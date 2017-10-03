@@ -12,7 +12,7 @@ class HomeVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "羽球密碼"
+        self.navigationItem.title = "首頁"
     }
 
     override func didReceiveMemoryWarning() {
