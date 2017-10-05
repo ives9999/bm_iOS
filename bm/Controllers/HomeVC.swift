@@ -8,12 +8,37 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
+class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
+
+    @IBOutlet weak var homeCV: UICollectionView!
+    
+    private(set) public var homes = [Home]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "首頁"
+        homeCV.delegate = self
+        homeCV.dataSource = self
+        
+        homes = DataService.instance.getHomes()
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return homes.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as? HomeCell {
+            let home = homes[indexPath.row]
+            cell.updateViews(home: home)
+            
+            return cell
+        }
+        
+        return HomeCell()
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
