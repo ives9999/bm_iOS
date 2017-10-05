@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="93y-75-RQq">
-    <device id="retina5_5" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,11 +19,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HomeVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3ab-Hq-GDb">
-                                <rect key="frame" x="0.0" y="80" width="414" height="607"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="538"/>
                                 <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jtJ-N6-SZQ">
                                     <size key="itemSize" width="353" height="266"/>
@@ -33,7 +33,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HomeCell" id="XDn-Z1-OgD" customClass="HomeCell" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="30.666666666666668" y="0.0" width="353" height="266"/>
+                                        <rect key="frame" x="11" y="0.0" width="353" height="266"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="353" height="266"/>
@@ -49,10 +49,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nSm-Vy-M0A">
-                                                    <rect key="frame" x="5" y="76" width="343" height="180"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="180" id="2cC-v1-Vna"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="5" y="76" width="343" height="185"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -63,7 +60,8 @@
                                             <constraint firstAttribute="trailing" secondItem="nSm-Vy-M0A" secondAttribute="trailing" constant="5" id="ame-re-h8w"/>
                                             <constraint firstItem="pwb-hL-umy" firstAttribute="top" secondItem="XDn-Z1-OgD" secondAttribute="top" id="i71-xJ-ZWL"/>
                                             <constraint firstItem="nSm-Vy-M0A" firstAttribute="leading" secondItem="XDn-Z1-OgD" secondAttribute="leading" constant="5" id="mn5-nY-sdA"/>
-                                            <constraint firstAttribute="bottom" secondItem="nSm-Vy-M0A" secondAttribute="bottom" constant="10" id="zRt-rc-lXV"/>
+                                            <constraint firstItem="nSm-Vy-M0A" firstAttribute="top" secondItem="pwb-hL-umy" secondAttribute="bottom" constant="16" id="y3A-m0-ZCF"/>
+                                            <constraint firstAttribute="bottom" secondItem="nSm-Vy-M0A" secondAttribute="bottom" constant="5" id="zRt-rc-lXV"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="featured" destination="nSm-Vy-M0A" id="1df-QY-8Zs"/>
@@ -96,7 +94,7 @@
             <objects>
                 <viewController id="hk6-fe-bLP" customClass="TeamVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h92-nJ-56i">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="moX-m5-kva"/>
@@ -134,7 +132,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="wVd-SJ-XtU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QhH-s5-lCh">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -157,7 +155,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="JVV-CL-e8R"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HzI-UG-x6r">
-                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
