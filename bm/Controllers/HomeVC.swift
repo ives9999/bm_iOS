@@ -35,9 +35,15 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if (deviceType == .simulator) {
             deviceType = (frameWidth >= 500) ? .iPad : .iPhone7
         } else {
-            //let tmp: String = UIDevice.current.deviceType.displayName
+            let tmp: String = UIDevice.current.deviceType.displayName
+            //print(tmp)
+            if tmp.hasPrefix("iPad") {
+                deviceType = .iPad
+            } else {
+                deviceType = .iPhone7
+            }
         }
-        print(deviceType)
+        //print(deviceType)
         
         homeCV.delegate = self
         homeCV.dataSource = self
