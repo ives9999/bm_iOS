@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Device
 
 class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
@@ -14,8 +15,13 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     @IBOutlet weak var homeCV: UICollectionView!
     
     private(set) public var homes = [Home]()
-    private(set) public var frameWidth: CGFloat?
-    //var deviceType: DeviceType?
+    private(set) public var frameWidth: CGFloat!
+    var deviceType: DeviceType!
+    let iPhoneCellOnRow: Int = 1
+    let iPadCellOnRow:Int = 2
+    let cellEdgeMargin: Int = 5
+    let titleHeight: Int = 60
+    let featuredHeight: Int = 180
     
     
     override func viewDidLoad() {
@@ -23,14 +29,15 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         frameWidth = view.frame.width
         
-//        switch UIDevice.current.userInterfaceIdiom {
-//        case .phone:
-//            type = "phone"
-//        case .pad:
-//            type = "pad"
-//        case .unspecified:
-//            type = "phone"
-//        }
+        //print(UIDevice.current.userInterfaceIdiom)
+        
+        deviceType = UIDevice.current.deviceType
+        if (deviceType == .simulator) {
+            deviceType = (frameWidth >= 500) ? .iPad : .iPhone7
+        } else {
+            //let tmp: String = UIDevice.current.deviceType.displayName
+        }
+        print(deviceType)
         
         homeCV.delegate = self
         homeCV.dataSource = self
@@ -40,9 +47,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //print(frameWidth)
-        let cellCount = (CGFloat)(UIDevice.current.userInterfaceIdiom == .phone ? 1 : 2)
-        let cellWidth = frameWidth! / cellCount - 10
-        let cellHeight = (CGFloat)(UIDevice.current.userInterfaceIdiom == .phone ? 245 : 425)
+        let cellCount: Int = deviceType == .iPhone7 ? iPhoneCellOnRow : iPadCellOnRow
+        let cellWidth: CGFloat = (frameWidth / CGFloat(cellCount)) - CGFloat(cellEdgeMargin*2)
+        let cellHeight:CGFloat = CGFloat(deviceType == .iPhone7 ? (titleHeight+featuredHeight+cellEdgeMargin) : (titleHeight+featuredHeight*2+cellEdgeMargin))
         let size = CGSize(width: cellWidth, height: cellHeight)
         return size
     }
