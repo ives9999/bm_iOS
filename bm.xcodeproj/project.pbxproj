@@ -7,13 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B31361E71F8786CC00BDA53D /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E61F8786CC00BDA53D /* Contants.swift */; };
 		B32FBCF31F8483E3003D39CC /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF21F8483E3003D39CC /* HomeCell.swift */; };
 		B32FBCF51F848AB9003D39CC /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF41F848AB9003D39CC /* Home.swift */; };
 		B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF71F849AA7003D39CC /* DataService.swift */; };
 		F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90423B81F83748C00DC8B1E /* TeamVC.swift */; };
-		F90423BB1F87279800DC8B1E /* Device.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F90423BA1F87279800DC8B1E /* Device.framework */; };
-		F90423BC1F87279800DC8B1E /* Device.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F90423BA1F87279800DC8B1E /* Device.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F90423BE1F8727B200DC8B1E /* Device.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = F90423BD1F8727B100DC8B1E /* Device.framework.dSYM */; };
 		F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D1F1F83636A00F550FD /* AppDelegate.swift */; };
 		F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D211F83636A00F550FD /* HomeVC.swift */; };
 		F94E7D251F83636A00F550FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94E7D231F83636A00F550FD /* Main.storyboard */; };
@@ -41,36 +39,23 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B36440BF1F86466B00B477F9 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				F90423BC1F87279800DC8B1E /* Device.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		B36440C01F86467600B477F9 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				F90423BE1F8727B200DC8B1E /* Device.framework.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B31361E61F8786CC00BDA53D /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		B32FBCF21F8483E3003D39CC /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
 		B32FBCF41F848AB9003D39CC /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Home.swift; path = bm/Views/Home.swift; sourceTree = SOURCE_ROOT; };
 		B32FBCF71F849AA7003D39CC /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
-		F90423BA1F87279800DC8B1E /* Device.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Device.framework; path = ../../Device.framework; sourceTree = "<group>"; };
-		F90423BD1F8727B100DC8B1E /* Device.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; path = Device.framework.dSYM; sourceTree = "<group>"; };
 		F94E7D1C1F83636A00F550FD /* bm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94E7D1F1F83636A00F550FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F94E7D211F83636A00F550FD /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -91,7 +76,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F90423BB1F87279800DC8B1E /* Device.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +96,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B31361E51F87869400BDA53D /* utilities */ = {
+			isa = PBXGroup;
+			children = (
+				B31361E61F8786CC00BDA53D /* Contants.swift */,
+			);
+			path = utilities;
+			sourceTree = "<group>";
+		};
 		B32FBCEF1F84831C003D39CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -128,28 +120,10 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		B36440C31F86469700B477F9 /* frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				B36440C41F8646A500B477F9 /* Device */,
-			);
-			path = frameworks;
-			sourceTree = "<group>";
-		};
-		B36440C41F8646A500B477F9 /* Device */ = {
-			isa = PBXGroup;
-			children = (
-				F90423BD1F8727B100DC8B1E /* Device.framework.dSYM */,
-				F90423BA1F87279800DC8B1E /* Device.framework */,
-			);
-			path = Device;
-			sourceTree = "<group>";
-		};
 		F94E7D131F83636A00F550FD = {
 			isa = PBXGroup;
 			children = (
 				F94E7D1E1F83636A00F550FD /* bm */,
-				B36440C31F86469700B477F9 /* frameworks */,
 				F94E7D331F83636B00F550FD /* bmTests */,
 				F94E7D3E1F83636B00F550FD /* bmUITests */,
 				F94E7D1D1F83636A00F550FD /* Products */,
@@ -169,6 +143,7 @@
 		F94E7D1E1F83636A00F550FD /* bm */ = {
 			isa = PBXGroup;
 			children = (
+				B31361E51F87869400BDA53D /* utilities */,
 				B32FBCF61F849A7D003D39CC /* Services */,
 				B32FBCEF1F84831C003D39CC /* Views */,
 				F94E7D4E1F83662600F550FD /* Models */,
@@ -227,7 +202,6 @@
 				F94E7D181F83636A00F550FD /* Sources */,
 				F94E7D191F83636A00F550FD /* Frameworks */,
 				F94E7D1A1F83636A00F550FD /* Resources */,
-				B36440BF1F86466B00B477F9 /* Embed Frameworks */,
 				B36440C01F86467600B477F9 /* CopyFiles */,
 			);
 			buildRules = (
@@ -356,6 +330,7 @@
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,
 				B32FBCF51F848AB9003D39CC /* Home.swift in Sources */,
+				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeCell.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
