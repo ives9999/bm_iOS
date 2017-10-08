@@ -8,6 +8,14 @@
 
 import Foundation
 
+typealias CompletionHandler = (_ Success: Bool) -> ()
+
+// URL Constants
+let REMOTE_BASE_URL = "http://bm.sportpassword.com"
+let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
+let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
+let URL_HOME = "\(BASE_URL)/mobile"
+
 // List pages
 let IPHONE_CELL_ON_ROW: Int = 1
 let IPAD_CELL_ON_ROW:Int = 2
