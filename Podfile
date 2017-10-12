@@ -10,4 +10,7 @@ target 'bm' do
   pod 'SwiftyJSON'
   pod 'Socket.IO-Client-Swift'
   pod 'Device.swift'
+  pod 'AlamofireImage'
+  pod 'TRVideoView'
+  pod 'PMJSON', '~> 2.0'
 end

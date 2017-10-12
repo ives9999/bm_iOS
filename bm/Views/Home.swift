@@ -6,14 +6,21 @@
 //  Copyright © 2017年 bm. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Home {
-    private(set) public var featured: String
-    private(set) public var title: String
     
-    init(featured: String, title: String) {
-        self.featured = featured
+    var title: String
+    var featured: UIImage
+    var youtube: String
+    var vimeo: String
+    var path: String
+    
+    init(title: String, path: String, youtube: String, vimeo: String) {
         self.title = title
+        self.path = path
+        self.youtube = youtube
+        self.vimeo = vimeo
+        self.featured = UIImage()
     }
 }

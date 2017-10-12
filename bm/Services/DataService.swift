@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import AlamofireImage
+import PMJSON
 
 class DataService {
     static let instance = DataService()
@@ -17,12 +19,17 @@ class DataService {
 //        Home(featured: "2.jpg", title: "永遠支持的戴資穎"),
 //        Home(featured: "3.jpg", title: "外媒評十大羽毛球美女，馬琳竟上榜！")
 //    ]
-    var homes: [Home] = [Home]()
+    var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
+    var downloadImageNum: Int = 0
+    var image: UIImage?
+    //var homesRaw: Dictionary<String, [Dictionary<String, String>]> = Dictionary<String, [Dictionary<String, String>]>()
+    //var titles: [String] = [String]()
+    //var pathes: [String] = [String]()
+    //var featureds: [UIImage] = [UIImage]()
     
     
     func getHomes(completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "mobile"]
-        
         //print(URL_HOME)
         
         Alamofire.request(URL_HOME, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseJSON {
@@ -30,28 +37,89 @@ class DataService {
             if response.result.error == nil {
                 if let json = response.result.value as? Dictionary<String, Any> {
                     //print(json)
-                    if let news = json["news"] as? [Dictionary<String, Any>] {
-                        //print(news)
-                        for item in news {
-                            let title: String = item["title"] as! String
-                            var path: String!
-                            if let featureds: [Dictionary<String, Any>] = item["featured"] as? [Dictionary<String, Any>] {
-                                for item1 in featureds {
-                                    path = item1["path"] as! String
-                                }
+                    let courseArray = json["courses"] as! [Dictionary<String, AnyObject>]
+                    let courseHome = self.parseHomeJSON(array: courseArray, titleField: "title", video: true)
+                    //print(courseArray1)
+                    self.homes["courses"] = courseHome
+                    let newsArray = json["news"] as! [Dictionary<String, AnyObject>]
+                    let newsHome = self.parseHomeJSON(array: newsArray, titleField: "title")
+                    self.homes["news"] = newsHome
+                    let arenaArray = json["arenas"] as! [Dictionary<String, AnyObject>]
+                    let arenaHome = self.parseHomeJSON(array: arenaArray, titleField: "name")
+                    self.homes["arenas"] = arenaHome
+                    //let jsonString = JSON.encodeAsString(self.homes)
+                    //print(self.downloadImageNum)
+                    self.getHomeFeatured(completion: { (success) in
+                        if(success) {
+                            self.downloadImageNum -= 1
+                            //print(self.downloadImageNum)
+                            //print(self.image)
+                            if self.downloadImageNum == 0 {
+                                //print(self.homes)
+                                completion(true)
                             }
-                            let featured = BASE_URL + path
-                            let home: Home = Home(featured: featured, title: title)
-                            self.homes.append(home)
                         }
-                    }
+                    })
                 }
-                //print(self.homes)
-                completion(true)
             } else {
                 completion(false)
                 debugPrint(response.result.error as Any)
             }
         }
     }
+    
+    func getHomeFeatured(completion: @escaping CompletionHandler) {
+        for (key, value) in homes {
+            for i in 0..<value.count {
+            
+                let path: String = value[i].path
+                if path.count > 0 {
+                    //print(path)
+                    getImage(url: path, completion: { (success) in
+                        if (success) {
+                            self.homes[key]![i].featured = self.image!
+                        }
+                        completion(true)
+                    })
+                }
+            }
+        }
+    }
+    
+    func getImage(url: String, completion: @escaping CompletionHandler) {
+        Alamofire.request(url).responseImage(completionHandler: { (response) in
+            guard let image = response.result.value else { return }
+            self.image = image
+            completion(true)
+        })
+    }
+    
+    func parseHomeJSON(array: [Dictionary<String, Any>], titleField: String, video: Bool=false) -> [Home] {
+        var result: [Home] = [Home]()
+        for item in array {
+            let title: String = item[titleField] as? String ?? ""
+            var path: String = item["featured_path"] as? String ?? ""
+            if (path.count > 0) {
+                path = BASE_URL + path
+                downloadImageNum += 1
+            }
+            let youtube: String = item["youtube"] as? String ?? ""
+            let vimeo: String = item["vimeo"] as? String ?? ""
+            let home = Home(title: title, path: path, youtube: youtube, vimeo: vimeo)
+            result.append(home)
+        }
+        
+        return result
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
