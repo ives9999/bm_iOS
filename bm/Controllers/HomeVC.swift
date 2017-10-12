@@ -19,8 +19,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     var frameWidth: CGFloat!
     var frameHeight: CGFloat!
-    
-    var videos: [NSIndexPath] = [NSIndexPath]()
+    var b: [[Bool]] = [[Bool]]()
     
     private(set) public var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
     var deviceType: DeviceType!
@@ -28,8 +27,8 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        frameWidth = view.frame.size.width
-        frameHeight = view.frame.size.height
+        frameWidth = view.bounds.size.width
+        frameHeight = view.bounds.size.height
         
         deviceType = Global.instance.deviceType(frameWidth: frameWidth!)
         //print(deviceType)
@@ -40,6 +39,18 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         DataService.instance.getHomes { (success) in
             if success {
                 self.homes = DataService.instance.homes
+                self.b = Array(repeating: Array(repeating: true, count: 4), count: self.homes.count)
+                print(self.b)
+//                for i in 0..<self.homes.count {
+//                    let key = self.indexToKey(index: i).key
+//                    print(key)
+//                    print(self.homes[key]!.count)
+//                    for j in 0..<self.homes[key]!.count {
+//                        print("i:\(i), j:\(j)")
+//                        self.b[i][j] = true
+//                        print("aaa")
+//                    }
+//                }
                 self.homeCV.reloadData()
             }
             self.removeSpinner()
@@ -86,33 +97,41 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeCell", for: indexPath) as? HomeCell {
-            let key = indexToKey(index: indexPath.section).key
-            let home = homes[key]![indexPath.row]
-            if home.vimeo.count > 0 {
-                let newIndexPath = NSIndexPath(row: indexPath.row, section: indexPath.section)
-                videos.append(newIndexPath)
+        print("cellForItemAt section: \(indexPath.section) row: \(indexPath.row)")
+        let key = indexToKey(index: indexPath.section).key
+        let home = homes[key]![indexPath.row]
+        if home.path.count > 0 {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeImageCell", for: indexPath) as? HomeImageCell {
+                if b[indexPath.section][indexPath.row] {
+                    cell.updateViews(home: home)
+                    b[indexPath.section][indexPath.row] = false
+                }
+                
+                return cell
             }
-            
-            cell.updateViews(home: home)
-            
-            return cell
+        } else if home.vimeo.count > 0 || home.youtube.count > 0 {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeVideoCell", for: indexPath) as? HomeVideoCell {
+                if b[indexPath.section][indexPath.row] {
+                    cell.updateViews(home: home)
+                    b[indexPath.section][indexPath.row] = false
+                }
+                
+                return cell
+            }
         }
         
-        return HomeCell()
+        return HomeImageCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("will display section: \(indexPath.section)")
-        print("will display row: \(indexPath.row)")
+        print("will display section: \(indexPath.section) row: \(indexPath.row)")
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("end display section: \(indexPath.section)")
-        print("end display row: \(indexPath.row)")
-        var tmps: [IndexPath] = [IndexPath]()
-        tmps.append(indexPath)
-        collectionView.reloadItems(at: tmps)
+        print("end display section: \(indexPath.section) row: \(indexPath.row)")
+        //var tmps: [IndexPath] = [IndexPath]()
+        //tmps.append(indexPath)
+        //collectionView.reloadItems(at: tmps)
     }
     
     
@@ -143,7 +162,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
     func addSpinner() {
         spinner = UIActivityIndicatorView()
-        spinner?.center = CGPoint(x: (homeCV.frame.width / 2) - ((spinner?.frame.width)! / 2), y: homeCV.frame.height / 2)
+        spinner?.center = CGPoint(x: (homeCV.bounds.width / 2) - ((spinner?.bounds.width)! / 2), y: homeCV.bounds.height / 2)
         spinner?.activityIndicatorViewStyle = .whiteLarge
         spinner?.color = #colorLiteral(red: 0.1490196078, green: 0.3568627451, blue: 0.01176470588, alpha: 1)
         spinner?.startAnimating()
@@ -158,7 +177,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func addProgressLbl() {
         progressLbl = UILabel()
-        progressLbl?.frame = CGRect(x: (homeCV.frame.width / 2) - 100, y: (homeCV.frame.height / 2) + 20, width: 200, height: 40)
+        progressLbl?.frame = CGRect(x: (homeCV.bounds.width / 2) - 100, y: (homeCV.bounds.height / 2) + 20, width: 200, height: 40)
         progressLbl?.font = UIFont(name: "Avenir Next", size: 18)
         progressLbl?.textColor = #colorLiteral(red: 0.1490196078, green: 0.3568627451, blue: 0.01176470588, alpha: 1)
         progressLbl?.textAlignment = .center

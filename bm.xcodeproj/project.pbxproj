@@ -9,10 +9,11 @@
 /* Begin PBXBuildFile section */
 		B31361E71F8786CC00BDA53D /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E61F8786CC00BDA53D /* Contants.swift */; };
 		B31361E91F88A35900BDA53D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E81F88A35900BDA53D /* Global.swift */; };
-		B32FBCF31F8483E3003D39CC /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF21F8483E3003D39CC /* HomeCell.swift */; };
-		B32FBCF51F848AB9003D39CC /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF41F848AB9003D39CC /* Home.swift */; };
+		B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF21F8483E3003D39CC /* HomeImageCell.swift */; };
 		B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF71F849AA7003D39CC /* DataService.swift */; };
 		B35F8DD51F8E6CEE0073BD70 /* HomeCollectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35F8DD41F8E6CEE0073BD70 /* HomeCollectView.swift */; };
+		B35F8DD91F8F64310073BD70 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35F8DD81F8F64310073BD70 /* Home.swift */; };
+		B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35F8DDA1F8F66490073BD70 /* HomeVideoCell.swift */; };
 		B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */; };
 		F07CD1A1BB728D94904CA85F /* Pods_bm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5D58D06320800C79615904 /* Pods_bm.framework */; };
 		F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90423B81F83748C00DC8B1E /* TeamVC.swift */; };
@@ -60,10 +61,11 @@
 		9C5D58D06320800C79615904 /* Pods_bm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B31361E61F8786CC00BDA53D /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		B31361E81F88A35900BDA53D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		B32FBCF21F8483E3003D39CC /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
-		B32FBCF41F848AB9003D39CC /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Home.swift; path = bm/Views/Home.swift; sourceTree = SOURCE_ROOT; };
+		B32FBCF21F8483E3003D39CC /* HomeImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeImageCell.swift; sourceTree = "<group>"; };
 		B32FBCF71F849AA7003D39CC /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		B35F8DD41F8E6CEE0073BD70 /* HomeCollectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectView.swift; sourceTree = "<group>"; };
+		B35F8DD81F8F64310073BD70 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
+		B35F8DDA1F8F66490073BD70 /* HomeVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVideoCell.swift; sourceTree = "<group>"; };
 		B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
 		F94E7D1C1F83636A00F550FD /* bm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bm.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,21 +118,22 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		B31361E51F87869400BDA53D /* utilities */ = {
+		B31361E51F87869400BDA53D /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
 				B31361E61F8786CC00BDA53D /* Contants.swift */,
 				B31361E81F88A35900BDA53D /* Global.swift */,
 			);
-			path = utilities;
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		B32FBCEF1F84831C003D39CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				B32FBCF21F8483E3003D39CC /* HomeCell.swift */,
+				B32FBCF21F8483E3003D39CC /* HomeImageCell.swift */,
 				B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */,
 				B35F8DD41F8E6CEE0073BD70 /* HomeCollectView.swift */,
+				B35F8DDA1F8F66490073BD70 /* HomeVideoCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -176,7 +179,7 @@
 		F94E7D1E1F83636A00F550FD /* bm */ = {
 			isa = PBXGroup;
 			children = (
-				B31361E51F87869400BDA53D /* utilities */,
+				B31361E51F87869400BDA53D /* Utilities */,
 				B32FBCF61F849A7D003D39CC /* Services */,
 				B32FBCEF1F84831C003D39CC /* Views */,
 				F94E7D4E1F83662600F550FD /* Models */,
@@ -220,7 +223,7 @@
 		F94E7D4E1F83662600F550FD /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B32FBCF41F848AB9003D39CC /* Home.swift */,
+				B35F8DD81F8F64310073BD70 /* Home.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Device.swift/Device_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/PMJSON/PMJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/PlayerKit/PlayerKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -381,6 +385,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Device_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PMJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PlayerKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -433,13 +438,14 @@
 			files = (
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
+				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
+				B35F8DD91F8F64310073BD70 /* Home.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,
 				B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */,
 				B35F8DD51F8E6CEE0073BD70 /* HomeCollectView.swift in Sources */,
-				B32FBCF51F848AB9003D39CC /* Home.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
-				B32FBCF31F8483E3003D39CC /* HomeCell.swift in Sources */,
+				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -608,6 +614,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_ACTIVITY_MODE = "";
+				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = default;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -628,6 +636,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_ACTIVITY_MODE = "";
 				DEVELOPMENT_TEAM = BYF37727CY;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

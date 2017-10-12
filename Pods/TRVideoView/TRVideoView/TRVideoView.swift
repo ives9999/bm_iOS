@@ -14,8 +14,8 @@ open class TRVideoView: WKWebView {
     var text = ""
     var urls = [URL]()
     
-    public convenience init(text: String) {
-        self.init(frame: CGRect(x: 0, y: 0, width: 340, height: 180))
+    public convenience init(frame: CGRect, text: String) {
+        self.init(frame: frame)
         self.text = text
         self.urls = text.extractURLs()
         //print(self.urls)
@@ -23,10 +23,10 @@ open class TRVideoView: WKWebView {
         setup()
     }
     
-    open func frame(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat){
-        self.frame = CGRect(x: x, y: y, width: width, height: height)
-        setup()
-    }
+//    open func frame(x: CGFloat, y: CGFloat, width: CGFloat, height: CGFloat){
+//        self.frame = CGRect(x: x, y: y, width: width, height: height)
+//        setup()
+//    }
     
     open func containsURLs() -> Bool {
         if(self.urls.isEmpty){

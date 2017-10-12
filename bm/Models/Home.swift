@@ -24,3 +24,4 @@ struct Home {
         self.featured = UIImage()
     }
 }
+
