@@ -13,5 +13,4 @@ target 'bm' do
   pod 'AlamofireImage'
   pod 'TRVideoView'
   pod 'PMJSON', '~> 2.0'
-  pod 'PlayerKit'
 end

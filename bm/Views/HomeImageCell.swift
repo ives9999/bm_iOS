@@ -13,10 +13,14 @@ class HomeImageCell: UICollectionViewCell {
     
     @IBOutlet weak var featured: UIImageView!
     @IBOutlet weak var title: UILabel!
+    var bUpdate: Bool = true
     
     func updateViews(home: Home) {
-        featured.image = home.featured
-        title.text = home.title
+        if bUpdate {
+            featured.image = home.featured
+            title.text = home.title
+            bUpdate = false
+        }
     }
     
 }
