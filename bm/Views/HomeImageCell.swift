@@ -16,11 +16,11 @@ class HomeImageCell: UICollectionViewCell {
     var bUpdate: Bool = true
     
     func updateViews(home: Home) {
-        if bUpdate {
+        //if bUpdate {
             featured.image = home.featured
             title.text = home.title
             bUpdate = false
-        }
+        //}
     }
     
 }

@@ -115,11 +115,45 @@
                     <navigationItem key="navigationItem" title="首頁" id="DpE-1i-y8C"/>
                     <connections>
                         <outlet property="homeCV" destination="3ab-Hq-GDb" id="uJ8-T9-efq"/>
+                        <segue destination="uBg-cW-QnS" kind="show" identifier="ShowSegue" id="6FO-aI-5h8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1661.5999999999999" y="-400.74962518740631"/>
+        </scene>
+        <!--ShowVC-->
+        <scene sceneID="4wi-G4-Cc6">
+            <objects>
+                <viewController id="uBg-cW-QnS" customClass="ShowVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pnG-cQ-q9N">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hYx-BE-arV">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8og-9k-8WK">
+                                        <rect key="frame" x="20" y="32" width="0.0" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                        <viewLayoutGuide key="safeArea" id="uWn-rC-mnw"/>
+                    </view>
+                    <connections>
+                        <outlet property="titleLbl" destination="8og-9k-8WK" id="7IU-R0-n7D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JlZ-fJ-uDt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2468" y="-220.83958020989508"/>
         </scene>
         <!--TeamVC-->
         <scene sceneID="Biv-Rk-NsK">
@@ -137,6 +171,38 @@
             </objects>
             <point key="canvasLocation" x="1687" y="311"/>
         </scene>
+        <!--教學-->
+        <scene sceneID="Eib-Tq-Zds">
+            <objects>
+                <viewController id="By4-ki-Kov" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="McF-I9-gA8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="3UI-9E-1a9"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="教學" id="rvw-VL-dX3"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="omZ-1j-3Gu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-541" y="715"/>
+        </scene>
+        <!--教練-->
+        <scene sceneID="5pf-JC-0gR">
+            <objects>
+                <viewController id="fEf-Ib-3oR" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="P7W-GH-0dG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="8LU-CJ-hpC"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="教練" id="gbw-RN-sij"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5cH-ZS-Ng2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="271" y="870"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="K9j-9Q-1Vn">
             <objects>
@@ -151,17 +217,19 @@
                     <connections>
                         <segue destination="rUV-I4-SeV" kind="relationship" relationship="viewControllers" id="Ce2-hc-xUH"/>
                         <segue destination="3QO-yW-Ruh" kind="relationship" relationship="viewControllers" id="wqV-an-USa"/>
+                        <segue destination="By4-ki-Kov" kind="relationship" relationship="viewControllers" id="xsN-Eo-DQE"/>
+                        <segue destination="fEf-Ib-3oR" kind="relationship" relationship="viewControllers" id="pCW-l0-Mau"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="t5i-iW-sH9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="156.80000000000001" y="117.84107946026987"/>
         </scene>
-        <!--Item-->
+        <!--首頁-->
         <scene sceneID="ICh-Kr-cRe">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rUV-I4-SeV" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="wVd-SJ-XtU"/>
+                    <tabBarItem key="tabBarItem" title="首頁" id="wVd-SJ-XtU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QhH-s5-lCh">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -180,11 +248,11 @@
             </objects>
             <point key="canvasLocation" x="825" y="-400"/>
         </scene>
-        <!--Item-->
+        <!--球隊-->
         <scene sceneID="MyK-xH-0gn">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3QO-yW-Ruh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="JVV-CL-e8R"/>
+                    <tabBarItem key="tabBarItem" title="球隊" id="JVV-CL-e8R"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HzI-UG-x6r">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>

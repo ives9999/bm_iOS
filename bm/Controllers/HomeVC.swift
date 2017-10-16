@@ -14,9 +14,6 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
     @IBOutlet weak var homeCV: UICollectionView!
     
-    var spinner: UIActivityIndicatorView?
-    var progressLbl: UILabel?
-    
     var frameWidth: CGFloat!
     var frameHeight: CGFloat!
     
@@ -40,11 +37,11 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.homes = DataService.instance.homes
                 self.homeCV.reloadData()
             }
-            self.removeSpinner()
-            self.removeProgressLbl()
+            Global.instance.removeSpinner()
+            Global.instance.removeProgressLbl()
         }
-        addSpinner()
-        addProgressLbl()
+        Global.instance.addSpinner(center: self.view.center, superView: homeCV)
+        Global.instance.addProgressLbl(center: self.view.center, superView: homeCV)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -68,7 +65,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let key = indexToKey(index: section).key
+        let key: String = DataService.instance.sectionToKey(section: section).key
         let number: Int = homes[key]!.count
         
         return number
@@ -78,7 +75,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         switch kind {
         case UICollectionElementKindSectionHeader:
             if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionHeaderView", for: indexPath) as? HomeCollectionHeaderView {
-                let headerTitle = indexToKey(index: indexPath.section).chTitle
+                let headerTitle = DataService.instance.sectionToKey(section: indexPath.section).chTitle
                 headerView.titleLbl.text = headerTitle
                 return headerView
             } else {
@@ -91,8 +88,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //print("cellForItemAt section: \(indexPath.section) row: \(indexPath.row)")
-        let key = indexToKey(index: indexPath.section).key
-        let home = homes[key]![indexPath.row]
+        let home = DataService.instance.getHomeItem(indexPath: indexPath)
         if home.vimeo.count > 0 || home.youtube.count > 0 {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeVideoCell", for: indexPath) as? HomeVideoCell {
                 cell.updateViews(home: home)
@@ -109,71 +105,30 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return HomeImageCell()
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section > 0 {
+            let home: Home = DataService.instance.getHomeItem(indexPath: indexPath)
+            //print(home)
+            performSegue(withIdentifier: "ShowSegue", sender: home)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let showVC: ShowVC = segue.destination as? ShowVC {
+            assert(sender as? Home != nil)
+            let home: Home = sender as! Home
+            let show_in: Show_IN = Show_IN(id: home.id, token: home.token)
+            showVC.initShowVC(sin: show_in)
+        }
+    }
+    
 //    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 //        print("will display section: \(indexPath.section) row: \(indexPath.row)")
 //    }
 //
 //    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 //        print("end display section: \(indexPath.section) row: \(indexPath.row)")
-//    }
-    
-    
-    func indexToKey(index: Int) -> (key: String, chTitle: String) {
-        var key: String
-        var chTitle: String
-        switch index {
-        case 0:
-            key = "courses"
-            chTitle = "課程"
-            break
-        case 1:
-            key = "news"
-            chTitle = "新聞"
-            break
-        case 2:
-            key = "arenas"
-            chTitle = "球館"
-            break
-        default:
-            key = "courses"
-            chTitle = "課程"
-        }
-        
-        return (key, chTitle)
-    }
-    
-
-    func addSpinner() {
-        spinner = UIActivityIndicatorView()
-        //spinner?.center = CGPoint(x: (homeCV.bounds.width / 2) - ((spinner?.bounds.width)! / 2), y: homeCV.bounds.height / 2)
-        spinner?.center = self.view.center
-        spinner?.activityIndicatorViewStyle = .whiteLarge
-        spinner?.color = #colorLiteral(red: 0.6862745098, green: 0.9882352941, blue: 0.4823529412, alpha: 1)
-        spinner?.startAnimating()
-        homeCV.addSubview(spinner!)
-    }
-    
-    func removeSpinner() {
-        if spinner != nil {
-            spinner?.removeFromSuperview()
-        }
-    }
-    
-    func addProgressLbl() {
-        progressLbl = UILabel()
-        progressLbl?.frame = CGRect(x: self.view.center.x - 100, y: self.view.center.y + 20, width: 200, height: 40)
-        progressLbl?.font = UIFont(name: "Avenir Next", size: 18)
-        progressLbl?.textColor = #colorLiteral(red: 0.6862745098, green: 0.9882352941, blue: 0.4823529412, alpha: 1)
-        progressLbl?.textAlignment = .center
-        progressLbl?.text = "努力加載中..."
-        homeCV.addSubview(progressLbl!)
-    }
-
-    func removeProgressLbl() {
-        if progressLbl != nil {
-            progressLbl?.removeFromSuperview()
-        }
-    }
+//    }   
 
 }
 

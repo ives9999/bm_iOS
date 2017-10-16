@@ -10,18 +10,22 @@ import UIKit
 
 struct Home {
     
+    var id: Int
     var title: String
     var featured: UIImage
     var youtube: String
     var vimeo: String
     var path: String
+    var token: String
     
-    init(title: String, path: String, youtube: String, vimeo: String) {
+    init(id: Int, title: String, path: String, youtube: String, vimeo: String, token: String) {
+        self.id = id
         self.title = title
         self.path = path
         self.youtube = youtube
         self.vimeo = vimeo
         self.featured = UIImage()
+        self.token = token
     }
 }
 
