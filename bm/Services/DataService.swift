@@ -21,6 +21,7 @@ class DataService {
 //    ]
     var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
     var show: Dictionary<String, Any> = Dictionary<String, Any>()
+    var show_html: String = ""
     var downloadImageNum: Int = 0
     var image: UIImage?
     //var homesRaw: Dictionary<String, [Dictionary<String, String>]> = Dictionary<String, [Dictionary<String, String>]>()
@@ -145,7 +146,7 @@ class DataService {
     }
     
     func getShow(type: String, id: Int, token: String, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "mobile", "id": id, "token": token]
+        let body: [String: Any] = ["source": "mobile", "id": id, "token": token, "type": type]
         
         
         let url: String = String(format: URL_SHOW, type)
@@ -153,24 +154,27 @@ class DataService {
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in
 
             if response.result.isSuccess {
-                let jsonString = response.result.value
-                //print(jsonString)
-                if let json = try? JSON.decode(jsonString!) {
-                    let title = try? json.getString("title")
-                    let content = try? json.getString("content")
-                    var path = try? json.getString("featured_path")
-                    self.show = ["title": title!, "path": path!, "content": content!]
-                    if (path!.count > 0) {
-                        path = BASE_URL + path!
-                        self.show["path"] = path!
-                        self.getImage(url: path!, completion: { (success) in
-                            if success {
-                                self.show["featured"] = self.image
-                            }
-                            completion(true)
-                        })
-                    }
-                }
+                self.show_html = response.result.value!
+                //print(self.show_html)
+                completion(true)
+//                let jsonString = response.result.value
+//                //print(jsonString)
+//                if let json = try? JSON.decode(jsonString!) {
+//                    let title = try? json.getString("title")
+//                    let content = try? json.getString("content")
+//                    var path = try? json.getString("featured_path")
+//                    self.show = ["title": title!, "path": path!, "content": content!]
+//                    if (path!.count > 0) {
+//                        path = BASE_URL + path!
+//                        self.show["path"] = path!
+//                        self.getImage(url: path!, completion: { (success) in
+//                            if success {
+//                                self.show["featured"] = self.image
+//                            }
+//                            completion(true)
+//                        })
+//                    }
+//                }
             } else {
                 completion(false)
                 debugPrint(response.result.error as Any)

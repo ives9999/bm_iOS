@@ -115,7 +115,7 @@
                     <navigationItem key="navigationItem" title="首頁" id="DpE-1i-y8C"/>
                     <connections>
                         <outlet property="homeCV" destination="3ab-Hq-GDb" id="uJ8-T9-efq"/>
-                        <segue destination="uBg-cW-QnS" kind="show" identifier="ShowSegue" id="6FO-aI-5h8"/>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="ShowSegue" id="tOs-so-0yx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -123,37 +123,19 @@
             <point key="canvasLocation" x="1661.5999999999999" y="-400.74962518740631"/>
         </scene>
         <!--ShowVC-->
-        <scene sceneID="4wi-G4-Cc6">
+        <scene sceneID="bO3-p0-FAW">
             <objects>
-                <viewController id="uBg-cW-QnS" customClass="ShowVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="pnG-cQ-q9N">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="xCM-NL-W3p" customClass="ShowVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Ls-03-bIq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hYx-BE-arV">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8og-9k-8WK">
-                                        <rect key="frame" x="20" y="32" width="0.0" height="40"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="24"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </scrollView>
-                        </subviews>
                         <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
-                        <viewLayoutGuide key="safeArea" id="uWn-rC-mnw"/>
+                        <viewLayoutGuide key="safeArea" id="n4W-T5-iY7"/>
                     </view>
-                    <connections>
-                        <outlet property="titleLbl" destination="8og-9k-8WK" id="7IU-R0-n7D"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="JlZ-fJ-uDt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WhJ-QH-Vdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2468" y="-220.83958020989508"/>
+            <point key="canvasLocation" x="2521.5999999999999" y="-389.5052473763119"/>
         </scene>
         <!--TeamVC-->
         <scene sceneID="Biv-Rk-NsK">
