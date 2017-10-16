@@ -14,8 +14,8 @@ typealias CompletionHandler = (_ Success: Bool) -> ()
 let REMOTE_BASE_URL = "http://bm.sportpassword.com"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
-let URL_HOME = "\(BASE_URL)/mobile"
-let URL_SHOW = "\(BASE_URL)/mobile/%@/show"
+let URL_HOME = "\(BASE_URL)/app/"
+let URL_SHOW = "\(BASE_URL)/app/%@/show/%@?device=app"
 
 // List pages
 let IPHONE_CELL_ON_ROW: Int = 1

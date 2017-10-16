@@ -31,7 +31,7 @@ class DataService {
     
     
     func getHomes(completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "mobile"]
+        let body: [String: Any] = ["device": "app"]
         //print(URL_HOME)
         
         Alamofire.request(URL_HOME, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseJSON {
@@ -40,14 +40,14 @@ class DataService {
                 if let json = response.result.value as? Dictionary<String, Any> {
                     //print(json)
                     let courseArray = json["courses"] as! [Dictionary<String, AnyObject>]
-                    let courseHome = self.parseHomeJSON(array: courseArray, titleField: "title", video: true)
+                    let courseHome = self.parseHomeJSON(array: courseArray, titleField: "title", type: "course", video: true)
                     //print(courseArray1)
                     self.homes["courses"] = courseHome
                     let newsArray = json["news"] as! [Dictionary<String, AnyObject>]
-                    let newsHome = self.parseHomeJSON(array: newsArray, titleField: "title")
+                    let newsHome = self.parseHomeJSON(array: newsArray, titleField: "title", type: "news")
                     self.homes["news"] = newsHome
                     let arenaArray = json["arenas"] as! [Dictionary<String, AnyObject>]
-                    let arenaHome = self.parseHomeJSON(array: arenaArray, titleField: "name")
+                    let arenaHome = self.parseHomeJSON(array: arenaArray, titleField: "name", type: "arena")
                     self.homes["arenas"] = arenaHome
                     //let jsonString = JSON.encodeAsString(self.homes)
                     //print(self.downloadImageNum)
@@ -96,7 +96,7 @@ class DataService {
         })
     }
     
-    func parseHomeJSON(array: [Dictionary<String, Any>], titleField: String, video: Bool=false) -> [Home] {
+    func parseHomeJSON(array: [Dictionary<String, Any>], titleField: String, type: String, video: Bool=false) -> [Home] {
         var result: [Home] = [Home]()
         for item in array {
             let id: Int = item["id"] as? Int ?? 0
@@ -109,7 +109,7 @@ class DataService {
             let youtube: String = item["youtube"] as? String ?? ""
             let vimeo: String = item["vimeo"] as? String ?? ""
             let token: String = item["token"] as? String ?? ""
-            let home = Home(id: id, title: title, path: path, youtube: youtube, vimeo: vimeo, token: token)
+            let home = Home(id: id, title: title, path: path, youtube: youtube, vimeo: vimeo, token: token, type: type)
             result.append(home)
         }
         
@@ -121,28 +121,33 @@ class DataService {
         return homes[key]![indexPath.row]
     }
     
-    func sectionToKey(section: Int) -> (key: String, chTitle: String) {
+    func sectionToKey(section: Int) -> (key: String, chTitle: String, type: String) {
         var key: String
         var chTitle: String
+        var type : String
         switch section {
         case 0:
             key = "courses"
+            type = "cours"
             chTitle = "課程"
             break
         case 1:
             key = "news"
+            type = "news"
             chTitle = "新聞"
             break
         case 2:
             key = "arenas"
+            type = "arena"
             chTitle = "球館"
             break
         default:
             key = "courses"
+            type = "cours"
             chTitle = "課程"
         }
         
-        return (key, chTitle)
+        return (key, chTitle, type)
     }
     
     func getShow(type: String, id: Int, token: String, completion: @escaping CompletionHandler) {

@@ -9,10 +9,12 @@
 import Foundation
 struct Show_IN {
     
+    var type: String
     var id: Int
     var token: String
     
-    init(id: Int, token: String) {
+    init(type: String, id: Int, token: String) {
+        self.type = type
         self.id = id
         self.token = token
     }
