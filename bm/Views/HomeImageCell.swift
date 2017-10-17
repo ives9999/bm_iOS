@@ -7,19 +7,18 @@
 //
 
 import UIKit
-import TRVideoView
 
 class HomeImageCell: UICollectionViewCell {
     
     @IBOutlet weak var featured: UIImageView!
     @IBOutlet weak var title: UILabel!
-    var bUpdate: Bool = true
+    //var bUpdate: Bool = true
     
     func updateViews(home: Home) {
         //if bUpdate {
             featured.image = home.featured
             title.text = home.title
-            bUpdate = false
+            //bUpdate = false
         //}
     }
     

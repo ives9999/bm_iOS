@@ -11,7 +11,6 @@ import Device_swift
 
 class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-
     @IBOutlet weak var homeCV: UICollectionView!
     
     var frameWidth: CGFloat!
