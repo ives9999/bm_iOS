@@ -20,6 +20,7 @@ class DataService {
 //        Home(featured: "3.jpg", title: "外媒評十大羽毛球美女，馬琳竟上榜！")
 //    ]
     var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
+    var teams: [Team] = [Team]()
     var show: Dictionary<String, Any> = Dictionary<String, Any>()
     var show_html: String = ""
     var downloadImageNum: Int = 0
@@ -150,8 +151,54 @@ class DataService {
         return (key, chTitle, type)
     }
     
+    func getTeam(completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app"]
+        Alamofire.request(URL_TEAM, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in
+            
+            if response.result.isSuccess {
+                let jsonString = response.result.value
+                //print(jsonString)
+                if let json = try? JSON.decode(jsonString!) {
+                    if let arr = try? json.getArray() {
+                        for i in 0 ..< arr.count {
+                            let name = try? arr[i].getString("name")
+                            let id = try? arr[i].getInt("id")
+                            let token = try? arr[i].getString("token")
+                            var path = try? arr[i].getString("featured_path")
+                            if (path!.count > 0) {
+                                path = BASE_URL + path!
+                                self.downloadImageNum += 1
+                            }
+                            let team: Team = Team(id: id!, name: name!, path: path!, token: token!)
+                            self.teams.append(team)
+                        }
+                        for i in 0 ..< self.teams.count {
+                            if self.teams[i].path.count > 0 {
+                                self.getImage(url: self.teams[i].path, completion: { (success) in
+                                    if success {
+                                        self.teams[i].featured = self.image!
+                                        self.downloadImageNum -= 1
+                                        if self.downloadImageNum == 0 {
+                                            //print(self.homes)
+                                            completion(true)
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    }
+                }
+                //completion(false)
+            } else {
+                completion(false)
+                debugPrint(response.result.error as Any)
+            }
+            
+        }
+    }
+    
     func getShow(type: String, id: Int, token: String, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "mobile", "id": id, "token": token, "type": type]
+        let body: [String: Any] = ["source": "app", "id": id, "token": token, "type": type]
         
         
         let url: String = String(format: URL_SHOW, type)

@@ -15,6 +15,7 @@ let REMOTE_BASE_URL = "http://bm.sportpassword.com"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 let URL_HOME = "\(BASE_URL)/app/"
+let URL_TEAM = "\(BASE_URL)/app/team"
 let URL_SHOW = "\(BASE_URL)/app/%@/show/%@?device=app"
 
 // List pages

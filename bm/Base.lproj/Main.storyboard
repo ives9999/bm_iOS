@@ -136,9 +136,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WhJ-QH-Vdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2521.5999999999999" y="-389.5052473763119"/>
+            <point key="canvasLocation" x="2676" y="-139"/>
         </scene>
-        <!--TeamVC-->
+        <!--球隊-->
         <scene sceneID="Biv-Rk-NsK">
             <objects>
                 <viewController id="hk6-fe-bLP" customClass="TeamVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
@@ -147,7 +147,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="YVo-es-Mbm">
-                                <rect key="frame" x="0.0" y="80" width="375" height="538"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nsa-4d-oQ2">
                                     <size key="itemSize" width="352" height="253"/>
@@ -160,10 +160,10 @@
                                         <rect key="frame" x="11.5" y="0.0" width="352" height="253"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="353" height="253"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="352" height="253"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0e6-bT-zFb">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0e6-bT-zFb">
                                                     <rect key="frame" x="10" y="0.0" width="332" height="60"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="GYD-AI-HPl"/>
@@ -172,7 +172,7 @@
                                                     <color key="textColor" red="0.14901960784313725" green="0.35686274509803922" blue="0.011764705882352941" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dU6-Fj-DLu">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dU6-Fj-DLu">
                                                     <rect key="frame" x="5" y="76" width="342" height="172"/>
                                                 </imageView>
                                             </subviews>
@@ -189,7 +189,7 @@
                                         </constraints>
                                         <connections>
                                             <outlet property="featured" destination="dU6-Fj-DLu" id="CDp-7b-1Io"/>
-                                            <outlet property="title" destination="0e6-bT-zFb" id="uaa-yD-cse"/>
+                                            <outlet property="name" destination="0e6-bT-zFb" id="heQ-VT-SXZ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -200,11 +200,15 @@
                             <constraint firstItem="moX-m5-kva" firstAttribute="bottom" secondItem="YVo-es-Mbm" secondAttribute="bottom" id="EDE-a1-9Iy"/>
                             <constraint firstItem="YVo-es-Mbm" firstAttribute="leading" secondItem="moX-m5-kva" secondAttribute="leading" id="L5o-aE-6Gu"/>
                             <constraint firstItem="moX-m5-kva" firstAttribute="trailing" secondItem="YVo-es-Mbm" secondAttribute="trailing" id="dmG-gW-daU"/>
-                            <constraint firstItem="YVo-es-Mbm" firstAttribute="top" secondItem="moX-m5-kva" secondAttribute="top" constant="16" id="fV0-yy-NIb"/>
+                            <constraint firstItem="YVo-es-Mbm" firstAttribute="top" secondItem="moX-m5-kva" secondAttribute="top" id="fV0-yy-NIb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="moX-m5-kva"/>
                     </view>
-                    <navigationItem key="navigationItem" id="owA-9M-Mfg"/>
+                    <navigationItem key="navigationItem" title="球隊" id="owA-9M-Mfg"/>
+                    <connections>
+                        <outlet property="teamCV" destination="YVo-es-Mbm" id="ENt-Iz-cwI"/>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="TeamShowSegue" id="AlK-fI-QxB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v4d-2t-b3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -307,4 +311,7 @@
             <point key="canvasLocation" x="865" y="311"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="AlK-fI-QxB"/>
+    </inferredMetricsTieBreakers>
 </document>

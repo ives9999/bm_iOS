@@ -10,10 +10,11 @@ import UIKit
 
 class TeamCell: UICollectionViewCell {
     
-    @IBOutlet weak var title: UILabel!
+    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var featured: UIImageView!
     
     func updateViews(team: Team) {
-        title.text = team.ti
+        name.text = team.name
+        featured.image = team.featured
     }
 }

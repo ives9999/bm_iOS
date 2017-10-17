@@ -10,14 +10,14 @@ import UIKit
 
 struct Team {
     var id: Int
-    var title: String
+    var name: String
     var featured: UIImage
     var path: String
     var token: String
     
-    init(id: Int, title: String, path: String, token: String) {
+    init(id: Int, name: String, path: String, token: String) {
         self.id = id
-        self.title = title
+        self.name = name
         self.path = path
         self.featured = UIImage()
         self.token = token
