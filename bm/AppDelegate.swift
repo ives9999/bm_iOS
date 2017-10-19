@@ -8,6 +8,7 @@
 
 import UIKit
 import Device_swift
+import UIColor_Hex_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,7 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let tbController = self.window!.rootViewController as! UITabBarController
+        tbController.tabBar.barTintColor = UIColor("#191c25")
+
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Arial", size: 14)!], for: UIControlState.normal)
+        
         let deviceType:DeviceType = UIDevice.current.deviceType
         if deviceType == .simulator {
             gSimulate = true

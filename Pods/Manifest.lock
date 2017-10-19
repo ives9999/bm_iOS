@@ -9,6 +9,7 @@ PODS:
   - Starscream (2.1.1)
   - SwiftyJSON (3.1.4)
   - TRVideoView (0.1.3)
+  - UIColor_Hex_Swift (3.0.2)
 
 DEPENDENCIES:
   - Alamofire
@@ -18,6 +19,7 @@ DEPENDENCIES:
   - Socket.IO-Client-Swift
   - SwiftyJSON
   - TRVideoView
+  - UIColor_Hex_Swift
 
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
@@ -28,7 +30,8 @@ SPEC CHECKSUMS:
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TRVideoView: ad64508a00b7cd177a31a89bd942a524faac3d2c
+  UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
 
-PODFILE CHECKSUM: 24c430920c5b5bb89fe74e6249819b964895c8cc
+PODFILE CHECKSUM: d4170ca7befb59b7a2fbad9e8d0a90ec1e3a52c4
 
 COCOAPODS: 1.3.1

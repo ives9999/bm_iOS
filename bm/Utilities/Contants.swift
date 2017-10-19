@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 typealias CompletionHandler = (_ Success: Bool) -> ()
 
@@ -15,15 +16,19 @@ let REMOTE_BASE_URL = "http://bm.sportpassword.com"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 let URL_HOME = "\(BASE_URL)/app/"
-let URL_TEAM = "\(BASE_URL)/app/team"
+let URL_LIST = "\(BASE_URL)/app/%@"
 let URL_SHOW = "\(BASE_URL)/app/%@/show/%@?device=app"
+
+// Font
+let FONT_NAME: String = "Apple SD Gothic Neo"
+let FONT_SIZE_TITLE: CGFloat = 22
 
 // List pages
 let IPHONE_CELL_ON_ROW: Int = 1
 let IPAD_CELL_ON_ROW:Int = 2
-let CELL_EDGE_MARGIN: Int = 5
-let TITLE_HEIGHT: Int = 60
-let FEATURED_HEIGHT: Int = 180
+let CELL_EDGE_MARGIN: CGFloat = 5
+let TITLE_HEIGHT: CGFloat = 60
+let FEATURED_HEIGHT: CGFloat = 180
 
 // spinner
 let LOADING: String = "努力加載中..."

@@ -26,7 +26,7 @@
 		F94E7D351F83636B00F550FD /* bmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D341F83636B00F550FD /* bmTests.swift */; };
 		F94E7D401F83636B00F550FD /* bmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D3F1F83636B00F550FD /* bmUITests.swift */; };
 		F9A1CB7F1F95CD2500DDEC86 /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* TeamCell.swift */; };
-		F9A1CB811F95CE2F00DDEC86 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB801F95CE2F00DDEC86 /* Team.swift */; };
+		F9A1CB811F95CE2F00DDEC86 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB801F95CE2F00DDEC86 /* List.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,7 +86,7 @@
 		F94E7D3F1F83636B00F550FD /* bmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bmUITests.swift; sourceTree = "<group>"; };
 		F94E7D411F83636B00F550FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9A1CB7E1F95CD2500DDEC86 /* TeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
-		F9A1CB801F95CE2F00DDEC86 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
+		F9A1CB801F95CE2F00DDEC86 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,7 +232,7 @@
 			children = (
 				B35F8DD81F8F64310073BD70 /* Home.swift */,
 				B3F2222F1F91DE7300A8C402 /* Show_IN.swift */,
-				F9A1CB801F95CE2F00DDEC86 /* Team.swift */,
+				F9A1CB801F95CE2F00DDEC86 /* List.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -386,6 +386,7 @@
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TRVideoView/TRVideoView.framework",
+				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -397,6 +398,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TRVideoView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -445,7 +447,7 @@
 			files = (
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
-				F9A1CB811F95CE2F00DDEC86 /* Team.swift in Sources */,
+				F9A1CB811F95CE2F00DDEC86 /* List.swift in Sources */,
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
 				B35F8DD91F8F64310073BD70 /* Home.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,

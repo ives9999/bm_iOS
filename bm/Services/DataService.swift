@@ -20,7 +20,7 @@ class DataService {
 //        Home(featured: "3.jpg", title: "外媒評十大羽毛球美女，馬琳竟上榜！")
 //    ]
     var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
-    var teams: [Team] = [Team]()
+    var lists: [List] = [List]()
     var show: Dictionary<String, Any> = Dictionary<String, Any>()
     var show_html: String = ""
     var downloadImageNum: Int = 0
@@ -151,9 +151,10 @@ class DataService {
         return (key, chTitle, type)
     }
     
-    func getTeam(completion: @escaping CompletionHandler) {
+    func getList(type: String, titleField: String, completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app"]
-        Alamofire.request(URL_TEAM, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in
+        let url: String = String(format: URL_LIST, type)
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in
             
             if response.result.isSuccess {
                 let jsonString = response.result.value
@@ -161,7 +162,7 @@ class DataService {
                 if let json = try? JSON.decode(jsonString!) {
                     if let arr = try? json.getArray() {
                         for i in 0 ..< arr.count {
-                            let name = try? arr[i].getString("name")
+                            let title = try? arr[i].getString(titleField)
                             let id = try? arr[i].getInt("id")
                             let token = try? arr[i].getString("token")
                             var path = try? arr[i].getString("featured_path")
@@ -169,14 +170,19 @@ class DataService {
                                 path = BASE_URL + path!
                                 self.downloadImageNum += 1
                             }
-                            let team: Team = Team(id: id!, name: name!, path: path!, token: token!)
-                            self.teams.append(team)
+                            var vimeo = "", youtube = ""
+                            if type == "course" {
+                                vimeo = try! arr[i].getString("vimeo")
+                                youtube = try! arr[i].getString("youtube")
+                            }
+                            let list: List = List(id: id!, title: title!, path: path!, token: token!, youtube: youtube, vimeo: vimeo)
+                            self.lists.append(list)
                         }
-                        for i in 0 ..< self.teams.count {
-                            if self.teams[i].path.count > 0 {
-                                self.getImage(url: self.teams[i].path, completion: { (success) in
+                        for i in 0 ..< self.lists.count {
+                            if self.lists[i].path.count > 0 {
+                                self.getImage(url: self.lists[i].path, completion: { (success) in
                                     if success {
-                                        self.teams[i].featured = self.image!
+                                        self.lists[i].featured = self.image!
                                         self.downloadImageNum -= 1
                                         if self.downloadImageNum == 0 {
                                             //print(self.homes)
