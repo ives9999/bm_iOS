@@ -27,6 +27,8 @@
 		F94E7D401F83636B00F550FD /* bmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D3F1F83636B00F550FD /* bmUITests.swift */; };
 		F9A1CB7F1F95CD2500DDEC86 /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* TeamCell.swift */; };
 		F9A1CB811F95CE2F00DDEC86 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB801F95CE2F00DDEC86 /* List.swift */; };
+		F9A1CB831F986C2300DDEC86 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB821F986C2300DDEC86 /* ListVC.swift */; };
+		F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB841F9895C300DDEC86 /* CoachVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +89,8 @@
 		F94E7D411F83636B00F550FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9A1CB7E1F95CD2500DDEC86 /* TeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
 		F9A1CB801F95CE2F00DDEC86 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		F9A1CB821F986C2300DDEC86 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
+		F9A1CB841F9895C300DDEC86 /* CoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +227,8 @@
 				F94E7D211F83636A00F550FD /* HomeVC.swift */,
 				F90423B81F83748C00DC8B1E /* TeamVC.swift */,
 				B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */,
+				F9A1CB821F986C2300DDEC86 /* ListVC.swift */,
+				F9A1CB841F9895C300DDEC86 /* CoachVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
 				B35F8DD91F8F64310073BD70 /* Home.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,
+				F9A1CB831F986C2300DDEC86 /* ListVC.swift in Sources */,
 				B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* TeamCell.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
@@ -459,6 +466,7 @@
 				B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
+				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

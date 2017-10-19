@@ -91,9 +91,14 @@ class DataService {
     
     func getImage(url: String, completion: @escaping CompletionHandler) {
         Alamofire.request(url).responseImage(completionHandler: { (response) in
-            guard let image = response.result.value else { return }
-            self.image = image
-            completion(true)
+            if response.result.isSuccess {
+                guard let image = response.result.value else { return }
+                self.image = image
+                completion(true)
+            } else {
+                //print("download image false: \(url)")
+                completion(false)
+            }
         })
     }
     
@@ -154,6 +159,7 @@ class DataService {
     func getList(type: String, titleField: String, completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app"]
         let url: String = String(format: URL_LIST, type)
+        //print(url)
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in
             
             if response.result.isSuccess {
@@ -178,16 +184,21 @@ class DataService {
                             let list: List = List(id: id!, title: title!, path: path!, token: token!, youtube: youtube, vimeo: vimeo)
                             self.lists.append(list)
                         }
+                        //print("need download image: \(self.downloadImageNum)")
                         for i in 0 ..< self.lists.count {
                             if self.lists[i].path.count > 0 {
                                 self.getImage(url: self.lists[i].path, completion: { (success) in
                                     if success {
                                         self.lists[i].featured = self.image!
+                                        //print("image url: \(self.lists[i].path)")
                                         self.downloadImageNum -= 1
-                                        if self.downloadImageNum == 0 {
-                                            //print(self.homes)
-                                            completion(true)
-                                        }
+                                        //print("has downloaded image: \(self.downloadImageNum)")
+                                    } else {
+                                        self.downloadImageNum -= 1
+                                    }
+                                    if self.downloadImageNum == 0 {
+                                        //print(self.homes)
+                                        completion(true)
                                     }
                                 })
                             }
