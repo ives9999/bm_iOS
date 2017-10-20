@@ -12,9 +12,12 @@ import Device_swift
 class TeamVC: ListVC {
 //class TeamVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     let _type:String = "team"
+    //var listCV: UICollectionView!
     
     
     override func viewDidLoad() {
+        print("self: \(self)")
+        //print("super: \(super)")
         super.viewDidLoad()
         self._init(type: _type)
     }
@@ -43,6 +46,7 @@ class TeamVC: ListVC {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        print("bbb")
         return lists.count
     }
     

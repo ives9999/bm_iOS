@@ -12,7 +12,8 @@ import Device_swift
 internal let reuseIdentifier = "Cell"
 
 class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    var listCV: UICollectionView!
+    
+    internal var listCV: UICollectionView!
     var frameWidth: CGFloat!
     var frameHeight: CGFloat!
     var cellWidth: CGFloat!
@@ -23,6 +24,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return CGFloat(count)
     }()
     override func viewDidLoad() {
+        print("super: \(self)")
         super.viewDidLoad()
     }
 
@@ -46,6 +48,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
+        print("aaa")
         return 0
     }
 
@@ -92,6 +95,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
 extension ListVC {
     func _init(type: String) {
+        print("_init self: \(self)")
         frameWidth = view.bounds.size.width
         frameHeight = view.bounds.size.height
         //print("frame width: \(frameWidth), height: \(frameHeight)")
@@ -112,13 +116,13 @@ extension ListVC {
         
         listCV.delegate = self
         listCV.dataSource = self
-        super.view.addSubview(listCV)
+        self.view.addSubview(listCV)
         Global.instance.addSpinner(center: self.view.center, superView: listCV)
         Global.instance.addProgressLbl(center: self.view.center, superView: listCV)
         DataService.instance.getList(type: type, titleField: "name") { (success) in
             if success {
                 self.lists = DataService.instance.lists
-                print(self.lists)
+                //print(self.lists)
                 self.listCV.reloadData()
             }
             //Global.instance.removeSpinner()
