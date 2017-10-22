@@ -13,7 +13,17 @@ class CoachVC: ListVC {
     let _type:String = "coach"
     
     override func viewDidLoad() {
+        setIden(item:_type)
         super.viewDidLoad()
-        self._init(type: _type)
+        getData(type: _type, titleField: "name")
+//        DataService.instance.getList(type: _type, titleField: "name") { (success) in
+//            if success {
+//                self.lists = DataService.instance.lists
+//                print(self.lists)
+//                self.listCV.reloadData()
+//            }
+//            Global.instance.removeSpinner()
+//            Global.instance.removeProgressLbl()
+//        }
     }
 }

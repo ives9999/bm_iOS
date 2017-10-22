@@ -18,46 +18,124 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var frameHeight: CGFloat!
     var cellWidth: CGFloat!
     var deviceType: DeviceType!
+    var iden: String!
     internal(set) public var lists: [List] = [List]()
     lazy var cellCount: CGFloat = {
         let count: Int = self.deviceType == .iPhone7 ? IPHONE_CELL_ON_ROW : IPAD_CELL_ON_ROW
         return CGFloat(count)
     }()
     override func viewDidLoad() {
-        print("super: \(self)")
+        //print("super: \(self)")
         super.viewDidLoad()
+        
+        frameWidth = view.bounds.size.width
+        frameHeight = view.bounds.size.height
+        deviceType = Global.instance.deviceType(frameWidth: frameWidth!)
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
+        listCV = UICollectionView(frame: CGRect(x: 0, y: 64, width: 375, height: 800), collectionViewLayout: layout)
+        //print(listCV)
+        listCV.register(TeamCell.self, forCellWithReuseIdentifier: iden+"Cell")
+        listCV.delegate = self
+        listCV.dataSource = self
+        self.view.addSubview(listCV)
+        Global.instance.addSpinner(center: self.view.center, superView: listCV)
+        Global.instance.addProgressLbl(center: self.view.center, superView: listCV)
+        
+        //var list = List(id: 0, title: "title1", path: "", token: "")
+        //list.featured = UIImage(named: "1.png")!
+        //lists.append(list)
+        //print(lists)
+        //listCV.reloadData()
+    }
+    
+    func setIden(item: String) {
+        iden = item
+    }
+    
+    func getData(type: String, titleField: String) {
+        DataService.instance.getList(type: type, titleField: titleField) { (success) in
+            if success {
+                self.lists = DataService.instance.lists
+                //print(self.lists)
+                self.listCV.reloadData()
+            }
+            Global.instance.removeSpinner()
+            Global.instance.removeProgressLbl()
+        }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let list = lists[indexPath.row]
+        let imageWidth = list.featured.size.width
+        let imageHeight = list.featured.size.height
+        //print("image width: \(imageWidth), height: \(imageHeight)")
+        
+        //print("cell count: \(cellCount)")
+        cellWidth = (frameWidth!-(20*(cellCount-1))) / cellCount
+        //print("cell width: \(cellWidth)")
+        
+        var cellHeight: CGFloat = TITLE_HEIGHT
+        if imageWidth < cellWidth - CELL_EDGE_MARGIN*2 {
+            cellHeight += imageHeight
+        } else {
+            cellHeight += (imageHeight/imageWidth) * (cellWidth-(CELL_EDGE_MARGIN*2))
+        }
+        cellHeight += CELL_EDGE_MARGIN
+        //print("cell width: \(cellWidth), height: \(cellHeight)")
+        let size = CGSize(width: cellWidth, height: cellHeight)
+        return size
     }
-    */
 
     // MARK: UICollectionViewDataSource
 
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
-
-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        print("aaa")
-        return 0
+        //print("aaa")
+        return lists.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let list = lists[indexPath.row]
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"Cell", for: indexPath) as? TeamCell {
+//            if indexPath.row == 0 {
+//                print(list)
+//            }
+            let image = list.featured
+            let imageWidth: CGFloat = image.size.width
+            let imageHeight: CGFloat = image.size.height
+            
+            let width: CGFloat = cellWidth! - CELL_EDGE_MARGIN*2
+            var height: CGFloat!
+            if imageWidth < width {
+                height = imageHeight
+            } else {
+                height = (imageHeight/imageWidth) * (cellWidth-CELL_EDGE_MARGIN*2)
+            }
+            
+            let frame: CGRect = cell.featured.frame
+            //print("featured frame: \(frame)")
+            cell.featured.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: width, height: height)
+            cell.updateViews(list: list)
+            
+            return cell
+        }
+        return HomeImageCell()
+    }
     
-        // Configure the cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let list: List = lists[indexPath.row]
+        performSegue(withIdentifier: "ListShowSegue", sender: list)
+    }
     
-        return cell
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let showVC: ShowVC = segue.destination as? ShowVC {
+            assert(sender as? List != nil)
+            let list: List = sender as! List
+            let show_in: Show_IN = Show_IN(type: "coach", id: list.id, token: list.token)
+            showVC.initShowVC(sin: show_in)
+        }
     }
 
     // MARK: UICollectionViewDelegate
@@ -95,20 +173,13 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
 extension ListVC {
     func _init(type: String) {
-        print("_init self: \(self)")
+        /*print("_init self: \(self)")
         frameWidth = view.bounds.size.width
         frameHeight = view.bounds.size.height
         //print("frame width: \(frameWidth), height: \(frameHeight)")
         
         deviceType = Global.instance.deviceType(frameWidth: frameWidth!)
-        //print(deviceType)
         
-        //        let cellCount: Int = deviceType == .iPhone7 ? IPHONE_CELL_ON_ROW : IPAD_CELL_ON_ROW
-        //        let cellWidth: CGFloat = frameWidth! / CGFloat(cellCount)
-        //        print(cellWidth)
-        
-        //let frame = teamCV.frame
-        //print(frame)
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
         listCV = UICollectionView(frame: CGRect(x: 0, y: 64, width: frameWidth, height: frameHeight-64), collectionViewLayout: layout)
@@ -116,17 +187,17 @@ extension ListVC {
         
         listCV.delegate = self
         listCV.dataSource = self
-        self.view.addSubview(listCV)
-        Global.instance.addSpinner(center: self.view.center, superView: listCV)
-        Global.instance.addProgressLbl(center: self.view.center, superView: listCV)
-        DataService.instance.getList(type: type, titleField: "name") { (success) in
-            if success {
-                self.lists = DataService.instance.lists
-                //print(self.lists)
-                self.listCV.reloadData()
-            }
-            //Global.instance.removeSpinner()
-            //Global.instance.removeProgressLbl()
-        }
+        self.view.addSubview(listCV)*/
+//        Global.instance.addSpinner(center: self.view.center, superView: listCV)
+//        Global.instance.addProgressLbl(center: self.view.center, superView: listCV)
+//        DataService.instance.getList(type: type, titleField: "name") { (success) in
+//            if success {
+//                self.lists = DataService.instance.lists
+//                //print(self.lists)
+//                self.listCV.reloadData()
+//            }
+//            //Global.instance.removeSpinner()
+//            //Global.instance.removeProgressLbl()
+//        }
     }
 }

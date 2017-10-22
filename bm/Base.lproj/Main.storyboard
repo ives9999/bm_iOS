@@ -4,7 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -135,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WhJ-QH-Vdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2676" y="-139"/>
+            <point key="canvasLocation" x="3286" y="152"/>
         </scene>
         <!--球隊-->
         <scene sceneID="Biv-Rk-NsK">
@@ -143,7 +143,7 @@
                 <viewController id="hk6-fe-bLP" customClass="TeamVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="球隊" id="owA-9M-Mfg"/>
                     <connections>
-                        <segue destination="xCM-NL-W3p" kind="show" identifier="TeamShowSegue" id="AlK-fI-QxB"/>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="AlK-fI-QxB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v4d-2t-b3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -177,6 +177,9 @@
                         <viewLayoutGuide key="safeArea" id="8LU-CJ-hpC"/>
                     </view>
                     <navigationItem key="navigationItem" title="教練" id="yjE-Ai-Cll"/>
+                    <connections>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="a7V-eU-Yjs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cH-ZS-Ng2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -276,6 +279,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="AlK-fI-QxB"/>
+        <segue reference="a7V-eU-Yjs"/>
     </inferredMetricsTieBreakers>
 </document>

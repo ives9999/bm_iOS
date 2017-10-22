@@ -160,6 +160,7 @@ class DataService {
         let body: [String: Any] = ["source": "app"]
         let url: String = String(format: URL_LIST, type)
         //print(url)
+        lists = [List]()
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in
             
             if response.result.isSuccess {
