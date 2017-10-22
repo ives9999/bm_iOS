@@ -150,21 +150,24 @@
             </objects>
             <point key="canvasLocation" x="2024.8" y="310.79460269865069"/>
         </scene>
-        <!--教學-->
+        <!--CourseCV-->
         <scene sceneID="Eib-Tq-Zds">
             <objects>
-                <viewController id="By4-ki-Kov" sceneMemberID="viewController">
+                <viewController id="By4-ki-Kov" customClass="CourseCV" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="McF-I9-gA8">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <viewLayoutGuide key="safeArea" id="3UI-9E-1a9"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="教學" id="rvw-VL-dX3"/>
+                    <navigationItem key="navigationItem" id="tEm-Ru-GfS"/>
+                    <connections>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="ListSegue" id="vrH-5G-Fdn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omZ-1j-3Gu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-541" y="715"/>
+            <point key="canvasLocation" x="2804" y="1110"/>
         </scene>
         <!--教練-->
         <scene sceneID="5pf-JC-0gR">
@@ -208,7 +211,7 @@
                     <connections>
                         <segue destination="rUV-I4-SeV" kind="relationship" relationship="viewControllers" id="Ce2-hc-xUH"/>
                         <segue destination="3QO-yW-Ruh" kind="relationship" relationship="viewControllers" id="wqV-an-USa"/>
-                        <segue destination="By4-ki-Kov" kind="relationship" relationship="viewControllers" id="xsN-Eo-DQE"/>
+                        <segue destination="dGp-Cj-WWR" kind="relationship" relationship="viewControllers" id="xsN-Eo-DQE"/>
                         <segue destination="g19-36-fvW" kind="relationship" relationship="viewControllers" id="pCW-l0-Mau"/>
                     </connections>
                 </tabBarController>
@@ -277,8 +280,27 @@
             </objects>
             <point key="canvasLocation" x="10" y="851"/>
         </scene>
+        <!--教學-->
+        <scene sceneID="y7C-1O-MFc">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dGp-Cj-WWR" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="教學" id="rvw-VL-dX3"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="GGl-ge-gQj">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="By4-ki-Kov" kind="relationship" relationship="rootViewController" id="cMh-lC-50h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7ZN-H5-Nol" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2081.5999999999999" y="1118.1409295352325"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="a7V-eU-Yjs"/>
+        <segue reference="vrH-5G-Fdn"/>
     </inferredMetricsTieBreakers>
 </document>
