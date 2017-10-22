@@ -133,7 +133,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if let showVC: ShowVC = segue.destination as? ShowVC {
             assert(sender as? List != nil)
             let list: List = sender as! List
-            let show_in: Show_IN = Show_IN(type: "coach", id: list.id, token: list.token)
+            let show_in: Show_IN = Show_IN(type: iden, id: list.id, token: list.token)
             showVC.initShowVC(sin: show_in)
         }
     }
