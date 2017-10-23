@@ -9,7 +9,7 @@
 import UIKit
 import UIColor_Hex_Swift
 
-class TeamCell: UICollectionViewCell {
+class ListCell: UICollectionViewCell {
     
     var title: UILabel!
     var featured: UIImageView!

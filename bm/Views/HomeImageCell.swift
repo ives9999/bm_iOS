@@ -20,6 +20,5 @@ class HomeImageCell: UICollectionViewCell {
             title.text = home.title
             //bUpdate = false
         //}
-    }
-    
+    }    
 }

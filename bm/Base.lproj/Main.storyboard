@@ -162,7 +162,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="tEm-Ru-GfS"/>
                     <connections>
-                        <segue destination="xCM-NL-W3p" kind="show" identifier="ListSegue" id="vrH-5G-Fdn"/>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="vrH-5G-Fdn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omZ-1j-3Gu" userLabel="First Responder" sceneMemberID="firstResponder"/>

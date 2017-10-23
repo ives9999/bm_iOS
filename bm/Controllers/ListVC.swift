@@ -36,7 +36,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
         listCV = UICollectionView(frame: CGRect(x: 0, y: 64, width: 375, height: 800), collectionViewLayout: layout)
         //print(listCV)
-        listCV.register(TeamCell.self, forCellWithReuseIdentifier: iden+"Cell")
+        listCV.register(ListCell.self, forCellWithReuseIdentifier: iden+"Cell")
         listCV.delegate = self
         listCV.dataSource = self
         self.view.addSubview(listCV)
@@ -98,7 +98,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let list = lists[indexPath.row]
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"Cell", for: indexPath) as? TeamCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"Cell", for: indexPath) as? ListCell {
 //            if indexPath.row == 0 {
 //                print(list)
 //            }

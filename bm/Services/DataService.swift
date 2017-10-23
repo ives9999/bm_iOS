@@ -94,11 +94,11 @@ class DataService {
             if response.result.isSuccess {
                 guard let image = response.result.value else { return }
                 self.image = image
-                completion(true)
             } else {
                 //print("download image false: \(url)")
-                completion(false)
+                self.image = UIImage(named: "nophoto")
             }
+            completion(true)
         })
     }
     
@@ -172,16 +172,27 @@ class DataService {
                             let title = try? arr[i].getString(titleField)
                             let id = try? arr[i].getInt("id")
                             let token = try? arr[i].getString("token")
-                            var path = try? arr[i].getString("featured_path")
-                            if (path!.count > 0) {
-                                path = BASE_URL + path!
-                                self.downloadImageNum += 1
-                            }
                             var vimeo = "", youtube = ""
-                            if type == "course" {
-                                vimeo = try! arr[i].getString("vimeo")
-                                youtube = try! arr[i].getString("youtube")
+                            if let vimeo1 = try? arr[i].getString("vimeo") {
+                                vimeo = vimeo1
                             }
+                            if let youtube1 = try? arr[i].getString("youtube") {
+                                youtube = youtube1
+                            }
+//                            if type == "course" {
+//                                vimeo = try! arr[i].getString("vimeo")
+//                                youtube = try! arr[i].getString("youtube")
+//                            }
+                            var path: String!
+                            if let path1 = try? arr[i].getString("featured_path") {
+                                if (path1.count > 0) {
+                                    path = BASE_URL + path1
+                                    self.downloadImageNum += 1
+                                }
+                            } else {
+                                path = ""
+                            }
+                            
                             let list: List = List(id: id!, title: title!, path: path!, token: token!, youtube: youtube, vimeo: vimeo)
                             self.lists.append(list)
                         }
@@ -202,9 +213,19 @@ class DataService {
                                         completion(true)
                                     }
                                 })
+                            } else {
+                                if (self.lists[i].vimeo.count==0) && (self.lists[i].youtube.count==0) {
+                                    self.lists[i].featured = UIImage(named: "nophoto")!
+                                }
                             }
                         }
+                    } else {
+                        print("JSON to array error")
+                        completion(false)
                     }
+                } else { // JSON string parse error
+                    print("JSON string parse error")
+                    completion(false)
                 }
                 //completion(false)
             } else {
