@@ -29,6 +29,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewDidLoad()
         
         frameWidth = view.bounds.size.width
+        print("frame width: \(frameWidth)")
         frameHeight = view.bounds.size.height
         deviceType = Global.instance.deviceType(frameWidth: frameWidth!)
         
@@ -36,7 +37,8 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
         listCV = UICollectionView(frame: CGRect(x: 0, y: 64, width: 375, height: 800), collectionViewLayout: layout)
         //print(listCV)
-        listCV.register(ListCell.self, forCellWithReuseIdentifier: iden+"Cell")
+        listCV.register(ListCell.self, forCellWithReuseIdentifier: iden+"ImageCell")
+        listCV.register(VideoCell.self, forCellWithReuseIdentifier: iden+"VideoCell")
         listCV.delegate = self
         listCV.dataSource = self
         self.view.addSubview(listCV)
@@ -54,8 +56,8 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         iden = item
     }
     
-    func getData(type: String, titleField: String) {
-        DataService.instance.getList(type: type, titleField: titleField) { (success) in
+    func getData(type: String, titleField: String, page: Int=1, perPage: Int=10) {
+        DataService.instance.getList(type: type, titleField: titleField, page: page, perPage: perPage) { (success) in
             if success {
                 self.lists = DataService.instance.lists
                 //print(self.lists)
@@ -67,24 +69,34 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        var size: CGSize!
         let list = lists[indexPath.row]
-        let imageWidth = list.featured.size.width
-        let imageHeight = list.featured.size.height
-        //print("image width: \(imageWidth), height: \(imageHeight)")
         
-        //print("cell count: \(cellCount)")
+        print("cell count: \(cellCount)")
         cellWidth = (frameWidth!-(20*(cellCount-1))) / cellCount
-        //print("cell width: \(cellWidth)")
+        print("cell width: \(cellWidth)")
+        var cellHeight: CGFloat
         
-        var cellHeight: CGFloat = TITLE_HEIGHT
-        if imageWidth < cellWidth - CELL_EDGE_MARGIN*2 {
-            cellHeight += imageHeight
+        if list.vimeo.count == 0 && list.youtube.count == 0 {
+            let imageWidth = list.featured.size.width
+            let imageHeight = list.featured.size.height
+            //print("image width: \(imageWidth), height: \(imageHeight)")
+            
+            cellHeight = TITLE_HEIGHT
+            if imageWidth < cellWidth - CELL_EDGE_MARGIN*2 {
+                cellHeight += imageHeight
+            } else {
+                cellHeight += (imageHeight/imageWidth) * (cellWidth-(CELL_EDGE_MARGIN*2))
+            }
+            cellHeight += CELL_EDGE_MARGIN
+            //print("cell width: \(cellWidth), height: \(cellHeight)")
+            size = CGSize(width: cellWidth, height: cellHeight)
         } else {
-            cellHeight += (imageHeight/imageWidth) * (cellWidth-(CELL_EDGE_MARGIN*2))
+            cellHeight = (cellWidth - CELL_EDGE_MARGIN * 2) * 0.75 + CELL_EDGE_MARGIN * 2
+            size = CGSize(width: cellWidth, height: cellHeight)
+            //print("cell_width: \(cellWidth), cell_height: \(cellHeight)")
         }
-        cellHeight += CELL_EDGE_MARGIN
-        //print("cell width: \(cellWidth), height: \(cellHeight)")
-        let size = CGSize(width: cellWidth, height: cellHeight)
+        print("cell width: \(cellWidth), height: \(cellHeight)")
         return size
     }
 
@@ -98,35 +110,42 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let list = lists[indexPath.row]
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"Cell", for: indexPath) as? ListCell {
-//            if indexPath.row == 0 {
-//                print(list)
-//            }
-            let image = list.featured
-            let imageWidth: CGFloat = image.size.width
-            let imageHeight: CGFloat = image.size.height
-            
-            let width: CGFloat = cellWidth! - CELL_EDGE_MARGIN*2
-            var height: CGFloat!
-            if imageWidth < width {
-                height = imageHeight
-            } else {
-                height = (imageHeight/imageWidth) * (cellWidth-CELL_EDGE_MARGIN*2)
+        if list.vimeo.count > 0 || list.youtube.count > 0 {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"VideoCell", for: indexPath) as? VideoCell {
+                cell.updateViews(list: list)
+                
+                return cell
             }
-            
-            let frame: CGRect = cell.featured.frame
-            //print("featured frame: \(frame)")
-            cell.featured.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: width, height: height)
-            cell.updateViews(list: list)
-            
-            return cell
+        } else {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"ImageCell", for: indexPath) as? ListCell {
+                let image = list.featured
+                let imageWidth: CGFloat = image.size.width
+                let imageHeight: CGFloat = image.size.height
+                
+                let width: CGFloat = cellWidth! - CELL_EDGE_MARGIN*2
+                var height: CGFloat!
+                if imageWidth < width {
+                    height = imageHeight
+                } else {
+                    height = (imageHeight/imageWidth) * (cellWidth-CELL_EDGE_MARGIN*2)
+                }
+                
+                let frame: CGRect = cell.featured.frame
+                //print("featured frame: \(frame)")
+                cell.featured.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: width, height: height)
+                cell.updateViews(list: list)
+                
+                return cell
+            }
         }
         return HomeImageCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let list: List = lists[indexPath.row]
-        performSegue(withIdentifier: "ListShowSegue", sender: list)
+        if list.vimeo.count == 0 && list.youtube.count == 0 {
+            performSegue(withIdentifier: "ListShowSegue", sender: list)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -136,6 +155,13 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             let show_in: Show_IN = Show_IN(type: iden, id: list.id, token: list.token)
             showVC.initShowVC(sin: show_in)
         }
+    }
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+            print("will display section: \(indexPath.section) row: \(indexPath.row)")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+            print("end display section: \(indexPath.section) row: \(indexPath.row)")
     }
 
     // MARK: UICollectionViewDelegate
@@ -171,33 +197,4 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
 }
 
-extension ListVC {
-    func _init(type: String) {
-        /*print("_init self: \(self)")
-        frameWidth = view.bounds.size.width
-        frameHeight = view.bounds.size.height
-        //print("frame width: \(frameWidth), height: \(frameHeight)")
-        
-        deviceType = Global.instance.deviceType(frameWidth: frameWidth!)
-        
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
-        listCV = UICollectionView(frame: CGRect(x: 0, y: 64, width: frameWidth, height: frameHeight-64), collectionViewLayout: layout)
-        listCV.register(TeamCell.self, forCellWithReuseIdentifier: "ListCell")
-        
-        listCV.delegate = self
-        listCV.dataSource = self
-        self.view.addSubview(listCV)*/
-//        Global.instance.addSpinner(center: self.view.center, superView: listCV)
-//        Global.instance.addProgressLbl(center: self.view.center, superView: listCV)
-//        DataService.instance.getList(type: type, titleField: "name") { (success) in
-//            if success {
-//                self.lists = DataService.instance.lists
-//                //print(self.lists)
-//                self.listCV.reloadData()
-//            }
-//            //Global.instance.removeSpinner()
-//            //Global.instance.removeProgressLbl()
-//        }
-    }
-}
+

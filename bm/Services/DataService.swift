@@ -156,8 +156,8 @@ class DataService {
         return (key, chTitle, type)
     }
     
-    func getList(type: String, titleField: String, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app"]
+    func getList(type: String, titleField: String, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
         let url: String = String(format: URL_LIST, type)
         //print(url)
         lists = [List]()
@@ -165,7 +165,7 @@ class DataService {
             
             if response.result.isSuccess {
                 let jsonString = response.result.value
-                //print(jsonString)
+                print(jsonString)
                 if let json = try? JSON.decode(jsonString!) {
                     if let arr = try? json.getArray() {
                         for i in 0 ..< arr.count {
