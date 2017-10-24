@@ -13,9 +13,9 @@ class CoachVC: ListVC {
     let _type:String = "coach"
     
     override func viewDidLoad() {
-        setIden(item:_type)
+        setIden(item:_type, titleField: "name")
         super.viewDidLoad()
-        getData(type: _type, titleField: "name")
+        getData()
 //        DataService.instance.getList(type: _type, titleField: "name") { (success) in
 //            if success {
 //                self.lists = DataService.instance.lists

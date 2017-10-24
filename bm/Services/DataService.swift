@@ -21,6 +21,9 @@ class DataService {
 //    ]
     var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
     var lists: [List] = [List]()
+    var totalCount: Int!
+    var page: Int!
+    var perPage: Int!
     var show: Dictionary<String, Any> = Dictionary<String, Any>()
     var show_html: String = ""
     var downloadImageNum: Int = 0
@@ -102,62 +105,9 @@ class DataService {
         })
     }
     
-    func parseHomeJSON(array: [Dictionary<String, Any>], titleField: String, type: String, video: Bool=false) -> [Home] {
-        var result: [Home] = [Home]()
-        for item in array {
-            let id: Int = item["id"] as? Int ?? 0
-            let title: String = item[titleField] as? String ?? ""
-            var path: String = item["featured_path"] as? String ?? ""
-            if (path.count > 0) {
-                path = BASE_URL + path
-                downloadImageNum += 1
-            }
-            let youtube: String = item["youtube"] as? String ?? ""
-            let vimeo: String = item["vimeo"] as? String ?? ""
-            let token: String = item["token"] as? String ?? ""
-            let home = Home(id: id, title: title, path: path, youtube: youtube, vimeo: vimeo, token: token, type: type)
-            result.append(home)
-        }
-        
-        return result
-    }
-    
-    func getHomeItem(indexPath: IndexPath) -> Home {
-        let key: String = sectionToKey(section: indexPath.section).key
-        return homes[key]![indexPath.row]
-    }
-    
-    func sectionToKey(section: Int) -> (key: String, chTitle: String, type: String) {
-        var key: String
-        var chTitle: String
-        var type : String
-        switch section {
-        case 0:
-            key = "courses"
-            type = "cours"
-            chTitle = "課程"
-            break
-        case 1:
-            key = "news"
-            type = "news"
-            chTitle = "新聞"
-            break
-        case 2:
-            key = "arenas"
-            type = "arena"
-            chTitle = "球館"
-            break
-        default:
-            key = "courses"
-            type = "cours"
-            chTitle = "課程"
-        }
-        
-        return (key, chTitle, type)
-    }
-    
     func getList(type: String, titleField: String, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
+        //print(body)
         let url: String = String(format: URL_LIST, type)
         //print(url)
         lists = [List]()
@@ -165,9 +115,15 @@ class DataService {
             
             if response.result.isSuccess {
                 let jsonString = response.result.value
-                print(jsonString)
+                //print(jsonString)
                 if let json = try? JSON.decode(jsonString!) {
-                    if let arr = try? json.getArray() {
+                    self.totalCount = try? json.getInt("totalCount")
+                    //print(self.totalCount)
+                    self.page = try? json.getInt("page")
+                    //print(self.page)
+                    self.perPage = try? json.getInt("perPage")
+                    //print(self.perPage)
+                    if let arr = try? json.getArray("rows") {
                         for i in 0 ..< arr.count {
                             let title = try? arr[i].getString(titleField)
                             let id = try? arr[i].getInt("id")
@@ -273,7 +229,59 @@ class DataService {
         }
     }
     
+    func parseHomeJSON(array: [Dictionary<String, Any>], titleField: String, type: String, video: Bool=false) -> [Home] {
+        var result: [Home] = [Home]()
+        for item in array {
+            let id: Int = item["id"] as? Int ?? 0
+            let title: String = item[titleField] as? String ?? ""
+            var path: String = item["featured_path"] as? String ?? ""
+            if (path.count > 0) {
+                path = BASE_URL + path
+                downloadImageNum += 1
+            }
+            let youtube: String = item["youtube"] as? String ?? ""
+            let vimeo: String = item["vimeo"] as? String ?? ""
+            let token: String = item["token"] as? String ?? ""
+            let home = Home(id: id, title: title, path: path, youtube: youtube, vimeo: vimeo, token: token, type: type)
+            result.append(home)
+        }
+        
+        return result
+    }
     
+    func getHomeItem(indexPath: IndexPath) -> Home {
+        let key: String = sectionToKey(section: indexPath.section).key
+        return homes[key]![indexPath.row]
+    }
+    
+    func sectionToKey(section: Int) -> (key: String, chTitle: String, type: String) {
+        var key: String
+        var chTitle: String
+        var type : String
+        switch section {
+        case 0:
+            key = "courses"
+            type = "cours"
+            chTitle = "課程"
+            break
+        case 1:
+            key = "news"
+            type = "news"
+            chTitle = "新聞"
+            break
+        case 2:
+            key = "arenas"
+            type = "arena"
+            chTitle = "球館"
+            break
+        default:
+            key = "courses"
+            type = "cours"
+            chTitle = "課程"
+        }
+        
+        return (key, chTitle, type)
+    }
     
     
     

@@ -24,16 +24,16 @@ class ListCell: UICollectionViewCell {
     }
     
     func _initSubview() {
-        let screenWidth = UIScreen.main.bounds.size.width
+        let cellWidth = self.bounds.width
         self.contentView.backgroundColor = UIColor.white
         
-        title = UILabel(frame: CGRect(x: CGFloat(CELL_EDGE_MARGIN), y: CGFloat(0.0), width: screenWidth-CGFloat(CELL_EDGE_MARGIN*2), height: CGFloat(TITLE_HEIGHT)))
+        title = UILabel(frame: CGRect(x: CGFloat(CELL_EDGE_MARGIN), y: CGFloat(0.0), width: cellWidth-CGFloat(CELL_EDGE_MARGIN*2), height: CGFloat(TITLE_HEIGHT)))
         let myFont: UIFont! = UIFont(name: FONT_NAME, size: CGFloat(FONT_SIZE_TITLE))
         title.font = myFont.bold()
         title.textColor = UIColor("#265B03")
         self.addSubview(title)
         
-        featured = UIImageView(frame: CGRect(x: CGFloat(CELL_EDGE_MARGIN), y: CGFloat(TITLE_HEIGHT), width: screenWidth-CGFloat(CELL_EDGE_MARGIN*2), height: 20))
+        featured = UIImageView(frame: CGRect(x: CGFloat(CELL_EDGE_MARGIN), y: CGFloat(TITLE_HEIGHT), width: cellWidth-CELL_EDGE_MARGIN*2, height: 20))
         featured.contentMode = .scaleAspectFit
         self.addSubview(featured)
     }

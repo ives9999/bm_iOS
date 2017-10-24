@@ -27,7 +27,7 @@ class TeamVC: ListVC {
     override func viewDidLoad() {
         //print("self: \(self)")
         //print("super: \(super)")
-        setIden(item:_type)
+        setIden(item:_type, titleField: "name")
         super.viewDidLoad()
         //self._init(type: _type)
         //frameWidth = view.bounds.size.width
@@ -55,7 +55,7 @@ class TeamVC: ListVC {
 //        lists.append(list)
 //        print(lists)
 //        listCV.reloadData()
-        getData(type: _type, titleField: "name")
+        getData()
         
 //        DataService.instance.getList(type: _type, titleField: "name") { (success) in
 //            if success {
@@ -67,59 +67,5 @@ class TeamVC: ListVC {
 //            Global.instance.removeProgressLbl()
 //        }
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let list = lists[indexPath.row]
-//        let imageWidth = list.featured.size.width
-//        let imageHeight = list.featured.size.height
-//        //print("image width: \(imageWidth), height: \(imageHeight)")
-//
-//        //print("cell count: \(cellCount)")
-//        cellWidth = (frameWidth!-(20*(cellCount-1))) / cellCount
-//        //print("cell width: \(cellWidth)")
-//
-//        var cellHeight: CGFloat = TITLE_HEIGHT
-//        if imageWidth < cellWidth - CELL_EDGE_MARGIN*2 {
-//            cellHeight += imageHeight
-//        } else {
-//            cellHeight += (imageHeight/imageWidth) * (cellWidth-(CELL_EDGE_MARGIN*2))
-//        }
-//        cellHeight += CELL_EDGE_MARGIN
-//        //print("cell width: \(cellWidth), height: \(cellHeight)")
-//        let size = CGSize(width: cellWidth, height: cellHeight)
-//        return size
-//    }
-
-    /*override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
-        print("bbb")
-        return lists.count
-    }*/
-
-    /*override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let list = lists[indexPath.row]
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as? TeamCell {
-            let image = list.featured
-            let imageWidth: CGFloat = image.size.width
-            let imageHeight: CGFloat = image.size.height
-
-            let width: CGFloat = cellWidth! - CELL_EDGE_MARGIN*2
-            var height: CGFloat!
-            if imageWidth < width {
-                height = imageHeight
-            } else {
-                height = (imageHeight/imageWidth) * (cellWidth-CELL_EDGE_MARGIN*2)
-            }
-
-            let frame: CGRect = cell.featured.frame
-            //print("featured frame: \(frame)")
-            cell.featured.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: width, height: height)
-            cell.updateViews(list: list)
-
-            return cell
-        }
-        return HomeImageCell()
-    }*/
-
     
 }

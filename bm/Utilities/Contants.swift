@@ -29,6 +29,7 @@ let IPAD_CELL_ON_ROW:Int = 2
 let CELL_EDGE_MARGIN: CGFloat = 5
 let TITLE_HEIGHT: CGFloat = 60
 let FEATURED_HEIGHT: CGFloat = 180
+let PERPAGE: Int = 5
 
 // spinner
 let LOADING: String = "努力加載中..."

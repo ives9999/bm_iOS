@@ -11,7 +11,7 @@ import Device_swift
 
 internal let reuseIdentifier = "Cell"
 
-class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     internal var listCV: UICollectionView!
     var frameWidth: CGFloat!
@@ -19,6 +19,11 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var cellWidth: CGFloat!
     var deviceType: DeviceType!
     var iden: String!
+    var titleField: String!
+    var page: Int = 1
+    var perPage: Int = PERPAGE
+    var totalCount: Int = 100000
+    var totalPage: Int = 1
     internal(set) public var lists: [List] = [List]()
     lazy var cellCount: CGFloat = {
         let count: Int = self.deviceType == .iPhone7 ? IPHONE_CELL_ON_ROW : IPAD_CELL_ON_ROW
@@ -29,13 +34,13 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewDidLoad()
         
         frameWidth = view.bounds.size.width
-        print("frame width: \(frameWidth)")
+        //print("frame width: \(frameWidth)")
         frameHeight = view.bounds.size.height
         deviceType = Global.instance.deviceType(frameWidth: frameWidth!)
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
-        listCV = UICollectionView(frame: CGRect(x: 0, y: 64, width: 375, height: 800), collectionViewLayout: layout)
+        listCV = UICollectionView(frame: CGRect(x: 0, y: 64, width: frameWidth, height: frameHeight), collectionViewLayout: layout)
         //print(listCV)
         listCV.register(ListCell.self, forCellWithReuseIdentifier: iden+"ImageCell")
         listCV.register(VideoCell.self, forCellWithReuseIdentifier: iden+"VideoCell")
@@ -52,15 +57,26 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         //listCV.reloadData()
     }
     
-    func setIden(item: String) {
-        iden = item
+    func setIden(item: String, titleField: String) {
+        self.iden = item
+        self.titleField = titleField
     }
     
-    func getData(type: String, titleField: String, page: Int=1, perPage: Int=10) {
-        DataService.instance.getList(type: type, titleField: titleField, page: page, perPage: perPage) { (success) in
+    func getData(page: Int=1, perPage: Int=PERPAGE) {
+        print(page)
+        DataService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage) { (success) in
             if success {
-                self.lists = DataService.instance.lists
+                let tmps: [List] = DataService.instance.lists
+                self.lists += tmps
                 //print(self.lists)
+                self.page = DataService.instance.page
+                if self.page == 1 {
+                    self.totalCount = DataService.instance.totalCount
+                    self.perPage = DataService.instance.perPage
+                    let _pageCount: Int = self.totalCount / self.perPage
+                    self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
+                    print(self.totalPage)
+                }
                 self.listCV.reloadData()
             }
             Global.instance.removeSpinner()
@@ -72,9 +88,9 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         var size: CGSize!
         let list = lists[indexPath.row]
         
-        print("cell count: \(cellCount)")
-        cellWidth = (frameWidth!-(20*(cellCount-1))) / cellCount
-        print("cell width: \(cellWidth)")
+        //print("cell count: \(cellCount)")
+        cellWidth = (frameWidth!-(CELL_EDGE_MARGIN*2*(cellCount-1))) / cellCount
+        //print("cell width: \(cellWidth!)")
         var cellHeight: CGFloat
         
         if list.vimeo.count == 0 && list.youtube.count == 0 {
@@ -88,6 +104,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             } else {
                 cellHeight += (imageHeight/imageWidth) * (cellWidth-(CELL_EDGE_MARGIN*2))
             }
+            //cellHeight += cellWidth * 0.75
             cellHeight += CELL_EDGE_MARGIN
             //print("cell width: \(cellWidth), height: \(cellHeight)")
             size = CGSize(width: cellWidth, height: cellHeight)
@@ -96,9 +113,12 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             size = CGSize(width: cellWidth, height: cellHeight)
             //print("cell_width: \(cellWidth), cell_height: \(cellHeight)")
         }
-        print("cell width: \(cellWidth), height: \(cellHeight)")
+        //print("cell width: \(cellWidth!), height: \(cellHeight)")
         return size
     }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        return UIEdgeInsets(top: 5.0, left: 5.0, bottom: 30.0, right: 5.0)
+//    }
 
     // MARK: UICollectionViewDataSource
 
@@ -121,7 +141,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 let image = list.featured
                 let imageWidth: CGFloat = image.size.width
                 let imageHeight: CGFloat = image.size.height
-                
+
                 let width: CGFloat = cellWidth! - CELL_EDGE_MARGIN*2
                 var height: CGFloat!
                 if imageWidth < width {
@@ -157,12 +177,28 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-            print("will display section: \(indexPath.section) row: \(indexPath.row)")
+        print("will display section: \(indexPath.section) row: \(indexPath.row)")
+        if indexPath.row == page * PERPAGE - 1 {
+            page += 1
+            print("current page: \(page)")
+            if page <= totalPage {
+                getData(page: page, perPage: PERPAGE)
+            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-            print("end display section: \(indexPath.section) row: \(indexPath.row)")
+        //print("end display section: \(indexPath.section) row: \(indexPath.row)")
     }
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//
+//        if offsetY > contentHeight - scrollView.frame.size.height {
+//            numberOfItemsPerSection += 6
+//            self.collectionView.reloadData()
+//        }
+//    }
 
     // MARK: UICollectionViewDelegate
 

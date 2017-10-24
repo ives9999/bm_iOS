@@ -25,7 +25,7 @@ class VideoCell: UICollectionViewCell {
     }
     
     func updateViews(list: List) {
-        if bUpdate {
+        //if bUpdate {
             var link: String?
             if list.vimeo.count > 0 {
                 link = "https://player.vimeo.com/video/\(list.vimeo)"
@@ -40,7 +40,7 @@ class VideoCell: UICollectionViewCell {
             let video = TRVideoView(frame: webView_frame!, text: link!)
             self.addSubview(video)
             bUpdate = false
-        }
+        //}
     }
     
     func caculateFrame() {

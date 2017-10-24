@@ -13,8 +13,8 @@ class CourseCV: ListVC {
     let _type:String = "course"
         
     override func viewDidLoad() {
-        setIden(item:_type)
+        setIden(item:_type, titleField: "title")
         super.viewDidLoad()
-        getData(type: _type, titleField: "title")
+        getData()
     }
 }
