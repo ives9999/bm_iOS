@@ -29,14 +29,14 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         let count: Int = self.deviceType == .iPhone7 ? IPHONE_CELL_ON_ROW : IPAD_CELL_ON_ROW
         return CGFloat(count)
     }()
-    var spinner: UIActivityIndicatorView?
-    var progressLbl: UILabel?
+    //var spinner: UIActivityIndicatorView?
+    //var progressLbl: UILabel?
     
     override func viewDidLoad() {
         //print("super: \(self)")
         super.viewDidLoad()
-        spinner = UIActivityIndicatorView()
-        progressLbl = UILabel()
+        //spinner = UIActivityIndicatorView()
+        //progressLbl = UILabel()
         
         frameWidth = view.bounds.size.width
         //print("frame width: \(frameWidth)")
@@ -45,7 +45,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
-        listCV = UICollectionView(frame: CGRect(x: 0, y: 64, width: frameWidth, height: frameHeight), collectionViewLayout: layout)
+        listCV = UICollectionView(frame: CGRect(x: 0, y: 84, width: frameWidth, height: frameHeight), collectionViewLayout: layout)
         //print(listCV)
         listCV.register(ListCell.self, forCellWithReuseIdentifier: iden+"ImageCell")
         listCV.register(VideoCell.self, forCellWithReuseIdentifier: iden+"VideoCell")

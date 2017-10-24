@@ -66,19 +66,10 @@ class Global {
         superView.addSubview(spinner)
     }
     
-    func removeSpinner(spinner: UIActivityIndicatorView, progressLbl: UILabel) {
-        spinner.removeFromSuperview()
-        _removeProgressLbl(progressLbl: progressLbl)
-    }
-    
     private func _addMask(mask: UIView, superView: UIView) {
         mask.backgroundColor = UIColor(white: 0, alpha: 0.5) //you can modify this to whatever you need
         mask.frame = CGRect(x: 0, y: 0, width: superView.frame.width, height: superView.frame.height)
         superView.addSubview(mask)
-    }
-    
-    private func _removeMaskView() {
-        
     }
     
     private func _addText(text: UILabel, superView: UIView) {
@@ -89,10 +80,6 @@ class Global {
         text.textAlignment = .center
         text.text = LOADING
         superView.addSubview(text)
-    }
-    
-    private func _removeProgressLbl(progressLbl: UILabel) {
-        progressLbl.removeFromSuperview()
     }
 }
 extension UIFont {
