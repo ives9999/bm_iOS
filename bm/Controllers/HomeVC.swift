@@ -18,9 +18,13 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     private(set) public var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
     var deviceType: DeviceType!
+    var spinner: UIActivityIndicatorView?
+    var progressLbl: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        spinner = UIActivityIndicatorView()
+        progressLbl = UILabel()
 
         frameWidth = view.bounds.size.width
         frameHeight = view.bounds.size.height
@@ -36,11 +40,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 self.homes = DataService.instance.homes
                 self.homeCV.reloadData()
             }
-            Global.instance.removeSpinner()
-            Global.instance.removeProgressLbl()
+            Global.instance.removeSpinner(superView: self.view)
         }
-        Global.instance.addSpinner(center: self.view.center, superView: homeCV)
-        Global.instance.addProgressLbl(center: self.view.center, superView: homeCV)
+        Global.instance.addSpinner(superView: self.view)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

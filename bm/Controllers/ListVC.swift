@@ -29,9 +29,14 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         let count: Int = self.deviceType == .iPhone7 ? IPHONE_CELL_ON_ROW : IPAD_CELL_ON_ROW
         return CGFloat(count)
     }()
+    var spinner: UIActivityIndicatorView?
+    var progressLbl: UILabel?
+    
     override func viewDidLoad() {
         //print("super: \(self)")
         super.viewDidLoad()
+        spinner = UIActivityIndicatorView()
+        progressLbl = UILabel()
         
         frameWidth = view.bounds.size.width
         //print("frame width: \(frameWidth)")
@@ -47,8 +52,6 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         listCV.delegate = self
         listCV.dataSource = self
         self.view.addSubview(listCV)
-        Global.instance.addSpinner(center: self.view.center, superView: listCV)
-        Global.instance.addProgressLbl(center: self.view.center, superView: listCV)
         
         //var list = List(id: 0, title: "title1", path: "", token: "")
         //list.featured = UIImage(named: "1.png")!
@@ -63,7 +66,9 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func getData(page: Int=1, perPage: Int=PERPAGE) {
-        print(page)
+        //print(page)
+        Global.instance.addSpinner(superView: self.view)
+        
         DataService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage) { (success) in
             if success {
                 let tmps: [List] = DataService.instance.lists
@@ -75,12 +80,11 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     self.perPage = DataService.instance.perPage
                     let _pageCount: Int = self.totalCount / self.perPage
                     self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
-                    print(self.totalPage)
+                    //print(self.totalPage)
                 }
                 self.listCV.reloadData()
             }
-            Global.instance.removeSpinner()
-            Global.instance.removeProgressLbl()
+            Global.instance.removeSpinner(superView: self.view)
         }
     }
 
@@ -177,10 +181,10 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        print("will display section: \(indexPath.section) row: \(indexPath.row)")
-        if indexPath.row == page * PERPAGE - 1 {
+        //print("will display section: \(indexPath.section) row: \(indexPath.row)")
+        if indexPath.row == page * PERPAGE - 2 {
             page += 1
-            print("current page: \(page)")
+            //print("current page: \(page)")
             if page <= totalPage {
                 getData(page: page, perPage: PERPAGE)
             }

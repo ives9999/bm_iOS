@@ -33,8 +33,96 @@ class DataService {
     //var pathes: [String] = [String]()
     //var featureds: [UIImage] = [UIImage]()
     
+    func getList(type: String, titleField: String, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+        self.downloadImageNum = 0
+        let body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
+        print(body)
+        let url: String = String(format: URL_LIST, type)
+        //print(url)
+        lists = [List]()
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in
+            
+            if response.result.isSuccess {
+                let jsonString = response.result.value
+                //print(jsonString)
+                if let json = try? JSON.decode(jsonString!) {
+                    self.totalCount = try? json.getInt("totalCount")
+                    //print(self.totalCount)
+                    self.page = try? json.getInt("page")
+                    //print(self.page)
+                    self.perPage = try? json.getInt("perPage")
+                    //print(self.perPage)
+                    if let arr = try? json.getArray("rows") {
+                        for i in 0 ..< arr.count {
+                            let title = try? arr[i].getString(titleField)
+                            let id = try? arr[i].getInt("id")
+                            let token = try? arr[i].getString("token")
+                            var vimeo = "", youtube = ""
+                            if let vimeo1 = try? arr[i].getString("vimeo") {
+                                vimeo = vimeo1
+                            }
+                            if let youtube1 = try? arr[i].getString("youtube") {
+                                youtube = youtube1
+                            }
+                            //                            if type == "course" {
+                            //                                vimeo = try! arr[i].getString("vimeo")
+                            //                                youtube = try! arr[i].getString("youtube")
+                            //                            }
+                            var path: String!
+                            if let path1 = try? arr[i].getString("featured_path") {
+                                if (path1.count > 0) {
+                                    path = BASE_URL + path1
+                                    self.downloadImageNum += 1
+                                }
+                            } else {
+                                path = ""
+                            }
+                            
+                            let list: List = List(id: id!, title: title!, path: path!, token: token!, youtube: youtube, vimeo: vimeo)
+                            self.lists.append(list)
+                        }
+                        print("need download image: \(self.downloadImageNum)")
+                        for i in 0 ..< self.lists.count {
+                            if (self.downloadImageNum > 0) {
+                                if self.lists[i].path.count > 0 {
+                                    self.getImage(url: self.lists[i].path, completion: { (success) in
+                                        if success {
+                                            self.lists[i].featured = self.image!
+                                        }
+                                        self.downloadImageNum -= 1
+                                        print("retain image download: \(self.downloadImageNum)")
+                                        if self.downloadImageNum == 0 {
+                                            completion(true)
+                                        }
+                                    })
+                                } else {
+                                    if (self.lists[i].vimeo.count==0) && (self.lists[i].youtube.count==0) {
+                                        self.lists[i].featured = UIImage(named: "nophoto")!
+                                    }
+                                }
+                            } else {
+                                completion(true)
+                            }
+                        }
+                    } else {
+                        print("JSON to array error")
+                        completion(false)
+                    }
+                } else { // JSON string parse error
+                    print("JSON string parse error")
+                    completion(false)
+                }
+                //completion(false)
+            } else {
+                completion(false)
+                debugPrint(response.result.error as Any)
+            }
+            
+        }
+    }
     
     func getHomes(completion: @escaping CompletionHandler) {
+        self.downloadImageNum = 0
         let body: [String: Any] = ["device": "app"]
         //print(URL_HOME)
         
@@ -105,97 +193,8 @@ class DataService {
         })
     }
     
-    func getList(type: String, titleField: String, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
-        //print(body)
-        let url: String = String(format: URL_LIST, type)
-        //print(url)
-        lists = [List]()
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in
-            
-            if response.result.isSuccess {
-                let jsonString = response.result.value
-                //print(jsonString)
-                if let json = try? JSON.decode(jsonString!) {
-                    self.totalCount = try? json.getInt("totalCount")
-                    //print(self.totalCount)
-                    self.page = try? json.getInt("page")
-                    //print(self.page)
-                    self.perPage = try? json.getInt("perPage")
-                    //print(self.perPage)
-                    if let arr = try? json.getArray("rows") {
-                        for i in 0 ..< arr.count {
-                            let title = try? arr[i].getString(titleField)
-                            let id = try? arr[i].getInt("id")
-                            let token = try? arr[i].getString("token")
-                            var vimeo = "", youtube = ""
-                            if let vimeo1 = try? arr[i].getString("vimeo") {
-                                vimeo = vimeo1
-                            }
-                            if let youtube1 = try? arr[i].getString("youtube") {
-                                youtube = youtube1
-                            }
-//                            if type == "course" {
-//                                vimeo = try! arr[i].getString("vimeo")
-//                                youtube = try! arr[i].getString("youtube")
-//                            }
-                            var path: String!
-                            if let path1 = try? arr[i].getString("featured_path") {
-                                if (path1.count > 0) {
-                                    path = BASE_URL + path1
-                                    self.downloadImageNum += 1
-                                }
-                            } else {
-                                path = ""
-                            }
-                            
-                            let list: List = List(id: id!, title: title!, path: path!, token: token!, youtube: youtube, vimeo: vimeo)
-                            self.lists.append(list)
-                        }
-                        //print("need download image: \(self.downloadImageNum)")
-                        for i in 0 ..< self.lists.count {
-                            if self.lists[i].path.count > 0 {
-                                self.getImage(url: self.lists[i].path, completion: { (success) in
-                                    if success {
-                                        self.lists[i].featured = self.image!
-                                        //print("image url: \(self.lists[i].path)")
-                                        self.downloadImageNum -= 1
-                                        //print("has downloaded image: \(self.downloadImageNum)")
-                                    } else {
-                                        self.downloadImageNum -= 1
-                                    }
-                                    if self.downloadImageNum == 0 {
-                                        //print(self.homes)
-                                        completion(true)
-                                    }
-                                })
-                            } else {
-                                if (self.lists[i].vimeo.count==0) && (self.lists[i].youtube.count==0) {
-                                    self.lists[i].featured = UIImage(named: "nophoto")!
-                                }
-                            }
-                        }
-                    } else {
-                        print("JSON to array error")
-                        completion(false)
-                    }
-                } else { // JSON string parse error
-                    print("JSON string parse error")
-                    completion(false)
-                }
-                //completion(false)
-            } else {
-                completion(false)
-                debugPrint(response.result.error as Any)
-            }
-            
-        }
-    }
-    
     func getShow(type: String, id: Int, token: String, completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app", "id": id, "token": token, "type": type]
-        
-        
         let url: String = String(format: URL_SHOW, type)
         //print(url)
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in

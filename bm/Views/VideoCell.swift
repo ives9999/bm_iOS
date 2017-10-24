@@ -30,7 +30,9 @@ class VideoCell: UICollectionViewCell {
             if list.vimeo.count > 0 {
                 link = "https://player.vimeo.com/video/\(list.vimeo)"
             } else {
-                link = "https://www.youtube.com/embed/\(list.youtube)?rel=0"
+                //link = "https://www.youtube.com/embed/\(list.youtube)?rel=0"
+                link = "https://youtu.be/\(list.youtube)"
+                //print(link)
             }
             //print(link)
             
