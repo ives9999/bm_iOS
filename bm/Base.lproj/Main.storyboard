@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="52s-rR-lo4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tFM-zl-suE">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -27,12 +27,46 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WhJ-QH-Vdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2452" y="-24.7376311844078"/>
+            <point key="canvasLocation" x="2791.1999999999998" y="-24.7376311844078"/>
+        </scene>
+        <!--Reveal View Controller-->
+        <scene sceneID="jbr-MT-GuX">
+            <objects>
+                <viewController id="tFM-zl-suE" customClass="SWRevealViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DbC-o5-zEy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="3YW-Xs-m8N"/>
+                    </view>
+                    <connections>
+                        <segue destination="HG5-5B-KRS" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="TEF-6j-CtU"/>
+                        <segue destination="gdq-xD-7m5" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="QlI-3Y-3jd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hSN-6g-Jhw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-663" y="-815"/>
+        </scene>
+        <!--MenuVC-->
+        <scene sceneID="eRv-Hc-RcR">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ixj-Mg-udo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="gdq-xD-7m5" customClass="MenuVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zri-mV-Lh4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="Av7-OI-v1Q"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="225" y="-856"/>
         </scene>
         <!--臨打-->
         <scene sceneID="3fs-rG-RyT">
             <objects>
-                <viewController id="89D-SL-Zb3" sceneMemberID="viewController">
+                <viewController id="89D-SL-Zb3" customClass="TempPlayVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xs1-xk-eGo">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,11 +80,21 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrH-Md-qly">
+                                        <rect key="frame" x="12" y="23" width="24" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="SHW-es-gYN"/>
+                                            <constraint firstAttribute="width" constant="24" id="eYs-Fi-35S"/>
+                                        </constraints>
+                                        <state key="normal" image="smackBurger"/>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.098039215686274508" green="0.10980392156862745" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="lfS-oN-pNs" firstAttribute="centerY" secondItem="YjS-X6-jiY" secondAttribute="centerY" id="2PL-bv-Fx2"/>
                                     <constraint firstItem="lfS-oN-pNs" firstAttribute="centerX" secondItem="YjS-X6-jiY" secondAttribute="centerX" id="EJR-vA-A37"/>
+                                    <constraint firstItem="DrH-Md-qly" firstAttribute="centerY" secondItem="YjS-X6-jiY" secondAttribute="centerY" id="Kfe-Ah-dxd"/>
+                                    <constraint firstItem="DrH-Md-qly" firstAttribute="leading" secondItem="YjS-X6-jiY" secondAttribute="leading" constant="12" id="nmr-T9-gRl"/>
                                     <constraint firstAttribute="height" constant="64" id="pCs-bH-GgH"/>
                                 </constraints>
                             </view>
@@ -64,10 +108,13 @@
                         <viewLayoutGuide key="safeArea" id="MKJ-0G-bAL"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="臨打" id="OIH-0z-1IF"/>
+                    <connections>
+                        <outlet property="menuBtn" destination="DrH-Md-qly" id="fLo-1s-4pb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIj-cG-Hfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="178" y="-160"/>
+            <point key="canvasLocation" x="516" y="-160.56971514242881"/>
         </scene>
         <!--球隊-->
         <scene sceneID="Biv-Rk-NsK">
@@ -111,7 +158,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v4d-2t-b3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="887.20000000000005" y="-142.57871064467767"/>
+            <point key="canvasLocation" x="1226.4000000000001" y="-142.57871064467767"/>
         </scene>
         <!--CourseCV-->
         <scene sceneID="Eib-Tq-Zds">
@@ -153,25 +200,27 @@
             <point key="canvasLocation" x="80.799999999999997" y="621.13943028485767"/>
         </scene>
         <!--Tab Bar Controller-->
-        <scene sceneID="rju-DP-cmT">
+        <scene sceneID="cWJ-Jn-lsR">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="52s-rR-lo4" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="HG5-5B-KRS" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Q42-Ie-YKJ">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jmD-lx-ne9">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="89D-SL-Zb3" kind="relationship" relationship="viewControllers" id="xfw-lR-oTK"/>
-                        <segue destination="hk6-fe-bLP" kind="relationship" relationship="viewControllers" id="RE6-IC-vcx"/>
-                        <segue destination="fEf-Ib-3oR" kind="relationship" relationship="viewControllers" id="Sqv-en-m1K"/>
+                        <segue destination="89D-SL-Zb3" kind="relationship" relationship="viewControllers" id="gt2-eb-16n"/>
+                        <segue destination="fEf-Ib-3oR" kind="relationship" relationship="viewControllers" id="B2O-ve-7Gf"/>
                     </connections>
                 </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Uv-DF-vYP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KSr-ma-axB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-632" y="-26.086956521739133"/>
+            <point key="canvasLocation" x="-633" y="27"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="smackBurger" width="40" height="40"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="AlK-fI-QxB"/>
     </inferredMetricsTieBreakers>

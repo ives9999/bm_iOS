@@ -17,10 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        let tbController = self.window!.rootViewController as! UITabBarController
-        tbController.tabBar.barTintColor = UIColor("#191c25")
+        
+        //let storyboard: UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
+        //let tbController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
+        //tbController.tabBar.barTintColor = UIColor("#191c25")
 
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Arial", size: 14)!], for: UIControlState.normal)
+        //UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Arial", size: 14)!], for: UIControlState.normal)
         
         let deviceType:DeviceType = UIDevice.current.deviceType
         if deviceType == .simulator {
