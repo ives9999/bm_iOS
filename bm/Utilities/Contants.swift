@@ -35,3 +35,6 @@ let PERPAGE: Int = 5
 let LOADING: String = "努力加載中..."
 let LOADING_WIDTH: Int = 200
 let LOADING_HEIGHT: Int = 40
+
+// segues
+let TO_LOGIN: String = "toLogin"
