@@ -53,15 +53,37 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ixj-Mg-udo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="gdq-xD-7m5" customClass="MenuVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="zri-mV-Lh4">
+                    <view key="view" contentMode="scaleToFill" id="zri-mV-Lh4" customClass="GradientView" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuProfileIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ghu-uM-R33">
+                                <rect key="frame" x="16" y="40" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="75" id="YWq-cc-G8y"/>
+                                    <constraint firstAttribute="height" constant="75" id="fGV-uz-b2v"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfn-tB-hEu">
+                                <rect key="frame" x="111" y="58" width="39" height="39"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                <state key="normal" title="登入">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ghu-uM-R33" firstAttribute="leading" secondItem="Av7-OI-v1Q" secondAttribute="leading" constant="16" id="IfL-ck-Zeb"/>
+                            <constraint firstItem="nfn-tB-hEu" firstAttribute="centerY" secondItem="ghu-uM-R33" secondAttribute="centerY" id="VF8-P1-L12"/>
+                            <constraint firstItem="ghu-uM-R33" firstAttribute="top" secondItem="Av7-OI-v1Q" secondAttribute="top" constant="20" id="dNl-UL-F8c"/>
+                            <constraint firstItem="nfn-tB-hEu" firstAttribute="leading" secondItem="ghu-uM-R33" secondAttribute="trailing" constant="20" id="uP7-6k-Vuw"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Av7-OI-v1Q"/>
                     </view>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="225" y="-856"/>
+            <point key="canvasLocation" x="224.80000000000001" y="-856.82158920539734"/>
         </scene>
         <!--臨打-->
         <scene sceneID="3fs-rG-RyT">
@@ -219,6 +241,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="menuProfileIcon" width="99" height="99"/>
         <image name="smackBurger" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
