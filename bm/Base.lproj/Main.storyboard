@@ -27,7 +27,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WhJ-QH-Vdn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2791.1999999999998" y="-24.7376311844078"/>
+            <point key="canvasLocation" x="-583" y="793"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="jbr-MT-GuX">
@@ -46,12 +46,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hSN-6g-Jhw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-663" y="-815"/>
+            <point key="canvasLocation" x="-946" y="-1724"/>
         </scene>
         <!--MenuVC-->
         <scene sceneID="eRv-Hc-RcR">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ixj-Mg-udo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="gdq-xD-7m5" customClass="MenuVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zri-mV-Lh4" customClass="GradientView" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -89,8 +88,9 @@
                         <segue destination="j9P-cA-JMi" kind="show" identifier="toLogin" id="9hz-2Z-7jX"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ixj-Mg-udo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="242" y="-852"/>
+            <point key="canvasLocation" x="-207" y="-1724"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="Oto-La-o8t">
@@ -121,7 +121,12 @@
                                 </constraints>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                        <color key="value" red="0.80784313725490198" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XaX-h8-XTh">
                                 <rect key="frame" x="62" y="212" width="250" height="2"/>
@@ -140,6 +145,11 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                        <color key="value" red="0.80784313725490198" green="0.81568627450980391" blue="0.81568627450980391" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWM-sV-tOA">
                                 <rect key="frame" x="62" y="274" width="250" height="2"/>
@@ -181,7 +191,7 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="fWM-sV-tOA" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="2fW-UO-sai"/>
                             <constraint firstItem="sa3-s4-muj" firstAttribute="top" secondItem="3Iu-sT-xvf" secondAttribute="bottom" constant="60" id="AuU-mp-dDX"/>
@@ -205,7 +215,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blT-yh-XVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="904.79999999999995" y="-852.3238380809596"/>
+            <point key="canvasLocation" x="481" y="-1714"/>
         </scene>
         <!--臨打-->
         <scene sceneID="3fs-rG-RyT">
@@ -233,7 +243,7 @@
                                         <state key="normal" image="smackBurger"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.098039215686274508" green="0.10980392156862745" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.050980392156862744" green="0.050980392156862744" blue="0.050980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="lfS-oN-pNs" firstAttribute="centerY" secondItem="YjS-X6-jiY" secondAttribute="centerY" id="2PL-bv-Fx2"/>
                                     <constraint firstItem="lfS-oN-pNs" firstAttribute="centerX" secondItem="YjS-X6-jiY" secondAttribute="centerX" id="EJR-vA-A37"/>
@@ -243,7 +253,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.10196078431372549" green="0.10196078431372549" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="YjS-X6-jiY" firstAttribute="top" secondItem="MKJ-0G-bAL" secondAttribute="top" id="8Yc-QK-Sku"/>
                             <constraint firstItem="MKJ-0G-bAL" firstAttribute="trailing" secondItem="YjS-X6-jiY" secondAttribute="trailing" id="Oid-kw-gUm"/>
@@ -258,7 +268,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIj-cG-Hfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="516" y="-160.56971514242881"/>
+            <point key="canvasLocation" x="-124" y="-982"/>
         </scene>
         <!--球隊-->
         <scene sceneID="Biv-Rk-NsK">
@@ -277,11 +287,21 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E9V-cS-tg9">
+                                        <rect key="frame" x="12" y="24" width="24" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="1Fw-y8-MKT"/>
+                                            <constraint firstAttribute="height" constant="18" id="BXn-PS-Rqn"/>
+                                        </constraints>
+                                        <state key="normal" image="smackBurger"/>
+                                    </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.098039215686274508" green="0.10980392156862745" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.050980392156862744" green="0.050980392156862744" blue="0.050980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="E9V-cS-tg9" firstAttribute="centerY" secondItem="QGB-uY-eI7" secondAttribute="centerY" id="Ft0-Zx-Eom"/>
                                     <constraint firstItem="QGB-uY-eI7" firstAttribute="centerY" secondItem="h8g-qX-Kzm" secondAttribute="centerY" id="dCe-7J-F5c"/>
                                     <constraint firstItem="QGB-uY-eI7" firstAttribute="centerX" secondItem="h8g-qX-Kzm" secondAttribute="centerX" id="e1j-c4-8Jx"/>
+                                    <constraint firstItem="E9V-cS-tg9" firstAttribute="leading" secondItem="h8g-qX-Kzm" secondAttribute="leading" constant="12" id="h9V-hG-jG6"/>
                                     <constraint firstAttribute="height" constant="64" id="oYA-ey-ZO1"/>
                                 </constraints>
                             </view>
@@ -297,12 +317,13 @@
                     <tabBarItem key="tabBarItem" title="球隊" id="iO8-yt-rXK"/>
                     <navigationItem key="navigationItem" title="球隊" id="owA-9M-Mfg"/>
                     <connections>
+                        <outlet property="menuBtn" destination="E9V-cS-tg9" id="rfP-Ni-bjs"/>
                         <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="AlK-fI-QxB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v4d-2t-b3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1226.4000000000001" y="-142.57871064467767"/>
+            <point key="canvasLocation" x="-444" y="-228.03598200899552"/>
         </scene>
         <!--CourseCV-->
         <scene sceneID="Eib-Tq-Zds">
@@ -321,7 +342,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omZ-1j-3Gu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="583" y="902"/>
+            <point key="canvasLocation" x="890" y="-228"/>
         </scene>
         <!--教練-->
         <scene sceneID="5pf-JC-0gR">
@@ -341,7 +362,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cH-ZS-Ng2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="80.799999999999997" y="621.13943028485767"/>
+            <point key="canvasLocation" x="-1697" y="-143"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="cWJ-Jn-lsR">
@@ -349,17 +370,19 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="HG5-5B-KRS" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jmD-lx-ne9">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="89D-SL-Zb3" kind="relationship" relationship="viewControllers" id="gt2-eb-16n"/>
                         <segue destination="fEf-Ib-3oR" kind="relationship" relationship="viewControllers" id="B2O-ve-7Gf"/>
+                        <segue destination="hk6-fe-bLP" kind="relationship" relationship="viewControllers" id="RQZ-ik-XYc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KSr-ma-axB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-633" y="27"/>
+            <point key="canvasLocation" x="-946" y="-982"/>
         </scene>
     </scenes>
     <resources>
@@ -369,6 +392,6 @@
         <image name="smackBurger" width="40" height="40"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="a7V-eU-Yjs"/>
+        <segue reference="AlK-fI-QxB"/>
     </inferredMetricsTieBreakers>
 </document>

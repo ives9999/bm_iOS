@@ -8,6 +8,7 @@
 
 import UIKit
 import Device_swift
+import UIColor_Hex_Swift
 
 internal let reuseIdentifier = "Cell"
 
@@ -35,8 +36,9 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewDidLoad() {
         //print("super: \(self)")
         super.viewDidLoad()
-        //spinner = UIActivityIndicatorView()
-        //progressLbl = UILabel()
+        
+        Global.instance.setupTabbar(self)
+        
         
         frameWidth = view.bounds.size.width
         //print("frame width: \(frameWidth)")

@@ -58,6 +58,15 @@ class Global {
         }
     }
     
+    func setupTabbar(_ ctrl: UIViewController) {
+        let tbC = ctrl.tabBarController
+        //tbC!.tabBar.barTintColor = UIColor.red
+        tbC!.tabBar.barTintColor = UIColor(TABBAR_BACKGROUND)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: FONT_NAME, size: FONT_SIZE_TABBAR)!], for: UIControlState.normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: UIControlState.normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor(SELECTED_COLOR)], for: UIControlState.selected)
+    }
+    
     private func _addSpinner(spinner: UIActivityIndicatorView, superView: UIView) {
         spinner.center = superView.center
         spinner.activityIndicatorViewStyle = .whiteLarge

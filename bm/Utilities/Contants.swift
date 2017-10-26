@@ -22,6 +22,7 @@ let URL_SHOW = "\(BASE_URL)/app/%@/show/%@?device=app"
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"
 let FONT_SIZE_TITLE: CGFloat = 22
+let FONT_SIZE_TABBAR: CGFloat = 14
 
 // List pages
 let IPHONE_CELL_ON_ROW: Int = 1
@@ -38,3 +39,7 @@ let LOADING_HEIGHT: Int = 40
 
 // segues
 let TO_LOGIN: String = "toLogin"
+
+// color
+let TABBAR_BACKGROUND = "#0d0d0d"
+let SELECTED_COLOR = "#03f505"
