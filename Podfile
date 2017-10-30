@@ -14,4 +14,5 @@ target 'bm' do
   pod 'TRVideoView'
   pod 'PMJSON', '~> 2.0'
   pod 'UIColor_Hex_Swift'
+  pod 'SCLAlertView'
 end

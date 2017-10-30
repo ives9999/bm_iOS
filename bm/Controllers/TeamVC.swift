@@ -26,9 +26,7 @@ class TeamVC: ListVC {
         //l.textColor = UIColor.white
         //self.view.addSubview(l)
         
-        menuBtn.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
+        Global.instance.menuPressedAction(menuBtn, self)
         
         getData()
     

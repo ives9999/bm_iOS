@@ -17,10 +17,8 @@ class TempPlayVC: UIViewController {
         super.viewDidLoad()
         
         Global.instance.setupTabbar(self)
+        Global.instance.menuPressedAction(menuBtn, self)
         
-        menuBtn.addTarget(self.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)
-        self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-        self.view.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
     }
 
 }

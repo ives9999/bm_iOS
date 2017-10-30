@@ -20,6 +20,8 @@
 		B3E72A221FA08A170008A6B1 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A211FA08A170008A6B1 /* MenuVC.swift */; };
 		B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A231FA08D090008A6B1 /* GradientView.swift */; };
 		B3E72A261FA0FBFF0008A6B1 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */; };
+		B3E72A281FA20D280008A6B1 /* MemberServic.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A271FA20D280008A6B1 /* MemberServic.swift */; };
+		B3E72A2A1FA2EC640008A6B1 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */; };
 		B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */; };
 		B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222F1F91DE7300A8C402 /* Show_IN.swift */; };
 		F07CD1A1BB728D94904CA85F /* Pods_bm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5D58D06320800C79615904 /* Pods_bm.framework */; };
@@ -86,6 +88,8 @@
 		B3E72A211FA08A170008A6B1 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		B3E72A231FA08D090008A6B1 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		B3E72A271FA20D280008A6B1 /* MemberServic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberServic.swift; sourceTree = "<group>"; };
+		B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVC.swift; sourceTree = "<group>"; };
 		B3F2222F1F91DE7300A8C402 /* Show_IN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show_IN.swift; sourceTree = "<group>"; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				B32FBCF71F849AA7003D39CC /* DataService.swift */,
+				B3E72A271FA20D280008A6B1 /* MemberServic.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -262,6 +267,7 @@
 				B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */,
 				B3E72A211FA08A170008A6B1 /* MenuVC.swift */,
 				B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */,
+				B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -422,6 +428,7 @@
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Device.swift/Device_swift.framework",
 				"${BUILT_PRODUCTS_DIR}/PMJSON/PMJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
@@ -434,6 +441,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Device_swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PMJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
@@ -502,7 +510,9 @@
 				F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
 				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
+				B3E72A281FA20D280008A6B1 /* MemberServic.swift in Sources */,
 				B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */,
+				B3E72A2A1FA2EC640008A6B1 /* RegisterVC.swift in Sources */,
 				B3E72A221FA08A170008A6B1 /* MenuVC.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,

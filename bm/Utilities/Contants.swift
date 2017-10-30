@@ -16,8 +16,10 @@ let REMOTE_BASE_URL = "http://bm.sportpassword.com"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 let URL_HOME = "\(BASE_URL)/app/"
-let URL_LIST = "\(BASE_URL)/app/%@"
-let URL_SHOW = "\(BASE_URL)/app/%@/show/%@?device=app"
+let URL_LIST = "\(URL_HOME)%@"
+let URL_SHOW = "\(URL_HOME)%@/show/%@?device=app"
+let URL_LOGIN = URL_HOME + "login"
+let URL_REGISTER = URL_HOME + "register"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"
@@ -39,7 +41,24 @@ let LOADING_HEIGHT: Int = 40
 
 // segues
 let TO_LOGIN: String = "toLogin"
+let TO_REGISTER: String = "toRegister"
+let UNWIND = "unwindToMenu"
 
 // color
+let MY_GREEN = "#a6d903"
+let STATUS_GREEN = "#658501"
 let TABBAR_BACKGROUND = "#0d0d0d"
-let SELECTED_COLOR = "#03f505"
+
+// User Defaults
+let LOGGED_IN_KEY = "loggedIn"
+let TOKEN_KEY = "token"
+let EMAIL_KEY = "email"
+let NICKNAME_KEY = "nickname"
+
+
+
+
+
+
+
+
