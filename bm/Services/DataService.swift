@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 import AlamofireImage
-import PMJSON
+import SwiftyJSON
 
 class DataService {
     static let instance = DataService()
@@ -40,12 +40,63 @@ class DataService {
         let url: String = String(format: URL_LIST, type)
         //print(url)
         lists = [List]()
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseJSON { (response) in
             
-            if response.result.isSuccess {
-                let jsonString = response.result.value
-                //print(jsonString)
-                if let json = try? JSON.decode(jsonString!) {
+            if response.result.error == nil {
+                //print(response.result.value)
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                self.totalCount = json["totalCount"].intValue
+                self.page = json["page"].intValue
+                self.perPage = json["perPage"].intValue
+                let arr: [JSON] = json["rows"].arrayValue
+                for i in 0 ..< arr.count {
+                    let title: String = arr[i][titleField].stringValue
+                    let id: Int = arr[i]["id"].intValue
+                    let token: String = arr[i]["token"].stringValue
+                    let vimeo: String = arr[i]["vimeo"].stringValue
+                    let youtube: String = arr[i]["youtube"].stringValue
+                    
+                    var path: String!
+                    let path1 = arr[i]["featured_path"].stringValue
+                    if (path1.count > 0) {
+                        path = BASE_URL + path1
+                        self.downloadImageNum += 1
+                    } else {
+                        path = ""
+                    }
+                    
+                    let list: List = List(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
+                    self.lists.append(list)
+                }
+                print("need download image: \(self.downloadImageNum)")
+                for i in 0 ..< self.lists.count {
+                    if (self.downloadImageNum > 0) {
+                        if self.lists[i].path.count > 0 {
+                            self.getImage(url: self.lists[i].path, completion: { (success) in
+                                if success {
+                                    self.lists[i].featured = self.image!
+                                }
+                                self.downloadImageNum -= 1
+                                print("retain image download: \(self.downloadImageNum)")
+                                if self.downloadImageNum == 0 {
+                                    completion(true)
+                                }
+                            })
+                        } else {
+                            if (self.lists[i].vimeo.count==0) && (self.lists[i].youtube.count==0) {
+                                self.lists[i].featured = UIImage(named: "nophoto")!
+                            }
+                        }
+                    } else {
+                        completion(true)
+                    }
+                }
+                /*if let json = try? JSON.decode(jsonString!) {
                     self.totalCount = try? json.getInt("totalCount")
                     //print(self.totalCount)
                     self.page = try? json.getInt("page")
@@ -64,10 +115,7 @@ class DataService {
                             if let youtube1 = try? arr[i].getString("youtube") {
                                 youtube = youtube1
                             }
-                            //                            if type == "course" {
-                            //                                vimeo = try! arr[i].getString("vimeo")
-                            //                                youtube = try! arr[i].getString("youtube")
-                            //                            }
+                            
                             var path: String!
                             if let path1 = try? arr[i].getString("featured_path") {
                                 if (path1.count > 0) {
@@ -111,7 +159,7 @@ class DataService {
                 } else { // JSON string parse error
                     print("JSON string parse error")
                     completion(false)
-                }
+                }*/
                 //completion(false)
             } else {
                 completion(false)
