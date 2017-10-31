@@ -41,11 +41,14 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         if password.count == 0 {
             SCLAlertView().showWarning("警告", subTitle: "請填寫密碼")
         }
+        Global.instance.addSpinner(superView: self.view)
         MemberService.instance.login(email: email, password: password) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
             if success {
                 if MemberService.instance.success {
                     //print("login success")
                     print(MemberService.instance.nickname)
+                    self.performSegue(withIdentifier: UNWIND, sender: nil)
                 } else {
                     //print("login failed by error email or password")
                     SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
