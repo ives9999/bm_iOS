@@ -117,13 +117,25 @@
                                     <action selector="loginBtnPressed:" destination="gdq-xD-7m5" eventType="touchUpInside" id="sLa-2M-e4w"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bm8-XJ-J3t">
+                                <rect key="frame" x="180" y="58" width="39" height="39"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                <state key="normal" title="註冊">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="registerBtnPressed:" destination="gdq-xD-7m5" eventType="touchUpInside" id="AEP-3t-b5X"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Av7-OI-v1Q" firstAttribute="trailing" secondItem="peB-WU-cfo" secondAttribute="trailing" id="Idw-FY-AHE"/>
                             <constraint firstItem="ghu-uM-R33" firstAttribute="leading" secondItem="Av7-OI-v1Q" secondAttribute="leading" constant="16" id="IfL-ck-Zeb"/>
                             <constraint firstItem="Av7-OI-v1Q" firstAttribute="bottom" secondItem="peB-WU-cfo" secondAttribute="bottom" id="Ku1-44-F7b"/>
+                            <constraint firstItem="Bm8-XJ-J3t" firstAttribute="centerY" secondItem="nfn-tB-hEu" secondAttribute="centerY" id="Mye-eT-WpB"/>
                             <constraint firstItem="peB-WU-cfo" firstAttribute="leading" secondItem="Av7-OI-v1Q" secondAttribute="leading" id="P1d-CH-OTc"/>
+                            <constraint firstItem="Bm8-XJ-J3t" firstAttribute="leading" secondItem="nfn-tB-hEu" secondAttribute="trailing" constant="30" id="PFi-c4-mKw"/>
                             <constraint firstItem="nfn-tB-hEu" firstAttribute="centerY" secondItem="ghu-uM-R33" secondAttribute="centerY" id="VF8-P1-L12"/>
                             <constraint firstItem="ghu-uM-R33" firstAttribute="top" secondItem="Av7-OI-v1Q" secondAttribute="top" constant="20" id="dNl-UL-F8c"/>
                             <constraint firstItem="peB-WU-cfo" firstAttribute="top" secondItem="Av7-OI-v1Q" secondAttribute="top" id="oCE-TE-sKC"/>
@@ -134,6 +146,7 @@
                     <connections>
                         <outlet property="loginBtn" destination="nfn-tB-hEu" id="QNs-Aj-jfL"/>
                         <segue destination="j9P-cA-JMi" kind="show" identifier="toLogin" id="9hz-2Z-7jX"/>
+                        <segue destination="G5m-sq-lsN" kind="show" identifier="toRegister" id="f5d-2G-qtf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ixj-Mg-udo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -207,13 +220,22 @@
                                     <constraint firstAttribute="height" constant="43" id="fpZ-9y-BHV"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pr6-jP-ohX">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pr6-jP-ohX" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="59" y="417" width="257" height="43"/>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="82O-6Z-Irq"/>
                                     <constraint firstAttribute="width" constant="257" id="s9v-qM-DmA"/>
                                 </constraints>
-                                <state key="normal" image="login_btn"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                <state key="normal" title="登入">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="a5A-E6-2vj"/>
                                 </connections>
@@ -453,13 +475,22 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7S-un-c1g">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7S-un-c1g" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="59" y="455" width="257" height="43"/>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="257" id="TTh-Ui-ofL"/>
                                     <constraint firstAttribute="height" constant="43" id="obY-2V-pkL"/>
                                 </constraints>
-                                <state key="normal" image="register_btn"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                <state key="normal" title="註冊">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="22"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="YIZ-L3-12l"/>
                                     <action selector="registerBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="Ekp-0f-0Gs"/>
@@ -842,16 +873,15 @@
         <image name="email" width="257" height="43"/>
         <image name="facebook" width="259" height="43"/>
         <image name="facebook_register_btn" width="257" height="43"/>
-        <image name="login_btn" width="257" height="43"/>
         <image name="logo" width="200" height="42"/>
         <image name="menu" width="16" height="13"/>
         <image name="menuProfileIcon" width="99" height="99"/>
         <image name="password_textfield" width="257" height="43"/>
         <image name="prev" width="20" height="20"/>
-        <image name="register_btn" width="257" height="43"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ym7-zQ-SHb"/>
+        <segue reference="f5d-2G-qtf"/>
+        <segue reference="9hz-2Z-7jX"/>
         <segue reference="vrH-5G-Fdn"/>
     </inferredMetricsTieBreakers>
 </document>

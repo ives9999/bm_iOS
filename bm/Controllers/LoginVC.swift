@@ -44,9 +44,11 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         MemberService.instance.login(email: email, password: password) { (success) in
             if success {
                 if MemberService.instance.success {
-                    print("login success")
+                    //print("login success")
+                    print(MemberService.instance.nickname)
                 } else {
-                    print("login failed by error email or password")
+                    //print("login failed by error email or password")
+                    SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
                 }
             } else {
                 print("login failed by server")

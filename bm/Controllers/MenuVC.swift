@@ -24,4 +24,7 @@ class MenuVC: UIViewController {
         performSegue(withIdentifier: TO_LOGIN, sender: nil)
     }
     
+    @IBAction func registerBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: TO_REGISTER, sender: nil)
+    }
 }

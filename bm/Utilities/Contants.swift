@@ -51,6 +51,7 @@ let TABBAR_BACKGROUND = "#0d0d0d"
 
 // User Defaults
 let LOGGED_IN_KEY = "loggedIn"
+let ID_KEY = "id"
 let TOKEN_KEY = "token"
 let EMAIL_KEY = "email"
 let NICKNAME_KEY = "nickname"

@@ -45,9 +45,15 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         }
         
         if bCheck {
-            MemberService.instance.register(email: email, password: password) { (success) in
+            MemberService.instance.register(email: email, password: password, repassword: rePassword) { (success) in
                 if success {
-                    print("register ok")
+                    //print("register ok")
+                    if MemberService.instance.success {
+                        SCLAlertView().showInfo("成功", subTitle: "註冊成功，請儘速通過email認證，才能使用更多功能！！")
+                    } else {
+                        //print("login failed by error email or password")
+                        SCLAlertView().showError("警告", subTitle: MemberService.instance.msg)
+                    }
                 }
             }
         }
