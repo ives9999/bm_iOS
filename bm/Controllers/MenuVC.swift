@@ -17,6 +17,7 @@ class MenuVC: UIViewController {
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
     @IBOutlet weak var nicknameLbl: UILabel!
     
+    let member: Member = Member()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +27,7 @@ class MenuVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if isLoggin { // login
+        if member.isLogin { // login
             _loginBlock()
         } else {
             _logoutBolck()
@@ -34,7 +35,7 @@ class MenuVC: UIViewController {
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
-        if isLoggin { // logout
+        if member.isLogin { // logout
             MemberService.instance.logout()
             _logoutBolck()
         } else {
@@ -47,7 +48,7 @@ class MenuVC: UIViewController {
     }
     
     private func _loginBlock() {
-        //nicknameLbl.text = Global.instance.member.nickname
+        nicknameLbl.text = member.nickname
         loginBtn.setTitle("登出", for: .normal)
         registerBtn.isHidden = true
         forgetPasswordBtn.isHidden = true

@@ -8,68 +8,186 @@
 
 import Foundation
 
-class Member: NSObject, NSCoding {
-    var id: Int
-    var nickname: String
-    //var uid: String
+class Member {
+    let session: UserDefaults = UserDefaults.standard
+    var id: Int {
+        get {
+            return session.getInt(ID_KEY)
+        }
+        set {
+            session.set(ID_KEY, newValue)
+        }
+    }
+    var nickname: String {
+        get {
+            return session.getString(NICKNAME_KEY)
+        }
+        set {
+            session.set(NICKNAME_KEY, newValue)
+        }
+    }
+    var uid: String {
+        get {
+            return session.getString(UID_KEY)
+        }
+        set {
+            session.set(UID_KEY, newValue)
+        }
+    }
     //var slug: String
-    //var name: String
-    //var channel: String
-    //var dob: Date
-    //var sex: sex
-    //var tel: String
-    //var mobile: String
-    var email: String
-    //var pid: String
-    //var avatar: UIImage
-    //var type: member_type
-    //var social: String
-    //var role: member_role
-    //var status: status
-    //var validate: Int
+    var name: String {
+        get {
+            return session.getString(NAME_KEY)
+        }
+        set {
+            session.set(NAME_KEY, newValue)
+        }
+    }
+    var channel: String {
+        get {
+            return session.getString(CHANNEL_KEY)
+        }
+        set {
+            session.set(CHANNEL_KEY, newValue)
+        }
+    }
+    var dob: Date {
+        get {
+            let tmp: String = session.getString(DOB_KEY)
+            let formatter = DateFormatter()
+            return formatter.date(from: tmp)!
+        }
+        set {
+            session.set(SEX_KEY, newValue.string)
+        }
+    }
+    var sex: SEX {
+        get {
+            let tmp: String = session.getString(SEX_KEY)
+            return SEX(rawValue: tmp)!
+        }
+        set {
+            session.set(SEX_KEY, newValue.rawValue)
+        }
+    }
+    var tel: String {
+        get {
+            return session.getString(TEL_KEY)
+        }
+        set {
+            session.set(TEL_KEY, newValue)
+        }
+    }
+    var mobile: String {
+        get {
+            return session.getString(MOBILE_KEY)
+        }
+        set {
+            session.set(MOBILE_KEY, newValue)
+        }
+    }
+    var email: String {
+        get {
+            return session.getString(EMAIL_KEY)
+        }
+        set {
+            session.set(EMAIL_KEY, newValue)
+        }
+    }
+    var pid: String {
+        get {
+            return session.getString(PID_KEY)
+        }
+        set {
+            session.set(PID_KEY, newValue)
+        }
+    }
+    var avatar: String {
+        get {
+            return session.getString(AVATAR_KEY)
+        }
+        set {
+            session.set(AVATAR_KEY, newValue)
+        }
+    }
+    var type: MEMBER_TYPE {
+        get {
+            let tmp: String = session.getString(MEMBER_TYPE_KEY)
+            return MEMBER_TYPE(rawValue: tmp)!
+        }
+        set {
+            session.set(MEMBER_TYPE_KEY, newValue.rawValue)
+        }
+    }
+    var social: String {
+        get {
+            return session.getString(SOCIAL_KEY)
+        }
+        set {
+            session.set(SOCIAL_KEY, newValue)
+        }
+    }
+    var role: MEMBER_ROLE {
+        get {
+            let tmp: String = session.getString(MEMBER_ROLE_KEY)
+            return MEMBER_ROLE(rawValue: tmp)!
+        }
+        set {
+            session.set(MEMBER_ROLE_KEY, newValue.rawValue)
+        }
+    }
+//    var status: STATUS {
+//        get {
+//            let tmp: String = session.getString(STATUS_KEY)
+//            return STATUS(rawValue: tmp)!
+//        }
+//        set {
+//            session.set(SEX_KEY, newValue.rawValue)
+//        }
+//    }
+    var validate: Int {
+        get {
+            return session.getInt(VALIDATE_KEY)
+        }
+        set {
+            session.set(VALIDATE_KEY, newValue)
+        }
+    }
     //var mobile_validate: String
-    var token: String
+    var token: String {
+        get {
+            return session.getString(TOKEN_KEY)
+        }
+        set {
+            session.set(TOKEN_KEY, newValue)
+        }
+    }
     //var created_at: Date
     //var updated_at: Date
     //var ip: Int
     
-    var isLoggin: Bool
-    
-    override init() {
-        isLoggin = false
-        id = 0
-        nickname = ""
-        email = ""
-        token = ""
+    var isLogin: Bool {
+        get {
+            return session.getBool(ISLOGIN_KEY)
+        }
+        set {
+            session.set(ISLOGIN_KEY, newValue)
+        }
     }
     
-    required init(coder aDecoder: NSCoder) {
-        //(id,nickname,uid,slug,name,channel,dob) = (0,"","","","","bm",Date())
-        //(sex,tel,mobile,email,pid,avatar) = (.M,"","","","",UIImage(named: "nophoto")!)
-        //(type,social,role,status,validate) = (.general,"",.member,.online,0)
-        //(mobile_validate,token,created_at,updated_at,ip) = ("","",Date(),Date(),0)
-        id = aDecoder.decodeInteger(forKey: "id")
-        nickname = aDecoder.decodeObject(forKey: "nickname") as! String
-        email = aDecoder.decodeObject(forKey: "email") as! String
-        token = aDecoder.decodeObject(forKey: "token") as! String
-        isLoggin = aDecoder.decodeBool(forKey: "isLoggin")
-        
+    init() {
+        var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
+        let folder: String = path[0] as! String
+        print("Your NSUserDefaults are stored in this folder: %@/Preferences", folder)
+        print("Member init is key exist: \(session.isKeyPresentInUserDefaults(key: ISLOGIN_KEY))")
+        if !session.isKeyPresentInUserDefaults(key: ISLOGIN_KEY) {
+            self.isLogin = false
+            self.id = 0
+            self.nickname = ""
+            self.email = ""
+            self.token = ""
+        }
     }
-//    convenience init(coder aDecoder: NSCoder) {
-//        id = aDecoder.decodeInt32(forKey: "id")
-//        nickname = aDecoder.decodeObject(forKey: "nickname") as! String
-//        email = aDecoder.decodeObject(forKey: "email") as! String
-//        token = aDecoder.decodeObject(forKey: "token") as! String
-//        isLoggin = aDecoder.decodeBool(forKey: "isLoggin")
-//    }
-    func encode(with aCoder: NSCoder) {
-        aCoder.encode(id, forKey: "id")
-        aCoder.encode(nickname, forKey: "nickname")
-        aCoder.encode(token, forKey: "token")
-        aCoder.encode(email, forKey: "email")
-        aCoder.encode(isLoggin, forKey: "isLoggin")
-    }
-    
 }
 
 

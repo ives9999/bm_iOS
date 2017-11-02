@@ -14,42 +14,23 @@ var gSimulate:Bool = false
 let gRequestHeader = [
     "Content-Type": "application/json; charset=utf-8"
     ]
-enum status {
+enum STATUS: String {
     case online, offline, trash, delete
 }
-enum sex {
-    case M, F
+enum SEX: String {
+    case M
+    case F
 }
-enum member_type {
+enum MEMBER_TYPE: String {
     case general, team, store
 }
-enum member_role {
+enum MEMBER_ROLE: String {
     case member, sale, designer, manager, admin
 }
 
 class Global {
     
     static let instance = Global()
-    
-    let defaults: UserDefaults = UserDefaults.standard
-    var member: [String: Any] {
-        get {
-            return defaults.value(forKey: "member") as! [String: Any]
-        }
-        set {
-            defaults.set(newValue, forKey: "member")
-        }
-    }
-    
-    init() {
-        if let tmp: [String: Any] = defaults.value(forKey: "member") as? [String: Any] {
-            member = tmp
-        } else {
-            var tmp: [String: Any] = [String: Any]()
-            tmp["isLoggin"] = false
-            member = tmp
-        }
-    }
     
     func deviceType(frameWidth: CGFloat) -> DeviceType {
         var deviceType: DeviceType = UIDevice.current.deviceType
@@ -158,6 +139,32 @@ extension UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension UserDefaults {
+    func getBool(_ key: String) -> Bool {
+        return bool(forKey: key)
+    }
+    func getString(_ key: String) -> String {
+        return string(forKey: key)!
+    }
+    func getInt(_ key: String) -> Int {
+        return integer(forKey: key)
+    }
+    func set(_ key: String, _ value: Any) {
+        set(value, forKey: key)
+    }
+    func isKeyPresentInUserDefaults(key: String) -> Bool {
+        return object(forKey: key) != nil
+    }
+}
+
+extension Date {
+    var string: String{
+        let formatter: DateFormatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: self)
     }
 }
 
