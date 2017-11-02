@@ -47,7 +47,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
             if success {
                 if MemberService.instance.success {
                     //print("login success")
-                    print(MemberService.instance.nickname)
+                    //print(Global.instance.member.nickname)
                     self.performSegue(withIdentifier: UNWIND, sender: nil)
                 } else {
                     //print("login failed by error email or password")

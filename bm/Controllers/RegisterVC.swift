@@ -45,11 +45,20 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         }
         
         if bCheck {
+            Global.instance.addSpinner(superView: self.view)
             MemberService.instance.register(email: email, password: password, repassword: rePassword) { (success) in
+                Global.instance.removeSpinner(superView: self.view)
                 if success {
-                    //print("register ok")
+                    print("register ok: \(MemberService.instance.success)")
                     if MemberService.instance.success {
-                        SCLAlertView().showInfo("成功", subTitle: "註冊成功，請儘速通過email認證，才能使用更多功能！！")
+                        let appearance = SCLAlertView.SCLAppearance(
+                            showCloseButton: false
+                        )
+                        let alert = SCLAlertView(appearance: appearance)
+                        alert.addButton("確定", action: {
+                            self.performSegue(withIdentifier: UNWIND, sender: nil)
+                        })
+                        alert.showSuccess("成功", subTitle: "註冊成功，請儘速通過email認證，才能使用更多功能！！")
                     } else {
                         //print("login failed by error email or password")
                         SCLAlertView().showError("警告", subTitle: MemberService.instance.msg)
@@ -57,6 +66,11 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
                 }
             }
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {

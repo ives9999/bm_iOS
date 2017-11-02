@@ -56,6 +56,9 @@ let TOKEN_KEY = "token"
 let EMAIL_KEY = "email"
 let NICKNAME_KEY = "nickname"
 
+// member
+let MEMBER_FIELD = ["id","nickname","email","token"]
+
 
 
 

@@ -27,7 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarView?.backgroundColor = UIColor(STATUS_GREEN)
         UIApplication.shared.statusBarStyle = .default
         
-        let deviceType:DeviceType = UIDevice.current.deviceType
+        let deviceType: DeviceType = UIDevice.current.deviceType
         if deviceType == .simulator {
             gSimulate = true
         }

@@ -14,10 +14,42 @@ var gSimulate:Bool = false
 let gRequestHeader = [
     "Content-Type": "application/json; charset=utf-8"
     ]
+enum status {
+    case online, offline, trash, delete
+}
+enum sex {
+    case M, F
+}
+enum member_type {
+    case general, team, store
+}
+enum member_role {
+    case member, sale, designer, manager, admin
+}
 
 class Global {
     
     static let instance = Global()
+    
+    let defaults: UserDefaults = UserDefaults.standard
+    var member: [String: Any] {
+        get {
+            return defaults.value(forKey: "member") as! [String: Any]
+        }
+        set {
+            defaults.set(newValue, forKey: "member")
+        }
+    }
+    
+    init() {
+        if let tmp: [String: Any] = defaults.value(forKey: "member") as? [String: Any] {
+            member = tmp
+        } else {
+            var tmp: [String: Any] = [String: Any]()
+            tmp["isLoggin"] = false
+            member = tmp
+        }
+    }
     
     func deviceType(frameWidth: CGFloat) -> DeviceType {
         var deviceType: DeviceType = UIDevice.current.deviceType
@@ -63,8 +95,8 @@ class Global {
         //tbC!.tabBar.barTintColor = UIColor.red
         tbC!.tabBar.barTintColor = UIColor(TABBAR_BACKGROUND)
         UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: FONT_NAME, size: FONT_SIZE_TABBAR)!], for: UIControlState.normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: UIControlState.normal)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor(MY_GREEN)], for: UIControlState.selected)
+//        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: UIControlState.normal)
+//        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor(MY_GREEN)], for: UIControlState.selected)
     }
     
     func menuPressedAction(_ menuBtn: UIButton, _ ctrl: UIViewController) {

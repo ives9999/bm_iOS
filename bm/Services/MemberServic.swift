@@ -14,8 +14,7 @@ import SwiftyJSON
 class MemberService {
     static let instance = MemberService()
     
-    let defaults: UserDefaults = UserDefaults.standard
-    var isLoggedIn: Bool {
+    /*var isLoggedIn: Bool {
         get {
             return defaults.bool(forKey: LOGGED_IN_KEY)
         }
@@ -54,7 +53,7 @@ class MemberService {
         set {
             defaults.set(newValue, forKey: NICKNAME_KEY)
         }
-    }
+    }*/
     
     var msg:String = ""
     var success: Bool = false
@@ -74,17 +73,25 @@ class MemberService {
                 let json: JSON = JSON(data)
                 self.success = json["success"].boolValue
                 //print(self.success)
+                //self.member = [String: Any]()
+                var member: [String: Any] = [String: Any]()
                 if self.success {
-                    self.id = json["id"].intValue
-                    self.nickname = json["nickname"].stringValue
-                    self.token = json["token"].stringValue
-                    self.isLoggedIn = true
+                    member["id"] = json["id"].intValue
+                    member["nickname"] = json["nickname"].stringValue
+                    member["token"] = json["token"].stringValue
+                    member["isLoggin"] = true
                 } else {
+                    member["isLogin"] = false
                     self.msg = json["msg"].stringValue
                 }
+                Global.instance.member = member
                 completion(true)
             }
         }
+    }
+    
+    func logout() {
+        //Global.instance.member.isLoggin = false
     }
     
     func register(email: String, password: String, repassword: String, completion: @escaping CompletionHandler) {
@@ -97,15 +104,16 @@ class MemberService {
                     print("data error")
                     return
                 }
-                //print(data)
+                print(data)
                 let json: JSON = JSON(data)
                 self.success = json["success"].boolValue
                 //print(self.success)
+                var member: [String: Any] = [String: Any]()
                 if self.success {
-                    self.id = json["id"].intValue
-                    self.nickname = json["nickname"].stringValue
-                    self.token = json["token"].stringValue
-                    self.isLoggedIn = true
+//                    self.member.id = json["id"].intValue
+//                    self.member.nickname = json["nickname"].stringValue
+//                    self.member.token = json["token"].stringValue
+//                    self.member.isLoggin = true
                 } else {
                     let errors: [String] = json["msg"].arrayObject as! [String]
                     for i in 0 ..< errors.count {
@@ -113,6 +121,7 @@ class MemberService {
                     }
                     //print(self.msg)
                 }
+                //Global.instance.member = self.member
                 completion(true)
             } else {
                 completion(false)
