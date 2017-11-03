@@ -15,54 +15,13 @@ class MemberService {
     static let instance = MemberService()
     let member: Member = Member()
     
-    /*var isLoggedIn: Bool {
-        get {
-            return defaults.bool(forKey: LOGGED_IN_KEY)
-        }
-        set {
-            defaults.set(newValue, forKey: LOGGED_IN_KEY)
-        }
-    }
-    var id: Int {
-        get {
-            return defaults.value(forKey: ID_KEY) as! Int
-        }
-        set {
-            defaults.set(newValue, forKey: ID_KEY)
-        }
-    }
-    var token: String {
-        get {
-            return defaults.value(forKey: TOKEN_KEY) as! String
-        }
-        set {
-            defaults.set(newValue, forKey: TOKEN_KEY)
-        }
-    }
-    var email: String {
-        get {
-            return defaults.value(forKey: EMAIL_KEY) as! String
-        }
-        set {
-            defaults.set(newValue, forKey: EMAIL_KEY)
-        }
-    }
-    var nickname: String {
-        get {
-            return defaults.value(forKey: NICKNAME_KEY) as! String
-        }
-        set {
-            defaults.set(newValue, forKey: NICKNAME_KEY)
-        }
-    }*/
-    
     var msg:String = ""
     var success: Bool = false
     
     func login(email: String, password: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
         let body: [String: Any] = ["source": "app", "email": lowerCaseEmail, "password": password]
-        print(body)
+        //print(body)
         
         Alamofire.request(URL_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseJSON { (response) in
             if response.result.error == nil {
@@ -75,14 +34,7 @@ class MemberService {
                 self.success = json["success"].boolValue
                 //print(self.success)
                 if self.success {
-                    self.member.id = json["id"].intValue
-                    self.member.nickname = json["nickname"].stringValue
-                    self.member.email = json["email"].stringValue
-                    self.member.token = json["token"].stringValue
-                    self.member.uid = json["uid"].stringValue
-                    self.member.name = json["name"].stringValue
-                    
-                    self.member.isLoggedIn = true
+                    self.jsonToMember(json: json)
                 } else {
                     self.member.isLoggedIn = false
                     self.msg = json["msg"].stringValue
@@ -111,21 +63,7 @@ class MemberService {
                 self.success = json["success"].boolValue
                 //print(self.success)
                 if self.success {
-                    var data:[String: Any] = [String: Any]()
-                    for i in 0 ..< MEMBER_FIELD_STRING.count {
-                        let key = MEMBER_FIELD_STRING[i]
-                        let tmp = json[key].stringValue
-                        data[key] = tmp                        
-                    }
-                    
-                        
-                    self.member.id = json["id"].intValue
-                    self.member.nickname = json["nickname"].stringValue
-                    self.member.email = json["email"].stringValue
-                    self.member.token = json["token"].stringValue
-                    self.member.uid = json["uid"].stringValue
-                    
-                    self.member.isLoggedIn = true
+                    self.jsonToMember(json: json)
                 } else {
                     let errors: [String] = json["msg"].arrayObject as! [String]
                     for i in 0 ..< errors.count {
@@ -139,6 +77,25 @@ class MemberService {
                 debugPrint(response.result.error as Any)
             }
         }
+    }
+    
+    func jsonToMember(json: JSON) {
+        var data:[String: Any] = [String: Any]()
+        for key in MEMBER_FIELD_STRING {
+            let tmp = json[key].stringValue
+            data[key] = tmp
+        }
+        for key in MEMBER_FIELD_INT {
+            let tmp = json[key].intValue
+            data[key] = tmp
+        }
+        for key in MEMBER_FIELD_BOOL {
+            let tmp = json[key].boolValue
+            data[key] = tmp
+        }
+        data[ISLOGGEDIN_KEY] = true
+        //print(data)
+        self.member.setData(data: data)
     }
 }
 

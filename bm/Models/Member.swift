@@ -110,13 +110,12 @@ class Member {
             session.set(AVATAR_KEY, newValue)
         }
     }
-    var type: MEMBER_TYPE {
+    var type: Int {
         get {
-            let tmp: String = session.getString(MEMBER_TYPE_KEY)
-            return MEMBER_TYPE(rawValue: tmp)!
+            return session.getInt(MEMBER_TYPE_KEY)
         }
         set {
-            session.set(MEMBER_TYPE_KEY, newValue.rawValue)
+            session.set(MEMBER_TYPE_KEY, newValue)
         }
     }
     var social: String {
@@ -178,8 +177,8 @@ class Member {
     init() {
         var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
         let folder: String = path[0] as! String
-        print("Your NSUserDefaults are stored in this folder: %@/Preferences", folder)
-        print("Member init is key exist: \(session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY))")
+        print("Your NSUserDefaults are stored in this folder: \(folder)/Preferences")
+        //print("Member init is key exist: \(session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY))")
         if !session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY) {
             self.isLoggedIn = false
             self.id = 0
@@ -190,63 +189,61 @@ class Member {
     }
     
     func setData(data: [String: Any]) {
-        if let val = data[ID_KEY] as? Int {
+        if let val: Int = data[ID_KEY] as? Int {
             self.id = val
         }
-        if let val = data[VALIDATE_KEY] as? Int {
+        if let val: Int = data[VALIDATE_KEY] as? Int {
             self.validate = val
         }
-        if let val = data[NICKNAME_KEY] as? String {
+        if let val: String = data[NICKNAME_KEY] as? String {
             self.nickname = val
         }
-        if let val = data[EMAIL_KEY] as? String {
+        if let val: String = data[EMAIL_KEY] as? String {
             self.email = val
         }
-        if let val = data[TOKEN_KEY] as? String {
+        if let val: String = data[TOKEN_KEY] as? String {
             self.token = val
         }
-        if let val = data[UID_KEY] as? String {
+        if let val: String = data[UID_KEY] as? String {
             self.uid = val
         }
-        if let val = data[NAME_KEY] as? String {
+        if let val: String = data[NAME_KEY] as? String {
             self.name = val
         }
-        if let val = data[CHANNEL_KEY] as? String {
+        if let val: String = data[CHANNEL_KEY] as? String {
             self.channel = val
         }
-        if let val = data[TEL_KEY] as? String {
+        if let val: String = data[TEL_KEY] as? String {
             self.tel = val
         }
-        if let val = data[MOBILE_KEY] as? String {
+        if let val: String = data[MOBILE_KEY] as? String {
             self.mobile = val
         }
-        if let val = data[PID_KEY] as? String {
+        if let val: String = data[PID_KEY] as? String {
             self.pid = val
         }
-        if let val = data[AVATAR_KEY] as? String {
+        if let val: String = data[AVATAR_KEY] as? String {
             self.avatar = val
         }
-        if let val = data[DOB_KEY] as? String {
-            if let tmp = Date(value: val) {
+        if let val: String = data[DOB_KEY] as? String {
+            if let tmp: Date = Date(value: val) {
                 self.dob = tmp
             }
         }
-        if let val = data[SEX_KEY] as? String {
-            if let tmp = SEX(rawValue: val) {
+        if let val: String = data[SEX_KEY] as? String {
+            if let tmp: SEX = SEX(rawValue: val) {
                 self.sex = tmp
             }
         }
-        if let val = data[MEMBER_TYPE_KEY] as? String {
-            if let tmp = MEMBER_TYPE(rawValue: val) {
-                self.type = tmp
-            }
+        if let val: Int = data[MEMBER_TYPE_KEY] as? Int {
+            self.type = val
         }
-        if let val = data[MEMBER_ROLE_KEY] as? String {
-            if let tmp = MEMBER_ROLE(rawValue: val) {
+        if let val: String = data[MEMBER_ROLE_KEY] as? String {
+            if let tmp:MEMBER_ROLE = MEMBER_ROLE(rawValue: val) {
                 self.role = tmp
             }
         }
-        if let val = data[ISLOGGEDIN_KEY] as? Bool {
+        if let val: Bool = data[ISLOGGEDIN_KEY] as? Bool {
             self.isLoggedIn = val
         }
     }

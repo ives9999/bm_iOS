@@ -21,9 +21,6 @@ enum SEX: String {
     case M
     case F
 }
-enum MEMBER_TYPE: String {
-    case general, team, store
-}
 enum MEMBER_ROLE: String {
     case member, sale, designer, manager, admin
 }

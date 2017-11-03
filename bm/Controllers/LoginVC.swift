@@ -21,7 +21,8 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         emailTxt.delegate = self
         passwordTxt.delegate = self
 
-        // Do any additional setup after loading the view.
+        emailTxt.text = "ives@housetube.tw"
+        passwordTxt.text = "K5SD23r6"
     }
 
     @IBAction func prevBtnPressed(_ sender: Any) {

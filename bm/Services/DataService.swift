@@ -36,7 +36,7 @@ class DataService {
     func getList(type: String, titleField: String, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         self.downloadImageNum = 0
         let body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
-        print(body)
+        //print(body)
         let url: String = String(format: URL_LIST, type)
         //print(url)
         lists = [List]()
