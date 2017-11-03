@@ -79,9 +79,12 @@ class MemberService {
                     self.member.nickname = json["nickname"].stringValue
                     self.member.email = json["email"].stringValue
                     self.member.token = json["token"].stringValue
-                    self.member.isLogin = true
+                    self.member.uid = json["uid"].stringValue
+                    self.member.name = json["name"].stringValue
+                    
+                    self.member.isLoggedIn = true
                 } else {
-                    self.member.isLogin = false
+                    self.member.isLoggedIn = false
                     self.msg = json["msg"].stringValue
                 }
                 completion(true)
@@ -90,7 +93,7 @@ class MemberService {
     }
     
     func logout() {
-        member.isLogin = false
+        member.isLoggedIn = false
     }
     
     func register(email: String, password: String, repassword: String, completion: @escaping CompletionHandler) {
@@ -108,11 +111,21 @@ class MemberService {
                 self.success = json["success"].boolValue
                 //print(self.success)
                 if self.success {
+                    var data:[String: Any] = [String: Any]()
+                    for i in 0 ..< MEMBER_FIELD_STRING.count {
+                        let key = MEMBER_FIELD_STRING[i]
+                        let tmp = json[key].stringValue
+                        data[key] = tmp                        
+                    }
+                    
+                        
                     self.member.id = json["id"].intValue
                     self.member.nickname = json["nickname"].stringValue
                     self.member.email = json["email"].stringValue
                     self.member.token = json["token"].stringValue
-                    self.member.isLogin = true
+                    self.member.uid = json["uid"].stringValue
+                    
+                    self.member.isLoggedIn = true
                 } else {
                     let errors: [String] = json["msg"].arrayObject as! [String]
                     for i in 0 ..< errors.count {

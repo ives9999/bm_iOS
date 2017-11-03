@@ -41,6 +41,9 @@
                                             <constraint firstAttribute="width" constant="24" id="GOq-jG-SYU"/>
                                         </constraints>
                                         <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="xCM-NL-W3p" eventType="touchUpInside" id="GVJ-Mx-dFr"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
@@ -654,6 +657,9 @@
                                             <constraint firstAttribute="width" constant="33" id="eYs-Fi-35S"/>
                                         </constraints>
                                         <state key="normal" image="menu"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="T7R-Q1-lPo"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039215686276" green="0.85098039215686272" blue="0.011764705882352941" alpha="1" colorSpace="calibratedRGB"/>
@@ -686,6 +692,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIj-cG-Hfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="q6c-HO-2wn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-124" y="-982"/>
         </scene>

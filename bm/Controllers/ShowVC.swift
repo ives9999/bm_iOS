@@ -16,56 +16,33 @@ class ShowVC: UIViewController, WKUIDelegate {
     //var content: String = ""
     var webView: WKWebView!
     
-    override func loadView() {
-        let webConfiguation = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguation)
-        webView.uiDelegate = self
-        view = webView
-    }
+//    override func loadView() {
+//        let webConfiguation = WKWebViewConfiguration()
+//        webView = WKWebView(frame: CGRect(x: 0, y: 64, width: self.view.frame.width, height: self.view.frame.height) , configuration: webConfiguation)
+//        webView.uiDelegate = self
+//        view = webView
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let webConfiguation = WKWebViewConfiguration()
+        webView = WKWebView(frame: CGRect(x: 0, y: 84, width: self.view.frame.width, height: self.view.frame.height) , configuration: webConfiguation)
+        webView.uiDelegate = self
+        self.view.addSubview(webView)
+        
         let url: String = String(format: URL_SHOW, show_in!.type, show_in!.token)
-        print(url)
+        //print(url)
         //let myURL = URL(string: "http://bm.sportpassword.localhost/app/news/show/dBFcLdrDEAuk1WzPRXQvUw5aIcMNVun23yta7kPNddSqCqnquyTjmOMvgngBxUbSX7M55StEs27wgrzG3O0tacXpEMgw18VDSBQrhXs8jHWOkfjR4lXJP8YXuaalhue?device=app")
         let myRequest = URLRequest(url: URL(string: url)!)
         webView.load(myRequest)
-        //print(show_in!)
-
-//        DataService.instance.getShow(type: "news", id: show_in!.id, token: show_in!.token) { (success) in
-//            if success {
-//                self.content = DataService.instance.show_html
-//                print(self.content)
-//                self.reloadData()
-//            }
-//            Global.instance.removeSpinner()
-//            Global.instance.removeProgressLbl()
-//        }
-        //Global.instance.addSpinner(center: self.view.center, superView: self.view)
-        //Global.instance.addProgressLbl(center: self.view.center, superView: self.view)
     }
     
     func initShowVC(sin: Show_IN) {
         self.show_in = sin
     }
     
-    func reloadData() {
-//        let title: String = show["title"] as? String ?? ""
-//        titleLbl.text = title
-//        if let image: UIImage = show["featured"] as? UIImage {
-//            let width: CGFloat = image.size.width
-//            let height: CGFloat = image.size.height
-//            //print("width: \(width), height: \(height)")
-//            let ratio: CGFloat = width / height
-//            let newHeight = featured.frame.width / ratio
-//            featuredHeight.constant = newHeight
-//            featured.image = image
-//        }
-//        let content: String = show["content"] as? String ?? ""
-//
-//        label.text = content
-        //webView.loadHTMLString(content, baseURL: nil)
+    @IBAction func prevBtnPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
-    
     
 }

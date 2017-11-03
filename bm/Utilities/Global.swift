@@ -161,9 +161,18 @@ extension UserDefaults {
 }
 
 extension Date {
-    var string: String{
+    init?(value: String) {
+        guard !value.isEmpty else { return nil }
+        let formatter = DateFormatter()
+        guard let date = formatter.date(from: value) else {
+            return nil
+        }
+        self.init(timeInterval: 0, since: date)
+    }
+    
+    func toString(format: String = "yyyy-MM-dd") -> String {
         let formatter: DateFormatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.dateFormat = format
         return formatter.string(from: self)
     }
 }

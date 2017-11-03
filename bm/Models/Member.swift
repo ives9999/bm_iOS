@@ -58,7 +58,7 @@ class Member {
             return formatter.date(from: tmp)!
         }
         set {
-            session.set(SEX_KEY, newValue.string)
+            session.set(DOB_KEY, newValue.toString())
         }
     }
     var sex: SEX {
@@ -166,12 +166,12 @@ class Member {
     //var updated_at: Date
     //var ip: Int
     
-    var isLogin: Bool {
+    var isLoggedIn: Bool {
         get {
-            return session.getBool(ISLOGIN_KEY)
+            return session.getBool(ISLOGGEDIN_KEY)
         }
         set {
-            session.set(ISLOGIN_KEY, newValue)
+            session.set(ISLOGGEDIN_KEY, newValue)
         }
     }
     
@@ -179,13 +179,75 @@ class Member {
         var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
         let folder: String = path[0] as! String
         print("Your NSUserDefaults are stored in this folder: %@/Preferences", folder)
-        print("Member init is key exist: \(session.isKeyPresentInUserDefaults(key: ISLOGIN_KEY))")
-        if !session.isKeyPresentInUserDefaults(key: ISLOGIN_KEY) {
-            self.isLogin = false
+        print("Member init is key exist: \(session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY))")
+        if !session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY) {
+            self.isLoggedIn = false
             self.id = 0
             self.nickname = ""
             self.email = ""
             self.token = ""
+        }
+    }
+    
+    func setData(data: [String: Any]) {
+        if let val = data[ID_KEY] as? Int {
+            self.id = val
+        }
+        if let val = data[VALIDATE_KEY] as? Int {
+            self.validate = val
+        }
+        if let val = data[NICKNAME_KEY] as? String {
+            self.nickname = val
+        }
+        if let val = data[EMAIL_KEY] as? String {
+            self.email = val
+        }
+        if let val = data[TOKEN_KEY] as? String {
+            self.token = val
+        }
+        if let val = data[UID_KEY] as? String {
+            self.uid = val
+        }
+        if let val = data[NAME_KEY] as? String {
+            self.name = val
+        }
+        if let val = data[CHANNEL_KEY] as? String {
+            self.channel = val
+        }
+        if let val = data[TEL_KEY] as? String {
+            self.tel = val
+        }
+        if let val = data[MOBILE_KEY] as? String {
+            self.mobile = val
+        }
+        if let val = data[PID_KEY] as? String {
+            self.pid = val
+        }
+        if let val = data[AVATAR_KEY] as? String {
+            self.avatar = val
+        }
+        if let val = data[DOB_KEY] as? String {
+            if let tmp = Date(value: val) {
+                self.dob = tmp
+            }
+        }
+        if let val = data[SEX_KEY] as? String {
+            if let tmp = SEX(rawValue: val) {
+                self.sex = tmp
+            }
+        }
+        if let val = data[MEMBER_TYPE_KEY] as? String {
+            if let tmp = MEMBER_TYPE(rawValue: val) {
+                self.type = tmp
+            }
+        }
+        if let val = data[MEMBER_ROLE_KEY] as? String {
+            if let tmp = MEMBER_ROLE(rawValue: val) {
+                self.role = tmp
+            }
+        }
+        if let val = data[ISLOGGEDIN_KEY] as? Bool {
+            self.isLoggedIn = val
         }
     }
 }

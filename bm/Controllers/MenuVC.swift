@@ -27,7 +27,7 @@ class MenuVC: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if member.isLogin { // login
+        if member.isLoggedIn   { // login
             _loginBlock()
         } else {
             _logoutBolck()
@@ -35,7 +35,7 @@ class MenuVC: UIViewController {
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
-        if member.isLogin { // logout
+        if member.isLoggedIn { // logout
             MemberService.instance.logout()
             _logoutBolck()
         } else {

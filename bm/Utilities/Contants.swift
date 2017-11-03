@@ -50,12 +50,11 @@ let STATUS_GREEN = "#658501"
 let TABBAR_BACKGROUND = "#0d0d0d"
 
 // User Defaults
-let LOGGED_IN_KEY = "loggedIn"
 let ID_KEY = "id"
 let TOKEN_KEY = "token"
 let EMAIL_KEY = "email"
 let NICKNAME_KEY = "nickname"
-let ISLOGIN_KEY = "isLogin"
+let ISLOGGEDIN_KEY = "isLoggedIn"
 let UID_KEY = "uid"
 let NAME_KEY = "name"
 let CHANNEL_KEY = "channel"
@@ -71,7 +70,9 @@ let MEMBER_ROLE_KEY = "member_role"
 let VALIDATE_KEY = "validate"
 
 // member
-let MEMBER_FIELD = ["id","nickname","email","token"]
+let MEMBER_FIELD_STRING = [TOKEN_KEY,EMAIL_KEY,NICKNAME_KEY,NAME_KEY,UID_KEY,CHANNEL_KEY,DOB_KEY,SEX_KEY,TEL_KEY,MOBILE_KEY,PID_KEY,AVATAR_KEY,MEMBER_TYPE_KEY,MEMBER_ROLE_KEY,SOCIAL_KEY]
+let MEMBER_FIELD_INT = [ID_KEY,VALIDATE_KEY]
+let MEMBER_FIELD_BOOL = [ISLOGGEDIN_KEY]
 
 
 
