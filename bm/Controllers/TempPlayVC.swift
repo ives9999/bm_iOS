@@ -19,6 +19,10 @@ class TempPlayVC: UIViewController {
         Global.instance.setupTabbar(self)
         Global.instance.menuPressedAction(menuBtn, self)
         
+        if Member.instance.isLoggedIn {
+            NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+        }
+        
     }
 
 }

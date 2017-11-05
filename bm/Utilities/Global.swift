@@ -11,9 +11,7 @@ import UIKit
 import Device_swift
 
 var gSimulate:Bool = false
-let gRequestHeader = [
-    "Content-Type": "application/json; charset=utf-8"
-    ]
+
 enum STATUS: String {
     case online, offline, trash, delete
 }

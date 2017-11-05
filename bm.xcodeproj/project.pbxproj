@@ -16,6 +16,7 @@
 		B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */; };
 		B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375105A1FA96C0500CDF1A0 /* Member.swift */; };
 		B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */; };
+		B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */; };
 		B3E72A191F9CBE9F0008A6B1 /* CourseCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A181F9CBE9F0008A6B1 /* CourseCV.swift */; };
 		B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */; };
 		B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */; };
@@ -84,6 +85,7 @@
 		B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		B375105A1FA96C0500CDF1A0 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
+		B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		B3E72A181F9CBE9F0008A6B1 /* CourseCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCV.swift; sourceTree = "<group>"; };
 		B3E72A1B1F9F9F330008A6B1 /* bm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bm-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
 				B3E72A231FA08D090008A6B1 /* GradientView.swift */,
 				B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */,
+				B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
 				B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */,
 				F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */,
+				B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
 				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
 				B3E72A281FA20D280008A6B1 /* MemberServic.swift in Sources */,

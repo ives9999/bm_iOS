@@ -40,7 +40,7 @@ class DataService {
         let url: String = String(format: URL_LIST, type)
         //print(url)
         lists = [List]()
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseJSON { (response) in
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
             if response.result.error == nil {
                 //print(response.result.value)
@@ -174,7 +174,7 @@ class DataService {
         let body: [String: Any] = ["device": "app"]
         //print(URL_HOME)
         
-        Alamofire.request(URL_HOME, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseJSON {
+        Alamofire.request(URL_HOME, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON {
             (response) in
             if response.result.error == nil {
                 if let json = response.result.value as? Dictionary<String, Any> {
@@ -245,7 +245,7 @@ class DataService {
         let body: [String: Any] = ["source": "app", "id": id, "token": token, "type": type]
         let url: String = String(format: URL_SHOW, type)
         //print(url)
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseString { (response) in
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseString { (response) in
 
             if response.result.isSuccess {
                 self.show_html = response.result.value!

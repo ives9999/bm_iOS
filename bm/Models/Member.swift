@@ -9,6 +9,7 @@
 import Foundation
 
 class Member {
+    static let instance = Member()
     let session: UserDefaults = UserDefaults.standard
     var id: Int {
         get {

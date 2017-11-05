@@ -74,6 +74,13 @@ let MEMBER_FIELD_STRING = [TOKEN_KEY,EMAIL_KEY,NICKNAME_KEY,NAME_KEY,UID_KEY,CHA
 let MEMBER_FIELD_INT = [ID_KEY,VALIDATE_KEY,MEMBER_TYPE_KEY]
 let MEMBER_FIELD_BOOL = [ISLOGGEDIN_KEY]
 
+// Notification Constants
+let NOTIF_MEMBER_DID_CHANGE = Notification.Name("notifMemberChanged")
+
+// Header
+let HEADER = ["Content-Type": "application/json; charset=utf-8"]
+
+
 
 
 

@@ -17,25 +17,20 @@ class MenuVC: UIViewController {
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
     @IBOutlet weak var nicknameLbl: UILabel!
     
-    let member: Member = Member()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
+        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        if member.isLoggedIn   { // login
-            _loginBlock()
-        } else {
-            _logoutBolck()
-        }
+    @objc func memberDidChange(_ notif: Notification) {
+        _loginout()
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
-        if member.isLoggedIn { // logout
+        if Member.instance.isLoggedIn { // logout
             MemberService.instance.logout()
             _logoutBolck()
         } else {
@@ -47,8 +42,16 @@ class MenuVC: UIViewController {
         performSegue(withIdentifier: TO_REGISTER, sender: nil)
     }
     
+    private func _loginout() {
+        if Member.instance.isLoggedIn   { // login
+            _loginBlock()
+        } else {
+            _logoutBolck()
+        }
+    }
+    
     private func _loginBlock() {
-        nicknameLbl.text = member.nickname
+        nicknameLbl.text = Member.instance.nickname
         loginBtn.setTitle("登出", for: .normal)
         registerBtn.isHidden = true
         forgetPasswordBtn.isHidden = true

@@ -13,7 +13,6 @@ import SwiftyJSON
 
 class MemberService {
     static let instance = MemberService()
-    let member: Member = Member()
     
     var msg:String = ""
     var success: Bool = false
@@ -23,7 +22,7 @@ class MemberService {
         let body: [String: Any] = ["source": "app", "email": lowerCaseEmail, "password": password]
         //print(body)
         
-        Alamofire.request(URL_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseJSON { (response) in
+        Alamofire.request(URL_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
@@ -36,7 +35,7 @@ class MemberService {
                 if self.success {
                     self.jsonToMember(json: json)
                 } else {
-                    self.member.isLoggedIn = false
+                    Member.instance.isLoggedIn = false
                     self.msg = json["msg"].stringValue
                 }
                 completion(true)
@@ -45,14 +44,14 @@ class MemberService {
     }
     
     func logout() {
-        member.isLoggedIn = false
+        Member.instance.isLoggedIn = false
     }
     
     func register(email: String, password: String, repassword: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
         let body: [String: Any] = ["source": "app", "email": lowerCaseEmail, "password": password, "repassword": repassword]
         
-        Alamofire.request(URL_REGISTER, method: .post, parameters: body, encoding: JSONEncoding.default, headers: gRequestHeader).responseJSON { (response) in
+        Alamofire.request(URL_REGISTER, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
@@ -95,7 +94,7 @@ class MemberService {
         }
         data[ISLOGGEDIN_KEY] = true
         //print(data)
-        self.member.setData(data: data)
+        Member.instance.setData(data: data)
     }
 }
 
