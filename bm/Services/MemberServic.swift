@@ -34,6 +34,7 @@ class MemberService {
                 //print(self.success)
                 if self.success {
                     self.jsonToMember(json: json)
+                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
                 } else {
                     Member.instance.isLoggedIn = false
                     self.msg = json["msg"].stringValue
@@ -45,6 +46,7 @@ class MemberService {
     
     func logout() {
         Member.instance.isLoggedIn = false
+        NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     }
     
     func register(email: String, password: String, repassword: String, completion: @escaping CompletionHandler) {
@@ -63,6 +65,7 @@ class MemberService {
                 //print(self.success)
                 if self.success {
                     self.jsonToMember(json: json)
+                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
                 } else {
                     let errors: [String] = json["msg"].arrayObject as! [String]
                     for i in 0 ..< errors.count {

@@ -43,6 +43,7 @@ let LOADING_HEIGHT: Int = 40
 let TO_LOGIN: String = "toLogin"
 let TO_REGISTER: String = "toRegister"
 let UNWIND = "unwindToMenu"
+let MENU_TABLE = "meunTable"
 
 // color
 let MY_GREEN = "#a6d903"
@@ -79,6 +80,12 @@ let NOTIF_MEMBER_DID_CHANGE = Notification.Name("notifMemberChanged")
 
 // Header
 let HEADER = ["Content-Type": "application/json; charset=utf-8"]
+
+// Static Cell
+struct STATICCELL {
+    let padding: CGFloat = 10
+    let xMargin: CGFloat = 20
+}
 
 
 

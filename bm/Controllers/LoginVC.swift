@@ -50,7 +50,6 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     //print("login success")
                     //print(Global.instance.member.nickname)
                     self.performSegue(withIdentifier: UNWIND, sender: nil)
-                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
                 } else {
                     //print("login failed by error email or password")
                     SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)

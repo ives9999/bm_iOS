@@ -16,23 +16,27 @@ class MenuVC: UIViewController {
     @IBOutlet weak var forgetPasswordBtn: UIButton!
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
     @IBOutlet weak var nicknameLbl: UILabel!
+    @IBOutlet weak var menuTableView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
         NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        _loginout()
     }
     
     @objc func memberDidChange(_ notif: Notification) {
+        print("notify")
         _loginout()
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
         if Member.instance.isLoggedIn { // logout
             MemberService.instance.logout()
-            _logoutBolck()
         } else {
             performSegue(withIdentifier: TO_LOGIN, sender: nil)
         }
@@ -43,10 +47,11 @@ class MenuVC: UIViewController {
     }
     
     private func _loginout() {
+        //print(Member.instance.isLoggedIn)
         if Member.instance.isLoggedIn   { // login
             _loginBlock()
         } else {
-            _logoutBolck()
+            _logoutBlock()
         }
     }
     
@@ -55,11 +60,13 @@ class MenuVC: UIViewController {
         loginBtn.setTitle("登出", for: .normal)
         registerBtn.isHidden = true
         forgetPasswordBtn.isHidden = true
+        menuTableView.isHidden = false
     }
-    private func _logoutBolck() {
+    private func _logoutBlock() {
         nicknameLbl.text = "未登入"
         loginBtn.setTitle("登入", for: .normal)
         registerBtn.isHidden = false
         forgetPasswordBtn.isHidden = false
+        menuTableView.isHidden = true
     }
 }
