@@ -48,11 +48,13 @@ class MenuTableVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+        cell.contentView.backgroundColor = UIColor.clear
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
-                print("account")
+                performSegue(withIdentifier: TO_PROFILE, sender: nil)
             default:
                 print("default row")
             }

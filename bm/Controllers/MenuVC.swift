@@ -13,6 +13,8 @@ class MenuVC: UIViewController {
     // outlets
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var registerBtn: UIButton!
+    @IBOutlet weak var registerIcon: UIImageView!
+    @IBOutlet weak var forgetPasswordIcon: UIImageView!
     @IBOutlet weak var forgetPasswordBtn: UIButton!
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
     @IBOutlet weak var nicknameLbl: UILabel!
@@ -59,14 +61,18 @@ class MenuVC: UIViewController {
         nicknameLbl.text = Member.instance.nickname
         loginBtn.setTitle("登出", for: .normal)
         registerBtn.isHidden = true
+        registerIcon.isHidden = true
         forgetPasswordBtn.isHidden = true
+        forgetPasswordIcon.isHidden = true
         menuTableView.isHidden = false
     }
     private func _logoutBlock() {
         nicknameLbl.text = "未登入"
         loginBtn.setTitle("登入", for: .normal)
         registerBtn.isHidden = false
+        registerIcon.isHidden = false
         forgetPasswordBtn.isHidden = false
+        forgetPasswordIcon.isHidden = false
         menuTableView.isHidden = true
     }
 }

@@ -42,8 +42,9 @@ let LOADING_HEIGHT: Int = 40
 // segues
 let TO_LOGIN: String = "toLogin"
 let TO_REGISTER: String = "toRegister"
-let UNWIND = "unwindToMenu"
-let MENU_TABLE = "meunTable"
+let UNWIND: String = "unwindToMenu"
+let MENU_TABLE: String = "meunTable"
+let TO_PROFILE: String = "toProfile"
 
 // color
 let MY_GREEN = "#a6d903"
