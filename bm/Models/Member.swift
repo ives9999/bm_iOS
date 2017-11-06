@@ -62,13 +62,12 @@ class Member {
             session.set(DOB_KEY, newValue.toString())
         }
     }
-    var sex: SEX {
+    var sex: String {
         get {
-            let tmp: String = session.getString(SEX_KEY)
-            return SEX(rawValue: tmp)!
+            return session.getString(SEX_KEY)
         }
         set {
-            session.set(SEX_KEY, newValue.rawValue)
+            session.set(SEX_KEY, newValue)
         }
     }
     var tel: String {
@@ -232,9 +231,7 @@ class Member {
             }
         }
         if let val: String = data[SEX_KEY] as? String {
-            if let tmp: SEX = SEX(rawValue: val) {
-                self.sex = tmp
-            }
+            self.sex = val
         }
         if let val: Int = data[MEMBER_TYPE_KEY] as? Int {
             self.type = val

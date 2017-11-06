@@ -16,8 +16,19 @@ enum STATUS: String {
     case online, offline, trash, delete
 }
 enum SEX: String {
-    case M
-    case F
+    case M = "先生"
+    case F = "小姐"
+    
+    static func enumFronString(string: String) -> SEX {
+        switch string {
+        case "M" :
+            return self.M
+        case "F" :
+            return self.F
+        default :
+            return self.M
+        }
+    }
 }
 enum MEMBER_ROLE: String {
     case member, sale, designer, manager, admin
