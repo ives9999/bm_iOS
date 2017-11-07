@@ -13,9 +13,22 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var nicknameLbl: UILabel!
     @IBOutlet weak var sexLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    private let arrs = [
-    ["基本資料" : ["帳號","姓名","EMmal"]
-    ]]
+    private let sections: [String] = ["登入資料","個人資料","通訊資料"]
+    private let rows: [[Dictionary<String, [String: String]>]] = [
+        [
+            [NICKNAME_KEY: ["text": "暱稱", "type": "String"]],
+            [NAME_KEY: ["text": "姓名", "type": "String"]],
+            [EMAIL_KEY: ["text": "EMail", "type": "String"]]
+        ],
+        [
+            [SEX_KEY: ["text": "性別", "type": "String"]],
+            [DOB_KEY: ["text": "生日", "type": "String"]]
+        ],
+        [
+            [MOBILE_KEY: ["text": "行動電話", "type": "String"]],
+            [TEL_KEY: ["text": "市內電話", "type": "String"]]
+        ]
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,18 +42,39 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return arrs.count
+        return sections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        /*
         guard let items: Dictionary<String, Any> = arrs[section] as? Dictionary else { return 0 }
         var count = 0
         for key in items.keys {
             guard let arrs = items[key] as? NSArray else { return 0 }
             count = arrs.count
         }
+ */
         
-        return count
+        
+        return rows[section].count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
+    }
+    
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UITableViewHeaderFooterView()
+        view.layer.backgroundColor = UIColor.clear.cgColor
+        
+        return view
+    }
+ 
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel!.font = UIFont(name: FONT_NAME, size: FONT_SIZE_TITLE)
+        header.textLabel!.textColor = UIColor.white
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,9 +84,26 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
         }
         //let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell!.textLabel!.text = "\(arrs[indexPath.row])"
+        let row: Dictionary<String, [String: String]> = rows[indexPath.section][indexPath.row]
+        var field: String = ""
+        var data: String = ""
+        for (key, value) in row {
+            if let tmp: String = value["text"] {
+                field = tmp
+            }
+            if let tmp: Any = Member.instance.getData(key: key) {
+                let type: String = value["type"]!
+                if type == "String" {
+                    data = tmp as! String
+                } else if type == "Int" {
+                    data = String(tmp as! Int)
+                }
+            }
+        }
+        
+        cell!.textLabel!.text = "\(field)"
         cell!.textLabel!.textColor = UIColor.white
-        cell!.detailTextLabel!.text = "test"
+        cell!.detailTextLabel!.text = "\(data)"
         cell!.detailTextLabel!.textColor = UIColor.white
         cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         return cell!
@@ -67,7 +118,9 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         dismiss(animated: true, completion: nil)
     }
     
+    /*
     private func getValues(section: Int) -> NSArray {
         
     }
+ */
 }

@@ -52,14 +52,16 @@ class Member {
             session.set(CHANNEL_KEY, newValue)
         }
     }
-    var dob: Date {
+    var dob: String {
         get {
-            let tmp: String = session.getString(DOB_KEY)
-            let formatter = DateFormatter()
-            return formatter.date(from: tmp)!
+            //let tmp: String = session.getString(DOB_KEY)
+            //let formatter = DateFormatter()
+            //return formatter.date(from: tmp)!
+            return session.getString(DOB_KEY)
         }
         set {
-            session.set(DOB_KEY, newValue.toString())
+            //session.set(DOB_KEY, newValue.toString())
+            session.set(DOB_KEY, newValue)
         }
     }
     var sex: String {
@@ -175,9 +177,9 @@ class Member {
     }
     
     init() {
-        //var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
-        //let folder: String = path[0] as! String
-        //print("Your NSUserDefaults are stored in this folder: \(folder)/Preferences")
+        var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
+        let folder: String = path[0] as! String
+        print("Your NSUserDefaults are stored in this folder: \(folder)/Preferences")
         //print("Member init is key exist: \(session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY))")
         if !session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY) {
             self.isLoggedIn = false
@@ -226,9 +228,10 @@ class Member {
             self.avatar = val
         }
         if let val: String = data[DOB_KEY] as? String {
-            if let tmp: Date = Date(value: val) {
-                self.dob = tmp
-            }
+            self.dob = val
+            //if let tmp: Date = Date(value: val) {
+                //self.dob = tmp
+            //}
         }
         if let val: String = data[SEX_KEY] as? String {
             self.sex = val
@@ -244,6 +247,48 @@ class Member {
         if let val: Bool = data[ISLOGGEDIN_KEY] as? Bool {
             self.isLoggedIn = val
         }
+    }
+    
+    func getData(key: String) -> Any {
+        if !session.isKeyPresentInUserDefaults(key: key) {
+            return ""
+        }
+        if key == ID_KEY {
+            return self.id
+        } else if key == VALIDATE_KEY {
+            return self.validate
+        } else if key == NICKNAME_KEY {
+            return self.nickname
+        } else if key == EMAIL_KEY {
+            return self.email
+        } else if key == TOKEN_KEY {
+            return self.token
+        } else if key == UID_KEY {
+            return self.uid
+        } else if key == NAME_KEY {
+            return self.name
+        } else if key == CHANNEL_KEY {
+            return self.channel
+        } else if key == TEL_KEY {
+            return self.tel
+        } else if key == MOBILE_KEY {
+            return self.mobile
+        } else if key == PID_KEY {
+            return self.pid
+        } else if key == AVATAR_KEY {
+            return self.avatar
+        } else if key == DOB_KEY {
+            return self.dob
+        } else if key == SEX_KEY {
+            return self.sex
+        } else if key == MEMBER_TYPE_KEY {
+            return self.type
+        } else if key == MEMBER_ROLE_KEY {
+            return self.role
+        } else if key == ISLOGGEDIN_KEY {
+            return self.isLoggedIn
+        }
+        return ""
     }
 }
 
