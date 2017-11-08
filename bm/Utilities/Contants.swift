@@ -45,6 +45,7 @@ let TO_REGISTER: String = "toRegister"
 let UNWIND: String = "unwindToMenu"
 let MENU_TABLE: String = "meunTable"
 let TO_PROFILE: String = "toProfile"
+let TO_EDIT_PROFILE: String = "toEditProfile"
 
 // color
 let MY_GREEN = "#a6d903"

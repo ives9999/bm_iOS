@@ -175,6 +175,25 @@ class Member {
             session.set(ISLOGGEDIN_KEY, newValue)
         }
     }
+    let info: [Dictionary<String, [String: String]>] = [
+        [ID_KEY: ["ch": "編號","type":"Int"]],
+        [NICKNAME_KEY: ["ch": "暱稱","type":"String"]],
+        [NAME_KEY: ["ch": "姓名","type":"String"]],
+        [EMAIL_KEY: ["ch": "email","type":"String"]],
+        [TOKEN_KEY: ["ch": "token","type":"String"]],
+        [UID_KEY: ["ch": "uid","type":"String"]],
+        [CHANNEL_KEY: ["ch": "channel","type":"String"]],
+        [DOB_KEY: ["ch": "生日","type":"String"]],
+        [SEX_KEY: ["ch": "性別","type":"String"]],
+        [TEL_KEY: ["ch": "市內電話","type":"String"]],
+        [MOBILE_KEY: ["ch": "行動電話","type":"String"]],
+        [PID_KEY: ["ch": "身分證","type":"String"]],
+        [AVATAR_KEY: ["ch": "大頭貼","type":"String"]],
+        [SOCIAL_KEY: ["ch": "social","type":"String"]],
+        [VALIDATE_KEY: ["ch": "認證階段","type":"Int"]],
+        [MEMBER_TYPE_KEY: ["ch": "會員類型","type":"Int"]],
+        [MEMBER_ROLE_KEY: ["ch": "會員角色","type":"String"]]
+    ]
     
     init() {
         var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
@@ -236,6 +255,9 @@ class Member {
         if let val: String = data[SEX_KEY] as? String {
             self.sex = val
         }
+        if let val: String = data[SOCIAL_KEY] as? String {
+            self.social = val
+        }
         if let val: Int = data[MEMBER_TYPE_KEY] as? Int {
             self.type = val
         }
@@ -250,9 +272,6 @@ class Member {
     }
     
     func getData(key: String) -> Any {
-        if !session.isKeyPresentInUserDefaults(key: key) {
-            return ""
-        }
         if key == ID_KEY {
             return self.id
         } else if key == VALIDATE_KEY {
@@ -277,6 +296,8 @@ class Member {
             return self.pid
         } else if key == AVATAR_KEY {
             return self.avatar
+        }else if key == SOCIAL_KEY {
+            return self.avatar
         } else if key == DOB_KEY {
             return self.dob
         } else if key == SEX_KEY {
@@ -289,6 +310,35 @@ class Member {
             return self.isLoggedIn
         }
         return ""
+    }
+    func sexShow(rawValue: String) -> String {
+        return SEX.enumFronString(string: rawValue).rawValue
+    }
+    func validateShow(rawValue: Int) -> String {
+        var res: String = "未通過任何認證"
+        if rawValue & 1 > 0 {
+            res = "已通過email認證"
+        }
+        if rawValue & 2 > 0 {
+            res = "已通過手機認證"
+        }
+        if rawValue & 4 > 0 {
+            res = "已通過身分證認證"
+        }
+        return res
+    }
+    func typeShow(rawValue: Int) -> String {
+        var res: [String] = [String]()
+        if rawValue & 1 > 0 {
+            res.append("一般會員")
+        }
+        if rawValue & 2 > 0 {
+            res.append("球隊隊長")
+        }
+        if rawValue & 4 > 0 {
+            res.append("球場管理員")
+        }
+        return res.joined(separator: ",")
     }
 }
 

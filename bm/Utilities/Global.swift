@@ -150,13 +150,25 @@ extension UIViewController {
 
 extension UserDefaults {
     func getBool(_ key: String) -> Bool {
-        return bool(forKey: key)
+        if isKeyPresentInUserDefaults(key: key) {
+            return bool(forKey: key)
+        } else {
+            return false
+        }
     }
     func getString(_ key: String) -> String {
-        return string(forKey: key)!
+        if isKeyPresentInUserDefaults(key: key) {
+            return string(forKey: key)!
+        } else {
+            return ""
+        }
     }
     func getInt(_ key: String) -> Int {
-        return integer(forKey: key)
+        if isKeyPresentInUserDefaults(key: key) {
+            return integer(forKey: key)
+        } else {
+            return 0
+        }
     }
     func set(_ key: String, _ value: Any) {
         set(value, forKey: key)
