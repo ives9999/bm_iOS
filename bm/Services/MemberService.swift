@@ -59,7 +59,7 @@ class MemberService {
                     print("data error")
                     return
                 }
-                print(data)
+                //print(data)
                 let json: JSON = JSON(data)
                 self.success = json["success"].boolValue
                 //print(self.success)
@@ -77,6 +77,34 @@ class MemberService {
             } else {
                 completion(false)
                 debugPrint(response.result.error as Any)
+            }
+        }
+    }
+    
+    func update(id: Int, field: String, value: inout String, completion: @escaping CompletionHandler) {
+        if field == EMAIL_KEY {
+            value = value.lowercased()
+        }
+        let body: [String: Any] = ["source": "app", field: value, ID_KEY: id]
+        Alamofire.request(URL_MEMBER_UPDATE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                self.success = json["success"].boolValue
+                if self.success {
+                    self.jsonToMember(json: json)
+                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+                } else {
+                    let errors: [String] = json["msg"].arrayObject as! [String]
+                    for i in 0 ..< errors.count {
+                        self.msg += errors[i]
+                    }
+                    //print(self.msg)
+                }
+                completion(true)
             }
         }
     }

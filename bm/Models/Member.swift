@@ -175,24 +175,24 @@ class Member {
             session.set(ISLOGGEDIN_KEY, newValue)
         }
     }
-    let info: [Dictionary<String, [String: String]>] = [
-        [ID_KEY: ["ch": "編號","type":"Int"]],
-        [NICKNAME_KEY: ["ch": "暱稱","type":"String"]],
-        [NAME_KEY: ["ch": "姓名","type":"String"]],
-        [EMAIL_KEY: ["ch": "email","type":"String"]],
-        [TOKEN_KEY: ["ch": "token","type":"String"]],
-        [UID_KEY: ["ch": "uid","type":"String"]],
-        [CHANNEL_KEY: ["ch": "channel","type":"String"]],
-        [DOB_KEY: ["ch": "生日","type":"String"]],
-        [SEX_KEY: ["ch": "性別","type":"String"]],
-        [TEL_KEY: ["ch": "市內電話","type":"String"]],
-        [MOBILE_KEY: ["ch": "行動電話","type":"String"]],
-        [PID_KEY: ["ch": "身分證","type":"String"]],
-        [AVATAR_KEY: ["ch": "大頭貼","type":"String"]],
-        [SOCIAL_KEY: ["ch": "social","type":"String"]],
-        [VALIDATE_KEY: ["ch": "認證階段","type":"Int"]],
-        [MEMBER_TYPE_KEY: ["ch": "會員類型","type":"Int"]],
-        [MEMBER_ROLE_KEY: ["ch": "會員角色","type":"String"]]
+    let info: Dictionary<String, [String: String]> = [
+        ID_KEY: ["ch": "編號","type":"Int"],
+        NICKNAME_KEY: ["ch": "暱稱","type":"String"],
+        NAME_KEY: ["ch": "姓名","type":"String"],
+        EMAIL_KEY: ["ch": "email","type":"String"],
+        TOKEN_KEY: ["ch": "token","type":"String"],
+        UID_KEY: ["ch": "uid","type":"String"],
+        CHANNEL_KEY: ["ch": "channel","type":"String"],
+        DOB_KEY: ["ch": "生日","type":"String"],
+        SEX_KEY: ["ch": "性別","type":"String"],
+        TEL_KEY: ["ch": "市內電話","type":"String"],
+        MOBILE_KEY: ["ch": "行動電話","type":"String"],
+        PID_KEY: ["ch": "身分證","type":"String"],
+        AVATAR_KEY: ["ch": "大頭貼","type":"String"],
+        SOCIAL_KEY: ["ch": "social","type":"String"],
+        VALIDATE_KEY: ["ch": "認證階段","type":"Int"],
+        MEMBER_TYPE_KEY: ["ch": "會員類型","type":"Int"],
+        MEMBER_ROLE_KEY: ["ch": "會員角色","type":"String"]
     ]
     
     init() {

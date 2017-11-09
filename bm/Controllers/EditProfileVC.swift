@@ -9,13 +9,40 @@
 import UIKit
 
 class EditProfileVC: UIViewController {
+    
+    // Outlets
+    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var dataTxt: UITextField!
+    
+    var key: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        if let row: [String: String] = Member.instance.info[key] {
+            //print(row)
+            
+            dataTxt.layer.borderWidth = 2.0
+            dataTxt.layer.borderColor = UIColor("#4b4b4b").cgColor
+            dataTxt.backgroundColor = UIColor.black
+            dataTxt.textColor = UIColor.white
+            
+            titleLbl.text = row["ch"]
+            let type = row["type"]
+            if let tmp: Any = Member.instance.getData(key: key) {
+                if type == "String" {
+                    dataTxt.text = tmp as! String
+                }
+            }
+        }
     }
 
+    @IBAction func saveBtnPressed(_ sender: Any) {
+        MemberService.instance.update(id: Member.instance.id, field: key, value: &dataTxt.text!) { (success) in
+            
+        }
+    }
+    
     @IBAction func prevBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

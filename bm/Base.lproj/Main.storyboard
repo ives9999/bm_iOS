@@ -396,19 +396,64 @@
                                     <constraint firstItem="CnJ-ot-fB4" firstAttribute="centerX" secondItem="B46-d8-Ieo" secondAttribute="centerX" id="wlP-eO-lpF"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="w3B-k1-HRb">
+                                <rect key="frame" x="0.0" y="64" width="375" height="328"/>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="ETd-yu-3ar">
+                                <rect key="frame" x="25" y="104" width="300" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="CaR-iQ-1jN"/>
+                                    <constraint firstAttribute="height" constant="50" id="EkP-ZK-OAr"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcc-Zd-r0g" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="107.5" y="174" width="160" height="30"/>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="ODx-bB-Bm2"/>
+                                    <constraint firstAttribute="height" constant="30" id="Oct-l2-rzT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                <state key="normal" title="儲存">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="saveBtnPressed:" destination="cqP-Uv-aIB" eventType="touchUpInside" id="rZG-wg-Lak"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="B46-d8-Ieo" firstAttribute="leading" secondItem="lC2-wD-zU1" secondAttribute="leading" id="49f-1u-1u7"/>
                             <constraint firstItem="B46-d8-Ieo" firstAttribute="trailing" secondItem="lC2-wD-zU1" secondAttribute="trailing" id="7kR-ON-7r7"/>
+                            <constraint firstItem="ETd-yu-3ar" firstAttribute="top" secondItem="B46-d8-Ieo" secondAttribute="bottom" constant="40" id="EtI-3T-soF"/>
                             <constraint firstItem="B46-d8-Ieo" firstAttribute="top" secondItem="lC2-wD-zU1" secondAttribute="top" id="Lfq-m9-fUi"/>
+                            <constraint firstItem="lC2-wD-zU1" firstAttribute="trailing" secondItem="w3B-k1-HRb" secondAttribute="trailing" id="cie-Zi-6z4"/>
+                            <constraint firstItem="lC2-wD-zU1" firstAttribute="bottom" secondItem="w3B-k1-HRb" secondAttribute="bottom" id="clE-Wq-YsY"/>
+                            <constraint firstItem="pcc-Zd-r0g" firstAttribute="top" secondItem="ETd-yu-3ar" secondAttribute="bottom" constant="20" id="dco-WB-MT8"/>
+                            <constraint firstItem="ETd-yu-3ar" firstAttribute="leading" secondItem="lC2-wD-zU1" secondAttribute="leading" constant="25" id="eoi-ON-rQc"/>
+                            <constraint firstItem="w3B-k1-HRb" firstAttribute="top" secondItem="B46-d8-Ieo" secondAttribute="bottom" id="qj3-Od-vm5"/>
+                            <constraint firstItem="pcc-Zd-r0g" firstAttribute="centerX" secondItem="5uR-eJ-Veb" secondAttribute="centerX" id="wGs-ac-hGE"/>
+                            <constraint firstItem="w3B-k1-HRb" firstAttribute="leading" secondItem="lC2-wD-zU1" secondAttribute="leading" id="wHn-7f-hKH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lC2-wD-zU1"/>
                     </view>
+                    <connections>
+                        <outlet property="dataTxt" destination="ETd-yu-3ar" id="7tY-Qn-drD"/>
+                        <outlet property="titleLbl" destination="CnJ-ot-fB4" id="4zr-nK-ORA"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Aki-ap-dL5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1325" y="-2545"/>
+            <point key="canvasLocation" x="1324" y="-2545.7271364317844"/>
         </scene>
         <!--MenuVC-->
         <scene sceneID="eRv-Hc-RcR">

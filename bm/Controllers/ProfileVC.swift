@@ -14,25 +14,11 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var sexLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     private let sections: [String] = ["登入資料","個人資料","通訊資料","設定資料"]
-    private let rows: [[Dictionary<String, [String: String]>]] = [
-        [
-            [NICKNAME_KEY: ["text": "暱稱", "type": "String"]],
-            [NAME_KEY: ["text": "姓名", "type": "String"]],
-            [EMAIL_KEY: ["text": "EMail", "type": "String"]]
-        ],
-        [
-            [SEX_KEY: ["text": "性別", "type": "String"]],
-            [DOB_KEY: ["text": "生日", "type": "String"]]
-        ],
-        [
-            [MOBILE_KEY: ["text": "行動電話", "type": "String"]],
-            [TEL_KEY: ["text": "市內電話", "type": "String"]]
-        ],
-        [
-            [VALIDATE_KEY: ["text": "認證階段", "type": "Int"]],
-            //[MEMBER_ROLE_KEY: ["text": "會員角色", "type": ""]],
-            [MEMBER_TYPE_KEY: ["text": "會員類型", "type": "Int"]]
-        ]
+    private let rows: [[String]] = [
+        [NICKNAME_KEY, NAME_KEY, EMAIL_KEY],
+        [SEX_KEY, DOB_KEY],
+        [MOBILE_KEY, TEL_KEY],
+        [VALIDATE_KEY, MEMBER_TYPE_KEY]
     ]
     
     override func viewDidLoad() {
@@ -97,35 +83,36 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell?.selectionStyle = .none
         }
         //let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let row: Dictionary<String, [String: String]> = rows[indexPath.section][indexPath.row]
+        let key: String = rows[indexPath.section][indexPath.row]
+        let row: [String: String] = Member.instance.info[key]!
         var field: String = ""
         var data: String = ""
-        for (key, value) in row {
-            if let tmp: String = value["text"] {
-                field = tmp
-            }
-            if let tmp: Any = Member.instance.getData(key: key) {
-                let type: String = value["type"]!
-                if type == "String" {
-                    data = tmp as! String
-                    if key == SEX_KEY {
-                        data = Member.instance.sexShow(rawValue: data)
-                    }
-                    if data.count == 0 {
-                        data = "未提供"
-                    }
-                } else if type == "Int" {
-                    let tmp1 = tmp as! Int
-                    if key == VALIDATE_KEY {
-                        data = Member.instance.validateShow(rawValue: tmp1)
-                    } else if key == MEMBER_TYPE_KEY {
-                        data = Member.instance.typeShow(rawValue: tmp1)
-                    } else {
-                        data = String(tmp1)
-                    }
+        if let tmp: String = row["ch"] {
+            field = tmp
+        }
+        if let tmp: Any = Member.instance.getData(key: key) {
+            let type: String = row["type"]!
+            if type == "String" {
+                data = tmp as! String
+                if key == SEX_KEY {
+                    data = Member.instance.sexShow(rawValue: data)
+                }
+                if data.count == 0 {
+                    data = "未提供"
+                }
+            } else if type == "Int" {
+                let tmp1 = tmp as! Int
+                if key == VALIDATE_KEY {
+                    data = Member.instance.validateShow(rawValue: tmp1)
+                } else if key == MEMBER_TYPE_KEY {
+                    data = Member.instance.typeShow(rawValue: tmp1)
+                } else {
+                    data = String(tmp1)
                 }
             }
         }
+        
+        
         
         cell!.textLabel!.text = "\(field)"
         cell!.textLabel!.textColor = UIColor.white
@@ -137,20 +124,22 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: TO_EDIT_PROFILE, sender: nil)
+        let key: String = rows[indexPath.section][indexPath.row]
+        performSegue(withIdentifier: TO_EDIT_PROFILE, sender: key)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.layer.backgroundColor = UIColor.clear.cgColor
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let edit: EditProfileVC = segue.destination as! EditProfileVC {
+            edit.key = sender as! String
+        }
+    }
+    
     @IBAction func prevBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
     
-    /*
-    private func getValues(section: Int) -> NSArray {
-        
-    }
- */
 }

@@ -20,6 +20,7 @@ let URL_LIST = "\(URL_HOME)%@"
 let URL_SHOW = "\(URL_HOME)%@/show/%@?device=app"
 let URL_LOGIN = URL_HOME + "login"
 let URL_REGISTER = URL_HOME + "register"
+let URL_MEMBER_UPDATE = URL_HOME + "member/update"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"
