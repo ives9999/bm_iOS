@@ -58,6 +58,13 @@ class MenuTableVC: UITableViewController {
             default:
                 print("default row")
             }
+        case 1:
+            switch indexPath.row {
+            case 0:
+                performSegue(withIdentifier: TO_TEAM_SUBMIT, sender: nil)
+            default:
+                print("default row")
+            }
         default:
             print("default section")
         }

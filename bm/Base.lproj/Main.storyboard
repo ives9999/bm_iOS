@@ -96,6 +96,72 @@
             </objects>
             <point key="canvasLocation" x="-946" y="-1724"/>
         </scene>
+        <!--Team SubmitVC-->
+        <scene sceneID="aWs-0V-lzQ">
+            <objects>
+                <viewController id="UtM-v1-pfK" customClass="TeamSubmitVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3YN-EW-tZy">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="392"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="33G-E0-PVJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登錄球隊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2w-Um-mA3">
+                                        <rect key="frame" x="149.5" y="19" width="76.5" height="27"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jau-09-Ctg">
+                                        <rect key="frame" x="12" y="23" width="24" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="CQM-zX-hBu"/>
+                                            <constraint firstAttribute="height" constant="18" id="tpQ-eY-pPy"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="vfe-V8-Hfx" eventType="touchUpInside" id="1Dj-la-z7T"/>
+                                            <action selector="prevBtnPressed:" destination="UtM-v1-pfK" eventType="touchUpInside" id="SSI-Qp-DAx"/>
+                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="bN9-Hz-VkJ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="Gc0-2Z-NF7"/>
+                                    <constraint firstItem="Jau-09-Ctg" firstAttribute="centerY" secondItem="33G-E0-PVJ" secondAttribute="centerY" id="SAP-OU-YQd"/>
+                                    <constraint firstItem="v2w-Um-mA3" firstAttribute="centerX" secondItem="33G-E0-PVJ" secondAttribute="centerX" id="UMm-Ez-g1r"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="dHG-YF-blA"/>
+                                    <constraint firstItem="v2w-Um-mA3" firstAttribute="centerY" secondItem="33G-E0-PVJ" secondAttribute="centerY" id="doH-ye-BaL"/>
+                                    <constraint firstItem="Jau-09-Ctg" firstAttribute="leading" secondItem="33G-E0-PVJ" secondAttribute="leading" constant="12" id="hNY-0y-3DA"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="rhl-Jw-qTc"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="GMe-F6-fpP">
+                                <rect key="frame" x="0.0" y="64" width="375" height="328"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="33G-E0-PVJ" firstAttribute="top" secondItem="28d-5J-eIl" secondAttribute="top" id="2ub-1g-h7M"/>
+                            <constraint firstItem="GMe-F6-fpP" firstAttribute="top" secondItem="33G-E0-PVJ" secondAttribute="bottom" id="GF0-Xz-YhG"/>
+                            <constraint firstItem="28d-5J-eIl" firstAttribute="bottom" secondItem="GMe-F6-fpP" secondAttribute="bottom" id="P1L-GR-xmy"/>
+                            <constraint firstItem="28d-5J-eIl" firstAttribute="trailing" secondItem="GMe-F6-fpP" secondAttribute="trailing" id="Rgg-ZO-zyG"/>
+                            <constraint firstItem="GMe-F6-fpP" firstAttribute="leading" secondItem="28d-5J-eIl" secondAttribute="leading" id="UC4-mB-PQs"/>
+                            <constraint firstItem="33G-E0-PVJ" firstAttribute="leading" secondItem="3YN-EW-tZy" secondAttribute="leading" id="dYL-zH-vKD"/>
+                            <constraint firstItem="28d-5J-eIl" firstAttribute="trailing" secondItem="33G-E0-PVJ" secondAttribute="trailing" id="tVu-FE-Yzh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="28d-5J-eIl"/>
+                    </view>
+                    <connections>
+                        <outlet property="titleLbl" destination="v2w-Um-mA3" id="wMh-ZJ-eN7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aSL-K2-kXt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-207" y="-3144"/>
+        </scene>
         <!--Menu TableVC-->
         <scene sceneID="IZp-As-VWB">
             <objects>
@@ -242,6 +308,7 @@
                         <outlet property="teamSubmitIcon" destination="kgh-lS-wr6" id="qb9-xc-4rQ"/>
                         <outlet property="teamSubmitLbl" destination="EPv-NH-MDO" id="4is-d4-RID"/>
                         <segue destination="vfe-V8-Hfx" kind="show" identifier="toProfile" id="l70-3o-bLE"/>
+                        <segue destination="UtM-v1-pfK" kind="show" identifier="toTeamSubmit" id="Jub-CG-ZWb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M8c-3Q-Veu" userLabel="First Responder" sceneMemberID="firstResponder"/>

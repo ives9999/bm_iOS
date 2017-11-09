@@ -96,7 +96,7 @@ class MemberService {
                 self.success = json["success"].boolValue
                 if self.success {
                     self.jsonToMember(json: json)
-                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+                    NotificationCenter.default.post(name: NOTIF_MEMBER_UPDATE, object: nil)
                 } else {
                     let errors: [String] = json["msg"].arrayObject as! [String]
                     for i in 0 ..< errors.count {

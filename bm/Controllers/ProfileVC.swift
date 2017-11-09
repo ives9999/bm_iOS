@@ -32,6 +32,14 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //tableView.separatorColor = UIColor.white
         tableView.delegate = self
         tableView.dataSource = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(ProfileVC._reloadData), name: NOTIF_MEMBER_UPDATE, object: nil)
+    }
+    
+    @objc func _reloadData() {
+        //print("notify member data update")
+        self.tableView.reloadData()
+        self.nicknameLbl.text = Member.instance.nickname
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

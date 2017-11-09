@@ -47,6 +47,7 @@ let UNWIND: String = "unwindToMenu"
 let MENU_TABLE: String = "meunTable"
 let TO_PROFILE: String = "toProfile"
 let TO_EDIT_PROFILE: String = "toEditProfile"
+let TO_TEAM_SUBMIT: String = "toTeamSubmit"
 
 // color
 let MY_GREEN = "#a6d903"
@@ -80,6 +81,7 @@ let MEMBER_FIELD_BOOL = [ISLOGGEDIN_KEY]
 
 // Notification Constants
 let NOTIF_MEMBER_DID_CHANGE = Notification.Name("notifMemberChanged")
+let NOTIF_MEMBER_UPDATE = Notification.Name("notifMemberUpdate")
 
 // Header
 let HEADER = ["Content-Type": "application/json; charset=utf-8"]

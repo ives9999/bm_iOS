@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class EditProfileVC: UIViewController {
     
@@ -38,7 +39,23 @@ class EditProfileVC: UIViewController {
     }
 
     @IBAction func saveBtnPressed(_ sender: Any) {
+        Global.instance.addSpinner(superView: self.view)
         MemberService.instance.update(id: Member.instance.id, field: key, value: &dataTxt.text!) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if success {
+                if MemberService.instance.success {
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    let alert = SCLAlertView(appearance: appearance)
+                    alert.addButton("確定", action: {
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                    alert.showSuccess("成功", subTitle: "修改個人資料成功")
+                } else {
+                    SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
+                }
+            }
             
         }
     }

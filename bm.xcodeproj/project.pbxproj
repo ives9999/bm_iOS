@@ -39,6 +39,7 @@
 		F94E7D351F83636B00F550FD /* bmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D341F83636B00F550FD /* bmTests.swift */; };
 		F94E7D401F83636B00F550FD /* bmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D3F1F83636B00F550FD /* bmUITests.swift */; };
 		F94EAA201FB023B800B1762C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EAA1F1FB023B800B1762C /* ProfileVC.swift */; };
+		F94FF4351FB4322C00D167B6 /* TeamSubmitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94FF4341FB4322C00D167B6 /* TeamSubmitVC.swift */; };
 		F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */; };
 		F9A1CB7F1F95CD2500DDEC86 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* ListCell.swift */; };
 		F9A1CB811F95CE2F00DDEC86 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB801F95CE2F00DDEC86 /* List.swift */; };
@@ -118,6 +119,7 @@
 		F94E7D3F1F83636B00F550FD /* bmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bmUITests.swift; sourceTree = "<group>"; };
 		F94E7D411F83636B00F550FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F94EAA1F1FB023B800B1762C /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		F94FF4341FB4322C00D167B6 /* TeamSubmitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSubmitVC.swift; sourceTree = "<group>"; };
 		F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		F9A1CB7E1F95CD2500DDEC86 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		F9A1CB801F95CE2F00DDEC86 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 				B3CCE63F1FAEDBC00050D2FE /* MenuTableVC.swift */,
 				F94EAA1F1FB023B800B1762C /* ProfileVC.swift */,
 				B3ED38D61FB2A3E80003F083 /* EditProfileVC.swift */,
+				F94FF4341FB4322C00D167B6 /* TeamSubmitVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F94EAA201FB023B800B1762C /* ProfileVC.swift in Sources */,
+				F94FF4351FB4322C00D167B6 /* TeamSubmitVC.swift in Sources */,
 				B3E72A191F9CBE9F0008A6B1 /* CourseCV.swift in Sources */,
 				B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */,
 				B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */,

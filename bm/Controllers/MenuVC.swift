@@ -32,7 +32,7 @@ class MenuVC: UIViewController {
     }
     
     @objc func memberDidChange(_ notif: Notification) {
-        print("notify")
+        //print("notify")
         _loginout()
     }
     
