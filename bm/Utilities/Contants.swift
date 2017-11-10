@@ -53,6 +53,7 @@ let TO_TEAM_SUBMIT: String = "toTeamSubmit"
 let MY_GREEN = "#a6d903"
 let STATUS_GREEN = "#658501"
 let TABBAR_BACKGROUND = "#0d0d0d"
+let TEXTBORDER = "#4B4B4B"
 
 // User Defaults
 let ID_KEY = "id"
@@ -78,6 +79,25 @@ let VALIDATE_KEY = "validate"
 let MEMBER_FIELD_STRING = [TOKEN_KEY,EMAIL_KEY,NICKNAME_KEY,NAME_KEY,UID_KEY,CHANNEL_KEY,DOB_KEY,SEX_KEY,TEL_KEY,MOBILE_KEY,PID_KEY,AVATAR_KEY,MEMBER_ROLE_KEY,SOCIAL_KEY]
 let MEMBER_FIELD_INT = [ID_KEY,VALIDATE_KEY,MEMBER_TYPE_KEY]
 let MEMBER_FIELD_BOOL = [ISLOGGEDIN_KEY]
+
+// Team key
+let TEAM_ID_KEY = "id"
+let TEAM_NAME_KEY = "name"
+let TEAM_LEADER_KEY = "leader"
+let TEAM_MOBILE_KEY = "mobile"
+let TEAM_EMAIL_KEY = "email"
+let TEAM_ZONE_ID_KEY = "zone_id"
+let TEAM_ARENA_ID_KEY = "arena_id"
+let TEAM_DAY_KEY = "day"
+let TEAM_PLAY_START_KEY = "play_start"
+let TEAM_PLAY_END_KEY = "play_end"
+let TEAM_TEMP_FEE_M_KEY = "temp_fee_M"
+let TEAM_TEMP_FEE_F_KEY = "temp_fee_F"
+let TEAM_TEMP_CONTENT_KEY = "temp_content"
+let TEAM_BALL_KEY = "ball"
+let TEAM_DEGREE_KEY = "degree"
+let TEAM_CHARGE_KEY = "charge"
+let TEAM_CONTENT_KEY = "content"
 
 // Notification Constants
 let NOTIF_MEMBER_DID_CHANGE = Notification.Name("notifMemberChanged")

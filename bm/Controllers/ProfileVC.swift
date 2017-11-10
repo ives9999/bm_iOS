@@ -27,7 +27,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         nicknameLbl.text = Member.instance.nickname
         sexLbl.text = SEX.enumFronString(string: Member.instance.sex).rawValue
         //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.backgroundColor = UIColor.clear
+        //tableView.backgroundColor = UIColor.clear
         //tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
         //tableView.separatorColor = UIColor.white
         tableView.delegate = self

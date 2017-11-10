@@ -24,7 +24,7 @@ class EditProfileVC: UIViewController {
             //print(row)
             
             dataTxt.layer.borderWidth = 2.0
-            dataTxt.layer.borderColor = UIColor("#4b4b4b").cgColor
+            dataTxt.layer.borderColor = UIColor(TEXTBORDER).cgColor
             dataTxt.backgroundColor = UIColor.black
             dataTxt.textColor = UIColor.white
             
