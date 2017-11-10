@@ -145,7 +145,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="peJ-6q-f4x">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ay1-4r-oEw" customClass="PickerImageView" customModule="bm" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ay1-4r-oEw" customClass="ImagePickerView" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="10" y="10" width="120" height="108"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -952,7 +952,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="1e9-BV-qGW">
-                                <rect key="frame" x="87" y="144" width="200" height="42"/>
+                                <rect key="frame" x="87.5" y="144" width="200" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="8Gu-de-wo0"/>
                                     <constraint firstAttribute="height" constant="42" id="fMW-xd-C8M"/>

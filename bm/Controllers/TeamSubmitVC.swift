@@ -8,12 +8,14 @@
 
 import UIKit
 
-class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var featuredView: PickerImageView!
+    @IBOutlet weak var featuredView: ImagePickerView!
+    
+    var imagePicker: UIImagePickerController = UIImagePickerController()
     
     let sections: [String] = ["", "聯絡資訊", "所在地", "打球時間", "臨打說明", "其他說明"]
     let rows: [[String]] = [
@@ -32,13 +34,9 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.delegate = self
         tableView.dataSource = self
         
+        imagePicker.delegate = self
+        featuredView.gallery = imagePicker
         featuredView.delegate = self
-        //let imagePickerViewGesture = UITapGestureRecognizer(target: self, action: #selector(TeamSubmitVC.showImageMenu(_:)))
-        //self.featuredView.addGestureRecognizer(imagePickerViewGesture)
-    }
-    
-    @objc func showImageMenu(_ sender: UITapGestureRecognizer) {
-        print("click")
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
