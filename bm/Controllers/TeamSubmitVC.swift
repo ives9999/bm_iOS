@@ -134,6 +134,13 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         cell.layer.backgroundColor = UIColor.clear.cgColor
     }
     
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            featuredView.setPickedImage(image: pickedImage)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let edit: EditProfileVC = segue.destination as! EditProfileVC {
             edit.key = sender as! String

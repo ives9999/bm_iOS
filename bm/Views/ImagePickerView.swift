@@ -15,12 +15,19 @@ class ImagePickerView: UIView {
     
     var noPhotoImageView: UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
     var noPhotoLbl: MyLabel = MyLabel(frame: CGRect(x:0, y: 0, width: 100, height: 30), fontName: FONT_NAME, fontSize: 14)
+    var imageView: UIImageView = UIImageView(frame: CGRect.zero)
     var delegate: UIViewController?
     var gallery: UIImagePickerController?
     
     func setupView() {
         self.backgroundColor = UIColor.black
         _dashedborder()
+        
+        imageView.frame = self.bounds
+        imageView.contentMode = .scaleAspectFit
+        imageView.isHidden = true
+        self.addSubview(imageView)
+        
         let padding: CGFloat = 10
         var x: CGFloat = (self.frame.width - noPhotoImageView.frame.width) / 2
         var y: CGFloat = (self.frame.height - (noPhotoImageView.frame.height + padding + noPhotoLbl.frame.height)) / 2
@@ -59,11 +66,13 @@ class ImagePickerView: UIView {
         print("touch end")
         let alert: UIAlertController = UIAlertController(title: "", message: "新增圖片從", preferredStyle: .actionSheet)
         let pictureAction: UIAlertAction = UIAlertAction(title: "照片", style: .default) { (action) in
-            print(action)
+            //print(action)
             self.openGallery()
         }
         alert.addAction(pictureAction)
-        let cameraAction: UIAlertAction = UIAlertAction(title: "相機", style: .default, handler: nil)
+        let cameraAction: UIAlertAction = UIAlertAction(title: "相機", style: .default) { (action) in
+            self.openCamera()
+        }
         alert.addAction(cameraAction)
         let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
@@ -71,10 +80,25 @@ class ImagePickerView: UIView {
     }
     
     func openGallery() {
-        print("aaa")
+        //print("aaa")
         gallery!.sourceType = UIImagePickerControllerSourceType.photoLibrary
         gallery!.allowsEditing = true
         delegate!.present(gallery!, animated: true, completion: nil)
+    }
+    func openCamera() {
+        gallery!.sourceType = UIImagePickerControllerSourceType.camera
+        gallery!.allowsEditing = true
+        gallery!.cameraCaptureMode = .photo
+        gallery!.modalPresentationStyle = .fullScreen
+        delegate!.present(gallery!, animated: true, completion: nil)
+    }
+    
+    func setPickedImage(image: UIImage) {
+        noPhotoImageView.isHidden = true
+        noPhotoLbl.isHidden = true
+        imageView.isHidden = false
+        imageView.image = image
+        self.addSubview(imageView)
     }
     
     private func _dashedborder() {
