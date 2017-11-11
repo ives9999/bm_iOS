@@ -15,6 +15,8 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var featuredView: ImagePickerView!
     
+    var nameTxt: UITextField = UITextField()
+    
     var imagePicker: UIImagePickerController = UIImagePickerController()
     
     let sections: [String] = ["", "聯絡資訊", "所在地", "打球時間", "臨打說明", "其他說明"]
@@ -87,7 +89,7 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
             cell?.selectionStyle = .none
         }
-        //let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        
         let key: String = rows[indexPath.section][indexPath.row]
         let row: [String: String] = Team.instance.info[key]!
         var field: String = ""
@@ -95,30 +97,31 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if let tmp: String = row["ch"] {
             field = tmp
         }
-        /*if let tmp: Any = Team.instance.getData(key: key) {
-            let type: String = row["type"]!
-            if type == "String" {
-                data = tmp as! String
-                if data.count == 0 {
-                    data = "未提供"
-                }
-            } else if type == "Int" {
-                let tmp1 = tmp as! Int
-                if key == VALIDATE_KEY {
-                    data = Member.instance.validateShow(rawValue: tmp1)
-                } else if key == MEMBER_TYPE_KEY {
-                    data = Member.instance.typeShow(rawValue: tmp1)
-                } else {
-                    data = String(tmp1)
-                }
+        let cellFrame: CGRect = (cell?.frame)!
+        let editFrame: CGRect = CGRect(x: 15, y: 0, width: cellFrame.width, height: cellFrame.height)
+        
+        switch indexPath.section {
+        case 0:
+            switch indexPath.row {
+            case 0:
+                nameTxt.frame = editFrame
+                print("field: \(field)")
+                nameTxt.placeholder = field
+                nameTxt.attributedPlaceholder = NSAttributedString(string: field,                                                                       attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+                nameTxt.textColor = UIColor.white
+                
+                cell?.addSubview(nameTxt)
+                break
+            default:
+                print("default")
             }
-        }*/
+        default:
+            print("default")
+        }
         
-        
-        
-        cell!.textLabel!.text = "\(field)"
-        cell!.textLabel!.textColor = UIColor.white
-        cell!.detailTextLabel!.text = "\(data)"
+        //cell!.textLabel!.text = "\(field)"
+        //cell!.textLabel!.textColor = UIColor.white
+        //cell!.detailTextLabel!.text = "\(data)"
         cell!.detailTextLabel!.textColor = UIColor.white
         cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         return cell!
