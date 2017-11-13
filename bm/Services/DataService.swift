@@ -33,6 +33,8 @@ class DataService {
     //var pathes: [String] = [String]()
     //var featureds: [UIImage] = [UIImage]()
     
+    var citys: [City] = [City]()
+    
     func getList(type: String, titleField: String, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         self.downloadImageNum = 0
         let body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
@@ -272,6 +274,28 @@ class DataService {
             } else {
                 completion(false)
                 debugPrint(response.result.error as Any)
+            }
+        }
+    }
+    
+    func getAllCitys(completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app"]
+        Alamofire.request(URL_CITYS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                let jsonArray: [JSON] = json[].arrayValue
+                self.citys = [City]()
+                for city in jsonArray {
+                    let id: Int = city["id"].intValue
+                    let name: String = city["name"].stringValue
+                    self.citys.append(City(id: id, name: name))
+                }
+                
+                completion(true)
             }
         }
     }

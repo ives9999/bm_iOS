@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, CityDelegate {
 
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -30,6 +30,16 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var leaderTxt: SuperTextField = SuperTextField()
     var mobileTxt: NumberTextField = NumberTextField()
     var emailTxt: EMailTextField = EMailTextField()
+    
+    var city_id: Int = 0
+    var city_name: String = ""
+    var selectedCity: City = City(id: 0, name: "")
+    
+    func setData(id: Int, name: String) {
+        let city = City(id: id, name: name)
+        self.selectedCity = city
+        self.tableView.reloadData()
+    }
     
     convenience init() {
         self.init(nibName:nil, bundle:nil)
@@ -167,6 +177,10 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             cell.textLabel!.text = "\(field)"
             switch indexPath.row {
             case 0:
+                print(selectedCity.name)
+                if selectedCity.name.count > 0 {
+                    cell.detailTextLabel?.text = selectedCity.name
+                }
                 cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 break
             case 1:
@@ -191,15 +205,15 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         case 0:
             break
         case 1:
+            break
+        case 2:
             switch indexPath.row {
             case 0:
-                print(indexPath.row)
-                //leaderTxt.becomeFirstResponder()
+                performSegue(withIdentifier: TO_CITY, sender: self)
                 break
             default:
                 print("click")
             }
-            break
         default:
             print("click")
         }
@@ -217,8 +231,10 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let edit: EditProfileVC = segue.destination as! EditProfileVC {
-            edit.key = sender as! String
+        if segue.identifier == TO_CITY {
+            if let cityVC: CityVC = segue.destination as? CityVC {
+                cityVC.delegate = self
+            }
         }
     }
     

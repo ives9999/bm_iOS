@@ -21,6 +21,7 @@ let URL_SHOW = "\(URL_HOME)%@/show/%@?device=app"
 let URL_LOGIN = URL_HOME + "login"
 let URL_REGISTER = URL_HOME + "register"
 let URL_MEMBER_UPDATE = URL_HOME + "member/update"
+let URL_CITYS = URL_HOME + "citys"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"
@@ -48,6 +49,7 @@ let MENU_TABLE: String = "meunTable"
 let TO_PROFILE: String = "toProfile"
 let TO_EDIT_PROFILE: String = "toEditProfile"
 let TO_TEAM_SUBMIT: String = "toTeamSubmit"
+let TO_CITY: String = "toCity"
 
 // color
 let MY_GREEN = "#a6d903"
