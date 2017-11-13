@@ -22,6 +22,7 @@ let URL_LOGIN = URL_HOME + "login"
 let URL_REGISTER = URL_HOME + "register"
 let URL_MEMBER_UPDATE = URL_HOME + "member/update"
 let URL_CITYS = URL_HOME + "citys"
+let URL_ARENA_BY_CITY_ID = URL_HOME + "arena_by_city"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"
@@ -50,6 +51,7 @@ let TO_PROFILE: String = "toProfile"
 let TO_EDIT_PROFILE: String = "toEditProfile"
 let TO_TEAM_SUBMIT: String = "toTeamSubmit"
 let TO_CITY: String = "toCity"
+let TO_ARENA: String = "toArena"
 
 // color
 let MY_GREEN = "#a6d903"

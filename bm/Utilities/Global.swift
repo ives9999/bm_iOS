@@ -200,7 +200,11 @@ extension Date {
 }
 
 protocol CityDelegate: class {
-    func setData(id: Int, name: String)
+    func setCityData(id: Int, name: String)
+}
+
+protocol ArenaDelegate: class {
+    func setArenaData(id: Int, name: String)
 }
 
 

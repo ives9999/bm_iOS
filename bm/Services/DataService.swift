@@ -34,6 +34,7 @@ class DataService {
     //var featureds: [UIImage] = [UIImage]()
     
     var citys: [City] = [City]()
+    var arenas: [Arena] = [Arena]()
     
     func getList(type: String, titleField: String, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         self.downloadImageNum = 0
@@ -293,6 +294,28 @@ class DataService {
                     let id: Int = city["id"].intValue
                     let name: String = city["name"].stringValue
                     self.citys.append(City(id: id, name: name))
+                }
+                
+                completion(true)
+            }
+        }
+    }
+    
+    func getArenaByCityID(city_id: Int, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app", "city": city_id]
+        Alamofire.request(URL_ARENA_BY_CITY_ID, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                let jsonArray: [JSON] = json[].arrayValue
+                self.arenas = [Arena]()
+                for arena in jsonArray {
+                    let id: Int = arena["id"].intValue
+                    let name: String = arena["name"].stringValue
+                    self.arenas.append(Arena(id: id, name: name))
                 }
                 
                 completion(true)

@@ -35,6 +35,8 @@
 		B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38E51FB785FE0003F083 /* EMailTextField.swift */; };
 		B3ED38E81FB852EB0003F083 /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38E71FB852EB0003F083 /* FormCell.swift */; };
 		B3ED38EA1FB87EE50003F083 /* TeamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38E91FB87EE50003F083 /* TeamService.swift */; };
+		B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38EB1FB9AB9D0003F083 /* Arena.swift */; };
+		B3ED38F01FB9AD460003F083 /* ArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38EF1FB9AD460003F083 /* ArenaVC.swift */; };
 		B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */; };
 		B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222F1F91DE7300A8C402 /* Show_IN.swift */; };
 		F07CD1A1BB728D94904CA85F /* Pods_bm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5D58D06320800C79615904 /* Pods_bm.framework */; };
@@ -120,6 +122,8 @@
 		B3ED38E51FB785FE0003F083 /* EMailTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMailTextField.swift; sourceTree = "<group>"; };
 		B3ED38E71FB852EB0003F083 /* FormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
 		B3ED38E91FB87EE50003F083 /* TeamService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamService.swift; sourceTree = "<group>"; };
+		B3ED38EB1FB9AB9D0003F083 /* Arena.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arena.swift; sourceTree = "<group>"; };
+		B3ED38EF1FB9AD460003F083 /* ArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaVC.swift; sourceTree = "<group>"; };
 		B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVC.swift; sourceTree = "<group>"; };
 		B3F2222F1F91DE7300A8C402 /* Show_IN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show_IN.swift; sourceTree = "<group>"; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				B3ED38D61FB2A3E80003F083 /* EditProfileVC.swift */,
 				F94FF4341FB4322C00D167B6 /* TeamSubmitVC.swift */,
 				F96931981FB958110005C13F /* CityVC.swift */,
+				B3ED38EF1FB9AD460003F083 /* ArenaVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -337,6 +342,7 @@
 				B375105A1FA96C0500CDF1A0 /* Member.swift */,
 				B3ED38D81FB463D00003F083 /* Team.swift */,
 				F96931961FB953960005C13F /* City.swift */,
+				B3ED38EB1FB9AB9D0003F083 /* Arena.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -578,6 +584,7 @@
 				F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */,
 				B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
+				B3ED38F01FB9AD460003F083 /* ArenaVC.swift in Sources */,
 				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
 				B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */,
 				B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */,
@@ -591,6 +598,7 @@
 				B3ED38D91FB463D00003F083 /* Team.swift in Sources */,
 				F96931991FB958110005C13F /* CityVC.swift in Sources */,
 				B3ED38D71FB2A3E80003F083 /* EditProfileVC.swift in Sources */,
+				B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */,
 				B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

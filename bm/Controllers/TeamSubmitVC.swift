@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SCLAlertView
 
-class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, CityDelegate {
+class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, CityDelegate, ArenaDelegate {
 
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -34,10 +35,16 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var city_id: Int = 0
     var city_name: String = ""
     var selectedCity: City = City(id: 0, name: "")
+    var selectedArena: Arena = Arena(id: 0, name: "")
     
-    func setData(id: Int, name: String) {
+    func setCityData(id: Int, name: String) {
         let city = City(id: id, name: name)
         self.selectedCity = city
+        self.tableView.reloadData()
+    }
+    func setArenaData(id: Int, name: String) {
+        let arena = Arena(id: id, name: name)
+        self.selectedArena = arena
         self.tableView.reloadData()
     }
     
@@ -60,7 +67,7 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.delegate = self
         tableView.dataSource = self
         
-        tableView.register(FormCell.self, forCellReuseIdentifier: "cell")
+        //tableView.register(FormCell.self, forCellReuseIdentifier: "cell")
         
         imagePicker.delegate = self
         featuredView.gallery = imagePicker
@@ -119,12 +126,12 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: FormCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! FormCell
-//        if cell == nil {
-//            //print("cell is nil")
-//            cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-//            cell?.selectionStyle = .none
-//        }
+        var cell: FormCell? = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell
+        if cell == nil {
+            print("cell is nil")
+            cell = FormCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
+            //cell?.selectionStyle = .none
+        }
         
         let key: String = rows[indexPath.section][indexPath.row]
         let row: [String: String] = Team.instance.info[key]!
@@ -133,7 +140,7 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if let tmp: String = row["ch"] {
             field = tmp
         }
-        let cellFrame: CGRect = cell.frame
+        let cellFrame: CGRect = cell!.frame
         var editFrame: CGRect = CGRect(x: 15, y: 0, width: cellFrame.width, height: cellFrame.height)
         
         switch indexPath.section {
@@ -143,14 +150,14 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 nameTxt.frame = editFrame
                 //print("field: \(field)")
                 nameTxt.placeholder(field)
-                cell.addSubview(nameTxt)
+                cell!.addSubview(nameTxt)
                 break
             default:
                 print("default")
             }
             break;
         case 1:
-            cell.textLabel!.text = "\(field)"
+            cell!.textLabel!.text = "\(field)"
             let width: CGFloat = 250
             editFrame = CGRect(x: cellFrame.width - width, y: 0, width: width, height: cellFrame.height)
             var txt: SuperTextField = SuperTextField()
@@ -170,21 +177,23 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             default:
                 print("default")
             }
-            cell.textLabel?.text = field
-            cell.addSubview(txt)
+            cell!.textLabel?.text = field
+            cell!.addSubview(txt)
             break;
         case 2:
-            cell.textLabel!.text = "\(field)"
+            cell!.textLabel!.text = "\(field)"
             switch indexPath.row {
             case 0:
-                print(selectedCity.name)
                 if selectedCity.name.count > 0 {
-                    cell.detailTextLabel?.text = selectedCity.name
+                    cell!.detailTextLabel?.text = selectedCity.name
                 }
-                cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+                cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 break
             case 1:
-                cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+                if selectedArena.name.count > 0 {
+                    cell!.detailTextLabel?.text = selectedArena.name
+                }
+                cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 break
             default:
                 print("default")
@@ -194,7 +203,7 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         
         //cell!.detailTextLabel!.text = "\(data)"
-        return cell
+        return cell!
         
     }
     
@@ -209,10 +218,15 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         case 2:
             switch indexPath.row {
             case 0:
-                performSegue(withIdentifier: TO_CITY, sender: self)
+                performSegue(withIdentifier: TO_CITY, sender: nil)
                 break
             default:
-                print("click")
+                if selectedCity.id == 0 {
+                    SCLAlertView().showError("錯誤", subTitle: "請先選擇區域")
+                } else {
+                    performSegue(withIdentifier: TO_ARENA, sender: selectedCity.id)
+                }
+                break
             }
         default:
             print("click")
@@ -234,6 +248,11 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if segue.identifier == TO_CITY {
             if let cityVC: CityVC = segue.destination as? CityVC {
                 cityVC.delegate = self
+            }
+        } else if segue.identifier == TO_ARENA {
+            if let arenaVC: ArenaVC = segue.destination as? ArenaVC {
+                arenaVC.delegate = self
+                arenaVC.city_id = sender as! Int
             }
         }
     }

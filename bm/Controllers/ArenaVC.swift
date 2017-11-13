@@ -1,5 +1,5 @@
 //
-//  CityVC.swift
+//  ArenaVC.swift
 //  bm
 //
 //  Created by ives on 2017/11/13.
@@ -8,23 +8,31 @@
 
 import UIKit
 
-class CityVC: UITableViewController {
+class ArenaVC: UITableViewController {
     
-    var citys: [City] = [City]()
-    weak var delegate: CityDelegate?
-    
+    var arenas: [Arena] = [Arena]()
+    var city_id: Int = 0
+    weak var delegate: ArenaDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         Global.instance.addSpinner(superView: self.tableView)
-        DataService.instance.getAllCitys { (success) in
+        print(city_id)
+        DataService.instance.getArenaByCityID(city_id: city_id) { (success) in
             if success {
-                self.citys = DataService.instance.citys
+                self.arenas = DataService.instance.arenas
                 //print(self.citys)
                 self.tableView.reloadData()
                 Global.instance.removeSpinner(superView: self.tableView)
             }
         }
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
@@ -35,27 +43,25 @@ class CityVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print(citys.count)
-        return citys.count
+        // #warning Incomplete implementation, return the number of rows
+        return arenas.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
-        //print(citys[indexPath.row].name)
-        cell.textLabel!.text = citys[indexPath.row].name
+        
+        cell.textLabel!.text = arenas[indexPath.row].name
         cell.textLabel!.textColor = UIColor.white
-
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let city: City = citys[indexPath.row]
-        delegate?.setCityData(id: city.id, name: city.name)
+        let arena: Arena = arenas[indexPath.row]
+        delegate?.setArenaData(id: arena.id, name: arena.name)
         dismiss(animated: true, completion: nil)
     }
-    
 
     /*
     // Override to support conditional editing of the table view.
