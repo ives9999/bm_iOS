@@ -146,6 +146,10 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    func getSelf() -> UIViewController {
+        return self
+    }
 }
 
 extension UserDefaults {

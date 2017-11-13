@@ -8,14 +8,12 @@
 
 import UIKit
 
-class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var featuredView: ImagePickerView!
-    
-    var nameTxt: UITextField = UITextField()
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
     
@@ -28,6 +26,22 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         [TEAM_TEMP_FEE_M_KEY, TEAM_TEMP_FEE_F_KEY, TEAM_TEMP_CONTENT_KEY],
         [TEAM_BALL_KEY, TEAM_DEGREE_KEY, TEAM_CHARGE_KEY, TEAM_CONTENT_KEY]
     ]
+    var nameTxt: SuperTextField = SuperTextField()
+    var leaderTxt: SuperTextField = SuperTextField()
+    var mobileTxt: NumberTextField = NumberTextField()
+    var emailTxt: EMailTextField = EMailTextField()
+    
+    convenience init() {
+        self.init(nibName:nil, bundle:nil)
+    }
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        //nameTxt = SuperTextField()
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    required init?(coder aDecoder: NSCoder) {
+        //nameTxt = SuperTextField()
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +50,22 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         tableView.delegate = self
         tableView.dataSource = self
         
+        tableView.register(FormCell.self, forCellReuseIdentifier: "cell")
+        
         imagePicker.delegate = self
         featuredView.gallery = imagePicker
         featuredView.delegate = self
+        
+        hideKeyboardWhenTappedAround()
+        
+        nameTxt.father = self
+        //nameTxt.setupView()
+        leaderTxt.father = self
+        mobileTxt.father = self
+        emailTxt.father = self
     }
+    
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return sections.count
@@ -83,34 +109,68 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "cell")
-        if cell == nil {
-            //print("cell is nil")
-            cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-            cell?.selectionStyle = .none
-        }
+        let cell: FormCell = tableView.dequeueReusableCell(withIdentifier: "cell") as! FormCell
+//        if cell == nil {
+//            //print("cell is nil")
+//            cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
+//            cell?.selectionStyle = .none
+//        }
         
         let key: String = rows[indexPath.section][indexPath.row]
         let row: [String: String] = Team.instance.info[key]!
         var field: String = ""
-        var data: String = ""
+        //var data: String = ""
         if let tmp: String = row["ch"] {
             field = tmp
         }
-        let cellFrame: CGRect = (cell?.frame)!
-        let editFrame: CGRect = CGRect(x: 15, y: 0, width: cellFrame.width, height: cellFrame.height)
+        let cellFrame: CGRect = cell.frame
+        var editFrame: CGRect = CGRect(x: 15, y: 0, width: cellFrame.width, height: cellFrame.height)
         
         switch indexPath.section {
         case 0:
             switch indexPath.row {
             case 0:
                 nameTxt.frame = editFrame
-                print("field: \(field)")
-                nameTxt.placeholder = field
-                nameTxt.attributedPlaceholder = NSAttributedString(string: field,                                                                       attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
-                nameTxt.textColor = UIColor.white
-                
-                cell?.addSubview(nameTxt)
+                //print("field: \(field)")
+                nameTxt.placeholder(field)
+                cell.addSubview(nameTxt)
+                break
+            default:
+                print("default")
+            }
+            break;
+        case 1:
+            cell.textLabel!.text = "\(field)"
+            let width: CGFloat = 250
+            editFrame = CGRect(x: cellFrame.width - width, y: 0, width: width, height: cellFrame.height)
+            var txt: SuperTextField = SuperTextField()
+            switch indexPath.row {
+            case 0:
+                leaderTxt.frame = editFrame
+                txt = leaderTxt
+                break
+            case 1:
+                mobileTxt.frame = editFrame
+                txt = mobileTxt
+                break
+            case 2:
+                emailTxt.frame = editFrame
+                txt = emailTxt
+                break
+            default:
+                print("default")
+            }
+            cell.textLabel?.text = field
+            cell.addSubview(txt)
+            break;
+        case 2:
+            cell.textLabel!.text = "\(field)"
+            switch indexPath.row {
+            case 0:
+                cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+                break
+            case 1:
+                cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 break
             default:
                 print("default")
@@ -119,22 +179,34 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             print("default")
         }
         
-        //cell!.textLabel!.text = "\(field)"
-        //cell!.textLabel!.textColor = UIColor.white
         //cell!.detailTextLabel!.text = "\(data)"
-        cell!.detailTextLabel!.textColor = UIColor.white
-        cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        return cell!
+        return cell
         
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let key: String = rows[indexPath.section][indexPath.row]
-        performSegue(withIdentifier: TO_EDIT_PROFILE, sender: key)
+        //let key: String = rows[indexPath.section][indexPath.row]
+        //performSegue(withIdentifier: TO_EDIT_PROFILE, sender: key)
+        switch indexPath.section {
+        case 0:
+            break
+        case 1:
+            switch indexPath.row {
+            case 0:
+                print(indexPath.row)
+                //leaderTxt.becomeFirstResponder()
+                break
+            default:
+                print("click")
+            }
+            break
+        default:
+            print("click")
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.layer.backgroundColor = UIColor.clear.cgColor
+        //cell.layer.backgroundColor = UIColor.clear.cgColor
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
