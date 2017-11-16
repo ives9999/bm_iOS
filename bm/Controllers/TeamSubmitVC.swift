@@ -20,7 +20,7 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     let sections: [String] = ["", "聯絡資訊", "所在地", "打球時間", "臨打說明", "其他說明"]
     let rows: [[String]] = [
-        [TEAM_NAME_KEY],
+        [TEAM_NAME_KEY, ""],
         [TEAM_LEADER_KEY, TEAM_MOBILE_KEY, TEAM_EMAIL_KEY],
         [TEAM_ZONE_ID_KEY, TEAM_ARENA_ID_KEY],
         [TEAM_DAY_KEY, TEAM_PLAY_START_KEY, TEAM_PLAY_END_KEY],
@@ -213,19 +213,28 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         
         let key: String = rows[indexPath.section][indexPath.row]
-        let row: [String: String] = Team.instance.info[key]!
+        var row: [String: String]? = Team.instance.info[key]
+        if row == nil {
+            row = [String: String]()
+        }
         var field: String = ""
         //var data: String = ""
-        if let tmp: String = row["ch"] {
+        if let tmp: String = row?["ch"] {
             field = tmp
         }
         cell!.textLabel!.text = field
         let cellFrame: CGRect = cell!.frame
-        let yPadding: CGFloat = 10
+        print("cell width: \(cellFrame.width)")
+        let yPadding: CGFloat = 5
         let xPadding: CGFloat = 20
-        let xLabelWidth:CGFloat = cell!.textLabel!.frame.width
-        let txtWidth:CGFloat = cellFrame.width - xLabelWidth - xPadding
-        var editFrame: CGRect = CGRect(x: cellFrame.width - txtWidth, y: 0, width: txtWidth, height: cellFrame.height-yPadding)
+        let xLabelWidth: CGFloat = 50
+        //let xLabelWidth: CGFloat = cell!.textLabel!.frame.size.width
+        print("xLabelWidth: \(xLabelWidth)")
+        let txtWidth: CGFloat = cellFrame.width - xLabelWidth - xPadding
+        print("txtWidth: \(txtWidth)")
+        let x = xLabelWidth + xPadding
+        print("x: \(x)")
+        var editFrame: CGRect = CGRect(x: x, y: 0, width: txtWidth, height: cellFrame.height-yPadding)
         
         switch indexPath.section {
         case 0:  //名稱
@@ -233,6 +242,11 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             case 0:
                 nameTxt.frame = editFrame
                 cell!.addSubview(nameTxt)
+                break
+            case 1:
+                let txt = SuperTextField()
+                txt.frame = CGRect(x: 0, y: 0, width: cellFrame.width, height: cellFrame.height)
+                cell!.addSubview(txt)
                 break
             default:
                 print("default")
