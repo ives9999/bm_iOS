@@ -1,42 +1,38 @@
 //
-//  ArenaVC.swift
+//  TimeSelectVC.swift
 //  bm
 //
-//  Created by ives on 2017/11/13.
+//  Created by ives on 2017/11/14.
 //  Copyright © 2017年 bm. All rights reserved.
 //
 
 import UIKit
 
-class ArenaVC: UITableViewController {
+class TimeSelectVC: UITableViewController {
     
-    var arenas: [Arena] = [Arena]()
-    var city_id: Int = 0
-    weak var delegate: ArenaDelegate?
+    var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
+    let times: [String] = ["07:00","07:30","08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00",
+                           "12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30",
+                           "18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00","22:30","23:00"
+                        ]
+    var delegate: TimeSelectDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+        var title: String = ""
+        switch type {
+        case .play_start:
+            title = "開始時間"
+            break
+        case .play_end:
+            title = "結束時間"
+            break
+        }
+        self.title = title
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-        
-        Global.instance.addSpinner(superView: self.tableView)
-        DataService.instance.getArenaByCityID(city_id: city_id) { (success) in
-            if success {
-                self.arenas = DataService.instance.arenas
-                //print(self.citys)
-                self.tableView.reloadData()
-                Global.instance.removeSpinner(superView: self.tableView)
-            }
-        }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
     @objc func back() {
         dismiss(animated: true, completion: nil)
     }
@@ -50,24 +46,25 @@ class ArenaVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return arenas.count
+        return times.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel!.text = arenas[indexPath.row].name
-        cell.textLabel!.textColor = UIColor.white
-        
+
+        cell.textLabel?.text = times[indexPath.row]
+        cell.textLabel?.textColor = UIColor.white
+
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let arena: Arena = arenas[indexPath.row]
-        delegate?.setArenaData(id: arena.id, name: arena.name)
-        back()
+        let time: String = times[indexPath.row]
+        delegate?.setTimeData(time: time, type: type)
+        dismiss(animated: true, completion: nil)
     }
+    
 
     /*
     // Override to support conditional editing of the table view.

@@ -1,44 +1,56 @@
 //
-//  ArenaVC.swift
+//  DegreeSelectVC.swift
 //  bm
 //
-//  Created by ives on 2017/11/13.
+//  Created by ives on 2017/11/15.
 //  Copyright © 2017年 bm. All rights reserved.
 //
 
 import UIKit
+import SCLAlertView
 
-class ArenaVC: UITableViewController {
+class DegreeSelectVC: UITableViewController {
+
+    var degrees: [[String: Any]] = [[String: Any]]()
+    var delegate: DegreeSelectDelegate?
     
-    var arenas: [Arena] = [Arena]()
-    var city_id: Int = 0
-    weak var delegate: ArenaDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let tmps:[[String: String]] = DEGREE.all()
+        for item in tmps {
+            for (key, value) in item {
+                degrees.append(["key": key, "value": value, "checked": false]);
+            }
+        }
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
-        Global.instance.addSpinner(superView: self.tableView)
-        DataService.instance.getArenaByCityID(city_id: city_id) { (success) in
-            if success {
-                self.arenas = DataService.instance.arenas
-                //print(self.citys)
-                self.tableView.reloadData()
-                Global.instance.removeSpinner(superView: self.tableView)
-            }
-        }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(submit))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
     }
-    
     @objc func back() {
         dismiss(animated: true, completion: nil)
+    }
+    @objc func submit() {
+        //print(days)
+        var isSelected: Bool = false
+        var res: [DEGREE] = [DEGREE]()
+        for degree in degrees {
+            //print(day)
+            if degree["checked"] as! Bool {
+                let key: String = degree["key"] as! String
+                res.append(DEGREE.enumFronString(string: key))
+                isSelected = true
+            }
+        }
+        if !isSelected {
+            SCLAlertView().showWarning("警告", subTitle: "沒有選擇任何的球友程度，或請按取消回上一頁")
+        } else {
+            self.delegate?.setDegreeData(degree: res)
+            back()
+        }
     }
 
     // MARK: - Table view data source
@@ -50,24 +62,34 @@ class ArenaVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return arenas.count
+        return degrees.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel!.text = arenas[indexPath.row].name
+
+        cell.textLabel!.text = degrees[indexPath.row]["value"] as! String
         cell.textLabel!.textColor = UIColor.white
-        
+
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let arena: Arena = arenas[indexPath.row]
-        delegate?.setArenaData(id: arena.id, name: arena.name)
-        back()
+        let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+        
+        if cell.accessoryType == .checkmark {
+            cell.accessoryType = .none
+            cell.textLabel?.textColor = UIColor.white
+            cell.tintColor = UIColor.white
+            degrees[indexPath.row]["checked"] = false
+        } else {
+            cell.accessoryType = .checkmark
+            cell.textLabel?.textColor = UIColor(MY_GREEN)
+            cell.tintColor = UIColor(MY_GREEN)
+            degrees[indexPath.row]["checked"] = true
+        }
     }
+    
 
     /*
     // Override to support conditional editing of the table view.

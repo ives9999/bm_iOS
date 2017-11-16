@@ -52,6 +52,10 @@ let TO_EDIT_PROFILE: String = "toEditProfile"
 let TO_TEAM_SUBMIT: String = "toTeamSubmit"
 let TO_CITY: String = "toCity"
 let TO_ARENA: String = "toArena"
+let TO_DAY: String = "toDay"
+let TO_SELECT_TIME: String = "toSelectTime"
+let TO_TEXT_INPUT: String = "toTextInput"
+let TO_SELECT_DEGREE: String = "toSelectDegree"
 
 // color
 let MY_GREEN = "#a6d903"

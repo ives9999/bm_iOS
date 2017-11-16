@@ -10,8 +10,13 @@ import UIKit
 
 class NumberTextField: SuperTextField {
 
+    convenience init(align: NSTextAlignment) {
+        self.init(frame: CGRect.zero)
+        self.textAlignment = align
+    }
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.textAlignment = .right
         self.keyboardType = UIKeyboardType.numberPad
         setupView()
     }

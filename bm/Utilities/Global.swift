@@ -33,6 +33,35 @@ enum SEX: String {
 enum MEMBER_ROLE: String {
     case member, sale, designer, manager, admin
 }
+enum SELECT_TIME_TYPE: Int {
+    case play_start, play_end
+}
+enum TEXT_INPUT_TYPE: Int {
+    case temp_play, charge, team
+}
+enum DEGREE: String {
+    case new = "新手"
+    case soso = "普通"
+    case high = "高手"
+    
+    static func enumFronString(string: String) -> DEGREE {
+        switch string {
+        case "new" :
+            return self.new
+        case "soso" :
+            return self.soso
+        case "high":
+            return self.high
+        default :
+            return self.high
+        }
+    }
+    static func all() -> [[String: String]] {
+        return [
+            ["new": "新手"], ["soso": "普通"], ["high": "高手"]
+        ]
+    }
+}
 
 class Global {
     
@@ -199,12 +228,34 @@ extension Date {
     }
 }
 
+extension CGRect {
+    func change(x: CGRect) {
+        
+    }
+}
+
 protocol CityDelegate: class {
     func setCityData(id: Int, name: String)
 }
 
 protocol ArenaDelegate: class {
     func setArenaData(id: Int, name: String)
+}
+
+protocol DaysDelegate: class {
+    func setDaysData(res: [Int: String])
+}
+
+protocol TimeSelectDelegate: class {
+    func setTimeData(time: String, type: SELECT_TIME_TYPE)
+}
+
+protocol TextInputDelegate: class {
+    func setTextInputData(text: String, type: TEXT_INPUT_TYPE)
+}
+
+protocol DegreeSelectDelegate: class {
+    func setDegreeData(degree: [DEGREE])
 }
 
 

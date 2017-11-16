@@ -16,6 +16,9 @@ class CityVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
+        navigationItem.leftBarButtonItem?.tintColor = UIColor.black
+        
         Global.instance.addSpinner(superView: self.tableView)
         DataService.instance.getAllCitys { (success) in
             if success {
@@ -25,6 +28,10 @@ class CityVC: UITableViewController {
                 Global.instance.removeSpinner(superView: self.tableView)
             }
         }
+    }
+    
+    @objc func back() {
+        dismiss(animated: true, completion: nil)
     }
 
     // MARK: - Table view data source
@@ -53,7 +60,7 @@ class CityVC: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let city: City = citys[indexPath.row]
         delegate?.setCityData(id: city.id, name: city.name)
-        dismiss(animated: true, completion: nil)
+        back()
     }
     
 

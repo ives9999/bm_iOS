@@ -1,44 +1,60 @@
 //
-//  ArenaVC.swift
+//  DayVC.swift
 //  bm
 //
-//  Created by ives on 2017/11/13.
+//  Created by ives on 2017/11/14.
 //  Copyright © 2017年 bm. All rights reserved.
 //
 
 import UIKit
+import UIColor_Hex_Swift
+import SCLAlertView
 
-class ArenaVC: UITableViewController {
+class DayVC: UITableViewController {
+
+    weak var delegate: DaysDelegate?
+    var days: [[String: Any]] = [
+        ["value": 1, "text": "星期一", "checked": false],
+        ["value": 2, "text": "星期二", "checked": false],
+        ["value": 3, "text": "星期三", "checked": false],
+        ["value": 4, "text": "星期四", "checked": false],
+        ["value": 5, "text": "星期五", "checked": false],
+        ["value": 6, "text": "星期六", "checked": false],
+        ["value": 7, "text": "星期日", "checked": false]
+    ]
     
-    var arenas: [Arena] = [Arena]()
-    var city_id: Int = 0
-    weak var delegate: ArenaDelegate?
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
-        Global.instance.addSpinner(superView: self.tableView)
-        DataService.instance.getArenaByCityID(city_id: city_id) { (success) in
-            if success {
-                self.arenas = DataService.instance.arenas
-                //print(self.citys)
-                self.tableView.reloadData()
-                Global.instance.removeSpinner(superView: self.tableView)
-            }
-        }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(submit))
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
     }
     
     @objc func back() {
         dismiss(animated: true, completion: nil)
+    }
+    @objc func submit() {
+        //print(days)
+        var isSelected: Bool = false
+        var res: [Int: String] = [Int: String]()
+        for day in days {
+            //print(day)
+            if day["checked"] as! Bool {
+                let idx: Int = day["value"] as! Int
+                let text: String = day["text"] as! String
+                res[idx] = text
+                isSelected = true
+            }
+        }
+        if !isSelected {
+            SCLAlertView().showWarning("警告", subTitle: "沒有選擇星期日期，或請按取消回上一頁")
+        } else {
+            self.delegate?.setDaysData(res: res)
+            back()
+        }
     }
 
     // MARK: - Table view data source
@@ -50,24 +66,35 @@ class ArenaVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return arenas.count
+        return days.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel!.text = arenas[indexPath.row].name
+
+        cell.textLabel!.text = (days[indexPath.row]["text"] as! String)
         cell.textLabel!.textColor = UIColor.white
-        
+
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let arena: Arena = arenas[indexPath.row]
-        delegate?.setArenaData(id: arena.id, name: arena.name)
-        back()
+        let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+                
+        if cell.accessoryType == .checkmark {
+            cell.accessoryType = .none
+            cell.textLabel?.textColor = UIColor.white
+            cell.tintColor = UIColor.white
+            days[indexPath.row]["checked"] = false
+        } else {
+            cell.accessoryType = .checkmark
+            cell.textLabel?.textColor = UIColor(MY_GREEN)
+            cell.tintColor = UIColor(MY_GREEN)
+            days[indexPath.row]["checked"] = true
+        }
     }
+    
 
     /*
     // Override to support conditional editing of the table view.
