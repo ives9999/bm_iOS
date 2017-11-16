@@ -33,10 +33,13 @@ class SuperTextField: UITextField {
     }
     
     func setupView() {
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.black
         self.textColor = UIColor.white
         self.font = UIFont(name: fontName, size: fontSize)
         self.createToolbar()
+        self.layer.borderWidth = 1.0
+        self.layer.borderColor = UIColor(TEXTBORDER).cgColor
+        self.setAlign(align: .right)
         
         //self.font = UIFont(name: fontName, size: fontSize)
     }
@@ -62,5 +65,9 @@ class SuperTextField: UITextField {
         flexibleSpace.width = toolbar.frame.width - done.width
         toolbar.items = [flexibleSpace, done]
         self.inputAccessoryView = toolbar
+    }
+    
+    func setAlign(align: NSTextAlignment) {
+        self.textAlignment = align
     }
 }

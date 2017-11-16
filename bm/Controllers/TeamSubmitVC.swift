@@ -219,19 +219,20 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         if let tmp: String = row["ch"] {
             field = tmp
         }
+        cell!.textLabel!.text = field
         let cellFrame: CGRect = cell!.frame
-        var editFrame: CGRect = CGRect(x: 15, y: 0, width: cellFrame.width, height: cellFrame.height)
+        let yPadding: CGFloat = 10
+        let xPadding: CGFloat = 20
+        let xLabelWidth:CGFloat = cell!.textLabel!.frame.width
+        let txtWidth:CGFloat = cellFrame.width - xLabelWidth - xPadding
+        var editFrame: CGRect = CGRect(x: cellFrame.width - txtWidth, y: 0, width: txtWidth, height: cellFrame.height-yPadding)
         
-        cell!.textLabel!.text = "\(field)"
         switch indexPath.section {
         case 0:  //名稱
             switch indexPath.row {
             case 0:
-                cell!.textLabel!.text = ""
                 nameTxt.frame = editFrame
-                nameTxt.placeholder(field)
                 cell!.addSubview(nameTxt)
-                cell!.accessoryType = UITableViewCellAccessoryType.none
                 break
             default:
                 print("default")
@@ -257,6 +258,7 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             default:
                 print("default")
             }
+            txt.setAlign(align: .right)
             cell!.addSubview(txt)
             break;
         case 2:  //所在地
@@ -327,6 +329,7 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 let width: CGFloat = 250
                 editFrame = CGRect(x: cellFrame.width - width, y: 0, width: width, height: cellFrame.height)
                 ballTxt.frame = editFrame
+                ballTxt.setAlign(align: .right)
                 cell!.addSubview(ballTxt)
                 break
             case 1:   //球友程度
