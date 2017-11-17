@@ -20,7 +20,7 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     let sections: [String] = ["", "聯絡資訊", "所在地", "打球時間", "臨打說明", "其他說明"]
     let rows: [[String]] = [
-        [TEAM_NAME_KEY, ""],
+        [TEAM_NAME_KEY],
         [TEAM_LEADER_KEY, TEAM_MOBILE_KEY, TEAM_EMAIL_KEY],
         [TEAM_ZONE_ID_KEY, TEAM_ARENA_ID_KEY],
         [TEAM_DAY_KEY, TEAM_PLAY_START_KEY, TEAM_PLAY_END_KEY],
@@ -29,7 +29,6 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     ]
     var nameTxt: SuperTextField = SuperTextField()
     
-    var leaderTxt: SuperTextField = SuperTextField()
     var mobileTxt: NumberTextField = NumberTextField()
     var emailTxt: EMailTextField = EMailTextField()
     
@@ -50,6 +49,8 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var degree: [DEGREE] = [DEGREE]()
     var charge: String = ""
     var team: String = ""
+    
+    var cell_width: CGFloat?
     
     func setCityData(id: Int, name: String) {
         let city = City(id: id, name: name)
@@ -130,9 +131,11 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         nameTxt.father = self
         //nameTxt.setupView()
-        leaderTxt.father = self
         mobileTxt.father = self
         emailTxt.father = self
+        
+        cell_width = tableView.frame.width
+        //print(cell_width)
     }
     
     
@@ -189,9 +192,6 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             if cell!.subviews.contains(nameTxt) {
                 nameTxt.removeFromSuperview()
             }
-            if cell!.subviews.contains(leaderTxt) {
-                leaderTxt.removeFromSuperview()
-            }
             if cell!.subviews.contains(mobileTxt) {
                 mobileTxt.removeFromSuperview()
             }
@@ -223,18 +223,18 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             field = tmp
         }
         cell!.textLabel!.text = field
-        let cellFrame: CGRect = cell!.frame
-        print("cell width: \(cellFrame.width)")
+        let cellFrame: CGRect = cell!.bounds
+        //print("cell width: \(cellFrame.width)")
         let yPadding: CGFloat = 5
-        let xPadding: CGFloat = 20
-        let xLabelWidth: CGFloat = 50
+        //let xPadding: CGFloat = 20
+        //let xLabelWidth: CGFloat = 50
         //let xLabelWidth: CGFloat = cell!.textLabel!.frame.size.width
-        print("xLabelWidth: \(xLabelWidth)")
-        let txtWidth: CGFloat = cellFrame.width - xLabelWidth - xPadding
-        print("txtWidth: \(txtWidth)")
-        let x = xLabelWidth + xPadding
-        print("x: \(x)")
-        var editFrame: CGRect = CGRect(x: x, y: 0, width: txtWidth, height: cellFrame.height-yPadding)
+        //print("xLabelWidth: \(xLabelWidth)")
+        let txtWidth: CGFloat = 280
+        //print("txtWidth: \(txtWidth)")
+        let x = cell_width! - txtWidth
+        //print("x: \(x)")
+        let editFrame: CGRect = CGRect(x: x, y: yPadding, width: txtWidth, height: cellFrame.height-yPadding)
         
         switch indexPath.section {
         case 0:  //名稱
@@ -243,37 +243,39 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 nameTxt.frame = editFrame
                 cell!.addSubview(nameTxt)
                 break
-            case 1:
-                let txt = SuperTextField()
-                txt.frame = CGRect(x: 0, y: 0, width: cellFrame.width, height: cellFrame.height)
-                cell!.addSubview(txt)
-                break
             default:
                 print("default")
             }
             break;
         case 1:  //聯絡資訊
-            let width: CGFloat = 250
-            editFrame = CGRect(x: cellFrame.width - width, y: 0, width: width, height: cellFrame.height)
+            //let width: CGFloat = 250
+            //editFrame = CGRect(x: cellFrame.width - width, y: 0, width: width, height: cellFrame.height)
             var txt: SuperTextField = SuperTextField()
             switch indexPath.row {
             case 0:
-                leaderTxt.frame = editFrame
-                txt = leaderTxt
+                let leaderLbl: MyLabel = MyLabel(frame: editFrame)
+                leaderLbl.text = Member.instance.nickname
+                leaderLbl.setupView()
+                leaderLbl.frame = leaderLbl.frame.setX(cell_width! - leaderLbl.frame.width - 10)
+                //print(leaderLbl.frame.width)
+                //leaderLbl.backgroundColor = UIColor.black
+                //leaderLbl.textAlignment = .right
+                //print(Member.instance.nickname)
+                cell!.addSubview(leaderLbl)
                 break
             case 1:
                 mobileTxt.frame = editFrame
                 txt = mobileTxt
+                cell!.addSubview(txt)
                 break
             case 2:
                 emailTxt.frame = editFrame
                 txt = emailTxt
+                cell!.addSubview(txt)
                 break
             default:
                 print("default")
             }
-            txt.setAlign(align: .right)
-            cell!.addSubview(txt)
             break;
         case 2:  //所在地
             switch indexPath.row {
@@ -316,14 +318,15 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             break
         case 4:  //臨打
             let width: CGFloat = 150
-            editFrame = CGRect(x: cellFrame.width - width, y: 0, width: width, height: cellFrame.height)
+            //let frame = editFrame.setWidth(width)
+            let frame = CGRect(x: cell_width! - width, y: editFrame.origin.y, width: width, height: editFrame.height)
             switch indexPath.row {
             case 0:
-                tempFeeMTxt.frame = editFrame
+                tempFeeMTxt.frame = frame
                 cell!.addSubview(tempFeeMTxt)
                 break
             case 1:
-                tempFeeFTxt.frame = editFrame
+                tempFeeFTxt.frame = frame
                 cell!.addSubview(tempFeeFTxt)
                 break
             case 2:
@@ -340,8 +343,6 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         case 5:  //球隊說明
             switch indexPath.row {
             case 0:   //使用球種
-                let width: CGFloat = 250
-                editFrame = CGRect(x: cellFrame.width - width, y: 0, width: width, height: cellFrame.height)
                 ballTxt.frame = editFrame
                 ballTxt.setAlign(align: .right)
                 cell!.addSubview(ballTxt)
@@ -395,7 +396,6 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         case 1:
             switch indexPath.row {
             case 0:
-                leaderTxt.becomeFirstResponder()
                 break
             case 1:
                 mobileTxt.becomeFirstResponder()
@@ -518,6 +518,12 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     @IBAction func submit(_ sender: Any) {
+        if nameTxt.text?.count == 0 {
+            SCLAlertView().showWarning("提示", subTitle: "請填寫隊名")
+        }
+        if mobileTxt.text?.count == 0 {
+            SCLAlertView().showWarning("提示", subTitle: "請填寫電話")
+        }
     }
     
 

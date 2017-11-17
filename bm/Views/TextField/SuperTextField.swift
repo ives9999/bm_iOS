@@ -13,6 +13,8 @@ class SuperTextField: UITextField {
     var fontName: String = FONT_NAME
     var fontSize: CGFloat = FONT_SIZE_TITLE
     var father: UIViewController?
+    let padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10);
+
     
     convenience init() {
         self.init(frame: CGRect.zero)
@@ -55,6 +57,17 @@ class SuperTextField: UITextField {
     override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         setupView()
+    }
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
+    }
+    
+    override func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return UIEdgeInsetsInsetRect(bounds, padding)
     }
     func createToolbar() {
         let toolbar = UIToolbar()

@@ -229,8 +229,11 @@ extension Date {
 }
 
 extension CGRect {
-    func change(x: CGRect) {
-        
+    func setWidth(_ width: CGFloat) -> CGRect {
+        return CGRect(x: self.origin.x, y: self.origin.y, width: width, height: self.size.height)
+    }
+    func setX(_ x: CGFloat) -> CGRect {
+        return CGRect(x: x, y: self.origin.y, width: self.size.width, height: self.size.height)
     }
 }
 
