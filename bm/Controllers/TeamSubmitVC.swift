@@ -551,7 +551,7 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     
     @IBAction func submit(_ sender: Any) {
         Global.instance.addSpinner(superView: self.view)
-        var data:[String: Any] = [String: Any]()
+        var params:[String: Any] = [String: Any]()
         var isPass: Bool = true
         if nameTxt.text?.count == 0 {
             SCLAlertView().showWarning("提示", subTitle: "請填寫隊名")
@@ -563,42 +563,50 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         if isPass {
             if id == 0 {
-                data.merge(["channel":"bm","type":"team","created_id":Member.instance.id,"manager_id":Member.instance.id,"cat_id":21])
+                params.merge(["channel":"bm","type":"team","created_id":Member.instance.id,"manager_id":Member.instance.id,"cat_id":21])
             }
+            var featured: Data?
             if isFeaturedSet {
-                let featured: UIImage = featuredView.imageView.image!
+                featured = UIImageJPEGRepresentation(featuredView.imageView.image!, 0.2)
             }
-            data["name"] = nameTxt.text!
-            data["slug"] = nameTxt.text!
-            data["mobile"] = mobileTxt.text!
-            data["leader"] = leaderTxt.text!
-            data["email"] = emailTxt.text!
-            data["ball"] = ballTxt.text!
-            data["temp_fee_M"] = tempFeeMTxt.text!
-            data["temp_fee_F"] = tempFeeFTxt.text!
-            data["charge"] = charge
-            data["temp_content"] = temp_content
-            data["content"] = content
-            data["play_time"] = selectStartTime + " - " + selectEndTime
+            params["name"] = nameTxt.text!
+            params["slug"] = nameTxt.text!
+            params["mobile"] = mobileTxt.text!
+            params["leader"] = leaderTxt.text!
+            params["email"] = emailTxt.text!
+            params["ball"] = ballTxt.text!
+            params["temp_fee_M"] = tempFeeMTxt.text!
+            params["temp_fee_F"] = tempFeeFTxt.text!
+            params["charge"] = charge
+            params["temp_content"] = temp_content
+            params["content"] = content
+            params["play_time"] = selectStartTime + " - " + selectEndTime
             var _degree: [String] = [String]()
             for value in degree {
                 _degree.append(DEGREE.DBValue(value))
             }
-            data["degree"] = _degree
+            params["degree"] = _degree
             var _days: [Int] = [Int]()
             for (key, _) in selectedDays {
                 _days.append(key)
             }
-            data["play_day"] = _days
-            data["city_id"] = selectedCity.id
-            data["arena_id"] = selectedArena.id
-            TeamService.instance.update(data: data) { (success) in
+            params["play_day"] = _days
+            params["city_id"] = selectedCity.id
+            params["arena_id"] = selectedArena.id
+            TeamService.instance.uploadImage(params: params, featured, key: "featured", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if success {
                     self.id = TeamService.instance.id
                     print(self.id)
                 }
             }
+//            TeamService.instance.update(data: data) { (success) in
+//                Global.instance.removeSpinner(superView: self.view)
+//                if success {
+//                    self.id = TeamService.instance.id
+//                    print(self.id)
+//                }
+//            }
         }
     }
     

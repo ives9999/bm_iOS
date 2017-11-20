@@ -18,11 +18,25 @@ class TeamService {
     var success: Bool = false
     var id: Int = 0
     
-    func uploadImage(_ imageData: Data, key: String, filename: String, mimeType: String) {
+    func uploadImage(params: [String: Any], _ imageData: Data?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)
-        }, to: URL_FEATURED) { (result) in
-            
+            //multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)
+            print(params)
+            for (key, value) in params {
+                multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
+            }
+        }, usingThreshold: UInt64.init(), to: URL_TEAM_UPDATE, method: .post, headers: headers) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.responseJSON(completionHandler: { (response) in
+                    print(response)
+                })
+            case .failure(let error):
+                print("error")
+                //onError(error)
+            }
+            completion(true)
         }
     }
     func update(data: [String: Any], completion: @escaping CompletionHandler) {
