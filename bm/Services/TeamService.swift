@@ -18,6 +18,13 @@ class TeamService {
     var success: Bool = false
     var id: Int = 0
     
+    func uploadImage(_ imageData: Data, key: String, filename: String, mimeType: String) {
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)
+        }, to: URL_FEATURED) { (result) in
+            
+        }
+    }
     func update(data: [String: Any], completion: @escaping CompletionHandler) {
         var body: [String: Any] = ["source": "app"]
         body.merge(data)

@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, CityDelegate, ArenaDelegate, DaysDelegate, TimeSelectDelegate, TextInputDelegate, DegreeSelectDelegate {
+class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, CityDelegate, ArenaDelegate, DaysDelegate, TimeSelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate {
 
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -52,6 +52,8 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var content: String = ""
     
     var cell_width: CGFloat?
+    
+    var isFeaturedSet: Bool = false
     
     func setCityData(id: Int, name: String) {
         let city = City(id: id, name: name)
@@ -96,6 +98,13 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func setDegreeData(degree: [DEGREE]) {
         self.degree = degree
         self.tableView.reloadData()
+    }
+    // ImagePickerDelegate
+    func isImageSet(_ b: Bool) {
+        self.isFeaturedSet = b
+    }
+    func myPresent(_ viewController: UIViewController) {
+        self.present(viewController, animated: true, completion: nil)
     }
     
     convenience init() {
@@ -554,7 +563,10 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         }
         if isPass {
             if id == 0 {
-            data.merge(["channel":"bm","type":"team","created_id":Member.instance.id,"manager_id":Member.instance.id,"cat_id":21])
+                data.merge(["channel":"bm","type":"team","created_id":Member.instance.id,"manager_id":Member.instance.id,"cat_id":21])
+            }
+            if isFeaturedSet {
+                let featured: UIImage = featuredView.imageView.image!
             }
             data["name"] = nameTxt.text!
             data["slug"] = nameTxt.text!
