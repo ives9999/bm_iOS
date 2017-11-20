@@ -16,7 +16,32 @@ class TeamService {
     
     var msg:String = ""
     var success: Bool = false
+    var id: Int = 0
     
-    
+    func update(data: [String: Any], completion: @escaping CompletionHandler) {
+        var body: [String: Any] = ["source": "app"]
+        body.merge(data)
+        print(body)
+        Alamofire.request(URL_TEAM_UPDATE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                self.success = json["success"].boolValue
+                if self.success {
+                    self.id = json["id"].intValue
+                } else {
+                    let errors: [String] = json["msg"].arrayObject as! [String]
+                    for i in 0 ..< errors.count {
+                        self.msg += errors[i]
+                    }
+                    //print(self.msg)
+                }
+                completion(true)
+            }
+        }
+    }
     
 }

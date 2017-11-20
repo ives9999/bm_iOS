@@ -27,8 +27,10 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         [TEAM_TEMP_FEE_M_KEY, TEAM_TEMP_FEE_F_KEY, TEAM_TEMP_CONTENT_KEY],
         [TEAM_BALL_KEY, TEAM_DEGREE_KEY, TEAM_CHARGE_KEY, TEAM_CONTENT_KEY]
     ]
+    var id: Int = 0
     var nameTxt: SuperTextField = SuperTextField()
     
+    var leaderTxt: SuperTextField = SuperTextField()
     var mobileTxt: NumberTextField = NumberTextField()
     var emailTxt: EMailTextField = EMailTextField()
     
@@ -42,13 +44,12 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     var selectedCity: City = City(id: 0, name: "")
     var selectedArena: Arena = Arena(id: 0, name: "")
     var selectedDays: [Int: String] = [Int: String]()
-    var selectedDaysText: String = ""
     var selectStartTime: String = ""
     var selectEndTime: String = ""
-    var temp_play: String = ""
+    var temp_content: String = ""
     var degree: [DEGREE] = [DEGREE]()
     var charge: String = ""
-    var team: String = ""
+    var content: String = ""
     
     var cell_width: CGFloat?
     
@@ -64,11 +65,6 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     func setDaysData(res: [Int: String]) {
         self.selectedDays = res
-        var tmps: [String] = [String]()
-        for (_, value) in res {
-            tmps.append(value)
-        }
-        self.selectedDaysText = tmps.joined(separator: ", ")
         self.tableView.reloadData()
     }
     func setTimeData(time: String, type: SELECT_TIME_TYPE) {
@@ -85,13 +81,13 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     func setTextInputData(text: String, type: TEXT_INPUT_TYPE) {
         switch type {
         case TEXT_INPUT_TYPE.temp_play:
-            temp_play = text
+            temp_content = text
             break
         case TEXT_INPUT_TYPE.charge:
             charge = text
             break
         case TEXT_INPUT_TYPE.team:
-            team = text
+            content = text
             break
         
         }
@@ -136,6 +132,23 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         
         cell_width = tableView.frame.width
         //print(cell_width)
+        
+        nameTxt.text = "快樂羽球隊"
+        leaderTxt.text = "孫志煌"
+        mobileTxt.text = "0911299994"
+        emailTxt.text = "ives@housetube.tw"
+        ballTxt.text = "RSL 4"
+        tempFeeMTxt.text = "150"
+        tempFeeFTxt.text = "100"
+        temp_content = "請勿報名沒有來，列入黑名單"
+        charge = "一季3600含球"
+        content = "歡迎加入"
+        selectStartTime = "16:00"
+        selectEndTime = "18:00"
+        degree = [DEGREE.high, DEGREE.soso]
+        selectedDays = [2: "星期二", 4:"星期四"]
+        selectedCity = City(id: 218, name: "台南")
+        selectedArena = Arena(id: 10, name: "全穎羽球館")
     }
     
     
@@ -192,6 +205,9 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             if cell!.subviews.contains(nameTxt) {
                 nameTxt.removeFromSuperview()
             }
+            if cell!.subviews.contains(leaderTxt) {
+                leaderTxt.removeFromSuperview()
+            }
             if cell!.subviews.contains(mobileTxt) {
                 mobileTxt.removeFromSuperview()
             }
@@ -231,10 +247,11 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         //let xLabelWidth: CGFloat = cell!.textLabel!.frame.size.width
         //print("xLabelWidth: \(xLabelWidth)")
         let txtWidth: CGFloat = 280
+        let txtHeight: CGFloat = cellFrame.height - 8
         //print("txtWidth: \(txtWidth)")
         let x = cell_width! - txtWidth
         //print("x: \(x)")
-        let editFrame: CGRect = CGRect(x: x, y: yPadding, width: txtWidth, height: cellFrame.height-yPadding)
+        let editFrame: CGRect = CGRect(x: x, y: yPadding, width: txtWidth, height: txtHeight)
         
         switch indexPath.section {
         case 0:  //名稱
@@ -253,15 +270,18 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             var txt: SuperTextField = SuperTextField()
             switch indexPath.row {
             case 0:
-                let leaderLbl: MyLabel = MyLabel(frame: editFrame)
-                leaderLbl.text = Member.instance.nickname
-                leaderLbl.setupView()
-                leaderLbl.frame = leaderLbl.frame.setX(cell_width! - leaderLbl.frame.width - 10)
+//                let leaderLbl: MyLabel = MyLabel(frame: editFrame)
+//                leaderLbl.text = Member.instance.nickname
+//                leaderLbl.setupView()
+//                leaderLbl.frame = leaderLbl.frame.setX(cell_width! - leaderLbl.frame.width - 10)
                 //print(leaderLbl.frame.width)
                 //leaderLbl.backgroundColor = UIColor.black
                 //leaderLbl.textAlignment = .right
                 //print(Member.instance.nickname)
-                cell!.addSubview(leaderLbl)
+                //cell!.addSubview(leaderLbl)
+                leaderTxt.frame = editFrame
+                txt = leaderTxt
+                cell!.addSubview(txt)
                 break
             case 1:
                 mobileTxt.frame = editFrame
@@ -297,9 +317,12 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
         case 3:  //打球時間
             switch indexPath.row {
             case 0:
-                if selectedDaysText.count > 0 {
-                    cell!.detailTextLabel?.text = selectedDaysText
+                var res: [String] = [String]()
+                for (_, value) in selectedDays {
+                    res.append(value)
                 }
+                let text = res.joined(separator: ", ")
+                cell!.detailTextLabel?.text = text
                 break
             case 1:
                 if selectStartTime.count > 0 {
@@ -330,9 +353,9 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 cell!.addSubview(tempFeeFTxt)
                 break
             case 2:
-                if temp_play.count > 0 {
-                    if temp_play.count < 15 {
-                        cell!.detailTextLabel?.text = temp_play
+                if temp_content.count > 0 {
+                    if temp_content.count < 15 {
+                        cell!.detailTextLabel?.text = temp_content
                     }
                 }
                 cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
@@ -368,9 +391,9 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
                 cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
                 break
             case 3:
-                if team.count > 0 {
-                    if team.count < 15 {
-                        cell!.detailTextLabel?.text = team
+                if content.count > 0 {
+                    if content.count < 15 {
+                        cell!.detailTextLabel?.text = content
                     }
                 }
                 cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
@@ -518,11 +541,52 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     @IBAction func submit(_ sender: Any) {
+        Global.instance.addSpinner(superView: self.view)
+        var data:[String: Any] = [String: Any]()
+        var isPass: Bool = true
         if nameTxt.text?.count == 0 {
             SCLAlertView().showWarning("提示", subTitle: "請填寫隊名")
+            isPass = false
         }
         if mobileTxt.text?.count == 0 {
             SCLAlertView().showWarning("提示", subTitle: "請填寫電話")
+            isPass = false
+        }
+        if isPass {
+            if id == 0 {
+            data.merge(["channel":"bm","type":"team","created_id":Member.instance.id,"manager_id":Member.instance.id,"cat_id":21])
+            }
+            data["name"] = nameTxt.text!
+            data["slug"] = nameTxt.text!
+            data["mobile"] = mobileTxt.text!
+            data["leader"] = leaderTxt.text!
+            data["email"] = emailTxt.text!
+            data["ball"] = ballTxt.text!
+            data["temp_fee_M"] = tempFeeMTxt.text!
+            data["temp_fee_F"] = tempFeeFTxt.text!
+            data["charge"] = charge
+            data["temp_content"] = temp_content
+            data["content"] = content
+            data["play_time"] = selectStartTime + " - " + selectEndTime
+            var _degree: [String] = [String]()
+            for value in degree {
+                _degree.append(DEGREE.DBValue(value))
+            }
+            data["degree"] = _degree
+            var _days: [Int] = [Int]()
+            for (key, _) in selectedDays {
+                _days.append(key)
+            }
+            data["play_day"] = _days
+            data["city_id"] = selectedCity.id
+            data["arena_id"] = selectedArena.id
+            TeamService.instance.update(data: data) { (success) in
+                Global.instance.removeSpinner(superView: self.view)
+                if success {
+                    self.id = TeamService.instance.id
+                    print(self.id)
+                }
+            }
         }
     }
     

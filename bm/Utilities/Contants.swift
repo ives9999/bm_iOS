@@ -23,6 +23,7 @@ let URL_REGISTER = URL_HOME + "register"
 let URL_MEMBER_UPDATE = URL_HOME + "member/update"
 let URL_CITYS = URL_HOME + "citys"
 let URL_ARENA_BY_CITY_ID = URL_HOME + "arena_by_city"
+let URL_TEAM_UPDATE = URL_HOME + "team/update"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"

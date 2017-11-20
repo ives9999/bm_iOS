@@ -44,7 +44,7 @@ enum DEGREE: String {
     case soso = "普通"
     case high = "高手"
     
-    static func enumFronString(string: String) -> DEGREE {
+    static func enumFromString(string: String) -> DEGREE {
         switch string {
         case "new" :
             return self.new
@@ -55,6 +55,23 @@ enum DEGREE: String {
         default :
             return self.high
         }
+    }
+    static func DBValue(_ degree: DEGREE) -> String {
+        var res: String = ""
+        switch degree {
+        case .new:
+            res = "new"
+            break
+        case .soso:
+            res = "soso"
+            break
+        case .high:
+            res = "high"
+            break
+        default:
+            res = "new"
+        }
+        return res
     }
     static func all() -> [[String: String]] {
         return [
@@ -234,6 +251,14 @@ extension CGRect {
     }
     func setX(_ x: CGFloat) -> CGRect {
         return CGRect(x: x, y: self.origin.y, width: self.size.width, height: self.size.height)
+    }
+}
+
+extension Dictionary {
+    mutating func merge(_ other: Dictionary) {
+        for (key, value) in other {
+            self.updateValue(value, forKey: key)
+        }
     }
 }
 

@@ -41,7 +41,7 @@ class DegreeSelectVC: UITableViewController {
             //print(day)
             if degree["checked"] as! Bool {
                 let key: String = degree["key"] as! String
-                res.append(DEGREE.enumFronString(string: key))
+                res.append(DEGREE.enumFromString(string: key))
                 isSelected = true
             }
         }
