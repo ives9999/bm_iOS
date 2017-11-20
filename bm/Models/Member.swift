@@ -198,7 +198,7 @@ class Member {
     init() {
         var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
         let folder: String = path[0] as! String
-        print("Your NSUserDefaults are stored in this folder: \(folder)/Preferences")
+        //print("Your NSUserDefaults are stored in this folder: \(folder)/Preferences")
         //print("Member init is key exist: \(session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY))")
         if !session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY) {
             self.isLoggedIn = false

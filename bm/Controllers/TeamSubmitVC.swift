@@ -565,10 +565,6 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             if id == 0 {
                 params.merge(["channel":"bm","type":"team","created_id":Member.instance.id,"manager_id":Member.instance.id,"cat_id":21])
             }
-            var featured: Data?
-            if isFeaturedSet {
-                featured = UIImageJPEGRepresentation(featuredView.imageView.image!, 0.2)
-            }
             params["name"] = nameTxt.text!
             params["slug"] = nameTxt.text!
             params["mobile"] = mobileTxt.text!
@@ -593,14 +589,22 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             params["play_day"] = _days
             params["city_id"] = selectedCity.id
             params["arena_id"] = selectedArena.id
-            TeamService.instance.uploadImage(params: params, featured, key: "featured", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
+            params["featured_id"] = 0
+            TeamService.instance.uploadImage(params: params, featuredView.imageView.image, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if success {
                     self.id = TeamService.instance.id
-                    print(self.id)
+                    //print(self.id)
                 }
             }
-//            TeamService.instance.update(data: data) { (success) in
+//            if isFeaturedSet {
+//                let image: UIImage = featuredView.imageView.image!
+//                let imageData: Data = UIImageJPEGRepresentation(image, 0.2)!
+//                let base64: String = imageData.base64EncodedString(options: .lineLength64Characters)
+//                //let json = try? JSONEncoder().encode(base64)
+//                params["featured"] = base64
+//            }
+//            TeamService.instance.update(params: params) { (success) in
 //                Global.instance.removeSpinner(superView: self.view)
 //                if success {
 //                    self.id = TeamService.instance.id

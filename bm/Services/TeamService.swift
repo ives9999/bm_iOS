@@ -18,20 +18,41 @@ class TeamService {
     var success: Bool = false
     var id: Int = 0
     
-    func uploadImage(params: [String: Any], _ imageData: Data?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
+    func uploadImage(params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+        var body: [String: Any] = ["source": "app"]
+        body.merge(params)
         Alamofire.upload(multipartFormData: { (multipartFormData) in
-            //multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)
-            print(params)
-            for (key, value) in params {
-                multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
+            if image != nil {
+                let imageData: Data = UIImageJPEGRepresentation(image!, 0.2)!
+                print(imageData)
+                //let base64: String = imageData.base64EncodedString(options: .lineLength64Characters)
+                multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)
             }
+            //print(params)
+            for (key, value) in body {
+                if key == "degree" {
+                    for d in value as! [String] {
+                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "degree[]")
+                    }
+                } else if key == "play_day" {
+                    for d in value as! [Int] {
+                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "play_day[]")
+                    }
+                } else {
+                    multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
+                }
+            }
+            //print(multipartFormData.boundary)
         }, usingThreshold: UInt64.init(), to: URL_TEAM_UPDATE, method: .post, headers: headers) { (result) in
             switch result {
             case .success(let upload, _, _):
-                upload.responseJSON(completionHandler: { (response) in
+                upload.responseString { (response) in
                     print(response)
-                })
+                }
+//                upload.responseJSON(completionHandler: { (response) in
+//                    print(response)
+//                })
             case .failure(let error):
                 print("error")
                 //onError(error)
@@ -39,9 +60,9 @@ class TeamService {
             completion(true)
         }
     }
-    func update(data: [String: Any], completion: @escaping CompletionHandler) {
+    func update(params: [String: Any], completion: @escaping CompletionHandler) {
         var body: [String: Any] = ["source": "app"]
-        body.merge(data)
+        body.merge(params)
         print(body)
         Alamofire.request(URL_TEAM_UPDATE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
