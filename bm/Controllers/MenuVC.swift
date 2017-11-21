@@ -20,9 +20,24 @@ class MenuVC: UIViewController {
     @IBOutlet weak var nicknameLbl: UILabel!
     @IBOutlet weak var menuTableView: UIView!
     
+    var myTeamLists: [List] = [List]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if Member.instance.isLoggedIn {
+            let filter: [[Any]] = [
+                ["channel", "=", CHANNEL],
+                ["manager_id", "=", Member.instance.id]
+            ]
+            DataService.instance.getList(type: "team", titleField: "name", page: 1, perPage: 100, filter: filter) { (success) in
+                if success {
+                    self.myTeamLists = DataService.instance.lists
+                    //print(self.myTeamLists)
+                }
+            }
+        }
+        
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
         NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     }

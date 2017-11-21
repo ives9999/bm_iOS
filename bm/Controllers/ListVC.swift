@@ -71,7 +71,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         //print(page)
         Global.instance.addSpinner(superView: self.view)
         
-        DataService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage) { (success) in
+        DataService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in
             if success {
                 let tmps: [List] = DataService.instance.lists
                 self.lists += tmps

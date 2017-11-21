@@ -548,6 +548,7 @@
                             <outlet property="delegate" destination="hU0-bT-MVm" id="gG1-jA-b0r"/>
                         </connections>
                     </tableView>
+                    <size key="freeformSize" width="375" height="392"/>
                     <connections>
                         <outlet property="accountCell" destination="vc3-f9-1nK" id="5Sv-Ng-JQR"/>
                         <outlet property="accountIcon" destination="oXI-ot-wLy" id="P9B-Rg-g2c"/>
@@ -912,7 +913,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ixj-Mg-udo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-207.19999999999999" y="-1724.8875562218891"/>
+            <point key="canvasLocation" x="-230" y="-1725"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="Oto-La-o8t">
@@ -1780,7 +1781,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="f5d-2G-qtf"/>
-        <segue reference="Ym7-zQ-SHb"/>
+        <segue reference="9hz-2Z-7jX"/>
         <segue reference="a7V-eU-Yjs"/>
     </inferredMetricsTieBreakers>
 </document>

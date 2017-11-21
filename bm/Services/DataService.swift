@@ -36,10 +36,13 @@ class DataService {
     var citys: [City] = [City]()
     var arenas: [Arena] = [Arena]()
     
-    func getList(type: String, titleField: String, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+    func getList(type: String, titleField: String, page: Int, perPage: Int, filter:[[Any]]?, completion: @escaping CompletionHandler) {
         self.downloadImageNum = 0
-        let body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
-        //print(body)
+        var body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
+        if filter != nil {
+            body["where"] = filter
+        }
+        print(body)
         let url: String = String(format: URL_LIST, type)
         //print(url)
         lists = [List]()
@@ -76,7 +79,7 @@ class DataService {
                     let list: List = List(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
                     self.lists.append(list)
                 }
-                print("need download image: \(self.downloadImageNum)")
+                //print("need download image: \(self.downloadImageNum)")
                 for i in 0 ..< self.lists.count {
                     if (self.downloadImageNum > 0) {
                         if self.lists[i].path.count > 0 {
@@ -85,7 +88,7 @@ class DataService {
                                     self.lists[i].featured = self.image!
                                 }
                                 self.downloadImageNum -= 1
-                                print("retain image download: \(self.downloadImageNum)")
+                                //print("retain image download: \(self.downloadImageNum)")
                                 if self.downloadImageNum == 0 {
                                     completion(true)
                                 }

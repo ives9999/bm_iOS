@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol TimeSelectDelegate: class {
+    func setTimeData(time: String, type: SELECT_TIME_TYPE)
+}
+
 class TimeSelectVC: UITableViewController {
     
     var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start

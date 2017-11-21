@@ -10,6 +10,10 @@ import UIKit
 import UIColor_Hex_Swift
 import SCLAlertView
 
+protocol DaysDelegate: class {
+    func setDaysData(res: [Int: String])
+}
+
 class DayVC: UITableViewController {
 
     weak var delegate: DaysDelegate?

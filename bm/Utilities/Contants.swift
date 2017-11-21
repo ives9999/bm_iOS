@@ -11,6 +11,8 @@ import UIKit
 
 typealias CompletionHandler = (_ Success: Bool) -> ()
 
+let CHANNEL = "bm"
+
 // URL Constants
 let REMOTE_BASE_URL = "http://bm.sportpassword.com"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"

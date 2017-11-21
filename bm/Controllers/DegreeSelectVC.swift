@@ -9,6 +9,10 @@
 import UIKit
 import SCLAlertView
 
+protocol DegreeSelectDelegate: class {
+    func setDegreeData(degree: [DEGREE])
+}
+
 class DegreeSelectVC: UITableViewController {
 
     var degrees: [[String: Any]] = [[String: Any]]()

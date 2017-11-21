@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol CityDelegate: class {
+    func setCityData(id: Int, name: String)
+}
+
+
 class CityVC: UITableViewController {
     
     var citys: [City] = [City]()

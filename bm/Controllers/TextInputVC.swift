@@ -10,6 +10,10 @@ import UIKit
 import SCLAlertView
 import UIColor_Hex_Swift
 
+protocol TextInputDelegate: class {
+    func setTextInputData(text: String, type: TEXT_INPUT_TYPE)
+}
+
 class TextInputVC: UIViewController {
     
     weak var delegate: TextInputDelegate?

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ArenaDelegate: class {
+    func setArenaData(id: Int, name: String)
+}
+
 class ArenaVC: UITableViewController {
     
     var arenas: [Arena] = [Arena]()

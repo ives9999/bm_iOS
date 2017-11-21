@@ -262,30 +262,6 @@ extension Dictionary {
     }
 }
 
-protocol CityDelegate: class {
-    func setCityData(id: Int, name: String)
-}
-
-protocol ArenaDelegate: class {
-    func setArenaData(id: Int, name: String)
-}
-
-protocol DaysDelegate: class {
-    func setDaysData(res: [Int: String])
-}
-
-protocol TimeSelectDelegate: class {
-    func setTimeData(time: String, type: SELECT_TIME_TYPE)
-}
-
-protocol TextInputDelegate: class {
-    func setTextInputData(text: String, type: TEXT_INPUT_TYPE)
-}
-
-protocol DegreeSelectDelegate: class {
-    func setDegreeData(degree: [DEGREE])
-}
-
 
 
 
