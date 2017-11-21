@@ -590,11 +590,19 @@ class TeamSubmitVC: UIViewController, UITableViewDelegate, UITableViewDataSource
             params["city_id"] = selectedCity.id
             params["arena_id"] = selectedArena.id
             params["featured_id"] = 0
-            TeamService.instance.uploadImage(params: params, featuredView.imageView.image, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
+            TeamService.instance.update(params: params, featuredView.imageView.image, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if success {
-                    self.id = TeamService.instance.id
-                    //print(self.id)
+                    if TeamService.instance.success {
+                        self.id = TeamService.instance.id
+                        //print(self.id)
+                        //if self.id > 0 {
+                        SCLAlertView().showSuccess("成功", subTitle: "新增 / 修改球隊成功")
+                    } else {
+                        SCLAlertView().showWarning("錯誤", subTitle: TeamService.instance.msg)
+                    }
+                } else {
+                    SCLAlertView().showWarning("錯誤", subTitle: "新增 / 修改球隊失敗，伺服器無法新增成功，請稍後再試")
                 }
             }
 //            if isFeaturedSet {
