@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuVC: UIViewController {
+class MenuVC: MyTableVC {
 
     // outlets
     @IBOutlet weak var loginBtn: UIButton!
@@ -18,11 +18,24 @@ class MenuVC: UIViewController {
     @IBOutlet weak var forgetPasswordBtn: UIButton!
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
     @IBOutlet weak var nicknameLbl: UILabel!
-    @IBOutlet weak var menuTableView: UIView!
+    @IBOutlet weak var tableView: UITableView!
     
     var myTeamLists: [List] = [List]()
+    let _sections: [String] = ["帳戶", "登錄"]
+    var _rows: [[Dictionary<String, Any>]] = [
+        [
+            ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
+            ["text": "更改密碼", "icon": "password"],
+            ["text": "手機認證", "icon": "mobile_validate"],
+        ],
+        [
+            ["text": "球隊登錄", "icon": "team", "segue": TO_TEAM_SUBMIT]
+        ]
+    ]
     
     override func viewDidLoad() {
+        myTablView = tableView
+        setData(sections: _sections, rows: _rows)
         super.viewDidLoad()
 
         if Member.instance.isLoggedIn {
@@ -34,6 +47,13 @@ class MenuVC: UIViewController {
                 if success {
                     self.myTeamLists = DataService.instance.lists
                     //print(self.myTeamLists)
+                    for team in self.myTeamLists {
+                        let row: [String: Any] = ["text": team.title, "id": team.id]
+                        self._rows[1].append(row)
+                    }
+                    //print(self._rows)
+                    self.setData(sections: self._sections, rows: self._rows)
+                    self.tableView.reloadData()
                 }
             }
         }
@@ -41,6 +61,56 @@ class MenuVC: UIViewController {
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
         NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var iconView: UIImageView = UIImageView(frame: CGRect.zero)
+        var titleLbl: MyLabel = MyLabel(frame: CGRect.zero)
+        var cell: FormCell? = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell
+        if cell == nil {
+            //print("cell is nil")
+            cell = FormCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
+            cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            cell!.selectionStyle = UITableViewCellSelectionStyle.none
+        } else {
+            print("cell exist sections: \(indexPath.section), rows: \(indexPath.row)")
+            if cell!.subviews.contains(iconView) {
+                print("iconView exist sections: \(indexPath.section), rows: \(indexPath.row)")
+                iconView.removeFromSuperview()
+            }
+            if cell!.subviews.contains(titleLbl) {
+                print("titleLbl exist sections: \(indexPath.section), rows: \(indexPath.row)")
+                titleLbl.removeFromSuperview()
+            }
+        }
+        
+        let row: [String: Any] = rows![indexPath.section][indexPath.row]
+        var x: CGFloat = 30
+        let y: CGFloat = 10
+        let iconWidth: CGFloat = 24
+        let iconHeight: CGFloat = 24
+        if row["icon"] != nil {
+            iconView.frame = CGRect(x: x, y: y, width: iconWidth, height: iconHeight)
+            iconView.image = UIImage(named: row["icon"] as! String)
+            cell!.addSubview(iconView)
+        }
+        x = x + iconWidth
+        if row["text"] != nil {
+            x = x + 30
+            titleLbl.frame = CGRect(x: x, y: y, width: 200, height: cell!.bounds.height)
+            titleLbl.text = (row["text"] as! String)
+            titleLbl.setupView()
+            cell!.addSubview(titleLbl)
+        }
+        return cell!
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row: [String: Any] = rows![indexPath.section][indexPath.row]
+        if row["segue"] != nil {
+            performSegue(withIdentifier: row["segue"] as! String, sender: nil)
+        }
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         _loginout()
@@ -79,7 +149,7 @@ class MenuVC: UIViewController {
         registerIcon.isHidden = true
         forgetPasswordBtn.isHidden = true
         forgetPasswordIcon.isHidden = true
-        menuTableView.isHidden = false
+        tableView.isHidden = false
     }
     private func _logoutBlock() {
         nicknameLbl.text = "未登入"
@@ -88,6 +158,6 @@ class MenuVC: UIViewController {
         registerIcon.isHidden = false
         forgetPasswordBtn.isHidden = false
         forgetPasswordIcon.isHidden = false
-        menuTableView.isHidden = true
+        tableView.isHidden = true
     }
 }

@@ -42,7 +42,7 @@ class DataService {
         if filter != nil {
             body["where"] = filter
         }
-        print(body)
+        //print(body)
         let url: String = String(format: URL_LIST, type)
         //print(url)
         lists = [List]()
