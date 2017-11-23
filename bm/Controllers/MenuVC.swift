@@ -37,6 +37,8 @@ class MenuVC: MyTableVC {
         myTablView = tableView
         setData(sections: _sections, rows: _rows)
         super.viewDidLoad()
+        
+        tableView.register(FormCell.self, forCellReuseIdentifier: "cell")
 
         if Member.instance.isLoggedIn {
             let filter: [[Any]] = [
@@ -63,45 +65,67 @@ class MenuVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var iconView: UIImageView = UIImageView(frame: CGRect.zero)
-        var titleLbl: MyLabel = MyLabel(frame: CGRect.zero)
-        var cell: FormCell? = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell
-        if cell == nil {
-            //print("cell is nil")
-            cell = FormCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-            cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-            cell!.selectionStyle = UITableViewCellSelectionStyle.none
-        } else {
-            print("cell exist sections: \(indexPath.section), rows: \(indexPath.row)")
-            if cell!.subviews.contains(iconView) {
-                print("iconView exist sections: \(indexPath.section), rows: \(indexPath.row)")
-                iconView.removeFromSuperview()
-            }
-            if cell!.subviews.contains(titleLbl) {
-                print("titleLbl exist sections: \(indexPath.section), rows: \(indexPath.row)")
-                titleLbl.removeFromSuperview()
-            }
-        }
+        //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
+        let cell: FormCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FormCell
         
-        let row: [String: Any] = rows![indexPath.section][indexPath.row]
         var x: CGFloat = 30
         let y: CGFloat = 10
         let iconWidth: CGFloat = 24
         let iconHeight: CGFloat = 24
+        let iconView: UIImageView = UIImageView(frame: CGRect(x: x, y: y, width: iconWidth, height: iconHeight))
+        cell.contentView.addSubview(iconView)
+        iconView.isHidden = true
+        
+        x = x + iconWidth + 30
+        let titleLbl: MyLabel = MyLabel(frame: CGRect(x: x, y: y, width: 200, height: cell.bounds.height))
+        titleLbl.text = ""
+        cell.contentView.addSubview(titleLbl)
+        titleLbl.isHidden = true
+        
+        
+//        var cell: FormCell? = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell
+//        if cell == nil {
+//            //print("cell is nil")
+//            cell = FormCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
+//            cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+//            cell!.selectionStyle = UITableViewCellSelectionStyle.none
+//
+//
+//            iconView = UIImageView(frame: CGRect(x: x, y: y, width: iconWidth, height: iconHeight))
+//
+//            titleLbl = MyLabel(frame: CGRect(x: x, y: y, width: 200, height: cell!.bounds.height))
+//            cell!.addSubview(iconView!)
+//            cell!.addSubview(titleLbl!)
+//        }
+//        else {
+//            //print("cell exist sections: \(indexPath.section), rows: \(indexPath.row)")
+//            if cell!.subviews.contains(iconView) {
+//                print("iconView exist sections: \(indexPath.section), rows: \(indexPath.row)")
+//                iconView.removeFromSuperview()
+//            }
+//            if cell!.subviews.contains(titleLbl) {
+//                print("titleLbl exist sections: \(indexPath.section), rows: \(indexPath.row)")
+//                titleLbl.removeFromSuperview()
+//            }
+//        }
+        
+        let row: [String: Any] = rows![indexPath.section][indexPath.row]
+        
         if row["icon"] != nil {
-            iconView.frame = CGRect(x: x, y: y, width: iconWidth, height: iconHeight)
+            iconView.isHidden = false
             iconView.image = UIImage(named: row["icon"] as! String)
-            cell!.addSubview(iconView)
+        } else {
+            iconView.isHidden = true
         }
-        x = x + iconWidth
         if row["text"] != nil {
-            x = x + 30
-            titleLbl.frame = CGRect(x: x, y: y, width: 200, height: cell!.bounds.height)
+            titleLbl.isHidden = false
             titleLbl.text = (row["text"] as! String)
             titleLbl.setupView()
-            cell!.addSubview(titleLbl)
+            print(titleLbl.text)
+        } else {
+            titleLbl.isHidden = true
         }
-        return cell!
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

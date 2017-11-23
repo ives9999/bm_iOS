@@ -16,6 +16,7 @@ class FormCell: UITableViewCell {
         self.textLabel?.textColor = UIColor.white
         self.detailTextLabel?.textColor = UIColor.white
         self.backgroundColor = UIColor.clear
+        print("cell init")
     }
     
     required init?(coder aDecoder: NSCoder) {
