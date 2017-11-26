@@ -29,7 +29,8 @@ class MenuVC: MyTableVC {
             ["text": "手機認證", "icon": "mobile_validate"],
         ],
         [
-            ["text": "球隊登錄", "icon": "team", "segue": TO_TEAM_SUBMIT]
+            ["text": "球隊登錄", "icon": "team"],
+            ["text": "新增球隊", "segue": TO_TEAM_SUBMIT]
         ]
     ]
     
@@ -38,7 +39,7 @@ class MenuVC: MyTableVC {
         setData(sections: _sections, rows: _rows)
         super.viewDidLoad()
         
-        tableView.register(FormCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
 
         if Member.instance.isLoggedIn {
             let filter: [[Any]] = [
@@ -50,7 +51,7 @@ class MenuVC: MyTableVC {
                     self.myTeamLists = DataService.instance.lists
                     //print(self.myTeamLists)
                     for team in self.myTeamLists {
-                        let row: [String: Any] = ["text": team.title, "id": team.id]
+                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_SUBMIT]
                         self._rows[1].append(row)
                     }
                     //print(self._rows)
@@ -66,72 +67,30 @@ class MenuVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        let cell: FormCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! FormCell
-        
-        var x: CGFloat = 30
-        let y: CGFloat = 10
-        let iconWidth: CGFloat = 24
-        let iconHeight: CGFloat = 24
-        let iconView: UIImageView = UIImageView(frame: CGRect(x: x, y: y, width: iconWidth, height: iconHeight))
-        cell.contentView.addSubview(iconView)
-        iconView.isHidden = true
-        
-        x = x + iconWidth + 30
-        let titleLbl: MyLabel = MyLabel(frame: CGRect(x: x, y: y, width: 200, height: cell.bounds.height))
-        titleLbl.text = ""
-        cell.contentView.addSubview(titleLbl)
-        titleLbl.isHidden = true
-        
-        
-//        var cell: FormCell? = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell
-//        if cell == nil {
-//            //print("cell is nil")
-//            cell = FormCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-//            cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-//            cell!.selectionStyle = UITableViewCellSelectionStyle.none
-//
-//
-//            iconView = UIImageView(frame: CGRect(x: x, y: y, width: iconWidth, height: iconHeight))
-//
-//            titleLbl = MyLabel(frame: CGRect(x: x, y: y, width: 200, height: cell!.bounds.height))
-//            cell!.addSubview(iconView!)
-//            cell!.addSubview(titleLbl!)
-//        }
-//        else {
-//            //print("cell exist sections: \(indexPath.section), rows: \(indexPath.row)")
-//            if cell!.subviews.contains(iconView) {
-//                print("iconView exist sections: \(indexPath.section), rows: \(indexPath.row)")
-//                iconView.removeFromSuperview()
-//            }
-//            if cell!.subviews.contains(titleLbl) {
-//                print("titleLbl exist sections: \(indexPath.section), rows: \(indexPath.row)")
-//                titleLbl.removeFromSuperview()
-//            }
-//        }
-        
+        let cell: MenuCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
+                
         let row: [String: Any] = rows![indexPath.section][indexPath.row]
+        cell.setRow(row: row)
         
-        if row["icon"] != nil {
-            iconView.isHidden = false
-            iconView.image = UIImage(named: row["icon"] as! String)
-        } else {
-            iconView.isHidden = true
-        }
-        if row["text"] != nil {
-            titleLbl.isHidden = false
-            titleLbl.text = (row["text"] as! String)
-            titleLbl.setupView()
-            print(titleLbl.text)
-        } else {
-            titleLbl.isHidden = true
-        }
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let row: [String: Any] = rows![indexPath.section][indexPath.row]
         if row["segue"] != nil {
-            performSegue(withIdentifier: row["segue"] as! String, sender: nil)
+            let segue = row["segue"] as! String
+            //print("segue: \(segue)")
+            performSegue(withIdentifier: segue, sender: row["token"])
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if sender != nil {
+            if segue.identifier == TO_TEAM_SUBMIT {
+                let vc: TeamSubmitVC = segue.destination as! TeamSubmitVC
+                vc.token = sender as! String
+            }
         }
     }
     

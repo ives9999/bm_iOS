@@ -39,6 +39,7 @@ class MyTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         frameWidth = view.bounds.size.width
         //print("frame width: \(frameWidth)")
         frameHeight = view.bounds.size.height
+        myTablView.backgroundColor = UIColor.clear
         myTablView.delegate = self
         myTablView.dataSource = self
 

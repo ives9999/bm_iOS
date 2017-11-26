@@ -10,6 +10,9 @@
 		B31361E71F8786CC00BDA53D /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E61F8786CC00BDA53D /* Contants.swift */; };
 		B31361E91F88A35900BDA53D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E81F88A35900BDA53D /* Global.swift */; };
 		B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F8041FC52CAE00DE98FB /* MyTableVC.swift */; };
+		B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F8071FC6AC2200DE98FB /* SuperCell.swift */; };
+		B322F80A1FC6AD1800DE98FB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F8091FC6AD1800DE98FB /* MenuCell.swift */; };
+		B322F80D1FC6DCAD00DE98FB /* TeamSubmitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F80C1FC6DCAD00DE98FB /* TeamSubmitCell.swift */; };
 		B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF21F8483E3003D39CC /* HomeImageCell.swift */; };
 		B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF71F849AA7003D39CC /* DataService.swift */; };
 		B35F8DD91F8F64310073BD70 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35F8DD81F8F64310073BD70 /* Home.swift */; };
@@ -100,6 +103,9 @@
 		B31361E61F8786CC00BDA53D /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		B31361E81F88A35900BDA53D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		B322F8041FC52CAE00DE98FB /* MyTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableVC.swift; sourceTree = "<group>"; };
+		B322F8071FC6AC2200DE98FB /* SuperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperCell.swift; sourceTree = "<group>"; };
+		B322F8091FC6AD1800DE98FB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		B322F80C1FC6DCAD00DE98FB /* TeamSubmitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSubmitCell.swift; sourceTree = "<group>"; };
 		B32FBCF21F8483E3003D39CC /* HomeImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeImageCell.swift; sourceTree = "<group>"; };
 		B32FBCF71F849AA7003D39CC /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		B35F8DD81F8F64310073BD70 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -205,9 +211,20 @@
 			path = Utilities;
 			sourceTree = "<group>";
 		};
+		B322F8061FC6ABEA00DE98FB /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B322F8071FC6AC2200DE98FB /* SuperCell.swift */,
+				B322F8091FC6AD1800DE98FB /* MenuCell.swift */,
+				B322F80C1FC6DCAD00DE98FB /* TeamSubmitCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		B32FBCEF1F84831C003D39CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B322F8061FC6ABEA00DE98FB /* Cell */,
 				B3ED38E01FB777BF0003F083 /* TextField */,
 				B32FBCF21F8483E3003D39CC /* HomeImageCell.swift */,
 				B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */,
@@ -573,11 +590,13 @@
 			files = (
 				F94EAA201FB023B800B1762C /* ProfileVC.swift in Sources */,
 				B3ED38E21FB77B830003F083 /* SuperTextField.swift in Sources */,
+				B322F80D1FC6DCAD00DE98FB /* TeamSubmitCell.swift in Sources */,
 				F94FF4351FB4322C00D167B6 /* TeamSubmitVC.swift in Sources */,
 				B3E72A191F9CBE9F0008A6B1 /* CourseCV.swift in Sources */,
 				B3ED38E81FB852EB0003F083 /* FormCell.swift in Sources */,
 				B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */,
 				B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */,
+				B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */,
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,
 				B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
@@ -602,6 +621,7 @@
 				F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */,
 				B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
+				B322F80A1FC6AD1800DE98FB /* MenuCell.swift in Sources */,
 				B3ED38F01FB9AD460003F083 /* ArenaVC.swift in Sources */,
 				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
 				B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */,
