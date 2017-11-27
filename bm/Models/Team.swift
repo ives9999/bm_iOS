@@ -22,7 +22,7 @@ class Team {
             ["key": TEAM_CITY_KEY],["key": TEAM_ARENA_KEY]
         ],
         [
-            ["key": TEAM_DAY_KEY],["key": TEAM_PLAY_START_KEY],["key": TEAM_PLAY_END_KEY]
+            ["key": TEAM_DAYS_KEY],["key": TEAM_PLAY_START_KEY],["key": TEAM_PLAY_END_KEY]
         ],
         [
             ["key": TEAM_TEMP_FEE_M_KEY],["key": TEAM_TEMP_FEE_F_KEY],["key": TEAM_TEMP_CONTENT_KEY]
@@ -45,18 +45,18 @@ class Team {
             TEAM_WEBSITE_KEY:["ch":"網站","vtype":"String","value":"","use":false,"show":""],
             TEAM_FB_KEY:["ch":"FB","vtype":"String","value":"","use":false,"show":""],
             TEAM_YOUTUBE_KEY:["ch":"youtube","vtype":"String","value":"","use":false,"show":""],
-            TEAM_PLAY_START_KEY:["ch":"開始時間","vtype":"String","value":"","use":true,"atype":more,"iden":TO_SELECT_TIME,"show":""],
-            TEAM_PLAY_END_KEY:["ch":"結束時間","vtype":"String","value":"","use":true,"atype":more,"iden":TO_SELECT_TIME,"show":""],
+            TEAM_PLAY_START_KEY:["ch":"開始時間","vtype":"String","value":"","use":true,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
+            TEAM_PLAY_END_KEY:["ch":"結束時間","vtype":"String","value":"","use":true,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
             TEAM_BALL_KEY:["ch":"使用球種","vtype":"String","value":"","use":true,"atype":more,"show":""],
-            TEAM_DEGREE_KEY:["ch":"球隊程度","vtype":"array","value":[String](),"use":true,"atype":more,"iden":TO_SELECT_DEGREE,"show":""],
+            TEAM_DEGREE_KEY:["ch":"球隊程度","vtype":"array","value":[String](),"use":true,"atype":more,"segue":TO_SELECT_DEGREE,"show":""],
             TEAM_SLUG_KEY:["ch":"插槽","vtype":"String","value":"","use":true,"show":""],
-            TEAM_CHARGE_KEY:["ch":"收費說明","vtype":"String","value":"","use":true,"atype":more,"iden":TO_TEXT_INPUT,"show":""],
-            TEAM_CONTENT_KEY:["ch":"球隊說明","vtype":"String","value":"","use":true,"atype":more,"iden":TO_TEXT_INPUT,"show":""],
+            TEAM_CHARGE_KEY:["ch":"收費說明","vtype":"String","value":"","use":true,"atype":more,"segue":TO_TEXT_INPUT,"show":""],
+            TEAM_CONTENT_KEY:["ch":"球隊說明","vtype":"String","value":"","use":true,"atype":more,"segue":TO_TEXT_INPUT,"show":""],
             TEAM_MANAGER_ID_KEY:["ch":"管理者編號","vtype":"Int","value":-1,"use":true,"show":""],
             TEAM_TEMP_FEE_M_KEY:["ch":"臨打費用：男","vtype":"Int","value":-1,"use":true,"atype":none,"show":""],
             TEAM_TEMP_FEE_F_KEY:["ch":"臨打費用：女","vtype":"Int","value":-1,"use":true,"atype":none,"show":""],
             TEAM_TEMP_QUANTITY_KEY:["ch":"臨打人數","vtype":"Int","value":-1,"use":false,"show":""],
-            TEAM_TEMP_CONTENT_KEY:["ch":"臨打說明","vtype":"String","value":"","use":true,"atype":more,"iden":TO_TEXT_INPUT,"show":""],
+            TEAM_TEMP_CONTENT_KEY:["ch":"臨打說明","vtype":"String","value":"","use":true,"atype":more,"segue":TO_TEXT_INPUT,"show":""],
             TEAM_TEMP_STATUS_KEY:["ch":"臨打狀態","vtype":"String","value":"","use":false,"show":""],
             TEAM_PV_KEY:["ch":"瀏覽數","vtype":"Int","value":-1,"use":false,"show":""],
             TEAM_TOKEN_KEY:["ch":"球隊token","vtype":"String","value":"","use":false,"show":""],
@@ -64,9 +64,9 @@ class Team {
             TEAM_CREATED_AT_KEY:["ch":"建立時間","vtype":"String","value":"","use":false,"show":""],
             TEAM_UPDATED_AT_KEY:["ch":"最後一次修改時間","vtype":"String","value":"","use":false,"show":""],
             TEAM_THUMB_KEY:["ch":"代表圖","vtype":"String","value":"","use":false,"show":""],
-            TEAM_CITY_KEY:["ch":"區域","vtype":"array","value":[String:Any](),"use":false,"atype":more,"iden":TO_CITY,"show":""],
-            TEAM_ARENA_KEY:["ch":"球館","vtype":"array","value":[String:Any](),"use":false,"atype":more,"iden":TO_ARENA,"show":""],
-            TEAM_DAY_KEY:["ch":"星期幾","vtype":"array","value":[Int](),"use":false,"atype":more,"iden":TO_DAY,"show":""],
+            TEAM_CITY_KEY:["ch":"區域","vtype":"array","value":0,"use":false,"atype":more,"segue":TO_CITY,"sender":0,"show":""],
+            TEAM_ARENA_KEY:["ch":"球館","vtype":"array","value":0,"use":false,"atype":more,"segue":TO_ARENA,"sender":[String: Int](),"show":""],
+            TEAM_DAYS_KEY:["ch":"星期幾","vtype":"array","value":[Int](),"use":false,"atype":more,"segue":TO_DAY,"sender":[Int](),"show":""],
             TEAM_FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(),"path":"","use":false,"show":""]
         ]
         
@@ -89,11 +89,9 @@ class Team {
     
     func extraShow() {
         daysShow()
-        cityShow()
-        arenaShow()
     }
     func daysShow() {
-        let row: [String: Any] = data[TEAM_DAY_KEY]!
+        let row: [String: Any] = data[TEAM_DAYS_KEY]!
         if row["value"] != nil {
             let days: [Int] = row["value"] as! [Int]
             if days.count > 0 {
@@ -108,14 +106,49 @@ class Team {
                     }
                 }
                 let show: String = res.joined(separator: ",")
-                data[TEAM_DAY_KEY]!["show"] = show
+                data[TEAM_DAYS_KEY]!["show"] = show
             }
         }
     }
-    func cityShow() {
-        
+    func timeShow() {
+        let start = data[TEAM_PLAY_START_KEY]!["value"] as! String
+        data[TEAM_PLAY_START_KEY]!["show"] = _timeShow(start)
+        let end = data[TEAM_PLAY_END_KEY]!["value"] as! String
+        data[TEAM_PLAY_END_KEY]!["show"] = _timeShow(end)
     }
-    func arenaShow() {
-        
+    func _timeShow(_ time: String) -> String {
+        let arr: [String] = time.components(separatedBy: ":")
+        var res: String = time
+        if arr.count > 2 {
+            res = "\(arr[0]):\(arr[1])"
+        }
+        return res
+    }
+    
+    func updateDays(_ days: [Int]) {
+        data[TEAM_DAYS_KEY]!["value"] = days
+        daysShow()
+    }
+    
+    func updateCity(_ city: City) {
+        data[TEAM_CITY_KEY]!["value"] = city.id
+        data[TEAM_CITY_KEY]!["show"] = city.name
+        data[TEAM_CITY_KEY]!["sender"] = city.id
+        setArenaSender()
+    }
+    
+    func updateArena(_ arena: Arena) {
+        data[TEAM_ARENA_KEY]!["value"] = arena.id
+        data[TEAM_ARENA_KEY]!["show"] = arena.name
+        setArenaSender()
+    }
+    
+    func setArenaSender() {
+        var arena_sender: [String: Int] = [String: Int]()
+        let city_id: Int = data[TEAM_CITY_KEY]!["value"] as! Int
+        let arena_id: Int = data[TEAM_ARENA_KEY]!["value"] as! Int
+        arena_sender["city_id"] = city_id
+        arena_sender["arena_id"] = arena_id
+        data[TEAM_ARENA_KEY]!["sender"] = arena_sender
     }
 }

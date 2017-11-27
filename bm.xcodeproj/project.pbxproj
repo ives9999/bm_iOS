@@ -40,8 +40,8 @@
 		B3ED38E81FB852EB0003F083 /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38E71FB852EB0003F083 /* FormCell.swift */; };
 		B3ED38EA1FB87EE50003F083 /* TeamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38E91FB87EE50003F083 /* TeamService.swift */; };
 		B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38EB1FB9AB9D0003F083 /* Arena.swift */; };
-		B3ED38F01FB9AD460003F083 /* ArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38EF1FB9AD460003F083 /* ArenaVC.swift */; };
-		B3ED38F21FBAD4C30003F083 /* DayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F11FBAD4C20003F083 /* DayVC.swift */; };
+		B3ED38F01FB9AD460003F083 /* ArenaSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38EF1FB9AD460003F083 /* ArenaSelectVC.swift */; };
+		B3ED38F21FBAD4C30003F083 /* DaysSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F11FBAD4C20003F083 /* DaysSelectVC.swift */; };
 		B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */; };
 		B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F51FBC0A7C0003F083 /* TextInputVC.swift */; };
 		B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */; };
@@ -59,7 +59,7 @@
 		F94EAA201FB023B800B1762C /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EAA1F1FB023B800B1762C /* ProfileVC.swift */; };
 		F94FF4351FB4322C00D167B6 /* TeamSubmitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94FF4341FB4322C00D167B6 /* TeamSubmitVC.swift */; };
 		F96931971FB953960005C13F /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96931961FB953960005C13F /* City.swift */; };
-		F96931991FB958110005C13F /* CityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96931981FB958110005C13F /* CityVC.swift */; };
+		F96931991FB958110005C13F /* CitySelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96931981FB958110005C13F /* CitySelectVC.swift */; };
 		F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */; };
 		F9A1CB7F1F95CD2500DDEC86 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* ListCell.swift */; };
 		F9A1CB811F95CE2F00DDEC86 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB801F95CE2F00DDEC86 /* List.swift */; };
@@ -135,8 +135,8 @@
 		B3ED38E71FB852EB0003F083 /* FormCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
 		B3ED38E91FB87EE50003F083 /* TeamService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamService.swift; sourceTree = "<group>"; };
 		B3ED38EB1FB9AB9D0003F083 /* Arena.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arena.swift; sourceTree = "<group>"; };
-		B3ED38EF1FB9AD460003F083 /* ArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaVC.swift; sourceTree = "<group>"; };
-		B3ED38F11FBAD4C20003F083 /* DayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayVC.swift; sourceTree = "<group>"; };
+		B3ED38EF1FB9AD460003F083 /* ArenaSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaSelectVC.swift; sourceTree = "<group>"; };
+		B3ED38F11FBAD4C20003F083 /* DaysSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSelectVC.swift; sourceTree = "<group>"; };
 		B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectVC.swift; sourceTree = "<group>"; };
 		B3ED38F51FBC0A7C0003F083 /* TextInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputVC.swift; sourceTree = "<group>"; };
 		B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreeSelectVC.swift; sourceTree = "<group>"; };
@@ -159,7 +159,7 @@
 		F94EAA1F1FB023B800B1762C /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		F94FF4341FB4322C00D167B6 /* TeamSubmitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSubmitVC.swift; sourceTree = "<group>"; };
 		F96931961FB953960005C13F /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
-		F96931981FB958110005C13F /* CityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityVC.swift; sourceTree = "<group>"; };
+		F96931981FB958110005C13F /* CitySelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySelectVC.swift; sourceTree = "<group>"; };
 		F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		F9A1CB7E1F95CD2500DDEC86 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		F9A1CB801F95CE2F00DDEC86 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
@@ -354,9 +354,9 @@
 				F94EAA1F1FB023B800B1762C /* ProfileVC.swift */,
 				B3ED38D61FB2A3E80003F083 /* EditProfileVC.swift */,
 				F94FF4341FB4322C00D167B6 /* TeamSubmitVC.swift */,
-				F96931981FB958110005C13F /* CityVC.swift */,
-				B3ED38EF1FB9AD460003F083 /* ArenaVC.swift */,
-				B3ED38F11FBAD4C20003F083 /* DayVC.swift */,
+				F96931981FB958110005C13F /* CitySelectVC.swift */,
+				B3ED38EF1FB9AD460003F083 /* ArenaSelectVC.swift */,
+				B3ED38F11FBAD4C20003F083 /* DaysSelectVC.swift */,
 				B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */,
 				B3ED38F51FBC0A7C0003F083 /* TextInputVC.swift */,
 				B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */,
@@ -622,7 +622,7 @@
 				B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
 				B322F80A1FC6AD1800DE98FB /* MenuCell.swift in Sources */,
-				B3ED38F01FB9AD460003F083 /* ArenaVC.swift in Sources */,
+				B3ED38F01FB9AD460003F083 /* ArenaSelectVC.swift in Sources */,
 				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
 				B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */,
 				B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */,
@@ -633,10 +633,10 @@
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
-				B3ED38F21FBAD4C30003F083 /* DayVC.swift in Sources */,
+				B3ED38F21FBAD4C30003F083 /* DaysSelectVC.swift in Sources */,
 				B3E72A261FA0FBFF0008A6B1 /* LoginVC.swift in Sources */,
 				B3ED38D91FB463D00003F083 /* Team.swift in Sources */,
-				F96931991FB958110005C13F /* CityVC.swift in Sources */,
+				F96931991FB958110005C13F /* CitySelectVC.swift in Sources */,
 				B3ED38D71FB2A3E80003F083 /* EditProfileVC.swift in Sources */,
 				B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */,
 				B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */,

@@ -123,7 +123,7 @@ let TEAM_UPDATED_AT_KEY = "updated_at"
 let TEAM_THUMB_KEY = "thumb"
 let TEAM_CITY_KEY = "city"
 let TEAM_ARENA_KEY = "arena"
-let TEAM_DAY_KEY = "days"
+let TEAM_DAYS_KEY = "days"
 let TEAM_FEATURED_KEY = "featured_path"
 
 // Notification Constants

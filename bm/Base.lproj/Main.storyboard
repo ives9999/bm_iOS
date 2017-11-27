@@ -100,7 +100,7 @@
         <!--星期幾-->
         <scene sceneID="w2r-Hp-vkk">
             <objects>
-                <tableViewController id="kQg-4a-L1K" customClass="DayVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="kQg-4a-L1K" customClass="DaysSelectVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DTt-lK-SLm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -329,7 +329,7 @@
         <!--區域-->
         <scene sceneID="3nd-bd-ghH">
             <objects>
-                <tableViewController id="oOZ-Lo-dEg" customClass="CityVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="oOZ-Lo-dEg" customClass="CitySelectVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="RBQ-b1-hWy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -359,7 +359,7 @@
         <!--球館-->
         <scene sceneID="Wbo-85-b7z">
             <objects>
-                <tableViewController id="lly-ei-ELv" customClass="ArenaVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="lly-ei-ELv" customClass="ArenaSelectVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lfw-Rq-VwX">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1625,7 +1625,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="f5d-2G-qtf"/>
-        <segue reference="9hz-2Z-7jX"/>
+        <segue reference="Ym7-zQ-SHb"/>
         <segue reference="a7V-eU-Yjs"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -10,17 +10,32 @@ import UIKit
 import UIColor_Hex_Swift
 import SCLAlertView
 
-protocol DaysDelegate: class {
-    func setDaysData(res: [Int: String])
+protocol DaysSelectDelegate: class {
+    func setDaysData(res: [Int])
 }
 
-class DayVC: UITableViewController {
+class DaysSelectVC: UITableViewController {
 
-    weak var delegate: DaysDelegate?
+    weak var delegate: DaysSelectDelegate?
+    var selectedDays: [Int]?
     var days: [[String: Any]] = Global.instance.days
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //print(selectedDays)
+        
+        if selectedDays!.count > 0 {
+            for day in selectedDays! {
+                for (index, item) in days.enumerated() {
+                    let value: Int = item["value"] as! Int
+                    if day == value {
+                        days[index]["checked"] = true
+                        break
+                    }
+                }
+            }
+        }
+        print(days)
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
@@ -35,13 +50,12 @@ class DayVC: UITableViewController {
     @objc func submit() {
         //print(days)
         var isSelected: Bool = false
-        var res: [Int: String] = [Int: String]()
+        var res: [Int] = [Int]()
         for day in days {
             //print(day)
             if day["checked"] as! Bool {
                 let idx: Int = day["value"] as! Int
-                let text: String = day["text"] as! String
-                res[idx] = text
+                res.append(idx)
                 isSelected = true
             }
         }
@@ -69,8 +83,19 @@ class DayVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        cell.textLabel!.text = (days[indexPath.row]["text"] as! String)
-        cell.textLabel!.textColor = UIColor.white
+        let item: [String: Any] = days[indexPath.row]
+        
+        cell.textLabel!.text = (item["text"] as! String)
+        let checked: Bool = item["checked"] as! Bool
+        if checked {
+            cell.accessoryType = .checkmark
+            cell.textLabel?.textColor = UIColor(MY_GREEN)
+            cell.tintColor = UIColor(MY_GREEN)
+        } else {
+            cell.accessoryType = .none
+            cell.textLabel?.textColor = UIColor.white
+            cell.tintColor = UIColor.white
+        }
 
         return cell
     }

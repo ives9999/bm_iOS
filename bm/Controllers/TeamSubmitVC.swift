@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CityDelegate, ArenaDelegate, DaysDelegate, TimeSelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate, TeamSubmitCellDelegate {
+class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate, TeamSubmitCellDelegate {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -141,23 +141,24 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-        let row = _rows[indexPath.section][indexPath.row]
+        
+        
+        let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
         let cell = tableView.cellForRow(at: indexPath) as! TeamSubmitCell
         if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
-            if row["iden"] != nil {
-                let iden: String = row["iden"] as! String
+            if row["segue"] != nil {
+                let segue: String = row["segue"] as! String
                 //print(iden)
-                if iden == TO_ARENA && selectedCity.id == 0 {
+                let city: Int = Team.instance.data[TEAM_CITY_KEY]!["value"] as! Int
+                if segue == TO_ARENA && city == 0 {
                     SCLAlertView().showError("錯誤", subTitle: "請先選擇區域")
                 } else {
-                    performSegue(withIdentifier: iden, sender: row["sender"])
+                    performSegue(withIdentifier: segue, sender: row["sender"])
                 }
             }
         } else {
             cell.generalTextField.becomeFirstResponder()
         }
- */
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -171,17 +172,19 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         var destinationNavigationController: UINavigationController?
         if segue.identifier == TO_CITY {
             destinationNavigationController = (segue.destination as! UINavigationController)
-            let cityVC: CityVC = destinationNavigationController!.topViewController as! CityVC
-            cityVC.delegate = self
+            let citySelectVC: CitySelectVC = destinationNavigationController!.topViewController as! CitySelectVC
+            citySelectVC.delegate = self
+            citySelectVC.city_id = (sender as! Int)
         } else if segue.identifier == TO_ARENA {
             destinationNavigationController = (segue.destination as! UINavigationController)
-            let arenaVC: ArenaVC = destinationNavigationController!.topViewController as! ArenaVC
-            arenaVC.delegate = self
-            arenaVC.city_id = sender as! Int
+            let arenaSelectVC: ArenaSelectVC = destinationNavigationController!.topViewController as! ArenaSelectVC
+            arenaSelectVC.delegate = self
+            arenaSelectVC.selectedID = (sender as! [String: Int])
         } else if segue.identifier == TO_DAY {
             destinationNavigationController = (segue.destination as! UINavigationController)
-            let dayVC: DayVC = destinationNavigationController!.topViewController as! DayVC
-            dayVC.delegate = self
+            let daysSelectVC: DaysSelectVC = destinationNavigationController!.topViewController as! DaysSelectVC
+            daysSelectVC.selectedDays = (sender as! [Int])
+            daysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let timeSelectVC: TimeSelectVC = destinationNavigationController!.topViewController as! TimeSelectVC
@@ -285,25 +288,16 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     func setCityData(id: Int, name: String) {
         let city = City(id: id, name: name)
-        //self.selectedCity = city
-        //print(selectedCity.name)
-        //_setSelectedToRows(key: TEAM_CITY_KEY, value: self.selectedCity.name)
+        Team.instance.updateCity(city)
         self.tableView.reloadData()
     }
     func setArenaData(id: Int, name: String) {
         let arena = Arena(id: id, name: name)
-        //self.selectedArena = arena
-        //_setSelectedToRows(key: TEAM_ARENA_KEY, value: self.selectedArena.name)
+        Team.instance.updateArena(arena)
         self.tableView.reloadData()
     }
-    func setDaysData(res: [Int: String]) {
-        //self.selectedDays = res
-        var tmp: [String] = [String]()
-        //for (_, value) in selectedDays {
-            //tmp.append(value)
-        //}
-        let text = tmp.joined(separator: ", ")
-        _setSelectedToRows(key: TEAM_DAY_KEY, value: text)
+    func setDaysData(res: [Int]) {
+        Team.instance.updateDays(res)
         self.tableView.reloadData()
     }
     func setTimeData(time: String, type: SELECT_TIME_TYPE) {

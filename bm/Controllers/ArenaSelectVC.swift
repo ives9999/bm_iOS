@@ -1,5 +1,5 @@
 //
-//  CityVC.swift
+//  ArenaVC.swift
 //  bm
 //
 //  Created by ives on 2017/11/13.
@@ -7,32 +7,41 @@
 //
 
 import UIKit
+import UIColor_Hex_Swift
 
-protocol CityDelegate: class {
-    func setCityData(id: Int, name: String)
+protocol ArenaSelectDelegate: class {
+    func setArenaData(id: Int, name: String)
 }
 
+class ArenaSelectVC: UITableViewController {
+    
+    var arenas: [Arena] = [Arena]()
+    var selectedID: [String: Int]?
+    weak var delegate: ArenaSelectDelegate?
 
-class CityVC: UITableViewController {
-    
-    var citys: [City] = [City]()
-    weak var delegate: CityDelegate?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        //print(selectedID)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
         Global.instance.addSpinner(superView: self.tableView)
-        DataService.instance.getAllCitys { (success) in
+        let city_id: Int = selectedID!["city_id"]!
+        DataService.instance.getArenaByCityID(city_id: city_id) { (success) in
             if success {
-                self.citys = DataService.instance.citys
+                self.arenas = DataService.instance.arenas
                 //print(self.citys)
                 self.tableView.reloadData()
                 Global.instance.removeSpinner(superView: self.tableView)
             }
         }
+
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
     
     @objc func back() {
@@ -47,27 +56,29 @@ class CityVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print(citys.count)
-        return citys.count
+        // #warning Incomplete implementation, return the number of rows
+        return arenas.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-
-        //print(citys[indexPath.row].name)
-        cell.textLabel!.text = citys[indexPath.row].name
-        cell.textLabel!.textColor = UIColor.white
-
+        
+        cell.textLabel!.text = arenas[indexPath.row].name
+        if selectedID!["arena_id"]! == arenas[indexPath.row].id {
+            cell.textLabel?.textColor = UIColor(MY_GREEN)
+        } else {
+            cell.textLabel!.textColor = UIColor.white
+        }
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let city: City = citys[indexPath.row]
-        delegate?.setCityData(id: city.id, name: city.name)
+        let arena: Arena = arenas[indexPath.row]
+        delegate?.setArenaData(id: arena.id, name: arena.name)
         back()
     }
-    
 
     /*
     // Override to support conditional editing of the table view.

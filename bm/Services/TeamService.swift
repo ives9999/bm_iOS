@@ -117,19 +117,25 @@ class TeamService {
                             if key == TEAM_DEGREE_KEY {
                                 let tmp1: String = tmp.stringValue
                                 value = tmp1.components(separatedBy: ",")
-                            } else if key == TEAM_DAY_KEY {
+                            } else if key == TEAM_DAYS_KEY {
                                 let tmp1: [JSON] = tmp.arrayValue
                                 var tmp2: [Int] = [Int]()
                                 for item in tmp1 {
                                     tmp2.append(item["day"].intValue)
                                 }
                                 value = tmp2
+                                Team.instance.data[key]!["sender"] = value
                             } else if key == TEAM_ARENA_KEY {
-                                let tmp2: [String: Any] = ["id": tmp["id"].intValue, "name": tmp["name"].stringValue]
-                                value = tmp2
+                                let id: Int = tmp["id"].intValue
+                                let name: String = tmp["name"].stringValue
+                                value = id
+                                Team.instance.data[key]!["show"] = name
                             } else if key == TEAM_CITY_KEY {
-                                let tmp2: [String: Any] = ["id": tmp["id"].intValue, "name": tmp["name"].stringValue]
-                                value = tmp2
+                                let id: Int = tmp["id"].intValue
+                                let name: String = tmp["name"].stringValue
+                                value = id
+                                Team.instance.data[key]!["sender"] = id
+                                Team.instance.data[key]!["show"] = name
                             }
                             Team.instance.data[key]!["value"] = value
                         } else if type == "image" {
@@ -143,6 +149,8 @@ class TeamService {
                         }
                     }
                 }
+                Team.instance.setArenaSender()
+                Team.instance.timeShow()
                 //print(Team.instance.data)
                 
                 let path: String = Team.instance.data[TEAM_FEATURED_KEY]!["path"] as! String
