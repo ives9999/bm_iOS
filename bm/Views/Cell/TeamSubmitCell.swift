@@ -16,6 +16,7 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
     
     var delegate: TeamSubmitCellDelegate?
     var generalTextField: SuperTextField!
+    var iden: String = ""
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
@@ -39,12 +40,14 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
     }
     
     func forRow(row: [String: Any]) {
+        //print(row)
         generalTextField.delegate = self
-        generalTextField.tag = row["idx"] as! Int
+        //generalTextField.tag = row["idx"] as! Int
+        iden = row["key"] as! String
         if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
             generalTextField.isHidden = true
-            if row["value"] != nil {
-                detailTextLabel?.text = (row["value"] as! String)
+            if row["show"] != nil {
+                detailTextLabel?.text = (row["show"] as! String)
             } else {
                 detailTextLabel?.text = ""
             }
@@ -52,19 +55,12 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
         } else {
             detailTextLabel?.text = ""
             generalTextField.isHidden = false
-            if row["value"] != nil {
-                var value: String = ""
-                if row["vtype"] as! String == "Int" {
-                    let tmp: Int = row["value"] as! Int
-                    value = tmp < 0 ? "" : String(tmp)
-                } else {
-                    value = row["value"] as! String
-                }
-                generalTextField.text = value
+            if row["show"] != nil {
+                generalTextField.text = (row["show"] as! String)
             }
             accessoryType = UITableViewCellAccessoryType.none
         }
-        textLabel?.text = (row["text"] as! String)
+        textLabel?.text = (row["ch"] as! String)
         setNeedsLayout()
     }
     

@@ -17,7 +17,9 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     @IBOutlet weak var featuredView: ImagePickerView!
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
+    var token: String = ""
     
+    /*
     var id: Int = 0
     var token: String = ""
     var name: String = ""
@@ -39,12 +41,10 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     var degree: [DEGREE] = [DEGREE]()
     var charge: String = ""
     var content: String = ""
-    
-    let _sections: [String] = ["", "聯絡資訊", "所在地", "打球時間", "臨打說明", "其他說明"]
-    var _rows: [[Dictionary<String, Any>]] = [[Dictionary<String, Any>]]()
-    var team: Team = Team()
+ */
     
     override func viewDidLoad() {
+        //print(Team.instance.data)
         //print(token)
         /*name = "快樂羽球隊"
         leader = "孫志煌"
@@ -64,6 +64,8 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         selectedCity = City(id: 218, name: "台南")
         selectedArena = Arena(id: 10, name: "全穎羽球館")*/
         
+        
+        /*
         var tmp:[String] = [String]()
         for (_, value) in selectedDays {
             tmp.append(value)
@@ -75,73 +77,26 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             tmp.append(value)
         }
         let textDegree = tmp.joined(separator: ", ")
+        */
         
-        let none: UITableViewCellAccessoryType = UITableViewCellAccessoryType.none
-        let more: UITableViewCellAccessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        
-        _rows = [
-            [
-                ["key": TEAM_NAME_KEY,"value":name,"atype":none,"vtype":"String"]
-            ],
-            [
-                ["key": TEAM_LEADER_KEY,"value":leader,"atype":none,"vtype":"String"],
-                ["key": TEAM_MOBILE_KEY,"value":mobile,"atype":none,"vtype":"String"],
-                ["key": TEAM_EMAIL_KEY,"value":email,"atype":none,"vtype":"String"]
-            ],
-            [
-                ["key": TEAM_CITY_KEY,"value":selectedCity.name,"atype":more,"iden":TO_CITY],
-                ["key": TEAM_ARENA_KEY,"value":selectedArena.name,"atype":more,"iden":TO_ARENA,"sender":selectedCity.id]
-            ],
-            [
-                ["key": TEAM_DAY_KEY,"value":textDay,"atype":more,"iden":TO_DAY],
-                ["key": TEAM_PLAY_START_KEY,"value":selectedStartTime,"atype":more,"iden":TO_SELECT_TIME,"sender":SELECT_TIME_TYPE.play_start],
-                ["key": TEAM_PLAY_END_KEY,"value":selectedEndTime,"atype":more,"iden":TO_SELECT_TIME,"sender":SELECT_TIME_TYPE.play_end]
-            ],
-            [
-                ["key": TEAM_TEMP_FEE_M_KEY,"value":temp_fee_M,"atype":none,"vtype":"Int"],
-                ["key": TEAM_TEMP_FEE_F_KEY,"value":temp_fee_F,"atype":none,"vtype":"Int"],
-                ["key": TEAM_TEMP_CONTENT_KEY,"value":temp_content,"atype":more,"iden":TO_TEXT_INPUT,"sender":TEXT_INPUT_TYPE.temp_play]
-            ],
-            [
-                ["key": TEAM_BALL_KEY,"value":ball,"atype":none,"vtype":"String"],
-                ["key": TEAM_DEGREE_KEY,"value":textDegree,"atype":more,"iden":TO_SELECT_DEGREE],
-                ["key": TEAM_CHARGE_KEY,"value":charge,"atype":more,"iden":TO_TEXT_INPUT,"sender":TEXT_INPUT_TYPE.charge],
-                ["key": TEAM_CONTENT_KEY,"value":content,"atype":more,"iden":TO_TEXT_INPUT,"sender":TEXT_INPUT_TYPE.team]
-            ]
-        ]
-        
-        
-        var idx = 1;
-        for (index1, row) in _rows.enumerated() {
-            for (index2, item) in row.enumerated() {
-                let key: String = item["key"] as! String
-                let team: [String: Any]? = Team.instance.data[key]
-                if team != nil {
-                    _rows[index1][index2]["text"] = team?["ch"] as! String
-                }
-                _rows[index1][index2]["idx"] = idx
-                idx += 1
-            }
-        }
-        
+ 
+        //let token: String = Team.instance.data[TEAM_TOKEN_KEY]!["value"] as! String
         if token.count > 0 {
             Global.instance.addSpinner(superView: self.view)
             TeamService.instance.getOne(type: "team", token: token, completion: { (success) in
                 if success {
                     Global.instance.removeSpinner(superView: self.view)
-                    self.team = TeamService.instance.team
-                    //print(self.team.data)
-                    self.name = self.team.data[TEAM_NAME_KEY]!["value"] as! String
-                    self._rows[0][0]["value"] = self.name
-                    print(self._rows)
-                    self.setData(sections: self._sections, rows: self._rows)
+                    //print(Team.instance.data)
+                    Team.instance.extraShow()
+                    print(Team.instance.data)
                     self.tableView.reloadData()
                 }
             })
         }
         
         //print(_rows)
-        setData(sections: _sections, rows: _rows)
+        //setData(sections: Team.instance.sections, rows: _rows)
+        sections = Team.instance.sections
         myTablView = tableView
         super.viewDidLoad()
         
@@ -154,234 +109,39 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         hideKeyboardWhenTappedAround()
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count: Int = 0
+        for (_, value) in Team.instance.data {
+            if value["section"] != nil {
+                let _section: Int = value["section"] as! Int
+                if section == _section {
+                    if value["row"] != nil {
+                        count += 1
+                    }
+                }
+            }
+        }
+        //print("section: \(section), count: \(count)")
+        return count
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //print("section: \(indexPath.section), row: \(indexPath.row)")
         let cell: TeamSubmitCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamSubmitCell
         cell.delegate = self
         
-        let row: [String: Any] = rows![indexPath.section][indexPath.row]
+        let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
+//        if indexPath.section == 0 && indexPath.row == 0 {
+//            print(row)
+//        }
         cell.forRow(row: row)
         
         return cell
-        
-        /*
-        var cell: FormCell? = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell
-        if cell == nil {
-            //print("cell is nil")
-            cell = FormCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-            cell!.accessoryType = UITableViewCellAccessoryType.none
-            cell!.selectionStyle = UITableViewCellSelectionStyle.none
-        } else {
-            if cell!.subviews.contains(nameTxt) {
-                nameTxt.removeFromSuperview()
-            }
-            if cell!.subviews.contains(leaderTxt) {
-                leaderTxt.removeFromSuperview()
-            }
-            if cell!.subviews.contains(mobileTxt) {
-                mobileTxt.removeFromSuperview()
-            }
-            if cell!.subviews.contains(emailTxt) {
-                emailTxt.removeFromSuperview()
-            }
-            if cell!.subviews.contains(tempFeeMTxt) {
-                tempFeeMTxt.removeFromSuperview()
-            }
-            if cell!.subviews.contains(tempFeeFTxt) {
-                tempFeeFTxt.removeFromSuperview()
-            }
-            if cell!.subviews.contains(ballTxt) {
-                ballTxt.removeFromSuperview()
-            }
-            cell!.textLabel?.text = ""
-            cell!.detailTextLabel?.text = ""
-            cell!.accessoryType = .none
-        }
-        
-        let row: [String: Any] = rows![indexPath.section][indexPath.row]
-        let key: String = row["key"] as! String
-        var team: [String: String]? = Team.instance.info[key]
-        if team == nil {
-            team = [String: String]()
-        }
-        var field: String = ""
-        //var data: String = ""
-        if let tmp: String = team?["ch"] {
-            field = tmp
-        }
-        cell!.textLabel!.text = field
-        let cellFrame: CGRect = cell!.bounds
-        //print("cell width: \(cellFrame.width)")
-        let yPadding: CGFloat = 5
-        //let xPadding: CGFloat = 20
-        //let xLabelWidth: CGFloat = 50
-        //let xLabelWidth: CGFloat = cell!.textLabel!.frame.size.width
-        //print("xLabelWidth: \(xLabelWidth)")
-        let txtWidth: CGFloat = 280
-        let txtHeight: CGFloat = cellFrame.height - 8
-        //print("txtWidth: \(txtWidth)")
-        let x = cell_width! - txtWidth
-        //print("x: \(x)")
-        let editFrame: CGRect = CGRect(x: x, y: yPadding, width: txtWidth, height: txtHeight)
-        
-        switch indexPath.section {
-        case 0:  //名稱
-            switch indexPath.row {
-            case 0:
-                nameTxt.frame = editFrame
-                cell!.addSubview(nameTxt)
-                break
-            default:
-                print("default")
-            }
-            break;
-        case 1:  //聯絡資訊
-            //let width: CGFloat = 250
-            //editFrame = CGRect(x: cellFrame.width - width, y: 0, width: width, height: cellFrame.height)
-            var txt: SuperTextField = SuperTextField()
-            switch indexPath.row {
-            case 0:
-//                let leaderLbl: MyLabel = MyLabel(frame: editFrame)
-//                leaderLbl.text = Member.instance.nickname
-//                leaderLbl.setupView()
-//                leaderLbl.frame = leaderLbl.frame.setX(cell_width! - leaderLbl.frame.width - 10)
-                //print(leaderLbl.frame.width)
-                //leaderLbl.backgroundColor = UIColor.black
-                //leaderLbl.textAlignment = .right
-                //print(Member.instance.nickname)
-                //cell!.addSubview(leaderLbl)
-                leaderTxt.frame = editFrame
-                txt = leaderTxt
-                cell!.addSubview(txt)
-                break
-            case 1:
-                mobileTxt.frame = editFrame
-                txt = mobileTxt
-                cell!.addSubview(txt)
-                break
-            case 2:
-                emailTxt.frame = editFrame
-                txt = emailTxt
-                cell!.addSubview(txt)
-                break
-            default:
-                print("default")
-            }
-            break;
-        case 2:  //所在地
-            switch indexPath.row {
-            case 0:
-                if selectedCity.name.count > 0 {
-                    cell!.detailTextLabel?.text = selectedCity.name
-                }
-                break
-            case 1:
-                if selectedArena.name.count > 0 {
-                    cell!.detailTextLabel?.text = selectedArena.name
-                }
-                break
-            default:
-                print("default")
-            }
-            cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-            break
-        case 3:  //打球時間
-            switch indexPath.row {
-            case 0:
-                var res: [String] = [String]()
-                for (_, value) in selectedDays {
-                    res.append(value)
-                }
-                let text = res.joined(separator: ", ")
-                cell!.detailTextLabel?.text = text
-                break
-            case 1:
-                if selectStartTime.count > 0 {
-                    cell!.detailTextLabel?.text = selectStartTime
-                }
-                break
-            case 2:
-                if selectEndTime.count > 0 {
-                    cell!.detailTextLabel?.text = selectEndTime
-                }
-                break
-            default:
-                print("default")
-            }
-            cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-            break
-        case 4:  //臨打
-            let width: CGFloat = 150
-            //let frame = editFrame.setWidth(width)
-            let frame = CGRect(x: cell_width! - width, y: editFrame.origin.y, width: width, height: editFrame.height)
-            switch indexPath.row {
-            case 0:
-                tempFeeMTxt.frame = frame
-                cell!.addSubview(tempFeeMTxt)
-                break
-            case 1:
-                tempFeeFTxt.frame = frame
-                cell!.addSubview(tempFeeFTxt)
-                break
-            case 2:
-                if temp_content.count > 0 {
-                    if temp_content.count < 15 {
-                        cell!.detailTextLabel?.text = temp_content
-                    }
-                }
-                cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-                break
-            default:
-                print("default")
-            }
-        case 5:  //球隊說明
-            switch indexPath.row {
-            case 0:   //使用球種
-                ballTxt.frame = editFrame
-                ballTxt.setAlign(align: .right)
-                cell!.addSubview(ballTxt)
-                break
-            case 1:   //球友程度
-                if degree.count > 0 {
-                    var res: [String] = [String]()
-                    for key in degree {
-                        let value = key.rawValue
-                        res.append(value)
-                    }
-                    let text = res.joined(separator: ", ")
-                    cell!.detailTextLabel?.text = text
-                }
-                cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-                break
-            case 2:
-                if charge.count > 0 {
-                    if charge.count < 15 {
-                        cell!.detailTextLabel?.text = charge
-                    }
-                }
-                cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-                break
-            case 3:
-                if content.count > 0 {
-                    if content.count < 15 {
-                        cell!.detailTextLabel?.text = content
-                    }
-                }
-                cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-                break
-            default:
-                print("default")
-            }
-        default:
-            print("default")
-        }
-        
-        //cell!.detailTextLabel!.text = "\(data)"
-        return cell!
-        */
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /*
         let row = _rows[indexPath.section][indexPath.row]
         let cell = tableView.cellForRow(at: indexPath) as! TeamSubmitCell
         if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
@@ -396,67 +156,6 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             }
         } else {
             cell.generalTextField.becomeFirstResponder()
-        }
-        
-        /*
-        switch indexPath.section {
-        case 2:
-            switch indexPath.row {
-            case 0:
-                performSegue(withIdentifier: TO_CITY, sender: nil)
-                break
-            default:
-                if selectedCity.id == 0 {
-                    SCLAlertView().showError("錯誤", subTitle: "請先選擇區域")
-                } else {
-                    performSegue(withIdentifier: TO_ARENA, sender: selectedCity.id)
-                }
-                break
-            }
-        case 3:
-            switch indexPath.row {
-            case 0:
-                performSegue(withIdentifier: TO_DAY, sender: nil)
-                break
-            case 1:
-                performSegue(withIdentifier: TO_SELECT_TIME, sender: SELECT_TIME_TYPE.play_start)
-                break
-            case 2:
-                performSegue(withIdentifier: TO_SELECT_TIME, sender: SELECT_TIME_TYPE.play_end)
-                break
-            default:
-                print("click")
-            }
-        case 4:  //臨打
-            switch indexPath.row {
-            case 0:
-                break
-            case 1:
-                break
-            case 2:
-                performSegue(withIdentifier: TO_TEXT_INPUT, sender: TEXT_INPUT_TYPE.temp_play)
-                break
-            default:
-                print("click")
-            }
-        case 5:  //球隊說明
-            switch indexPath.row {
-            case 0:
-                break
-            case 1:
-                performSegue(withIdentifier: TO_SELECT_DEGREE, sender: nil)
-                break
-            case 2:
-                performSegue(withIdentifier: TO_TEXT_INPUT, sender: TEXT_INPUT_TYPE.charge)
-                break
-            case 3:
-                performSegue(withIdentifier: TO_TEXT_INPUT, sender: TEXT_INPUT_TYPE.team)
-                break
-            default:
-                print("default")
-            }
-        default:
-            print("click")
         }
  */
     }
@@ -509,10 +208,12 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     @IBAction func submit(_ sender: Any) {
         var params:[String: Any] = [String: Any]()
         var isPass: Bool = true
+        let name: String = Team.instance.data[TEAM_NAME_KEY]!["value"] as! String
         if name.count == 0 {
             isPass = false
             SCLAlertView().showWarning("提示", subTitle: "請填寫隊名")
         }
+        let mobile: String = Team.instance.data[TEAM_MOBILE_KEY]!["value"] as! String
         if mobile.count == 0 {
             isPass = false
             SCLAlertView().showWarning("提示", subTitle: "請填寫電話")
@@ -520,9 +221,23 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         //print(isPass)
         if isPass {
             Global.instance.addSpinner(superView: self.view)
-            if id == 0 {
+            let id: Int = Team.instance.data["id"]!["value"] as! Int
+            if id <= 0 {
         params.merge(["channel":"bm","type":"team","created_id":Member.instance.id,"manager_id":Member.instance.id,"cat_id":21])
             }
+            
+            /*
+            for (index1, row) in _rows.enumerated() {
+                for (index2, item) in row.enumerated() {
+                    if item["value"] != nil {
+                        let key: String = item["key"] as! String
+                        params[key] = item["value"]
+                    }
+                }
+            }
+ */
+            
+            /*
             params[TEAM_NAME_KEY] = name
             params[TEAM_SLUG_KEY] = name
             params[TEAM_MOBILE_KEY] = mobile
@@ -548,11 +263,14 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             params["city_id"] = selectedCity.id
             params["arena_id"] = selectedArena.id
             params["featured_id"] = 0
+ */
             TeamService.instance.update(params: params, featuredView.imageView.image, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if success {
                     if TeamService.instance.success {
-                        self.id = TeamService.instance.id
+                        let id: Int = TeamService.instance.id
+                        Team.instance.data[TEAM_ID_KEY]!["value"] = id
+                        Team.instance.data[TEAM_ID_KEY]!["show"] = id
                         //print(self.id)
                         //if self.id > 0 {
                         SCLAlertView().showSuccess("成功", subTitle: "新增 / 修改球隊成功")
@@ -567,23 +285,23 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     func setCityData(id: Int, name: String) {
         let city = City(id: id, name: name)
-        self.selectedCity = city
+        //self.selectedCity = city
         //print(selectedCity.name)
-        _setSelectedToRows(key: TEAM_CITY_KEY, value: self.selectedCity.name)
+        //_setSelectedToRows(key: TEAM_CITY_KEY, value: self.selectedCity.name)
         self.tableView.reloadData()
     }
     func setArenaData(id: Int, name: String) {
         let arena = Arena(id: id, name: name)
-        self.selectedArena = arena
-        _setSelectedToRows(key: TEAM_ARENA_KEY, value: self.selectedArena.name)
+        //self.selectedArena = arena
+        //_setSelectedToRows(key: TEAM_ARENA_KEY, value: self.selectedArena.name)
         self.tableView.reloadData()
     }
     func setDaysData(res: [Int: String]) {
-        self.selectedDays = res
+        //self.selectedDays = res
         var tmp: [String] = [String]()
-        for (_, value) in selectedDays {
-            tmp.append(value)
-        }
+        //for (_, value) in selectedDays {
+            //tmp.append(value)
+        //}
         let text = tmp.joined(separator: ", ")
         _setSelectedToRows(key: TEAM_DAY_KEY, value: text)
         self.tableView.reloadData()
@@ -591,12 +309,12 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     func setTimeData(time: String, type: SELECT_TIME_TYPE) {
         switch type {
         case SELECT_TIME_TYPE.play_start:
-            selectedStartTime = time
+            //selectedStartTime = time
             _setSelectedToRows(key: TEAM_PLAY_START_KEY, value: time)
             break
         case SELECT_TIME_TYPE.play_end:
             _setSelectedToRows(key: TEAM_PLAY_END_KEY, value: time)
-            selectedEndTime = time
+            //selectedEndTime = time
             break
         }
         self.tableView.reloadData()
@@ -605,29 +323,29 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         switch type {
         case TEXT_INPUT_TYPE.temp_play:
             _setSelectedToRows(key: TEAM_TEMP_CONTENT_KEY, value: text)
-            temp_content = text
+            //temp_content = text
             break
         case TEXT_INPUT_TYPE.charge:
             _setSelectedToRows(key: TEAM_CHARGE_KEY, value: text)
-            charge = text
+            //charge = text
             break
         case TEXT_INPUT_TYPE.team:
             _setSelectedToRows(key: TEAM_CONTENT_KEY, value: text)
-            content = text
+            //content = text
             break
             
         }
         self.tableView.reloadData()
     }
     func setDegreeData(degree: [DEGREE]) {
-        self.degree = degree
+        //self.degree = degree
         var tmp: [String] = [String]()
         for key in degree {
             let value = key.rawValue
             tmp.append(value)
         }
         let text = tmp.joined(separator: ", ")
-        _setSelectedToRows(key: TEAM_DEGREE_KEY, value: text)
+        //_setSelectedToRows(key: TEAM_DEGREE_KEY, value: text)
         self.tableView.reloadData()
     }
     // ImagePickerDelegate
@@ -637,25 +355,40 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     func myPresent(_ viewController: UIViewController) {
         self.present(viewController, animated: true, completion: nil)
     }
-    func setTextField(idx: Int, value: String) {
-        if (idx == 1) {
-            name = value
-        } else if (idx == 2) {
-            leader = value
-        } else if (idx == 3) {
-            mobile = value
-        } else if (idx == 4) {
-            email = value
-        } else if (idx == 8) {
-            temp_fee_M = Int(value)!
-        } else if (idx == 9) {
-            temp_fee_F = Int(value)!
-        } else if (idx == 11) {
-            ball = value
+    
+    func _getRowByindexPath(indexPath: IndexPath) -> [String: Any] {
+        var section: Int = -1
+        var row: Int = -1
+        var res: [String: Any]?
+        for (_, value) in Team.instance.data {
+            if value["section"] != nil {
+                section = value["section"] as! Int
+            }
+            if value["row"] != nil {
+                row = value["row"] as! Int
+            }
+            if section == indexPath.section && row == indexPath.row {
+                res = value
+                break
+            }
         }
+        return res!
+    }
+    func setTextField(idx: Int, value: String) {
+        /*
+        for (index1, row) in _rows.enumerated() {
+            for (index2, item) in row.enumerated() {
+                if item["idx"] as! Int == idx {
+                    _rows[index1][index2]["value"] = value
+                    _rows[index1][index2]["show"] = value
+                }
+            }
+        }
+ */
     }
     
     func _setSelectedToRows(key: String, value: String) {
+        /*
         print("key: \(key), value: \(value)")
         for (index1, row) in _rows.enumerated() {
             for (index2, item) in row.enumerated() {
@@ -666,5 +399,6 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
         //print(_rows)
         setData(sections: _sections, rows: _rows)
+ */
     }
 }

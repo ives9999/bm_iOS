@@ -18,7 +18,7 @@ class TeamService {
     var success: Bool = false
     var id: Int = 0
     var downloadImageNum: Int = 0
-    var team: Team = Team()
+    //var team: Team = Team()
     
     func update(params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
@@ -83,7 +83,7 @@ class TeamService {
     }
     func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
         self.downloadImageNum = 0
-        var body: [String: Any] = ["source": "app", "token": token]
+        let body: [String: Any] = ["source": "app", "token": token, "strip_html": true]
         
         //print(body)
         let url: String = String(format: URL_ONE, type)
@@ -100,15 +100,19 @@ class TeamService {
                 //print(json)
                 
                 //var images: [String] = [String]()
-                for (key, item) in self.team.data {
+                for (key, item) in Team.instance.data {
                     if json[key] != JSON.null {
                         let tmp = json[key]
                         var value: Any?
-                        let type: String = item["type"] as! String
+                        let type: String = item["vtype"] as! String
                         if type == "Int" {
                             value = tmp.intValue
+                            Team.instance.data[key]!["value"] = value
+                            Team.instance.data[key]!["show"] = "\(value ?? "")"
                         } else if type == "String" {
                             value = tmp.stringValue
+                            Team.instance.data[key]!["value"] = value
+                            Team.instance.data[key]!["show"] = value
                         } else if type == "array" {
                             if key == TEAM_DEGREE_KEY {
                                 let tmp1: String = tmp.stringValue
@@ -127,25 +131,25 @@ class TeamService {
                                 let tmp2: [String: Any] = ["id": tmp["id"].intValue, "name": tmp["name"].stringValue]
                                 value = tmp2
                             }
+                            Team.instance.data[key]!["value"] = value
                         } else if type == "image" {
                             if key == TEAM_FEATURED_KEY {
                                 var tmp1: String = tmp.stringValue
                                 if (tmp1.count > 0) {
                                     tmp1 = BASE_URL + tmp1
-                                    self.team.data[key]!["path"] = tmp1
+                                    Team.instance.data[key]!["path"] = tmp1
                                 }
                             }
                         }
-                        self.team.data[key]!["value"] = value
                     }
                 }
-                //print(team.data)
+                //print(Team.instance.data)
                 
-                let path: String = self.team.data[TEAM_FEATURED_KEY]!["path"] as! String
+                let path: String = Team.instance.data[TEAM_FEATURED_KEY]!["path"] as! String
                 if path.count > 0 {
                     DataService.instance.getImage(url: path, completion: { (success) in
                         if success {
-                            self.team.data[TEAM_FEATURED_KEY]!["value"] = DataService.instance.image
+                            Team.instance.data[TEAM_FEATURED_KEY]!["value"] = DataService.instance.image
                             completion(true)
                             //print(team.data)
                         }

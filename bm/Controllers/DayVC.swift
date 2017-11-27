@@ -17,15 +17,7 @@ protocol DaysDelegate: class {
 class DayVC: UITableViewController {
 
     weak var delegate: DaysDelegate?
-    var days: [[String: Any]] = [
-        ["value": 1, "text": "星期一", "checked": false],
-        ["value": 2, "text": "星期二", "checked": false],
-        ["value": 3, "text": "星期三", "checked": false],
-        ["value": 4, "text": "星期四", "checked": false],
-        ["value": 5, "text": "星期五", "checked": false],
-        ["value": 6, "text": "星期六", "checked": false],
-        ["value": 7, "text": "星期日", "checked": false]
-    ]
+    var days: [[String: Any]] = Global.instance.days
     
     override func viewDidLoad() {
         super.viewDidLoad()
