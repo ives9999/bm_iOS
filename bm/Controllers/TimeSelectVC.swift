@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UIColor_Hex_Swift
 
 protocol TimeSelectDelegate: class {
     func setTimeData(time: String, type: SELECT_TIME_TYPE)
@@ -14,7 +15,7 @@ protocol TimeSelectDelegate: class {
 
 class TimeSelectVC: UITableViewController {
     
-    var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
+    var input: [String: Any]?
     let times: [String] = ["07:00","07:30","08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00",
                            "12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30",
                            "18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00","22:30","23:00"
@@ -25,6 +26,7 @@ class TimeSelectVC: UITableViewController {
         super.viewDidLoad()
 
         var title: String = ""
+        let type: SELECT_TIME_TYPE = input!["type"] as! SELECT_TIME_TYPE
         switch type {
         case .play_start:
             title = "開始時間"
@@ -57,14 +59,21 @@ class TimeSelectVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        cell.textLabel?.text = times[indexPath.row]
-        cell.textLabel?.textColor = UIColor.white
+        let time: String = times[indexPath.row]
+        cell.textLabel?.text = time
+        let selectedTime: String = input!["time"] as! String
+        if time == selectedTime {
+            cell.textLabel?.textColor = UIColor(MY_GREEN)
+        } else {
+            cell.textLabel?.textColor = UIColor.white
+        }
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let time: String = times[indexPath.row]
+        let type: SELECT_TIME_TYPE = input!["type"] as! SELECT_TIME_TYPE
         delegate?.setTimeData(time: time, type: type)
         dismiss(animated: true, completion: nil)
     }

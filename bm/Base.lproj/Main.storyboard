@@ -11,7 +11,6 @@
     </dependencies>
     <customFonts key="customFonts">
         <array key="AppleSDGothicNeo.ttc">
-            <string>AppleSDGothicNeo-Regular</string>
             <string>AppleSDGothicNeo-SemiBold</string>
         </array>
         <array key="AvenirNext.ttc">
@@ -155,7 +154,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G9u-KJ-zAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1186" y="-3260"/>
+            <point key="canvasLocation" x="-1910" y="-3276"/>
         </scene>
         <!--Text InputVC-->
         <scene sceneID="QRP-sP-fbK">
@@ -168,32 +167,33 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Yxr-ME-S3m">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Dw-8z-Svy" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="10" y="84" width="355" height="100"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="mKn-9j-98B">
+                                <rect key="frame" x="10" y="84" width="355" height="128"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="Shc-0X-zXi"/>
+                                    <constraint firstAttribute="height" constant="128" id="aDk-cv-WhM"/>
                                 </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="18"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Yxr-ME-S3m" firstAttribute="leading" secondItem="d8O-KF-Y85" secondAttribute="leading" id="27H-27-lWS"/>
-                            <constraint firstItem="1Dw-8z-Svy" firstAttribute="top" secondItem="d8O-KF-Y85" secondAttribute="top" constant="20" id="6wX-kb-WGL"/>
                             <constraint firstItem="d8O-KF-Y85" firstAttribute="bottom" secondItem="Yxr-ME-S3m" secondAttribute="bottom" id="BH7-9T-D7w"/>
-                            <constraint firstItem="d8O-KF-Y85" firstAttribute="trailing" secondItem="1Dw-8z-Svy" secondAttribute="trailing" constant="10" id="RR8-94-wJB"/>
+                            <constraint firstItem="d8O-KF-Y85" firstAttribute="trailing" secondItem="mKn-9j-98B" secondAttribute="trailing" constant="10" id="Ee1-Fk-y9i"/>
+                            <constraint firstItem="mKn-9j-98B" firstAttribute="leading" secondItem="d8O-KF-Y85" secondAttribute="leading" constant="10" id="Lyy-XA-w0q"/>
                             <constraint firstItem="Yxr-ME-S3m" firstAttribute="top" secondItem="d8O-KF-Y85" secondAttribute="top" id="SeV-5f-NSF"/>
                             <constraint firstItem="d8O-KF-Y85" firstAttribute="trailing" secondItem="Yxr-ME-S3m" secondAttribute="trailing" id="UDf-dE-1eJ"/>
-                            <constraint firstItem="1Dw-8z-Svy" firstAttribute="leading" secondItem="d8O-KF-Y85" secondAttribute="leading" constant="10" id="joM-4h-fn0"/>
+                            <constraint firstItem="mKn-9j-98B" firstAttribute="top" secondItem="d8O-KF-Y85" secondAttribute="top" constant="20" id="a0R-64-vz3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="d8O-KF-Y85"/>
                     </view>
                     <navigationItem key="navigationItem" id="VVV-Hy-kqF"/>
                     <connections>
-                        <outlet property="textTxt" destination="1Dw-8z-Svy" id="7aN-d8-pHx"/>
+                        <outlet property="content" destination="mKn-9j-98B" id="W34-0P-DB5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E60-ID-6gF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1545,7 +1545,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lxm-Qf-W2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-471" y="-3722"/>
+            <point key="canvasLocation" x="-458" y="-3905"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZCV-m5-fHB">

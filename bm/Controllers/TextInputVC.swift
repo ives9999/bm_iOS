@@ -17,13 +17,15 @@ protocol TextInputDelegate: class {
 class TextInputVC: UIViewController {
     
     weak var delegate: TextInputDelegate?
-    var type: TEXT_INPUT_TYPE = TEXT_INPUT_TYPE.team
-    @IBOutlet weak var textTxt: SuperTextField!
+    var input: [String: Any]?
+
+    @IBOutlet weak var content: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         var title: String = ""
+        let type: TEXT_INPUT_TYPE = input!["type"] as! TEXT_INPUT_TYPE
         switch type {
         case .temp_play:
             title = "臨打說明"
@@ -37,8 +39,8 @@ class TextInputVC: UIViewController {
         }
         self.title = title
         
-        textTxt.layer.borderWidth = 1.0
-        textTxt.layer.borderColor = UIColor(TEXTBORDER).cgColor
+        content.layer.borderWidth = 1.0
+        content.layer.borderColor = UIColor(TEXTBORDER).cgColor
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
@@ -46,17 +48,25 @@ class TextInputVC: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(submit))
         navigationItem.rightBarButtonItem?.tintColor = UIColor.black
         
-        textTxt.becomeFirstResponder()
+        if input!["text"] != nil {
+            let text: String = input!["text"] as! String
+            if text.count > 0 {
+                content.text = text
+            }
+        }
+        
+        content.becomeFirstResponder()
     }
     @objc func back() {
         dismiss(animated: true, completion: nil)
     }
     @objc func submit() {
         
-        if textTxt.text!.count == 0 {
+        if content.text!.count == 0 {
             SCLAlertView().showWarning("警告", subTitle: "沒有選擇星期日期，或請按取消回上一頁")
         } else {
-            self.delegate?.setTextInputData(text: textTxt.text!, type: type)
+            let type: TEXT_INPUT_TYPE = input!["type"] as! TEXT_INPUT_TYPE
+            self.delegate?.setTextInputData(text: content.text!, type: type)
             back()
         }
     }

@@ -114,30 +114,28 @@ class TeamService {
                             Team.instance.data[key]!["value"] = value
                             Team.instance.data[key]!["show"] = value
                         } else if type == "array" {
-                            if key == TEAM_DEGREE_KEY {
-                                let tmp1: String = tmp.stringValue
-                                value = tmp1.components(separatedBy: ",")
-                            } else if key == TEAM_DAYS_KEY {
-                                let tmp1: [JSON] = tmp.arrayValue
-                                var tmp2: [Int] = [Int]()
-                                for item in tmp1 {
-                                    tmp2.append(item["day"].intValue)
-                                }
-                                value = tmp2
-                                Team.instance.data[key]!["sender"] = value
+                            if key == TEAM_CITY_KEY {
+                                let id: Int = tmp["id"].intValue
+                                let name: String = tmp["name"].stringValue
+                                let city: City = City(id: id, name: name)
+                                Team.instance.updateCity(city)
                             } else if key == TEAM_ARENA_KEY {
                                 let id: Int = tmp["id"].intValue
                                 let name: String = tmp["name"].stringValue
-                                value = id
-                                Team.instance.data[key]!["show"] = name
-                            } else if key == TEAM_CITY_KEY {
-                                let id: Int = tmp["id"].intValue
-                                let name: String = tmp["name"].stringValue
-                                value = id
-                                Team.instance.data[key]!["sender"] = id
-                                Team.instance.data[key]!["show"] = name
+                                let arena: Arena = Arena(id: id, name: name)
+                                Team.instance.updateArena(arena)
+                            } else if key == TEAM_DAYS_KEY {
+                                let tmp1: [JSON] = tmp.arrayValue
+                                var days: [Int] = [Int]()
+                                for item in tmp1 {
+                                    days.append(item["day"].intValue)
+                                }
+                                Team.instance.updateDays(days)
+                            } else if key == TEAM_DEGREE_KEY {
+                                let tmp1: String = tmp.stringValue
+                                let degrees: [String] = tmp1.components(separatedBy: ",")
+                                Team.instance.updateDegree(degrees)
                             }
-                            Team.instance.data[key]!["value"] = value
                         } else if type == "image" {
                             if key == TEAM_FEATURED_KEY {
                                 var tmp1: String = tmp.stringValue
@@ -149,8 +147,11 @@ class TeamService {
                         }
                     }
                 }
-                Team.instance.setArenaSender()
-                Team.instance.timeShow()
+                Team.instance.updatePlayStartTime()
+                Team.instance.updatePlayEndTime()                
+                Team.instance.updateTempContent()
+                Team.instance.updateCharge()
+                Team.instance.updateContent()
                 //print(Team.instance.data)
                 
                 let path: String = Team.instance.data[TEAM_FEATURED_KEY]!["path"] as! String

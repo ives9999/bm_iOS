@@ -9,7 +9,7 @@
 import UIKit
 
 protocol TeamSubmitCellDelegate {
-    func setTextField(idx: Int, value: String)
+    func setTextField(iden: String, value: String)
 }
 
 class TeamSubmitCell: SuperCell, UITextFieldDelegate {
@@ -55,6 +55,11 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
         } else {
             detailTextLabel?.text = ""
             generalTextField.isHidden = false
+            if row["vtype"] as! String == "Int" {
+                generalTextField.keyboardType = UIKeyboardType.numberPad
+            } else {
+                generalTextField.keyboardType = UIKeyboardType.default
+            }
             if row["show"] != nil {
                 generalTextField.text = (row["show"] as! String)
             }
@@ -65,9 +70,9 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        //print("tag: \(textField.tag)")
+        print("tag: \(iden)")
         //print("text: \(textField.text)")
-        delegate?.setTextField(idx: textField.tag, value: textField.text!)
+        delegate?.setTextField(iden: iden, value: textField.text!)
     }
     
     override func awakeFromNib() {

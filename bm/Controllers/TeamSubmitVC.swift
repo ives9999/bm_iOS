@@ -87,9 +87,11 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                 if success {
                     Global.instance.removeSpinner(superView: self.view)
                     //print(Team.instance.data)
-                    Team.instance.extraShow()
-                    print(Team.instance.data)
                     self.tableView.reloadData()
+                    if let pickedImage: UIImage = Team.instance.data[TEAM_FEATURED_KEY]!["value"] as? UIImage {
+                        self.featuredView.setPickedImage(image: pickedImage)
+                    }
+                    //self.featuredView.imageView.image = (Team.instance.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
                 }
             })
         }
@@ -189,16 +191,17 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             destinationNavigationController = (segue.destination as! UINavigationController)
             let timeSelectVC: TimeSelectVC = destinationNavigationController!.topViewController as! TimeSelectVC
             timeSelectVC.delegate = self
-            timeSelectVC.type = sender as! SELECT_TIME_TYPE
+            timeSelectVC.input = (sender as! [String: Any])
         } else if segue.identifier == TO_TEXT_INPUT {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let textInputVC: TextInputVC = destinationNavigationController!.topViewController as! TextInputVC
             textInputVC.delegate = self
-            textInputVC.type = sender as! TEXT_INPUT_TYPE
+            textInputVC.input = (sender as! [String: Any])
         } else if segue.identifier == TO_SELECT_DEGREE {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let degreeSelectVC: DegreeSelectVC = destinationNavigationController!.topViewController as! DegreeSelectVC
             degreeSelectVC.delegate = self
+            degreeSelectVC.selectedDegrees = (sender as! [String])
         }
     }
     
@@ -303,12 +306,10 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     func setTimeData(time: String, type: SELECT_TIME_TYPE) {
         switch type {
         case SELECT_TIME_TYPE.play_start:
-            //selectedStartTime = time
-            _setSelectedToRows(key: TEAM_PLAY_START_KEY, value: time)
+            Team.instance.updatePlayStartTime(time)
             break
         case SELECT_TIME_TYPE.play_end:
-            _setSelectedToRows(key: TEAM_PLAY_END_KEY, value: time)
-            //selectedEndTime = time
+            Team.instance.updatePlayEndTime(time)
             break
         }
         self.tableView.reloadData()
@@ -316,30 +317,21 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     func setTextInputData(text: String, type: TEXT_INPUT_TYPE) {
         switch type {
         case TEXT_INPUT_TYPE.temp_play:
-            _setSelectedToRows(key: TEAM_TEMP_CONTENT_KEY, value: text)
-            //temp_content = text
+            Team.instance.updateTempContent(text)
             break
         case TEXT_INPUT_TYPE.charge:
-            _setSelectedToRows(key: TEAM_CHARGE_KEY, value: text)
-            //charge = text
+            Team.instance.updateCharge(text)
             break
         case TEXT_INPUT_TYPE.team:
-            _setSelectedToRows(key: TEAM_CONTENT_KEY, value: text)
-            //content = text
+            Team.instance.updateContent(text)
             break
             
         }
         self.tableView.reloadData()
+        //print(Team.instance.data)
     }
-    func setDegreeData(degree: [DEGREE]) {
-        //self.degree = degree
-        var tmp: [String] = [String]()
-        for key in degree {
-            let value = key.rawValue
-            tmp.append(value)
-        }
-        let text = tmp.joined(separator: ", ")
-        //_setSelectedToRows(key: TEAM_DEGREE_KEY, value: text)
+    func setDegreeData(degrees: [String]) {
+        Team.instance.updateDegree(degrees)
         self.tableView.reloadData()
     }
     // ImagePickerDelegate
@@ -368,31 +360,13 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
         return res!
     }
-    func setTextField(idx: Int, value: String) {
-        /*
-        for (index1, row) in _rows.enumerated() {
-            for (index2, item) in row.enumerated() {
-                if item["idx"] as! Int == idx {
-                    _rows[index1][index2]["value"] = value
-                    _rows[index1][index2]["show"] = value
-                }
+    func setTextField(iden: String, value: String) {
+        for (key, _) in Team.instance.data {
+            if key == iden {
+                Team.instance.data[key]!["value"] = value
+                Team.instance.data[key]!["show"] = value
             }
         }
- */
-    }
-    
-    func _setSelectedToRows(key: String, value: String) {
-        /*
-        print("key: \(key), value: \(value)")
-        for (index1, row) in _rows.enumerated() {
-            for (index2, item) in row.enumerated() {
-                if item["key"] as! String == key {
-                    _rows[index1][index2]["value"] = value
-                }
-            }
-        }
-        //print(_rows)
-        setData(sections: _sections, rows: _rows)
- */
+        //print(Team.instance.data)
     }
 }

@@ -8,13 +8,15 @@
 
 import UIKit
 import SCLAlertView
+import UIColor_Hex_Swift
 
 protocol DegreeSelectDelegate: class {
-    func setDegreeData(degree: [DEGREE])
+    func setDegreeData(degrees: [String])
 }
 
 class DegreeSelectVC: UITableViewController {
 
+    var selectedDegrees: [String]?
     var degrees: [[String: Any]] = [[String: Any]]()
     var delegate: DegreeSelectDelegate?
     
@@ -27,6 +29,18 @@ class DegreeSelectVC: UITableViewController {
                 degrees.append(["key": key, "value": value, "checked": false]);
             }
         }
+        if selectedDegrees!.count > 0 {
+            for selectedDegree in selectedDegrees! {
+                for (index, item) in degrees.enumerated() {
+                    let key: String = item["key"] as! String
+                    if key == selectedDegree {
+                        degrees[index]["checked"] = true
+                        break
+                    }
+                }
+            }
+        }
+        print(degrees)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
@@ -40,19 +54,19 @@ class DegreeSelectVC: UITableViewController {
     @objc func submit() {
         //print(days)
         var isSelected: Bool = false
-        var res: [DEGREE] = [DEGREE]()
+        var res: [String] = [String]()
         for degree in degrees {
             //print(day)
             if degree["checked"] as! Bool {
                 let key: String = degree["key"] as! String
-                res.append(DEGREE.enumFromString(string: key))
+                res.append(key)
                 isSelected = true
             }
         }
         if !isSelected {
             SCLAlertView().showWarning("警告", subTitle: "沒有選擇任何的球友程度，或請按取消回上一頁")
         } else {
-            self.delegate?.setDegreeData(degree: res)
+            self.delegate?.setDegreeData(degrees: res)
             back()
         }
     }
@@ -72,8 +86,18 @@ class DegreeSelectVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        cell.textLabel!.text = degrees[indexPath.row]["value"] as! String
-        cell.textLabel!.textColor = UIColor.white
+        let row: [String: Any] = degrees[indexPath.row]
+        cell.textLabel!.text = (row["value"] as! String)
+        let isChecked: Bool = (row["checked"] as! Bool)
+        if isChecked {
+            cell.accessoryType = .checkmark
+            cell.textLabel?.textColor = UIColor(MY_GREEN)
+            cell.tintColor = UIColor(MY_GREEN)
+        } else {
+            cell.accessoryType = .none
+            cell.textLabel?.textColor = UIColor.white
+            cell.tintColor = UIColor.white
+        }
 
         return cell
     }
