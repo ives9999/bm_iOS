@@ -35,42 +35,42 @@ class Team {
     init() {
         let none: UITableViewCellAccessoryType = UITableViewCellAccessoryType.none
         let more: UITableViewCellAccessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        var data1: Dictionary<String, [String: Any]> = [
-            TEAM_ID_KEY:["ch":"編號","vtype":"Int","value":-1,"use":true,"show":""],
-            TEAM_CHANNEL_KEY:["ch":"頻道","vtype":"String","value":"","use":false,"show":""],
-            TEAM_WEBSITE_KEY:["ch":"網站","vtype":"String","value":"","use":false,"show":""],
-            TEAM_FB_KEY:["ch":"FB","vtype":"String","value":"","use":false,"show":""],
-            TEAM_YOUTUBE_KEY:["ch":"youtube","vtype":"String","value":"","use":false,"show":""],
-            TEAM_SLUG_KEY:["ch":"插槽","vtype":"String","value":"","use":true,"show":""],
-            TEAM_MANAGER_ID_KEY:["ch":"管理者編號","vtype":"Int","value":-1,"use":true,"show":""],
-            TEAM_TEMP_QUANTITY_KEY:["ch":"臨打人數","vtype":"Int","value":-1,"use":false,"show":""],
-            TEAM_TEMP_STATUS_KEY:["ch":"臨打狀態","vtype":"String","value":"","use":false,"show":""],
-            TEAM_PV_KEY:["ch":"瀏覽數","vtype":"Int","value":-1,"use":false,"show":""],
-            TEAM_TOKEN_KEY:["ch":"球隊token","vtype":"String","value":"","use":false,"show":""],
-            TEAM_CREATED_ID_KEY:["ch":"建立者","vtype":"Int","value":-1,"use":true,"show":""],
-            TEAM_CREATED_AT_KEY:["ch":"建立時間","vtype":"String","value":"","use":false,"show":""],
-            TEAM_UPDATED_AT_KEY:["ch":"最後一次修改時間","vtype":"String","value":"","use":false,"show":""],
-            TEAM_THUMB_KEY:["ch":"代表圖","vtype":"String","value":"","use":false,"show":""]
+        let data1: Dictionary<String, [String: Any]> = [
+            TEAM_ID_KEY:["ch":"編號","vtype":"Int","value":-1,"submit":false,"show":""],
+            TEAM_CHANNEL_KEY:["ch":"頻道","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_WEBSITE_KEY:["ch":"網站","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_FB_KEY:["ch":"FB","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_YOUTUBE_KEY:["ch":"youtube","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_SLUG_KEY:["ch":"插槽","vtype":"String","value":"","submit":true,"show":""],
+            TEAM_MANAGER_ID_KEY:["ch":"管理者編號","vtype":"Int","value":-1,"submit":false,"show":""],
+            TEAM_TEMP_QUANTITY_KEY:["ch":"臨打人數","vtype":"Int","value":-1,"submit":false,"show":""],
+            TEAM_TEMP_STATUS_KEY:["ch":"臨打狀態","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_PV_KEY:["ch":"瀏覽數","vtype":"Int","value":-1,"submit":false,"show":""],
+            TEAM_TOKEN_KEY:["ch":"球隊token","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_CREATED_ID_KEY:["ch":"建立者","vtype":"Int","value":-1,"submit":false,"show":""],
+            TEAM_CREATED_AT_KEY:["ch":"建立時間","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_UPDATED_AT_KEY:["ch":"最後一次修改時間","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_THUMB_KEY:["ch":"代表圖","vtype":"String","value":"","submit":false,"show":""]
             
         ]
         var data2: Dictionary<String, [String: Any]> = [
-            TEAM_NAME_KEY:["ch":"名稱","vtype":"String","value":"","use":true,"atype":none,"show":""],
-            TEAM_LEADER_KEY:["ch":"隊長","vtype":"String","value":"","use":true,"atype":none,"show":""],
-            TEAM_MOBILE_KEY:["ch":"電話","vtype":"String","value":"","use":true,"atype":none,"show":""],
-            TEAM_EMAIL_KEY:["ch":"EMail","vtype":"String","value":"","use":true,"atype":none,"show":""],
-            TEAM_PLAY_START_KEY:["ch":"開始時間","vtype":"String","value":"","use":true,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
-            TEAM_PLAY_END_KEY:["ch":"結束時間","vtype":"String","value":"","use":true,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
-            TEAM_BALL_KEY:["ch":"使用球種","vtype":"String","value":"","use":true,"atype":none,"show":""],
-            TEAM_DEGREE_KEY:["ch":"球隊程度","vtype":"array","value":[String](),"use":true,"atype":more,"segue":TO_SELECT_DEGREE,"sender":[String](),"show":""],
-            TEAM_CHARGE_KEY:["ch":"收費說明","vtype":"String","value":"","use":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
-            TEAM_CONTENT_KEY:["ch":"球隊說明","vtype":"String","value":"","use":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
-            TEAM_TEMP_FEE_M_KEY:["ch":"臨打費用：男","vtype":"Int","value":-1,"use":true,"atype":none,"show":""],
-            TEAM_TEMP_FEE_F_KEY:["ch":"臨打費用：女","vtype":"Int","value":-1,"use":true,"atype":none,"show":""],
-            TEAM_TEMP_CONTENT_KEY:["ch":"臨打說明","vtype":"String","value":"","use":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
-            TEAM_CITY_KEY:["ch":"區域","vtype":"array","value":0,"use":false,"atype":more,"segue":TO_CITY,"sender":0,"show":""],
-            TEAM_ARENA_KEY:["ch":"球館","vtype":"array","value":0,"use":false,"atype":more,"segue":TO_ARENA,"sender":[String: Int](),"show":""],
-            TEAM_DAYS_KEY:["ch":"星期幾","vtype":"array","value":[Int](),"use":false,"atype":more,"segue":TO_DAY,"sender":[Int](),"show":""],
-            TEAM_FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(),"path":"","use":false,"show":""]
+            TEAM_NAME_KEY:["ch":"名稱","vtype":"String","value":"","submit":true,"atype":none,"show":""],
+            TEAM_LEADER_KEY:["ch":"隊長","vtype":"String","value":"","submit":true,"atype":none,"show":""],
+            TEAM_MOBILE_KEY:["ch":"電話","vtype":"String","value":"","submit":true,"atype":none,"show":""],
+            TEAM_EMAIL_KEY:["ch":"EMail","vtype":"String","value":"","submit":true,"atype":none,"show":""],
+            TEAM_PLAY_START_KEY:["ch":"開始時間","vtype":"String","value":"","submit":false,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
+            TEAM_PLAY_END_KEY:["ch":"結束時間","vtype":"String","value":"","submit":false,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
+            TEAM_BALL_KEY:["ch":"使用球種","vtype":"String","value":"","submit":true,"atype":none,"show":""],
+            TEAM_DEGREE_KEY:["ch":"球隊程度","vtype":"array","value":[String](),"submit":true,"atype":more,"segue":TO_SELECT_DEGREE,"sender":[String](),"show":""],
+            TEAM_CHARGE_KEY:["ch":"收費說明","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
+            TEAM_CONTENT_KEY:["ch":"球隊說明","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
+            TEAM_TEMP_FEE_M_KEY:["ch":"臨打費用：男","vtype":"Int","value":-1,"submit":true,"atype":none,"show":""],
+            TEAM_TEMP_FEE_F_KEY:["ch":"臨打費用：女","vtype":"Int","value":-1,"submit":true,"atype":none,"show":""],
+            TEAM_TEMP_CONTENT_KEY:["ch":"臨打說明","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
+            TEAM_CITY_KEY:["ch":"區域","vtype":"array","value":0,"submit":true,"atype":more,"segue":TO_CITY,"sender":0,"show":""],
+            TEAM_ARENA_KEY:["ch":"球館","vtype":"array","value":0,"submit":true,"atype":more,"segue":TO_ARENA,"sender":[String: Int](),"show":""],
+            TEAM_DAYS_KEY:["ch":"星期幾","vtype":"array","value":[Int](),"submit":true,"atype":more,"segue":TO_DAY,"sender":[Int](),"show":""],
+            TEAM_FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(),"path":"","submit":false,"show":""]
         ]
         for (section, value1) in rows.enumerated() {
             for (row, value2) in value1.enumerated() {
@@ -85,12 +85,21 @@ class Team {
         }
         data.merge(data1)
         data.merge(data2)
+        initData2()
         
         for (key, _) in data {
             data[key]!["key"] = key
         }
         
         //print(data)
+    }
+    
+    func initData2() {
+        updatePlayStartTime()
+        updatePlayEndTime()
+        updateTempContent()
+        updateCharge()
+        updateContent()
     }
     
     func updateCity(_ city: City) {
@@ -246,7 +255,40 @@ class Team {
         var res: [String: Any] = [String: Any]()
         let text: String = data[TEAM_CONTENT_KEY]!["value"] as! String
         res["text"] = text
-        res["type"] = TEXT_INPUT_TYPE.temp_play
+        res["type"] = TEXT_INPUT_TYPE.team
         data[TEAM_CONTENT_KEY]!["sender"] = res
+    }
+    
+    func makeSubmitArr() -> [String: Any] {
+        //slug, manager_id, created_id, play_time, channel, type, cat_id
+        //play_day change to days
+        var res: [String: Any] = [String: Any]()
+        for (key, row) in data {
+            let isSubmit: Bool = row["submit"] as! Bool
+            if isSubmit {
+                res[key] = row["value"]
+            }
+        }
+        res[TEAM_SLUG_KEY] = data[TEAM_NAME_KEY]!["value"]
+        res["play_time"] = _makePlayTime()
+        var id: Int = -1
+        if data[TEAM_ID_KEY]!["value"] != nil {
+            id = data[TEAM_ID_KEY]!["value"] as! Int
+        }
+        if id < 0 {
+            res[TEAM_MANAGER_ID_KEY] = Member.instance.id
+            res[TEAM_CREATED_ID_KEY] = Member.instance.id
+            res[TEAM_CHANNEL_KEY] = "bm"
+            res["type"] = "team"
+            res[TEAM_CAT_KEY] = 21
+        }
+        
+        return res
+    }
+    func _makePlayTime() -> String {
+        let selectedStartTime: String = data[TEAM_PLAY_START_KEY]!["value"] as! String
+        let selectedEndTime: String = data[TEAM_PLAY_END_KEY]!["value"] as! String
+        let play_time: String = selectedStartTime + " - " + selectedEndTime
+        return play_time
     }
 }

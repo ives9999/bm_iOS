@@ -125,6 +125,7 @@ let TEAM_CITY_KEY = "city"
 let TEAM_ARENA_KEY = "arena"
 let TEAM_DAYS_KEY = "days"
 let TEAM_FEATURED_KEY = "featured_path"
+let TEAM_CAT_KEY = "cat_id"
 
 // Notification Constants
 let NOTIF_MEMBER_DID_CHANGE = Notification.Name("notifMemberChanged")

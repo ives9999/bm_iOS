@@ -33,11 +33,11 @@ class TeamService {
             }
             //print(params)
             for (key, value) in body {
-                if key == "degree" {
+                if key == TEAM_DEGREE_KEY {
                     for d in value as! [String] {
                         multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "degree[]")
                     }
-                } else if key == "play_day" {
+                } else if key == TEAM_DAYS_KEY {
                     for d in value as! [Int] {
                         multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "play_day[]")
                     }

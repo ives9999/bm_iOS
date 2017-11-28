@@ -35,7 +35,7 @@ class DaysSelectVC: UITableViewController {
                 }
             }
         }
-        print(days)
+        //print(days)
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black

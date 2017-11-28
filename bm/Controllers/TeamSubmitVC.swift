@@ -212,7 +212,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     @IBAction func submit(_ sender: Any) {
-        var params:[String: Any] = [String: Any]()
+        var params:[String: Any]!
         var isPass: Bool = true
         let name: String = Team.instance.data[TEAM_NAME_KEY]!["value"] as! String
         if name.count == 0 {
@@ -227,21 +227,8 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         //print(isPass)
         if isPass {
             Global.instance.addSpinner(superView: self.view)
-            let id: Int = Team.instance.data["id"]!["value"] as! Int
-            if id <= 0 {
-        params.merge(["channel":"bm","type":"team","created_id":Member.instance.id,"manager_id":Member.instance.id,"cat_id":21])
-            }
-            
-            /*
-            for (index1, row) in _rows.enumerated() {
-                for (index2, item) in row.enumerated() {
-                    if item["value"] != nil {
-                        let key: String = item["key"] as! String
-                        params[key] = item["value"]
-                    }
-                }
-            }
- */
+            params = Team.instance.makeSubmitArr()
+            print(params)
             
             /*
             params[TEAM_NAME_KEY] = name
@@ -270,6 +257,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             params["arena_id"] = selectedArena.id
             params["featured_id"] = 0
  */
+            /*
             TeamService.instance.update(params: params, featuredView.imageView.image, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if success {
@@ -287,6 +275,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                     SCLAlertView().showWarning("錯誤", subTitle: "新增 / 修改球隊失敗，伺服器無法新增成功，請稍後再試")
                 }
             }
+ */
         }
     }
     func setCityData(id: Int, name: String) {

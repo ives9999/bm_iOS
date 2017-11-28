@@ -40,7 +40,7 @@ class DegreeSelectVC: UITableViewController {
                 }
             }
         }
-        print(degrees)
+        //print(degrees)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
