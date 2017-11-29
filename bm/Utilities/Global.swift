@@ -291,14 +291,19 @@ extension String {
      - Returns: A `String` object.
      */
     func truncate(length: Int, trailing: String = "…") -> String {
-        if self.characters.count > length {
-            return String(self.characters.prefix(length)) + trailing
+        if self.count > length {
+            return String(self.prefix(length)) + trailing
         } else {
             return self
         }
     }
 }
 
+extension Array where Element: Comparable {
+    func containsSameElements(as other: [Element]) -> Bool {
+        return self.count == other.count && self.sorted() == other.sorted()
+    }
+}
 
 
 

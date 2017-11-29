@@ -18,67 +18,11 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
     var token: String = ""
-    
-    /*
-    var id: Int = 0
-    var token: String = ""
-    var name: String = ""
-    var leader: String = ""
-    var mobile: String = ""
-    var email: String = ""
-    var temp_fee_M: Int = -1
-    var temp_fee_F: Int = -1
-    var ball: String = ""
-    
-    var city_id: Int = 0
-    var city_name: String = ""
-    var selectedCity: City = City(id: 0, name: "")
-    var selectedArena: Arena = Arena(id: 0, name: "")
-    var selectedDays: [Int: String] = [Int: String]()
-    var selectedStartTime: String = ""
-    var selectedEndTime: String = ""
-    var temp_content: String = ""
-    var degree: [DEGREE] = [DEGREE]()
-    var charge: String = ""
-    var content: String = ""
- */
+    var isFeaturedChange: Bool = false
     
     override func viewDidLoad() {
         //print(Team.instance.data)
         //print(token)
-        /*name = "快樂羽球隊"
-        leader = "孫志煌"
-        mobile = "0911299994"
-        email = "ives@housetube.tw"
-        temp_fee_M = 150
-        temp_fee_F = 100
-        ball = "RSL 4"
-        
-        temp_content = "請勿報名沒有來，列入黑名單"
-        charge = "一季3600含球"
-        content = "歡迎加入"
-        selectedStartTime = "16:00"
-        selectedEndTime = "18:00"
-        degree = [DEGREE.high, DEGREE.soso]
-        selectedDays = [2: "星期二", 4:"星期四"]
-        selectedCity = City(id: 218, name: "台南")
-        selectedArena = Arena(id: 10, name: "全穎羽球館")*/
-        
-        
-        /*
-        var tmp:[String] = [String]()
-        for (_, value) in selectedDays {
-            tmp.append(value)
-        }
-        let textDay = tmp.joined(separator: ", ")
-        tmp = [String]()
-        for key in degree {
-            let value = key.rawValue
-            tmp.append(value)
-        }
-        let textDegree = tmp.joined(separator: ", ")
-        */
-        
  
         //let token: String = Team.instance.data[TEAM_TOKEN_KEY]!["value"] as! String
         if token.count > 0 {
@@ -166,6 +110,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             featuredView.setPickedImage(image: pickedImage)
+            isFeaturedChange = true
         }
         dismiss(animated: true, completion: nil)
     }
@@ -205,8 +150,6 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
     }
     
-    
-    
     @IBAction func prevBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -226,106 +169,131 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
         //print(isPass)
         if isPass {
-            Global.instance.addSpinner(superView: self.view)
             params = Team.instance.makeSubmitArr()
-            print(params)
-            
-            /*
-            params[TEAM_NAME_KEY] = name
-            params[TEAM_SLUG_KEY] = name
-            params[TEAM_MOBILE_KEY] = mobile
-            params["leader"] = leader
-            params["email"] = email
-            params["ball"] = ball
-            params["temp_fee_M"] = temp_fee_M
-            params["temp_fee_F"] = temp_fee_F
-            params["charge"] = charge
-            params["temp_content"] = temp_content
-            params["content"] = content
-            params["play_time"] = selectedStartTime + " - " + selectedEndTime
-            var _degree: [String] = [String]()
-            for value in degree {
-                _degree.append(DEGREE.DBValue(value))
-            }
-            params["degree"] = _degree
-            var _days: [Int] = [Int]()
-            for (key, _) in selectedDays {
-                _days.append(key)
-            }
-            params["play_day"] = _days
-            params["city_id"] = selectedCity.id
-            params["arena_id"] = selectedArena.id
-            params["featured_id"] = 0
- */
-            /*
-            TeamService.instance.update(params: params, featuredView.imageView.image, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
-                Global.instance.removeSpinner(superView: self.view)
-                if success {
-                    if TeamService.instance.success {
-                        let id: Int = TeamService.instance.id
-                        Team.instance.data[TEAM_ID_KEY]!["value"] = id
-                        Team.instance.data[TEAM_ID_KEY]!["show"] = id
-                        //print(self.id)
-                        //if self.id > 0 {
-                        SCLAlertView().showSuccess("成功", subTitle: "新增 / 修改球隊成功")
-                    } else {
-                        SCLAlertView().showWarning("錯誤", subTitle: TeamService.instance.msg)
+            if params.count == 0 && !isFeaturedChange {
+                SCLAlertView().showWarning("提示", subTitle: " 沒有修改任何資料或圖片")
+            } else {
+                if params.count == 0 { // just update image
+                    params[TEAM_CREATED_ID_KEY] = Member.instance.id
+                    if Team.instance.data[TEAM_ID_KEY]!["value"] != nil {
+                        let id: Int = Team.instance.data[TEAM_ID_KEY]!["value"] as! Int
+                        params[TEAM_ID_KEY] = id
                     }
-                } else {
-                    SCLAlertView().showWarning("錯誤", subTitle: "新增 / 修改球隊失敗，伺服器無法新增成功，請稍後再試")
+                }
+                print(params)
+                Global.instance.addSpinner(superView: self.view)
+                
+                //print(isFeaturedChange)
+                let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
+                TeamService.instance.update(params: params, image, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
+                    Global.instance.removeSpinner(superView: self.view)
+                    if success {
+                        if TeamService.instance.success {
+                            let id: Int = TeamService.instance.id
+                            Team.instance.data[TEAM_ID_KEY]!["value"] = id
+                            Team.instance.data[TEAM_ID_KEY]!["show"] = id
+                            //print(self.id)
+                            //if self.id > 0 {
+                            SCLAlertView().showSuccess("成功", subTitle: "新增 / 修改球隊成功")
+                        } else {
+                            SCLAlertView().showWarning("錯誤", subTitle: TeamService.instance.msg)
+                        }
+                    } else {
+                        SCLAlertView().showWarning("錯誤", subTitle: "新增 / 修改球隊失敗，伺服器無法新增成功，請稍後再試")
+                    }
                 }
             }
- */
         }
     }
     func setCityData(id: Int, name: String) {
-        let city = City(id: id, name: name)
-        Team.instance.updateCity(city)
-        self.tableView.reloadData()
+        let city_id: Int = Team.instance.data[TEAM_CITY_KEY]!["value"] as! Int
+        if city_id != id {
+            let city = City(id: id, name: name)
+            Team.instance.updateCity(city)
+            Team.instance.data[TEAM_CITY_KEY]!["change"] = true
+            self.tableView.reloadData()
+        }
     }
     func setArenaData(id: Int, name: String) {
-        let arena = Arena(id: id, name: name)
-        Team.instance.updateArena(arena)
-        self.tableView.reloadData()
+        let arena_id: Int = Team.instance.data[TEAM_ARENA_KEY]!["value"] as! Int
+        if arena_id != id {
+            let arena = Arena(id: id, name: name)
+            Team.instance.updateArena(arena)
+            Team.instance.data[TEAM_ARENA_KEY]!["change"] = true
+            self.tableView.reloadData()
+        }
     }
     func setDaysData(res: [Int]) {
-        Team.instance.updateDays(res)
-        self.tableView.reloadData()
+        let days: [Int] = Team.instance.data[TEAM_DAYS_KEY]!["value"] as! [Int]
+        if !res.containsSameElements(as: days) {
+            Team.instance.updateDays(res)
+            Team.instance.data[TEAM_DAYS_KEY]!["change"] = true
+            self.tableView.reloadData()
+        }
     }
     func setTimeData(time: String, type: SELECT_TIME_TYPE) {
         switch type {
         case SELECT_TIME_TYPE.play_start:
-            Team.instance.updatePlayStartTime(time)
+            var start: String = Team.instance.data[TEAM_PLAY_START_KEY]!["value"] as! String
+            start = Global.instance.noSec(start)
+            if start != time {
+                Team.instance.updatePlayStartTime(time)
+                Team.instance.data[TEAM_PLAY_START_KEY]!["change"] = true
+                self.tableView.reloadData()
+            }
             break
         case SELECT_TIME_TYPE.play_end:
-            Team.instance.updatePlayEndTime(time)
+            var end: String = Team.instance.data[TEAM_PLAY_END_KEY]!["value"] as! String
+            end = Global.instance.noSec(end)
+            if end != time {
+                Team.instance.updatePlayEndTime(time)
+                Team.instance.data[TEAM_PLAY_END_KEY]!["change"] = true
+                self.tableView.reloadData()
+            }
             break
         }
-        self.tableView.reloadData()
     }
     func setTextInputData(text: String, type: TEXT_INPUT_TYPE) {
         switch type {
         case TEXT_INPUT_TYPE.temp_play:
-            Team.instance.updateTempContent(text)
+            let old: String = Team.instance.data[TEAM_TEMP_CONTENT_KEY]!["value"] as! String
+            if old != text {
+                Team.instance.updateTempContent(text)
+                Team.instance.data[TEAM_TEMP_CONTENT_KEY]!["change"] = true
+                self.tableView.reloadData()
+            }
             break
         case TEXT_INPUT_TYPE.charge:
-            Team.instance.updateCharge(text)
+            let old: String = Team.instance.data[TEAM_CHARGE_KEY]!["value"] as! String
+            if old != text {
+                Team.instance.updateCharge(text)
+                Team.instance.data[TEAM_CHARGE_KEY]!["change"] = true
+                self.tableView.reloadData()
+            }
             break
         case TEXT_INPUT_TYPE.team:
-            Team.instance.updateContent(text)
+            let old: String = Team.instance.data[TEAM_CONTENT_KEY]!["value"] as! String
+            if old != text {
+                Team.instance.updateContent(text)
+                Team.instance.data[TEAM_CONTENT_KEY]!["change"] = true
+                self.tableView.reloadData()
+            }
             break
             
         }
-        self.tableView.reloadData()
         //print(Team.instance.data)
     }
     func setDegreeData(degrees: [String]) {
-        Team.instance.updateDegree(degrees)
-        self.tableView.reloadData()
+        let old: [String] = Team.instance.data[TEAM_DEGREE_KEY]!["value"] as! [String]
+        if !degrees.containsSameElements(as: old) {
+            Team.instance.updateDegree(degrees)
+            Team.instance.data[TEAM_DEGREE_KEY]!["change"] = true
+            self.tableView.reloadData()
+        }
     }
     // ImagePickerDelegate
     func isImageSet(_ b: Bool) {
-        //self.isFeaturedSet = b
+        //isFeaturedChange = b
     }
     func myPresent(_ viewController: UIViewController) {
         self.present(viewController, animated: true, completion: nil)
@@ -352,7 +320,27 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     func setTextField(iden: String, value: String) {
         for (key, _) in Team.instance.data {
             if key == iden {
-                Team.instance.data[key]!["value"] = value
+                let item: [String: Any] = Team.instance.data[key]!
+                let oldValue: Any = item["value"] as Any
+                let vtype: String = item["vtype"] as! String
+                if vtype == "String" {
+                    Team.instance.data[key]!["value"] = value
+                    if oldValue as! String != value {
+                        Team.instance.data[key]!["change"] = true
+                    }
+                } else if vtype == "Int" {
+                    let value1: Int = Int(value)!
+                    Team.instance.data[key]!["value"] = value1
+                    if oldValue as! Int != value1 {
+                        Team.instance.data[key]!["change"] = true
+                    }
+                } else if vtype == "Bool" {
+                    let value1: Bool = Bool(value)!
+                    Team.instance.data[key]!["value"] = value1
+                    if oldValue as! Bool != value1 {
+                        Team.instance.data[key]!["change"] = true
+                    }
+                }
                 Team.instance.data[key]!["show"] = value
             }
         }

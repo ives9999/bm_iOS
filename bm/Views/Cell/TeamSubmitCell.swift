@@ -55,11 +55,11 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
         } else {
             detailTextLabel?.text = ""
             generalTextField.isHidden = false
-            if row["vtype"] as! String == "Int" {
-                generalTextField.keyboardType = UIKeyboardType.numberPad
-            } else {
-                generalTextField.keyboardType = UIKeyboardType.default
+            if row["keyboardType"] != nil {
+                let pad: UIKeyboardType = row["keyboardType"] as! UIKeyboardType
+                generalTextField.keyboardType = pad
             }
+            //print(iden)
             if row["show"] != nil {
                 generalTextField.text = (row["show"] as! String)
             }

@@ -39,7 +39,11 @@ class TeamService {
                     }
                 } else if key == TEAM_DAYS_KEY {
                     for d in value as! [Int] {
-                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "play_day[]")
+                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "days[]")
+                    }
+                } else if key == TEAM_CAT_KEY {
+                    for d in value as! [Int] {
+                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "cat_id[]")
                     }
                 } else {
                     multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
@@ -51,6 +55,7 @@ class TeamService {
             case .success(let upload, _, _):
 //                upload.responseString { (response) in
 //                    print(response)
+//                    completion(true)
 //                }
                 upload.responseJSON(completionHandler: { (response) in
                     //print(response)
@@ -72,8 +77,8 @@ class TeamService {
                             }
                         }
                     }
+                    completion(true)
                 })
-                completion(true)
             case .failure(let error):
                 print(error)
                 //onError(error)

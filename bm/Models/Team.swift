@@ -32,9 +32,18 @@ class Team {
         ]
     ]
     var data:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
+    let transferPair: [String: String] = [TEAM_CITY_KEY:"city_id",TEAM_ARENA_KEY:"arena_id"]
+    var testData: [String: Any] = [String: Any]()
+
     init() {
+        
         let none: UITableViewCellAccessoryType = UITableViewCellAccessoryType.none
         let more: UITableViewCellAccessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        let defaultPad: UIKeyboardType = UIKeyboardType.default
+        let numberPad: UIKeyboardType = UIKeyboardType.numberPad
+        let phonePad: UIKeyboardType = UIKeyboardType.phonePad
+        let emailPad: UIKeyboardType = UIKeyboardType.emailAddress
+        
         let data1: Dictionary<String, [String: Any]> = [
             TEAM_ID_KEY:["ch":"編號","vtype":"Int","value":-1,"submit":false,"show":""],
             TEAM_CHANNEL_KEY:["ch":"頻道","vtype":"String","value":"","submit":false,"show":""],
@@ -54,24 +63,48 @@ class Team {
             
         ]
         var data2: Dictionary<String, [String: Any]> = [
-            TEAM_NAME_KEY:["ch":"名稱","vtype":"String","value":"","submit":true,"atype":none,"show":""],
-            TEAM_LEADER_KEY:["ch":"隊長","vtype":"String","value":"","submit":true,"atype":none,"show":""],
-            TEAM_MOBILE_KEY:["ch":"電話","vtype":"String","value":"","submit":true,"atype":none,"show":""],
-            TEAM_EMAIL_KEY:["ch":"EMail","vtype":"String","value":"","submit":true,"atype":none,"show":""],
-            TEAM_PLAY_START_KEY:["ch":"開始時間","vtype":"String","value":"","submit":false,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
-            TEAM_PLAY_END_KEY:["ch":"結束時間","vtype":"String","value":"","submit":false,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
-            TEAM_BALL_KEY:["ch":"使用球種","vtype":"String","value":"","submit":true,"atype":none,"show":""],
+            TEAM_NAME_KEY:["ch":"名稱","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":defaultPad],
+            TEAM_LEADER_KEY:["ch":"隊長","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":defaultPad],
+            TEAM_MOBILE_KEY:["ch":"電話","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":phonePad],
+            TEAM_EMAIL_KEY:["ch":"EMail","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":emailPad],
+            TEAM_PLAY_START_KEY:["ch":"開始時間","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
+            TEAM_PLAY_END_KEY:["ch":"結束時間","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
+            TEAM_BALL_KEY:["ch":"使用球種","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":defaultPad],
             TEAM_DEGREE_KEY:["ch":"球隊程度","vtype":"array","value":[String](),"submit":true,"atype":more,"segue":TO_SELECT_DEGREE,"sender":[String](),"show":""],
             TEAM_CHARGE_KEY:["ch":"收費說明","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
             TEAM_CONTENT_KEY:["ch":"球隊說明","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
-            TEAM_TEMP_FEE_M_KEY:["ch":"臨打費用：男","vtype":"Int","value":-1,"submit":true,"atype":none,"show":""],
-            TEAM_TEMP_FEE_F_KEY:["ch":"臨打費用：女","vtype":"Int","value":-1,"submit":true,"atype":none,"show":""],
+            TEAM_TEMP_FEE_M_KEY:["ch":"臨打費用：男","vtype":"Int","value":-1,"submit":true,"atype":none,"show":"","keyboardType":numberPad],
+            TEAM_TEMP_FEE_F_KEY:["ch":"臨打費用：女","vtype":"Int","value":-1,"submit":true,"atype":none,"show":"","keyboardType":numberPad],
             TEAM_TEMP_CONTENT_KEY:["ch":"臨打說明","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
             TEAM_CITY_KEY:["ch":"區域","vtype":"array","value":0,"submit":true,"atype":more,"segue":TO_CITY,"sender":0,"show":""],
             TEAM_ARENA_KEY:["ch":"球館","vtype":"array","value":0,"submit":true,"atype":more,"segue":TO_ARENA,"sender":[String: Int](),"show":""],
             TEAM_DAYS_KEY:["ch":"星期幾","vtype":"array","value":[Int](),"submit":true,"atype":more,"segue":TO_DAY,"sender":[Int](),"show":""],
             TEAM_FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(),"path":"","submit":false,"show":""]
         ]
+        
+        testData = [
+            TEAM_NAME_KEY: "快樂羽球隊",
+            TEAM_LEADER_KEY: "孫志煌",
+            TEAM_MOBILE_KEY: "0911299994",
+            TEAM_EMAIL_KEY: "ives@housetube.tw",
+            TEAM_TEMP_FEE_M_KEY: 150,
+            TEAM_TEMP_FEE_F_KEY: 100,
+            TEAM_BALL_KEY: "RSL 4",
+            TEAM_CONTENT_KEY: "請勿報名沒有來，列入黑名單",
+            TEAM_CHARGE_KEY: "一季3600含球",
+            TEAM_TEMP_CONTENT_KEY: "歡迎加入",
+            TEAM_PLAY_START_KEY: "16:00",
+            TEAM_PLAY_END_KEY: "18:00",
+            TEAM_DEGREE_KEY: ["high", "soso"],
+            TEAM_DAYS_KEY: [2, 4],
+            TEAM_CITY_KEY: City(id:218, name: "台南"),
+            TEAM_ARENA_KEY: Arena(id: 10, name: "全穎羽球館")
+        ]
+        
+        for (key, _) in data2 {
+            data2[key]!["change"] = false
+        }
+        
         for (section, value1) in rows.enumerated() {
             for (row, value2) in value1.enumerated() {
                 let key: String = value2["key"]!
@@ -85,12 +118,39 @@ class Team {
         }
         data.merge(data1)
         data.merge(data2)
+        
+        if testData.count > 0 {
+            for (key1, value) in testData {
+                if key1 == TEAM_CITY_KEY {
+                    let city: City = value as! City
+                    data[key1]!["value"] = city.id
+                    data[key1]!["show"] = city.name
+                } else if key1 == TEAM_ARENA_KEY {
+                    let arena: Arena = value as! Arena
+                    data[key1]!["value"] = arena.id
+                    data[key1]!["show"] = arena.name
+                } else {
+                    for (key2, row) in data {
+                        if key1 == key2 {
+                            data[key2]!["value"] = value
+                            let vtype: String = row["vtype"] as! String
+                            if vtype != "array" {
+                                data[key2]!["show"] = "\(value)"
+                            }
+                        }
+                    }
+                }
+            }
+            updateDays(testData[TEAM_DAYS_KEY] as! [Int])
+            updateDegree(testData[TEAM_DEGREE_KEY] as! [String])
+        }
+        
+        
         initData2()
         
         for (key, _) in data {
             data[key]!["key"] = key
         }
-        
         //print(data)
     }
     
@@ -260,35 +320,44 @@ class Team {
     }
     
     func makeSubmitArr() -> [String: Any] {
-        //slug, manager_id, created_id, play_time, channel, type, cat_id
-        //play_day change to days
+        var isAnyOneChange: Bool = false
         var res: [String: Any] = [String: Any]()
         for (key, row) in data {
             let isSubmit: Bool = row["submit"] as! Bool
-            if isSubmit {
+            var isChange: Bool = false
+            if row["change"] != nil {
+                isChange = row["change"] as! Bool
+            }
+            if isSubmit && isChange {
                 res[key] = row["value"]
+                if !isAnyOneChange {
+                    isAnyOneChange = true
+                }
             }
         }
+        if !isAnyOneChange {
+            return res
+        }
         res[TEAM_SLUG_KEY] = data[TEAM_NAME_KEY]!["value"]
-        res["play_time"] = _makePlayTime()
+        res[TEAM_CREATED_ID_KEY] = Member.instance.id
         var id: Int = -1
         if data[TEAM_ID_KEY]!["value"] != nil {
             id = data[TEAM_ID_KEY]!["value"] as! Int
         }
         if id < 0 {
             res[TEAM_MANAGER_ID_KEY] = Member.instance.id
-            res[TEAM_CREATED_ID_KEY] = Member.instance.id
             res[TEAM_CHANNEL_KEY] = "bm"
             res["type"] = "team"
-            res[TEAM_CAT_KEY] = 21
+            let cat_id: [Int] = [21]
+            res[TEAM_CAT_KEY] = cat_id
+        } else {
+            res[TEAM_ID_KEY] = id
+        }
+        for (key, value) in transferPair {
+            res[value] = res[key]
+            res.removeValue(forKey: key)
         }
         
         return res
-    }
-    func _makePlayTime() -> String {
-        let selectedStartTime: String = data[TEAM_PLAY_START_KEY]!["value"] as! String
-        let selectedEndTime: String = data[TEAM_PLAY_END_KEY]!["value"] as! String
-        let play_time: String = selectedStartTime + " - " + selectedEndTime
-        return play_time
     }
 }
