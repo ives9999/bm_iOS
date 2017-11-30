@@ -14,7 +14,7 @@ protocol TeamSubmitCellDelegate {
 
 class TeamSubmitCell: SuperCell, UITextFieldDelegate {
     
-    var delegate: TeamSubmitCellDelegate?
+    var teamSubmitCellDelegate: TeamSubmitCellDelegate?
     var generalTextField: SuperTextField!
     var iden: String = ""
 
@@ -72,7 +72,7 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         //print("tag: \(iden)")
         //print("text: \(textField.text)")
-        delegate?.setTextField(iden: iden, value: textField.text!)
+        teamSubmitCellDelegate?.setTextField(iden: iden, value: textField.text!)
     }
     
     override func awakeFromNib() {

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class MenuVC: MyTableVC {
+class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
 
     // outlets
     @IBOutlet weak var loginBtn: UIButton!
@@ -29,7 +30,7 @@ class MenuVC: MyTableVC {
             ["text": "手機認證", "icon": "mobile_validate"],
         ],
         [
-            ["text": "球隊登錄", "icon": "team"],
+            ["text": "球隊登錄(往右滑可以編輯)", "icon": "team"],
             ["text": "新增球隊", "segue": TO_TEAM_SUBMIT]
         ]
     ]
@@ -68,6 +69,7 @@ class MenuVC: MyTableVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let cell: MenuCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
+        cell.delegate = self
                 
         let row: [String: Any] = rows![indexPath.section][indexPath.row]
         cell.setRow(row: row)
@@ -92,6 +94,37 @@ class MenuVC: MyTableVC {
                 vc.token = sender as! String
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .left else { return nil}
+        
+        //var style = SwipeExpansionStyle(target: <#T##SwipeExpansionStyle.Target#>)
+        let editAction = SwipeAction(style: .destructive, title: "編輯") { action, indexPath in
+            let row: [String: Any] = self.rows![indexPath.section][indexPath.row]
+            if row["segue"] != nil {
+                let segue = row["segue"] as! String
+                //print("segue: \(segue)")
+                self.performSegue(withIdentifier: segue, sender: row["token"])
+            }
+        }
+        editAction.image = UIImage(named: "register")
+        
+//        let deleteAction = SwipeAction(style: .destructive, title: "刪除") { action, indexPath in
+//            print("delete")
+//        }
+//
+//        deleteAction.image = UIImage(named: "close")
+        
+        return [editAction]
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
+        var options = SwipeTableOptions()
+        options.backgroundColor = UIColor.blue
+        options.expansionStyle = .destructive
+        options.transitionStyle = .border
+        return options
     }
     
     

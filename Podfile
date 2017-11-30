@@ -14,4 +14,5 @@ target 'bm' do
   pod 'TRVideoView'
   pod 'UIColor_Hex_Swift'
   pod 'SCLAlertView'
+  pod 'SwipeCellKit'
 end

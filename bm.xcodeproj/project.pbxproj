@@ -21,7 +21,6 @@
 		B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375105A1FA96C0500CDF1A0 /* Member.swift */; };
 		B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */; };
 		B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */; };
-		B3CCE6401FAEDBC00050D2FE /* MenuTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CCE63F1FAEDBC00050D2FE /* MenuTableVC.swift */; };
 		B3E72A191F9CBE9F0008A6B1 /* CourseCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A181F9CBE9F0008A6B1 /* CourseCV.swift */; };
 		B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */; };
 		B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */; };
@@ -114,7 +113,6 @@
 		B375105A1FA96C0500CDF1A0 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
 		B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
-		B3CCE63F1FAEDBC00050D2FE /* MenuTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableVC.swift; sourceTree = "<group>"; };
 		B3E72A181F9CBE9F0008A6B1 /* CourseCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCV.swift; sourceTree = "<group>"; };
 		B3E72A1B1F9F9F330008A6B1 /* bm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bm-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -350,7 +348,6 @@
 				B3E72A211FA08A170008A6B1 /* MenuVC.swift */,
 				B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */,
 				B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */,
-				B3CCE63F1FAEDBC00050D2FE /* MenuTableVC.swift */,
 				F94EAA1F1FB023B800B1762C /* ProfileVC.swift */,
 				B3ED38D61FB2A3E80003F083 /* EditProfileVC.swift */,
 				F94FF4341FB4322C00D167B6 /* TeamSubmitVC.swift */,
@@ -528,6 +525,7 @@
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TRVideoView/TRVideoView.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 			);
@@ -540,6 +538,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TRVideoView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 			);
@@ -614,7 +613,6 @@
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* ListCell.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
-				B3CCE6401FAEDBC00050D2FE /* MenuTableVC.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
 				F96931971FB953960005C13F /* City.swift in Sources */,
 				B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */,

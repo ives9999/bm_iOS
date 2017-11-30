@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class SuperCell: UITableViewCell {
+class SuperCell: SwipeTableViewCell {
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

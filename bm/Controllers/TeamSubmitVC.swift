@@ -75,8 +75,8 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
         let cell: TeamSubmitCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamSubmitCell
-        cell.delegate = self
-        
+        cell.teamSubmitCellDelegate = self
+        cell
         let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
 //        if indexPath.section == 0 && indexPath.row == 0 {
 //            print(row)

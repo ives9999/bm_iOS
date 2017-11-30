@@ -8,6 +8,7 @@ PODS:
     - Starscream (~> 2.1.1)
   - Starscream (2.1.1)
   - SwiftyJSON (3.1.4)
+  - SwipeCellKit (2.0.0)
   - TRVideoView (0.1.3)
   - UIColor_Hex_Swift (3.0.2)
 
@@ -18,6 +19,7 @@ DEPENDENCIES:
   - SCLAlertView
   - Socket.IO-Client-Swift
   - SwiftyJSON
+  - SwipeCellKit
   - TRVideoView
   - UIColor_Hex_Swift
 
@@ -29,9 +31,10 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: ba3cb1c4bf0a6ca90080406a2c22685c25ad1f60
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  SwipeCellKit: 349c61ffde96ac3ae51c2691a03e421b5b29ee98
   TRVideoView: ad64508a00b7cd177a31a89bd942a524faac3d2c
   UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
 
-PODFILE CHECKSUM: c1481cf97bd8b78ab8e96aa604a1d8bde0bfb69f
+PODFILE CHECKSUM: 88365f479143501e60bcecc4d318d97458b2af0b
 
 COCOAPODS: 1.3.1
