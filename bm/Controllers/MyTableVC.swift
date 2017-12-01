@@ -47,11 +47,19 @@ class MyTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return sections!.count
+        if sections == nil {
+            return 1
+        } else {
+            return sections!.count
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rows![section].count
+        if rows == nil {
+            return 0
+        } else {
+            return rows![section].count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,7 +107,11 @@ class MyTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     //header and footer
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections![section]
+        if sections == nil {
+            return ""
+        } else {
+            return sections![section]
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {

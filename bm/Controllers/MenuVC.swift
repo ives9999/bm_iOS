@@ -8,6 +8,7 @@
 
 import UIKit
 import SwipeCellKit
+import UIColor_Hex_Swift
 
 class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
 
@@ -40,6 +41,9 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         setData(sections: _sections, rows: _rows)
         super.viewDidLoad()
         
+        var layoutMargins: UIEdgeInsets = tableView.layoutMargins
+        layoutMargins.right = 80
+        tableView.layoutMargins = layoutMargins
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
 
         if Member.instance.isLoggedIn {
@@ -52,7 +56,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                     self.myTeamLists = DataService.instance.lists
                     //print(self.myTeamLists)
                     for team in self.myTeamLists {
-                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_SUBMIT]
+                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_TEMP_PLAY,"detail":"臨打"]
                         self._rows[1].append(row)
                     }
                     //print(self._rows)
@@ -97,36 +101,42 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
-        guard orientation == .left else { return nil}
-        
-        //var style = SwipeExpansionStyle(target: <#T##SwipeExpansionStyle.Target#>)
-        let editAction = SwipeAction(style: .destructive, title: "編輯") { action, indexPath in
-            let row: [String: Any] = self.rows![indexPath.section][indexPath.row]
-            if row["segue"] != nil {
-                let segue = row["segue"] as! String
-                //print("segue: \(segue)")
-                self.performSegue(withIdentifier: segue, sender: row["token"])
+        if indexPath.section == 1 && indexPath.row > 1 {
+            guard orientation == .left else { return nil}
+            
+            let editAction = SwipeAction(style: .default, title: "編輯") { action, indexPath in
+                let segue: String = TO_TEAM_SUBMIT
+                let row: [String: Any] = self.rows![indexPath.section][indexPath.row]
+                if row["segue"] != nil {
+                    self.performSegue(withIdentifier: segue, sender: row["token"])
+                }
             }
+            editAction.backgroundColor = UIColor(MY_GREEN)
+            editAction.textColor = UIColor.black
+
+            editAction.image = UIImage(named: "edit")
+            
+            let deleteAction = SwipeAction(style: .destructive, title: "刪除") { action, indexPath in
+                print("delete")
+            }
+
+            deleteAction.image = UIImage(named: "close")
+            
+            return [editAction, deleteAction]
+        } else {
+            return nil
         }
-        editAction.image = UIImage(named: "register")
-        
-//        let deleteAction = SwipeAction(style: .destructive, title: "刪除") { action, indexPath in
-//            print("delete")
-//        }
-//
-//        deleteAction.image = UIImage(named: "close")
-        
-        return [editAction]
     }
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
         var options = SwipeTableOptions()
-        options.backgroundColor = UIColor.blue
-        options.expansionStyle = .destructive
+        
+        //var style = SwipeExpansionStyle(
         options.transitionStyle = .border
+        //options.expansionStyle?.target.edgeInset = 20
         return options
     }
-    
+
     
     override func viewDidAppear(_ animated: Bool) {
         _loginout()

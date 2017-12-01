@@ -12,15 +12,20 @@ class MenuCell: SuperCell {
     
     var iconView: UIImageView!
     var titleLbl: MyLabel!
-
+    //var tempPlayLbl: MyLabel!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
         
         iconView = UIImageView(frame: CGRect.zero)
         contentView.addSubview(iconView)
         
         titleLbl = MyLabel(frame: CGRect.zero)
         contentView.addSubview(titleLbl)
+        
+//        tempPlayLbl = MyLabel(frame: CGRect.zero)
+//        tempPlayLbl.text = "臨打"
+//        contentView.addSubview(tempPlayLbl)
     }
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -36,7 +41,10 @@ class MenuCell: SuperCell {
         iconView.frame = CGRect(x: x, y: y, width: iconWidth, height: iconHeight)
         
         x = x + iconWidth + 30
-        titleLbl.frame = CGRect(x: x, y: y, width: bounds.width - x - 30, height: bounds.height)
+        titleLbl.frame = CGRect(x: x, y: 0, width: bounds.width - x - 30, height: bounds.height)
+        
+        //let tempPlayWidth: CGFloat = 50
+        //tempPlayLbl.frame = CGRect(x: bounds.width - tempPlayWidth - 90, y: 20, width: tempPlayWidth, height: bounds.height-20)
     }
     
     func setRow(row: [String: Any]) {
@@ -49,6 +57,11 @@ class MenuCell: SuperCell {
         if row["text"] != nil {
             titleLbl.text = (row["text"] as! String)
         }
+        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        if row["detail"] != nil {
+            detailTextLabel?.text = row["detail"] as! String
+        }
+        
         setNeedsLayout()
     }
     

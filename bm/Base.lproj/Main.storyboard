@@ -754,11 +754,99 @@
                         <segue destination="G5m-sq-lsN" kind="show" identifier="toRegister" id="f5d-2G-qtf"/>
                         <segue destination="vfe-V8-Hfx" kind="show" identifier="toProfile" id="L8k-6m-3tm"/>
                         <segue destination="UtM-v1-pfK" kind="show" identifier="toTeamSubmit" id="tfa-sh-Qj7"/>
+                        <segue destination="gO6-sX-L0T" kind="show" identifier="toTeamTempPlay" id="PtM-Ha-efS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ixj-Mg-udo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-230" y="-1725"/>
+            <point key="canvasLocation" x="124" y="-1821"/>
+        </scene>
+        <!--Team Temp Play EditVC-->
+        <scene sceneID="MSd-4H-Rd8">
+            <objects>
+                <viewController id="gO6-sX-L0T" customClass="TeamTempPlayEditVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UVT-AD-sSx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Req-IZ-nd0">
+                                <rect key="frame" x="0.0" y="20" width="375" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="臨打" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAb-Q7-dkO">
+                                        <rect key="frame" x="168.5" y="19" width="38.5" height="27"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbn-nY-DP6">
+                                        <rect key="frame" x="12" y="23" width="24" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="24" id="Jqk-JT-SWw"/>
+                                            <constraint firstAttribute="height" constant="18" id="POx-Q6-rwb"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="UtM-v1-pfK" eventType="touchUpInside" id="10w-we-59z"/>
+                                            <action selector="prevBtnPressed:" destination="vfe-V8-Hfx" eventType="touchUpInside" id="w5j-vI-x5b"/>
+                                            <action selector="prevBtnPressed:" destination="gO6-sX-L0T" eventType="touchUpInside" id="xBk-CR-gsV"/>
+                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="xCv-79-SkB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMx-d2-eep">
+                                        <rect key="frame" x="331" y="15" width="32" height="34"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                        <state key="normal" title="提交">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="submit:" destination="UtM-v1-pfK" eventType="touchUpInside" id="FTI-5O-XBc"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Fbn-nY-DP6" firstAttribute="centerY" secondItem="Req-IZ-nd0" secondAttribute="centerY" id="0LV-7z-qbx"/>
+                                    <constraint firstAttribute="trailing" secondItem="hMx-d2-eep" secondAttribute="trailing" constant="12" id="1Ma-rM-7RB"/>
+                                    <constraint firstAttribute="height" constant="64" id="KCf-9K-Xqd"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="TTe-bl-ic2"/>
+                                    <constraint firstItem="hAb-Q7-dkO" firstAttribute="centerX" secondItem="Req-IZ-nd0" secondAttribute="centerX" id="aaV-zi-MLT"/>
+                                    <constraint firstItem="hAb-Q7-dkO" firstAttribute="centerY" secondItem="Req-IZ-nd0" secondAttribute="centerY" id="jJN-SU-zZ3"/>
+                                    <constraint firstItem="hMx-d2-eep" firstAttribute="centerY" secondItem="hAb-Q7-dkO" secondAttribute="centerY" id="xJ8-2h-Dg6"/>
+                                    <constraint firstItem="Fbn-nY-DP6" firstAttribute="leading" secondItem="Req-IZ-nd0" secondAttribute="leading" constant="12" id="yMb-mt-E2p"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="X9c-VN-HVh">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FcP-ze-zC8">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aJ9-6P-u9a" firstAttribute="trailing" secondItem="X9c-VN-HVh" secondAttribute="trailing" id="2RM-hU-Jyr"/>
+                            <constraint firstItem="Req-IZ-nd0" firstAttribute="top" secondItem="aJ9-6P-u9a" secondAttribute="top" id="3k1-F6-PuD"/>
+                            <constraint firstItem="aJ9-6P-u9a" firstAttribute="bottom" secondItem="X9c-VN-HVh" secondAttribute="bottom" id="6ev-uJ-lgu"/>
+                            <constraint firstItem="aJ9-6P-u9a" firstAttribute="trailing" secondItem="Req-IZ-nd0" secondAttribute="trailing" id="ENf-6A-aPt"/>
+                            <constraint firstItem="Req-IZ-nd0" firstAttribute="leading" secondItem="UVT-AD-sSx" secondAttribute="leading" id="Ods-G3-xe5"/>
+                            <constraint firstItem="aJ9-6P-u9a" firstAttribute="leading" secondItem="X9c-VN-HVh" secondAttribute="leading" id="Zz6-gw-g09"/>
+                            <constraint firstItem="aJ9-6P-u9a" firstAttribute="bottom" secondItem="FcP-ze-zC8" secondAttribute="bottom" id="cLl-u8-DSI"/>
+                            <constraint firstItem="FcP-ze-zC8" firstAttribute="top" secondItem="Req-IZ-nd0" secondAttribute="bottom" id="gSy-Bs-fuz"/>
+                            <constraint firstItem="aJ9-6P-u9a" firstAttribute="trailing" secondItem="FcP-ze-zC8" secondAttribute="trailing" id="kts-IZ-PnS"/>
+                            <constraint firstItem="FcP-ze-zC8" firstAttribute="leading" secondItem="aJ9-6P-u9a" secondAttribute="leading" id="rXz-KD-khc"/>
+                            <constraint firstItem="X9c-VN-HVh" firstAttribute="top" secondItem="Req-IZ-nd0" secondAttribute="bottom" id="yLR-ar-udL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="aJ9-6P-u9a"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="FcP-ze-zC8" id="f3J-kg-zSK"/>
+                        <outlet property="titleLbl" destination="hAb-Q7-dkO" id="gWU-is-OVt"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NfQ-iA-1gN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1001" y="-2160"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="Oto-La-o8t">
@@ -951,7 +1039,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blT-yh-XVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FFY-HN-ANR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="481" y="-1714"/>
+            <point key="canvasLocation" x="2346" y="-2089"/>
         </scene>
         <!--RegisterVC-->
         <scene sceneID="qP6-W9-TlQ">
@@ -1174,7 +1262,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fUp-g4-Ikk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="mnF-u8-8Z3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1153" y="-1714"/>
+            <point key="canvasLocation" x="1918" y="-1050"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Cmb-3P-T1w">
@@ -1207,7 +1295,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ys-MV-zQm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1833" y="-1714"/>
+            <point key="canvasLocation" x="3108" y="-1990"/>
         </scene>
         <!--臨打-->
         <scene sceneID="3fs-rG-RyT">
@@ -1270,7 +1358,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIj-cG-Hfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="q6c-HO-2wn" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-124" y="-982"/>
+            <point key="canvasLocation" x="370" y="-828"/>
         </scene>
         <!--球隊-->
         <scene sceneID="Biv-Rk-NsK">
@@ -1624,7 +1712,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="f5d-2G-qtf"/>
-        <segue reference="Ym7-zQ-SHb"/>
+        <segue reference="9hz-2Z-7jX"/>
         <segue reference="a7V-eU-Yjs"/>
     </inferredMetricsTieBreakers>
 </document>
