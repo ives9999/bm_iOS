@@ -33,6 +33,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         [
             ["text": "球隊登錄(往右滑可以編輯)", "icon": "team"],
             ["text": "新增球隊", "segue": TO_TEAM_SUBMIT]
+            
         ]
     ]
     
@@ -46,7 +47,9 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         tableView.layoutMargins = layoutMargins
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
 
+        
         if Member.instance.isLoggedIn {
+            Global.instance.addSpinner(superView: self.view)
             let filter: [[Any]] = [
                 ["channel", "=", CHANNEL],
                 ["manager_id", "=", Member.instance.id]
@@ -62,6 +65,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                     //print(self._rows)
                     self.setData(sections: self._sections, rows: self._rows)
                     self.tableView.reloadData()
+                    Global.instance.removeSpinner(superView: self.view)
                 }
             }
         }

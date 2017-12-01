@@ -82,6 +82,7 @@ class Team {
             TEAM_FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(),"path":"","submit":false,"show":""]
         ]
         
+        /*
         testData = [
             TEAM_NAME_KEY: "快樂羽球隊",
             TEAM_LEADER_KEY: "孫志煌",
@@ -100,6 +101,7 @@ class Team {
             TEAM_CITY_KEY: City(id:218, name: "台南"),
             TEAM_ARENA_KEY: Arena(id: 10, name: "全穎羽球館")
         ]
+ */
         
         for (key, _) in data2 {
             data2[key]!["change"] = false

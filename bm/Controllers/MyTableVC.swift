@@ -70,29 +70,6 @@ class MyTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell!.accessoryType = UITableViewCellAccessoryType.none
             cell!.selectionStyle = UITableViewCellSelectionStyle.none
         } else {
-            //            if cell!.subviews.contains(nameTxt) {
-            //                nameTxt.removeFromSuperview()
-            //            }
-            //            if cell!.subviews.contains(leaderTxt) {
-            //                leaderTxt.removeFromSuperview()
-            //            }
-            //            if cell!.subviews.contains(mobileTxt) {
-            //                mobileTxt.removeFromSuperview()
-            //            }
-            //            if cell!.subviews.contains(emailTxt) {
-            //                emailTxt.removeFromSuperview()
-            //            }
-            //            if cell!.subviews.contains(tempFeeMTxt) {
-            //                tempFeeMTxt.removeFromSuperview()
-            //            }
-            //            if cell!.subviews.contains(tempFeeFTxt) {
-            //                tempFeeFTxt.removeFromSuperview()
-            //            }
-            //            if cell!.subviews.contains(ballTxt) {
-            //                ballTxt.removeFromSuperview()
-            //            }
-            //            cell!.textLabel?.text = ""
-            //            cell!.detailTextLabel?.text = ""
             cell!.accessoryType = .none
         }
         
@@ -108,14 +85,14 @@ class MyTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if sections == nil {
-            return ""
+            return nil
         } else {
             return sections![section]
         }
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 30
+        return 20
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -140,6 +117,6 @@ class MyTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let footer = view as! UITableViewHeaderFooterView
         let separator: UIView = UIView(frame: CGRect(x: 15, y: 0, width: footer.frame.width, height: 1))
         separator.layer.backgroundColor = UIColor("#6c6c6e").cgColor
-        footer.addSubview(separator)
+        //footer.addSubview(separator)
     }
 }

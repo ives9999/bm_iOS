@@ -17,6 +17,7 @@ class TeamTempPlayEditVC: MyTableVC {
 //        let _sections: [String] = [""]
 //        let _rows: [[Dictionary<String, Any>]] = [[Dictionary<String, Any>]]()
 //        setData(sections: _sections, rows: _rows)
+        sections = TeamTempPlay.instance.sections
         myTablView = tableView
         super.viewDidLoad()
 
