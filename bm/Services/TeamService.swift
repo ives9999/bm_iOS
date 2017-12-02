@@ -101,69 +101,70 @@ class TeamService {
                     print("get response result value error")
                     return
                 }
+                let model: Team = Team.instance
                 let json = JSON(data)
                 //print(json)
                 
                 //var images: [String] = [String]()
-                for (key, item) in Team.instance.data {
+                for (key, item) in model.data {
                     if json[key] != JSON.null {
                         let tmp = json[key]
                         var value: Any?
                         let type: String = item["vtype"] as! String
                         if type == "Int" {
                             value = tmp.intValue
-                            Team.instance.data[key]!["value"] = value
-                            Team.instance.data[key]!["show"] = "\(value ?? "")"
+                            model.data[key]!["value"] = value
+                            model.data[key]!["show"] = "\(value ?? "")"
                         } else if type == "String" {
                             value = tmp.stringValue
-                            Team.instance.data[key]!["value"] = value
-                            Team.instance.data[key]!["show"] = value
+                            model.data[key]!["value"] = value
+                            model.data[key]!["show"] = value
                         } else if type == "array" {
                             if key == TEAM_CITY_KEY {
                                 let id: Int = tmp["id"].intValue
                                 let name: String = tmp["name"].stringValue
                                 let city: City = City(id: id, name: name)
-                                Team.instance.updateCity(city)
+                                model.updateCity(city)
                             } else if key == TEAM_ARENA_KEY {
                                 let id: Int = tmp["id"].intValue
                                 let name: String = tmp["name"].stringValue
                                 let arena: Arena = Arena(id: id, name: name)
-                                Team.instance.updateArena(arena)
+                                model.updateArena(arena)
                             } else if key == TEAM_DAYS_KEY {
                                 let tmp1: [JSON] = tmp.arrayValue
                                 var days: [Int] = [Int]()
                                 for item in tmp1 {
                                     days.append(item["day"].intValue)
                                 }
-                                Team.instance.updateDays(days)
+                                model.updateDays(days)
                             } else if key == TEAM_DEGREE_KEY {
                                 let tmp1: String = tmp.stringValue
                                 let degrees: [String] = tmp1.components(separatedBy: ",")
-                                Team.instance.updateDegree(degrees)
+                                model.updateDegree(degrees)
                             }
                         } else if type == "image" {
                             if key == TEAM_FEATURED_KEY {
                                 var tmp1: String = tmp.stringValue
                                 if (tmp1.count > 0) {
                                     tmp1 = BASE_URL + tmp1
-                                    Team.instance.data[key]!["path"] = tmp1
+                                    model.data[key]!["path"] = tmp1
                                 }
                             }
                         }
                     }
                 }
-                Team.instance.updatePlayStartTime()
-                Team.instance.updatePlayEndTime()                
-                Team.instance.updateTempContent()
-                Team.instance.updateCharge()
-                Team.instance.updateContent()
-                //print(Team.instance.data)
+                model.updatePlayStartTime()
+                model.updatePlayEndTime()
+                model.updateTempContent()
+                model.updateCharge()
+                model.updateContent()
+                //print(model.data)
                 
-                let path: String = Team.instance.data[TEAM_FEATURED_KEY]!["path"] as! String
+                let path: String = model.data[TEAM_FEATURED_KEY]!["path"] as! String
                 if path.count > 0 {
                     DataService.instance.getImage(url: path, completion: { (success) in
                         if success {
-                            Team.instance.data[TEAM_FEATURED_KEY]!["value"] = DataService.instance.image
+                            model.data[TEAM_FEATURED_KEY]!["value"] = DataService.instance.image
                             completion(true)
                             //print(team.data)
                         }
@@ -224,30 +225,69 @@ class TeamService {
             
         }
     }
-//    func update(params: [String: Any], completion: @escaping CompletionHandler) {
-//        var body: [String: Any] = ["source": "app"]
-//        body.merge(params)
-//        print(body)
-//        Alamofire.request(URL_TEAM_UPDATE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-//            if response.result.error == nil {
-//                guard let data = response.result.value else {
-//                    print("data error")
-//                    return
-//                }
-//                let json = JSON(data)
-//                self.success = json["success"].boolValue
-//                if self.success {
-//                    self.id = json["id"].intValue
-//                } else {
-//                    let errors: [String] = json["msg"].arrayObject as! [String]
-//                    for i in 0 ..< errors.count {
-//                        self.msg += errors[i]
-//                    }
-//                    //print(self.msg)
-//                }
-//                completion(true)
-//            }
-//        }
-//    }
+    func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app", "token": token, "strip_html": true]
+        
+        //print(body)
+        
+        Alamofire.request(URL_TEAM_TEMP_PLAY, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                //print(response.result.value)
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                let model: TeamTempPlay = TeamTempPlay.instance
+                let json = JSON(data)
+                for (key, item) in model.data {
+                    if json[key] != JSON.null {
+                        let tmp = json[key]
+                        var value: Any?
+                        let type: String = item["vtype"] as! String
+                        if type == "Int" {
+                            value = tmp.intValue
+                            model.data[key]!["value"] = value
+                            model.data[key]!["show"] = "\(value ?? "")"
+                        } else if type == "String" {
+                            value = tmp.stringValue
+                            model.data[key]!["value"] = value
+                            model.data[key]!["show"] = value
+                        } else if type == "array" {
+                            if key == TEAM_CITY_KEY {
+                                let id: Int = tmp["id"].intValue
+                                let name: String = tmp["name"].stringValue
+                                let city: City = City(id: id, name: name)
+                                model.updateCity(city)
+                            } else if key == TEAM_ARENA_KEY {
+                                let id: Int = tmp["id"].intValue
+                                let name: String = tmp["name"].stringValue
+                                let arena: Arena = Arena(id: id, name: name)
+                                model.updateArena(arena)
+                            } else if key == TEAM_DAYS_KEY {
+                                let tmp1: [JSON] = tmp.arrayValue
+                                var days: [Int] = [Int]()
+                                for item in tmp1 {
+                                    days.append(item["day"].intValue)
+                                }
+                                model.updateDays(days)
+                            } else if key == TEAM_DEGREE_KEY {
+                                let tmp1: String = tmp.stringValue
+                                let degrees: [String] = tmp1.components(separatedBy: ",")
+                                model.updateDegree(degrees)
+                            }
+                        } else if type == "image" {
+                            if key == TEAM_FEATURED_KEY {
+                                var tmp1: String = tmp.stringValue
+                                if (tmp1.count > 0) {
+                                    tmp1 = BASE_URL + tmp1
+                                    model.data[key]!["path"] = tmp1
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     
 }

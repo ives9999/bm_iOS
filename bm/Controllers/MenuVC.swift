@@ -100,6 +100,9 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             if segue.identifier == TO_TEAM_SUBMIT {
                 let vc: TeamSubmitVC = segue.destination as! TeamSubmitVC
                 vc.token = sender as! String
+            } else if segue.identifier == TO_TEAM_TEMP_PLAY {
+                let vc: TeamTempPlayEditVC = segue.destination as! TeamTempPlayEditVC
+                vc.token = (sender as! String)
             }
         }
     }
