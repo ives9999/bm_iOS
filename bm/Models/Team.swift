@@ -34,6 +34,14 @@ class Team {
     var data:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
     let transferPair: [String: String] = [TEAM_CITY_KEY:"city_id",TEAM_ARENA_KEY:"arena_id"]
     var testData: [String: Any] = [String: Any]()
+    
+    let temp_play_sections: [String] = [""]
+    let temp_play_rows: [[Dictionary<String, String>]] = [
+        [
+            ["key": TEAM_TEMP_STATUS_KEY], ["key": TEAM_TEMP_QUANTITY_KEY]
+        ]
+    ]
+    var temp_play_data:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
 
     init() {
         
@@ -154,6 +162,29 @@ class Team {
             data[key]!["key"] = key
         }
         //print(data)
+        
+        
+        temp_play_data = [
+            TEAM_ID_KEY:["ch":"編號","vtype":"Int","value":-1,"show":"","atype":none,"submit":false],
+            TEAM_NAME_KEY:["ch":"名稱","vtype":"String","value":"","submit":false,"atype":none,"show":"","keyboardType":defaultPad],
+            TEAM_TEMP_STATUS_KEY:["ch":"臨打狀態","vtype":"String","value":"off","show":"off","atype":none,"itype":"switch","submit":true,"change":false],
+            TEAM_TEMP_QUANTITY_KEY:["ch":"臨打人數","vtype":"Int","value":-1,"show":"","atype":none,"itype":"text","keyboardType":numberPad,"hidden":true,"submit":true,"change":false]
+        ]
+        for (section, value1) in temp_play_rows.enumerated() {
+            for (row, value2) in value1.enumerated() {
+                let key: String = value2["key"]!
+                for (key1, _) in temp_play_data {
+                    if key == key1 {
+                        temp_play_data[key1]!["section"] = section
+                        temp_play_data[key1]!["row"] = row
+                    }
+                }
+            }
+        }
+        for (key, _) in temp_play_data {
+            temp_play_data[key]!["key"] = key
+        }
+        
     }
     
     func initData2() {
@@ -361,5 +392,40 @@ class Team {
         }
         
         return res
+    }
+    func makeTempPlaySubmitArr() -> [String: Any] {
+        var isAnyOneChange: Bool = false
+        var res: [String: Any] = [String: Any]()
+        for (key, row) in temp_play_data {
+            let isSubmit: Bool = row["submit"] as! Bool
+            var isChange: Bool = false
+            if row["change"] != nil {
+                isChange = row["change"] as! Bool
+            }
+            if isSubmit && isChange {
+                res[key] = row["value"]
+                if !isAnyOneChange {
+                    isAnyOneChange = true
+                }
+            }
+        }
+        if !isAnyOneChange {
+            return res
+        }
+        res[TEAM_ID_KEY] = temp_play_data[TEAM_ID_KEY]!["value"]
+        
+        return res
+    }
+    
+    func hideOrShowTempPlayData() {
+        let statusStr: String = temp_play_data[TEAM_TEMP_STATUS_KEY]!["value"] as! String
+        let status = statusStr == "on" ? true : false
+        for (key, item) in temp_play_data {
+            if item["section"] != nil && item["row"] != nil {
+                if key != TEAM_TEMP_STATUS_KEY {
+                    temp_play_data[key]!["hidden"] = !status
+                }
+            }
+        }
     }
 }

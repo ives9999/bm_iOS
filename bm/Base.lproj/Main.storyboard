@@ -800,6 +800,7 @@
                                         </state>
                                         <connections>
                                             <action selector="submit:" destination="UtM-v1-pfK" eventType="touchUpInside" id="FTI-5O-XBc"/>
+                                            <action selector="submit:" destination="gO6-sX-L0T" eventType="touchUpInside" id="qt1-uk-APN"/>
                                         </connections>
                                     </button>
                                 </subviews>

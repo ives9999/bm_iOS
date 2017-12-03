@@ -46,7 +46,7 @@ class TeamTempPlayCell: SuperCell, UITextFieldDelegate {
         generalTextField.frame = fullTextFieldFrame
         
         let switchWidth: CGFloat = 80
-        generalSwitch.frame = CGRect(x: bounds.width - switchWidth, y: 0, width: switchWidth, height: bounds.height)
+        generalSwitch.frame = CGRect(x: bounds.width - switchWidth + 10, y: 0, width: switchWidth, height: bounds.height)
     }
     func forRow(row: [String: Any]) {
         //print(row)
@@ -67,6 +67,16 @@ class TeamTempPlayCell: SuperCell, UITextFieldDelegate {
                 if itype == "switch" {
                     generalTextField.isHidden = true
                     generalSwitch.isHidden = false
+                    var b: Bool = false
+                    let vtype: String = row["vtype"] as! String
+                    if vtype == "String" {
+                        let tmp: String = row["value"] as! String
+                        b = tmp == "on" ? true : false
+                    } else if vtype == "Bool" {
+                        b = row["value"] as! Bool
+                    }
+                    //print("status: \(b)")
+                    generalSwitch.setOn(b, animated: true)
                 } else {
                     generalSwitch.isHidden = true
                     detailTextLabel?.text = ""

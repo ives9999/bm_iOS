@@ -237,21 +237,21 @@ class TeamService {
                     print("get response result value error")
                     return
                 }
-                let model: TeamTempPlay = TeamTempPlay.instance
+                let model: Team = Team.instance
                 let json = JSON(data)
-                for (key, item) in model.data {
+                for (key, item) in model.temp_play_data {
                     if json[key] != JSON.null {
                         let tmp = json[key]
                         var value: Any?
                         let type: String = item["vtype"] as! String
                         if type == "Int" {
                             value = tmp.intValue
-                            model.data[key]!["value"] = value
-                            model.data[key]!["show"] = "\(value ?? "")"
+                            model.temp_play_data[key]!["value"] = value
+                            model.temp_play_data[key]!["show"] = "\(value ?? "")"
                         } else if type == "String" {
                             value = tmp.stringValue
-                            model.data[key]!["value"] = value
-                            model.data[key]!["show"] = value
+                            model.temp_play_data[key]!["value"] = value
+                            model.temp_play_data[key]!["show"] = value
                         } else if type == "array" {
                             if key == TEAM_CITY_KEY {
                                 let id: Int = tmp["id"].intValue
@@ -275,17 +275,10 @@ class TeamService {
                                 let degrees: [String] = tmp1.components(separatedBy: ",")
                                 model.updateDegree(degrees)
                             }
-                        } else if type == "image" {
-                            if key == TEAM_FEATURED_KEY {
-                                var tmp1: String = tmp.stringValue
-                                if (tmp1.count > 0) {
-                                    tmp1 = BASE_URL + tmp1
-                                    model.data[key]!["path"] = tmp1
-                                }
-                            }
                         }
                     }
                 }
+                completion(true)
             }
         }
     }
