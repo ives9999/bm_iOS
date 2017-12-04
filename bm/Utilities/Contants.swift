@@ -28,6 +28,7 @@ let URL_ARENA_BY_CITY_ID = URL_HOME + "arena_by_city"
 let URL_TEAM_UPDATE = URL_HOME + "team/update"
 let URL_ONE = "\(URL_HOME)%@/one"
 let URL_TEAM_TEMP_PLAY = URL_HOME + "team/tempPlay/onoff"
+let URL_TEAM_TEMP_PLAY_LIST = URL_HOME + "team/tempPlay/list"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"

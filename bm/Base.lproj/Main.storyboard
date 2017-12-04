@@ -1339,13 +1339,21 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="hIU-gT-JFe">
                                 <rect key="frame" x="0.0" y="84" width="375" height="534"/>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DqK-vF-DVl">
+                                <rect key="frame" x="0.0" y="84" width="375" height="534"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="MKJ-0G-bAL" firstAttribute="trailing" secondItem="hIU-gT-JFe" secondAttribute="trailing" id="09A-oF-I9l"/>
                             <constraint firstItem="YjS-X6-jiY" firstAttribute="top" secondItem="MKJ-0G-bAL" secondAttribute="top" id="8Yc-QK-Sku"/>
+                            <constraint firstItem="DqK-vF-DVl" firstAttribute="leading" secondItem="MKJ-0G-bAL" secondAttribute="leading" id="8bu-WF-xpU"/>
+                            <constraint firstItem="MKJ-0G-bAL" firstAttribute="trailing" secondItem="DqK-vF-DVl" secondAttribute="trailing" id="9k9-7q-2b8"/>
                             <constraint firstItem="MKJ-0G-bAL" firstAttribute="trailing" secondItem="YjS-X6-jiY" secondAttribute="trailing" id="Oid-kw-gUm"/>
                             <constraint firstItem="hIU-gT-JFe" firstAttribute="leading" secondItem="MKJ-0G-bAL" secondAttribute="leading" id="PAa-XK-Vyz"/>
+                            <constraint firstItem="DqK-vF-DVl" firstAttribute="top" secondItem="YjS-X6-jiY" secondAttribute="bottom" id="TJJ-9x-1Lk"/>
                             <constraint firstItem="hIU-gT-JFe" firstAttribute="top" secondItem="YjS-X6-jiY" secondAttribute="bottom" id="USj-By-Yn0"/>
+                            <constraint firstItem="MKJ-0G-bAL" firstAttribute="bottom" secondItem="DqK-vF-DVl" secondAttribute="bottom" id="mOD-92-nOb"/>
                             <constraint firstItem="MKJ-0G-bAL" firstAttribute="bottom" secondItem="hIU-gT-JFe" secondAttribute="bottom" id="sDk-eI-zAq"/>
                             <constraint firstItem="YjS-X6-jiY" firstAttribute="leading" secondItem="MKJ-0G-bAL" secondAttribute="leading" id="xF9-WZ-cRp"/>
                         </constraints>
@@ -1354,6 +1362,7 @@
                     <tabBarItem key="tabBarItem" title="臨打" image="tempPlay" id="OIH-0z-1IF"/>
                     <connections>
                         <outlet property="menuBtn" destination="DrH-Md-qly" id="fLo-1s-4pb"/>
+                        <outlet property="tableView" destination="DqK-vF-DVl" id="7CS-vI-PXn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uIj-cG-Hfp" userLabel="First Responder" sceneMemberID="firstResponder"/>

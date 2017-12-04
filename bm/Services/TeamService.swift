@@ -228,8 +228,6 @@ class TeamService {
     func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app", "token": token, "strip_html": true]
         
-        //print(body)
-        
         Alamofire.request(URL_TEAM_TEMP_PLAY, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 //print(response.result.value)
@@ -278,6 +276,64 @@ class TeamService {
                         }
                     }
                 }
+                completion(true)
+            }
+        }
+    }
+    func tempPlay_list(completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app"]
+        
+        Alamofire.request(URL_TEAM_TEMP_PLAY_LIST, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                //print(response.result.value)
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                let model: Team = Team.instance
+                let json = JSON(data)
+                print(json)
+                /*
+                for (key, item) in model.temp_play_data {
+                    if json[key] != JSON.null {
+                        let tmp = json[key]
+                        var value: Any?
+                        let type: String = item["vtype"] as! String
+                        if type == "Int" {
+                            value = tmp.intValue
+                            model.temp_play_data[key]!["value"] = value
+                            model.temp_play_data[key]!["show"] = "\(value ?? "")"
+                        } else if type == "String" {
+                            value = tmp.stringValue
+                            model.temp_play_data[key]!["value"] = value
+                            model.temp_play_data[key]!["show"] = value
+                        } else if type == "array" {
+                            if key == TEAM_CITY_KEY {
+                                let id: Int = tmp["id"].intValue
+                                let name: String = tmp["name"].stringValue
+                                let city: City = City(id: id, name: name)
+                                model.updateCity(city)
+                            } else if key == TEAM_ARENA_KEY {
+                                let id: Int = tmp["id"].intValue
+                                let name: String = tmp["name"].stringValue
+                                let arena: Arena = Arena(id: id, name: name)
+                                model.updateArena(arena)
+                            } else if key == TEAM_DAYS_KEY {
+                                let tmp1: [JSON] = tmp.arrayValue
+                                var days: [Int] = [Int]()
+                                for item in tmp1 {
+                                    days.append(item["day"].intValue)
+                                }
+                                model.updateDays(days)
+                            } else if key == TEAM_DEGREE_KEY {
+                                let tmp1: String = tmp.stringValue
+                                let degrees: [String] = tmp1.components(separatedBy: ",")
+                                model.updateDegree(degrees)
+                            }
+                        }
+                    }
+                }
+ */
                 completion(true)
             }
         }

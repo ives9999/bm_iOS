@@ -12,6 +12,7 @@ class TempPlayVC: UIViewController {
 
     // outlets
     @IBOutlet weak var menuBtn: UIButton!
+    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,10 @@ class TempPlayVC: UIViewController {
         
         if Member.instance.isLoggedIn {
             NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+        }
+        
+        TeamService.instance.tempPlay_list { (success) in
+            
         }
         
     }
