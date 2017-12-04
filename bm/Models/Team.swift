@@ -35,14 +35,22 @@ class Team {
     let transferPair: [String: String] = [TEAM_CITY_KEY:"city_id",TEAM_ARENA_KEY:"arena_id"]
     var testData: [String: Any] = [String: Any]()
     
-    let temp_play_sections: [String] = [""]
-    let temp_play_rows: [[Dictionary<String, String>]] = [
+    let temp_play_edit_sections: [String] = [""]
+    let temp_play_edit_rows: [[Dictionary<String, String>]] = [
         [
             ["key": TEAM_TEMP_STATUS_KEY], ["key": TEAM_TEMP_QUANTITY_KEY]
         ]
     ]
     var temp_play_data:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
 
+    let temp_play_list_sections: [String] = [""]
+    let temp_play_list_rows: [[Dictionary<String, String>]] = [
+        [
+            ["key": TEAM_NAME_KEY], ["key": TEAM_TEMP_QUANTITY_KEY]
+        ]
+    ]
+    var list: [DATA] = [DATA]()
+    
     init() {
         
         let none: UITableViewCellAccessoryType = UITableViewCellAccessoryType.none

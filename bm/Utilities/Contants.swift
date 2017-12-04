@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 typealias CompletionHandler = (_ Success: Bool) -> ()
+typealias DATA = Dictionary<String, [String: Any]>
 
 let CHANNEL = "bm"
 

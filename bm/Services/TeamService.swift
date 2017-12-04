@@ -19,6 +19,11 @@ class TeamService {
     var id: Int = 0
     var downloadImageNum: Int = 0
     //var team: Team = Team()
+    var model:Team!
+    
+    init() {
+        model = Team.instance
+    }
     
     func update(params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
@@ -235,43 +240,42 @@ class TeamService {
                     print("get response result value error")
                     return
                 }
-                let model: Team = Team.instance
                 let json = JSON(data)
-                for (key, item) in model.temp_play_data {
+                for (key, item) in self.model.temp_play_data {
                     if json[key] != JSON.null {
                         let tmp = json[key]
                         var value: Any?
                         let type: String = item["vtype"] as! String
                         if type == "Int" {
                             value = tmp.intValue
-                            model.temp_play_data[key]!["value"] = value
-                            model.temp_play_data[key]!["show"] = "\(value ?? "")"
+                            self.model.temp_play_data[key]!["value"] = value
+                            self.model.temp_play_data[key]!["show"] = "\(value ?? "")"
                         } else if type == "String" {
                             value = tmp.stringValue
-                            model.temp_play_data[key]!["value"] = value
-                            model.temp_play_data[key]!["show"] = value
+                            self.model.temp_play_data[key]!["value"] = value
+                            self.model.temp_play_data[key]!["show"] = value
                         } else if type == "array" {
                             if key == TEAM_CITY_KEY {
                                 let id: Int = tmp["id"].intValue
                                 let name: String = tmp["name"].stringValue
                                 let city: City = City(id: id, name: name)
-                                model.updateCity(city)
+                                self.model.updateCity(city)
                             } else if key == TEAM_ARENA_KEY {
                                 let id: Int = tmp["id"].intValue
                                 let name: String = tmp["name"].stringValue
                                 let arena: Arena = Arena(id: id, name: name)
-                                model.updateArena(arena)
+                                self.model.updateArena(arena)
                             } else if key == TEAM_DAYS_KEY {
                                 let tmp1: [JSON] = tmp.arrayValue
                                 var days: [Int] = [Int]()
                                 for item in tmp1 {
                                     days.append(item["day"].intValue)
                                 }
-                                model.updateDays(days)
+                                self.model.updateDays(days)
                             } else if key == TEAM_DEGREE_KEY {
                                 let tmp1: String = tmp.stringValue
                                 let degrees: [String] = tmp1.components(separatedBy: ",")
-                                model.updateDegree(degrees)
+                                self.model.updateDegree(degrees)
                             }
                         }
                     }
@@ -293,48 +297,54 @@ class TeamService {
                 let model: Team = Team.instance
                 let json = JSON(data)
                 print(json)
-                /*
-                for (key, item) in model.temp_play_data {
-                    if json[key] != JSON.null {
-                        let tmp = json[key]
-                        var value: Any?
-                        let type: String = item["vtype"] as! String
-                        if type == "Int" {
-                            value = tmp.intValue
-                            model.temp_play_data[key]!["value"] = value
-                            model.temp_play_data[key]!["show"] = "\(value ?? "")"
-                        } else if type == "String" {
-                            value = tmp.stringValue
-                            model.temp_play_data[key]!["value"] = value
-                            model.temp_play_data[key]!["show"] = value
-                        } else if type == "array" {
-                            if key == TEAM_CITY_KEY {
-                                let id: Int = tmp["id"].intValue
-                                let name: String = tmp["name"].stringValue
-                                let city: City = City(id: id, name: name)
-                                model.updateCity(city)
-                            } else if key == TEAM_ARENA_KEY {
-                                let id: Int = tmp["id"].intValue
-                                let name: String = tmp["name"].stringValue
-                                let arena: Arena = Arena(id: id, name: name)
-                                model.updateArena(arena)
-                            } else if key == TEAM_DAYS_KEY {
-                                let tmp1: [JSON] = tmp.arrayValue
-                                var days: [Int] = [Int]()
-                                for item in tmp1 {
-                                    days.append(item["day"].intValue)
-                                }
-                                model.updateDays(days)
-                            } else if key == TEAM_DEGREE_KEY {
-                                let tmp1: String = tmp.stringValue
-                                let degrees: [String] = tmp1.components(separatedBy: ",")
-                                model.updateDegree(degrees)
-                            }
+                let arr: [JSON] = json["rows"].arrayValue
+                
+                for i in 0 ..< arr.count {
+                    for (key, value) in model.data {
+                        if arr[i][key] != nil {
+                            self._jsonToData(tmp: arr[i][key], key: key, item: value)
                         }
                     }
+                    model.list.append(model.data)
                 }
- */
                 completion(true)
+            }
+        }
+    }
+    
+    func _jsonToData(tmp: JSON, key: String, item: [String: Any]) {
+        var value: Any?
+        let type: String = item["vtype"] as! String
+        if type == "Int" {
+            value = tmp.intValue
+            model.data[key]!["value"] = value
+            model.data[key]!["show"] = "\(value ?? "")"
+        } else if type == "String" {
+            value = tmp.stringValue
+            model.data[key]!["value"] = value
+            model.data[key]!["show"] = value
+        } else if type == "array" {
+            if key == TEAM_CITY_KEY {
+                let id: Int = tmp["id"].intValue
+                let name: String = tmp["name"].stringValue
+                let city: City = City(id: id, name: name)
+                model.updateCity(city)
+            } else if key == TEAM_ARENA_KEY {
+                let id: Int = tmp["id"].intValue
+                let name: String = tmp["name"].stringValue
+                let arena: Arena = Arena(id: id, name: name)
+                model.updateArena(arena)
+            } else if key == TEAM_DAYS_KEY {
+                let tmp1: [JSON] = tmp.arrayValue
+                var days: [Int] = [Int]()
+                for item in tmp1 {
+                    days.append(item["day"].intValue)
+                }
+                model.updateDays(days)
+            } else if key == TEAM_DEGREE_KEY {
+                let tmp1: String = tmp.stringValue
+                let degrees: [String] = tmp1.components(separatedBy: ",")
+                model.updateDegree(degrees)
             }
         }
     }

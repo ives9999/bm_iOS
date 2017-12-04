@@ -37,7 +37,7 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
             })
         }
         
-        sections = model.temp_play_sections
+        sections = model.temp_play_edit_sections
         myTablView = tableView
         super.viewDidLoad()
 
