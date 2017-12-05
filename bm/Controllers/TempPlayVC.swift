@@ -32,7 +32,7 @@ class TempPlayVC: MyTableVC {
         TeamService.instance.tempPlay_list { (success) in
             if success {
                 Global.instance.removeSpinner(superView: self.view)
-                //print(self.model.temp_play_data)
+                print(self.model.list)
                 self.tableView.reloadData()
             }
         }
