@@ -296,16 +296,21 @@ class TeamService {
                 }
                 let model: Team = Team.instance
                 let json = JSON(data)
-                print(json)
+                //print(json)
                 let arr: [JSON] = json["rows"].arrayValue
                 
                 for i in 0 ..< arr.count {
                     for (key, value) in model.data {
-                        if arr[i][key] != nil {
+                        if arr[i][key] != JSON.null {
                             self._jsonToData(tmp: arr[i][key], key: key, item: value)
                         }
                     }
-                    model.list.append(model.data)
+                    var data: Dictionary<String, [String: Any]> = model.data
+                    var near_date: Dictionary<String, Any> = [String: Any]()
+                    near_date["value"] = arr[i]["near_date"].stringValue
+                    data["near_date"] = near_date
+                    //print(data)
+                    model.list.append(data)
                 }
                 completion(true)
             }

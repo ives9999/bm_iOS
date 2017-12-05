@@ -17,6 +17,7 @@ class TempPlayVC: MyTableVC {
     var model: Team!
     
     override func viewDidLoad() {
+        model = Team.instance
         sections = model.temp_play_list_sections
         myTablView = tableView
         super.viewDidLoad()
@@ -32,13 +33,15 @@ class TempPlayVC: MyTableVC {
         TeamService.instance.tempPlay_list { (success) in
             if success {
                 Global.instance.removeSpinner(superView: self.view)
-                print(self.model.list)
+                //print(self.model.list)
                 self.tableView.reloadData()
             }
         }
+        tableView.register(TeamTempPlayListCell.self, forCellReuseIdentifier: "cell")
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(model.list.count)
         return model.list.count
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

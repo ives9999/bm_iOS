@@ -178,7 +178,7 @@ class Team {
             TEAM_TEMP_STATUS_KEY:["ch":"臨打狀態","vtype":"String","value":"off","show":"off","atype":none,"itype":"switch","submit":true,"change":false],
             TEAM_TEMP_QUANTITY_KEY:["ch":"臨打人數","vtype":"Int","value":-1,"show":"","atype":none,"itype":"text","keyboardType":numberPad,"hidden":true,"submit":true,"change":false]
         ]
-        for (section, value1) in temp_play_rows.enumerated() {
+        for (section, value1) in temp_play_edit_rows.enumerated() {
             for (row, value2) in value1.enumerated() {
                 let key: String = value2["key"]!
                 for (key1, _) in temp_play_data {
