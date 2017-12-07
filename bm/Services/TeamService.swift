@@ -306,9 +306,27 @@ class TeamService {
                         }
                     }
                     var data: Dictionary<String, [String: Any]> = model.data
+                    
                     var near_date: Dictionary<String, Any> = [String: Any]()
                     near_date["value"] = arr[i]["near_date"].stringValue
+                    near_date["value1"] = arr[i]["near_date_w"].stringValue
                     data["near_date"] = near_date
+                    
+                    var city: Dictionary<String, Any> = [String: Any]()
+                    city["value"] = arr[i]["city_id"].intValue
+                    city["show"] = arr[i]["city_name"].stringValue
+                    data["city"] = city
+                    
+                    var arena: Dictionary<String, Any> = [String: Any]()
+                    arena["value"] = arr[i]["arena_id"].intValue
+                    arena["show"] = arr[i]["arena_name"].stringValue
+                    data["arena"] = arena
+                    
+                    var count: Dictionary<String, Any> = [String: Any]()
+                    count["quantity"] = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
+                    count["signup"] = arr[i]["signup"].intValue
+                    data["count"] = count
+                    
                     //print(data)
                     model.list.append(data)
                 }

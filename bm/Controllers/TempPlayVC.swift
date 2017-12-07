@@ -15,6 +15,7 @@ class TempPlayVC: MyTableVC {
     @IBOutlet weak var tableView: UITableView!
     
     var model: Team!
+    let cell_constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
     
     override func viewDidLoad() {
         model = Team.instance
@@ -38,12 +39,22 @@ class TempPlayVC: MyTableVC {
             }
         }
         tableView.register(TeamTempPlayListCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(model.list.count)
+        //print(model.list.count)
         return model.list.count
     }
+    
+     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return cell_constant.height
+     }
+ 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
