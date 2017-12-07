@@ -33,12 +33,6 @@ class SuperLabel: UILabel {
     func setTextSize(_ size: CGFloat) {
         self.font = UIFont(name: fontName, size: size)
     }
-    
-    func setTagStyle(bk: UIColor) {
-        self.backgroundColor = bk
-        self.layer.cornerRadius = 10
-        self.layer.masksToBounds = true
-    }
 
     func setTextColor(_ color: UIColor) {
         self.textColor = color

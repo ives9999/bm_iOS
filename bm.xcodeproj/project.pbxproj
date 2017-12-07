@@ -15,6 +15,7 @@
 		B322F80D1FC6DCAD00DE98FB /* TeamSubmitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F80C1FC6DCAD00DE98FB /* TeamSubmitCell.swift */; };
 		B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF21F8483E3003D39CC /* HomeImageCell.swift */; };
 		B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF71F849AA7003D39CC /* DataService.swift */; };
+		B3308C4D1FD9575E006A83B6 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3308C4C1FD9575E006A83B6 /* Tag.swift */; };
 		B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33297801FD6B4E400949CDE /* SuperLabel.swift */; };
 		B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */; };
 		B35F8DD91F8F64310073BD70 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35F8DD81F8F64310073BD70 /* Home.swift */; };
@@ -111,6 +112,7 @@
 		B322F80C1FC6DCAD00DE98FB /* TeamSubmitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamSubmitCell.swift; sourceTree = "<group>"; };
 		B32FBCF21F8483E3003D39CC /* HomeImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeImageCell.swift; sourceTree = "<group>"; };
 		B32FBCF71F849AA7003D39CC /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		B3308C4C1FD9575E006A83B6 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		B33297801FD6B4E400949CDE /* SuperLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLabel.swift; sourceTree = "<group>"; };
 		B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayEditVC.swift; sourceTree = "<group>"; };
 		B35F8DD81F8F64310073BD70 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 			isa = PBXGroup;
 			children = (
 				B33297801FD6B4E400949CDE /* SuperLabel.swift */,
+				B3308C4C1FD9575E006A83B6 /* Tag.swift */,
 			);
 			path = Label;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				F9A1CB831F986C2300DDEC86 /* ListVC.swift in Sources */,
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
 				B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */,
+				B3308C4D1FD9575E006A83B6 /* Tag.swift in Sources */,
 				B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */,
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* ListCell.swift in Sources */,
