@@ -178,7 +178,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                         params[TEAM_ID_KEY] = id
                     }
                 }
-                print(params)
+                //print(params)
                 Global.instance.addSpinner(superView: self.view)
                 
                 //print(isFeaturedChange)

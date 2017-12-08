@@ -64,4 +64,22 @@ class TempPlayVC: MyTableVC {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row: Dictionary<String, [String: Any]> = model.list[indexPath.row]
+        let token: String = row[TEAM_TOKEN_KEY]!["value"] as! String
+        performSegue(withIdentifier: TO_TEMP_PLAY_SHOW, sender: token)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let tempPlayShowVC: TempPlayShowVC = segue.destination as! TempPlayShowVC
+        tempPlayShowVC.token = sender as! String
+    }
 }
+
+
+
+
+
+
+
