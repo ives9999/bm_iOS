@@ -168,6 +168,7 @@ class TeamService {
                 model.updateCharge()
                 model.updateContent()
                 model.updateNearDate()
+                model.feeShow()
                 //print(model.data)
                 
                 let path: String = model.data[TEAM_FEATURED_KEY]!["path"] as! String

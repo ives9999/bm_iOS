@@ -17,6 +17,14 @@ class TempPlayShowVC: MyTableVC {
     var arenaBtn: SuperButton!
     var dateLbl: SuperLabel!
     var timeLbl: SuperLabel!
+    var quantityLbl: SuperLabel!
+    var signupLbl: SuperLabel!
+    var feeMLbl: SuperLabel!
+    var feeFLbl: SuperLabel!
+    var ballLbl: SuperLabel!
+    var leaderLbl: SuperLabel!
+    var mobileLbl: SuperLabel!
+    var degreeLbl: SuperLabel!
     
     var items: [Any] = [Any]()
     
@@ -52,8 +60,16 @@ class TempPlayShowVC: MyTableVC {
         arenaBtn = SuperButton(frame: CGRect.zero)
         dateLbl = SuperLabel(frame: CGRect.zero)
         timeLbl = SuperLabel(frame: CGRect.zero)
+        quantityLbl = SuperLabel(frame: CGRect.zero)
+        signupLbl = SuperLabel(frame: CGRect.zero)
+        feeMLbl = SuperLabel(frame: CGRect.zero)
+        feeFLbl = SuperLabel(frame: CGRect.zero)
+        ballLbl = SuperLabel(frame: CGRect.zero)
+        leaderLbl = SuperLabel(frame: CGRect.zero)
+        mobileLbl = SuperLabel(frame: CGRect.zero)
+        degreeLbl = SuperLabel(frame: CGRect.zero)
         
-        let tmps: [Any] = [cityBtn, arenaBtn, dateLbl, timeLbl]
+        let tmps: [Any] = [cityBtn,arenaBtn,dateLbl,timeLbl,quantityLbl,signupLbl,feeMLbl,feeFLbl,ballLbl,leaderLbl,mobileLbl,degreeLbl]
         items = items + tmps
         
         for (idx, item) in items.enumerated() {
@@ -110,30 +126,70 @@ class TempPlayShowVC: MyTableVC {
         let img_height: CGFloat = img.size.height
         let width: CGFloat = bkView.frame.width
         let height: CGFloat = width * (img_height / img_width)
-        featured.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        featured.frame = CGRect(x: 0, y: 80, width: width, height: height)
         featured.image = img
         featured.contentMode = .scaleAspectFit
         
         var lbl: String! = ""
         var text: String! = ""
+        var key: String! = ""
         
-        lbl = (model.data[TEAM_CITY_KEY]!["ch"] as! String)
-        text = (model.data[TEAM_CITY_KEY]!["show"] as! String)
-        cityBtn.setTitle(lbl + ": " + text, for: .normal)
+        key = TEAM_CITY_KEY
+        text = (model.data[key]!["show"] as! String)
+        cityBtn.setTitle(text, for: .normal)
         
-        lbl = (model.data[TEAM_ARENA_KEY]!["ch"] as! String)
-        text = (model.data[TEAM_ARENA_KEY]!["show"] as! String)
-        arenaBtn.setTitle(lbl + ": " + text, for: .normal)
+        key = TEAM_ARENA_KEY
+        text = (model.data[key]!["show"] as! String)
+        arenaBtn.setTitle(text, for: .normal)
         
-        lbl = (model.data[TEAM_NEAR_DATE_KEY]!["ch"] as! String)
-        text = (model.data[TEAM_NEAR_DATE_KEY]!["show"] as! String)
+        key = TEAM_NEAR_DATE_KEY
+        lbl = (model.data[key]!["ch"] as! String)
+        text = (model.data[key]!["show"] as! String)
         dateLbl.text = lbl + ": " + text
         
         lbl = "臨打時段"
         text = (model.data[TEAM_PLAY_START_KEY]!["show"] as! String) + " - " + (model.data[TEAM_PLAY_END_KEY]!["show"] as! String)
         timeLbl.text = lbl + ": " + text
         
+        key = TEAM_TEMP_QUANTITY_KEY
+        lbl = (model.data[key]!["ch"] as! String)
+        text = (model.data[key]!["show"] as! String)
+        quantityLbl.text = lbl + ": " + text
         
+        key = TEAM_TEMP_SIGNUP_KEY
+        lbl = (model.data[key]!["ch"] as! String)
+        text = (model.data[key]!["value"] as! String)
+        signupLbl.text = lbl + ": " + text
+        
+        key = TEAM_TEMP_FEE_M_KEY
+        lbl = (model.data[key]!["ch"] as! String)
+        text = (model.data[key]!["show"] as! String)
+        feeMLbl.text = lbl + ": " + text
+        
+        key = TEAM_TEMP_FEE_F_KEY
+        lbl = (model.data[key]!["ch"] as! String)
+        text = (model.data[key]!["show"] as! String)
+        feeFLbl.text = lbl + ": " + text
+        
+        key = TEAM_BALL_KEY
+        lbl = (model.data[key]!["ch"] as! String)
+        text = (model.data[key]!["show"] as! String)
+        ballLbl.text = lbl + ": " + text
+        
+        key = TEAM_LEADER_KEY
+        lbl = (model.data[key]!["ch"] as! String)
+        text = (model.data[key]!["show"] as! String)
+        leaderLbl.text = lbl + ": " + text
+        
+        key = TEAM_MOBILE_KEY
+        lbl = (model.data[key]!["ch"] as! String)
+        text = (model.data[key]!["show"] as! String)
+        mobileLbl.text = lbl + ": " + text
+        
+        key = TEAM_DEGREE_KEY
+        lbl = (model.data[key]!["ch"] as! String)
+        text = (model.data[key]!["show"] as! String)
+        degreeLbl.text = lbl + ": " + text
     }
     
     @objc func city(sender: UIButton) {

@@ -68,7 +68,7 @@ class Team {
             TEAM_YOUTUBE_KEY:["ch":"youtube","vtype":"String","value":"","submit":false,"show":""],
             TEAM_SLUG_KEY:["ch":"插槽","vtype":"String","value":"","submit":true,"show":""],
             TEAM_MANAGER_ID_KEY:["ch":"管理者編號","vtype":"Int","value":-1,"submit":false,"show":""],
-            TEAM_TEMP_QUANTITY_KEY:["ch":"臨打人數","vtype":"Int","value":-1,"submit":false,"show":""],
+            TEAM_TEMP_QUANTITY_KEY:["ch":"臨打人數缺額","vtype":"Int","value":-1,"submit":false,"show":""],
             TEAM_TEMP_STATUS_KEY:["ch":"臨打狀態","vtype":"String","value":"","submit":false,"show":""],
             TEAM_PV_KEY:["ch":"瀏覽數","vtype":"Int","value":-1,"submit":false,"show":""],
             TEAM_TOKEN_KEY:["ch":"球隊token","vtype":"String","value":"","submit":false,"show":""],
@@ -76,7 +76,8 @@ class Team {
             TEAM_CREATED_AT_KEY:["ch":"建立時間","vtype":"String","value":"","submit":false,"show":""],
             TEAM_UPDATED_AT_KEY:["ch":"最後一次修改時間","vtype":"String","value":"","submit":false,"show":""],
             TEAM_THUMB_KEY:["ch":"代表圖","vtype":"String","value":"","submit":false,"show":""],
-            TEAM_NEAR_DATE_KEY:["ch":"下次臨打日期","vtype":"String","value":"","submit":false,"show":""]
+            TEAM_NEAR_DATE_KEY:["ch":"下次臨打日期","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_TEMP_SIGNUP_KEY:["ch":"已報名人數","vtype":"String","value":"","submit":false,"show":""]
             
         ]
         var data2: Dictionary<String, [String: Any]> = [
@@ -325,6 +326,13 @@ class Team {
         var text: String = data[TEAM_CONTENT_KEY]!["value"] as! String
         text = text.truncate(length: length)
         data[TEAM_CONTENT_KEY]!["show"] = text
+    }
+    func feeShow() {
+        var text: String = ""
+        text = data[TEAM_TEMP_FEE_M_KEY]!["show"] as! String + "元"
+        data[TEAM_TEMP_FEE_M_KEY]!["show"] = text
+        text = data[TEAM_TEMP_FEE_F_KEY]!["show"] as! String + "元"
+        data[TEAM_TEMP_FEE_F_KEY]!["show"] = text
     }
     
     func setArenaSender() {
