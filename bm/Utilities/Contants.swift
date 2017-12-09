@@ -132,6 +132,7 @@ let TEAM_ARENA_KEY = "arena"
 let TEAM_DAYS_KEY = "days"
 let TEAM_FEATURED_KEY = "featured_path"
 let TEAM_CAT_KEY = "cat_id"
+let TEAM_NEAR_DATE_KEY = "near_date"
 
 // Team temp_play key
 

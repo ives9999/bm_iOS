@@ -158,11 +158,16 @@ class TeamService {
                         }
                     }
                 }
+                if json["near_date_w"] != JSON.null {
+                    let n2: String = json["near_date_w"].stringValue
+                    model.data[TEAM_NEAR_DATE_KEY]!["value1"] = n2
+                }
                 model.updatePlayStartTime()
                 model.updatePlayEndTime()
                 model.updateTempContent()
                 model.updateCharge()
                 model.updateContent()
+                model.updateNearDate()
                 //print(model.data)
                 
                 let path: String = model.data[TEAM_FEATURED_KEY]!["path"] as! String
@@ -308,8 +313,11 @@ class TeamService {
                     var data: Dictionary<String, [String: Any]> = model.data
                     
                     var near_date: Dictionary<String, Any> = [String: Any]()
-                    near_date["value"] = arr[i]["near_date"].stringValue
-                    near_date["value1"] = arr[i]["near_date_w"].stringValue
+                    let n1: String = arr[i]["near_date"].stringValue
+                    let n2: String = arr[i]["near_date_w"].stringValue
+                    near_date["value"] = n1
+                    near_date["value1"] = n2
+                    near_date["show"] = n1 + "(" + n2 + ")"
                     data["near_date"] = near_date
                     
                     var city: Dictionary<String, Any> = [String: Any]()

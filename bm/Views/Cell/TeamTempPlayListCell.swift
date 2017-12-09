@@ -123,9 +123,7 @@ class TeamTempPlayListCell: SuperCell {
         quantityLbl.text = "接受臨打人數：" + String(quantity)
         signupLbl.text = "已報名人數：" + String(signup)
         
-        let near_date_1: String = (row["near_date"]!["value"] as! String)
-        let near_date_2: String = (row["near_date"]!["value1"] as! String)
-        let near_date: String = near_date_1 + "(" + near_date_2 + ")"
+        let near_date: String = (row["near_date"]!["show"] as! String)
         dateLbl.text = near_date
         
         setNeedsLayout()

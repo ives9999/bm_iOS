@@ -75,7 +75,8 @@ class Team {
             TEAM_CREATED_ID_KEY:["ch":"建立者","vtype":"Int","value":-1,"submit":false,"show":""],
             TEAM_CREATED_AT_KEY:["ch":"建立時間","vtype":"String","value":"","submit":false,"show":""],
             TEAM_UPDATED_AT_KEY:["ch":"最後一次修改時間","vtype":"String","value":"","submit":false,"show":""],
-            TEAM_THUMB_KEY:["ch":"代表圖","vtype":"String","value":"","submit":false,"show":""]
+            TEAM_THUMB_KEY:["ch":"代表圖","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_NEAR_DATE_KEY:["ch":"下次臨打日期","vtype":"String","value":"","submit":false,"show":""]
             
         ]
         var data2: Dictionary<String, [String: Any]> = [
@@ -260,6 +261,24 @@ class Team {
         }
         contentShow()
         setContentSender()
+    }
+    func updateNearDate(_ n1: String? = nil, _ n2: String? = nil) {
+        var nn1: String = ""
+        var nn2: String = ""
+        if n1 != nil {
+            data[TEAM_NEAR_DATE_KEY]!["value"] = n1
+            nn1 = n1!
+        } else {
+            nn1 = (data[TEAM_NEAR_DATE_KEY]!["value"] as! String)
+        }
+        if n2 != nil {
+            data[TEAM_NEAR_DATE_KEY]!["value1"] = n2
+            nn2 = n2!
+        } else {
+            nn2 = (data[TEAM_NEAR_DATE_KEY]!["value1"] as! String)
+        }
+        let n: String = nn1 + "(" + nn2 + ")"
+        data[TEAM_NEAR_DATE_KEY]!["show"] = n
     }
     
     func daysShow() {
