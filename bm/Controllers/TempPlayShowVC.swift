@@ -8,10 +8,12 @@
 
 import UIKit
 
-class TempPlayShowVC: MyTableVC {
+class TempPlayShowVC: UIViewController {
     
     var token: String!
     var model: Team!
+    var scrollView: UIScrollView!
+    var bkView: UIImageView!
     var featured: UIImageView!
     var cityBtn: SuperButton!
     var arenaBtn: SuperButton!
@@ -32,13 +34,14 @@ class TempPlayShowVC: MyTableVC {
 
     // outlet
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+    //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var bkView: UIImageView!
+    //@IBOutlet weak var bkView: UIImageView!
+    //@IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         model = Team.instance
-        myTablView = tableView
+        //myTablView = tableView
         
         super.viewDidLoad()
 
@@ -51,10 +54,27 @@ class TempPlayShowVC: MyTableVC {
                 //self.tableView.reloadData()
             }
         }
+        scrollView = UIScrollView(frame: CGRect(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height))
+        scrollView.backgroundColor = UIColor.black
+        scrollView.contentSize = CGSize(width: view.bounds.width, height: 5000)
+        self.view.addSubview(scrollView)
         
-        //bkView.isUserInteractionEnabled = false
         featured = UIImageView(frame: CGRect.zero)
-        self.view.addSubview(featured)
+        scrollView.addSubview(featured)
+        
+        bkView = UIImageView(frame: CGRect.zero)
+        bkView.image = UIImage(named: "background")
+        scrollView.addSubview(bkView)
+        
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: bkView, attribute: .top, relatedBy: .equal, toItem: featured, attribute: .bottom, multiplier: 1, constant: 0)
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: bkView, attribute: .leading, relatedBy: .equal, toItem: bkView.superview, attribute: .leading, multiplier: 1, constant: 0)
+        let c3: NSLayoutConstraint = NSLayoutConstraint(item: bkView, attribute: .trailing, relatedBy: .equal, toItem: bkView.superview, attribute: .trailing, multiplier: 1, constant: 0)
+        let c4: NSLayoutConstraint = NSLayoutConstraint(item: bkView, attribute: .bottom, relatedBy: .equal, toItem: bkView.superview, attribute: .bottom, multiplier: 1, constant: 0)
+        bkView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addConstraint(c1)
+        scrollView.addConstraint(c2)
+        scrollView.addConstraint(c3)
+        scrollView.addConstraint(c4)        
         
         cityBtn = SuperButton(frame: CGRect.zero)
         arenaBtn = SuperButton(frame: CGRect.zero)
@@ -69,26 +89,34 @@ class TempPlayShowVC: MyTableVC {
         mobileLbl = SuperLabel(frame: CGRect.zero)
         degreeLbl = SuperLabel(frame: CGRect.zero)
         
-        let tmps: [Any] = [cityBtn,arenaBtn,dateLbl,timeLbl,quantityLbl,signupLbl,feeMLbl,feeFLbl,ballLbl,leaderLbl,mobileLbl,degreeLbl]
+        let tmps: [Any] = [cityBtn,dateLbl,timeLbl,quantityLbl,signupLbl,feeMLbl,feeFLbl,ballLbl,leaderLbl,mobileLbl,degreeLbl]
         items = items + tmps
         
         for (idx, item) in items.enumerated() {
             let last = (idx == 0) ? featured : items[idx-1]
-            let c1: NSLayoutConstraint = NSLayoutConstraint(item: item, attribute: .leading, relatedBy: .equal, toItem: bkView, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
+            let c1: NSLayoutConstraint = NSLayoutConstraint(item: item, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
             let c2: NSLayoutConstraint = NSLayoutConstraint(item: item, attribute: .top, relatedBy: .equal, toItem: last, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
             if let item1: SuperLabel = item as? SuperLabel {
                 item1.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(item1)
-                self.view.addConstraint(c1)
-                self.view.addConstraint(c2)
+                scrollView.addSubview(item1)
+                scrollView.addConstraint(c1)
+                scrollView.addConstraint(c2)
             } else if let item1: SuperButton = item as? SuperButton {
                 item1.translatesAutoresizingMaskIntoConstraints = false
-                self.view.addSubview(item1)
-                self.view.addConstraint(c1)
-                self.view.addConstraint(c2)
+                scrollView.addSubview(item1)
+                scrollView.addConstraint(c1)
+                scrollView.addConstraint(c2)
             }
             
         }
+        
+        let arenaBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: arenaBtn, attribute: .leading, relatedBy: .equal, toItem: cityBtn, attribute: .trailing, multiplier: 1, constant: constant.name_left_padding)
+        let arenaBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: arenaBtn, attribute: .centerY, relatedBy: .equal, toItem: cityBtn, attribute: .centerY, multiplier: 1, constant: 0)
+        arenaBtn.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addSubview(arenaBtn)
+        scrollView.addConstraint(arenaBtnC1)
+        scrollView.addConstraint(arenaBtnC2)
+        
         cityBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
         arenaBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
         cityBtn.cornerRadius(18)
@@ -96,27 +124,6 @@ class TempPlayShowVC: MyTableVC {
         cityBtn.addTarget(self, action: #selector(city), for: UIControlEvents.touchUpInside)
         arenaBtn.addTarget(self, action: #selector(self.arena), for: UIControlEvents.touchUpInside)
         
-        
-        
-        
-        
-
-        
-//        dateLbl = SuperLabel(frame: CGRect.zero)
-//        bkView.addSubview(dateLbl)
-//        let dateLblC1: NSLayoutConstraint = NSLayoutConstraint(item: dateLbl, attribute: .leading, relatedBy: .equal, toItem: featured.superview, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
-//        let dateLblC2: NSLayoutConstraint = NSLayoutConstraint(item: dateLbl, attribute: .top, relatedBy: .equal, toItem: arenaBtn, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
-//        dateLbl.translatesAutoresizingMaskIntoConstraints = false
-//        bkView.addConstraint(dateLblC1)
-//        bkView.addConstraint(dateLblC2)
-//
-//        timeLbl = SuperLabel(frame: CGRect.zero)
-//        bkView.addSubview(timeLbl)
-//        let timeLblC1: NSLayoutConstraint = NSLayoutConstraint(item: timeLbl, attribute: .leading, relatedBy: .equal, toItem: featured.superview, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
-//        let timeLblC2: NSLayoutConstraint = NSLayoutConstraint(item: timeLbl, attribute: .top, relatedBy: .equal, toItem: dateLbl, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
-//        timeLbl.translatesAutoresizingMaskIntoConstraints = false
-//        bkView.addConstraint(timeLblC1)
-//        bkView.addConstraint(timeLblC2)
     }
     
     func setPage() {
@@ -124,9 +131,9 @@ class TempPlayShowVC: MyTableVC {
         let img: UIImage = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
         let img_width: CGFloat = img.size.width
         let img_height: CGFloat = img.size.height
-        let width: CGFloat = bkView.frame.width
+        let width: CGFloat = view.frame.width
         let height: CGFloat = width * (img_height / img_width)
-        featured.frame = CGRect(x: 0, y: 80, width: width, height: height)
+        featured.frame = CGRect(x: 0, y: 0, width: width, height: height)
         featured.image = img
         featured.contentMode = .scaleAspectFit
         
