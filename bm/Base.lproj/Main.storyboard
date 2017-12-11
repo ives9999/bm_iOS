@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tFM-zl-suE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tFM-zl-suE">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1400,14 +1400,30 @@
                                             <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="n3c-0i-59w"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEn-SQ-gja">
+                                        <rect key="frame" x="283" y="14.5" width="80" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="lo8-AH-8pg"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
+                                        <state key="normal" title="我要臨打">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="abK-Gf-6De"/>
+                                            <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="K58-hr-qhQ"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="BAw-aE-4fj" firstAttribute="centerY" secondItem="kjd-vi-xhQ" secondAttribute="centerY" id="1Wq-XQ-FcL"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="JDx-MR-CiF"/>
                                     <constraint firstAttribute="height" constant="64" id="LhH-eI-1Gp"/>
+                                    <constraint firstAttribute="trailing" secondItem="VEn-SQ-gja" secondAttribute="trailing" constant="12" id="Qqa-vy-4wH"/>
                                     <constraint firstItem="31T-Ck-L6a" firstAttribute="centerX" secondItem="kjd-vi-xhQ" secondAttribute="centerX" id="ays-dd-5Bo"/>
                                     <constraint firstItem="31T-Ck-L6a" firstAttribute="centerY" secondItem="kjd-vi-xhQ" secondAttribute="centerY" id="bDS-cT-HMB"/>
+                                    <constraint firstItem="VEn-SQ-gja" firstAttribute="centerY" secondItem="kjd-vi-xhQ" secondAttribute="centerY" id="lC4-05-k6N"/>
                                     <constraint firstItem="BAw-aE-4fj" firstAttribute="leading" secondItem="kjd-vi-xhQ" secondAttribute="leading" constant="12" id="rqY-Kq-qLP"/>
                                 </constraints>
                             </view>
@@ -1427,7 +1443,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZb-89-3QI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1191" y="-1000"/>
+            <point key="canvasLocation" x="1189.5999999999999" y="-1000.7496251874064"/>
         </scene>
         <!--球隊-->
         <scene sceneID="Biv-Rk-NsK">

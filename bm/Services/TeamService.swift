@@ -304,6 +304,7 @@ class TeamService {
                 let json = JSON(data)
                 //print(json)
                 let arr: [JSON] = json["rows"].arrayValue
+                model.list = [DATA]()
                 
                 for i in 0 ..< arr.count {
                     for (key, value) in model.data {
@@ -380,5 +381,43 @@ class TeamService {
             }
         }
     }
-    
+    func plusOne(title: String, near_date: String, token: String, completion: @escaping CompletionHandler) {
+        var url: String = URL_TEAM_PLUSONE + title + "?source=app&date=" + near_date + "&token=" + token
+        //print(url)
+        url = url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+//        Alamofire.request(url).response { (response) in
+//            print("Request: \(response.request)")
+//            print("Response: \(response.response)")
+//            print("Error: \(response.error)")
+//
+//            if let data = response.data, let utf8Text = String(data: data, encoding: .utf8) {
+//                print("Data: \(utf8Text)")
+//            }
+//        }
+        Alamofire.request(url).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                let json = JSON(data)
+                self.success = json["success"].boolValue
+                if !self.success {
+                    self.msg = json["msg"].stringValue
+                }
+                completion(true)
+            }
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+

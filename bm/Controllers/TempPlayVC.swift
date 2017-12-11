@@ -17,6 +17,8 @@ class TempPlayVC: MyTableVC {
     var model: Team!
     let cell_constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
     
+    var refreshControl: UIRefreshControl!
+    
     override func viewDidLoad() {
         model = Team.instance
         sections = model.temp_play_list_sections
@@ -29,17 +31,16 @@ class TempPlayVC: MyTableVC {
         if Member.instance.isLoggedIn {
             NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
         }
-        
-        Global.instance.addSpinner(superView: self.view)
-        TeamService.instance.tempPlay_list { (success) in
-            if success {
-                Global.instance.removeSpinner(superView: self.view)
-                //print(self.model.list)
-                self.tableView.reloadData()
-            }
-        }
+    
         tableView.register(TeamTempPlayListCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        tableView.addSubview(refreshControl)
+        
+        refresh()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -74,6 +75,18 @@ class TempPlayVC: MyTableVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let tempPlayShowVC: TempPlayShowVC = segue.destination as! TempPlayShowVC
         tempPlayShowVC.token = sender as! String
+    }
+    
+    @objc func refresh() {
+        Global.instance.addSpinner(superView: self.view)
+        TeamService.instance.tempPlay_list { (success) in
+            if success {
+                Global.instance.removeSpinner(superView: self.view)
+                //print(self.model.list)
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
     }
 }
 

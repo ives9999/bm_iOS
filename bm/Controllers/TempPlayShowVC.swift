@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class TempPlayShowVC: UIViewController {
     
@@ -31,6 +32,9 @@ class TempPlayShowVC: UIViewController {
     var items: [Any] = [Any]()
     
     let constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
+    
+    var myTitle: String!
+    var nearDate: String!
 
     // outlet
     @IBOutlet weak var titleLbl: UILabel!
@@ -127,7 +131,8 @@ class TempPlayShowVC: UIViewController {
     }
     
     func setPage() {
-        titleLbl.text = (model.data[TEAM_NAME_KEY]!["value"] as! String)
+        myTitle = (model.data[TEAM_NAME_KEY]!["value"] as! String)
+        titleLbl.text = myTitle
         let img: UIImage = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
         let img_width: CGFloat = img.size.width
         let img_height: CGFloat = img.size.height
@@ -152,6 +157,7 @@ class TempPlayShowVC: UIViewController {
         key = TEAM_NEAR_DATE_KEY
         lbl = (model.data[key]!["ch"] as! String)
         text = (model.data[key]!["show"] as! String)
+        nearDate = (model.data[key]!["value"] as! String)
         dateLbl.text = lbl + ": " + text
         
         lbl = "臨打時段"
@@ -210,6 +216,21 @@ class TempPlayShowVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func plusOne(_ sender: Any) {
+        if !Member.instance.isLoggedIn {
+            SCLAlertView().showWarning("警告", subTitle: "請先登入為會員")
+            return
+        }
+        TeamService.instance.plusOne(title: myTitle, near_date: nearDate, token: Member.instance.token) { (success) in
+            if success {
+                if TeamService.instance.success {
+                    SCLAlertView().showSuccess("成功", subTitle: "報名臨打成功")
+                } else {
+                    SCLAlertView().showWarning("警告", subTitle: TeamService.instance.msg)
+                }
+            }
+        }
+    }
 }
 
 
