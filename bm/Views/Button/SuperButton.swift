@@ -46,5 +46,8 @@ class SuperButton: UIButton {
     func cornerRadius(_ value: CGFloat) {
         self.layer.cornerRadius = value
     }
+    func setTextSize(_ size: CGFloat) {
+        self.titleLabel?.font = UIFont(name: fontName, size: size)
+    }
 
 }

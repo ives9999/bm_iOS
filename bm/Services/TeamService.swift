@@ -312,6 +312,8 @@ class TeamService {
                             self._jsonToData(tmp: arr[i][key], key: key, item: value)
                         }
                     }
+                    model.updatePlayStartTime()
+                    model.updatePlayEndTime()
                     var data: Dictionary<String, [String: Any]> = model.data
                     
                     var near_date: Dictionary<String, Any> = [String: Any]()
@@ -334,7 +336,7 @@ class TeamService {
                     
                     var count: Dictionary<String, Any> = [String: Any]()
                     count["quantity"] = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
-                    count["signup"] = arr[i]["signup"].intValue
+                    count["signup"] = arr[i]["temp_signup_count"].intValue
                     data["count"] = count
                     
                     //print(data)

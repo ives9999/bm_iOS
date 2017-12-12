@@ -14,8 +14,9 @@ class TempPlayShowVC: UIViewController {
     var token: String!
     var model: Team!
     var scrollView: UIScrollView!
-    var bkView: UIImageView!
-    var featured: UIImageView!
+    //var bkView: UIImageView!
+    var bkView: UIView!
+    var featuredView: UIImageView!
     var cityBtn: SuperButton!
     var arenaBtn: SuperButton!
     var dateLbl: SuperLabel!
@@ -28,6 +29,8 @@ class TempPlayShowVC: UIViewController {
     var leaderLbl: SuperLabel!
     var mobileLbl: SuperLabel!
     var degreeLbl: SuperLabel!
+    var plusOneBtn: SuperButton!
+    var cancelPlusOneBtn: SuperButton!
     
     var items: [Any] = [Any]()
     
@@ -35,20 +38,106 @@ class TempPlayShowVC: UIViewController {
     
     var myTitle: String!
     var nearDate: String!
+    var featured: UIImage!
+    
+    var refreshControl: UIRefreshControl!
 
     // outlet
     @IBOutlet weak var titleLbl: UILabel!
     //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIView!
-    //@IBOutlet weak var bkView: UIImageView!
-    //@IBOutlet weak var scrollView: UIScrollView!
     
     override func viewDidLoad() {
         model = Team.instance
         //myTablView = tableView
         
         super.viewDidLoad()
-
+        
+        
+        //scrollView = UIScrollView(frame: CGRect(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height))
+        scrollView = UIScrollView()
+        scrollView.backgroundColor = UIColor.black
+        self.view.addSubview(scrollView)
+        scrollView.contentSize = CGSize(width: view.bounds.width, height: 5000)
+        
+        featuredView = UIImageView()
+        scrollView.addSubview(featuredView)
+        
+        //bkView = UIImageView()
+        //bkView.image = UIImage(named: "background")
+        //bkView.contentMode = .scaleAspectFill
+        print(view.frame)
+        bkView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        bkView.backgroundColor = UIColor.red
+        view.addSubview(bkView)
+        
+        cityBtn = SuperButton()
+        arenaBtn = SuperButton()
+        dateLbl = SuperLabel()
+        timeLbl = SuperLabel()
+        quantityLbl = SuperLabel()
+        signupLbl = SuperLabel()
+        feeMLbl = SuperLabel()
+        feeFLbl = SuperLabel()
+        ballLbl = SuperLabel()
+        leaderLbl = SuperLabel()
+        mobileLbl = SuperLabel()
+        degreeLbl = SuperLabel()
+        plusOneBtn = SuperButton()
+        cancelPlusOneBtn = SuperButton(frame: CGRect.zero, textColor: UIColor.black, bkColor: UIColor(MY_RED))
+        
+        scrollView.addSubview(cityBtn)
+        scrollView.addSubview(arenaBtn)
+        scrollView.addSubview(dateLbl)
+        scrollView.addSubview(timeLbl)
+        scrollView.addSubview(quantityLbl)
+        scrollView.addSubview(signupLbl)
+        scrollView.addSubview(feeMLbl)
+        scrollView.addSubview(feeFLbl)
+        scrollView.addSubview(ballLbl)
+        scrollView.addSubview(leaderLbl)
+        scrollView.addSubview(mobileLbl)
+        scrollView.addSubview(degreeLbl)
+        scrollView.addSubview(plusOneBtn)
+        scrollView.addSubview(cancelPlusOneBtn)
+        
+        cityBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
+        arenaBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
+        cityBtn.cornerRadius(18)
+        arenaBtn.cornerRadius(18)
+        cityBtn.addTarget(self, action: #selector(city), for: UIControlEvents.touchUpInside)
+        arenaBtn.addTarget(self, action: #selector(self.arena), for: UIControlEvents.touchUpInside)
+        
+        plusOneBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
+        cancelPlusOneBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
+        plusOneBtn.cornerRadius(18)
+        cancelPlusOneBtn.cornerRadius(18)
+        plusOneBtn.addTarget(self, action: #selector(plusOne(_:)), for: UIControlEvents.touchUpInside)
+        cancelPlusOneBtn.addTarget(self, action: #selector(self.arena), for: UIControlEvents.touchUpInside)
+        plusOneBtn.setTitle("我要臨打", for: .normal)
+        cancelPlusOneBtn.setTitle("取消臨打", for: .normal)
+        plusOneBtn.sizeToFit()
+        cancelPlusOneBtn.sizeToFit()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        scrollView.addSubview(refreshControl)
+        
+        //print(view.frame)
+        //bkView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        
+        //_layout()
+        //refresh()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        print("view did load")
+    }
+    
+    
+    
+    @objc func refresh() {
+        //_layout()
         Global.instance.addSpinner(superView: self.view)
         TeamService.instance.getOne(type: "team", token: token) { (success) in
             if success {
@@ -56,58 +145,53 @@ class TempPlayShowVC: UIViewController {
                 //print(self.model.data)
                 self.setPage()
                 //self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
-        scrollView = UIScrollView(frame: CGRect(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height))
-        scrollView.backgroundColor = UIColor.black
-        scrollView.contentSize = CGSize(width: view.bounds.width, height: 5000)
-        self.view.addSubview(scrollView)
+    }
+    
+    private func _layout() {
         
-        featured = UIImageView(frame: CGRect.zero)
-        scrollView.addSubview(featured)
         
-        bkView = UIImageView(frame: CGRect.zero)
-        bkView.image = UIImage(named: "background")
-        scrollView.addSubview(bkView)
+        var c1: NSLayoutConstraint!,c2: NSLayoutConstraint,c3: NSLayoutConstraint,c4: NSLayoutConstraint
         
-        let c1: NSLayoutConstraint = NSLayoutConstraint(item: bkView, attribute: .top, relatedBy: .equal, toItem: featured, attribute: .bottom, multiplier: 1, constant: 0)
-        let c2: NSLayoutConstraint = NSLayoutConstraint(item: bkView, attribute: .leading, relatedBy: .equal, toItem: bkView.superview, attribute: .leading, multiplier: 1, constant: 0)
-        let c3: NSLayoutConstraint = NSLayoutConstraint(item: bkView, attribute: .trailing, relatedBy: .equal, toItem: bkView.superview, attribute: .trailing, multiplier: 1, constant: 0)
-        let c4: NSLayoutConstraint = NSLayoutConstraint(item: bkView, attribute: .bottom, relatedBy: .equal, toItem: bkView.superview, attribute: .bottom, multiplier: 1, constant: 0)
-        bkView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addConstraint(c1)
-        scrollView.addConstraint(c2)
-        scrollView.addConstraint(c3)
-        scrollView.addConstraint(c4)        
+        c1 = NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: headerView, attribute: .bottom, multiplier: 1, constant: 0)
+        c2 = NSLayoutConstraint(item: scrollView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
+        c3 = NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        c4 = NSLayoutConstraint(item: scrollView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 0)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        view.addConstraint(c1)
+        view.addConstraint(c2)
+        view.addConstraint(c3)
+        view.addConstraint(c4)
         
-        cityBtn = SuperButton(frame: CGRect.zero)
-        arenaBtn = SuperButton(frame: CGRect.zero)
-        dateLbl = SuperLabel(frame: CGRect.zero)
-        timeLbl = SuperLabel(frame: CGRect.zero)
-        quantityLbl = SuperLabel(frame: CGRect.zero)
-        signupLbl = SuperLabel(frame: CGRect.zero)
-        feeMLbl = SuperLabel(frame: CGRect.zero)
-        feeFLbl = SuperLabel(frame: CGRect.zero)
-        ballLbl = SuperLabel(frame: CGRect.zero)
-        leaderLbl = SuperLabel(frame: CGRect.zero)
-        mobileLbl = SuperLabel(frame: CGRect.zero)
-        degreeLbl = SuperLabel(frame: CGRect.zero)
+        print(scrollView.frame)
+        
+        bkView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
+        print(bkView.frame)
+//        c1 = NSLayoutConstraint(item: bkView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1, constant: 0)
+//        c2 = NSLayoutConstraint(item: bkView, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: 0)
+//        c3 = NSLayoutConstraint(item: bkView, attribute: .trailing, relatedBy: .equal, toItem: scrollView, attribute: .trailing, multiplier: 1, constant: 0)
+//        c4 = NSLayoutConstraint(item: bkView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1, constant: 0)
+//        bkView.translatesAutoresizingMaskIntoConstraints = false
+//        scrollView.addConstraint(c1)
+//        scrollView.addConstraint(c2)
+//        scrollView.addConstraint(c3)
+//        scrollView.addConstraint(c4)
         
         let tmps: [Any] = [cityBtn,dateLbl,timeLbl,quantityLbl,signupLbl,feeMLbl,feeFLbl,ballLbl,leaderLbl,mobileLbl,degreeLbl]
         items = items + tmps
         
         for (idx, item) in items.enumerated() {
-            let last = (idx == 0) ? featured : items[idx-1]
+            let last = (idx == 0) ? featuredView : items[idx-1]
             let c1: NSLayoutConstraint = NSLayoutConstraint(item: item, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
             let c2: NSLayoutConstraint = NSLayoutConstraint(item: item, attribute: .top, relatedBy: .equal, toItem: last, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
             if let item1: SuperLabel = item as? SuperLabel {
                 item1.translatesAutoresizingMaskIntoConstraints = false
-                scrollView.addSubview(item1)
                 scrollView.addConstraint(c1)
                 scrollView.addConstraint(c2)
             } else if let item1: SuperButton = item as? SuperButton {
                 item1.translatesAutoresizingMaskIntoConstraints = false
-                scrollView.addSubview(item1)
                 scrollView.addConstraint(c1)
                 scrollView.addConstraint(c2)
             }
@@ -117,30 +201,67 @@ class TempPlayShowVC: UIViewController {
         let arenaBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: arenaBtn, attribute: .leading, relatedBy: .equal, toItem: cityBtn, attribute: .trailing, multiplier: 1, constant: constant.name_left_padding)
         let arenaBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: arenaBtn, attribute: .centerY, relatedBy: .equal, toItem: cityBtn, attribute: .centerY, multiplier: 1, constant: 0)
         arenaBtn.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(arenaBtn)
         scrollView.addConstraint(arenaBtnC1)
         scrollView.addConstraint(arenaBtnC2)
         
-        cityBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
-        arenaBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
-        cityBtn.cornerRadius(18)
-        arenaBtn.cornerRadius(18)
-        cityBtn.addTarget(self, action: #selector(city), for: UIControlEvents.touchUpInside)
-        arenaBtn.addTarget(self, action: #selector(self.arena), for: UIControlEvents.touchUpInside)
+        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: degreeLbl, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
+        let allW: CGFloat = view.frame.width / 2
+        let w1: CGFloat = plusOneBtn.frame.width
+        let plusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: allW - w1 - constant.name_left_padding)
+        plusOneBtn.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addConstraint(plusOneBtnC1)
+        scrollView.addConstraint(plusOneBtnC2)
         
+        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: degreeLbl, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
+        let cancelPlusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: allW + constant.name_left_padding)
+        cancelPlusOneBtn.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addConstraint(cancelPlusOneBtnC1)
+        scrollView.addConstraint(cancelPlusOneBtnC2)
     }
     
-    func setPage() {
+    @objc func rotated() {
+        //print("rotate")
+        //_layout()
+        print(view.frame)
+        print(headerView.frame)
+        featuredLayout()
+    }
+    
+    @objc func city(sender: UIButton) {
+        print("city")
+    }
+    @objc func arena(sender: UIButton) {
+        print("arena")
+    }
+
+    @IBAction func prevBtnPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func plusOne(_ sender: Any) {
+        if !Member.instance.isLoggedIn {
+            SCLAlertView().showWarning("警告", subTitle: "請先登入為會員")
+            return
+        }
+        TeamService.instance.plusOne(title: myTitle, near_date: nearDate, token: Member.instance.token) { (success) in
+            if success {
+                if TeamService.instance.success {
+                    SCLAlertView().showSuccess("成功", subTitle: "報名臨打成功")
+                
+                } else {
+                    SCLAlertView().showWarning("警告", subTitle: TeamService.instance.msg)
+                }
+                self.refresh()
+            }
+        }
+    }
+    private func setPage() {
         myTitle = (model.data[TEAM_NAME_KEY]!["value"] as! String)
         titleLbl.text = myTitle
-        let img: UIImage = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
-        let img_width: CGFloat = img.size.width
-        let img_height: CGFloat = img.size.height
-        let width: CGFloat = view.frame.width
-        let height: CGFloat = width * (img_height / img_width)
-        featured.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        featured.image = img
-        featured.contentMode = .scaleAspectFit
+        featured = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
+        featuredLayout()
+        featuredView.image = featured
+        featuredView.contentMode = .scaleAspectFit
         
         var lbl: String! = ""
         var text: String! = ""
@@ -204,32 +325,12 @@ class TempPlayShowVC: UIViewController {
         text = (model.data[key]!["show"] as! String)
         degreeLbl.text = lbl + ": " + text
     }
-    
-    @objc func city(sender: UIButton) {
-        print("city")
-    }
-    @objc func arena(sender: UIButton) {
-        print("arena")
-    }
-
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-
-    @IBAction func plusOne(_ sender: Any) {
-        if !Member.instance.isLoggedIn {
-            SCLAlertView().showWarning("警告", subTitle: "請先登入為會員")
-            return
-        }
-        TeamService.instance.plusOne(title: myTitle, near_date: nearDate, token: Member.instance.token) { (success) in
-            if success {
-                if TeamService.instance.success {
-                    SCLAlertView().showSuccess("成功", subTitle: "報名臨打成功")
-                } else {
-                    SCLAlertView().showWarning("警告", subTitle: TeamService.instance.msg)
-                }
-            }
-        }
+    private func featuredLayout() {
+        let img_width: CGFloat = featured.size.width
+        let img_height: CGFloat = featured.size.height
+        let width: CGFloat = view.frame.width
+        let height: CGFloat = width * (img_height / img_width)
+        featuredView.frame = CGRect(x: 0, y: 0, width: width, height: height)
     }
 }
 
