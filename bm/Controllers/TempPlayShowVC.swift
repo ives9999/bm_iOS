@@ -14,8 +14,8 @@ class TempPlayShowVC: UIViewController {
     var token: String!
     var model: Team!
     var scrollView: UIScrollView!
-    //var bkView: UIImageView!
-    var bkView: UIView!
+    var bkView: UIImageView!
+    //var bkView: UIView!
     var featuredView: UIImageView!
     var cityBtn: SuperButton!
     var arenaBtn: SuperButton!
@@ -57,19 +57,20 @@ class TempPlayShowVC: UIViewController {
         //scrollView = UIScrollView(frame: CGRect(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height))
         scrollView = UIScrollView()
         scrollView.backgroundColor = UIColor.black
-        self.view.addSubview(scrollView)
-        scrollView.contentSize = CGSize(width: view.bounds.width, height: 5000)
+        view.addSubview(scrollView)
+        //scrollView.contentSize = CGSize(width: view.bounds.width, height: 5000)
+        
+        //bkView = UIImageView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        //bkView.backgroundColor = UIColor.red
+        bkView = UIImageView()
+        bkView.image = UIImage(named: "background")
+        //bkView.contentMode = .scaleAspectFit
+        
+        scrollView.addSubview(bkView)
+        //bkView.bringSubview(toFront: scrollView)
         
         featuredView = UIImageView()
         scrollView.addSubview(featuredView)
-        
-        //bkView = UIImageView()
-        //bkView.image = UIImage(named: "background")
-        //bkView.contentMode = .scaleAspectFill
-        print(view.frame)
-        bkView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        bkView.backgroundColor = UIColor.red
-        view.addSubview(bkView)
         
         cityBtn = SuperButton()
         arenaBtn = SuperButton()
@@ -127,33 +128,15 @@ class TempPlayShowVC: UIViewController {
         //print(view.frame)
         //bkView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
-        //_layout()
-        //refresh()
+        _layout()
+        refresh()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        print("view did load")
-    }
-    
-    
-    
-    @objc func refresh() {
-        //_layout()
-        Global.instance.addSpinner(superView: self.view)
-        TeamService.instance.getOne(type: "team", token: token) { (success) in
-            if success {
-                Global.instance.removeSpinner(superView: self.view)
-                //print(self.model.data)
-                self.setPage()
-                //self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
-            }
-        }
+        //NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+        //print("view did load")
     }
     
     private func _layout() {
-        
-        
-        var c1: NSLayoutConstraint!,c2: NSLayoutConstraint,c3: NSLayoutConstraint,c4: NSLayoutConstraint
+        var c1: NSLayoutConstraint,c2: NSLayoutConstraint,c3: NSLayoutConstraint,c4: NSLayoutConstraint
         
         c1 = NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: headerView, attribute: .bottom, multiplier: 1, constant: 0)
         c2 = NSLayoutConstraint(item: scrollView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
@@ -165,19 +148,18 @@ class TempPlayShowVC: UIViewController {
         view.addConstraint(c3)
         view.addConstraint(c4)
         
-        print(scrollView.frame)
+        //print(headerView.frame)
         
-        bkView.frame = CGRect(x: 0, y: 0, width: scrollView.frame.width, height: scrollView.frame.height)
-        print(bkView.frame)
-//        c1 = NSLayoutConstraint(item: bkView, attribute: .top, relatedBy: .equal, toItem: scrollView, attribute: .top, multiplier: 1, constant: 0)
-//        c2 = NSLayoutConstraint(item: bkView, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: 0)
-//        c3 = NSLayoutConstraint(item: bkView, attribute: .trailing, relatedBy: .equal, toItem: scrollView, attribute: .trailing, multiplier: 1, constant: 0)
-//        c4 = NSLayoutConstraint(item: bkView, attribute: .bottom, relatedBy: .equal, toItem: scrollView, attribute: .bottom, multiplier: 1, constant: 0)
-//        bkView.translatesAutoresizingMaskIntoConstraints = false
-//        scrollView.addConstraint(c1)
-//        scrollView.addConstraint(c2)
-//        scrollView.addConstraint(c3)
-//        scrollView.addConstraint(c4)
+        
+        c1 = NSLayoutConstraint(item: bkView, attribute: .top, relatedBy: .equal, toItem: bkView.superview, attribute: .top, multiplier: 1, constant: 0)
+        c2 = NSLayoutConstraint(item: bkView, attribute: .leading, relatedBy: .equal, toItem: bkView.superview, attribute: .leading, multiplier: 1, constant: 0)
+        c3 = NSLayoutConstraint(item: bkView, attribute: .trailing, relatedBy: .equal, toItem: bkView.superview, attribute: .trailing, multiplier: 1, constant: 0)
+        c4 = NSLayoutConstraint(item: bkView, attribute: .bottom, relatedBy: .equal, toItem: bkView.superview, attribute: .bottom, multiplier: 1, constant: 0)
+        bkView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addConstraint(c1)
+        scrollView.addConstraint(c2)
+        scrollView.addConstraint(c3)
+        scrollView.addConstraint(c4)
         
         let tmps: [Any] = [cityBtn,dateLbl,timeLbl,quantityLbl,signupLbl,feeMLbl,feeFLbl,ballLbl,leaderLbl,mobileLbl,degreeLbl]
         items = items + tmps
@@ -219,14 +201,33 @@ class TempPlayShowVC: UIViewController {
         scrollView.addConstraint(cancelPlusOneBtnC2)
     }
     
+    @objc func refresh() {
+        //_layout()
+        Global.instance.addSpinner(superView: self.view)
+        TeamService.instance.getOne(type: "team", token: token) { (success) in
+            if success {
+                Global.instance.removeSpinner(superView: self.view)
+                //print(self.model.data)
+                self.setPage()
+                //self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
+            }
+        }
+    }
+    
+    /*
     @objc func rotated() {
         //print("rotate")
         //_layout()
         print(view.frame)
         print(headerView.frame)
-        featuredLayout()
+        //featuredLayout()
+        //bkView.transform = bkView.transform.rotated(by: .pi/2)
+        scrollView.frame = CGRect(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height)
+        bkView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
     }
-    
+ 
+ */
     @objc func city(sender: UIButton) {
         print("city")
     }
@@ -331,6 +332,10 @@ class TempPlayShowVC: UIViewController {
         let width: CGFloat = view.frame.width
         let height: CGFloat = width * (img_height / img_width)
         featuredView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        //print(featuredView.frame)
+    }
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
     }
 }
 
