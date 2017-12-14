@@ -77,8 +77,7 @@ class Team {
             TEAM_UPDATED_AT_KEY:["ch":"最後一次修改時間","vtype":"String","value":"","submit":false,"show":""],
             TEAM_THUMB_KEY:["ch":"代表圖","vtype":"String","value":"","submit":false,"show":""],
             TEAM_NEAR_DATE_KEY:["ch":"下次臨打日期","vtype":"String","value":"","submit":false,"show":""],
-            TEAM_TEMP_SIGNUP_KEY:["ch":"已報名人數","vtype":"String","value":"","submit":false,"show":""]
-            
+            TEAM_TEMP_SIGNUP_KEY:["ch":"已報名人數","vtype":"String","value":"","submit":false,"show":""]            
         ]
         var data2: Dictionary<String, [String: Any]> = [
             TEAM_NAME_KEY:["ch":"名稱","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":defaultPad],

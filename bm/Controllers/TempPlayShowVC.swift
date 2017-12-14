@@ -9,13 +9,13 @@
 import UIKit
 import SCLAlertView
 
-class TempPlayShowVC: UIViewController {
+class TempPlayShowVC: MyTableVC {
     
     var token: String!
     var model: Team!
     var scrollView: UIScrollView!
     var bkView: UIImageView!
-    //var bkView: UIView!
+    var containerView: UIView!
     var featuredView: UIImageView!
     var cityBtn: SuperButton!
     var arenaBtn: SuperButton!
@@ -31,16 +31,24 @@ class TempPlayShowVC: UIViewController {
     var degreeLbl: SuperLabel!
     var plusOneBtn: SuperButton!
     var cancelPlusOneBtn: SuperButton!
+    var tableView: UITableView!
     
     var items: [Any] = [Any]()
     
     let constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
+    let tableViewHeaderHeight: CGFloat = 40
+    let tableViewCellHeight: CGFloat = 60
+    
+    var tableViewHeightConstraint: NSLayoutConstraint!
     
     var myTitle: String!
     var nearDate: String!
     var featured: UIImage!
     
     var refreshControl: UIRefreshControl!
+    
+    let label1: SuperLabel = SuperLabel()
+    let label2: SuperLabel = SuperLabel()
 
     // outlet
     @IBOutlet weak var titleLbl: UILabel!
@@ -49,28 +57,31 @@ class TempPlayShowVC: UIViewController {
     
     override func viewDidLoad() {
         model = Team.instance
-        //myTablView = tableView
+        tableView = UITableView()
+        myTablView = tableView
         
         super.viewDidLoad()
         
-        
-        //scrollView = UIScrollView(frame: CGRect(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height))
-        scrollView = UIScrollView()
+        scrollView = UIScrollView(frame: CGRect(x: 0, y: headerView.frame.height + STATUSBAR_HEIGHT, width: view.bounds.width, height: view.bounds.height))
         scrollView.backgroundColor = UIColor.black
+        scrollView.contentSize = CGSize(width: view.bounds.width, height: 5000)
         view.addSubview(scrollView)
-        //scrollView.contentSize = CGSize(width: view.bounds.width, height: 5000)
         
-        //bkView = UIImageView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        //bkView.backgroundColor = UIColor.red
+        containerView = UIView(frame: CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height))
+        containerView.backgroundColor = UIColor.clear
+        containerView.isUserInteractionEnabled = true
+        
         bkView = UIImageView()
         bkView.image = UIImage(named: "background")
-        //bkView.contentMode = .scaleAspectFit
+        let height: CGFloat = (bkView.image?.size.height)!
+        bkView.frame = CGRect(x: 0, y: 0, width: containerView.frame.width, height: height)
+        //containerView.contentMode = .scaleAspectFit
+        containerView.addSubview(bkView)
         
-        scrollView.addSubview(bkView)
-        //bkView.bringSubview(toFront: scrollView)
+        scrollView.addSubview(containerView)
         
         featuredView = UIImageView()
-        scrollView.addSubview(featuredView)
+        containerView.addSubview(featuredView)
         
         cityBtn = SuperButton()
         arenaBtn = SuperButton()
@@ -87,20 +98,21 @@ class TempPlayShowVC: UIViewController {
         plusOneBtn = SuperButton()
         cancelPlusOneBtn = SuperButton(frame: CGRect.zero, textColor: UIColor.black, bkColor: UIColor(MY_RED))
         
-        scrollView.addSubview(cityBtn)
-        scrollView.addSubview(arenaBtn)
-        scrollView.addSubview(dateLbl)
-        scrollView.addSubview(timeLbl)
-        scrollView.addSubview(quantityLbl)
-        scrollView.addSubview(signupLbl)
-        scrollView.addSubview(feeMLbl)
-        scrollView.addSubview(feeFLbl)
-        scrollView.addSubview(ballLbl)
-        scrollView.addSubview(leaderLbl)
-        scrollView.addSubview(mobileLbl)
-        scrollView.addSubview(degreeLbl)
-        scrollView.addSubview(plusOneBtn)
-        scrollView.addSubview(cancelPlusOneBtn)
+        containerView.addSubview(cityBtn)
+        containerView.addSubview(arenaBtn)
+        containerView.addSubview(dateLbl)
+        containerView.addSubview(timeLbl)
+        containerView.addSubview(quantityLbl)
+        containerView.addSubview(signupLbl)
+        containerView.addSubview(feeMLbl)
+        containerView.addSubview(feeFLbl)
+        containerView.addSubview(ballLbl)
+        containerView.addSubview(leaderLbl)
+        containerView.addSubview(mobileLbl)
+        containerView.addSubview(degreeLbl)
+        containerView.addSubview(plusOneBtn)
+        containerView.addSubview(cancelPlusOneBtn)
+        containerView.addSubview(tableView)
         
         cityBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
         arenaBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
@@ -119,6 +131,10 @@ class TempPlayShowVC: UIViewController {
         cancelPlusOneBtn.setTitle("取消臨打", for: .normal)
         plusOneBtn.sizeToFit()
         cancelPlusOneBtn.sizeToFit()
+        //spaceView.backgroundColor = UIColor.red
+        
+        tableView.register(TempPlaySignupCell.self, forCellReuseIdentifier: "cell")
+        tableView.backgroundColor = UIColor.blue
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
@@ -126,18 +142,41 @@ class TempPlayShowVC: UIViewController {
         scrollView.addSubview(refreshControl)
         
         //print(view.frame)
-        //bkView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         
         _layout()
         refresh()
-        
-        //NotificationCenter.default.addObserver(self, selector: #selector(rotated), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
-        //print("view did load")
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        //print("view did layout subviews")
+        
+        var count = 0
+        if model.data["signups"] != nil {
+            let signups: [[String:String]] = model.data["signups"]!["value"] as! [[String:String]]
+            count = signups.count
+        }
+        let tableViewHeight: CGFloat = count > 0 ? tableViewHeaderHeight + CGFloat(count) * tableViewCellHeight : 0
+        
+        //print(tableViewHeight)
+        tableViewHeightConstraint.constant = tableViewHeight
+        //print(tableView.frame.width)
+        //print(containerView.frame.width)
+        //label1.sizeToFit()
+        //label2.sizeToFit()
+        if let tableHeaderView: UIView = tableView.tableHeaderView {
+            print("aaa")
+        }
+        
+        self.view.layoutIfNeeded()
+    }
+    //override func updateViewConstraints() {
+        
+    //}
     
     private func _layout() {
-        var c1: NSLayoutConstraint,c2: NSLayoutConstraint,c3: NSLayoutConstraint,c4: NSLayoutConstraint
         
+        var c1: NSLayoutConstraint,c2: NSLayoutConstraint,c3: NSLayoutConstraint,c4: NSLayoutConstraint
+        /*
         c1 = NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: headerView, attribute: .bottom, multiplier: 1, constant: 0)
         c2 = NSLayoutConstraint(item: scrollView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 0)
         c3 = NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
@@ -151,54 +190,72 @@ class TempPlayShowVC: UIViewController {
         //print(headerView.frame)
         
         
-        c1 = NSLayoutConstraint(item: bkView, attribute: .top, relatedBy: .equal, toItem: bkView.superview, attribute: .top, multiplier: 1, constant: 0)
-        c2 = NSLayoutConstraint(item: bkView, attribute: .leading, relatedBy: .equal, toItem: bkView.superview, attribute: .leading, multiplier: 1, constant: 0)
-        c3 = NSLayoutConstraint(item: bkView, attribute: .trailing, relatedBy: .equal, toItem: bkView.superview, attribute: .trailing, multiplier: 1, constant: 0)
-        c4 = NSLayoutConstraint(item: bkView, attribute: .bottom, relatedBy: .equal, toItem: bkView.superview, attribute: .bottom, multiplier: 1, constant: 0)
-        bkView.translatesAutoresizingMaskIntoConstraints = false
+        c1 = NSLayoutConstraint(item: containerView, attribute: .top, relatedBy: .equal, toItem: containerView.superview, attribute: .top, multiplier: 1, constant: 0)
+        c2 = NSLayoutConstraint(item: containerView, attribute: .leading, relatedBy: .equal, toItem: containerView.superview, attribute: .leading, multiplier: 1, constant: 0)
+        c3 = NSLayoutConstraint(item: containerView, attribute: .trailing, relatedBy: .equal, toItem: containerView.superview, attribute: .trailing, multiplier: 1, constant: 0)
+        c4 = NSLayoutConstraint(item: containerView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: scrollView.contentSize.height)
+        //c4 = NSLayoutConstraint(item: containerView, attribute: .bottom, relatedBy: .equal, toItem: containerView.superview, attribute: .bottom, multiplier: 1, constant: 0)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addConstraint(c1)
         scrollView.addConstraint(c2)
         scrollView.addConstraint(c3)
         scrollView.addConstraint(c4)
+ */
         
-        let tmps: [Any] = [cityBtn,dateLbl,timeLbl,quantityLbl,signupLbl,feeMLbl,feeFLbl,ballLbl,leaderLbl,mobileLbl,degreeLbl]
+        //let tmps: [Any] = [cityBtn]
+        let tmps: [Any] = [cityBtn,dateLbl,timeLbl,quantityLbl,signupLbl,feeMLbl,feeFLbl,ballLbl,leaderLbl,mobileLbl,degreeLbl,tableView]
         items = items + tmps
         
         for (idx, item) in items.enumerated() {
             let last = (idx == 0) ? featuredView : items[idx-1]
-            let c1: NSLayoutConstraint = NSLayoutConstraint(item: item, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
+            let c1: NSLayoutConstraint = NSLayoutConstraint(item: item, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
             let c2: NSLayoutConstraint = NSLayoutConstraint(item: item, attribute: .top, relatedBy: .equal, toItem: last, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
             if let item1: SuperLabel = item as? SuperLabel {
                 item1.translatesAutoresizingMaskIntoConstraints = false
-                scrollView.addConstraint(c1)
-                scrollView.addConstraint(c2)
+                containerView.addConstraint(c1)
+                containerView.addConstraint(c2)
             } else if let item1: SuperButton = item as? SuperButton {
                 item1.translatesAutoresizingMaskIntoConstraints = false
-                scrollView.addConstraint(c1)
-                scrollView.addConstraint(c2)
+                containerView.addConstraint(c1)
+                containerView.addConstraint(c2)
+            } else if let item1: UITableView = item as? UITableView {
+                
             }
             
         }
         
+        // tableView
+        c1 = NSLayoutConstraint(item: tableView, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
+        c2 = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: degreeLbl, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
+        //c3 = NSLayoutConstraint(item: tableView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200)
+        c3 = NSLayoutConstraint(item: tableView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1, constant: constant.name_left_padding * -1)
+        tableViewHeightConstraint = NSLayoutConstraint(item: tableView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200)
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addConstraint(c1)
+        containerView.addConstraint(c2)
+        containerView.addConstraint(c3)
+        containerView.addConstraint(tableViewHeightConstraint)
+        
         let arenaBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: arenaBtn, attribute: .leading, relatedBy: .equal, toItem: cityBtn, attribute: .trailing, multiplier: 1, constant: constant.name_left_padding)
         let arenaBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: arenaBtn, attribute: .centerY, relatedBy: .equal, toItem: cityBtn, attribute: .centerY, multiplier: 1, constant: 0)
         arenaBtn.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addConstraint(arenaBtnC1)
-        scrollView.addConstraint(arenaBtnC2)
+        containerView.addConstraint(arenaBtnC1)
+        containerView.addConstraint(arenaBtnC2)
         
-        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: degreeLbl, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
+        
+        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
         let allW: CGFloat = view.frame.width / 2
         let w1: CGFloat = plusOneBtn.frame.width
-        let plusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: allW - w1 - constant.name_left_padding)
+        let plusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW - w1 - constant.name_left_padding)
         plusOneBtn.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addConstraint(plusOneBtnC1)
-        scrollView.addConstraint(plusOneBtnC2)
+        containerView.addConstraint(plusOneBtnC1)
+        containerView.addConstraint(plusOneBtnC2)
         
-        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: degreeLbl, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
-        let cancelPlusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: allW + constant.name_left_padding)
+        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
+        let cancelPlusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW + constant.name_left_padding)
         cancelPlusOneBtn.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addConstraint(cancelPlusOneBtnC1)
-        scrollView.addConstraint(cancelPlusOneBtnC2)
+        containerView.addConstraint(cancelPlusOneBtnC1)
+        containerView.addConstraint(cancelPlusOneBtnC2)
     }
     
     @objc func refresh() {
@@ -208,11 +265,75 @@ class TempPlayShowVC: UIViewController {
             if success {
                 Global.instance.removeSpinner(superView: self.view)
                 //print(self.model.data)
+//                let tmp:[[String:String]] = [["nickname":"ives"]]
+//                self.model.data["signups"]!["value"] = [[String:String]]()
+//                self.model.data["signups"]!["value"] = tmp
                 self.setPage()
-                //self.tableView.reloadData()
+                self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
             }
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count: Int = 0
+        if model.data["signups"] != nil {
+            let rows: [[String: String]] = model.data["signups"]!["value"] as! [[String: String]]
+            count = rows.count
+        }
+        //print(count)
+        return count
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return tableViewHeaderHeight
+    }
+    /*
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "報名臨打球友"
+    }*/
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView: UIView = UIView()
+        
+        label1.backgroundColor = UIColor.black
+        label2.backgroundColor = UIColor.black
+        label1.text = "臨打球友"
+        label2.text = "加入日期"
+        label1.sizeToFit()
+        label2.sizeToFit()
+        headerView.addSubview(label1)
+        headerView.addSubview(label2)
+        label1.translatesAutoresizingMaskIntoConstraints = false
+        label2.translatesAutoresizingMaskIntoConstraints = false
+        let horiCs: [NSLayoutConstraint] = NSLayoutConstraint.constraints(withVisualFormat: "H:|-30-[label1]-[label2]-30-|", options: .alignAllCenterY, metrics: nil, views: ["label1":label1,"label2":label2])
+        //let horiCs: [NSLayoutConstraint] = NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(constant.name_left_padding)-[label1]-[label2]-\(constant.name_left_padding)-|", options: .alignAllCenterY, metrics: nil, views: ["label1":label1,"label2":label2])
+        headerView.addConstraints(horiCs)
+        let vertiC = NSLayoutConstraint(item: label1, attribute: .centerY, relatedBy: .equal, toItem: headerView, attribute: .centerY, multiplier: 1, constant: 0)
+        headerView.addConstraint(vertiC)
+        self.view.layoutIfNeeded()
+        self.tableView.layoutIfNeeded()
+        
+        return headerView
+    }
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+    }
+    /*
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0
+    }
+ */
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableViewCellHeight
+    }
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        //print("section: \(indexPath.section), row: \(indexPath.row)")
+        let cell: TempPlaySignupCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TempPlaySignupCell
+        let rows: [[String: String]] = model.data["signups"]!["value"] as! [[String: String]]
+        let row: Dictionary<String, String> = rows[indexPath.row]
+        cell.forRow(row: row)
+        
+        return cell
     }
     
     /*
@@ -222,9 +343,9 @@ class TempPlayShowVC: UIViewController {
         print(view.frame)
         print(headerView.frame)
         //featuredLayout()
-        //bkView.transform = bkView.transform.rotated(by: .pi/2)
+        //containerView.transform = containerView.transform.rotated(by: .pi/2)
         scrollView.frame = CGRect(x: 0, y: 80, width: view.bounds.width, height: view.bounds.height)
-        bkView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        containerView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
     }
  
  */

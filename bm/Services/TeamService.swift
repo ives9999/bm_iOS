@@ -106,6 +106,7 @@ class TeamService {
                     print("get response result value error")
                     return
                 }
+                //print(data)
                 let model: Team = Team.instance
                 let json = JSON(data)
                 //print(json)
@@ -162,6 +163,28 @@ class TeamService {
                     let n2: String = json["near_date_w"].stringValue
                     model.data[TEAM_NEAR_DATE_KEY]!["value1"] = n2
                 }
+                var signups:[[String: String]] = [[String: String]]()
+                
+                if json["signups"] != JSON.null {
+                    let items: [JSON] = json["signups"].arrayValue
+                    for item in items {
+                        let member: JSON = item["member"]
+                        //print(member)
+                        let nickname: String = member["nickname"].stringValue
+                        let token: String = member["token"].stringValue
+                        let created_at: String = item["created_at"].stringValue
+                        signups.append(["nickname":nickname, "token":token,"created_at":created_at])
+                        //print(signups)
+                    }
+                    if model.data["signups"] == nil {
+                        model.data["signups"] = [String: Any]()
+                    }
+                    model.data["signups"]!["value"] = signups
+                    model.data["signups"]!["vtype"] = "array"
+                    //print(model.data)
+ 
+                }
+ 
                 model.updatePlayStartTime()
                 model.updatePlayEndTime()
                 model.updateTempContent()

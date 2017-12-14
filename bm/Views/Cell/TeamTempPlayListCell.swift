@@ -41,6 +41,7 @@ class TeamTempPlayListCell: SuperCell {
         
         contentView.addSubview(bkView)
         bkView!.backgroundColor = UIColor.clear
+        _layout()
     }
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -48,7 +49,6 @@ class TeamTempPlayListCell: SuperCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        _layout()
         nameLbl.sizeToFit()
         quantityLbl.sizeToFit()
         signupLbl.sizeToFit()

@@ -46,6 +46,8 @@ let TITLE_HEIGHT: CGFloat = 60
 let FEATURED_HEIGHT: CGFloat = 180
 let PERPAGE: Int = 5
 
+let STATUSBAR_HEIGHT:CGFloat = 16
+
 // spinner
 let LOADING: String = "努力加載中..."
 let LOADING_WIDTH: Int = 200
