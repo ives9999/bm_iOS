@@ -37,7 +37,7 @@ class TempPlayShowVC: MyTableVC {
     
     let constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
     let tableViewHeaderHeight: CGFloat = 40
-    let tableViewCellHeight: CGFloat = 60
+    let tableViewCellHeight: CGFloat = 40
     
     var tableViewHeightConstraint: NSLayoutConstraint!
     
@@ -47,13 +47,13 @@ class TempPlayShowVC: MyTableVC {
     
     var refreshControl: UIRefreshControl!
     
-    let label1: SuperLabel = SuperLabel()
-    let label2: SuperLabel = SuperLabel()
+    
 
     // outlet
     @IBOutlet weak var titleLbl: UILabel!
     //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var tempPlayBtn: UIButton!
     
     override func viewDidLoad() {
         model = Team.instance
@@ -134,12 +134,16 @@ class TempPlayShowVC: MyTableVC {
         //spaceView.backgroundColor = UIColor.red
         
         tableView.register(TempPlaySignupCell.self, forCellReuseIdentifier: "cell")
-        tableView.backgroundColor = UIColor.blue
+        tableView.backgroundColor = UIColor.black
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         scrollView.addSubview(refreshControl)
+        
+        tempPlayBtn.contentEdgeInsets = UIEdgeInsets(top: 4, left: 10, bottom: 2, right: 10)
+        tempPlayBtn.layer.cornerRadius = 8
         
         //print(view.frame)
         
@@ -159,13 +163,6 @@ class TempPlayShowVC: MyTableVC {
         
         //print(tableViewHeight)
         tableViewHeightConstraint.constant = tableViewHeight
-        //print(tableView.frame.width)
-        //print(containerView.frame.width)
-        //label1.sizeToFit()
-        //label2.sizeToFit()
-        if let tableHeaderView: UIView = tableView.tableHeaderView {
-            print("aaa")
-        }
         
         self.view.layoutIfNeeded()
     }
@@ -243,7 +240,7 @@ class TempPlayShowVC: MyTableVC {
         containerView.addConstraint(arenaBtnC2)
         
         
-        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
+        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 2)
         let allW: CGFloat = view.frame.width / 2
         let w1: CGFloat = plusOneBtn.frame.width
         let plusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW - w1 - constant.name_left_padding)
@@ -251,7 +248,7 @@ class TempPlayShowVC: MyTableVC {
         containerView.addConstraint(plusOneBtnC1)
         containerView.addConstraint(plusOneBtnC2)
         
-        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
+        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 2)
         let cancelPlusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW + constant.name_left_padding)
         cancelPlusOneBtn.translatesAutoresizingMaskIntoConstraints = false
         containerView.addConstraint(cancelPlusOneBtnC1)
@@ -271,6 +268,7 @@ class TempPlayShowVC: MyTableVC {
                 self.setPage()
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
+                self.tableView.tableHeaderView?.layoutIfNeeded()
             }
         }
     }
@@ -292,25 +290,7 @@ class TempPlayShowVC: MyTableVC {
         return "報名臨打球友"
     }*/
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView: UIView = UIView()
-        
-        label1.backgroundColor = UIColor.black
-        label2.backgroundColor = UIColor.black
-        label1.text = "臨打球友"
-        label2.text = "加入日期"
-        label1.sizeToFit()
-        label2.sizeToFit()
-        headerView.addSubview(label1)
-        headerView.addSubview(label2)
-        label1.translatesAutoresizingMaskIntoConstraints = false
-        label2.translatesAutoresizingMaskIntoConstraints = false
-        let horiCs: [NSLayoutConstraint] = NSLayoutConstraint.constraints(withVisualFormat: "H:|-30-[label1]-[label2]-30-|", options: .alignAllCenterY, metrics: nil, views: ["label1":label1,"label2":label2])
-        //let horiCs: [NSLayoutConstraint] = NSLayoutConstraint.constraints(withVisualFormat: "H:|-\(constant.name_left_padding)-[label1]-[label2]-\(constant.name_left_padding)-|", options: .alignAllCenterY, metrics: nil, views: ["label1":label1,"label2":label2])
-        headerView.addConstraints(horiCs)
-        let vertiC = NSLayoutConstraint(item: label1, attribute: .centerY, relatedBy: .equal, toItem: headerView, attribute: .centerY, multiplier: 1, constant: 0)
-        headerView.addConstraint(vertiC)
-        self.view.layoutIfNeeded()
-        self.tableView.layoutIfNeeded()
+        let headerView: TempPlayTableHeaderView = TempPlayTableHeaderView()
         
         return headerView
     }

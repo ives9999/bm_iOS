@@ -79,6 +79,11 @@ enum DEGREE: String {
         ]
     }
 }
+let df : DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+    return formatter
+}()
 
 class Global {
     
@@ -248,15 +253,18 @@ extension UserDefaults {
 }
 
 extension Date {
+    /*
     init?(value: String) {
         guard !value.isEmpty else { return nil }
         let formatter = DateFormatter()
+        //formatter.dateFormat = format
         guard let date = formatter.date(from: value) else {
             return nil
         }
         self.init(timeInterval: 0, since: date)
     }
-    
+ 
+ */
     func toString(format: String = "yyyy-MM-dd") -> String {
         let formatter: DateFormatter = DateFormatter()
         formatter.dateFormat = format
@@ -297,11 +305,69 @@ extension String {
             return self
         }
     }
+    func toDateTime(format: String = "yyyy-MM-dd HH:mm:ss") -> Date
+    {
+        //Create Date Formatter
+        let dateFormatter = DateFormatter()
+        
+        //Specify Format of String to Parse
+        dateFormatter.dateFormat = format
+        
+        //Parse into NSDate
+        let dateFromString : Date = dateFormatter.date(from: self)!
+        
+        //Return Parsed Date
+        return dateFromString
+    }
 }
 
 extension Array where Element: Comparable {
     func containsSameElements(as other: [Element]) -> Bool {
         return self.count == other.count && self.sorted() == other.sorted()
+    }
+}
+
+extension UIView {
+    func tempPlayShowTableConstraint(_ items:[[String: UILabel]]) -> [NSLayoutConstraint] {
+        var constraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
+        var views: [String: UILabel] = [String: UILabel]()
+        for item in items {
+            for (key, value) in item {
+                views[key] = value
+            }
+        }
+        if  items.count > 0 {
+            let item: [String: UILabel] = items[0]
+            var pattern: String = ""
+            for (key, value) in item {
+                pattern = "H:|-30-[\(key)]"
+                let c2: NSLayoutConstraint = NSLayoutConstraint(item: value, attribute: .centerY, relatedBy: .equal, toItem: value.superview, attribute: .centerY, multiplier:
+                    1, constant: 0)
+                constraints.append(c2)
+                value.translatesAutoresizingMaskIntoConstraints = false
+            }
+            if pattern.count > 0 {
+                let c1: [NSLayoutConstraint] = NSLayoutConstraint.constraints(withVisualFormat: pattern, options: .alignAllCenterY, metrics: nil, views: views)
+                constraints += c1
+            }
+        }
+        if items.count > 1 {
+            let item: [String: UILabel] = items[1]
+            var pattern: String = ""
+            for (key, value) in item {
+                pattern = "H:[\(key)]-30-|"
+                let c2: NSLayoutConstraint = NSLayoutConstraint(item: value, attribute: .centerY, relatedBy: .equal, toItem: value.superview, attribute: .centerY, multiplier:
+                    1, constant: 0)
+                constraints.append(c2)
+                value.translatesAutoresizingMaskIntoConstraints = false
+            }
+            if pattern.count > 0 {
+                let c1: [NSLayoutConstraint] = NSLayoutConstraint.constraints(withVisualFormat: pattern, options: .alignAllCenterY, metrics: nil, views: views)
+                constraints += c1
+            }
+        }
+        
+        return constraints
     }
 }
 
