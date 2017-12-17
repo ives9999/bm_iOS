@@ -95,8 +95,8 @@ class TempPlayShowVC: MyTableVC {
         leaderLbl = SuperLabel()
         mobileLbl = SuperLabel()
         degreeLbl = SuperLabel()
-        plusOneBtn = SuperButton()
-        cancelPlusOneBtn = SuperButton(frame: CGRect.zero, textColor: UIColor.black, bkColor: UIColor(MY_RED))
+        plusOneBtn = SuperButton(frame: CGRect.zero, textColor: UIColor.black, bkColor: UIColor(MY_RED))
+        cancelPlusOneBtn = SuperButton()
         
         containerView.addSubview(cityBtn)
         containerView.addSubview(arenaBtn)
@@ -143,7 +143,7 @@ class TempPlayShowVC: MyTableVC {
         scrollView.addSubview(refreshControl)
         
         tempPlayBtn.contentEdgeInsets = UIEdgeInsets(top: 4, left: 10, bottom: 2, right: 10)
-        tempPlayBtn.layer.cornerRadius = 8
+        tempPlayBtn.layer.cornerRadius = 12
         
         //print(view.frame)
         
