@@ -15,4 +15,7 @@ target 'bm' do
   pod 'UIColor_Hex_Swift'
   pod 'SCLAlertView'
   pod 'SwipeCellKit'
+  pod 'FBSDKCoreKit'
+  pod 'FBSDKLoginKit'
+  pod 'FBSDKShareKit'
 end

@@ -2,7 +2,19 @@ PODS:
   - Alamofire (4.5.1)
   - AlamofireImage (3.3.0):
     - Alamofire (~> 4.5)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
   - Device.swift (1.0)
+  - FBSDKCoreKit (4.29.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.29.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.29.0):
+    - FBSDKCoreKit
   - SCLAlertView (0.7.0)
   - Socket.IO-Client-Swift (12.1.2):
     - Starscream (~> 2.1.1)
@@ -16,6 +28,9 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - Device.swift
+  - FBSDKCoreKit
+  - FBSDKLoginKit
+  - FBSDKShareKit
   - SCLAlertView
   - Socket.IO-Client-Swift
   - SwiftyJSON
@@ -26,7 +41,11 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Device.swift: edb7ee47de78dbfeb42730dacc7075abaa5c2fde
+  FBSDKCoreKit: 6f139173dc63a1deaff4430a55f2fe5bb222d2af
+  FBSDKLoginKit: 56a057ca6822535ea0faa25f57a7c41edb697fd4
+  FBSDKShareKit: 18a2cd118aef11dd657fe7e8b64bae5c719088b2
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   Socket.IO-Client-Swift: ba3cb1c4bf0a6ca90080406a2c22685c25ad1f60
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
@@ -35,6 +54,6 @@ SPEC CHECKSUMS:
   TRVideoView: ad64508a00b7cd177a31a89bd942a524faac3d2c
   UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
 
-PODFILE CHECKSUM: 88365f479143501e60bcecc4d318d97458b2af0b
+PODFILE CHECKSUM: c90c71196e4f6a196375c600286611faf49d80e0
 
 COCOAPODS: 1.3.1
