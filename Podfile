@@ -19,3 +19,8 @@ target 'bm' do
   pod 'FacebookLogin'
   pod 'FacebookShare'
 end
+
+target 'bmNotificationServiceExtension' do
+  use_frameworks!
+  pod 'OneSignal', '>=2.5.2', '<3.0'
+end
