@@ -9,6 +9,19 @@ PODS:
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
   - Device.swift (1.0)
+  - FacebookCore (0.3.0):
+    - Bolts (~> 1.8)
+    - FBSDKCoreKit (~> 4.27)
+  - FacebookLogin (0.3.0):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.3)
+    - FBSDKCoreKit (~> 4.27)
+    - FBSDKLoginKit (~> 4.27)
+  - FacebookShare (0.3.0):
+    - Bolts (~> 1.8)
+    - FacebookCore (~> 0.3)
+    - FBSDKCoreKit (~> 4.27)
+    - FBSDKShareKit (~> 4.27)
   - FBSDKCoreKit (4.29.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.29.0):
@@ -28,9 +41,9 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - Device.swift
-  - FBSDKCoreKit
-  - FBSDKLoginKit
-  - FBSDKShareKit
+  - FacebookCore
+  - FacebookLogin
+  - FacebookShare
   - SCLAlertView
   - Socket.IO-Client-Swift
   - SwiftyJSON
@@ -43,6 +56,9 @@ SPEC CHECKSUMS:
   AlamofireImage: 2e784dc5d00f04903a52c1d169181469c805c3df
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Device.swift: edb7ee47de78dbfeb42730dacc7075abaa5c2fde
+  FacebookCore: 3ffa190a3f1f96cec0e44d3fc221bc322c595ffa
+  FacebookLogin: 0af839ea858faef99550d16596b87b4a8e8906e6
+  FacebookShare: 0469964297ebd75f052be2c5083389a4208e82b7
   FBSDKCoreKit: 6f139173dc63a1deaff4430a55f2fe5bb222d2af
   FBSDKLoginKit: 56a057ca6822535ea0faa25f57a7c41edb697fd4
   FBSDKShareKit: 18a2cd118aef11dd657fe7e8b64bae5c719088b2
@@ -54,6 +70,6 @@ SPEC CHECKSUMS:
   TRVideoView: ad64508a00b7cd177a31a89bd942a524faac3d2c
   UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
 
-PODFILE CHECKSUM: c90c71196e4f6a196375c600286611faf49d80e0
+PODFILE CHECKSUM: 4a28caeef106db15ebf74da13eeb479f34edb0e6
 
 COCOAPODS: 1.3.1

@@ -68,6 +68,15 @@
             </array>
         </dict>
     </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb1669875846375141</string>
+            </array>
+        </dict>
+    </array>
     <key>FacebookAppID</key>
     <string>1669875846375141</string>
     <key>FacebookDisplayName</key>

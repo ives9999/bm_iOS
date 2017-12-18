@@ -8,6 +8,8 @@
 
 import UIKit
 import SCLAlertView
+import FacebookCore
+import FacebookLogin
 
 class LoginVC: UIViewController, UITextFieldDelegate {
 
@@ -56,6 +58,15 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 }
             } else {
                 print("login failed by server")
+            }
+        }
+    }
+    @IBAction func loginFBBtnPressed(_ sender: Any) {
+        Facebook.instance.login(viewController: self) {
+            (success) in
+            if success {
+                print(Facebook.instance.id)
+                print(Facebook.instance.email)
             }
         }
     }
