@@ -44,6 +44,32 @@ class MemberService {
         }
     }
     
+    func login_fb(completion: @escaping CompletionHandler) {
+        let fb: Facebook = Facebook.instance
+        let body: [String: String] = ["source":"app","uid":fb.uid,"email":fb.email,"name":fb.name,"sex":fb.sex,"avatar":fb.avatar,"social":fb.social,"channel":fb.channel]
+        //print(body)
+        Alamofire.request(URL_FB_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                //print(data)
+                let json: JSON = JSON(data)
+                self.success = json["success"].boolValue
+                //print(self.success)
+                if self.success {
+                    self.jsonToMember(json: json)
+                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+                } else {
+                    Member.instance.isLoggedIn = false
+                    self.msg = json["msg"].stringValue
+                }
+                completion(true)
+            }
+        }
+    }
+    
     func logout() {
         Member.instance.isLoggedIn = false
         NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)

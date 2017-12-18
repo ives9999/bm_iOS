@@ -65,8 +65,23 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         Facebook.instance.login(viewController: self) {
             (success) in
             if success {
-                print(Facebook.instance.id)
-                print(Facebook.instance.email)
+                //print(Facebook.instance.uid)
+                //print(Facebook.instance.email)
+                Global.instance.addSpinner(superView: self.view)
+                MemberService.instance.login_fb(completion: { (success1) in
+                    if success1 {
+                        if MemberService.instance.success {
+                            //print("login success")
+                            //print(Global.instance.member.nickname)
+                            self.performSegue(withIdentifier: UNWIND, sender: nil)
+                        } else {
+                            //print("login failed by error email or password")
+                            SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
+                        }
+                    } else {
+                        print("login failed by fb")
+                    }
+                })
             }
         }
     }

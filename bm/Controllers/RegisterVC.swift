@@ -67,6 +67,15 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    @IBAction func registerFBBtnPressed(_ sender: Any) {
+        Facebook.instance.login(viewController: self) {
+            (success) in
+            if success {
+                print(Facebook.instance.uid)
+                print(Facebook.instance.email)
+            }
+        }
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)

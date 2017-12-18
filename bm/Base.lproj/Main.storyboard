@@ -1202,6 +1202,9 @@
                                     <constraint firstAttribute="height" constant="43" id="ZWF-8a-b9i"/>
                                 </constraints>
                                 <state key="normal" image="facebook_register_btn"/>
+                                <connections>
+                                    <action selector="registerFBBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="Mhn-4H-mJd"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPP-sR-GNI">
                                 <rect key="frame" x="69" y="601" width="77" height="39"/>

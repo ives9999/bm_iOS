@@ -29,12 +29,14 @@ fileprivate struct FBProfileRequest: GraphRequestProtocol {
 */
 class Facebook {
     static let instance = Facebook()
-    var id: String = ""
+    var uid: String = ""
     var email: String = ""
-    var first_name: String = ""
-    var last_name: String = ""
-    var token: String = ""
-    var pictureUrl: String = ""
+    var name: String = ""
+    var sex: String = ""
+    //var token: String = ""
+    var avatar: String = ""
+    var social: String = "fb"
+    var channel: String = CHANNEL
     
     let readPermissions: [ReadPermission] = [.publicProfile, .email, .userFriends]
     let params: [String: Any] = ["fields":"email,first_name,last_name,picture.width(1000).height(1000),birthday,gender"]
@@ -62,11 +64,18 @@ class Facebook {
                     (urlResponse, result) in
                     switch result {
                     case .success(response: let response):
-                        //print("Graph Request Response: \(response1)")
+                        //print("Graph Request Response: \(response)")
                         if let responseDictionary = response.dictionaryValue {
-                            self.id = responseDictionary["id"] as! String
+                            self.uid = responseDictionary["id"] as! String
                             self.email = responseDictionary["email"] as! String
-                            //print(id)
+                            let first_name: String = responseDictionary["first_name"] as! String
+                            let last_name: String = responseDictionary["last_name"] as! String
+                            self.name = last_name + first_name
+                            self.sex = self.sexChange(responseDictionary["gender"] as! String)
+                            let picture = responseDictionary["picture"] as! NSDictionary
+                            let picture_data = picture["data"] as! NSDictionary
+                            self.avatar = picture_data["url"] as! String
+                            print(self.avatar)
                             //print(email)
                             completion(true)
                         }
@@ -82,5 +91,9 @@ class Facebook {
                 connection.start()
             }
         }
+    }
+    func sexChange(_ raw: String) -> String {
+        var res: String = raw == "male" ? "M" : "F"
+        return res
     }
 }
