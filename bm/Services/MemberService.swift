@@ -17,9 +17,9 @@ class MemberService {
     var msg:String = ""
     var success: Bool = false
     
-    func login(email: String, password: String, completion: @escaping CompletionHandler) {
+    func login(email: String, password: String, playerID: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
-        let body: [String: Any] = ["source": "app", "email": lowerCaseEmail, "password": password]
+        let body: [String: Any] = ["source": "app", "email": lowerCaseEmail, "password": password, "player_id": playerID]
         //print(body)
         
         Alamofire.request(URL_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
@@ -44,9 +44,9 @@ class MemberService {
         }
     }
     
-    func login_fb(completion: @escaping CompletionHandler) {
+    func login_fb(playerID: String, completion: @escaping CompletionHandler) {
         let fb: Facebook = Facebook.instance
-        let body: [String: String] = ["source":"app","uid":fb.uid,"email":fb.email,"name":fb.name,"sex":fb.sex,"avatar":fb.avatar,"social":fb.social,"channel":fb.channel]
+        let body: [String: String] = ["source":"app","uid":fb.uid,"email":fb.email,"name":fb.name,"sex":fb.sex,"avatar":fb.avatar,"social":fb.social,"channel":fb.channel,"player_id":playerID]
         //print(body)
         Alamofire.request(URL_FB_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {

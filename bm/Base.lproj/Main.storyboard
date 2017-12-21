@@ -650,8 +650,8 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-F2-Q95">
-                                <rect key="frame" x="25" y="630" width="70" height="17"/>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-F2-Q95">
+                                <rect key="frame" x="25" y="630" width="65" height="17"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="power" translatesAutoresizingMaskIntoConstraints="NO" id="lVk-by-yn8">
                                         <rect key="frame" x="0.0" y="0.0" width="16" height="17"/>
@@ -661,7 +661,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfn-tB-hEu">
-                                        <rect key="frame" x="31" y="0.0" width="39" height="17"/>
+                                        <rect key="frame" x="26" y="0.0" width="39" height="17"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <state key="normal" title="登入">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -672,8 +672,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="zjo-WY-36j">
-                                <rect key="frame" x="125" y="630" width="70" height="16"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zjo-WY-36j">
+                                <rect key="frame" x="115" y="630" width="65" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register" translatesAutoresizingMaskIntoConstraints="NO" id="qKe-xf-qGP">
                                         <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -683,7 +683,7 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bm8-XJ-J3t">
-                                        <rect key="frame" x="31" y="0.0" width="39" height="16"/>
+                                        <rect key="frame" x="26" y="0.0" width="39" height="16"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <state key="normal" title="註冊">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -694,8 +694,8 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Cbx-1o-peR">
-                                <rect key="frame" x="225" y="630" width="108" height="16"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cbx-1o-peR">
+                                <rect key="frame" x="205" y="630" width="103" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password" translatesAutoresizingMaskIntoConstraints="NO" id="A0v-pO-lvS">
                                         <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -705,11 +705,14 @@
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rC8-Rt-Zp6">
-                                        <rect key="frame" x="31" y="0.0" width="77" height="16"/>
+                                        <rect key="frame" x="26" y="0.0" width="77" height="16"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <state key="normal" title="忘記密碼">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="passwordBtnPressed:" destination="gdq-xD-7m5" eventType="touchUpInside" id="0cm-By-FD3"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -723,8 +726,8 @@
                             <constraint firstItem="Av7-OI-v1Q" firstAttribute="bottom" secondItem="NEG-F2-Q95" secondAttribute="bottom" constant="20" id="313-jG-qTC"/>
                             <constraint firstItem="Cbx-1o-peR" firstAttribute="centerY" secondItem="zjo-WY-36j" secondAttribute="centerY" id="AIQ-3D-nP5"/>
                             <constraint firstItem="zjo-WY-36j" firstAttribute="centerY" secondItem="NEG-F2-Q95" secondAttribute="centerY" id="I5m-XE-XXc"/>
-                            <constraint firstItem="Cbx-1o-peR" firstAttribute="leading" secondItem="zjo-WY-36j" secondAttribute="trailing" constant="30" id="ILl-j7-slI"/>
-                            <constraint firstItem="zjo-WY-36j" firstAttribute="leading" secondItem="NEG-F2-Q95" secondAttribute="trailing" constant="30" id="IML-Fl-Q7p"/>
+                            <constraint firstItem="Cbx-1o-peR" firstAttribute="leading" secondItem="zjo-WY-36j" secondAttribute="trailing" constant="25" id="ILl-j7-slI"/>
+                            <constraint firstItem="zjo-WY-36j" firstAttribute="leading" secondItem="NEG-F2-Q95" secondAttribute="trailing" constant="25" id="IML-Fl-Q7p"/>
                             <constraint firstItem="Av7-OI-v1Q" firstAttribute="trailing" secondItem="2yx-Ir-KK1" secondAttribute="trailing" id="IRD-oh-GNK"/>
                             <constraint firstItem="Av7-OI-v1Q" firstAttribute="trailing" secondItem="peB-WU-cfo" secondAttribute="trailing" id="Idw-FY-AHE"/>
                             <constraint firstItem="ghu-uM-R33" firstAttribute="leading" secondItem="Av7-OI-v1Q" secondAttribute="leading" constant="30" id="IfL-ck-Zeb"/>
@@ -755,6 +758,7 @@
                         <segue destination="vfe-V8-Hfx" kind="show" identifier="toProfile" id="L8k-6m-3tm"/>
                         <segue destination="UtM-v1-pfK" kind="show" identifier="toTeamSubmit" id="tfa-sh-Qj7"/>
                         <segue destination="gO6-sX-L0T" kind="show" identifier="toTeamTempPlay" id="PtM-Ha-efS"/>
+                        <segue destination="trT-Qb-e9n" kind="show" identifier="toPassword" id="OU7-h8-11b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ixj-Mg-udo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1038,12 +1042,13 @@
                         <outlet property="passwordTxt" destination="69n-Va-wxY" id="guj-JH-2tK"/>
                         <segue destination="G5m-sq-lsN" kind="show" identifier="toRegister" id="ViB-98-skP"/>
                         <segue destination="FFY-HN-ANR" kind="unwind" identifier="unwindToMenu" unwindAction="prepareForUnwindWithSegue:" id="ZwC-9B-2pn"/>
+                        <segue destination="trT-Qb-e9n" kind="show" identifier="toPassword" id="ous-Dp-pXL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blT-yh-XVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FFY-HN-ANR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2346" y="-2089"/>
+            <point key="canvasLocation" x="2212" y="-2051"/>
         </scene>
         <!--RegisterVC-->
         <scene sceneID="qP6-W9-TlQ">
@@ -1270,6 +1275,82 @@
                 <exit id="mnF-u8-8Z3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1918" y="-1050"/>
+        </scene>
+        <!--PasswordVC-->
+        <scene sceneID="oJV-Mq-jGs">
+            <objects>
+                <viewController id="trT-Qb-e9n" customClass="PasswordVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="z2o-2r-ldq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5FF-VX-gI0">
+                                <rect key="frame" x="0.0" y="20" width="375" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘記密碼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11X-Jp-huJ">
+                                        <rect key="frame" x="149" y="19.5" width="76.5" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9XQ-tK-w3c">
+                                        <rect key="frame" x="12" y="23" width="24" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="L2s-BF-kr5"/>
+                                            <constraint firstAttribute="width" constant="24" id="R1d-Lu-ld8"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="hnz-aI-Ka8"/>
+                                            <action selector="prevBtnPressed:" destination="trT-Qb-e9n" eventType="touchUpInside" id="r4Y-hJ-lSX"/>
+                                            <action selector="prevBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="rCs-PP-Ugx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="11X-Jp-huJ" firstAttribute="centerX" secondItem="5FF-VX-gI0" secondAttribute="centerX" id="0Cx-gJ-FFu"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="Dkv-R5-PBJ"/>
+                                    <constraint firstItem="9XQ-tK-w3c" firstAttribute="centerY" secondItem="5FF-VX-gI0" secondAttribute="centerY" id="SMY-Pb-fEm"/>
+                                    <constraint firstItem="11X-Jp-huJ" firstAttribute="centerY" secondItem="5FF-VX-gI0" secondAttribute="centerY" id="fZP-cP-5r6"/>
+                                    <constraint firstAttribute="height" constant="64" id="gIn-ge-qR7"/>
+                                    <constraint firstItem="9XQ-tK-w3c" firstAttribute="leading" secondItem="5FF-VX-gI0" secondAttribute="leading" constant="12" id="mHH-rc-Pv2"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="ugP-cM-RNK"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="DK7-8i-GZa">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="myM-dp-wNG">
+                                <rect key="frame" x="87" y="144" width="200" height="42"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="alu-j7-QDT"/>
+                                    <constraint firstAttribute="width" constant="200" id="oag-nX-llh"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YXC-Ew-abc" firstAttribute="trailing" secondItem="5FF-VX-gI0" secondAttribute="trailing" id="2v1-Jl-mQS"/>
+                            <constraint firstItem="DK7-8i-GZa" firstAttribute="top" secondItem="5FF-VX-gI0" secondAttribute="bottom" id="3KP-ea-mgf"/>
+                            <constraint firstItem="myM-dp-wNG" firstAttribute="centerX" secondItem="z2o-2r-ldq" secondAttribute="centerX" id="Kyh-7W-T7c"/>
+                            <constraint firstItem="5FF-VX-gI0" firstAttribute="top" secondItem="YXC-Ew-abc" secondAttribute="top" id="OlM-zt-mDK"/>
+                            <constraint firstItem="5FF-VX-gI0" firstAttribute="leading" secondItem="z2o-2r-ldq" secondAttribute="leading" id="Pjw-NK-S1u"/>
+                            <constraint firstItem="myM-dp-wNG" firstAttribute="top" secondItem="5FF-VX-gI0" secondAttribute="bottom" constant="60" id="YMd-Aa-FTl"/>
+                            <constraint firstItem="YXC-Ew-abc" firstAttribute="bottom" secondItem="DK7-8i-GZa" secondAttribute="bottom" id="a9p-JC-ccn"/>
+                            <constraint firstItem="DK7-8i-GZa" firstAttribute="leading" secondItem="YXC-Ew-abc" secondAttribute="leading" id="mI0-n2-FPN"/>
+                            <constraint firstItem="YXC-Ew-abc" firstAttribute="trailing" secondItem="DK7-8i-GZa" secondAttribute="trailing" id="tqX-dO-bqY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="YXC-Ew-abc"/>
+                    </view>
+                    <connections>
+                        <outlet property="bkView" destination="DK7-8i-GZa" id="6GV-2H-f5r"/>
+                        <outlet property="logoView" destination="myM-dp-wNG" id="mrD-nK-N4v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kIG-t9-jES" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2798" y="-1280"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Cmb-3P-T1w">
@@ -1804,7 +1885,8 @@
         <image name="tempPlay" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ViB-98-skP"/>
+        <segue reference="OU7-h8-11b"/>
+        <segue reference="f5d-2G-qtf"/>
         <segue reference="Ym7-zQ-SHb"/>
         <segue reference="a7V-eU-Yjs"/>
     </inferredMetricsTieBreakers>

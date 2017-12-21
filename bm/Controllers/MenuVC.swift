@@ -27,7 +27,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     var _rows: [[Dictionary<String, Any>]] = [
         [
             ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
-            ["text": "更改密碼", "icon": "password"],
+            ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD],
             ["text": "手機認證", "icon": "mobile_validate"],
         ],
         [
@@ -91,7 +91,11 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         if row["segue"] != nil {
             let segue = row["segue"] as! String
             //print("segue: \(segue)")
-            performSegue(withIdentifier: segue, sender: row["token"])
+            if segue == TO_PROFILE {
+                performSegue(withIdentifier: segue, sender: row["token"])
+            } else if segue == TO_PASSWORD {
+                performSegue(withIdentifier: segue, sender: "change_password")
+            }
         }
     }
     
@@ -103,6 +107,9 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             } else if segue.identifier == TO_TEAM_TEMP_PLAY {
                 let vc: TeamTempPlayEditVC = segue.destination as! TeamTempPlayEditVC
                 vc.token = (sender as! String)
+            } else if segue.identifier == TO_PASSWORD {
+                let vc: PasswordVC = segue.destination as! PasswordVC
+                vc.type = (sender as! String)
             }
         }
     }
@@ -164,6 +171,11 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     
     @IBAction func registerBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_REGISTER, sender: nil)
+    }
+    
+    @IBAction func passwordBtnPressed(_ sender: Any) {
+        let type: String = "forget_password"
+        performSegue(withIdentifier: TO_PASSWORD, sender: type)
     }
     
     private func _loginout() {
