@@ -126,7 +126,7 @@ class TempPlayShowVC: MyTableVC {
         plusOneBtn.cornerRadius(18)
         cancelPlusOneBtn.cornerRadius(18)
         plusOneBtn.addTarget(self, action: #selector(plusOne(_:)), for: UIControlEvents.touchUpInside)
-        cancelPlusOneBtn.addTarget(self, action: #selector(self.arena), for: UIControlEvents.touchUpInside)
+        cancelPlusOneBtn.addTarget(self, action: #selector(cancelPlusOne(_:)), for: UIControlEvents.touchUpInside)
         plusOneBtn.setTitle("我要臨打", for: .normal)
         cancelPlusOneBtn.setTitle("取消臨打", for: .normal)
         plusOneBtn.sizeToFit()
@@ -345,7 +345,9 @@ class TempPlayShowVC: MyTableVC {
             SCLAlertView().showWarning("警告", subTitle: "請先登入為會員")
             return
         }
+        Global.instance.addSpinner(superView: self.view)
         TeamService.instance.plusOne(title: myTitle, near_date: nearDate, token: Member.instance.token) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
             if success {
                 if TeamService.instance.success {
                     SCLAlertView().showSuccess("成功", subTitle: "報名臨打成功")
@@ -357,6 +359,26 @@ class TempPlayShowVC: MyTableVC {
             }
         }
     }
+    @objc func cancelPlusOne(_ sender:Any) {
+        if !Member.instance.isLoggedIn {
+            SCLAlertView().showWarning("警告", subTitle: "請先登入為會員")
+            return
+        }
+        Global.instance.addSpinner(superView: self.view)
+        TeamService.instance.cancelPlusOne(title: myTitle, near_date: nearDate, token: Member.instance.token) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if success {
+                if TeamService.instance.success {
+                    SCLAlertView().showSuccess("成功", subTitle: "取消報名臨打成功")
+                    
+                } else {
+                    SCLAlertView().showWarning("警告", subTitle: TeamService.instance.msg)
+                }
+                self.refresh()
+            }
+        }
+    }
+    
     private func setPage() {
         myTitle = (model.data[TEAM_NAME_KEY]!["value"] as! String)
         titleLbl.text = myTitle

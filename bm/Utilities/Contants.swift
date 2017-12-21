@@ -33,6 +33,7 @@ let URL_TEAM = URL_HOME + "team/"
 let URL_TEAM_TEMP_PLAY = URL_TEAM + "tempPlay/onoff"
 let URL_TEAM_TEMP_PLAY_LIST = URL_TEAM + "tempPlay/list"
 let URL_TEAM_PLUSONE = BASE_URL + "/team/tempPlay/plusOne/"
+let URL_TEAM_CANCELPLUSONE = BASE_URL + "/team/tempPlay/cancelPlusOne/"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"
@@ -70,6 +71,7 @@ let TO_SELECT_TIME: String = "toSelectTime"
 let TO_TEXT_INPUT: String = "toTextInput"
 let TO_SELECT_DEGREE: String = "toSelectDegree"
 let TO_TEMP_PLAY_SHOW: String = "toTempPlayShow"
+let TO_PASSWORD: String = "toPassword"
 
 // color
 let MY_GREEN = "#a6d903"
@@ -146,6 +148,10 @@ let TEAM_NEAR_DATE_KEY = "near_date"
 // Notification Constants
 let NOTIF_MEMBER_DID_CHANGE = Notification.Name("notifMemberChanged")
 let NOTIF_MEMBER_UPDATE = Notification.Name("notifMemberUpdate")
+
+// Push Notification
+let PUSH_TEST_PLAYID = "53e3238c-d78b-40b0-abf4-90174a7a9b67"
+let PUSH_LANGUAGE = "zh-Hant"
 
 // Header
 let HEADER = ["Content-Type": "application/json; charset=utf-8"]

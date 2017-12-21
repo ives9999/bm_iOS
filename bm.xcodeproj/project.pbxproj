@@ -10,6 +10,7 @@
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B30C954C1FEA8CDA005F71EF /* PasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C954B1FEA8CDA005F71EF /* PasswordVC.swift */; };
 		B31361E71F8786CC00BDA53D /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E61F8786CC00BDA53D /* Contants.swift */; };
 		B31361E91F88A35900BDA53D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E81F88A35900BDA53D /* Global.swift */; };
 		B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F8041FC52CAE00DE98FB /* MyTableVC.swift */; };
@@ -138,6 +139,7 @@
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30C95411FE82DA0005F71EF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		B30C95431FE82DA0005F71EF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B30C954B1FEA8CDA005F71EF /* PasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordVC.swift; sourceTree = "<group>"; };
 		B31361E61F8786CC00BDA53D /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		B31361E81F88A35900BDA53D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		B322F8041FC52CAE00DE98FB /* MyTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableVC.swift; sourceTree = "<group>"; };
@@ -462,6 +464,7 @@
 				B322F8041FC52CAE00DE98FB /* MyTableVC.swift */,
 				B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */,
 				B3308C501FDA5311006A83B6 /* TempPlayShowVC.swift */,
+				B30C954B1FEA8CDA005F71EF /* PasswordVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -844,6 +847,7 @@
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
 				B3ED38F21FBAD4C30003F083 /* DaysSelectVC.swift in Sources */,
+				B30C954C1FEA8CDA005F71EF /* PasswordVC.swift in Sources */,
 				B3E72A261FA0FBFF0008A6B1 /* LoginVC.swift in Sources */,
 				B3ED38D91FB463D00003F083 /* Team.swift in Sources */,
 				F96931991FB958110005C13F /* CitySelectVC.swift in Sources */,
@@ -996,7 +1000,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = Yes;
 				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
@@ -1049,7 +1052,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				NEW_SETTING = "";
 				SDKROOT = iphoneos;
@@ -1075,6 +1077,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = bm/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1101,6 +1104,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = bm/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
