@@ -12,9 +12,9 @@ import SCLAlertView
 class RegisterVC: UIViewController, UITextFieldDelegate {
 
     // Outlets
-    @IBOutlet weak var emailTxt: UITextField!
-    @IBOutlet weak var passwordTxt: UITextField!
-    @IBOutlet weak var rePasswordTxt: UITextField!
+    @IBOutlet weak var emailTxt: EMailTextField!
+    @IBOutlet weak var passwordTxt: SuperTextField!
+    @IBOutlet weak var rePasswordTxt: SuperTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,15 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         emailTxt.delegate = self
         passwordTxt.delegate = self
         rePasswordTxt.delegate = self
+        emailTxt.align(.left)
+        emailTxt.borderWidth(0)
+        emailTxt.backgroundColor = UIColor.clear
+        passwordTxt.align(.left)
+        passwordTxt.borderWidth(0)
+        passwordTxt.backgroundColor = UIColor.clear
+        rePasswordTxt.align(.left)
+        rePasswordTxt.borderWidth(0)
+        rePasswordTxt.backgroundColor = UIColor.clear
     }
 
     @IBAction func registerBtnPressed(_ sender: Any) {
@@ -92,5 +101,16 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_LOGIN, sender: nil)
+    }
+    
+    @IBAction func passwordBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: TO_PASSWORD, sender: "forget_password")
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == TO_PASSWORD {
+            let vc: PasswordVC = segue.destination as! PasswordVC
+            vc.type = sender as! String
+        }
     }
 }

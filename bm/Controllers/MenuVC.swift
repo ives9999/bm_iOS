@@ -22,13 +22,14 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     @IBOutlet weak var nicknameLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    var type: String = "refresh_team"
     var myTeamLists: [List] = [List]()
     let _sections: [String] = ["帳戶", "登錄"]
     var _rows: [[Dictionary<String, Any>]] = [
         [
             ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
-            ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD],
-            ["text": "手機認證", "icon": "mobile_validate"],
+            ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
+            //["text": "手機認證", "icon": "mobile_validate"],
         ],
         [
             ["text": "球隊登錄(往右滑可以編輯)", "icon": "team"],
@@ -47,31 +48,15 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         tableView.layoutMargins = layoutMargins
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
 
-        
-        if Member.instance.isLoggedIn {
-            Global.instance.addSpinner(superView: self.view)
-            let filter: [[Any]] = [
-                ["channel", "=", CHANNEL],
-                ["manager_id", "=", Member.instance.id]
-            ]
-            DataService.instance.getList(type: "team", titleField: "name", page: 1, perPage: 100, filter: filter) { (success) in
-                if success {
-                    self.myTeamLists = DataService.instance.lists
-                    //print(self.myTeamLists)
-                    for team in self.myTeamLists {
-                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_TEMP_PLAY,"detail":"臨打"]
-                        self._rows[1].append(row)
-                    }
-                    //print(self._rows)
-                    self.setData(sections: self._sections, rows: self._rows)
-                    self.tableView.reloadData()
-                    Global.instance.removeSpinner(superView: self.view)
-                }
-            }
-        }
+        refreshTeam()        
         
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
         NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if type == "refresh_team" {
+            refreshTeam()
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,6 +80,8 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                 performSegue(withIdentifier: segue, sender: row["token"])
             } else if segue == TO_PASSWORD {
                 performSegue(withIdentifier: segue, sender: "change_password")
+            } else {
+                performSegue(withIdentifier: segue, sender: row["token"])
             }
         }
     }
@@ -110,6 +97,9 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             } else if segue.identifier == TO_PASSWORD {
                 let vc: PasswordVC = segue.destination as! PasswordVC
                 vc.type = (sender as! String)
+            } else if segue.identifier == TO_TEAM_TEMP_PLAY {
+                let vc: TeamTempPlayEditVC = segue.destination as! TeamTempPlayEditVC
+                vc.token = (sender as! String)
             }
         }
     }
@@ -204,5 +194,31 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         forgetPasswordBtn.isHidden = false
         forgetPasswordIcon.isHidden = false
         tableView.isHidden = true
+    }
+    
+    private func refreshTeam() {
+        if Member.instance.isLoggedIn {
+            Global.instance.addSpinner(superView: self.view)
+            let filter: [[Any]] = [
+                ["channel", "=", CHANNEL],
+                ["manager_id", "=", Member.instance.id]
+            ]
+            DataService.instance.getList(type: "team", titleField: "name", page: 1, perPage: 100, filter: filter) { (success) in
+                if success {
+                    self.myTeamLists = DataService.instance.lists
+                    //print(self.myTeamLists)
+                    for team in self.myTeamLists {
+                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_TEMP_PLAY,"detail":"臨打"]
+                        self._rows[1].append(row)
+                    }
+                    //print(self._rows)
+                    self.setData(sections: self._sections, rows: self._rows)
+                    self.tableView.reloadData()
+                    Global.instance.removeSpinner(superView: self.view)
+                }
+                self.type = ""
+                
+            }
+        }
     }
 }

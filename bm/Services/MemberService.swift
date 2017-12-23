@@ -153,6 +153,40 @@ class MemberService {
         //print(data)
         Member.instance.setData(data: data)
     }
+    
+    func forgetPassword(email: String, completion: @escaping CompletionHandler) {
+        let lowerCaseEmail = email.lowercased()
+        let body: [String: Any] = ["source": "app", "email": lowerCaseEmail]
+        
+        Alamofire.request(URL_FORGET_PASSWORD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                let json = JSON(data)
+                self.success = json["success"].boolValue
+                self.msg = json["msg"].stringValue
+                completion(true)
+            }
+        }
+    }
+    func changePassword(oldPassword: String, password: String, rePassword: String, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app", "password_old": oldPassword,"password":password,"repassword":rePassword]
+        
+        Alamofire.request(URL_CHANGE_PASSWORD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                let json = JSON(data)
+                self.success = json["success"].boolValue
+                self.msg = json["msg"].stringValue
+                completion(true)
+            }
+        }
+    }
 }
 
 

@@ -15,14 +15,20 @@ import OneSignal
 class LoginVC: UIViewController, UITextFieldDelegate {
 
     // outlets
-    @IBOutlet weak var emailTxt: UITextField!
-    @IBOutlet weak var passwordTxt: UITextField!
+    @IBOutlet weak var emailTxt: EMailTextField!
+    @IBOutlet weak var passwordTxt: SuperTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         emailTxt.delegate = self
         passwordTxt.delegate = self
+        emailTxt.align(.left)
+        emailTxt.borderWidth(0)
+        emailTxt.backgroundColor = UIColor.clear
+        passwordTxt.align(.left)
+        passwordTxt.borderWidth(0)
+        passwordTxt.backgroundColor = UIColor.clear
 
         emailTxt.text = "ives@housetube.tw"
         passwordTxt.text = "K5SD23r6"
@@ -53,7 +59,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                 if MemberService.instance.success {
                     //print("login success")
                     //print(Global.instance.member.nickname)
-                    self.performSegue(withIdentifier: UNWIND, sender: nil)
+                    self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
                 } else {
                     //print("login failed by error email or password")
                     SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
@@ -75,7 +81,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
                     Global.instance.removeSpinner(superView: self.view)
                     if success1 {
                         if MemberService.instance.success {
-                            self.performSegue(withIdentifier: UNWIND, sender: nil)
+                            self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
                         } else {
                             //print("login failed by error email or password")
                             SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
@@ -90,6 +96,18 @@ class LoginVC: UIViewController, UITextFieldDelegate {
     
     @IBAction func registerBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_REGISTER, sender: nil)
+    }
+    @IBAction func passwordBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: TO_PASSWORD, sender: "forget_password")
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == TO_PASSWORD {
+            let vc: PasswordVC = segue.destination as! PasswordVC
+            vc.type = sender as! String
+        } else if segue.identifier == UNWIND {
+            let vc: MenuVC = segue.destination as! MenuVC
+            vc.type = "refresh_team"
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

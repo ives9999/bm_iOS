@@ -39,9 +39,10 @@ class SuperTextField: UITextField {
         self.textColor = UIColor.white
         self.font = UIFont(name: fontName, size: fontSize)
         self.createToolbar()
-        self.layer.borderWidth = 1.0
-        self.layer.borderColor = UIColor(TEXTBORDER).cgColor
-        self.setAlign(align: .right)
+        self.borderWidth(1.0)
+        self.borderColor(UIColor(TEXTBORDER))
+        self.borderStyle = UITextBorderStyle.line
+        self.align(.right)
         
         //self.font = UIFont(name: fontName, size: fontSize)
     }
@@ -80,7 +81,16 @@ class SuperTextField: UITextField {
         self.inputAccessoryView = toolbar
     }
     
-    func setAlign(align: NSTextAlignment) {
+    func align(_ align: NSTextAlignment) {
         self.textAlignment = align
+    }
+    func borderWidth(_ width: CGFloat) {
+        self.layer.borderWidth = width
+    }
+    func borderColor(_ color: UIColor) {
+        self.layer.borderColor = color.cgColor
+    }
+    func borderCornerRadius(_ cornerRadius: CGFloat) {
+        self.layer.cornerRadius = cornerRadius
     }
 }
