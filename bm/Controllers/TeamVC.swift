@@ -20,6 +20,7 @@ class TeamVC: ListVC {
         //print("super: \(super)")
         setIden(item:_type, titleField: "name")
         super.viewDidLoad()
+        Global.instance.setupTabbar(self)
         
         //let l: UILabel = UILabel(frame: CGRect(x: 0, y:100, width: 100, height: 100))
         //l.text = "label"

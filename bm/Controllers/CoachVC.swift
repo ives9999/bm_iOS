@@ -11,11 +11,14 @@ import UIKit
 class CoachVC: ListVC {
 
     let _type:String = "coach"
+    @IBOutlet weak var menuBtn: UIButton!
     
     override func viewDidLoad() {
         setIden(item:_type, titleField: "name")
         super.viewDidLoad()
+        Global.instance.setupTabbar(self)
         getData()
+        Global.instance.menuPressedAction(menuBtn, self)
 //        DataService.instance.getList(type: _type, titleField: "name") { (success) in
 //            if success {
 //                self.lists = DataService.instance.lists

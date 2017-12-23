@@ -37,7 +37,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         //print("super: \(self)")
         super.viewDidLoad()
         
-        Global.instance.setupTabbar(self)
+        
         
         
         frameWidth = view.bounds.size.width

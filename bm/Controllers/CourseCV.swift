@@ -17,4 +17,7 @@ class CourseCV: ListVC {
         super.viewDidLoad()
         getData()
     }
+    @IBAction func prevBtnPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
 }

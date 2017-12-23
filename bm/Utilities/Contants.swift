@@ -34,6 +34,8 @@ let URL_TEAM_TEMP_PLAY = URL_TEAM + "tempPlay/onoff"
 let URL_TEAM_TEMP_PLAY_LIST = URL_TEAM + "tempPlay/list"
 let URL_TEAM_PLUSONE = BASE_URL + "/team/tempPlay/plusOne/"
 let URL_TEAM_CANCELPLUSONE = BASE_URL + "/team/tempPlay/cancelPlusOne/"
+let URL_FORGET_PASSWORD = BASE_URL + "/member/forget_password"
+let URL_CHANGE_PASSWORD = BASE_URL + "/member/change_password"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"
@@ -72,6 +74,7 @@ let TO_TEXT_INPUT: String = "toTextInput"
 let TO_SELECT_DEGREE: String = "toSelectDegree"
 let TO_TEMP_PLAY_SHOW: String = "toTempPlayShow"
 let TO_PASSWORD: String = "toPassword"
+let TO_COURSE: String = "toCourse"
 
 // color
 let MY_GREEN = "#a6d903"

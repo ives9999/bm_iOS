@@ -68,8 +68,6 @@ enum DEGREE: String {
         case .high:
             res = "high"
             break
-        default:
-            res = "new"
         }
         return res
     }
