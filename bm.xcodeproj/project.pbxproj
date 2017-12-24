@@ -24,6 +24,7 @@
 		B3308C4D1FD9575E006A83B6 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3308C4C1FD9575E006A83B6 /* Tag.swift */; };
 		B3308C511FDA5311006A83B6 /* TempPlayShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3308C501FDA5311006A83B6 /* TempPlayShowVC.swift */; };
 		B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33297801FD6B4E400949CDE /* SuperLabel.swift */; };
+		B33426041FEFCDE300A760BD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B33426031FEFCDE300A760BD /* Images.xcassets */; };
 		B337B9A61FE039ED00C3EE28 /* TempPlaySignupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */; };
 		B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */; };
 		B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */; };
@@ -155,6 +156,7 @@
 		B3308C4C1FD9575E006A83B6 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		B3308C501FDA5311006A83B6 /* TempPlayShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayShowVC.swift; sourceTree = "<group>"; };
 		B33297801FD6B4E400949CDE /* SuperLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperLabel.swift; sourceTree = "<group>"; };
+		B33426031FEFCDE300A760BD /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlaySignupCell.swift; sourceTree = "<group>"; };
 		B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayTableHeaderView.swift; sourceTree = "<group>"; };
 		B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayEditVC.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				F94E7D261F83636A00F550FD /* Assets.xcassets */,
 				F94E7D281F83636A00F550FD /* LaunchScreen.storyboard */,
 				F94E7D2B1F83636A00F550FD /* Info.plist */,
+				B33426031FEFCDE300A760BD /* Images.xcassets */,
 			);
 			path = bm;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
+				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				F94E7D271F83636A00F550FD /* Assets.xcassets in Resources */,
 				F94E7D251F83636A00F550FD /* Main.storyboard in Resources */,
 			);
@@ -1074,6 +1078,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -1102,6 +1107,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_STYLE = Automatic;
