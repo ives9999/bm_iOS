@@ -15,6 +15,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var featuredView: ImagePickerView!
+    @IBOutlet weak var submitBtn: UIButton!
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
     var token: String = ""
@@ -22,11 +23,11 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     var model: Team!
     
     override func viewDidLoad() {
-        //print(model.data)
-        //print(token)
+        //print("token: \(token)")
  
         //let token: String = model.data[TEAM_TOKEN_KEY]!["value"] as! String
         model = Team.instance
+        
         if token.count > 0 {
             Global.instance.addSpinner(superView: self.view)
             TeamService.instance.getOne(type: "team", token: token, completion: { (success) in
@@ -40,13 +41,19 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                     //self.featuredView.imageView.image = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
                 }
             })
+        } else {
+            model.initData()
         }
+ 
         
         //print(_rows)
         //setData(sections: Team.instance.sections, rows: _rows)
-        sections = Team.instance.sections
+        sections = model.sections
         myTablView = tableView
         super.viewDidLoad()
+        
+        submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
+        submitBtn.layer.cornerRadius = 12
         
         tableView.register(TeamSubmitCell.self, forCellReuseIdentifier: "cell")
         
@@ -54,7 +61,11 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         featuredView.gallery = imagePicker
         featuredView.delegate = self
         
+        //print(model.data)
+        
         hideKeyboardWhenTappedAround()
+        Global.instance.addSpinner(superView: self.view)
+        Global.instance.removeSpinner(superView: self.view)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -79,6 +90,9 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         let cell: TeamSubmitCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamSubmitCell
         cell.teamSubmitCellDelegate = self
         let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
+        //if indexPath.section == 0 && indexPath.row == 0 {
+            //print(row)
+        //}
         cell.forRow(row: row)
         
         return cell

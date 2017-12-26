@@ -30,7 +30,7 @@ class SuperButton: UIButton {
     }
     func commonInit(){
         self.setTitleColor(UIColor.black, for: UIControlState.normal)
-        self.backgroundColor = UIColor(MY_GREEN)
+        self.backgroundColor = UIColor(MY_RED)
         self.titleLabel?.font = UIFont(name: fontName, size: fontSize)
         self.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
         self.contentVerticalAlignment = UIControlContentVerticalAlignment.center

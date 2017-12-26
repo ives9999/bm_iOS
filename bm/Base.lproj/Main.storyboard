@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -231,6 +232,7 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1d-Ud-k9i">
                                         <rect key="frame" x="331" y="15" width="32" height="34"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
                                         <state key="normal" title="提交">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -311,6 +313,7 @@
                     </view>
                     <connections>
                         <outlet property="featuredView" destination="Ay1-4r-oEw" id="PnO-ul-GFO"/>
+                        <outlet property="submitBtn" destination="e1d-Ud-k9i" id="g20-OP-LWl"/>
                         <outlet property="tableView" destination="zIz-8r-oiA" id="OQ0-me-Ba8"/>
                         <outlet property="titleLbl" destination="v2w-Um-mA3" id="wMh-ZJ-eN7"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="EKU-tT-H1i"/>
@@ -578,7 +581,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pcc-Zd-r0g" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="107.5" y="194" width="160" height="30"/>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="ODx-bB-Bm2"/>
                                     <constraint firstAttribute="height" constant="30" id="Oct-l2-rzT"/>
@@ -650,7 +653,7 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-F2-Q95">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="NEG-F2-Q95">
                                 <rect key="frame" x="25" y="630" width="65" height="17"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="power" translatesAutoresizingMaskIntoConstraints="NO" id="lVk-by-yn8">
@@ -695,7 +698,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Cbx-1o-peR">
-                                <rect key="frame" x="205" y="630" width="103" height="16"/>
+                                <rect key="frame" x="205" y="630.5" width="103" height="16"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password" translatesAutoresizingMaskIntoConstraints="NO" id="A0v-pO-lvS">
                                         <rect key="frame" x="0.0" y="0.0" width="16" height="16"/>
@@ -717,14 +720,13 @@
                                 </subviews>
                             </stackView>
                             <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2yx-Ir-KK1">
-                                <rect key="frame" x="0.0" y="175" width="375" height="405"/>
+                                <rect key="frame" x="0.0" y="175" width="375" height="432"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Av7-OI-v1Q" firstAttribute="bottom" secondItem="NEG-F2-Q95" secondAttribute="bottom" constant="20" id="313-jG-qTC"/>
-                            <constraint firstItem="Cbx-1o-peR" firstAttribute="centerY" secondItem="zjo-WY-36j" secondAttribute="centerY" id="AIQ-3D-nP5"/>
                             <constraint firstItem="zjo-WY-36j" firstAttribute="centerY" secondItem="NEG-F2-Q95" secondAttribute="centerY" id="I5m-XE-XXc"/>
                             <constraint firstItem="Cbx-1o-peR" firstAttribute="leading" secondItem="zjo-WY-36j" secondAttribute="trailing" constant="25" id="ILl-j7-slI"/>
                             <constraint firstItem="zjo-WY-36j" firstAttribute="leading" secondItem="NEG-F2-Q95" secondAttribute="trailing" constant="25" id="IML-Fl-Q7p"/>
@@ -732,8 +734,8 @@
                             <constraint firstItem="Av7-OI-v1Q" firstAttribute="trailing" secondItem="peB-WU-cfo" secondAttribute="trailing" id="Idw-FY-AHE"/>
                             <constraint firstItem="ghu-uM-R33" firstAttribute="leading" secondItem="Av7-OI-v1Q" secondAttribute="leading" constant="30" id="IfL-ck-Zeb"/>
                             <constraint firstItem="Av7-OI-v1Q" firstAttribute="bottom" secondItem="peB-WU-cfo" secondAttribute="bottom" id="Ku1-44-F7b"/>
-                            <constraint firstItem="zjo-WY-36j" firstAttribute="top" secondItem="2yx-Ir-KK1" secondAttribute="bottom" constant="50" id="OtE-Zu-Mpn"/>
                             <constraint firstItem="peB-WU-cfo" firstAttribute="leading" secondItem="Av7-OI-v1Q" secondAttribute="leading" id="P1d-CH-OTc"/>
+                            <constraint firstAttribute="bottom" secondItem="2yx-Ir-KK1" secondAttribute="bottom" constant="60" id="TLm-rK-deY"/>
                             <constraint firstItem="2yx-Ir-KK1" firstAttribute="leading" secondItem="Av7-OI-v1Q" secondAttribute="leading" id="Ui3-50-w4P"/>
                             <constraint firstItem="Akv-rv-KaN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="ghu-uM-R33" secondAttribute="trailing" constant="8" symbolic="YES" id="XBk-A3-q5J"/>
                             <constraint firstItem="ghu-uM-R33" firstAttribute="top" secondItem="Av7-OI-v1Q" secondAttribute="top" constant="30" id="dNl-UL-F8c"/>
@@ -741,6 +743,7 @@
                             <constraint firstItem="peB-WU-cfo" firstAttribute="top" secondItem="Av7-OI-v1Q" secondAttribute="top" id="oCE-TE-sKC"/>
                             <constraint firstItem="Akv-rv-KaN" firstAttribute="centerY" secondItem="ghu-uM-R33" secondAttribute="centerY" id="paR-OB-s70"/>
                             <constraint firstAttribute="trailing" secondItem="Akv-rv-KaN" secondAttribute="trailing" constant="60" id="s7y-0T-A9s"/>
+                            <constraint firstItem="Cbx-1o-peR" firstAttribute="centerY" secondItem="NEG-F2-Q95" secondAttribute="centerY" id="tt2-UZ-IVB"/>
                             <constraint firstItem="NEG-F2-Q95" firstAttribute="leading" secondItem="Av7-OI-v1Q" secondAttribute="leading" constant="25" id="uki-Y3-WjM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Av7-OI-v1Q"/>
@@ -798,12 +801,12 @@
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMx-d2-eep">
                                         <rect key="frame" x="331" y="15" width="32" height="34"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
                                         <state key="normal" title="提交">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="submit:" destination="UtM-v1-pfK" eventType="touchUpInside" id="FTI-5O-XBc"/>
                                             <action selector="submit:" destination="gO6-sX-L0T" eventType="touchUpInside" id="qt1-uk-APN"/>
                                         </connections>
                                     </button>
@@ -845,6 +848,7 @@
                         <viewLayoutGuide key="safeArea" id="aJ9-6P-u9a"/>
                     </view>
                     <connections>
+                        <outlet property="submitBtn" destination="hMx-d2-eep" id="NmF-8T-zH6"/>
                         <outlet property="tableView" destination="FcP-ze-zC8" id="f3J-kg-zSK"/>
                         <outlet property="titleLbl" destination="hAb-Q7-dkO" id="gWU-is-OVt"/>
                     </connections>
@@ -922,7 +926,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pr6-jP-ohX" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="59" y="417" width="257" height="43"/>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="82O-6Z-Irq"/>
                                     <constraint firstAttribute="width" constant="257" id="s9v-qM-DmA"/>
@@ -1184,7 +1188,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E7S-un-c1g" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="59" y="455" width="257" height="43"/>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="257" id="TTh-Ui-ofL"/>
                                     <constraint firstAttribute="height" constant="43" id="obY-2V-pkL"/>
@@ -1970,9 +1974,9 @@
         <image name="tempPlay" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ous-Dp-pXL"/>
+        <segue reference="2ff-JT-Wdj"/>
         <segue reference="ViB-98-skP"/>
-        <segue reference="9hz-2Z-7jX"/>
+        <segue reference="Ym7-zQ-SHb"/>
         <segue reference="vrH-5G-Fdn"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -22,6 +22,7 @@ class MenuCell: SuperCell {
         
         titleLbl = MyLabel(frame: CGRect.zero)
         contentView.addSubview(titleLbl)
+        _constraint()
         
 //        tempPlayLbl = MyLabel(frame: CGRect.zero)
 //        tempPlayLbl.text = "臨打"
@@ -31,35 +32,46 @@ class MenuCell: SuperCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func _constraint() {
+        var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint, c4: NSLayoutConstraint
+        
+        c1 = NSLayoutConstraint(item: iconView, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 32)
+        c2 = NSLayoutConstraint(item: iconView, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 15)
+        c3 = NSLayoutConstraint(item: iconView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16)
+        c4 = NSLayoutConstraint(item: iconView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24)
+        iconView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints([c1,c2,c3,c4])
+        
+        c1 = NSLayoutConstraint(item: titleLbl, attribute: .leading, relatedBy: .equal, toItem: iconView, attribute: .trailing, multiplier: 1, constant: 16)
+        c2 = NSLayoutConstraint(item: titleLbl, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 15)
+        titleLbl.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints([c1,c2])
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        var x: CGFloat = 30
-        let y: CGFloat = 10
-        let iconWidth: CGFloat = 24
-        let iconHeight: CGFloat = 24
-        iconView.frame = CGRect(x: x, y: y, width: iconWidth, height: iconHeight)
+        iconView.clipsToBounds = true
+        iconView.contentMode = .scaleAspectFit
+        titleLbl.sizeToFit()
         
-        x = x + iconWidth + 30
-        titleLbl.frame = CGRect(x: x, y: 0, width: bounds.width - x - 30, height: bounds.height)
-        
-        //let tempPlayWidth: CGFloat = 50
-        //tempPlayLbl.frame = CGRect(x: bounds.width - tempPlayWidth - 90, y: 20, width: tempPlayWidth, height: bounds.height-20)
     }
     
     func setRow(row: [String: Any]) {
+        
         if row["icon"] != nil {
             iconView.isHidden = false
             iconView.image = UIImage(named: row["icon"] as! String)
         } else {
             iconView.isHidden = true
         }
+ 
         if row["text"] != nil {
             titleLbl.text = (row["text"] as! String)
         }
         accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         if row["detail"] != nil {
-            detailTextLabel?.text = row["detail"] as! String
+            detailTextLabel?.text = (row["detail"] as! String)
         }
         
         setNeedsLayout()

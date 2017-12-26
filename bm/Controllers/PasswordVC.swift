@@ -92,6 +92,8 @@ class PasswordVC: UIViewController {
         } else if type == "change_password" {
             titleLbl.text = "更改密碼"
         }
+        Global.instance.addSpinner(superView: view)
+        Global.instance.removeSpinner(superView: view)
         
         _layout()
 

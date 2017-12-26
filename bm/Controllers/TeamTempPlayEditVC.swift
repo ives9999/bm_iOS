@@ -14,6 +14,8 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var submitBtn: UIButton!
+    
     var data: Dictionary<String, Any>?
     var token: String = ""
     var model: Team!
@@ -43,6 +45,8 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
 
         tableView.register(TeamTempPlayCell.self, forCellReuseIdentifier: "cell")
         //print(token)
+        submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
+        submitBtn.layer.cornerRadius = 12
         
         hideKeyboardWhenTappedAround()
     }

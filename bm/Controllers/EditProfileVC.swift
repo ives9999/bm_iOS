@@ -36,6 +36,8 @@ class EditProfileVC: UIViewController {
                 }
             }
         }
+        Global.instance.addSpinner(superView: view)
+        Global.instance.removeSpinner(superView: view)
     }
 
     @IBAction func saveBtnPressed(_ sender: Any) {

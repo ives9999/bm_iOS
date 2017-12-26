@@ -32,6 +32,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //tableView.separatorColor = UIColor.white
         tableView.delegate = self
         tableView.dataSource = self
+        Global.instance.addSpinner(superView: view)
+        Global.instance.removeSpinner(superView: view)
         
         NotificationCenter.default.addObserver(self, selector: #selector(ProfileVC._reloadData), name: NOTIF_MEMBER_UPDATE, object: nil)
     }
@@ -75,12 +77,6 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         let header = view as! UITableViewHeaderFooterView
         header.textLabel!.font = UIFont(name: FONT_NAME, size: FONT_SIZE_TITLE)
         header.textLabel!.textColor = UIColor.white
-    }
-    func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
-        let footer = view as! UITableViewHeaderFooterView
-        let separator: UIView = UIView(frame: CGRect(x: 15, y: 0, width: footer.frame.width, height: 1))
-        separator.layer.backgroundColor = UIColor("#6c6c6e").cgColor
-        footer.addSubview(separator)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

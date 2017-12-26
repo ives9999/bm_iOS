@@ -83,8 +83,8 @@ class TempPlayShowVC: MyTableVC {
         featuredView = UIImageView()
         containerView.addSubview(featuredView)
         
-        cityBtn = SuperButton()
-        arenaBtn = SuperButton()
+        cityBtn = SuperButton(frame:CGRect.zero,textColor:UIColor.black, bkColor:UIColor(MY_GREEN))
+        arenaBtn = SuperButton(frame:CGRect.zero,textColor:UIColor.black, bkColor:UIColor(MY_GREEN))
         dateLbl = SuperLabel()
         timeLbl = SuperLabel()
         quantityLbl = SuperLabel()
@@ -95,8 +95,8 @@ class TempPlayShowVC: MyTableVC {
         leaderLbl = SuperLabel()
         mobileLbl = SuperLabel()
         degreeLbl = SuperLabel()
-        plusOneBtn = SuperButton(frame: CGRect.zero, textColor: UIColor.black, bkColor: UIColor(MY_RED))
-        cancelPlusOneBtn = SuperButton()
+        plusOneBtn = SuperButton()
+        cancelPlusOneBtn = SuperButton(frame: CGRect.zero, textColor: UIColor.black, bkColor: UIColor(MY_GREEN))
         
         containerView.addSubview(cityBtn)
         containerView.addSubview(arenaBtn)

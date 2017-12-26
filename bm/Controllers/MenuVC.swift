@@ -11,6 +11,7 @@ import SwipeCellKit
 import UIColor_Hex_Swift
 
 class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
+    
 
     // outlets
     @IBOutlet weak var loginBtn: UIButton!
@@ -48,8 +49,6 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         tableView.layoutMargins = layoutMargins
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
 
-        refreshTeam()        
-        
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
         NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     }
@@ -59,6 +58,10 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 45
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let cell: MenuCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
@@ -66,6 +69,10 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                 
         let row: [String: Any] = rows![indexPath.section][indexPath.row]
         cell.setRow(row: row)
+        
+        if indexPath.section == 1 && indexPath.row == 0 {
+            cell.accessoryType = .none
+        }
         
         return cell
     }
@@ -85,7 +92,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             }
         }
     }
-    
+ 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if sender != nil {
             if segue.identifier == TO_TEAM_SUBMIT {
@@ -140,7 +147,6 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         //options.expansionStyle?.target.edgeInset = 20
         return options
     }
-
     
     override func viewDidAppear(_ animated: Bool) {
         _loginout()
@@ -178,12 +184,14 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     }
     
     private func _loginBlock() {
+        
         nicknameLbl.text = Member.instance.nickname
         loginBtn.setTitle("登出", for: .normal)
         registerBtn.isHidden = true
         registerIcon.isHidden = true
         forgetPasswordBtn.isHidden = true
         forgetPasswordIcon.isHidden = true
+ 
         tableView.isHidden = false
     }
     private func _logoutBlock() {
@@ -197,6 +205,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     }
     
     private func refreshTeam() {
+        //print("aaa")
         if Member.instance.isLoggedIn {
             Global.instance.addSpinner(superView: self.view)
             let filter: [[Any]] = [

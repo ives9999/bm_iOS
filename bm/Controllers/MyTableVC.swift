@@ -47,19 +47,23 @@ class MyTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
+        var count: Int?
         if sections == nil {
-            return 1
+            count = 1
         } else {
-            return sections!.count
+            count = sections!.count
         }
+        return count!
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count: Int?
         if rows == nil {
-            return 0
+            count = 0
         } else {
-            return rows![section].count
+            count = rows![section].count
         }
+        return count!
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
