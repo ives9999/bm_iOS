@@ -32,9 +32,25 @@ class SuperButton: UIButton {
         self.setTitleColor(UIColor.black, for: UIControlState.normal)
         self.backgroundColor = UIColor(MY_RED)
         self.titleLabel?.font = UIFont(name: fontName, size: fontSize)
-        self.contentHorizontalAlignment = UIControlContentHorizontalAlignment.left
-        self.contentVerticalAlignment = UIControlContentVerticalAlignment.center
+        self.alignH = .left
+        self.alignV = .center
+        self.cornerRadius = 18
         self.padding(top: 3, left: 8, bottom: 3, right: 8)
+    }
+    open var alignH: UIControlContentHorizontalAlignment = UIControlContentHorizontalAlignment.left {
+        didSet {
+            contentHorizontalAlignment = alignH
+        }
+    }
+    open var alignV: UIControlContentVerticalAlignment = UIControlContentVerticalAlignment.center {
+        didSet {
+            contentVerticalAlignment = alignV
+        }
+    }
+    open var cornerRadius: CGFloat = 3.0 {
+        didSet {
+            layer.cornerRadius = cornerRadius
+        }
     }
     func setColor(textColor: UIColor, bkColor: UIColor) {
         self.setTitleColor(textColor, for: UIControlState.normal)

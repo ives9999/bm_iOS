@@ -25,7 +25,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         super.viewDidLoad()
 
         nicknameLbl.text = Member.instance.nickname
-        sexLbl.text = SEX.enumFronString(string: Member.instance.sex).rawValue
+        sexLbl.text = SEX.enumFromString(string: Member.instance.sex).rawValue
         //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         //tableView.backgroundColor = UIColor.clear
         //tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
@@ -89,6 +89,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         //let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let key: String = rows[indexPath.section][indexPath.row]
         let row: [String: String] = Member.instance.info[key]!
+        //print(key)
         var field: String = ""
         var data: String = ""
         if let tmp: String = row["ch"] {
@@ -122,14 +123,20 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         cell!.textLabel!.textColor = UIColor.white
         cell!.detailTextLabel!.text = "\(data)"
         cell!.detailTextLabel!.textColor = UIColor.white
-        cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        if key == "validate" || key == "type" {
+            cell?.accessoryType = UITableViewCellAccessoryType.none
+        } else {
+            cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        }
         return cell!
        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let key: String = rows[indexPath.section][indexPath.row]
-        performSegue(withIdentifier: TO_EDIT_PROFILE, sender: key)
+        if key != "validate" && key != "type" {
+            performSegue(withIdentifier: TO_EDIT_PROFILE, sender: key)
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -137,9 +144,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let edit: EditProfileVC = segue.destination as! EditProfileVC {
-            edit.key = sender as! String
-        }
+        let vc: EditProfileVC = segue.destination as! EditProfileVC
+        vc.key = sender as! String
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {

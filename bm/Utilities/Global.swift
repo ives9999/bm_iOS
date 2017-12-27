@@ -19,7 +19,7 @@ enum SEX: String {
     case M = "先生"
     case F = "小姐"
     
-    static func enumFronString(string: String) -> SEX {
+    static func enumFromString(string: String) -> SEX {
         switch string {
         case "M" :
             return self.M
@@ -28,6 +28,12 @@ enum SEX: String {
         default :
             return self.M
         }
+    }
+    static func all() -> [[String: String]] {
+        return [
+            ["key": "M","value": "先生"],
+            ["key": "F", "value": "小姐"]
+        ]
     }
 }
 enum MEMBER_ROLE: String {

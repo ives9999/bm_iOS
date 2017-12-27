@@ -197,7 +197,7 @@ class Member {
     
     init() {
         var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
-        let folder: String = path[0] as! String
+        //let folder: String = path[0] as! String
         //print("Your NSUserDefaults are stored in this folder: \(folder)/Preferences")
         //print("Member init is key exist: \(session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY))")
         if !session.isKeyPresentInUserDefaults(key: ISLOGGEDIN_KEY) {
@@ -312,7 +312,7 @@ class Member {
         return ""
     }
     func sexShow(rawValue: String) -> String {
-        return SEX.enumFronString(string: rawValue).rawValue
+        return SEX.enumFromString(string: rawValue).rawValue
     }
     func validateShow(rawValue: Int) -> String {
         var res: String = "未通過任何認證"
