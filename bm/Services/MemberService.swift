@@ -172,7 +172,8 @@ class MemberService {
         }
     }
     func changePassword(oldPassword: String, password: String, rePassword: String, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app", "password_old": oldPassword,"password":password,"repassword":rePassword]
+        let token: String = Member.instance.token
+        let body: [String: Any] = ["source": "app", "password_old": oldPassword,"password":password,"repassword":rePassword,"token":token]
         
         Alamofire.request(URL_CHANGE_PASSWORD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {

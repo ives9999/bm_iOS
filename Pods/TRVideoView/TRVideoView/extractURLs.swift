@@ -19,7 +19,7 @@ extension String {
                 }
             })
         } catch let error as NSError {
-            //print(error.localizedDescription)
+            print(error.localizedDescription)
         }
         return urls
     }
