@@ -72,6 +72,7 @@ class MemberService {
     
     func logout() {
         Member.instance.isLoggedIn = false
+        Member.instance.reset()
         NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     }
     

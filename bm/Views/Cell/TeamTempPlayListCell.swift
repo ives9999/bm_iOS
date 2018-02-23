@@ -63,7 +63,11 @@ class TeamTempPlayListCell: SuperCell {
         
         let quantity: Int = (row["count"]!["quantity"] as! Int)
         let signup: Int = (row["count"]!["signup"] as! Int)
-        quantityLbl.text = "接受臨打人數：" + String(quantity)
+        var quantity_show: String = "未提供"
+        if quantity >= 0 {
+            quantity_show = String(quantity)
+        }
+        quantityLbl.text = "接受臨打人數：" + quantity_show
         signupLbl.text = "已報名人數：" + String(signup)
         
         let near_date: String = (row["near_date"]!["show"] as! String)

@@ -68,7 +68,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func getData(page: Int=1, perPage: Int=PERPAGE) {
-        //print(page)
+        print(page)
         Global.instance.addSpinner(superView: self.view)
         
         DataService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in

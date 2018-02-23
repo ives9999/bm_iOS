@@ -80,10 +80,10 @@ class TempPlayVC: MyTableVC {
     }
     
     @objc func refresh() {
-        Global.instance.addSpinner(superView: self.view)
+        //Global.instance.addSpinner(superView: self.view)
         TeamService.instance.tempPlay_list { (success) in
             if success {
-                Global.instance.removeSpinner(superView: self.view)
+                //Global.instance.removeSpinner(superView: self.view)
                 //print(self.model.list)
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()

@@ -176,23 +176,23 @@ class Member {
         }
     }
     let info: Dictionary<String, [String: String]> = [
-        ID_KEY: ["ch": "編號","type":"Int"],
-        NICKNAME_KEY: ["ch": "暱稱","type":"String"],
-        NAME_KEY: ["ch": "姓名","type":"String"],
-        EMAIL_KEY: ["ch": "email","type":"String"],
-        TOKEN_KEY: ["ch": "token","type":"String"],
-        UID_KEY: ["ch": "uid","type":"String"],
-        CHANNEL_KEY: ["ch": "channel","type":"String"],
-        DOB_KEY: ["ch": "生日","type":"String"],
-        SEX_KEY: ["ch": "性別","type":"String"],
-        TEL_KEY: ["ch": "市內電話","type":"String"],
-        MOBILE_KEY: ["ch": "行動電話","type":"String"],
-        PID_KEY: ["ch": "身分證","type":"String"],
-        AVATAR_KEY: ["ch": "大頭貼","type":"String"],
-        SOCIAL_KEY: ["ch": "social","type":"String"],
-        VALIDATE_KEY: ["ch": "認證階段","type":"Int"],
-        MEMBER_TYPE_KEY: ["ch": "會員類型","type":"Int"],
-        MEMBER_ROLE_KEY: ["ch": "會員角色","type":"String"]
+        ID_KEY: ["ch": "編號","type":"Int","default":"0"],
+        NICKNAME_KEY: ["ch": "暱稱","type":"String","default":""],
+        NAME_KEY: ["ch": "姓名","type":"String","default":""],
+        EMAIL_KEY: ["ch": "email","type":"String","default":""],
+        TOKEN_KEY: ["ch": "token","type":"String","default":""],
+        UID_KEY: ["ch": "uid","type":"String","default":""],
+        CHANNEL_KEY: ["ch": "channel","type":"String","default":"bm"],
+        DOB_KEY: ["ch": "生日","type":"String","default":""],
+        SEX_KEY: ["ch": "性別","type":"String","default":"M"],
+        TEL_KEY: ["ch": "市內電話","type":"String","default":""],
+        MOBILE_KEY: ["ch": "行動電話","type":"String","default":""],
+        PID_KEY: ["ch": "身分證","type":"String","default":""],
+        AVATAR_KEY: ["ch": "大頭貼","type":"String","default":""],
+        SOCIAL_KEY: ["ch": "social","type":"String","default":""],
+        VALIDATE_KEY: ["ch": "認證階段","type":"Int","default":"0"],
+        MEMBER_TYPE_KEY: ["ch": "會員類型","type":"Int","default":"0"],
+        MEMBER_ROLE_KEY: ["ch": "會員角色","type":"String","default":""]
     ]
     
     init() {
@@ -339,6 +339,24 @@ class Member {
             res.append("球場管理員")
         }
         return res.joined(separator: ",")
+    }
+    func reset() {
+        var data: [String: Any] = [String: Any]()
+        
+        for (key, value) in info {
+            let d: String = value["default"]!
+            let type: String = value["type"]!
+            if type == "Int" {
+                let d1: Int = Int(d)!
+                data[key] = d1
+            } else if type == "Bool" {
+                let d1: Bool = Bool(d)!
+                data[key] = d1
+            } else {
+                data[key] = d
+            }
+        }
+        setData(data: data)
     }
 }
 

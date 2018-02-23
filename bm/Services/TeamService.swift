@@ -323,10 +323,11 @@ class TeamService {
                     print("get response result value error")
                     return
                 }
+                //print(data)
                 let model: Team = Team.instance
                 let json = JSON(data)
-                //print(json)
                 let arr: [JSON] = json["rows"].arrayValue
+                //print(arr)
                 model.list = [DATA]()
                 
                 for i in 0 ..< arr.count {
@@ -358,6 +359,8 @@ class TeamService {
                     data["arena"] = arena
                     
                     var count: Dictionary<String, Any> = [String: Any]()
+                    let tmp: Int = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
+                    
                     count["quantity"] = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
                     count["signup"] = arr[i]["temp_signup_count"].intValue
                     data["count"] = count
