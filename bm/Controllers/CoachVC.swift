@@ -17,16 +17,7 @@ class CoachVC: ListVC {
         setIden(item:_type, titleField: "name")
         super.viewDidLoad()
         Global.instance.setupTabbar(self)
-        getData()
+        refresh()
         Global.instance.menuPressedAction(menuBtn, self)
-//        DataService.instance.getList(type: _type, titleField: "name") { (success) in
-//            if success {
-//                self.lists = DataService.instance.lists
-//                print(self.lists)
-//                self.listCV.reloadData()
-//            }
-//            Global.instance.removeSpinner()
-//            Global.instance.removeProgressLbl()
-//        }
     }
 }

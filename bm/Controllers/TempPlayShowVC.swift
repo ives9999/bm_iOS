@@ -45,7 +45,7 @@ class TempPlayShowVC: MyTableVC {
     var nearDate: String!
     var featured: UIImage!
     
-    var refreshControl: UIRefreshControl!
+    //var refreshControl: UIRefreshControl!
     
     
 
@@ -255,7 +255,7 @@ class TempPlayShowVC: MyTableVC {
         containerView.addConstraint(cancelPlusOneBtnC2)
     }
     
-    @objc func refresh() {
+    override func refresh() {
         //_layout()
         Global.instance.addSpinner(superView: self.view)
         TeamService.instance.getOne(type: "team", token: token) { (success) in

@@ -15,7 +15,7 @@ class CourseCV: ListVC {
     override func viewDidLoad() {
         setIden(item:_type, titleField: "title")
         super.viewDidLoad()
-        getData()
+        refresh()
     }
     @IBAction func prevBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)

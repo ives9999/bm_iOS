@@ -33,12 +33,11 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     //var spinner: UIActivityIndicatorView?
     //var progressLbl: UILabel?
     
+    var refreshControl: UIRefreshControl!
+    
     override func viewDidLoad() {
         //print("super: \(self)")
         super.viewDidLoad()
-        
-        
-        
         
         frameWidth = view.bounds.size.width
         //print("frame width: \(frameWidth)")
@@ -53,6 +52,12 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         listCV.register(VideoCell.self, forCellWithReuseIdentifier: iden+"VideoCell")
         listCV.delegate = self
         listCV.dataSource = self
+
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        listCV.addSubview(refreshControl)
+        
         self.view.addSubview(listCV)
         
         //var list = List(id: 0, title: "title1", path: "", token: "")
@@ -67,26 +72,38 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         self.titleField = titleField
     }
     
-    func getData(page: Int=1, perPage: Int=PERPAGE) {
-        print(page)
+    func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
+        //print(page)
         Global.instance.addSpinner(superView: self.view)
         
         DataService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in
-            if success {
-                let tmps: [List] = DataService.instance.lists
-                self.lists += tmps
-                //print(self.lists)
-                self.page = DataService.instance.page
-                if self.page == 1 {
-                    self.totalCount = DataService.instance.totalCount
-                    self.perPage = DataService.instance.perPage
-                    let _pageCount: Int = self.totalCount / self.perPage
-                    self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
-                    //print(self.totalPage)
-                }
-                self.listCV.reloadData()
-            }
+            self.getDataEnd(success: success)
             Global.instance.removeSpinner(superView: self.view)
+        }
+    }
+    func getDataEnd(success: Bool) {
+        if success {
+            let tmps: [List] = DataService.instance.lists
+            //print(tmps)
+            //print("===============")
+            if page == 1 {
+                lists = [List]()
+            }
+            lists += tmps
+            //print(self.lists)
+            page = DataService.instance.page
+            if page == 1 {
+                totalCount = DataService.instance.totalCount
+                perPage = DataService.instance.perPage
+                let _pageCount: Int = totalCount / perPage
+                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+                //print(self.totalPage)
+                if refreshControl.isRefreshing {
+                    refreshControl.endRefreshing()
+                }
+            }
+            listCV.reloadData()
+            //self.page = self.page + 1 in CollectionView
         }
     }
 
@@ -130,7 +147,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        //print("aaa")
+        //print(lists.count)
         return lists.count
     }
 
@@ -188,13 +205,18 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             page += 1
             //print("current page: \(page)")
             if page <= totalPage {
-                getData(page: page, perPage: PERPAGE)
+                getDataStart(page: page, perPage: PERPAGE)
             }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         //print("end display section: \(indexPath.section) row: \(indexPath.row)")
+    }
+    
+    @objc func refresh() {
+        self.page = 1
+        getDataStart()
     }
 //    func scrollViewDidScroll(scrollView: UIScrollView) {
 //        let offsetY = scrollView.contentOffset.y

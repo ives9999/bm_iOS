@@ -45,6 +45,7 @@ class DataService {
         //print(body)
         let url: String = String(format: URL_LIST, type)
         //print(url)
+        
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
             if response.result.error == nil {
@@ -55,7 +56,10 @@ class DataService {
                 }
                 let json = JSON(data)
                 //print(json)
-                self.lists = [List]()
+                //if page == 1 {
+                    self.lists = [List]()
+                //}
+                //print("page: \(page)")
                 self.totalCount = json["totalCount"].intValue
                 if self.totalCount > 0 {
                     self.page = json["page"].intValue

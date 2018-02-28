@@ -53,7 +53,7 @@ open class TRVideoView: WKWebView {
             
             // If vimeo URL embedded vimeo player
             if(url.absoluteString.contains("vimeo.com")){
-                print(url.pathComponents)
+                //print(url.pathComponents)
                 var link = url.lastPathComponent
                 link = "https://player.vimeo.com/video/"+link
                 DispatchQueue.main.async(execute: { () -> Void in
