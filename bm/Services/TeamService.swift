@@ -433,7 +433,7 @@ class TeamService {
                 if !self.success {
                     self.msg = json["msg"].stringValue
                 }
-                completion(true)
+                completion(self.success)
             }
         }
     }

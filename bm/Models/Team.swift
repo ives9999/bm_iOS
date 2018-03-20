@@ -99,7 +99,7 @@ class Team {
         ]
         data2 = [
             TEAM_NAME_KEY:["ch":"名稱","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":defaultPad],
-            TEAM_LEADER_KEY:["ch":"隊長","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":defaultPad],
+            TEAM_LEADER_KEY:["ch":"聯絡人","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":defaultPad],
             TEAM_MOBILE_KEY:["ch":"電話","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":phonePad],
             TEAM_EMAIL_KEY:["ch":"EMail","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":emailPad],
             TEAM_PLAY_START_KEY:["ch":"開始時間","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
