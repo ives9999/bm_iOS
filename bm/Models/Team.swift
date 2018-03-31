@@ -404,7 +404,10 @@ class Team {
         var isAnyOneChange: Bool = false
         var res: [String: Any] = [String: Any]()
         for (key, row) in data {
-            let isSubmit: Bool = row["submit"] as! Bool
+            var isSubmit: Bool = false
+            if row["submit"] != nil {
+                isSubmit = row["submit"] as! Bool
+            }
             var isChange: Bool = false
             if row["change"] != nil {
                 isChange = row["change"] as! Bool

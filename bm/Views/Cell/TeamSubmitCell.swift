@@ -71,7 +71,7 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         //print("tag: \(iden)")
-        //print("text: \(textField.text)")
+        // print("text: \(textField.text)")
         teamSubmitCellDelegate?.setTextField(iden: iden, value: textField.text!)
     }
     

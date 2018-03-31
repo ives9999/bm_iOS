@@ -22,7 +22,6 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
     var cellHeight: CGFloat = 55
     
     override func viewDidLoad() {
-
         model = Team.instance
         
         if token.count > 0 {
@@ -30,6 +29,7 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
             TeamService.instance.tempPlay_onoff(token: token, completion: { (success) in
                 if success {
                     Global.instance.removeSpinner(superView: self.view)
+                    self.sections = self.model.temp_play_edit_sections
                     self.model.hideOrShowTempPlayData()
                     //print(self.model.temp_play_data)
                     let name: String = self.model.temp_play_data[TEAM_NAME_KEY]!["value"] as! String
@@ -39,7 +39,6 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
             })
         }
         
-        sections = model.temp_play_edit_sections
         myTablView = tableView
         super.viewDidLoad()
 
@@ -53,12 +52,14 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count: Int = 0
-        for (_, value) in model.temp_play_data {
-            if value["section"] != nil {
-                let _section: Int = value["section"] as! Int
-                if section == _section {
-                    if value["row"] != nil {
-                        count += 1
+        if (sections != nil) {
+            for (_, value) in model.temp_play_data {
+                if value["section"] != nil {
+                    let _section: Int = value["section"] as! Int
+                    if section == _section {
+                        if value["row"] != nil {
+                            count += 1
+                        }
                     }
                 }
             }
@@ -73,6 +74,7 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
         cell.teamTempPlayCellDelegate = self
         let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
         cell.forRow(row: row)
+        //cell.generalTextField.becomeFirstResponder()
         if row["hidden"] != nil {
             let b: Bool = row["hidden"] as! Bool
             if b {
@@ -128,7 +130,7 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
         if params.count == 0 {
             SCLAlertView().showWarning("提示", subTitle: " 沒有修改任何資料")
         } else {
-            print(params)
+            //print(params)
             Global.instance.addSpinner(superView: self.view)
             
             //print(isFeaturedChange)

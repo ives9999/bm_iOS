@@ -20,7 +20,7 @@ class MyTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     convenience init(sections: [String], rows: [[Dictionary<String, Any>]]) {
         self.init(nibName:nil, bundle:nil)
-        setData(sections: sections, rows: rows)
+        //setData(sections: sections, rows: rows)
     }
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         //nameTxt = SuperTextField()
