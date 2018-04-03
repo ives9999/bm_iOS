@@ -9,6 +9,7 @@
 import UIKit
 import SwipeCellKit
 import UIColor_Hex_Swift
+import SCLAlertView
 
 class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     
@@ -87,6 +88,12 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                 performSegue(withIdentifier: segue, sender: row["token"])
             } else if segue == TO_PASSWORD {
                 performSegue(withIdentifier: segue, sender: "change_password")
+            } else if segue == TO_TEAM_SUBMIT {
+                if Member.instance.validate < 1 {
+                    SCLAlertView().showError("錯誤", subTitle: "未通過EMail認證，無法新增球隊，認證完後，請先登出再登入")
+                } else {
+                    performSegue(withIdentifier: segue, sender: nil)
+                }
             } else {
                 performSegue(withIdentifier: segue, sender: row["token"])
             }
@@ -98,9 +105,6 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             if segue.identifier == TO_TEAM_SUBMIT {
                 let vc: TeamSubmitVC = segue.destination as! TeamSubmitVC
                 vc.token = sender as! String
-            } else if segue.identifier == TO_TEAM_TEMP_PLAY {
-                let vc: TeamTempPlayEditVC = segue.destination as! TeamTempPlayEditVC
-                vc.token = (sender as! String)
             } else if segue.identifier == TO_PASSWORD {
                 let vc: PasswordVC = segue.destination as! PasswordVC
                 vc.type = (sender as! String)
