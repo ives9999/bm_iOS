@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class RegisterVC: UIViewController, UITextFieldDelegate {
+class RegisterVC: BaseViewController, UITextFieldDelegate {
 
     // Outlets
     @IBOutlet weak var emailTxt: EMailTextField!
@@ -58,7 +58,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
             MemberService.instance.register(email: email, password: password, repassword: rePassword) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if success {
-                    print("register ok: \(MemberService.instance.success)")
+                    //print("register ok: \(MemberService.instance.success)")
                     if MemberService.instance.success {
                         let appearance = SCLAlertView.SCLAppearance(
                             showCloseButton: false
@@ -80,8 +80,9 @@ class RegisterVC: UIViewController, UITextFieldDelegate {
         Facebook.instance.login(viewController: self) {
             (success) in
             if success {
-                print(Facebook.instance.uid)
-                print(Facebook.instance.email)
+                //print(Facebook.instance.uid)
+                //print(Facebook.instance.email)
+                self._loginFB()
             }
         }
     }

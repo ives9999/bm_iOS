@@ -33,6 +33,7 @@ class PasswordVC: UIViewController {
         emailLbl.text = "請輸入註冊時的email"
         emailTxt = IconTextField()
         emailTxt.set(icon: "email1")
+        emailTxt.keyboardType = UIKeyboardType.emailAddress
         
         oldPwdLbl = SuperLabel()
         oldPwdLbl.text = "舊密碼"

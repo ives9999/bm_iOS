@@ -10,9 +10,8 @@ import UIKit
 import SCLAlertView
 import FacebookCore
 import FacebookLogin
-import OneSignal
 
-class LoginVC: UIViewController, UITextFieldDelegate {
+class LoginVC: BaseViewController, UITextFieldDelegate {
 
     // outlets
     @IBOutlet weak var emailTxt: EMailTextField!
@@ -51,7 +50,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         if password.count == 0 {
             SCLAlertView().showWarning("警告", subTitle: "請填寫密碼")
         }
-        let playerID: String = getPlayerID()
+        let playerID: String = _getPlayerID()
         Global.instance.addSpinner(superView: self.view)
         MemberService.instance.login(email: email, password: password, playerID: playerID) { (success) in
             Global.instance.removeSpinner(superView: self.view)
@@ -73,23 +72,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         Facebook.instance.login(viewController: self) {
             (success) in
             if success {
-                //print(Facebook.instance.uid)
-                //print(Facebook.instance.email)
-                let playerID: String = self.getPlayerID()
-                Global.instance.addSpinner(superView: self.view)
-                MemberService.instance.login_fb(playerID: playerID, completion: { (success1) in
-                    Global.instance.removeSpinner(superView: self.view)
-                    if success1 {
-                        if MemberService.instance.success {
-                            self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
-                        } else {
-                            //print("login failed by error email or password")
-                            SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
-                        }
-                    } else {
-                        print("login failed by fb")
-                    }
-                })
+                self._loginFB()
             }
         }
     }
@@ -115,15 +98,7 @@ class LoginVC: UIViewController, UITextFieldDelegate {
         return true
     }
     
-    func getPlayerID() -> String {
-        let status: OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
-        let playerID: String = status.subscriptionStatus.userId
-        //print(playerID)
-        //if userID != nil {
-        //let user = PFUser.cu
-        //}
-        return playerID
-    }
+    
 }
 
 
