@@ -102,7 +102,6 @@ class DataService {
                                 if (self.lists[i].vimeo.count==0) && (self.lists[i].youtube.count==0) {
                                     self.lists[i].featured = UIImage(named: "nophoto")!
                                 }
-                                completion(true)
                             }
                         } else {
                             completion(true)

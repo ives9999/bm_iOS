@@ -77,8 +77,10 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         Global.instance.addSpinner(superView: self.view)
         
         DataService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in
-            self.getDataEnd(success: success)
-            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.getDataEnd(success: success)
+                Global.instance.removeSpinner(superView: self.view)
+            }
         }
     }
     func getDataEnd(success: Bool) {
