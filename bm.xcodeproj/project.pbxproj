@@ -295,6 +295,8 @@
 				F969319C1FD12B930005C13F /* TeamTempPlayCell.swift */,
 				F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */,
 				B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */,
+				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
+				F9A1CB7E1F95CD2500DDEC86 /* ListCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -311,8 +313,6 @@
 				B32CAFE01FF2589000D184ED /* Switch.swift */,
 				B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */,
 				B35F8DDA1F8F66490073BD70 /* HomeVideoCell.swift */,
-				F9A1CB7E1F95CD2500DDEC86 /* ListCell.swift */,
-				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
 				B3E72A231FA08D090008A6B1 /* GradientView.swift */,
 				B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */,
 				B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */,
