@@ -26,7 +26,8 @@ class DataService {
     var perPage: Int!
     var show: Dictionary<String, Any> = Dictionary<String, Any>()
     var show_html: String = ""
-    var downloadImageNum: Int = 0
+    //var downloadImageNum: Int = 0
+    var needDownloads: [Dictionary<String, Any>] = [Dictionary<String, Any>]()
     var image: UIImage?
     //var homesRaw: Dictionary<String, [Dictionary<String, String>]> = Dictionary<String, [Dictionary<String, String>]>()
     //var titles: [String] = [String]()
@@ -37,7 +38,7 @@ class DataService {
     var arenas: [Arena] = [Arena]()
     
     func getList(type: String, titleField: String, page: Int, perPage: Int, filter:[[Any]]?, completion: @escaping CompletionHandler) {
-        self.downloadImageNum = 0
+        self.needDownloads = [Dictionary<String, Any>]()
         var body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
         if filter != nil {
             body["where"] = filter
@@ -76,7 +77,7 @@ class DataService {
                         let path1 = arr[i]["featured_path"].stringValue
                         if (path1.count > 0) {
                             path = BASE_URL + path1
-                            self.downloadImageNum += 1
+                            self.needDownloads.append(["idx": i, "path": path])
                         } else {
                             path = ""
                         }
@@ -84,28 +85,25 @@ class DataService {
                         let list: List = List(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
                         self.lists.append(list)
                     }
-                    //print("need download image: \(self.downloadImageNum)")
-                    for i in 0 ..< self.lists.count {
-                        if (self.downloadImageNum > 0) {
-                            if self.lists[i].path.count > 0 {
-                                self.getImage(url: self.lists[i].path, completion: { (success) in
-                                    if success {
-                                        self.lists[i].featured = self.image!
-                                    }
-                                    self.downloadImageNum -= 1
-                                    //print("retain image download: \(self.downloadImageNum)")
-                                    if self.downloadImageNum == 0 {
-                                        completion(true)
-                                    }
-                                })
-                            } else {
-                                if (self.lists[i].vimeo.count==0) && (self.lists[i].youtube.count==0) {
-                                    self.lists[i].featured = UIImage(named: "nophoto")!
+                    //print(self.lists)
+                    //print("need download image: \(self.needDownloads.count)")
+                    let needDownload: Int = self.needDownloads.count
+                    if (needDownload > 0) {
+                        var tmp: Int = needDownload
+                        for i in 0 ..< needDownload {
+                            self.getImage(url: self.needDownloads[i]["path"] as! String, completion: { (success) in
+                                if success {
+                                    let idx: Int = self.needDownloads[i]["idx"] as! Int
+                                    self.lists[idx].featured = self.image!
                                 }
-                            }
-                        } else {
-                            completion(true)
+                                tmp -= 1
+                                if (tmp == 0) {
+                                    completion(true)
+                                }
+                            })
                         }
+                    } else {
+                        completion(true)
                     }
                 } else {// total count == 0
                     completion(true)
@@ -119,7 +117,6 @@ class DataService {
     }
     
     func getHomes(completion: @escaping CompletionHandler) {
-        self.downloadImageNum = 0
         let body: [String: Any] = ["device": "app"]
         //print(URL_HOME)
         
@@ -142,13 +139,13 @@ class DataService {
                     //print(self.downloadImageNum)
                     self.getHomeFeatured(completion: { (success) in
                         if(success) {
-                            self.downloadImageNum -= 1
+                            //self.downloadImageNum -= 1
                             //print(self.downloadImageNum)
                             //print(self.image)
-                            if self.downloadImageNum == 0 {
+                            //if self.downloadImageNum == 0 {
                                 //print(self.homes)
                                 completion(true)
-                            }
+                            //}
                         }
                     })
                 }
@@ -160,19 +157,35 @@ class DataService {
     }
     
     func getHomeFeatured(completion: @escaping CompletionHandler) {
+        var allHomeImages: Dictionary<String, [Dictionary<String, Any>]> = Dictionary<String, [Dictionary<String, Any>]>()
+        var allImages: [Dictionary<String, Any>]
+        var count: Int = 0
         for (key, value) in homes {
+            allImages = [Dictionary<String, Any>]()
             for i in 0..<value.count {
-            
                 let path: String = value[i].path
                 if path.count > 0 {
                     //print(path)
-                    getImage(url: path, completion: { (success) in
-                        if (success) {
-                            self.homes[key]![i].featured = self.image!
-                        }
-                        completion(true)
-                    })
+                    allImages.append(["idx": i, "path": path])
+                    count += 1
                 }
+            }
+            allHomeImages[key] = allImages
+        }
+        for (key, value) in allHomeImages {
+            needDownloads = value
+            for i in 0..<needDownloads.count {
+                let path: String = needDownloads[i]["path"] as! String
+                let idx: Int = needDownloads[i]["idx"] as! Int
+                getImage(url: path, completion: { (success) in
+                    if (success) {
+                        self.homes[key]![idx].featured = self.image!
+                        count -= 1
+                        if (count == 0) {
+                            completion(true)
+                        }
+                    }
+                })
             }
         }
     }
@@ -271,19 +284,20 @@ class DataService {
     
     func parseHomeJSON(array: [Dictionary<String, Any>], titleField: String, type: String, video: Bool=false) -> [Home] {
         var result: [Home] = [Home]()
+        var i: Int = 0
         for item in array {
             let id: Int = item["id"] as? Int ?? 0
             let title: String = item[titleField] as? String ?? ""
             var path: String = item["featured_path"] as? String ?? ""
             if (path.count > 0) {
                 path = BASE_URL + path
-                downloadImageNum += 1
             }
             let youtube: String = item["youtube"] as? String ?? ""
             let vimeo: String = item["vimeo"] as? String ?? ""
             let token: String = item["token"] as? String ?? ""
             let home = Home(id: id, title: title, path: path, youtube: youtube, vimeo: vimeo, token: token, type: type)
             result.append(home)
+            i += 1
         }
         
         return result

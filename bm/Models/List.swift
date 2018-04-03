@@ -21,7 +21,7 @@ struct List {
         self.id = id
         self.title = title
         self.path = path
-        self.featured = UIImage()
+        self.featured = UIImage(named: "nophoto")!
         self.token = token
         self.vimeo = vimeo
         self.youtube = youtube

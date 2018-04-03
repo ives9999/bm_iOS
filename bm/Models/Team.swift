@@ -114,7 +114,7 @@ class Team {
             TEAM_CITY_KEY:["ch":"區域","vtype":"array","value":0,"submit":true,"atype":more,"segue":TO_CITY,"sender":0,"show":""],
             TEAM_ARENA_KEY:["ch":"球館","vtype":"array","value":0,"submit":true,"atype":more,"segue":TO_ARENA,"sender":[String: Int](),"show":""],
             TEAM_DAYS_KEY:["ch":"星期幾","vtype":"array","value":[Int](),"submit":true,"atype":more,"segue":TO_DAY,"sender":[Int](),"show":""],
-            TEAM_FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(),"path":"","submit":false,"show":""]
+            TEAM_FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(named: "nophoto"),"path":"","submit":false,"show":""]
         ]
         for (key, _) in data2 {
             data2[key]!["change"] = false
