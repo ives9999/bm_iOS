@@ -39,17 +39,19 @@ class PasswordVC: UIViewController {
         oldPwdLbl.text = "舊密碼"
         oldPwdTxt = IconTextField()
         oldPwdTxt.set(icon: "password")
-        
+        oldPwdTxt.isSecureTextEntry = true
         
         newPwdLbl = SuperLabel()
         newPwdLbl.text = "新密碼"
         newPwdTxt = IconTextField()
         newPwdTxt.set(icon: "password")
+        newPwdTxt.isSecureTextEntry = true
         
         rePwdLbl = SuperLabel()
         rePwdLbl.text = "確認密碼"
         rePwdTxt = IconTextField()
         rePwdTxt.set(icon: "password")
+        rePwdTxt.isSecureTextEntry = true
         
         
         submitBtn = SuperButton()
