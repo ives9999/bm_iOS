@@ -51,7 +51,7 @@ class EditProfileVC: UIViewController {
                 oldValue = (data as! String)
                 value = oldValue
             }
-            if key == "sex" {
+            if key == SEX_KEY {
                 let selected: String = (oldValue == allSEX[0]["key"]) ? "left" : "right"
                 setDataSwitch(left: allSEX[0]["value"]!, right: allSEX[1]["value"]!, selected: selected)
                 
@@ -61,7 +61,7 @@ class EditProfileVC: UIViewController {
                 submitBtnConstraintTopTxt.isActive = false
                 submitBtnConstraintTopSwitch.isActive = true
                 submitBtnConstraintTopDatePicker.isActive = false
-            } else if key == "dob" {
+            } else if key == DOB_KEY {
                 setDatePicker(startDate: oldValue!)
                 
                 dataTxt.isHidden = true
@@ -70,6 +70,33 @@ class EditProfileVC: UIViewController {
                 submitBtnConstraintTopTxt.isActive = false
                 submitBtnConstraintTopSwitch.isActive = false
                 submitBtnConstraintTopDatePicker.isActive = true
+            } else if key == EMAIL_KEY {
+                dataTxt.isHidden = false
+                datePicker.isHidden = true
+                dataSwitch.isHidden = true
+                submitBtnConstraintTopTxt.isActive = true
+                submitBtnConstraintTopSwitch.isActive = false
+                submitBtnConstraintTopDatePicker.isActive = false
+                dataTxt.text = oldValue!
+                dataTxt.keyboardType = UIKeyboardType.emailAddress
+            } else if key == MOBILE_KEY {
+                dataTxt.isHidden = false
+                datePicker.isHidden = true
+                dataSwitch.isHidden = true
+                submitBtnConstraintTopTxt.isActive = true
+                submitBtnConstraintTopSwitch.isActive = false
+                submitBtnConstraintTopDatePicker.isActive = false
+                dataTxt.text = oldValue!
+                dataTxt.keyboardType = UIKeyboardType.numberPad
+            } else if key == TEL_KEY {
+                dataTxt.isHidden = false
+                datePicker.isHidden = true
+                dataSwitch.isHidden = true
+                submitBtnConstraintTopTxt.isActive = true
+                submitBtnConstraintTopSwitch.isActive = false
+                submitBtnConstraintTopDatePicker.isActive = false
+                dataTxt.text = oldValue!
+                dataTxt.keyboardType = UIKeyboardType.numberPad
             } else {
                 dataTxt.isHidden = false
                 datePicker.isHidden = true
@@ -193,6 +220,28 @@ class EditProfileVC: UIViewController {
         submitBtnConstraintTopDatePicker.isActive = false
     }
     @objc func submitBtnPressed(_ sender: Any) {
+        var _continue: Bool = true
+        if (key == EMAIL_KEY || key == MOBILE_KEY) {
+            _continue = false
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false
+            )
+            let alert = SCLAlertView(appearance: appearance)
+            alert.addButton("確定", action: {
+                self.continueSubmit()
+            })
+            alert.addButton("取消", action: {
+            })
+            let type: String = (key == EMAIL_KEY) ? "EMail" : "行動電話"
+            alert.showWarning("警告", subTitle: "修改\(type)需要重新認證，是否確定要修改")
+        }
+        
+        if (_continue) {
+            self.continueSubmit()
+        }
+    }
+    
+    func continueSubmit() {
         Global.instance.addSpinner(superView: self.view)
         if key != "sex" && key != "dob" {
             value = dataTxt.text
@@ -201,6 +250,7 @@ class EditProfileVC: UIViewController {
         MemberService.instance.update(id: Member.instance.id, field: key, value: &value1) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
+                //print(MemberService.instance.success)
                 if MemberService.instance.success {
                     let appearance = SCLAlertView.SCLAppearance(
                         showCloseButton: false
@@ -214,7 +264,6 @@ class EditProfileVC: UIViewController {
                     SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
                 }
             }
-            
         }
     }
 }

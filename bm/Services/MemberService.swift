@@ -113,6 +113,7 @@ class MemberService {
             value = value.lowercased()
         }
         let body: [String: Any] = ["source": "app", field: value, ID_KEY: id]
+        //print(body)
         Alamofire.request(URL_MEMBER_UPDATE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {
@@ -120,12 +121,13 @@ class MemberService {
                     return
                 }
                 let json = JSON(data)
+                //print(json)
                 self.success = json["success"].boolValue
                 if self.success {
                     self.jsonToMember(json: json)
                     NotificationCenter.default.post(name: NOTIF_MEMBER_UPDATE, object: nil)
                 } else {
-                    let errors: [String] = json["msg"].arrayObject as! [String]
+                    let errors: [String] = json["error"].arrayObject as! [String]
                     for i in 0 ..< errors.count {
                         self.msg += errors[i]
                     }
