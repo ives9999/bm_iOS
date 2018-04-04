@@ -263,6 +263,8 @@ class EditProfileVC: UIViewController {
                 } else {
                     SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
                 }
+            } else {
+                SCLAlertView().showError("錯誤", subTitle: "更新錯誤")
             }
         }
     }

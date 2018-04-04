@@ -115,6 +115,7 @@ class MemberService {
         let body: [String: Any] = ["source": "app", field: value, ID_KEY: id]
         //print(body)
         Alamofire.request(URL_MEMBER_UPDATE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            //print(response.result.error)
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
@@ -134,6 +135,9 @@ class MemberService {
                     //print(self.msg)
                 }
                 completion(true)
+            } else {
+                self.success = false
+                completion(false)
             }
         }
     }
