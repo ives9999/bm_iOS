@@ -344,9 +344,9 @@ class Team {
     }
     func feeShow() {
         var text: String = ""
-        text = data[TEAM_TEMP_FEE_M_KEY]!["show"] as! String + "元"
+        text = data[TEAM_TEMP_FEE_M_KEY]!["show"] as! String
         data[TEAM_TEMP_FEE_M_KEY]!["show"] = text
-        text = data[TEAM_TEMP_FEE_F_KEY]!["show"] as! String + "元"
+        text = data[TEAM_TEMP_FEE_F_KEY]!["show"] as! String
         data[TEAM_TEMP_FEE_F_KEY]!["show"] = text
     }
     

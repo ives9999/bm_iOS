@@ -36,7 +36,7 @@ class TeamService {
                 //let base64: String = imageData.base64EncodedString(options: .lineLength64Characters)
                 multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)
             }
-            print(params)
+            //print(params)
             for (key, value) in body {
                 if key == TEAM_DEGREE_KEY {
                     for d in value as! [String] {
