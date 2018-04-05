@@ -33,12 +33,10 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
             //["text": "手機認證", "icon": "mobile_validate"],
         ],
-        [
-            ["text": "球隊登錄(往右滑可以編輯)", "icon": "team"],
-            ["text": "新增球隊", "segue": TO_TEAM_SUBMIT]
-            
-        ]
+        []
     ]
+    let _rows10: Dictionary<String, Any> = ["text": "球隊登錄(往右滑可以編輯)", "icon": "team"]
+    let _rows11: Dictionary<String, Any> = ["text": "新增球隊", "segue": TO_TEAM_SUBMIT]
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -51,8 +49,15 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
 
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
+        
         NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.teamDidChange(_:)), name: NOTIF_TEAM_UPDATE, object: nil)
     }
+    
+    override func refresh() {
+        refreshTeam()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         if type == "refresh_team" {
             refreshTeam()
@@ -132,7 +137,17 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             editAction.image = UIImage(named: "edit")
             
             let deleteAction = SwipeAction(style: .destructive, title: "刪除") { action, indexPath in
-                print("delete")
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                let alert = SCLAlertView(appearance: appearance)
+                alert.addButton("確定", action: {
+                    let row: [String: Any] = self.rows![indexPath.section][indexPath.row]
+                    self._deleteTeam(token: row["token"] as! String)
+                })
+                alert.addButton("取消", action: {
+                })
+                alert.showWarning("警告", subTitle: "是否確定要刪除此球隊")
             }
 
             deleteAction.image = UIImage(named: "close")
@@ -159,6 +174,9 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     @objc func memberDidChange(_ notif: Notification) {
         //print("notify")
         _loginout()
+    }
+    @objc func teamDidChange(_ notif: Notification) {
+        refreshTeam()
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
@@ -207,6 +225,20 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         forgetPasswordIcon.isHidden = false
         tableView.isHidden = true
     }
+    private func _deleteTeam(token: String) {
+        Global.instance.addSpinner(superView: self.view)
+        DataService.instance.delete(token: token, type: "team") { (success) in
+            if success {
+                Global.instance.removeSpinner(superView: self.view)
+                if (!DataService.instance.success) {
+                    SCLAlertView().showError("錯誤", subTitle: "無法刪除球隊，請稍後再試")
+                }
+                NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+            } else {
+                SCLAlertView().showError("錯誤", subTitle: "無法刪除球隊，請稍後再試")
+            }
+        }
+    }
     
     private func refreshTeam() {
         //print("aaa")
@@ -220,6 +252,9 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                 if success {
                     self.myTeamLists = DataService.instance.lists
                     //print(self.myTeamLists)
+                    self._rows[1] = [Dictionary<String, Any>]()
+                    self._rows[1].append(self._rows10)
+                    self._rows[1].append(self._rows11)
                     for team in self.myTeamLists {
                         let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_TEMP_PLAY,"detail":"臨打"]
                         self._rows[1].append(row)
@@ -228,6 +263,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                     self.setData(sections: self._sections, rows: self._rows)
                     self.tableView.reloadData()
                     Global.instance.removeSpinner(superView: self.view)
+                    self.refreshControl.endRefreshing()
                 }
                 self.type = ""
                 

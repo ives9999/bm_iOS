@@ -21,6 +21,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     var token: String = ""
     var isFeaturedChange: Bool = false
     var model: Team!
+    var action: String = "INSERT"
     
     override func viewDidLoad() {
         //print("token: \(token)")
@@ -29,6 +30,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         model = Team.instance
         
         if token.count > 0 {
+            action = "UPDATE"
             Global.instance.addSpinner(superView: self.view)
             TeamService.instance.getOne(type: "team", token: token, completion: { (success) in
                 if success {
@@ -66,6 +68,12 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         hideKeyboardWhenTappedAround()
         Global.instance.addSpinner(superView: self.view)
         Global.instance.removeSpinner(superView: self.view)
+        
+        if (action == "UPDATE") {
+            titleLbl.text = "更新球隊"
+        } else {
+            titleLbl.text = "新增球隊"
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -204,7 +212,23 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                             self.model.data[TEAM_ID_KEY]!["show"] = id
                             //print(self.id)
                             //if self.id > 0 {
-                            SCLAlertView().showSuccess("成功", subTitle: "新增 / 修改球隊成功")
+                            let appearance = SCLAlertView.SCLAppearance(
+                                showCloseButton: false
+                            )
+                            let alert = SCLAlertView(appearance: appearance)
+                            if (self.action == "INSERT") {
+                                alert.addButton("確定", action: {
+                                    self.dismiss(animated: true, completion: nil)
+                                })
+                            } else {
+                                alert.addButton("回上一頁", action: {
+                                    self.dismiss(animated: true, completion: nil)
+                                })
+                                alert.addButton("繼續修改", action: {
+                                })
+                            }
+                            alert.showSuccess("成功", subTitle: "新增 / 修改球隊成功")
+                            NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
                         } else {
                             SCLAlertView().showWarning("錯誤", subTitle: TeamService.instance.msg)
                         }

@@ -139,6 +139,7 @@ class Team {
         for (key, _) in data {
             data[key]!["key"] = key
         }
+        runTestData()
     }
     
     func initTempPlayData() {
@@ -204,6 +205,7 @@ class Team {
                         }
                     }
                 }
+                data[key1]!["change"] = true
             }
             updateDays(testData[TEAM_DAYS_KEY] as! [Int])
             updateDegree(testData[TEAM_DEGREE_KEY] as! [String])

@@ -36,6 +36,8 @@ class DataService {
     
     var citys: [City] = [City]()
     var arenas: [Arena] = [Arena]()
+    var msg:String = ""
+    var success: Bool = false
     
     func getList(type: String, titleField: String, page: Int, perPage: Int, filter:[[Any]]?, completion: @escaping CompletionHandler) {
         self.needDownloads = [Dictionary<String, Any>]()
@@ -113,6 +115,31 @@ class DataService {
                 debugPrint(response.result.error as Any)
             }
             
+        }
+    }
+    
+    func delete(token: String, type: String, completion: @escaping CompletionHandler) {
+        let body: [String: String] = ["source": "app", "channel": "bm", "token": token]
+        let url: String = String(format: URL_TEAM_DELETE, type)
+        //print(url)
+        //print(body)
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                //print(data)
+                let json: JSON = JSON(data)
+                self.success = json["success"].boolValue
+                if self.success {
+                } else {
+                    self.msg = json["msg"].stringValue
+                }
+                completion(true)
+            } else {
+                completion(false)
+            }
         }
     }
     

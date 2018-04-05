@@ -28,6 +28,7 @@ let URL_MEMBER_UPDATE = URL_HOME + "member/update"
 let URL_CITYS = URL_HOME + "citys"
 let URL_ARENA_BY_CITY_ID = URL_HOME + "arena_by_city"
 let URL_TEAM_UPDATE = URL_HOME + "team/update"
+let URL_TEAM_DELETE = URL_HOME + "team/delete"
 let URL_ONE = "\(URL_HOME)%@/one"
 let URL_TEAM = URL_HOME + "team/"
 let URL_TEAM_TEMP_PLAY = URL_TEAM + "tempPlay/onoff"
@@ -151,6 +152,7 @@ let TEAM_NEAR_DATE_KEY = "near_date"
 // Notification Constants
 let NOTIF_MEMBER_DID_CHANGE = Notification.Name("notifMemberChanged")
 let NOTIF_MEMBER_UPDATE = Notification.Name("notifMemberUpdate")
+let NOTIF_TEAM_UPDATE = Notification.Name("notifTeamUpdate")
 
 // Push Notification
 let PUSH_TEST_PLAYID = "53e3238c-d78b-40b0-abf4-90174a7a9b67"
