@@ -13,7 +13,7 @@ target 'bm' do
   pod 'AlamofireImage'
   pod 'TRVideoView'
   pod 'UIColor_Hex_Swift'
-  pod 'SCLAlertView', :git => 'https://github.com/ahmedsafadii/SCLAlertView-Swift.git'
+  pod 'SCLAlertView'
   pod 'SwipeCellKit'
   pod 'FacebookCore'
   pod 'FacebookLogin'
