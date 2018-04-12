@@ -84,6 +84,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             }
         default:
             assert(false, "collection header failed")
+            return UICollectionReusableView()
         }
     }
     

@@ -9,7 +9,6 @@
 import UIKit
 import SwipeCellKit
 import UIColor_Hex_Swift
-import SCLAlertView
 
 class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     

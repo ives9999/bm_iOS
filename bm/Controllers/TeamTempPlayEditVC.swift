@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SCLAlertView
 
 class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
 

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SCLAlertView
 import FacebookCore
 import FacebookLogin
 

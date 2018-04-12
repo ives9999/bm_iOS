@@ -8,7 +8,6 @@
 
 import UIKit
 import OneSignal
-import SCLAlertView
 
 class BaseViewController: UIViewController {
 
@@ -30,7 +29,7 @@ class BaseViewController: UIViewController {
                     self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
                 } else {
                     //print("login failed by error email or password")
-                    SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
+                    self.alertError(title: "錯誤", msg: MemberService.instance.msg)
                 }
             } else {
                 print("login failed by fb")
@@ -46,6 +45,12 @@ class BaseViewController: UIViewController {
         //let user = PFUser.cu
         //}
         return playerID
+    }
+    
+    func alertError(title: String, msg: String) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
+        self.present(alert, animated: true)
     }
 
     override func didReceiveMemoryWarning() {

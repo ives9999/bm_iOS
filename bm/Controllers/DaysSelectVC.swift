@@ -8,7 +8,6 @@
 
 import UIKit
 import UIColor_Hex_Swift
-import SCLAlertView
 
 protocol DaysSelectDelegate: class {
     func setDaysData(res: [Int])

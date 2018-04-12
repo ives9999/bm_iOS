@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SCLAlertView
 import UIColor_Hex_Swift
 
 protocol DegreeSelectDelegate: class {
