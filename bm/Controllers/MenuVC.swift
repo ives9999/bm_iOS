@@ -71,6 +71,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let cell: MenuCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
         cell.delegate = self
+        //print(rows)
                 
         let row: [String: Any] = rows![indexPath.section][indexPath.row]
         cell.setRow(row: row)
@@ -83,16 +84,16 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
+        print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let row: [String: Any] = rows![indexPath.section][indexPath.row]
         if row["segue"] != nil {
             let segue = row["segue"] as! String
-            //print("segue: \(segue)")
+            print("segue: \(segue)")
             if segue == TO_PROFILE {
                 performSegue(withIdentifier: segue, sender: row["token"])
             } else if segue == TO_PASSWORD {
                 performSegue(withIdentifier: segue, sender: "change_password")
-            } else if segue == TO_TEAM_SUBMIT {
+            } else if segue == TO_TEAM_SUBMIT {// just for add team
                 if Member.instance.validate < 1 {
                     SCLAlertView().showError("錯誤", subTitle: "未通過EMail認證，無法新增球隊，認證完後，請先登出再登入")
                 } else {
@@ -259,7 +260,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                         self._rows[1].append(row)
                     }
                     //print(self._rows)
-                    self.setData(sections: self._sections, rows: self._rows)
+                    self.setData(sections: self._sections, rows: self._rows)// set to rows
                     self.tableView.reloadData()
                     Global.instance.removeSpinner(superView: self.view)
                     self.refreshControl.endRefreshing()

@@ -94,7 +94,7 @@ class Team {
             TEAM_CREATED_AT_KEY:["ch":"建立時間","vtype":"String","value":"","submit":false,"show":""],
             TEAM_UPDATED_AT_KEY:["ch":"最後一次修改時間","vtype":"String","value":"","submit":false,"show":""],
             TEAM_THUMB_KEY:["ch":"代表圖","vtype":"String","value":"","submit":false,"show":""],
-            TEAM_NEAR_DATE_KEY:["ch":"下次臨打日期","vtype":"String","value":"","submit":false,"show":""],
+            TEAM_NEAR_DATE_KEY:["ch":"下次臨打日期","vtype":"String","value":"","value1":"","submit":false,"show":""],
             TEAM_TEMP_SIGNUP_KEY:["ch":"已報名人數","vtype":"String","value":"","submit":false,"show":""]
         ]
         data2 = [
@@ -128,7 +128,7 @@ class Team {
                         data2[key1]!["section"] = section
                         data2[key1]!["row"] = row
                     }
-                }
+                } 
             }
         }
         data.merge(data1)
@@ -139,7 +139,7 @@ class Team {
         for (key, _) in data {
             data[key]!["key"] = key
         }
-        runTestData()
+        //runTestData()
     }
     
     func initTempPlayData() {

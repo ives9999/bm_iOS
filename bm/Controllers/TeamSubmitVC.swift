@@ -34,7 +34,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             TeamService.instance.getOne(type: "team", token: token, completion: { (success) in
                 if success {
                     Global.instance.removeSpinner(superView: self.view)
-                    //print(model.data)
+                    //print(self.model.data)
                     self.tableView.reloadData()
                     if let pickedImage: UIImage = self.model.data[TEAM_FEATURED_KEY]!["value"] as? UIImage {
                         self.featuredView.setPickedImage(image: pickedImage)

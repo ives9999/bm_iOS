@@ -323,6 +323,9 @@ extension String {
         //Return Parsed Date
         return dateFromString
     }
+    var isNumber: Bool {
+        return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    }
 }
 
 extension Array where Element: Comparable {

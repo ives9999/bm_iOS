@@ -19,6 +19,7 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
     var token: String = ""
     var model: Team!
     var cellHeight: CGFloat = 55
+    var quantityTextField: SuperTextField?
     
     override func viewDidLoad() {
         model = Team.instance
@@ -73,6 +74,7 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
         cell.teamTempPlayCellDelegate = self
         let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
         cell.forRow(row: row)
+        quantityTextField = cell.generalTextField
         //cell.generalTextField.becomeFirstResponder()
         if row["hidden"] != nil {
             let b: Bool = row["hidden"] as! Bool
@@ -124,59 +126,83 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
     }
     
     @IBAction func submit(_ sender: Any) {
-        var params:[String: Any]!
-        params = model.makeTempPlaySubmitArr()
-        if params.count == 0 {
-            SCLAlertView().showWarning("提示", subTitle: " 沒有修改任何資料")
-        } else {
-            //print(params)
-            Global.instance.addSpinner(superView: self.view)
-            
-            //print(isFeaturedChange)
-            TeamService.instance.update(params: params, nil, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
-                Global.instance.removeSpinner(superView: self.view)
-                if success {
-                    if TeamService.instance.success {
-                        let id: Int = TeamService.instance.id
-                        self.model.temp_play_data[TEAM_ID_KEY]!["value"] = id
-                        self.model.temp_play_data[TEAM_ID_KEY]!["show"] = id
-                        //print(self.id)
-                        //if self.id > 0 {
-                        SCLAlertView().showSuccess("成功", subTitle: "修改臨打成功")
-                    } else {
-                        SCLAlertView().showWarning("錯誤", subTitle: TeamService.instance.msg)
-                    }
+        var isPass = true
+        let _on = model.temp_play_data[TEAM_TEMP_STATUS_KEY]!["value"] as! String
+        let on = (_on == "on") ? true : false
+        if on {
+            let quantityS: String = quantityTextField!.text!
+            if quantityS.count == 0 {
+                isPass = false
+            } else {
+                if (!quantityS.isNumber) {
+                    isPass = false
                 } else {
-                    SCLAlertView().showWarning("錯誤", subTitle: "修改臨打失敗，伺服器無法修改成功，請稍後再試")
+                    let quantityI: Int = Int(quantityS)!
+                    if (quantityI <= 0) {
+                        isPass = false
+                    }
+                }
+            }
+        }
+        if !isPass {
+            SCLAlertView().showWarning("警告", subTitle: "必須填寫臨打人數或臨打人數須大於0")
+        } else {
+            var params:[String: Any]!
+            params = model.makeTempPlaySubmitArr()
+            if params.count == 0 {
+                SCLAlertView().showWarning("提示", subTitle: " 沒有修改任何資料")
+            } else {
+                //print(params)
+                Global.instance.addSpinner(superView: self.view)
+
+                //print(isFeaturedChange)
+                TeamService.instance.update(params: params, nil, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
+                    Global.instance.removeSpinner(superView: self.view)
+                    if success {
+                        if TeamService.instance.success {
+                            let id: Int = TeamService.instance.id
+                            self.model.temp_play_data[TEAM_ID_KEY]!["value"] = id
+                            self.model.temp_play_data[TEAM_ID_KEY]!["show"] = id
+                            //print(self.id)
+                            //if self.id > 0 {
+                            SCLAlertView().showSuccess("成功", subTitle: "修改臨打成功")
+                        } else {
+                            SCLAlertView().showWarning("錯誤", subTitle: TeamService.instance.msg)
+                        }
+                    } else {
+                        SCLAlertView().showWarning("錯誤", subTitle: "修改臨打失敗，伺服器無法修改成功，請稍後再試")
+                    }
                 }
             }
         }
     }
     func setTextField(iden: String, value: String) {
-        for (key, _) in model.temp_play_data {
-            if key == iden {
-                let item: [String: Any] = model.temp_play_data[key]!
-                let oldValue: Any = item["value"] as Any
-                let vtype: String = item["vtype"] as! String
-                if vtype == "String" {
-                    model.temp_play_data[key]!["value"] = value
-                    if oldValue as! String != value {
-                        model.temp_play_data[key]!["change"] = true
+        if value.count > 0 {
+            for (key, _) in model.temp_play_data {
+                if key == iden {
+                    let item: [String: Any] = model.temp_play_data[key]!
+                    let oldValue: Any = item["value"] as Any
+                    let vtype: String = item["vtype"] as! String
+                    if vtype == "String" {
+                        model.temp_play_data[key]!["value"] = value
+                        if oldValue as! String != value {
+                            model.temp_play_data[key]!["change"] = true
+                        }
+                    } else if vtype == "Int" {
+                        let value1: Int = Int(value)!
+                        model.temp_play_data[key]!["value"] = value1
+                        if oldValue as! Int != value1 {
+                            model.temp_play_data[key]!["change"] = true
+                        }
+                    } else if vtype == "Bool" {
+                        let value1: Bool = Bool(value)!
+                        model.temp_play_data[key]!["value"] = value1
+                        if oldValue as! Bool != value1 {
+                            model.temp_play_data[key]!["change"] = true
+                        }
                     }
-                } else if vtype == "Int" {
-                    let value1: Int = Int(value)!
-                    model.temp_play_data[key]!["value"] = value1
-                    if oldValue as! Int != value1 {
-                        model.temp_play_data[key]!["change"] = true
-                    }
-                } else if vtype == "Bool" {
-                    let value1: Bool = Bool(value)!
-                    model.temp_play_data[key]!["value"] = value1
-                    if oldValue as! Bool != value1 {
-                        model.temp_play_data[key]!["change"] = true
-                    }
+                    model.temp_play_data[key]!["show"] = value
                 }
-                model.temp_play_data[key]!["show"] = value
             }
         }
     }

@@ -52,7 +52,9 @@ class Facebook {
             case .failed(let error):
                 print(error)
             case .cancelled:
-                print("User canceled login.")
+                //print("User canceled login.")
+                var i = 6
+                i = i+1
             case .success(grantedPermissions: _, declinedPermissions: _, token: _):
                 //print("login in!")
                 //print(accessToken)
@@ -75,8 +77,9 @@ class Facebook {
                             let picture = responseDictionary["picture"] as! NSDictionary
                             let picture_data = picture["data"] as! NSDictionary
                             self.avatar = picture_data["url"] as! String
-                            print(self.avatar)
-                            //print(email)
+                            //print(self.avatar)
+                            //print(self.uid)
+                            //print(self.email)
                             completion(true)
                         }
                     case .failed(let error):
