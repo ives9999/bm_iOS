@@ -24,11 +24,15 @@ class TeamVC: ListVC {
         Global.instance.menuPressedAction(menuBtn, self)
     }
     
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        let vc: TeamManagerVC = segue.destination as! TeamManagerVC
+//    }
+    
     @IBAction func manager(_ sender: Any) {
         if !Member.instance.isLoggedIn {
             SCLAlertView().showError("警告", subTitle: "請先登入為會員")
         } else {
-            performSegue(withIdentifier: "segue", sender: nil)
+            performSegue(withIdentifier: TO_TEAM_MANAGER, sender: nil)
         }
     }
 }

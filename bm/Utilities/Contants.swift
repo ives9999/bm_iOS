@@ -76,6 +76,8 @@ let TO_SELECT_DEGREE: String = "toSelectDegree"
 let TO_TEMP_PLAY_SHOW: String = "toTempPlayShow"
 let TO_PASSWORD: String = "toPassword"
 let TO_COURSE: String = "toCourse"
+let TO_TEAM_MANAGER: String = "toTeamManager"
+let TO_TEAM_MANAGER_FUNCTION: String = "toTeamManagerFunction"
 
 // color
 let MY_GREEN = "#a6d903"

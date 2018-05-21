@@ -84,11 +84,11 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
+        //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let row: [String: Any] = rows![indexPath.section][indexPath.row]
         if row["segue"] != nil {
             let segue = row["segue"] as! String
-            print("segue: \(segue)")
+            //print("segue: \(segue)")
             if segue == TO_PROFILE {
                 performSegue(withIdentifier: segue, sender: row["token"])
             } else if segue == TO_PASSWORD {
