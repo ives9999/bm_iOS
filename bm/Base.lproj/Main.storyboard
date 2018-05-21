@@ -1424,31 +1424,35 @@
                                             <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="n3c-0i-59w"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEn-SQ-gja">
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3aq-jw-zQW">
                                         <rect key="frame" x="256" y="15" width="107" height="35"/>
-                                        <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="107" id="lo8-AH-8pg"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
-                                        <state key="normal" title="我要臨打">
-                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="abK-Gf-6De"/>
-                                            <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="K58-hr-qhQ"/>
-                                        </connections>
-                                    </button>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEn-SQ-gja">
+                                                <rect key="frame" x="0.0" y="0.0" width="107" height="35"/>
+                                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="107" id="lo8-AH-8pg"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
+                                                <state key="normal" title="我要臨打">
+                                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="abK-Gf-6De"/>
+                                                    <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="K58-hr-qhQ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="BAw-aE-4fj" firstAttribute="centerY" secondItem="kjd-vi-xhQ" secondAttribute="centerY" id="1Wq-XQ-FcL"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="JDx-MR-CiF"/>
                                     <constraint firstAttribute="height" constant="64" id="LhH-eI-1Gp"/>
-                                    <constraint firstAttribute="trailing" secondItem="VEn-SQ-gja" secondAttribute="trailing" constant="12" id="Qqa-vy-4wH"/>
                                     <constraint firstItem="31T-Ck-L6a" firstAttribute="centerX" secondItem="kjd-vi-xhQ" secondAttribute="centerX" id="ays-dd-5Bo"/>
                                     <constraint firstItem="31T-Ck-L6a" firstAttribute="centerY" secondItem="kjd-vi-xhQ" secondAttribute="centerY" id="bDS-cT-HMB"/>
-                                    <constraint firstItem="VEn-SQ-gja" firstAttribute="centerY" secondItem="kjd-vi-xhQ" secondAttribute="centerY" id="lC4-05-k6N"/>
                                     <constraint firstItem="BAw-aE-4fj" firstAttribute="leading" secondItem="kjd-vi-xhQ" secondAttribute="leading" constant="12" id="rqY-Kq-qLP"/>
                                 </constraints>
                             </view>
@@ -1496,14 +1500,32 @@
                                         </constraints>
                                         <state key="normal" image="menu"/>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayd-RJ-lxK">
+                                        <rect key="frame" x="260" y="15" width="107" height="35"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="107" id="1h0-Qa-F5b"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
+                                        <state key="normal" title="管理">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="0Kx-Oh-VIk"/>
+                                            <action selector="manager:" destination="hk6-fe-bLP" eventType="touchUpInside" id="ngm-MV-LxV"/>
+                                            <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="3yM-SW-tmN"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="E9V-cS-tg9" firstAttribute="centerY" secondItem="QGB-uY-eI7" secondAttribute="centerY" id="Ft0-Zx-Eom"/>
+                                    <constraint firstAttribute="trailing" secondItem="ayd-RJ-lxK" secondAttribute="trailing" constant="8" id="I6F-E8-F1G"/>
                                     <constraint firstItem="QGB-uY-eI7" firstAttribute="centerY" secondItem="h8g-qX-Kzm" secondAttribute="centerY" id="dCe-7J-F5c"/>
                                     <constraint firstItem="QGB-uY-eI7" firstAttribute="centerX" secondItem="h8g-qX-Kzm" secondAttribute="centerX" id="e1j-c4-8Jx"/>
                                     <constraint firstItem="E9V-cS-tg9" firstAttribute="leading" secondItem="h8g-qX-Kzm" secondAttribute="leading" constant="12" id="h9V-hG-jG6"/>
                                     <constraint firstAttribute="height" constant="64" id="oYA-ey-ZO1"/>
+                                    <constraint firstItem="ayd-RJ-lxK" firstAttribute="centerY" secondItem="h8g-qX-Kzm" secondAttribute="centerY" id="sV3-je-ZWU"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="UkJ-5o-MVz">
@@ -1525,6 +1547,7 @@
                     <tabBarItem key="tabBarItem" title="球隊" image="team" id="iO8-yt-rXK"/>
                     <navigationItem key="navigationItem" title="球隊" id="owA-9M-Mfg"/>
                     <connections>
+                        <outlet property="managerBtn" destination="ayd-RJ-lxK" id="8ga-4O-AxJ"/>
                         <outlet property="menuBtn" destination="E9V-cS-tg9" id="rfP-Ni-bjs"/>
                         <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="AlK-fI-QxB"/>
                     </connections>
@@ -1902,6 +1925,6 @@
         <segue reference="OU7-h8-11b"/>
         <segue reference="f5d-2G-qtf"/>
         <segue reference="9hz-2Z-7jX"/>
-        <segue reference="a7V-eU-Yjs"/>
+        <segue reference="AlK-fI-QxB"/>
     </inferredMetricsTieBreakers>
 </document>
