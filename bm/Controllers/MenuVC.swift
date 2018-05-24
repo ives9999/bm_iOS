@@ -25,17 +25,16 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     
     var type: String = "refresh_team"
     var myTeamLists: [List] = [List]()
-    let _sections: [String] = ["帳戶", "登錄"]
+    let _sections: [String] = ["帳戶"]
     var _rows: [[Dictionary<String, Any>]] = [
         [
             ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
             ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
             //["text": "手機認證", "icon": "mobile_validate"],
-        ],
-        []
+        ]
     ]
-    let _rows10: Dictionary<String, Any> = ["text": "球隊登錄(往右滑可以編輯)", "icon": "team"]
-    let _rows11: Dictionary<String, Any> = ["text": "新增球隊", "segue": TO_TEAM_SUBMIT]
+//    let _rows10: Dictionary<String, Any> = ["text": "球隊登錄(往右滑可以編輯)", "icon": "team"]
+//    let _rows11: Dictionary<String, Any> = ["text": "新增球隊", "segue": TO_TEAM_SUBMIT]
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -50,18 +49,18 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
         
         NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.teamDidChange(_:)), name: NOTIF_TEAM_UPDATE, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.teamDidChange(_:)), name: NOTIF_TEAM_UPDATE, object: nil)
     }
     
     override func refresh() {
-        refreshTeam()
+        //refreshTeam()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        if type == "refresh_team" {
-            refreshTeam()
-        }
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        if type == "refresh_team" {
+//            refreshTeam()
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 45
@@ -121,6 +120,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        /*
         if indexPath.section == 1 && indexPath.row > 1 {
             guard orientation == .left else { return nil}
             
@@ -156,6 +156,8 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         } else {
             return nil
         }
+ */
+        return nil
     }
     
     func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
@@ -175,9 +177,9 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         //print("notify")
         _loginout()
     }
-    @objc func teamDidChange(_ notif: Notification) {
-        refreshTeam()
-    }
+//    @objc func teamDidChange(_ notif: Notification) {
+//        refreshTeam()
+//    }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
         if Member.instance.isLoggedIn { // logout
@@ -225,49 +227,49 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         forgetPasswordIcon.isHidden = false
         tableView.isHidden = true
     }
-    private func _deleteTeam(token: String) {
-        Global.instance.addSpinner(superView: self.view)
-        DataService.instance.delete(token: token, type: "team") { (success) in
-            if success {
-                Global.instance.removeSpinner(superView: self.view)
-                if (!DataService.instance.success) {
-                    SCLAlertView().showError("錯誤", subTitle: "無法刪除球隊，請稍後再試")
-                }
-                NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
-            } else {
-                SCLAlertView().showError("錯誤", subTitle: "無法刪除球隊，請稍後再試")
-            }
-        }
-    }
-    
-    private func refreshTeam() {
-        //print("aaa")
-        if Member.instance.isLoggedIn {
-            Global.instance.addSpinner(superView: self.view)
-            let filter: [[Any]] = [
-                ["channel", "=", CHANNEL],
-                ["manager_id", "=", Member.instance.id]
-            ]
-            DataService.instance.getList(type: "team", titleField: "name", page: 1, perPage: 100, filter: filter) { (success) in
-                if success {
-                    self.myTeamLists = DataService.instance.lists
-                    //print(self.myTeamLists)
-                    self._rows[1] = [Dictionary<String, Any>]()
-                    self._rows[1].append(self._rows10)
-                    self._rows[1].append(self._rows11)
-                    for team in self.myTeamLists {
-                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_TEMP_PLAY,"detail":"臨打"]
-                        self._rows[1].append(row)
-                    }
-                    //print(self._rows)
-                    self.setData(sections: self._sections, rows: self._rows)// set to rows
-                    self.tableView.reloadData()
-                    Global.instance.removeSpinner(superView: self.view)
-                    self.refreshControl.endRefreshing()
-                }
-                self.type = ""
-                
-            }
-        }
-    }
+//    private func _deleteTeam(token: String) {
+//        Global.instance.addSpinner(superView: self.view)
+//        DataService.instance.delete(token: token, type: "team") { (success) in
+//            if success {
+//                Global.instance.removeSpinner(superView: self.view)
+//                if (!DataService.instance.success) {
+//                    SCLAlertView().showError("錯誤", subTitle: "無法刪除球隊，請稍後再試")
+//                }
+//                NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+//            } else {
+//                SCLAlertView().showError("錯誤", subTitle: "無法刪除球隊，請稍後再試")
+//            }
+//        }
+//    }
+//
+//    private func refreshTeam() {
+//        //print("aaa")
+//        if Member.instance.isLoggedIn {
+//            Global.instance.addSpinner(superView: self.view)
+//            let filter: [[Any]] = [
+//                ["channel", "=", CHANNEL],
+//                ["manager_id", "=", Member.instance.id]
+//            ]
+//            DataService.instance.getList(type: "team", titleField: "name", page: 1, perPage: 100, filter: filter) { (success) in
+//                if success {
+//                    self.myTeamLists = DataService.instance.lists
+//                    //print(self.myTeamLists)
+//                    self._rows[1] = [Dictionary<String, Any>]()
+//                    self._rows[1].append(self._rows10)
+//                    self._rows[1].append(self._rows11)
+//                    for team in self.myTeamLists {
+//                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_TEMP_PLAY,"detail":"臨打"]
+//                        self._rows[1].append(row)
+//                    }
+//                    //print(self._rows)
+//                    self.setData(sections: self._sections, rows: self._rows)// set to rows
+//                    self.tableView.reloadData()
+//                    Global.instance.removeSpinner(superView: self.view)
+//                    self.refreshControl.endRefreshing()
+//                }
+//                self.type = ""
+//
+//            }
+//        }
+//    }
 }

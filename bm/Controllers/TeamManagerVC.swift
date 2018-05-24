@@ -21,6 +21,10 @@ class TeamManagerVC: MyTableVC {
 
         addTeamBtn.layer.cornerRadius = 12
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
+        //refresh()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         refresh()
     }
     
@@ -54,10 +58,12 @@ class TeamManagerVC: MyTableVC {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc: TeamManagerFunctionVC = segue.destination as! TeamManagerFunctionVC
-        let row: [String: String] = sender as! [String: String]
-        vc.name = row["name"]!
-        vc.token = row["token"]!
+        if segue.identifier == TO_TEAM_MANAGER_FUNCTION {
+            let vc: TeamManagerFunctionVC = segue.destination as! TeamManagerFunctionVC
+            let row: [String: String] = sender as! [String: String]
+            vc.name = row["name"]!
+            vc.token = row["token"]!
+        }
     }
     
     private func refreshTeam() {

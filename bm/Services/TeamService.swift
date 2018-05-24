@@ -76,9 +76,11 @@ class TeamService {
                         if self.success {
                             self.id = json["id"].intValue
                         } else {
-                            let errors: [String] = json["msg"].arrayObject as! [String]
-                            for i in 0 ..< errors.count {
-                                self.msg += errors[i]
+                            if json["error"].exists() {
+                                let errors: [String] = json["error"].arrayObject as! [String]
+                                for i in 0 ..< errors.count {
+                                    self.msg += errors[i]
+                                }
                             }
                         }
                     }

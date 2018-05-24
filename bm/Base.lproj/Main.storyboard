@@ -813,7 +813,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfQ-iA-1gN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="879" y="-2287"/>
+            <point key="canvasLocation" x="761" y="-2297"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="Oto-La-o8t">
@@ -1474,7 +1474,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZb-89-3QI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1189.5999999999999" y="-1000.7496251874064"/>
+            <point key="canvasLocation" x="1212" y="-849"/>
         </scene>
         <!--球隊-->
         <scene sceneID="Biv-Rk-NsK">
@@ -1718,11 +1718,13 @@
                     <connections>
                         <outlet property="tableView" destination="oon-Mz-8yN" id="zve-Ln-qS0"/>
                         <outlet property="titleLbl" destination="mT7-32-00D" id="y5q-5F-hyI"/>
+                        <segue destination="gO6-sX-L0T" kind="show" identifier="toTeamTempPlay" id="DaT-w5-CTD"/>
+                        <segue destination="UtM-v1-pfK" kind="show" identifier="toTeamSubmit" id="q87-Mu-6YG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ba-XJ-WEw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2055" y="-170"/>
+            <point key="canvasLocation" x="1996" y="-170"/>
         </scene>
         <!--CourseCV-->
         <scene sceneID="Eib-Tq-Zds">
@@ -2090,10 +2092,11 @@
         <image name="tempPlay" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="OU7-h8-11b"/>
+        <segue reference="2ff-JT-Wdj"/>
         <segue reference="f5d-2G-qtf"/>
-        <segue reference="9hz-2Z-7jX"/>
-        <segue reference="Kca-5B-OTe"/>
+        <segue reference="Ym7-zQ-SHb"/>
+        <segue reference="DaT-w5-CTD"/>
+        <segue reference="q87-Mu-6YG"/>
         <segue reference="AlK-fI-QxB"/>
     </inferredMetricsTieBreakers>
 </document>

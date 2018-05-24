@@ -15,7 +15,8 @@ class MoreVC: MyTableVC {
     
     var _rows: [[Dictionary<String, Any>]] = [
         [
-            ["text": "教學", "icon": "coach", "segue": TO_COURSE]
+            ["text": "教學", "icon": "coach", "segue": TO_COURSE],
+            ["text": "版本", "icon": "coach", "segue": ""]
         ]
     ]
     
@@ -42,13 +43,26 @@ class MoreVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        let row: [String: Any] = rows![indexPath.section][indexPath.row]
-        //print(row)
-        if row["segue"] != nil {
-            let segue = row["segue"] as! String
-            //print("segue: \(segue)")
-            performSegue(withIdentifier: segue, sender: row["sender"])
+        if (indexPath.row == 1) {
+            //First get the nsObject by defining as an optional anyObject
+            let nsObject: Any? = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
             
+            //Then just cast the object as a String, but be careful, you may want to double check for nil
+            let version = nsObject as! String
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: true
+            )
+            let alert = SCLAlertView(appearance: appearance)
+            alert.showInfo(version)
+        } else {
+            let row: [String: Any] = rows![indexPath.section][indexPath.row]
+            //print(row)
+            if row["segue"] != nil {
+                let segue = row["segue"] as! String
+                //print("segue: \(segue)")
+                performSegue(withIdentifier: segue, sender: row["sender"])
+                
+            }
         }
     }
     @IBAction func prevBtnPressed(_ sender: Any) {
