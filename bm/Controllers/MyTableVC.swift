@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyTableVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     var sections: [String]?
     var rows:[[Dictionary<String, Any>]]?

@@ -29,11 +29,15 @@ class MemberService {
                     return
                 }
                 //print(data)
+                self.msg = ""
                 let json: JSON = JSON(data)
                 self.success = json["success"].boolValue
                 //print(self.success)
                 if self.success {
                     self.jsonToMember(json: json)
+                    if json["msg"].exists() {
+                        self.msg = json["msg"].stringValue
+                    }
                     NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
                 } else {
                     Member.instance.isLoggedIn = false
@@ -141,6 +145,11 @@ class MemberService {
                 completion(false)
             }
         }
+    }
+    
+    func validate(type: String, code: String, completion: @escaping CompletionHandler) {
+        let token: String = Member.instance.token
+        let body: [String: Any] = ["source": "app", code: code, TOKEN_KEY: token]
     }
     
     func jsonToMember(json: JSON) {

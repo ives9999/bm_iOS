@@ -57,7 +57,17 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                 if MemberService.instance.success {
                     //print("login success")
                     //print(Global.instance.member.nickname)
-                    self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
+                    if MemberService.instance.msg.count > 0 {
+                        let appearance = SCLAlertView.SCLAppearance(
+                            showCloseButton: false
+                        )
+                        let alert = SCLAlertView(appearance: appearance)
+                        alert.addButton("確定", action: {
+                            self.performSegue(withIdentifier: UNWIND, sender: nil)
+                        })
+                        alert.showWarning("警告", subTitle: MemberService.instance.msg)
+                    }
+                    self.performSegue(withIdentifier: UNWIND, sender: nil)
                 } else {
                     //print("login failed by error email or password")
                     SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
@@ -87,8 +97,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
             let vc: PasswordVC = segue.destination as! PasswordVC
             vc.type = sender as! String
         } else if segue.identifier == UNWIND {
-            let vc: MenuVC = segue.destination as! MenuVC
-            vc.type = "refresh_team"
+            //let vc: MenuVC = segue.destination as! MenuVC
         }
     }
     

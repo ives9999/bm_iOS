@@ -17,6 +17,10 @@ class BaseViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    func prev() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     func _loginFB() {
         //print(Facebook.instance.uid)
         //print(Facebook.instance.email)
@@ -52,21 +56,5 @@ class BaseViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

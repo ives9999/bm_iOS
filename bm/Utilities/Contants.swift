@@ -25,6 +25,8 @@ let URL_LOGIN = URL_HOME + "login"
 let URL_FB_LOGIN = URL_HOME + "member/fb"
 let URL_REGISTER = URL_HOME + "register"
 let URL_MEMBER_UPDATE = URL_HOME + "member/update"
+let URL_EMAIL_VALIDATE = URL_HOME + "member/email_validate"
+let URL_MOBILE_VALIDATE = URL_HOME + "member/mobile _validate"
 let URL_CITYS = URL_HOME + "citys"
 let URL_ARENA_BY_CITY_ID = URL_HOME + "arena_by_city"
 let URL_TEAM_UPDATE = URL_HOME + "team/update"
@@ -65,6 +67,7 @@ let UNWIND: String = "unwindToMenu"
 let MENU_TABLE: String = "meunTable"
 let TO_PROFILE: String = "toProfile"
 let TO_EDIT_PROFILE: String = "toEditProfile"
+let TO_VALIDATE: String = "toValidate"
 let TO_TEAM_SUBMIT: String = "toTeamSubmit"
 let TO_TEAM_TEMP_PLAY: String = "toTeamTempPlay"
 let TO_CITY: String = "toCity"
@@ -110,6 +113,8 @@ let VALIDATE_KEY = "validate"
 let MEMBER_FIELD_STRING = [TOKEN_KEY,EMAIL_KEY,NICKNAME_KEY,NAME_KEY,UID_KEY,CHANNEL_KEY,DOB_KEY,SEX_KEY,TEL_KEY,MOBILE_KEY,PID_KEY,AVATAR_KEY,MEMBER_ROLE_KEY,SOCIAL_KEY]
 let MEMBER_FIELD_INT = [ID_KEY,VALIDATE_KEY,MEMBER_TYPE_KEY]
 let MEMBER_FIELD_BOOL = [ISLOGGEDIN_KEY]
+let EMAIL_VALIDATE = 1
+let MOBILE_VALIDATE = 2
 
 // Team key
 let TEAM_ID_KEY = "id"

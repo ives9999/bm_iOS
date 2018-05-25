@@ -23,20 +23,31 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     @IBOutlet weak var nicknameLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var type: String = "refresh_team"
     var myTeamLists: [List] = [List]()
     let _sections: [String] = ["帳戶"]
     var _rows: [[Dictionary<String, Any>]] = [
         [
             ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
             ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
-            //["text": "手機認證", "icon": "mobile_validate"],
         ]
     ]
 //    let _rows10: Dictionary<String, Any> = ["text": "球隊登錄(往右滑可以編輯)", "icon": "team"]
 //    let _rows11: Dictionary<String, Any> = ["text": "新增球隊", "segue": TO_TEAM_SUBMIT]
     
     override func viewDidLoad() {
+        if Member.instance.isLoggedIn {// detected validate status
+            let validate: Int = Member.instance.getData(key: VALIDATE_KEY) as! Int
+            //print(validate)
+            if validate & EMAIL_VALIDATE <= 0 {
+                let new: Dictionary<String, Any> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
+                _rows[0].append(new)
+            }
+            if validate & MOBILE_VALIDATE <= 0 {
+                let new: Dictionary<String, Any> = ["text": "手機認證", "icon": "mobile_validate", "segue": TO_VALIDATE, "type": "mobile"]
+                _rows[0].append(new)
+            }
+        }
+        //print(_rows)
         myTablView = tableView
         setData(sections: _sections, rows: _rows)
         super.viewDidLoad()
@@ -85,6 +96,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let row: [String: Any] = rows![indexPath.section][indexPath.row]
+        //print(row)
         if row["segue"] != nil {
             let segue = row["segue"] as! String
             //print("segue: \(segue)")
@@ -92,29 +104,24 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                 performSegue(withIdentifier: segue, sender: row["token"])
             } else if segue == TO_PASSWORD {
                 performSegue(withIdentifier: segue, sender: "change_password")
-            } else if segue == TO_TEAM_SUBMIT {// just for add team
-                if Member.instance.validate < 1 {
-                    SCLAlertView().showError("錯誤", subTitle: "未通過EMail認證，無法新增球隊，認證完後，請先登出再登入")
-                } else {
-                    performSegue(withIdentifier: segue, sender: nil)
+            } else if segue == TO_VALIDATE {
+                var sender: String = ""
+                if row["type"] != nil {
+                    sender = row["type"] as! String
                 }
-            } else {
-                performSegue(withIdentifier: segue, sender: row["token"])
+                performSegue(withIdentifier: segue, sender: sender)
             }
         }
     }
  
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if sender != nil {
-            if segue.identifier == TO_TEAM_SUBMIT {
-                let vc: TeamSubmitVC = segue.destination as! TeamSubmitVC
-                vc.token = sender as! String
-            } else if segue.identifier == TO_PASSWORD {
+            if segue.identifier == TO_PASSWORD {
                 let vc: PasswordVC = segue.destination as! PasswordVC
                 vc.type = (sender as! String)
-            } else if segue.identifier == TO_TEAM_TEMP_PLAY {
-                let vc: TeamTempPlayEditVC = segue.destination as! TeamTempPlayEditVC
-                vc.token = (sender as! String)
+            } else if segue.identifier == TO_VALIDATE {
+                let vc: ValidateVC = segue.destination as! ValidateVC
+                vc.type = sender as! String
             }
         }
     }
