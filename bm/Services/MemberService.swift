@@ -148,10 +148,108 @@ class MemberService {
     }
     
     func validate(type: String, code: String, completion: @escaping CompletionHandler) {
+        var url: String = ""
+        if (type == "email") {
+            url = URL_EMAIL_VALIDATE
+        } else if (type == "mobile") {
+            url = URL_MOBILE_VALIDATE
+        }
         let token: String = Member.instance.token
-        let body: [String: Any] = ["source": "app", code: code, TOKEN_KEY: token]
+        let body: [String: Any] = ["source": "app", "code": code, TOKEN_KEY: token]
+        //print(url)
+        //print(body)
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            //print(response)
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                self.success = json["success"].boolValue
+                if self.success {
+                    completion(true)
+                } else {
+                    if json["msg"] != JSON.null {
+                        self.msg = json["msg"].stringValue
+                    }
+                    //print(self.msg)
+                    completion(false)
+                }
+            } else {
+                self.success = false
+                completion(false)
+            }
+        }
     }
     
+    func sendVaildateCode(type: String, value: String, token: String, completion: @escaping CompletionHandler) {
+        var url: String = ""
+        if (type == "email") {
+            url = URL_SEND_EMAIL_VALIDATE
+        } else if (type == "mobile") {
+            url = URL_SEND_MOBILE_VALIDATE
+        }
+        let body: [String: String] = ["source": "app","value": value,TOKEN_KEY: token]
+        //print(url)
+        //print(body)
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            //print(response)
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                self.success = json["success"].boolValue
+                if self.success {
+                    completion(true)
+                } else {
+                    if json["msg"] != JSON.null {
+                        self.msg = json["msg"].stringValue
+                    }
+                    //print(self.msg)
+                    completion(false)
+                }
+            } else {
+                self.success = false
+                completion(false)
+            }
+        }
+    }
+    
+    func getOne(token: String, completion: @escaping CompletionHandler) {
+        let body: [String: String] = ["source": "app",TOKEN_KEY: token]
+        //print(url)
+        //print(body)
+        Alamofire.request(URL_MEMBER_GETONE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            //print(response)
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                self.success = json["success"].boolValue
+                if self.success {
+                    self.jsonToMember(json: json)
+                    completion(true)
+                } else {
+                    if json["msg"] != JSON.null {
+                        self.msg = json["msg"].stringValue
+                    }
+                    //print(self.msg)
+                    completion(false)
+                }
+            } else {
+                self.success = false
+                completion(false)
+            }
+        }
+    }
     func jsonToMember(json: JSON) {
         var data:[String: Any] = [String: Any]()
         for key in MEMBER_FIELD_STRING {

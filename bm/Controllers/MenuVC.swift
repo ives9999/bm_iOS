@@ -25,16 +25,70 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     
     var myTeamLists: [List] = [List]()
     let _sections: [String] = ["帳戶"]
-    var _rows: [[Dictionary<String, Any>]] = [
+    let fixedRows: [[Dictionary<String, Any>]] = [
         [
             ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
             ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
         ]
     ]
+    var _rows: [[Dictionary<String, Any>]] = [[Dictionary<String, Any>]]()
 //    let _rows10: Dictionary<String, Any> = ["text": "球隊登錄(往右滑可以編輯)", "icon": "team"]
 //    let _rows11: Dictionary<String, Any> = ["text": "新增球隊", "segue": TO_TEAM_SUBMIT]
     
     override func viewDidLoad() {
+        myTablView = tableView
+        super.viewDidLoad()
+        
+        var layoutMargins: UIEdgeInsets = tableView.layoutMargins
+        layoutMargins.right = 80
+        tableView.layoutMargins = layoutMargins
+        tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
+
+        self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.teamDidChange(_:)), name: NOTIF_TEAM_UPDATE, object: nil)
+//        refreshControl = UIRefreshControl()
+//        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
+//        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+//        view.addSubview(refreshControl)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        refresh()
+    }
+    
+    @objc func memberDidChange(_ notif: Notification) {
+        //print("notify")
+        refresh()
+    }
+    
+    override func refresh() {
+        if Member.instance.isLoggedIn {
+            refreshMember()
+            //refreshTeam()
+        } else {
+            _logoutBlock()
+        }
+    }
+    
+    func refreshMember() {
+        Global.instance.addSpinner(superView: self.view)
+        MemberService.instance.getOne(token: Member.instance.token) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.setValidateRow()
+                self.tableView.reloadData()
+                self._loginout()
+            } else {
+                SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
+            }
+        }
+    }
+    
+    func setValidateRow() {
+        _rows.removeAll()
+        _rows = fixedRows
         if Member.instance.isLoggedIn {// detected validate status
             let validate: Int = Member.instance.getData(key: VALIDATE_KEY) as! Int
             //print(validate)
@@ -48,23 +102,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             }
         }
         //print(_rows)
-        myTablView = tableView
         setData(sections: _sections, rows: _rows)
-        super.viewDidLoad()
-        
-        var layoutMargins: UIEdgeInsets = tableView.layoutMargins
-        layoutMargins.right = 80
-        tableView.layoutMargins = layoutMargins
-        tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
-
-        self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.teamDidChange(_:)), name: NOTIF_TEAM_UPDATE, object: nil)
-    }
-    
-    override func refresh() {
-        //refreshTeam()
     }
     
 //    override func viewWillAppear(_ animated: Bool) {
@@ -176,14 +214,6 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         return options
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        _loginout()
-    }
-    
-    @objc func memberDidChange(_ notif: Notification) {
-        //print("notify")
-        _loginout()
-    }
 //    @objc func teamDidChange(_ notif: Notification) {
 //        refreshTeam()
 //    }
@@ -191,6 +221,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     @IBAction func loginBtnPressed(_ sender: Any) {
         if Member.instance.isLoggedIn { // logout
             MemberService.instance.logout()
+            refresh()
         } else {
             performSegue(withIdentifier: TO_LOGIN, sender: nil)
         }

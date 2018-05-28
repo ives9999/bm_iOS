@@ -108,7 +108,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             } else if type == "Int" {
                 let tmp1 = tmp as! Int
                 if key == VALIDATE_KEY {
-                    data = Member.instance.validateShow(rawValue: tmp1)
+                    let res: [String] = Member.instance.validateShow(rawValue: tmp1)
+                    data = res.joined(separator: ",")
                 } else if key == MEMBER_TYPE_KEY {
                     data = Member.instance.typeShow(rawValue: tmp1)
                 } else {

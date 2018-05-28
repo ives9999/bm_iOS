@@ -16,7 +16,7 @@ class MoreVC: MyTableVC {
     var _rows: [[Dictionary<String, Any>]] = [
         [
             ["text": "教學", "icon": "coach", "segue": TO_COURSE],
-            ["text": "版本", "icon": "coach", "segue": ""]
+            ["text": "版本", "icon": "version", "segue": ""]
         ]
     ]
     

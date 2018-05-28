@@ -314,16 +314,19 @@ class Member {
     func sexShow(rawValue: String) -> String {
         return SEX.enumFromString(string: rawValue).rawValue
     }
-    func validateShow(rawValue: Int) -> String {
-        var res: String = "未通過任何認證"
+    func validateShow(rawValue: Int) -> [String] {
+        var res: [String] = [String]()
         if rawValue & 1 > 0 {
-            res = "已通過email認證"
+            res.append("email認證")
         }
         if rawValue & 2 > 0 {
-            res = "已通過手機認證"
+            res.append("手機認證")
         }
         if rawValue & 4 > 0 {
-            res = "已通過身分證認證"
+            res.append("身分證認證")
+        }
+        if res.count == 0 {
+            res.append("未通過任何認證")
         }
         return res
     }
