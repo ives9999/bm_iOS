@@ -147,14 +147,13 @@ class MemberService {
         }
     }
     
-    func validate(type: String, code: String, completion: @escaping CompletionHandler) {
+    func validate(type: String, code: String, token: String, completion: @escaping CompletionHandler) {
         var url: String = ""
         if (type == "email") {
             url = URL_EMAIL_VALIDATE
         } else if (type == "mobile") {
             url = URL_MOBILE_VALIDATE
         }
-        let token: String = Member.instance.token
         let body: [String: Any] = ["source": "app", "code": code, TOKEN_KEY: token]
         //print(url)
         //print(body)
@@ -186,9 +185,9 @@ class MemberService {
     
     func sendVaildateCode(type: String, value: String, token: String, completion: @escaping CompletionHandler) {
         var url: String = ""
-        if (type == "email") {
+        if type == "email" {
             url = URL_SEND_EMAIL_VALIDATE
-        } else if (type == "mobile") {
+        } else if type == "mobile" {
             url = URL_SEND_MOBILE_VALIDATE
         }
         let body: [String: String] = ["source": "app","value": value,TOKEN_KEY: token]

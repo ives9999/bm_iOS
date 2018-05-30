@@ -41,7 +41,7 @@ class ValidateVC: BaseViewController {
             SCLAlertView().showWarning("警告", subTitle: msg)
         } else {
             Global.instance.addSpinner(superView: self.view)
-            MemberService.instance.validate(type: type, code: code) { (success) in
+            MemberService.instance.validate(type: type, code: code, token: Member.instance.token) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if (success) {
                     let appearance = SCLAlertView.SCLAppearance(

@@ -1081,7 +1081,6 @@
                                 <connections>
                                     <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="C2e-s5-jAp"/>
                                     <action selector="resend:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="zcm-tI-W9S"/>
-                                    <action selector="submit:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="f4d-Ie-OAR"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySD-eX-vph" customClass="RoundedButton" customModule="bm" customModuleProvider="target">

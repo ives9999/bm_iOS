@@ -317,6 +317,8 @@ class TeamService {
     }
     func tempPlay_list(completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app"]
+        //print(body)
+        //print(URL_TEAM_TEMP_PLAY_LIST)
         
         Alamofire.request(URL_TEAM_TEMP_PLAY_LIST, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
