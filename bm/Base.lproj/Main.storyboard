@@ -1632,11 +1632,13 @@
                         <outlet property="headerView" destination="kjd-vi-xhQ" id="fHJ-54-5xu"/>
                         <outlet property="tempPlayBtn" destination="VEn-SQ-gja" id="c77-rM-TsO"/>
                         <outlet property="titleLbl" destination="31T-Ck-L6a" id="tuQ-ty-CPS"/>
+                        <segue destination="XsO-Wn-cpI" kind="show" identifier="toValidate" id="xcZ-Ad-vEw"/>
+                        <segue destination="vfe-V8-Hfx" kind="show" identifier="toProfile" id="cK5-nM-2qW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZb-89-3QI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1212" y="-849"/>
+            <point key="canvasLocation" x="1212" y="-855"/>
         </scene>
         <!--球隊-->
         <scene sceneID="Biv-Rk-NsK">
@@ -2256,8 +2258,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="ous-Dp-pXL"/>
         <segue reference="ViB-98-skP"/>
+        <segue reference="xcZ-Ad-vEw"/>
         <segue reference="9hz-2Z-7jX"/>
         <segue reference="PtM-Ha-efS"/>
+        <segue reference="cK5-nM-2qW"/>
         <segue reference="tfa-sh-Qj7"/>
         <segue reference="AlK-fI-QxB"/>
     </inferredMetricsTieBreakers>

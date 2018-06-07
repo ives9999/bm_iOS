@@ -56,5 +56,31 @@ class BaseViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
         self.present(alert, animated: true)
     }
-
+    
+    func __warning(showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) -> SCLAlertView {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: showCloseButton
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        alert.addButton(buttonTitle, action: buttonAction)
+        return alert
+    }
+    func _warning(title: String, msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        let alert = __warning(showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
+        alert.showWarning(title, subTitle: msg)
+    }
+    func _warning(title: String, msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        let alert = __warning(showCloseButton: true, buttonTitle: buttonTitle, buttonAction: buttonAction)
+        alert.showWarning(title, subTitle: msg, closeButtonTitle: closeButtonTitle)
+    }
+    
+    func warning(msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        _warning(title: "警告", msg: msg, showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
+    }
+    func warning(msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        _warning(title: "警告", msg: msg, closeButtonTitle: closeButtonTitle, buttonTitle: buttonTitle, buttonAction: buttonAction)
+    }
+    func info(msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        _warning(title: "訊息", msg: msg, showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
+    }
 }

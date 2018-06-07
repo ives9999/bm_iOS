@@ -344,17 +344,37 @@ class TempPlayShowVC: MyTableVC {
             SCLAlertView().showWarning("警告", subTitle: "請先登入為會員")
             return
         }
+        if (Member.instance.validate & MOBILE_VALIDATE) == 0 {
+            warning(msg: "要使用臨打功能，須先通過手機認證", showCloseButton:true, buttonTitle: "手機認證", buttonAction: {
+                self.performSegue(withIdentifier: TO_VALIDATE, sender: "mobile")
+            })
+
+            return
+        }
+        if (Member.instance.name.count == 0) {
+            warning(msg: "要使用臨打功能，請先輸入真實姓名", showCloseButton: true, buttonTitle: "輸入姓名", buttonAction: {
+                self.performSegue(withIdentifier: TO_PROFILE, sender: nil)
+            })
+        }
+
+        warning(msg: "報名臨打後，將會公開您的姓名與手機號碼給球隊管理員，方便球隊管理員跟您連絡\n是否真的要參加此球隊的臨打？", closeButtonTitle: "取消報名", buttonTitle: "確定臨打") {
+                self._plusOne()
+        }
+    }
+    func _plusOne() {
         Global.instance.addSpinner(superView: self.view)
         TeamService.instance.plusOne(title: myTitle, near_date: nearDate, token: Member.instance.token) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
                 if TeamService.instance.success {
                     SCLAlertView().showSuccess("成功", subTitle: "報名臨打成功")
-                
+                    
                 } else {
                     SCLAlertView().showWarning("警告", subTitle: TeamService.instance.msg)
                 }
                 self.refresh()
+            } else {
+                SCLAlertView().showWarning("警告", subTitle: TeamService.instance.msg)
             }
         }
     }
@@ -374,6 +394,17 @@ class TempPlayShowVC: MyTableVC {
                     SCLAlertView().showWarning("警告", subTitle: TeamService.instance.msg)
                 }
                 self.refresh()
+            } else {
+                SCLAlertView().showWarning("警告", subTitle: TeamService.instance.msg)
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if sender != nil {
+            if segue.identifier == TO_VALIDATE {
+                let vc: ValidateVC = segue.destination as! ValidateVC
+                vc.type = sender as! String
             }
         }
     }

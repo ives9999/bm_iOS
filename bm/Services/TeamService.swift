@@ -433,6 +433,7 @@ class TeamService {
                     return
                 }
                 let json = JSON(data)
+                //print(json)
                 self.success = json["success"].boolValue
                 if !self.success {
                     self.msg = json["msg"].stringValue
