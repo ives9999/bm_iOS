@@ -54,6 +54,7 @@ class TempPlaySignupCell: SuperCell {
             let d: Date = df.date(from: str)!
             created_atLbl.text = d.toString(format: "yyyy-MM-dd HH:mm")
         }
+        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         setNeedsLayout()
     }
     

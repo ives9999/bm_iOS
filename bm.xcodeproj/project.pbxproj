@@ -67,6 +67,8 @@
 		B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */; };
 		B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */; };
 		B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222F1F91DE7300A8C402 /* Show_IN.swift */; };
+		B3FAA0A820CA5C48008F2294 /* MemberOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FAA0A720CA5C48008F2294 /* MemberOneVC.swift */; };
+		B3FAA0AA20CAC995008F2294 /* MemberOneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FAA0A920CAC995008F2294 /* MemberOneCell.swift */; };
 		F07CD1A1BB728D94904CA85F /* Pods_bm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5D58D06320800C79615904 /* Pods_bm.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		F509DE101A4597741A285B3C /* Pods_bmNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44013B063878E5AA0587495E /* Pods_bmNotificationServiceExtension.framework */; };
 		F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90423B81F83748C00DC8B1E /* TeamVC.swift */; };
@@ -208,6 +210,8 @@
 		B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreeSelectVC.swift; sourceTree = "<group>"; };
 		B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVC.swift; sourceTree = "<group>"; };
 		B3F2222F1F91DE7300A8C402 /* Show_IN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show_IN.swift; sourceTree = "<group>"; };
+		B3FAA0A720CA5C48008F2294 /* MemberOneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberOneVC.swift; sourceTree = "<group>"; };
+		B3FAA0A920CAC995008F2294 /* MemberOneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberOneCell.swift; sourceTree = "<group>"; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
 		F94E7D1C1F83636A00F550FD /* bm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94E7D1F1F83636A00F550FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -309,6 +313,7 @@
 				B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
 				F9A1CB7E1F95CD2500DDEC86 /* ListCell.swift */,
+				B3FAA0A920CAC995008F2294 /* MemberOneCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -495,6 +500,7 @@
 				B3A5A28320B2CB80001A846F /* TeamManagerVC.swift */,
 				B3A5A28520B32152001A846F /* TeamManagerFunctionVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
+				B3FAA0A720CA5C48008F2294 /* MemberOneVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -803,6 +809,7 @@
 				B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */,
 				B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */,
 				B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */,
+				B3FAA0AA20CAC995008F2294 /* MemberOneCell.swift in Sources */,
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,
 				B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
@@ -827,6 +834,7 @@
 				B30C95391FE765FB005F71EF /* Facebook.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* ListCell.swift in Sources */,
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
+				B3FAA0A820CA5C48008F2294 /* MemberOneVC.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,

@@ -16,6 +16,7 @@ class MemberService {
     
     var msg:String = ""
     var success: Bool = false
+    var one: JSON? = nil
     
     func login(email: String, password: String, playerID: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
@@ -221,8 +222,9 @@ class MemberService {
     
     func getOne(token: String, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["source": "app",TOKEN_KEY: token]
-        //print(url)
+        //print(URL_MEMBER_GETONE)
         //print(body)
+        one = nil
         Alamofire.request(URL_MEMBER_GETONE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             //print(response)
             if response.result.error == nil {
@@ -234,7 +236,10 @@ class MemberService {
                 //print(json)
                 self.success = json["success"].boolValue
                 if self.success {
-                    self.jsonToMember(json: json)
+                    self.one = json
+                    if token == Member.instance.token {
+                        self.jsonToMember(json: json)
+                    }
                     completion(true)
                 } else {
                     if json["msg"] != JSON.null {

@@ -70,6 +70,7 @@ let UNWIND: String = "unwindToMenu"
 let MENU_TABLE: String = "meunTable"
 let TO_PROFILE: String = "toProfile"
 let TO_EDIT_PROFILE: String = "toEditProfile"
+let TO_MEMBER_ONE: String = "toMemberOne"
 let TO_VALIDATE: String = "toValidate"
 let TO_TEAM_SUBMIT: String = "toTeamSubmit"
 let TO_TEAM_TEMP_PLAY: String = "toTeamTempPlay"
@@ -118,6 +119,19 @@ let MEMBER_FIELD_INT = [ID_KEY,VALIDATE_KEY,MEMBER_TYPE_KEY]
 let MEMBER_FIELD_BOOL = [ISLOGGEDIN_KEY]
 let EMAIL_VALIDATE = 1
 let MOBILE_VALIDATE = 2
+let MEMBER_ARRAY = [
+    NAME_KEY: ["text":"姓名","icon":"name"],
+    EMAIL_KEY: ["text":"email","icon":"email1"],
+    NICKNAME_KEY: ["text":"暱稱","icon":""],
+    DOB_KEY: ["text":"生日","icon":""],
+    SEX_KEY: ["text":"性別","icon":""],
+    TEL_KEY: ["text":"電話","icon":""],
+    MOBILE_KEY: ["text":"手機","icon":"mobile"],
+    PID_KEY: ["text":"身分證字號","icon":""],
+    MEMBER_TYPE_KEY: ["text":"會員類型","icon":""],
+    MEMBER_ROLE_KEY: ["text":"會員身份","icon":""],
+    VALIDATE_KEY: ["text":"驗證","icon":""]
+]
 
 // Team key
 let TEAM_ID_KEY = "id"

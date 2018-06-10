@@ -323,6 +323,16 @@ extension String {
         //Return Parsed Date
         return dateFromString
     }
+    func makeCll() {
+        let formatedNumber = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
+        let phoneUrl: String = "tel://\(formatedNumber)"
+        if let url: URL = URL(string: phoneUrl) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        
+    }
     var isNumber: Bool {
         return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }
@@ -362,7 +372,7 @@ extension UIView {
             let item: [String: UILabel] = items[1]
             var pattern: String = ""
             for (key, value) in item {
-                pattern = "H:[\(key)]-30-|"
+                pattern = "H:|[\(key)]-30-|"
                 let c2: NSLayoutConstraint = NSLayoutConstraint(item: value, attribute: .centerY, relatedBy: .equal, toItem: value.superview, attribute: .centerY, multiplier:
                     1, constant: 0)
                 constraints.append(c2)

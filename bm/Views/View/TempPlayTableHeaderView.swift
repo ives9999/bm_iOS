@@ -33,7 +33,7 @@ class TempPlayTableHeaderView: UIView {
     
     func setup() {
         label1 = SuperLabel(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
-        label2 = SuperLabel(frame: CGRect(x: 100, y: 0, width: 10, height: 10))
+        label2 = SuperLabel(frame: CGRect(x: 0, y: 0, width: 10, height: 10))
         //label1.adjustsFontSizeToFitWidth = true
         //label2.adjustsFontSizeToFitWidth = true
         //label1.textAlignment = left

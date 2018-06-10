@@ -290,11 +290,11 @@ class TempPlayShowVC: MyTableVC {
     }*/
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView: TempPlayTableHeaderView = TempPlayTableHeaderView()
-        
+
         return headerView
     }
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        
+
     }
     /*
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -313,6 +313,32 @@ class TempPlayShowVC: MyTableVC {
         cell.forRow(row: row)
         
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let rows: [[String: String]] = model.data["signups"]!["value"] as! [[String: String]]
+        let row: Dictionary<String, String> = rows[indexPath.row]
+        //print(row)
+        let id: Int = model.data[TEAM_ID_KEY]!["value"] as! Int
+        let sender:[String:Any] = ["token":row["token"]!,"title":myTitle,"near_date":nearDate,"id":id]
+        performSegue(withIdentifier: TO_MEMBER_ONE, sender: sender)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if sender != nil {
+            if segue.identifier == TO_VALIDATE {
+                let vc: ValidateVC = segue.destination as! ValidateVC
+                vc.type = sender as! String
+            } else if segue.identifier == TO_MEMBER_ONE {
+                let row:[String:Any] = sender as! [String:Any]
+                let vc: MemberOneVC = segue.destination as! MemberOneVC
+                vc.memberToken = row["token"]! as! String
+                vc.team_name = row["title"]! as! String
+                vc.near_date = row["near_date"]! as! String
+                vc.team_id = row["id"]! as! Int
+                vc.type = "temp play"
+            }
+        }
     }
     
     /*
@@ -396,15 +422,6 @@ class TempPlayShowVC: MyTableVC {
                 self.refresh()
             } else {
                 SCLAlertView().showWarning("警告", subTitle: TeamService.instance.msg)
-            }
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if sender != nil {
-            if segue.identifier == TO_VALIDATE {
-                let vc: ValidateVC = segue.destination as! ValidateVC
-                vc.type = sender as! String
             }
         }
     }

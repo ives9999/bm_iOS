@@ -13,8 +13,6 @@ class TeamManagerVC: MyTableVC {
     @IBOutlet weak var addTeamBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    var myTeamLists: [List] = [List]()
-    
     override func viewDidLoad() {
         myTablView = tableView 
         super.viewDidLoad()
@@ -29,11 +27,24 @@ class TeamManagerVC: MyTableVC {
     }
     
     override func refresh() {
-        refreshTeam()
+        getTeamManagerList()
+    }
+    func getTeamManagerList() {
+        if Member.instance.isLoggedIn {
+            _getTeamManagerList() { (success) in
+                if (success) {
+                    self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                } else {
+                    self.warning(self.msg)
+                    self.refreshControl.endRefreshing()
+                }
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myTeamLists.count
+        return teamManagerLists.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,7 +52,7 @@ class TeamManagerVC: MyTableVC {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
         //print(rows)
         
-        let row: List = myTeamLists[indexPath.row]
+        let row: List = teamManagerLists[indexPath.row]
         //print(row)
         cell.textLabel!.text = row.title
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
@@ -50,7 +61,7 @@ class TeamManagerVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row: List = myTeamLists[indexPath.row]
+        let row: List = teamManagerLists[indexPath.row]
         let name: String = row.title
         let token: String = row.token
         let sender:[String: String] = ["name": name, "token": token]
@@ -63,30 +74,6 @@ class TeamManagerVC: MyTableVC {
             let row: [String: String] = sender as! [String: String]
             vc.name = row["name"]!
             vc.token = row["token"]!
-        }
-    }
-    
-    private func refreshTeam() {
-        if Member.instance.isLoggedIn {
-            Global.instance.addSpinner(superView: self.view)
-            let filter: [[Any]] = [
-                ["channel", "=", CHANNEL],
-                ["manager_id", "=", Member.instance.id]
-            ]
-            DataService.instance.getList(type: "team", titleField: "name", page: 1, perPage: 100, filter: filter) { (success) in
-                if success {
-                    self.myTeamLists = DataService.instance.lists
-                    //print(self.myTeamLists)
-//                    for team in self.myTeamLists {
-//                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_TEMP_PLAY,"detail":"臨打"]
-//                        self._rows[1].append(row)
-//                    }
-                    //print(self.myTeamLists)
-                    self.tableView.reloadData()
-                    Global.instance.removeSpinner(superView: self.view)
-                    self.refreshControl.endRefreshing()
-                }
-            }
         }
     }
 
