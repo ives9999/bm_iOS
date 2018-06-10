@@ -239,15 +239,14 @@ class TempPlayShowVC: MyTableVC {
         containerView.addConstraint(arenaBtnC2)
         
         
-        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 2)
+        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 6)
         let allW: CGFloat = view.frame.width / 2
         let w1: CGFloat = plusOneBtn.frame.width
         let plusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW - w1 - constant.name_left_padding)
         plusOneBtn.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addConstraint(plusOneBtnC1)
-        containerView.addConstraint(plusOneBtnC2)
+        containerView.addConstraints([plusOneBtnC1,plusOneBtnC2])
         
-        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 2)
+        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 6)
         let cancelPlusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW + constant.name_left_padding)
         cancelPlusOneBtn.translatesAutoresizingMaskIntoConstraints = false
         containerView.addConstraint(cancelPlusOneBtnC1)
