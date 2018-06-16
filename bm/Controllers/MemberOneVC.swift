@@ -39,6 +39,20 @@ class MemberOneVC: MyTableVC {
     
     override func refresh() {
         Global.instance.addSpinner(superView: self.view)
+        if self.type == "temp play" {
+            self._getTeamManagerList() { (success) in
+                if success {
+                    //print(self.teamManagerLists)
+                    for i in 0 ..< self.teamManagerLists.count {
+                        let list: List = self.teamManagerLists[i]
+                        if list.id == self.team_id {
+                            self.isTeamManager = true
+                            break
+                        }
+                    }
+                }
+            }
+        }
         _getMemberOne(token: memberToken) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
@@ -52,27 +66,13 @@ class MemberOneVC: MyTableVC {
                     for (key1, _) in one {
                         if (key == key1) {
                             self.memberOne[idx][key]!["value"] = one[key].stringValue
-                            break;
+                            break
                         }
                     }
                 }
                 //print(self.memberOne)
                 self.titleLbl.text = one["name"].stringValue
                 self.tableView.reloadData()
-                if self.type == "temp play" {
-                    self._getTeamManagerList() { (success) in
-                        if success {
-                            //print(self.teamManagerLists)
-                            for i in 0 ..< self.teamManagerLists.count {
-                                let list: List = self.teamManagerLists[i]
-                                if list.id == self.team_id {
-                                    self.isTeamManager = true
-                                    break
-                                }
-                            }
-                        }
-                    }
-                }
             } else {
                 self.warning(MemberService.instance.msg)
             }
@@ -142,7 +142,7 @@ class MemberOneVC: MyTableVC {
                 if !isTeamManager {
                     warning("您不是此球隊管理員，所以無法檢視並撥打球友的電話")
                 } else {
-                    info(msg: "球友電話是："+memberMobile, closeButtonTitle: "取消", buttonTitle: "撥打電話", buttonAction: {self.memberMobile.makeCll()})
+                    info(msg: "球友電話是："+memberMobile, closeButtonTitle: "取消", buttonTitle: "撥打電話", buttonAction: {self.memberMobile.makeCall()})
                 }
             }
         }

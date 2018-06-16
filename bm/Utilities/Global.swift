@@ -323,7 +323,7 @@ extension String {
         //Return Parsed Date
         return dateFromString
     }
-    func makeCll() {
+    func makeCall() {
         let formatedNumber = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
         let phoneUrl: String = "tel://\(formatedNumber)"
         if let url: URL = URL(string: phoneUrl) {
