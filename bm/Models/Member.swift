@@ -175,6 +175,14 @@ class Member {
             session.set(ISLOGGEDIN_KEY, newValue)
         }
     }
+    var isTeamManager: Bool {
+        get {
+            return session.getBool(ISTEAMMANAGER_KEY)
+        }
+        set {
+            session.set(ISTEAMMANAGER_KEY, newValue)
+        }
+    }
     let info: Dictionary<String, [String: String]> = [
         ID_KEY: ["ch": "編號","type":"Int","default":"0"],
         NICKNAME_KEY: ["ch": "暱稱","type":"String","default":""],
@@ -269,6 +277,8 @@ class Member {
         if let val: Bool = data[ISLOGGEDIN_KEY] as? Bool {
             self.isLoggedIn = val
         }
+        let val: Int = self.type & TEAM_TYPE
+        self.isTeamManager = val > 0 ? true : false
     }
     
     func getData(key: String) -> Any {
@@ -316,13 +326,13 @@ class Member {
     }
     func validateShow(rawValue: Int) -> [String] {
         var res: [String] = [String]()
-        if rawValue & 1 > 0 {
+        if rawValue & EMAIL_VALIDATE > 0 {
             res.append("email認證")
         }
-        if rawValue & 2 > 0 {
+        if rawValue & MOBILE_VALIDATE > 0 {
             res.append("手機認證")
         }
-        if rawValue & 4 > 0 {
+        if rawValue & PID_VALIDATE > 0 {
             res.append("身分證認證")
         }
         if res.count == 0 {
@@ -332,13 +342,13 @@ class Member {
     }
     func typeShow(rawValue: Int) -> String {
         var res: [String] = [String]()
-        if rawValue & 1 > 0 {
+        if rawValue & GENERAL_TYPE > 0 {
             res.append("一般會員")
         }
-        if rawValue & 2 > 0 {
+        if rawValue & TEAM_TYPE > 0 {
             res.append("球隊隊長")
         }
-        if rawValue & 4 > 0 {
+        if rawValue & ARENA_TYPE > 0 {
             res.append("球場管理員")
         }
         return res.joined(separator: ",")

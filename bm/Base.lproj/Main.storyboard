@@ -721,6 +721,7 @@
                         <segue destination="gO6-sX-L0T" kind="show" identifier="toTeamTempPlay" id="PtM-Ha-efS"/>
                         <segue destination="trT-Qb-e9n" kind="show" identifier="toPassword" id="OU7-h8-11b"/>
                         <segue destination="XsO-Wn-cpI" kind="show" identifier="toValidate" id="1gi-Xv-JX8"/>
+                        <segue destination="LPl-7I-nuE" kind="show" identifier="toBlacklist" id="XML-MN-amm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ixj-Mg-udo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1402,6 +1403,81 @@
             </objects>
             <point key="canvasLocation" x="3039" y="-1415"/>
         </scene>
+        <!--Black ListVC-->
+        <scene sceneID="PvD-40-aIs">
+            <objects>
+                <viewController id="LPl-7I-nuE" customClass="BlackListVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Qsd-kl-ZFR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hay-9N-KJJ">
+                                <rect key="frame" x="0.0" y="20" width="375" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3jP-ct-LRJ">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="Vrl-NU-9n3"/>
+                                            <constraint firstAttribute="width" constant="33" id="WHK-KO-XI5"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="LPl-7I-nuE" eventType="touchUpInside" id="7Or-ye-iw1"/>
+                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="ADy-hH-0YY"/>
+                                            <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="Dng-kx-R7c"/>
+                                            <action selector="prevBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="FBl-pH-PRF"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="黑名單" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeT-Uw-Z8b">
+                                        <rect key="frame" x="159" y="18.5" width="57.5" height="27"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="3jP-ct-LRJ" firstAttribute="leading" secondItem="Hay-9N-KJJ" secondAttribute="leading" constant="12" id="GVD-71-OKP"/>
+                                    <constraint firstAttribute="height" constant="64" id="I3H-At-8DV"/>
+                                    <constraint firstItem="3jP-ct-LRJ" firstAttribute="centerY" secondItem="Hay-9N-KJJ" secondAttribute="centerY" id="JJd-Mv-dqV"/>
+                                    <constraint firstItem="IeT-Uw-Z8b" firstAttribute="centerX" secondItem="Hay-9N-KJJ" secondAttribute="centerX" id="jSH-5p-QC3"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="kae-xh-vzt"/>
+                                    <constraint firstItem="IeT-Uw-Z8b" firstAttribute="centerY" secondItem="Hay-9N-KJJ" secondAttribute="centerY" id="nI2-SA-a67"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="wG1-Ve-RwW">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DHn-bq-SaO">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="wG1-Ve-RwW" firstAttribute="leading" secondItem="Zda-Pt-yVr" secondAttribute="leading" id="2hP-1t-oDq"/>
+                            <constraint firstItem="DHn-bq-SaO" firstAttribute="top" secondItem="Hay-9N-KJJ" secondAttribute="bottom" id="3mo-LS-BIj"/>
+                            <constraint firstItem="DHn-bq-SaO" firstAttribute="trailing" secondItem="Zda-Pt-yVr" secondAttribute="trailing" id="Cch-GT-lm5"/>
+                            <constraint firstItem="Hay-9N-KJJ" firstAttribute="top" secondItem="Zda-Pt-yVr" secondAttribute="top" id="Xnp-oM-qta"/>
+                            <constraint firstItem="wG1-Ve-RwW" firstAttribute="trailing" secondItem="Zda-Pt-yVr" secondAttribute="trailing" id="Y0c-RF-dtF"/>
+                            <constraint firstAttribute="bottom" secondItem="wG1-Ve-RwW" secondAttribute="bottom" id="fMr-yk-mj2"/>
+                            <constraint firstItem="Hay-9N-KJJ" firstAttribute="trailing" secondItem="Zda-Pt-yVr" secondAttribute="trailing" id="gsd-lS-pYq"/>
+                            <constraint firstItem="DHn-bq-SaO" firstAttribute="leading" secondItem="Zda-Pt-yVr" secondAttribute="leading" id="hU4-4x-rzt"/>
+                            <constraint firstItem="Zda-Pt-yVr" firstAttribute="bottom" secondItem="DHn-bq-SaO" secondAttribute="bottom" id="qcz-vy-3bG"/>
+                            <constraint firstItem="Hay-9N-KJJ" firstAttribute="leading" secondItem="Zda-Pt-yVr" secondAttribute="leading" id="sFa-eD-gLX"/>
+                            <constraint firstItem="wG1-Ve-RwW" firstAttribute="top" secondItem="Hay-9N-KJJ" secondAttribute="bottom" id="vXW-p6-M3j"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Zda-Pt-yVr"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="DHn-bq-SaO" id="hpG-MO-zFD"/>
+                        <outlet property="titleLbl" destination="IeT-Uw-Z8b" id="NbT-QA-9YP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bDt-4Y-1zp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3926" y="-1415"/>
+        </scene>
         <!--PasswordVC-->
         <scene sceneID="oJV-Mq-jGs">
             <objects>
@@ -1891,10 +1967,10 @@
             </objects>
             <point key="canvasLocation" x="1996" y="-170"/>
         </scene>
-        <!--Member OneVC-->
+        <!--Temp Play Signup OneVC-->
         <scene sceneID="gwZ-XZ-zSj">
             <objects>
-                <viewController id="ivA-0I-eys" customClass="MemberOneVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ivA-0I-eys" customClass="TempPlaySignupOneVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="naB-Kd-ftl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2331,13 +2407,13 @@
         <image name="tempPlay" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2ff-JT-Wdj"/>
-        <segue reference="ViB-98-skP"/>
-        <segue reference="xcZ-Ad-vEw"/>
-        <segue reference="Ym7-zQ-SHb"/>
-        <segue reference="DaT-w5-CTD"/>
-        <segue reference="cK5-nM-2qW"/>
-        <segue reference="q87-Mu-6YG"/>
+        <segue reference="OU7-h8-11b"/>
+        <segue reference="f5d-2G-qtf"/>
+        <segue reference="1gi-Xv-JX8"/>
+        <segue reference="9hz-2Z-7jX"/>
+        <segue reference="PtM-Ha-efS"/>
+        <segue reference="L8k-6m-3tm"/>
+        <segue reference="tfa-sh-Qj7"/>
         <segue reference="AlK-fI-QxB"/>
     </inferredMetricsTieBreakers>
 </document>

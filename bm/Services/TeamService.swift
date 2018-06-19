@@ -472,7 +472,6 @@ class TeamService {
                 completion(true)
             }
         }
- 
     }
 }
 

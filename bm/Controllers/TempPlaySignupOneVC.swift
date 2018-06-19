@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class MemberOneVC: MyTableVC {
+class TempPlaySignupOneVC: MyTableVC {
 
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -18,9 +18,9 @@ class MemberOneVC: MyTableVC {
     var team_name: String = ""
     var team_id: Int = -1
     var near_date: String = ""
-    var type: String = ""  //temp play
     var isTeamManager: Bool = false
     var memberMobile: String = ""
+    var memberName: String = ""
     var memberOne: [Dictionary<String, Dictionary<String, Any>>] = [Dictionary<String, Dictionary<String, Any>>]()
     var keys: [String] = ["team", NAME_KEY, MOBILE_KEY, "black_list"]
     
@@ -39,16 +39,14 @@ class MemberOneVC: MyTableVC {
     
     override func refresh() {
         Global.instance.addSpinner(superView: self.view)
-        if self.type == "temp play" {
-            self._getTeamManagerList() { (success) in
-                if success {
-                    //print(self.teamManagerLists)
-                    for i in 0 ..< self.teamManagerLists.count {
-                        let list: List = self.teamManagerLists[i]
-                        if list.id == self.team_id {
-                            self.isTeamManager = true
-                            break
-                        }
+        _getTeamManagerList() { (success) in
+            if success {
+                //print(self.teamManagerLists)
+                for i in 0 ..< self.teamManagerLists.count {
+                    let list: List = self.teamManagerLists[i]
+                    if list.id == self.team_id {
+                        self.isTeamManager = true
+                        break
                     }
                 }
             }
@@ -71,7 +69,8 @@ class MemberOneVC: MyTableVC {
                     }
                 }
                 //print(self.memberOne)
-                self.titleLbl.text = one["name"].stringValue
+                self.memberName = one["name"].stringValue
+                self.titleLbl.text = self.memberName
                 self.tableView.reloadData()
             } else {
                 self.warning(MemberService.instance.msg)
@@ -81,9 +80,7 @@ class MemberOneVC: MyTableVC {
     
     func initMemberOne() {
         memberOne.removeAll()
-        if type == "temp play" {
-            memberOne.append(["team":["title":team_name,"value":near_date,"more":false]])
-        }
+        memberOne.append(["team":["title":team_name,"value":near_date,"more":false]])
         for key in keys {
             var title: String = ""
             var icon: String = ""
@@ -104,9 +101,9 @@ class MemberOneVC: MyTableVC {
                 memberOne.append(tmp)
             }
         }
-//        if type == "temp play" {
-//            memberOne.append(["black_list":["title":"加入黑名單","more":true]])
-//        }
+        if isTeamManager {
+            memberOne.append(["black_list":["title":"加入黑名單","more":true]])
+        }
         //print(memberOne)
     }
     
@@ -144,11 +141,39 @@ class MemberOneVC: MyTableVC {
                 } else {
                     info(msg: "球友電話是："+memberMobile, closeButtonTitle: "取消", buttonTitle: "撥打電話", buttonAction: {self.memberMobile.makeCall()})
                 }
+            } else if key == "black_list" {
+                warning(msg:"是否真的要將球友"+memberName+"設為黑名單\n之後可以解除", closeButtonTitle: "取消", buttonTitle: "確定", buttonAction: {
+                    self.reasonBox()
+                })
             }
         }
+    }
+    
+    private func reasonBox() {
+        let alert = SCLAlertView()
+        let txt = alert.addTextField()
+        alert.addButton("加入", action: {
+            self.addBlackList(txt.text!)
+        })
+        alert.showEdit("請輸入理由") 
+    }
+    
+    private func addBlackList(_ reason: String) {
+        print(reason)
     }
 
     @IBAction func prevBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 }
+
+
+
+
+
+
+
+
+
+
+

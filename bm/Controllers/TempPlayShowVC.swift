@@ -330,12 +330,11 @@ class TempPlayShowVC: MyTableVC {
                 vc.type = sender as! String
             } else if segue.identifier == TO_MEMBER_ONE {
                 let row:[String:Any] = sender as! [String:Any]
-                let vc: MemberOneVC = segue.destination as! MemberOneVC
+                let vc: TempPlaySignupOneVC = segue.destination as! TempPlaySignupOneVC
                 vc.memberToken = row["token"]! as! String
                 vc.team_name = row["title"]! as! String
                 vc.near_date = row["near_date"]! as! String
                 vc.team_id = row["id"]! as! Int
-                vc.type = "temp play"
             }
         }
     }

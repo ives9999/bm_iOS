@@ -254,6 +254,28 @@ class MemberService {
             }
         }
     }
+    
+    func blacklist(token:String,completion:@escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app","channel":CHANNEL,"token":token,]
+        let url: String = URL_MEMBER_BLACKLIST
+        //print(url)
+        //print(body)
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                let jsonArray: [JSON] = json[].arrayValue
+                for row in jsonArray {
+                    print(row)
+                }
+            }
+        }
+    }
+    
     func jsonToMember(json: JSON) {
         var data:[String: Any] = [String: Any]()
         for key in MEMBER_FIELD_STRING {

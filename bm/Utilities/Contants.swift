@@ -30,6 +30,9 @@ let URL_MOBILE_VALIDATE = URL_HOME + "member/mobile_validate"
 let URL_SEND_EMAIL_VALIDATE = URL_HOME + "member/sendEmailValidate"
 let URL_SEND_MOBILE_VALIDATE = URL_HOME + "member/sendMobileValidate"
 let URL_MEMBER_GETONE = URL_HOME + "member/getOne"
+let URL_MEMBER_BLACKLIST = URL_HOME + "member/blacklist"
+let URL_FORGET_PASSWORD = BASE_URL + "/member/forget_password"
+let URL_CHANGE_PASSWORD = BASE_URL + "/member/change_password"
 let URL_CITYS = URL_HOME + "citys"
 let URL_ARENA_BY_CITY_ID = URL_HOME + "arena_by_city"
 let URL_TEAM_UPDATE = URL_HOME + "team/update"
@@ -40,8 +43,8 @@ let URL_TEAM_TEMP_PLAY = URL_TEAM + "tempPlay/onoff"
 let URL_TEAM_TEMP_PLAY_LIST = URL_TEAM + "tempPlay/list"
 let URL_TEAM_PLUSONE = BASE_URL + "/team/tempPlay/plusOne/"
 let URL_TEAM_CANCELPLUSONE = BASE_URL + "/team/tempPlay/cancelPlusOne/"
-let URL_FORGET_PASSWORD = BASE_URL + "/member/forget_password"
-let URL_CHANGE_PASSWORD = BASE_URL + "/member/change_password"
+let URL_TEAM_TEMP_PLAY_BLACKLIST = URL_TEAM + "tempPlay/blacklist"
+
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"
@@ -85,6 +88,7 @@ let TO_PASSWORD: String = "toPassword"
 let TO_COURSE: String = "toCourse"
 let TO_TEAM_MANAGER: String = "toTeamManager"
 let TO_TEAM_MANAGER_FUNCTION: String = "toTeamManagerFunction"
+let TO_BLACKLIST: String = "toBlacklist"
 
 // color
 let MY_GREEN = "#a6d903"
@@ -112,6 +116,7 @@ let MEMBER_TYPE_KEY = "type"
 let SOCIAL_KEY = "social"
 let MEMBER_ROLE_KEY = "role"
 let VALIDATE_KEY = "validate"
+let ISTEAMMANAGER_KEY = "isTeamManager"
 
 // member
 let MEMBER_FIELD_STRING = [TOKEN_KEY,EMAIL_KEY,NICKNAME_KEY,NAME_KEY,UID_KEY,CHANNEL_KEY,DOB_KEY,SEX_KEY,TEL_KEY,MOBILE_KEY,PID_KEY,AVATAR_KEY,MEMBER_ROLE_KEY,SOCIAL_KEY]
@@ -119,6 +124,10 @@ let MEMBER_FIELD_INT = [ID_KEY,VALIDATE_KEY,MEMBER_TYPE_KEY]
 let MEMBER_FIELD_BOOL = [ISLOGGEDIN_KEY]
 let EMAIL_VALIDATE = 1
 let MOBILE_VALIDATE = 2
+let PID_VALIDATE = 4
+let GENERAL_TYPE = 1
+let TEAM_TYPE = 2
+let ARENA_TYPE = 4
 let MEMBER_ARRAY = [
     NAME_KEY: ["text":"姓名","icon":"name"],
     EMAIL_KEY: ["text":"email","icon":"email1"],

@@ -101,6 +101,10 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                 _rows[0].append(new)
             }
         }
+        if Member.instance.isTeamManager {
+            let new: Dictionary<String, Any> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]
+            _rows[0].append(new)
+        }
         //print(_rows)
         setData(sections: _sections, rows: _rows)
     }
@@ -148,6 +152,8 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                     sender = row["type"] as! String
                 }
                 performSegue(withIdentifier: segue, sender: sender)
+            } else if segue == TO_BLACKLIST {
+                performSegue(withIdentifier: segue, sender: nil)
             }
         }
     }

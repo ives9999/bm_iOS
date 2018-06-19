@@ -168,7 +168,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        prev()
     }
     
     @IBAction func submit(_ sender: Any) {
