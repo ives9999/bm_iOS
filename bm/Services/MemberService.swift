@@ -17,6 +17,7 @@ class MemberService {
     var msg:String = ""
     var success: Bool = false
     var one: JSON? = nil
+    var blacklists: Array<Dictionary<String, String>> = Array()
     
     func login(email: String, password: String, playerID: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
@@ -268,10 +269,16 @@ class MemberService {
                 }
                 let json = JSON(data)
                 //print(json)
+                self.blacklists.removeAll()
                 let jsonArray: [JSON] = json[].arrayValue
                 for row in jsonArray {
-                    print(row)
+                    //print(row)
+                    let name: String = row["name"].stringValue
+                    let mobile: String = row["mobile"].stringValue
+                    let d:Dictionary<String, String> = ["name":name,"mobile":mobile]
+                    self.blacklists.append(d)
                 }
+                print(self.blacklists)
             }
         }
     }
