@@ -1710,7 +1710,7 @@
                         <outlet property="titleLbl" destination="31T-Ck-L6a" id="tuQ-ty-CPS"/>
                         <segue destination="XsO-Wn-cpI" kind="show" identifier="toValidate" id="xcZ-Ad-vEw"/>
                         <segue destination="vfe-V8-Hfx" kind="show" identifier="toProfile" id="cK5-nM-2qW"/>
-                        <segue destination="ivA-0I-eys" kind="show" identifier="toMemberOne" id="pIb-ZG-QGV"/>
+                        <segue destination="ivA-0I-eys" kind="show" identifier="toTempPlaySignupOne" id="pIb-ZG-QGV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZb-89-3QI" userLabel="First Responder" sceneMemberID="firstResponder"/>

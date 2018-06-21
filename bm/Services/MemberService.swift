@@ -17,7 +17,7 @@ class MemberService {
     var msg:String = ""
     var success: Bool = false
     var one: JSON? = nil
-    var blacklists: Array<Dictionary<String, String>> = Array()
+    var blacklists: Array<Dictionary<String, Any>> = Array()
     
     func login(email: String, password: String, playerID: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
@@ -257,7 +257,7 @@ class MemberService {
     }
     
     func blacklist(token:String,completion:@escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app","channel":CHANNEL,"token":token,]
+        let body: [String: Any] = ["source": "app","channel":CHANNEL,"token":token]
         let url: String = URL_MEMBER_BLACKLIST
         //print(url)
         //print(body)
@@ -269,16 +269,30 @@ class MemberService {
                 }
                 let json = JSON(data)
                 //print(json)
-                self.blacklists.removeAll()
-                let jsonArray: [JSON] = json[].arrayValue
-                for row in jsonArray {
-                    //print(row)
-                    let name: String = row["name"].stringValue
-                    let mobile: String = row["mobile"].stringValue
-                    let d:Dictionary<String, String> = ["name":name,"mobile":mobile]
-                    self.blacklists.append(d)
+                let success:Bool = json["success"].boolValue
+                if (success) {
+                    self.blacklists.removeAll()
+                    let rows: [JSON] = json["rows"].arrayValue
+                    for row in rows {
+                        //print(row)
+                        let id: Int = row["id"].intValue
+                        let memberName: String = row["name"].stringValue
+                        let memberMobile: String = row["mobile"].stringValue
+                        let memberToken: String = row["token"].stringValue
+                        let date: String = row["created_at"].stringValue.noSec()
+                        let memo: String = row["memo"].stringValue
+                        let teamObj: JSON = row["team"]
+                        let teamName: String = teamObj["name"].stringValue
+                        let teamToken: String = teamObj["token"].stringValue
+                        let d:Dictionary<String, Any> = ["id":id,"memberName":memberName,"memberMobile":memberMobile,"memberToken":memberToken,"date":date,"teamName":teamName,"memo":memo,"teamToken":teamToken]
+                        self.blacklists.append(d)
+                    }
+                    //print(self.blacklists)
+                    completion(true)
+                } else {
+                    self.msg = "無法取得管理球隊的黑名單，請稍後再試"
+                    completion(false)
                 }
-                print(self.blacklists)
             }
         }
     }

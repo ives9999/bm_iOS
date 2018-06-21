@@ -16,8 +16,6 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     var frameWidth: CGFloat!
     var frameHeight: CGFloat!
     
-    var refreshControl: UIRefreshControl!
-    
     convenience init(sections: [String], rows: [[Dictionary<String, Any>]]) {
         self.init(nibName:nil, bundle:nil)
         //setData(sections: sections, rows: rows)
@@ -45,9 +43,7 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         myTablView.delegate = self
         myTablView.dataSource = self
 
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
-        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        beginRefresh()
         myTablView.addSubview(refreshControl)
     }
 
@@ -127,9 +123,5 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         let separator: UIView = UIView(frame: CGRect(x: 15, y: 0, width: footer.frame.width, height: 1))
         separator.layer.backgroundColor = UIColor("#6c6c6e").cgColor
         //footer.addSubview(separator)
-    }
-    
-    @objc func refresh() {
-        
     }
 }

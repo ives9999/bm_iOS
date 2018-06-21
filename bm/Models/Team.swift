@@ -246,7 +246,7 @@ class Team {
             data[TEAM_PLAY_START_KEY]!["value"] = time
         }
         let tmp: String = data[TEAM_PLAY_START_KEY]!["value"] as! String
-        data[TEAM_PLAY_START_KEY]!["show"] = Global.instance.noSec(tmp)
+        data[TEAM_PLAY_START_KEY]!["show"] = tmp.noSec()
         setPlayStartTimeSender()
     }
     func updatePlayEndTime(_ time: String? = nil) {
@@ -254,7 +254,7 @@ class Team {
             data[TEAM_PLAY_END_KEY]!["value"] = time
         }
         let tmp: String = data[TEAM_PLAY_END_KEY]!["value"] as! String
-        data[TEAM_PLAY_END_KEY]!["show"] = Global.instance.noSec(tmp)
+        data[TEAM_PLAY_END_KEY]!["show"] = tmp.noSec()
         setPlayEndTimeSender()
     }
     func updateTempContent(_ content: String? = nil) {
@@ -367,7 +367,7 @@ class Team {
     func setPlayStartTimeSender() {
         var res: [String: Any] = [String: Any]()
         var time: String = data[TEAM_PLAY_START_KEY]!["value"] as! String
-        time = Global.instance.noSec(time)
+        time = time.noSec()
         res["type"] = SELECT_TIME_TYPE.play_start
         res["time"] = time
         data[TEAM_PLAY_START_KEY]!["sender"] = res
@@ -375,7 +375,7 @@ class Team {
     func setPlayEndTimeSender() {
         var res: [String: Any] = [String: Any]()
         var time: String = data[TEAM_PLAY_END_KEY]!["value"] as! String
-        time = Global.instance.noSec(time)
+        time = time.noSec()
         res["type"] = SELECT_TIME_TYPE.play_end
         res["time"] = time
         data[TEAM_PLAY_END_KEY]!["sender"] = res

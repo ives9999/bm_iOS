@@ -473,6 +473,34 @@ class TeamService {
             }
         }
     }
+    func addBlackList(teamToken: String, playerToken: String, managerToken:String,reason: String, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app","channel":CHANNEL,"teamToken":teamToken,"playerToken":playerToken,"managerToken":managerToken,"memo":reason,"do":"add"]
+        //print(body)
+        _blacklist(body: body, completion: completion)
+    }
+    func removeBlackList(teamToken:String,playerToken:String,managerToken:String,completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app","channel":CHANNEL,"teamToken":teamToken,"playerToken":playerToken,"managerToken":managerToken,"do":"remove"]
+        //print(body)
+        _blacklist(body: body, completion: completion)
+    }
+    private func _blacklist(body: [String: Any], completion: @escaping CompletionHandler) {
+        let url: String = URL_TEAM_TEMP_PLAY_BLACKLIST
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                self.success = json["success"].boolValue
+                if !self.success {
+                    self.msg = json["msg"].stringValue
+                }
+                completion(self.success)
+            }
+        }
+    }
 }
 
 

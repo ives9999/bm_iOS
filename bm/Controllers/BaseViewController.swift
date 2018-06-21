@@ -13,6 +13,7 @@ class BaseViewController: UIViewController {
     
     var msg: String = ""
     var teamManagerLists: [List] = [List]()
+    var refreshControl: UIRefreshControl!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,16 @@ class BaseViewController: UIViewController {
     
     func prev() {
         dismiss(animated: true, completion: nil)
+    }
+    func beginRefresh() {
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+    }
+    func endRefresh() {
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
     }
     
     func _getMemberOne(token: String, completion: @escaping CompletionHandler) {
@@ -83,6 +94,8 @@ class BaseViewController: UIViewController {
         }
     }
     
+    @objc func refresh() {}
+    
     func alertError(title: String, msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
@@ -129,5 +142,8 @@ class BaseViewController: UIViewController {
     }
     func info(msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
         _info(title: "訊息", msg: msg, closeButtonTitle: closeButtonTitle, buttonTitle: buttonTitle, buttonAction: buttonAction)
+    }
+    func info(_ msg: String) {
+        alertError(title: "訊息", msg: msg)
     }
 }

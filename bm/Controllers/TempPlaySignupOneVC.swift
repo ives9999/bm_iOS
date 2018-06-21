@@ -15,8 +15,9 @@ class TempPlaySignupOneVC: MyTableVC {
     @IBOutlet weak var tableView: UITableView!
     
     var memberToken: String = ""
-    var team_name: String = ""
     var team_id: Int = -1
+    var team_name: String = ""
+    var teamToken: String = ""
     var near_date: String = ""
     var isTeamManager: Bool = false
     var memberMobile: String = ""
@@ -31,9 +32,9 @@ class TempPlaySignupOneVC: MyTableVC {
 //        print(team)
 //        print(near_date)
 //        print(type)
-//        print(team_id)
+//        print(teamToken)
         
-        tableView.register(MemberOneCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(TempPlaySignupOneCell.self, forCellReuseIdentifier: "cell")
         refresh()
     }
     
@@ -112,7 +113,7 @@ class TempPlaySignupOneVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: MemberOneCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MemberOneCell
+        let cell: TempPlaySignupOneCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TempPlaySignupOneCell
         
         let key: String = keys[indexPath.row]
         var row: [String: Any] = memberOne[indexPath.row][key]!
@@ -159,7 +160,15 @@ class TempPlaySignupOneVC: MyTableVC {
     }
     
     private func addBlackList(_ reason: String) {
-        print(reason)
+        Global.instance.addSpinner(superView: self.view)
+        TeamService.instance.addBlackList(teamToken: teamToken, playerToken: memberToken,managerToken:Member.instance.token, reason: reason) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.info("加入黑名單成功")
+            } else {
+                self.warning(TeamService.instance.msg)
+            }
+        }
     }
 
     @IBAction func prevBtnPressed(_ sender: Any) {

@@ -268,7 +268,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         switch type {
         case SELECT_TIME_TYPE.play_start:
             var start: String = model.data[TEAM_PLAY_START_KEY]!["value"] as! String
-            start = Global.instance.noSec(start)
+            start = start.noSec()
             if start != time {
                 Team.instance.updatePlayStartTime(time)
                 model.data[TEAM_PLAY_START_KEY]!["change"] = true
@@ -277,7 +277,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             break
         case SELECT_TIME_TYPE.play_end:
             var end: String = model.data[TEAM_PLAY_END_KEY]!["value"] as! String
-            end = Global.instance.noSec(end)
+            end = end.noSec()
             if end != time {
                 Team.instance.updatePlayEndTime(time)
                 model.data[TEAM_PLAY_END_KEY]!["change"] = true

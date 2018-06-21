@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemberOneCell: SuperCell {
+class TempPlaySignupOneCell: SuperCell {
     
     var iconView: UIImageView!
     var titleLbl: MyLabel!

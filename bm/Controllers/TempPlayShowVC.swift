@@ -43,6 +43,7 @@ class TempPlayShowVC: MyTableVC {
     var myTitle: String!
     var nearDate: String!
     var featured: UIImage!
+    var teamToken: String = ""
     
     //var refreshControl: UIRefreshControl!
     
@@ -320,7 +321,7 @@ class TempPlayShowVC: MyTableVC {
         //print(row)
         let id: Int = model.data[TEAM_ID_KEY]!["value"] as! Int
         let sender:[String:Any] = ["token":row["token"]!,"title":myTitle,"near_date":nearDate,"id":id]
-        performSegue(withIdentifier: TO_MEMBER_ONE, sender: sender)
+        performSegue(withIdentifier: TO_TEMP_PLAY_SIGNUP_ONE, sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -328,13 +329,14 @@ class TempPlayShowVC: MyTableVC {
             if segue.identifier == TO_VALIDATE {
                 let vc: ValidateVC = segue.destination as! ValidateVC
                 vc.type = sender as! String
-            } else if segue.identifier == TO_MEMBER_ONE {
+            } else if segue.identifier == TO_TEMP_PLAY_SIGNUP_ONE {
                 let row:[String:Any] = sender as! [String:Any]
                 let vc: TempPlaySignupOneVC = segue.destination as! TempPlaySignupOneVC
                 vc.memberToken = row["token"]! as! String
                 vc.team_name = row["title"]! as! String
                 vc.near_date = row["near_date"]! as! String
                 vc.team_id = row["id"]! as! Int
+                vc.teamToken = teamToken
             }
         }
     }
@@ -427,6 +429,7 @@ class TempPlayShowVC: MyTableVC {
     private func setPage() {
         myTitle = (model.data[TEAM_NAME_KEY]!["value"] as! String)
         titleLbl.text = myTitle
+        teamToken = (model.data[TEAM_TOKEN_KEY]!["value"] as! String)
         featured = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
         featuredLayout()
         featuredView.image = featured

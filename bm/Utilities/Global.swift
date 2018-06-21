@@ -120,15 +120,6 @@ class Global {
         return deviceType
     }
     
-    func noSec(_ time: String) -> String {
-        let arr: [String] = time.components(separatedBy: ":")
-        var res: String = time
-        if arr.count > 2 {
-            res = "\(arr[0]):\(arr[1])"
-        }
-        return res
-    }
-    
     func addSpinner(superView: UIView) {
         let mask: UIView = UIView()
         let spinner: UIActivityIndicatorView = UIActivityIndicatorView()
@@ -322,6 +313,14 @@ extension String {
         
         //Return Parsed Date
         return dateFromString
+    }
+    func noSec() -> String {
+        let arr: [String] = self.components(separatedBy: ":")
+        var res: String = self
+        if arr.count > 2 {
+            res = "\(arr[0]):\(arr[1])"
+        }
+        return res
     }
     func makeCall() {
         let formatedNumber = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
