@@ -94,6 +94,31 @@ class BaseViewController: UIViewController {
         }
     }
     
+    func addBlackList(memberName: String, memberToken: String, teamToken: String) {
+        warning(msg:"是否真的要將球友"+memberName+"設為黑名單\n之後可以解除", closeButtonTitle: "取消", buttonTitle: "確定", buttonAction: {
+            self.reasonBox(memberToken: memberToken, teamToken: teamToken)
+        })
+    }
+    func reasonBox(memberToken: String, teamToken: String) {
+        let alert = SCLAlertView()
+        let txt = alert.addTextField()
+        alert.addButton("加入", action: {
+            self._addBlackList(txt.text!, memberToken: memberToken, teamToken: teamToken)
+        })
+        alert.showEdit("請輸入理由")
+    }
+    func _addBlackList(_ reason: String, memberToken: String, teamToken: String) {
+        Global.instance.addSpinner(superView: self.view)
+        TeamService.instance.addBlackList(teamToken: teamToken, playerToken: memberToken,managerToken:Member.instance.token, reason: reason) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.info("加入黑名單成功")
+            } else {
+                self.warning(TeamService.instance.msg)
+            }
+        }
+    }
+    
     @objc func refresh() {}
     
     func alertError(title: String, msg: String) {

@@ -20,6 +20,8 @@ class TeamService {
     var downloadImageNum: Int = 0
     //var team: Team = Team()
     var model:Team!
+    var tempPlayDates: Array<String> = Array()
+    var tempPlayDatePlayer: TempPlayDatePlayer = TempPlayDatePlayer()
     
     init() {
         model = Team.instance
@@ -373,6 +375,70 @@ class TeamService {
                     model.list.append(data)
                 }
                 completion(true)
+            }
+        }
+    }
+    
+    func tempPlay_date(token: String,completion: @escaping CompletionHandler) {
+        let url: String = URL_TEAM_TEMP_PLAY_DATE
+        let body: [String: Any] = ["source":"app","channel":CHANNEL,"token":token]
+        //print(body)
+        //print(url)
+        
+        
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                //print(response.result.value)
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                //print(data)
+                let json = JSON(data)
+                let success: Bool = json["success"].boolValue
+                if success {
+                    let arr: [JSON] = json["rows"].arrayValue
+                    //print(arr)
+                    self.tempPlayDates.removeAll()
+                    for i in 0 ..< arr.count {
+                        let date: String = arr[i].stringValue
+                        self.tempPlayDates.append(date)
+                    }
+                    completion(true)
+                } else {
+                    self.msg = json["msg"].stringValue
+                    completion(false)
+                }
+            }
+        }
+    }
+    
+    func tempPlay_datePlayer(date:String,token: String, completion: @escaping CompletionHandler) {
+        let url: String = URL_TEAM_TEMP_PLAY_DATE_PLAYER
+        let body: [String: Any] = ["source":"app","channel":CHANNEL,"token":token,"date":date]
+        //print(body)
+        //print(url)
+        
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            //print(response.result.value)
+            
+            if response.result.error == nil {
+                //print(response.result.value)
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                let json = JSON(data)
+                self.tempPlayDatePlayer = JSONParse.parse(data: json)
+                //print(self.tempPlayDatePlayer!.rows)
+                
+                let success: Bool = self.tempPlayDatePlayer.success
+                if success {
+                    completion(true)
+                } else {
+                    self.msg = json["msg"].stringValue
+                    completion(false)
+                }
             }
         }
     }

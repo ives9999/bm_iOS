@@ -14,7 +14,8 @@ class TeamManagerFunctionVC: MyTableVC {
     var token: String = ""
     var _rows: [Dictionary<String, Any>] = [
         ["text": "編輯", "icon": "edit1", "segue": TO_TEAM_SUBMIT],
-        ["text": "臨打", "icon": "tempPlay", "segue": TO_TEAM_TEMP_PLAY],
+        ["text": "臨打編輯", "icon": "tempPlay", "segue": TO_TEAM_TEMP_PLAY],
+        ["text": "每次臨打名單", "icon": "tempPlay", "segue": TO_TEAM_TEMP_PLAY],
         ["text": "刪除", "icon": "clear"]
     ]
     
@@ -51,6 +52,8 @@ class TeamManagerFunctionVC: MyTableVC {
         } else if indexPath.row == 1 {
             iden = TO_TEAM_TEMP_PLAY
         } else if indexPath.row == 2 {
+            iden = TO_TEMP_PLAY_DATE
+        } else if indexPath.row == 3 {
             let appearance = SCLAlertView.SCLAppearance(
                 showCloseButton: false
             )
@@ -75,6 +78,10 @@ class TeamManagerFunctionVC: MyTableVC {
         } else if segue.identifier == TO_TEAM_TEMP_PLAY {
             let vc: TeamTempPlayEditVC = segue.destination as! TeamTempPlayEditVC
             vc.token = token
+        } else if segue.identifier == TO_TEMP_PLAY_DATE {
+            let vc: TempPlayDateVC = segue.destination as! TempPlayDateVC
+            vc.token = token
+            vc.name = name
         }
     }
     

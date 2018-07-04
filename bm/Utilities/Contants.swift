@@ -44,6 +44,8 @@ let URL_TEAM_TEMP_PLAY_LIST = URL_TEAM + "tempPlay/list"
 let URL_TEAM_PLUSONE = BASE_URL + "/team/tempPlay/plusOne/"
 let URL_TEAM_CANCELPLUSONE = BASE_URL + "/team/tempPlay/cancelPlusOne/"
 let URL_TEAM_TEMP_PLAY_BLACKLIST = URL_TEAM + "tempPlay/blacklist"
+let URL_TEAM_TEMP_PLAY_DATE = URL_TEAM + "tempPlay/date"
+let URL_TEAM_TEMP_PLAY_DATE_PLAYER = URL_TEAM + "tempPlay/datePlayer"
 
 
 // Font
@@ -87,6 +89,8 @@ let TO_PASSWORD: String = "toPassword"
 let TO_COURSE: String = "toCourse"
 let TO_TEAM_MANAGER: String = "toTeamManager"
 let TO_TEAM_MANAGER_FUNCTION: String = "toTeamManagerFunction"
+let TO_TEMP_PLAY_DATE: String = "toTempPlayDate"
+let TO_TEMP_PLAY_DATE_PLAYER: String = "toTempPlayDatePlayer"
 let TO_TEMP_PLAY_SIGNUP_ONE: String = "toTempPlaySignupOne"
 let TO_BLACKLIST: String = "toBlacklist"
 

@@ -335,6 +335,15 @@ extension String {
     var isNumber: Bool {
         return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }
+    func indexDistance(of character: Character) -> Int? {
+        guard let index = index(of: character) else { return nil }
+        return distance(from: startIndex, to: index)
+    }
+//    func substring(_ range: CountableRange<Int>) -> String {
+//        let idx1 = index(startIndex, offsetBy: max(0, range.lowerBound))
+//        let idx2 = index(startIndex, offsetBy: min(self.count, range.upperBound))
+//        return String(self[idx1..<idx2])
+//    }
 }
 
 extension Array where Element: Comparable {

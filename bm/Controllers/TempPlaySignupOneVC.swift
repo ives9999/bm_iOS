@@ -143,30 +143,7 @@ class TempPlaySignupOneVC: MyTableVC {
                     info(msg: "球友電話是："+memberMobile, closeButtonTitle: "取消", buttonTitle: "撥打電話", buttonAction: {self.memberMobile.makeCall()})
                 }
             } else if key == "black_list" {
-                warning(msg:"是否真的要將球友"+memberName+"設為黑名單\n之後可以解除", closeButtonTitle: "取消", buttonTitle: "確定", buttonAction: {
-                    self.reasonBox()
-                })
-            }
-        }
-    }
-    
-    private func reasonBox() {
-        let alert = SCLAlertView()
-        let txt = alert.addTextField()
-        alert.addButton("加入", action: {
-            self.addBlackList(txt.text!)
-        })
-        alert.showEdit("請輸入理由") 
-    }
-    
-    private func addBlackList(_ reason: String) {
-        Global.instance.addSpinner(superView: self.view)
-        TeamService.instance.addBlackList(teamToken: teamToken, playerToken: memberToken,managerToken:Member.instance.token, reason: reason) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if (success) {
-                self.info("加入黑名單成功")
-            } else {
-                self.warning(TeamService.instance.msg)
+                addBlackList(memberName: memberName, memberToken: memberToken, teamToken: teamToken)
             }
         }
     }
