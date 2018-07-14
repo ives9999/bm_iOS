@@ -14,8 +14,8 @@ class TeamManagerFunctionVC: MyTableVC {
     var token: String = ""
     var _rows: [Dictionary<String, Any>] = [
         ["text": "編輯", "icon": "edit1", "segue": TO_TEAM_SUBMIT],
-        ["text": "臨打編輯", "icon": "tempPlay", "segue": TO_TEAM_TEMP_PLAY],
-        ["text": "每次臨打名單", "icon": "tempPlay", "segue": TO_TEAM_TEMP_PLAY],
+        ["text": "臨打編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
+        ["text": "每次臨打名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
         ["text": "刪除", "icon": "clear"]
     ]
     

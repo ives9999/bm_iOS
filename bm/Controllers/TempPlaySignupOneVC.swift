@@ -39,28 +39,28 @@ class TempPlaySignupOneVC: MyTableVC {
     }
     
     override func refresh() {
+        initMemberOne()
         Global.instance.addSpinner(superView: self.view)
-        _getTeamManagerList() { (success) in
+        initGetMemberValue() { (success) in
             if success {
-                //print(self.teamManagerLists)
-                for i in 0 ..< self.teamManagerLists.count {
-                    let list: List = self.teamManagerLists[i]
-                    if list.id == self.team_id {
-                        self.isTeamManager = true
-                        break
-                    }
-                }
+                self.initIsTeamManager(completion: { (success) in
+                    Global.instance.removeSpinner(superView: self.view)
+                    self.tableView.reloadData()
+                })
+            } else {
+                Global.instance.removeSpinner(superView: self.view)
             }
         }
+    }
+    
+    func initGetMemberValue(completion: @escaping CompletionHandler) {
         _getMemberOne(token: memberToken) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 guard let one = MemberService.instance.one else {
                     self.warning("無法取得該會員資訊，請稍後再試")
                     return
                 }
                 //print(MemberService.instance.one!)
-                self.initMemberOne()
                 for (idx, key) in self.keys.enumerated() {
                     for (key1, _) in one {
                         if (key == key1) {
@@ -72,10 +72,27 @@ class TempPlaySignupOneVC: MyTableVC {
                 //print(self.memberOne)
                 self.memberName = one["name"].stringValue
                 self.titleLbl.text = self.memberName
-                self.tableView.reloadData()
             } else {
                 self.warning(MemberService.instance.msg)
             }
+            completion(success)
+        }
+    }
+    
+    func initIsTeamManager(completion: @escaping CompletionHandler) {
+        _getTeamManagerList() { (success) in
+            if success {
+                //print(self.teamManagerLists)
+                for i in 0 ..< self.teamManagerLists.count {
+                    let list: List = self.teamManagerLists[i]
+                    if list.id == self.team_id {
+                        self.isTeamManager = true
+                        self.memberOne.append(["black_list":["title":"加入黑名單","more":true,"icon":"blacklist"]])
+                        break
+                    }
+                }
+            }
+            completion(success)
         }
     }
     
@@ -102,10 +119,6 @@ class TempPlaySignupOneVC: MyTableVC {
                 memberOne.append(tmp)
             }
         }
-        if isTeamManager {
-            memberOne.append(["black_list":["title":"加入黑名單","more":true]])
-        }
-        //print(memberOne)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
