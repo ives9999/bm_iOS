@@ -104,6 +104,7 @@ class Team {
             TEAM_EMAIL_KEY:["ch":"EMail","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":emailPad],
             TEAM_PLAY_START_KEY:["ch":"開始時間","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
             TEAM_PLAY_END_KEY:["ch":"結束時間","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
+            TEAM_INTERVAL_KEY:["ch":"打球時段","vtype":"String","value":"","submit":true,"atype":none,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
             TEAM_BALL_KEY:["ch":"使用球種","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":defaultPad],
             TEAM_DEGREE_KEY:["ch":"球隊程度","vtype":"array","value":[String](),"submit":true,"atype":more,"segue":TO_SELECT_DEGREE,"sender":[String](),"show":""],
             TEAM_CHARGE_KEY:["ch":"收費說明","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
@@ -256,6 +257,18 @@ class Team {
         let tmp: String = data[TEAM_PLAY_END_KEY]!["value"] as! String
         data[TEAM_PLAY_END_KEY]!["show"] = tmp.noSec()
         setPlayEndTimeSender()
+    }
+    func updateInterval(_ _startTime: String? = nil, _ _endTime: String? = nil) {
+        var startTime = _startTime
+        if startTime == nil {
+            startTime = data[TEAM_PLAY_START_KEY]!["show"] as? String
+        }
+        var endTime = _endTime
+        if endTime == nil {
+            endTime = data[TEAM_PLAY_END_KEY]!["show"] as? String
+        }
+        let tmp: String = startTime! + " ~ " + endTime!
+        data[TEAM_INTERVAL_KEY]!["show"] = tmp
     }
     func updateTempContent(_ content: String? = nil) {
         if content != nil {

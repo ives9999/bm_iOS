@@ -454,6 +454,11 @@ class TeamService {
             value = tmp.stringValue
             model.data[key]!["value"] = value
             model.data[key]!["show"] = value
+            if key == TEAM_PLAY_START_KEY {
+                model.updatePlayStartTime(value as? String)
+            } else if key == TEAM_PLAY_END_KEY {
+                model.updatePlayEndTime(value as? String)
+            }
         } else if type == "array" {
             if key == TEAM_CITY_KEY {
                 let id: Int = tmp["id"].intValue
