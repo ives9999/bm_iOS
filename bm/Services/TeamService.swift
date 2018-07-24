@@ -25,6 +25,8 @@ class TeamService: DataService {
     var tempPlayDates: Array<String> = Array()
     var tempPlayDatePlayer: TempPlayDatePlayer = TempPlayDatePlayer()
     
+    var tempPlayList: [DATA] = [DATA]()
+    
     override init() {
         //model = Team.instance
     }
@@ -334,10 +336,11 @@ class TeamService: DataService {
             }
         }
     }
-    func tempPlay_list(completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app"]
+    func tempPlay_list(page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
         //print(body)
         //print(URL_TEAM_TEMP_PLAY_LIST)
+        tempPlayList = [DATA]()
         
         Alamofire.request(URL_TEAM_TEMP_PLAY_LIST, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
@@ -347,51 +350,60 @@ class TeamService: DataService {
                     return
                 }
                 //print(data)
-                let model: Team = Team.instance
-                let json = JSON(data)
-                let arr: [JSON] = json["rows"].arrayValue
-                //print(arr)
-                model.list = [DATA]()
                 
-                for i in 0 ..< arr.count {
-                    for (key, value) in model.data {
-                        if arr[i][key] != JSON.null {
-                            self._jsonToData(tmp: arr[i][key], key: key, item: value)
+                let json = JSON(data)
+                self.tempPlayList = [DATA]()
+                self.totalCount = json["totalCount"].intValue
+                if self.totalCount > 0 {
+                    self.page = json["page"].intValue
+                    self.perPage = json["perPage"].intValue
+                    let arr: [JSON] = json["rows"].arrayValue
+                    //print(arr)
+                    
+                    for i in 0 ..< arr.count {
+                        for (key, value) in self.model.data {
+                            if arr[i][key] != JSON.null {
+                                self._jsonToData(tmp: arr[i][key], key: key, item: value)
+                            }
                         }
+                        self.model.updatePlayStartTime()
+                        self.model.updatePlayEndTime()
+                        var data: Dictionary<String, [String: Any]> = self.model.data
+                        
+                        var near_date: Dictionary<String, Any> = [String: Any]()
+                        let n1: String = arr[i]["near_date"].stringValue
+                        let n2: String = arr[i]["near_date_w"].stringValue
+                        near_date["value"] = n1
+                        near_date["value1"] = n2
+                        near_date["show"] = n1 + "(" + n2 + ")"
+                        data["near_date"] = near_date
+                        
+                        var city: Dictionary<String, Any> = [String: Any]()
+                        city["value"] = arr[i]["city_id"].intValue
+                        city["show"] = arr[i]["city_name"].stringValue
+                        data["city"] = city
+                        
+                        var arena: Dictionary<String, Any> = [String: Any]()
+                        arena["value"] = arr[i]["arena_id"].intValue
+                        arena["show"] = arr[i]["arena_name"].stringValue
+                        data["arena"] = arena
+                        
+                        var count: Dictionary<String, Any> = [String: Any]()
+                        let tmp: Int = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
+                        
+                        count["quantity"] = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
+                        count["signup"] = arr[i]["temp_signup_count"].intValue
+                        data["count"] = count
+                        
+                        //print(data)
+                        self.tempPlayList.append(data)
                     }
-                    model.updatePlayStartTime()
-                    model.updatePlayEndTime()
-                    var data: Dictionary<String, [String: Any]> = model.data
-                    
-                    var near_date: Dictionary<String, Any> = [String: Any]()
-                    let n1: String = arr[i]["near_date"].stringValue
-                    let n2: String = arr[i]["near_date_w"].stringValue
-                    near_date["value"] = n1
-                    near_date["value1"] = n2
-                    near_date["show"] = n1 + "(" + n2 + ")"
-                    data["near_date"] = near_date
-                    
-                    var city: Dictionary<String, Any> = [String: Any]()
-                    city["value"] = arr[i]["city_id"].intValue
-                    city["show"] = arr[i]["city_name"].stringValue
-                    data["city"] = city
-                    
-                    var arena: Dictionary<String, Any> = [String: Any]()
-                    arena["value"] = arr[i]["arena_id"].intValue
-                    arena["show"] = arr[i]["arena_name"].stringValue
-                    data["arena"] = arena
-                    
-                    var count: Dictionary<String, Any> = [String: Any]()
-                    let tmp: Int = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
-                    
-                    count["quantity"] = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
-                    count["signup"] = arr[i]["temp_signup_count"].intValue
-                    data["count"] = count
-                    
-                    //print(data)
-                    model.list.append(data)
+                    completion(true)
+                } else {// total count == 0
+                    completion(true)
                 }
-                completion(true)
+            } else {
+                completion(false)
             }
         }
     }

@@ -16,6 +16,7 @@ class TempPlayVC: MyTableVC {
     
     var model: Team!
     let cell_constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
+    internal(set) public var lists: [DATA] = [DATA]()
     
     override func viewDidLoad() {
         model = Team.instance
@@ -48,8 +49,7 @@ class TempPlayVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print(model.list.count)
-        return model.list.count
+        return lists.count
     }
     
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -60,14 +60,14 @@ class TempPlayVC: MyTableVC {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
         let cell: TeamTempPlayListCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamTempPlayListCell
-        let row: Dictionary<String, [String: Any]> = model.list[indexPath.row]
+        let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
         cell.forRow(row: row)
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row: Dictionary<String, [String: Any]> = model.list[indexPath.row]
+        let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
         let token: String = row[TEAM_TOKEN_KEY]!["value"] as! String
         performSegue(withIdentifier: TO_TEMP_PLAY_SHOW, sender: token)
     }
@@ -78,14 +78,39 @@ class TempPlayVC: MyTableVC {
     }
     
     override func refresh() {
+        page = 1
+        getDataStart()
+    }
+    
+    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
         Global.instance.addSpinner(superView: self.view)
-        TeamService.instance.tempPlay_list { (success) in
+        TeamService.instance.tempPlay_list(page: page, perPage: perPage) { (success) in
             if success {
+                self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)
-                //print(self.model.list)
-                self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
             }
+        }
+    }
+    override func getDataEnd(success: Bool) {
+        if success {
+            let tmps = TeamService.instance.tempPlayList
+            if page == 1 {
+                lists = [DATA]()
+            }
+            lists += tmps
+            //print(self.lists)
+            page = TeamService.instance.page
+            if page == 1 {
+                totalCount = TeamService.instance.totalCount
+                perPage = TeamService.instance.perPage
+                let _pageCount: Int = totalCount / perPage
+                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+                if refreshControl.isRefreshing {
+                    refreshControl.endRefreshing()
+                }
+            }
+            tableView.reloadData()
+            //self.page = self.page + 1 in CollectionView
         }
     }
 }

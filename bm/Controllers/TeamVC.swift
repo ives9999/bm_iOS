@@ -9,55 +9,34 @@
 import UIKit
 import Device_swift
 
-class TeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TeamVC: MyTableVC {
     
     let _type:String = "team"
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var managerBtn: UIButton!
-    var iden: String!
-    var titleField: String!
-    var page: Int = 1
-    var perPage: Int = PERPAGE
-    var totalCount: Int = 100000
     @IBOutlet weak var tableView: UITableView!
-    var totalPage: Int = 1
-    var refreshControl: UIRefreshControl!
+    
     internal(set) public var lists: [List] = [List]()
     
     override func viewDidLoad() {
-        setIden(item:_type, titleField: "name")
+        myTablView = tableView
         super.viewDidLoad()
+        setIden(item:_type, titleField: "name")
         Global.instance.setupTabbar(self)
-        managerBtn.layer.cornerRadius = 12
-        
-        tableView.backgroundColor = UIColor.clear
-        
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
-        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
-        tableView.addSubview(refreshControl)
-        
-        tableView.delegate = self
-        tableView.dataSource = self
+        Global.instance.menuPressedAction(menuBtn, self)
         
         let cellNibName = UINib(nibName: "ListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listcell")
         
         refresh()
-        Global.instance.menuPressedAction(menuBtn, self)
     }
     
-    func setIden(item: String, titleField: String) {
-        iden = item
-        self.titleField = titleField
-    }
-    
-    @objc func refresh() {
+    override func refresh() {
         page = 1
         getDataStart()
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lists.count
     }
     
@@ -65,7 +44,7 @@ class TeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         return 120
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
             
             let list = lists[indexPath.row]
@@ -77,7 +56,7 @@ class TeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
+    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
         //print(page)
         Global.instance.addSpinner(superView: self.view)
         
@@ -88,7 +67,7 @@ class TeamVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             }
         }
     }
-    func getDataEnd(success: Bool) {
+    override func getDataEnd(success: Bool) {
         if success {
             let tmps: [List] = TeamService.instance.dataLists
             //print(tmps)

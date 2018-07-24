@@ -55,7 +55,7 @@ class DataService {
     
     func getList(type: String, titleField: String, page: Int, perPage: Int, filter:[[Any]]?, completion: @escaping CompletionHandler) {
         self.needDownloads = [Dictionary<String, Any>]()
-        var body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
+        var body: [String: Any] = ["source": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
         if filter != nil {
             body["where"] = filter
         }

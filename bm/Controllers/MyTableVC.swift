@@ -16,6 +16,14 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     var frameWidth: CGFloat!
     var frameHeight: CGFloat!
     
+    var page: Int = 1
+    var perPage: Int = PERPAGE
+    var totalCount: Int = 100000
+    var totalPage: Int = 1
+    
+    var iden: String!
+    var titleField: String!
+    
     convenience init(sections: [String], rows: [[Dictionary<String, Any>]]) {
         self.init(nibName:nil, bundle:nil)
         //setData(sections: sections, rows: rows)
@@ -45,6 +53,11 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
 
         beginRefresh()
         myTablView.addSubview(refreshControl)
+    }
+    
+    func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
+    }
+    func getDataEnd(success: Bool) {
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -123,5 +136,20 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         let separator: UIView = UIView(frame: CGRect(x: 15, y: 0, width: footer.frame.width, height: 1))
         separator.layer.backgroundColor = UIColor("#6c6c6e").cgColor
         //footer.addSubview(separator)
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == page * PERPAGE - 2 {
+            page += 1
+            //print("current page: \(page)")
+            //print(totalPage)
+            if page <= totalPage {
+                getDataStart(page: page, perPage: PERPAGE)
+            }
+        }
+    }
+    
+    func setIden(item: String, titleField: String) {
+        self.iden = item
+        self.titleField = titleField
     }
 }

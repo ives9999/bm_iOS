@@ -2307,16 +2307,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="RZe-9b-pM2">
                                 <rect key="frame" x="0.0" y="84" width="375" height="534"/>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Iz0-ts-ZTW">
+                                <rect key="frame" x="0.0" y="84" width="375" height="534"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="Iz0-ts-ZTW" firstAttribute="leading" secondItem="8LU-CJ-hpC" secondAttribute="leading" id="4hM-Ih-zHQ"/>
                             <constraint firstItem="RZe-9b-pM2" firstAttribute="top" secondItem="K8B-44-m3b" secondAttribute="bottom" id="7Uz-GP-a7S"/>
                             <constraint firstItem="K8B-44-m3b" firstAttribute="trailing" secondItem="8LU-CJ-hpC" secondAttribute="trailing" id="FJ9-2n-oJL"/>
                             <constraint firstItem="RZe-9b-pM2" firstAttribute="leading" secondItem="8LU-CJ-hpC" secondAttribute="leading" id="Fdn-ks-UYL"/>
                             <constraint firstItem="8LU-CJ-hpC" firstAttribute="bottom" secondItem="RZe-9b-pM2" secondAttribute="bottom" id="G3O-EF-b9Y"/>
+                            <constraint firstItem="Iz0-ts-ZTW" firstAttribute="top" secondItem="K8B-44-m3b" secondAttribute="bottom" id="UIz-nW-t7d"/>
+                            <constraint firstItem="8LU-CJ-hpC" firstAttribute="bottom" secondItem="Iz0-ts-ZTW" secondAttribute="bottom" id="VYA-MV-CYO"/>
                             <constraint firstItem="RZe-9b-pM2" firstAttribute="trailing" secondItem="8LU-CJ-hpC" secondAttribute="trailing" id="YLS-th-c7C"/>
                             <constraint firstItem="K8B-44-m3b" firstAttribute="top" secondItem="8LU-CJ-hpC" secondAttribute="top" id="j8D-wf-eQK"/>
                             <constraint firstItem="K8B-44-m3b" firstAttribute="leading" secondItem="8LU-CJ-hpC" secondAttribute="leading" id="jVI-XF-1op"/>
+                            <constraint firstItem="8LU-CJ-hpC" firstAttribute="trailing" secondItem="Iz0-ts-ZTW" secondAttribute="trailing" id="kla-Dn-HWS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="8LU-CJ-hpC"/>
                     </view>
@@ -2324,6 +2332,7 @@
                     <navigationItem key="navigationItem" title="教練" id="yjE-Ai-Cll"/>
                     <connections>
                         <outlet property="menuBtn" destination="kHq-BV-ZQk" id="hgP-L1-XFx"/>
+                        <outlet property="tableView" destination="Iz0-ts-ZTW" id="glu-Q3-n9t"/>
                         <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="a7V-eU-Yjs"/>
                     </connections>
                 </viewController>
@@ -2577,6 +2586,6 @@
         <segue reference="DaT-w5-CTD"/>
         <segue reference="L8k-6m-3tm"/>
         <segue reference="q87-Mu-6YG"/>
-        <segue reference="AlK-fI-QxB"/>
+        <segue reference="a7V-eU-Yjs"/>
     </inferredMetricsTieBreakers>
 </document>
