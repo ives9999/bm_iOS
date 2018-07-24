@@ -28,9 +28,9 @@ class CitySelectVC: UITableViewController {
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
         Global.instance.addSpinner(superView: self.tableView)
-        DataService.instance.getAllCitys { (success) in
+        TeamService.instance.getAllCitys { (success) in
             if success {
-                self.citys = DataService.instance.citys
+                self.citys = TeamService.instance.citys
                 //print(self.citys)
                 self.tableView.reloadData()
                 Global.instance.removeSpinner(superView: self.tableView)

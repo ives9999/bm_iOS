@@ -75,10 +75,10 @@ class BaseViewController: UIViewController {
             ["channel", "=", CHANNEL],
             ["manager_id", "=", Member.instance.id]
         ]
-        DataService.instance.getList(type: "team", titleField: "name", page: 1, perPage: 100, filter: filter) { (success) in
+        TeamService.instance.getList(type: "team", titleField: "name", page: 1, perPage: 100, filter: filter) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                self.teamManagerLists = DataService.instance.lists
+                self.teamManagerLists = TeamService.instance.dataLists
                 //print(self.myTeamLists)
                 //                    for team in self.myTeamLists {
                 //                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_TEMP_PLAY,"detail":"臨打"]
@@ -88,7 +88,7 @@ class BaseViewController: UIViewController {
                 
                 completion(true)
             } else {
-                self.msg = DataService.instance.msg
+                self.msg = TeamService.instance.msg
                 completion(false)
             }
         }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Team {
+class Team: List {
     static let instance = Team()
     let sections: [String] = ["", "聯絡資訊", "所在地", "打球時間", "臨打說明", "其他說明"]
     let rows: [[Dictionary<String, String>]] = [
@@ -31,7 +31,7 @@ class Team {
             ["key": TEAM_BALL_KEY],["key": TEAM_DEGREE_KEY],["key": TEAM_CHARGE_KEY],["key": TEAM_CONTENT_KEY]
         ]
     ]
-    var data:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
+//    var data:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
     var data1:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
     var data2:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
     let transferPair: [String: String] = [TEAM_CITY_KEY:"city_id",TEAM_ARENA_KEY:"arena_id"]
@@ -60,9 +60,10 @@ class Team {
     let phonePad: UIKeyboardType = UIKeyboardType.phonePad
     let emailPad: UIKeyboardType = UIKeyboardType.emailAddress
     
-    init() {
-        initData()
-        initTempPlayData()
+    override init() {
+        super.init()
+        self.initData()
+        self.initTempPlayData()
         
         
         //print("1. \(data["name"])")
@@ -75,6 +76,13 @@ class Team {
         
         
         //print("3. \(data["name"])")
+    }
+    
+    override init(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") {
+        super.init(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
+    }
+    override func listReset() {
+        initData()
     }
     
     func initData() {
@@ -139,8 +147,10 @@ class Team {
         
         for (key, _) in data {
             data[key]!["key"] = key
+            data[key]!["show"] = "未提供"
         }
         //runTestData()
+        //data["play_end"]!["value"] = "ccc"
     }
     
     func initTempPlayData() {
@@ -327,6 +337,8 @@ class Team {
                 }
                 let show: String = res.joined(separator: ", ")
                 data[TEAM_DAYS_KEY]!["show"] = show
+            } else {
+                data[TEAM_DAYS_KEY]!["show"] = "未提供"
             }
         }
     }

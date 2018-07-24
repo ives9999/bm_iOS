@@ -12,7 +12,6 @@ import AlamofireImage
 import SwiftyJSON
 
 class DataService {
-    static let instance = DataService()
     
 //    private let homes = [
 //        Home(featured: "1.jpg", title: "艾傑早安羽球團8月份會內賽"),
@@ -20,7 +19,7 @@ class DataService {
 //        Home(featured: "3.jpg", title: "外媒評十大羽毛球美女，馬琳竟上榜！")
 //    ]
     var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
-    var lists: [List] = [List]()
+    var dataLists: [List] = [List]()
     var totalCount: Int!
     var page: Int!
     var perPage: Int!
@@ -39,6 +38,21 @@ class DataService {
     var msg:String = ""
     var success: Bool = false
     
+    var model: List {
+        get {
+            return List()
+        }
+    }
+    func setData(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") -> List {
+        let list = List(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
+        return list
+    }
+    
+    func setData1(obj: JSON)->Dictionary<String, [String: Any]> {
+        let list = Dictionary<String, [String: Any]>()
+        return list
+    }
+    
     func getList(type: String, titleField: String, page: Int, perPage: Int, filter:[[Any]]?, completion: @escaping CompletionHandler) {
         self.needDownloads = [Dictionary<String, Any>]()
         var body: [String: Any] = ["source": "app", "page": String(page), "perPage": String(perPage)]
@@ -48,6 +62,7 @@ class DataService {
         //print(body)
         let url: String = String(format: URL_LIST, type)
         //print(url)
+        dataLists = [List]()
         
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
@@ -60,7 +75,7 @@ class DataService {
                 let json = JSON(data)
                 //print(json)
                 //if page == 1 {
-                    self.lists = [List]()
+                    self.dataLists = [List]()
                 //}
                 //print("page: \(page)")
                 self.totalCount = json["totalCount"].intValue
@@ -69,14 +84,15 @@ class DataService {
                     self.perPage = json["perPage"].intValue
                     let arr: [JSON] = json["rows"].arrayValue
                     for i in 0 ..< arr.count {
-                        let title: String = arr[i][titleField].stringValue
-                        let id: Int = arr[i]["id"].intValue
-                        let token: String = arr[i]["token"].stringValue
-                        let vimeo: String = arr[i]["vimeo"].stringValue
-                        let youtube: String = arr[i]["youtube"].stringValue
+                        let obj = arr[i]
+                        let title: String = obj[titleField].stringValue
+                        let id: Int = obj["id"].intValue
+                        let token: String = obj["token"].stringValue
+                        let vimeo: String = obj["vimeo"].stringValue
+                        let youtube: String = obj["youtube"].stringValue
                         
                         var path: String!
-                        let path1 = arr[i]["featured_path"].stringValue
+                        let path1 = obj["featured_path"].stringValue
                         if (path1.count > 0) {
                             path = BASE_URL + path1
                             self.needDownloads.append(["idx": i, "path": path])
@@ -84,10 +100,13 @@ class DataService {
                             path = ""
                         }
                         
-                        let list: List = List(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
-                        self.lists.append(list)
+                        let list = self.setData(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
+                        let map = self.setData1(obj: obj)
+                        list.data = map
+                        self.dataLists.append(list)
                     }
-                    //print(self.lists)
+                    //self.model.aPrint()
+                    //print(self.dataLists)
                     //print("need download image: \(self.needDownloads.count)")
                     let needDownload: Int = self.needDownloads.count
                     if (needDownload > 0) {
@@ -96,7 +115,7 @@ class DataService {
                             self.getImage(url: self.needDownloads[i]["path"] as! String, completion: { (success) in
                                 if success {
                                     let idx: Int = self.needDownloads[i]["idx"] as! Int
-                                    self.lists[idx].featured = self.image!
+                                    self.dataLists[idx].featured = self.image!
                                 }
                                 tmp -= 1
                                 if (tmp == 0) {
@@ -363,9 +382,4 @@ class DataService {
         
         return (key, chTitle, type)
     }
-    
-    
-    
-    
-    
 }

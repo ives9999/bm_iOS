@@ -35,9 +35,9 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         homeCV.delegate = self
         homeCV.dataSource = self
         
-        DataService.instance.getHomes { (success) in
+        TeamService.instance.getHomes { (success) in
             if success {
-                self.homes = DataService.instance.homes
+                self.homes = TeamService.instance.homes
                 self.homeCV.reloadData()
             }
             Global.instance.removeSpinner(superView: self.view)
@@ -66,7 +66,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let key: String = DataService.instance.sectionToKey(section: section).key
+        let key: String = TeamService.instance.sectionToKey(section: section).key
         let number: Int = homes[key]!.count
         
         return number
@@ -76,7 +76,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         switch kind {
         case UICollectionElementKindSectionHeader:
             if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionHeaderView", for: indexPath) as? HomeCollectionHeaderView {
-                let headerTitle = DataService.instance.sectionToKey(section: indexPath.section).chTitle
+                let headerTitle = TeamService.instance.sectionToKey(section: indexPath.section).chTitle
                 headerView.titleLbl.text = headerTitle
                 return headerView
             } else {
@@ -90,7 +90,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //print("cellForItemAt section: \(indexPath.section) row: \(indexPath.row)")
-        let home = DataService.instance.getHomeItem(indexPath: indexPath)
+        let home = TeamService.instance.getHomeItem(indexPath: indexPath)
         if home.vimeo.count > 0 || home.youtube.count > 0 {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeVideoCell", for: indexPath) as? HomeVideoCell {
                 cell.updateViews(home: home)
@@ -109,7 +109,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section > 0 {
-            let home: Home = DataService.instance.getHomeItem(indexPath: indexPath)
+            let home: Home = TeamService.instance.getHomeItem(indexPath: indexPath)
             //print(home)
             performSegue(withIdentifier: "ShowSegue", sender: home)
         }

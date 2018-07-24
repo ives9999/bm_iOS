@@ -11,20 +11,37 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-class TeamService {
-    static let instance = TeamService()
+class TeamService: DataService {
     
-    var msg:String = ""
-    var success: Bool = false
+    static let instance = TeamService()
     var id: Int = 0
     var downloadImageNum: Int = 0
     //var team: Team = Team()
-    var model:Team!
+    override var model: Team {
+        get {
+            return Team.instance
+        }
+    }
     var tempPlayDates: Array<String> = Array()
     var tempPlayDatePlayer: TempPlayDatePlayer = TempPlayDatePlayer()
     
-    init() {
-        model = Team.instance
+    override init() {
+        //model = Team.instance
+    }
+    
+    override func setData(id: Int, title: String, path: String, token: String, youtube: String, vimeo: String) -> Team {
+        let list = Team(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
+        return list
+    }
+    override func setData1(obj: JSON) -> Dictionary<String, [String : Any]> {
+        model.listReset()
+        for (key, value) in model.data {
+            if obj[key].exists() {
+                _jsonToData(tmp: obj[key], key: key, item: value)
+            }
+        }
+        model.updateInterval()
+        return model.data
     }
     
     func update(params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
@@ -33,7 +50,7 @@ class TeamService {
         body.merge(params)
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             if image != nil {
-                let imageData: Data = UIImageJPEGRepresentation(image!, 0.2)!
+                let imageData: Data = UIImageJPEGRepresentation(image!, 0.2)! as Data
                 //print(imageData)
                 //let base64: String = imageData.base64EncodedString(options: .lineLength64Characters)
                 multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)
@@ -200,9 +217,9 @@ class TeamService {
                 
                 let path: String = model.data[TEAM_FEATURED_KEY]!["path"] as! String
                 if path.count > 0 {
-                    DataService.instance.getImage(url: path, completion: { (success) in
+                    self.getImage(url: path, completion: { (success) in
                         if success {
-                            model.data[TEAM_FEATURED_KEY]!["value"] = DataService.instance.image
+                            model.data[TEAM_FEATURED_KEY]!["value"] = self.image
                             completion(true)
                             //print(team.data)
                         }
@@ -452,8 +469,9 @@ class TeamService {
             model.data[key]!["show"] = "\(value ?? "")"
         } else if type == "String" {
             value = tmp.stringValue
-            model.data[key]!["value"] = value
-            model.data[key]!["show"] = value
+            //print("\(key) => \(value!)")
+            model.data[key]!["value"] = value!
+            model.data[key]!["show"] = value!
             if key == TEAM_PLAY_START_KEY {
                 model.updatePlayStartTime(value as? String)
             } else if key == TEAM_PLAY_END_KEY {

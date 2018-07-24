@@ -48,20 +48,20 @@ extension DataRequest {
         "image/x-ms-bmp",
         "image/x-win-bitmap"
     ]
-
+    
     static let streamImageInitialBytePattern = Data(bytes: [255, 216]) // 0xffd8
-
+    
     /// Adds the content types specified to the list of acceptable images content types for validation.
     ///
     /// - parameter contentTypes: The additional content types.
     public class func addAcceptableImageContentTypes(_ contentTypes: Set<String>) {
         DataRequest.acceptableImageContentTypes.formUnion(contentTypes)
     }
-
+    
     // MARK: - iOS, tvOS and watchOS
-
-#if os(iOS) || os(tvOS) || os(watchOS)
-
+    
+    #if os(iOS) || os(tvOS) || os(watchOS)
+    
     /// Creates a response serializer that returns an image initialized from the response data using the specified
     /// image options.
     ///
@@ -83,22 +83,22 @@ extension DataRequest {
     {
         return DataResponseSerializer { request, response, data, error in
             let result = serializeResponseData(response: response, data: data, error: error)
-
+            
             guard case let .success(data) = result else { return .failure(result.error!) }
-
+            
             do {
                 try DataRequest.validateContentType(for: request, response: response)
-
+                
                 let image = try DataRequest.image(from: data, withImageScale: imageScale)
                 if inflateResponseImage { image.af_inflate() }
-
+                
                 return .success(image)
             } catch {
                 return .failure(error)
             }
         }
     }
-
+    
     /// Adds a response handler to be called once the request has finished.
     ///
     /// - parameter imageScale:           The scale factor used when interpreting the image data to construct
@@ -137,7 +137,7 @@ extension DataRequest {
             completionHandler: completionHandler
         )
     }
-
+    
     /// Sets a closure to be called periodically during the lifecycle of the request as data is read from the server
     /// and converted into images.
     ///
@@ -164,20 +164,20 @@ extension DataRequest {
         -> Self
     {
         var imageData = Data()
-
+        
         return stream { chunkData in
             if chunkData.starts(with: DataRequest.streamImageInitialBytePattern) {
                 imageData = Data()
             }
-
+            
             imageData.append(chunkData)
-
+            
             if let image = DataRequest.serializeImage(from: imageData) {
                 completionHandler(image)
             }
         }
     }
-
+    
     private class func serializeImage(
         from data: Data,
         imageScale: CGFloat = DataRequest.imageScale,
@@ -185,63 +185,63 @@ extension DataRequest {
         -> UIImage?
     {
         guard data.count > 0 else { return nil }
-
+        
         do {
             let image = try DataRequest.image(from: data, withImageScale: imageScale)
             if inflateResponseImage { image.af_inflate() }
-
+            
             return image
         } catch {
             return nil
         }
     }
-
+    
     private class func image(from data: Data, withImageScale imageScale: CGFloat) throws -> UIImage {
         if let image = UIImage.af_threadSafeImage(with: data, scale: imageScale) {
             return image
         }
-
+        
         throw AFIError.imageSerializationFailed
     }
-
+    
     public class var imageScale: CGFloat {
         #if os(iOS) || os(tvOS)
-            return UIScreen.main.scale
+        return UIScreen.main.scale
         #elseif os(watchOS)
-            return WKInterfaceDevice.current().screenScale
+        return WKInterfaceDevice.current().screenScale
         #endif
     }
-
-#elseif os(macOS)
-
+    
+    #elseif os(macOS)
+    
     // MARK: - macOS
-
+    
     /// Creates a response serializer that returns an image initialized from the response data.
     ///
     /// - returns: An image response serializer.
     public class func imageResponseSerializer() -> DataResponseSerializer<Image> {
         return DataResponseSerializer { request, response, data, error in
             let result = serializeResponseData(response: response, data: data, error: error)
-
+            
             guard case let .success(data) = result else { return .failure(result.error!) }
-
+            
             do {
                 try DataRequest.validateContentType(for: request, response: response)
             } catch {
                 return .failure(error)
             }
-
+            
             guard let bitmapImage = NSBitmapImageRep(data: data) else {
                 return .failure(AFIError.imageSerializationFailed)
             }
-
+            
             let image = NSImage(size: NSSize(width: bitmapImage.pixelsWide, height: bitmapImage.pixelsHigh))
             image.addRepresentation(bitmapImage)
-
+            
             return .success(image)
         }
     }
-
+    
     /// Adds a response handler to be called once the request has finished.
     ///
     /// - parameter completionHandler: A closure to be executed once the request has finished. The closure takes 4
@@ -257,13 +257,13 @@ extension DataRequest {
         queue: DispatchQueue? = nil,
         completionHandler: @escaping (DataResponse<Image>) -> Void)
         -> Self {
-        return response(
-            queue: queue,
-            responseSerializer: DataRequest.imageResponseSerializer(),
-            completionHandler: completionHandler
-        )
+            return response(
+                queue: queue,
+                responseSerializer: DataRequest.imageResponseSerializer(),
+                completionHandler: completionHandler
+            )
     }
-
+    
     /// Sets a closure to be called periodically during the lifecycle of the request as data is read from the server
     /// and converted into images.
     ///
@@ -274,34 +274,34 @@ extension DataRequest {
     @discardableResult
     public func streamImage(completionHandler: @escaping (Image) -> Void) -> Self {
         var imageData = Data()
-
+        
         return stream { chunkData in
             if chunkData.starts(with: DataRequest.streamImageInitialBytePattern) {
                 imageData = Data()
             }
-
+            
             imageData.append(chunkData)
-
+            
             if let image = DataRequest.serializeImage(from: imageData) {
                 completionHandler(image)
             }
         }
     }
-
+    
     private class func serializeImage(from data: Data) -> NSImage? {
         guard data.count > 0 else { return nil }
         guard let bitmapImage = NSBitmapImageRep(data: data) else { return nil }
-
+        
         let image = NSImage(size: NSSize(width: bitmapImage.pixelsWide, height: bitmapImage.pixelsHigh))
         image.addRepresentation(bitmapImage)
-
+        
         return image
     }
-
-#endif
-
+    
+    #endif
+    
     // MARK: - Content Type Validation
-
+    
     /// Returns whether the content type of the response matches one of the acceptable content types.
     ///
     /// - parameter request: The request.
@@ -310,18 +310,19 @@ extension DataRequest {
     /// - throws: An `AFError` response validation failure when an error is encountered.
     public class func validateContentType(for request: URLRequest?, response: HTTPURLResponse?) throws {
         if let url = request?.url, url.isFileURL { return }
-
+        
         guard let mimeType = response?.mimeType else {
             let contentTypes = Array(DataRequest.acceptableImageContentTypes)
             throw AFError.responseValidationFailed(reason: .missingContentType(acceptableContentTypes: contentTypes))
         }
-
+        
         guard DataRequest.acceptableImageContentTypes.contains(mimeType) else {
             let contentTypes = Array(DataRequest.acceptableImageContentTypes)
-
+            
             throw AFError.responseValidationFailed(
                 reason: .unacceptableContentType(acceptableContentTypes: contentTypes, responseContentType: mimeType)
             )
         }
     }
 }
+

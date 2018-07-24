@@ -1,48 +1,50 @@
 //
-//  TeamCell.swift
+//  ListCell.swift
 //  bm
 //
-//  Created by ives on 2017/10/17.
-//  Copyright © 2017年 bm. All rights reserved.
+//  Created by ives on 2018/7/24.
+//  Copyright © 2018年 bm. All rights reserved.
 //
 
 import UIKit
-import UIColor_Hex_Swift
 
-class ListCell: UICollectionViewCell {
+class ListCell: SuperCell {
+
+    @IBOutlet weak var listFeatured: UIImageView!
+    @IBOutlet weak var listTitleTxt: UILabel!
+    @IBOutlet weak var listCityTxt: UILabel!
+    @IBOutlet weak var listArenaTxt: UILabel!
+    @IBOutlet weak var listBallTxt: UILabel!
+    @IBOutlet weak var listDayTxt: UILabel!
+    @IBOutlet weak var listIntervalTxt: UILabel!
     
-    var title: UILabel!
-    var featured: UIImageView!
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        _initSubview()
-        
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
     }
+    
     required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    func _initSubview() {
-        let cellWidth = self.bounds.width
-        self.contentView.backgroundColor = UIColor.white
-        
-        title = UILabel(frame: CGRect(x: CGFloat(CELL_EDGE_MARGIN), y: CGFloat(0.0), width: cellWidth-CGFloat(CELL_EDGE_MARGIN*2), height: CGFloat(TITLE_HEIGHT)))
-        let myFont: UIFont! = UIFont(name: FONT_NAME, size: CGFloat(FONT_SIZE_TITLE))
-        title.font = myFont.bold()
-        title.textColor = UIColor("#265B03")
-        self.addSubview(title)
-        
-        featured = UIImageView(frame: CGRect(x: CGFloat(CELL_EDGE_MARGIN), y: CGFloat(TITLE_HEIGHT), width: cellWidth-CELL_EDGE_MARGIN*2, height: 20))
-        featured.contentMode = .scaleAspectFit
-        self.addSubview(featured)
+        super.init(coder: aDecoder)
     }
     
     func updateViews(list: List) {
-        title.text = list.title
-        featured.image = list.featured
+        listTitleTxt.text = list.title
+        listFeatured.image = list.featured
+        if let item = list.data["city"] {
+            listCityTxt.text = (item["show"] as! String)
+        }
+        if let item = list.data["arena"] {
+            listArenaTxt.text = (item["show"] as! String)
+        }
+        if let item = list.data["ball"] {
+            listBallTxt.text = (item["show"] as! String)
+        }
+        if let item = list.data["days"] {
+            listDayTxt.text = (item["show"] as! String)
+        }
+        if let item = list.data["interval"] {
+            listIntervalTxt.text = (item["show"] as! String)
+        }
+        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
     }
+    
 }
-
-
-

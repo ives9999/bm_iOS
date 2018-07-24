@@ -28,9 +28,9 @@ class ArenaSelectVC: UITableViewController {
         
         Global.instance.addSpinner(superView: self.tableView)
         let city_id: Int = selectedID!["city_id"]!
-        DataService.instance.getArenaByCityID(city_id: city_id) { (success) in
+        TeamService.instance.getArenaByCityID(city_id: city_id) { (success) in
             if success {
-                self.arenas = DataService.instance.arenas
+                self.arenas = TeamService.instance.arenas
                 //print(self.citys)
                 self.tableView.reloadData()
                 Global.instance.removeSpinner(superView: self.tableView)

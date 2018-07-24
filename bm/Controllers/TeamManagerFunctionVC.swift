@@ -87,10 +87,10 @@ class TeamManagerFunctionVC: MyTableVC {
     
     private func _deleteTeam(token: String) {
         Global.instance.addSpinner(superView: self.view)
-        DataService.instance.delete(token: token, type: "team") { (success) in
+        TeamService.instance.delete(token: token, type: "team") { (success) in
             if success {
                 Global.instance.removeSpinner(superView: self.view)
-                if (!DataService.instance.success) {
+                if (!TeamService.instance.success) {
                     SCLAlertView().showError("錯誤", subTitle: "無法刪除球隊，請稍後再試")
                 }
                 NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)

@@ -48,7 +48,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
         listCV = UICollectionView(frame: CGRect(x: 0, y: 84, width: frameWidth, height: frameHeight), collectionViewLayout: layout)
         //print(listCV)
-        listCV.register(ListCell.self, forCellWithReuseIdentifier: iden+"ImageCell")
+        listCV.register(ListCellBK.self, forCellWithReuseIdentifier: iden+"ImageCell")
         listCV.register(VideoCell.self, forCellWithReuseIdentifier: iden+"VideoCell")
         listCV.delegate = self
         listCV.dataSource = self
@@ -76,7 +76,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         //print(page)
         Global.instance.addSpinner(superView: self.view)
         
-        DataService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in
+        TeamService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)
@@ -85,7 +85,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     func getDataEnd(success: Bool) {
         if success {
-            let tmps: [List] = DataService.instance.lists
+            let tmps: [List] = TeamService.instance.dataLists
             //print(tmps)
             //print("===============")
             if page == 1 {
@@ -93,10 +93,10 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             }
             lists += tmps
             //print(self.lists)
-            page = DataService.instance.page
+            page = TeamService.instance.page
             if page == 1 {
-                totalCount = DataService.instance.totalCount
-                perPage = DataService.instance.perPage
+                totalCount = TeamService.instance.totalCount
+                perPage = TeamService.instance.perPage
                 let _pageCount: Int = totalCount / perPage
                 totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
                 //print(self.totalPage)
@@ -162,7 +162,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 return cell
             }
         } else {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"ImageCell", for: indexPath) as? ListCell {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"ImageCell", for: indexPath) as? ListCellBK {
                 let image = list.featured
                 let imageWidth: CGFloat = image.size.width
                 let imageHeight: CGFloat = image.size.height

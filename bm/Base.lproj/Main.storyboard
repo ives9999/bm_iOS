@@ -1773,16 +1773,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="UkJ-5o-MVz">
                                 <rect key="frame" x="0.0" y="84" width="375" height="534"/>
                             </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rJI-Y4-Ooh">
+                                <rect key="frame" x="0.0" y="84" width="375" height="534"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="h8g-qX-Kzm" firstAttribute="top" secondItem="Oz8-8f-8Js" secondAttribute="top" id="8XZ-8q-zIs"/>
                             <constraint firstItem="UkJ-5o-MVz" firstAttribute="trailing" secondItem="Oz8-8f-8Js" secondAttribute="trailing" id="B6E-MB-1L4"/>
                             <constraint firstItem="UkJ-5o-MVz" firstAttribute="leading" secondItem="Oz8-8f-8Js" secondAttribute="leading" id="Quj-Gz-YfA"/>
+                            <constraint firstItem="rJI-Y4-Ooh" firstAttribute="leading" secondItem="Oz8-8f-8Js" secondAttribute="leading" id="Rqu-dK-MKq"/>
                             <constraint firstItem="h8g-qX-Kzm" firstAttribute="leading" secondItem="Oz8-8f-8Js" secondAttribute="leading" id="ShF-Yw-AnY"/>
+                            <constraint firstItem="Oz8-8f-8Js" firstAttribute="trailing" secondItem="rJI-Y4-Ooh" secondAttribute="trailing" id="Xcf-YF-O4A"/>
                             <constraint firstItem="UkJ-5o-MVz" firstAttribute="top" secondItem="h8g-qX-Kzm" secondAttribute="bottom" id="kew-X1-8LV"/>
                             <constraint firstItem="Oz8-8f-8Js" firstAttribute="trailing" secondItem="h8g-qX-Kzm" secondAttribute="trailing" id="mVN-tT-sCF"/>
+                            <constraint firstItem="rJI-Y4-Ooh" firstAttribute="top" secondItem="h8g-qX-Kzm" secondAttribute="bottom" id="vSg-Nk-ky3"/>
                             <constraint firstItem="Oz8-8f-8Js" firstAttribute="bottom" secondItem="UkJ-5o-MVz" secondAttribute="bottom" id="wug-nG-QoW"/>
+                            <constraint firstItem="Oz8-8f-8Js" firstAttribute="bottom" secondItem="rJI-Y4-Ooh" secondAttribute="bottom" id="x5b-xk-OYK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Oz8-8f-8Js"/>
                     </view>
@@ -1791,13 +1799,14 @@
                     <connections>
                         <outlet property="managerBtn" destination="ayd-RJ-lxK" id="8ga-4O-AxJ"/>
                         <outlet property="menuBtn" destination="E9V-cS-tg9" id="rfP-Ni-bjs"/>
+                        <outlet property="tableView" destination="rJI-Y4-Ooh" id="cf1-zU-0bd"/>
                         <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="AlK-fI-QxB"/>
                         <segue destination="Zvi-i7-Pcr" kind="show" identifier="toTeamManager" id="xCJ-lv-P9J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v4d-2t-b3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137" y="-170"/>
+            <point key="canvasLocation" x="136.80000000000001" y="-170.46476761619192"/>
         </scene>
         <!--Team ManagerVC-->
         <scene sceneID="Joe-Qd-tZ0">

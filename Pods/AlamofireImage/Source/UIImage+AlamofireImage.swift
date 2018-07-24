@@ -46,10 +46,10 @@ extension UIImage {
         lock.lock()
         let image = UIImage(data: data)
         lock.unlock()
-
+        
         return image
     }
-
+    
     /// Initializes and returns the image object with the specified data and scale in a thread-safe manner.
     ///
     /// It has been reported that there are thread-safety issues when initializing large amounts of images
@@ -66,7 +66,7 @@ extension UIImage {
         lock.lock()
         let image = UIImage(data: data, scale: scale)
         lock.unlock()
-
+        
         return image
     }
 }
@@ -77,7 +77,7 @@ extension UIImage {
     private struct AssociatedKey {
         static var inflated = "af_UIImage.Inflated"
     }
-
+    
     /// Returns whether the image is inflated.
     public var af_inflated: Bool {
         get {
@@ -91,14 +91,14 @@ extension UIImage {
             objc_setAssociatedObject(self, &AssociatedKey.inflated, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-
+    
     /// Inflates the underlying compressed image data to be backed by an uncompressed bitmap representation.
     ///
     /// Inflating compressed image formats (such as PNG or JPEG) can significantly improve drawing performance as it
     /// allows a bitmap representation to be constructed in the background rather than on the main thread.
     public func af_inflate() {
         guard !af_inflated else { return }
-
+        
         af_inflated = true
         _ = cgImage?.dataProvider?.data
     }
@@ -110,15 +110,15 @@ extension UIImage {
     /// Returns whether the image contains an alpha component.
     public var af_containsAlphaComponent: Bool {
         let alphaInfo = cgImage?.alphaInfo
-
+        
         return (
             alphaInfo == .first ||
-            alphaInfo == .last ||
-            alphaInfo == .premultipliedFirst ||
-            alphaInfo == .premultipliedLast
+                alphaInfo == .last ||
+                alphaInfo == .premultipliedFirst ||
+                alphaInfo == .premultipliedLast
         )
     }
-
+    
     /// Returns whether the image is opaque.
     public var af_isOpaque: Bool { return !af_containsAlphaComponent }
 }
@@ -133,16 +133,16 @@ extension UIImage {
     /// - returns: A new image object.
     public func af_imageScaled(to size: CGSize) -> UIImage {
         assert(size.width > 0 && size.height > 0, "You cannot safely scale an image to a zero width or height")
-
+        
         UIGraphicsBeginImageContextWithOptions(size, af_isOpaque, 0.0)
         draw(in: CGRect(origin: .zero, size: size))
-
+        
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext() ?? self
         UIGraphicsEndImageContext()
-
+        
         return scaledImage
     }
-
+    
     /// Returns a new version of the image scaled from the center while maintaining the aspect ratio to fit within
     /// a specified size.
     ///
@@ -156,30 +156,30 @@ extension UIImage {
     /// - returns: A new image object.
     public func af_imageAspectScaled(toFit size: CGSize) -> UIImage {
         assert(size.width > 0 && size.height > 0, "You cannot safely scale an image to a zero width or height")
-
+        
         let imageAspectRatio = self.size.width / self.size.height
         let canvasAspectRatio = size.width / size.height
-
+        
         var resizeFactor: CGFloat
-
+        
         if imageAspectRatio > canvasAspectRatio {
             resizeFactor = size.width / self.size.width
         } else {
             resizeFactor = size.height / self.size.height
         }
-
+        
         let scaledSize = CGSize(width: self.size.width * resizeFactor, height: self.size.height * resizeFactor)
         let origin = CGPoint(x: (size.width - scaledSize.width) / 2.0, y: (size.height - scaledSize.height) / 2.0)
-
+        
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
         draw(in: CGRect(origin: origin, size: scaledSize))
-
+        
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext() ?? self
         UIGraphicsEndImageContext()
-
+        
         return scaledImage
     }
-
+    
     /// Returns a new version of the image scaled from the center while maintaining the aspect ratio to fill a
     /// specified size. Any pixels that fall outside the specified size are clipped.
     ///
@@ -188,27 +188,27 @@ extension UIImage {
     /// - returns: A new image object.
     public func af_imageAspectScaled(toFill size: CGSize) -> UIImage {
         assert(size.width > 0 && size.height > 0, "You cannot safely scale an image to a zero width or height")
-
+        
         let imageAspectRatio = self.size.width / self.size.height
         let canvasAspectRatio = size.width / size.height
-
+        
         var resizeFactor: CGFloat
-
+        
         if imageAspectRatio > canvasAspectRatio {
             resizeFactor = size.height / self.size.height
         } else {
             resizeFactor = size.width / self.size.width
         }
-
+        
         let scaledSize = CGSize(width: self.size.width * resizeFactor, height: self.size.height * resizeFactor)
         let origin = CGPoint(x: (size.width - scaledSize.width) / 2.0, y: (size.height - scaledSize.height) / 2.0)
-
+        
         UIGraphicsBeginImageContextWithOptions(size, af_isOpaque, 0.0)
         draw(in: CGRect(origin: origin, size: scaledSize))
-
+        
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext() ?? self
         UIGraphicsEndImageContext()
-
+        
         return scaledImage
     }
 }
@@ -228,47 +228,47 @@ extension UIImage {
     /// - returns: A new image object.
     public func af_imageRounded(withCornerRadius radius: CGFloat, divideRadiusByImageScale: Bool = false) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
-
+        
         let scaledRadius = divideRadiusByImageScale ? radius / scale : radius
-
+        
         let clippingPath = UIBezierPath(roundedRect: CGRect(origin: CGPoint.zero, size: size), cornerRadius: scaledRadius)
         clippingPath.addClip()
-
+        
         draw(in: CGRect(origin: CGPoint.zero, size: size))
-
+        
         let roundedImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-
+        
         return roundedImage
     }
-
+    
     /// Returns a new version of the image rounded into a circle.
     ///
     /// - returns: A new image object.
     public func af_imageRoundedIntoCircle() -> UIImage {
         let radius = min(size.width, size.height) / 2.0
         var squareImage = self
-
+        
         if size.width != size.height {
             let squareDimension = min(size.width, size.height)
             let squareSize = CGSize(width: squareDimension, height: squareDimension)
             squareImage = af_imageAspectScaled(toFill: squareSize)
         }
-
+        
         UIGraphicsBeginImageContextWithOptions(squareImage.size, false, 0.0)
-
+        
         let clippingPath = UIBezierPath(
             roundedRect: CGRect(origin: CGPoint.zero, size: squareImage.size),
             cornerRadius: radius
         )
-
+        
         clippingPath.addClip()
-
+        
         squareImage.draw(in: CGRect(origin: CGPoint.zero, size: squareImage.size))
-
+        
         let roundedImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
-
+        
         return roundedImage
     }
 }
@@ -291,25 +291,26 @@ extension UIImage {
     /// - returns: A new image object, or `nil` if the filter failed for any reason.
     public func af_imageFiltered(withCoreImageFilter name: String, parameters: [String: Any]? = nil) -> UIImage? {
         var image: CoreImage.CIImage? = ciImage
-
+        
         if image == nil, let CGImage = self.cgImage {
             image = CoreImage.CIImage(cgImage: CGImage)
         }
-
+        
         guard let coreImage = image else { return nil }
-
+        
         let context = CIContext(options: [kCIContextPriorityRequestLow: true])
-
+        
         var parameters: [String: Any] = parameters ?? [:]
         parameters[kCIInputImageKey] = coreImage
-
+        
         guard let filter = CIFilter(name: name, withInputParameters: parameters) else { return nil }
         guard let outputImage = filter.outputImage else { return nil }
-
+        
         let cgImageRef = context.createCGImage(outputImage, from: outputImage.extent)
-
+        
         return UIImage(cgImage: cgImageRef!, scale: scale, orientation: imageOrientation)
     }
 }
 
 #endif
+
