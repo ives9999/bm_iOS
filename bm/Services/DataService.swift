@@ -107,6 +107,9 @@ class DataService {
                     }
                     //self.model.aPrint()
                     //print(self.dataLists)
+//                    for item in self.dataLists {
+//                        print(item.data)
+//                    }
                     //print("need download image: \(self.needDownloads.count)")
                     let needDownload: Int = self.needDownloads.count
                     if (needDownload > 0) {

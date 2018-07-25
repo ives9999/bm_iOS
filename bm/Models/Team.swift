@@ -231,10 +231,8 @@ class Team: List {
         updateContent()
     }
     
-    func updateCity(_ city: City) {
-        data[TEAM_CITY_KEY]!["value"] = city.id
-        data[TEAM_CITY_KEY]!["show"] = city.name
-        data[TEAM_CITY_KEY]!["sender"] = city.id
+    override func updateCity(_ city: City) {
+        super.updateCity(city)
         setArenaSender()
     }
     func updateArena(_ arena: Arena) {

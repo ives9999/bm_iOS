@@ -19,6 +19,7 @@ class TempPlayVC: MyTableVC {
     internal(set) public var lists: [DATA] = [DATA]()
     
     override func viewDidLoad() {
+            
         model = Team.instance
         sections = model.temp_play_list_sections
         myTablView = tableView

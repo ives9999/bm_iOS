@@ -339,6 +339,65 @@ extension String {
         guard let index = index(of: character) else { return nil }
         return distance(from: startIndex, to: index)
     }
+    func substring(from idx: Int) -> String {
+        if self.count > idx {
+            let startIndex = self.index(self.startIndex, offsetBy: idx)
+            let res = self[startIndex ..< self.endIndex]
+            return String(res)
+        } else {
+            return self
+        }
+    }
+    func substring(from range: NSRange) -> String {
+        let lowBound = range.lowerBound
+        let upperBound = range.upperBound
+        //print("\(lowBound), \(upperBound)")
+        let start = index(startIndex, offsetBy: lowBound)
+        let end = index(startIndex, offsetBy: upperBound)
+        let substring = self[start ..< end]
+        return String(substring)
+    }
+    func substring(from range: CountableRange<Int>) -> String {
+        let start = index(startIndex, offsetBy: range.lowerBound)
+        let end = index(endIndex, offsetBy: range.upperBound)
+        let substring = self[start ..< end]
+        return String(substring)
+    }
+    func matches(for re: String) -> [String] {
+        do {
+            let re = try NSRegularExpression(pattern: re, options: [])
+            let nsstr = self as NSString
+            let all = NSRange(location: 0, length: nsstr.length)
+            var matches: [String] = [String]()
+            re.enumerateMatches(in: self, options:NSRegularExpression.MatchingOptions(rawValue: 0), range: all) { (match, _, stop) in
+                for n in 0 ..< match!.numberOfRanges {
+                    let range = match!.range(at: n)
+                    let substring = self.substring(from: range)
+                    matches.append(String(substring))
+                }
+                
+            }
+            return matches
+            //re.matches(in: self, options: [], range: NSRange(self.startIndex..., in: self))
+            
+//            return matches.map {
+//                String(self[Range($0.range, in: self)!])
+//            }
+        } catch let e {
+            print("invalid regex: \(e.localizedDescription)")
+            return []
+        }
+    }
+    func mobileShow() -> String {
+        let pattern = "^(09\\d\\d)\\-?(\\d\\d\\d)\\-?(\\d\\d\\d)$";
+        let res = matches(for: pattern)
+        //print(res)
+        var mobile = self
+        if res.count > 3 {
+            mobile = res[1] + "-" + res[2] + "-" + res[3]
+        }
+        return mobile
+    }
 //    func substring(_ range: CountableRange<Int>) -> String {
 //        let idx1 = index(startIndex, offsetBy: max(0, range.lowerBound))
 //        let idx2 = index(startIndex, offsetBy: min(self.count, range.upperBound))

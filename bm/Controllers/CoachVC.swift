@@ -83,7 +83,7 @@ class CoachVC: MyTableVC {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
             
             let list = lists[indexPath.row]
-            cell.updateViews(list: list)
+            cell.updateViews(list: list, iden: _type)
             
             return cell
         } else {

@@ -102,9 +102,6 @@ let TABBAR_BACKGROUND = "#0d0d0d"
 let TEXTBORDER = "#4B4B4B"
 
 // User Defaults
-let ID_KEY = "id"
-let TOKEN_KEY = "token"
-let EMAIL_KEY = "email"
 let NICKNAME_KEY = "nickname"
 let ISLOGGEDIN_KEY = "isLoggedIn"
 let UID_KEY = "uid"
@@ -113,7 +110,6 @@ let CHANNEL_KEY = "channel"
 let DOB_KEY = "dob"
 let SEX_KEY = "sex"
 let TEL_KEY = "tel"
-let MOBILE_KEY = "mobile"
 let PID_KEY = "pid"
 let AVATAR_KEY = "avatar"
 let MEMBER_TYPE_KEY = "type"
@@ -185,6 +181,34 @@ let TEAM_CAT_KEY = "cat_id"
 let TEAM_NEAR_DATE_KEY = "near_date"
 
 // Team temp_play key
+
+let COACH_SENIORITY_KEY = "seniority"
+let COACH_EXP_KEY = "exp"
+let COACH_FEAT_KEY = "feat"
+let COACH_LICENSE_KEY = "license"
+let COACH_CHARGE_KEY = "charge"
+let COACH_CONTENT_KEY = "content"
+
+// General key
+let ID_KEY = "id"
+let TOKEN_KEY = "token"
+let EMAIL_KEY = "email"
+let SLUG_KEY = "slug"
+let WEBSITE_KEY = "website"
+let YOUTUBE_KEY = "youtube"
+let VIMEO_KEY = "vimeo"
+let FB_KEY = "fb"
+let LINE_KEY = "line"
+let MOBILE_KEY = "mobile"
+let MANAGER_ID_KEY = "manager_id"
+let PV_KEY = "pv"
+let STATUS_KEY = "status"
+let SORT_ORDER_KEY = "sort_order"
+let COLOR_KEY = "color"
+let CITY_KEY = "city"
+let CREATED_ID_KEY = "created_id"
+let CREATED_AT_KEY = "created_at"
+let UPDATED_AT_KEY = "updated_at"
 
 
 // Notification Constants

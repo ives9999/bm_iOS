@@ -26,23 +26,39 @@ class ListCell: SuperCell {
         super.init(coder: aDecoder)
     }
     
-    func updateViews(list: List) {
+    func updateViews(list: List, iden: String = "team") {
         listTitleTxt.text = list.title
         listFeatured.image = list.featured
-        if let item = list.data["city"] {
-            listCityTxt.text = (item["show"] as! String)
-        }
-        if let item = list.data["arena"] {
-            listArenaTxt.text = (item["show"] as! String)
-        }
-        if let item = list.data["ball"] {
-            listBallTxt.text = (item["show"] as! String)
-        }
-        if let item = list.data["days"] {
-            listDayTxt.text = (item["show"] as! String)
-        }
-        if let item = list.data["interval"] {
-            listIntervalTxt.text = (item["show"] as! String)
+        if iden == "team" {
+            if let item = list.data[CITY_KEY] {
+                listCityTxt.text = (item["show"] as! String)
+            }
+            if let item = list.data[TEAM_ARENA_KEY] {
+                listArenaTxt.text = (item["show"] as! String)
+            }
+            if let item = list.data[TEAM_BALL_KEY] {
+                listBallTxt.text = (item["show"] as! String)
+            }
+            if let item = list.data[TEAM_DAYS_KEY] {
+                listDayTxt.text = (item["show"] as! String)
+            }
+            if let item = list.data[TEAM_INTERVAL_KEY] {
+                listIntervalTxt.text = (item["show"] as! String)
+            }
+        } else if iden == "coach" {
+            if let item = list.data[CITY_KEY] {
+                listCityTxt.text = (item["show"] as! String)
+            }
+            if let item = list.data[MOBILE_KEY] {
+                listArenaTxt.text = (item["show"] as! String)
+            }
+            if let item = list.data[COACH_SENIORITY_KEY] {
+                listBallTxt.text = "年資: " + (item["show"] as! String)
+            }
+            if let item = list.data[LINE_KEY] {
+                listDayTxt.text = "line id: " + (item["show"] as! String)
+            }
+            listIntervalTxt.text = ""
         }
         accessoryType = UITableViewCellAccessoryType.disclosureIndicator
     }

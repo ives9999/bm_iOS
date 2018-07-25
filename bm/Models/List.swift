@@ -40,6 +40,21 @@ class List {
         self.data = Dictionary<String, [String: Any]>()
     }
     
+    func updateCity(_ city: City) {
+        data[TEAM_CITY_KEY]!["value"] = city.id
+        data[TEAM_CITY_KEY]!["show"] = city.name
+        data[TEAM_CITY_KEY]!["sender"] = city.id
+    }
+    
+    func mobileShow(_ _mobile: String? = nil) {
+        var mobile = _mobile
+        if _mobile == nil {
+            mobile = data[MOBILE_KEY]!["value"] as! String
+        }
+        mobile = mobile!.mobileShow()
+        data[MOBILE_KEY]!["show"] = mobile
+    }
+    
     func listReset() {}
     
     func aPrint() {
