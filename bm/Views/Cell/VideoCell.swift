@@ -24,7 +24,7 @@ class VideoCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateViews(list: List) {
+    func updateViews(list: SuperData) {
         //if bUpdate {
             var link: String?
             if list.vimeo.count > 0 {

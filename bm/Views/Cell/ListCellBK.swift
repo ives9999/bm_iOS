@@ -38,7 +38,7 @@ class ListCellBK: UICollectionViewCell {
         self.addSubview(featured)
     }
     
-    func updateViews(list: List) {
+    func updateViews(list: SuperData) {
         title.text = list.title
         featured.image = list.featured
     }

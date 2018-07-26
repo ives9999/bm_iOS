@@ -26,7 +26,7 @@ class ListCell: SuperCell {
         super.init(coder: aDecoder)
     }
     
-    func updateViews(list: List, iden: String = "team") {
+    func updateViews(list: SuperData, iden: String = "team") {
         listTitleTxt.text = list.title
         listFeatured.image = list.featured
         if iden == "team" {

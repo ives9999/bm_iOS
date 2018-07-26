@@ -23,7 +23,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     @IBOutlet weak var nicknameLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
-    var myTeamLists: [List] = [List]()
+    var myTeamLists: [SuperData] = [SuperData]()
     let _sections: [String] = ["帳戶"]
     let fixedRows: [[Dictionary<String, Any>]] = [
         [

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class Coach: List {
+class Coach: SuperData {
     static let instance = Coach()
     
     func initData() {

@@ -52,7 +52,7 @@ class TeamManagerVC: MyTableVC {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
         //print(rows)
         
-        let row: List = teamManagerLists[indexPath.row]
+        let row: SuperData = teamManagerLists[indexPath.row]
         //print(row)
         cell.textLabel!.text = row.title
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
@@ -61,7 +61,7 @@ class TeamManagerVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row: List = teamManagerLists[indexPath.row]
+        let row: SuperData = teamManagerLists[indexPath.row]
         let name: String = row.title
         let token: String = row.token
         let sender:[String: String] = ["name": name, "token": token]

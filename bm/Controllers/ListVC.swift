@@ -25,7 +25,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     var perPage: Int = PERPAGE
     var totalCount: Int = 100000
     var totalPage: Int = 1
-    internal(set) public var lists: [List] = [List]()
+    internal(set) public var lists: [SuperData] = [SuperData]()
     lazy var cellCount: CGFloat = {
         let count: Int = self.deviceType == .iPhone7 ? IPHONE_CELL_ON_ROW : IPAD_CELL_ON_ROW
         return CGFloat(count)
@@ -85,11 +85,11 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     func getDataEnd(success: Bool) {
         if success {
-            let tmps: [List] = TeamService.instance.dataLists
+            let tmps: [SuperData] = TeamService.instance.dataLists
             //print(tmps)
             //print("===============")
             if page == 1 {
-                lists = [List]()
+                lists = [SuperData]()
             }
             lists += tmps
             //print(self.lists)
@@ -187,7 +187,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let list: List = lists[indexPath.row]
+        let list: SuperData = lists[indexPath.row]
         if list.vimeo.count == 0 && list.youtube.count == 0 {
             performSegue(withIdentifier: "ListShowSegue", sender: list)
         }
@@ -195,8 +195,8 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let showVC: ShowVC = segue.destination as? ShowVC {
-            assert(sender as? List != nil)
-            let list: List = sender as! List
+            assert(sender as? SuperData != nil)
+            let list: SuperData = sender as! SuperData
             let show_in: Show_IN = Show_IN(type: iden, id: list.id, token: list.token)
             showVC.initShowVC(sin: show_in)
         }

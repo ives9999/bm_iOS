@@ -99,7 +99,7 @@
 		F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */; };
 		F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */; };
 		F9A1CB7F1F95CD2500DDEC86 /* ListCellBK.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* ListCellBK.swift */; };
-		F9A1CB811F95CE2F00DDEC86 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB801F95CE2F00DDEC86 /* List.swift */; };
+		F9A1CB811F95CE2F00DDEC86 /* SuperData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB801F95CE2F00DDEC86 /* SuperData.swift */; };
 		F9A1CB831F986C2300DDEC86 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB821F986C2300DDEC86 /* ListVC.swift */; };
 		F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB841F9895C300DDEC86 /* CoachVC.swift */; };
 /* End PBXBuildFile section */
@@ -258,7 +258,7 @@
 		F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayListCell.swift; sourceTree = "<group>"; };
 		F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		F9A1CB7E1F95CD2500DDEC86 /* ListCellBK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellBK.swift; sourceTree = "<group>"; };
-		F9A1CB801F95CE2F00DDEC86 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
+		F9A1CB801F95CE2F00DDEC86 /* SuperData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperData.swift; sourceTree = "<group>"; };
 		F9A1CB821F986C2300DDEC86 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
 		F9A1CB841F9895C300DDEC86 /* CoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -543,7 +543,7 @@
 			children = (
 				B35F8DD81F8F64310073BD70 /* Home.swift */,
 				B3F2222F1F91DE7300A8C402 /* Show_IN.swift */,
-				F9A1CB801F95CE2F00DDEC86 /* List.swift */,
+				F9A1CB801F95CE2F00DDEC86 /* SuperData.swift */,
 				B375105A1FA96C0500CDF1A0 /* Member.swift */,
 				B3ED38D81FB463D00003F083 /* Team.swift */,
 				F96931961FB953960005C13F /* City.swift */,
@@ -855,7 +855,7 @@
 				B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
 				B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */,
-				F9A1CB811F95CE2F00DDEC86 /* List.swift in Sources */,
+				F9A1CB811F95CE2F00DDEC86 /* SuperData.swift in Sources */,
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
 				B3ED38EA1FB87EE50003F083 /* TeamService.swift in Sources */,
 				B35F8DD91F8F64310073BD70 /* Home.swift in Sources */,

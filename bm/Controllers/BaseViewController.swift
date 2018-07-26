@@ -12,7 +12,7 @@ import OneSignal
 class BaseViewController: UIViewController {
     
     var msg: String = ""
-    var teamManagerLists: [List] = [List]()
+    var teamManagerLists: [SuperData] = [SuperData]()
     var refreshControl: UIRefreshControl!
 
     override func viewDidLoad() {

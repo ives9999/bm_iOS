@@ -8,7 +8,7 @@
 
 import UIKit
 
-class List {
+class SuperData {
     var id: Int
     var title: String
     var featured: UIImage

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Team: List {
+class Team: SuperData {
     static let instance = Team()
     let sections: [String] = ["", "聯絡資訊", "所在地", "打球時間", "臨打說明", "其他說明"]
     let rows: [[Dictionary<String, String>]] = [

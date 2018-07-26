@@ -19,7 +19,7 @@ class DataService {
 //        Home(featured: "3.jpg", title: "外媒評十大羽毛球美女，馬琳竟上榜！")
 //    ]
     var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
-    var dataLists: [List] = [List]()
+    var dataLists: [SuperData] = [SuperData]()
     var totalCount: Int!
     var page: Int!
     var perPage: Int!
@@ -38,13 +38,13 @@ class DataService {
     var msg:String = ""
     var success: Bool = false
     
-    var model: List {
+    var model: SuperData {
         get {
-            return List()
+            return SuperData()
         }
     }
-    func setData(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") -> List {
-        let list = List(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
+    func setData(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") -> SuperData {
+        let list = SuperData(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
         return list
     }
     
@@ -62,7 +62,7 @@ class DataService {
         //print(body)
         let url: String = String(format: URL_LIST, type)
         //print(url)
-        dataLists = [List]()
+        dataLists = [SuperData]()
         
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
@@ -75,7 +75,7 @@ class DataService {
                 let json = JSON(data)
                 //print(json)
                 //if page == 1 {
-                    self.dataLists = [List]()
+                    self.dataLists = [SuperData]()
                 //}
                 //print("page: \(page)")
                 self.totalCount = json["totalCount"].intValue

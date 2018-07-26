@@ -16,7 +16,7 @@ class TeamVC: MyTableVC {
     @IBOutlet weak var managerBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
     
-    internal(set) public var lists: [List] = [List]()
+    internal(set) public var lists: [SuperData] = [SuperData]()
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -69,11 +69,11 @@ class TeamVC: MyTableVC {
     }
     override func getDataEnd(success: Bool) {
         if success {
-            let tmps: [List] = TeamService.instance.dataLists
+            let tmps: [SuperData] = TeamService.instance.dataLists
             //print(tmps)
             //print("===============")
             if page == 1 {
-                lists = [List]()
+                lists = [SuperData]()
             }
             lists += tmps
             //print(self.lists)

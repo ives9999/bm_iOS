@@ -14,7 +14,7 @@ class CoachVC: MyTableVC {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
     
-    internal(set) public var lists: [List] = [List]()
+    internal(set) public var lists: [SuperData] = [SuperData]()
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -47,11 +47,11 @@ class CoachVC: MyTableVC {
     }
     override func getDataEnd(success: Bool) {
         if success {
-            let tmps: [List] = CoachService.instance.dataLists
+            let tmps: [SuperData] = CoachService.instance.dataLists
             //print(tmps)
             //print("===============")
             if page == 1 {
-                lists = [List]()
+                lists = [SuperData]()
             }
             lists += tmps
             //print(self.lists)

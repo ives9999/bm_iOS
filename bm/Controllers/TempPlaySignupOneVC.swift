@@ -84,7 +84,7 @@ class TempPlaySignupOneVC: MyTableVC {
             if success {
                 //print(self.teamManagerLists)
                 for i in 0 ..< self.teamManagerLists.count {
-                    let list: List = self.teamManagerLists[i]
+                    let list: SuperData = self.teamManagerLists[i]
                     if list.id == self.team_id {
                         self.isTeamManager = true
                         self.memberOne.append(["black_list":["title":"加入黑名單","more":true,"icon":"blacklist"]])
