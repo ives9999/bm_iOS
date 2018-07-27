@@ -363,9 +363,9 @@ extension String {
         let substring = self[start ..< end]
         return String(substring)
     }
-    func matches(for re: String) -> [String] {
+    func matches(for pattern: String) -> [String] {
         do {
-            let re = try NSRegularExpression(pattern: re, options: [])
+            let re = try NSRegularExpression(pattern: pattern, options: [])
             let nsstr = self as NSString
             let all = NSRange(location: 0, length: nsstr.length)
             var matches: [String] = [String]()

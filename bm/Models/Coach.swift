@@ -13,6 +13,7 @@ class Coach: SuperData {
     func initData() {
         data = [
             ID_KEY:["ch":"編號","vtype":"Int","value":-1,"show":""],
+            NAME_KEY:["ch":"姓名","vtype":"String","value":"","show":""],
             CHANNEL_KEY:["ch":"頻道","vtype":"String","value":"","show":""],
             WEBSITE_KEY:["ch":"網站","vtype":"String","value":"","show":""],
             FB_KEY:["ch":"FB","vtype":"String","value":"","show":""],
@@ -27,7 +28,7 @@ class Coach: SuperData {
             COACH_FEAT_KEY:["ch":"比賽成績","vtype":"String","value":"","show":""],
             COACH_LICENSE_KEY:["ch":"證照","vtype":"String","value":"","show":""],
             COACH_CHARGE_KEY:["ch":"收費標準","vtype":"String","value":"","show":""],
-            COACH_CONTENT_KEY:["ch":"內容","vtype":"String","value":"","show":""],
+            CONTENT_KEY:["ch":"內容","vtype":"String","value":"","show":""],
             MANAGER_ID_KEY:["ch":"","vtype":"Int","value":0,"show":""],
             SORT_ORDER_KEY:["ch":"","vtype":"Int","value":0,"show":""],
             PV_KEY:["ch":"瀏覽數","vtype":"Int","value":0,"show":""],

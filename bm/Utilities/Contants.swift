@@ -182,14 +182,15 @@ let TEAM_NEAR_DATE_KEY = "near_date"
 
 // Team temp_play key
 
+// Coach key
 let COACH_SENIORITY_KEY = "seniority"
 let COACH_EXP_KEY = "exp"
 let COACH_FEAT_KEY = "feat"
 let COACH_LICENSE_KEY = "license"
 let COACH_CHARGE_KEY = "charge"
-let COACH_CONTENT_KEY = "content"
 
 // General key
+let TITLE_KEY = "title"
 let ID_KEY = "id"
 let TOKEN_KEY = "token"
 let EMAIL_KEY = "email"
@@ -200,6 +201,7 @@ let VIMEO_KEY = "vimeo"
 let FB_KEY = "fb"
 let LINE_KEY = "line"
 let MOBILE_KEY = "mobile"
+let CONTENT_KEY = "content"
 let MANAGER_ID_KEY = "manager_id"
 let PV_KEY = "pv"
 let STATUS_KEY = "status"
