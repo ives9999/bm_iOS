@@ -363,16 +363,20 @@ extension String {
         let substring = self[start ..< end]
         return String(substring)
     }
-    func matches(for pattern: String) -> [String] {
+    func reMatches(for pattern: String, str _str: String?=nil) -> [String] {
+        var str = _str
+        if (str == nil) {
+            str = self
+        }
         do {
             let re = try NSRegularExpression(pattern: pattern, options: [])
-            let nsstr = self as NSString
+            let nsstr = str! as NSString
             let all = NSRange(location: 0, length: nsstr.length)
             var matches: [String] = [String]()
-            re.enumerateMatches(in: self, options:NSRegularExpression.MatchingOptions(rawValue: 0), range: all) { (match, _, stop) in
+            re.enumerateMatches(in: str!, options:NSRegularExpression.MatchingOptions(rawValue: 0), range: all) { (match, _, stop) in
                 for n in 0 ..< match!.numberOfRanges {
                     let range = match!.range(at: n)
-                    let substring = self.substring(from: range)
+                    let substring = str!.substring(from: range)
                     matches.append(String(substring))
                 }
                 
@@ -389,15 +393,41 @@ extension String {
         }
     }
     func mobileShow() -> String {
+        var res = self
+        res = res.replacingOccurrences(of: " ", with: "")
+        res = res.replacingOccurrences(of: "-", with: "")
         let pattern = "^(09\\d\\d)\\-?(\\d\\d\\d)\\-?(\\d\\d\\d)$";
-        let res = matches(for: pattern)
+        let matches = reMatches(for: pattern, str: res)
         //print(res)
         var mobile = self
-        if res.count > 3 {
-            mobile = res[1] + "-" + res[2] + "-" + res[3]
+        if matches.count > 3 {
+            mobile = matches[1] + "-" + matches[2] + "-" + matches[3]
         }
         return mobile
     }
+    func telShow() -> String {
+        var res = self
+        res = res.replacingOccurrences(of: " ", with: "")
+        res = res.replacingOccurrences(of: "-", with: "")
+        let pattern = "^(0\\d)\\-?(\\d\\d\\d\\d)\\-?(\\d\\d\\d\\d?)$";
+        let matches = reMatches(for: pattern, str: res)
+        //print(res)
+        var tel = self
+        if matches.count > 3 {
+            tel = matches[1] + "-" + matches[2] + "-" + matches[3]
+        }
+        return tel
+    }
+    func telOrMobileShow()-> String {
+        if (self.hasPrefix("09")) {
+            return self.mobileShow()
+        }
+        if (self.hasPrefix("0")) {
+            return self.telShow()
+        }
+        return self
+    }
+    
 //    func substring(_ range: CountableRange<Int>) -> String {
 //        let idx1 = index(startIndex, offsetBy: max(0, range.lowerBound))
 //        let idx2 = index(startIndex, offsetBy: min(self.count, range.upperBound))

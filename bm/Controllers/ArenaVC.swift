@@ -1,34 +1,29 @@
 //
-//  CoachVC.swift
+//  ArenaVC.swift
 //  bm
 //
-//  Created by ives on 2017/10/19.
-//  Copyright © 2017年 bm. All rights reserved.
+//  Created by ives on 2018/7/28.
+//  Copyright © 2018年 bm. All rights reserved.
 //
 
 import UIKit
 
-class CoachVC: MyTableVC {
-
-    let _type:String = "coach"
+class ArenaVC: MyTableVC {
+    
+    let _type:String = "arena"
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var menuBtn: UIButton!
-    
     internal(set) public var lists: [SuperData] = [SuperData]()
-    
+
     override func viewDidLoad() {
         myTablView = tableView
         super.viewDidLoad()
         setIden(item:_type, titleField: "name")
-        Global.instance.setupTabbar(self)
-        Global.instance.menuPressedAction(menuBtn, self)
-        
+
         let cellNibName = UINib(nibName: "ListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listcell")
         
         refresh()
     }
-    
     override func refresh() {
         page = 1
         getDataStart()
@@ -38,7 +33,7 @@ class CoachVC: MyTableVC {
         //print(page)
         Global.instance.addSpinner(superView: self.view)
         
-        CoachService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in
+        ArenaService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)
@@ -47,7 +42,7 @@ class CoachVC: MyTableVC {
     }
     override func getDataEnd(success: Bool) {
         if success {
-            let tmps: [SuperData] = CoachService.instance.dataLists
+            let tmps: [SuperData] = ArenaService.instance.dataLists
             //print(tmps)
             //print("===============")
             if page == 1 {
@@ -55,10 +50,10 @@ class CoachVC: MyTableVC {
             }
             lists += tmps
             //print(self.lists)
-            page = CoachService.instance.page
+            page = ArenaService.instance.page
             if page == 1 {
-                totalCount = CoachService.instance.totalCount
-                perPage = CoachService.instance.perPage
+                totalCount = ArenaService.instance.totalCount
+                perPage = ArenaService.instance.perPage
                 let _pageCount: Int = totalCount / perPage
                 totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
                 //print(self.totalPage)
@@ -90,12 +85,9 @@ class CoachVC: MyTableVC {
             return ListCell()
         }
     }
-    
-    @IBAction func manager(_ sender: Any) {
-        if !Member.instance.isLoggedIn {
-            SCLAlertView().showError("警告", subTitle: "請先登入為會員")
-        } else {
-            performSegue(withIdentifier: TO_TEAM_MANAGER, sender: nil)
-        }
+
+    @IBAction func prevBtnPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
+
 }

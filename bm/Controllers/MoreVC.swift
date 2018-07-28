@@ -15,6 +15,7 @@ class MoreVC: MyTableVC {
     
     var _rows: [[Dictionary<String, Any>]] = [
         [
+            ["text": "球館", "icon": "arena", "segue": TO_ARENA],
             ["text": "教學", "icon": "coach", "segue": TO_COURSE],
             ["text": "版本", "icon": "version", "segue": ""]
         ]
@@ -43,7 +44,7 @@ class MoreVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        if (indexPath.row == 1) {
+        if (indexPath.row == _rows[0].count-1) {
             //First get the nsObject by defining as an optional anyObject
             let nsObject: Any? = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
             

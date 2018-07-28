@@ -2204,6 +2204,79 @@
             </objects>
             <point key="canvasLocation" x="2233" y="-828"/>
         </scene>
+        <!--球館-->
+        <scene sceneID="rU9-us-FPg">
+            <objects>
+                <viewController title="球館" id="NIB-Wk-iZw" customClass="ArenaVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NkK-tG-RSP">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j88-uB-Kay">
+                                <rect key="frame" x="0.0" y="20" width="375" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xB-65-Tqp">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="3fm-Eq-OAE"/>
+                                            <constraint firstAttribute="height" constant="26" id="H1i-lv-OL5"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="NIB-Wk-iZw" eventType="touchUpInside" id="LQz-wP-R0U"/>
+                                            <action selector="prevBtnPressed:" destination="By4-ki-Kov" eventType="touchUpInside" id="g12-pP-pSV"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球館" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sfO-PD-WM6">
+                                        <rect key="frame" x="168.5" y="18.5" width="38.5" height="27"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="7xB-65-Tqp" firstAttribute="centerY" secondItem="j88-uB-Kay" secondAttribute="centerY" id="2P6-It-P3B"/>
+                                    <constraint firstItem="7xB-65-Tqp" firstAttribute="leading" secondItem="j88-uB-Kay" secondAttribute="leading" constant="12" id="3zc-IR-vgO"/>
+                                    <constraint firstAttribute="height" constant="64" id="BBA-yw-kcH"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="Xjj-Vd-MO3"/>
+                                    <constraint firstItem="sfO-PD-WM6" firstAttribute="centerY" secondItem="j88-uB-Kay" secondAttribute="centerY" id="gD7-mR-qfT"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="rO2-2N-Su9"/>
+                                    <constraint firstItem="sfO-PD-WM6" firstAttribute="centerX" secondItem="j88-uB-Kay" secondAttribute="centerX" id="wz4-Qm-HaQ"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="CpJ-ZY-OmS">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4mb-SH-JK7">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CpJ-ZY-OmS" firstAttribute="top" secondItem="j88-uB-Kay" secondAttribute="bottom" id="1zw-uE-ibV"/>
+                            <constraint firstItem="CpJ-ZY-OmS" firstAttribute="leading" secondItem="g6Y-AK-76q" secondAttribute="leading" id="5Lf-p4-up0"/>
+                            <constraint firstItem="g6Y-AK-76q" firstAttribute="trailing" secondItem="j88-uB-Kay" secondAttribute="trailing" id="6pM-yq-Pb0"/>
+                            <constraint firstItem="4mb-SH-JK7" firstAttribute="top" secondItem="j88-uB-Kay" secondAttribute="bottom" id="BTg-ch-BYD"/>
+                            <constraint firstItem="j88-uB-Kay" firstAttribute="leading" secondItem="NkK-tG-RSP" secondAttribute="leading" id="Gda-aF-UuM"/>
+                            <constraint firstItem="CpJ-ZY-OmS" firstAttribute="trailing" secondItem="g6Y-AK-76q" secondAttribute="trailing" id="GhY-hZ-aKk"/>
+                            <constraint firstAttribute="bottom" secondItem="CpJ-ZY-OmS" secondAttribute="bottom" id="I35-8V-GMg"/>
+                            <constraint firstItem="4mb-SH-JK7" firstAttribute="leading" secondItem="g6Y-AK-76q" secondAttribute="leading" id="MhH-un-r5P"/>
+                            <constraint firstItem="g6Y-AK-76q" firstAttribute="trailing" secondItem="4mb-SH-JK7" secondAttribute="trailing" id="XQ9-wz-bXY"/>
+                            <constraint firstItem="j88-uB-Kay" firstAttribute="top" secondItem="g6Y-AK-76q" secondAttribute="top" id="hJ6-XA-mpd"/>
+                            <constraint firstItem="g6Y-AK-76q" firstAttribute="bottom" secondItem="4mb-SH-JK7" secondAttribute="bottom" id="vqR-bj-beT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="g6Y-AK-76q"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="4mb-SH-JK7" id="mee-5x-3Mw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z6k-pd-Jq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2470" y="-160"/>
+        </scene>
         <!--CourseCV-->
         <scene sceneID="Eib-Tq-Zds">
             <objects>
@@ -2266,7 +2339,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omZ-1j-3Gu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1658" y="-170"/>
+            <point key="canvasLocation" x="-1618" y="-170"/>
         </scene>
         <!--教練-->
         <scene sceneID="5pf-JC-0gR">
@@ -2405,11 +2478,12 @@
                         <outlet property="menuBtn" destination="BPm-PN-QwP" id="thz-dv-Q4v"/>
                         <outlet property="tableView" destination="IDb-Ca-u21" id="Ysa-uM-nlx"/>
                         <segue destination="By4-ki-Kov" kind="show" identifier="toCourse" id="yI0-wB-3GU"/>
+                        <segue destination="NIB-Wk-iZw" kind="show" identifier="toArena" id="MIC-kZ-w6B"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wt5-kF-hRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1657" y="-1048"/>
+            <point key="canvasLocation" x="-1618" y="-983"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="cWJ-Jn-lsR">
@@ -2586,6 +2660,6 @@
         <segue reference="DaT-w5-CTD"/>
         <segue reference="L8k-6m-3tm"/>
         <segue reference="q87-Mu-6YG"/>
-        <segue reference="a7V-eU-Yjs"/>
+        <segue reference="vrH-5G-Fdn"/>
     </inferredMetricsTieBreakers>
 </document>

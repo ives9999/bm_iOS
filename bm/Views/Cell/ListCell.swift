@@ -26,41 +26,67 @@ class ListCell: SuperCell {
         super.init(coder: aDecoder)
     }
     
-    func updateViews(list: SuperData, iden: String = "team") {
-        listTitleTxt.text = list.title
-        listFeatured.image = list.featured
+    func updateViews(data: SuperData, iden: String = "team") {
+        listTitleTxt.text = data.title
+        listFeatured.image = data.featured
         if iden == "team" {
-            if let item = list.data[CITY_KEY] {
-                listCityTxt.text = (item["show"] as! String)
-            }
-            if let item = list.data[TEAM_ARENA_KEY] {
-                listArenaTxt.text = (item["show"] as! String)
-            }
-            if let item = list.data[TEAM_BALL_KEY] {
-                listBallTxt.text = (item["show"] as! String)
-            }
-            if let item = list.data[TEAM_DAYS_KEY] {
-                listDayTxt.text = (item["show"] as! String)
-            }
-            if let item = list.data[TEAM_INTERVAL_KEY] {
-                listIntervalTxt.text = (item["show"] as! String)
-            }
+            updateTeam(data: data)
         } else if iden == "coach" {
-            if let item = list.data[CITY_KEY] {
-                listCityTxt.text = (item["show"] as! String)
-            }
-            if let item = list.data[MOBILE_KEY] {
-                listArenaTxt.text = (item["show"] as! String)
-            }
-            if let item = list.data[COACH_SENIORITY_KEY] {
-                listBallTxt.text = "年資: " + (item["show"] as! String)
-            }
-            if let item = list.data[LINE_KEY] {
-                listDayTxt.text = "line id: " + (item["show"] as! String)
-            }
-            listIntervalTxt.text = ""
+            updateCoach(data: data)
+        } else if iden == "arena" {
+            updateArena(data: data)
         }
         accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+    }
+    
+    func updateTeam(data: SuperData) {
+        if let item = data.data[CITY_KEY] {
+            listCityTxt.text = (item["show"] as! String)
+        }
+        if let item = data.data[TEAM_ARENA_KEY] {
+            listArenaTxt.text = (item["show"] as! String)
+        }
+        if let item = data.data[TEAM_BALL_KEY] {
+            listBallTxt.text = (item["show"] as! String)
+        }
+        if let item = data.data[TEAM_DAYS_KEY] {
+            listDayTxt.text = (item["show"] as! String)
+        }
+        if let item = data.data[TEAM_INTERVAL_KEY] {
+            listIntervalTxt.text = (item["show"] as! String)
+        }
+    }
+    func updateCoach(data: SuperData) {
+        if let item = data.data[CITY_KEY] {
+            listCityTxt.text = (item["show"] as! String)
+        }
+        if let item = data.data[MOBILE_KEY] {
+            listArenaTxt.text = (item["show"] as! String)
+        }
+        if let item = data.data[COACH_SENIORITY_KEY] {
+            listBallTxt.text = "年資: " + (item["show"] as! String)
+        }
+        if let item = data.data[LINE_KEY] {
+            listDayTxt.text = "line id: " + (item["show"] as! String)
+        }
+        listIntervalTxt.text = ""
+    }
+    func updateArena(data: SuperData) {
+        if let item = data.data[CITY_KEY] {
+            listCityTxt.text = (item["show"] as! String)
+        }
+        if let item = data.data[TEL_KEY] {
+            listArenaTxt.text = (item["show"] as! String)
+        }
+        if let item = data.data[AREA_KEY] {
+            listBallTxt.text = (item["show"] as! String)
+        }
+        if let item = data.data[ARENA_INTERVAL_KEY] {
+            listDayTxt.text = (item["show"] as! String)
+        }
+        if let item = data.data[ARENA_AIR_CONDITION_KEY] {
+            listIntervalTxt.text = "空調: " + (item["show"] as! String)
+        }
     }
     
 }

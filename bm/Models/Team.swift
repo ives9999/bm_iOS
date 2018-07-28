@@ -123,7 +123,7 @@ class Team: SuperData {
             TEAM_CITY_KEY:["ch":"區域","vtype":"array","value":0,"submit":true,"atype":more,"segue":TO_CITY,"sender":0,"show":""],
             TEAM_ARENA_KEY:["ch":"球館","vtype":"array","value":0,"submit":true,"atype":more,"segue":TO_ARENA,"sender":[String: Int](),"show":""],
             TEAM_DAYS_KEY:["ch":"星期幾","vtype":"array","value":[Int](),"submit":true,"atype":more,"segue":TO_DAY,"sender":[Int](),"show":""],
-            TEAM_FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(named: "nophoto"),"path":"","submit":false,"show":""]
+            TEAM_FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(named: "nophoto")!,"path":"","submit":false,"show":""]
         ]
         for (key, _) in data2 {
             data2[key]!["change"] = false
@@ -204,7 +204,7 @@ class Team: SuperData {
                 } else if key1 == TEAM_ARENA_KEY {
                     let arena: Arena = value as! Arena
                     data[key1]!["value"] = arena.id
-                    data[key1]!["show"] = arena.name
+                    data[key1]!["show"] = arena.title
                 } else {
                     for (key2, row) in data {
                         if key1 == key2 {
@@ -237,7 +237,7 @@ class Team: SuperData {
     }
     func updateArena(_ arena: Arena) {
         data[TEAM_ARENA_KEY]!["value"] = arena.id
-        data[TEAM_ARENA_KEY]!["show"] = arena.name
+        data[TEAM_ARENA_KEY]!["show"] = arena.title
         setArenaSender()
     }
     func updateDays(_ days: [Int]) {

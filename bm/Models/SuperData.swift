@@ -49,10 +49,19 @@ class SuperData {
     func mobileShow(_ _mobile: String? = nil) {
         var mobile = _mobile
         if _mobile == nil {
-            mobile = data[MOBILE_KEY]!["value"] as! String
+            mobile = (data[MOBILE_KEY]!["value"] as! String)
         }
         mobile = mobile!.mobileShow()
         data[MOBILE_KEY]!["show"] = mobile
+    }
+    
+    func telOrMobileShow(_tel: String? = nil) {
+        var tel = _tel
+        if _tel == nil {
+            tel = (data[TEL_KEY]!["value"] as! String)
+        }
+        tel = tel!.telOrMobileShow()
+        data[TEL_KEY]!["show"] = tel
     }
     
     func listReset() {}

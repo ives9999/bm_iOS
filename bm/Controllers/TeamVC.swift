@@ -47,8 +47,8 @@ class TeamVC: MyTableVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
             
-            let list = lists[indexPath.row]
-            cell.updateViews(list: list, iden: _type)
+            let data = lists[indexPath.row]
+            cell.updateViews(data: data, iden: _type)
             
             return cell
         } else {

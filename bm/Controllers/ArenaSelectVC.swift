@@ -64,7 +64,7 @@ class ArenaSelectVC: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        cell.textLabel!.text = arenas[indexPath.row].name
+        cell.textLabel!.text = arenas[indexPath.row].title
         if selectedID!["arena_id"]! == arenas[indexPath.row].id {
             cell.textLabel?.textColor = UIColor(MY_GREEN)
         } else {
@@ -76,7 +76,7 @@ class ArenaSelectVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let arena: Arena = arenas[indexPath.row]
-        delegate?.setArenaData(id: arena.id, name: arena.name)
+        delegate?.setArenaData(id: arena.id, name: arena.title)
         back()
     }
 

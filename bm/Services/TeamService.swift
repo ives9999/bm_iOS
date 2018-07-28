@@ -32,8 +32,8 @@ class TeamService: DataService {
     }
     
     override func setData(id: Int, title: String, path: String, token: String, youtube: String, vimeo: String) -> Team {
-        let list = Team(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
-        return list
+        let superData = Team(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
+        return superData
     }
     override func setData1(obj: JSON) -> Dictionary<String, [String : Any]> {
         model.listReset()
