@@ -102,7 +102,7 @@
 		F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */; };
 		F9A1CB7F1F95CD2500DDEC86 /* ListCellBK.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* ListCellBK.swift */; };
 		F9A1CB811F95CE2F00DDEC86 /* SuperData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB801F95CE2F00DDEC86 /* SuperData.swift */; };
-		F9A1CB831F986C2300DDEC86 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB821F986C2300DDEC86 /* ListVC.swift */; };
+		F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */; };
 		F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB841F9895C300DDEC86 /* CoachVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -263,7 +263,7 @@
 		F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		F9A1CB7E1F95CD2500DDEC86 /* ListCellBK.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellBK.swift; sourceTree = "<group>"; };
 		F9A1CB801F95CE2F00DDEC86 /* SuperData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperData.swift; sourceTree = "<group>"; };
-		F9A1CB821F986C2300DDEC86 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
+		F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		F9A1CB841F9895C300DDEC86 /* CoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -516,7 +516,7 @@
 				B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */,
 				B3ED38D61FB2A3E80003F083 /* EditProfileVC.swift */,
 				F94E7D211F83636A00F550FD /* HomeVC.swift */,
-				F9A1CB821F986C2300DDEC86 /* ListVC.swift */,
+				F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */,
 				B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */,
 				B3E72A211FA08A170008A6B1 /* MenuVC.swift */,
 				B30C954F1FED68A0005F71EF /* MoreVC.swift */,
@@ -875,7 +875,7 @@
 				B3ED38DB1FB488CB0003F083 /* ImagePickerView.swift in Sources */,
 				B36CBD5520DFCC9E00E52B9C /* SuperModel.swift in Sources */,
 				B36CBD5720DFF7B000E52B9C /* JSONParse.swift in Sources */,
-				F9A1CB831F986C2300DDEC86 /* ListVC.swift in Sources */,
+				F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */,
 				B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */,
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
 				B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */,

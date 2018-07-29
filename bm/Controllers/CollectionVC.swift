@@ -12,9 +12,9 @@ import UIColor_Hex_Swift
 
 internal let reuseIdentifier = "Cell"
 
-class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
-    internal var listCV: UICollectionView!
+    internal var collectionView: UICollectionView!
     var frameWidth: CGFloat!
     var frameHeight: CGFloat!
     var cellWidth: CGFloat!
@@ -46,19 +46,19 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
-        listCV = UICollectionView(frame: CGRect(x: 0, y: 84, width: frameWidth, height: frameHeight), collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect(x: 0, y: 84, width: frameWidth, height: frameHeight), collectionViewLayout: layout)
         //print(listCV)
-        listCV.register(ListCellBK.self, forCellWithReuseIdentifier: iden+"ImageCell")
-        listCV.register(VideoCell.self, forCellWithReuseIdentifier: iden+"VideoCell")
-        listCV.delegate = self
-        listCV.dataSource = self
+        collectionView.register(ListCellBK.self, forCellWithReuseIdentifier: iden+"ImageCell")
+        collectionView.register(VideoCell.self, forCellWithReuseIdentifier: iden+"VideoCell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
 
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
-        listCV.addSubview(refreshControl)
+        collectionView.addSubview(refreshControl)
         
-        self.view.addSubview(listCV)
+        self.view.addSubview(collectionView)
         
         //var list = List(id: 0, title: "title1", path: "", token: "")
         //list.featured = UIImage(named: "1.png")!
@@ -104,7 +104,7 @@ class ListVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                     refreshControl.endRefreshing()
                 }
             }
-            listCV.reloadData()
+            collectionView.reloadData()
             //self.page = self.page + 1 in CollectionView
         }
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CourseCV: ListVC {
+class CourseCV: CollectionVC {
     
     let _type:String = "course"
         
