@@ -12,6 +12,7 @@ import AlamofireImage
 import SwiftyJSON
 
 class DataService {
+    static let instance1 = DataService()
     
 //    private let homes = [
 //        Home(featured: "1.jpg", title: "艾傑早安羽球團8月份會內賽"),
@@ -94,7 +95,11 @@ class DataService {
                         var path: String!
                         let path1 = obj["featured_path"].stringValue
                         if (path1.count > 0) {
-                            path = BASE_URL + path1
+                            if (!path1.startWith("http://") && !path1.startWith("https://")) {
+                                path = BASE_URL + path1
+                            } else {
+                                path = path1
+                            }
                             self.needDownloads.append(["idx": i, "path": path])
                         } else {
                             path = ""

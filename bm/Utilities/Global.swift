@@ -427,6 +427,9 @@ extension String {
         }
         return self
     }
+    func startWith(_ prefix: String)-> Bool {
+        return hasPrefix(prefix)
+    }
     
 //    func substring(_ range: CountableRange<Int>) -> String {
 //        let idx1 = index(startIndex, offsetBy: max(0, range.lowerBound))

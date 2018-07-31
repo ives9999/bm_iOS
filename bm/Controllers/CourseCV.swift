@@ -13,6 +13,7 @@ class CourseCV: CollectionVC {
     let _type:String = "course"
         
     override func viewDidLoad() {
+        dataService = CourseService.instance
         setIden(item:_type, titleField: "title")
         super.viewDidLoad()
         refresh()

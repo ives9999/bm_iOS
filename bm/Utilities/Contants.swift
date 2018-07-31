@@ -56,10 +56,10 @@ let FONT_SIZE_TABBAR: CGFloat = 14
 // List pages
 let IPHONE_CELL_ON_ROW: Int = 1
 let IPAD_CELL_ON_ROW:Int = 2
-let CELL_EDGE_MARGIN: CGFloat = 5
-let TITLE_HEIGHT: CGFloat = 60
-let FEATURED_HEIGHT: CGFloat = 180
-let PERPAGE: Int = 6
+let CELL_EDGE_MARGIN: CGFloat = 12
+let TITLE_HEIGHT: CGFloat = 40
+let FEATURED_HEIGHT: CGFloat = 200
+let PERPAGE: Int = 8
 
 let STATUSBAR_HEIGHT:CGFloat = 16
 
@@ -197,6 +197,9 @@ let ARENA_PARKING_KEY: String = "parking"
 let ARENA_BATHROOM_KEY: String = "bathroom"
 let ARENA_CHARGE_KEY: String = "charge"
 let ARENA_INTERVAL_KEY: String = "interval"
+
+// Course key
+let COURSE_PROVIDER_KEY: String = "provider_url"
 
 // General key
 let ID_KEY = "id"

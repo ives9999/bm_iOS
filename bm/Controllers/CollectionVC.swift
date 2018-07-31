@@ -34,6 +34,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     //var progressLbl: UILabel?
     
     var refreshControl: UIRefreshControl!
+    var dataService: DataService = DataService.instance1
     
     override func viewDidLoad() {
         //print("super: \(self)")
@@ -48,8 +49,8 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
         collectionView = UICollectionView(frame: CGRect(x: 0, y: 84, width: frameWidth, height: frameHeight), collectionViewLayout: layout)
         //print(listCV)
-        collectionView.register(ListCellBK.self, forCellWithReuseIdentifier: iden+"ImageCell")
-        collectionView.register(VideoCell.self, forCellWithReuseIdentifier: iden+"VideoCell")
+        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: iden+"ImageCell")
+        //collectionView.register(VideoCell.self, forCellWithReuseIdentifier: iden+"VideoCell")
         collectionView.delegate = self
         collectionView.dataSource = self
 
@@ -76,7 +77,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         //print(page)
         Global.instance.addSpinner(superView: self.view)
         
-        TeamService.instance.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in
+        dataService.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)
@@ -85,7 +86,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     func getDataEnd(success: Bool) {
         if success {
-            let tmps: [SuperData] = TeamService.instance.dataLists
+            let tmps: [SuperData] = dataService.dataLists
             //print(tmps)
             //print("===============")
             if page == 1 {
@@ -93,10 +94,10 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
             }
             lists += tmps
             //print(self.lists)
-            page = TeamService.instance.page
+            page = dataService.page
             if page == 1 {
-                totalCount = TeamService.instance.totalCount
-                perPage = TeamService.instance.perPage
+                totalCount = dataService.totalCount
+                perPage = dataService.perPage
                 let _pageCount: Int = totalCount / perPage
                 totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
                 //print(self.totalPage)
@@ -111,33 +112,46 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var size: CGSize!
-        let list = lists[indexPath.row]
         
         //print("cell count: \(cellCount)")
         cellWidth = (frameWidth!-(CELL_EDGE_MARGIN*2*(cellCount-1))) / cellCount
         //print("cell width: \(cellWidth!)")
-        var cellHeight: CGFloat
         
-        if list.vimeo.count == 0 && list.youtube.count == 0 {
-            let imageWidth = list.featured.size.width
-            let imageHeight = list.featured.size.height
-            //print("image width: \(imageWidth), height: \(imageHeight)")
-            
-            cellHeight = TITLE_HEIGHT
-            if imageWidth < cellWidth - CELL_EDGE_MARGIN*2 {
-                cellHeight += imageHeight
-            } else {
-                cellHeight += (imageHeight/imageWidth) * (cellWidth-(CELL_EDGE_MARGIN*2))
-            }
-            //cellHeight += cellWidth * 0.75
-            cellHeight += CELL_EDGE_MARGIN
-            //print("cell width: \(cellWidth), height: \(cellHeight)")
-            size = CGSize(width: cellWidth, height: cellHeight)
-        } else {
-            cellHeight = (cellWidth - CELL_EDGE_MARGIN * 2) * 0.75 + CELL_EDGE_MARGIN * 2
-            size = CGSize(width: cellWidth, height: cellHeight)
-            //print("cell_width: \(cellWidth), cell_height: \(cellHeight)")
+        let data = lists[indexPath.row]
+        let featured = data.featured
+        let w = featured.size.width
+        let h = featured.size.height
+        let aspect = w / h
+        let newH = cellWidth / aspect
+        
+        var cellHeight: CGFloat
+        cellHeight = newH + 3*CELL_EDGE_MARGIN + TITLE_HEIGHT
+        //cellHeight = (cellWidth - CELL_EDGE_MARGIN * 2) * 0.8 + CELL_EDGE_MARGIN * 2
+        if data.title.count > 20 {
+            cellHeight = cellHeight + TITLE_HEIGHT
         }
+        size = CGSize(width: cellWidth, height: cellHeight)
+        
+//        if list.vimeo.count == 0 && list.youtube.count == 0 {
+//            let imageWidth = list.featured.size.width
+//            let imageHeight = list.featured.size.height
+//            //print("image width: \(imageWidth), height: \(imageHeight)")
+//
+//            cellHeight = TITLE_HEIGHT
+//            if imageWidth < cellWidth - CELL_EDGE_MARGIN*2 {
+//                cellHeight += imageHeight
+//            } else {
+//                cellHeight += (imageHeight/imageWidth) * (cellWidth-(CELL_EDGE_MARGIN*2))
+//            }
+//            //cellHeight += cellWidth * 0.75
+//            cellHeight += CELL_EDGE_MARGIN
+//            //print("cell width: \(cellWidth), height: \(cellHeight)")
+//            size = CGSize(width: cellWidth, height: cellHeight)
+//        } else {
+//            cellHeight = (cellWidth - CELL_EDGE_MARGIN * 2) * 0.75 + CELL_EDGE_MARGIN * 2
+//            size = CGSize(width: cellWidth, height: cellHeight)
+//            //print("cell_width: \(cellWidth), cell_height: \(cellHeight)")
+//        }
         //print("cell width: \(cellWidth!), height: \(cellHeight)")
         return size
     }
@@ -154,35 +168,36 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let list = lists[indexPath.row]
-        if list.vimeo.count > 0 || list.youtube.count > 0 {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"VideoCell", for: indexPath) as? VideoCell {
-                cell.updateViews(list: list)
-                
-                return cell
-            }
-        } else {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"ImageCell", for: indexPath) as? ListCellBK {
-                let image = list.featured
-                let imageWidth: CGFloat = image.size.width
-                let imageHeight: CGFloat = image.size.height
-
-                let width: CGFloat = cellWidth! - CELL_EDGE_MARGIN*2
-                var height: CGFloat!
-                if imageWidth < width {
-                    height = imageHeight
-                } else {
-                    height = (imageHeight/imageWidth) * (cellWidth-CELL_EDGE_MARGIN*2)
-                }
-                
-                let frame: CGRect = cell.featured.frame
-                //print("featured frame: \(frame)")
-                cell.featured.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: width, height: height)
-                cell.updateViews(list: list)
-                
-                return cell
-            }
+        let data = lists[indexPath.row]
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"ImageCell", for: indexPath) as? CollectionCell {
+//            let image = data.featured
+//            let imageWidth: CGFloat = image.size.width
+//            let imageHeight: CGFloat = image.size.height
+//
+//            let width: CGFloat = cellWidth! - CELL_EDGE_MARGIN*2
+//            var height: CGFloat!
+//            if imageWidth < width {
+//                height = imageHeight
+//            } else {
+//                height = (imageHeight/imageWidth) * (cellWidth-CELL_EDGE_MARGIN*2)
+//            }
+//
+//            let frame: CGRect = cell.featuredView.frame
+//            //print("featured frame: \(frame)")
+//            cell.featuredView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: width, height: height)
+            cell.updateViews(data: data)
+            
+            return cell
         }
+//        if data.vimeo.count > 0 || data.youtube.count > 0 {
+//            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"VideoCell", for: indexPath) as? VideoCell {
+//                cell.updateViews(list: data)
+//
+//                return cell
+//            }
+//        } else {
+//
+//        }
         return HomeImageCell()
     }
     
