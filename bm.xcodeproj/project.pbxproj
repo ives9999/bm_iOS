@@ -56,6 +56,7 @@
 		B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE13210781FD003699A0 /* CoachService.swift */; };
 		B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE15210CA83A003699A0 /* ArenaVC.swift */; };
 		B3DEBE18210CB30E003699A0 /* ArenaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE17210CB30E003699A0 /* ArenaService.swift */; };
+		B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE19210D6AC2003699A0 /* ListVC.swift */; };
 		B3E72A191F9CBE9F0008A6B1 /* CourseCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A181F9CBE9F0008A6B1 /* CourseCV.swift */; };
 		B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */; };
 		B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */; };
@@ -211,6 +212,7 @@
 		B3DEBE13210781FD003699A0 /* CoachService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachService.swift; sourceTree = "<group>"; };
 		B3DEBE15210CA83A003699A0 /* ArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaVC.swift; sourceTree = "<group>"; };
 		B3DEBE17210CB30E003699A0 /* ArenaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaService.swift; sourceTree = "<group>"; };
+		B3DEBE19210D6AC2003699A0 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
 		B3E72A181F9CBE9F0008A6B1 /* CourseCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCV.swift; sourceTree = "<group>"; };
 		B3E72A1B1F9F9F330008A6B1 /* bm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bm-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -540,6 +542,7 @@
 				B36CBD4E20DCBBF600E52B9C /* TempPlayDateVC.swift */,
 				B36CBD5020DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift */,
 				B3DEBE15210CA83A003699A0 /* ArenaVC.swift */,
+				B3DEBE19210D6AC2003699A0 /* ListVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -915,6 +918,7 @@
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
 				B3ED38F21FBAD4C30003F083 /* DaysSelectVC.swift in Sources */,
+				B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */,
 				B30C954C1FEA8CDA005F71EF /* PasswordVC.swift in Sources */,
 				B3E72A261FA0FBFF0008A6B1 /* LoginVC.swift in Sources */,
 				B3649416207DCB280030CF44 /* SCLExtensions.swift in Sources */,

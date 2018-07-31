@@ -196,8 +196,8 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let showVC: ShowVC = segue.destination as? ShowVC {
             assert(sender as? SuperData != nil)
-            let list: SuperData = sender as! SuperData
-            let show_in: Show_IN = Show_IN(type: iden, id: list.id, token: list.token)
+            let data: SuperData = sender as! SuperData
+            let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token)
             showVC.initShowVC(sin: show_in)
         }
     }

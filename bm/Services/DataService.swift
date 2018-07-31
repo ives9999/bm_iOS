@@ -67,7 +67,7 @@ class DataService {
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
             if response.result.error == nil {
-                //print(response.result.value)
+                //print(response.result)
                 guard let data = response.result.value else {
                     print("get response result value error")
                     return

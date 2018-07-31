@@ -2271,6 +2271,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="4mb-SH-JK7" id="mee-5x-3Mw"/>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="EIA-wN-WfT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6k-pd-Jq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2660,6 +2661,6 @@
         <segue reference="DaT-w5-CTD"/>
         <segue reference="L8k-6m-3tm"/>
         <segue reference="q87-Mu-6YG"/>
-        <segue reference="vrH-5G-Fdn"/>
+        <segue reference="EIA-wN-WfT"/>
     </inferredMetricsTieBreakers>
 </document>

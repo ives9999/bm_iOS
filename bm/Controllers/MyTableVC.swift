@@ -24,16 +24,25 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     var iden: String!
     var titleField: String!
     
+    var dataService: DataService
+    
+    convenience init(dataService: DataService) {
+        self.init(nibName:nil, bundle:nil)
+        self.dataService = dataService
+    }
+    
     convenience init(sections: [String], rows: [[Dictionary<String, Any>]]) {
         self.init(nibName:nil, bundle:nil)
         //setData(sections: sections, rows: rows)
     }
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         //nameTxt = SuperTextField()
+        dataService = DataService()
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     required init?(coder aDecoder: NSCoder) {
         //nameTxt = SuperTextField()
+        dataService = DataService()
         super.init(coder: aDecoder)
     }
     
