@@ -13,6 +13,9 @@ class CollectionCell: UICollectionViewCell {
     
     var titleLbl: UILabel!
     var featuredView: UIImageView!
+    var pvLbl: UILabel!
+    var createdAtLbl: UILabel!
+    var idx: Int = 0
     
     internal var aspectConstraint: NSLayoutConstraint? {
         didSet {
@@ -27,10 +30,28 @@ class CollectionCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        let titleFont: UIFont! = UIFont(name: FONT_NAME, size: CGFloat(FONT_SIZE_TITLE))
+        let otherFont: UIFont! = UIFont(name: FONT_NAME, size: CGFloat(FONT_SIZE_TABBAR))
         titleLbl = UILabel(frame: CGRect.zero)
+        titleLbl.font = titleFont.bold()
+        titleLbl.textColor = UIColor("#265B03")
+        titleLbl.numberOfLines = 0
         contentView.addSubview(titleLbl)
+        
         featuredView = UIImageView(frame: CGRect.zero)
         contentView.addSubview(featuredView)
+        
+        pvLbl = UILabel(frame: CGRect.zero)
+        pvLbl.font = otherFont
+        pvLbl.textColor = UIColor("#265B03")
+        contentView.addSubview(pvLbl)
+        
+        createdAtLbl = UILabel(frame: CGRect.zero)
+        createdAtLbl.font = otherFont
+        createdAtLbl.textColor = UIColor("#265B03")
+        contentView.addSubview(createdAtLbl)
+        
         _initSubview()
         
     }
@@ -39,8 +60,8 @@ class CollectionCell: UICollectionViewCell {
     }
     
     func _initSubview() {
-        let cellWidth = self.bounds.width
-        let cellHeight = self.bounds.height
+        let cellWidth = self.frame.width
+        //let cellHeight = self.frame.height
         self.contentView.backgroundColor = UIColor.white
         
         var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint, c4: NSLayoutConstraint
@@ -52,10 +73,6 @@ class CollectionCell: UICollectionViewCell {
         contentView.addConstraints([c1,c2,c3])
         
         //titleLbl = UILabel(frame: CGRect(x: CGFloat(CELL_EDGE_MARGIN), y: CGFloat(0.0), width: cellWidth-CGFloat(CELL_EDGE_MARGIN*2), height: CGFloat(TITLE_HEIGHT)))
-        let myFont: UIFont! = UIFont(name: FONT_NAME, size: CGFloat(FONT_SIZE_TITLE))
-        titleLbl.font = myFont.bold()
-        titleLbl.textColor = UIColor("#265B03")
-        titleLbl.numberOfLines = 0
         
         c1 = NSLayoutConstraint(item: featuredView, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 0)
         c2 = NSLayoutConstraint(item: featuredView, attribute: .top, relatedBy: .equal, toItem: titleLbl, attribute: .bottom, multiplier: 1, constant: CELL_EDGE_MARGIN)
@@ -64,9 +81,15 @@ class CollectionCell: UICollectionViewCell {
         featuredView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addConstraints([c1,c2,c3])
         
-        //featured = UIImageView(frame: CGRect.zero)
-        //featured = UIImageView(frame: CGRect(x: CGFloat(CELL_EDGE_MARGIN), y: CGFloat(TITLE_HEIGHT), width: cellWidth-CELL_EDGE_MARGIN*2, height: self.bounds.height))
+        c1 = NSLayoutConstraint(item: pvLbl, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: CELL_EDGE_MARGIN)
+        c2 = NSLayoutConstraint(item: pvLbl, attribute: .top, relatedBy: .equal, toItem: featuredView, attribute: .bottom, multiplier: 1, constant: CELL_EDGE_MARGIN)
+        pvLbl.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints([c1,c2])
         
+        c1 = NSLayoutConstraint(item: createdAtLbl, attribute: .leading, relatedBy: .equal, toItem: pvLbl, attribute: .trailing, multiplier: 1, constant: CELL_EDGE_MARGIN)
+        c2 = NSLayoutConstraint(item: createdAtLbl, attribute: .top, relatedBy: .equal, toItem: featuredView, attribute: .bottom, multiplier: 1, constant: CELL_EDGE_MARGIN)
+        createdAtLbl.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints([c1,c2])
     }
     
     override func layoutSubviews() {
@@ -75,17 +98,28 @@ class CollectionCell: UICollectionViewCell {
         //featuredView.contentMode = .scaleAspectFill
         featuredView.layer.masksToBounds = true
         titleLbl.sizeToFit()
+        pvLbl.sizeToFit()
+        createdAtLbl.sizeToFit()
+        //print("2.\(self.idx):\(titleLbl.frame.size.height)")
     }
     
-    func updateViews(data: SuperData) {
+    func updateViews(data: SuperData, idx: Int) {
+        self.idx = idx
         titleLbl.text = data.title
         let featured = data.featured
         featuredView.image = featured
+        pvLbl.text = "瀏覽數：" + (data.data[PV_KEY]!["show"] as! String)
+        var createdAt: String = (data.data[CREATED_AT_KEY]!["show"] as! String)
+        createdAt = createdAt.toDateTime().toString()
+        createdAtLbl.text = "建立時間：" + createdAt
         
         let aspect = featured.size.width / featured.size.height
-        let constraint = NSLayoutConstraint(item: featuredView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: featuredView, attribute: NSLayoutAttribute.height, multiplier: aspect, constant: 0)
+        //let constraint = NSLayoutConstraint(item: featuredView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: featuredView, attribute: NSLayoutAttribute.height, multiplier: aspect, constant: 0)
+        let constraint = NSLayoutConstraint(item: featuredView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.size.width/aspect)
         constraint.priority = UILayoutPriority(rawValue: 999)
         aspectConstraint = constraint
+        
+        //print("1.\(idx):\(self.frame.size.height)")
         
         setNeedsLayout()
     }

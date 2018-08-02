@@ -431,6 +431,12 @@ extension String {
         return hasPrefix(prefix)
     }
     
+    func height(font: UIFont)-> CGFloat {
+        let fontAttr = [NSAttributedStringKey.font: font]
+        let size = (self as NSString).size(withAttributes: fontAttr)
+        return size.height
+    }
+    
 //    func substring(_ range: CountableRange<Int>) -> String {
 //        let idx1 = index(startIndex, offsetBy: max(0, range.lowerBound))
 //        let idx2 = index(startIndex, offsetBy: min(self.count, range.upperBound))

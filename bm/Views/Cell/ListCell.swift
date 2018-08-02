@@ -36,7 +36,7 @@ class ListCell: SuperCell {
         } else if iden == "arena" {
             updateArena(data: data)
         }
-        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        //accessoryType = UITableViewCellAccessoryType.disclosureIndicator
     }
     
     func updateTeam(data: SuperData) {

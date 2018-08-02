@@ -110,6 +110,10 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     
     //header and footer
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if sections == nil {
             return nil

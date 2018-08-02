@@ -57,7 +57,7 @@ let FONT_SIZE_TABBAR: CGFloat = 14
 let IPHONE_CELL_ON_ROW: Int = 1
 let IPAD_CELL_ON_ROW:Int = 2
 let CELL_EDGE_MARGIN: CGFloat = 12
-let TITLE_HEIGHT: CGFloat = 40
+let TITLE_HEIGHT: CGFloat = 27
 let FEATURED_HEIGHT: CGFloat = 200
 let PERPAGE: Int = 8
 

@@ -281,7 +281,7 @@ class TempPlayShowVC: MyTableVC {
         //print(count)
         return count
     }
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tableViewHeaderHeight
     }
     /*

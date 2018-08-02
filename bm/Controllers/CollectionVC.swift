@@ -25,11 +25,13 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     var perPage: Int = PERPAGE
     var totalCount: Int = 100000
     var totalPage: Int = 1
+    var textHeight: CGFloat = TITLE_HEIGHT
     internal(set) public var lists: [SuperData] = [SuperData]()
     lazy var cellCount: CGFloat = {
         let count: Int = self.deviceType == .iPhone7 ? IPHONE_CELL_ON_ROW : IPAD_CELL_ON_ROW
         return CGFloat(count)
     }()
+    var testLabel: UILabel = UILabel(frame: CGRect.zero)
     //var spinner: UIActivityIndicatorView?
     //var progressLbl: UILabel?
     
@@ -60,6 +62,15 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         collectionView.addSubview(refreshControl)
         
         self.view.addSubview(collectionView)
+        
+        let myFont: UIFont! = UIFont(name: FONT_NAME, size: CGFloat(FONT_SIZE_TITLE))
+        textHeight = "測試".height(font: myFont)
+        
+        //print("cell count: \(cellCount)")
+        cellWidth = (frameWidth!-(CELL_EDGE_MARGIN*2*(cellCount-1))) / cellCount
+        testLabelReset()
+        testLabel.numberOfLines = 0
+        //print("cell width: \(cellWidth!)")
         
         //var list = List(id: 0, title: "title1", path: "", token: "")
         //list.featured = UIImage(named: "1.png")!
@@ -109,28 +120,44 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
             //self.page = self.page + 1 in CollectionView
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: 0, height: 0)
+    }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        //print(lists.count)
+        return lists.count
+    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         var size: CGSize!
-        
-        //print("cell count: \(cellCount)")
-        cellWidth = (frameWidth!-(CELL_EDGE_MARGIN*2*(cellCount-1))) / cellCount
-        //print("cell width: \(cellWidth!)")
-        
         let data = lists[indexPath.row]
+        
+        testLabelReset()
+        testLabel.text = data.title
+        testLabel.sizeToFit()
+        let lineCount = getTestLabelLineCount(textCount: data.title.count)
+        //let lineNum: Int = Int((testLabel.frame.size.height / textHeight).rounded(FloatingPointRoundingRule.up))
+        
+//        print("3.\(indexPath.row):\(lineCount)")
+//        print("3.\(indexPath.row):\(textHeight)")
+//        print("3.\(indexPath.row):\(testLabel.frame.size.height)")
+        let titleLblHeight = textHeight * CGFloat(lineCount)
+        
         let featured = data.featured
         let w = featured.size.width
         let h = featured.size.height
         let aspect = w / h
-        let newH = cellWidth / aspect
+        let featuredViewHeight = cellWidth / aspect
         
         var cellHeight: CGFloat
-        cellHeight = newH + 3*CELL_EDGE_MARGIN + TITLE_HEIGHT
-        //cellHeight = (cellWidth - CELL_EDGE_MARGIN * 2) * 0.8 + CELL_EDGE_MARGIN * 2
-        if data.title.count > 20 {
-            cellHeight = cellHeight + TITLE_HEIGHT
-        }
+        cellHeight = titleLblHeight + featuredViewHeight + textHeight + 4*CELL_EDGE_MARGIN
+        //print("\(indexPath.row).\(cellHeight)")
         size = CGSize(width: cellWidth, height: cellHeight)
+        //print("3.\(indexPath.row):\(titleLblHeight)")
+        //print("3.\(indexPath.row):\(featuredViewHeight)")
+        //print("3.\(indexPath.row):\(cellHeight)")
         
 //        if list.vimeo.count == 0 && list.youtube.count == 0 {
 //            let imageWidth = list.featured.size.width
@@ -159,14 +186,6 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
 //        return UIEdgeInsets(top: 5.0, left: 5.0, bottom: 30.0, right: 5.0)
 //    }
 
-    // MARK: UICollectionViewDataSource
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        //print(lists.count)
-        return lists.count
-    }
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let data = lists[indexPath.row]
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"ImageCell", for: indexPath) as? CollectionCell {
@@ -185,7 +204,8 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
 //            let frame: CGRect = cell.featuredView.frame
 //            //print("featured frame: \(frame)")
 //            cell.featuredView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: width, height: height)
-            cell.updateViews(data: data)
+            cell.updateViews(data: data, idx: indexPath.row)
+            //print("4.\(indexPath.row):\(cell.frame.size.height)")
             
             return cell
         }
@@ -198,7 +218,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
 //        } else {
 //
 //        }
-        return HomeImageCell()
+        return CollectionCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -234,6 +254,26 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     @objc func refresh() {
         self.page = 1
         getDataStart()
+    }
+    
+    private func testLabelReset() {
+        testLabel.frame = CGRect.zero
+        testLabel.frame.size.width = cellWidth-(2*CELL_EDGE_MARGIN)
+    }
+    
+    private func getTestLabelLineCount(textCount: Int = 0)-> Int {
+        let textSize = CGSize(width: CGFloat(testLabel.frame.size.width), height: CGFloat(MAXFLOAT))
+        let rHeight: Int = lroundf(Float(testLabel.sizeThatFits(textSize).height))
+        let charSize: Int = lroundf(Float(testLabel.font.pointSize))
+        var count: Int = rHeight / charSize
+        if textCount > 0 {
+            let tmp = CGFloat(textCount) / CGFloat(20)
+            let count1: Int = Int(tmp.rounded(FloatingPointRoundingRule.up))
+            if count1 > count {
+                count = count1
+            }
+        }
+        return count
     }
 //    func scrollViewDidScroll(scrollView: UIScrollView) {
 //        let offsetY = scrollView.contentOffset.y
