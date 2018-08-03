@@ -15,6 +15,8 @@
 		B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C954F1FED68A0005F71EF /* MoreVC.swift */; };
 		B31361E71F8786CC00BDA53D /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E61F8786CC00BDA53D /* Contants.swift */; };
 		B31361E91F88A35900BDA53D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E81F88A35900BDA53D /* Global.swift */; };
+		B316FED62112F13600FB990C /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B316FED42112F13600FB990C /* CollectionCell.swift */; };
+		B316FED72112F13600FB990C /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B316FED52112F13600FB990C /* CollectionCell.xib */; };
 		B317855920D60EE200765CA1 /* BlackListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B317855820D60EE200765CA1 /* BlackListVC.swift */; };
 		B317855B20D9089600765CA1 /* BlackListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B317855A20D9089600765CA1 /* BlackListCell.swift */; };
 		B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F8041FC52CAE00DE98FB /* MyTableVC.swift */; };
@@ -103,7 +105,7 @@
 		F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969319C1FD12B930005C13F /* TeamTempPlayCell.swift */; };
 		F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */; };
 		F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */; };
-		F9A1CB7F1F95CD2500DDEC86 /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* CollectionCell.swift */; };
+		F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */; };
 		F9A1CB811F95CE2F00DDEC86 /* SuperData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB801F95CE2F00DDEC86 /* SuperData.swift */; };
 		F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */; };
 		F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB841F9895C300DDEC86 /* CoachVC.swift */; };
@@ -173,6 +175,8 @@
 		B30C954F1FED68A0005F71EF /* MoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVC.swift; sourceTree = "<group>"; };
 		B31361E61F8786CC00BDA53D /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		B31361E81F88A35900BDA53D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		B316FED42112F13600FB990C /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
+		B316FED52112F13600FB990C /* CollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
 		B317855820D60EE200765CA1 /* BlackListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListVC.swift; sourceTree = "<group>"; };
 		B317855A20D9089600765CA1 /* BlackListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListCell.swift; sourceTree = "<group>"; };
 		B322F8041FC52CAE00DE98FB /* MyTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableVC.swift; sourceTree = "<group>"; };
@@ -267,7 +271,7 @@
 		F969319C1FD12B930005C13F /* TeamTempPlayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayCell.swift; sourceTree = "<group>"; };
 		F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayListCell.swift; sourceTree = "<group>"; };
 		F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
-		F9A1CB7E1F95CD2500DDEC86 /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
+		F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell1.swift; sourceTree = "<group>"; };
 		F9A1CB801F95CE2F00DDEC86 /* SuperData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperData.swift; sourceTree = "<group>"; };
 		F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		F9A1CB841F9895C300DDEC86 /* CoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachVC.swift; sourceTree = "<group>"; };
@@ -347,12 +351,14 @@
 				F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */,
 				B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
-				F9A1CB7E1F95CD2500DDEC86 /* CollectionCell.swift */,
+				F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */,
 				B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */,
 				B317855A20D9089600765CA1 /* BlackListCell.swift */,
 				B36CBD5820E13F7A00E52B9C /* TempPlayDatePlayerCell.swift */,
 				B3DEBE0D2106FDB1003699A0 /* ListCell.swift */,
 				B3DEBE0E2106FDB1003699A0 /* ListCell.xib */,
+				B316FED42112F13600FB990C /* CollectionCell.swift */,
+				B316FED52112F13600FB990C /* CollectionCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -728,6 +734,7 @@
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				F94E7D271F83636A00F550FD /* Assets.xcassets in Resources */,
+				B316FED72112F13600FB990C /* CollectionCell.xib in Resources */,
 				F94E7D251F83636A00F550FD /* Main.storyboard in Resources */,
 				B3DEBE102106FDB1003699A0 /* ListCell.xib in Resources */,
 			);
@@ -878,6 +885,7 @@
 				B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */,
 				F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */,
 				B3A5A28420B2CB80001A846F /* TeamManagerVC.swift in Sources */,
+				B316FED62112F13600FB990C /* CollectionCell.swift in Sources */,
 				B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */,
 				B3ED38DD1FB4A06C0003F083 /* MyLabel.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,
@@ -892,7 +900,7 @@
 				B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */,
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
 				B30C95391FE765FB005F71EF /* Facebook.swift in Sources */,
-				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell.swift in Sources */,
+				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,

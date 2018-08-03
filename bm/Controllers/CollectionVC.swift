@@ -14,7 +14,7 @@ internal let reuseIdentifier = "Cell"
 
 class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
-    internal var collectionView: UICollectionView!
+    @IBOutlet weak var collectionView: UICollectionView!
     var frameWidth: CGFloat!
     var frameHeight: CGFloat!
     var cellWidth: CGFloat!
@@ -47,11 +47,11 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         frameHeight = view.bounds.size.height
         deviceType = Global.instance.deviceType(frameWidth: frameWidth!)
         
-        let layout = UICollectionViewFlowLayout()
-        layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
-        collectionView = UICollectionView(frame: CGRect(x: 0, y: 84, width: frameWidth, height: frameHeight), collectionViewLayout: layout)
+        //let layout = UICollectionViewFlowLayout()
+        //layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
+        //collectionView = UICollectionView(frame: CGRect(x: 0, y: 84, width: frameWidth, height: frameHeight), collectionViewLayout: layout)
         //print(listCV)
-        collectionView.register(CollectionCell.self, forCellWithReuseIdentifier: iden+"ImageCell")
+        //collectionView.register(CollectionCell1.self, forCellWithReuseIdentifier: iden+"ImageCell")
         //collectionView.register(VideoCell.self, forCellWithReuseIdentifier: iden+"VideoCell")
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -72,11 +72,11 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         testLabel.numberOfLines = 0
         //print("cell width: \(cellWidth!)")
         
-        //var list = List(id: 0, title: "title1", path: "", token: "")
-        //list.featured = UIImage(named: "1.png")!
-        //lists.append(list)
-        //print(lists)
-        //listCV.reloadData()
+        let cellNibName = UINib(nibName: "CollectionCell", bundle: nil)
+        collectionView.register(cellNibName, forCellWithReuseIdentifier: "CollectionCell")
+//        if let flowlayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            flowlayout.estimatedItemSize = CGSize(width: cellWidth, height: 1)
+//        }
     }
     
     func setIden(item: String, titleField: String) {
@@ -188,7 +188,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let data = lists[indexPath.row]
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: iden+"ImageCell", for: indexPath) as? CollectionCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as? CollectionCell {
 //            let image = data.featured
 //            let imageWidth: CGFloat = image.size.width
 //            let imageHeight: CGFloat = image.size.height
