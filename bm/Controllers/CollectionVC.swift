@@ -47,7 +47,9 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         frameHeight = view.bounds.size.height
         deviceType = Global.instance.deviceType(frameWidth: frameWidth!)
         
-        //let layout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumLineSpacing = 25
+        collectionView!.collectionViewLayout = layout
         //layout.minimumInteritemSpacing = CELL_EDGE_MARGIN
         //collectionView = UICollectionView(frame: CGRect(x: 0, y: 84, width: frameWidth, height: frameHeight), collectionViewLayout: layout)
         //print(listCV)
