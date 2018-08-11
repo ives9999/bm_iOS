@@ -81,7 +81,10 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         Facebook.instance.login(viewController: self) {
             (success) in
             if success {
+                //print("login fb success")
                 self._loginFB()
+            } else {
+                print("login fb failure")
             }
         }
     }

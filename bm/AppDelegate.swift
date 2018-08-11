@@ -10,6 +10,7 @@ import UIKit
 import Device_swift
 import UIColor_Hex_Swift
 import OneSignal
+import FacebookCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -31,13 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Recommend moving the below line to prompt for push after informing the user about
         //   how your app will use them.
-        OneSignal.promptForPushNotifications(userResponse: { accepted in
+        //OneSignal.promptForPushNotifications(userResponse: { accepted in
             //print("User accepted notifications: \(accepted)")
-        })
+        //})
         
-        // Sync hashed email if you have a login system or collect it.
-        //   Will be used to reach the user at the most optimal time of day.
-        // OneSignal.syncHashedEmail(userEmail)
+         //Sync hashed email if you have a login system or collect it.
+           //Will be used to reach the user at the most optimal time of day.
+         //OneSignal.syncHashedEmail(userEmail)
         
         //let storyboard: UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
         //let tbController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
@@ -53,8 +54,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             gSimulate = true
         }
         
+        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
     }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return SDKApplicationDelegate.shared.application(application,
+                                                         open: url,
+                                                         sourceApplication: sourceApplication,
+                                                         annotation: annotation)
+    }
+    
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication,
+                     open url: URL,
+                     options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
+        return SDKApplicationDelegate.shared.application(application, open: url, options: options)
+    }
+    
+//    func applicatioDidBecomeActive(_ application: UIApplication) {
+//        AppEventsLogger.activate(application)
+//    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

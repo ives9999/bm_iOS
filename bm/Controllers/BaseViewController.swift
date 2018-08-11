@@ -54,7 +54,8 @@ class BaseViewController: UIViewController {
                     self.alertError(title: "錯誤", msg: MemberService.instance.msg)
                 }
             } else {
-                print("login failed by fb")
+                self.warning("使用FB登入，但無法新增至資料庫，請洽管理員")
+                //print("login failed by fb")
             }
         })
     }
