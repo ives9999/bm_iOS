@@ -12,7 +12,6 @@ import UIColor_Hex_Swift
 
 class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     
-
     // outlets
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var registerBtn: UIButton!
@@ -46,42 +45,26 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
 
         self.revealViewController().rearViewRevealWidth = self.view.frame.size.width - 60
         
-        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
-//        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.teamDidChange(_:)), name: NOTIF_TEAM_UPDATE, object: nil)
+//        NotificationCenter.default.addObserver(self, selector: #selector(MenuVC.teamDidChange(_:)), name: NOTIF_TEAM_UPDATE, object: nil) move to TempPlayVC
+        
 //        refreshControl = UIRefreshControl()
 //        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
 //        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
 //        view.addSubview(refreshControl)
+//        NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        refresh()
-    }
-    
-    @objc func memberDidChange(_ notif: Notification) {
-        //print("notify")
-        refresh()
+        //refresh()
+        _loginout()
     }
     
     override func refresh() {
-        if Member.instance.isLoggedIn {
-            refreshMember()
-            //refreshTeam()
-        } else {
-            _logoutBlock()
-        }
-    }
-    
-    func refreshMember() {
-        Global.instance.addSpinner(superView: self.view)
-        MemberService.instance.getOne(token: Member.instance.token) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if (success) {
-                self.setValidateRow()
-                self.tableView.reloadData()
-                self._loginout()
-            } else {
-                SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
+        //print("refresh")
+        refreshMember { (success) in
+            self._loginout()
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
             }
         }
     }
@@ -105,6 +88,8 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             let new: Dictionary<String, Any> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]
             _rows[0].append(new)
         }
+        let new: Dictionary<String, Any> = ["text": "重新整理", "icon": "refresh", "segue": TO_REFRESH]
+        _rows[0].append(new)
         //print(_rows)
         setData(sections: _sections, rows: _rows)
     }
@@ -154,6 +139,8 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                 performSegue(withIdentifier: segue, sender: sender)
             } else if segue == TO_BLACKLIST {
                 performSegue(withIdentifier: segue, sender: nil)
+            } else if segue == TO_REFRESH {
+                refresh()
             }
         }
     }
@@ -227,7 +214,8 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     @IBAction func loginBtnPressed(_ sender: Any) {
         if Member.instance.isLoggedIn { // logout
             MemberService.instance.logout()
-            refresh()
+            Member.instance.isLoggedIn = false
+            _loginout()
         } else {
             performSegue(withIdentifier: TO_LOGIN, sender: nil)
         }
@@ -252,7 +240,8 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     }
     
     private func _loginBlock() {
-        
+        self.setValidateRow()
+        self.tableView.reloadData()
         nicknameLbl.text = Member.instance.nickname
         loginBtn.setTitle("登出", for: .normal)
         registerBtn.isHidden = true

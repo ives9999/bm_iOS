@@ -17,6 +17,7 @@ target 'bm' do
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
+  pod 'ReachabilitySwift'
 end
 
 target 'bmNotificationServiceExtension' do

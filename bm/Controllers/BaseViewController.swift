@@ -8,6 +8,7 @@
 
 import UIKit
 import OneSignal
+import Reachability
 
 class BaseViewController: UIViewController {
     
@@ -19,6 +20,29 @@ class BaseViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        let reachability = Reachability()!
+        
+        reachability.whenReachable = { reachability in
+            if reachability.connection == .wifi {
+                //print("WiFi")
+            } else {
+                //print("Cellular")
+            }
+        }
+        reachability.whenUnreachable = { _ in
+            self.warning(msg: "沒有連接網路，所以無法使用此app", buttonTitle: "確定", buttonAction: {
+                exit(0)
+            })
+        }
+        
+        do {
+            try reachability.startNotifier()
+        } catch {
+            warning("無法開啟測試連結網路警告視窗，請稍後再使用!!")
+        }
     }
     
     func prev() {
@@ -39,6 +63,39 @@ class BaseViewController: UIViewController {
         MemberService.instance.getOne(token: token, completion: completion)
     }
     
+    func _updatePlayerIDWhenIsNull() {
+        let token = Member.instance.token
+        //print(token)
+        MemberService.instance.getOne(token: token) { (success) in
+            if (success) {
+                Member.instance.justGetMemberOne = true
+                //print(Member.instance.type)
+                if Member.instance.player_id.count == 0 {
+                    self._updatePlayerID()
+                }
+            }
+        }
+    }
+    func _updatePlayerID() {
+        var player_id = _getPlayerID()
+        //print(player_id)
+        MemberService.instance.update(id: Member.instance.id, field: PLAYERID_KEY, value: &player_id, completion: { (success) in
+            Member.instance.player_id = player_id
+        })
+    }
+    func _getPlayerID() -> String {
+        let status: OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
+        var playerID: String = ""
+        if let temp: String = status.subscriptionStatus.userId {
+            playerID = temp
+        }
+        //print(playerID)
+        //if userID != nil {
+        //let user = PFUser.cu
+        //}
+        return playerID
+    }
+    
     func _loginFB() {
         //print(Facebook.instance.uid)
         //print(Facebook.instance.email)
@@ -51,23 +108,13 @@ class BaseViewController: UIViewController {
                     self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
                 } else {
                     //print("login failed by error email or password")
-                    self.alertError(title: "錯誤", msg: MemberService.instance.msg)
+                    self.warning(MemberService.instance.msg)
                 }
             } else {
                 self.warning("使用FB登入，但無法新增至資料庫，請洽管理員")
                 //print("login failed by fb")
             }
         })
-    }
-    
-    func _getPlayerID() -> String {
-        let status: OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
-        let playerID: String = status.subscriptionStatus.userId
-        //print(playerID)
-        //if userID != nil {
-        //let user = PFUser.cu
-        //}
-        return playerID
     }
     
     func _getTeamManagerList(completion: @escaping CompletionHandler) {
@@ -116,6 +163,25 @@ class BaseViewController: UIViewController {
                 self.info("加入黑名單成功")
             } else {
                 self.warning(TeamService.instance.msg)
+            }
+        }
+    }
+    
+    @objc func memberDidChange(_ notif: Notification) {
+        //print("notify")
+        refreshMember { (success) in
+            
+        }
+    }
+    func refreshMember(completion: @escaping CompletionHandler) {
+        Global.instance.addSpinner(superView: self.view)
+        MemberService.instance.getOne(token: Member.instance.token) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                completion(true)
+            } else {
+                SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
+                completion(false)
             }
         }
     }

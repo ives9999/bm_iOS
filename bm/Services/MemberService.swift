@@ -83,7 +83,7 @@ class MemberService {
         Member.instance.isLoggedIn = false
         Member.instance.reset()
         Facebook.instance.logout()
-        NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+        //NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     }
     
     func register(email: String, password: String, repassword: String, completion: @escaping CompletionHandler) {
@@ -136,7 +136,7 @@ class MemberService {
                 self.success = json["success"].boolValue
                 if self.success {
                     self.jsonToMember(json: json)
-                    NotificationCenter.default.post(name: NOTIF_MEMBER_UPDATE, object: nil)
+                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
                 } else {
                     let errors: [String] = json["error"].arrayObject as! [String]
                     for i in 0 ..< errors.count {
@@ -173,6 +173,7 @@ class MemberService {
                 //print(json)
                 self.success = json["success"].boolValue
                 if self.success {
+                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
                     completion(true)
                 } else {
                     if json["msg"] != JSON.null {

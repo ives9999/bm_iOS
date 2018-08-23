@@ -61,6 +61,9 @@ class EditProfileVC: UIViewController {
                 submitBtnConstraintTopSwitch.isActive = true
                 submitBtnConstraintTopDatePicker.isActive = false
             } else if key == DOB_KEY {
+                if oldValue?.count == 0 {
+                    oldValue = "2000-01-01"
+                }
                 setDatePicker(startDate: oldValue!)
                 
                 dataTxt.isHidden = true
@@ -193,6 +196,7 @@ class EditProfileVC: UIViewController {
     private func setDatePicker(startDate: String) {
         let dob: Date = startDate.toDateTime(format: "yyyy-MM-dd")
         datePicker.date = dob
+        value = startDate
     }
     @objc func dateDidChange(_ sender: Any) {
         value = datePicker.date.toString()

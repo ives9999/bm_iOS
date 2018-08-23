@@ -112,6 +112,14 @@ class Member {
             session.set(AVATAR_KEY, newValue)
         }
     }
+    var player_id: String {
+        get {
+            return session.getString(PLAYERID_KEY)
+        }
+        set {
+            session.set(PLAYERID_KEY, newValue)
+        }
+    }
     var type: Int {
         get {
             return session.getInt(MEMBER_TYPE_KEY)
@@ -183,6 +191,14 @@ class Member {
             session.set(ISTEAMMANAGER_KEY, newValue)
         }
     }
+    var justGetMemberOne: Bool {
+        get {
+            return session.getBool("justGetMemberOne")
+        }
+        set {
+            session.set("justGetMemberOne", newValue)
+        }
+    }
     let info: Dictionary<String, [String: String]> = [
         ID_KEY: ["ch": "編號","type":"Int","default":"0"],
         NICKNAME_KEY: ["ch": "暱稱","type":"String","default":""],
@@ -195,6 +211,7 @@ class Member {
         SEX_KEY: ["ch": "性別","type":"String","default":"M"],
         TEL_KEY: ["ch": "市內電話","type":"String","default":""],
         MOBILE_KEY: ["ch": "行動電話","type":"String","default":""],
+        PLAYERID_KEY: ["ch": "推播id","type":"String","default":""],
         PID_KEY: ["ch": "身分證","type":"String","default":""],
         AVATAR_KEY: ["ch": "大頭貼","type":"String","default":""],
         SOCIAL_KEY: ["ch": "social","type":"String","default":""],
@@ -214,6 +231,7 @@ class Member {
             self.nickname = ""
             self.email = ""
             self.token = ""
+            self.player_id = ""
         }
     }
     
@@ -235,6 +253,9 @@ class Member {
         }
         if let val: String = data[UID_KEY] as? String {
             self.uid = val
+        }
+        if let val: String = data[PLAYERID_KEY] as? String {
+            self.player_id = val
         }
         if let val: String = data[NAME_KEY] as? String {
             self.name = val
@@ -294,6 +315,8 @@ class Member {
             return self.token
         } else if key == UID_KEY {
             return self.uid
+        } else if key == PLAYERID_KEY {
+            return self.uid
         } else if key == NAME_KEY {
             return self.name
         } else if key == CHANNEL_KEY {
@@ -342,7 +365,7 @@ class Member {
     }
     func typeShow(rawValue: Int) -> String {
         var res: [String] = [String]()
-        if rawValue & GENERAL_TYPE > 0 {
+        if rawValue & GENERAL_TYPE >= 0 {
             res.append("一般會員")
         }
         if rawValue & TEAM_TYPE > 0 {
@@ -370,6 +393,7 @@ class Member {
             }
         }
         setData(data: data)
+        self.justGetMemberOne = false
     }
 }
 

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileVC: MyTableVC {
 
     @IBOutlet weak var nicknameLbl: UILabel!
     @IBOutlet weak var sexLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    private let sections: [String] = ["登入資料","個人資料","通訊資料","設定資料"]
-    private let rows: [[String]] = [
+    let _sections: [String]? = ["登入資料","個人資料","通訊資料","設定資料"]
+    let _rows: [[String]] = [
         [NICKNAME_KEY, NAME_KEY, EMAIL_KEY],
         [SEX_KEY, DOB_KEY],
         [MOBILE_KEY, TEL_KEY],
@@ -22,64 +22,50 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     ]
     
     override func viewDidLoad() {
+        sections = _sections
+        myTablView = tableView
         super.viewDidLoad()
 
-        nicknameLbl.text = Member.instance.nickname
-        sexLbl.text = SEX.enumFromString(string: Member.instance.sex).rawValue
-        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        //tableView.backgroundColor = UIColor.clear
-        //tableView.separatorStyle = UITableViewCellSeparatorStyle.singleLine
-        //tableView.separatorColor = UIColor.white
-        tableView.delegate = self
-        tableView.dataSource = self
-        Global.instance.addSpinner(superView: view)
-        Global.instance.removeSpinner(superView: view)
+//        nicknameLbl.text = Member.instance.nickname
+//        sexLbl.text = SEX.enumFromString(string: Member.instance.sex).rawValue
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ProfileVC._reloadData), name: NOTIF_MEMBER_UPDATE, object: nil)
+        //Global.instance.addSpinner(superView: view)
+        //Global.instance.removeSpinner(superView: view)
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        refresh()
     }
     
-    @objc func _reloadData() {
+    override func refresh() {
         //print("notify member data update")
         self.tableView.reloadData()
         self.nicknameLbl.text = Member.instance.nickname
+        sexLbl.text = SEX.enumFromString(string: Member.instance.sex).rawValue
+        if self.refreshControl.isRefreshing {
+            self.refreshControl.endRefreshing()
+        }
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rows[section].count
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 30
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        var count: Int?
+        count = _rows[section].count
+        return count!
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UITableViewHeaderFooterView()
-        view.layer.backgroundColor = UIColor.clear.cgColor
-        
-        return view
-    }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UITableViewHeaderFooterView()
-        view.layer.backgroundColor = UIColor.clear.cgColor
-        
-        return view
-    }
- 
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel!.font = UIFont(name: FONT_NAME, size: FONT_SIZE_TITLE)
-        header.textLabel!.textColor = UIColor.white
-    }
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        print(sections![section])
+//        return sections![section]
+//    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
             //print("cell is nil")
@@ -87,7 +73,7 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
             cell?.selectionStyle = .none
         }
         //let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        let key: String = rows[indexPath.section][indexPath.row]
+        let key: String = _rows[indexPath.section][indexPath.row]
         let row: [String: String] = Member.instance.info[key]!
         //print(key)
         var field: String = ""
@@ -101,6 +87,14 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 data = tmp as! String
                 if key == SEX_KEY {
                     data = Member.instance.sexShow(rawValue: data)
+                } else if key == MOBILE_KEY {
+                    if Member.instance.mobile.count > 0 {
+                        data = Member.instance.mobile.mobileShow()
+                    }
+                } else if key == TEL_KEY {
+                    if Member.instance.tel.count > 0 {
+                        data = Member.instance.tel.telShow()
+                    }
                 }
                 if data.count == 0 {
                     data = "未提供"
@@ -117,13 +111,8 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
                 }
             }
         }
-        
-        
-        
         cell!.textLabel!.text = "\(field)"
-        cell!.textLabel!.textColor = UIColor.white
         cell!.detailTextLabel!.text = "\(data)"
-        cell!.detailTextLabel!.textColor = UIColor.white
         if key == "validate" || key == "type" {
             cell?.accessoryType = UITableViewCellAccessoryType.none
         } else {
@@ -133,15 +122,17 @@ class ProfileVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
        
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let key: String = rows[indexPath.section][indexPath.row]
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let key: String = _rows[indexPath.section][indexPath.row]
         if key != "validate" && key != "type" {
             performSegue(withIdentifier: TO_EDIT_PROFILE, sender: key)
         }
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.layer.backgroundColor = UIColor.clear.cgColor
+        cell.textLabel!.textColor = UIColor.white
+        cell.detailTextLabel!.textColor = UIColor.white
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

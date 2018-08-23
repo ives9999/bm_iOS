@@ -28,9 +28,7 @@ class TempPlayVC: MyTableVC {
         Global.instance.setupTabbar(self)
         Global.instance.menuPressedAction(menuBtn, self)
         
-        if Member.instance.isLoggedIn {
-            NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     
         tableView.register(TeamTempPlayListCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -43,6 +41,9 @@ class TempPlayVC: MyTableVC {
         refresh()
         
         //OneSignal.postNotification(["contents": ["en": "hello",PUSH_LANGUAGE: "有人報名臨打"], "include_player_ids": [PUSH_TEST_PLAYID]])
+        if !Member.instance.justGetMemberOne && Member.instance.isLoggedIn {
+            _updatePlayerIDWhenIsNull()
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

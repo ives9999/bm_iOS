@@ -55,6 +55,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        Member.instance.justGetMemberOne = false
         return true
     }
     
