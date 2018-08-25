@@ -59,10 +59,27 @@ class BaseViewController: UIViewController {
         }
     }
     
+    @objc func memberDidChange(_ notif: Notification) {
+        //print("notify")
+        refreshMember { (success) in
+            
+        }
+    }
     func _getMemberOne(token: String, completion: @escaping CompletionHandler) {
         MemberService.instance.getOne(token: token, completion: completion)
     }
-    
+    func refreshMember(completion: @escaping CompletionHandler) {
+        Global.instance.addSpinner(superView: self.view)
+        MemberService.instance.getOne(token: Member.instance.token) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                completion(true)
+            } else {
+                SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
+                completion(false)
+            }
+        }
+    }
     func _updatePlayerIDWhenIsNull() {
         let token = Member.instance.token
         //print(token)
@@ -80,7 +97,9 @@ class BaseViewController: UIViewController {
         var player_id = _getPlayerID()
         //print(player_id)
         MemberService.instance.update(id: Member.instance.id, field: PLAYERID_KEY, value: &player_id, completion: { (success) in
-            Member.instance.player_id = player_id
+            if success {
+                Member.instance.player_id = player_id
+            }
         })
     }
     func _getPlayerID() -> String {
@@ -163,25 +182,6 @@ class BaseViewController: UIViewController {
                 self.info("加入黑名單成功")
             } else {
                 self.warning(TeamService.instance.msg)
-            }
-        }
-    }
-    
-    @objc func memberDidChange(_ notif: Notification) {
-        //print("notify")
-        refreshMember { (success) in
-            
-        }
-    }
-    func refreshMember(completion: @escaping CompletionHandler) {
-        Global.instance.addSpinner(superView: self.view)
-        MemberService.instance.getOne(token: Member.instance.token) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if (success) {
-                completion(true)
-            } else {
-                SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
-                completion(false)
             }
         }
     }
