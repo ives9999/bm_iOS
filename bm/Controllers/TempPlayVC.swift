@@ -13,11 +13,15 @@ class TempPlayVC: MyTableVC {
     // outlets
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBtn: UIButton!
     
     var model: Team!
     let cell_constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
     internal(set) public var lists: [DATA] = [DATA]()
     
+    @IBAction func searchBtnPressed(_ sender: Any) {
+        performSegue(withIdentifier: TO_SEARCH, sender: "team_play")
+    }
     override func viewDidLoad() {
             
         model = Team.instance
@@ -71,8 +75,13 @@ class TempPlayVC: MyTableVC {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let tempPlayShowVC: TempPlayShowVC = segue.destination as! TempPlayShowVC
-        tempPlayShowVC.token = sender as! String
+        if segue.identifier == TO_TEMP_PLAY_SHOW {
+            let tempPlayShowVC: TempPlayShowVC = segue.destination as! TempPlayShowVC
+            tempPlayShowVC.token = sender as! String
+        } else if segue.identifier == TO_SEARCH {
+            let searchVC: SearchVC = segue.destination as! SearchVC
+            searchVC.type = sender as! String
+        }
     }
     
     override func refresh() {

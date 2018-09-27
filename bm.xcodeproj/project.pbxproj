@@ -86,6 +86,7 @@
 		B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */; };
 		B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */; };
 		B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222F1F91DE7300A8C402 /* Show_IN.swift */; };
+		B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */; };
 		B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FAA0A720CA5C48008F2294 /* TempPlaySignupOneVC.swift */; };
 		B3FAA0AA20CAC995008F2294 /* TempPlaySignupOneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */; };
 		F07CD1A1BB728D94904CA85F /* Pods_bm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5D58D06320800C79615904 /* Pods_bm.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -248,6 +249,7 @@
 		B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreeSelectVC.swift; sourceTree = "<group>"; };
 		B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVC.swift; sourceTree = "<group>"; };
 		B3F2222F1F91DE7300A8C402 /* Show_IN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show_IN.swift; sourceTree = "<group>"; };
+		B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		B3FAA0A720CA5C48008F2294 /* TempPlaySignupOneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlaySignupOneVC.swift; sourceTree = "<group>"; };
 		B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlaySignupOneCell.swift; sourceTree = "<group>"; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
@@ -554,6 +556,7 @@
 				B36CBD5020DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift */,
 				B3DEBE15210CA83A003699A0 /* ArenaVC.swift */,
 				B3DEBE19210D6AC2003699A0 /* ListVC.swift */,
+				B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 				B3ED38F01FB9AD460003F083 /* ArenaSelectVC.swift in Sources */,
 				B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */,
 				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
+				B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */,
 				F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */,
 				B3A5A28620B32152001A846F /* TeamManagerFunctionVC.swift in Sources */,
 				B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */,

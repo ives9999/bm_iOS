@@ -94,6 +94,7 @@ let TO_TEMP_PLAY_DATE_PLAYER: String = "toTempPlayDatePlayer"
 let TO_TEMP_PLAY_SIGNUP_ONE: String = "toTempPlaySignupOne"
 let TO_BLACKLIST: String = "toBlacklist"
 let TO_REFRESH: String = "toRefresh"
+let TO_SEARCH: String = "toSearch"
 
 // color
 let MY_GREEN = "#a6d903"
