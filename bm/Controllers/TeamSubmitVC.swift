@@ -247,6 +247,10 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             self.tableView.reloadData()
         }
     }
+    func setCitysData(res: [City])
+    {
+        //not use
+    }
     func setArenaData(id: Int, name: String) {
         let arena_id: Int = model.data[TEAM_ARENA_KEY]!["value"] as! Int
         if arena_id != id {

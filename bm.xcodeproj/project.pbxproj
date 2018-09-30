@@ -87,6 +87,8 @@
 		B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */; };
 		B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222F1F91DE7300A8C402 /* Show_IN.swift */; };
 		B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */; };
+		B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B6215D27BE005CBBC1 /* Checkbox.swift */; };
+		B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */; };
 		B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FAA0A720CA5C48008F2294 /* TempPlaySignupOneVC.swift */; };
 		B3FAA0AA20CAC995008F2294 /* TempPlaySignupOneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */; };
 		F07CD1A1BB728D94904CA85F /* Pods_bm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5D58D06320800C79615904 /* Pods_bm.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -250,6 +252,8 @@
 		B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVC.swift; sourceTree = "<group>"; };
 		B3F2222F1F91DE7300A8C402 /* Show_IN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show_IN.swift; sourceTree = "<group>"; };
 		B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		B3F8C3B6215D27BE005CBBC1 /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
+		B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC_next.swift; sourceTree = "<group>"; };
 		B3FAA0A720CA5C48008F2294 /* TempPlaySignupOneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlaySignupOneVC.swift; sourceTree = "<group>"; };
 		B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlaySignupOneCell.swift; sourceTree = "<group>"; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 		B32FBCEF1F84831C003D39CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3F8C3B6215D27BE005CBBC1 /* Checkbox.swift */,
 				B337B9A71FE2981700C3EE28 /* View */,
 				B37A13431FDAF38C00413E64 /* Button */,
 				B332977F1FD6B4B100949CDE /* Label */,
@@ -557,6 +562,7 @@
 				B3DEBE15210CA83A003699A0 /* ArenaVC.swift */,
 				B3DEBE19210D6AC2003699A0 /* ListVC.swift */,
 				B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */,
+				B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -905,6 +911,7 @@
 				B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */,
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
 				B30C95391FE765FB005F71EF /* Facebook.swift in Sources */,
+				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
@@ -937,6 +944,7 @@
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* CourseService.swift in Sources */,
+				B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
 				B3ED38F21FBAD4C30003F083 /* DaysSelectVC.swift in Sources */,

@@ -314,6 +314,30 @@ class DataService {
         }
     }
     
+    func getCustomCitys(completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app"]
+        Alamofire.request(URL_CUSTOM_CITYS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                let jsonArray: [JSON] = json[].arrayValue
+                self.citys = [City]()
+                for city in jsonArray {
+                    let id: Int = city["id"].intValue
+                    let name: String = city["name"].stringValue
+                    self.citys.append(City(id: id, name: name))
+                }
+                //print(self.citys)
+                
+                completion(true)
+            }
+        }
+    }
+    
     func getArenaByCityID(city_id: Int, completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app", "city": city_id]
         Alamofire.request(URL_ARENA_BY_CITY_ID, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in

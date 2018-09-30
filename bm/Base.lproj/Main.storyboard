@@ -1867,40 +1867,52 @@
                                     <constraint firstItem="Nd2-FW-fzb" firstAttribute="centerX" secondItem="mB9-AG-XQD" secondAttribute="centerX" id="y9G-es-oVc"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9u-HL-PaE">
+                                <rect key="frame" x="331" y="35" width="32" height="34"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                <state key="normal" title="提交">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="submit:" destination="UtM-v1-pfK" eventType="touchUpInside" id="BXo-7u-xTI"/>
+                                    <action selector="submitBtnPressed:" destination="Qui-jL-mMT" eventType="touchUpInside" id="mXP-IY-YYO"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="DpE-TG-fU1">
                                 <rect key="frame" x="0.0" y="84" width="375" height="583"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mCB-Wo-rys">
-                                <rect key="frame" x="23" y="124" width="99" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="99" id="IKF-rM-D9Y"/>
-                                    <constraint firstAttribute="height" constant="42" id="zyP-wB-uIh"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
-                                <state key="normal" title="縣市"/>
-                                <connections>
-                                    <action selector="cityBtnPressed:" destination="Qui-jL-mMT" eventType="touchUpInside" id="v5s-2r-4VE"/>
-                                </connections>
-                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qE9-4T-nY3">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="DpE-TG-fU1" secondAttribute="bottom" id="2ab-Z5-TTe"/>
+                            <constraint firstItem="qE9-4T-nY3" firstAttribute="top" secondItem="mB9-AG-XQD" secondAttribute="bottom" id="4uR-el-DDZ"/>
+                            <constraint firstItem="j9u-HL-PaE" firstAttribute="centerY" secondItem="mB9-AG-XQD" secondAttribute="centerY" id="91D-jW-YkT"/>
                             <constraint firstAttribute="trailing" secondItem="mB9-AG-XQD" secondAttribute="trailing" id="ASM-ZO-0E1"/>
+                            <constraint firstItem="qE9-4T-nY3" firstAttribute="trailing" secondItem="MId-N4-3lE" secondAttribute="trailing" id="T04-he-iac"/>
                             <constraint firstItem="DpE-TG-fU1" firstAttribute="top" secondItem="mB9-AG-XQD" secondAttribute="bottom" id="XU1-uN-x7r"/>
+                            <constraint firstItem="qE9-4T-nY3" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="Xao-qN-A0B"/>
                             <constraint firstItem="DpE-TG-fU1" firstAttribute="trailing" secondItem="MId-N4-3lE" secondAttribute="trailing" id="dSJ-Ts-xhF"/>
-                            <constraint firstItem="mCB-Wo-rys" firstAttribute="top" secondItem="mB9-AG-XQD" secondAttribute="bottom" constant="40" id="mK2-XS-UKm"/>
+                            <constraint firstItem="MId-N4-3lE" firstAttribute="trailing" secondItem="j9u-HL-PaE" secondAttribute="trailing" constant="12" id="eSn-rw-mPc"/>
+                            <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="qE9-4T-nY3" secondAttribute="bottom" id="eT5-6v-l8u"/>
                             <constraint firstItem="DpE-TG-fU1" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="pzD-KP-ssu"/>
-                            <constraint firstItem="mCB-Wo-rys" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" constant="23" id="vWB-Nr-xLT"/>
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="wIa-be-ZTa"/>
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="top" secondItem="MId-N4-3lE" secondAttribute="top" id="xYF-jR-S3y"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="MId-N4-3lE"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="qE9-4T-nY3" id="INU-li-bW2"/>
+                        <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="itP-1S-HdR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UJy-DK-SL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="701.60000000000002" y="492.50374812593708"/>
+            <point key="canvasLocation" x="167" y="-4803"/>
         </scene>
         <!--Team ManagerVC-->
         <scene sceneID="Joe-Qd-tZ0">
@@ -2765,13 +2777,14 @@
         <image name="tempPlay" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ous-Dp-pXL"/>
-        <segue reference="ViB-98-skP"/>
-        <segue reference="xcZ-Ad-vEw"/>
+        <segue reference="itP-1S-HdR"/>
+        <segue reference="OU7-h8-11b"/>
+        <segue reference="f5d-2G-qtf"/>
+        <segue reference="1gi-Xv-JX8"/>
         <segue reference="9hz-2Z-7jX"/>
         <segue reference="PtM-Ha-efS"/>
-        <segue reference="cK5-nM-2qW"/>
-        <segue reference="Kca-5B-OTe"/>
+        <segue reference="L8k-6m-3tm"/>
+        <segue reference="tfa-sh-Qj7"/>
         <segue reference="vrH-5G-Fdn"/>
     </inferredMetricsTieBreakers>
 </document>
