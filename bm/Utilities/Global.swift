@@ -77,10 +77,12 @@ enum DEGREE: String {
         }
         return res
     }
-    static func all() -> [[String: String]] {
-        return [
-            ["new": "新手"], ["soso": "普通"], ["high": "高手"]
-        ]
+    static func all() -> [DEGREE: String] {
+        var degrees: [DEGREE: String] = [DEGREE: String]()
+        degrees[DEGREE.new] = "新手"
+        degrees[DEGREE.soso] = "普通"
+        degrees[DEGREE.high] = "高手"
+        return degrees
     }
 }
 let df : DateFormatter = {
@@ -94,13 +96,13 @@ class Global {
     static let instance = Global()
     
     let days: [[String: Any]] = [
-        ["value": 1, "text": "星期一", "checked": false],
-        ["value": 2, "text": "星期二", "checked": false],
-        ["value": 3, "text": "星期三", "checked": false],
-        ["value": 4, "text": "星期四", "checked": false],
-        ["value": 5, "text": "星期五", "checked": false],
-        ["value": 6, "text": "星期六", "checked": false],
-        ["value": 7, "text": "星期日", "checked": false]
+        ["value":1,"text":"星期一","simple_text":"一","checked":false],
+        ["value":2,"text":"星期二","simple_text":"二","checked":false],
+        ["value":3,"text":"星期三","simple_text":"三","checked":false],
+        ["value":4,"text":"星期四","simple_text":"四","checked":false],
+        ["value":5,"text":"星期五","simple_text":"五","checked":false],
+        ["value":6,"text":"星期六","simple_text":"六","checked":false],
+        ["value":7,"text":"星期日","simple_text":"日","checked":false]
     ]
     
     func deviceType(frameWidth: CGFloat) -> DeviceType {

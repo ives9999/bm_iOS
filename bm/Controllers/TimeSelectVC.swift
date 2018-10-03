@@ -15,25 +15,33 @@ protocol TimeSelectDelegate: class {
 
 class TimeSelectVC: UITableViewController {
     
-    var input: [String: Any]?
+    var input: [String: Any] = [String: Any]()
     let times: [String] = ["07:00","07:30","08:00","08:30","09:00","09:30","10:00","10:30","11:00","11:30","12:00",
                            "12:30","13:00","13:30","14:00","14:30","15:00","15:30","16:00","16:30","17:00","17:30",
                            "18:00","18:30","19:00","19:30","20:00","20:30","21:00","21:30","22:00","22:30","23:00"
                         ]
     var delegate: TimeSelectDelegate?
+    
+    //來源的程式：目前有team的setup跟search
+    var source: String = "setup"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         var title: String = ""
-        let type: SELECT_TIME_TYPE = input!["type"] as! SELECT_TIME_TYPE
-        switch type {
-        case .play_start:
-            title = "開始時間"
-            break
-        case .play_end:
-            title = "結束時間"
-            break
+        
+        if input["type"] != nil {
+            let type: SELECT_TIME_TYPE = input["type"] as! SELECT_TIME_TYPE
+            switch type {
+            case .play_start:
+                title = "開始時間"
+                break
+            case .play_end:
+                title = "結束時間"
+                break
+            }
+        } else {
+            title = "時間"
         }
         self.title = title
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
@@ -61,7 +69,10 @@ class TimeSelectVC: UITableViewController {
 
         let time: String = times[indexPath.row]
         cell.textLabel?.text = time
-        let selectedTime: String = input!["time"] as! String
+        var selectedTime: String = ""
+        if input["time"] != nil {
+            selectedTime = input["time"] as! String
+        }
         if time == selectedTime {
             cell.textLabel?.textColor = UIColor(MY_GREEN)
         } else {
@@ -72,8 +83,13 @@ class TimeSelectVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let time: String = times[indexPath.row]
-        let type: SELECT_TIME_TYPE = input!["type"] as! SELECT_TIME_TYPE
+        var time: String = times[indexPath.row]
+        let type: SELECT_TIME_TYPE = input["type"] as! SELECT_TIME_TYPE
+        if input["time"] != nil {
+            if time == input["time"] as! String {
+                time = ""
+            }
+        }
         delegate?.setTimeData(time: time, type: type)
         dismiss(animated: true, completion: nil)
     }

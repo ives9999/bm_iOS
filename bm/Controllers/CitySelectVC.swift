@@ -17,20 +17,25 @@ protocol CitySelectDelegate: class {
 
 class CitySelectVC: UITableViewController {
     
-    var citys: [City] = [City]()
-    var selects: [Int] = [Int]()
     weak var delegate: CitySelectDelegate?
+    var citys: [City] = [City]()
+    //var selects: [Int] = [Int]()
+    
+    //get city data from database
+    var allCitys: [City] = [City]()
+    //from source
     var city_id: Int = -1
+    
+    //來源的程式：目前有team的setup跟search
+    var source: String = "setup"
+    //縣市的類型：all所有的縣市，simple比較簡單的縣市
     var type: String = "all"
+    //選擇的類型：just one單選，multi複選
     var select: String = "just one"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //print(city_id)
-        
-        if city_id > 0 {
-            selects.append(city_id)
-        }
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
@@ -41,51 +46,19 @@ class CitySelectVC: UITableViewController {
         }
         
         Global.instance.addSpinner(superView: self.tableView)
-        if type == "all" {
-            TeamService.instance.getAllCitys { (success) in
-                if success {
-                    self.citys = TeamService.instance.citys
-                    //print(self.citys)
-                    self.tableView.reloadData()
-                    Global.instance.removeSpinner(superView: self.tableView)
-                }
-            }
-        } else if type == "simple" {
-            TeamService.instance.getCustomCitys { (success) in
-                if success {
-                    self.citys = TeamService.instance.citys
-                    //print(self.citys)
-                    self.tableView.reloadData()
-                    Global.instance.removeSpinner(superView: self.tableView)
-                }
+        TeamService.instance.getCitys(type: type) { (success) in
+            if success {
+                self.allCitys = TeamService.instance.citys
+                //print(self.citys)
+                self.tableView.reloadData()
+                Global.instance.removeSpinner(superView: self.tableView)
             }
         }
     }
     
     @objc func submit() {
-        //print(days)
-        var isSelected: Bool = false
-        var res: [City] = [City]()
-        for city in citys {
-            //print(day)
-            for id in selects {
-                if id == city.id {
-                    res.append(city)
-                    isSelected = true
-                }
-            }
-        }
-        if !isSelected {
-            if select == "just one" {
-                SCLAlertView().showWarning("警告", subTitle: "沒有選擇星期日期，或請按取消回上一頁")
-            } else {
-                self.delegate?.setCitysData(res: res)
-                back()
-            }
-        } else {
-            self.delegate?.setCitysData(res: res)
-            back()
-        }
+        self.delegate?.setCitysData(res: citys)
+        back()
     }
     
     @objc func back() {
@@ -101,7 +74,7 @@ class CitySelectVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print(citys.count)
-        return citys.count
+        return allCitys.count
     }
 
     
@@ -109,11 +82,11 @@ class CitySelectVC: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         //print(citys[indexPath.row].name)
-        cell.textLabel!.text = citys[indexPath.row].name
+        cell.textLabel!.text = allCitys[indexPath.row].name
         cell.textLabel!.textColor = UIColor.white
         
-        for id in selects {
-            if id == citys[indexPath.row].id {
+        for city in citys {
+            if city.id == allCitys[indexPath.row].id {
                 setSelectedStyle(cell)
             }
         }
@@ -123,7 +96,7 @@ class CitySelectVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Global.instance.addSpinner(superView: view)
-        let city: City = citys[indexPath.row]
+        let city: City = allCitys[indexPath.row]
         delegate?.setCityData(id: city.id, name: city.name)
         if select == "just one" {
             back()
@@ -133,10 +106,10 @@ class CitySelectVC: UITableViewController {
         let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         if cell.accessoryType == .checkmark {//not select
             unSetSelectedStyle(cell)
-            selects = selects.filter {$0 != city_id}
+            citys = citys.filter {$0.id != city_id}
         } else {
             setSelectedStyle(cell)
-            selects.append(city_id)
+            citys.append(city)
         }
         //print(selects)
     }

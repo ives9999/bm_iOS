@@ -11,13 +11,29 @@ import UIColor_Hex_Swift
 
 protocol ArenaSelectDelegate: class {
     func setArenaData(id: Int, name: String)
+    func setArenasData(res: [Arena])
 }
 
 class ArenaSelectVC: UITableViewController {
     
     var arenas: [Arena] = [Arena]()
-    var selectedID: [String: Int]?
+    
+    //要顯示球館的縣市編號
+    var citys: [Int] = [Int]()
+    /*
+     city_id:
+        id:218, name:台南市, rows:
+            id:1, name:a羽球館
+            id:2, name:b羽球館
+    */
+    var citysandarenas:[Int:[String:Any]] = [Int:[String:Any]]()
+    
     weak var delegate: ArenaSelectDelegate?
+    
+    //來源的程式：目前有team的setup跟search
+    var source: String = "setup"
+    //選擇的類型：just one單選，multi複選
+    var select: String = "just one"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,22 +42,37 @@ class ArenaSelectVC: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
+        if select == "multi" {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(submit))
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        }
+        
+        //print(citys)
         Global.instance.addSpinner(superView: self.tableView)
-        let city_id: Int = selectedID!["city_id"]!
-        TeamService.instance.getArenaByCityID(city_id: city_id) { (success) in
+        
+        TeamService.instance.getArenaByCityIDs(city_ids: citys) { (success) in
             if success {
-                self.arenas = TeamService.instance.arenas
+                //self.arenas = TeamService.instance.arenas
                 //print(self.citys)
+                let tmp = TeamService.instance.citysandarenas
+                for city_id in self.citys {
+                    for (id, item) in tmp {
+                        if id == city_id {
+                            self.citysandarenas[id] = item
+                            break
+                        }
+                    }
+                }
+                //print(self.citysandarenas)
                 self.tableView.reloadData()
                 Global.instance.removeSpinner(superView: self.tableView)
             }
         }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+    
+    @objc func submit() {
+        delegate?.setArenasData(res: arenas)
+        back()
     }
     
     @objc func back() {
@@ -52,32 +83,83 @@ class ArenaSelectVC: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return citysandarenas.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return arenas.count
+        let city_id = citys[section]
+        let rows = citysandarenas[city_id]!["rows"] as! [[String:Any]]
+        return rows.count
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 34
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        let city_id = citys[section]
+        let item = citysandarenas[city_id] as! [String: Any]
+        return item["name"] as! String
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
-        cell.textLabel!.text = arenas[indexPath.row].title
-        if selectedID!["arena_id"]! == arenas[indexPath.row].id {
-            cell.textLabel?.textColor = UIColor(MY_GREEN)
+        let arena = getArena(indexPath)
+    
+        cell.textLabel!.text = arena.title
+        var isSelected = false
+        for _arena in arenas {
+            if _arena.id == arena.id {
+                isSelected = true
+                break
+            }
+        }
+        if isSelected {
+            setSelectedStyle(cell)
         } else {
-            cell.textLabel!.textColor = UIColor.white
+            unSetSelectedStyle(cell)
         }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let arena: Arena = arenas[indexPath.row]
+        Global.instance.addSpinner(superView: view)
+        let arena: Arena = getArena(indexPath)
         delegate?.setArenaData(id: arena.id, name: arena.title)
-        back()
+        if select == "just one" {
+            back()
+        }
+        Global.instance.removeSpinner(superView: view)
+        let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+        if cell.accessoryType == .checkmark {//not select
+            unSetSelectedStyle(cell)
+            arenas = arenas.filter {$0.id != arena.id}
+        } else {
+            setSelectedStyle(cell)
+            arenas.append(arena)
+        }
+    }
+    
+    private func getArena(_ indexPath: IndexPath)-> Arena {
+        let city_id = citys[indexPath.section]
+        let rows = citysandarenas[city_id]!["rows"] as! [[String: Any]]
+        let row = rows[indexPath.row]
+        
+        return Arena(id: row["id"] as! Int, name: row["name"] as! String)
+    }
+    
+    func setSelectedStyle(_ cell: UITableViewCell) {
+        cell.accessoryType = .checkmark
+        cell.textLabel?.textColor = UIColor(MY_GREEN)
+        cell.tintColor = UIColor(MY_GREEN)
+    }
+    func unSetSelectedStyle(_ cell: UITableViewCell) {
+        cell.accessoryType = .none
+        cell.textLabel?.textColor = UIColor.white
+        cell.tintColor = UIColor.white
     }
 
     /*

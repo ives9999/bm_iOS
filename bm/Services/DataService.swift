@@ -36,6 +36,7 @@ class DataService {
     
     var citys: [City] = [City]()
     var arenas: [Arena] = [Arena]()
+    var citysandarenas:[Int:[String:Any]] = [Int:[String:Any]]()
     var msg:String = ""
     var success: Bool = false
     
@@ -292,6 +293,30 @@ class DataService {
         }
     }
     
+    func getCitys(type: String="all", zone:Bool=false, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app","channel":"bm","type":type,"zone":zone]
+        Alamofire.request(URL_CITYS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                let jsonArray: [JSON] = json[].arrayValue
+                self.citys = [City]()
+                for city in jsonArray {
+                    let id: Int = city["id"].intValue
+                    let name: String = city["name"].stringValue
+                    self.citys.append(City(id: id, name: name))
+                }
+                
+                completion(true)
+            }
+        }
+    }
+    
+    // 將不使用了，請使用getCitys代替
     func getAllCitys(completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app"]
         Alamofire.request(URL_CITYS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
@@ -313,7 +338,7 @@ class DataService {
             }
         }
     }
-    
+    // 將不使用了，請使用getCitys代替
     func getCustomCitys(completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app"]
         Alamofire.request(URL_CUSTOM_CITYS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
@@ -354,6 +379,36 @@ class DataService {
                     let name: String = arena["name"].stringValue
                     self.arenas.append(Arena(id: id, name: name))
                 }
+                
+                completion(true)
+            }
+        }
+    }
+    func getArenaByCityIDs(city_ids: [Int], completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app", "channel":"bm","citys": city_ids]
+        //print(body)
+        //print(URL_ARENA_BY_CITY_IDS)
+        Alamofire.request(URL_ARENA_BY_CITY_IDS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                for (city_id, item) in json {
+                    let id: Int = item["id"].intValue
+                    let city_name: String = item["name"].stringValue
+                    let _rows: [JSON] = item["rows"].arrayValue
+                    var rows: [[String: Any]] = [[String: Any]]()
+                    for _row in _rows {
+                        let arena_id: Int = _row["id"].intValue
+                        let arena_name: String = _row["name"].stringValue
+                        rows.append(["id":arena_id,"name":arena_name])
+                    }
+                    self.citysandarenas[id] = ["id":id,"name":city_name,"rows":rows]
+                }
+                //print(self.citysandarenas)
                 
                 completion(true)
             }

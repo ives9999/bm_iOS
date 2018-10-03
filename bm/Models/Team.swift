@@ -114,7 +114,7 @@ class Team: SuperData {
             TEAM_PLAY_END_KEY:["ch":"結束時間","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
             TEAM_INTERVAL_KEY:["ch":"打球時段","vtype":"String","value":"","submit":true,"atype":none,"segue":TO_SELECT_TIME,"sender":[String: Any](),"show":""],
             TEAM_BALL_KEY:["ch":"使用球種","vtype":"String","value":"","submit":true,"atype":none,"show":"","keyboardType":defaultPad],
-            TEAM_DEGREE_KEY:["ch":"球隊程度","vtype":"array","value":[String](),"submit":true,"atype":more,"segue":TO_SELECT_DEGREE,"sender":[String](),"show":""],
+            TEAM_DEGREE_KEY:["ch":"球隊程度","vtype":"array","value":[String](),"submit":true,"atype":more,"segue":TO_SELECT_DEGREE,"sender":[Degree](),"show":""],
             TEAM_CHARGE_KEY:["ch":"收費說明","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
             TEAM_CONTENT_KEY:["ch":"球隊說明","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
             TEAM_TEMP_FEE_M_KEY:["ch":"臨打費用：男","vtype":"Int","value":-1,"submit":true,"atype":none,"show":"","keyboardType":numberPad],
@@ -190,7 +190,7 @@ class Team: SuperData {
          TEAM_TEMP_CONTENT_KEY: "歡迎加入",
          TEAM_PLAY_START_KEY: "16:00",
          TEAM_PLAY_END_KEY: "18:00",
-         TEAM_DEGREE_KEY: ["high", "soso"],
+         TEAM_DEGREE_KEY: [Degree(value:DEGREE.high,text:""), Degree(value: DEGREE.high, text: "")],
          TEAM_DAYS_KEY: [2, 4],
          TEAM_CITY_KEY: City(id:218, name: "台南"),
          TEAM_ARENA_KEY: Arena(id: 10, name: "全穎羽球館")
@@ -219,7 +219,7 @@ class Team: SuperData {
                 data[key1]!["change"] = true
             }
             updateDays(testData[TEAM_DAYS_KEY] as! [Int])
-            updateDegree(testData[TEAM_DEGREE_KEY] as! [String])
+            updateDegree(testData[TEAM_DEGREE_KEY] as! [Degree])
         }
     }
     
@@ -245,10 +245,14 @@ class Team: SuperData {
         daysShow()
         setDaysSender()
     }
-    func updateDegree(_ degrees: [String]) {
-        data[TEAM_DEGREE_KEY]!["value"] = degrees
+    func updateDegree(_ degrees: [Degree]) {
+        var res: [String] = [String]()
+        for degree in degrees {
+            res.append(DEGREE.DBValue(degree.value))
+        }
+        data[TEAM_DEGREE_KEY]!["value"] = res
         degreeShow()
-        setDegreeSender()
+        setDegreeSender(degrees)
     }
     func updatePlayStartTime(_ time: String? = nil) {
         if time != nil {
@@ -384,8 +388,8 @@ class Team: SuperData {
     func setDaysSender() {
         data[TEAM_DAYS_KEY]!["sender"] = data[TEAM_DAYS_KEY]!["value"]
     }
-    func setDegreeSender() {
-        data[TEAM_DEGREE_KEY]!["sender"] = data[TEAM_DEGREE_KEY]!["value"]
+    func setDegreeSender(_ degrees: [Degree]) {
+        data[TEAM_DEGREE_KEY]!["sender"] = degrees
     }
     func setPlayStartTimeSender() {
         var res: [String: Any] = [String: Any]()

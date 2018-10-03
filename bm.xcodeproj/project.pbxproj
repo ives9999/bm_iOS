@@ -34,6 +34,7 @@
 		B337B9A61FE039ED00C3EE28 /* TempPlaySignupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */; };
 		B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */; };
 		B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */; };
+		B3591B702164CC6100E0919C /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3591B6F2164CC6100E0919C /* Degree.swift */; };
 		B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35BA6822073C06600B506CA /* BaseViewController.swift */; };
 		B35F8DD91F8F64310073BD70 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35F8DD81F8F64310073BD70 /* Home.swift */; };
 		B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35F8DDA1F8F66490073BD70 /* HomeVideoCell.swift */; };
@@ -197,6 +198,7 @@
 		B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlaySignupCell.swift; sourceTree = "<group>"; };
 		B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayTableHeaderView.swift; sourceTree = "<group>"; };
 		B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayEditVC.swift; sourceTree = "<group>"; };
+		B3591B6F2164CC6100E0919C /* Degree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
 		B35BA6822073C06600B506CA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B35F8DD81F8F64310073BD70 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		B35F8DDA1F8F66490073BD70 /* HomeVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVideoCell.swift; sourceTree = "<group>"; };
@@ -582,6 +584,7 @@
 				B36CBD5420DFCC9E00E52B9C /* SuperModel.swift */,
 				B3DEBE1121078191003699A0 /* Coach.swift */,
 				B3DEBE1B2110432F003699A0 /* Course.swift */,
+				B3591B6F2164CC6100E0919C /* Degree.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -888,6 +891,7 @@
 				B3DEBE0F2106FDB1003699A0 /* ListCell.swift in Sources */,
 				B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
+				B3591B702164CC6100E0919C /* Degree.swift in Sources */,
 				B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */,
 				F9A1CB811F95CE2F00DDEC86 /* SuperData.swift in Sources */,
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,

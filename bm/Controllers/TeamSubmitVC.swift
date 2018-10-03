@@ -138,12 +138,23 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             destinationNavigationController = (segue.destination as! UINavigationController)
             let citySelectVC: CitySelectVC = destinationNavigationController!.topViewController as! CitySelectVC
             citySelectVC.delegate = self
-            citySelectVC.city_id = (sender as! Int)
+            let tmp = sender as! Int
+            if tmp > 0 {
+                citySelectVC.citys = [City(id: tmp, name: "")]
+            }
         } else if segue.identifier == TO_ARENA {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let arenaSelectVC: ArenaSelectVC = destinationNavigationController!.topViewController as! ArenaSelectVC
             arenaSelectVC.delegate = self
-            arenaSelectVC.selectedID = (sender as! [String: Int])
+            let tmp = sender as! [String: Int]
+            if tmp["city_id"] != nil {
+                let citys: [Int] = [tmp["city_id"]!]
+                arenaSelectVC.citys = citys
+            }
+            if tmp["arena_id"] != nil {
+                let arenas: [Arena] = [Arena(id:tmp["arena_id"]!, name:"")]
+                arenaSelectVC.arenas = arenas
+            }
         } else if segue.identifier == TO_DAY {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let daysSelectVC: DaysSelectVC = destinationNavigationController!.topViewController as! DaysSelectVC
@@ -163,7 +174,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             destinationNavigationController = (segue.destination as! UINavigationController)
             let degreeSelectVC: DegreeSelectVC = destinationNavigationController!.topViewController as! DegreeSelectVC
             degreeSelectVC.delegate = self
-            degreeSelectVC.selectedDegrees = (sender as! [String])
+            degreeSelectVC.degrees = (sender as! [Degree])
         }
     }
     
@@ -260,6 +271,10 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             self.tableView.reloadData()
         }
     }
+    func setArenasData(res: [Arena])
+    {
+        //not use
+    }
     func setDaysData(res: [Int]) {
         let days: [Int] = model.data[TEAM_DAYS_KEY]!["value"] as! [Int]
         if !res.containsSameElements(as: days) {
@@ -320,10 +335,14 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
         //print(model.data)
     }
-    func setDegreeData(degrees: [String]) {
+    func setDegreeData(res: [Degree]) {
         let old: [String] = model.data[TEAM_DEGREE_KEY]!["value"] as! [String]
-        if !degrees.containsSameElements(as: old) {
-            Team.instance.updateDegree(degrees)
+        var res1: [String] = [String]()
+        for degree in res {
+            res1.append(DEGREE.DBValue(degree.value))
+        }
+        if !res1.containsSameElements(as: old) {
+            Team.instance.updateDegree(res)
             model.data[TEAM_DEGREE_KEY]!["change"] = true
             self.tableView.reloadData()
         }

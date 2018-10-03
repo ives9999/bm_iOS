@@ -169,7 +169,7 @@ class TeamService: DataService {
                             } else if key == TEAM_DEGREE_KEY {
                                 let tmp1: String = tmp.stringValue
                                 let degrees: [String] = tmp1.components(separatedBy: ",")
-                                model.updateDegree(degrees)
+                                model.updateDegree(self.strsToDegree(degrees))
                             }
                         } else if type == "image" {
                             if key == TEAM_FEATURED_KEY {
@@ -327,7 +327,7 @@ class TeamService: DataService {
                             } else if key == TEAM_DEGREE_KEY {
                                 let tmp1: String = tmp.stringValue
                                 let degrees: [String] = tmp1.components(separatedBy: ",")
-                                self.model.updateDegree(degrees)
+                                self.model.updateDegree(self.strsToDegree(degrees))
                             }
                         }
                     }
@@ -510,7 +510,7 @@ class TeamService: DataService {
             } else if key == TEAM_DEGREE_KEY {
                 let tmp1: String = tmp.stringValue
                 let degrees: [String] = tmp1.components(separatedBy: ",")
-                model.updateDegree(degrees)
+                model.updateDegree(strsToDegree(degrees))
             }
         }
     }
@@ -601,6 +601,17 @@ class TeamService: DataService {
                 completion(self.success)
             }
         }
+    }
+    
+    private func strsToDegree(_ strs: [String])-> [Degree] {
+        var res: [Degree] = [Degree]()
+        for str in strs {
+            let value = DEGREE.enumFromString(string: str)
+            let text = value.rawValue
+            let degree = Degree(value: value, text: text)
+            res.append(degree)
+        }
+        return res
     }
 }
 

@@ -16,15 +16,18 @@ protocol DaysSelectDelegate: class {
 class DaysSelectVC: UITableViewController {
 
     weak var delegate: DaysSelectDelegate?
-    var selectedDays: [Int]?
+    var selectedDays: [Int] = [Int]()
     var days: [[String: Any]] = Global.instance.days
+    
+    //來源的程式：目前有team的setup跟search
+    var source: String = "setup"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //print(selectedDays)
         
-        if selectedDays!.count > 0 {
-            for day in selectedDays! {
+        if selectedDays.count > 0 {
+            for day in selectedDays {
                 for (index, item) in days.enumerated() {
                     let value: Int = item["value"] as! Int
                     if day == value {
@@ -59,7 +62,12 @@ class DaysSelectVC: UITableViewController {
             }
         }
         if !isSelected {
-            SCLAlertView().showWarning("警告", subTitle: "沒有選擇星期日期，或請按取消回上一頁")
+            if source == "setup" {
+                SCLAlertView().showWarning("警告", subTitle: "沒有選擇星期日期，或請按取消回上一頁")
+            } else {
+                self.delegate?.setDaysData(res: res)
+                back()
+            }
         } else {
             self.delegate?.setDaysData(res: res)
             back()

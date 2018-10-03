@@ -117,7 +117,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dl0-Th-2Mv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1153" y="-3733"/>
+            <point key="canvasLocation" x="-1534" y="-3905"/>
         </scene>
         <!--Time SelectVC-->
         <scene sceneID="a1T-vI-WGQ">
@@ -1834,6 +1834,18 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mB9-AG-XQD">
                                 <rect key="frame" x="0.0" y="20" width="375" height="64"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9u-HL-PaE">
+                                        <rect key="frame" x="331" y="15" width="32" height="34"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                        <state key="normal" title="提交">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="submit:" destination="UtM-v1-pfK" eventType="touchUpInside" id="BXo-7u-xTI"/>
+                                            <action selector="submitBtnPressed:" destination="Qui-jL-mMT" eventType="touchUpInside" id="mXP-IY-YYO"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6lQ-hf-loi">
                                         <rect key="frame" x="12" y="19" width="33" height="26"/>
                                         <constraints>
@@ -1861,24 +1873,14 @@
                                 <constraints>
                                     <constraint firstItem="6lQ-hf-loi" firstAttribute="leading" secondItem="mB9-AG-XQD" secondAttribute="leading" constant="12" id="6r6-tj-pkt"/>
                                     <constraint firstItem="6lQ-hf-loi" firstAttribute="centerY" secondItem="mB9-AG-XQD" secondAttribute="centerY" id="9DK-z9-sN6"/>
+                                    <constraint firstAttribute="trailing" secondItem="j9u-HL-PaE" secondAttribute="trailing" constant="12" id="Pnm-8T-p5H"/>
                                     <constraint firstItem="Nd2-FW-fzb" firstAttribute="centerY" secondItem="mB9-AG-XQD" secondAttribute="centerY" id="be9-3q-k95"/>
+                                    <constraint firstItem="j9u-HL-PaE" firstAttribute="centerY" secondItem="mB9-AG-XQD" secondAttribute="centerY" id="dbi-sn-yw1"/>
                                     <constraint firstAttribute="height" constant="64" id="gQ2-7m-G2g"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="miq-cD-ssg"/>
                                     <constraint firstItem="Nd2-FW-fzb" firstAttribute="centerX" secondItem="mB9-AG-XQD" secondAttribute="centerX" id="y9G-es-oVc"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j9u-HL-PaE">
-                                <rect key="frame" x="331" y="35" width="32" height="34"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
-                                <state key="normal" title="提交">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="submit:" destination="UtM-v1-pfK" eventType="touchUpInside" id="BXo-7u-xTI"/>
-                                    <action selector="submitBtnPressed:" destination="Qui-jL-mMT" eventType="touchUpInside" id="mXP-IY-YYO"/>
-                                </connections>
-                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="DpE-TG-fU1">
                                 <rect key="frame" x="0.0" y="84" width="375" height="583"/>
                             </imageView>
@@ -1891,13 +1893,11 @@
                         <constraints>
                             <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="DpE-TG-fU1" secondAttribute="bottom" id="2ab-Z5-TTe"/>
                             <constraint firstItem="qE9-4T-nY3" firstAttribute="top" secondItem="mB9-AG-XQD" secondAttribute="bottom" id="4uR-el-DDZ"/>
-                            <constraint firstItem="j9u-HL-PaE" firstAttribute="centerY" secondItem="mB9-AG-XQD" secondAttribute="centerY" id="91D-jW-YkT"/>
                             <constraint firstAttribute="trailing" secondItem="mB9-AG-XQD" secondAttribute="trailing" id="ASM-ZO-0E1"/>
                             <constraint firstItem="qE9-4T-nY3" firstAttribute="trailing" secondItem="MId-N4-3lE" secondAttribute="trailing" id="T04-he-iac"/>
                             <constraint firstItem="DpE-TG-fU1" firstAttribute="top" secondItem="mB9-AG-XQD" secondAttribute="bottom" id="XU1-uN-x7r"/>
                             <constraint firstItem="qE9-4T-nY3" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="Xao-qN-A0B"/>
                             <constraint firstItem="DpE-TG-fU1" firstAttribute="trailing" secondItem="MId-N4-3lE" secondAttribute="trailing" id="dSJ-Ts-xhF"/>
-                            <constraint firstItem="MId-N4-3lE" firstAttribute="trailing" secondItem="j9u-HL-PaE" secondAttribute="trailing" constant="12" id="eSn-rw-mPc"/>
                             <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="qE9-4T-nY3" secondAttribute="bottom" id="eT5-6v-l8u"/>
                             <constraint firstItem="DpE-TG-fU1" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="pzD-KP-ssu"/>
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="wIa-be-ZTa"/>
@@ -1906,8 +1906,13 @@
                         <viewLayoutGuide key="safeArea" id="MId-N4-3lE"/>
                     </view>
                     <connections>
+                        <outlet property="submitBtn" destination="j9u-HL-PaE" id="ZCr-Y9-fp6"/>
                         <outlet property="tableView" destination="qE9-4T-nY3" id="INU-li-bW2"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="itP-1S-HdR"/>
+                        <segue destination="25C-Iu-CXV" kind="show" identifier="toDay" id="H3p-LU-aVa"/>
+                        <segue destination="eqh-Y0-TDo" kind="show" identifier="toSelectTime" id="mvW-Q8-ZFE"/>
+                        <segue destination="81S-kF-xqU" kind="show" identifier="toArena" id="CFj-m8-ABA"/>
+                        <segue destination="Z37-Ed-Jzr" kind="show" identifier="toSelectDegree" id="2Di-nR-q4w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UJy-DK-SL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2696,7 +2701,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lxm-Qf-W2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-458" y="-3905"/>
+            <point key="canvasLocation" x="-511" y="-4119"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZCV-m5-fHB">
@@ -2777,6 +2782,10 @@
         <image name="tempPlay" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="2Di-nR-q4w"/>
+        <segue reference="mvW-Q8-ZFE"/>
+        <segue reference="H3p-LU-aVa"/>
+        <segue reference="CFj-m8-ABA"/>
         <segue reference="itP-1S-HdR"/>
         <segue reference="OU7-h8-11b"/>
         <segue reference="f5d-2G-qtf"/>
