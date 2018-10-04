@@ -37,7 +37,7 @@ class ArenaSelectVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print(selectedID)
+        //print(citys)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
@@ -55,6 +55,11 @@ class ArenaSelectVC: UITableViewController {
                 //self.arenas = TeamService.instance.arenas
                 //print(self.citys)
                 let tmp = TeamService.instance.citysandarenas
+                
+                self.citys = [Int]()
+                for (city_id, _) in tmp {
+                    self.citys.append(city_id)
+                }
                 for city_id in self.citys {
                     for (id, item) in tmp {
                         if id == city_id {
@@ -64,6 +69,7 @@ class ArenaSelectVC: UITableViewController {
                     }
                 }
                 //print(self.citysandarenas)
+                
                 self.tableView.reloadData()
                 Global.instance.removeSpinner(superView: self.tableView)
             }

@@ -24,8 +24,9 @@ class TempPlayVC: MyTableVC {
     
     //key has type, play_start_time, play_end_time, time
     var times: [String: Any] = [String: Any]()
+    var keyword: String = ""
     
-    var city_ids: [Int] = [Int]()
+    var params: [String: Any] = [String: Any]()
     
     override func viewDidLoad() {
             
@@ -33,6 +34,7 @@ class TempPlayVC: MyTableVC {
         sections = model.temp_play_list_sections
         myTablView = tableView
         super.viewDidLoad()
+        //print(degrees)
         
         NotificationCenter.default.addObserver(self, selector: #selector(memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     
@@ -44,7 +46,7 @@ class TempPlayVC: MyTableVC {
 //        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
 //        tableView.addSubview(refreshControl)
         
-        prepareData()
+        prepareParams()
         refresh()
         
         //OneSignal.postNotification(["contents": ["en": "hello",PUSH_LANGUAGE: "有人報名臨打"], "include_player_ids": [PUSH_TEST_PLAYID]])
@@ -53,11 +55,50 @@ class TempPlayVC: MyTableVC {
         }
     }
     
-    func prepareData() {
+    func prepareParams() {
+        var city_ids:[Int] = [Int]()
         if citys.count > 0 {
             for city in citys {
                 city_ids.append(city.id)
             }
+        }
+        if city_ids.count > 0 {
+            params["city_id"] = city_ids
+            params["city_type"] = "simple"
+        }
+        if days.count > 0 {
+            params["play_days"] = days
+        }
+        if times.count > 0 {
+            params["use_date_range"] = 1
+            let play_start = times[TEAM_PLAY_START_KEY] as! String
+            let time = play_start + ":00 - 24:00:00"
+            params["play_time"] = time
+        }
+        
+        var arena_ids:[Int] = [Int]()
+        if arenas.count > 0 {
+            for arena in arenas {
+                arena_ids.append(arena.id)
+            }
+        }
+        if arena_ids.count > 0 {
+            params["arena_id"] = arena_ids
+        }
+        
+        var _degrees:[String] = [String]()
+        if degrees.count > 0 {
+            for degree in degrees {
+                let value = degree.value
+                _degrees.append(DEGREE.DBValue(value))
+            }
+        }
+        if _degrees.count > 0 {
+            params["degree"] = _degrees
+        }
+        
+        if keyword.count > 0 {
+            params["k"] = keyword
         }
     }
     
@@ -99,7 +140,7 @@ class TempPlayVC: MyTableVC {
     
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
         Global.instance.addSpinner(superView: self.view)
-        TeamService.instance.tempPlay_list(city_id:city_ids,page: page, perPage: perPage) { (success) in
+        TeamService.instance.tempPlay_list(params:params,page: page, perPage: perPage) { (success) in
             if success {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)

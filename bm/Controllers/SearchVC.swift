@@ -41,6 +41,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     
     //key has type, play_start_time, play_end_time, time
     var times: [String: Any] = [String: Any]()
+    var keyword: String = ""
     
     override func viewDidLoad() {
         model = Team.instance
@@ -188,6 +189,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
             tempPlayVC.days = days
             tempPlayVC.times = times
             tempPlayVC.degrees = degrees
+            tempPlayVC.keyword = keyword
         }
     }
     
@@ -281,7 +283,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     }
     
     func setTextField(iden: String, value: String) {
-        
+        keyword = value
     }
     
     func setDegreeData(res: [Degree]) {

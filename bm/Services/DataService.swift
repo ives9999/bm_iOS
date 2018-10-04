@@ -385,7 +385,7 @@ class DataService {
         }
     }
     func getArenaByCityIDs(city_ids: [Int], completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app", "channel":"bm","citys": city_ids]
+        let body: [String: Any] = ["source": "app", "channel":"bm","citys": city_ids,"city_type":"simple"]
         //print(body)
         //print(URL_ARENA_BY_CITY_IDS)
         Alamofire.request(URL_ARENA_BY_CITY_IDS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
