@@ -41,6 +41,7 @@ class SuperTextField: UITextField {
         self.createToolbar()
         self.borderWidth(1.0)
         self.borderColor(UIColor(TEXTBORDER))
+        self.backgroundColor = (UIColor(TEXTBACKGROUND))
         self.borderStyle = UITextBorderStyle.line
         self.align(.right)
         
@@ -48,7 +49,7 @@ class SuperTextField: UITextField {
     }
     
     func placeholder(_ text: String) {
-        self.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedStringKey.foregroundColor: UIColor.white])
+        self.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedStringKey.foregroundColor: UIColor(PLACEHOLDER)])
     }
     
     override func awakeFromNib() {

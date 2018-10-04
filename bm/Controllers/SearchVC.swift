@@ -10,26 +10,27 @@ import UIKit
 
 class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, TeamSubmitCellDelegate {
     
-    @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var submitBtn: UIButton!
     
     let heightForSection: CGFloat = 34
     //search type: temp_play, coach, team, course
     var type: String!
     var model: Team!
     var _rows: [[String: Any]] = [
-        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":""],
+        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字"],
         ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
         //            ["ch": "區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":"team_area","show":"全部","segue":TO_ARENA,"sender":0],
         ["ch":"日期","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_DAYS_KEY,"show":"全部","segue":TO_DAY,"sender":[Int]()],
-        ["ch":"開始時間","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_START_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
-        ["ch":"結束時間","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_END_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
+        ["ch":"時段","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_START_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
+//        ["ch":"結束時間","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_END_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
         ["ch":"球館","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int]()],
         ["ch":"程度","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String]()]
     ]
     
     var tables = [
-        ExpandableItems(isExpanded: true, items: ["keyword",TEAM_CITY_KEY,TEAM_DAYS_KEY, TEAM_PLAY_START_KEY,TEAM_PLAY_END_KEY]),
+        ExpandableItems(isExpanded: true, items: ["keyword",TEAM_CITY_KEY,TEAM_DAYS_KEY, TEAM_PLAY_START_KEY]),
         ExpandableItems(isExpanded: false, items: [TEAM_ARENA_KEY,TEAM_DEGREE_KEY])
     ]
 
@@ -45,6 +46,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         model = Team.instance
         myTablView = tableView
         sections = ["", "更多"]
+        Global.instance.setupTabbar(self)
+        Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
         tableView.register(TeamSubmitCell.self, forCellReuseIdentifier: "cell")
         submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
@@ -53,6 +56,9 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
 //        citys.append(City(id: 257, name: ""))
     }
     
+    @IBAction func submit(_ sender: Any) {
+        performSegue(withIdentifier: TO_TEMP_PLAY_LIST, sender: nil)
+    }
     override func numberOfSections(in tableView: UITableView) -> Int {
         return tables.count
     }
@@ -65,6 +71,9 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0 {
+            return 0
+        }
         return heightForSection
     }
     
@@ -172,6 +181,13 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
             degreeSelectVC.source = "search"
             degreeSelectVC.degrees = degrees
             degreeSelectVC.delegate = self
+        } else if segue.identifier == TO_TEMP_PLAY_LIST {
+            let tempPlayVC: TempPlayVC = segue.destination as! TempPlayVC
+            tempPlayVC.citys = citys
+            tempPlayVC.arenas = arenas
+            tempPlayVC.days = days
+            tempPlayVC.times = times
+            tempPlayVC.degrees = degrees
         }
     }
     
@@ -179,7 +195,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         //not use
     }
     func setCitysData(res: [City]) {
-        print(res)
+        //print(res)
         var row = getDefinedRow(TEAM_CITY_KEY)
         var texts: [String] = [String]()
         citys = res
@@ -335,13 +351,6 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
                 mark?.image = UIImage(named: "to_down")
             }
         }
-    }
-
-    @IBAction func submitBtnPressed(_ sender: Any) {
-        print("submit")
-    }
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
     }
 }
 

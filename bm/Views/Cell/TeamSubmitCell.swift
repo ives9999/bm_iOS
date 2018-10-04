@@ -33,8 +33,8 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
         
         let yPadding: CGFloat = 5
         let txtWidth: CGFloat = 250
-        let txtHeight: CGFloat = bounds.height - 8
-        let x = bounds.width - txtWidth
+        let txtHeight: CGFloat = bounds.height - 10
+        let x = bounds.width - txtWidth - 18
         let fullTextFieldFrame: CGRect = CGRect(x: x, y: yPadding, width: txtWidth, height: txtHeight)
         generalTextField.frame = fullTextFieldFrame
     }
@@ -58,6 +58,9 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
             if row["keyboardType"] != nil {
                 let pad: UIKeyboardType = row["keyboardType"] as! UIKeyboardType
                 generalTextField.keyboardType = pad
+            }
+            if row["hint"] != nil {
+                generalTextField.placeholder(row["hint"] as! String)
             }
             //print(iden)
             if row["show"] != nil {

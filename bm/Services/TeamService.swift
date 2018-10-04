@@ -336,9 +336,9 @@ class TeamService: DataService {
             }
         }
     }
-    func tempPlay_list(page: Int, perPage: Int, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
-        //print(body)
+    func tempPlay_list(city_id:[Int],page:Int, perPage: Int, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage),"city_id":city_id]
+        print(body)
         //print(URL_TEAM_TEMP_PLAY_LIST)
         tempPlayList = [DATA]()
         
@@ -349,7 +349,7 @@ class TeamService: DataService {
                     print("get response result value error")
                     return
                 }
-                //print(data)
+                print(data)
                 
                 let json = JSON(data)
                 self.tempPlayList = [DATA]()

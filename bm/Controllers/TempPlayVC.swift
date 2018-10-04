@@ -11,26 +11,28 @@ import UIKit
 class TempPlayVC: MyTableVC {
 
     // outlets
-    @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBtn: UIButton!
     
     var model: Team!
     let cell_constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
     internal(set) public var lists: [DATA] = [DATA]()
     
-    @IBAction func searchBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_SEARCH, sender: "team_play")
-    }
+    var citys: [City] = [City]()
+    var arenas: [Arena] = [Arena]()
+    var days: [Int] = [Int]()
+    var degrees: [Degree] = [Degree]()
+    
+    //key has type, play_start_time, play_end_time, time
+    var times: [String: Any] = [String: Any]()
+    
+    var city_ids: [Int] = [Int]()
+    
     override func viewDidLoad() {
             
         model = Team.instance
         sections = model.temp_play_list_sections
         myTablView = tableView
         super.viewDidLoad()
-        
-        Global.instance.setupTabbar(self)
-        Global.instance.menuPressedAction(menuBtn, self)
         
         NotificationCenter.default.addObserver(self, selector: #selector(memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     
@@ -42,11 +44,20 @@ class TempPlayVC: MyTableVC {
 //        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
 //        tableView.addSubview(refreshControl)
         
+        prepareData()
         refresh()
         
         //OneSignal.postNotification(["contents": ["en": "hello",PUSH_LANGUAGE: "有人報名臨打"], "include_player_ids": [PUSH_TEST_PLAYID]])
         if !Member.instance.justGetMemberOne && Member.instance.isLoggedIn {
             _updatePlayerIDWhenIsNull()
+        }
+    }
+    
+    func prepareData() {
+        if citys.count > 0 {
+            for city in citys {
+                city_ids.append(city.id)
+            }
         }
     }
     
@@ -78,9 +89,6 @@ class TempPlayVC: MyTableVC {
         if segue.identifier == TO_TEMP_PLAY_SHOW {
             let tempPlayShowVC: TempPlayShowVC = segue.destination as! TempPlayShowVC
             tempPlayShowVC.token = sender as! String
-        } else if segue.identifier == TO_SEARCH {
-            let searchVC: SearchVC = segue.destination as! SearchVC
-            searchVC.type = sender as! String
         }
     }
     
@@ -91,7 +99,7 @@ class TempPlayVC: MyTableVC {
     
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
         Global.instance.addSpinner(superView: self.view)
-        TeamService.instance.tempPlay_list(page: page, perPage: perPage) { (success) in
+        TeamService.instance.tempPlay_list(city_id:city_ids,page: page, perPage: perPage) { (success) in
             if success {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)
@@ -106,19 +114,24 @@ class TempPlayVC: MyTableVC {
             }
             lists += tmps
             //print(self.lists)
-            page = TeamService.instance.page
-            if page == 1 {
-                totalCount = TeamService.instance.totalCount
+            totalCount = TeamService.instance.totalCount
+            if totalCount > 0 {
                 perPage = TeamService.instance.perPage
-                let _pageCount: Int = totalCount / perPage
-                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
+                page = TeamService.instance.page
+                if page == 1 {
+                    let _pageCount: Int = totalCount / perPage
+                    totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+                    if refreshControl.isRefreshing {
+                        refreshControl.endRefreshing()
+                    }
                 }
+                tableView.reloadData()
+                //self.page = self.page + 1 in CollectionView
             }
-            tableView.reloadData()
-            //self.page = self.page + 1 in CollectionView
         }
+    }
+    @IBAction func prevBtnPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
     }
 }
 
