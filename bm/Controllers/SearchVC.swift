@@ -112,6 +112,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Global.instance.addSpinner(superView: view)
+        Global.instance.removeSpinner(superView: view)
         let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
         let cell = tableView.cellForRow(at: indexPath) as! TeamSubmitCell
         if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
