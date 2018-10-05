@@ -101,7 +101,7 @@ class ListVC: MyTableVC {
         if let showVC: ShowVC = segue.destination as? ShowVC {
             assert(sender as? SuperData != nil)
             let data: SuperData = sender as! SuperData
-            let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token)
+            let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
             showVC.initShowVC(sin: show_in)
         }
     }

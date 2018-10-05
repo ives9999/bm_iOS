@@ -12,10 +12,5 @@ struct Show_IN {
     var type: String
     var id: Int
     var token: String
-    
-    init(type: String, id: Int, token: String) {
-        self.type = type
-        self.id = id
-        self.token = token
-    }
+    var title: String
 }

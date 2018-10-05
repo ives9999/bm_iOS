@@ -119,7 +119,7 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         if let showVC: ShowVC = segue.destination as? ShowVC {
             assert(sender as? Home != nil)
             let home: Home = sender as! Home
-            let show_in: Show_IN = Show_IN(type: home.type, id: home.id, token: home.token)
+            let show_in: Show_IN = Show_IN(type: home.type, id: home.id, token: home.token, title: home.title)
             showVC.initShowVC(sin: show_in)
         }
     }

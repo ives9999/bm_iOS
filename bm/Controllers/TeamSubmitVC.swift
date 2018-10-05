@@ -106,6 +106,8 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Global.instance.addSpinner(superView: view)
+        Global.instance.removeSpinner(superView: view)
         let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
         let cell = tableView.cellForRow(at: indexPath) as! TeamSubmitCell
         if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {

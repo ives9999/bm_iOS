@@ -11,6 +11,7 @@ import WebKit
 
 class ShowVC: UIViewController, WKUIDelegate {
 
+    @IBOutlet weak var titleLbl: UILabel!
     var show_in: Show_IN?
     //var show: Dictionary<String, Any> = Dictionary<String, Any>()
     //var content: String = ""
@@ -29,6 +30,7 @@ class ShowVC: UIViewController, WKUIDelegate {
         webView = WKWebView(frame: CGRect(x: 0, y: 84, width: self.view.frame.width, height: self.view.frame.height) , configuration: webConfiguation)
         webView.uiDelegate = self
         self.view.addSubview(webView)
+        titleLbl.text = show_in!.title
         
         let url: String = String(format: URL_SHOW, show_in!.type, show_in!.token)
         //print(url)

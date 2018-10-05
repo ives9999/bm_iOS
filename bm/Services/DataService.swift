@@ -384,8 +384,8 @@ class DataService {
             }
         }
     }
-    func getArenaByCityIDs(city_ids: [Int], completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app", "channel":"bm","citys": city_ids,"city_type":"simple"]
+    func getArenaByCityIDs(city_ids: [Int],city_type:String, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app", "channel":"bm","citys": city_ids,"city_type":city_type,"version":"1.2.5"]
         //print(body)
         //print(URL_ARENA_BY_CITY_IDS)
         Alamofire.request(URL_ARENA_BY_CITY_IDS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in

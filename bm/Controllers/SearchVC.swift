@@ -158,6 +158,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
             destinationNavigationController = (segue.destination as! UINavigationController)
             let arenaSelectVC: ArenaSelectVC = destinationNavigationController!.topViewController as! ArenaSelectVC
             arenaSelectVC.source = "search"
+            arenaSelectVC.type = "simple"
             arenaSelectVC.select = "multi"
             var _citys: [Int] = [Int]()
             for city in citys {

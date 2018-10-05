@@ -32,6 +32,8 @@ class ArenaSelectVC: UITableViewController {
     
     //來源的程式：目前有team的setup跟search
     var source: String = "setup"
+    //縣市的類型：all所有的縣市，simple比較簡單的縣市
+    var type: String = "all"
     //選擇的類型：just one單選，multi複選
     var select: String = "just one"
 
@@ -50,7 +52,7 @@ class ArenaSelectVC: UITableViewController {
         //print(citys)
         Global.instance.addSpinner(superView: self.tableView)
         
-        TeamService.instance.getArenaByCityIDs(city_ids: citys) { (success) in
+        TeamService.instance.getArenaByCityIDs(city_ids: citys,city_type: type) { (success) in
             if success {
                 //self.arenas = TeamService.instance.arenas
                 //print(self.citys)
