@@ -30,6 +30,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         
         if token.count > 0 {
             action = "UPDATE"
+            //model.neverFill()
             Global.instance.addSpinner(superView: self.view)
             TeamService.instance.getOne(type: "team", token: token, completion: { (success) in
                 if success {
@@ -387,16 +388,21 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                         model.data[key]!["change"] = true
                     }
                 } else if vtype == "Int" {
-                    let value1: Int = Int(value)!
+                    var value1: Int = -1
+                    if value.count > 0 {
+                        value1 = Int(value)!
+                    }
                     model.data[key]!["value"] = value1
                     if oldValue as! Int != value1 {
                         model.data[key]!["change"] = true
                     }
                 } else if vtype == "Bool" {
-                    let value1: Bool = Bool(value)!
-                    model.data[key]!["value"] = value1
-                    if oldValue as! Bool != value1 {
-                        model.data[key]!["change"] = true
+                    if value.count > 0 {
+                        let value1: Bool = Bool(value)!
+                        model.data[key]!["value"] = value1
+                        if oldValue as! Bool != value1 {
+                            model.data[key]!["change"] = true
+                        }
                     }
                 }
                 model.data[key]!["show"] = value

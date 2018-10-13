@@ -147,10 +147,15 @@ class Team: SuperData {
         
         for (key, _) in data {
             data[key]!["key"] = key
-            data[key]!["show"] = "未提供"
         }
         //runTestData()
         //data["play_end"]!["value"] = "ccc"
+    }
+    
+    func neverFill() {
+        for (key, _) in data {
+            data[key]!["show"] = "未提供"
+        }
     }
     
     func initTempPlayData() {

@@ -131,6 +131,7 @@ class TeamService: DataService {
                 }
                 //print(data)
                 let model: Team = Team.instance
+                //model.neverFill()
                 let json = JSON(data)
                 //print(json)
                 
