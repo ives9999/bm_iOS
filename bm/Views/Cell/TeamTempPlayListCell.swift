@@ -9,6 +9,9 @@
 import UIKit
 import UIColor_Hex_Swift
 
+protocol TeamTempPlayListCellDelegate {
+}
+
 class TeamTempPlayListCell: SuperCell {
     
     var bkView: UIView!
@@ -20,6 +23,8 @@ class TeamTempPlayListCell: SuperCell {
     var dateLbl: SuperLabel!
     var timeLbl: SuperLabel!
     let constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
+    
+    var cellDelegate: TeamTempPlayListCellDelegate?
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
@@ -54,12 +59,21 @@ class TeamTempPlayListCell: SuperCell {
         signupLbl.sizeToFit()
         dateLbl.sizeToFit()
         
+//        let f = contentView.frame
+//        let fr = UIEdgeInsetsInsetRect(f, UIEdgeInsetsMake(10, 10, 10, 10))
+//        contentView.frame = fr
     }
     func forRow(row: Dictionary<String, [String: Any]>) {
         //accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         nameLbl.text = (row[TEAM_NAME_KEY]!["value"] as! String)
         cityBtn.setTitle((row["city"]!["show"] as! String), for: .normal)
+        let city_id = row["city"]!["value"] as! Int
+        cityBtn.tag = city_id
+        cityBtn.addTarget(cellDelegate, action: #selector(TempPlayVC.cityBtnPressed(sender:)), for: .touchUpInside)
         arenaBtn.setTitle((row["arena"]!["show"] as! String), for: .normal)
+        let arena_id = row["arena"]!["value"] as! Int
+        arenaBtn.tag = arena_id
+        arenaBtn.addTarget(cellDelegate, action: #selector(TempPlayVC.arenaBtnPressed(sender:)), for: .touchUpInside)
         
         let quantity: Int = (row["count"]!["quantity"] as! Int)
         let signup: Int = (row["count"]!["signup"] as! Int)
@@ -79,6 +93,10 @@ class TeamTempPlayListCell: SuperCell {
         setNeedsLayout()
     }
     
+//    @objc func press(sender: UIButton) {
+//        print(sender.tag)
+//    }
+    
     func _layout() {
         bkView?.frame = CGRect(x: 0, y: constant.height_padding, width: bounds.width, height: constant.height - 2*constant.height_padding)
         
@@ -88,14 +106,14 @@ class TeamTempPlayListCell: SuperCell {
         //let c3: NSLayoutConstraint = NSLayoutConstraint(item: nameLbl, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 10)
         //let c4: NSLayoutConstraint = NSLayoutConstraint(item: nameLbl, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 10)
         
-        let arenaBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: arenaBtn, attribute: .leading, relatedBy: .equal, toItem: nameLbl, attribute: .trailing, multiplier: 1, constant: 10)
-        let arenaBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: arenaBtn, attribute: .centerY, relatedBy: .equal, toItem: nameLbl, attribute: .centerY, multiplier: 1, constant: 0)
+        let cityBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cityBtn, attribute: .leading, relatedBy: .equal, toItem: nameLbl, attribute: .trailing, multiplier: 1, constant: 10)
+        let cityBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: cityBtn, attribute: .centerY, relatedBy: .equal, toItem: nameLbl, attribute: .centerY, multiplier: 1, constant: 0)
         
-        let cityBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cityBtn, attribute: .leading, relatedBy: .equal, toItem: arenaBtn, attribute: .trailing, multiplier: 1, constant: 5)
-        let cityBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: cityBtn, attribute: .centerY, relatedBy: .equal, toItem: arenaBtn, attribute: .centerY, multiplier: 1, constant: 0)
+        let arenaBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: arenaBtn, attribute: .leading, relatedBy: .equal, toItem: arenaBtn.superview, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
+        let arenaBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: arenaBtn, attribute: .top, relatedBy: .equal, toItem: nameLbl, attribute: .bottom, multiplier: 1, constant: 8)
         
         let quantityLblC1: NSLayoutConstraint = NSLayoutConstraint(item: quantityLbl, attribute: .leading, relatedBy: .equal, toItem: quantityLbl.superview, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
-        let quantityLblC2: NSLayoutConstraint = NSLayoutConstraint(item: quantityLbl, attribute: .top, relatedBy: .equal, toItem: nameLbl, attribute: .bottom, multiplier: 1, constant: 8)
+        let quantityLblC2: NSLayoutConstraint = NSLayoutConstraint(item: quantityLbl, attribute: .top, relatedBy: .equal, toItem: arenaBtn, attribute: .bottom, multiplier: 1, constant: 8)
         
         let signupLblC1: NSLayoutConstraint = NSLayoutConstraint(item: signupLbl, attribute: .leading, relatedBy: .equal, toItem: signupLbl.superview, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
         let signupLblC2: NSLayoutConstraint = NSLayoutConstraint(item: signupLbl, attribute: .top, relatedBy: .equal, toItem: quantityLbl, attribute: .bottom, multiplier: 1, constant: 2)

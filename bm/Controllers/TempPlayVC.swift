@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TempPlayVC: MyTableVC {
+class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
 
     // outlets
     @IBOutlet weak var tableView: UITableView!
@@ -55,7 +55,7 @@ class TempPlayVC: MyTableVC {
         }
     }
     
-    func prepareParams() {
+    func prepareParams(city_type: String="simple") {
         var city_ids:[Int] = [Int]()
         if citys.count > 0 {
             for city in citys {
@@ -64,7 +64,7 @@ class TempPlayVC: MyTableVC {
         }
         if city_ids.count > 0 {
             params["city_id"] = city_ids
-            params["city_type"] = "simple"
+            params["city_type"] = city_type
         }
         if days.count > 0 {
             params["play_days"] = days
@@ -102,6 +102,15 @@ class TempPlayVC: MyTableVC {
         }
     }
     
+    func resetParams() {
+        citys.removeAll()
+        arenas.removeAll()
+        days.removeAll()
+        degrees.removeAll()
+        times.removeAll()
+        keyword = ""
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lists.count
     }
@@ -114,6 +123,7 @@ class TempPlayVC: MyTableVC {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
         let cell: TeamTempPlayListCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamTempPlayListCell
+        cell.cellDelegate = self
         let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
         cell.forRow(row: row)
         
@@ -173,6 +183,20 @@ class TempPlayVC: MyTableVC {
     }
     @IBAction func prevBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func cityBtnPressed(sender: UIButton) {
+        //print(sender.tag)
+        citys.append(City(id: sender.tag, name: ""))
+        prepareParams(city_type: "all")
+        refresh()
+    }
+    
+    @objc func arenaBtnPressed(sender: UIButton) {
+        //print(sender.tag)
+        arenas.append(Arena(id: sender.tag, name: ""))
+        prepareParams()
+        refresh()
     }
 }
 

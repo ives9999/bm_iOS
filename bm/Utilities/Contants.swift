@@ -251,7 +251,7 @@ let HEADER = ["Content-Type": "application/json; charset=utf-8"]
 
 // Team Temp play list
 struct TEAM_TEMP_PLAY_CELL {
-    let height: CGFloat = 100
+    let height: CGFloat = 130
     let height_padding: CGFloat = 8
     let name_top_padding: CGFloat = 8
     let name_left_padding: CGFloat = 8
