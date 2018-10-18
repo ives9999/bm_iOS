@@ -17,6 +17,7 @@
 		B31361E91F88A35900BDA53D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E81F88A35900BDA53D /* Global.swift */; };
 		B316FED62112F13600FB990C /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B316FED42112F13600FB990C /* CollectionCell.swift */; };
 		B316FED72112F13600FB990C /* CollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B316FED52112F13600FB990C /* CollectionCell.xib */; };
+		B31739ED21763CD1004CFEDE /* MapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31739EC21763CD1004CFEDE /* MapVC.swift */; };
 		B317855920D60EE200765CA1 /* BlackListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B317855820D60EE200765CA1 /* BlackListVC.swift */; };
 		B317855B20D9089600765CA1 /* BlackListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B317855A20D9089600765CA1 /* BlackListCell.swift */; };
 		B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F8041FC52CAE00DE98FB /* MyTableVC.swift */; };
@@ -181,6 +182,7 @@
 		B31361E81F88A35900BDA53D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		B316FED42112F13600FB990C /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
 		B316FED52112F13600FB990C /* CollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionCell.xib; sourceTree = "<group>"; };
+		B31739EC21763CD1004CFEDE /* MapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapVC.swift; sourceTree = "<group>"; };
 		B317855820D60EE200765CA1 /* BlackListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListVC.swift; sourceTree = "<group>"; };
 		B317855A20D9089600765CA1 /* BlackListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListCell.swift; sourceTree = "<group>"; };
 		B322F8041FC52CAE00DE98FB /* MyTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableVC.swift; sourceTree = "<group>"; };
@@ -530,41 +532,42 @@
 			isa = PBXGroup;
 			children = (
 				B3ED38EF1FB9AD460003F083 /* ArenaSelectVC.swift */,
+				B3DEBE15210CA83A003699A0 /* ArenaVC.swift */,
 				B35BA6822073C06600B506CA /* BaseViewController.swift */,
+				B317855820D60EE200765CA1 /* BlackListVC.swift */,
 				F96931981FB958110005C13F /* CitySelectVC.swift */,
 				F9A1CB841F9895C300DDEC86 /* CoachVC.swift */,
+				F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */,
 				B3E72A181F9CBE9F0008A6B1 /* CourseCV.swift */,
 				B3ED38F11FBAD4C20003F083 /* DaysSelectVC.swift */,
 				B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */,
 				B3ED38D61FB2A3E80003F083 /* EditProfileVC.swift */,
 				F94E7D211F83636A00F550FD /* HomeVC.swift */,
-				F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */,
+				B3DEBE19210D6AC2003699A0 /* ListVC.swift */,
 				B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */,
+				B31739EC21763CD1004CFEDE /* MapVC.swift */,
 				B3E72A211FA08A170008A6B1 /* MenuVC.swift */,
 				B30C954F1FED68A0005F71EF /* MoreVC.swift */,
 				B322F8041FC52CAE00DE98FB /* MyTableVC.swift */,
 				B30C954B1FEA8CDA005F71EF /* PasswordVC.swift */,
 				F94EAA1F1FB023B800B1762C /* ProfileVC.swift */,
 				B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */,
+				B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */,
+				B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */,
 				B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */,
 				B3A5A28520B32152001A846F /* TeamManagerFunctionVC.swift */,
 				B3A5A28320B2CB80001A846F /* TeamManagerVC.swift */,
 				F94FF4341FB4322C00D167B6 /* TeamSubmitVC.swift */,
 				B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */,
 				F90423B81F83748C00DC8B1E /* TeamVC.swift */,
+				B36CBD5020DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift */,
+				B36CBD4E20DCBBF600E52B9C /* TempPlayDateVC.swift */,
 				B3308C501FDA5311006A83B6 /* TempPlayShowVC.swift */,
 				B3FAA0A720CA5C48008F2294 /* TempPlaySignupOneVC.swift */,
 				B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */,
 				B3ED38F51FBC0A7C0003F083 /* TextInputVC.swift */,
 				B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
-				B317855820D60EE200765CA1 /* BlackListVC.swift */,
-				B36CBD4E20DCBBF600E52B9C /* TempPlayDateVC.swift */,
-				B36CBD5020DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift */,
-				B3DEBE15210CA83A003699A0 /* ArenaVC.swift */,
-				B3DEBE19210D6AC2003699A0 /* ListVC.swift */,
-				B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */,
-				B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -572,19 +575,19 @@
 		F94E7D4E1F83662600F550FD /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				B35F8DD81F8F64310073BD70 /* Home.swift */,
-				B3F2222F1F91DE7300A8C402 /* Show_IN.swift */,
-				F9A1CB801F95CE2F00DDEC86 /* SuperData.swift */,
-				B375105A1FA96C0500CDF1A0 /* Member.swift */,
-				B3ED38D81FB463D00003F083 /* Team.swift */,
-				F96931961FB953960005C13F /* City.swift */,
 				B3ED38EB1FB9AB9D0003F083 /* Arena.swift */,
-				B30C95381FE765FB005F71EF /* Facebook.swift */,
-				B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */,
-				B36CBD5420DFCC9E00E52B9C /* SuperModel.swift */,
+				F96931961FB953960005C13F /* City.swift */,
 				B3DEBE1121078191003699A0 /* Coach.swift */,
 				B3DEBE1B2110432F003699A0 /* Course.swift */,
 				B3591B6F2164CC6100E0919C /* Degree.swift */,
+				B30C95381FE765FB005F71EF /* Facebook.swift */,
+				B35F8DD81F8F64310073BD70 /* Home.swift */,
+				B375105A1FA96C0500CDF1A0 /* Member.swift */,
+				B3F2222F1F91DE7300A8C402 /* Show_IN.swift */,
+				F9A1CB801F95CE2F00DDEC86 /* SuperData.swift */,
+				B36CBD5420DFCC9E00E52B9C /* SuperModel.swift */,
+				B3ED38D81FB463D00003F083 /* Team.swift */,
+				B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -900,6 +903,7 @@
 				B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */,
 				F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */,
 				B3A5A28420B2CB80001A846F /* TeamManagerVC.swift in Sources */,
+				B31739ED21763CD1004CFEDE /* MapVC.swift in Sources */,
 				B316FED62112F13600FB990C /* CollectionCell.swift in Sources */,
 				B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */,
 				B3ED38DD1FB4A06C0003F083 /* MyLabel.swift in Sources */,

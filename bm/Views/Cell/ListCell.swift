@@ -8,6 +8,9 @@
 
 import UIKit
 
+protocol ListCellDelegate {
+}
+
 class ListCell: SuperCell {
 
     @IBOutlet weak var listFeatured: UIImageView!
@@ -18,6 +21,8 @@ class ListCell: SuperCell {
     @IBOutlet weak var listDayTxt: UILabel!
     @IBOutlet weak var listIntervalTxt: UILabel!
     
+    var cellDelegate: ListCellDelegate?
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
     }
@@ -26,37 +31,37 @@ class ListCell: SuperCell {
         super.init(coder: aDecoder)
     }
     
-    func updateViews(data: SuperData, iden: String = "team") {
+    func updateViews(indexPath: IndexPath, data: SuperData, iden: String = "team") {
         listTitleTxt.text = data.title
         listFeatured.image = data.featured
         if iden == "team" {
-            updateTeam(data: data)
+            updateTeam(indexPath: indexPath, data: data)
         } else if iden == "coach" {
-            updateCoach(data: data)
+            updateCoach(indexPath: indexPath, data: data)
         } else if iden == "arena" {
-            updateArena(data: data)
+            updateArena(indexPath: indexPath, data: data)
         }
         //accessoryType = UITableViewCellAccessoryType.disclosureIndicator
     }
     
-    func updateTeam(data: SuperData) {
+    func updateTeam(indexPath: IndexPath, data: SuperData) {
         if let item = data.data[CITY_KEY] {
-            listCityTxt.text = (item["show"] as! String)
+            listCityTxt.text = (emptyToSpace(item["show"] as! String))
         }
         if let item = data.data[TEAM_ARENA_KEY] {
-            listArenaTxt.text = (item["show"] as! String)
+            listArenaTxt.text = (emptyToSpace(item["show"] as! String))
         }
         if let item = data.data[TEAM_BALL_KEY] {
             listBallTxt.text = (item["show"] as! String)
         }
         if let item = data.data[TEAM_DAYS_KEY] {
-            listDayTxt.text = (item["show"] as! String)
+            listDayTxt.text = (emptyToSpace(item["show"] as! String))
         }
         if let item = data.data[TEAM_INTERVAL_KEY] {
             listIntervalTxt.text = (item["show"] as! String)
         }
     }
-    func updateCoach(data: SuperData) {
+    func updateCoach(indexPath: IndexPath, data: SuperData) {
         if let item = data.data[CITY_KEY] {
             listCityTxt.text = (item["show"] as! String)
         }
@@ -71,9 +76,14 @@ class ListCell: SuperCell {
         }
         listIntervalTxt.text = ""
     }
-    func updateArena(data: SuperData) {
+    func updateArena(indexPath: IndexPath, data: SuperData) {
         if let item = data.data[CITY_KEY] {
+            //print(item)
             listCityTxt.text = (item["show"] as! String)
+            listCityTxt.tag = indexPath.row
+            listCityTxt.isUserInteractionEnabled = true
+            let tap = UITapGestureRecognizer(target: cellDelegate, action: #selector(ArenaVC.mapPrepare))
+            listCityTxt.addGestureRecognizer(tap)
         }
         if let item = data.data[TEL_KEY] {
             listArenaTxt.text = (item["show"] as! String)
@@ -89,4 +99,12 @@ class ListCell: SuperCell {
         }
     }
     
+    private func emptyToSpace(_ text: String)-> String {
+        var res = text
+        if text.count == 0 {
+            res = "     "
+        }
+        
+        return res
+    }
 }

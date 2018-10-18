@@ -21,13 +21,25 @@ class ArenaService: DataService {
         let superData = Arena(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
         return superData
     }
-    override func setData1(obj: JSON) -> Dictionary<String, [String : Any]> {
+    override func setData1(row: JSON) -> Dictionary<String, [String : Any]> {
         model.listReset()
         for (key, value) in model.data {
-            if obj[key].exists() {
-                _jsonToData(tmp: obj[key], key: key, item: value)
+            if row[key].exists() {
+                //row[key]: remote value, item: local setup
+                _jsonToData(tmp: row[key], key: key, item: value)
+            }
+            if key == CITY_KEY {
+                if row["city_id"].exists() {
+                    model.data[CITY_KEY]!["value"] = row["city_id"].intValue
+                }
+            }
+            if key == AREA_KEY {
+                if row["area_id"].exists() {
+                    model.data[AREA_KEY]!["value"] = row["area_id"].intValue
+                }
             }
         }
+        //print(model.data)
         return model.data
     }
     

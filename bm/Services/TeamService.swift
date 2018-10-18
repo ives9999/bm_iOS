@@ -35,11 +35,11 @@ class TeamService: DataService {
         let superData = Team(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
         return superData
     }
-    override func setData1(obj: JSON) -> Dictionary<String, [String : Any]> {
+    override func setData1(row: JSON) -> Dictionary<String, [String : Any]> {
         model.listReset()
         for (key, value) in model.data {
-            if obj[key].exists() {
-                _jsonToData(tmp: obj[key], key: key, item: value)
+            if row[key].exists() {
+                _jsonToData(tmp: row[key], key: key, item: value)
             }
         }
         model.updateInterval()

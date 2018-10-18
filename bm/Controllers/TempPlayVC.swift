@@ -187,6 +187,7 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
     
     @objc func cityBtnPressed(sender: UIButton) {
         //print(sender.tag)
+        resetParams()
         citys.append(City(id: sender.tag, name: ""))
         prepareParams(city_type: "all")
         refresh()
@@ -194,6 +195,7 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
     
     @objc func arenaBtnPressed(sender: UIButton) {
         //print(sender.tag)
+        resetParams()
         arenas.append(Arena(id: sender.tag, name: ""))
         prepareParams()
         refresh()

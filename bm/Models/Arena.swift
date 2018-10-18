@@ -37,6 +37,7 @@ class Arena: SuperData {
             CITY_KEY:["ch":"縣市","vtype":"String","value":"","show":"","submit":false],
             AREA_KEY:["ch":"區域","vtype":"String","value":"","show":"","submit":false],
             ROAD_KEY:["ch":"路名","vtype":"String","value":"","show":"","submit":false],
+            ADDRESS_KEY:["ch":"住址","vtype":"String","value":"","show":"","submit":false],
             ZIP_KEY:["ch":"郵遞區號","vtype":"String","value":"","show":"","submit":false],
             ARENA_AIR_CONDITION_KEY:["ch":"冷氣","vtype":"Boolean","value":false,"show":"","submit":false],
             ARENA_PARKING_KEY:["ch":"停車位","vtype":"Int","value":0,"show":"","submit":false],

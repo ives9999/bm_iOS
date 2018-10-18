@@ -50,7 +50,7 @@ class DataService {
         return list
     }
     
-    func setData1(obj: JSON)->Dictionary<String, [String: Any]> {
+    func setData1(row: JSON)->Dictionary<String, [String: Any]> {
         let list = Dictionary<String, [String: Any]>()
         return list
     }
@@ -84,17 +84,17 @@ class DataService {
                 if self.totalCount > 0 {
                     self.page = json["page"].intValue
                     self.perPage = json["perPage"].intValue
-                    let arr: [JSON] = json["rows"].arrayValue
-                    for i in 0 ..< arr.count {
-                        let obj = arr[i]
-                        let title: String = obj[titleField].stringValue
-                        let id: Int = obj["id"].intValue
-                        let token: String = obj["token"].stringValue
-                        let vimeo: String = obj["vimeo"].stringValue
-                        let youtube: String = obj["youtube"].stringValue
+                    let rows: [JSON] = json["rows"].arrayValue
+                    for i in 0 ..< rows.count {
+                        let row = rows[i]
+                        let title: String = row[titleField].stringValue
+                        let id: Int = row["id"].intValue
+                        let token: String = row["token"].stringValue
+                        let vimeo: String = row["vimeo"].stringValue
+                        let youtube: String = row["youtube"].stringValue
                         
                         var path: String!
-                        let path1 = obj["featured_path"].stringValue
+                        let path1 = row["featured_path"].stringValue
                         if (path1.count > 0) {
                             if (!path1.startWith("http://") && !path1.startWith("https://")) {
                                 path = BASE_URL + path1
@@ -107,7 +107,7 @@ class DataService {
                         }
                         
                         let list = self.setData(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
-                        let map = self.setData1(obj: obj)
+                        let map = self.setData1(row: row)
                         list.data = map
                         self.dataLists.append(list)
                     }
