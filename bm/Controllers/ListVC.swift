@@ -107,7 +107,7 @@ class ListVC: MyTableVC, ListCellDelegate {
                 showVC.initShowVC(sin: show_in)
             }
         } else if segue.identifier == "toMap" {
-            if let mapVC: MapVC = segue.destination as? MapVC {
+            if let mapVC: ArenaMapVC = segue.destination as? ArenaMapVC {
                 let hashMap = sender as! [String: String]
                 mapVC.annotationTitle = hashMap["title"]!
                 mapVC.address = hashMap["address"]!

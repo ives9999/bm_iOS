@@ -383,10 +383,10 @@
             </objects>
             <point key="canvasLocation" x="2183" y="-3784"/>
         </scene>
-        <!--MapVC-->
+        <!--Arena MapVC-->
         <scene sceneID="Zi4-45-7Ma">
             <objects>
-                <viewController id="nQN-QD-w9o" customClass="MapVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nQN-QD-w9o" customClass="ArenaMapVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="d9N-zp-VKN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2402,11 +2402,24 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fCC-SR-PJr">
+                                        <rect key="frame" x="321" y="11" width="42" height="42"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="42" id="7pH-0e-ZIF"/>
+                                            <constraint firstAttribute="height" constant="42" id="9Bw-jt-lA8"/>
+                                        </constraints>
+                                        <state key="normal" image="search"/>
+                                        <connections>
+                                            <action selector="searchBtnPressed:" destination="NIB-Wk-iZw" eventType="touchUpInside" id="Duq-BV-eEI"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="fCC-SR-PJr" secondAttribute="trailing" constant="12" id="0r4-Cm-ktq"/>
                                     <constraint firstItem="7xB-65-Tqp" firstAttribute="centerY" secondItem="j88-uB-Kay" secondAttribute="centerY" id="2P6-It-P3B"/>
                                     <constraint firstItem="7xB-65-Tqp" firstAttribute="leading" secondItem="j88-uB-Kay" secondAttribute="leading" constant="12" id="3zc-IR-vgO"/>
+                                    <constraint firstItem="fCC-SR-PJr" firstAttribute="centerY" secondItem="j88-uB-Kay" secondAttribute="centerY" id="9fe-3M-eY5"/>
                                     <constraint firstAttribute="height" constant="64" id="BBA-yw-kcH"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="Xjj-Vd-MO3"/>
                                     <constraint firstItem="sfO-PD-WM6" firstAttribute="centerY" secondItem="j88-uB-Kay" secondAttribute="centerY" id="gD7-mR-qfT"/>
@@ -2836,6 +2849,7 @@
         <image name="power" width="16" height="17"/>
         <image name="prev" width="20" height="20"/>
         <image name="register" width="16" height="16"/>
+        <image name="search" width="42" height="42"/>
         <image name="team" width="25" height="25"/>
         <image name="tempPlay" width="25" height="25"/>
     </resources>
