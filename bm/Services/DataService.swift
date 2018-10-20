@@ -62,7 +62,7 @@ class DataService {
             body["where"] = filter
         }
         body = body.merging(params){ (current, _) in current }
-        print(body)
+        //print(body)
         let url: String = String(format: URL_LIST, type)
         //print(url)
         dataLists = [SuperData]()

@@ -8,7 +8,14 @@
 
 import UIKit
 
-class ListVC: MyTableVC, ListCellDelegate {
+class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDelegate {
+    func setCityData(id: Int, name: String) {
+        
+    }
+    
+    func setCitysData(res: [City]) {
+        
+    }
     
     var _type: String = "coach"
     var _titleField: String = "name"
@@ -17,6 +24,7 @@ class ListVC: MyTableVC, ListCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
     
+    var newY: CGFloat = 0
     
     let maskView = UIView()
     let containerView = UIView(frame: .zero)
@@ -29,7 +37,8 @@ class ListVC: MyTableVC, ListCellDelegate {
     
     let padding: CGFloat = 20
     let headerHeight: CGFloat = 84
-    var layerHeight: CGFloat!
+    var tableViewBoundHeight: CGFloat = 0
+    var layerHeight: CGFloat = 0
     
     var searchRows: [[String: Any]] {
         get {
@@ -49,11 +58,26 @@ class ListVC: MyTableVC, ListCellDelegate {
         setIden(item:_type, titleField: _titleField)
         let cellNibName = UINib(nibName: "ListCell", bundle: nil)
         myTablView.register(cellNibName, forCellReuseIdentifier: "listcell")
-        layerHeight = view.frame.height-200
+        tableViewBoundHeight = view.bounds.height - 64
+        layerHeight = tableViewBoundHeight - 100
         searchTableView.dataSource = self
         searchTableView.delegate = self
         searchTableView.register(TeamSubmitCell.self, forCellReuseIdentifier: "search_cell")
+        
+        
         refresh()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        newY = scrollView.contentOffset.y
+        if newY < 0 { newY = 0 }
+        //print(newY)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        newY = scrollView.contentOffset.y
+        if newY < 0 { newY = 0 }
+        //print(scrollView.contentOffset.y)
     }
     
     func prepareParams(city_type: String="simple") {
@@ -195,11 +219,20 @@ class ListVC: MyTableVC, ListCellDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let data = lists[indexPath.row]
-        performSegue(withIdentifier: "ListShowSegue", sender: data)
+        Global.instance.addSpinner(superView: view)
+        Global.instance.removeSpinner(superView: view)
+        if tableView == self.tableView {
+            let data = lists[indexPath.row]
+            performSegue(withIdentifier: "ListShowSegue", sender: data)
+        } else if tableView == searchTableView {
+            let row = searchRows[indexPath.row]
+            let segue: String = row["segue"] as! String
+            performSegue(withIdentifier: segue, sender: row["sender"])
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var destinationNavigationController: UINavigationController?
         if segue.identifier == "ListShowSegue" {
             if let showVC: ShowVC = segue.destination as? ShowVC {
                 assert(sender as? SuperData != nil)
@@ -213,10 +246,19 @@ class ListVC: MyTableVC, ListCellDelegate {
                 mapVC.annotationTitle = hashMap["title"]!
                 mapVC.address = hashMap["address"]!
             }
+        } else if segue.identifier == TO_CITY {
+            destinationNavigationController = (segue.destination as! UINavigationController)
+            let citySelectVC: CitySelectVC = destinationNavigationController!.topViewController as! CitySelectVC
+            citySelectVC.delegate = self
+            citySelectVC.source = "search"
+            citySelectVC.type = "simple"
+            citySelectVC.select = "multi"
+            //citySelectVC.citys = citys
         }
     }
     
     func showSearchPanel() {
+        tableView.isScrollEnabled = false
         mask()
         addLayer()
         animation()
@@ -226,14 +268,16 @@ class ListVC: MyTableVC, ListCellDelegate {
         maskView.backgroundColor = UIColor(white: 1, alpha: 0.8)
         maskView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(unmask)))
         tableView.addSubview(maskView)
-        maskView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: view.frame.height)
+        
+        maskView.frame = CGRect(x: 0, y: newY, width: tableView.frame.width, height: tableViewBoundHeight)
         maskView.alpha = 0
     }
     
     func addLayer() {
         tableView.addSubview(containerView)
-        containerView.frame = CGRect(x:padding, y:tableView.frame.height, width:view.frame.width-(2*padding), height:layerHeight)
+        containerView.frame = CGRect(x:padding, y:tableViewBoundHeight + newY, width:view.frame.width-(2*padding), height:layerHeight)
         containerView.backgroundColor = UIColor.black
+        
         searchTableView.backgroundColor = UIColor.clear
         containerView.addSubview(self.searchTableView)
         
@@ -243,13 +287,15 @@ class ListVC: MyTableVC, ListCellDelegate {
         searchSubmitBtn.translatesAutoresizingMaskIntoConstraints = false
         containerView.addConstraints([c1,c2])
         searchSubmitBtn.addTarget(self, action: #selector(submit(view:)), for: .touchUpInside)
+        self.searchTableView.isHidden = false
+        self.searchSubmitBtn.isHidden = false
     }
     
     func animation() {
-        let y = tableView.frame.height - layerHeight
+        let y = newY + 100
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.maskView.alpha = 1
-            self.containerView.frame = CGRect(x: self.padding, y: y, width: self.containerView.frame.width, height: self.containerView.frame.height)
+            self.containerView.frame = CGRect(x: self.padding, y: y, width: self.containerView.frame.width, height: self.layerHeight)
         }, completion: { (finished) in
             if finished {
                 let frame = self.containerView.frame
@@ -262,8 +308,11 @@ class ListVC: MyTableVC, ListCellDelegate {
     @objc func unmask() {
         UIView.animate(withDuration: 0.5) {
             self.maskView.alpha = 0
-            self.containerView.frame = CGRect(x:self.padding, y:self.view.frame.height, width:self.searchTableView.frame.width, height:self.searchTableView.frame.height)
+            self.searchTableView.isHidden = true
+            self.searchSubmitBtn.isHidden = true
+            self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.tableViewBoundHeight, width:self.containerView.frame.width, height:0)
         }
+        tableView.isScrollEnabled = true
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {
@@ -272,8 +321,11 @@ class ListVC: MyTableVC, ListCellDelegate {
     
     @objc func submit(view: UIButton) {
         unmask()
-        keyword = "安"
         prepareParams()
         refresh()
+    }
+    
+    func setTextField(iden: String, value: String) {
+        keyword = value
     }
 }

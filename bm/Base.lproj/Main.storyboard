@@ -2455,11 +2455,12 @@
                         <outlet property="tableView" destination="4mb-SH-JK7" id="mee-5x-3Mw"/>
                         <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="EIA-wN-WfT"/>
                         <segue destination="nQN-QD-w9o" kind="show" identifier="toMap" id="2RB-tg-LFe"/>
+                        <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="cDK-8u-UPz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6k-pd-Jq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2470" y="-160"/>
+            <point key="canvasLocation" x="-402" y="-3452"/>
         </scene>
         <!--CourseCV-->
         <scene sceneID="Eib-Tq-Zds">
@@ -2858,7 +2859,7 @@
         <segue reference="HZU-LD-Mbl"/>
         <segue reference="cUS-kZ-A2j"/>
         <segue reference="XnZ-GS-Ao0"/>
-        <segue reference="EKU-tT-H1i"/>
+        <segue reference="cDK-8u-UPz"/>
         <segue reference="2ff-JT-Wdj"/>
         <segue reference="f5d-2G-qtf"/>
         <segue reference="xcZ-Ad-vEw"/>
