@@ -90,7 +90,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         //print(page)
         Global.instance.addSpinner(superView: self.view)
         
-        dataService.getList(type: iden, titleField: titleField, page: page, perPage: perPage, filter: nil) { (success) in
+        dataService.getList(type: iden, titleField: titleField, params:[String: Any](), page: page, perPage: perPage, filter: nil) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)

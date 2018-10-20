@@ -142,7 +142,8 @@ class BaseViewController: UIViewController {
             ["channel", "=", CHANNEL],
             ["manager_id", "=", Member.instance.id]
         ]
-        TeamService.instance.getList(type: "team", titleField: "name", page: 1, perPage: 100, filter: filter) { (success) in
+        let params: Dictionary<String, Any> = [String: Any]()
+        TeamService.instance.getList(type: "team", titleField: "name", params:params, page: 1, perPage: 100, filter: filter) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
                 self.teamManagerLists = TeamService.instance.dataLists

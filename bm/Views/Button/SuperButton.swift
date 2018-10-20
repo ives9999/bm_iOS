@@ -21,7 +21,6 @@ class SuperButton: UIButton {
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         self.commonInit()
-        
     }
     
     override init(frame: CGRect) {
@@ -29,12 +28,11 @@ class SuperButton: UIButton {
         self.commonInit()
     }
     func commonInit(){
-        self.setTitleColor(UIColor.black, for: UIControlState.normal)
-        self.backgroundColor = UIColor(MY_RED)
+        self.setTitleColor(UIColor.white, for: UIControlState.normal)
         self.titleLabel?.font = UIFont(name: fontName, size: fontSize)
         self.alignH = .left
         self.alignV = .center
-        self.cornerRadius = 18
+        self.cornerRadius = 12
         self.padding(top: 3, left: 8, bottom: 3, right: 8)
     }
     open var alignH: UIControlContentHorizontalAlignment = UIControlContentHorizontalAlignment.left {

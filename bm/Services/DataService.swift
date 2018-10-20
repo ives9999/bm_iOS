@@ -55,13 +55,14 @@ class DataService {
         return list
     }
     
-    func getList(type: String, titleField: String, page: Int, perPage: Int, filter:[[Any]]?, completion: @escaping CompletionHandler) {
+    func getList(type: String, titleField: String, params:[String:Any], page: Int, perPage: Int, filter:[[Any]]?, completion: @escaping CompletionHandler) {
         self.needDownloads = [Dictionary<String, Any>]()
         var body: [String: Any] = ["source": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
         if filter != nil {
             body["where"] = filter
         }
-        //print(body)
+        body = body.merging(params){ (current, _) in current }
+        print(body)
         let url: String = String(format: URL_LIST, type)
         //print(url)
         dataLists = [SuperData]()

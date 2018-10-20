@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33B217AF31100C32CE2 /* SubmitButton.swift */; };
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -171,6 +172,7 @@
 		8887FB55CE42CC9156BD0571 /* Pods-bm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bm/Pods-bm.debug.xcconfig"; sourceTree = "<group>"; };
 		9C5D58D06320800C79615904 /* Pods_bm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B177D5D81630D703CAC77139 /* Pods-bmNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		B306F33B217AF31100C32CE2 /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -434,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				B37A13441FDAF3CB00413E64 /* SuperButton.swift */,
+				B306F33B217AF31100C32CE2 /* SubmitButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -898,6 +901,7 @@
 				B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
 				B3591B702164CC6100E0919C /* Degree.swift in Sources */,
+				B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */,
 				B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */,
 				F9A1CB811F95CE2F00DDEC86 /* SuperData.swift in Sources */,
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
