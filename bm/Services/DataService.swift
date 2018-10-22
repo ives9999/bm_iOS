@@ -37,6 +37,7 @@ class DataService {
     var citys: [City] = [City]()
     var arenas: [Arena] = [Arena]()
     var citysandarenas:[Int:[String:Any]] = [Int:[String:Any]]()
+    var citysandareas:[Int:[String:Any]] = [Int:[String:Any]]()
     var msg:String = ""
     var success: Bool = false
     
@@ -410,6 +411,37 @@ class DataService {
                     self.citysandarenas[id] = ["id":id,"name":city_name,"rows":rows]
                 }
                 //print(self.citysandarenas)
+                
+                completion(true)
+            }
+        }
+    }
+    
+    func getAreaByCityIDs(city_ids: [Int],city_type:String, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app", "channel":"bm","citys": city_ids,"city_type":city_type]
+        //print(body)
+        //print(URL_ARENA_BY_CITY_IDS)
+        Alamofire.request(URL_AREA_BY_CITY_IDS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                for (city_id, item) in json {
+                    let id: Int = item["id"].intValue
+                    let city_name: String = item["name"].stringValue
+                    let _rows: [JSON] = item["rows"].arrayValue
+                    var rows: [[String: Any]] = [[String: Any]]()
+                    for _row in _rows {
+                        let area_id: Int = _row["id"].intValue
+                        let area_name: String = _row["name"].stringValue
+                        rows.append(["id":area_id,"name":area_name])
+                    }
+                    self.citysandareas[id] = ["id":id,"name":city_name,"rows":rows]
+                }
+                print(self.citysandareas)
                 
                 completion(true)
             }

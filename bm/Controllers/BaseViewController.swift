@@ -15,7 +15,7 @@ class BaseViewController: UIViewController {
     var msg: String = ""
     var teamManagerLists: [SuperData] = [SuperData]()
     var refreshControl: UIRefreshControl!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

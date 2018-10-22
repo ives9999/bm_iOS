@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33B217AF31100C32CE2 /* SubmitButton.swift */; };
+		B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */; };
+		B306F340217DA15000C32CE2 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33F217DA15000C32CE2 /* Area.swift */; };
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -173,6 +175,8 @@
 		9C5D58D06320800C79615904 /* Pods_bm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B177D5D81630D703CAC77139 /* Pods-bmNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		B306F33B217AF31100C32CE2 /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
+		B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSelectVC.swift; sourceTree = "<group>"; };
+		B306F33F217DA15000C32CE2 /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
 		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -574,6 +578,7 @@
 				B3ED38F51FBC0A7C0003F083 /* TextInputVC.swift */,
 				B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
+				B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -594,6 +599,7 @@
 				B36CBD5420DFCC9E00E52B9C /* SuperModel.swift */,
 				B3ED38D81FB463D00003F083 /* Team.swift */,
 				B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */,
+				B306F33F217DA15000C32CE2 /* Area.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -950,6 +956,7 @@
 				F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */,
 				B3A5A28620B32152001A846F /* TeamManagerFunctionVC.swift in Sources */,
 				B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */,
+				B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */,
 				B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */,
 				B36CBD5120DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift in Sources */,
 				B3E72A2A1FA2EC640008A6B1 /* RegisterVC.swift in Sources */,
@@ -975,6 +982,7 @@
 				B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */,
 				B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */,
 				B317855B20D9089600765CA1 /* BlackListCell.swift in Sources */,
+				B306F340217DA15000C32CE2 /* Area.swift in Sources */,
 				B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

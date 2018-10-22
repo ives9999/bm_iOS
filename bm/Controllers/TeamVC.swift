@@ -11,6 +11,7 @@ import Device_swift
 
 class TeamVC: ListVC {
     
+    //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var managerBtn: UIButton!    
     
     override func viewDidLoad() {

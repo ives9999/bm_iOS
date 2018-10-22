@@ -323,7 +323,96 @@
             </objects>
             <point key="canvasLocation" x="406" y="-3194"/>
         </scene>
-        <!--區域-->
+        <!--Area SelectVC-->
+        <scene sceneID="8se-mo-ZdO">
+            <objects>
+                <viewController id="rNf-pN-AQF" customClass="AreaSelectVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0tH-bk-Y6u">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="psQ-y0-HDc">
+                                <rect key="frame" x="0.0" y="20" width="375" height="64"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="區域" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-ZP-eHB">
+                                        <rect key="frame" x="168.5" y="19" width="38.5" height="27"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYS-WD-ZIv">
+                                        <rect key="frame" x="12" y="23" width="24" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="QVV-PE-O1v"/>
+                                            <constraint firstAttribute="width" constant="24" id="aiw-Xh-ylc"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="Dzz-d9-3U6"/>
+                                            <action selector="prevBtnPressed:" destination="vfe-V8-Hfx" eventType="touchUpInside" id="FI1-C6-T6y"/>
+                                            <action selector="prevBtnPressed:" destination="rNf-pN-AQF" eventType="touchUpInside" id="KKT-KW-QcT"/>
+                                            <action selector="prevBtnPressed:" destination="UtM-v1-pfK" eventType="touchUpInside" id="a2U-oK-3Am"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r00-Q1-Luh">
+                                        <rect key="frame" x="331" y="15" width="32" height="34"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                        <state key="normal" title="提交">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="submit:" destination="rNf-pN-AQF" eventType="touchUpInside" id="22H-c2-ZXj"/>
+                                            <action selector="submit:" destination="UtM-v1-pfK" eventType="touchUpInside" id="VLa-Mm-Sqg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="VYS-WD-ZIv" firstAttribute="centerY" secondItem="psQ-y0-HDc" secondAttribute="centerY" id="RUK-WX-Qvl"/>
+                                    <constraint firstAttribute="height" constant="64" id="S4q-8Q-Vh4"/>
+                                    <constraint firstItem="jvb-ZP-eHB" firstAttribute="centerX" secondItem="psQ-y0-HDc" secondAttribute="centerX" id="SIP-qd-4dV"/>
+                                    <constraint firstItem="jvb-ZP-eHB" firstAttribute="centerY" secondItem="psQ-y0-HDc" secondAttribute="centerY" id="Xui-b6-VG3"/>
+                                    <constraint firstAttribute="trailing" secondItem="r00-Q1-Luh" secondAttribute="trailing" constant="12" id="Zdp-at-jDF"/>
+                                    <constraint firstItem="r00-Q1-Luh" firstAttribute="centerY" secondItem="jvb-ZP-eHB" secondAttribute="centerY" id="lEA-EH-6Pn"/>
+                                    <constraint firstItem="VYS-WD-ZIv" firstAttribute="leading" secondItem="psQ-y0-HDc" secondAttribute="leading" constant="12" id="qJK-01-ZXR"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="qc4-ZN-bgb"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="qkE-Cf-u6W">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t91-ES-VLr">
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="qkE-Cf-u6W" firstAttribute="leading" secondItem="fEh-XE-zIw" secondAttribute="leading" id="3ZT-T4-Lgs"/>
+                            <constraint firstItem="psQ-y0-HDc" firstAttribute="leading" secondItem="fEh-XE-zIw" secondAttribute="leading" id="9BI-pW-R3t"/>
+                            <constraint firstItem="qkE-Cf-u6W" firstAttribute="top" secondItem="psQ-y0-HDc" secondAttribute="bottom" id="EHK-Nl-3T8"/>
+                            <constraint firstItem="fEh-XE-zIw" firstAttribute="bottom" secondItem="qkE-Cf-u6W" secondAttribute="bottom" id="GOc-rk-mqy"/>
+                            <constraint firstItem="psQ-y0-HDc" firstAttribute="trailing" secondItem="fEh-XE-zIw" secondAttribute="trailing" id="Nvw-LC-6VH"/>
+                            <constraint firstItem="fEh-XE-zIw" firstAttribute="bottom" secondItem="t91-ES-VLr" secondAttribute="bottom" id="SGq-XV-nGi"/>
+                            <constraint firstItem="t91-ES-VLr" firstAttribute="top" secondItem="psQ-y0-HDc" secondAttribute="bottom" id="W3I-i0-yhC"/>
+                            <constraint firstItem="t91-ES-VLr" firstAttribute="leading" secondItem="fEh-XE-zIw" secondAttribute="leading" id="aAs-iG-6y8"/>
+                            <constraint firstItem="psQ-y0-HDc" firstAttribute="top" secondItem="fEh-XE-zIw" secondAttribute="top" id="qCC-lf-gzu"/>
+                            <constraint firstItem="fEh-XE-zIw" firstAttribute="trailing" secondItem="t91-ES-VLr" secondAttribute="trailing" id="rOr-2A-WVU"/>
+                            <constraint firstItem="fEh-XE-zIw" firstAttribute="trailing" secondItem="qkE-Cf-u6W" secondAttribute="trailing" id="zYK-0C-bjB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="fEh-XE-zIw"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="t91-ES-VLr" id="Ryc-fa-4Q7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eq2-bS-RNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="465" y="-4730"/>
+        </scene>
+        <!--縣市-->
         <scene sceneID="3nd-bd-ghH">
             <objects>
                 <tableViewController id="oOZ-Lo-dEg" customClass="CitySelectVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
@@ -347,7 +436,7 @@
                             <outlet property="delegate" destination="oOZ-Lo-dEg" id="QvF-fR-5md"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="區域" id="Yph-hF-scQ"/>
+                    <navigationItem key="navigationItem" title="縣市" id="Yph-hF-scQ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wwM-Qy-nUW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1870,7 +1959,7 @@
                     <connections>
                         <outlet property="managerBtn" destination="ayd-RJ-lxK" id="8ga-4O-AxJ"/>
                         <outlet property="menuBtn" destination="E9V-cS-tg9" id="rfP-Ni-bjs"/>
-                        <outlet property="tableView" destination="rJI-Y4-Ooh" id="cf1-zU-0bd"/>
+                        <outlet property="tableView" destination="rJI-Y4-Ooh" id="hYG-z3-4Uc"/>
                         <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="AlK-fI-QxB"/>
                         <segue destination="Zvi-i7-Pcr" kind="show" identifier="toTeamManager" id="xCJ-lv-P9J"/>
                     </connections>
@@ -2456,11 +2545,12 @@
                         <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="EIA-wN-WfT"/>
                         <segue destination="nQN-QD-w9o" kind="show" identifier="toMap" id="2RB-tg-LFe"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="cDK-8u-UPz"/>
+                        <segue destination="rNf-pN-AQF" kind="show" identifier="toArea" id="5Nm-Wc-gVO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6k-pd-Jq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-402" y="-3452"/>
+            <point key="canvasLocation" x="-268" y="-4979"/>
         </scene>
         <!--CourseCV-->
         <scene sceneID="Eib-Tq-Zds">

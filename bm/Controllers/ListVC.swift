@@ -9,14 +9,7 @@
 import UIKit
 
 class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDelegate {
-    func setCityData(id: Int, name: String) {
-        
-    }
-    
-    func setCitysData(res: [City]) {
-        
-    }
-    
+
     var _type: String = "coach"
     var _titleField: String = "name"
     internal(set) public var lists: [SuperData] = [SuperData]()
@@ -40,14 +33,13 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
     var tableViewBoundHeight: CGFloat = 0
     var layerHeight: CGFloat = 0
     
-    var searchRows: [[String: Any]] {
-        get {
-            return [[String: Any]]()
-        }
-    }
+    var searchRows: [[String: Any]] = [[String: Any]]()
     
     var keyword: String = ""
+    var citys: [City] = [City]()
+    
     var params: [String: Any] = [String: Any]()
+    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -210,6 +202,7 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         } else if tableView == searchTableView {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? TeamSubmitCell {
                 let searchRow = searchRows[indexPath.row]
+                //print(searchRow)
                 cell.forRow(row: searchRow)
                 return cell
             }
@@ -240,7 +233,7 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
                 let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
                 showVC.initShowVC(sin: show_in)
             }
-        } else if segue.identifier == "toMap" {
+        } else if segue.identifier == TO_MAP {
             if let mapVC: ArenaMapVC = segue.destination as? ArenaMapVC {
                 let hashMap = sender as! [String: String]
                 mapVC.annotationTitle = hashMap["title"]!
@@ -253,7 +246,19 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
             citySelectVC.source = "search"
             citySelectVC.type = "simple"
             citySelectVC.select = "multi"
-            //citySelectVC.citys = citys
+            citySelectVC.citys = citys
+        } else if segue.identifier == TO_AREA {
+            if let areaSelectVC = segue.destination as? AreaSelectVC {
+                var _citys: [Int] = [Int]()
+                citys.append(City(id: 218, name: ""))
+                for city in citys {
+                    _citys.append(city.id)
+                }
+                areaSelectVC.source = "search"
+                areaSelectVC.type = "simple"
+                areaSelectVC.select = "multi"
+                areaSelectVC.citys = _citys
+            }
         }
     }
     
@@ -327,5 +332,45 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
     
     func setTextField(iden: String, value: String) {
         keyword = value
+    }
+    
+    func setCityData(id: Int, name: String) {
+        
+    }
+    
+    func setCitysData(res: [City]) {
+        //print(res)
+        var row = getDefinedRow(TEAM_CITY_KEY)
+        var texts: [String] = [String]()
+        citys = res
+        if citys.count > 0 {
+            for city in citys {
+                let text = city.name
+                texts.append(text)
+            }
+            row["show"] = texts.joined(separator: ",")
+        } else {
+            row["show"] = "全部"
+        }
+        replaceRows(TEAM_CITY_KEY, row)
+        searchTableView.reloadData()
+    }
+    
+    func getDefinedRow(_ key: String) -> [String: Any] {
+        for row in searchRows {
+            if row["key"] as! String == key {
+                return row
+            }
+        }
+        return [String: Any]()
+    }
+    
+    func replaceRows(_ key: String, _ row: [String: Any]) {
+        for (idx, _row) in searchRows.enumerated() {
+            if _row["key"] as! String == key {
+                searchRows[idx] = row
+                break;
+            }
+        }
     }
 }

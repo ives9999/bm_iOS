@@ -10,19 +10,17 @@ import UIKit
 
 class ArenaVC: ListVC {
     
-    override var searchRows: [[String: Any]]{
-        get {
-            return
-                [
-                    ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字"],
-                    ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0]
-            ]
-        }
-    }
+    let _searchRows: [[String: Any]] = [
+        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字"],
+    ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
+    ["ch":"區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":AREA_KEY,"show":"全部","segue":TO_AREA,"sender":0]
+    ]
+    
     
     override func viewDidLoad() {
         myTablView = tableView
         dataService = ArenaService.instance
+        searchRows = _searchRows
         _type = "arena"
         _titleField = "name"
         super.viewDidLoad()
@@ -38,7 +36,7 @@ class ArenaVC: ListVC {
             "title": title,
             "address": address
         ]
-        performSegue(withIdentifier: "toMap", sender: sender)
+        performSegue(withIdentifier: TO_MAP, sender: sender)
     }
 
     @IBAction func searchBtnPressed(_ sender: Any) {
