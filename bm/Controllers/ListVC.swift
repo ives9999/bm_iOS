@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDelegate {
+class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDelegate, AreaSelectDelegate {
 
     var _type: String = "coach"
     var _titleField: String = "name"
@@ -37,6 +37,7 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
     
     var keyword: String = ""
     var citys: [City] = [City]()
+    var areas: [Area] = [Area]()
     
     var params: [String: Any] = [String: Any]()
     
@@ -212,15 +213,19 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Global.instance.addSpinner(superView: view)
-        Global.instance.removeSpinner(superView: view)
+        Global.instance.addSpinner(superView: tableView)
+        Global.instance.removeSpinner(superView: tableView)
         if tableView == self.tableView {
             let data = lists[indexPath.row]
             performSegue(withIdentifier: "ListShowSegue", sender: data)
         } else if tableView == searchTableView {
             let row = searchRows[indexPath.row]
             let segue: String = row["segue"] as! String
-            performSegue(withIdentifier: segue, sender: row["sender"])
+            if segue == TO_AREA && citys.count == 0 {
+                SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
+            } else {
+                performSegue(withIdentifier: segue, sender: row["sender"])
+            }
         }
     }
     
@@ -250,14 +255,16 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         } else if segue.identifier == TO_AREA {
             if let areaSelectVC = segue.destination as? AreaSelectVC {
                 var _citys: [Int] = [Int]()
-                citys.append(City(id: 218, name: ""))
+                //citys.append(City(id: 10, name: ""))
                 for city in citys {
                     _citys.append(city.id)
                 }
+                areaSelectVC.delegate = self
                 areaSelectVC.source = "search"
                 areaSelectVC.type = "simple"
                 areaSelectVC.select = "multi"
                 areaSelectVC.citys = _citys
+                areaSelectVC.areas = areas
             }
         }
     }
@@ -340,7 +347,7 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
     
     func setCitysData(res: [City]) {
         //print(res)
-        var row = getDefinedRow(TEAM_CITY_KEY)
+        var row = getDefinedRow(CITY_KEY)
         var texts: [String] = [String]()
         citys = res
         if citys.count > 0 {
@@ -353,6 +360,24 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
             row["show"] = "全部"
         }
         replaceRows(TEAM_CITY_KEY, row)
+        searchTableView.reloadData()
+    }
+    
+    func setAreasData(res: [Area]) {
+        //print(res)
+        var row = getDefinedRow(AREA_KEY)
+        var texts: [String] = [String]()
+        areas = res
+        if areas.count > 0 {
+            for area in areas {
+                let text = area.name
+                texts.append(text)
+            }
+            row["show"] = texts.joined(separator: ",")
+        } else {
+            row["show"] = "全部"
+        }
+        replaceRows(AREA_KEY, row)
         searchTableView.reloadData()
     }
     

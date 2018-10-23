@@ -8,9 +8,16 @@
 
 import UIKit
 
-class AreaSelectVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+protocol AreaSelectDelegate: class {
+    func setAreasData(res: [Area])
+}
 
+class AreaSelectVC: MyTableVC {
+
+    @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    weak var delegate: AreaSelectDelegate?
+    
     var areas: [Area] = [Area]()
     //要顯示區域的縣市編號
     var citys: [Int] = [Int]()
@@ -30,11 +37,17 @@ class AreaSelectVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     var select: String = "just one"
     
     override func viewDidLoad() {
+        myTablView = tableView
         super.viewDidLoad()
-        
-        tableView.delegate = self
-        tableView.dataSource = self
 
+        submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
+        submitBtn.layer.cornerRadius = 12
+        
+        tableView.register(
+            SuperCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.white
+        
         Global.instance.addSpinner(superView: self.tableView)
         
         TeamService.instance.getAreaByCityIDs(city_ids: citys,city_type: type) { (success) in
@@ -54,7 +67,7 @@ class AreaSelectVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                         }
                     }
                 }
-                //print(self.citysandarenas)
+                //print(self.citysandareas)
                 
                 self.tableView.reloadData()
                 Global.instance.removeSpinner(superView: self.tableView)
@@ -62,23 +75,40 @@ class AreaSelectVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
 
-    func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        
         return citysandareas.count
     }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 34
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        let label = UILabel(frame: CGRect(x: 15, y: 0, width: 100, height: 34))
+        label.textColor = UIColor.black
+        let city_id = citys[section]
+        let item: [String: Any] = (citysandareas[city_id] as? [String: Any])!
+        label.text = item["name"] as? String
+        view.addSubview(label)
+        
+        return view
+    }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         let city_id = citys[section]
         let rows = citysandareas[city_id]!["rows"] as! [[String:Any]]
         return rows.count
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SuperCell
         let area = getArea(indexPath)
         
-        cell.textLabel!.text = "aaa"
+        cell.textLabel!.text = area.name
         
         var isSelected = false
         for _area in areas {
@@ -96,12 +126,30 @@ class AreaSelectVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
-    private func getArea(_ indexPath: IndexPath)-> Arena {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Global.instance.addSpinner(superView: view)
+        let area: Area = getArea(indexPath)
+        //delegate?.setArenaData(id: arena.id, name: arena.title)
+        if select == "just one" {
+            back()
+        }
+        Global.instance.removeSpinner(superView: view)
+        let cell: SuperCell = tableView.cellForRow(at: indexPath)! as! SuperCell
+        if cell.accessoryType == .checkmark {//not select
+            unSetSelectedStyle(cell)
+            areas = areas.filter {$0.id != area.id}
+        } else {
+            setSelectedStyle(cell)
+            areas.append(area)
+        }
+    }
+    
+    private func getArea(_ indexPath: IndexPath)-> Area {
         let city_id = citys[indexPath.section]
         let rows = citysandareas[city_id]!["rows"] as! [[String: Any]]
         let row = rows[indexPath.row]
         
-        return Arena(id: row["id"] as! Int, name: row["name"] as! String)
+        return Area(id: row["id"] as! Int, name: row["name"] as! String)
     }
     
     func setSelectedStyle(_ cell: UITableViewCell) {
@@ -116,8 +164,10 @@ class AreaSelectVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     @IBAction func submit(_ sender: Any) {
+        delegate?.setAreasData(res: areas)
+        back()
     }
-    @IBAction func prevBtnPressed(_ sender: Any) {
+    @IBAction func back() {
         prev()
     }
 }

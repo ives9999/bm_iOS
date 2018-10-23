@@ -441,7 +441,7 @@ class DataService {
                     }
                     self.citysandareas[id] = ["id":id,"name":city_name,"rows":rows]
                 }
-                print(self.citysandareas)
+                //print(self.citysandareas)
                 
                 completion(true)
             }

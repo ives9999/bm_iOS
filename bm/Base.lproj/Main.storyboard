@@ -348,9 +348,9 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
+                                            <action selector="back:" destination="rNf-pN-AQF" eventType="touchUpInside" id="hcG-8A-sCc"/>
                                             <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="Dzz-d9-3U6"/>
                                             <action selector="prevBtnPressed:" destination="vfe-V8-Hfx" eventType="touchUpInside" id="FI1-C6-T6y"/>
-                                            <action selector="prevBtnPressed:" destination="rNf-pN-AQF" eventType="touchUpInside" id="KKT-KW-QcT"/>
                                             <action selector="prevBtnPressed:" destination="UtM-v1-pfK" eventType="touchUpInside" id="a2U-oK-3Am"/>
                                         </connections>
                                     </button>
@@ -405,6 +405,7 @@
                         <viewLayoutGuide key="safeArea" id="fEh-XE-zIw"/>
                     </view>
                     <connections>
+                        <outlet property="submitBtn" destination="r00-Q1-Luh" id="nYc-H1-wWt"/>
                         <outlet property="tableView" destination="t91-ES-VLr" id="Ryc-fa-4Q7"/>
                     </connections>
                 </viewController>

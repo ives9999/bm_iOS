@@ -108,7 +108,7 @@ class ArenaSelectVC: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let city_id = citys[section]
         let item = citysandarenas[city_id] as! [String: Any]
-        return item["name"] as! String
+        return (item["name"] as! String)
     }
 
     

@@ -121,7 +121,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
                 let segue: String = row["segue"] as! String
                 //print(iden)
                 if segue == TO_ARENA && citys.count == 0 {
-                    SCLAlertView().showError("錯誤", subTitle: "請先選擇區域")
+                    SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
                 } else if segue == TO_SELECT_TIME {
                     if row["key"] as! String == TEAM_PLAY_START_KEY {
                         times["type"] = SELECT_TIME_TYPE.play_start
