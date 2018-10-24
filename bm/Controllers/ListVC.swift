@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDelegate, AreaSelectDelegate {
+class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate {
 
     var _type: String = "coach"
     var _titleField: String = "name"
@@ -38,6 +38,15 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
     var keyword: String = ""
     var citys: [City] = [City]()
     var areas: [Area] = [Area]()
+    var air_condition: Bool = false
+    var bathroom: Bool = false
+    var parking: Bool = false
+    var arenas: [Arena] = [Arena]()
+    var days: [Int] = [Int]()
+    var degrees: [Degree] = [Degree]()
+    
+    //key has type, play_start_time, play_end_time, time
+    var times: [String: Any] = [String: Any]()
     
     var params: [String: Any] = [String: Any]()
     
@@ -53,8 +62,10 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         myTablView.register(cellNibName, forCellReuseIdentifier: "listcell")
         tableViewBoundHeight = view.bounds.height - 64
         layerHeight = tableViewBoundHeight - 100
+        
         searchTableView.dataSource = self
         searchTableView.delegate = self
+        
         searchTableView.register(TeamSubmitCell.self, forCellReuseIdentifier: "search_cell")
         
         
@@ -77,48 +88,59 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         if keyword.count > 0 {
             params["k"] = keyword
         }
-        /*
-         var city_ids:[Int] = [Int]()
-         if citys.count > 0 {
-         for city in citys {
-         city_ids.append(city.id)
-         }
-         }
-         if city_ids.count > 0 {
-         params["city_id"] = city_ids
-         params["city_type"] = city_type
-         }
-         if days.count > 0 {
-         params["play_days"] = days
-         }
-         if times.count > 0 {
-         params["use_date_range"] = 1
-         let play_start = times[TEAM_PLAY_START_KEY] as! String
-         let time = play_start + ":00 - 24:00:00"
-         params["play_time"] = time
-         }
-         
-         var arena_ids:[Int] = [Int]()
-         if arenas.count > 0 {
-         for arena in arenas {
-         arena_ids.append(arena.id)
-         }
-         }
-         if arena_ids.count > 0 {
-         params["arena_id"] = arena_ids
-         }
-         
-         var _degrees:[String] = [String]()
-         if degrees.count > 0 {
-         for degree in degrees {
-         let value = degree.value
-         _degrees.append(DEGREE.DBValue(value))
-         }
-         }
-         if _degrees.count > 0 {
-         params["degree"] = _degrees
-         }
-         */
+        var city_ids:[Int] = [Int]()
+        if citys.count > 0 {
+            for city in citys {
+                city_ids.append(city.id)
+            }
+        }
+        if city_ids.count > 0 {
+            params["city_id"] = city_ids
+            params["city_type"] = city_type
+        }
+        var area_ids:[Int] = [Int]()
+        if areas.count > 0 {
+            for area in areas {
+                area_ids.append(area.id)
+            }
+        }
+        if area_ids.count > 0 {
+            params["area_id"] = area_ids
+        }
+        params["air_condition"] = (air_condition) ? 1 : 0
+        params["bathroom"] = (bathroom) ? 1 : 0
+        params["parking"] = (parking) ? 1 : 0
+        
+        if days.count > 0 {
+            params["play_days"] = days
+        }
+        if times.count > 0 {
+            params["use_date_range"] = 1
+            let play_start = times[TEAM_PLAY_START_KEY] as! String
+            let time = play_start + ":00 - 24:00:00"
+            params["play_time"] = time
+        }
+        
+        var arena_ids:[Int] = [Int]()
+        if arenas.count > 0 {
+            for arena in arenas {
+                arena_ids.append(arena.id)
+            }
+        }
+        if arena_ids.count > 0 {
+            params["arena_id"] = arena_ids
+        }
+        
+        var _degrees:[String] = [String]()
+        if degrees.count > 0 {
+            for degree in degrees {
+                let value = degree.value
+                _degrees.append(DEGREE.DBValue(value))
+            }
+        }
+        if _degrees.count > 0 {
+            params["degree"] = _degrees
+        }
     }
 
     override func refresh() {
@@ -202,9 +224,10 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
             }
         } else if tableView == searchTableView {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? TeamSubmitCell {
+                cell.teamSubmitCellDelegate = self
                 let searchRow = searchRows[indexPath.row]
                 //print(searchRow)
-                cell.forRow(row: searchRow)
+                cell.forRow(indexPath: indexPath, row: searchRow)
                 return cell
             }
         }
@@ -221,10 +244,27 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         } else if tableView == searchTableView {
             let row = searchRows[indexPath.row]
             let segue: String = row["segue"] as! String
-            if segue == TO_AREA && citys.count == 0 {
-                SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
-            } else {
-                performSegue(withIdentifier: segue, sender: row["sender"])
+            if segue.count > 0 {
+                if segue == TO_AREA && citys.count == 0 {
+                    SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
+                } else if segue == TO_ARENA && citys.count == 0 {
+                    SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
+                } else if segue == TO_SELECT_TIME {
+                    if row["key"] as! String == TEAM_PLAY_START_KEY {
+                        times["type"] = SELECT_TIME_TYPE.play_start
+                        if times[TEAM_PLAY_START_KEY] != nil {
+                            times["time"] = times[TEAM_PLAY_START_KEY]
+                        }
+                    } else {
+                        times["type"] = SELECT_TIME_TYPE.play_end
+                        if times[TEAM_PLAY_END_KEY] != nil {
+                            times["time"] = times[TEAM_PLAY_END_KEY]
+                        }
+                    }
+                    performSegue(withIdentifier: segue, sender: row["sender"])
+                } else {
+                    performSegue(withIdentifier: segue, sender: row["sender"])
+                }
             }
         }
     }
@@ -266,6 +306,45 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
                 areaSelectVC.citys = _citys
                 areaSelectVC.areas = areas
             }
+        } else if segue.identifier == TO_ARENA {
+            destinationNavigationController = (segue.destination as! UINavigationController)
+            let arenaSelectVC: ArenaSelectVC = destinationNavigationController!.topViewController as! ArenaSelectVC
+            arenaSelectVC.source = "search"
+            arenaSelectVC.type = "simple"
+            arenaSelectVC.select = "multi"
+            var _citys: [Int] = [Int]()
+            for city in citys {
+                _citys.append(city.id)
+            }
+            arenaSelectVC.citys = _citys
+            arenaSelectVC.arenas = arenas
+            arenaSelectVC.delegate = self
+        } else if segue.identifier == TO_DAY {
+            destinationNavigationController = (segue.destination as! UINavigationController)
+            let daysSelectVC: DaysSelectVC = destinationNavigationController!.topViewController as! DaysSelectVC
+            daysSelectVC.source = "search"
+            daysSelectVC.selectedDays = days
+            daysSelectVC.delegate = self
+        } else if segue.identifier == TO_SELECT_TIME {
+            destinationNavigationController = (segue.destination as! UINavigationController)
+            let timeSelectVC: TimeSelectVC = destinationNavigationController!.topViewController as! TimeSelectVC
+            timeSelectVC.source = "search"
+            timeSelectVC.input = times
+            timeSelectVC.delegate = self
+        } else if segue.identifier == TO_SELECT_DEGREE {
+            destinationNavigationController = (segue.destination as! UINavigationController)
+            let degreeSelectVC: DegreeSelectVC = destinationNavigationController!.topViewController as! DegreeSelectVC
+            degreeSelectVC.source = "search"
+            degreeSelectVC.degrees = degrees
+            degreeSelectVC.delegate = self
+        } else if segue.identifier == TO_TEMP_PLAY_LIST {
+            let tempPlayVC: TempPlayVC = segue.destination as! TempPlayVC
+            tempPlayVC.citys = citys
+            tempPlayVC.arenas = arenas
+            tempPlayVC.days = days
+            tempPlayVC.times = times
+            tempPlayVC.degrees = degrees
+            tempPlayVC.keyword = keyword
         }
     }
     
@@ -311,7 +390,7 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         }, completion: { (finished) in
             if finished {
                 let frame = self.containerView.frame
-                self.searchTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 200)
+                self.searchTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 400)
                 
             }
         })
@@ -335,6 +414,18 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         unmask()
         prepareParams()
         refresh()
+    }
+    
+    func setSwitch(indexPath: IndexPath, value: Bool) {
+        let row = searchRows[indexPath.row]
+        let key = row["key"] as! String
+        if (key == ARENA_AIR_CONDITION_KEY) {
+            air_condition = value
+        } else if (key == ARENA_BATHROOM_KEY) {
+            bathroom = value
+        } else if (key == ARENA_PARKING_KEY) {
+            parking = value
+        }
     }
     
     func setTextField(iden: String, value: String) {
@@ -379,6 +470,96 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         }
         replaceRows(AREA_KEY, row)
         searchTableView.reloadData()
+    }
+    
+    func setArenaData(id: Int, name: String) {
+        //not use
+    }
+    func setArenasData(res: [Arena]) {
+        //print(res)
+        var row = getDefinedRow(TEAM_ARENA_KEY)
+        var texts: [String] = [String]()
+        arenas = res
+        if arenas.count > 0 {
+            for arena in arenas {
+                let text = arena.title
+                texts.append(text)
+            }
+            row["show"] = texts.joined(separator: ",")
+        } else {
+            row["show"] = "全部"
+        }
+        replaceRows(TEAM_ARENA_KEY, row)
+        searchTableView.reloadData()
+    }
+    
+    func setDaysData(res: [Int]) {
+        var row = getDefinedRow(TEAM_DAYS_KEY)
+        var texts: [String] = [String]()
+        days = res
+        if days.count > 0 {
+            for day in days {
+                for gday in Global.instance.days {
+                    if day == gday["value"] as! Int {
+                        let text = gday["simple_text"]
+                        texts.append(text! as! String)
+                        break
+                    }
+                }
+            }
+            row["show"] = texts.joined(separator: ",")
+        } else {
+            row["show"] = "全部"
+        }
+        replaceRows(TEAM_DAYS_KEY, row)
+        searchTableView.reloadData()
+    }
+    
+    func setTimeData(time: String, type: SELECT_TIME_TYPE) {
+        var row: [String: Any]
+        var text = ""
+        if time == "" {
+            text = "全部"
+        } else {
+            text = time
+        }
+        switch type {
+        case SELECT_TIME_TYPE.play_start:
+            times[TEAM_PLAY_START_KEY] = time
+            row = getDefinedRow(TEAM_PLAY_START_KEY)
+            row["show"] = text
+            replaceRows(TEAM_PLAY_START_KEY, row)
+            break
+        case SELECT_TIME_TYPE.play_end:
+            times[TEAM_PLAY_END_KEY] = time
+            row = getDefinedRow(TEAM_PLAY_END_KEY)
+            row["show"] = text
+            replaceRows(TEAM_PLAY_END_KEY, row)
+            break
+        }
+        searchTableView.reloadData()
+    }
+    
+    func setDegreeData(res: [Degree]) {
+        var row = getDefinedRow(TEAM_DEGREE_KEY)
+        var texts: [String] = [String]()
+        degrees = res
+        if degrees.count > 0 {
+            for degree in degrees {
+                texts.append(degree.text)
+            }
+            row["show"] = texts.joined(separator: ",")
+        } else {
+            row["show"] = "全部"
+        }
+        replaceRows(TEAM_DEGREE_KEY, row)
+        searchTableView.reloadData()
+    }
+    
+    func showMap(indexPath: IndexPath) {
+    }
+    
+    func searchCity(indexPath: IndexPath) {
     }
     
     func getDefinedRow(_ key: String) -> [String: Any] {

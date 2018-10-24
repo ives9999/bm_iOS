@@ -13,6 +13,9 @@ class SuperLabel: UILabel {
     var fontName: String = FONT_NAME
     var fontSize: CGFloat = FONT_SIZE_TITLE
     
+    var indexPath: IndexPath?
+    var key: String?
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         self.commonInit()

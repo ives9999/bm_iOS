@@ -101,7 +101,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         //if indexPath.section == 0 && indexPath.row == 0 {
             //print(row)
         //}
-        cell.forRow(row: row)
+        cell.forRow(indexPath: indexPath, row: row)
         
         return cell
     }
@@ -409,5 +409,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             }
         }
         //print(model.data)
+    }
+    func setSwitch(indexPath: IndexPath, value: Bool) {
     }
 }

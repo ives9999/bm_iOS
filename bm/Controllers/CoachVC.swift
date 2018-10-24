@@ -10,11 +10,18 @@ import UIKit
 
 class CoachVC: ListVC {
     
+    
+    let _searchRows: [[String: Any]] = [
+        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入教練名稱關鍵字","text_field":true],
+        ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0]
+        ]
+    
     override func viewDidLoad() {
         myTablView = tableView
         dataService = CoachService.instance
         _type = "coach"
         _titleField = "name"
+        searchRows = _searchRows
         Global.instance.setupTabbar(self)
         Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
@@ -26,5 +33,9 @@ class CoachVC: ListVC {
         } else {
             performSegue(withIdentifier: TO_TEAM_MANAGER, sender: nil)
         }
+    }
+    
+    @IBAction func searchBtnPressed(_ sender: Any) {
+        showSearchPanel()
     }
 }

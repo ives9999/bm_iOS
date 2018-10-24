@@ -9,17 +9,20 @@
 import UIKit
 
 protocol ListCellDelegate {
+    func searchCity(indexPath: IndexPath)
+    func showMap(indexPath: IndexPath)
 }
 
 class ListCell: SuperCell {
 
     @IBOutlet weak var listFeatured: UIImageView!
     @IBOutlet weak var listTitleTxt: UILabel!
-    @IBOutlet weak var listCityTxt: UILabel!
+    @IBOutlet weak var listCityTxt: SuperLabel!
     @IBOutlet weak var listArenaTxt: UILabel!
     @IBOutlet weak var listBallTxt: UILabel!
     @IBOutlet weak var listDayTxt: UILabel!
     @IBOutlet weak var listIntervalTxt: UILabel!
+    @IBOutlet weak var listMarker: SuperButton!
     
     var cellDelegate: ListCellDelegate?
     
@@ -35,8 +38,10 @@ class ListCell: SuperCell {
         listTitleTxt.text = data.title
         listFeatured.image = data.featured
         if iden == "team" {
+            listMarker.isHidden = true
             updateTeam(indexPath: indexPath, data: data)
         } else if iden == "coach" {
+            listMarker.isHidden = true
             updateCoach(indexPath: indexPath, data: data)
         } else if iden == "arena" {
             updateArena(indexPath: indexPath, data: data)
@@ -80,16 +85,23 @@ class ListCell: SuperCell {
         if let item = data.data[CITY_KEY] {
             //print(item)
             listCityTxt.text = (item["show"] as! String)
-            listCityTxt.tag = indexPath.row
+            listCityTxt.indexPath = indexPath
             listCityTxt.isUserInteractionEnabled = true
-            let tap = UITapGestureRecognizer(target: cellDelegate, action: #selector(ArenaVC.mapPrepare))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(cityPressed))
             listCityTxt.addGestureRecognizer(tap)
         }
         if let item = data.data[TEL_KEY] {
             listArenaTxt.text = (item["show"] as! String)
         }
         if let item = data.data[AREA_KEY] {
-            listBallTxt.text = (item["show"] as! String)
+            let area = item["show"] as! String
+            listBallTxt.text = area
+            if (area == "未提供") {
+                listMarker.isHidden = true
+            } else {
+                listMarker.isHidden = false
+                listMarker.indexPath = indexPath
+            }
         }
         if let item = data.data[ARENA_INTERVAL_KEY] {
             listDayTxt.text = (item["show"] as! String)
@@ -97,6 +109,17 @@ class ListCell: SuperCell {
         if let item = data.data[ARENA_AIR_CONDITION_KEY] {
             listIntervalTxt.text = "空調: " + (item["show"] as! String)
         }
+    }
+    
+    @objc func cityPressed(sender: UITapGestureRecognizer) {
+        let label = sender.view as! SuperLabel
+        cellDelegate?.searchCity(indexPath: label.indexPath!)
+    }
+    
+    @IBAction func markerBtnPressed(sender: UIButton) {
+        let _sender = sender as! SuperButton
+        let indexPath = _sender.indexPath!
+        cellDelegate?.showMap(indexPath: indexPath)
     }
     
     private func emptyToSpace(_ text: String)-> String {

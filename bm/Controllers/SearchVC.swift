@@ -19,7 +19,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     var type: String!
     var model: Team!
     var _rows: [[String: Any]] = [
-        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字"],
+        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true],
         ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
         //            ["ch": "區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":"team_area","show":"全部","segue":TO_ARENA,"sender":0],
         ["ch":"日期","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_DAYS_KEY,"show":"全部","segue":TO_DAY,"sender":[Int]()],
@@ -106,7 +106,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         let cell: TeamSubmitCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamSubmitCell
         cell.teamSubmitCellDelegate = self
         let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
-        cell.forRow(row: row)
+        cell.forRow(indexPath: indexPath, row: row)
         
         return cell
     }
@@ -287,6 +287,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     
     func setTextField(iden: String, value: String) {
         keyword = value
+    }
+    func setSwitch(indexPath: IndexPath, value: Bool) {
     }
     
     func setDegreeData(res: [Degree]) {

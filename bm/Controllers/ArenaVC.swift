@@ -11,9 +11,12 @@ import UIKit
 class ArenaVC: ListVC {
     
     let _searchRows: [[String: Any]] = [
-        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字"],
-    ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
-    ["ch":"區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":AREA_KEY,"show":"全部","segue":TO_AREA,"sender":0]
+        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球場名稱關鍵字","text_field":true],
+        ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
+        ["ch":"區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":AREA_KEY,"show":"全部","segue":TO_AREA,"sender":0],
+        ["ch":"空調","atype":UITableViewCellAccessoryType.none,"key":ARENA_AIR_CONDITION_KEY,"show":"全部","segue":"","sender":0,"switch":true],
+        ["ch":"盥洗室","atype":UITableViewCellAccessoryType.none,"key":ARENA_BATHROOM_KEY,"show":"全部","segue":"","sender":0,"switch":true],
+        ["ch":"停車場","atype":UITableViewCellAccessoryType.none,"key":ARENA_PARKING_KEY,"show":"全部","segue":"","sender":0,"switch":true]
     ]
     
     
@@ -26,10 +29,8 @@ class ArenaVC: ListVC {
         super.viewDidLoad()
     }
     
-    @objc func mapPrepare(sender: UITapGestureRecognizer) {
-        let label = sender.view as! UILabel
-        let idx = label.tag
-        let row = lists[idx]
+    override func showMap(indexPath: IndexPath) {
+        let row = lists[indexPath.row]
         let address = row.data[ADDRESS_KEY]!["value"] as! String
         let title = row.title
         let sender: [String: String] = [
@@ -37,6 +38,15 @@ class ArenaVC: ListVC {
             "address": address
         ]
         performSegue(withIdentifier: TO_MAP, sender: sender)
+    }
+    
+    override func searchCity(indexPath: IndexPath) {
+        let row = lists[indexPath.row]
+        let city_id = row.data[CITY_KEY]!["value"] as! Int
+        citys.removeAll()
+        citys.append(City(id: city_id, name: ""))
+        prepareParams(city_type: "all")
+        refresh()
     }
 
     @IBAction func searchBtnPressed(_ sender: Any) {

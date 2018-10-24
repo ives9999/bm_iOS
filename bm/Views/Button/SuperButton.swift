@@ -13,6 +13,9 @@ class SuperButton: UIButton {
     var fontName: String = FONT_NAME
     var fontSize: CGFloat = FONT_SIZE_TITLE
     
+    var indexPath: IndexPath?
+    var key: String?
+    
     convenience init(frame: CGRect, textColor: UIColor, bkColor: UIColor) {
         self.init(frame: frame)
         setColor(textColor: textColor, bkColor: bkColor)

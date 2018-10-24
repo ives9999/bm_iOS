@@ -10,6 +10,7 @@
 		B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33B217AF31100C32CE2 /* SubmitButton.swift */; };
 		B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */; };
 		B306F340217DA15000C32CE2 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33F217DA15000C32CE2 /* Area.swift */; };
+		B306F3432180346B00C32CE2 /* SuperSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F3422180346B00C32CE2 /* SuperSwitch.swift */; };
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -177,6 +178,7 @@
 		B306F33B217AF31100C32CE2 /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSelectVC.swift; sourceTree = "<group>"; };
 		B306F33F217DA15000C32CE2 /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
+		B306F3422180346B00C32CE2 /* SuperSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperSwitch.swift; sourceTree = "<group>"; };
 		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -340,6 +342,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		B306F3412180344300C32CE2 /* Switch */ = {
+			isa = PBXGroup;
+			children = (
+				B306F3422180346B00C32CE2 /* SuperSwitch.swift */,
+			);
+			path = Switch;
+			sourceTree = "<group>";
+		};
 		B30C95401FE82DA0005F71EF /* bmNotificationServiceExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +394,7 @@
 		B32FBCEF1F84831C003D39CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B306F3412180344300C32CE2 /* Switch */,
 				B3F8C3B6215D27BE005CBBC1 /* Checkbox.swift */,
 				B337B9A71FE2981700C3EE28 /* View */,
 				B37A13431FDAF38C00413E64 /* Button */,
@@ -942,6 +953,7 @@
 				B3649414207DCA790030CF44 /* SCLAlertView.swift in Sources */,
 				F96931971FB953960005C13F /* City.swift in Sources */,
 				B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */,
+				B306F3432180346B00C32CE2 /* SuperSwitch.swift in Sources */,
 				F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */,
 				B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
