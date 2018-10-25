@@ -24,18 +24,21 @@ class TempPlaySignupCell: SuperCell {
         //nameLbl.backgroundColor = UIColor.black
         //created_atLbl.backgroundColor = UIColor.black
         
-        let views: [[String: UILabel]] = [["label1":nameLbl], ["label2":created_atLbl]]
-        let constraints: [NSLayoutConstraint] = tempPlayShowTableConstraint(views)
-        contentView.addConstraints(constraints)
+//        let views: [[String: UILabel]] = [["label1":nameLbl], ["label2":created_atLbl]]
+//        let constraints: [NSLayoutConstraint] = tempPlayShowTableConstraint(views)
+//        contentView.addConstraints(constraints)
         
-        /*
-        let nameLblC1: NSLayoutConstraint = NSLayoutConstraint(item: nameLbl, attribute: .leading, relatedBy: .equal, toItem: nameLbl.superview, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
+        
+        let nameLblC1: NSLayoutConstraint = NSLayoutConstraint(item: nameLbl, attribute: .leading, relatedBy: .equal, toItem: nameLbl.superview, attribute: .leading, multiplier: 1, constant: 30)
         let nameLblC2: NSLayoutConstraint = NSLayoutConstraint(item: nameLbl, attribute: .centerY, relatedBy: .equal, toItem: nameLbl.superview, attribute: .centerY, multiplier: 1, constant: 0)
         nameLbl.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints([nameLblC1,nameLblC2])
         
-        contentView.addConstraint(nameLblC1)
-        contentView.addConstraint(nameLblC2)
- */
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: created_atLbl, attribute: .leading, relatedBy: .equal, toItem: nameLbl, attribute: .trailing, multiplier: 1, constant: 80)
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: created_atLbl, attribute: .centerY, relatedBy: .equal, toItem: created_atLbl.superview, attribute: .centerY, multiplier: 1, constant: 0)
+        created_atLbl.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints([c1,c2])
+ 
     }
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
