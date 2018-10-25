@@ -14,12 +14,12 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
     var _titleField: String = "name"
     internal(set) public var lists: [SuperData] = [SuperData]()
     
+    let maskView = UIView()
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
     
     var newY: CGFloat = 0
     
-    let maskView = UIView()
     let containerView = UIView(frame: .zero)
     let searchTableView: UITableView = {
         let cv = UITableView(frame: .zero, style: .plain)
@@ -85,9 +85,7 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
     }
     
     func prepareParams(city_type: String="simple") {
-        if keyword.count > 0 {
-            params["k"] = keyword
-        }
+        params["k"] = keyword
         var city_ids:[Int] = [Int]()
         if citys.count > 0 {
             for city in citys {
@@ -350,17 +348,17 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
     
     func showSearchPanel() {
         tableView.isScrollEnabled = false
-        mask()
+        mask(superView: tableView)
         addLayer()
         animation()
     }
     
-    func mask() {
+    func mask(superView: UIView) {
         maskView.backgroundColor = UIColor(white: 1, alpha: 0.8)
         maskView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(unmask)))
-        tableView.addSubview(maskView)
+        superView.addSubview(maskView)
         
-        maskView.frame = CGRect(x: 0, y: newY, width: tableView.frame.width, height: tableViewBoundHeight)
+        maskView.frame = CGRect(x: 0, y: newY, width: superView.frame.width, height: tableViewBoundHeight)
         maskView.alpha = 0
     }
     

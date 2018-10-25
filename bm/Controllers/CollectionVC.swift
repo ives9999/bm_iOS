@@ -12,7 +12,7 @@ import UIColor_Hex_Swift
 
 internal let reuseIdentifier = "Cell"
 
-class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
+class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, TeamSubmitCellDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var frameWidth: CGFloat!
@@ -37,6 +37,24 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     var refreshControl: UIRefreshControl!
     var dataService: DataService = DataService.instance1
+    
+    let maskView = UIView()
+    var newY: CGFloat = 0
+    let padding: CGFloat = 20
+    let headerHeight: CGFloat = 84
+    var tableViewBoundHeight: CGFloat = 0
+    var layerHeight: CGFloat = 0
+    let containerView = UIView(frame: .zero)
+    let searchTableView: UITableView = {
+        let cv = UITableView(frame: .zero, style: .plain)
+        cv.backgroundColor = UIColor.black
+        return cv
+    }()
+    let searchSubmitBtn: SubmitButton = SubmitButton()
+    var searchRows: [[String: Any]] = [[String: Any]]()
+    var params: [String: Any] = [String: Any]()
+    
+    var keyword: String = ""
     
     override func viewDidLoad() {
         //print("super: \(self)")
@@ -79,6 +97,13 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
 //        if let flowlayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
 //            flowlayout.estimatedItemSize = CGSize(width: cellWidth, height: 1)
 //        }
+        
+        tableViewBoundHeight = view.bounds.height - 64
+        layerHeight = tableViewBoundHeight - 100
+        searchTableView.dataSource = self
+        searchTableView.delegate = self
+        
+        searchTableView.register(TeamSubmitCell.self, forCellReuseIdentifier: "search_cell")
     }
     
     func setIden(item: String, titleField: String) {
@@ -86,11 +111,15 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         self.titleField = titleField
     }
     
+    func prepareParams(city_type: String="simple") {
+        params["k"] = keyword
+    }
+    
     func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
         //print(page)
         Global.instance.addSpinner(superView: self.view)
         
-        dataService.getList(type: iden, titleField: titleField, params:[String: Any](), page: page, perPage: perPage, filter: nil) { (success) in
+        dataService.getList(type: iden, titleField: titleField, params:params, page: page, perPage: perPage, filter: nil) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)
@@ -258,6 +287,105 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         getDataStart()
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        var height: CGFloat = 0
+        if tableView == searchTableView {
+            height = 30
+        }
+        return height
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchRows.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? TeamSubmitCell {
+            cell.teamSubmitCellDelegate = self
+            let searchRow = searchRows[indexPath.row]
+            //print(searchRow)
+            cell.forRow(indexPath: indexPath, row: searchRow)
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func showSearchPanel() {
+        collectionView.isScrollEnabled = false
+        mask(superView: collectionView)
+        addLayer()
+        animation()
+    }
+    
+    func mask(superView: UIView) {
+        maskView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        maskView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(unmask)))
+        superView.addSubview(maskView)
+        
+        maskView.frame = CGRect(x: 0, y: newY, width: superView.frame.width, height: tableViewBoundHeight)
+        maskView.alpha = 0
+    }
+    
+    func addLayer() {
+        collectionView.addSubview(containerView)
+        containerView.frame = CGRect(x:padding, y:tableViewBoundHeight + newY, width:view.frame.width-(2*padding), height:layerHeight)
+        containerView.backgroundColor = UIColor.black
+        
+        searchTableView.backgroundColor = UIColor.clear
+        containerView.addSubview(self.searchTableView)
+        
+        containerView.addSubview(searchSubmitBtn)
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: searchSubmitBtn, attribute: .top, relatedBy: .equal, toItem: searchTableView, attribute: .bottom, multiplier: 1, constant: 24)
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: searchSubmitBtn, attribute: .centerX, relatedBy: .equal, toItem: searchSubmitBtn.superview, attribute: .centerX, multiplier: 1, constant: 0)
+        searchSubmitBtn.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addConstraints([c1,c2])
+        searchSubmitBtn.addTarget(self, action: #selector(submit(view:)), for: .touchUpInside)
+        self.searchTableView.isHidden = false
+        self.searchSubmitBtn.isHidden = false
+    }
+    
+    func animation() {
+        let y = newY + 100
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.maskView.alpha = 1
+            self.containerView.frame = CGRect(x: self.padding, y: y, width: self.containerView.frame.width, height: self.layerHeight)
+        }, completion: { (finished) in
+            if finished {
+                let frame = self.containerView.frame
+                self.searchTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 400)
+                
+            }
+        })
+    }
+    
+    @objc func unmask() {
+        UIView.animate(withDuration: 0.5) {
+            self.maskView.alpha = 0
+            self.searchTableView.isHidden = true
+            self.searchSubmitBtn.isHidden = true
+            self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.tableViewBoundHeight, width:self.containerView.frame.width, height:0)
+        }
+        collectionView.isScrollEnabled = true
+    }
+    
+    @objc func submit(view: UIButton) {
+        unmask()
+        prepareParams()
+        refresh()
+    }
+    
+    func setSwitch(indexPath: IndexPath, value: Bool) {
+    }
+    
+    func setTextField(iden: String, value: String) {
+        //print(value)
+        keyword = value
+    }
+    
     private func testLabelReset() {
         testLabel.frame = CGRect.zero
         testLabel.frame.size.width = cellWidth-(2*CELL_EDGE_MARGIN)
@@ -276,6 +404,18 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
             }
         }
         return count
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        newY = scrollView.contentOffset.y
+        if newY < 0 { newY = 0 }
+        //print(newY)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        newY = scrollView.contentOffset.y
+        if newY < 0 { newY = 0 }
+        //print(scrollView.contentOffset.y)
     }
 //    func scrollViewDidScroll(scrollView: UIScrollView) {
 //        let offsetY = scrollView.contentOffset.y
