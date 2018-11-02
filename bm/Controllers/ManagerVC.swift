@@ -8,18 +8,27 @@
 
 import UIKit
 
-class TeamManagerVC: MyTableVC {
+class ManagerVC: MyTableVC {
 
-    @IBOutlet weak var addTeamBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleLbl: UILabel!
+    
+    //source is team or coach or arena
+    var source: String = "team"
     
     override func viewDidLoad() {
         myTablView = tableView 
         super.viewDidLoad()
+        
+        if source == "team" {
+            titleLbl.text = "球隊管理"
+        } else if source == "coach" {
+            titleLbl.text = "教練管理"
+        } else if source == "arena" {
+            titleLbl.text = "球館管理"
+        }
 
-        addTeamBtn.layer.cornerRadius = 12
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
-        //refresh()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -27,11 +36,11 @@ class TeamManagerVC: MyTableVC {
     }
     
     override func refresh() {
-        getTeamManagerList()
+        getManagerList()
     }
-    func getTeamManagerList() {
+    func getManagerList() {
         if Member.instance.isLoggedIn {
-            _getTeamManagerList() { (success) in
+            _getManagerList(source: source, titleField: titleField) { (success) in
                 if (success) {
                     self.tableView.reloadData()
                     self.refreshControl.endRefreshing()
@@ -44,7 +53,7 @@ class TeamManagerVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return teamManagerLists.count
+        return managerLists.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -52,7 +61,7 @@ class TeamManagerVC: MyTableVC {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
         //print(rows)
         
-        let row: SuperData = teamManagerLists[indexPath.row]
+        let row: SuperData = managerLists[indexPath.row]
         //print(row)
         cell.textLabel!.text = row.title
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
@@ -61,7 +70,7 @@ class TeamManagerVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row: SuperData = teamManagerLists[indexPath.row]
+        let row: SuperData = managerLists[indexPath.row]
         let name: String = row.title
         let token: String = row.token
         let sender:[String: String] = ["name": name, "token": token]
@@ -78,7 +87,7 @@ class TeamManagerVC: MyTableVC {
     }
 
     @IBAction func prevBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        prev()
     }
     @IBAction func addTeamBtnPressed(_ sender: Any) {
         if !Member.instance.isLoggedIn {
@@ -87,14 +96,4 @@ class TeamManagerVC: MyTableVC {
             performSegue(withIdentifier: TO_TEAM_SUBMIT, sender: nil)
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

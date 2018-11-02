@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3046B66218B324300DAA0D0 /* CoachManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3046B65218B324300DAA0D0 /* CoachManagerFunctionVC.swift */; };
 		B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33B217AF31100C32CE2 /* SubmitButton.swift */; };
 		B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */; };
 		B306F340217DA15000C32CE2 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33F217DA15000C32CE2 /* Area.swift */; };
@@ -55,7 +56,7 @@
 		B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */; };
 		B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375105A1FA96C0500CDF1A0 /* Member.swift */; };
 		B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A13441FDAF3CB00413E64 /* SuperButton.swift */; };
-		B3A5A28420B2CB80001A846F /* TeamManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* TeamManagerVC.swift */; };
+		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* TeamManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* TeamManagerFunctionVC.swift */; };
 		B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28720B68981001A846F /* ValidateVC.swift */; };
 		B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */; };
@@ -175,6 +176,7 @@
 		8887FB55CE42CC9156BD0571 /* Pods-bm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bm/Pods-bm.debug.xcconfig"; sourceTree = "<group>"; };
 		9C5D58D06320800C79615904 /* Pods_bm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B177D5D81630D703CAC77139 /* Pods-bmNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		B3046B65218B324300DAA0D0 /* CoachManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachManagerFunctionVC.swift; sourceTree = "<group>"; };
 		B306F33B217AF31100C32CE2 /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSelectVC.swift; sourceTree = "<group>"; };
 		B306F33F217DA15000C32CE2 /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
@@ -225,7 +227,7 @@
 		B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		B375105A1FA96C0500CDF1A0 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		B37A13441FDAF3CB00413E64 /* SuperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperButton.swift; sourceTree = "<group>"; };
-		B3A5A28320B2CB80001A846F /* TeamManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamManagerVC.swift; sourceTree = "<group>"; };
+		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* TeamManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamManagerFunctionVC.swift; sourceTree = "<group>"; };
 		B3A5A28720B68981001A846F /* ValidateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateVC.swift; sourceTree = "<group>"; };
 		B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
@@ -577,7 +579,7 @@
 				B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */,
 				B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */,
 				B3A5A28520B32152001A846F /* TeamManagerFunctionVC.swift */,
-				B3A5A28320B2CB80001A846F /* TeamManagerVC.swift */,
+				B3A5A28320B2CB80001A846F /* ManagerVC.swift */,
 				F94FF4341FB4322C00D167B6 /* TeamSubmitVC.swift */,
 				B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */,
 				F90423B81F83748C00DC8B1E /* TeamVC.swift */,
@@ -590,6 +592,7 @@
 				B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */,
+				B3046B65218B324300DAA0D0 /* CoachManagerFunctionVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -901,6 +904,7 @@
 				B317855920D60EE200765CA1 /* BlackListVC.swift in Sources */,
 				B337B9A61FE039ED00C3EE28 /* TempPlaySignupCell.swift in Sources */,
 				B36CBD5320DE00FE00E52B9C /* TempPlayDatePlayer.swift in Sources */,
+				B3046B66218B324300DAA0D0 /* CoachManagerFunctionVC.swift in Sources */,
 				B322F80D1FC6DCAD00DE98FB /* TeamSubmitCell.swift in Sources */,
 				F94FF4351FB4322C00D167B6 /* TeamSubmitVC.swift in Sources */,
 				B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */,
@@ -926,7 +930,7 @@
 				B35F8DD91F8F64310073BD70 /* Home.swift in Sources */,
 				B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */,
 				F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */,
-				B3A5A28420B2CB80001A846F /* TeamManagerVC.swift in Sources */,
+				B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */,
 				B31739ED21763CD1004CFEDE /* ArenaMapVC.swift in Sources */,
 				B316FED62112F13600FB990C /* CollectionCell.swift in Sources */,
 				B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */,

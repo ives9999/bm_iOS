@@ -10,7 +10,6 @@ import UIKit
 
 class CoachVC: ListVC {
     
-    
     let _searchRows: [[String: Any]] = [
         ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入教練名稱關鍵字","text_field":true],
         ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0]
@@ -31,7 +30,7 @@ class CoachVC: ListVC {
         if !Member.instance.isLoggedIn {
             SCLAlertView().showError("警告", subTitle: "請先登入為會員")
         } else {
-            performSegue(withIdentifier: TO_TEAM_MANAGER, sender: nil)
+            performSegue(withIdentifier: TO_MANAGER, sender: nil)
         }
     }
     

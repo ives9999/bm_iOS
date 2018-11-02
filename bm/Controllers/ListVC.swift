@@ -68,7 +68,6 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         
         searchTableView.register(TeamSubmitCell.self, forCellReuseIdentifier: "search_cell")
         
-        
         refresh()
     }
     
@@ -343,6 +342,10 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
             tempPlayVC.times = times
             tempPlayVC.degrees = degrees
             tempPlayVC.keyword = keyword
+        } else if segue.identifier == TO_MANAGER {
+            let managerVC: ManagerVC = segue.destination as! ManagerVC
+            managerVC.source = _type
+            managerVC.titleField = _titleField
         }
     }
     

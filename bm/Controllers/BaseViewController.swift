@@ -13,7 +13,8 @@ import Reachability
 class BaseViewController: UIViewController {
     
     var msg: String = ""
-    var teamManagerLists: [SuperData] = [SuperData]()
+    var dataService: DataService = DataService()
+    var managerLists: [SuperData] = [SuperData]()
     var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
@@ -136,17 +137,17 @@ class BaseViewController: UIViewController {
         })
     }
     
-    func _getTeamManagerList(completion: @escaping CompletionHandler) {
+    func _getManagerList(source: String, titleField: String, completion: @escaping CompletionHandler) {
         Global.instance.addSpinner(superView: self.view)
         let filter: [[Any]] = [
             ["channel", "=", CHANNEL],
             ["manager_id", "=", Member.instance.id]
         ]
         let params: Dictionary<String, Any> = [String: Any]()
-        TeamService.instance.getList(type: "team", titleField: "name", params:params, page: 1, perPage: 100, filter: filter) { (success) in
+        dataService.getList(type: source, titleField: titleField, params:params, page: 1, perPage: 100, filter: filter) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                self.teamManagerLists = TeamService.instance.dataLists
+                self.managerLists = self.dataService.dataLists
                 //print(self.myTeamLists)
                 //                    for team in self.myTeamLists {
                 //                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_TEMP_PLAY,"detail":"臨打"]
@@ -156,7 +157,7 @@ class BaseViewController: UIViewController {
                 
                 completion(true)
             } else {
-                self.msg = TeamService.instance.msg
+                self.msg = self.dataService.msg
                 completion(false)
             }
         }

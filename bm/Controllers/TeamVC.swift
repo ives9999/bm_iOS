@@ -38,7 +38,7 @@ class TeamVC: ListVC {
         if !Member.instance.isLoggedIn {
             SCLAlertView().showError("警告", subTitle: "請先登入為會員")
         } else {
-            performSegue(withIdentifier: TO_TEAM_MANAGER, sender: nil)
+            performSegue(withIdentifier: TO_MANAGER, sender: nil)
         }
     }
     

@@ -1585,7 +1585,6 @@
                                             <action selector="prevBtnPressed:" destination="LPl-7I-nuE" eventType="touchUpInside" id="7Or-ye-iw1"/>
                                             <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="ADy-hH-0YY"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="Dng-kx-R7c"/>
-                                            <action selector="prevBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="FBl-pH-PRF"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="黑名單" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeT-Uw-Z8b">
@@ -1973,7 +1972,7 @@
                         <outlet property="menuBtn" destination="E9V-cS-tg9" id="rfP-Ni-bjs"/>
                         <outlet property="tableView" destination="rJI-Y4-Ooh" id="hYG-z3-4Uc"/>
                         <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="AlK-fI-QxB"/>
-                        <segue destination="Zvi-i7-Pcr" kind="show" identifier="toTeamManager" id="xCJ-lv-P9J"/>
+                        <segue destination="Zvi-i7-Pcr" kind="show" identifier="toManager" id="xCJ-lv-P9J"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="UI0-Ma-Ffm"/>
                         <segue destination="81S-kF-xqU" kind="show" identifier="toArena" id="pYZ-nD-1ol"/>
                         <segue destination="25C-Iu-CXV" kind="show" identifier="toDay" id="SiI-cm-Vku"/>
@@ -1984,6 +1983,81 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v4d-2t-b3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="108" y="-141"/>
+        </scene>
+        <!--Coach Manager FunctionVC-->
+        <scene sceneID="WkT-Vp-b4A">
+            <objects>
+                <viewController id="cud-aA-eIL" customClass="CoachManagerFunctionVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2tY-cg-Roi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJf-tZ-qaB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ox-ac-DVm">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="KP8-qH-I2T"/>
+                                            <constraint firstAttribute="width" constant="33" id="UPh-II-pfq"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="00R-aP-ezQ"/>
+                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="GGT-GR-Izm"/>
+                                            <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="VFG-5M-uia"/>
+                                            <action selector="prevBtnPressed:" destination="cud-aA-eIL" eventType="touchUpInside" id="rWZ-th-pIB"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教練" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWv-Sk-Hp7">
+                                        <rect key="frame" x="167" y="18.5" width="41.5" height="27"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="3DV-tI-sfk"/>
+                                    <constraint firstItem="IWv-Sk-Hp7" firstAttribute="centerY" secondItem="dJf-tZ-qaB" secondAttribute="centerY" id="4Mg-6z-iO7"/>
+                                    <constraint firstItem="4Ox-ac-DVm" firstAttribute="leading" secondItem="dJf-tZ-qaB" secondAttribute="leading" constant="12" id="5Gh-IQ-G1C"/>
+                                    <constraint firstItem="4Ox-ac-DVm" firstAttribute="centerY" secondItem="dJf-tZ-qaB" secondAttribute="centerY" id="EVt-aN-nPe"/>
+                                    <constraint firstItem="IWv-Sk-Hp7" firstAttribute="centerX" secondItem="dJf-tZ-qaB" secondAttribute="centerX" id="Ow6-5K-Lcv"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="V6O-Ft-qbr"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="EHZ-pa-mGC">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XQd-qU-Kg6">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Hcn-3s-esr" firstAttribute="bottom" secondItem="XQd-qU-Kg6" secondAttribute="bottom" id="0WO-tO-aIN"/>
+                            <constraint firstItem="dJf-tZ-qaB" firstAttribute="top" secondItem="2tY-cg-Roi" secondAttribute="top" id="6jC-h0-9dl"/>
+                            <constraint firstItem="EHZ-pa-mGC" firstAttribute="bottom" secondItem="Hcn-3s-esr" secondAttribute="bottom" id="IIE-0s-rzb"/>
+                            <constraint firstItem="dJf-tZ-qaB" firstAttribute="leading" secondItem="2tY-cg-Roi" secondAttribute="leading" id="OK9-Ui-z8g"/>
+                            <constraint firstItem="EHZ-pa-mGC" firstAttribute="leading" secondItem="Hcn-3s-esr" secondAttribute="leading" id="Tev-v0-Jpj"/>
+                            <constraint firstItem="XQd-qU-Kg6" firstAttribute="top" secondItem="dJf-tZ-qaB" secondAttribute="bottom" id="Y6D-oW-0sf"/>
+                            <constraint firstAttribute="trailing" secondItem="EHZ-pa-mGC" secondAttribute="trailing" id="apN-6w-P6P"/>
+                            <constraint firstItem="Hcn-3s-esr" firstAttribute="trailing" secondItem="dJf-tZ-qaB" secondAttribute="trailing" id="bcZ-Af-wah"/>
+                            <constraint firstAttribute="trailing" secondItem="XQd-qU-Kg6" secondAttribute="trailing" id="iab-1w-JDh"/>
+                            <constraint firstItem="EHZ-pa-mGC" firstAttribute="top" secondItem="dJf-tZ-qaB" secondAttribute="bottom" id="mJY-3a-9ek"/>
+                            <constraint firstItem="XQd-qU-Kg6" firstAttribute="leading" secondItem="Hcn-3s-esr" secondAttribute="leading" id="nL7-xh-ltF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Hcn-3s-esr"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="XQd-qU-Kg6" id="Sos-5X-Bc7"/>
+                        <outlet property="titleLbl" destination="IWv-Sk-Hp7" id="seO-Bi-4rZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cJB-eT-ZRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1582" y="700"/>
         </scene>
         <!--臨打-->
         <scene sceneID="3a3-E3-xcE">
@@ -2083,10 +2157,10 @@
             </objects>
             <point key="canvasLocation" x="-121" y="-949"/>
         </scene>
-        <!--Team ManagerVC-->
+        <!--ManagerVC-->
         <scene sceneID="Joe-Qd-tZ0">
             <objects>
-                <viewController id="Zvi-i7-Pcr" customClass="TeamManagerVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zvi-i7-Pcr" customClass="ManagerVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1qk-ev-3EH">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2103,12 +2177,12 @@
                                         <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="7A1-NE-pyL"/>
-                                            <action selector="prevBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="Ena-fn-Wpz"/>
+                                            <action selector="prevBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="Au2-4Q-6iz"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="cS7-Uq-fnT"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33k-oE-O8H">
-                                        <rect key="frame" x="149" y="18.5" width="77" height="27"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33k-oE-O8H">
+                                        <rect key="frame" x="168.5" y="18.5" width="38.5" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -2165,15 +2239,15 @@
                         <viewLayoutGuide key="safeArea" id="eTn-Lz-FWa"/>
                     </view>
                     <connections>
-                        <outlet property="addTeamBtn" destination="Qd2-zv-pJR" id="hJP-nR-FEI"/>
                         <outlet property="tableView" destination="ac6-qU-H7f" id="IGH-U6-mWq"/>
+                        <outlet property="titleLbl" destination="33k-oE-O8H" id="iZ5-fK-l1a"/>
                         <segue destination="UtM-v1-pfK" kind="show" identifier="toTeamSubmit" id="Kca-5B-OTe"/>
                         <segue destination="zVt-Av-Afw" kind="show" identifier="toTeamManagerFunction" id="GbJ-32-NmG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRR-x7-JTP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1159" y="-170"/>
+            <point key="canvasLocation" x="310" y="656"/>
         </scene>
         <!--Team Manager FunctionVC-->
         <scene sceneID="eaE-vz-b2s">
@@ -2197,7 +2271,6 @@
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="AQZ-Aj-ZiA"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="gVh-Kn-c1f"/>
                                             <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="uPq-DY-Ctv"/>
-                                            <action selector="prevBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="xV5-z8-EFZ"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mT7-32-00D">
@@ -2250,7 +2323,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ba-XJ-WEw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1999" y="-140"/>
+            <point key="canvasLocation" x="1263" y="-80"/>
         </scene>
         <!--Temp Play DateVC-->
         <scene sceneID="6EB-Lt-ctB">
@@ -2274,7 +2347,6 @@
                                             <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="JGJ-JU-sf1"/>
                                             <action selector="prevBtnPressed:" destination="R6S-rJ-jUX" eventType="touchUpInside" id="Oco-sz-hro"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="OwV-RM-UCP"/>
-                                            <action selector="prevBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="pkS-eq-LvR"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="po4-IX-E7S"/>
                                         </connections>
                                     </button>
@@ -2352,7 +2424,6 @@
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="Z2e-op-6gO"/>
                                             <action selector="prevBtnPressed:" destination="GuJ-5M-2A0" eventType="touchUpInside" id="ZgQ-av-xep"/>
                                             <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="mmx-Mz-BIo"/>
-                                            <action selector="prevBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="tC7-Cf-eaW"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期臨打球友列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFD-E4-vIm">
@@ -2424,7 +2495,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="2wW-jF-D5f"/>
                                             <action selector="prevBtnPressed:" destination="ivA-0I-eys" eventType="touchUpInside" id="4GF-bc-Fka"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="Evf-ql-coi"/>
                                             <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="Nzt-Zf-ul8"/>
@@ -2563,6 +2633,7 @@
                         <segue destination="nQN-QD-w9o" kind="show" identifier="toMap" id="2RB-tg-LFe"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="cDK-8u-UPz"/>
                         <segue destination="rNf-pN-AQF" kind="show" identifier="toArea" id="5Nm-Wc-gVO"/>
+                        <segue destination="Zvi-i7-Pcr" kind="show" identifier="toManager" id="Wr7-FG-b1z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z6k-pd-Jq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2703,10 +2774,29 @@
                                             <action selector="searchBtnPressed:" destination="fEf-Ib-3oR" eventType="touchUpInside" id="gKw-75-7mv"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zov-Xc-HUn">
+                                        <rect key="frame" x="293" y="16" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="8po-df-oxB"/>
+                                            <constraint firstAttribute="width" constant="32" id="XKB-KP-6Ms"/>
+                                            <constraint firstAttribute="width" constant="32" id="vxU-14-tTN"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="vyE-rs-xfJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                        <state key="normal" image="gear"/>
+                                        <connections>
+                                            <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="yAw-By-Cpv"/>
+                                            <action selector="manager:" destination="hk6-fe-bLP" eventType="touchUpInside" id="Wko-sd-grq"/>
+                                            <action selector="manager:" destination="fEf-Ib-3oR" eventType="touchUpInside" id="z6l-FF-9SV"/>
+                                            <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="Mv1-5m-qFc"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="kHq-BV-ZQk" firstAttribute="centerY" secondItem="e9S-w7-cmn" secondAttribute="centerY" id="30X-QK-hNH"/>
+                                    <constraint firstItem="CQb-m8-4XP" firstAttribute="leading" secondItem="Zov-Xc-HUn" secondAttribute="trailing" constant="6" id="7fE-Ut-VrO"/>
+                                    <constraint firstItem="Zov-Xc-HUn" firstAttribute="centerY" secondItem="K8B-44-m3b" secondAttribute="centerY" id="9ta-II-ypD"/>
                                     <constraint firstItem="e9S-w7-cmn" firstAttribute="centerX" secondItem="K8B-44-m3b" secondAttribute="centerX" id="Kdo-Yc-NtK"/>
                                     <constraint firstItem="kHq-BV-ZQk" firstAttribute="leading" secondItem="K8B-44-m3b" secondAttribute="leading" constant="12" id="OHy-cA-3wo"/>
                                     <constraint firstAttribute="height" constant="64" id="RyH-Cg-HfO"/>
@@ -2747,6 +2837,7 @@
                         <outlet property="tableView" destination="Iz0-ts-ZTW" id="glu-Q3-n9t"/>
                         <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="a7V-eU-Yjs"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="e7e-xA-HgL"/>
+                        <segue destination="Zvi-i7-Pcr" kind="show" identifier="toManager" id="f4Q-EU-SfD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cH-ZS-Ng2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2991,7 +3082,7 @@
         <image name="power" width="16" height="17"/>
         <image name="prev" width="20" height="20"/>
         <image name="register" width="16" height="16"/>
-        <image name="search" width="42" height="42"/>
+        <image name="search" width="32" height="32"/>
         <image name="team" width="25" height="25"/>
         <image name="tempPlay" width="25" height="25"/>
     </resources>
@@ -3000,14 +3091,15 @@
         <segue reference="y8N-d0-A16"/>
         <segue reference="SiI-cm-Vku"/>
         <segue reference="pYZ-nD-1ol"/>
-        <segue reference="UI0-Ma-Ffm"/>
+        <segue reference="cDK-8u-UPz"/>
+        <segue reference="Wr7-FG-b1z"/>
         <segue reference="2ff-JT-Wdj"/>
         <segue reference="f5d-2G-qtf"/>
         <segue reference="xcZ-Ad-vEw"/>
         <segue reference="Ym7-zQ-SHb"/>
         <segue reference="DaT-w5-CTD"/>
         <segue reference="cK5-nM-2qW"/>
-        <segue reference="Kca-5B-OTe"/>
-        <segue reference="AlK-fI-QxB"/>
+        <segue reference="q87-Mu-6YG"/>
+        <segue reference="EIA-wN-WfT"/>
     </inferredMetricsTieBreakers>
 </document>
