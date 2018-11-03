@@ -74,15 +74,16 @@ class ManagerVC: MyTableVC {
         let name: String = row.title
         let token: String = row.token
         let sender:[String: String] = ["name": name, "token": token]
-        performSegue(withIdentifier: TO_TEAM_MANAGER_FUNCTION, sender: sender)
+        performSegue(withIdentifier: TO_MANAGER_FUNCTION, sender: sender)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_TEAM_MANAGER_FUNCTION {
-            let vc: TeamManagerFunctionVC = segue.destination as! TeamManagerFunctionVC
+        if segue.identifier == TO_MANAGER_FUNCTION {
+            let vc: ManagerFunctionVC = segue.destination as! ManagerFunctionVC
             let row: [String: String] = sender as! [String: String]
             vc.name = row["name"]!
             vc.token = row["token"]!
+            vc.source = source
         }
     }
 

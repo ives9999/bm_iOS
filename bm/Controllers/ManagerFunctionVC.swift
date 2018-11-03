@@ -8,17 +8,13 @@
 
 import UIKit
 
-class TeamManagerFunctionVC: MyTableVC {
+class ManagerFunctionVC: MyTableVC {
 
+    var source: String = ""
     var name: String = ""
     var token: String = ""
-    var _rows: [Dictionary<String, Any>] = [
-        ["text": "編輯", "icon": "edit1", "segue": TO_TEAM_SUBMIT],
-        ["text": "臨打編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
-        ["text": "每次臨打名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
-        ["text": "刪除", "icon": "clear"]
-    ]
-    
+    var _rows: [Dictionary<String, Any>] = [Dictionary<String, Any>]()
+
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
@@ -26,6 +22,29 @@ class TeamManagerFunctionVC: MyTableVC {
         myTablView = tableView
         super.viewDidLoad()
         titleLbl.text = name
+        
+        if source == "team" {
+            _rows = [
+                ["text": "編輯", "icon": "edit1", "segue": TO_TEAM_SUBMIT],
+                ["text": "臨打編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
+                ["text": "每次臨打名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
+                ["text": "刪除", "icon": "clear"]
+            ]
+        } else if source == "coach" {
+            _rows = [
+                ["text": "編輯", "icon": "edit1", "segue": TO_TEAM_SUBMIT],
+                ["text": "教球時段編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
+                ["text": "報名學員名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
+                ["text": "刪除", "icon": "clear"]
+            ]
+        } else if source == "arena" {
+            _rows = [
+                ["text": "編輯", "icon": "edit1", "segue": TO_TEAM_SUBMIT],
+                ["text": "時段編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
+                ["text": "報名球隊名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
+                ["text": "刪除", "icon": "clear"]
+            ]
+        }
 
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
     }

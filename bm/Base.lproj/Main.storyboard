@@ -2242,17 +2242,17 @@
                         <outlet property="tableView" destination="ac6-qU-H7f" id="IGH-U6-mWq"/>
                         <outlet property="titleLbl" destination="33k-oE-O8H" id="iZ5-fK-l1a"/>
                         <segue destination="UtM-v1-pfK" kind="show" identifier="toTeamSubmit" id="Kca-5B-OTe"/>
-                        <segue destination="zVt-Av-Afw" kind="show" identifier="toTeamManagerFunction" id="GbJ-32-NmG"/>
+                        <segue destination="zVt-Av-Afw" kind="show" identifier="toManagerFunction" id="GbJ-32-NmG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZRR-x7-JTP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="310" y="656"/>
         </scene>
-        <!--Team Manager FunctionVC-->
+        <!--Manager FunctionVC-->
         <scene sceneID="eaE-vz-b2s">
             <objects>
-                <viewController id="zVt-Av-Afw" customClass="TeamManagerFunctionVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zVt-Av-Afw" customClass="ManagerFunctionVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LAt-aP-4W2" customClass="TeamManagerFunction">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
