@@ -25,21 +25,21 @@ class ManagerFunctionVC: MyTableVC {
         
         if source == "team" {
             _rows = [
-                ["text": "編輯", "icon": "edit1", "segue": TO_TEAM_SUBMIT],
+                ["text": "編輯", "icon": "edit1", "segue": TO_EDIT],
                 ["text": "臨打編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
                 ["text": "每次臨打名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
                 ["text": "刪除", "icon": "clear"]
             ]
         } else if source == "coach" {
             _rows = [
-                ["text": "編輯", "icon": "edit1", "segue": TO_TEAM_SUBMIT],
+                ["text": "編輯", "icon": "edit1", "segue": TO_EDIT],
                 ["text": "教球時段編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
                 ["text": "報名學員名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
                 ["text": "刪除", "icon": "clear"]
             ]
         } else if source == "arena" {
             _rows = [
-                ["text": "編輯", "icon": "edit1", "segue": TO_TEAM_SUBMIT],
+                ["text": "編輯", "icon": "edit1", "segue": TO_EDIT],
                 ["text": "時段編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
                 ["text": "報名球隊名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
                 ["text": "刪除", "icon": "clear"]
@@ -67,7 +67,7 @@ class ManagerFunctionVC: MyTableVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var iden: String = ""
         if indexPath.row == 0 {
-            iden = TO_TEAM_SUBMIT
+            iden = TO_EDIT
         } else if indexPath.row == 1 {
             iden = TO_TEAM_TEMP_PLAY
         } else if indexPath.row == 2 {
@@ -78,7 +78,7 @@ class ManagerFunctionVC: MyTableVC {
             )
             let alert = SCLAlertView(appearance: appearance)
             alert.addButton("確定", action: {
-                self._deleteTeam(token: self.token)
+                self._delete(token: self.token)
                 self.prevBtnPressed("")
             })
             alert.addButton("取消", action: {
@@ -91,9 +91,10 @@ class ManagerFunctionVC: MyTableVC {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_TEAM_SUBMIT {
-            let vc: TeamSubmitVC = segue.destination as! TeamSubmitVC
+        if segue.identifier == TO_EDIT {
+            let vc: EditVC = segue.destination as! EditVC
             vc.token = token
+            vc.source = source
         } else if segue.identifier == TO_TEAM_TEMP_PLAY {
             let vc: TeamTempPlayEditVC = segue.destination as! TeamTempPlayEditVC
             vc.token = token
@@ -104,17 +105,17 @@ class ManagerFunctionVC: MyTableVC {
         }
     }
     
-    private func _deleteTeam(token: String) {
+    private func _delete(token: String) {
         Global.instance.addSpinner(superView: self.view)
-        TeamService.instance.delete(token: token, type: "team") { (success) in
+        dataService.delete(token: token, type: "team") { (success) in
             if success {
                 Global.instance.removeSpinner(superView: self.view)
-                if (!TeamService.instance.success) {
-                    SCLAlertView().showError("錯誤", subTitle: "無法刪除球隊，請稍後再試")
+                if (!self.dataService.success) {
+                    SCLAlertView().showError("錯誤", subTitle: "無法刪除，請稍後再試")
                 }
                 NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
             } else {
-                SCLAlertView().showError("錯誤", subTitle: "無法刪除球隊，請稍後再試")
+                SCLAlertView().showError("錯誤", subTitle: "無法刪除，請稍後再試")
             }
         }
     }

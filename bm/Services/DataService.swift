@@ -19,6 +19,7 @@ class DataService {
 //        Home(featured: "2.jpg", title: "永遠支持的戴資穎"),
 //        Home(featured: "3.jpg", title: "外媒評十大羽毛球美女，馬琳竟上榜！")
 //    ]
+    var id: Int = 0
     var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
     var dataLists: [SuperData] = [SuperData]()
     var totalCount: Int!
@@ -26,7 +27,7 @@ class DataService {
     var perPage: Int!
     var show: Dictionary<String, Any> = Dictionary<String, Any>()
     var show_html: String = ""
-    //var downloadImageNum: Int = 0
+    var downloadImageNum: Int = 0
     var needDownloads: [Dictionary<String, Any>] = [Dictionary<String, Any>]()
     var image: UIImage?
     //var homesRaw: Dictionary<String, [Dictionary<String, String>]> = Dictionary<String, [Dictionary<String, String>]>()
@@ -41,11 +42,20 @@ class DataService {
     var msg:String = ""
     var success: Bool = false
     
+    var _model: SuperData
     var model: SuperData {
         get {
-            return SuperData()
+            return _model
+        }
+        set {
+            _model = newValue
         }
     }
+    
+    init() {
+        _model = Team.instance
+    }
+    
     func setData(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") -> SuperData {
         let list = SuperData(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
         return list
@@ -57,6 +67,7 @@ class DataService {
     }
     
     func getList(type: String, titleField: String, params:[String:Any], page: Int, perPage: Int, filter:[[Any]]?, completion: @escaping CompletionHandler) {
+        
         self.needDownloads = [Dictionary<String, Any>]()
         var body: [String: Any] = ["source": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
         if filter != nil {
@@ -148,9 +159,258 @@ class DataService {
         }
     }
     
+    func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
+        
+        //print(model)
+        //model.neverFill()
+        downloadImageNum = 0
+        let body: [String: Any] = ["source": "app", "token": token, "strip_html": true]
+        
+        //print(body)
+        let url: String = String(format: URL_ONE, type)
+        //print(url)
+        
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            
+            if response.result.error == nil {
+                //print(response.result.value)
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    return
+                }
+                //print(data)
+                let json = JSON(data)
+                //print(json)
+                
+                //var images: [String] = [String]()
+                for (key, item) in self.model.data {
+                    if json[key] != JSON.null {
+                        let tmp = json[key]
+                        var value: Any?
+                        let vType: String = item["vtype"] as! String
+                        if vType == "Int" {
+                            value = tmp.intValue
+                            self.model.data[key]!["value"] = value
+                            self.model.data[key]!["show"] = "\(value ?? "")"
+                        } else if vType == "String" {
+                            value = tmp.stringValue
+                            self.model.data[key]!["value"] = value
+                            self.model.data[key]!["show"] = value
+                        } else if vType == "array" {
+                            if key == CITY_KEY {
+                                let id: Int = tmp["id"].intValue
+                                let name: String = tmp["name"].stringValue
+                                let city: City = City(id: id, name: name)
+                                self.model.updateCity(city)
+                            } else if key == ARENA_KEY {
+                                let id: Int = tmp["id"].intValue
+                                let name: String = tmp["name"].stringValue
+                                let arena: Arena = Arena(id: id, name: name)
+                                self.model.updateArena(arena)
+                            } else if key == TEAM_DAYS_KEY {
+                                let tmp1: [JSON] = tmp.arrayValue
+                                var days: [Int] = [Int]()
+                                for item in tmp1 {
+                                    days.append(item["day"].intValue)
+                                }
+                                self.model.updateDays(days)
+                            } else if key == TEAM_DEGREE_KEY {
+                                let tmp1: String = tmp.stringValue
+                                let degrees: [String] = tmp1.components(separatedBy: ",")
+                                self.model.updateDegree(self.strsToDegree(degrees))
+                            }
+                        } else if vType == "image" {
+                            if key == FEATURED_KEY {
+                                var tmp1: String = tmp.stringValue
+                                if (tmp1.count > 0) {
+                                    tmp1 = BASE_URL + tmp1
+                                    self.model.data[key]!["path"] = tmp1
+                                }
+                            }
+                        }
+                    }
+                }
+                if json["near_date_w"] != JSON.null {
+                    let n2: String = json["near_date_w"].stringValue
+                    self.model.data[TEAM_NEAR_DATE_KEY]!["value1"] = n2
+                }
+                var signups:[[String: String]] = [[String: String]]()
+                
+                if json["signups"] != JSON.null {
+                    let items: [JSON] = json["signups"].arrayValue
+                    for item in items {
+                        let member: JSON = item["member"]
+                        //print(member)
+                        let nickname: String = member["nickname"].stringValue
+                        let token: String = member["token"].stringValue
+                        let created_at: String = item["created_at"].stringValue
+                        signups.append(["nickname":nickname, "token":token,"created_at":created_at])
+                        //print(signups)
+                    }
+                    if self.model.data["signups"] == nil {
+                        self.model.data["signups"] = [String: Any]()
+                    }
+                    self.model.data["signups"]!["value"] = signups
+                    self.model.data["signups"]!["vtype"] = "array"
+                    //print(model.data)
+                    
+                }
+                
+                if type == "team" {
+                    self.model.updatePlayStartTime()
+                    self.model.updatePlayEndTime()
+                    self.model.updateTempContent()
+                    self.model.updateCharge()
+                    self.model.updateContent()
+                    self.model.updateNearDate()
+                    self.model.feeShow()
+                }
+                //print(self.model.data)
+                
+                let path: String = self.model.data[FEATURED_KEY]!["path"] as! String
+                if path.count > 0 {
+                    self.getImage(url: path, completion: { (success) in
+                        if success {
+                            self.model.data[FEATURED_KEY]!["value"] = self.image
+                            completion(true)
+                            //print(team.data)
+                        }
+                    })
+                } else {
+                    completion(true)
+                }
+                
+                /*
+                 let id: Int = json["id"].intValue
+                 let channel: String = json["channel"].stringValue
+                 let name: String = json["name"].stringValue
+                 let mobile: String = json["mobile"].stringValue
+                 let email: String = json["email"].stringValue
+                 let website: String = json["website"].stringValue
+                 let fb: String = json["fb"].stringValue
+                 let youtube: String = json["youtube"].stringValue
+                 let play_start: String = json["play_start"].stringValue
+                 let play_end: String = json["play_end"].stringValue
+                 let ball: String = json["ball"].stringValue
+                 let degree: String = json["degree"].stringValue
+                 let slug: String = json["slug"].stringValue
+                 let charge: String = json["charge"].stringValue
+                 let content: String = json["content"].stringValue
+                 let manager_id: Int = json["manager_id"].intValue
+                 let temp_fee_M: Int = json["temp_fee_M"].intValue
+                 let temp_fee_F: Int = json["temp_fee_F"].intValue
+                 let temp_quantity: Int = json["temp_quantity"].intValue
+                 let temp_content: String = json["temp_content"].stringValue
+                 let temp_status: String = json["temp_status"].stringValue
+                 let pv: Int = json["pv"].intValue
+                 let token: String = json["token"].stringValue
+                 let created_id: Int = json["created_id"].intValue
+                 let created_at: String = json["created_at"].stringValue
+                 let updated_at: String = json["updated_id"].stringValue
+                 let thumb: String = json["thumb"].stringValue
+                 let arena_json: JSON = JSON(json["arena"])
+                 let arena: [String: Any] = [
+                 "id": arena_json["id"].intValue, "name": arena_json["name"].stringValue
+                 ]
+                 let days_json: [JSON] = json["days"].arrayValue
+                 var days: [Int] = [Int]()
+                 for day in days_json {
+                 days.append(day["day"].intValue)
+                 }
+                 
+                 var path: String = ""
+                 let path1 = json["featured_path"].stringValue
+                 if (path1.count > 0) {
+                 path = BASE_URL + path1
+                 self.downloadImageNum += 1
+                 }
+                 */
+            } else {
+                completion(false)
+                debugPrint(response.result.error as Any)
+            }
+            
+        }
+    }
+    
+    func update(type: String, params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
+        
+        let url: String = String(format: URL_UPDATE, type)
+        //print(url)
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+        var body: [String: Any] = ["source": "app"]
+        body.merge(params)
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            if image != nil {
+                let imageData: Data = UIImageJPEGRepresentation(image!, 0.2)! as Data
+                //print(imageData)
+                //let base64: String = imageData.base64EncodedString(options: .lineLength64Characters)
+                multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)
+            }
+            //print(params)
+            for (key, value) in body {
+                if key == TEAM_DEGREE_KEY {
+                    for d in value as! [String] {
+                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "degree[]")
+                    }
+                } else if key == TEAM_DAYS_KEY {
+                    for d in value as! [Int] {
+                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "days[]")
+                    }
+                } else if key == CAT_KEY {
+                    for d in value as! [Int] {
+                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "cat_id[]")
+                    }
+                } else {
+                    multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
+                }
+            }
+            //print(multipartFormData.boundary)
+        }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headers) { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                //                upload.responseString { (response) in
+                //                    print(response)
+                //                    completion(true)
+                //                }
+                upload.responseJSON(completionHandler: { (response) in
+                    //print(response)
+                    if response.result.error == nil {
+                        guard let data = response.result.value else {
+                            print("data error")
+                            return
+                        }
+                        //print(data)
+                        let json = JSON(data)
+                        self.success = true
+                        self.success = json["success"].boolValue
+                        //print(self.success)
+                        if self.success {
+                            self.id = json["id"].intValue
+                        } else {
+                            if json["fields"].exists() {
+                                let errors: [String: JSON] = json["fields"].dictionary!
+                                for (_, value) in errors {
+                                    let error = value.stringValue
+                                    self.msg += error + "\n"
+                                }
+                            }
+                            //print(self.msg)
+                        }
+                    }
+                    completion(true)
+                })
+            case .failure(let error):
+                print(error)
+                //onError(error)
+                completion(false)
+            }
+        }
+    }
+    
     func delete(token: String, type: String, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["source": "app", "channel": "bm", "token": token]
-        let url: String = String(format: URL_TEAM_DELETE, type)
+        let url: String = String(format: URL_DELETE, type)
         //print(url)
         //print(body)
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
@@ -501,5 +761,8 @@ class DataService {
         }
         
         return (key, chTitle, type)
+    }
+    func strsToDegree(_ strs: [String])-> [Degree] {
+        return [Degree]()
     }
 }

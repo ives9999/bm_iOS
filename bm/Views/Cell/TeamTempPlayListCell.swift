@@ -65,7 +65,7 @@ class TeamTempPlayListCell: SuperCell {
     }
     func forRow(row: Dictionary<String, [String: Any]>) {
         //accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        nameLbl.text = (row[TEAM_NAME_KEY]!["value"] as! String)
+        nameLbl.text = (row[NAME_KEY]!["value"] as! String)
         cityBtn.setTitle((row["city"]!["show"] as! String), for: .normal)
         let city_id = row["city"]!["value"] as! Int
         cityBtn.tag = city_id

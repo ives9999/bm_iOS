@@ -11,7 +11,7 @@ import Foundation
 class Course: SuperData {
     static let instance = Course()
     
-    func initData() {
+    override func initData() {
         data = [
             ID_KEY:["ch":"編號","vtype":"Int","value":-1,"show":""],
             TITLE_KEY:["ch":"標題","vtype":"String","value":"","show":""],

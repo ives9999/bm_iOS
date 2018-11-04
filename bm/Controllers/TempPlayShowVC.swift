@@ -319,7 +319,7 @@ class TempPlayShowVC: MyTableVC {
         let rows: [[String: String]] = model.data["signups"]!["value"] as! [[String: String]]
         let row: Dictionary<String, String> = rows[indexPath.row]
         //print(row)
-        let id: Int = model.data[TEAM_ID_KEY]!["value"] as! Int
+        let id: Int = model.data[ID_KEY]!["value"] as! Int
         let sender:[String:Any] = ["token":row["token"]!,"title":myTitle,"near_date":nearDate,"id":id]
         performSegue(withIdentifier: TO_TEMP_PLAY_SIGNUP_ONE, sender: sender)
     }
@@ -427,10 +427,10 @@ class TempPlayShowVC: MyTableVC {
     }
     
     private func setPage() {
-        myTitle = (model.data[TEAM_NAME_KEY]!["value"] as! String)
+        myTitle = (model.data[NAME_KEY]!["value"] as! String)
         titleLbl.text = myTitle
-        teamToken = (model.data[TEAM_TOKEN_KEY]!["value"] as! String)
-        featured = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
+        teamToken = (model.data[TOKEN_KEY]!["value"] as! String)
+        featured = (model.data[FEATURED_KEY]!["value"] as! UIImage)
         featuredLayout()
         featuredView.image = featured
         featuredView.contentMode = .scaleAspectFit
@@ -439,11 +439,11 @@ class TempPlayShowVC: MyTableVC {
         var text: String! = ""
         var key: String! = ""
         
-        key = TEAM_CITY_KEY
+        key = CITY_KEY
         text = (model.data[key]!["show"] as! String)
         cityBtn.setTitle(text, for: .normal)
         
-        key = TEAM_ARENA_KEY
+        key = ARENA_KEY
         text = (model.data[key]!["show"] as! String)
         arenaBtn.setTitle(text, for: .normal)
         
@@ -487,7 +487,7 @@ class TempPlayShowVC: MyTableVC {
         text = (model.data[key]!["show"] as! String)
         leaderLbl.text = lbl + ": " + text
         
-        key = TEAM_MOBILE_KEY
+        key = MOBILE_KEY
         lbl = (model.data[key]!["ch"] as! String)
         text = (model.data[key]!["show"] as! String)
         mobileLbl.text = lbl + ": " + text

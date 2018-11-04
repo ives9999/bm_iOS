@@ -42,8 +42,14 @@ enum MEMBER_ROLE: String {
 enum SELECT_TIME_TYPE: Int {
     case play_start, play_end
 }
-enum TEXT_INPUT_TYPE: Int {
-    case temp_play, charge, team
+enum TEXT_INPUT_TYPE: String {
+    case temp_play = "臨打說明"
+    case charge = "收費說明"
+    case team = "球隊詳細說明"
+    case exp = "經歷"
+    case feat = "比賽成績"
+    case license = "證照"
+    case coach = "教練詳細說明"
 }
 enum DEGREE: String {
     case new = "新手"

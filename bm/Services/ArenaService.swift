@@ -11,10 +11,10 @@ import SwiftyJSON
 
 class ArenaService: DataService {
     static let instance = ArenaService()
-    override var model: Arena {
-        get {
-            return Arena.instance
-        }
+    
+    override init() {
+        super.init()
+        _model = Arena.instance
     }
     
     override func setData(id: Int, title: String, path: String, token: String, youtube: String, vimeo: String) -> Arena {

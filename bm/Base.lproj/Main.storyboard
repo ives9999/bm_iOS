@@ -195,10 +195,10 @@
             </objects>
             <point key="canvasLocation" x="-1433" y="-2669"/>
         </scene>
-        <!--Team SubmitVC-->
+        <!--EditVC-->
         <scene sceneID="aWs-0V-lzQ">
             <objects>
-                <viewController id="UtM-v1-pfK" customClass="TeamSubmitVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="UtM-v1-pfK" customClass="EditVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3YN-EW-tZy">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -877,7 +877,7 @@
                         <segue destination="j9P-cA-JMi" kind="show" identifier="toLogin" id="9hz-2Z-7jX"/>
                         <segue destination="G5m-sq-lsN" kind="show" identifier="toRegister" id="f5d-2G-qtf"/>
                         <segue destination="vfe-V8-Hfx" kind="show" identifier="toProfile" id="L8k-6m-3tm"/>
-                        <segue destination="UtM-v1-pfK" kind="show" identifier="toTeamSubmit" id="tfa-sh-Qj7"/>
+                        <segue destination="UtM-v1-pfK" kind="show" identifier="toEdit" id="tfa-sh-Qj7"/>
                         <segue destination="gO6-sX-L0T" kind="show" identifier="toTeamTempPlay" id="PtM-Ha-efS"/>
                         <segue destination="trT-Qb-e9n" kind="show" identifier="toPassword" id="OU7-h8-11b"/>
                         <segue destination="XsO-Wn-cpI" kind="show" identifier="toValidate" id="1gi-Xv-JX8"/>
@@ -1984,81 +1984,6 @@
             </objects>
             <point key="canvasLocation" x="108" y="-141"/>
         </scene>
-        <!--Coach Manager FunctionVC-->
-        <scene sceneID="WkT-Vp-b4A">
-            <objects>
-                <viewController id="cud-aA-eIL" customClass="CoachManagerFunctionVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2tY-cg-Roi">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJf-tZ-qaB">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ox-ac-DVm">
-                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="KP8-qH-I2T"/>
-                                            <constraint firstAttribute="width" constant="33" id="UPh-II-pfq"/>
-                                        </constraints>
-                                        <state key="normal" image="prev"/>
-                                        <connections>
-                                            <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="00R-aP-ezQ"/>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="GGT-GR-Izm"/>
-                                            <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="VFG-5M-uia"/>
-                                            <action selector="prevBtnPressed:" destination="cud-aA-eIL" eventType="touchUpInside" id="rWZ-th-pIB"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教練" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWv-Sk-Hp7">
-                                        <rect key="frame" x="167" y="18.5" width="41.5" height="27"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="3DV-tI-sfk"/>
-                                    <constraint firstItem="IWv-Sk-Hp7" firstAttribute="centerY" secondItem="dJf-tZ-qaB" secondAttribute="centerY" id="4Mg-6z-iO7"/>
-                                    <constraint firstItem="4Ox-ac-DVm" firstAttribute="leading" secondItem="dJf-tZ-qaB" secondAttribute="leading" constant="12" id="5Gh-IQ-G1C"/>
-                                    <constraint firstItem="4Ox-ac-DVm" firstAttribute="centerY" secondItem="dJf-tZ-qaB" secondAttribute="centerY" id="EVt-aN-nPe"/>
-                                    <constraint firstItem="IWv-Sk-Hp7" firstAttribute="centerX" secondItem="dJf-tZ-qaB" secondAttribute="centerX" id="Ow6-5K-Lcv"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="V6O-Ft-qbr"/>
-                                </constraints>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="EHZ-pa-mGC">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XQd-qU-Kg6">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="Hcn-3s-esr" firstAttribute="bottom" secondItem="XQd-qU-Kg6" secondAttribute="bottom" id="0WO-tO-aIN"/>
-                            <constraint firstItem="dJf-tZ-qaB" firstAttribute="top" secondItem="2tY-cg-Roi" secondAttribute="top" id="6jC-h0-9dl"/>
-                            <constraint firstItem="EHZ-pa-mGC" firstAttribute="bottom" secondItem="Hcn-3s-esr" secondAttribute="bottom" id="IIE-0s-rzb"/>
-                            <constraint firstItem="dJf-tZ-qaB" firstAttribute="leading" secondItem="2tY-cg-Roi" secondAttribute="leading" id="OK9-Ui-z8g"/>
-                            <constraint firstItem="EHZ-pa-mGC" firstAttribute="leading" secondItem="Hcn-3s-esr" secondAttribute="leading" id="Tev-v0-Jpj"/>
-                            <constraint firstItem="XQd-qU-Kg6" firstAttribute="top" secondItem="dJf-tZ-qaB" secondAttribute="bottom" id="Y6D-oW-0sf"/>
-                            <constraint firstAttribute="trailing" secondItem="EHZ-pa-mGC" secondAttribute="trailing" id="apN-6w-P6P"/>
-                            <constraint firstItem="Hcn-3s-esr" firstAttribute="trailing" secondItem="dJf-tZ-qaB" secondAttribute="trailing" id="bcZ-Af-wah"/>
-                            <constraint firstAttribute="trailing" secondItem="XQd-qU-Kg6" secondAttribute="trailing" id="iab-1w-JDh"/>
-                            <constraint firstItem="EHZ-pa-mGC" firstAttribute="top" secondItem="dJf-tZ-qaB" secondAttribute="bottom" id="mJY-3a-9ek"/>
-                            <constraint firstItem="XQd-qU-Kg6" firstAttribute="leading" secondItem="Hcn-3s-esr" secondAttribute="leading" id="nL7-xh-ltF"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Hcn-3s-esr"/>
-                    </view>
-                    <connections>
-                        <outlet property="tableView" destination="XQd-qU-Kg6" id="Sos-5X-Bc7"/>
-                        <outlet property="titleLbl" destination="IWv-Sk-Hp7" id="seO-Bi-4rZ"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cJB-eT-ZRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1582" y="700"/>
-        </scene>
         <!--臨打-->
         <scene sceneID="3a3-E3-xcE">
             <objects>
@@ -2241,7 +2166,7 @@
                     <connections>
                         <outlet property="tableView" destination="ac6-qU-H7f" id="IGH-U6-mWq"/>
                         <outlet property="titleLbl" destination="33k-oE-O8H" id="iZ5-fK-l1a"/>
-                        <segue destination="UtM-v1-pfK" kind="show" identifier="toTeamSubmit" id="Kca-5B-OTe"/>
+                        <segue destination="UtM-v1-pfK" kind="show" identifier="toEdit" id="Kca-5B-OTe"/>
                         <segue destination="zVt-Av-Afw" kind="show" identifier="toManagerFunction" id="GbJ-32-NmG"/>
                     </connections>
                 </viewController>
@@ -2273,8 +2198,8 @@
                                             <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="uPq-DY-Ctv"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mT7-32-00D">
-                                        <rect key="frame" x="168.5" y="18.5" width="38.5" height="27"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理功能" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mT7-32-00D">
+                                        <rect key="frame" x="149.5" y="18.5" width="76.5" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -2317,7 +2242,7 @@
                         <outlet property="tableView" destination="oon-Mz-8yN" id="zve-Ln-qS0"/>
                         <outlet property="titleLbl" destination="mT7-32-00D" id="y5q-5F-hyI"/>
                         <segue destination="gO6-sX-L0T" kind="show" identifier="toTeamTempPlay" id="DaT-w5-CTD"/>
-                        <segue destination="UtM-v1-pfK" kind="show" identifier="toTeamSubmit" id="q87-Mu-6YG"/>
+                        <segue destination="UtM-v1-pfK" kind="show" identifier="toEdit" id="q87-Mu-6YG"/>
                         <segue destination="R6S-rJ-jUX" kind="show" identifier="toTempPlayDate" id="KX0-iG-zUi"/>
                     </connections>
                 </viewController>
@@ -2399,7 +2324,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LqQ-Hw-gjq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2721" y="-137"/>
+            <point key="canvasLocation" x="2233" y="-70"/>
         </scene>
         <!--Temp Play Date PlayerVC-->
         <scene sceneID="OIc-Rb-3sO">
@@ -3099,7 +3024,7 @@
         <segue reference="Ym7-zQ-SHb"/>
         <segue reference="DaT-w5-CTD"/>
         <segue reference="cK5-nM-2qW"/>
-        <segue reference="q87-Mu-6YG"/>
+        <segue reference="Kca-5B-OTe"/>
         <segue reference="EIA-wN-WfT"/>
     </inferredMetricsTieBreakers>
 </document>

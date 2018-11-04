@@ -23,20 +23,8 @@ class TextInputVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var title: String = ""
         let type: TEXT_INPUT_TYPE = input!["type"] as! TEXT_INPUT_TYPE
-        switch type {
-        case .temp_play:
-            title = "臨打說明"
-            break
-        case .charge:
-            title = "收費說明"
-            break
-        case .team:
-            title = "球隊說明"
-            break
-        }
-        self.title = title
+        self.title = type.rawValue
         
         content.layer.borderWidth = 1.0
         content.layer.borderColor = UIColor(TEXTBORDER).cgColor

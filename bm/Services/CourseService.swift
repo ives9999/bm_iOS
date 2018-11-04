@@ -12,10 +12,9 @@ import SwiftyJSON
 class CourseService: DataService {
     static let instance = CourseService()
     
-    override var model: Course {
-        get {
-            return Course.instance
-        }
+    override init() {
+        super.init()
+        _model = Team.instance
     }
     
     override func setData(id: Int, title: String, path: String, token: String, youtube: String, vimeo: String) -> Arena {

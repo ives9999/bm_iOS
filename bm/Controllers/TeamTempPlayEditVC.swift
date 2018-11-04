@@ -32,7 +32,7 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
                     self.sections = self.model.temp_play_edit_sections
                     self.model.hideOrShowTempPlayData()
                     //print(self.model.temp_play_data)
-                    let name: String = self.model.temp_play_data[TEAM_NAME_KEY]!["value"] as! String
+                    let name: String = self.model.temp_play_data[NAME_KEY]!["value"] as! String
                     self.titleLbl.text = name + self.titleLbl.text!
                     self.tableView.reloadData()
                 }
@@ -156,13 +156,13 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
                 Global.instance.addSpinner(superView: self.view)
 
                 //print(isFeaturedChange)
-                TeamService.instance.update(params: params, nil, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
+                TeamService.instance.update(type: "team", params: params, nil, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
                     Global.instance.removeSpinner(superView: self.view)
                     if success {
                         if TeamService.instance.success {
                             let id: Int = TeamService.instance.id
-                            self.model.temp_play_data[TEAM_ID_KEY]!["value"] = id
-                            self.model.temp_play_data[TEAM_ID_KEY]!["show"] = id
+                            self.model.temp_play_data[ID_KEY]!["value"] = id
+                            self.model.temp_play_data[ID_KEY]!["show"] = id
                             //print(self.id)
                             //if self.id > 0 {
                             SCLAlertView().showSuccess("成功", subTitle: "修改臨打成功")

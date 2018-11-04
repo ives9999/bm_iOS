@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, TeamSubmitCellDelegate {
+class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, EditCellDelegate {
     
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -20,18 +20,18 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     var model: Team!
     var _rows: [[String: Any]] = [
         ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true],
-        ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
+        ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
         //            ["ch": "區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":"team_area","show":"全部","segue":TO_ARENA,"sender":0],
         ["ch":"日期","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_DAYS_KEY,"show":"全部","segue":TO_DAY,"sender":[Int]()],
         ["ch":"時段","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_START_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
 //        ["ch":"結束時間","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_END_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
-        ["ch":"球館","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int]()],
+        ["ch":"球館","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int]()],
         ["ch":"程度","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String]()]
     ]
     
     var tables = [
-        ExpandableItems(isExpanded: true, items: ["keyword",TEAM_CITY_KEY,TEAM_DAYS_KEY, TEAM_PLAY_START_KEY]),
-        ExpandableItems(isExpanded: false, items: [TEAM_ARENA_KEY,TEAM_DEGREE_KEY])
+        ExpandableItems(isExpanded: true, items: ["keyword",CITY_KEY,TEAM_DAYS_KEY, TEAM_PLAY_START_KEY]),
+        ExpandableItems(isExpanded: false, items: [ARENA_KEY,TEAM_DEGREE_KEY])
     ]
 
     var citys: [City] = [City]()
@@ -50,7 +50,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         Global.instance.setupTabbar(self)
         Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
-        tableView.register(TeamSubmitCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(EditCell.self, forCellReuseIdentifier: "cell")
         submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
         submitBtn.layer.cornerRadius = 12
 //        citys.append(City(id: 218, name: ""))
@@ -103,8 +103,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
-        let cell: TeamSubmitCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamSubmitCell
-        cell.teamSubmitCellDelegate = self
+        let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
+        cell.editCellDelegate = self
         let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
         cell.forRow(indexPath: indexPath, row: row)
         
@@ -115,7 +115,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         Global.instance.addSpinner(superView: view)
         Global.instance.removeSpinner(superView: view)
         let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
-        let cell = tableView.cellForRow(at: indexPath) as! TeamSubmitCell
+        let cell = tableView.cellForRow(at: indexPath) as! EditCell
         if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
             if row["segue"] != nil {
                 let segue: String = row["segue"] as! String
@@ -201,7 +201,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     }
     func setCitysData(res: [City]) {
         //print(res)
-        var row = getDefinedRow(TEAM_CITY_KEY)
+        var row = getDefinedRow(CITY_KEY)
         var texts: [String] = [String]()
         citys = res
         if citys.count > 0 {
@@ -213,7 +213,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         } else {
             row["show"] = "全部"
         }
-        replaceRows(TEAM_CITY_KEY, row)
+        replaceRows(CITY_KEY, row)
         tableView.reloadData()
     }
     
@@ -222,7 +222,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     }
     func setArenasData(res: [Arena]) {
         //print(res)
-        var row = getDefinedRow(TEAM_ARENA_KEY)
+        var row = getDefinedRow(ARENA_KEY)
         var texts: [String] = [String]()
         arenas = res
         if arenas.count > 0 {
@@ -234,7 +234,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         } else {
             row["show"] = "全部"
         }
-        replaceRows(TEAM_ARENA_KEY, row)
+        replaceRows(ARENA_KEY, row)
         tableView.reloadData()
     }
     

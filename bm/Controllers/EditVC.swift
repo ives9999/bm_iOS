@@ -1,5 +1,5 @@
 //
-//  TeamSubmitVC.swift
+//  TeamEditVC.swift
 //  bm
 //
 //  Created by ives on 2017/11/9.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate, TeamSubmitCellDelegate {
+class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate, EditCellDelegate {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -19,25 +19,40 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     var imagePicker: UIImagePickerController = UIImagePickerController()
     var token: String = ""
     var isFeaturedChange: Bool = false
-    var model: Team!
+    var model: SuperData = Team.instance
     var action: String = "INSERT"
+    var source: String = "team"
+    var ch: String = "球隊"
     
     override func viewDidLoad() {
         //print("token: \(token)")
  
         //let token: String = model.data[TEAM_TOKEN_KEY]!["value"] as! String
-        model = Team.instance
+        if source == "team" {
+            model = Team.instance
+            dataService = TeamService.instance
+            ch = "球隊"
+        } else if source == "coach" {
+            model = Coach.instance
+            dataService = CoachService.instance
+            ch = "教練"
+        } else if source == "arena" {
+            model = Arena.instance
+            dataService = ArenaService.instance
+            ch = "球館"
+        }
         
         if token.count > 0 {
             action = "UPDATE"
             //model.neverFill()
             Global.instance.addSpinner(superView: self.view)
-            TeamService.instance.getOne(type: "team", token: token, completion: { (success) in
+            dataService.getOne(type: source, token: token, completion: { (success) in
                 if success {
                     Global.instance.removeSpinner(superView: self.view)
+                    self.titleLbl.text = (self.model.data[NAME_KEY]!["value"] as! String)
                     //print(self.model.data)
                     self.tableView.reloadData()
-                    if let pickedImage: UIImage = self.model.data[TEAM_FEATURED_KEY]!["value"] as? UIImage {
+                    if let pickedImage: UIImage = self.model.data[FEATURED_KEY]!["value"] as? UIImage {
                         self.featuredView.setPickedImage(image: pickedImage)
                     }
                     //self.featuredView.imageView.image = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
@@ -49,7 +64,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
  
         
         //print(_rows)
-        //setData(sections: Team.instance.sections, rows: _rows)
+        //setData(sections: model.sections, rows: _rows)
         sections = model.sections
         myTablView = tableView
         super.viewDidLoad()
@@ -57,7 +72,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
         submitBtn.layer.cornerRadius = 12
         
-        tableView.register(TeamSubmitCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(EditCell.self, forCellReuseIdentifier: "cell")
         
         imagePicker.delegate = self
         featuredView.gallery = imagePicker
@@ -69,10 +84,11 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         Global.instance.addSpinner(superView: self.view)
         Global.instance.removeSpinner(superView: self.view)
         
+        
         if (action == "UPDATE") {
-            titleLbl.text = "更新球隊"
+            titleLbl.text = "更新" + ch
         } else {
-            titleLbl.text = "新增球隊"
+            titleLbl.text = "新增" + ch
         }
     }
     
@@ -95,9 +111,10 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
-        let cell: TeamSubmitCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamSubmitCell
-        cell.teamSubmitCellDelegate = self
+        let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
+        cell.editCellDelegate = self
         let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
+        //print(row)
         //if indexPath.section == 0 && indexPath.row == 0 {
             //print(row)
         //}
@@ -110,12 +127,12 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         Global.instance.addSpinner(superView: view)
         Global.instance.removeSpinner(superView: view)
         let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
-        let cell = tableView.cellForRow(at: indexPath) as! TeamSubmitCell
+        let cell = tableView.cellForRow(at: indexPath) as! EditCell
         if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
             if row["segue"] != nil {
                 let segue: String = row["segue"] as! String
                 //print(iden)
-                let city: Int = model.data[TEAM_CITY_KEY]!["value"] as! Int
+                let city: Int = model.data[CITY_KEY]!["value"] as! Int
                 if segue == TO_ARENA && city == 0 {
                     SCLAlertView().showError("錯誤", subTitle: "請先選擇區域")
                 } else {
@@ -188,27 +205,28 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     @IBAction func submit(_ sender: Any) {
         var params:[String: Any]!
         var isPass: Bool = true
-        let name: String = model.data[TEAM_NAME_KEY]!["value"] as! String
+        let name: String = model.data[NAME_KEY]!["value"] as! String
         if name.count == 0 {
             isPass = false
             SCLAlertView().showWarning("提示", subTitle: "請填寫隊名")
         }
-        let mobile: String = model.data[TEAM_MOBILE_KEY]!["value"] as! String
+        let mobile: String = model.data[MOBILE_KEY]!["value"] as! String
         if mobile.count == 0 {
             isPass = false
             SCLAlertView().showWarning("提示", subTitle: "請填寫電話")
         }
         //print(isPass)
+        //print(model.data)
         if isPass {
-            params = Team.instance.makeSubmitArr()
+            params = model.makeSubmitArr()
             if params.count == 0 && !isFeaturedChange {
                 SCLAlertView().showWarning("提示", subTitle: " 沒有修改任何資料或圖片")
             } else {
                 if params.count == 0 { // just update image
-                    params[TEAM_CREATED_ID_KEY] = Member.instance.id
-                    if model.data[TEAM_ID_KEY]!["value"] != nil {
-                        let id: Int = model.data[TEAM_ID_KEY]!["value"] as! Int
-                        params[TEAM_ID_KEY] = id
+                    params[CREATED_ID_KEY] = Member.instance.id
+                    if model.data[ID_KEY]!["value"] != nil {
+                        let id: Int = model.data[ID_KEY]!["value"] as! Int
+                        params[ID_KEY] = id
                     }
                 }
                 //print(params)
@@ -216,13 +234,13 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                 
                 //print(isFeaturedChange)
                 let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
-                TeamService.instance.update(params: params, image, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
+                dataService.update(type: source, params: params, image, key: "file", filename: "test.jpg", mimeType: "image/jpeg") { (success) in
                     Global.instance.removeSpinner(superView: self.view)
                     if success {
-                        if TeamService.instance.success {
-                            let id: Int = TeamService.instance.id
-                            self.model.data[TEAM_ID_KEY]!["value"] = id
-                            self.model.data[TEAM_ID_KEY]!["show"] = id
+                        if self.dataService.success {
+                            let id: Int = self.dataService.id
+                            self.model.data[ID_KEY]!["value"] = id
+                            self.model.data[ID_KEY]!["show"] = id
                             //print(self.id)
                             //if self.id > 0 {
                             let appearance = SCLAlertView.SCLAppearance(
@@ -240,24 +258,24 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                                 alert.addButton("繼續修改", action: {
                                 })
                             }
-                            alert.showSuccess("成功", subTitle: "新增 / 修改球隊成功")
+                            alert.showSuccess("成功", subTitle: "新增 / 修改成功")
                             NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
                         } else {
-                            SCLAlertView().showWarning("錯誤", subTitle: TeamService.instance.msg)
+                            SCLAlertView().showWarning("錯誤", subTitle: self.dataService.msg)
                         }
                     } else {
-                        SCLAlertView().showWarning("錯誤", subTitle: "新增 / 修改球隊失敗，伺服器無法新增成功，請稍後再試")
+                        SCLAlertView().showWarning("錯誤", subTitle: "新增 / 修改失敗，伺服器無法新增成功，請稍後再試")
                     }
                 }
             }
         }
     }
     func setCityData(id: Int, name: String) {
-        let city_id: Int = model.data[TEAM_CITY_KEY]!["value"] as! Int
+        let city_id: Int = model.data[CITY_KEY]!["value"] as! Int
         if city_id != id {
             let city = City(id: id, name: name)
-            Team.instance.updateCity(city)
-            model.data[TEAM_CITY_KEY]!["change"] = true
+            model.updateCity(city)
+            model.data[CITY_KEY]!["change"] = true
             self.tableView.reloadData()
         }
     }
@@ -266,11 +284,11 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         //not use
     }
     func setArenaData(id: Int, name: String) {
-        let arena_id: Int = model.data[TEAM_ARENA_KEY]!["value"] as! Int
+        let arena_id: Int = model.data[ARENA_KEY]!["value"] as! Int
         if arena_id != id {
             let arena = Arena(id: id, name: name)
-            Team.instance.updateArena(arena)
-            model.data[TEAM_ARENA_KEY]!["change"] = true
+            model.updateArena(arena)
+            model.data[ARENA_KEY]!["change"] = true
             self.tableView.reloadData()
         }
     }
@@ -281,7 +299,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     func setDaysData(res: [Int]) {
         let days: [Int] = model.data[TEAM_DAYS_KEY]!["value"] as! [Int]
         if !res.containsSameElements(as: days) {
-            Team.instance.updateDays(res)
+            model.updateDays(res)
             model.data[TEAM_DAYS_KEY]!["change"] = true
             self.tableView.reloadData()
         }
@@ -292,7 +310,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             var start: String = model.data[TEAM_PLAY_START_KEY]!["value"] as! String
             start = start.noSec()
             if start != time {
-                Team.instance.updatePlayStartTime(time)
+                model.updatePlayStartTime(time)
                 model.data[TEAM_PLAY_START_KEY]!["change"] = true
                 self.tableView.reloadData()
             }
@@ -301,7 +319,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             var end: String = model.data[TEAM_PLAY_END_KEY]!["value"] as! String
             end = end.noSec()
             if end != time {
-                Team.instance.updatePlayEndTime(time)
+                model.updatePlayEndTime(time)
                 model.data[TEAM_PLAY_END_KEY]!["change"] = true
                 self.tableView.reloadData()
             }
@@ -313,28 +331,37 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         case TEXT_INPUT_TYPE.temp_play:
             let old: String = model.data[TEAM_TEMP_CONTENT_KEY]!["value"] as! String
             if old != text {
-                Team.instance.updateTempContent(text)
+                model.updateTempContent(text)
                 model.data[TEAM_TEMP_CONTENT_KEY]!["change"] = true
                 self.tableView.reloadData()
             }
             break
         case TEXT_INPUT_TYPE.charge:
-            let old: String = model.data[TEAM_CHARGE_KEY]!["value"] as! String
+            let old: String = model.data[CHARGE_KEY]!["value"] as! String
             if old != text {
-                Team.instance.updateCharge(text)
-                model.data[TEAM_CHARGE_KEY]!["change"] = true
+                model.updateCharge(text)
+                model.data[CHARGE_KEY]!["change"] = true
                 self.tableView.reloadData()
             }
             break
         case TEXT_INPUT_TYPE.team:
-            let old: String = model.data[TEAM_CONTENT_KEY]!["value"] as! String
+            let old: String = model.data[CONTENT_KEY]!["value"] as! String
             if old != text {
-                Team.instance.updateContent(text)
-                model.data[TEAM_CONTENT_KEY]!["change"] = true
+                model.updateContent(text)
+                model.data[CONTENT_KEY]!["change"] = true
                 self.tableView.reloadData()
             }
             break
             
+        case .exp:
+            
+            break
+        case .feat:
+            break
+        case .license:
+            break
+        case .coach:
+            break
         }
         //print(model.data)
     }
@@ -345,7 +372,7 @@ class TeamSubmitVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             res1.append(DEGREE.DBValue(degree.value))
         }
         if !res1.containsSameElements(as: old) {
-            Team.instance.updateDegree(res)
+            model.updateDegree(res)
             model.data[TEAM_DEGREE_KEY]!["change"] = true
             self.tableView.reloadData()
         }

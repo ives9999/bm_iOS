@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol TeamSubmitCellDelegate {
+protocol EditCellDelegate {
     func setTextField(iden: String, value: String)
     func setSwitch(indexPath: IndexPath, value: Bool)
 }
 
-class TeamSubmitCell: SuperCell, UITextFieldDelegate {
+class EditCell: SuperCell, UITextFieldDelegate {
     
-    var teamSubmitCellDelegate: TeamSubmitCellDelegate?
+    var editCellDelegate: EditCellDelegate?
     var generalTextField: SuperTextField!
     var generalSwitch: SuperSwitch!
     var iden: String = ""
@@ -95,12 +95,12 @@ class TeamSubmitCell: SuperCell, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         //print("tag: \(iden)")
         //print("text: \(textField.text)")
-        teamSubmitCellDelegate?.setTextField(iden: iden, value: textField.text!)
+        editCellDelegate?.setTextField(iden: iden, value: textField.text!)
     }
     
     @objc func switchDidValueChanged(sender: UISwitch) {
         let _sender = sender as! SuperSwitch
-        teamSubmitCellDelegate?.setSwitch(indexPath: _sender.indexPath!, value: _sender.isOn)
+        editCellDelegate?.setSwitch(indexPath: _sender.indexPath!, value: _sender.isOn)
     }
     
     override func awakeFromNib() {

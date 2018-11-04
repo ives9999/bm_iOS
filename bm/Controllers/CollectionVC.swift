@@ -12,7 +12,7 @@ import UIColor_Hex_Swift
 
 internal let reuseIdentifier = "Cell"
 
-class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, TeamSubmitCellDelegate {
+class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var frameWidth: CGFloat!
@@ -103,7 +103,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         searchTableView.dataSource = self
         searchTableView.delegate = self
         
-        searchTableView.register(TeamSubmitCell.self, forCellReuseIdentifier: "search_cell")
+        searchTableView.register(EditCell.self, forCellReuseIdentifier: "search_cell")
     }
     
     func setIden(item: String, titleField: String) {
@@ -304,8 +304,8 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? TeamSubmitCell {
-            cell.teamSubmitCellDelegate = self
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
+            cell.editCellDelegate = self
             let searchRow = searchRows[indexPath.row]
             //print(searchRow)
             cell.forRow(indexPath: indexPath, row: searchRow)

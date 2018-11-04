@@ -84,6 +84,9 @@ class ManagerVC: MyTableVC {
             vc.name = row["name"]!
             vc.token = row["token"]!
             vc.source = source
+        } else if segue.identifier == TO_EDIT {
+            let vc: EditVC = segue.destination as! EditVC
+            vc.source = source
         }
     }
 
@@ -94,7 +97,7 @@ class ManagerVC: MyTableVC {
         if !Member.instance.isLoggedIn {
             SCLAlertView().showError("警告", subTitle: "請先登入為會員")
         } else {
-            performSegue(withIdentifier: TO_TEAM_SUBMIT, sender: nil)
+            performSegue(withIdentifier: TO_EDIT, sender: nil)
         }
     }
 }

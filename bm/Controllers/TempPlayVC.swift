@@ -132,7 +132,7 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
-        let token: String = row[TEAM_TOKEN_KEY]!["value"] as! String
+        let token: String = row[TOKEN_KEY]!["value"] as! String
         performSegue(withIdentifier: TO_TEMP_PLAY_SHOW, sender: token)
     }
     

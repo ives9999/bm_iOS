@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate {
+class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate {
 
     var _type: String = "coach"
     var _titleField: String = "name"
@@ -66,7 +66,7 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         searchTableView.dataSource = self
         searchTableView.delegate = self
         
-        searchTableView.register(TeamSubmitCell.self, forCellReuseIdentifier: "search_cell")
+        searchTableView.register(EditCell.self, forCellReuseIdentifier: "search_cell")
         
         refresh()
     }
@@ -220,8 +220,8 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
                 return ListCell()
             }
         } else if tableView == searchTableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? TeamSubmitCell {
-                cell.teamSubmitCellDelegate = self
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
+                cell.editCellDelegate = self
                 let searchRow = searchRows[indexPath.row]
                 //print(searchRow)
                 cell.forRow(indexPath: indexPath, row: searchRow)
@@ -451,7 +451,7 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         } else {
             row["show"] = "全部"
         }
-        replaceRows(TEAM_CITY_KEY, row)
+        replaceRows(CITY_KEY, row)
         searchTableView.reloadData()
     }
     
@@ -478,7 +478,7 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
     }
     func setArenasData(res: [Arena]) {
         //print(res)
-        var row = getDefinedRow(TEAM_ARENA_KEY)
+        var row = getDefinedRow(ARENA_KEY)
         var texts: [String] = [String]()
         arenas = res
         if arenas.count > 0 {
@@ -490,7 +490,7 @@ class ListVC: MyTableVC, ListCellDelegate, TeamSubmitCellDelegate, CitySelectDel
         } else {
             row["show"] = "全部"
         }
-        replaceRows(TEAM_ARENA_KEY, row)
+        replaceRows(ARENA_KEY, row)
         searchTableView.reloadData()
     }
     
