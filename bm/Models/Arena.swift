@@ -12,31 +12,20 @@ class Arena: SuperData {
     static let instance = Arena()
     
     let _sections: [String] = ["", "聯絡資訊", "所在地", "打球時間", "臨打說明", "其他說明"]
-    let _rows: [[Dictionary<String, String>]] = [
-        [
-            ["key": NAME_KEY]
-        ],
-        [
-            ["key": TEAM_LEADER_KEY],["key": MOBILE_KEY],["key": EMAIL_KEY]
-        ],
-        [
-            ["key": CITY_KEY],["key": ARENA_KEY]
-        ],
-        [
-            ["key": TEAM_DAYS_KEY],["key": TEAM_PLAY_START_KEY],["key": TEAM_PLAY_END_KEY]
-        ],
-        [
-            ["key": TEAM_TEMP_FEE_M_KEY],["key": TEAM_TEMP_FEE_F_KEY],["key": TEAM_TEMP_CONTENT_KEY]
-        ],
-        [
-            ["key": TEAM_BALL_KEY],["key": TEAM_DEGREE_KEY],["key": CHARGE_KEY],["key": CONTENT_KEY]
-        ]
+    let _rows: [[String]] = [
+    [NAME_KEY],
+    [TEAM_LEADER_KEY,MOBILE_KEY,EMAIL_KEY],
+    [CITY_KEY,ARENA_KEY],
+    [TEAM_DAYS_KEY,TEAM_PLAY_START_KEY,TEAM_PLAY_END_KEY],
+    [TEAM_TEMP_FEE_M_KEY,TEAM_TEMP_FEE_F_KEY,TEAM_TEMP_CONTENT_KEY],
+    [TEAM_BALL_KEY,TEAM_DEGREE_KEY,CHARGE_KEY,CONTENT_KEY]
     ]
     
     override init(){
         super.init()
         sections = _sections
         rows = _rows
+        initData()
     }
     required init(id: Int, name: String) {
         super.init(id: id, title: name, path: "", token: "")
@@ -89,17 +78,7 @@ class Arena: SuperData {
             data[key]!["show"] = "未提供"
             data[key]!["change"] = false
         }
-        for (section, value1) in rows.enumerated() {
-            for (row, value2) in value1.enumerated() {
-                let key: String = value2["key"]!
-                for (key1, _) in data {
-                    if key == key1 {
-                        data[key1]!["section"] = section
-                        data[key1]!["row"] = row
-                    }
-                }
-            }
-        }
+        setSectionAndRow()
         for (key, _) in data {
             data[key]!["key"] = key
         }

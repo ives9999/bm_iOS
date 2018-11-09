@@ -11,24 +11,14 @@ class Coach: SuperData {
     static let instance = Coach()
     
     var testData: [String: Any] = [String: Any]()
-    let _sections: [String] = ["", "聯絡資訊", "展示資訊", "地方與收費", "其他說明"]
+    let _sections: [String] = ["", "聯絡資訊", "展示資訊", "地區與收費", "其他說明"]
     
-    let _rows: [[Dictionary<String, String>]] = [
-        [
-            ["key": NAME_KEY]
-        ],
-        [
-            ["key": MOBILE_KEY],["key": EMAIL_KEY],["key": FB_KEY],["key": LINE_KEY]
-        ],
-        [
-            ["key": WEBSITE_KEY],["key": YOUTUBE_KEY]
-        ],
-        [
-            ["key": COACH_SENIORITY_KEY],["key": CITY_KEY]
-        ],
-        [
-            ["key": CHARGE_KEY],["key": COACH_LICENSE_KEY],["key": COACH_EXP_KEY],["key": COACH_FEAT_KEY],["key": CONTENT_KEY]
-        ]
+    let _rows: [[String]] = [
+        [NAME_KEY],
+        [MOBILE_KEY,EMAIL_KEY,FB_KEY,LINE_KEY],
+        [WEBSITE_KEY,YOUTUBE_KEY],
+        [COACH_SENIORITY_KEY,CITY_KEY],
+        [CHARGE_KEY,COACH_LICENSE_KEY,COACH_EXP_KEY,COACH_FEAT_KEY,CONTENT_KEY]
     ]
     
     override func initData() {
@@ -62,17 +52,7 @@ class Coach: SuperData {
             FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(named: "nophoto")!,"path":"","submit":false,"show":""]
             ]
         
-        for (section, value1) in rows.enumerated() {
-            for (row, value2) in value1.enumerated() {
-                let key: String = value2["key"]!
-                for (key1, _) in data {
-                    if key == key1 {
-                        data[key1]!["section"] = section
-                        data[key1]!["row"] = row
-                    }
-                }
-            }
-        }
+        setSectionAndRow()
         for (key, _) in data {
             data[key]!["key"] = key
             data[key]!["change"] = false
@@ -84,15 +64,16 @@ class Coach: SuperData {
     
     override init() {
         super.init()
-        self.initData()
         sections = _sections
         rows = _rows
+        initData()
     }
     
     override init(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") {
         super.init(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
         sections = _sections
         rows = _rows
+        initData()
     }
     
     override func listReset() {

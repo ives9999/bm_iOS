@@ -18,7 +18,7 @@ class SuperData {
     var vimeo: String
     var data: Dictionary<String, [String: Any]>
     var sections: [String]
-    var rows: [[Dictionary<String, String>]]
+    var rows: [[String]]
     
     //temp play
     var temp_play_data:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
@@ -42,7 +42,7 @@ class SuperData {
         self.youtube = ""
         self.data = Dictionary<String, [String: Any]>()
         self.sections = [String]()
-        self.rows = [[Dictionary<String, String>]]()
+        self.rows = [[String]]()
     }
     
     init(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") {
@@ -55,12 +55,26 @@ class SuperData {
         self.youtube = youtube
         self.data = Dictionary<String, [String: Any]>()
         self.sections = [String]()
-        self.rows = [[Dictionary<String, String>]]()
+        self.rows = [[String]]()
     }
     
     func neverFill() {
         for (key, _) in data {
             data[key]!["show"] = "未提供"
+        }
+    }
+    
+    func setSectionAndRow() {
+        for (section, value1) in rows.enumerated() {
+            for (idx, key) in value1.enumerated() {
+                for (key1, _) in data {
+                    if key == key1 {
+                        data[key1]!["section"] = section
+                        data[key1]!["row"] = idx
+                        break
+                    }
+                }
+            }
         }
     }
     

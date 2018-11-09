@@ -11,25 +11,13 @@ import Foundation
 class Team: SuperData {
     static let instance = Team()
     let _sections: [String] = ["", "聯絡資訊", "所在地", "打球時間", "臨打說明", "其他說明"]
-    let _rows: [[Dictionary<String, String>]] = [
-        [
-            ["key": NAME_KEY]
-        ],
-        [
-            ["key": TEAM_LEADER_KEY],["key": MOBILE_KEY],["key": EMAIL_KEY]
-        ],
-        [
-            ["key": CITY_KEY],["key": ARENA_KEY]
-        ],
-        [
-            ["key": TEAM_DAYS_KEY],["key": TEAM_PLAY_START_KEY],["key": TEAM_PLAY_END_KEY]
-        ],
-        [
-            ["key": TEAM_TEMP_FEE_M_KEY],["key": TEAM_TEMP_FEE_F_KEY],["key": TEAM_TEMP_CONTENT_KEY]
-        ],
-        [
-            ["key": TEAM_BALL_KEY],["key": TEAM_DEGREE_KEY],["key": CHARGE_KEY],["key": CONTENT_KEY]
-        ]
+    let _rows: [[String]] = [
+        [NAME_KEY],
+        [TEAM_LEADER_KEY,MOBILE_KEY,EMAIL_KEY],
+        [CITY_KEY,ARENA_KEY],
+        [TEAM_DAYS_KEY,TEAM_PLAY_START_KEY,TEAM_PLAY_END_KEY],
+        [TEAM_TEMP_FEE_M_KEY,TEAM_TEMP_FEE_F_KEY,TEAM_TEMP_CONTENT_KEY],
+        [TEAM_BALL_KEY,TEAM_DEGREE_KEY,CHARGE_KEY,CONTENT_KEY]
     ]
 //    var data:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
     var data1:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
@@ -54,18 +42,21 @@ class Team: SuperData {
     
     override init() {
         super.init()
-        self.initData()
-        self.initTempPlayData()
         sections = _sections
         rows = _rows
+        self.initData()
+        self.initTempPlayData()
     }
     
     override init(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") {
         super.init(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
         sections = _sections
         rows = _rows
+        initData()
     }
     override func listReset() {
+        sections = _sections
+        rows = _rows
         initData()
     }
     
@@ -113,19 +104,9 @@ class Team: SuperData {
             data2[key]!["change"] = false
         }
         
-        for (section, value1) in rows.enumerated() {
-            for (row, value2) in value1.enumerated() {
-                let key: String = value2["key"]!
-                for (key1, _) in data2 {
-                    if key == key1 {
-                        data2[key1]!["section"] = section
-                        data2[key1]!["row"] = row
-                    }
-                } 
-            }
-        }
         data.merge(data1)
         data.merge(data2)
+        setSectionAndRow()
         _initData2()
         //print("2. \(data["name"])")
         
