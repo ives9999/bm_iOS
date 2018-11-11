@@ -103,7 +103,8 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         searchTableView.dataSource = self
         searchTableView.delegate = self
         
-        searchTableView.register(EditCell.self, forCellReuseIdentifier: "search_cell")
+        let editCellNib = UINib(nibName: "EditCell", bundle: nil)
+        searchTableView.register(editCellNib, forCellReuseIdentifier: "search_cell")
     }
     
     func setIden(item: String, titleField: String) {
@@ -384,6 +385,10 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     func setTextField(iden: String, value: String) {
         //print(value)
         keyword = value
+    }
+    
+    func clear(indexPath: IndexPath) {
+        
     }
     
     private func testLabelReset() {

@@ -50,7 +50,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         Global.instance.setupTabbar(self)
         Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
-        tableView.register(EditCell.self, forCellReuseIdentifier: "cell")
+        let cellNib = UINib(nibName: "EditCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "cell")
         submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
         submitBtn.layer.cornerRadius = 12
 //        citys.append(City(id: 218, name: ""))
@@ -100,6 +101,10 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         return headerView
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
@@ -140,7 +145,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
                 }
             }
         } else {
-            cell.generalTextField.becomeFirstResponder()
+            cell.editText.becomeFirstResponder()
         }
     }
     
@@ -289,6 +294,9 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         keyword = value
     }
     func setSwitch(indexPath: IndexPath, value: Bool) {
+    }
+    func clear(indexPath: IndexPath) {
+        
     }
     
     func setDegreeData(res: [Degree]) {

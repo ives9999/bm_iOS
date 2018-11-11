@@ -78,10 +78,16 @@ class SuperData {
         }
     }
     
-    func updateCity(_ city: City) {
-        data[CITY_KEY]!["value"] = city.id
-        data[CITY_KEY]!["show"] = city.name
-        data[CITY_KEY]!["sender"] = city.id
+    func updateCity(_ city: City? = nil) {
+        if city != nil {
+            data[CITY_KEY]!["value"] = city!.id
+            data[CITY_KEY]!["show"] = city!.name
+            data[CITY_KEY]!["sender"] = city!.id
+        } else {
+            data[CITY_KEY]!["value"] = 0
+            data[CITY_KEY]!["show"] = ""
+            data[CITY_KEY]!["sender"] = 0
+        }
     }
     
     func updateCharge(_ content: String? = nil) {
@@ -139,9 +145,9 @@ class SuperData {
     
     func listReset() {}
     func initData() {}
-    func updateArena(_ arena: Arena) {}
-    func updateDays(_ days: [Int]) {}
-    func updateDegree(_ degrees: [Degree]) {}
+    func updateArena(_ arena: Arena?=nil) {}
+    func updateDays(_ days: [Int]?=nil) {}
+    func updateDegree(_ degrees: [Degree]?=nil) {}
     func updateInterval(_ _startTime: String? = nil, _ _endTime: String? = nil) {}
     func updateOpenTime(_ time: String? = nil) {}
     func updateCloseTime(_ time: String? = nil) {}

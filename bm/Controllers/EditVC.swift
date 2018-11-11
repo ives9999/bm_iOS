@@ -72,7 +72,8 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
         submitBtn.layer.cornerRadius = 12
         
-        tableView.register(EditCell.self, forCellReuseIdentifier: "cell")
+        let editCellNib = UINib(nibName: "EditCell", bundle: nil)
+        tableView.register(editCellNib, forCellReuseIdentifier: "cell")
         
         imagePicker.delegate = self
         featuredView.gallery = imagePicker
@@ -108,6 +109,10 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         return count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
@@ -118,7 +123,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         //if indexPath.section == 0 && indexPath.row == 0 {
             //print(row)
         //}
-        cell.forRow(indexPath: indexPath, row: row)
+        cell.forRow(indexPath: indexPath, row: row, isClear: true)
         
         return cell
     }
@@ -140,7 +145,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                 }
             }
         } else {
-            cell.generalTextField.becomeFirstResponder()
+            cell.editText.becomeFirstResponder()
         }
     }
     
@@ -438,5 +443,108 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         //print(model.data)
     }
     func setSwitch(indexPath: IndexPath, value: Bool) {
+    }
+    
+    func clear(indexPath: IndexPath) {
+        let dataRow = _getRowByindexPath(indexPath: indexPath)
+        if dataRow["atype"] != nil && (dataRow["atype"] as! UITableViewCellAccessoryType == .disclosureIndicator) {
+            if dataRow["key"] != nil {
+                let key = dataRow["key"] as! String
+                //print(key)
+                if (key == CITY_KEY) {
+                    updateCity()
+                } else if (key == ARENA_KEY) {
+                    updateArena()
+                } else if (key == TEAM_DAYS_KEY) {
+                    updateDays()
+                } else if (key == TEAM_PLAY_START_KEY || key == TEAM_PLAY_END_KEY) {
+                    updateTime(type: key, time:nil)
+                } else if (key == TEAM_DEGREE_KEY) {
+                    updateDegree()
+                } else if (key == TEAM_TEMP_CONTENT_KEY || key == CHARGE_KEY || key == CONTENT_KEY) {
+                    updateContent(type: key, content:nil)
+                }
+                model.data[key]!["change"] = true
+            }
+        }
+    }
+    
+    func updateCity(citys: [City]?=nil) {
+        if (citys != nil && (citys?.count)! > 0) {
+            let city = citys![0]
+            model.updateCity(city)
+        } else {
+            model.updateCity(nil)
+        }
+    }
+    
+    func updateArena(arenas: [Arena]?=nil) {
+        if (arenas != nil && (arenas?.count)! > 0) {
+            let id = arenas![0].id
+            let name = arenas![0].title
+            let arena = Arena(id: id, name: name)
+            model.updateArena(arena)
+        } else {
+            model.updateArena(nil)
+        }
+    }
+    
+    func updateDays(days: [Int]? = nil) {
+        if (days != nil && (days?.count)! > 0) {
+            model.updateDays(days!)
+        } else {
+            model.updateDays(nil)
+        }
+    }
+    
+    func updateTime(type: String, time: String?=nil) {
+        if (time != nil) {
+            switch (type) {
+            case TEAM_PLAY_START_KEY: model.updatePlayStartTime(time)
+                break
+            case TEAM_PLAY_END_KEY: model.updatePlayEndTime(time)
+                break
+            default:
+                model.updatePlayStartTime(time)
+            }
+        } else {
+            switch (type) {
+            case TEAM_PLAY_START_KEY: model.updatePlayStartTime()
+                break
+            case TEAM_PLAY_END_KEY:
+                model.updatePlayEndTime()
+                break
+            default:
+                model.updatePlayStartTime(time)
+            }
+        }
+    }
+    
+    func updateDegree(degrees: [Degree]?=nil) {
+        if (degrees != nil && (degrees?.count)! > 0) {
+            model.updateDegree(degrees!)
+        } else {
+            model.updateDegree(nil)
+        }
+    }
+    
+    func updateContent(type: String, content: String?=nil) {
+        if (content != nil) {
+            if (type == TEAM_TEMP_CONTENT_KEY) {
+                model.updateTempContent(content)
+            } else if (type == CHARGE_KEY) {
+                model.updateCharge(content)
+            } else if (type == CONTENT_KEY) {
+                model.updateContent(content)
+            }
+        } else {
+            if (type == TEAM_TEMP_CONTENT_KEY) {
+                model.updateTempContent()
+            } else if (type == CHARGE_KEY) {
+                model.updateCharge()
+            } else if (type == CONTENT_KEY) {
+                model.updateContent()
+            }
+        }
     }
 }

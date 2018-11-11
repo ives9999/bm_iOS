@@ -1,9 +1,9 @@
 //
-//  TeamSubmitCell.swift
+//  EditCell.swift
 //  bm
 //
-//  Created by ives on 2017/11/23.
-//  Copyright © 2017年 bm. All rights reserved.
+//  Created by ives on 2018/11/10.
+//  Copyright © 2018 bm. All rights reserved.
 //
 
 import UIKit
@@ -11,84 +11,71 @@ import UIKit
 protocol EditCellDelegate {
     func setTextField(iden: String, value: String)
     func setSwitch(indexPath: IndexPath, value: Bool)
+    func clear(indexPath: IndexPath)
 }
 
 class EditCell: SuperCell, UITextFieldDelegate {
     
-    var editCellDelegate: EditCellDelegate?
-    var generalTextField: SuperTextField!
-    var generalSwitch: SuperSwitch!
+    @IBOutlet weak var titleLbl: SuperLabel!
+    @IBOutlet weak var detailLbl: SuperLabel!
+    @IBOutlet weak var clearBtn: SuperButton!
+    @IBOutlet weak var moreImageView: UIImageView!
+    @IBOutlet weak var editText: SuperTextField!
+    @IBOutlet weak var onoff: SuperSwitch!
+    
     var iden: String = ""
+    var editCellDelegate: EditCellDelegate?
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        titleLbl.textAlignment = NSTextAlignment.left
+        detailLbl.textAlignment = NSTextAlignment.right
+        editText.delegate = self
+        onoff.addTarget(self, action: #selector(switchDidValueChanged(sender:)), for: .valueChanged)
+        clearBtn.addTarget(self, action: #selector(clearBtnPressed(sender:)), for: .touchUpInside)
+    }
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
-        
-        generalTextField = SuperTextField(frame: CGRect.zero)
-        contentView.addSubview(generalTextField)
-        generalTextField.isHidden = true
-        
-        generalSwitch = SuperSwitch(frame: .zero)
-        contentView.addSubview(generalSwitch)
-        generalSwitch.isHidden = true
-    }
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
-        let yPadding: CGFloat = 5
-        let txtWidth: CGFloat = 250
-        let txtHeight: CGFloat = bounds.height - 10
-        let x = bounds.width - txtWidth - 18
-        let fullTextFieldFrame: CGRect = CGRect(x: x, y: yPadding, width: txtWidth, height: txtHeight)
-        generalTextField.frame = fullTextFieldFrame
-        
-        generalSwitch.frame = CGRect(x: bounds.width-70, y: 7, width: 40, height: 20)
-        
-    }
-    
-    func forRow(indexPath:IndexPath, row: [String: Any]) {
+    func forRow(indexPath:IndexPath, row: [String: Any], isClear: Bool=false) {
         //print(row)
-        generalTextField.delegate = self
         //generalTextField.tag = row["idx"] as! Int
+        clearBtn.isHidden = !isClear
+        clearBtn.indexPath = indexPath
         iden = row["key"] as! String
         
         if row["text_field"] != nil && (row["text_field"] as! Bool) {
-            detailTextLabel?.text = ""
-            generalTextField.isHidden = false
-            generalSwitch.isHidden = true
+            //detailLbl.text = ""
+            editText.isHidden = false
+            onoff.isHidden = true
+            moreImageView.isHidden = true
             if row["keyboardType"] != nil {
                 let pad: UIKeyboardType = row["keyboardType"] as! UIKeyboardType
-                generalTextField.keyboardType = pad
+                editText.keyboardType = pad
             }
             if row["hint"] != nil {
-                generalTextField.placeholder(row["hint"] as! String)
+                editText.placeholder(row["hint"] as! String)
             }
             //print(iden)
             if row["show"] != nil {
-                generalTextField.text = (row["show"] as! String)
+                editText.text = (row["show"] as! String)
             }
-            accessoryType = UITableViewCellAccessoryType.none
         }
         if row["switch"] != nil && (row["switch"] as! Bool) {
-            generalTextField.isHidden = true
-            generalSwitch.isHidden = false
-            generalSwitch.indexPath = indexPath
-            generalSwitch.addTarget(self, action: #selector(switchDidValueChanged(sender:)), for: .valueChanged)
+            editText.isHidden = true
+            onoff.isHidden = false
+            onoff.indexPath = indexPath
         }
         if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
-            generalTextField.isHidden = true
-            generalSwitch.isHidden = true
+            editText.isHidden = true
+            onoff.isHidden = true
+            detailLbl.isHidden = false
             if row["show"] != nil {
-                detailTextLabel?.text = (row["show"] as! String)
+                detailLbl.text = (row["show"] as! String)
             } else {
-                detailTextLabel?.text = ""
+                detailLbl.text = ""
             }
-            accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            moreImageView.isHidden = false
         }
-        textLabel?.text = (row["ch"] as! String)
+        titleLbl.text = (row["ch"] as! String)
         setNeedsLayout()
     }
     
@@ -103,9 +90,13 @@ class EditCell: SuperCell, UITextFieldDelegate {
         editCellDelegate?.setSwitch(indexPath: _sender.indexPath!, value: _sender.isOn)
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @objc func clearBtnPressed(sender: UIButton) {
+        let _sender = sender as! SuperButton
+        //print(_sender.indexPath?.section)
+        //print(_sender.indexPath?.row)
+        editText.text = ""
+        detailLbl.text = ""
+        editCellDelegate?.clear(indexPath: _sender.indexPath!)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -113,5 +104,5 @@ class EditCell: SuperCell, UITextFieldDelegate {
 
         // Configure the view for the selected state
     }
-
+    
 }

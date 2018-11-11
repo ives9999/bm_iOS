@@ -195,28 +195,43 @@ class Team: SuperData {
         updateContent()
     }
     
-    override func updateCity(_ city: City) {
+    override func updateCity(_ city: City?) {
         super.updateCity(city)
         setArenaSender()
     }
-    override func updateArena(_ arena: Arena) {
-        data[ARENA_KEY]!["value"] = arena.id
-        data[ARENA_KEY]!["show"] = arena.title
+    override func updateArena(_ arena: Arena?) {
+        if arena != nil {
+            data[ARENA_KEY]!["value"] = arena!.id
+            data[ARENA_KEY]!["show"] = arena!.title
+        } else {
+            data[ARENA_KEY]!["value"] = 0
+            data[ARENA_KEY]!["show"] = ""
+        }
         setArenaSender()
     }
-    override func updateDays(_ days: [Int]) {
-        data[TEAM_DAYS_KEY]!["value"] = days
-        daysShow()
+    override func updateDays(_ days: [Int]?) {
+        if days != nil {
+            data[TEAM_DAYS_KEY]!["value"] = days
+            daysShow()
+        } else {
+            data[TEAM_DAYS_KEY]!["value"] = [Int]()
+            data[TEAM_DAYS_KEY]!["show"] = ""
+        }
         setDaysSender()
     }
-    override func updateDegree(_ degrees: [Degree]) {
-        var res: [String] = [String]()
-        for degree in degrees {
-            res.append(DEGREE.DBValue(degree.value))
+    override func updateDegree(_ degrees: [Degree]?) {
+        if degrees != nil {
+            var res: [String] = [String]()
+            for degree in degrees! {
+                res.append(DEGREE.DBValue(degree.value))
+            }
+            data[TEAM_DEGREE_KEY]!["value"] = res
+            setDegreeSender(degrees!)
+        } else {
+            data[TEAM_DEGREE_KEY]!["value"] = [String]()
+            setDegreeSender([Degree]())
         }
-        data[TEAM_DEGREE_KEY]!["value"] = res
         degreeShow()
-        setDegreeSender(degrees)
     }
     override func updatePlayStartTime(_ time: String? = nil) {
         if time != nil {
@@ -303,7 +318,11 @@ class Team: SuperData {
             let text: String = type.rawValue
             res.append(text)
         }
-        data[TEAM_DEGREE_KEY]!["show"] = res.joined(separator: ", ")
+        if res.count > 0 {
+            data[TEAM_DEGREE_KEY]!["show"] = res.joined(separator: ", ")
+        } else {
+            data[TEAM_DEGREE_KEY]!["show"] = ""
+        }
     }
     func tempContentShow(_ length: Int=15) {
         var text: String = data[TEAM_TEMP_CONTENT_KEY]!["value"] as! String

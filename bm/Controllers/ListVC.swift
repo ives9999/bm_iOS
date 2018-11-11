@@ -66,7 +66,8 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         searchTableView.dataSource = self
         searchTableView.delegate = self
         
-        searchTableView.register(EditCell.self, forCellReuseIdentifier: "search_cell")
+        let editCellNib = UINib(nibName: "EditCell", bundle: nil)
+        searchTableView.register(editCellNib, forCellReuseIdentifier: "search_cell")
         
         refresh()
     }
@@ -431,6 +432,10 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     
     func setTextField(iden: String, value: String) {
         keyword = value
+    }
+    
+    func clear(indexPath: IndexPath) {
+        
     }
     
     func setCityData(id: Int, name: String) {
