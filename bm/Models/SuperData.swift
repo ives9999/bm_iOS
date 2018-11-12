@@ -93,6 +93,8 @@ class SuperData {
     func updateCharge(_ content: String? = nil) {
         if content != nil {
             data[CHARGE_KEY]!["value"] = content
+        } else {
+            data[CHARGE_KEY]!["value"] = ""
         }
         chargeShow()
         setChargeSender()
@@ -100,6 +102,8 @@ class SuperData {
     func updateContent(_ content: String? = nil) {
         if content != nil {
             data[CONTENT_KEY]!["value"] = content
+        } else {
+            data[CONTENT_KEY]!["value"] = ""
         }
         contentShow()
         setContentSender()
@@ -107,13 +111,31 @@ class SuperData {
     
     func chargeShow(_ length: Int=15) {
         var text: String = data[CHARGE_KEY]!["value"] as! String
-        text = text.truncate(length: length)
+        if text.count > 0 {
+            text = text.truncate(length: length)
+        }
         data[CHARGE_KEY]!["show"] = text
     }
     func contentShow(_ length: Int=15) {
         var text: String = data[CONTENT_KEY]!["value"] as! String
-        text = text.truncate(length: length)
+        if text.count > 0 {
+            text = text.truncate(length: length)
+        }
         data[CONTENT_KEY]!["show"] = text
+    }
+    func setChargeSender() {
+        var res: [String: Any] = [String: Any]()
+        let text: String = data[CHARGE_KEY]!["value"] as! String
+        res["text"] = text
+        res["type"] = TEXT_INPUT_TYPE.charge
+        data[CHARGE_KEY]!["sender"] = res
+    }
+    func setContentSender() {
+        var res: [String: Any] = [String: Any]()
+        let text: String = data[CONTENT_KEY]!["value"] as! String
+        res["text"] = text
+        res["type"] = TEXT_INPUT_TYPE.team
+        data[CONTENT_KEY]!["sender"] = res
     }
     
     func mobileShow(_ _mobile: String? = nil) {
@@ -134,15 +156,6 @@ class SuperData {
         data[TEL_KEY]!["show"] = tel
     }
     
-    func setChargeSender() {
-        var res: [String: Any] = [String: Any]()
-        let text: String = data[CHARGE_KEY]!["value"] as! String
-        res["text"] = text
-        res["type"] = TEXT_INPUT_TYPE.charge
-        data[CHARGE_KEY]!["sender"] = res
-    }
-    func setContentSender() {}
-    
     func listReset() {}
     func initData() {}
     func updateArena(_ arena: Arena?=nil) {}
@@ -155,6 +168,8 @@ class SuperData {
     func updatePlayEndTime(_ time: String? = nil) {}
     func updateTempContent(_ content: String? = nil) {}
     func updateNearDate(_ n1: String? = nil, _ n2: String? = nil) {}
+    func playStartTimeShow() {}
+    func playEndTimeShow() {}
     func feeShow() {}
     func makeSubmitArr() -> [String: Any] {
         return [String: Any]()

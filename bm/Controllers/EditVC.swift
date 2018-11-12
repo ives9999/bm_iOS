@@ -453,6 +453,8 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                 //print(key)
                 if (key == CITY_KEY) {
                     updateCity()
+                    updateArena()
+                    tableView.reloadData()
                 } else if (key == ARENA_KEY) {
                     updateArena()
                 } else if (key == TEAM_DAYS_KEY) {
@@ -474,7 +476,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             let city = citys![0]
             model.updateCity(city)
         } else {
-            model.updateCity(nil)
+            model.updateCity()
         }
     }
     
@@ -485,7 +487,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             let arena = Arena(id: id, name: name)
             model.updateArena(arena)
         } else {
-            model.updateArena(nil)
+            model.updateArena()
         }
     }
     
@@ -493,7 +495,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         if (days != nil && (days?.count)! > 0) {
             model.updateDays(days!)
         } else {
-            model.updateDays(nil)
+            model.updateDays()
         }
     }
     
@@ -524,7 +526,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         if (degrees != nil && (degrees?.count)! > 0) {
             model.updateDegree(degrees!)
         } else {
-            model.updateDegree(nil)
+            model.updateDegree()
         }
     }
     

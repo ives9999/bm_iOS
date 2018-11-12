@@ -257,13 +257,9 @@ class DataService {
                 }
                 
                 if type == "team" {
-                    self.model.updatePlayStartTime()
-                    self.model.updatePlayEndTime()
-                    self.model.updateTempContent()
-                    self.model.updateCharge()
-                    self.model.updateContent()
+                    self.model.playStartTimeShow()
+                    self.model.playEndTimeShow()
                     self.model.updateNearDate()
-                    self.model.feeShow()
                 }
                 //print(self.model.data)
                 

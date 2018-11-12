@@ -195,8 +195,11 @@ class Team: SuperData {
         updateContent()
     }
     
-    override func updateCity(_ city: City?) {
+    override func updateCity(_ city: City?=nil) {
         super.updateCity(city)
+        if city == nil {
+            data[ARENA_KEY]!["value"] = 0
+        }
         setArenaSender()
     }
     override func updateArena(_ arena: Arena?) {
@@ -226,27 +229,28 @@ class Team: SuperData {
                 res.append(DEGREE.DBValue(degree.value))
             }
             data[TEAM_DEGREE_KEY]!["value"] = res
-            setDegreeSender(degrees!)
         } else {
             data[TEAM_DEGREE_KEY]!["value"] = [String]()
-            setDegreeSender([Degree]())
         }
         degreeShow()
+        setDegreeSender()
     }
     override func updatePlayStartTime(_ time: String? = nil) {
         if time != nil {
             data[TEAM_PLAY_START_KEY]!["value"] = time
+        } else {
+            data[TEAM_PLAY_START_KEY]!["value"] = ""
         }
-        let tmp: String = data[TEAM_PLAY_START_KEY]!["value"] as! String
-        data[TEAM_PLAY_START_KEY]!["show"] = tmp.noSec()
+        playStartTimeShow()
         setPlayStartTimeSender()
     }
     override func updatePlayEndTime(_ time: String? = nil) {
         if time != nil {
             data[TEAM_PLAY_END_KEY]!["value"] = time
+        } else {
+            data[TEAM_PLAY_END_KEY]!["value"] = ""
         }
-        let tmp: String = data[TEAM_PLAY_END_KEY]!["value"] as! String
-        data[TEAM_PLAY_END_KEY]!["show"] = tmp.noSec()
+        playEndTimeShow()
         setPlayEndTimeSender()
     }
     override func updateInterval(_ _startTime: String? = nil, _ _endTime: String? = nil) {
@@ -264,6 +268,8 @@ class Team: SuperData {
     override func updateTempContent(_ content: String? = nil) {
         if content != nil {
             data[TEAM_TEMP_CONTENT_KEY]!["value"] = content
+        } else {
+            data[TEAM_TEMP_CONTENT_KEY]!["value"] = ""
         }
         tempContentShow()
         setTempContentSender()
@@ -326,8 +332,25 @@ class Team: SuperData {
     }
     func tempContentShow(_ length: Int=15) {
         var text: String = data[TEAM_TEMP_CONTENT_KEY]!["value"] as! String
-        text = text.truncate(length: length)
+        if text.count > 0 {
+            text = text.truncate(length: length)
+        }
         data[TEAM_TEMP_CONTENT_KEY]!["show"] = text
+    }
+    
+    override func playStartTimeShow() {
+        var time = data[TEAM_PLAY_START_KEY]!["value"] as! String
+        if time.count > 0 {
+            time = time.noSec()
+        }
+        data[TEAM_PLAY_START_KEY]!["show"] = time
+    }
+    override func playEndTimeShow() {
+        var time = data[TEAM_PLAY_END_KEY]!["value"] as! String
+        if time.count > 0 {
+            time = time.noSec()
+        }
+        data[TEAM_PLAY_END_KEY]!["show"] = time
     }
     
     override func feeShow() {
@@ -349,23 +372,33 @@ class Team: SuperData {
     func setDaysSender() {
         data[TEAM_DAYS_KEY]!["sender"] = data[TEAM_DAYS_KEY]!["value"]
     }
-    func setDegreeSender(_ degrees: [Degree]) {
-        data[TEAM_DEGREE_KEY]!["sender"] = degrees
+    func setDegreeSender() {
+        let degrees: [String] = data[TEAM_DEGREE_KEY]!["value"] as! [String]
+        var res: [Degree] = [Degree]()
+        for degree in degrees {
+            let D = DEGREE.enumFromString(string: degree)
+            res.append(Degree(value: D, text: D.rawValue))
+        }
+        data[TEAM_DEGREE_KEY]!["sender"] = res
     }
     func setPlayStartTimeSender() {
         var res: [String: Any] = [String: Any]()
         var time: String = data[TEAM_PLAY_START_KEY]!["value"] as! String
-        time = time.noSec()
-        res["type"] = SELECT_TIME_TYPE.play_start
-        res["time"] = time
+        if time.count > 0 {
+            time = time.noSec()
+            res["type"] = SELECT_TIME_TYPE.play_start
+            res["time"] = time
+        }
         data[TEAM_PLAY_START_KEY]!["sender"] = res
     }
     func setPlayEndTimeSender() {
         var res: [String: Any] = [String: Any]()
         var time: String = data[TEAM_PLAY_END_KEY]!["value"] as! String
-        time = time.noSec()
-        res["type"] = SELECT_TIME_TYPE.play_end
-        res["time"] = time
+        if time.count > 0 {
+            time = time.noSec()
+            res["type"] = SELECT_TIME_TYPE.play_end
+            res["time"] = time
+        }
         data[TEAM_PLAY_END_KEY]!["sender"] = res
     }
     func setTempContentSender() {
@@ -374,13 +407,6 @@ class Team: SuperData {
         res["text"] = text
         res["type"] = TEXT_INPUT_TYPE.temp_play
         data[TEAM_TEMP_CONTENT_KEY]!["sender"] = res
-    }
-    override func setContentSender() {
-        var res: [String: Any] = [String: Any]()
-        let text: String = data[CONTENT_KEY]!["value"] as! String
-        res["text"] = text
-        res["type"] = TEXT_INPUT_TYPE.team
-        data[CONTENT_KEY]!["sender"] = res
     }
     
     override func makeSubmitArr() -> [String: Any] {
