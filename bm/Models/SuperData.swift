@@ -19,6 +19,9 @@ class SuperData {
     var data: Dictionary<String, [String: Any]>
     var sections: [String]
     var rows: [[String]]
+    var textKeys:[String] = [String]()
+    var timeKeys:[String] = [String]()
+    var cat_id: Int = 21
     
     //temp play
     var temp_play_data:Dictionary<String, [String: Any]> = Dictionary<String, [String: Any]>()
@@ -90,54 +93,6 @@ class SuperData {
         }
     }
     
-    func updateCharge(_ content: String? = nil) {
-        if content != nil {
-            data[CHARGE_KEY]!["value"] = content
-        } else {
-            data[CHARGE_KEY]!["value"] = ""
-        }
-        chargeShow()
-        setChargeSender()
-    }
-    func updateContent(_ content: String? = nil) {
-        if content != nil {
-            data[CONTENT_KEY]!["value"] = content
-        } else {
-            data[CONTENT_KEY]!["value"] = ""
-        }
-        contentShow()
-        setContentSender()
-    }
-    
-    func chargeShow(_ length: Int=15) {
-        var text: String = data[CHARGE_KEY]!["value"] as! String
-        if text.count > 0 {
-            text = text.truncate(length: length)
-        }
-        data[CHARGE_KEY]!["show"] = text
-    }
-    func contentShow(_ length: Int=15) {
-        var text: String = data[CONTENT_KEY]!["value"] as! String
-        if text.count > 0 {
-            text = text.truncate(length: length)
-        }
-        data[CONTENT_KEY]!["show"] = text
-    }
-    func setChargeSender() {
-        var res: [String: Any] = [String: Any]()
-        let text: String = data[CHARGE_KEY]!["value"] as! String
-        res["text"] = text
-        res["type"] = TEXT_INPUT_TYPE.charge
-        data[CHARGE_KEY]!["sender"] = res
-    }
-    func setContentSender() {
-        var res: [String: Any] = [String: Any]()
-        let text: String = data[CONTENT_KEY]!["value"] as! String
-        res["text"] = text
-        res["type"] = TEXT_INPUT_TYPE.team
-        data[CONTENT_KEY]!["sender"] = res
-    }
-    
     func mobileShow(_ _mobile: String? = nil) {
         var mobile = _mobile
         if _mobile == nil {
@@ -156,23 +111,179 @@ class SuperData {
         data[TEL_KEY]!["show"] = tel
     }
     
+    func initTimeData() {
+        for key in timeKeys {
+            updateTime(key: key)
+        }
+    }
+    
+    func updateText(key: String, text: String?=nil) {
+        var _content = ""
+        if (text != nil) {
+            _content = text!
+        }
+        data[key]!["value"] = _content
+        textShow(key: key)
+        setTextSender(key: key)
+    }
+    
+    func initTextData() {
+        for key in textKeys {
+            updateText(key: key)
+        }
+    }
+    
+    func textShow(key: String, length: Int=12) {
+        var text: String = data[key]!["value"] as! String
+        if (text.count > 0) {
+            text = text.truncate(length: length)
+        }
+        data[key]!["show"] = text
+    }
+    
+    func setTextSender(key: String) {
+        var res: [String: Any] = [String: Any]()
+        let text: String = data[key]!["value"] as! String
+        let type = contentKey2Type(key: key)
+        res["text"] = text
+        res["type"] = type
+        data[key]!["sender"] = res
+    }
+    
+    func setAllTextSender() {
+        for key in textKeys {
+            setTextSender(key: key)
+        }
+    }
+    
+    func updateTime(key: String, _ time: String? = nil) {
+        if time != nil {
+            data[key]!["value"] = time
+        } else {
+            data[key]!["value"] = ""
+        }
+        timeShow(key: key)
+        setTimeSender(key: key)
+    }
+    
+    func timeShow(key: String) {
+        var time = data[key]!["value"] as! String
+        if time.count > 0 {
+            time = time.noSec()
+        }
+        data[key]!["show"] = time
+    }
+    
+    func setTimeSender(key: String) {
+        var res: [String: Any] = [String: Any]()
+        var time: String = data[key]!["value"] as! String
+        time = time.noSec()
+        let type = timeKey2Type(key: key)
+        res["type"] = type
+        res["time"] = time
+        data[key]!["sender"] = res
+    }
+    
+    func initTimeShow() {
+        for key in timeKeys {
+            timeShow(key: key)
+        }
+    }
+    
+    func contentKey2Type(key: String)-> TEXT_INPUT_TYPE {
+        var type = TEXT_INPUT_TYPE.content
+        switch (key) {
+        case TEAM_TEMP_CONTENT_KEY:
+            type = TEXT_INPUT_TYPE.temp_play
+            break
+        case CHARGE_KEY:
+            type = TEXT_INPUT_TYPE.charge
+            break
+        case CONTENT_KEY:
+            type = TEXT_INPUT_TYPE.content
+            break
+        case COACH_EXP_KEY:
+            type = TEXT_INPUT_TYPE.exp
+            break
+        case COACH_FEAT_KEY:
+            type = TEXT_INPUT_TYPE.feat
+            break
+        case COACH_LICENSE_KEY:
+            type = TEXT_INPUT_TYPE.license
+            break
+        default:
+            type = .content
+        }
+        return type
+    }
+    
+    func timeKey2Type(key: String)-> SELECT_TIME_TYPE {
+        var type = SELECT_TIME_TYPE.play_start
+        switch (key) {
+        case TEAM_PLAY_START_KEY:
+            type = .play_start
+            break
+        case TEAM_PLAY_END_KEY:
+            type = .play_end
+            break
+        default:
+            type = .play_start
+        }
+        return type
+    }
+    
     func listReset() {}
     func initData() {}
     func updateArena(_ arena: Arena?=nil) {}
     func updateDays(_ days: [Int]?=nil) {}
     func updateDegree(_ degrees: [Degree]?=nil) {}
     func updateInterval(_ _startTime: String? = nil, _ _endTime: String? = nil) {}
-    func updateOpenTime(_ time: String? = nil) {}
-    func updateCloseTime(_ time: String? = nil) {}
-    func updatePlayStartTime(_ time: String? = nil) {}
-    func updatePlayEndTime(_ time: String? = nil) {}
-    func updateTempContent(_ content: String? = nil) {}
     func updateNearDate(_ n1: String? = nil, _ n2: String? = nil) {}
-    func playStartTimeShow() {}
-    func playEndTimeShow() {}
     func feeShow() {}
+    
     func makeSubmitArr() -> [String: Any] {
-        return [String: Any]()
+        var isAnyOneChange: Bool = false
+        var res: [String: Any] = [String: Any]()
+        for (key, row) in data {
+            var isSubmit: Bool = false
+            if row["submit"] != nil {
+                isSubmit = row["submit"] as! Bool
+            }
+            var isChange: Bool = false
+            if row["change"] != nil {
+                isChange = row["change"] as! Bool
+            }
+            if isSubmit && isChange {
+                res[key] = row["value"]
+                if !isAnyOneChange {
+                    isAnyOneChange = true
+                }
+            }
+        }
+        if !isAnyOneChange {
+            return res
+        }
+        res[SLUG_KEY] = data[NAME_KEY]!["value"]
+        res[CREATED_ID_KEY] = Member.instance.id
+        var id: Int = -1
+        if data[ID_KEY]!["value"] != nil {
+            id = data[ID_KEY]!["value"] as! Int
+        }
+        if id < 0 {
+            res[MANAGER_ID_KEY] = Member.instance.id
+            res[CHANNEL_KEY] = "bm"
+            //res["type"] = "team"
+            let cat_id: [Int] = [self.cat_id]
+            res[CAT_KEY] = cat_id
+        } else {
+            res[ID_KEY] = id
+        }
+        for (key, value) in transferPair {
+            res[value] = res[key]
+            res.removeValue(forKey: key)
+        }
+        
+        return res
     }
     
     func aPrint() {

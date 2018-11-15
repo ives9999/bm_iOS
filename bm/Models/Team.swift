@@ -40,6 +40,20 @@ class Team: SuperData {
     ]
     var list: [DATA] = [DATA]()
     
+    override var textKeys:[String] {
+        get { return [TEAM_TEMP_CONTENT_KEY,CHARGE_KEY,CONTENT_KEY]}
+        set{}
+    }
+    override var timeKeys:[String] {
+        get { return [TEAM_PLAY_START_KEY,TEAM_PLAY_END_KEY]}
+        set {}
+    }
+    
+    override var cat_id: Int{
+        get { return 21}
+        set {}
+    }
+    
     override init() {
         super.init()
         sections = _sections
@@ -107,7 +121,8 @@ class Team: SuperData {
         data.merge(data1)
         data.merge(data2)
         setSectionAndRow()
-        _initData2()
+        initTimeData()
+        initTextData()
         //print("2. \(data["name"])")
         
         for (key, _) in data {
@@ -187,14 +202,6 @@ class Team: SuperData {
         }
     }
     
-    private func _initData2() {
-        updatePlayStartTime()
-        updatePlayEndTime()
-        updateTempContent()
-        updateCharge()
-        updateContent()
-    }
-    
     override func updateCity(_ city: City?=nil) {
         super.updateCity(city)
         if city == nil {
@@ -235,24 +242,7 @@ class Team: SuperData {
         degreeShow()
         setDegreeSender()
     }
-    override func updatePlayStartTime(_ time: String? = nil) {
-        if time != nil {
-            data[TEAM_PLAY_START_KEY]!["value"] = time
-        } else {
-            data[TEAM_PLAY_START_KEY]!["value"] = ""
-        }
-        playStartTimeShow()
-        setPlayStartTimeSender()
-    }
-    override func updatePlayEndTime(_ time: String? = nil) {
-        if time != nil {
-            data[TEAM_PLAY_END_KEY]!["value"] = time
-        } else {
-            data[TEAM_PLAY_END_KEY]!["value"] = ""
-        }
-        playEndTimeShow()
-        setPlayEndTimeSender()
-    }
+    
     override func updateInterval(_ _startTime: String? = nil, _ _endTime: String? = nil) {
         var startTime = _startTime
         if startTime == nil {
@@ -264,15 +254,6 @@ class Team: SuperData {
         }
         let tmp: String = startTime! + " ~ " + endTime!
         data[TEAM_INTERVAL_KEY]!["show"] = tmp
-    }
-    override func updateTempContent(_ content: String? = nil) {
-        if content != nil {
-            data[TEAM_TEMP_CONTENT_KEY]!["value"] = content
-        } else {
-            data[TEAM_TEMP_CONTENT_KEY]!["value"] = ""
-        }
-        tempContentShow()
-        setTempContentSender()
     }
     
     override func updateNearDate(_ n1: String? = nil, _ n2: String? = nil) {
@@ -330,28 +311,6 @@ class Team: SuperData {
             data[TEAM_DEGREE_KEY]!["show"] = ""
         }
     }
-    func tempContentShow(_ length: Int=15) {
-        var text: String = data[TEAM_TEMP_CONTENT_KEY]!["value"] as! String
-        if text.count > 0 {
-            text = text.truncate(length: length)
-        }
-        data[TEAM_TEMP_CONTENT_KEY]!["show"] = text
-    }
-    
-    override func playStartTimeShow() {
-        var time = data[TEAM_PLAY_START_KEY]!["value"] as! String
-        if time.count > 0 {
-            time = time.noSec()
-        }
-        data[TEAM_PLAY_START_KEY]!["show"] = time
-    }
-    override func playEndTimeShow() {
-        var time = data[TEAM_PLAY_END_KEY]!["value"] as! String
-        if time.count > 0 {
-            time = time.noSec()
-        }
-        data[TEAM_PLAY_END_KEY]!["show"] = time
-    }
     
     override func feeShow() {
         var text: String = ""
@@ -372,6 +331,7 @@ class Team: SuperData {
     func setDaysSender() {
         data[TEAM_DAYS_KEY]!["sender"] = data[TEAM_DAYS_KEY]!["value"]
     }
+    
     func setDegreeSender() {
         let degrees: [String] = data[TEAM_DEGREE_KEY]!["value"] as! [String]
         var res: [Degree] = [Degree]()
@@ -381,78 +341,8 @@ class Team: SuperData {
         }
         data[TEAM_DEGREE_KEY]!["sender"] = res
     }
-    func setPlayStartTimeSender() {
-        var res: [String: Any] = [String: Any]()
-        var time: String = data[TEAM_PLAY_START_KEY]!["value"] as! String
-        if time.count > 0 {
-            time = time.noSec()
-            res["type"] = SELECT_TIME_TYPE.play_start
-            res["time"] = time
-        }
-        data[TEAM_PLAY_START_KEY]!["sender"] = res
-    }
-    func setPlayEndTimeSender() {
-        var res: [String: Any] = [String: Any]()
-        var time: String = data[TEAM_PLAY_END_KEY]!["value"] as! String
-        if time.count > 0 {
-            time = time.noSec()
-            res["type"] = SELECT_TIME_TYPE.play_end
-            res["time"] = time
-        }
-        data[TEAM_PLAY_END_KEY]!["sender"] = res
-    }
-    func setTempContentSender() {
-        var res: [String: Any] = [String: Any]()
-        let text: String = data[TEAM_TEMP_CONTENT_KEY]!["value"] as! String
-        res["text"] = text
-        res["type"] = TEXT_INPUT_TYPE.temp_play
-        data[TEAM_TEMP_CONTENT_KEY]!["sender"] = res
-    }
     
-    override func makeSubmitArr() -> [String: Any] {
-        var isAnyOneChange: Bool = false
-        var res: [String: Any] = [String: Any]()
-        for (key, row) in data {
-            var isSubmit: Bool = false
-            if row["submit"] != nil {
-                isSubmit = row["submit"] as! Bool
-            }
-            var isChange: Bool = false
-            if row["change"] != nil {
-                isChange = row["change"] as! Bool
-            }
-            if isSubmit && isChange {
-                res[key] = row["value"]
-                if !isAnyOneChange {
-                    isAnyOneChange = true
-                }
-            }
-        }
-        if !isAnyOneChange {
-            return res
-        }
-        res[SLUG_KEY] = data[NAME_KEY]!["value"]
-        res[CREATED_ID_KEY] = Member.instance.id
-        var id: Int = -1
-        if data[ID_KEY]!["value"] != nil {
-            id = data[ID_KEY]!["value"] as! Int
-        }
-        if id < 0 {
-            res[MANAGER_ID_KEY] = Member.instance.id
-            res[CHANNEL_KEY] = "bm"
-            res["type"] = "team"
-            let cat_id: [Int] = [21]
-            res[CAT_KEY] = cat_id
-        } else {
-            res[ID_KEY] = id
-        }
-        for (key, value) in transferPair {
-            res[value] = res[key]
-            res.removeValue(forKey: key)
-        }
-        
-        return res
-    }
+    
     func makeTempPlaySubmitArr() -> [String: Any] {
         var isAnyOneChange: Bool = false
         var res: [String: Any] = [String: Any]()

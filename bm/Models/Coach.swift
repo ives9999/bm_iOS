@@ -21,6 +21,16 @@ class Coach: SuperData {
         [CHARGE_KEY,COACH_LICENSE_KEY,COACH_EXP_KEY,COACH_FEAT_KEY,CONTENT_KEY]
     ]
     
+    override var textKeys:[String] {
+        get { return [COACH_EXP_KEY,COACH_FEAT_KEY,COACH_LICENSE_KEY,CHARGE_KEY,CONTENT_KEY]}
+        set{}
+    }
+    
+    override var cat_id: Int{
+        get { return 18}
+        set {}
+    }
+    
     override func initData() {
         data = [
             ID_KEY:["ch":"編號","vtype":"Int","value":-1,"show":""],
@@ -58,8 +68,8 @@ class Coach: SuperData {
             data[key]!["change"] = false
         }
         
-        _initData2()
-        runTestData()
+        initTextData()
+        //runTestData()
     }
     
     override init() {
@@ -78,14 +88,6 @@ class Coach: SuperData {
     
     override func listReset() {
         initData()
-    }
-    
-    private func _initData2() {
-        updateExp()
-        updateFeat()
-        updateLicense()
-        updateCharge()
-        updateContent()
     }
     
     func runTestData() {
@@ -125,126 +127,5 @@ class Coach: SuperData {
                 data[key1]!["change"] = true
             }
         }
-    }
-    
-    func updateExp(_ content: String? = nil) {
-        if content != nil {
-            data[COACH_EXP_KEY]!["value"] = content
-        }
-        expShow()
-        setExpSender()
-    }
-    
-    func updateFeat(_ content: String? = nil) {
-        if content != nil {
-            data[COACH_FEAT_KEY]!["value"] = content
-        }
-        featShow()
-        setFeatSender()
-    }
-    
-    func updateLicense(_ content: String? = nil) {
-        if content != nil {
-            data[COACH_LICENSE_KEY]!["value"] = content
-        }
-        licenseShow()
-        setLicenseSender()
-    }
-    
-    func expShow(_ length: Int=15) {
-        var text: String = data[COACH_EXP_KEY]!["value"] as! String
-        text = text.truncate(length: length)
-        data[COACH_EXP_KEY]!["show"] = text
-    }
-    
-    func featShow(_ length: Int=15) {
-        var text: String = data[COACH_FEAT_KEY]!["value"] as! String
-        text = text.truncate(length: length)
-        data[COACH_FEAT_KEY]!["show"] = text
-    }
-    
-    func licenseShow(_ length: Int=15) {
-        var text: String = data[COACH_LICENSE_KEY]!["value"] as! String
-        text = text.truncate(length: length)
-        data[COACH_LICENSE_KEY]!["show"] = text
-    }
-    
-    func setExpSender() {
-        var res: [String: Any] = [String: Any]()
-        let text: String = data[COACH_EXP_KEY]!["value"] as! String
-        res["text"] = text
-        res["type"] = TEXT_INPUT_TYPE.exp
-        data[COACH_EXP_KEY]!["sender"] = res
-    }
-    
-    func setFeatSender() {
-        var res: [String: Any] = [String: Any]()
-        let text: String = data[COACH_FEAT_KEY]!["value"] as! String
-        res["text"] = text
-        res["type"] = TEXT_INPUT_TYPE.feat
-        data[COACH_FEAT_KEY]!["sender"] = res
-    }
-    
-    func setLicenseSender() {
-        var res: [String: Any] = [String: Any]()
-        let text: String = data[COACH_LICENSE_KEY]!["value"] as! String
-        res["text"] = text
-        res["type"] = TEXT_INPUT_TYPE.license
-        data[COACH_LICENSE_KEY]!["sender"] = res
-    }
-    
-    override func setContentSender() {
-        var res: [String: Any] = [String: Any]()
-        let text: String = data[CONTENT_KEY]!["value"] as! String
-        res["text"] = text
-        res["type"] = TEXT_INPUT_TYPE.coach
-        data[CONTENT_KEY]!["sender"] = res
-    }
-    
-    override func makeSubmitArr() -> [String: Any] {
-        var isAnyOneChange: Bool = false
-        var res: [String: Any] = [String: Any]()
-        for (key, row) in data {
-            var isSubmit: Bool = false
-            if row["submit"] != nil {
-                isSubmit = row["submit"] as! Bool
-            }
-            var isChange: Bool = false
-            if row["change"] != nil {
-                isChange = row["change"] as! Bool
-            }
-            if isSubmit && isChange {
-                res[key] = row["value"]
-                if !isAnyOneChange {
-                    isAnyOneChange = true
-                }
-            }
-        }
-        if !isAnyOneChange {
-            return res
-        }
-        res[SLUG_KEY] = data[NAME_KEY]!["value"]
-        res[CREATED_ID_KEY] = Member.instance.id
-        var id: Int = -1
-        if data[ID_KEY]!["value"] != nil {
-            id = data[ID_KEY]!["value"] as! Int
-        }
-        if id < 0 {
-            res[MANAGER_ID_KEY] = Member.instance.id
-            res[CHANNEL_KEY] = "bm"
-            res["type"] = "team"
-            let cat_id: [Int] = [25]
-            res[CAT_KEY] = cat_id
-        } else {
-            res[ID_KEY] = id
-        }
-        for (key, value) in transferPair {
-            if res[key] != nil {
-                res[value] = res[key]
-                res.removeValue(forKey: key)
-            }
-        }
-        
-        return res
     }
 }

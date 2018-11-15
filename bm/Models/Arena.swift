@@ -21,6 +21,16 @@ class Arena: SuperData {
     [TEAM_BALL_KEY,TEAM_DEGREE_KEY,CHARGE_KEY,CONTENT_KEY]
     ]
     
+    override var textKeys:[String] {
+        get { return [CHARGE_KEY,CONTENT_KEY]}
+        set{}
+    }
+    
+    override var cat_id: Int{
+        get { return 17}
+        set {}
+    }
+    
     override init(){
         super.init()
         sections = _sections
@@ -87,20 +97,7 @@ class Arena: SuperData {
     override func listReset() {
         initData()
     }
-    override func updateOpenTime(_ time: String? = nil) {
-        if time != nil {
-            data[ARENA_OPEN_TIME_KEY]!["value"] = time
-        }
-        let tmp: String = data[ARENA_OPEN_TIME_KEY]!["value"] as! String
-        data[ARENA_OPEN_TIME_KEY]!["show"] = tmp.noSec()
-    }
-    override func updateCloseTime(_ time: String? = nil) {
-        if time != nil {
-            data[ARENA_CLOSE_TIME_KEY]!["value"] = time
-        }
-        let tmp: String = data[ARENA_CLOSE_TIME_KEY]!["value"] as! String
-        data[ARENA_CLOSE_TIME_KEY]!["show"] = tmp.noSec()
-    }
+    
     override func updateInterval(_ _openTime: String? = nil, _ _closeTime: String? = nil) {
         var openTime = _openTime
         if openTime == nil {

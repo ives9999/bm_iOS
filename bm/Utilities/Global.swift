@@ -45,11 +45,10 @@ enum SELECT_TIME_TYPE: Int {
 enum TEXT_INPUT_TYPE: String {
     case temp_play = "臨打說明"
     case charge = "收費說明"
-    case team = "球隊詳細說明"
+    case content = "詳細說明"
     case exp = "經歷"
     case feat = "比賽成績"
     case license = "證照"
-    case coach = "教練詳細說明"
 }
 enum DEGREE: String {
     case new = "新手"

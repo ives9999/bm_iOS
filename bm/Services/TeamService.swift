@@ -38,7 +38,36 @@ class TeamService: DataService {
                 _jsonToData(tmp: row[key], key: key, item: value)
             }
         }
+        if row["near_date_w"] != JSON.null {
+            let n2: String = row["near_date_w"].stringValue
+            model.data[TEAM_NEAR_DATE_KEY]!["value1"] = n2
+        }
+        var signups:[[String: String]] = [[String: String]]()
+        
+        if row["signups"] != JSON.null {
+            let items: [JSON] = row["signups"].arrayValue
+            for item in items {
+                let member: JSON = item["member"]
+                //print(member)
+                let nickname: String = member["nickname"].stringValue
+                let token: String = member["token"].stringValue
+                let created_at: String = item["created_at"].stringValue
+                signups.append(["nickname":nickname, "token":token,"created_at":created_at])
+                //print(signups)
+            }
+            if model.data["signups"] == nil {
+                model.data["signups"] = [String: Any]()
+            }
+            model.data["signups"]!["value"] = signups
+            model.data["signups"]!["vtype"] = "array"
+            //print(model.data)
+            
+        }
+        
+        model.initTimeShow()
+        model.updateNearDate()
         model.updateInterval()
+        model.setAllTextSender()
         return model.data
     }
     
@@ -127,8 +156,7 @@ class TeamService: DataService {
                                 self._jsonToData(tmp: arr[i][key], key: key, item: value)
                             }
                         }
-                        self.model.updatePlayStartTime()
-                        self.model.updatePlayEndTime()
+                        self.model.updateTime(key:TEAM_PLAY_END_KEY)
                         var data: Dictionary<String, [String: Any]> = self.model.data
                         
                         var near_date: Dictionary<String, Any> = [String: Any]()
@@ -245,10 +273,8 @@ class TeamService: DataService {
             //print("\(key) => \(value!)")
             model.data[key]!["value"] = value!
             model.data[key]!["show"] = value!
-            if key == TEAM_PLAY_START_KEY {
-                model.updatePlayStartTime(value as? String)
-            } else if key == TEAM_PLAY_END_KEY {
-                model.updatePlayEndTime(value as? String)
+            if key == TEAM_PLAY_START_KEY || key == TEAM_PLAY_END_KEY {
+                model.updateTime(key: key, value as? String)
             }
         } else if type == "array" {
             if key == CITY_KEY {

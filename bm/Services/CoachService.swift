@@ -29,6 +29,8 @@ class CoachService: DataService {
                 _jsonToData(tmp: row[key], key: key, item: value)
             }
         }
+        model.setAllTextSender()
+        
         return model.data
     }
     

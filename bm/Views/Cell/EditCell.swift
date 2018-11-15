@@ -47,6 +47,11 @@ class EditCell: SuperCell, UITextFieldDelegate {
             editText.isHidden = false
             onoff.isHidden = true
             moreImageView.isHidden = true
+            
+            var vType = "String"
+            if row["vtype"] != nil {
+                vType = row["vtype"] as! String
+            }
             if row["keyboardType"] != nil {
                 let pad: UIKeyboardType = row["keyboardType"] as! UIKeyboardType
                 editText.keyboardType = pad
@@ -55,8 +60,18 @@ class EditCell: SuperCell, UITextFieldDelegate {
                 editText.placeholder(row["hint"] as! String)
             }
             //print(iden)
-            if row["show"] != nil {
-                editText.text = (row["show"] as! String)
+            if row["value"] != nil {
+                var text = ""
+                if vType == "Int" {
+                    let tmp = row["value"] as! Int
+                    text = String(tmp)
+                    if text == "-1" {
+                        text = ""                        
+                    }
+                } else {
+                    text = row["value"] as! String
+                }
+                editText.text = text
             }
         }
         if row["switch"] != nil && (row["switch"] as! Bool) {

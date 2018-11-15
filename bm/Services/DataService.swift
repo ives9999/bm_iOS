@@ -181,86 +181,57 @@ class DataService {
                 //print(data)
                 let json = JSON(data)
                 //print(json)
+                self.setData1(row: json)
                 
                 //var images: [String] = [String]()
-                for (key, item) in self.model.data {
-                    if json[key] != JSON.null {
-                        let tmp = json[key]
-                        var value: Any?
-                        let vType: String = item["vtype"] as! String
-                        if vType == "Int" {
-                            value = tmp.intValue
-                            self.model.data[key]!["value"] = value
-                            self.model.data[key]!["show"] = "\(value ?? "")"
-                        } else if vType == "String" {
-                            value = tmp.stringValue
-                            self.model.data[key]!["value"] = value
-                            self.model.data[key]!["show"] = value
-                        } else if vType == "array" {
-                            if key == CITY_KEY {
-                                let id: Int = tmp["id"].intValue
-                                let name: String = tmp["name"].stringValue
-                                let city: City = City(id: id, name: name)
-                                self.model.updateCity(city)
-                            } else if key == ARENA_KEY {
-                                let id: Int = tmp["id"].intValue
-                                let name: String = tmp["name"].stringValue
-                                let arena: Arena = Arena(id: id, name: name)
-                                self.model.updateArena(arena)
-                            } else if key == TEAM_DAYS_KEY {
-                                let tmp1: [JSON] = tmp.arrayValue
-                                var days: [Int] = [Int]()
-                                for item in tmp1 {
-                                    days.append(item["day"].intValue)
-                                }
-                                self.model.updateDays(days)
-                            } else if key == TEAM_DEGREE_KEY {
-                                let tmp1: String = tmp.stringValue
-                                let degrees: [String] = tmp1.components(separatedBy: ",")
-                                self.model.updateDegree(self.strsToDegree(degrees))
-                            }
-                        } else if vType == "image" {
-                            if key == FEATURED_KEY {
-                                var tmp1: String = tmp.stringValue
-                                if (tmp1.count > 0) {
-                                    tmp1 = BASE_URL + tmp1
-                                    self.model.data[key]!["path"] = tmp1
-                                }
-                            }
-                        }
-                    }
-                }
-                if json["near_date_w"] != JSON.null {
-                    let n2: String = json["near_date_w"].stringValue
-                    self.model.data[TEAM_NEAR_DATE_KEY]!["value1"] = n2
-                }
-                var signups:[[String: String]] = [[String: String]]()
+//                for (key, item) in self.model.data {
+//                    if json[key] != JSON.null {
+//                        let tmp = json[key]
+//                        var value: Any?
+//                        let vType: String = item["vtype"] as! String
+//                        if vType == "Int" {
+//                            value = tmp.intValue
+//                            self.model.data[key]!["value"] = value
+//                            self.model.data[key]!["show"] = "\(value ?? "")"
+//                        } else if vType == "String" {
+//                            value = tmp.stringValue
+//                            self.model.data[key]!["value"] = value
+//                            self.model.data[key]!["show"] = value
+//                        } else if vType == "array" {
+//                            if key == CITY_KEY {
+//                                let id: Int = tmp["id"].intValue
+//                                let name: String = tmp["name"].stringValue
+//                                let city: City = City(id: id, name: name)
+//                                self.model.updateCity(city)
+//                            } else if key == ARENA_KEY {
+//                                let id: Int = tmp["id"].intValue
+//                                let name: String = tmp["name"].stringValue
+//                                let arena: Arena = Arena(id: id, name: name)
+//                                self.model.updateArena(arena)
+//                            } else if key == TEAM_DAYS_KEY {
+//                                let tmp1: [JSON] = tmp.arrayValue
+//                                var days: [Int] = [Int]()
+//                                for item in tmp1 {
+//                                    days.append(item["day"].intValue)
+//                                }
+//                                self.model.updateDays(days)
+//                            } else if key == TEAM_DEGREE_KEY {
+//                                let tmp1: String = tmp.stringValue
+//                                let degrees: [String] = tmp1.components(separatedBy: ",")
+//                                self.model.updateDegree(self.strsToDegree(degrees))
+//                            }
+//                        } else if vType == "image" {
+//                            if key == FEATURED_KEY {
+//                                var tmp1: String = tmp.stringValue
+//                                if (tmp1.count > 0) {
+//                                    tmp1 = BASE_URL + tmp1
+//                                    self.model.data[key]!["path"] = tmp1
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
                 
-                if json["signups"] != JSON.null {
-                    let items: [JSON] = json["signups"].arrayValue
-                    for item in items {
-                        let member: JSON = item["member"]
-                        //print(member)
-                        let nickname: String = member["nickname"].stringValue
-                        let token: String = member["token"].stringValue
-                        let created_at: String = item["created_at"].stringValue
-                        signups.append(["nickname":nickname, "token":token,"created_at":created_at])
-                        //print(signups)
-                    }
-                    if self.model.data["signups"] == nil {
-                        self.model.data["signups"] = [String: Any]()
-                    }
-                    self.model.data["signups"]!["value"] = signups
-                    self.model.data["signups"]!["vtype"] = "array"
-                    //print(model.data)
-                    
-                }
-                
-                if type == "team" {
-                    self.model.playStartTimeShow()
-                    self.model.playEndTimeShow()
-                    self.model.updateNearDate()
-                }
                 //print(self.model.data)
                 
                 let path: String = self.model.data[FEATURED_KEY]!["path"] as! String

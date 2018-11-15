@@ -67,10 +67,10 @@ class ArenaService: DataService {
                 model.telOrMobileShow()
             }
             if key == ARENA_OPEN_TIME_KEY {
-                model.updateOpenTime((value as! String))
+                model.updateTime(key:key,(value as! String))
             }
             if key == ARENA_CLOSE_TIME_KEY {
-                model.updateCloseTime((value as! String))
+                model.updateTime(key:key,(value as! String))
             }
         } else if type == "array" {
             

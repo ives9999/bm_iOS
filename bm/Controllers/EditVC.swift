@@ -132,6 +132,10 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         Global.instance.addSpinner(superView: view)
         Global.instance.removeSpinner(superView: view)
         let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
+        var key = NAME_KEY
+        if row["key"] != nil {
+            key = row["key"]! as! String
+        }
         let cell = tableView.cellForRow(at: indexPath) as! EditCell
         if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
             if row["segue"] != nil {
@@ -140,6 +144,13 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                 let city: Int = model.data[CITY_KEY]!["value"] as! Int
                 if segue == TO_ARENA && city == 0 {
                     SCLAlertView().showError("錯誤", subTitle: "請先選擇區域")
+                } else if segue == TO_TEXT_INPUT {
+                    var sender: [String: Any] = [String: Any]()
+                    sender["key"] = key
+                    if row["sender"] != nil {
+                        sender["sender"] = row["sender"]
+                    }
+                    performSegue(withIdentifier: segue, sender: sender)
                 } else {
                     performSegue(withIdentifier: segue, sender: row["sender"])
                 }
@@ -147,14 +158,6 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         } else {
             cell.editText.becomeFirstResponder()
         }
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            featuredView.setPickedImage(image: pickedImage)
-            isFeaturedChange = true
-        }
-        dismiss(animated: true, completion: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -194,7 +197,11 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             destinationNavigationController = (segue.destination as! UINavigationController)
             let textInputVC: TextInputVC = destinationNavigationController!.topViewController as! TextInputVC
             textInputVC.delegate = self
-            textInputVC.input = (sender as! [String: Any])
+            let _sender = sender as! [String: Any]
+            let input = _sender["sender"] as! [String: Any]
+            textInputVC.input = input
+            let key = _sender["key"] as! String
+            textInputVC.key = key
         } else if segue.identifier == TO_SELECT_DEGREE {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let degreeSelectVC: DegreeSelectVC = destinationNavigationController!.topViewController as! DegreeSelectVC
@@ -213,7 +220,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         let name: String = model.data[NAME_KEY]!["value"] as! String
         if name.count == 0 {
             isPass = false
-            SCLAlertView().showWarning("提示", subTitle: "請填寫隊名")
+            SCLAlertView().showWarning("提示", subTitle: "請填寫名稱")
         }
         let mobile: String = model.data[MOBILE_KEY]!["value"] as! String
         if mobile.count == 0 {
@@ -312,64 +319,37 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
     func setTimeData(time: String, type: SELECT_TIME_TYPE) {
         switch type {
         case SELECT_TIME_TYPE.play_start:
-            var start: String = model.data[TEAM_PLAY_START_KEY]!["value"] as! String
+            let key = TEAM_PLAY_START_KEY
+            var start: String = model.data[key]!["value"] as! String
             start = start.noSec()
             if start != time {
-                model.updatePlayStartTime(time)
-                model.data[TEAM_PLAY_START_KEY]!["change"] = true
+                model.updateTime(key: key, time)
+                model.data[key]!["change"] = true
                 self.tableView.reloadData()
             }
             break
         case SELECT_TIME_TYPE.play_end:
-            var end: String = model.data[TEAM_PLAY_END_KEY]!["value"] as! String
+            let key = TEAM_PLAY_END_KEY
+            var end: String = model.data[key]!["value"] as! String
             end = end.noSec()
             if end != time {
-                model.updatePlayEndTime(time)
-                model.data[TEAM_PLAY_END_KEY]!["change"] = true
+                model.updateTime(key: key, time)
+                model.data[key]!["change"] = true
                 self.tableView.reloadData()
             }
             break
         }
     }
-    func setTextInputData(text: String, type: TEXT_INPUT_TYPE) {
-        switch type {
-        case TEXT_INPUT_TYPE.temp_play:
-            let old: String = model.data[TEAM_TEMP_CONTENT_KEY]!["value"] as! String
-            if old != text {
-                model.updateTempContent(text)
-                model.data[TEAM_TEMP_CONTENT_KEY]!["change"] = true
-                self.tableView.reloadData()
-            }
-            break
-        case TEXT_INPUT_TYPE.charge:
-            let old: String = model.data[CHARGE_KEY]!["value"] as! String
-            if old != text {
-                model.updateCharge(text)
-                model.data[CHARGE_KEY]!["change"] = true
-                self.tableView.reloadData()
-            }
-            break
-        case TEXT_INPUT_TYPE.team:
-            let old: String = model.data[CONTENT_KEY]!["value"] as! String
-            if old != text {
-                model.updateContent(text)
-                model.data[CONTENT_KEY]!["change"] = true
-                self.tableView.reloadData()
-            }
-            break
-            
-        case .exp:
-            
-            break
-        case .feat:
-            break
-        case .license:
-            break
-        case .coach:
-            break
+    func setTextInputData(key: String, type: TEXT_INPUT_TYPE, text: String) {
+        let old: String = model.data[key]!["value"] as! String
+        if old != text {
+            model.data[key]!["change"] = true
+            model.updateText(key: key, text: text)
+            tableView.reloadData()
         }
         //print(model.data)
     }
+    
     func setDegreeData(res: [Degree]) {
         let old: [String] = model.data[TEAM_DEGREE_KEY]!["value"] as! [String]
         var res1: [String] = [String]()
@@ -382,6 +362,15 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             self.tableView.reloadData()
         }
     }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            featuredView.setPickedImage(image: pickedImage)
+            isFeaturedChange = true
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
     // ImagePickerDelegate
     func isImageSet(_ b: Bool) {
         //isFeaturedChange = b
@@ -464,7 +453,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                 } else if (key == TEAM_DEGREE_KEY) {
                     updateDegree()
                 } else if (key == TEAM_TEMP_CONTENT_KEY || key == CHARGE_KEY || key == CONTENT_KEY) {
-                    updateContent(type: key, content:nil)
+                    updateText(key: key)
                 }
                 model.data[key]!["change"] = true
             }
@@ -500,25 +489,15 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
     }
     
     func updateTime(type: String, time: String?=nil) {
-        if (time != nil) {
-            switch (type) {
-            case TEAM_PLAY_START_KEY: model.updatePlayStartTime(time)
-                break
-            case TEAM_PLAY_END_KEY: model.updatePlayEndTime(time)
-                break
-            default:
-                model.updatePlayStartTime(time)
-            }
-        } else {
-            switch (type) {
-            case TEAM_PLAY_START_KEY: model.updatePlayStartTime()
-                break
-            case TEAM_PLAY_END_KEY:
-                model.updatePlayEndTime()
-                break
-            default:
-                model.updatePlayStartTime(time)
-            }
+        switch (type) {
+        case TEAM_PLAY_START_KEY:
+            model.updateTime(key: TEAM_PLAY_START_KEY, time)
+            break
+        case TEAM_PLAY_END_KEY:
+            model.updateTime(key: TEAM_PLAY_END_KEY, time)
+            break
+        default:
+            model.updateTime(key: TEAM_PLAY_START_KEY, time)
         }
     }
     
@@ -530,23 +509,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         }
     }
     
-    func updateContent(type: String, content: String?=nil) {
-        if (content != nil) {
-            if (type == TEAM_TEMP_CONTENT_KEY) {
-                model.updateTempContent(content)
-            } else if (type == CHARGE_KEY) {
-                model.updateCharge(content)
-            } else if (type == CONTENT_KEY) {
-                model.updateContent(content)
-            }
-        } else {
-            if (type == TEAM_TEMP_CONTENT_KEY) {
-                model.updateTempContent()
-            } else if (type == CHARGE_KEY) {
-                model.updateCharge()
-            } else if (type == CONTENT_KEY) {
-                model.updateContent()
-            }
-        }
+    func updateText(key: String, content: String?=nil) {
+        model.updateText(key: key, text: content)
     }
 }

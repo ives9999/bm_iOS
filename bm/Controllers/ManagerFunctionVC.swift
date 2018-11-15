@@ -107,7 +107,7 @@ class ManagerFunctionVC: MyTableVC {
     
     private func _delete(token: String) {
         Global.instance.addSpinner(superView: self.view)
-        dataService.delete(token: token, type: "team") { (success) in
+        dataService.delete(token: token, type: source) { (success) in
             if success {
                 Global.instance.removeSpinner(superView: self.view)
                 if (!self.dataService.success) {
