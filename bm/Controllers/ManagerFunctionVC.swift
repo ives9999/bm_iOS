@@ -27,20 +27,20 @@ class ManagerFunctionVC: MyTableVC {
             _rows = [
                 ["text": "編輯", "icon": "edit1", "segue": TO_EDIT],
                 ["text": "臨打編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
-                ["text": "每次臨打名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
+                ["text": "每次臨打名單", "icon": "tempplaylist", "segue": TO_TEMP_PLAY_DATE],
                 ["text": "刪除", "icon": "clear"]
             ]
         } else if source == "coach" {
             _rows = [
                 ["text": "編輯", "icon": "edit1", "segue": TO_EDIT],
-                ["text": "教球時段編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
-                ["text": "報名學員名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
+                ["text": "教球時段編輯", "icon": "tempplayedit", "segue": TO_TIMETABLE],
+                ["text": "報名學員名單", "icon": "tempplaylist", "segue": TO_COACH_SIGNUP],
                 ["text": "刪除", "icon": "clear"]
             ]
         } else if source == "arena" {
             _rows = [
                 ["text": "編輯", "icon": "edit1", "segue": TO_EDIT],
-                ["text": "時段編輯", "icon": "tempplayedit", "segue": TO_TEAM_TEMP_PLAY],
+                ["text": "時段編輯", "icon": "tempplayedit", "segue": TO_TIMETABLE],
                 ["text": "報名球隊名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
                 ["text": "刪除", "icon": "clear"]
             ]
@@ -65,14 +65,8 @@ class ManagerFunctionVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var iden: String = ""
-        if indexPath.row == 0 {
-            iden = TO_EDIT
-        } else if indexPath.row == 1 {
-            iden = TO_TEAM_TEMP_PLAY
-        } else if indexPath.row == 2 {
-            iden = TO_TEMP_PLAY_DATE
-        } else if indexPath.row == 3 {
+        let row: [String: Any] = _rows[indexPath.row]
+        if indexPath.row == 3 {
             let appearance = SCLAlertView.SCLAppearance(
                 showCloseButton: false
             )
@@ -84,9 +78,10 @@ class ManagerFunctionVC: MyTableVC {
             alert.addButton("取消", action: {
             })
             alert.showWarning("警告", subTitle: "是否確定要刪除此球隊")
-        }
-        if iden.count > 0 {
-            performSegue(withIdentifier: iden, sender: token)
+        } else {
+            let segue = row["segue"] as! String
+            //print(segue)
+            performSegue(withIdentifier: segue, sender: token)
         }
     }
     
@@ -102,6 +97,10 @@ class ManagerFunctionVC: MyTableVC {
             let vc: TempPlayDateVC = segue.destination as! TempPlayDateVC
             vc.token = token
             vc.name = name
+        } else if segue.identifier == TO_TIMETABLE {
+            
+        } else if segue.identifier == TO_COACH_SIGNUP {
+            
         }
     }
     

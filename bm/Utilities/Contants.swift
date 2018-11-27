@@ -15,7 +15,7 @@ typealias DATA = Dictionary<String, [String: Any]>
 let CHANNEL = "bm"
 
 // URL Constants
-let REMOTE_BASE_URL = "http://bm.sportpassword.com"
+let REMOTE_BASE_URL = "https://bm.sportpassword.com"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 let URL_HOME = "\(BASE_URL)/app/"
@@ -94,6 +94,8 @@ let TO_COURSE: String = "toCourse"
 let TO_MANAGER: String = "toManager"
 let TO_MANAGER_FUNCTION: String = "toManagerFunction"
 let TO_COACH_MANAGER_FUNCTION: String = "toCoachManagerFunction"
+let TO_COACH_SIGNUP: String = "toCoachSignup"
+let TO_TIMETABLE: String = "toTimeTable"
 let TO_COACH_SUBMIT: String = "toCoachSubmit"
 let TO_TEMP_PLAY_DATE: String = "toTempPlayDate"
 let TO_TEMP_PLAY_DATE_PLAYER: String = "toTempPlayDatePlayer"
