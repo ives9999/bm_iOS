@@ -98,7 +98,9 @@ class ManagerFunctionVC: MyTableVC {
             vc.token = token
             vc.name = name
         } else if segue.identifier == TO_TIMETABLE {
-            
+            let vc: TimeTableVC = segue.destination as! TimeTableVC
+            vc.token = token
+            vc.source = source
         } else if segue.identifier == TO_COACH_SIGNUP {
             
         }

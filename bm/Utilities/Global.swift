@@ -12,6 +12,65 @@ import Device_swift
 
 var gSimulate:Bool = false
 
+enum MYCOLOR: Int {
+    case danger = 0xb92cc28
+    case success = 0x3e8f3e
+    case primary = 0x245580
+    case warning = 0xe38d13
+    case info = 0x28a4c9
+    case gray = 0xcccccc
+    
+    static let allValues = [danger, success, primary, warning, info, gray]
+    
+    init(color: String) {
+        switch color {
+        case "danger":
+            self = .danger
+        case "success":
+            self = .success
+        case "primary":
+            self = .primary
+        case "warning":
+            self = .warning
+        case "info":
+            self = .info
+        case "gray":
+            self = .gray
+        default:
+            self = .success
+        }
+    }
+    
+    func toString()->String {
+        switch self {
+        case .danger:
+            return "danger"
+        case .success:
+            return "success"
+        case .primary:
+            return "primary"
+        case .warning:
+            return "warning"
+        case .info:
+            return "info"
+        case .gray:
+            return "gray"
+        }
+    }
+    
+    func toColor()-> UIColor {
+        return UIColor(rgb: self.rawValue)
+    }
+    
+    static func all()-> [[String: UIColor]] {
+        var res: [[String: UIColor]] = [[String: UIColor]]()
+        for item in allValues {
+            res.append([item.toString():item.toColor()])
+        }
+        
+        return res
+    }
+}
 enum STATUS: String {
     case online, offline, trash, delete
 }
@@ -272,6 +331,17 @@ extension Date {
         formatter.dateFormat = format
         return formatter.string(from: self)
     }
+    
+    //Date()->getH()
+    func getH()->Int {
+        let calendar = Calendar.current
+        return calendar.component(.hour, from: self)
+    }
+    
+    func getm()->Int {
+        let calendar = Calendar.current
+        return calendar.component(.minute, from: self)
+    }
 }
 
 extension CGRect {
@@ -311,7 +381,7 @@ extension String {
     {
         //Create Date Formatter
         let dateFormatter = DateFormatter()
-        
+        dateFormatter.locale = Locale(identifier: "zh_TW")
         //Specify Format of String to Parse
         dateFormatter.dateFormat = format
         
@@ -321,6 +391,7 @@ extension String {
         //Return Parsed Date
         return dateFromString
     }
+    
     func noSec() -> String {
         let arr: [String] = self.components(separatedBy: ":")
         var res: String = self
@@ -505,6 +576,23 @@ extension UIView {
     }
 }
 
+extension UIColor {
+    convenience init(red: Int, green: Int, blue: Int) {
+        assert(red >= 0 && red <= 255, "Invalid red component")
+        assert(green >= 0 && green <= 255, "Invalid green component")
+        assert(blue >= 0 && blue <= 255, "Invalid blue component")
+        
+        self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
+    }
+    
+    convenience init(rgb: Int) {
+        self.init(
+            red: (rgb >> 16) & 0xFF,
+            green: (rgb >> 8) & 0xFF,
+            blue: rgb & 0xFF
+        )
+    }
+}
 
 
 

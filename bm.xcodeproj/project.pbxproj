@@ -39,6 +39,7 @@
 		B337B9A61FE039ED00C3EE28 /* TempPlaySignupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */; };
 		B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */; };
 		B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */; };
+		B34A20AE21AE962700EE6E1C /* TimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AD21AE962700EE6E1C /* TimeTable.swift */; };
 		B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */; };
 		B3591B702164CC6100E0919C /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3591B6F2164CC6100E0919C /* Degree.swift */; };
 		B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35BA6822073C06600B506CA /* BaseViewController.swift */; };
@@ -211,6 +212,7 @@
 		B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlaySignupCell.swift; sourceTree = "<group>"; };
 		B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayTableHeaderView.swift; sourceTree = "<group>"; };
 		B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableVC.swift; sourceTree = "<group>"; };
+		B34A20AD21AE962700EE6E1C /* TimeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; };
 		B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayEditVC.swift; sourceTree = "<group>"; };
 		B3591B6F2164CC6100E0919C /* Degree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
 		B35BA6822073C06600B506CA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -617,6 +619,7 @@
 				B3ED38D81FB463D00003F083 /* Team.swift */,
 				B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */,
 				B306F33F217DA15000C32CE2 /* Area.swift */,
+				B34A20AD21AE962700EE6E1C /* TimeTable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -952,6 +955,7 @@
 				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
+				B34A20AE21AE962700EE6E1C /* TimeTable.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,

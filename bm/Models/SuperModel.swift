@@ -29,6 +29,7 @@ class SuperModel: NSObject, JSONParsable {
             initialize(for: property, dict: dict)
         }
     }
+    
     private func initialize(for property: Mirror.Child, dict: [String: Any]) {
         let key = property.label
         if let value = dict[key!] as? JSON {
@@ -59,6 +60,7 @@ class SuperModel: NSObject, JSONParsable {
             }
             if let dynamicClass = getDynamicClassType(value: property.value) {
                 let dynamicObject = dynamicClass.init(dict: d)
+                //dynamicObject.filterRow()
                 resultingArray.append(dynamicObject)
             }
         }
@@ -103,6 +105,16 @@ class SuperModel: NSObject, JSONParsable {
         
         return dynamicType
     }
+    
+    public func printRow() {
+        let mirror: Mirror? = Mirror(reflecting: self)
+        for property in mirror!.children {
+            print("\(property.label)=>\(property.value)")
+        }
+    }
+    public func printRows() {}
+    
+    public func filterRow(){}
     
     /*
     func parse1(data: JSON) {

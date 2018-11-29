@@ -52,6 +52,8 @@ class DataService {
         }
     }
     
+    var timeTable: TimeTable = TimeTable()
+    
     init() {
         _model = Team.instance
     }
@@ -669,6 +671,40 @@ class DataService {
                     self.citysandareas[id] = ["id":id,"name":city_name,"rows":rows]
                 }
                 //print(self.citysandareas)
+                
+                completion(true)
+            }
+        }
+    }
+    
+    func getTT(token: String, type:String, completion: @escaping CompletionHandler) {
+        let body: [String: Any] = ["source": "app", "channel": "bm","token":token]
+        let url: String = String(format: URL_TT, type)
+//        print(url)
+//        print(body)
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                self.timeTable = JSONParse.parse(data: json)
+                for row in self.timeTable.rows {
+                    row.filterRow()
+                    //row.printRow()
+                }
+                
+//                var rows: [JSON] = [JSON]()
+//                if json["rows"].exists() {
+//                    rows = json["rows"].arrayValue
+//                    for row in rows {
+//                        self.timeTable = JSONParse.parse(data: row)
+//                    }
+//                }
+                //print(self.timeTable.printRows())
+                
                 
                 completion(true)
             }

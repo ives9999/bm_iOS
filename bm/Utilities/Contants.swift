@@ -41,6 +41,7 @@ let URL_AREA_BY_CITY_IDS = URL_HOME + "area_by_citys"
 let URL_ONE = "\(URL_HOME)%@/one"
 let URL_UPDATE = "\(URL_HOME)%@/update"
 let URL_DELETE = "\(URL_HOME)%@/delete"
+let URL_TT = "\(URL_HOME)%@/tt"
 
 let URL_TEAM = URL_HOME + "team/"
 let URL_TEAM_TEMP_PLAY = URL_TEAM + "tempPlay/onoff"
@@ -51,6 +52,7 @@ let URL_TEAM_TEMP_PLAY_BLACKLIST = URL_TEAM + "tempPlay/blacklist"
 let URL_TEAM_TEMP_PLAY_DATE = URL_TEAM + "tempPlay/date"
 let URL_TEAM_TEMP_PLAY_DATE_PLAYER = URL_TEAM + "tempPlay/datePlayer"
 
+let URL_COACH = URL_HOME + "coach/"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"

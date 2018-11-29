@@ -13,6 +13,7 @@ class JSONParse {
     public static func parse<Type: SuperModel>(data: JSON) -> Type {
         var d: [String: Any] = [String: Any]()
         for (key, value) in data {
+            //print("\(key)=>\(value)")
             d[key] = value
         }
         return Type(dict: d)
