@@ -16,11 +16,17 @@ class BaseViewController: UIViewController {
     var dataService: DataService = DataService()
     var managerLists: [SuperData] = [SuperData]()
     var refreshControl: UIRefreshControl!
+    let titleBarHeight: CGFloat = 80
+    var workAreaHeight: CGFloat = 600
+    
+    let maskView = UIView()
+    var containerView = UIView(frame: .zero)
+    let layerSubmitBtn: SubmitButton = SubmitButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        workAreaHeight = view.bounds.height - titleBarHeight
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -45,6 +51,54 @@ class BaseViewController: UIViewController {
             warning("無法開啟測試連結網路警告視窗，請稍後再使用!!")
         }
     }
+    
+    func mask(y: CGFloat, superView: UIView? = nil, height: CGFloat? = nil) {
+        maskView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        maskView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(unmask)))
+        var _view = view
+        if superView != nil {
+            _view = superView
+        }
+        _view?.addSubview(maskView)
+        
+        var _height = view.bounds.height - titleBarHeight
+        if height != nil {
+            _height = height!
+        }
+        maskView.frame = CGRect(x: 0, y: y, width: (_view?.frame.width)!, height: _height)
+        maskView.alpha = 0
+    }
+    
+    func addLayer(superView: UIView, frame: CGRect) {
+        superView.addSubview(containerView)
+        containerView.frame = frame
+        containerView.backgroundColor = UIColor.black
+        _addLayer()
+    }
+    func _addLayer() {}
+    func layerAddSubmitBtn(upView: UIView) {
+        containerView.addSubview(layerSubmitBtn)
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 24)
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .centerX, relatedBy: .equal, toItem: layerSubmitBtn.superview, attribute: .centerX, multiplier: 1, constant: 0)
+        layerSubmitBtn.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addConstraints([c1,c2])
+        layerSubmitBtn.addTarget(self, action: #selector(layerSubmit(view:)), for: .touchUpInside)
+        self.layerSubmitBtn.isHidden = false
+    }
+    func animation(frame: CGRect) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.maskView.alpha = 1
+            self.containerView.frame = frame
+        }, completion: { (finished) in
+            if finished {
+                self.otherAnimation()
+                
+            }
+        })
+    }
+    func otherAnimation(){}
+    @objc func unmask(){}
+    @objc func layerSubmit(view: UIButton){}
     
     func prev() {
         dismiss(animated: true, completion: nil)

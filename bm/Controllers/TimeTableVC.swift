@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -29,6 +29,17 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     var v: UIView = UIView(frame: CGRect.zero)
     var eventViews: [UIView] = [UIView]()
+    
+    var newY: CGFloat = 0
+    let padding: CGFloat = 20
+    let editTableView: UITableView = {
+        let cv = UITableView(frame: .zero, style: .plain)
+        cv.backgroundColor = UIColor.black
+        return cv
+    }()
+    let editRows: [[String: Any]] = [
+        ["ch":"標題","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入事件標題","text_field":true]
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +65,12 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
 //        v.backgroundColor = UIColor.red
         collectionView.addSubview(v)
         
+        editTableView.delegate = self
+        editTableView.dataSource = self
+        editTableView.backgroundColor = UIColor.clear
+        let editCellNib = UINib(nibName: "EditCell", bundle: nil)
+        editTableView.register(editCellNib, forCellReuseIdentifier: "edit_cell")
+        
         refresh()
     }
     
@@ -65,10 +82,19 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             let width: CGFloat = cellWidth - 2 * cellBorderWidth
             let gridNum: CGFloat = CGFloat(row._end-row._start)
             let height: CGFloat = gridNum * cellHeight - 2 * cellBorderWidth
-            let frame = CGRect(x: x, y: y, width: width, height: height)
+            var frame = CGRect(x: x, y: y, width: width, height: height)
             let v: UIView = UIView(frame: frame)
             v.backgroundColor = row._color.toColor()
             v.tag = i
+            
+            frame = CGRect(x: 10, y: 10, width: width, height: height)
+            let titleLbl = UILabel(frame: frame)
+            titleLbl.text = row.title
+            titleLbl.textColor = UIColor.black
+            titleLbl.numberOfLines = 0
+            titleLbl.sizeToFit()
+            v.addSubview(titleLbl)
+            
             let tap = UITapGestureRecognizer(target: self, action: #selector(clickEvent))
             v.addGestureRecognizer(tap)
             
@@ -80,8 +106,20 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     @objc func clickEvent(sender: UITapGestureRecognizer) {
         guard let a = (sender.view as? UIView) else {return}
         let idx: Int = a.tag
-        print(idx)
-        //blacklistCellDelegate?.call(position: position)
+        //print(idx)
+        showEditEvent()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        newY = scrollView.contentOffset.y
+        if newY < 0 { newY = 0 }
+        //print(newY)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        newY = scrollView.contentOffset.y
+        if newY < 0 { newY = 0 }
+        //print(scrollView.contentOffset.y)
     }
     
     override func refresh() {
@@ -135,7 +173,62 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let startTime: Int = indexPath.row / columnNum + startNum
         let weekday: Int = indexPath.row % columnNum
-        print("\(weekday)-\(startTime)")
+        //print("\(weekday)-\(startTime)")
+        showEditEvent()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return editRows.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "edit_cell", for: indexPath) as? EditCell {
+            cell.editCellDelegate = self
+            let editRow = editRows[indexPath.row]
+            //print(searchRow)
+            cell.forRow(indexPath: indexPath, row: editRow)
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func showEditEvent() {
+        collectionView.isScrollEnabled = false
+        mask(y: newY, superView: collectionView)
+        let layerY = workAreaHeight + newY
+        var frame = CGRect(x:padding, y:layerY, width:view.frame.width-(2*padding), height:layerY-100)
+        addLayer(superView: collectionView, frame: frame)
+        let y = newY + 100
+        frame = CGRect(x: padding, y: y, width: containerView.frame.width, height: layerY-100)
+        animation(frame: frame)
+    }
+    override func _addLayer() {
+        editTableView.isHidden = false
+        containerView.addSubview(editTableView)
+        layerAddSubmitBtn(upView: editTableView)
+    }
+    override func otherAnimation() {
+        let frame = containerView.frame
+        editTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 400)
+    }
+    
+    @objc override func unmask() {
+        UIView.animate(withDuration: 0.5) {
+            self.maskView.alpha = 0
+            self.editTableView.isHidden = true
+            self.layerSubmitBtn.isHidden = true
+            self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.workAreaHeight, width:self.containerView.frame.width, height:0)
+        }
+        collectionView.isScrollEnabled = true
+    }
+    @objc override func layerSubmit(view: UIButton) {
+        unmask()
+        //prepareParams()
+        refresh()
     }
     
     @IBAction func addTimeTableBtnPressed(_ sender: Any) {
@@ -144,6 +237,18 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     @IBAction func prevBtnPressed(_ sender: Any) {
         prev()
+    }
+    
+    func setTextField(iden: String, value: String) {
+        
+    }
+    
+    func setSwitch(indexPath: IndexPath, value: Bool) {
+        
+    }
+    
+    func clear(indexPath: IndexPath) {
+        
     }
 }
 

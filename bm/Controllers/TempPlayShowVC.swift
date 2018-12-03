@@ -14,7 +14,7 @@ class TempPlayShowVC: MyTableVC {
     var model: Team!
     var scrollView: UIScrollView!
     var bkView: UIImageView!
-    var containerView: UIView!
+//    var containerView: UIView!
     var featuredView: UIImageView!
     var cityBtn: SuperButton!
     var arenaBtn: SuperButton!

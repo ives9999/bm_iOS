@@ -11,7 +11,6 @@ import UIKit
 class SearchVC_next: BaseViewController {
 
     var type: String!
-    let maskView = UIView()
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -59,7 +58,7 @@ class SearchVC_next: BaseViewController {
         maskView.alpha = 0
     }
     
-    @objc func unmask() {
+    @objc override func unmask() {
         UIView.animate(withDuration: 0.5) {
             self.maskView.alpha = 0
             self.collectionView.frame = CGRect(x:self.padding, y:self.view.frame.height, width:self.collectionView.frame.width, height:self.collectionView.frame.height)

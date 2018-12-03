@@ -13,12 +13,12 @@ import Device_swift
 var gSimulate:Bool = false
 
 enum MYCOLOR: Int {
-    case danger = 0xb92cc28
-    case success = 0x3e8f3e
-    case primary = 0x245580
-    case warning = 0xe38d13
-    case info = 0x28a4c9
-    case gray = 0xcccccc
+    case danger = 0xc12e2a
+    case success = 0x36c6d3
+    case primary = 0x337ab7
+    case warning = 0xF1C40F
+    case info = 0x659be0
+    case gray = 0xe1e1e1
     
     static let allValues = [danger, success, primary, warning, info, gray]
     

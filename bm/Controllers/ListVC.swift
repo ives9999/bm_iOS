@@ -14,23 +14,19 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     var _titleField: String = "name"
     internal(set) public var lists: [SuperData] = [SuperData]()
     
-    let maskView = UIView()
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var menuBtn: UIButton!
     
     var newY: CGFloat = 0
     
-    let containerView = UIView(frame: .zero)
     let searchTableView: UITableView = {
         let cv = UITableView(frame: .zero, style: .plain)
         cv.backgroundColor = UIColor.black
         return cv
     }()
-    let searchSubmitBtn: SubmitButton = SubmitButton()
     
     let padding: CGFloat = 20
     let headerHeight: CGFloat = 84
-    var tableViewBoundHeight: CGFloat = 0
     var layerHeight: CGFloat = 0
     
     var searchRows: [[String: Any]] = [[String: Any]]()
@@ -60,8 +56,8 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         setIden(item:_type, titleField: _titleField)
         let cellNibName = UINib(nibName: "ListCell", bundle: nil)
         myTablView.register(cellNibName, forCellReuseIdentifier: "listcell")
-        tableViewBoundHeight = view.bounds.height - 64
-        layerHeight = tableViewBoundHeight - 100
+        
+        layerHeight = workAreaHeight - 100
         
         searchTableView.dataSource = self
         searchTableView.delegate = self
@@ -352,58 +348,33 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     
     func showSearchPanel() {
         tableView.isScrollEnabled = false
-        mask(superView: tableView)
-        addLayer()
-        animation()
-    }
-    
-    func mask(superView: UIView) {
-        maskView.backgroundColor = UIColor(white: 1, alpha: 0.8)
-        maskView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(unmask)))
-        superView.addSubview(maskView)
-        
-        maskView.frame = CGRect(x: 0, y: newY, width: superView.frame.width, height: tableViewBoundHeight)
-        maskView.alpha = 0
-    }
-    
-    func addLayer() {
-        tableView.addSubview(containerView)
-        containerView.frame = CGRect(x:padding, y:tableViewBoundHeight + newY, width:view.frame.width-(2*padding), height:layerHeight)
-        containerView.backgroundColor = UIColor.black
-        
-        searchTableView.backgroundColor = UIColor.clear
-        containerView.addSubview(self.searchTableView)
-        
-        containerView.addSubview(searchSubmitBtn)
-        let c1: NSLayoutConstraint = NSLayoutConstraint(item: searchSubmitBtn, attribute: .top, relatedBy: .equal, toItem: searchTableView, attribute: .bottom, multiplier: 1, constant: 24)
-        let c2: NSLayoutConstraint = NSLayoutConstraint(item: searchSubmitBtn, attribute: .centerX, relatedBy: .equal, toItem: searchSubmitBtn.superview, attribute: .centerX, multiplier: 1, constant: 0)
-        searchSubmitBtn.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addConstraints([c1,c2])
-        searchSubmitBtn.addTarget(self, action: #selector(submit(view:)), for: .touchUpInside)
-        self.searchTableView.isHidden = false
-        self.searchSubmitBtn.isHidden = false
-    }
-    
-    func animation() {
+        mask(y: newY, superView: tableView)
+        var frame = CGRect(x:padding, y:workAreaHeight + newY, width:view.frame.width-(2*padding), height:layerHeight)
+        addLayer(superView: tableView, frame: frame)
         let y = newY + 100
-        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.maskView.alpha = 1
-            self.containerView.frame = CGRect(x: self.padding, y: y, width: self.containerView.frame.width, height: self.layerHeight)
-        }, completion: { (finished) in
-            if finished {
-                let frame = self.containerView.frame
-                self.searchTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 400)
-                
-            }
-        })
+        frame = CGRect(x: self.padding, y: y, width: self.containerView.frame.width, height: self.layerHeight)
+        animation(frame: frame)
     }
     
-    @objc func unmask() {
+    override func _addLayer() {
+        searchTableView.backgroundColor = UIColor.clear
+        searchTableView.isHidden = false
+        containerView.addSubview(self.searchTableView)
+    
+        layerAddSubmitBtn(upView: searchTableView)
+    }
+    
+    override func otherAnimation() {
+        let frame = self.containerView.frame
+        self.searchTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 400)
+    }
+    
+    @objc override func unmask() {
         UIView.animate(withDuration: 0.5) {
             self.maskView.alpha = 0
             self.searchTableView.isHidden = true
-            self.searchSubmitBtn.isHidden = true
-            self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.tableViewBoundHeight, width:self.containerView.frame.width, height:0)
+            self.layerSubmitBtn.isHidden = true
+            self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.workAreaHeight, width:self.containerView.frame.width, height:0)
         }
         tableView.isScrollEnabled = true
     }
@@ -412,7 +383,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         prev()
     }
     
-    @objc func submit(view: UIButton) {
+    @objc override func layerSubmit(view: UIButton) {
         unmask()
         prepareParams()
         refresh()
