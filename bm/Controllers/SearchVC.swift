@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, EditCellDelegate {
+class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, EditCellDelegate {
     
     @IBOutlet weak var menuBtn: UIButton!
     @IBOutlet weak var tableView: UITableView!
@@ -22,7 +22,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true],
         ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
         //            ["ch": "區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":"team_area","show":"全部","segue":TO_ARENA,"sender":0],
-        ["ch":"日期","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_DAYS_KEY,"show":"全部","segue":TO_DAY,"sender":[Int]()],
+        ["ch":"日期","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_DAYS_KEY,"show":"全部","segue":TO_WEEKDAY,"sender":[Int]()],
         ["ch":"時段","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_START_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
 //        ["ch":"結束時間","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_END_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
         ["ch":"球館","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int]()],
@@ -36,7 +36,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
 
     var citys: [City] = [City]()
     var arenas: [Arena] = [Arena]()
-    var days: [Int] = [Int]()
+    var weekdays: [Int] = [Int]()
     var degrees: [Degree] = [Degree]()
     
     //key has type, play_start_time, play_end_time, time
@@ -172,12 +172,12 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
             arenaSelectVC.citys = _citys
             arenaSelectVC.arenas = arenas
             arenaSelectVC.delegate = self
-        } else if segue.identifier == TO_DAY {
+        } else if segue.identifier == TO_WEEKDAY {
             destinationNavigationController = (segue.destination as! UINavigationController)
-            let daysSelectVC: DaysSelectVC = destinationNavigationController!.topViewController as! DaysSelectVC
-            daysSelectVC.source = "search"
-            daysSelectVC.selectedDays = days
-            daysSelectVC.delegate = self
+            let weekdaysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
+            weekdaysSelectVC.source = "search"
+            weekdaysSelectVC.selectedWeekdays = weekdays
+            weekdaysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let timeSelectVC: TimeSelectVC = destinationNavigationController!.topViewController as! TimeSelectVC
@@ -194,7 +194,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
             let tempPlayVC: TempPlayVC = segue.destination as! TempPlayVC
             tempPlayVC.citys = citys
             tempPlayVC.arenas = arenas
-            tempPlayVC.days = days
+            tempPlayVC.days = weekdays
             tempPlayVC.times = times
             tempPlayVC.degrees = degrees
             tempPlayVC.keyword = keyword
@@ -243,15 +243,15 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         tableView.reloadData()
     }
     
-    func setDaysData(res: [Int]) {
+    func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
         var row = getDefinedRow(TEAM_DAYS_KEY)
         var texts: [String] = [String]()
-        days = res
-        if days.count > 0 {
-            for day in days {
-                for gday in Global.instance.days {
-                    if day == gday["value"] as! Int {
-                        let text = gday["simple_text"]
+        weekdays = res
+        if weekdays.count > 0 {
+            for weekday in weekdays {
+                for gweekday in Global.instance.weekdays {
+                    if weekday == gweekday["value"] as! Int {
+                        let text = gweekday["simple_text"]
                         texts.append(text! as! String)
                         break
                     }

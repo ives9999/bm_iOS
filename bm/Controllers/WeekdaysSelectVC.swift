@@ -9,29 +9,32 @@
 import UIKit
 import UIColor_Hex_Swift
 
-protocol DaysSelectDelegate: class {
-    func setDaysData(res: [Int])
+protocol WeekdaysSelectDelegate: class {
+    func setWeekdaysData(res: [Int], indexPath: IndexPath?)
 }
 
-class DaysSelectVC: UITableViewController {
+class WeekdaysSelectVC: UITableViewController {
 
-    weak var delegate: DaysSelectDelegate?
-    var selectedDays: [Int] = [Int]()
-    var days: [[String: Any]] = Global.instance.days
+    weak var delegate: WeekdaysSelectDelegate?
+    var selectedWeekdays: [Int] = [Int]()
+    var weekdays: [[String: Any]] = Global.instance.weekdays
     
     //來源的程式：目前有team的setup跟search
     var source: String = "setup"
+    //選擇的類型：just one單選，multi複選
+    var select: String = "multi"
+    var indexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //print(selectedDays)
         
-        if selectedDays.count > 0 {
-            for day in selectedDays {
-                for (index, item) in days.enumerated() {
+        if selectedWeekdays.count > 0 {
+            for weekday in selectedWeekdays {
+                for (index, item) in weekdays.enumerated() {
                     let value: Int = item["value"] as! Int
-                    if day == value {
-                        days[index]["checked"] = true
+                    if weekday == value {
+                        weekdays[index]["checked"] = true
                         break
                     }
                 }
@@ -53,10 +56,10 @@ class DaysSelectVC: UITableViewController {
         //print(days)
         var isSelected: Bool = false
         var res: [Int] = [Int]()
-        for day in days {
+        for weekday in weekdays {
             //print(day)
-            if day["checked"] as! Bool {
-                let idx: Int = day["value"] as! Int
+            if weekday["checked"] as! Bool {
+                let idx: Int = weekday["value"] as! Int
                 res.append(idx)
                 isSelected = true
             }
@@ -65,11 +68,11 @@ class DaysSelectVC: UITableViewController {
             if source == "setup" {
                 SCLAlertView().showWarning("警告", subTitle: "沒有選擇星期日期，或請按取消回上一頁")
             } else {
-                self.delegate?.setDaysData(res: res)
+                self.delegate?.setWeekdaysData(res: res, indexPath: indexPath)
                 back()
             }
         } else {
-            self.delegate?.setDaysData(res: res)
+            self.delegate?.setWeekdaysData(res: res, indexPath: indexPath)
             back()
         }
     }
@@ -83,14 +86,14 @@ class DaysSelectVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return days.count
+        return weekdays.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        let item: [String: Any] = days[indexPath.row]
+        let item: [String: Any] = weekdays[indexPath.row]
         
         cell.textLabel!.text = (item["text"] as! String)
         let checked: Bool = item["checked"] as! Bool
@@ -114,12 +117,15 @@ class DaysSelectVC: UITableViewController {
             cell.accessoryType = .none
             cell.textLabel?.textColor = UIColor.white
             cell.tintColor = UIColor.white
-            days[indexPath.row]["checked"] = false
+            weekdays[indexPath.row]["checked"] = false
         } else {
             cell.accessoryType = .checkmark
             cell.textLabel?.textColor = UIColor(MY_GREEN)
             cell.tintColor = UIColor(MY_GREEN)
-            days[indexPath.row]["checked"] = true
+            weekdays[indexPath.row]["checked"] = true
+        }
+        if select == "just one" {
+            submit()
         }
     }
     

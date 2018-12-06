@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate {
+class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate, WeekdaysSelectDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -37,9 +37,10 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         cv.backgroundColor = UIColor.black
         return cv
     }()
-    let editRows: [[String: Any]] = [
-        ["ch":"標題","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入事件標題","text_field":true]
-    ]
+//    let editRows: [[String: Any]] = [
+//        ["ch":"標題","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入事件標題","text_field":true]
+//    ]
+    fileprivate var form: TimeTableForm = TimeTableForm()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,10 +69,16 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         editTableView.delegate = self
         editTableView.dataSource = self
         editTableView.backgroundColor = UIColor.clear
-        let editCellNib = UINib(nibName: "EditCell", bundle: nil)
-        editTableView.register(editCellNib, forCellReuseIdentifier: "edit_cell")
+        prepareSubViews()
         
         refresh()
+    }
+    
+    private func prepareSubViews() {
+        FormItemCellType.registerCells(for: editTableView)
+        //self.ibTableView.allowsSelection = false
+        //self.ibTableView.estimatedRowHeight = 60
+        //self.ibTableView.rowHeight = 60
     }
     
     func markEvent() {
@@ -182,28 +189,71 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return editRows.count
+        return form.formItems.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "edit_cell", for: indexPath) as? EditCell {
-            cell.editCellDelegate = self
-            let editRow = editRows[indexPath.row]
-            //print(searchRow)
-            cell.forRow(indexPath: indexPath, row: editRow)
-            return cell
+        let item = form.formItems[indexPath.row]
+        let cell: UITableViewCell
+        if let cellType = form.formItems[indexPath.row].uiProperties.cellType {
+            cell = cellType.dequeueCell(for: tableView, at: indexPath)
+        } else {
+            cell = UITableViewCell()
         }
-        return UITableViewCell()
+        
+        if let formUpdatableCell = cell as? FormUPdatable {
+            item.indexPath = indexPath
+            formUpdatableCell.update(with: item)
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        Global.instance.addSpinner(superView: view)
+        Global.instance.removeSpinner(superView: view)
+        let item = form.formItems[indexPath.row]
+        if let cellType = form.formItems[indexPath.row].uiProperties.cellType {
+            if cellType == FormItemCellType.more {
+                if item.segue != nil {
+                    let segue = item.segue!
+                    let sender: [String: Any?] = ["indexPath":indexPath, "sender":item.sender]
+                    performSegue(withIdentifier: segue, sender: sender)
+                }
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        var destinationNavigationController: UINavigationController?
+        if segue.identifier == TO_WEEKDAY {
+            destinationNavigationController = (segue.destination as! UINavigationController)
+            let weekdaysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
+            //weekdaysSelectVC.source = "search"
+            weekdaysSelectVC.select = "just one"
+            if let _sender: [String: Any?] = sender as? [String: Any?] {
+                if _sender["indexPath"] != nil {
+                    let indexPath: IndexPath = _sender["indexPath"] as! IndexPath
+                    weekdaysSelectVC.indexPath = indexPath
+                }
+                if _sender["sender"] != nil {
+                    let realSender: [Int] = _sender["sender"] as! [Int]
+                    weekdaysSelectVC.selectedWeekdays = realSender
+                }
+            }
+            
+            weekdaysSelectVC.delegate = self
+        }
     }
     
     func showEditEvent() {
         collectionView.isScrollEnabled = false
         mask(y: newY, superView: collectionView)
         let layerY = workAreaHeight + newY
-        var frame = CGRect(x:padding, y:layerY, width:view.frame.width-(2*padding), height:layerY-100)
+        var frame = CGRect(x:padding, y:layerY, width:view.frame.width-(2*padding), height:layerY)
         addLayer(superView: collectionView, frame: frame)
-        let y = newY + 100
-        frame = CGRect(x: padding, y: y, width: containerView.frame.width, height: layerY-100)
+        let y = newY
+        frame = CGRect(x: padding, y: y, width: containerView.frame.width, height: layerY)
         animation(frame: frame)
     }
     override func _addLayer() {
@@ -213,7 +263,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     override func otherAnimation() {
         let frame = containerView.frame
-        editTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 400)
+        editTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 500)
     }
     
     @objc override func unmask() {
@@ -249,6 +299,29 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     func clear(indexPath: IndexPath) {
         
+    }
+    
+    func setWeekdaysData(res: [Int], indexPath: IndexPath? = nil) {
+        if indexPath != nil {
+            let item = form.formItems[indexPath!.row]
+            var texts: [String] = [String]()
+            item.weekdays = res
+            if item.weekdays.count > 0 {
+                for weekday in item.weekdays {
+                    for gweekday in Global.instance.weekdays {
+                        if weekday == gweekday["value"] as! Int {
+                            let text = gweekday["simple_text"]
+                            texts.append(text! as! String)
+                            break
+                        }
+                    }
+                }
+                item.show = texts.joined(separator: ",")
+            } else {
+                item.show = ""
+            }
+            editTableView.reloadData()
+        }
     }
 }
 

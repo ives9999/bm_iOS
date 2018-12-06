@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate, EditCellDelegate {
+class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate, EditCellDelegate {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -183,10 +183,10 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                 let arenas: [Arena] = [Arena(id:tmp["arena_id"]!, name:"")]
                 arenaSelectVC.arenas = arenas
             }
-        } else if segue.identifier == TO_DAY {
+        } else if segue.identifier == TO_WEEKDAY {
             destinationNavigationController = (segue.destination as! UINavigationController)
-            let daysSelectVC: DaysSelectVC = destinationNavigationController!.topViewController as! DaysSelectVC
-            daysSelectVC.selectedDays = (sender as! [Int])
+            let daysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
+            daysSelectVC.selectedWeekdays = (sender as! [Int])
             daysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
             destinationNavigationController = (segue.destination as! UINavigationController)
@@ -308,7 +308,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
     {
         //not use
     }
-    func setDaysData(res: [Int]) {
+    func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
         let days: [Int] = model.data[TEAM_DAYS_KEY]!["value"] as! [Int]
         if !res.containsSameElements(as: days) {
             model.updateDays(res)

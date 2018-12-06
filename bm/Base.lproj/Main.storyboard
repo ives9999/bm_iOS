@@ -95,7 +95,7 @@
         <!--星期幾-->
         <scene sceneID="w2r-Hp-vkk">
             <objects>
-                <tableViewController id="kQg-4a-L1K" customClass="DaysSelectVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="kQg-4a-L1K" customClass="WeekdaysSelectVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="DTt-lK-SLm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -313,7 +313,7 @@
                         <outlet property="titleLbl" destination="v2w-Um-mA3" id="wMh-ZJ-eN7"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="EKU-tT-H1i"/>
                         <segue destination="81S-kF-xqU" kind="show" identifier="toArena" id="XnZ-GS-Ao0"/>
-                        <segue destination="25C-Iu-CXV" kind="show" identifier="toDay" id="cUS-kZ-A2j"/>
+                        <segue destination="25C-Iu-CXV" kind="show" identifier="toWeekday" id="cUS-kZ-A2j"/>
                         <segue destination="eqh-Y0-TDo" kind="show" identifier="toSelectTime" id="HZU-LD-Mbl"/>
                         <segue destination="jgh-cg-UbZ" kind="show" identifier="toTextInput" id="Lp8-ui-LgL"/>
                         <segue destination="Z37-Ed-Jzr" kind="show" identifier="toSelectDegree" id="EfF-hk-cE7"/>
@@ -1975,7 +1975,7 @@
                         <segue destination="Zvi-i7-Pcr" kind="show" identifier="toManager" id="xCJ-lv-P9J"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="UI0-Ma-Ffm"/>
                         <segue destination="81S-kF-xqU" kind="show" identifier="toArena" id="pYZ-nD-1ol"/>
-                        <segue destination="25C-Iu-CXV" kind="show" identifier="toDay" id="SiI-cm-Vku"/>
+                        <segue destination="25C-Iu-CXV" kind="show" identifier="toWeekday" id="SiI-cm-Vku"/>
                         <segue destination="eqh-Y0-TDo" kind="show" identifier="toSelectTime" id="y8N-d0-A16"/>
                         <segue destination="Z37-Ed-Jzr" kind="show" identifier="toSelectDegree" id="beR-yu-55u"/>
                     </connections>
@@ -2071,7 +2071,7 @@
                         <outlet property="submitBtn" destination="9QR-jK-rdm" id="joa-9p-0QF"/>
                         <outlet property="tableView" destination="qE9-4T-nY3" id="INU-li-bW2"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="itP-1S-HdR"/>
-                        <segue destination="25C-Iu-CXV" kind="show" identifier="toDay" id="H3p-LU-aVa"/>
+                        <segue destination="25C-Iu-CXV" kind="show" identifier="toWeekday" id="H3p-LU-aVa"/>
                         <segue destination="eqh-Y0-TDo" kind="show" identifier="toSelectTime" id="mvW-Q8-ZFE"/>
                         <segue destination="81S-kF-xqU" kind="show" identifier="toArena" id="CFj-m8-ABA"/>
                         <segue destination="Z37-Ed-Jzr" kind="show" identifier="toSelectDegree" id="2Di-nR-q4w"/>
@@ -2412,11 +2412,12 @@
                     <connections>
                         <outlet property="collectionView" destination="9Jd-2O-e9s" id="xlH-2q-7RH"/>
                         <outlet property="titleLbl" destination="lfh-Wl-Z80" id="Xex-aA-Jbf"/>
+                        <segue destination="25C-Iu-CXV" kind="show" identifier="toWeekday" id="T5V-F1-cVP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1T7-kS-5RS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1508" y="569"/>
+            <point key="canvasLocation" x="406" y="-4041"/>
         </scene>
         <!--Manager FunctionVC-->
         <scene sceneID="eaE-vz-b2s">
@@ -3174,7 +3175,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lxm-Qf-W2p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-364" y="-4377"/>
+            <point key="canvasLocation" x="-772" y="-4590"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZCV-m5-fHB">

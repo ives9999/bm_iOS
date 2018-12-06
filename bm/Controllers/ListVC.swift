@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, DaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate {
+class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate {
 
     var _type: String = "coach"
     var _titleField: String = "name"
@@ -313,11 +313,11 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
             arenaSelectVC.citys = _citys
             arenaSelectVC.arenas = arenas
             arenaSelectVC.delegate = self
-        } else if segue.identifier == TO_DAY {
+        } else if segue.identifier == TO_WEEKDAY {
             destinationNavigationController = (segue.destination as! UINavigationController)
-            let daysSelectVC: DaysSelectVC = destinationNavigationController!.topViewController as! DaysSelectVC
+            let daysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
             daysSelectVC.source = "search"
-            daysSelectVC.selectedDays = days
+            daysSelectVC.selectedWeekdays = days
             daysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
             destinationNavigationController = (segue.destination as! UINavigationController)
@@ -470,13 +470,13 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         searchTableView.reloadData()
     }
     
-    func setDaysData(res: [Int]) {
+    func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
         var row = getDefinedRow(TEAM_DAYS_KEY)
         var texts: [String] = [String]()
         days = res
         if days.count > 0 {
             for day in days {
-                for gday in Global.instance.days {
+                for gday in Global.instance.weekdays {
                     if day == gday["value"] as! Int {
                         let text = gday["simple_text"]
                         texts.append(text! as! String)

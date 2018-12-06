@@ -159,7 +159,7 @@ class Global {
     
     static let instance = Global()
     
-    let days: [[String: Any]] = [
+    let weekdays: [[String: Any]] = [
         ["value":1,"text":"星期一","simple_text":"一","checked":false],
         ["value":2,"text":"星期二","simple_text":"二","checked":false],
         ["value":3,"text":"星期三","simple_text":"三","checked":false],

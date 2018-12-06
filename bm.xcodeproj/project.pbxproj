@@ -28,6 +28,13 @@
 		B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F8041FC52CAE00DE98FB /* MyTableVC.swift */; };
 		B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F8071FC6AC2200DE98FB /* SuperCell.swift */; };
 		B322F80A1FC6AD1800DE98FB /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F8091FC6AD1800DE98FB /* MenuCell.swift */; };
+		B323390A21B6B8E4003EB84D /* FormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B323390821B6B8E4003EB84D /* FormItem.swift */; };
+		B323390B21B6B8E4003EB84D /* FormValidableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = B323390921B6B8E4003EB84D /* FormValidableProtocol.swift */; };
+		B323390D21B6B995003EB84D /* FormConformity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B323390C21B6B995003EB84D /* FormConformity.swift */; };
+		B323390F21B6BBC7003EB84D /* BaseForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B323390E21B6BBC7003EB84D /* BaseForm.swift */; };
+		B323391121B6BC05003EB84D /* TimeTableFrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = B323391021B6BC05003EB84D /* TimeTableFrom.swift */; };
+		B323391321B6C947003EB84D /* FormItemCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B323391221B6C947003EB84D /* FormItemCellType.swift */; };
+		B323391521B6CAE8003EB84D /* FormItemUIProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B323391421B6CAE8003EB84D /* FormItemUIProperties.swift */; };
 		B32CAFE11FF2589000D184ED /* Switch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32CAFE01FF2589000D184ED /* Switch.swift */; };
 		B32D9EE621106C5F00999A4A /* CourseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32D9EE521106C5F00999A4A /* CourseService.swift */; };
 		B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32FBCF21F8483E3003D39CC /* HomeImageCell.swift */; };
@@ -40,6 +47,10 @@
 		B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */; };
 		B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */; };
 		B34A20AE21AE962700EE6E1C /* TimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AD21AE962700EE6E1C /* TimeTable.swift */; };
+		B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20FE21B696AA00EE6E1C /* TextFieldCell.swift */; };
+		B34A210121B696AA00EE6E1C /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B34A20FF21B696AA00EE6E1C /* TextFieldCell.xib */; };
+		B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A210221B6A6D300EE6E1C /* MoreCell.swift */; };
+		B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B34A210321B6A6D300EE6E1C /* MoreCell.xib */; };
 		B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */; };
 		B3591B702164CC6100E0919C /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3591B6F2164CC6100E0919C /* Degree.swift */; };
 		B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35BA6822073C06600B506CA /* BaseViewController.swift */; };
@@ -57,6 +68,8 @@
 		B36CBD5920E13F7A00E52B9C /* TempPlayDatePlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36CBD5820E13F7A00E52B9C /* TempPlayDatePlayerCell.swift */; };
 		B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */; };
 		B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375105A1FA96C0500CDF1A0 /* Member.swift */; };
+		B3756ED021B793E8006893E1 /* DateTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3756ECE21B793E8006893E1 /* DateTimeCell.swift */; };
+		B3756ED121B793E8006893E1 /* DateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3756ECF21B793E8006893E1 /* DateTimeCell.xib */; };
 		B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A13441FDAF3CB00413E64 /* SuperButton.swift */; };
 		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */; };
@@ -90,7 +103,7 @@
 		B3ED38EA1FB87EE50003F083 /* TeamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38E91FB87EE50003F083 /* TeamService.swift */; };
 		B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38EB1FB9AB9D0003F083 /* Arena.swift */; };
 		B3ED38F01FB9AD460003F083 /* ArenaSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38EF1FB9AD460003F083 /* ArenaSelectVC.swift */; };
-		B3ED38F21FBAD4C30003F083 /* DaysSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F11FBAD4C20003F083 /* DaysSelectVC.swift */; };
+		B3ED38F21FBAD4C30003F083 /* WeekdaysSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */; };
 		B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */; };
 		B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F51FBC0A7C0003F083 /* TextInputVC.swift */; };
 		B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */; };
@@ -201,6 +214,13 @@
 		B322F8041FC52CAE00DE98FB /* MyTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableVC.swift; sourceTree = "<group>"; };
 		B322F8071FC6AC2200DE98FB /* SuperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperCell.swift; sourceTree = "<group>"; };
 		B322F8091FC6AD1800DE98FB /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		B323390821B6B8E4003EB84D /* FormItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormItem.swift; sourceTree = "<group>"; };
+		B323390921B6B8E4003EB84D /* FormValidableProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValidableProtocol.swift; sourceTree = "<group>"; };
+		B323390C21B6B995003EB84D /* FormConformity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormConformity.swift; sourceTree = "<group>"; };
+		B323390E21B6BBC7003EB84D /* BaseForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseForm.swift; sourceTree = "<group>"; };
+		B323391021B6BC05003EB84D /* TimeTableFrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableFrom.swift; sourceTree = "<group>"; };
+		B323391221B6C947003EB84D /* FormItemCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormItemCellType.swift; sourceTree = "<group>"; };
+		B323391421B6CAE8003EB84D /* FormItemUIProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormItemUIProperties.swift; sourceTree = "<group>"; };
 		B32CAFE01FF2589000D184ED /* Switch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Switch.swift; sourceTree = "<group>"; };
 		B32D9EE521106C5F00999A4A /* CourseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseService.swift; sourceTree = "<group>"; };
 		B32FBCF21F8483E3003D39CC /* HomeImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeImageCell.swift; sourceTree = "<group>"; };
@@ -213,6 +233,10 @@
 		B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayTableHeaderView.swift; sourceTree = "<group>"; };
 		B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableVC.swift; sourceTree = "<group>"; };
 		B34A20AD21AE962700EE6E1C /* TimeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; };
+		B34A20FE21B696AA00EE6E1C /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
+		B34A20FF21B696AA00EE6E1C /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
+		B34A210221B6A6D300EE6E1C /* MoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCell.swift; sourceTree = "<group>"; };
+		B34A210321B6A6D300EE6E1C /* MoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreCell.xib; sourceTree = "<group>"; };
 		B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayEditVC.swift; sourceTree = "<group>"; };
 		B3591B6F2164CC6100E0919C /* Degree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
 		B35BA6822073C06600B506CA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -230,6 +254,8 @@
 		B36CBD5820E13F7A00E52B9C /* TempPlayDatePlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayDatePlayerCell.swift; sourceTree = "<group>"; };
 		B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		B375105A1FA96C0500CDF1A0 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		B3756ECE21B793E8006893E1 /* DateTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeCell.swift; sourceTree = "<group>"; };
+		B3756ECF21B793E8006893E1 /* DateTimeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateTimeCell.xib; sourceTree = "<group>"; };
 		B37A13441FDAF3CB00413E64 /* SuperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperButton.swift; sourceTree = "<group>"; };
 		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFunctionVC.swift; sourceTree = "<group>"; };
@@ -265,7 +291,7 @@
 		B3ED38E91FB87EE50003F083 /* TeamService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamService.swift; sourceTree = "<group>"; };
 		B3ED38EB1FB9AB9D0003F083 /* Arena.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arena.swift; sourceTree = "<group>"; };
 		B3ED38EF1FB9AD460003F083 /* ArenaSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaSelectVC.swift; sourceTree = "<group>"; };
-		B3ED38F11FBAD4C20003F083 /* DaysSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysSelectVC.swift; sourceTree = "<group>"; };
+		B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysSelectVC.swift; sourceTree = "<group>"; };
 		B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectVC.swift; sourceTree = "<group>"; };
 		B3ED38F51FBC0A7C0003F083 /* TextInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputVC.swift; sourceTree = "<group>"; };
 		B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreeSelectVC.swift; sourceTree = "<group>"; };
@@ -401,6 +427,7 @@
 		B32FBCEF1F84831C003D39CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B34A20FD21B6967600EE6E1C /* Form */,
 				B306F3412180344300C32CE2 /* Switch */,
 				B3F8C3B6215D27BE005CBBC1 /* Checkbox.swift */,
 				B337B9A71FE2981700C3EE28 /* View */,
@@ -452,6 +479,26 @@
 				B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		B34A20FD21B6967600EE6E1C /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				B323391421B6CAE8003EB84D /* FormItemUIProperties.swift */,
+				B323391221B6C947003EB84D /* FormItemCellType.swift */,
+				B323390821B6B8E4003EB84D /* FormItem.swift */,
+				B323390C21B6B995003EB84D /* FormConformity.swift */,
+				B323390921B6B8E4003EB84D /* FormValidableProtocol.swift */,
+				B34A20FE21B696AA00EE6E1C /* TextFieldCell.swift */,
+				B34A20FF21B696AA00EE6E1C /* TextFieldCell.xib */,
+				B34A210221B6A6D300EE6E1C /* MoreCell.swift */,
+				B34A210321B6A6D300EE6E1C /* MoreCell.xib */,
+				B323390E21B6BBC7003EB84D /* BaseForm.swift */,
+				B323391021B6BC05003EB84D /* TimeTableFrom.swift */,
+				B3756ECE21B793E8006893E1 /* DateTimeCell.swift */,
+				B3756ECF21B793E8006893E1 /* DateTimeCell.xib */,
+			);
+			path = Form;
 			sourceTree = "<group>";
 		};
 		B37A13431FDAF38C00413E64 /* Button */ = {
@@ -568,7 +615,7 @@
 				F9A1CB841F9895C300DDEC86 /* CoachVC.swift */,
 				F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */,
 				B3E72A181F9CBE9F0008A6B1 /* CourseCV.swift */,
-				B3ED38F11FBAD4C20003F083 /* DaysSelectVC.swift */,
+				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */,
 				B3ED38D61FB2A3E80003F083 /* EditProfileVC.swift */,
 				F94FF4341FB4322C00D167B6 /* EditVC.swift */,
@@ -778,9 +825,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3756ED121B793E8006893E1 /* DateTimeCell.xib in Resources */,
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				F94E7D271F83636A00F550FD /* Assets.xcassets in Resources */,
+				B34A210121B696AA00EE6E1C /* TextFieldCell.xib in Resources */,
+				B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */,
 				B316FED72112F13600FB990C /* CollectionCell.xib in Resources */,
 				F94E7D251F83636A00F550FD /* Main.storyboard in Resources */,
 				B35C4F4D2196F5E500F8AEB2 /* EditCell.xib in Resources */,
@@ -926,6 +976,7 @@
 				B3DEBE0F2106FDB1003699A0 /* ListCell.swift in Sources */,
 				B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
+				B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */,
 				B3591B702164CC6100E0919C /* Degree.swift in Sources */,
 				B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */,
 				B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */,
@@ -933,6 +984,7 @@
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
 				B3ED38EA1FB87EE50003F083 /* TeamService.swift in Sources */,
 				B35F8DD91F8F64310073BD70 /* Home.swift in Sources */,
+				B323390D21B6B995003EB84D /* FormConformity.swift in Sources */,
 				B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */,
 				F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */,
 				B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */,
@@ -947,6 +999,8 @@
 				F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */,
 				B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */,
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
+				B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */,
+				B323391521B6CAE8003EB84D /* FormItemUIProperties.swift in Sources */,
 				B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */,
 				B3308C4D1FD9575E006A83B6 /* Tag.swift in Sources */,
 				B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */,
@@ -959,6 +1013,7 @@
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
+				B323390F21B6BBC7003EB84D /* BaseForm.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
 				B3649414207DCA790030CF44 /* SCLAlertView.swift in Sources */,
 				F96931971FB953960005C13F /* City.swift in Sources */,
@@ -966,6 +1021,7 @@
 				B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */,
 				B306F3432180346B00C32CE2 /* SuperSwitch.swift in Sources */,
 				F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */,
+				B323391121B6BC05003EB84D /* TimeTableFrom.swift in Sources */,
 				B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
 				B322F80A1FC6AD1800DE98FB /* MenuCell.swift in Sources */,
@@ -974,8 +1030,10 @@
 				B31739EF21787960004CFEDE /* MyMapVC.swift in Sources */,
 				B36CBD5920E13F7A00E52B9C /* TempPlayDatePlayerCell.swift in Sources */,
 				B3ED38F01FB9AD460003F083 /* ArenaSelectVC.swift in Sources */,
+				B323390A21B6B8E4003EB84D /* FormItem.swift in Sources */,
 				B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */,
 				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
+				B323391321B6C947003EB84D /* FormItemCellType.swift in Sources */,
 				B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */,
 				F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */,
 				B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */,
@@ -988,13 +1046,15 @@
 				B3DEBE1221078191003699A0 /* Coach.swift in Sources */,
 				B3ED38E41FB77BD20003F083 /* NumberTextField.swift in Sources */,
 				B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */,
+				B3756ED021B793E8006893E1 /* DateTimeCell.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* CourseService.swift in Sources */,
+				B323390B21B6B8E4003EB84D /* FormValidableProtocol.swift in Sources */,
 				B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
-				B3ED38F21FBAD4C30003F083 /* DaysSelectVC.swift in Sources */,
+				B3ED38F21FBAD4C30003F083 /* WeekdaysSelectVC.swift in Sources */,
 				B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */,
 				B30C954C1FEA8CDA005F71EF /* PasswordVC.swift in Sources */,
 				B3E72A261FA0FBFF0008A6B1 /* LoginVC.swift in Sources */,
