@@ -45,8 +45,10 @@ class WeekdaysSelectVC: UITableViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(submit))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        if select == "multi" {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(submit))
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        }
     }
     
     @objc func back() {
@@ -54,16 +56,19 @@ class WeekdaysSelectVC: UITableViewController {
     }
     @objc func submit() {
         //print(days)
-        var isSelected: Bool = false
-        var res: [Int] = [Int]()
-        for weekday in weekdays {
-            //print(day)
-            if weekday["checked"] as! Bool {
-                let idx: Int = weekday["value"] as! Int
-                res.append(idx)
-                isSelected = true
-            }
-        }
+//        var isSelected: Bool = false
+//        var res: [Int] = [Int]()
+//        for weekday in weekdays {
+//            //print(day)
+//            if weekday["checked"] as! Bool {
+//                let idx: Int = weekday["value"] as! Int
+//                res.append(idx)
+//                isSelected = true
+//            }
+//        }
+        self.delegate?.setWeekdaysData(res: selectedWeekdays, indexPath: indexPath)
+        back()
+        /*
         if !isSelected {
             if source == "setup" {
                 SCLAlertView().showWarning("警告", subTitle: "沒有選擇星期日期，或請按取消回上一頁")
@@ -75,6 +80,11 @@ class WeekdaysSelectVC: UITableViewController {
             self.delegate?.setWeekdaysData(res: res, indexPath: indexPath)
             back()
         }
+ */
+    }
+    
+    func _submit() {
+        
     }
 
     // MARK: - Table view data source
@@ -112,7 +122,12 @@ class WeekdaysSelectVC: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
-                
+        
+//        if select == "just one" {
+//            for (index, _) in weekdays.enumerated() {
+//                weekdays[index]["checked"] = false
+//            }
+//        }
         if cell.accessoryType == .checkmark {
             cell.accessoryType = .none
             cell.textLabel?.textColor = UIColor.white
@@ -124,9 +139,44 @@ class WeekdaysSelectVC: UITableViewController {
             cell.tintColor = UIColor(MY_GREEN)
             weekdays[indexPath.row]["checked"] = true
         }
-        if select == "just one" {
+        let weekday = indexPath.row + 1
+        var isExist = false
+        var at = 0
+        for (idx, selectWeekday) in selectedWeekdays.enumerated() {
+            if selectWeekday == weekday {
+                isExist = true
+                at = idx
+                break
+            }
+        }
+        if isExist {
+            selectedWeekdays.remove(at: at)
+        } else {
+            if select == "just one" {
+                selectedWeekdays.removeAll()
+            }
+            selectedWeekdays.append(weekday)
+        }
+        if select == "just one" && selectedWeekdays.count > 0 {
             submit()
         }
+//        if select == "just one" {
+//            var selected = false
+//            for (index, _) in weekdays.enumerated() {
+//                let _selected = weekdays[index]["checked"] as! Bool
+//                if _selected {
+//                    selected = true
+//                    break
+//                }
+//            }
+//            if selected {
+//                submit()
+//            }
+//        }
+    }
+    
+    func resetSelect() {
+        
     }
     
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoreCell: SuperCell {
+class MoreCell: SuperCell, FormUPdatable {
     
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var detailLbl: SuperLabel!
@@ -17,26 +17,25 @@ class MoreCell: SuperCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        titleLbl.textAlignment = NSTextAlignment.left
         detailLbl.textAlignment = NSTextAlignment.right
         detailLbl.text = ""
         clearBtn.isHidden = true
     }
     
     @IBAction func clearBtnPressed(_ sender: Any) {
-        print("clear")
+        clear()
     }
-}
-
-extension MoreCell: FormUPdatable {
+    
+    func clear() {
+        clearBtn.isHidden = true
+        detailLbl.text = ""
+    }
     
     func update(with formItem: FormItem) {
         self.formItem = formItem
         
-        titleLbl.text = self.formItem?.title
+        //titleLbl.text = self.formItem?.title
         detailLbl.text = self.formItem?.show
-        self.formItem?.sender = self.formItem?.weekdays
-        if (self.formItem?.weekdays.count)! > 0 {
-            clearBtn.isHidden = false
-        }
     }
 }

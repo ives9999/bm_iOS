@@ -30,6 +30,11 @@ class FormItem: FormValidable {
         self.value = value
     }
     
+    func reset() {
+        show = ""
+        weekdays = [Int]()
+    }
+    
     func checkValidity() {
         if self.isMandatory {
             self.isValid = self.value != nil && self.value?.isEmpty == false

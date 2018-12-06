@@ -195,7 +195,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let item = form.formItems[indexPath.row]
         let cell: UITableViewCell
-        if let cellType = form.formItems[indexPath.row].uiProperties.cellType {
+        if let cellType = item.uiProperties.cellType {
             cell = cellType.dequeueCell(for: tableView, at: indexPath)
         } else {
             cell = UITableViewCell()
@@ -214,7 +214,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         Global.instance.removeSpinner(superView: view)
         let item = form.formItems[indexPath.row]
         if let cellType = form.formItems[indexPath.row].uiProperties.cellType {
-            if cellType == FormItemCellType.more {
+            if cellType == FormItemCellType.weekday {
                 if item.segue != nil {
                     let segue = item.segue!
                     let sender: [String: Any?] = ["indexPath":indexPath, "sender":item.sender]
@@ -241,7 +241,6 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                     weekdaysSelectVC.selectedWeekdays = realSender
                 }
             }
-            
             weekdaysSelectVC.delegate = self
         }
     }
@@ -305,6 +304,8 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         if indexPath != nil {
             let item = form.formItems[indexPath!.row]
             var texts: [String] = [String]()
+            item.reset()
+            item.sender = [Int]()
             item.weekdays = res
             if item.weekdays.count > 0 {
                 for weekday in item.weekdays {

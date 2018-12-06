@@ -13,6 +13,7 @@ enum FormItemCellType {
     case textField
     case more
     case dateTime
+    case weekday
     
     static func registerCells(for tableView: UITableView) {
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
@@ -23,6 +24,9 @@ enum FormItemCellType {
         
         let dateTimeNib = UINib(nibName: "DateTimeCell", bundle: nil)
         tableView.register(dateTimeNib, forCellReuseIdentifier: "dateTime")
+        
+        let weekdayNib = UINib(nibName: "WeekdayCell", bundle: nil)
+        tableView.register(weekdayNib, forCellReuseIdentifier: "weekday")
     }
     
     func dequeueCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
@@ -35,6 +39,8 @@ enum FormItemCellType {
             cell = tableView.dequeueReusableCell(withIdentifier: "more", for: indexPath)
         case .dateTime:
             cell = tableView.dequeueReusableCell(withIdentifier: "dateTime", for: indexPath)
+        case .weekday:
+            cell = tableView.dequeueReusableCell(withIdentifier: "weekday", for: indexPath)
         }
         
         return cell

@@ -11,7 +11,7 @@ import Foundation
 class TimeTableForm: BaseForm {
     
     var eventTitle: String?
-    var eventDay: String?
+    var eventWeekdayay: String?
     var eventStartTime: String?
     var eventEndTime: String?
     var eventLimit: String?
@@ -29,9 +29,9 @@ class TimeTableForm: BaseForm {
             eventTitleItem?.value = value
         }
         
-        let eventDayItem = FormItem(title: "星期日期")
-        eventDayItem.uiProperties.cellType = FormItemCellType.more
-        eventDayItem.segue = TO_WEEKDAY
+        let eventWeekdayItem = FormItem(title: "星期日期")
+        eventWeekdayItem.uiProperties.cellType = FormItemCellType.weekday
+        eventWeekdayItem.segue = TO_WEEKDAY
         
         let eventStartTimeItem = FormItem(title: "開始時間")
         eventStartTimeItem.uiProperties.cellType = FormItemCellType.more
@@ -57,6 +57,6 @@ class TimeTableForm: BaseForm {
         let eventContentItem = FormItem(title: "詳細內容")
         eventContentItem.uiProperties.cellType = FormItemCellType.more
         
-        formItems = [eventTitleItem, eventDayItem, eventStartTimeItem, eventEndTimeItem, eventLimitItem, eventColorItem, eventStatusItem, eventContentItem]
+        formItems = [eventTitleItem, eventWeekdayItem, eventStartTimeItem, eventEndTimeItem, eventLimitItem, eventColorItem, eventStatusItem, eventContentItem]
     }
 }
