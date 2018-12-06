@@ -10,11 +10,12 @@ import UIKit
 import UIColor_Hex_Swift
 
 protocol TimeSelectDelegate: class {
-    func setTimeData(time: String, type: SELECT_TIME_TYPE)
+    func setTimeData(time: String, type: SELECT_TIME_TYPE, indexPath: IndexPath?)
 }
 
 class TimeSelectVC: UITableViewController {
     
+    //input["type":PLAY_START,"time":time]
     var input: [String: Any] = [String: Any]()
     let times: [String] = ["07:00","08:00","09:00","10:00","11:00","12:00",
 "13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"
@@ -23,6 +24,9 @@ class TimeSelectVC: UITableViewController {
     
     //來源的程式：目前有team的setup跟search
     var source: String = "setup"
+    //選擇的類型：just one單選，multi複選
+    var select: String = "multi"
+    var indexPath: IndexPath?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +94,7 @@ class TimeSelectVC: UITableViewController {
                 time = ""
             }
         }
-        delegate?.setTimeData(time: time, type: type)
+        delegate?.setTimeData(time: time, type: type, indexPath: indexPath)
         dismiss(animated: true, completion: nil)
     }
     

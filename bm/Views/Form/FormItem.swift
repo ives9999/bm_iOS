@@ -17,10 +17,14 @@ class FormItem: FormValidable {
     var indexPath: IndexPath?
     var valueCompletion: ((String?) -> Void)?
     var uiProperties = FormItemUIProperties()
+    var timeType: SELECT_TIME_TYPE?
     var segue: String?
-    var weekdays: [Int] = [Int]()
     var show: String = ""
     var sender: Any?
+    
+    var weekdays: [Int] = [Int]()
+    var startTime: String = ""
+    var endTime: String = ""
     
     init(title: String, placeholder: String? = nil, value: String? = nil) {
         self.title = title

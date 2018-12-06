@@ -316,7 +316,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             self.tableView.reloadData()
         }
     }
-    func setTimeData(time: String, type: SELECT_TIME_TYPE) {
+    func setTimeData(time: String, type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
         switch type {
         case SELECT_TIME_TYPE.play_start:
             let key = TEAM_PLAY_START_KEY

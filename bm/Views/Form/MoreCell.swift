@@ -35,7 +35,7 @@ class MoreCell: SuperCell, FormUPdatable {
     func update(with formItem: FormItem) {
         self.formItem = formItem
         
-        //titleLbl.text = self.formItem?.title
+        titleLbl.text = self.formItem?.title
         detailLbl.text = self.formItem?.show
     }
 }

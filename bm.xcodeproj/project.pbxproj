@@ -72,6 +72,8 @@
 		B3756ED121B793E8006893E1 /* DateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3756ECF21B793E8006893E1 /* DateTimeCell.xib */; };
 		B3756EDA21B8E50E006893E1 /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3756ED821B8E50E006893E1 /* WeekdayCell.swift */; };
 		B3756EDB21B8E50E006893E1 /* WeekdayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3756ED921B8E50E006893E1 /* WeekdayCell.xib */; };
+		B3756EDE21B901C5006893E1 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3756EDC21B901C5006893E1 /* TimeCell.swift */; };
+		B3756EDF21B901C5006893E1 /* TimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3756EDD21B901C5006893E1 /* TimeCell.xib */; };
 		B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A13441FDAF3CB00413E64 /* SuperButton.swift */; };
 		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */; };
@@ -260,6 +262,8 @@
 		B3756ECF21B793E8006893E1 /* DateTimeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateTimeCell.xib; sourceTree = "<group>"; };
 		B3756ED821B8E50E006893E1 /* WeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
 		B3756ED921B8E50E006893E1 /* WeekdayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekdayCell.xib; sourceTree = "<group>"; };
+		B3756EDC21B901C5006893E1 /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
+		B3756EDD21B901C5006893E1 /* TimeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeCell.xib; sourceTree = "<group>"; };
 		B37A13441FDAF3CB00413E64 /* SuperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperButton.swift; sourceTree = "<group>"; };
 		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFunctionVC.swift; sourceTree = "<group>"; };
@@ -503,6 +507,8 @@
 				B3756ECF21B793E8006893E1 /* DateTimeCell.xib */,
 				B3756ED821B8E50E006893E1 /* WeekdayCell.swift */,
 				B3756ED921B8E50E006893E1 /* WeekdayCell.xib */,
+				B3756EDC21B901C5006893E1 /* TimeCell.swift */,
+				B3756EDD21B901C5006893E1 /* TimeCell.xib */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -831,6 +837,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3756EDF21B901C5006893E1 /* TimeCell.xib in Resources */,
 				B3756EDB21B8E50E006893E1 /* WeekdayCell.xib in Resources */,
 				B3756ED121B793E8006893E1 /* DateTimeCell.xib in Resources */,
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
@@ -1023,6 +1030,7 @@
 				B323390F21B6BBC7003EB84D /* BaseForm.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
 				B3649414207DCA790030CF44 /* SCLAlertView.swift in Sources */,
+				B3756EDE21B901C5006893E1 /* TimeCell.swift in Sources */,
 				F96931971FB953960005C13F /* City.swift in Sources */,
 				B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */,
 				B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */,

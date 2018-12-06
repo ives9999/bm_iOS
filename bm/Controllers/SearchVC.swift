@@ -265,7 +265,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         tableView.reloadData()
     }
     
-    func setTimeData(time: String, type: SELECT_TIME_TYPE) {
+    func setTimeData(time: String, type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
         var row: [String: Any]
         var text = ""
         if time == "" {

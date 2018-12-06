@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate, WeekdaysSelectDelegate {
+class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate, WeekdaysSelectDelegate, TimeSelectDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -214,34 +214,57 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         Global.instance.removeSpinner(superView: view)
         let item = form.formItems[indexPath.row]
         if let cellType = form.formItems[indexPath.row].uiProperties.cellType {
-            if cellType == FormItemCellType.weekday {
-                if item.segue != nil {
-                    let segue = item.segue!
-                    let sender: [String: Any?] = ["indexPath":indexPath, "sender":item.sender]
-                    performSegue(withIdentifier: segue, sender: sender)
+            if item.segue != nil {
+                let segue = item.segue!
+                let sender: [String: Any?] = ["indexPath":indexPath, "sender":item.sender]
+                //print(item.sender)
+                if cellType == FormItemCellType.weekday {
+                    
+                } else if cellType == FormItemCellType.time {
+                    
                 }
+                performSegue(withIdentifier: segue, sender: sender)
             }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var destinationNavigationController: UINavigationController?
+        destinationNavigationController = (segue.destination as! UINavigationController)
+        
+        var indexPath: IndexPath?
+        if let _sender: [String: Any?] = sender as? [String: Any?] {
+            if _sender["indexPath"] != nil {
+                indexPath = _sender["indexPath"] as! IndexPath
+            }
+        }
+        
         if segue.identifier == TO_WEEKDAY {
-            destinationNavigationController = (segue.destination as! UINavigationController)
             let weekdaysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
-            //weekdaysSelectVC.source = "search"
             weekdaysSelectVC.select = "just one"
+            if indexPath != nil {
+                weekdaysSelectVC.indexPath = indexPath
+            }
             if let _sender: [String: Any?] = sender as? [String: Any?] {
-                if _sender["indexPath"] != nil {
-                    let indexPath: IndexPath = _sender["indexPath"] as! IndexPath
-                    weekdaysSelectVC.indexPath = indexPath
-                }
                 if _sender["sender"] != nil {
                     let realSender: [Int] = _sender["sender"] as! [Int]
                     weekdaysSelectVC.selectedWeekdays = realSender
                 }
             }
             weekdaysSelectVC.delegate = self
+        } else if segue.identifier == TO_SELECT_TIME {
+            let timeSelectVC: TimeSelectVC = destinationNavigationController!.topViewController as! TimeSelectVC
+            timeSelectVC.select = "just one"
+            if indexPath != nil {
+                timeSelectVC.indexPath = indexPath
+            }
+            if let _sender: [String: Any?] = sender as? [String: Any?] {
+                if _sender["sender"] != nil {
+                    let realSender: [String: Any] = _sender["sender"] as! [String: Any]
+                    timeSelectVC.input = realSender
+                }
+            }
+            timeSelectVC.delegate = self
         }
     }
     
@@ -323,6 +346,16 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             }
             editTableView.reloadData()
         }
+    }
+    
+    func setTimeData(time: String, type: SELECT_TIME_TYPE, indexPath: IndexPath?){
+        if indexPath != nil {
+            let item = form.formItems[indexPath!.row]
+            item.value = time
+            item.show = time
+            item.sender = ["type":type,"time":time]
+        }
+        editTableView.reloadData()
     }
 }
 

@@ -34,10 +34,16 @@ class TimeTableForm: BaseForm {
         eventWeekdayItem.segue = TO_WEEKDAY
         
         let eventStartTimeItem = FormItem(title: "開始時間")
-        eventStartTimeItem.uiProperties.cellType = FormItemCellType.more
+        eventStartTimeItem.uiProperties.cellType = FormItemCellType.time
+        eventStartTimeItem.segue = TO_SELECT_TIME
+        eventStartTimeItem.timeType = SELECT_TIME_TYPE.play_start
+        eventStartTimeItem.sender = ["type":eventStartTimeItem.timeType!,"time":""]
         
         let eventEndTimeItem = FormItem(title: "結束時間")
-        eventEndTimeItem.uiProperties.cellType = FormItemCellType.more
+        eventEndTimeItem.uiProperties.cellType = FormItemCellType.time
+        eventEndTimeItem.segue = TO_SELECT_TIME
+        eventEndTimeItem.timeType = SELECT_TIME_TYPE.play_end
+        eventEndTimeItem.sender = ["type":eventEndTimeItem.timeType!,"time":""]
         
         let eventLimitItem = FormItem(title: "限制人數", placeholder: "無限制請填-1")
         eventLimitItem.uiProperties.cellType = FormItemCellType.textField

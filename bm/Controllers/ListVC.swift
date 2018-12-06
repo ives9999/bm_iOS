@@ -492,7 +492,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         searchTableView.reloadData()
     }
     
-    func setTimeData(time: String, type: SELECT_TIME_TYPE) {
+    func setTimeData(time: String, type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
         var row: [String: Any]
         var text = ""
         if time == "" {
