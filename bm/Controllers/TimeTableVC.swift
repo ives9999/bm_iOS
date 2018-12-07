@@ -8,7 +8,8 @@
 
 import UIKit
 
-class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate, WeekdaysSelectDelegate, TimeSelectDelegate {
+class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ColorSelectDelegate {
+    
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -216,7 +217,10 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         if let cellType = form.formItems[indexPath.row].uiProperties.cellType {
             if item.segue != nil {
                 let segue = item.segue!
-                let sender: [String: Any?] = ["indexPath":indexPath, "sender":item.sender]
+                var sender: [String: Any?] = ["indexPath":indexPath]
+                if item.sender != nil {
+                    sender["sender"] = item.sender
+                }
                 //print(item.sender)
                 if cellType == FormItemCellType.weekday {
                     
@@ -230,7 +234,6 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var destinationNavigationController: UINavigationController?
-        destinationNavigationController = (segue.destination as! UINavigationController)
         
         var indexPath: IndexPath?
         if let _sender: [String: Any?] = sender as? [String: Any?] {
@@ -240,6 +243,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         }
         
         if segue.identifier == TO_WEEKDAY {
+            destinationNavigationController = (segue.destination as! UINavigationController)
             let weekdaysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
             weekdaysSelectVC.select = "just one"
             if indexPath != nil {
@@ -248,11 +252,12 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             if let _sender: [String: Any?] = sender as? [String: Any?] {
                 if _sender["sender"] != nil {
                     let realSender: [Int] = _sender["sender"] as! [Int]
-                    weekdaysSelectVC.selectedWeekdays = realSender
+                    weekdaysSelectVC.selecteds = realSender
                 }
             }
             weekdaysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
+            destinationNavigationController = (segue.destination as! UINavigationController)
             let timeSelectVC: TimeSelectVC = destinationNavigationController!.topViewController as! TimeSelectVC
             timeSelectVC.select = "just one"
             if indexPath != nil {
@@ -265,6 +270,19 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                 }
             }
             timeSelectVC.delegate = self
+        } else if segue.identifier == TO_SELECT_COLOR {
+            let colorSelectVC: ColorSelectVC = segue.destination as! ColorSelectVC
+            colorSelectVC.delegate = self
+            if indexPath != nil {
+                colorSelectVC.indexPath = indexPath
+            }
+            //print(sender)
+            if let _sender: [String: Any?] = sender as? [String: Any?] {
+                if _sender["sender"] != nil {
+                    let realSender: MYCOLOR = _sender["sender"] as! MYCOLOR
+                    colorSelectVC.selecteds = [realSender]
+                }
+            }
         }
     }
     
@@ -348,12 +366,24 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         }
     }
     
-    func setTimeData(time: String, type: SELECT_TIME_TYPE, indexPath: IndexPath?){
+    func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+        let time = res[0]
         if indexPath != nil {
             let item = form.formItems[indexPath!.row]
             item.value = time
             item.show = time
             item.sender = ["type":type,"time":time]
+        }
+        editTableView.reloadData()
+    }
+    
+    func setColorData(res: [MYCOLOR], indexPath: IndexPath?) {
+        let colorType = res[0]
+        if indexPath != nil {
+            let item = form.formItems[indexPath!.row]
+            item.color = colorType
+            item.value = colorType.toString()
+            item.sender = colorType
         }
         editTableView.reloadData()
     }

@@ -55,7 +55,8 @@ class TimeTableForm: BaseForm {
         }
         
         let eventColorItem = FormItem(title: "顏色")
-        eventColorItem.uiProperties.cellType = FormItemCellType.more
+        eventColorItem.uiProperties.cellType = FormItemCellType.color
+        eventColorItem.segue = TO_SELECT_COLOR
         
         let eventStatusItem = FormItem(title: "狀態")
         eventStatusItem.uiProperties.cellType = FormItemCellType.more

@@ -186,7 +186,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         } else if segue.identifier == TO_WEEKDAY {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let daysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
-            daysSelectVC.selectedWeekdays = (sender as! [Int])
+            daysSelectVC.selecteds = (sender as! [Int])
             daysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
             destinationNavigationController = (segue.destination as! UINavigationController)
@@ -316,7 +316,8 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             self.tableView.reloadData()
         }
     }
-    func setTimeData(time: String, type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+    func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+        let time = res[0]
         switch type {
         case SELECT_TIME_TYPE.play_start:
             let key = TEAM_PLAY_START_KEY

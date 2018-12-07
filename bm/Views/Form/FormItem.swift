@@ -20,11 +20,15 @@ class FormItem: FormValidable {
     var timeType: SELECT_TIME_TYPE?
     var segue: String?
     var show: String = ""
+    
+    //weekday is [Int]
+    //time is ["type":timeType,"time":"09:00"]
     var sender: Any?
     
     var weekdays: [Int] = [Int]()
     var startTime: String = ""
     var endTime: String = ""
+    var color: MYCOLOR?
     
     init(title: String, placeholder: String? = nil, value: String? = nil) {
         self.title = title
@@ -36,6 +40,11 @@ class FormItem: FormValidable {
     
     func reset() {
         show = ""
+        value = nil
+        color = nil
+        startTime = ""
+        endTime = ""
+        sender = nil
         weekdays = [Int]()
     }
     

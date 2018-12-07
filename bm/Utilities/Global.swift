@@ -62,10 +62,10 @@ enum MYCOLOR: Int {
         return UIColor(rgb: self.rawValue)
     }
     
-    static func all()-> [[String: UIColor]] {
-        var res: [[String: UIColor]] = [[String: UIColor]]()
+    static func all()-> [[String: Any]] {
+        var res: [[String: Any]] = [[String: UIColor]]()
         for item in allValues {
-            res.append([item.toString():item.toColor()])
+            res.append(["key":item.toString(), "value":item,"color":item.toColor()])
         }
         
         return res
@@ -593,6 +593,11 @@ extension UIColor {
         )
     }
 }
+
+protocol ArrayProtocol{}
+
+extension Array: ArrayProtocol {}
+
 
 
 

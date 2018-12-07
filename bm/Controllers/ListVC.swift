@@ -317,7 +317,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
             destinationNavigationController = (segue.destination as! UINavigationController)
             let daysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
             daysSelectVC.source = "search"
-            daysSelectVC.selectedWeekdays = days
+            daysSelectVC.selecteds = days
             daysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
             destinationNavigationController = (segue.destination as! UINavigationController)
@@ -492,7 +492,8 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         searchTableView.reloadData()
     }
     
-    func setTimeData(time: String, type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+    func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+        let time = res[0]
         var row: [String: Any]
         var text = ""
         if time == "" {

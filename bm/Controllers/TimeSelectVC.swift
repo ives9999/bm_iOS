@@ -10,22 +10,27 @@ import UIKit
 import UIColor_Hex_Swift
 
 protocol TimeSelectDelegate: class {
-    func setTimeData(time: String, type: SELECT_TIME_TYPE, indexPath: IndexPath?)
+    func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?)
 }
 
 class TimeSelectVC: UITableViewController {
     
     //input["type":PLAY_START,"time":time]
     var input: [String: Any] = [String: Any]()
-    let times: [String] = ["07:00","08:00","09:00","10:00","11:00","12:00",
-"13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"
-                        ]
+    var selecteds: [String] = [String]()
+    
+    var start: String = "07:00"
+    var end: String = "23:00"
+    //minute
+    var interval: Int = 60
+    var times: [String] = [String]()
+    
     var delegate: TimeSelectDelegate?
     
     //來源的程式：目前有team的setup跟search
     var source: String = "setup"
     //選擇的類型：just one單選，multi複選
-    var select: String = "multi"
+    var select: String = "just one"
     var indexPath: IndexPath?
 
     override func viewDidLoad() {
@@ -33,6 +38,13 @@ class TimeSelectVC: UITableViewController {
 
         var title: String = ""
         //print(input)
+        var s = start.toDateTime(format: "HH:mm")
+        let e = end.toDateTime(format: "HH:mm")
+        times.append(s.toString(format: "HH:mm"))
+        while s < e {
+            s = s.addingTimeInterval(TimeInterval(Double(interval)*60.0))
+            times.append(s.toString(format: "HH:mm"))
+        }
         
         if input["type"] != nil {
             let type: SELECT_TIME_TYPE = input["type"] as! SELECT_TIME_TYPE
@@ -47,10 +59,29 @@ class TimeSelectVC: UITableViewController {
         } else {
             title = "時間"
         }
+        if input["time"] != nil {
+            if input["time"]! is ArrayProtocol {
+                selecteds = input["time"] as! [String]
+            } else {
+                selecteds.append(input["time"] as! String)
+            }
+        }
+        
         self.title = title
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
         navigationItem.leftBarButtonItem?.tintColor = UIColor.black
+        if select == "multi" {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(submit))
+            navigationItem.rightBarButtonItem?.tintColor = UIColor.black
+        }
     }
+    
+    @objc func submit() {
+        
+        self.delegate?.setTimeData(res: selecteds, type: input["type"] as! SELECT_TIME_TYPE, indexPath: indexPath)
+        back()
+    }
+    
     @objc func back() {
         dismiss(animated: true, completion: nil)
     }
@@ -87,15 +118,38 @@ class TimeSelectVC: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var time: String = times[indexPath.row]
-        let type: SELECT_TIME_TYPE = input["type"] as! SELECT_TIME_TYPE
-        if input["time"] != nil {
-            if time == input["time"] as! String {
-                time = ""
+        
+        let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
+        if cell.accessoryType == .checkmark {
+            cell.accessoryType = .none
+            cell.textLabel?.textColor = UIColor.white
+            cell.tintColor = UIColor.white
+        } else {
+            cell.accessoryType = .checkmark
+            cell.textLabel?.textColor = UIColor(MY_GREEN)
+            cell.tintColor = UIColor(MY_GREEN)
+        }
+        let time: String = times[indexPath.row]
+        var isExist = false
+        var at = 0
+        for (idx, selectTime) in selecteds.enumerated() {
+            if selectTime == time {
+                isExist = true
+                at = idx
+                break
             }
         }
-        delegate?.setTimeData(time: time, type: type, indexPath: indexPath)
-        dismiss(animated: true, completion: nil)
+        if isExist {
+            selecteds.remove(at: at)
+        } else {
+            if select == "just one" {
+                selecteds.removeAll()
+            }
+            selecteds.append(time)
+        }
+        if select == "just one" && selecteds.count > 0 {
+            submit()
+        }
     }
     
 
