@@ -63,7 +63,7 @@ enum MYCOLOR: Int {
     }
     
     static func all()-> [[String: Any]] {
-        var res: [[String: Any]] = [[String: UIColor]]()
+        var res: [[String: Any]] = [[String: Any]]()
         for item in allValues {
             res.append(["key":item.toString(), "value":item,"color":item.toColor()])
         }
@@ -72,7 +72,49 @@ enum MYCOLOR: Int {
     }
 }
 enum STATUS: String {
-    case online, offline, trash, delete
+    case online = "上線"
+    case offline = "下線"
+    case trash = "垃圾桶"
+    case delete = "刪除"
+    
+    static let allValues = [online, offline, trash, delete]
+    
+    init(status: String) {
+        switch status {
+        case "online":
+            self = .online
+        case "offline":
+            self = .offline
+        case "trash":
+            self = .trash
+        case "delete":
+            self = .delete
+        default:
+            self = .online
+        }
+    }
+    
+    func toString()->String {
+        switch self {
+        case .online:
+            return "online"
+        case .offline:
+            return "offline"
+        case .trash:
+            return "trash"
+        case .delete:
+            return "delete"
+        }
+    }
+    
+    static func all()-> [[String: Any]] {
+        var res: [[String: Any]] = [[String: Any]]()
+        for item in allValues {
+            res.append(["key":item.toString(), "value":item, "ch":item.rawValue])
+        }
+        
+        return res
+    }
 }
 enum SEX: String {
     case M = "先生"

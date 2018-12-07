@@ -16,6 +16,7 @@ enum FormItemCellType {
     case weekday
     case time
     case color
+    case status
     
     static func registerCells(for tableView: UITableView) {
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
@@ -33,6 +34,8 @@ enum FormItemCellType {
         tableView.register(timeNib, forCellReuseIdentifier: "time")
         let colorNib = UINib(nibName: "ColorCell", bundle: nil)
         tableView.register(colorNib, forCellReuseIdentifier: "color")
+        let statusNib = UINib(nibName: "StatusCell", bundle: nil)
+        tableView.register(statusNib, forCellReuseIdentifier: "status")
     }
     
     func dequeueCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
@@ -51,6 +54,8 @@ enum FormItemCellType {
             cell = tableView.dequeueReusableCell(withIdentifier: "time", for: indexPath)
         case .color:
             cell = tableView.dequeueReusableCell(withIdentifier: "color", for: indexPath)
+        case .status:
+            cell = tableView.dequeueReusableCell(withIdentifier: "status", for: indexPath)
         }
         
         return cell

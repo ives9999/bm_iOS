@@ -8,8 +8,7 @@
 
 import UIKit
 
-class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ColorSelectDelegate {
-    
+class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ColorSelectDelegate, StatusSelectDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -283,6 +282,19 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                     colorSelectVC.selecteds = [realSender]
                 }
             }
+        } else if segue.identifier == TO_SELECT_STATUS {
+            let statusSelectVC: StatusSelectVC = segue.destination as! StatusSelectVC
+            statusSelectVC.delegate = self
+            if indexPath != nil {
+                statusSelectVC.indexPath = indexPath
+            }
+            //print(sender)
+            if let _sender: [String: Any?] = sender as? [String: Any?] {
+                if _sender["sender"] != nil {
+                    let realSender: STATUS = _sender["sender"] as! STATUS
+                    statusSelectVC.selected = realSender
+                }
+            }
         }
     }
     
@@ -384,6 +396,17 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             item.color = colorType
             item.value = colorType.toString()
             item.sender = colorType
+        }
+        editTableView.reloadData()
+    }
+    
+    func setStatusData(res: STATUS, indexPath: IndexPath?) {
+        if indexPath != nil {
+            let item = form.formItems[indexPath!.row]
+            item.value = res.toString()
+            item.status = res
+            item.show = res.rawValue
+            item.sender = res
         }
         editTableView.reloadData()
     }

@@ -29,6 +29,7 @@ class FormItem: FormValidable {
     var startTime: String = ""
     var endTime: String = ""
     var color: MYCOLOR?
+    var status: STATUS?
     
     init(title: String, placeholder: String? = nil, value: String? = nil) {
         self.title = title
@@ -42,6 +43,7 @@ class FormItem: FormValidable {
         show = ""
         value = nil
         color = nil
+        status = nil
         startTime = ""
         endTime = ""
         sender = nil
