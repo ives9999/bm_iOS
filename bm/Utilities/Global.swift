@@ -150,6 +150,7 @@ enum TEXT_INPUT_TYPE: String {
     case exp = "經歷"
     case feat = "比賽成績"
     case license = "證照"
+    case timetable_coach = "課程說明"
 }
 enum DEGREE: String {
     case new = "新手"

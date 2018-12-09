@@ -61,9 +61,16 @@ class TimeTableForm: BaseForm {
         let eventStatusItem = FormItem(title: "狀態")
         eventStatusItem.uiProperties.cellType = FormItemCellType.status
         eventStatusItem.segue = TO_SELECT_STATUS
+        eventStatusItem.status = STATUS.online
+        eventStatusItem.value = STATUS.online.rawValue
+        eventStatusItem.show = STATUS.online.toString()
+        eventStatusItem.sender = STATUS.online
         
         let eventContentItem = FormItem(title: "詳細內容")
         eventContentItem.uiProperties.cellType = FormItemCellType.more
+        eventContentItem.segue = TO_TEXT_INPUT
+        eventContentItem.sender = ["type":TEXT_INPUT_TYPE.timetable_coach,"text":""]
+        eventContentItem.isRequired = false
         
         formItems = [eventTitleItem, eventWeekdayItem, eventStartTimeItem, eventEndTimeItem, eventLimitItem, eventColorItem, eventStatusItem, eventContentItem]
     }

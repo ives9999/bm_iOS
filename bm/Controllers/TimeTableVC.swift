@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ColorSelectDelegate, StatusSelectDelegate {
+class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ColorSelectDelegate, StatusSelectDelegate, TextInputDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -221,11 +221,6 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                     sender["sender"] = item.sender
                 }
                 //print(item.sender)
-                if cellType == FormItemCellType.weekday {
-                    
-                } else if cellType == FormItemCellType.time {
-                    
-                }
                 performSegue(withIdentifier: segue, sender: sender)
             }
         }
@@ -294,6 +289,21 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                     let realSender: STATUS = _sender["sender"] as! STATUS
                     statusSelectVC.selected = realSender
                 }
+            }
+        } else if segue.identifier == TO_TEXT_INPUT {
+            destinationNavigationController = (segue.destination as! UINavigationController)
+            let textInputVC: TextInputVC = destinationNavigationController!.topViewController as! TextInputVC
+            textInputVC.delegate = self
+            if indexPath != nil {
+                textInputVC.indexPath = indexPath
+            }
+            //print(sender)
+            if let _sender: [String: Any?] = sender as? [String: Any?] {
+                var realSender: [String: Any] = ["type":TEXT_INPUT_TYPE.timetable_coach,"text":""]
+                if _sender["sender"] != nil {
+                    realSender = _sender["sender"] as! [String: Any]
+                }
+                textInputVC.input = realSender
             }
         }
     }
@@ -407,6 +417,16 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             item.status = res
             item.show = res.rawValue
             item.sender = res
+        }
+        editTableView.reloadData()
+    }
+    
+    func setTextInputData(key: String, type: TEXT_INPUT_TYPE, text: String, indexPath: IndexPath?) {
+        if indexPath != nil {
+            let item = form.formItems[indexPath!.row]
+            item.value = text
+            item.show = text
+            item.sender = ["type":type,"text":text]
         }
         editTableView.reloadData()
     }

@@ -28,6 +28,9 @@ class MoreCell: SuperCell, FormUPdatable {
     }
     
     func clear() {
+        formItem?.value = nil
+        formItem?.show = ""
+        formItem?.sender = nil
         clearBtn.isHidden = true
         detailLbl.text = ""
     }
@@ -37,5 +40,10 @@ class MoreCell: SuperCell, FormUPdatable {
         
         titleLbl.text = self.formItem?.title
         detailLbl.text = self.formItem?.show
+        if detailLbl.text != nil {
+            if detailLbl.text!.count > 0 {
+                clearBtn.isHidden = false
+            }
+        }
     }
 }

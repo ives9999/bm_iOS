@@ -193,7 +193,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E60-ID-6gF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1433" y="-2669"/>
+            <point key="canvasLocation" x="-1497" y="-2624"/>
         </scene>
         <!--EditVC-->
         <scene sceneID="aWs-0V-lzQ">
@@ -2580,11 +2580,12 @@
                         <segue destination="eqh-Y0-TDo" kind="show" identifier="toSelectTime" id="7sU-TL-inm"/>
                         <segue destination="Cyt-Jb-jyE" kind="show" identifier="toSelectColor" id="Ujz-y4-a2k"/>
                         <segue destination="ERS-sh-cNj" kind="show" identifier="toSelectStatus" id="L0r-yZ-MyZ"/>
+                        <segue destination="jgh-cg-UbZ" kind="show" identifier="toTextInput" id="l0H-dd-erC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1T7-kS-5RS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1127" y="-4966"/>
+            <point key="canvasLocation" x="191" y="-2997"/>
         </scene>
         <!--Manager FunctionVC-->
         <scene sceneID="eaE-vz-b2s">
@@ -3380,7 +3381,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m1U-XB-eBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-444" y="-2749"/>
+            <point key="canvasLocation" x="-686" y="-2723"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="l43-Mu-18t">
@@ -3426,6 +3427,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="EfF-hk-cE7"/>
+        <segue reference="l0H-dd-erC"/>
         <segue reference="7sU-TL-inm"/>
         <segue reference="T5V-F1-cVP"/>
         <segue reference="XnZ-GS-Ao0"/>

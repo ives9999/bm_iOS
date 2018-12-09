@@ -10,21 +10,24 @@ import Foundation
 
 class FormItem: FormValidable {
     var isValid = true
-    var isMandatory = true
+    var isRequired = true
     var title: String = ""
     var value: String?
     var placeholder = ""
     var indexPath: IndexPath?
     var valueCompletion: ((String?) -> Void)?
     var uiProperties = FormItemUIProperties()
-    var timeType: SELECT_TIME_TYPE?
     var segue: String?
     var show: String = ""
     
     //weekday is [Int]
-    //time is ["type":timeType,"time":"09:00"]
+    //time is ["type":SELECT_TIME_TYPE,"time":"09:00"]
+    //color is [MYCOLOR]
+    //status is STATUS
+    //content is ["type":TEXT_INPUT_TYPE,"text":"課程說明"]
     var sender: Any?
     
+    var timeType: SELECT_TIME_TYPE?
     var weekdays: [Int] = [Int]()
     var startTime: String = ""
     var endTime: String = ""
@@ -51,7 +54,7 @@ class FormItem: FormValidable {
     }
     
     func checkValidity() {
-        if self.isMandatory {
+        if self.isRequired {
             self.isValid = self.value != nil && self.value?.isEmpty == false
         } else {
             self.isValid = true

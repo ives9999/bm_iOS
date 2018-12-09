@@ -10,7 +10,8 @@ import UIKit
 import UIColor_Hex_Swift
 
 protocol TextInputDelegate: class {
-    func setTextInputData(key: String, type: TEXT_INPUT_TYPE, text: String)
+    //[key:"content", type:TEXT_INPUT_TYPE,text:"課程說明",indexPath:indexPath]
+    func setTextInputData(key: String, type: TEXT_INPUT_TYPE, text: String, indexPath: IndexPath?)
 }
 
 class TextInputVC: UIViewController {
@@ -18,6 +19,7 @@ class TextInputVC: UIViewController {
     weak var delegate: TextInputDelegate?
     var input: [String: Any]?
     var key: String = CONTENT_KEY
+    var indexPath: IndexPath?
 
     @IBOutlet weak var content: UITextView!
     
@@ -25,6 +27,8 @@ class TextInputVC: UIViewController {
         super.viewDidLoad()
         
         var type = TEXT_INPUT_TYPE.charge
+        
+        //input["type":PLAY_START,"text":content]
         if input!["type"] != nil {
             type = input!["type"] as! TEXT_INPUT_TYPE
         }
@@ -55,7 +59,7 @@ class TextInputVC: UIViewController {
             SCLAlertView().showWarning("警告", subTitle: "沒有選擇星期日期，或請按取消回上一頁")
         } else {
             let type: TEXT_INPUT_TYPE = input!["type"] as! TEXT_INPUT_TYPE
-            self.delegate?.setTextInputData(key: key, type: type, text: content.text!)
+            self.delegate?.setTextInputData(key: key, type: type, text: content.text!, indexPath: indexPath)
             back()
         }
     }

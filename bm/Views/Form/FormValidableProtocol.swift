@@ -10,6 +10,6 @@ import Foundation
 
 protocol FormValidable {
     var isValid: Bool {get set}
-    var isMandatory: Bool{get set}
+    var isRequired: Bool{get set}
     func checkValidity()
 }

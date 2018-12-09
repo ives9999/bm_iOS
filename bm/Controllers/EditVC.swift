@@ -341,7 +341,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             break
         }
     }
-    func setTextInputData(key: String, type: TEXT_INPUT_TYPE, text: String) {
+    func setTextInputData(key: String, type: TEXT_INPUT_TYPE, text: String, indexPath: IndexPath?) {
         let old: String = model.data[key]!["value"] as! String
         if old != text {
             model.data[key]!["change"] = true
