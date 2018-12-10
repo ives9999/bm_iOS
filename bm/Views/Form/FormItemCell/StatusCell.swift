@@ -12,25 +12,27 @@ class StatusCell: MoreCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        //self.formItem = self.formItem as! StatusFormItem
     }
 
     override func update(with formItem: FormItem) {
         super.update(with: formItem)
-        if self.formItem?.status != nil {
-            self.formItem?.sender = self.formItem?.status
-            self.formItem?.show = (self.formItem?.status?.rawValue)!
+        let _formItem = formItem as! StatusFormItem
+        _formItem.make()
+        if _formItem.status != nil {
             clearBtn.isHidden = false
         }
-        if self.formItem?.show != nil {
-            detailLbl.text = self.formItem?.show
-        }
+        detailLbl.text = _formItem.show
+        self.formItem = _formItem
     }
     
     override func clear() {
         super.clear()
         if formItem != nil {
-            formItem!.reset()
+            let _formItem = formItem as! StatusFormItem
+            _formItem.status = nil
+            _formItem.make()
+            self.formItem = _formItem
         }
     }
     

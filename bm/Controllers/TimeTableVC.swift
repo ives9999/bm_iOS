@@ -111,8 +111,8 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     
     @objc func clickEvent(sender: UITapGestureRecognizer) {
-        guard let a = (sender.view as? UIView) else {return}
-        let idx: Int = a.tag
+        //guard let a = (sender.view) else {return}
+        //let idx: Int = a.tag
         //print(idx)
         showEditEvent()
     }
@@ -236,7 +236,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             }
         }
         
-        if segue.identifier == TO_WEEKDAY {
+        if segue.identifier == TO_SELECT_WEEKDAY {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let weekdaysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
             weekdaysSelectVC.select = "just one"
@@ -273,8 +273,8 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             //print(sender)
             if let _sender: [String: Any?] = sender as? [String: Any?] {
                 if _sender["sender"] != nil {
-                    let realSender: MYCOLOR = _sender["sender"] as! MYCOLOR
-                    colorSelectVC.selecteds = [realSender]
+                    let realSender: [MYCOLOR] = _sender["sender"] as! [MYCOLOR]
+                    colorSelectVC.selecteds = realSender
                 }
             }
         } else if segue.identifier == TO_SELECT_STATUS {
@@ -365,25 +365,9 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     func setWeekdaysData(res: [Int], indexPath: IndexPath? = nil) {
         if indexPath != nil {
-            let item = form.formItems[indexPath!.row]
-            var texts: [String] = [String]()
-            item.reset()
-            item.sender = [Int]()
+            let item = form.formItems[indexPath!.row] as! WeekdayFormItem
             item.weekdays = res
-            if item.weekdays.count > 0 {
-                for weekday in item.weekdays {
-                    for gweekday in Global.instance.weekdays {
-                        if weekday == gweekday["value"] as! Int {
-                            let text = gweekday["simple_text"]
-                            texts.append(text! as! String)
-                            break
-                        }
-                    }
-                }
-                item.show = texts.joined(separator: ",")
-            } else {
-                item.show = ""
-            }
+            
             editTableView.reloadData()
         }
     }
@@ -391,10 +375,8 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
         let time = res[0]
         if indexPath != nil {
-            let item = form.formItems[indexPath!.row]
+            let item = form.formItems[indexPath!.row] as! TimeFormItem
             item.value = time
-            item.show = time
-            item.sender = ["type":type,"time":time]
         }
         editTableView.reloadData()
     }
@@ -402,21 +384,16 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     func setColorData(res: [MYCOLOR], indexPath: IndexPath?) {
         let colorType = res[0]
         if indexPath != nil {
-            let item = form.formItems[indexPath!.row]
+            let item = form.formItems[indexPath!.row] as! ColorFormItem
             item.color = colorType
-            item.value = colorType.toString()
-            item.sender = colorType
         }
         editTableView.reloadData()
     }
     
     func setStatusData(res: STATUS, indexPath: IndexPath?) {
         if indexPath != nil {
-            let item = form.formItems[indexPath!.row]
-            item.value = res.toString()
+            let item = form.formItems[indexPath!.row] as! StatusFormItem
             item.status = res
-            item.show = res.rawValue
-            item.sender = res
         }
         editTableView.reloadData()
     }

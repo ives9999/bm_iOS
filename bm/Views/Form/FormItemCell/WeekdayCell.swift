@@ -17,10 +17,13 @@ class WeekdayCell: MoreCell {
     
     override func update(with formItem: FormItem) {
         super.update(with: formItem)
-        self.formItem?.sender = self.formItem?.weekdays
-        if (self.formItem?.weekdays.count)! > 0 {
+        let _formItem = formItem as! WeekdayFormItem
+        _formItem.make()
+        if _formItem.weekdays.count > 0 {
             clearBtn.isHidden = false
         }
+        detailLbl.text = _formItem.show
+        self.formItem = _formItem
     }
     
     override func clear() {

@@ -110,8 +110,12 @@ class TimeSelectVC: UITableViewController {
         }
         if time == selectedTime {
             cell.textLabel?.textColor = UIColor(MY_GREEN)
+            cell.accessoryType = .checkmark
+            cell.tintColor = UIColor(MY_GREEN)
         } else {
             cell.textLabel?.textColor = UIColor.white
+            cell.accessoryType = .none
+            cell.tintColor = UIColor.white
         }
 
         return cell

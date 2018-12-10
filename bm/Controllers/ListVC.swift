@@ -313,7 +313,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
             arenaSelectVC.citys = _citys
             arenaSelectVC.arenas = arenas
             arenaSelectVC.delegate = self
-        } else if segue.identifier == TO_WEEKDAY {
+        } else if segue.identifier == TO_SELECT_WEEKDAY {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let daysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
             daysSelectVC.source = "search"

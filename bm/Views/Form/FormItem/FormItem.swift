@@ -9,7 +9,7 @@
 import Foundation
 
 class FormItem: FormValidable {
-    var isValid = true
+    var isValid = false
     var isRequired = true
     var title: String = ""
     var value: String?
@@ -27,13 +27,6 @@ class FormItem: FormValidable {
     //content is ["type":TEXT_INPUT_TYPE,"text":"課程說明"]
     var sender: Any?
     
-    var timeType: SELECT_TIME_TYPE?
-    var weekdays: [Int] = [Int]()
-    var startTime: String = ""
-    var endTime: String = ""
-    var color: MYCOLOR?
-    var status: STATUS?
-    
     init(title: String, placeholder: String? = nil, value: String? = nil) {
         self.title = title
         if placeholder != nil {
@@ -45,13 +38,10 @@ class FormItem: FormValidable {
     func reset() {
         show = ""
         value = nil
-        color = nil
-        status = nil
-        startTime = ""
-        endTime = ""
         sender = nil
-        weekdays = [Int]()
     }
+    
+    func make() {}
     
     func checkValidity() {
         if self.isRequired {

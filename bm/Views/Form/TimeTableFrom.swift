@@ -29,21 +29,21 @@ class TimeTableForm: BaseForm {
             eventTitleItem?.value = value
         }
         
-        let eventWeekdayItem = FormItem(title: "星期日期")
-        eventWeekdayItem.uiProperties.cellType = FormItemCellType.weekday
-        eventWeekdayItem.segue = TO_WEEKDAY
+        let eventWeekdayItem = WeekdayFormItem(title: "星期日期")
+        //eventWeekdayItem.uiProperties.cellType = FormItemCellType.weekday
+        //eventWeekdayItem.segue = TO_SELECT_WEEKDAY
         
-        let eventStartTimeItem = FormItem(title: "開始時間")
-        eventStartTimeItem.uiProperties.cellType = FormItemCellType.time
-        eventStartTimeItem.segue = TO_SELECT_TIME
-        eventStartTimeItem.timeType = SELECT_TIME_TYPE.play_start
-        eventStartTimeItem.sender = ["type":eventStartTimeItem.timeType!,"time":""]
+        let eventStartTimeItem = TimeFormItem(title: "開始時間", timeType: SELECT_TIME_TYPE.play_start)
+        //eventStartTimeItem.uiProperties.cellType = FormItemCellType.time
+        //eventStartTimeItem.segue = TO_SELECT_TIME
+        //eventStartTimeItem.timeType = SELECT_TIME_TYPE.play_start
+        //eventStartTimeItem.sender = ["type":eventStartTimeItem.timeType!,"time":""]
         
-        let eventEndTimeItem = FormItem(title: "結束時間")
-        eventEndTimeItem.uiProperties.cellType = FormItemCellType.time
-        eventEndTimeItem.segue = TO_SELECT_TIME
-        eventEndTimeItem.timeType = SELECT_TIME_TYPE.play_end
-        eventEndTimeItem.sender = ["type":eventEndTimeItem.timeType!,"time":""]
+        let eventEndTimeItem = TimeFormItem(title: "結束時間", timeType: SELECT_TIME_TYPE.play_end)
+        //eventEndTimeItem.uiProperties.cellType = FormItemCellType.time
+        //eventEndTimeItem.segue = TO_SELECT_TIME
+        //eventEndTimeItem.timeType = SELECT_TIME_TYPE.play_end
+        //eventEndTimeItem.sender = ["type":eventEndTimeItem.timeType!,"time":""]
         
         let eventLimitItem = FormItem(title: "限制人數", placeholder: "無限制請填-1")
         eventLimitItem.uiProperties.cellType = FormItemCellType.textField
@@ -54,17 +54,15 @@ class TimeTableForm: BaseForm {
             eventLimitItem?.value = value
         }
         
-        let eventColorItem = FormItem(title: "顏色")
-        eventColorItem.uiProperties.cellType = FormItemCellType.color
-        eventColorItem.segue = TO_SELECT_COLOR
+        let eventColorItem = ColorFormItem(title: "顏色")
         
-        let eventStatusItem = FormItem(title: "狀態")
-        eventStatusItem.uiProperties.cellType = FormItemCellType.status
-        eventStatusItem.segue = TO_SELECT_STATUS
-        eventStatusItem.status = STATUS.online
-        eventStatusItem.value = STATUS.online.rawValue
-        eventStatusItem.show = STATUS.online.toString()
-        eventStatusItem.sender = STATUS.online
+        let eventStatusItem = StatusFormItem(title: "狀態")
+//        eventStatusItem.uiProperties.cellType = FormItemCellType.status
+//        eventStatusItem.segue = TO_SELECT_STATUS
+//        eventStatusItem.status = STATUS.online
+//        eventStatusItem.value = STATUS.online.rawValue
+//        eventStatusItem.show = STATUS.online.toString()
+//        eventStatusItem.sender = STATUS.online
         
         let eventContentItem = FormItem(title: "詳細內容")
         eventContentItem.uiProperties.cellType = FormItemCellType.more

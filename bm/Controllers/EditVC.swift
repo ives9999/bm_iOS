@@ -183,7 +183,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                 let arenas: [Arena] = [Arena(id:tmp["arena_id"]!, name:"")]
                 arenaSelectVC.arenas = arenas
             }
-        } else if segue.identifier == TO_WEEKDAY {
+        } else if segue.identifier == TO_SELECT_WEEKDAY {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let daysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
             daysSelectVC.selecteds = (sender as! [Int])
