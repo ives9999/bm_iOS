@@ -9,10 +9,11 @@
 import Foundation
 
 class TimeFormItem: FormItem {
+    
     var timeType: SELECT_TIME_TYPE?
     
-    required init(title: String, timeType: SELECT_TIME_TYPE) {
-        super.init(title: title, placeholder: nil, value: nil)
+    required init(name: String, title: String, timeType: SELECT_TIME_TYPE) {
+        super.init(name: name, title: title, placeholder: nil, value: nil)
         segue = TO_SELECT_TIME
         uiProperties.cellType = .time
         self.timeType = timeType

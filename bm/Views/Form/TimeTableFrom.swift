@@ -10,66 +10,75 @@ import Foundation
 
 class TimeTableForm: BaseForm {
     
-    var eventTitle: String?
-    var eventWeekdayay: String?
-    var eventStartTime: String?
-    var eventEndTime: String?
-    var eventLimit: String?
-    var eventColor: String?
-    var eventStatus: String?
-    var eventContent: String?
-    
     override func configureItems() {
         
-        let eventTitleItem = FormItem(title: "標題", placeholder: "請輸入標題")
-        eventTitleItem.uiProperties.cellType = FormItemCellType.textField
-        eventTitleItem.value = eventTitle
-        eventTitleItem.valueCompletion = {
-            [weak self, weak eventTitleItem] value in self?.eventTitle = value
-            eventTitleItem?.value = value
-        }
+        let eventTitleItem = TextFieldFormItem(name: TT_TITLE, title: "標題", placeholder: "請輸入標題")
+//        eventTitleItem.valueCompletion = {
+//            [weak self, weak eventTitleItem] value in self?.eventTitle = value
+//            eventTitleItem?.value = value
+//        }
         
-        let eventWeekdayItem = WeekdayFormItem(title: "星期日期")
-        //eventWeekdayItem.uiProperties.cellType = FormItemCellType.weekday
-        //eventWeekdayItem.segue = TO_SELECT_WEEKDAY
+        let eventWeekdayItem = WeekdayFormItem(title: "星期幾", name: TT_WEEKDAY)
         
-        let eventStartTimeItem = TimeFormItem(title: "開始時間", timeType: SELECT_TIME_TYPE.play_start)
-        //eventStartTimeItem.uiProperties.cellType = FormItemCellType.time
-        //eventStartTimeItem.segue = TO_SELECT_TIME
-        //eventStartTimeItem.timeType = SELECT_TIME_TYPE.play_start
-        //eventStartTimeItem.sender = ["type":eventStartTimeItem.timeType!,"time":""]
+        let eventStartTimeItem = TimeFormItem(name: TT_START, title: "開始時間", timeType: SELECT_TIME_TYPE.play_start)
         
-        let eventEndTimeItem = TimeFormItem(title: "結束時間", timeType: SELECT_TIME_TYPE.play_end)
-        //eventEndTimeItem.uiProperties.cellType = FormItemCellType.time
-        //eventEndTimeItem.segue = TO_SELECT_TIME
-        //eventEndTimeItem.timeType = SELECT_TIME_TYPE.play_end
-        //eventEndTimeItem.sender = ["type":eventEndTimeItem.timeType!,"time":""]
+        let eventEndTimeItem = TimeFormItem(name: TT_END, title: "結束時間", timeType: SELECT_TIME_TYPE.play_end)
         
-        let eventLimitItem = FormItem(title: "限制人數", placeholder: "無限制請填-1")
-        eventLimitItem.uiProperties.cellType = FormItemCellType.textField
-        eventLimitItem.uiProperties.keyboardType = .numberPad
-        eventLimitItem.value = eventLimit
-        eventLimitItem.valueCompletion = {
-            [weak self, weak eventLimitItem] value in self?.eventLimit = value
-            eventLimitItem?.value = value
-        }
+        let eventLimitItem = TextFieldFormItem(name: TT_LIMIT, title: "限制人數", placeholder: "無限制請填-1", value: nil, keyboardType: .numberPad)
         
-        let eventColorItem = ColorFormItem(title: "顏色")
+        let eventColorItem = ColorFormItem()
         
-        let eventStatusItem = StatusFormItem(title: "狀態")
-//        eventStatusItem.uiProperties.cellType = FormItemCellType.status
-//        eventStatusItem.segue = TO_SELECT_STATUS
-//        eventStatusItem.status = STATUS.online
-//        eventStatusItem.value = STATUS.online.rawValue
-//        eventStatusItem.show = STATUS.online.toString()
-//        eventStatusItem.sender = STATUS.online
+        let eventStatusItem = StatusFormItem()
         
-        let eventContentItem = FormItem(title: "詳細內容")
-        eventContentItem.uiProperties.cellType = FormItemCellType.more
-        eventContentItem.segue = TO_TEXT_INPUT
-        eventContentItem.sender = ["type":TEXT_INPUT_TYPE.timetable_coach,"text":""]
-        eventContentItem.isRequired = false
+        let eventContentItem = ContentFormItem(name: TT_CONTENT, title: "詳細內容", type: TEXT_INPUT_TYPE.timetable_coach)
         
         formItems = [eventTitleItem, eventWeekdayItem, eventStartTimeItem, eventEndTimeItem, eventLimitItem, eventColorItem, eventStatusItem, eventContentItem]
+    }
+    
+    override func fillValue() {
+        super.fillValue()
+    }
+    
+    override func isValid() -> (Bool, String?) {
+        
+        //check if empty
+        let (isValid, msg) = super.isValid()
+        if !isValid {
+            return (isValid, msg)
+        }
+        
+        //check end early to start
+        var start: Date?
+        var end: Date?
+        for formItem in formItems {
+            if formItem.title == "開始時間" {
+                start = formItem.value?.toDateTime(format: "HH:mm")
+            }
+            if formItem.title == "結束時間" {
+                end = formItem.value?.toDateTime(format: "HH:mm")
+            }
+        }
+        if start != nil && end != nil {
+            if start! > end! {
+                return (isValid, "結束時間不能早於開始時間")
+            }
+        }
+        
+        var isValid1 = false
+        for forItem in formItems {
+            if forItem.oldValue != nil {
+                if forItem.isRequired && forItem.value != nil {
+                    if forItem.value != forItem.oldValue {
+                        isValid1 = true
+                        break
+                    }
+                }
+            }
+        }
+        if !isValid1 {
+            return (isValid1, "沒有修改任何值，不用提交")
+        }
+        
+        return (true, nil)
     }
 }

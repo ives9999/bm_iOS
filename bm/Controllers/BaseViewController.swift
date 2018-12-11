@@ -22,11 +22,13 @@ class BaseViewController: UIViewController {
     let maskView = UIView()
     var containerView = UIView(frame: .zero)
     let layerSubmitBtn: SubmitButton = SubmitButton()
+    let layerCancelBtn: SubmitButton = SubmitButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         workAreaHeight = view.bounds.height - titleBarHeight
+        layerCancelBtn.setTitle("取消")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -78,12 +80,21 @@ class BaseViewController: UIViewController {
     func _addLayer() {}
     func layerAddSubmitBtn(upView: UIView) {
         containerView.addSubview(layerSubmitBtn)
-        let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 24)
-        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .centerX, relatedBy: .equal, toItem: layerSubmitBtn.superview, attribute: .centerX, multiplier: 1, constant: 0)
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 12)
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .centerX, relatedBy: .equal, toItem: layerSubmitBtn.superview, attribute: .centerX, multiplier: 1, constant: -60)
         layerSubmitBtn.translatesAutoresizingMaskIntoConstraints = false
         containerView.addConstraints([c1,c2])
         layerSubmitBtn.addTarget(self, action: #selector(layerSubmit(view:)), for: .touchUpInside)
         self.layerSubmitBtn.isHidden = false
+    }
+    func layerAddCancelBtn(upView: UIView) {
+        containerView.addSubview(layerCancelBtn)
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerCancelBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 12)
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerCancelBtn, attribute: .centerX, relatedBy: .equal, toItem: layerCancelBtn.superview, attribute: .centerX, multiplier: 1, constant: 60)
+        layerCancelBtn.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addConstraints([c1,c2])
+        layerCancelBtn.addTarget(self, action: #selector(layerCancel(view:)), for: .touchUpInside)
+        self.layerCancelBtn.isHidden = false
     }
     func animation(frame: CGRect) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -92,13 +103,13 @@ class BaseViewController: UIViewController {
         }, completion: { (finished) in
             if finished {
                 self.otherAnimation()
-                
             }
         })
     }
     func otherAnimation(){}
     @objc func unmask(){}
     @objc func layerSubmit(view: UIButton){}
+    @objc func layerCancel(view: UIButton){unmask()}
     
     func prev() {
         dismiss(animated: true, completion: nil)

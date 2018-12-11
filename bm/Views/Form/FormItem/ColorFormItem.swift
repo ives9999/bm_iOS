@@ -9,10 +9,12 @@
 import Foundation
 
 class ColorFormItem: FormItem {
+    
+    var oldColor: MYCOLOR?
     var color: MYCOLOR?
     
-    required init(title: String) {
-        super.init(title: title, placeholder: nil, value: nil)
+    required init(title: String = "顏色", name: String = TT_COLOR) {
+        super.init(name: name, title: title, placeholder: nil, value: nil)
         segue = TO_SELECT_COLOR
         uiProperties.cellType = .color
         reset()
@@ -32,6 +34,12 @@ class ColorFormItem: FormItem {
             value = nil
             show = ""
             sender = nil
+        }
+    }
+    
+    override func valueToAnother() {
+        if value != nil {
+            color = MYCOLOR(color: value!)
         }
     }
 }

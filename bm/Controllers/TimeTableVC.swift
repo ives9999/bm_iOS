@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, EditCellDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ColorSelectDelegate, StatusSelectDelegate, TextInputDelegate {
+class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, WeekdaysSelectDelegate, TimeSelectDelegate, ColorSelectDelegate, StatusSelectDelegate, TextInputDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -37,10 +37,10 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         cv.backgroundColor = UIColor.black
         return cv
     }()
-//    let editRows: [[String: Any]] = [
-//        ["ch":"標題","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入事件標題","text_field":true]
-//    ]
+
     fileprivate var form: TimeTableForm = TimeTableForm()
+    var params: [String: String] = [String: String]()
+    let test: [String: String] = [TT_TITLE:"練球",TT_WEEKDAY:"5",TT_START:"14:00",TT_END:"17:00",TT_LIMIT:"6",TT_COLOR:"warning",TT_STATUS:"offline",TT_CONTENT:"大家來練球"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,9 +111,27 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     
     @objc func clickEvent(sender: UITapGestureRecognizer) {
-        //guard let a = (sender.view) else {return}
-        //let idx: Int = a.tag
+        guard let a = (sender.view) else {return}
+        let idx: Int = a.tag
         //print(idx)
+        let event = timeTable.rows[idx]
+        //print(event.printRow())
+        //let mirror: Mirror? = Mirror(reflecting: event)
+        //mirror.
+        var values: [String: String] = [String: String]()
+        for formItem in form.formItems {
+            if formItem.name != nil {
+                let name: String = formItem.name!
+                var value: String = String(describing:(event.value(forKey: name))!)
+                //print(value)
+                if name == TT_START || name == TT_END {
+                    value = value.noSec()
+                }
+                values[name] = value
+            }
+        }
+        //print(values)
+        form = TimeTableForm(id: event.id, values: values)
         showEditEvent()
     }
     
@@ -181,6 +199,8 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         let startTime: Int = indexPath.row / columnNum + startNum
         let weekday: Int = indexPath.row % columnNum
         //print("\(weekday)-\(startTime)")
+        let values: [String: String] = [TT_START: String(startTime) + ":00", TT_WEEKDAY: String(weekday)]
+        form = TimeTableForm(values: values)
         showEditEvent()
     }
     
@@ -213,7 +233,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         Global.instance.addSpinner(superView: view)
         Global.instance.removeSpinner(superView: view)
         let item = form.formItems[indexPath.row]
-        if let cellType = form.formItems[indexPath.row].uiProperties.cellType {
+        if form.formItems[indexPath.row].uiProperties.cellType != nil {
             if item.segue != nil {
                 let segue = item.segue!
                 var sender: [String: Any?] = ["indexPath":indexPath]
@@ -232,7 +252,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         var indexPath: IndexPath?
         if let _sender: [String: Any?] = sender as? [String: Any?] {
             if _sender["indexPath"] != nil {
-                indexPath = _sender["indexPath"] as! IndexPath
+                indexPath = (_sender["indexPath"] as! IndexPath)
             }
         }
         
@@ -310,6 +330,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     func showEditEvent() {
         collectionView.isScrollEnabled = false
+        editTableView.reloadData()
         mask(y: newY, superView: collectionView)
         let layerY = workAreaHeight + newY
         var frame = CGRect(x:padding, y:layerY, width:view.frame.width-(2*padding), height:layerY)
@@ -322,6 +343,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         editTableView.isHidden = false
         containerView.addSubview(editTableView)
         layerAddSubmitBtn(upView: editTableView)
+        layerAddCancelBtn(upView: editTableView)
     }
     override func otherAnimation() {
         let frame = containerView.frame
@@ -333,34 +355,38 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             self.maskView.alpha = 0
             self.editTableView.isHidden = true
             self.layerSubmitBtn.isHidden = true
+            self.layerCancelBtn.isHidden = true
             self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.workAreaHeight, width:self.containerView.frame.width, height:0)
         }
         collectionView.isScrollEnabled = true
     }
     @objc override func layerSubmit(view: UIButton) {
-        unmask()
-        //prepareParams()
-        refresh()
+        let (isValid, msg) = form.isValid()
+        if !isValid {
+            let _msg = msg ?? "欄位驗證錯誤"
+            warning(_msg)
+        }
+        
+        prepareParams()
+        //unmask()
+        //refresh()
     }
     
     @IBAction func addTimeTableBtnPressed(_ sender: Any) {
-        
+        showEditEvent()
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {
         prev()
     }
     
-    func setTextField(iden: String, value: String) {
-        
-    }
-    
-    func setSwitch(indexPath: IndexPath, value: Bool) {
-        
-    }
-    
-    func clear(indexPath: IndexPath) {
-        
+    func prepareParams() {
+        for formItem in form.formItems {
+            if formItem.name != nil && formItem.value != nil {
+                params[formItem.name!] = formItem.value
+            }
+        }
+        print(params)
     }
     
     func setWeekdaysData(res: [Int], indexPath: IndexPath? = nil) {
@@ -400,10 +426,9 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     func setTextInputData(key: String, type: TEXT_INPUT_TYPE, text: String, indexPath: IndexPath?) {
         if indexPath != nil {
-            let item = form.formItems[indexPath!.row]
+            let item = form.formItems[indexPath!.row] as! ContentFormItem
             item.value = text
-            item.show = text
-            item.sender = ["type":type,"text":text]
+            item.make()
         }
         editTableView.reloadData()
     }

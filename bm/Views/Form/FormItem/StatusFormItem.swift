@@ -9,10 +9,11 @@
 import Foundation
 
 class StatusFormItem: FormItem {
+    var oldStatus: STATUS?
     var status: STATUS?
     
-    required init(title: String) {
-        super.init(title: title, placeholder: nil, value: nil)
+    required init(title: String = "狀態", name: String = TT_STATUS) {
+        super.init(name: name, title: title, placeholder: nil, value: nil)
         segue = TO_SELECT_STATUS
         uiProperties.cellType = .status
         reset()
@@ -33,6 +34,12 @@ class StatusFormItem: FormItem {
             show = ""
             value = nil
             sender = nil
+        }
+    }
+    
+    override func valueToAnother() {
+        if value != nil {
+            status = STATUS(status: value!)
         }
     }
 }

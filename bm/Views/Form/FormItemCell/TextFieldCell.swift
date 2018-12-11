@@ -13,6 +13,7 @@ class TextFieldCell: SuperCell {
     @IBOutlet weak var textField: SuperTextField!
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var clearBtn: SubmitButton!
+    
     var formItem: FormItem?
 
     override func awakeFromNib() {
@@ -20,25 +21,34 @@ class TextFieldCell: SuperCell {
         titleLbl.textAlignment = NSTextAlignment.left
     }
     
+    @IBAction func textFieldDidChange(_ textField: UITextField) {
+        let _formItem = formItem as! TextFieldFormItem
+        _formItem.value = textField.text
+    }
+    
     @IBAction func clearBtnPressed(_ sender: Any) {
-        print("clear")
+        textField.text = ""
+        let _formItem = formItem as! TextFieldFormItem
+        _formItem.reset()
     }
 }
 
 extension TextFieldCell: FormUPdatable {
     
     func update(with formItem: FormItem) {
+        
+        let _formItem = formItem as! TextFieldFormItem
+        _formItem.make()
+        
+        titleLbl.text = _formItem.title
+        textField.text = _formItem.value
+        
+        let bgColor: UIColor = _formItem.isValid  == false ? .red : .white
+        textField.layer.backgroundColor = bgColor.cgColor
+        textField.placeholder(_formItem.placeholder)
+        textField.keyboardType = _formItem.uiProperties.keyboardType
+        textField.tintColor = _formItem.uiProperties.tintColor
+        
         self.formItem = formItem
-        
-        self.titleLbl.text = self.formItem?.title
-        self.textField.text = self.formItem?.value
-        
-        let bgColor: UIColor = self.formItem?.isValid  == false ? .red : .white
-        self.textField.layer.backgroundColor = bgColor.cgColor
-        if self.formItem?.placeholder != nil {
-            textField.placeholder((self.formItem?.placeholder)!)
-        }
-        self.textField.keyboardType = self.formItem?.uiProperties.keyboardType ?? .default
-        self.textField.tintColor = self.formItem?.uiProperties.tintColor
     }
 }

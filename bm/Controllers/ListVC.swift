@@ -362,6 +362,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         containerView.addSubview(self.searchTableView)
     
         layerAddSubmitBtn(upView: searchTableView)
+        layerAddCancelBtn(upView: searchTableView)
     }
     
     override func otherAnimation() {
@@ -374,6 +375,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
             self.maskView.alpha = 0
             self.searchTableView.isHidden = true
             self.layerSubmitBtn.isHidden = true
+            self.layerCancelBtn.isHidden = true
             self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.workAreaHeight, width:self.containerView.frame.width, height:0)
         }
         tableView.isScrollEnabled = true

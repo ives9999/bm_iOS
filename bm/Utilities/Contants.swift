@@ -195,6 +195,16 @@ let ARENA_PARKING_KEY: String = "parking"
 let ARENA_BATHROOM_KEY: String = "bathroom"
 let ARENA_INTERVAL_KEY: String = "interval"
 
+// Timetalbe key
+let TT_TITLE: String = "title"
+let TT_WEEKDAY: String = "day"
+let TT_START: String = "start"
+let TT_END: String = "end"
+let TT_LIMIT: String = "limit"
+let TT_COLOR: String = "color"
+let TT_STATUS: String = "status"
+let TT_CONTENT: String = "content"
+
 // Course key
 let COURSE_PROVIDER_KEY: String = "provider_url"
 
