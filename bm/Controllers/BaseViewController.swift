@@ -23,12 +23,15 @@ class BaseViewController: UIViewController {
     var containerView = UIView(frame: .zero)
     let layerSubmitBtn: SubmitButton = SubmitButton()
     let layerCancelBtn: SubmitButton = SubmitButton()
+    let layerDeleteBtn: SubmitButton = SubmitButton()
+    var layerBtnCount: Int = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         workAreaHeight = view.bounds.height - titleBarHeight
         layerCancelBtn.setTitle("取消")
+        layerDeleteBtn.setTitle("刪除")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -81,7 +84,13 @@ class BaseViewController: UIViewController {
     func layerAddSubmitBtn(upView: UIView) {
         containerView.addSubview(layerSubmitBtn)
         let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 12)
-        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .centerX, relatedBy: .equal, toItem: layerSubmitBtn.superview, attribute: .centerX, multiplier: 1, constant: -60)
+        var offset:CGFloat = 0
+        if layerBtnCount == 2 {
+            offset = -60
+        } else if layerBtnCount == 3 {
+            offset = -120
+        }
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .centerX, relatedBy: .equal, toItem: layerSubmitBtn.superview, attribute: .centerX, multiplier: 1, constant: offset)
         layerSubmitBtn.translatesAutoresizingMaskIntoConstraints = false
         containerView.addConstraints([c1,c2])
         layerSubmitBtn.addTarget(self, action: #selector(layerSubmit(view:)), for: .touchUpInside)
@@ -90,11 +99,30 @@ class BaseViewController: UIViewController {
     func layerAddCancelBtn(upView: UIView) {
         containerView.addSubview(layerCancelBtn)
         let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerCancelBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 12)
-        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerCancelBtn, attribute: .centerX, relatedBy: .equal, toItem: layerCancelBtn.superview, attribute: .centerX, multiplier: 1, constant: 60)
+        var offset:CGFloat = 0
+        if layerBtnCount == 2 {
+            offset = 60
+        }
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerCancelBtn, attribute: .centerX, relatedBy: .equal, toItem: layerCancelBtn.superview, attribute: .centerX, multiplier: 1, constant: offset)
         layerCancelBtn.translatesAutoresizingMaskIntoConstraints = false
         containerView.addConstraints([c1,c2])
         layerCancelBtn.addTarget(self, action: #selector(layerCancel(view:)), for: .touchUpInside)
         self.layerCancelBtn.isHidden = false
+    }
+    func layerAddDeleteBtn(upView: UIView) {
+        containerView.addSubview(layerDeleteBtn)
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerDeleteBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 12)
+        var offset:CGFloat = 0
+        if layerBtnCount == 2 {
+            offset = 60
+        } else if layerBtnCount == 3 {
+            offset = 120
+        }
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerDeleteBtn, attribute: .centerX, relatedBy: .equal, toItem: layerDeleteBtn.superview, attribute: .centerX, multiplier: 1, constant: offset)
+        layerDeleteBtn.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addConstraints([c1,c2])
+        layerDeleteBtn.addTarget(self, action: #selector(layerDelete(view:)), for: .touchUpInside)
+        self.layerDeleteBtn.isHidden = false
     }
     func animation(frame: CGRect) {
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
@@ -109,6 +137,7 @@ class BaseViewController: UIViewController {
     func otherAnimation(){}
     @objc func unmask(){}
     @objc func layerSubmit(view: UIButton){}
+    @objc func layerDelete(view: UIButton){}
     @objc func layerCancel(view: UIButton){unmask()}
     
     func prev() {

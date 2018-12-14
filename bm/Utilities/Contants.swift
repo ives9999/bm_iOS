@@ -42,6 +42,8 @@ let URL_ONE = "\(URL_HOME)%@/one"
 let URL_UPDATE = "\(URL_HOME)%@/update"
 let URL_DELETE = "\(URL_HOME)%@/delete"
 let URL_TT = "\(URL_HOME)%@/tt"
+let URL_TT_UPDATE = "\(URL_HOME)%@/tt/update"
+let URL_TT_DELETE = "\(URL_HOME)%@/tt/delete"
 
 let URL_TEAM = URL_HOME + "team/"
 let URL_TEAM_TEMP_PLAY = URL_TEAM + "tempPlay/onoff"

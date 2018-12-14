@@ -29,6 +29,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     var v: UIView = UIView(frame: CGRect.zero)
     var eventViews: [UIView] = [UIView]()
+    var eventTag: Int = 0
     
     var newY: CGFloat = 0
     let padding: CGFloat = 20
@@ -71,6 +72,9 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         editTableView.backgroundColor = UIColor.clear
         prepareSubViews()
         
+        beginRefresh()
+        collectionView.addSubview(refreshControl)
+        
         refresh()
     }
     
@@ -82,6 +86,12 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     
     func markEvent() {
+        eventViews.removeAll()
+        for subView in collectionView.subviews {
+            if subView.tag >= 100 {
+                subView.removeFromSuperview()
+            }
+        }
         for i in 0 ... timeTable.rows.count-1 {
             let row = timeTable.rows[i]
             let x: CGFloat = CGFloat(row.day) * cellWidth + cellBorderWidth
@@ -92,7 +102,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             var frame = CGRect(x: x, y: y, width: width, height: height)
             let v: UIView = UIView(frame: frame)
             v.backgroundColor = row._color.toColor()
-            v.tag = i
+            v.tag = 100 + i
             
             frame = CGRect(x: 10, y: 10, width: width, height: height)
             let titleLbl = UILabel(frame: frame)
@@ -112,8 +122,10 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     @objc func clickEvent(sender: UITapGestureRecognizer) {
         guard let a = (sender.view) else {return}
-        let idx: Int = a.tag
+        let idx: Int = a.tag - 100
         //print(idx)
+        eventTag = idx + 100
+        //print(eventTag)
         let event = timeTable.rows[idx]
         //print(event.printRow())
         //let mirror: Mirror? = Mirror(reflecting: event)
@@ -132,19 +144,109 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         }
         //print(values)
         form = TimeTableForm(id: event.id, values: values)
-        showEditEvent()
+        showEditEvent(3)
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        newY = scrollView.contentOffset.y
-        if newY < 0 { newY = 0 }
-        //print(newY)
+    @objc override func layerSubmit(view: UIButton) {
+        let (isValid, msg) = form.isValid()
+        if !isValid {
+            let _msg = msg ?? "欄位驗證錯誤"
+            warning(_msg)
+        }
+        
+        prepareParams()
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        newY = scrollView.contentOffset.y
-        if newY < 0 { newY = 0 }
-        //print(scrollView.contentOffset.y)
+    override func layerDelete(view: UIButton) {
+        warning(msg: "是否真的要刪除此事件？", closeButtonTitle: "取消", buttonTitle: "確定") {
+            self._layerDelete()
+        }
+    }
+    
+    func _layerDelete() {
+        params.removeAll()
+        params["model_token"] = token
+        if form.id != nil {
+            params["id"] = String(form.id!)
+        }
+        //print(params)
+        unmask()
+        Global.instance.addSpinner(superView: view)
+        dataService.deleteTT(type: "coach", params: params) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if success {
+                self.refreshEvent()
+            } else {
+                self.warning(self.dataService.msg)
+            }
+        }
+    }
+    
+    @IBAction func addTimeTableBtnPressed(_ sender: Any) {
+        form = TimeTableForm(values: test)
+        showEditEvent(2)
+    }
+    
+    func prepareParams() {
+        params.removeAll()
+        params["model_token"] = token
+        params["created_token"] = Member.instance.token
+        for formItem in form.formItems {
+            if formItem.name != nil && formItem.value != nil {
+                params[formItem.name!] = formItem.value
+            }
+        }
+        if form.id != nil {
+            params["id"] = String(form.id!)
+        }
+        //print(params)
+        unmask()
+        Global.instance.addSpinner(superView: view)
+        dataService.updateTT(type: "coach", params: params) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if success {
+                self.refreshEvent()
+            } else {
+                self.warning(self.dataService.msg)
+            }
+        }
+    }
+    
+    func showEditEvent(_ btnCount: Int) {
+        collectionView.isScrollEnabled = false
+        editTableView.reloadData()
+        mask(y: newY, superView: collectionView)
+        let layerY = workAreaHeight + newY
+        var frame = CGRect(x:padding, y:layerY, width:view.frame.width-(2*padding), height:layerY)
+        layerBtnCount = btnCount
+        addLayer(superView: collectionView, frame: frame)
+        let y = newY
+        frame = CGRect(x: padding, y: y, width: containerView.frame.width, height: layerY)
+        animation(frame: frame)
+    }
+    override func _addLayer() {
+        editTableView.isHidden = false
+        containerView.addSubview(editTableView)
+        layerAddSubmitBtn(upView: editTableView)
+        layerAddCancelBtn(upView: editTableView)
+        if layerBtnCount > 2 {
+            layerAddDeleteBtn(upView: editTableView)
+        }
+    }
+    override func otherAnimation() {
+        let frame = containerView.frame
+        editTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 500)
+    }
+    
+    @objc override func unmask() {
+        UIView.animate(withDuration: 0.5) {
+            self.maskView.alpha = 0
+            self.editTableView.isHidden = true
+            self.layerSubmitBtn.isHidden = true
+            self.layerCancelBtn.isHidden = true
+            self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.workAreaHeight, width:self.containerView.frame.width, height:0)
+        }
+        collectionView.isScrollEnabled = true
     }
     
     override func refresh() {
@@ -152,11 +254,15 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         dataService.getTT(token: token, type: source) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                self.timeTable = self.dataService.timeTable
-                //self.collectionView.reloadData()
-                self.markEvent()
+                self.refreshEvent()
             }
+            self.endRefresh()
         }
+    }
+    
+    func refreshEvent() {
+        self.timeTable = self.dataService.timeTable
+        self.markEvent()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -178,6 +284,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         let contentView = cell.contentView
         contentView.layer.borderWidth = cellBorderWidth
         contentView.layer.borderColor = UIColor.gray.cgColor
+        cell.tag = (startTime - startNum)*columnNum + weekday
 //        for row in timeTable.rows {
 //            if startTime >= row._start && startTime < row._end && weekday == row.day {
 //                contentView.backgroundColor = row._color.toColor()
@@ -200,8 +307,10 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         let weekday: Int = indexPath.row % columnNum
         //print("\(weekday)-\(startTime)")
         let values: [String: String] = [TT_START: String(startTime) + ":00", TT_WEEKDAY: String(weekday)]
+        eventTag = (collectionView.cellForItem(at: indexPath)?.tag)!
+        //print(eventTag)
         form = TimeTableForm(values: values)
-        showEditEvent()
+        showEditEvent(2)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -328,67 +437,6 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         }
     }
     
-    func showEditEvent() {
-        collectionView.isScrollEnabled = false
-        editTableView.reloadData()
-        mask(y: newY, superView: collectionView)
-        let layerY = workAreaHeight + newY
-        var frame = CGRect(x:padding, y:layerY, width:view.frame.width-(2*padding), height:layerY)
-        addLayer(superView: collectionView, frame: frame)
-        let y = newY
-        frame = CGRect(x: padding, y: y, width: containerView.frame.width, height: layerY)
-        animation(frame: frame)
-    }
-    override func _addLayer() {
-        editTableView.isHidden = false
-        containerView.addSubview(editTableView)
-        layerAddSubmitBtn(upView: editTableView)
-        layerAddCancelBtn(upView: editTableView)
-    }
-    override func otherAnimation() {
-        let frame = containerView.frame
-        editTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 500)
-    }
-    
-    @objc override func unmask() {
-        UIView.animate(withDuration: 0.5) {
-            self.maskView.alpha = 0
-            self.editTableView.isHidden = true
-            self.layerSubmitBtn.isHidden = true
-            self.layerCancelBtn.isHidden = true
-            self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.workAreaHeight, width:self.containerView.frame.width, height:0)
-        }
-        collectionView.isScrollEnabled = true
-    }
-    @objc override func layerSubmit(view: UIButton) {
-        let (isValid, msg) = form.isValid()
-        if !isValid {
-            let _msg = msg ?? "欄位驗證錯誤"
-            warning(_msg)
-        }
-        
-        prepareParams()
-        //unmask()
-        //refresh()
-    }
-    
-    @IBAction func addTimeTableBtnPressed(_ sender: Any) {
-        showEditEvent()
-    }
-    
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
-    
-    func prepareParams() {
-        for formItem in form.formItems {
-            if formItem.name != nil && formItem.value != nil {
-                params[formItem.name!] = formItem.value
-            }
-        }
-        print(params)
-    }
-    
     func setWeekdaysData(res: [Int], indexPath: IndexPath? = nil) {
         if indexPath != nil {
             let item = form.formItems[indexPath!.row] as! WeekdayFormItem
@@ -431,6 +479,22 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             item.make()
         }
         editTableView.reloadData()
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        newY = scrollView.contentOffset.y
+        if newY < 0 { newY = 0 }
+        //print(newY)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        newY = scrollView.contentOffset.y
+        if newY < 0 { newY = 0 }
+        //print(scrollView.contentOffset.y)
+    }
+    
+    @IBAction func prevBtnPressed(_ sender: Any) {
+        prev()
     }
 }
 

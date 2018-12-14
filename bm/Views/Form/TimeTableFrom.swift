@@ -76,7 +76,7 @@ class TimeTableForm: BaseForm {
             }
         }
         if !isValid1 {
-            return (isValid1, "沒有修改任何值，不用提交")
+            //return (isValid1, "沒有修改任何值，不用提交")
         }
         
         return (true, nil)

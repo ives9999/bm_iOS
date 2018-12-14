@@ -711,6 +711,80 @@ class DataService {
         }
     }
     
+    func updateTT(type: String, params:[String:Any], completion: @escaping CompletionHandler) {
+        var body: [String: Any] = ["source": "app", "channel": CHANNEL]
+        body = body.merging(params){ (current, _) in current }
+        //print(body)
+        let url: String = String(format: URL_TT_UPDATE, type)
+        //print(url)
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    completion(false)
+                    self.msg = "data error"
+                    return
+                }
+                let json = JSON(data)
+                self.msg = ""
+                let success = json["success"].boolValue
+                if success {
+                    self.timeTable = TimeTable()
+                    self.timeTable = JSONParse.parse(data: json)
+                    for row in self.timeTable.rows {
+                        row.filterRow()
+                        //row.printRow()
+                    }
+                } else {
+                    self.msg = json["msg"].stringValue
+                    //print(self.msg)
+                }
+                completion(success)
+            } else {
+                //print(response.result.error)
+                completion(false)
+            }
+        }
+        
+    }
+    
+    func deleteTT(type: String, params:[String:Any], completion: @escaping CompletionHandler) {
+        var body: [String: Any] = ["source": "app", "channel": CHANNEL]
+        body = body.merging(params){ (current, _) in current }
+        //print(body)
+        let url: String = String(format: URL_TT_DELETE, type)
+        //print(url)
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    completion(false)
+                    self.msg = "data error"
+                    return
+                }
+                let json = JSON(data)
+                self.msg = ""
+                let success = json["success"].boolValue
+                if success {
+                    self.timeTable = TimeTable()
+                    self.timeTable = JSONParse.parse(data: json)
+                    for row in self.timeTable.rows {
+                        row.filterRow()
+                        //row.printRow()
+                    }
+                } else {
+                    self.msg = json["msg"].stringValue
+                    //print(self.msg)
+                }
+                completion(success)
+            } else {
+                //print(response.result.error)
+                completion(false)
+            }
+        }
+        
+    }
+    
     func parseHomeJSON(array: [Dictionary<String, Any>], titleField: String, type: String, video: Bool=false) -> [Home] {
         var result: [Home] = [Home]()
         var i: Int = 0
