@@ -87,6 +87,8 @@ class DataService {
                 //print(response.result)
                 guard let data = response.result.value else {
                     print("get response result value error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -154,6 +156,7 @@ class DataService {
                     completion(true)
                 }
             } else {
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
                 debugPrint(response.result.error as Any)
             }
@@ -178,6 +181,8 @@ class DataService {
                 //print(response.result.value)
                 guard let data = response.result.value else {
                     print("get response result value error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 //print(data)
@@ -295,6 +300,7 @@ class DataService {
                  }
                  */
             } else {
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
                 debugPrint(response.result.error as Any)
             }
@@ -372,6 +378,7 @@ class DataService {
             case .failure(let error):
                 print(error)
                 //onError(error)
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
             }
         }
@@ -386,6 +393,8 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 //print(data)
@@ -397,6 +406,7 @@ class DataService {
                 }
                 completion(true)
             } else {
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
             }
         }
@@ -436,6 +446,7 @@ class DataService {
                     })
                 }
             } else {
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
                 debugPrint(response.result.error as Any)
             }
@@ -518,6 +529,7 @@ class DataService {
 //                    }
 //                }
             } else {
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
                 debugPrint(response.result.error as Any)
             }
@@ -530,6 +542,8 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -543,6 +557,9 @@ class DataService {
                 }
                 
                 completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }
@@ -554,6 +571,8 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -566,6 +585,9 @@ class DataService {
                 }
                 
                 completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }
@@ -576,6 +598,8 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -590,6 +614,9 @@ class DataService {
                 //print(self.citys)
                 
                 completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }
@@ -600,6 +627,8 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -612,6 +641,9 @@ class DataService {
                 }
                 
                 completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }
@@ -623,6 +655,8 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -642,6 +676,9 @@ class DataService {
                 //print(self.citysandarenas)
                 
                 completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }
@@ -654,6 +691,8 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -673,6 +712,9 @@ class DataService {
                 //print(self.citysandareas)
                 
                 completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }
@@ -686,6 +728,8 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -707,6 +751,9 @@ class DataService {
                 
                 
                 completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }
@@ -721,8 +768,8 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
                     completion(false)
-                    self.msg = "data error"
                     return
                 }
                 let json = JSON(data)
@@ -742,6 +789,7 @@ class DataService {
                 completion(success)
             } else {
                 //print(response.result.error)
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
             }
         }
@@ -758,8 +806,8 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
                     completion(false)
-                    self.msg = "data error"
                     return
                 }
                 let json = JSON(data)
@@ -779,6 +827,7 @@ class DataService {
                 completion(success)
             } else {
                 //print(response.result.error)
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
             }
         }

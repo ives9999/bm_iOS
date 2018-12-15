@@ -150,6 +150,9 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
             if (success) {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)
+            } else {
+                Global.instance.removeSpinner(superView: self.view)
+                self.warning(self.dataService.msg)
             }
         }
     }

@@ -92,25 +92,37 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                 subView.removeFromSuperview()
             }
         }
+        let width: CGFloat = cellWidth - 2 * cellBorderWidth
         for i in 0 ... timeTable.rows.count-1 {
             let row = timeTable.rows[i]
             let x: CGFloat = CGFloat(row.day) * cellWidth + cellBorderWidth
             let y: CGFloat = CGFloat(row._start-startNum) * cellHeight + cellBorderWidth
-            let width: CGFloat = cellWidth - 2 * cellBorderWidth
             let gridNum: CGFloat = CGFloat(row._end-row._start)
             let height: CGFloat = gridNum * cellHeight - 2 * cellBorderWidth
+            
             var frame = CGRect(x: x, y: y, width: width, height: height)
             let v: UIView = UIView(frame: frame)
             v.backgroundColor = row._color.toColor()
             v.tag = 100 + i
             
-            frame = CGRect(x: 10, y: 10, width: width, height: height)
+            frame = CGRect(x: 3, y: 10, width: width, height: 20)
             let titleLbl = UILabel(frame: frame)
             titleLbl.text = row.title
             titleLbl.textColor = UIColor.black
             titleLbl.numberOfLines = 0
             titleLbl.sizeToFit()
             v.addSubview(titleLbl)
+            
+            let line = DrawLine(frame: CGRect(x: 5, y: 35, width: width-10, height: 1))
+            v.addSubview(line)
+            
+            frame = CGRect(x: 3, y: 40, width: width, height: height-20)
+            let contentLbl = UILabel(frame: frame)
+            contentLbl.text = row.content
+            contentLbl.textColor = UIColor.black
+            contentLbl.numberOfLines = 0
+            contentLbl.sizeToFit()
+            v.addSubview(contentLbl)
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(clickEvent))
             v.addGestureRecognizer(tap)

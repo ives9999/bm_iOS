@@ -24,7 +24,7 @@ class BaseViewController: UIViewController {
     let layerSubmitBtn: SubmitButton = SubmitButton()
     let layerCancelBtn: SubmitButton = SubmitButton()
     let layerDeleteBtn: SubmitButton = SubmitButton()
-    var layerBtnCount: Int = 1
+    var layerBtnCount: Int = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()

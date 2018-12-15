@@ -79,6 +79,8 @@ class TeamService: DataService {
                 //print(response.result.value)
                 guard let data = response.result.value else {
                     print("get response result value error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -122,6 +124,9 @@ class TeamService: DataService {
                     }
                 }
                 completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }
@@ -137,6 +142,8 @@ class TeamService: DataService {
                 //print(response.result.value)
                 guard let data = response.result.value else {
                     print("get response result value error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 //print(data)
@@ -192,6 +199,7 @@ class TeamService: DataService {
                     completion(true)
                 }
             } else {
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
             }
         }
@@ -209,6 +217,8 @@ class TeamService: DataService {
                 //print(response.result.value)
                 guard let data = response.result.value else {
                     print("get response result value error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 //print(data)
@@ -227,6 +237,9 @@ class TeamService: DataService {
                     self.msg = json["msg"].stringValue
                     completion(false)
                 }
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }
@@ -244,6 +257,8 @@ class TeamService: DataService {
                 //print(response.result.value)
                 guard let data = response.result.value else {
                     print("get response result value error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -257,6 +272,9 @@ class TeamService: DataService {
                     self.msg = json["msg"].stringValue
                     completion(false)
                 }
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }

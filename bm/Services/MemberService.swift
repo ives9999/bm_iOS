@@ -28,6 +28,8 @@ class MemberService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 //print(data)
@@ -46,6 +48,9 @@ class MemberService {
                     self.msg = json["msg"].stringValue
                 }
                 completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
             }
         }
     }
@@ -59,6 +64,8 @@ class MemberService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 //print(data)
@@ -74,6 +81,7 @@ class MemberService {
                 }
                 completion(true)
             } else {
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
             }
         }
@@ -94,6 +102,8 @@ class MemberService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 //print(data)
@@ -112,6 +122,7 @@ class MemberService {
                 }
                 completion(true)
             } else {
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
                 debugPrint(response.result.error as Any)
             }
@@ -129,6 +140,8 @@ class MemberService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -147,6 +160,7 @@ class MemberService {
                 completion(true)
             } else {
                 self.success = false
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
             }
         }
@@ -167,6 +181,8 @@ class MemberService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -184,6 +200,7 @@ class MemberService {
                 }
             } else {
                 self.success = false
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
             }
         }
@@ -204,6 +221,8 @@ class MemberService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -220,6 +239,7 @@ class MemberService {
                 }
             } else {
                 self.success = false
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
             }
         }
@@ -235,6 +255,8 @@ class MemberService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -255,6 +277,7 @@ class MemberService {
                 }
             } else {
                 self.success = false
+                self.msg = "網路錯誤，請稍後再試"
                 completion(false)
             }
         }
@@ -269,6 +292,8 @@ class MemberService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("get response result value error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
                     return
                 }
                 let json = JSON(data)
@@ -295,6 +320,7 @@ class MemberService {
                     completion(true)
                 } else {
                     self.msg = "無法取得管理球隊的黑名單，請稍後再試"
+                    self.msg = "網路錯誤，請稍後再試"
                     completion(false)
                 }
             }
