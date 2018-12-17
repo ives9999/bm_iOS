@@ -79,7 +79,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     
     private func prepareSubViews() {
-        FormItemCellType.registerCells(for: editTableView)
+        FormItemCellType.registerCell(for: editTableView)
         //self.ibTableView.allowsSelection = false
         //self.ibTableView.estimatedRowHeight = 60
         //self.ibTableView.rowHeight = 60

@@ -18,7 +18,7 @@ enum FormItemCellType {
     case color
     case status
     
-    static func registerCells(for tableView: UITableView) {
+    static func registerCell(for tableView: UITableView) {
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
         tableView.register(textFieldNib, forCellReuseIdentifier: "textField")
         
