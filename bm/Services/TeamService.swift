@@ -163,7 +163,7 @@ class TeamService: DataService {
                                 self._jsonToData(tmp: arr[i][key], key: key, item: value)
                             }
                         }
-                        self.model.updateTime(key:TEAM_PLAY_END_KEY)
+                        //self.model.updateTime(key:TEAM_PLAY_END_KEY)
                         var data: Dictionary<String, [String: Any]> = self.model.data
                         
                         var near_date: Dictionary<String, Any> = [String: Any]()
@@ -309,7 +309,7 @@ class TeamService: DataService {
                 let tmp1: [JSON] = tmp.arrayValue
                 var days: [Int] = [Int]()
                 for item in tmp1 {
-                    days.append(item["day"].intValue)
+                    days.append(item["weekday"].intValue)
                 }
                 model.updateDays(days)
             } else if key == TEAM_DEGREE_KEY {

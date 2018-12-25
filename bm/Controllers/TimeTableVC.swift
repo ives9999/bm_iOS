@@ -164,6 +164,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         if !isValid {
             let _msg = msg ?? "欄位驗證錯誤"
             warning(_msg)
+            return
         }
         
         prepareParams()

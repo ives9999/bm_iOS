@@ -74,10 +74,11 @@ enum MYCOLOR: Int {
 enum STATUS: String {
     case online = "上線"
     case offline = "下線"
+    case padding = "草稿"
     case trash = "垃圾桶"
     case delete = "刪除"
     
-    static let allValues = [online, offline, trash, delete]
+    static let allValues = [online, offline, padding, trash, delete]
     
     init(status: String) {
         switch status {
@@ -100,6 +101,8 @@ enum STATUS: String {
             return "online"
         case .offline:
             return "offline"
+        case .padding:
+            return "padding"
         case .trash:
             return "trash"
         case .delete:
@@ -247,6 +250,7 @@ class Global {
         for subview in superView.subviews {
             if subview.tag > 5000 {
                 subview.removeFromSuperview()
+                //subview = nil
             }
         }
     }

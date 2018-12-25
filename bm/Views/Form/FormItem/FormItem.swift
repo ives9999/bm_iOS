@@ -71,6 +71,15 @@ class FormItem: FormValidable {
             self.isValid = true
         }
     }
+    
+    func updateCheckChange()-> Bool {
+        if ((value != nil && oldValue != nil) && (value == oldValue)) {
+            isValid = false
+            msg = "${title} 沒有更改欄位值"
+            return false
+        }
+        return true
+    }
 }
 
 

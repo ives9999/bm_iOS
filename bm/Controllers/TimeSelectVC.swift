@@ -23,7 +23,7 @@ class TimeSelectVC: UITableViewController {
     var end: String = "23:00"
     //minute
     var interval: Int = 60
-    var times: [String] = [String]()
+    var allTimes: [String] = [String]()
     
     var delegate: TimeSelectDelegate?
     
@@ -40,10 +40,10 @@ class TimeSelectVC: UITableViewController {
         //print(input)
         var s = start.toDateTime(format: "HH:mm")
         let e = end.toDateTime(format: "HH:mm")
-        times.append(s.toString(format: "HH:mm"))
+        allTimes.append(s.toString(format: "HH:mm"))
         while s < e {
             s = s.addingTimeInterval(TimeInterval(Double(interval)*60.0))
-            times.append(s.toString(format: "HH:mm"))
+            allTimes.append(s.toString(format: "HH:mm"))
         }
         
         if input["type"] != nil {
@@ -95,14 +95,14 @@ class TimeSelectVC: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return times.count
+        return allTimes.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
-        let time: String = times[indexPath.row]
+        let time: String = allTimes[indexPath.row]
         cell.textLabel?.text = time
         var selectedTime: String = ""
         if input["time"] != nil {
@@ -133,7 +133,7 @@ class TimeSelectVC: UITableViewController {
             cell.textLabel?.textColor = UIColor(MY_GREEN)
             cell.tintColor = UIColor(MY_GREEN)
         }
-        let time: String = times[indexPath.row]
+        let time: String = allTimes[indexPath.row]
         var isExist = false
         var at = 0
         for (idx, selectTime) in selecteds.enumerated() {

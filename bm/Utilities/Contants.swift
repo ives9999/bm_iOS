@@ -67,7 +67,7 @@ let IPAD_CELL_ON_ROW:Int = 2
 let CELL_EDGE_MARGIN: CGFloat = 8
 let TITLE_HEIGHT: CGFloat = 27
 let FEATURED_HEIGHT: CGFloat = 200
-let PERPAGE: Int = 8
+let PERPAGE: Int = 20
 
 let STATUSBAR_HEIGHT:CGFloat = 16
 
@@ -170,7 +170,7 @@ let TEAM_PLAY_END_KEY = "play_end"
 let TEAM_INTERVAL_KEY = "interval"
 let TEAM_BALL_KEY = "ball"
 let TEAM_DEGREE_KEY = "degree"
-let TEAM_DAYS_KEY = "days"
+let TEAM_DAYS_KEY = "weekdays"
 let TEAM_NEAR_DATE_KEY = "near_date"
 
 let TEAM_TEMP_FEE_M_KEY = "temp_fee_M"

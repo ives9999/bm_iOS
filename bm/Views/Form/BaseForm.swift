@@ -13,6 +13,7 @@ class BaseForm {
     var title: String?
     var values: [String: String]?
     var id: Int?
+    var isChange: Bool = false
     
     init(id: Int? = nil, values: [String: String]? = nil, title: String = "") {
         self.id = id
@@ -33,7 +34,15 @@ class BaseForm {
                 msg = item.msg
                 break
             }
+            if (!isChange) {
+                isChange = item.updateCheckChange()
+            }
         }
+        if (isValid && !isChange) {
+            isValid = false
+            msg = "沒有更改任何值，所以不用送出更新"
+        }
+        
         return (isValid, msg)
     }
     

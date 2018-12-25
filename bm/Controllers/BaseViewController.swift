@@ -19,12 +19,19 @@ class BaseViewController: UIViewController {
     let titleBarHeight: CGFloat = 80
     var workAreaHeight: CGFloat = 600
     
+    //layer
     let maskView = UIView()
     var containerView = UIView(frame: .zero)
     let layerSubmitBtn: SubmitButton = SubmitButton()
     let layerCancelBtn: SubmitButton = SubmitButton()
     let layerDeleteBtn: SubmitButton = SubmitButton()
     var layerBtnCount: Int = 2
+    
+    //loading
+    var isLoading: Bool = false
+    var loadingMask: UIView?
+    var loadingSpinner: UIActivityIndicatorView?
+    var loadingText: UILabel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -279,6 +286,39 @@ class BaseViewController: UIViewController {
             } else {
                 self.warning(TeamService.instance.msg)
             }
+        }
+    }
+    
+    func loadingShow() {
+        if loadingMask == nil {
+            loadingMask = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+            loadingMask!.backgroundColor = UIColor(white: 0, alpha: 0.8) //you can modify this to whatever you need
+            
+            let center: CGPoint = loadingMask!.center
+            loadingSpinner = UIActivityIndicatorView()
+            loadingSpinner!.center = center
+            loadingSpinner!.activityIndicatorViewStyle = .whiteLarge
+            loadingSpinner!.color = #colorLiteral(red: 0.6862745098, green: 0.9882352941, blue: 0.4823529412, alpha: 1)
+            loadingSpinner!.startAnimating()
+            loadingMask!.addSubview(loadingSpinner!)
+            
+            loadingText = UILabel(frame: CGRect(x: Int(center.x)-LOADING_WIDTH/2, y: Int(center.y)+LOADING_HEIGHT/2, width: LOADING_WIDTH, height: LOADING_HEIGHT))
+            loadingText!.font = UIFont(name: "Avenir Next", size: 18)
+            loadingText!.textColor = #colorLiteral(red: 0.6862745098, green: 0.9882352941, blue: 0.4823529412, alpha: 1)
+            loadingText!.textAlignment = .center
+            loadingText!.text = LOADING
+            loadingMask!.addSubview(loadingText!)
+        } else {
+            loadingMask!.isHidden = false
+        }
+        view.addSubview(loadingMask!)
+    }
+    
+    func loadingHide() {
+        if loadingMask != nil {
+            loadingMask!.removeFromSuperview()
+            //loadingMask! = nil
+            loadingMask!.isHidden = true
         }
     }
     

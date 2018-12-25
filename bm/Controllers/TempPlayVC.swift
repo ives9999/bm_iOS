@@ -27,7 +27,7 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
     var keyword: String = ""
     
     var params: [String: Any] = [String: Any]()
-    
+        
     override func viewDidLoad() {
             
         model = Team.instance
@@ -41,6 +41,9 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
         tableView.register(TeamTempPlayListCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
+        
+        
+        
 //        refreshControl = UIRefreshControl()
 //        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
 //        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
@@ -52,6 +55,27 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
         //OneSignal.postNotification(["contents": ["en": "hello",PUSH_LANGUAGE: "有人報名臨打"], "include_player_ids": [PUSH_TEST_PLAYID]])
         if !Member.instance.justGetMemberOne && Member.instance.isLoggedIn {
             _updatePlayerIDWhenIsNull()
+        }
+    }
+    
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//        print("scroll view will begin dragging")
+//    }
+//
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        print("scroll view did end decelerating")
+//    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        if offsetY > contentHeight - scrollView.frame.size.height {
+            page += 1
+            //print("current page: \(page)")
+            //print(totalPage)
+            if page <= totalPage {
+                getDataStart(page: page, perPage: PERPAGE)
+            }
         }
     }
     
@@ -136,6 +160,10 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
         performSegue(withIdentifier: TO_TEMP_PLAY_SHOW, sender: token)
     }
     
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //print(indexPath.row)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == TO_TEMP_PLAY_SHOW {
             let tempPlayShowVC: TempPlayShowVC = segue.destination as! TempPlayShowVC
@@ -149,11 +177,19 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
     }
     
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-        Global.instance.addSpinner(superView: self.view)
+        loadingShow()
+//        if (!isLoading) {
+//            Global.instance.addSpinner(superView: self.view)
+//            isLoading = true
+//        }
         TeamService.instance.tempPlay_list(params:params,page: page, perPage: perPage) { (success) in
             if success {
+                self.loadingHide()
+//                if (self.isLoading) {
+//                    Global.instance.removeSpinner(superView: self.view)
+//                    self.isLoading = false
+//                }
                 self.getDataEnd(success: success)
-                Global.instance.removeSpinner(superView: self.view)
             }
         }
     }
