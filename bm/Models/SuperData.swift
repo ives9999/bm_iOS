@@ -235,7 +235,7 @@ class SuperData {
     func listReset() {}
     func initData() {}
     func updateArena(_ arena: Arena?=nil) {}
-    func updateDays(_ days: [Int]?=nil) {}
+    func updateWeekdays(_ days: [Int]?=nil) {}
     func updateDegree(_ degrees: [Degree]?=nil) {}
     func updateInterval(_ _startTime: String? = nil, _ _endTime: String? = nil) {}
     func updateNearDate(_ n1: String? = nil, _ n2: String? = nil) {}

@@ -309,10 +309,10 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         //not use
     }
     func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
-        let days: [Int] = model.data[TEAM_DAYS_KEY]!["value"] as! [Int]
+        let days: [Int] = model.data[TEAM_WEEKDAYS_KEY]!["value"] as! [Int]
         if !res.containsSameElements(as: days) {
-            model.updateDays(res)
-            model.data[TEAM_DAYS_KEY]!["change"] = true
+            model.updateWeekdays(res)
+            model.data[TEAM_WEEKDAYS_KEY]!["change"] = true
             self.tableView.reloadData()
         }
     }
@@ -447,7 +447,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                     tableView.reloadData()
                 } else if (key == ARENA_KEY) {
                     updateArena()
-                } else if (key == TEAM_DAYS_KEY) {
+                } else if (key == TEAM_WEEKDAYS_KEY) {
                     updateDays()
                 } else if (key == TEAM_PLAY_START_KEY || key == TEAM_PLAY_END_KEY) {
                     updateTime(type: key, time:nil)
@@ -483,9 +483,9 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
     
     func updateDays(days: [Int]? = nil) {
         if (days != nil && (days?.count)! > 0) {
-            model.updateDays(days!)
+            model.updateWeekdays(days!)
         } else {
-            model.updateDays()
+            model.updateWeekdays()
         }
     }
     

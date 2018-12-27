@@ -59,7 +59,7 @@ class ListCell: SuperCell {
         if let item = data.data[TEAM_BALL_KEY] {
             listBallTxt.text = (item["show"] as! String)
         }
-        if let item = data.data[TEAM_DAYS_KEY] {
+        if let item = data.data[TEAM_WEEKDAYS_KEY] {
             listDayTxt.text = (emptyToSpace(item["show"] as! String))
         }
         if let item = data.data[TEAM_INTERVAL_KEY] {

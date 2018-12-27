@@ -476,7 +476,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     }
     
     func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
-        var row = getDefinedRow(TEAM_DAYS_KEY)
+        var row = getDefinedRow(TEAM_WEEKDAYS_KEY)
         var texts: [String] = [String]()
         days = res
         if days.count > 0 {
@@ -493,7 +493,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         } else {
             row["show"] = "全部"
         }
-        replaceRows(TEAM_DAYS_KEY, row)
+        replaceRows(TEAM_WEEKDAYS_KEY, row)
         searchTableView.reloadData()
     }
     

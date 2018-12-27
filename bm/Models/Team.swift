@@ -15,7 +15,7 @@ class Team: SuperData {
         [NAME_KEY],
         [TEAM_LEADER_KEY,MOBILE_KEY,EMAIL_KEY],
         [CITY_KEY,ARENA_KEY],
-        [TEAM_DAYS_KEY,TEAM_PLAY_START_KEY,TEAM_PLAY_END_KEY],
+        [TEAM_WEEKDAYS_KEY,TEAM_PLAY_START_KEY,TEAM_PLAY_END_KEY],
         [TEAM_TEMP_FEE_M_KEY,TEAM_TEMP_FEE_F_KEY,TEAM_TEMP_CONTENT_KEY],
         [TEAM_BALL_KEY,TEAM_DEGREE_KEY,CHARGE_KEY,CONTENT_KEY]
     ]
@@ -111,7 +111,7 @@ class Team: SuperData {
             TEAM_TEMP_CONTENT_KEY:["ch":"臨打說明","vtype":"String","value":"","submit":true,"atype":more,"segue":TO_TEXT_INPUT,"sender":[String: Any](),"show":""],
             CITY_KEY:["ch":"區域","vtype":"array","value":0,"submit":true,"atype":more,"segue":TO_CITY,"sender":0,"show":""],
             ARENA_KEY:["ch":"球館","vtype":"array","value":0,"submit":true,"atype":more,"segue":TO_ARENA,"sender":[String: Int](),"show":""],
-            TEAM_DAYS_KEY:["ch":"星期幾","vtype":"array","value":[Int](),"submit":true,"atype":more,"segue":TO_SELECT_WEEKDAY,"sender":[Int](),"show":""],
+            TEAM_WEEKDAYS_KEY:["ch":"星期幾","vtype":"array","value":[Int](),"submit":true,"atype":more,"segue":TO_SELECT_WEEKDAY,"sender":[Int](),"show":""],
             FEATURED_KEY:["ch":"代表圖","vtype":"image","value":UIImage(named: "nophoto")!,"path":"","submit":false,"show":""]
         ]
         for (key, _) in data2 {
@@ -170,7 +170,7 @@ class Team: SuperData {
          TEAM_PLAY_START_KEY: "16:00",
          TEAM_PLAY_END_KEY: "18:00",
          TEAM_DEGREE_KEY: [Degree(value:DEGREE.high,text:""), Degree(value: DEGREE.high, text: "")],
-         TEAM_DAYS_KEY: [2, 4],
+         TEAM_WEEKDAYS_KEY: [2, 4],
          CITY_KEY: City(id:218, name: "台南"),
          ARENA_KEY: Arena(id: 10, name: "全穎羽球館")
          ]
@@ -197,7 +197,7 @@ class Team: SuperData {
                 }
                 data[key1]!["change"] = true
             }
-            updateDays(testData[TEAM_DAYS_KEY] as! [Int])
+            updateWeekdays(testData[TEAM_WEEKDAYS_KEY] as! [Int])
             updateDegree(testData[TEAM_DEGREE_KEY] as! [Degree])
         }
     }
@@ -219,15 +219,15 @@ class Team: SuperData {
         }
         setArenaSender()
     }
-    override func updateDays(_ days: [Int]?) {
-        if days != nil {
-            data[TEAM_DAYS_KEY]!["value"] = days
-            daysShow()
+    override func updateWeekdays(_ weekdays: [Int]?) {
+        if weekdays != nil {
+            data[TEAM_WEEKDAYS_KEY]!["value"] = weekdays
+            weekdaysShow()
         } else {
-            data[TEAM_DAYS_KEY]!["value"] = [Int]()
-            data[TEAM_DAYS_KEY]!["show"] = ""
+            data[TEAM_WEEKDAYS_KEY]!["value"] = [Int]()
+            data[TEAM_WEEKDAYS_KEY]!["show"] = ""
         }
-        setDaysSender()
+        setWeekdaysSender()
     }
     override func updateDegree(_ degrees: [Degree]?) {
         if degrees != nil {
@@ -275,25 +275,25 @@ class Team: SuperData {
         data[TEAM_NEAR_DATE_KEY]!["show"] = n
     }
     
-    func daysShow() {
-        let row: [String: Any] = data[TEAM_DAYS_KEY]!
+    func weekdaysShow() {
+        let row: [String: Any] = data[TEAM_WEEKDAYS_KEY]!
         if row["value"] != nil {
-            let days: [Int] = row["value"] as! [Int]
-            if days.count > 0 {
+            let weekdays: [Int] = row["value"] as! [Int]
+            if weekdays.count > 0 {
                 var res: [String] = [String]()
-                for day in days {
+                for weekday in weekdays {
                     for item in Global.instance.weekdays {
                         let idx: Int = item["value"] as! Int
                         let text: String = item["text"] as! String
-                        if idx == day {
+                        if idx == weekday {
                             res.append(text)
                         }
                     }
                 }
                 let show: String = res.joined(separator: ", ")
-                data[TEAM_DAYS_KEY]!["show"] = show
+                data[TEAM_WEEKDAYS_KEY]!["show"] = show
             } else {
-                data[TEAM_DAYS_KEY]!["show"] = "未提供"
+                data[TEAM_WEEKDAYS_KEY]!["show"] = "未提供"
             }
         }
     }
@@ -328,8 +328,8 @@ class Team: SuperData {
         arena_sender["arena_id"] = arena_id
         data[ARENA_KEY]!["sender"] = arena_sender
     }
-    func setDaysSender() {
-        data[TEAM_DAYS_KEY]!["sender"] = data[TEAM_DAYS_KEY]!["value"]
+    func setWeekdaysSender() {
+        data[TEAM_WEEKDAYS_KEY]!["sender"] = data[TEAM_WEEKDAYS_KEY]!["value"]
     }
     
     func setDegreeSender() {

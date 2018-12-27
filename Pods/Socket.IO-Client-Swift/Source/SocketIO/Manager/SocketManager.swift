@@ -137,10 +137,6 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
         self._config = config
         self.socketURL = socketURL
 
-        if socketURL.absoluteString.hasPrefix("https://") {
-            self._config.insert(.secure(true))
-        }
-
         super.init()
 
         setConfigs(_config)
@@ -290,7 +286,7 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
     /// - parameter items: The data to send with this event.
     open func emitAll(_ event: String, withItems items: [Any]) {
         forAll {socket in
-            socket.emit(event, with: items)
+            socket.emit(event, with: items, completion: nil)
         }
     }
 
@@ -381,6 +377,18 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
         }
     }
 
+    /// Called when when upgrading the http connection to a websocket connection.
+    ///
+    /// - parameter headers: The http headers.
+    open func engineDidWebsocketUpgrade(headers: [String: String]) {
+        handleQueue.async {
+            self._engineDidWebsocketUpgrade(headers: headers)
+        }
+    }
+     private func _engineDidWebsocketUpgrade(headers: [String: String]) {
+        emitAll(clientEvent: .websocketUpgrade, data: [headers])
+    }
+
     /// Called when the engine has a message that must be parsed.
     ///
     /// - parameter msg: The message that needs parsing.
@@ -392,7 +400,7 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
 
     private func _parseEngineMessage(_ msg: String) {
         guard let packet = parseSocketMessage(msg) else { return }
-        guard packet.type != .binaryAck && packet.type != .binaryEvent else {
+        guard !packet.type.isBinary else {
             waitingPackets.append(packet)
 
             return
@@ -489,12 +497,17 @@ open class SocketManager : NSObject, SocketManagerSpec, SocketParsable, SocketDa
                 DefaultSocketLogger.Logger.log = log
             case let .logger(logger):
                 DefaultSocketLogger.Logger = logger
-            default:
+            case _:
                 continue
             }
         }
 
         _config = config
+
+        if socketURL.absoluteString.hasPrefix("https://") {
+            _config.insert(.secure(true))
+        }
+
         _config.insert(.path("/socket.io/"), replacing: false)
 
         // If `ConfigSettable` & `SocketEngineSpec`, update its configs.

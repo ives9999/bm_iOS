@@ -22,7 +22,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true],
         ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
         //            ["ch": "區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":"team_area","show":"全部","segue":TO_ARENA,"sender":0],
-        ["ch":"日期","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_DAYS_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int]()],
+        ["ch":"日期","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_WEEKDAYS_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int]()],
         ["ch":"時段","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_START_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
 //        ["ch":"結束時間","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_END_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
         ["ch":"球館","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int]()],
@@ -30,7 +30,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     ]
     
     var tables = [
-        ExpandableItems(isExpanded: true, items: ["keyword",CITY_KEY,TEAM_DAYS_KEY, TEAM_PLAY_START_KEY]),
+        ExpandableItems(isExpanded: true, items: ["keyword",CITY_KEY,TEAM_WEEKDAYS_KEY, TEAM_PLAY_START_KEY]),
         ExpandableItems(isExpanded: false, items: [ARENA_KEY,TEAM_DEGREE_KEY])
     ]
 
@@ -244,7 +244,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     }
     
     func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
-        var row = getDefinedRow(TEAM_DAYS_KEY)
+        var row = getDefinedRow(TEAM_WEEKDAYS_KEY)
         var texts: [String] = [String]()
         weekdays = res
         if weekdays.count > 0 {
@@ -261,7 +261,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         } else {
             row["show"] = "全部"
         }
-        replaceRows(TEAM_DAYS_KEY, row)
+        replaceRows(TEAM_WEEKDAYS_KEY, row)
         tableView.reloadData()
     }
     

@@ -110,17 +110,9 @@ class DataService {
                         let vimeo: String = row["vimeo"].stringValue
                         let youtube: String = row["youtube"].stringValue
                         
-                        var path: String!
-                        let path1 = row["featured_path"].stringValue
-                        if (path1.count > 0) {
-                            if (!path1.startWith("http://") && !path1.startWith("https://")) {
-                                path = BASE_URL + path1
-                            } else {
-                                path = path1
-                            }
+                        let path = row["featured_path"].stringValue
+                        if (path.count > 0) {
                             self.needDownloads.append(["idx": i, "path": path])
-                        } else {
-                            path = ""
                         }
                         
                         let list = self.setData(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
@@ -138,7 +130,7 @@ class DataService {
                     if (needDownload > 0) {
                         var tmp: Int = needDownload
                         for i in 0 ..< needDownload {
-                            self.getImage(url: self.needDownloads[i]["path"] as! String, completion: { (success) in
+                            self.getImage(_url: self.needDownloads[i]["path"] as! String, completion: { (success) in
                                 if success {
                                     let idx: Int = self.needDownloads[i]["idx"] as! Int
                                     self.dataLists[idx].featured = self.image!
@@ -241,9 +233,10 @@ class DataService {
                 
                 //print(self.model.data)
                 
-                let path: String = self.model.data[FEATURED_KEY]!["path"] as! String
+                //let path: String = self.model.data[FEATURED_KEY]!["path"] as! String
+                let path: String =  json[FEATURED_KEY].stringValue
                 if path.count > 0 {
-                    self.getImage(url: path, completion: { (success) in
+                    self.getImage(_url: path, completion: { (success) in
                         if success {
                             self.model.data[FEATURED_KEY]!["value"] = self.image
                             completion(true)
@@ -328,7 +321,7 @@ class DataService {
                     for d in value as! [String] {
                         multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "degree[]")
                     }
-                } else if key == TEAM_DAYS_KEY {
+                } else if key == TEAM_WEEKDAYS_KEY {
                     for d in value as! [Int] {
                         multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "days[]")
                     }
@@ -474,7 +467,7 @@ class DataService {
             for i in 0..<needDownloads.count {
                 let path: String = needDownloads[i]["path"] as! String
                 let idx: Int = needDownloads[i]["idx"] as! Int
-                getImage(url: path, completion: { (success) in
+                getImage(_url: path, completion: { (success) in
                     if (success) {
                         self.homes[key]![idx].featured = self.image!
                         count -= 1
@@ -487,7 +480,11 @@ class DataService {
         }
     }
     
-    func getImage(url: String, completion: @escaping CompletionHandler) {
+    func getImage(_url: String, completion: @escaping CompletionHandler) {
+        var url = _url
+        if (!_url.startWith("http://") && !_url.startWith("https://")) {
+            url = BASE_URL + _url
+        }
         Alamofire.request(url).responseImage(completionHandler: { (response) in
             if response.result.isSuccess {
                 guard let image = response.result.value else { return }

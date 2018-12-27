@@ -170,7 +170,7 @@ let TEAM_PLAY_END_KEY = "play_end"
 let TEAM_INTERVAL_KEY = "interval"
 let TEAM_BALL_KEY = "ball"
 let TEAM_DEGREE_KEY = "degree"
-let TEAM_DAYS_KEY = "weekdays"
+let TEAM_WEEKDAYS_KEY = "weekdays"
 let TEAM_NEAR_DATE_KEY = "near_date"
 
 let TEAM_TEMP_FEE_M_KEY = "temp_fee_M"

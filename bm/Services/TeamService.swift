@@ -108,13 +108,13 @@ class TeamService: DataService {
                                 let name: String = tmp["name"].stringValue
                                 let arena: Arena = Arena(id: id, name: name)
                                 self.model.updateArena(arena)
-                            } else if key == TEAM_DAYS_KEY {
+                            } else if key == TEAM_WEEKDAYS_KEY {
                                 let tmp1: [JSON] = tmp.arrayValue
                                 var days: [Int] = [Int]()
                                 for item in tmp1 {
                                     days.append(item["day"].intValue)
                                 }
-                                self.model.updateDays(days)
+                                self.model.updateWeekdays(days)
                             } else if key == TEAM_DEGREE_KEY {
                                 let tmp1: String = tmp.stringValue
                                 let degrees: [String] = tmp1.components(separatedBy: ",")
@@ -305,13 +305,13 @@ class TeamService: DataService {
                 let name: String = tmp["name"].stringValue
                 let arena: Arena = Arena(id: id, name: name)
                 model.updateArena(arena)
-            } else if key == TEAM_DAYS_KEY {
+            } else if key == TEAM_WEEKDAYS_KEY {
                 let tmp1: [JSON] = tmp.arrayValue
                 var days: [Int] = [Int]()
                 for item in tmp1 {
                     days.append(item["weekday"].intValue)
                 }
-                model.updateDays(days)
+                model.updateWeekdays(days)
             } else if key == TEAM_DEGREE_KEY {
                 let tmp1: String = tmp.stringValue
                 let degrees: [String] = tmp1.components(separatedBy: ",")
