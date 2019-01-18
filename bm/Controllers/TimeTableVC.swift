@@ -41,7 +41,8 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
 
     fileprivate var form: TimeTableForm = TimeTableForm()
     var params: [String: String] = [String: String]()
-    let test: [String: String] = [TT_TITLE:"練球",TT_WEEKDAY:"5",TT_START_DATE:"2019-02-01",TT_END_DATE:"2019-03-31",TT_START_TIME:"14:00",TT_END_TIME:"17:00",TT_LIMIT:"6",TT_COLOR:"warning",TT_STATUS:"offline",TT_CONTENT:"大家來練球"]
+    let test: [String: String] = [TT_TITLE:"練球",TT_WEEKDAY:"2",TT_START_DATE:"2019-01-01",TT_END_DATE:"2019-03-31",TT_START_TIME:"14:00",TT_END_TIME:"17:00",TT_CHARGE:"800",TT_LIMIT:"6",TT_COLOR:"warning",TT_STATUS:"online",TT_CONTENT:"大家來練球"]
+    var action: String = "INSERT"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -178,10 +179,19 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
 //        }
 //        //print(values)
 //        form = TimeTableForm(id: event.id, values: values)
+//        action = "UPDATE"
 //        showEditEvent(3)
     }
     
     @objc override func layerSubmit(view: UIButton) {
+        if action == "UPDATE" {
+            let (isChange, msg) = form.isChanged()
+            if !isChange {
+                let _msg = msg ?? "沒有更改任何值，所以不用送出更新"
+                warning(_msg)
+                return
+            }
+        }
         let (isValid, msg) = form.isValid()
         if !isValid {
             let _msg = msg ?? "欄位驗證錯誤"
@@ -219,6 +229,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     @IBAction func addTimeTableBtnPressed(_ sender: Any) {
         form = TimeTableForm(values: test)
+        action = "INSERT"
         showEditEvent(2)
     }
     

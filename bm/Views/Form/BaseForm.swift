@@ -24,6 +24,20 @@ class BaseForm {
     }
     
     @discardableResult
+    func isChanged()-> (Bool, String?) {
+        var msg: String?
+        for item in formItems {
+            if (!isChange) {
+                isChange = item.updateCheckChange()
+            }
+        }
+        if (!isChange) {
+            msg = "沒有更改任何值，所以不用送出更新"
+        }
+        
+        return (isChange, msg)
+    }
+    @discardableResult
     func isValid() ->(Bool, String?) {
         var isValid = true
         var msg: String?
@@ -34,13 +48,6 @@ class BaseForm {
                 msg = item.msg
                 break
             }
-            if (!isChange) {
-                isChange = item.updateCheckChange()
-            }
-        }
-        if (isValid && !isChange) {
-            isValid = false
-            msg = "沒有更改任何值，所以不用送出更新"
         }
         
         return (isValid, msg)

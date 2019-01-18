@@ -20,7 +20,7 @@ class TimeTableForm: BaseForm {
         
         let eventWeekdayItem = WeekdayFormItem(title: "星期幾", name: TT_WEEKDAY)
         let eventStartDateItem = DateFormItem(name: TT_START_DATE, title: "開始日期", dateType: SELECT_DATE_TYPE.start)
-        let eventEndDateItem = DateFormItem(name: TT_START_DATE, title: "結束日期", dateType: SELECT_DATE_TYPE.end)
+        let eventEndDateItem = DateFormItem(name: TT_END_DATE, title: "結束日期", dateType: SELECT_DATE_TYPE.end)
         
         let eventStartTimeItem = TimeFormItem(name: TT_START_TIME, title: "開始時間", timeType: SELECT_TIME_TYPE.play_start)
         
