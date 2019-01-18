@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, WeekdaysSelectDelegate, TimeSelectDelegate, ColorSelectDelegate, StatusSelectDelegate, TextInputDelegate {
+class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, WeekdaysSelectDelegate, DateSelectDelegate, TimeSelectDelegate, ColorSelectDelegate, StatusSelectDelegate, TextInputDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -41,7 +41,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
 
     fileprivate var form: TimeTableForm = TimeTableForm()
     var params: [String: String] = [String: String]()
-    let test: [String: String] = [TT_TITLE:"練球",TT_WEEKDAY:"5",TT_START:"14:00",TT_END:"17:00",TT_LIMIT:"6",TT_COLOR:"warning",TT_STATUS:"offline",TT_CONTENT:"大家來練球"]
+    let test: [String: String] = [TT_TITLE:"練球",TT_WEEKDAY:"5",TT_START_DATE:"2019-02-01",TT_END_DATE:"2019-03-31",TT_START_TIME:"14:00",TT_END_TIME:"17:00",TT_LIMIT:"6",TT_COLOR:"warning",TT_STATUS:"offline",TT_CONTENT:"大家來練球"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,9 +95,9 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         let width: CGFloat = cellWidth - 2 * cellBorderWidth
         for i in 0 ... timeTable.rows.count-1 {
             let row = timeTable.rows[i]
-            let x: CGFloat = CGFloat(row.day) * cellWidth + cellBorderWidth
-            let y: CGFloat = CGFloat(row._start-startNum) * cellHeight + cellBorderWidth
-            let gridNum: CGFloat = CGFloat(row._end-row._start)
+            let x: CGFloat = CGFloat(row.weekday) * cellWidth + cellBorderWidth
+            let y: CGFloat = CGFloat(row._start_time-startNum) * cellHeight + cellBorderWidth
+            let gridNum: CGFloat = CGFloat(row._end_time-row._start_time)
             let height: CGFloat = gridNum * cellHeight - 2 * cellBorderWidth
             
             var frame = CGRect(x: x, y: y, width: width, height: height)
@@ -133,30 +133,52 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     
     @objc func clickEvent(sender: UITapGestureRecognizer) {
-        guard let a = (sender.view) else {return}
-        let idx: Int = a.tag - 100
-        //print(idx)
-        eventTag = idx + 100
-        //print(eventTag)
-        let event = timeTable.rows[idx]
-        //print(event.printRow())
-        //let mirror: Mirror? = Mirror(reflecting: event)
-        //mirror.
-        var values: [String: String] = [String: String]()
-        for formItem in form.formItems {
-            if formItem.name != nil {
-                let name: String = formItem.name!
-                var value: String = String(describing:(event.value(forKey: name))!)
-                //print(value)
-                if name == TT_START || name == TT_END {
-                    value = value.noSec()
-                }
-                values[name] = value
-            }
+        
+        let alert = UIAlertController(title: "title", message: "content", preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
+            print("view")
         }
-        //print(values)
-        form = TimeTableForm(id: event.id, values: values)
-        showEditEvent(3)
+        let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
+            print("edit")
+        }
+        let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
+            print("delete")
+        }
+        let action4 = UIAlertAction(title: "取消", style: .default) { (action) in
+            print("cancel")
+        }
+        alert.addAction(action1)
+        alert.addAction(action2)
+        alert.addAction(action3)
+        alert.addAction(action4)
+        present(alert, animated: true, completion: nil)
+        
+        
+        
+//        guard let a = (sender.view) else {return}
+//        let idx: Int = a.tag - 100
+//        //print(idx)
+//        eventTag = idx + 100
+//        //print(eventTag)
+//        let event = timeTable.rows[idx]
+//        //print(event.printRow())
+//        //let mirror: Mirror? = Mirror(reflecting: event)
+//        //mirror.
+//        var values: [String: String] = [String: String]()
+//        for formItem in form.formItems {
+//            if formItem.name != nil {
+//                let name: String = formItem.name!
+//                var value: String = String(describing:(event.value(forKey: name))!)
+//                //print(value)
+//                if name == TT_START || name == TT_END {
+//                    value = value.noSec()
+//                }
+//                values[name] = value
+//            }
+//        }
+//        //print(values)
+//        form = TimeTableForm(id: event.id, values: values)
+//        showEditEvent(3)
     }
     
     @objc override func layerSubmit(view: UIButton) {
@@ -319,7 +341,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         let startTime: Int = indexPath.row / columnNum + startNum
         let weekday: Int = indexPath.row % columnNum
         //print("\(weekday)-\(startTime)")
-        let values: [String: String] = [TT_START: String(startTime) + ":00", TT_WEEKDAY: String(weekday)]
+        let values: [String: String] = [TT_START_TIME: String(startTime) + ":00", TT_WEEKDAY: String(weekday)]
         eventTag = (collectionView.cellForItem(at: indexPath)?.tag)!
         //print(eventTag)
         form = TimeTableForm(values: values)
@@ -354,6 +376,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         Global.instance.addSpinner(superView: view)
         Global.instance.removeSpinner(superView: view)
+        
         let item = form.formItems[indexPath.row]
         if form.formItems[indexPath.row].uiProperties.cellType != nil {
             if item.segue != nil {
@@ -392,6 +415,19 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                 }
             }
             weekdaysSelectVC.delegate = self
+        }else if segue.identifier == TO_SELECT_DATE {
+            let dateSelectVC: DateSelectVC = segue.destination as! DateSelectVC
+            if indexPath != nil {
+                dateSelectVC.indexPath = indexPath
+            }
+            if let _sender: [String: Any?] = sender as? [String: Any?] {
+                if _sender["sender"] != nil {
+                    let realSender: [String: Any] = _sender["sender"] as! [String: Any]
+                    dateSelectVC.type = realSender["type"] as! SELECT_DATE_TYPE
+                    dateSelectVC.selected = realSender["date"] as! String
+                }
+            }
+            dateSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
             destinationNavigationController = (segue.destination as! UINavigationController)
             let timeSelectVC: TimeSelectVC = destinationNavigationController!.topViewController as! TimeSelectVC
@@ -457,6 +493,14 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             
             editTableView.reloadData()
         }
+    }
+    
+    func setDateData(res: String, type: SELECT_DATE_TYPE, indexPath: IndexPath?) {
+        if indexPath != nil {
+            let item = form.formItems[indexPath!.row] as! DateFormItem
+            item.value = res
+        }
+        editTableView.reloadData()
     }
     
     func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {

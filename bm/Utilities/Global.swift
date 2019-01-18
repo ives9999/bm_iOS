@@ -146,6 +146,9 @@ enum MEMBER_ROLE: String {
 enum SELECT_TIME_TYPE: Int {
     case play_start, play_end
 }
+enum SELECT_DATE_TYPE: Int {
+    case start, end
+}
 enum TEXT_INPUT_TYPE: String {
     case temp_play = "臨打說明"
     case charge = "收費說明"
@@ -214,6 +217,13 @@ class Global {
         ["value":6,"text":"星期六","simple_text":"六","checked":false],
         ["value":7,"text":"星期日","simple_text":"日","checked":false]
     ]
+    
+    func today()-> String {
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
     
     func deviceType(frameWidth: CGFloat) -> DeviceType {
         var deviceType: DeviceType = UIDevice.current.deviceType
@@ -463,6 +473,16 @@ extension String {
     }
     var isNumber: Bool {
         return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    }
+    var isDate: Bool {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        
+        if dateFormatterGet.date(from: self) != nil {
+            return true
+        } else {
+            return false
+        }
     }
     func indexDistance(of character: Character) -> Int? {
         guard let index = index(of: character) else { return nil }

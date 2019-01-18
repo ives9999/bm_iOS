@@ -11,6 +11,11 @@
 		B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */; };
 		B306F340217DA15000C32CE2 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33F217DA15000C32CE2 /* Area.swift */; };
 		B306F3432180346B00C32CE2 /* SuperSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F3422180346B00C32CE2 /* SuperSwitch.swift */; };
+		B306FE9A21F0916D00403FE2 /* DateFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FE9921F0916D00403FE2 /* DateFormItem.swift */; };
+		B306FE9C21F0DA8000403FE2 /* DateSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FE9B21F0DA8000403FE2 /* DateSelectVC.swift */; };
+		B306FE9F21F0DC5900403FE2 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FE9D21F0DC5900403FE2 /* DateCell.swift */; };
+		B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B306FE9E21F0DC5900403FE2 /* DateCell.xib */; };
+		B306FEA321F1A35700403FE2 /* SuperDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEA221F1A35700403FE2 /* SuperDatePicker.swift */; };
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -216,6 +221,11 @@
 		B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSelectVC.swift; sourceTree = "<group>"; };
 		B306F33F217DA15000C32CE2 /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
 		B306F3422180346B00C32CE2 /* SuperSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperSwitch.swift; sourceTree = "<group>"; };
+		B306FE9921F0916D00403FE2 /* DateFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormItem.swift; sourceTree = "<group>"; };
+		B306FE9B21F0DA8000403FE2 /* DateSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectVC.swift; sourceTree = "<group>"; };
+		B306FE9D21F0DC5900403FE2 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
+		B306FE9E21F0DC5900403FE2 /* DateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateCell.xib; sourceTree = "<group>"; };
+		B306FEA221F1A35700403FE2 /* SuperDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperDatePicker.swift; sourceTree = "<group>"; };
 		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -424,6 +434,14 @@
 			path = Switch;
 			sourceTree = "<group>";
 		};
+		B306FEA121F1A31500403FE2 /* DatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				B306FEA221F1A35700403FE2 /* SuperDatePicker.swift */,
+			);
+			path = DatePicker;
+			sourceTree = "<group>";
+		};
 		B30C95401FE82DA0005F71EF /* bmNotificationServiceExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -473,6 +491,7 @@
 		B32FBCEF1F84831C003D39CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B306FEA121F1A31500403FE2 /* DatePicker */,
 				B34A20FD21B6967600EE6E1C /* Form */,
 				B306F3412180344300C32CE2 /* Switch */,
 				B3F8C3B6215D27BE005CBBC1 /* Checkbox.swift */,
@@ -538,6 +557,7 @@
 				B33C1ABE21BD7F2C006F2BEB /* WeekdayFormItem.swift */,
 				B33C1AC021BE635E006F2BEB /* ContentFormItem.swift */,
 				B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */,
+				B306FE9921F0916D00403FE2 /* DateFormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";
@@ -559,6 +579,8 @@
 				B3756EE121B95974006893E1 /* ColorCell.xib */,
 				B3756EEA21BA6AAA006893E1 /* StatusCell.swift */,
 				B3756EEB21BA6AAA006893E1 /* StatusCell.xib */,
+				B306FE9D21F0DC5900403FE2 /* DateCell.swift */,
+				B306FE9E21F0DC5900403FE2 /* DateCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -724,6 +746,7 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3756EE421B95DD5006893E1 /* ColorSelectVC.swift */,
 				B3756EEE21BA6F19006893E1 /* StatusSelectVC.swift */,
+				B306FE9B21F0DA8000403FE2 /* DateSelectVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -911,6 +934,7 @@
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
+				B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */,
 				F94E7D271F83636A00F550FD /* Assets.xcassets in Resources */,
 				B34A210121B696AA00EE6E1C /* TextFieldCell.xib in Resources */,
 				B3756EF321BA7567006893E1 /* StatusSelectCell.xib in Resources */,
@@ -1055,6 +1079,7 @@
 				B3ED38E81FB852EB0003F083 /* FormCell.swift in Sources */,
 				B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */,
 				B3308C511FDA5311006A83B6 /* TempPlayShowVC.swift in Sources */,
+				B306FE9A21F0916D00403FE2 /* DateFormItem.swift in Sources */,
 				B33C1ABB21BD2DED006F2BEB /* ColorFormItem.swift in Sources */,
 				B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */,
 				B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */,
@@ -1071,6 +1096,7 @@
 				B3756EE821B96B96006893E1 /* ColorSelectCell.swift in Sources */,
 				B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */,
 				F9A1CB811F95CE2F00DDEC86 /* SuperData.swift in Sources */,
+				B306FE9F21F0DC5900403FE2 /* DateCell.swift in Sources */,
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
 				B3ED38EA1FB87EE50003F083 /* TeamService.swift in Sources */,
 				B3756EF221BA7567006893E1 /* StatusSelectCell.swift in Sources */,
@@ -1104,6 +1130,7 @@
 				B34A20AE21AE962700EE6E1C /* TimeTable.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
+				B306FE9C21F0DA8000403FE2 /* DateSelectVC.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
 				B323390F21B6BBC7003EB84D /* BaseForm.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
@@ -1165,6 +1192,7 @@
 				B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */,
 				B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */,
 				B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */,
+				B306FEA321F1A35700403FE2 /* SuperDatePicker.swift in Sources */,
 				B317855B20D9089600765CA1 /* BlackListCell.swift in Sources */,
 				B306F340217DA15000C32CE2 /* Area.swift in Sources */,
 				B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */,

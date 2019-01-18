@@ -14,6 +14,7 @@ enum FormItemCellType {
     case more
     case dateTime
     case weekday
+    case date
     case time
     case color
     case status
@@ -30,6 +31,8 @@ enum FormItemCellType {
         
         let weekdayNib = UINib(nibName: "WeekdayCell", bundle: nil)
         tableView.register(weekdayNib, forCellReuseIdentifier: "weekday")
+        let dateNib = UINib(nibName: "DateCell", bundle: nil)
+        tableView.register(dateNib, forCellReuseIdentifier: "date")
         let timeNib = UINib(nibName: "TimeCell", bundle: nil)
         tableView.register(timeNib, forCellReuseIdentifier: "time")
         let colorNib = UINib(nibName: "ColorCell", bundle: nil)
@@ -50,6 +53,8 @@ enum FormItemCellType {
             cell = tableView.dequeueReusableCell(withIdentifier: "dateTime", for: indexPath)
         case .weekday:
             cell = tableView.dequeueReusableCell(withIdentifier: "weekday", for: indexPath)
+        case .date:
+            cell = tableView.dequeueReusableCell(withIdentifier: "date", for: indexPath)
         case .time:
             cell = tableView.dequeueReusableCell(withIdentifier: "time", for: indexPath)
         case .color:

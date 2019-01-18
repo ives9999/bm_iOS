@@ -19,11 +19,14 @@ class TimeTableForm: BaseForm {
 //        }
         
         let eventWeekdayItem = WeekdayFormItem(title: "星期幾", name: TT_WEEKDAY)
+        let eventStartDateItem = DateFormItem(name: TT_START_DATE, title: "開始日期", dateType: SELECT_DATE_TYPE.start)
+        let eventEndDateItem = DateFormItem(name: TT_START_DATE, title: "結束日期", dateType: SELECT_DATE_TYPE.end)
         
-        let eventStartTimeItem = TimeFormItem(name: TT_START, title: "開始時間", timeType: SELECT_TIME_TYPE.play_start)
+        let eventStartTimeItem = TimeFormItem(name: TT_START_TIME, title: "開始時間", timeType: SELECT_TIME_TYPE.play_start)
         
-        let eventEndTimeItem = TimeFormItem(name: TT_END, title: "結束時間", timeType: SELECT_TIME_TYPE.play_end)
+        let eventEndTimeItem = TimeFormItem(name: TT_END_TIME, title: "結束時間", timeType: SELECT_TIME_TYPE.play_end)
         
+        let eventChargeItem = TextFieldFormItem(name: TT_CHARGE, title: "費用", placeholder: "", value: nil, keyboardType: .numberPad)
         let eventLimitItem = TextFieldFormItem(name: TT_LIMIT, title: "限制人數", placeholder: "無限制請填-1", value: nil, keyboardType: .numberPad)
         
         let eventColorItem = ColorFormItem()
@@ -32,7 +35,7 @@ class TimeTableForm: BaseForm {
         
         let eventContentItem = ContentFormItem(name: TT_CONTENT, title: "詳細內容", type: TEXT_INPUT_TYPE.timetable_coach)
         
-        formItems = [eventTitleItem, eventWeekdayItem, eventStartTimeItem, eventEndTimeItem, eventLimitItem, eventColorItem, eventStatusItem, eventContentItem]
+        formItems = [eventTitleItem, eventWeekdayItem, eventStartDateItem, eventEndDateItem, eventStartTimeItem, eventEndTimeItem, eventChargeItem, eventLimitItem, eventColorItem, eventStatusItem, eventContentItem]
     }
     
     override func fillValue() {
