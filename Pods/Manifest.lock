@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.8.0)
   - AlamofireImage (3.5.0):
     - Alamofire (~> 4.8)
+  - AMPopTip (3.5.0)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
     - Bolts/Tasks (= 1.9.0)
@@ -41,6 +42,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireImage
+  - AMPopTip
   - Device.swift
   - FacebookCore
   - FacebookLogin
@@ -57,6 +59,7 @@ SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - AlamofireImage
+    - AMPopTip
     - Bolts
     - Device.swift
     - FacebookCore
@@ -77,6 +80,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
+  AMPopTip: 871ae0570b68fe396e714922b3f7d8ed6a36bb71
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Device.swift: f5ff884087c13999505b3a6b2ff1104fb6923f93
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
@@ -94,6 +98,6 @@ SPEC CHECKSUMS:
   TRVideoView: 00e2eaed3f19196956bb1ec61c875df6c0ea84dc
   UIColor_Hex_Swift: bc07fc197421ee896b9ed6dcfa2054b7fbf75145
 
-PODFILE CHECKSUM: 9e87aab1f6f4df7a361ae2af0896c466a7cf5db5
+PODFILE CHECKSUM: 02e94dceeeb05d85f7bd7904a87eae395e54af32
 
 COCOAPODS: 1.5.0

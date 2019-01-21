@@ -23,6 +23,7 @@ class FormItem: FormValidable {
     var uiProperties = FormItemUIProperties()
     var segue: String?
     var show: String = ""
+    var tooltip: String?
     
     //weekday is [Int]
     //time is ["type":SELECT_TIME_TYPE,"time":"09:00"]
@@ -31,11 +32,14 @@ class FormItem: FormValidable {
     //content is ["type":TEXT_INPUT_TYPE,"text":"課程說明"]
     var sender: Any?
     
-    init(name: String, title: String, placeholder: String? = nil, value: String? = nil) {
+    init(name: String, title: String, placeholder: String? = nil, value: String? = nil, tooltip: String?=nil) {
         self.title = title
         self.name = name
         if placeholder != nil {
             self.placeholder = placeholder!
+        }
+        if tooltip != nil {
+            self.tooltip = tooltip
         }
         self.value = value
     }

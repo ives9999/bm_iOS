@@ -26,10 +26,10 @@ class TimeTableForm: BaseForm {
         
         let eventEndTimeItem = TimeFormItem(name: TT_END_TIME, title: "結束時間", timeType: SELECT_TIME_TYPE.play_end)
         
-        let eventChargeItem = TextFieldFormItem(name: TT_CHARGE, title: "費用", placeholder: "", value: nil, keyboardType: .numberPad)
-        let eventLimitItem = TextFieldFormItem(name: TT_LIMIT, title: "限制人數", placeholder: "無限制請填-1", value: nil, keyboardType: .numberPad)
+        let eventChargeItem = TextFieldFormItem(name: TT_CHARGE, title: "費用", placeholder: "", value: nil, keyboardType: .numberPad, tooltip: "如果不需要費用，請填0")
+        let eventLimitItem = TextFieldFormItem(name: TT_LIMIT, title: "限制人數", placeholder: "", value: nil, keyboardType: .numberPad, tooltip: "如果不限制人數請填-1，不接受報名請填0")
         
-        let eventColorItem = ColorFormItem()
+        let eventColorItem = ColorFormItem(tooltip: "使用色塊來區分不同的課程")
         
         let eventStatusItem = StatusFormItem()
         

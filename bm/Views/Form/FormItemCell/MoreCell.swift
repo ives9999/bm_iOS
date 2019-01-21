@@ -12,7 +12,8 @@ class MoreCell: SuperCell, FormUPdatable {
     
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var detailLbl: SuperLabel!
-    @IBOutlet weak var clearBtn: SubmitButton!
+    @IBOutlet weak var clearBtn: UIButton!
+    @IBOutlet weak var promptBtn: UIButton!
     var formItem: FormItem?
 
     override func awakeFromNib() {
@@ -25,6 +26,14 @@ class MoreCell: SuperCell, FormUPdatable {
     
     @IBAction func clearBtnPressed(_ sender: Any) {
         clear()
+    }
+    
+    @IBAction func promptBtnPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "提示", message: (formItem?.tooltip)!, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: { (action) in
+            
+        }))
+        self.parentViewController?.present(alert, animated: true, completion: nil)
     }
     
     func clear() {
@@ -45,5 +54,6 @@ class MoreCell: SuperCell, FormUPdatable {
                 clearBtn.isHidden = false
             }
         }
+        promptBtn.isHidden = (formItem.tooltip == nil) ? true : false
     }
 }

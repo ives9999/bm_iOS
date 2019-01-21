@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import AMPopTip
 
 class TextFieldCell: SuperCell {
     
     @IBOutlet weak var textField: SuperTextField!
     @IBOutlet weak var titleLbl: SuperLabel!
-    @IBOutlet weak var clearBtn: SubmitButton!
+    @IBOutlet weak var clearBtn: UIButton!
+    @IBOutlet weak var promptBtn: UIButton!
     
     var formItem: FormItem?
+    let popTip = PopTip()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,6 +33,24 @@ class TextFieldCell: SuperCell {
         textField.text = ""
         let _formItem = formItem as! TextFieldFormItem
         _formItem.reset()
+    }
+    
+    @IBAction func promptBtnPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "提示", message: (formItem?.tooltip)!, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: { (action) in
+            
+        }))
+        self.parentViewController?.present(alert, animated: true, completion: nil)
+        
+//        if popTip.isVisible {
+//            popTip.hide()
+//        } else {
+//            if formItem?.tooltip != nil {
+//                let here = CGRect(x: 100, y: 100, width: 100, height: 30)
+//                popTip.show(text: (formItem?.tooltip)!, direction: .left, maxWidth: 200, in: titleLbl, from: here)
+//                popTip.bringSubview(toFront: self.superview!)
+//            }
+//        }
     }
 }
 
@@ -48,6 +69,7 @@ extension TextFieldCell: FormUPdatable {
         textField.placeholder(_formItem.placeholder)
         textField.keyboardType = _formItem.uiProperties.keyboardType
         textField.tintColor = _formItem.uiProperties.tintColor
+        promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
         
         self.formItem = formItem
     }

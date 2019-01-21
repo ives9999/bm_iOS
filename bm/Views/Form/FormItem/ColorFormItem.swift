@@ -13,8 +13,8 @@ class ColorFormItem: FormItem {
     var oldColor: MYCOLOR?
     var color: MYCOLOR?
     
-    required init(title: String = "顏色", name: String = TT_COLOR) {
-        super.init(name: name, title: title, placeholder: nil, value: nil)
+    required init(title: String = "顏色", name: String = TT_COLOR, tooltip: String?=nil) {
+        super.init(name: name, title: title, placeholder: nil, value: nil, tooltip: tooltip)
         segue = TO_SELECT_COLOR
         uiProperties.cellType = .color
         reset()

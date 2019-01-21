@@ -9,9 +9,9 @@
 import Foundation
 
 class TextFieldFormItem: FormItem {
-    required init(name: String, title: String, placeholder: String? = nil, value: String? = nil, keyboardType: UIKeyboardType = .default, isRequire: Bool = true) {
+    required init(name: String, title: String, placeholder: String? = nil, value: String? = nil, keyboardType: UIKeyboardType = .default, isRequire: Bool = true, tooltip: String?=nil) {
         
-        super.init(name: name, title: title, placeholder: placeholder, value: value)
+        super.init(name: name, title: title, placeholder: placeholder, value: value, tooltip: tooltip)
         self.isRequired = isRequired
         uiProperties.keyboardType = keyboardType
         uiProperties.cellType = .textField

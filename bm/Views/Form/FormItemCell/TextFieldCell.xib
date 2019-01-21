@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,19 +20,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oi-tq-AuG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="24" y="12" width="120" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="120" id="ojf-cH-OaA"/>
-                        </constraints>
+                        <rect key="frame" x="24" y="11.5" width="33.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ml-wn-o2D" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="278" y="1" width="42" height="42"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0ml-wn-o2D">
+                        <rect key="frame" x="289" y="9.5" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="42" id="PbX-Wz-SCF"/>
-                            <constraint firstAttribute="width" constant="42" id="TmH-jI-ZGJ"/>
+                            <constraint firstAttribute="height" constant="25" id="PbX-Wz-SCF"/>
+                            <constraint firstAttribute="width" constant="25" id="TmH-jI-ZGJ"/>
                         </constraints>
                         <state key="normal" image="clear"/>
                         <connections>
@@ -41,7 +37,7 @@
                         </connections>
                     </button>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mRn-Ga-cUS" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="150" y="8" width="128" height="28"/>
+                        <rect key="frame" x="100.5" y="8" width="182.5" height="27.5"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
@@ -49,12 +45,25 @@
                             <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="cRN-Rl-h2E"/>
                         </connections>
                     </textField>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-Zp-2Cg">
+                        <rect key="frame" x="63.5" y="9.5" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="WKb-28-OAM"/>
+                            <constraint firstAttribute="height" constant="25" id="avr-P6-XdX"/>
+                        </constraints>
+                        <state key="normal" image="question"/>
+                        <connections>
+                            <action selector="promptBtnPressed:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="IZA-l0-jlw"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="mRn-Ga-cUS" firstAttribute="leading" secondItem="5Oi-tq-AuG" secondAttribute="trailing" constant="6" id="4Vo-fp-6Ej"/>
-                    <constraint firstItem="0ml-wn-o2D" firstAttribute="leading" secondItem="mRn-Ga-cUS" secondAttribute="trailing" id="YZN-GI-gca"/>
+                    <constraint firstItem="eXe-Zp-2Cg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2TZ-AX-5oA"/>
+                    <constraint firstItem="mRn-Ga-cUS" firstAttribute="leading" secondItem="eXe-Zp-2Cg" secondAttribute="trailing" constant="12" id="EuJ-t1-uxo"/>
+                    <constraint firstItem="0ml-wn-o2D" firstAttribute="leading" secondItem="mRn-Ga-cUS" secondAttribute="trailing" constant="6" id="YZN-GI-gca"/>
                     <constraint firstItem="mRn-Ga-cUS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="bO9-aa-xxl"/>
-                    <constraint firstAttribute="trailing" secondItem="0ml-wn-o2D" secondAttribute="trailing" id="d8W-2L-8P5"/>
+                    <constraint firstItem="eXe-Zp-2Cg" firstAttribute="leading" secondItem="5Oi-tq-AuG" secondAttribute="trailing" constant="6" id="ca6-EN-eNj"/>
+                    <constraint firstAttribute="trailing" secondItem="0ml-wn-o2D" secondAttribute="trailing" constant="6" id="d8W-2L-8P5"/>
                     <constraint firstItem="5Oi-tq-AuG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jOv-mT-aBh"/>
                     <constraint firstAttribute="bottom" secondItem="mRn-Ga-cUS" secondAttribute="bottom" constant="8" id="l3J-Am-aM0"/>
                     <constraint firstItem="0ml-wn-o2D" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="r16-cI-yYl"/>
@@ -65,6 +74,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="clearBtn" destination="0ml-wn-o2D" id="ytc-Jc-Jeq"/>
+                <outlet property="promptBtn" destination="eXe-Zp-2Cg" id="iUz-FO-xkg"/>
                 <outlet property="textField" destination="mRn-Ga-cUS" id="1lZ-7o-bor"/>
                 <outlet property="titleLbl" destination="5Oi-tq-AuG" id="lgq-Zm-fxg"/>
             </connections>
@@ -72,5 +82,6 @@
     </objects>
     <resources>
         <image name="clear" width="25" height="25"/>
+        <image name="question" width="25" height="25"/>
     </resources>
 </document>

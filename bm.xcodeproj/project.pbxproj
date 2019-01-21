@@ -80,8 +80,6 @@
 		B36CBD5920E13F7A00E52B9C /* TempPlayDatePlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36CBD5820E13F7A00E52B9C /* TempPlayDatePlayerCell.swift */; };
 		B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */; };
 		B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375105A1FA96C0500CDF1A0 /* Member.swift */; };
-		B3756ED021B793E8006893E1 /* DateTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3756ECE21B793E8006893E1 /* DateTimeCell.swift */; };
-		B3756ED121B793E8006893E1 /* DateTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3756ECF21B793E8006893E1 /* DateTimeCell.xib */; };
 		B3756EDA21B8E50E006893E1 /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3756ED821B8E50E006893E1 /* WeekdayCell.swift */; };
 		B3756EDB21B8E50E006893E1 /* WeekdayCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3756ED921B8E50E006893E1 /* WeekdayCell.xib */; };
 		B3756EDE21B901C5006893E1 /* TimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3756EDC21B901C5006893E1 /* TimeCell.swift */; };
@@ -292,8 +290,6 @@
 		B36CBD5820E13F7A00E52B9C /* TempPlayDatePlayerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayDatePlayerCell.swift; sourceTree = "<group>"; };
 		B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		B375105A1FA96C0500CDF1A0 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
-		B3756ECE21B793E8006893E1 /* DateTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTimeCell.swift; sourceTree = "<group>"; };
-		B3756ECF21B793E8006893E1 /* DateTimeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateTimeCell.xib; sourceTree = "<group>"; };
 		B3756ED821B8E50E006893E1 /* WeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
 		B3756ED921B8E50E006893E1 /* WeekdayCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeekdayCell.xib; sourceTree = "<group>"; };
 		B3756EDC21B901C5006893E1 /* TimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCell.swift; sourceTree = "<group>"; };
@@ -569,8 +565,6 @@
 				B34A20FF21B696AA00EE6E1C /* TextFieldCell.xib */,
 				B34A210221B6A6D300EE6E1C /* MoreCell.swift */,
 				B34A210321B6A6D300EE6E1C /* MoreCell.xib */,
-				B3756ECE21B793E8006893E1 /* DateTimeCell.swift */,
-				B3756ECF21B793E8006893E1 /* DateTimeCell.xib */,
 				B3756ED821B8E50E006893E1 /* WeekdayCell.swift */,
 				B3756ED921B8E50E006893E1 /* WeekdayCell.xib */,
 				B3756EDC21B901C5006893E1 /* TimeCell.swift */,
@@ -930,7 +924,6 @@
 				B3756EDF21B901C5006893E1 /* TimeCell.xib in Resources */,
 				B3756EED21BA6AAA006893E1 /* StatusCell.xib in Resources */,
 				B3756EDB21B8E50E006893E1 /* WeekdayCell.xib in Resources */,
-				B3756ED121B793E8006893E1 /* DateTimeCell.xib in Resources */,
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
@@ -989,6 +982,7 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-bm/Pods-bm-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -1009,6 +1003,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
@@ -1170,7 +1165,6 @@
 				B3DEBE1221078191003699A0 /* Coach.swift in Sources */,
 				B3ED38E41FB77BD20003F083 /* NumberTextField.swift in Sources */,
 				B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */,
-				B3756ED021B793E8006893E1 /* DateTimeCell.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* CourseService.swift in Sources */,

@@ -135,24 +135,25 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     @objc func clickEvent(sender: UITapGestureRecognizer) {
         
-        let alert = UIAlertController(title: "title", message: "content", preferredStyle: .alert)
-        let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
-            print("view")
-        }
-        let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
-            print("edit")
-        }
-        let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
-            print("delete")
-        }
-        let action4 = UIAlertAction(title: "取消", style: .default) { (action) in
-            print("cancel")
-        }
-        alert.addAction(action1)
-        alert.addAction(action2)
-        alert.addAction(action3)
-        alert.addAction(action4)
-        present(alert, animated: true, completion: nil)
+        
+//        let alert = UIAlertController(title: "title", message: "content", preferredStyle: .alert)
+//        let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
+//            print("view")
+//        }
+//        let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
+//            print("edit")
+//        }
+//        let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
+//            print("delete")
+//        }
+//        let action4 = UIAlertAction(title: "取消", style: .default) { (action) in
+//            print("cancel")
+//        }
+//        alert.addAction(action1)
+//        alert.addAction(action2)
+//        alert.addAction(action3)
+//        alert.addAction(action4)
+//        present(alert, animated: true, completion: nil)
         
         
         
