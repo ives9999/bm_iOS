@@ -13,9 +13,9 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var token: String = ""
+    var token: String = "" //coach token or arena token
     var source: String = ""
-    var timeTable: TimeTable = TimeTable()
+    var timetables: Timetables = Timetables()
     
     var screenWidth: CGFloat!
     var screenHeight: CGFloat!
@@ -42,7 +42,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     fileprivate var form: TimeTableForm = TimeTableForm()
     var params: [String: String] = [String: String]()
     let test: [String: String] = [TT_TITLE:"練球",TT_WEEKDAY:"2",TT_START_DATE:"2019-01-01",TT_END_DATE:"2019-03-31",TT_START_TIME:"14:00",TT_END_TIME:"17:00",TT_CHARGE:"800",TT_LIMIT:"6",TT_COLOR:"warning",TT_STATUS:"online",TT_CONTENT:"大家來練球"]
-    var action: String = "INSERT"
+    var TTEditAction: String = "INSERT"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -94,8 +94,8 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             }
         }
         let width: CGFloat = cellWidth - 2 * cellBorderWidth
-        for i in 0 ... timeTable.rows.count-1 {
-            let row = timeTable.rows[i]
+        for i in 0 ... timetables.rows.count-1 {
+            let row = timetables.rows[i]
             let x: CGFloat = CGFloat(row.weekday) * cellWidth + cellBorderWidth
             let y: CGFloat = CGFloat(row._start_time-startNum) * cellHeight + cellBorderWidth
             let gridNum: CGFloat = CGFloat(row._end_time-row._start_time)
@@ -119,7 +119,8 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             
             frame = CGRect(x: 3, y: 40, width: width, height: height-20)
             let contentLbl = UILabel(frame: frame)
-            contentLbl.text = row.content
+            contentLbl.text = "人數：\n" + row.limit_text
+            contentLbl.font = UIFont(name: contentLbl.font.fontName, size: 12)
             contentLbl.textColor = UIColor.black
             contentLbl.numberOfLines = 0
             contentLbl.sizeToFit()
@@ -134,58 +135,52 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     
     @objc func clickEvent(sender: UITapGestureRecognizer) {
+        guard let a = (sender.view) else {return}
+        let idx: Int = a.tag - 100
+        //print(idx)
+        eventTag = idx + 100
+        //print(eventTag)
+        let event = timetables.rows[idx]
+        //print(event.printRow())
+        //let mirror: Mirror? = Mirror(reflecting: event)
+        //mirror.
+        var values: [String: String] = [String: String]()
+        for formItem in form.formItems {
+            if formItem.name != nil {
+                let name: String = formItem.name!
+                var value: String = String(describing:(event.value(forKey: name))!)
+                //print(value)
+                if name == TT_START_TIME || name == TT_END_TIME {
+                    value = value.noSec()
+                }
+                values[name] = value
+            }
+        }
+        //print(values)
+        form = TimeTableForm(id: event.id, values: values)
         
-        
-//        let alert = UIAlertController(title: "title", message: "content", preferredStyle: .alert)
-//        let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
-//            print("view")
-//        }
-//        let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
-//            print("edit")
-//        }
-//        let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
-//            print("delete")
-//        }
-//        let action4 = UIAlertAction(title: "取消", style: .default) { (action) in
-//            print("cancel")
-//        }
-//        alert.addAction(action1)
-//        alert.addAction(action2)
-//        alert.addAction(action3)
-//        alert.addAction(action4)
-//        present(alert, animated: true, completion: nil)
-        
-        
-        
-//        guard let a = (sender.view) else {return}
-//        let idx: Int = a.tag - 100
-//        //print(idx)
-//        eventTag = idx + 100
-//        //print(eventTag)
-//        let event = timeTable.rows[idx]
-//        //print(event.printRow())
-//        //let mirror: Mirror? = Mirror(reflecting: event)
-//        //mirror.
-//        var values: [String: String] = [String: String]()
-//        for formItem in form.formItems {
-//            if formItem.name != nil {
-//                let name: String = formItem.name!
-//                var value: String = String(describing:(event.value(forKey: name))!)
-//                //print(value)
-//                if name == TT_START || name == TT_END {
-//                    value = value.noSec()
-//                }
-//                values[name] = value
-//            }
-//        }
-//        //print(values)
-//        form = TimeTableForm(id: event.id, values: values)
-//        action = "UPDATE"
-//        showEditEvent(3)
+        let alert = UIAlertController(title: "title", message: "content", preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
+            self.performSegue(withIdentifier: TO_SHOWTIMETABLE, sender: event.id)
+        }
+        let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
+            self.TTEditAction = "UPDATE"
+            self.showEditEvent(3)
+        }
+        let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
+            self.layerDelete(view: UIButton())
+        }
+        let action4 = UIAlertAction(title: "取消", style: .default) { (action) in
+        }
+        alert.addAction(action1)
+        alert.addAction(action2)
+        alert.addAction(action3)
+        alert.addAction(action4)
+        present(alert, animated: true, completion: nil)
     }
     
     @objc override func layerSubmit(view: UIButton) {
-        if action == "UPDATE" {
+        if TTEditAction == "UPDATE" {
             let (isChange, msg) = form.isChanged()
             if !isChange {
                 let _msg = msg ?? "沒有更改任何值，所以不用送出更新"
@@ -230,7 +225,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     @IBAction func addTimeTableBtnPressed(_ sender: Any) {
         form = TimeTableForm(values: test)
-        action = "INSERT"
+        TTEditAction = "INSERT"
         showEditEvent(2)
     }
     
@@ -308,7 +303,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     
     func refreshEvent() {
-        self.timeTable = self.dataService.timeTable
+        self.timetables = self.dataService.timetables
         self.markEvent()
     }
     
@@ -427,7 +422,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                 }
             }
             weekdaysSelectVC.delegate = self
-        }else if segue.identifier == TO_SELECT_DATE {
+        } else if segue.identifier == TO_SELECT_DATE {
             let dateSelectVC: DateSelectVC = segue.destination as! DateSelectVC
             if indexPath != nil {
                 dateSelectVC.indexPath = indexPath
@@ -495,6 +490,13 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                 }
                 textInputVC.input = realSender
             }
+        } else if segue.identifier == TO_SHOWTIMETABLE {
+            let showTimetableVC: ShowTimetableVC = segue.destination as! ShowTimetableVC
+            if let id = sender as? Int {
+                showTimetableVC.tt_id = id
+            }
+            showTimetableVC.source = source
+            showTimetableVC.token = token
         }
     }
     

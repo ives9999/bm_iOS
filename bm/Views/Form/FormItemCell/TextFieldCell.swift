@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AMPopTip
+//import AMPopTip
 
 class TextFieldCell: SuperCell {
     
@@ -17,7 +17,7 @@ class TextFieldCell: SuperCell {
     @IBOutlet weak var promptBtn: UIButton!
     
     var formItem: FormItem?
-    let popTip = PopTip()
+    //let popTip = PopTip()
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -52,7 +52,7 @@ class DataService {
         }
     }
     
-    var timeTable: TimeTable = TimeTable()
+    var timetables: Timetables = Timetables()
     
     init() {
         _model = Team.instance
@@ -719,8 +719,8 @@ class DataService {
     func getTT(token: String, type:String, completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app", "channel": "bm","token":token]
         let url: String = String(format: URL_TT, type)
-//        print(url)
-//        print(body)
+        //print(url)
+        //print(body)
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {
@@ -731,8 +731,8 @@ class DataService {
                 }
                 let json = JSON(data)
                 //print(json)
-                self.timeTable = JSONParse.parse(data: json)
-                for row in self.timeTable.rows {
+                self.timetables = JSONParse.parse(data: json)
+                for row in self.timetables.rows {
                     row.filterRow()
                     //row.printRow()
                 }
@@ -773,9 +773,9 @@ class DataService {
                 self.msg = ""
                 let success = json["success"].boolValue
                 if success {
-                    self.timeTable = TimeTable()
-                    self.timeTable = JSONParse.parse(data: json)
-                    for row in self.timeTable.rows {
+                    self.timetables = Timetables()
+                    self.timetables = JSONParse.parse(data: json)
+                    for row in self.timetables.rows {
                         row.filterRow()
                         //row.printRow()
                     }
@@ -811,9 +811,9 @@ class DataService {
                 self.msg = ""
                 let success = json["success"].boolValue
                 if success {
-                    self.timeTable = TimeTable()
-                    self.timeTable = JSONParse.parse(data: json)
-                    for row in self.timeTable.rows {
+                    self.timetables = Timetables()
+                    self.timetables = JSONParse.parse(data: json)
+                    for row in self.timetables.rows {
                         row.filterRow()
                         //row.printRow()
                     }

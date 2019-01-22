@@ -16,6 +16,9 @@
 		B306FE9F21F0DC5900403FE2 /* DateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FE9D21F0DC5900403FE2 /* DateCell.swift */; };
 		B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B306FE9E21F0DC5900403FE2 /* DateCell.xib */; };
 		B306FEA321F1A35700403FE2 /* SuperDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEA221F1A35700403FE2 /* SuperDatePicker.swift */; };
+		B306FEA521F72F0E00403FE2 /* ShowTimetableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */; };
+		B306FEA821F737D700403FE2 /* SuperTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEA721F737D700403FE2 /* SuperTableView.swift */; };
+		B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEA921F7446F00403FE2 /* TimetableService.swift */; };
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -58,7 +61,7 @@
 		B33C1AC321BE669F006F2BEB /* TextFieldFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */; };
 		B33C1AC521C3F848006F2BEB /* DrawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C1AC421C3F848006F2BEB /* DrawLine.swift */; };
 		B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */; };
-		B34A20AE21AE962700EE6E1C /* TimeTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AD21AE962700EE6E1C /* TimeTable.swift */; };
+		B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AD21AE962700EE6E1C /* Timetables.swift */; };
 		B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20FE21B696AA00EE6E1C /* TextFieldCell.swift */; };
 		B34A210121B696AA00EE6E1C /* TextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B34A20FF21B696AA00EE6E1C /* TextFieldCell.xib */; };
 		B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A210221B6A6D300EE6E1C /* MoreCell.swift */; };
@@ -224,6 +227,9 @@
 		B306FE9D21F0DC5900403FE2 /* DateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCell.swift; sourceTree = "<group>"; };
 		B306FE9E21F0DC5900403FE2 /* DateCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DateCell.xib; sourceTree = "<group>"; };
 		B306FEA221F1A35700403FE2 /* SuperDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperDatePicker.swift; sourceTree = "<group>"; };
+		B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTimetableVC.swift; sourceTree = "<group>"; };
+		B306FEA721F737D700403FE2 /* SuperTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperTableView.swift; sourceTree = "<group>"; };
+		B306FEA921F7446F00403FE2 /* TimetableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableService.swift; sourceTree = "<group>"; };
 		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -268,7 +274,7 @@
 		B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldFormItem.swift; sourceTree = "<group>"; };
 		B33C1AC421C3F848006F2BEB /* DrawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLine.swift; sourceTree = "<group>"; };
 		B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableVC.swift; sourceTree = "<group>"; };
-		B34A20AD21AE962700EE6E1C /* TimeTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTable.swift; sourceTree = "<group>"; };
+		B34A20AD21AE962700EE6E1C /* Timetables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetables.swift; sourceTree = "<group>"; };
 		B34A20FE21B696AA00EE6E1C /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
 		B34A20FF21B696AA00EE6E1C /* TextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldCell.xib; sourceTree = "<group>"; };
 		B34A210221B6A6D300EE6E1C /* MoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCell.swift; sourceTree = "<group>"; };
@@ -438,6 +444,14 @@
 			path = DatePicker;
 			sourceTree = "<group>";
 		};
+		B306FEA621F7379F00403FE2 /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				B306FEA721F737D700403FE2 /* SuperTableView.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
 		B30C95401FE82DA0005F71EF /* bmNotificationServiceExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +501,7 @@
 		B32FBCEF1F84831C003D39CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B306FEA621F7379F00403FE2 /* Table */,
 				B306FEA121F1A31500403FE2 /* DatePicker */,
 				B34A20FD21B6967600EE6E1C /* Form */,
 				B306F3412180344300C32CE2 /* Switch */,
@@ -522,6 +537,7 @@
 				B3DEBE13210781FD003699A0 /* CoachService.swift */,
 				B3DEBE17210CB30E003699A0 /* ArenaService.swift */,
 				B32D9EE521106C5F00999A4A /* CourseService.swift */,
+				B306FEA921F7446F00403FE2 /* TimetableService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -741,6 +757,7 @@
 				B3756EE421B95DD5006893E1 /* ColorSelectVC.swift */,
 				B3756EEE21BA6F19006893E1 /* StatusSelectVC.swift */,
 				B306FE9B21F0DA8000403FE2 /* DateSelectVC.swift */,
+				B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -762,7 +779,7 @@
 				B3ED38D81FB463D00003F083 /* Team.swift */,
 				B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */,
 				B306F33F217DA15000C32CE2 /* Area.swift */,
-				B34A20AD21AE962700EE6E1C /* TimeTable.swift */,
+				B34A20AD21AE962700EE6E1C /* Timetables.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -982,7 +999,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-bm/Pods-bm-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AMPopTip/AMPopTip.framework",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -1003,7 +1019,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AMPopTip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
@@ -1081,6 +1096,7 @@
 				B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */,
 				B3FAA0AA20CAC995008F2294 /* TempPlaySignupOneCell.swift in Sources */,
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,
+				B306FEA821F737D700403FE2 /* SuperTableView.swift in Sources */,
 				B3DEBE18210CB30E003699A0 /* ArenaService.swift in Sources */,
 				B3DEBE0F2106FDB1003699A0 /* ListCell.swift in Sources */,
 				B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */,
@@ -1122,7 +1138,7 @@
 				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
-				B34A20AE21AE962700EE6E1C /* TimeTable.swift in Sources */,
+				B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
 				B306FE9C21F0DA8000403FE2 /* DateSelectVC.swift in Sources */,
@@ -1166,6 +1182,7 @@
 				B3ED38E41FB77BD20003F083 /* NumberTextField.swift in Sources */,
 				B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
+				B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */,
 				B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* CourseService.swift in Sources */,
 				B323390B21B6B8E4003EB84D /* FormValidableProtocol.swift in Sources */,
@@ -1184,6 +1201,7 @@
 				B3ED38D71FB2A3E80003F083 /* EditProfileVC.swift in Sources */,
 				B33C1ABF21BD7F2C006F2BEB /* WeekdayFormItem.swift in Sources */,
 				B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */,
+				B306FEA521F72F0E00403FE2 /* ShowTimetableVC.swift in Sources */,
 				B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */,
 				B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */,
 				B306FEA321F1A35700403FE2 /* SuperDatePicker.swift in Sources */,

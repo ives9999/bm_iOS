@@ -22,12 +22,12 @@ class TimeTableForm: BaseForm {
         let eventStartDateItem = DateFormItem(name: TT_START_DATE, title: "開始日期", dateType: SELECT_DATE_TYPE.start)
         let eventEndDateItem = DateFormItem(name: TT_END_DATE, title: "結束日期", dateType: SELECT_DATE_TYPE.end)
         
-        let eventStartTimeItem = TimeFormItem(name: TT_START_TIME, title: "開始時間", timeType: SELECT_TIME_TYPE.play_start)
+        let eventStartTimeItem = TimeFormItem(name: TT_START_TIME, title: "開始時間", timeType: SELECT_TIME_TYPE.play_start, tooltip: "設定出現在行事曆的日期，若不設定，就會一直出現")
         
         let eventEndTimeItem = TimeFormItem(name: TT_END_TIME, title: "結束時間", timeType: SELECT_TIME_TYPE.play_end)
         
-        let eventChargeItem = TextFieldFormItem(name: TT_CHARGE, title: "費用", placeholder: "", value: nil, keyboardType: .numberPad, tooltip: "如果不需要費用，請填0")
-        let eventLimitItem = TextFieldFormItem(name: TT_LIMIT, title: "限制人數", placeholder: "", value: nil, keyboardType: .numberPad, tooltip: "如果不限制人數請填-1，不接受報名請填0")
+        let eventChargeItem = TextFieldFormItem(name: TT_CHARGE, title: "費用", placeholder: "", value: nil, keyboardType: .numberPad, tooltip: "限填數字，如要加以說明，請在內容處填寫")
+        let eventLimitItem = TextFieldFormItem(name: TT_LIMIT, title: "限制人數", placeholder: "", value: nil, keyboardType: .numberPad, tooltip: "無限制填-1，若不想提供報名，請填0")
         
         let eventColorItem = ColorFormItem(tooltip: "使用色塊來區分不同的課程")
         
