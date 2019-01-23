@@ -19,6 +19,8 @@
 		B306FEA521F72F0E00403FE2 /* ShowTimetableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */; };
 		B306FEA821F737D700403FE2 /* SuperTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEA721F737D700403FE2 /* SuperTableView.swift */; };
 		B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEA921F7446F00403FE2 /* TimetableService.swift */; };
+		B306FEAD21F8422B00403FE2 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEAB21F8422B00403FE2 /* IconCell.swift */; };
+		B306FEAE21F8422B00403FE2 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B306FEAC21F8422B00403FE2 /* IconCell.xib */; };
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -230,6 +232,8 @@
 		B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTimetableVC.swift; sourceTree = "<group>"; };
 		B306FEA721F737D700403FE2 /* SuperTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperTableView.swift; sourceTree = "<group>"; };
 		B306FEA921F7446F00403FE2 /* TimetableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableService.swift; sourceTree = "<group>"; };
+		B306FEAB21F8422B00403FE2 /* IconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
+		B306FEAC21F8422B00403FE2 /* IconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -494,6 +498,8 @@
 				B3756EE721B96B96006893E1 /* ColorSelectCell.xib */,
 				B3756EF021BA7567006893E1 /* StatusSelectCell.swift */,
 				B3756EF121BA7567006893E1 /* StatusSelectCell.xib */,
+				B306FEAB21F8422B00403FE2 /* IconCell.swift */,
+				B306FEAC21F8422B00403FE2 /* IconCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -953,6 +959,7 @@
 				B316FED72112F13600FB990C /* CollectionCell.xib in Resources */,
 				F94E7D251F83636A00F550FD /* Main.storyboard in Resources */,
 				B35C4F4D2196F5E500F8AEB2 /* EditCell.xib in Resources */,
+				B306FEAE21F8422B00403FE2 /* IconCell.xib in Resources */,
 				B3DEBE102106FDB1003699A0 /* ListCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1113,6 +1120,7 @@
 				B3756EF221BA7567006893E1 /* StatusSelectCell.swift in Sources */,
 				B35F8DD91F8F64310073BD70 /* Home.swift in Sources */,
 				B323390D21B6B995003EB84D /* FormConformity.swift in Sources */,
+				B306FEAD21F8422B00403FE2 /* IconCell.swift in Sources */,
 				B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */,
 				F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */,
 				B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */,
