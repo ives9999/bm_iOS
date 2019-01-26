@@ -42,7 +42,7 @@ class TimetableService: DataService {
                 let tt = json["tt"]
                 //print(tt)
                 self.timetable = JSONParse.parse(data: tt)
-                self.timetable.printRow()
+                //self.timetable.printRow()
                 completion(true)
                 
             } else {

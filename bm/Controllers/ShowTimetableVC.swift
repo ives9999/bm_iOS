@@ -16,14 +16,14 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     var tt_id: Int?
     var source: String?  //coach or arena
     var token: String?     // coach token or arena token
-    let tableRowKeys:[String] = [TT_WEEKDAY,"date","interval",TT_CHARGE,TT_LIMIT,"signup"]
+    let tableRowKeys:[String] = ["weekday_text","date","interval","charge_text","limit_text","signup_count"]
     var tableRows: [String: [String:String]] = [
-        TT_WEEKDAY:["icon":"calendar","title":"日期","content":""],
+        "weekday_text":["icon":"calendar","title":"日期","content":""],
         "date":["icon":"calendar","title":"期間","content":""],
         "interval":["icon":"clock","title":"時段","content":""],
-        TT_CHARGE:["icon":"money","title":"收費","content":""],
-        TT_LIMIT:["icon":"group","title":"接受報名人數","content":""],
-        "signup":["icon":"group","title":"已報名人數","content":""]
+        "charge_text":["icon":"money","title":"收費","content":""],
+        "limit_text":["icon":"group","title":"接受報名人數","content":""],
+        "signup_count":["icon":"group","title":"已報名人數","content":""]
     ]
     var timetable: Timetable?
 
@@ -58,7 +58,12 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
 //                            }
 //                        }
                     }
-                    print(self.tableRows)
+                    let date = self.timetable!.start_date + " ~ " + self.timetable!.end_date
+                    self.tableRows["date"]!["content"] = date
+                    let interval = self.timetable!.start_time_text + " ~ " + self.timetable!.end_time_text
+                    self.tableRows["interval"]!["content"] = interval
+                    self.tableRows["signup_count"]!["content"] = String(self.timetable!.signup_count)+"人"
+                    //print(self.tableRows)
                     self.tableView.reloadData()
                 }
             }
