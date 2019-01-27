@@ -2463,7 +2463,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSg-Vh-SKn">
-                                        <rect key="frame" x="159" y="18.5" width="57.5" height="27"/>
+                                        <rect key="frame" x="158.5" y="18.5" width="58" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -2471,42 +2471,68 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="M2i-KM-ifL" firstAttribute="leading" secondItem="7yj-ZN-pUB" secondAttribute="leading" constant="12" id="4pQ-YS-zO9"/>
-                                    <constraint firstItem="M2i-KM-ifL" firstAttribute="centerY" secondItem="7yj-ZN-pUB" secondAttribute="centerY" id="BHP-rA-okX"/>
-                                    <constraint firstItem="tSg-Vh-SKn" firstAttribute="centerX" secondItem="7yj-ZN-pUB" secondAttribute="centerX" id="Gkx-t9-K0N"/>
-                                    <constraint firstAttribute="height" constant="64" id="QeK-cb-FiQ"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="pE2-BV-bsE"/>
-                                    <constraint firstItem="tSg-Vh-SKn" firstAttribute="centerY" secondItem="7yj-ZN-pUB" secondAttribute="centerY" id="r0X-hF-A8l"/>
+                                    <constraint firstItem="M2i-KM-ifL" firstAttribute="centerY" secondItem="7yj-ZN-pUB" secondAttribute="centerY" id="Qg4-cv-QfM"/>
+                                    <constraint firstAttribute="height" constant="64" id="Uz0-57-667"/>
+                                    <constraint firstItem="tSg-Vh-SKn" firstAttribute="centerY" secondItem="7yj-ZN-pUB" secondAttribute="centerY" id="u8d-lu-kfx"/>
+                                    <constraint firstItem="tSg-Vh-SKn" firstAttribute="centerX" secondItem="7yj-ZN-pUB" secondAttribute="centerX" id="vF1-I5-tBV"/>
+                                    <constraint firstItem="M2i-KM-ifL" firstAttribute="leading" secondItem="7yj-ZN-pUB" secondAttribute="leading" constant="12" id="vep-5D-zkt"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="ATQ-Uo-q3x">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="top" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jx2-36-28A">
                                 <rect key="frame" x="0.0" y="84" width="375" height="583"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7b2-qD-nu1" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="84" width="375" height="300"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldj-mG-gIa" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="12" width="49" height="31"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7b2-qD-nu1" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="55" width="377" height="300"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="377" id="BIy-LG-jBp"/>
+                                            <constraint firstAttribute="height" constant="300" id="Wl4-ep-4Af"/>
+                                        </constraints>
+                                    </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="詳細介紹" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64G-ba-Syd" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="355" width="70" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="300" id="2dS-of-L3M"/>
+                                    <constraint firstAttribute="trailing" secondItem="7b2-qD-nu1" secondAttribute="trailing" id="5wX-AZ-SIz"/>
+                                    <constraint firstItem="Ldj-mG-gIa" firstAttribute="leading" secondItem="Jx2-36-28A" secondAttribute="leading" constant="24" id="NUg-KY-zc1"/>
+                                    <constraint firstItem="7b2-qD-nu1" firstAttribute="top" secondItem="Ldj-mG-gIa" secondAttribute="bottom" constant="12" id="QpK-0O-SdH"/>
+                                    <constraint firstItem="Ldj-mG-gIa" firstAttribute="top" secondItem="Jx2-36-28A" secondAttribute="top" constant="12" id="f8W-Sw-bLb"/>
+                                    <constraint firstItem="64G-ba-Syd" firstAttribute="leading" secondItem="Jx2-36-28A" secondAttribute="leading" constant="24" id="fvH-Cu-Veu"/>
+                                    <constraint firstItem="7b2-qD-nu1" firstAttribute="leading" secondItem="Jx2-36-28A" secondAttribute="leading" id="pTJ-wa-fbz"/>
+                                    <constraint firstItem="64G-ba-Syd" firstAttribute="top" secondItem="7b2-qD-nu1" secondAttribute="bottom" id="xjN-Ta-zR2"/>
                                 </constraints>
-                            </tableView>
+                                <connections>
+                                    <outlet property="delegate" destination="F2b-4T-551" id="GCf-TS-CzQ"/>
+                                </connections>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ATQ-Uo-q3x" secondAttribute="bottom" id="3wV-ps-gLK"/>
-                            <constraint firstItem="m9z-U2-o5O" firstAttribute="trailing" secondItem="7yj-ZN-pUB" secondAttribute="trailing" id="7eM-rm-euK"/>
-                            <constraint firstItem="7b2-qD-nu1" firstAttribute="top" secondItem="7yj-ZN-pUB" secondAttribute="bottom" id="Dvc-ii-Zuz"/>
-                            <constraint firstItem="m9z-U2-o5O" firstAttribute="trailing" secondItem="7b2-qD-nu1" secondAttribute="trailing" id="FPD-om-URw"/>
-                            <constraint firstItem="7yj-ZN-pUB" firstAttribute="top" secondItem="m9z-U2-o5O" secondAttribute="top" id="M05-He-99x"/>
-                            <constraint firstItem="7b2-qD-nu1" firstAttribute="leading" secondItem="m9z-U2-o5O" secondAttribute="leading" id="O2d-Qe-mUD"/>
-                            <constraint firstItem="ATQ-Uo-q3x" firstAttribute="top" secondItem="7yj-ZN-pUB" secondAttribute="bottom" id="dtI-69-K4K"/>
-                            <constraint firstItem="ATQ-Uo-q3x" firstAttribute="leading" secondItem="m9z-U2-o5O" secondAttribute="leading" id="fQ6-4S-yD3"/>
-                            <constraint firstItem="7yj-ZN-pUB" firstAttribute="leading" secondItem="RfK-nq-Sac" secondAttribute="leading" id="xXK-vU-1u4"/>
-                            <constraint firstItem="ATQ-Uo-q3x" firstAttribute="trailing" secondItem="m9z-U2-o5O" secondAttribute="trailing" id="yMI-rc-FUo"/>
+                            <constraint firstItem="7yj-ZN-pUB" firstAttribute="top" secondItem="m9z-U2-o5O" secondAttribute="top" id="6PV-As-dLu"/>
+                            <constraint firstItem="7yj-ZN-pUB" firstAttribute="trailing" secondItem="m9z-U2-o5O" secondAttribute="trailing" id="BB6-6b-kfw"/>
+                            <constraint firstItem="Jx2-36-28A" firstAttribute="trailing" secondItem="m9z-U2-o5O" secondAttribute="trailing" id="HNG-3u-vyE"/>
+                            <constraint firstItem="Jx2-36-28A" firstAttribute="leading" secondItem="m9z-U2-o5O" secondAttribute="leading" id="KAO-m6-ZiE"/>
+                            <constraint firstItem="7yj-ZN-pUB" firstAttribute="leading" secondItem="m9z-U2-o5O" secondAttribute="leading" id="Krw-Yx-cc4"/>
+                            <constraint firstItem="Jx2-36-28A" firstAttribute="bottom" secondItem="m9z-U2-o5O" secondAttribute="bottom" id="sFU-Jp-cCS"/>
+                            <constraint firstItem="Jx2-36-28A" firstAttribute="top" secondItem="7yj-ZN-pUB" secondAttribute="bottom" id="sL5-Sm-MhG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m9z-U2-o5O"/>
                     </view>
                     <connections>
+                        <outlet property="contentLbl" destination="64G-ba-Syd" id="o4E-Xo-TyP"/>
+                        <outlet property="scrollView" destination="Jx2-36-28A" id="M5K-vG-bdG"/>
                         <outlet property="tableView" destination="7b2-qD-nu1" id="LN5-DO-sZh"/>
+                        <outlet property="timetableTitle" destination="Ldj-mG-gIa" id="M67-87-ngH"/>
                         <outlet property="titleLbl" destination="tSg-Vh-SKn" id="0Rf-u4-Lz7"/>
                     </connections>
                 </viewController>

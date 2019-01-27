@@ -37,6 +37,7 @@ class Timetable: SuperModel {
     @objc dynamic var count: Int = 0
     @objc dynamic var content: String = ""
     @objc dynamic var color: String = ""
+    @objc dynamic var content_style: String = ""
     @objc dynamic var status: String = "online"
     @objc dynamic var pv: Int = 0
     @objc dynamic var created_id: Int = 0
