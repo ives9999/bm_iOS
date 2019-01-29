@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class ShowVC: UIViewController, WKUIDelegate {
+class ShowVC: BaseViewController, WKUIDelegate, WKNavigationDelegate {
 
     @IBOutlet weak var titleLbl: UILabel!
     var show_in: Show_IN?
@@ -29,6 +29,7 @@ class ShowVC: UIViewController, WKUIDelegate {
         let webConfiguation = WKWebViewConfiguration()
         webView = WKWebView(frame: CGRect(x: 0, y: 84, width: self.view.frame.width, height: self.view.frame.height) , configuration: webConfiguation)
         webView.uiDelegate = self
+        webView.navigationDelegate = self
         self.view.addSubview(webView)
         titleLbl.text = show_in!.title
         
@@ -43,8 +44,12 @@ class ShowVC: UIViewController, WKUIDelegate {
         self.show_in = sin
     }
     
+    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+    }
+    
     @IBAction func prevBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        prev()
     }
     
 }

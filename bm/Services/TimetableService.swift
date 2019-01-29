@@ -14,16 +14,17 @@ class TimetableService: DataService {
     
     static let instance = TimetableService()
     var timetable: Timetable = Timetable()
+    var superCoach: SuperCoach = SuperCoach()
     
     func getOne(id: Int, source: String, token: String, completion: @escaping CompletionHandler) {
         
         //print(model)
         //model.neverFill()
         downloadImageNum = 0
-        let body: [String: Any] = ["device": "app", "type": source, "type_token": token]
+        let body: [String: Any] = ["device": "app", "type": source, "type_token": token,"id":id]
         
         //print(body)
-        let url: String = String(format: URL_TT_ONE, id)
+        let url: String = String(format: URL_ONE, "timetable")
         //print(url)
         
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
@@ -43,6 +44,13 @@ class TimetableService: DataService {
                 //print(tt)
                 self.timetable = JSONParse.parse(data: tt)
                 //self.timetable.printRow()
+                if json["type"].exists() {
+                    let type: String = json["type"].string!
+                    if type == "coach" {
+                        self.superCoach = JSONParse.parse(data: json["model"])
+                        //self.superCoach.printRow()
+                    }
+                }
                 completion(true)
                 
             } else {

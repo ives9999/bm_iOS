@@ -44,7 +44,6 @@ let URL_DELETE = "\(URL_HOME)%@/delete"
 let URL_TT = "\(URL_HOME)%@/tt"
 let URL_TT_UPDATE = "\(URL_HOME)%@/tt/update"
 let URL_TT_DELETE = "\(URL_HOME)%@/tt/delete"
-let URL_TT_ONE = URL_HOME + "timetable/show/%d"
 
 let URL_TEAM = URL_HOME + "team/"
 let URL_TEAM_TEMP_PLAY = URL_TEAM + "tempPlay/onoff"
@@ -115,6 +114,7 @@ let TO_BLACKLIST: String = "toBlacklist"
 let TO_REFRESH: String = "toRefresh"
 let TO_SEARCH: String = "toSearch"
 let TO_MAP: String = "toMap"
+let TO_SHOW: String = "toShow"
 
 // color
 let MY_GREEN = "#a6d903"

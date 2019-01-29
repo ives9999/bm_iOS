@@ -9,8 +9,9 @@
 import UIKit
 import OneSignal
 import Reachability
+import WebKit
 
-class BaseViewController: UIViewController {
+class BaseViewController: UIViewController  {
     
     var msg: String = ""
     var dataService: DataService = DataService()
@@ -319,6 +320,23 @@ class BaseViewController: UIViewController {
             loadingMask!.removeFromSuperview()
             //loadingMask! = nil
             loadingMask!.isHidden = true
+        }
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        if navigationAction.navigationType == .linkActivated {
+            if let url = navigationAction.request.url {
+                if UIApplication.shared.canOpenURL(url) {
+                    decisionHandler(.cancel)
+                    UIApplication.shared.openURL(url)
+                } else {
+                    decisionHandler(.allow)
+                }
+            } else {
+                decisionHandler(.allow)
+            }
+        } else {
+            decisionHandler(.allow)
         }
     }
     

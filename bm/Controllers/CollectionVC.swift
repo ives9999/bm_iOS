@@ -256,7 +256,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let list: SuperData = lists[indexPath.row]
         if list.vimeo.count == 0 && list.youtube.count == 0 {
-            performSegue(withIdentifier: "ListShowSegue", sender: list)
+            performSegue(withIdentifier: TO_SHOW, sender: list)
         }
     }
     

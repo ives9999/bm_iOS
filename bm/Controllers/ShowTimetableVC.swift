@@ -9,36 +9,39 @@
 import UIKit
 import WebKit
 
-class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate, WKScriptMessageHandler {
+class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
     
     @IBOutlet weak var tableView: SuperTableView!
+    @IBOutlet weak var coachTableView: SuperTableView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var timetableTitle: SuperLabel!
     @IBOutlet weak var contentLbl: SuperLabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var timetableDataLbl: SuperLabel!
+    @IBOutlet weak var coachDataLbl: SuperLabel!
     lazy var contentView: WKWebView = {
         //Javascript string
-        let source = "window.onload=function () {window.webkit.messageHandlers.sizeNotification.postMessage({justLoaded:true,height: document.body.scrollHeight});};"
-        let source2 = "document.body.addEventListener( 'resize', incrementCounter); function incrementCounter() {window.webkit.messageHandlers.sizeNotification.postMessage({height: document.body.scrollHeight});};"
+//        let source = "window.onload=function () {window.webkit.messageHandlers.sizeNotification.postMessage({justLoaded:true,height: document.body.scrollHeight});};"
+//        let source2 = "document.body.addEventListener( 'resize', incrementCounter); function incrementCounter() {window.webkit.messageHandlers.sizeNotification.postMessage({height: document.body.scrollHeight});};"
         
         //UserScript object
-        let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        
-        let script2 = WKUserScript(source: source2, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+//        let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+//
+//        let script2 = WKUserScript(source: source2, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
         
         //Content Controller object
-        let controller = WKUserContentController()
+        //let controller = WKUserContentController()
         
         //Add script to controller
-        controller.addUserScript(script)
-        controller.addUserScript(script2)
+        //controller.addUserScript(script)
+        //controller.addUserScript(script2)
         
         //Add message handler reference
-        controller.add(self, name: "sizeNotification")
+        //controller.add(self, name: "sizeNotification")
         
         //Create configuration
         let configuration = WKWebViewConfiguration()
-        configuration.userContentController = controller
+        //configuration.userContentController = controller
         
         let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
         webView.backgroundColor = UIColor.clear
@@ -61,24 +64,17 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         "limit_text":["icon":"group","title":"接受報名人數","content":""],
         "signup_count":["icon":"group","title":"已報名人數","content":""]
     ]
+    let coachTableRowKeys:[String] = [NAME_KEY,MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY]
+    var coachTableRows: [String: [String:String]] = [
+        NAME_KEY:["icon":"coach","title":"教練","content":"","isPressed":"true"],
+        MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
+        LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"true"],
+        FB_KEY:["icon":"fb","title":"fb","content":"","isPressed":"true"],
+        YOUTUBE_KEY:["icon":"youtube","title":"youtube","content":"","isPressed":"true"],
+        WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"]
+    ]
     var timetable: Timetable?
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard let responseDict = message.body as? [String:Any],
-            let height = responseDict["height"] as? Float else {return}
-        if self.contentViewHeight!.constant != CGFloat(height) {
-            if let _ = responseDict["justLoaded"] {
-                print("just loaded")
-                shouldListenToResizeNotification = true
-                self.contentViewHeight!.constant = CGFloat(height)
-            }
-            else if shouldListenToResizeNotification {
-                print("height is \(height)")
-                self.contentViewHeight!.constant = CGFloat(height)
-            }
-            changeScrollViewContentSize()
-        }
-    }
+    var superCoach: SuperCoach?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,9 +84,11 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         
         tableView.dataSource = self
         tableView.delegate = self
-        //tableView.isScrollEnabled = false
+        coachTableView.dataSource = self
+        coachTableView.delegate = self
         let cellNib = UINib(nibName: "IconCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
+        coachTableView.register(cellNib, forCellReuseIdentifier: "coachCell")
         
         scrollView.backgroundColor = UIColor.black
         
@@ -102,13 +100,14 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint
         
         c1 = NSLayoutConstraint(item: contentView, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: 0)
-        c2 = NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: contentLbl, attribute: .bottom, multiplier: 1, constant: 12)
+        c2 = NSLayoutConstraint(item: contentView, attribute: .top, relatedBy: .equal, toItem: contentLbl, attribute: .bottom, multiplier: 1, constant: 0)
         c3 = NSLayoutConstraint(item: contentView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.frame.width)
         //contentViewHeight = 1000
         contentViewHeight = NSLayoutConstraint(item: contentView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
         contentView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.addConstraints([c1,c2,c3,contentViewHeight!])
         contentView.uiDelegate = self
+        contentView.navigationDelegate = self
         
         beginRefresh()
         scrollView.addSubview(refreshControl)
@@ -118,16 +117,9 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     override func viewWillLayoutSubviews() {
         changeScrollViewContentSize()
-    }
-    func changeScrollViewContentSize() {
-        let height = 300 + contentViewHeight!.constant
-        scrollView.contentSize = CGSize(width: view.frame.width, height: height)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x != 0 {
-            scrollView.contentOffset.x = 0
-        }
+        timetableDataLbl.textColor = UIColor(MY_RED)
+        coachDataLbl.textColor = UIColor(MY_RED)
+        contentLbl.textColor = UIColor(MY_RED)
     }
     
     override func refresh() {
@@ -138,18 +130,13 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                     Global.instance.removeSpinner(superView: self.view)
                     self.endRefresh()
                     self.timetable = TimetableService.instance.timetable
+                    self.superCoach = TimetableService.instance.superCoach
                     //let mirror: Mirror? = Mirror(reflecting: self.timetable!)
                     for key in self.tableRowKeys {
                         if (self.timetable!.responds(to: Selector(key))) {
                             let content: String = String(describing:(self.timetable!.value(forKey: key))!)
                             self.tableRows[key]!["content"] = content
                         }
-//                        for property in mirror!.children {
-//                            if key == property.label {
-//                                var content: String = String(describing:(event.value(forKey: name))!)
-//                                self.tableRows[key]!["content"] = content
-//                            }
-//                        }
                     }
                     self.timetableTitle.text = self.timetable!.title
                     let content: String = "<div class=\"content\">"+self.timetable!.content+"</div>"+self.timetable!.content_style
@@ -164,27 +151,113 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                     self.tableView.reloadData()
                     
                     self.contentViewHeight!.constant = 1000
+                    
+                    for key in self.coachTableRowKeys {
+                        if (self.superCoach!.responds(to: Selector(key))) {
+                            let content: String = String(describing:(self.superCoach!.value(forKey: key))!)
+                            self.coachTableRows[key]!["content"] = content
+                        }
+                    }
+                    //print(self.coachTableRows)
+                    self.coachTableView.reloadData()
                 }
             }
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableRowKeys.count
+        if tableView == self.tableView {
+            return tableRowKeys.count
+        } else {
+            return coachTableRowKeys.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IconCell
-        let key = tableRowKeys[indexPath.row]
-        if tableRows[key] != nil {
-            let row = tableRows[key]!
-            let icon = row["icon"] ?? ""
-            let title = row["title"] ?? ""
-            let content = row["content"] ?? ""
-            cell.update(icon: icon, title: title, content: content)
+        var cell: IconCell?
+        if tableView == self.tableView {
+            cell = (tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IconCell)
+            let key = tableRowKeys[indexPath.row]
+            if tableRows[key] != nil {
+                let row = tableRows[key]!
+                let icon = row["icon"] ?? ""
+                let title = row["title"] ?? ""
+                let content = row["content"] ?? ""
+                cell!.update(icon: icon, title: title, content: content)
+            }
+        } else {
+            cell = (tableView.dequeueReusableCell(withIdentifier: "coachCell", for: indexPath) as! IconCell)
+            let key = coachTableRowKeys[indexPath.row]
+            if coachTableRows[key] != nil {
+                let row = coachTableRows[key]!
+                let icon = row["icon"] ?? ""
+                let title = row["title"] ?? ""
+                var content = row["content"] ?? ""
+                if key == MOBILE_KEY && content.count > 0 {
+                    content = content.mobileShow()
+                }
+                let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
+                cell!.update(icon: icon, title: title, content: content, isPressed: isPressed)
+            }
         }
         
-        return cell
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == self.coachTableView {
+            let key = coachTableRowKeys[indexPath.row]
+            if key == NAME_KEY {
+                let sender: Show_IN = Show_IN(type: source!,id:superCoach!.id,token:superCoach!.token,title:superCoach!.name)
+                performSegue(withIdentifier: TO_SHOW, sender: sender)
+            } else if key == MOBILE_KEY {
+                superCoach!.mobile.makeCall()
+            } else if key == LINE_KEY {
+                superCoach!.line.line()
+            } else if key == FB_KEY {
+                superCoach!.fb.fb()
+            } else if key == YOUTUBE_KEY {
+                superCoach!.youtube.youtube()
+            } else if key == WEBSITE_KEY {
+                superCoach!.website.website()
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == TO_SHOW {
+            let sender = sender as! Show_IN
+            let showVC: ShowVC = segue.destination as! ShowVC
+            showVC.show_in = sender
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x != 0 {
+            scrollView.contentOffset.x = 0
+        }
+    }
+    
+    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.contentView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+            if complete != nil {
+                self.contentView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
+                    self.contentViewHeight!.constant = height as! CGFloat
+                    self.changeScrollViewContentSize()
+                })
+            }
+            
+        })
+    }
+    
+    func changeScrollViewContentSize() {
+        let height = contentViewHeight!.constant
+        //print(height)
+        scrollView.contentSize = CGSize(width: view.frame.width, height: height)
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {

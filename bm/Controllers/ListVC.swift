@@ -237,7 +237,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         Global.instance.removeSpinner(superView: tableView)
         if tableView == self.tableView {
             let data = lists[indexPath.row]
-            performSegue(withIdentifier: "ListShowSegue", sender: data)
+            performSegue(withIdentifier: TO_SHOW, sender: data)
         } else if tableView == searchTableView {
             let row = searchRows[indexPath.row]
             let segue: String = row["segue"] as! String
@@ -268,7 +268,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var destinationNavigationController: UINavigationController?
-        if segue.identifier == "ListShowSegue" {
+        if segue.identifier == TO_SHOW {
             if let showVC: ShowVC = segue.destination as? ShowVC {
                 assert(sender as? SuperData != nil)
                 let data: SuperData = sender as! SuperData

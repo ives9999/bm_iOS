@@ -25,7 +25,7 @@ class IconCell: SuperCell {
         // Configure the view for the selected state
     }
     
-    func update(icon: String, title: String, content: String) {
+    func update(icon: String, title: String, content: String, isPressed: Bool=false) {
         if icon.count > 0 {
             iconView.image = UIImage(named: icon)
         }
@@ -35,6 +35,8 @@ class IconCell: SuperCell {
         if content.count > 0 {
             contentLbl.text = content
         }
+        if isPressed {
+            contentLbl.textColor = UIColor(MY_GREEN)
+        }
     }
-    
 }

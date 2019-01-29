@@ -471,6 +471,60 @@ extension String {
         }
         
     }
+    
+    func youtube() {
+        if self.count > 0 {
+            var app = ""
+            if self.startWith("https") {
+                app = self.replace(target: "https", withString: "youtube")
+            } else if self.startWith("http") {
+                app = self.replace(target: "http", withString: "youtube")
+            }
+            let appURL = URL(string: app)!
+            let webURL = URL(string: self)!
+            let application = UIApplication.shared
+            if application.canOpenURL(appURL) {
+                application.openURL(appURL)
+            } else {
+                application.openURL(webURL)
+            }
+        }
+    }
+    
+    func fb() {
+        if self.count > 0 {
+            var app = ""
+            if self.startWith("https") {
+                app = self.replace(target: "https", withString: "fb")
+            } else if self.startWith("http") {
+                app = self.replace(target: "http", withString: "fb")
+            }
+            let appURL = URL(string: app)!
+            let webURL = URL(string: self)!
+            let application = UIApplication.shared
+            if application.canOpenURL(appURL) {
+                application.openURL(appURL)
+            } else {
+                application.openURL(webURL)
+            }
+        }
+    }
+    
+    func line() {
+        if self.count > 0 {
+            let app = "line://ti/p/@"+self
+            let appURL = URL(string: app)!
+            let application = UIApplication.shared
+            application.openURL(appURL)
+        }
+    }
+    
+    func website() {
+        if self.count > 0 {
+            UIApplication.shared.openURL(URL(string: self)!)
+        }
+    }
+    
     var isNumber: Bool {
         return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }
@@ -584,6 +638,11 @@ extension String {
         let fontAttr = [NSAttributedStringKey.font: font]
         let size = (self as NSString).size(withAttributes: fontAttr)
         return size.height
+    }
+    
+    func replace(target: String, withString: String) -> String
+    {
+        return self.replacingOccurrences(of: target, with: withString, options: NSString.CompareOptions.literal, range: nil)
     }
     
 //    func substring(_ range: CountableRange<Int>) -> String {

@@ -2234,7 +2234,7 @@
                         <outlet property="managerBtn" destination="ayd-RJ-lxK" id="8ga-4O-AxJ"/>
                         <outlet property="menuBtn" destination="E9V-cS-tg9" id="rfP-Ni-bjs"/>
                         <outlet property="tableView" destination="rJI-Y4-Ooh" id="hYG-z3-4Uc"/>
-                        <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="AlK-fI-QxB"/>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="toShow" id="AlK-fI-QxB"/>
                         <segue destination="Zvi-i7-Pcr" kind="show" identifier="toManager" id="xCJ-lv-P9J"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="UI0-Ma-Ffm"/>
                         <segue destination="81S-kF-xqU" kind="show" identifier="toArena" id="pYZ-nD-1ol"/>
@@ -2488,28 +2488,54 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7b2-qD-nu1" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55" width="377" height="300"/>
+                                        <rect key="frame" x="0.0" y="76" width="377" height="260"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="377" id="BIy-LG-jBp"/>
-                                            <constraint firstAttribute="height" constant="300" id="Wl4-ep-4Af"/>
+                                            <constraint firstAttribute="height" constant="260" id="Wl4-ep-4Af"/>
+                                        </constraints>
+                                    </tableView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W44-vd-bjW" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="55" width="70" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教練資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VnA-Er-m4r" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="24" y="352" width="70" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ejo-Lv-yrh" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="373" width="377" height="260"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="260" id="JTD-hi-3uD"/>
                                         </constraints>
                                     </tableView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="詳細介紹" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64G-ba-Syd" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="24" y="355" width="70" height="21"/>
+                                        <rect key="frame" x="24" y="649" width="70" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="7b2-qD-nu1" secondAttribute="trailing" id="5wX-AZ-SIz"/>
+                                    <constraint firstItem="W44-vd-bjW" firstAttribute="leading" secondItem="Jx2-36-28A" secondAttribute="leading" constant="24" id="J0H-dy-WdI"/>
                                     <constraint firstItem="Ldj-mG-gIa" firstAttribute="leading" secondItem="Jx2-36-28A" secondAttribute="leading" constant="24" id="NUg-KY-zc1"/>
-                                    <constraint firstItem="7b2-qD-nu1" firstAttribute="top" secondItem="Ldj-mG-gIa" secondAttribute="bottom" constant="12" id="QpK-0O-SdH"/>
+                                    <constraint firstItem="VnA-Er-m4r" firstAttribute="leading" secondItem="Jx2-36-28A" secondAttribute="leading" constant="24" id="Pyc-rA-sMQ"/>
+                                    <constraint firstItem="ejo-Lv-yrh" firstAttribute="leading" secondItem="Jx2-36-28A" secondAttribute="leading" id="Tfl-Gj-kXq"/>
+                                    <constraint firstItem="ejo-Lv-yrh" firstAttribute="top" secondItem="VnA-Er-m4r" secondAttribute="bottom" id="WbO-gQ-A55"/>
+                                    <constraint firstItem="W44-vd-bjW" firstAttribute="top" secondItem="Ldj-mG-gIa" secondAttribute="bottom" constant="12" id="Zgs-Xn-WcN"/>
+                                    <constraint firstItem="7b2-qD-nu1" firstAttribute="top" secondItem="W44-vd-bjW" secondAttribute="bottom" id="dGu-MR-9hB"/>
+                                    <constraint firstItem="64G-ba-Syd" firstAttribute="top" secondItem="ejo-Lv-yrh" secondAttribute="bottom" constant="16" id="e0W-Mi-4rc"/>
                                     <constraint firstItem="Ldj-mG-gIa" firstAttribute="top" secondItem="Jx2-36-28A" secondAttribute="top" constant="12" id="f8W-Sw-bLb"/>
                                     <constraint firstItem="64G-ba-Syd" firstAttribute="leading" secondItem="Jx2-36-28A" secondAttribute="leading" constant="24" id="fvH-Cu-Veu"/>
+                                    <constraint firstItem="VnA-Er-m4r" firstAttribute="top" secondItem="7b2-qD-nu1" secondAttribute="bottom" constant="16" id="lFK-Bg-WsB"/>
                                     <constraint firstItem="7b2-qD-nu1" firstAttribute="leading" secondItem="Jx2-36-28A" secondAttribute="leading" id="pTJ-wa-fbz"/>
-                                    <constraint firstItem="64G-ba-Syd" firstAttribute="top" secondItem="7b2-qD-nu1" secondAttribute="bottom" id="xjN-Ta-zR2"/>
+                                    <constraint firstAttribute="trailing" secondItem="ejo-Lv-yrh" secondAttribute="trailing" id="wBJ-1z-Jmn"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="F2b-4T-551" id="GCf-TS-CzQ"/>
@@ -2529,16 +2555,20 @@
                         <viewLayoutGuide key="safeArea" id="m9z-U2-o5O"/>
                     </view>
                     <connections>
+                        <outlet property="coachDataLbl" destination="VnA-Er-m4r" id="Kms-EU-kxm"/>
+                        <outlet property="coachTableView" destination="ejo-Lv-yrh" id="cr6-NT-C0p"/>
                         <outlet property="contentLbl" destination="64G-ba-Syd" id="o4E-Xo-TyP"/>
                         <outlet property="scrollView" destination="Jx2-36-28A" id="M5K-vG-bdG"/>
                         <outlet property="tableView" destination="7b2-qD-nu1" id="LN5-DO-sZh"/>
+                        <outlet property="timetableDataLbl" destination="W44-vd-bjW" id="7cz-2j-Zm0"/>
                         <outlet property="timetableTitle" destination="Ldj-mG-gIa" id="M67-87-ngH"/>
                         <outlet property="titleLbl" destination="tSg-Vh-SKn" id="0Rf-u4-Lz7"/>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="toShow" id="qeF-0J-3pd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ljb-VN-C87" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3207" y="-4451"/>
+            <point key="canvasLocation" x="799" y="1406"/>
         </scene>
         <!--Time TableVC-->
         <scene sceneID="yi3-Fh-Nrs">
@@ -3126,7 +3156,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="4mb-SH-JK7" id="mee-5x-3Mw"/>
-                        <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="EIA-wN-WfT"/>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="toShow" id="EIA-wN-WfT"/>
                         <segue destination="nQN-QD-w9o" kind="show" identifier="toMap" id="2RB-tg-LFe"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="cDK-8u-UPz"/>
                         <segue destination="rNf-pN-AQF" kind="show" identifier="toArea" id="5Nm-Wc-gVO"/>
@@ -3225,7 +3255,7 @@
                     <navigationItem key="navigationItem" id="tEm-Ru-GfS"/>
                     <connections>
                         <outlet property="collectionView" destination="c1J-YM-4Ou" id="yjr-Oy-mCL"/>
-                        <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="vrH-5G-Fdn"/>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="toShow" id="vrH-5G-Fdn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omZ-1j-3Gu" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3332,7 +3362,7 @@
                     <connections>
                         <outlet property="menuBtn" destination="kHq-BV-ZQk" id="hgP-L1-XFx"/>
                         <outlet property="tableView" destination="Iz0-ts-ZTW" id="glu-Q3-n9t"/>
-                        <segue destination="xCM-NL-W3p" kind="show" identifier="ListShowSegue" id="a7V-eU-Yjs"/>
+                        <segue destination="xCM-NL-W3p" kind="show" identifier="toShow" id="a7V-eU-Yjs"/>
                         <segue destination="soF-hl-M3T" kind="show" identifier="toCity" id="e7e-xA-HgL"/>
                         <segue destination="Zvi-i7-Pcr" kind="show" identifier="toManager" id="f4Q-EU-SfD"/>
                     </connections>
@@ -3598,6 +3628,6 @@
         <segue reference="DaT-w5-CTD"/>
         <segue reference="cK5-nM-2qW"/>
         <segue reference="q87-Mu-6YG"/>
-        <segue reference="vrH-5G-Fdn"/>
+        <segue reference="EIA-wN-WfT"/>
     </inferredMetricsTieBreakers>
 </document>
