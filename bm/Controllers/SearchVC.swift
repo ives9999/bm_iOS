@@ -44,6 +44,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     var keyword: String = ""
     
     override func viewDidLoad() {
+        
         model = Team.instance
         myTablView = tableView
         sections = ["", "更多"]

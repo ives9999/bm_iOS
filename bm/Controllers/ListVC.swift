@@ -237,7 +237,11 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         Global.instance.removeSpinner(superView: tableView)
         if tableView == self.tableView {
             let data = lists[indexPath.row]
-            performSegue(withIdentifier: TO_SHOW, sender: data)
+            var iden = TO_SHOW
+            if _type == "coach" {
+                iden = TO_SHOW_COACh
+            }
+            performSegue(withIdentifier: iden, sender: data)
         } else if tableView == searchTableView {
             let row = searchRows[indexPath.row]
             let segue: String = row["segue"] as! String
@@ -274,6 +278,13 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
                 let data: SuperData = sender as! SuperData
                 let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
                 showVC.initShowVC(sin: show_in)
+            }
+        } else if segue.identifier == TO_SHOW_COACh {
+            if let showCoachVC: ShowCoachVC = segue.destination as? ShowCoachVC {
+                assert(sender as? SuperData != nil)
+                let data: SuperData = sender as! SuperData
+                let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
+                showCoachVC.initShowVC(sin: show_in)
             }
         } else if segue.identifier == TO_MAP {
             if let mapVC: ArenaMapVC = segue.destination as? ArenaMapVC {

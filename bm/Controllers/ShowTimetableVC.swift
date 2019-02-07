@@ -20,24 +20,6 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     @IBOutlet weak var timetableDataLbl: SuperLabel!
     @IBOutlet weak var coachDataLbl: SuperLabel!
     lazy var contentView: WKWebView = {
-        //Javascript string
-//        let source = "window.onload=function () {window.webkit.messageHandlers.sizeNotification.postMessage({justLoaded:true,height: document.body.scrollHeight});};"
-//        let source2 = "document.body.addEventListener( 'resize', incrementCounter); function incrementCounter() {window.webkit.messageHandlers.sizeNotification.postMessage({height: document.body.scrollHeight});};"
-        
-        //UserScript object
-//        let script = WKUserScript(source: source, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-//
-//        let script2 = WKUserScript(source: source2, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
-        
-        //Content Controller object
-        //let controller = WKUserContentController()
-        
-        //Add script to controller
-        //controller.addUserScript(script)
-        //controller.addUserScript(script2)
-        
-        //Add message handler reference
-        //controller.add(self, name: "sizeNotification")
         
         //Create configuration
         let configuration = WKWebViewConfiguration()
@@ -49,7 +31,7 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         return webView
     }()
     var contentViewHeight: NSLayoutConstraint?
-    var shouldListenToResizeNotification: Bool = false
+    //var shouldListenToResizeNotification: Bool = false
     //var contentViewHeight: CGFloat = 100
     
     var tt_id: Int?

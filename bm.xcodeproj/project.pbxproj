@@ -103,7 +103,7 @@
 		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */; };
 		B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28720B68981001A846F /* ValidateVC.swift */; };
-		B3A617D321FEC2050059B603 /* SuperCoach.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A617D221FEC2050059B603 /* SuperCoach.swift */; };
+		B3A617D321FEC2050059B603 /* import SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A617D221FEC2050059B603 /* import SwiftyJSON.swift */; };
 		B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */; };
 		B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */; };
 		B3DEBE0F2106FDB1003699A0 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE0D2106FDB1003699A0 /* ListCell.swift */; };
@@ -122,6 +122,11 @@
 		B3E72A261FA0FBFF0008A6B1 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */; };
 		B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A271FA20D280008A6B1 /* MemberService.swift */; };
 		B3E72A2A1FA2EC640008A6B1 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */; };
+		B3E8C29B220603310008ED25 /* ShowCoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E8C29A220603310008ED25 /* ShowCoachVC.swift */; };
+		B3E8C29E220715430008ED25 /* SuperScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E8C29D220715430008ED25 /* SuperScrollView.swift */; };
+		B3E8C2A022074CC90008ED25 /* SuperCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E8C29F22074CC90008ED25 /* SuperCity.swift */; };
+		B3E8C2A22207E0DC0008ED25 /* CityButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E8C2A12207E0DC0008ED25 /* CityButton.swift */; };
+		B3E8C2A5220BFFE10008ED25 /* SuperWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E8C2A4220BFFE10008ED25 /* SuperWebView.swift */; };
 		B3ED38D71FB2A3E80003F083 /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38D61FB2A3E80003F083 /* EditProfileVC.swift */; };
 		B3ED38D91FB463D00003F083 /* Team.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38D81FB463D00003F083 /* Team.swift */; };
 		B3ED38DB1FB488CB0003F083 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38DA1FB488CB0003F083 /* ImagePickerView.swift */; };
@@ -319,7 +324,7 @@
 		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFunctionVC.swift; sourceTree = "<group>"; };
 		B3A5A28720B68981001A846F /* ValidateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateVC.swift; sourceTree = "<group>"; };
-		B3A617D221FEC2050059B603 /* SuperCoach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperCoach.swift; sourceTree = "<group>"; };
+		B3A617D221FEC2050059B603 /* import SwiftyJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "import SwiftyJSON.swift"; sourceTree = "<group>"; };
 		B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
 		B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		B3DEBE0D2106FDB1003699A0 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
@@ -340,6 +345,11 @@
 		B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3E72A271FA20D280008A6B1 /* MemberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberService.swift; sourceTree = "<group>"; };
 		B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		B3E8C29A220603310008ED25 /* ShowCoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCoachVC.swift; sourceTree = "<group>"; };
+		B3E8C29D220715430008ED25 /* SuperScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperScrollView.swift; sourceTree = "<group>"; };
+		B3E8C29F22074CC90008ED25 /* SuperCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperCity.swift; sourceTree = "<group>"; };
+		B3E8C2A12207E0DC0008ED25 /* CityButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityButton.swift; sourceTree = "<group>"; };
+		B3E8C2A4220BFFE10008ED25 /* SuperWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperWebView.swift; sourceTree = "<group>"; };
 		B3ED38D61FB2A3E80003F083 /* EditProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
 		B3ED38D81FB463D00003F083 /* Team.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team.swift; sourceTree = "<group>"; };
 		B3ED38DA1FB488CB0003F083 /* ImagePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
@@ -509,6 +519,8 @@
 		B32FBCEF1F84831C003D39CC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B3E8C2A3220BFFC00008ED25 /* WebView */,
+				B3E8C29C220715070008ED25 /* ScrollView */,
 				B306FEA621F7379F00403FE2 /* Table */,
 				B306FEA121F1A31500403FE2 /* DatePicker */,
 				B34A20FD21B6967600EE6E1C /* Form */,
@@ -623,6 +635,7 @@
 			children = (
 				B37A13441FDAF3CB00413E64 /* SuperButton.swift */,
 				B306F33B217AF31100C32CE2 /* SubmitButton.swift */,
+				B3E8C2A12207E0DC0008ED25 /* CityButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -635,6 +648,22 @@
 				B3E72A1B1F9F9F330008A6B1 /* bm-Bridging-Header.h */,
 			);
 			path = "Support files";
+			sourceTree = "<group>";
+		};
+		B3E8C29C220715070008ED25 /* ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				B3E8C29D220715430008ED25 /* SuperScrollView.swift */,
+			);
+			name = ScrollView;
+			sourceTree = "<group>";
+		};
+		B3E8C2A3220BFFC00008ED25 /* WebView */ = {
+			isa = PBXGroup;
+			children = (
+				B3E8C2A4220BFFE10008ED25 /* SuperWebView.swift */,
+			);
+			path = WebView;
 			sourceTree = "<group>";
 		};
 		B3ED38E01FB777BF0003F083 /* TextField */ = {
@@ -766,6 +795,7 @@
 				B3756EEE21BA6F19006893E1 /* StatusSelectVC.swift */,
 				B306FE9B21F0DA8000403FE2 /* DateSelectVC.swift */,
 				B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */,
+				B3E8C29A220603310008ED25 /* ShowCoachVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -788,7 +818,8 @@
 				B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */,
 				B306F33F217DA15000C32CE2 /* Area.swift */,
 				B34A20AD21AE962700EE6E1C /* Timetables.swift */,
-				B3A617D221FEC2050059B603 /* SuperCoach.swift */,
+				B3A617D221FEC2050059B603 /* import SwiftyJSON.swift */,
+				B3E8C29F22074CC90008ED25 /* SuperCity.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1097,6 +1128,7 @@
 				B33C1ABD21BD300E006F2BEB /* TimeFormItem.swift in Sources */,
 				B3E72A191F9CBE9F0008A6B1 /* CourseCV.swift in Sources */,
 				B3ED38E81FB852EB0003F083 /* FormCell.swift in Sources */,
+				B3E8C29B220603310008ED25 /* ShowCoachVC.swift in Sources */,
 				B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */,
 				B3308C511FDA5311006A83B6 /* TempPlayShowVC.swift in Sources */,
 				B306FE9A21F0916D00403FE2 /* DateFormItem.swift in Sources */,
@@ -1113,6 +1145,7 @@
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
 				B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */,
 				B3591B702164CC6100E0919C /* Degree.swift in Sources */,
+				B3E8C2A5220BFFE10008ED25 /* SuperWebView.swift in Sources */,
 				B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */,
 				B3756EE821B96B96006893E1 /* ColorSelectCell.swift in Sources */,
 				B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */,
@@ -1127,7 +1160,7 @@
 				B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */,
 				F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */,
 				B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */,
-				B3A617D321FEC2050059B603 /* SuperCoach.swift in Sources */,
+				B3A617D321FEC2050059B603 /* import SwiftyJSON.swift in Sources */,
 				B31739ED21763CD1004CFEDE /* ArenaMapVC.swift in Sources */,
 				B316FED62112F13600FB990C /* CollectionCell.swift in Sources */,
 				B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */,
@@ -1144,6 +1177,7 @@
 				B323391521B6CAE8003EB84D /* FormItemUIProperties.swift in Sources */,
 				B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */,
 				B3308C4D1FD9575E006A83B6 /* Tag.swift in Sources */,
+				B3E8C2A22207E0DC0008ED25 /* CityButton.swift in Sources */,
 				B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */,
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
 				B30C95391FE765FB005F71EF /* Facebook.swift in Sources */,
@@ -1175,6 +1209,7 @@
 				B3ED38F01FB9AD460003F083 /* ArenaSelectVC.swift in Sources */,
 				B323390A21B6B8E4003EB84D /* FormItem.swift in Sources */,
 				B3756EDA21B8E50E006893E1 /* WeekdayCell.swift in Sources */,
+				B3E8C29E220715430008ED25 /* SuperScrollView.swift in Sources */,
 				B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */,
 				B3756EE221B95974006893E1 /* ColorCell.swift in Sources */,
 				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
@@ -1197,6 +1232,7 @@
 				B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */,
 				B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* CourseService.swift in Sources */,
+				B3E8C2A022074CC90008ED25 /* SuperCity.swift in Sources */,
 				B323390B21B6B8E4003EB84D /* FormValidableProtocol.swift in Sources */,
 				B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */,
 				B33C1AB921BD10B8006F2BEB /* StatusFormItem.swift in Sources */,

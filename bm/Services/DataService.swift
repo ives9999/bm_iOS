@@ -485,16 +485,41 @@ class DataService {
         if (!_url.startWith("http://") && !_url.startWith("https://")) {
             url = BASE_URL + _url
         }
-        Alamofire.request(url).responseImage(completionHandler: { (response) in
+        //print(url)
+//        let urlRequest = URLRequest(url: URL(string: url)!)
+//        URLCache.shared.removeCachedResponse(for: urlRequest)
+//        URLCache.shared.removeAllCachedResponses()
+        
+        Alamofire.request(url).responseData { (response) in
+            //debugPrint(response)
             if response.result.isSuccess {
-                guard let image = response.result.value else { return }
-                self.image = image
+                if response.response?.statusCode == 200 {
+                    if let data = response.data {
+                        self.image = UIImage(data: data)
+                    } else {
+                        self.image = UIImage(named: "nophoto")
+                    }
+                } else {
+                    self.image = UIImage(named: "nophoto")
+                }
+                //print(self.image!.size.width)
+                //image?.af_imageAspectScaled(toFill: )
             } else {
-                //print("download image false: \(url)")
                 self.image = UIImage(named: "nophoto")
             }
             completion(true)
-        })
+        }
+//        Alamofire.request(url).responseImage(completionHandler: { (response) in
+//            if response.result.isSuccess {
+//                guard let image = response.result.value else { return }
+//                print(image.size.width)
+//                self.image = image
+//            } else {
+//                //print("download image false: \(url)")
+//                self.image = UIImage(named: "nophoto")
+//            }
+//            completion(true)
+//        })
     }
     
     func getShow(type: String, id: Int, token: String, completion: @escaping CompletionHandler) {

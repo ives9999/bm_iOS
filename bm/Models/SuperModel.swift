@@ -31,22 +31,33 @@ class SuperModel: NSObject, JSONParsable {
     }
     
     private func initialize(for property: Mirror.Child, dict: [String: Any]) {
-        let key = property.label
-        if let value = dict[key!] as? JSON {
+        let key: String = property.label!
+        if let value = dict[key] as? JSON {
             let type = value.type
             if type == Type.array {
                 let arrayValue = value.arrayValue
                 let parsedArray = parse(property: property, array: arrayValue)
-                setValue(parsedArray, forKey: key!)
+                setValue(parsedArray, forKey: key)
             } else if type == Type.dictionary {
-                let dictValue = value.dictionary
-                if let dynamicClass = getDynamicClassType(value: property.value) {
-                    //print(dynamicClass)
-                    let dynamicObj = dynamicClass.init(dict: dictValue!)
-                    setValue(dynamicObj, forKey: key!)
+                //let dictValue = value.dictionary
+                
+                if key == "city" {
+                    let city: SuperCity = JSONParse.parse(data: value)
+                    setValue(city, forKey: key)
                 }
+                
+//                var a = [String: Any]()
+//                for (key1, value1) in dictValue! {
+//                    a[key1] = value1
+//                }
+                
+//                if let dynamicClass = getDynamicClassType(value: property.value) {
+//                    //print(dynamicClass)
+//                    let dynamicObj = dynamicClass.init(dict: dictValue!)
+//                    setValue(dynamicObj, forKey: key)
+//                }
             } else {
-                setValue(value, on: property, forKey: key!)
+                setValue(value, on: property, forKey: key)
             }
         }
     }
@@ -91,6 +102,12 @@ class SuperModel: NSObject, JSONParsable {
         if dynamicType.hasPrefix("Array") {
             dynamicType = getInnerClassType(of: dynamicType)
         }
+//        guard let dynamicClass: SuperCoach.Type = "SuperCoach".convertToClass() else {
+//            return nil
+//        }
+//        return dynamicClass
+        
+        
         
         if let dynamicClass = NSClassFromString(dynamicType) as? JSONParsable.Type {
             //print(dynamicClass)
@@ -207,4 +224,27 @@ class SuperModel: NSObject, JSONParsable {
 //
 //        return isExist
 //    }
+}
+
+extension String {
+    
+    func convertToClass<T>() -> T.Type? {
+        return StringClassConverter<T>.convert(string: self)
+    }
+    
+}
+
+class StringClassConverter<T> {
+    
+    static func convert(string className: String) -> T.Type? {
+        guard let nameSpace = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String else {
+            return nil
+        }
+        guard let aClass: T.Type = NSClassFromString("\(nameSpace).\(className)") as? T.Type else {
+            return nil
+        }
+        return aClass
+        
+    }
+    
 }

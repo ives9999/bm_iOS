@@ -87,12 +87,10 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     
     func markEvent() {
-        eventViews.removeAll()
-        for subView in collectionView.subviews {
-            if subView.tag >= 100 {
-                subView.removeFromSuperview()
-            }
+        for eventView in eventViews {
+            eventView.removeFromSuperview()
         }
+        eventViews.removeAll()
         let width: CGFloat = cellWidth - 2 * cellBorderWidth
         for i in 0 ... timetables.rows.count-1 {
             let row = timetables.rows[i]
@@ -104,7 +102,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             var frame = CGRect(x: x, y: y, width: width, height: height)
             let v: UIView = UIView(frame: frame)
             v.backgroundColor = row._color.toColor()
-            v.tag = 100 + i
+            v.tag = 1000 + i
             
             frame = CGRect(x: 3, y: 10, width: width, height: 20)
             let titleLbl = UILabel(frame: frame)
@@ -136,9 +134,9 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     @objc func clickEvent(sender: UITapGestureRecognizer) {
         guard let a = (sender.view) else {return}
-        let idx: Int = a.tag - 100
+        let idx: Int = a.tag - 1000
         //print(idx)
-        eventTag = idx + 100
+        eventTag = idx + 1000
         //print(eventTag)
         let event = timetables.rows[idx]
         //print(event.printRow())

@@ -469,7 +469,6 @@ extension String {
                 }
             }
         }
-        
     }
     
     func youtube() {
@@ -522,6 +521,13 @@ extension String {
     func website() {
         if self.count > 0 {
             UIApplication.shared.openURL(URL(string: self)!)
+        }
+    }
+    
+    func email() {
+        if self.count > 0 {
+            let url = "mailto:\(self)"
+            UIApplication.shared.openURL(URL(string: url)!)
         }
     }
     

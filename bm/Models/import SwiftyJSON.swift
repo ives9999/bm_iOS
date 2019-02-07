@@ -10,6 +10,8 @@ import Foundation
 
 @objc(SuperCoach)
 class SuperCoach: SuperModel {
+    @objc dynamic var city: SuperCity = SuperCity()
+    //@objc dynamic var city: Dictionary = [String: Any]()
     @objc dynamic var id: Int = -1
     @objc dynamic var name: String = ""
     @objc dynamic var channel: String = ""
@@ -35,6 +37,8 @@ class SuperCoach: SuperModel {
     @objc dynamic var created_id: Int = 0
     @objc dynamic var created_at: String = ""
     @objc dynamic var updated_at: String = ""
+    @objc dynamic var featured_path: String = ""
+    @objc dynamic var thumb: String = ""
     
     override func filterRow() {
         
@@ -49,4 +53,12 @@ class SuperCoaches: SuperModel {
         let row = rows[0]
         row.printRow()
     }
+}
+
+@objc(City1)
+class City1: SuperModel {
+    @objc dynamic var id: Int = -1
+    @objc dynamic var parent_id: Int = -1
+    @objc dynamic var name: String = ""
+    @objc dynamic var zip: String = ""
 }
