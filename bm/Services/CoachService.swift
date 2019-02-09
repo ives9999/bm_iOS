@@ -26,7 +26,7 @@ class CoachService: DataService {
         //print(model)
         //model.neverFill()
         downloadImageNum = 0
-        let body: [String: Any] = ["device": "app", "token": token,"strip_html": true]
+        let body: [String: Any] = ["device": "app", "token": token,"strip_html": false]
         
         //print(body)
         let url: String = String(format: URL_ONE, type)

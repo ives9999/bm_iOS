@@ -77,6 +77,7 @@ let LOADING_WIDTH: Int = 200
 let LOADING_HEIGHT: Int = 40
 
 // segues
+let TO_HOME: String = "toHome"
 let TO_LOGIN: String = "toLogin"
 let TO_REGISTER: String = "toRegister"
 let UNWIND: String = "unwindToMenu"
@@ -98,6 +99,7 @@ let TO_SELECT_DEGREE: String = "toSelectDegree"
 let TO_TEMP_PLAY_SHOW: String = "toTempPlayShow"
 let TO_PASSWORD: String = "toPassword"
 let TO_COURSE: String = "toCourse"
+let TO_COACH: String = "toCoach"
 let TO_MANAGER: String = "toManager"
 let TO_MANAGER_FUNCTION: String = "toManagerFunction"
 let TO_COACH_MANAGER_FUNCTION: String = "toCoachManagerFunction"

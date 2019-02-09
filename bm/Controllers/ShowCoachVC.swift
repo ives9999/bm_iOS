@@ -30,22 +30,18 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBOutlet weak var scrollView: SuperScrollView!
     @IBOutlet weak var chargeView: UIView!
-    var chargeWebView: SuperWebView!
+    var chargeWebView: SuperWebView = SuperWebView()
     @IBOutlet weak var expView: UIView!
-    var expWebView: SuperWebView!
-    @IBOutlet weak var licenseView: UIWebView!
-    var licenseWebView: SuperWebView!
-    @IBOutlet weak var featView: UIWebView!
-    var featWebView: SuperWebView!
-    @IBOutlet weak var detailView: UIWebView!
-    var detailWebView: SuperWebView!
+    var expWebView: SuperWebView = SuperWebView()
+    @IBOutlet weak var licenseView: UIView!
+    var licenseWebView: SuperWebView = SuperWebView()
+    @IBOutlet weak var featView: UIView!
+    var featWebView: SuperWebView = SuperWebView()
+    @IBOutlet weak var detailView: UIView!
+    var detailWebView: SuperWebView = SuperWebView()
     
-    //@IBOutlet weak var featuredViewWidth:
-    //NSLayoutConstraint!
     @IBOutlet weak var featuredViewHeight:
     NSLayoutConstraint!
-    //@IBOutlet weak var contactTableViewWidth:
-    //NSLayoutConstraint!
     @IBOutlet weak var contactTableViewHeight:
     NSLayoutConstraint!
     @IBOutlet weak var timetableConllectionViewHeight: NSLayoutConstraint!
@@ -56,12 +52,21 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var featViewHeight: NSLayoutConstraint!
     @IBOutlet weak var detailViewHeight: NSLayoutConstraint!
     
+    
+    var featuredHeight: CGFloat = 0
+    var contactHeight: CGFloat = 0
     var timetableHeight: CGFloat = 0
     var timetableHeaderHeight: CGFloat = 30
-    var lblMargin: CGFloat = 12
     var chargeHeight: CGFloat = 0
+    var expHeight: CGFloat = 0
+    var licenseHeight: CGFloat = 0
+    var featHeight: CGFloat = 0
+    var detailHeight: CGFloat = 0
+    var lblHeight: CGFloat = 30
     
+    var lblMargin: CGFloat = 12
     var frameWidth: CGFloat?
+    var contactCellHeight: CGFloat = 40
     var timetableCellWidth: CGFloat!
     var timetableCellHeight: CGFloat = 50
     let timetableCellBorderWidth: CGFloat = 1
@@ -69,15 +74,17 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     let startNum: Int = 6
     let endNum: Int = 23
     let columnNum: Int = 8
-    var eventViews: [UIView] = [UIView]()
     var eventTag: Int = 0
     
     var show_in: Show_IN?
     var superCoach: SuperCoach?
     var timetables: Timetables?
     var featured: UIImage?
+    var city_id: Int = 0
+    var params: [String: Any] = [String: Any]()
+    var backDelegate: BackDelegate?
     
-    let style = "<style>body{background-color:#F00;padding-left:8px;padding-right:8px;margin-top:0;padding-top:0;}div.content{color:#888888;font-size:54px;}</style>"
+    let style = "<style>body{background-color:#000;padding-left:8px;padding-right:8px;margin-top:0;padding-top:0;color:#888888;font-size:18px;}</style>"
     let contactTableRowKeys:[String] = [MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY,COACH_SENIORITY_KEY,CREATED_AT_KEY,PV_KEY]
     var contactTableRows: [String: [String:String]] = [
         MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
@@ -90,7 +97,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         CREATED_AT_KEY:["icon":"calendar","title":"建立日期","content":""],
         PV_KEY:["icon":"pv","title":"瀏覽數","content":""]
     ]
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLbl.text = show_in!.title
@@ -98,6 +105,9 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         
         let cellNib = UINib(nibName: "IconCell", bundle: nil)
         contactTableView.register(cellNib, forCellReuseIdentifier: "cell")
+        contactHeight = contactCellHeight * CGFloat(contactTableRowKeys.count)
+        contactTableViewHeight.constant = contactHeight
+        
         featuredView.backgroundColor = UIColor.white
         featuredView.contentMode = .scaleAspectFit
         
@@ -105,21 +115,16 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         timetableConllectionViewHeight.constant = timetableHeight
         chargeTop.constant = timetableHeight+timetableHeaderHeight+lblMargin
         
-        initChargeView()
-        initExpView()
-        //initLicenseView()
+        initWebView(webView: chargeWebView, container: chargeView)
+        initWebView(webView: expWebView, container: expView)
+        initWebView(webView: licenseWebView, container: licenseView)
+        initWebView(webView: featWebView, container: featView)
+        initWebView(webView: detailWebView, container: detailView)
         
+        beginRefresh()
+        scrollView.addSubview(refreshControl)
         refresh()
     }
-    
-//    override func loadView() {
-//        super.loadView()
-//        chargeWebView = SuperWebView()
-//        chargeWebView.backgroundColor = UIColor.gray
-//        chargeWebView.uiDelegate = self
-//        chargeView = chargeWebView
-//        chargeView.backgroundColor = UIColor.white
-//    }
     
     override func refresh() {
         Global.instance.addSpinner(superView: view)
@@ -131,6 +136,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 self.getFeatured()
                 CoachService.instance.getTT(token: self.show_in!.token, type: self.show_in!.type) { (success2) in
                     Global.instance.removeSpinner(superView: self.view)
+                    self.endRefresh()
                     if (success2) {
                         self.timetables = CoachService.instance.timetables
                         self.setTimetableEvent()
@@ -142,49 +148,54 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func setTimetableEvent() {
-        //timetables!.printRows()
-        for eventView in eventViews {
-            eventView.removeFromSuperview()
-        }
-        eventViews.removeAll()
         let width: CGFloat = timetableCellWidth - 2 * timetableCellBorderWidth
-        for i in 0 ... timetables!.rows.count-1 {
-            let row = timetables!.rows[i]
-            let x: CGFloat = CGFloat(row.weekday) * timetableCellWidth + timetableCellBorderWidth
-            let y: CGFloat = CGFloat(row._start_time-startNum) * timetableCellHeight + timetableCellBorderWidth
-            let gridNum: CGFloat = CGFloat(row._end_time-row._start_time)
-            let height: CGFloat = gridNum * timetableCellHeight - 2 * timetableCellBorderWidth
-            
-            var frame = CGRect(x: x, y: y, width: width, height: height)
-            let v: UIView = UIView(frame: frame)
-            v.backgroundColor = row._color.toColor()
-            v.tag = 1000 + i
-            
-            frame = CGRect(x: 3, y: 10, width: width, height: 20)
-            let titleLbl = UILabel(frame: frame)
-            titleLbl.text = row.title
-            titleLbl.textColor = UIColor.black
-            titleLbl.numberOfLines = 0
-            titleLbl.sizeToFit()
-            v.addSubview(titleLbl)
-            
-            let line = DrawLine(frame: CGRect(x: 5, y: 35, width: width-10, height: 1))
-            v.addSubview(line)
-            
-            frame = CGRect(x: 3, y: 40, width: width, height: height-20)
-            let contentLbl = UILabel(frame: frame)
-            contentLbl.text = "人數：\n" + row.limit_text
-            contentLbl.font = UIFont(name: contentLbl.font.fontName, size: 12)
-            contentLbl.textColor = UIColor.black
-            contentLbl.numberOfLines = 0
-            contentLbl.sizeToFit()
-            v.addSubview(contentLbl)
-            
-            let tap = UITapGestureRecognizer(target: self, action: #selector(clickTimetableEvent))
-            v.addGestureRecognizer(tap)
-            
-            timetableCollectionView.addSubview(v)
-            eventViews.append(v)
+        timetableCollectionView.isUserInteractionEnabled = true
+        if timetables!.rows.count > 0 {
+            for i in 0 ... timetables!.rows.count-1 {
+                let row = timetables!.rows[i]
+                let x: CGFloat = CGFloat(row.weekday) * timetableCellWidth + timetableCellBorderWidth
+                let y: CGFloat = CGFloat(row._start_time-startNum) * timetableCellHeight + timetableCellBorderWidth
+                let gridNum: CGFloat = CGFloat(row._end_time-row._start_time)
+                let height: CGFloat = gridNum * timetableCellHeight - 2 * timetableCellBorderWidth
+                
+                var frame = CGRect(x: x, y: y, width: width, height: height)
+                //print(frame)
+                let v: UIView = UIView(frame: frame)
+                timetableCollectionView.addSubview(v)
+                
+                let absFrame = v.convert(v.bounds, to: scrollView)
+                v.removeFromSuperview()
+                //print(v1)
+                let absView = UIView(frame: absFrame)
+                absView.isUserInteractionEnabled = true
+                absView.backgroundColor = row._color.toColor()
+                absView.tag = 1000 + i
+                
+                frame = CGRect(x: 3, y: 10, width: width, height: 20)
+                let titleLbl = UILabel(frame: frame)
+                titleLbl.text = row.title
+                titleLbl.textColor = UIColor.black
+                titleLbl.numberOfLines = 0
+                titleLbl.sizeToFit()
+                absView.addSubview(titleLbl)
+
+                let line = DrawLine(frame: CGRect(x: 5, y: 35, width: width-10, height: 1))
+                absView.addSubview(line)
+
+                frame = CGRect(x: 3, y: 40, width: width, height: height-20)
+                let contentLbl = UILabel(frame: frame)
+                contentLbl.text = "人數：\n" + row.limit_text
+                contentLbl.font = UIFont(name: contentLbl.font.fontName, size: 12)
+                contentLbl.textColor = UIColor.black
+                contentLbl.numberOfLines = 0
+                contentLbl.sizeToFit()
+                absView.addSubview(contentLbl)
+                
+                let tap = UITapGestureRecognizer(target: self, action: #selector(clickTimetableEvent))
+                absView.addGestureRecognizer(tap)
+                
+                scrollView.addSubview(absView)
+            }
         }
     }
     
@@ -196,18 +207,14 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         //print(idx)
         eventTag = idx + 1000
         //print(eventTag)
-        let event = timetables!.rows[idx]        
+        let event = timetables!.rows[idx]
         performSegue(withIdentifier: TO_SHOWTIMETABLE, sender: event.id)
     }
     
     override func viewWillLayoutSubviews() {
         
-        //contactTableViewWidth.constant = frameWidth!
         changeScrollViewContentSize()
         initCollectionView()
-//        print(view.frame.width)
-//        print(timetableCollectionView.frame.width)
-//        print(scrollView.frame.width)
     }
     
     func initCollectionView() {
@@ -221,34 +228,22 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         timetableCollectionView.collectionViewLayout = layout
     }
     
-    func initChargeView() {
-        chargeWebView = SuperWebView()
-        chargeWebView.translatesAutoresizingMaskIntoConstraints = false
-        chargeView.addSubview(chargeWebView)
-        chargeWebView.topAnchor.constraint(equalTo: chargeView.topAnchor).isActive = true
-        chargeWebView.rightAnchor.constraint(equalTo: chargeView.rightAnchor).isActive = true
-        chargeWebView.leftAnchor.constraint(equalTo: chargeView.leftAnchor).isActive = true
-        chargeWebView.bottomAnchor.constraint(equalTo: chargeView.bottomAnchor).isActive = true
-        chargeWebView.heightAnchor.constraint(equalTo: chargeView.heightAnchor).isActive = true
-        chargeWebView.uiDelegate = self
-        chargeWebView.navigationDelegate = self
-    }
-    
-    func initExpView() {
-        expWebView = SuperWebView()
-        expWebView.translatesAutoresizingMaskIntoConstraints = false
-        expView.addSubview(expWebView)
-        expWebView.topAnchor.constraint(equalTo: expView.topAnchor).isActive = true
-        expWebView.rightAnchor.constraint(equalTo: expView.rightAnchor).isActive = true
-        expWebView.leftAnchor.constraint(equalTo: expView.leftAnchor).isActive = true
-        expWebView.bottomAnchor.constraint(equalTo: expView.bottomAnchor).isActive = true
-        expWebView.heightAnchor.constraint(equalTo: expView.heightAnchor).isActive = true
-        expWebView.uiDelegate = self
-        expWebView.navigationDelegate = self
+    func initWebView(webView: WKWebView, container: UIView) {
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(webView)
+        webView.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+        webView.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
+        webView.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
+        webView.heightAnchor.constraint(equalTo: container.heightAnchor).isActive = true
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
+        webView.scrollView.isScrollEnabled = false
     }
     
     func changeScrollViewContentSize() {
-        let height: CGFloat = 10000
+        let height: CGFloat = featuredHeight + contactHeight + timetableHeaderHeight + timetableHeight + chargeHeight + expHeight + licenseHeight + featHeight + detailHeight + (lblMargin+lblHeight)*8 + 100
+        //let height: CGFloat = 10000
         //print(height)
         scrollView.contentSize = CGSize(width: timetableCollectionView.frame.width, height: height)
     }
@@ -337,17 +332,6 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let startTime: Int = indexPath.row / columnNum + startNum
-        let weekday: Int = indexPath.row % columnNum
-        //print("\(weekday)-\(startTime)")
-        let values: [String: String] = [TT_START_TIME: String(startTime) + ":00", TT_WEEKDAY: String(weekday)]
-        //eventTag = (collectionView.cellForItem(at: indexPath)?.tag)!
-        //print(eventTag)
-        //form = TimeTableForm(values: values)
-        //showEditEvent(2)
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == TO_SHOW {
             let sender = sender as! Show_IN
@@ -364,13 +348,19 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func setData() {
+        city_id = superCoach!.city.id
+        params["city_id"] = [city_id]
+        params["city_type"] = "all"
         cityBtn.setTitle(superCoach!.city.name)
         //print(BASE_URL + superCoach!.featured_path)
         //featuredView.af_setImage(withURL: URL(string: BASE_URL + superCoach!.featured_path)!)
         featuredView.image = featured
         setContact()
-        setCharge()
-        setExp()
+        setWeb(webView: chargeWebView, content: superCoach!.charge)
+        setWeb(webView: expWebView, content: superCoach!.exp)
+        setWeb(webView: licenseWebView, content: superCoach!.license)
+        setWeb(webView: featWebView, content: superCoach!.feat)
+        setWeb(webView: detailWebView, content: superCoach!.content)
     }
     
     func setContact() {
@@ -384,20 +374,11 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         contactTableView.reloadData()
     }
     
-    func setCharge() {
-        
-        let content: String = "<html><body><div class=\"content\">"+superCoach!.charge+"</div></body></html>"+style
+    func setWeb(webView: WKWebView, content: String) {
+        let html: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+style+"</HEAD><body>"+content+"</body></html>"
         //print(content)
         
-        chargeWebView.loadHTMLString(content, baseURL: nil)
-    }
-    
-    func setExp() {
-        
-        let content: String = "<html><body><div class=\"content\">"+superCoach!.exp+"</div></body></html>"+style
-        //print(content)
-        
-        expWebView.loadHTMLString(content, baseURL: nil)
+        webView.loadHTMLString(html, baseURL: nil)
     }
     
     func getFeatured() {
@@ -408,45 +389,59 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
+    
+    
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        chargeWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
-            if complete != nil {
-                self.chargeWebView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
-                    print(height)
-                    self.chargeViewHeight!.constant = height as! CGFloat
-                    //self.changeScrollViewContentSize()
-                })
-            }
-            
-        })
         
-        expWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+        webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
             if complete != nil {
-                self.expWebView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
-                    print(height)
-                    self.expViewHeight!.constant = height as! CGFloat
-                    //self.changeScrollViewContentSize()
+                webView.evaluateJavaScript("document.documentElement.scrollHeight", completionHandler: { (height, error) in
+                    //print(height)
+                    let _height = height as! CGFloat-50
+                    if webView == self.chargeWebView {
+                        self.chargeHeight = _height
+                        self.chargeViewHeight!.constant = _height
+                    } else if (webView == self.expWebView) {
+                        self.expHeight = _height
+                        self.expViewHeight!.constant = _height
+                    } else if (webView == self.licenseWebView) {
+                        self.licenseHeight = _height
+                        self.licenseViewHeight!.constant = _height
+                    } else if (webView == self.featWebView) {
+                        self.featHeight = _height
+                        self.featViewHeight!.constant = _height
+                    } else if (webView == self.detailWebView) {
+                        self.detailHeight = _height
+                        self.detailViewHeight!.constant = _height
+                    }
+                    self.changeScrollViewContentSize()
                 })
             }
             
         })
     }
     
-    private func featuredLayout() {
+    func featuredLayout() {
         let img_width: CGFloat = featured!.size.width
         let img_height: CGFloat = featured!.size.height
         //print(img_width)
         //print(img_height)
-        let height: CGFloat = featuredView.frame.width * (img_height / img_width)
-        //featuredViewWidth.constant = frameWidth!
-        featuredViewHeight.constant = height
+        featuredHeight = featuredView.frame.width * (img_height / img_width)
+        featuredViewHeight.constant = featuredHeight
     }
     
     func initShowVC(sin: Show_IN) {
         self.show_in = sin
     }
     
+    @IBAction func cityBtnPressed(_ sender: Any) {
+        //performSegue(withIdentifier: TO_HOME, sender: nil)
+        backDelegate?.setBack(params: params)
+        prev()
+    }
+    
     @IBAction func prevBtnPressed(_ sender: Any) {
         prev()
     }
 }
+

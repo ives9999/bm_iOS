@@ -8,7 +8,15 @@
 
 import UIKit
 
-class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate {
+protocol BackDelegate {
+    func setBack(params: [String: Any])
+}
+
+class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, BackDelegate {
+    func setBack(params: [String: Any]) {
+        self.params = params
+    }
+    
 
     var _type: String = "coach"
     var _titleField: String = "name"
@@ -64,7 +72,10 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         
         let editCellNib = UINib(nibName: "EditCell", bundle: nil)
         searchTableView.register(editCellNib, forCellReuseIdentifier: "search_cell")
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        //print(params)
         refresh()
     }
     
@@ -81,6 +92,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     }
     
     func prepareParams(city_type: String="simple") {
+        params.removeAll()
         params["k"] = keyword
         var city_ids:[Int] = [Int]()
         if citys.count > 0 {
@@ -285,6 +297,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
                 let data: SuperData = sender as! SuperData
                 let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
                 showCoachVC.initShowVC(sin: show_in)
+                showCoachVC.backDelegate = self
             }
         } else if segue.identifier == TO_MAP {
             if let mapVC: ArenaMapVC = segue.destination as? ArenaMapVC {
