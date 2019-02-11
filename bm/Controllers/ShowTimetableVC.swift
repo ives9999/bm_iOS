@@ -33,6 +33,7 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     var contentViewHeight: NSLayoutConstraint?
     //var shouldListenToResizeNotification: Bool = false
     //var contentViewHeight: CGFloat = 100
+    //var lastView: UIView!
     
     var tt_id: Int?
     var source: String?  //coach or arena
@@ -46,14 +47,15 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         "limit_text":["icon":"group","title":"接受報名人數","content":""],
         "signup_count":["icon":"group","title":"已報名人數","content":""]
     ]
-    let coachTableRowKeys:[String] = [NAME_KEY,MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY]
+    let coachTableRowKeys:[String] = [NAME_KEY,MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY]
     var coachTableRows: [String: [String:String]] = [
         NAME_KEY:["icon":"coach","title":"教練","content":"","isPressed":"true"],
         MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
         LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"true"],
         FB_KEY:["icon":"fb","title":"fb","content":"","isPressed":"true"],
         YOUTUBE_KEY:["icon":"youtube","title":"youtube","content":"","isPressed":"true"],
-        WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"]
+        WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],
+        EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"]
     ]
     var timetable: Timetable?
     var superCoach: SuperCoach?
@@ -91,6 +93,19 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         contentView.uiDelegate = self
         contentView.navigationDelegate = self
         
+        /*
+        let frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 10)
+        lastView = UIView(frame: CGRect.zero)
+        lastView.backgroundColor = UIColor.red
+        scrollView.addSubview(lastView)
+        let c5 = NSLayoutConstraint(item: lastView, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1, constant: 12)
+        let c6 = NSLayoutConstraint(item: lastView, attribute: .leading, relatedBy: .equal, toItem: scrollView, attribute: .leading, multiplier: 1, constant: 0)
+        let c7 = NSLayoutConstraint(item: lastView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: view.frame.width)
+        let c8 = NSLayoutConstraint(item: lastView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 10)
+        lastView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.addConstraints([c5, c6, c7, c8])
+ */
+        
         beginRefresh()
         scrollView.addSubview(refreshControl)
 
@@ -121,7 +136,7 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                         }
                     }
                     self.timetableTitle.text = self.timetable!.title
-                    let content: String = "<div class=\"content\">"+self.timetable!.content+"</div>"+self.timetable!.content_style
+                    let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.timetable!.content+"</body></html>"
                     
                     self.contentView.loadHTMLString(content, baseURL: nil)
                     let date = self.timetable!.start_date + " ~ " + self.timetable!.end_date
@@ -202,6 +217,8 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                 superCoach!.youtube.youtube()
             } else if key == WEBSITE_KEY {
                 superCoach!.website.website()
+            } else if key == EMAIL_KEY {
+                superCoach!.email.email()
             }
         }
     }
@@ -237,8 +254,16 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func changeScrollViewContentSize() {
-        let height = contentViewHeight!.constant
+        
+        //print(lastView.frame)
+        //let absFrame = lastView.convert(lastView.bounds, to: scrollView)
+        //print(absFrame)
+        //scrollView.contentSize = CGSize(width: view.frame.width, height: lastView.frame.origin.y)
+        
+        
+        let height = contentViewHeight!.constant + 800
         //print(height)
+        //let height:CGFloat = 10000
         scrollView.contentSize = CGSize(width: view.frame.width, height: height)
     }
     

@@ -44,14 +44,14 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     NSLayoutConstraint!
     @IBOutlet weak var contactTableViewHeight:
     NSLayoutConstraint!
+    @IBOutlet weak var timetableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var timetableConllectionViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var chargeTop: NSLayoutConstraint!
     @IBOutlet weak var chargeViewHeight: NSLayoutConstraint!
     @IBOutlet weak var expViewHeight: NSLayoutConstraint!
     @IBOutlet weak var licenseViewHeight: NSLayoutConstraint!
     @IBOutlet weak var featViewHeight: NSLayoutConstraint!
     @IBOutlet weak var detailViewHeight: NSLayoutConstraint!
-    
+    var lastView: UIView!
     
     var featuredHeight: CGFloat = 0
     var contactHeight: CGFloat = 0
@@ -66,7 +66,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     var lblMargin: CGFloat = 12
     var frameWidth: CGFloat?
-    var contactCellHeight: CGFloat = 40
+    var contactCellHeight: CGFloat = 45
     var timetableCellWidth: CGFloat!
     var timetableCellHeight: CGFloat = 50
     let timetableCellBorderWidth: CGFloat = 1
@@ -84,7 +84,6 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     var params: [String: Any] = [String: Any]()
     var backDelegate: BackDelegate?
     
-    let style = "<style>body{background-color:#000;padding-left:8px;padding-right:8px;margin-top:0;padding-top:0;color:#888888;font-size:18px;}</style>"
     let contactTableRowKeys:[String] = [MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY,COACH_SENIORITY_KEY,CREATED_AT_KEY,PV_KEY]
     var contactTableRows: [String: [String:String]] = [
         MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
@@ -93,7 +92,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         YOUTUBE_KEY:["icon":"youtube","title":"youtube","content":"","isPressed":"true"],
         WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],
         EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"],
-        COACH_SENIORITY_KEY:["icon":"seniority","title":"年資","content":"","isPressed":"true"],
+        COACH_SENIORITY_KEY:["icon":"seniority","title":"年資","content":""],
         CREATED_AT_KEY:["icon":"calendar","title":"建立日期","content":""],
         PV_KEY:["icon":"pv","title":"瀏覽數","content":""]
     ]
@@ -113,13 +112,20 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         
         timetableHeight = CGFloat(endNum - startNum) * timetableCellHeight
         timetableConllectionViewHeight.constant = timetableHeight
-        chargeTop.constant = timetableHeight+timetableHeaderHeight+lblMargin
+        timetableViewHeight.constant = timetableHeight + 30
         
         initWebView(webView: chargeWebView, container: chargeView)
         initWebView(webView: expWebView, container: expView)
         initWebView(webView: licenseWebView, container: licenseView)
         initWebView(webView: featWebView, container: featView)
         initWebView(webView: detailWebView, container: detailView)
+        
+        let frame = CGRect(x: 0, y: 0, width: frameWidth!, height: 10)
+        lastView = UIView(frame: frame)
+        detailView.addSubview(lastView)
+        let c1 = NSLayoutConstraint(item: lastView, attribute: .top, relatedBy: .equal, toItem: detailWebView, attribute: .bottom, multiplier: 1, constant: 12)
+        lastView.translatesAutoresizingMaskIntoConstraints = false
+        detailView.addConstraints([c1])
         
         beginRefresh()
         scrollView.addSubview(refreshControl)
@@ -132,7 +138,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             if (success1) {
                 self.superCoach = CoachService.instance.superCoach
                 //self.superCoach!.printRow()
-                //self.setData()
+                //self.setData() move to getFeatured
                 self.getFeatured()
                 CoachService.instance.getTT(token: self.show_in!.token, type: self.show_in!.type) { (success2) in
                     Global.instance.removeSpinner(superView: self.view)
@@ -140,7 +146,6 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                     if (success2) {
                         self.timetables = CoachService.instance.timetables
                         self.setTimetableEvent()
-                        //self.chargeViewHeight.constant = 500
                     }
                 }
             }
@@ -212,9 +217,15 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     override func viewWillLayoutSubviews() {
-        
-        changeScrollViewContentSize()
+        contactLbl.setTextColor(UIColor(MY_RED))
+        timetableLbl.setTextColor(UIColor(MY_RED))
+        chargeLbl.setTextColor(UIColor(MY_RED))
+        expLbl.setTextColor(UIColor(MY_RED))
+        licenseLbl.setTextColor(UIColor(MY_RED))
+        featLbl.setTextColor(UIColor(MY_RED))
+        detailLbl.setTextColor(UIColor(MY_RED))
         initCollectionView()
+        changeScrollViewContentSize()
     }
     
     func initCollectionView() {
@@ -242,10 +253,17 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func changeScrollViewContentSize() {
-        let height: CGFloat = featuredHeight + contactHeight + timetableHeaderHeight + timetableHeight + chargeHeight + expHeight + licenseHeight + featHeight + detailHeight + (lblMargin+lblHeight)*8 + 100
+        //let height: CGFloat = featuredHeight + contactHeight + timetableHeaderHeight + timetableHeight + chargeHeight + expHeight + licenseHeight + featHeight + detailHeight + (lblMargin+lblHeight)*8 + 100
         //let height: CGFloat = 10000
         //print(height)
-        scrollView.contentSize = CGSize(width: timetableCollectionView.frame.width, height: height)
+        
+        let absFrame = lastView.convert(lastView.bounds, to: scrollView)
+        //print(absFrame)
+        scrollView.contentSize = CGSize(width: frameWidth!, height: absFrame.origin.y)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return contactCellHeight
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -268,6 +286,8 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 var content = row["content"] ?? ""
                 if key == MOBILE_KEY && content.count > 0 {
                     content = content.mobileShow()
+                } else if key == CREATED_AT_KEY {
+                    content = content.noTime()
                 } else if key == COACH_SENIORITY_KEY {
                     if content.count > 0 {
                         content = content + "年"
@@ -375,7 +395,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func setWeb(webView: WKWebView, content: String) {
-        let html: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+style+"</HEAD><body>"+content+"</body></html>"
+        let html: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+body_css+"</HEAD><body>"+content+"</body></html>"
         //print(content)
         
         webView.loadHTMLString(html, baseURL: nil)

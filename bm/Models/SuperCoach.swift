@@ -54,11 +54,3 @@ class SuperCoaches: SuperModel {
         row.printRow()
     }
 }
-
-@objc(City1)
-class City1: SuperModel {
-    @objc dynamic var id: Int = -1
-    @objc dynamic var parent_id: Int = -1
-    @objc dynamic var name: String = ""
-    @objc dynamic var zip: String = ""
-}

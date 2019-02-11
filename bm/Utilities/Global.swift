@@ -457,6 +457,10 @@ extension String {
         }
         return res
     }
+    func noTime() -> String {
+        let arr: [String] = self.components(separatedBy: " ")
+        return arr[0]
+    }
     func makeCall() {
         let formatedNumber = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
         let phoneUrl: String = "tel://\(formatedNumber)"
