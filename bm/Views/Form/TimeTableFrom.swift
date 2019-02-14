@@ -19,10 +19,10 @@ class TimeTableForm: BaseForm {
 //        }
         
         let eventWeekdayItem = WeekdayFormItem(title: "星期幾", name: TT_WEEKDAY)
-        let eventStartDateItem = DateFormItem(name: TT_START_DATE, title: "開始日期", dateType: SELECT_DATE_TYPE.start)
+        let eventStartDateItem = DateFormItem(name: TT_START_DATE, title: "開始日期", dateType: SELECT_DATE_TYPE.start, tooltip: "設定出現在行事曆的日期，若不設定，就會一直出現")
         let eventEndDateItem = DateFormItem(name: TT_END_DATE, title: "結束日期", dateType: SELECT_DATE_TYPE.end)
         
-        let eventStartTimeItem = TimeFormItem(name: TT_START_TIME, title: "開始時間", timeType: SELECT_TIME_TYPE.play_start, tooltip: "設定出現在行事曆的日期，若不設定，就會一直出現")
+        let eventStartTimeItem = TimeFormItem(name: TT_START_TIME, title: "開始時間", timeType: SELECT_TIME_TYPE.play_start)
         
         let eventEndTimeItem = TimeFormItem(name: TT_END_TIME, title: "結束時間", timeType: SELECT_TIME_TYPE.play_end)
         

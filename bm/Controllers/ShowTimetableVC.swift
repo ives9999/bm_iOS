@@ -51,7 +51,7 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     var coachTableRows: [String: [String:String]] = [
         NAME_KEY:["icon":"coach","title":"教練","content":"","isPressed":"true"],
         MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
-        LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"true"],
+        LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"false"],
         FB_KEY:["icon":"fb","title":"fb","content":"","isPressed":"true"],
         YOUTUBE_KEY:["icon":"youtube","title":"youtube","content":"","isPressed":"true"],
         WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],

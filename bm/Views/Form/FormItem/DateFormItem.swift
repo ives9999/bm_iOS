@@ -11,8 +11,8 @@ class DateFormItem: FormItem {
     
     var dateType: SELECT_DATE_TYPE?
     
-    required init(name: String, title: String, dateType: SELECT_DATE_TYPE) {
-        super.init(name: name, title: title, placeholder: nil, value: nil)
+    required init(name: String, title: String, dateType: SELECT_DATE_TYPE, tooltip: String?=nil) {
+        super.init(name: name, title: title, placeholder: nil, value: nil, tooltip: tooltip)
         segue = TO_SELECT_DATE
         uiProperties.cellType = .date
         self.dateType = dateType

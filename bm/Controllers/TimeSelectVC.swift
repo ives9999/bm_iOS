@@ -22,7 +22,7 @@ class TimeSelectVC: UITableViewController {
     var start: String = "07:00"
     var end: String = "23:00"
     //minute
-    var interval: Int = 60
+    var interval: Int = 30
     var allTimes: [String] = [String]()
     
     var delegate: TimeSelectDelegate?

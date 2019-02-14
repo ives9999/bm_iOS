@@ -43,13 +43,17 @@ class Timetable: SuperModel {
     @objc dynamic var created_id: Int = 0
     @objc dynamic var created_at: String = ""
     @objc dynamic var updated_at: String = ""
-    var _start_time: Int = 0
-    var _end_time: Int = 0
+    var _start_hour: Int = 0
+    var _start_minute: Int = 0
+    var _end_hour: Int = 0
+    var _end_minute: Int = 0
     var _color: MYCOLOR = .success
     
     override func filterRow() {
-        _start_time = start_time.toDateTime(format:"HH:mm:ss").getH()
-        _end_time = end_time.toDateTime(format:"HH:mm:ss").getH()
+        _start_hour = start_time.toDateTime(format:"HH:mm:ss").getH()
+        _end_hour = end_time.toDateTime(format:"HH:mm:ss").getH()
+        _start_minute = start_time.toDateTime(format:"HH:mm:ss").getm()
+        _end_minute = end_time.toDateTime(format:"HH:mm:ss").getm()
         _color = MYCOLOR(color: color)
     }
 }

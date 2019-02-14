@@ -23,7 +23,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     var cellHeight: CGFloat = 50
     let cellBorderWidth: CGFloat = 1
     
-    let startNum: Int = 6
+    let startNum: Int = 7
     let endNum: Int = 23
     let columnNum: Int = 8
     
@@ -95,23 +95,31 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         for i in 0 ... timetables.rows.count-1 {
             let row = timetables.rows[i]
             let x: CGFloat = CGFloat(row.weekday) * cellWidth + cellBorderWidth
-            let y: CGFloat = CGFloat(row._start_time-startNum) * cellHeight + cellBorderWidth
-            let gridNum: CGFloat = CGFloat(row._end_time-row._start_time)
-            let height: CGFloat = gridNum * cellHeight - 2 * cellBorderWidth
+            let y1 = (CGFloat(row._start_hour-startNum)+CGFloat(row._start_minute)/60)
+            let y: CGFloat = y1 * cellHeight + cellBorderWidth
+            
+            let start_time = row.start_time.toDateTime(format:"HH:mm:ss")
+            let end_time = row.end_time.toDateTime(format:"HH:mm:ss")
+            let elapsed = CGFloat(end_time.timeIntervalSince(start_time)/(60*60))
+            let height: CGFloat = elapsed * cellHeight - 2 * cellBorderWidth
             
             var frame = CGRect(x: x, y: y, width: width, height: height)
             let v: UIView = UIView(frame: frame)
             v.backgroundColor = row._color.toColor()
             v.tag = 1000 + i
             
-            frame = CGRect(x: 3, y: 10, width: width, height: 20)
+            frame = CGRect(x: 3, y: 3, width: width-6, height: height-6)
             let titleLbl = UILabel(frame: frame)
+            //titleLbl.backgroundColor = UIColor.white
+            titleLbl.font = titleLbl.font.withSize(14)
+            titleLbl.textAlignment = .center
             titleLbl.text = row.title
             titleLbl.textColor = UIColor.black
             titleLbl.numberOfLines = 0
-            titleLbl.sizeToFit()
+            //titleLbl.sizeToFit()
             v.addSubview(titleLbl)
             
+            /*
             let line = DrawLine(frame: CGRect(x: 5, y: 35, width: width-10, height: 1))
             v.addSubview(line)
             
@@ -123,6 +131,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             contentLbl.numberOfLines = 0
             contentLbl.sizeToFit()
             v.addSubview(contentLbl)
+ */
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(clickEvent))
             v.addGestureRecognizer(tap)
@@ -222,7 +231,8 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }
     
     @IBAction func addTimeTableBtnPressed(_ sender: Any) {
-        form = TimeTableForm(values: test)
+        form = TimeTableForm()
+        //form = TimeTableForm(values: test)
         TTEditAction = "INSERT"
         showEditEvent(2)
     }
@@ -529,6 +539,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         if indexPath != nil {
             let item = form.formItems[indexPath!.row] as! ColorFormItem
             item.color = colorType
+            item.make()
         }
         editTableView.reloadData()
     }

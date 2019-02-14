@@ -71,7 +71,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     var timetableCellHeight: CGFloat = 50
     let timetableCellBorderWidth: CGFloat = 1
     
-    let startNum: Int = 6
+    let startNum: Int = 7
     let endNum: Int = 23
     let columnNum: Int = 8
     var eventTag: Int = 0
@@ -87,7 +87,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     let contactTableRowKeys:[String] = [MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY,COACH_SENIORITY_KEY,CREATED_AT_KEY,PV_KEY]
     var contactTableRows: [String: [String:String]] = [
         MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
-        LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"true"],
+        LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"false"],
         FB_KEY:["icon":"fb","title":"fb","content":"","isPressed":"true"],
         YOUTUBE_KEY:["icon":"youtube","title":"youtube","content":"","isPressed":"true"],
         WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],
@@ -159,9 +159,13 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             for i in 0 ... timetables!.rows.count-1 {
                 let row = timetables!.rows[i]
                 let x: CGFloat = CGFloat(row.weekday) * timetableCellWidth + timetableCellBorderWidth
-                let y: CGFloat = CGFloat(row._start_time-startNum) * timetableCellHeight + timetableCellBorderWidth
-                let gridNum: CGFloat = CGFloat(row._end_time-row._start_time)
-                let height: CGFloat = gridNum * timetableCellHeight - 2 * timetableCellBorderWidth
+                let y1 = (CGFloat(row._start_hour-startNum)+CGFloat(row._start_minute)/60)
+                let y: CGFloat = y1 * timetableCellHeight + timetableCellBorderWidth
+                
+                let start_time = row.start_time.toDateTime(format:"HH:mm:ss")
+                let end_time = row.end_time.toDateTime(format:"HH:mm:ss")
+                let elapsed = CGFloat(end_time.timeIntervalSince(start_time)/(60*60))
+                let height: CGFloat = elapsed * timetableCellHeight - 2 * timetableCellBorderWidth
                 
                 var frame = CGRect(x: x, y: y, width: width, height: height)
                 //print(frame)
@@ -170,20 +174,25 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 
                 let absFrame = v.convert(v.bounds, to: scrollView)
                 v.removeFromSuperview()
-                //print(v1)
+                //print(absFrame)
                 let absView = UIView(frame: absFrame)
                 absView.isUserInteractionEnabled = true
                 absView.backgroundColor = row._color.toColor()
                 absView.tag = 1000 + i
                 
-                frame = CGRect(x: 3, y: 10, width: width, height: 20)
+                //print(height)
+                frame = CGRect(x: 3, y: 3, width: width-6, height: height-6)
                 let titleLbl = UILabel(frame: frame)
+                //titleLbl.backgroundColor = UIColor.white
+                titleLbl.font = titleLbl.font.withSize(14)
+                titleLbl.textAlignment = .center
                 titleLbl.text = row.title
                 titleLbl.textColor = UIColor.black
                 titleLbl.numberOfLines = 0
-                titleLbl.sizeToFit()
+                //titleLbl.sizeToFit()
                 absView.addSubview(titleLbl)
 
+                /*
                 let line = DrawLine(frame: CGRect(x: 5, y: 35, width: width-10, height: 1))
                 absView.addSubview(line)
 
@@ -195,6 +204,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 contentLbl.numberOfLines = 0
                 contentLbl.sizeToFit()
                 absView.addSubview(contentLbl)
+ */
                 
                 let tap = UITapGestureRecognizer(target: self, action: #selector(clickTimetableEvent))
                 absView.addGestureRecognizer(tap)

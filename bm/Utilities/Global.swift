@@ -18,9 +18,9 @@ enum MYCOLOR: Int {
     case primary = 0x337ab7
     case warning = 0xF1C40F
     case info = 0x659be0
-    case gray = 0xe1e1e1
+    case white = 0xe1e1e1
     
-    static let allValues = [danger, success, primary, warning, info, gray]
+    static let allValues = [danger, success, primary, warning, info, white]
     
     init(color: String) {
         switch color {
@@ -34,8 +34,8 @@ enum MYCOLOR: Int {
             self = .warning
         case "info":
             self = .info
-        case "gray":
-            self = .gray
+        case "white":
+            self = .white
         default:
             self = .success
         }
@@ -53,8 +53,8 @@ enum MYCOLOR: Int {
             return "warning"
         case .info:
             return "info"
-        case .gray:
-            return "gray"
+        case .white:
+            return "white"
         }
     }
     
