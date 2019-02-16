@@ -49,6 +49,19 @@ class CoachService: DataService {
                     self.superCoach = JSONParse.parse(data: json)
                     //self.superCoach.printRow()
                 }
+                self.setData1(row: json)
+                let path: String =  json[FEATURED_KEY].stringValue
+                if path.count > 0 {
+                    self.getImage(_url: path, completion: { (success) in
+                        if success {
+                            self.model.data[FEATURED_KEY]!["value"] = self.image
+                            completion(true)
+                            //print(team.data)
+                        }
+                    })
+                } else {
+                    completion(true)
+                }
                 completion(true)
                 
             } else {

@@ -13,14 +13,14 @@ import Device_swift
 var gSimulate:Bool = false
 
 enum MYCOLOR: Int {
-    case danger = 0xc12e2a
-    case success = 0x36c6d3
-    case primary = 0x337ab7
+    case primary = 0x245580
     case warning = 0xF1C40F
     case info = 0x659be0
+    case danger = 0xc12e2a
+    case success = 0x419641
     case white = 0xe1e1e1
     
-    static let allValues = [danger, success, primary, warning, info, white]
+    static let allValues = [primary, warning, info, danger, success, white]
     
     init(color: String) {
         switch color {
