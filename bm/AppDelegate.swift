@@ -19,13 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: false]
+        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: true]
         
         // Replace 'YOUR_APP_ID' with your OneSignal App ID.
         OneSignal.initWithLaunchOptions(launchOptions,
-                                        appId: "856c8fdb-79fb-418d-a397-d58b9c6b880b",
-                                        handleNotificationAction: nil,
-                                        settings: onesignalInitSettings)
+                                        appId: "856c8fdb-79fb-418d-a397-d58b9c6b880b", handleNotificationReceived: nil, handleNotificationAction: nil, settings: onesignalInitSettings)
         
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
         
@@ -61,6 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+//        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
+//        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
+//        application.registerUserNotificationSettings(pushNotificationSettings)
+//        application.registerForRemoteNotifications()
         return SDKApplicationDelegate.shared.application(application,
                                                          open: url,
                                                          sourceApplication: sourceApplication,

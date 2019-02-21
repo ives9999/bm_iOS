@@ -166,7 +166,7 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == TO_TEMP_PLAY_SHOW {
-            let tempPlayShowVC: TempPlayShowVC = segue.destination as! TempPlayShowVC
+            let tempPlayShowVC: ShowTempPlayVC = segue.destination as! ShowTempPlayVC
             tempPlayShowVC.token = sender as! String
         }
     }

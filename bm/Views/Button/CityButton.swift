@@ -12,7 +12,10 @@ class CityButton: SuperButton {
 
     init() {
         super.init(frame: .zero)
-        
+    }
+    
+    required override init(frame: CGRect) {
+        super.init(frame: frame)
     }
     
     required init(coder aDecoder: NSCoder) {

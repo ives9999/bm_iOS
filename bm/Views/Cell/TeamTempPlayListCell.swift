@@ -16,7 +16,7 @@ class TeamTempPlayListCell: SuperCell {
     
     var bkView: UIView!
     var nameLbl: SuperLabel!
-    var cityBtn: SuperButton!
+    var cityBtn: CityButton!
     var arenaBtn: SuperButton!
     var quantityLbl: SuperLabel!
     var signupLbl: SuperLabel!
@@ -30,7 +30,7 @@ class TeamTempPlayListCell: SuperCell {
         super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
         bkView = UIView(frame: CGRect.zero)
         nameLbl = SuperLabel(frame: CGRect.zero)
-        cityBtn = SuperButton(frame: CGRect.zero,textColor:UIColor.black, bkColor:UIColor(MY_GREEN))
+        cityBtn = CityButton(frame: CGRect.zero)
         arenaBtn = SuperButton(frame: CGRect.zero,textColor:UIColor.black, bkColor:UIColor(MY_GREEN))
         quantityLbl = SuperLabel(frame: CGRect.zero)
         signupLbl = SuperLabel(frame: CGRect.zero)

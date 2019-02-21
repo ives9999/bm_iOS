@@ -26,7 +26,7 @@ class SuperButton: UIButton {
         self.commonInit()
     }
     
-    override init(frame: CGRect) {
+    required override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()
     }

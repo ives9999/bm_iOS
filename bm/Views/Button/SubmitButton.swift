@@ -12,13 +12,23 @@ class SubmitButton: SuperButton {
 
     init() {
         super.init(frame: .zero)
-        setTitle("送出", for: .normal)
-        backgroundColor = UIColor(MY_RED)
-        contentEdgeInsets = UIEdgeInsets(top: 4, left: 36, bottom: 4, right: 36)
+        commonInit()
+    }
+    
+    required init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
     }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    override func commonInit() {
+        setTitle("送出", for: .normal)
+        backgroundColor = UIColor(MY_RED)
+        contentEdgeInsets = UIEdgeInsets(top: 4, left: 36, bottom: 4, right: 36)
     }
     
     func setTitle(_ title: String) {

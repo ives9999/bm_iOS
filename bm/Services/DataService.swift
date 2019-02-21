@@ -405,6 +405,36 @@ class DataService {
         }
     }
     
+    func signup(type: String, token: String, member_token: String, tt_id: Int, completion: @escaping CompletionHandler) {
+        let body: [String: String] = ["source": "app", "channel": "bm","member_token":member_token,"tt_id":String(tt_id)]
+        let url: String = String(format: URL_SIGNUP, type, token)
+        //print(url)
+        //print(body)
+        
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                    return
+                }
+                //print(data)
+                let json: JSON = JSON(data)
+                self.success = json["success"].boolValue
+                if self.success {
+                } else {
+                    self.msg = json["msg"].stringValue
+                }
+                completion(self.success)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
+            }
+        }
+ 
+    }
+    
     func getHomes(completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["device": "app"]
         //print(URL_HOME)

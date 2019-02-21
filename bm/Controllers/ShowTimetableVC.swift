@@ -59,12 +59,16 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     ]
     var timetable: Timetable?
     var superCoach: SuperCoach?
-
+    
+    var signupBtn: SubmitButton?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print(tt_id)
 //        print(source)
 //        print(token)
+        
+        dataService = TimetableService.instance
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -106,10 +110,41 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         scrollView.addConstraints([c5, c6, c7, c8])
  */
         
+        signupBtn = SubmitButton()
+        signupBtn!.setTitle("報名")
+        signupBtn!.addTarget(self, action: #selector(signup), for: .touchUpInside)
+        
         beginRefresh()
         scrollView.addSubview(refreshControl)
 
         refresh()
+    }
+    
+    @objc func signup(sender: UIButton) {
+        if !Member.instance.isLoggedIn {
+            warning("請先登入")
+        } else {
+            if timetable != nil {
+                let tt_id = timetable!.id
+                dataService.signup(type: "timetable", token: token!, member_token: Member.instance.token, tt_id: tt_id) { (success) in
+                    if !success {
+                        self.warning(self.dataService.msg)
+                    } else {
+                        self.info("您已經報名成功")
+                    }
+                }
+            } else {
+                warning("沒有取得課程表，請重新進入")
+            }
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        addStatic(height: 50)
+        signupBtn!.translatesAutoresizingMaskIntoConstraints = false
+        staticButtomView!.addSubview(signupBtn!)
+        signupBtn!.centerXAnchor.constraint(equalTo: staticButtomView!.centerXAnchor).isActive = true
+        signupBtn!.centerYAnchor.constraint(equalTo: staticButtomView!.centerYAnchor).isActive = true
     }
     
     override func viewWillLayoutSubviews() {

@@ -28,6 +28,8 @@ class BaseViewController: UIViewController  {
     let layerDeleteBtn: SubmitButton = SubmitButton()
     var layerBtnCount: Int = 2
     
+    var staticButtomView: StaticBottomView?
+    
     //loading
     var isLoading: Bool = false
     var loadingMask: UIView?
@@ -149,6 +151,16 @@ class BaseViewController: UIViewController  {
     @objc func layerSubmit(view: UIButton){}
     @objc func layerDelete(view: UIButton){}
     @objc func layerCancel(view: UIButton){unmask()}
+    
+    func addStatic(height: CGFloat) {
+        let w = view.frame.width
+        let h = view.frame.height
+        let mainBound = CGRect(x: 0, y: h-height, width: w, height: height)
+        staticButtomView = StaticBottomView.init(frame: mainBound)
+        if let window = UIApplication.shared.keyWindow {
+            window.addSubview(staticButtomView!)
+        }
+    }
     
     func prev() {
         dismiss(animated: true, completion: nil)
