@@ -56,6 +56,7 @@ let URL_TEAM_TEMP_PLAY_DATE_PLAYER = URL_TEAM + "tempPlay/datePlayer"
 
 let URL_COACH = URL_HOME + "coach/"
 let URL_SIGNUP = "\(URL_HOME)%@/signup/%@"
+let URL_CANCEL_SIGNUP = "\(URL_HOME)%@/cancelSignup/%d"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"

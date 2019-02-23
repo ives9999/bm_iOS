@@ -61,6 +61,8 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     var superCoach: SuperCoach?
     
     var signupBtn: SubmitButton?
+    var isSignup: Bool = false
+    var signup: Signup?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,31 +114,12 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         
         signupBtn = SubmitButton()
         signupBtn!.setTitle("報名")
-        signupBtn!.addTarget(self, action: #selector(signup), for: .touchUpInside)
+        signupBtn!.addTarget(self, action: #selector(signupSubmit), for: .touchUpInside)
         
         beginRefresh()
         scrollView.addSubview(refreshControl)
 
         refresh()
-    }
-    
-    @objc func signup(sender: UIButton) {
-        if !Member.instance.isLoggedIn {
-            warning("請先登入")
-        } else {
-            if timetable != nil {
-                let tt_id = timetable!.id
-                dataService.signup(type: "timetable", token: token!, member_token: Member.instance.token, tt_id: tt_id) { (success) in
-                    if !success {
-                        self.warning(self.dataService.msg)
-                    } else {
-                        self.info("您已經報名成功")
-                    }
-                }
-            } else {
-                warning("沒有取得課程表，請重新進入")
-            }
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -161,9 +144,31 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                 if (success) {
                     Global.instance.removeSpinner(superView: self.view)
                     self.endRefresh()
-                    self.timetable = TimetableService.instance.timetable
+                    self.timetable =
+                        TimetableService.instance.timetable
+                    //self.timetable!.printRow()
                     self.superCoach = TimetableService.instance.superCoach
                     //let mirror: Mirror? = Mirror(reflecting: self.timetable!)
+                    
+                    self.isSignup = false
+                    if self.timetable!.signups.count > 0 {
+                        for signup in self.timetable!.signups {
+                            //signup.printRow()
+                            if signup.member_id == Member.instance.id {
+                                self.signup = signup
+                                if signup.status == "normal" {
+                                    self.isSignup = true
+                                }
+                                break
+                            }
+                        }
+                    }
+                    if self.isSignup {
+                        self.signupBtn!.setTitle("取消報名")
+                    } else {
+                        self.signupBtn!.setTitle("報名")
+                    }
+                    
                     for key in self.tableRowKeys {
                         if (self.timetable!.responds(to: Selector(key))) {
                             let content: String = String(describing:(self.timetable!.value(forKey: key))!)
@@ -300,6 +305,46 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         //print(height)
         //let height:CGFloat = 10000
         scrollView.contentSize = CGSize(width: view.frame.width, height: height)
+    }
+    
+    @objc func signupSubmit(sender: UIButton) {
+        
+        if !Member.instance.isLoggedIn {
+            warning("請先登入")
+        } else {
+            if timetable != nil {
+                let tt_id = timetable!.id
+                Global.instance.addSpinner(superView: view)
+                if !isSignup {//報名
+                    dataService.signup(type: "timetable", token: token!, member_token: Member.instance.token, tt_id: tt_id) { (success) in
+                        Global.instance.removeSpinner(superView: self.view)
+                        if !success {
+                            self.warning(self.dataService.msg)
+                        } else {
+                            self.info("您已經報名成功")
+                            self.refresh()
+                        }
+                    }
+                } else {//取消報名
+                    if signup != nil {
+                        dataService.cancelSignup(type: "timetable", member_token: Member.instance.token, signup_id: self.signup!.id) { (success) in
+                            Global.instance.removeSpinner(superView: self.view)
+                            if !success {
+                                self.warning(self.dataService.msg)
+                            } else {
+                                self.info("取消報名成功")
+                                self.refresh()
+                            }
+                        }
+                    } else {
+                        self.warning("沒有取得報名資料，無法取消報名，請洽管理員")
+                    }
+                }
+            } else {
+                warning("沒有取得課程表，請重新進入")
+            }
+        }
+        
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {

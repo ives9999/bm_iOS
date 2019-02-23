@@ -43,6 +43,7 @@ class Timetable: SuperModel {
     @objc dynamic var created_id: Int = 0
     @objc dynamic var created_at: String = ""
     @objc dynamic var updated_at: String = ""
+    @objc dynamic var signups: [Signup] = [Signup]()
     var _start_hour: Int = 0
     var _start_minute: Int = 0
     var _end_hour: Int = 0
