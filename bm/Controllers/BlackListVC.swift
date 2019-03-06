@@ -12,6 +12,8 @@ class BlackListVC: MyTableVC, BlackListCellDelegate {
 
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var emptyLbl: SuperLabel!
+    @IBOutlet weak var emptyCons: NSLayoutConstraint!
     
     var memberToken: String = ""
     var blacklists: Array<Dictionary<String, Any>> = Array()
@@ -31,7 +33,16 @@ class BlackListVC: MyTableVC, BlackListCellDelegate {
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 self.blacklists = MemberService.instance.blacklists
-                self.tableView.reloadData()
+                if (self.blacklists.count == 0) {
+                    self.emptyLbl.isHidden = false
+                    self.emptyCons.constant = 20
+                    self.view.layoutIfNeeded()
+                } else {
+                    self.emptyLbl.isHidden = true
+                    self.emptyCons.constant = 0
+                    self.view.layoutIfNeeded()
+                    self.tableView.reloadData()
+                }
             } else {
                 self.warning(MemberService.instance.msg)
             }

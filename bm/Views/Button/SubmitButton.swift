@@ -27,7 +27,8 @@ class SubmitButton: SuperButton {
     
     override func commonInit() {
         setTitle("送出", for: .normal)
-        backgroundColor = UIColor(MY_RED)
+        setColor(textColor: UIColor.white, bkColor: UIColor(MY_RED))
+        self.cornerRadius = 12
         contentEdgeInsets = UIEdgeInsets(top: 4, left: 36, bottom: 4, right: 36)
     }
     

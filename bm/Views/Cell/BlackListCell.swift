@@ -19,7 +19,7 @@ class BlackListCell: SuperCell {
     var teamNameLbl: MyLabel!
     var memberMobileLbl: MyLabel!
     var dateLbl: MyLabel!
-    var cancelBtn: SuperButton
+    var cancelBtn: SubmitButton
     let secondLineMargin: CGFloat = 1.0
     let secondItemMargin: CGFloat = 160
     
@@ -27,7 +27,7 @@ class BlackListCell: SuperCell {
     var blacklistCellDelegate: BlackListCellDelegate?
 
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        cancelBtn = SuperButton(frame: CGRect.zero,textColor:UIColor.black, bkColor:UIColor(MY_RED))
+        cancelBtn = SubmitButton()
         super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
         
         memberNameLbl = MyLabel(frame: CGRect.zero)

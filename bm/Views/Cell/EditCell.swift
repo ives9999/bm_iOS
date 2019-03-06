@@ -32,6 +32,7 @@ class EditCell: SuperCell, UITextFieldDelegate {
         detailLbl.textAlignment = NSTextAlignment.right
         editText.delegate = self
         onoff.addTarget(self, action: #selector(switchDidValueChanged(sender:)), for: .valueChanged)
+        clearBtn.padding(top: 0, left: 0, bottom: 0, right: 0)
         clearBtn.addTarget(self, action: #selector(clearBtnPressed(sender:)), for: .touchUpInside)
     }
 

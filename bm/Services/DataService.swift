@@ -308,6 +308,7 @@ class DataService {
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
         var body: [String: Any] = ["source": "app"]
         body.merge(params)
+        //print(body)
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             if image != nil {
                 let imageData: Data = UIImageJPEGRepresentation(image!, 0.2)! as Data
@@ -323,7 +324,7 @@ class DataService {
                     }
                 } else if key == TEAM_WEEKDAYS_KEY {
                     for d in value as! [Int] {
-                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "days[]")
+                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "weekdays[]")
                     }
                 } else if key == CAT_KEY {
                     for d in value as! [Int] {
