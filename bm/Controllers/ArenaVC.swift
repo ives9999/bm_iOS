@@ -39,15 +39,6 @@ class ArenaVC: ListVC {
         ]
         performSegue(withIdentifier: TO_MAP, sender: sender)
     }
-    
-    override func searchCity(indexPath: IndexPath) {
-        let row = lists[indexPath.row]
-        let city_id = row.data[CITY_KEY]!["value"] as! Int
-        citys.removeAll()
-        citys.append(City(id: city_id, name: ""))
-        prepareParams(city_type: "all")
-        refresh()
-    }
 
     @IBAction func searchBtnPressed(_ sender: Any) {
         showSearchPanel()

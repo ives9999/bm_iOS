@@ -17,6 +17,7 @@ class MoreVC: MyTableVC {
         [
             ["text": "球館", "icon": "arena", "segue": TO_ARENA],
             ["text": "教學", "icon": "coach", "segue": TO_COURSE],
+            ["text": "推播訊息", "icon": "bell", "segue": TO_PN],
             ["text": "版本", "icon": "version", "segue": ""]
         ]
     ]
@@ -67,6 +68,7 @@ class MoreVC: MyTableVC {
         }
     }
     @IBAction func prevBtnPressed(_ sender: Any) {
+        prev()
     }
     
 }

@@ -120,6 +120,7 @@ let TO_MAP: String = "toMap"
 let TO_SHOW: String = "toShow"
 let TO_SHOW_COACh: String = "toShowCoach"
 let TO_SHOWTIMETABLE: String = "toShowTimeTable"
+let TO_PN: String = "toPN"
 
 // color
 let MY_GREEN = "#a6d903"

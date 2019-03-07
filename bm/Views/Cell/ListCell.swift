@@ -17,7 +17,7 @@ class ListCell: SuperCell {
 
     @IBOutlet weak var listFeatured: UIImageView!
     @IBOutlet weak var listTitleTxt: UILabel!
-    @IBOutlet weak var listCityTxt: SuperLabel!
+    @IBOutlet weak var listCityBtn: CityButton!
     @IBOutlet weak var listArenaTxt: UILabel!
     @IBOutlet weak var listBallTxt: UILabel!
     @IBOutlet weak var listDayTxt: UILabel!
@@ -37,6 +37,13 @@ class ListCell: SuperCell {
     func updateViews(indexPath: IndexPath, data: SuperData, iden: String = "team") {
         listTitleTxt.text = data.title
         listFeatured.image = data.featured
+        listMarker.padding(top: 0, left: 0, bottom: 0, right: 0)
+        listCityBtn.setTextSize(14)
+        listCityBtn.alignH = UIControlContentHorizontalAlignment.center
+        if let item = data.data[CITY_KEY] {
+            listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
+            listCityBtn.indexPath = indexPath
+        }
         if iden == "team" {
             listMarker.isHidden = true
             updateTeam(indexPath: indexPath, data: data)
@@ -50,9 +57,6 @@ class ListCell: SuperCell {
     }
     
     func updateTeam(indexPath: IndexPath, data: SuperData) {
-        if let item = data.data[CITY_KEY] {
-            listCityTxt.text = (emptyToSpace(item["show"] as! String))
-        }
         if let item = data.data[ARENA_KEY] {
             listArenaTxt.text = (emptyToSpace(item["show"] as! String))
         }
@@ -67,9 +71,6 @@ class ListCell: SuperCell {
         }
     }
     func updateCoach(indexPath: IndexPath, data: SuperData) {
-        if let item = data.data[CITY_KEY] {
-            listCityTxt.text = (item["show"] as! String)
-        }
         if let item = data.data[MOBILE_KEY] {
             listArenaTxt.text = (item["show"] as! String)
         }
@@ -82,14 +83,6 @@ class ListCell: SuperCell {
         listIntervalTxt.text = ""
     }
     func updateArena(indexPath: IndexPath, data: SuperData) {
-        if let item = data.data[CITY_KEY] {
-            //print(item)
-            listCityTxt.text = (item["show"] as! String)
-            listCityTxt.indexPath = indexPath
-            listCityTxt.isUserInteractionEnabled = true
-            let tap = UITapGestureRecognizer(target: self, action: #selector(cityPressed))
-            listCityTxt.addGestureRecognizer(tap)
-        }
         if let item = data.data[TEL_KEY] {
             listArenaTxt.text = (item["show"] as! String)
         }
@@ -111,9 +104,9 @@ class ListCell: SuperCell {
         }
     }
     
-    @objc func cityPressed(sender: UITapGestureRecognizer) {
-        let label = sender.view as! SuperLabel
-        cellDelegate?.searchCity(indexPath: label.indexPath!)
+    @IBAction func cityPressed(sender: UIButton) {
+        let cityBtn = sender as! CityButton
+        cellDelegate?.searchCity(indexPath: cityBtn.indexPath!)
     }
     
     @IBAction func markerBtnPressed(sender: UIButton) {

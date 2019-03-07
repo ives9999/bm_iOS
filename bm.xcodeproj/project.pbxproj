@@ -102,6 +102,8 @@
 		B3756EF221BA7567006893E1 /* StatusSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3756EF021BA7567006893E1 /* StatusSelectCell.swift */; };
 		B3756EF321BA7567006893E1 /* StatusSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3756EF121BA7567006893E1 /* StatusSelectCell.xib */; };
 		B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A13441FDAF3CB00413E64 /* SuperButton.swift */; };
+		B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453D82230E849005E3027 /* ShowPNVC.swift */; };
+		B39453DB2230F516005E3027 /* OneSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453DA2230F516005E3027 /* OneSignal.swift */; };
 		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */; };
 		B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28720B68981001A846F /* ValidateVC.swift */; };
@@ -326,6 +328,8 @@
 		B3756EF021BA7567006893E1 /* StatusSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSelectCell.swift; sourceTree = "<group>"; };
 		B3756EF121BA7567006893E1 /* StatusSelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusSelectCell.xib; sourceTree = "<group>"; };
 		B37A13441FDAF3CB00413E64 /* SuperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperButton.swift; sourceTree = "<group>"; };
+		B39453D82230E849005E3027 /* ShowPNVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPNVC.swift; sourceTree = "<group>"; };
+		B39453DA2230F516005E3027 /* OneSignal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneSignal.swift; sourceTree = "<group>"; };
 		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFunctionVC.swift; sourceTree = "<group>"; };
 		B3A5A28720B68981001A846F /* ValidateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateVC.swift; sourceTree = "<group>"; };
@@ -489,6 +493,7 @@
 				B31361E61F8786CC00BDA53D /* Contants.swift */,
 				B31361E81F88A35900BDA53D /* Global.swift */,
 				B36CBD5620DFF7B000E52B9C /* JSONParse.swift */,
+				B39453DA2230F516005E3027 /* OneSignal.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -803,6 +808,7 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
+				B39453D82230E849005E3027 /* ShowPNVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1236,6 +1242,7 @@
 				B33C1AC121BE635E006F2BEB /* ContentFormItem.swift in Sources */,
 				B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */,
 				B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */,
+				B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */,
 				B36CBD5120DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift in Sources */,
 				B33C1AC521C3F848006F2BEB /* DrawLine.swift in Sources */,
 				B3E72A2A1FA2EC640008A6B1 /* RegisterVC.swift in Sources */,
@@ -1266,6 +1273,7 @@
 				B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */,
 				B306FEA521F72F0E00403FE2 /* ShowTimetableVC.swift in Sources */,
 				B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */,
+				B39453DB2230F516005E3027 /* OneSignal.swift in Sources */,
 				B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */,
 				B306FEA321F1A35700403FE2 /* SuperDatePicker.swift in Sources */,
 				B317855B20D9089600765CA1 /* BlackListCell.swift in Sources */,

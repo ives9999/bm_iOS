@@ -22,8 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: true]
         
         // Replace 'YOUR_APP_ID' with your OneSignal App ID.
+        
         OneSignal.initWithLaunchOptions(launchOptions,
-                                        appId: "856c8fdb-79fb-418d-a397-d58b9c6b880b", handleNotificationReceived: nil, handleNotificationAction: nil, settings: onesignalInitSettings)
+                                        appId: "856c8fdb-79fb-418d-a397-d58b9c6b880b", handleNotificationReceived: { notification in
+                         MyNotificationReceivedHandler.instance.notificationReceived(notification: notification)
+        }, handleNotificationAction: { result in
+            MyNotificationOpenedHandler.instance.notificationOpened(result: result)
+        }, settings: onesignalInitSettings)
         
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
         

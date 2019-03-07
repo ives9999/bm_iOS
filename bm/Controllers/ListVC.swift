@@ -567,6 +567,12 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     }
     
     func searchCity(indexPath: IndexPath) {
+        let row = lists[indexPath.row]
+        let city_id = row.data[CITY_KEY]!["value"] as! Int
+        citys.removeAll()
+        citys.append(City(id: city_id, name: ""))
+        prepareParams(city_type: "all")
+        refresh()
     }
     
     func getDefinedRow(_ key: String) -> [String: Any] {

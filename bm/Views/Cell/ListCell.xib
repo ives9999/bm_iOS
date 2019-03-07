@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,63 +20,68 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0hV-Gc-StL">
-                        <rect key="frame" x="8" y="9" width="100" height="100"/>
+                        <rect key="frame" x="8" y="10" width="100" height="100"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="2r2-AK-s8d"/>
                             <constraint firstAttribute="width" constant="100" id="2tu-v9-ZdE"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWu-Yu-Hcy">
-                        <rect key="frame" x="120" y="17" width="55" height="24"/>
+                        <rect key="frame" x="120" y="18" width="55" height="24"/>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gff-Gv-Ek8" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="191" y="18.5" width="32" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <color key="textColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arena" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qSx-Uf-4Hb">
-                        <rect key="frame" x="120" y="45" width="48" height="22"/>
+                        <rect key="frame" x="120" y="46" width="48" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ball" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32N-x7-zHR">
-                        <rect key="frame" x="184" y="45" width="30" height="22"/>
+                        <rect key="frame" x="184" y="46" width="30" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Day" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v5b-3p-aeQ">
-                        <rect key="frame" x="120" y="71" width="32" height="22"/>
+                        <rect key="frame" x="120" y="72" width="32" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interval" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBt-Mj-DEU">
-                        <rect key="frame" x="164" y="71" width="60" height="22"/>
+                        <rect key="frame" x="164" y="72" width="60" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j8g-pq-RDi" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="222" y="44" width="36" height="24"/>
+                        <rect key="frame" x="222" y="45" width="24" height="24"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="24" id="hvs-6L-SzU"/>
-                            <constraint firstAttribute="width" constant="36" id="oEc-gm-gzq"/>
+                            <constraint firstAttribute="width" constant="24" id="oEc-gm-gzq"/>
                         </constraints>
                         <state key="normal" image="marker"/>
                         <connections>
                             <action selector="markerBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="nCp-iJ-41z"/>
                         </connections>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HEI-zi-xno" customClass="CityButton" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="191" y="17" width="66" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="66" id="BDg-vm-TIl"/>
+                            <constraint firstAttribute="height" constant="26" id="BEl-G0-fgj"/>
+                        </constraints>
+                        <state key="normal" title="city"/>
+                        <connections>
+                            <action selector="cityPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="eeV-Iz-hab"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="qSx-Uf-4Hb" firstAttribute="leading" secondItem="pWu-Yu-Hcy" secondAttribute="leading" id="1EV-x6-Xd4"/>
-                    <constraint firstItem="gff-Gv-Ek8" firstAttribute="leading" secondItem="pWu-Yu-Hcy" secondAttribute="trailing" constant="16" id="5B6-Pd-SjK"/>
+                    <constraint firstItem="HEI-zi-xno" firstAttribute="leading" secondItem="pWu-Yu-Hcy" secondAttribute="trailing" constant="16" id="E29-AU-gUb"/>
                     <constraint firstItem="j8g-pq-RDi" firstAttribute="leading" secondItem="32N-x7-zHR" secondAttribute="trailing" constant="8" id="Fpa-5c-201"/>
                     <constraint firstItem="j8g-pq-RDi" firstAttribute="centerY" secondItem="32N-x7-zHR" secondAttribute="centerY" id="MDt-mS-5cx"/>
                     <constraint firstItem="0hV-Gc-StL" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="N36-Kt-Th3"/>
@@ -87,7 +92,7 @@
                     <constraint firstItem="qSx-Uf-4Hb" firstAttribute="top" secondItem="pWu-Yu-Hcy" secondAttribute="bottom" constant="4" id="aBl-o4-q0p"/>
                     <constraint firstItem="pWu-Yu-Hcy" firstAttribute="leading" secondItem="0hV-Gc-StL" secondAttribute="trailing" constant="12" id="aly-vg-ALf"/>
                     <constraint firstItem="dBt-Mj-DEU" firstAttribute="leading" secondItem="v5b-3p-aeQ" secondAttribute="trailing" constant="12" id="c0P-ra-J8g"/>
-                    <constraint firstItem="gff-Gv-Ek8" firstAttribute="centerY" secondItem="pWu-Yu-Hcy" secondAttribute="centerY" id="rOr-rc-lv9"/>
+                    <constraint firstItem="HEI-zi-xno" firstAttribute="centerY" secondItem="pWu-Yu-Hcy" secondAttribute="centerY" id="p7H-FT-QGu"/>
                     <constraint firstItem="32N-x7-zHR" firstAttribute="centerY" secondItem="qSx-Uf-4Hb" secondAttribute="centerY" id="rbX-CD-jX3"/>
                     <constraint firstItem="dBt-Mj-DEU" firstAttribute="centerY" secondItem="v5b-3p-aeQ" secondAttribute="centerY" id="sLX-gs-ZMS"/>
                     <constraint firstItem="32N-x7-zHR" firstAttribute="leading" secondItem="qSx-Uf-4Hb" secondAttribute="trailing" constant="16" id="wRw-iH-H3U"/>
@@ -97,7 +102,7 @@
             <connections>
                 <outlet property="listArenaTxt" destination="qSx-Uf-4Hb" id="xt8-ZT-ao4"/>
                 <outlet property="listBallTxt" destination="32N-x7-zHR" id="kNg-PD-xLp"/>
-                <outlet property="listCityTxt" destination="gff-Gv-Ek8" id="R5g-qC-4FC"/>
+                <outlet property="listCityBtn" destination="HEI-zi-xno" id="waN-ik-cl9"/>
                 <outlet property="listDayTxt" destination="v5b-3p-aeQ" id="mCn-yU-deb"/>
                 <outlet property="listFeatured" destination="0hV-Gc-StL" id="cp6-8j-EQx"/>
                 <outlet property="listIntervalTxt" destination="dBt-Mj-DEU" id="Yok-hS-Hsw"/>
@@ -107,6 +112,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="marker" width="36" height="36"/>
+        <image name="marker" width="54" height="54"/>
     </resources>
 </document>
