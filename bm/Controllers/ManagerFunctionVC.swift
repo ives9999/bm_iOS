@@ -34,14 +34,14 @@ class ManagerFunctionVC: MyTableVC {
             _rows = [
                 ["text": "編輯", "icon": "edit1", "segue": TO_EDIT],
                 ["text": "教球時段編輯", "icon": "tempplayedit", "segue": TO_TIMETABLE],
-                ["text": "報名學員名單", "icon": "tempplaylist", "segue": TO_COACH_SIGNUP],
+                //["text": "報名學員名單", "icon": "tempplaylist", "segue": TO_COACH_SIGNUP],
                 ["text": "刪除", "icon": "clear"]
             ]
         } else if source == "arena" {
             _rows = [
                 ["text": "編輯", "icon": "edit1", "segue": TO_EDIT],
-                ["text": "時段編輯", "icon": "tempplayedit", "segue": TO_TIMETABLE],
-                ["text": "報名球隊名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
+                //["text": "時段編輯", "icon": "tempplayedit", "segue": TO_TIMETABLE],
+                //["text": "報名球隊名單", "icon": "tempplaylist", "segue": TO_TEAM_TEMP_PLAY],
                 ["text": "刪除", "icon": "clear"]
             ]
         }

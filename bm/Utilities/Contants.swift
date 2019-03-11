@@ -15,8 +15,8 @@ typealias DATA = Dictionary<String, [String: Any]>
 let CHANNEL = "bm"
 
 // URL Constants
-//let REMOTE_BASE_URL = "https://bm.sportpassword.com"
-let REMOTE_BASE_URL = "http://192.168.100.100"
+let REMOTE_BASE_URL = "https://bm.sportpassword.com"
+//let REMOTE_BASE_URL = "http://192.168.100.100"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 let URL_HOME = "\(BASE_URL)/app/"
