@@ -3465,7 +3465,7 @@
         <!--ShowPNVC-->
         <scene sceneID="fZI-0f-kMy">
             <objects>
-                <viewController id="7B3-vz-daH" customClass="ShowPNVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toPN" id="7B3-vz-daH" customClass="ShowPNVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oYt-Mw-Kfi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3505,52 +3505,84 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="raH-Py-nUs"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="oIe-hG-zfK">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YZf-k7-aLx" customClass="SuperScrollView" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前無推播訊息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sW4-FK-UYQ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="76" width="375" height="20"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="oIe-hG-zfK">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="670"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前無推播訊息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sW4-FK-UYQ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="16" width="375" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="CKh-0c-pn8"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PT6-mH-0Dr">
+                                        <rect key="frame" x="0.0" y="36" width="375" height="300"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="300" id="ygs-vd-9X8"/>
+                                        </constraints>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </tableView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9t9-cr-Lcc" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="107.5" y="368" width="160" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="H9a-Hg-rIW"/>
+                                            <constraint firstAttribute="width" constant="160" id="J7m-lb-7YI"/>
+                                        </constraints>
+                                        <state key="normal" title="全部清除"/>
+                                        <connections>
+                                            <action selector="clearBtnPressed:" destination="7B3-vz-daH" eventType="touchUpInside" id="FBp-ez-rig"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="CKh-0c-pn8"/>
+                                    <constraint firstItem="oIe-hG-zfK" firstAttribute="leading" secondItem="YZf-k7-aLx" secondAttribute="leading" id="4Ig-Y1-rCH"/>
+                                    <constraint firstItem="PT6-mH-0Dr" firstAttribute="width" secondItem="YZf-k7-aLx" secondAttribute="width" id="H6N-vK-Lt9"/>
+                                    <constraint firstItem="9t9-cr-Lcc" firstAttribute="top" secondItem="PT6-mH-0Dr" secondAttribute="bottom" constant="32" id="HaV-IU-pCF"/>
+                                    <constraint firstItem="oIe-hG-zfK" firstAttribute="top" secondItem="YZf-k7-aLx" secondAttribute="top" id="L1i-4c-COu"/>
+                                    <constraint firstAttribute="bottom" secondItem="oIe-hG-zfK" secondAttribute="bottom" id="OvD-hi-Zcz"/>
+                                    <constraint firstItem="sW4-FK-UYQ" firstAttribute="leading" secondItem="YZf-k7-aLx" secondAttribute="leading" id="PfI-6L-8Vr"/>
+                                    <constraint firstAttribute="trailing" secondItem="sW4-FK-UYQ" secondAttribute="trailing" id="Rub-WW-6Mb"/>
+                                    <constraint firstItem="PT6-mH-0Dr" firstAttribute="top" secondItem="sW4-FK-UYQ" secondAttribute="bottom" id="YUq-kj-Rbi"/>
+                                    <constraint firstAttribute="trailing" secondItem="PT6-mH-0Dr" secondAttribute="trailing" id="fdE-jc-VcI"/>
+                                    <constraint firstItem="PT6-mH-0Dr" firstAttribute="leading" secondItem="YZf-k7-aLx" secondAttribute="leading" id="miF-MY-SMj"/>
+                                    <constraint firstItem="9t9-cr-Lcc" firstAttribute="centerX" secondItem="YZf-k7-aLx" secondAttribute="centerX" id="ndm-mP-cOT"/>
+                                    <constraint firstItem="sW4-FK-UYQ" firstAttribute="top" secondItem="YZf-k7-aLx" secondAttribute="top" constant="16" id="syk-dB-KfG"/>
+                                    <constraint firstAttribute="trailing" secondItem="oIe-hG-zfK" secondAttribute="trailing" id="tU7-Si-W7V"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PT6-mH-0Dr">
-                                <rect key="frame" x="0.0" y="96" width="375" height="571"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="kaF-gc-GkK" firstAttribute="leading" secondItem="Kau-P2-jdC" secondAttribute="leading" id="0PM-ep-XYF"/>
-                            <constraint firstItem="Kau-P2-jdC" firstAttribute="trailing" secondItem="PT6-mH-0Dr" secondAttribute="trailing" id="D0C-vT-YUb"/>
-                            <constraint firstItem="Kau-P2-jdC" firstAttribute="trailing" secondItem="sW4-FK-UYQ" secondAttribute="trailing" id="Fkv-wW-LlB"/>
+                            <constraint firstItem="YZf-k7-aLx" firstAttribute="top" secondItem="kaF-gc-GkK" secondAttribute="bottom" id="4i8-KJ-ihh"/>
+                            <constraint firstItem="YZf-k7-aLx" firstAttribute="width" secondItem="oYt-Mw-Kfi" secondAttribute="width" id="98m-d2-3P0"/>
                             <constraint firstItem="kaF-gc-GkK" firstAttribute="trailing" secondItem="Kau-P2-jdC" secondAttribute="trailing" id="KPF-RH-7ij"/>
-                            <constraint firstItem="sW4-FK-UYQ" firstAttribute="top" secondItem="kaF-gc-GkK" secondAttribute="bottom" constant="12" id="MDk-Cz-8CW"/>
-                            <constraint firstItem="oIe-hG-zfK" firstAttribute="top" secondItem="kaF-gc-GkK" secondAttribute="bottom" id="N1K-Ig-7U5"/>
-                            <constraint firstItem="oIe-hG-zfK" firstAttribute="leading" secondItem="Kau-P2-jdC" secondAttribute="leading" id="OHB-2H-znZ"/>
+                            <constraint firstItem="YZf-k7-aLx" firstAttribute="leading" secondItem="Kau-P2-jdC" secondAttribute="leading" id="KZg-yo-nrN"/>
                             <constraint firstItem="kaF-gc-GkK" firstAttribute="top" secondItem="oYt-Mw-Kfi" secondAttribute="top" id="Rw5-E7-Rdm"/>
-                            <constraint firstItem="PT6-mH-0Dr" firstAttribute="top" secondItem="sW4-FK-UYQ" secondAttribute="bottom" id="TD2-1u-FaA"/>
-                            <constraint firstItem="sW4-FK-UYQ" firstAttribute="leading" secondItem="Kau-P2-jdC" secondAttribute="leading" id="Z5y-Q3-Kum"/>
-                            <constraint firstItem="Kau-P2-jdC" firstAttribute="bottom" secondItem="oIe-hG-zfK" secondAttribute="bottom" id="e4t-GP-cEZ"/>
-                            <constraint firstItem="Kau-P2-jdC" firstAttribute="bottom" secondItem="PT6-mH-0Dr" secondAttribute="bottom" id="lYx-mJ-N3e"/>
-                            <constraint firstItem="PT6-mH-0Dr" firstAttribute="leading" secondItem="Kau-P2-jdC" secondAttribute="leading" id="lmQ-52-vgC"/>
-                            <constraint firstItem="oIe-hG-zfK" firstAttribute="trailing" secondItem="Kau-P2-jdC" secondAttribute="trailing" id="zMB-AB-mar"/>
+                            <constraint firstItem="Kau-P2-jdC" firstAttribute="trailing" secondItem="YZf-k7-aLx" secondAttribute="trailing" id="ddE-ce-2D2"/>
+                            <constraint firstItem="Kau-P2-jdC" firstAttribute="bottom" secondItem="YZf-k7-aLx" secondAttribute="bottom" id="yXY-ek-963"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kau-P2-jdC"/>
                     </view>
                     <connections>
+                        <outlet property="clearBtn" destination="9t9-cr-Lcc" id="Og4-2F-nZi"/>
                         <outlet property="emptyCons" destination="CKh-0c-pn8" id="BoO-NU-Xcn"/>
                         <outlet property="emptyLbl" destination="sW4-FK-UYQ" id="f7G-lG-QEM"/>
+                        <outlet property="scrollView" destination="YZf-k7-aLx" id="x8Z-JR-T7t"/>
                         <outlet property="tableView" destination="PT6-mH-0Dr" id="PP5-Fk-hbR"/>
+                        <outlet property="tableViewHeightCons" destination="ygs-vd-9X8" id="LYI-PB-EQ0"/>
                         <outlet property="titleLbl" destination="7EK-EI-R9v" id="rXO-dE-s0A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0AO-No-Lcb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3178" y="-160"/>
+            <point key="canvasLocation" x="-3394" y="-142"/>
         </scene>
         <!--球館-->
         <scene sceneID="rU9-us-FPg">

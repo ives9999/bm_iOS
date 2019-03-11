@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PNCell" customModule="bm" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="354" height="104"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="354" height="103.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SEe-Dr-wIa" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="16" y="8" width="0.0" height="0.0"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" id="hLW-d8-9rM"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="id" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLW-8A-ZC7">
+                        <rect key="frame" x="24" y="72" width="14" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fp0-9X-RAm">
+                        <rect key="frame" x="313" y="39.5" width="25" height="25"/>
+                        <state key="normal" image="clear"/>
+                        <connections>
+                            <action selector="clearBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sns-zp-8V1"/>
+                        </connections>
+                    </button>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="content" translatesAutoresizingMaskIntoConstraints="NO" id="ckx-UW-4In">
+                        <rect key="frame" x="16" y="8" width="338" height="87.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="right" secondItem="ckx-UW-4In" secondAttribute="right" id="1qI-SL-BNx"/>
+                    <constraint firstItem="Fp0-9X-RAm" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5ts-ir-Fsh"/>
+                    <constraint firstItem="ckx-UW-4In" firstAttribute="top" secondItem="SEe-Dr-wIa" secondAttribute="bottom" id="AJv-Xh-wMQ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="fLW-8A-ZC7" secondAttribute="bottom" id="BNQ-dh-cJN"/>
+                    <constraint firstItem="ckx-UW-4In" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="DwB-eL-YKp"/>
+                    <constraint firstItem="SEe-Dr-wIa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="JvE-Gf-7E8"/>
+                    <constraint firstAttribute="trailing" secondItem="Fp0-9X-RAm" secondAttribute="trailing" constant="16" id="TrN-qr-Iap"/>
+                    <constraint firstItem="fLW-8A-ZC7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="ZGT-1h-jfI"/>
+                    <constraint firstItem="SEe-Dr-wIa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="em7-NN-EXy"/>
+                    <constraint firstAttribute="bottom" secondItem="ckx-UW-4In" secondAttribute="bottom" constant="8" id="gsn-Tg-NQO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="contentTV" destination="ckx-UW-4In" id="WOb-S9-YTv"/>
+                <outlet property="idLbl" destination="fLW-8A-ZC7" id="M7D-zB-dkD"/>
+                <outlet property="titleHeightCons" destination="hLW-d8-9rM" id="svC-Y6-70W"/>
+                <outlet property="titleLbl" destination="SEe-Dr-wIa" id="ilL-XK-KkF"/>
+            </connections>
+            <point key="canvasLocation" x="164.80000000000001" y="180.80959520239881"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="clear" width="25" height="25"/>
+    </resources>
+</document>

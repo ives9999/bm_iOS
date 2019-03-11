@@ -104,6 +104,8 @@
 		B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A13441FDAF3CB00413E64 /* SuperButton.swift */; };
 		B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453D82230E849005E3027 /* ShowPNVC.swift */; };
 		B39453DB2230F516005E3027 /* OneSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453DA2230F516005E3027 /* OneSignal.swift */; };
+		B39453DE2232948F005E3027 /* PNCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453DC2232948F005E3027 /* PNCell.swift */; };
+		B39453DF2232948F005E3027 /* PNCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B39453DD2232948F005E3027 /* PNCell.xib */; };
 		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */; };
 		B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28720B68981001A846F /* ValidateVC.swift */; };
@@ -330,6 +332,8 @@
 		B37A13441FDAF3CB00413E64 /* SuperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperButton.swift; sourceTree = "<group>"; };
 		B39453D82230E849005E3027 /* ShowPNVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPNVC.swift; sourceTree = "<group>"; };
 		B39453DA2230F516005E3027 /* OneSignal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneSignal.swift; sourceTree = "<group>"; };
+		B39453DC2232948F005E3027 /* PNCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCell.swift; sourceTree = "<group>"; };
+		B39453DD2232948F005E3027 /* PNCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PNCell.xib; sourceTree = "<group>"; };
 		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFunctionVC.swift; sourceTree = "<group>"; };
 		B3A5A28720B68981001A846F /* ValidateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateVC.swift; sourceTree = "<group>"; };
@@ -523,6 +527,8 @@
 				B3756EF121BA7567006893E1 /* StatusSelectCell.xib */,
 				B306FEAB21F8422B00403FE2 /* IconCell.swift */,
 				B306FEAC21F8422B00403FE2 /* IconCell.xib */,
+				B39453DC2232948F005E3027 /* PNCell.swift */,
+				B39453DD2232948F005E3027 /* PNCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1014,6 +1020,7 @@
 				B35C4F4D2196F5E500F8AEB2 /* EditCell.xib in Resources */,
 				B306FEAE21F8422B00403FE2 /* IconCell.xib in Resources */,
 				B3DEBE102106FDB1003699A0 /* ListCell.xib in Resources */,
+				B39453DF2232948F005E3027 /* PNCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1178,6 +1185,7 @@
 				B306FEAD21F8422B00403FE2 /* IconCell.swift in Sources */,
 				B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */,
 				F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */,
+				B39453DE2232948F005E3027 /* PNCell.swift in Sources */,
 				B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */,
 				B3A617D321FEC2050059B603 /* SuperCoach.swift in Sources */,
 				B31739ED21763CD1004CFEDE /* ArenaMapVC.swift in Sources */,

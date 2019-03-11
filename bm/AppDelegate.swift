@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: true]
         
         // Replace 'YOUR_APP_ID' with your OneSignal App ID.
@@ -26,8 +27,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         OneSignal.initWithLaunchOptions(launchOptions,
                                         appId: "856c8fdb-79fb-418d-a397-d58b9c6b880b", handleNotificationReceived: { notification in
                          MyNotificationReceivedHandler.instance.notificationReceived(notification: notification)
+            self.goShowPNVC()
         }, handleNotificationAction: { result in
             MyNotificationOpenedHandler.instance.notificationOpened(result: result)
+            self.goShowPNVC()
         }, settings: onesignalInitSettings)
         
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
@@ -61,6 +64,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Member.instance.justGetMemberOne = false
         return true
+    }
+    
+    private func goShowPNVC() {
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let showPNVC: ShowPNVC = mainStoryboard.instantiateViewController(withIdentifier: TO_PN) as! ShowPNVC
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window!.rootViewController = showPNVC
+        self.window!.makeKeyAndVisible()
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
