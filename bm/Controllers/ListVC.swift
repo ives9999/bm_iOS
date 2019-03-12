@@ -46,13 +46,15 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     var bathroom: Bool = false
     var parking: Bool = false
     var arenas: [Arena] = [Arena]()
-    var days: [Int] = [Int]()
+    var weekdays: [Int] = [Int]()
     var degrees: [Degree] = [Degree]()
     
     //key has type, play_start_time, play_end_time, time
     var times: [String: Any] = [String: Any]()
     
     var params: [String: Any] = [String: Any]()
+    
+    var searchPanelisHidden = true
     
     
     required init?(coder aDecoder: NSCoder) {
@@ -76,7 +78,9 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         //print(params)
-        refresh()
+        if searchPanelisHidden {
+            refresh()
+        }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -117,8 +121,8 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         params["bathroom"] = (bathroom) ? 1 : 0
         params["parking"] = (parking) ? 1 : 0
         
-        if days.count > 0 {
-            params["play_days"] = days
+        if weekdays.count > 0 {
+            params["play_days"] = weekdays
         }
         if times.count > 0 {
             params["use_date_range"] = 1
@@ -236,7 +240,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
                 cell.editCellDelegate = self
                 let searchRow = searchRows[indexPath.row]
                 //print(searchRow)
-                cell.forRow(indexPath: indexPath, row: searchRow)
+                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
                 return cell
             }
         }
@@ -344,7 +348,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
             destinationNavigationController = (segue.destination as! UINavigationController)
             let daysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
             daysSelectVC.source = "search"
-            daysSelectVC.selecteds = days
+            daysSelectVC.selecteds = weekdays
             daysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
             destinationNavigationController = (segue.destination as! UINavigationController)
@@ -362,7 +366,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
             let tempPlayVC: TempPlayVC = segue.destination as! TempPlayVC
             tempPlayVC.citys = citys
             tempPlayVC.arenas = arenas
-            tempPlayVC.days = days
+            tempPlayVC.days = weekdays
             tempPlayVC.times = times
             tempPlayVC.degrees = degrees
             tempPlayVC.keyword = keyword
@@ -374,11 +378,12 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     }
     
     func showSearchPanel() {
+        searchPanelisHidden = false
         tableView.isScrollEnabled = false
-        mask(y: newY, superView: tableView)
+        mask(y: titleBarHeight, superView: view)
         var frame = CGRect(x:padding, y:workAreaHeight + newY, width:view.frame.width-(2*padding), height:layerHeight)
-        addLayer(superView: tableView, frame: frame)
-        let y = newY + 100
+        addLayer(superView: view, frame: frame)
+        let y = titleBarHeight + 50
         frame = CGRect(x: self.padding, y: y, width: self.containerView.frame.width, height: self.layerHeight)
         animation(frame: frame)
     }
@@ -413,6 +418,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     }
     
     @objc override func layerSubmit(view: UIButton) {
+        searchPanelisHidden = true
         unmask()
         prepareParams()
         refresh()
@@ -435,7 +441,28 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     }
     
     func clear(indexPath: IndexPath) {
+        var row = searchRows[indexPath.row]
+        //print(row)
         
+        let key = row["key"] as! String
+        switch key {
+        case CITY_KEY:
+            citys.removeAll()
+        case AREA_KEY:
+            areas.removeAll()
+        case TEAM_WEEKDAYS_KEY:
+            weekdays.removeAll()
+        case TEAM_PLAY_START_KEY:
+            times.removeAll()
+        case ARENA_KEY:
+            arenas.removeAll()
+        case TEAM_DEGREE_KEY:
+            degrees.removeAll()
+        default:
+            _ = 1
+        }
+        row["show"] = "全部"
+        replaceRows(key, row)
     }
     
     func setCityData(id: Int, name: String) {
@@ -502,9 +529,9 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
         var row = getDefinedRow(TEAM_WEEKDAYS_KEY)
         var texts: [String] = [String]()
-        days = res
-        if days.count > 0 {
-            for day in days {
+        weekdays = res
+        if weekdays.count > 0 {
+            for day in weekdays {
                 for gday in Global.instance.weekdays {
                     if day == gday["value"] as! Int {
                         let text = gday["simple_text"]

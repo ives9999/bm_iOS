@@ -35,6 +35,11 @@ class CoachVC: ListVC {
     }
     
     @IBAction func searchBtnPressed(_ sender: Any) {
-        showSearchPanel()
+        if searchPanelisHidden {
+            showSearchPanel()
+        } else {
+            searchPanelisHidden = true
+            unmask()
+        }
     }
 }

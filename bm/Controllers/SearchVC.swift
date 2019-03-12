@@ -112,7 +112,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
         cell.editCellDelegate = self
         let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
-        cell.forRow(indexPath: indexPath, row: row)
+        cell.forRow(indexPath: indexPath, row: row, isClear: true)
         
         return cell
     }
@@ -292,15 +292,6 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         tableView.reloadData()
     }
     
-    func setTextField(iden: String, value: String) {
-        keyword = value
-    }
-    func setSwitch(indexPath: IndexPath, value: Bool) {
-    }
-    func clear(indexPath: IndexPath) {
-        
-    }
-    
     func setDegreeData(res: [Degree]) {
         var row = getDefinedRow(TEAM_DEGREE_KEY)
         var texts: [String] = [String]()
@@ -315,6 +306,33 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         }
         replaceRows(TEAM_DEGREE_KEY, row)
         tableView.reloadData()
+    }
+    
+    func setTextField(iden: String, value: String) {
+        keyword = value
+    }
+    func setSwitch(indexPath: IndexPath, value: Bool) {
+    }
+    func clear(indexPath: IndexPath) {
+        var row = getDefinedRow(indexPath.section, indexPath.row)
+        //print(row)
+        let key = row["key"] as! String
+        switch key {
+        case CITY_KEY:
+            citys.removeAll()
+        case TEAM_WEEKDAYS_KEY:
+            weekdays.removeAll()
+        case TEAM_PLAY_START_KEY:
+            times.removeAll()
+        case ARENA_KEY:
+            arenas.removeAll()
+        case TEAM_DEGREE_KEY:
+            degrees.removeAll()
+        default:
+            _ = 1
+        }
+        row["show"] = "全部"
+        replaceRows(key, row)
     }
     
     private func getDefinedRow(_ section: Int, _ row: Int) -> [String: Any] {

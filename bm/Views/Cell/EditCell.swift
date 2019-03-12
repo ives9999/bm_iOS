@@ -79,6 +79,7 @@ class EditCell: SuperCell, UITextFieldDelegate {
             editText.isHidden = true
             onoff.isHidden = false
             onoff.indexPath = indexPath
+            clearBtn.isHidden = true
         }
         if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
             editText.isHidden = true
@@ -111,7 +112,7 @@ class EditCell: SuperCell, UITextFieldDelegate {
         //print(_sender.indexPath?.section)
         //print(_sender.indexPath?.row)
         editText.text = ""
-        detailLbl.text = ""
+        detailLbl.text = "全部"
         editCellDelegate?.clear(indexPath: _sender.indexPath!)
     }
 

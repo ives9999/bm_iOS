@@ -56,6 +56,8 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     
     var keyword: String = ""
     
+    var searchPanelisHidden = true
+    
     override func viewDidLoad() {
         //print("super: \(self)")
         super.viewDidLoad()
@@ -374,6 +376,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     @objc func submit(view: UIButton) {
+        searchPanelisHidden = true
         unmask()
         prepareParams()
         refresh()
