@@ -17,6 +17,9 @@ target 'bm' do
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
+  pod 'FBSDKCoreKit', '~> 4.38.0'
+  pod 'FBSDKLoginKit', '~> 4.38.0'
+  pod 'FBSDKShareKit', '~> 4.38.0'
   pod 'ReachabilitySwift'
 end
 
