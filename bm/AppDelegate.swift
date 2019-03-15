@@ -20,6 +20,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         
+//        let status:OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
+//        let hasPrompted = status.permissionStatus.hasPrompted
+//        print("hasPrompted = \(hasPrompted)")
+//
+//        let userStatus = status.permissionStatus.status
+//        print("userStatus = \(userStatus)")
+//
+//        let isSubscribed = status.subscriptionStatus.subscribed
+//        print("isSubscribed = \(isSubscribed)")
+//
+//        let userID = status.subscriptionStatus.userId
+//        print("userID = \(userID)")
+//
+//        let pushToken = status.subscriptionStatus.pushToken
+//        print("pushToken = \(pushToken)")
+//
+//        OneSignal.promptForPushNotifications { (accepted) in
+//            print("User accepted notifications: \(accepted)")
+//            if !accepted {
+//                OneSignal.presentAppSettings()
+//            }
+//        }
+        
         let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: true]
         
         // Replace 'YOUR_APP_ID' with your OneSignal App ID.

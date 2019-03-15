@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import OneSignal
+
 
 class ShowPNVC: MyTableVC, PNCellDelegate {
     
@@ -17,8 +19,11 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
     @IBOutlet weak var tableViewHeightCons: NSLayoutConstraint!
     @IBOutlet weak var clearBtn: SubmitButton!
     @IBOutlet weak var scrollView: SuperScrollView!
+    @IBOutlet weak var bottomView: StaticBottomView!
+    @IBOutlet weak var setupSwitch: SuperSwitch!
     
     var pnArr: [[String: String]]?
+    var isReceive: Bool = false
 
     override func viewDidLoad() {
         myTablView = tableView
@@ -26,12 +31,22 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         
         clearBtn.setTitle("全部清除")
         
-        MyOneSignal.instance.save(id: "011", title: "eee", content: "這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1")
+        MyOneSignal.instance.save(id: "012", title: "eee", content: "這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1")
         
         let cellNib = UINib(nibName: "PNCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 600
+        
+        OneSignal.promptForPushNotifications { (accepted) in
+            //print("User accepted notifications: \(accepted)")
+            if !accepted {
+                self.isReceive = false
+            } else {
+                self.isReceive = true
+            }
+            self.setupSwitch.isOn = self.isReceive
+        }
         
         beginRefresh()
         scrollView.addSubview(refreshControl)
@@ -48,10 +63,12 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
             emptyLbl.isHidden = false
             emptyCons.constant = 20
             clearBtn.isHidden = true
+            //bottomView.isHidden = true
         } else {
             emptyLbl.isHidden = true
             emptyCons.constant = 0
             clearBtn.isHidden = false
+            //bottomView.isHidden = false
         }
         self.endRefresh()
         tableView.reloadData()
@@ -116,6 +133,14 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         warning(msg: "是否要刪除全部訊息", showCloseButton: true, buttonTitle: "刪除") {
             MyOneSignal.instance.clear()
             self.refresh()
+        }
+    }
+    
+    @IBAction func receivedChange(sender: UISwitch) {
+        let receive = sender as! SuperSwitch
+        //print(receive.isOn)
+        info(msg: "iOS必須透過設定來開啟或關閉是否接收推播功能，因此應用程式將為您開啟設定，請設定完後，再回到羽球密碼", buttonTitle: "確定") {
+            OneSignal.presentAppSettings()
         }
     }
 

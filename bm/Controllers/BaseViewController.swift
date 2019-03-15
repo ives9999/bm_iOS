@@ -152,14 +152,15 @@ class BaseViewController: UIViewController  {
     @objc func layerDelete(view: UIButton){}
     @objc func layerCancel(view: UIButton){unmask()}
     
-    func addStatic(height: CGFloat) {
+    func addStatic(height: CGFloat, superView: UIView) {
         let w = view.frame.width
         let h = view.frame.height
         let mainBound = CGRect(x: 0, y: h-height, width: w, height: height)
         staticButtomView = StaticBottomView.init(frame: mainBound)
-        if let window = UIApplication.shared.keyWindow {
-            window.addSubview(staticButtomView!)
-        }
+        superView.addSubview(staticButtomView!)
+//        if let window = UIApplication.shared.keyWindow {
+//            window.addSubview(staticButtomView!)
+//        }
     }
     
     func prev() {

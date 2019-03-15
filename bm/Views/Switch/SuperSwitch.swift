@@ -12,4 +12,19 @@ class SuperSwitch: UISwitch {
 
     var indexPath: IndexPath?
     var key: String?
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    func commonInit()  {
+        onTintColor = UIColor(MY_RED)
+        tintColor = UIColor.gray
+    }
 }

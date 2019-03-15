@@ -135,6 +135,7 @@ class MemberService {
         }
         let body: [String: Any] = ["source": "app", field: value, ID_KEY: id]
         //print(body)
+        //print(URL_MEMBER_UPDATE)
         Alamofire.request(URL_MEMBER_UPDATE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             //print(response.result.error)
             if response.result.error == nil {

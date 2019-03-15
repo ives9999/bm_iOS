@@ -123,11 +123,11 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     }
     
     override func viewDidLayoutSubviews() {
-//        addStatic(height: 50)
-//        signupBtn!.translatesAutoresizingMaskIntoConstraints = false
-//        staticButtomView!.addSubview(signupBtn!)
-//        signupBtn!.centerXAnchor.constraint(equalTo: staticButtomView!.centerXAnchor).isActive = true
-//        signupBtn!.centerYAnchor.constraint(equalTo: staticButtomView!.centerYAnchor).isActive = true
+        addStatic(height: 50, superView: view)
+        signupBtn!.translatesAutoresizingMaskIntoConstraints = false
+        staticButtomView!.addSubview(signupBtn!)
+        signupBtn!.centerXAnchor.constraint(equalTo: staticButtomView!.centerXAnchor).isActive = true
+        signupBtn!.centerYAnchor.constraint(equalTo: staticButtomView!.centerYAnchor).isActive = true
     }
     
     override func viewWillLayoutSubviews() {

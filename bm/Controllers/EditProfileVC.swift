@@ -202,9 +202,9 @@ class EditProfileVC: UIViewController {
         value = datePicker.date.toString()
     }
     private func _initSubmitBtn() {
-        submitBtn = SuperButton()
-        submitBtn.alignH = .center
-        submitBtn.setTitle("送出", for: .normal)
+        submitBtn = SubmitButton()
+        //submitBtn.alignH = .center
+        //submitBtn.setTitle("送出", for: .normal)
         submitBtn.addTarget(self, action: #selector(submitBtnPressed(_:)), for: .touchUpInside)
         
         view.addSubview(submitBtn)
@@ -214,8 +214,9 @@ class EditProfileVC: UIViewController {
         submitBtnConstraintTopSwitch = NSLayoutConstraint(item: submitBtn, attribute: .top, relatedBy: .equal, toItem: dataSwitch, attribute: .bottom, multiplier: 1, constant: 18)
         submitBtnConstraintTopDatePicker = NSLayoutConstraint(item: submitBtn, attribute: .top, relatedBy: .equal, toItem: datePicker, attribute: .bottom, multiplier: 1, constant: 18)
         c2 = NSLayoutConstraint(item: submitBtn, attribute: .centerX, relatedBy: .equal, toItem: dataSwitch.superview, attribute: .centerX, multiplier: 1, constant: 0)
-        c3 = NSLayoutConstraint(item: submitBtn, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+        c3 = NSLayoutConstraint(item: submitBtn, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120)
         c4 = NSLayoutConstraint(item: submitBtn, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 30)
+        
         submitBtn.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([submitBtnConstraintTopTxt,submitBtnConstraintTopSwitch,submitBtnConstraintTopDatePicker,c2,c3,c4])
         submitBtnConstraintTopTxt.isActive = true

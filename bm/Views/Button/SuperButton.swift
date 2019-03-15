@@ -30,6 +30,11 @@ class SuperButton: UIButton {
         super.init(frame: frame)
         self.commonInit()
     }
+    
+    convenience init() {
+        self.init(frame: CGRect.zero)
+    }
+    
     func commonInit(){
         self.setTitleColor(UIColor.white, for: UIControlState.normal)
         self.titleLabel?.font = UIFont(name: fontName, size: fontSize)
