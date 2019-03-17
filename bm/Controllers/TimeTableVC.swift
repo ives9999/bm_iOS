@@ -417,8 +417,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         }
         
         if segue.identifier == TO_SELECT_WEEKDAY {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let weekdaysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
+            let weekdaysSelectVC: WeekdaysSelectVC = segue.destination as! WeekdaysSelectVC
             weekdaysSelectVC.select = "just one"
             if indexPath != nil {
                 weekdaysSelectVC.indexPath = indexPath
@@ -444,8 +443,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             }
             dateSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let timeSelectVC: TimeSelectVC = destinationNavigationController!.topViewController as! TimeSelectVC
+            let timeSelectVC: TimeSelectVC = segue.destination as! TimeSelectVC
             timeSelectVC.select = "just one"
             if indexPath != nil {
                 timeSelectVC.indexPath = indexPath

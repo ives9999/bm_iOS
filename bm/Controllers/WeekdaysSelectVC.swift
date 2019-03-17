@@ -13,8 +13,9 @@ protocol WeekdaysSelectDelegate: class {
     func setWeekdaysData(res: [Int], indexPath: IndexPath?)
 }
 
-class WeekdaysSelectVC: UITableViewController {
+class WeekdaysSelectVC: MyTableVC {
 
+    @IBOutlet weak var tableView: UITableView!
     weak var delegate: WeekdaysSelectDelegate?
     var selecteds: [Int] = [Int]()
     var weekdays: [[String: Any]] = Global.instance.weekdays
@@ -26,6 +27,7 @@ class WeekdaysSelectVC: UITableViewController {
     var indexPath: IndexPath?
     
     override func viewDidLoad() {
+        myTablView = tableView
         super.viewDidLoad()
         //print(selectedDays)
         
@@ -41,53 +43,11 @@ class WeekdaysSelectVC: UITableViewController {
             }
         }
         //print(days)
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
-        navigationItem.leftBarButtonItem?.tintColor = UIColor.black
         
-        if select == "multi" {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(submit))
-            navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-        }
-    }
-    
-    @objc func back() {
-        dismiss(animated: true, completion: nil)
-    }
-    @objc func submit() {
-        //print(days)
-//        var isSelected: Bool = false
-//        var res: [Int] = [Int]()
-//        for weekday in weekdays {
-//            //print(day)
-//            if weekday["checked"] as! Bool {
-//                let idx: Int = weekday["value"] as! Int
-//                res.append(idx)
-//                isSelected = true
-//            }
-//        }
-        self.delegate?.setWeekdaysData(res: selecteds, indexPath: indexPath)
-        back()
-        /*
-        if !isSelected {
-            if source == "setup" {
-                SCLAlertView().showWarning("警告", subTitle: "沒有選擇星期日期，或請按取消回上一頁")
-            } else {
-                self.delegate?.setWeekdaysData(res: res, indexPath: indexPath)
-                back()
-            }
-        } else {
-            self.delegate?.setWeekdaysData(res: res, indexPath: indexPath)
-            back()
-        }
- */
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        tableView.register(
+            SuperCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.white
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,7 +57,7 @@ class WeekdaysSelectVC: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SuperCell
 
         let item: [String: Any] = weekdays[indexPath.row]
         
@@ -158,49 +118,14 @@ class WeekdaysSelectVC: UITableViewController {
     }
     
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    @IBAction func back() {
+        prev()
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    @IBAction func cancel() {
+        prev()
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    @IBAction func submit() {
+        self.delegate?.setWeekdaysData(res: selecteds, indexPath: indexPath)
+        prev()
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -13,8 +13,9 @@ protocol DegreeSelectDelegate: class {
     func setDegreeData(res: [Degree])
 }
 
-class DegreeSelectVC: UITableViewController {
+class DegreeSelectVC: MyTableVC {
 
+    @IBOutlet weak var tableView: UITableView!
     var degrees: [Degree] = [Degree]()
     //var degrees: [[String: Any]] = [[String: Any]]()
     var allDegrees: [Degree] = [Degree]()
@@ -24,6 +25,7 @@ class DegreeSelectVC: UITableViewController {
     //縣市的類型：all所有的縣市，simple比較簡單的縣市
     
     override func viewDidLoad() {
+        myTablView = tableView
         super.viewDidLoad()
 
         //[DEGREE.new: "新手"], [DEGREE.soso: "普通"], [DEGREE.high: "高手"]
@@ -33,25 +35,10 @@ class DegreeSelectVC: UITableViewController {
             allDegrees.append(Degree(value: item.key, text: item.value))
         }
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(back))
-        navigationItem.leftBarButtonItem?.tintColor = UIColor.black
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "提交", style: .plain, target: self, action: #selector(submit))
-        navigationItem.rightBarButtonItem?.tintColor = UIColor.black
-    }
-    @objc func back() {
-        dismiss(animated: true, completion: nil)
-    }
-    @objc func submit() {
-        self.delegate?.setDegreeData(res: degrees)
-        back()
-    }
-
-    // MARK: - Table view data source
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        tableView.register(
+            SuperCell.self, forCellReuseIdentifier: "cell")
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.white
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -60,7 +47,7 @@ class DegreeSelectVC: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SuperCell
 
         let row = allDegrees[indexPath.row]
         cell.textLabel!.text = row.text
@@ -104,4 +91,14 @@ class DegreeSelectVC: UITableViewController {
         cell.tintColor = UIColor.white
     }
 
+    @IBAction func back() {
+        prev()
+    }
+    @IBAction func cancel() {
+        prev()
+    }
+    @IBAction func submit() {
+        self.delegate?.setDegreeData(res: degrees)
+        prev()
+    }
 }

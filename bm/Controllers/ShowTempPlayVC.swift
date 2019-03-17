@@ -28,8 +28,8 @@ class ShowTempPlayVC: MyTableVC {
     var leaderLbl: SuperLabel!
     var mobileLbl: SuperLabel!
     var degreeLbl: SuperLabel!
-    var plusOneBtn: SuperButton!
-    var cancelPlusOneBtn: SuperButton!
+    var plusOneBtn: SubmitButton!
+    var cancelPlusOneBtn: CancelButton!
     var tableView: UITableView!
     
     var items: [Any] = [Any]()
@@ -95,8 +95,8 @@ class ShowTempPlayVC: MyTableVC {
         leaderLbl = SuperLabel()
         mobileLbl = SuperLabel()
         degreeLbl = SuperLabel()
-        plusOneBtn = SuperButton()
-        cancelPlusOneBtn = SuperButton(frame: CGRect.zero, textColor: UIColor.black, bkColor: UIColor(MY_GREEN))
+        plusOneBtn = SubmitButton()
+        cancelPlusOneBtn = CancelButton()
         
         containerView.addSubview(cityBtn)
         containerView.addSubview(arenaBtn)
@@ -114,17 +114,17 @@ class ShowTempPlayVC: MyTableVC {
         containerView.addSubview(cancelPlusOneBtn)
         containerView.addSubview(tableView)
         
-        cityBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
+//        cityBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
         arenaBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
-        cityBtn.cornerRadius(18)
+        //cityBtn.cornerRadius(18)
         arenaBtn.cornerRadius(18)
         cityBtn.addTarget(self, action: #selector(city), for: UIControlEvents.touchUpInside)
         arenaBtn.addTarget(self, action: #selector(self.arena), for: UIControlEvents.touchUpInside)
         
-        plusOneBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
-        cancelPlusOneBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
-        plusOneBtn.cornerRadius(18)
-        cancelPlusOneBtn.cornerRadius(18)
+//        plusOneBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
+//        cancelPlusOneBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
+//        plusOneBtn.cornerRadius(18)
+//        cancelPlusOneBtn.cornerRadius(18)
         plusOneBtn.addTarget(self, action: #selector(plusOne(_:)), for: UIControlEvents.touchUpInside)
         cancelPlusOneBtn.addTarget(self, action: #selector(cancelPlusOne(_:)), for: UIControlEvents.touchUpInside)
         plusOneBtn.setTitle("我要臨打", for: .normal)

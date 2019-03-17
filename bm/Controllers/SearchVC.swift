@@ -153,16 +153,15 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var destinationNavigationController: UINavigationController?
         if segue.identifier == TO_CITY {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let citySelectVC: CitySelectVC = destinationNavigationController!.topViewController as! CitySelectVC
+            let citySelectVC: CitySelectVC = segue.destination as! CitySelectVC
+            
             citySelectVC.delegate = self
             citySelectVC.source = "search"
             citySelectVC.type = "simple"
             citySelectVC.select = "multi"
             citySelectVC.citys = citys
         } else if segue.identifier == TO_ARENA {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let arenaSelectVC: ArenaSelectVC = destinationNavigationController!.topViewController as! ArenaSelectVC
+            let arenaSelectVC: ArenaSelectVC = segue.destination as! ArenaSelectVC
             arenaSelectVC.source = "search"
             arenaSelectVC.type = "simple"
             arenaSelectVC.select = "multi"
@@ -174,20 +173,17 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
             arenaSelectVC.arenas = arenas
             arenaSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_WEEKDAY {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let weekdaysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
+            let weekdaysSelectVC: WeekdaysSelectVC = segue.destination as! WeekdaysSelectVC
             weekdaysSelectVC.source = "search"
             weekdaysSelectVC.selecteds = weekdays
             weekdaysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let timeSelectVC: TimeSelectVC = destinationNavigationController!.topViewController as! TimeSelectVC
+            let timeSelectVC: TimeSelectVC = segue.destination as! TimeSelectVC
             timeSelectVC.source = "search"
             timeSelectVC.input = times
             timeSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_DEGREE {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let degreeSelectVC: DegreeSelectVC = destinationNavigationController!.topViewController as! DegreeSelectVC
+            let degreeSelectVC: DegreeSelectVC = segue.destination as! DegreeSelectVC
             degreeSelectVC.source = "search"
             degreeSelectVC.degrees = degrees
             degreeSelectVC.delegate = self

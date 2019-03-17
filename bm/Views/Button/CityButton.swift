@@ -29,7 +29,7 @@ class CityButton: SuperButton {
         contentEdgeInsets = UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12)
     }
     
-    func setTitle(_ title: String) {
+    override func setTitle(_ title: String) {
         setTitle(title, for: .normal)
     }
 

@@ -32,7 +32,7 @@
                             <constraint firstAttribute="height" constant="18" id="zCi-w8-Reb"/>
                         </constraints>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqq-DV-aVx" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tqq-DV-aVx">
                         <rect key="frame" x="278" y="1" width="42" height="42"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="42" id="Qjc-Xa-05d"/>

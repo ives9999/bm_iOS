@@ -25,7 +25,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJn-dz-0yI" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HJn-dz-0yI">
                         <rect key="frame" x="278" y="1" width="42" height="42"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="42" id="XxW-JW-Y2C"/>

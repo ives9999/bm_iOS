@@ -71,5 +71,7 @@ class SuperButton: UIButton {
     func setTextSize(_ size: CGFloat) {
         self.titleLabel?.font = UIFont(name: fontName, size: size)
     }
-
+    func setTitle(_ title: String) {
+        setTitle(title, for: .normal)
+    }
 }

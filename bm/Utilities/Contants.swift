@@ -126,6 +126,7 @@ let TO_PN: String = "toPN"
 // color
 let MY_GREEN = "#a6d903"
 let MY_RED = "#f11b90"
+let MY_GRAY = "#717171"
 let CITY_BUTTON = "#fceb4c"
 let STATUS_GREEN = "#658501"
 let TABBAR_BACKGROUND = "#0d0d0d"

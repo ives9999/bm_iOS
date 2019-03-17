@@ -1,14 +1,14 @@
 //
-//  SubmitButton.swift
+//  CancelButton.swift
 //  bm
 //
-//  Created by ives on 2018/10/20.
-//  Copyright © 2018 bm. All rights reserved.
+//  Created by ives on 2019/3/16.
+//  Copyright © 2019 bm. All rights reserved.
 //
 
 import UIKit
 
-class SubmitButton: SuperButton {
+class CancelButton: SuperButton {
 
     init() {
         super.init(frame: .zero)
@@ -26,9 +26,10 @@ class SubmitButton: SuperButton {
     }
     
     override func commonInit() {
-        setTitle("送出", for: .normal)
-        setColor(textColor: UIColor.white, bkColor: UIColor(MY_RED))
+        setTitle("取消", for: .normal)
+        setColor(textColor: UIColor.white, bkColor: UIColor(MY_GRAY))
         self.cornerRadius = 12
         contentEdgeInsets = UIEdgeInsets(top: 4, left: 36, bottom: 4, right: 36)
     }
+
 }

@@ -106,6 +106,7 @@
 		B39453DB2230F516005E3027 /* OneSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453DA2230F516005E3027 /* OneSignal.swift */; };
 		B39453DE2232948F005E3027 /* PNCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453DC2232948F005E3027 /* PNCell.swift */; };
 		B39453DF2232948F005E3027 /* PNCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B39453DD2232948F005E3027 /* PNCell.xib */; };
+		B39453E1223CE905005E3027 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453E0223CE905005E3027 /* CancelButton.swift */; };
 		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */; };
 		B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28720B68981001A846F /* ValidateVC.swift */; };
@@ -334,6 +335,7 @@
 		B39453DA2230F516005E3027 /* OneSignal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneSignal.swift; sourceTree = "<group>"; };
 		B39453DC2232948F005E3027 /* PNCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCell.swift; sourceTree = "<group>"; };
 		B39453DD2232948F005E3027 /* PNCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PNCell.xib; sourceTree = "<group>"; };
+		B39453E0223CE905005E3027 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFunctionVC.swift; sourceTree = "<group>"; };
 		B3A5A28720B68981001A846F /* ValidateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateVC.swift; sourceTree = "<group>"; };
@@ -654,6 +656,7 @@
 				B37A13441FDAF3CB00413E64 /* SuperButton.swift */,
 				B306F33B217AF31100C32CE2 /* SubmitButton.swift */,
 				B3E8C2A12207E0DC0008ED25 /* CityButton.swift */,
+				B39453E0223CE905005E3027 /* CancelButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -1215,6 +1218,7 @@
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
 				B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
+				B39453E1223CE905005E3027 /* CancelButton.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
 				B306FE9C21F0DA8000403FE2 /* DateSelectVC.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,

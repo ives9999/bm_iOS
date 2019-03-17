@@ -163,16 +163,14 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         var destinationNavigationController: UINavigationController?
         if segue.identifier == TO_CITY {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let citySelectVC: CitySelectVC = destinationNavigationController!.topViewController as! CitySelectVC
+            let citySelectVC: CitySelectVC = segue.destination as! CitySelectVC
             citySelectVC.delegate = self
             let tmp = sender as! Int
             if tmp > 0 {
                 citySelectVC.citys = [City(id: tmp, name: "")]
             }
         } else if segue.identifier == TO_ARENA {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let arenaSelectVC: ArenaSelectVC = destinationNavigationController!.topViewController as! ArenaSelectVC
+            let arenaSelectVC: ArenaSelectVC = segue.destination as! ArenaSelectVC
             arenaSelectVC.delegate = self
             let tmp = sender as! [String: Int]
             if tmp["city_id"] != nil {
@@ -184,13 +182,11 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                 arenaSelectVC.arenas = arenas
             }
         } else if segue.identifier == TO_SELECT_WEEKDAY {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let daysSelectVC: WeekdaysSelectVC = destinationNavigationController!.topViewController as! WeekdaysSelectVC
-            daysSelectVC.selecteds = (sender as! [Int])
-            daysSelectVC.delegate = self
+            let weekdaysSelectVC: WeekdaysSelectVC = segue.destination as! WeekdaysSelectVC
+            weekdaysSelectVC.selecteds = (sender as! [Int])
+            weekdaysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let timeSelectVC: TimeSelectVC = destinationNavigationController!.topViewController as! TimeSelectVC
+            let timeSelectVC: TimeSelectVC = segue.destination as! TimeSelectVC
             timeSelectVC.delegate = self
             timeSelectVC.input = (sender as! [String: Any])
         } else if segue.identifier == TO_TEXT_INPUT {
@@ -203,8 +199,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             let key = _sender["key"] as! String
             textInputVC.key = key
         } else if segue.identifier == TO_SELECT_DEGREE {
-            destinationNavigationController = (segue.destination as! UINavigationController)
-            let degreeSelectVC: DegreeSelectVC = destinationNavigationController!.topViewController as! DegreeSelectVC
+            let degreeSelectVC: DegreeSelectVC = segue.destination as! DegreeSelectVC
             degreeSelectVC.delegate = self
             degreeSelectVC.degrees = (sender as! [Degree])
         }

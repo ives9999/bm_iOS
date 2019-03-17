@@ -13,7 +13,7 @@ class PasswordVC: UIViewController {
     var type: String!// forget_password, change_password
     var emailLbl: SuperLabel!
     var emailTxt: IconTextField!
-    var submitBtn: SuperButton!
+    var submitBtn: SubmitButton!
     var oldPwdLbl: SuperLabel!
     var oldPwdTxt: IconTextField!
     var newPwdLbl: SuperLabel!
@@ -53,10 +53,7 @@ class PasswordVC: UIViewController {
         rePwdTxt.isSecureTextEntry = true
         
         
-        submitBtn = SuperButton()
-        submitBtn.setTitle("送出", for: .normal)
-        submitBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
-        submitBtn.cornerRadius(18)
+        submitBtn = SubmitButton()
         submitBtn.addTarget(self, action: #selector(submit(_:)), for: UIControlEvents.touchUpInside)
         
         view.addSubview(emailLbl)
@@ -118,7 +115,7 @@ class PasswordVC: UIViewController {
         view.addConstraints([c1, c2, c3, c4])
  
         
-        c1 = NSLayoutConstraint(item: oldPwdLbl, attribute: .leading, relatedBy: .equal, toItem: oldPwdLbl.superview, attribute: .leading, multiplier: 1, constant: 3)
+        c1 = NSLayoutConstraint(item: oldPwdLbl, attribute: .leading, relatedBy: .equal, toItem: oldPwdLbl.superview, attribute: .leading, multiplier: 1, constant: 16)
         c2 = NSLayoutConstraint(item: oldPwdLbl, attribute: .top, relatedBy: .equal, toItem: logoView, attribute: .bottom, multiplier: 1, constant: 50)
         oldPwdLbl.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([c1, c2])
@@ -129,7 +126,7 @@ class PasswordVC: UIViewController {
         oldPwdTxt.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([c1, c2, c3, c4])
         
-        c1 = NSLayoutConstraint(item: newPwdLbl, attribute: .leading, relatedBy: .equal, toItem: newPwdLbl.superview, attribute: .leading, multiplier: 1, constant: 3)
+        c1 = NSLayoutConstraint(item: newPwdLbl, attribute: .leading, relatedBy: .equal, toItem: newPwdLbl.superview, attribute: .leading, multiplier: 1, constant: 16)
         c2 = NSLayoutConstraint(item: newPwdLbl, attribute: .top, relatedBy: .equal, toItem: oldPwdLbl, attribute: .bottom, multiplier: 1, constant: 30)
         newPwdLbl.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([c1, c2])
@@ -140,7 +137,7 @@ class PasswordVC: UIViewController {
         newPwdTxt.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([c1, c2, c3, c4])
         
-        c1 = NSLayoutConstraint(item: rePwdLbl, attribute: .leading, relatedBy: .equal, toItem: rePwdLbl.superview, attribute: .leading, multiplier: 1, constant: 3)
+        c1 = NSLayoutConstraint(item: rePwdLbl, attribute: .leading, relatedBy: .equal, toItem: rePwdLbl.superview, attribute: .leading, multiplier: 1, constant: 16)
         c2 = NSLayoutConstraint(item: rePwdLbl, attribute: .top, relatedBy: .equal, toItem: newPwdLbl, attribute: .bottom, multiplier: 1, constant: 30)
         rePwdLbl.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([c1, c2])
