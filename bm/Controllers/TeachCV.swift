@@ -8,16 +8,16 @@
 
 import UIKit
 
-class CourseCV: CollectionVC {
+class TeachCV: CollectionVC {
     
-    let _type:String = "course"
+    let _type:String = "teach"
     
     let _searchRows: [[String: Any]] = [
         ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入教學名稱關鍵字","text_field":true]
         ]
         
     override func viewDidLoad() {
-        dataService = CourseService.instance
+        dataService = TeachService.instance
         searchRows = _searchRows
         setIden(item:_type, titleField: "title")
         super.viewDidLoad()

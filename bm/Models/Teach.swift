@@ -8,8 +8,8 @@
 
 import Foundation
 
-class Course: SuperData {
-    static let instance = Course()
+class Teach: SuperData {
+    static let instance = Teach()
     
     override func initData() {
         data = [

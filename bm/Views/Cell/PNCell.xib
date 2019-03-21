@@ -42,7 +42,7 @@
                             <action selector="clearBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sns-zp-8V1"/>
                         </connections>
                     </button>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="content" translatesAutoresizingMaskIntoConstraints="NO" id="ckx-UW-4In">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="content" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckx-UW-4In">
                         <rect key="frame" x="16" y="8" width="338" height="87.5"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

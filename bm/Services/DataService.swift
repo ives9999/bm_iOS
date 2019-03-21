@@ -474,10 +474,10 @@ class DataService {
             if response.result.error == nil {
                 if let json = response.result.value as? Dictionary<String, Any> {
                     //print(json)
-                    let courseArray = json["courses"] as! [Dictionary<String, AnyObject>]
-                    let courseHome = self.parseHomeJSON(array: courseArray, titleField: "title", type: "course", video: true)
-                    //print(courseArray1)
-                    self.homes["courses"] = courseHome
+                    let teachArray = json["teaches"] as! [Dictionary<String, AnyObject>]
+                    let teachHome = self.parseHomeJSON(array: teachArray, titleField: "title", type: "teach", video: true)
+                    //print(teachArray1)
+                    self.homes["teaches"] = teachHome
                     let newsArray = json["news"] as! [Dictionary<String, AnyObject>]
                     let newsHome = self.parseHomeJSON(array: newsArray, titleField: "title", type: "news")
                     self.homes["news"] = newsHome
@@ -948,7 +948,7 @@ class DataService {
         var type : String
         switch section {
         case 0:
-            key = "courses"
+            key = "teaches"
             type = "cours"
             chTitle = "課程"
             break
@@ -963,7 +963,7 @@ class DataService {
             chTitle = "球館"
             break
         default:
-            key = "courses"
+            key = "teaches"
             type = "cours"
             chTitle = "課程"
         }

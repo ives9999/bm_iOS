@@ -15,7 +15,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     @IBOutlet weak var submitBtn: UIButton!
     
     let heightForSection: CGFloat = 34
-    //search type: temp_play, coach, team, course
+    //search type: temp_play, coach, team, teach
     var type: String!
     var model: Team!
     var _rows: [[String: Any]] = [

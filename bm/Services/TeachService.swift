@@ -9,8 +9,8 @@
 import Foundation
 import SwiftyJSON
 
-class CourseService: DataService {
-    static let instance = CourseService()
+class TeachService: DataService {
+    static let instance = TeachService()
     
     override init() {
         super.init()
