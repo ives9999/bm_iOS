@@ -47,14 +47,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Replace 'YOUR_APP_ID' with your OneSignal App ID.
         
-        OneSignal.initWithLaunchOptions(launchOptions,
-                                        appId: "856c8fdb-79fb-418d-a397-d58b9c6b880b", handleNotificationReceived: { notification in
-                         MyNotificationReceivedHandler.instance.notificationReceived(notification: notification)
+        OneSignal.initWithLaunchOptions(
+            launchOptions,
+            appId: "856c8fdb-79fb-418d-a397-d58b9c6b880b",                                        handleNotificationReceived: {
+                notification in
+                
+                MyNotificationReceivedHandler.instance.notificationReceived(notification: notification)
             self.goShowPNVC()
-        }, handleNotificationAction: { result in
+        },
+            handleNotificationAction: { result in
             MyNotificationOpenedHandler.instance.notificationOpened(result: result)
             self.goShowPNVC()
-        }, settings: onesignalInitSettings)
+        },
+            settings: onesignalInitSettings)
         
         OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
         
@@ -92,9 +97,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func goShowPNVC() {
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let showPNVC: ShowPNVC = mainStoryboard.instantiateViewController(withIdentifier: TO_PN) as! ShowPNVC
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        self.window!.rootViewController = showPNVC
-        self.window!.makeKeyAndVisible()
+        let root = UIApplication.shared.keyWindow!.rootViewController
+        root?.present(showPNVC, animated: true, completion: nil)
+//        self.window = UIWindow(frame: UIScreen.main.bounds)
+//        self.window!.rootViewController = showPNVC
+//        self.window!.makeKeyAndVisible()
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
@@ -114,30 +121,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
         return SDKApplicationDelegate.shared.application(application, open: url, options: options)
     }
+}
+
+extension AppDelegate {
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        //use response.notification.request.content.userInfo to fetch push data
+        print("didReceive > 10.0")
+    }
     
-//    func applicatioDidBecomeActive(_ application: UIApplication) {
-//        AppEventsLogger.activate(application)
-//    }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    // for iOS < 10
+    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+        //use notification.userInfo to fetch push data
+        print("didReceive < 10")
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        //use userInfo to fetch push data
+        print("background")
     }
 }
+
+
+
