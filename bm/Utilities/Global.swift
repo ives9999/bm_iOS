@@ -11,6 +11,7 @@ import UIKit
 import Device_swift
 
 var gSimulate:Bool = false
+var gReset: Bool = false
 
 enum MYCOLOR: Int {
     case primary = 0x245580

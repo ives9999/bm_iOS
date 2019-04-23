@@ -52,7 +52,9 @@ class TeamService: DataService {
                 let nickname: String = member["nickname"].stringValue
                 let token: String = member["token"].stringValue
                 let created_at: String = item["created_at"].stringValue
-                signups.append(["nickname":nickname, "token":token,"created_at":created_at])
+                let status: String = item["status"].stringValue
+                let off_at: String = item["off_at"].stringValue
+                signups.append(["nickname":nickname, "token":token,"created_at":created_at,"status":status,"off_at":off_at])
                 //print(signups)
             }
             if model.data["signups"] == nil {
@@ -320,9 +322,10 @@ class TeamService: DataService {
         }
     }
     func plusOne(title: String, near_date: String, token: String, completion: @escaping CompletionHandler) {
-        var url: String = URL_TEAM_PLUSONE + title + "?source=app&date=" + near_date + "&token=" + token
+        var url: String = "\(URL_TEAM_PLUSONE)\(title)?source=app&date=\(near_date)&token=\(token)"
         //print(url)
         url = url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        //print(url)
 //        Alamofire.request(url).response { (response) in
 //            print("Request: \(response.request)")
 //            print("Response: \(response.response)")

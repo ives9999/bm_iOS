@@ -19,11 +19,13 @@ class TempPlaySignupOneVC: MyTableVC {
     var team_name: String = ""
     var teamToken: String = ""
     var near_date: String = ""
+    var status: String = "on"
+    var off_at: String = ""
     var isTeamManager: Bool = false
     var memberMobile: String = ""
     var memberName: String = ""
     var memberOne: [Dictionary<String, Dictionary<String, Any>>] = [Dictionary<String, Dictionary<String, Any>>]()
-    var keys: [String] = ["team", NAME_KEY, MOBILE_KEY, "black_list"]
+    var keys: [String] = ["team", NAME_KEY, MOBILE_KEY, "black_list", "temp_play_status"]
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -45,6 +47,9 @@ class TempPlaySignupOneVC: MyTableVC {
             if success {
                 self.initIsTeamManager(completion: { (success) in
                     Global.instance.removeSpinner(superView: self.view)
+                    if self.status == "off" {
+                        self.memberOne.append(["temp_play_status": ["title":"取消", "value":self.off_at.noSec()]])
+                    }
                     self.tableView.reloadData()
                 })
             } else {

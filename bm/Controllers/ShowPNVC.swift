@@ -35,8 +35,8 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         
         let cellNib = UINib(nibName: "PNCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 600
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        //tableView.estimatedRowHeight = 800
         
         OneSignal.promptForPushNotifications { (accepted) in
             //print("User accepted notifications: \(accepted)")
@@ -98,19 +98,25 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         }
     }
     
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: PNCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! PNCell
         if pnArr != nil {
             let idx = indexPath.row
             let obj: [String: String] = pnArr![pnArr!.count-1-idx]
             let id = obj["id"]!
+            var pnID = ""
+            if obj["pnid"] != nil {
+                pnID = obj["pnid"]!
+            }
             var title: String?
             if obj["title"] != nil {
                 title = obj["title"]!
             }
             let content: String = obj["content"]!
             cell.thisDelegate = self
-            cell.update(id: id, title: title, content: content)
+            cell.update(id: id, title: title, content: content, pnID: pnID)
         }
         return cell
     }

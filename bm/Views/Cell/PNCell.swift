@@ -18,6 +18,7 @@ class PNCell: SuperCell {
     @IBOutlet var titleHeightCons: NSLayoutConstraint!
     @IBOutlet var contentTV: UITextView!
     @IBOutlet var idLbl: UILabel!
+    @IBOutlet var pnIDLbl: UILabel!
     
     var thisDelegate: PNCellDelegate?
 
@@ -27,7 +28,7 @@ class PNCell: SuperCell {
         
     }
     
-    func update(id: String, title: String?, content: String) {
+    func update(id: String, title: String?, content: String, pnID: String) {
         idLbl.text = id
         if title != nil && title!.count > 0 {
 //            titleLbl.isHidden = false
@@ -46,6 +47,8 @@ class PNCell: SuperCell {
         contentTV.translatesAutoresizingMaskIntoConstraints = true
         contentTV.isScrollEnabled = false
         contentTV.sizeToFit()
+        
+        pnIDLbl.text = pnID
     }
 
     @IBAction func clearBtnPressed(sender: UIButton) {

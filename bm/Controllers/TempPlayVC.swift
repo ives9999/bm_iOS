@@ -36,6 +36,7 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
         super.viewDidLoad()
         //print(degrees)
         
+        
         NotificationCenter.default.addObserver(self, selector: #selector(memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     
         tableView.register(TeamTempPlayListCell.self, forCellReuseIdentifier: "cell")

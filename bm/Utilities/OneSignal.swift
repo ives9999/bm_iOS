@@ -11,7 +11,23 @@ import UIKit
 import OneSignal
 import SwiftyJSON
 
-class MyNotificationOpenedHandler {
+class MyNotification {
+    
+    func getServerPNID(data: Dictionary<AnyHashable, Any>)-> String {
+        let member_id = String(Member.instance.id)
+        var id = "0"
+        for (key, value) in data {
+            let tmp = value as! String
+            if tmp == member_id {
+                id = key as! String
+            }
+        }
+        
+        return id
+    }
+}
+
+class MyNotificationOpenedHandler: MyNotification {
     static let instance = MyNotificationOpenedHandler()
     
     func notificationOpened(result: OSNotificationOpenedResult?) {
@@ -23,23 +39,25 @@ class MyNotificationOpenedHandler {
             let title = result!.notification.payload.title
             let content = result!.notification.payload.body
             
+            var pnID = "0"
             if (data != nil) {
-                let customKey = data!["customkey"] as! String
-                if (customKey != nil) {
+                //let customKey = data!["customkey"] as! String
+                //if (customKey != nil) {
                     //print("OpenedHandler customkey set with value: $customKey")
-                }
+                //}
+                pnID = getServerPNID(data: data!)
             }
             
             //if (actionType == OSNotificationAction.) {
                 //            println("OpenedHandler Button pressed with id: ${result.action.actionID}")
             //}
             print("open handle")
-            MyOneSignal.instance.save(id: id!, title: title, content: content!)
+            MyOneSignal.instance.save(id: id!, title: title, content: content!, pnID: pnID)
         }
     }
 }
 
-class MyNotificationReceivedHandler {
+class MyNotificationReceivedHandler: MyNotification {
     static let instance = MyNotificationReceivedHandler()
     
     func notificationReceived(notification: OSNotification?) {
@@ -54,13 +72,19 @@ class MyNotificationReceivedHandler {
             let subtitle = notification!.payload.subtitle
             let launchURL = notification!.payload.launchURL
             let sound = notification!.payload.sound
-            let additionalData = notification!.payload.additionalData
             let attachments = notification!.payload.attachments
             let actionButtons = notification!.payload.actionButtons
             let rawPayload = notification!.payload.rawPayload
             
+//            print("additionalData = \(data)")
+            var pnID = "0"
+            if (data != nil) {
+                pnID = getServerPNID(data: data!)
+                //print(pnID)
+            }
+            
             print("receive handle")
-            MyOneSignal.instance.save(id: id!, title: title, content: content!)
+            MyOneSignal.instance.save(id: id!, title: title, content: content!, pnID: pnID)
         }
     }
 }
@@ -69,12 +93,15 @@ class MyOneSignal {
     static let instance = MyOneSignal()
     
     let session: UserDefaults = UserDefaults.standard
-    func save(id: String, title: String?, content: String) {
+    func save(id: String, title: String?, content: String, pnID: String) {
         //session.removeObject(forKey: "pn")
         var pnObj:Dictionary<String, String> = ["id": id, "content": content]
         if title != nil {
             pnObj["title"] = title!
         }
+        //if pnID > 0 {
+            pnObj["pnid"] = pnID
+        //}
         var pnArr = self.getSession()
         if pnArr == nil {
             pnArr = Array<Dictionary<String, String>>()
@@ -86,6 +113,10 @@ class MyOneSignal {
                 session.set(pnArr, forKey: "pn")
             }
         }
+        
+        //if (pnID > 0) {
+            session.set("pnid", pnID)
+        //}
         
         //let res = (session.array(forKey: "pn") as! Array<Dictionary<String, String>>)
         //print(res)

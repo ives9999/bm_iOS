@@ -29,12 +29,12 @@ class TempPlaySignupCell: SuperCell {
 //        contentView.addConstraints(constraints)
         
         
-        let nameLblC1: NSLayoutConstraint = NSLayoutConstraint(item: nameLbl, attribute: .leading, relatedBy: .equal, toItem: nameLbl.superview, attribute: .leading, multiplier: 1, constant: 30)
+        let nameLblC1: NSLayoutConstraint = NSLayoutConstraint(item: nameLbl, attribute: .leading, relatedBy: .equal, toItem: nameLbl.superview, attribute: .leading, multiplier: 1, constant: 4)
         let nameLblC2: NSLayoutConstraint = NSLayoutConstraint(item: nameLbl, attribute: .centerY, relatedBy: .equal, toItem: nameLbl.superview, attribute: .centerY, multiplier: 1, constant: 0)
         nameLbl.translatesAutoresizingMaskIntoConstraints = false
         contentView.addConstraints([nameLblC1,nameLblC2])
         
-        let c1: NSLayoutConstraint = NSLayoutConstraint(item: created_atLbl, attribute: .leading, relatedBy: .equal, toItem: nameLbl, attribute: .trailing, multiplier: 1, constant: 80)
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: created_atLbl, attribute: .leading, relatedBy: .equal, toItem: nameLbl, attribute: .trailing, multiplier: 1, constant: 8)
         let c2: NSLayoutConstraint = NSLayoutConstraint(item: created_atLbl, attribute: .centerY, relatedBy: .equal, toItem: created_atLbl.superview, attribute: .centerY, multiplier: 1, constant: 0)
         created_atLbl.translatesAutoresizingMaskIntoConstraints = false
         contentView.addConstraints([c1,c2])
@@ -51,7 +51,17 @@ class TempPlaySignupCell: SuperCell {
     }
     func forRow(row: [String: String]) {
         //print(frame.width)
-        nameLbl.text = row["nickname"]
+        
+        var status = "on"
+        var status1 = ""
+        if row["status"] != nil {
+            status = row["status"]!
+            if status == "off" {
+                status1 = "(取消)"
+            }
+        }
+        
+        nameLbl.text = "\(row["nickname"]!)\(status1)"
         if let str: String = row["created_at"] {
             //print(str)
             let d: Date = df.date(from: str)!

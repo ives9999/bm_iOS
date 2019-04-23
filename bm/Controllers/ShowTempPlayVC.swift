@@ -134,6 +134,7 @@ class ShowTempPlayVC: MyTableVC {
         //spaceView.backgroundColor = UIColor.red
         
         tableView.register(TempPlaySignupCell.self, forCellReuseIdentifier: "cell")
+        tableView.isScrollEnabled = false
         tableView.backgroundColor = UIColor.black
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
@@ -320,7 +321,9 @@ class ShowTempPlayVC: MyTableVC {
         let row: Dictionary<String, String> = rows[indexPath.row]
         //print(row)
         let id: Int = model.data[ID_KEY]!["value"] as! Int
-        let sender:[String:Any] = ["token":row["token"]!,"title":myTitle,"near_date":nearDate,"id":id]
+        let status: String = row["status"] ?? "on"
+        let off_at: String = row["off_at"] ?? ""
+        let sender:[String:Any] = ["token":row["token"]!,"title":myTitle,"near_date":nearDate,"id":id,"status":status,"off_at":off_at]
         performSegue(withIdentifier: TO_TEMP_PLAY_SIGNUP_ONE, sender: sender)
     }
     
@@ -337,6 +340,8 @@ class ShowTempPlayVC: MyTableVC {
                 vc.near_date = row["near_date"]! as! String
                 vc.team_id = row["id"]! as! Int
                 vc.teamToken = teamToken
+                vc.status = row["status"]! as! String
+                vc.off_at = row["off_at"]! as! String
             }
         }
     }
