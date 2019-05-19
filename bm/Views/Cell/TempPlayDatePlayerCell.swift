@@ -13,12 +13,16 @@ protocol TempPlayDatePlayerCellDelegate {
 }
 class TempPlayDatePlayerCell: SuperCell {
     
+    var noLbl: MyLabel!
     var titleLbl: MyLabel!
     var mobileLbl: MyLabel!
     var tempPlayDatePlayerCellDelegate: TempPlayDatePlayerCellDelegate?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
+        
+        noLbl = MyLabel(frame: CGRect.zero)
+        contentView.addSubview(noLbl)
         
         titleLbl = MyLabel(frame: CGRect.zero)
         contentView.addSubview(titleLbl)
@@ -34,7 +38,13 @@ class TempPlayDatePlayerCell: SuperCell {
     
     func _constraint() {
         var c1: NSLayoutConstraint, c2: NSLayoutConstraint
-        c1 = NSLayoutConstraint(item: titleLbl, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 8)
+        
+        c1 = NSLayoutConstraint(item: noLbl, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 8)
+        c2 = NSLayoutConstraint(item: noLbl, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 15)
+        noLbl.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints([c1,c2])
+        
+        c1 = NSLayoutConstraint(item: titleLbl, attribute: .leading, relatedBy: .equal, toItem: noLbl, attribute: .trailing, multiplier: 1, constant: 8)
         c2 = NSLayoutConstraint(item: titleLbl, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 15)
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
         contentView.addConstraints([c1,c2])
@@ -55,8 +65,16 @@ class TempPlayDatePlayerCell: SuperCell {
     
     func setRow(row: TempPlayDatePlayer.Row, position: Int) {
         
-        titleLbl.text = row.name
+        var name = row.name
         mobileLbl.text = row.mobile
+        
+        noLbl.text = String(position+1) + "."
+        
+        if row.status == "off" {
+            name = name + "(取消)"
+        }
+        titleLbl.text = name
+        
         accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         mobileLbl.tag = position
         let tap = UITapGestureRecognizer(target: self, action: #selector(call))

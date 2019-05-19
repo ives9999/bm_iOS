@@ -28,8 +28,8 @@ class ShowTempPlayVC: MyTableVC {
     var leaderLbl: SuperLabel!
     var mobileLbl: SuperLabel!
     var degreeLbl: SuperLabel!
-    var plusOneBtn: SubmitButton!
-    var cancelPlusOneBtn: CancelButton!
+//    var plusOneBtn: SubmitButton!
+//    var cancelPlusOneBtn: CancelButton!
     var tableView: UITableView!
     
     var items: [Any] = [Any]()
@@ -47,13 +47,13 @@ class ShowTempPlayVC: MyTableVC {
     
     //var refreshControl: UIRefreshControl!
     
-    
-
     // outlet
     @IBOutlet weak var titleLbl: UILabel!
     //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var tempPlayBtn: UIButton!
+    @IBOutlet weak var buttomView: StaticBottomView!
+    @IBOutlet weak var plusOneButton: SubmitButton!
+    @IBOutlet weak var cancelPlusButton: CancelButton!
     
     override func viewDidLoad() {
         model = Team.instance
@@ -62,10 +62,15 @@ class ShowTempPlayVC: MyTableVC {
         
         super.viewDidLoad()
         
+        plusOneButton.setTitle("報名臨打")
+        cancelPlusButton.setTitle("取消報名")
+        
         scrollView = UIScrollView(frame: CGRect(x: 0, y: headerView.frame.height + STATUSBAR_HEIGHT, width: view.bounds.width, height: view.bounds.height))
         scrollView.backgroundColor = UIColor.black
         scrollView.contentSize = CGSize(width: view.bounds.width, height: 5000)
         view.addSubview(scrollView)
+        
+        view.bringSubview(toFront: buttomView)
         
         containerView = UIView(frame: CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height))
         containerView.backgroundColor = UIColor.clear
@@ -95,8 +100,8 @@ class ShowTempPlayVC: MyTableVC {
         leaderLbl = SuperLabel()
         mobileLbl = SuperLabel()
         degreeLbl = SuperLabel()
-        plusOneBtn = SubmitButton()
-        cancelPlusOneBtn = CancelButton()
+        //plusOneBtn = SubmitButton()
+        //cancelPlusOneBtn = CancelButton()
         
         containerView.addSubview(cityBtn)
         containerView.addSubview(arenaBtn)
@@ -110,8 +115,8 @@ class ShowTempPlayVC: MyTableVC {
         containerView.addSubview(leaderLbl)
         containerView.addSubview(mobileLbl)
         containerView.addSubview(degreeLbl)
-        containerView.addSubview(plusOneBtn)
-        containerView.addSubview(cancelPlusOneBtn)
+        //containerView.addSubview(plusOneBtn)
+        //containerView.addSubview(cancelPlusOneBtn)
         containerView.addSubview(tableView)
         
 //        cityBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
@@ -125,12 +130,12 @@ class ShowTempPlayVC: MyTableVC {
 //        cancelPlusOneBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
 //        plusOneBtn.cornerRadius(18)
 //        cancelPlusOneBtn.cornerRadius(18)
-        plusOneBtn.addTarget(self, action: #selector(plusOne(_:)), for: UIControlEvents.touchUpInside)
-        cancelPlusOneBtn.addTarget(self, action: #selector(cancelPlusOne(_:)), for: UIControlEvents.touchUpInside)
-        plusOneBtn.setTitle("我要臨打", for: .normal)
-        cancelPlusOneBtn.setTitle("取消臨打", for: .normal)
-        plusOneBtn.sizeToFit()
-        cancelPlusOneBtn.sizeToFit()
+//        plusOneBtn.addTarget(self, action: #selector(plusOne(_:)), for: UIControlEvents.touchUpInside)
+//        cancelPlusOneBtn.addTarget(self, action: #selector(cancelPlusOne(_:)), for: UIControlEvents.touchUpInside)
+//        plusOneBtn.setTitle("我要臨打", for: .normal)
+//        cancelPlusOneBtn.setTitle("取消臨打", for: .normal)
+//        plusOneBtn.sizeToFit()
+//        cancelPlusOneBtn.sizeToFit()
         //spaceView.backgroundColor = UIColor.red
         
         tableView.register(TempPlaySignupCell.self, forCellReuseIdentifier: "cell")
@@ -143,14 +148,12 @@ class ShowTempPlayVC: MyTableVC {
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         scrollView.addSubview(refreshControl)
         
-        tempPlayBtn.contentEdgeInsets = UIEdgeInsets(top: 4, left: 10, bottom: 2, right: 10)
-        tempPlayBtn.layer.cornerRadius = 12
-        
         //print(view.frame)
         
         _layout()
         refresh()
     }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         //print("view did layout subviews")
@@ -167,6 +170,7 @@ class ShowTempPlayVC: MyTableVC {
         
         self.view.layoutIfNeeded()
     }
+ 
     //override func updateViewConstraints() {
         
     //}
@@ -241,18 +245,18 @@ class ShowTempPlayVC: MyTableVC {
         containerView.addConstraint(arenaBtnC2)
         
         
-        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 6)
-        let allW: CGFloat = view.frame.width / 2
-        let w1: CGFloat = plusOneBtn.frame.width
-        let plusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW - w1 - constant.name_left_padding)
-        plusOneBtn.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addConstraints([plusOneBtnC1,plusOneBtnC2])
-        
-        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 6)
-        let cancelPlusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW + constant.name_left_padding)
-        cancelPlusOneBtn.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addConstraint(cancelPlusOneBtnC1)
-        containerView.addConstraint(cancelPlusOneBtnC2)
+//        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 6)
+//        let allW: CGFloat = view.frame.width / 2
+//        let w1: CGFloat = plusOneBtn.frame.width
+//        let plusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW - w1 - constant.name_left_padding)
+//        plusOneBtn.translatesAutoresizingMaskIntoConstraints = false
+//        containerView.addConstraints([plusOneBtnC1,plusOneBtnC2])
+//
+//        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 6)
+//        let cancelPlusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW + constant.name_left_padding)
+//        cancelPlusOneBtn.translatesAutoresizingMaskIntoConstraints = false
+//        containerView.addConstraint(cancelPlusOneBtnC1)
+//        containerView.addConstraint(cancelPlusOneBtnC2)
     }
     
     override func refresh() {
@@ -388,7 +392,7 @@ class ShowTempPlayVC: MyTableVC {
             })
         }
 
-        warning(msg: "報名臨打後，將會公開您的姓名與手機號碼給球隊管理員，方便球隊管理員跟您連絡\n是否真的要參加此球隊的臨打？", closeButtonTitle: "取消報名", buttonTitle: "確定臨打") {
+        warning(msg: "報名臨打後，將會公開您的姓名與手機號碼給球隊管理員，方便球隊管理員跟您連絡\n是否真的要參加此球隊的臨打？", closeButtonTitle: "取消", buttonTitle: "確定") {
                 self._plusOne()
         }
     }
@@ -409,7 +413,7 @@ class ShowTempPlayVC: MyTableVC {
             }
         }
     }
-    @objc func cancelPlusOne(_ sender:Any) {
+    @IBAction func cancelPlusOne(_ sender:Any) {
         if !Member.instance.isLoggedIn {
             SCLAlertView().showWarning("警告", subTitle: "請先登入為會員")
             return

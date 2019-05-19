@@ -20,6 +20,8 @@ class TempPlayDatePlayer: SuperModel {
         @objc dynamic var name: String = ""
         @objc dynamic var mobile: String = ""
         @objc dynamic var token: String = ""
+        @objc dynamic var status: String = "on"
+        @objc dynamic var off_at: String = ""
         @objc dynamic var play_date: String = ""
         @objc dynamic var created_at: String = ""
         @objc dynamic var updated_at: String = ""

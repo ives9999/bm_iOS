@@ -23,6 +23,7 @@ class MemberService {
         let lowerCaseEmail = email.lowercased()
         let body: [String: Any] = ["source": "app", "email": lowerCaseEmail, "password": password, "player_id": playerID]
         //print(body)
+        //print(URL_LOGIN)
         
         Alamofire.request(URL_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {

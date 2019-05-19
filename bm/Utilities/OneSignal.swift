@@ -51,7 +51,7 @@ class MyNotificationOpenedHandler: MyNotification {
             //if (actionType == OSNotificationAction.) {
                 //            println("OpenedHandler Button pressed with id: ${result.action.actionID}")
             //}
-            print("open handle")
+            //print("open handle")
             MyOneSignal.instance.save(id: id!, title: title, content: content!, pnID: pnID)
         }
     }
@@ -83,7 +83,7 @@ class MyNotificationReceivedHandler: MyNotification {
                 //print(pnID)
             }
             
-            print("receive handle")
+            //print("receive handle")
             MyOneSignal.instance.save(id: id!, title: title, content: content!, pnID: pnID)
         }
     }

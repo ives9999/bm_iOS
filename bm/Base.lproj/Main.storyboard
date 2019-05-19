@@ -94,7 +94,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="FW3-GB-Cpk"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="HDk-Tt-pwL"/>
                                             <action selector="prevBtnPressed:" destination="F2b-4T-551" eventType="touchUpInside" id="cLY-Gz-VfT"/>
                                             <action selector="prevBtnPressed:" destination="tTg-jR-J80" eventType="touchUpInside" id="ddR-8A-QCq"/>
@@ -2249,7 +2248,6 @@
                                         <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="LPl-7I-nuE" eventType="touchUpInside" id="7Or-ye-iw1"/>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="ADy-hH-0YY"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="Dng-kx-R7c"/>
                                         </connections>
                                     </button>
@@ -2427,7 +2425,6 @@
                                 </constraints>
                                 <state key="normal" image="prev"/>
                                 <connections>
-                                    <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="B06-gX-dai"/>
                                     <action selector="prevBtnPressed:" destination="89D-SL-Zb3" eventType="touchUpInside" id="WPs-ap-r8s"/>
                                     <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="jeb-UX-ASC"/>
                                 </connections>
@@ -2494,7 +2491,7 @@
                                         <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="DGI-iw-IlB"/>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="n3c-0i-59w"/>
+                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="fCx-BK-1qG"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="3aq-jw-zQW">
@@ -2517,28 +2514,38 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVL-bJ-APa" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="617" width="375" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEn-SQ-gja">
-                                        <rect key="frame" x="154.5" y="7.5" width="66" height="35"/>
-                                        <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="35" id="sdz-AM-jWG"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
-                                        <state key="normal" title="我要臨打">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="abK-Gf-6De"/>
-                                            <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="K58-hr-qhQ"/>
-                                        </connections>
-                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Its-0c-UjM">
+                                        <rect key="frame" x="117.5" y="7.5" width="140" height="35"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VEn-SQ-gja" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="62" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="gbV-qf-wM7"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="我要臨打"/>
+                                                <connections>
+                                                    <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="abK-Gf-6De"/>
+                                                    <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="p0o-LJ-hGx"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g60-MJ-d0q" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="78" y="0.0" width="62" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="Cmj-8C-Zx6"/>
+                                                </constraints>
+                                                <state key="normal" title="取消臨打"/>
+                                                <connections>
+                                                    <action selector="cancelPlusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="9oN-1a-g3f"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="E6j-xi-LkM"/>
-                                    <constraint firstItem="VEn-SQ-gja" firstAttribute="centerX" secondItem="MVL-bJ-APa" secondAttribute="centerX" id="GtK-xH-IZD"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Ooe-Kq-VQg"/>
-                                    <constraint firstItem="VEn-SQ-gja" firstAttribute="centerY" secondItem="MVL-bJ-APa" secondAttribute="centerY" id="d54-j7-0d9"/>
+                                    <constraint firstItem="Its-0c-UjM" firstAttribute="centerX" secondItem="MVL-bJ-APa" secondAttribute="centerX" id="lmQ-Lu-Gv6"/>
+                                    <constraint firstItem="Its-0c-UjM" firstAttribute="centerY" secondItem="MVL-bJ-APa" secondAttribute="centerY" id="m8H-I8-GNy"/>
                                     <constraint firstAttribute="height" constant="50" id="tOF-Kz-fTm"/>
                                 </constraints>
                             </view>
@@ -2555,8 +2562,10 @@
                         <viewLayoutGuide key="safeArea" id="obQ-5G-fgW"/>
                     </view>
                     <connections>
+                        <outlet property="buttomView" destination="MVL-bJ-APa" id="KaL-BC-klh"/>
+                        <outlet property="cancelPlusButton" destination="g60-MJ-d0q" id="QCL-gg-iPx"/>
                         <outlet property="headerView" destination="kjd-vi-xhQ" id="fHJ-54-5xu"/>
-                        <outlet property="tempPlayBtn" destination="VEn-SQ-gja" id="c77-rM-TsO"/>
+                        <outlet property="plusOneButton" destination="VEn-SQ-gja" id="eST-cQ-DBE"/>
                         <outlet property="titleLbl" destination="31T-Ck-L6a" id="tuQ-ty-CPS"/>
                         <segue destination="XsO-Wn-cpI" kind="show" identifier="toValidate" id="xcZ-Ad-vEw"/>
                         <segue destination="vfe-V8-Hfx" kind="show" identifier="toProfile" id="cK5-nM-2qW"/>
@@ -2603,7 +2612,6 @@
                                         <connections>
                                             <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="0Kx-Oh-VIk"/>
                                             <action selector="manager:" destination="hk6-fe-bLP" eventType="touchUpInside" id="ngm-MV-LxV"/>
-                                            <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="3yM-SW-tmN"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7B4-96-hjo">
@@ -2791,7 +2799,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="7A1-NE-pyL"/>
                                             <action selector="prevBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="Au2-4Q-6iz"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="cS7-Uq-fnT"/>
                                         </connections>
@@ -2815,7 +2822,6 @@
                                         <connections>
                                             <action selector="addTeamBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="n3q-5S-VKD"/>
                                             <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="EhC-dJ-c1B"/>
-                                            <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="5BN-T5-454"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2885,7 +2891,6 @@
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="0U8-n7-Fnq"/>
                                             <action selector="prevBtnPressed:" destination="F2b-4T-551" eventType="touchUpInside" id="50i-W8-D09"/>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="5Kw-Ju-LnI"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="7LH-Yv-gcd"/>
                                         </connections>
                                     </button>
@@ -3016,7 +3021,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="5fB-09-0Ti"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="s7R-s2-rJv"/>
                                             <action selector="prevBtnPressed:" destination="ZfU-fN-VKi" eventType="touchUpInside" id="uPT-HN-d5X"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="yzi-gR-MvI"/>
@@ -3055,7 +3059,6 @@
                                     <action selector="addTeamBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="SIK-df-NYS"/>
                                     <action selector="addTimeTableBtnPressed:" destination="ZfU-fN-VKi" eventType="touchUpInside" id="eS9-AG-Dlh"/>
                                     <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="HZb-Sb-jmH"/>
-                                    <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="shP-oL-bDx"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="ifh-wV-c6X">
@@ -3223,7 +3226,6 @@
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="AQZ-Aj-ZiA"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="gVh-Kn-c1f"/>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="uPq-DY-Ctv"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理功能" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mT7-32-00D">
@@ -3298,7 +3300,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="JGJ-JU-sf1"/>
                                             <action selector="prevBtnPressed:" destination="R6S-rJ-jUX" eventType="touchUpInside" id="Oco-sz-hro"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="OwV-RM-UCP"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="po4-IX-E7S"/>
@@ -3377,7 +3378,6 @@
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="PMY-vs-biN"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="Z2e-op-6gO"/>
                                             <action selector="prevBtnPressed:" destination="GuJ-5M-2A0" eventType="touchUpInside" id="ZgQ-av-xep"/>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="mmx-Mz-BIo"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期臨打球友列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFD-E4-vIm">
@@ -3451,7 +3451,6 @@
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="ivA-0I-eys" eventType="touchUpInside" id="4GF-bc-Fka"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="Evf-ql-coi"/>
-                                            <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="Nzt-Zf-ul8"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="unO-mJ-81d"/>
                                         </connections>
                                     </button>
@@ -3890,7 +3889,6 @@
                                             <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="yAw-By-Cpv"/>
                                             <action selector="manager:" destination="hk6-fe-bLP" eventType="touchUpInside" id="Wko-sd-grq"/>
                                             <action selector="manager:" destination="fEf-Ib-3oR" eventType="touchUpInside" id="z6l-FF-9SV"/>
-                                            <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="Mv1-5m-qFc"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -4602,11 +4600,11 @@
         <image name="tempPlay" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="EfF-hk-cE7"/>
+        <segue reference="2Di-nR-q4w"/>
         <segue reference="Lp8-ui-LgL"/>
         <segue reference="mvW-Q8-ZFE"/>
-        <segue reference="cUS-kZ-A2j"/>
-        <segue reference="EKU-tT-H1i"/>
+        <segue reference="H3p-LU-aVa"/>
+        <segue reference="itP-1S-HdR"/>
         <segue reference="xCT-HQ-HRw"/>
         <segue reference="oKL-Gk-zBn"/>
         <segue reference="Wr7-FG-b1z"/>
@@ -4616,7 +4614,7 @@
         <segue reference="Ym7-zQ-SHb"/>
         <segue reference="DaT-w5-CTD"/>
         <segue reference="cK5-nM-2qW"/>
-        <segue reference="XnZ-GS-Ao0"/>
+        <segue reference="CFj-m8-ABA"/>
         <segue reference="q87-Mu-6YG"/>
         <segue reference="EIA-wN-WfT"/>
     </inferredMetricsTieBreakers>
