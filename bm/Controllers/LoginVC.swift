@@ -55,7 +55,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
             Global.instance.removeSpinner(superView: self.view)
             if success {
                 if MemberService.instance.success {
-                    Session.shared.loginReset = true
+                    //Session.shared.loginReset = true
                     //print("login success")
                     //print(Global.instance.member.nickname)
                     if MemberService.instance.msg.count > 0 {
@@ -84,7 +84,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
             if success {
                 //print("login fb success")
                 self._loginFB()
-                Session.shared.loginReset = true
+                //Session.shared.loginReset = true
             } else {
                 print("login fb failure")
             }

@@ -51,6 +51,7 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         beginRefresh()
         scrollView.addSubview(refreshControl)
         refresh()
+        //UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     override func viewDidLayoutSubviews() {

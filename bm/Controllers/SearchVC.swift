@@ -58,18 +58,18 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
 //        citys.append(City(id: 218, name: ""))
 //        citys.append(City(id: 257, name: ""))
         //Session.shared.clear(key: Session.shared.loginResetKey)
-        if !Session.shared.exist(key: Session.shared.loginResetKey) {
-            Session.shared.loginReset = gReset
-        }
+//        if !Session.shared.exist(key: Session.shared.loginResetKey) {
+//            Session.shared.loginReset = gReset
+//        }
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        gReset = Session.shared.loginReset
-        if !gReset {
-            info("因為更新APP系統，請重新登出再登入，方能正常使用會員功能")
-        }
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        gReset = Session.shared.loginReset
+//        if !gReset {
+//            info("因為更新APP系統，請重新登出再登入，方能正常使用會員功能")
+//        }
+//    }
     
     @IBAction func submit(_ sender: Any) {
         performSegue(withIdentifier: TO_TEMP_PLAY_LIST, sender: nil)

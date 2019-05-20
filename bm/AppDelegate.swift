@@ -127,18 +127,18 @@ extension AppDelegate {
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         //use response.notification.request.content.userInfo to fetch push data
-        print("didReceive > 10.0")
+        //print("didReceive > 10.0")
     }
     
     // for iOS < 10
     func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
         //use notification.userInfo to fetch push data
-        print("didReceive < 10")
+        //print("didReceive < 10")
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         //use userInfo to fetch push data
-        print("background")
+        //print("background")
     }
 }
 

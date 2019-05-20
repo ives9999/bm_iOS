@@ -16,16 +16,16 @@ class Session: NSObject {
     
     private let UD = UserDefaults.standard
     
-    public let loginResetKey = "login_reset"
+    //public let loginResetKey = "login_reset"
     
-    var loginReset: Bool {
-        get {
-            return UD.bool(forKey: loginResetKey)
-        }
-        set {
-            UD.set(loginResetKey, newValue)
-        }
-    }
+//    var loginReset: Bool {
+//        get {
+//            return UD.bool(forKey: loginResetKey)
+//        }
+//        set {
+//            UD.set(loginResetKey, newValue)
+//        }
+//    }
     
     func clear(key: String) {
         if exist(key: key) {
