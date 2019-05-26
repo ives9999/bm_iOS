@@ -35,7 +35,8 @@ class ManagerFunctionVC: MyTableVC {
                 ["text": "編輯", "icon": "edit1", "segue": TO_EDIT],
                 ["text": "教球時段編輯", "icon": "tempplayedit", "segue": TO_TIMETABLE],
                 //["text": "報名學員名單", "icon": "tempplaylist", "segue": TO_COACH_SIGNUP],
-                ["text": "刪除", "icon": "clear", "segue": TO_DELETE]
+                ["text": "刪除", "icon": "clear", "segue": TO_DELETE],
+                ["text": "課程", "icon": "course", "segue": TO_MANAGER_COURSE]
             ]
         } else if source == "arena" {
             _rows = [
@@ -66,7 +67,9 @@ class ManagerFunctionVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row: [String: Any] = _rows[indexPath.row]
-        if indexPath.row == _rows.count-1 {
+        let segue = row["segue"] as! String
+        
+        if segue == TO_DELETE {
             let appearance = SCLAlertView.SCLAppearance(
                 showCloseButton: false
             )
@@ -79,7 +82,7 @@ class ManagerFunctionVC: MyTableVC {
             })
             alert.showWarning("警告", subTitle: "是否確定要刪除")
         } else {
-            let segue = row["segue"] as! String
+            
             //print(segue)
             performSegue(withIdentifier: segue, sender: token)
         }
@@ -103,6 +106,10 @@ class ManagerFunctionVC: MyTableVC {
             vc.source = source
         } else if segue.identifier == TO_COACH_SIGNUP {
             
+        } else if segue.identifier == TO_MANAGER_COURSE {
+            let vc: ManagerCourseVC = segue.destination as! ManagerCourseVC
+            vc.token = token
+            vc.name = name
         }
     }
     

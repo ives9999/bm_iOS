@@ -15,8 +15,8 @@ typealias DATA = Dictionary<String, [String: Any]>
 let CHANNEL = "bm"
 
 // URL Constants
-let REMOTE_BASE_URL = "https://bm.sportpassword.com"
-//let REMOTE_BASE_URL = "http://192.168.100.100"
+//let REMOTE_BASE_URL = "https://bm.sportpassword.com"
+let REMOTE_BASE_URL = "http://192.168.100.100"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 let URL_HOME = "\(BASE_URL)/app/"
@@ -58,6 +58,8 @@ let URL_TEAM_TEMP_PLAY_DATE_PLAYER = URL_TEAM + "tempPlay/datePlayer"
 let URL_COACH = URL_HOME + "coach/"
 let URL_SIGNUP = "\(URL_HOME)%@/signup/%@"
 let URL_CANCEL_SIGNUP = "\(URL_HOME)%@/cancelSignup/%d"
+
+let URL_COURSE_LIST = "\(URL_HOME)course"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"
@@ -106,6 +108,7 @@ let TO_COURSE: String = "toCourse"
 let TO_COACH: String = "toCoach"
 let TO_MANAGER: String = "toManager"
 let TO_MANAGER_FUNCTION: String = "toManagerFunction"
+let TO_MANAGER_COURSE: String = "toManagerCourse"
 let TO_COACH_MANAGER_FUNCTION: String = "toCoachManagerFunction"
 let TO_COACH_SIGNUP: String = "toCoachSignup"
 let TO_TIMETABLE: String = "toTimeTable"
@@ -245,6 +248,7 @@ let VIMEO_KEY = "vimeo"
 let FB_KEY = "fb"
 let LINE_KEY = "line"
 let CITY_KEY = "city"
+let CITYS_KEY = "citys"
 let AREA_KEY = "area"
 let ARENA_KEY = "arena"
 let ROAD_KEY = "road"

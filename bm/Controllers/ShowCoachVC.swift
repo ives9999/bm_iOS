@@ -378,19 +378,27 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func setData() {
-        city_id = superCoach!.city.id
-        params["city_id"] = [city_id]
-        params["city_type"] = "all"
-        cityBtn.setTitle(superCoach!.city.name)
-        //print(BASE_URL + superCoach!.featured_path)
-        //featuredView.af_setImage(withURL: URL(string: BASE_URL + superCoach!.featured_path)!)
-        featuredView.image = featured
-        setContact()
-        setWeb(webView: chargeWebView, content: superCoach!.charge)
-        setWeb(webView: expWebView, content: superCoach!.exp)
-        setWeb(webView: licenseWebView, content: superCoach!.license)
-        setWeb(webView: featWebView, content: superCoach!.feat)
-        setWeb(webView: detailWebView, content: superCoach!.content)
+        if superCoach != nil {
+            if superCoach!.citys.count > 0 {
+                for city in superCoach!.citys {
+                    city_id = city.id
+                    params["city_id"] = [city_id]
+                    params["city_type"] = "all"
+                    cityBtn.setTitle(city.name)
+                }
+            } else {
+                cityBtn.isHidden = true
+            }
+            //print(BASE_URL + superCoach!.featured_path)
+            //featuredView.af_setImage(withURL: URL(string: BASE_URL + superCoach!.featured_path)!)
+            featuredView.image = featured
+            setContact()
+            setWeb(webView: chargeWebView, content: superCoach!.charge)
+            setWeb(webView: expWebView, content: superCoach!.exp)
+            setWeb(webView: licenseWebView, content: superCoach!.license)
+            setWeb(webView: featWebView, content: superCoach!.feat)
+            setWeb(webView: detailWebView, content: superCoach!.content)
+        }
     }
     
     func setContact() {

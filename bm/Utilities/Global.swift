@@ -199,6 +199,146 @@ enum DEGREE: String {
         return degrees
     }
 }
+
+enum PRICE_UNIT: String {
+    
+    case month = "月"
+    case week = "週"
+    
+    static func enumFromString(string: String) -> PRICE_UNIT {
+        switch string {
+        case "month" :
+            return self.month
+        case "week" :
+            return self.week
+        default :
+            return self.month
+        }
+    }
+    
+    static func DBValue(_ price_unit: PRICE_UNIT) -> String {
+        var res: String = ""
+        switch price_unit {
+        case .month:
+            res = "month"
+            break
+        case .week:
+            res = "week"
+            break
+        }
+        return res
+    }
+    
+    static func all() -> [PRICE_UNIT: String] {
+        var price_units: [PRICE_UNIT: String] = [PRICE_UNIT: String]()
+        price_units[PRICE_UNIT.month] = "月"
+        price_units[PRICE_UNIT.week] = "週"
+        return price_units
+    }
+}
+
+enum PRICE_KIND: String {
+    
+    case one = "一次性"
+    case cycle = "週期性"
+    
+    static func enumFromString(string: String) -> PRICE_KIND {
+        switch string {
+        case "one" :
+            return self.one
+        case "cycle" :
+            return self.cycle
+        default :
+            return self.cycle
+        }
+    }
+    
+    static func DBValue(_ price_kind: PRICE_KIND) -> String {
+        var res: String = ""
+        switch price_kind {
+        case .one:
+            res = "one"
+            break
+        case .cycle:
+            res = "cycle"
+            break
+        }
+        return res
+    }
+    
+    static func all() -> [PRICE_KIND: String] {
+        var price_kinds: [PRICE_KIND: String] = [PRICE_KIND: String]()
+        price_kinds[PRICE_KIND.one] = "一次性"
+        price_kinds[PRICE_KIND.cycle] = "週期性"
+        return price_kinds
+    }
+}
+
+enum PRICE_CYCLE_UNIT: String {
+    
+    case month = "每月"
+    case week = "每週"
+    case season = "每季"
+    case year = "每年"
+    case span = "每期"
+    case other = "其他"
+    
+    static func enumFromString(string: String) -> PRICE_CYCLE_UNIT {
+        switch string {
+        case "month" :
+            return self.month
+        case "week" :
+            return self.week
+        case "season" :
+            return self.season
+        case "year" :
+            return self.year
+        case "span" :
+            return self.span
+        case "other" :
+            return self.other
+        default :
+            return self.month
+        }
+    }
+    
+    static func DBValue(_ price_cycle_unit: PRICE_CYCLE_UNIT) -> String {
+        var res: String = ""
+        switch price_cycle_unit {
+        case .month:
+            res = "month"
+            break
+        case .week:
+            res = "week"
+            break
+        case .season:
+            res = "season"
+            break
+        case .year:
+            res = "year"
+            break
+        case .span:
+            res = "span"
+            break
+        case .other:
+            res = "other"
+            break
+        }
+        return res
+    }
+    
+    static func all() -> [PRICE_CYCLE_UNIT: String] {
+        var price_cycle_units: [PRICE_CYCLE_UNIT: String] = [PRICE_CYCLE_UNIT: String]()
+        price_cycle_units[PRICE_CYCLE_UNIT.month] = "每月"
+        price_cycle_units[PRICE_CYCLE_UNIT.week] = "每週"
+        price_cycle_units[PRICE_CYCLE_UNIT.season] = "每季"
+        price_cycle_units[PRICE_CYCLE_UNIT.year] = "每年"
+        price_cycle_units[PRICE_CYCLE_UNIT.span] = "每期"
+        price_cycle_units[PRICE_CYCLE_UNIT.other] = "其他"
+        return price_cycle_units
+    }
+}
+
 let df : DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

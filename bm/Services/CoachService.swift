@@ -90,6 +90,7 @@ class CoachService: DataService {
     }
     
     func _jsonToData(tmp: JSON, key: String, item: [String: Any]) {
+        //print(tmp)
         var value: Any?
         let type: String = item["vtype"] as! String
         if type == "Int" {
@@ -113,11 +114,14 @@ class CoachService: DataService {
                 model.mobileShow()
             }
         } else if type == "array" {
-            if key == CITY_KEY {
-                let id: Int = tmp["id"].intValue
-                let name: String = tmp["name"].stringValue
-                let city: City = City(id: id, name: name)
-                model.updateCity(city)
+            if key == CITYS_KEY {
+                var arr: [JSON] = tmp.arrayValue
+                for obj1 in arr {
+                    let id: Int = obj1["id"].intValue
+                    let name: String = obj1["name"].stringValue
+                    let city: City = City(id: id, name: name)
+                    model.updateCity(city)
+                }
             }
         }
     }

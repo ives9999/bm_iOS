@@ -10,7 +10,7 @@ import Foundation
 
 @objc(SuperCoach)
 class SuperCoach: SuperModel {
-    @objc dynamic var city: SuperCity = SuperCity()
+    @objc dynamic var citys: Array<SuperCity> = Array()
     //@objc dynamic var city: Dictionary = [String: Any]()
     @objc dynamic var id: Int = -1
     @objc dynamic var name: String = ""
@@ -47,7 +47,7 @@ class SuperCoach: SuperModel {
 
 class SuperCoaches: SuperModel {
     @objc dynamic var success: Bool = false
-    @objc dynamic var rows: [SuperModel] = Array()
+    @objc dynamic var rows: [SuperCoach] = Array()
     
     override func printRows() {
         let row = rows[0]

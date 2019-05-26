@@ -41,9 +41,10 @@ class Coach: SuperData {
             YOUTUBE_KEY:["ch":"youtube","vtype":"String","atype":none,"value":"","show":"","submit":true,"keyboardType":defaultPad,"text_field":true],
             MOBILE_KEY:["ch":"行動電話","vtype":"String","atype":none,"value":"","show":"","submit":true,"keyboardType":numberPad,"text_field":true],
             EMAIL_KEY:["ch":"email","vtype":"String","atype":none,"value":"","show":"","submit":true,"keyboardType":emailPad,"text_field":true],
-            LINE_KEY:["ch":"line id","vtype":"String","atype":none,"value":"","show":"","submit":true,"keyboardType":defaultPad,"text_field":true],
+                LINE_KEY:
+                ["ch":"line id","vtype":"String","atype":none,"value":"","show":"","submit":true,"keyboardType":defaultPad,"text_field":true],
             SLUG_KEY:["ch":"插槽","vtype":"String","value":"","show":""],
-            CITY_KEY:["ch":"區域","vtype":"array","atype":more,"value":0,"show":"","segue":TO_CITY,"sender":0,"submit":true],
+            CITYS_KEY:["ch":"區域","vtype":"array","atype":more,"value":0,"show":"","segue":TO_CITY,"sender":0,"submit":true],
             COACH_SENIORITY_KEY:["ch":"年資","vtype":"Int","atype":none,"value":-1,"show":"","submit":true,"keyboardType":numberPad,"text_field":true],
             COACH_EXP_KEY:["ch":"經歷","vtype":"String","atype":more,"value":"","show":"","segue":TO_TEXT_INPUT,"sender":[String: Any](),"submit":true],
             COACH_FEAT_KEY:["ch":"比賽成績","vtype":"String","atype":more,"value":"","show":"","segue":TO_TEXT_INPUT,"sender":[String: Any](),"submit":true],
@@ -126,6 +127,18 @@ class Coach: SuperData {
                 }
                 data[key1]!["change"] = true
             }
+        }
+    }
+    
+    override func updateCity(_ city: City? = nil) {
+        if (city != nil) {
+            data[CITYS_KEY]!["value"] = city!.id
+            data[CITYS_KEY]!["show"] = city!.name
+            data[CITYS_KEY]!["sender"] = city!.id
+        } else {
+            data[CITYS_KEY]!["value"] = 0
+            data[CITYS_KEY]!["show"] = ""
+            data[CITYS_KEY]!["sender"] = 0
         }
     }
 }

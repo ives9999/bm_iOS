@@ -590,7 +590,11 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     
     func searchCity(indexPath: IndexPath) {
         let row = lists[indexPath.row]
-        let city_id = row.data[CITY_KEY]!["value"] as! Int
+        var key = CITY_KEY
+        if _type == "coach" {
+            key = CITYS_KEY
+        }
+        let city_id = row.data[key]!["value"] as! Int
         citys.removeAll()
         citys.append(City(id: city_id, name: ""))
         prepareParams(city_type: "all")

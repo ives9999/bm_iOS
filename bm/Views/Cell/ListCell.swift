@@ -40,10 +40,7 @@ class ListCell: SuperCell {
         listMarker.padding(top: 0, left: 0, bottom: 0, right: 0)
         listCityBtn.setTextSize(14)
         listCityBtn.alignH = UIControlContentHorizontalAlignment.center
-        if let item = data.data[CITY_KEY] {
-            listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
-            listCityBtn.indexPath = indexPath
-        }
+        
         if iden == "team" {
             listMarker.isHidden = true
             updateTeam(indexPath: indexPath, data: data)
@@ -57,6 +54,10 @@ class ListCell: SuperCell {
     }
     
     func updateTeam(indexPath: IndexPath, data: SuperData) {
+        if let item = data.data[CITY_KEY] {
+            listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
+            listCityBtn.indexPath = indexPath
+        }
         if let item = data.data[ARENA_KEY] {
             listArenaTxt.text = (emptyToSpace(item["show"] as! String))
         }
@@ -71,6 +72,10 @@ class ListCell: SuperCell {
         }
     }
     func updateCoach(indexPath: IndexPath, data: SuperData) {
+        if let item = data.data[CITYS_KEY] {
+            listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
+            listCityBtn.indexPath = indexPath
+        }
         if let item = data.data[MOBILE_KEY] {
             listArenaTxt.text = (item["show"] as! String)
         }
@@ -83,6 +88,10 @@ class ListCell: SuperCell {
         listIntervalTxt.text = ""
     }
     func updateArena(indexPath: IndexPath, data: SuperData) {
+        if let item = data.data[CITY_KEY] {
+            listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
+            listCityBtn.indexPath = indexPath
+        }
         if let item = data.data[TEL_KEY] {
             listArenaTxt.text = (item["show"] as! String)
         }
