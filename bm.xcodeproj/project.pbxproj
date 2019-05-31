@@ -71,6 +71,11 @@
 		B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A210221B6A6D300EE6E1C /* MoreCell.swift */; };
 		B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B34A210321B6A6D300EE6E1C /* MoreCell.xib */; };
 		B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */; };
+		B358B0B0229D4F4F00F1A4E6 /* EditCourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0AF229D4F4F00F1A4E6 /* EditCourseVC.swift */; };
+		B358B0B2229D722300F1A4E6 /* CourseForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B1229D722300F1A4E6 /* CourseForm.swift */; };
+		B358B0B422A0F66A00F1A4E6 /* PriceCycleUnitFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B322A0F66A00F1A4E6 /* PriceCycleUnitFormItem.swift */; };
+		B358B0B622A0FB5200F1A4E6 /* SingleSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B522A0FB5200F1A4E6 /* SingleSelectVC.swift */; };
+		B358B0B822A100EF00F1A4E6 /* SectionFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B722A100EF00F1A4E6 /* SectionFormItem.swift */; };
 		B3591B702164CC6100E0919C /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3591B6F2164CC6100E0919C /* Degree.swift */; };
 		B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35BA6822073C06600B506CA /* BaseViewController.swift */; };
 		B35C4F4C2196F5E500F8AEB2 /* EditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35C4F4A2196F5E500F8AEB2 /* EditCell.swift */; };
@@ -306,6 +311,11 @@
 		B34A210221B6A6D300EE6E1C /* MoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCell.swift; sourceTree = "<group>"; };
 		B34A210321B6A6D300EE6E1C /* MoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreCell.xib; sourceTree = "<group>"; };
 		B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayEditVC.swift; sourceTree = "<group>"; };
+		B358B0AF229D4F4F00F1A4E6 /* EditCourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCourseVC.swift; sourceTree = "<group>"; };
+		B358B0B1229D722300F1A4E6 /* CourseForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseForm.swift; sourceTree = "<group>"; };
+		B358B0B322A0F66A00F1A4E6 /* PriceCycleUnitFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceCycleUnitFormItem.swift; sourceTree = "<group>"; };
+		B358B0B522A0FB5200F1A4E6 /* SingleSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectVC.swift; sourceTree = "<group>"; };
+		B358B0B722A100EF00F1A4E6 /* SectionFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionFormItem.swift; sourceTree = "<group>"; };
 		B3591B6F2164CC6100E0919C /* Degree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
 		B35BA6822073C06600B506CA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B35C4F4A2196F5E500F8AEB2 /* EditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCell.swift; sourceTree = "<group>"; };
@@ -626,6 +636,8 @@
 				B33C1AC021BE635E006F2BEB /* ContentFormItem.swift */,
 				B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */,
 				B306FE9921F0916D00403FE2 /* DateFormItem.swift */,
+				B358B0B322A0F66A00F1A4E6 /* PriceCycleUnitFormItem.swift */,
+				B358B0B722A100EF00F1A4E6 /* SectionFormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";
@@ -662,6 +674,7 @@
 				B323391221B6C947003EB84D /* FormItemCellType.swift */,
 				B323390C21B6B995003EB84D /* FormConformity.swift */,
 				B323390921B6B8E4003EB84D /* FormValidableProtocol.swift */,
+				B358B0B1229D722300F1A4E6 /* CourseForm.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -835,6 +848,8 @@
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B36D66B6229997AC00502D62 /* ManagerCourseVC.swift */,
+				B358B0AF229D4F4F00F1A4E6 /* EditCourseVC.swift */,
+				B358B0B522A0FB5200F1A4E6 /* SingleSelectVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1165,6 +1180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B33C1AC321BE669F006F2BEB /* TextFieldFormItem.swift in Sources */,
+				B358B0B422A0F66A00F1A4E6 /* PriceCycleUnitFormItem.swift in Sources */,
 				F94EAA201FB023B800B1762C /* ProfileVC.swift in Sources */,
 				B3756EEC21BA6AAA006893E1 /* StatusCell.swift in Sources */,
 				B3ED38E21FB77B830003F083 /* SuperTextField.swift in Sources */,
@@ -1195,6 +1211,7 @@
 				B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
 				B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */,
+				B358B0B2229D722300F1A4E6 /* CourseForm.swift in Sources */,
 				B3591B702164CC6100E0919C /* Degree.swift in Sources */,
 				B3E8C2A5220BFFE10008ED25 /* SuperWebView.swift in Sources */,
 				B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */,
@@ -1209,6 +1226,7 @@
 				B35F8DD91F8F64310073BD70 /* Home.swift in Sources */,
 				B323390D21B6B995003EB84D /* FormConformity.swift in Sources */,
 				B306FEAD21F8422B00403FE2 /* IconCell.swift in Sources */,
+				B358B0B0229D4F4F00F1A4E6 /* EditCourseVC.swift in Sources */,
 				B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */,
 				F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */,
 				B39453DE2232948F005E3027 /* PNCell.swift in Sources */,
@@ -1244,10 +1262,12 @@
 				B39453E1223CE905005E3027 /* CancelButton.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
 				B306FE9C21F0DA8000403FE2 /* DateSelectVC.swift in Sources */,
+				B358B0B622A0FB5200F1A4E6 /* SingleSelectVC.swift in Sources */,
 				B36D66BB229A580E00502D62 /* CourseService.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
 				B323390F21B6BBC7003EB84D /* BaseForm.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
+				B358B0B822A100EF00F1A4E6 /* SectionFormItem.swift in Sources */,
 				B3649414207DCA790030CF44 /* SCLAlertView.swift in Sources */,
 				B3756EDE21B901C5006893E1 /* TimeCell.swift in Sources */,
 				F96931971FB953960005C13F /* City.swift in Sources */,

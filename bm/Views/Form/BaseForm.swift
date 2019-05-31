@@ -64,6 +64,45 @@ class BaseForm {
             }
         }
     }
+    
+    func getSections()-> [String] {
+    
+        var sections: [String] = [String]()
+        for formItem in formItems {
+            if (formItem.uiProperties.cellType == FormItemCellType.section) {
+                sections.append(formItem.title)
+            }
+        }
+    
+        return sections
+    }
+    
+    func getSectionKeys()-> [[String]] {
+    
+        var res: [[String]] = [[String]]()
+        
+        var rows: [String] = [String]()
+        var findSection: Bool = false
+        for (idx, formItem) in formItems.enumerated() {
+        
+            if !findSection && formItem.uiProperties.cellType == FormItemCellType.section {
+                    findSection = true
+                    rows = [String]()
+                continue
+            }
+            if findSection && formItem.uiProperties.cellType == FormItemCellType.section {
+                    res.append(rows)
+                    rows = [String]()
+                    continue
+            }
+            if findSection {
+                rows.append(formItem.name!)
+            }
+        }
+        res.append(rows)
+        
+        return res
+    }
 }
 
 

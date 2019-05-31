@@ -14,7 +14,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var featuredView: ImagePickerView!
-    @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var submitBtn: SubmitButton!
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
     var token: String = ""
@@ -69,8 +69,8 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         myTablView = tableView
         super.viewDidLoad()
         
-        submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
-        submitBtn.layer.cornerRadius = 12
+//        submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
+//        submitBtn.layer.cornerRadius = 12
         
         let editCellNib = UINib(nibName: "EditCell", bundle: nil)
         tableView.register(editCellNib, forCellReuseIdentifier: "cell")
@@ -203,6 +203,10 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             degreeSelectVC.delegate = self
             degreeSelectVC.degrees = (sender as! [Degree])
         }
+    }
+    
+    @IBAction func cancel(_ sender: Any) {
+        prev()
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {

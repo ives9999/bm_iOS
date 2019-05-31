@@ -200,12 +200,12 @@ enum DEGREE: String {
     }
 }
 
-enum PRICE_UNIT: String {
+enum CYCLE_UNIT: String {
     
     case month = "月"
     case week = "週"
     
-    static func enumFromString(string: String) -> PRICE_UNIT {
+    static func enumFromString(string: String) -> CYCLE_UNIT {
         switch string {
         case "month" :
             return self.month
@@ -216,9 +216,9 @@ enum PRICE_UNIT: String {
         }
     }
     
-    static func DBValue(_ price_unit: PRICE_UNIT) -> String {
+    static func DBValue(_ cycle_unit: CYCLE_UNIT) -> String {
         var res: String = ""
-        switch price_unit {
+        switch cycle_unit {
         case .month:
             res = "month"
             break
@@ -229,11 +229,11 @@ enum PRICE_UNIT: String {
         return res
     }
     
-    static func all() -> [PRICE_UNIT: String] {
-        var price_units: [PRICE_UNIT: String] = [PRICE_UNIT: String]()
-        price_units[PRICE_UNIT.month] = "月"
-        price_units[PRICE_UNIT.week] = "週"
-        return price_units
+    static func all() -> [CYCLE_UNIT: String] {
+        var cycle_units: [CYCLE_UNIT: String] = [CYCLE_UNIT: String]()
+        cycle_units[CYCLE_UNIT.month] = "月"
+        cycle_units[CYCLE_UNIT.week] = "週"
+        return cycle_units
     }
 }
 
@@ -299,6 +299,23 @@ enum PRICE_CYCLE_UNIT: String {
             return self.other
         default :
             return self.month
+        }
+    }
+    
+    func toString()->String {
+        switch self {
+        case .week:
+            return "week"
+        case .month:
+            return "month"
+        case .season:
+            return "season"
+        case .year:
+            return "year"
+        case .span:
+            return "span"
+        case .other:
+            return "other"
         }
     }
     

@@ -18,6 +18,7 @@ enum FormItemCellType {
     case time
     case color
     case status
+    case section
     
     static func registerCell(for tableView: UITableView) {
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
@@ -61,6 +62,8 @@ enum FormItemCellType {
             cell = tableView.dequeueReusableCell(withIdentifier: "color", for: indexPath)
         case .status:
             cell = tableView.dequeueReusableCell(withIdentifier: "status", for: indexPath)
+        case .section:
+            cell = UITableViewCell()
         }
         
         return cell

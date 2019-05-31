@@ -71,8 +71,48 @@ class ManagerCourseVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        var row: SuperCourse? = nil
         if superCourses != nil && superCourses!.rows.indices.contains(indexPath.row) {
-            let row = superCourses!.rows[indexPath.row]
+            row = superCourses!.rows[indexPath.row]
+        }
+        
+        var title = "課程"
+        if row != nil {
+            title = row!.title
+        }
+        
+        let alert = UIAlertController(title: title, message: "選擇動作", preferredStyle: .alert)
+        let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
+            //self.performSegue(withIdentifier: TO_SHOWTIMETABLE, sender: event.id)
+        }
+        let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
+            let sender: [String: String] = ["title": title, "token": self.token!]
+            self.performSegue(withIdentifier: TO_EDIT_COURSE, sender: sender)
+        }
+        let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
+            self.layerDelete(view: UIButton())
+        }
+        let action4 = UIAlertAction(title: "取消", style: .default) { (action) in
+        }
+        alert.addAction(action1)
+        alert.addAction(action2)
+        alert.addAction(action3)
+        alert.addAction(action4)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == TO_EDIT_COURSE {
+            let vc: EditCourseVC = segue.destination as! EditCourseVC
+            if sender != nil {
+                let row: [String: String] = sender as! [String: String]
+                if row["title"] != nil {
+                    vc.title = row["title"]
+                }
+                if row["token"] != nil {
+                    vc.coachToken = row["token"]
+                }
+            }
         }
     }
 

@@ -16,7 +16,8 @@ let CHANNEL = "bm"
 
 // URL Constants
 //let REMOTE_BASE_URL = "https://bm.sportpassword.com"
-let REMOTE_BASE_URL = "http://192.168.100.100"
+//let REMOTE_BASE_URL = "http://192.168.100.100"
+let REMOTE_BASE_URL = "http://192.168.2.200"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 let URL_HOME = "\(BASE_URL)/app/"
@@ -91,6 +92,7 @@ let TO_PROFILE: String = "toProfile"
 let TO_EDIT_PROFILE: String = "toEditProfile"
 let TO_VALIDATE: String = "toValidate"
 let TO_EDIT: String = "toEdit"
+let TO_EDIT_COURSE: String = "toEditCourse"
 let TO_DELETE: String = "toDelete"
 let TO_CITY: String = "toCity"
 let TO_AREA: String = "toArea"
@@ -126,6 +128,7 @@ let TO_SHOW: String = "toShow"
 let TO_SHOW_COACh: String = "toShowCoach"
 let TO_SHOWTIMETABLE: String = "toShowTimeTable"
 let TO_PN: String = "toPN"
+let TO_SINGLE_SELECT: String = "toSingleSelect"
 
 // color
 let MY_GREEN = "#a6d903"
@@ -264,6 +267,8 @@ let COLOR_KEY = "color"
 let CREATED_ID_KEY = "created_id"
 let CREATED_AT_KEY = "created_at"
 let UPDATED_AT_KEY = "updated_at"
+let PRICE_KEY = "price"
+let PRICE_CYCLE_UNIT_KEY: String = "price_cycle_unit"
 
 
 // Notification Constants
