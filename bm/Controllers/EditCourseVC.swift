@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate {
+class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, SingleSelectDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
@@ -61,8 +61,8 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let key = section_keys[indexPath.section][indexPath.row]
-        let item = getFormItemFromKey(key)
+        
+        let item = getFormItemFromIdx(indexPath)
         let cell: UITableViewCell
         if item != nil {
             if let cellType = item!.uiProperties.cellType {
@@ -86,24 +86,35 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         Global.instance.addSpinner(superView: view)
         Global.instance.removeSpinner(superView: view)
         
-        let item = form.formItems[indexPath.row]
-        if form.formItems[indexPath.row].uiProperties.cellType != nil {
-            if item.segue != nil {
-                let segue = item.segue!
-                var sender: [String: Any?] = ["indexPath":indexPath]
-                if item.sender != nil {
-                    sender["sender"] = item.sender
-                }
-                //print(item.sender)
-                performSegue(withIdentifier: segue, sender: sender)
+        let item = getFormItemFromIdx(indexPath)
+        if item != nil {
+            if item!.segue != nil {
+                let segue = item!.segue!
+                performSegue(withIdentifier: segue, sender: indexPath)
             }
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_SINGLE_SELECT {
-            
+        
+        let indexPath = sender as! IndexPath
+        let item = getFormItemFromIdx(indexPath)
+        if item != nil {
+            if segue.identifier == TO_SINGLE_SELECT {
+                let vc: SingleSelectVC = segue.destination as! SingleSelectVC
+                
+                let rows = PRICE_CYCLE_UNIT.makeSelect()
+                vc.rows1 = rows
+                vc.key = item!.name
+                vc.title = item!.title
+                //vc.delegate = self
+            }
         }
+    }
+    
+    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
+        let key = section_keys[indexPath.section][indexPath.row]
+        return getFormItemFromKey(key)
     }
     
     func getFormItemFromKey(_ key: String)-> FormItem? {
@@ -132,6 +143,15 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     func myPresent(_ viewController: UIViewController) {
         self.present(viewController, animated: true, completion: nil)
+    }
+    
+    func singleSelected(key: String, value: String) {
+        let item = getFormItemFromKey(key)
+        if item != nil {
+            item!.value = value
+            item!.make()
+        }
+        tableView.reloadData()
     }
     
     @IBAction func submit(_ sender: Any) {

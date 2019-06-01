@@ -354,6 +354,14 @@ enum PRICE_CYCLE_UNIT: String {
         price_cycle_units[PRICE_CYCLE_UNIT.other] = "其他"
         return price_cycle_units
     }
+    
+    static func makeSelect()-> [[String: String]] {
+        var res: [[String: String]] = [[String: String]]()
+        for (key, value) in all() {
+            res.append(["title": value, "value": key.toString()])
+        }
+        return res
+    }
 }
 
 let df : DateFormatter = {
