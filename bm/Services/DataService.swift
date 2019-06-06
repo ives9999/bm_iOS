@@ -297,9 +297,10 @@ class DataService {
                 completion(false)
                 debugPrint(response.result.error as Any)
             }
-            
         }
     }
+    
+    func getOne(token: String, completion: @escaping CompletionHandler){}
     
     func update(type: String, params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
         

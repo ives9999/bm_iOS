@@ -17,7 +17,7 @@ class CourseForm: BaseForm {
         let youtubeItem = TextFieldFormItem(name: YOUTUBE_KEY, title: "youtube代碼", placeholder: "請輸入youtube影片代碼")
         let section2 = SectionFormItem(title: "收費")
         let priceItem = TextFieldFormItem(name: PRICE_KEY, title: "收費標準", placeholder: "請輸入收費費用")
-        let priceCycleUnitItem = PriceCycleUnitFormItem()
+        let priceCycleUnitItem = PriceUnitFormItem()
         
         formItems = [section1,titleItem,youtubeItem,section2,priceItem,priceCycleUnitItem]
     }

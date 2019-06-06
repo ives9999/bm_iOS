@@ -237,12 +237,12 @@ enum CYCLE_UNIT: String {
     }
 }
 
-enum PRICE_KIND: String {
+enum COURSE_KIND: String {
     
     case one = "一次性"
     case cycle = "週期性"
     
-    static func enumFromString(string: String) -> PRICE_KIND {
+    static func enumFromString(string: String) -> COURSE_KIND {
         switch string {
         case "one" :
             return self.one
@@ -253,9 +253,9 @@ enum PRICE_KIND: String {
         }
     }
     
-    static func DBValue(_ price_kind: PRICE_KIND) -> String {
+    static func DBValue(_ course_kind: COURSE_KIND) -> String {
         var res: String = ""
-        switch price_kind {
+        switch course_kind {
         case .one:
             res = "one"
             break
@@ -266,15 +266,15 @@ enum PRICE_KIND: String {
         return res
     }
     
-    static func all() -> [PRICE_KIND: String] {
-        var price_kinds: [PRICE_KIND: String] = [PRICE_KIND: String]()
-        price_kinds[PRICE_KIND.one] = "一次性"
-        price_kinds[PRICE_KIND.cycle] = "週期性"
-        return price_kinds
+    static func all() -> [COURSE_KIND: String] {
+        var cours_kinds: [COURSE_KIND: String] = [COURSE_KIND: String]()
+        cours_kinds[COURSE_KIND.one] = "一次性"
+        cours_kinds[COURSE_KIND.cycle] = "週期性"
+        return cours_kinds
     }
 }
 
-enum PRICE_CYCLE_UNIT: String {
+enum PRICE_UNIT: String {
     
     case month = "每月"
     case week = "每週"
@@ -283,7 +283,7 @@ enum PRICE_CYCLE_UNIT: String {
     case span = "每期"
     case other = "其他"
     
-    static func enumFromString(string: String) -> PRICE_CYCLE_UNIT {
+    static func enumFromString(string: String) -> PRICE_UNIT {
         switch string {
         case "month" :
             return self.month
@@ -319,9 +319,9 @@ enum PRICE_CYCLE_UNIT: String {
         }
     }
     
-    static func DBValue(_ price_cycle_unit: PRICE_CYCLE_UNIT) -> String {
+    static func DBValue(_ price_unit: PRICE_UNIT) -> String {
         var res: String = ""
-        switch price_cycle_unit {
+        switch price_unit {
         case .month:
             res = "month"
             break
@@ -344,15 +344,15 @@ enum PRICE_CYCLE_UNIT: String {
         return res
     }
     
-    static func all() -> [PRICE_CYCLE_UNIT: String] {
-        var price_cycle_units: [PRICE_CYCLE_UNIT: String] = [PRICE_CYCLE_UNIT: String]()
-        price_cycle_units[PRICE_CYCLE_UNIT.month] = "每月"
-        price_cycle_units[PRICE_CYCLE_UNIT.week] = "每週"
-        price_cycle_units[PRICE_CYCLE_UNIT.season] = "每季"
-        price_cycle_units[PRICE_CYCLE_UNIT.year] = "每年"
-        price_cycle_units[PRICE_CYCLE_UNIT.span] = "每期"
-        price_cycle_units[PRICE_CYCLE_UNIT.other] = "其他"
-        return price_cycle_units
+    static func all() -> [PRICE_UNIT: String] {
+        var price_units: [PRICE_UNIT: String] = [PRICE_UNIT: String]()
+        price_units[PRICE_UNIT.month] = "每月"
+        price_units[PRICE_UNIT.week] = "每週"
+        price_units[PRICE_UNIT.season] = "每季"
+        price_units[PRICE_UNIT.year] = "每年"
+        price_units[PRICE_UNIT.span] = "每期"
+        price_units[PRICE_UNIT.other] = "其他"
+        return price_units
     }
     
     static func makeSelect()-> [[String: String]] {

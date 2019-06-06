@@ -86,7 +86,7 @@ class ManagerCourseVC: MyTableVC {
             //self.performSegue(withIdentifier: TO_SHOWTIMETABLE, sender: event.id)
         }
         let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
-            let sender: [String: String] = ["title": title, "token": self.token!]
+            let sender: [String: String] = ["title": title, "token": row!.token]
             self.performSegue(withIdentifier: TO_EDIT_COURSE, sender: sender)
         }
         let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
@@ -110,7 +110,7 @@ class ManagerCourseVC: MyTableVC {
                     vc.title = row["title"]
                 }
                 if row["token"] != nil {
-                    vc.coachToken = row["token"]
+                    vc.token = row["token"]
                 }
             }
         }

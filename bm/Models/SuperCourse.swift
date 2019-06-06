@@ -18,6 +18,7 @@ class SuperCourse: SuperModel {
     @objc dynamic var coach_id: Int = -1
     @objc dynamic var price: Int = -1
     @objc dynamic var price_unit: String = ""
+    //var price_uint1: PRICE_UNIT = PRICE_UNIT.month
     @objc dynamic var price_desc: String = ""
     @objc dynamic var limit: Int = -1
     @objc dynamic var kind: String = ""

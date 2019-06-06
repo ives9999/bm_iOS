@@ -15,6 +15,7 @@ class CourseService: DataService {
     
     static let instance = CourseService()
     var superCourses: SuperCourses = SuperCourses()
+    var superCourse: SuperCourse = SuperCourse()
     
     func getList(token: String?, filter:[[Any]]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
@@ -78,6 +79,58 @@ class CourseService: DataService {
                 completion(false)
                 debugPrint(response.result.error as Any)
             }
+        }
+    }
+    
+    override func getOne(token: String, completion: @escaping CompletionHandler) {
+        
+        //print(model)
+        //model.neverFill()
+        downloadImageNum = 0
+        let body: [String: Any] = ["device": "app", "token": token,"strip_html": false]
+        
+        //print(body)
+        let url: String = String(format: URL_ONE, "course")
+        //print(url)
+        
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            
+            if response.result.error == nil {
+                //print(response.result.value)
+                guard let data = response.result.value else {
+                    print("get response result value error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                    return
+                }
+                //print(data)
+                let json = JSON(data)
+                //print(json)
+                self.superCourse = JSONParse.parse(data: json)
+                
+                //self.setData1(row: json)
+                let path: String =  json[FEATURED_KEY].stringValue
+                if path.count > 0 {
+                    self.getImage(_url: path, completion: { (success) in
+                        if success {
+                            if self.image != nil {
+                                self.superCourse.featured = self.image!
+                            }
+                            completion(true)
+                            //print(team.data)
+                        }
+                    })
+                } else {
+                    completion(true)
+                }
+                completion(true)
+                
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
+                debugPrint(response.result.error as Any)
+            }
+            
         }
     }
 }

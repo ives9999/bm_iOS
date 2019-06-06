@@ -73,7 +73,7 @@
 		B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */; };
 		B358B0B0229D4F4F00F1A4E6 /* EditCourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0AF229D4F4F00F1A4E6 /* EditCourseVC.swift */; };
 		B358B0B2229D722300F1A4E6 /* CourseForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B1229D722300F1A4E6 /* CourseForm.swift */; };
-		B358B0B422A0F66A00F1A4E6 /* PriceCycleUnitFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B322A0F66A00F1A4E6 /* PriceCycleUnitFormItem.swift */; };
+		B358B0B422A0F66A00F1A4E6 /* PriceUnitFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B322A0F66A00F1A4E6 /* PriceUnitFormItem.swift */; };
 		B358B0B622A0FB5200F1A4E6 /* SingleSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B522A0FB5200F1A4E6 /* SingleSelectVC.swift */; };
 		B358B0B822A100EF00F1A4E6 /* SectionFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B722A100EF00F1A4E6 /* SectionFormItem.swift */; };
 		B358B0BF22A168C700F1A4E6 /* SingleSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0BD22A168C700F1A4E6 /* SingleSelectCell.swift */; };
@@ -315,7 +315,7 @@
 		B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayEditVC.swift; sourceTree = "<group>"; };
 		B358B0AF229D4F4F00F1A4E6 /* EditCourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCourseVC.swift; sourceTree = "<group>"; };
 		B358B0B1229D722300F1A4E6 /* CourseForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseForm.swift; sourceTree = "<group>"; };
-		B358B0B322A0F66A00F1A4E6 /* PriceCycleUnitFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceCycleUnitFormItem.swift; sourceTree = "<group>"; };
+		B358B0B322A0F66A00F1A4E6 /* PriceUnitFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceUnitFormItem.swift; sourceTree = "<group>"; };
 		B358B0B522A0FB5200F1A4E6 /* SingleSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectVC.swift; sourceTree = "<group>"; };
 		B358B0B722A100EF00F1A4E6 /* SectionFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionFormItem.swift; sourceTree = "<group>"; };
 		B358B0BD22A168C700F1A4E6 /* SingleSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleSelectCell.swift; sourceTree = "<group>"; };
@@ -642,7 +642,7 @@
 				B33C1AC021BE635E006F2BEB /* ContentFormItem.swift */,
 				B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */,
 				B306FE9921F0916D00403FE2 /* DateFormItem.swift */,
-				B358B0B322A0F66A00F1A4E6 /* PriceCycleUnitFormItem.swift */,
+				B358B0B322A0F66A00F1A4E6 /* PriceUnitFormItem.swift */,
 				B358B0B722A100EF00F1A4E6 /* SectionFormItem.swift */,
 			);
 			path = FormItem;
@@ -1187,7 +1187,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B33C1AC321BE669F006F2BEB /* TextFieldFormItem.swift in Sources */,
-				B358B0B422A0F66A00F1A4E6 /* PriceCycleUnitFormItem.swift in Sources */,
+				B358B0B422A0F66A00F1A4E6 /* PriceUnitFormItem.swift in Sources */,
 				F94EAA201FB023B800B1762C /* ProfileVC.swift in Sources */,
 				B3756EEC21BA6AAA006893E1 /* StatusCell.swift in Sources */,
 				B3ED38E21FB77B830003F083 /* SuperTextField.swift in Sources */,

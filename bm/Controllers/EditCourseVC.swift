@@ -20,11 +20,12 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     var isFeaturedChange: Bool = false
     
     //var title: String? = nil
-    var coachToken: String? = nil
+    var token: String? = nil
     
     var section_keys: [[String]] = [[String]]()
     
     fileprivate var form: CourseForm = CourseForm()
+    var superCourse: SuperCourse? = nil
 
     override func viewDidLoad() {
         myTablView = tableView
@@ -46,6 +47,49 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         section_keys = form.getSectionKeys()
 //        print(sections)
 //        print(section_keys)
+        if token != nil {
+            refresh()
+        }
+        
+    }
+    
+    override func refresh() {
+        Global.instance.addSpinner(superView: view)
+        CourseService.instance.getOne(token: token!) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if success {
+                self.superCourse = CourseService.instance.superCourse
+                self.putValue()
+                self.tableView.reloadData()
+            } else {
+                self.warning(CourseService.instance.msg)
+            }
+            self.endRefresh()
+        }
+    }
+    
+    func putValue() {
+        if superCourse != nil {
+            let mirror: Mirror? = Mirror(reflecting: superCourse!)
+            if mirror != nil {
+                for formItem in self.form.formItems {
+                    let name = formItem.name!
+                    for (property, value) in mirror!.children {
+                        if name == property {
+                            let typeof = type(of: value)
+                            if typeof == String.self {
+                                formItem.value = value as? String
+                            } else if typeof == Int.self {
+                                let tmp = value as! Int
+                                formItem.value = String(tmp)
+                            }
+                            formItem.make()
+                        }
+                        
+                    }
+                }
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -103,7 +147,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             if segue.identifier == TO_SINGLE_SELECT {
                 let vc: SingleSelectVC = segue.destination as! SingleSelectVC
                 
-                let rows = PRICE_CYCLE_UNIT.makeSelect()
+                let rows = PRICE_UNIT.makeSelect()
                 vc.rows1 = rows
                 vc.key = item!.name
                 vc.title = item!.title

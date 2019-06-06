@@ -60,7 +60,7 @@ let URL_COACH = URL_HOME + "coach/"
 let URL_SIGNUP = "\(URL_HOME)%@/signup/%@"
 let URL_CANCEL_SIGNUP = "\(URL_HOME)%@/cancelSignup/%d"
 
-let URL_COURSE_LIST = "\(URL_HOME)course"
+let URL_COURSE_LIST = "\(URL_HOME)course/list"
 
 // Font
 let FONT_NAME: String = "Apple SD Gothic Neo"
@@ -268,7 +268,7 @@ let CREATED_ID_KEY = "created_id"
 let CREATED_AT_KEY = "created_at"
 let UPDATED_AT_KEY = "updated_at"
 let PRICE_KEY = "price"
-let PRICE_CYCLE_UNIT_KEY: String = "price_cycle_unit"
+let PRICE_UNIT_KEY: String = "price_unit"
 
 
 // Notification Constants
