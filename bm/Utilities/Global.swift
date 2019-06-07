@@ -235,6 +235,15 @@ enum CYCLE_UNIT: String {
         cycle_units[CYCLE_UNIT.week] = "週"
         return cycle_units
     }
+    
+    func toString()->String {
+        switch self {
+        case .month:
+            return "month"
+        case .week:
+            return "week"
+        }
+    }
 }
 
 enum COURSE_KIND: String {
@@ -271,6 +280,15 @@ enum COURSE_KIND: String {
         cours_kinds[COURSE_KIND.one] = "一次性"
         cours_kinds[COURSE_KIND.cycle] = "週期性"
         return cours_kinds
+    }
+    
+    func toString()->String {
+        switch self {
+        case .one:
+            return "one"
+        case .cycle:
+            return "cycle"
+        }
     }
 }
 

@@ -269,6 +269,15 @@ let CREATED_AT_KEY = "created_at"
 let UPDATED_AT_KEY = "updated_at"
 let PRICE_KEY = "price"
 let PRICE_UNIT_KEY: String = "price_unit"
+let PRICE_DESC_KEY: String = "price_desc"
+let WEEKDAY_KEY: String = "weekday"
+let START_TIME_KEY: String = "start_time"
+let END_TIME_KEY: String = "end_time"
+
+// Course key
+let CYCLE_UNIT_KEY: String = "cycle_unit"
+let COURSE_KIND_KEY: String = "kind"
+
 
 
 // Notification Constants

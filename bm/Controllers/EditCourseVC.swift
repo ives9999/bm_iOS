@@ -89,6 +89,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                     }
                 }
             }
+            featuredView.setPickedImage(image: superCourse!.featured)
         }
     }
     
