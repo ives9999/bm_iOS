@@ -15,7 +15,7 @@ class WeekdayFormItem: FormItem {
     
     required init(title: String = "星期幾", name: String = TT_WEEKDAY) {
         super.init(name: name, title: title, placeholder: nil, value: nil)
-        segue = TO_SELECT_WEEKDAY
+        segue = TO_MULTI_SELECT
         uiProperties.cellType = .weekday
         reset()
     }
@@ -27,34 +27,43 @@ class WeekdayFormItem: FormItem {
     }
     
     override func make() {
-        var texts: [String] = [String]()
-        var values: [String] = [String]()
-        if weekdays.count > 0 {
-            for weekday in weekdays {
-                for gweekday in Global.instance.weekdays {
-                    if weekday == gweekday["value"] as! Int {
-                        let text = gweekday["simple_text"]
-                        texts.append(text! as! String)
-                        break
-                    }
-                }
-                values.append(String(weekday))
+        if value != nil {
+            weekdays.removeAll()
+            if value!.contains(",") {
+                valueToAnother()
+            } else {
+                weekdays.append(Int(value!)!)
             }
-            show = texts.joined(separator: ",")
-            value = values.joined(separator: ",")
-            sender = weekdays
-        } else {
-            show = ""
+            
+            var texts: [String] = [String]()
+            var senders: [String] = [String]()
+            if weekdays.count > 0 {
+                for weekday in weekdays {
+//                    for gweekday in Global.instance.weekdays {
+//                        if weekday == gweekday["value"] as! Int {
+//                            let text = gweekday["simple_text"]
+//                            texts.append(text! as! String)
+//                            break
+//                        }
+//                    }
+//                    values.append(String(weekday))
+                    let text = WEEKDAY.intToString(weekday)
+                    texts.append(text)
+                    senders.append(String(weekday))
+                }
+                show = texts.joined(separator: ",")
+                //value = values.joined(separator: ",")
+                sender = senders
+            } else {
+                show = ""
+            }
         }
     }
     
     override func valueToAnother() {
-        if value != nil {
-            let values: [String] = value!.components(separatedBy: ",")
-            weekdays.removeAll()
-            for v in values {
-                weekdays.append(Int(v)!)
-            }
+        let values: [String] = value!.components(separatedBy: ",")
+        for v in values {
+            weekdays.append(Int(v)!)
         }
     }
 }

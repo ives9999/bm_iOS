@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, SingleSelectDelegate {
+class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, SingleSelectDelegate, MultiSelectDelegate, ContentEditDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
@@ -98,7 +98,13 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        
+        let item = getFormItemFromIdx(indexPath)
+        if item!.name == CONTENT_KEY {
+            return 200
+        } else {
+            return 60
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -145,15 +151,64 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         let indexPath = sender as! IndexPath
         let item = getFormItemFromIdx(indexPath)
         if item != nil {
+            var rows: [[String: String]]? = nil
             if segue.identifier == TO_SINGLE_SELECT {
+                
                 let vc: SingleSelectVC = segue.destination as! SingleSelectVC
                 
-                let rows = PRICE_UNIT.makeSelect()
-                vc.rows1 = rows
+                if item!.name == PRICE_UNIT_KEY {
+                    rows = PRICE_UNIT.makeSelect()
+                } else if item!.name == CYCLE_UNIT_KEY {
+                    rows = CYCLE_UNIT.makeSelect()
+                } else if item!.name == COURSE_KIND_KEY {
+                    rows = COURSE_KIND.makeSelect()
+                } else if item!.name == START_TIME_KEY || item!.name == END_TIME_KEY {
+                    let times = Global.instance.makeTimes()
+                    rows = [[String: String]]()
+                    for time in times {
+                        rows!.append(["title": time, "value": time+":00"])
+                    }
+                }
+                if rows != nil {
+                    vc.rows1 = rows
+                }
+                
                 vc.key = item!.name
                 vc.title = item!.title
-                //vc.delegate = self
+                vc.delegate = self
+            } else if segue.identifier == TO_MULTI_SELECT {
+                let vc: MultiSelectVC = segue.destination as! MultiSelectVC
+                
+                if item!.name == WEEKDAY_KEY {
+                    rows = WEEKDAY.makeSelect()
+                    //print(rows)
+                    if item!.sender != nil {
+                        let selecteds = item!.sender as! [String]
+                        //print(selecteds)
+                        vc.selecteds = selecteds
+                    }
+                }
+                
+                if rows != nil {
+                    vc.rows1 = rows
+                }
+                
+                vc.key = item!.name
+                vc.title = item!.title
+                vc.delegate = self
+            } else if segue.identifier == TO_CONTENT_EDIT {
+                let vc: ContentEditVC = segue.destination as! ContentEditVC
+                if item!.name == CONTENT_KEY {
+                    if item!.sender != nil {
+                        let content = item!.sender as! String
+                        vc.content = content
+                    }
+                }
+                vc.key = item!.name
+                vc.title = item!.title
+                vc.delegate = self
             }
+            
         }
     }
     
@@ -190,13 +245,31 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         self.present(viewController, animated: true, completion: nil)
     }
     
-    func singleSelected(key: String, value: String) {
+    func singleSelected(key: String, selected: String) {
         let item = getFormItemFromKey(key)
         if item != nil {
-            item!.value = value
+            item!.value = selected
             item!.make()
+            tableView.reloadData()
         }
-        tableView.reloadData()
+    }
+    
+    func multiSelected(key: String, selecteds: [String]) {
+        let item = getFormItemFromKey(key)
+        if item != nil {
+            item!.value = selecteds.joined(separator: ",")
+            item!.make()
+            tableView.reloadData()
+        }
+    }
+    
+    func setContent(key: String, content: String) {
+        let item = getFormItemFromKey(key)
+        if item != nil {
+            item!.value = content
+            item!.make()
+            tableView.reloadData()
+        }
     }
     
     @IBAction func submit(_ sender: Any) {

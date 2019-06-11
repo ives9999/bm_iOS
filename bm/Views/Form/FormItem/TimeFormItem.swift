@@ -14,7 +14,7 @@ class TimeFormItem: FormItem {
     
     required init(name: String, title: String, timeType: SELECT_TIME_TYPE, tooltip: String?=nil, isRequired: Bool = true) {
         super.init(name: name, title: title, placeholder: nil, value: nil, tooltip: tooltip)
-        segue = TO_SELECT_TIME
+        segue = TO_SINGLE_SELECT
         uiProperties.cellType = .time
         self.timeType = timeType
         reset()
@@ -27,7 +27,7 @@ class TimeFormItem: FormItem {
     
     override func make() {
         if value != nil {
-            show = value!
+            show = value!.noSec()
             sender = ["type":timeType!,"time":value!]
         } else {
             sender = ["type":timeType!,"time":""]

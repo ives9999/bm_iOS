@@ -129,12 +129,15 @@ let TO_SHOW_COACh: String = "toShowCoach"
 let TO_SHOWTIMETABLE: String = "toShowTimeTable"
 let TO_PN: String = "toPN"
 let TO_SINGLE_SELECT: String = "toSingleSelect"
+let TO_MULTI_SELECT: String = "toMultiSelect"
+let TO_CONTENT_EDIT: String = "toContentEdit"
 
 // color
 let MY_GREEN = "#a6d903"
 let MY_RED = "#f11b90"
 let MY_GRAY = "#717171"
 let CITY_BUTTON = "#fceb4c"
+let CLEAR_BUTTON = "#8618f5"
 let STATUS_GREEN = "#658501"
 let TABBAR_BACKGROUND = "#0d0d0d"
 let TEXTBORDER = MY_GREEN

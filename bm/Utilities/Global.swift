@@ -72,6 +72,93 @@ enum MYCOLOR: Int {
         return res
     }
 }
+
+enum WEEKDAY: Int {
+    case mon = 1
+    case tue = 2
+    case wed = 3
+    case thu = 4
+    case fri = 5
+    case sat = 6
+    case sun = 7
+    
+    static let allValues = [mon, tue, wed, thu, fri, sat, sun]
+    
+    init(weekday: Int) {
+        switch weekday {
+        case 1:
+            self = .mon
+        case 2:
+            self = .tue
+        case 3:
+            self = .wed
+        case 4:
+            self = .thu
+        case 5:
+            self = .fri
+        case 6:
+            self = .sat
+        case 7:
+            self = .sun
+        default:
+            self = .mon
+        }
+    }
+    
+    func toString()->String {
+        switch self {
+        case .mon:
+            return "星期一"
+        case .tue:
+            return "星期二"
+        case .wed:
+            return "星期三"
+        case .thu:
+            return "星期四"
+        case .fri:
+            return "星期五"
+        case .sat:
+            return "星期六"
+        case .sun:
+            return "星期日"
+        }
+    }
+    
+    static func intToString(_ value: Int)-> String {
+        switch value {
+        case 1:
+            return "星期一"
+        case 2:
+            return "星期二"
+        case 3:
+            return "星期三"
+        case 4:
+            return "星期四"
+        case 5:
+            return "星期五"
+        case 6:
+            return "星期六"
+        case 7:
+            return "星期日"
+        default:
+            return"星期一"
+        }
+    }
+    
+    static func enumToString(_ value: WEEKDAY)-> String {
+    
+        return WEEKDAY.intToString(value.rawValue)
+    }
+    
+    static func makeSelect()-> [[String: String]] {
+        var res: [[String: String]] = [[String: String]]()
+        for key in allValues {
+            res.append(["title": key.toString(), "value": String(key.rawValue)])
+        }
+        return res
+    }
+}
+
 enum STATUS: String {
     case online = "上線"
     case offline = "下線"
@@ -244,6 +331,14 @@ enum CYCLE_UNIT: String {
             return "week"
         }
     }
+    
+    static func makeSelect()-> [[String: String]] {
+        var res: [[String: String]] = [[String: String]]()
+        for (key, value) in all() {
+            res.append(["title": value, "value": key.toString()])
+        }
+        return res
+    }
 }
 
 enum COURSE_KIND: String {
@@ -289,6 +384,14 @@ enum COURSE_KIND: String {
         case .cycle:
             return "cycle"
         }
+    }
+    
+    static func makeSelect()-> [[String: String]] {
+        var res: [[String: String]] = [[String: String]]()
+        for (key, value) in all() {
+            res.append(["title": value, "value": key.toString()])
+        }
+        return res
     }
 }
 
@@ -407,6 +510,20 @@ class Global {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: date)
+    }
+    
+    func makeTimes(start_time: String="07:00", end_time: String="23:00", interval: Int=60)-> [String] {
+        
+        var allTimes: [String] = [String]()
+        var s = start_time.toDateTime(format: "HH:mm")
+        let e = end_time.toDateTime(format: "HH:mm")
+        allTimes.append(s.toString(format: "HH:mm"))
+        while s < e {
+            s = s.addingTimeInterval(TimeInterval(Double(interval)*60.0))
+            allTimes.append(s.toString(format: "HH:mm"))
+        }
+        
+        return allTimes
     }
     
     func deviceType(frameWidth: CGFloat) -> DeviceType {

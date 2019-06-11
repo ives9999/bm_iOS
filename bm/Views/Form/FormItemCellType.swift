@@ -19,10 +19,15 @@ enum FormItemCellType {
     case color
     case status
     case section
+    case content
     
     static func registerCell(for tableView: UITableView) {
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
+        
         tableView.register(textFieldNib, forCellReuseIdentifier: "textField")
+        
+        let contentNib = UINib(nibName: "ContentCell", bundle: nil)
+        tableView.register(contentNib, forCellReuseIdentifier: "content")
         
         let moreNib = UINib(nibName: "MoreCell", bundle: nil)
         tableView.register(moreNib, forCellReuseIdentifier: "more")
@@ -50,6 +55,8 @@ enum FormItemCellType {
             cell = tableView.dequeueReusableCell(withIdentifier: "textField", for: indexPath)
         case .more:
             cell = tableView.dequeueReusableCell(withIdentifier: "more", for: indexPath)
+        case .content:
+            cell = tableView.dequeueReusableCell(withIdentifier: "content", for: indexPath)
         case .dateTime:
             cell = tableView.dequeueReusableCell(withIdentifier: "dateTime", for: indexPath)
         case .weekday:

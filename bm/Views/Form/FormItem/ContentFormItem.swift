@@ -16,8 +16,8 @@ class ContentFormItem: FormItem {
         super.init(name: name, title: title, placeholder: nil, value: nil)
         self.contentType = type
         self.isRequired = isRequired
-        segue = TO_TEXT_INPUT
-        uiProperties.cellType = .more
+        segue = TO_CONTENT_EDIT
+        uiProperties.cellType = .content
         reset()
     }
     
@@ -28,10 +28,12 @@ class ContentFormItem: FormItem {
     
     override func make() {
         if value != nil {
-            show = value!
-            sender = ["type":contentType!,"text":value!]
+            show = value!.truncate(length: 100, trailing: "...")
+            sender = value
+            //sender = ["type":contentType!,"text":value!]
         } else {
-            sender = ["type":contentType!,"text":""]
+            sender = ""
+            //sender = ["type":contentType!,"text":""]
         }
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SingleSelectDelegate: class {
-    func singleSelected(key: String, value: String)
+    func singleSelected(key: String, selected: String)
 }
 
 class SingleSelectVC: MyTableVC {
@@ -19,6 +19,8 @@ class SingleSelectVC: MyTableVC {
     
     var key: String? = nil
     var rows1: [[String: String]]?
+    var selected: String? = nil
+    
     var delegate: SingleSelectDelegate?
 
     override func viewDidLoad() {
@@ -29,7 +31,7 @@ class SingleSelectVC: MyTableVC {
         titleLbl.text = title
         let cellNib = UINib(nibName: "SingleSelectCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
-        view.layoutIfNeeded()
+//        view.layoutIfNeeded()
 //        if key == nil {
 //            alertError()
 //        } else {
@@ -63,8 +65,10 @@ class SingleSelectVC: MyTableVC {
 
     func submit(_ indexPath: IndexPath) {
         
+        let row = rows1![indexPath.row]
+        let selected = row["value"]
         if delegate != nil {
-            delegate!.singleSelected(key: key!, value: rows1![indexPath.row]["value"]!)
+            delegate!.singleSelected(key: key!, selected: selected!)
             prev()
         } else {
             alertError("由於傳遞參數不正確，無法做選擇，請回上一頁重新進入")
