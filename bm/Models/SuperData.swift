@@ -39,7 +39,7 @@ class SuperData {
         self.id = -1
         self.title = ""
         self.path = ""
-        self.featured = UIImage()
+        self.featured = UIImage(named: "nophoto")!
         self.token = ""
         self.vimeo = ""
         self.youtube = ""

@@ -28,7 +28,8 @@ class ManagerVC: MyTableVC {
             titleLbl.text = "球館管理"
         }
 
-        tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
+        let cellNib = UINib(nibName: "ManagerCourseCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "cell")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -58,13 +59,13 @@ class ManagerVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ManagerCourseCell
         //print(rows)
         
         let row: SuperData = managerLists[indexPath.row]
         //print(row)
-        cell.textLabel!.text = row.title
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.titleLbl.text = row.title
+        cell.featured.image = row.featured
         
         return cell
     }
