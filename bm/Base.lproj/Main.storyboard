@@ -1162,7 +1162,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="akV-gR-VdC">
-                                <rect key="frame" x="0.0" y="84" width="375" height="670"/>
+                                <rect key="frame" x="0.0" y="84" width="375" height="583"/>
                             </imageView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="oLj-Mk-1z3" customClass="SuperDatePicker" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="24" y="108" width="327" height="160"/>
@@ -3374,7 +3374,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="HrW-2D-NhE" eventType="touchUpInside" id="QYq-FF-Vu7"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="qHl-ea-vIx"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="wzA-yb-pfE"/>
                                         </connections>
@@ -3396,6 +3395,22 @@
                                     <constraint firstItem="a2i-Yd-gYM" firstAttribute="centerX" secondItem="Ngt-cj-eIT" secondAttribute="centerX" id="z5Q-LR-cIG"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tso-nH-h5i">
+                                <rect key="frame" x="331" y="36" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="8sP-Jl-woX"/>
+                                    <constraint firstAttribute="width" constant="32" id="bCa-Q6-Ia6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
+                                <state key="normal" image="plus">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="addCourseBtnPressed:" destination="HrW-2D-NhE" eventType="touchUpInside" id="6Qs-Mv-4yG"/>
+                                    <action selector="addTeamBtnPressed:" destination="Zvi-i7-Pcr" eventType="touchUpInside" id="xM0-0Z-j02"/>
+                                    <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="c9d-UP-zw1"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="Ysu-wT-NCT">
                                 <rect key="frame" x="0.0" y="84" width="375" height="583"/>
                             </imageView>
@@ -3412,10 +3427,12 @@
                             <constraint firstAttribute="trailing" secondItem="k2G-ew-bgI" secondAttribute="trailing" id="PjD-VS-t1m"/>
                             <constraint firstItem="Ysu-wT-NCT" firstAttribute="leading" secondItem="UYj-ky-gKi" secondAttribute="leading" id="QUa-8A-ODq"/>
                             <constraint firstItem="Ngt-cj-eIT" firstAttribute="leading" secondItem="UYj-ky-gKi" secondAttribute="leading" id="QsN-gZ-QCm"/>
+                            <constraint firstItem="Tso-nH-h5i" firstAttribute="centerY" secondItem="Ngt-cj-eIT" secondAttribute="centerY" id="TOE-7x-B4c"/>
                             <constraint firstItem="UYj-ky-gKi" firstAttribute="bottom" secondItem="Ysu-wT-NCT" secondAttribute="bottom" id="Wfa-yC-bFo"/>
                             <constraint firstAttribute="trailing" secondItem="Ysu-wT-NCT" secondAttribute="trailing" id="cAH-Ft-xGo"/>
                             <constraint firstAttribute="bottom" secondItem="k2G-ew-bgI" secondAttribute="bottom" id="hgt-OL-6Wm"/>
                             <constraint firstItem="k2G-ew-bgI" firstAttribute="top" secondItem="Ngt-cj-eIT" secondAttribute="bottom" id="iqd-Wy-2E8"/>
+                            <constraint firstItem="UYj-ky-gKi" firstAttribute="trailing" secondItem="Tso-nH-h5i" secondAttribute="trailing" constant="12" id="v2H-c4-yOh"/>
                             <constraint firstItem="Ngt-cj-eIT" firstAttribute="top" secondItem="UYj-ky-gKi" secondAttribute="top" id="vpm-PJ-SKi"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="UYj-ky-gKi"/>
@@ -3608,7 +3625,6 @@
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="VZK-dK-Rb8"/>
                                             <action selector="prevBtnPressed:" destination="FL6-tC-Cb5" eventType="touchUpInside" id="bf7-3L-TB0"/>
                                             <action selector="prevBtnPressed:" destination="Exi-DF-oVO" eventType="touchUpInside" id="cJ9-u4-jqq"/>
-                                            <action selector="prevBtnPressed:" destination="HrW-2D-NhE" eventType="touchUpInside" id="e5s-wA-Zc0"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="單選" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwS-O7-NXQ">
@@ -3687,7 +3703,6 @@
                                             <action selector="prevBtnPressed:" destination="Rnr-RQ-nbw" eventType="touchUpInside" id="APE-aJ-yQo"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="FfP-xF-Qg2"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="KNF-EY-Qel"/>
-                                            <action selector="prevBtnPressed:" destination="HrW-2D-NhE" eventType="touchUpInside" id="LdH-lX-YFm"/>
                                             <action selector="prevBtnPressed:" destination="RNp-jr-1LT" eventType="touchUpInside" id="N1L-51-lmx"/>
                                         </connections>
                                     </button>
@@ -3840,7 +3855,6 @@
                                         <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="Exi-DF-oVO" eventType="touchUpInside" id="2G1-yr-WyJ"/>
-                                            <action selector="prevBtnPressed:" destination="HrW-2D-NhE" eventType="touchUpInside" id="7h6-5q-IUX"/>
                                             <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="Mw7-53-gaf"/>
                                             <action selector="prevBtnPressed:" destination="FL6-tC-Cb5" eventType="touchUpInside" id="RBQ-2S-JIZ"/>
                                             <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="V93-QQ-htK"/>
@@ -5194,7 +5208,7 @@
         <segue reference="DaT-w5-CTD"/>
         <segue reference="cK5-nM-2qW"/>
         <segue reference="XnZ-GS-Ao0"/>
-        <segue reference="q87-Mu-6YG"/>
+        <segue reference="Kca-5B-OTe"/>
         <segue reference="EIA-wN-WfT"/>
     </inferredMetricsTieBreakers>
 </document>

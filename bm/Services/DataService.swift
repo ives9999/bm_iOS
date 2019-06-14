@@ -302,6 +302,8 @@ class DataService {
     
     func getOne(token: String, completion: @escaping CompletionHandler){}
     
+    func update(_params: [String: String], image: UIImage?, completion: @escaping CompletionHandler) {}
+    
     func update(type: String, params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
         
         let url: String = String(format: URL_UPDATE, type)
@@ -310,7 +312,7 @@ class DataService {
         var body: [String: Any] = ["source": "app"]
         body.merge(params)
         //print(body)
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
+        Alamofire.upload( multipartFormData: { (multipartFormData) in
             if image != nil {
                 let imageData: Data = UIImageJPEGRepresentation(image!, 0.2)! as Data
                 //print(imageData)
@@ -352,7 +354,7 @@ class DataService {
                         }
                         //print(data)
                         let json = JSON(data)
-                        self.success = true
+                        //self.success = true
                         self.success = json["success"].boolValue
                         //print(self.success)
                         if self.success {
@@ -371,7 +373,7 @@ class DataService {
                     completion(true)
                 })
             case .failure(let error):
-                print(error)
+                //print(error)
                 //onError(error)
                 self.msg = "網路錯誤，請稍後再試"
                 completion(false)
@@ -971,7 +973,21 @@ class DataService {
         
         return (key, chTitle, type)
     }
+    
     func strsToDegree(_ strs: [String])-> [Degree] {
         return [Degree]()
+    }
+    
+    func handleErrorMsg(_ msg: String?, _ msgs: [String: JSON]? = nil) {
+        if msg != nil {
+            self.msg = msg!
+        } else {
+            if msgs != nil {
+                for (_, value) in msgs! {
+                    let error = value.stringValue
+                    self.msg += error + "\n"
+                }
+            }
+        }
     }
 }

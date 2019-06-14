@@ -956,6 +956,18 @@ extension String {
         return self.replacingOccurrences(of: target, with: withString, options: NSString.CompareOptions.literal, range: nil)
     }
     
+    func convertHtml() -> NSAttributedString?{
+        
+        let htmlData = NSString(string: self).data(using: String.Encoding.unicode.rawValue)
+        let options = [NSAttributedString.DocumentReadingOptionKey.documentType:
+            NSAttributedString.DocumentType.html]
+        let attributedString = try? NSMutableAttributedString(data: htmlData ?? Data(),
+                                                              options: options,
+                                                              documentAttributes: nil)
+        
+        return attributedString
+    }
+    
 //    func substring(_ range: CountableRange<Int>) -> String {
 //        let idx1 = index(startIndex, offsetBy: max(0, range.lowerBound))
 //        let idx2 = index(startIndex, offsetBy: min(self.count, range.upperBound))

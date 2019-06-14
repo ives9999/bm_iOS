@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EditCourseDelegate {
+    func isReload(_ yes: Bool)
+}
+
 class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, SingleSelectDelegate, MultiSelectDelegate, ContentEditDelegate {
     
     @IBOutlet weak var tableView: UITableView!
@@ -20,12 +24,15 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     var isFeaturedChange: Bool = false
     
     //var title: String? = nil
-    var token: String? = nil
+    var course_token: String? = nil
+    var coach_token: String? = nil
     
     var section_keys: [[String]] = [[String]]()
     
     fileprivate var form: CourseForm = CourseForm()
     var superCourse: SuperCourse? = nil
+    
+    var delegate: EditCourseDelegate?
 
     override func viewDidLoad() {
         myTablView = tableView
@@ -47,7 +54,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         section_keys = form.getSectionKeys()
 //        print(sections)
 //        print(section_keys)
-        if token != nil {
+        if course_token != nil && course_token!.count > 0 {
             refresh()
         }
         
@@ -55,7 +62,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     override func refresh() {
         Global.instance.addSpinner(superView: view)
-        CourseService.instance.getOne(token: token!) { (success) in
+        CourseService.instance.getOne(token: course_token!) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
                 self.superCourse = CourseService.instance.superCourse
@@ -273,14 +280,76 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     @IBAction func submit(_ sender: Any) {
-    
+        
+        var action = "UPDATE"
+        if course_token != nil && course_token!.count == 0 {
+            action = "INSERT"
+        }
+        
+        var params:[String: String] = [String: String]()
+        for formItem in form.formItems {
+            if formItem.value != nil {
+                let value = formItem.value!
+                params[formItem.name!] = value
+            }
+        }
+        if action == "INSERT" {
+            params[CREATED_ID_KEY] = String(Member.instance.id)
+        }
+        if course_token != nil {
+            params["course_token"] = course_token!
+        }
+        if coach_token != nil {
+            params["coach_token"] = coach_token!
+        }
+        //print(params)
+        let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
+        CourseService.instance.update(_params: params, image: image) { (success) in
+            if success {
+                if CourseService.instance.success {
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    let alert = SCLAlertView(appearance: appearance)
+                    if (action == "INSERT") {
+                        alert.addButton("確定", action: {
+                            if self.delegate != nil {
+                                self.delegate!.isReload(true)
+                            }
+                            self.dismiss(animated: true, completion: nil)
+                        })
+                    } else {
+                        alert.addButton("回上一頁", action: {
+                            if self.delegate != nil {
+                                self.delegate!.isReload(true)
+                            }
+                            self.dismiss(animated: true, completion: nil)
+                        })
+                        alert.addButton("繼續修改", action: {
+                        })
+                    }
+                    alert.showSuccess("成功", subTitle: "新增 / 修改成功")
+                    NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+                } else {
+                    SCLAlertView().showWarning("錯誤", subTitle: CourseService.instance.msg)
+                }
+            } else {
+                SCLAlertView().showWarning("錯誤", subTitle: "新增 / 修改失敗，伺服器無法新增成功，請稍後再試")
+            }
+        }
     }
     
     @IBAction func cancel(_ sender: Any) {
+        if delegate != nil {
+            delegate!.isReload(false)
+        }
         prev()
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {
+        if delegate != nil {
+            delegate!.isReload(false)
+        }
         prev()
     }
 

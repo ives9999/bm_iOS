@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ManagerCourseVC: MyTableVC {
+class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
@@ -17,6 +17,8 @@ class ManagerCourseVC: MyTableVC {
     var token: String? = nil
     
     var superCourses: SuperCourses? = nil
+    
+    var isReload: Bool = true
 
     override func viewDidLoad() {
         myTablView = tableView
@@ -25,7 +27,13 @@ class ManagerCourseVC: MyTableVC {
         
         let cellNib = UINib(nibName: "ManagerCourseCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
-        refresh()
+        //refresh()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if isReload {
+            refresh()
+        }
     }
     
     override func refresh() {
@@ -104,20 +112,38 @@ class ManagerCourseVC: MyTableVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == TO_EDIT_COURSE {
             let vc: EditCourseVC = segue.destination as! EditCourseVC
-            if sender != nil {
+            if sender != nil { //edit
                 let row: [String: String] = sender as! [String: String]
                 if row["title"] != nil {
                     vc.title = row["title"]
                 }
                 if row["token"] != nil {
-                    vc.token = row["token"]
+                    vc.course_token = row["token"]
                 }
+            } else { //add
+                vc.course_token = ""
+                vc.title = "新增課程"
             }
+            if token != nil {
+                vc.coach_token = token
+            }
+            vc.delegate = self
+        }
+    }
+    
+    @IBAction func addCourseBtnPressed(_ sender: Any) {
+        if !Member.instance.isLoggedIn {
+            SCLAlertView().showError("警告", subTitle: "請先登入為會員")
+        } else {
+            performSegue(withIdentifier: TO_EDIT_COURSE, sender: nil)
         }
     }
 
     @IBAction func prevBtnPressed(_ sender: Any) {
         prev()
     }
-
+    
+    func isReload(_ yes: Bool) {
+        self.isReload = yes
+    }
 }
