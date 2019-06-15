@@ -264,7 +264,12 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     func multiSelected(key: String, selecteds: [String]) {
         let item = getFormItemFromKey(key)
         if item != nil {
-            item!.value = selecteds.joined(separator: ",")
+            var value: String = "-1"
+            if item!.name! == WEEKDAY_KEY {
+                let tmps: [Int] = selecteds.map({ Int($0)! })
+                value = String(Global.instance.weekdaysToDBValue(tmps))
+            }
+            item!.value = value
             item!.make()
             tableView.reloadData()
         }

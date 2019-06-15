@@ -28,12 +28,7 @@ class WeekdayFormItem: FormItem {
     
     override func make() {
         if value != nil {
-            weekdays.removeAll()
-            if value!.contains(",") {
-                valueToAnother()
-            } else {
-                weekdays.append(Int(value!)!)
-            }
+            valueToAnother()
             
             var texts: [String] = [String]()
             var senders: [String] = [String]()
@@ -61,9 +56,11 @@ class WeekdayFormItem: FormItem {
     }
     
     override func valueToAnother() {
-        let values: [String] = value!.components(separatedBy: ",")
-        for v in values {
-            weekdays.append(Int(v)!)
+        if value != nil {
+            let tmp: Int? = Int(value!)
+            if tmp != nil {
+                weekdays = Global.instance.weekdaysParse(Int(tmp!))
+            }
         }
     }
 }

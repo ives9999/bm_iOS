@@ -581,6 +581,31 @@ class Global {
         ctrl.view.addGestureRecognizer(ctrl.revealViewController().tapGestureRecognizer())
     }
     
+    func weekdaysParse(_ value: Int)-> [Int] {
+        var arr: [Int] = [Int]()
+        if value > 0 && value < 128 {
+            for i in 0...6 {
+                let two = Int(pow(Float(2), Float(i)))
+                if (value & two) > 0 {
+                    arr.append(i + 1)
+                }
+            }
+        }
+    
+        return arr
+    }
+    
+    func weekdaysToDBValue(_ arr: [Int])-> Int {
+        var res: Int = 0
+        for value in arr {
+            if value >= 0 && value <= 6 {
+                res = res | Int(pow(Float(2), Float(value - 1)))
+            }
+        }
+        
+        return res
+    }
+    
     private func _addSpinner(spinner: UIActivityIndicatorView, superView: UIView) {
         spinner.center = superView.center
         spinner.activityIndicatorViewStyle = .whiteLarge
