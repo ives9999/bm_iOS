@@ -69,9 +69,7 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
         if superCourses != nil && superCourses!.rows.indices.contains(indexPath.row) {
             let row = superCourses!.rows[indexPath.row]
             //row.printRow()
-            if row != nil {
-                cell.forRow(row: row)
-            }
+            cell.forRow(row: row)
         }
         
         return cell
@@ -98,7 +96,18 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
             self.performSegue(withIdentifier: TO_EDIT_COURSE, sender: sender)
         }
         let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
-            self.layerDelete(view: UIButton())
+            
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false
+            )
+            let alert = SCLAlertView(appearance: appearance)
+            alert.addButton("確定", action: {
+                self._delete(token: self.token!)
+                self.prevBtnPressed("")
+            })
+            alert.addButton("取消", action: {
+            })
+            alert.showWarning("警告", subTitle: "是否確定要刪除")
         }
         let action4 = UIAlertAction(title: "取消", style: .default) { (action) in
         }
@@ -128,6 +137,22 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
                 vc.coach_token = token
             }
             vc.delegate = self
+        }
+    }
+    
+    private func _delete(token: String) {
+        Global.instance.addSpinner(superView: self.view)
+        dataService.delete(token: token, type: "course") { (success) in
+            if success {
+                Global.instance.removeSpinner(superView: self.view)
+                if (!self.dataService.success) {
+                    SCLAlertView().showError("錯誤", subTitle: "無法刪除，請稍後再試")
+                }
+                NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+                self.refresh()
+            } else {
+                SCLAlertView().showError("錯誤", subTitle: "無法刪除，請稍後再試")
+            }
         }
     }
     
