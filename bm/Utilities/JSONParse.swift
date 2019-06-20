@@ -10,13 +10,13 @@ import Foundation
 import SwiftyJSON
  
 class JSONParse {
-    public static func parse<Type: SuperModel>(data: JSON) -> Type {
+    public static func parse<T: SuperModel>(data: JSON) -> T {
         var d: [String: Any] = [String: Any]()
         for (key, value) in data {
             //print("\(key)=>\(value)")
             d[key] = value
         }
-        return Type(dict: d)
+        return T(dict: d) 
     }
 }
 

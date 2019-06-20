@@ -21,8 +21,8 @@ class CoachVC: ListVC {
         _type = "coach"
         _titleField = "name"
         searchRows = _searchRows
-        Global.instance.setupTabbar(self)
-        Global.instance.menuPressedAction(menuBtn, self)
+        //Global.instance.setupTabbar(self)
+        //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
     }
     

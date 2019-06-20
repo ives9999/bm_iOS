@@ -30,8 +30,25 @@ class SuperModel: NSObject, JSONParsable {
         }
     }
     
+    func getRows<T: SuperModel>()-> [T]? {
+        return nil
+    }
+    
+    func getRowFromIdx<T: SuperModel>(_ idx: Int)-> T? {
+        return nil
+    }
+    
+    func getFeaturedPath()-> String {
+        return ""
+    }
+    
+    func setFeatured(_ image: UIImage) {}
+    
     private func initialize(for property: Mirror.Child, dict: [String: Any]) {
         let key: String = property.label!
+        if key == "featured" {
+            return
+        }
         if let value = dict[key] as? JSON {
             let type = value.type
             if type == Type.array {
@@ -44,6 +61,9 @@ class SuperModel: NSObject, JSONParsable {
                 if key == "city" {
                     let city: SuperCity = JSONParse.parse(data: value)
                     setValue(city, forKey: key)
+                } else if key == "coach" {
+                    let coach: SuperCoach = JSONParse.parse(data: value)
+                    setValue(coach, forKey: key)
                 }
                 
 //                var a = [String: Any]()
@@ -248,3 +268,4 @@ class StringClassConverter<T> {
     }
     
 }
+

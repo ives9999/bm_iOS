@@ -54,6 +54,8 @@ class DataService {
     
     var timetables: Timetables = Timetables()
     
+    var superModel: SuperModel = SuperModel()
+    
     init() {
         _model = Team.instance
     }
@@ -66,6 +68,56 @@ class DataService {
     func setData1(row: JSON)->Dictionary<String, [String: Any]> {
         let list = Dictionary<String, [String: Any]>()
         return list
+    }
+    
+    func getList<T: SuperModel, T1: SuperModel>(t:T.Type, t1: T1.Type, token: String?, filter:[[Any]]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+        
+        self.needDownloads = [Dictionary<String, Any>]()
+        var body: [String: Any] = ["source": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
+        if filter != nil {
+            body["where"] = filter
+        }
+        
+        //print(body)
+        var url: String = URL_COURSE_LIST
+        if (token != nil) {
+            url = url + "/" + token!
+        }
+        //print(url)
+        
+        //superCourses = SuperCourses()
+        
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    //print("get response result value error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                    return
+                }
+                let json = JSON(data)
+                //print(json)
+                let s: T1 = JSONParse.parse(data: json)
+                //print(type(of: s))
+                //self.superModel.printRows()
+                //self.superCourses = JSONParse.parse(data: json)
+                self.superModel = s
+                
+                let rows: [T] = s.getRows() ?? [T]()
+                self.makeNeedDownloadImageArr(rows, t: T.self)
+                let needDownload: Int = self.needDownloads.count
+                if needDownload > 0 {
+                    self.needDownloadImage(needDownload, t: T1.self, completion: completion)
+                } else {
+                    completion(true)
+                }
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
+                debugPrint(response.result.error as Any)
+            }
+        }
     }
     
     func getList(type: String, titleField: String, params:[String:Any], page: Int, perPage: Int, filter:[[Any]]?, completion: @escaping CompletionHandler) {
@@ -583,6 +635,50 @@ class DataService {
 //            }
 //            completion(true)
 //        })
+    }
+    
+    func makeNeedDownloadImageArr<T: SuperModel>(_ rows: [SuperModel], t: T.Type) {
+        for i in 0 ..< rows.count {
+            let row: T = rows[i] as! T
+            row.filterRow()
+            //row.printRow()
+            let featured_path = row.getFeaturedPath()
+            if featured_path.count > 0 {
+                let path = BASE_URL + featured_path
+                self.needDownloads.append(["idx": i, "path": path])
+            }
+        }
+    }
+    
+    func needDownloadImage<T: SuperModel>(_ needDownload: Int, t: T.Type, completion: @escaping CompletionHandler) {
+        var tmp: Int = needDownload
+        for i in 0 ..< needDownload {
+            let imageUrl = self.needDownloads[i]["path"] as! String
+            let d = { (_ success: Bool) in
+                if success {
+                    let idx: Int = self.needDownloads[i]["idx"] as! Int
+                    self.setImage(idx, t: T.self)
+                    //self.superCourses.rows[idx].featured = self.image!
+                }
+                tmp -= 1
+                if (tmp == 0) {
+                    completion(true)
+                }
+            }
+            self.getImage(_url: imageUrl, completion: d)
+        }
+    }
+    
+    func setImage<T: SuperModel>(_ idx: Int, t: T.Type) {
+        if image != nil {
+            let rows: [T] = superModel.getRows() ?? [T]()
+            if rows.count >= idx {
+                let row = superModel.getRowFromIdx(idx)
+                if row != nil {
+                    row?.setFeatured(image!)
+                }
+            }
+        }
     }
     
     func getShow(type: String, id: Int, token: String, completion: @escaping CompletionHandler) {
