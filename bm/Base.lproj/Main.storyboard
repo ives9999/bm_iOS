@@ -2777,11 +2777,13 @@
                         <outlet property="menuBtn" destination="tdY-i4-j06" id="phZ-fa-RCO"/>
                         <outlet property="tableView" destination="P13-eV-hn3" id="rvO-sD-nRJ"/>
                         <segue destination="HrW-2D-NhE" kind="showDetail" identifier="toManagerCourse" id="gqh-nG-WJt"/>
+                        <segue destination="Exi-DF-oVO" kind="showDetail" identifier="toSingleSelect" id="A4Z-Qs-ID8"/>
+                        <segue destination="RNp-jr-1LT" kind="showDetail" identifier="toMultiSelect" id="NO9-v4-wOp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p4y-tZ-S2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-375" y="-357"/>
+            <point key="canvasLocation" x="4257" y="1434"/>
         </scene>
         <!--臨打-->
         <scene sceneID="3a3-E3-xcE">
@@ -4931,17 +4933,8 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="RzO-Eb-oBE">
                                         <rect key="frame" x="143.5" y="8" width="88" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRw-63-RfK" customClass="CancelButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="31" height="34"/>
-                                                <state key="normal" title="取消"/>
-                                                <connections>
-                                                    <action selector="cancel" destination="nnI-xU-Qec" eventType="touchUpInside" id="pCS-zy-SUK"/>
-                                                    <action selector="cancel" destination="OKL-6q-hzR" eventType="touchUpInside" id="rOL-A0-8eo"/>
-                                                    <action selector="cancel:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="S2Z-UK-Hnf"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2O8-Xa-VXs" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="56" y="0.0" width="32" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="Yhi-UV-Pox"/>
@@ -4956,6 +4949,15 @@
                                                     <action selector="submit:" destination="rNf-pN-AQF" eventType="touchUpInside" id="8pj-YJ-1l2"/>
                                                     <action selector="submit:" destination="UtM-v1-pfK" eventType="touchUpInside" id="GiT-Hy-zuG"/>
                                                     <action selector="submitWithSender:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="ar2-uw-CG6"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRw-63-RfK" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="57" y="0.0" width="31" height="34"/>
+                                                <state key="normal" title="取消"/>
+                                                <connections>
+                                                    <action selector="cancel" destination="nnI-xU-Qec" eventType="touchUpInside" id="pCS-zy-SUK"/>
+                                                    <action selector="cancel" destination="OKL-6q-hzR" eventType="touchUpInside" id="rOL-A0-8eo"/>
+                                                    <action selector="cancel:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="S2Z-UK-Hnf"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -5056,18 +5058,8 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="HHF-UB-YGu">
                                         <rect key="frame" x="143.5" y="8" width="88" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTg-fl-9TY" customClass="CancelButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="31" height="34"/>
-                                                <state key="normal" title="取消"/>
-                                                <connections>
-                                                    <action selector="cancel" destination="OKL-6q-hzR" eventType="touchUpInside" id="BD9-5U-f40"/>
-                                                    <action selector="cancel" destination="nnI-xU-Qec" eventType="touchUpInside" id="avj-lx-qAD"/>
-                                                    <action selector="cancel" destination="3jC-Sa-5eM" eventType="touchUpInside" id="jGW-X5-hT4"/>
-                                                    <action selector="cancel:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="gyv-6w-qoG"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKy-DI-AlE" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="56" y="0.0" width="32" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="L70-jQ-Wmy"/>
@@ -5082,6 +5074,16 @@
                                                     <action selector="submit" destination="3jC-Sa-5eM" eventType="touchUpInside" id="fZg-Kh-aWk"/>
                                                     <action selector="submit:" destination="rNf-pN-AQF" eventType="touchUpInside" id="Kxn-4p-Aec"/>
                                                     <action selector="submitWithSender:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="UdD-E4-AiQ"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTg-fl-9TY" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="57" y="0.0" width="31" height="34"/>
+                                                <state key="normal" title="取消"/>
+                                                <connections>
+                                                    <action selector="cancel" destination="OKL-6q-hzR" eventType="touchUpInside" id="BD9-5U-f40"/>
+                                                    <action selector="cancel" destination="nnI-xU-Qec" eventType="touchUpInside" id="avj-lx-qAD"/>
+                                                    <action selector="cancel" destination="3jC-Sa-5eM" eventType="touchUpInside" id="jGW-X5-hT4"/>
+                                                    <action selector="cancel:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="gyv-6w-qoG"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -5304,10 +5306,12 @@
     <inferredMetricsTieBreakers>
         <segue reference="beR-yu-55u"/>
         <segue reference="Lp8-ui-LgL"/>
-        <segue reference="y8N-d0-A16"/>
+        <segue reference="mvW-Q8-ZFE"/>
         <segue reference="SiI-cm-Vku"/>
-        <segue reference="UI0-Ma-Ffm"/>
+        <segue reference="EKU-tT-H1i"/>
         <segue reference="qm6-H3-3ie"/>
+        <segue reference="NO9-v4-wOp"/>
+        <segue reference="A4Z-Qs-ID8"/>
         <segue reference="gqh-nG-WJt"/>
         <segue reference="oKL-Gk-zBn"/>
         <segue reference="xCJ-lv-P9J"/>

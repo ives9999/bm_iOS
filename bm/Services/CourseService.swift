@@ -22,6 +22,10 @@ class CourseService: DataService {
         superModel = SuperCourses(dict: [String : Any]())
     }
     
+    override func getListURL() -> String {
+        return URL_COURSE_LIST
+    }
+    
     override func getOne(token: String, completion: @escaping CompletionHandler) {
         
         //print(model)

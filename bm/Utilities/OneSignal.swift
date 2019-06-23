@@ -93,6 +93,7 @@ class MyOneSignal {
     static let instance = MyOneSignal()
     
     let session: UserDefaults = UserDefaults.standard
+    
     func save(id: String, title: String?, content: String, pnID: String) {
         //session.removeObject(forKey: "pn")
         var pnObj:Dictionary<String, String> = ["id": id, "content": content]

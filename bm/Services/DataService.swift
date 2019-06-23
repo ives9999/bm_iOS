@@ -70,24 +70,22 @@ class DataService {
         return list
     }
     
-    func getList<T: SuperModel, T1: SuperModel>(t:T.Type, t1: T1.Type, token: String?, filter:[[Any]]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+    func getList<T: SuperModel, T1: SuperModel>(t:T.Type, t1: T1.Type, token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
         self.needDownloads = [Dictionary<String, Any>]()
-        var body: [String: Any] = ["source": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
-        if filter != nil {
-            body["where"] = filter
+        var filter: [String: Any] = ["source": "app", "channel": CHANNEL, "page": page, "perPage": perPage]
+        if _filter != nil {
+            filter.merge(_filter!)
         }
+        print(filter.toJSONString())
         
-        //print(body)
-        var url: String = URL_COURSE_LIST
+        var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        //print(url)
-        
-        //superCourses = SuperCourses()
-        
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+        print(url)
+                
+        Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
             if response.result.error == nil {
                 guard let data = response.result.value else {
@@ -207,6 +205,8 @@ class DataService {
             
         }
     }
+    
+    func getListURL()-> String { return ""}
     
     func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
         

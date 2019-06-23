@@ -8,39 +8,26 @@
 
 import UIKit
 
-protocol MultiSelectDelegate: class {
+protocol MultiSelectDelegate: SelectDelegate {
     func multiSelected(key: String, selecteds: [String])
 }
 
-class MultiSelectVC: MyTableVC {
+class MultiSelectVC: SelectVC {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var titleLbl: UILabel!
-    
-    var key: String? = nil
-    var rows1: [[String: String]]?
     var selecteds: [String] = [String]()
-    
     var delegate: MultiSelectDelegate?
+    
 
     override func viewDidLoad() {
         
         myTablView = tableView
-        super.viewDidLoad()
-
-        titleLbl.text = title
         tableView.register(
             SuperCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.white
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if rows1 != nil {
-            return rows1!.count
-        } else {
-            return 0
-        }
+        super.viewDidLoad()
+
+        titleLbl.text = title
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -92,17 +79,6 @@ class MultiSelectVC: MyTableVC {
         
     }
     
-    func setSelectedStyle(_ cell: UITableViewCell) {
-        cell.accessoryType = .checkmark
-        cell.textLabel?.textColor = UIColor(MY_GREEN)
-        cell.tintColor = UIColor(MY_GREEN)
-    }
-    func unSetSelectedStyle(_ cell: UITableViewCell) {
-        cell.accessoryType = .none
-        cell.textLabel?.textColor = UIColor.white
-        cell.tintColor = UIColor.white
-    }
-    
     @IBAction func submit(_ sender: Any) {
         if delegate != nil {
             delegate!.multiSelected(key: key!, selecteds: selecteds)
@@ -112,12 +88,7 @@ class MultiSelectVC: MyTableVC {
         }
     }
     
-    @IBAction func cancel(_ sender: Any) {
-        prev()
+    override func setDelegate(_ delegate: SelectDelegate) {
+        self.delegate = (delegate as! MultiSelectDelegate)
     }
-    
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
-
 }

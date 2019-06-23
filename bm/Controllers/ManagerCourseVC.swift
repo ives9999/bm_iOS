@@ -38,11 +38,11 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     }
     
     override func refresh() {
-        var filter1: [Any]? = nil
+        var filter1: [String]? = nil
         if manager_token != nil {
             filter1 = ["manager_token", "=", manager_token!]
         }
-        var filter: [[Any]]?
+        var filter: [[String]]?
         if filter1 != nil {
             filter = [filter1!]
         } else {
@@ -50,7 +50,7 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
         }
         
         Global.instance.addSpinner(superView: self.view)
-        CourseService.instance.getList(t: SuperCourse.self, t1: SuperCourses.self, token: token, filter: filter, page: 1, perPage: 100) { (success) in
+        CourseService.instance.getList(t: SuperCourse.self, t1: SuperCourses.self, token: token, _filter: nil, page: 1, perPage: 100) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 self.superCourses = (CourseService.instance.superModel as! SuperCourses)

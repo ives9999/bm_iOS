@@ -8,29 +8,23 @@
 
 import UIKit
 
-protocol SingleSelectDelegate: class {
+protocol SingleSelectDelegate: SelectDelegate {
     func singleSelected(key: String, selected: String)
 }
 
-class SingleSelectVC: MyTableVC {
+class SingleSelectVC: SelectVC {
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var titleLbl: UILabel!
-    
-    var key: String? = nil
-    var rows1: [[String: String]]?
     var selected: String? = nil
-    
     var delegate: SingleSelectDelegate?
 
     override func viewDidLoad() {
         
         myTablView = tableView
-        super.viewDidLoad()
 
         titleLbl.text = title
         let cellNib = UINib(nibName: "SingleSelectCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
+        super.viewDidLoad()
 //        view.layoutIfNeeded()
 //        if key == nil {
 //            alertError()
@@ -38,14 +32,6 @@ class SingleSelectVC: MyTableVC {
 //
 //
 //        }
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if rows1 != nil {
-            return rows1!.count
-        } else {
-            return 0
-        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,13 +61,7 @@ class SingleSelectVC: MyTableVC {
         }
     }
     
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
-
-    func alertError(_ msg: String) {
-        
-        warning(msg: msg, buttonTitle: "回上一頁", buttonAction: {
-            self.prev()})
+    override func setDelegate(_ delegate: SelectDelegate) {
+        self.delegate = (delegate as! SingleSelectDelegate)
     }
 }

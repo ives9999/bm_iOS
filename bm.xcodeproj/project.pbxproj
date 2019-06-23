@@ -123,6 +123,7 @@
 		B3756EF321BA7567006893E1 /* StatusSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3756EF121BA7567006893E1 /* StatusSelectCell.xib */; };
 		B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A13441FDAF3CB00413E64 /* SuperButton.swift */; };
 		B385A07A22B9336C00BC3ADF /* CourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385A07922B9336C00BC3ADF /* CourseVC.swift */; };
+		B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385A07B22BCB28E00BC3ADF /* SelectVC.swift */; };
 		B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453D82230E849005E3027 /* ShowPNVC.swift */; };
 		B39453DB2230F516005E3027 /* OneSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453DA2230F516005E3027 /* OneSignal.swift */; };
 		B39453DE2232948F005E3027 /* PNCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453DC2232948F005E3027 /* PNCell.swift */; };
@@ -374,6 +375,7 @@
 		B3756EF121BA7567006893E1 /* StatusSelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusSelectCell.xib; sourceTree = "<group>"; };
 		B37A13441FDAF3CB00413E64 /* SuperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperButton.swift; sourceTree = "<group>"; };
 		B385A07922B9336C00BC3ADF /* CourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseVC.swift; sourceTree = "<group>"; };
+		B385A07B22BCB28E00BC3ADF /* SelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVC.swift; sourceTree = "<group>"; };
 		B39453D82230E849005E3027 /* ShowPNVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPNVC.swift; sourceTree = "<group>"; };
 		B39453DA2230F516005E3027 /* OneSignal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneSignal.swift; sourceTree = "<group>"; };
 		B39453DC2232948F005E3027 /* PNCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCell.swift; sourceTree = "<group>"; };
@@ -891,6 +893,7 @@
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B385A07922B9336C00BC3ADF /* CourseVC.swift */,
+				B385A07B22BCB28E00BC3ADF /* SelectVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1232,6 +1235,7 @@
 				B36CBD5320DE00FE00E52B9C /* TempPlayDatePlayer.swift in Sources */,
 				F94FF4351FB4322C00D167B6 /* EditVC.swift in Sources */,
 				B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */,
+				B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */,
 				B33C1ABD21BD300E006F2BEB /* TimeFormItem.swift in Sources */,
 				B3E72A191F9CBE9F0008A6B1 /* TeachCV.swift in Sources */,
 				B3ED38E81FB852EB0003F083 /* FormCell.swift in Sources */,

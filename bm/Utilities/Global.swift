@@ -742,6 +742,32 @@ extension Dictionary {
             self.updateValue(value, forKey: key)
         }
     }
+    
+    func toJSONString()-> String {
+        var json: String = "{"
+        var tmps: [String] = [String]()
+        for (key, value) in self {
+            let str = "\"\(key)\":\"\(value)\""
+            
+            tmps.append(str)
+        }
+        json += tmps.joined(separator: ",")
+        json += "}"
+        
+        return json
+    }
+    
+    func toJSON1()-> String? {
+        if let theJSONData = try? JSONSerialization.data(
+            withJSONObject: self,
+            options: []) {
+            var theJSONText = String(data: theJSONData,
+                                     encoding: .utf8)
+            theJSONText = theJSONText!.replace(target: "\\", withString: "")
+            return theJSONText
+        }
+        return nil
+    }
 }
 
 extension String {

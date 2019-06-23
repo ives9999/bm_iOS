@@ -24,8 +24,8 @@ class BaseViewController: UIViewController  {
     let maskView = UIView()
     var containerView = UIView(frame: .zero)
     let layerSubmitBtn: SubmitButton = SubmitButton()
-    let layerCancelBtn: SubmitButton = SubmitButton()
-    let layerDeleteBtn: SubmitButton = SubmitButton()
+    let layerCancelBtn: CancelButton = CancelButton()
+    let layerDeleteBtn: ClearButton = ClearButton()
     var layerBtnCount: Int = 2
     
     var staticButtomView: StaticBottomView?

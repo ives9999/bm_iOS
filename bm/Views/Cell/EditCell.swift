@@ -81,18 +81,25 @@ class EditCell: SuperCell, UITextFieldDelegate {
             onoff.indexPath = indexPath
             clearBtn.isHidden = true
         }
-        if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
-            editText.isHidden = true
-            onoff.isHidden = true
-            detailLbl.isHidden = false
-            if row["show"] != nil {
-                detailLbl.text = (row["show"] as! String)
-            } else {
-                detailLbl.text = ""
+        if row["atype"] != nil {
+            if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
+                editText.isHidden = true
+                onoff.isHidden = true
+                detailLbl.isHidden = false
+                if row["show"] != nil {
+                    detailLbl.text = (row["show"] as! String)
+                } else {
+                    detailLbl.text = ""
+                }
+                moreImageView.isHidden = false
             }
-            moreImageView.isHidden = false
         }
-        titleLbl.text = (row["ch"] as! String)
+        if row["ch"] != nil {
+            titleLbl.text = (row["ch"] as! String)
+        }
+        if row["title"] != nil {
+            titleLbl.text = (row["title"] as! String)
+        }
         setNeedsLayout()
     }
     
