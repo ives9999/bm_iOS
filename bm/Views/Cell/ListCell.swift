@@ -50,7 +50,7 @@ class ListCell: SuperCell {
         } else if iden == "arena" {
             updateArena(indexPath: indexPath, data: data)
         }
-        //accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
     }
     
     func updateCourseViews(indexPath: IndexPath, data: SuperCourse) {
