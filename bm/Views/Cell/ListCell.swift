@@ -70,6 +70,8 @@ class ListCell: SuperCell {
         
         listBallTxt.isHidden = true
         listMarker.isHidden = true
+        
+        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
     }
     
     func updateTeam(indexPath: IndexPath, data: SuperData) {

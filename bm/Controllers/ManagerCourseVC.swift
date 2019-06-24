@@ -38,19 +38,14 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     }
     
     override func refresh() {
-        var filter1: [String]? = nil
+        var filter: [String: Any] = [String: Any]()
+        filter.merge(["status": "online"])
         if manager_token != nil {
-            filter1 = ["manager_token", "=", manager_token!]
-        }
-        var filter: [[String]]?
-        if filter1 != nil {
-            filter = [filter1!]
-        } else {
-            filter = []
+            filter.merge(["manager_token": manager_token!])
         }
         
         Global.instance.addSpinner(superView: self.view)
-        CourseService.instance.getList(t: SuperCourse.self, t1: SuperCourses.self, token: token, _filter: nil, page: 1, perPage: 100) { (success) in
+        CourseService.instance.getList(t: SuperCourse.self, t1: SuperCourses.self, token: token, _filter: filter, page: 1, perPage: 100) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 self.superCourses = (CourseService.instance.superModel as! SuperCourses)
