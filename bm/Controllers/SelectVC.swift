@@ -58,8 +58,8 @@ class SelectVC: MyTableVC {
                 }
                 self.session.set(self.rows1, forKey: "citys")
                 self.tableView.reloadData()
-                Global.instance.removeSpinner(superView: self.view)
             }
+            Global.instance.removeSpinner(superView: self.view)
         }
     }
     
