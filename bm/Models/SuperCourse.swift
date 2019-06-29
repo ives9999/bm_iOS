@@ -23,7 +23,9 @@ class SuperCourse: SuperModel {
     @objc dynamic var price_text_long: String = ""
     @objc dynamic var price_text_short: String = ""
     @objc dynamic var limit: Int = -1
+    @objc dynamic var limit_text: String = ""
     @objc dynamic var kind: String = ""
+    @objc dynamic var kind_text: String = ""
     @objc dynamic var cycle: Int = -1
     @objc dynamic var cycle_unit: String = ""
     @objc dynamic var start_date: String = ""
@@ -45,6 +47,7 @@ class SuperCourse: SuperModel {
     @objc dynamic var created_id: Int = 0
     @objc dynamic var created_at: String = ""
     @objc dynamic var updated_at: String = ""
+    @objc dynamic var created_at_text: String = ""
     @objc dynamic var featured_path: String = ""
     @objc dynamic var thumb: String = ""
     
@@ -52,7 +55,7 @@ class SuperCourse: SuperModel {
     @objc dynamic var coach: SuperCoach = SuperCoach()
     
     override func filterRow() {
-        
+        created_at_text = created_at.noTime()
     }
     
     override func getFeaturedPath() -> String {

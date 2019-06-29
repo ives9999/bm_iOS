@@ -900,6 +900,16 @@ extension String {
             return false
         }
     }
+    var isDateTime: Bool {
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        if dateFormatterGet.date(from: self) != nil {
+            return true
+        } else {
+            return false
+        }
+    }
     func indexDistance(of character: Character) -> Int? {
         guard let index = index(of: character) else { return nil }
         return distance(from: startIndex, to: index)

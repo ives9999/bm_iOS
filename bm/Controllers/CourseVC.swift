@@ -119,6 +119,10 @@ class CourseVC: ListVC, SingleSelectDelegate, MultiSelectDelegate, SelectDelegat
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == self.tableView {
+            if superCourses != nil {
+                let superCourse = superCourses!.rows[indexPath.row]
+                performSegue(withIdentifier: TO_SHOW_COURSE, sender: superCourse)
+            }
             
         } else if tableView == searchTableView {
             let row = searchRows[indexPath.row]
@@ -129,7 +133,12 @@ class CourseVC: ListVC, SingleSelectDelegate, MultiSelectDelegate, SelectDelegat
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == TO_MANAGER_COURSE {
+        if segue.identifier == TO_SHOW_COURSE {
+            let superCourse = sender as! SuperCourse
+            let vc: ShowCourseVC = segue.destination as! ShowCourseVC
+            vc.title = superCourse.title
+            vc.course_token = superCourse.token
+        } else if segue.identifier == TO_MANAGER_COURSE {
             let vc: ManagerCourseVC = segue.destination as! ManagerCourseVC
             vc.manager_token = Member.instance.token
         } else if segue.identifier == TO_MULTI_SELECT || segue.identifier == TO_SINGLE_SELECT {

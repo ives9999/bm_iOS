@@ -168,7 +168,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         
         let alert = UIAlertController(title: "title", message: "content", preferredStyle: .alert)
         let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
-            self.performSegue(withIdentifier: TO_SHOWTIMETABLE, sender: event.id)
+            self.performSegue(withIdentifier: TO_SHOW_TIMETABLE, sender: event.id)
         }
         let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
             self.TTEditAction = "UPDATE"
@@ -496,7 +496,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                 }
                 textInputVC.input = realSender
             }
-        } else if segue.identifier == TO_SHOWTIMETABLE {
+        } else if segue.identifier == TO_SHOW_TIMETABLE {
             let showTimetableVC: ShowTimetableVC = segue.destination as! ShowTimetableVC
             if let id = sender as? Int {
                 showTimetableVC.tt_id = id

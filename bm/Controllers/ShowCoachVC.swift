@@ -223,7 +223,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         eventTag = idx + 1000
         //print(eventTag)
         let event = timetables!.rows[idx]
-        performSegue(withIdentifier: TO_SHOWTIMETABLE, sender: event.id)
+        performSegue(withIdentifier: TO_SHOW_TIMETABLE, sender: event.id)
     }
     
     override func viewWillLayoutSubviews() {
@@ -367,7 +367,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             let sender = sender as! Show_IN
             let showVC: ShowVC = segue.destination as! ShowVC
             showVC.show_in = sender
-        } else if segue.identifier == TO_SHOWTIMETABLE {
+        } else if segue.identifier == TO_SHOW_TIMETABLE {
             let showTimetableVC: ShowTimetableVC = segue.destination as! ShowTimetableVC
             if let id = sender as? Int {
                 showTimetableVC.tt_id = id
