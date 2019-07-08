@@ -77,13 +77,13 @@ class DataService {
         if _filter != nil {
             filter.merge(_filter!)
         }
-        print(filter.toJSONString())
+        //print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        print(url)
+        //print(url)
                 
         Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
@@ -103,13 +103,17 @@ class DataService {
                 self.superModel = s
                 
                 let rows: [T] = s.getRows() ?? [T]()
-                self.makeNeedDownloadImageArr(rows, t: T.self)
-                let needDownload: Int = self.needDownloads.count
-                if needDownload > 0 {
-                    self.needDownloadImage(needDownload, t: T1.self, completion: completion)
-                } else {
-                    completion(true)
+                for row in rows {
+                    row.filterRow()
                 }
+                completion(true)
+//                self.makeNeedDownloadImageArr(rows, t: T.self)
+//                let needDownload: Int = self.needDownloads.count
+//                if needDownload > 0 {
+//                    self.needDownloadImage(needDownload, t: T1.self, completion: completion)
+//                } else {
+//                    completion(true)
+//                }
             } else {
                 self.msg = "網路錯誤，請稍後再試"
                 completion(false)
@@ -352,7 +356,44 @@ class DataService {
         }
     }
     
-    func getOne(token: String, completion: @escaping CompletionHandler){}
+    func getOne<T: SuperModel>(t: T.Type, token: String, completion: @escaping CompletionHandler){
+        
+        let body: [String: Any] = ["device": "app", "token": token,"strip_html": false]
+        
+        //print(body)
+        let source: String? = getSource()
+        var url: String?
+        if source != nil {
+            url = String(format: URL_ONE, source!)
+        }
+        //print(url)
+        if url != nil {
+            Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+                
+                if response.result.error == nil {
+                    //print(response.result.value)
+                    guard let data = response.result.value else {
+                        //print("get response result value error")
+                        self.msg = "網路錯誤，請稍後再試"
+                        completion(false)
+                        return
+                    }
+                    //print(data)
+                    let json = JSON(data)
+                    //print(json)
+                    let s: T = JSONParse.parse(data: json)
+                    self.superModel = s
+                    self.superModel.filterRow()
+                    completion(true)
+                    
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                    debugPrint(response.result.error as Any)
+                }
+            }
+        }
+    }
     
     func update(_params: [String: String], image: UIImage?, completion: @escaping CompletionHandler) {}
     
@@ -361,7 +402,7 @@ class DataService {
         let url: String = String(format: URL_UPDATE, type)
         //print(url)
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-        var body: [String: Any] = ["source": "app"]
+        var body: [String: Any] = ["source": "app","channel":CHANNEL]
         body.merge(params)
         //print(body)
         Alamofire.upload( multipartFormData: { (multipartFormData) in
@@ -1085,5 +1126,9 @@ class DataService {
                 }
             }
         }
+    }
+    
+    func getSource()-> String? {
+        return nil
     }
 }

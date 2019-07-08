@@ -59,6 +59,7 @@ class CourseVC: ListVC, SingleSelectDelegate, MultiSelectDelegate, SelectDelegat
             superCourses = (superModel as! SuperCourses)
             //superCourses = CourseService.instance.superCourses
             let tmps: [SuperCourse] = superCourses!.rows
+            
             //print(tmps)
             //print("===============")
             if page == 1 {

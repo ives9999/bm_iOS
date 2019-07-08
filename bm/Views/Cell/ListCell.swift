@@ -55,7 +55,10 @@ class ListCell: SuperCell {
     
     func updateCourseViews(indexPath: IndexPath, data: SuperCourse) {
         listTitleTxt.text = data.title
-        listFeatured.image = data.featured
+        if data.featured_path.count > 0 {
+            //print(data.featured_path)
+            listFeatured.downloaded(from: data.featured_path)
+        }
         
         listCityBtn.setTextSize(14)
         listCityBtn.alignH = UIControlContentHorizontalAlignment.center

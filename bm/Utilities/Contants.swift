@@ -15,8 +15,8 @@ typealias DATA = Dictionary<String, [String: Any]>
 let CHANNEL = "bm"
 
 // URL Constants
-//let REMOTE_BASE_URL = "https://bm.sportpassword.com"
-let REMOTE_BASE_URL = "http://192.168.100.100"
+let REMOTE_BASE_URL = "https://bm.sportpassword.com"
+//let REMOTE_BASE_URL = "http://192.168.100.100"
 //let REMOTE_BASE_URL = "http://192.168.2.200"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
@@ -277,6 +277,9 @@ let PRICE_DESC_KEY: String = "price_desc"
 let WEEKDAY_KEY: String = "weekday"
 let START_TIME_KEY: String = "start_time"
 let END_TIME_KEY: String = "end_time"
+let PEOPLE_LIMIT_KEY: String = "people_limit"
+let START_DATE_KEY: String = "start_date"
+let END_DATE_KEY: String = "end_date"
 
 // Course key
 let CYCLE_UNIT_KEY: String = "cycle_unit"

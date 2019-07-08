@@ -20,7 +20,9 @@ class ManagerCourseCell: SuperCell {
 
     func forRow(row: SuperCourse) {
         titleLbl.text = row.title
-        featured.image = row.featured
+        if row.featured_path.count > 0 {
+            featured.downloaded(from: row.featured_path)
+        }
     }
     
 }

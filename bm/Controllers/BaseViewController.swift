@@ -341,6 +341,7 @@ class BaseViewController: UIViewController  {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if navigationAction.navigationType == .linkActivated {
             if let url = navigationAction.request.url {
+                //print(url)
                 if UIApplication.shared.canOpenURL(url) {
                     decisionHandler(.cancel)
                     UIApplication.shared.openURL(url)

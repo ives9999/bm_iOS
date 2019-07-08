@@ -431,13 +431,13 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             weekdaysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_DATE {
             let dateSelectVC: DateSelectVC = segue.destination as! DateSelectVC
-            if indexPath != nil {
-                dateSelectVC.indexPath = indexPath
-            }
+//            if indexPath != nil {
+//                dateSelectVC.indexPath = indexPath
+//            }
             if let _sender: [String: Any?] = sender as? [String: Any?] {
                 if _sender["sender"] != nil {
                     let realSender: [String: Any] = _sender["sender"] as! [String: Any]
-                    dateSelectVC.type = realSender["type"] as! SELECT_DATE_TYPE
+                    //dateSelectVC.type = realSender["type"] as! SELECT_DATE_TYPE
                     dateSelectVC.selected = realSender["date"] as! String
                 }
             }
@@ -515,13 +515,17 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         }
     }
     
-    func setDateData(res: String, type: SELECT_DATE_TYPE, indexPath: IndexPath?) {
-        if indexPath != nil {
-            let item = form.formItems[indexPath!.row] as! DateFormItem
-            item.value = res
-        }
-        editTableView.reloadData()
+    func dateSelected(key: String, selected: String) {
+        print(selected)
     }
+    
+//    func setDateData(res: String, type: SELECT_DATE_TYPE, indexPath: IndexPath?) {
+//        if indexPath != nil {
+//            let item = form.formItems[indexPath!.row] as! DateFormItem
+//            item.value = res
+//        }
+//        editTableView.reloadData()
+//    }
     
     func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
         let time = res[0]

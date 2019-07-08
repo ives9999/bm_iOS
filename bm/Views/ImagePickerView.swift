@@ -107,6 +107,15 @@ class ImagePickerView: UIView {
         delegate!.isImageSet(true)
     }
     
+    func setPickedImage(url: String) {
+        noPhotoImageView.isHidden = true
+        noPhotoLbl.isHidden = true
+        imageView.isHidden = false
+        imageView.downloaded(from: url)
+        self.addSubview(imageView)
+        delegate!.isImageSet(true)
+    }
+    
     private func _dashedborder() {
         let yourViewBorder = CAShapeLayer()
         yourViewBorder.strokeColor = UIColor("#6c6c6e").cgColor

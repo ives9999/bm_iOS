@@ -25,8 +25,11 @@ class CourseForm: BaseForm {
         let weekdayFormItem = WeekdayFormItem()
         let startTimeFormItem = TimeFormItem(name: START_TIME_KEY, title: "開始時間", timeType: SELECT_TIME_TYPE.play_start, tooltip: "", isRequired: false)
         let endTimeFormItem = TimeFormItem(name: END_TIME_KEY, title: "結束時間", timeType: SELECT_TIME_TYPE.play_end, tooltip: "", isRequired: false)
+        let startDateFormItem = DateFormItem(name: START_DATE_KEY, title: "開始日期", dateType: SELECT_DATE_TYPE.start)
+        let endDateFormItem = DateFormItem(name: END_DATE_KEY, title: "結束日期", dateType: SELECT_DATE_TYPE.end)
+        let peopleLimitItem = TextFieldFormItem(name: PEOPLE_LIMIT_KEY, title: "人數限制", placeholder: "")
         let contentFormItem = ContentFormItem(name: CONTENT_KEY, title: "詳細介紹", type: TEXT_INPUT_TYPE.content)
 
-        formItems = [section1,titleItem,youtubeItem,section2,priceItem,priceCycleUnitItem,priceDescItem,section3,courseKindItem,cycleUnitItem,weekdayFormItem,startTimeFormItem,endTimeFormItem,contentFormItem]
+        formItems = [section1,titleItem,youtubeItem,section2,priceItem,priceCycleUnitItem,priceDescItem,section3,courseKindItem,cycleUnitItem,weekdayFormItem,startTimeFormItem,endTimeFormItem,startDateFormItem,endDateFormItem,peopleLimitItem,contentFormItem]
     }
 }

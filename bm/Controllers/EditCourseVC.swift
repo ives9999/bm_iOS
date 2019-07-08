@@ -12,7 +12,7 @@ protocol EditCourseDelegate {
     func isReload(_ yes: Bool)
 }
 
-class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, SingleSelectDelegate, MultiSelectDelegate, ContentEditDelegate {
+class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, SingleSelectDelegate, MultiSelectDelegate, ContentEditDelegate,DateSelectDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
@@ -62,10 +62,11 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     override func refresh() {
         Global.instance.addSpinner(superView: view)
-        CourseService.instance.getOne(token: course_token!) { (success) in
+        CourseService.instance.getOne(t: SuperCourse.self, token: course_token!) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                self.superCourse = CourseService.instance.superCourse
+                let superModel = CourseService.instance.superModel
+                self.superCourse = (superModel as! SuperCourse)
                 self.putValue()
                 self.tableView.reloadData()
             } else {
@@ -96,7 +97,13 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                     }
                 }
             }
-            featuredView.setPickedImage(image: superCourse!.featured)
+            //featuredView.s
+            let featured_path = superCourse!.featured_path
+            if featured_path.count > 0 {
+                //print(featured_path)
+                featuredView.setPickedImage(url: featured_path)
+            }
+            //featuredView.setPickedImage(image: superCourse!.featured)
         }
     }
     
@@ -214,6 +221,12 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                 vc.key = item!.name
                 vc.title = item!.title
                 vc.delegate = self
+            } else if segue.identifier == TO_SELECT_DATE {
+                let vc: DateSelectVC = segue.destination as! DateSelectVC
+                vc.key = item!.name
+                vc.selected = item!.value!
+                vc.title = item!.title
+                vc.delegate = self
             }
             
         }
@@ -279,6 +292,15 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         let item = getFormItemFromKey(key)
         if item != nil {
             item!.value = content
+            item!.make()
+            tableView.reloadData()
+        }
+    }
+    
+    func dateSelected(key: String, selected: String) {
+        let item = getFormItemFromKey(key)
+        if item != nil {
+            item!.value = selected
             item!.make()
             tableView.reloadData()
         }

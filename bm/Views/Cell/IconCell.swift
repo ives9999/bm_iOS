@@ -16,7 +16,16 @@ class IconCell: SuperCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        titleLbl.textAlignment = .left
+        contentLbl.textAlignment = .left
+        titleLbl.numberOfLines = 0
+        contentLbl.numberOfLines = 0
+        titleLbl.lineBreakMode = .byWordWrapping
+        contentLbl.lineBreakMode = .byWordWrapping
+        contentLbl.setTextColor(UIColor("#aaaaaa"))
+        
+        //backgroundColor = UIColor.red
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

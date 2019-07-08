@@ -22,8 +22,8 @@ class SuperCourse: SuperModel {
     @objc dynamic var price_desc: String = ""
     @objc dynamic var price_text_long: String = ""
     @objc dynamic var price_text_short: String = ""
-    @objc dynamic var limit: Int = -1
-    @objc dynamic var limit_text: String = ""
+    @objc dynamic var people_limit: Int = -1
+    @objc dynamic var people_limit_text: String = ""
     @objc dynamic var kind: String = ""
     @objc dynamic var kind_text: String = ""
     @objc dynamic var cycle: Int = -1
@@ -56,6 +56,12 @@ class SuperCourse: SuperModel {
     
     override func filterRow() {
         created_at_text = created_at.noTime()
+        if featured_path.count > 0 {
+            if !featured_path.hasPrefix("http://") || !featured_path.hasPrefix("https://") {
+                featured_path = BASE_URL + featured_path
+                //print(featured_path)
+            }
+        }
     }
     
     override func getFeaturedPath() -> String {

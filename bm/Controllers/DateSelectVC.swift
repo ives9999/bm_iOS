@@ -9,7 +9,8 @@
 import UIKit
 
 protocol DateSelectDelegate: class {
-    func setDateData(res: String, type: SELECT_DATE_TYPE, indexPath: IndexPath?)
+    //func setDateData(res: String, type: SELECT_DATE_TYPE, indexPath: IndexPath?)
+    func dateSelected(key: String, selected: String)
 }
 
 class DateSelectVC: BaseViewController {
@@ -21,10 +22,11 @@ class DateSelectVC: BaseViewController {
     var delegate: DateSelectDelegate?
     
     //input["type":START,"date":date]
-    var type: SELECT_DATE_TYPE = SELECT_DATE_TYPE.start
+    //var type: SELECT_DATE_TYPE = SELECT_DATE_TYPE.start
     var selected: String = "2019-01-01"
+    var key: String? = nil
     
-    var indexPath: IndexPath?
+    //var indexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +40,10 @@ class DateSelectVC: BaseViewController {
     @IBAction func submit(_ sender: Any) {
         selected = datePicker.date.toString(format: "yyyy-MM-dd")
         //print(selected)
-        self.delegate?.setDateData(res: selected, type: type, indexPath: indexPath)
+        //self.delegate?.setDateData(res: selected, type: type, indexPath: indexPath)
+        if key != nil {
+            self.delegate?.dateSelected(key: key!, selected: selected)
+        }
         back()
     }
     

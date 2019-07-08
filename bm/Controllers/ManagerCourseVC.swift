@@ -97,7 +97,8 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
         
         let alert = UIAlertController(title: title, message: "選擇動作", preferredStyle: .alert)
         let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
-            //self.performSegue(withIdentifier: TO_SHOWTIMETABLE, sender: event.id)
+            let sender: [String: String] = ["title": title, "token": row!.token]
+            self.performSegue(withIdentifier: TO_SHOW_COURSE, sender: sender)
         }
         let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
             let sender: [String: String] = ["title": title, "token": row!.token]
@@ -145,6 +146,18 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
                 vc.coach_token = token
             }
             vc.delegate = self
+        } else if segue.identifier == TO_SHOW_COURSE {
+            let vc: ShowCourseVC = segue.destination as! ShowCourseVC
+            vc.delegate = self
+            if sender != nil {
+                let row: [String: String] = sender as! [String: String]
+                if row["title"] != nil {
+                    vc.title = row["title"]
+                }
+                if row["token"] != nil {
+                    vc.course_token = row["token"]
+                }
+            }
         }
     }
     
