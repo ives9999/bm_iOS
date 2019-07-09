@@ -16,6 +16,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var cityBtn: CityButton!
     @IBOutlet weak var contactLbl: SuperLabel!
+    @IBOutlet weak var courseLbl: SuperLabel!
     @IBOutlet weak var timetableLbl: SuperLabel!
     @IBOutlet weak var chargeLbl: SuperLabel!
     @IBOutlet weak var expLbl: SuperLabel!
@@ -25,6 +26,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBOutlet weak var featuredView: UIImageView!
     @IBOutlet weak var contactTableView: SuperTableView!
+    @IBOutlet weak var courseTableView: SuperTableView!
     @IBOutlet weak var timetableView: UIView!
     @IBOutlet weak var timetableCollectionView: UICollectionView!
     
@@ -45,6 +47,8 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var featuredViewHeight:
     NSLayoutConstraint!
     @IBOutlet weak var contactTableViewHeight:
+    NSLayoutConstraint!
+    @IBOutlet weak var courseTableViewHeight:
     NSLayoutConstraint!
     @IBOutlet weak var timetableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var timetableConllectionViewHeight: NSLayoutConstraint!
@@ -84,6 +88,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     var show_in: Show_IN?
     var superCoach: SuperCoach?
     var timetables: Timetables?
+    var superCourses: SuperCourses?
     var featured: UIImage?
     var city_id: Int = 0
     var params: [String: Any] = [String: Any]()
@@ -109,29 +114,25 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         titleLbl.text = show_in!.title
         frameWidth = view.frame.width
         
-        h = contactLbl.bounds.height * 6
+        h = contactLbl.bounds.height * 7
         
         let cellNib = UINib(nibName: "IconCell", bundle: nil)
         contactTableView.register(cellNib, forCellReuseIdentifier: "cell")
-        contactTableView.rowHeight = UITableViewAutomaticDimension
-        contactTableView.estimatedRowHeight = 600
-        contactTableViewHeight.constant = 2000
+        initContactTableView()
         
-        //contactHeight = contactCellHeight * CGFloat(contactTableRowKeys.count)
-        //contactTableViewHeight.constant = contactHeight
+        let cellNib1 = UINib(nibName: "ManagerCourseCell", bundle: nil)
+        courseTableView.register(cellNib1, forCellReuseIdentifier: "courseCell")
+        initCourseTableView()
         
-        featuredView.backgroundColor = UIColor.white
-        featuredView.contentMode = .scaleAspectFit
+        initWebView()
+        
+        initFeaturedView()
         
         //timetableHeight = CGFloat(endNum - startNum) * timetableCellHeight
         //timetableConllectionViewHeight.constant = timetableHeight
         //timetableViewHeight.constant = timetableHeight + 30
         
-        initWebView(webView: chargeWebView, container: chargeView)
-        initWebView(webView: expWebView, container: expView)
-        initWebView(webView: licenseWebView, container: licenseView)
-        initWebView(webView: featWebView, container: featView)
-        initWebView(webView: detailWebView, container: detailView)
+        
         
 //        let frame = CGRect(x: 0, y: 0, width: frameWidth!, height: 10)
 //        lastView = UIView(frame: frame)
@@ -143,6 +144,25 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         beginRefresh()
         scrollView.addSubview(refreshControl)
         refresh()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        contactLbl.setTextColor(UIColor(MY_RED))
+        //timetableLbl.setTextColor(UIColor(MY_RED))
+        chargeLbl.setTextColor(UIColor(MY_RED))
+        expLbl.setTextColor(UIColor(MY_RED))
+        licenseLbl.setTextColor(UIColor(MY_RED))
+        featLbl.setTextColor(UIColor(MY_RED))
+        detailLbl.setTextColor(UIColor(MY_RED))
+        courseLbl.setTextColor(UIColor(MY_RED))
+        //initCollectionView()
+        contactLbl.textAlignment = .left
+        chargeLbl.textAlignment = .left
+        expLbl.textAlignment = .left
+        licenseLbl.textAlignment = .left
+        featLbl.textAlignment = .left
+        detailLbl.textAlignment = .left
+        courseLbl.textAlignment = .left
     }
     
     override func refresh() {
@@ -160,6 +180,23 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                     self.contactTableView.reloadData()
                     self.setFeatured()
                 }
+                
+                var filter: [String: Any] = [String: Any]()
+                filter.merge(["status": "online"])
+                if self.superCoach != nil {
+                    filter.merge(["coach_id": self.superCoach!.id])
+                }
+                CourseService.instance.getList(t: SuperCourse.self, t1: SuperCourses.self, token: nil, _filter: filter, page: 1, perPage: 100) { (success2) in
+                    Global.instance.removeSpinner(superView: self.view)
+                    if (success2) {
+                        self.superCourses = (CourseService.instance.superModel as! SuperCourses)
+                        //self.superCourses!.printRows()
+                        self.courseTableView.reloadData()
+                    } else {
+                        self.warning(CourseService.instance.msg)
+                    }
+                    self.endRefresh()
+                }
 //                CoachService.instance.getTT(token: self.show_in!.token, type: self.show_in!.type) { (success2) in
 //                    self.endRefresh()
 //                    if (success2) {
@@ -173,24 +210,31 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    override func viewWillLayoutSubviews() {
-        contactLbl.setTextColor(UIColor(MY_RED))
-        //timetableLbl.setTextColor(UIColor(MY_RED))
-        chargeLbl.setTextColor(UIColor(MY_RED))
-        expLbl.setTextColor(UIColor(MY_RED))
-        licenseLbl.setTextColor(UIColor(MY_RED))
-        featLbl.setTextColor(UIColor(MY_RED))
-        detailLbl.setTextColor(UIColor(MY_RED))
-        //initCollectionView()
-        contactLbl.textAlignment = .left
-        chargeLbl.textAlignment = .left
-        expLbl.textAlignment = .left
-        licenseLbl.textAlignment = .left
-        featLbl.textAlignment = .left
-        detailLbl.textAlignment = .left
+    func initCourseTableView() {
+        courseTableView.rowHeight = UITableViewAutomaticDimension
+        courseTableView.estimatedRowHeight = 600
+        courseTableViewHeight.constant = 2000
+        courseTableView.delegate = self
+        courseTableView.dataSource = self
     }
     
-    func initWebView(webView: WKWebView, container: UIView) {
+    func initContactTableView() {
+        contactTableView.rowHeight = UITableViewAutomaticDimension
+        contactTableView.estimatedRowHeight = 600
+        contactTableViewHeight.constant = 2000
+        contactTableView.delegate = self
+        contactTableView.dataSource = self
+    }
+    
+    func initWebView() {
+        _initWebView(webView: chargeWebView, container: chargeView)
+        _initWebView(webView: expWebView, container: expView)
+        _initWebView(webView: licenseWebView, container: licenseView)
+        _initWebView(webView: featWebView, container: featView)
+        _initWebView(webView: detailWebView, container: detailView)
+    }
+    
+    func _initWebView(webView: WKWebView, container: UIView) {
         webView.translatesAutoresizingMaskIntoConstraints = false
         container.addSubview(webView)
         webView.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
@@ -203,6 +247,11 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         webView.scrollView.isScrollEnabled = false
     }
     
+    func initFeaturedView() {
+        featuredView.backgroundColor = UIColor.white
+        featuredView.contentMode = .scaleAspectFit
+    }
+    
     func changeScrollViewContentSize() {
         
         let h1 = contactTableViewHeight.constant
@@ -212,9 +261,10 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         let h5 = featViewHeight.constant
         let h6 = detailViewHeight.constant
         let h7 = featuredViewHeight.constant
+        let h8 = courseTableViewHeight.constant
         //print(contentViewConstraintHeight)
         
-        h += h1 + h2 + h3 + h4 + h5 + h6 + h7 + 100
+        h += h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + 100
         scrollView.contentSize = CGSize(width: view.frame.width, height: h)
         ContainerViewConstraintHeight.constant = h
     }
@@ -225,6 +275,12 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         } else {
             if tableView == contactTableView {
                 return contactTableRowKeys.count
+            } else if tableView == courseTableView {
+                if superCourses != nil {
+                    return superCourses!.rows.count
+                } else {
+                    return 0
+                }
             } else {
                 return 0
             }
@@ -232,9 +288,8 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: IconCell?
         if tableView == contactTableView {
-            cell = (tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IconCell)
+            let cell = (tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IconCell)
             let key = contactTableRowKeys[indexPath.row]
             if contactTableRows[key] != nil {
                 let row = contactTableRows[key]!
@@ -251,7 +306,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                     }
                 }
                 let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
-                cell!.update(icon: icon, title: title, content: content, isPressed: isPressed)
+                cell.update(icon: icon, title: title, content: content, isPressed: isPressed)
             }
             if indexPath.row == contactTableRows.count - 1 {
                 UIView.animate(withDuration: 0, animations: {self.contactTableView.layoutIfNeeded()}) { (complete) in
@@ -265,12 +320,32 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                     self.changeScrollViewContentSize()
                 }
             }
+            return cell
+        } else if tableView == courseTableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "courseCell", for: indexPath) as! ManagerCourseCell
+            //cell.blacklistCellDelegate = self
+            if superCourses != nil && superCourses!.rows.indices.contains(indexPath.row) {
+                let row = superCourses!.rows[indexPath.row]
+                //row.printRow()
+                cell.forRow(row: row)
+            }
+            if indexPath.row == superCourses!.rows.count - 1 {
+                UIView.animate(withDuration: 0, animations: {self.courseTableView.layoutIfNeeded()}) { (complete) in
+                    var heightOfTableView: CGFloat = 0.0
+                    let cells = self.courseTableView.visibleCells
+                    for cell in cells {
+                        heightOfTableView += cell.frame.height
+                    }
+                    //print(heightOfTableView)
+                    self.courseTableViewHeight.constant = heightOfTableView
+                    self.changeScrollViewContentSize()
+                }
+            }
+            return cell
         } else {
-            cell = (UITableViewCell() as! IconCell)
-            
+            let cell = (UITableViewCell() as! IconCell)
+            return cell
         }
-        
-        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
