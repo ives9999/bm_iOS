@@ -50,7 +50,7 @@ class MemberService {
                 }
                 completion(true)
             } else {
-                self.msg = "網路錯誤，請稍後再試"
+                self.msg = "網路或伺服器錯誤，請聯絡管理員或請稍後再試"
                 completion(false)
             }
         }

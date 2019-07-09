@@ -369,11 +369,12 @@
                         <outlet property="titleLbl" destination="ae5-TU-DnJ" id="p5N-61-J3p"/>
                         <segue destination="F2b-4T-551" kind="show" identifier="toShowTimeTable" id="oKL-Gk-zBn"/>
                         <segue destination="fEf-Ib-3oR" kind="custom" customClass="SWRevealViewControllerSegueSetController" id="xCT-HQ-HRw"/>
+                        <segue destination="ZZa-2U-rNz" kind="showDetail" identifier="toShowCourse" id="25S-Pg-i4z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sA-Si-aaz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3009" y="1666"/>
+            <point key="canvasLocation" x="71" y="2210"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="jbr-MT-GuX">
@@ -5422,7 +5423,7 @@
         <segue reference="gqh-nG-WJt"/>
         <segue reference="oKL-Gk-zBn"/>
         <segue reference="xCJ-lv-P9J"/>
-        <segue reference="YBu-8w-Gih"/>
+        <segue reference="25S-Pg-i4z"/>
         <segue reference="2ff-JT-Wdj"/>
         <segue reference="f5d-2G-qtf"/>
         <segue reference="xcZ-Ad-vEw"/>

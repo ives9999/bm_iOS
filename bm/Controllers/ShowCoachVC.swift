@@ -364,6 +364,11 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             } else if key == EMAIL_KEY {
                 superCoach!.email.email()
             }
+        } else if tableView == courseTableView {
+            if superCourses != nil {
+                let sender = superCourses!.rows[indexPath.row]
+                performSegue(withIdentifier: TO_SHOW_COURSE, sender: sender)
+            }
         }
     }
     
@@ -379,6 +384,11 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             }
             showTimetableVC.source = show_in!.type
             showTimetableVC.token = show_in!.token
+        } else if segue.identifier == TO_SHOW_COURSE {
+            let superCourse = sender as! SuperCourse
+            let vc: ShowCourseVC = segue.destination as! ShowCourseVC
+            vc.title = superCourse.title
+            vc.course_token = superCourse.token
         }
     }
     

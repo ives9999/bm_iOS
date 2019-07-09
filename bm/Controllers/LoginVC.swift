@@ -74,7 +74,15 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                     SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
                 }
             } else {
-                print("login failed by server")
+                //print("login failed by server")
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                let alert = SCLAlertView(appearance: appearance)
+                alert.addButton("確定", action: {
+                    self.performSegue(withIdentifier: UNWIND, sender: nil)
+                })
+                alert.showWarning("警告", subTitle: MemberService.instance.msg)
             }
         }
     }
