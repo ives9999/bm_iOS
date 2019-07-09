@@ -322,6 +322,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
         if action == "INSERT" {
             params[CREATED_ID_KEY] = String(Member.instance.id)
+            params["cat_id"] = String(44)
         }
         if course_token != nil {
             params["course_token"] = course_token!

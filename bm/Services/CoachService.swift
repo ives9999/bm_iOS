@@ -21,6 +21,10 @@ class CoachService: DataService {
         _model = Coach.instance
     }
     
+    override func getSource() -> String? {
+        return "coach"
+    }
+    
     override func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
         
         //print(model)

@@ -29,6 +29,8 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var timetableCollectionView: UICollectionView!
     
     @IBOutlet weak var scrollView: SuperScrollView!
+    @IBOutlet weak var scrollContainerView: UIView!
+    @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var chargeView: UIView!
     var chargeWebView: SuperWebView = SuperWebView()
     @IBOutlet weak var expView: UIView!
@@ -53,6 +55,9 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var detailViewHeight: NSLayoutConstraint!
     var lastView: UIView!
     
+    var h: CGFloat = 0
+    var lblHeight: CGFloat = 30
+    
     var featuredHeight: CGFloat = 0
     var contactHeight: CGFloat = 0
     var timetableHeight: CGFloat = 0
@@ -62,7 +67,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     var licenseHeight: CGFloat = 0
     var featHeight: CGFloat = 0
     var detailHeight: CGFloat = 0
-    var lblHeight: CGFloat = 30
+    
     
     var lblMargin: CGFloat = 12
     var frameWidth: CGFloat?
@@ -84,6 +89,8 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     var params: [String: Any] = [String: Any]()
     var backDelegate: BackDelegate?
     
+    var fromNet: Bool = false
+    
     let contactTableRowKeys:[String] = [MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY,COACH_SENIORITY_KEY,CREATED_AT_KEY,PV_KEY]
     var contactTableRows: [String: [String:String]] = [
         MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
@@ -102,17 +109,23 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         titleLbl.text = show_in!.title
         frameWidth = view.frame.width
         
+        h = contactLbl.bounds.height * 6
+        
         let cellNib = UINib(nibName: "IconCell", bundle: nil)
         contactTableView.register(cellNib, forCellReuseIdentifier: "cell")
-        contactHeight = contactCellHeight * CGFloat(contactTableRowKeys.count)
-        contactTableViewHeight.constant = contactHeight
+        contactTableView.rowHeight = UITableViewAutomaticDimension
+        contactTableView.estimatedRowHeight = 600
+        contactTableViewHeight.constant = 2000
+        
+        //contactHeight = contactCellHeight * CGFloat(contactTableRowKeys.count)
+        //contactTableViewHeight.constant = contactHeight
         
         featuredView.backgroundColor = UIColor.white
         featuredView.contentMode = .scaleAspectFit
         
-        timetableHeight = CGFloat(endNum - startNum) * timetableCellHeight
-        timetableConllectionViewHeight.constant = timetableHeight
-        timetableViewHeight.constant = timetableHeight + 30
+        //timetableHeight = CGFloat(endNum - startNum) * timetableCellHeight
+        //timetableConllectionViewHeight.constant = timetableHeight
+        //timetableViewHeight.constant = timetableHeight + 30
         
         initWebView(webView: chargeWebView, container: chargeView)
         initWebView(webView: expWebView, container: expView)
@@ -120,12 +133,12 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         initWebView(webView: featWebView, container: featView)
         initWebView(webView: detailWebView, container: detailView)
         
-        let frame = CGRect(x: 0, y: 0, width: frameWidth!, height: 10)
-        lastView = UIView(frame: frame)
-        detailView.addSubview(lastView)
-        let c1 = NSLayoutConstraint(item: lastView, attribute: .top, relatedBy: .equal, toItem: detailWebView, attribute: .bottom, multiplier: 1, constant: 12)
-        lastView.translatesAutoresizingMaskIntoConstraints = false
-        detailView.addConstraints([c1])
+//        let frame = CGRect(x: 0, y: 0, width: frameWidth!, height: 10)
+//        lastView = UIView(frame: frame)
+//        detailView.addSubview(lastView)
+//        let c1 = NSLayoutConstraint(item: lastView, attribute: .top, relatedBy: .equal, toItem: detailWebView, attribute: .bottom, multiplier: 1, constant: 12)
+//        lastView.translatesAutoresizingMaskIntoConstraints = false
+//        detailView.addConstraints([c1])
         
         beginRefresh()
         scrollView.addSubview(refreshControl)
@@ -134,23 +147,289 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func refresh() {
         Global.instance.addSpinner(superView: view)
-        CoachService.instance.getOne(type: show_in!.type, token: show_in!.token) { (success1) in
+        CoachService.instance.getOne(t: SuperCoach.self, token: show_in!.token){ (success1) in
             if (success1) {
-                self.superCoach = CoachService.instance.superCoach
+                let superModel: SuperModel = CoachService.instance.superModel
+                self.superCoach = (superModel as! SuperCoach)
                 //self.superCoach!.printRow()
                 //self.setData() move to getFeatured
-                self.getFeatured()
-                CoachService.instance.getTT(token: self.show_in!.token, type: self.show_in!.type) { (success2) in
-                    Global.instance.removeSpinner(superView: self.view)
-                    self.endRefresh()
-                    if (success2) {
-                        self.timetables = CoachService.instance.timetables
-                        self.setTimetableEvent()
-                    }
+                if self.superCoach != nil {
+                    self.setData()
+                    self.fromNet = true
+                    //self.getFeatured()
+                    self.contactTableView.reloadData()
+                    self.setFeatured()
                 }
+//                CoachService.instance.getTT(token: self.show_in!.token, type: self.show_in!.type) { (success2) in
+//                    self.endRefresh()
+//                    if (success2) {
+//                        self.timetables = CoachService.instance.timetables
+//                        self.setTimetableEvent()
+//                    }
+//                }
+            }
+            Global.instance.removeSpinner(superView: self.view)
+            self.endRefresh()
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        contactLbl.setTextColor(UIColor(MY_RED))
+        //timetableLbl.setTextColor(UIColor(MY_RED))
+        chargeLbl.setTextColor(UIColor(MY_RED))
+        expLbl.setTextColor(UIColor(MY_RED))
+        licenseLbl.setTextColor(UIColor(MY_RED))
+        featLbl.setTextColor(UIColor(MY_RED))
+        detailLbl.setTextColor(UIColor(MY_RED))
+        //initCollectionView()
+        contactLbl.textAlignment = .left
+        chargeLbl.textAlignment = .left
+        expLbl.textAlignment = .left
+        licenseLbl.textAlignment = .left
+        featLbl.textAlignment = .left
+        detailLbl.textAlignment = .left
+    }
+    
+    func initWebView(webView: WKWebView, container: UIView) {
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        container.addSubview(webView)
+        webView.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
+        webView.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
+        webView.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
+        webView.heightAnchor.constraint(equalTo: container.heightAnchor).isActive = true
+        webView.uiDelegate = self
+        webView.navigationDelegate = self
+        webView.scrollView.isScrollEnabled = false
+    }
+    
+    func changeScrollViewContentSize() {
+        
+        let h1 = contactTableViewHeight.constant
+        let h2 = chargeViewHeight.constant
+        let h3 = expViewHeight.constant
+        let h4 = licenseViewHeight.constant
+        let h5 = featViewHeight.constant
+        let h6 = detailViewHeight.constant
+        let h7 = featuredViewHeight.constant
+        //print(contentViewConstraintHeight)
+        
+        h += h1 + h2 + h3 + h4 + h5 + h6 + h7 + 100
+        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
+        ContainerViewConstraintHeight.constant = h
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if !fromNet {
+            return 0
+        } else {
+            if tableView == contactTableView {
+                return contactTableRowKeys.count
+            } else {
+                return 0
             }
         }
     }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell: IconCell?
+        if tableView == contactTableView {
+            cell = (tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IconCell)
+            let key = contactTableRowKeys[indexPath.row]
+            if contactTableRows[key] != nil {
+                let row = contactTableRows[key]!
+                let icon = row["icon"] ?? ""
+                let title = row["title"] ?? ""
+                var content = row["content"] ?? ""
+                if key == MOBILE_KEY && content.count > 0 {
+                    content = content.mobileShow()
+                } else if key == CREATED_AT_KEY {
+                    content = content.noTime()
+                } else if key == COACH_SENIORITY_KEY {
+                    if content.count > 0 {
+                        content = content + "年"
+                    }
+                }
+                let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
+                cell!.update(icon: icon, title: title, content: content, isPressed: isPressed)
+            }
+            if indexPath.row == contactTableRows.count - 1 {
+                UIView.animate(withDuration: 0, animations: {self.contactTableView.layoutIfNeeded()}) { (complete) in
+                    var heightOfTableView: CGFloat = 0.0
+                    let cells = self.contactTableView.visibleCells
+                    for cell in cells {
+                        heightOfTableView += cell.frame.height
+                    }
+                    //print(heightOfTableView)
+                    self.contactTableViewHeight.constant = heightOfTableView
+                    self.changeScrollViewContentSize()
+                }
+            }
+        } else {
+            cell = (UITableViewCell() as! IconCell)
+            
+        }
+        
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == contactTableView {
+            let key = contactTableRowKeys[indexPath.row]
+            if key == MOBILE_KEY {
+                superCoach!.mobile.makeCall()
+            } else if key == LINE_KEY {
+                superCoach!.line.line()
+            } else if key == FB_KEY {
+                superCoach!.fb.fb()
+            } else if key == YOUTUBE_KEY {
+                superCoach!.youtube.youtube()
+            } else if key == WEBSITE_KEY {
+                superCoach!.website.website()
+            } else if key == EMAIL_KEY {
+                superCoach!.email.email()
+            }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == TO_SHOW {
+            let sender = sender as! Show_IN
+            let showVC: ShowVC = segue.destination as! ShowVC
+            showVC.show_in = sender
+        } else if segue.identifier == TO_SHOW_TIMETABLE {
+            let showTimetableVC: ShowTimetableVC = segue.destination as! ShowTimetableVC
+            if let id = sender as? Int {
+                showTimetableVC.tt_id = id
+            }
+            showTimetableVC.source = show_in!.type
+            showTimetableVC.token = show_in!.token
+        }
+    }
+    
+    func setData() {
+        if superCoach != nil {
+            if superCoach!.citys.count > 0 {
+                for city in superCoach!.citys {
+                    city_id = city.id
+                    params["city_id"] = [city_id]
+                    params["city_type"] = "all"
+                    cityBtn.setTitle(city.name)
+                }
+            } else {
+                cityBtn.isHidden = true
+            }
+            //print(BASE_URL + superCoach!.featured_path)
+            //featuredView.af_setImage(withURL: URL(string: BASE_URL + superCoach!.featured_path)!)
+            //featuredView.image = featured
+            for key in contactTableRowKeys {
+                if (self.superCoach!.responds(to: Selector(key))) {
+                    let content: String = String(describing:(self.superCoach!.value(forKey: key))!)
+                    contactTableRows[key]!["content"] = content
+                }
+            }
+            
+            setWeb(webView: chargeWebView, content: superCoach!.charge)
+            setWeb(webView: expWebView, content: superCoach!.exp)
+            setWeb(webView: licenseWebView, content: superCoach!.license)
+            setWeb(webView: featWebView, content: superCoach!.feat)
+            setWeb(webView: detailWebView, content: superCoach!.content)
+        }
+    }
+    
+    func setFeatured() {
+        
+        if superCoach!.featured_path.count > 0 {
+            
+            DataService.instance1.getImage(_url: superCoach!.featured_path) { (success) in
+                self.featured = DataService.instance1.image
+                self.featuredView.image = self.featured
+                self.featuredLayout()
+            }
+        }
+    }
+    
+    func setWeb(webView: WKWebView, content: String) {
+        let html: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+body_css+"</HEAD><body>"+content+"</body></html>"
+        //print(content)
+        
+        webView.loadHTMLString(html, baseURL: nil)
+    }
+    
+    func getFeatured() {
+        DataService.instance1.getImage(_url: BASE_URL + superCoach!.featured_path) { (success) in
+            self.featured = DataService.instance1.image
+            self.featuredLayout()
+        }
+    }
+    
+    
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        
+//        self.chargeWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+//            if complete != nil {
+//                self.chargeWebView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
+//                    self.chargeViewHeight!.constant = height as! CGFloat
+//                    self.changeScrollViewContentSize()
+//                })
+//            }
+//
+//        })
+        
+        webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+            if complete != nil {
+                webView.evaluateJavaScript("document.documentElement.scrollHeight", completionHandler: { (height, error) in
+                    //print(height)
+                    let _height = height as! CGFloat
+                    if webView == self.chargeWebView {
+                        self.chargeHeight = _height
+                        self.chargeViewHeight!.constant = _height
+                    } else if (webView == self.expWebView) {
+                        self.expHeight = _height
+                        self.expViewHeight!.constant = _height
+                    } else if (webView == self.licenseWebView) {
+                        self.licenseHeight = _height
+                        self.licenseViewHeight!.constant = _height
+                    } else if (webView == self.featWebView) {
+                        self.featHeight = _height
+                        self.featViewHeight!.constant = _height
+                    } else if (webView == self.detailWebView) {
+                        self.detailHeight = _height
+                        self.detailViewHeight!.constant = _height
+                    }
+                    self.changeScrollViewContentSize()
+                })
+            }
+            
+        })
+    }
+    
+    func featuredLayout() {
+        let img_width: CGFloat = featured!.size.width
+        let img_height: CGFloat = featured!.size.height
+        //print(img_width)
+        //print(img_height)
+        featuredHeight = featuredView.frame.width * (img_height / img_width)
+        featuredViewHeight.constant = featuredHeight
+        changeScrollViewContentSize()
+    }
+    
+    func initShowVC(sin: Show_IN) {
+        self.show_in = sin
+    }
+    
+    @IBAction func cityBtnPressed(_ sender: Any) {
+        //performSegue(withIdentifier: TO_HOME, sender: nil)
+        backDelegate?.setBack(params: params)
+        prev()
+    }
+    
+    @IBAction func prevBtnPressed(_ sender: Any) {
+        prev()
+    }
+    
+    
     
     func setTimetableEvent() {
         let width: CGFloat = timetableCellWidth - 2 * timetableCellBorderWidth
@@ -191,20 +470,20 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 titleLbl.numberOfLines = 0
                 //titleLbl.sizeToFit()
                 absView.addSubview(titleLbl)
-
+                
                 /*
-                let line = DrawLine(frame: CGRect(x: 5, y: 35, width: width-10, height: 1))
-                absView.addSubview(line)
-
-                frame = CGRect(x: 3, y: 40, width: width, height: height-20)
-                let contentLbl = UILabel(frame: frame)
-                contentLbl.text = "人數：\n" + row.limit_text
-                contentLbl.font = UIFont(name: contentLbl.font.fontName, size: 12)
-                contentLbl.textColor = UIColor.black
-                contentLbl.numberOfLines = 0
-                contentLbl.sizeToFit()
-                absView.addSubview(contentLbl)
- */
+                 let line = DrawLine(frame: CGRect(x: 5, y: 35, width: width-10, height: 1))
+                 absView.addSubview(line)
+                 
+                 frame = CGRect(x: 3, y: 40, width: width, height: height-20)
+                 let contentLbl = UILabel(frame: frame)
+                 contentLbl.text = "人數：\n" + row.limit_text
+                 contentLbl.font = UIFont(name: contentLbl.font.fontName, size: 12)
+                 contentLbl.textColor = UIColor.black
+                 contentLbl.numberOfLines = 0
+                 contentLbl.sizeToFit()
+                 absView.addSubview(contentLbl)
+                 */
                 
                 let tap = UITapGestureRecognizer(target: self, action: #selector(clickTimetableEvent))
                 absView.addGestureRecognizer(tap)
@@ -226,18 +505,6 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         performSegue(withIdentifier: TO_SHOW_TIMETABLE, sender: event.id)
     }
     
-    override func viewWillLayoutSubviews() {
-        contactLbl.setTextColor(UIColor(MY_RED))
-        timetableLbl.setTextColor(UIColor(MY_RED))
-        chargeLbl.setTextColor(UIColor(MY_RED))
-        expLbl.setTextColor(UIColor(MY_RED))
-        licenseLbl.setTextColor(UIColor(MY_RED))
-        featLbl.setTextColor(UIColor(MY_RED))
-        detailLbl.setTextColor(UIColor(MY_RED))
-        initCollectionView()
-        changeScrollViewContentSize()
-    }
-    
     func initCollectionView() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
@@ -247,90 +514,6 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         timetableCellWidth = timetableCollectionView.frame.width/CGFloat(columnNum)
         layout.itemSize = CGSize(width: timetableCellWidth, height: timetableCellHeight)
         timetableCollectionView.collectionViewLayout = layout
-    }
-    
-    func initWebView(webView: WKWebView, container: UIView) {
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        container.addSubview(webView)
-        webView.topAnchor.constraint(equalTo: container.topAnchor).isActive = true
-        webView.rightAnchor.constraint(equalTo: container.rightAnchor).isActive = true
-        webView.leftAnchor.constraint(equalTo: container.leftAnchor).isActive = true
-        webView.bottomAnchor.constraint(equalTo: container.bottomAnchor).isActive = true
-        webView.heightAnchor.constraint(equalTo: container.heightAnchor).isActive = true
-        webView.uiDelegate = self
-        webView.navigationDelegate = self
-        webView.scrollView.isScrollEnabled = false
-    }
-    
-    func changeScrollViewContentSize() {
-        //let height: CGFloat = featuredHeight + contactHeight + timetableHeaderHeight + timetableHeight + chargeHeight + expHeight + licenseHeight + featHeight + detailHeight + (lblMargin+lblHeight)*8 + 100
-        //let height: CGFloat = 10000
-        //print(height)
-        
-        let absFrame = lastView.convert(lastView.bounds, to: scrollView)
-        //print(absFrame)
-        scrollView.contentSize = CGSize(width: frameWidth!, height: absFrame.origin.y)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return contactCellHeight
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == contactTableView {
-            return contactTableRowKeys.count
-        } else {
-            return 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: IconCell?
-        if tableView == contactTableView {
-            cell = (tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IconCell)
-            let key = contactTableRowKeys[indexPath.row]
-            if contactTableRows[key] != nil {
-                let row = contactTableRows[key]!
-                let icon = row["icon"] ?? ""
-                let title = row["title"] ?? ""
-                var content = row["content"] ?? ""
-                if key == MOBILE_KEY && content.count > 0 {
-                    content = content.mobileShow()
-                } else if key == CREATED_AT_KEY {
-                    content = content.noTime()
-                } else if key == COACH_SENIORITY_KEY {
-                    if content.count > 0 {
-                        content = content + "年"
-                    }
-                }
-                let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
-                cell!.update(icon: icon, title: title, content: content, isPressed: isPressed)
-            }
-        } else {
-            cell = (UITableViewCell() as! IconCell)
-            
-        }
-        
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == contactTableView {
-            let key = contactTableRowKeys[indexPath.row]
-            if key == MOBILE_KEY {
-                superCoach!.mobile.makeCall()
-            } else if key == LINE_KEY {
-                superCoach!.line.line()
-            } else if key == FB_KEY {
-                superCoach!.fb.fb()
-            } else if key == YOUTUBE_KEY {
-                superCoach!.youtube.youtube()
-            } else if key == WEBSITE_KEY {
-                superCoach!.website.website()
-            } else if key == EMAIL_KEY {
-                superCoach!.email.email()
-            }
-        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -360,126 +543,6 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         return cell
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_SHOW {
-            let sender = sender as! Show_IN
-            let showVC: ShowVC = segue.destination as! ShowVC
-            showVC.show_in = sender
-        } else if segue.identifier == TO_SHOW_TIMETABLE {
-            let showTimetableVC: ShowTimetableVC = segue.destination as! ShowTimetableVC
-            if let id = sender as? Int {
-                showTimetableVC.tt_id = id
-            }
-            showTimetableVC.source = show_in!.type
-            showTimetableVC.token = show_in!.token
-        }
-    }
-    
-    func setData() {
-        if superCoach != nil {
-            if superCoach!.citys.count > 0 {
-                for city in superCoach!.citys {
-                    city_id = city.id
-                    params["city_id"] = [city_id]
-                    params["city_type"] = "all"
-                    cityBtn.setTitle(city.name)
-                }
-            } else {
-                cityBtn.isHidden = true
-            }
-            //print(BASE_URL + superCoach!.featured_path)
-            //featuredView.af_setImage(withURL: URL(string: BASE_URL + superCoach!.featured_path)!)
-            featuredView.image = featured
-            setContact()
-            setWeb(webView: chargeWebView, content: superCoach!.charge)
-            setWeb(webView: expWebView, content: superCoach!.exp)
-            setWeb(webView: licenseWebView, content: superCoach!.license)
-            setWeb(webView: featWebView, content: superCoach!.feat)
-            setWeb(webView: detailWebView, content: superCoach!.content)
-        }
-    }
-    
-    func setContact() {
-        for key in contactTableRowKeys {
-            if (self.superCoach!.responds(to: Selector(key))) {
-                let content: String = String(describing:(self.superCoach!.value(forKey: key))!)
-                contactTableRows[key]!["content"] = content
-            }
-        }
-        //print(self.coachTableRows)
-        contactTableView.reloadData()
-    }
-    
-    func setWeb(webView: WKWebView, content: String) {
-        let html: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+body_css+"</HEAD><body>"+content+"</body></html>"
-        //print(content)
-        
-        webView.loadHTMLString(html, baseURL: nil)
-    }
-    
-    func getFeatured() {
-        DataService.instance1.getImage(_url: BASE_URL + superCoach!.featured_path) { (success) in
-            self.featured = DataService.instance1.image
-            self.featuredLayout()
-            self.setData()
-        }
-    }
-    
-    
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        
-        webView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
-            if complete != nil {
-                webView.evaluateJavaScript("document.documentElement.scrollHeight", completionHandler: { (height, error) in
-                    //print(height)
-                    let _height = height as! CGFloat-50
-                    if webView == self.chargeWebView {
-                        self.chargeHeight = _height
-                        self.chargeViewHeight!.constant = _height
-                    } else if (webView == self.expWebView) {
-                        self.expHeight = _height
-                        self.expViewHeight!.constant = _height
-                    } else if (webView == self.licenseWebView) {
-                        self.licenseHeight = _height
-                        self.licenseViewHeight!.constant = _height
-                    } else if (webView == self.featWebView) {
-                        self.featHeight = _height
-                        self.featViewHeight!.constant = _height
-                    } else if (webView == self.detailWebView) {
-                        self.detailHeight = _height
-                        self.detailViewHeight!.constant = _height
-                    }
-                    self.changeScrollViewContentSize()
-                })
-            }
-            
-        })
-    }
-    
-    func featuredLayout() {
-        let img_width: CGFloat = featured!.size.width
-        let img_height: CGFloat = featured!.size.height
-        //print(img_width)
-        //print(img_height)
-        featuredHeight = featuredView.frame.width * (img_height / img_width)
-        featuredViewHeight.constant = featuredHeight
-    }
-    
-    func initShowVC(sin: Show_IN) {
-        self.show_in = sin
-    }
-    
-    @IBAction func cityBtnPressed(_ sender: Any) {
-        //performSegue(withIdentifier: TO_HOME, sender: nil)
-        backDelegate?.setBack(params: params)
-        prev()
-    }
-    
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
     }
 }
 
