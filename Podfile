@@ -21,9 +21,10 @@ target 'bm' do
   pod 'FBSDKLoginKit', '~> 4.38.0'
   pod 'FBSDKShareKit', '~> 4.38.0'
   pod 'ReachabilitySwift'
+  pod 'OneSignal', '>= 2.6.2', '< 3.0'
 end
 
 target 'bmNotificationServiceExtension' do
   use_frameworks!
-  pod 'OneSignal', '>=2.5.2', '<3.0'
+  pod 'OneSignal', '>=2.6.2', '<3.0'
 end

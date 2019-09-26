@@ -1,6 +1,6 @@
 PODS:
-  - Alamofire (4.8.1)
-  - AlamofireImage (3.5.0):
+  - Alamofire (4.9.0)
+  - AlamofireImage (3.5.2):
     - Alamofire (~> 4.8)
   - Bolts (1.9.0):
     - Bolts/AppLinks (= 1.9.0)
@@ -28,15 +28,15 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.38.1):
     - FBSDKCoreKit
-  - OneSignal (2.9.5)
-  - ReachabilitySwift (4.3.0)
-  - Socket.IO-Client-Swift (14.0.0):
-    - Starscream (~> 3.0.6)
-  - Starscream (3.0.6)
-  - SwiftyJSON (4.2.0)
-  - SwipeCellKit (2.5.1)
+  - OneSignal (2.11.0)
+  - ReachabilitySwift (4.3.1)
+  - Socket.IO-Client-Swift (15.1.0):
+    - Starscream (~> 3.1)
+  - Starscream (3.1.0)
+  - SwiftyJSON (5.0.0)
+  - SwipeCellKit (2.7.1)
   - TRVideoView (0.1.4)
-  - UIColor_Hex_Swift (4.2.0)
+  - UIColor_Hex_Swift (5.1.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -48,7 +48,7 @@ DEPENDENCIES:
   - FBSDKCoreKit (~> 4.38.0)
   - FBSDKLoginKit (~> 4.38.0)
   - FBSDKShareKit (~> 4.38.0)
-  - OneSignal (< 3.0, >= 2.5.2)
+  - OneSignal (< 3.0, >= 2.6.2)
   - ReachabilitySwift
   - Socket.IO-Client-Swift
   - SwiftyJSON
@@ -57,7 +57,7 @@ DEPENDENCIES:
   - UIColor_Hex_Swift
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - Alamofire
     - AlamofireImage
     - Bolts
@@ -78,8 +78,8 @@ SPEC REPOS:
     - UIColor_Hex_Swift
 
 SPEC CHECKSUMS:
-  Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
-  AlamofireImage: 1aea346f4dda2f6c67622fa5a89fcbb80d79cc16
+  Alamofire: afc3e7c6db61476cb45cdd23fed06bad03bbc321
+  AlamofireImage: 63cfe3baf1370be6c498149687cf6db3e3b00999
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
   FacebookCore: 74288d0add931d361b1596beae787ab72c438249
@@ -88,15 +88,15 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 8d47857400e2f5bdea697a80daff882e91c84ef6
   FBSDKLoginKit: 4621c690d9dd8628031a4791497062183ea34b0d
   FBSDKShareKit: 6ffe22f0a0618eb7424d4104ab0ef3ce9643d42a
-  OneSignal: ccdeb961882f8668305e5b694e2cb7cb325fc907
-  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
-  Socket.IO-Client-Swift: 21e6a8a23a7d367d5ddfab6cbbd3c679cf3c25d6
-  Starscream: ef3ece99d765eeccb67de105bfa143f929026cf5
-  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
-  SwipeCellKit: 30fd6a4f8a8b8ac864ea389c8b4c8bac5ba5471a
+  OneSignal: 1e2ed98358f87cb755e7262412ddb2949b8e5c55
+  ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
+  Socket.IO-Client-Swift: 7cb44c0ffb86e158cee32d0642d30ec5fdcf8f61
+  Starscream: 08172b481e145289c4930cb567230fb55897cfa4
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   TRVideoView: 00e2eaed3f19196956bb1ec61c875df6c0ea84dc
-  UIColor_Hex_Swift: bc07fc197421ee896b9ed6dcfa2054b7fbf75145
+  UIColor_Hex_Swift: 8be7432edacb7fa91c78aa05ef3c30b66e4f9415
 
-PODFILE CHECKSUM: eca77bc926b106a95d5ecd8a7986da8be4d46d00
+PODFILE CHECKSUM: d278d2de30213d5224d5a34b2248c3728b1b190f
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.8.0
