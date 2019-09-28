@@ -186,7 +186,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 if self.superCoach != nil {
                     filter.merge(["coach_id": self.superCoach!.id])
                 }
-                CourseService.instance.getList(t: SuperCourse.self, t1: SuperCourses.self, token: nil, _filter: filter, page: 1, perPage: 100) { (success2) in
+                CourseService.instance.getList(t: SuperCourse.self, t1: SuperCourses.self, token: self.show_in!.token, _filter: filter, page: 1, perPage: 100) { (success2) in
                     Global.instance.removeSpinner(superView: self.view)
                     if (success2) {
                         self.superCourses = (CourseService.instance.superModel as! SuperCourses)
@@ -277,8 +277,12 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 return contactTableRowKeys.count
             } else if tableView == courseTableView {
                 if superCourses != nil {
+                    if superCourses!.rows.count == 0 {
+                        courseTableViewHeight.constant = 0
+                    }
                     return superCourses!.rows.count
                 } else {
+                    courseTableViewHeight.constant = 0
                     return 0
                 }
             } else {
