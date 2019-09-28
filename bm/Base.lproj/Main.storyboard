@@ -2501,7 +2501,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZb-89-3QI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1212" y="-880"/>
+            <point key="canvasLocation" x="1374" y="-886"/>
         </scene>
         <!--球隊-->
         <scene sceneID="Biv-Rk-NsK">
@@ -2740,7 +2740,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSl-Mb-3BG">
-                                        <rect key="frame" x="168" y="18.5" width="39" height="27"/>
+                                        <rect key="frame" x="168.5" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -2788,8 +2788,24 @@
                                                     <constraint firstAttribute="height" constant="100" id="R7s-DU-6k4"/>
                                                 </constraints>
                                             </tableView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pR9-it-PkG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJg-kc-5vb" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="334" width="359" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="GXG-KT-MAF"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TW3-yY-PBt" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="372" width="375" height="100"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="100" id="YIB-3P-53u"/>
+                                                </constraints>
+                                            </tableView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pR9-it-PkG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="464" width="359" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="2W6-ek-TXI"/>
                                                 </constraints>
@@ -2798,14 +2814,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m6U-A8-ron" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="372" width="375" height="100"/>
+                                                <rect key="frame" x="0.0" y="502" width="375" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="Jb9-Dk-IyG"/>
                                                 </constraints>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1J-aW-JsJ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="480" width="359" height="30"/>
+                                                <rect key="frame" x="8" y="610" width="359" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Rq8-ic-C4D"/>
                                                 </constraints>
@@ -2819,22 +2835,28 @@
                                             <constraint firstItem="I9U-D1-tnd" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="0Y9-mG-qYv"/>
                                             <constraint firstItem="a1J-aW-JsJ" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="0oh-HE-CVn"/>
                                             <constraint firstItem="QDC-d9-WhK" firstAttribute="top" secondItem="uVt-2n-TRc" secondAttribute="bottom" constant="8" id="1pv-TY-5rb"/>
-                                            <constraint firstItem="pR9-it-PkG" firstAttribute="top" secondItem="QDC-d9-WhK" secondAttribute="bottom" constant="8" id="3JM-wr-kNJ"/>
                                             <constraint firstItem="uVt-2n-TRc" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="Buj-NO-GTp"/>
+                                            <constraint firstItem="GJg-kc-5vb" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="Etg-sS-FvJ"/>
                                             <constraint firstItem="a1J-aW-JsJ" firstAttribute="top" secondItem="m6U-A8-ron" secondAttribute="bottom" constant="8" id="KDW-oJ-K0z"/>
-                                            <constraint firstItem="m6U-A8-ron" firstAttribute="top" secondItem="pR9-it-PkG" secondAttribute="bottom" constant="8" id="L76-dU-NVk"/>
+                                            <constraint firstItem="m6U-A8-ron" firstAttribute="top" secondItem="pR9-it-PkG" secondAttribute="bottom" constant="8" id="Ks2-sa-DEA"/>
+                                            <constraint firstItem="TW3-yY-PBt" firstAttribute="bottom" secondItem="pR9-it-PkG" secondAttribute="top" constant="8" id="L76-dU-NVk"/>
                                             <constraint firstAttribute="trailing" secondItem="m6U-A8-ron" secondAttribute="trailing" id="LRc-OF-2Ng"/>
+                                            <constraint firstAttribute="trailing" secondItem="GJg-kc-5vb" secondAttribute="trailing" constant="8" id="Mi8-B7-seg"/>
                                             <constraint firstAttribute="trailing" secondItem="QDC-d9-WhK" secondAttribute="trailing" id="Ofl-IJ-IFg"/>
                                             <constraint firstItem="m6U-A8-ron" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" id="OoP-Mp-EPf"/>
                                             <constraint firstAttribute="trailing" secondItem="uVt-2n-TRc" secondAttribute="trailing" constant="8" id="QYv-T2-sjk"/>
                                             <constraint firstItem="I9U-D1-tnd" firstAttribute="top" secondItem="ORk-cu-jAE" secondAttribute="top" constant="8" id="SiT-Ui-wbX"/>
                                             <constraint firstAttribute="trailing" secondItem="I9U-D1-tnd" secondAttribute="trailing" constant="8" id="gFc-li-qzC"/>
+                                            <constraint firstItem="GJg-kc-5vb" firstAttribute="top" secondItem="QDC-d9-WhK" secondAttribute="bottom" constant="8" id="hFG-Y7-AgY"/>
                                             <constraint firstItem="uVt-2n-TRc" firstAttribute="top" secondItem="I9U-D1-tnd" secondAttribute="bottom" id="iXz-U0-DBc"/>
                                             <constraint firstAttribute="trailing" secondItem="pR9-it-PkG" secondAttribute="trailing" constant="8" id="mn8-UE-AuD"/>
                                             <constraint firstAttribute="height" constant="583" id="n6A-Vq-b1H"/>
+                                            <constraint firstItem="TW3-yY-PBt" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" id="peh-Ep-KOb"/>
                                             <constraint firstItem="QDC-d9-WhK" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" id="t0D-F9-KCC"/>
                                             <constraint firstAttribute="trailing" secondItem="a1J-aW-JsJ" secondAttribute="trailing" constant="8" id="tMx-cs-6pB"/>
                                             <constraint firstItem="pR9-it-PkG" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="vKO-V0-KZY"/>
+                                            <constraint firstAttribute="trailing" secondItem="TW3-yY-PBt" secondAttribute="trailing" id="xuy-TM-Y4J"/>
+                                            <constraint firstItem="TW3-yY-PBt" firstAttribute="top" secondItem="GJg-kc-5vb" secondAttribute="bottom" constant="8" id="zSa-S6-5wn"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -2847,6 +2869,44 @@
                                     <constraint firstAttribute="bottom" secondItem="ORk-cu-jAE" secondAttribute="bottom" id="vr9-Zu-d66"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q8w-Js-ba1" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="597" width="375" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Iba-Pw-pJn">
+                                        <rect key="frame" x="133" y="7.5" width="109" height="35"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1v5-xT-scn" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="31" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="y5h-kW-fLZ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="報名"/>
+                                                <connections>
+                                                    <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="scp-fy-DXS"/>
+                                                    <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="vRn-Pv-7Bz"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKs-qi-Nxd" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="47" y="0.0" width="62" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="f9A-nJ-dD3"/>
+                                                </constraints>
+                                                <state key="normal" title="報名列表"/>
+                                                <connections>
+                                                    <action selector="cancelPlusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="Ylt-DF-yAL"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Iba-Pw-pJn" firstAttribute="centerX" secondItem="Q8w-Js-ba1" secondAttribute="centerX" id="AzH-Em-YLs"/>
+                                    <constraint firstItem="Iba-Pw-pJn" firstAttribute="centerY" secondItem="Q8w-Js-ba1" secondAttribute="centerY" id="Sdj-To-vUY"/>
+                                    <constraint firstAttribute="height" constant="50" id="eMc-ZS-IOc"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -2854,11 +2914,14 @@
                             <constraint firstItem="lfl-RI-5GV" firstAttribute="top" secondItem="yZ0-g4-hZ8" secondAttribute="bottom" id="8wC-8C-LYH"/>
                             <constraint firstItem="iKv-Ih-QJf" firstAttribute="bottom" secondItem="lfl-RI-5GV" secondAttribute="bottom" id="JII-Wz-0s4"/>
                             <constraint firstItem="YwH-l8-gVk" firstAttribute="leading" secondItem="H7q-yk-6nf" secondAttribute="leading" id="LnK-iB-tp2"/>
+                            <constraint firstItem="iKv-Ih-QJf" firstAttribute="bottom" secondItem="Q8w-Js-ba1" secondAttribute="bottom" id="QA7-20-fBH"/>
+                            <constraint firstItem="Q8w-Js-ba1" firstAttribute="leading" secondItem="iKv-Ih-QJf" secondAttribute="leading" id="Uqt-fM-6A1"/>
                             <constraint firstItem="yZ0-g4-hZ8" firstAttribute="leading" secondItem="iKv-Ih-QJf" secondAttribute="leading" id="aSW-eP-eqn"/>
                             <constraint firstItem="iKv-Ih-QJf" firstAttribute="trailing" secondItem="YwH-l8-gVk" secondAttribute="trailing" id="aaA-cA-WA9"/>
                             <constraint firstItem="iKv-Ih-QJf" firstAttribute="trailing" secondItem="lfl-RI-5GV" secondAttribute="trailing" id="bx8-O3-daB"/>
                             <constraint firstItem="YwH-l8-gVk" firstAttribute="top" secondItem="yZ0-g4-hZ8" secondAttribute="bottom" id="ddO-ze-w8K"/>
                             <constraint firstItem="lfl-RI-5GV" firstAttribute="leading" secondItem="iKv-Ih-QJf" secondAttribute="leading" id="fpG-M7-F65"/>
+                            <constraint firstItem="Q8w-Js-ba1" firstAttribute="trailing" secondItem="iKv-Ih-QJf" secondAttribute="trailing" id="qBR-Gv-fHH"/>
                             <constraint firstAttribute="trailing" secondItem="yZ0-g4-hZ8" secondAttribute="trailing" id="tp9-eZ-n9o"/>
                             <constraint firstItem="yZ0-g4-hZ8" firstAttribute="top" secondItem="iKv-Ih-QJf" secondAttribute="top" id="yU3-7e-2lb"/>
                         </constraints>
@@ -2874,6 +2937,11 @@
                         <outlet property="featured" destination="I9U-D1-tnd" id="1Mi-aI-H3N"/>
                         <outlet property="scrollContainerView" destination="ORk-cu-jAE" id="kqI-68-0h3"/>
                         <outlet property="scrollView" destination="lfl-RI-5GV" id="nyn-hc-0DQ"/>
+                        <outlet property="signupButton" destination="1v5-xT-scn" id="5NW-z3-FwD"/>
+                        <outlet property="signupDataLbl" destination="GJg-kc-5vb" id="kjZ-da-rcQ"/>
+                        <outlet property="signupListButton" destination="sKs-qi-Nxd" id="Uwn-hu-8Wf"/>
+                        <outlet property="signupTableView" destination="TW3-yY-PBt" id="RHE-ER-nhx"/>
+                        <outlet property="signupTableViewConstraintHeight" destination="YIB-3P-53u" id="6w1-cl-yIE"/>
                         <outlet property="tableView" destination="QDC-d9-WhK" id="1LP-87-7Wj"/>
                         <outlet property="tableViewConstraintHeight" destination="R7s-DU-6k4" id="0Co-49-fIf"/>
                         <outlet property="titleLbl" destination="HSl-Mb-3BG" id="4n8-gn-TQ3"/>
@@ -2882,7 +2950,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAS-dJ-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1010" y="1384"/>
+            <point key="canvasLocation" x="954" y="1386"/>
         </scene>
         <!--臨打-->
         <scene sceneID="3a3-E3-xcE">

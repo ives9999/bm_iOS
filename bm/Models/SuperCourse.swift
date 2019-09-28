@@ -53,6 +53,11 @@ class SuperCourse: SuperModel {
     
     @objc dynamic var featured: UIImage = UIImage(named: "nophoto")!
     @objc dynamic var coach: SuperCoach = SuperCoach()
+    @objc dynamic var nextCourseTime: [String: String] = [String: String]()
+    @objc dynamic var signups: SuperSignups = SuperSignups()
+    @objc dynamic var isSignup: Bool = false
+    @objc dynamic var signup_id: Int = 0
+
     
     override func filterRow() {
         created_at_text = created_at.noTime()

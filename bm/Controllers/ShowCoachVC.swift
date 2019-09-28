@@ -167,7 +167,8 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func refresh() {
         Global.instance.addSpinner(superView: view)
-        CoachService.instance.getOne(t: SuperCoach.self, token: show_in!.token){ (success1) in
+        let params: [String: String] = ["token": show_in!.token]
+        CoachService.instance.getOne(t: SuperCoach.self, params: params){ (success1) in
             if (success1) {
                 let superModel: SuperModel = CoachService.instance.superModel
                 self.superCoach = (superModel as! SuperCoach)

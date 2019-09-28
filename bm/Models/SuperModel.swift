@@ -64,6 +64,10 @@ class SuperModel: NSObject, JSONParsable {
                 } else if key == "coach" {
                     let coach: SuperCoach = JSONParse.parse(data: value)
                     setValue(coach, forKey: key)
+                //} else i
+                } else if key == "nextCourseTime" {
+                    
+                    setValue(value, on: property, forKey: key)
                 }
                 
 //                var a = [String: Any]()
@@ -103,7 +107,19 @@ class SuperModel: NSObject, JSONParsable {
         let jsonValue = value as! JSON
         let type: String = getClassType(value: property.value)
         //print(type)
-        if type.contains("String") {
+        if type.contains("Dictionary") {
+            //print(jsonValue)
+            var d: [String: String] = [String: String]()
+            
+            for (key1, value1) in jsonValue {
+                //print(value1)
+                if value1 == JSON.null {
+                } else {
+                    d[key1] = jsonValue[key1].stringValue
+                }
+            }
+            setValue(d, forKey: propertyName)
+        }  else if type.contains("String") {
             setValue(jsonValue.stringValue, forKey: propertyName)
         } else if type.contains("Bool") {
             setValue(jsonValue.boolValue, forKey: propertyName)
