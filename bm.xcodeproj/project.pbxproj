@@ -28,7 +28,7 @@
 		B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C954D1FECDE9E005F71EF /* IconTextField.swift */; };
 		B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C954F1FED68A0005F71EF /* MoreVC.swift */; };
 		B31106E9221E5285007A5D49 /* StaticBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31106E8221E5285007A5D49 /* StaticBottomView.swift */; };
-		B31106EB221EC20A007A5D49 /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31106EA221EC20A007A5D49 /* Signup.swift */; };
+		B31106EB221EC20A007A5D49 /* SuperSignup.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31106EA221EC20A007A5D49 /* SuperSignup.swift */; };
 		B31361E71F8786CC00BDA53D /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E61F8786CC00BDA53D /* Contants.swift */; };
 		B31361E91F88A35900BDA53D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E81F88A35900BDA53D /* Global.swift */; };
 		B316FED62112F13600FB990C /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B316FED42112F13600FB990C /* CollectionCell.swift */; };
@@ -283,7 +283,7 @@
 		B30C954F1FED68A0005F71EF /* MoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVC.swift; sourceTree = "<group>"; };
 		B31106E7221D9EDB007A5D49 /* bmNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bmNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		B31106E8221E5285007A5D49 /* StaticBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticBottomView.swift; sourceTree = "<group>"; };
-		B31106EA221EC20A007A5D49 /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
+		B31106EA221EC20A007A5D49 /* SuperSignup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperSignup.swift; sourceTree = "<group>"; };
 		B31361E61F8786CC00BDA53D /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		B31361E81F88A35900BDA53D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		B316FED42112F13600FB990C /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
@@ -860,6 +860,7 @@
 				F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */,
 				B3756EE421B95DD5006893E1 /* ColorSelectVC.swift */,
 				B3310D9322ACBCC30062EF98 /* ContentEditVC.swift */,
+				B385A07922B9336C00BC3ADF /* CourseVC.swift */,
 				B306FE9B21F0DA8000403FE2 /* DateSelectVC.swift */,
 				B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */,
 				B358B0AF229D4F4F00F1A4E6 /* EditCourseVC.swift */,
@@ -881,7 +882,9 @@
 				B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */,
 				B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */,
 				B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */,
+				B385A07B22BCB28E00BC3ADF /* SelectVC.swift */,
 				B3E8C29A220603310008ED25 /* ShowCoachVC.swift */,
+				B3839EB722CF0261003F3620 /* ShowCourseVC.swift */,
 				B39453D82230E849005E3027 /* ShowPNVC.swift */,
 				B3308C501FDA5311006A83B6 /* ShowTempPlayVC.swift */,
 				B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */,
@@ -900,9 +903,6 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
-				B385A07922B9336C00BC3ADF /* CourseVC.swift */,
-				B385A07B22BCB28E00BC3ADF /* SelectVC.swift */,
-				B3839EB722CF0261003F3620 /* ShowCourseVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -919,16 +919,16 @@
 				B35F8DD81F8F64310073BD70 /* Home.swift */,
 				B375105A1FA96C0500CDF1A0 /* Member.swift */,
 				B3F2222F1F91DE7300A8C402 /* Show_IN.swift */,
-				B31106EA221EC20A007A5D49 /* Signup.swift */,
+				B31106EA221EC20A007A5D49 /* SuperSignup.swift */,
 				B3E8C29F22074CC90008ED25 /* SuperCity.swift */,
 				B3A617D221FEC2050059B603 /* SuperCoach.swift */,
+				B36D66BC229A585700502D62 /* SuperCourse.swift */,
 				F9A1CB801F95CE2F00DDEC86 /* SuperData.swift */,
 				B36CBD5420DFCC9E00E52B9C /* SuperModel.swift */,
 				B3DEBE1B2110432F003699A0 /* Teach.swift */,
 				B3ED38D81FB463D00003F083 /* Team.swift */,
 				B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */,
 				B34A20AD21AE962700EE6E1C /* Timetables.swift */,
-				B36D66BC229A585700502D62 /* SuperCourse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1158,7 +1158,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-bm/Pods-bm-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-bm/Pods-bm-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
@@ -1199,7 +1199,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-bm/Pods-bm-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bm/Pods-bm-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BAF73931C936E7B0C667205A /* [CP] Check Pods Manifest.lock */ = {
@@ -1312,7 +1312,7 @@
 				B3310D8A22AA20A50062EF98 /* CourseKindFormItem.swift in Sources */,
 				B3308C4D1FD9575E006A83B6 /* Tag.swift in Sources */,
 				B3E8C2A22207E0DC0008ED25 /* CityButton.swift in Sources */,
-				B31106EB221EC20A007A5D49 /* Signup.swift in Sources */,
+				B31106EB221EC20A007A5D49 /* SuperSignup.swift in Sources */,
 				B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */,
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
 				B30C95391FE765FB005F71EF /* Facebook.swift in Sources */,
@@ -1474,6 +1474,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1.4.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1496,6 +1497,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1643,6 +1645,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
@@ -1673,6 +1676,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";

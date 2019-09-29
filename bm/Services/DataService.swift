@@ -77,13 +77,13 @@ class DataService {
         if _filter != nil {
             filter.merge(_filter!)
         }
-        //print(filter.toJSONString())
+        print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        //print(url)
+        print(url)
                 
         Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
@@ -356,17 +356,23 @@ class DataService {
         }
     }
     
-    func getOne<T: SuperModel>(t: T.Type, token: String, completion: @escaping CompletionHandler){
+    func getOne<T: SuperModel>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
         
-        let body: [String: Any] = ["device": "app", "token": token,"strip_html": false]
+        var body: [String: Any] = ["device": "app","strip_html": false]
+        if params["token"] != nil {
+            body["token"] = params["token"]
+        }
+        if params["member_token"] != nil {
+            body["member_token"] = params["member_token"]
+        }
         
-        //print(body)
+        print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        //print(url)
+        print(url)
         if url != nil {
             Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
                 
@@ -378,7 +384,7 @@ class DataService {
                         completion(false)
                         return
                     }
-                    //print(data)
+                    print(data)
                     let json = JSON(data)
                     //print(json)
                     let s: T = JSONParse.parse(data: json)

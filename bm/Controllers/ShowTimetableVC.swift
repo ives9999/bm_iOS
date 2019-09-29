@@ -62,7 +62,7 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     
     var signupBtn: SubmitButton?
     var isSignup: Bool = false
-    var signup: Signup?
+    var signup: SuperSignup?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -151,8 +151,8 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                     //let mirror: Mirror? = Mirror(reflecting: self.timetable!)
                     
                     self.isSignup = false
-                    if self.timetable!.signups.count > 0 {
-                        for signup in self.timetable!.signups {
+                    if self.timetable!.signups.rows.count > 0 {
+                        for signup in self.timetable!.signups.rows {
                             //signup.printRow()
                             if signup.member_id == Member.instance.id {
                                 self.signup = signup

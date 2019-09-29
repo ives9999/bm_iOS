@@ -62,7 +62,8 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     override func refresh() {
         Global.instance.addSpinner(superView: view)
-        CourseService.instance.getOne(t: SuperCourse.self, token: course_token!) { (success) in
+        let params: [String: String] = ["token": course_token!]
+        CourseService.instance.getOne(t: SuperCourse.self, params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
                 let superModel = CourseService.instance.superModel
