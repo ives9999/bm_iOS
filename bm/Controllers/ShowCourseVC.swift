@@ -62,8 +62,8 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     let signupTableRowKeys:[String] = ["date", "deadline"]
     var signupTableRows: [String: [String:String]] = [
-        "date":["title":"報名上課日期","content":"","isPressed":"false"],
-        "deadline":["title":"報名截止時間","content":"","isPressed":"false"]
+        "date":["icon":"calendar","title":"報名上課日期","content":"","isPressed":"false"],
+        "deadline":["icon":"clock","title":"報名截止時間","content":"","isPressed":"false"]
     ]
     
     let coachTableRowKeys:[String] = [NAME_KEY,MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY]
@@ -173,7 +173,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                         (superModel as! SuperCourse)
                     
                     if self.superCourse != nil {
-                        self.superCourse!.printRow()
+                        //self.superCourse!.printRow()
                         self.superCoach = self.superCourse!.coach
                         self.setMainData()
                         self.setFeatured()
@@ -184,6 +184,10 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                         self.tableView.reloadData()
                         self.signupTableView.reloadData()
                         self.coachTableView.reloadData()
+                        
+                        if self.superCourse!.isSignup {
+                            self.signupButton.setTitle("取消報名")
+                        }
                     }
                 }
                 Global.instance.removeSpinner(superView: self.view)
@@ -213,7 +217,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     func setFeatured() {
         
         if superCourse!.featured_path.count > 0 {
-            var featured_path = superCourse!.featured_path
+            let featured_path = superCourse!.featured_path
             if featured_path.count > 0 {
                 //print(featured_path)
                 featured.downloaded(from: featured_path)
@@ -287,10 +291,11 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             let key = signupTableRowKeys[indexPath.row]
             if signupTableRows[key] != nil {
                 let row = signupTableRows[key]!
+                let icon = row["icon"] ?? ""
                 let title = row["title"] ?? ""
                 let content = row["content"] ?? ""
                 let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
-                cell!.update(icon: "", title: title, content: content, isPressed: isPressed)
+                cell!.update(icon: icon, title: title, content: content, isPressed: isPressed)
             }
             if indexPath.row == signupTableRowKeys.count - 1 {
                 
