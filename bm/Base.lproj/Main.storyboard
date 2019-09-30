@@ -2794,7 +2794,7 @@
                                                     <constraint firstAttribute="height" constant="30" id="GXG-KT-MAF"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" systemColor="systemPinkColor" red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TW3-yY-PBt" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
@@ -2885,6 +2885,7 @@
                                                 <connections>
                                                     <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="scp-fy-DXS"/>
                                                     <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="vRn-Pv-7Bz"/>
+                                                    <action selector="signupButtonPressed:" destination="ZZa-2U-rNz" eventType="touchUpInside" id="taN-ok-LvS"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sKs-qi-Nxd" customClass="CancelButton" customModule="bm" customModuleProvider="target">
@@ -2895,6 +2896,7 @@
                                                 <state key="normal" title="報名列表"/>
                                                 <connections>
                                                     <action selector="cancelPlusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="Ylt-DF-yAL"/>
+                                                    <action selector="signupListButtonPressed:" destination="ZZa-2U-rNz" eventType="touchUpInside" id="8Ds-qu-mF0"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -4345,7 +4347,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="hG5-WS-6vA">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1340"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="670"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yKJ-E5-Rqy">
                                 <rect key="frame" x="0.0" y="64" width="375" height="583"/>

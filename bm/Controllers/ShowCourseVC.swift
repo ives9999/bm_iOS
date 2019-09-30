@@ -415,6 +415,14 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         ContainerViewConstraintHeight.constant = h
         //print(h1)
     }
+    
+    @IBAction func signupButtonPressed(_ sender: Any) {
+        
+    }
+    
+    @IBAction func signupListButtonPressed(_ sender: Any) {
+        
+    }
 
     @IBAction func prevBtnPressed(_ sender: Any) {
         if delegate != nil {
