@@ -371,6 +371,10 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             let sender = sender as! Show_IN
             let showVC: ShowVC = segue.destination as! ShowVC
             showVC.show_in = sender
+        } else if segue.identifier == TO_SIGNUP_LIST {
+            let signupListVC: SignupListVC = segue.destination as! SignupListVC
+            signupListVC.able = "course"
+            signupListVC.able_token = course_token!
         }
     }
     
@@ -421,7 +425,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func signupListButtonPressed(_ sender: Any) {
-        
+        performSegue(withIdentifier: TO_SIGNUP_LIST, sender: nil)
     }
 
     @IBAction func prevBtnPressed(_ sender: Any) {

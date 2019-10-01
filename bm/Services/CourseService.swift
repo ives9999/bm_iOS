@@ -30,6 +30,21 @@ class CourseService: DataService {
         return "course"
     }
     
+    override func getSignupListURL(token: String? = nil)-> String {
+        var url = URL_COURSE_SIGNUP_LIST
+        if token != nil {
+            url = url + "/" + token!
+        }
+        
+        return url
+    }
+    
+    override func parseAbleForSingupList(data: JSON) -> SuperModel {
+        let s: SuperCourse = JSONParse.parse(data: data)
+        
+        return s
+    }
+    
     override func update(_params: [String : String], image: UIImage?, completion: @escaping CompletionHandler) {
         
         let url: String = String(format: URL_UPDATE, "course")

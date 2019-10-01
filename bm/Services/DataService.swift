@@ -55,6 +55,7 @@ class DataService {
     var timetables: Timetables = Timetables()
     
     var superModel: SuperModel = SuperModel()
+    var able: SuperModel = SuperModel() // for signup list able model
     
     init() {
         _model = Team.instance
@@ -366,13 +367,13 @@ class DataService {
             body["member_token"] = params["member_token"]
         }
         
-        print(body)
+        //print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        print(url)
+        //print(url)
         if url != nil {
             Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
                 
@@ -384,7 +385,7 @@ class DataService {
                         completion(false)
                         return
                     }
-                    print(data)
+                    //print(data)
                     let json = JSON(data)
                     //print(json)
                     let s: T = JSONParse.parse(data: json)
@@ -566,6 +567,47 @@ class DataService {
         }
         
     }
+    
+    func signup_list(token: String? = nil, completion: @escaping CompletionHandler) {
+        let url: String = getSignupListURL(token: token)
+        //print(url)
+        let body: [String: String] = ["device": "app", "channel": "bm"]
+        
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+                    
+                    if response.result.error == nil {
+                        guard let data = response.result.value else {
+                            //print("get response result value error")
+                            self.msg = "網路錯誤，請稍後再試"
+                            completion(false)
+                            return
+                        }
+                        let json = JSON(data)
+                        //print(json["able"])
+                        if json["able"].exists() {
+                            self.able = self.parseAbleForSingupList(data: json["able"])
+                            //print(able.printRow())
+                        }
+                        
+                        let s: SuperSignups = JSONParse.parse(data: json)
+                        self.superModel = s
+                        
+                        let rows: [SuperSignup] = s.getRows() ?? [SuperSignup]()
+                        for row in rows {
+                            row.filterRow()
+                            //row.printRow()
+                        }
+                        completion(true)
+                    } else {
+                        self.msg = "網路錯誤，請稍後再試"
+                        completion(false)
+                        debugPrint(response.result.error as Any)
+                    }
+                }
+    }
+    
+    func getSignupListURL(token: String? = nil)-> String { return ""}
+    func parseAbleForSingupList(data: JSON)-> SuperModel { return SuperModel() }
     
     func getHomes(completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["device": "app"]
