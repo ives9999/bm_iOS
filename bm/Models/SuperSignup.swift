@@ -20,6 +20,7 @@ class SuperSignup: SuperModel {
     @objc dynamic var cancel_times: Int = 0
     @objc dynamic var created_at: String = ""
     @objc dynamic var updated_at: String = ""
+    @objc dynamic var member_name: String = ""
 }
 
 class SuperSignups: SuperModel {

@@ -163,11 +163,10 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         Global.instance.addSpinner(superView: self.view)
         
         dataService.getList(type: iden, titleField: titleField, params: params, page: page, perPage: perPage, filter: nil) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 self.getDataEnd(success: success)
-                Global.instance.removeSpinner(superView: self.view)
             } else {
-                Global.instance.removeSpinner(superView: self.view)
                 self.warning(self.dataService.msg)
             }
         }
@@ -190,9 +189,9 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
                 let _pageCount: Int = totalCount / perPage
                 totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
                 //print(self.totalPage)
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
-                }
+            }
+            if refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
             }
             myTablView.reloadData()
             //self.page = self.page + 1 in CollectionView

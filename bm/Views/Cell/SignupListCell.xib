@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="113" id="KGk-i7-Jjw" customClass="SignupListCell" customModule="bm" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="372" height="113"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="372" height="113"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmR-Xr-Ixl" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="8" y="8" width="40" height="20.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="wg0-Xh-476"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="報名者" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUv-RV-Y2i" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="60" y="8" width="60" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="lKv-i8-4rR"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="報名時間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XZX-y3-VFm" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="132" y="8" width="118" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="118" id="VUs-JV-mxj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="上課日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igh-uL-pod" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="262" y="8" width="69.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="igh-uL-pod" firstAttribute="centerY" secondItem="jmR-Xr-Ixl" secondAttribute="centerY" id="1Dw-bi-PHz"/>
+                    <constraint firstItem="XZX-y3-VFm" firstAttribute="leading" secondItem="MUv-RV-Y2i" secondAttribute="trailing" constant="12" id="2t7-Dc-HFX"/>
+                    <constraint firstItem="MUv-RV-Y2i" firstAttribute="leading" secondItem="jmR-Xr-Ixl" secondAttribute="trailing" constant="12" id="Arj-DD-2Jf"/>
+                    <constraint firstItem="jmR-Xr-Ixl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="BSD-2B-5IB"/>
+                    <constraint firstItem="jmR-Xr-Ixl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VRt-Vd-8Le"/>
+                    <constraint firstItem="igh-uL-pod" firstAttribute="leading" secondItem="XZX-y3-VFm" secondAttribute="trailing" constant="12" id="hiX-NU-Hcd"/>
+                    <constraint firstItem="XZX-y3-VFm" firstAttribute="centerY" secondItem="jmR-Xr-Ixl" secondAttribute="centerY" id="qUr-uO-tXB"/>
+                    <constraint firstItem="MUv-RV-Y2i" firstAttribute="centerY" secondItem="jmR-Xr-Ixl" secondAttribute="centerY" id="vRq-3V-F7m"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="courseDateLbl" destination="igh-uL-pod" id="1dY-h4-Mn5"/>
+                <outlet property="noLbl" destination="jmR-Xr-Ixl" id="Fis-d1-udS"/>
+                <outlet property="signupTimeLbl" destination="XZX-y3-VFm" id="Hln-fJ-sew"/>
+                <outlet property="signuperLbl" destination="MUv-RV-Y2i" id="I2v-0Q-GNL"/>
+            </connections>
+            <point key="canvasLocation" x="150.72463768115944" y="-27.120535714285712"/>
+        </tableViewCell>
+    </objects>
+</document>

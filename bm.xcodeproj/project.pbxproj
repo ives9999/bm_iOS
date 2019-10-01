@@ -125,6 +125,8 @@
 		B3839EB822CF0261003F3620 /* ShowCourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3839EB722CF0261003F3620 /* ShowCourseVC.swift */; };
 		B385A07A22B9336C00BC3ADF /* CourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385A07922B9336C00BC3ADF /* CourseVC.swift */; };
 		B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385A07B22BCB28E00BC3ADF /* SelectVC.swift */; };
+		B39453712343256C000DF98E /* SignupListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394536F2343256C000DF98E /* SignupListCell.swift */; };
+		B39453722343256C000DF98E /* SignupListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B39453702343256C000DF98E /* SignupListCell.xib */; };
 		B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453D82230E849005E3027 /* ShowPNVC.swift */; };
 		B39453DB2230F516005E3027 /* OneSignal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453DA2230F516005E3027 /* OneSignal.swift */; };
 		B39453DE2232948F005E3027 /* PNCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453DC2232948F005E3027 /* PNCell.swift */; };
@@ -381,6 +383,8 @@
 		B3839EB722CF0261003F3620 /* ShowCourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCourseVC.swift; sourceTree = "<group>"; };
 		B385A07922B9336C00BC3ADF /* CourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseVC.swift; sourceTree = "<group>"; };
 		B385A07B22BCB28E00BC3ADF /* SelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVC.swift; sourceTree = "<group>"; };
+		B394536F2343256C000DF98E /* SignupListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupListCell.swift; sourceTree = "<group>"; };
+		B39453702343256C000DF98E /* SignupListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignupListCell.xib; sourceTree = "<group>"; };
 		B39453D82230E849005E3027 /* ShowPNVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPNVC.swift; sourceTree = "<group>"; };
 		B39453DA2230F516005E3027 /* OneSignal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneSignal.swift; sourceTree = "<group>"; };
 		B39453DC2232948F005E3027 /* PNCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PNCell.swift; sourceTree = "<group>"; };
@@ -592,6 +596,8 @@
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
 				B3B4B60E22CA247500245CC8 /* SomeCell.swift */,
 				B3B4B60F22CA247500245CC8 /* SomeCell.xib */,
+				B394536F2343256C000DF98E /* SignupListCell.swift */,
+				B39453702343256C000DF98E /* SignupListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1107,6 +1113,7 @@
 				B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */,
 				F94E7D271F83636A00F550FD /* Assets.xcassets in Resources */,
 				B34A210121B696AA00EE6E1C /* TextFieldCell.xib in Resources */,
+				B39453722343256C000DF98E /* SignupListCell.xib in Resources */,
 				B3756EF321BA7567006893E1 /* StatusSelectCell.xib in Resources */,
 				B3756EE321B95974006893E1 /* ColorCell.xib in Resources */,
 				B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */,
@@ -1333,6 +1340,7 @@
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
 				B323390F21B6BBC7003EB84D /* BaseForm.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
+				B39453712343256C000DF98E /* SignupListCell.swift in Sources */,
 				B358B0B822A100EF00F1A4E6 /* SectionFormItem.swift in Sources */,
 				B3649414207DCA790030CF44 /* SCLAlertView.swift in Sources */,
 				B3756EDE21B901C5006893E1 /* TimeCell.swift in Sources */,

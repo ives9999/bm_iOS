@@ -568,10 +568,10 @@ class DataService {
         
     }
     
-    func signup_list(token: String? = nil, completion: @escaping CompletionHandler) {
+    func signup_list(token: String? = nil, page: Int = 1, perPage: Int = 8, completion: @escaping CompletionHandler) {
         let url: String = getSignupListURL(token: token)
         //print(url)
-        let body: [String: String] = ["device": "app", "channel": "bm"]
+        let body: [String: String] = ["device": "app", "channel": "bm", "page":String(page), "perPage":String(perPage)]
         
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
                     

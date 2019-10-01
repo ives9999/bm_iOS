@@ -809,6 +809,16 @@ extension String {
         }
         return res
     }
+    
+    func noYear() -> String {
+        let arr: [String] = self.components(separatedBy: "-")
+        var res: String = self
+        if arr.count > 2 {
+            res = "\(arr[1])-\(arr[2])"
+        }
+        return res
+    }
+    
     func noTime() -> String {
         let arr: [String] = self.components(separatedBy: " ")
         return arr[0]
