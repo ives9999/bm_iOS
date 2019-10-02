@@ -509,64 +509,103 @@ class DataService {
         }
     }
     
-    func signup(type: String, token: String, member_token: String, tt_id: Int, completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["source": "app", "channel": "bm","member_token":member_token,"tt_id":String(tt_id)]
-        let url: String = String(format: URL_SIGNUP, type, token)
-        //print(url)
-        //print(body)
+    func signup_date(token: String, signup_id: Int, completion: @escaping CompletionHandler) {
+        let url = getSignupDateURL(token: token)
+        print(url)
+        let body: [String: String] = ["device": "app", "channel": "bm", "signup_id": String(signup_id)]
         
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    print("data error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                //print(data)
-                let json: JSON = JSON(data)
-                self.success = json["success"].boolValue
-                if self.success {
-                } else {
-                    self.msg = json["msg"].stringValue
-                }
-                completion(self.success)
-            } else {
-                self.msg = "網路錯誤，請稍後再試"
-                completion(false)
-            }
-        }
- 
+        print(body)
     }
-    func cancelSignup(type: String, member_token: String, signup_id: Int, completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["source": "app", "channel": "bm","member_token":member_token]
-        let url: String = String(format: URL_CANCEL_SIGNUP, type, signup_id)
+    
+    func signup(token: String, member_token: String, signup_id: Int, course_date: String, course_deadline: String, completion: @escaping CompletionHandler) {
+        let url = getSignupURL(token: token)
         //print(url)
+        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "signup_id": String(signup_id), "course_date": course_date, "course_deadline": course_deadline]
+        
         //print(body)
-        
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    print("data error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                //print(data)
-                let json: JSON = JSON(data)
-                self.success = json["success"].boolValue
-                if self.success {
-                } else {
-                    self.msg = json["msg"].stringValue
-                }
-                completion(self.success)
-            } else {
-                self.msg = "網路錯誤，請稍後再試"
-                completion(false)
-            }
-        }
-        
+//        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                //print(data)
+//                let json: JSON = JSON(data)
+//                self.success = json["success"].boolValue
+//                if self.success {
+//                } else {
+//                    self.msg = json["msg"].stringValue
+//                }
+//                completion(self.success)
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//            }
+//        }
     }
+//    func signup(type: String, token: String, member_token: String, tt_id: Int, completion: @escaping CompletionHandler) {
+//        let body: [String: String] = ["source": "app", "channel": "bm","member_token":member_token,"tt_id":String(tt_id)]
+//        let url: String = String(format: URL_SIGNUP, type, token)
+//        //print(url)
+//        //print(body)
+//
+//        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                //print(data)
+//                let json: JSON = JSON(data)
+//                self.success = json["success"].boolValue
+//                if self.success {
+//                } else {
+//                    self.msg = json["msg"].stringValue
+//                }
+//                completion(self.success)
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//            }
+//        }
+//
+//    }
+//    func cancelSignup(type: String, member_token: String, signup_id: Int, completion: @escaping CompletionHandler) {
+//        let body: [String: String] = ["source": "app", "channel": "bm","member_token":member_token]
+//        let url: String = String(format: URL_CANCEL_SIGNUP, type, signup_id)
+//        //print(url)
+//        //print(body)
+//
+//        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                //print(data)
+//                let json: JSON = JSON(data)
+//                self.success = json["success"].boolValue
+//                if self.success {
+//                } else {
+//                    self.msg = json["msg"].stringValue
+//                }
+//                completion(self.success)
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//            }
+//        }
+//
+//    }
+    
+    func getSignupURL(token: String)-> String { return ""}
+    func getSignupDateURL(token: String)-> String { return ""}
     
     func signup_list(token: String? = nil, page: Int = 1, perPage: Int = 8, completion: @escaping CompletionHandler) {
         let url: String = getSignupListURL(token: token)

@@ -316,26 +316,26 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                 let tt_id = timetable!.id
                 Global.instance.addSpinner(superView: view)
                 if !isSignup {//報名
-                    dataService.signup(type: "timetable", token: token!, member_token: Member.instance.token, tt_id: tt_id) { (success) in
-                        Global.instance.removeSpinner(superView: self.view)
-                        if !success {
-                            self.warning(self.dataService.msg)
-                        } else {
-                            self.info("您已經報名成功")
-                            self.refresh()
-                        }
-                    }
+//                    dataService.signup(type: "timetable", token: token!, member_token: Member.instance.token, tt_id: tt_id) { (success) in
+//                        Global.instance.removeSpinner(superView: self.view)
+//                        if !success {
+//                            self.warning(self.dataService.msg)
+//                        } else {
+//                            self.info("您已經報名成功")
+//                            self.refresh()
+//                        }
+//                    }
                 } else {//取消報名
                     if signup != nil {
-                        dataService.cancelSignup(type: "timetable", member_token: Member.instance.token, signup_id: self.signup!.id) { (success) in
-                            Global.instance.removeSpinner(superView: self.view)
-                            if !success {
-                                self.warning(self.dataService.msg)
-                            } else {
-                                self.info("取消報名成功")
-                                self.refresh()
-                            }
-                        }
+//                        dataService.cancelSignup(type: "timetable", member_token: Member.instance.token, signup_id: self.signup!.id) { (success) in
+//                            Global.instance.removeSpinner(superView: self.view)
+//                            if !success {
+//                                self.warning(self.dataService.msg)
+//                            } else {
+//                                self.info("取消報名成功")
+//                                self.refresh()
+//                            }
+//                        }
                     } else {
                         self.warning("沒有取得報名資料，無法取消報名，請洽管理員")
                     }

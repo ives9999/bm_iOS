@@ -421,7 +421,10 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @IBAction func signupButtonPressed(_ sender: Any) {
-        
+        //print(Member.instance.token)
+        CourseService.instance.signup_date(token: course_token!, signup_id: 0) { (success) in
+            
+        }
     }
     
     @IBAction func signupListButtonPressed(_ sender: Any) {
