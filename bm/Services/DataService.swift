@@ -511,10 +511,31 @@ class DataService {
     
     func signup_date(token: String, signup_id: Int, completion: @escaping CompletionHandler) {
         let url = getSignupDateURL(token: token)
-        print(url)
+        //print(url)
         let body: [String: String] = ["device": "app", "channel": "bm", "signup_id": String(signup_id)]
+        //print(body)
         
-        print(body)
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                    return
+                }
+                //print(data)
+                let json: JSON = JSON(data)
+                self.success = json["success"].boolValue
+                if self.success {
+                } else {
+                    self.msg = json["msg"].stringValue
+                }
+                completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
+            }
+        }
     }
     
     func signup(token: String, member_token: String, signup_id: Int, course_date: String, course_deadline: String, completion: @escaping CompletionHandler) {
