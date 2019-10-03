@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import SwiftyJSON
 
 class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
     
@@ -81,6 +82,12 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     var superCoach: SuperCoach?
     
     var fromNet: Bool = false
+    var signup_date: JSON = JSON()
+    var isSignup: Bool = false
+    var canCancelSignup: Bool = false
+    var signup_id: Int = 0
+    var course_date: String = ""
+    var course_deadline: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -420,10 +427,28 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         //print(h1)
     }
     
+    func showSignupModal() {
+        let alert = UIAlertController(title: "提示", message: "是否確定要報名", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: { (action) in
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func signupButtonPressed(_ sender: Any) {
         //print(Member.instance.token)
-        CourseService.instance.signup_date(token: course_token!, signup_id: 0) { (success) in
-            
+        Global.instance.addSpinner(superView: view)
+        CourseService.instance.signup_date(token: course_token!, member_token: Member.instance.token) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.signup_date = CourseService.instance.signup_date
+                self.isSignup = self.signup_date["isSignup"].boolValue
+                self.canCancelSignup = self.signup_date["cancel"].boolValue
+                self.signup_id = self.signup_date["signup_id"].intValue
+                self.course_date = self.signup_date["course_date"].stringValue
+                self.course_deadline = self.signup_date["course_deadline"].stringValue
+                self.showSignupModal()
+            }
         }
     }
     

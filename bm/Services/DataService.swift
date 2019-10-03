@@ -41,6 +41,7 @@ class DataService {
     var citysandareas:[Int:[String:Any]] = [Int:[String:Any]]()
     var msg:String = ""
     var success: Bool = false
+    var signup_date: JSON = JSON()//signup_date use
     
     var _model: SuperData
     var model: SuperData {
@@ -509,10 +510,10 @@ class DataService {
         }
     }
     
-    func signup_date(token: String, signup_id: Int, completion: @escaping CompletionHandler) {
+    func signup_date(token: String, member_token: String, completion: @escaping CompletionHandler) {
         let url = getSignupDateURL(token: token)
         //print(url)
-        let body: [String: String] = ["device": "app", "channel": "bm", "signup_id": String(signup_id)]
+        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token]
         //print(body)
         
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
@@ -525,8 +526,10 @@ class DataService {
                 }
                 //print(data)
                 let json: JSON = JSON(data)
+                //print(json)
                 self.success = json["success"].boolValue
                 if self.success {
+                    self.signup_date = json
                 } else {
                     self.msg = json["msg"].stringValue
                 }
