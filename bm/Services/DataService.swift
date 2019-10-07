@@ -544,30 +544,29 @@ class DataService {
     func signup(token: String, member_token: String, signup_id: Int, course_date: String, course_deadline: String, completion: @escaping CompletionHandler) {
         let url = getSignupURL(token: token)
         //print(url)
-        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "signup_id": String(signup_id), "course_date": course_date, "course_deadline": course_deadline]
+        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "signup_id": String(signup_id), "able_date": course_date, "cancel_deadline": course_deadline]
         
         //print(body)
-//        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-//            if response.result.error == nil {
-//                guard let data = response.result.value else {
-//                    print("data error")
-//                    self.msg = "網路錯誤，請稍後再試"
-//                    completion(false)
-//                    return
-//                }
-//                //print(data)
-//                let json: JSON = JSON(data)
-//                self.success = json["success"].boolValue
-//                if self.success {
-//                } else {
-//                    self.msg = json["msg"].stringValue
-//                }
-//                completion(self.success)
-//            } else {
-//                self.msg = "網路錯誤，請稍後再試"
-//                completion(false)
-//            }
-//        }
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    print("data error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                    return
+                }
+                //print(data)
+                let json: JSON = JSON(data)
+                self.success = json["success"].boolValue
+                if json["msg"].exists() {
+                    self.msg = json["msg"].stringValue
+                }
+                completion(self.success)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
+            }
+        }
     }
 //    func signup(type: String, token: String, member_token: String, tt_id: Int, completion: @escaping CompletionHandler) {
 //        let body: [String: String] = ["source": "app", "channel": "bm","member_token":member_token,"tt_id":String(tt_id)]
@@ -635,6 +634,7 @@ class DataService {
         let url: String = getSignupListURL(token: token)
         //print(url)
         let body: [String: String] = ["device": "app", "channel": "bm", "page":String(page), "perPage":String(perPage)]
+        //print(body)
         
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
                     

@@ -310,7 +310,7 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
     @objc func signupSubmit(sender: UIButton) {
         
         if !Member.instance.isLoggedIn {
-            warning("請先登入")
+            warning("請先登入會員")
         } else {
             if timetable != nil {
                 let tt_id = timetable!.id

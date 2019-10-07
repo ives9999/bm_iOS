@@ -194,6 +194,8 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                         
                         if self.superCourse!.isSignup {
                             self.signupButton.setTitle("取消報名")
+                        } else {
+                            self.signupButton.setTitle("報名")
                         }
                     }
                 }
@@ -428,14 +430,66 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func showSignupModal() {
-        let alert = UIAlertController(title: "提示", message: "是否確定要報名", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: { (action) in
-            
-        }))
+        var title: String = (isSignup) ? "取消報名" : "報名"
+        let signup_html = "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
+        let cancel_signup_html = "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
+        let cant_cancel_signup_html = "已經超過取消報名期限，無法取消\r\n" + "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
+        var msg = signup_html
+        if !isSignup && !canCancelSignup {
+            msg = signup_html
+        } else {
+            if isSignup && canCancelSignup {
+                msg = cancel_signup_html
+            } else {
+                msg = cant_cancel_signup_html
+                title = "警告"
+            }
+        }
+        
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+        if (!isSignup && !canCancelSignup) || (isSignup && canCancelSignup) {
+            alert.addAction(UIAlertAction(title: title, style: .default, handler: { (action) in
+                self.signup()
+            }))
+        }
+        
+        let closeAction = UIAlertAction(title: "關閉", style: .default, handler: nil)
+        alert.addAction(closeAction)
+        
         self.present(alert, animated: true, completion: nil)
     }
     
+    func signup() {
+        if !Member.instance.isLoggedIn {
+            warning("請先登入會員")
+            return
+        }
+        Global.instance.addSpinner(superView: view)
+        CourseService.instance.signup(token: course_token!, member_token: Member.instance.token, signup_id: signup_id, course_date: course_date, course_deadline: course_deadline) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            let msg = CourseService.instance.msg
+            var title = "警告"
+            var closeAction: UIAlertAction?
+            if CourseService.instance.success {
+                title = "提示"
+                closeAction = UIAlertAction(title: "關閉", style: .default, handler: { (action) in
+                    self.refresh()
+                })
+            } else {
+                closeAction = UIAlertAction(title: "關閉", style: .default, handler: nil)
+            }
+            let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+            alert.addAction(closeAction!)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+    
     @IBAction func signupButtonPressed(_ sender: Any) {
+        if !Member.instance.isLoggedIn {
+            warning("請先登入會員")
+            return
+        }
         //print(Member.instance.token)
         Global.instance.addSpinner(superView: view)
         CourseService.instance.signup_date(token: course_token!, member_token: Member.instance.token) { (success) in
