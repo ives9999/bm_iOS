@@ -41,6 +41,7 @@ class BaseViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //setStatusBar(color: UIColor(STATUS_GREEN))
         workAreaHeight = view.bounds.height - titleBarHeight
         layerCancelBtn.setTitle("取消")
         layerDeleteBtn.setTitle("刪除")

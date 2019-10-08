@@ -644,11 +644,11 @@ extension UIFont {
     }
 }
 
-extension UIApplication {
-    var statusBarView: UIView? {
-        return value(forKey: "statusBar") as? UIView
-    }
-}
+//extension UIApplication {
+//    var statusBarView: UIView? {
+//        return value(forKey: "statusBar") as? UIView
+//    }
+//}
 
 extension UIViewController {
     func hideKeyboardWhenTappedAround() {
@@ -663,6 +663,18 @@ extension UIViewController {
     
     func getSelf() -> UIViewController {
         return self
+    }
+    
+    func setStatusBar(color: UIColor) {
+        let tag = 12321
+        if let taggedView = self.view.viewWithTag(tag){
+            taggedView.removeFromSuperview()
+        }
+        let overView = UIView()
+        overView.frame = UIApplication.shared.statusBarFrame
+        overView.backgroundColor = color
+        overView.tag = tag
+        self.view.addSubview(overView)
     }
 }
 

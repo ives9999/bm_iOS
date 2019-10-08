@@ -16,6 +16,8 @@ import FacebookCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -79,8 +81,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Arial", size: 14)!], for: UIControlState.normal)
         
-        UIApplication.shared.statusBarView?.backgroundColor = UIColor(STATUS_GREEN)
-        UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarStyle = .default
+        //UIApplication.shared.statusBarView?.backgroundColor = UIColor(STATUS_GREEN)
+        //let color = UIColor(red: 128/255, green: 100/255, blue: 0, alpha: 1)
+        //setStatusBarBackgroundColor(color: color)
+        
+        let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: (window?.frame.width)!, height: UIApplication.shared.statusBarFrame.height))
+        label.backgroundColor = UIColor(STATUS_GREEN)
+        //建立一個Label並且為全黑底色，高度20px，寬度與整個window同寬
+        window?.rootViewController?.view.addSubview(label)
+        //self.window.backgroundColor = [UIColor blackColor];
+        
         
         let deviceType: DeviceType = UIDevice.current.deviceType
         if deviceType == .simulator {
@@ -93,6 +104,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Member.instance.justGetMemberOne = false
         return true
     }
+    
+    func setStatusBarBackgroundColor(color: UIColor) {
+        guard let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView else { return }
+        statusBar.backgroundColor = color
+    }
+    
     
     private func goShowPNVC() {
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
@@ -120,6 +137,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                      open url: URL,
                      options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
         return SDKApplicationDelegate.shared.application(application, open: url, options: options)
+    }
+}
+
+extension UIApplication {
+    var statusBarView: UIView? {
+        let v = value(forKey: "statusBar") as? UIView
+//        if responds(to: Selector("statusBar")) {
+//            return value(forKey: "statusBar") as? UIView
+//        }
+        return v
     }
 }
 
