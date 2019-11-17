@@ -24,6 +24,7 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
         rePasswordTxt.delegate = self
         emailTxt.align(.left)
         emailTxt.borderWidth(0)
+        emailTxt.layer.borderColor = UIColor.clear.cgColor
         emailTxt.backgroundColor = UIColor.clear
         passwordTxt.align(.left)
         passwordTxt.borderWidth(0)

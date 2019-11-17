@@ -2008,13 +2008,13 @@
                                     <constraint firstAttribute="height" constant="43" id="z9i-i8-D9c"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="jacky@gmail.com" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Gyb-GY-JaR" customClass="EMailTextField" customModule="bm" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="jacky@gmail.com" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Gyb-GY-JaR" customClass="EMailTextField" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="99" y="239" width="200" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="5cU-bC-nCp"/>
                                     <constraint firstAttribute="width" constant="200" id="AmI-Yh-fld"/>
                                 </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
                                 <userDefinedRuntimeAttributes>

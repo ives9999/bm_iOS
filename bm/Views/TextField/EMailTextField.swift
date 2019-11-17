@@ -17,6 +17,8 @@ class EMailTextField: SuperTextField {
     }
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.keyboardType = UIKeyboardType.emailAddress
+        setupView()
     }
 
 }
