@@ -15,7 +15,6 @@ protocol TimeSelectDelegate: class {
 
 class TimeSelectVC: MyTableVC {
     
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLbl: SuperLabel!
     //input["type":PLAY_START,"time":time]
     var input: [String: Any] = [String: Any]()

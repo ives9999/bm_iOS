@@ -10,7 +10,6 @@ import UIKit
 
 class ManagerVC: MyTableVC {
 
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
     
     //source is team or coach or arena

@@ -14,7 +14,6 @@ protocol EditCourseDelegate {
 
 class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, SingleSelectDelegate, MultiSelectDelegate, ContentEditDelegate,DateSelectDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var featuredView: ImagePickerView!
     @IBOutlet weak var submitBtn: SubmitButton!

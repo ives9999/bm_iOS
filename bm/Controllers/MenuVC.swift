@@ -20,7 +20,6 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     @IBOutlet weak var forgetPasswordBtn: UIButton!
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
     @IBOutlet weak var nicknameLbl: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     
     var myTeamLists: [SuperData] = [SuperData]()
     let _sections: [String] = ["帳戶"]

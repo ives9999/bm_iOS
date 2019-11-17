@@ -12,7 +12,6 @@ class ProfileVC: MyTableVC {
 
     @IBOutlet weak var nicknameLbl: UILabel!
     @IBOutlet weak var sexLbl: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     let _sections: [String]? = ["登入資料","個人資料","通訊資料","設定資料"]
     let _rows: [[String]] = [
         [NICKNAME_KEY, NAME_KEY, EMAIL_KEY],

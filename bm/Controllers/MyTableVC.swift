@@ -24,7 +24,8 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     var iden: String!
     var titleField: String!
     
-    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var menuBtn: UIButton!
     
     convenience init(sections: [String], rows: [[Dictionary<String, Any>]]) {
         self.init(nibName:nil, bundle:nil)

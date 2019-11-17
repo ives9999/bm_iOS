@@ -11,7 +11,6 @@ import UIKit
 class BlackListVC: MyTableVC, BlackListCellDelegate {
 
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var emptyLbl: SuperLabel!
     @IBOutlet weak var emptyCons: NSLayoutConstraint!
     

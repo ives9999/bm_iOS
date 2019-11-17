@@ -16,7 +16,6 @@ protocol ArenaSelectDelegate: class {
 
 class ArenaSelectVC: MyTableVC {
     
-    @IBOutlet weak var tableView: UITableView!
     var arenas: [Arena] = [Arena]()
     
     //要顯示球館的縣市編號

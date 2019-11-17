@@ -34,7 +34,7 @@ class ShowVC: BaseViewController, WKUIDelegate, WKNavigationDelegate {
         titleLbl.text = show_in!.title
         
         let url: String = String(format: URL_SHOW, show_in!.type, show_in!.token)
-        //print(url)
+        print(url)
         //let myURL = URL(string: "http://bm.sportpassword.localhost/app/news/show/dBFcLdrDEAuk1WzPRXQvUw5aIcMNVun23yta7kPNddSqCqnquyTjmOMvgngBxUbSX7M55StEs27wgrzG3O0tacXpEMgw18VDSBQrhXs8jHWOkfjR4lXJP8YXuaalhue?device=app")
         let myRequest = URLRequest(url: URL(string: url)!)
         webView.load(myRequest)

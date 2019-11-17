@@ -15,7 +15,6 @@ protocol WeekdaysSelectDelegate: class {
 
 class WeekdaysSelectVC: MyTableVC {
 
-    @IBOutlet weak var tableView: UITableView!
     weak var delegate: WeekdaysSelectDelegate?
     var selecteds: [Int] = [Int]()
     var weekdays: [[String: Any]] = Global.instance.weekdays

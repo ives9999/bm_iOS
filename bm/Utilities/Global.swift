@@ -606,6 +606,15 @@ class Global {
         return res
     }
     
+    func getMonthLastDay(year: Int, month: Int)->Int {
+        let calendar = Calendar.current
+        var comps = DateComponents(calendar: calendar, year: year, month: month)
+        comps.setValue(month + 1, for: .month)
+        comps.setValue(0, for: .day)
+        let date = calendar.date(from: comps)
+        return calendar.component(.day, from: date!)
+    }
+    
     private func _addSpinner(spinner: UIActivityIndicatorView, superView: UIView) {
         spinner.center = superView.center
         spinner.activityIndicatorViewStyle = .whiteLarge
@@ -727,15 +736,65 @@ extension Date {
         return formatter.string(from: self)
     }
     
-    //Date()->getH()
+    func getY()->Int {
+        let calendar = Calendar.current
+        return calendar.component(.year, from: self)
+    }
+    
+    func getm()->Int {
+        let calendar = Calendar.current
+        return calendar.component(.month, from: self)
+    }
+    
+    func getd()->Int {
+        let calendar = Calendar.current
+        return calendar.component(.day, from: self)
+    }
+    
     func getH()->Int {
         let calendar = Calendar.current
         return calendar.component(.hour, from: self)
     }
     
-    func getm()->Int {
+    func geti()->Int {
         let calendar = Calendar.current
         return calendar.component(.minute, from: self)
+    }
+    
+    func gets()->Int {
+        let calendar = Calendar.current
+        return calendar.component(.second, from: self)
+    }
+    
+    func dateToWeekday()-> Int {
+        let dc: DateComponents = Calendar.current.dateComponents(in: TimeZone.current, from: self)
+        var weekday = dc.weekday! - 1
+        if weekday == 0 {
+            weekday = 7
+        }
+        return weekday
+    }
+    
+    func dateToWeekdayForChinese()-> String {
+        let weekday = dateToWeekday()
+        var res: String = "一"
+        if weekday == 1 {
+            res = "一"
+        } else if weekday == 2 {
+            res = "二"
+        } else if weekday == 3 {
+            res = "三"
+        } else if weekday == 4 {
+            res = "四"
+        } else if weekday == 5 {
+            res = "五"
+        } else if weekday == 6 {
+            res = "六"
+        } else if weekday == 7 {
+            res = "日"
+        }
+        
+        return res
     }
 }
 
@@ -798,6 +857,22 @@ extension String {
             return self
         }
     }
+    
+    func toDate(format: String = "yyyy-MM-dd") -> Date
+    {
+        //Create Date Formatter
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "zh_TW")
+        //Specify Format of String to Parse
+        dateFormatter.dateFormat = format
+        
+        //Parse into NSDate
+        let dateFromString : Date = dateFormatter.date(from: self)!
+        
+        //Return Parsed Date
+        return dateFromString
+    }
+    
     func toDateTime(format: String = "yyyy-MM-dd HH:mm:ss") -> Date
     {
         //Create Date Formatter

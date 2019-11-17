@@ -15,7 +15,6 @@ protocol AreaSelectDelegate: class {
 class AreaSelectVC: MyTableVC {
 
     @IBOutlet weak var submitBtn: UIButton!
-    @IBOutlet weak var tableView: UITableView!
     weak var delegate: AreaSelectDelegate?
     
     var areas: [Area] = [Area]()

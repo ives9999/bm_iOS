@@ -53,8 +53,8 @@ class Timetable: SuperModel {
     override func filterRow() {
         _start_hour = start_time.toDateTime(format:"HH:mm:ss").getH()
         _end_hour = end_time.toDateTime(format:"HH:mm:ss").getH()
-        _start_minute = start_time.toDateTime(format:"HH:mm:ss").getm()
-        _end_minute = end_time.toDateTime(format:"HH:mm:ss").getm()
+        _start_minute = start_time.toDateTime(format:"HH:mm:ss").geti()
+        _end_minute = end_time.toDateTime(format:"HH:mm:ss").geti()
         _color = MYCOLOR(color: color)
     }
 }

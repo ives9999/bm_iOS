@@ -9,10 +9,7 @@
 import UIKit
 
 class MoreVC: MyTableVC {
-    
-    @IBOutlet weak var menuBtn: UIButton!
-    @IBOutlet weak var tableView: UITableView!
-    
+        
     var _rows: [[Dictionary<String, Any>]] = [
         [
             ["text": "教練", "icon": "coach", "segue": TO_COACH],

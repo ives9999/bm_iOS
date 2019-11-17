@@ -158,6 +158,9 @@
 		B3E72A261FA0FBFF0008A6B1 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */; };
 		B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A271FA20D280008A6B1 /* MemberService.swift */; };
 		B3E72A2A1FA2EC640008A6B1 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */; };
+		B3E88BE6237FCEC0001F015A /* CourseCalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E88BE5237FCEC0001F015A /* CourseCalendarVC.swift */; };
+		B3E88BE92380F2D1001F015A /* CalendarSignupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E88BE72380F2D1001F015A /* CalendarSignupCell.swift */; };
+		B3E88BEA2380F2D1001F015A /* CalendarSignupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */; };
 		B3E8C29B220603310008ED25 /* ShowCoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E8C29A220603310008ED25 /* ShowCoachVC.swift */; };
 		B3E8C29E220715430008ED25 /* SuperScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E8C29D220715430008ED25 /* SuperScrollView.swift */; };
 		B3E8C2A022074CC90008ED25 /* SuperCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E8C29F22074CC90008ED25 /* SuperCity.swift */; };
@@ -418,6 +421,9 @@
 		B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3E72A271FA20D280008A6B1 /* MemberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberService.swift; sourceTree = "<group>"; };
 		B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		B3E88BE5237FCEC0001F015A /* CourseCalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCalendarVC.swift; sourceTree = "<group>"; };
+		B3E88BE72380F2D1001F015A /* CalendarSignupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSignupCell.swift; sourceTree = "<group>"; };
+		B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarSignupCell.xib; sourceTree = "<group>"; };
 		B3E8C29A220603310008ED25 /* ShowCoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCoachVC.swift; sourceTree = "<group>"; };
 		B3E8C29D220715430008ED25 /* SuperScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperScrollView.swift; sourceTree = "<group>"; };
 		B3E8C29F22074CC90008ED25 /* SuperCity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperCity.swift; sourceTree = "<group>"; };
@@ -598,6 +604,8 @@
 				B3B4B60F22CA247500245CC8 /* SomeCell.xib */,
 				B394536F2343256C000DF98E /* SignupListCell.swift */,
 				B39453702343256C000DF98E /* SignupListCell.xib */,
+				B3E88BE72380F2D1001F015A /* CalendarSignupCell.swift */,
+				B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -912,6 +920,7 @@
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B39A216E23420881006C9FF7 /* SignupListVC.swift */,
+				B3E88BE5237FCEC0001F015A /* CourseCalendarVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1108,6 +1117,7 @@
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
 				B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */,
 				B3310D9222ACA57A0062EF98 /* ContentCell.xib in Resources */,
+				B3E88BEA2380F2D1001F015A /* CalendarSignupCell.xib in Resources */,
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
 				B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */,
@@ -1346,6 +1356,7 @@
 				B3756EDE21B901C5006893E1 /* TimeCell.swift in Sources */,
 				B358B0BF22A168C700F1A4E6 /* SingleSelectCell.swift in Sources */,
 				F96931971FB953960005C13F /* City.swift in Sources */,
+				B3E88BE6237FCEC0001F015A /* CourseCalendarVC.swift in Sources */,
 				B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */,
 				B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */,
 				B3839EB822CF0261003F3620 /* ShowCourseVC.swift in Sources */,
@@ -1375,6 +1386,7 @@
 				B3310D9422ACBCC30062EF98 /* ContentEditVC.swift in Sources */,
 				B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */,
 				B3310D9722AD54000062EF98 /* SuperTextView.swift in Sources */,
+				B3E88BE92380F2D1001F015A /* CalendarSignupCell.swift in Sources */,
 				B33C1AC121BE635E006F2BEB /* ContentFormItem.swift in Sources */,
 				B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */,
 				B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */,
@@ -1481,13 +1493,13 @@
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1505,13 +1517,13 @@
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1648,7 +1660,7 @@
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = default;
 				DEVELOPMENT_TEAM = BYF37727CY;
@@ -1660,7 +1672,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
@@ -1681,7 +1693,7 @@
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_ACTIVITY_MODE = "";
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
@@ -1692,7 +1704,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.4.2;
+				MARKETING_VERSION = 1.4.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";

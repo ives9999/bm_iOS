@@ -12,7 +12,6 @@ import SwiftyJSON
 class TempPlaySignupOneVC: MyTableVC {
 
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     
     var memberToken: String = ""
     var team_id: Int = -1

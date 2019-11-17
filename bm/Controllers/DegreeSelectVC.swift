@@ -15,7 +15,6 @@ protocol DegreeSelectDelegate: class {
 
 class DegreeSelectVC: MyTableVC {
 
-    @IBOutlet weak var tableView: UITableView!
     var degrees: [Degree] = [Degree]()
     //var degrees: [[String: Any]] = [[String: Any]]()
     var allDegrees: [Degree] = [Degree]()

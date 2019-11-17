@@ -63,6 +63,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n4W-T5-iY7"/>
                     </view>
+                    <navigationItem key="navigationItem" id="5Wi-H2-5Mb"/>
                     <connections>
                         <outlet property="titleLbl" destination="oXe-Ml-6VE" id="fcW-xM-jOs"/>
                     </connections>
@@ -336,6 +337,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="TJv-46-gGn"/>
                     </view>
+                    <navigationItem key="navigationItem" id="bBe-K8-qZt"/>
                     <connections>
                         <outlet property="ContainerViewConstraintHeight" destination="vZc-YT-dI1" id="jAf-ez-h5G"/>
                         <outlet property="chargeLbl" destination="1GD-kX-C87" id="GcT-lM-HfU"/>
@@ -575,6 +577,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="28d-5J-eIl"/>
                     </view>
+                    <navigationItem key="navigationItem" id="EUw-xS-idh"/>
                     <connections>
                         <outlet property="featuredView" destination="Ay1-4r-oEw" id="PnO-ul-GFO"/>
                         <outlet property="submitBtn" destination="e1d-Ud-k9i" id="NyQ-oV-dbD"/>
@@ -688,6 +691,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fEh-XE-zIw"/>
                     </view>
+                    <navigationItem key="navigationItem" id="A4e-v1-beF"/>
                     <connections>
                         <outlet property="submitBtn" destination="r00-Q1-Luh" id="nYc-H1-wWt"/>
                         <outlet property="tableView" destination="t91-ES-VLr" id="Ryc-fa-4Q7"/>
@@ -770,6 +774,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p8i-zb-CYN"/>
                     </view>
+                    <navigationItem key="navigationItem" id="J9z-98-uQk"/>
                     <connections>
                         <outlet property="tableView" destination="Njs-Vj-aFE" id="EVd-zy-N34"/>
                         <outlet property="titleLbl" destination="njh-Ym-qMR" id="G1G-HS-Brv"/>
@@ -850,6 +855,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="p39-tX-FqC"/>
                     </view>
+                    <navigationItem key="navigationItem" id="R5L-aS-hac"/>
                     <connections>
                         <outlet property="tableView" destination="O9G-HZ-qeq" id="sKm-2t-Hod"/>
                         <outlet property="titleLbl" destination="YY0-84-MUU" id="Pir-dP-hOf"/>
@@ -857,7 +863,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dIQ-CS-y3w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2396" y="-4365"/>
+            <point key="canvasLocation" x="2916" y="-4334"/>
         </scene>
         <!--Arena SelectVC-->
         <scene sceneID="Iw9-ua-SYG">
@@ -975,6 +981,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pjr-OJ-qxv"/>
                     </view>
+                    <navigationItem key="navigationItem" id="AQS-yP-vNa"/>
                     <connections>
                         <outlet property="tableView" destination="8yo-I1-exL" id="gpG-py-DeR"/>
                     </connections>
@@ -1040,6 +1047,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="7Y1-fW-x90"/>
                     </view>
+                    <navigationItem key="navigationItem" id="2lC-aD-6zf"/>
                     <connections>
                         <outlet property="mapView" destination="haD-Wy-bTo" id="Y5w-ME-wd9"/>
                         <outlet property="titleLbl" destination="6gh-g2-6zA" id="V0t-9T-cTl"/>
@@ -1095,7 +1103,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="akV-gR-VdC">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1340"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="670"/>
                             </imageView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="oLj-Mk-1z3" customClass="SuperDatePicker" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="24" y="88" width="327" height="160"/>
@@ -1138,6 +1146,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4Qy-ad-PCJ"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ekc-lX-usW"/>
                     <connections>
                         <outlet property="datePicker" destination="oLj-Mk-1z3" id="2NX-cf-6Rv"/>
                         <outlet property="submitBtn" destination="lAd-ie-Gh7" id="1vV-Os-kMs"/>
@@ -1242,6 +1251,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6fI-OA-fdN"/>
                     </view>
+                    <navigationItem key="navigationItem" id="xp1-mx-Nb3"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <connections>
                         <outlet property="nicknameLbl" destination="J6b-Sg-IWd" id="hXA-Iv-YsK"/>
@@ -1312,6 +1322,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lC2-wD-zU1"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ov4-1I-w7A"/>
                     <connections>
                         <outlet property="headerView" destination="B46-d8-Ieo" id="rLR-o0-MD5"/>
                         <outlet property="titleLbl" destination="CnJ-ot-fB4" id="4zr-nK-ORA"/>
@@ -1561,6 +1572,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="aJ9-6P-u9a"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Agn-u2-7Ah"/>
                     <connections>
                         <outlet property="submitBtn" destination="hMx-d2-eep" id="NmF-8T-zH6"/>
                         <outlet property="tableView" destination="FcP-ze-zC8" id="f3J-kg-zSK"/>
@@ -1914,6 +1926,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CAM-UA-l1o"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Hcx-PF-EZs"/>
                     <connections>
                         <outlet property="codeTxt" destination="vic-zn-4Mh" id="crr-Kf-yC4"/>
                         <outlet property="titleLbl" destination="KwD-jK-3i4" id="3iA-MW-soc"/>
@@ -2382,6 +2395,7 @@
                         <viewLayoutGuide key="safeArea" id="MKJ-0G-bAL"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="臨打" image="tempPlay" id="OIH-0z-1IF"/>
+                    <navigationItem key="navigationItem" id="qdk-ew-vX5"/>
                     <connections>
                         <outlet property="tableView" destination="DqK-vF-DVl" id="7CS-vI-PXn"/>
                         <segue destination="dhS-d1-hPU" kind="show" identifier="toTempPlayShow" id="12Y-zR-5Ts"/>
@@ -2488,6 +2502,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="obQ-5G-fgW"/>
                     </view>
+                    <navigationItem key="navigationItem" id="OgV-fv-2jn"/>
                     <connections>
                         <outlet property="buttomView" destination="MVL-bJ-APa" id="KaL-BC-klh"/>
                         <outlet property="cancelPlusButton" destination="g60-MJ-d0q" id="QCL-gg-iPx"/>
@@ -2676,7 +2691,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="hrp-CI-jAh">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P13-eV-hn3">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
@@ -3045,6 +3060,127 @@
             </objects>
             <point key="canvasLocation" x="1748" y="1532"/>
         </scene>
+        <!--課程-->
+        <scene sceneID="Bxb-h1-yjD">
+            <objects>
+                <viewController id="T0x-jP-JLI" customClass="CourseCalendarVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y7y-qw-cC6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hFe-kJ-soy">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2i0-CM-liA">
+                                        <rect key="frame" x="12" y="21" width="16" height="22"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="22" id="osx-wO-2Rr"/>
+                                            <constraint firstAttribute="width" constant="16" id="vwa-9P-hyb"/>
+                                        </constraints>
+                                        <state key="normal" image="menu"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="vKs-8d-qX1"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgG-zi-T3t">
+                                        <rect key="frame" x="168.5" y="18.5" width="38.5" height="27"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Plv-nn-hV9">
+                                        <rect key="frame" x="331" y="16" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="1CW-RH-1q6"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="4xA-gc-vrw"/>
+                                            <constraint firstAttribute="width" constant="32" id="JSI-57-6pB"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="VCj-JJ-PbV"/>
+                                        </constraints>
+                                        <state key="normal" image="search"/>
+                                        <connections>
+                                            <action selector="searchBtnPressed:" destination="hk6-fe-bLP" eventType="touchUpInside" id="4aU-Oa-y1m"/>
+                                            <action selector="searchBtnPressed:" destination="fZf-Fb-4DO" eventType="touchUpInside" id="Zw8-Yu-oaj"/>
+                                            <action selector="searchBtnPressed:" destination="T0x-jP-JLI" eventType="touchUpInside" id="ney-3d-Mof"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTa-yo-007">
+                                        <rect key="frame" x="293" y="19.5" width="32" height="25"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="J7e-g2-azZ"/>
+                                            <constraint firstAttribute="height" constant="25" id="asH-Xk-uCV"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="qn4-lt-1wF"/>
+                                            <constraint firstAttribute="width" constant="32" id="s35-pi-hwR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                        <state key="normal" image="gear"/>
+                                        <connections>
+                                            <action selector="colseBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="EHh-1C-mfS"/>
+                                            <action selector="manager:" destination="fZf-Fb-4DO" eventType="touchUpInside" id="CXK-qk-qhO"/>
+                                            <action selector="manager:" destination="T0x-jP-JLI" eventType="touchUpInside" id="KO8-i8-B8r"/>
+                                            <action selector="manager:" destination="hk6-fe-bLP" eventType="touchUpInside" id="yYF-v2-bvv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="2i0-CM-liA" firstAttribute="leading" secondItem="hFe-kJ-soy" secondAttribute="leading" constant="12" id="6qb-MQ-vSk"/>
+                                    <constraint firstAttribute="trailing" secondItem="Plv-nn-hV9" secondAttribute="trailing" constant="12" id="8if-b5-8DN"/>
+                                    <constraint firstItem="UgG-zi-T3t" firstAttribute="centerX" secondItem="hFe-kJ-soy" secondAttribute="centerX" id="A03-Oz-peE"/>
+                                    <constraint firstItem="2i0-CM-liA" firstAttribute="centerY" secondItem="hFe-kJ-soy" secondAttribute="centerY" id="AGe-vH-oyo"/>
+                                    <constraint firstAttribute="height" constant="64" id="ANV-ZS-Bcb"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="AS9-9f-AXf"/>
+                                    <constraint firstItem="Plv-nn-hV9" firstAttribute="centerY" secondItem="hFe-kJ-soy" secondAttribute="centerY" id="SZa-rs-3Wg"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="Syr-Kf-F0V"/>
+                                    <constraint firstItem="DTa-yo-007" firstAttribute="centerY" secondItem="hFe-kJ-soy" secondAttribute="centerY" id="fow-B1-vDa"/>
+                                    <constraint firstItem="UgG-zi-T3t" firstAttribute="centerY" secondItem="hFe-kJ-soy" secondAttribute="centerY" id="mEy-Cn-7BF"/>
+                                    <constraint firstItem="Plv-nn-hV9" firstAttribute="leading" secondItem="DTa-yo-007" secondAttribute="trailing" constant="6" id="xeX-W8-KUX"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="LVQ-aV-9zT">
+                                <rect key="frame" x="0.0" y="64" width="377.5" height="603"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxr-00-IuR">
+                                <rect key="frame" x="0.0" y="64" width="375" height="128"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="XKA-A5-7Hd"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AwX-iW-Rfl">
+                                <rect key="frame" x="0.0" y="192" width="375" height="426"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="Tfa-Ao-ZUt" firstAttribute="trailing" secondItem="hFe-kJ-soy" secondAttribute="trailing" id="5dv-0f-vNb"/>
+                            <constraint firstItem="Tfa-Ao-ZUt" firstAttribute="bottom" secondItem="AwX-iW-Rfl" secondAttribute="bottom" id="AUg-oH-8mN"/>
+                            <constraint firstItem="AwX-iW-Rfl" firstAttribute="top" secondItem="sxr-00-IuR" secondAttribute="bottom" id="CCG-OP-CcL"/>
+                            <constraint firstItem="LVQ-aV-9zT" firstAttribute="top" secondItem="hFe-kJ-soy" secondAttribute="bottom" id="F6S-gM-b9Z"/>
+                            <constraint firstItem="hFe-kJ-soy" firstAttribute="top" secondItem="Tfa-Ao-ZUt" secondAttribute="top" id="GwD-o0-mgd"/>
+                            <constraint firstItem="Tfa-Ao-ZUt" firstAttribute="trailing" secondItem="AwX-iW-Rfl" secondAttribute="trailing" id="Q3o-wg-HTO"/>
+                            <constraint firstItem="Tfa-Ao-ZUt" firstAttribute="trailing" secondItem="sxr-00-IuR" secondAttribute="trailing" id="Yqc-ZO-hTz"/>
+                            <constraint firstItem="AwX-iW-Rfl" firstAttribute="leading" secondItem="Tfa-Ao-ZUt" secondAttribute="leading" id="aOv-Qn-8nN"/>
+                            <constraint firstItem="sxr-00-IuR" firstAttribute="leading" secondItem="Tfa-Ao-ZUt" secondAttribute="leading" id="rwE-Ro-Mvb"/>
+                            <constraint firstItem="sxr-00-IuR" firstAttribute="top" secondItem="hFe-kJ-soy" secondAttribute="bottom" id="ta8-dV-TNn"/>
+                            <constraint firstAttribute="bottom" secondItem="LVQ-aV-9zT" secondAttribute="bottom" id="y6n-og-Nhd"/>
+                            <constraint firstItem="LVQ-aV-9zT" firstAttribute="leading" secondItem="Tfa-Ao-ZUt" secondAttribute="leading" id="z29-Xi-0Pl"/>
+                            <constraint firstItem="hFe-kJ-soy" firstAttribute="leading" secondItem="y7y-qw-cC6" secondAttribute="leading" id="z7H-Bw-aRs"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Tfa-Ao-ZUt"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="課程" image="course" id="xls-2e-VSV"/>
+                    <connections>
+                        <outlet property="managerBtn" destination="DTa-yo-007" id="oTO-3k-xKu"/>
+                        <outlet property="menuBtn" destination="2i0-CM-liA" id="2GN-qh-dtE"/>
+                        <outlet property="tableView" destination="AwX-iW-Rfl" id="Os5-YV-fdw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tIv-yo-Hrs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-236" y="-1258"/>
+        </scene>
         <!--臨打-->
         <scene sceneID="3a3-E3-xcE">
             <objects>
@@ -3199,7 +3335,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="SZC-gy-pqa">
-                                <rect key="frame" x="0.0" y="64" width="375" height="1340"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="670"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ac6-qU-H7f">
                                 <rect key="frame" x="0.0" y="64" width="375" height="583"/>
@@ -3221,6 +3357,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eTn-Lz-FWa"/>
                     </view>
+                    <navigationItem key="navigationItem" id="W7K-S9-x9M"/>
                     <connections>
                         <outlet property="tableView" destination="ac6-qU-H7f" id="IGH-U6-mWq"/>
                         <outlet property="titleLbl" destination="33k-oE-O8H" id="iZ5-fK-l1a"/>
@@ -3348,6 +3485,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m9z-U2-o5O"/>
                     </view>
+                    <navigationItem key="navigationItem" id="qYI-gP-9oO"/>
                     <connections>
                         <outlet property="coachDataLbl" destination="VnA-Er-m4r" id="Kms-EU-kxm"/>
                         <outlet property="coachTableView" destination="ejo-Lv-yrh" id="cr6-NT-C0p"/>
@@ -3551,6 +3689,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="GRo-LE-jpC"/>
                     </view>
+                    <navigationItem key="navigationItem" id="vG7-Ku-IfO"/>
                     <connections>
                         <outlet property="collectionView" destination="9Jd-2O-e9s" id="xlH-2q-7RH"/>
                         <outlet property="titleLbl" destination="lfh-Wl-Z80" id="Xex-aA-Jbf"/>
@@ -3630,6 +3769,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="mDO-ve-yFo"/>
                     </view>
+                    <navigationItem key="navigationItem" id="8td-jK-YAq"/>
                     <connections>
                         <outlet property="tableView" destination="oon-Mz-8yN" id="zve-Ln-qS0"/>
                         <outlet property="titleLbl" destination="mT7-32-00D" id="y5q-5F-hyI"/>
@@ -3709,6 +3849,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4NC-Y4-KNc"/>
                     </view>
+                    <navigationItem key="navigationItem" id="cU4-x5-KkL"/>
                     <connections>
                         <outlet property="tableView" destination="6lI-Kj-zyW" id="jr7-Os-qxk"/>
                         <outlet property="titleLbl" destination="pPF-SV-psO" id="L5N-5l-8jD"/>
@@ -4388,6 +4529,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bp2-qj-eqk"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Yha-GI-el3"/>
                     <connections>
                         <outlet property="tableView" destination="KDU-5C-WMW" id="gBh-XA-wj0"/>
                         <outlet property="titleLbl" destination="vFD-E4-vIm" id="eXC-WE-dNP"/>
@@ -4460,6 +4602,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="72Q-wl-fFD"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ekV-lQ-ddI"/>
                     <connections>
                         <outlet property="tableView" destination="yKJ-E5-Rqy" id="P6Y-vU-9hO"/>
                         <outlet property="titleLbl" destination="b9m-1p-DCF" id="Zxu-Rb-EIt"/>
@@ -4601,6 +4744,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kau-P2-jdC"/>
                     </view>
+                    <navigationItem key="navigationItem" id="tZm-y8-eAo"/>
                     <connections>
                         <outlet property="bottomView" destination="079-4S-HsD" id="yro-hK-xr6"/>
                         <outlet property="clearBtn" destination="9t9-cr-Lcc" id="Og4-2F-nZi"/>
@@ -4801,7 +4945,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="omZ-1j-3Gu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1618" y="-170"/>
+            <point key="canvasLocation" x="-1282" y="-142"/>
         </scene>
         <!--教練-->
         <scene sceneID="5pf-JC-0gR">
@@ -4913,7 +5057,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cH-ZS-Ng2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1977" y="-448"/>
+            <point key="canvasLocation" x="-2060" y="-510"/>
         </scene>
         <!--更多-->
         <scene sceneID="B3E-J4-4nC">
@@ -5009,7 +5153,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Qui-jL-mMT" kind="relationship" relationship="viewControllers" id="4np-zh-koR"/>
-                        <segue destination="fZf-Fb-4DO" kind="relationship" relationship="viewControllers" id="6g0-3d-mds"/>
+                        <segue destination="T0x-jP-JLI" kind="relationship" relationship="viewControllers" id="tuQ-DV-pid"/>
                         <segue destination="hk6-fe-bLP" kind="relationship" relationship="viewControllers" id="RQZ-ik-XYc"/>
                         <segue destination="OKf-NR-jh3" kind="relationship" relationship="viewControllers" id="D84-qE-32n"/>
                     </connections>
@@ -5256,6 +5400,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="5Zf-xU-fwv"/>
                     </view>
+                    <navigationItem key="navigationItem" id="OlM-YO-dbI"/>
                     <connections>
                         <outlet property="tableView" destination="f15-Ng-9QQ" id="8Pc-wS-dnR"/>
                     </connections>
@@ -5383,6 +5528,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Kz9-HB-r4x"/>
                     </view>
+                    <navigationItem key="navigationItem" id="FjB-UB-Ds6"/>
                     <connections>
                         <outlet property="tableView" destination="8Ra-ke-3tb" id="sxj-1b-ZwA"/>
                         <outlet property="titleLbl" destination="KUT-Nj-FQF" id="gfj-46-Kb6"/>
@@ -5397,6 +5543,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jgh-cg-UbZ" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="LS7-mt-1ba"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Fwf-kL-CSU">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -5532,6 +5679,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lcZ-h2-Zak"/>
                     </view>
+                    <navigationItem key="navigationItem" id="aKP-59-Of8"/>
                     <connections>
                         <outlet property="tableView" destination="IHa-NJ-dmw" id="O5s-rB-Npd"/>
                     </connections>
@@ -5566,18 +5714,18 @@
         <image name="tempPlay" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2Di-nR-q4w"/>
+        <segue reference="beR-yu-55u"/>
         <segue reference="Lp8-ui-LgL"/>
-        <segue reference="mvW-Q8-ZFE"/>
-        <segue reference="H3p-LU-aVa"/>
-        <segue reference="itP-1S-HdR"/>
+        <segue reference="y8N-d0-A16"/>
+        <segue reference="SiI-cm-Vku"/>
+        <segue reference="UI0-Ma-Ffm"/>
         <segue reference="xCT-HQ-HRw"/>
-        <segue reference="aHG-Uf-e4X"/>
-        <segue reference="kcV-jt-cPw"/>
+        <segue reference="NO9-v4-wOp"/>
+        <segue reference="A4Z-Qs-ID8"/>
         <segue reference="gqh-nG-WJt"/>
         <segue reference="oKL-Gk-zBn"/>
         <segue reference="xCJ-lv-P9J"/>
-        <segue reference="25S-Pg-i4z"/>
+        <segue reference="CEV-J6-MNI"/>
         <segue reference="2ff-JT-Wdj"/>
         <segue reference="f5d-2G-qtf"/>
         <segue reference="xcZ-Ad-vEw"/>
@@ -5585,7 +5733,7 @@
         <segue reference="DaT-w5-CTD"/>
         <segue reference="cK5-nM-2qW"/>
         <segue reference="fYu-zk-ZTm"/>
-        <segue reference="CFj-m8-ABA"/>
+        <segue reference="pYZ-nD-1ol"/>
         <segue reference="Kca-5B-OTe"/>
         <segue reference="AlK-fI-QxB"/>
     </inferredMetricsTieBreakers>

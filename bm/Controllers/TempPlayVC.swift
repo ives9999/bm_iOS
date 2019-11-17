@@ -11,7 +11,6 @@ import UIKit
 class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
 
     // outlets
-    @IBOutlet weak var tableView: UITableView!
     
     var model: Team!
     let cell_constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()

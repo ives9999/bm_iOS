@@ -10,7 +10,6 @@ import UIKit
 
 class TempPlayDatePlayerVC: MyTableVC, TempPlayDatePlayerCellDelegate {
 
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
     
     var date: String = ""

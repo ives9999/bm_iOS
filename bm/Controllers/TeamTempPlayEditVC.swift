@@ -11,7 +11,6 @@ import UIKit
 class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
 
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var submitBtn: UIButton!
     

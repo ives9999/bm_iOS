@@ -10,8 +10,6 @@ import UIKit
 
 class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, EditCellDelegate {
     
-    @IBOutlet weak var menuBtn: UIButton!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var submitBtn: UIButton!
     
     let heightForSection: CGFloat = 34

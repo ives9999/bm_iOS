@@ -12,7 +12,6 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var featuredView: ImagePickerView!
     @IBOutlet weak var submitBtn: SubmitButton!
     

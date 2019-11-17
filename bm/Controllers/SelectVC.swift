@@ -12,7 +12,6 @@ protocol SelectDelegate: class {}
 
 class SelectVC: MyTableVC {
     
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
     
     var key: String? = nil

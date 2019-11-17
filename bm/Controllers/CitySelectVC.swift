@@ -16,9 +16,7 @@ protocol CitySelectDelegate: class {
 
 
 class CitySelectVC: MyTableVC {
-    
-    @IBOutlet weak var tableView: UITableView!
-    
+        
     weak var delegate: CitySelectDelegate?
     var citys: [City] = [City]()
     //var selects: [Int] = [Int]()

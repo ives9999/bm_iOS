@@ -22,8 +22,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     var _titleField: String = "name"
     internal(set) public var lists: [SuperData] = [SuperData]()
     
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var menuBtn: UIButton!
+    
     
     var newY: CGFloat = 0
     
@@ -79,7 +78,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     override func viewWillAppear(_ animated: Bool) {
         //print(params)
         if searchPanelisHidden {
-            refresh()
+            //refresh()
         }
     }
     

@@ -16,7 +16,6 @@ class ManagerFunctionVC: MyTableVC {
     var _rows: [Dictionary<String, Any>] = [Dictionary<String, Any>]()
 
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         myTablView = tableView

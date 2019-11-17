@@ -10,7 +10,6 @@ import UIKit
 
 class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleLbl: UILabel!
     
     var name: String? = nil

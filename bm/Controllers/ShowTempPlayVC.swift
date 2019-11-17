@@ -30,7 +30,6 @@ class ShowTempPlayVC: MyTableVC {
     var degreeLbl: SuperLabel!
 //    var plusOneBtn: SubmitButton!
 //    var cancelPlusOneBtn: CancelButton!
-    var tableView: UITableView!
     
     var items: [Any] = [Any]()
     
@@ -57,8 +56,7 @@ class ShowTempPlayVC: MyTableVC {
     
     override func viewDidLoad() {
         model = Team.instance
-        tableView = UITableView()
-        myTablView = tableView
+        myTablView = UITableView()
         
         super.viewDidLoad()
         
@@ -117,7 +115,7 @@ class ShowTempPlayVC: MyTableVC {
         containerView.addSubview(degreeLbl)
         //containerView.addSubview(plusOneBtn)
         //containerView.addSubview(cancelPlusOneBtn)
-        containerView.addSubview(tableView)
+        containerView.addSubview(myTablView)
         
 //        cityBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
         arenaBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
@@ -138,10 +136,10 @@ class ShowTempPlayVC: MyTableVC {
 //        cancelPlusOneBtn.sizeToFit()
         //spaceView.backgroundColor = UIColor.red
         
-        tableView.register(TempPlaySignupCell.self, forCellReuseIdentifier: "cell")
-        tableView.isScrollEnabled = false
-        tableView.backgroundColor = UIColor.black
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        myTablView.register(TempPlaySignupCell.self, forCellReuseIdentifier: "cell")
+        myTablView.isScrollEnabled = false
+        myTablView.backgroundColor = UIColor.black
+        myTablView.separatorStyle = UITableViewCellSeparatorStyle.none
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
@@ -205,7 +203,7 @@ class ShowTempPlayVC: MyTableVC {
  */
         
         //let tmps: [Any] = [cityBtn]
-        let tmps: [Any] = [cityBtn,dateLbl,timeLbl,quantityLbl,signupLbl,feeMLbl,feeFLbl,ballLbl,leaderLbl,mobileLbl,degreeLbl,tableView]
+        let tmps: [Any] = [cityBtn,dateLbl,timeLbl,quantityLbl,signupLbl,feeMLbl,feeFLbl,ballLbl,leaderLbl,mobileLbl,degreeLbl,myTablView]
         items = items + tmps
         
         for (idx, item) in items.enumerated() {
@@ -227,12 +225,12 @@ class ShowTempPlayVC: MyTableVC {
         }
         
         // tableView
-        c1 = NSLayoutConstraint(item: tableView, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
-        c2 = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: degreeLbl, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
+        c1 = NSLayoutConstraint(item: myTablView, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: constant.name_left_padding)
+        c2 = NSLayoutConstraint(item: myTablView, attribute: .top, relatedBy: .equal, toItem: degreeLbl, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding)
         //c3 = NSLayoutConstraint(item: tableView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200)
-        c3 = NSLayoutConstraint(item: tableView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1, constant: constant.name_left_padding * -1)
-        tableViewHeightConstraint = NSLayoutConstraint(item: tableView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        c3 = NSLayoutConstraint(item: myTablView, attribute: .trailing, relatedBy: .equal, toItem: containerView, attribute: .trailing, multiplier: 1, constant: constant.name_left_padding * -1)
+        tableViewHeightConstraint = NSLayoutConstraint(item: myTablView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200)
+        myTablView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addConstraint(c1)
         containerView.addConstraint(c2)
         containerView.addConstraint(c3)
@@ -245,14 +243,14 @@ class ShowTempPlayVC: MyTableVC {
         containerView.addConstraint(arenaBtnC2)
         
         
-//        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 6)
+//        let plusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .top, relatedBy: .equal, toItem: myTablView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 6)
 //        let allW: CGFloat = view.frame.width / 2
 //        let w1: CGFloat = plusOneBtn.frame.width
 //        let plusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: plusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW - w1 - constant.name_left_padding)
 //        plusOneBtn.translatesAutoresizingMaskIntoConstraints = false
 //        containerView.addConstraints([plusOneBtnC1,plusOneBtnC2])
 //
-//        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: tableView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 6)
+//        let cancelPlusOneBtnC1: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .top, relatedBy: .equal, toItem: myTablView, attribute: .bottom, multiplier: 1, constant: constant.name_top_padding * 6)
 //        let cancelPlusOneBtnC2: NSLayoutConstraint = NSLayoutConstraint(item: cancelPlusOneBtn, attribute: .leading, relatedBy: .equal, toItem: containerView, attribute: .leading, multiplier: 1, constant: allW + constant.name_left_padding)
 //        cancelPlusOneBtn.translatesAutoresizingMaskIntoConstraints = false
 //        containerView.addConstraint(cancelPlusOneBtnC1)
@@ -270,9 +268,9 @@ class ShowTempPlayVC: MyTableVC {
 //                self.model.data["signups"]!["value"] = [[String:String]]()
 //                self.model.data["signups"]!["value"] = tmp
                 self.setPage()
-                self.tableView.reloadData()
+                self.myTablView.reloadData()
                 self.refreshControl.endRefreshing()
-                self.tableView.tableHeaderView?.layoutIfNeeded()
+                self.myTablView.tableHeaderView?.layoutIfNeeded()
             }
         }
     }

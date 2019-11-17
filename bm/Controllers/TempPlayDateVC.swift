@@ -11,7 +11,6 @@ import UIKit
 class TempPlayDateVC: MyTableVC {
 
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var tableView: UITableView!
     
     var token: String = ""
     var name: String = ""
