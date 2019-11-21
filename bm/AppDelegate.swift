@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if deviceType == .simulator {
             gSimulate = true
         }
-        //gSimulate = false
+        //gSimulate = true
         
         SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         

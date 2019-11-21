@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tFM-zl-suE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tFM-zl-suE">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1670,7 +1670,7 @@
                                     <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="a5A-E6-2vj"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="jacky@gmail.com" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0yo-nU-T3O" customClass="EMailTextField" customModule="bm" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="jacky@gmail.com" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0yo-nU-T3O">
                                 <rect key="frame" x="99" y="259" width="200" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="4Nh-qB-oVW"/>
@@ -1692,7 +1692,7 @@
                                     <constraint firstAttribute="width" constant="257" id="KfC-zG-eAg"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密碼" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="69n-Va-wxY" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密碼" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="69n-Va-wxY">
                                 <rect key="frame" x="99" y="322" width="200" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="NuH-Ln-aMw"/>
@@ -1700,7 +1700,7 @@
                                 </constraints>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" secureTextEntry="YES" textContentType="password"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                         <color key="value" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2008,7 +2008,7 @@
                                     <constraint firstAttribute="height" constant="43" id="z9i-i8-D9c"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="jacky@gmail.com" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Gyb-GY-JaR" customClass="EMailTextField" customModule="bm" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="jacky@gmail.com" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Gyb-GY-JaR">
                                 <rect key="frame" x="99" y="239" width="200" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="5cU-bC-nCp"/>
@@ -2030,7 +2030,7 @@
                                     <constraint firstAttribute="height" constant="43" id="bdu-ie-qAL"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密碼" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qrD-N4-R1z" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密碼" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qrD-N4-R1z">
                                 <rect key="frame" x="99" y="302" width="200" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="Z3l-7Y-dxU"/>
@@ -2038,7 +2038,7 @@
                                 </constraints>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                         <color key="value" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2052,7 +2052,7 @@
                                     <constraint firstAttribute="height" constant="43" id="yzH-F1-LEM"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密碼確認" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="w9e-SB-GmI" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密碼確認" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="w9e-SB-GmI">
                                 <rect key="frame" x="99" y="365" width="200" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="BAR-eS-a3K"/>
@@ -2060,7 +2060,7 @@
                                 </constraints>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                         <color key="value" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2544,7 +2544,7 @@
                                         <state key="normal" image="menu"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayd-RJ-lxK">
-                                        <rect key="frame" x="293" y="19.5" width="32" height="25"/>
+                                        <rect key="frame" x="293" y="7" width="32" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="32" id="1h0-Qa-F5b"/>
                                             <constraint firstAttribute="width" constant="32" id="SWQ-mA-QTe"/>
@@ -3335,7 +3335,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="SZC-gy-pqa">
-                                <rect key="frame" x="0.0" y="64" width="375" height="670"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="1340"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ac6-qU-H7f">
                                 <rect key="frame" x="0.0" y="64" width="375" height="583"/>
@@ -4656,7 +4656,7 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="583"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="oIe-hG-zfK">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="670"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="1340"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前無推播訊息" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sW4-FK-UYQ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="16" width="375" height="20"/>
@@ -5727,7 +5727,7 @@
         <segue reference="xCJ-lv-P9J"/>
         <segue reference="CEV-J6-MNI"/>
         <segue reference="2ff-JT-Wdj"/>
-        <segue reference="f5d-2G-qtf"/>
+        <segue reference="ViB-98-skP"/>
         <segue reference="xcZ-Ad-vEw"/>
         <segue reference="Ym7-zQ-SHb"/>
         <segue reference="DaT-w5-CTD"/>

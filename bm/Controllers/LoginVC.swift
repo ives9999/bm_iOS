@@ -13,20 +13,20 @@ import FacebookLogin
 class LoginVC: BaseViewController, UITextFieldDelegate {
 
     // outlets
-    @IBOutlet weak var emailTxt: EMailTextField!
-    @IBOutlet weak var passwordTxt: SuperTextField!
+    @IBOutlet weak var emailTxt: UITextField!
+    @IBOutlet weak var passwordTxt: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         emailTxt.delegate = self
         passwordTxt.delegate = self
-        emailTxt.align(.left)
-        emailTxt.borderWidth(0)
-        emailTxt.backgroundColor = UIColor.clear
-        passwordTxt.align(.left)
-        passwordTxt.borderWidth(0)
-        passwordTxt.backgroundColor = UIColor.clear
+        //emailTxt.align(.left)
+        //emailTxt.borderWidth(0)
+        //emailTxt.backgroundColor = UIColor.clear
+        //passwordTxt.align(.left)
+        //passwordTxt.borderWidth(0)
+        //passwordTxt.backgroundColor = UIColor.clear
 
         //emailTxt.text = "ives@housetube.tw"
         //passwordTxt.text = "K5SD23r6"

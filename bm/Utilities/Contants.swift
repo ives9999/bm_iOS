@@ -15,8 +15,8 @@ typealias DATA = Dictionary<String, [String: Any]>
 let CHANNEL = "bm"
 
 // URL Constants
-let REMOTE_BASE_URL = "https://bm.sportpassword.com"
-//let REMOTE_BASE_URL = "http://192.168.100.120"
+//let REMOTE_BASE_URL = "https://bm.sportpassword.com"
+let REMOTE_BASE_URL = "http://192.168.100.120"
 //let REMOTE_BASE_URL = "http://192.168.2.200"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
@@ -149,6 +149,13 @@ let TEXTBORDER = MY_GREEN
 let PLACEHOLDER = "#8b8f90"
 let TEXTBACKGROUND = "#3d3f41"
 let DARKBACKGROUND = "#282828"
+let MONDAY_COLOR = "#389DAD"
+let TUESDAY_COLOR = "#659B2C"
+let WEDNESDAY_COLOR = "#F4BA00"
+let THURSDAY_COLOR = "#E47417"
+let FRIDAY_COLOR = "#B04444"
+let SATURDAY_COLOR = "#1aff5e"
+let SUNDAY_COLOR = "#795bff"
 
 // User Defaults
 let NICKNAME_KEY = "nickname"

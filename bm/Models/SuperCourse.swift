@@ -57,7 +57,7 @@ class SuperCourse: SuperModel {
     @objc dynamic var signups: SuperSignups = SuperSignups()
     @objc dynamic var isSignup: Bool = false
     @objc dynamic var signup_id: Int = 0
-
+    @objc dynamic var weekday_arr: [Int] = [Int]()
     
     override func filterRow() {
         created_at_text = created_at.noTime()

@@ -53,8 +53,14 @@ class SuperModel: NSObject, JSONParsable {
             let type = value.type
             if type == Type.array {
                 let arrayValue = value.arrayValue
-                let parsedArray = parse(property: property, array: arrayValue)
-                setValue(parsedArray, forKey: key)
+                if key == "weekday_arr" {
+                    let parseArray = parseInt(arrayValue)
+                    setValue(parseArray, forKey: key)
+                } else {
+                    let parsedArray = parse(property: property, array: arrayValue)
+                    setValue(parsedArray, forKey: key)
+                }
+                
             } else if type == Type.dictionary {
                 //let dictValue = value.dictionary
                 
@@ -98,6 +104,16 @@ class SuperModel: NSObject, JSONParsable {
                 //dynamicObject.filterRow()
                 resultingArray.append(dynamicObject)
             }
+        }
+        
+        return resultingArray
+    }
+    
+    private func parseInt(_ array: [JSON]) -> [Int] {
+        var resultingArray = [Int]()
+        for json in array {
+            let i = json.intValue
+            resultingArray.append(i)
         }
         
         return resultingArray

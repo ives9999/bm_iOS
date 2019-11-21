@@ -11,9 +11,9 @@ import UIKit
 class RegisterVC: BaseViewController, UITextFieldDelegate {
 
     // Outlets
-    @IBOutlet weak var emailTxt: EMailTextField!
-    @IBOutlet weak var passwordTxt: SuperTextField!
-    @IBOutlet weak var rePasswordTxt: SuperTextField!
+    @IBOutlet weak var emailTxt: UITextField!
+    @IBOutlet weak var passwordTxt: UITextField!
+    @IBOutlet weak var rePasswordTxt: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,16 +22,16 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
         emailTxt.delegate = self
         passwordTxt.delegate = self
         rePasswordTxt.delegate = self
-        emailTxt.align(.left)
-        emailTxt.borderWidth(0)
-        emailTxt.layer.borderColor = UIColor.clear.cgColor
-        emailTxt.backgroundColor = UIColor.clear
-        passwordTxt.align(.left)
-        passwordTxt.borderWidth(0)
-        passwordTxt.backgroundColor = UIColor.clear
-        rePasswordTxt.align(.left)
-        rePasswordTxt.borderWidth(0)
-        rePasswordTxt.backgroundColor = UIColor.clear
+        //emailTxt.align(.left)
+        //emailTxt.borderWidth(0)
+        //emailTxt.layer.borderColor = UIColor.clear.cgColor
+        //emailTxt.backgroundColor = UIColor.clear
+        //passwordTxt.align(.left)
+        //passwordTxt.borderWidth(0)
+        //passwordTxt.backgroundColor = UIColor.clear
+        //rePasswordTxt.align(.left)
+        //rePasswordTxt.borderWidth(0)
+        //rePasswordTxt.backgroundColor = UIColor.clear
     }
 
     @IBAction func registerBtnPressed(_ sender: Any) {

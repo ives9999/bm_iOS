@@ -78,7 +78,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     override func viewWillAppear(_ animated: Bool) {
         //print(params)
         if searchPanelisHidden {
-            //refresh()
+            refresh()
         }
     }
     

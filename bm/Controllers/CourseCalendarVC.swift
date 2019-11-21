@@ -20,7 +20,12 @@ class CourseCalendarVC: ListVC {
         ["title":"結束時間之前","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":END_TIME_KEY,"show":"不限","segue":TO_SINGLE_SELECT,"sender":[String: Any](),"value":"","value_type":"String"]
     ]
     
+    var superCourses: SuperCourses? = nil
+    internal(set) public var lists1: [SuperModel] = [SuperModel]()
+    
     let session: UserDefaults = UserDefaults.standard
+    var params1: [String: Any]?
+    
     var year: Int = Date().getY()
     var month: Int = Date().getm()
     var monthLastDay: Int = 31
@@ -40,10 +45,64 @@ class CourseCalendarVC: ListVC {
         
         let cellNibName = UINib(nibName: "CalendarSignupCell", bundle: nil)
         myTablView.register(cellNibName, forCellReuseIdentifier: "calendar_signup_cell")
+        myTablView.estimatedRowHeight = 85
+    }
+    
+    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
+        //print(page)
+        Global.instance.addSpinner(superView: self.view)
+        
+        dataService.getList(t: SuperCourse.self, t1: SuperCourses.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
+            if (success) {
+                self.getDataEnd(success: success)
+                Global.instance.removeSpinner(superView: self.view)
+            } else {
+                Global.instance.removeSpinner(superView: self.view)
+                self.warning(self.dataService.msg)
+            }
+        }
+    }
+    
+    override func getDataEnd(success: Bool) {
+        if success {
+            let superModel: SuperModel = CourseService.instance.superModel
+            superCourses = (superModel as! SuperCourses)
+            //superCourses = CourseService.instance.superCourses
+            let tmps: [SuperCourse] = superCourses!.rows
+            
+            //print(tmps)
+            //print("===============")
+            if page == 1 {
+                lists1 = [SuperCourse]()
+            }
+            lists1 += tmps
+            //print(self.lists)
+            page = superCourses!.page
+            if page == 1 {
+                totalCount = superCourses!.totalCount
+                perPage = superCourses!.perPage
+                let _pageCount: Int = totalCount / perPage
+                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+                //print(self.totalPage)
+                if refreshControl.isRefreshing {
+                    refreshControl.endRefreshing()
+                }
+            }
+            myTablView.reloadData()
+            //self.page = self.page + 1 in CollectionView
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return monthLastDay
+        if lists1.count > 0 {
+            return monthLastDay
+        } else {
+            return 0
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,7 +116,8 @@ class CourseCalendarVC: ListVC {
                     day_str = "0\(day_str)"
                 }
                 let date: String = "\(year)-\(month)-\(day_str)"
-                cell.update(date: date)
+                
+                cell.update(date: date, superModels: lists1)
                 return cell
             } else {
                 return CalendarSignupCell()
