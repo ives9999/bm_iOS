@@ -29,6 +29,11 @@ class CourseCalendarVC: ListVC {
     var year: Int = Date().getY()
     var month: Int = Date().getm()
     var monthLastDay: Int = 31
+    
+    var course_width: Int = 100
+    var course_height: Int = 300
+    
+    var dateCourses: [[String: Any]] = [[String: Any]]()
 
     override func viewDidLoad() {
         
@@ -45,7 +50,8 @@ class CourseCalendarVC: ListVC {
         
         let cellNibName = UINib(nibName: "CalendarSignupCell", bundle: nil)
         myTablView.register(cellNibName, forCellReuseIdentifier: "calendar_signup_cell")
-        myTablView.estimatedRowHeight = 85
+        //myTablView.rowHeight = UITableViewAutomaticDimension
+        //myTablView.estimatedRowHeight = 400
     }
     
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
@@ -88,6 +94,8 @@ class CourseCalendarVC: ListVC {
                     refreshControl.endRefreshing()
                 }
             }
+            makeCourseArr()
+            print(dateCourses)
             myTablView.reloadData()
             //self.page = self.page + 1 in CollectionView
         }
@@ -102,7 +110,15 @@ class CourseCalendarVC: ListVC {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        
+        let d: [String: Any] = dateCourses[indexPath.row]
+        guard let courses: [SuperCourse] = d["rows"] as? [SuperCourse] else { return 44}
+        if courses.count > 0 {
+            let height: Int = course_height * courses.count + ((courses.count-1)*10) + 50
+            return CGFloat(height)
+        } else {
+            return 44
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -110,14 +126,15 @@ class CourseCalendarVC: ListVC {
         if tableView == myTablView {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "calendar_signup_cell", for: indexPath) as? CalendarSignupCell {
                 
-                let day: Int = indexPath.row + 1
-                var day_str: String = String(day)
-                if day < 10 {
-                    day_str = "0\(day_str)"
+                for view in cell.courseContainer.subviews {
+                    view.removeFromSuperview()
                 }
-                let date: String = "\(year)-\(month)-\(day_str)"
+                let day: Int = indexPath.row + 1
+                let date: String = String(format: "%4d-%02d-%02d", year, month, day)
+                //print(date)
                 
-                cell.update(date: date, superModels: lists1)
+                course_width = Int(view.frame.width - 24)
+                cell.update(date: date, superModels: lists1, course_width: course_width, course_height: course_height)
                 return cell
             } else {
                 return CalendarSignupCell()
@@ -133,6 +150,34 @@ class CourseCalendarVC: ListVC {
         }
                
         return UITableViewCell()
+    }
+    
+    func makeCourseArr() {
+        for day in 1...monthLastDay {
+            var course: [String: Any] = [String: Any]()
+            let date: String = String(format: "%4d-%02d-%02d", year, month, day)
+            course["date"] = date
+            let d: Date = date.toDate()
+            let weekday_i: Int = d.dateToWeekday()
+            let weekday_c: String = d.dateToWeekdayForChinese()
+            course["weekday_i"] = weekday_i
+            course["weekday_c"] = weekday_c
+            
+            var rows: [SuperCourse] = [SuperCourse]()
+            for superModel in lists1 {
+                if let superCourse = superModel as? SuperCourse {
+                    //superCourse.printRow()
+                    for weekday in superCourse.weekday_arr {
+                        if weekday == weekday_i {
+                            rows.append(superCourse)
+                        }
+                    }
+                }
+            }
+            course["rows"] = rows
+            
+            dateCourses.append(course)
+        }
     }
 
     @IBAction func manager(_ sender: Any) {

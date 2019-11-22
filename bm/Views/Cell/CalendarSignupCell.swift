@@ -18,7 +18,13 @@ class CalendarSignupCell: SuperCell {
         // Initialization code
     }
     
-    func update(date: String, superModels: [SuperModel]) {
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        courseContainer.layoutIfNeeded()
+//
+//    }
+    
+    func update(date: String, superModels: [SuperModel], course_width: Int, course_height: Int) {
         let d: Date = date.toDate()
         let weekday_i = d.dateToWeekday()
         let weekday_c: String = d.dateToWeekdayForChinese()
@@ -42,22 +48,35 @@ class CalendarSignupCell: SuperCell {
         }
         
         
-        let v: CourseView = CourseView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
-        v.containerView.backgroundColor = background_color
-        courseContainer.addSubview(v)
+//        let v: CourseView = CourseView(frame: CGRect(x: 0, y: 0, width: 100, height: 200))
+//        v.containerView.backgroundColor = background_color
+//        courseContainer.addSubview(v)
+        
+//        let v1: CourseView = CourseView(frame: CGRect(x: 0, y: 110, width: 100, height: 200))
+//        v1.containerView.backgroundColor = background_color
+//        courseContainer.addSubview(v1)
         
         
         //print(superModels.count)
-//        for superModel in superModels {
-//            if let superCourse = superModel as? SuperCourse {
-//                //superCourse.printRow()
-//                for weekday in superCourse.weekday_arr {
-//                    if weekday == weekday_i {
-//                        self.backgroundColor = backgroundColor
-//                    }
-//                }
-//            }
-//        }
+        var course_count = 0
+        let gap: Int = 10
+        for superModel in superModels {
+            if let superCourse = superModel as? SuperCourse {
+                //superCourse.printRow()
+                for weekday in superCourse.weekday_arr {
+                    if weekday == weekday_i {
+                        var height: Int = course_count*course_height
+                        if course_count > 0 {
+                            height = height + gap
+                        }
+                        let v: CourseView = CourseView(frame: CGRect(x: 0, y: height, width: course_width, height: course_height))
+                        v.containerView.backgroundColor = background_color
+                        courseContainer.addSubview(v)
+                        course_count = course_count+1
+                    }
+                }
+            }
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

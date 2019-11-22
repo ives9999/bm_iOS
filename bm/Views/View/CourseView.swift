@@ -10,7 +10,14 @@ import UIKit
 
 class CourseView: UIView {
 
-    @IBOutlet weak var timeTxt: UILabel!
+    @IBOutlet weak var startTimeTxt: UILabel!
+    @IBOutlet weak var endTimeTxt: UILabel!
+    @IBOutlet weak var priceTxt: UILabel!
+    @IBOutlet weak var cityTxt: UILabel!
+    @IBOutlet weak var titleTxt: UILabel!
+    @IBOutlet weak var peopleLimitTxt: UILabel!
+    @IBOutlet weak var signupButton: UIButton!
+    
     @IBOutlet weak var containerView: UIView!
     
     override init(frame: CGRect) {
