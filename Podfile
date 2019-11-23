@@ -22,6 +22,7 @@ target 'bm' do
   pod 'FBSDKShareKit', '~> 4.38.0'
   pod 'ReachabilitySwift'
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
+  pod "SelectionDialog"
 end
 
 target 'bmNotificationServiceExtension' do

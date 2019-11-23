@@ -37,4 +37,24 @@ class CourseView: UIView {
         containerView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         //containerView.backgroundColor = UIColor.red
     }
+    
+    public func update(_ superCourse: SuperCourse, _ background_color: UIColor) {
+        containerView.backgroundColor = background_color
+        
+        startTimeTxt.text = superCourse.start_time_text
+        endTimeTxt.text = superCourse.end_time_text
+        priceTxt.text = superCourse.price_text_short
+        let citys = superCourse.coach.citys
+        
+        if (citys.count > 0) {
+            let city = citys[0]
+            let name: String? = city.name as String
+            if name != nil {
+                cityTxt.text = name!
+            }
+        }
+        
+        titleTxt.text = superCourse.title
+        peopleLimitTxt.text = superCourse.people_limit_text
+    }
 }

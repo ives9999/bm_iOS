@@ -24,11 +24,21 @@ class CalendarSignupCell: SuperCell {
 //
 //    }
     
-    func update(date: String, superModels: [SuperModel], course_width: Int, course_height: Int) {
-        let d: Date = date.toDate()
-        let weekday_i = d.dateToWeekday()
-        let weekday_c: String = d.dateToWeekdayForChinese()
+    func update(_ dateCourse: [String: Any], course_width width: Int, course_height height: Int=300, course_gap gap: Int=10) {
+        var date: String = "錯誤"
+        if dateCourse["date"] != nil {
+            date = dateCourse["date"] as? String ?? "錯誤"
+        }
+        var weekday_c: String = "錯誤"
+        if dateCourse["weekday_c"] != nil {
+            weekday_c = dateCourse["weekday_c"] as? String ?? "錯誤"
+        }
         dateTxt.text = "\(date)(\(weekday_c))"
+        
+        var weekday_i: Int = -1
+        if dateCourse["weekday_i"] != nil {
+            weekday_i = dateCourse["weekday_i"] as? Int ?? -1
+        }
         
         var background_color = UIColor.clear
         if weekday_i == 1 {
@@ -47,33 +57,16 @@ class CalendarSignupCell: SuperCell {
             background_color = UIColor(SUNDAY_COLOR)
         }
         
-        
-//        let v: CourseView = CourseView(frame: CGRect(x: 0, y: 0, width: 100, height: 200))
-//        v.containerView.backgroundColor = background_color
-//        courseContainer.addSubview(v)
-        
-//        let v1: CourseView = CourseView(frame: CGRect(x: 0, y: 110, width: 100, height: 200))
-//        v1.containerView.backgroundColor = background_color
-//        courseContainer.addSubview(v1)
-        
-        
-        //print(superModels.count)
-        var course_count = 0
-        let gap: Int = 10
-        for superModel in superModels {
-            if let superCourse = superModel as? SuperCourse {
-                //superCourse.printRow()
-                for weekday in superCourse.weekday_arr {
-                    if weekday == weekday_i {
-                        var height: Int = course_count*course_height
-                        if course_count > 0 {
-                            height = height + gap
-                        }
-                        let v: CourseView = CourseView(frame: CGRect(x: 0, y: height, width: course_width, height: course_height))
-                        v.containerView.backgroundColor = background_color
-                        courseContainer.addSubview(v)
-                        course_count = course_count+1
-                    }
+        if let rows: [SuperCourse] = dateCourse["rows"] as? [SuperCourse] {
+            
+            if rows.count > 0 {
+                var y: Int = 0
+                let x: Int = 0
+                for row in rows {
+                    let v: CourseView = CourseView(frame: CGRect(x: x, y: y, width: width, height: height))
+                    v.update(row, background_color)
+                    courseContainer.addSubview(v)
+                    y = y + height + gap
                 }
             }
         }

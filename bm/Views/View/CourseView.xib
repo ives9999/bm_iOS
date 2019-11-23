@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CourseView" customModule="bm" customModuleProvider="target">
             <connections>
+                <outlet property="cityTxt" destination="Nob-hE-l9s" id="x9r-Ug-84U"/>
                 <outlet property="containerView" destination="D4b-rt-qZg" id="0E9-Ib-tVV"/>
                 <outlet property="endTimeTxt" destination="xcE-mQ-6Wf" id="Znx-fV-qK9"/>
                 <outlet property="peopleLimitTxt" destination="HTA-4f-Dla" id="yS6-Zl-8ZR"/>

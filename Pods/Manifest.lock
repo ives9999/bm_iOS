@@ -30,6 +30,7 @@ PODS:
     - FBSDKCoreKit
   - OneSignal (2.11.0)
   - ReachabilitySwift (4.3.1)
+  - SelectionDialog (3.0.0)
   - Socket.IO-Client-Swift (15.1.0):
     - Starscream (~> 3.1)
   - Starscream (3.1.0)
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - FBSDKShareKit (~> 4.38.0)
   - OneSignal (< 3.0, >= 2.6.2)
   - ReachabilitySwift
+  - SelectionDialog
   - Socket.IO-Client-Swift
   - SwiftyJSON
   - SwipeCellKit
@@ -70,6 +72,7 @@ SPEC REPOS:
     - FBSDKShareKit
     - OneSignal
     - ReachabilitySwift
+    - SelectionDialog
     - Socket.IO-Client-Swift
     - Starscream
     - SwiftyJSON
@@ -90,6 +93,7 @@ SPEC CHECKSUMS:
   FBSDKShareKit: 6ffe22f0a0618eb7424d4104ab0ef3ce9643d42a
   OneSignal: 1e2ed98358f87cb755e7262412ddb2949b8e5c55
   ReachabilitySwift: 4032e2f59586e11e3b0ebe15b167abdd587a388b
+  SelectionDialog: 9f4b63f2fc004f2b834a9980870a698f98516897
   Socket.IO-Client-Swift: 7cb44c0ffb86e158cee32d0642d30ec5fdcf8f61
   Starscream: 08172b481e145289c4930cb567230fb55897cfa4
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
@@ -97,6 +101,6 @@ SPEC CHECKSUMS:
   TRVideoView: 00e2eaed3f19196956bb1ec61c875df6c0ea84dc
   UIColor_Hex_Swift: 8be7432edacb7fa91c78aa05ef3c30b66e4f9415
 
-PODFILE CHECKSUM: d278d2de30213d5224d5a34b2248c3728b1b190f
+PODFILE CHECKSUM: ad994a7f17ca27a9656eb0dbe89261807128d1e5
 
-COCOAPODS: 1.8.0
+COCOAPODS: 1.8.4

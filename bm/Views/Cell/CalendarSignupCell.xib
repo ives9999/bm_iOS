@@ -18,9 +18,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2019-11-01(五)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnS-ME-Of7" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="18" y="12" width="163.5" height="29"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                        <nil key="textColor"/>
+                        <rect key="frame" x="18" y="12" width="175" height="29"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NUk-eC-4Qp">

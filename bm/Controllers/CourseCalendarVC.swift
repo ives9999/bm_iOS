@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import SelectionDialog
 
 class CourseCalendarVC: ListVC {
     
     @IBOutlet weak var managerBtn: UIButton!
+    @IBOutlet weak var yearTxt: UILabel!
+    @IBOutlet weak var monthTxt: UILabel!
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String"],
@@ -32,6 +35,7 @@ class CourseCalendarVC: ListVC {
     
     var course_width: Int = 100
     var course_height: Int = 300
+    var course_gap: Int = 10
     
     var dateCourses: [[String: Any]] = [[String: Any]]()
 
@@ -52,6 +56,43 @@ class CourseCalendarVC: ListVC {
         myTablView.register(cellNibName, forCellReuseIdentifier: "calendar_signup_cell")
         //myTablView.rowHeight = UITableViewAutomaticDimension
         //myTablView.estimatedRowHeight = 400
+        course_width = Int(view.frame.width - 24)
+        
+        yearTxt.text = String(year)
+        let yearLap = UITapGestureRecognizer(target: self, action: #selector(yearPressed))
+        yearTxt.addGestureRecognizer(yearLap)
+        
+        monthTxt.text = String(month)
+        let monthLap = UITapGestureRecognizer(target: self, action: #selector(monthPressed))
+        monthTxt.addGestureRecognizer(monthLap)
+    }
+    
+    @objc func yearPressed() {
+        //print("year")
+        let dialog = SelectionDialog(title: "選擇年", closeButtonTitle: "關閉")
+        for i in year...year+5 {
+            dialog.addItem(item: String(i)) {
+                //print(i)
+                self.yearTxt.text = String(i)
+                self.year = i
+                dialog.close()
+            }
+        }
+        dialog.show()
+    }
+    
+    @objc func monthPressed() {
+        //print("year")
+        let dialog = SelectionDialog(title: "選擇月", closeButtonTitle: "關閉")
+        for i in 1...12 {
+            dialog.addItem(item: String(i)) {
+                //print(i)
+                self.monthTxt.text = String(i)
+                self.month = i
+                dialog.close()
+            }
+        }
+        dialog.show()
     }
     
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
@@ -95,7 +136,7 @@ class CourseCalendarVC: ListVC {
                 }
             }
             makeCourseArr()
-            print(dateCourses)
+            //print(dateCourses)
             myTablView.reloadData()
             //self.page = self.page + 1 in CollectionView
         }
@@ -114,7 +155,7 @@ class CourseCalendarVC: ListVC {
         let d: [String: Any] = dateCourses[indexPath.row]
         guard let courses: [SuperCourse] = d["rows"] as? [SuperCourse] else { return 44}
         if courses.count > 0 {
-            let height: Int = course_height * courses.count + ((courses.count-1)*10) + 50
+            let height: Int = course_height * courses.count + ((courses.count-1)*10) + 80
             return CGFloat(height)
         } else {
             return 44
@@ -129,12 +170,9 @@ class CourseCalendarVC: ListVC {
                 for view in cell.courseContainer.subviews {
                     view.removeFromSuperview()
                 }
-                let day: Int = indexPath.row + 1
-                let date: String = String(format: "%4d-%02d-%02d", year, month, day)
-                //print(date)
+                let dateCourse = dateCourses[indexPath.row]
+                cell.update(dateCourse, course_width: course_width, course_height: course_height, course_gap: course_gap)
                 
-                course_width = Int(view.frame.width - 24)
-                cell.update(date: date, superModels: lists1, course_width: course_width, course_height: course_height)
                 return cell
             } else {
                 return CalendarSignupCell()
