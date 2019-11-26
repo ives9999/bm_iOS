@@ -61,6 +61,8 @@ class CourseCalendarVC: ListVC {
         yearTxt.text = String(year)
         let yearLap = UITapGestureRecognizer(target: self, action: #selector(yearPressed))
         yearTxt.addGestureRecognizer(yearLap)
+        yearTxt.layer.borderWidth = 1.0
+        yearTxt.layer.borderColor = UIColor.white.cgColor
         
         monthTxt.text = String(month)
         let monthLap = UITapGestureRecognizer(target: self, action: #selector(monthPressed))
