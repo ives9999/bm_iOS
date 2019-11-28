@@ -64,7 +64,7 @@ class CalendarSignupCell: SuperCell {
                 let x: Int = 0
                 for row in rows {
                     let v: CourseView = CourseView(frame: CGRect(x: x, y: y, width: width, height: height))
-                    v.update(row, background_color)
+                    v.update(date, row, background_color)
                     courseContainer.addSubview(v)
                     y = y + height + gap
                 }

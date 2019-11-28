@@ -212,7 +212,60 @@ class DataService {
         }
     }
     
+    func calendar<T: SuperModel, T1: SuperModel>(t:T.Type, t1: T1.Type, token: String?, _filter:[String: Any]?, completion: @escaping CompletionHandler) {
+            
+            self.needDownloads = [Dictionary<String, Any>]()
+            var filter: [String: Any] = ["device": "app", "channel": CHANNEL]
+            if _filter != nil {
+                filter.merge(_filter!)
+            }
+            //print(filter.toJSONString())
+            
+            var url: String = getCalendarURL()
+            if (token != nil) {
+                url = url + "/" + token!
+            }
+            //print(url)
+                    
+            Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+                
+                if response.result.error == nil {
+                    guard let data = response.result.value else {
+                        //print("get response result value error")
+                        self.msg = "網路錯誤，請稍後再試"
+                        completion(false)
+                        return
+                    }
+                    let json = JSON(data)
+                    //print(json)
+                    let s: T1 = JSONParse.parse(data: json)
+                    //print(type(of: s))
+                    //self.superModel.printRows()
+                    //self.superCourses = JSONParse.parse(data: json)
+                    self.superModel = s
+                    
+                    let rows: [T] = s.getRows() ?? [T]()
+                    for row in rows {
+                        row.filterRow()
+                    }
+                    completion(true)
+    //                self.makeNeedDownloadImageArr(rows, t: T.self)
+    //                let needDownload: Int = self.needDownloads.count
+    //                if needDownload > 0 {
+    //                    self.needDownloadImage(needDownload, t: T1.self, completion: completion)
+    //                } else {
+    //                    completion(true)
+    //                }
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                    debugPrint(response.result.error as Any)
+                }
+            }
+        }
+    
     func getListURL()-> String { return ""}
+    func getCalendarURL(token: String? = nil)-> String { return ""}
     
     func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
         

@@ -34,6 +34,7 @@ class SuperCourse: SuperModel {
     @objc dynamic var weekday_text: String = ""
     @objc dynamic var start_time: String = ""
     @objc dynamic var end_time: String = ""
+    @objc dynamic var deadline: String = ""
     @objc dynamic var start_time_text: String = ""
     @objc dynamic var end_time_text: String = ""
     @objc dynamic var youtube: String = ""

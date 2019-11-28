@@ -30,6 +30,15 @@ class CourseService: DataService {
         return "course"
     }
     
+    override func getCalendarURL(token: String? = nil) -> String {
+        var url: String = URL_COURSE_CALENDAR
+        if token != nil {
+            url = url + "/" + token!
+        }
+        
+        return url
+    }
+    
     override func getSignupListURL(token: String? = nil)-> String {
         var url: String = String(format: URL_SIGNUP_LIST, "course")
         if token != nil {

@@ -14,6 +14,16 @@ class CourseCalendarVC: ListVC {
     @IBOutlet weak var managerBtn: UIButton!
     @IBOutlet weak var yearTxt: UILabel!
     @IBOutlet weak var monthTxt: UILabel!
+    @IBOutlet weak var yearView: UIView!
+    @IBOutlet weak var monthView: UIView!
+    @IBOutlet weak var nextMonthTxt: UILabel!
+    @IBOutlet weak var prevMonthTxt: UILabel!
+    @IBOutlet weak var nowMonthTxt: UILabel!
+    @IBOutlet weak var selectedYearTxt: UILabel!
+    @IBOutlet weak var selectedMonthTxt: UILabel!
+    
+    @IBOutlet weak var dateSelectView: UIView!
+    @IBOutlet weak var preNextMonthView: UIView!
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String"],
@@ -27,11 +37,14 @@ class CourseCalendarVC: ListVC {
     internal(set) public var lists1: [SuperModel] = [SuperModel]()
     
     let session: UserDefaults = UserDefaults.standard
-    var params1: [String: Any]?
+    var params1: [String: Any] = [String: Any]()
     
     var year: Int = Date().getY()
     var month: Int = Date().getm()
     var monthLastDay: Int = 31
+    
+    var thisYear: Int = Date().getY()
+    var thisMonth: Int = Date().getm()
     
     var course_width: Int = 100
     var course_height: Int = 300
@@ -49,8 +62,6 @@ class CourseCalendarVC: ListVC {
         Global.instance.setupTabbar(self)
         Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
-
-        monthLastDay = Global.instance.getMonthLastDay(year: year, month: month)
         
         let cellNibName = UINib(nibName: "CalendarSignupCell", bundle: nil)
         myTablView.register(cellNibName, forCellReuseIdentifier: "calendar_signup_cell")
@@ -60,13 +71,32 @@ class CourseCalendarVC: ListVC {
         
         yearTxt.text = String(year)
         let yearLap = UITapGestureRecognizer(target: self, action: #selector(yearPressed))
-        yearTxt.addGestureRecognizer(yearLap)
-        yearTxt.layer.borderWidth = 1.0
-        yearTxt.layer.borderColor = UIColor.white.cgColor
+        yearView.addGestureRecognizer(yearLap)
+        
+        yearView.layer.borderWidth = 1.0
+        yearView.layer.borderColor = UIColor.white.cgColor
         
         monthTxt.text = String(month)
         let monthLap = UITapGestureRecognizer(target: self, action: #selector(monthPressed))
-        monthTxt.addGestureRecognizer(monthLap)
+        monthView.addGestureRecognizer(monthLap)
+        
+        monthView.layer.borderWidth = 1.0
+        monthView.layer.borderColor = UIColor.white.cgColor
+        
+        let nextMonthLap = UITapGestureRecognizer(target: self, action: #selector(nextMonthPressed))
+        nextMonthTxt.addGestureRecognizer(nextMonthLap)
+        
+        let prevMonthLap = UITapGestureRecognizer(target: self, action: #selector(prevMonthPressed))
+        prevMonthTxt.addGestureRecognizer(prevMonthLap)
+        
+        let nowMonthLap = UITapGestureRecognizer(target: self, action: #selector(nowMonthPressed))
+        nowMonthTxt.addGestureRecognizer(nowMonthLap)
+        
+//        dateSelectView.layer.borderWidth = 2.0
+//        dateSelectView.layer.borderColor = UIColor.red.cgColor
+//        preNextMonthView.layer.borderWidth = 2.0
+//        preNextMonthView.layer.borderColor = UIColor.blue.cgColor
+        
     }
     
     @objc func yearPressed() {
@@ -77,7 +107,9 @@ class CourseCalendarVC: ListVC {
                 //print(i)
                 self.yearTxt.text = String(i)
                 self.year = i
+                self.month = Int(self.monthTxt.text!)!
                 dialog.close()
+                self.refresh()
             }
         }
         dialog.show()
@@ -91,17 +123,49 @@ class CourseCalendarVC: ListVC {
                 //print(i)
                 self.monthTxt.text = String(i)
                 self.month = i
+                self.year = Int(self.yearTxt.text!)!
                 dialog.close()
+                self.refresh()
             }
         }
         dialog.show()
+    }
+    
+    @objc func nextMonthPressed() {
+        month = month + 1
+        if month > 12 {
+            year = year + 1
+            month = 1
+        }
+        refresh()
+    }
+    
+    @objc func prevMonthPressed() {
+        month = month - 1
+        if month < 0 {
+            year = year - 1
+            month = 12
+        }
+        refresh()
+    }
+    
+    @objc func nowMonthPressed() {
+        year = thisYear
+        month = thisMonth
+        refresh()
     }
     
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
         //print(page)
         Global.instance.addSpinner(superView: self.view)
         
-        dataService.getList(t: SuperCourse.self, t1: SuperCourses.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
+        params1.merge(["member_token": Member.instance.token])
+        params1.merge(["y": year])
+        params1.merge(["m": month])
+        monthLastDay = Global.instance.getMonthLastDay(year: year, month: month)
+        selectedYearTxt.text = String(year)
+        selectedMonthTxt.text = String(month)
+        dataService.calendar(t: SuperCourse.self, t1: SuperCourses.self, token: nil, _filter: params1) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)
@@ -126,19 +190,12 @@ class CourseCalendarVC: ListVC {
             }
             lists1 += tmps
             //print(self.lists)
-            page = superCourses!.page
-            if page == 1 {
-                totalCount = superCourses!.totalCount
-                perPage = superCourses!.perPage
-                let _pageCount: Int = totalCount / perPage
-                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                //print(self.totalPage)
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
-                }
-            }
+
             makeCourseArr()
             //print(dateCourses)
+            if refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
+            }
             myTablView.reloadData()
             //self.page = self.page + 1 in CollectionView
         }
@@ -167,14 +224,19 @@ class CourseCalendarVC: ListVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == myTablView {
+//            let cell = CalendarSignupCell(style: .default, reuseIdentifier: "cell")
+//            let dateCourse = dateCourses[indexPath.row]
+//            cell.update(dateCourse, course_width: course_width, course_height: course_height, course_gap: course_gap)
+//            return cell
             if let cell = tableView.dequeueReusableCell(withIdentifier: "calendar_signup_cell", for: indexPath) as? CalendarSignupCell {
-                
+
                 for view in cell.courseContainer.subviews {
                     view.removeFromSuperview()
                 }
+                //cell.dateTxt.text = ""
                 let dateCourse = dateCourses[indexPath.row]
                 cell.update(dateCourse, course_width: course_width, course_height: course_height, course_gap: course_gap)
-                
+
                 return cell
             } else {
                 return CalendarSignupCell()
@@ -192,7 +254,12 @@ class CourseCalendarVC: ListVC {
         return UITableViewCell()
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
     func makeCourseArr() {
+        dateCourses.removeAll()
         for day in 1...monthLastDay {
             var course: [String: Any] = [String: Any]()
             let date: String = String(format: "%4d-%02d-%02d", year, month, day)
@@ -218,6 +285,7 @@ class CourseCalendarVC: ListVC {
             
             dateCourses.append(course)
         }
+        //print(dateCourses)
     }
 
     @IBAction func manager(_ sender: Any) {

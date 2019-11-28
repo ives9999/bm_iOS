@@ -615,6 +615,15 @@ class Global {
         return calendar.component(.day, from: date!)
     }
     
+    func now()-> String {
+        let now = Date()
+        let format = DateFormatter()
+        format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let dateString = format.string(from: now)
+        
+        return dateString
+    }
+    
     private func _addSpinner(spinner: UIActivityIndicatorView, superView: UIView) {
         spinner.center = superView.center
         spinner.activityIndicatorViewStyle = .whiteLarge

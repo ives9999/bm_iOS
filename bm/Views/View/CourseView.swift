@@ -38,7 +38,7 @@ class CourseView: UIView {
         //containerView.backgroundColor = UIColor.red
     }
     
-    public func update(_ superCourse: SuperCourse, _ background_color: UIColor) {
+    public func update(_ date: String, _ superCourse: SuperCourse, _ background_color: UIColor) {
         containerView.backgroundColor = background_color
         
         startTimeTxt.text = superCourse.start_time_text
@@ -56,5 +56,21 @@ class CourseView: UIView {
         
         titleTxt.text = superCourse.title
         peopleLimitTxt.text = superCourse.people_limit_text
+                
+        let now = Global.instance.now()
+        let deadline = String(format: "%@ %@", date, superCourse.deadline)
+        //print("\(now)=>\(deadline)")
+        if deadline.toDate(format: "yyyy-MM-dd HH:mm:ss") > now.toDate(format: "yyyy-MM-dd HH:mm:ss") { //還沒超過報名的期限，可以報名
+            signupButton.tag = superCourse.id
+        } else {
+            //print(superCourse.id)
+            signupButton.setTitle("無法報名", for: .normal)
+            signupButton.backgroundColor = UIColor.gray
+            signupButton.isEnabled = false
+        }
+    }
+    
+    @IBAction func signupPressed(_ sender: UIButton) {
+        print(sender.tag)
     }
 }
