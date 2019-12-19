@@ -8,7 +8,7 @@
 
 import UIKit
 import FacebookCore
-import FacebookLogin
+//import FacebookLogin
 
 class LoginVC: BaseViewController, UITextFieldDelegate {
 

@@ -10,7 +10,8 @@ import UIKit
 import Device_swift
 import UIColor_Hex_Swift
 import OneSignal
-import FacebookCore
+//import FacebookCore
+import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -99,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         //gSimulate = true
         
-        SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         Member.instance.justGetMemberOne = false
         return true
@@ -126,17 +127,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
 //        application.registerUserNotificationSettings(pushNotificationSettings)
 //        application.registerForRemoteNotifications()
-        return SDKApplicationDelegate.shared.application(application,
+        let appId: String = Settings.appID!
+        if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host == "authorize" {
+            return ApplicationDelegate.shared.application(application,
                                                          open: url,
                                                          sourceApplication: sourceApplication,
                                                          annotation: annotation)
+        }
+        return false;
     }
     
     @available(iOS 9.0, *)
     func application(_ application: UIApplication,
                      open url: URL,
                      options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
-        return SDKApplicationDelegate.shared.application(application, open: url, options: options)
+        return ApplicationDelegate.shared.application(application, open: url, options: options)
     }
 }
 
@@ -168,6 +173,7 @@ extension AppDelegate {
         //print("background")
     }
 }
+
 
 
 

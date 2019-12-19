@@ -17,9 +17,6 @@ target 'bm' do
   pod 'FacebookCore'
   pod 'FacebookLogin'
   pod 'FacebookShare'
-  pod 'FBSDKCoreKit', '~> 4.38.0'
-  pod 'FBSDKLoginKit', '~> 4.38.0'
-  pod 'FBSDKShareKit', '~> 4.38.0'
   pod 'ReachabilitySwift'
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
   pod "SelectionDialog"

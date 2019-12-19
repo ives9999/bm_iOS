@@ -48,7 +48,7 @@ class BaseViewController: UIViewController  {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let reachability = Reachability()!
+        let reachability = try! Reachability()
         
         reachability.whenReachable = { reachability in
             if reachability.connection == .wifi {
