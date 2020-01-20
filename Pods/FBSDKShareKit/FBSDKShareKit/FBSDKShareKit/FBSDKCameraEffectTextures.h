@@ -18,11 +18,7 @@
 
 #import <UIKit/UIKit.h>
 
-#if defined BUCK || defined FBSDKCOCOAPODS || defined __cplusplus
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#else
-@import FBSDKCoreKit;
-#endif
+#import <FBSDKCoreKit/FBSDKCopying.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

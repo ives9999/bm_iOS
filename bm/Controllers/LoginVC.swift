@@ -7,14 +7,35 @@
 //
 
 import UIKit
-import FacebookCore
-//import FacebookLogin
+import FBSDKLoginKit
 
 class LoginVC: BaseViewController, UITextFieldDelegate {
+//    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+//
+//        if result!.isCancelled {
+//
+//        } else {
+//            if result!.grantedPermissions.contains("email") {
+//
+//            }
+//        }
+//        fetchProfile()
+//    }
+//
+//    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+//
+//    }
+//
+//    func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
+//        return true
+//    }
+    
+    var menuVC: MenuVC? = nil
 
     // outlets
     @IBOutlet weak var emailTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
+    //@IBOutlet weak var facebookLogin: FBLoginButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +57,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func closeBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: UNWIND, sender: nil)
+        self.backToMenu()
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
@@ -68,7 +89,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                         })
                         alert.showWarning("警告", subTitle: MemberService.instance.msg)
                     }
-                    self.performSegue(withIdentifier: UNWIND, sender: nil)
+                    self.backToMenu()
                 } else {
                     //print("login failed by error email or password")
                     SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
@@ -86,13 +107,31 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
             }
         }
     }
+    
     @IBAction func loginFBBtnPressed(_ sender: Any) {
+        
         Facebook.instance.login(viewController: self) {
             (success) in
             if success {
                 //print("login fb success")
-                self._loginFB()
+                //self._loginFB()
                 //Session.shared.loginReset = true
+                let playerID: String = self._getPlayerID()
+                Global.instance.addSpinner(superView: self.view)
+                MemberService.instance.login_fb(playerID: playerID, completion: { (success1) in
+                    Global.instance.removeSpinner(superView: self.view)
+                    if success1 {
+                        if MemberService.instance.success {
+                            self.backToMenu()
+                        } else {
+                            //print("login failed by error email or password")
+                            self.warning(MemberService.instance.msg)
+                        }
+                    } else {
+                        self.warning("使用FB登入，但無法新增至資料庫，請洽管理員")
+                        //print("login failed by fb")
+                    }
+                })
             } else {
                 print("login fb failure")
             }
@@ -100,7 +139,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func registerBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_REGISTER, sender: nil)
+        performSegue(withIdentifier: TO_REGISTER, sender: menuVC)
     }
     @IBAction func passwordBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_PASSWORD, sender: "forget_password")
@@ -111,6 +150,12 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
             vc.type = sender as! String
         } else if segue.identifier == UNWIND {
             //let vc: MenuVC = segue.destination as! MenuVC
+        } else if segue.identifier == TO_LOGIN {
+            let vc: LoginVC = segue.destination as! LoginVC
+            vc.menuVC = (sender as! MenuVC)
+        } else if segue.identifier == TO_REGISTER {
+            let vc: RegisterVC = segue.destination as! RegisterVC
+            vc.menuVC = (sender as! MenuVC)
         }
     }
     
@@ -119,7 +164,12 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         return true
     }
     
-    
+    func backToMenu() {
+        if self.menuVC != nil {
+            self.menuVC!._loginout()
+        }
+        self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
+    }
 }
 
 

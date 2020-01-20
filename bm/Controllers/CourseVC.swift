@@ -268,3 +268,4 @@ class CourseVC: ListVC, SingleSelectDelegate, MultiSelectDelegate, SelectDelegat
         searchTableView.reloadData()
     }
 }
+

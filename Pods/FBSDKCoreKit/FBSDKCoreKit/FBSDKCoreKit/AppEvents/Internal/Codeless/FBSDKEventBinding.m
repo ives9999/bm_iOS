@@ -18,14 +18,15 @@
 
 #import "FBSDKEventBinding.h"
 
-#import "FBSDKAppEvents.h"
+#import <FBSDKCoreKit/FBSDKAppEvents.h>
+#import <FBSDKCoreKit/FBSDKUtility.h>
+
 #import "FBSDKAppEventsUtility.h"
+#import "FBSDKCodelessMacros.h"
 #import "FBSDKCodelessParameterComponent.h"
 #import "FBSDKCodelessPathComponent.h"
 #import "FBSDKSwizzler.h"
-#import "FBSDKUtility.h"
 #import "FBSDKViewHierarchy.h"
-#import "FBSDKViewHierarchyMacros.h"
 
 #define CODELESS_PATH_TYPE_ABSOLUTE  @"absolute"
 #define CODELESS_PATH_TYPE_RELATIVE  @"relative"

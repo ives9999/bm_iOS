@@ -19,8 +19,6 @@
 #import "FBSDKCrashObserver.h"
 
 #import "FBSDKCrashHandler.h"
-#import "FBSDKCrashShield.h"
-#import "FBSDKFeatureManager.h"
 #import "FBSDKGraphRequest.h"
 #import "FBSDKGraphRequestConnection.h"
 #import "FBSDKLibAnalyzer.h"
@@ -61,7 +59,6 @@
 - (void)didReceiveCrashLogs:(NSArray<NSDictionary<NSString *, id> *> *)processedCrashLogs
 {
   if (0 == processedCrashLogs.count) {
-    [FBSDKCrashHandler clearCrashReportFiles];
     return;
   }
   NSData *jsonData = [NSJSONSerialization dataWithJSONObject:processedCrashLogs options:0 error:nil];
@@ -77,11 +74,6 @@
       }
     }];
   }
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureCrashShield completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKCrashShield analyze:processedCrashLogs];
-    }
-  }];
 }
 
 @end

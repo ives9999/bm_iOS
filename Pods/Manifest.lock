@@ -3,31 +3,21 @@ PODS:
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
   - Device.swift (1.2.2)
-  - FacebookCore (0.9.0):
-    - FBSDKCoreKit (~> 5.0)
-  - FacebookLogin (0.9.0):
-    - FacebookCore (~> 0.9.0)
-    - FBSDKCoreKit (~> 5.0)
-    - FBSDKLoginKit (~> 5.0)
-  - FacebookShare (0.9.0):
-    - FacebookCore (~> 0.9.0)
-    - FBSDKCoreKit (~> 5.0)
-    - FBSDKShareKit (~> 5.0)
-  - FBSDKCoreKit (5.13.1):
-    - FBSDKCoreKit/Basics (= 5.13.1)
-    - FBSDKCoreKit/Core (= 5.13.1)
-  - FBSDKCoreKit/Basics (5.13.1)
-  - FBSDKCoreKit/Core (5.13.1):
+  - FBSDKCoreKit (5.8.0):
+    - FBSDKCoreKit/Basics (= 5.8.0)
+    - FBSDKCoreKit/Core (= 5.8.0)
+  - FBSDKCoreKit/Basics (5.8.0)
+  - FBSDKCoreKit/Core (5.8.0):
     - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.13.1):
-    - FBSDKLoginKit/Login (= 5.13.1)
-  - FBSDKLoginKit/Login (5.13.1):
+  - FBSDKLoginKit (5.8.0):
+    - FBSDKLoginKit/Login (= 5.8.0)
+  - FBSDKLoginKit/Login (5.8.0):
     - FBSDKCoreKit (~> 5.0)
-  - FBSDKShareKit (5.13.1):
-    - FBSDKShareKit/Share (= 5.13.1)
-  - FBSDKShareKit/Share (5.13.1):
+  - FBSDKShareKit (5.8.0):
+    - FBSDKShareKit/Share (= 5.8.0)
+  - FBSDKShareKit/Share (5.8.0):
     - FBSDKCoreKit (~> 5.0)
-  - OneSignal (2.12.3)
+  - OneSignal (2.12.5)
   - ReachabilitySwift (5.0.0)
   - SelectionDialog (3.0.0)
   - Socket.IO-Client-Swift (15.2.0):
@@ -42,9 +32,9 @@ DEPENDENCIES:
   - Alamofire
   - AlamofireImage
   - Device.swift
-  - FacebookCore
-  - FacebookLogin
-  - FacebookShare
+  - FBSDKCoreKit (~> 5.8.0)
+  - FBSDKLoginKit (~> 5.8.0)
+  - FBSDKShareKit (~> 5.8.0)
   - OneSignal (< 3.0, >= 2.6.2)
   - ReachabilitySwift
   - SelectionDialog
@@ -59,9 +49,6 @@ SPEC REPOS:
     - Alamofire
     - AlamofireImage
     - Device.swift
-    - FacebookCore
-    - FacebookLogin
-    - FacebookShare
     - FBSDKCoreKit
     - FBSDKLoginKit
     - FBSDKShareKit
@@ -79,13 +66,10 @@ SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
-  FacebookCore: ba86524b66cfa86d0f8e65d08faa8504a9f732dd
-  FacebookLogin: 6cee9fd6e1fe976fe8f7eec199e27b28b14f5d63
-  FacebookShare: 85968ad1b1606c4944fb154924e425fd29184ea5
-  FBSDKCoreKit: 8fb98209109fb684937f05d534305edb18c20207
-  FBSDKLoginKit: c7c6ffd9ca9ea45aee32361840af040ad8f6706a
-  FBSDKShareKit: 8a0e4d7172c7b706991c834cff2bf74e7b4726e3
-  OneSignal: 30b6e03a1f14169c4313e301a7b7bdf467b5a575
+  FBSDKCoreKit: e7dcac0aabcfb09d0166998edd95fe3b05a0ce5d
+  FBSDKLoginKit: 1b0cf04df0370b37404213157b060d6666ede814
+  FBSDKShareKit: abc29e1bb4f9f59f679adf1ae191006d68455f96
+  OneSignal: 1de998c42bb06ed630bb38dd1bc933a667437dbb
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SelectionDialog: 9f4b63f2fc004f2b834a9980870a698f98516897
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
@@ -95,6 +79,6 @@ SPEC CHECKSUMS:
   TRVideoView: 00e2eaed3f19196956bb1ec61c875df6c0ea84dc
   UIColor_Hex_Swift: 8be7432edacb7fa91c78aa05ef3c30b66e4f9415
 
-PODFILE CHECKSUM: 81c8c9c9c2dc6fd85e867065b75712cfdc438a90
+PODFILE CHECKSUM: 88d9914e87bec3b18de5ad8bb390cb9da55fb74b
 
 COCOAPODS: 1.8.4

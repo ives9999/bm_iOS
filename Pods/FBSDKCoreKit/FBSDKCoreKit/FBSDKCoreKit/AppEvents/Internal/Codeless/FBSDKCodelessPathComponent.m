@@ -18,7 +18,7 @@
 
 #import "FBSDKCodelessPathComponent.h"
 
-#import "FBSDKViewHierarchyMacros.h"
+#import "FBSDKCodelessMacros.h"
 
 @implementation FBSDKCodelessPathComponent
 

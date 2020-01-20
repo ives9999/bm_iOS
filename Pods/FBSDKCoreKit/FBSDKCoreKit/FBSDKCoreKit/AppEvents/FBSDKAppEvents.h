@@ -22,11 +22,7 @@
 #import <WebKit/WebKit.h>
 #endif
 
-#ifdef BUCK
 #import <FBSDKCoreKit/FBSDKGraphRequestConnection.h>
-#else
-#import "FBSDKGraphRequestConnection.h"
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

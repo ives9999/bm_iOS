@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import FacebookCore
+//import FacebookCore
 //import FacebookLogin
 import FBSDKLoginKit
 //import FBSDKLoginKit
@@ -48,17 +48,58 @@ class Facebook {
     
     func login(viewController: UIViewController, completion: @escaping CompletionHandler) {
         logout()
+        
+        
+        
         let loginManager = LoginManager()
         
-        loginManager.logIn(permissions: ["publicProfile", "email"], from: viewController) { (loginResult, error) in
+        loginManager.logIn(permissions: ["public_profile", "email"], from: viewController) { (loginResult, error) in
             
-            let token = loginResult?.token!
-            let connection = GraphRequestConnection()
-            var request = GraphRequest.init(graphPath: "/me")
-            request.parameters = self.params
-            connection.add(request) { (connection, result, error) in
-                print(result);
-            }
+//            let token = loginResult?.token!
+//            let connection = GraphRequestConnection()
+//            var request = GraphRequest.init(graphPath: "/me")
+//            request.parameters = self.params
+//            connection.add(request) { (connection, result, error) in
+//                print(result);
+//            }
+            
+            
+            GraphRequest(graphPath: "me", parameters: self.params).start(completionHandler: {
+                connection, result, error -> Void in
+                
+                if error != nil {
+                    print("登入失敗")
+                    print("login error = \(error)")
+                    completion(false)
+                } else {
+                    if let resultNew = result as? [String: Any] {
+                        //print("登入成功")
+                        
+                        let uid = resultNew["id"] as! String
+                        //print(uid)
+                        self.uid = uid
+                        let email = resultNew["email"] as! String
+                        //print(email)
+                        self.email = email
+                        let first_name = resultNew["first_name"] as! String
+                        //print(first_name)
+                            
+                        let last_name = resultNew["last_name"] as! String
+                        //print(last_name)
+                        self.name = last_name + first_name
+                        
+                        if let picture = resultNew["picture"] as? NSDictionary,
+                            let data = picture["data"] as? NSDictionary,
+                            let url = data["url"] as? String {
+                            //print(url) //臉書大頭貼的url, 再放入imageView內秀出來
+                            self.avatar = url
+                        }
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                }
+            })
             
             
             

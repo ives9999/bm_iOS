@@ -18,8 +18,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FBSDKCopying.h"
-#import "FBSDKGraphRequestConnection.h"
+#import <FBSDKCoreKit/FBSDKCopying.h>
+#import <FBSDKCoreKit/FBSDKGraphRequestConnection.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

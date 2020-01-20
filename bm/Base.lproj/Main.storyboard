@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tFM-zl-suE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="tFM-zl-suE">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -1715,7 +1715,7 @@
                                 </constraints>
                                 <state key="normal" image="facebook"/>
                                 <connections>
-                                    <action selector="loginFBBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="q20-XA-92A"/>
+                                    <action selector="loginFBBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="XmO-N3-wpL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqL-EE-CA1">
@@ -1781,7 +1781,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blT-yh-XVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="FFY-HN-ANR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1722" y="-2148"/>
+            <point key="canvasLocation" x="1684" y="-2067"/>
         </scene>
         <!--ValidateVC-->
         <scene sceneID="68j-z1-Qm2">
@@ -2622,7 +2622,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v4d-2t-b3k" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="374" y="-177"/>
+            <point key="canvasLocation" x="402" y="-100"/>
         </scene>
         <!--課程-->
         <scene sceneID="ngm-6w-1Ik">
@@ -2691,7 +2691,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="hrp-CI-jAh">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P13-eV-hn3">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
@@ -2727,7 +2727,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p4y-tZ-S2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4257" y="1434"/>
+            <point key="canvasLocation" x="-393" y="-484"/>
         </scene>
         <!--Show CourseVC-->
         <scene sceneID="N0V-9M-qgG">
@@ -2788,7 +2788,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="course" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uVt-2n-TRc" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="188" width="359" height="30"/>
+                                                <rect key="frame" x="8" y="200" width="359" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="1FQ-nP-aHD"/>
                                                 </constraints>
@@ -2797,14 +2797,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QDC-d9-WhK" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="226" width="375" height="100"/>
+                                                <rect key="frame" x="0.0" y="238" width="375" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="R7s-DU-6k4"/>
                                                 </constraints>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="signup" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GJg-kc-5vb" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="334" width="359" height="30"/>
+                                                <rect key="frame" x="8" y="346" width="359" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="GXG-KT-MAF"/>
                                                 </constraints>
@@ -2813,14 +2813,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TW3-yY-PBt" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="372" width="375" height="100"/>
+                                                <rect key="frame" x="0.0" y="384" width="375" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="YIB-3P-53u"/>
                                                 </constraints>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="coach" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pR9-it-PkG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="480" width="359" height="30"/>
+                                                <rect key="frame" x="8" y="492" width="359" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="2W6-ek-TXI"/>
                                                 </constraints>
@@ -2829,14 +2829,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m6U-A8-ron" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="518" width="375" height="100"/>
+                                                <rect key="frame" x="0.0" y="530" width="375" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="Jb9-Dk-IyG"/>
                                                 </constraints>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1J-aW-JsJ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="626" width="359" height="30"/>
+                                                <rect key="frame" x="8" y="638" width="359" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Rq8-ic-C4D"/>
                                                 </constraints>
@@ -2863,7 +2863,7 @@
                                             <constraint firstItem="I9U-D1-tnd" firstAttribute="top" secondItem="ORk-cu-jAE" secondAttribute="top" constant="8" id="SiT-Ui-wbX"/>
                                             <constraint firstAttribute="trailing" secondItem="I9U-D1-tnd" secondAttribute="trailing" constant="8" id="gFc-li-qzC"/>
                                             <constraint firstItem="GJg-kc-5vb" firstAttribute="top" secondItem="QDC-d9-WhK" secondAttribute="bottom" constant="8" id="hFG-Y7-AgY"/>
-                                            <constraint firstItem="uVt-2n-TRc" firstAttribute="top" secondItem="I9U-D1-tnd" secondAttribute="bottom" id="iXz-U0-DBc"/>
+                                            <constraint firstItem="uVt-2n-TRc" firstAttribute="top" secondItem="I9U-D1-tnd" secondAttribute="bottom" constant="12" id="iXz-U0-DBc"/>
                                             <constraint firstAttribute="trailing" secondItem="pR9-it-PkG" secondAttribute="trailing" constant="8" id="mn8-UE-AuD"/>
                                             <constraint firstAttribute="height" constant="583" id="n6A-Vq-b1H"/>
                                             <constraint firstItem="TW3-yY-PBt" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" id="peh-Ep-KOb"/>
@@ -3310,7 +3310,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AwX-iW-Rfl">
-                                <rect key="frame" x="0.0" y="220" width="375" height="398"/>
+                                <rect key="frame" x="0.0" y="220" width="375" height="447"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </tableView>
@@ -3353,7 +3353,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tIv-yo-Hrs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-386" y="-1263"/>
+            <point key="canvasLocation" x="-78" y="-1272"/>
         </scene>
         <!--臨打-->
         <scene sceneID="3a3-E3-xcE">
@@ -5327,7 +5327,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="Qui-jL-mMT" kind="relationship" relationship="viewControllers" id="4np-zh-koR"/>
-                        <segue destination="T0x-jP-JLI" kind="relationship" relationship="viewControllers" id="tuQ-DV-pid"/>
+                        <segue destination="fZf-Fb-4DO" kind="relationship" relationship="viewControllers" id="dRD-9y-QB1"/>
                         <segue destination="hk6-fe-bLP" kind="relationship" relationship="viewControllers" id="RQZ-ik-XYc"/>
                         <segue destination="OKf-NR-jh3" kind="relationship" relationship="viewControllers" id="D84-qE-32n"/>
                     </connections>
@@ -5889,11 +5889,11 @@
         <image name="tempPlay" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="2Di-nR-q4w"/>
+        <segue reference="beR-yu-55u"/>
         <segue reference="Lp8-ui-LgL"/>
-        <segue reference="mvW-Q8-ZFE"/>
-        <segue reference="H3p-LU-aVa"/>
-        <segue reference="itP-1S-HdR"/>
+        <segue reference="y8N-d0-A16"/>
+        <segue reference="SiI-cm-Vku"/>
+        <segue reference="UI0-Ma-Ffm"/>
         <segue reference="xCT-HQ-HRw"/>
         <segue reference="NO9-v4-wOp"/>
         <segue reference="A4Z-Qs-ID8"/>
@@ -5901,15 +5901,15 @@
         <segue reference="oKL-Gk-zBn"/>
         <segue reference="xCJ-lv-P9J"/>
         <segue reference="CEV-J6-MNI"/>
-        <segue reference="2ff-JT-Wdj"/>
+        <segue reference="ous-Dp-pXL"/>
         <segue reference="ViB-98-skP"/>
         <segue reference="xcZ-Ad-vEw"/>
         <segue reference="Ym7-zQ-SHb"/>
         <segue reference="DaT-w5-CTD"/>
         <segue reference="cK5-nM-2qW"/>
         <segue reference="fYu-zk-ZTm"/>
-        <segue reference="CFj-m8-ABA"/>
+        <segue reference="pYZ-nD-1ol"/>
         <segue reference="Kca-5B-OTe"/>
-        <segue reference="AlK-fI-QxB"/>
+        <segue reference="x4H-6S-8nE"/>
     </inferredMetricsTieBreakers>
 </document>

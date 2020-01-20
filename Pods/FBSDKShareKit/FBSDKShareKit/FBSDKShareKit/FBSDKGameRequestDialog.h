@@ -18,7 +18,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FBSDKGameRequestContent.h"
+#import <FBSDKShareKit/FBSDKGameRequestContent.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

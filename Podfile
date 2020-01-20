@@ -14,9 +14,9 @@ target 'bm' do
   pod 'TRVideoView'
   pod 'UIColor_Hex_Swift'
   pod 'SwipeCellKit'
-  pod 'FacebookCore'
-  pod 'FacebookLogin'
-  pod 'FacebookShare'
+  pod 'FBSDKCoreKit', '~> 5.8.0'
+  pod 'FBSDKLoginKit', '~> 5.8.0'
+  pod 'FBSDKShareKit', '~> 5.8.0'
   pod 'ReachabilitySwift'
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
   pod "SelectionDialog"

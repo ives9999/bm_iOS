@@ -54,6 +54,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         //refresh()
         _loginout()
     }
@@ -152,6 +153,12 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             } else if segue.identifier == TO_VALIDATE {
                 let vc: ValidateVC = segue.destination as! ValidateVC
                 vc.type = sender as! String
+            } else if segue.identifier == TO_LOGIN {
+                let vc: LoginVC = segue.destination as! LoginVC
+                vc.menuVC = (sender as! MenuVC)
+            } else if segue.identifier == TO_REGISTER {
+                let vc: RegisterVC = segue.destination as! RegisterVC
+                vc.menuVC = (sender as! MenuVC)
             }
         }
     }
@@ -216,12 +223,12 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
             Member.instance.isLoggedIn = false
             _loginout()
         } else {
-            performSegue(withIdentifier: TO_LOGIN, sender: nil)
+            performSegue(withIdentifier: TO_LOGIN, sender: self)
         }
     }
     
     @IBAction func registerBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_REGISTER, sender: nil)
+        performSegue(withIdentifier: TO_REGISTER, sender: self)
     }
     
     @IBAction func passwordBtnPressed(_ sender: Any) {
@@ -229,7 +236,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         performSegue(withIdentifier: TO_PASSWORD, sender: type)
     }
     
-    private func _loginout() {
+    public func _loginout() {
         //print(Member.instance.isLoggedIn)
         if Member.instance.isLoggedIn   { // login
             _loginBlock()
@@ -238,7 +245,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
         }
     }
     
-    private func _loginBlock() {
+    public func _loginBlock() {
         self.setValidateRow()
         self.tableView.reloadData()
         nicknameLbl.text = Member.instance.nickname
@@ -250,7 +257,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
  
         tableView.isHidden = false
     }
-    private func _logoutBlock() {
+    public func _logoutBlock() {
         nicknameLbl.text = "未登入"
         loginBtn.setTitle("登入", for: .normal)
         registerBtn.isHidden = false

@@ -17,8 +17,7 @@
 // CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 #import <Foundation/Foundation.h>
-
-#import "FBSDKShareConstants.h"
+#import <FBSDKShareKit/FBSDKShareConstants.h>
 
 @class FBSDKShareMessengerURLActionButton;
 @protocol FBSDKShareMessengerActionButton;

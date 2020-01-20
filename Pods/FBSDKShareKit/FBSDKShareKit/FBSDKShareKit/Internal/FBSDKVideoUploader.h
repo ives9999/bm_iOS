@@ -18,14 +18,10 @@
 
 #import <Foundation/Foundation.h>
 
-#if defined BUCK || defined FBSDKCOCOAPODS
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-#else
-@import FBSDKCoreKit;
-#endif
 
-#import "FBSDKShareVideo.h"
-#import "FBSDKSharing.h"
+#import <FBSDKShareKit/FBSDKShareVideo.h>
+#import <FBSDKShareKit/FBSDKSharing.h>
 
 @protocol FBSDKVideoUploaderDelegate;
 

@@ -15,6 +15,8 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var rePasswordTxt: UITextField!
     
+    var menuVC: MenuVC? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -65,7 +67,7 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
                         )
                         let alert = SCLAlertView(appearance: appearance)
                         alert.addButton("確定", action: {
-                            self.performSegue(withIdentifier: UNWIND, sender: nil)
+                            self.backToMenu()
                         })
                         alert.showSuccess("成功", subTitle: "註冊成功，請儘速通過email認證，才能使用更多功能！！")
                     } else {
@@ -80,9 +82,27 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
         Facebook.instance.login(viewController: self) {
             (success) in
             if success {
-                //print(Facebook.instance.uid)
-                //print(Facebook.instance.email)
-                self._loginFB()
+                //print("login fb success")
+                //self._loginFB()
+                //Session.shared.loginReset = true
+                let playerID: String = self._getPlayerID()
+                Global.instance.addSpinner(superView: self.view)
+                MemberService.instance.login_fb(playerID: playerID, completion: { (success1) in
+                    Global.instance.removeSpinner(superView: self.view)
+                    if success1 {
+                        if MemberService.instance.success {
+                            self.backToMenu()
+                        } else {
+                            //print("login failed by error email or password")
+                            self.warning(MemberService.instance.msg)
+                        }
+                    } else {
+                        self.warning("使用FB註冊，但無法新增至資料庫，請洽管理員")
+                        //print("login failed by fb")
+                    }
+                })
+            } else {
+                print("login fb failure")
             }
         }
     }
@@ -97,11 +117,11 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func colseBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: UNWIND, sender: nil)
+        self.backToMenu()
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_LOGIN, sender: nil)
+        performSegue(withIdentifier: TO_LOGIN, sender: menuVC)
     }
     
     @IBAction func passwordBtnPressed(_ sender: Any) {
@@ -112,6 +132,19 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
         if segue.identifier == TO_PASSWORD {
             let vc: PasswordVC = segue.destination as! PasswordVC
             vc.type = sender as! String
+        } else if segue.identifier == TO_LOGIN {
+            let vc: LoginVC = segue.destination as! LoginVC
+            vc.menuVC = (sender as! MenuVC)
+        } else if segue.identifier == TO_REGISTER {
+            let vc: RegisterVC = segue.destination as! RegisterVC
+            vc.menuVC = (sender as! MenuVC)
         }
+    }
+    
+    func backToMenu() {
+        if self.menuVC != nil {
+            self.menuVC!._loginout()
+        }
+        self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
     }
 }

@@ -59,8 +59,8 @@ class MemberService {
     func login_fb(playerID: String, completion: @escaping CompletionHandler) {
         let fb: Facebook = Facebook.instance
         let body: [String: String] = ["source":"app","uid":fb.uid,"email":fb.email,"name":fb.name,"sex":fb.sex,"avatar":fb.avatar,"social":fb.social,"channel":fb.channel,"player_id":playerID]
-//        print(body)
-//        print(URL_FB_LOGIN)
+        //print(body)
+        //print(URL_FB_LOGIN)
         Alamofire.request(URL_FB_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {

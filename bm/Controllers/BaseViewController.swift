@@ -234,26 +234,27 @@ class BaseViewController: UIViewController  {
         return playerID
     }
     
-    func _loginFB() {
-        //print(Facebook.instance.uid)
-        //print(Facebook.instance.email)
-        let playerID: String = self._getPlayerID()
-        Global.instance.addSpinner(superView: self.view)
-        MemberService.instance.login_fb(playerID: playerID, completion: { (success1) in
-            Global.instance.removeSpinner(superView: self.view)
-            if success1 {
-                if MemberService.instance.success {
-                    self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
-                } else {
-                    //print("login failed by error email or password")
-                    self.warning(MemberService.instance.msg)
-                }
-            } else {
-                self.warning("使用FB登入，但無法新增至資料庫，請洽管理員")
-                //print("login failed by fb")
-            }
-        })
-    }
+    //直接在LoginVC執行
+//    func _loginFB() {
+//        //print(Facebook.instance.uid)
+//        //print(Facebook.instance.email)
+//        let playerID: String = self._getPlayerID()
+//        Global.instance.addSpinner(superView: self.view)
+//        MemberService.instance.login_fb(playerID: playerID, completion: { (success1) in
+//            Global.instance.removeSpinner(superView: self.view)
+//            if success1 {
+//                if MemberService.instance.success {
+//                    //self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
+//                } else {
+//                    //print("login failed by error email or password")
+//                    self.warning(MemberService.instance.msg)
+//                }
+//            } else {
+//                self.warning("使用FB登入，但無法新增至資料庫，請洽管理員")
+//                //print("login failed by fb")
+//            }
+//        })
+//    }
     
     func _getManagerList(source: String, titleField: String, completion: @escaping CompletionHandler) {
         Global.instance.addSpinner(superView: self.view)

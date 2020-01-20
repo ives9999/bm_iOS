@@ -25,7 +25,6 @@
 #import "FBSDKConstants.h"
 #import "FBSDKDynamicFrameworkLoader.h"
 #import "FBSDKError.h"
-#import "FBSDKEventDeactivationManager.h"
 #import "FBSDKFeatureManager.h"
 #import "FBSDKGateKeeperManager.h"
 #import "FBSDKInstrumentManager.h"
@@ -115,12 +114,6 @@ static UIApplicationState _applicationState;
   [FBSDKFeatureManager checkFeature:FBSDKFeatureRestrictiveDataFiltering completionBlock:^(BOOL enabled) {
     if (enabled) {
       [FBSDKRestrictiveDataFilterManager enable];
-    }
-  }];
-
-  [FBSDKFeatureManager checkFeature:FBSDKFeatureEventDeactivation completionBlock:^(BOOL enabled) {
-    if (enabled) {
-      [FBSDKEventDeactivationManager enable];
     }
   }];
 

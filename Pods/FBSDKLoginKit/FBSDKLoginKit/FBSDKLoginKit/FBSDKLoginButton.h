@@ -18,13 +18,10 @@
 
 #import <UIKit/UIKit.h>
 
-#if defined BUCK || defined FBSDKCOCOAPODS || defined __cplusplus
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#else
-@import FBSDKCoreKit;
-#endif
+#import <FBSDKCoreKit/FBSDKButton.h>
 
-#import "FBSDKLoginManager.h"
+#import <FBSDKLoginKit/FBSDKLoginManager.h>
+
 #import "FBSDKTooltipView.h"
 
 NS_ASSUME_NONNULL_BEGIN

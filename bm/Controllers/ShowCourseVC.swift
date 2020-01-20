@@ -26,11 +26,13 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var featured: UIImageView!
     @IBOutlet weak var courseDataLbl: SuperLabel!
+    
     @IBOutlet weak var tableView: SuperTableView!
-    @IBOutlet weak var signupDataLbl: SuperLabel!
     @IBOutlet weak var signupTableView: SuperTableView!
-    @IBOutlet weak var coachDataLbl: SuperLabel!
     @IBOutlet weak var coachTableView: SuperTableView!
+    
+    @IBOutlet weak var signupDataLbl: SuperLabel!
+    @IBOutlet weak var coachDataLbl: SuperLabel!
     @IBOutlet weak var contentLbl: SuperLabel!
     @IBOutlet weak var signupButton: SubmitButton!
     @IBOutlet weak var signupListButton: CancelButton!
@@ -89,12 +91,14 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     var course_date: String = ""
     var course_deadline: String = ""
     
+    var cellHeight: CGFloat = 40
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         scrollView.backgroundColor = UIColor.clear
         
-        let cellNib = UINib(nibName: "IconCell", bundle: nil)
+        let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
         signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
         coachTableView.register(cellNib, forCellReuseIdentifier: "cell")
@@ -269,10 +273,46 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        if tableView == self.tableView {
+            let key = tableRowKeys[indexPath.row]
+            if tableRows[key] != nil {
+                let row = tableRows[key]!
+                let content = row["content"] ?? ""
+                _caculateCellHeight(content)
+            }
+        } else if tableView == self.coachTableView {
+            let key = coachTableRowKeys[indexPath.row]
+            if coachTableRows[key] != nil {
+                let row = coachTableRows[key]!
+                let content = row["content"] ?? ""
+                _caculateCellHeight(content)
+            }
+        } else if tableView == self.signupTableView {
+            let key = signupTableRowKeys[indexPath.row]
+            if signupTableRows[key] != nil {
+                let row = signupTableRows[key]!
+                let content = row["content"] ?? ""
+                _caculateCellHeight(content)
+            }
+        }
+        
+        return cellHeight
+    }
+    
+    private func _caculateCellHeight(_ content: String) {
+        let base: CGFloat = 40.0
+        let limit: Int = 18
+        let n: CGFloat = CGFloat((content.count / limit) + 1)
+        cellHeight = base * n
+        //print("\(title):\(content.count):\(contentHeight.constant)")
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell: IconCell?
-        cell = (tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IconCell)
+        var cell: OneLineCell?
+        cell = (tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell)
         
         if tableView == self.tableView {
             let key = tableRowKeys[indexPath.row]
@@ -281,7 +321,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                 let icon = row["icon"] ?? ""
                 let title = row["title"] ?? ""
                 let content = row["content"] ?? ""
-                cell!.update(icon: icon, title: title, content: content)
+                cell!.update(icon: icon, title: title, content: content, contentH: cellHeight)
             }
             
             if indexPath.row == tableRowKeys.count - 1 {
@@ -304,7 +344,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                 let title = row["title"] ?? ""
                 let content = row["content"] ?? ""
                 let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
-                cell!.update(icon: icon, title: title, content: content, isPressed: isPressed)
+                cell!.update(icon: icon, title: title, content: content, contentH: cellHeight, isPressed: isPressed)
             }
             if indexPath.row == signupTableRowKeys.count - 1 {
                 
@@ -331,7 +371,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                     content = content.mobileShow()
                 }
                 let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
-                cell!.update(icon: icon, title: title, content: content, isPressed: isPressed)
+                cell!.update(icon: icon, title: title, content: content, contentH: cellHeight, isPressed: isPressed)
             }
             
             if indexPath.row == coachTableRowKeys.count - 1 {

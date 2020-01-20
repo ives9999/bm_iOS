@@ -18,7 +18,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "FBSDKLoginManagerLoginResult.h"
+#import <FBSDKLoginKit/FBSDKLoginManagerLoginResult.h>
 
 @interface FBSDKLoginManagerLoginResult()
 
