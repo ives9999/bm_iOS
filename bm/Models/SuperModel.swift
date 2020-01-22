@@ -49,12 +49,19 @@ class SuperModel: NSObject, JSONParsable {
         if key == "featured" {
             return
         }
+        //print(key)
         if let value = dict[key] as? JSON {
             let type = value.type
             if type == Type.array {
                 let arrayValue = value.arrayValue
                 if key == "weekday_arr" {
                     let parseArray = parseInt(arrayValue)
+                    setValue(parseArray, forKey: key)
+                } else if key == "signup_normal_models" {
+                    let parseArray: [SuperSignupNormal] = parse(property: property, array: arrayValue) as! [SuperSignupNormal]
+                    setValue(parseArray, forKey: key)
+                } else if key == "signup_normal_models" {
+                    let parseArray: [SuperSignupNormal] = parse(property: property, array: arrayValue) as! [SuperSignupNormal]
                     setValue(parseArray, forKey: key)
                 } else {
                     let parsedArray = parse(property: property, array: arrayValue)
@@ -70,7 +77,9 @@ class SuperModel: NSObject, JSONParsable {
                 } else if key == "coach" {
                     let coach: SuperCoach = JSONParse.parse(data: value)
                     setValue(coach, forKey: key)
-                //} else i
+                } else if key == "date_model" {
+                    let superDate: SuperDate = JSONParse.parse(data: value)
+                    setValue(superDate, forKey: key)
                 } else if key == "nextCourseTime" {
                     
                     setValue(value, on: property, forKey: key)

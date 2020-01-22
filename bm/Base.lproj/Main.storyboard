@@ -2813,14 +2813,14 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TW3-yY-PBt" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="384" width="375" height="100"/>
+                                                <rect key="frame" x="0.0" y="412.5" width="375" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="YIB-3P-53u"/>
                                                 </constraints>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="coach" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pR9-it-PkG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="492" width="359" height="30"/>
+                                                <rect key="frame" x="8" y="520.5" width="359" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="2W6-ek-TXI"/>
                                                 </constraints>
@@ -2829,19 +2829,25 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="m6U-A8-ron" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="530" width="375" height="100"/>
+                                                <rect key="frame" x="0.0" y="558.5" width="375" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="Jb9-Dk-IyG"/>
                                                 </constraints>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1J-aW-JsJ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="638" width="359" height="30"/>
+                                                <rect key="frame" x="8" y="666.5" width="359" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Rq8-ic-C4D"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fbj-Q2-FvL" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="384" width="42" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -2861,17 +2867,19 @@
                                             <constraint firstItem="m6U-A8-ron" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" id="OoP-Mp-EPf"/>
                                             <constraint firstAttribute="trailing" secondItem="uVt-2n-TRc" secondAttribute="trailing" constant="8" id="QYv-T2-sjk"/>
                                             <constraint firstItem="I9U-D1-tnd" firstAttribute="top" secondItem="ORk-cu-jAE" secondAttribute="top" constant="8" id="SiT-Ui-wbX"/>
+                                            <constraint firstItem="Fbj-Q2-FvL" firstAttribute="top" secondItem="GJg-kc-5vb" secondAttribute="bottom" constant="8" id="b2x-Ba-NcK"/>
                                             <constraint firstAttribute="trailing" secondItem="I9U-D1-tnd" secondAttribute="trailing" constant="8" id="gFc-li-qzC"/>
                                             <constraint firstItem="GJg-kc-5vb" firstAttribute="top" secondItem="QDC-d9-WhK" secondAttribute="bottom" constant="8" id="hFG-Y7-AgY"/>
                                             <constraint firstItem="uVt-2n-TRc" firstAttribute="top" secondItem="I9U-D1-tnd" secondAttribute="bottom" constant="12" id="iXz-U0-DBc"/>
+                                            <constraint firstItem="TW3-yY-PBt" firstAttribute="top" secondItem="Fbj-Q2-FvL" secondAttribute="bottom" constant="8" id="kCE-5P-1Kw"/>
                                             <constraint firstAttribute="trailing" secondItem="pR9-it-PkG" secondAttribute="trailing" constant="8" id="mn8-UE-AuD"/>
                                             <constraint firstAttribute="height" constant="583" id="n6A-Vq-b1H"/>
+                                            <constraint firstItem="Fbj-Q2-FvL" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="pV9-aF-GDX"/>
                                             <constraint firstItem="TW3-yY-PBt" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" id="peh-Ep-KOb"/>
                                             <constraint firstItem="QDC-d9-WhK" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" id="t0D-F9-KCC"/>
                                             <constraint firstAttribute="trailing" secondItem="a1J-aW-JsJ" secondAttribute="trailing" constant="8" id="tMx-cs-6pB"/>
                                             <constraint firstItem="pR9-it-PkG" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="vKO-V0-KZY"/>
                                             <constraint firstAttribute="trailing" secondItem="TW3-yY-PBt" secondAttribute="trailing" id="xuy-TM-Y4J"/>
-                                            <constraint firstItem="TW3-yY-PBt" firstAttribute="top" secondItem="GJg-kc-5vb" secondAttribute="bottom" constant="8" id="zSa-S6-5wn"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -2956,6 +2964,7 @@
                         <outlet property="scrollView" destination="lfl-RI-5GV" id="nyn-hc-0DQ"/>
                         <outlet property="signupButton" destination="1v5-xT-scn" id="5NW-z3-FwD"/>
                         <outlet property="signupDataLbl" destination="GJg-kc-5vb" id="kjZ-da-rcQ"/>
+                        <outlet property="signupDateLbl" destination="Fbj-Q2-FvL" id="uii-g1-OVz"/>
                         <outlet property="signupListButton" destination="sKs-qi-Nxd" id="Uwn-hu-8Wf"/>
                         <outlet property="signupTableView" destination="TW3-yY-PBt" id="RHE-ER-nhx"/>
                         <outlet property="signupTableViewConstraintHeight" destination="YIB-3P-53u" id="6w1-cl-yIE"/>

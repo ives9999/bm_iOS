@@ -145,6 +145,9 @@
 		B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4B60F22CA247500245CC8 /* SomeCell.xib */; };
 		B3CB73D923D410CD00892F75 /* OneLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73D723D410CD00892F75 /* OneLineCell.swift */; };
 		B3CB73DA23D410CD00892F75 /* OneLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CB73D823D410CD00892F75 /* OneLineCell.xib */; };
+		B3CB73DC23D5B14B00892F75 /* SuperDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73DB23D5B14B00892F75 /* SuperDate.swift */; };
+		B3CB73DE23D5C19100892F75 /* SuperSignupNormal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73DD23D5C19100892F75 /* SuperSignupNormal.swift */; };
+		B3CB73E023D5C1A700892F75 /* SuperSignupStandby.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73DF23D5C1A700892F75 /* SuperSignupStandby.swift */; };
 		B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */; };
 		B3DEBE0F2106FDB1003699A0 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE0D2106FDB1003699A0 /* ListCell.swift */; };
 		B3DEBE102106FDB1003699A0 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3DEBE0E2106FDB1003699A0 /* ListCell.xib */; };
@@ -410,6 +413,9 @@
 		B3B4B60F22CA247500245CC8 /* SomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SomeCell.xib; sourceTree = "<group>"; };
 		B3CB73D723D410CD00892F75 /* OneLineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineCell.swift; sourceTree = "<group>"; };
 		B3CB73D823D410CD00892F75 /* OneLineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OneLineCell.xib; sourceTree = "<group>"; };
+		B3CB73DB23D5B14B00892F75 /* SuperDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperDate.swift; sourceTree = "<group>"; };
+		B3CB73DD23D5C19100892F75 /* SuperSignupNormal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperSignupNormal.swift; sourceTree = "<group>"; };
+		B3CB73DF23D5C1A700892F75 /* SuperSignupStandby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperSignupStandby.swift; sourceTree = "<group>"; };
 		B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		B3DEBE0D2106FDB1003699A0 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		B3DEBE0E2106FDB1003699A0 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
@@ -959,6 +965,9 @@
 				B3ED38D81FB463D00003F083 /* Team.swift */,
 				B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */,
 				B34A20AD21AE962700EE6E1C /* Timetables.swift */,
+				B3CB73DB23D5B14B00892F75 /* SuperDate.swift */,
+				B3CB73DD23D5C19100892F75 /* SuperSignupNormal.swift */,
+				B3CB73DF23D5C1A700892F75 /* SuperSignupStandby.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1292,6 +1301,7 @@
 				B3FAA0AA20CAC995008F2294 /* TempPlaySignupOneCell.swift in Sources */,
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,
 				B306FEA821F737D700403FE2 /* SuperTableView.swift in Sources */,
+				B3CB73DC23D5B14B00892F75 /* SuperDate.swift in Sources */,
 				B36D66BD229A585700502D62 /* SuperCourse.swift in Sources */,
 				B3DEBE18210CB30E003699A0 /* ArenaService.swift in Sources */,
 				B3DEBE0F2106FDB1003699A0 /* ListCell.swift in Sources */,
@@ -1326,6 +1336,7 @@
 				B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */,
 				B3ED38DD1FB4A06C0003F083 /* MyLabel.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,
+				B3CB73DE23D5C19100892F75 /* SuperSignupNormal.swift in Sources */,
 				B3756EEF21BA6F19006893E1 /* StatusSelectVC.swift in Sources */,
 				B3ED38DB1FB488CB0003F083 /* ImagePickerView.swift in Sources */,
 				B36CBD5520DFCC9E00E52B9C /* SuperModel.swift in Sources */,
@@ -1407,6 +1418,7 @@
 				B3E72A221FA08A170008A6B1 /* MenuVC.swift in Sources */,
 				B3DEBE1221078191003699A0 /* Coach.swift in Sources */,
 				B3ED38E41FB77BD20003F083 /* NumberTextField.swift in Sources */,
+				B3CB73E023D5C1A700892F75 /* SuperSignupStandby.swift in Sources */,
 				B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */,

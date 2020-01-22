@@ -32,6 +32,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var coachTableView: SuperTableView!
     
     @IBOutlet weak var signupDataLbl: SuperLabel!
+    @IBOutlet weak var signupDateLbl: SuperLabel!
     @IBOutlet weak var coachDataLbl: SuperLabel!
     @IBOutlet weak var contentLbl: SuperLabel!
     @IBOutlet weak var signupButton: SubmitButton!
@@ -186,6 +187,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                     if self.superCourse != nil {
                         //self.superCourse!.printRow()
                         self.superCoach = self.superCourse!.coach
+                        //self.superCourse!.signup_normal_models
                         self.setMainData()
                         self.setFeatured()
                         self.setCoachData()
@@ -240,10 +242,16 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func setSignupData() {
-        let nextCourseTime: [String: String] = superCourse!.nextCourseTime
-        for key in signupTableRowKeys {
-            signupTableRows[key]!["content"] = nextCourseTime[key]
-        }
+        let date_model: SuperDate = superCourse!.date_model
+        let date: String = date_model.date
+        let start_time: String = superCourse!.start_time_text
+        let end_time: String = superCourse!.end_time_text
+        let next_time = "下次上課時間：\(date) \(start_time) ~ \(end_time)"
+        signupDateLbl.text = next_time
+//        let nextCourseTime: [String: String] = superCourse!.nextCourseTime
+//        for key in signupTableRowKeys {
+//            signupTableRows[key]!["content"] = nextCourseTime[key]
+//        }
     }
     
     func setCoachData() {
@@ -264,7 +272,14 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             if tableView == self.tableView {
                 return tableRowKeys.count
             } else if tableView == self.signupTableView {
-                return signupTableRowKeys.count
+                if superCourse != nil {
+                    let normal_count: Int = superCourse!.signup_normal_models.count
+                    let standby_count: Int = superCourse!.signup_standby_models.count
+                    let people_limit: Int = superCourse!.people_limit
+                    return people_limit
+                } else {
+                    return 0
+                }
             } else if tableView == self.coachTableView {
                 return coachTableRowKeys.count
             } else {
