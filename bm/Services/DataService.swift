@@ -564,10 +564,10 @@ class DataService {
         }
     }
     
-    func signup_date(token: String, member_token: String, completion: @escaping CompletionHandler) {
+    func signup_date(token: String, member_token: String, date_token: String, completion: @escaping CompletionHandler) {
         let url = getSignupDateURL(token: token)
         //print(url)
-        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token]
+        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "date_token": date_token]
         //print(body)
         
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
@@ -595,10 +595,10 @@ class DataService {
         }
     }
     
-    func signup(token: String, member_token: String, signup_id: Int, course_date: String, course_deadline: String, completion: @escaping CompletionHandler) {
+    func signup(token: String, member_token: String, date_token: String, course_deadline: String, completion: @escaping CompletionHandler) {
         let url = getSignupURL(token: token)
         //print(url)
-        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "signup_id": String(signup_id), "able_date": course_date, "cancel_deadline": course_deadline]
+        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "able_date_token": date_token, "cancel_deadline": course_deadline]
         
         //print(body)
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in

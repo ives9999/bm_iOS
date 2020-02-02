@@ -18,4 +18,5 @@ class SuperSignupNormal: SuperModel {
     @objc dynamic var token: String = ""
     @objc dynamic var created_at: String = ""
     @objc dynamic var updated_at: String = ""
+    @objc dynamic var member_name: String = ""
 }

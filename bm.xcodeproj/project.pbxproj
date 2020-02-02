@@ -148,6 +148,7 @@
 		B3CB73DC23D5B14B00892F75 /* SuperDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73DB23D5B14B00892F75 /* SuperDate.swift */; };
 		B3CB73DE23D5C19100892F75 /* SuperSignupNormal.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73DD23D5C19100892F75 /* SuperSignupNormal.swift */; };
 		B3CB73E023D5C1A700892F75 /* SuperSignupStandby.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73DF23D5C1A700892F75 /* SuperSignupStandby.swift */; };
+		B3CB73E223E3185E00892F75 /* OlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73E123E3185D00892F75 /* OlCell.swift */; };
 		B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */; };
 		B3DEBE0F2106FDB1003699A0 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE0D2106FDB1003699A0 /* ListCell.swift */; };
 		B3DEBE102106FDB1003699A0 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3DEBE0E2106FDB1003699A0 /* ListCell.xib */; };
@@ -416,6 +417,7 @@
 		B3CB73DB23D5B14B00892F75 /* SuperDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperDate.swift; sourceTree = "<group>"; };
 		B3CB73DD23D5C19100892F75 /* SuperSignupNormal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperSignupNormal.swift; sourceTree = "<group>"; };
 		B3CB73DF23D5C1A700892F75 /* SuperSignupStandby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperSignupStandby.swift; sourceTree = "<group>"; };
+		B3CB73E123E3185D00892F75 /* OlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OlCell.swift; sourceTree = "<group>"; };
 		B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		B3DEBE0D2106FDB1003699A0 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		B3DEBE0E2106FDB1003699A0 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 				B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */,
 				B3CB73D723D410CD00892F75 /* OneLineCell.swift */,
 				B3CB73D823D410CD00892F75 /* OneLineCell.xib */,
+				B3CB73E123E3185D00892F75 /* OlCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1404,6 +1407,7 @@
 				B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */,
 				F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */,
 				B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */,
+				B3CB73E223E3185E00892F75 /* OlCell.swift in Sources */,
 				B3310D9422ACBCC30062EF98 /* ContentEditVC.swift in Sources */,
 				B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */,
 				B3310D9722AD54000062EF98 /* SuperTextView.swift in Sources */,

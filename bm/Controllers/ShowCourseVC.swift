@@ -36,7 +36,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var coachDataLbl: SuperLabel!
     @IBOutlet weak var contentLbl: SuperLabel!
     @IBOutlet weak var signupButton: SubmitButton!
-    @IBOutlet weak var signupListButton: CancelButton!
+    //@IBOutlet weak var signupListButton: CancelButton!
     
     var contentView: WKWebView? = {
         
@@ -87,6 +87,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     var fromNet: Bool = false
     var signup_date: JSON = JSON()
     var isSignup: Bool = false
+    var isStandby: Bool = false
     var canCancelSignup: Bool = false
     var signup_id: Int = 0
     var course_date: String = ""
@@ -109,7 +110,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         initContentView()
         
         signupButton.setTitle("報名")
-        signupListButton.setTitle("報名列表")
+        //signupListButton.setTitle("報名列表")
         
         beginRefresh()
         scrollView.addSubview(refreshControl)
@@ -177,6 +178,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     override func refresh() {
         if course_token != nil {
             Global.instance.addSpinner(superView: view)
+            //print(Member.instance.token)
             let params: [String: String] = ["token": course_token!, "member_token": Member.instance.token]
             CourseService.instance.getOne(t: SuperCourse.self, params: params) { (success) in
                 if (success) {
@@ -185,7 +187,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                         (superModel as! SuperCourse)
                     
                     if self.superCourse != nil {
-                        //self.superCourse!.printRow()
+                        //self.superCourse!.date_model.printRow()
                         self.superCoach = self.superCourse!.coach
                         //self.superCourse!.signup_normal_models
                         self.setMainData()
@@ -201,7 +203,12 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                         if self.superCourse!.isSignup {
                             self.signupButton.setTitle("取消報名")
                         } else {
-                            self.signupButton.setTitle("報名")
+                            let count = self.superCourse!.signup_normal_models.count
+                            if count >= self.superCourse!.people_limit {
+                                self.signupButton.setTitle("候補")
+                            } else {
+                                self.signupButton.setTitle("報名")
+                            }
                         }
                     }
                 }
@@ -273,10 +280,10 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                 return tableRowKeys.count
             } else if tableView == self.signupTableView {
                 if superCourse != nil {
-                    let normal_count: Int = superCourse!.signup_normal_models.count
+                    //let normal_count: Int = superCourse!.signup_normal_models.count
                     let standby_count: Int = superCourse!.signup_standby_models.count
                     let people_limit: Int = superCourse!.people_limit
-                    return people_limit
+                    return people_limit + standby_count + 1
                 } else {
                     return 0
                 }
@@ -305,12 +312,13 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                 _caculateCellHeight(content)
             }
         } else if tableView == self.signupTableView {
-            let key = signupTableRowKeys[indexPath.row]
-            if signupTableRows[key] != nil {
-                let row = signupTableRows[key]!
-                let content = row["content"] ?? ""
-                _caculateCellHeight(content)
-            }
+//            let key = signupTableRowKeys[indexPath.row]
+//            if signupTableRows[key] != nil {
+//                let row = signupTableRows[key]!
+//                let content = row["content"] ?? ""
+//                _caculateCellHeight(content)
+//            }
+            cellHeight = 36
         }
         
         return cellHeight
@@ -326,17 +334,16 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell: OneLineCell?
-        cell = (tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell)
-        
         if tableView == self.tableView {
+            let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
+            
             let key = tableRowKeys[indexPath.row]
             if tableRows[key] != nil {
                 let row = tableRows[key]!
                 let icon = row["icon"] ?? ""
                 let title = row["title"] ?? ""
                 let content = row["content"] ?? ""
-                cell!.update(icon: icon, title: title, content: content, contentH: cellHeight)
+                cell.update(icon: icon, title: title, content: content, contentH: cellHeight)
             }
             
             if indexPath.row == tableRowKeys.count - 1 {
@@ -351,18 +358,36 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                     self.changeScrollViewContentSize()
                 }
             }
+            return cell
         } else if tableView == self.signupTableView {
-            let key = signupTableRowKeys[indexPath.row]
-            if signupTableRows[key] != nil {
-                let row = signupTableRows[key]!
-                let icon = row["icon"] ?? ""
-                let title = row["title"] ?? ""
-                let content = row["content"] ?? ""
-                let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
-                cell!.update(icon: icon, title: title, content: content, contentH: cellHeight, isPressed: isPressed)
+            let cell: OlCell = tableView.dequeueReusableCell(withIdentifier: "signupCell", for: indexPath) as! OlCell
+            
+            let people_limit = superCourse!.people_limit
+            let normal_count = superCourse!.signup_normal_models.count
+            let standby_count = superCourse!.signup_standby_models.count
+            if indexPath.row < people_limit {
+                cell.numberLbl.text = "\(indexPath.row + 1)."
+                if normal_count > 0 {
+                    if indexPath.row < normal_count {
+                        let signup_normal_model = superCourse!.signup_normal_models[indexPath.row]
+                        cell.nameLbl.text = signup_normal_model.member_name
+                    }
+                }
+            } else if indexPath.row >= people_limit && indexPath.row < people_limit + standby_count {
+                cell.numberLbl.text = "候補\(indexPath.row - people_limit + 1)."
+                let signup_standby_model = superCourse!.signup_standby_models[indexPath.row - people_limit]
+                cell.nameLbl.text = signup_standby_model.member_name
+            } else {
+                let remain: Int = people_limit - superCourse!.signup_normal_models.count
+                var remain_text = "還有\(remain)個名額"
+                if remain == 0 {
+                    remain_text = "已經額滿，請排候補"
+                }
+                cell.numberLbl.text = remain_text
             }
-            if indexPath.row == signupTableRowKeys.count - 1 {
-                
+            
+            if indexPath.row == people_limit + standby_count - 1 {
+
                 UIView.animate(withDuration: 0, animations: {self.signupTableView.layoutIfNeeded()}) { (complete) in
                     var heightOfTableView: CGFloat = 0.0
                     let cells = self.signupTableView.visibleCells
@@ -374,7 +399,19 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                     self.changeScrollViewContentSize()
                 }
             }
+            return cell
+//            let key = signupTableRowKeys[indexPath.row]
+//            if signupTableRows[key] != nil {
+//                let row = signupTableRows[key]!
+//                let icon = row["icon"] ?? ""
+//                let title = row["title"] ?? ""
+//                let content = row["content"] ?? ""
+//                let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
+//                cell!.update(icon: icon, title: title, content: content, contentH: cellHeight, isPressed: isPressed)
+//            }
+
         } else if tableView == self.coachTableView {
+            let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
             
             let key = coachTableRowKeys[indexPath.row]
             if coachTableRows[key] != nil {
@@ -386,7 +423,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                     content = content.mobileShow()
                 }
                 let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
-                cell!.update(icon: icon, title: title, content: content, contentH: cellHeight, isPressed: isPressed)
+                cell.update(icon: icon, title: title, content: content, contentH: cellHeight, isPressed: isPressed)
             }
             
             if indexPath.row == coachTableRowKeys.count - 1 {
@@ -402,9 +439,10 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                     self.changeScrollViewContentSize()
                 }
             }
+            return cell
+        } else {
+            return UITableViewCell()
         }
-        
-        return cell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -478,7 +516,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         //print(contentViewConstraintHeight)
         
         //let h: CGFloat = h1 + h2 + h3 + h4 + h5
-        let h: CGFloat = h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + 100
+        let h: CGFloat = h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + 300
         scrollView.contentSize = CGSize(width: view.frame.width, height: h)
         ContainerViewConstraintHeight.constant = h
         //print(h1)
@@ -486,18 +524,26 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     func showSignupModal() {
         var title: String = (isSignup) ? "取消報名" : "報名"
+        if isStandby {
+            title = "候補報名"
+        }
         let signup_html = "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
         let cancel_signup_html = "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
         let cant_cancel_signup_html = "已經超過取消報名期限，無法取消\r\n" + "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
+        let standby_html = "此課程報名已經額滿，請排候補" + "\r\n" + signup_html
         var msg = signup_html
-        if !isSignup && !canCancelSignup {
-            msg = signup_html
+        if isStandby {
+            msg = standby_html
         } else {
-            if isSignup && canCancelSignup {
-                msg = cancel_signup_html
+            if !isSignup && !canCancelSignup {
+                msg = signup_html
             } else {
-                msg = cant_cancel_signup_html
-                title = "警告"
+                if isSignup && canCancelSignup {
+                    msg = cancel_signup_html
+                } else {
+                    msg = cant_cancel_signup_html
+                    title = "警告"
+                }
             }
         }
         
@@ -520,7 +566,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
         Global.instance.addSpinner(superView: view)
-        CourseService.instance.signup(token: course_token!, member_token: Member.instance.token, signup_id: signup_id, course_date: course_date, course_deadline: course_deadline) { (success) in
+        CourseService.instance.signup(token: course_token!, member_token: Member.instance.token, date_token: superCourse!.date_model.token, course_deadline: course_deadline) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             let msg = CourseService.instance.msg
             var title = "警告"
@@ -547,15 +593,16 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         }
         //print(Member.instance.token)
         Global.instance.addSpinner(superView: view)
-        CourseService.instance.signup_date(token: course_token!, member_token: Member.instance.token) { (success) in
+        CourseService.instance.signup_date(token: course_token!, member_token: Member.instance.token, date_token: superCourse!.date_model.token) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 self.signup_date = CourseService.instance.signup_date
                 self.isSignup = self.signup_date["isSignup"].boolValue
                 self.canCancelSignup = self.signup_date["cancel"].boolValue
                 self.signup_id = self.signup_date["signup_id"].intValue
-                self.course_date = self.signup_date["course_date"].stringValue
-                self.course_deadline = self.signup_date["course_deadline"].stringValue
+                self.course_date = self.signup_date["date"].stringValue
+                self.course_deadline = self.signup_date["deadline"].stringValue
+                self.isStandby = self.signup_date["standby"].boolValue
                 self.showSignupModal()
             }
         }
