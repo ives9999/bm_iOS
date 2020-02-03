@@ -523,27 +523,27 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func showSignupModal() {
-        var title: String = (isSignup) ? "取消報名" : "報名"
-        if isStandby {
-            title = "候補報名"
-        }
+        
         let signup_html = "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
         let cancel_signup_html = "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
         let cant_cancel_signup_html = "已經超過取消報名期限，無法取消\r\n" + "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
         let standby_html = "此課程報名已經額滿，請排候補" + "\r\n" + signup_html
+        
+        var title: String = ""
         var msg = signup_html
-        if isStandby {
-            msg = standby_html
-        } else {
-            if !isSignup && !canCancelSignup {
-                msg = signup_html
+        
+        if isSignup {
+            title = "取消報名"
+            if canCancelSignup {
+                msg = cancel_signup_html
             } else {
-                if isSignup && canCancelSignup {
-                    msg = cancel_signup_html
-                } else {
-                    msg = cant_cancel_signup_html
-                    title = "警告"
-                }
+                msg = cant_cancel_signup_html
+            }
+        } else {
+            if isStandby {
+                title = "候補報名"
+            } else {
+                title = "報名"
             }
         }
         
@@ -599,7 +599,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                 self.signup_date = CourseService.instance.signup_date
                 self.isSignup = self.signup_date["isSignup"].boolValue
                 self.canCancelSignup = self.signup_date["cancel"].boolValue
-                self.signup_id = self.signup_date["signup_id"].intValue
+                //self.signup_id = self.signup_date["signup_id"].intValue
                 self.course_date = self.signup_date["date"].stringValue
                 self.course_deadline = self.signup_date["deadline"].stringValue
                 self.isStandby = self.signup_date["standby"].boolValue
