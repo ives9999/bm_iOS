@@ -598,11 +598,11 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             if (success) {
                 self.signup_date = CourseService.instance.signup_date
                 self.isSignup = self.signup_date["isSignup"].boolValue
+                self.isStandby = self.signup_date["isStandby"].boolValue
                 self.canCancelSignup = self.signup_date["cancel"].boolValue
                 //self.signup_id = self.signup_date["signup_id"].intValue
                 self.course_date = self.signup_date["date"].stringValue
                 self.course_deadline = self.signup_date["deadline"].stringValue
-                self.isStandby = self.signup_date["standby"].boolValue
                 self.showSignupModal()
             }
         }
