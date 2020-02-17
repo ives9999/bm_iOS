@@ -72,6 +72,7 @@
 		B33C1AC121BE635E006F2BEB /* ContentFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C1AC021BE635E006F2BEB /* ContentFormItem.swift */; };
 		B33C1AC321BE669F006F2BEB /* TextFieldFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */; };
 		B33C1AC521C3F848006F2BEB /* DrawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C1AC421C3F848006F2BEB /* DrawLine.swift */; };
+		B3485C9723F841BE0078265D /* MemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3485C9623F841BE0078265D /* MemberVC.swift */; };
 		B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */; };
 		B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AD21AE962700EE6E1C /* Timetables.swift */; };
 		B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20FE21B696AA00EE6E1C /* TextFieldCell.swift */; };
@@ -341,6 +342,7 @@
 		B33C1AC021BE635E006F2BEB /* ContentFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentFormItem.swift; sourceTree = "<group>"; };
 		B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldFormItem.swift; sourceTree = "<group>"; };
 		B33C1AC421C3F848006F2BEB /* DrawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLine.swift; sourceTree = "<group>"; };
+		B3485C9623F841BE0078265D /* MemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberVC.swift; sourceTree = "<group>"; };
 		B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableVC.swift; sourceTree = "<group>"; };
 		B34A20AD21AE962700EE6E1C /* Timetables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetables.swift; sourceTree = "<group>"; };
 		B34A20FE21B696AA00EE6E1C /* TextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldCell.swift; sourceTree = "<group>"; };
@@ -897,6 +899,7 @@
 				F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */,
 				B3756EE421B95DD5006893E1 /* ColorSelectVC.swift */,
 				B3310D9322ACBCC30062EF98 /* ContentEditVC.swift */,
+				B3E88BE5237FCEC0001F015A /* CourseCalendarVC.swift */,
 				B385A07922B9336C00BC3ADF /* CourseVC.swift */,
 				B306FE9B21F0DA8000403FE2 /* DateSelectVC.swift */,
 				B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */,
@@ -926,6 +929,7 @@
 				B3308C501FDA5311006A83B6 /* ShowTempPlayVC.swift */,
 				B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */,
 				B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */,
+				B39A216E23420881006C9FF7 /* SignupListVC.swift */,
 				B358B0B522A0FB5200F1A4E6 /* SingleSelectVC.swift */,
 				B3756EEE21BA6F19006893E1 /* StatusSelectVC.swift */,
 				B3E72A181F9CBE9F0008A6B1 /* TeachCV.swift */,
@@ -940,8 +944,7 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
-				B39A216E23420881006C9FF7 /* SignupListVC.swift */,
-				B3E88BE5237FCEC0001F015A /* CourseCalendarVC.swift */,
+				B3485C9623F841BE0078265D /* MemberVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1346,6 +1349,7 @@
 				B3310D9922AE302A0062EF98 /* ClearButton.swift in Sources */,
 				B36CBD5720DFF7B000E52B9C /* JSONParse.swift in Sources */,
 				F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */,
+				B3485C9723F841BE0078265D /* MemberVC.swift in Sources */,
 				B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */,
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
 				B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */,
@@ -1525,7 +1529,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.4.3;
+				MARKETING_VERSION = 1.5.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1549,7 +1553,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.4.3;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1700,7 +1704,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.4.3;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
@@ -1732,7 +1736,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.4.3;
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";

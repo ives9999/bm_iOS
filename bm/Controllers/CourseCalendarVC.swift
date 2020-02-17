@@ -60,7 +60,7 @@ class CourseCalendarVC: ListVC {
         _titleField = "title"
         searchRows = _searchRows
         Global.instance.setupTabbar(self)
-        Global.instance.menuPressedAction(menuBtn, self)
+        //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
         
         let cellNibName = UINib(nibName: "CalendarSignupCell", bundle: nil)

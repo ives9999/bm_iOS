@@ -47,7 +47,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         myTablView = tableView
         sections = ["", "更多"]
         Global.instance.setupTabbar(self)
-        Global.instance.menuPressedAction(menuBtn, self)
+        //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
         let cellNib = UINib(nibName: "EditCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
