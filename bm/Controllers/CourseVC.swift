@@ -29,12 +29,14 @@ class CourseVC: ListVC, SingleSelectDelegate, MultiSelectDelegate, SelectDelegat
     override func viewDidLoad() {
         
         myTablView = tableView
+        myTablView.allowsMultipleSelectionDuringEditing = false
+        myTablView.isUserInteractionEnabled = true
         dataService = CourseService.instance
         _type = "course"
         _titleField = "title"
         searchRows = _searchRows
         Global.instance.setupTabbar(self)
-        Global.instance.menuPressedAction(menuBtn, self)
+        //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
     }
     

@@ -121,6 +121,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let row: [String: Any] = rows![indexPath.section][indexPath.row]
         //print(row)

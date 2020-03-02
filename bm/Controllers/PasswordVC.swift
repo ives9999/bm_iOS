@@ -10,7 +10,7 @@ import UIKit
 
 class PasswordVC: UIViewController {
     
-    var type: String!// forget_password, change_password
+    var type: String?// forget_password, change_password
     var emailLbl: SuperLabel!
     var emailTxt: IconTextField!
     var submitBtn: SubmitButton!
