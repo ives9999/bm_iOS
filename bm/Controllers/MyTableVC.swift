@@ -70,6 +70,7 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         } else {
             count = sections!.count
         }
+        //print(count)
         return count!
     }
     
@@ -80,6 +81,7 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         } else {
             count = rows![section].count
         }
+        
         return count!
     }
     

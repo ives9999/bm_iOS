@@ -155,11 +155,11 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
                 let vc: ValidateVC = segue.destination as! ValidateVC
                 vc.type = sender as! String
             } else if segue.identifier == TO_LOGIN {
-                let vc: LoginVC = segue.destination as! LoginVC
-                vc.menuVC = (sender as! MenuVC)
+                //let vc: LoginVC = segue.destination as! LoginVC
+                //vc.menuVC = (sender as! MenuVC)
             } else if segue.identifier == TO_REGISTER {
-                let vc: RegisterVC = segue.destination as! RegisterVC
-                vc.menuVC = (sender as! MenuVC)
+                //let vc: RegisterVC = segue.destination as! RegisterVC
+                //vc.menuVC = (sender as! MenuVC)
             }
         }
     }

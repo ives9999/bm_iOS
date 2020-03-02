@@ -59,7 +59,7 @@ class CourseCalendarVC: ListVC {
         _type = "course"
         _titleField = "title"
         searchRows = _searchRows
-        Global.instance.setupTabbar(self)
+        //Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
         

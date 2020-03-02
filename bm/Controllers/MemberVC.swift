@@ -17,12 +17,14 @@ class MemberVC: MyTableVC {
     @IBOutlet weak var forgetPasswordIcon: UIImageView!
     @IBOutlet weak var forgetPasswordBtn: UIButton!
     
-    let _sections: [String] = ["帳戶"]
-    let fixedRows: [[Dictionary<String, Any>]] = [
-        [
-            ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
-            ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
-        ]
+    let _sections: [String] = ["會員資料", "報名"]
+    let fixedRows: [Dictionary<String, String>] = [
+        ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
+        ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
+    ]
+    var memberRows: [Dictionary<String, String>] = [Dictionary<String, String>]()
+    let signupRows: [Dictionary<String, String>] = [
+        ["text": "課程報名", "icon": "account", "segue": TO_SIGNUP_LIST]
     ]
     var _rows: [[Dictionary<String, Any>]] = [[Dictionary<String, Any>]]()
 
@@ -50,28 +52,35 @@ class MemberVC: MyTableVC {
     }
     
     func setValidateRow() {
-        _rows.removeAll()
-        _rows = fixedRows
+        memberRows.removeAll()
+        memberRows = fixedRows
         if Member.instance.isLoggedIn {// detected validate status
             let validate: Int = Member.instance.getData(key: VALIDATE_KEY) as! Int
             //print(validate)
             if validate & EMAIL_VALIDATE <= 0 {
-                let new: Dictionary<String, Any> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
-                _rows[0].append(new)
+                let new: Dictionary<String, String> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
+                memberRows.append(new)
             }
             if validate & MOBILE_VALIDATE <= 0 {
-                let new: Dictionary<String, Any> = ["text": "手機認證", "icon": "mobile_validate", "segue": TO_VALIDATE, "type": "mobile"]
-                _rows[0].append(new)
+                let new: Dictionary<String, String> = ["text": "手機認證", "icon": "mobile_validate", "segue": TO_VALIDATE, "type": "mobile"]
+                memberRows.append(new)
             }
         }
         if Member.instance.isTeamManager {
-            let new: Dictionary<String, Any> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]
-            _rows[0].append(new)
+            let new: Dictionary<String, String> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]
+            memberRows.append(new)
         }
-        let new: Dictionary<String, Any> = ["text": "重新整理", "icon": "refresh", "segue": TO_REFRESH]
-        _rows[0].append(new)
+        let new: Dictionary<String, String> = ["text": "重新整理", "icon": "refresh", "segue": TO_REFRESH]
+        memberRows.append(new)
+        
+        _rows.append(memberRows)
+        _rows.append(signupRows)
         //print(_rows)
         setData(sections: _sections, rows: _rows)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 45
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -94,6 +103,58 @@ class MemberVC: MyTableVC {
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+           
+           //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
+           let row: [String: Any] = _rows[indexPath.section][indexPath.row]
+           //print(row)
+           if row["segue"] != nil {
+               let segue = row["segue"] as! String
+               //print("segue: \(segue)")
+               if segue == TO_PROFILE {
+                   performSegue(withIdentifier: segue, sender: nil)
+               } else if segue == TO_PASSWORD {
+                   performSegue(withIdentifier: segue, sender: "change_password")
+               } else if segue == TO_VALIDATE {
+                   var sender: String = ""
+                   if row["type"] != nil {
+                       sender = row["type"] as! String
+                   }
+                   performSegue(withIdentifier: segue, sender: sender)
+               } else if segue == TO_BLACKLIST {
+                   performSegue(withIdentifier: segue, sender: nil)
+               } else if segue == TO_REFRESH {
+                   refresh()
+               } else if segue == TO_SIGNUP_LIST {
+                
+                    //if let vc = storyboard?.instantiateViewController(withIdentifier: "toS") as? CourseCalendarVC {
+                        //present(vc, animated: true, completion: nil)
+                    //}
+                   performSegue(withIdentifier: "toA", sender: nil)
+               }
+           }
+       }
+    
+       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+           if sender != nil {
+               if segue.identifier == TO_PASSWORD {
+                   let vc: PasswordVC = segue.destination as! PasswordVC
+                   vc.type = (sender as! String)
+               } else if segue.identifier == TO_VALIDATE {
+                   let vc: ValidateVC = segue.destination as! ValidateVC
+                   vc.type = sender as! String
+               } else if segue.identifier == TO_LOGIN {
+                   //let vc: LoginVC = segue.destination as! LoginVC
+                   //vc.menuVC = (sender as! MenuVC)
+               } else if segue.identifier == TO_REGISTER {
+                   //let vc: RegisterVC = segue.destination as! RegisterVC
+                   //vc.menuVC = (sender as! MenuVC)
+               } else {
+                
+            }
+           }
+       }
+    
     @IBAction func loginBtnPressed(_ sender: Any) {
         if Member.instance.isLoggedIn { // logout
             MemberService.instance.logout()
@@ -101,6 +162,7 @@ class MemberVC: MyTableVC {
             _loginout()
         } else {
             if let vc = storyboard?.instantiateViewController(withIdentifier: "login") as? LoginVC {
+                vc.sourceVC = self
                 present(vc, animated: true, completion: nil)
             }
             //performSegue(withIdentifier: TO_LOGIN, sender: self)
@@ -109,6 +171,7 @@ class MemberVC: MyTableVC {
     
     @IBAction func registerBtnPressed(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "register") as? RegisterVC {
+            vc.sourceVC = self
             present(vc, animated: true, completion: nil)
         }
         //performSegue(withIdentifier: TO_REGISTER, sender: self)

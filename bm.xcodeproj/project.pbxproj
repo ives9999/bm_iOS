@@ -202,6 +202,7 @@
 		B3FB9B222407F5EC0051186F /* Team.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B212407F5EC0051186F /* Team.storyboard */; };
 		B3FB9B252407F7280051186F /* Course.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B232407F7280051186F /* Course.storyboard */; };
 		B3FB9B272407F7EE0051186F /* TempPlay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B262407F7EE0051186F /* TempPlay.storyboard */; };
+		B3FB9B2924093E580051186F /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3FB9B2824093E580051186F /* MemberSignuListVC.swift */; };
 		F07CD1A1BB728D94904CA85F /* Pods_bm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5D58D06320800C79615904 /* Pods_bm.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		F509DE101A4597741A285B3C /* Pods_bmNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44013B063878E5AA0587495E /* Pods_bmNotificationServiceExtension.framework */; };
 		F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90423B81F83748C00DC8B1E /* TeamVC.swift */; };
@@ -479,6 +480,8 @@
 		B3FB9B212407F5EC0051186F /* Team.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Team.storyboard; sourceTree = SOURCE_ROOT; };
 		B3FB9B242407F7280051186F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Course.storyboard; sourceTree = "<group>"; };
 		B3FB9B262407F7EE0051186F /* TempPlay.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TempPlay.storyboard; sourceTree = SOURCE_ROOT; };
+		B3FB9B2824093E580051186F /* MemberSignuListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
+		B3FB9B2A240A8E110051186F /* MyPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = MyPlayground.playground; path = "../../../Library/Autosave Information/MyPlayground.playground"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
 		F94E7D1C1F83636A00F550FD /* bm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94E7D1F1F83636A00F550FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -601,6 +604,8 @@
 			isa = PBXGroup;
 			children = (
 				B317855A20D9089600765CA1 /* BlackListCell.swift */,
+				B3E88BE72380F2D1001F015A /* CalendarSignupCell.swift */,
+				B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */,
 				B316FED42112F13600FB990C /* CollectionCell.swift */,
 				B316FED52112F13600FB990C /* CollectionCell.xib */,
 				F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */,
@@ -615,10 +620,17 @@
 				B36D66BE229A828A00502D62 /* ManagerCourseCell.swift */,
 				B36D66BF229A828A00502D62 /* ManagerCourseCell.xib */,
 				B322F8091FC6AD1800DE98FB /* MenuCell.swift */,
+				B3CB73E123E3185D00892F75 /* OlCell.swift */,
+				B3CB73D723D410CD00892F75 /* OneLineCell.swift */,
+				B3CB73D823D410CD00892F75 /* OneLineCell.xib */,
 				B39453DC2232948F005E3027 /* PNCell.swift */,
 				B39453DD2232948F005E3027 /* PNCell.xib */,
+				B394536F2343256C000DF98E /* SignupListCell.swift */,
+				B39453702343256C000DF98E /* SignupListCell.xib */,
 				B358B0BD22A168C700F1A4E6 /* SingleSelectCell.swift */,
 				B358B0BE22A168C700F1A4E6 /* SingleSelectCell.xib */,
+				B3B4B60E22CA247500245CC8 /* SomeCell.swift */,
+				B3B4B60F22CA247500245CC8 /* SomeCell.xib */,
 				B3756EF021BA7567006893E1 /* StatusSelectCell.swift */,
 				B3756EF121BA7567006893E1 /* StatusSelectCell.xib */,
 				B322F8071FC6AC2200DE98FB /* SuperCell.swift */,
@@ -628,15 +640,6 @@
 				B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */,
 				B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
-				B3B4B60E22CA247500245CC8 /* SomeCell.swift */,
-				B3B4B60F22CA247500245CC8 /* SomeCell.xib */,
-				B394536F2343256C000DF98E /* SignupListCell.swift */,
-				B39453702343256C000DF98E /* SignupListCell.xib */,
-				B3E88BE72380F2D1001F015A /* CalendarSignupCell.swift */,
-				B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */,
-				B3CB73D723D410CD00892F75 /* OneLineCell.swift */,
-				B3CB73D823D410CD00892F75 /* OneLineCell.xib */,
-				B3CB73E123E3185D00892F75 /* OlCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -860,6 +863,7 @@
 		F94E7D1E1F83636A00F550FD /* bm */ = {
 			isa = PBXGroup;
 			children = (
+				B3FB9B2A240A8E110051186F /* MyPlayground.playground */,
 				B3FB9B262407F7EE0051186F /* TempPlay.storyboard */,
 				B3FB9B232407F7280051186F /* Course.storyboard */,
 				B3FB9B212407F5EC0051186F /* Team.storyboard */,
@@ -927,6 +931,7 @@
 				B36D66B6229997AC00502D62 /* ManagerCourseVC.swift */,
 				B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */,
 				B3A5A28320B2CB80001A846F /* ManagerVC.swift */,
+				B3485C9623F841BE0078265D /* MemberVC.swift */,
 				B3E72A211FA08A170008A6B1 /* MenuVC.swift */,
 				B30C954F1FED68A0005F71EF /* MoreVC.swift */,
 				B3310D8D22ABB4820062EF98 /* MultiSelectVC.swift */,
@@ -959,7 +964,7 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
-				B3485C9623F841BE0078265D /* MemberVC.swift */,
+				B3FB9B2824093E580051186F /* MemberSignuListVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1307,6 +1312,7 @@
 				B337B9A61FE039ED00C3EE28 /* TempPlaySignupCell.swift in Sources */,
 				B36CBD5320DE00FE00E52B9C /* TempPlayDatePlayer.swift in Sources */,
 				F94FF4351FB4322C00D167B6 /* EditVC.swift in Sources */,
+				B3FB9B2924093E580051186F /* MemberSignuListVC.swift in Sources */,
 				B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */,
 				B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */,
 				B33C1ABD21BD300E006F2BEB /* TimeFormItem.swift in Sources */,
