@@ -365,6 +365,7 @@ class MemberService {
             }
         }
     }
+    
     func changePassword(oldPassword: String, password: String, rePassword: String, completion: @escaping CompletionHandler) {
         let token: String = Member.instance.token
         let body: [String: Any] = ["source": "app", "password_old": oldPassword,"password":password,"repassword":rePassword,"token":token]
@@ -381,6 +382,15 @@ class MemberService {
                 completion(true)
             }
         }
+    }
+    
+    func memberSignupCalendar(year: Int, month: Int, member_token: String? = nil, source: String = "course", completion: @escaping CompletionHandler) {
+        if member_token == nil {
+            
+        }
+        let url: String = URL_MEMBER_SIGNUP_CALENDAR
+        //print(url)
+        let body: [String: String] = ["y":(String)year,"m":(String)month,"member_token":member_token!,"source":source,"device": "app", "channel": "bm"]
     }
 }
 

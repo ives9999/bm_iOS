@@ -144,6 +144,10 @@
 		B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */; };
 		B3B4B61022CA247500245CC8 /* SomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4B60E22CA247500245CC8 /* SomeCell.swift */; };
 		B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4B60F22CA247500245CC8 /* SomeCell.xib */; };
+		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
+		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
+		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
+		B3BBDD95240FE88D00EB9856 /* SuperSignupCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD94240FE88D00EB9856 /* SuperSignupCancel.swift */; };
 		B3CB73D923D410CD00892F75 /* OneLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73D723D410CD00892F75 /* OneLineCell.swift */; };
 		B3CB73DA23D410CD00892F75 /* OneLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CB73D823D410CD00892F75 /* OneLineCell.xib */; };
 		B3CB73DC23D5B14B00892F75 /* SuperDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73DB23D5B14B00892F75 /* SuperDate.swift */; };
@@ -164,9 +168,7 @@
 		B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */; };
 		B3E72A221FA08A170008A6B1 /* MenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A211FA08A170008A6B1 /* MenuVC.swift */; };
 		B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A231FA08D090008A6B1 /* GradientView.swift */; };
-		B3E72A261FA0FBFF0008A6B1 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */; };
 		B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A271FA20D280008A6B1 /* MemberService.swift */; };
-		B3E72A2A1FA2EC640008A6B1 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */; };
 		B3E88BE6237FCEC0001F015A /* CourseCalendarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E88BE5237FCEC0001F015A /* CourseCalendarVC.swift */; };
 		B3E88BE92380F2D1001F015A /* CalendarSignupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E88BE72380F2D1001F015A /* CalendarSignupCell.swift */; };
 		B3E88BEA2380F2D1001F015A /* CalendarSignupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */; };
@@ -419,6 +421,10 @@
 		B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
 		B3B4B60E22CA247500245CC8 /* SomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeCell.swift; sourceTree = "<group>"; };
 		B3B4B60F22CA247500245CC8 /* SomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SomeCell.xib; sourceTree = "<group>"; };
+		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
+		B3BBDD94240FE88D00EB9856 /* SuperSignupCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperSignupCancel.swift; sourceTree = "<group>"; };
 		B3CB73D723D410CD00892F75 /* OneLineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineCell.swift; sourceTree = "<group>"; };
 		B3CB73D823D410CD00892F75 /* OneLineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OneLineCell.xib; sourceTree = "<group>"; };
 		B3CB73DB23D5B14B00892F75 /* SuperDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperDate.swift; sourceTree = "<group>"; };
@@ -441,9 +447,7 @@
 		B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayVC.swift; sourceTree = "<group>"; };
 		B3E72A211FA08A170008A6B1 /* MenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVC.swift; sourceTree = "<group>"; };
 		B3E72A231FA08D090008A6B1 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
-		B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3E72A271FA20D280008A6B1 /* MemberService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberService.swift; sourceTree = "<group>"; };
-		B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3E88BE5237FCEC0001F015A /* CourseCalendarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseCalendarVC.swift; sourceTree = "<group>"; };
 		B3E88BE72380F2D1001F015A /* CalendarSignupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSignupCell.swift; sourceTree = "<group>"; };
 		B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarSignupCell.xib; sourceTree = "<group>"; };
@@ -677,14 +681,14 @@
 		B32FBCF61F849A7D003D39CC /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				B3DEBE17210CB30E003699A0 /* ArenaService.swift */,
+				B3DEBE13210781FD003699A0 /* CoachService.swift */,
+				B36D66BA229A580E00502D62 /* CourseService.swift */,
 				B32FBCF71F849AA7003D39CC /* DataService.swift */,
 				B3E72A271FA20D280008A6B1 /* MemberService.swift */,
-				B3ED38E91FB87EE50003F083 /* TeamService.swift */,
-				B3DEBE13210781FD003699A0 /* CoachService.swift */,
-				B3DEBE17210CB30E003699A0 /* ArenaService.swift */,
 				B32D9EE521106C5F00999A4A /* TeachService.swift */,
+				B3ED38E91FB87EE50003F083 /* TeamService.swift */,
 				B306FEA921F7446F00403FE2 /* TimetableService.swift */,
-				B36D66BA229A580E00502D62 /* CourseService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -903,6 +907,9 @@
 		F94E7D4D1F83660B00F550FD /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */,
+				B3BBDD8E240E54D000EB9856 /* LoginVC.swift */,
+				B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */,
 				B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */,
 				B31739EC21763CD1004CFEDE /* ArenaMapVC.swift */,
 				B3ED38EF1FB9AD460003F083 /* ArenaSelectVC.swift */,
@@ -923,7 +930,6 @@
 				F94FF4341FB4322C00D167B6 /* EditVC.swift */,
 				F94E7D211F83636A00F550FD /* HomeVC.swift */,
 				B3DEBE19210D6AC2003699A0 /* ListVC.swift */,
-				B3E72A251FA0FBFF0008A6B1 /* LoginVC.swift */,
 				B36D66B6229997AC00502D62 /* ManagerCourseVC.swift */,
 				B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */,
 				B3A5A28320B2CB80001A846F /* ManagerVC.swift */,
@@ -934,7 +940,6 @@
 				B322F8041FC52CAE00DE98FB /* MyTableVC.swift */,
 				B30C954B1FEA8CDA005F71EF /* PasswordVC.swift */,
 				F94EAA1F1FB023B800B1762C /* ProfileVC.swift */,
-				B3E72A291FA2EC640008A6B1 /* RegisterVC.swift */,
 				B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */,
 				B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */,
 				B385A07B22BCB28E00BC3ADF /* SelectVC.swift */,
@@ -989,6 +994,7 @@
 				B3CB73DB23D5B14B00892F75 /* SuperDate.swift */,
 				B3CB73DD23D5C19100892F75 /* SuperSignupNormal.swift */,
 				B3CB73DF23D5C1A700892F75 /* SuperSignupStandby.swift */,
+				B3BBDD94240FE88D00EB9856 /* SuperSignupCancel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1307,6 +1313,7 @@
 				B337B9A61FE039ED00C3EE28 /* TempPlaySignupCell.swift in Sources */,
 				B36CBD5320DE00FE00E52B9C /* TempPlayDatePlayer.swift in Sources */,
 				F94FF4351FB4322C00D167B6 /* EditVC.swift in Sources */,
+				B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */,
 				B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */,
 				B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */,
 				B33C1ABD21BD300E006F2BEB /* TimeFormItem.swift in Sources */,
@@ -1315,6 +1322,7 @@
 				B3E8C29B220603310008ED25 /* ShowCoachVC.swift in Sources */,
 				B36D66B8229997AD00502D62 /* ManagerCourseVC.swift in Sources */,
 				B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */,
+				B3BBDD95240FE88D00EB9856 /* SuperSignupCancel.swift in Sources */,
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,
 				B3308C511FDA5311006A83B6 /* ShowTempPlayVC.swift in Sources */,
 				B3310D8E22ABB4820062EF98 /* MultiSelectVC.swift in Sources */,
@@ -1366,6 +1374,7 @@
 				B3756EEF21BA6F19006893E1 /* StatusSelectVC.swift in Sources */,
 				B3ED38DB1FB488CB0003F083 /* ImagePickerView.swift in Sources */,
 				B36CBD5520DFCC9E00E52B9C /* SuperModel.swift in Sources */,
+				B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */,
 				B3310D9922AE302A0062EF98 /* ClearButton.swift in Sources */,
 				B36CBD5720DFF7B000E52B9C /* JSONParse.swift in Sources */,
 				F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */,
@@ -1406,6 +1415,7 @@
 				F96931971FB953960005C13F /* City.swift in Sources */,
 				B3E88BE6237FCEC0001F015A /* CourseCalendarVC.swift in Sources */,
 				B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */,
+				B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */,
 				B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */,
 				B3839EB822CF0261003F3620 /* ShowCourseVC.swift in Sources */,
 				B306F3432180346B00C32CE2 /* SuperSwitch.swift in Sources */,
@@ -1442,7 +1452,6 @@
 				B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */,
 				B36CBD5120DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift in Sources */,
 				B33C1AC521C3F848006F2BEB /* DrawLine.swift in Sources */,
-				B3E72A2A1FA2EC640008A6B1 /* RegisterVC.swift in Sources */,
 				B3E72A221FA08A170008A6B1 /* MenuVC.swift in Sources */,
 				B3DEBE1221078191003699A0 /* Coach.swift in Sources */,
 				B3ED38E41FB77BD20003F083 /* NumberTextField.swift in Sources */,
@@ -1461,7 +1470,6 @@
 				B3ED38F21FBAD4C30003F083 /* WeekdaysSelectVC.swift in Sources */,
 				B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */,
 				B30C954C1FEA8CDA005F71EF /* PasswordVC.swift in Sources */,
-				B3E72A261FA0FBFF0008A6B1 /* LoginVC.swift in Sources */,
 				B3649416207DCB280030CF44 /* SCLExtensions.swift in Sources */,
 				B3756EE521B95DD5006893E1 /* ColorSelectVC.swift in Sources */,
 				B3ED38D91FB463D00003F083 /* Team.swift in Sources */,

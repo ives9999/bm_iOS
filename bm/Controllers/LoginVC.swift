@@ -30,7 +30,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
 //        return true
 //    }
     
-    var menuVC: MenuVC? = nil
+    var sourceVC: MemberVC? = nil
 
     // outlets
     @IBOutlet weak var emailTxt: UITextField!
@@ -57,7 +57,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         dismiss(animated: true, completion: nil)
     }
     @IBAction func closeBtnPressed(_ sender: Any) {
-        self.backToMenu()
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
@@ -89,7 +89,11 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                         })
                         alert.showWarning("警告", subTitle: MemberService.instance.msg)
                     }
-                    self.backToMenu()
+                    self.dismiss(animated: true, completion: {
+                        if self.sourceVC != nil {
+                            self.sourceVC!._loginout()
+                        }
+                    })
                 } else {
                     //print("login failed by error email or password")
                     SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
@@ -122,7 +126,11 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                     Global.instance.removeSpinner(superView: self.view)
                     if success1 {
                         if MemberService.instance.success {
-                            self.backToMenu()
+                            self.dismiss(animated: true, completion: {
+                                if self.sourceVC != nil {
+                                    self.sourceVC!._loginout()
+                                }
+                            })
                         } else {
                             //print("login failed by error email or password")
                             self.warning(MemberService.instance.msg)
@@ -139,7 +147,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func registerBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_REGISTER, sender: menuVC)
+        performSegue(withIdentifier: TO_REGISTER, sender: nil)
     }
     @IBAction func passwordBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_PASSWORD, sender: "forget_password")
@@ -151,11 +159,11 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         } else if segue.identifier == UNWIND {
             //let vc: MenuVC = segue.destination as! MenuVC
         } else if segue.identifier == TO_LOGIN {
-            let vc: LoginVC = segue.destination as! LoginVC
-            vc.menuVC = (sender as! MenuVC)
+            //let vc: LoginVC = segue.destination as! LoginVC
+            //vc.menuVC = (sender as! MenuVC)
         } else if segue.identifier == TO_REGISTER {
-            let vc: RegisterVC = segue.destination as! RegisterVC
-            vc.menuVC = (sender as! MenuVC)
+            //let vc: RegisterVC = segue.destination as! RegisterVC
+            //vc.menuVC = (sender as! MenuVC)
         }
     }
     
@@ -164,12 +172,12 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         return true
     }
     
-    func backToMenu() {
-        if self.menuVC != nil {
-            self.menuVC!._loginout()
-        }
-        self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
-    }
+//    func backToMenu() {
+//        if self.menuVC != nil {
+//            self.menuVC!._loginout()
+//        }
+//        self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
+//    }
 }
 
 

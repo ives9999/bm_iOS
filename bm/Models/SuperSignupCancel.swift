@@ -1,14 +1,14 @@
 //
-//  SuperSignupNormal.swift
+//  SuperSignupCancel.swift
 //  bm
 //
-//  Created by ives on 2020/1/20.
+//  Created by ives on 2020/3/4.
 //  Copyright © 2020 bm. All rights reserved.
 //
 
 import Foundation
-@objc(SuperSignupNormal)
-class SuperSignupNormal: SuperModel {
+@objc(SuperSignupCancel)
+class SuperSignupCancel: SuperModel {
     @objc dynamic var id: Int = -1
     @objc dynamic var member_id: Int = -1
     @objc dynamic var signupable_id: Int = -1

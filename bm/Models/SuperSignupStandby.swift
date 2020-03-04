@@ -11,8 +11,8 @@ import Foundation
 class SuperSignupStandby: SuperModel {
     @objc dynamic var id: Int = -1
     @objc dynamic var member_id: Int = -1
-    @objc dynamic var signup_able_id: Int = -1
-    @objc dynamic var signup_able_type: String = ""
+    @objc dynamic var signupable_id: Int = -1
+    @objc dynamic var signupable_type: String = ""
     @objc dynamic var able_date_id: Int = -1
     @objc dynamic var cancel_deadline: String = ""
     @objc dynamic var token: String = ""

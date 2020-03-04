@@ -39,9 +39,9 @@ class CourseCalendarVC: ListVC {
     let session: UserDefaults = UserDefaults.standard
     var params1: [String: Any] = [String: Any]()
     
-    var year: Int = Date().getY()
-    var month: Int = Date().getm()
-    var monthLastDay: Int = 31
+    var y: Int = Date().getY()
+    var m: Int = Date().getm()
+    //var monthLastDay: Int = 31
     
     var thisYear: Int = Date().getY()
     var thisMonth: Int = Date().getm()
@@ -51,32 +51,35 @@ class CourseCalendarVC: ListVC {
     var course_gap: Int = 10
     
     var dateCourses: [[String: Any]] = [[String: Any]]()
+    
+    var calendarParams: [String: Any] = [String: Any]()
 
     override func viewDidLoad() {
         
         myTablView = tableView
-        dataService = CourseService.instance
+        dataService = MemberService.instance
         _type = "course"
         _titleField = "title"
         searchRows = _searchRows
-        Global.instance.setupTabbar(self)
+        //Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
         
+        calendarParams = makeCalendar(y, m)
         let cellNibName = UINib(nibName: "CalendarSignupCell", bundle: nil)
         myTablView.register(cellNibName, forCellReuseIdentifier: "calendar_signup_cell")
         //myTablView.rowHeight = UITableViewAutomaticDimension
         //myTablView.estimatedRowHeight = 400
         course_width = Int(view.frame.width - 24)
         
-        yearTxt.text = String(year)
+        yearTxt.text = String(y)
         let yearLap = UITapGestureRecognizer(target: self, action: #selector(yearPressed))
         yearView.addGestureRecognizer(yearLap)
         
         yearView.layer.borderWidth = 1.0
         yearView.layer.borderColor = UIColor.white.cgColor
         
-        monthTxt.text = String(month)
+        monthTxt.text = String(m)
         let monthLap = UITapGestureRecognizer(target: self, action: #selector(monthPressed))
         monthView.addGestureRecognizer(monthLap)
         
@@ -102,12 +105,12 @@ class CourseCalendarVC: ListVC {
     @objc func yearPressed() {
         //print("year")
         let dialog = SelectionDialog(title: "選擇年", closeButtonTitle: "關閉")
-        for i in year...year+5 {
+        for i in y...y+5 {
             dialog.addItem(item: String(i)) {
                 //print(i)
                 self.yearTxt.text = String(i)
-                self.year = i
-                self.month = Int(self.monthTxt.text!)!
+                self.y = i
+                self.m = Int(self.monthTxt.text!)!
                 dialog.close()
                 self.refresh()
             }
@@ -122,8 +125,8 @@ class CourseCalendarVC: ListVC {
             dialog.addItem(item: String(i)) {
                 //print(i)
                 self.monthTxt.text = String(i)
-                self.month = i
-                self.year = Int(self.yearTxt.text!)!
+                self.m = i
+                self.y = Int(self.yearTxt.text!)!
                 dialog.close()
                 self.refresh()
             }
@@ -132,26 +135,26 @@ class CourseCalendarVC: ListVC {
     }
     
     @objc func nextMonthPressed() {
-        month = month + 1
-        if month > 12 {
-            year = year + 1
-            month = 1
+        m = m + 1
+        if m > 12 {
+            y = y + 1
+            m = 1
         }
         refresh()
     }
     
     @objc func prevMonthPressed() {
-        month = month - 1
-        if month < 0 {
-            year = year - 1
-            month = 12
+        m = m - 1
+        if m < 0 {
+            y = y - 1
+            m = 12
         }
         refresh()
     }
     
     @objc func nowMonthPressed() {
-        year = thisYear
-        month = thisMonth
+        y = thisYear
+        m = thisMonth
         refresh()
     }
     
@@ -160,11 +163,11 @@ class CourseCalendarVC: ListVC {
         Global.instance.addSpinner(superView: self.view)
         
         params1.merge(["member_token": Member.instance.token])
-        params1.merge(["y": year])
-        params1.merge(["m": month])
-        monthLastDay = Global.instance.getMonthLastDay(year: year, month: month)
-        selectedYearTxt.text = String(year)
-        selectedMonthTxt.text = String(month)
+        params1.merge(["y": y])
+        params1.merge(["m": m])
+        //monthLastDay = Global.instance.getMonthLastDay(year: year, month: month)
+        selectedYearTxt.text = String(y)
+        selectedMonthTxt.text = String(m)
         dataService.calendar(t: SuperCourse.self, t1: SuperCourses.self, token: nil, _filter: params1) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
@@ -203,7 +206,8 @@ class CourseCalendarVC: ListVC {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if lists1.count > 0 {
-            return monthLastDay
+            let d: Int = calendarParams["monthLastDay"] as? Int ?? 0
+            return d
         } else {
             return 0
         }
@@ -260,32 +264,34 @@ class CourseCalendarVC: ListVC {
     
     func makeCourseArr() {
         dateCourses.removeAll()
-        for day in 1...monthLastDay {
-            var course: [String: Any] = [String: Any]()
-            let date: String = String(format: "%4d-%02d-%02d", year, month, day)
-            course["date"] = date
-            let d: Date = date.toDate()
-            let weekday_i: Int = d.dateToWeekday()
-            let weekday_c: String = d.dateToWeekdayForChinese()
-            course["weekday_i"] = weekday_i
-            course["weekday_c"] = weekday_c
-            
-            var rows: [SuperCourse] = [SuperCourse]()
-            for superModel in lists1 {
-                if let superCourse = superModel as? SuperCourse {
-                    //superCourse.printRow()
-                    for weekday in superCourse.weekday_arr {
-                        if weekday == weekday_i {
-                            rows.append(superCourse)
+        if let d: Int = calendarParams["monthLastDay"] as? Int {
+            for day in 1...d {
+                var course: [String: Any] = [String: Any]()
+                let date: String = String(format: "%4d-%02d-%02d", y, m, day)
+                course["date"] = date
+                let d: Date = date.toDate()
+                let weekday_i: Int = d.dateToWeekday()
+                let weekday_c: String = d.dateToWeekdayForChinese()
+                course["weekday_i"] = weekday_i
+                course["weekday_c"] = weekday_c
+                
+                var rows: [SuperCourse] = [SuperCourse]()
+                for superModel in lists1 {
+                    if let superCourse = superModel as? SuperCourse {
+                        //superCourse.printRow()
+                        for weekday in superCourse.weekday_arr {
+                            if weekday == weekday_i {
+                                rows.append(superCourse)
+                            }
                         }
                     }
                 }
+                course["rows"] = rows
+                
+                dateCourses.append(course)
             }
-            course["rows"] = rows
-            
-            dateCourses.append(course)
+            //print(dateCourses)
         }
-        //print(dateCourses)
     }
 
     @IBAction func manager(_ sender: Any) {

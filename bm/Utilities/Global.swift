@@ -805,6 +805,36 @@ extension Date {
         
         return res
     }
+    
+    func startOfMonth(_ _y: Int?=nil, _ _m: Int?=nil) -> Date {
+        let y = _y==nil ? Date().getY() : _y
+        let m = _m==nil ? Date().getm() : _m
+        let d = 1
+        return "\(y!)-\(m!)-\(d)".toDate()
+    }
+    
+    func endOfMonth(_ _y: Int?=nil, _ _m: Int?=nil)-> Date {
+        let y = _y==nil ? Date().getY() : _y
+        let m = _m==nil ? Date().getm() : _m
+        let date = Date().startOfMonth(y!, m!)
+        let components:NSDateComponents = Calendar.current.dateComponents([.year, .month], from: date) as NSDateComponents
+        //let y1 = components.year
+        //let m1 = components.month
+        
+        components.month += 1
+        components.day = 1
+        components.day -= 1
+        return Calendar.current.date(from: components as DateComponents)!
+    }
+    
+    func getMonthDays(_ _y: Int?=nil, _ _m: Int?=nil)-> Int {
+        let y = _y==nil ? Date().getY() : _y
+        let m = _m==nil ? Date().getm() : _m
+        
+        let date = endOfMonth(y!, m!)
+        
+        return date.getd()
+    }
 }
 
 extension CGRect {
@@ -1289,6 +1319,7 @@ extension UIImageView {
 protocol ArrayProtocol{}
 
 extension Array: ArrayProtocol {}
+
 
 
 

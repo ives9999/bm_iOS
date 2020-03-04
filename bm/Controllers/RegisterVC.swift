@@ -15,7 +15,7 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTxt: UITextField!
     @IBOutlet weak var rePasswordTxt: UITextField!
     
-    var menuVC: MenuVC? = nil
+    var sourceVC: MemberVC? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,7 +67,11 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
                         )
                         let alert = SCLAlertView(appearance: appearance)
                         alert.addButton("確定", action: {
-                            self.backToMenu()
+                            self.dismiss(animated: true, completion: {
+                                if self.sourceVC != nil {
+                                    self.sourceVC!._loginout()
+                                }
+                            })
                         })
                         alert.showSuccess("成功", subTitle: "註冊成功，請儘速通過email認證，才能使用更多功能！！")
                     } else {
@@ -91,7 +95,11 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
                     Global.instance.removeSpinner(superView: self.view)
                     if success1 {
                         if MemberService.instance.success {
-                            self.backToMenu()
+                            self.dismiss(animated: true, completion: {
+                                if self.sourceVC != nil {
+                                    self.sourceVC!._loginout()
+                                }
+                            })
                         } else {
                             //print("login failed by error email or password")
                             self.warning(MemberService.instance.msg)
@@ -117,11 +125,11 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func colseBtnPressed(_ sender: Any) {
-        self.backToMenu()
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_LOGIN, sender: menuVC)
+        performSegue(withIdentifier: TO_LOGIN, sender: nil)
     }
     
     @IBAction func passwordBtnPressed(_ sender: Any) {
@@ -133,18 +141,18 @@ class RegisterVC: BaseViewController, UITextFieldDelegate {
             let vc: PasswordVC = segue.destination as! PasswordVC
             vc.type = sender as! String
         } else if segue.identifier == TO_LOGIN {
-            let vc: LoginVC = segue.destination as! LoginVC
-            vc.menuVC = (sender as! MenuVC)
+            //let vc: LoginVC = segue.destination as! LoginVC
+            //vc.menuVC = (sender as! MenuVC)
         } else if segue.identifier == TO_REGISTER {
-            let vc: RegisterVC = segue.destination as! RegisterVC
-            vc.menuVC = (sender as! MenuVC)
+            //let vc: RegisterVC = segue.destination as! RegisterVC
+            //vc.menuVC = (sender as! MenuVC)
         }
     }
     
-    func backToMenu() {
-        if self.menuVC != nil {
-            self.menuVC!._loginout()
-        }
-        self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
-    }
+//    func backToMenu() {
+//        if self.menuVC != nil {
+//            self.menuVC!._loginout()
+//        }
+//        self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
+//    }
 }

@@ -199,6 +199,50 @@ class BaseViewController: UIViewController  {
             }
         }
     }
+    
+    func makeCalendar(_ _y:Int?, _ _m:Int?)->[String: Any] {
+        
+        let y: Int = (_y == nil) ? Date().getY() : _y!
+        let m: Int = (_m == nil) ? Date().getm() : _m!
+        var res: [String: Any] = [String: Any]()
+        //取得該月1號的星期幾，日曆才知道從星期幾開始顯示
+        let weekday01 = "\(y)-\(m)-01"
+        res["weekday01"] = weekday01
+        
+        var beginWeekday = weekday01.toDate().dateToWeekday()
+        beginWeekday = beginWeekday == 0 ? 7 : beginWeekday;
+        res["beginWeekday"] = beginWeekday
+
+        //取得該月最後一天的日期，30, 31或28，日曆才知道顯示到那一天
+        let monthLastDay = Date().getMonthDays(y, m)
+        res["monthLastDay"] = monthLastDay
+        let monthLastDay_add_begin = monthLastDay + beginWeekday - 1
+        res["monthLastDay_add_begin"] = monthLastDay_add_begin
+
+        //取得該月最後一天的星期幾，計算月曆有幾列需要用到的數字
+        let weekday31 = "\(y)-\(m)-\(monthLastDay)"
+        res["weekday31"] = weekday31
+        
+        let endWeekday = weekday31.toDate().dateToWeekday()
+        res["endWeekday"] = endWeekday
+
+        //算出共需幾個日曆的格子
+        let allMonthGrid = monthLastDay + (beginWeekday-1) + (7-endWeekday);
+        res["allMonthGrid"] = allMonthGrid
+
+        //算出月曆列數，日曆才知道顯示幾列
+        let monthRow = allMonthGrid/7
+        res["monthRow"] = monthRow
+
+        //建立下個月的連結
+        let next_month = m == 12 ? 1 : m+1
+        res["next_month"] = next_month
+        let next_year = m == 12 ? y+1 : y
+        res["next_year"] = next_year
+        
+        return res
+    }
+    
     func _updatePlayerIDWhenIsNull() {
         let token = Member.instance.token
         //print(token)
