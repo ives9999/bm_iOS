@@ -57,7 +57,7 @@ class CourseCalendarVC: ListVC {
     override func viewDidLoad() {
         
         myTablView = tableView
-        dataService = MemberService.instance
+        //dataService = MemberService.instance
         _type = "course"
         _titleField = "title"
         searchRows = _searchRows

@@ -390,7 +390,7 @@ class MemberService {
         }
         let url: String = URL_MEMBER_SIGNUP_CALENDAR
         //print(url)
-        let body: [String: String] = ["y":(String)year,"m":(String)month,"member_token":member_token!,"source":source,"device": "app", "channel": "bm"]
+        //let body: [String: String] = ["y":(String)year,"m":(String)month,"member_token":member_token!,"source":source,"device": "app", "channel": "bm"]
     }
 }
 
