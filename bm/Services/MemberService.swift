@@ -43,7 +43,6 @@ class MemberService {
                     if json["msg"].exists() {
                         self.msg = json["msg"].stringValue
                     }
-                    Member.instance.isLoggedIn = true
                     NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
                 } else {
                     Member.instance.isLoggedIn = false
@@ -76,7 +75,6 @@ class MemberService {
                 //print(self.success)
                 if self.success {
                     self.jsonToMember(json: json)
-                    Member.instance.isLoggedIn = true
                     NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
                 } else {
                     Member.instance.isLoggedIn = false
