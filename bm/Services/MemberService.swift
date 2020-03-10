@@ -384,13 +384,48 @@ class MemberService {
         }
     }
     
-    func memberSignupCalendar(year: Int, month: Int, member_token: String? = nil, source: String = "course", completion: @escaping CompletionHandler) {
+    func memberSignupCalendar(year: Int, month: Int, member_token: String? = nil, source: String = "course", completion: @escaping CompletionHandler)-> (success: Bool, msg: String) {
+        var res = true
         if member_token == nil {
-            
+            res = false
+            return (res, "沒有傳輸會員碼錯誤，請洽管理員")
         }
         let url: String = URL_MEMBER_SIGNUP_CALENDAR
         //print(url)
-        //let body: [String: String] = ["y":(String)year,"m":(String)month,"member_token":member_token!,"source":source,"device": "app", "channel": "bm"]
+        let body: [String: String] = ["y":String(year),"m":String(month),"member_token":member_token!,"source":source,"device": "app", "channel": "bm"]
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            
+            if response.result.error == nil {
+                guard let data = response.result.value else {
+                    //print("get response result value error")
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                    return
+                }
+                let json = JSON(data)
+                //print(json["able"])
+                if json["able"].exists() {
+                    self.able = self.parseAbleForSingupList(data: json["able"])
+                    //print(able.printRow())
+                }
+                
+                let s: SuperSignups = JSONParse.parse(data: json)
+                self.superModel = s
+                
+                let rows: [SuperSignup] = s.getRows() ?? [SuperSignup]()
+                for row in rows {
+                    row.filterRow()
+                    //row.printRow()
+                }
+                completion(true)
+            } else {
+                self.msg = "網路錯誤，請稍後再試"
+                completion(false)
+                debugPrint(response.result.error as Any)
+            }
+        }
+        
+        return (res, "")
     }
 }
 

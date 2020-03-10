@@ -168,14 +168,17 @@ class CourseCalendarVC: ListVC {
         //monthLastDay = Global.instance.getMonthLastDay(year: year, month: month)
         selectedYearTxt.text = String(y)
         selectedMonthTxt.text = String(m)
-        dataService.calendar(t: SuperCourse.self, t1: SuperCourses.self, token: nil, _filter: params1) { (success) in
+        let res = MemberService.instance.memberSignupCalendar(year: y, month: m) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
-                Global.instance.removeSpinner(superView: self.view)
             } else {
-                Global.instance.removeSpinner(superView: self.view)
                 self.warning(self.dataService.msg)
             }
+            Global.instance.removeSpinner(superView: self.view)
+        }
+        if !res.success {
+            Global.instance.removeSpinner(superView: self.view)
+            warning(res.msg)
         }
     }
     
