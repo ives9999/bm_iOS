@@ -11,11 +11,11 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-class MemberService {
+class MemberService: DataService {
     static let instance = MemberService()
     
-    var msg:String = ""
-    var success: Bool = false
+    //var msg:String = ""
+    //var success: Bool = false
     var one: JSON? = nil
     var blacklists: Array<Dictionary<String, Any>> = Array()
     
@@ -404,10 +404,10 @@ class MemberService {
                 }
                 let json = JSON(data)
                 //print(json["able"])
-                if json["able"].exists() {
-                    self.able = self.parseAbleForSingupList(data: json["able"])
-                    //print(able.printRow())
-                }
+//                if json["able"].exists() {
+//                    self.able = self.parseAbleForSingupList(data: json["able"])
+//                    //print(able.printRow())
+//                }
                 
                 let s: SuperSignups = JSONParse.parse(data: json)
                 self.superModel = s
