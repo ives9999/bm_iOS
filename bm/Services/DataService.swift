@@ -85,7 +85,7 @@ class DataService {
         if (token != nil) {
             url = url + "/" + token!
         }
-        print(url)
+        //print(url)
                 
         Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
@@ -97,7 +97,7 @@ class DataService {
                     return
                 }
                 let json = JSON(data)
-                print(json)
+                //print(json)
                 let s: T1 = JSONParse.parse(data: json)
                 //print(type(of: s))
                 //self.superModel.printRows()

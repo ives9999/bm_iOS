@@ -51,7 +51,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }()
     var contentViewConstraintHeight: NSLayoutConstraint?
     
-    let tableRowKeys:[String] = ["weekday_text","interval","date","price_text_long","people_limit_text","kind_text","pv","created_at_text"]
+    var tableRowKeys:[String] = ["weekday_text","interval","date","price_text_long","people_limit_text","kind_text","pv","created_at_text"]
     var tableRows: [String: [String:String]] = [
         "weekday_text":["icon":"calendar","title":"星期","content":""],
         "interval":["icon":"clock","title":"時段","content":""],
@@ -226,8 +226,13 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         
-        let date = superCourse!.start_date + " ~ " + superCourse!.end_date
-        tableRows["date"]!["content"] = date
+        if !superCourse!.start_date.isEmpty {
+            let date = superCourse!.start_date + " ~ " + superCourse!.end_date
+            tableRows["date"]!["content"] = date
+        } else {
+            tableRows.removeValue(forKey: "date");
+            tableRowKeys = tableRowKeys.filter{$0 != "date"}
+        }
         let interval = superCourse!.start_time_text + " ~ " + superCourse!.end_time_text
         tableRows["interval"]!["content"] = interval
         
@@ -269,7 +274,6 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         //print(self.coachTableRows)
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
