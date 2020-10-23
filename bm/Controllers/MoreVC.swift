@@ -14,7 +14,8 @@ class MoreVC: MyTableVC {
         [
             ["text": "教練", "icon": "coach", "segue": TO_COACH],
             ["text": "球館", "icon": "arena", "segue": TO_ARENA],
-            ["text": "教學", "icon": "coach", "segue": TO_COURSE],
+            ["text": "教學", "icon": "course", "segue": TO_COURSE],
+            ["text": "體育用品店", "icon": "store", "segue": TO_STORE],
             ["text": "推播訊息", "icon": "bell", "segue": TO_PN],
             ["text": "版本", "icon": "version", "segue": ""]
         ]

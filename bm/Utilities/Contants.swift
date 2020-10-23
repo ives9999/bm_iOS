@@ -19,8 +19,8 @@ let CHANNEL = "bm"
 let REMOTE_BASE_URL = "http://192.168.100.120"
 //let REMOTE_BASE_URL = "http://192.168.100.150"
 //let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
-//let LOCALHOST_BASE_URL = "http://192.168.100.150"
-let LOCALHOST_BASE_URL = "http://192.168.100.120"
+let LOCALHOST_BASE_URL = "http://192.168.100.150"
+//let LOCALHOST_BASE_URL = "http://192.168.100.120"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 
 
@@ -131,6 +131,7 @@ let TO_SHOW_COURSE: String = "toShowCourse"
 let TO_SHOW_TIMETABLE: String = "toShowTimeTable"
 let TO_SIGNUP_LIST: String = "toSignupList"
 let TO_SINGLE_SELECT: String = "toSingleSelect"
+let TO_STORE: String = "toStore"
 let TO_TEAM_TEMP_PLAY: String = "toTeamTempPlay"//臨打編輯
 let TO_TEMP_PLAY_DATE: String = "toTempPlayDate"
 let TO_TEMP_PLAY_DATE_PLAYER: String = "toTempPlayDatePlayer"

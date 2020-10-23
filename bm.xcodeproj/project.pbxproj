@@ -106,6 +106,7 @@
 		B36D66BD229A585700502D62 /* SuperCourse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36D66BC229A585700502D62 /* SuperCourse.swift */; };
 		B36D66C0229A828A00502D62 /* ManagerCourseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36D66BE229A828A00502D62 /* ManagerCourseCell.swift */; };
 		B36D66C1229A828A00502D62 /* ManagerCourseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B36D66BF229A828A00502D62 /* ManagerCourseCell.xib */; };
+		B36E333A2542B996001336C2 /* StoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E33392542B996001336C2 /* StoreVC.swift */; };
 		B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */; };
 		B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375105A1FA96C0500CDF1A0 /* Member.swift */; };
 		B3756EDA21B8E50E006893E1 /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3756ED821B8E50E006893E1 /* WeekdayCell.swift */; };
@@ -383,6 +384,7 @@
 		B36D66BC229A585700502D62 /* SuperCourse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperCourse.swift; sourceTree = "<group>"; };
 		B36D66BE229A828A00502D62 /* ManagerCourseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerCourseCell.swift; sourceTree = "<group>"; };
 		B36D66BF229A828A00502D62 /* ManagerCourseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagerCourseCell.xib; sourceTree = "<group>"; };
+		B36E33392542B996001336C2 /* StoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreVC.swift; sourceTree = "<group>"; };
 		B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		B375105A1FA96C0500CDF1A0 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		B3756ED821B8E50E006893E1 /* WeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
@@ -965,6 +967,7 @@
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B3485C9623F841BE0078265D /* MemberVC.swift */,
+				B36E33392542B996001336C2 /* StoreVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1312,6 +1315,7 @@
 				B317855920D60EE200765CA1 /* BlackListVC.swift in Sources */,
 				B337B9A61FE039ED00C3EE28 /* TempPlaySignupCell.swift in Sources */,
 				B36CBD5320DE00FE00E52B9C /* TempPlayDatePlayer.swift in Sources */,
+				B36E333A2542B996001336C2 /* StoreVC.swift in Sources */,
 				F94FF4351FB4322C00D167B6 /* EditVC.swift in Sources */,
 				B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */,
 				B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */,
