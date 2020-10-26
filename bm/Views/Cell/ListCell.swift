@@ -77,6 +77,27 @@ class ListCell: SuperCell {
         accessoryType = UITableViewCellAccessoryType.disclosureIndicator
     }
     
+    func updateStoreViews(indexPath: IndexPath, data: SuperStore) {
+        listTitleTxt.text = data.name
+        if data.featured_path.count > 0 {
+            //print(data.featured_path)
+            listFeatured.downloaded(from: data.featured_path)
+        }
+        
+        listCityBtn.setTextSize(14)
+        listCityBtn.alignH = UIControlContentHorizontalAlignment.center
+        
+        listCityBtn.setTitle(data.city)
+        listArenaTxt.text = data.address
+        listDayTxt.text = data.tel_text
+        listIntervalTxt.text = data.open_time_text + "~" + data.close_time_text
+        
+        listBallTxt.isHidden = true
+        listMarker.isHidden = true
+        
+        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+    }
+    
     func updateTeam(indexPath: IndexPath, data: SuperData) {
         if let item = data.data[CITY_KEY] {
             listCityBtn.setTitle(emptyToSpace(item["show"] as! String))

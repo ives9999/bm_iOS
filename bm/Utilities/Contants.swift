@@ -19,8 +19,8 @@ let CHANNEL = "bm"
 let REMOTE_BASE_URL = "http://192.168.100.120"
 //let REMOTE_BASE_URL = "http://192.168.100.150"
 //let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
-let LOCALHOST_BASE_URL = "http://192.168.100.150"
-//let LOCALHOST_BASE_URL = "http://192.168.100.120"
+//let LOCALHOST_BASE_URL = "http://192.168.100.150"
+let LOCALHOST_BASE_URL = "http://192.168.100.120"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 
 
@@ -55,6 +55,7 @@ let URL_SEND_MOBILE_VALIDATE = URL_HOME + "member/sendMobileValidate"
 let URL_SIGNUP = "\(URL_HOME)%@/signup/%@"
 let URL_SIGNUP_DATE = "\(URL_HOME)%@/signup_date/%@"
 let URL_SIGNUP_LIST = "\(URL_HOME)%@/signup_list"
+let URL_STORE_LIST = "\(URL_HOME)store/list"
 let URL_TT = "\(URL_HOME)%@/tt"
 let URL_TEAM = URL_HOME + "team/"
 let URL_TEAM_CANCELPLUSONE = BASE_URL + "/team/tempPlay/cancelPlusOne/"
