@@ -111,4 +111,20 @@ class StoreVC: ListVC {
         
         return UITableViewCell()
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if tableView == self.tableView {
+            if superStores != nil {
+                let superStore = superStores!.rows[indexPath.row]
+                performSegue(withIdentifier: TO_SHOW_STORE, sender: superStore)
+            }
+            
+        } else if tableView == searchTableView {
+            let row = searchRows[indexPath.row]
+            let segue: String = row["segue"] as! String
+            performSegue(withIdentifier: segue, sender: indexPath)
+        }
+    }
+    
 }
