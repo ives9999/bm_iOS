@@ -127,4 +127,11 @@ class StoreVC: ListVC {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let showVC: ShowStoreVC = segue.destination as? ShowStoreVC {
+            assert(sender as? SuperStore != nil)
+            let superStore: SuperStore = sender as! SuperStore
+            showVC.superStore = superStore
+        }
+    }
 }

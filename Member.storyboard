@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -25,7 +26,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="帳戶" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aDa-pS-uaC">
                                         <rect key="frame" x="168" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HC7-tj-QLo">
@@ -80,6 +81,7 @@
                                 <sections/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="6fI-OA-fdN"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="X2C-Oo-LrJ" firstAttribute="top" secondItem="6fI-OA-fdN" secondAttribute="top" id="2TX-oJ-ozj"/>
@@ -100,7 +102,6 @@
                             <constraint firstItem="X2C-Oo-LrJ" firstAttribute="leading" secondItem="6fI-OA-fdN" secondAttribute="leading" id="mtr-TB-vfu"/>
                             <constraint firstItem="fng-6i-HQU" firstAttribute="top" secondItem="6fI-OA-fdN" secondAttribute="top" id="xCv-d1-kVI"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="6fI-OA-fdN"/>
                     </view>
                     <navigationItem key="navigationItem" id="xp1-mx-Nb3"/>
                     <size key="freeformSize" width="375" height="667"/>
@@ -129,7 +130,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CnJ-ot-fB4">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HXp-0X-pLg">
@@ -161,6 +162,7 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="744"/>
                             </imageView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="lC2-wD-zU1"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="B46-d8-Ieo" firstAttribute="leading" secondItem="lC2-wD-zU1" secondAttribute="leading" id="49f-1u-1u7"/>
@@ -171,7 +173,6 @@
                             <constraint firstItem="w3B-k1-HRb" firstAttribute="top" secondItem="B46-d8-Ieo" secondAttribute="bottom" id="qj3-Od-vm5"/>
                             <constraint firstItem="w3B-k1-HRb" firstAttribute="leading" secondItem="lC2-wD-zU1" secondAttribute="leading" id="wHn-7f-hKH"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="lC2-wD-zU1"/>
                     </view>
                     <navigationItem key="navigationItem" id="ov4-1I-w7A"/>
                     <connections>
@@ -200,7 +201,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登入" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CP0-Qd-R4O">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lND-d7-C7w">
@@ -318,7 +319,7 @@
                                     <action selector="loginFBBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="XmO-N3-wpL"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqL-EE-CA1">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqL-EE-CA1">
                                 <rect key="frame" x="88.5" y="563" width="77" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="忘記密碼">
@@ -328,7 +329,7 @@
                                     <action selector="passwordBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="Jjo-KT-JkU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NML-Ap-Iec">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NML-Ap-Iec">
                                 <rect key="frame" x="286.5" y="563" width="39" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="註冊">
@@ -339,6 +340,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="DTV-Ir-EvU"/>
                         <constraints>
                             <constraint firstItem="69n-Va-wxY" firstAttribute="centerY" secondItem="oWN-d9-N6B" secondAttribute="centerY" id="0Ds-ts-vDO"/>
                             <constraint firstItem="NML-Ap-Iec" firstAttribute="trailing" secondItem="X6G-TE-7Wb" secondAttribute="trailing" constant="-10" id="30q-eb-wBV"/>
@@ -368,7 +370,6 @@
                             <constraint firstItem="NML-Ap-Iec" firstAttribute="top" secondItem="X6G-TE-7Wb" secondAttribute="bottom" constant="50" id="xo6-XK-qR2"/>
                             <constraint firstItem="Pr6-jP-ohX" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="zeQ-9d-GTF"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="DTV-Ir-EvU"/>
                     </view>
                     <connections>
                         <outlet property="emailTxt" destination="0yo-nU-T3O" id="5e9-5s-b01"/>
@@ -397,7 +398,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="認證" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwD-jK-3i4">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHD-sb-64G">
@@ -500,6 +501,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="CAM-UA-l1o"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="WhY-Z2-MHj" firstAttribute="centerX" secondItem="FtC-eI-1dW" secondAttribute="centerX" id="3oW-lf-90l"/>
@@ -523,7 +525,6 @@
                             <constraint firstItem="hWd-K2-nZw" firstAttribute="leading" secondItem="CAM-UA-l1o" secondAttribute="leading" id="tVh-iq-bLe"/>
                             <constraint firstItem="CAM-UA-l1o" firstAttribute="bottom" secondItem="jP9-H9-e3C" secondAttribute="bottom" id="wCt-Bl-Gto"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="CAM-UA-l1o"/>
                     </view>
                     <navigationItem key="navigationItem" id="Hcx-PF-EZs"/>
                     <connections>
@@ -554,7 +555,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="註冊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Noq-kD-CRS">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JxC-i3-mdH">
@@ -698,7 +699,7 @@
                                     <action selector="registerFBBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="Mhn-4H-mJd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPP-sR-GNI">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPP-sR-GNI">
                                 <rect key="frame" x="88.5" y="581" width="77" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="忘記密碼">
@@ -708,7 +709,7 @@
                                     <action selector="passwordBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="Is3-gZ-qrh"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mv5-gx-gSn">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mv5-gx-gSn">
                                 <rect key="frame" x="296.5" y="581" width="39" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="登入">
@@ -720,6 +721,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="XZa-GS-Ac3"/>
                         <constraints>
                             <constraint firstItem="XZa-GS-Ac3" firstAttribute="trailing" secondItem="TpW-KC-cbZ" secondAttribute="trailing" id="4Ti-Yh-mXB"/>
                             <constraint firstItem="i9g-Ng-Hn4" firstAttribute="centerX" secondItem="Jkr-bY-LcT" secondAttribute="centerX" id="5Lt-vm-vdL"/>
@@ -751,7 +753,6 @@
                             <constraint firstItem="1e9-BV-qGW" firstAttribute="top" secondItem="zIG-Ko-hbj" secondAttribute="bottom" constant="60" id="ykU-Ye-XEz"/>
                             <constraint firstItem="Gyb-GY-JaR" firstAttribute="centerY" secondItem="i9g-Ng-Hn4" secondAttribute="centerY" id="zBs-KG-kRi"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="XZa-GS-Ac3"/>
                     </view>
                     <connections>
                         <outlet property="emailTxt" destination="Gyb-GY-JaR" id="ocE-dU-VkN"/>
@@ -781,7 +782,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘記密碼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11X-Jp-huJ">
                                         <rect key="frame" x="168.5" y="18.5" width="77" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9XQ-tK-w3c">
@@ -820,6 +821,7 @@
                                 </constraints>
                             </imageView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="YXC-Ew-abc"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YXC-Ew-abc" firstAttribute="trailing" secondItem="5FF-VX-gI0" secondAttribute="trailing" id="2v1-Jl-mQS"/>
@@ -832,7 +834,6 @@
                             <constraint firstItem="DK7-8i-GZa" firstAttribute="leading" secondItem="YXC-Ew-abc" secondAttribute="leading" id="mI0-n2-FPN"/>
                             <constraint firstItem="YXC-Ew-abc" firstAttribute="trailing" secondItem="DK7-8i-GZa" secondAttribute="trailing" id="tqX-dO-bqY"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="YXC-Ew-abc"/>
                     </view>
                     <connections>
                         <outlet property="bkView" destination="DK7-8i-GZa" id="6GV-2H-f5r"/>
@@ -858,7 +859,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="會員" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnK-P8-m6G">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -918,7 +919,7 @@
                                                             <constraint firstAttribute="height" constant="25" id="bd5-89-umY"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mc0-Id-FyL">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mc0-Id-FyL">
                                                         <rect key="frame" x="31" y="0.0" width="39" height="25"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                                         <state key="normal" title="登入">
@@ -944,7 +945,7 @@
                                                             <constraint firstAttribute="width" constant="25" id="Vci-UR-1Gg"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qbu-I3-Mbg">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qbu-I3-Mbg">
                                                         <rect key="frame" x="31" y="0.0" width="77" height="25"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                                         <state key="normal" title="忘記密碼">
@@ -970,7 +971,7 @@
                                                             <constraint firstAttribute="height" constant="25" id="Im6-Jo-4up"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bzs-pN-MgL">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bzs-pN-MgL">
                                                         <rect key="frame" x="31" y="0.0" width="39" height="25"/>
                                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                                         <state key="normal" title="註冊">
@@ -997,7 +998,8 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="ef6-8n-Fg2"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="qop-cY-EqR" firstAttribute="leading" secondItem="ef6-8n-Fg2" secondAttribute="leading" id="0Vz-PX-Er9"/>
                             <constraint firstItem="PAr-Af-9Fe" firstAttribute="top" secondItem="wjB-Rp-kZH" secondAttribute="bottom" id="1Mw-Oo-d02"/>
@@ -1018,7 +1020,6 @@
                             <constraint firstItem="wjB-Rp-kZH" firstAttribute="top" secondItem="ef6-8n-Fg2" secondAttribute="top" id="tzf-2t-tUg"/>
                             <constraint firstItem="qop-cY-EqR" firstAttribute="top" secondItem="RhS-Df-H8i" secondAttribute="bottom" id="vA5-nY-Ftl"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="ef6-8n-Fg2"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="會員" image="member" id="p65-Zk-2yj"/>
                     <navigationItem key="navigationItem" id="Qdh-tv-BEY"/>
@@ -1051,7 +1052,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="報名列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2X-RC-B7U">
                                         <rect key="frame" x="169" y="19" width="76.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1103,7 +1104,7 @@
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H6b-W2-XPh">
                                                 <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="100" id="1Pa-pw-BaH"/>
                                                     <constraint firstAttribute="height" constant="40" id="Rvn-8P-DqL"/>
@@ -1121,7 +1122,7 @@
                                             </label>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gnh-Tq-kUa">
                                                 <rect key="frame" x="151.5" y="0.0" width="60" height="40"/>
-                                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="APj-Qe-1D0"/>
                                                     <constraint firstAttribute="width" constant="60" id="Lkv-mb-ow1"/>
@@ -1157,7 +1158,7 @@
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MAu-yj-ERJ">
                                 <rect key="frame" x="0.0" y="200" width="414" height="608"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CalendarSignupCell" rowHeight="83" id="o8d-1o-xNl">
                                         <rect key="frame" x="0.0" y="28" width="414" height="83"/>
@@ -1170,7 +1171,8 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="55C-ub-g0K"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="jxR-Fz-NbE" firstAttribute="top" secondItem="F0k-9h-EAM" secondAttribute="bottom" id="3BA-5W-hUE"/>
                             <constraint firstItem="eWb-fQ-2hb" firstAttribute="leading" secondItem="55C-ub-g0K" secondAttribute="leading" id="6z4-mN-iJh"/>
@@ -1187,7 +1189,6 @@
                             <constraint firstItem="F0k-9h-EAM" firstAttribute="leading" secondItem="Pnp-XL-p50" secondAttribute="leading" id="yyv-I3-2T0"/>
                             <constraint firstItem="MAu-yj-ERJ" firstAttribute="leading" secondItem="55C-ub-g0K" secondAttribute="leading" id="yzs-Jk-6wz"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="55C-ub-g0K"/>
                     </view>
                     <navigationItem key="navigationItem" id="l3u-bQ-p0d"/>
                     <connections>
@@ -1216,7 +1217,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zu-d3-D1F">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G8W-zv-hbe">
@@ -1270,13 +1271,13 @@
                                         <rect key="frame" x="12" y="12" width="102" height="40"/>
                                         <subviews>
                                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2014" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mio-Ff-8kF">
-                                                <rect key="frame" x="12" y="5.5" width="54.5" height="29"/>
+                                                <rect key="frame" x="12" y="5.5" width="54" height="29"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="24"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="down" translatesAutoresizingMaskIntoConstraints="NO" id="arQ-7o-Pg7">
-                                                <rect key="frame" x="74.5" y="12" width="16" height="16"/>
+                                                <rect key="frame" x="74" y="12" width="16" height="16"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="16" id="68w-Ca-BPf"/>
                                                     <constraint firstAttribute="height" constant="16" id="gnc-0F-Jeo"/>
@@ -1436,10 +1437,11 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yr9-Jw-YwC">
                                 <rect key="frame" x="0.0" y="264" width="414" height="598"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="sectionIndexBackgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="sectionIndexBackgroundColor" systemColor="systemRedColor"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="3I5-zS-K1s"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="AjQ-4h-dXN" firstAttribute="leading" secondItem="3I5-zS-K1s" secondAttribute="leading" id="0aX-08-tjc"/>
                             <constraint firstItem="3I5-zS-K1s" firstAttribute="trailing" secondItem="AjQ-4h-dXN" secondAttribute="trailing" id="4Hl-2B-cUK"/>
@@ -1456,7 +1458,6 @@
                             <constraint firstItem="3I5-zS-K1s" firstAttribute="trailing" secondItem="yr9-Jw-YwC" secondAttribute="trailing" id="rLo-Zz-mAb"/>
                             <constraint firstItem="3Jo-PK-ITV" firstAttribute="leading" secondItem="0DQ-tt-7Wk" secondAttribute="leading" id="s5J-ln-XTz"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="3I5-zS-K1s"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="課程" image="course" id="O7v-M6-EmU"/>
                     <navigationItem key="navigationItem" id="luB-6X-FRL"/>
@@ -1481,6 +1482,26 @@
             <point key="canvasLocation" x="-1368" y="-786"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="E7S-un-c1g">
+            <size key="intrinsicContentSize" width="39" height="39"/>
+        </designable>
+        <designable name="Pr6-jP-ohX">
+            <size key="intrinsicContentSize" width="39" height="39"/>
+        </designable>
+        <designable name="WhY-Z2-MHj">
+            <size key="intrinsicContentSize" width="134" height="39"/>
+        </designable>
+        <designable name="fDf-E9-mCZ">
+            <size key="intrinsicContentSize" width="40" height="34"/>
+        </designable>
+        <designable name="vic-zn-4Mh">
+            <size key="intrinsicContentSize" width="40" height="34"/>
+        </designable>
+        <designable name="ySD-eX-vph">
+            <size key="intrinsicContentSize" width="39" height="39"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="ViB-98-skP"/>
         <segue reference="ous-Dp-pXL"/>
@@ -1503,5 +1524,41 @@
         <image name="prev" width="20.5" height="20.5"/>
         <image name="register" width="16" height="16"/>
         <image name="search" width="25" height="25"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
