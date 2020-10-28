@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -374,6 +374,9 @@
                                             <constraint firstAttribute="height" constant="26" id="S3j-os-MyG"/>
                                         </constraints>
                                         <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="MM3-rH-prO" eventType="touchUpInside" id="elJ-sC-fPu"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="體育用品店" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jtU-3j-IVt">
                                         <rect key="frame" x="159.5" y="19" width="95.5" height="26.5"/>
@@ -399,13 +402,25 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kem-El-iLq">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="744"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dhX-s3-hn7">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="583"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nophoto" translatesAutoresizingMaskIntoConstraints="NO" id="Kzl-dl-Q1D">
+                                                <rect key="frame" x="8" y="8" width="398" height="180"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="180" id="1eB-4H-ouw"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="180" id="mh0-ri-f4t"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="583" id="7Fb-gK-YiP"/>
+                                            <constraint firstItem="Kzl-dl-Q1D" firstAttribute="leading" secondItem="dhX-s3-hn7" secondAttribute="leading" constant="8" id="ELj-06-Bi0"/>
+                                            <constraint firstItem="Kzl-dl-Q1D" firstAttribute="top" secondItem="dhX-s3-hn7" secondAttribute="top" constant="8" id="JoM-nT-5yI"/>
+                                            <constraint firstAttribute="trailing" secondItem="Kzl-dl-Q1D" secondAttribute="trailing" constant="8" id="Kb5-C3-NHi"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -417,8 +432,6 @@
                                     <constraint firstAttribute="bottom" secondItem="dhX-s3-hn7" secondAttribute="bottom" id="yXU-50-Uaa"/>
                                     <constraint firstAttribute="trailing" secondItem="dhX-s3-hn7" secondAttribute="trailing" id="zxm-JI-CBS"/>
                                 </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="myx-aj-68L"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="ILF-s4-Sva"/>
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="KK4-Sj-BQs"/>
@@ -429,12 +442,13 @@
                             <constraint firstItem="Kem-El-iLq" firstAttribute="leading" secondItem="KK4-Sj-BQs" secondAttribute="leading" id="SOs-DX-6ag"/>
                             <constraint firstItem="73p-Y4-f9z" firstAttribute="leading" secondItem="KK4-Sj-BQs" secondAttribute="leading" id="Yeh-5E-D7C"/>
                             <constraint firstItem="KK4-Sj-BQs" firstAttribute="trailing" secondItem="Kem-El-iLq" secondAttribute="trailing" id="a8e-Vc-gQP"/>
-                            <constraint firstItem="Kem-El-iLq" firstAttribute="top" secondItem="KK4-Sj-BQs" secondAttribute="top" id="kly-hw-cWW"/>
+                            <constraint firstItem="Kem-El-iLq" firstAttribute="top" secondItem="73p-Y4-f9z" secondAttribute="bottom" id="kly-hw-cWW"/>
                             <constraint firstItem="KK4-Sj-BQs" firstAttribute="bottom" secondItem="Kem-El-iLq" secondAttribute="bottom" id="vsg-V5-Ho4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="hww-Mj-9fe"/>
                     <connections>
+                        <outlet property="featured" destination="Kzl-dl-Q1D" id="rV1-SB-rNK"/>
                         <outlet property="scrollContainerView" destination="dhX-s3-hn7" id="Zbn-Xp-h5v"/>
                         <outlet property="scrollView" destination="Kem-El-iLq" id="9ii-WU-Rew"/>
                     </connections>
@@ -680,6 +694,7 @@
         <image name="coach" width="25" height="25"/>
         <image name="gear" width="25" height="25"/>
         <image name="more" width="25" height="25"/>
+        <image name="nophoto" width="900" height="514"/>
         <image name="prev" width="20.5" height="20.5"/>
         <image name="search" width="25" height="25"/>
         <systemColor name="darkTextColor">
