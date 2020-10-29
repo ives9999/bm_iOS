@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import WebKit
 
-class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContainerView: UIView!
@@ -22,6 +23,19 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     @IBOutlet weak var tableViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
+    
+    var contentView: WKWebView? = {
+        
+        //Create configuration
+        let configuration = WKWebViewConfiguration()
+        //configuration.userContentController = controller
+        
+        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        webView.backgroundColor = UIColor.clear
+        webView.scrollView.isScrollEnabled = false
+        return webView
+    }()
+    var contentViewConstraintHeight: NSLayoutConstraint?
     
     var superStore: SuperStore?
     
@@ -50,7 +64,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
 
         initTableView()
-//        initContentView()
+        initContentView()
         
         beginRefresh()
         scrollView.addSubview(refreshControl)
@@ -61,10 +75,12 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func viewWillLayoutSubviews() {
         storeDataLbl.text = "體育用品店資料"
-        //contentLbl.text = "詳細介紹"
+        contentLbl.text = "詳細介紹"
         
-        //contentLbl.textColor = UIColor(MY_RED)
-        //contentLbl.textAlignment = .left
+        storeDataLbl.textColor = UIColor(MY_RED)
+        storeDataLbl.textAlignment = .left
+        contentLbl.textColor = UIColor(MY_RED)
+        contentLbl.textAlignment = .left
     }
     
     func initTableView() {
@@ -74,6 +90,21 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 600
         tableViewConstraintHeight.constant = 1000
+    }
+    
+    func initContentView() {
+        
+        scrollContainerView.addSubview(contentView!)
+        var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint
+        
+        c1 = NSLayoutConstraint(item: contentView!, attribute: .leading, relatedBy: .equal, toItem: contentView!.superview, attribute: .leading, multiplier: 1, constant: 8)
+        c2 = NSLayoutConstraint(item: contentView!, attribute: .top, relatedBy: .equal, toItem: contentLbl, attribute: .bottom, multiplier: 1, constant: 8)
+        c3 = NSLayoutConstraint(item: contentView!, attribute: .trailing, relatedBy: .equal, toItem: contentView!.superview, attribute: .trailing, multiplier: 1, constant: 8)
+        contentViewConstraintHeight = NSLayoutConstraint(item: contentView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+        contentView!.translatesAutoresizingMaskIntoConstraints = false
+        scrollContainerView.addConstraints([c1,c2,c3,contentViewConstraintHeight!])
+        contentView!.uiDelegate = self
+        contentView!.navigationDelegate = self
     }
     
     func setFeatured() {
@@ -107,9 +138,9 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 tableRowKeys = tableRowKeys.filter{$0 != "business_time"}
             }
             
-            //let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.superCourse!.content+"</body></html>"
+            let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.superStore!.content+"</body></html>"
             
-            //contentView!.loadHTMLString(content, baseURL: nil)
+            contentView!.loadHTMLString(content, baseURL: nil)
         }
     }
     
@@ -186,12 +217,12 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         let h1 = featured.bounds.size.height
         let h2 = storeDataLbl.bounds.size.height
         let h3 = tableViewConstraintHeight.constant
-//        let h6 = contentLbl.bounds.size.height
-//        let h7 = contentViewConstraintHeight!.constant
+        let h6 = contentLbl.bounds.size.height
+        let h7 = contentViewConstraintHeight!.constant
 
         //print(contentViewConstraintHeight)
         
-        let h: CGFloat = h1 + h2 + h3 + 300
+        let h: CGFloat = h1 + h2 + h3 + h6 + h7 + 300
         scrollView.contentSize = CGSize(width: view.frame.width, height: h)
         ContainerViewConstraintHeight.constant = h
         //print(h1)
