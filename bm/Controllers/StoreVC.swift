@@ -132,6 +132,7 @@ class StoreVC: ListVC {
             assert(sender as? SuperStore != nil)
             let superStore: SuperStore = sender as! SuperStore
             showVC.superStore = superStore
+            showVC.store_token = superStore.token
         }
     }
 }

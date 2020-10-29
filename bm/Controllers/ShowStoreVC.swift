@@ -38,14 +38,17 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     var contentViewConstraintHeight: NSLayoutConstraint?
     
     var superStore: SuperStore?
+    var store_token: String?
     
-    var tableRowKeys:[String] = ["tel_text","mobile_text","address","fb","line","business_time","pv","created_at_text"]
+    var tableRowKeys:[String] = ["tel_text","mobile_text","address","fb","line","website","email","business_time","pv","created_at_text"]
     var tableRows: [String: [String:String]] = [
         "tel_text":["icon":"tel","title":"市內電話","content":""],
         "mobile_text":["icon":"mobile","title":"行動電話","content":""],
         "address":["icon":"marker","title":"住址","content":""],
         "fb":["icon":"fb","title":"FB","content":""],
         "line":["icon":"line","title":"line","content":""],
+        "website":["icon":"website","title":"網站","content":""],
+        "email":["icon":"email1","title":"email","content":""],
         "business_time":["icon":"clock","title":"營業時間","content":""],
         "pv":["icon":"pv","title":"瀏覽數","content":""],
         "created_at_text":["icon":"calendar","title":"建立日期","content":""]
@@ -68,9 +71,9 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         
         beginRefresh()
         scrollView.addSubview(refreshControl)
-        self.setFeatured()
-        self.setMainData()
-        //refresh()
+        //self.setFeatured()
+        //self.setMainData()
+        refresh()
     }
     
     override func viewWillLayoutSubviews() {
@@ -105,6 +108,31 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         scrollContainerView.addConstraints([c1,c2,c3,contentViewConstraintHeight!])
         contentView!.uiDelegate = self
         contentView!.navigationDelegate = self
+    }
+    
+    override func refresh() {
+        if store_token != nil {
+            Global.instance.addSpinner(superView: view)
+            //print(Member.instance.token)
+            let params: [String: String] = ["token": store_token!, "member_token": Member.instance.token]
+            StoreService.instance.getOne(t: SuperStore.self, params: params) { (success) in
+                if (success) {
+                    let superModel: SuperModel = StoreService.instance.superModel
+                    self.superStore =
+                        (superModel as! SuperStore)
+                    
+                    if self.superStore != nil {
+                        self.setMainData()
+                        self.setFeatured()
+                        //self.fromNet = true
+                        
+                        self.tableView.reloadData()
+                    }
+                }
+                Global.instance.removeSpinner(superView: self.view)
+                self.endRefresh()
+            }
+        }
     }
     
     func setFeatured() {
@@ -195,6 +223,24 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             return cell
         } else {
             return UITableViewCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if tableView == self.tableView {
+            let key = tableRowKeys[indexPath.row]
+            if key == MOBILE_KEY {
+                superStore!.mobile.makeCall()
+            } else if key == LINE_KEY {
+                superStore!.line.line()
+            } else if key == FB_KEY {
+                superStore!.fb.fb()
+            } else if key == WEBSITE_KEY {
+                superStore!.website.website()
+            } else if key == EMAIL_KEY {
+                superStore!.email.email()
+            }
         }
     }
     

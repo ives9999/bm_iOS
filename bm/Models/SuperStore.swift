@@ -21,6 +21,7 @@ class SuperStore: SuperModel {
     @objc dynamic var fb: String = ""
     @objc dynamic var website: String = ""
     @objc dynamic var email: String = ""
+    @objc dynamic var line: String = ""
     
     @objc dynamic var open_time: String = ""
     @objc dynamic var close_time: String = ""

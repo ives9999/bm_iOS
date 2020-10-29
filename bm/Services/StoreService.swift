@@ -21,4 +21,8 @@ class StoreService: DataService {
     override func getListURL() -> String {
         return URL_STORE_LIST
     }
+    
+    override func getSource() -> String? {
+        return "store"
+    }
 }
