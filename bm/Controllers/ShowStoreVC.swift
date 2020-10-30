@@ -54,7 +54,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         "created_at_text":["icon":"calendar","title":"建立日期","content":""]
     ]
     
-    //var fromNet: Bool = false
+    var fromNet: Bool = false
     var cellHeight: CGFloat = 40
     
     override func viewDidLoad() {
@@ -71,8 +71,6 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         
         beginRefresh()
         scrollView.addSubview(refreshControl)
-        //self.setFeatured()
-        //self.setMainData()
         refresh()
     }
     
@@ -124,7 +122,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                     if self.superStore != nil {
                         self.setMainData()
                         self.setFeatured()
-                        //self.fromNet = true
+                        self.fromNet = true
                         
                         self.tableView.reloadData()
                     }
@@ -173,7 +171,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView {
+        if fromNet {
             return tableRowKeys.count
         } else {
             return 0
@@ -188,10 +186,12 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 let row = tableRows[key]!
                 let content = row["content"] ?? ""
                 _caculateCellHeight(content)
+                print("\(key):\(content.count):\(cellHeight)")
             }
         }
         
-        return cellHeight
+        return 120
+        //return cellHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -249,7 +249,6 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         let limit: Int = 18
         let n: CGFloat = CGFloat((content.count / limit) + 1)
         cellHeight = base * n
-        //print("\(title):\(content.count):\(contentHeight.constant)")
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
