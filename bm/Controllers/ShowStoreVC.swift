@@ -190,8 +190,8 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             }
         }
         
-        return 120
-        //return cellHeight
+        //return 120
+        return cellHeight
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

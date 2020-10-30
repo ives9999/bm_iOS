@@ -25,6 +25,8 @@ class OneLineCell: SuperCell {
         titleLbl.lineBreakMode = .byWordWrapping
         contentLbl.lineBreakMode = .byWordWrapping
         contentLbl.setTextColor(UIColor("#aaaaaa"))
+        titleLbl.sizeToFit()
+        //backgroundColor = UIColor.orange
         
 //        layer.masksToBounds = true
 //        layer.cornerRadius = 5
