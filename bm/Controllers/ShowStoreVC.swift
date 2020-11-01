@@ -55,7 +55,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     ]
     
     var fromNet: Bool = false
-    var cellHeight: CGFloat = 40
+    //var cellHeight: CGFloat = 40
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +65,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
-
+        
         initTableView()
         initContentView()
         
@@ -89,8 +89,8 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         tableView.delegate = self
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 600
-        tableViewConstraintHeight.constant = 1000
+        //tableView.estimatedRowHeight = 600
+        tableViewConstraintHeight.constant = 600
     }
     
     func initContentView() {
@@ -178,21 +178,22 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if tableView == self.tableView {
-            let key = tableRowKeys[indexPath.row]
-            if tableRows[key] != nil {
-                let row = tableRows[key]!
-                let content = row["content"] ?? ""
-                _caculateCellHeight(content)
-                print("\(key):\(content.count):\(cellHeight)")
-            }
-        }
-        
-        //return 120
-        return cellHeight
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        
+//        if tableView == self.tableView {
+//            let key = tableRowKeys[indexPath.row]
+//            if tableRows[key] != nil {
+//                let row = tableRows[key]!
+//                let content = row["content"] ?? ""
+//                _caculateCellHeight(content)
+//                print("\(key):\(content.count):\(cellHeight)")
+//            }
+//        }
+//        
+//        //return 120
+//        return cellHeight
+//        return UITableViewAutomaticDimension
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -204,8 +205,15 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 let row = tableRows[key]!
                 let icon = row["icon"] ?? ""
                 let title = row["title"] ?? ""
-                let content = row["content"] ?? ""
-                cell.update(icon: icon, title: title, content: content, contentH: cellHeight)
+                var content = row["content"] ?? ""
+                if key == "fb" && !content.isEmpty {
+                    content = "連結請按此"
+                }
+                if key == "website" && !content.isEmpty {
+                    content = "連結請按此"
+                }
+                cell.update(icon: icon, title: title, content: content)
+                    //print("\(key):\(cell.frame.height)")
             }
             
             if indexPath.row == tableRowKeys.count - 1 {
@@ -244,12 +252,28 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    private func _caculateCellHeight(_ content: String) {
-        let base: CGFloat = 40.0
-        let limit: Int = 18
-        let n: CGFloat = CGFloat((content.count / limit) + 1)
-        cellHeight = base * n
+    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
     }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.contentView!.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+            if complete != nil {
+                self.contentView!.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
+                    self.contentViewConstraintHeight!.constant = height as! CGFloat
+                    self.changeScrollViewContentSize()
+                })
+            }
+            
+        })
+    }
+    
+//    private func _caculateCellHeight(_ content: String) {
+//        let base: CGFloat = 40.0
+//        let limit: Int = 18
+//        let n: CGFloat = CGFloat((content.count / limit) + 1)
+//        cellHeight = base * n
+//    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x != 0 {

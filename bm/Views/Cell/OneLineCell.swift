@@ -26,15 +26,27 @@ class OneLineCell: SuperCell {
         contentLbl.lineBreakMode = .byWordWrapping
         contentLbl.setTextColor(UIColor("#aaaaaa"))
         titleLbl.sizeToFit()
-        //backgroundColor = UIColor.orange
+        
+        //self.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 80, right: 0)
+        //backgroundColor = UIColor.gray
         
 //        layer.masksToBounds = true
-//        layer.cornerRadius = 5
-//        layer.borderWidth = 2
+//        layer.cornerRadius = 0
+//        layer.borderWidth = 1
 //        layer.shadowOffset = CGSize(width: -1, height: 1)
 //        let borderColor: UIColor = .green
 //        layer.borderColor = borderColor.cgColor
     }
+    
+    //override func layoutSubviews() {
+        //super.layoutSubviews()
+
+        //var frame = contentView.frame
+        //var new_frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height + 20)
+        //contentView.frame = new_frame
+        //contentView.backgroundColor = UIColor.gray
+        //contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8))
+    //}
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -42,7 +54,7 @@ class OneLineCell: SuperCell {
         // Configure the view for the selected state
     }
     
-    func update(icon: String, title: String, content: String, contentH: CGFloat, isPressed: Bool=false) {
+    func update(icon: String, title: String, content: String, contentH: CGFloat=0, isPressed: Bool=false) {
         if icon.count > 0 {
             iconView.image = UIImage(named: icon)
         }
@@ -50,7 +62,7 @@ class OneLineCell: SuperCell {
             titleLbl.text = title
         }
         contentLbl.text = content
-        contentHeight.constant = contentH
+        //contentHeight.constant = contentH
         
         if isPressed {
             contentLbl.textColor = UIColor(MY_GREEN)
