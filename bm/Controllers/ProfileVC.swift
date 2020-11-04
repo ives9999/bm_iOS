@@ -48,9 +48,9 @@ class ProfileVC: MyTableVC {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
     }
-    
+
     override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 30
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -80,6 +80,10 @@ class ProfileVC: MyTableVC {
         if let tmp: String = row["ch"] {
             field = tmp
         }
+        cell!.backgroundColor = UIColor.black
+        //cell!.tintColor = UIColor.red //not working
+        cell!.textLabel!.textColor = UIColor.white
+        cell!.detailTextLabel!.textColor = UIColor.white
         if let tmp: Any = Member.instance.getData(key: key) {
             let type: String = row["type"]!
             if type == "String" {
@@ -113,9 +117,12 @@ class ProfileVC: MyTableVC {
         cell!.textLabel!.text = "\(field)"
         cell!.detailTextLabel!.text = "\(data)"
         if key == "validate" || key == "type" {
-            cell?.accessoryType = UITableViewCellAccessoryType.none
+            cell!.accessoryType = UITableViewCellAccessoryType.none
         } else {
-            cell?.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            let chevron = UIImage(named: "greater1")
+            cell!.accessoryType = .disclosureIndicator
+            cell!.accessoryView = UIImageView(image: chevron!)
+            //cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         }
         return cell!
        
@@ -126,12 +133,6 @@ class ProfileVC: MyTableVC {
         if key != "validate" && key != "type" {
             performSegue(withIdentifier: TO_EDIT_PROFILE, sender: key)
         }
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.layer.backgroundColor = UIColor.clear.cgColor
-        cell.textLabel!.textColor = UIColor.white
-        cell.detailTextLabel!.textColor = UIColor.white
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -39,10 +39,9 @@ class SuperTextField: UITextField {
         self.textColor = UIColor.white
         self.font = UIFont(name: fontName, size: fontSize)
         self.createToolbar()
-        self.borderWidth(0)
-        //self.borderColor(UIColor(TEXTBORDER))
-        //self.backgroundColor = (UIColor(TEXTBACKGROUND))
-        //self.borderStyle = UITextBorderStyle.line
+        self.borderWidth(1)
+        self.borderColor(UIColor.white)
+        self.borderStyle = UITextBorderStyle.line
         self.align(.right)
         
         //self.font = UIFont(name: fontName, size: fontSize)

@@ -179,7 +179,9 @@ class EditProfileVC: UIViewController {
         datePicker.minimumDate = startDate
         datePicker.maximumDate = Date()
         datePicker.locale = Locale(identifier: "zh_TW")
-        datePicker.backgroundColor = UIColor(MY_GREEN)
+        //datePicker.backgroundColor = UIColor.white
+        datePicker.setValue(UIColor.red, forKey: "textColor")
+        
         datePicker.addTarget(self, action: #selector(dateDidChange(_:)), for: .valueChanged)
         
         view.addSubview(datePicker)

@@ -104,40 +104,49 @@ class MemberVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-           
-           //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
-           let row: [String: Any] = _rows[indexPath.section][indexPath.row]
-           //print(row)
-           if row["segue"] != nil {
-               let segue = row["segue"] as! String
-               //print("segue: \(segue)")
-               if segue == TO_PROFILE {
-                   performSegue(withIdentifier: segue, sender: nil)
-               } else if segue == TO_PASSWORD {
-                   performSegue(withIdentifier: segue, sender: "change_password")
-               } else if segue == TO_VALIDATE {
-                   var sender: String = ""
-                   if row["type"] != nil {
-                       sender = row["type"] as! String
-                   }
-                   performSegue(withIdentifier: segue, sender: sender)
-               } else if segue == TO_BLACKLIST {
-                   performSegue(withIdentifier: segue, sender: nil)
-               } else if segue == TO_REFRESH {
-                   refresh()
-               } else if segue == TO_SIGNUP_LIST {
-                
-                    //if let vc = storyboard?.instantiateViewController(withIdentifier: "toS") as? CourseCalendarVC {
-                        //present(vc, animated: true, completion: nil)
-                    //}
-                   performSegue(withIdentifier: "toA", sender: nil)
-               }
-           }
-       }
+        //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
+        let row: [String: Any] = _rows[indexPath.section][indexPath.row]
+        //print(row)
+        if row["segue"] != nil {
+            let segue = row["segue"] as! String
+            //print("segue: \(segue)")
+            if segue == TO_PROFILE {
+                if #available(iOS 13.0, *) {
+                    let storyboard = UIStoryboard(name: "Member", bundle: nil)
+                    let viewController = storyboard.instantiateViewController(identifier: "UIViewController-vfe-V8-Hfx")
+                    show(viewController, sender: nil)
+                } else {
+                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-vfe-V8-Hfx") as! ProfileVC
+                    self.navigationController!.pushViewController(viewController, animated: true)
+                }
+                //performSegue(withIdentifier: segue, sender: nil)
+            } else if segue == TO_PASSWORD {
+                performSegue(withIdentifier: segue, sender: "change_password")
+            } else if segue == TO_VALIDATE {
+                var sender: String = ""
+                if row["type"] != nil {
+                    sender = row["type"] as! String
+                }
+                performSegue(withIdentifier: segue, sender: sender)
+            } else if segue == TO_BLACKLIST {
+                performSegue(withIdentifier: segue, sender: nil)
+            } else if segue == TO_REFRESH {
+                refresh()
+            } else if segue == TO_SIGNUP_LIST {
+             
+                 //if let vc = storyboard?.instantiateViewController(withIdentifier: "toS") as? CourseCalendarVC {
+                     //present(vc, animated: true, completion: nil)
+                 //}
+                performSegue(withIdentifier: "toA", sender: nil)
+            }
+        }
+    }
     
        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
            if sender != nil {
-               if segue.identifier == TO_PASSWORD {
+               if segue.identifier == TO_PROFILE {
+                   let vc: ProfileVC = segue.destination as! ProfileVC
+               } else if segue.identifier == TO_PASSWORD {
                    let vc: PasswordVC = segue.destination as! PasswordVC
                    vc.type = (sender as! String)
                } else if segue.identifier == TO_VALIDATE {

@@ -137,7 +137,8 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
             header.textLabel!.font = UIFont(name: FONT_NAME, size: FONT_SIZE_TITLE)
-            header.textLabel!.textColor = UIColor("#A6D903")
+            //header.textLabel!.textColor = UIColor("#A6D903")
+            header.textLabel?.textColor = UIColor.black
         }
     }
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
