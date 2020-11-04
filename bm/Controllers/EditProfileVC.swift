@@ -179,8 +179,10 @@ class EditProfileVC: UIViewController {
         datePicker.minimumDate = startDate
         datePicker.maximumDate = Date()
         datePicker.locale = Locale(identifier: "zh_TW")
-        //datePicker.backgroundColor = UIColor.white
-        datePicker.setValue(UIColor.red, forKey: "textColor")
+        datePicker.backgroundColor = UIColor("#1E1F22")
+        //datePicker.setValue(UIColor.red, forKey: "textColor")
+        //datePicker.setValue(UIColor.red, forKeyPath: "textColor")
+        //datePicker.setValue(false, forKeyPath: "highlightsToday")
         
         datePicker.addTarget(self, action: #selector(dateDidChange(_:)), for: .valueChanged)
         
@@ -190,7 +192,7 @@ class EditProfileVC: UIViewController {
         var c1:NSLayoutConstraint,c2:NSLayoutConstraint,c3:NSLayoutConstraint,c4:NSLayoutConstraint
         c1 = NSLayoutConstraint(item: datePicker, attribute: .top, relatedBy: .equal, toItem: headerView, attribute: .bottom, multiplier: 1, constant: 40)
         c2 = NSLayoutConstraint(item: datePicker, attribute: .leading, relatedBy: .equal, toItem: datePicker.superview, attribute: .leading, multiplier: 1, constant: 12)
-        c3 = NSLayoutConstraint(item: datePicker, attribute: .trailing, relatedBy: .equal, toItem: datePicker.superview, attribute: .trailing, multiplier: 1, constant: 12)
+        c3 = NSLayoutConstraint(item: datePicker.superview!, attribute: .trailing, relatedBy: .equal, toItem: datePicker, attribute: .trailing, multiplier: 1, constant: 12)
         c4 = NSLayoutConstraint(item: datePicker, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 120)
         datePicker.translatesAutoresizingMaskIntoConstraints = false
         view.addConstraints([c1,c2,c3,c4])
