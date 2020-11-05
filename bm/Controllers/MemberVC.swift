@@ -17,7 +17,8 @@ class MemberVC: MyTableVC {
     @IBOutlet weak var forgetPasswordIcon: UIImageView!
     @IBOutlet weak var forgetPasswordBtn: UIButton!
     
-    let _sections: [String] = ["會員資料", "報名"]
+    let _sections: [String] = ["會員資料"]
+    //let _sections: [String] = ["會員資料", "報名"]
     let fixedRows: [Dictionary<String, String>] = [
         ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
         ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
