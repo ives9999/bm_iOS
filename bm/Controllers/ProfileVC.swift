@@ -35,6 +35,10 @@ class ProfileVC: MyTableVC {
         refresh()
     }
     
+    func presentationControllerDidDismiss(_ presentationController: UIPresentationController) {
+        refresh()
+    }
+    
     override func refresh() {
         //print("notify member data update")
         self.tableView.reloadData()
@@ -138,6 +142,7 @@ class ProfileVC: MyTableVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let vc: EditProfileVC = segue.destination as! EditProfileVC
         vc.key = sender as! String
+        vc.delegate = self
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {

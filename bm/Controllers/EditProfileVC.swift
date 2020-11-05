@@ -27,6 +27,7 @@ class EditProfileVC: UIViewController {
     var model: Member!
     var allSEX: [[String: String]]!
     var value: String!
+    var delegate: ProfileVC?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -265,6 +266,9 @@ class EditProfileVC: UIViewController {
                     )
                     let alert = SCLAlertView(appearance: appearance)
                     alert.addButton("確定", action: {
+                        if self.delegate != nil {
+                            self.delegate!.refresh()
+                        }
                         self.dismiss(animated: true, completion: nil)
                     })
                     alert.showSuccess("成功", subTitle: "修改個人資料成功")
