@@ -44,7 +44,10 @@ class MemberVC: MyTableVC {
     override func refresh() {
         //print("refresh")
         refreshMember { (success) in
-            self._loginout()
+            if success {
+                self._loginout()
+                self.tableView.reloadData()
+            }
             if self.refreshControl.isRefreshing {
                 self.refreshControl.endRefreshing()
             }
@@ -52,6 +55,7 @@ class MemberVC: MyTableVC {
     }
     
     func setValidateRow() {
+        _rows.removeAll()
         memberRows.removeAll()
         memberRows = fixedRows
         if Member.instance.isLoggedIn {// detected validate status
