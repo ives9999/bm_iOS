@@ -66,10 +66,10 @@ class MemberVC: MyTableVC {
                 memberRows.append(new)
             }
         }
-        if Member.instance.isTeamManager {
-            let new: Dictionary<String, String> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]
-            memberRows.append(new)
-        }
+//        if Member.instance.isTeamManager {
+//            let new: Dictionary<String, String> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]
+//            memberRows.append(new)
+//        }
         let new: Dictionary<String, String> = ["text": "重新整理", "icon": "refresh", "segue": TO_REFRESH]
         memberRows.append(new)
         
@@ -121,7 +121,20 @@ class MemberVC: MyTableVC {
                 }
                 //performSegue(withIdentifier: segue, sender: nil)
             } else if segue == TO_PASSWORD {
-                performSegue(withIdentifier: segue, sender: "change_password")
+                if #available(iOS 13.0, *) {
+                    let storyboard = UIStoryboard(name: "Member", bundle: nil)
+                    if let viewController = storyboard.instantiateViewController(identifier: "passwo") as? PasswordVC {
+                        viewController.type = "change_password"
+                        viewController.delegate1 = self
+                        show(viewController, sender: nil)
+                    }
+                } else {
+                    let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "passwo") as! PasswordVC
+                    viewController.type = "change_password"
+                    viewController.delegate1 = self
+                    self.navigationController!.pushViewController(viewController, animated: true)
+                }
+                //performSegue(withIdentifier: segue, sender: "change_password")
             } else if segue == TO_VALIDATE {
                 var sender: String = ""
                 if row["type"] != nil {
@@ -144,12 +157,7 @@ class MemberVC: MyTableVC {
     
        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
            if sender != nil {
-               if segue.identifier == TO_PROFILE {
-                   let vc: ProfileVC = segue.destination as! ProfileVC
-               } else if segue.identifier == TO_PASSWORD {
-                   let vc: PasswordVC = segue.destination as! PasswordVC
-                   vc.type = (sender as! String)
-               } else if segue.identifier == TO_VALIDATE {
+               if segue.identifier == TO_VALIDATE {
                    let vc: ValidateVC = segue.destination as! ValidateVC
                    vc.type = sender as! String
                } else if segue.identifier == TO_LOGIN {

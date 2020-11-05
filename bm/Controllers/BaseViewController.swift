@@ -194,7 +194,7 @@ class BaseViewController: UIViewController  {
             if (success) {
                 completion(true)
             } else {
-                SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
+                SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
                 completion(false)
             }
         }
