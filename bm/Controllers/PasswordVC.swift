@@ -25,7 +25,7 @@ class PasswordVC: UIViewController {
     @IBOutlet weak var logoView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     
-    var delegate1: MemberVC?
+    var delegate: MemberVC?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -185,7 +185,21 @@ class PasswordVC: UIViewController {
                     Global.instance.removeSpinner(superView: self.view)
                     if success {
                         if MemberService.instance.success {
-                            SCLAlertView().showSuccess("成功", subTitle: MemberService.instance.msg)
+                            
+                            let appearance = SCLAlertView.SCLAppearance(
+                                showCloseButton: false
+                            )
+                            let alertView = SCLAlertView(appearance: appearance)
+                            alertView.addButton("成功") {
+                                if self.delegate != nil {
+                                    self.delegate?.refresh()
+                                }
+                                self.dismiss(animated: true, completion: nil)
+                            }
+                            alertView.showSuccess("成功", subTitle: MemberService.instance.msg)
+                            
+                            
+                            //SCLAlertView().showSuccess("成功", subTitle: MemberService.instance.msg)
                         } else {
                             SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
                         }
@@ -222,8 +236,8 @@ class PasswordVC: UIViewController {
                             )
                             let alertView = SCLAlertView(appearance: appearance)
                             alertView.addButton("關閉") {
-                                if self.delegate1 != nil {
-                                    self.delegate1?.refresh()
+                                if self.delegate != nil {
+                                    self.delegate?.refresh()
                                 }
                                 self.dismiss(animated: true, completion: nil)
                             }

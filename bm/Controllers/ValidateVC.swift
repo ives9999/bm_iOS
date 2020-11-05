@@ -16,6 +16,8 @@ class ValidateVC: BaseViewController {
     @IBOutlet weak var typeTxt: SuperTextField!
     @IBOutlet weak var typeLbl: UILabel!
     
+    var delegate: MemberVC?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -49,6 +51,9 @@ class ValidateVC: BaseViewController {
                     )
                     let alert = SCLAlertView(appearance: appearance)
                     alert.addButton("確定", action: {
+                        if self.delegate != nil {
+                            self.delegate?.refresh()
+                        }
                         self.prev()
                     })
                     alert.showInfo("訊息", subTitle: "認證成功")

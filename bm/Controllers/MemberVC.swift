@@ -125,22 +125,38 @@ class MemberVC: MyTableVC {
                     let storyboard = UIStoryboard(name: "Member", bundle: nil)
                     if let viewController = storyboard.instantiateViewController(identifier: "passwo") as? PasswordVC {
                         viewController.type = "change_password"
-                        viewController.delegate1 = self
+                        viewController.delegate = self
                         show(viewController, sender: nil)
                     }
                 } else {
                     let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "passwo") as! PasswordVC
                     viewController.type = "change_password"
-                    viewController.delegate1 = self
+                    viewController.delegate = self
                     self.navigationController!.pushViewController(viewController, animated: true)
                 }
                 //performSegue(withIdentifier: segue, sender: "change_password")
             } else if segue == TO_VALIDATE {
+                
                 var sender: String = ""
                 if row["type"] != nil {
                     sender = row["type"] as! String
                 }
-                performSegue(withIdentifier: segue, sender: sender)
+                if #available(iOS 13.0, *) {
+                    let storyboard = UIStoryboard(name: "Member", bundle: nil)
+                    if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-XsO-Wn-cpI") as? ValidateVC {
+                        viewController.type = sender
+                        viewController.delegate = self
+                        show(viewController, sender: nil)
+                    }
+                } else {
+                    let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-XsO-Wn-cpI") as! ValidateVC
+                    viewController.type = sender
+                    viewController.delegate = self
+                    self.navigationController!.pushViewController(viewController, animated: true)
+                }
+                
+                
+                //performSegue(withIdentifier: segue, sender: sender)
             } else if segue == TO_BLACKLIST {
                 performSegue(withIdentifier: segue, sender: nil)
             } else if segue == TO_REFRESH {
@@ -198,6 +214,7 @@ class MemberVC: MyTableVC {
         let type: String = "forget_password"
         if let vc = storyboard?.instantiateViewController(withIdentifier: "passwo") as? PasswordVC {
             vc.type = type
+            vc.delegate = self
             present(vc, animated: true, completion: nil)
         }
         //performSegue(withIdentifier: TO_PASSWORD, sender: type)
