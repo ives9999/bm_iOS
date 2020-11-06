@@ -200,5 +200,8 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     
     func isReload(_ yes: Bool) {
         self.isReload = yes
+        if self.isReload {
+            refresh()
+        }
     }
 }

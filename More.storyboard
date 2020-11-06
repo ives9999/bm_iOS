@@ -498,6 +498,96 @@
             </objects>
             <point key="canvasLocation" x="-4662.3188405797109" y="-1002.4553571428571"/>
         </scene>
+        <!--Manager StoreVC-->
+        <scene sceneID="HlM-KW-QFF">
+            <objects>
+                <viewController id="TfX-bS-LrQ" customClass="ManagerStoreVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ZYt-1J-j5P">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lPf-YI-n8A">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="297-e0-Q7G">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="lIq-YJ-upJ"/>
+                                            <constraint firstAttribute="height" constant="26" id="vO9-hl-cNp"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="TfX-bS-LrQ" eventType="touchUpInside" id="jT2-og-UcM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAF-4d-pey">
+                                        <rect key="frame" x="370" y="16" width="32" height="32"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="YWX-3B-6eH"/>
+                                            <constraint firstAttribute="height" constant="32" id="icW-mH-gAy"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
+                                        <state key="normal" image="plus">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="addStoreBtnPressed:" destination="TfX-bS-LrQ" eventType="touchUpInside" id="fep-ac-oOA"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="體育用品店管理列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A3v-Ha-lLe">
+                                        <rect key="frame" x="121" y="18.5" width="172" height="27"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="A3v-Ha-lLe" firstAttribute="centerX" secondItem="lPf-YI-n8A" secondAttribute="centerX" id="0IS-wQ-r1i"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="0lJ-Ex-rxc"/>
+                                    <constraint firstItem="A3v-Ha-lLe" firstAttribute="centerY" secondItem="lPf-YI-n8A" secondAttribute="centerY" id="FMg-D1-Bqt"/>
+                                    <constraint firstAttribute="height" constant="64" id="HMN-uh-QRJ"/>
+                                    <constraint firstItem="297-e0-Q7G" firstAttribute="centerY" secondItem="lPf-YI-n8A" secondAttribute="centerY" id="LZi-1W-Bgf"/>
+                                    <constraint firstItem="mAF-4d-pey" firstAttribute="centerY" secondItem="lPf-YI-n8A" secondAttribute="centerY" id="Ne0-G3-x5a"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="d5r-qV-a5N"/>
+                                    <constraint firstAttribute="trailing" secondItem="mAF-4d-pey" secondAttribute="trailing" constant="12" id="hO8-Jp-duc"/>
+                                    <constraint firstItem="297-e0-Q7G" firstAttribute="leading" secondItem="lPf-YI-n8A" secondAttribute="leading" constant="12" id="pFG-RI-5Kp"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="TRf-XS-yZq">
+                                <rect key="frame" x="0.0" y="64" width="414" height="744"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3bQ-2k-Vo3">
+                                <rect key="frame" x="0.0" y="64" width="414" height="778"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="JKa-3v-9ml"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lPf-YI-n8A" firstAttribute="top" secondItem="JKa-3v-9ml" secondAttribute="top" id="8wU-gs-jAB"/>
+                            <constraint firstItem="TRf-XS-yZq" firstAttribute="leading" secondItem="JKa-3v-9ml" secondAttribute="leading" id="CLK-LN-Es6"/>
+                            <constraint firstItem="3bQ-2k-Vo3" firstAttribute="leading" secondItem="JKa-3v-9ml" secondAttribute="leading" id="ECl-4s-CEf"/>
+                            <constraint firstItem="lPf-YI-n8A" firstAttribute="leading" secondItem="JKa-3v-9ml" secondAttribute="leading" id="JJF-vf-TjB"/>
+                            <constraint firstItem="TRf-XS-yZq" firstAttribute="top" secondItem="lPf-YI-n8A" secondAttribute="bottom" id="SkI-Zh-Gh0"/>
+                            <constraint firstItem="JKa-3v-9ml" firstAttribute="bottom" secondItem="TRf-XS-yZq" secondAttribute="bottom" id="VsE-AE-tMP"/>
+                            <constraint firstItem="3bQ-2k-Vo3" firstAttribute="top" secondItem="lPf-YI-n8A" secondAttribute="bottom" id="aLc-F0-9d6"/>
+                            <constraint firstItem="3bQ-2k-Vo3" firstAttribute="trailing" secondItem="JKa-3v-9ml" secondAttribute="trailing" id="d22-ng-IC0"/>
+                            <constraint firstItem="lPf-YI-n8A" firstAttribute="trailing" secondItem="JKa-3v-9ml" secondAttribute="trailing" id="pfd-xp-9Vz"/>
+                            <constraint firstAttribute="bottom" secondItem="3bQ-2k-Vo3" secondAttribute="bottom" id="r1m-nz-kFf"/>
+                            <constraint firstItem="TRf-XS-yZq" firstAttribute="trailing" secondItem="JKa-3v-9ml" secondAttribute="trailing" id="v8M-Ap-mVL"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="gPa-D9-W2n"/>
+                    <connections>
+                        <outlet property="tableView" destination="3bQ-2k-Vo3" id="7qC-CB-UEP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Tyd-rW-WwU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4504" y="-348"/>
+        </scene>
         <!--StoreVC-->
         <scene sceneID="Z3V-J1-6nx">
             <objects>
@@ -527,6 +617,7 @@
                                         <connections>
                                             <action selector="searchBtnPressed:" destination="NIB-Wk-iZw" eventType="touchUpInside" id="1JK-mF-Ht4"/>
                                             <action selector="searchBtnPressed:" destination="fEf-Ib-3oR" eventType="touchUpInside" id="4vQ-pv-eF9"/>
+                                            <action selector="searchBtnPressed:" destination="Nap-sO-qjg" eventType="touchUpInside" id="dtC-Qx-zVE"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAL-lL-9nn">
@@ -540,6 +631,7 @@
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
                                         <state key="normal" image="gear"/>
                                         <connections>
+                                            <action selector="manager:" destination="Nap-sO-qjg" eventType="touchUpInside" id="7XI-Ng-7XK"/>
                                             <action selector="manager:" destination="fEf-Ib-3oR" eventType="touchUpInside" id="ImL-Cc-f85"/>
                                         </connections>
                                     </button>
@@ -599,11 +691,12 @@
                     <connections>
                         <outlet property="tableView" destination="UEY-2n-3XU" id="ZVM-w2-1RY"/>
                         <segue destination="MM3-rH-prO" kind="show" identifier="toShowStore" id="Lcb-mr-llm"/>
+                        <segue destination="TfX-bS-LrQ" kind="show" identifier="toManagerStore" id="6uf-Yz-b4C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gea-7K-QVb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3936.2318840579715" y="-981.02678571428567"/>
+            <point key="canvasLocation" x="-3736" y="-1019"/>
         </scene>
         <!--更多-->
         <scene sceneID="B3E-J4-4nC">
@@ -736,8 +829,12 @@
         <image name="gear" width="25" height="25"/>
         <image name="more" width="25" height="25"/>
         <image name="nophoto" width="900" height="514"/>
+        <image name="plus" width="25" height="25"/>
         <image name="prev" width="20.5" height="20.5"/>
         <image name="search" width="25" height="25"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

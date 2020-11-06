@@ -349,6 +349,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                     } else {
                         alert.addButton("回上一頁", action: {
                             if self.delegate != nil {
+                            
                                 self.delegate!.isReload(true)
                             }
                             self.dismiss(animated: true, completion: nil)

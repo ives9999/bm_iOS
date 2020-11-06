@@ -145,6 +145,7 @@
 		B3A617D321FEC2050059B603 /* SuperCoach.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A617D221FEC2050059B603 /* SuperCoach.swift */; };
 		B3A9038E2385537900A986F7 /* CourseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A9038D2385537900A986F7 /* CourseView.xib */; };
 		B3A9039023857A1200A986F7 /* CourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9038F23857A1200A986F7 /* CourseView.swift */; };
+		B3A9843125552DBB00DCD0F6 /* ManagerStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */; };
 		B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */; };
 		B3B4B61022CA247500245CC8 /* SomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4B60E22CA247500245CC8 /* SomeCell.swift */; };
 		B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4B60F22CA247500245CC8 /* SomeCell.xib */; };
@@ -426,6 +427,7 @@
 		B3A617D221FEC2050059B603 /* SuperCoach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperCoach.swift; sourceTree = "<group>"; };
 		B3A9038D2385537900A986F7 /* CourseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseView.xib; sourceTree = "<group>"; };
 		B3A9038F23857A1200A986F7 /* CourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseView.swift; sourceTree = "<group>"; };
+		B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerStoreVC.swift; sourceTree = "<group>"; };
 		B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
 		B3B4B60E22CA247500245CC8 /* SomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeCell.swift; sourceTree = "<group>"; };
 		B3B4B60F22CA247500245CC8 /* SomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SomeCell.xib; sourceTree = "<group>"; };
@@ -976,6 +978,7 @@
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B36E334325480007001336C2 /* ShowStoreVC.swift */,
+				B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1336,6 +1339,7 @@
 				B36D66B8229997AD00502D62 /* ManagerCourseVC.swift in Sources */,
 				B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */,
 				B3BBDD95240FE88D00EB9856 /* SuperSignupCancel.swift in Sources */,
+				B3A9843125552DBB00DCD0F6 /* ManagerStoreVC.swift in Sources */,
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,
 				B3308C511FDA5311006A83B6 /* ShowTempPlayVC.swift in Sources */,
 				B3310D8E22ABB4820062EF98 /* MultiSelectVC.swift in Sources */,

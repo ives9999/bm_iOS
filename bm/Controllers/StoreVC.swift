@@ -135,4 +135,21 @@ class StoreVC: ListVC {
             showVC.store_token = superStore.token
         }
     }
+    
+    @IBAction func manager(_ sender: Any) {
+        if !Member.instance.isLoggedIn {
+            SCLAlertView().showError("警告", subTitle: "請先登入為會員")
+        } else {
+            performSegue(withIdentifier: TO_MANAGER_STORE, sender: nil)
+        }
+    }
+    
+    @IBAction func searchBtnPressed(_ sender: Any) {
+        if searchPanelisHidden {
+            showSearchPanel()
+        } else {
+            searchPanelisHidden = true
+            unmask()
+        }
+    }
 }

@@ -27,10 +27,13 @@ class SuperLabel: UILabel {
         self.commonInit()
     }
     func commonInit(){
+        
         self.textColor = UIColor.white
+        self.backgroundColor = UIColor.clear
         self.font = UIFont(name: fontName, size: fontSize)
-        self.numberOfLines = 1
         self.textAlignment = NSTextAlignment.center
+        
+        self.numberOfLines = 1
     }
     
     func setTextSize(_ size: CGFloat) {

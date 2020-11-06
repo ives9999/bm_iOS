@@ -25,4 +25,11 @@ class ManagerCourseCell: SuperCell {
         }
     }
     
+    func forStoreRow(row: SuperStore) {
+        titleLbl.text = row.name
+        if row.featured_path.count > 0 {
+            featured.downloaded(from: row.featured_path)
+        }
+    }
+    
 }

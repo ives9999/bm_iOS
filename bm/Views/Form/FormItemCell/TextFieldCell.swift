@@ -64,8 +64,8 @@ extension TextFieldCell: FormUPdatable {
         titleLbl.text = _formItem.title
         textField.text = _formItem.value
         
-        let bgColor: UIColor = _formItem.isValid  == false ? .red : .white
-        textField.layer.backgroundColor = bgColor.cgColor
+        //let bgColor: UIColor = _formItem.isValid  == false ? .red : .white
+        //textField.layer.backgroundColor = bgColor.cgColor
         textField.placeholder(_formItem.placeholder)
         textField.keyboardType = _formItem.uiProperties.keyboardType
         textField.tintColor = _formItem.uiProperties.tintColor
