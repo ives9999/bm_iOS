@@ -49,7 +49,17 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
             if (success) {
                 self.superCourses = (CourseService.instance.superModel as! SuperCourses)
                 //self.superCourses!.printRows()
-                self.tableView.reloadData()
+                if self.superCourses != nil {
+                    if self.superCourses!.totalCount == 0 {
+                        let alert = SCLAlertView()
+                        alert.showInfo("目前無您管理的課程")
+                    } else {
+                        self.tableView.reloadData()
+                    }
+                } else {
+                    let alert = SCLAlertView()
+                    alert.showWarning("無法取得課程資料，請洽管理員")
+                }
             } else {
                 self.warning(CourseService.instance.msg)
             }
