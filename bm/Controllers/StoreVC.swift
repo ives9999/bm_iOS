@@ -29,7 +29,12 @@ class StoreVC: ListVC {
         _type = "store"
         _titleField = "name"
         searchRows = _searchRows
-        //Global.instance.setupTabbar(self)
+        
+        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
+        myTablView.register(cellNibName, forCellReuseIdentifier: "list1cell")
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 600
+        
         super.viewDidLoad()
     }
     
@@ -88,9 +93,9 @@ class StoreVC: ListVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "list1cell", for: indexPath) as? List1Cell {
                 
-                cell.cellDelegate = self
+                //cell.cellDelegate = self
                 let row = lists1[indexPath.row] as! SuperStore
                 //row.printRow()
                 

@@ -17,12 +17,9 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         self.params = params
     }
     
-
     var _type: String = "coach"
     var _titleField: String = "name"
     internal(set) public var lists: [SuperData] = [SuperData]()
-    
-    
     
     var newY: CGFloat = 0
     

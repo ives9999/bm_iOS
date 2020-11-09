@@ -146,6 +146,8 @@
 		B3A9038E2385537900A986F7 /* CourseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A9038D2385537900A986F7 /* CourseView.xib */; };
 		B3A9039023857A1200A986F7 /* CourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9038F23857A1200A986F7 /* CourseView.swift */; };
 		B3A9843125552DBB00DCD0F6 /* ManagerStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */; };
+		B3A9844C255918CF00DCD0F6 /* List1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9844A255918CF00DCD0F6 /* List1Cell.swift */; };
+		B3A9844D255918CF00DCD0F6 /* List1Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A9844B255918CF00DCD0F6 /* List1Cell.xib */; };
 		B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */; };
 		B3B4B61022CA247500245CC8 /* SomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4B60E22CA247500245CC8 /* SomeCell.swift */; };
 		B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4B60F22CA247500245CC8 /* SomeCell.xib */; };
@@ -428,6 +430,8 @@
 		B3A9038D2385537900A986F7 /* CourseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseView.xib; sourceTree = "<group>"; };
 		B3A9038F23857A1200A986F7 /* CourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseView.swift; sourceTree = "<group>"; };
 		B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerStoreVC.swift; sourceTree = "<group>"; };
+		B3A9844A255918CF00DCD0F6 /* List1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List1Cell.swift; sourceTree = "<group>"; };
+		B3A9844B255918CF00DCD0F6 /* List1Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = List1Cell.xib; sourceTree = "<group>"; };
 		B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
 		B3B4B60E22CA247500245CC8 /* SomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeCell.swift; sourceTree = "<group>"; };
 		B3B4B60F22CA247500245CC8 /* SomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SomeCell.xib; sourceTree = "<group>"; };
@@ -615,6 +619,8 @@
 			isa = PBXGroup;
 			children = (
 				B317855A20D9089600765CA1 /* BlackListCell.swift */,
+				B3E88BE72380F2D1001F015A /* CalendarSignupCell.swift */,
+				B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */,
 				B316FED42112F13600FB990C /* CollectionCell.swift */,
 				B316FED52112F13600FB990C /* CollectionCell.xib */,
 				F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */,
@@ -624,15 +630,24 @@
 				B35C4F4B2196F5E500F8AEB2 /* EditCell.xib */,
 				B306FEAB21F8422B00403FE2 /* IconCell.swift */,
 				B306FEAC21F8422B00403FE2 /* IconCell.xib */,
+				B3A9844A255918CF00DCD0F6 /* List1Cell.swift */,
+				B3A9844B255918CF00DCD0F6 /* List1Cell.xib */,
 				B3DEBE0D2106FDB1003699A0 /* ListCell.swift */,
 				B3DEBE0E2106FDB1003699A0 /* ListCell.xib */,
 				B36D66BE229A828A00502D62 /* ManagerCourseCell.swift */,
 				B36D66BF229A828A00502D62 /* ManagerCourseCell.xib */,
 				B322F8091FC6AD1800DE98FB /* MenuCell.swift */,
+				B3CB73E123E3185D00892F75 /* OlCell.swift */,
+				B3CB73D723D410CD00892F75 /* OneLineCell.swift */,
+				B3CB73D823D410CD00892F75 /* OneLineCell.xib */,
 				B39453DC2232948F005E3027 /* PNCell.swift */,
 				B39453DD2232948F005E3027 /* PNCell.xib */,
+				B394536F2343256C000DF98E /* SignupListCell.swift */,
+				B39453702343256C000DF98E /* SignupListCell.xib */,
 				B358B0BD22A168C700F1A4E6 /* SingleSelectCell.swift */,
 				B358B0BE22A168C700F1A4E6 /* SingleSelectCell.xib */,
+				B3B4B60E22CA247500245CC8 /* SomeCell.swift */,
+				B3B4B60F22CA247500245CC8 /* SomeCell.xib */,
 				B3756EF021BA7567006893E1 /* StatusSelectCell.swift */,
 				B3756EF121BA7567006893E1 /* StatusSelectCell.xib */,
 				B322F8071FC6AC2200DE98FB /* SuperCell.swift */,
@@ -642,15 +657,6 @@
 				B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */,
 				B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
-				B3B4B60E22CA247500245CC8 /* SomeCell.swift */,
-				B3B4B60F22CA247500245CC8 /* SomeCell.xib */,
-				B394536F2343256C000DF98E /* SignupListCell.swift */,
-				B39453702343256C000DF98E /* SignupListCell.xib */,
-				B3E88BE72380F2D1001F015A /* CalendarSignupCell.swift */,
-				B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */,
-				B3CB73D723D410CD00892F75 /* OneLineCell.swift */,
-				B3CB73D823D410CD00892F75 /* OneLineCell.xib */,
-				B3CB73E123E3185D00892F75 /* OlCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1184,6 +1190,7 @@
 				B3FB9B272407F7EE0051186F /* TempPlay.storyboard in Resources */,
 				B3310D9222ACA57A0062EF98 /* ContentCell.xib in Resources */,
 				B3FB9B202407F3750051186F /* More.storyboard in Resources */,
+				B3A9844D255918CF00DCD0F6 /* List1Cell.xib in Resources */,
 				B3E88BEA2380F2D1001F015A /* CalendarSignupCell.xib in Resources */,
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
@@ -1340,6 +1347,7 @@
 				B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */,
 				B3BBDD95240FE88D00EB9856 /* SuperSignupCancel.swift in Sources */,
 				B3A9843125552DBB00DCD0F6 /* ManagerStoreVC.swift in Sources */,
+				B3A9844C255918CF00DCD0F6 /* List1Cell.swift in Sources */,
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,
 				B3308C511FDA5311006A83B6 /* ShowTempPlayVC.swift in Sources */,
 				B3310D8E22ABB4820062EF98 /* MultiSelectVC.swift in Sources */,
