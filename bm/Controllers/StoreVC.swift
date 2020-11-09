@@ -93,6 +93,7 @@ class StoreVC: ListVC {
                 cell.cellDelegate = self
                 let row = lists1[indexPath.row] as! SuperStore
                 //row.printRow()
+                
                 cell.updateStoreViews(indexPath: indexPath, data: row)
                 
                 return cell

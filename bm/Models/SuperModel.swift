@@ -63,6 +63,9 @@ class SuperModel: NSObject, JSONParsable {
                 } else if key == "signup_normal_models" {
                     let parseArray: [SuperSignupNormal] = parse(property: property, array: arrayValue) as! [SuperSignupNormal]
                     setValue(parseArray, forKey: key)
+                } else if key == "managers" {
+                    let parsedArray = setArrayDictionary(value, on: property, forKey: key)
+                    setValue(parsedArray, forKey: key)
                 } else {
                     let parsedArray = parse(property: property, array: arrayValue)
                     setValue(parsedArray, forKey: key)
@@ -144,7 +147,7 @@ class SuperModel: NSObject, JSONParsable {
                 }
             }
             setValue(d, forKey: propertyName)
-        }  else if type.contains("String") {
+        } else if type.contains("String") {
             setValue(jsonValue.stringValue, forKey: propertyName)
         } else if type.contains("Bool") {
             setValue(jsonValue.boolValue, forKey: propertyName)
@@ -158,6 +161,22 @@ class SuperModel: NSObject, JSONParsable {
         }
     }
     
+    private func setArrayDictionary(_ value: Any, on property: Mirror.Child, forKey propertyName: String)-> [[String: Any]] {
+        var resultingArray = [[String: Any]]()
+        let tmp = value as! JSON
+        let jsonValues = tmp.arrayValue
+        for jsonValue in jsonValues {
+            for (key, value) in jsonValue {
+                var d: [String: Any] = [String: Any]()
+                
+                let _value: String = value.description                
+                d[key] = _value
+                resultingArray.append(d)
+            }
+        }
+        return resultingArray
+    }
+    
     private func getDynamicClassType(value: Any) -> JSONParsable.Type? {
         var dynamicType = getClassType(value: value)
         if dynamicType.hasPrefix("Array") {
@@ -167,7 +186,6 @@ class SuperModel: NSObject, JSONParsable {
 //            return nil
 //        }
 //        return dynamicClass
-        
         
         
         if let dynamicClass = NSClassFromString(dynamicType) as? JSONParsable.Type {

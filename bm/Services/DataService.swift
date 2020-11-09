@@ -107,6 +107,7 @@ class DataService {
                 let rows: [T] = s.getRows() ?? [T]()
                 for row in rows {
                     row.filterRow()
+                    //row.printRow()
                 }
                 completion(true)
 //                self.makeNeedDownloadImageArr(rows, t: T.self)

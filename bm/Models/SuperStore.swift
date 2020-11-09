@@ -51,6 +51,8 @@ class SuperStore: SuperModel {
     @objc dynamic var tel_text: String = ""
     @objc dynamic var mobile_text: String = ""
     
+    @objc dynamic var managers: [[String: Any]] = [[String: Any]]()
+    
     override func filterRow() {
         created_at_text = created_at.noTime()
         if featured_path.count > 0 {
