@@ -20,8 +20,8 @@ class List1Cell: SuperCell {
         super.awakeFromNib()
         
         addressLbl.textColor = UIColor(MY_GREEN)
-        telLbl.textColor = UIColor(MY_GREEN)
-        business_timeLbl.textColor = UIColor(MY_GREEN)
+        //telLbl.textColor = UIColor(MY_GREEN)
+        //business_timeLbl.textColor = UIColor(MY_GREEN)
         
         addressLbl.numberOfLines = 0
         addressLbl.textAlignment = .left
@@ -48,8 +48,8 @@ class List1Cell: SuperCell {
 //
 //        listCityBtn.setTitle(data.city)
 //        listArenaTxt.text = data.address
-        telLbl.text = data.tel_text
-        business_timeLbl.text = data.open_time_text + "~" + data.close_time_text
+        //telLbl.text = data.tel_text
+        //business_timeLbl.text = data.open_time_text + "~" + data.close_time_text
 //
 //        var showManager = false;
 //        if data.managers.count > 0 {
