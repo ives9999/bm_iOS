@@ -32,8 +32,8 @@ class StoreVC: ListVC {
         
         let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
         myTablView.register(cellNibName, forCellReuseIdentifier: "list1cell")
+        tableView.estimatedRowHeight = 180
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 600
         
         super.viewDidLoad()
     }
@@ -90,6 +90,11 @@ class StoreVC: ListVC {
             return searchRows.count
         }
     }
+    
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//        return UITableViewAutomaticDimension
+//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {

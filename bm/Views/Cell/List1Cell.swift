@@ -11,10 +11,20 @@ import UIKit
 class List1Cell: SuperCell {
 
     @IBOutlet weak var listFeatured: UIImageView!
+    @IBOutlet weak var titleLbl: SuperLabel!
+    @IBOutlet weak var addressLbl: SuperLabel!
+    @IBOutlet weak var telLbl: SuperLabel!
+    @IBOutlet weak var business_timeLbl: SuperLabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        addressLbl.textColor = UIColor(MY_GREEN)
+        telLbl.textColor = UIColor(MY_GREEN)
+        business_timeLbl.textColor = UIColor(MY_GREEN)
+        
+        addressLbl.numberOfLines = 0
+        addressLbl.textAlignment = .left
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,18 +34,22 @@ class List1Cell: SuperCell {
     }
     
     func updateStoreViews(indexPath: IndexPath, data: SuperStore) {
-        //listTitleTxt.text = data.name
+        //data.printRow()
+        self.backgroundColor = UIColor.clear
         if data.featured_path.count > 0 {
-            listFeatured.downloaded(from: data.featured_path)
+           // listFeatured.downloaded(from: data.featured_path)
         }
+        
+        titleLbl.text = data.name
+        addressLbl.text = data.address
         
 //        listCityBtn.setTextSize(14)
 //        listCityBtn.alignH = UIControlContentHorizontalAlignment.center
 //
 //        listCityBtn.setTitle(data.city)
 //        listArenaTxt.text = data.address
-//        listDayTxt.text = data.tel_text
-//        listIntervalTxt.text = data.open_time_text + "~" + data.close_time_text
+        telLbl.text = data.tel_text
+        business_timeLbl.text = data.open_time_text + "~" + data.close_time_text
 //
 //        var showManager = false;
 //        if data.managers.count > 0 {
@@ -59,7 +73,9 @@ class List1Cell: SuperCell {
 //        }
 //        listBallTxt.isHidden = true
         
-        //accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        let chevron = UIImage(named: "greater1")
+        self.accessoryType = .disclosureIndicator
+        self.accessoryView = UIImageView(image: chevron!)
     }
     
 }
