@@ -18,42 +18,32 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="180"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" verticalHuggingPriority="255" verticalCompressionResistancePriority="755" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="K0d-FV-MJ4" userLabel="Data View">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WlP-9G-HGk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="135"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3oL-1B-ZfV">
-                                <rect key="frame" x="8" y="18" width="90" height="90"/>
+                                <rect key="frame" x="8" y="22.5" width="90" height="90"/>
                                 <constraints>
+                                    <constraint firstAttribute="height" priority="998" constant="90" id="8fg-dv-rpN"/>
                                     <constraint firstAttribute="width" constant="90" id="bs0-Ra-CtY"/>
-                                    <constraint firstAttribute="height" constant="90" id="z2s-Zb-aPP"/>
                                 </constraints>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3oL-1B-ZfV" secondAttribute="bottom" priority="900" constant="8" id="ghy-IO-54d"/>
-                            <constraint firstItem="3oL-1B-ZfV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="K0d-FV-MJ4" secondAttribute="top" priority="900" constant="8" id="uhm-kp-Ggk"/>
-                            <constraint firstItem="3oL-1B-ZfV" firstAttribute="centerY" secondItem="K0d-FV-MJ4" secondAttribute="centerY" id="xa3-bL-Z2t"/>
-                            <constraint firstItem="3oL-1B-ZfV" firstAttribute="leading" secondItem="K0d-FV-MJ4" secondAttribute="leading" constant="8" id="yPd-We-TUv"/>
-                        </constraints>
-                    </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fxL-6i-wRH" userLabel="Icon View">
-                        <rect key="frame" x="0.0" y="126" width="320" height="46"/>
-                        <color key="backgroundColor" systemColor="systemTealColor"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="46" id="5gZ-O2-EWg"/>
+                            <constraint firstItem="3oL-1B-ZfV" firstAttribute="centerY" secondItem="WlP-9G-HGk" secondAttribute="centerY" id="F66-lF-7Zw"/>
+                            <constraint firstItem="3oL-1B-ZfV" firstAttribute="leading" secondItem="WlP-9G-HGk" secondAttribute="leading" constant="8" id="HOh-xN-tGA"/>
+                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="3oL-1B-ZfV" secondAttribute="bottom" constant="8" id="lbW-KR-IQH"/>
+                            <constraint firstItem="3oL-1B-ZfV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WlP-9G-HGk" secondAttribute="top" constant="8" id="ne6-Sb-S9f"/>
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" systemColor="systemRedColor"/>
+                <color key="backgroundColor" systemColor="systemGray2Color"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="fxL-6i-wRH" secondAttribute="trailing" id="OfD-Xe-hc7"/>
-                    <constraint firstAttribute="trailing" secondItem="K0d-FV-MJ4" secondAttribute="trailing" id="SX4-Uj-tCx"/>
-                    <constraint firstItem="K0d-FV-MJ4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Sic-N6-crQ"/>
-                    <constraint firstItem="fxL-6i-wRH" firstAttribute="top" secondItem="K0d-FV-MJ4" secondAttribute="bottom" id="TKA-1A-qqb"/>
-                    <constraint firstAttribute="bottom" secondItem="fxL-6i-wRH" secondAttribute="bottom" constant="8" id="hNd-Hn-uvB"/>
-                    <constraint firstItem="K0d-FV-MJ4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="lGe-hS-o2n"/>
-                    <constraint firstItem="fxL-6i-wRH" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="uJV-xf-30A"/>
+                    <constraint firstAttribute="bottom" secondItem="WlP-9G-HGk" secondAttribute="bottom" constant="45" id="HHJ-vZ-W79"/>
+                    <constraint firstAttribute="trailing" secondItem="WlP-9G-HGk" secondAttribute="trailing" id="KcP-AE-oYr"/>
+                    <constraint firstItem="WlP-9G-HGk" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Wxz-x2-N7u"/>
+                    <constraint firstItem="WlP-9G-HGk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XGY-ea-KVQ"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -64,14 +54,11 @@
         </tableViewCell>
     </objects>
     <resources>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-        <systemColor name="systemTealColor">
-            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
