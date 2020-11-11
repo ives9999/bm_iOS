@@ -32,10 +32,10 @@ class StoreVC: ListVC {
         
         let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
         myTablView.register(cellNibName, forCellReuseIdentifier: "list1cell")
-        tableView.estimatedRowHeight = 180
-        tableView.rowHeight = UITableViewAutomaticDimension
         
         super.viewDidLoad()
+        tableView.estimatedRowHeight = 480
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
@@ -91,10 +91,11 @@ class StoreVC: ListVC {
         }
     }
     
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//        return UITableViewAutomaticDimension
-//    }
+    //override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+        //return 280
+        //return UITableViewAutomaticDimension
+    //}
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
@@ -105,6 +106,9 @@ class StoreVC: ListVC {
                 //row.printRow()
                 
                 cell.updateStoreViews(indexPath: indexPath, data: row)
+                //cell.layoutIfNeeded()
+                cell.layoutSubviews()
+                //viewDidLayoutSubviews()
                 
                 return cell
             } else {
@@ -122,6 +126,11 @@ class StoreVC: ListVC {
         
         return UITableViewCell()
     }
+    
+//    override func viewDidLayoutSubviews() {
+//        tableView.estimatedRowHeight = 480
+//        tableView.rowHeight = UITableViewAutomaticDimension
+//    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
