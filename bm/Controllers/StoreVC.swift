@@ -21,6 +21,8 @@ class StoreVC: ListVC {
     var superStores: SuperStores? = nil
     internal(set) public var lists1: [SuperModel] = [SuperModel]()
     
+    var tableViewCells: [List1Cell] = [List1Cell]()
+    
     override func viewDidLoad() {
         myTablView = tableView
         myTablView.allowsMultipleSelectionDuringEditing = false
@@ -34,8 +36,8 @@ class StoreVC: ListVC {
         myTablView.register(cellNibName, forCellReuseIdentifier: "list1cell")
         
         super.viewDidLoad()
-        tableView.estimatedRowHeight = 480
-        tableView.rowHeight = UITableViewAutomaticDimension
+        //tableView.estimatedRowHeight = 480
+        //tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
@@ -91,11 +93,38 @@ class StoreVC: ListVC {
         }
     }
     
-    //override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        //return 280
+        if lists1.count > 0 {
+            
+            let labelH: CGFloat = 32
+            var margin: CGFloat = 8
+            let iconViewH: CGFloat = 45
+            let marginCount: CGFloat = 5
+            margin = margin * marginCount
+            let titleH: CGFloat = labelH
+            let telH: CGFloat = labelH
+            var addressH: CGFloat = labelH
+            
+            if tableViewCells.count > indexPath.row {
+                
+                let cell = tableViewCells[indexPath.row]
+                let model = lists1[indexPath.row] as! SuperStore
+                let address = model.address
+                cell.addressLbl.text = address
+                let line: CGFloat = (CGFloat)(cell.addressLbl.calculateMaxLines())
+                addressH = labelH * line
+                //print(addressH)
+            }
+            let h: CGFloat = margin + titleH + telH + addressH + iconViewH
+            //print(h)
+            
+            return h
+        }
+        return 220
         //return UITableViewAutomaticDimension
-    //}
+    }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
@@ -106,9 +135,18 @@ class StoreVC: ListVC {
                 //row.printRow()
                 
                 cell.updateStoreViews(indexPath: indexPath, data: row)
+//                print("title:\(cell.titleLbl.frame.height)")
+//                print("tel:\(cell.telLbl.frame.height)")
+//                print("address:\(cell.addressLbl.frame.height)")
+                //cell.contentView.setNeedsLayout()
+                //cell.contentView.layoutIfNeeded()
                 //cell.layoutIfNeeded()
-                cell.layoutSubviews()
+                //cell.layoutSubviews()
                 //viewDidLayoutSubviews()
+                
+                if !tableViewCells.contains(cell) {
+                    tableViewCells.append(cell)
+                }
                 
                 return cell
             } else {
@@ -128,8 +166,8 @@ class StoreVC: ListVC {
     }
     
 //    override func viewDidLayoutSubviews() {
-//        tableView.estimatedRowHeight = 480
-//        tableView.rowHeight = UITableViewAutomaticDimension
+//        tableView.estimatedRowHeight = 180
+//        //tableView.rowHeight = UITableViewAutomaticDimension
 //    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

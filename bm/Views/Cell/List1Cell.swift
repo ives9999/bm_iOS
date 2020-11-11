@@ -21,7 +21,11 @@ class List1Cell: SuperCell {
         
         addressLbl.textColor = UIColor(MY_GREEN)
         telLbl.textColor = UIColor(MY_GREEN)
-        //business_timeLbl.textColor = UIColor(MY_GREEN)
+        business_timeLbl.textColor = UIColor(MY_GREEN)
+        
+        titleLbl.numberOfLines = 0
+        titleLbl.textAlignment = .left
+        titleLbl.setTextSize(24)
         
         addressLbl.numberOfLines = 0
         addressLbl.textAlignment = .left
@@ -38,11 +42,12 @@ class List1Cell: SuperCell {
         //data.printRow()
         self.backgroundColor = UIColor.clear
         if data.featured_path.count > 0 {
-           // listFeatured.downloaded(from: data.featured_path)
+           listFeatured.downloaded(from: data.featured_path)
         }
         
         titleLbl.text = data.name
         addressLbl.text = data.address
+        //print(addressLbl.calculateMaxLines())
         
 //        listCityBtn.setTextSize(14)
 //        listCityBtn.alignH = UIControlContentHorizontalAlignment.center
@@ -50,7 +55,7 @@ class List1Cell: SuperCell {
 //        listCityBtn.setTitle(data.city)
 //        listArenaTxt.text = data.address
         telLbl.text = data.tel_text
-        //business_timeLbl.text = data.open_time_text + "~" + data.close_time_text
+        business_timeLbl.text = data.open_time_text + "~" + data.close_time_text
 //
 //        var showManager = false;
 //        if data.managers.count > 0 {
