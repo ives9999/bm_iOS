@@ -9,7 +9,7 @@
 import UIKit
 
 protocol List1CellDelegate {
-    func searchCity(indexPath: IndexPath)
+    //func searchCity(indexPath: IndexPath)
     func cellShowMap(indexPath: IndexPath?)
     func cellTel(indexPath: IndexPath?)
     func cellMobile(indexPath: IndexPath?)

@@ -42,6 +42,12 @@ class StoreVC: ListVC, List1CellDelegate {
         //tableView.rowHeight = UITableViewAutomaticDimension
     }
     
+    override func refresh() {
+        page = 1
+        tableViewCells.removeAll()
+        getDataStart()
+    }
+    
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
         //print(page)
         Global.instance.addSpinner(superView: self.view)
@@ -97,35 +103,37 @@ class StoreVC: ListVC, List1CellDelegate {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        if lists1.count > 0 {
+        if tableViewCells.count > indexPath.row {
             
-            let labelH: CGFloat = 26
+            let labelH: CGFloat = 30
             var margin: CGFloat = 8
-            let iconViewH: CGFloat = 32
+            let iconViewH: CGFloat = 36
             let marginCount: CGFloat = 5
             margin = margin * marginCount
             var titleH: CGFloat = labelH
             let telH: CGFloat = labelH
             var addressH: CGFloat = labelH
             
-            if tableViewCells.count > indexPath.row {
-                
-                let cell = tableViewCells[indexPath.row]
-                let model = lists1[indexPath.row] as! SuperStore
-                
-                let address = model.address
-                cell.addressLbl.text = address
-                var line: CGFloat = (CGFloat)(cell.addressLbl.calculateMaxLines())
-                addressH = labelH * line
-                //print(addressH)
-                
-                let name = model.name
-                cell.titleLbl.text = name
-                line = (CGFloat)(cell.titleLbl.calculateMaxLines())
-                titleH = labelH * line
-            }
+            let cell = tableViewCells[indexPath.row]
+            let model = lists1[indexPath.row] as! SuperStore
+            
+            let name = model.name
+            cell.titleLbl.text = name
+            var line: CGFloat = (CGFloat)(cell.titleLbl.calculateMaxLines())
+            titleH = labelH * line
+            //titleH = cell.titleLbl.frame.height
+            //print("title \(indexPath.row): \(titleH)")
+            //print("title \(indexPath.row): \(cell.titleLbl.frame.height)")
+            
+            let address = model.address
+            cell.addressLbl.text = address
+            line = (CGFloat)(cell.addressLbl.calculateMaxLines())
+            addressH = labelH * line
+            //addressH = cell.addressLbl.frame.height
+            //print("address: \(addressH)")
+            
             let h: CGFloat = margin + titleH + telH + addressH + iconViewH
-            //print(h)
+            //print("h: \(h)")
             
             return h
         }
