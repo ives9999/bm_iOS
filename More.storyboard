@@ -620,21 +620,6 @@
                                             <action selector="searchBtnPressed:" destination="Nap-sO-qjg" eventType="touchUpInside" id="dtC-Qx-zVE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gAL-lL-9nn">
-                                        <rect key="frame" x="332" y="16" width="32" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="Ru9-7s-fJx"/>
-                                            <constraint firstAttribute="height" constant="32" id="ZrT-Zj-YYe"/>
-                                            <constraint firstAttribute="width" constant="32" id="pG1-fS-cSZ"/>
-                                            <constraint firstAttribute="width" constant="32" id="ubc-Wq-bfT"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
-                                        <state key="normal" image="gear"/>
-                                        <connections>
-                                            <action selector="manager:" destination="Nap-sO-qjg" eventType="touchUpInside" id="7XI-Ng-7XK"/>
-                                            <action selector="manager:" destination="fEf-Ib-3oR" eventType="touchUpInside" id="ImL-Cc-f85"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2r-zC-lXk">
                                         <rect key="frame" x="12" y="15.5" width="33" height="33"/>
                                         <constraints>
@@ -652,9 +637,7 @@
                                     <constraint firstItem="y2r-zC-lXk" firstAttribute="leading" secondItem="3tu-1F-GSY" secondAttribute="leading" constant="12" id="3kb-Ys-m2H"/>
                                     <constraint firstItem="bzY-vD-R1k" firstAttribute="centerX" secondItem="3tu-1F-GSY" secondAttribute="centerX" id="IRt-8Z-mkK"/>
                                     <constraint firstItem="U9n-mI-mdf" firstAttribute="centerY" secondItem="3tu-1F-GSY" secondAttribute="centerY" id="LcR-qW-Ezf"/>
-                                    <constraint firstItem="gAL-lL-9nn" firstAttribute="centerY" secondItem="3tu-1F-GSY" secondAttribute="centerY" id="LhQ-bG-nDl"/>
                                     <constraint firstItem="bzY-vD-R1k" firstAttribute="centerY" secondItem="3tu-1F-GSY" secondAttribute="centerY" id="Lr6-5I-4VK"/>
-                                    <constraint firstItem="U9n-mI-mdf" firstAttribute="leading" secondItem="gAL-lL-9nn" secondAttribute="trailing" constant="6" id="gij-Ue-vkW"/>
                                     <constraint firstItem="y2r-zC-lXk" firstAttribute="centerY" secondItem="3tu-1F-GSY" secondAttribute="centerY" id="oeJ-uv-rAb"/>
                                     <constraint firstAttribute="trailing" secondItem="U9n-mI-mdf" secondAttribute="trailing" constant="12" id="rBp-pO-FFT"/>
                                     <constraint firstAttribute="height" constant="64" id="yWX-7F-iLB"/>

@@ -85,6 +85,9 @@
                                     <constraint firstAttribute="height" constant="36" id="Fx4-DF-q5s"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="tel"/>
+                                <connections>
+                                    <action selector="telBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8BT-Uc-mdJ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hmq-ks-Bxg" customClass="SuperButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="120" y="0.0" width="36" height="36"/>
@@ -95,16 +98,74 @@
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="mGc-Xt-dq9"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="mobile"/>
+                                <connections>
+                                    <action selector="mobileBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ySt-B3-JaW"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWV-ki-GT7" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="172" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="4xD-lD-cho"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="36" id="5HY-5g-CDf"/>
+                                    <constraint firstAttribute="height" constant="36" id="J7Q-Qv-kob"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="36" id="QW2-wG-mZR"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="36" id="jRs-Z6-vox"/>
+                                    <constraint firstAttribute="width" constant="36" id="kJl-Uj-oMb"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="refresh"/>
+                                <connections>
+                                    <action selector="refreshBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yX0-3g-KFu"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QO8-ii-AEf" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="216" y="0.0" width="36" height="34.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="36" id="4Vq-vC-Nex"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="36" id="5RP-tb-MDw"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="36" id="HBJ-6l-gKS"/>
+                                    <constraint firstAttribute="width" constant="36" id="JJ7-pY-tFi"/>
+                                    <constraint firstAttribute="height" constant="36" id="Tj5-17-oHa"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="36" id="VAR-9E-Pi8"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="WZv-ox-kqm"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="36" id="WeP-tO-n0y"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="square.and.pencil" catalog="system"/>
+                                <connections>
+                                    <action selector="editBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="rsR-dg-Qjb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFl-qo-hdE" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="268" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="24a-Tg-DId"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="36" id="5KQ-Ea-EUJ"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="36" id="Nml-VS-fT0"/>
+                                    <constraint firstAttribute="height" constant="36" id="YcF-z4-z5i"/>
+                                    <constraint firstAttribute="width" relation="lessThanOrEqual" constant="36" id="bBV-ia-j2A"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="eol-IF-tZJ"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="36" id="oS2-Bn-Zyb"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="36" id="rUv-Sg-sBe"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="clear"/>
+                                <connections>
+                                    <action selector="deleteBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ysg-lz-e9Q"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Hmq-ks-Bxg" firstAttribute="centerY" secondItem="XO6-km-uim" secondAttribute="centerY" id="CQA-vZ-gyI"/>
+                            <constraint firstAttribute="trailing" secondItem="TFl-qo-hdE" secondAttribute="trailing" constant="16" id="Cgn-2o-tmx"/>
+                            <constraint firstItem="TFl-qo-hdE" firstAttribute="leading" secondItem="QO8-ii-AEf" secondAttribute="trailing" constant="16" id="GEp-hD-8RK"/>
                             <constraint firstItem="W7s-Dp-ImY" firstAttribute="leading" secondItem="6Mh-co-eOH" secondAttribute="trailing" constant="16" id="QgG-RJ-bkQ"/>
+                            <constraint firstItem="yWV-ki-GT7" firstAttribute="centerY" secondItem="XO6-km-uim" secondAttribute="centerY" id="TSh-sm-dSR"/>
+                            <constraint firstItem="yWV-ki-GT7" firstAttribute="leading" secondItem="Hmq-ks-Bxg" secondAttribute="trailing" constant="16" id="TlR-Af-cEX"/>
                             <constraint firstItem="W7s-Dp-ImY" firstAttribute="centerY" secondItem="XO6-km-uim" secondAttribute="centerY" id="VYl-0y-o4M"/>
                             <constraint firstItem="6Mh-co-eOH" firstAttribute="leading" secondItem="XO6-km-uim" secondAttribute="leading" constant="16" id="YJk-CH-o1V"/>
+                            <constraint firstItem="TFl-qo-hdE" firstAttribute="centerY" secondItem="XO6-km-uim" secondAttribute="centerY" id="ZgM-U3-de6"/>
                             <constraint firstAttribute="height" constant="36" id="bAG-B6-ky6"/>
                             <constraint firstItem="Hmq-ks-Bxg" firstAttribute="leading" secondItem="W7s-Dp-ImY" secondAttribute="trailing" constant="16" id="bWQ-bt-rqi"/>
+                            <constraint firstItem="QO8-ii-AEf" firstAttribute="centerY" secondItem="XO6-km-uim" secondAttribute="centerY" id="dw2-9R-gn5"/>
                             <constraint firstItem="6Mh-co-eOH" firstAttribute="centerY" secondItem="XO6-km-uim" secondAttribute="centerY" id="nf0-4o-AfB"/>
                         </constraints>
                     </view>
@@ -127,9 +188,12 @@
             <connections>
                 <outlet property="addressLbl" destination="O9C-Ng-6zQ" id="GnN-0K-ObV"/>
                 <outlet property="business_timeLbl" destination="MqW-04-683" id="nEP-y8-lkL"/>
+                <outlet property="deleteIcon" destination="TFl-qo-hdE" id="0dp-bF-MTk"/>
+                <outlet property="editIcon" destination="QO8-ii-AEf" id="aYF-QC-ZCo"/>
                 <outlet property="listFeatured" destination="QTH-rm-Uu4" id="xGb-Jv-mir"/>
                 <outlet property="mapIcon" destination="6Mh-co-eOH" id="LYO-bw-mNZ"/>
                 <outlet property="mobileIcon" destination="Hmq-ks-Bxg" id="TxV-9F-JI8"/>
+                <outlet property="refreshIcon" destination="yWV-ki-GT7" id="d0Q-6J-lgk"/>
                 <outlet property="telIcon" destination="W7s-Dp-ImY" id="c2c-vD-wPl"/>
                 <outlet property="telLbl" destination="L9p-9p-eLP" id="8nd-5n-bEH"/>
                 <outlet property="titleLbl" destination="9aX-GN-8KU" id="0j7-T3-xvU"/>
@@ -138,8 +202,11 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="clear" width="25" height="25"/>
         <image name="marker" width="36" height="36"/>
         <image name="mobile" width="36" height="36"/>
+        <image name="refresh" width="36" height="36"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <image name="tel" width="25" height="25"/>
     </resources>
 </document>

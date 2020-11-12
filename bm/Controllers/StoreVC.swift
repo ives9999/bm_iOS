@@ -202,7 +202,7 @@ class StoreVC: ListVC, List1CellDelegate {
         }
     }
     
-    override func showMap(indexPath: IndexPath?) {
+    func cellShowMap(indexPath: IndexPath?) {
         if indexPath != nil {
             let row = lists1[indexPath!.row] as! SuperStore
             _showMap(title: row.name, address: row.address)            
@@ -211,10 +211,45 @@ class StoreVC: ListVC, List1CellDelegate {
         }
     }
     
-    func tel(indexPath: IndexPath?) {
+    func cellTel(indexPath: IndexPath?) {
         if indexPath != nil {
             let row = lists1[indexPath!.row] as! SuperStore
-            row.tel.telOrMobileShow()
+            row.tel.makeCall()
+        } else {
+            warning("index path 為空值，請洽管理員")
+        }
+    }
+    
+    func cellMobile(indexPath: IndexPath?) {
+        if indexPath != nil {
+            let row = lists1[indexPath!.row] as! SuperStore
+            row.mobile.makeCall()
+        } else {
+            warning("index path 為空值，請洽管理員")
+        }
+    }
+    
+    func cellRefresh(indexPath: IndexPath?) {
+        if indexPath != nil {
+            self.refresh()
+        } else {
+            warning("index path 為空值，請洽管理員")
+        }
+    }
+    
+    func cellEdit(indexPath: IndexPath?) {
+        if indexPath != nil {
+            let row = lists1[indexPath!.row] as! SuperStore
+            row.mobile.makeCall()
+        } else {
+            warning("index path 為空值，請洽管理員")
+        }
+    }
+    
+    func cellDelete(indexPath: IndexPath?) {
+        if indexPath != nil {
+            let row = lists1[indexPath!.row] as! SuperStore
+            row.mobile.makeCall()
         } else {
             warning("index path 為空值，請洽管理員")
         }
