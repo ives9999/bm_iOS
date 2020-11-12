@@ -22,7 +22,6 @@ class MyMapVC: BaseViewController, MKMapViewDelegate {
         super.viewDidLoad()
         myTitleLbl.text = myTitle
         myMapView.delegate = self
-        
     }
     
     func addAnnotation(location: CLLocationCoordinate2D, title: String, subTitle: String="") {

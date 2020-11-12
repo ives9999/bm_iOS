@@ -19,6 +19,7 @@ class ArenaMapVC: MyMapVC {
     
     override func viewDidLoad() {
         myMapView = mapView
+        
         myTitleLbl = titleLbl
         myTitle = annotationTitle
         super.viewDidLoad()

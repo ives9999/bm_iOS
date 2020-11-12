@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StoreVC: ListVC {
+class StoreVC: ListVC, List1CellDelegate {
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String"],
@@ -36,6 +36,8 @@ class StoreVC: ListVC {
         myTablView.register(cellNibName, forCellReuseIdentifier: "list1cell")
         
         super.viewDidLoad()
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.lightGray
         //tableView.estimatedRowHeight = 480
         //tableView.rowHeight = UITableViewAutomaticDimension
     }
@@ -97,12 +99,12 @@ class StoreVC: ListVC {
 
         if lists1.count > 0 {
             
-            let labelH: CGFloat = 32
+            let labelH: CGFloat = 26
             var margin: CGFloat = 8
-            let iconViewH: CGFloat = 45
+            let iconViewH: CGFloat = 32
             let marginCount: CGFloat = 5
             margin = margin * marginCount
-            let titleH: CGFloat = labelH
+            var titleH: CGFloat = labelH
             let telH: CGFloat = labelH
             var addressH: CGFloat = labelH
             
@@ -110,11 +112,17 @@ class StoreVC: ListVC {
                 
                 let cell = tableViewCells[indexPath.row]
                 let model = lists1[indexPath.row] as! SuperStore
+                
                 let address = model.address
                 cell.addressLbl.text = address
-                let line: CGFloat = (CGFloat)(cell.addressLbl.calculateMaxLines())
+                var line: CGFloat = (CGFloat)(cell.addressLbl.calculateMaxLines())
                 addressH = labelH * line
                 //print(addressH)
+                
+                let name = model.name
+                cell.titleLbl.text = name
+                line = (CGFloat)(cell.titleLbl.calculateMaxLines())
+                titleH = labelH * line
             }
             let h: CGFloat = margin + titleH + telH + addressH + iconViewH
             //print(h)
@@ -130,7 +138,7 @@ class StoreVC: ListVC {
         if tableView == self.tableView {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "list1cell", for: indexPath) as? List1Cell {
                 
-                //cell.cellDelegate = self
+                cell.cellDelegate = self
                 let row = lists1[indexPath.row] as! SuperStore
                 //row.printRow()
                 
@@ -191,6 +199,24 @@ class StoreVC: ListVC {
             let superStore: SuperStore = sender as! SuperStore
             showVC.superStore = superStore
             showVC.store_token = superStore.token
+        }
+    }
+    
+    override func showMap(indexPath: IndexPath?) {
+        if indexPath != nil {
+            let row = lists1[indexPath!.row] as! SuperStore
+            _showMap(title: row.name, address: row.address)            
+        } else {
+            warning("index path 為空值，請洽管理員")
+        }
+    }
+    
+    func tel(indexPath: IndexPath?) {
+        if indexPath != nil {
+            let row = lists1[indexPath!.row] as! SuperStore
+            row.tel.telOrMobileShow()
+        } else {
+            warning("index path 為空值，請洽管理員")
         }
     }
     

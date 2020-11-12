@@ -351,6 +351,22 @@ class BaseViewController: UIViewController  {
         }
     }
     
+    func _showMap(title: String, address: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-nQN-QD-w9o") as? ArenaMapVC {
+                viewController.annotationTitle = title
+                viewController.address = address
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-nQN-QD-w9o") as! ArenaMapVC
+            viewController.annotationTitle = title
+            viewController.address = address
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func loadingShow() {
         if loadingMask == nil {
             loadingMask = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))

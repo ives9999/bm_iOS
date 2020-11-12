@@ -18,14 +18,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QTH-rm-Uu4">
-                        <rect key="frame" x="8" y="44.5" width="90" height="90"/>
+                        <rect key="frame" x="8" y="49" width="90" height="90"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="Baw-LR-pkT"/>
                             <constraint firstAttribute="height" constant="90" id="UcW-Lx-gpN"/>
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="top" axis="vertical" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0AS-bu-Kz5">
-                        <rect key="frame" x="106" y="8" width="198" height="163"/>
+                        <rect key="frame" x="106" y="8" width="198" height="172"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aX-GN-8KU" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="198" height="20.5"/>
@@ -34,7 +34,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ab5-EX-taP">
-                                <rect key="frame" x="0.0" y="71.5" width="89" height="20.5"/>
+                                <rect key="frame" x="0.0" y="76" width="89" height="20.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9p-9p-eLP" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
@@ -51,7 +51,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9C-Ng-6zQ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="142.5" width="198" height="20.5"/>
+                                <rect key="frame" x="0.0" y="151.5" width="198" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -64,11 +64,48 @@
                             <constraint firstAttribute="trailing" secondItem="9aX-GN-8KU" secondAttribute="trailing" id="z5m-DW-fI6"/>
                         </constraints>
                     </stackView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XO6-km-uim">
-                        <rect key="frame" x="0.0" y="179" width="320" height="45"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XO6-km-uim" userLabel="IconView">
+                        <rect key="frame" x="0.0" y="188" width="320" height="36"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Mh-co-eOH" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="16" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="SVp-0J-Svn"/>
+                                    <constraint firstAttribute="width" constant="36" id="lWf-Rc-JHY"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="marker"/>
+                                <connections>
+                                    <action selector="mapBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9ma-kg-Qo1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W7s-Dp-ImY" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="68" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="ETk-9V-msP"/>
+                                    <constraint firstAttribute="height" constant="36" id="Fx4-DF-q5s"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="tel"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hmq-ks-Bxg" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="120" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="Q8m-r0-gwu"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="36" id="YPi-9K-ilS"/>
+                                    <constraint firstAttribute="width" constant="36" id="biD-yy-i7m"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="mGc-Xt-dq9"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="mobile"/>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="45" id="bAG-B6-ky6"/>
+                            <constraint firstItem="Hmq-ks-Bxg" firstAttribute="centerY" secondItem="XO6-km-uim" secondAttribute="centerY" id="CQA-vZ-gyI"/>
+                            <constraint firstItem="W7s-Dp-ImY" firstAttribute="leading" secondItem="6Mh-co-eOH" secondAttribute="trailing" constant="16" id="QgG-RJ-bkQ"/>
+                            <constraint firstItem="W7s-Dp-ImY" firstAttribute="centerY" secondItem="XO6-km-uim" secondAttribute="centerY" id="VYl-0y-o4M"/>
+                            <constraint firstItem="6Mh-co-eOH" firstAttribute="leading" secondItem="XO6-km-uim" secondAttribute="leading" constant="16" id="YJk-CH-o1V"/>
+                            <constraint firstAttribute="height" constant="36" id="bAG-B6-ky6"/>
+                            <constraint firstItem="Hmq-ks-Bxg" firstAttribute="leading" secondItem="W7s-Dp-ImY" secondAttribute="trailing" constant="16" id="bWQ-bt-rqi"/>
+                            <constraint firstItem="6Mh-co-eOH" firstAttribute="centerY" secondItem="XO6-km-uim" secondAttribute="centerY" id="nf0-4o-AfB"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -91,10 +128,18 @@
                 <outlet property="addressLbl" destination="O9C-Ng-6zQ" id="GnN-0K-ObV"/>
                 <outlet property="business_timeLbl" destination="MqW-04-683" id="nEP-y8-lkL"/>
                 <outlet property="listFeatured" destination="QTH-rm-Uu4" id="xGb-Jv-mir"/>
+                <outlet property="mapIcon" destination="6Mh-co-eOH" id="LYO-bw-mNZ"/>
+                <outlet property="mobileIcon" destination="Hmq-ks-Bxg" id="TxV-9F-JI8"/>
+                <outlet property="telIcon" destination="W7s-Dp-ImY" id="c2c-vD-wPl"/>
                 <outlet property="telLbl" destination="L9p-9p-eLP" id="8nd-5n-bEH"/>
                 <outlet property="titleLbl" destination="9aX-GN-8KU" id="0j7-T3-xvU"/>
             </connections>
-            <point key="canvasLocation" x="-272.46376811594206" y="-75.334821428571431"/>
+            <point key="canvasLocation" x="-326.08695652173918" y="-92.075892857142847"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="marker" width="36" height="36"/>
+        <image name="mobile" width="36" height="36"/>
+        <image name="tel" width="25" height="25"/>
+    </resources>
 </document>

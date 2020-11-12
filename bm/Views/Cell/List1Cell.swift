@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol List1CellDelegate {
+    func searchCity(indexPath: IndexPath)
+    func showMap(indexPath: IndexPath?)
+    func tel(indexPath: IndexPath?)
+}
+
 class List1Cell: SuperCell {
 
     @IBOutlet weak var listFeatured: UIImageView!
@@ -15,6 +21,11 @@ class List1Cell: SuperCell {
     @IBOutlet weak var addressLbl: SuperLabel!
     @IBOutlet weak var telLbl: SuperLabel!
     @IBOutlet weak var business_timeLbl: SuperLabel!
+    @IBOutlet weak var mapIcon: SuperButton!
+    @IBOutlet weak var telIcon: SuperButton!
+    @IBOutlet weak var mobileIcon: SuperButton!
+    
+    var cellDelegate: List1CellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -56,6 +67,7 @@ class List1Cell: SuperCell {
 //        listArenaTxt.text = data.address
         telLbl.text = data.tel_text
         business_timeLbl.text = data.open_time_text + "~" + data.close_time_text
+        mapIcon.indexPath = indexPath
 //
 //        var showManager = false;
 //        if data.managers.count > 0 {
@@ -87,4 +99,25 @@ class List1Cell: SuperCell {
         //self.setNeedsLayout()
     }
     
+    @IBAction func mapBtnPressed(sender: UIButton) {
+        let _sender = sender as! SuperButton
+        var indexPath: IndexPath?
+        if _sender.indexPath != nil {
+            indexPath = _sender.indexPath!
+            cellDelegate?.showMap(indexPath: indexPath!)
+        } else {
+            cellDelegate?.showMap(indexPath: indexPath)
+        }
+    }
+    
+    @IBAction func telBtnPressed(sender: UIButton) {
+        let _sender = sender as! SuperButton
+        var indexPath: IndexPath?
+        if _sender.indexPath != nil {
+            indexPath = _sender.indexPath!
+            cellDelegate?.tel(indexPath: indexPath!)
+        } else {
+            cellDelegate?.tel(indexPath: indexPath)
+        }
+    }
 }
