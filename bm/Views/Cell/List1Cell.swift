@@ -66,10 +66,10 @@ class List1Cell: SuperCell {
             let w: CGFloat = CGFloat(idx+1) * iconMargin + CGFloat(idx) * iconWidth
             icons.append(["icon": _icon!, "constraint": _constraints[idx]!, "constant": w])
         }
-        for icon in icons {
-            let w = icon["constant"] as! CGFloat
-            print(w)
-        }
+//        for icon in icons {
+//            let w = icon["constant"] as! CGFloat
+//            print(w)
+//        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -99,28 +99,14 @@ class List1Cell: SuperCell {
         editIcon.indexPath = indexPath
         deleteIcon.indexPath = indexPath
         
-        if row.address.isEmpty {
-            hiddenIcon(mapIcon, firstItem: mapIcon, secondItem: mapIcon.superview!, constant: 16)
-        }
+        //if row.address.isEmpty {
+            hiddenIcon(mapIcon)
+        //}
         if row.tel.isEmpty {
             telIcon.visibility = .gone
         }
         if row.mobile.isEmpty {
-            
-//            //print(leftMargin?.constant)
-//            mobileIcon.widthConstraint?.constant = 0
-//            mobileIcon.visibility = .gone
-            
-            hiddenIcon(mobileIcon, firstItem: mobileIcon, secondItem: telIcon, constant: 16)
-            
-            let constraints = mobileIcon.superview!.constraints
-            for constraint in constraints {
-                if (constraint.firstItem as? SuperButton) == refreshIcon && constraint.firstAttribute == NSLayoutConstraint.Attribute.leading && constraint.secondAttribute == NSLayoutConstraint.Attribute.trailing {
-                    //print(constraint.constant)
-                    //constraint.secondItem = telIcon
-                    //constraint.constant = 0
-                }
-            }
+            hiddenIcon(mobileIcon)
         }
 
         var showManager = false;
@@ -150,31 +136,42 @@ class List1Cell: SuperCell {
         //self.setNeedsLayout()
     }
     
-    func hiddenIcon(_ icon: SuperButton, firstItem: UIView, secondItem: UIView, constant: CGFloat) {
+    func hiddenIcon(_ icon: SuperButton) {
         
-        let constraints = icon.superview!.constraints
-        for constraint in constraints {
-            if constraint.secondItem == nil {
-                continue
-            }
-            let firstType = String(describing: firstItem.self)
-            var _firstItem = constraint.firstItem as? UIView
-            if (firstType == "SuperButton") {
-                _firstItem = constraint.firstItem as! SuperButton
-            }
-            let secondType = String(describing: secondItem.self)
-            var _secondItem = constraint.secondItem as? UIView
-            if (secondType == "SuperButton") {
-                _secondItem = constraint.secondItem as! SuperButton
-            }
-            
-            
-            if _firstItem == firstItem && _secondItem == secondItem && constraint.constant == constant &&  constraint.firstAttribute == NSLayoutConstraint.Attribute.leading && constraint.secondAttribute == NSLayoutConstraint.Attribute.trailing {
-                constraint.constant = 0
+//        let constraints = icon.superview!.constraints
+//        for constraint in constraints {
+//            if constraint.secondItem == nil {
+//                continue
+//            }
+//            let firstType = String(describing: firstItem.self)
+//            var _firstItem = constraint.firstItem as? UIView
+//            if (firstType == "SuperButton") {
+//                _firstItem = constraint.firstItem as! SuperButton
+//            }
+//            let secondType = String(describing: secondItem.self)
+//            var _secondItem = constraint.secondItem as? UIView
+//            if (secondType == "SuperButton") {
+//                _secondItem = constraint.secondItem as! SuperButton
+//            }
+//
+//
+//            if _firstItem == firstItem && _secondItem == secondItem && constraint.constant == constant &&  constraint.firstAttribute == NSLayoutConstraint.Attribute.leading && constraint.secondAttribute == NSLayoutConstraint.Attribute.trailing {
+//                constraint.constant = 0
+//            }
+//        }
+        //print(leftMargin?.constant)
+        //icon.widthConstraint?.constant = 0
+        for (idx, _icon) in icons.enumerated() {
+            if _icon["icon"] as! SuperButton == icon {
+                icons.remove(at: idx)
             }
         }
-        //print(leftMargin?.constant)
-        icon.widthConstraint?.constant = 0
+        for (idx, _) in icons.enumerated() {
+            let w: CGFloat = CGFloat(idx+1) * iconMargin + CGFloat(idx) * iconWidth
+            icons[idx]["constant"] = w
+            let constraint: NSLayoutConstraint = icons[idx]["constraint"] as! NSLayoutConstraint
+            constraint.constant = w
+        }
         icon.visibility = .gone
     }
     
