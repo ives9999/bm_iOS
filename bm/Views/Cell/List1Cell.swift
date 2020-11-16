@@ -32,6 +32,14 @@ class List1Cell: SuperCell {
     @IBOutlet weak var editIcon: SuperButton!
     @IBOutlet weak var deleteIcon: SuperButton!
     
+    @IBOutlet weak var mapConstraint: NSLayoutConstraint!
+    @IBOutlet weak var telConstraint: NSLayoutConstraint!
+    @IBOutlet weak var mobileConstraint: NSLayoutConstraint!
+    @IBOutlet weak var refreshConstraint: NSLayoutConstraint!
+    var icons: [[String: Any]] = [[String: Any]]()
+    let iconWidth: CGFloat = 36
+    let iconMargin: CGFloat = 16
+    
     var cellDelegate: List1CellDelegate?
     
     override func awakeFromNib() {
@@ -51,6 +59,17 @@ class List1Cell: SuperCell {
         
         editIcon.isHidden = true
         deleteIcon.isHidden = true
+        
+        let _icons = [mapIcon, telIcon, mobileIcon, refreshIcon]
+        let _constraints = [mapConstraint, telConstraint, mobileConstraint, refreshConstraint]
+        for (idx,_icon) in _icons.enumerated() {
+            let w: CGFloat = CGFloat(idx+1) * iconMargin + CGFloat(idx) * iconWidth
+            icons.append(["icon": _icon!, "constraint": _constraints[idx]!, "constant": w])
+        }
+        for icon in icons {
+            let w = icon["constant"] as! CGFloat
+            print(w)
+        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -59,19 +78,19 @@ class List1Cell: SuperCell {
         // Configure the view for the selected state
     }
     
-    func updateStoreViews(indexPath: IndexPath, data: SuperStore) {
+    func updateStoreViews(indexPath: IndexPath, row: SuperStore) {
         //data.printRow()
         self.backgroundColor = UIColor.clear
-        if data.featured_path.count > 0 {
-           listFeatured.downloaded(from: data.featured_path)
+        if row.featured_path.count > 0 {
+           listFeatured.downloaded(from: row.featured_path)
         }
         
-        titleLbl.text = data.name
-        addressLbl.text = data.address
+        titleLbl.text = row.name
+        addressLbl.text = row.address
         //print(addressLbl.calculateMaxLines())
         
-        telLbl.text = data.tel_text
-        business_timeLbl.text = data.open_time_text + "~" + data.close_time_text
+        telLbl.text = row.tel_text
+        business_timeLbl.text = row.open_time_text + "~" + row.close_time_text
         
         mapIcon.indexPath = indexPath
         telIcon.indexPath = indexPath
@@ -79,11 +98,35 @@ class List1Cell: SuperCell {
         refreshIcon.indexPath = indexPath
         editIcon.indexPath = indexPath
         deleteIcon.indexPath = indexPath
+        
+        if row.address.isEmpty {
+            hiddenIcon(mapIcon, firstItem: mapIcon, secondItem: mapIcon.superview!, constant: 16)
+        }
+        if row.tel.isEmpty {
+            telIcon.visibility = .gone
+        }
+        if row.mobile.isEmpty {
+            
+//            //print(leftMargin?.constant)
+//            mobileIcon.widthConstraint?.constant = 0
+//            mobileIcon.visibility = .gone
+            
+            hiddenIcon(mobileIcon, firstItem: mobileIcon, secondItem: telIcon, constant: 16)
+            
+            let constraints = mobileIcon.superview!.constraints
+            for constraint in constraints {
+                if (constraint.firstItem as? SuperButton) == refreshIcon && constraint.firstAttribute == NSLayoutConstraint.Attribute.leading && constraint.secondAttribute == NSLayoutConstraint.Attribute.trailing {
+                    //print(constraint.constant)
+                    //constraint.secondItem = telIcon
+                    //constraint.constant = 0
+                }
+            }
+        }
 
         var showManager = false;
-        if data.managers.count > 0 {
+        if row.managers.count > 0 {
             let member_id = Member.instance.id
-            for manager in data.managers {
+            for manager in row.managers {
                 //print(manager)
                 if let tmp = manager["id"] as? String {
                     let manager_id = Int(tmp)
@@ -105,6 +148,34 @@ class List1Cell: SuperCell {
         
         //self.layoutIfNeeded()
         //self.setNeedsLayout()
+    }
+    
+    func hiddenIcon(_ icon: SuperButton, firstItem: UIView, secondItem: UIView, constant: CGFloat) {
+        
+        let constraints = icon.superview!.constraints
+        for constraint in constraints {
+            if constraint.secondItem == nil {
+                continue
+            }
+            let firstType = String(describing: firstItem.self)
+            var _firstItem = constraint.firstItem as? UIView
+            if (firstType == "SuperButton") {
+                _firstItem = constraint.firstItem as! SuperButton
+            }
+            let secondType = String(describing: secondItem.self)
+            var _secondItem = constraint.secondItem as? UIView
+            if (secondType == "SuperButton") {
+                _secondItem = constraint.secondItem as! SuperButton
+            }
+            
+            
+            if _firstItem == firstItem && _secondItem == secondItem && constraint.constant == constant &&  constraint.firstAttribute == NSLayoutConstraint.Attribute.leading && constraint.secondAttribute == NSLayoutConstraint.Attribute.trailing {
+                constraint.constant = 0
+            }
+        }
+        //print(leftMargin?.constant)
+        icon.widthConstraint?.constant = 0
+        icon.visibility = .gone
     }
     
     @IBAction func mapBtnPressed(sender: UIButton) {

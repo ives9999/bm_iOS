@@ -88,7 +88,7 @@ class ProfileVC: MyTableVC {
         //cell!.tintColor = UIColor.red //not working
         cell!.textLabel!.textColor = UIColor.white
         cell!.detailTextLabel!.textColor = UIColor.white
-        if let tmp: Any = Member.instance.getData(key: key) {
+        if let tmp: Any? = Member.instance.getData(key: key) {
             let type: String = row["type"]!
             if type == "String" {
                 data = tmp as! String

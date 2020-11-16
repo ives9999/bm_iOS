@@ -150,7 +150,7 @@ class StoreVC: ListVC, List1CellDelegate {
                 let row = lists1[indexPath.row] as! SuperStore
                 //row.printRow()
                 
-                cell.updateStoreViews(indexPath: indexPath, data: row)
+                cell.updateStoreViews(indexPath: indexPath, row: row)
 //                print("title:\(cell.titleLbl.frame.height)")
 //                print("tel:\(cell.telLbl.frame.height)")
 //                print("address:\(cell.addressLbl.frame.height)")
