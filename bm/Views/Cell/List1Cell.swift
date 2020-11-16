@@ -99,9 +99,9 @@ class List1Cell: SuperCell {
         editIcon.indexPath = indexPath
         deleteIcon.indexPath = indexPath
         
-        //if row.address.isEmpty {
+        if row.address.isEmpty {
             hiddenIcon(mapIcon)
-        //}
+        }
         if row.tel.isEmpty {
             telIcon.visibility = .gone
         }
