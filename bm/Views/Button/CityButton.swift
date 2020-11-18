@@ -26,7 +26,7 @@ class CityButton: SuperButton {
     override func commonInit() {
         super.commonInit()
         setColor(textColor: UIColor.black, bkColor: UIColor(CITY_BUTTON))
-        contentEdgeInsets = UIEdgeInsets(top: 4, left: 12, bottom: 4, right: 12)
+        contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
     }

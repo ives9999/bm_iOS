@@ -18,7 +18,7 @@ protocol List1CellDelegate {
     func cellDelete(indexPath: IndexPath?)
 }
 
-class List1Cell: SuperCell {
+class List1Cell: UITableViewCell {
 
     @IBOutlet weak var listFeatured: UIImageView!
     @IBOutlet weak var titleLbl: SuperLabel!
@@ -43,19 +43,21 @@ class List1Cell: SuperCell {
     
     var cellDelegate: List1CellDelegate?
     
+    var data: [[String: String]] = [[String: String]]()
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        addressLbl.textColor = UIColor(MY_GREEN)
-        telLbl.textColor = UIColor(MY_GREEN)
-        business_timeLbl.textColor = UIColor(MY_GREEN)
+        //addressLbl.textColor = UIColor(MY_GREEN)
+        //telLbl.textColor = UIColor(MY_GREEN)
+        //business_timeLbl.textColor = UIColor(MY_GREEN)
         
         titleLbl.numberOfLines = 0
         titleLbl.textAlignment = .left
         titleLbl.setTextSize(24)
         
-        addressLbl.numberOfLines = 0
-        addressLbl.textAlignment = .left
+        //addressLbl.numberOfLines = 0
+        //addressLbl.textAlignment = .left
         //addressLbl.backgroundColor = UIColor.red
         
         editIcon.isHidden = true
@@ -83,16 +85,16 @@ class List1Cell: SuperCell {
         //data.printRow()
         self.backgroundColor = UIColor.clear
         if row.featured_path.count > 0 {
-           listFeatured.downloaded(from: row.featured_path)
+           //listFeatured.downloaded(from: row.featured_path)
         }
         
         titleLbl.text = row.name
         cityBtn.setTitle(row.city)
-        addressLbl.text = row.address
+        ////addressLbl.text = row.address
         //print(addressLbl.calculateMaxLines())
         
-        telLbl.text = row.tel_text
-        business_timeLbl.text = row.open_time_text + "~" + row.close_time_text
+        ////telLbl.text = row.tel_text
+        ////business_timeLbl.text = row.open_time_text + "~" + row.close_time_text
         
         mapIcon.indexPath = indexPath
         telIcon.indexPath = indexPath
@@ -101,6 +103,7 @@ class List1Cell: SuperCell {
         editIcon.indexPath = indexPath
         deleteIcon.indexPath = indexPath
         
+        /*
         if row.address.isEmpty {
             hiddenIcon(mapIcon)
         }
@@ -129,6 +132,7 @@ class List1Cell: SuperCell {
             editIcon.isHidden = false
             deleteIcon.isHidden = false
         }
+ */
         
         let chevron = UIImage(named: "greater1")
         self.accessoryType = .disclosureIndicator

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StoreVC: ListVC, List1CellDelegate {
+class StoreVC: MyTableVC, List1CellDelegate {
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String"],
@@ -20,9 +20,7 @@ class StoreVC: ListVC, List1CellDelegate {
     var params1: [String: Any]?
     var superStores: SuperStores? = nil
     internal(set) public var lists1: [SuperModel] = [SuperModel]()
-    
-    var tableViewCells: [List2Cell] = [List2Cell]()
-    
+        
     var data: [[String: String]] = [[String: String]]()
     
     override func viewDidLoad() {
@@ -30,35 +28,36 @@ class StoreVC: ListVC, List1CellDelegate {
         myTablView.allowsMultipleSelectionDuringEditing = false
         myTablView.isUserInteractionEnabled = true
         dataService = StoreService.instance
-        _type = "store"
-        _titleField = "name"
-        searchRows = _searchRows
+        //_type = "store"
+        //_titleField = "name"
+        //searchRows = _searchRows
         
-        let a: [String: String] = ["title": "葉氏悟羽體育用品北成店葉氏悟羽體育用品北成店", "city": "台南市", "tel": "062295888"]
+        let a: [String: String] = ["title": "葉氏悟羽體育用品北成店葉氏悟羽體育用品北成店", "city": "台南市", "tel": "062295888", "business_time":"14:00~22:00", "address": "台南市北區北成路330號"]
         data.append(a)
-        let b: [String: String] = ["title": "獵人羽球工廠", "city": "新竹市", "tel": "062295888"]
+        let b: [String: String] = ["title": "獵人羽球工廠", "city": "新竹市", "tel": "062295888", "business_time":"14:00~22:00", "address": "新竹市北區環西路二段216號新竹市北區環西路二段216號"]
         data.append(b)
         
-        let cellNibName = UINib(nibName: "List2Cell", bundle: nil)
-        myTablView.register(cellNibName, forCellReuseIdentifier: "list2cell")
-        
         super.viewDidLoad()
+        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
+        
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.lightGray
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
+        
+        refresh()
     }
     
     override func refresh() { //called by ListVC viewWillAppear
         page = 1
-        tableViewCells.removeAll()
-        //getDataStart()
+        getDataStart()
     }
     
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
         //print(page)
         Global.instance.addSpinner(superView: self.view)
-        
+
         dataService.getList(t: SuperStore.self, t1: SuperStores.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
@@ -69,14 +68,14 @@ class StoreVC: ListVC, List1CellDelegate {
             }
         }
     }
-    
+
     override func getDataEnd(success: Bool) {
         if success {
             let superModel: SuperModel = dataService.superModel
             superStores = (superModel as! SuperStores)
             //superCourses = CourseService.instance.superCourses
             let tmps: [SuperStore] = superStores!.rows
-            
+
             //print(tmps)
             //print("===============")
             if page == 1 {
@@ -102,12 +101,16 @@ class StoreVC: ListVC, List1CellDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
-            //return lists1.count
-            return data.count
+            return lists1.count
+            //return data.count
         } else {
-            return searchRows.count
+            return 1
         }
     }
+    
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableViewAutomaticDimension
+//    }
     
 //    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //
@@ -152,17 +155,22 @@ class StoreVC: ListVC, List1CellDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "list2cell", for: indexPath) as? List2Cell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? List1Cell {
                 
-                //cell.cellDelegate = self
-                //let row = lists1[indexPath.row] as! SuperStore
+                cell.cellDelegate = self
+                let row = lists1[indexPath.row] as! SuperStore
                 //row.printRow()
                 
-                //cell.updateStoreViews(indexPath: indexPath, row: row)
-                let d: [String: String] = data[indexPath.row]
-                cell.titleLbl.text = d["title"]!
-                cell.cityBtn.setTitle(d["city"]!)
-                cell.telLbl.text = d["tel"]!
+                cell.updateStoreViews(indexPath: indexPath, row: row)
+                
+//                let d: [String: String] = data[indexPath.row]
+//                cell.titleLbl.text = d["title"]!
+//                cell.cityBtn.setTitle(d["city"]!)
+                //cell.telLbl.text = d["tel"]!
+                
+                //let chevron = UIImage(named: "greater1")
+                //cell.accessoryType = .disclosureIndicator
+                //cell.accessoryView = UIImageView(image: chevron!)
                 
                 //cell.setNeedsUpdateConstraints()
                 //cell.updateConstraintsIfNeeded()
@@ -175,23 +183,24 @@ class StoreVC: ListVC, List1CellDelegate {
                 //cell.layoutSubviews()
                 //viewDidLayoutSubviews()
                 
-                if !tableViewCells.contains(cell) {
-                    tableViewCells.append(cell)
-                }
+//                if !tableViewCells.contains(cell) {
+//                    tableViewCells.append(cell)
+//                }
                 
                 return cell
             } else {
                 return ListCell()
             }
-        } else if tableView == searchTableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
-                cell.editCellDelegate = self
-                let searchRow = searchRows[indexPath.row]
-                //print(searchRow)
-                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
-                return cell
-            }
         }
+//        else if tableView == searchTableView {
+//            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
+//                cell.editCellDelegate = self
+//                let searchRow = searchRows[indexPath.row]
+//                //print(searchRow)
+//                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
+//                return cell
+//            }
+//        }
         
         return UITableViewCell()
     }
@@ -201,10 +210,6 @@ class StoreVC: ListVC, List1CellDelegate {
 //        //tableView.rowHeight = UITableViewAutomaticDimension
 //    }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //cell.layoutIfNeeded()
-        
-    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -214,11 +219,12 @@ class StoreVC: ListVC, List1CellDelegate {
                 performSegue(withIdentifier: TO_SHOW_STORE, sender: superStore)
             }
             
-        } else if tableView == searchTableView {
-            let row = searchRows[indexPath.row]
-            let segue: String = row["segue"] as! String
-            performSegue(withIdentifier: segue, sender: indexPath)
         }
+//        else if tableView == searchTableView {
+//            let row = searchRows[indexPath.row]
+//            let segue: String = row["segue"] as! String
+//            performSegue(withIdentifier: segue, sender: indexPath)
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -233,9 +239,9 @@ class StoreVC: ListVC, List1CellDelegate {
     func cellShowMap(indexPath: IndexPath?) {
         if indexPath != nil {
             let row = lists1[indexPath!.row] as! SuperStore
-            _showMap(title: row.name, address: row.address)            
+            //_showMap(title: row.name, address: row.address)
         } else {
-            warning("index path 為空值，請洽管理員")
+            //warning("index path 為空值，請洽管理員")
         }
     }
     
@@ -244,7 +250,7 @@ class StoreVC: ListVC, List1CellDelegate {
             let row = lists1[indexPath!.row] as! SuperStore
             row.tel.makeCall()
         } else {
-            warning("index path 為空值，請洽管理員")
+            //warning("index path 為空值，請洽管理員")
         }
     }
     
@@ -253,15 +259,15 @@ class StoreVC: ListVC, List1CellDelegate {
             let row = lists1[indexPath!.row] as! SuperStore
             row.mobile.makeCall()
         } else {
-            warning("index path 為空值，請洽管理員")
+            //warning("index path 為空值，請洽管理員")
         }
     }
     
     func cellRefresh(indexPath: IndexPath?) {
         if indexPath != nil {
-            self.refresh()
+            //self.refresh()
         } else {
-            warning("index path 為空值，請洽管理員")
+            //warning("index path 為空值，請洽管理員")
         }
     }
     
@@ -270,7 +276,7 @@ class StoreVC: ListVC, List1CellDelegate {
             let row = lists1[indexPath!.row] as! SuperStore
             row.mobile.makeCall()
         } else {
-            warning("index path 為空值，請洽管理員")
+            //warning("index path 為空值，請洽管理員")
         }
     }
     
@@ -279,7 +285,7 @@ class StoreVC: ListVC, List1CellDelegate {
             let row = lists1[indexPath!.row] as! SuperStore
             row.mobile.makeCall()
         } else {
-            warning("index path 為空值，請洽管理員")
+            //warning("index path 為空值，請洽管理員")
         }
     }
     
@@ -291,12 +297,12 @@ class StoreVC: ListVC, List1CellDelegate {
         }
     }
     
-    @IBAction func searchBtnPressed(_ sender: Any) {
-        if searchPanelisHidden {
-            showSearchPanel()
-        } else {
-            searchPanelisHidden = true
-            unmask()
-        }
-    }
+//    @IBAction func searchBtnPressed(_ sender: Any) {
+//        if searchPanelisHidden {
+//            showSearchPanel()
+//        } else {
+//            searchPanelisHidden = true
+//            unmask()
+//        }
+//    }
 }
