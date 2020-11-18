@@ -22,6 +22,7 @@ class List1Cell: SuperCell {
 
     @IBOutlet weak var listFeatured: UIImageView!
     @IBOutlet weak var titleLbl: SuperLabel!
+    @IBOutlet weak var cityBtn: CityButton!
     @IBOutlet weak var addressLbl: SuperLabel!
     @IBOutlet weak var telLbl: SuperLabel!
     @IBOutlet weak var business_timeLbl: SuperLabel!
@@ -86,6 +87,7 @@ class List1Cell: SuperCell {
         }
         
         titleLbl.text = row.name
+        cityBtn.setTitle(row.city)
         addressLbl.text = row.address
         //print(addressLbl.calculateMaxLines())
         

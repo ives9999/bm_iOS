@@ -139,6 +139,8 @@
 		B39453E1223CE905005E3027 /* CancelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453E0223CE905005E3027 /* CancelButton.swift */; };
 		B39A216F23420882006C9FF7 /* SignupListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39A216E23420881006C9FF7 /* SignupListVC.swift */; };
 		B3A0D699226DD290008A7D47 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A0D698226DD290008A7D47 /* Session.swift */; };
+		B3A2536D256376B6004B8A03 /* List2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A2536B256376B6004B8A03 /* List2Cell.swift */; };
+		B3A2536E256376B6004B8A03 /* List2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A2536C256376B6004B8A03 /* List2Cell.xib */; };
 		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */; };
 		B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28720B68981001A846F /* ValidateVC.swift */; };
@@ -423,6 +425,8 @@
 		B39453E0223CE905005E3027 /* CancelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelButton.swift; sourceTree = "<group>"; };
 		B39A216E23420881006C9FF7 /* SignupListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupListVC.swift; sourceTree = "<group>"; };
 		B3A0D698226DD290008A7D47 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		B3A2536B256376B6004B8A03 /* List2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List2Cell.swift; sourceTree = "<group>"; };
+		B3A2536C256376B6004B8A03 /* List2Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = List2Cell.xib; sourceTree = "<group>"; };
 		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFunctionVC.swift; sourceTree = "<group>"; };
 		B3A5A28720B68981001A846F /* ValidateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateVC.swift; sourceTree = "<group>"; };
@@ -657,6 +661,8 @@
 				B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */,
 				B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
+				B3A2536B256376B6004B8A03 /* List2Cell.swift */,
+				B3A2536C256376B6004B8A03 /* List2Cell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1195,6 +1201,7 @@
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
 				B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */,
+				B3A2536E256376B6004B8A03 /* List2Cell.xib in Resources */,
 				B3FB9B222407F5EC0051186F /* Team.storyboard in Resources */,
 				F94E7D271F83636A00F550FD /* Assets.xcassets in Resources */,
 				B34A210121B696AA00EE6E1C /* TextFieldCell.xib in Resources */,
@@ -1346,6 +1353,7 @@
 				B36D66B8229997AD00502D62 /* ManagerCourseVC.swift in Sources */,
 				B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */,
 				B3BBDD95240FE88D00EB9856 /* SuperSignupCancel.swift in Sources */,
+				B3A2536D256376B6004B8A03 /* List2Cell.swift in Sources */,
 				B3A9843125552DBB00DCD0F6 /* ManagerStoreVC.swift in Sources */,
 				B3A9844C255918CF00DCD0F6 /* List1Cell.swift in Sources */,
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,

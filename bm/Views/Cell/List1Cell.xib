@@ -25,16 +25,20 @@
                         </constraints>
                     </imageView>
                     <stackView opaque="NO" contentMode="top" axis="vertical" distribution="equalSpacing" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="0AS-bu-Kz5">
-                        <rect key="frame" x="106" y="8" width="198" height="172"/>
+                        <rect key="frame" x="106" y="8" width="89" height="172"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9aX-GN-8KU" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="198" height="20.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81n-Cg-era" customClass="CityButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="47.5" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ab5-EX-taP">
-                                <rect key="frame" x="0.0" y="76" width="89" height="20.5"/>
+                                <rect key="frame" x="0.0" y="104" width="89" height="20.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9p-9p-eLP" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="41.5" height="20.5"/>
@@ -51,7 +55,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O9C-Ng-6zQ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="151.5" width="198" height="20.5"/>
+                                <rect key="frame" x="0.0" y="151.5" width="89" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -61,11 +65,11 @@
                             <constraint firstItem="O9C-Ng-6zQ" firstAttribute="leading" secondItem="0AS-bu-Kz5" secondAttribute="leading" id="3qp-5N-Na6"/>
                             <constraint firstItem="9aX-GN-8KU" firstAttribute="leading" secondItem="0AS-bu-Kz5" secondAttribute="leading" id="AC8-Pp-PBw"/>
                             <constraint firstAttribute="trailing" secondItem="O9C-Ng-6zQ" secondAttribute="trailing" id="a5o-dW-Bwr"/>
-                            <constraint firstAttribute="trailing" secondItem="9aX-GN-8KU" secondAttribute="trailing" id="z5m-DW-fI6"/>
+                            <constraint firstAttribute="right" secondItem="9aX-GN-8KU" secondAttribute="right" constant="200" id="z5m-DW-fI6"/>
                         </constraints>
                     </stackView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XO6-km-uim" userLabel="IconView">
-                        <rect key="frame" x="0.0" y="188" width="320" height="36"/>
+                        <rect key="frame" x="0.0" y="188" width="211" height="36"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Mh-co-eOH" customClass="SuperButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="16" y="0.0" width="36" height="36"/>
@@ -112,7 +116,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QO8-ii-AEf" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="216" y="0.0" width="36" height="36"/>
+                                <rect key="frame" x="107" y="0.0" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="JJ7-pY-tFi"/>
                                     <constraint firstAttribute="height" constant="36" id="Tj5-17-oHa"/>
@@ -123,7 +127,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TFl-qo-hdE" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="268" y="0.0" width="36" height="36"/>
+                                <rect key="frame" x="159" y="0.0" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="24a-Tg-DId"/>
                                     <constraint firstAttribute="height" constant="36" id="YcF-z4-z5i"/>

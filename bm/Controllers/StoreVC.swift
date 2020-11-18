@@ -21,7 +21,9 @@ class StoreVC: ListVC, List1CellDelegate {
     var superStores: SuperStores? = nil
     internal(set) public var lists1: [SuperModel] = [SuperModel]()
     
-    var tableViewCells: [List1Cell] = [List1Cell]()
+    var tableViewCells: [List2Cell] = [List2Cell]()
+    
+    var data: [[String: String]] = [[String: String]]()
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -32,20 +34,25 @@ class StoreVC: ListVC, List1CellDelegate {
         _titleField = "name"
         searchRows = _searchRows
         
-        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
-        myTablView.register(cellNibName, forCellReuseIdentifier: "list1cell")
+        let a: [String: String] = ["title": "葉氏悟羽體育用品北成店葉氏悟羽體育用品北成店", "city": "台南市", "tel": "062295888"]
+        data.append(a)
+        let b: [String: String] = ["title": "獵人羽球工廠", "city": "新竹市", "tel": "062295888"]
+        data.append(b)
+        
+        let cellNibName = UINib(nibName: "List2Cell", bundle: nil)
+        myTablView.register(cellNibName, forCellReuseIdentifier: "list2cell")
         
         super.viewDidLoad()
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.lightGray
-        //tableView.estimatedRowHeight = 480
-        //tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableViewAutomaticDimension
     }
     
-    override func refresh() {
+    override func refresh() { //called by ListVC viewWillAppear
         page = 1
         tableViewCells.removeAll()
-        getDataStart()
+        //getDataStart()
     }
     
     override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
@@ -95,62 +102,70 @@ class StoreVC: ListVC, List1CellDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
-            return lists1.count
+            //return lists1.count
+            return data.count
         } else {
             return searchRows.count
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
-        if tableViewCells.count > indexPath.row {
-            
-            let labelH: CGFloat = 30
-            var margin: CGFloat = 8
-            let iconViewH: CGFloat = 36
-            let marginCount: CGFloat = 5
-            margin = margin * marginCount
-            var titleH: CGFloat = labelH
-            let telH: CGFloat = labelH
-            var addressH: CGFloat = labelH
-            
-            let cell = tableViewCells[indexPath.row]
-            let model = lists1[indexPath.row] as! SuperStore
-            
-            let name = model.name
-            cell.titleLbl.text = name
-            var line: CGFloat = (CGFloat)(cell.titleLbl.calculateMaxLines())
-            titleH = labelH * line
-            //titleH = cell.titleLbl.frame.height
-            //print("title \(indexPath.row): \(titleH)")
-            //print("title \(indexPath.row): \(cell.titleLbl.frame.height)")
-            
-            let address = model.address
-            cell.addressLbl.text = address
-            line = (CGFloat)(cell.addressLbl.calculateMaxLines())
-            addressH = labelH * line
-            //addressH = cell.addressLbl.frame.height
-            //print("address: \(addressH)")
-            
-            let h: CGFloat = margin + titleH + telH + addressH + iconViewH
-            //print("h: \(h)")
-            
-            return h
-        }
-        return 220
-        //return UITableViewAutomaticDimension
-    }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//        if tableViewCells.count > indexPath.row {
+//
+//            let labelH: CGFloat = 30
+//            var margin: CGFloat = 8
+//            let iconViewH: CGFloat = 36
+//            let marginCount: CGFloat = 5
+//            margin = margin * marginCount
+//            var titleH: CGFloat = labelH
+//            let telH: CGFloat = labelH
+//            var addressH: CGFloat = labelH
+//
+//            let cell = tableViewCells[indexPath.row]
+//            let model = lists1[indexPath.row] as! SuperStore
+//
+//            let name = model.name
+//            cell.titleLbl.text = name
+//            var line: CGFloat = (CGFloat)(cell.titleLbl.calculateMaxLines())
+//            titleH = labelH * line
+//            //titleH = cell.titleLbl.frame.height
+//            //print("title \(indexPath.row): \(titleH)")
+//            //print("title \(indexPath.row): \(cell.titleLbl.frame.height)")
+//
+//            let address = model.address
+//            cell.addressLbl.text = address
+//            line = (CGFloat)(cell.addressLbl.calculateMaxLines())
+//            addressH = labelH * line
+//            //addressH = cell.addressLbl.frame.height
+//            //print("address: \(addressH)")
+//
+//            let h: CGFloat = margin + titleH + telH + addressH + iconViewH
+//            //print("h: \(h)")
+//
+//            return h
+//        }
+//        return 220
+//        //return UITableViewAutomaticDimension
+//    }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "list1cell", for: indexPath) as? List1Cell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "list2cell", for: indexPath) as? List2Cell {
                 
-                cell.cellDelegate = self
-                let row = lists1[indexPath.row] as! SuperStore
+                //cell.cellDelegate = self
+                //let row = lists1[indexPath.row] as! SuperStore
                 //row.printRow()
                 
-                cell.updateStoreViews(indexPath: indexPath, row: row)
+                //cell.updateStoreViews(indexPath: indexPath, row: row)
+                let d: [String: String] = data[indexPath.row]
+                cell.titleLbl.text = d["title"]!
+                cell.cityBtn.setTitle(d["city"]!)
+                cell.telLbl.text = d["tel"]!
+                
+                //cell.setNeedsUpdateConstraints()
+                //cell.updateConstraintsIfNeeded()
 //                print("title:\(cell.titleLbl.frame.height)")
 //                print("tel:\(cell.telLbl.frame.height)")
 //                print("address:\(cell.addressLbl.frame.height)")
@@ -185,6 +200,11 @@ class StoreVC: ListVC, List1CellDelegate {
 //        tableView.estimatedRowHeight = 180
 //        //tableView.rowHeight = UITableViewAutomaticDimension
 //    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //cell.layoutIfNeeded()
+        
+    }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
