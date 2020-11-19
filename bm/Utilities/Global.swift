@@ -1295,6 +1295,10 @@ extension UIView {
     }
 }
 
+extension UILabel {
+    
+}
+
 extension UIColor {
     convenience init(red: Int, green: Int, blue: Int) {
         assert(red >= 0 && red <= 255, "Invalid red component")
@@ -1318,13 +1322,14 @@ extension UIImageView {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard
-             let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
+            let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
+            let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
             let data = data, error == nil,
             let image = UIImage(data: data)
                 else {return}
             DispatchQueue.main.async {
                 self.image = image
+                //print(image.size.height)
             }
         }.resume()
     }
@@ -1332,6 +1337,45 @@ extension UIImageView {
     func downloaded(from link: String, contentMode mode: UIViewContentMode = UIView.ContentMode.scaleAspectFit) {
         guard let url = URL(string: link) else {return}
         downloaded(from: url, contentMode: mode)
+    }
+    
+    func sizeOfImageAt(_ link: String) -> CGSize? {
+        guard let url = URL(string: link) else {return CGSize(width: 0, height: 0)}
+        // with CGImageSource we avoid loading the whole image into memory
+        guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else {
+            return nil
+        }
+
+        let propertiesOptions = [kCGImageSourceShouldCache: false] as CFDictionary
+        guard let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, propertiesOptions) as? [CFString: Any] else {
+            return nil
+        }
+
+        if let width = properties[kCGImagePropertyPixelWidth] as? CGFloat,
+            let height = properties[kCGImagePropertyPixelHeight] as? CGFloat {
+            return CGSize(width: width, height: height)
+        } else {
+            return nil
+        }
+    }
+    
+    var contentClippingRect: CGRect {
+        guard let image = image else { return bounds }
+        guard contentMode == .scaleAspectFit else { return bounds }
+        guard image.size.width > 0 && image.size.height > 0 else { return bounds }
+
+        let scale: CGFloat
+        if image.size.width > image.size.height {
+            scale = bounds.width / image.size.width
+        } else {
+            scale = bounds.height / image.size.height
+        }
+
+        let size = CGSize(width: image.size.width * scale, height: image.size.height * scale)
+        let x = (bounds.width - size.width) / 2.0
+        let y = (bounds.height - size.height) / 2.0
+
+        return CGRect(x: x, y: y, width: size.width, height: size.height)
     }
 }
 

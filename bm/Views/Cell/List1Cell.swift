@@ -37,6 +37,9 @@ class List1Cell: UITableViewCell {
     @IBOutlet weak var telConstraint: NSLayoutConstraint!
     @IBOutlet weak var mobileConstraint: NSLayoutConstraint!
     @IBOutlet weak var refreshConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var featuredHConstraint: NSLayoutConstraint!
+    
     var icons: [[String: Any]] = [[String: Any]]()
     let iconWidth: CGFloat = 36
     let iconMargin: CGFloat = 16
@@ -48,16 +51,16 @@ class List1Cell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        //addressLbl.textColor = UIColor(MY_GREEN)
-        //telLbl.textColor = UIColor(MY_GREEN)
-        //business_timeLbl.textColor = UIColor(MY_GREEN)
+        addressLbl.textColor = UIColor(MY_GREEN)
+        telLbl.textColor = UIColor(MY_GREEN)
+        business_timeLbl.textColor = UIColor(MY_GREEN)
         
         titleLbl.numberOfLines = 0
         titleLbl.textAlignment = .left
         titleLbl.setTextSize(24)
         
-        //addressLbl.numberOfLines = 0
-        //addressLbl.textAlignment = .left
+        addressLbl.numberOfLines = 0
+        addressLbl.textAlignment = .left
         //addressLbl.backgroundColor = UIColor.red
         
         editIcon.isHidden = true
@@ -84,17 +87,47 @@ class List1Cell: UITableViewCell {
     func updateStoreViews(indexPath: IndexPath, row: SuperStore) {
         //data.printRow()
         self.backgroundColor = UIColor.clear
+        
+        var featured_h: CGFloat = 0
         if row.featured_path.count > 0 {
-           //listFeatured.downloaded(from: row.featured_path)
+            let featured_size: CGSize = (listFeatured.sizeOfImageAt(row.featured_path))!
+            //print("featured height: \(featured_h)")
+            if featured_size.width > 0 && featured_size.height > 0 {
+                let w = featured_size.width
+                let h = featured_size.height
+                let scale: CGFloat
+                if w > h {
+                    scale = 90 / w
+                } else {
+                    scale = 90 / h
+                }
+                featured_h = h * scale
+            }
+            listFeatured.downloaded(from: row.featured_path)
         }
         
         titleLbl.text = row.name
         cityBtn.setTitle(row.city)
-        ////addressLbl.text = row.address
-        //print(addressLbl.calculateMaxLines())
+        addressLbl.text = row.address
         
-        ////telLbl.text = row.tel_text
-        ////business_timeLbl.text = row.open_time_text + "~" + row.close_time_text
+        titleLbl.sizeToFit()
+        telLbl.sizeToFit()
+        addressLbl.sizeToFit()
+        print("title height: \(titleLbl.frame.height)")
+        print("tel height: \(telLbl.frame.height)")
+        print("address height: \(addressLbl.frame.height)")
+        let rightHeight: CGFloat = titleLbl.frame.height + telLbl.frame.height + addressLbl.frame.height + 32
+        
+        if featured_h > 0 {
+            let featured_margin_h: CGFloat = (rightHeight - featured_h) / 2
+            print("featured height: \(featured_h)")
+            featuredHConstraint.constant = featured_margin_h
+        }
+        
+
+        
+        telLbl.text = row.tel_text
+        business_timeLbl.text = row.open_time_text + "~" + row.close_time_text
         
         mapIcon.indexPath = indexPath
         telIcon.indexPath = indexPath
@@ -103,7 +136,6 @@ class List1Cell: UITableViewCell {
         editIcon.indexPath = indexPath
         deleteIcon.indexPath = indexPath
         
-        /*
         if row.address.isEmpty {
             hiddenIcon(mapIcon)
         }
@@ -132,7 +164,6 @@ class List1Cell: UITableViewCell {
             editIcon.isHidden = false
             deleteIcon.isHidden = false
         }
- */
         
         let chevron = UIImage(named: "greater1")
         self.accessoryType = .disclosureIndicator

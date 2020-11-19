@@ -108,51 +108,6 @@ class StoreVC: MyTableVC, List1CellDelegate {
         }
     }
     
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableViewAutomaticDimension
-//    }
-    
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//        if tableViewCells.count > indexPath.row {
-//
-//            let labelH: CGFloat = 30
-//            var margin: CGFloat = 8
-//            let iconViewH: CGFloat = 36
-//            let marginCount: CGFloat = 5
-//            margin = margin * marginCount
-//            var titleH: CGFloat = labelH
-//            let telH: CGFloat = labelH
-//            var addressH: CGFloat = labelH
-//
-//            let cell = tableViewCells[indexPath.row]
-//            let model = lists1[indexPath.row] as! SuperStore
-//
-//            let name = model.name
-//            cell.titleLbl.text = name
-//            var line: CGFloat = (CGFloat)(cell.titleLbl.calculateMaxLines())
-//            titleH = labelH * line
-//            //titleH = cell.titleLbl.frame.height
-//            //print("title \(indexPath.row): \(titleH)")
-//            //print("title \(indexPath.row): \(cell.titleLbl.frame.height)")
-//
-//            let address = model.address
-//            cell.addressLbl.text = address
-//            line = (CGFloat)(cell.addressLbl.calculateMaxLines())
-//            addressH = labelH * line
-//            //addressH = cell.addressLbl.frame.height
-//            //print("address: \(addressH)")
-//
-//            let h: CGFloat = margin + titleH + telH + addressH + iconViewH
-//            //print("h: \(h)")
-//
-//            return h
-//        }
-//        return 220
-//        //return UITableViewAutomaticDimension
-//    }
-    
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? List1Cell {
@@ -162,30 +117,14 @@ class StoreVC: MyTableVC, List1CellDelegate {
                 //row.printRow()
                 
                 cell.updateStoreViews(indexPath: indexPath, row: row)
-                
+                                
 //                let d: [String: String] = data[indexPath.row]
 //                cell.titleLbl.text = d["title"]!
 //                cell.cityBtn.setTitle(d["city"]!)
                 //cell.telLbl.text = d["tel"]!
                 
-                //let chevron = UIImage(named: "greater1")
-                //cell.accessoryType = .disclosureIndicator
-                //cell.accessoryView = UIImageView(image: chevron!)
-                
-                //cell.setNeedsUpdateConstraints()
-                //cell.updateConstraintsIfNeeded()
-//                print("title:\(cell.titleLbl.frame.height)")
-//                print("tel:\(cell.telLbl.frame.height)")
-//                print("address:\(cell.addressLbl.frame.height)")
-                //cell.contentView.setNeedsLayout()
-                //cell.contentView.layoutIfNeeded()
-                //cell.layoutIfNeeded()
-                //cell.layoutSubviews()
-                //viewDidLayoutSubviews()
-                
-//                if !tableViewCells.contains(cell) {
-//                    tableViewCells.append(cell)
-//                }
+                //let frame = tableView.rectForRow(at: indexPath)
+                //print(frame)
                 
                 return cell
             } else {
@@ -204,12 +143,6 @@ class StoreVC: MyTableVC, List1CellDelegate {
         
         return UITableViewCell()
     }
-    
-//    override func viewDidLayoutSubviews() {
-//        tableView.estimatedRowHeight = 180
-//        //tableView.rowHeight = UITableViewAutomaticDimension
-//    }
-    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -239,9 +172,9 @@ class StoreVC: MyTableVC, List1CellDelegate {
     func cellShowMap(indexPath: IndexPath?) {
         if indexPath != nil {
             let row = lists1[indexPath!.row] as! SuperStore
-            //_showMap(title: row.name, address: row.address)
+            _showMap(title: row.name, address: row.address)
         } else {
-            //warning("index path 為空值，請洽管理員")
+            warning("index path 為空值，請洽管理員")
         }
     }
     
@@ -250,7 +183,7 @@ class StoreVC: MyTableVC, List1CellDelegate {
             let row = lists1[indexPath!.row] as! SuperStore
             row.tel.makeCall()
         } else {
-            //warning("index path 為空值，請洽管理員")
+            warning("index path 為空值，請洽管理員")
         }
     }
     
@@ -259,15 +192,15 @@ class StoreVC: MyTableVC, List1CellDelegate {
             let row = lists1[indexPath!.row] as! SuperStore
             row.mobile.makeCall()
         } else {
-            //warning("index path 為空值，請洽管理員")
+            warning("index path 為空值，請洽管理員")
         }
     }
     
     func cellRefresh(indexPath: IndexPath?) {
         if indexPath != nil {
-            //self.refresh()
+            self.refresh()
         } else {
-            //warning("index path 為空值，請洽管理員")
+            warning("index path 為空值，請洽管理員")
         }
     }
     
@@ -276,7 +209,7 @@ class StoreVC: MyTableVC, List1CellDelegate {
             let row = lists1[indexPath!.row] as! SuperStore
             row.mobile.makeCall()
         } else {
-            //warning("index path 為空值，請洽管理員")
+            warning("index path 為空值，請洽管理員")
         }
     }
     
@@ -285,7 +218,7 @@ class StoreVC: MyTableVC, List1CellDelegate {
             let row = lists1[indexPath!.row] as! SuperStore
             row.mobile.makeCall()
         } else {
-            //warning("index path 為空值，請洽管理員")
+            warning("index path 為空值，請洽管理員")
         }
     }
     
@@ -305,4 +238,8 @@ class StoreVC: MyTableVC, List1CellDelegate {
 //            unmask()
 //        }
 //    }
+    
+    @IBAction func prevBtnPressed(_ sender: Any) {
+        prev()
+    }
 }
