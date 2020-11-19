@@ -12,17 +12,12 @@ class StoreVC: ListVC, List1CellDelegate {
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String"],
-        ["title":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":0,"value":"","value_type":"Array"],
-        ["title":"日期","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":[Int](),"value":"","value_type":"Array"],
-        ["title":"開始時間之後","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"不限","segue":TO_SINGLE_SELECT,"sender":[String: Any](),"value":"","value_type":"String"],
-        ["title":"結束時間之前","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":END_TIME_KEY,"show":"不限","segue":TO_SINGLE_SELECT,"sender":[String: Any](),"value":"","value_type":"String"]
+        ["title":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":0,"value":"","value_type":"Array"]
     ]
     var params1: [String: Any]?
     var superStores: SuperStores? = nil
     internal(set) public var lists1: [SuperModel] = [SuperModel]()
-        
-    var data: [[String: String]] = [[String: String]]()
-    
+            
     override func viewDidLoad() {
         myTablView = tableView
         myTablView.allowsMultipleSelectionDuringEditing = false
@@ -31,11 +26,6 @@ class StoreVC: ListVC, List1CellDelegate {
         _type = "store"
         _titleField = "name"
         searchRows = _searchRows
-        
-        let a: [String: String] = ["title": "葉氏悟羽體育用品北成店葉氏悟羽體育用品北成店", "city": "台南市", "tel": "062295888", "business_time":"14:00~22:00", "address": "台南市北區北成路330號"]
-        data.append(a)
-        let b: [String: String] = ["title": "獵人羽球工廠", "city": "新竹市", "tel": "062295888", "business_time":"14:00~22:00", "address": "新竹市北區環西路二段216號新竹市北區環西路二段216號"]
-        data.append(b)
         
         super.viewDidLoad()
         let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
@@ -103,9 +93,8 @@ class StoreVC: ListVC, List1CellDelegate {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
             return lists1.count
-            //return data.count
         } else {
-            return 1
+            return searchRows.count
         }
     }
     
@@ -118,14 +107,6 @@ class StoreVC: ListVC, List1CellDelegate {
                 //row.printRow()
                 
                 cell.updateStoreViews(indexPath: indexPath, row: row)
-                                
-//                let d: [String: String] = data[indexPath.row]
-//                cell.titleLbl.text = d["title"]!
-//                cell.cityBtn.setTitle(d["city"]!)
-                //cell.telLbl.text = d["tel"]!
-                
-                //let frame = tableView.rectForRow(at: indexPath)
-                //print(frame)
                 
                 return cell
             } else {
@@ -153,8 +134,32 @@ class StoreVC: ListVC, List1CellDelegate {
             }
             
         } else if tableView == searchTableView {
+            
             let row = searchRows[indexPath.row]
-            let segue: String = row["segue"] as! String
+            var segue: String = row["segue"] as! String
+            if segue == TO_MULTI_SELECT {
+                segue = "UIViewController-RNp-jr-1LT"
+            } else if segue == TO_SINGLE_SELECT {
+                segue = "UIViewController-Exi-DF-oVO"
+            }
+            
+            if #available(iOS 13.0, *) {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(identifier: segue) as? MultiSelectVC {
+                    viewController.type = sender
+                    viewController.delegate = self
+                    show(viewController, sender: nil)
+                }
+            } else {
+                let viewController =  self.storyboard!.instantiateViewController(withIdentifier: segue) as! MultiSelectVC
+                viewController.type = sender
+                viewController.delegate = self
+                self.navigationController!.pushViewController(viewController, animated: true)
+            }
+            
+            
+            
+            
             performSegue(withIdentifier: segue, sender: indexPath)
         }
     }

@@ -108,19 +108,6 @@ class List1Cell: UITableViewCell {
         titleLbl.text = row.name
         cityBtn.setTitle(row.city)
         addressLbl.text = row.address
-        
-//        titleLbl.sizeToFit()
-//        telLbl.sizeToFit()
-//        addressLbl.sizeToFit()
-//        print("title height: \(titleLbl.frame.height)")
-//        print("tel height: \(telLbl.frame.height)")
-//        print("address height: \(addressLbl.frame.height)")
-//        let rightHeight: CGFloat = titleLbl.frame.height + telLbl.frame.height + addressLbl.frame.height + 32
-        
-        
-        
-
-        
         telLbl.text = row.tel_text
         business_timeLbl.text = row.open_time_text + "~" + row.close_time_text
         
