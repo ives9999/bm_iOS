@@ -46,7 +46,7 @@ class List1Cell: UITableViewCell {
     
     var cellDelegate: List1CellDelegate?
     
-    var data: [[String: String]] = [[String: String]]()
+    var featured_h: CGFloat = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -88,7 +88,6 @@ class List1Cell: UITableViewCell {
         //data.printRow()
         self.backgroundColor = UIColor.clear
         
-        var featured_h: CGFloat = 0
         if row.featured_path.count > 0 {
             let featured_size: CGSize = (listFeatured.sizeOfImageAt(row.featured_path))!
             //print("featured height: \(featured_h)")
@@ -110,19 +109,15 @@ class List1Cell: UITableViewCell {
         cityBtn.setTitle(row.city)
         addressLbl.text = row.address
         
-        titleLbl.sizeToFit()
-        telLbl.sizeToFit()
-        addressLbl.sizeToFit()
-        print("title height: \(titleLbl.frame.height)")
-        print("tel height: \(telLbl.frame.height)")
-        print("address height: \(addressLbl.frame.height)")
-        let rightHeight: CGFloat = titleLbl.frame.height + telLbl.frame.height + addressLbl.frame.height + 32
+//        titleLbl.sizeToFit()
+//        telLbl.sizeToFit()
+//        addressLbl.sizeToFit()
+//        print("title height: \(titleLbl.frame.height)")
+//        print("tel height: \(telLbl.frame.height)")
+//        print("address height: \(addressLbl.frame.height)")
+//        let rightHeight: CGFloat = titleLbl.frame.height + telLbl.frame.height + addressLbl.frame.height + 32
         
-        if featured_h > 0 {
-            let featured_margin_h: CGFloat = (rightHeight - featured_h) / 2
-            print("featured height: \(featured_h)")
-            featuredHConstraint.constant = featured_margin_h
-        }
+        
         
 
         
@@ -169,8 +164,19 @@ class List1Cell: UITableViewCell {
         self.accessoryType = .disclosureIndicator
         self.accessoryView = UIImageView(image: chevron!)
         
-        //self.layoutIfNeeded()
-        //self.setNeedsLayout()
+        //print(contentView.frame.height)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        //print(contentView.frame.height)
+        let cellH = contentView.frame.height
+        
+        if featured_h > 0 {
+            // 16 is margin*2
+            let featured_margin_h: CGFloat = (cellH - iconWidth - 16 - featured_h) / 2
+            featuredHConstraint.constant = featured_margin_h
+        }
     }
     
     func hiddenIcon(_ icon: SuperButton) {

@@ -216,7 +216,7 @@ class CourseCalendarVC: ListVC {
         }
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
         let d: [String: Any] = dateCourses[indexPath.row]
         guard let courses: [SuperCourse] = d["rows"] as? [SuperCourse] else { return 44}

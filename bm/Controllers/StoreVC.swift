@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StoreVC: MyTableVC, List1CellDelegate {
+class StoreVC: ListVC, List1CellDelegate {
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String"],
@@ -28,9 +28,9 @@ class StoreVC: MyTableVC, List1CellDelegate {
         myTablView.allowsMultipleSelectionDuringEditing = false
         myTablView.isUserInteractionEnabled = true
         dataService = StoreService.instance
-        //_type = "store"
-        //_titleField = "name"
-        //searchRows = _searchRows
+        _type = "store"
+        _titleField = "name"
+        searchRows = _searchRows
         
         let a: [String: String] = ["title": "葉氏悟羽體育用品北成店葉氏悟羽體育用品北成店", "city": "台南市", "tel": "062295888", "business_time":"14:00~22:00", "address": "台南市北區北成路330號"]
         data.append(a)
@@ -43,10 +43,11 @@ class StoreVC: MyTableVC, List1CellDelegate {
         
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.lightGray
+        
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         
-        refresh()
+        //refresh()
     }
     
     override func refresh() { //called by ListVC viewWillAppear
@@ -130,16 +131,15 @@ class StoreVC: MyTableVC, List1CellDelegate {
             } else {
                 return ListCell()
             }
+        } else if tableView == searchTableView {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
+                cell.editCellDelegate = self
+                let searchRow = searchRows[indexPath.row]
+                //print(searchRow)
+                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
+                return cell
+            }
         }
-//        else if tableView == searchTableView {
-//            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
-//                cell.editCellDelegate = self
-//                let searchRow = searchRows[indexPath.row]
-//                //print(searchRow)
-//                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
-//                return cell
-//            }
-//        }
         
         return UITableViewCell()
     }
@@ -152,12 +152,11 @@ class StoreVC: MyTableVC, List1CellDelegate {
                 performSegue(withIdentifier: TO_SHOW_STORE, sender: superStore)
             }
             
+        } else if tableView == searchTableView {
+            let row = searchRows[indexPath.row]
+            let segue: String = row["segue"] as! String
+            performSegue(withIdentifier: segue, sender: indexPath)
         }
-//        else if tableView == searchTableView {
-//            let row = searchRows[indexPath.row]
-//            let segue: String = row["segue"] as! String
-//            performSegue(withIdentifier: segue, sender: indexPath)
-//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -230,16 +229,16 @@ class StoreVC: MyTableVC, List1CellDelegate {
         }
     }
     
-//    @IBAction func searchBtnPressed(_ sender: Any) {
-//        if searchPanelisHidden {
-//            showSearchPanel()
-//        } else {
-//            searchPanelisHidden = true
-//            unmask()
-//        }
-//    }
-    
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
+    @IBAction func searchBtnPressed(_ sender: Any) {
+        if searchPanelisHidden {
+            showSearchPanel()
+        } else {
+            searchPanelisHidden = true
+            unmask()
+        }
     }
+    
+//    @IBAction func prevBtnPressed(_ sender: Any) {
+//        prev()
+//    }
 }

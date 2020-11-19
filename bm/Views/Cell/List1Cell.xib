@@ -136,7 +136,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AVM-EG-3in">
-                        <rect key="frame" x="8" y="8" width="90" height="90"/>
+                        <rect key="frame" x="8" y="16" width="90" height="90"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="06d-Ud-SQw"/>
                             <constraint firstAttribute="height" constant="90" id="d04-R4-YyW"/>
@@ -161,7 +161,7 @@
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Agk-eS-7wz" secondAttribute="trailing" constant="8" id="azi-3u-JKE"/>
                     <constraint firstItem="XO6-km-uim" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="b7F-F8-mz1"/>
                     <constraint firstItem="Agk-eS-7wz" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="qSG-uW-HnY"/>
-                    <constraint firstItem="AVM-EG-3in" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="rxK-oD-rMk"/>
+                    <constraint firstItem="AVM-EG-3in" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="rxK-oD-rMk"/>
                     <constraint firstItem="XO6-km-uim" firstAttribute="top" secondItem="Agk-eS-7wz" secondAttribute="bottom" constant="10" id="wi7-Dx-OOS"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="XO6-km-uim" secondAttribute="bottom" constant="8" id="yLI-dH-2IO"/>
                 </constraints>
