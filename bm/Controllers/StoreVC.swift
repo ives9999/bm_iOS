@@ -244,8 +244,18 @@ class StoreVC: ListVC, List1CellDelegate, MultiSelectDelegate {
     
     func cellEdit(indexPath: IndexPath?) {
         if indexPath != nil {
-            let row = lists1[indexPath!.row] as! SuperStore
-            row.mobile.makeCall()
+            //let row = lists1[indexPath!.row] as! SuperStore
+            if #available(iOS 13.0, *) {
+                let storyboard = UIStoryboard(name: "Course", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-HrW-2D-NhE") as? ManagerCourseVC {
+                    viewController.manager_token = Member.instance.token
+                    show(viewController, sender: nil)
+                }
+            } else {
+                let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-HrW-2D-NhE") as! ManagerCourseVC
+                viewController.manager_token = Member.instance.token
+                self.navigationController!.pushViewController(viewController, animated: true)
+            }
         } else {
             warning("index path 為空值，請洽管理員")
         }

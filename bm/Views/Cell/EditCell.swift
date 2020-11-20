@@ -49,7 +49,7 @@ class EditCell: SuperCell, UITextFieldDelegate {
             onoff.isHidden = true
             moreImageView.isHidden = true
             //editText.addTarget(self, action: #selector(textFieldDidBeginEditing(_:)), for: .editingDidBegin)
-            editText.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingDidEnd)
+            editText.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingChanged)
             
             var vType = "String"
             if row["vtype"] != nil {
