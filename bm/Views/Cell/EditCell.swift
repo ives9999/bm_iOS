@@ -48,6 +48,8 @@ class EditCell: SuperCell, UITextFieldDelegate {
             editText.isHidden = false
             onoff.isHidden = true
             moreImageView.isHidden = true
+            //editText.addTarget(self, action: #selector(textFieldDidBeginEditing(_:)), for: .editingDidBegin)
+            editText.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingDidEnd)
             
             var vType = "String"
             if row["vtype"] != nil {
@@ -102,6 +104,10 @@ class EditCell: SuperCell, UITextFieldDelegate {
         }
         setNeedsLayout()
     }
+    
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        print("start edit")
+//    }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         //print("tag: \(iden)")

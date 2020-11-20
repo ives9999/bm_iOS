@@ -161,6 +161,7 @@ class List1Cell: UITableViewCell {
         
         if featured_h > 0 {
             // 16 is margin*2
+            //print(listFeatured.image!.size)
             let featured_margin_h: CGFloat = (cellH - iconWidth - 16 - featured_h) / 2
             featuredHConstraint.constant = featured_margin_h
         }

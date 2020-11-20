@@ -411,6 +411,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     }
     
     @objc override func layerSubmit(view: UIButton) {
+        
         searchPanelisHidden = true
         unmask()
         prepareParams()

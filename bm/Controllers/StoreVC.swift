@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StoreVC: ListVC, List1CellDelegate {
+class StoreVC: ListVC, List1CellDelegate, MultiSelectDelegate {
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String"],
@@ -17,6 +17,8 @@ class StoreVC: ListVC, List1CellDelegate {
     var params1: [String: Any]?
     var superStores: SuperStores? = nil
     internal(set) public var lists1: [SuperModel] = [SuperModel]()
+    
+    let session: UserDefaults = UserDefaults.standard
             
     override func viewDidLoad() {
         myTablView = tableView
@@ -136,31 +138,33 @@ class StoreVC: ListVC, List1CellDelegate {
         } else if tableView == searchTableView {
             
             let row = searchRows[indexPath.row]
-            var segue: String = row["segue"] as! String
+            let segue: String = row["segue"] as! String
+            var iden: String = ""
             if segue == TO_MULTI_SELECT {
-                segue = "UIViewController-RNp-jr-1LT"
+                iden = "UIViewController-RNp-jr-1LT"
             } else if segue == TO_SINGLE_SELECT {
-                segue = "UIViewController-Exi-DF-oVO"
+                iden = "UIViewController-Exi-DF-oVO"
             }
             
-            if #available(iOS 13.0, *) {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let viewController = storyboard.instantiateViewController(identifier: segue) as? MultiSelectVC {
-                    viewController.type = sender
+            let key: String = row["key"] as! String
+            if segue == TO_MULTI_SELECT {
+                if #available(iOS 13.0, *) {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let viewController = storyboard.instantiateViewController(identifier: iden) as? MultiSelectVC {
+                        viewController.key = key
+                        viewController.delegate = self
+                        show(viewController, sender: nil)
+                    }
+                } else {
+                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: iden) as! MultiSelectVC
+                    viewController.key = key
                     viewController.delegate = self
-                    show(viewController, sender: nil)
+                    self.navigationController!.pushViewController(viewController, animated: true)
                 }
-            } else {
-                let viewController =  self.storyboard!.instantiateViewController(withIdentifier: segue) as! MultiSelectVC
-                viewController.type = sender
-                viewController.delegate = self
-                self.navigationController!.pushViewController(viewController, animated: true)
+            } else if segue == TO_SINGLE_SELECT {
+                
             }
-            
-            
-            
-            
-            performSegue(withIdentifier: segue, sender: indexPath)
+            //performSegue(withIdentifier: segue, sender: indexPath)
         }
     }
     
@@ -171,6 +175,33 @@ class StoreVC: ListVC, List1CellDelegate {
             showVC.superStore = superStore
             showVC.store_token = superStore.token
         }
+    }
+    
+    override func prepareParams(city_type: String="simple") {
+        params1 = [String: Any]()
+        if keyword.count > 0 {
+            params1!["k"] = keyword
+        }
+        for row in searchRows {
+            let key: String = row["key"] as! String
+            let value: String = row["value"] as! String
+            if value.count == 0 {
+                continue
+            }
+            let value_type: String = row["value_type"] as! String
+            if value_type == "Array" {
+                var values: [String] = [String]()
+                if value.contains(",") {
+                    values = value.components(separatedBy: ",")
+                } else {
+                    values.append(value)
+                }
+                params1![key] = values
+            } else {
+                params1![key] = value
+            }
+        }
+        //print(params1)
     }
     
     func cellShowMap(indexPath: IndexPath?) {
@@ -202,6 +233,9 @@ class StoreVC: ListVC, List1CellDelegate {
     
     func cellRefresh(indexPath: IndexPath?) {
         if indexPath != nil {
+            if params1 != nil && !params1!.isEmpty {
+                params1!.removeAll()
+            }
             self.refresh()
         } else {
             warning("index path 為空值，請洽管理員")
@@ -226,6 +260,40 @@ class StoreVC: ListVC, List1CellDelegate {
         }
     }
     
+    func multiSelected(key: String, selecteds: [String]) {
+        var row = getDefinedRow(key)
+        var show = ""
+        if key == WEEKDAY_KEY {
+            var texts: [String] = [String]()
+            for selected in selecteds {
+                let text = WEEKDAY.intToString(Int(selected)!)
+                texts.append(text)
+            }
+            show = texts.joined(separator: ",")
+        } else if key == CITY_KEY {
+            var citys: [[String: String]] = [[String: String]]()
+            if session.array(forKey: "citys") != nil {
+                citys = (session.array(forKey: "citys") as! [[String: String]])
+                //print(citys)
+            }
+            var texts: [String] = [String]()
+            for selected in selecteds {
+                for city in citys {
+                    if city["value"] == selected {
+                        let text = city["title"]!
+                        texts.append(text)
+                        break
+                    }
+                }
+            }
+            show = texts.joined(separator: ",")
+        }
+        row["show"] = show
+        row["value"] = selecteds.joined(separator: ",")
+        replaceRows(key, row)
+        searchTableView.reloadData()
+    }
+    
     @IBAction func manager(_ sender: Any) {
         if !Member.instance.isLoggedIn {
             SCLAlertView().showError("警告", subTitle: "請先登入為會員")
@@ -242,6 +310,37 @@ class StoreVC: ListVC, List1CellDelegate {
             unmask()
         }
     }
+    
+    override func clear(indexPath: IndexPath) {
+        var row = searchRows[indexPath.row]
+        //print(row)
+        
+        let key = row["key"] as! String
+        switch key {
+        case CITY_KEY:
+            citys.removeAll()
+            if session.array(forKey: "citys") != nil {
+                session.removeObject(forKey: "citys")
+            }
+        case AREA_KEY:
+            areas.removeAll()
+        case TEAM_WEEKDAYS_KEY:
+            weekdays.removeAll()
+        case TEAM_PLAY_START_KEY:
+            times.removeAll()
+        case ARENA_KEY:
+            arenas.removeAll()
+        case TEAM_DEGREE_KEY:
+            degrees.removeAll()
+        default:
+            _ = 1
+        }
+        
+        row["value"] = ""
+        row["show"] = "全部"
+        replaceRows(key, row)
+    }
+    
     
 //    @IBAction func prevBtnPressed(_ sender: Any) {
 //        prev()
