@@ -45,7 +45,7 @@ class MultiSelectVC: SelectVC {
         if checked {
             setSelectedStyle(cell)
         } else {
-           unSetSelectedStyle(cell)
+            unSetSelectedStyle(cell)
         }
         
         return cell

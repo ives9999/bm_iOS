@@ -8,7 +8,7 @@
 
 import Foundation
 
-class StoreVC: ListVC, List1CellDelegate, MultiSelectDelegate {
+class StoreVC: ListVC, List1CellDelegate {
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""],
@@ -139,28 +139,10 @@ class StoreVC: ListVC, List1CellDelegate, MultiSelectDelegate {
             
             let row = searchRows[indexPath.row]
             let segue: String = row["segue"] as! String
-            var iden: String = ""
-            if segue == TO_MULTI_SELECT {
-                iden = "UIViewController-RNp-jr-1LT"
-            } else if segue == TO_SINGLE_SELECT {
-                iden = "UIViewController-Exi-DF-oVO"
-            }
             
             let key: String = row["key"] as! String
             if segue == TO_MULTI_SELECT {
-                if #available(iOS 13.0, *) {
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let viewController = storyboard.instantiateViewController(identifier: iden) as? MultiSelectVC {
-                        viewController.key = key
-                        viewController.delegate = self
-                        show(viewController, sender: nil)
-                    }
-                } else {
-                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: iden) as! MultiSelectVC
-                    viewController.key = key
-                    viewController.delegate = self
-                    self.navigationController!.pushViewController(viewController, animated: true)
-                }
+                toMultiSelect(key: key, _delegate: self)
             } else if segue == TO_SINGLE_SELECT {
                 
             }
@@ -244,16 +226,18 @@ class StoreVC: ListVC, List1CellDelegate, MultiSelectDelegate {
     
     func cellEdit(indexPath: IndexPath?) {
         if indexPath != nil {
-            //let row = lists1[indexPath!.row] as! SuperStore
+            let row = lists1[indexPath!.row] as! SuperStore
             if #available(iOS 13.0, *) {
-                let storyboard = UIStoryboard(name: "Course", bundle: nil)
-                if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-HrW-2D-NhE") as? ManagerCourseVC {
-                    viewController.manager_token = Member.instance.token
+                let storyboard = UIStoryboard(name: "More", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(identifier: TO_EDIT_STORE) as? EditStoreVC {
+                    viewController.title = row.name
+                    viewController.store_token = row.token
                     show(viewController, sender: nil)
                 }
             } else {
-                let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-HrW-2D-NhE") as! ManagerCourseVC
-                viewController.manager_token = Member.instance.token
+                let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_EDIT_STORE) as! EditStoreVC
+                viewController.title = row.name
+                viewController.store_token = row.token
                 self.navigationController!.pushViewController(viewController, animated: true)
             }
         } else {
@@ -264,13 +248,39 @@ class StoreVC: ListVC, List1CellDelegate, MultiSelectDelegate {
     func cellDelete(indexPath: IndexPath?) {
         if indexPath != nil {
             let row = lists1[indexPath!.row] as! SuperStore
-            row.mobile.makeCall()
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false
+            )
+            let alert = SCLAlertView(appearance: appearance)
+            alert.addButton("確定", action: {
+                self._delete(token: row.token)
+                self.prevBtnPressed("")
+            })
+            alert.addButton("取消", action: {
+            })
+            alert.showWarning("警告", subTitle: "是否確定要刪除")
         } else {
             warning("index path 為空值，請洽管理員")
         }
     }
     
-    func multiSelected(key: String, selecteds: [String]) {
+    private func _delete(token: String) {
+        Global.instance.addSpinner(superView: self.view)
+        dataService.delete(token: token, type: "store") { (success) in
+            if success {
+                Global.instance.removeSpinner(superView: self.view)
+                if (!self.dataService.success) {
+                    SCLAlertView().showError("錯誤", subTitle: "無法刪除，請稍後再試")
+                }
+                NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+                self.refresh()
+            } else {
+                SCLAlertView().showError("錯誤", subTitle: "無法刪除，請稍後再試")
+            }
+        }
+    }
+    
+    override func multiSelected(key: String, selecteds: [String]) {
         var row = getDefinedRow(key)
         var show = ""
         if key == WEEKDAY_KEY {

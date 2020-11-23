@@ -12,7 +12,7 @@ protocol EditCourseDelegate {
     func isReload(_ yes: Bool)
 }
 
-class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, SingleSelectDelegate, MultiSelectDelegate, ContentEditDelegate,DateSelectDelegate {
+class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ContentEditDelegate,DateSelectDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var featuredView: ImagePickerView!
@@ -265,7 +265,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         self.present(viewController, animated: true, completion: nil)
     }
     
-    func singleSelected(key: String, selected: String) {
+    override func singleSelected(key: String, selected: String) {
         let item = getFormItemFromKey(key)
         if item != nil {
             item!.value = selected
@@ -274,7 +274,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
     }
     
-    func multiSelected(key: String, selecteds: [String]) {
+    override func multiSelected(key: String, selecteds: [String]) {
         let item = getFormItemFromKey(key)
         if item != nil {
             var value: String = "-1"

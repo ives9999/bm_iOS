@@ -314,7 +314,7 @@ class CourseCalendarVC: ListVC {
         }
     }
 
-    func singleSelected(key: String, selected: String) {
+    override func singleSelected(key: String, selected: String) {
         var row = getDefinedRow(key)
         var show = ""
         if key == START_TIME_KEY || key == END_TIME_KEY {
@@ -326,7 +326,7 @@ class CourseCalendarVC: ListVC {
         searchTableView.reloadData()
     }
     
-    func multiSelected(key: String, selecteds: [String]) {
+    override func multiSelected(key: String, selecteds: [String]) {
         var row = getDefinedRow(key)
         var show = ""
         if key == WEEKDAY_KEY {

@@ -11,8 +11,8 @@ import OneSignal
 import Reachability
 import WebKit
 
-class BaseViewController: UIViewController  {
-    
+class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate  {
+
     var msg: String = ""
     var dataService: DataService = DataService()
     var managerLists: [SuperData] = [SuperData]()
@@ -419,6 +419,49 @@ class BaseViewController: UIViewController  {
     }
     
     @objc func refresh() {}
+    
+    func toSingleSelect(key: String? = nil, _delegate: BaseViewController) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: IDEN_SINGLE_SELECT) as? SingleSelectVC {
+                if key != nil {
+                    viewController.key = key
+                }
+                viewController.delegate = _delegate
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: IDEN_SINGLE_SELECT) as! SingleSelectVC
+            if key != nil {
+                viewController.key = key
+            }
+            viewController.delegate = _delegate
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toMultiSelect(key: String? = nil, _delegate: BaseViewController) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: IDEN_MULTI_SELECT) as? MultiSelectVC {
+                if key != nil {
+                    viewController.key = key
+                }
+                viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: IDEN_MULTI_SELECT) as! MultiSelectVC
+            if key != nil {
+                viewController.key = key
+            }
+            viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func multiSelected(key: String, selecteds: [String]) {}
+    func singleSelected(key: String, selected: String) {}
     
     func alertError(title: String, msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)

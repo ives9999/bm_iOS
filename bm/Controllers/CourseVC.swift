@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CourseVC: ListVC, SingleSelectDelegate, MultiSelectDelegate, SelectDelegate {
+class CourseVC: ListVC {
     
     @IBOutlet weak var managerBtn: UIButton!
     
@@ -224,7 +224,7 @@ class CourseVC: ListVC, SingleSelectDelegate, MultiSelectDelegate, SelectDelegat
         }
     }
 
-    func singleSelected(key: String, selected: String) {
+    override func singleSelected(key: String, selected: String) {
         var row = getDefinedRow(key)
         var show = ""
         if key == START_TIME_KEY || key == END_TIME_KEY {
@@ -236,7 +236,7 @@ class CourseVC: ListVC, SingleSelectDelegate, MultiSelectDelegate, SelectDelegat
         searchTableView.reloadData()
     }
     
-    func multiSelected(key: String, selecteds: [String]) {
+    override func multiSelected(key: String, selecteds: [String]) {
         var row = getDefinedRow(key)
         var show = ""
         if key == WEEKDAY_KEY {
