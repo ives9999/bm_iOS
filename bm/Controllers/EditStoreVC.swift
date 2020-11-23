@@ -27,6 +27,8 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
     
     var delegate: EditStoreDelegate?
     
+    let session: UserDefaults = UserDefaults.standard
+    
     override func viewDidLoad() {
         myTablView = tableView
         super.viewDidLoad()
@@ -181,6 +183,14 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
     
     override func singleSelected(key: String, selected: String) {
         
+        let item = getFormItemFromKey(key)
+        if item != nil {
+            if key == CITY_KEY {
+                item!.value = selected
+            }
+            item!.make()
+            tableView.reloadData()
+        }
     }
     
     func getFormItemFromKey(_ key: String)-> FormItem? {
