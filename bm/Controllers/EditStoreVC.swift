@@ -29,6 +29,8 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
     
     let session: UserDefaults = UserDefaults.standard
     
+    var citysandareas:[Int:[String:Any]] = [Int:[String:Any]]()
+    
     override func viewDidLoad() {
         myTablView = tableView
         super.viewDidLoad()
@@ -97,9 +99,45 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                 //let segue = item!.segue!
                 let key = item!.name
                 if key == CITY_KEY {
-                    toSingleSelect(key: key, _delegate: self)
+                    let selectItem: CityFormItem = item as! CityFormItem
+                    var selected: String = ""
+                    if selectItem.selected_city_ids.count > 0 {
+                        selected = String(selectItem.selected_city_ids[0])
+                    }
+                    
+                    toSingleSelect(key: key, selected: selected, _delegate: self)
+                } else if key == AREA_KEY {
+                    let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY) as! CityFormItem
+                    var city_id: Int = 0
+                    if cityItem.value != nil {
+                        city_id = Int(cityItem.value!)!
+                        var city_ids: [Int] = [city_id]
+                        
+                        StoreService.instance.getAreaByCityIDs(city_ids: city_ids,city_type: "complete") { (success) in
+                            if success {
+                                //print(self.citys)
+                                let tmp = StoreService.instance.citysandareas
+                                
+                                city_ids = [Int]()
+                                for (city_id, _) in tmp {
+                                    city_ids.append(city_id)
+                                }
+                                for city_id in city_ids {
+                                    for (id, item) in tmp {
+                                        if id == city_id {
+                                            self.citysandareas[id] = item
+                                            break
+                                        }
+                                    }
+                                }
+                                //print(self.citysandareas)
+                                Global.instance.removeSpinner(superView: self.tableView)
+                            }
+                        }
+                    } else {
+                        warning("請先選擇縣市")
+                    }
                 }
-                //performSegue(withIdentifier: segue, sender: indexPath)
             }
         }
     }
@@ -181,18 +219,6 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
         return getFormItemFromKey(key)
     }
     
-    override func singleSelected(key: String, selected: String) {
-        
-        let item = getFormItemFromKey(key)
-        if item != nil {
-            if key == CITY_KEY {
-                item!.value = selected
-            }
-            item!.make()
-            tableView.reloadData()
-        }
-    }
-    
     func getFormItemFromKey(_ key: String)-> FormItem? {
         var res: FormItem? = nil
         for formItem in form.formItems {
@@ -203,6 +229,18 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
         }
         
         return res
+    }
+    
+    override func singleSelected(key: String, selected: String) {
+        
+        let item = getFormItemFromKey(key)
+        if item != nil {
+            if key == CITY_KEY {
+                item!.value = selected
+            }
+            item!.make()
+            tableView.reloadData()
+        }
     }
     
     func isImageSet(_ b: Bool) {

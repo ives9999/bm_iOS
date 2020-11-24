@@ -24,6 +24,7 @@ class StoreForm: BaseForm {
         
         let section3 = SectionFormItem(title: "課程")
         let cityItem = CityFormItem()
+        let areaItem = AreaFormItem()
         let courseKindItem = CourseKindFormItem()
         let cycleUnitItem = CycleUnitFormItem()
         let weekdayFormItem = WeekdayFormItem()
@@ -34,6 +35,6 @@ class StoreForm: BaseForm {
         let peopleLimitItem = TextFieldFormItem(name: PEOPLE_LIMIT_KEY, title: "人數限制", placeholder: "")
         let contentFormItem = ContentFormItem(name: CONTENT_KEY, title: "詳細介紹", type: TEXT_INPUT_TYPE.content)
 
-        formItems = [section1,nameItem,section2,telItem,mobileItem,emailItem,weblItem,fbItem,lineItem,section3,cityItem, courseKindItem,cycleUnitItem,weekdayFormItem,startTimeFormItem,endTimeFormItem,startDateFormItem,endDateFormItem,peopleLimitItem,contentFormItem]
+        formItems = [section1,nameItem,section2,telItem,mobileItem,emailItem,weblItem,fbItem,lineItem,section3,cityItem,areaItem, courseKindItem,cycleUnitItem,weekdayFormItem,startTimeFormItem,endTimeFormItem,startDateFormItem,endDateFormItem,peopleLimitItem,contentFormItem]
     }
 }

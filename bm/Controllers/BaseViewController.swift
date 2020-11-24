@@ -420,12 +420,15 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     
     @objc func refresh() {}
     
-    func toSingleSelect(key: String? = nil, _delegate: BaseViewController) {
+    func toSingleSelect(key: String? = nil, selected: String? = nil, _delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: IDEN_SINGLE_SELECT) as? SingleSelectVC {
                 if key != nil {
                     viewController.key = key
+                }
+                if selected != nil {
+                    viewController.selected = selected
                 }
                 viewController.delegate = _delegate
                 show(viewController, sender: nil)

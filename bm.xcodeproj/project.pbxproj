@@ -142,6 +142,9 @@
 		B3A253D22567D6ED004B8A03 /* EditStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A253D12567D6EB004B8A03 /* EditStoreVC.swift */; };
 		B3A253D8256A57B6004B8A03 /* StoreForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A253D7256A57B6004B8A03 /* StoreForm.swift */; };
 		B3A253DE256A9E43004B8A03 /* CityFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A253DD256A9E43004B8A03 /* CityFormItem.swift */; };
+		B3A253E4256BCBB8004B8A03 /* AreaFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A253E3256BCBB8004B8A03 /* AreaFormItem.swift */; };
+		B3A253EA256CBA4D004B8A03 /* CitySelect1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A253E9256CBA4C004B8A03 /* CitySelect1VC.swift */; };
+		B3A253F0256CBB40004B8A03 /* Select.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A253EF256CBB40004B8A03 /* Select.storyboard */; };
 		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */; };
 		B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28720B68981001A846F /* ValidateVC.swift */; };
@@ -429,6 +432,9 @@
 		B3A253D12567D6EB004B8A03 /* EditStoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStoreVC.swift; sourceTree = "<group>"; };
 		B3A253D7256A57B6004B8A03 /* StoreForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreForm.swift; sourceTree = "<group>"; };
 		B3A253DD256A9E43004B8A03 /* CityFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFormItem.swift; sourceTree = "<group>"; };
+		B3A253E3256BCBB8004B8A03 /* AreaFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaFormItem.swift; sourceTree = "<group>"; };
+		B3A253E9256CBA4C004B8A03 /* CitySelect1VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitySelect1VC.swift; sourceTree = "<group>"; };
+		B3A253EF256CBB40004B8A03 /* Select.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Select.storyboard; sourceTree = "<group>"; };
 		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFunctionVC.swift; sourceTree = "<group>"; };
 		B3A5A28720B68981001A846F /* ValidateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateVC.swift; sourceTree = "<group>"; };
@@ -760,6 +766,7 @@
 				B33C1ABC21BD300E006F2BEB /* TimeFormItem.swift */,
 				B33C1ABE21BD7F2C006F2BEB /* WeekdayFormItem.swift */,
 				B3A253DD256A9E43004B8A03 /* CityFormItem.swift */,
+				B3A253E3256BCBB8004B8A03 /* AreaFormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";
@@ -907,6 +914,7 @@
 				B3E72A1A1F9F9F0B0008A6B1 /* Support files */,
 				B31361E51F87869400BDA53D /* Utilities */,
 				B32FBCEF1F84831C003D39CC /* Views */,
+				B3A253EF256CBB40004B8A03 /* Select.storyboard */,
 			);
 			path = bm;
 			sourceTree = "<group>";
@@ -994,6 +1002,7 @@
 				B36E334325480007001336C2 /* ShowStoreVC.swift */,
 				B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */,
 				B3A253D12567D6EB004B8A03 /* EditStoreVC.swift */,
+				B3A253E9256CBA4C004B8A03 /* CitySelect1VC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1219,6 +1228,7 @@
 				B306FEAE21F8422B00403FE2 /* IconCell.xib in Resources */,
 				B3DEBE102106FDB1003699A0 /* ListCell.xib in Resources */,
 				B3A9038E2385537900A986F7 /* CourseView.xib in Resources */,
+				B3A253F0256CBB40004B8A03 /* Select.storyboard in Resources */,
 				B39453DF2232948F005E3027 /* PNCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1384,6 +1394,7 @@
 				B3E8C2A5220BFFE10008ED25 /* SuperWebView.swift in Sources */,
 				B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */,
 				B36D66C0229A828A00502D62 /* ManagerCourseCell.swift in Sources */,
+				B3A253EA256CBA4D004B8A03 /* CitySelect1VC.swift in Sources */,
 				B3756EE821B96B96006893E1 /* ColorSelectCell.swift in Sources */,
 				B39A216F23420882006C9FF7 /* SignupListVC.swift in Sources */,
 				B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */,
@@ -1514,6 +1525,7 @@
 				B3ED38D91FB463D00003F083 /* Team.swift in Sources */,
 				F96931991FB958110005C13F /* CitySelectVC.swift in Sources */,
 				B3ED38D71FB2A3E80003F083 /* EditProfileVC.swift in Sources */,
+				B3A253E4256BCBB8004B8A03 /* AreaFormItem.swift in Sources */,
 				B33C1ABF21BD7F2C006F2BEB /* WeekdayFormItem.swift in Sources */,
 				B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */,
 				B306FEA521F72F0E00403FE2 /* ShowTimetableVC.swift in Sources */,

@@ -41,6 +41,17 @@ class SingleSelectVC: SelectVC {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SingleSelectCell
         cell.titleLbl.text = rows1![indexPath.row]["title"]
         
+        var checked: Bool = false
+        let row = rows1![indexPath.row]
+        if row["value"] == selected {
+            checked = true
+        }
+        if checked {
+            setSelectedStyle(cell)
+        } else {
+            unSetSelectedStyle(cell)
+        }
+        
         return cell
     }
     
@@ -48,11 +59,10 @@ class SingleSelectVC: SelectVC {
         submit(indexPath)
     }
     
-
     func submit(_ indexPath: IndexPath) {
         
         let row = rows1![indexPath.row]
-        let selected = row["value"]
+        selected = (row["value"] == selected) ? "" : row["value"]
         if delegate != nil {
             delegate!.singleSelected(key: key!, selected: selected!)
             prev()

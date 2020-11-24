@@ -37,6 +37,7 @@ class MoreCell: SuperCell, FormUPdatable {
     }
     
     func clear() {
+        formItem?.reset()
         formItem?.value = nil
         formItem?.show = ""
         formItem?.sender = nil

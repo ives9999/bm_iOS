@@ -30,6 +30,8 @@ class CityFormItem: FormItem {
     override func reset() {
         super.reset()
         value = nil
+        selected_city_ids.removeAll()
+        selected_city_names.removeAll()
         make()
     }
     
@@ -37,6 +39,22 @@ class CityFormItem: FormItem {
         
         //value is a number string by divide ,
         valueToAnother()
+        if selected_city_names.count > 0 {
+            show = selected_city_names.joined(separator: ",")
+        } else {
+            show = ""
+        }
+        if selected_city_ids.count > 0 {
+            sender = (selected_city_ids.map{String($0)}).joined(separator: ",")
+            value = (sender as! String)
+        } else {
+            sender = nil
+        }
+    }
+    
+    //parse value to array
+    override func valueToAnother() {
+        //value is 1,2,3 or 1 is city id
         if value != nil && value!.count > 0 {
             let tmps: [String] = value!.components(separatedBy: ",")
             for tmp in tmps {
@@ -51,12 +69,6 @@ class CityFormItem: FormItem {
                     
                 }
             }
-            show = selected_city_names.joined(separator: ",")
-            sender = (selected_city_ids.map{String($0)}).joined(separator: ",")
-        } else {
-            value = nil
-            show = ""
-            sender = nil
         }
     }
 }
