@@ -466,6 +466,29 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func multiSelected(key: String, selecteds: [String]) {}
     func singleSelected(key: String, selected: String) {}
     
+    func selectCity(key: String? = nil, selected: String? = nil, _delegate: BaseViewController) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Select", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_CITY) as? SelectCityVC {
+                if key != nil {
+                    viewController.key = key
+                }
+                if selected != nil {
+                    viewController.selected = selected
+                }
+                viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SELECT_CITY) as! SelectCityVC
+            if key != nil {
+                viewController.key = key
+            }
+            viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func alertError(title: String, msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))

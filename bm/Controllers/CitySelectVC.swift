@@ -6,6 +6,8 @@
 //  Copyright © 2017年 bm. All rights reserved.
 //
 
+//不再使用了，請使用 SelectCityVC or SelectCitysVC 代替
+
 import UIKit
 import UIColor_Hex_Swift
 

@@ -104,8 +104,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                     if selectItem.selected_city_ids.count > 0 {
                         selected = String(selectItem.selected_city_ids[0])
                     }
-                    
-                    toSingleSelect(key: key, selected: selected, _delegate: self)
+                    selectCity(key: key, selected: selected, _delegate: self)
                 } else if key == AREA_KEY {
                     let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY) as! CityFormItem
                     var city_id: Int = 0
@@ -235,9 +234,10 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
         
         let item = getFormItemFromKey(key)
         if item != nil {
-            if key == CITY_KEY {
-                item!.value = selected
+            if item!.value != selected {
+                item!.reset()
             }
+            item!.value = selected
             item!.make()
             tableView.reloadData()
         }
