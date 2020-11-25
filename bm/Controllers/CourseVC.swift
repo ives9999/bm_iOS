@@ -23,7 +23,7 @@ class CourseVC: ListVC {
     var superCourses: SuperCourses? = nil
     internal(set) public var lists1: [SuperModel] = [SuperModel]()
     
-    let session: UserDefaults = UserDefaults.standard
+    //let session: UserDefaults = UserDefaults.standard
     var params1: [String: Any]?
 
     override func viewDidLoad() {

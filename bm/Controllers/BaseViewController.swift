@@ -20,6 +20,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     let titleBarHeight: CGFloat = 80
     var workAreaHeight: CGFloat = 600
     
+    let session: UserDefaults = UserDefaults.standard
+    
     //layer
     let maskView = UIView()
     var containerView = UIView(frame: .zero)
@@ -466,7 +468,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func multiSelected(key: String, selecteds: [String]) {}
     func singleSelected(key: String, selected: String) {}
     
-    func selectCity(key: String? = nil, selected: String? = nil, _delegate: BaseViewController) {
+    func toSelectCity(key: String? = nil, selected: String? = nil, _delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Select", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_CITY) as? SelectCityVC {
@@ -486,6 +488,46 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             }
             viewController.delegate = self
             self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toSelectCitys(key: String? = nil, selected: String? = nil, _delegate: BaseViewController) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Select", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_CITYS) as? SelectCitysVC {
+                if key != nil {
+                    viewController.key = key
+                }
+                if selected != nil {
+                    //viewController.selected = selected
+                }
+                viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SELECT_CITYS) as! SelectCitysVC
+            if key != nil {
+                viewController.key = key
+            }
+            viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func getCitys(completion1: @escaping (_ rows: [[String: String]]) -> Void) {
+        Global.instance.addSpinner(superView: view)
+        DataService.instance1.getCitys() { (success) in
+            if success {
+                let citys = DataService.instance1.citys
+                var rows1 = [[String: String]]()
+                for city in citys {
+                    rows1.append(["title": city.name, "value": String(city.id)])
+                }
+                self.session.set(rows1, forKey: "citys")
+                //self.tableView.reloadData()
+                completion1(rows1)
+            }
+            Global.instance.removeSpinner(superView: self.view)
         }
     }
     

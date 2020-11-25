@@ -61,14 +61,35 @@ class SingleSelectVC: SelectVC {
     
     func submit(_ indexPath: IndexPath) {
         
+        let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         let row = rows1![indexPath.row]
-        selected = (row["value"] == selected) ? "" : row["value"]
-        if delegate != nil {
-            delegate!.singleSelected(key: key!, selected: selected!)
-            prev()
-        } else {
-            alertError("由於傳遞參數不正確，無法做選擇，請回上一頁重新進入")
+        
+        var cancel: Bool = false
+        if selected != nil && selected!.count > 0 {
+            if selected! == row["value"] {
+                cancel = true
+                unSetSelectedStyle(cell)
+            }
         }
+        if !cancel {
+            if delegate != nil {
+                let _key = ((key == nil) ? "" : key)!
+                delegate!.singleSelected(key: _key, selected: row["value"]!)
+            }
+            setSelectedStyle(cell)
+            prev()
+        }
+        
+        
+        
+        
+//        selected = (row["value"] == selected) ? "" : row["value"]
+//        if delegate != nil {
+//            delegate!.singleSelected(key: key!, selected: selected!)
+//            prev()
+//        } else {
+//            alertError("由於傳遞參數不正確，無法做選擇，請回上一頁重新進入")
+//        }
     }
     
     override func setDelegate(_ delegate: SelectDelegate) {

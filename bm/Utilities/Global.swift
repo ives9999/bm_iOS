@@ -718,6 +718,15 @@ extension UserDefaults {
             return 0
         }
     }
+    func getArrayDictionary(_ key: String) -> [[String: String]] {
+        var tmp: [[String: String]] = [[String: String]]()
+        let tmp1 = object(forKey: key)
+        if tmp1 != nil {
+            tmp = tmp1 as? [[String: String]] ?? [[String: String]]()
+        }
+        
+        return tmp
+    }
     func set(_ key: String, _ value: Any) {
         set(value, forKey: key)
     }

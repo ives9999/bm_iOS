@@ -19,8 +19,8 @@ let REMOTE_BASE_URL = "https://bm.sportpassword.com"
 //let REMOTE_BASE_URL = "http://192.168.100.120"
 //let REMOTE_BASE_URL = "http://192.168.100.150"
 //let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
-let LOCALHOST_BASE_URL = "http://192.168.100.241"
-//let LOCALHOST_BASE_URL = "http://192.168.100.120"
+//let LOCALHOST_BASE_URL = "http://192.168.100.241"
+let LOCALHOST_BASE_URL = "http://192.168.100.120"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 
 
@@ -123,6 +123,7 @@ let TO_REGISTER: String = "toRegister"
 let TO_REFRESH: String = "toRefresh"
 let TO_SEARCH: String = "toSearch"
 let TO_SELECT_CITY: String = "toSelectCity"
+let TO_SELECT_CITYS: String = "toSelectCitys"
 let TO_SELECT_DEGREE: String = "toSelectDegree"
 let TO_SELECT_WEEKDAY: String = "toWeekday"
 let TO_SELECT_DATE: String = "toSelectDate"

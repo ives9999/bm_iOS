@@ -16,14 +16,15 @@ class SelectVC: MyTableVC {
     
     var key: String? = nil
     var rows1: [[String: String]]?
-    let session: UserDefaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if key != nil && key == CITY_KEY {
-            getCitys()
-        }
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.white
+//        if key != nil && key == CITY_KEY {
+//            getCitys()
+//        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -44,22 +45,6 @@ class SelectVC: MyTableVC {
         cell.accessoryType = .none
         cell.textLabel?.textColor = UIColor.white
         cell.tintColor = UIColor.white
-    }
-
-    func getCitys() {
-        Global.instance.addSpinner(superView: view)
-        DataService.instance1.getCitys() { (success) in
-            if success {
-                let citys = DataService.instance1.citys
-                self.rows1 = [[String: String]]()
-                for city in citys {
-                    self.rows1!.append(["title": city.name, "value": String(city.id)])
-                }
-                self.session.set(self.rows1, forKey: "citys")
-                self.tableView.reloadData()
-            }
-            Global.instance.removeSpinner(superView: self.view)
-        }
     }
     
     func setDelegate(_ delegate: SelectDelegate) {}

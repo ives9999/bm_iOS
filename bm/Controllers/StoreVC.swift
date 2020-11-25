@@ -18,7 +18,7 @@ class StoreVC: ListVC, List1CellDelegate {
     var superStores: SuperStores? = nil
     internal(set) public var lists1: [SuperModel] = [SuperModel]()
     
-    let session: UserDefaults = UserDefaults.standard
+    //let session: UserDefaults = UserDefaults.standard
             
     override func viewDidLoad() {
         myTablView = tableView

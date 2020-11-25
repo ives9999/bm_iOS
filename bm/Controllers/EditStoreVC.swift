@@ -27,7 +27,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
     
     var delegate: EditStoreDelegate?
     
-    let session: UserDefaults = UserDefaults.standard
+    //let session: UserDefaults = UserDefaults.standard
     
     var citysandareas:[Int:[String:Any]] = [Int:[String:Any]]()
     
@@ -104,7 +104,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                     if selectItem.selected_city_ids.count > 0 {
                         selected = String(selectItem.selected_city_ids[0])
                     }
-                    selectCity(key: key, selected: selected, _delegate: self)
+                    toSelectCity(key: key, selected: selected, _delegate: self)
                 } else if key == AREA_KEY {
                     let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY) as! CityFormItem
                     var city_id: Int = 0
