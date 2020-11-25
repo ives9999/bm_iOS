@@ -486,20 +486,23 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             if key != nil {
                 viewController.key = key
             }
+            if selected != nil {
+                viewController.selected = selected
+            }
             viewController.delegate = self
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
     
-    func toSelectCitys(key: String? = nil, selected: String? = nil, _delegate: BaseViewController) {
+    func toSelectCitys(key: String? = nil, selecteds: [String]? = nil, _delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Select", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_CITYS) as? SelectCitysVC {
                 if key != nil {
                     viewController.key = key
                 }
-                if selected != nil {
-                    //viewController.selected = selected
+                if selecteds != nil {
+                    viewController.selecteds = selecteds!
                 }
                 viewController.delegate = self
                 show(viewController, sender: nil)
@@ -508,6 +511,65 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SELECT_CITYS) as! SelectCitysVC
             if key != nil {
                 viewController.key = key
+            }
+            if selecteds != nil {
+                viewController.selecteds = selecteds!
+            }
+            viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toSelectArea(key: String? = nil, city_id: Int? = nil, selected: String? = nil, _delegate: BaseViewController) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Select", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_AREA) as? SelectAreaVC {
+                if key != nil {
+                    viewController.key = key
+                }
+                if selected != nil {
+                    viewController.selected = selected
+                }
+                if city_id != nil {
+                    viewController.city_id = city_id
+                }
+                viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SELECT_AREA) as! SelectAreaVC
+            if key != nil {
+                viewController.key = key
+                //viewController.city
+            }
+            if selected != nil {
+                viewController.selected = selected
+            }
+            viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toSelectAreas(key: String? = nil, selecteds: [String]? = nil, _delegate: BaseViewController) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Select", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_AREAS) as? SelectAreasVC {
+                if key != nil {
+                    viewController.key = key
+                }
+                if selecteds != nil {
+                    viewController.selecteds = selecteds!
+                }
+                viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SELECT_AREAS) as! SelectAreasVC
+            if key != nil {
+                viewController.key = key
+            }
+            if selecteds != nil {
+                viewController.selecteds = selecteds!
             }
             viewController.delegate = self
             self.navigationController!.pushViewController(viewController, animated: true)
@@ -529,6 +591,45 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             }
             Global.instance.removeSpinner(superView: self.view)
         }
+    }
+    
+    func getAreasFromCity(_ city_id: Int, completion1: @escaping (_ rows: [[String: String]]) -> Void) {
+        
+        let city_ids: [Int] = [city_id]
+        Global.instance.addSpinner(superView: view)
+        DataService.instance1.getAreaByCityIDs(city_ids: city_ids,city_type: "") { (success) in
+            if success {
+                //print(self.citys)
+                //citysandareas:[Int:[String:Any]] = [Int:[String:Any]]()
+                let city = DataService.instance1.citysandareas
+                var city_name = ""
+                if city[city_id] != nil {
+                    city_name = city[city_id]!["name"] as! String
+                }
+                
+                var areas: [[String: String]] = [[String: String]]()
+                for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
+                    var area_id: String = ""
+                    var area_name: String = ""
+                    for (key, value) in row {
+                        if key == "id" {
+                            area_id = String(value as! Int)
+                        }
+                        if key == "name" {
+                            area_name = value as! String
+                        }
+                    }
+                    if area_id.count > 0 && area_name.count > 0 {
+                        areas.append(["value":area_id,"title":area_name])
+                    }
+                }
+                //print(areas)
+                completion1(areas)
+                
+                Global.instance.removeSpinner(superView: self.view)
+            }
+        }
+        
     }
     
     func alertError(title: String, msg: String) {

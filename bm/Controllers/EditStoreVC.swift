@@ -105,36 +105,21 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                         selected = String(selectItem.selected_city_ids[0])
                     }
                     toSelectCity(key: key, selected: selected, _delegate: self)
+                    
+                    //let selecteds: [String] = [String]()
+                    //toSelectCitys(key: key, selecteds: selecteds, _delegate: self)
                 } else if key == AREA_KEY {
-                    let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY) as! CityFormItem
-                    var city_id: Int = 0
-                    if cityItem.value != nil {
-                        city_id = Int(cityItem.value!)!
-                        var city_ids: [Int] = [city_id]
-                        
-                        StoreService.instance.getAreaByCityIDs(city_ids: city_ids,city_type: "complete") { (success) in
-                            if success {
-                                //print(self.citys)
-                                let tmp = StoreService.instance.citysandareas
-                                
-                                city_ids = [Int]()
-                                for (city_id, _) in tmp {
-                                    city_ids.append(city_id)
-                                }
-                                for city_id in city_ids {
-                                    for (id, item) in tmp {
-                                        if id == city_id {
-                                            self.citysandareas[id] = item
-                                            break
-                                        }
-                                    }
-                                }
-                                //print(self.citysandareas)
-                                Global.instance.removeSpinner(superView: self.tableView)
-                            }
-                        }
-                    } else {
+                    let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY)! as! CityFormItem
+                    if cityItem.value == nil {
                         warning("請先選擇縣市")
+                    } else {
+                        let city_id = Int(cityItem.value!)
+                        let selectItem: AreaFormItem = item as! AreaFormItem
+                        var selected: String = ""
+                        if selectItem.selected_area_ids.count > 0 {
+                            selected = String(selectItem.selected_area_ids[0])
+                        }
+                        toSelectArea(key: key, city_id: city_id, selected: selected, _delegate: self)
                     }
                 }
             }

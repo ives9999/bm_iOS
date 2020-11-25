@@ -10,25 +10,22 @@ import Foundation
 
 class AreaFormItem: FormItem {
     
-    let session: UserDefaults = UserDefaults.standard
-    var citysFromCache:[[String: String]] = [[String: String]]()
+    var selected_area_ids:[Int] = [Int]()
+    var selected_area_names: [String] = [String]()
     
     required init(name: String = AREA_KEY, title: String = "區域") {
         super.init(name: name, title: title, placeholder: nil, value: nil)
         segue = TO_SINGLE_SELECT
         uiProperties.cellType = .more
         
-        if session.array(forKey: "citys") != nil {
-            citysFromCache = (session.array(forKey: "citys") as! [[String: String]])
-        }
         reset()
     }
     
     override func reset() {
         super.reset()
         value = nil
-        //selected_city_ids.removeAll()
-        //selected_city_names.removeAll()
+        selected_area_ids.removeAll()
+        selected_area_names.removeAll()
         make()
     }
     
@@ -36,17 +33,17 @@ class AreaFormItem: FormItem {
         
         //value is a number string by divide ,
         valueToAnother()
-//        if selected_city_names.count > 0 {
-//            show = selected_city_names.joined(separator: ",")
-//        } else {
-//            show = ""
-//        }
-//        if selected_city_ids.count > 0 {
-//            sender = (selected_city_ids.map{String($0)}).joined(separator: ",")
-//            value = (sender as! String)
-//        } else {
-//            sender = nil
-//        }
+        if selected_area_names.count > 0 {
+            show = selected_area_names.joined(separator: ",")
+        } else {
+            show = ""
+        }
+        if selected_area_ids.count > 0 {
+            sender = (selected_area_ids.map{String($0)}).joined(separator: ",")
+            value = (sender as! String)
+        } else {
+            sender = nil
+        }
     }
     
     override func valueToAnother() {
