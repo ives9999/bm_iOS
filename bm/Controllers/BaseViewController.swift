@@ -576,9 +576,13 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
+    // return is [
+    //             ["id": "5", "name": "新北市"],
+    //             ["id": "6", "name": "台北市"]
+    //           ]
     func getCitys(completion1: @escaping (_ rows: [[String: String]]) -> Void) -> [[String: String]] {
         
-        session.removeObject(forKey: "citys")
+        //session.removeObject(forKey: "citys")
         let rows = session.getArrayDictionary("citys")
         if rows.count == 0 {
             Global.instance.addSpinner(superView: view)
@@ -600,48 +604,61 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         return rows
     }
     
-    func getAreasFromCity(_ city_id: Int, completion1: @escaping (_ rows: [[String: String]]) -> Void) {
+    // return is [
+    //             "52": [
+    //                     "id": "52",
+    //                     "name": ["新北市"],
+    //                     "rows": [
+    //                          ["id": "5", "name": "中和"],
+    //                          ["id": "6", "name": "永和"]
+    //                     ]
+    //                  ]
+    //           ]
+    func getAreasFromCity(_ city_id: Int, completion1: @escaping (_ rows: [[String: String]]) -> Void) -> [[String: String]] {
         
-        let city_ids: [Int] = [city_id]
-        Global.instance.addSpinner(superView: view)
-        DataService.instance1.getAreaByCityIDs(city_ids: city_ids,city_type: "") { (success) in
-            if success {
-                
-                let city = DataService.instance1.citysandareas
-                var city_name = ""
-                if city[city_id] != nil {
-                    city_name = city[city_id]!["name"] as! String
-                }
-                
-                var areas: [[String: String]] = [[String: String]]()
-                var areas1: [[String: String]] = [[String: String]]()
-                for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
-                    var area_id: String = ""
-                    var area_name: String = ""
-                    for (key, value) in row {
-                        if key == "id" {
-                            area_id = String(value as! Int)
+        //session.removeObject(forKey: "areas")
+        let rows = session.getAreas(city_id)
+        if rows.count == 0 {
+            let city_ids: [Int] = [city_id]
+            Global.instance.addSpinner(superView: view)
+            DataService.instance1.getAreaByCityIDs(city_ids: city_ids,city_type: "") { (success) in
+                if success {
+                    
+                    let city = DataService.instance1.citysandareas
+                    var city_name = ""
+                    if city[city_id] != nil {
+                        city_name = city[city_id]!["name"] as! String
+                    }
+                    
+                    var areas: [[String: String]] = [[String: String]]()
+                    for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
+                        var area_id: String = ""
+                        var area_name: String = ""
+                        for (key, value) in row {
+                            if key == "id" {
+                                area_id = String(value as! Int)
+                            }
+                            if key == "name" {
+                                area_name = value as! String
+                            }
                         }
-                        if key == "name" {
-                            area_name = value as! String
+                        if area_id.count > 0 && area_name.count > 0 {
+                            areas.append(["id":area_id,"name":area_name])
                         }
                     }
-                    if area_id.count > 0 && area_name.count > 0 {
-                        areas1.append(["id":area_id,"name":area_name])
-                        areas.append(["value":area_id,"title":area_name])
-                    }
+                    //print(areas)
+                    let area_s: [String: Any] = ["id": String(city_id), "name": city_name, "rows": areas]
+                    let city_s: [String: [String: Any]] = [String(city_id): area_s]
+                    
+                    //self.session.removeObject(forKey: "areas")
+                    self.session.set(city_s, forKey: "areas")
+                    completion1(areas)
+                    
+                    Global.instance.removeSpinner(superView: self.view)
                 }
-                //print(areas)
-                let area_s: [String: Any] = ["id": city_id, "name": city_name, "rows": areas1]
-                let city_s: [String: [String: Any]] = [String(city_id): area_s]
-                //self.session.removeObject(forKey: "areas")
-                self.session.set(city_s, forKey: "areas")
-                completion1(areas)
-                
-                Global.instance.removeSpinner(superView: self.view)
             }
         }
-        
+        return rows
     }
     
     func alertError(title: String, msg: String) {

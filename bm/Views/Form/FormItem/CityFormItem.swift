@@ -59,8 +59,8 @@ class CityFormItem: FormItem {
             let tmps: [String] = value!.components(separatedBy: ",")
             for tmp in tmps {
                 for city in citysFromCache {
-                    if city["value"] == tmp {
-                        selected_city_names.append(city["title"]!)
+                    if city["id"] == tmp {
+                        selected_city_names.append(city["name"]!)
                         break
                     }
                 }
