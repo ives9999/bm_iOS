@@ -16,12 +16,14 @@ class SelectCityVC: SingleSelectVC {
         super.viewDidLoad()
         
         //print(selected)
-        rows1 = session.getArrayDictionary("citys")
-        if rows1!.count == 0 {
-            getCitys() { rows in
-                self.rows1 = rows
-                self.tableView.reloadData()
-            }
+        rows1 = getCitys() { rows in
+            print(rows)
+            self.rows1 = rows
+            self.tableView.reloadData()
         }
+    }
+    
+    func citysBridge(rowsFromSession: [[String: String]]) {
+        
     }
 }

@@ -984,6 +984,8 @@
 				B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */,
 				B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */,
 				B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */,
+				B326C7CB256E2F0D0048A2C2 /* SelectAreasVC.swift */,
+				B326C7C1256E2AEB0048A2C2 /* SelectAreaVC.swift */,
 				B326C7BB256CE0950048A2C2 /* SelectCitysVC.swift */,
 				B3A253E9256CBA4C004B8A03 /* SelectCityVC.swift */,
 				B385A07B22BCB28E00BC3ADF /* SelectVC.swift */,
@@ -1010,8 +1012,6 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
-				B326C7C1256E2AEB0048A2C2 /* SelectAreaVC.swift */,
-				B326C7CB256E2F0D0048A2C2 /* SelectAreasVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

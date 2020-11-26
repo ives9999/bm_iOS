@@ -576,21 +576,28 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func getCitys(completion1: @escaping (_ rows: [[String: String]]) -> Void) {
-        Global.instance.addSpinner(superView: view)
-        DataService.instance1.getCitys() { (success) in
-            if success {
-                let citys = DataService.instance1.citys
-                var rows1 = [[String: String]]()
-                for city in citys {
-                    rows1.append(["title": city.name, "value": String(city.id)])
+    func getCitys(completion1: @escaping (_ rows: [[String: String]]) -> Void) -> [[String: String]] {
+        
+        session.removeObject(forKey: "citys")
+        let rows = session.getArrayDictionary("citys")
+        if rows.count == 0 {
+            Global.instance.addSpinner(superView: view)
+            DataService.instance1.getCitys() { (success) in
+                if success {
+                    let rows = DataService.instance1.citys
+                    //print(rows)
+                    var citys = [[String: String]]()
+                    for row in rows { // row is City object
+                        citys.append(["name": row.name, "id": String(row.id)])
+                    }
+                    self.session.set(citys, forKey: "citys")
+                    //self.tableView.reloadData()
+                    completion1(citys)
                 }
-                self.session.set(rows1, forKey: "citys")
-                //self.tableView.reloadData()
-                completion1(rows1)
+                Global.instance.removeSpinner(superView: self.view)
             }
-            Global.instance.removeSpinner(superView: self.view)
         }
+        return rows
     }
     
     func getAreasFromCity(_ city_id: Int, completion1: @escaping (_ rows: [[String: String]]) -> Void) {
@@ -599,8 +606,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         Global.instance.addSpinner(superView: view)
         DataService.instance1.getAreaByCityIDs(city_ids: city_ids,city_type: "") { (success) in
             if success {
-                //print(self.citys)
-                //citysandareas:[Int:[String:Any]] = [Int:[String:Any]]()
+                
                 let city = DataService.instance1.citysandareas
                 var city_name = ""
                 if city[city_id] != nil {
@@ -608,6 +614,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                 }
                 
                 var areas: [[String: String]] = [[String: String]]()
+                var areas1: [[String: String]] = [[String: String]]()
                 for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
                     var area_id: String = ""
                     var area_name: String = ""
@@ -620,10 +627,15 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                         }
                     }
                     if area_id.count > 0 && area_name.count > 0 {
+                        areas1.append(["id":area_id,"name":area_name])
                         areas.append(["value":area_id,"title":area_name])
                     }
                 }
                 //print(areas)
+                let area_s: [String: Any] = ["id": city_id, "name": city_name, "rows": areas1]
+                let city_s: [String: [String: Any]] = [String(city_id): area_s]
+                //self.session.removeObject(forKey: "areas")
+                self.session.set(city_s, forKey: "areas")
                 completion1(areas)
                 
                 Global.instance.removeSpinner(superView: self.view)

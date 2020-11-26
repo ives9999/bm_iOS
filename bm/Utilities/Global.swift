@@ -727,6 +727,27 @@ extension UserDefaults {
         
         return tmp
     }
+    func getAreas(_ city_id: Int) -> [[String: String]] {
+        var tmp: [[String: String]] = [[String: String]]()
+        let key: String = "areas"
+        let obj = object(forKey: key)
+        if obj != nil {
+            let tmp1: [String: [String: Any]] = obj as! [String: [String: Any]]
+            for (_city_id, area) in tmp1 {
+                if city_id == Int(_city_id) {
+                    let rows = area["rows"] as! [[String: Any]]
+                    for row in rows {
+                        //print(row)
+                        let id: String = row["id"] as! String
+                        let name: String = row["name"] as! String
+                        tmp.append(["value": id, "title": name])
+                    }
+                }
+            }
+        }
+        
+        return tmp
+    }
     func set(_ key: String, _ value: Any) {
         set(value, forKey: key)
     }
