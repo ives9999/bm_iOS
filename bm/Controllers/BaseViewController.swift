@@ -422,12 +422,18 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     
     @objc func refresh() {}
     
-    func toSingleSelect(key: String? = nil, selected: String? = nil, _delegate: BaseViewController) {
+    func toSingleSelect(key: String? = nil, title: String? = nil, rows:[[String: String]] = [[String: String]](), selected: String? = nil, _delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: IDEN_SINGLE_SELECT) as? SingleSelectVC {
                 if key != nil {
                     viewController.key = key
+                }
+                if title != nil {
+                    viewController.title = title
+                }
+                if rows.count > 0 {
+                    viewController.rows1 = rows
                 }
                 if selected != nil {
                     viewController.selected = selected
@@ -439,6 +445,15 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: IDEN_SINGLE_SELECT) as! SingleSelectVC
             if key != nil {
                 viewController.key = key
+            }
+            if title != nil {
+                viewController.title = title
+            }
+            if rows.count > 0 {
+                viewController.rows1 = rows
+            }
+            if selected != nil {
+                viewController.selected = selected
             }
             viewController.delegate = _delegate
             self.navigationController!.pushViewController(viewController, animated: true)
@@ -550,7 +565,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toSelectAreas(key: String? = nil, selecteds: [String]? = nil, _delegate: BaseViewController) {
+    func toSelectAreas(key: String? = nil, city_ids: [Int]? = nil, selecteds: [String]? = nil, _delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Select", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_AREAS) as? SelectAreasVC {
@@ -659,6 +674,63 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                         self.session.set(city_s, forKey: "areas")
                     }
                     completion1(areas)
+                    
+                    Global.instance.removeSpinner(superView: self.view)
+                }
+            }
+        }
+        return rows
+    }
+    
+    func getAreasFromCitys(_ city_ids: [Int], completion1: @escaping (_ rows: [String: [String: Any]]) -> Void) -> [String: [String: Any]] {
+        
+        //session.removeObject(forKey: "areas")
+        let rows = session.getAreasByCitys(city_ids)
+        //print(rows)
+        if rows.count < city_ids.count {
+            //let city_ids: [Int] = [city_id]
+            Global.instance.addSpinner(superView: view)
+            DataService.instance1.getAreaByCityIDs(city_ids: city_ids,city_type: "") { (success) in
+                if success {
+                    
+                    var res: [String: [String: Any]] = [String: [String: Any]]()
+                    let city = DataService.instance1.citysandareas
+                    for (city_id, city_value) in city {
+                        var city_name = ""
+                        if city[city_id] != nil {
+                            city_name = city[city_id]!["name"] as! String
+                        }
+                        
+                        var areas: [[String: String]] = [[String: String]]()
+                        for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
+                            var area_id: String = ""
+                            var area_name: String = ""
+                            for (key, value) in row {
+                                if key == "id" {
+                                    area_id = String(value as! Int)
+                                }
+                                if key == "name" {
+                                    area_name = value as! String
+                                }
+                            }
+                            if area_id.count > 0 && area_name.count > 0 {
+                                areas.append(["id":area_id,"name":area_name])
+                            }
+                        }
+                        //print(areas)
+                        let area_s: [String: Any] = ["id": String(city_id), "name": city_name, "rows": areas]
+                        let city_s: [String: [String: Any]] = [String(city_id): area_s]
+                        
+                        var allAreas: [String: [String: Any]] = self.session.getAllAreas()
+                        if allAreas != nil && allAreas.count > 0 {
+                            allAreas[String(city_id)] = area_s
+                            self.session.set(allAreas, forKey: "areas")
+                        } else {
+                            self.session.set(city_s, forKey: "areas")
+                        }
+                        res[String(city_id)] = area_s
+                    }
+                    completion1(res)
                     
                     Global.instance.removeSpinner(superView: self.view)
                 }

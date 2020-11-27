@@ -108,6 +108,8 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                     
                     //let selecteds: [String] = [String]()
                     //toSelectCitys(key: key, selecteds: selecteds, _delegate: self)
+                    //let city_ids: [Int] = [52, 66]
+                    //toSelectAreas(key: key, city_ids: city_ids, selecteds: selecteds, _delegate: self)
                 } else if key == AREA_KEY {
                     let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY)! as! CityFormItem
                     if cityItem.value == nil {
@@ -121,6 +123,13 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                         }
                         toSelectArea(key: key, city_id: city_id, selected: selected, _delegate: self)
                     }
+                } else if key == OPEN_TIME_KEY || key == CLOSE_TIME_KEY {
+                    let times = Global.instance.makeTimes()
+                    var rows = [[String: String]]()
+                    for time in times {
+                        rows.append(["title": time, "value": time+":00"])
+                    }
+                    toSingleSelect(key: key, title: item!.title, rows: rows, _delegate: self)
                 }
             }
         }

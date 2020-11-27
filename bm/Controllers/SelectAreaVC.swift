@@ -19,7 +19,7 @@ class SelectAreaVC: SingleSelectVC {
             super.viewDidLoad()
 
             //print(selected)
-            if city_id != nil && city_id! > 0 {
+            if city_id! > 0 {
                 let session_rows = getAreasFromCity(city_id!) { rows in
                     //print(rows)
                     self.rows1Bridge(rowsFromSession: rows)

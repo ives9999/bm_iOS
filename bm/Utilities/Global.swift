@@ -718,6 +718,11 @@ extension UserDefaults {
             return 0
         }
     }
+    
+    // return is [
+    //             ["id": "5", "name": "新北市"],
+    //             ["id": "6", "name": "台北市"]
+    //           ]
     func getArrayDictionary(_ key: String) -> [[String: String]] {
         var tmp: [[String: String]] = [[String: String]]()
         let tmp1 = object(forKey: key)
@@ -727,6 +732,17 @@ extension UserDefaults {
         
         return tmp
     }
+    
+    // return is [
+    //             "52": [
+    //                     "id": "52",
+    //                     "name": ["新北市"],
+    //                     "rows": [
+    //                          ["id": "5", "name": "中和"],
+    //                          ["id": "6", "name": "永和"]
+    //                     ]
+    //                  ]
+    //           ]
     func getAllAreas() -> [String:[String: Any]] {
         var tmp: [String: [String: Any]] = [String: [String: Any]]()
         let key: String = "areas"
@@ -738,6 +754,11 @@ extension UserDefaults {
         
         return tmp
     }
+    
+    // return is [
+    //             ["id": "5", "name": "中區"],
+    //             ["id": "6", "name": "西區"]
+    //           ]
     func getAreasByCity(_ city_id: Int) -> [[String: String]] {
         //var tmp: [[String: String]] = [[String: String]]()
         
@@ -765,6 +786,32 @@ extension UserDefaults {
 //        }
         
         //return tmp
+    }
+    
+    // return is [
+    //             "52": [
+    //                     "id": "52",
+    //                     "name": ["新北市"],
+    //                     "rows": [
+    //                          ["id": "5", "name": "中和"],
+    //                          ["id": "6", "name": "永和"]
+    //                     ]
+    //                  ]
+    //           ]
+    //// not test
+    func getAreasByCitys(_ city_ids: [Int]) -> [String: [String: Any]] {
+        
+        let tmp1 = getAllAreas()
+        var tmp: [String: [String: Any]] = [String: [String: Any]]()
+        for (session_city_id, session_city) in tmp1 {
+            for city_id in city_ids {
+                if Int(session_city_id) == city_id {
+                    tmp[session_city_id] = session_city
+                }
+            }
+        }
+        
+        return tmp
     }
     func set(_ key: String, _ value: Any) {
         set(value, forKey: key)
