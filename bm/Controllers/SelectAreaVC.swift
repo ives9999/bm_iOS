@@ -22,23 +22,11 @@ class SelectAreaVC: SingleSelectVC {
             if city_id != nil && city_id! > 0 {
                 let session_rows = getAreasFromCity(city_id!) { rows in
                     //print(rows)
-                    self.areasBridge(rowsFromSession: rows)
+                    self.rows1Bridge(rowsFromSession: rows)
                     self.tableView.reloadData()
                 }
-                areasBridge(rowsFromSession: session_rows)
+                rows1Bridge(rowsFromSession: session_rows)
             }
-        }
-    }
-    
-    func areasBridge(rowsFromSession: [[String: String]]) {
-        
-        if rows1 != nil && rows1!.count > 0 {
-            rows1!.removeAll()
-        } else {
-            rows1 = [[String: String]]()
-        }
-        for row in rowsFromSession {
-            rows1!.append(["title": row["name"]!, "value": row["id"]!])
         }
     }
 }

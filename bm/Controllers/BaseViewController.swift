@@ -617,7 +617,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func getAreasFromCity(_ city_id: Int, completion1: @escaping (_ rows: [[String: String]]) -> Void) -> [[String: String]] {
         
         //session.removeObject(forKey: "areas")
-        let rows = session.getAreas(city_id)
+        let rows = session.getAreasByCity(city_id)
+        //print(rows)
         if rows.count == 0 {
             let city_ids: [Int] = [city_id]
             Global.instance.addSpinner(superView: view)
@@ -650,8 +651,13 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                     let area_s: [String: Any] = ["id": String(city_id), "name": city_name, "rows": areas]
                     let city_s: [String: [String: Any]] = [String(city_id): area_s]
                     
-                    //self.session.removeObject(forKey: "areas")
-                    self.session.set(city_s, forKey: "areas")
+                    var allAreas: [String: [String: Any]] = self.session.getAllAreas()
+                    if allAreas != nil && allAreas.count > 0 {
+                        allAreas[String(city_id)] = area_s
+                        self.session.set(allAreas, forKey: "areas")
+                    } else {
+                        self.session.set(city_s, forKey: "areas")
+                    }
                     completion1(areas)
                     
                     Global.instance.removeSpinner(superView: self.view)

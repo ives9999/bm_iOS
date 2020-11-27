@@ -222,6 +222,11 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
             if item!.value != selected {
                 item!.reset()
             }
+            if key == AREA_KEY {
+                let item1: AreaFormItem = item as! AreaFormItem
+                let cityItem = getFormItemFromKey(CITY_KEY)
+                item1.city_id = Int((cityItem?.value)!)
+            }
             item!.value = selected
             item!.make()
             tableView.reloadData()

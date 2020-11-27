@@ -727,26 +727,44 @@ extension UserDefaults {
         
         return tmp
     }
-    func getAreas(_ city_id: Int) -> [[String: String]] {
-        var tmp: [[String: String]] = [[String: String]]()
+    func getAllAreas() -> [String:[String: Any]] {
+        var tmp: [String: [String: Any]] = [String: [String: Any]]()
         let key: String = "areas"
         let obj = object(forKey: key)
+        //print(obj)
         if obj != nil {
-            let tmp1: [String: [String: Any]] = obj as! [String: [String: Any]]
-            for (_city_id, area) in tmp1 {
-                if city_id == Int(_city_id) {
-                    let rows = area["rows"] as! [[String: Any]]
-                    for row in rows {
-                        //print(row)
-                        let id: String = row["id"] as! String
-                        let name: String = row["name"] as! String
-                        tmp.append(["value": id, "title": name])
-                    }
-                }
-            }
+            tmp = obj as! [String: [String: Any]]
         }
         
         return tmp
+    }
+    func getAreasByCity(_ city_id: Int) -> [[String: String]] {
+        //var tmp: [[String: String]] = [[String: String]]()
+        
+        let tmp1 = getAllAreas()
+        if let tmp = tmp1[String(city_id)]?["rows"] as? [[String: String]] {
+            return tmp
+        } else {
+            return [[String: String]]()
+        }
+//        let key: String = "areas"
+//        let obj = object(forKey: key)
+//        if obj != nil {
+//            let tmp1: [String: [String: Any]] = obj as! [String: [String: Any]]
+//            for (_city_id, area) in tmp1 {
+//                if city_id == Int(_city_id) {
+//                    let rows = area["rows"] as! [[String: Any]]
+//                    for row in rows {
+//                        //print(row)
+//                        let id: String = row["id"] as! String
+//                        let name: String = row["name"] as! String
+//                        tmp.append(["id": id, "name": name])
+//                    }
+//                }
+//            }
+//        }
+        
+        //return tmp
     }
     func set(_ key: String, _ value: Any) {
         set(value, forKey: key)

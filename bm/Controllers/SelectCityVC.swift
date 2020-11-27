@@ -18,21 +18,9 @@ class SelectCityVC: SingleSelectVC {
         //print(selected)
         let session_rows = getCitys() { rows in
             //print(rows)
-            self.citysBridge(rowsFromSession: rows)
+            self.rows1Bridge(rowsFromSession: rows)
             self.tableView.reloadData()
         }
-        citysBridge(rowsFromSession: session_rows)
-    }
-    
-    func citysBridge(rowsFromSession: [[String: String]]) {
-        
-        if rows1 != nil && rows1!.count > 0 {
-            rows1!.removeAll()
-        } else {
-            rows1 = [[String: String]]()
-        }
-        for row in rowsFromSession {
-            rows1!.append(["title": row["name"]!, "value": row["id"]!])
-        }
+        rows1Bridge(rowsFromSession: session_rows)
     }
 }

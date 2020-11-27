@@ -12,8 +12,8 @@ class CityFormItem: FormItem {
     
     var selected_city_ids:[Int] = [Int]()
     var selected_city_names: [String] = [String]()
-    var citysFromCache:[[String: String]] = [[String: String]]()
     
+    var citysFromCache:[[String: String]] = [[String: String]]()
     let session: UserDefaults = UserDefaults.standard
     
     required init(name: String = CITY_KEY, title: String = "縣市") {
