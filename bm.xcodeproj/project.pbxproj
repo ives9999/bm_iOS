@@ -148,6 +148,8 @@
 		B3A253E4256BCBB8004B8A03 /* AreaFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A253E3256BCBB8004B8A03 /* AreaFormItem.swift */; };
 		B3A253EA256CBA4D004B8A03 /* SelectCityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A253E9256CBA4C004B8A03 /* SelectCityVC.swift */; };
 		B3A253F0256CBB40004B8A03 /* Select.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A253EF256CBB40004B8A03 /* Select.storyboard */; };
+		B3A2541825722C5C004B8A03 /* ManagersFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A2541725722C5A004B8A03 /* ManagersFormItem.swift */; };
+		B3A2542225723F5B004B8A03 /* SelectManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A2542125723F5B004B8A03 /* SelectManagers.swift */; };
 		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */; };
 		B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28720B68981001A846F /* ValidateVC.swift */; };
@@ -441,6 +443,8 @@
 		B3A253E3256BCBB8004B8A03 /* AreaFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaFormItem.swift; sourceTree = "<group>"; };
 		B3A253E9256CBA4C004B8A03 /* SelectCityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityVC.swift; sourceTree = "<group>"; };
 		B3A253EF256CBB40004B8A03 /* Select.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Select.storyboard; sourceTree = "<group>"; };
+		B3A2541725722C5A004B8A03 /* ManagersFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagersFormItem.swift; sourceTree = "<group>"; };
+		B3A2542125723F5B004B8A03 /* SelectManagers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagers.swift; sourceTree = "<group>"; };
 		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFunctionVC.swift; sourceTree = "<group>"; };
 		B3A5A28720B68981001A846F /* ValidateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateVC.swift; sourceTree = "<group>"; };
@@ -773,6 +777,7 @@
 				B33C1ABE21BD7F2C006F2BEB /* WeekdayFormItem.swift */,
 				B3A253DD256A9E43004B8A03 /* CityFormItem.swift */,
 				B3A253E3256BCBB8004B8A03 /* AreaFormItem.swift */,
+				B3A2541725722C5A004B8A03 /* ManagersFormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";
@@ -780,22 +785,22 @@
 		B33C1AB721BD1047006F2BEB /* FormItemCell */ = {
 			isa = PBXGroup;
 			children = (
-				B34A20FE21B696AA00EE6E1C /* TextFieldCell.swift */,
-				B34A20FF21B696AA00EE6E1C /* TextFieldCell.xib */,
-				B34A210221B6A6D300EE6E1C /* MoreCell.swift */,
-				B34A210321B6A6D300EE6E1C /* MoreCell.xib */,
-				B3756ED821B8E50E006893E1 /* WeekdayCell.swift */,
-				B3756ED921B8E50E006893E1 /* WeekdayCell.xib */,
-				B3756EDC21B901C5006893E1 /* TimeCell.swift */,
-				B3756EDD21B901C5006893E1 /* TimeCell.xib */,
 				B3756EE021B95974006893E1 /* ColorCell.swift */,
 				B3756EE121B95974006893E1 /* ColorCell.xib */,
-				B3756EEA21BA6AAA006893E1 /* StatusCell.swift */,
-				B3756EEB21BA6AAA006893E1 /* StatusCell.xib */,
-				B306FE9D21F0DC5900403FE2 /* DateCell.swift */,
-				B306FE9E21F0DC5900403FE2 /* DateCell.xib */,
 				B3310D8F22ACA57A0062EF98 /* ContentCell.swift */,
 				B3310D9022ACA57A0062EF98 /* ContentCell.xib */,
+				B306FE9D21F0DC5900403FE2 /* DateCell.swift */,
+				B306FE9E21F0DC5900403FE2 /* DateCell.xib */,
+				B34A210221B6A6D300EE6E1C /* MoreCell.swift */,
+				B34A210321B6A6D300EE6E1C /* MoreCell.xib */,
+				B3756EEA21BA6AAA006893E1 /* StatusCell.swift */,
+				B3756EEB21BA6AAA006893E1 /* StatusCell.xib */,
+				B34A20FE21B696AA00EE6E1C /* TextFieldCell.swift */,
+				B34A20FF21B696AA00EE6E1C /* TextFieldCell.xib */,
+				B3756EDC21B901C5006893E1 /* TimeCell.swift */,
+				B3756EDD21B901C5006893E1 /* TimeCell.xib */,
+				B3756ED821B8E50E006893E1 /* WeekdayCell.swift */,
+				B3756ED921B8E50E006893E1 /* WeekdayCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1012,6 +1017,7 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
+				B3A2542125723F5B004B8A03 /* SelectManagers.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1492,6 +1498,7 @@
 				B3ED38F01FB9AD460003F083 /* ArenaSelectVC.swift in Sources */,
 				B323390A21B6B8E4003EB84D /* FormItem.swift in Sources */,
 				B3756EDA21B8E50E006893E1 /* WeekdayCell.swift in Sources */,
+				B3A2541825722C5C004B8A03 /* ManagersFormItem.swift in Sources */,
 				B3E8C29E220715430008ED25 /* SuperScrollView.swift in Sources */,
 				B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */,
 				B3756EE221B95974006893E1 /* ColorCell.swift in Sources */,
@@ -1526,6 +1533,7 @@
 				B323390B21B6B8E4003EB84D /* FormValidableProtocol.swift in Sources */,
 				B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */,
 				B33C1AB921BD10B8006F2BEB /* StatusFormItem.swift in Sources */,
+				B3A2542225723F5B004B8A03 /* SelectManagers.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
 				B3ED38F21FBAD4C30003F083 /* WeekdaysSelectVC.swift in Sources */,

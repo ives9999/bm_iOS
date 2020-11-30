@@ -326,10 +326,10 @@
             </objects>
             <point key="canvasLocation" x="-588.40579710144937" y="26.785714285714285"/>
         </scene>
-        <!--Select AreasVC-->
+        <!--Select ManagersVC-->
         <scene sceneID="Nlf-6X-jlg">
             <objects>
-                <viewController storyboardIdentifier="toSelectAreas" id="n2n-d3-6Bz" customClass="SelectAreasVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toSelectManagers" id="n2n-d3-6Bz" customClass="SelectManagersVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XDt-3z-QiI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -337,8 +337,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Mk1-yQ-DD7">
                                 <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="區域" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQS-3E-JGc">
-                                        <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQS-3E-JGc">
+                                        <rect key="frame" x="178.5" y="19" width="57.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -351,7 +351,7 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="TAY-xg-apx"/>
+                                            <action selector="prevBtnPressed:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="k0J-6e-VrZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -368,7 +368,7 @@
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AZB-9H-E7c">
-                                <rect key="frame" x="0.0" y="108" width="414" height="704"/>
+                                <rect key="frame" x="0.0" y="530" width="414" height="282"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xN1-CT-nO8" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
@@ -388,14 +388,14 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="submit:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="gzL-1K-fe5"/>
+                                                    <action selector="submit:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="k98-eX-rAn"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QzF-YU-WnT" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="57" y="0.0" width="31" height="34"/>
                                                 <state key="normal" title="取消"/>
                                                 <connections>
-                                                    <action selector="cancel:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="fnV-qG-lXT"/>
+                                                    <action selector="cancel:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="8fR-Om-uSV"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -422,6 +422,7 @@
                             <constraint firstItem="fIo-WB-xew" firstAttribute="bottom" secondItem="VxF-7C-PmT" secondAttribute="bottom" id="64q-t7-3GT"/>
                             <constraint firstItem="AZB-9H-E7c" firstAttribute="trailing" secondItem="fIo-WB-xew" secondAttribute="trailing" id="Hi6-Vg-fSM"/>
                             <constraint firstItem="VxF-7C-PmT" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" id="MMW-IC-Qhj"/>
+                            <constraint firstItem="AZB-9H-E7c" firstAttribute="top" secondItem="Mk1-yQ-DD7" secondAttribute="bottom" constant="422" id="Msw-Ku-QCl"/>
                             <constraint firstItem="fIo-WB-xew" firstAttribute="bottom" secondItem="xN1-CT-nO8" secondAttribute="bottom" id="NqM-jh-JMB"/>
                             <constraint firstItem="xN1-CT-nO8" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" id="SbC-bl-VlO"/>
                             <constraint firstItem="Mk1-yQ-DD7" firstAttribute="trailing" secondItem="fIo-WB-xew" secondAttribute="trailing" id="VcC-hV-bxH"/>
@@ -429,17 +430,16 @@
                             <constraint firstItem="VxF-7C-PmT" firstAttribute="trailing" secondItem="fIo-WB-xew" secondAttribute="trailing" id="cKe-w8-pvU"/>
                             <constraint firstItem="xN1-CT-nO8" firstAttribute="top" secondItem="AZB-9H-E7c" secondAttribute="bottom" id="fBg-qv-6of"/>
                             <constraint firstItem="VxF-7C-PmT" firstAttribute="top" secondItem="Mk1-yQ-DD7" secondAttribute="bottom" id="hQH-2l-DUw"/>
-                            <constraint firstItem="AZB-9H-E7c" firstAttribute="top" secondItem="Mk1-yQ-DD7" secondAttribute="bottom" id="kkG-UQ-W6y"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="AZB-9H-E7c" id="rDE-0o-CCO"/>
-                        <outlet property="titleLbl" destination="OQS-3E-JGc" id="K5f-c8-raD"/>
+                        <outlet property="tableView" destination="AZB-9H-E7c" id="1c6-mJ-wzz"/>
+                        <outlet property="titleLbl" destination="OQS-3E-JGc" id="0GY-f0-JhY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rtM-Xu-P6F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="449" y="-226"/>
+            <point key="canvasLocation" x="305.79710144927537" y="525.66964285714289"/>
         </scene>
     </scenes>
     <resources>

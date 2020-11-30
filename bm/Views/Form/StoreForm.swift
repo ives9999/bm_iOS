@@ -30,9 +30,14 @@ class StoreForm: BaseForm {
         let openTimeFormItem = TimeFormItem(name: OPEN_TIME_KEY, title: "開始時間", timeType: SELECT_TIME_TYPE.play_start, tooltip: "", isRequired: false)
         let closeTimeFormItem = TimeFormItem(name: CLOSE_TIME_KEY, title: "結束時間", timeType: SELECT_TIME_TYPE.play_end, tooltip: "", isRequired: false)
         
+        let section4 = SectionFormItem(title: "管理者")
+        let managersItem = ManagersFormItem()
+        
         let contentFormItem = ContentFormItem(name: CONTENT_KEY, title: "詳細介紹", type: TEXT_INPUT_TYPE.content)
 
         formItems = [section1,nameItem,
-                     section2,telItem,mobileItem,emailItem,weblItem,fbItem,lineItem,section3,cityItem,areaItem,addressItem, openTimeFormItem,closeTimeFormItem,contentFormItem]
+                     section2,telItem,mobileItem,emailItem,weblItem,fbItem,lineItem,
+                     section3,cityItem,areaItem,addressItem, openTimeFormItem,closeTimeFormItem,
+                     section4,managersItem,contentFormItem]
     }
 }

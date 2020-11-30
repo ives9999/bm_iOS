@@ -11,7 +11,7 @@ import OneSignal
 import Reachability
 import WebKit
 
-class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate  {
+class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate  {
 
     var msg: String = ""
     var dataService: DataService = DataService()
@@ -482,6 +482,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     
     func multiSelected(key: String, selecteds: [String]) {}
     func singleSelected(key: String, selected: String) {}
+    func selectedManagers(selecteds: [String]) {}
     
     func toSelectCity(key: String? = nil, selected: String? = nil, _delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
@@ -583,6 +584,29 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             if key != nil {
                 viewController.key = key
             }
+            if selecteds != nil {
+                viewController.selecteds = selecteds!
+            }
+            viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toSelectManagers(selecteds: [String]? = nil, _delegate: BaseViewController) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Select", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_MANAGERS)  as? SelectManagersVC {
+                
+                viewController.key = MANAGERS_KEY
+                if selecteds != nil {
+                    viewController.selecteds = selecteds!
+                }
+                viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SELECT_MANAGERS) as! SelectManagersVC
+            viewController.key = MANAGERS_KEY
             if selecteds != nil {
                 viewController.selecteds = selecteds!
             }

@@ -1279,6 +1279,7 @@ extension UIView {
         case invisible
         case gone
     }
+    
     func tempPlayShowTableConstraint(_ items:[[String: UILabel]]) -> [NSLayoutConstraint] {
         var constraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
         var views: [String: UILabel] = [String: UILabel]()
@@ -1388,6 +1389,14 @@ extension UIView {
         }
         set { setNeedsLayout() }
     }
+    
+    func constraintsPinTo(leading: NSLayoutXAxisAnchor, trailing: NSLayoutXAxisAnchor, top: NSLayoutYAxisAnchor, bottom: NSLayoutYAxisAnchor) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([self.leadingAnchor.constraint(equalTo: leading),
+                                     self.trailingAnchor.constraint(equalTo: trailing),
+                                     self.topAnchor.constraint(equalTo: top),
+                                     self.bottomAnchor.constraint(equalTo: bottom)])
+    }
 }
 
 extension UILabel {
@@ -1413,6 +1422,7 @@ extension UIColor {
 }
 
 extension UIImageView {
+    
     func downloaded(from url: URL, contentMode mode: UIViewContentMode = UIView.ContentMode.scaleAspectFit) {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
@@ -1477,6 +1487,242 @@ extension UIImageView {
 protocol ArrayProtocol{}
 
 extension Array: ArrayProtocol {}
+
+extension UIImage {
+    
+    // for textfield dropdown menu
+    enum Theme {
+        case triangle
+        
+        var name: String {
+            switch self {
+            case .triangle: return "greater1"
+            }
+        }
+        
+        var image: UIImage {
+            return UIImage(named: self.name)!
+        }
+    }
+}
+
+class DropDownTextField: UIView {
+    
+    //public properties
+    var boldColor = UIColor.black
+    var lightColor = UIColor.white
+    var dropDownColor = UIColor.gray
+    var font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+    
+    //private properties
+    private var options: [String]
+    private var initialHeight: CGFloat = 0
+    private let rowHeight: CGFloat = 40
+    
+    //UI properties
+    var underline = UIView()
+    
+    let triangleIndicator: UIImageView = {
+        let image = UIImage.Theme.triangle.image
+        image.withRenderingMode(.alwaysTemplate)
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFit
+        
+        return imageView
+    }()
+    
+    let tapView: UIView = UIView()
+    
+    lazy var tableView: UITableView = {
+        
+        let tableView = UITableView()
+        tableView.bounces = false
+        tableView.backgroundColor = UIColor.clear
+        tableView.separatorInset = UIEdgeInsets.zero
+        tableView.separatorColor = lightColor
+        
+        return tableView
+    }()
+    
+    let animationView = UIView()
+    
+    lazy var textField: UITextField = {
+        
+        let textField = UITextField(frame: .zero)
+        textField.textColor = boldColor
+        textField.autocapitalizationType = .sentences
+        textField.returnKeyType = .done
+        textField.keyboardType = .alphabet
+        
+        return textField
+    }()
+    
+    init(frame: CGRect, title: String, options: [String]) {
+        self.options = options
+        super.init(frame: frame)
+        self.textField.text = title
+        calculateHeight()
+        setupViews()
+    }
+    
+    private override init(frame: CGRect) {
+        
+        options = []
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func animateMenu() {
+        
+    }
+}
+
+extension DropDownTextField {
+    
+    private func calculateHeight() {
+        
+        self.initialHeight = self.bounds.height
+        let rowCount = self.options.count + 1 //Add one so that you can include 'other'
+        let newHeight = self.initialHeight + (CGFloat(rowCount) * rowHeight)
+        self.frame.size = CGSize(width: self.frame.width, height: newHeight)
+    }
+    
+    private func setupViews() {
+        
+        removeSubviews()
+        addUnderline()
+        addTriangleIndicator()
+        addTextField()
+        addTapView()
+        addTableView()
+        addAnimationView()
+    }
+    
+    private func removeSubviews() {
+        
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+    }
+    
+    private func addUnderline() {
+        
+        addSubview(underline)
+        underline.backgroundColor = self.boldColor
+        
+        underline.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            underline.topAnchor.constraint(equalTo: topAnchor, constant: initialHeight - 2),
+            underline.leadingAnchor.constraint(equalTo: leadingAnchor),
+            underline.trailingAnchor.constraint(equalTo: trailingAnchor),
+            underline.trailingAnchor.constraint(equalTo: trailingAnchor),
+            underline.heightAnchor.constraint(equalToConstant: 2)
+        ])
+    }
+    
+    private func addTriangleIndicator() {
+        triangleIndicator.translatesAutoresizingMaskIntoConstraints = false
+        triangleIndicator.tintColor = boldColor
+        addSubview(triangleIndicator)
+        let triSize: CGFloat = 12.0
+        NSLayoutConstraint.activate([
+            triangleIndicator.trailingAnchor.constraint(equalTo: trailingAnchor),
+            triangleIndicator.heightAnchor.constraint(equalToConstant: triSize),
+            triangleIndicator.widthAnchor.constraint(equalToConstant: triSize),
+            triangleIndicator.centerYAnchor.constraint(equalTo: topAnchor, constant: initialHeight / 2)
+        ])
+    }
+    
+    private func addTextField() {
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(textField)
+        NSLayoutConstraint.activate([
+            textField.leadingAnchor.constraint(equalTo: leadingAnchor),
+            textField.centerYAnchor.constraint(equalTo: topAnchor, constant: initialHeight / 2),
+            textField.trailingAnchor.constraint(equalTo: triangleIndicator.leadingAnchor, constant: -8)
+        ])
+        textField.font = self.font
+    }
+    
+    private func addTapView() {
+        
+        tapView.translatesAutoresizingMaskIntoConstraints = false
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(animateMenu))
+        tapView.addGestureRecognizer(tapGesture)
+        addSubview(tapView)
+        tapView.constraintsPinTo(leading: leadingAnchor, trailing: trailingAnchor, top: topAnchor, bottom: underline.bottomAnchor)
+    }
+    
+    private func addTableView() {
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        
+        self.addSubview(tableView)
+        tableView.constraintsPinTo(leading: leadingAnchor, trailing: trailingAnchor, top: underline.bottomAnchor, bottom: bottomAnchor)
+    }
+    
+    private func addAnimationView() {
+        
+        self.addSubview(animationView)
+        animationView.frame = CGRect(x: 0.0, y: initialHeight, width: bounds.width, height: bounds.height - initialHeight)
+        self.sendSubview(toBack: animationView)
+        animationView.backgroundColor = dropDownColor
+    }
+}
+
+class DropDownCell: UITableViewCell {
+    var lightColor = UIColor.lightGray
+    var cellFont: UIFont = UIFont.systemFont(ofSize: 18, weight: .semibold)
+    
+    override class func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    func configreCell(with title: String) {
+        
+        self.selectionStyle = .none
+        self.textLabel?.font = cellFont
+        self.textLabel?.textColor = self.lightColor
+        self.backgroundColor = UIColor.clear
+        self.textLabel?.text = title
+    }
+}
+
+extension DropDownTextField: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return options.count + 1
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "option") as? DropDownCell ?? DropDownCell()
+        cell.lightColor = self.lightColor
+        cell.cellFont = font
+        let title = indexPath.row < options.count ? options[indexPath.row] : "Other"
+        cell.configreCell(with: title)
+        return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return tableView.frame.height / CGFloat(options.count + 1)
+    }
+
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.row == options.count {
+//            otherChosen()
+//        } else {
+//            let chosen = options[indexPath.row]
+//            textField.text = chosen
+//            self.delegate?.optionSelected(option: chosen)
+//            animateMenu()
+//        }
+//    }
+}
 
 
 

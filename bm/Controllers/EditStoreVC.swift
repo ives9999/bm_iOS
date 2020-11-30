@@ -60,7 +60,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        return 40
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -130,6 +130,9 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                         rows.append(["title": time, "value": time+":00"])
                     }
                     toSingleSelect(key: key, title: item!.title, rows: rows, _delegate: self)
+                } else if key == MANAGERS_KEY {
+                    //toSelectCity(key: key, selected: "", _delegate: self)
+                    toSelectManagers(_delegate: self)
                 }
             }
         }
@@ -196,12 +199,8 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                 vc.key = item!.name
                 vc.title = item!.title
                 //vc.delegate = self
-            } else if segue.identifier == TO_SELECT_DATE {
-                let vc: DateSelectVC = segue.destination as! DateSelectVC
-                vc.key = item!.name
-                vc.selected = item!.value!
-                vc.title = item!.title
-                //vc.delegate = self
+            } else if segue.identifier == TO_SELECT_MANAGERS {
+                
             }
             
         }
@@ -240,6 +239,11 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
             item!.make()
             tableView.reloadData()
         }
+    }
+    
+    override func selectedManagers(selecteds: [String]) {
+        
+        let key = MANAGERS_KEY
     }
     
     func isImageSet(_ b: Bool) {

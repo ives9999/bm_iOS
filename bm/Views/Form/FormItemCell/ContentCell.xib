@@ -52,10 +52,10 @@
                         </connections>
                     </button>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greater1" translatesAutoresizingMaskIntoConstraints="NO" id="51g-at-Jsg">
-                        <rect key="frame" x="262" y="29.5" width="25" height="25"/>
+                        <rect key="frame" x="273" y="33" width="18" height="18"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="25" id="7Fr-HI-cPB"/>
-                            <constraint firstAttribute="height" constant="25" id="hvC-Ye-M1h"/>
+                            <constraint firstAttribute="width" constant="18" id="7Fr-HI-cPB"/>
+                            <constraint firstAttribute="height" constant="18" id="hvC-Ye-M1h"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -63,7 +63,7 @@
                     <constraint firstItem="cGD-PP-khr" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="Ah5-Av-Gno"/>
                     <constraint firstItem="H82-PO-8KG" firstAttribute="leading" secondItem="cGD-PP-khr" secondAttribute="trailing" constant="8" id="EX3-nW-D8R"/>
                     <constraint firstAttribute="trailing" secondItem="6Jk-p4-u05" secondAttribute="trailing" constant="8" id="TXB-HE-r6g"/>
-                    <constraint firstItem="6Jk-p4-u05" firstAttribute="leading" secondItem="51g-at-Jsg" secondAttribute="trailing" constant="8" id="X25-Va-PxO"/>
+                    <constraint firstItem="6Jk-p4-u05" firstAttribute="leading" secondItem="51g-at-Jsg" secondAttribute="trailing" constant="4" id="X25-Va-PxO"/>
                     <constraint firstItem="cGD-PP-khr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="af6-4r-1TF"/>
                     <constraint firstItem="51g-at-Jsg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mK8-JG-0XL"/>
                     <constraint firstItem="rVN-vy-6TU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="nwd-fO-UtT"/>
