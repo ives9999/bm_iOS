@@ -1506,6 +1506,11 @@ extension UIImage {
     }
 }
 
+protocol DropDownTextFieldDelegate {
+    func menuDidAnimate(up: Bool)
+    func optionSelected(option: String)
+}
+
 class DropDownTextField: UIView {
     
     //public properties
@@ -1513,6 +1518,9 @@ class DropDownTextField: UIView {
     var lightColor = UIColor.white
     var dropDownColor = UIColor.gray
     var font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+    
+    var delegate: DropDownTextFieldDelegate?
+    private var isDroppedDown = false
     
     //private properties
     private var options: [String]
@@ -1549,7 +1557,7 @@ class DropDownTextField: UIView {
     lazy var textField: UITextField = {
         
         let textField = UITextField(frame: .zero)
-        textField.textColor = boldColor
+        textField.textColor = UIColor.white
         textField.autocapitalizationType = .sentences
         textField.returnKeyType = .done
         textField.keyboardType = .alphabet
@@ -1576,7 +1584,7 @@ class DropDownTextField: UIView {
     }
     
     @objc func animateMenu() {
-        
+        menuAnimate(up: isDroppedDown)
     }
 }
 
@@ -1673,6 +1681,25 @@ extension DropDownTextField {
         self.sendSubview(toBack: animationView)
         animationView.backgroundColor = dropDownColor
     }
+    
+    private func menuAnimate(up: Bool) {
+        
+        let downFrame = animationView.frame
+        let upFrame = CGRect(x: 0, y: self.initialHeight, width: self.bounds.width, height: 0)
+        animationView.frame = up ? downFrame : upFrame
+        animationView.isHidden = false
+        tableView.isHidden = true
+        
+        UIView.animate(withDuration: 0.3, delay: 0.0, options: .curveEaseInOut, animations: {
+            self.animationView.frame = up ? upFrame : downFrame
+        }, completion: { (Bool) in
+            self.isDroppedDown = !self.isDroppedDown
+            self.animationView.isHidden = up
+            self.animationView.frame = downFrame
+            self.tableView.isHidden = up
+            self.delegate?.menuDidAnimate(up: up)
+        })
+    }
 }
 
 class DropDownCell: UITableViewCell {
@@ -1712,16 +1739,16 @@ extension DropDownTextField: UITableViewDelegate, UITableViewDataSource {
         return tableView.frame.height / CGFloat(options.count + 1)
     }
 
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.row == options.count {
-//            otherChosen()
-//        } else {
-//            let chosen = options[indexPath.row]
-//            textField.text = chosen
-//            self.delegate?.optionSelected(option: chosen)
-//            animateMenu()
-//        }
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == options.count {
+            //otherChosen()
+        } else {
+            let chosen = options[indexPath.row]
+            textField.text = chosen
+            self.delegate?.optionSelected(option: chosen)
+            animateMenu()
+        }
+    }
 }
 
 

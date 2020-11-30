@@ -42,6 +42,7 @@ class SelectManagersVC: SelectVC {
             height: height
         )
         dropDown = DropDownTextField(frame: dropDownFrame, title: "Select Flavour", options: flavourOptions)
+        dropDown.delegate = self
         
         view.addSubview(dropDown)
     }
@@ -53,5 +54,16 @@ class SelectManagersVC: SelectVC {
         } else {
             //alertError("由於傳遞參數不正確，無法做選擇，請回上一頁重新進入")
         }
+    }
+}
+
+extension SelectManagersVC: DropDownTextFieldDelegate {
+    
+    func menuDidAnimate(up: Bool) {
+        print("animating up; \(up)")
+    }
+    
+    func optionSelected(option: String) {
+        print("option selected: \(option)")
     }
 }
