@@ -128,24 +128,25 @@ class List1Cell: UITableViewCell {
             hiddenIcon(mobileIcon)
         }
 
-        var showManager = false;
-        if row.managers.count > 0 {
-            let member_id = Member.instance.id
-            for manager in row.managers {
-                //print(manager)
-                if let tmp = manager["id"] as? String {
-                    let manager_id = Int(tmp)
-                    if member_id == manager_id {
-                        showManager = true
-                        break
-                    }
-                }
-            }
-        }
-        if showManager {
-            editIcon.isHidden = false
-            deleteIcon.isHidden = false
-        }
+        //如果要啟動管理功能，請打開這個註解
+//        var showManager = false;
+//        if row.managers.count > 0 {
+//            let member_id = Member.instance.id
+//            for manager in row.managers {
+//                //print(manager)
+//                if let tmp = manager["id"] as? String {
+//                    let manager_id = Int(tmp)
+//                    if member_id == manager_id {
+//                        showManager = true
+//                        break
+//                    }
+//                }
+//            }
+//        }
+//        if showManager {
+//            editIcon.isHidden = false
+//            deleteIcon.isHidden = false
+//        }
         
         let chevron = UIImage(named: "greater1")
         self.accessoryType = .disclosureIndicator

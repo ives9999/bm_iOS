@@ -13,7 +13,7 @@ class SuperTextField: UITextField {
     var fontName: String = FONT_NAME
     var fontSize: CGFloat = FONT_SIZE_TITLE
     var father: UIViewController?
-    let padding = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10);
+    let padding = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8);
 
     
     convenience init() {
