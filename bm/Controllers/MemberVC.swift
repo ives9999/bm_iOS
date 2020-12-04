@@ -208,11 +208,12 @@ class MemberVC: MyTableVC {
     }
     
     @IBAction func registerBtnPressed(_ sender: Any) {
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "register") as? RegisterVC {
-            vc.sourceVC = self
-            present(vc, animated: true, completion: nil)
-        }
+//        if let vc = storyboard?.instantiateViewController(withIdentifier: "register") as? RegisterVC {
+//            vc.sourceVC = self
+//            present(vc, animated: true, completion: nil)
+//        }
         //performSegue(withIdentifier: TO_REGISTER, sender: self)
+        toRegister()
     }
     
     @IBAction func passwordBtnPressed(_ sender: Any) {

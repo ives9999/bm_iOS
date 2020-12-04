@@ -422,6 +422,21 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     
     @objc func refresh() {}
     
+    func toRegister() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_REGISTER) as? RegisterVC {
+                //viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_REGISTER) as! RegisterVC
+            //viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    
     func toSingleSelect(key: String? = nil, title: String? = nil, rows:[[String: String]] = [[String: String]](), selected: String? = nil, _delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
