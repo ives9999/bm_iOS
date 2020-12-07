@@ -12,7 +12,7 @@ protocol EditCourseDelegate {
     func isReload(_ yes: Bool)
 }
 
-class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ContentEditDelegate,DateSelectDelegate {
+class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ContentEditDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var featuredView: ImagePickerView!
@@ -297,7 +297,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
     }
     
-    func dateSelected(key: String, selected: String) {
+    override func dateSelected(key: String, selected: String) {
         let item = getFormItemFromKey(key)
         if item != nil {
             item!.value = selected

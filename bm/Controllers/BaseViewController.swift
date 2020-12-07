@@ -11,8 +11,8 @@ import OneSignal
 import Reachability
 import WebKit
 
-class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate  {
-
+class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate  {
+    
     var msg: String = ""
     var dataService: DataService = DataService()
     var managerLists: [SuperData] = [SuperData]()
@@ -436,6 +436,19 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
+    func toSelectDate() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-bUa-fD-2pO") as? DateSelectVC {
+                viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-bUa-fD-2pO") as! DateSelectVC
+            viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
     
     func toSingleSelect(key: String? = nil, title: String? = nil, rows:[[String: String]] = [[String: String]](), selected: String? = nil, _delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
@@ -777,6 +790,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
         return rows
     }
+    
+    func dateSelected(key: String, selected: String) {}
     
     func alertError(title: String, msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
