@@ -17,8 +17,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="required" translatesAutoresizingMaskIntoConstraints="NO" id="DIs-UN-nhl">
+                        <rect key="frame" x="0.0" y="16" width="12" height="12"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="12" id="X2O-Gy-06j"/>
+                            <constraint firstAttribute="width" constant="12" id="miX-IT-71X"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oi-tq-AuG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="24" y="11.5" width="33" height="21"/>
+                        <rect key="frame" x="12" y="11.5" width="33" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -35,7 +42,7 @@
                         </connections>
                     </button>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mRn-Ga-cUS" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="100" y="8" width="183" height="28"/>
+                        <rect key="frame" x="88" y="8" width="195" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                         <connections>
@@ -43,7 +50,7 @@
                         </connections>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-Zp-2Cg">
-                        <rect key="frame" x="63" y="9.5" width="25" height="25"/>
+                        <rect key="frame" x="51" y="9.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="WKb-28-OAM"/>
                             <constraint firstAttribute="height" constant="25" id="avr-P6-XdX"/>
@@ -56,6 +63,7 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="eXe-Zp-2Cg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2TZ-AX-5oA"/>
+                    <constraint firstItem="DIs-UN-nhl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="A86-9Y-GaZ"/>
                     <constraint firstItem="mRn-Ga-cUS" firstAttribute="leading" secondItem="eXe-Zp-2Cg" secondAttribute="trailing" constant="12" id="EuJ-t1-uxo"/>
                     <constraint firstItem="0ml-wn-o2D" firstAttribute="leading" secondItem="mRn-Ga-cUS" secondAttribute="trailing" constant="6" id="YZN-GI-gca"/>
                     <constraint firstItem="mRn-Ga-cUS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="bO9-aa-xxl"/>
@@ -65,26 +73,29 @@
                     <constraint firstAttribute="bottom" secondItem="mRn-Ga-cUS" secondAttribute="bottom" constant="8" id="l3J-Am-aM0"/>
                     <constraint firstItem="0ml-wn-o2D" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="r16-cI-yYl"/>
                     <constraint firstItem="mRn-Ga-cUS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rXy-Q2-2Ub"/>
-                    <constraint firstItem="5Oi-tq-AuG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="ywD-U9-Ol8"/>
+                    <constraint firstItem="5Oi-tq-AuG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="ywD-U9-Ol8"/>
+                    <constraint firstItem="5Oi-tq-AuG" firstAttribute="leading" secondItem="DIs-UN-nhl" secondAttribute="trailing" id="zmU-sM-2E6"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="clearBtn" destination="0ml-wn-o2D" id="ytc-Jc-Jeq"/>
                 <outlet property="promptBtn" destination="eXe-Zp-2Cg" id="iUz-FO-xkg"/>
+                <outlet property="requiredImageView" destination="DIs-UN-nhl" id="9kp-QS-yNo"/>
                 <outlet property="textField" destination="mRn-Ga-cUS" id="1lZ-7o-bor"/>
                 <outlet property="titleLbl" destination="5Oi-tq-AuG" id="lgq-Zm-fxg"/>
             </connections>
-            <point key="canvasLocation" x="142" y="155"/>
+            <point key="canvasLocation" x="140.80000000000001" y="154.72263868065968"/>
         </tableViewCell>
     </objects>
     <designables>
         <designable name="mRn-Ga-cUS">
-            <size key="intrinsicContentSize" width="30" height="32"/>
+            <size key="intrinsicContentSize" width="26" height="47"/>
         </designable>
     </designables>
     <resources>
         <image name="delete" width="25" height="25"/>
         <image name="question" width="25" height="25"/>
+        <image name="required" width="25" height="25"/>
     </resources>
 </document>

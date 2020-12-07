@@ -162,6 +162,12 @@
 		B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */; };
 		B3B4B61022CA247500245CC8 /* SomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4B60E22CA247500245CC8 /* SomeCell.swift */; };
 		B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4B60F22CA247500245CC8 /* SomeCell.xib */; };
+		B3B4EF56257B59EA00EE15D0 /* PrivacyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */; };
+		B3B4EF57257B59EA00EE15D0 /* PrivacyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4EF55257B59EA00EE15D0 /* PrivacyCell.xib */; };
+		B3B4EF5D257B614C00EE15D0 /* PrivacyFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EF5C257B614C00EE15D0 /* PrivacyFormItem.swift */; };
+		B3B4EF70257C8BFB00EE15D0 /* PasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EF6E257C8BFB00EE15D0 /* PasswordCell.swift */; };
+		B3B4EF71257C8BFB00EE15D0 /* PasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4EF6F257C8BFB00EE15D0 /* PasswordCell.xib */; };
+		B3B4EF77257C8ECF00EE15D0 /* PasswordFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EF76257C8ECF00EE15D0 /* PasswordFormItem.swift */; };
 		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
 		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
@@ -458,6 +464,12 @@
 		B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
 		B3B4B60E22CA247500245CC8 /* SomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeCell.swift; sourceTree = "<group>"; };
 		B3B4B60F22CA247500245CC8 /* SomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SomeCell.xib; sourceTree = "<group>"; };
+		B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyCell.swift; sourceTree = "<group>"; };
+		B3B4EF55257B59EA00EE15D0 /* PrivacyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PrivacyCell.xib; sourceTree = "<group>"; };
+		B3B4EF5C257B614C00EE15D0 /* PrivacyFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyFormItem.swift; sourceTree = "<group>"; };
+		B3B4EF6E257C8BFB00EE15D0 /* PasswordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCell.swift; sourceTree = "<group>"; };
+		B3B4EF6F257C8BFB00EE15D0 /* PasswordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordCell.xib; sourceTree = "<group>"; };
+		B3B4EF76257C8ECF00EE15D0 /* PasswordFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormItem.swift; sourceTree = "<group>"; };
 		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
@@ -780,6 +792,8 @@
 				B3A253DD256A9E43004B8A03 /* CityFormItem.swift */,
 				B3A253E3256BCBB8004B8A03 /* AreaFormItem.swift */,
 				B3A2541725722C5A004B8A03 /* ManagersFormItem.swift */,
+				B3B4EF5C257B614C00EE15D0 /* PrivacyFormItem.swift */,
+				B3B4EF76257C8ECF00EE15D0 /* PasswordFormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";
@@ -803,6 +817,10 @@
 				B3756EDD21B901C5006893E1 /* TimeCell.xib */,
 				B3756ED821B8E50E006893E1 /* WeekdayCell.swift */,
 				B3756ED921B8E50E006893E1 /* WeekdayCell.xib */,
+				B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */,
+				B3B4EF55257B59EA00EE15D0 /* PrivacyCell.xib */,
+				B3B4EF6E257C8BFB00EE15D0 /* PasswordCell.swift */,
+				B3B4EF6F257C8BFB00EE15D0 /* PasswordCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1231,6 +1249,7 @@
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
 				B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */,
+				B3B4EF57257B59EA00EE15D0 /* PrivacyCell.xib in Resources */,
 				B3FB9B222407F5EC0051186F /* Team.storyboard in Resources */,
 				F94E7D271F83636A00F550FD /* Assets.xcassets in Resources */,
 				B34A210121B696AA00EE6E1C /* TextFieldCell.xib in Resources */,
@@ -1240,6 +1259,7 @@
 				B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */,
 				B316FED72112F13600FB990C /* CollectionCell.xib in Resources */,
 				F94E7D251F83636A00F550FD /* Main.storyboard in Resources */,
+				B3B4EF71257C8BFB00EE15D0 /* PasswordCell.xib in Resources */,
 				B3FB9B252407F7280051186F /* Course.storyboard in Resources */,
 				B358B0C022A168C700F1A4E6 /* SingleSelectCell.xib in Resources */,
 				B35C4F4D2196F5E500F8AEB2 /* EditCell.xib in Resources */,
@@ -1399,6 +1419,7 @@
 				B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */,
 				B3FAA0AA20CAC995008F2294 /* TempPlaySignupOneCell.swift in Sources */,
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,
+				B3B4EF70257C8BFB00EE15D0 /* PasswordCell.swift in Sources */,
 				B306FEA821F737D700403FE2 /* SuperTableView.swift in Sources */,
 				B3CB73DC23D5B14B00892F75 /* SuperDate.swift in Sources */,
 				B36D66BD229A585700502D62 /* SuperCourse.swift in Sources */,
@@ -1412,6 +1433,7 @@
 				B3E8C2A5220BFFE10008ED25 /* SuperWebView.swift in Sources */,
 				B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */,
 				B36D66C0229A828A00502D62 /* ManagerCourseCell.swift in Sources */,
+				B3B4EF56257B59EA00EE15D0 /* PrivacyCell.swift in Sources */,
 				B3A253EA256CBA4D004B8A03 /* SelectCityVC.swift in Sources */,
 				B3EA0B1D2579EAF800F9C4C3 /* RegisterForm.swift in Sources */,
 				B3756EE821B96B96006893E1 /* ColorSelectCell.swift in Sources */,
@@ -1506,6 +1528,7 @@
 				B3E8C29E220715430008ED25 /* SuperScrollView.swift in Sources */,
 				B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */,
 				B3756EE221B95974006893E1 /* ColorCell.swift in Sources */,
+				B3B4EF77257C8ECF00EE15D0 /* PasswordFormItem.swift in Sources */,
 				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
 				B323391321B6C947003EB84D /* FormItemCellType.swift in Sources */,
 				B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */,
@@ -1539,6 +1562,7 @@
 				B33C1AB921BD10B8006F2BEB /* StatusFormItem.swift in Sources */,
 				B3A2542225723F5B004B8A03 /* SelectManagers.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
+				B3B4EF5D257B614C00EE15D0 /* PrivacyFormItem.swift in Sources */,
 				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
 				B3ED38F21FBAD4C30003F083 /* WeekdaysSelectVC.swift in Sources */,
 				B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */,

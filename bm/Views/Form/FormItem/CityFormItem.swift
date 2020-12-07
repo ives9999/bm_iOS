@@ -16,10 +16,11 @@ class CityFormItem: FormItem {
     var citysFromCache:[[String: String]] = [[String: String]]()
     let session: UserDefaults = UserDefaults.standard
     
-    required init(name: String = CITY_KEY, title: String = "縣市") {
-        super.init(name: name, title: title, placeholder: nil, value: nil)
+    required init(name: String = CITY_KEY, title: String = "縣市", isRequire: Bool = false) {
+        super.init(name: name, title: title, placeholder: nil, value: nil, isRequired: isRequire)
         segue = TO_SINGLE_SELECT
         uiProperties.cellType = .more
+        self.isRequired = isRequire
         
         if session.array(forKey: "citys") != nil {
             citysFromCache = (session.array(forKey: "citys") as! [[String: String]])

@@ -9,12 +9,13 @@
 import UIKit
 //import AMPopTip
 
-class TextFieldCell: SuperCell {
+class TextFieldCell: SuperCell, FormUPdatable {
     
     @IBOutlet weak var textField: SuperTextField!
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var clearBtn: UIButton!
     @IBOutlet weak var promptBtn: UIButton!
+    @IBOutlet weak var requiredImageView: UIImageView!
     
     var formItem: FormItem?
     //let popTip = PopTip()
@@ -52,9 +53,6 @@ class TextFieldCell: SuperCell {
 //            }
 //        }
     }
-}
-
-extension TextFieldCell: FormUPdatable {
     
     func update(with formItem: FormItem) {
         
@@ -70,6 +68,7 @@ extension TextFieldCell: FormUPdatable {
         textField.keyboardType = _formItem.uiProperties.keyboardType
         textField.tintColor = _formItem.uiProperties.tintColor
         promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
+        requiredImageView.isHidden = !_formItem.isRequired
         
         self.formItem = formItem
     }

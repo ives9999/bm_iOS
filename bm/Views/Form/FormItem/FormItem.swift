@@ -12,7 +12,7 @@ class FormItem: FormValidable {
     
     var isValid = false
     var msg: String?
-    var isRequired = true
+    var isRequired = false
     var title: String = ""
     var name: String?
     var oldValue: String?
@@ -32,16 +32,16 @@ class FormItem: FormValidable {
     //content is ["type":TEXT_INPUT_TYPE,"text":"課程說明"]
     var sender: Any?
     
-    init(name: String, title: String, placeholder: String? = nil, value: String? = nil, tooltip: String?=nil) {
+    init(name: String, title: String, placeholder: String? = nil, value: String? = nil, tooltip: String?=nil, isRequired: Bool = false) {
         self.title = title
         self.name = name
+        self.isRequired = isRequired
         if placeholder != nil {
             self.placeholder = placeholder!
         }
         if tooltip != nil {
             self.tooltip = tooltip
         }
-        self.value = value
     }
     
     func reset() {

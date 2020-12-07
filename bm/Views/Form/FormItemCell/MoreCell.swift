@@ -14,6 +14,7 @@ class MoreCell: SuperCell, FormUPdatable {
     @IBOutlet weak var detailLbl: SuperLabel!
     @IBOutlet weak var clearBtn: UIButton!
     @IBOutlet weak var promptBtn: UIButton!
+    @IBOutlet weak var requiredImageView: UIImageView!
     var formItem: FormItem?
 
     override func awakeFromNib() {
@@ -56,5 +57,6 @@ class MoreCell: SuperCell, FormUPdatable {
             }
         }
         promptBtn.isHidden = (formItem.tooltip == nil) ? true : false
+        requiredImageView.isHidden = !formItem.isRequired
     }
 }

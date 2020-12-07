@@ -1,21 +1,19 @@
 //
 //  Checkbox.swift
 //  CheckboxDemo
-//
+//  https://github.com/BeauNouvelle/SimpleCheckbox
 
 import Foundation
 import UIKit
 
 /// Checkbox is a simple, animation free checkbox and UISwitch alternative designed
 /// to be performant and easy to implement.
-@available(iOS 10.0, *)
-@available(iOS 10.0, *)
-public class Checkbox: UIControl {
+@IBDesignable
+open class Checkbox: UIControl {
 
     // MARK: - Enums
-
     /// Shape of the center checkmark that appears when `Checkbox.isChecked == true`.
-    public enum CheckmarkStyle {
+    public enum CheckmarkStyle: String {
         /// ■
         case square
         /// ●
@@ -29,7 +27,7 @@ public class Checkbox: UIControl {
     /// Shape of the outside box containing the checkmarks contents.
     ///
     /// Used as a visual indication of where the user can tap.
-    public enum BorderStyle {
+    public enum BorderStyle: String {
         /// ▢
         case square
         /// ◯
@@ -37,18 +35,33 @@ public class Checkbox: UIControl {
     }
 
     // MARK: - Properties
-
     /// Shape of the center checkmark that appears when `Checkbox.isChecked == true`.
     ///
     /// **Default:** `CheckmarkStyle.square`
-    public var checkmarkStyle: CheckmarkStyle = .square
+    dynamic public var checkmarkStyle: CheckmarkStyle = .square
+    @IBInspectable private var checkmarkStyleIB: String {
+        set {
+            checkmarkStyle = CheckmarkStyle(rawValue: newValue) ?? .square
+        }
+        get {
+            return checkmarkStyle.rawValue
+        }
+    }
 
     /// Shape of the outside border containing the checkmarks contents.
     ///
     /// Used as a visual indication of where the user can tap.
     ///
     /// **Default:** `BorderStyle.square`
-    public var borderStyle: BorderStyle = .square
+    dynamic public var borderStyle: BorderStyle = .square
+    @IBInspectable private var borderStyleIB: String {
+        set {
+            borderStyle = BorderStyle(rawValue: newValue) ?? .square
+        }
+        get {
+            return borderStyle.rawValue
+        }
+    }
 
     /// Width of the borders stroke.
     ///
@@ -59,24 +72,42 @@ public class Checkbox: UIControl {
     /// in order appear similar next to other border styles.
     ///
     /// **Default:** `2`
-    public var borderWidth: CGFloat = 2
+    @IBInspectable public var borderLineWidth: CGFloat = 2
 
     /// Size of the center checkmark element.
     ///
     /// Drawn as a percentage of the size of the Checkbox's draw rect.
     ///
     /// **Default:** `0.5`
-    public var checkmarkSize: CGFloat = 0.5
+    @IBInspectable public var checkmarkSize: CGFloat = 0.5
+
+    /// The checboxes border color in its unchecked state.
+    ///
+    /// **Default:** The current tintColor.
+    @IBInspectable public var uncheckedBorderColor: UIColor!
+    
+    /// The checboxes border color in its checked state.
+    ///
+    /// **Default:** The current tintColor.
+    @IBInspectable public var checkedBorderColor: UIColor!
 
     /// **Default:** The current tintColor.
-    public var uncheckedBorderColor: UIColor!
-    public var checkedBorderColor: UIColor!
-
-    /// **Default:** The current tintColor.
-    public var checkmarkColor: UIColor!
+    @IBInspectable public var checkmarkColor: UIColor!
 
     /// **Default:** White.
+    @available(swift, obsoleted: 4.1, renamed: "checkboxFillColor", message: "Defaults to a clear color")
     public var checkboxBackgroundColor: UIColor! = .white
+    
+    /// The checkboxes fill color.
+    ///
+    /// **Default:** `UIColoe.Clear`
+    @IBInspectable public var checkboxFillColor: UIColor = .clear
+    
+    /// Sets the corner radius for the checkbox border.
+    ///
+    ///**Default:** `0.0`
+    /// - Note: Only applies to checkboxes with `BorderStyle.square`
+    @IBInspectable public var borderCornerRadius: CGFloat = 0.0
 
     /// Increases the controls touch area.
     ///
@@ -85,7 +116,7 @@ public class Checkbox: UIControl {
     /// This property helps with that.
     ///
     /// **Default:** `5`
-    public var increasedTouchRadius: CGFloat = 5
+    @IBInspectable public var increasedTouchRadius: CGFloat = 5
 
     /// A function can be passed in here and will be called
     /// when the `isChecked` value changes due to a tap gesture
@@ -96,16 +127,18 @@ public class Checkbox: UIControl {
 
     /// Indicates whether the checkbox is currently in a state of being
     /// checked or not.
-    public var isChecked: Bool = false {
+    @IBInspectable public var isChecked: Bool = false {
         didSet { setNeedsDisplay() }
     }
 
-    public var useHapticFeedback: Bool = true
+    /// Determines if tapping the checkbox generates haptic feedback to the user.
+    ///
+    /// **Default:** `true`
+    @IBInspectable public var useHapticFeedback: Bool = true
 
     private var feedbackGenerator: UIImpactFeedbackGenerator?
 
     // MARK: - Lifecycle
-
     public override init(frame: CGRect) {
         super.init(frame: frame)
         setupDefaults()
@@ -139,12 +172,11 @@ public class Checkbox: UIControl {
     }
 
     // MARK: - Borders
-
     private func drawBorder(shape: BorderStyle, in rect: CGRect) {
-        let adjustedRect = CGRect(x: borderWidth/2,
-                                  y: borderWidth/2,
-                                  width: rect.width-borderWidth,
-                                  height: rect.height-borderWidth)
+        let adjustedRect = CGRect(x: borderLineWidth/2,
+                                  y: borderLineWidth/2,
+                                  width: rect.width-borderLineWidth,
+                                  height: rect.height-borderLineWidth)
 
         switch shape {
         case .circle:
@@ -153,9 +185,9 @@ public class Checkbox: UIControl {
             squareBorder(rect: adjustedRect)
         }
     }
-
+    
     private func squareBorder(rect: CGRect) {
-        let rectanglePath = UIBezierPath(rect: rect)
+        let rectanglePath = UIBezierPath(roundedRect: rect, cornerRadius: borderCornerRadius)
 
         if isChecked {
             checkedBorderColor.setStroke()
@@ -163,9 +195,9 @@ public class Checkbox: UIControl {
             uncheckedBorderColor.setStroke()
         }
 
-        rectanglePath.lineWidth = borderWidth
+        rectanglePath.lineWidth = borderLineWidth
         rectanglePath.stroke()
-        checkboxBackgroundColor.setFill()
+        checkboxFillColor.setFill()
         rectanglePath.fill()
     }
 
@@ -178,14 +210,13 @@ public class Checkbox: UIControl {
             uncheckedBorderColor.setStroke()
         }
 
-        ovalPath.lineWidth = borderWidth / 2
+        ovalPath.lineWidth = borderLineWidth / 2
         ovalPath.stroke()
-        checkboxBackgroundColor.setFill()
+        checkboxFillColor.setFill()
         ovalPath.fill()
     }
 
     // MARK: - Checkmarks
-
     private func drawCheckmark(style: CheckmarkStyle, in rect: CGRect) {
         let adjustedRect = checkmarkRect(in: rect)
         switch checkmarkStyle {
@@ -234,7 +265,6 @@ public class Checkbox: UIControl {
     }
 
     // MARK: - Size Calculations
-
     private func checkmarkRect(in rect: CGRect) -> CGRect {
         let width = rect.maxX * checkmarkSize
         let height = rect.maxY * checkmarkSize
@@ -246,7 +276,6 @@ public class Checkbox: UIControl {
     }
 
     // MARK: - Touch
-
     @objc private func handleTapGesture(recognizer: UITapGestureRecognizer) {
         isChecked = !isChecked
         valueChanged?(isChecked)
@@ -264,7 +293,7 @@ public class Checkbox: UIControl {
     override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         let relativeFrame = self.bounds
         let hitTestEdgeInsets = UIEdgeInsets(top: -increasedTouchRadius, left: -increasedTouchRadius, bottom: -increasedTouchRadius, right: -increasedTouchRadius)
-        let hitFrame = UIEdgeInsetsInsetRect(relativeFrame, hitTestEdgeInsets)
+        let hitFrame = relativeFrame.insetBy(dx: hitTestEdgeInsets.left, dy: hitTestEdgeInsets.top)
         return hitFrame.contains(point)
     }
 

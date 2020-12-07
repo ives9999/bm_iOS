@@ -17,10 +17,11 @@ class AreaFormItem: FormItem {
     var areasFromCache:[[String: String]] = [[String: String]]()
     let session: UserDefaults = UserDefaults.standard
     
-    required init(name: String = AREA_KEY, title: String = "區域") {
-        super.init(name: name, title: title, placeholder: nil, value: nil)
+    required init(name: String = AREA_KEY, title: String = "區域", isRequire: Bool = false) {
+        super.init(name: name, title: title, placeholder: nil, value: nil, isRequired: isRequire)
         segue = TO_SINGLE_SELECT
         uiProperties.cellType = .more
+        self.isRequired = isRequire
     
         reset()
     }

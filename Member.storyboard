@@ -429,7 +429,7 @@
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhY-Z2-MHj" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="117" y="378.5" width="180" height="43"/>
+                                <rect key="frame" x="117" y="381" width="180" height="43"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Nkw-Yy-vA5"/>
@@ -450,7 +450,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySD-eX-vph" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="147" y="299.5" width="120" height="43"/>
+                                <rect key="frame" x="147" y="302" width="120" height="43"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="0af-dv-bWd"/>
@@ -471,7 +471,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vic-zn-4Mh" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="118" y="221.5" width="210" height="42"/>
+                                <rect key="frame" x="118" y="218.5" width="210" height="47.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="0Vd-2u-HEh"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="3ox-CX-VBF"/>
@@ -644,13 +644,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password_textfield" translatesAutoresizingMaskIntoConstraints="NO" id="51M-JF-8fy">
-                                <rect key="frame" x="78.5" y="406" width="257" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="257" id="eqe-qg-VAt"/>
-                                    <constraint firstAttribute="height" constant="43" id="yzH-F1-LEM"/>
-                                </constraints>
-                            </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密碼確認" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="w9e-SB-GmI">
                                 <rect key="frame" x="118.5" y="409" width="200" height="37"/>
                                 <constraints>
@@ -719,6 +712,13 @@
                                     <action selector="registerBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="fOA-sd-4F6"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password_textfield" translatesAutoresizingMaskIntoConstraints="NO" id="51M-JF-8fy">
+                                <rect key="frame" x="78" y="406" width="257" height="43"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="257" id="eqe-qg-VAt"/>
+                                    <constraint firstAttribute="height" constant="43" id="yzH-F1-LEM"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XZa-GS-Ac3"/>
                         <constraints>
@@ -1580,10 +1580,16 @@
                                                 <state key="normal" title="提交">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="submitBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="5XN-Ge-dcK"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6s-MP-5wx" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="73" y="0.0" width="46" height="34"/>
                                                 <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="cancelBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="Ous-R1-hGi"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -1639,10 +1645,10 @@
             <size key="intrinsicContentSize" width="134" height="39"/>
         </designable>
         <designable name="fDf-E9-mCZ">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="26" height="47.5"/>
         </designable>
         <designable name="vic-zn-4Mh">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="26" height="48"/>
         </designable>
         <designable name="ySD-eX-vph">
             <size key="intrinsicContentSize" width="39" height="39"/>

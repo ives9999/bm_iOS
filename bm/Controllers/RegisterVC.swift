@@ -76,6 +76,37 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = getFormItemFromIdx(indexPath)
+        if item != nil {
+            if item!.name != nil {
+                //let segue = item!.segue!
+                let key = item!.name
+                if key == CITY_KEY {
+                    let selectItem: CityFormItem = item as! CityFormItem
+                    var selected: String = ""
+                    if selectItem.selected_city_ids.count > 0 {
+                        selected = String(selectItem.selected_city_ids[0])
+                    }
+                    toSelectCity(key: key, selected: selected, _delegate: self)
+                } else if key == AREA_KEY {
+                    let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY)! as! CityFormItem
+                    if cityItem.value == nil {
+                        warning("請先選擇縣市")
+                    } else {
+                        let city_id = Int(cityItem.value!)
+                        let selectItem: AreaFormItem = item as! AreaFormItem
+                        var selected: String = ""
+                        if selectItem.selected_area_ids.count > 0 {
+                            selected = String(selectItem.selected_area_ids[0])
+                        }
+                        toSelectArea(key: key, city_id: city_id, selected: selected, _delegate: self)
+                    }
+                }
+            }
+        }
+    }
+    
     func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
         let key = section_keys[indexPath.section][indexPath.row]
         return getFormItemFromKey(key)
@@ -91,6 +122,24 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
         
         return res
+    }
+    
+    override func singleSelected(key: String, selected: String) {
+        
+        let item = getFormItemFromKey(key)
+        if item != nil {
+            if item!.value != selected {
+                item!.reset()
+            }
+            if key == AREA_KEY {
+                let item1: AreaFormItem = item as! AreaFormItem
+                let cityItem = getFormItemFromKey(CITY_KEY)
+                item1.city_id = Int((cityItem?.value)!)
+            }
+            item!.value = selected
+            item!.make()
+            tableView.reloadData()
+        }
     }
     
     func isImageSet(_ b: Bool) {}
@@ -187,8 +236,22 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func colseBtnPressed(_ sender: Any) {
+    @IBAction func cancelBtnPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func submitBtnPressed(_ sender: Any) {
+        for formItem in form.formItems {
+            formItem.checkValidity()
+            if !formItem.isValid {
+                if formItem.msg != nil {
+                    warning(formItem.msg!)
+                } else {
+                    warning("有錯誤")
+                }
+                break
+            }
+        }
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
