@@ -813,9 +813,42 @@ extension UserDefaults {
         
         return tmp
     }
+    
+    func getAreaByAreaID(_ area_id: Int) -> [String: String] {
+        
+        let tmp1 = getAllAreas()//dictionary
+        var tmp: [String: String] = [String: String]()
+        var bFind = false
+        for (_, areas) in tmp1 {
+            if areas["rows"] != nil {
+                let rows = areas["rows"] as! [[String: String]]
+                for row in rows {
+                    for (key, _) in row {
+                        let _value: String = row["id"]!
+                        if key == "id" && Int(_value) == area_id {
+                            bFind = true
+                        }
+                        if bFind {
+                            tmp[key] = _value
+                        }
+                    }
+                    if bFind {
+                        break
+                    }
+                }
+                if bFind {
+                    break
+                }
+            }
+        }
+        
+        return tmp
+    }
+    
     func set(_ key: String, _ value: Any) {
         set(value, forKey: key)
     }
+    
     func isKeyPresentInUserDefaults(key: String) -> Bool {
         return object(forKey: key) != nil
     }
@@ -972,6 +1005,20 @@ extension Dictionary {
             return theJSONText
         }
         return nil
+    }
+    
+    func keyExist(key: String)-> Bool {
+        var isExist = false
+        for (idx, _) in self {
+            if let key1 = idx as? String {
+                if key == key1 {
+                    isExist = true
+                    break
+                }
+            }
+        }
+        
+        return isExist
     }
 }
 

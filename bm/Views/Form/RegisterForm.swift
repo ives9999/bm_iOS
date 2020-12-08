@@ -27,7 +27,7 @@ class RegisterForm: BaseForm {
         let telItem = TextFieldFormItem(name: TEL_KEY, title: "市內電話", placeholder: "請輸入市內電話", keyboardType: .numberPad)
         let cityItem = CityFormItem(isRequire: true)
         let areaItem = AreaFormItem(isRequire: true)
-        let addressItem = TextFieldFormItem(name: ADDRESS_KEY, title: "住址", placeholder: "路街名、巷、弄、號", isRequire: true)
+        let roadItem = TextFieldFormItem(name: ROAD_KEY, title: "住址", placeholder: "路街名、巷、弄、號", isRequire: true)
         
         let section4 = SectionFormItem(title: "社群資料")
         let fbItem = TextFieldFormItem(name: FB_KEY, title: "FB", placeholder: "請輸入FB網址")
@@ -38,7 +38,7 @@ class RegisterForm: BaseForm {
 
         formItems = [section1,emailItem,passwordItem,repasswordItem,
                      section2,nameItem,nicknameItem,dobItem,
-                     section3,mobileItem,telItem,cityItem,areaItem,addressItem,
+                     section3,mobileItem,telItem,cityItem,areaItem,roadItem,
                      section4,fbItem,lineItem,
                      section5,privacyItem
         ]

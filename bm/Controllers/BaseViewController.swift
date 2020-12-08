@@ -799,6 +799,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         return rows
     }
     
+    func getAreaByAreaID(_ area_id: Int) -> [String: String] {
+        let area = self.session.getAreaByAreaID(area_id)
+        
+        return area
+    }
+    
     func multiSelected(key: String, selecteds: [String]) {}
     func singleSelected(key: String, selected: String) {}
     func selectedManagers(selecteds: [String]) {}

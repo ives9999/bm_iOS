@@ -29,6 +29,11 @@ class PasswordCell: TextFieldCell {
         requiredImageView.isHidden = !_formItem.isRequired
         
         self.formItem = formItem
+        
+        if _formItem.value != nil && _formItem.value!.count > 0 {
+            let p = textToStar(input: _formItem.value!)
+            textField.text = p
+        }
     }
     
     @IBAction override func textFieldDidChange(_ textField: UITextField) {

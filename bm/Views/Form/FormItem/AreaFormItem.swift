@@ -15,6 +15,7 @@ class AreaFormItem: FormItem {
     var city_id: Int?
     
     var areasFromCache:[[String: String]] = [[String: String]]()
+    var area: [String: String] = [String: String]()
     let session: UserDefaults = UserDefaults.standard
     
     required init(name: String = AREA_KEY, title: String = "區域", isRequire: Bool = false) {
@@ -40,6 +41,14 @@ class AreaFormItem: FormItem {
         if city_id != nil {
             if session.getAreasByCity(city_id!).count > 0 {
                 areasFromCache = session.getAreasByCity(city_id!)
+            }
+        } else {
+            var area_id: Int = 0
+            if value != nil  {
+                area_id = Int(value!) ?? 0
+                if area_id > 0 {
+                    area = session.getAreaByAreaID(area_id)
+                }
             }
         }
         valueToAnother()

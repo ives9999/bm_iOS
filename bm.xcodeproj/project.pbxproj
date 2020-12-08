@@ -777,23 +777,23 @@
 		B33C1AB621BD1022006F2BEB /* FormItem */ = {
 			isa = PBXGroup;
 			children = (
+				B3A253E3256BCBB8004B8A03 /* AreaFormItem.swift */,
+				B3A253DD256A9E43004B8A03 /* CityFormItem.swift */,
 				B33C1ABA21BD2DED006F2BEB /* ColorFormItem.swift */,
 				B33C1AC021BE635E006F2BEB /* ContentFormItem.swift */,
 				B3310D8922AA20A50062EF98 /* CourseKindFormItem.swift */,
 				B3310D8B22AA28260062EF98 /* CycleUnitFormItem.swift */,
 				B306FE9921F0916D00403FE2 /* DateFormItem.swift */,
 				B323390821B6B8E4003EB84D /* FormItem.swift */,
+				B3A2541725722C5A004B8A03 /* ManagersFormItem.swift */,
+				B3B4EF76257C8ECF00EE15D0 /* PasswordFormItem.swift */,
 				B358B0B322A0F66A00F1A4E6 /* PriceUnitFormItem.swift */,
+				B3B4EF5C257B614C00EE15D0 /* PrivacyFormItem.swift */,
 				B358B0B722A100EF00F1A4E6 /* SectionFormItem.swift */,
 				B33C1AB821BD10B8006F2BEB /* StatusFormItem.swift */,
 				B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */,
 				B33C1ABC21BD300E006F2BEB /* TimeFormItem.swift */,
 				B33C1ABE21BD7F2C006F2BEB /* WeekdayFormItem.swift */,
-				B3A253DD256A9E43004B8A03 /* CityFormItem.swift */,
-				B3A253E3256BCBB8004B8A03 /* AreaFormItem.swift */,
-				B3A2541725722C5A004B8A03 /* ManagersFormItem.swift */,
-				B3B4EF5C257B614C00EE15D0 /* PrivacyFormItem.swift */,
-				B3B4EF76257C8ECF00EE15D0 /* PasswordFormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";

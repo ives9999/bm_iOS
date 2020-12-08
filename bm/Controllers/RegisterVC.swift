@@ -24,7 +24,19 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     fileprivate var form: RegisterForm = RegisterForm()
     
     let testData: [String: String] = [
-        EMAIL_KEY: "ives@housetube.tw"
+        EMAIL_KEY: "ives@housetube.tw",
+        PASSWORD_KEY: "1234",
+        REPASSWORD_KEY: "1234",
+        NAME_KEY: "孫志煌",
+        NICKNAME_KEY: "列車長",
+        DOB_KEY: "1969-01-05",
+        MOBILE_KEY: "0911299994",
+        TEL_KEY: "062295888",
+        CITY_KEY: "218",
+        AREA_KEY: "219",
+        ROAD_KEY: "南華街101號8樓",
+        FB_KEY: "https://www.facebook.com/ives.sun",
+        LINE_KEY: "ives9999"
     ]
     
     override func viewDidLoad() {
@@ -50,10 +62,15 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     }
     
     func initData() {
+        if testData.keyExist(key: AREA_KEY) {
+            let area_id: Int = Int(testData[AREA_KEY]!) ?? 0
+            let area = session.getAreaByAreaID(area_id)
+        }
         if testData.count > 0 {
             for (key, value) in testData {
                 let formItem = getFormItemFromKey(key)
                 formItem!.value = value
+                formItem!.make()
             }
         }
     }
