@@ -15,6 +15,8 @@ class SuperDatePicker: UIDatePicker {
         //if !isChanged {
             isChanged = true
         self.backgroundColor = UIColor.white
+        self.setValue(UIColor.red, forKey: "textColor")
+        //self.datePickerStyle =
         //self.backgroundColor = UIColor(DARKBACKGROUND)
             //self.setValue(UIColor.white, forKey: "textColor")
             //self.setValue(false, forKey: "highlightsToday")

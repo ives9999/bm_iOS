@@ -436,15 +436,27 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toSelectDate() {
+    func toSelectDate(key: String? = nil, selected: String? = nil) {
         if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-bUa-fD-2pO") as? DateSelectVC {
+                if key != nil {
+                    viewController.key = key
+                }
+                if selected != nil {
+                    viewController.selected = selected!
+                }
                 viewController.delegate = self
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-bUa-fD-2pO") as! DateSelectVC
+            if key != nil {
+                viewController.key = key
+            }
+            if selected != nil {
+                viewController.selected = selected!
+            }
             viewController.delegate = self
             self.navigationController!.pushViewController(viewController, animated: true)
         }
@@ -507,10 +519,6 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
-    
-    func multiSelected(key: String, selecteds: [String]) {}
-    func singleSelected(key: String, selected: String) {}
-    func selectedManagers(selecteds: [String]) {}
     
     func toSelectCity(key: String? = nil, selected: String? = nil, _delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
@@ -791,6 +799,9 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         return rows
     }
     
+    func multiSelected(key: String, selecteds: [String]) {}
+    func singleSelected(key: String, selected: String) {}
+    func selectedManagers(selecteds: [String]) {}
     func dateSelected(key: String, selected: String) {}
     
     func alertError(title: String, msg: String) {

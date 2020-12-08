@@ -23,7 +23,7 @@ class DateSelectVC: BaseViewController {
     
     //input["type":START,"date":date]
     //var type: SELECT_DATE_TYPE = SELECT_DATE_TYPE.start
-    var selected: String = "2019-01-01"
+    var selected: String = "2000-01-01"
     var key: String? = nil
     
     //var indexPath: IndexPath?
@@ -34,6 +34,8 @@ class DateSelectVC: BaseViewController {
         if !selected.isDate {
             selected = Global.instance.today()
         }
+        //datePicker.backgroundColor = UIColor.white
+        //datePicker.setValue(UIColor.red, forKey: "textColor")
         datePicker.date = selected.toDateTime(format: "yyyy-MM-dd")
     }
     

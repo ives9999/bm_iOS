@@ -23,14 +23,15 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     
     fileprivate var form: RegisterForm = RegisterForm()
     
+    let testData: [String: String] = [
+        EMAIL_KEY: "ives@housetube.tw"
+    ]
+    
     override func viewDidLoad() {
         myTablView = tableView
         super.viewDidLoad()
 
         self.hideKeyboardWhenTappedAround()
-        //emailTxt.delegate = self
-        //passwordTxt.delegate = self
-        //rePasswordTxt.delegate = self
         
         imagePicker.delegate = self
         featuredView.gallery = imagePicker
@@ -44,6 +45,17 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         
         sections = form.getSections()
         section_keys = form.getSectionKeys()
+        
+        initData()
+    }
+    
+    func initData() {
+        if testData.count > 0 {
+            for (key, value) in testData {
+                let formItem = getFormItemFromKey(key)
+                formItem!.value = value
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -102,6 +114,13 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                         }
                         toSelectArea(key: key, city_id: city_id, selected: selected, _delegate: self)
                     }
+                } else if key == DOB_KEY {
+                    let dobItem: DateFormItem = getFormItemFromKey(key!)! as! DateFormItem
+                    var selected: String?
+                    if dobItem.value != nil {
+                        selected = dobItem.value!
+                    }
+                    toSelectDate(key: key, selected: selected)
                 }
             }
         }
@@ -135,6 +154,18 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 let item1: AreaFormItem = item as! AreaFormItem
                 let cityItem = getFormItemFromKey(CITY_KEY)
                 item1.city_id = Int((cityItem?.value)!)
+            }
+            item!.value = selected
+            item!.make()
+            tableView.reloadData()
+        }
+    }
+    
+    override func dateSelected(key: String, selected: String) {
+        let item = getFormItemFromKey(key)
+        if item != nil {
+            if item!.value != selected {
+                item!.reset()
             }
             item!.value = selected
             item!.make()

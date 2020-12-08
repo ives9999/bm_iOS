@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HG5-5B-KRS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HG5-5B-KRS">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,7 +23,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="展示" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oXe-Ml-6VE">
                                         <rect key="frame" x="52" y="18.5" width="330" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wmN-mx-yAk">
@@ -52,6 +53,7 @@
                                 <rect key="frame" x="0.0" y="64" width="414" height="778"/>
                             </imageView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="n4W-T5-iY7"/>
                         <constraints>
                             <constraint firstItem="Mq6-l1-TM6" firstAttribute="trailing" secondItem="n4W-T5-iY7" secondAttribute="trailing" id="8uV-6I-Kxx"/>
                             <constraint firstItem="Mq6-l1-TM6" firstAttribute="leading" secondItem="n4W-T5-iY7" secondAttribute="leading" id="BlG-NP-kAe"/>
@@ -61,7 +63,6 @@
                             <constraint firstItem="6Eb-iz-ieV" firstAttribute="top" secondItem="Mq6-l1-TM6" secondAttribute="bottom" id="RP8-zB-6ZT"/>
                             <constraint firstItem="6Eb-iz-ieV" firstAttribute="trailing" secondItem="n4W-T5-iY7" secondAttribute="trailing" id="ws8-tb-ss1"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="n4W-T5-iY7"/>
                     </view>
                     <navigationItem key="navigationItem" id="5Wi-H2-5Mb"/>
                     <connections>
@@ -100,7 +101,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教練" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ae5-TU-DnJ">
                                         <rect key="frame" x="186.5" y="18.5" width="41" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -127,7 +128,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xeD-8R-KJQ">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="583"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pro-xp-EfP" customClass="CityButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pro-xp-EfP" customClass="CityButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="8" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="fE8-tF-1eB"/>
@@ -319,6 +320,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="TJv-46-gGn"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="n23-TM-rvs" firstAttribute="trailing" secondItem="TJv-46-gGn" secondAttribute="trailing" id="1TZ-d9-SEI"/>
@@ -333,7 +335,6 @@
                             <constraint firstItem="TJv-46-gGn" firstAttribute="bottom" secondItem="UeS-dR-qEx" secondAttribute="bottom" id="jaI-rN-QY5"/>
                             <constraint firstItem="UeS-dR-qEx" firstAttribute="leading" secondItem="TJv-46-gGn" secondAttribute="leading" id="tf2-4I-pHf"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="TJv-46-gGn"/>
                     </view>
                     <navigationItem key="navigationItem" id="bBe-K8-qZt"/>
                     <connections>
@@ -396,6 +397,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="d8O-KF-Y85"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Yxr-ME-S3m" firstAttribute="leading" secondItem="d8O-KF-Y85" secondAttribute="leading" id="27H-27-lWS"/>
@@ -406,7 +408,6 @@
                             <constraint firstItem="d8O-KF-Y85" firstAttribute="trailing" secondItem="Yxr-ME-S3m" secondAttribute="trailing" id="UDf-dE-1eJ"/>
                             <constraint firstItem="mKn-9j-98B" firstAttribute="top" secondItem="d8O-KF-Y85" secondAttribute="top" constant="20" id="a0R-64-vz3"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="d8O-KF-Y85"/>
                     </view>
                     <navigationItem key="navigationItem" id="VVV-Hy-kqF"/>
                     <connections>
@@ -431,7 +432,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登錄球隊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2w-Um-mA3">
                                         <rect key="frame" x="169" y="19" width="76.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jau-09-Ctg">
@@ -502,7 +503,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="wb5-m6-ybU">
                                         <rect key="frame" x="155.5" y="8" width="103" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1d-Ud-k9i" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1d-Ud-k9i" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -516,7 +517,7 @@
                                                     <action selector="submit:" destination="UtM-v1-pfK" eventType="touchUpInside" id="OkA-Fh-OFS"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CxY-HY-Tdm" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CxY-HY-Tdm" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="58" y="0.0" width="45" height="34"/>
                                                 <state key="normal" title="cancel"/>
                                                 <connections>
@@ -535,6 +536,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="28d-5J-eIl"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="33G-E0-PVJ" firstAttribute="top" secondItem="28d-5J-eIl" secondAttribute="top" id="2ub-1g-h7M"/>
@@ -552,7 +554,6 @@
                             <constraint firstItem="mHM-51-z96" firstAttribute="trailing" secondItem="28d-5J-eIl" secondAttribute="trailing" id="hsD-pY-jbL"/>
                             <constraint firstItem="28d-5J-eIl" firstAttribute="trailing" secondItem="33G-E0-PVJ" secondAttribute="trailing" id="tVu-FE-Yzh"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="28d-5J-eIl"/>
                     </view>
                     <navigationItem key="navigationItem" id="EUw-xS-idh"/>
                     <connections>
@@ -586,7 +587,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="區域" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-ZP-eHB">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYS-WD-ZIv">
@@ -622,7 +623,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JhC-DH-udG" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r00-Q1-Luh">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r00-Q1-Luh">
                                         <rect key="frame" x="191" y="8" width="32" height="34"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -647,6 +648,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="fEh-XE-zIw"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="JhC-DH-udG" secondAttribute="trailing" id="1Fo-dG-ARr"/>
@@ -664,7 +666,6 @@
                             <constraint firstItem="fEh-XE-zIw" firstAttribute="bottom" secondItem="JhC-DH-udG" secondAttribute="bottom" id="zDs-lV-0FT"/>
                             <constraint firstItem="fEh-XE-zIw" firstAttribute="trailing" secondItem="qkE-Cf-u6W" secondAttribute="trailing" id="zYK-0C-bjB"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="fEh-XE-zIw"/>
                     </view>
                     <navigationItem key="navigationItem" id="A4e-v1-beF"/>
                     <connections>
@@ -690,7 +691,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="狀態" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="njh-Ym-qMR">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Po9-c5-Xu4">
@@ -731,6 +732,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="p8i-zb-CYN"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="p8i-zb-CYN" firstAttribute="bottom" secondItem="Njs-Vj-aFE" secondAttribute="bottom" id="6SJ-60-7Bn"/>
@@ -745,7 +747,6 @@
                             <constraint firstItem="6lP-dO-ztb" firstAttribute="top" secondItem="ylp-Rr-RCn" secondAttribute="bottom" id="tF6-2m-mRN"/>
                             <constraint firstItem="ylp-Rr-RCn" firstAttribute="leading" secondItem="p8i-zb-CYN" secondAttribute="leading" id="wDh-ka-kXp"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="p8i-zb-CYN"/>
                     </view>
                     <navigationItem key="navigationItem" id="J9z-98-uQk"/>
                     <connections>
@@ -771,7 +772,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="顏色" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YY0-84-MUU">
                                         <rect key="frame" x="186.5" y="18.5" width="41" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fi-Xm-yRO">
@@ -810,6 +811,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="p39-tX-FqC"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="4Ln-GT-M42" firstAttribute="top" secondItem="p39-tX-FqC" secondAttribute="top" id="4Np-Tz-ab2"/>
@@ -824,7 +826,6 @@
                             <constraint firstItem="p39-tX-FqC" firstAttribute="trailing" secondItem="O9G-HZ-qeq" secondAttribute="trailing" id="sQ6-Id-wz0"/>
                             <constraint firstItem="O9G-HZ-qeq" firstAttribute="leading" secondItem="p39-tX-FqC" secondAttribute="leading" id="wV8-MU-DeE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="p39-tX-FqC"/>
                     </view>
                     <navigationItem key="navigationItem" id="R5L-aS-hac"/>
                     <connections>
@@ -850,7 +851,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球館" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6H6-B3-jPD">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ia7-F3-r5j">
@@ -892,7 +893,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="a5S-IG-IgF">
                                         <rect key="frame" x="163" y="8" width="88" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81x-bd-tgb" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="81x-bd-tgb" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="31" height="34"/>
                                                 <state key="normal" title="取消"/>
                                                 <connections>
@@ -900,7 +901,7 @@
                                                     <action selector="cancel:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="1QM-VD-fHK"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkd-gG-VFZ" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hkd-gG-VFZ" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="56" y="0.0" width="32" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -931,6 +932,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="pjr-OJ-qxv"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qh8-oo-cR6" firstAttribute="leading" secondItem="pjr-OJ-qxv" secondAttribute="leading" id="1hE-VU-O2b"/>
@@ -948,7 +950,6 @@
                             <constraint firstItem="7b0-C9-d8k" firstAttribute="leading" secondItem="pjr-OJ-qxv" secondAttribute="leading" id="wRR-wH-2C2"/>
                             <constraint firstItem="8yo-I1-exL" firstAttribute="top" secondItem="7b0-C9-d8k" secondAttribute="bottom" id="xQd-cB-aVD"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="pjr-OJ-qxv"/>
                     </view>
                     <navigationItem key="navigationItem" id="AQS-yP-vNa"/>
                     <connections>
@@ -973,7 +974,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="地圖" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gh-g2-6zA">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gd7-T4-JjU">
@@ -1002,6 +1003,7 @@
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </mapView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="7Y1-fW-x90"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="prw-F7-Rv3" firstAttribute="top" secondItem="7Y1-fW-x90" secondAttribute="top" id="6Vs-it-UBk"/>
@@ -1012,7 +1014,6 @@
                             <constraint firstItem="7Y1-fW-x90" firstAttribute="trailing" secondItem="haD-Wy-bTo" secondAttribute="trailing" id="t9J-uH-hRi"/>
                             <constraint firstItem="7Y1-fW-x90" firstAttribute="bottom" secondItem="haD-Wy-bTo" secondAttribute="bottom" id="x9o-De-fmE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="7Y1-fW-x90"/>
                     </view>
                     <navigationItem key="navigationItem" id="2lC-aD-6zf"/>
                     <connections>
@@ -1038,7 +1039,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90v-Jt-iYV">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ODc-t4-v3X">
@@ -1070,15 +1071,18 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="akV-gR-VdC">
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </imageView>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" translatesAutoresizingMaskIntoConstraints="NO" id="oLj-Mk-1z3" customClass="SuperDatePicker" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="24" y="132" width="366" height="160"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="160" id="UM3-Nc-ILC"/>
-                                </constraints>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="oLj-Mk-1z3" customClass="SuperDatePicker" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="8" y="124" width="398" height="353.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAd-ie-Gh7" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="191" y="308" width="32" height="34"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAd-ie-Gh7" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="191" y="493.5" width="32" height="34"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="NR3-xy-z3R"/>
@@ -1093,34 +1097,33 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="4Qy-ad-PCJ"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="oLj-Mk-1z3" firstAttribute="top" secondItem="2da-Qg-3Zc" secondAttribute="bottom" constant="24" id="2mu-Wa-Mg1"/>
+                            <constraint firstItem="oLj-Mk-1z3" firstAttribute="leading" secondItem="4Qy-ad-PCJ" secondAttribute="leading" constant="8" id="5PM-m7-pI3"/>
                             <constraint firstItem="4Qy-ad-PCJ" firstAttribute="bottom" secondItem="akV-gR-VdC" secondAttribute="bottom" id="KP9-bC-5yQ"/>
-                            <constraint firstItem="lAd-ie-Gh7" firstAttribute="centerY" secondItem="UEn-bW-WWO" secondAttribute="centerY" id="MS5-S2-Pke"/>
+                            <constraint firstItem="oLj-Mk-1z3" firstAttribute="top" secondItem="2da-Qg-3Zc" secondAttribute="bottom" constant="16" id="UhT-gJ-bi4"/>
                             <constraint firstItem="lAd-ie-Gh7" firstAttribute="centerX" secondItem="UEn-bW-WWO" secondAttribute="centerX" id="Uie-w2-3hO"/>
-                            <constraint firstItem="lAd-ie-Gh7" firstAttribute="top" secondItem="oLj-Mk-1z3" secondAttribute="bottom" constant="16" id="UpK-c0-cg0"/>
                             <constraint firstItem="2da-Qg-3Zc" firstAttribute="leading" secondItem="4Qy-ad-PCJ" secondAttribute="leading" id="aue-5U-alc"/>
-                            <constraint firstItem="oLj-Mk-1z3" firstAttribute="trailing" secondItem="UEn-bW-WWO" secondAttribute="trailing" constant="-24" id="bza-yL-GNi"/>
-                            <constraint firstItem="oLj-Mk-1z3" firstAttribute="leading" secondItem="akV-gR-VdC" secondAttribute="leading" constant="24" id="cyP-Ew-0GN"/>
                             <constraint firstItem="akV-gR-VdC" firstAttribute="leading" secondItem="UEn-bW-WWO" secondAttribute="leading" id="kwt-dl-kWc"/>
+                            <constraint firstItem="lAd-ie-Gh7" firstAttribute="top" secondItem="oLj-Mk-1z3" secondAttribute="bottom" constant="16" id="lEG-4c-nyd"/>
                             <constraint firstItem="akV-gR-VdC" firstAttribute="top" secondItem="2da-Qg-3Zc" secondAttribute="bottom" id="lMH-wb-C0v"/>
                             <constraint firstItem="4Qy-ad-PCJ" firstAttribute="trailing" secondItem="akV-gR-VdC" secondAttribute="trailing" id="p22-lh-uBN"/>
                             <constraint firstItem="2da-Qg-3Zc" firstAttribute="top" secondItem="4Qy-ad-PCJ" secondAttribute="top" id="t4b-OC-cph"/>
                             <constraint firstAttribute="trailing" secondItem="2da-Qg-3Zc" secondAttribute="trailing" id="xWY-KL-IqJ"/>
+                            <constraint firstItem="4Qy-ad-PCJ" firstAttribute="trailing" secondItem="oLj-Mk-1z3" secondAttribute="trailing" constant="8" id="xar-om-o7O"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="4Qy-ad-PCJ"/>
                     </view>
                     <navigationItem key="navigationItem" id="ekc-lX-usW"/>
                     <connections>
-                        <outlet property="datePicker" destination="oLj-Mk-1z3" id="2NX-cf-6Rv"/>
+                        <outlet property="datePicker" destination="oLj-Mk-1z3" id="Wes-fS-qxF"/>
                         <outlet property="submitBtn" destination="lAd-ie-Gh7" id="1vV-Os-kMs"/>
                         <outlet property="titleLbl" destination="90v-Jt-iYV" id="YlS-lr-hHL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DTh-rn-HWH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1986" y="-4693"/>
+            <point key="canvasLocation" x="2126" y="-4617"/>
         </scene>
         <!--Black ListVC-->
         <scene sceneID="PvD-40-aIs">
@@ -1147,7 +1150,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="黑名單" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeT-Uw-Z8b">
                                         <rect key="frame" x="178.5" y="18.5" width="57" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1178,6 +1181,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Zda-Pt-yVr"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="wG1-Ve-RwW" firstAttribute="leading" secondItem="Zda-Pt-yVr" secondAttribute="leading" id="2hP-1t-oDq"/>
@@ -1195,7 +1199,6 @@
                             <constraint firstItem="wG1-Ve-RwW" firstAttribute="top" secondItem="Hay-9N-KJJ" secondAttribute="bottom" id="vXW-p6-M3j"/>
                             <constraint firstItem="6F8-0q-Ykf" firstAttribute="top" secondItem="Hay-9N-KJJ" secondAttribute="bottom" constant="12" id="zhZ-KH-a3x"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Zda-Pt-yVr"/>
                     </view>
                     <connections>
                         <outlet property="emptyCons" destination="pa3-Hl-8IZ" id="wOa-1Y-OF2"/>
@@ -1234,7 +1237,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="報名列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mbW-za-DfR">
                                         <rect key="frame" x="168.5" y="18.5" width="77" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1267,7 +1270,8 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="dS1-ol-M6K"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="dS1-ol-M6K" firstAttribute="bottom" secondItem="Ja9-jE-Drs" secondAttribute="bottom" id="2hS-UK-hsz"/>
                             <constraint firstItem="Ja9-jE-Drs" firstAttribute="leading" secondItem="dS1-ol-M6K" secondAttribute="leading" id="L2C-7k-iIL"/>
@@ -1282,7 +1286,6 @@
                             <constraint firstItem="eZ6-Xv-UYk" firstAttribute="leading" secondItem="9bv-xD-MMv" secondAttribute="leading" id="fQ5-yR-Kft"/>
                             <constraint firstItem="dS1-ol-M6K" firstAttribute="trailing" secondItem="eZ6-Xv-UYk" secondAttribute="trailing" id="kJO-KR-4aj"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="dS1-ol-M6K"/>
                     </view>
                     <connections>
                         <outlet property="emptyCons" destination="AQZ-RL-RX7" id="lxT-Nk-WX3"/>
@@ -1320,7 +1323,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="33k-oE-O8H">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qd2-zv-pJR">
@@ -1357,6 +1360,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="eTn-Lz-FWa"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SZC-gy-pqa" firstAttribute="leading" secondItem="eTn-Lz-FWa" secondAttribute="leading" id="1yk-a3-0hf"/>
@@ -1370,7 +1374,6 @@
                             <constraint firstItem="SZC-gy-pqa" firstAttribute="trailing" secondItem="eTn-Lz-FWa" secondAttribute="trailing" id="sbB-Dg-9d9"/>
                             <constraint firstItem="ac6-qU-H7f" firstAttribute="leading" secondItem="eTn-Lz-FWa" secondAttribute="leading" id="suW-tz-XWi"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="eTn-Lz-FWa"/>
                     </view>
                     <navigationItem key="navigationItem" id="W7K-S9-x9M"/>
                     <connections>
@@ -1409,7 +1412,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理功能" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mT7-32-00D">
                                         <rect key="frame" x="168.5" y="18.5" width="77" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1430,6 +1433,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="mDO-ve-yFo"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Lx4-SK-e3n" firstAttribute="top" secondItem="mDO-ve-yFo" secondAttribute="top" id="8Bb-uD-Kqr"/>
@@ -1444,7 +1448,6 @@
                             <constraint firstItem="8jY-n3-FEB" firstAttribute="top" secondItem="Lx4-SK-e3n" secondAttribute="bottom" id="r8d-Yx-kmg"/>
                             <constraint firstItem="8jY-n3-FEB" firstAttribute="trailing" secondItem="mDO-ve-yFo" secondAttribute="trailing" id="zbx-mp-z0k"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="mDO-ve-yFo"/>
                     </view>
                     <navigationItem key="navigationItem" id="8td-jK-YAq"/>
                     <connections>
@@ -1487,7 +1490,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="單選" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZwS-O7-NXQ">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1511,6 +1514,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Ql0-XC-LG8"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="dgY-UV-bc4" secondAttribute="trailing" id="1Lb-xL-fog"/>
@@ -1525,7 +1529,6 @@
                             <constraint firstItem="bGC-fG-vAG" firstAttribute="top" secondItem="cTH-Da-jMk" secondAttribute="bottom" id="gnO-jR-Ydw"/>
                             <constraint firstItem="dgY-UV-bc4" firstAttribute="leading" secondItem="Ql0-XC-LG8" secondAttribute="leading" id="twH-10-p1E"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Ql0-XC-LG8"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="dgY-UV-bc4" id="3La-bU-I1o"/>
@@ -1564,7 +1567,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="內容編輯" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGi-gf-oQY">
                                         <rect key="frame" x="169" y="19" width="76.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1598,7 +1601,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="namePhonePad"/>
                                     </textView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3A-7E-Fq4" customClass="ClearButton" customModule="bm" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3A-7E-Fq4" customClass="ClearButton" customModule="bm" customModuleProvider="target">
                                         <rect key="frame" x="184" y="160" width="46" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
@@ -1626,7 +1629,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="RYF-xX-YKi">
                                         <rect key="frame" x="147.5" y="8" width="119" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kf0-Jb-sNf" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kf0-Jb-sNf" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1641,7 +1644,7 @@
                                                     <action selector="submit:" destination="RNp-jr-1LT" eventType="touchUpInside" id="cdg-ic-qE9"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="daT-1S-PeG" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="daT-1S-PeG" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="73" y="0.0" width="46" height="34"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
@@ -1661,6 +1664,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="lVf-8y-gWg"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Hou-Nq-d63" firstAttribute="top" secondItem="KhY-Gz-vjQ" secondAttribute="bottom" id="CHR-1n-g0I"/>
@@ -1674,7 +1678,6 @@
                             <constraint firstItem="lVf-8y-gWg" firstAttribute="trailing" secondItem="Hou-Nq-d63" secondAttribute="trailing" id="hSV-2W-HhK"/>
                             <constraint firstItem="KhY-Gz-vjQ" firstAttribute="leading" secondItem="lVf-8y-gWg" secondAttribute="leading" id="kv2-0c-s2I"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="lVf-8y-gWg"/>
                     </view>
                     <connections>
                         <outlet property="clearBtn" destination="a3A-7E-Fq4" id="kK9-bg-N9o"/>
@@ -1715,7 +1718,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="複選" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mDv-Ml-d0i">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1745,7 +1748,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="y9N-OO-BLS">
                                         <rect key="frame" x="147.5" y="8" width="119" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W08-ON-P5N" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W08-ON-P5N" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -1759,7 +1762,7 @@
                                                     <action selector="submit:" destination="RNp-jr-1LT" eventType="touchUpInside" id="Jun-Ba-Oab"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxA-OH-sTF" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kxA-OH-sTF" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="73" y="0.0" width="46" height="34"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
@@ -1777,6 +1780,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="8cP-wQ-ayc"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zvs-2C-DAm" firstAttribute="trailing" secondItem="8cP-wQ-ayc" secondAttribute="trailing" id="2Kp-py-noE"/>
@@ -1794,7 +1798,6 @@
                             <constraint firstAttribute="bottom" secondItem="Moy-Ks-hiw" secondAttribute="bottom" id="teR-F1-a1n"/>
                             <constraint firstItem="bEe-A3-eYy" firstAttribute="top" secondItem="QBn-lF-ieM" secondAttribute="bottom" id="vUR-dc-a7E"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="8cP-wQ-ayc"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="Moy-Ks-hiw" id="g7c-UH-5EA"/>
@@ -1830,7 +1833,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教學" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z7U-Sb-9A4">
                                         <rect key="frame" x="186.5" y="18.5" width="41" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVg-JS-GAZ">
@@ -1874,6 +1877,7 @@
                                 <cells/>
                             </collectionView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="3UI-9E-1a9"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="3UI-9E-1a9" firstAttribute="trailing" secondItem="c1J-YM-4Ou" secondAttribute="trailing" id="2Al-4X-GJ4"/>
@@ -1888,7 +1892,6 @@
                             <constraint firstAttribute="bottom" secondItem="73f-Wr-7ag" secondAttribute="bottom" id="ryB-lk-YfF"/>
                             <constraint firstItem="73f-Wr-7ag" firstAttribute="top" secondItem="hlO-wO-ecB" secondAttribute="bottom" id="sc9-DO-NpL"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="3UI-9E-1a9"/>
                     </view>
                     <navigationItem key="navigationItem" id="tEm-Ru-GfS"/>
                     <connections>
@@ -1944,7 +1947,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="縣市" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yQ0-Zq-XAv">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kHz-Pu-4ci">
@@ -1984,7 +1987,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="xpg-5C-2tv">
                                         <rect key="frame" x="163" y="8" width="88" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7GF-Zi-EuA" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7GF-Zi-EuA" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -1999,7 +2002,7 @@
                                                     <action selector="submitWithSender:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="5s8-mf-PF3"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKN-If-acj" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HKN-If-acj" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="57" y="0.0" width="31" height="34"/>
                                                 <state key="normal" title="取消"/>
                                                 <connections>
@@ -2020,6 +2023,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="efQ-Ov-mAh"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="9iM-Eu-0nH" firstAttribute="leading" secondItem="LMb-aU-xDv" secondAttribute="leading" id="2Sv-Gq-6sk"/>
@@ -2037,7 +2041,6 @@
                             <constraint firstItem="xDN-25-qWK" firstAttribute="leading" secondItem="efQ-Ov-mAh" secondAttribute="leading" id="viR-Wa-gte"/>
                             <constraint firstItem="ZVn-B0-Eur" firstAttribute="leading" secondItem="efQ-Ov-mAh" secondAttribute="leading" id="wAO-9N-BYG"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="efQ-Ov-mAh"/>
                     </view>
                     <navigationItem key="navigationItem" id="NKy-S9-0gv"/>
                     <connections>
@@ -2062,7 +2065,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="星期日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XD9-K3-Wtv">
                                         <rect key="frame" x="169" y="19" width="76.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6WD-Zs-sz0">
@@ -2103,7 +2106,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="RzO-Eb-oBE">
                                         <rect key="frame" x="163" y="8" width="88" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2O8-Xa-VXs" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2O8-Xa-VXs" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -2120,7 +2123,7 @@
                                                     <action selector="submitWithSender:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="ar2-uw-CG6"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRw-63-RfK" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRw-63-RfK" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="57" y="0.0" width="31" height="34"/>
                                                 <state key="normal" title="取消"/>
                                                 <connections>
@@ -2145,6 +2148,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="5Zf-xU-fwv"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="f15-Ng-9QQ" secondAttribute="trailing" id="0bQ-Q6-KI7"/>
@@ -2162,7 +2166,6 @@
                             <constraint firstItem="s2q-px-X1u" firstAttribute="bottom" secondItem="5Zf-xU-fwv" secondAttribute="bottom" id="x2Q-7h-reu"/>
                             <constraint firstItem="s2q-px-X1u" firstAttribute="leading" secondItem="5Zf-xU-fwv" secondAttribute="leading" id="yJ5-1i-8Jb"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="5Zf-xU-fwv"/>
                     </view>
                     <navigationItem key="navigationItem" id="OlM-YO-dbI"/>
                     <connections>
@@ -2226,7 +2229,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="HHF-UB-YGu">
                                         <rect key="frame" x="163" y="8" width="88" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKy-DI-AlE" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKy-DI-AlE" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
@@ -2244,7 +2247,7 @@
                                                     <action selector="submitWithSender:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="UdD-E4-AiQ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTg-fl-9TY" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTg-fl-9TY" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="57" y="0.0" width="31" height="34"/>
                                                 <state key="normal" title="取消"/>
                                                 <connections>
@@ -2271,6 +2274,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="Kz9-HB-r4x"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="lXe-XM-9k3" firstAttribute="trailing" secondItem="Kz9-HB-r4x" secondAttribute="trailing" id="1qM-o9-Za8"/>
@@ -2288,7 +2292,6 @@
                             <constraint firstItem="dMf-Fb-B4G" firstAttribute="leading" secondItem="dI2-BP-JjI" secondAttribute="leading" id="gHa-nB-dNP"/>
                             <constraint firstItem="8Ra-ke-3tb" firstAttribute="top" secondItem="dMf-Fb-B4G" secondAttribute="bottom" id="jMm-Q6-XnE"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="Kz9-HB-r4x"/>
                     </view>
                     <navigationItem key="navigationItem" id="FjB-UB-Ds6"/>
                     <connections>
@@ -2503,13 +2506,73 @@
             <point key="canvasLocation" x="-2034" y="-1535"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="q87-Mu-6YG"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="377.5" height="670"/>
         <image name="plus" width="25" height="25"/>
         <image name="prev" width="20.5" height="20.5"/>
         <image name="search" width="25" height="25"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="q87-Mu-6YG"/>
-    </inferredMetricsTieBreakers>
 </document>
