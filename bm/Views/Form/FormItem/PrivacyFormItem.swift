@@ -10,10 +10,11 @@ import Foundation
 
 class PrivacyFormItem: FormItem {
     
-    required init(title: String = "隱私權", name: String = PRIVACY_KEY) {
-        super.init(name: name, title: title, placeholder: nil, value: "1")
+    required init(title: String = "隱私權", name: String = PRIVACY_KEY, delegate: BaseViewController? = nil) {
+        super.init(name: name, title: title, placeholder: nil, value: "1", isRequired: true, delegate: delegate)
         uiProperties.cellType = .privacy
         reset()
+        self.value = "1"
     }
     
 //    override func reset() {

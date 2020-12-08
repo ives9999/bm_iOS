@@ -814,6 +814,8 @@ extension UserDefaults {
         return tmp
     }
     
+    
+    // not complete, if area_id not in session must get from server, but not implement it.
     func getAreaByAreaID(_ area_id: Int) -> [String: String] {
         
         let tmp1 = getAllAreas()//dictionary

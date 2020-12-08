@@ -11,7 +11,7 @@ import OneSignal
 import Reachability
 import WebKit
 
-class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate  {
+class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate  {
     
     var msg: String = ""
     var dataService: DataService = DataService()
@@ -809,6 +809,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func singleSelected(key: String, selected: String) {}
     func selectedManagers(selecteds: [String]) {}
     func dateSelected(key: String, selected: String) {}
+    func checkboxValueChanged(checked: Bool) {}
     
     func alertError(title: String, msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)

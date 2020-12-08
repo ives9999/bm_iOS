@@ -8,17 +8,25 @@
 
 import Foundation
 
+protocol FormItemDelegate {
+    func checkboxValueChanged(checked: Bool)
+}
+
 class BaseForm {
     var formItems = [FormItem]()
     var title: String?
     var values: [String: String]?
     var id: Int?
     var isChange: Bool = false
+    var delegate: BaseViewController? = nil
     
-    init(id: Int? = nil, values: [String: String]? = nil, title: String = "") {
+    init(id: Int? = nil, values: [String: String]? = nil, title: String = "", delegate: BaseViewController? = nil) {
         self.id = id
         self.values = values
         self.title = title
+        if delegate != nil {
+            self.delegate = delegate
+        }
         self.configureItems()
         self.fillValue()
     }
@@ -54,6 +62,11 @@ class BaseForm {
     }
     
     func configureItems() {}
+    
+    func setDelegate(_ delegate: BaseViewController) {
+        self.delegate = delegate
+    }
+    
     func fillValue() {
         for formItem in formItems {
             if formItem.name != nil && values?[formItem.name!] != nil {

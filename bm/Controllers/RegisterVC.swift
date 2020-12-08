@@ -9,7 +9,7 @@
 import UIKit
 
 class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate {
-
+    
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var featuredView: ImagePickerView!
@@ -21,7 +21,8 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     
     var section_keys: [[String]] = [[String]]()
     
-    fileprivate var form: RegisterForm = RegisterForm()
+    fileprivate var form: RegisterForm!
+    var agreePrivacy: Bool = true
     
     let testData: [String: String] = [
         EMAIL_KEY: "ives@housetube.tw",
@@ -33,7 +34,9 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         MOBILE_KEY: "0911299994",
         TEL_KEY: "062295888",
         CITY_KEY: "218",
+        "city_name": "台南市",
         AREA_KEY: "219",
+        "area_name": "中西區",
         ROAD_KEY: "南華街101號8樓",
         FB_KEY: "https://www.facebook.com/ives.sun",
         LINE_KEY: "ives9999"
@@ -45,9 +48,11 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
 
         self.hideKeyboardWhenTappedAround()
         
+        form = RegisterForm(delegate: self)
         imagePicker.delegate = self
         featuredView.gallery = imagePicker
         featuredView.delegate = self
+        form.setDelegate(self)
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -62,15 +67,24 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     }
     
     func initData() {
-        if testData.keyExist(key: AREA_KEY) {
-            let area_id: Int = Int(testData[AREA_KEY]!) ?? 0
-            let area = session.getAreaByAreaID(area_id)
-        }
+//        if testData.keyExist(key: AREA_KEY) {
+//            let area_id: Int = Int(testData[AREA_KEY]!) ?? 0
+//            let area = session.getAreaByAreaID(area_id)
+//        }
         if testData.count > 0 {
             for (key, value) in testData {
                 let formItem = getFormItemFromKey(key)
-                formItem!.value = value
-                formItem!.make()
+                if formItem != nil {
+                    if key == AREA_KEY && testData.keyExist(key: "area_name") {
+                        let _formItem = formItem as! AreaFormItem
+                        _formItem.selected_area_names = [testData["area_name"]!]
+                    } else if key == CITY_KEY && testData.keyExist(key: "city_name") { // test data session has, so not implement.
+                        //let _formItem = formItem as! CityFormItem
+                        //_formItem.selected_city_names = [testData["city_name"]!]
+                    }
+                    formItem!.value = value
+                    formItem!.make()
+                }
             }
         }
     }
@@ -188,6 +202,17 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             item!.make()
             tableView.reloadData()
         }
+    }
+    
+    override func checkboxValueChanged(checked: Bool) {
+        let item = getFormItemFromKey(PRIVACY_KEY)
+        if !checked {
+            warning("必須同意隱私權條款，才能註冊")
+            item?.value = nil
+        } else {
+            item?.value = "1"
+        }
+        self.agreePrivacy = checked
     }
     
     func isImageSet(_ b: Bool) {}
@@ -313,7 +338,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == TO_PASSWORD {
             let vc: PasswordVC = segue.destination as! PasswordVC
-            vc.type = sender as! String
+            vc.type = sender as? String
         } else if segue.identifier == TO_LOGIN {
             //let vc: LoginVC = segue.destination as! LoginVC
             //vc.menuVC = (sender as! MenuVC)

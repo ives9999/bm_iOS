@@ -809,6 +809,10 @@
 				B306FE9E21F0DC5900403FE2 /* DateCell.xib */,
 				B34A210221B6A6D300EE6E1C /* MoreCell.swift */,
 				B34A210321B6A6D300EE6E1C /* MoreCell.xib */,
+				B3B4EF6E257C8BFB00EE15D0 /* PasswordCell.swift */,
+				B3B4EF6F257C8BFB00EE15D0 /* PasswordCell.xib */,
+				B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */,
+				B3B4EF55257B59EA00EE15D0 /* PrivacyCell.xib */,
 				B3756EEA21BA6AAA006893E1 /* StatusCell.swift */,
 				B3756EEB21BA6AAA006893E1 /* StatusCell.xib */,
 				B34A20FE21B696AA00EE6E1C /* TextFieldCell.swift */,
@@ -817,10 +821,6 @@
 				B3756EDD21B901C5006893E1 /* TimeCell.xib */,
 				B3756ED821B8E50E006893E1 /* WeekdayCell.swift */,
 				B3756ED921B8E50E006893E1 /* WeekdayCell.xib */,
-				B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */,
-				B3B4EF55257B59EA00EE15D0 /* PrivacyCell.xib */,
-				B3B4EF6E257C8BFB00EE15D0 /* PasswordCell.swift */,
-				B3B4EF6F257C8BFB00EE15D0 /* PasswordCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
