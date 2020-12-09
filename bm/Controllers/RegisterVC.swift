@@ -334,6 +334,18 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 break
             }
         }
+        
+        var params:[String: String] = [String: String]()
+        for formItem in form.formItems {
+            if formItem.value != nil {
+                let value = formItem.value!
+                params[formItem.name!] = value
+            }
+        }
+        
+        MemberService.instance.update(id: Member.instance.id, field: key, value: &value1) { (success) in
+            
+        }
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
