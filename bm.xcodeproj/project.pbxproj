@@ -168,6 +168,9 @@
 		B3B4EF70257C8BFB00EE15D0 /* PasswordCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EF6E257C8BFB00EE15D0 /* PasswordCell.swift */; };
 		B3B4EF71257C8BFB00EE15D0 /* PasswordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4EF6F257C8BFB00EE15D0 /* PasswordCell.xib */; };
 		B3B4EF77257C8ECF00EE15D0 /* PasswordFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EF76257C8ECF00EE15D0 /* PasswordFormItem.swift */; };
+		B3B4EFC025807CA800EE15D0 /* SexFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EFBF25807CA800EE15D0 /* SexFormItem.swift */; };
+		B3B4EFC725807EDD00EE15D0 /* SexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EFC525807EDD00EE15D0 /* SexCell.swift */; };
+		B3B4EFC825807EDD00EE15D0 /* SexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4EFC625807EDD00EE15D0 /* SexCell.xib */; };
 		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
 		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
@@ -470,6 +473,9 @@
 		B3B4EF6E257C8BFB00EE15D0 /* PasswordCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCell.swift; sourceTree = "<group>"; };
 		B3B4EF6F257C8BFB00EE15D0 /* PasswordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordCell.xib; sourceTree = "<group>"; };
 		B3B4EF76257C8ECF00EE15D0 /* PasswordFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormItem.swift; sourceTree = "<group>"; };
+		B3B4EFBF25807CA800EE15D0 /* SexFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexFormItem.swift; sourceTree = "<group>"; };
+		B3B4EFC525807EDD00EE15D0 /* SexCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexCell.swift; sourceTree = "<group>"; };
+		B3B4EFC625807EDD00EE15D0 /* SexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexCell.xib; sourceTree = "<group>"; };
 		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
@@ -794,6 +800,7 @@
 				B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */,
 				B33C1ABC21BD300E006F2BEB /* TimeFormItem.swift */,
 				B33C1ABE21BD7F2C006F2BEB /* WeekdayFormItem.swift */,
+				B3B4EFBF25807CA800EE15D0 /* SexFormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";
@@ -821,6 +828,8 @@
 				B3756EDD21B901C5006893E1 /* TimeCell.xib */,
 				B3756ED821B8E50E006893E1 /* WeekdayCell.swift */,
 				B3756ED921B8E50E006893E1 /* WeekdayCell.xib */,
+				B3B4EFC525807EDD00EE15D0 /* SexCell.swift */,
+				B3B4EFC625807EDD00EE15D0 /* SexCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1014,6 +1023,7 @@
 				B326C7C1256E2AEB0048A2C2 /* SelectAreaVC.swift */,
 				B326C7BB256CE0950048A2C2 /* SelectCitysVC.swift */,
 				B3A253E9256CBA4C004B8A03 /* SelectCityVC.swift */,
+				B3A2542125723F5B004B8A03 /* SelectManagers.swift */,
 				B385A07B22BCB28E00BC3ADF /* SelectVC.swift */,
 				B3E8C29A220603310008ED25 /* ShowCoachVC.swift */,
 				B3839EB722CF0261003F3620 /* ShowCourseVC.swift */,
@@ -1038,7 +1048,6 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
-				B3A2542125723F5B004B8A03 /* SelectManagers.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1257,6 +1266,7 @@
 				B3756EF321BA7567006893E1 /* StatusSelectCell.xib in Resources */,
 				B3756EE321B95974006893E1 /* ColorCell.xib in Resources */,
 				B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */,
+				B3B4EFC825807EDD00EE15D0 /* SexCell.xib in Resources */,
 				B316FED72112F13600FB990C /* CollectionCell.xib in Resources */,
 				F94E7D251F83636A00F550FD /* Main.storyboard in Resources */,
 				B3B4EF71257C8BFB00EE15D0 /* PasswordCell.xib in Resources */,
@@ -1487,6 +1497,7 @@
 				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
+				B3B4EFC725807EDD00EE15D0 /* SexCell.swift in Sources */,
 				B3CB73D923D410CD00892F75 /* OneLineCell.swift in Sources */,
 				B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
@@ -1544,6 +1555,7 @@
 				B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */,
 				B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */,
 				B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */,
+				B3B4EFC025807CA800EE15D0 /* SexFormItem.swift in Sources */,
 				B36CBD5120DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift in Sources */,
 				B33C1AC521C3F848006F2BEB /* DrawLine.swift in Sources */,
 				B3E72A221FA08A170008A6B1 /* MenuVC.swift in Sources */,

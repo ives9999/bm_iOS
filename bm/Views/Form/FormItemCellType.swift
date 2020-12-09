@@ -22,6 +22,7 @@ enum FormItemCellType {
     case content
     case privacy
     case password
+    case sex
     
     static func registerCell(for tableView: UITableView) {
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
@@ -50,6 +51,8 @@ enum FormItemCellType {
         tableView.register(privacyNib, forCellReuseIdentifier: "privacy")
         let passwordNib = UINib(nibName: "PasswordCell", bundle: nil)
         tableView.register(passwordNib, forCellReuseIdentifier: "password")
+        let sexNib = UINib(nibName: "SexCell", bundle: nil)
+        tableView.register(sexNib, forCellReuseIdentifier: "sex")
     }
     
     func dequeueCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
@@ -78,6 +81,8 @@ enum FormItemCellType {
             cell = tableView.dequeueReusableCell(withIdentifier: "privacy", for: indexPath)
         case .password:
             cell = tableView.dequeueReusableCell(withIdentifier: "password", for: indexPath)
+        case .sex:
+            cell = tableView.dequeueReusableCell(withIdentifier: "sex", for: indexPath)
         case .section:
             cell = UITableViewCell()
         }
