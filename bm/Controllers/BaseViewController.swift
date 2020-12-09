@@ -810,6 +810,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func selectedManagers(selecteds: [String]) {}
     func dateSelected(key: String, selected: String) {}
     func checkboxValueChanged(checked: Bool) {}
+    func sexValueChanged(sex: String) {}
     
     func alertError(title: String, msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)

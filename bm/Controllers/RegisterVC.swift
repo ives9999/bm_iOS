@@ -23,6 +23,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     
     fileprivate var form: RegisterForm!
     var agreePrivacy: Bool = true
+    var sex: String = "M"
     
     let testData: [String: String] = [
         EMAIL_KEY: "ives@housetube.tw",
@@ -213,6 +214,14 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             item?.value = "1"
         }
         self.agreePrivacy = checked
+    }
+    
+    override func sexValueChanged(sex: String) {
+        
+        let item = getFormItemFromKey(SEX_KEY)
+        self.sex = sex
+        item?.value = sex
+        //print(self.sex)
     }
     
     func isImageSet(_ b: Bool) {}

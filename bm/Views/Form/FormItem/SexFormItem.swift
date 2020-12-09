@@ -10,8 +10,8 @@ import Foundation
 
 class SexFormItem: FormItem {
     
-    required init(name: String = SEX_KEY, title: String = "性別", tooltip: String?=nil, isRequired: Bool = false) {
-        super.init(name: name, title: title, placeholder: nil, value: nil, tooltip: tooltip, isRequired: isRequired)
+    required init(name: String = SEX_KEY, title: String = "性別", tooltip: String? = nil, isRequired: Bool = false, delegate: BaseViewController? = nil) {
+        super.init(name: name, title: title, placeholder: nil, value: nil, tooltip: tooltip, isRequired: isRequired, delegate: delegate)
         uiProperties.cellType = .sex
         reset()
         self.value = "M"

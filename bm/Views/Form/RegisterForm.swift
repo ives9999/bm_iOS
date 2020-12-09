@@ -21,7 +21,7 @@ class RegisterForm: BaseForm {
         let nameItem = TextFieldFormItem(name: NAME_KEY, title: "姓名", placeholder: "真實姓名，寄送物品時使用", isRequire: true)
         let nicknameItem = TextFieldFormItem(name: NICKNAME_KEY, title: "暱稱", placeholder: "網站上出現的名稱", isRequire: true)
         let dobItem = DateFormItem(name: DOB_KEY, title: "生日", dateType: .start)
-        let sexItem = SexFormItem(isRequired: true)
+        let sexItem = SexFormItem(isRequired: true, delegate: self.delegate)
 
         let section3 = SectionFormItem(title: "聯絡資料")
         let mobileItem = TextFieldFormItem(name: MOBILE_KEY, title: "行動電話", placeholder: "請輸入行動電話", keyboardType: .numberPad, isRequire: true)

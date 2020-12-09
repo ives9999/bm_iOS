@@ -16,11 +16,12 @@ class SexCell: SuperCell, FormUPdatable {
     var male: Checkbox!
     var female: Checkbox!
     var myDelegate: BaseViewController?
+    var checked: String = "M"
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        male = Checkbox(frame: CGRect(x: 150, y: 10, width: 20, height: 20))
+        male = Checkbox(frame: CGRect(x: 100, y: 10, width: 20, height: 20))
         male.checkedBorderColor = .white
         male.uncheckedBorderColor = .white
         male.borderStyle = .circle
@@ -29,25 +30,57 @@ class SexCell: SuperCell, FormUPdatable {
         male.checkmarkStyle = .circle
         male.isChecked = true
         
-        male.increasedTouchRadius = 15
+        female = Checkbox(frame: CGRect(x: 200, y: 10, width: 20, height: 20))
+        female.checkedBorderColor = .white
+        female.uncheckedBorderColor = .white
+        female.borderStyle = .circle
         
-        male.addTarget(self, action: #selector(checkboxValueChanged(sender:)), for: .valueChanged)
+        female.checkmarkColor = UIColor(MY_GREEN)
+        female.checkmarkStyle = .circle
+        female.isChecked = false
+        
+        female.increasedTouchRadius = 15
+        
+        male.addTarget(self, action: #selector(maleValueChanged(sender:)), for: .valueChanged)
+        female.addTarget(self, action: #selector(femaleValueChanged(sender:)), for: .valueChanged)
         
         self.addSubview(male)
+        self.addSubview(female)
     }
 
     func update(with formItem: FormItem) {
+        
+        requiredImageView.isHidden = !formItem.isRequired
         if formItem.delegate != nil {
             self.myDelegate = (formItem.delegate as! BaseViewController)
         }
     }
     
-    @objc func checkboxValueChanged(sender: Checkbox) {
-        //checked is t, unchecked is f.
-        //print("privacy value change: \(sender.isChecked)")
+    @objc func maleValueChanged(sender: Checkbox) {
+        
+        if sender.isChecked {
+            female.isChecked = false
+            self.checked = "M"
+        } else {
+            female.isChecked = true
+            self.checked = "F"
+        }
         if myDelegate != nil {
-            myDelegate!.checkboxValueChanged(checked: sender.isChecked)
+            myDelegate?.sexValueChanged(sex: self.checked)
         }
     }
     
+    @objc func femaleValueChanged(sender: Checkbox) {
+        
+        if sender.isChecked {
+            male.isChecked = false
+            self.checked = "F"
+        } else {
+            male.isChecked = true
+            self.checked = "M"
+        }
+        if myDelegate != nil {
+            myDelegate?.sexValueChanged(sex: self.checked)
+        }
+    }
 }

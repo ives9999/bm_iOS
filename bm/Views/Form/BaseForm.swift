@@ -9,7 +9,8 @@
 import Foundation
 
 protocol FormItemDelegate {
-    func checkboxValueChanged(checked: Bool)
+    func checkboxValueChanged(checked: Bool) //for checkbox, now is privacy
+    func sexValueChanged(sex: String)
 }
 
 class BaseForm {
