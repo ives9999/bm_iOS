@@ -267,6 +267,7 @@ class DataService {
     
     func getListURL()-> String { return ""}
     func getCalendarURL(token: String? = nil)-> String { return ""}
+    func getUpdateURL()-> String {return ""}
     
     func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
         
@@ -458,7 +459,16 @@ class DataService {
         }
     }
     
-    func update(_params: [String: String], image: UIImage?, completion: @escaping CompletionHandler) {}
+    func update(_params: [String: String], image: UIImage?, completion: @escaping CompletionHandler) {
+        
+        let url: String = getUpdateURL()
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+        var params: [String: String] = ["source": "app","channel":CHANNEL]
+        params.merge(_params)
+        
+        print(url)
+        print(params)
+    }
     
     func update(type: String, params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
         

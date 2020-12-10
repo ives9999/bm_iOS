@@ -342,10 +342,13 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 params[formItem.name!] = value
             }
         }
+        //print(params)
         
-        MemberService.instance.update(id: Member.instance.id, field: key, value: &value1) { (success) in
+        MemberService.instance.update(_params: params, image: nil) { (success) in
             
         }
+        
+
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {

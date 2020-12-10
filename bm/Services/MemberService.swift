@@ -19,6 +19,10 @@ class MemberService: DataService {
     var one: JSON? = nil
     var blacklists: Array<Dictionary<String, Any>> = Array()
     
+    override func getUpdateURL() -> String {
+        return URL_MEMBER_UPDATE
+    }
+    
     func login(email: String, password: String, playerID: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
         let body: [String: Any] = ["source": "app", "email": lowerCaseEmail, "password": password, "player_id": playerID]
