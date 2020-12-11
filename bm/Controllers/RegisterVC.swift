@@ -323,6 +323,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
+        Global.instance.addSpinner(superView: self.view)
         for formItem in form.formItems {
             formItem.checkValidity()
             if !formItem.isValid {
@@ -350,22 +351,30 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             params["area_id"] = area_id
             params.removeValue(forKey: "area")
         }
-        print(params)
+        //print(params)
         
         MemberService.instance.update(_params: params, image: nil) { (success) in
             if success {
+                Global.instance.removeSpinner(superView: self.view)
                 if MemberService.instance.success {
                     let appearance = SCLAlertView.SCLAppearance(
                         showCloseButton: false
                     )
                     let alert = SCLAlertView(appearance: appearance)
+                    alert.addButton("確定", action: {
+                        //print("ok")
+                        self.dismiss(animated: true, completion: nil)
+                    })
                     alert.showSuccess("成功", subTitle: "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序")
-                    NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+                    //NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
                 } else {
-                    SCLAlertView().showWarning("錯誤", subTitle: MemberService.instance.msg)
+                    self.warning(MemberService.instance.msg)
+                    //SCLAlertView().showWarning("錯誤", subTitle: MemberService.instance.msg)
                 }
             } else {
-                SCLAlertView().showWarning("錯誤", subTitle: "註冊失敗，伺服器錯誤，請稍後再試")
+                Global.instance.removeSpinner(superView: self.view)
+                self.warning("伺服器錯誤，請稍後再試，或洽管理人員")
+                //SCLAlertView().showWarning("錯誤", subTitle: "註冊失敗，伺服器錯誤，請稍後再試")
             }
         }
     }
