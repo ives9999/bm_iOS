@@ -342,13 +342,32 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 params[formItem.name!] = value
             }
         }
-        //print(params)
+        if let city_id = params["city"] {
+            params["city_id"] = city_id
+            params.removeValue(forKey: "city")
+        }
+        if let area_id = params["area"] {
+            params["area_id"] = area_id
+            params.removeValue(forKey: "area")
+        }
+        print(params)
         
         MemberService.instance.update(_params: params, image: nil) { (success) in
-            
+            if success {
+                if MemberService.instance.success {
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    let alert = SCLAlertView(appearance: appearance)
+                    alert.showSuccess("成功", subTitle: "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序")
+                    NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+                } else {
+                    SCLAlertView().showWarning("錯誤", subTitle: MemberService.instance.msg)
+                }
+            } else {
+                SCLAlertView().showWarning("錯誤", subTitle: "註冊失敗，伺服器錯誤，請稍後再試")
+            }
         }
-        
-
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {

@@ -1535,7 +1535,9 @@ extension UIImageView {
 
 protocol ArrayProtocol{}
 
-extension Array: ArrayProtocol {}
+extension Array: ArrayProtocol {
+    
+}
 
 
 
