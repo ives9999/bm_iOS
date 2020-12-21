@@ -68,16 +68,19 @@ class AreaFormItem: FormItem {
     override func valueToAnother() {
         if value != nil && value!.count > 0 {
             let tmps: [String] = value!.components(separatedBy: ",")
-            for tmp in tmps {
-                for area in areasFromCache {
-                    if area["id"] == tmp {
-                        selected_area_names.append(area["name"]!)
-                        break
+            if city_id != nil {
+                let areas: [Area] = Global.instance.getAreasByCityID(city_id: city_id!)
+                for tmp in tmps {
+                    for area in areas {
+                        if area.id == Int(tmp) {
+                            selected_area_names.append(area.name)
+                            break
+                        }
                     }
-                }
-                if let n: Int = Int(tmp) {
-                    selected_area_ids.append(n)
+                    if let n: Int = Int(tmp) {
+                        selected_area_ids.append(n)
 
+                    }
                 }
             }
         }

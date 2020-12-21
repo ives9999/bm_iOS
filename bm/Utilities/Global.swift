@@ -650,6 +650,32 @@ class Global {
         return citys
     }
     
+    func getAreasByCityID(city_id: Int)-> [Area] {
+        
+        var areas: [Area] = [Area]()
+        for zone in Zone.instance.zones {
+            if zone.keyExist(key: "parent") {
+                let parent: Int = zone["parent"] as! Int
+                if parent == city_id {
+                    var id: Int? = nil
+                    var name: String? = nil
+                    if zone.keyExist(key: "id") {
+                        id = zone["id"] as? Int
+                    }
+                    if zone.keyExist(key: "name") {
+                        name = zone["name"] as? String
+                    }
+                    if id != nil && name != nil {
+                        let area: Area = Area(id: id!, name: name!)
+                        areas.append(area)
+                    }
+                }
+            }
+        }
+        
+        return areas
+    }
+    
     private func _addSpinner(spinner: UIActivityIndicatorView, superView: UIView) {
         spinner.center = superView.center
         spinner.activityIndicatorViewStyle = .whiteLarge

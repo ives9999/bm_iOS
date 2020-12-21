@@ -35,17 +35,17 @@ class SelectVC: MyTableVC {
         }
     }
     
-    func rows1Bridge(rowsFromSession: [[String: String]]) {
-        
-        if rows1 != nil && rows1!.count > 0 {
-            rows1!.removeAll()
-        } else {
-            rows1 = [[String: String]]()
-        }
-        for row in rowsFromSession {
-            rows1!.append(["title": row["name"]!, "value": row["id"]!])
-        }
-    }
+//    func rows1Bridge(rowsFromSession: [[String: String]]) {
+//
+//        if rows1 != nil && rows1!.count > 0 {
+//            rows1!.removeAll()
+//        } else {
+//            rows1 = [[String: String]]()
+//        }
+//        for row in rowsFromSession {
+//            rows1!.append(["title": row["name"]!, "value": row["id"]!])
+//        }
+//    }
     
     func setSelectedStyle(_ cell: UITableViewCell) {
         cell.accessoryType = .checkmark

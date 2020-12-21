@@ -22,9 +22,9 @@ class CityFormItem: FormItem {
         uiProperties.cellType = .more
         self.isRequired = isRequire
         
-        if session.array(forKey: "citys") != nil {
-            citysFromCache = (session.array(forKey: "citys") as! [[String: String]])
-        }
+//        if session.array(forKey: "citys") != nil {
+//            citysFromCache = (session.array(forKey: "citys") as! [[String: String]])
+//        }
         reset()
     }
     
@@ -58,13 +58,21 @@ class CityFormItem: FormItem {
         //value is 1,2,3 or 1 is city id
         if value != nil && value!.count > 0 {
             let tmps: [String] = value!.components(separatedBy: ",")
+            let citys: [City] = Global.instance.getCitys()
             for tmp in tmps {
-                for city in citysFromCache {
-                    if city["id"] == tmp {
-                        selected_city_names.append(city["name"]!)
-                        break
+                for city in citys {
+                    if city.id == Int(tmp) {
+                        selected_city_names.append(city.name)
                     }
                 }
+                
+                
+//                for city in citysFromCache {
+//                    if city["id"] == tmp {
+//                        selected_city_names.append(city["name"]!)
+//                        break
+//                    }
+//                }
                 if let n: Int = Int(tmp) {
                     selected_city_ids.append(n)
                     
