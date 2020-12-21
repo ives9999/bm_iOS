@@ -624,6 +624,32 @@ class Global {
         return dateString
     }
     
+    func getCitys()-> [City] {
+        
+        var citys: [City] = [City]()
+        for zone in Zone.instance.zones {
+            if zone.keyExist(key: "parent") {
+                let parent: Int = zone["parent"] as! Int
+                if parent == 0 {
+                    var id: Int? = nil
+                    var name: String? = nil
+                    if zone.keyExist(key: "id") {
+                        id = zone["id"] as? Int
+                    }
+                    if zone.keyExist(key: "name") {
+                        name = zone["name"] as? String
+                    }
+                    if id != nil && name != nil {
+                        let city: City = City(id: id!, name: name!)
+                        citys.append(city)
+                    }
+                }
+            }
+        }
+        
+        return citys
+    }
+    
     private func _addSpinner(spinner: UIActivityIndicatorView, superView: UIView) {
         spinner.center = superView.center
         spinner.activityIndicatorViewStyle = .whiteLarge
