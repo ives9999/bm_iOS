@@ -24,7 +24,6 @@ class FormItem: FormValidable {
     var segue: String?
     var show: String = ""
     var tooltip: String?
-    var delegate: BaseViewController?
     
     //weekday is [Int]
     //time is ["type":SELECT_TIME_TYPE,"time":"09:00"]
@@ -33,7 +32,7 @@ class FormItem: FormValidable {
     //content is ["type":TEXT_INPUT_TYPE,"text":"課程說明"]
     var sender: Any?
     
-    init(name: String, title: String, placeholder: String? = nil, value: String? = nil, tooltip: String?=nil, isRequired: Bool = false, delegate: BaseViewController? = nil) {
+    init(name: String, title: String, placeholder: String? = nil, value: String? = nil, tooltip: String?=nil, isRequired: Bool = false) {
         
         self.title = title
         self.name = name
@@ -43,9 +42,6 @@ class FormItem: FormValidable {
         }
         if tooltip != nil {
             self.tooltip = tooltip
-        }
-        if delegate != nil {
-            self.delegate = delegate
         }
     }
     

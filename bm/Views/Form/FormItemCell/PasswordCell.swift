@@ -20,7 +20,7 @@ class PasswordCell: TextFieldCell {
         let _formItem = formItem as! PasswordFormItem
         _formItem.make()
         
-        titleLbl.text = _formItem.title
+        titleLbl!.text = _formItem.title
         textField.text = _formItem.value
         
         textField.placeholder(_formItem.placeholder)

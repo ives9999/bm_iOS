@@ -8,18 +8,12 @@
 
 import UIKit
 
-class MoreCell: SuperCell, FormUPdatable {
+class MoreCell: FormItemCell {
     
-    @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var detailLbl: SuperLabel!
-    @IBOutlet weak var clearBtn: UIButton!
-    @IBOutlet weak var promptBtn: UIButton!
-    @IBOutlet weak var requiredImageView: UIImageView!
-    var formItem: FormItem?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLbl.textAlignment = NSTextAlignment.left
         detailLbl.textAlignment = NSTextAlignment.right
         detailLbl.text = ""
         clearBtn.isHidden = true
@@ -46,10 +40,10 @@ class MoreCell: SuperCell, FormUPdatable {
         detailLbl.text = ""
     }
     
-    func update(with formItem: FormItem) {
+    override func update(with formItem: FormItem) {
         self.formItem = formItem
         
-        titleLbl.text = self.formItem?.title
+        titleLbl!.text = self.formItem?.title
         detailLbl.text = self.formItem?.show
         if detailLbl.text != nil {
             if detailLbl.text!.count > 0 {

@@ -8,10 +8,9 @@
 
 import UIKit
 
-class PrivacyCell: SuperCell, FormUPdatable {
+class PrivacyCell: FormItemCell {
     
     @IBOutlet weak var textField: SuperLabel!
-    @IBOutlet weak var requiredImageView: UIImageView!
     
     var privacy: Checkbox!
     var myDelegate: BaseViewController?
@@ -35,18 +34,17 @@ class PrivacyCell: SuperCell, FormUPdatable {
         self.addSubview(privacy)
     }
 
-    func update(with formItem: FormItem) {
-        if formItem.delegate != nil {
-            self.myDelegate = (formItem.delegate as! BaseViewController)
-        }
-    }
+    override func update(with formItem: FormItem) {}
     
     @objc func checkboxValueChanged(sender: Checkbox) {
+        if valueDelegate != nil {
+            valueDelegate?.privacyChecked(checked: sender.isChecked)
+        }
         //checked is t, unchecked is f.
         //print("privacy value change: \(sender.isChecked)")
-        if myDelegate != nil {
-            myDelegate!.checkboxValueChanged(checked: sender.isChecked)
-        }
+//        if myDelegate != nil {
+//            myDelegate!.checkboxValueChanged(checked: sender.isChecked)
+//        }
     }
     
 }

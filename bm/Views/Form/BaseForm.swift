@@ -19,15 +19,12 @@ class BaseForm {
     var values: [String: String]?
     var id: Int?
     var isChange: Bool = false
-    var delegate: BaseViewController? = nil
+    //var delegate: BaseViewController? = nil
     
-    init(id: Int? = nil, values: [String: String]? = nil, title: String = "", delegate: BaseViewController? = nil) {
+    init(id: Int? = nil, values: [String: String]? = nil, title: String = "") {
         self.id = id
         self.values = values
         self.title = title
-        if delegate != nil {
-            self.delegate = delegate
-        }
         self.configureItems()
         self.fillValue()
     }
@@ -63,10 +60,6 @@ class BaseForm {
     }
     
     func configureItems() {}
-    
-    func setDelegate(_ delegate: BaseViewController) {
-        self.delegate = delegate
-    }
     
     func fillValue() {
         for formItem in formItems {

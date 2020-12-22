@@ -38,6 +38,7 @@
 		B317855920D60EE200765CA1 /* BlackListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B317855820D60EE200765CA1 /* BlackListVC.swift */; };
 		B317855B20D9089600765CA1 /* BlackListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B317855A20D9089600765CA1 /* BlackListCell.swift */; };
 		B31ADD9325905387003E86BD /* Zone.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31ADD9225905387003E86BD /* Zone.swift */; };
+		B31ADD992591FDF3003E86BD /* FormItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31ADD982591FDF3003E86BD /* FormItemCell.swift */; };
 		B3200045254304D20061442D /* SuperStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3200044254304D20061442D /* SuperStore.swift */; };
 		B320004F254305410061442D /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B320004E254305410061442D /* StoreService.swift */; };
 		B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322F8041FC52CAE00DE98FB /* MyTableVC.swift */; };
@@ -344,6 +345,7 @@
 		B317855820D60EE200765CA1 /* BlackListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListVC.swift; sourceTree = "<group>"; };
 		B317855A20D9089600765CA1 /* BlackListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackListCell.swift; sourceTree = "<group>"; };
 		B31ADD9225905387003E86BD /* Zone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Zone.swift; sourceTree = "<group>"; };
+		B31ADD982591FDF3003E86BD /* FormItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormItemCell.swift; sourceTree = "<group>"; };
 		B3200044254304D20061442D /* SuperStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperStore.swift; sourceTree = "<group>"; };
 		B320004E254305410061442D /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		B322F8041FC52CAE00DE98FB /* MyTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableVC.swift; sourceTree = "<group>"; };
@@ -833,6 +835,7 @@
 				B3756ED921B8E50E006893E1 /* WeekdayCell.xib */,
 				B3B4EFC525807EDD00EE15D0 /* SexCell.swift */,
 				B3B4EFC625807EDD00EE15D0 /* SexCell.xib */,
+				B31ADD982591FDF3003E86BD /* FormItemCell.swift */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1562,6 +1565,7 @@
 				B3B4EFC025807CA800EE15D0 /* SexFormItem.swift in Sources */,
 				B36CBD5120DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift in Sources */,
 				B33C1AC521C3F848006F2BEB /* DrawLine.swift in Sources */,
+				B31ADD992591FDF3003E86BD /* FormItemCell.swift in Sources */,
 				B3E72A221FA08A170008A6B1 /* MenuVC.swift in Sources */,
 				B3DEBE1221078191003699A0 /* Coach.swift in Sources */,
 				B3ED38E41FB77BD20003F083 /* NumberTextField.swift in Sources */,

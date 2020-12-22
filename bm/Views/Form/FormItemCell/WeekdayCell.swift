@@ -12,7 +12,7 @@ class WeekdayCell: MoreCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLbl.text = "星期幾"
+        titleLbl!.text = "星期幾"
     }
     
     override func update(with formItem: FormItem) {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -308,19 +308,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X6G-TE-7Wb">
-                                <rect key="frame" x="78.5" y="470" width="257" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="CgG-LE-dRa"/>
-                                    <constraint firstAttribute="width" constant="257" id="RNV-dh-jZK"/>
-                                </constraints>
-                                <state key="normal" image="facebook"/>
-                                <connections>
-                                    <action selector="loginFBBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="XmO-N3-wpL"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqL-EE-CA1">
-                                <rect key="frame" x="88.5" y="563" width="77" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqL-EE-CA1">
+                                <rect key="frame" x="88.5" y="470" width="77" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="忘記密碼">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -329,8 +318,8 @@
                                     <action selector="passwordBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="Jjo-KT-JkU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NML-Ap-Iec">
-                                <rect key="frame" x="286.5" y="563" width="39" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NML-Ap-Iec">
+                                <rect key="frame" x="286.5" y="470" width="39" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="註冊">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -343,9 +332,8 @@
                         <viewLayoutGuide key="safeArea" id="DTV-Ir-EvU"/>
                         <constraints>
                             <constraint firstItem="69n-Va-wxY" firstAttribute="centerY" secondItem="oWN-d9-N6B" secondAttribute="centerY" id="0Ds-ts-vDO"/>
-                            <constraint firstItem="NML-Ap-Iec" firstAttribute="trailing" secondItem="X6G-TE-7Wb" secondAttribute="trailing" constant="-10" id="30q-eb-wBV"/>
                             <constraint firstItem="oWN-d9-N6B" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="3ww-bl-qul"/>
-                            <constraint firstItem="fqL-EE-CA1" firstAttribute="top" secondItem="X6G-TE-7Wb" secondAttribute="bottom" constant="50" id="48a-yi-Szq"/>
+                            <constraint firstItem="fqL-EE-CA1" firstAttribute="top" secondItem="Pr6-jP-ohX" secondAttribute="bottom" constant="30" id="48a-yi-Szq"/>
                             <constraint firstItem="69n-Va-wxY" firstAttribute="leading" secondItem="oWN-d9-N6B" secondAttribute="leading" constant="40" id="5ZP-k0-d0B"/>
                             <constraint firstItem="DTV-Ir-EvU" firstAttribute="trailing" secondItem="Nqr-Az-eL1" secondAttribute="trailing" id="5lI-4Z-vn9"/>
                             <constraint firstItem="Nqr-Az-eL1" firstAttribute="top" secondItem="DTV-Ir-EvU" secondAttribute="top" id="AuU-1u-5OE"/>
@@ -355,19 +343,16 @@
                             <constraint firstItem="DTV-Ir-EvU" firstAttribute="trailing" secondItem="gFF-Mz-ZVy" secondAttribute="trailing" constant="12" id="M31-lS-3DY"/>
                             <constraint firstItem="oWN-d9-N6B" firstAttribute="top" secondItem="IvV-U8-27e" secondAttribute="bottom" constant="20" id="Onj-jX-Lad"/>
                             <constraint firstItem="IvV-U8-27e" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="Tbl-va-ht1"/>
-                            <constraint firstItem="fqL-EE-CA1" firstAttribute="leading" secondItem="X6G-TE-7Wb" secondAttribute="leading" constant="10" id="Wna-bJ-zvu"/>
                             <constraint firstItem="j2K-pR-cvo" firstAttribute="top" secondItem="QQl-Cf-5EQ" secondAttribute="bottom" constant="60" id="ad5-uu-Z35"/>
-                            <constraint firstItem="X6G-TE-7Wb" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="cZb-UM-RcX"/>
                             <constraint firstItem="QQl-Cf-5EQ" firstAttribute="leading" secondItem="Nqr-Az-eL1" secondAttribute="leading" id="fxU-pL-PV1"/>
                             <constraint firstItem="DTV-Ir-EvU" firstAttribute="bottom" secondItem="Nqr-Az-eL1" secondAttribute="bottom" id="jKc-gs-IOs"/>
                             <constraint firstItem="j2K-pR-cvo" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="kTA-5P-uKn"/>
                             <constraint firstItem="gFF-Mz-ZVy" firstAttribute="centerY" secondItem="CP0-Qd-R4O" secondAttribute="centerY" id="lBy-12-gaR"/>
                             <constraint firstItem="0yo-nU-T3O" firstAttribute="centerY" secondItem="IvV-U8-27e" secondAttribute="centerY" id="lS4-9Z-IPc"/>
                             <constraint firstItem="0yo-nU-T3O" firstAttribute="leading" secondItem="IvV-U8-27e" secondAttribute="leading" constant="40" id="rei-dX-ZZ6"/>
-                            <constraint firstItem="X6G-TE-7Wb" firstAttribute="top" secondItem="Pr6-jP-ohX" secondAttribute="bottom" constant="30" id="sol-vz-fOM"/>
                             <constraint firstItem="QQl-Cf-5EQ" firstAttribute="top" secondItem="DTV-Ir-EvU" secondAttribute="top" id="vbP-MG-4bH"/>
                             <constraint firstItem="IvV-U8-27e" firstAttribute="top" secondItem="j2K-pR-cvo" secondAttribute="bottom" constant="90" id="vjw-Uj-ESC"/>
-                            <constraint firstItem="NML-Ap-Iec" firstAttribute="top" secondItem="X6G-TE-7Wb" secondAttribute="bottom" constant="50" id="xo6-XK-qR2"/>
+                            <constraint firstItem="NML-Ap-Iec" firstAttribute="top" secondItem="Pr6-jP-ohX" secondAttribute="bottom" constant="30" id="xo6-XK-qR2"/>
                             <constraint firstItem="Pr6-jP-ohX" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="zeQ-9d-GTF"/>
                         </constraints>
                     </view>
@@ -713,7 +698,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password_textfield" translatesAutoresizingMaskIntoConstraints="NO" id="51M-JF-8fy">
-                                <rect key="frame" x="78" y="406" width="257" height="43"/>
+                                <rect key="frame" x="78.5" y="406" width="257" height="43"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="257" id="eqe-qg-VAt"/>
                                     <constraint firstAttribute="height" constant="43" id="yzH-F1-LEM"/>
@@ -1655,7 +1640,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="2ff-JT-Wdj"/>
+        <segue reference="ous-Dp-pXL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="377.5" height="670"/>
@@ -1663,7 +1648,6 @@
         <image name="course" width="25" height="25"/>
         <image name="down" width="32" height="32"/>
         <image name="email" width="257" height="43"/>
-        <image name="facebook" width="259" height="43.5"/>
         <image name="facebook_register_btn" width="257" height="43"/>
         <image name="gear" width="25" height="25"/>
         <image name="logo" width="200" height="42"/>
@@ -1675,33 +1659,6 @@
         <image name="prev" width="20.5" height="20.5"/>
         <image name="register" width="16" height="16"/>
         <image name="search" width="25" height="25"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

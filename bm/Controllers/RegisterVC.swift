@@ -8,16 +8,7 @@
 
 import UIKit
 
-class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, TextFieldChangeDelegate {
-    
-    //目前暫時沒有用到
-    func textFieldTextChanged(formItem: FormItem, text: String) {
-        print(text)
-    }
-    func setTextFieldDelegate(delegate: TextFieldChangeDelegate) {
-        
-    }
-    
+class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ValueChangeDelegate {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -58,11 +49,10 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
 
         self.hideKeyboardWhenTappedAround()
         
-        form = RegisterForm(delegate: self)
+        form = RegisterForm()
         imagePicker.delegate = self
         featuredView.gallery = imagePicker
         featuredView.delegate = self
-        form.setDelegate(self)
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -122,11 +112,15 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 item!.indexPath = indexPath
                 formUpdatableCell.update(with: item!)
             }
-//            if item!.uiProperties.cellType == FormItemCellType.textField {
-//                if let formDelegateCell = cell as? TextFieldChangeDelegate {
-//                    formDelegateCell.setTextFieldDelegate(delegate: self)
-//                }
-//            }
+            
+            if item!.uiProperties.cellType == FormItemCellType.textField ||
+                item!.uiProperties.cellType == FormItemCellType.sex ||
+                item!.uiProperties.cellType == FormItemCellType.privacy
+            {
+                if let formCell = cell as? FormItemCell {
+                    formCell.valueDelegate = self
+                }
+            }
             
         } else {
             cell = UITableViewCell()
@@ -220,24 +214,23 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
     }
     
-    override func checkboxValueChanged(checked: Bool) {
-        let item = getFormItemFromKey(PRIVACY_KEY)
-        if !checked {
-            warning("必須同意隱私權條款，才能註冊")
-            item?.value = nil
-        } else {
-            item?.value = "1"
-        }
-        self.agreePrivacy = checked
-    }
+//    override func checkboxValueChanged(checked: Bool) {
+//        let item = getFormItemFromKey(PRIVACY_KEY)
+//        if !checked {
+//            warning("必須同意隱私權條款，才能註冊")
+//            item?.value = nil
+//        } else {
+//            item?.value = "1"
+//        }
+//        self.agreePrivacy = checked
+//    }
     
-    override func sexValueChanged(sex: String) {
-        
-        let item = getFormItemFromKey(SEX_KEY)
-        self.sex = sex
-        item?.value = sex
-        //print(self.sex)
-    }
+//    override func sexValueChanged(sex: String) {
+//
+//        let item = getFormItemFromKey(SEX_KEY)
+//        self.sex = sex
+//        item?.value = sex
+//    }
     
     func isImageSet(_ b: Bool) {}
     
@@ -368,30 +361,30 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
         //print(params)
         
-//        MemberService.instance.update(_params: params, image: nil) { (success) in
-//            if success {
-//                Global.instance.removeSpinner(superView: self.view)
-//                if MemberService.instance.success {
-//                    let appearance = SCLAlertView.SCLAppearance(
-//                        showCloseButton: false
-//                    )
-//                    let alert = SCLAlertView(appearance: appearance)
-//                    alert.addButton("確定", action: {
-//                        //print("ok")
-//                        self.dismiss(animated: true, completion: nil)
-//                    })
-//                    alert.showSuccess("成功", subTitle: "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序")
-//                    //NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
-//                } else {
-//                    self.warning(MemberService.instance.msg)
-//                    //SCLAlertView().showWarning("錯誤", subTitle: MemberService.instance.msg)
-//                }
-//            } else {
-//                Global.instance.removeSpinner(superView: self.view)
-//                self.warning("伺服器錯誤，請稍後再試，或洽管理人員")
-//                //SCLAlertView().showWarning("錯誤", subTitle: "註冊失敗，伺服器錯誤，請稍後再試")
-//            }
-//        }
+        MemberService.instance.update(_params: params, image: nil) { (success) in
+            if success {
+                Global.instance.removeSpinner(superView: self.view)
+                if MemberService.instance.success {
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    let alert = SCLAlertView(appearance: appearance)
+                    alert.addButton("確定", action: {
+                        //print("ok")
+                        self.dismiss(animated: true, completion: nil)
+                    })
+                    alert.showSuccess("成功", subTitle: "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序")
+                    //NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+                } else {
+                    self.warning(MemberService.instance.msg)
+                    //SCLAlertView().showWarning("錯誤", subTitle: MemberService.instance.msg)
+                }
+            } else {
+                Global.instance.removeSpinner(superView: self.view)
+                self.warning("伺服器錯誤，請稍後再試，或洽管理人員")
+                //SCLAlertView().showWarning("錯誤", subTitle: "註冊失敗，伺服器錯誤，請稍後再試")
+            }
+        }
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
@@ -415,6 +408,29 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
     }
     
+    func textFieldTextChanged(formItem: FormItem, text: String) {
+        formItem.value = text
+        //print(text)
+    }
+    
+    func sexChanged(sex: String) {
+        let item = getFormItemFromKey(SEX_KEY)
+        self.sex = sex
+        item?.value = sex
+        //print(sex)
+    }
+    
+    func privacyChecked(checked: Bool) {
+        let item = getFormItemFromKey(PRIVACY_KEY)
+        if !checked {
+            warning("必須同意隱私權條款，才能註冊")
+            item?.value = nil
+        } else {
+            item?.value = "1"
+        }
+        self.agreePrivacy = checked
+        //print(checked)
+    }
     
     
 //    func backToMenu() {

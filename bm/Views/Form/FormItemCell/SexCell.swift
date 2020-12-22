@@ -8,11 +8,8 @@
 
 import UIKit
 
-class SexCell: SuperCell, FormUPdatable {
-    
-    @IBOutlet weak var textField: SuperLabel!
-    @IBOutlet weak var requiredImageView: UIImageView!
-    
+class SexCell: FormItemCell {
+        
     var male: Checkbox!
     var female: Checkbox!
     var myDelegate: BaseViewController?
@@ -48,12 +45,12 @@ class SexCell: SuperCell, FormUPdatable {
         self.addSubview(female)
     }
 
-    func update(with formItem: FormItem) {
+    override func update(with formItem: FormItem) {
         
         requiredImageView.isHidden = !formItem.isRequired
-        if formItem.delegate != nil {
-            self.myDelegate = (formItem.delegate as! BaseViewController)
-        }
+//        if formItem.delegate != nil {
+//            self.myDelegate = (formItem.delegate as! BaseViewController)
+//        }
     }
     
     @objc func maleValueChanged(sender: Checkbox) {
@@ -65,9 +62,10 @@ class SexCell: SuperCell, FormUPdatable {
             female.isChecked = true
             self.checked = "F"
         }
-        if myDelegate != nil {
-            myDelegate?.sexValueChanged(sex: self.checked)
-        }
+        valueDelegate!.sexChanged(sex: self.checked)
+//        if myDelegate != nil {
+//            myDelegate?.sexValueChanged(sex: self.checked)
+//        }
     }
     
     @objc func femaleValueChanged(sender: Checkbox) {
@@ -79,8 +77,9 @@ class SexCell: SuperCell, FormUPdatable {
             male.isChecked = true
             self.checked = "M"
         }
-        if myDelegate != nil {
-            myDelegate?.sexValueChanged(sex: self.checked)
-        }
+        valueDelegate!.sexChanged(sex: self.checked)
+//        if myDelegate != nil {
+//            myDelegate?.sexValueChanged(sex: self.checked)
+//        }
     }
 }

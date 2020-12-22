@@ -8,35 +8,19 @@
 
 import UIKit
 
-class TextFieldCell: SuperCell, FormUPdatable {
-    
-//    func textFieldTextChanged(formItem: FormItem, text: String) {
-//        if textFieldDelegate != nil {
-//            textFieldDelegate!.textFieldTextChanged(formItem: formItem, text: textField.text!)
-//        }
-//    }
-    
+class TextFieldCell: FormItemCell {
     
     @IBOutlet weak var textField: SuperTextField!
-    @IBOutlet weak var titleLbl: SuperLabel!
-    @IBOutlet weak var clearBtn: UIButton!
-    @IBOutlet weak var promptBtn: UIButton!
-    @IBOutlet weak var requiredImageView: UIImageView!
-    
-    var formItem: FormItem?
-    
-    var textFieldDelegate: TextFieldChangeDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLbl.textAlignment = NSTextAlignment.left
     }
     
     @IBAction func textFieldDidChange(_ textField: UITextField) {
         let _formItem = formItem as! TextFieldFormItem
-        _formItem.value = textField.text
-        //self.parentViewController?.textFieldTextChanged()
-        //textFieldTextChanged(formItem: _formItem, text: textField.text!)
+        if self.valueDelegate != nil {
+            valueDelegate!.textFieldTextChanged(formItem: _formItem, text: textField.text!)
+        }
     }
     
     @IBAction func clearBtnPressed(_ sender: Any) {
@@ -63,12 +47,12 @@ class TextFieldCell: SuperCell, FormUPdatable {
 //        }
     }
     
-    func update(with formItem: FormItem) {
+    override func update(with formItem: FormItem) {
         
         let _formItem = formItem as! TextFieldFormItem
         _formItem.make()
         
-        titleLbl.text = _formItem.title
+        self.titleLbl!.text = _formItem.title
         textField.text = _formItem.value
         
         //let bgColor: UIColor = _formItem.isValid  == false ? .red : .white
@@ -80,9 +64,5 @@ class TextFieldCell: SuperCell, FormUPdatable {
         requiredImageView.isHidden = !_formItem.isRequired
         
         self.formItem = formItem
-    }
-    
-    func setTextFieldDelegate(delegate: TextFieldChangeDelegate) {
-        self.textFieldDelegate = delegate
     }
 }
