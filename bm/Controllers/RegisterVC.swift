@@ -8,7 +8,16 @@
 
 import UIKit
 
-class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate {
+class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, TextFieldChangeDelegate {
+    
+    //目前暫時沒有用到
+    func textFieldTextChanged(formItem: FormItem, text: String) {
+        print(text)
+    }
+    func setTextFieldDelegate(delegate: TextFieldChangeDelegate) {
+        
+    }
+    
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -113,6 +122,12 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 item!.indexPath = indexPath
                 formUpdatableCell.update(with: item!)
             }
+//            if item!.uiProperties.cellType == FormItemCellType.textField {
+//                if let formDelegateCell = cell as? TextFieldChangeDelegate {
+//                    formDelegateCell.setTextFieldDelegate(delegate: self)
+//                }
+//            }
+            
         } else {
             cell = UITableViewCell()
         }
@@ -353,30 +368,30 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
         //print(params)
         
-        MemberService.instance.update(_params: params, image: nil) { (success) in
-            if success {
-                Global.instance.removeSpinner(superView: self.view)
-                if MemberService.instance.success {
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    let alert = SCLAlertView(appearance: appearance)
-                    alert.addButton("確定", action: {
-                        //print("ok")
-                        self.dismiss(animated: true, completion: nil)
-                    })
-                    alert.showSuccess("成功", subTitle: "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序")
-                    //NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
-                } else {
-                    self.warning(MemberService.instance.msg)
-                    //SCLAlertView().showWarning("錯誤", subTitle: MemberService.instance.msg)
-                }
-            } else {
-                Global.instance.removeSpinner(superView: self.view)
-                self.warning("伺服器錯誤，請稍後再試，或洽管理人員")
-                //SCLAlertView().showWarning("錯誤", subTitle: "註冊失敗，伺服器錯誤，請稍後再試")
-            }
-        }
+//        MemberService.instance.update(_params: params, image: nil) { (success) in
+//            if success {
+//                Global.instance.removeSpinner(superView: self.view)
+//                if MemberService.instance.success {
+//                    let appearance = SCLAlertView.SCLAppearance(
+//                        showCloseButton: false
+//                    )
+//                    let alert = SCLAlertView(appearance: appearance)
+//                    alert.addButton("確定", action: {
+//                        //print("ok")
+//                        self.dismiss(animated: true, completion: nil)
+//                    })
+//                    alert.showSuccess("成功", subTitle: "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序")
+//                    //NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+//                } else {
+//                    self.warning(MemberService.instance.msg)
+//                    //SCLAlertView().showWarning("錯誤", subTitle: MemberService.instance.msg)
+//                }
+//            } else {
+//                Global.instance.removeSpinner(superView: self.view)
+//                self.warning("伺服器錯誤，請稍後再試，或洽管理人員")
+//                //SCLAlertView().showWarning("錯誤", subTitle: "註冊失敗，伺服器錯誤，請稍後再試")
+//            }
+//        }
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
@@ -399,6 +414,8 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             //vc.menuVC = (sender as! MenuVC)
         }
     }
+    
+    
     
 //    func backToMenu() {
 //        if self.menuVC != nil {

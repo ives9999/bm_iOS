@@ -7,9 +7,15 @@
 //
 
 import UIKit
-//import AMPopTip
 
 class TextFieldCell: SuperCell, FormUPdatable {
+    
+//    func textFieldTextChanged(formItem: FormItem, text: String) {
+//        if textFieldDelegate != nil {
+//            textFieldDelegate!.textFieldTextChanged(formItem: formItem, text: textField.text!)
+//        }
+//    }
+    
     
     @IBOutlet weak var textField: SuperTextField!
     @IBOutlet weak var titleLbl: SuperLabel!
@@ -18,7 +24,8 @@ class TextFieldCell: SuperCell, FormUPdatable {
     @IBOutlet weak var requiredImageView: UIImageView!
     
     var formItem: FormItem?
-    //let popTip = PopTip()
+    
+    var textFieldDelegate: TextFieldChangeDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +35,8 @@ class TextFieldCell: SuperCell, FormUPdatable {
     @IBAction func textFieldDidChange(_ textField: UITextField) {
         let _formItem = formItem as! TextFieldFormItem
         _formItem.value = textField.text
+        //self.parentViewController?.textFieldTextChanged()
+        //textFieldTextChanged(formItem: _formItem, text: textField.text!)
     }
     
     @IBAction func clearBtnPressed(_ sender: Any) {
@@ -71,5 +80,9 @@ class TextFieldCell: SuperCell, FormUPdatable {
         requiredImageView.isHidden = !_formItem.isRequired
         
         self.formItem = formItem
+    }
+    
+    func setTextFieldDelegate(delegate: TextFieldChangeDelegate) {
+        self.textFieldDelegate = delegate
     }
 }

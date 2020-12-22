@@ -15,3 +15,8 @@ protocol FormUPdatable {
 protocol FormConformity {
     var formItem: FormItem? {get set}
 }
+
+protocol TextFieldChangeDelegate {
+    func textFieldTextChanged(formItem: FormItem, text: String)
+    func setTextFieldDelegate(delegate: TextFieldChangeDelegate)
+}
