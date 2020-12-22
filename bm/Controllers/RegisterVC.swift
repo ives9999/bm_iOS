@@ -64,7 +64,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         sections = form.getSections()
         section_keys = form.getSectionKeys()
         
-        //initData()
+        initData()
     }
     
     func initData() {
