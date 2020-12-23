@@ -468,7 +468,7 @@ class DataService {
         
         //print(url)
         //print(params)
-        
+        msg = ""
         Alamofire.upload(
             multipartFormData: { (multipartFormData) in
                 if image != nil {

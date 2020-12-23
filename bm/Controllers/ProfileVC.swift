@@ -12,11 +12,12 @@ class ProfileVC: MyTableVC {
 
     @IBOutlet weak var nicknameLbl: UILabel!
     @IBOutlet weak var sexLbl: UILabel!
-    let _sections: [String]? = ["登入資料","個人資料","通訊資料","設定資料"]
+    let _sections: [String]? = ["登入資料","個人資料","聯絡資料","社群資料","設定資料"]
     let _rows: [[String]] = [
-        [NICKNAME_KEY, NAME_KEY, EMAIL_KEY],
-        [SEX_KEY, DOB_KEY],
-        [MOBILE_KEY, TEL_KEY],
+        [EMAIL_KEY],
+        [NAME_KEY, NICKNAME_KEY, SEX_KEY, DOB_KEY],
+        [MOBILE_KEY, TEL_KEY, CITY_ID_KEY, AREA_ID_KEY, ROAD_KEY, ZIP_KEY],
+        [FB_KEY, LINE_KEY],
         [VALIDATE_KEY, MEMBER_TYPE_KEY]
     ]
     
@@ -113,11 +114,18 @@ class ProfileVC: MyTableVC {
                     data = res.joined(separator: ",")
                 } else if key == MEMBER_TYPE_KEY {
                     data = Member.instance.typeShow(rawValue: tmp1)
+                } else if key == CITY_ID_KEY {
+                    let city_name: String = Global.instance.zoneIDToName(tmp1)
+                    data = city_name
+                } else if key == AREA_ID_KEY {
+                    let area_name: String = Global.instance.zoneIDToName(tmp1)
+                    data = area_name
                 } else {
                     data = String(tmp1)
                 }
             }
         }
+    
         cell!.textLabel!.text = "\(field)"
         cell!.detailTextLabel!.text = "\(data)"
         if key == "validate" || key == "type" {
@@ -129,7 +137,7 @@ class ProfileVC: MyTableVC {
             //cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         }
         return cell!
-       
+           
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

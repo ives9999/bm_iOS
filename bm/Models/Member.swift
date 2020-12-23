@@ -96,6 +96,38 @@ class Member {
             session.set(EMAIL_KEY, newValue)
         }
     }
+    var city_id: Int {
+        get {
+            return session.getInt(CITY_ID_KEY)
+        }
+        set {
+            session.set(CITY_ID_KEY, newValue)
+        }
+    }
+    var area_id: Int {
+        get {
+            return session.getInt(AREA_ID_KEY)
+        }
+        set {
+            session.set(AREA_ID_KEY, newValue)
+        }
+    }
+    var road: String {
+        get {
+            return session.getString(ROAD_KEY)
+        }
+        set {
+            session.set(ROAD_KEY, newValue)
+        }
+    }
+    var zip: Int {
+        get {
+            return session.getInt(ZIP_KEY)
+        }
+        set {
+            session.set(ZIP_KEY, newValue)
+        }
+    }
     var pid: String {
         get {
             return session.getString(PID_KEY)
@@ -134,6 +166,22 @@ class Member {
         }
         set {
             session.set(SOCIAL_KEY, newValue)
+        }
+    }
+    var fb: String {
+        get {
+            return session.getString(FB_KEY)
+        }
+        set {
+            session.set(FB_KEY, newValue)
+        }
+    }
+    var line: String {
+        get {
+            return session.getString(LINE_KEY)
+        }
+        set {
+            session.set(LINE_KEY, newValue)
         }
     }
     var role: MEMBER_ROLE {
@@ -211,10 +259,16 @@ class Member {
         SEX_KEY: ["ch": "性別","type":"String","default":"M"],
         TEL_KEY: ["ch": "市內電話","type":"String","default":""],
         MOBILE_KEY: ["ch": "行動電話","type":"String","default":""],
+        CITY_ID_KEY: ["ch": "縣市","type":"Int","default":"0"],
+        AREA_ID_KEY: ["ch": "區域","type":"Int","default":"0"],
+        ROAD_KEY: ["ch": "路名","type":"String","default":""],
+        ZIP_KEY: ["ch": "郵遞區號","type":"Int","default":"0"],
         PLAYERID_KEY: ["ch": "推播id","type":"String","default":""],
         PID_KEY: ["ch": "身分證","type":"String","default":""],
         AVATAR_KEY: ["ch": "大頭貼","type":"String","default":""],
         SOCIAL_KEY: ["ch": "social","type":"String","default":""],
+        FB_KEY: ["ch": "FB","type":"String","default":""],
+        LINE_KEY: ["ch": "Line","type":"String","default":""],
         VALIDATE_KEY: ["ch": "認證階段","type":"Int","default":"0"],
         MEMBER_TYPE_KEY: ["ch": "會員類型","type":"Int","default":"0"],
         MEMBER_ROLE_KEY: ["ch": "會員角色","type":"String","default":""]
@@ -268,6 +322,24 @@ class Member {
         }
         if let val: String = data[MOBILE_KEY] as? String {
             self.mobile = val
+        }
+        if let val: Int = data[CITY_ID_KEY] as? Int {
+            self.city_id = val
+        }
+        if let val: Int = data[AREA_ID_KEY] as? Int {
+            self.area_id = val
+        }
+        if let val: String = data[ROAD_KEY] as? String {
+            self.road = val
+        }
+        if let val: Int = data[ZIP_KEY] as? Int {
+            self.zip = val
+        }
+        if let val: String = data[FB_KEY] as? String {
+            self.fb = val
+        }
+        if let val: String = data[LINE_KEY] as? String {
+            self.line = val
         }
         if let val: String = data[PID_KEY] as? String {
             self.pid = val
@@ -325,6 +397,18 @@ class Member {
             return self.tel
         } else if key == MOBILE_KEY {
             return self.mobile
+        } else if key == CITY_ID_KEY {
+            return self.city_id
+        } else if key == AREA_ID_KEY {
+            return self.area_id
+        } else if key == ROAD_KEY {
+            return self.road
+        } else if key == ZIP_KEY {
+            return self.zip
+        } else if key == FB_KEY {
+            return self.fb
+        } else if key == LINE_KEY {
+            return self.line
         } else if key == PID_KEY {
             return self.pid
         } else if key == AVATAR_KEY {
@@ -376,6 +460,7 @@ class Member {
         }
         return res.joined(separator: ",")
     }
+    
     func reset() {
         var data: [String: Any] = [String: Any]()
         

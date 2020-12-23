@@ -676,6 +676,18 @@ class Global {
         return areas
     }
     
+    func zoneIDToName(_ zone_id: Int)-> String {
+        var value = ""
+        for zone in Zone.instance.zones {
+            let id = zone["id"] as? Int
+            if id == zone_id {
+                value = (zone["name"] as? String)!
+                break
+            }
+        }
+        return value
+    }
+    
     private func _addSpinner(spinner: UIActivityIndicatorView, superView: UIView) {
         spinner.center = superView.center
         spinner.activityIndicatorViewStyle = .whiteLarge

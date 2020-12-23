@@ -141,6 +141,7 @@ class MemberService: DataService {
         let body: [String: Any] = ["source": "app", field: value, ID_KEY: id]
         //print(body)
         //print(URL_MEMBER_UPDATE)
+        msg = ""
         Alamofire.request(URL_MEMBER_UPDATE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             //print(response.result.error)
             if response.result.error == nil {
@@ -334,6 +335,7 @@ class MemberService: DataService {
     }
     
     func jsonToMember(json: JSON) {
+        //print(json)
         var data:[String: Any] = [String: Any]()
         for key in MEMBER_FIELD_STRING {
             let tmp = json[key].stringValue
