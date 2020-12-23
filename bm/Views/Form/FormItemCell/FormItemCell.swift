@@ -11,7 +11,7 @@ import UIKit
 class FormItemCell: SuperCell, FormUPdatable {
     
     var formItem: FormItem?
-    var valueDelegate: ValueChangeDelegate?
+    var valueDelegate: ValueChangedDelegate?
     
     @IBOutlet weak var titleLbl: SuperLabel?
     @IBOutlet weak var clearBtn: UIButton!

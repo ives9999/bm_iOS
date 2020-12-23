@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ValueChangeDelegate {
+class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ValueChangedDelegate {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!

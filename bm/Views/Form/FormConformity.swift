@@ -16,7 +16,7 @@ protocol FormConformity {
     var formItem: FormItem? {get set}
 }
 
-protocol ValueChangeDelegate {
+protocol ValueChangedDelegate {
     func textFieldTextChanged(formItem: FormItem, text: String)
     func sexChanged(sex: String)
     func privacyChecked(checked: Bool)
