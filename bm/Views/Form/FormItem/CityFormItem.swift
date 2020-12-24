@@ -13,12 +13,12 @@ class CityFormItem: FormItem {
     var selected_city_ids:[Int] = [Int]()
     var selected_city_names: [String] = [String]()
     
-    var citysFromCache:[[String: String]] = [[String: String]]()
-    let session: UserDefaults = UserDefaults.standard
+    //var citysFromCache:[[String: String]] = [[String: String]]()
+    //let session: UserDefaults = UserDefaults.standard
     
-    required init(name: String = CITY_KEY, title: String = "縣市", isRequire: Bool = false) {
+    required init(name: String = CITY_ID_KEY, title: String = "縣市", isRequire: Bool = false) {
         super.init(name: name, title: title, placeholder: nil, value: nil, isRequired: isRequire)
-        segue = TO_SINGLE_SELECT
+        //segue = TO_SINGLE_SELECT
         uiProperties.cellType = .more
         self.isRequired = isRequire
         

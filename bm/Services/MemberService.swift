@@ -335,7 +335,7 @@ class MemberService: DataService {
     }
     
     func jsonToMember(json: JSON) {
-        //print(json)
+        print(json)
         var data:[String: Any] = [String: Any]()
         for key in MEMBER_FIELD_STRING {
             let tmp = json[key].stringValue
@@ -350,7 +350,7 @@ class MemberService: DataService {
             data[key] = tmp
         }
         data[ISLOGGEDIN_KEY] = true
-        //print(data)
+        print(data)
         Member.instance.setData(data: data)
     }
     

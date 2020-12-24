@@ -14,7 +14,7 @@ protocol FormItemDelegate {
 }
 
 class BaseForm {
-    var formItems = [FormItem]()
+    var formItems: [FormItem] = [FormItem]()
     var title: String?
     var values: [String: String]?
     var id: Int?

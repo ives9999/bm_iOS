@@ -116,14 +116,15 @@ class MemberVC: MyTableVC {
             let segue = row["segue"] as! String
             //print("segue: \(segue)")
             if segue == TO_PROFILE {
-                if #available(iOS 13.0, *) {
-                    let storyboard = UIStoryboard(name: "Member", bundle: nil)
-                    let viewController = storyboard.instantiateViewController(identifier: "UIViewController-vfe-V8-Hfx")
-                    show(viewController, sender: nil)
-                } else {
-                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-vfe-V8-Hfx") as! ProfileVC
-                    self.navigationController!.pushViewController(viewController, animated: true)
-                }
+                toRegister()
+//                if #available(iOS 13.0, *) {
+//                    let storyboard = UIStoryboard(name: "Member", bundle: nil)
+//                    let viewController = storyboard.instantiateViewController(identifier: "UIViewController-vfe-V8-Hfx")
+//                    show(viewController, sender: nil)
+//                } else {
+//                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-vfe-V8-Hfx") as! ProfileVC
+//                    self.navigationController!.pushViewController(viewController, animated: true)
+//                }
                 //performSegue(withIdentifier: segue, sender: nil)
             } else if segue == TO_PASSWORD {
                 if #available(iOS 13.0, *) {

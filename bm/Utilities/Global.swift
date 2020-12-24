@@ -761,6 +761,13 @@ extension UIViewController {
 }
 
 extension UserDefaults {
+    
+    func myPrint() {
+        for (key, value) in self.dictionaryRepresentation() {
+            print("\(key) => \(value)")
+        }
+    }
+    
     func getBool(_ key: String) -> Bool {
         if isKeyPresentInUserDefaults(key: key) {
             return bool(forKey: key)

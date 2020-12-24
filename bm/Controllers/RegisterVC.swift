@@ -24,8 +24,9 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     fileprivate var form: RegisterForm!
     var agreePrivacy: Bool = true
     var sex: String = "M"
+    var old_selected_city: String = ""
     
-    let testData: [String: String] = [
+    var testData: [String: String] = [
         EMAIL_KEY: "ives@housetube.tw",
         PASSWORD_KEY: "1234",
         REPASSWORD_KEY: "1234",
@@ -34,9 +35,9 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         DOB_KEY: "1969-01-05",
         MOBILE_KEY: "0911299994",
         TEL_KEY: "062295888",
-        CITY_KEY: "218",
+        CITY_ID_KEY: "218",
         "city_name": "台南市",
-        AREA_KEY: "219",
+        AREA_ID_KEY: "219",
         "area_name": "中西區",
         ROAD_KEY: "南華街101號8樓",
         FB_KEY: "https://www.facebook.com/ives.sun",
@@ -50,6 +51,8 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         self.hideKeyboardWhenTappedAround()
         
         form = RegisterForm()
+        initData()
+        
         imagePicker.delegate = self
         featuredView.gallery = imagePicker
         featuredView.delegate = self
@@ -62,29 +65,61 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         
         sections = form.getSections()
         section_keys = form.getSectionKeys()
-        
-        initData()
     }
     
     func initData() {
-//        if testData.keyExist(key: AREA_KEY) {
-//            let area_id: Int = Int(testData[AREA_KEY]!) ?? 0
-//            let area = session.getAreaByAreaID(area_id)
-//        }
-        if testData.count > 0 {
-            for (key, value) in testData {
-                let formItem = getFormItemFromKey(key)
-                if formItem != nil {
-                    if key == AREA_KEY && testData.keyExist(key: "area_name") {
-                        let _formItem = formItem as! AreaFormItem
-                        _formItem.selected_area_names = [testData["area_name"]!]
-                    } else if key == CITY_KEY && testData.keyExist(key: "city_name") { // test data session has, so not implement.
-                        //let _formItem = formItem as! CityFormItem
-                        //_formItem.selected_city_names = [testData["city_name"]!]
-                    }
-                    formItem!.value = value
-                    formItem!.make()
+        
+        if Member.instance.isLoggedIn {
+            form.removeItems(keys: [PASSWORD_KEY, REPASSWORD_KEY, PRIVACY_KEY])
+            form.formItems.remove(at: form.formItems.count - 1)
+            
+            var keys: [String] = [String]()
+            for formItem in form.formItems {
+                if formItem.name != nil {
+                    keys.append(formItem.name!)
                 }
+            }
+            
+            if Member.instance.isLoggedIn {
+                for key in keys {
+                    let data = Member.instance.getData(key: key)
+                    if Member.instance.info[key] != nil {
+                        let types: [String: String] = Member.instance.info[key]!
+                        let type: String = types["type"]!
+                        var value: String = ""
+                        if type == "String" {
+                            value = data as! String
+                        } else if type == "Int" {
+                            value = String(data as! Int)
+                        }
+                        let formItem = getFormItemFromKey(key)
+                        if formItem != nil {
+                            if key == AREA_ID_KEY {
+                                let cityFormItem: CityFormItem = (getFormItemFromKey(CITY_ID_KEY) as? CityFormItem)!
+                                let areaFormItem: AreaFormItem = (formItem as? AreaFormItem)!
+                                areaFormItem.city_id = Int(cityFormItem.value!)
+                            }
+                            formItem!.value = value
+                            formItem!.make()
+                        }
+                    }
+                }
+                old_selected_city = String(Member.instance.getData(key: CITY_ID_KEY) as! Int)
+            }
+        } else {
+            if testData.count > 0 {
+                for (key, value) in testData {
+                    let formItem = getFormItemFromKey(key)
+                    if formItem != nil {
+                        if key == AREA_ID_KEY && testData.keyExist(key: "area_name") {
+                            let _formItem = formItem as! AreaFormItem
+                            _formItem.selected_area_names = [testData["area_name"]!]
+                        }
+                        formItem!.value = value
+                        formItem!.make()
+                    }
+                }
+                old_selected_city = testData[CITY_ID_KEY] ?? ""
             }
         }
     }
@@ -135,15 +170,15 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             if item!.name != nil {
                 //let segue = item!.segue!
                 let key = item!.name
-                if key == CITY_KEY {
+                if key == CITY_ID_KEY {
                     let selectItem: CityFormItem = item as! CityFormItem
                     var selected: String = ""
                     if selectItem.selected_city_ids.count > 0 {
                         selected = String(selectItem.selected_city_ids[0])
                     }
                     toSelectCity(key: key, selected: selected, _delegate: self)
-                } else if key == AREA_KEY {
-                    let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY)! as! CityFormItem
+                } else if key == AREA_ID_KEY {
+                    let cityItem: CityFormItem = getFormItemFromKey(CITY_ID_KEY)! as! CityFormItem
                     if cityItem.value == nil {
                         warning("請先選擇縣市")
                     } else {
@@ -191,10 +226,18 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             if item!.value != selected {
                 item!.reset()
             }
-            if key == AREA_KEY {
+            if key == AREA_ID_KEY {
                 let item1: AreaFormItem = item as! AreaFormItem
-                let cityItem = getFormItemFromKey(CITY_KEY)
+                let cityItem = getFormItemFromKey(CITY_ID_KEY)
                 item1.city_id = Int((cityItem?.value)!)
+            } else if key == CITY_ID_KEY {
+                let item1 = getFormItemFromKey(AREA_ID_KEY)
+                if old_selected_city != selected {
+                    if item1 != nil {
+                        item1!.reset()
+                    }
+                    old_selected_city = selected
+                }
             }
             item!.value = selected
             item!.make()
