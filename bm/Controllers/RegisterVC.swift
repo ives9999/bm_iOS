@@ -25,6 +25,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     var agreePrivacy: Bool = true
     var sex: String = "M"
     var old_selected_city: String = ""
+    var member_token: String = ""
     
     var testData: [String: String] = [
         EMAIL_KEY: "ives@housetube.tw",
@@ -81,6 +82,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             }
             
             if Member.instance.isLoggedIn {
+                member_token = Member.instance.token
                 for key in keys {
                     let data = Member.instance.getData(key: key)
                     if Member.instance.info[key] != nil {
@@ -402,7 +404,10 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             params["area_id"] = area_id
             params.removeValue(forKey: "area")
         }
-        //print(params)
+        if member_token.count > 0 {
+            params["token"] = member_token
+        }
+        print(params)
         
         MemberService.instance.update(_params: params, image: nil) { (success) in
             if success {
