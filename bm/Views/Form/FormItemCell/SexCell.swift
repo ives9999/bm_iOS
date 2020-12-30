@@ -48,6 +48,13 @@ class SexCell: FormItemCell {
     override func update(with formItem: FormItem) {
         
         requiredImageView.isHidden = !formItem.isRequired
+        if formItem.value == "M" {
+            male.isChecked = true
+            female.isChecked = false
+        } else {
+            male.isChecked = false
+            female.isChecked = true
+        }
 //        if formItem.delegate != nil {
 //            self.myDelegate = (formItem.delegate as! BaseViewController)
 //        }

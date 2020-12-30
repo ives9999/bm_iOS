@@ -81,33 +81,31 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 }
             }
             
-            if Member.instance.isLoggedIn {
-                member_token = Member.instance.token
-                for key in keys {
-                    let data = Member.instance.getData(key: key)
-                    if Member.instance.info[key] != nil {
-                        let types: [String: String] = Member.instance.info[key]!
-                        let type: String = types["type"]!
-                        var value: String = ""
-                        if type == "String" {
-                            value = data as! String
-                        } else if type == "Int" {
-                            value = String(data as! Int)
+            member_token = Member.instance.token
+            for key in keys {
+                let data = Member.instance.getData(key: key)
+                if Member.instance.info[key] != nil {
+                    let types: [String: String] = Member.instance.info[key]!
+                    let type: String = types["type"]!
+                    var value: String = ""
+                    if type == "String" {
+                        value = data as! String
+                    } else if type == "Int" {
+                        value = String(data as! Int)
+                    }
+                    let formItem = getFormItemFromKey(key)
+                    if formItem != nil {
+                        if key == AREA_ID_KEY {
+                            let cityFormItem: CityFormItem = (getFormItemFromKey(CITY_ID_KEY) as? CityFormItem)!
+                            let areaFormItem: AreaFormItem = (formItem as? AreaFormItem)!
+                            areaFormItem.city_id = Int(cityFormItem.value!)
                         }
-                        let formItem = getFormItemFromKey(key)
-                        if formItem != nil {
-                            if key == AREA_ID_KEY {
-                                let cityFormItem: CityFormItem = (getFormItemFromKey(CITY_ID_KEY) as? CityFormItem)!
-                                let areaFormItem: AreaFormItem = (formItem as? AreaFormItem)!
-                                areaFormItem.city_id = Int(cityFormItem.value!)
-                            }
-                            formItem!.value = value
-                            formItem!.make()
-                        }
+                        formItem!.value = value
+                        formItem!.make()
                     }
                 }
-                old_selected_city = String(Member.instance.getData(key: CITY_ID_KEY) as! Int)
             }
+            old_selected_city = String(Member.instance.getData(key: CITY_ID_KEY) as! Int)
         } else {
             if testData.count > 0 {
                 for (key, value) in testData {
@@ -376,7 +374,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
-        Global.instance.addSpinner(superView: self.view)
+    
         for formItem in form.formItems {
             formItem.checkValidity()
             if !formItem.isValid {
@@ -389,6 +387,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             }
         }
         
+        Global.instance.addSpinner(superView: self.view)
         var params:[String: String] = [String: String]()
         for formItem in form.formItems {
             if formItem.value != nil {
@@ -396,18 +395,18 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 params[formItem.name!] = value
             }
         }
-        if let city_id = params["city"] {
-            params["city_id"] = city_id
-            params.removeValue(forKey: "city")
+        if let city_id = params[CITY_KEY] {
+            params[CITY_ID_KEY] = city_id
+            params.removeValue(forKey: CITY_KEY)
         }
-        if let area_id = params["area"] {
-            params["area_id"] = area_id
-            params.removeValue(forKey: "area")
+        if let area_id = params[AREA_KEY] {
+            params[AREA_ID_KEY] = area_id
+            params.removeValue(forKey: AREA_KEY)
         }
         if member_token.count > 0 {
-            params["token"] = member_token
+            params[TOKEN_KEY] = member_token
         }
-        print(params)
+        //print(params)
         
         MemberService.instance.update(_params: params, image: nil) { (success) in
             if success {
@@ -419,9 +418,19 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                     let alert = SCLAlertView(appearance: appearance)
                     alert.addButton("確定", action: {
                         //print("ok")
-                        self.dismiss(animated: true, completion: nil)
+                        if self.member_token.count == 0 {
+                            self.dismiss(animated: true, completion: nil)
+                        }
                     })
-                    alert.showSuccess("成功", subTitle: "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序")
+                    var msg: String = ""
+                    if self.member_token.count > 0 {
+                        msg = "修改成功"
+                        //let data = Member.instance.getData(key: NAME_KEY)
+                        //print(data)
+                    } else {
+                        msg = "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序"
+                    }
+                    alert.showSuccess("成功", subTitle: msg)
                     //NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
                 } else {
                     self.warning(MemberService.instance.msg)

@@ -496,9 +496,13 @@ class DataService {
                         }
                         //print(data)
                         let json = JSON(data)
+                        //print(json)
                         self.success = json["success"].boolValue
                         if self.success {
                             self.id = json["id"].intValue
+                            if _params.keyExist(key: "token") { // update
+                                self.jsonToMember(json: json["model"])
+                            }
                         } else {
                             if json["errors"].exists() {
                                 let _errors = json["errors"].arrayValue
@@ -1363,4 +1367,6 @@ class DataService {
     func getSource()-> String? {
         return nil
     }
+    
+    func jsonToMember(json: JSON) {}
 }

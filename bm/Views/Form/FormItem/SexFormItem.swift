@@ -16,4 +16,13 @@ class SexFormItem: FormItem {
         reset()
         self.value = "M"
     }
+    
+    override func make() {
+        if value != nil {
+            show = value!
+            sender = show
+        } else {
+            sender = "M"
+        }
+    }
 }
