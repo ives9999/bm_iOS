@@ -15,7 +15,7 @@ class StoreService: DataService {
     
     override init() {
         super.init()
-        superModel = SuperCourses(dict: [String : Any]())
+        superModel = SuperStores(dict: [String : Any]())
     }
     
     override func getListURL() -> String {

@@ -651,6 +651,18 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
+    func toProduct() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "More", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_PRODUCT)  as? ProductVC {
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_PRODUCT) as! ProductVC
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     // return is [
     //             ["id": "5", "name": "新北市"],
     //             ["id": "6", "name": "台北市"]

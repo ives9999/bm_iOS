@@ -173,6 +173,9 @@
 		B3B4EFC025807CA800EE15D0 /* SexFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EFBF25807CA800EE15D0 /* SexFormItem.swift */; };
 		B3B4EFC725807EDD00EE15D0 /* SexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EFC525807EDD00EE15D0 /* SexCell.swift */; };
 		B3B4EFC825807EDD00EE15D0 /* SexCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4EFC625807EDD00EE15D0 /* SexCell.xib */; };
+		B3B7585D259CB8FE006ACC33 /* ProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7585C259CB8FE006ACC33 /* ProductVC.swift */; };
+		B3B75863259CBA0B006ACC33 /* SuperProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B75862259CBA0B006ACC33 /* SuperProduct.swift */; };
+		B3B75869259CBB27006ACC33 /* ProductService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B75868259CBB27006ACC33 /* ProductService.swift */; };
 		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
 		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
@@ -480,6 +483,9 @@
 		B3B4EFBF25807CA800EE15D0 /* SexFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexFormItem.swift; sourceTree = "<group>"; };
 		B3B4EFC525807EDD00EE15D0 /* SexCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SexCell.swift; sourceTree = "<group>"; };
 		B3B4EFC625807EDD00EE15D0 /* SexCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SexCell.xib; sourceTree = "<group>"; };
+		B3B7585C259CB8FE006ACC33 /* ProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductVC.swift; sourceTree = "<group>"; };
+		B3B75862259CBA0B006ACC33 /* SuperProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperProduct.swift; sourceTree = "<group>"; };
+		B3B75868259CBB27006ACC33 /* ProductService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductService.swift; sourceTree = "<group>"; };
 		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
@@ -753,6 +759,7 @@
 				B3ED38E91FB87EE50003F083 /* TeamService.swift */,
 				B306FEA921F7446F00403FE2 /* TimetableService.swift */,
 				B320004E254305410061442D /* StoreService.swift */,
+				B3B75868259CBB27006ACC33 /* ProductService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1054,6 +1061,7 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
+				B3B7585C259CB8FE006ACC33 /* ProductVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1085,6 +1093,7 @@
 				B3CB73DF23D5C1A700892F75 /* SuperSignupStandby.swift */,
 				B3BBDD94240FE88D00EB9856 /* SuperSignupCancel.swift */,
 				B3200044254304D20061442D /* SuperStore.swift */,
+				B3B75862259CBA0B006ACC33 /* SuperProduct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1460,6 +1469,7 @@
 				B306FE9F21F0DC5900403FE2 /* DateCell.swift in Sources */,
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
 				B3310D9122ACA57A0062EF98 /* ContentCell.swift in Sources */,
+				B3B75863259CBA0B006ACC33 /* SuperProduct.swift in Sources */,
 				B3ED38EA1FB87EE50003F083 /* TeamService.swift in Sources */,
 				B3756EF221BA7567006893E1 /* StatusSelectCell.swift in Sources */,
 				B35F8DD91F8F64310073BD70 /* Home.swift in Sources */,
@@ -1486,6 +1496,7 @@
 				B3310D9922AE302A0062EF98 /* ClearButton.swift in Sources */,
 				B36CBD5720DFF7B000E52B9C /* JSONParse.swift in Sources */,
 				F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */,
+				B3B7585D259CB8FE006ACC33 /* ProductVC.swift in Sources */,
 				B3485C9723F841BE0078265D /* MemberVC.swift in Sources */,
 				B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */,
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
@@ -1515,6 +1526,7 @@
 				B36D66BB229A580E00502D62 /* CourseService.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
 				B323390F21B6BBC7003EB84D /* BaseForm.swift in Sources */,
+				B3B75869259CBB27006ACC33 /* ProductService.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
 				B39453712343256C000DF98E /* SignupListCell.swift in Sources */,
 				B358B0B822A100EF00F1A4E6 /* SectionFormItem.swift in Sources */,

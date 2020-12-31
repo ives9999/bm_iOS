@@ -366,3 +366,4 @@ class StoreVC: ListVC, List1CellDelegate {
 //        prev()
 //    }
 }
+

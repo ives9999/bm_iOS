@@ -12,6 +12,7 @@ class MoreVC: MyTableVC {
         
     var _rows: [[Dictionary<String, Any>]] = [
         [
+            ["text": "商品", "icon": "coach", "segue": TO_PRODUCT],
             ["text": "教練", "icon": "coach", "segue": TO_COACH],
             ["text": "球館", "icon": "arena", "segue": TO_ARENA],
             ["text": "教學", "icon": "course", "segue": TO_COURSE],
@@ -61,7 +62,11 @@ class MoreVC: MyTableVC {
             if row["segue"] != nil {
                 let segue = row["segue"] as! String
                 //print("segue: \(segue)")
-                performSegue(withIdentifier: segue, sender: row["sender"])
+                if segue == TO_PRODUCT {
+                    toProduct()
+                } else {
+                    performSegue(withIdentifier: segue, sender: row["sender"])
+                }
                 
             }
         }
