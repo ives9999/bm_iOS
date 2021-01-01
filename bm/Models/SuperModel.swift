@@ -66,7 +66,7 @@ class SuperModel: NSObject, JSONParsable {
                 } else if key == "managers" {
                     let parsedArray = setArrayDictionary(value, on: property, forKey: key)
                     setValue(parsedArray, forKey: key)
-                } else {
+                }  else {
                     let parsedArray = parse(property: property, array: arrayValue)
                     setValue(parsedArray, forKey: key)
                 }
@@ -86,6 +86,9 @@ class SuperModel: NSObject, JSONParsable {
                 } else if key == "nextCourseTime" {
                     
                     setValue(value, on: property, forKey: key)
+                } else if key == "prices" {
+                    let parsed: SuperProductPrice = JSONParse.parse(data: value)
+                    setValue(parsed, forKey: key)
                 }
                 
 //                var a = [String: Any]()
@@ -175,6 +178,16 @@ class SuperModel: NSObject, JSONParsable {
             }
         }
         return resultingArray
+    }
+    
+    private func setDictionary(_ value: Any, on property: Mirror.Child, forKey propertyName: String)-> [String: Any] {
+        var result = [String: Any]()
+        let jsonObject = value as! JSON
+        for (key, value) in jsonObject {
+            let _value: String = value.description
+            result[key] = _value
+        }
+        return result
     }
     
     private func getDynamicClassType(value: Any) -> JSONParsable.Type? {

@@ -106,7 +106,7 @@ class ProductVC: ListVC {
                 let row = lists1[indexPath.row] as! SuperProduct
                 //row.printRow()
                 
-                //cell.updateStoreViews(indexPath: indexPath, row: row)
+                cell.updateProductViews(indexPath: indexPath, row: row)
                 
                 return cell
             } else {

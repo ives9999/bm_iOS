@@ -43,7 +43,7 @@ class SuperProduct: SuperModel {
     
     @objc dynamic var featured: UIImage = UIImage(named: "nophoto")!
     
-    @objc dynamic var managers: [[String: Any]] = [[String: Any]]()
+    @objc dynamic var prices: SuperProductPrice = SuperProductPrice()
     
     override func filterRow() {
         created_at_text = created_at.noTime()

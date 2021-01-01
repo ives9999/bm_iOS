@@ -26,6 +26,8 @@ class List1Cell: UITableViewCell {
     @IBOutlet weak var addressLbl: SuperLabel!
     @IBOutlet weak var telLbl: SuperLabel!
     @IBOutlet weak var business_timeLbl: SuperLabel!
+    
+    @IBOutlet weak var iconView: UIView!
     @IBOutlet weak var mapIcon: SuperButton!
     @IBOutlet weak var telIcon: SuperButton!
     @IBOutlet weak var mobileIcon: SuperButton!
@@ -62,6 +64,8 @@ class List1Cell: UITableViewCell {
         addressLbl.numberOfLines = 0
         addressLbl.textAlignment = .left
         //addressLbl.backgroundColor = UIColor.red
+        
+        //self.backgroundColor = UIColor.black
         
         editIcon.isHidden = true
         deleteIcon.isHidden = true
@@ -153,6 +157,46 @@ class List1Cell: UITableViewCell {
         self.accessoryView = UIImageView(image: chevron!)
         
         //print(contentView.frame.height)
+    }
+    
+    func updateProductViews(indexPath: IndexPath, row: SuperProduct) {
+        //data.printRow()
+        self.backgroundColor = UIColor.black
+        
+        if row.featured_path.count > 0 {
+            let featured_size: CGSize = (listFeatured.sizeOfImageAt(row.featured_path))!
+            //print("featured height: \(featured_h)")
+            if featured_size.width > 0 && featured_size.height > 0 {
+                let w = featured_size.width
+                let h = featured_size.height
+                let scale: CGFloat
+                if w > h {
+                    scale = 90 / w
+                } else {
+                    scale = 90 / h
+                }
+                featured_h = h * scale
+            }
+            listFeatured.downloaded(from: row.featured_path)
+        }
+        
+        titleLbl.text = row.name
+        cityBtn.setTitle("購買")
+        telLbl.text = "價格： \(row.prices.price_member) 元"
+        business_timeLbl.visibility = .gone
+        addressLbl.visibility = .gone
+        
+        iconView.visibility = .gone
+        mapIcon.visibility = .gone
+        telIcon.visibility = .gone
+        mobileIcon.visibility = .gone
+        refreshIcon.visibility = .gone
+        editIcon.visibility = .gone
+        deleteIcon.visibility = .gone
+        
+        let chevron = UIImage(named: "greater1")
+        self.accessoryType = .disclosureIndicator
+        self.accessoryView = UIImageView(image: chevron!)
     }
     
     override func layoutSubviews() {
