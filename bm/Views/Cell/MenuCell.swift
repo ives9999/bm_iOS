@@ -68,6 +68,9 @@ class MenuCell: SuperCell {
  
         if row["text"] != nil {
             titleLbl.text = (row["text"] as! String)
+            if row["color"] != nil {
+                titleLbl.textColor = row["color"] as? UIColor
+            }
         }
         accessoryType = UITableViewCellAccessoryType.disclosureIndicator
         if row["detail"] != nil {

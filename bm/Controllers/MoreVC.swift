@@ -12,13 +12,13 @@ class MoreVC: MyTableVC {
         
     var _rows: [[Dictionary<String, Any>]] = [
         [
-            ["text": "商品", "icon": "coach", "segue": TO_PRODUCT],
-            ["text": "教練", "icon": "coach", "segue": TO_COACH],
-            ["text": "球館", "icon": "arena", "segue": TO_ARENA],
-            ["text": "教學", "icon": "course", "segue": TO_COURSE],
-            ["text": "體育用品店", "icon": "store", "segue": TO_STORE],
-            ["text": "推播訊息", "icon": "bell", "segue": TO_PN],
-            ["text": "版本", "icon": "version", "segue": ""]
+            ["text": "商品", "icon": "product", "segue": TO_PRODUCT, "color": UIColor(MY_RED)],
+            ["text": "教練", "icon": "coach", "segue": TO_COACH, "color": UIColor(MY_WHITE)],
+            ["text": "球館", "icon": "arena", "segue": TO_ARENA, "color": UIColor(MY_WHITE)],
+            ["text": "教學", "icon": "course", "segue": TO_COURSE, "color": UIColor(MY_WHITE)],
+            ["text": "體育用品店", "icon": "store", "segue": TO_STORE, "color": UIColor(MY_WHITE)],
+            ["text": "推播訊息", "icon": "bell", "segue": TO_PN, "color": UIColor(MY_WHITE)],
+            ["text": "版本", "icon": "version", "segue": "", "color": UIColor(MY_WHITE)]
         ]
     ]
     
