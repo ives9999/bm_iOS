@@ -1026,7 +1026,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Kw-a8-iJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2097.1014492753625" y="-1100.2232142857142"/>
+            <point key="canvasLocation" x="-2200" y="-1138"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
