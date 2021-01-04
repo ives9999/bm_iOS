@@ -130,7 +130,7 @@ class ProductVC: ListVC {
         if tableView == self.tableView {
             if superProducts != nil {
                 let superProduct = superProducts!.rows[indexPath.row]
-                performSegue(withIdentifier: TO_SHOW_PRODUCT, sender: superProduct)
+                toShowProduct(token: superProduct.token)
             }
             
         } else if tableView == searchTableView {
