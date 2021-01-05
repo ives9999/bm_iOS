@@ -54,6 +54,14 @@ class SuperProduct: SuperModel {
                 //print(featured_path)
             }
         }
+        if images.count > 0 {
+            for (idx, image) in images.enumerated() {
+                if !image.hasPrefix("http://") || !image.hasPrefix("https://") {
+                    let _image = BASE_URL + image
+                    images[idx] = _image
+                }
+            }
+        }
     }
     
     override func getFeaturedPath() -> String {

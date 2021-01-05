@@ -107,16 +107,21 @@ class ShowProductVC: BaseViewController {
                 for image_url in superProduct!.images {
                     //print(image_url)
                     let imageView: UIImageView = UIImageView()
+                    //imageView.backgroundColor = UIColor.red
                     imageContainerView.addSubview(imageView)
-                    var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint
+                    var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint, h: NSLayoutConstraint
                     
-                    c1 = NSLayoutConstraint(item: contentView!, attribute: .leading, relatedBy: .equal, toItem: contentView!.superview, attribute: .leading, multiplier: 1, constant: 8)
-                    c2 = NSLayoutConstraint(item: contentView!, attribute: .top, relatedBy: .equal, toItem: contentLbl, attribute: .bottom, multiplier: 1, constant: 8)
-                    c3 = NSLayoutConstraint(item: contentView!, attribute: .trailing, relatedBy: .equal, toItem: contentView!.superview, attribute: .trailing, multiplier: 1, constant: 8)
-                    contentViewConstraintHeight = NSLayoutConstraint(item: contentView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
-                    contentView!.translatesAutoresizingMaskIntoConstraints = false
-                    imageContainerView.addConstraints([c1,c2,c3,contentViewConstraintHeight!])
+                    c1 = NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: imageView.superview, attribute: .leading, multiplier: 1, constant: 8)
+                    c3 = NSLayoutConstraint(item: imageView, attribute: .trailing, relatedBy: .equal, toItem: imageView.superview, attribute: .trailing, multiplier: 1, constant: -8)
+                    c2 = NSLayoutConstraint(item: imageView, attribute: .top, relatedBy: .equal, toItem: imageView.superview, attribute: .top, multiplier: 1, constant: 8)
+                    h = NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 500)
+                    imageView.translatesAutoresizingMaskIntoConstraints = false
+                    imageContainerView.addConstraints([c1,c2,c3,h])
                     
+                    imageContainerViewConstraintHeight.constant = 500
+                    
+                    imageView.downloaded(from: image_url)
+                    break
                 }
             }
         }

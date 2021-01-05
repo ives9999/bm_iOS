@@ -12,7 +12,7 @@ class MoreVC: MyTableVC {
         
     var _rows: [[Dictionary<String, Any>]] = [
         [
-            ["text": "商品", "icon": "product", "segue": TO_PRODUCT, "color": UIColor(MY_RED)],
+            ["text": "商品", "icon": "product", "segue": TO_PRODUCT, "color": UIColor(MY_LIGHT_RED)],
             ["text": "教練", "icon": "coach", "segue": TO_COACH, "color": UIColor(MY_WHITE)],
             ["text": "球館", "icon": "arena", "segue": TO_ARENA, "color": UIColor(MY_WHITE)],
             ["text": "教學", "icon": "course", "segue": TO_COURSE, "color": UIColor(MY_WHITE)],
