@@ -66,6 +66,9 @@ class SuperModel: NSObject, JSONParsable {
                 } else if key == "managers" {
                     let parsedArray = setArrayDictionary(value, on: property, forKey: key)
                     setValue(parsedArray, forKey: key)
+                } else if key == "images" {
+                    let parsedArray = setArray(value, on: property, forKey: key)
+                    setValue(parsedArray, forKey: key)
                 }  else {
                     let parsedArray = parse(property: property, array: arrayValue)
                     setValue(parsedArray, forKey: key)
@@ -162,6 +165,17 @@ class SuperModel: NSObject, JSONParsable {
         } else if type.contains("Double") {
             setValue(jsonValue.doubleValue, forKey: propertyName)
         }
+    }
+    
+    private func setArray(_ value: Any, on property: Mirror.Child, forKey propertyName: String)-> [String] {
+        var resultingArray = [String]()
+        let tmp = value as! JSON
+        let jsonValues = tmp.arrayValue
+        for jsonValue in jsonValues {
+            let _value: String = jsonValue.description
+            resultingArray.append(_value)
+        }
+        return resultingArray
     }
     
     private func setArrayDictionary(_ value: Any, on property: Mirror.Child, forKey propertyName: String)-> [[String: Any]] {

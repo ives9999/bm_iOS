@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ShowProductVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class ShowProductVC: BaseViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContainerView: UIView!
@@ -18,10 +18,10 @@ class ShowProductVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     @IBOutlet weak var productDataLbl: SuperLabel!
     @IBOutlet weak var contentLbl: SuperLabel!
     
-    @IBOutlet weak var tableView: SuperTableView!
+    @IBOutlet weak var imageContainerView: UIView!
     var contentView: UIView!
     
-    @IBOutlet weak var tableViewConstraintHeight: NSLayoutConstraint!
+    @IBOutlet weak var imageContainerViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
     
     var contentViewConstraintHeight: NSLayoutConstraint?
@@ -29,30 +29,13 @@ class ShowProductVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     var superProduct: SuperProduct?
     var product_token: String?
     
-    var tableRowKeys:[String] = ["tel_text","mobile_text","address","fb","line","website","email","business_time","pv","created_at_text"]
-    var tableRows: [String: [String:String]] = [
-        "tel_text":["icon":"tel","title":"市內電話","content":""],
-        "mobile_text":["icon":"mobile","title":"行動電話","content":""],
-        "address":["icon":"marker","title":"住址","content":""],
-        "fb":["icon":"fb","title":"FB","content":""],
-        "line":["icon":"line","title":"line","content":""],
-        "website":["icon":"website","title":"網站","content":""],
-        "email":["icon":"email1","title":"email","content":""],
-        "business_time":["icon":"clock","title":"營業時間","content":""],
-        "pv":["icon":"pv","title":"瀏覽數","content":""],
-        "created_at_text":["icon":"calendar","title":"建立日期","content":""]
-    ]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //print(superStore)
         scrollView.backgroundColor = UIColor.clear
         
-        let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "cell")
-        
-        initTableView()
+        //initImageView()
         //initContentView()
         
         beginRefresh()
@@ -61,22 +44,13 @@ class ShowProductVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     override func viewWillLayoutSubviews() {
-        productDataLbl.text = "商品資料"
+        productDataLbl.text = "商品圖片"
         contentLbl.text = "詳細介紹"
         
         productDataLbl.textColor = UIColor(MY_RED)
         productDataLbl.textAlignment = .left
         contentLbl.textColor = UIColor(MY_RED)
         contentLbl.textAlignment = .left
-    }
-    
-    func initTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        //tableView.estimatedRowHeight = 600
-        tableViewConstraintHeight.constant = 600
     }
     
     func initContentView() {
@@ -104,12 +78,8 @@ class ShowProductVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
                     let superModel: SuperModel = ProductService.instance.superModel
                     self.superProduct = (superModel as! SuperProduct)
                     
-                    if self.superProduct != nil {
-                        self.setMainData()
-                        self.setFeatured()
-                        
-                        self.tableView.reloadData()
-                    }
+                    self.setFeatured()
+                    self.setImages()
                 }
                 Global.instance.removeSpinner(superView: self.view)
                 self.endRefresh()
@@ -131,69 +101,24 @@ class ShowProductVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    func setMainData() {
+    func setImages() {
         if superProduct != nil {
-            for key in tableRowKeys {
-                if (superProduct!.responds(to: Selector(key))) {
-                    let content: String = String(describing:(superProduct!.value(forKey: key))!)
-                    tableRows[key]!["content"] = content
+            if superProduct!.images.count > 0 {
+                for image_url in superProduct!.images {
+                    //print(image_url)
+                    let imageView: UIImageView = UIImageView()
+                    imageContainerView.addSubview(imageView)
+                    var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint
+                    
+                    c1 = NSLayoutConstraint(item: contentView!, attribute: .leading, relatedBy: .equal, toItem: contentView!.superview, attribute: .leading, multiplier: 1, constant: 8)
+                    c2 = NSLayoutConstraint(item: contentView!, attribute: .top, relatedBy: .equal, toItem: contentLbl, attribute: .bottom, multiplier: 1, constant: 8)
+                    c3 = NSLayoutConstraint(item: contentView!, attribute: .trailing, relatedBy: .equal, toItem: contentView!.superview, attribute: .trailing, multiplier: 1, constant: 8)
+                    contentViewConstraintHeight = NSLayoutConstraint(item: contentView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+                    contentView!.translatesAutoresizingMaskIntoConstraints = false
+                    imageContainerView.addConstraints([c1,c2,c3,contentViewConstraintHeight!])
+                    
                 }
             }
-            
-//            if !superProduct!.open_time.isEmpty {
-//                let business_time = superProduct!.open_time_text + " ~ " + superProduct!.close_time_text
-//                tableRows["business_time"]!["content"] = business_time
-//            } else {
-//                tableRows.removeValue(forKey: "business_time");
-//                tableRowKeys = tableRowKeys.filter{$0 != "business_time"}
-//            }
-            
-//            let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.superStore!.content+"</body></html>"
-//
-//            contentView!.loadHTMLString(content, baseURL: nil)
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableRowKeys.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if tableView == self.tableView {
-            let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
-            
-            let key = tableRowKeys[indexPath.row]
-            if tableRows[key] != nil {
-                let row = tableRows[key]!
-                let icon = row["icon"] ?? ""
-                let title = row["title"] ?? ""
-                var content = row["content"] ?? ""
-                if key == "fb" && !content.isEmpty {
-                    content = "連結請按此"
-                }
-                if key == "website" && !content.isEmpty {
-                    content = "連結請按此"
-                }
-                cell.update(icon: icon, title: title, content: content)
-                    //print("\(key):\(cell.frame.height)")
-            }
-            
-            if indexPath.row == tableRowKeys.count - 1 {
-                UIView.animate(withDuration: 0, animations: {self.tableView.layoutIfNeeded()}) { (complete) in
-                    var heightOfTableView: CGFloat = 0.0
-                    let cells = self.tableView.visibleCells
-                    for cell in cells {
-                        heightOfTableView += cell.frame.height
-                    }
-                    //print(heightOfTableView)
-                    self.tableViewConstraintHeight.constant = heightOfTableView
-                    self.changeScrollViewContentSize()
-                }
-            }
-            return cell
-        } else {
-            return UITableViewCell()
         }
     }
     
@@ -207,7 +132,7 @@ class ShowProductVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         
         let h1 = featured.bounds.size.height
         let h2 = productDataLbl.bounds.size.height
-        let h3 = tableViewConstraintHeight.constant
+        let h3 = imageContainerViewConstraintHeight.constant
         let h6 = contentLbl.bounds.size.height
         //let h7 = contentViewConstraintHeight!.constant
 

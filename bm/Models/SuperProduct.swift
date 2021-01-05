@@ -42,6 +42,7 @@ class SuperProduct: SuperModel {
     @objc dynamic var thumb: String = ""
     
     @objc dynamic var featured: UIImage = UIImage(named: "nophoto")!
+    @objc dynamic var images: [String] = [String]()
     
     @objc dynamic var prices: SuperProductPrice = SuperProductPrice()
     
