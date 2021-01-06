@@ -19,8 +19,8 @@ let REMOTE_BASE_URL = "https://bm.sportpassword.com"
 //let REMOTE_BASE_URL = "http://192.168.100.120"
 //let REMOTE_BASE_URL = "http://192.168.100.150"
 //let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
-//let LOCALHOST_BASE_URL = "http://192.168.100.241"
-let LOCALHOST_BASE_URL = "http://192.168.100.120"
+let LOCALHOST_BASE_URL = "http://192.168.100.241"
+//let LOCALHOST_BASE_URL = "http://192.168.100.120"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 
 
@@ -155,6 +155,7 @@ let TO_TIMETABLE: String = "toTimeTable"
 let TO_VALIDATE: String = "toValidate"
 
 // color
+let CELL_SELECTED = "#665D65"
 let MY_GREEN = "#a6d903"
 let MY_RED = "#f11b90"
 let MY_LIGHT_RED = "#FF4081"

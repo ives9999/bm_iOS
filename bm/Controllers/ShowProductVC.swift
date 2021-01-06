@@ -181,9 +181,7 @@ class ShowProductVC: BaseViewController {
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {
-//        if delegate != nil {
-//            delegate!.isReload(false)
-//        }
+        //goHome()
         prev()
     }
 }

@@ -169,6 +169,11 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func prev() {
         dismiss(animated: true, completion: nil)
     }
+    
+    func goHome() {
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
     func beginRefresh() {
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
@@ -655,6 +660,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_PRODUCT)  as? ProductVC {
+                //self.navigationController?.pushViewController(viewController, animated: true)
+                //self.present(viewController, animated: true, completion: nil)
                 show(viewController, sender: nil)
             }
         } else {

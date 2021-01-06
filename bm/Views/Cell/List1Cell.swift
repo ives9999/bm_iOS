@@ -66,6 +66,10 @@ class List1Cell: UITableViewCell {
         //addressLbl.backgroundColor = UIColor.red
         
         //self.backgroundColor = UIColor.black
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(CELL_SELECTED)
+        selectedBackgroundView = bgColorView
+        //selectedBackgroundView?.backgroundColor = UIColor.clear
         
         editIcon.isHidden = true
         deleteIcon.isHidden = true
@@ -80,12 +84,6 @@ class List1Cell: UITableViewCell {
 //            let w = icon["constant"] as! CGFloat
 //            print(w)
 //        }
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func updateStoreViews(indexPath: IndexPath, row: SuperStore) {
