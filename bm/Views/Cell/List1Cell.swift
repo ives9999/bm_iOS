@@ -93,19 +93,8 @@ class List1Cell: UITableViewCell {
         self.backgroundColor = UIColor.clear
         
         if row.featured_path.count > 0 {
-            let featured_size: CGSize = (listFeatured.sizeOfImageAt(row.featured_path))!
-            //print("featured height: \(featured_h)")
-            if featured_size.width > 0 && featured_size.height > 0 {
-                let w = featured_size.width
-                let h = featured_size.height
-                let scale: CGFloat
-                if w > h {
-                    scale = 90 / w
-                } else {
-                    scale = 90 / h
-                }
-                featured_h = h * scale
-            }
+            
+            featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
             listFeatured.downloaded(from: row.featured_path)
         }
         
@@ -164,19 +153,7 @@ class List1Cell: UITableViewCell {
         self.backgroundColor = UIColor.black
         
         if row.featured_path.count > 0 {
-            let featured_size: CGSize = (listFeatured.sizeOfImageAt(row.featured_path))!
-            //print("featured height: \(featured_h)")
-            if featured_size.width > 0 && featured_size.height > 0 {
-                let w = featured_size.width
-                let h = featured_size.height
-                let scale: CGFloat
-                if w > h {
-                    scale = 90 / w
-                } else {
-                    scale = 90 / h
-                }
-                featured_h = h * scale
-            }
+            featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
             listFeatured.downloaded(from: row.featured_path)
         }
         

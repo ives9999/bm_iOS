@@ -23,11 +23,7 @@ class SuperProduct: SuperModel {
     @objc dynamic var shipping: String = ""
     @objc dynamic var gateway: String = ""
     
-    @objc dynamic var price_dummy: Int = -1
-    @objc dynamic var price_member: Int = -1
-    @objc dynamic var price_nonmember: Int = -1
-    @objc dynamic var shipping_fee: Int = -1
-    
+    @objc dynamic var content: String = ""
     @objc dynamic var alias: String = ""
     
     @objc dynamic var status: String = "online"

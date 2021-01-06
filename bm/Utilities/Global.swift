@@ -1517,6 +1517,54 @@ extension UIView {
                                      self.topAnchor.constraint(equalTo: top),
                                      self.bottomAnchor.constraint(equalTo: bottom)])
     }
+    
+    func showImages(images: [String])-> CGFloat {
+        
+        var totalHeight: CGFloat = 0
+        var upView: UIView = self
+        for (idx, image_url) in images.enumerated() {
+            let imageView: UIImageView = UIImageView()
+            imageView.downloaded(from: image_url)
+            self.addSubview(imageView)
+            
+            let image_h: CGFloat = imageView.heightForUrl(url: image_url, width: self.frame.width)
+            var upViewAttribute: NSLayoutConstraint.Attribute = .top
+            var upConstant: CGFloat = 8
+            if idx > 0 {
+                upViewAttribute = .bottom
+            } else {
+                upConstant = 0
+            }
+            _setImageConstraint(imageView: imageView, image_h: image_h, upView: upView, upViewAttribute: upViewAttribute, upConstant: upConstant)
+            totalHeight = totalHeight + image_h + 8
+            upView = imageView
+        }
+        
+        return totalHeight
+    }
+    
+    private func _setImageConstraint(
+        imageView: UIImageView,
+        image_h: CGFloat,
+        upView: UIView,
+        upViewAttribute: NSLayoutConstraint.Attribute,
+        upConstant: CGFloat) {
+        
+        var left: NSLayoutConstraint, right: NSLayoutConstraint, top: NSLayoutConstraint, h: NSLayoutConstraint
+        
+        //左邊
+        left = NSLayoutConstraint(item: imageView, attribute: .leading, relatedBy: .equal, toItem: imageView.superview, attribute: .leading, multiplier: 1, constant: 0)
+        //右邊
+        right = NSLayoutConstraint(item: imageView, attribute: .trailing, relatedBy: .equal, toItem: imageView.superview, attribute: .trailing, multiplier: 1, constant: 0)
+        
+        //上面
+        top = NSLayoutConstraint(item: imageView, attribute: .top, relatedBy: .equal, toItem: upView, attribute: upViewAttribute, multiplier: 1, constant: upConstant)
+        
+        //高度
+        h = NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: image_h)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.addConstraints([left, right, top, h])
+    }
 }
 
 extension UILabel {
@@ -1585,23 +1633,24 @@ extension UIImageView {
         }
     }
     
-    var contentClippingRect: CGRect {
-        guard let image = image else { return bounds }
-        guard contentMode == .scaleAspectFit else { return bounds }
-        guard image.size.width > 0 && image.size.height > 0 else { return bounds }
-
-        let scale: CGFloat
-        if image.size.width > image.size.height {
-            scale = bounds.width / image.size.width
-        } else {
-            scale = bounds.height / image.size.height
+    func heightForUrl(url: String, width: CGFloat)-> CGFloat {
+        
+        var featured_h: CGFloat = 0
+        let featured_size: CGSize = (self.sizeOfImageAt(url))!
+        //print("featured height: \(featured_h)")
+        if featured_size.width > 0 && featured_size.height > 0 {
+            let w = featured_size.width
+            let h = featured_size.height
+            let scale: CGFloat
+            if w > h {
+                scale = width / w
+            } else {
+                scale = width / h
+            }
+            featured_h = h * scale
         }
-
-        let size = CGSize(width: image.size.width * scale, height: image.size.height * scale)
-        let x = (bounds.width - size.width) / 2.0
-        let y = (bounds.height - size.height) / 2.0
-
-        return CGRect(x: x, y: y, width: size.width, height: size.height)
+        
+        return featured_h
     }
 }
 
@@ -1610,9 +1659,6 @@ protocol ArrayProtocol{}
 extension Array: ArrayProtocol {
     
 }
-
-
-
 
 extension UIImage {
     

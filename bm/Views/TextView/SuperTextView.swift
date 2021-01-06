@@ -17,13 +17,18 @@ class SuperTextView: UITextView {
         super.init(coder: aDecoder)!
         self.commonInit()
     }
+    
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
+        self.commonInit()
+    }
 
     func commonInit(){
         self.textColor = UIColor.white
-        self.backgroundColor = UIColor(TEXTBACKGROUND)
-        self.layer.borderColor = UIColor(MY_GREEN).cgColor
-        self.layer.borderWidth = 1
+        self.backgroundColor = UIColor.clear
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.borderWidth = 0
         self.font = UIFont(name: fontName, size: fontSize)
-        self.textAlignment = NSTextAlignment.center
+        self.textAlignment = NSTextAlignment.left
     }
 }
