@@ -173,7 +173,8 @@ class ShowProductVC: BaseViewController {
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
-        print("purchase")
+        //print("purchase")
+        toOrder(superProduct: superProduct!)
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {

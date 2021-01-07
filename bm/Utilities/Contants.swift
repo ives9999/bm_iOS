@@ -19,8 +19,8 @@ let REMOTE_BASE_URL = "https://bm.sportpassword.com"
 //let REMOTE_BASE_URL = "http://192.168.100.120"
 //let REMOTE_BASE_URL = "http://192.168.100.150"
 //let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
-let LOCALHOST_BASE_URL = "http://192.168.100.241"
-//let LOCALHOST_BASE_URL = "http://192.168.100.120"
+//let LOCALHOST_BASE_URL = "http://192.168.100.241"
+let LOCALHOST_BASE_URL = "http://192.168.100.120"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 
 
@@ -117,6 +117,7 @@ let TO_MANAGER_FUNCTION: String = "toManagerFunction"
 let TO_MANAGER_STORE: String = "toManagerStore"
 let TO_MAP: String = "toMap"
 let TO_MULTI_SELECT: String = "toMultiSelect"
+let TO_ORDER: String = "toOrder"
 let TO_PASSWORD: String = "toPassword"
 let TO_PRODUCT: String = "toProduct"
 let TO_PN: String = "toPN"

@@ -1028,6 +1028,65 @@
             </objects>
             <point key="canvasLocation" x="-2200" y="-1138"/>
         </scene>
+        <!--OrderVC-->
+        <scene sceneID="aae-Fx-anz">
+            <objects>
+                <viewController storyboardIdentifier="toOrder" id="o4v-AV-CC1" customClass="OrderVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UtV-4m-LmY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cGv-0m-S7b">
+                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jim-cc-w7L" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="IzF-VR-wAX"/>
+                                            <constraint firstAttribute="width" constant="33" id="cob-zv-Q3f"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="tNU-cp-fqk" eventType="touchUpInside" id="GK5-V7-J0N"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqJ-Mv-iQ8" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Jim-cc-w7L" firstAttribute="centerY" secondItem="cGv-0m-S7b" secondAttribute="centerY" id="0Dx-lz-hbI"/>
+                                    <constraint firstItem="aqJ-Mv-iQ8" firstAttribute="centerY" secondItem="cGv-0m-S7b" secondAttribute="centerY" id="6uN-93-DEy"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="8xl-O8-4Gj"/>
+                                    <constraint firstItem="aqJ-Mv-iQ8" firstAttribute="centerX" secondItem="cGv-0m-S7b" secondAttribute="centerX" id="K9e-DC-a2O"/>
+                                    <constraint firstAttribute="height" constant="64" id="Lk4-Rs-xAh"/>
+                                    <constraint firstItem="Jim-cc-w7L" firstAttribute="leading" secondItem="cGv-0m-S7b" secondAttribute="leading" constant="12" id="jYB-Fy-sV0"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="qee-6p-shS"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="v9w-WN-dd0"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="xYr-YM-Qf0"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="TbQ-f2-XH0"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cGv-0m-S7b" firstAttribute="trailing" secondItem="TbQ-f2-XH0" secondAttribute="trailing" id="bWH-Kh-XUy"/>
+                            <constraint firstItem="cGv-0m-S7b" firstAttribute="top" secondItem="TbQ-f2-XH0" secondAttribute="top" id="iVa-AB-yg4"/>
+                            <constraint firstItem="cGv-0m-S7b" firstAttribute="leading" secondItem="TbQ-f2-XH0" secondAttribute="leading" id="ifa-Zq-bd1"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="titleLbl" destination="aqJ-Mv-iQ8" id="rp2-s8-sMe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wXP-fU-6FU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6001" y="-1250"/>
+        </scene>
         <!--Show ProductVC-->
         <scene sceneID="eAs-AF-B20">
             <objects>
