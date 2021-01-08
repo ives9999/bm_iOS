@@ -11,10 +11,13 @@ import UIKit
 class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
 
     var sections: [String]?
+    var section_keys: [[String]] = [[String]]()
     var rows:[[Dictionary<String, Any>]]?
     internal var myTablView: UITableView!
     var frameWidth: CGFloat!
     var frameHeight: CGFloat!
+    
+    var form: BaseForm!
     
     var page: Int = 1
     var perPage: Int = PERPAGE
@@ -56,6 +59,11 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
 
         beginRefresh()
         myTablView.addSubview(refreshControl)
+        
+        if form != nil {
+            sections = form.getSections()
+            section_keys = form.getSectionKeys()
+        }
     }
     
     func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
@@ -156,6 +164,23 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
                 getDataStart(page: page, perPage: PERPAGE)
             }
         }
+    }
+    
+    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
+        let key = section_keys[indexPath.section][indexPath.row]
+        return getFormItemFromKey(key)
+    }
+    
+    func getFormItemFromKey(_ key: String)-> FormItem? {
+        var res: FormItem? = nil
+        for formItem in form.formItems {
+            if key == formItem.name {
+                res = formItem
+                break
+            }
+        }
+        
+        return res
     }
     
     func setIden(item: String, titleField: String) {

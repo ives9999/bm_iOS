@@ -179,6 +179,8 @@
 		B3B7586F259E114A006ACC33 /* SuperProductPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7586E259E114A006ACC33 /* SuperProductPrice.swift */; };
 		B3B7587525A1B06C006ACC33 /* ShowProductVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7587425A1B06B006ACC33 /* ShowProductVC.swift */; };
 		B3B7587B25A5C1BE006ACC33 /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7587A25A5C1BB006ACC33 /* OrderVC.swift */; };
+		B3B7588B25A802A7006ACC33 /* OrderForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7588A25A802A7006ACC33 /* OrderForm.swift */; };
+		B3B7589125A816D2006ACC33 /* PlainFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7589025A816D2006ACC33 /* PlainFormItem.swift */; };
 		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
 		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
@@ -492,6 +494,8 @@
 		B3B7586E259E114A006ACC33 /* SuperProductPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperProductPrice.swift; sourceTree = "<group>"; };
 		B3B7587425A1B06B006ACC33 /* ShowProductVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowProductVC.swift; sourceTree = "<group>"; };
 		B3B7587A25A5C1BB006ACC33 /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
+		B3B7588A25A802A7006ACC33 /* OrderForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderForm.swift; sourceTree = "<group>"; };
+		B3B7589025A816D2006ACC33 /* PlainFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainFormItem.swift; sourceTree = "<group>"; };
 		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
@@ -819,6 +823,7 @@
 				B33C1ABC21BD300E006F2BEB /* TimeFormItem.swift */,
 				B33C1ABE21BD7F2C006F2BEB /* WeekdayFormItem.swift */,
 				B3B4EFBF25807CA800EE15D0 /* SexFormItem.swift */,
+				B3B7589025A816D2006ACC33 /* PlainFormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";
@@ -867,6 +872,7 @@
 				B358B0B1229D722300F1A4E6 /* CourseForm.swift */,
 				B3A253D7256A57B6004B8A03 /* StoreForm.swift */,
 				B3EA0B1C2579EAF800F9C4C3 /* RegisterForm.swift */,
+				B3B7588A25A802A7006ACC33 /* OrderForm.swift */,
 			);
 			path = Form;
 			sourceTree = "<group>";
@@ -1522,6 +1528,7 @@
 				B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */,
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
 				B30C95391FE765FB005F71EF /* Facebook.swift in Sources */,
+				B3B7588B25A802A7006ACC33 /* OrderForm.swift in Sources */,
 				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
@@ -1607,6 +1614,7 @@
 				B3A2542225723F5B004B8A03 /* SelectManagers.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 				B3B4EF5D257B614C00EE15D0 /* PrivacyFormItem.swift in Sources */,
+				B3B7589125A816D2006ACC33 /* PlainFormItem.swift in Sources */,
 				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
 				B3ED38F21FBAD4C30003F083 /* WeekdaysSelectVC.swift in Sources */,
 				B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */,

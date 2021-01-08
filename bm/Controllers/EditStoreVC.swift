@@ -20,10 +20,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
     
-    var store_token: String? = nil
-    var section_keys: [[String]] = [[String]]()
-    
-    fileprivate var form: StoreForm = StoreForm()
+    var store_token: String? = nil    
     
     var delegate: EditStoreDelegate?
     
@@ -33,6 +30,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
     
     override func viewDidLoad() {
         myTablView = tableView
+        form = StoreForm()
         super.viewDidLoad()
         
         if title == nil {
@@ -204,23 +202,6 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
             }
             
         }
-    }
-    
-    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
-        let key = section_keys[indexPath.section][indexPath.row]
-        return getFormItemFromKey(key)
-    }
-    
-    func getFormItemFromKey(_ key: String)-> FormItem? {
-        var res: FormItem? = nil
-        for formItem in form.formItems {
-            if key == formItem.name {
-                res = formItem
-                break
-            }
-        }
-        
-        return res
     }
     
     override func singleSelected(key: String, selected: String) {

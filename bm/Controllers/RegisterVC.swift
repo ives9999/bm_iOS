@@ -19,9 +19,6 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     
     //var sourceVC: MemberVC? = nil
     
-    var section_keys: [[String]] = [[String]]()
-    
-    fileprivate var form: RegisterForm!
     var agreePrivacy: Bool = true
     var sex: String = "M"
     var old_selected_city: String = ""
@@ -47,11 +44,11 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     
     override func viewDidLoad() {
         myTablView = tableView
+        form = RegisterForm()
         super.viewDidLoad()
 
         self.hideKeyboardWhenTappedAround()
         
-        form = RegisterForm()
         initData()
         
         imagePicker.delegate = self
@@ -63,9 +60,6 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         
         hideKeyboardWhenTappedAround()
         FormItemCellType.registerCell(for: tableView)
-        
-        sections = form.getSections()
-        section_keys = form.getSectionKeys()
     }
     
     func initData() {
@@ -200,23 +194,6 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 }
             }
         }
-    }
-    
-    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
-        let key = section_keys[indexPath.section][indexPath.row]
-        return getFormItemFromKey(key)
-    }
-    
-    func getFormItemFromKey(_ key: String)-> FormItem? {
-        var res: FormItem? = nil
-        for formItem in form.formItems {
-            if key == formItem.name {
-                res = formItem
-                break
-            }
-        }
-        
-        return res
     }
     
     override func singleSelected(key: String, selected: String) {

@@ -110,6 +110,22 @@ class BaseForm {
         
         return res
     }
+    
+    func removeItem(key: String) {
+        for i in 0..<formItems.count {
+            let _formItem = formItems[i]
+            if key == _formItem.name {
+                formItems.remove(at: i)
+                break
+            }
+        }
+    }
+    
+    func removeItems(keys: [String]) {
+        for key in keys {
+            removeItem(key: key)
+        }
+    }
 }
 
 
