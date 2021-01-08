@@ -13,6 +13,7 @@ class OrderForm: BaseForm {
     override func configureItems() {
         
         let section1 = SectionFormItem(title: "商品資料")
+        let productItem = PlainFormItem(name: "Product_Name", title: "商品")
         let colorItem = TextFieldFormItem(name: EMAIL_KEY, title: "EMail", placeholder: "請輸入EMail", isRequire: true)
         let sizeItem = PasswordFormItem(name: PASSWORD_KEY, title: "密碼", placeholder: "請輸入密碼", isRequire: true)
         let countItem = PasswordFormItem(name: PASSWORD_KEY, title: "密碼", placeholder: "請輸入密碼", isRequire: true)
@@ -37,7 +38,7 @@ class OrderForm: BaseForm {
         let section5 = SectionFormItem(title: "隱私權")
         let privacyItem = PrivacyFormItem()
 
-        formItems = [section1,emailItem,passwordItem,repasswordItem,
+        formItems = [section1,productItem,
                      section2,nameItem,nicknameItem,dobItem,sexItem,
                      section3,mobileItem,telItem,cityItem,areaItem,roadItem,
                      section4,fbItem,lineItem,

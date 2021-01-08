@@ -55,7 +55,7 @@ enum FormItemCellType {
         let sexNib = UINib(nibName: "SexCell", bundle: nil)
         tableView.register(sexNib, forCellReuseIdentifier: "sex")
         let plainNib = UINib(nibName: "PlainCell", bundle: nil)
-        tableView.register(plainNib, forCellReuseIdentifier: "sex")
+        tableView.register(plainNib, forCellReuseIdentifier: "plain")
     }
     
     func dequeueCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {

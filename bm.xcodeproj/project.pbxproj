@@ -132,6 +132,8 @@
 		B3756EF221BA7567006893E1 /* StatusSelectCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3756EF021BA7567006893E1 /* StatusSelectCell.swift */; };
 		B3756EF321BA7567006893E1 /* StatusSelectCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3756EF121BA7567006893E1 /* StatusSelectCell.xib */; };
 		B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37A13441FDAF3CB00413E64 /* SuperButton.swift */; };
+		B380FD4F25A827670081DBBA /* PlainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380FD4D25A827670081DBBA /* PlainCell.swift */; };
+		B380FD5025A827670081DBBA /* PlainCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B380FD4E25A827670081DBBA /* PlainCell.xib */; };
 		B3839EB822CF0261003F3620 /* ShowCourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3839EB722CF0261003F3620 /* ShowCourseVC.swift */; };
 		B385A07A22B9336C00BC3ADF /* CourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385A07922B9336C00BC3ADF /* CourseVC.swift */; };
 		B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385A07B22BCB28E00BC3ADF /* SelectVC.swift */; };
@@ -447,6 +449,8 @@
 		B3756EF021BA7567006893E1 /* StatusSelectCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusSelectCell.swift; sourceTree = "<group>"; };
 		B3756EF121BA7567006893E1 /* StatusSelectCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatusSelectCell.xib; sourceTree = "<group>"; };
 		B37A13441FDAF3CB00413E64 /* SuperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperButton.swift; sourceTree = "<group>"; };
+		B380FD4D25A827670081DBBA /* PlainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainCell.swift; sourceTree = "<group>"; };
+		B380FD4E25A827670081DBBA /* PlainCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlainCell.xib; sourceTree = "<group>"; };
 		B3839EB722CF0261003F3620 /* ShowCourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCourseVC.swift; sourceTree = "<group>"; };
 		B385A07922B9336C00BC3ADF /* CourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseVC.swift; sourceTree = "<group>"; };
 		B385A07B22BCB28E00BC3ADF /* SelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVC.swift; sourceTree = "<group>"; };
@@ -854,6 +858,8 @@
 				B3B4EFC525807EDD00EE15D0 /* SexCell.swift */,
 				B3B4EFC625807EDD00EE15D0 /* SexCell.xib */,
 				B31ADD982591FDF3003E86BD /* FormItemCell.swift */,
+				B380FD4D25A827670081DBBA /* PlainCell.swift */,
+				B380FD4E25A827670081DBBA /* PlainCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1287,6 +1293,7 @@
 				B3E88BEA2380F2D1001F015A /* CalendarSignupCell.xib in Resources */,
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
+				B380FD5025A827670081DBBA /* PlainCell.xib in Resources */,
 				B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */,
 				B3B4EF57257B59EA00EE15D0 /* PrivacyCell.xib in Resources */,
 				B3FB9B222407F5EC0051186F /* Team.storyboard in Resources */,
@@ -1470,6 +1477,7 @@
 				B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
 				B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */,
+				B380FD4F25A827670081DBBA /* PlainCell.swift in Sources */,
 				B358B0B2229D722300F1A4E6 /* CourseForm.swift in Sources */,
 				B3591B702164CC6100E0919C /* Degree.swift in Sources */,
 				B3E8C2A5220BFFE10008ED25 /* SuperWebView.swift in Sources */,

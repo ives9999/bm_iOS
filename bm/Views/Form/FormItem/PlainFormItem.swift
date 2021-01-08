@@ -10,8 +10,8 @@ import Foundation
 
 class PlainFormItem: FormItem {
     
-    required init(title: String) {
-        super.init(name: "section", title: title, placeholder: nil, value: nil)
+    required init(name: String, title: String) {
+        super.init(name: name, title: title, placeholder: nil, value: nil)
         uiProperties.cellType = .plain
     }
 }
