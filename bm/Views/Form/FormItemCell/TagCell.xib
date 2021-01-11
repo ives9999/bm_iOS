@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skP-Je-zcJ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="12" y="33.5" width="0.0" height="21"/>
+                        <rect key="frame" x="12" y="33.5" width="33" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -31,7 +31,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYA-Zw-Pns">
-                        <rect key="frame" x="20" y="8" width="307" height="72"/>
+                        <rect key="frame" x="53" y="8" width="274" height="72"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="72" id="H6X-wZ-bqv"/>
@@ -39,7 +39,6 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="MYA-Zw-Pns" firstAttribute="leading" secondItem="scy-iJ-eU5" secondAttribute="trailing" constant="8" id="0uI-jT-8Sr"/>
                     <constraint firstItem="skP-Je-zcJ" firstAttribute="leading" secondItem="scy-iJ-eU5" secondAttribute="trailing" id="RfM-b2-REX"/>
                     <constraint firstItem="MYA-Zw-Pns" firstAttribute="leading" secondItem="skP-Je-zcJ" secondAttribute="trailing" constant="8" id="WFJ-fy-6DW"/>
                     <constraint firstItem="MYA-Zw-Pns" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Wb1-vM-5S5"/>
