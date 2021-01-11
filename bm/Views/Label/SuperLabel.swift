@@ -43,6 +43,11 @@ class SuperLabel: UILabel {
     func setTextColor(_ color: UIColor) {
         self.textColor = color
     }
+    
+    func setBorder(width: CGFloat, color: UIColor) {
+        self.layer.borderWidth = width
+        self.layer.borderColor = color.cgColor
+    }
 }
 
 extension UILabel {

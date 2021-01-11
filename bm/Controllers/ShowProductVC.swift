@@ -64,6 +64,7 @@ class ShowProductVC: BaseViewController {
                 if (success) {
                     let superModel: SuperModel = ProductService.instance.superModel
                     self.superProduct = (superModel as! SuperProduct)
+                    //self.superProduct!.printRow()
                     
                     self.titleLbl.text = self.superProduct?.name
                     self.setFeatured()

@@ -39,7 +39,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="contentLbl" destination="mfe-nq-WeD" id="r8I-gb-ZIH"/>
+                <outlet property="detailLbl" destination="mfe-nq-WeD" id="fCN-ji-uXb"/>
                 <outlet property="titleLbl" destination="ObZ-Ot-OFf" id="F0C-Oq-IXJ"/>
             </connections>
             <point key="canvasLocation" x="-6" y="86"/>

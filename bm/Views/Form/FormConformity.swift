@@ -20,4 +20,5 @@ protocol ValueChangedDelegate {
     func textFieldTextChanged(formItem: FormItem, text: String)
     func sexChanged(sex: String)
     func privacyChecked(checked: Bool)
+    func tagChecked(checked: Bool, key: String, value: String)
 }

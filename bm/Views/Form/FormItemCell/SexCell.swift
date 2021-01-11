@@ -12,7 +12,7 @@ class SexCell: FormItemCell {
         
     var male: Checkbox!
     var female: Checkbox!
-    var myDelegate: BaseViewController?
+    //var myDelegate: BaseViewController?
     var checked: String = "M"
 
     override func awakeFromNib() {

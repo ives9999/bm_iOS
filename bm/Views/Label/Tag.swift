@@ -12,13 +12,16 @@ class Tag: SuperLabel {
     
     let topInset: CGFloat = 2
     let bottomInset: CGFloat = 2
-    let leftInset: CGFloat = 24
-    let rightInset: CGFloat = 24
+    let leftInset: CGFloat = 2
+    let rightInset: CGFloat = 2
+    let radius: CGFloat = 5
+    
+    var value: String = ""
+    var selected: Bool = false
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.commonInit1()
-        
     }
     
     override init(frame: CGRect) {
@@ -30,28 +33,52 @@ class Tag: SuperLabel {
         setColor(bk: bk, textColor: textColor)
     }
     func commonInit1(){
-        setTagStyle(bk: UIColor.clear)
+        setTagStyle(bk: UIColor(TAG_BACKGROUND))
+        setStyle()
+        isUserInteractionEnabled = true
     }
     func setTagStyle(bk: UIColor) {
         self.backgroundColor = bk
-        self.layer.cornerRadius = 10
+        setTextSize(16)
+        textColor = UIColor.white
+        self.layer.cornerRadius = radius
         self.layer.masksToBounds = true
     }
     func setColor(bk: UIColor, textColor: UIColor) {
         self.backgroundColor = bk
         setTextColor(textColor)
     }
-    override func drawText(in rect: CGRect) {
-        let insets: UIEdgeInsets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
-        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+    
+    func setStyle() {
+        if selected {
+            selectedStyle()
+        } else {
+            unSelectedStyle()
+        }
     }
     
-    override var intrinsicContentSize: CGSize {
-        var intrinsicSuperViewContentSize = super.intrinsicContentSize
-        intrinsicSuperViewContentSize.height += topInset + bottomInset
-        intrinsicSuperViewContentSize.width += leftInset + rightInset
-        return intrinsicSuperViewContentSize
+    func selectedStyle() {
+        layer.cornerRadius = radius
+        setBorder(width: 2.0, color:UIColor(MY_RED))
+        setTextColor(UIColor(MY_RED))
     }
+    
+    func unSelectedStyle() {
+        layer.cornerRadius = radius
+        setBorder(width: 0, color: UIColor.clear)
+        setTextColor(UIColor.black)
+    }
+//    override func drawText(in rect: CGRect) {
+//        let insets: UIEdgeInsets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+//        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
+//    }
+    
+//    override var intrinsicContentSize: CGSize {
+//        var intrinsicSuperViewContentSize = super.intrinsicContentSize
+//        intrinsicSuperViewContentSize.height += topInset + bottomInset
+//        intrinsicSuperViewContentSize.width += leftInset + rightInset
+//        return intrinsicSuperViewContentSize
+//    }
  
     /*
     // Only override draw() if you perform custom drawing.

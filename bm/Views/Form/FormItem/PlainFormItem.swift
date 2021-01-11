@@ -14,4 +14,12 @@ class PlainFormItem: FormItem {
         super.init(name: name, title: title, placeholder: nil, value: nil)
         uiProperties.cellType = .plain
     }
+    
+    override func make() {
+        if value != nil {
+            show = value!
+        } else {
+            show = ""
+        }
+    }
 }

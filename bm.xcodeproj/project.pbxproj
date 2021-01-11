@@ -183,6 +183,9 @@
 		B3B7587B25A5C1BE006ACC33 /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7587A25A5C1BB006ACC33 /* OrderVC.swift */; };
 		B3B7588B25A802A7006ACC33 /* OrderForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7588A25A802A7006ACC33 /* OrderForm.swift */; };
 		B3B7589125A816D2006ACC33 /* PlainFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7589025A816D2006ACC33 /* PlainFormItem.swift */; };
+		B3B7589B25A95EAD006ACC33 /* Color1FormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7589A25A95EAA006ACC33 /* Color1FormItem.swift */; };
+		B3B758A225A960B0006ACC33 /* Color1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758A025A960B0006ACC33 /* Color1Cell.swift */; };
+		B3B758A325A960B0006ACC33 /* Color1Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B758A125A960B0006ACC33 /* Color1Cell.xib */; };
 		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
 		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
@@ -500,6 +503,9 @@
 		B3B7587A25A5C1BB006ACC33 /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
 		B3B7588A25A802A7006ACC33 /* OrderForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderForm.swift; sourceTree = "<group>"; };
 		B3B7589025A816D2006ACC33 /* PlainFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlainFormItem.swift; sourceTree = "<group>"; };
+		B3B7589A25A95EAA006ACC33 /* Color1FormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color1FormItem.swift; sourceTree = "<group>"; };
+		B3B758A025A960B0006ACC33 /* Color1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color1Cell.swift; sourceTree = "<group>"; };
+		B3B758A125A960B0006ACC33 /* Color1Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Color1Cell.xib; sourceTree = "<group>"; };
 		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
@@ -828,6 +834,7 @@
 				B33C1ABE21BD7F2C006F2BEB /* WeekdayFormItem.swift */,
 				B3B4EFBF25807CA800EE15D0 /* SexFormItem.swift */,
 				B3B7589025A816D2006ACC33 /* PlainFormItem.swift */,
+				B3B7589A25A95EAA006ACC33 /* Color1FormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";
@@ -860,6 +867,8 @@
 				B31ADD982591FDF3003E86BD /* FormItemCell.swift */,
 				B380FD4D25A827670081DBBA /* PlainCell.swift */,
 				B380FD4E25A827670081DBBA /* PlainCell.xib */,
+				B3B758A025A960B0006ACC33 /* Color1Cell.swift */,
+				B3B758A125A960B0006ACC33 /* Color1Cell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1297,6 +1306,7 @@
 				B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */,
 				B3B4EF57257B59EA00EE15D0 /* PrivacyCell.xib in Resources */,
 				B3FB9B222407F5EC0051186F /* Team.storyboard in Resources */,
+				B3B758A325A960B0006ACC33 /* Color1Cell.xib in Resources */,
 				F94E7D271F83636A00F550FD /* Assets.xcassets in Resources */,
 				B34A210121B696AA00EE6E1C /* TextFieldCell.xib in Resources */,
 				B39453722343256C000DF98E /* SignupListCell.xib in Resources */,
@@ -1528,6 +1538,7 @@
 				B31106E9221E5285007A5D49 /* StaticBottomView.swift in Sources */,
 				B323391521B6CAE8003EB84D /* FormItemUIProperties.swift in Sources */,
 				B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */,
+				B3B7589B25A95EAD006ACC33 /* Color1FormItem.swift in Sources */,
 				B3310D8A22AA20A50062EF98 /* CourseKindFormItem.swift in Sources */,
 				B3308C4D1FD9575E006A83B6 /* Tag.swift in Sources */,
 				B3E8C2A22207E0DC0008ED25 /* CityButton.swift in Sources */,
@@ -1552,6 +1563,7 @@
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
 				B323390F21B6BBC7003EB84D /* BaseForm.swift in Sources */,
 				B3B75869259CBB27006ACC33 /* ProductService.swift in Sources */,
+				B3B758A225A960B0006ACC33 /* Color1Cell.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
 				B39453712343256C000DF98E /* SignupListCell.swift in Sources */,
 				B358B0B822A100EF00F1A4E6 /* SectionFormItem.swift in Sources */,

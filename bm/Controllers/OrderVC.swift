@@ -8,14 +8,14 @@
 
 import Foundation
 
-class OrderVC: MyTableVC {
-    
+class OrderVC: MyTableVC, ValueChangedDelegate {
+
     var superProduct: SuperProduct = SuperProduct()
     @IBOutlet weak var titleLbl: SuperLabel!
     
     override func viewDidLoad() {
         myTablView = tableView
-        form = RegisterForm()
+        form = OrderForm()
         super.viewDidLoad()
         //print(superProduct)
         self.hideKeyboardWhenTappedAround()
@@ -23,12 +23,46 @@ class OrderVC: MyTableVC {
         titleLbl.textColor = UIColor.black
         titleLbl.text = superProduct.name
 
-        //initData()
+        initData()
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableViewAutomaticDimension
         
         FormItemCellType.registerCell(for: tableView)
+    }
+    
+    func initData() {
+        
+        if let productNameItem = getFormItemFromKey("Product_Name") {
+            productNameItem.value = superProduct.name
+            productNameItem.make()
+        }
+        
+        if let nameItem = getFormItemFromKey(NAME_KEY) {
+            nameItem.value = Member.instance.name
+            nameItem.make()
+        }
+        
+        if let mobileItem = getFormItemFromKey(MOBILE_KEY) {
+            mobileItem.value = Member.instance.mobile
+            mobileItem.make()
+        }
+        
+        if let emailItem = getFormItemFromKey(EMAIL_KEY) {
+            emailItem.value = Member.instance.email
+            emailItem.make()
+        }
+        
+        if let addressItem = getFormItemFromKey(ADDRESS_KEY) {
+            //let address: String = Member.instance.ci
+            addressItem.value = Member.instance.road
+            addressItem.make()
+        }
+        
+        if let colorItem = getFormItemFromKey(COLOR_KEY) as? Color1FormItem {
+            colorItem.setColors(colors: superProduct.colors)
+            //print(superProduct.color)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -42,6 +76,7 @@ class OrderVC: MyTableVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let item = getFormItemFromIdx(indexPath)
+        let name = item?.name
         let cell: UITableViewCell
         if item != nil {
             if let cellType = item!.uiProperties.cellType {
@@ -55,12 +90,10 @@ class OrderVC: MyTableVC {
                 formUpdatableCell.update(with: item!)
             }
             
-            if item!.uiProperties.cellType == FormItemCellType.textField ||
-                item!.uiProperties.cellType == FormItemCellType.sex ||
-                item!.uiProperties.cellType == FormItemCellType.privacy
+            if item!.uiProperties.cellType == FormItemCellType.color1
             {
                 if let formCell = cell as? FormItemCell {
-                    //formCell.valueDelegate = self
+                    formCell.valueDelegate = self
                 }
             }
             
@@ -69,6 +102,24 @@ class OrderVC: MyTableVC {
         }
         
         return cell
+    }
+    
+    func tagChecked(checked: Bool, key: String, value: String) {
+//        print(checked)
+//        print(key)
+//        print(value)
+    }
+    
+    func textFieldTextChanged(formItem: FormItem, text: String) {
+        
+    }
+    
+    func sexChanged(sex: String) {
+        
+    }
+    
+    func privacyChecked(checked: Bool) {
+        
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
