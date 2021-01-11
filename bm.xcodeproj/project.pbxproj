@@ -186,6 +186,8 @@
 		B3B7589B25A95EAD006ACC33 /* Color1FormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B7589A25A95EAA006ACC33 /* Color1FormItem.swift */; };
 		B3B758A225A960B0006ACC33 /* Color1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758A025A960B0006ACC33 /* Color1Cell.swift */; };
 		B3B758A325A960B0006ACC33 /* Color1Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B758A125A960B0006ACC33 /* Color1Cell.xib */; };
+		B3B758AA25AC04AC006ACC33 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758A825AC04A9006ACC33 /* TagCell.swift */; };
+		B3B758AB25AC04AC006ACC33 /* TagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B758A925AC04A9006ACC33 /* TagCell.xib */; };
 		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
 		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
@@ -506,6 +508,8 @@
 		B3B7589A25A95EAA006ACC33 /* Color1FormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color1FormItem.swift; sourceTree = "<group>"; };
 		B3B758A025A960B0006ACC33 /* Color1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color1Cell.swift; sourceTree = "<group>"; };
 		B3B758A125A960B0006ACC33 /* Color1Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Color1Cell.xib; sourceTree = "<group>"; };
+		B3B758A825AC04A9006ACC33 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
+		B3B758A925AC04A9006ACC33 /* TagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCell.xib; sourceTree = "<group>"; };
 		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
@@ -869,6 +873,8 @@
 				B380FD4E25A827670081DBBA /* PlainCell.xib */,
 				B3B758A025A960B0006ACC33 /* Color1Cell.swift */,
 				B3B758A125A960B0006ACC33 /* Color1Cell.xib */,
+				B3B758A825AC04A9006ACC33 /* TagCell.swift */,
+				B3B758A925AC04A9006ACC33 /* TagCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1317,6 +1323,7 @@
 				B316FED72112F13600FB990C /* CollectionCell.xib in Resources */,
 				F94E7D251F83636A00F550FD /* Main.storyboard in Resources */,
 				B3B4EF71257C8BFB00EE15D0 /* PasswordCell.xib in Resources */,
+				B3B758AB25AC04AC006ACC33 /* TagCell.xib in Resources */,
 				B3FB9B252407F7280051186F /* Course.storyboard in Resources */,
 				B358B0C022A168C700F1A4E6 /* SingleSelectCell.xib in Resources */,
 				B35C4F4D2196F5E500F8AEB2 /* EditCell.xib in Resources */,
@@ -1614,6 +1621,7 @@
 				B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */,
 				B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */,
 				B3B4EFC025807CA800EE15D0 /* SexFormItem.swift in Sources */,
+				B3B758AA25AC04AC006ACC33 /* TagCell.swift in Sources */,
 				B36CBD5120DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift in Sources */,
 				B33C1AC521C3F848006F2BEB /* DrawLine.swift in Sources */,
 				B31ADD992591FDF3003E86BD /* FormItemCell.swift in Sources */,
