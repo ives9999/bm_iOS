@@ -188,6 +188,14 @@
 		B3B758A325A960B0006ACC33 /* Color1Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B758A125A960B0006ACC33 /* Color1Cell.xib */; };
 		B3B758AA25AC04AC006ACC33 /* TagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758A825AC04A9006ACC33 /* TagCell.swift */; };
 		B3B758AB25AC04AC006ACC33 /* TagCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B758A925AC04A9006ACC33 /* TagCell.xib */; };
+		B3B758B125AC5051006ACC33 /* TagFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758B025AC5051006ACC33 /* TagFormItem.swift */; };
+		B3B758B725AC5FDA006ACC33 /* ClothesSizeFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758B625AC5FD9006ACC33 /* ClothesSizeFormItem.swift */; };
+		B3B758BE25AC6134006ACC33 /* ClothesSizeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758BC25AC6134006ACC33 /* ClothesSizeCell.swift */; };
+		B3B758BF25AC6134006ACC33 /* ClothesSizeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B758BD25AC6134006ACC33 /* ClothesSizeCell.xib */; };
+		B3B758C625AD414E006ACC33 /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758C425AD414D006ACC33 /* NumberCell.swift */; };
+		B3B758C725AD414E006ACC33 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B758C525AD414D006ACC33 /* NumberCell.xib */; };
+		B3B758CD25AD4215006ACC33 /* NumberFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758CC25AD4215006ACC33 /* NumberFormItem.swift */; };
+		B3B758D325AD55E7006ACC33 /* GMStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758D225AD55E7006ACC33 /* GMStepper.swift */; };
 		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
 		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
@@ -510,6 +518,14 @@
 		B3B758A125A960B0006ACC33 /* Color1Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Color1Cell.xib; sourceTree = "<group>"; };
 		B3B758A825AC04A9006ACC33 /* TagCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagCell.swift; sourceTree = "<group>"; };
 		B3B758A925AC04A9006ACC33 /* TagCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TagCell.xib; sourceTree = "<group>"; };
+		B3B758B025AC5051006ACC33 /* TagFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagFormItem.swift; sourceTree = "<group>"; };
+		B3B758B625AC5FD9006ACC33 /* ClothesSizeFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesSizeFormItem.swift; sourceTree = "<group>"; };
+		B3B758BC25AC6134006ACC33 /* ClothesSizeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClothesSizeCell.swift; sourceTree = "<group>"; };
+		B3B758BD25AC6134006ACC33 /* ClothesSizeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClothesSizeCell.xib; sourceTree = "<group>"; };
+		B3B758C425AD414D006ACC33 /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
+		B3B758C525AD414D006ACC33 /* NumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberCell.xib; sourceTree = "<group>"; };
+		B3B758CC25AD4215006ACC33 /* NumberFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormItem.swift; sourceTree = "<group>"; };
+		B3B758D225AD55E7006ACC33 /* GMStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMStepper.swift; sourceTree = "<group>"; };
 		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
@@ -767,6 +783,7 @@
 				B3649413207DCA790030CF44 /* SCLAlertView.swift */,
 				B3649415207DCB280030CF44 /* SCLExtensions.swift */,
 				B33C1AC421C3F848006F2BEB /* DrawLine.swift */,
+				B3B758D225AD55E7006ACC33 /* GMStepper.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -839,6 +856,9 @@
 				B3B4EFBF25807CA800EE15D0 /* SexFormItem.swift */,
 				B3B7589025A816D2006ACC33 /* PlainFormItem.swift */,
 				B3B7589A25A95EAA006ACC33 /* Color1FormItem.swift */,
+				B3B758B025AC5051006ACC33 /* TagFormItem.swift */,
+				B3B758B625AC5FD9006ACC33 /* ClothesSizeFormItem.swift */,
+				B3B758CC25AD4215006ACC33 /* NumberFormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";
@@ -875,6 +895,10 @@
 				B3B758A125A960B0006ACC33 /* Color1Cell.xib */,
 				B3B758A825AC04A9006ACC33 /* TagCell.swift */,
 				B3B758A925AC04A9006ACC33 /* TagCell.xib */,
+				B3B758BC25AC6134006ACC33 /* ClothesSizeCell.swift */,
+				B3B758BD25AC6134006ACC33 /* ClothesSizeCell.xib */,
+				B3B758C425AD414D006ACC33 /* NumberCell.swift */,
+				B3B758C525AD414D006ACC33 /* NumberCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1300,6 +1324,7 @@
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
 				B3FB9B1E2407C9CB0051186F /* Member.storyboard in Resources */,
 				B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */,
+				B3B758C725AD414E006ACC33 /* NumberCell.xib in Resources */,
 				B3CB73DA23D410CD00892F75 /* OneLineCell.xib in Resources */,
 				B3FB9B272407F7EE0051186F /* TempPlay.storyboard in Resources */,
 				B3310D9222ACA57A0062EF98 /* ContentCell.xib in Resources */,
@@ -1318,6 +1343,7 @@
 				B39453722343256C000DF98E /* SignupListCell.xib in Resources */,
 				B3756EF321BA7567006893E1 /* StatusSelectCell.xib in Resources */,
 				B3756EE321B95974006893E1 /* ColorCell.xib in Resources */,
+				B3B758BF25AC6134006ACC33 /* ClothesSizeCell.xib in Resources */,
 				B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */,
 				B3B4EFC825807EDD00EE15D0 /* SexCell.xib in Resources */,
 				B316FED72112F13600FB990C /* CollectionCell.xib in Resources */,
@@ -1458,8 +1484,10 @@
 				B36CBD5320DE00FE00E52B9C /* TempPlayDatePlayer.swift in Sources */,
 				B36E333A2542B996001336C2 /* StoreVC.swift in Sources */,
 				F94FF4351FB4322C00D167B6 /* EditVC.swift in Sources */,
+				B3B758B125AC5051006ACC33 /* TagFormItem.swift in Sources */,
 				B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */,
 				B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */,
+				B3B758C625AD414E006ACC33 /* NumberCell.swift in Sources */,
 				B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */,
 				B3A253D8256A57B6004B8A03 /* StoreForm.swift in Sources */,
 				B33C1ABD21BD300E006F2BEB /* TimeFormItem.swift in Sources */,
@@ -1542,6 +1570,8 @@
 				B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */,
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
 				B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */,
+				B3B758D325AD55E7006ACC33 /* GMStepper.swift in Sources */,
+				B3B758CD25AD4215006ACC33 /* NumberFormItem.swift in Sources */,
 				B31106E9221E5285007A5D49 /* StaticBottomView.swift in Sources */,
 				B323391521B6CAE8003EB84D /* FormItemUIProperties.swift in Sources */,
 				B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */,
@@ -1606,6 +1636,7 @@
 				B3B4EF77257C8ECF00EE15D0 /* PasswordFormItem.swift in Sources */,
 				B3B7587B25A5C1BE006ACC33 /* OrderVC.swift in Sources */,
 				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
+				B3B758B725AC5FDA006ACC33 /* ClothesSizeFormItem.swift in Sources */,
 				B323391321B6C947003EB84D /* FormItemCellType.swift in Sources */,
 				B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */,
 				F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */,
@@ -1615,6 +1646,7 @@
 				B3310D9422ACBCC30062EF98 /* ContentEditVC.swift in Sources */,
 				B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */,
 				B3310D9722AD54000062EF98 /* SuperTextView.swift in Sources */,
+				B3B758BE25AC6134006ACC33 /* ClothesSizeCell.swift in Sources */,
 				B3E88BE92380F2D1001F015A /* CalendarSignupCell.swift in Sources */,
 				B33C1AC121BE635E006F2BEB /* ContentFormItem.swift in Sources */,
 				B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */,

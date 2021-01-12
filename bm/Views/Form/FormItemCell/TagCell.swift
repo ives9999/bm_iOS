@@ -20,7 +20,8 @@ class TagCell: FormItemCell {
     let column: Int = 3
     var row: Int = 0
     
-    var tags: [Tag] = [Tag]()
+    var tagLabels: [Tag] = [Tag]()
+    var tagArrays: [String: String] = [String: String]()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,39 +34,34 @@ class TagCell: FormItemCell {
         requiredImageView.isHidden = !formItem.isRequired
         titleLbl!.text = self.formItem?.title
         
-        let _formItem: Color1FormItem = formItem as! Color1FormItem
-        var colors: [String: String]?
-        if _formItem.colors != nil {
-            colors = _formItem.colors
-            var count = colors!.count
-            var res = count.quotientAndRemainder(dividingBy: column)
-            row = (res.remainder > 0) ? res.quotient + 1 : res.quotient
+        var count = tagArrays.count
+        var res = count.quotientAndRemainder(dividingBy: column)
+        row = (res.remainder > 0) ? res.quotient + 1 : res.quotient
+        
+        count = 0
+        for (key, value) in tagArrays {
+            let tag: Tag = Tag()
+            containerView.addSubview(tag)
+            tag.key = key
+            tag.value = value
+            tag.text = value
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+            tag.addGestureRecognizer(gestureRecognizer)
+            tagLabels.append(tag)
             
-            count = 0
-            for (key, value) in colors! {
-                let tag: Tag = Tag()
-                containerView.addSubview(tag)
-                tag.key = key
-                tag.value = value
-                tag.text = value
-                let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-                tag.addGestureRecognizer(gestureRecognizer)
-                tags.append(tag)
-                
-                //tag.backgroundColor = UIColor.red
-                res = count.quotientAndRemainder(dividingBy: column)
-                //print(res)
-                setMargin(block: tag, row_count: res.quotient + 1, column_count: res.remainder + 1)
-                count = count + 1
-            }
-            
-            var height: CGFloat = 70
-            if count > 0 {
-                let marginCount: Int = (row == 1) ? 2 : row*2-1
-                height = CGFloat(row)*labelHeight + CGFloat(marginCount)*vericalMergin
-            }
-            containViewHeight.constant = height
+            //tag.backgroundColor = UIColor.red
+            res = count.quotientAndRemainder(dividingBy: column)
+            //print(res)
+            setMargin(block: tag, row_count: res.quotient + 1, column_count: res.remainder + 1)
+            count = count + 1
         }
+        
+        var height: CGFloat = 70
+        if count > 0 {
+            let marginCount: Int = (row == 1) ? 2 : row*2-1
+            height = CGFloat(row)*labelHeight + CGFloat(marginCount)*vericalMergin
+        }
+        containViewHeight.constant = height
     }
     
     //    (1, 1)  (1, 2)  (1, 3)
@@ -101,16 +97,16 @@ class TagCell: FormItemCell {
 //        print(tag.key)
 //        print(tag.value)
         if valueDelegate != nil {
-            valueDelegate!.tagChecked(checked: tag.selected, key: tag.key!, value: tag.value)
+            valueDelegate!.tagChecked(checked: tag.selected, name: self.formItem!.name!, key: tag.key!, value: tag.value)
         }
     }
     
     func clearOtherTagSelected(selectedTag: Tag) {
         if selectedTag.selected {
-            for tag in tags {
-                if tag != selectedTag {
-                    tag.selected = false
-                    tag.unSelectedStyle()
+            for tagLabel in tagLabels {
+                if tagLabel != selectedTag {
+                    tagLabel.selected = false
+                    tagLabel.unSelectedStyle()
                 }
             }
         }

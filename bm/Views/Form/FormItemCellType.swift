@@ -23,10 +23,14 @@ enum FormItemCellType {
     case password
     case sex
     case plain
+    case tag
     case color1
+    case clothesSize
+    case number
     case section
     
     static func registerCell(for tableView: UITableView) {
+        
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
         tableView.register(textFieldNib, forCellReuseIdentifier: "textField")
         
@@ -57,8 +61,18 @@ enum FormItemCellType {
         tableView.register(sexNib, forCellReuseIdentifier: "sex")
         let plainNib = UINib(nibName: "PlainCell", bundle: nil)
         tableView.register(plainNib, forCellReuseIdentifier: "plain")
+        
+        let tagNib = UINib(nibName: "TagCell", bundle: nil)
+        tableView.register(tagNib, forCellReuseIdentifier: "tag")
+        
         let color1Nib = UINib(nibName: "Color1Cell", bundle: nil)
         tableView.register(color1Nib, forCellReuseIdentifier: "color1")
+        
+        let clothesSizeNib = UINib(nibName: "ClothesSizeCell", bundle: nil)
+        tableView.register(clothesSizeNib, forCellReuseIdentifier: "clothesSize")
+        
+        let numberNib = UINib(nibName: "NumberCell", bundle: nil)
+        tableView.register(numberNib, forCellReuseIdentifier: "number")
     }
     
     func dequeueCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
@@ -91,8 +105,14 @@ enum FormItemCellType {
             cell = tableView.dequeueReusableCell(withIdentifier: "sex", for: indexPath)
         case .plain:
             cell = tableView.dequeueReusableCell(withIdentifier: "plain", for: indexPath)
+        case .tag:
+            cell = tableView.dequeueReusableCell(withIdentifier: "tag", for: indexPath)
         case .color1:
             cell = tableView.dequeueReusableCell(withIdentifier: "color1", for: indexPath)
+        case .clothesSize:
+            cell = tableView.dequeueReusableCell(withIdentifier: "clothesSize", for: indexPath)
+        case .number:
+            cell = tableView.dequeueReusableCell(withIdentifier: "number", for: indexPath)
         case .section:
             cell = UITableViewCell()
         }

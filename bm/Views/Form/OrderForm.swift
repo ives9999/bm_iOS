@@ -12,13 +12,13 @@ class OrderForm: BaseForm {
     
     override func configureItems() {
         
-        let section1 = SectionFormItem(title: "商品資料")
+        let section1 = SectionFormItem(title: "商品名稱")
         let productItem = PlainFormItem(name: "Product_Name", title: "商品")
         
-        let section2 = SectionFormItem(title: "個人資料")
-        let colorItem = Color1FormItem(name: COLOR_KEY, title: "顏色", isRequire: true)
-        let sizeItem = PasswordFormItem(name: PASSWORD_KEY, title: "密碼", placeholder: "請輸入密碼", isRequire: true)
-        let countItem = PasswordFormItem(name: PASSWORD_KEY, title: "密碼", placeholder: "請輸入密碼", isRequire: true)
+        let section2 = SectionFormItem(title: "商品選項")
+        let colorItem = Color1FormItem(isRequire: true)
+        let clothesSizeItem = ClothesSizeFormItem(isRequire: true)
+        let numberItem = NumberFormItem(isRequire: true)
 
         let section3 = SectionFormItem(title: "寄件資料")
         let nameItem = PlainFormItem(name: NAME_KEY, title: "姓名")
@@ -27,7 +27,7 @@ class OrderForm: BaseForm {
         let addressItem = PlainFormItem(name: ADDRESS_KEY, title: "住址")
 
         formItems = [section1,productItem,
-                     section2,colorItem,sizeItem,countItem,
+                     section2,colorItem,clothesSizeItem,numberItem,
                      section3,nameItem,mobileItem,emailItem,addressItem
         ]
     }

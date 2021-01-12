@@ -60,8 +60,17 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
         
         if let colorItem = getFormItemFromKey(COLOR_KEY) as? Color1FormItem {
-            colorItem.setColors(colors: superProduct.colors)
+            colorItem.setTags(tags: superProduct.colors)
             //print(superProduct.color)
+        }
+        
+        if let clothesSizeItem = getFormItemFromKey(CLOTHES_SIZE_KEY) as? ClothesSizeFormItem {
+            
+            var dicts: [String: String] = [String: String]()
+            for size in superProduct.sizes {
+                dicts[size] = size
+            }
+            clothesSizeItem.setTags(tags: dicts)
         }
     }
     
@@ -90,8 +99,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 formUpdatableCell.update(with: item!)
             }
             
-            if item!.uiProperties.cellType == FormItemCellType.color1
-            {
+            if item!.uiProperties.cellType == FormItemCellType.tag {
                 if let formCell = cell as? FormItemCell {
                     formCell.valueDelegate = self
                 }
@@ -104,23 +112,24 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         return cell
     }
     
-    func tagChecked(checked: Bool, key: String, value: String) {
+    func tagChecked(checked: Bool, name: String, key: String, value: String) {
 //        print(checked)
 //        print(key)
 //        print(value)
+        let item = getFormItemFromKey(name)
+        item?.value = value
     }
     
-    func textFieldTextChanged(formItem: FormItem, text: String) {
-        
+    func stepperValueChanged(number: Int, name: String) {
+        let item = getFormItemFromKey(name)
+        item?.value = String(number)
     }
     
-    func sexChanged(sex: String) {
-        
-    }
+    func textFieldTextChanged(formItem: FormItem, text: String) {}
     
-    func privacyChecked(checked: Bool) {
-        
-    }
+    func sexChanged(sex: String) {}
+    
+    func privacyChecked(checked: Bool) {}
     
     @IBAction func submitBtnPressed(_ sender: Any) {
         //print("purchase")

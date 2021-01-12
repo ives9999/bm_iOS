@@ -466,7 +466,8 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         //print(checked)
     }
     
-    func tagChecked(checked: Bool, key: String, value: String) {}
+    func tagChecked(checked: Bool, name: String, key: String, value: String) {}
+    func stepperValueChanged(number: Int, name: String) {}
     
     
 //    func backToMenu() {
