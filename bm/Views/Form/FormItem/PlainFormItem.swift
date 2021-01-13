@@ -10,9 +10,12 @@ import Foundation
 
 class PlainFormItem: FormItem {
     
-    required init(name: String, title: String) {
+    var unit: String! = nil
+    
+    required init(name: String, title: String, unit: String? = nil) {
         super.init(name: name, title: title, placeholder: nil, value: nil)
         uiProperties.cellType = .plain
+        self.unit = unit
     }
     
     override func make() {
@@ -20,6 +23,9 @@ class PlainFormItem: FormItem {
             show = value!
         } else {
             show = ""
+        }
+        if unit != nil {
+            show = show + " " + unit
         }
     }
 }

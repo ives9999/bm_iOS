@@ -12,6 +12,11 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 
     var superProduct: SuperProduct = SuperProduct()
     @IBOutlet weak var titleLbl: SuperLabel!
+    @IBOutlet weak var submitButton: SubmitButton!
+    
+    var sub_total: Int = 0
+    var shippingFee: Int = 0
+    var total: Int = 0
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -19,6 +24,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         super.viewDidLoad()
         //print(superProduct)
         self.hideKeyboardWhenTappedAround()
+        submitButton.setTitle("訂購")
         
         titleLbl.textColor = UIColor.black
         titleLbl.text = superProduct.name
@@ -72,6 +78,14 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             }
             clothesSizeItem.setTags(tags: dicts)
         }
+        
+        if getFormItemFromKey(SUB_TOTAL_KEY) != nil {
+            updateSubTotal(price: superProduct.prices.price_member)
+        }
+        
+        if getFormItemFromKey(SHIPPING_FEE_KEY) != nil {
+            updateShippingFee(price: superProduct.prices.shipping_fee)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -99,7 +113,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 formUpdatableCell.update(with: item!)
             }
             
-            if item!.uiProperties.cellType == FormItemCellType.tag {
+            if item!.uiProperties.cellType == FormItemCellType.tag || item!.uiProperties.cellType == FormItemCellType.number {
                 if let formCell = cell as? FormItemCell {
                     formCell.valueDelegate = self
                 }
@@ -110,6 +124,33 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
         
         return cell
+    }
+    
+    func updateSubTotal(price: Int) {
+        if let priceItem = getFormItemFromKey(SUB_TOTAL_KEY) {
+            sub_total = price
+            priceItem.value = String(price)
+            priceItem.make()
+            updateTotal()
+        }
+    }
+    
+    func updateShippingFee(price: Int) {
+        if let priceItem = getFormItemFromKey(SHIPPING_FEE_KEY) {
+            shippingFee = price
+            priceItem.value = String(price)
+            priceItem.make()
+            updateTotal()
+        }
+    }
+    
+    func updateTotal() {
+        if let priceItem = getFormItemFromKey(TOTAL_KEY) {
+            total = sub_total + shippingFee
+            priceItem.value = String(total)
+            priceItem.make()
+            tableView.reloadData()
+        }
     }
     
     func tagChecked(checked: Bool, name: String, key: String, value: String) {
@@ -123,6 +164,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     func stepperValueChanged(number: Int, name: String) {
         let item = getFormItemFromKey(name)
         item?.value = String(number)
+        
+        let price: Int = number * Int(superProduct.prices.price_dummy)
+        updateSubTotal(price: price)
     }
     
     func textFieldTextChanged(formItem: FormItem, text: String) {}

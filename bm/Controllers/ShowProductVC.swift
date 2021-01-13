@@ -35,7 +35,7 @@ class ShowProductVC: BaseViewController {
         super.viewDidLoad()
 
         //print(superStore)
-        imageDataLbl.text = "商品圖片"
+        imageDataLbl.text = "更多圖片"
         contentLbl.text = "詳細介紹"
         submitButton.setTitle("購買")
         

@@ -10,11 +10,16 @@ import Foundation
 
 class NumberFormItem: FormItem {
     
-    required init(name: String = NUMBER_KEY, title: String = "數量", isRequire: Bool = false) {
+    var min: Int = 0
+    var max: Int = 5
+    
+    required init(name: String = NUMBER_KEY, title: String = "數量", isRequire: Bool = false, min: Int = 1, max: Int = 5) {
         super.init(name: name, title: title, placeholder: nil, value: nil, isRequired: isRequire)
         //segue = TO_SINGLE_SELECT
         uiProperties.cellType = .number
         self.isRequired = isRequire
+        self.min = min
+        self.max = max
         
         reset()
     }

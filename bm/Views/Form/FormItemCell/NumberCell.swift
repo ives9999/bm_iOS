@@ -19,8 +19,13 @@ class NumberCell: FormItemCell {
     
     override func update(with formItem: FormItem) {
         
+        let _formItem: NumberFormItem = formItem as! NumberFormItem
+        self.formItem = _formItem
         titleLbl?.text = formItem.title
         requiredImageView.isHidden = !formItem.isRequired
+        
+        stepper.minimumValue = Double(_formItem.min)
+        stepper.maximumValue = Double(_formItem.max)
     }
     
     @objc func stepperValueChanged(stepper: GMStepper) {
