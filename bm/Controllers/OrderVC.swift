@@ -20,7 +20,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     override func viewDidLoad() {
         myTablView = tableView
-        form = OrderForm()
+        form = OrderForm(type: self.superProduct.type)
+
         super.viewDidLoad()
         //print(superProduct)
         self.hideKeyboardWhenTappedAround()

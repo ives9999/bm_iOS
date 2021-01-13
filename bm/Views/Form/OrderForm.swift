@@ -12,6 +12,11 @@ class OrderForm: BaseForm {
     
     var type: String = "clothes"
     
+    init(type: String) {
+        self.type = type
+        super.init()
+    }
+    
     override func configureItems() {
         
         let section1 = SectionFormItem(title: "商品名稱")
