@@ -92,7 +92,7 @@ class TagCell: FormItemCell {
     @objc func handleTap(sender: UITapGestureRecognizer) {
         let tag = sender.view as! Tag
         tag.selected = !tag.selected
-        tag.setStyle()
+        tag.setSelectedStyle()
         clearOtherTagSelected(selectedTag: tag)
 //        print(tag.key)
 //        print(tag.value)

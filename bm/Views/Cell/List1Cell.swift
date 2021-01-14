@@ -157,7 +157,7 @@ class List1Cell: UITableViewCell {
         
         titleLbl.text = row.name
         cityBtn.setTitle("購買")
-        telLbl.text = "價格： \(row.prices.price_member) 元"
+        telLbl.text = "價格： \(row.prices[0].price_member) 元"
         business_timeLbl.visibility = .gone
         addressLbl.visibility = .gone
         

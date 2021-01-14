@@ -18,6 +18,15 @@ class Tag: SuperLabel {
     
     var value: String = ""
     var selected: Bool = false
+    
+    var unSelected_background = UIColor(TAG_UNSELECTED_BACKGROUND)
+    var unSelected_textColor = UIColor(TAG_UNSELECTED_TEXTCOLOR)
+    var unSelected_borderColor = UIColor.clear
+    var selected_background = UIColor(TAG_SELECTED_BACKGROUND)
+    var selected_textColor = UIColor(TAG_SELECTED_TEXTCOLOR)
+    var selected_borderColor = UIColor(TAG_SELECTED_BOLDCOLOR)
+    var border_width: CGFloat = 2
+    var font_size: CGFloat = 16
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -28,28 +37,32 @@ class Tag: SuperLabel {
         super.init(frame: frame)
         self.commonInit1()
     }
-    convenience init(frame: CGRect, bk: UIColor, textColor: UIColor) {
-        self.init(frame: frame)
-        setColor(bk: bk, textColor: textColor)
-    }
+    
+//    convenience init(frame: CGRect, bk: UIColor, textColor: UIColor) {
+//        self.init(frame: frame)
+//        setColor(bk: bk, textColor: textColor)
+//    }
+    
     func commonInit1(){
-        setTagStyle(bk: UIColor(TAG_BACKGROUND))
-        setStyle()
+        setTextSize(font_size)
+        self.layer.masksToBounds = true
+        unSelectedStyle()
+        setSelectedStyle()
         isUserInteractionEnabled = true
     }
-    func setTagStyle(bk: UIColor) {
-        self.backgroundColor = bk
-        setTextSize(16)
-        textColor = UIColor.white
-        self.layer.cornerRadius = radius
-        self.layer.masksToBounds = true
-    }
-    func setColor(bk: UIColor, textColor: UIColor) {
-        self.backgroundColor = bk
-        setTextColor(textColor)
-    }
     
-    func setStyle() {
+//    func setTagStyle() {
+//        setTextSize(font_size)
+//        self.layer.masksToBounds = true
+//        unSelectedStyle()
+//    }
+    
+//    func setColor(bk: UIColor, textColor: UIColor) {
+//        self.backgroundColor = bk
+//        setTextColor(textColor)
+//    }
+    
+    func setSelectedStyle() {
         if selected {
             selectedStyle()
         } else {
@@ -59,14 +72,16 @@ class Tag: SuperLabel {
     
     func selectedStyle() {
         layer.cornerRadius = radius
-        setBorder(width: 2.0, color:UIColor(MY_RED))
-        setTextColor(UIColor(MY_RED))
+        self.backgroundColor = self.selected_background
+        setBorder(width: border_width, color:self.selected_borderColor)
+        setTextColor(self.selected_textColor)
     }
     
     func unSelectedStyle() {
         layer.cornerRadius = radius
-        setBorder(width: 0, color: UIColor.clear)
-        setTextColor(UIColor.black)
+        self.backgroundColor = self.unSelected_background
+        setBorder(width: border_width, color: self.unSelected_borderColor)
+        setTextColor(self.unSelected_textColor)
     }
 //    override func drawText(in rect: CGRect) {
 //        let insets: UIEdgeInsets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)

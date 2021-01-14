@@ -61,7 +61,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
         
         if let addressItem = getFormItemFromKey(ADDRESS_KEY) {
-            //let address: String = Member.instance.ci
             addressItem.value = Member.instance.road
             addressItem.make()
         }
@@ -81,11 +80,11 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
         
         if getFormItemFromKey(SUB_TOTAL_KEY) != nil {
-            updateSubTotal(price: superProduct.prices.price_member)
+            updateSubTotal(price: superProduct.prices[0].price_member)
         }
         
         if getFormItemFromKey(SHIPPING_FEE_KEY) != nil {
-            updateShippingFee(price: superProduct.prices.shipping_fee)
+            updateShippingFee(price: superProduct.prices[0].shipping_fee)
         }
     }
     
@@ -100,7 +99,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let item = getFormItemFromIdx(indexPath)
-        let name = item?.name
+        //let name = item?.name
         let cell: UITableViewCell
         if item != nil {
             if let cellType = item!.uiProperties.cellType {
@@ -166,8 +165,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         let item = getFormItemFromKey(name)
         item?.value = String(number)
         
-        let price: Int = number * Int(superProduct.prices.price_dummy)
-        updateSubTotal(price: price)
+        //let price: Int = number * Int(superProduct.prices.price_dummy)
+        //updateSubTotal(price: price)
     }
     
     func textFieldTextChanged(formItem: FormItem, text: String) {}
