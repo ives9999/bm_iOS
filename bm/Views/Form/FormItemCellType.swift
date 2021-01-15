@@ -27,6 +27,7 @@ enum FormItemCellType {
     case color1
     case clothesSize
     case number
+    case weight
     case section
     
     static func registerCell(for tableView: UITableView) {
@@ -73,6 +74,9 @@ enum FormItemCellType {
         
         let numberNib = UINib(nibName: "NumberCell", bundle: nil)
         tableView.register(numberNib, forCellReuseIdentifier: "number")
+        
+        let weightNib = UINib(nibName: "WeightCell", bundle: nil)
+        tableView.register(weightNib, forCellReuseIdentifier: WEIGHT_KEY)
     }
     
     func dequeueCell(for tableView: UITableView, at indexPath: IndexPath) -> UITableViewCell {
@@ -113,6 +117,8 @@ enum FormItemCellType {
             cell = tableView.dequeueReusableCell(withIdentifier: "clothesSize", for: indexPath)
         case .number:
             cell = tableView.dequeueReusableCell(withIdentifier: "number", for: indexPath)
+        case .weight:
+            cell = tableView.dequeueReusableCell(withIdentifier: WEIGHT_KEY, for: indexPath)
         case .section:
             cell = UITableViewCell()
         }

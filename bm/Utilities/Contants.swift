@@ -333,6 +333,7 @@ let UPDATED_AT_KEY = "updated_at"
 let VIMEO_KEY = "vimeo"
 let WEBSITE_KEY = "website"
 let WEEKDAY_KEY: String = "weekday"
+let WEIGHT_KEY: String = "weight"
 let YOUTUBE_KEY = "youtube"
 let ZIP_KEY = "zip"
 

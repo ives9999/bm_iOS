@@ -16,6 +16,7 @@ protocol List1CellDelegate {
     func cellRefresh(indexPath: IndexPath?)
     func cellEdit(indexPath: IndexPath?)
     func cellDelete(indexPath: IndexPath?)
+    func cellCity(indexPath: IndexPath?)
 }
 
 class List1Cell: UITableViewCell {
@@ -102,6 +103,7 @@ class List1Cell: UITableViewCell {
         telLbl.text = row.tel_text
         business_timeLbl.text = row.open_time_text + "~" + row.close_time_text
         
+        cityBtn.indexPath = indexPath
         mapIcon.indexPath = indexPath
         telIcon.indexPath = indexPath
         mobileIcon.indexPath = indexPath
@@ -158,6 +160,9 @@ class List1Cell: UITableViewCell {
         titleLbl.text = row.name
         cityBtn.setTitle("購買")
         telLbl.text = "價格： \(row.prices[0].price_member) 元"
+        
+        cityBtn.indexPath = indexPath
+        
         business_timeLbl.visibility = .gone
         addressLbl.visibility = .gone
         
@@ -224,6 +229,15 @@ class List1Cell: UITableViewCell {
             constraint.constant = w
         }
         icon.visibility = .gone
+    }
+    
+    @IBAction func cityBtnPressed(sender: UIButton) {
+        let _sender = sender as! SuperButton
+        var indexPath: IndexPath?
+        if _sender.indexPath != nil {
+            indexPath = _sender.indexPath!
+            cellDelegate?.cellCity(indexPath: indexPath)
+        }
     }
     
     @IBAction func mapBtnPressed(sender: UIButton) {

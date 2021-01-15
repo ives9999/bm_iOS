@@ -264,6 +264,10 @@ class StoreVC: ListVC, List1CellDelegate {
         }
     }
     
+    func cellCity(indexPath: IndexPath?) {
+        
+    }
+    
     private func _delete(token: String) {
         Global.instance.addSpinner(superView: self.view)
         dataService.delete(token: token, type: "store") { (success) in

@@ -22,6 +22,8 @@ class SuperProduct: SuperModel {
     @objc dynamic var weight: String = ""
     @objc dynamic var shipping: String = ""
     @objc dynamic var gateway: String = ""
+    @objc dynamic var order_min: Int = 1
+    @objc dynamic var order_max: Int = 1
     
     @objc dynamic var content: String = ""
     @objc dynamic var alias: String = ""

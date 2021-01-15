@@ -29,6 +29,9 @@
                             <constraint firstAttribute="width" constant="80" id="dDX-rv-uWs"/>
                         </constraints>
                         <state key="normal" title="Button"/>
+                        <connections>
+                            <action selector="cityBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="aPb-vS-GJX"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m5k-3I-1fW" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="122" y="38.5" width="42" height="21"/>

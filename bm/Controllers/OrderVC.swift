@@ -65,6 +65,11 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             addressItem.make()
         }
         
+        if let numberItem = getFormItemFromKey(NUMBER_KEY) as? NumberFormItem {
+            numberItem.min = superProduct.order_min
+            numberItem.max = superProduct.order_max
+        }
+        
         if let colorItem = getFormItemFromKey(COLOR_KEY) as? Color1FormItem {
             colorItem.setTags(tags: superProduct.colors)
             //print(superProduct.color)
@@ -77,6 +82,15 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 dicts[size] = size
             }
             clothesSizeItem.setTags(tags: dicts)
+        }
+        
+        if let weightItem = getFormItemFromKey(WEIGHT_KEY) as? WeightFormItem {
+            
+            var dicts: [String: String] = [String: String]()
+            for size in superProduct.weights {
+                dicts[size] = size
+            }
+            weightItem.setTags(tags: dicts)
         }
         
         if getFormItemFromKey(SUB_TOTAL_KEY) != nil {
@@ -113,7 +127,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 formUpdatableCell.update(with: item!)
             }
             
-            if item!.uiProperties.cellType == FormItemCellType.tag || item!.uiProperties.cellType == FormItemCellType.number {
+            if item!.uiProperties.cellType == FormItemCellType.tag || item!.uiProperties.cellType == FormItemCellType.number || item!.uiProperties.cellType == FormItemCellType.weight {
                 if let formCell = cell as? FormItemCell {
                     formCell.valueDelegate = self
                 }
@@ -164,6 +178,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     func stepperValueChanged(number: Int, name: String) {
         let item = getFormItemFromKey(name)
         item?.value = String(number)
+        updateSubTotal(price: number * superProduct.prices[0].price_member)
         
         //let price: Int = number * Int(superProduct.prices.price_dummy)
         //updateSubTotal(price: price)

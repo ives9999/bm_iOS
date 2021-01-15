@@ -196,6 +196,9 @@
 		B3B758C725AD414E006ACC33 /* NumberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B758C525AD414D006ACC33 /* NumberCell.xib */; };
 		B3B758CD25AD4215006ACC33 /* NumberFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758CC25AD4215006ACC33 /* NumberFormItem.swift */; };
 		B3B758D325AD55E7006ACC33 /* GMStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758D225AD55E7006ACC33 /* GMStepper.swift */; };
+		B3B758E525B0759B006ACC33 /* WeightFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758E425B07599006ACC33 /* WeightFormItem.swift */; };
+		B3B758EC25B0763A006ACC33 /* WeightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758EA25B0763A006ACC33 /* WeightCell.swift */; };
+		B3B758ED25B0763A006ACC33 /* WeightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B758EB25B0763A006ACC33 /* WeightCell.xib */; };
 		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
 		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
@@ -526,6 +529,9 @@
 		B3B758C525AD414D006ACC33 /* NumberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberCell.xib; sourceTree = "<group>"; };
 		B3B758CC25AD4215006ACC33 /* NumberFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberFormItem.swift; sourceTree = "<group>"; };
 		B3B758D225AD55E7006ACC33 /* GMStepper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GMStepper.swift; sourceTree = "<group>"; };
+		B3B758E425B07599006ACC33 /* WeightFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightFormItem.swift; sourceTree = "<group>"; };
+		B3B758EA25B0763A006ACC33 /* WeightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCell.swift; sourceTree = "<group>"; };
+		B3B758EB25B0763A006ACC33 /* WeightCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeightCell.xib; sourceTree = "<group>"; };
 		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
@@ -859,6 +865,7 @@
 				B3B758B025AC5051006ACC33 /* TagFormItem.swift */,
 				B3B758B625AC5FD9006ACC33 /* ClothesSizeFormItem.swift */,
 				B3B758CC25AD4215006ACC33 /* NumberFormItem.swift */,
+				B3B758E425B07599006ACC33 /* WeightFormItem.swift */,
 			);
 			path = FormItem;
 			sourceTree = "<group>";
@@ -899,6 +906,8 @@
 				B3B758BD25AC6134006ACC33 /* ClothesSizeCell.xib */,
 				B3B758C425AD414D006ACC33 /* NumberCell.swift */,
 				B3B758C525AD414D006ACC33 /* NumberCell.xib */,
+				B3B758EA25B0763A006ACC33 /* WeightCell.swift */,
+				B3B758EB25B0763A006ACC33 /* WeightCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1328,6 +1337,7 @@
 				B3CB73DA23D410CD00892F75 /* OneLineCell.xib in Resources */,
 				B3FB9B272407F7EE0051186F /* TempPlay.storyboard in Resources */,
 				B3310D9222ACA57A0062EF98 /* ContentCell.xib in Resources */,
+				B3B758ED25B0763A006ACC33 /* WeightCell.xib in Resources */,
 				B3FB9B202407F3750051186F /* More.storyboard in Resources */,
 				B3A9844D255918CF00DCD0F6 /* List1Cell.xib in Resources */,
 				B3E88BEA2380F2D1001F015A /* CalendarSignupCell.xib in Resources */,
@@ -1506,10 +1516,12 @@
 				B3310D8E22ABB4820062EF98 /* MultiSelectVC.swift in Sources */,
 				B3200045254304D20061442D /* SuperStore.swift in Sources */,
 				B306FE9A21F0916D00403FE2 /* DateFormItem.swift in Sources */,
+				B3B758EC25B0763A006ACC33 /* WeightCell.swift in Sources */,
 				B3B4B61022CA247500245CC8 /* SomeCell.swift in Sources */,
 				B33C1ABB21BD2DED006F2BEB /* ColorFormItem.swift in Sources */,
 				B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */,
 				B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */,
+				B3B758E525B0759B006ACC33 /* WeightFormItem.swift in Sources */,
 				B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */,
 				B3FAA0AA20CAC995008F2294 /* TempPlaySignupOneCell.swift in Sources */,
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,

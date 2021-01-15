@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProductVC: ListVC {
+class ProductVC: ListVC, List1CellDelegate {
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入商品名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""],
@@ -102,7 +102,7 @@ class ProductVC: ListVC {
         if tableView == self.tableView {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? List1Cell {
                 
-                //cell.cellDelegate = self
+                cell.cellDelegate = self
                 let row = lists1[indexPath.row] as! SuperProduct
                 //row.printRow()
                 
@@ -146,5 +146,23 @@ class ProductVC: ListVC {
             }
             //performSegue(withIdentifier: segue, sender: indexPath)
         }
+    }
+    
+    func cellShowMap(indexPath: IndexPath?) {}
+    
+    func cellTel(indexPath: IndexPath?) {}
+    
+    func cellMobile(indexPath: IndexPath?) {}
+    
+    func cellRefresh(indexPath: IndexPath?) {}
+    
+    func cellEdit(indexPath: IndexPath?) {}
+    
+    func cellDelete(indexPath: IndexPath?) {}
+    
+    func cellCity(indexPath: IndexPath?) {
+        //print(indexPath!.row)
+        let superProduct = superProducts!.rows[indexPath!.row]
+        toOrder(superProduct: superProduct)
     }
 }

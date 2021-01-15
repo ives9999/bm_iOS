@@ -51,7 +51,11 @@ class OrderForm: BaseForm {
             let clothesSizeItem = ClothesSizeFormItem(isRequire: true)
             let numberItem = NumberFormItem(isRequire: true, max: 1)
             formItems.append(contentsOf: [colorItem, clothesSizeItem, numberItem])
-            
+        } else if type == "racket" {
+            let colorItem = Color1FormItem(isRequire: true)
+            let weightItem = WeightFormItem(isRequire: true)
+            let numberItem = NumberFormItem(isRequire: true, max: 5)
+            formItems.append(contentsOf: [colorItem, weightItem, numberItem])
         }
         
         return formItems
