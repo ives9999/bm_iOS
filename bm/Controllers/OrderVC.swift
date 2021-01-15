@@ -93,6 +93,20 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             weightItem.setTags(tags: dicts)
         }
         
+        if superProduct.type == "mejump" {
+            if let typeItem = getFormItemFromKey("type") as? TagFormItem {
+                var dicts: [String: String] = [String: String]()
+                for price in superProduct.prices {
+                    //price.printRow()
+                    let type: String = price.price_title
+                    let typePrice: String = String(price.price_member)
+                    let str: String = type + " " + typePrice
+                    dicts[String(price.id)] = str
+                }
+                typeItem.setTags(tags: dicts)
+            }
+        }
+        
         if getFormItemFromKey(SUB_TOTAL_KEY) != nil {
             updateSubTotal(price: superProduct.prices[0].price_member)
         }

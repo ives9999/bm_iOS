@@ -35,8 +35,13 @@ class TagCell: FormItemCell {
         titleLbl!.text = self.formItem?.title
         
         var count = tagArrays.count
+        if count == 0 {
+            if let _formItem: TagFormItem = formItem as? TagFormItem {
+                tagArrays = _formItem.tags!
+            }
+        }
         var res = count.quotientAndRemainder(dividingBy: column)
-        row = (res.remainder > 0) ? res.quotient + 1 : res.quotient
+        row = (res.remainder >= 0) ? res.quotient + 1 : res.quotient
         
         count = 0
         for (key, value) in tagArrays {
