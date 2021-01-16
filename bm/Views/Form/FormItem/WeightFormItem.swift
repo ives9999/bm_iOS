@@ -10,12 +10,9 @@ import Foundation
 
 class WeightFormItem: TagFormItem {
     
-    required init(name: String = WEIGHT_KEY, title: String = "重量", isRequire: Bool = false) {
+    required init(name: String = WEIGHT_KEY, title: String = "重量", isRequire: Bool = false, selected_idxs: [Int] = [0]) {
         super.init(name: name, title: title, isRequire: false)
         uiProperties.cellType = .weight
-        self.isRequired = isRequire
-        
-        reset()
     }
     
 }

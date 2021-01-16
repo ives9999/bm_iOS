@@ -21,7 +21,7 @@ class TagCell: FormItemCell {
     var row: Int = 0
     
     var tagLabels: [Tag] = [Tag]()
-    var tagArrays: [String: String] = [String: String]()
+    var tagDicts: [[String: String]] = [[String: String]]()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,31 +34,46 @@ class TagCell: FormItemCell {
         requiredImageView.isHidden = !formItem.isRequired
         titleLbl!.text = self.formItem?.title
         
-        var count = tagArrays.count
-        if count == 0 {
-            if let _formItem: TagFormItem = formItem as? TagFormItem {
-                tagArrays = _formItem.tags!
+        var count = tagDicts.count
+        if let _formItem: TagFormItem = formItem as? TagFormItem {
+            
+            if count == 0 {
+                tagDicts = _formItem.tags!
             }
         }
         var res = count.quotientAndRemainder(dividingBy: column)
         row = (res.remainder >= 0) ? res.quotient + 1 : res.quotient
         
         count = 0
-        for (key, value) in tagArrays {
-            let tag: Tag = Tag()
-            containerView.addSubview(tag)
-            tag.key = key
-            tag.value = value
-            tag.text = value
-            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-            tag.addGestureRecognizer(gestureRecognizer)
-            tagLabels.append(tag)
-            
-            //tag.backgroundColor = UIColor.red
-            res = count.quotientAndRemainder(dividingBy: column)
-            //print(res)
-            setMargin(block: tag, row_count: res.quotient + 1, column_count: res.remainder + 1)
-            count = count + 1
+        for tagDict in tagDicts {
+            for (key, value) in tagDict {
+                let tag: Tag = Tag()
+                containerView.addSubview(tag)
+                tag.tag = count
+                tag.key = key
+                tag.value = value
+                tag.text = value
+                
+                if let _formItem: TagFormItem = formItem as? TagFormItem {
+                    for idx in _formItem.selected_idxs {
+                        if count == idx {
+                            tag.selected = true
+                            tag.setSelectedStyle()
+                        }
+                    }
+                }
+                
+                let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+                tag.addGestureRecognizer(gestureRecognizer)
+                tagLabels.append(tag)
+                
+                //tag.backgroundColor = UIColor.red
+                res = count.quotientAndRemainder(dividingBy: column)
+                //print(res)
+                setMargin(block: tag, row_count: res.quotient + 1, column_count: res.remainder + 1)
+                count = count + 1
+                break
+            }
         }
         
         var height: CGFloat = 70
@@ -96,6 +111,11 @@ class TagCell: FormItemCell {
         
     @objc func handleTap(sender: UITapGestureRecognizer) {
         let tag = sender.view as! Tag
+        
+        let _formItem: TagFormItem = formItem as! TagFormItem
+        _formItem.selected_idxs = [tag.tag]
+        _formItem.value = tag.value
+        
         tag.selected = !tag.selected
         tag.setSelectedStyle()
         clearOtherTagSelected(selectedTag: tag)

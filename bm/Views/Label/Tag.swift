@@ -73,7 +73,7 @@ class Tag: SuperLabel {
     func selectedStyle() {
         layer.cornerRadius = radius
         self.backgroundColor = self.selected_background
-        setBorder(width: border_width, color:self.selected_borderColor)
+        setBorder(width: border_width, color: self.selected_borderColor)
         setTextColor(self.selected_textColor)
     }
     

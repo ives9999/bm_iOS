@@ -18,7 +18,7 @@ class Color1Cell: TagCell {
         
         let _formItem: Color1FormItem = formItem as! Color1FormItem
         if _formItem.tags != nil {
-            self.tagArrays = _formItem.tags!
+            self.tagDicts = _formItem.tags!
             super.update(with: formItem)
         }
     }

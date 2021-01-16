@@ -57,7 +57,7 @@ class OrderForm: BaseForm {
             let numberItem = NumberFormItem(isRequire: true, max: 5)
             formItems.append(contentsOf: [colorItem, weightItem, numberItem])
         } else if type == "mejump" {
-            let typeItem = TagFormItem(name: "type", title: "種類", isRequire: true)
+            let typeItem = TagFormItem(name: "type", title: "種類", isRequire: true, selected_idxs: [0])
             let numberItem = NumberFormItem(title: "組數", isRequire: true, max: 5)
             formItems.append(contentsOf: [typeItem, numberItem])
         }

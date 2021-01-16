@@ -1112,8 +1112,7 @@ extension String {
         }
     }
     
-    func toDate(format: String = "yyyy-MM-dd") -> Date
-    {
+    func toDate(format: String = "yyyy-MM-dd") -> Date {
         //Create Date Formatter
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "zh_TW")
@@ -1127,8 +1126,7 @@ extension String {
         return dateFromString
     }
     
-    func toDateTime(format: String = "yyyy-MM-dd HH:mm:ss") -> Date
-    {
+    func toDateTime(format: String = "yyyy-MM-dd HH:mm:ss") -> Date {
         //Create Date Formatter
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "zh_TW")
@@ -1164,6 +1162,7 @@ extension String {
         let arr: [String] = self.components(separatedBy: " ")
         return arr[0]
     }
+    
     func makeCall() {
         let formatedNumber = self.components(separatedBy: CharacterSet.decimalDigits.inverted).joined(separator: "")
         let phoneUrl: String = "tel://\(formatedNumber)"
@@ -1241,6 +1240,7 @@ extension String {
     var isNumber: Bool {
         return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
     }
+    
     var isDate: Bool {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd"
@@ -1251,6 +1251,7 @@ extension String {
             return false
         }
     }
+    
     var isDateTime: Bool {
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd HH:mm:ss"
@@ -1261,10 +1262,12 @@ extension String {
             return false
         }
     }
+    
     func indexDistance(of character: Character) -> Int? {
         guard let index = index(of: character) else { return nil }
         return distance(from: startIndex, to: index)
     }
+    
     func substring(from idx: Int) -> String {
         if self.count > idx {
             let startIndex = self.index(self.startIndex, offsetBy: idx)
@@ -1274,6 +1277,7 @@ extension String {
             return self
         }
     }
+    
     func substring(from range: NSRange) -> String {
         let lowBound = range.lowerBound
         let upperBound = range.upperBound
@@ -1283,12 +1287,14 @@ extension String {
         let substring = self[start ..< end]
         return String(substring)
     }
+    
     func substring(from range: CountableRange<Int>) -> String {
         let start = index(startIndex, offsetBy: range.lowerBound)
         let end = index(endIndex, offsetBy: range.upperBound)
         let substring = self[start ..< end]
         return String(substring)
     }
+    
     func reMatches(for pattern: String, str _str: String?=nil) -> [String] {
         var str = _str
         if (str == nil) {
@@ -1318,6 +1324,7 @@ extension String {
             return []
         }
     }
+    
     func mobileShow() -> String {
         var res = self
         res = res.replacingOccurrences(of: " ", with: "")
@@ -1331,6 +1338,7 @@ extension String {
         }
         return mobile
     }
+    
     func telShow() -> String {
         var res = self
         res = res.replacingOccurrences(of: " ", with: "")
@@ -1344,6 +1352,7 @@ extension String {
         }
         return tel
     }
+    
     func telOrMobileShow()-> String {
         if (self.hasPrefix("09")) {
             return self.mobileShow()
@@ -1353,6 +1362,7 @@ extension String {
         }
         return self
     }
+    
     func startWith(_ prefix: String)-> Bool {
         return hasPrefix(prefix)
     }
@@ -1363,8 +1373,7 @@ extension String {
         return size.height
     }
     
-    func replace(target: String, withString: String) -> String
-    {
+    func replace(target: String, withString: String) -> String {
         return self.replacingOccurrences(of: target, with: withString, options: NSString.CompareOptions.literal, range: nil)
     }
     
@@ -1441,6 +1450,7 @@ extension UIView {
         
         return constraints
     }
+    
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while parentResponder != nil {

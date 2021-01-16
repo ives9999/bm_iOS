@@ -30,6 +30,7 @@ class NumberCell: FormItemCell {
     
     @objc func stepperValueChanged(stepper: GMStepper) {
         //print(stepper.value)
+        formItem?.value = String(Int(stepper.value))
         if valueDelegate != nil {
             valueDelegate?.stepperValueChanged(number: Int(stepper.value), name: self.formItem!.name!)
         }

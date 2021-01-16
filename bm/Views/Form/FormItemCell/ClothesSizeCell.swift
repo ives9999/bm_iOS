@@ -18,7 +18,7 @@ class ClothesSizeCell: TagCell {
         
         let _formItem: ClothesSizeFormItem = formItem as! ClothesSizeFormItem
         if _formItem.tags != nil {
-            self.tagArrays = _formItem.tags!
+            self.tagDicts = _formItem.tags!
             super.update(with: formItem)
         }
     }

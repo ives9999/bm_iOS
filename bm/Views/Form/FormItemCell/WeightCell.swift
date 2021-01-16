@@ -18,7 +18,7 @@ class WeightCell: TagCell {
         
         let _formItem: WeightFormItem = formItem as! WeightFormItem
         if _formItem.tags != nil {
-            self.tagArrays = _formItem.tags!
+            self.tagDicts = _formItem.tags!
             super.update(with: formItem)
         }
     }

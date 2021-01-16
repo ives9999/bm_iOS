@@ -18,6 +18,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     var shippingFee: Int = 0
     var total: Int = 0
     
+    var selected_number: Int = 1
+    var selected_price: Int = 0
+    var selected_idx: Int = 0
+    
     override func viewDidLoad() {
         myTablView = tableView
         form = OrderForm(type: self.superProduct.type)
@@ -71,48 +75,68 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
         
         if let colorItem = getFormItemFromKey(COLOR_KEY) as? Color1FormItem {
-            colorItem.setTags(tags: superProduct.colors)
+            var res: [[String: String]] = [[String: String]]()
+            for (key, value) in superProduct.colors {
+                let dict: [String: String] = [key: value]
+                res.append(dict)
+            }
+            colorItem.setTags(tags: res)
             //print(superProduct.color)
         }
         
         if let clothesSizeItem = getFormItemFromKey(CLOTHES_SIZE_KEY) as? ClothesSizeFormItem {
             
-            var dicts: [String: String] = [String: String]()
+            var res: [[String: String]] = [[String: String]]()
+            
             for size in superProduct.sizes {
-                dicts[size] = size
+                let dict: [String: String] = [size: size]
+                res.append(dict)
             }
-            clothesSizeItem.setTags(tags: dicts)
+            clothesSizeItem.setTags(tags: res)
         }
         
         if let weightItem = getFormItemFromKey(WEIGHT_KEY) as? WeightFormItem {
             
-            var dicts: [String: String] = [String: String]()
+            var res: [[String: String]] = [[String: String]]()
             for size in superProduct.weights {
-                dicts[size] = size
+                let dict: [String: String] = [size: size]
+                res.append(dict)
             }
-            weightItem.setTags(tags: dicts)
+            weightItem.setTags(tags: res)
         }
         
         if superProduct.type == "mejump" {
             if let typeItem = getFormItemFromKey("type") as? TagFormItem {
-                var dicts: [String: String] = [String: String]()
+                var res: [[String: String]] = [[String: String]]()
                 for price in superProduct.prices {
                     //price.printRow()
                     let type: String = price.price_title
                     let typePrice: String = String(price.price_member)
                     let str: String = type + " " + typePrice
-                    dicts[String(price.id)] = str
+                    let dict: [String: String] = [String(price.id): str]
+                    res.append(dict)
                 }
-                typeItem.setTags(tags: dicts)
+//                let sortedByKeys = dicts.keys.sorted(by: <)
+//                var _dicts: [String: String] = [String: String]()
+//                for sortedBykey in sortedByKeys {
+//                    _dicts[sortedBykey] = dicts[sortedBykey]
+//                }
+                typeItem.setTags(tags: res)
             }
         }
         
+        if getFormItemFromKey(NUMBER_KEY) != nil {
+            selected_number = superProduct.order_min
+        }
+        
         if getFormItemFromKey(SUB_TOTAL_KEY) != nil {
-            updateSubTotal(price: superProduct.prices[0].price_member)
+            selected_price = superProduct.prices[selected_idx].price_member
+            updateSubTotal()
         }
         
         if getFormItemFromKey(SHIPPING_FEE_KEY) != nil {
-            updateShippingFee(price: superProduct.prices[0].shipping_fee)
+            shippingFee = superProduct.prices[selected_idx].shipping_fee
+            updateShippingFee()
         }
     }
     
@@ -154,19 +178,21 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         return cell
     }
     
-    func updateSubTotal(price: Int) {
+    func updateSubTotal() {
         if let priceItem = getFormItemFromKey(SUB_TOTAL_KEY) {
-            sub_total = price
-            priceItem.value = String(price)
+            sub_total = selected_price * selected_number
+            priceItem.value = String(sub_total)
             priceItem.make()
-            updateTotal()
+            updateShippingFee()
+            //updateTotal()
         }
     }
     
-    func updateShippingFee(price: Int) {
+    func updateShippingFee() {
+        shippingFee = superProduct.prices[selected_idx].shipping_fee
         if let priceItem = getFormItemFromKey(SHIPPING_FEE_KEY) {
-            shippingFee = price
-            priceItem.value = String(price)
+            //shippingFee = price
+            priceItem.value = String(shippingFee)
             priceItem.make()
             updateTotal()
         }
@@ -185,14 +211,38 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        print(checked)
 //        print(key)
 //        print(value)
-        let item = getFormItemFromKey(name)
-        item?.value = value
+        //let item = getFormItemFromKey(name)
+        if name == "type" {
+            let id: Int = Int(key)!
+            //print(id)
+            var idx: Int = 0
+            for price in superProduct.prices {
+                if price.id == id {
+                    selected_price = price.price_member
+                    self.selected_idx = idx
+                    updateSubTotal()
+                    break
+                }
+                idx = idx + 1
+            }
+        }
+        
+        //move to cell to implement
+        //item?.value = value
     }
     
     func stepperValueChanged(number: Int, name: String) {
-        let item = getFormItemFromKey(name)
-        item?.value = String(number)
-        updateSubTotal(price: number * superProduct.prices[0].price_member)
+        //move to cell to implement
+//        let item = getFormItemFromKey(name)
+//        item?.value = String(number)
+//        var idx: Int = 0
+//
+//        if let _formItem: TagFormItem = getFormItemFromKey("type") as? TagFormItem {
+//            idx = _formItem.selected_idxs[0]
+//        }
+        
+        selected_number = number
+        updateSubTotal()
         
         //let price: Int = number * Int(superProduct.prices.price_dummy)
         //updateSubTotal(price: price)
