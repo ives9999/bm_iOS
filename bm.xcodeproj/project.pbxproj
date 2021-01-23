@@ -199,6 +199,7 @@
 		B3B758E525B0759B006ACC33 /* WeightFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758E425B07599006ACC33 /* WeightFormItem.swift */; };
 		B3B758EC25B0763A006ACC33 /* WeightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758EA25B0763A006ACC33 /* WeightCell.swift */; };
 		B3B758ED25B0763A006ACC33 /* WeightCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B758EB25B0763A006ACC33 /* WeightCell.xib */; };
+		B3B758F325BB08CD006ACC33 /* OrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758F225BB08CB006ACC33 /* OrderService.swift */; };
 		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
 		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
@@ -532,6 +533,7 @@
 		B3B758E425B07599006ACC33 /* WeightFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightFormItem.swift; sourceTree = "<group>"; };
 		B3B758EA25B0763A006ACC33 /* WeightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCell.swift; sourceTree = "<group>"; };
 		B3B758EB25B0763A006ACC33 /* WeightCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeightCell.xib; sourceTree = "<group>"; };
+		B3B758F225BB08CB006ACC33 /* OrderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderService.swift; sourceTree = "<group>"; };
 		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
@@ -807,6 +809,7 @@
 				B306FEA921F7446F00403FE2 /* TimetableService.swift */,
 				B320004E254305410061442D /* StoreService.swift */,
 				B3B75868259CBB27006ACC33 /* ProductService.swift */,
+				B3B758F225BB08CB006ACC33 /* OrderService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1508,6 +1511,7 @@
 				B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */,
 				B3BBDD95240FE88D00EB9856 /* SuperSignupCancel.swift in Sources */,
 				B3A9843125552DBB00DCD0F6 /* ManagerStoreVC.swift in Sources */,
+				B3B758F325BB08CD006ACC33 /* OrderService.swift in Sources */,
 				B31ADD9325905387003E86BD /* Zone.swift in Sources */,
 				B3A9844C255918CF00DCD0F6 /* List1Cell.swift in Sources */,
 				B3A253DE256A9E43004B8A03 /* CityFormItem.swift in Sources */,

@@ -27,7 +27,7 @@ class OrderForm: BaseForm {
         formItems.append(contentsOf: items)
 
         let section3 = SectionFormItem(title: "款項")
-        let subTotalItem = PlainFormItem(name: SUB_TOTAL_KEY, title: "小計", unit: "元", thousand_mark: true)
+        let subTotalItem = PlainFormItem(name: SUBTOTAL_KEY, title: "小計", unit: "元", thousand_mark: true)
         let shippingFeeItem = PlainFormItem(name: SHIPPING_FEE_KEY, title: "運費", unit: "元", thousand_mark: true)
         let totalItem = PlainFormItem(name: TOTAL_KEY, title: "總計", unit: "元", thousand_mark: true)
         

@@ -70,7 +70,7 @@ class SuperModel: NSObject, JSONParsable {
                     let parsedArray: [SuperProductPrice] = parse(property: property, array: arrayValue) as! [SuperProductPrice]
                     setValue(parsedArray, forKey: key)
                 } else if
-                    key == "images" || key == "sizes" || key == "weights" || key == "shippings" || key == "gateways" {
+                    key == "images" || key == "sizes" || key == "weights" || key == "shippings" || key == "gateways" || key == "colors" {
                     let parsedArray = setArray(value, on: property, forKey: key)
                     setValue(parsedArray, forKey: key)
                 }  else {
@@ -93,14 +93,15 @@ class SuperModel: NSObject, JSONParsable {
                 } else if key == "nextCourseTime" {
                     
                     setValue(value, on: property, forKey: key)
-                } else if key == "colors" {
-                    let parsed: [String: Any] = setDictionary(value, on: property, forKey: key)
-                    var result: [String: String] = [String: String]()
-                    for (key, value) in parsed {
-                        result[key] = value as? String
-                    }
-                    setValue(result, forKey: key)
                 }
+//                else if key == "colors" {
+//                    let parsed: [String: Any] = setDictionary(value, on: property, forKey: key)
+//                    var result: [String: String] = [String: String]()
+//                    for (key, value) in parsed {
+//                        result[key] = value as? String
+//                    }
+//                    setValue(result, forKey: key)
+//                }
                 
 //                var a = [String: Any]()
 //                for (key1, value1) in dictValue! {

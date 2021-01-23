@@ -76,8 +76,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         if let colorItem = getFormItemFromKey(COLOR_KEY) as? Color1FormItem {
             var res: [[String: String]] = [[String: String]]()
-            for (key, value) in superProduct.colors {
-                let dict: [String: String] = [key: value]
+            for color in superProduct.colors {
+                let dict: [String: String] = [color: color]
                 res.append(dict)
             }
             colorItem.setTags(tags: res)
@@ -129,7 +129,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             selected_number = superProduct.order_min
         }
         
-        if getFormItemFromKey(SUB_TOTAL_KEY) != nil {
+        if getFormItemFromKey(SUBTOTAL_KEY) != nil {
             selected_price = superProduct.prices[selected_idx].price_member
             updateSubTotal()
         }
@@ -179,7 +179,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     }
     
     func updateSubTotal() {
-        if let priceItem = getFormItemFromKey(SUB_TOTAL_KEY) {
+        if let priceItem = getFormItemFromKey(SUBTOTAL_KEY) {
             sub_total = selected_price * selected_number
             priceItem.value = String(sub_total)
             priceItem.make()
@@ -256,7 +256,42 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     @IBAction func submitBtnPressed(_ sender: Any) {
         //print("purchase")
-        //toOrder(superProduct: superProduct!)
+        var params: [String: String] = [String: String]()
+        params["product_id"] = String(superProduct.id)
+        params["type"] = superProduct.type
+        params["member_id"] = String(Member.instance.id)
+        params["order_name"] = Member.instance.name
+        params["order_tel"] = Member.instance.mobile
+        params["order_email"] = Member.instance.email
+        
+        let city_name = Global.instance.zoneIDToName(Member.instance.city_id)
+        let area_name = Global.instance.zoneIDToName(Member.instance.area_id)
+        params["order_city"] = city_name
+        params["order_area"] = area_name
+        params["order_road"] = Member.instance.road
+        
+        let numberFormItem = getFormItemFromKey(NUMBER_KEY)
+        params["quantity"] = numberFormItem?.value
+        
+        let totalFormItem = getFormItemFromKey(TOTAL_KEY)
+        params["amount"] = totalFormItem?.value
+        
+        let shippingFeeFormItem = getFormItemFromKey(SHIPPING_FEE_KEY)
+        params["shipping_fee"] = shippingFeeFormItem?.value
+        
+        if let item = getFormItemFromKey(COLOR_KEY) {
+            params["color"] = item.value
+        }
+        
+        if let item = getFormItemFromKey(CLOTHES_SIZE_KEY) {
+            params["size"] = item.value
+        }
+        
+        if let item = getFormItemFromKey(WEIGHT_KEY) {
+            params["weight"] = item.value
+        }
+        
+        print(params)
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {

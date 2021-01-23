@@ -43,7 +43,7 @@ class SuperProduct: SuperModel {
     @objc dynamic var images: [String] = [String]()
     
     @objc dynamic var prices: [SuperProductPrice] = [SuperProductPrice]()
-    @objc dynamic var colors: [String: String] = [String: String]()
+    @objc dynamic var colors: [String] = [String]()
     @objc dynamic var sizes: [String] = [String]()
     @objc dynamic var weights: [String] = [String]()
     @objc dynamic var shippings: [String] = [String]()
