@@ -257,8 +257,12 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     @IBAction func submitBtnPressed(_ sender: Any) {
         //print("purchase")
         var params: [String: String] = [String: String]()
+        
+        params["device"] = "app"
         params["product_id"] = String(superProduct.id)
         params["type"] = superProduct.type
+        params["price_id"] = String(superProduct.prices[selected_idx].id)
+        
         params["member_id"] = String(Member.instance.id)
         params["order_name"] = Member.instance.name
         params["order_tel"] = Member.instance.mobile
@@ -290,8 +294,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         if let item = getFormItemFromKey(WEIGHT_KEY) {
             params["weight"] = item.value
         }
-        
         print(params)
+//        OrderService.instance.update(params: params) { (success) in
+//
+//        }
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {

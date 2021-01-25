@@ -28,6 +28,10 @@ class TagFormItem: FormItem {
     
     func setTags(tags: [[String: String]]) {
         self.tags = tags
+        setSelectedIdx(selected: [0])
+        for (key, value) in tags[0] {
+            self.value = value
+        }
     }
     
     func setSelectedIdx(selected: [Int]) {

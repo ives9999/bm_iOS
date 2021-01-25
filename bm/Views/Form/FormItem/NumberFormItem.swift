@@ -26,7 +26,7 @@ class NumberFormItem: FormItem {
     
     override func reset() {
         super.reset()
-        value = nil
+        self.value = "1"
         make()
     }
     
