@@ -294,7 +294,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         if let item = getFormItemFromKey(WEIGHT_KEY) {
             params["weight"] = item.value
         }
- //       print(params)
+        //print(params)
         OrderService.instance.update(t: SuperOrder.self, params: params) { (success) in
             if success {
                 

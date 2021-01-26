@@ -28,9 +28,14 @@ class TagFormItem: FormItem {
     
     func setTags(tags: [[String: String]]) {
         self.tags = tags
-        setSelectedIdx(selected: [0])
-        for (_, value) in tags[0] {
-            self.value = value
+        for selected_idx in selected_idxs {
+            for (idx, tag) in tags.enumerated() {
+                if selected_idx == idx {
+                    for (_, value) in tag {
+                        self.value = value
+                    }
+                }
+            }
         }
     }
     
