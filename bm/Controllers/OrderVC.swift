@@ -296,7 +296,11 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
  //       print(params)
         OrderService.instance.update(t: SuperOrder.self, params: params) { (success) in
-
+            if success {
+                
+            } else {
+                self.warning(OrderService.instance.msg)
+            }
         }
     }
     

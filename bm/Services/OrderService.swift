@@ -33,7 +33,7 @@ class OrderService: DataService {
                     completion(false)
                     return
                 }
-                print(data)
+                //print(data)
                 self.msg = ""
                 let json: JSON = JSON(data)
                 self.success = json["success"].boolValue
