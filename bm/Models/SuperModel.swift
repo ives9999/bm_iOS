@@ -91,8 +91,16 @@ class SuperModel: NSObject, JSONParsable {
                     let superDate: SuperDate = JSONParse.parse(data: value)
                     setValue(superDate, forKey: key)
                 } else if key == "nextCourseTime" {
-                    
                     setValue(value, on: property, forKey: key)
+                } else if key == "payment" {
+                    let model: SuperPayment = JSONParse.parse(data: value)
+                    setValue(model, forKey: key)
+                } else if key == "shipping" {
+                    let model: SuperShipping = JSONParse.parse(data: value)
+                    setValue(model, forKey: key)
+                } else if key == "product" {
+                    let model: SuperProduct = JSONParse.parse(data: value)
+                    setValue(model, forKey: key)
                 }
 //                else if key == "colors" {
 //                    let parsed: [String: Any] = setDictionary(value, on: property, forKey: key)

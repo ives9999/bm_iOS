@@ -294,10 +294,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         if let item = getFormItemFromKey(WEIGHT_KEY) {
             params["weight"] = item.value
         }
-        print(params)
-//        OrderService.instance.update(params: params) { (success) in
-//
-//        }
+ //       print(params)
+        OrderService.instance.update(t: SuperOrder.self, params: params) { (success) in
+
+        }
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {
