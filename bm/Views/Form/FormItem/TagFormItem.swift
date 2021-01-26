@@ -29,7 +29,7 @@ class TagFormItem: FormItem {
     func setTags(tags: [[String: String]]) {
         self.tags = tags
         setSelectedIdx(selected: [0])
-        for (key, value) in tags[0] {
+        for (_, value) in tags[0] {
             self.value = value
         }
     }
@@ -42,30 +42,5 @@ class TagFormItem: FormItem {
         super.reset()
         value = nil
         make()
-    }
-    
-    override func make() {
-        
-        //value is a number string by divide ,
-        valueToAnother()
-//        if selected_city_names.count > 0 {
-//            show = selected_city_names.joined(separator: ",")
-//        } else {
-//            show = ""
-//        }
-//        if selected_city_ids.count > 0 {
-//            sender = (selected_city_ids.map{String($0)}).joined(separator: ",")
-//            value = (sender as! String)
-//        } else {
-//            sender = nil
-//        }
-    }
-    
-    //parse value to array
-    override func valueToAnother() {
-        //value is 1,2,3 or 1 is city id
-        if value != nil && value!.count > 0 {
-            
-        }
     }
 }
