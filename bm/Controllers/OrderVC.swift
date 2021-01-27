@@ -297,7 +297,15 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         //print(params)
         OrderService.instance.update(t: SuperOrder.self, params: params) { (success) in
             if success {
-                
+                if self.total > 0 {
+                    self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
+                        print("aaa")
+                    }
+                } else {
+                    self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
+                        self.prev()
+                    }
+                }
             } else {
                 self.warning(OrderService.instance.msg)
             }
