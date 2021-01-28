@@ -8,15 +8,7 @@
 
 import UIKit
 
-protocol MoreVCDelegate {
-    func moreToLogin()
-}
-
-class MoreVC: MyTableVC, MoreVCDelegate {
-    
-    func moreToLogin() {
-        toLogin()
-    }
+class MoreVC: MyTableVC {
         
     var _rows: [[Dictionary<String, Any>]] = [
         [
@@ -79,7 +71,6 @@ class MoreVC: MyTableVC, MoreVCDelegate {
                             //self.navigationController?.pushViewController(viewController, animated: true)
                             //self.present(viewController, animated: true, completion: nil)
                             viewController.modalPresentationStyle = .fullScreen
-                            viewController.moreVCDelegate = self
                             show(viewController, sender: nil)
                             //showDetailViewController(viewController, sender: nil)
                         }

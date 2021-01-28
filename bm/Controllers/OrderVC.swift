@@ -22,8 +22,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     var selected_price: Int = 0
     var selected_idx: Int = 0
     
-    var moreVCDelegate: MoreVCDelegate?
-    
     override func viewDidLoad() {
         
         myTablView = tableView

@@ -17,9 +17,7 @@ class ProductVC: ListVC, List1CellDelegate {
     var params1: [String: Any]?
     var superProducts: SuperProducts? = nil
     internal(set) public var lists1: [SuperModel] = [SuperModel]()
-    
-    var moreVCDelegate: MoreVCDelegate?
-    
+        
     override func viewDidLoad() {
         myTablView = tableView
         myTablView.allowsMultipleSelectionDuringEditing = false
@@ -137,9 +135,7 @@ class ProductVC: ListVC, List1CellDelegate {
                 if #available(iOS 13.0, *) {
                     let storyboard = UIStoryboard(name: "More", bundle: nil)
                     if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_PRODUCT)  as? ShowProductVC {
-                        if self.moreVCDelegate != nil {
-                            viewController.moreVCDelegate = self.moreVCDelegate
-                        }
+                        
                         viewController.product_token = token
                         show(viewController, sender: nil)
                     }
@@ -183,42 +179,12 @@ class ProductVC: ListVC, List1CellDelegate {
         let superProduct = superProducts!.rows[indexPath!.row]
         if !Member.instance.isLoggedIn {
             warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
-                
-                //self.tabBarController
-                //let tabVC = UITabBarController()
-                //let app = UIApplication.shared.delegate
-                
-                //UIApplication.shared.windows.first?.rootViewController = self.tabBarController
-                //self.toLogin()
-                let root = self.view.window!.rootViewController as! UITabBarController
-                let home = root.selectedViewController as! MoreVC
-                //let nav = root!.navigationController
-                //let home = nav?.topViewController as? MoreVC
-                //root.childViewControllers
-                self.view.window!.rootViewController?.dismiss(animated: true) {
-                    home.toLogin()
-//                    if self.moreVCDelegate != nil {
-//                        self.moreVCDelegate!.moreToLogin()
-//                    }
+                self.goHomeThen() { vc in
+                    vc.toLogin()
                 }
             }
         } else {
-            if #available(iOS 13.0, *) {
-                let storyboard = UIStoryboard(name: "More", bundle: nil)
-                if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
-                    viewController.modalPresentationStyle = .fullScreen
-                    //self.navigationController?.pushViewController(viewController, animated: true)
-                    //self.present(viewController, animated: true, completion: nil)
-                    viewController.superProduct = superProduct
-                    show(viewController, sender: nil)
-                }
-            } else {
-                let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
-                self.navigationController!.pushViewController(viewController, animated: true)
-            }
+            toOrder(superProduct: superProduct)
         }
-        
-        
-        //toOrder(superProduct: superProduct)
     }
 }

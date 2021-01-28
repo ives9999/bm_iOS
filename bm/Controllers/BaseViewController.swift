@@ -174,6 +174,16 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
     }
     
+    func goHomeThen(completion: @escaping (_ baseViewController: BaseViewController)-> Void) {
+        
+        let tabBarController = self.view.window!.rootViewController as! UITabBarController
+        let idx: Int = tabBarController.selectedIndex
+        let vc: BaseViewController = TAB.idxToController(idx, tabBarController: tabBarController)
+        self.view.window!.rootViewController?.dismiss(animated: true) {
+            completion(vc)
+        }
+    }
+    
     func beginRefresh() {
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")

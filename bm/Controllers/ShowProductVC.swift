@@ -30,9 +30,7 @@ class ShowProductVC: BaseViewController {
     
     var superProduct: SuperProduct?
     var product_token: String?
-    
-    var moreVCDelegate: MoreVCDelegate?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -177,31 +175,15 @@ class ShowProductVC: BaseViewController {
     
     @IBAction func submitBtnPressed(_ sender: Any) {
         //print("purchase")
-        //toOrder(superProduct: superProduct!)
         
         if !Member.instance.isLoggedIn {
             warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
-                //self.toLogin()
-                self.view.window!.rootViewController?.dismiss(animated: true) {
-                    if self.moreVCDelegate != nil {
-                        self.moreVCDelegate!.moreToLogin()
-                    }
+                self.goHomeThen() { vc in
+                    vc.toLogin()
                 }
             }
         } else {
-            if #available(iOS 13.0, *) {
-                let storyboard = UIStoryboard(name: "More", bundle: nil)
-                if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
-                    viewController.modalPresentationStyle = .fullScreen
-                    //self.navigationController?.pushViewController(viewController, animated: true)
-                    //self.present(viewController, animated: true, completion: nil)
-                    viewController.superProduct = self.superProduct!
-                    show(viewController, sender: nil)
-                }
-            } else {
-                let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
-                self.navigationController!.pushViewController(viewController, animated: true)
-            }
+            toOrder(superProduct: superProduct!)
         }
     }
     

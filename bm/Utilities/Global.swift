@@ -159,6 +159,32 @@ enum WEEKDAY: Int {
     }
 }
 
+enum TAB: String {
+    case tempPlay = "臨打"
+    case course = "課程"
+    case member = "會員"
+    case team = "球隊"
+    case more = "更多"
+    
+    static func idxToController(_ idx: Int, tabBarController: UITabBarController)-> BaseViewController {
+        
+        switch idx {
+        case 0:
+            return tabBarController.selectedViewController as! TempPlayVC
+        case 1:
+            return tabBarController.selectedViewController as! CourseVC
+        case 2:
+            return tabBarController.selectedViewController as! MemberVC
+        case 3:
+            return tabBarController.selectedViewController as! TeamVC
+        case 4:
+            return tabBarController.selectedViewController as! MoreVC
+        default:
+            return TempPlayVC()
+        }
+    }
+}
+
 enum STATUS: String {
     case online = "上線"
     case offline = "下線"
