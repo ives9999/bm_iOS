@@ -8,7 +8,15 @@
 
 import UIKit
 
-class MoreVC: MyTableVC {
+protocol MoreVCDelegate {
+    func moreToLogin()
+}
+
+class MoreVC: MyTableVC, MoreVCDelegate {
+    
+    func moreToLogin() {
+        toLogin()
+    }
         
     var _rows: [[Dictionary<String, Any>]] = [
         [

@@ -441,6 +441,20 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
+    func toLogin() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "login") as? LoginVC {
+                //viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "login") as! LoginVC
+            //viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toSelectDate(key: String? = nil, selected: String? = nil) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -659,9 +673,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func toProduct() {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_PRODUCT)  as? ProductVC {
+            if let viewController = storyboard.instantiateViewController(identifier: TO_PRODUCT) as? ProductVC {
                 //self.navigationController?.pushViewController(viewController, animated: true)
                 //self.present(viewController, animated: true, completion: nil)
+//                if moreVCDelegate != nil {
+//                    viewController.moreVCDelegate = self
+//                }
                 show(viewController, sender: nil)
             }
         } else {
@@ -685,17 +702,27 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     }
     
     func toOrder(superProduct: SuperProduct) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "More", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
-                //self.navigationController?.pushViewController(viewController, animated: true)
-                //self.present(viewController, animated: true, completion: nil)
-                viewController.superProduct = superProduct
-                show(viewController, sender: nil)
+        if !Member.instance.isLoggedIn {
+            warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
+                self.dismiss(animated: true) {
+                    //if moreVC != nil {
+                        //moreVC!.toLogin()
+                    //}
+                }
             }
         } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
-            self.navigationController!.pushViewController(viewController, animated: true)
+            if #available(iOS 13.0, *) {
+                let storyboard = UIStoryboard(name: "More", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
+                    //self.navigationController?.pushViewController(viewController, animated: true)
+                    //self.present(viewController, animated: true, completion: nil)
+                    viewController.superProduct = superProduct
+                    show(viewController, sender: nil)
+                }
+            } else {
+                let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
+                self.navigationController!.pushViewController(viewController, animated: true)
+            }
         }
     }
     

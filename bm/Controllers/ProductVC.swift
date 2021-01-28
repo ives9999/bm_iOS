@@ -18,6 +18,8 @@ class ProductVC: ListVC, List1CellDelegate {
     var superProducts: SuperProducts? = nil
     internal(set) public var lists1: [SuperModel] = [SuperModel]()
     
+    var moreVCDelegate: MoreVCDelegate?
+    
     override func viewDidLoad() {
         myTablView = tableView
         myTablView.allowsMultipleSelectionDuringEditing = false
@@ -162,7 +164,31 @@ class ProductVC: ListVC, List1CellDelegate {
     
     func cellCity(indexPath: IndexPath?) {
         //print(indexPath!.row)
-        let superProduct = superProducts!.rows[indexPath!.row]
-        toOrder(superProduct: superProduct)
+        
+        if !Member.instance.isLoggedIn {
+            warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
+                self.dismiss(animated: true) {
+                    //if moreVC != nil {
+                        //moreVC!.toLogin()
+                    //}
+                }
+            }
+        } else {
+            if #available(iOS 13.0, *) {
+                let storyboard = UIStoryboard(name: "More", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
+                    //self.navigationController?.pushViewController(viewController, animated: true)
+                    //self.present(viewController, animated: true, completion: nil)
+                    viewController.superProduct = self.superProduct
+                    show(viewController, sender: nil)
+                }
+            } else {
+                let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
+                self.navigationController!.pushViewController(viewController, animated: true)
+            }
+        }
+        
+        //let superProduct = superProducts!.rows[indexPath!.row]
+        //toOrder(superProduct: superProduct)
     }
 }
