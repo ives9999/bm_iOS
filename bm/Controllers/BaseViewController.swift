@@ -712,21 +712,29 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toOrder(superProduct: SuperProduct) {
+    func toOrder(superProduct: SuperProduct, completion: @escaping (_ baseViewController: BaseViewController)-> Void) {
         if !Member.instance.isLoggedIn {
             warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
-                self.dismiss(animated: true) {
-                    //if moreVC != nil {
-                        //moreVC!.toLogin()
-                    //}
-                }
+                self.goHomeThen(completion: completion)
             }
         } else {
+            
+            var msg: String = ""
+            for key in MEMBER_MUST_ARRAY {
+                let type: String = Member.instance.info[key]!["type"]!
+                var tmp = Member.instance.getData(key: key)
+                if type == "Int" {
+                    tmp = tmp as! Int
+                } else if type == "String" {
+                    tmp = tmp as! String
+                }
+                
+            }
+            
+            
             if #available(iOS 13.0, *) {
                 let storyboard = UIStoryboard(name: "More", bundle: nil)
                 if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
-                    //self.navigationController?.pushViewController(viewController, animated: true)
-                    //self.present(viewController, animated: true, completion: nil)
                     viewController.superProduct = superProduct
                     show(viewController, sender: nil)
                 }

@@ -177,14 +177,8 @@ class ProductVC: ListVC, List1CellDelegate {
         //print(indexPath!.row)
         
         let superProduct = superProducts!.rows[indexPath!.row]
-        if !Member.instance.isLoggedIn {
-            warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
-                self.goHomeThen() { vc in
-                    vc.toLogin()
-                }
-            }
-        } else {
-            toOrder(superProduct: superProduct)
+        toOrder(superProduct: superProduct) { vc in
+            vc.toLogin()
         }
     }
 }

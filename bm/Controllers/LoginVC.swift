@@ -147,7 +147,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     }
     
     @IBAction func registerBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_REGISTER, sender: nil)
+        toRegister()
     }
     @IBAction func passwordBtnPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_PASSWORD, sender: "forget_password")
@@ -155,7 +155,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == TO_PASSWORD {
             let vc: PasswordVC = segue.destination as! PasswordVC
-            vc.type = sender as! String
+            vc.type = sender as? String
         } else if segue.identifier == UNWIND {
             //let vc: MenuVC = segue.destination as! MenuVC
         } else if segue.identifier == TO_LOGIN {

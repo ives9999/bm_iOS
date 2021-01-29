@@ -227,6 +227,20 @@ let MEMBER_ARRAY = [
     MEMBER_ROLE_KEY: ["text":"會員身份","icon":""],
     VALIDATE_KEY: ["text":"驗證","icon":""]
 ]
+let MEMBER_MUST_ARRAY = [
+    NAME_KEY, NICKNAME_KEY, EMAIL_KEY, MOBILE_KEY, SEX_KEY, CITY_ID_KEY, AREA_ID_KEY, ROAD_KEY
+]
+
+let MEMBER_MUST_ARRAY_WARNING = [
+    NAME_KEY: "沒有填寫姓名",
+    NICKNAME_KEY: "",
+    EMAIL_KEY: "",
+    MOBILE_KEY: "",
+    SEX_KEY: "",
+    CITY_ID_KEY: "",
+    AREA_ID_KEY: "",
+    ROAD_KEY: ""
+]
 
 // Team key
 let TEAM_LEADER_KEY = "leader"
