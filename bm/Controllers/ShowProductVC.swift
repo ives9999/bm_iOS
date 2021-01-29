@@ -176,18 +176,11 @@ class ShowProductVC: BaseViewController {
     @IBAction func submitBtnPressed(_ sender: Any) {
         //print("purchase")
         
-        toOrder(superProduct: superProduct!) { vc in
-            vc.toLogin()
-        }
-//        if !Member.instance.isLoggedIn {
-//            warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
-//                self.goHomeThen() { vc in
-//                    vc.toLogin()
-//                }
-//            }
-//        } else {
-//            toOrder(superProduct: superProduct!)
-//        }
+        toOrder(
+            superProduct: superProduct!,
+            login: { vc in vc.toLogin() },
+            register: { vc in vc.toRegister() }
+        )
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {

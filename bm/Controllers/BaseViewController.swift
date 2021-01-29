@@ -712,35 +712,46 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toOrder(superProduct: SuperProduct, completion: @escaping (_ baseViewController: BaseViewController)-> Void) {
+    func toOrder(superProduct: SuperProduct, login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
         if !Member.instance.isLoggedIn {
             warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
-                self.goHomeThen(completion: completion)
+                self.goHomeThen(completion: login)
             }
         } else {
             
             var msg: String = ""
             for key in MEMBER_MUST_ARRAY {
                 let type: String = Member.instance.info[key]!["type"]!
-                var tmp = Member.instance.getData(key: key)
+                let tmp = Member.instance.getData(key: key)
                 if type == "Int" {
-                    tmp = tmp as! Int
+                    if let value: Int = tmp as? Int {
+                        if value == 0 {
+                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+                        }
+                    }
                 } else if type == "String" {
-                    tmp = tmp as! String
+                    if let value = tmp as? String {
+                        if value.count == 0 {
+                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+                        }
+                    }
                 }
-                
             }
-            
-            
-            if #available(iOS 13.0, *) {
-                let storyboard = UIStoryboard(name: "More", bundle: nil)
-                if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
-                    viewController.superProduct = superProduct
-                    show(viewController, sender: nil)
+            if msg.count > 0 {
+                warning(msg: msg, showCloseButton: true, buttonTitle: "填寫") {
+                    self.goHomeThen(completion: register)
                 }
             } else {
-                let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
-                self.navigationController!.pushViewController(viewController, animated: true)
+                if #available(iOS 13.0, *) {
+                    let storyboard = UIStoryboard(name: "More", bundle: nil)
+                    if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
+                        viewController.superProduct = superProduct
+                        show(viewController, sender: nil)
+                    }
+                } else {
+                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
+                    self.navigationController!.pushViewController(viewController, animated: true)
+                }
             }
         }
     }
@@ -920,17 +931,31 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         alert.addButton(buttonTitle, action: buttonAction)
         return alert
     }
+    
+    func __alert()-> SCLAlertView {
+        
+        let appearance = SCLAlertView.SCLAppearance()
+        let alert = SCLAlertView(appearance: appearance)
+        return alert
+    }
+    
     func _warning(title: String, msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
         let alert = __alert(showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
         alert.showWarning(title, subTitle: msg)
     }
+    
     func _warning(title: String, msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
         let alert = __alert(showCloseButton: true, buttonTitle: buttonTitle, buttonAction: buttonAction)
         alert.showWarning(title, subTitle: msg, closeButtonTitle: closeButtonTitle)
     }
     
+    func _warning(msg: String) {
+        let alert = __alert()
+        alert.showWarning("警告", subTitle: msg)
+    }
+    
     func warning(_ msg: String) {
-        alertError(title: "警告", msg: msg)
+        _warning(msg: msg)
     }
     func warning(msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
         _warning(title: "警告", msg: msg, showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
@@ -947,6 +972,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         let alert = __alert(showCloseButton: true, buttonTitle: buttonTitle, buttonAction: buttonAction)
         alert.showInfo(title, subTitle: msg, closeButtonTitle: closeButtonTitle)
     }
+    
+    func _info(msg: String) {
+        let alert = __alert()
+        alert.showInfo("訊息", subTitle: msg)
+    }
+    
     func info(msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
         _info(title: "訊息", msg: msg, showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
     }
@@ -954,6 +985,6 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         _info(title: "訊息", msg: msg, closeButtonTitle: closeButtonTitle, buttonTitle: buttonTitle, buttonAction: buttonAction)
     }
     func info(_ msg: String) {
-        alertError(title: "訊息", msg: msg)
+        _info(msg: msg)
     }
 }

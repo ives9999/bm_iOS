@@ -177,8 +177,10 @@ class ProductVC: ListVC, List1CellDelegate {
         //print(indexPath!.row)
         
         let superProduct = superProducts!.rows[indexPath!.row]
-        toOrder(superProduct: superProduct) { vc in
-            vc.toLogin()
-        }
+        toOrder(
+            superProduct: superProduct,
+            login: { vc in vc.toLogin() },
+            register: { vc in vc.toRegister() }
+        )
     }
 }

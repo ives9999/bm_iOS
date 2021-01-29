@@ -19,8 +19,8 @@ let REMOTE_BASE_URL = "https://bm.sportpassword.com"
 //let REMOTE_BASE_URL = "http://192.168.100.120"
 //let REMOTE_BASE_URL = "http://192.168.100.150"
 //let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
-//let LOCALHOST_BASE_URL = "http://192.168.100.241"
-let LOCALHOST_BASE_URL = "http://192.168.100.120"
+let LOCALHOST_BASE_URL = "http://192.168.100.241"
+//let LOCALHOST_BASE_URL = "http://192.168.100.120"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 
 
@@ -233,13 +233,13 @@ let MEMBER_MUST_ARRAY = [
 
 let MEMBER_MUST_ARRAY_WARNING = [
     NAME_KEY: "沒有填寫姓名",
-    NICKNAME_KEY: "",
-    EMAIL_KEY: "",
-    MOBILE_KEY: "",
-    SEX_KEY: "",
-    CITY_ID_KEY: "",
-    AREA_ID_KEY: "",
-    ROAD_KEY: ""
+    NICKNAME_KEY: "沒有填寫暱稱",
+    EMAIL_KEY: "沒有填寫email",
+    MOBILE_KEY: "沒有填寫手機",
+    SEX_KEY: "沒有選擇性別",
+    CITY_ID_KEY: "沒有選擇縣市",
+    AREA_ID_KEY: "沒有選擇區域",
+    ROAD_KEY: "沒有填寫路名"
 ]
 
 // Team key
