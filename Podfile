@@ -6,20 +6,24 @@ target 'bm' do
   use_frameworks!
 
   # Pods for bm
-  pod 'Alamofire'
-  pod 'SwiftyJSON'
+  pod 'Alamofire', '~> 4.9'
   pod 'Socket.IO-Client-Swift'
   pod 'Device.swift'
   pod 'AlamofireImage'
   pod 'TRVideoView'
   pod 'UIColor_Hex_Swift'
   pod 'SwipeCellKit'
-  pod 'FBSDKCoreKit', '~> 5.8.0'
-  pod 'FBSDKLoginKit', '~> 5.8.0'
-  pod 'FBSDKShareKit', '~> 5.8.0'
   pod 'ReachabilitySwift'
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
   pod "SelectionDialog"
+  
+  pod 'ECPayPaymentGatewayKit', '~> 1.0.0'
+  pod 'PromiseKit' , '~> 6.8.3'
+  pod 'IQKeyboardManagerSwift'
+  pod 'KeychainSwift' , '~> 16.0'
+  pod 'SwiftyJSON' , '~> 4.2.0'
+  pod 'SwiftyXMLParser' , :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
+  pod 'CryptoSwift' , '~> 0.14.0'
 end
 
 target 'bmNotificationServiceExtension' do

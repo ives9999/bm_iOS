@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FBSDKLoginKit
+//import FBSDKLoginKit
 
 class LoginVC: BaseViewController, UITextFieldDelegate {
 //    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
@@ -109,39 +109,39 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func loginFBBtnPressed(_ sender: Any) {
-        
-        Facebook.instance.login(viewController: self) {
-            (success) in
-            if success {
-                //print("login fb success")
-                //self._loginFB()
-                //Session.shared.loginReset = true
-                let playerID: String = self._getPlayerID()
-                Global.instance.addSpinner(superView: self.view)
-                MemberService.instance.login_fb(playerID: playerID, completion: { (success1) in
-                    Global.instance.removeSpinner(superView: self.view)
-                    if success1 {
-                        if MemberService.instance.success {
-                            self.dismiss(animated: true, completion: {
-                                if self.sourceVC != nil {
-                                    self.sourceVC!._loginout()
-                                }
-                            })
-                        } else {
-                            //print("login failed by error email or password")
-                            self.warning(MemberService.instance.msg)
-                        }
-                    } else {
-                        self.warning("使用FB登入，但無法新增至資料庫，請洽管理員")
-                        //print("login failed by fb")
-                    }
-                })
-            } else {
-                print("login fb failure")
-            }
-        }
-    }
+//    @IBAction func loginFBBtnPressed(_ sender: Any) {
+//
+//        Facebook.instance.login(viewController: self) {
+//            (success) in
+//            if success {
+//                //print("login fb success")
+//                //self._loginFB()
+//                //Session.shared.loginReset = true
+//                let playerID: String = self._getPlayerID()
+//                Global.instance.addSpinner(superView: self.view)
+//                MemberService.instance.login_fb(playerID: playerID, completion: { (success1) in
+//                    Global.instance.removeSpinner(superView: self.view)
+//                    if success1 {
+//                        if MemberService.instance.success {
+//                            self.dismiss(animated: true, completion: {
+//                                if self.sourceVC != nil {
+//                                    self.sourceVC!._loginout()
+//                                }
+//                            })
+//                        } else {
+//                            //print("login failed by error email or password")
+//                            self.warning(MemberService.instance.msg)
+//                        }
+//                    } else {
+//                        self.warning("使用FB登入，但無法新增至資料庫，請洽管理員")
+//                        //print("login failed by fb")
+//                    }
+//                })
+//            } else {
+//                print("login fb failure")
+//            }
+//        }
+//    }
     
     @IBAction func registerBtnPressed(_ sender: Any) {
         toRegister()

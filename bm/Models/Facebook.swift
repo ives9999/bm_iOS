@@ -9,7 +9,7 @@
 import Foundation
 //import FacebookCore
 //import FacebookLogin
-import FBSDKLoginKit
+//import FBSDKLoginKit
 //import FBSDKLoginKit
 
 /*
@@ -46,6 +46,7 @@ class Facebook {
     init() {
     }
     
+    /*
     func login(viewController: UIViewController, completion: @escaping CompletionHandler) {
         logout()
         
@@ -162,5 +163,7 @@ class Facebook {
         let res: String = raw == "male" ? "M" : "F"
         return res
     }
+ 
+ */
 }
 

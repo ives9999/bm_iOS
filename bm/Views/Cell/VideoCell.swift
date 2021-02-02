@@ -39,7 +39,8 @@ class VideoCell: UICollectionViewCell {
             caculateFrame()
             //print(self.bounds)
             //print(webView_frame!)
-            let video = TRVideoView(frame: webView_frame!, text: link!)
+        let video = TRVideoView(text: link!)
+        video.frame = webView_frame!
             self.addSubview(video)
             bUpdate = false
         //}

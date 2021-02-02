@@ -38,7 +38,6 @@
                                         <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="vfe-V8-Hfx" eventType="touchUpInside" id="EUQ-ac-hT7"/>
-                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="pmn-EY-2bF"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -143,7 +142,6 @@
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="cqP-Uv-aIB" eventType="touchUpInside" id="bS7-X5-cvQ"/>
                                             <action selector="prevBtnPressed:" destination="vfe-V8-Hfx" eventType="touchUpInside" id="jtZ-tl-dxt"/>
-                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="uxu-VC-fy6"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -212,7 +210,7 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="0R8-8u-m7l"/>
+                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="LFC-Iw-rVE"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -261,7 +259,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="a5A-E6-2vj"/>
+                                    <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="IfD-hD-89O"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="jacky@gmail.com" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0yo-nU-T3O">
@@ -318,7 +316,7 @@
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="registerBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="K9D-Te-ou8"/>
+                                    <action selector="registerBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="Tox-ok-nzT"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -388,7 +386,6 @@
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="JeB-mk-bMm"/>
                                             <action selector="prevBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="Vz1-ew-UOw"/>
-                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="gkc-l7-3mD"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -423,7 +420,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="C2e-s5-jAp"/>
                                     <action selector="resend:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="zcm-tI-W9S"/>
                                 </connections>
                             </button>
@@ -444,7 +440,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="NVb-w6-T7R"/>
                                     <action selector="submit:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="XCU-wZ-XJM"/>
                                 </connections>
                             </button>
@@ -543,7 +538,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="8E9-8M-vAU"/>
                                             <action selector="prevBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="PZz-Kr-oy1"/>
                                         </connections>
                                     </button>
@@ -654,7 +648,6 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="YIZ-L3-12l"/>
                                     <action selector="registerBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="Ekp-0f-0Gs"/>
                                 </connections>
                             </button>
@@ -687,7 +680,6 @@
                                 </state>
                                 <connections>
                                     <action selector="loginBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="Ys4-uH-KH7"/>
-                                    <action selector="registerBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="fOA-sd-4F6"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password_textfield" translatesAutoresizingMaskIntoConstraints="NO" id="51M-JF-8fy">
@@ -770,7 +762,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="hnz-aI-Ka8"/>
                                             <action selector="prevBtnPressed:" destination="trT-Qb-e9n" eventType="touchUpInside" id="r4Y-hJ-lSX"/>
                                             <action selector="prevBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="rCs-PP-Ugx"/>
                                         </connections>

@@ -11,7 +11,7 @@ import Device_swift
 import UIColor_Hex_Swift
 import OneSignal
 //import FacebookCore
-import FBSDKCoreKit
+//import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         //gSimulate = true
         
-        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         Member.instance.justGetMemberOne = false
         return true
@@ -125,22 +125,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
 //        application.registerUserNotificationSettings(pushNotificationSettings)
 //        application.registerForRemoteNotifications()
-        let appId: String = Settings.appID!
-        if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host == "authorize" {
-            return ApplicationDelegate.shared.application(application,
-                                                         open: url,
-                                                         sourceApplication: sourceApplication,
-                                                         annotation: annotation)
-        }
+        
+//      stop facebook login support for 1.5.0 above
+//        let appId: String = Settings.appID!
+//        if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host == "authorize" {
+//            return ApplicationDelegate.shared.application(application,
+//                                                         open: url,
+//                                                         sourceApplication: sourceApplication,
+//                                                         annotation: annotation)
+//        }
         return false;
     }
     
-    @available(iOS 9.0, *)
-    func application(_ application: UIApplication,
-                     open url: URL,
-                     options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
-        return ApplicationDelegate.shared.application(application, open: url, options: options)
-    }
+    //      stop facebook login support for 1.5.0 above
+//    @available(iOS 9.0, *)
+//    func application(_ application: UIApplication,
+//                     open url: URL,
+//                     options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
+//        return ApplicationDelegate.shared.application(application, open: url, options: options)
+//    }
 }
 
 extension UIApplication {

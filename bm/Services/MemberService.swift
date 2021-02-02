@@ -60,6 +60,7 @@ class MemberService: DataService {
         }
     }
     
+    /*
     func login_fb(playerID: String, completion: @escaping CompletionHandler) {
         let fb: Facebook = Facebook.instance
         let body: [String: String] = ["source":"app","uid":fb.uid,"email":fb.email,"name":fb.name,"sex":fb.sex,"avatar":fb.avatar,"social":fb.social,"channel":fb.channel,"player_id":playerID]
@@ -91,11 +92,12 @@ class MemberService: DataService {
             }
         }
     }
+ */
     
     func logout() {
         Member.instance.isLoggedIn = false
         Member.instance.reset()
-        Facebook.instance.logout()
+        //Facebook.instance.logout()
         //NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     }
     

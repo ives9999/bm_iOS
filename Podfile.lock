@@ -2,44 +2,47 @@ PODS:
   - Alamofire (4.9.1)
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
+  - CryptoSwift (0.14.0)
   - Device.swift (1.2.2)
-  - FBSDKCoreKit (5.8.0):
-    - FBSDKCoreKit/Basics (= 5.8.0)
-    - FBSDKCoreKit/Core (= 5.8.0)
-  - FBSDKCoreKit/Basics (5.8.0)
-  - FBSDKCoreKit/Core (5.8.0):
-    - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (5.8.0):
-    - FBSDKLoginKit/Login (= 5.8.0)
-  - FBSDKLoginKit/Login (5.8.0):
-    - FBSDKCoreKit (~> 5.0)
-  - FBSDKShareKit (5.8.0):
-    - FBSDKShareKit/Share (= 5.8.0)
-  - FBSDKShareKit/Share (5.8.0):
-    - FBSDKCoreKit (~> 5.0)
-  - OneSignal (2.12.5)
+  - ECPayPaymentGatewayKit (1.0.0)
+  - IQKeyboardManagerSwift (6.5.6)
+  - KeychainSwift (16.0.1)
+  - OneSignal (2.16.2)
+  - PromiseKit (6.8.5):
+    - PromiseKit/CorePromise (= 6.8.5)
+    - PromiseKit/Foundation (= 6.8.5)
+    - PromiseKit/UIKit (= 6.8.5)
+  - PromiseKit/CorePromise (6.8.5)
+  - PromiseKit/Foundation (6.8.5):
+    - PromiseKit/CorePromise
+  - PromiseKit/UIKit (6.8.5):
+    - PromiseKit/CorePromise
   - ReachabilitySwift (5.0.0)
   - SelectionDialog (3.0.0)
-  - Socket.IO-Client-Swift (15.2.0):
-    - Starscream (~> 3.1)
-  - Starscream (3.1.1)
-  - SwiftyJSON (5.0.0)
+  - Socket.IO-Client-Swift (16.0.0):
+    - Starscream (~> 4.0)
+  - Starscream (4.0.4)
+  - SwiftyJSON (4.2.0)
+  - SwiftyXMLParser (5.1.0)
   - SwipeCellKit (2.7.1)
-  - TRVideoView (0.1.4)
+  - TRVideoView (0.1.5)
   - UIColor_Hex_Swift (5.1.0)
 
 DEPENDENCIES:
-  - Alamofire
+  - Alamofire (~> 4.9)
   - AlamofireImage
+  - CryptoSwift (~> 0.14.0)
   - Device.swift
-  - FBSDKCoreKit (~> 5.8.0)
-  - FBSDKLoginKit (~> 5.8.0)
-  - FBSDKShareKit (~> 5.8.0)
+  - ECPayPaymentGatewayKit (~> 1.0.0)
+  - IQKeyboardManagerSwift
+  - KeychainSwift (~> 16.0)
   - OneSignal (< 3.0, >= 2.6.2)
+  - PromiseKit (~> 6.8.3)
   - ReachabilitySwift
   - SelectionDialog
   - Socket.IO-Client-Swift
-  - SwiftyJSON
+  - SwiftyJSON (~> 4.2.0)
+  - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
   - SwipeCellKit
   - TRVideoView
   - UIColor_Hex_Swift
@@ -48,11 +51,13 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
+    - CryptoSwift
     - Device.swift
-    - FBSDKCoreKit
-    - FBSDKLoginKit
-    - FBSDKShareKit
+    - ECPayPaymentGatewayKit
+    - IQKeyboardManagerSwift
+    - KeychainSwift
     - OneSignal
+    - PromiseKit
     - ReachabilitySwift
     - SelectionDialog
     - Socket.IO-Client-Swift
@@ -62,23 +67,35 @@ SPEC REPOS:
     - TRVideoView
     - UIColor_Hex_Swift
 
+EXTERNAL SOURCES:
+  SwiftyXMLParser:
+    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
+
+CHECKOUT OPTIONS:
+  SwiftyXMLParser:
+    :commit: ec7f183642adf429babd867d1a38c5c6912408ba
+    :git: https://github.com/yahoojapan/SwiftyXMLParser.git
+
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
+  CryptoSwift: 35a10419f4dbf0619c13f8c1c180037e115323fa
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
-  FBSDKCoreKit: e7dcac0aabcfb09d0166998edd95fe3b05a0ce5d
-  FBSDKLoginKit: 1b0cf04df0370b37404213157b060d6666ede814
-  FBSDKShareKit: abc29e1bb4f9f59f679adf1ae191006d68455f96
-  OneSignal: 1de998c42bb06ed630bb38dd1bc933a667437dbb
+  ECPayPaymentGatewayKit: 9d8787050df7323fd1cb399db2a220527d19550e
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
+  OneSignal: 678872eea3e733ce20c75a5d18a803c75ec2a32f
+  PromiseKit: 9616b0afef31eae56ab9ce044c8ec2b8612a15cd
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SelectionDialog: 9f4b63f2fc004f2b834a9980870a698f98516897
-  Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
-  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
-  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  Socket.IO-Client-Swift: ff35cb6e4831f681441ce25bc1078039ca8602ea
+  Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
+  SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  SwiftyXMLParser: 23b5a9321a8adf72aae29046ea58c3d097b4ac17
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
-  TRVideoView: 00e2eaed3f19196956bb1ec61c875df6c0ea84dc
+  TRVideoView: dc9617f61f7d3b207b2a5ad8afe401ef7c03e51e
   UIColor_Hex_Swift: 8be7432edacb7fa91c78aa05ef3c30b66e4f9415
 
-PODFILE CHECKSUM: 88d9914e87bec3b18de5ad8bb390cb9da55fb74b
+PODFILE CHECKSUM: 2a13900b6112d4f377091cd1eda13b633e557f60
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.1
