@@ -249,12 +249,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         //updateSubTotal(price: price)
     }
     
-    func textFieldTextChanged(formItem: FormItem, text: String) {}
-    
-    func sexChanged(sex: String) {}
-    
-    func privacyChecked(checked: Bool) {}
-    
     @IBAction func submitBtnPressed(_ sender: Any) {
         //print("purchase")
         var params: [String: String] = [String: String]()

@@ -713,13 +713,13 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     }
     
     func toOrder(superProduct: SuperProduct, login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
+        
+        var msg: String = ""
         if !Member.instance.isLoggedIn {
             warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
                 self.goHomeThen(completion: login)
             }
         } else {
-            
-            var msg: String = ""
             for key in MEMBER_MUST_ARRAY {
                 let type: String = Member.instance.info[key]!["type"]!
                 let tmp = Member.instance.getData(key: key)
