@@ -10,6 +10,7 @@ import UIKit
 import Device_swift
 import UIColor_Hex_Swift
 import OneSignal
+import ECPayPaymentGatewayKit
 //import FacebookCore
 //import FBSDKCoreKit
 
@@ -99,6 +100,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //gSimulate = true
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Stage)
         
         Member.instance.justGetMemberOne = false
         return true
