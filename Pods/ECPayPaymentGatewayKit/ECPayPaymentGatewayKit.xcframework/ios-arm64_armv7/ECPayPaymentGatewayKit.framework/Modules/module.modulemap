@@ -1,0 +1,11 @@
+framework module ECPayPaymentGatewayKit {
+  umbrella header "ECPayPaymentGatewayKit.h"
+
+  export *
+  module * { export * }
+}
+
+module ECPayPaymentGatewayKit.Swift {
+    header "ECPayPaymentGatewayKit-Swift.h"
+    requires objc
+}
