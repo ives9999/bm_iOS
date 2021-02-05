@@ -21,11 +21,12 @@ class OrderService: DataService {
         if token.count > 0 {
             url = String(format: URL_ORDER, "/"+token)
         }
-//        print(url)
-//        print(params)
+        print(url)
+        print(params)
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
+            print(response.result);
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
@@ -36,12 +37,14 @@ class OrderService: DataService {
                 //print(data)
                 self.msg = ""
                 let json: JSON = JSON(data)
+                print(json)
                 self.success = json["success"].boolValue
                 //print(self.success)
                 let s: T = JSONParse.parse(data: json["order"])
                 self.superModel = s
                 completion(true)
             } else {
+                print(response.result.error)
                 self.msg = "網路或伺服器錯誤，請聯絡管理員或請稍後再試"
                 completion(false)
             }
