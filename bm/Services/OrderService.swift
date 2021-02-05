@@ -14,6 +14,9 @@ class OrderService: DataService {
     
     static let instance = OrderService()
     var superProduct: SuperProduct = SuperProduct()
+    var ecpay_token: String = ""
+    var tokenExpireDate: String = ""
+    var order_no: String = ""
     
     func update<T: SuperModel>(t: T.Type, token: String = "", params: [String: String], completion: @escaping CompletionHandler) {
         
@@ -37,14 +40,17 @@ class OrderService: DataService {
                 //print(data)
                 self.msg = ""
                 let json: JSON = JSON(data)
-                print(json)
+                //print(json)
                 self.success = json["success"].boolValue
                 //print(self.success)
-                let s: T = JSONParse.parse(data: json["order"])
-                self.superModel = s
-                completion(true)
+                if self.success {
+                    self.ecpay_token = json["token"].stringValue
+                    completion(true)
+                } else {
+                    self.msg = json["msg"].stringValue
+                }
             } else {
-                print(response.result.error)
+                //print(response.result.error)
                 self.msg = "網路或伺服器錯誤，請聯絡管理員或請稍後再試"
                 completion(false)
             }
