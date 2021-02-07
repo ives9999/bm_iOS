@@ -262,6 +262,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["order_name"] = Member.instance.name
         params["order_tel"] = Member.instance.mobile
         params["order_email"] = Member.instance.email
+        params["gateway"] = "credit_card"
         
         let city_name = Global.instance.zoneIDToName(Member.instance.city_id)
         let area_name = Global.instance.zoneIDToName(Member.instance.area_id)
@@ -290,11 +291,18 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             params["weight"] = item.value
         }
         //print(params)
+        
+        //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
+        
         OrderService.instance.update(t: SuperOrder.self, params: params) { (success) in
             if success {
                 if self.total > 0 {
+                    let ecpay_token: String = OrderService.instance.ecpay_token
+                    let tokenExpireDate: String = OrderService.instance.tokenExpireDate
+                    let order_no: String = OrderService.instance.order_no
                     self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
-                        print("aaa")
+                        //print("aaa")
+                        self.toPayment(ecpay_token: ecpay_token, order_no: order_no, tokenExpireDate: tokenExpireDate)
                     }
                 } else {
                     self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {

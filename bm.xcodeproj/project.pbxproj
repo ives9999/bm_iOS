@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3031D6A25CD46A50044830C /* PaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3031D6925CD46A50044830C /* PaymentVC.swift */; };
 		B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33B217AF31100C32CE2 /* SubmitButton.swift */; };
 		B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */; };
 		B306F340217DA15000C32CE2 /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33F217DA15000C32CE2 /* Area.swift */; };
@@ -341,6 +342,7 @@
 		8887FB55CE42CC9156BD0571 /* Pods-bm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bm/Pods-bm.debug.xcconfig"; sourceTree = "<group>"; };
 		9C5D58D06320800C79615904 /* Pods_bm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B177D5D81630D703CAC77139 /* Pods-bmNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		B3031D6925CD46A50044830C /* PaymentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentVC.swift; sourceTree = "<group>"; };
 		B306F33B217AF31100C32CE2 /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSelectVC.swift; sourceTree = "<group>"; };
 		B306F33F217DA15000C32CE2 /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
@@ -1139,6 +1141,7 @@
 				B3B7585C259CB8FE006ACC33 /* ProductVC.swift */,
 				B3B7587425A1B06B006ACC33 /* ShowProductVC.swift */,
 				B3B7587A25A5C1BB006ACC33 /* OrderVC.swift */,
+				B3031D6925CD46A50044830C /* PaymentVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1562,6 +1565,7 @@
 				B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */,
 				B36D66C0229A828A00502D62 /* ManagerCourseCell.swift in Sources */,
 				B3B4EF56257B59EA00EE15D0 /* PrivacyCell.swift in Sources */,
+				B3031D6A25CD46A50044830C /* PaymentVC.swift in Sources */,
 				B3A253EA256CBA4D004B8A03 /* SelectCityVC.swift in Sources */,
 				B3EA0B1D2579EAF800F9C4C3 /* RegisterForm.swift in Sources */,
 				B3756EE821B96B96006893E1 /* ColorSelectCell.swift in Sources */,

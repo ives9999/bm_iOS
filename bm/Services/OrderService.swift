@@ -29,7 +29,7 @@ class OrderService: DataService {
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
-            print(response.result);
+            //print(response.result);
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
@@ -45,6 +45,8 @@ class OrderService: DataService {
                 //print(self.success)
                 if self.success {
                     self.ecpay_token = json["token"].stringValue
+                    self.tokenExpireDate = json["tokenExpireDate"].stringValue
+                    self.order_no = json["order_no"].stringValue
                     completion(true)
                 } else {
                     self.msg = json["msg"].stringValue
