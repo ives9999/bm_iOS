@@ -14,7 +14,7 @@ class PaymentVC: BaseViewController {
     @IBOutlet weak var titleLbl: SuperLabel!
     
     var ecpay_token: String = ""
-    var order_no: String = ""
+    var order_token: String = ""
     var tokenExpireDate: String = ""
     
     override func viewDidLoad() {

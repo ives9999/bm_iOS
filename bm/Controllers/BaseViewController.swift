@@ -756,19 +756,19 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toPayment(ecpay_token: String, order_no: String, tokenExpireDate: String) {
+    func toPayment(ecpay_token: String, order_token: String, tokenExpireDate: String) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_PAYMENT)  as? PaymentVC {
                 viewController.ecpay_token = ecpay_token
-                viewController.order_no = order_no
+                viewController.order_token = order_token
                 viewController.tokenExpireDate = tokenExpireDate
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_PAYMENT) as! PaymentVC
             viewController.ecpay_token = ecpay_token
-            viewController.order_no = order_no
+            viewController.order_token = order_token
             viewController.tokenExpireDate = tokenExpireDate
             self.navigationController!.pushViewController(viewController, animated: true)
         }

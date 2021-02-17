@@ -16,7 +16,7 @@ class OrderService: DataService {
     var superProduct: SuperProduct = SuperProduct()
     var ecpay_token: String = ""
     var tokenExpireDate: String = ""
-    var order_no: String = ""
+    var order_token: String = ""
     
     func update<T: SuperModel>(t: T.Type, token: String = "", params: [String: String], completion: @escaping CompletionHandler) {
         
@@ -46,7 +46,7 @@ class OrderService: DataService {
                 if self.success {
                     self.ecpay_token = json["token"].stringValue
                     self.tokenExpireDate = json["tokenExpireDate"].stringValue
-                    self.order_no = json["order_no"].stringValue
+                    self.order_token = json["order_token"].stringValue
                     completion(true)
                 } else {
                     self.msg = json["msg"].stringValue

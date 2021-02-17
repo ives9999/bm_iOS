@@ -250,7 +250,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
-        //print("purchase")
+        Global.instance.addSpinner(superView: self.view)
         var params: [String: String] = [String: String]()
         
         params["device"] = "app"
@@ -295,14 +295,15 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
         
         OrderService.instance.update(t: SuperOrder.self, params: params) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
             if success {
                 if self.total > 0 {
                     let ecpay_token: String = OrderService.instance.ecpay_token
                     let tokenExpireDate: String = OrderService.instance.tokenExpireDate
-                    let order_no: String = OrderService.instance.order_no
+                    let order_token: String = OrderService.instance.order_token
                     self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
                         //print("aaa")
-                        self.toPayment(ecpay_token: ecpay_token, order_no: order_no, tokenExpireDate: tokenExpireDate)
+                        self.toPayment(ecpay_token: ecpay_token, order_token: order_token, tokenExpireDate: tokenExpireDate)
                     }
                 } else {
                     self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
