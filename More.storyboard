@@ -1378,17 +1378,33 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="n7x-3R-nug"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="0dk-1v-fXQ">
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dnZ-KH-Iaw">
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7LI-Oi-iup"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="7LI-Oi-iup" firstAttribute="bottom" secondItem="dnZ-KH-Iaw" secondAttribute="bottom" id="5tM-qx-en4"/>
+                            <constraint firstItem="dnZ-KH-Iaw" firstAttribute="trailing" secondItem="7LI-Oi-iup" secondAttribute="trailing" id="8sp-Ge-5DK"/>
                             <constraint firstAttribute="trailing" secondItem="jLh-vN-qb6" secondAttribute="trailing" id="F4h-bR-Bxs"/>
+                            <constraint firstItem="dnZ-KH-Iaw" firstAttribute="top" secondItem="jLh-vN-qb6" secondAttribute="bottom" id="K3s-oj-fCv"/>
                             <constraint firstItem="jLh-vN-qb6" firstAttribute="top" secondItem="7LI-Oi-iup" secondAttribute="top" id="KjR-ZI-YAo"/>
+                            <constraint firstItem="0dk-1v-fXQ" firstAttribute="trailing" secondItem="7LI-Oi-iup" secondAttribute="trailing" id="MVN-pp-WJC"/>
+                            <constraint firstItem="dnZ-KH-Iaw" firstAttribute="leading" secondItem="7LI-Oi-iup" secondAttribute="leading" id="bXj-MD-nba"/>
+                            <constraint firstItem="0dk-1v-fXQ" firstAttribute="top" secondItem="jLh-vN-qb6" secondAttribute="bottom" id="d7m-ap-nTy"/>
+                            <constraint firstItem="0dk-1v-fXQ" firstAttribute="leading" secondItem="7LI-Oi-iup" secondAttribute="leading" id="fMV-im-CBD"/>
                             <constraint firstItem="jLh-vN-qb6" firstAttribute="leading" secondItem="7LI-Oi-iup" secondAttribute="leading" id="rVR-R2-wyf"/>
+                            <constraint firstItem="0dk-1v-fXQ" firstAttribute="bottom" secondItem="7LI-Oi-iup" secondAttribute="bottom" id="tRD-ve-ija"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="AjB-IM-8hv"/>
                     <connections>
+                        <outlet property="tableView" destination="dnZ-KH-Iaw" id="Uua-ER-diI"/>
                         <outlet property="titleLbl" destination="2JU-1H-0TF" id="6vK-sV-bN6"/>
                     </connections>
                 </viewController>

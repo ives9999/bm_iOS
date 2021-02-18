@@ -67,6 +67,8 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         if Member.instance.isLoggedIn {
             form.removeItems(keys: [PASSWORD_KEY, REPASSWORD_KEY, PRIVACY_KEY])
             form.formItems.remove(at: form.formItems.count - 1)
+            sections = form.getSections()
+            section_keys = form.getSectionKeys()
             
             var keys: [String] = [String]()
             for formItem in form.formItems {
@@ -123,6 +125,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let c = section_keys[section].count
         return section_keys[section].count
     }
     
