@@ -138,6 +138,9 @@
 		B3839EB822CF0261003F3620 /* ShowCourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3839EB722CF0261003F3620 /* ShowCourseVC.swift */; };
 		B385A07A22B9336C00BC3ADF /* CourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385A07922B9336C00BC3ADF /* CourseVC.swift */; };
 		B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385A07B22BCB28E00BC3ADF /* SelectVC.swift */; };
+		B387EFEA25DE2FC700B397F8 /* SuperOrderClothes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387EFE925DE2FC700B397F8 /* SuperOrderClothes.swift */; };
+		B387EFF025DE310100B397F8 /* SuperOrderRacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387EFEF25DE310100B397F8 /* SuperOrderRacket.swift */; };
+		B387EFF625DE316100B397F8 /* SuperOrderMejump.swift in Sources */ = {isa = PBXBuildFile; fileRef = B387EFF525DE316100B397F8 /* SuperOrderMejump.swift */; };
 		B39453712343256C000DF98E /* SignupListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394536F2343256C000DF98E /* SignupListCell.swift */; };
 		B39453722343256C000DF98E /* SignupListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B39453702343256C000DF98E /* SignupListCell.xib */; };
 		B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453D82230E849005E3027 /* ShowPNVC.swift */; };
@@ -476,6 +479,9 @@
 		B3839EB722CF0261003F3620 /* ShowCourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCourseVC.swift; sourceTree = "<group>"; };
 		B385A07922B9336C00BC3ADF /* CourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseVC.swift; sourceTree = "<group>"; };
 		B385A07B22BCB28E00BC3ADF /* SelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVC.swift; sourceTree = "<group>"; };
+		B387EFE925DE2FC700B397F8 /* SuperOrderClothes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperOrderClothes.swift; sourceTree = "<group>"; };
+		B387EFEF25DE310100B397F8 /* SuperOrderRacket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperOrderRacket.swift; sourceTree = "<group>"; };
+		B387EFF525DE316100B397F8 /* SuperOrderMejump.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperOrderMejump.swift; sourceTree = "<group>"; };
 		B394536F2343256C000DF98E /* SignupListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupListCell.swift; sourceTree = "<group>"; };
 		B39453702343256C000DF98E /* SignupListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignupListCell.xib; sourceTree = "<group>"; };
 		B39453D82230E849005E3027 /* ShowPNVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPNVC.swift; sourceTree = "<group>"; };
@@ -1178,6 +1184,9 @@
 				B3B758F825BEEDF8006ACC33 /* SuperOrder.swift */,
 				B3B758FE25BEF089006ACC33 /* SuperPayment.swift */,
 				B3B7590425BEFD0D006ACC33 /* SuperShipping.swift */,
+				B387EFE925DE2FC700B397F8 /* SuperOrderClothes.swift */,
+				B387EFEF25DE310100B397F8 /* SuperOrderRacket.swift */,
+				B387EFF525DE316100B397F8 /* SuperOrderMejump.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1538,6 +1547,7 @@
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,
 				B3308C511FDA5311006A83B6 /* ShowTempPlayVC.swift in Sources */,
 				B3310D8E22ABB4820062EF98 /* MultiSelectVC.swift in Sources */,
+				B387EFF625DE316100B397F8 /* SuperOrderMejump.swift in Sources */,
 				B3200045254304D20061442D /* SuperStore.swift in Sources */,
 				B306FE9A21F0916D00403FE2 /* DateFormItem.swift in Sources */,
 				B3B758EC25B0763A006ACC33 /* WeightCell.swift in Sources */,
@@ -1574,6 +1584,7 @@
 				F9A1CB811F95CE2F00DDEC86 /* SuperData.swift in Sources */,
 				B306FE9F21F0DC5900403FE2 /* DateCell.swift in Sources */,
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
+				B387EFF025DE310100B397F8 /* SuperOrderRacket.swift in Sources */,
 				B3310D9122ACA57A0062EF98 /* ContentCell.swift in Sources */,
 				B3B75863259CBA0B006ACC33 /* SuperProduct.swift in Sources */,
 				B3ED38EA1FB87EE50003F083 /* TeamService.swift in Sources */,
@@ -1631,6 +1642,7 @@
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
 				B39453E1223CE905005E3027 /* CancelButton.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
+				B387EFEA25DE2FC700B397F8 /* SuperOrderClothes.swift in Sources */,
 				B306FE9C21F0DA8000403FE2 /* DateSelectVC.swift in Sources */,
 				B358B0B622A0FB5200F1A4E6 /* SingleSelectVC.swift in Sources */,
 				B36D66BB229A580E00502D62 /* CourseService.swift in Sources */,

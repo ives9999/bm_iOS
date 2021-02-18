@@ -18,14 +18,18 @@ class OrderService: DataService {
     var tokenExpireDate: String = ""
     var order_token: String = ""
     
+    override func getSource() -> String? {
+        return "order"
+    }
+    
     func update<T: SuperModel>(t: T.Type, token: String = "", params: [String: String], completion: @escaping CompletionHandler) {
         
         var url: String = URL_ORDER
         if token.count > 0 {
             url = String(format: URL_ORDER, "/"+token)
         }
-        print(url)
-        print(params)
+        //print(url)
+        //print(params)
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             

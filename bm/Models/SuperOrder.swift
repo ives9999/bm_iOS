@@ -45,6 +45,10 @@ class SuperOrder: SuperModel {
     @objc dynamic var shipping: SuperShipping = SuperShipping()
     @objc dynamic var product: SuperProduct = SuperProduct()
     
+    @objc dynamic var order_clothes: [SuperOrderClothes] = [SuperOrderClothes]()
+    @objc dynamic var order_racket: [SuperOrderRacket] = [SuperOrderRacket]()
+    @objc dynamic var order_mejump: [SuperOrderMejump] = [SuperOrderMejump]()
+    
     override func filterRow() {
         
     }

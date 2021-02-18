@@ -69,6 +69,9 @@ class SuperModel: NSObject, JSONParsable {
                 } else if key == "prices" {
                     let parsedArray: [SuperProductPrice] = parse(property: property, array: arrayValue) as! [SuperProductPrice]
                     setValue(parsedArray, forKey: key)
+                } else if key == "order_clothes" {
+                    let parsedArray: [SuperOrderClothes] = parse(property: property, array: arrayValue) as! [SuperOrderClothes]
+                    setValue(parsedArray, forKey: key)
                 } else if
                     key == "images" || key == "sizes" || key == "weights" || key == "shippings" || key == "gateways" || key == "colors" {
                     let parsedArray = setArray(value, on: property, forKey: key)

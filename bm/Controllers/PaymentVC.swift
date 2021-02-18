@@ -16,6 +16,7 @@ class PaymentVC: MyTableVC {
     var ecpay_token: String = ""
     var order_token: String = ""
     var tokenExpireDate: String = ""
+    var superOrder: SuperOrder? = nil
         
     override func viewDidLoad() {
         myTablView = tableView
@@ -28,6 +29,8 @@ class PaymentVC: MyTableVC {
         ]
         super.viewDidLoad()
         titleLbl.textColor = UIColor.black
+        
+        refresh()
         
         //let name: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String)!
         
@@ -62,6 +65,25 @@ class PaymentVC: MyTableVC {
 //                }
 //            }
 //        }
+    }
+    
+    override func refresh() {
+        if order_token != nil {
+            Global.instance.addSpinner(superView: view)
+            //print(Member.instance.token)
+            let params: [String: String] = ["token": order_token, "member_token": Member.instance.token]
+            OrderService.instance.getOne(t: SuperOrder.self, params: params) { (success) in
+                if (success) {
+                    let superModel: SuperModel = OrderService.instance.superModel
+                    self.superOrder = (superModel as! SuperOrder)
+                    self.superOrder!.printRow()
+                    
+                    self.titleLbl.text = self.superOrder?.product.name
+                }
+                Global.instance.removeSpinner(superView: self.view)
+                self.endRefresh()
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
