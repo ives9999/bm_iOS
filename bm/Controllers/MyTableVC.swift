@@ -27,6 +27,14 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     var iden: String!
     var titleField: String!
     
+//    sections = ["商品", "訂單", "付款", "訂購人"]
+//    rows = [
+//        [["name":"商品名稱", "value":"value"],["name":"商品屬性", "value":"attributes"]],
+//        [["name":"訂單編號", "value":"no"],["name":"商品金額", "value":"amount"],["name":"商品數量", "value":"quantity"],["name":"運費", "value":"shipping_fee"]],
+//        [["name":"訂單總金額", "value":"amount"],["name":"訂單建立時間", "value":"create_at"],["name":"付款方式", "value":"gateway"],["name":"到貨方式", "value":"method"]],
+//        [["name":"訂購人姓名", "value":"order_name"], ["name":"訂購人電話", "value":"order_tel"], ["name":"訂購人EMail", "value":"order_email"], ["name":"訂購人住址", "value":"order_address"]]
+//    ]
+    
     @IBOutlet weak var tableView: UITableView!
     //@IBOutlet weak var menuBtn: UIButton!
     

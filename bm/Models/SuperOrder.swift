@@ -16,6 +16,7 @@ class SuperOrder: SuperModel {
     @objc dynamic var product_id: Int = 0
     @objc dynamic var member_id: Int = 0
     @objc dynamic var quantity: Int = 0
+    @objc dynamic var amount: Int = 0
     @objc dynamic var shipping_fee: Int = 0
     @objc dynamic var tax: Int = 0
     
@@ -40,6 +41,10 @@ class SuperOrder: SuperModel {
     
     @objc dynamic var created_at: String = ""
     @objc dynamic var updated_at: String = ""
+    
+    @objc dynamic var product_type: String = ""
+    @objc dynamic var gateway_ch: String = ""
+    @objc dynamic var method_ch: String = ""
     
     @objc dynamic var payment: SuperPayment = SuperPayment()
     @objc dynamic var shipping: SuperShipping = SuperShipping()
