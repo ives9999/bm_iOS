@@ -19,6 +19,7 @@ class SuperOrderRacket: SuperModel {
     @objc dynamic var weight: String = ""
     @objc dynamic var quantity: Int = -1
     @objc dynamic var price: Int = -1
+    @objc dynamic var unit: String = "隻"
 }
 
 class SuperOrderRackets: SuperModel {

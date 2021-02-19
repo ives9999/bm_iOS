@@ -17,6 +17,8 @@ class SuperOrderMejump: SuperModel {
     @objc dynamic var price_id: Int = -1
     @objc dynamic var quantity: Int = -1
     @objc dynamic var price: Int = -1
+    @objc dynamic var title: String = ""
+    @objc dynamic var unit: String = "組"
 }
 
 class SuperOrderMejumps: SuperModel {

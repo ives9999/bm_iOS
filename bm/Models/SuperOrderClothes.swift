@@ -19,6 +19,7 @@ class SuperOrderClothes: SuperModel {
     @objc dynamic var size: String = ""
     @objc dynamic var quantity: Int = -1
     @objc dynamic var price: Int = -1
+    @objc dynamic var unit: String = "件"
 }
 
 

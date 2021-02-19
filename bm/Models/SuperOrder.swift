@@ -54,7 +54,15 @@ class SuperOrder: SuperModel {
     @objc dynamic var order_racket: [SuperOrderRacket] = [SuperOrderRacket]()
     @objc dynamic var order_mejump: [SuperOrderMejump] = [SuperOrderMejump]()
     
+    var attributes: [String] = [String]()
+    var address: String = ""
+    var product_price: String = ""
+    var shipping_fee_show: String = ""
+    var tax_show: String = ""
+    var amount_show: String = ""
+    
     override func filterRow() {
-        
+        address = order_city+order_area+order_road
     }
+
 }
