@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxm-91-b4I" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="16" y="12" width="41.5" height="20.5"/>
+                        <rect key="frame" x="16" y="8" width="41.5" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -32,6 +32,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="Vbd-4r-yuw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="JgC-WG-H0r"/>
+                    <constraint firstItem="zxm-91-b4I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="LsE-Mk-y6Q"/>
+                    <constraint firstAttribute="bottom" secondItem="zxm-91-b4I" secondAttribute="bottom" constant="8" id="SC5-Eo-f9J"/>
                     <constraint firstItem="Vbd-4r-yuw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="zxm-91-b4I" secondAttribute="trailing" constant="16" id="SH5-bx-7T0"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Vbd-4r-yuw" secondAttribute="bottom" constant="8" id="YXJ-Wj-BeB"/>
                     <constraint firstAttribute="trailing" secondItem="Vbd-4r-yuw" secondAttribute="trailing" constant="16" id="aCa-2k-DzG"/>

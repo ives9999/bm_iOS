@@ -542,7 +542,7 @@ enum ORDER_PROCESS: String {
 }
 
 enum PAYMENT_PROCESS: String {
-    case normal = "訂單成立"
+    case normal = "未付款"
     case code = "取得付款代碼"
     case complete = "完成付款"
     
@@ -566,7 +566,7 @@ enum PAYMENT_PROCESS: String {
 }
 
 enum SHIPPING_PROCESS: String {
-    case normal = "訂單成立"
+    case normal = "準備中"
     case shipping = "出貨中"
     case store = "商品已到便利商店"
     case complete = "已完成取貨"

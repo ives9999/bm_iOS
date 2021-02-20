@@ -68,6 +68,12 @@ class SuperOrder: SuperModel {
     var created_at_show: String = ""
     var order_process_show: String = ""
     
+    var payment_process_show: String = ""
+    var payment_at_show: String = "未付款"
+    
+    var shipping_process_show: String = ""
+    var shipping_at_show: String = "準備中"
+    
     override func filterRow() {
         product_name = product.name
         address = order_city+order_area+order_road
@@ -83,6 +89,16 @@ class SuperOrder: SuperModel {
         
         created_at_show = created_at.noSec()
         order_process_show = ORDER_PROCESS.getRawValueFromString(process)
+        
+        if payment_at.count > 0 {
+            payment_at_show = payment_at.noSec()
+        }
+        payment_process_show = PAYMENT_PROCESS.getRawValueFromString(payment.process)
+        
+        if shipping_at.count > 0 {
+            shipping_at_show = shipping_at.noSec()
+        }
+        shipping_process_show = SHIPPING_PROCESS.getRawValueFromString(shipping.process)
     }
     
     private func makeAttributes()-> String {
