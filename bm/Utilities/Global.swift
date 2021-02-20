@@ -511,6 +511,90 @@ enum PRICE_UNIT: String {
     }
 }
 
+enum ORDER_PROCESS: String {
+    case normal = "訂單成立"
+    case shipping = "出貨中"
+    case payment = "完成付款"
+    case complete = "訂單完成"
+    case cancel = "訂單取消"
+    
+    static func stringToEnum(_ enumString: String) -> ORDER_PROCESS {
+        switch enumString {
+        case "normal":
+            return .normal
+        case "shipping":
+            return .shipping
+        case "payment":
+            return .payment
+        case "complete":
+            return .complete
+        case "cancel":
+            return .cancel
+        default:
+            return .normal
+        }
+    }
+    
+    static func getRawValueFromString(_ string: String)-> String {
+        let res: ORDER_PROCESS = stringToEnum(string)
+        return res.rawValue
+    }
+}
+
+enum PAYMENT_PROCESS: String {
+    case normal = "訂單成立"
+    case code = "取得付款代碼"
+    case complete = "完成付款"
+    
+    static func stringToEnum(_ enumString: String) -> PAYMENT_PROCESS {
+        switch enumString {
+        case "normal":
+            return .normal
+        case "code":
+            return .code
+        case "complete":
+            return .complete
+        default:
+            return .normal
+        }
+    }
+    
+    static func getRawValueFromString(_ string: String)-> String {
+        let res: PAYMENT_PROCESS = stringToEnum(string)
+        return res.rawValue
+    }
+}
+
+enum SHIPPING_PROCESS: String {
+    case normal = "訂單成立"
+    case shipping = "出貨中"
+    case store = "商品已到便利商店"
+    case complete = "已完成取貨"
+    case back = "貨物退回"
+    
+    static func stringToEnum(_ enumString: String) -> SHIPPING_PROCESS {
+        switch enumString {
+        case "normal":
+            return .normal
+        case "shipping":
+            return .shipping
+        case "store":
+            return .store
+        case "complete":
+            return .complete
+        case "back":
+            return .back
+        default:
+            return .normal
+        }
+    }
+    
+    static func getRawValueFromString(_ string: String)-> String {
+        let res: SHIPPING_PROCESS = stringToEnum(string)
+        return res.rawValue
+    }
+}
+
 let df : DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

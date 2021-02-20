@@ -24,15 +24,15 @@ class PaymentVC: MyTableVC {
         rows = [
             [
                 ["name":"商品名稱", "value":"", "key":"product_name"],
-                ["name":"商品屬性", "value":"", "key":"product_attributes"]],
+                ["name":"商品屬性", "value":"", "key":"attribute"]],
             [
                 ["name":"訂單編號", "value":"", "key":"order_no"],
-                ["name":"商品數量", "value":"", "key":"quantity"],
-                ["name":"商品金額", "value":"product_price", "key":"amount"],
-                ["name":"運費", "value":"shipping_fee", "key":"shipping_fee"],
-                ["name":"訂單總金額", "value":"", "key":"amount"],
-                ["name":"訂單建立時間", "value":"", "key":"created_at"],
-                ["name":"訂單狀態", "value":"", "key":"process"]
+                ["name":"商品數量", "value":"", "key":"quantity_show"],
+                ["name":"商品金額", "value":"product_price", "key":"product_price_show"],
+                ["name":"運費", "value":"shipping_fee", "key":"shipping_fee_show"],
+                ["name":"訂單總金額", "value":"", "key":"amount_show"],
+                ["name":"訂單建立時間", "value":"", "key":"created_at_show"],
+                ["name":"訂單狀態", "value":"", "key":"order_process_show"]
             ],
             [
                 ["name":"付款方式", "value":"", "key":"gateway_ch"],
@@ -42,7 +42,7 @@ class PaymentVC: MyTableVC {
             [
                 ["name":"訂購人姓名", "value":"", "key":"order_name"],
                 ["name":"訂購人電話", "value":"", "key":"order_tel"],
-                ["name":"訂購人EMail", "value":"", "key":"order_email"], ["name":"訂購人住址", "value":"", "key":"order_address"]
+                ["name":"訂購人EMail", "value":"", "key":"order_email"], ["name":"訂購人住址", "value":"", "key":"address"]
             ]
         ]
         super.viewDidLoad()
@@ -103,7 +103,7 @@ class PaymentVC: MyTableVC {
                 if (success) {
                     let superModel: SuperModel = OrderService.instance.superModel
                     self.superOrder = (superModel as! SuperOrder)
-                    self.superOrder!.printRow()
+                    //self.superOrder!.product.printRow()
                     
                     self.titleLbl.text = self.superOrder?.product.name
                     
@@ -137,82 +137,12 @@ class PaymentVC: MyTableVC {
                     }
                 }
             }
-            var attributes: [String] = [String]()
-            var unit: String = "件"
-            if superOrder!.product_type == "clothes" {
-                for item in superOrder!.order_clothes {
-                    let color: String = item.color
-                    let size: String = item.size
-                    unit = item.unit
-                    let quantity: String = String(item.quantity) + unit
-                    let price: String = String(item.price)
-                    let attribute =
-                        "顏色：" + color + "," +
-                        "尺寸：" + size + "," +
-                        "數量：" + quantity + "," +
-                        "價格：" + price
-                    attributes.append(attribute)
-                }
-            } else if superOrder!.product_type == "racket" {
-                for item in superOrder!.order_racket {
-                    let color: String = item.color
-                    let weight: String = item.weight
-                    unit = item.unit
-                    let quantity: String = String(item.quantity) + unit
-                    let price: String = String(item.price)
-                    let attribute =
-                        "顏色：" + color + "," +
-                        "重量：" + weight + "," +
-                        "數量：" + quantity + "," +
-                        "價格：" + price
-                    attributes.append(attribute)
-                }
-            } else if superOrder!.product_type == "mejump" {
-                for item in superOrder!.order_mejump {
-                    let title: String = item.title
-                    unit = item.unit
-                    let quantity: String = String(item.quantity) + unit
-                    let price: String = String(item.price)
-                    let attribute =
-                        "種類：" + title + "," +
-                        "數量：" + quantity + "," +
-                        "價格：" + price
-                    attributes.append(attribute)
-                }
-            }
-            rows![0][1]["value"] = attributes.joined(separator: "\n")
-            rows![0][0]["value"] = superOrder!.product.name
-            rows![3][3]["value"] = superOrder!.order_city+superOrder!.order_area+superOrder!.order_road
-            rows![1][1]["value"] = (rows![1][1]["value"] as! String) + unit
             
-            var tmp: String = rows![1][2]["value"] as! String
-            if tmp.count > 0 {
-                rows![1][2]["value"] = thousandNumber(tmp)
-            }
-            tmp = rows![1][3]["value"] as! String
-            if tmp.count > 0 {
-                rows![1][3]["value"] = thousandNumber(tmp)
-            }
-            tmp = rows![1][4]["value"] as! String
-            if tmp.count > 0 {
-                rows![1][4]["value"] = thousandNumber(tmp)
-            }
-            
-            tmp = rows![1][5]["value"] as! String
-            if tmp.count > 0 {
-                rows![1][5]["value"] = tmp.noSec()
-            }
             //print(rows)
         }
     }
     
-    private func thousandNumber(_ tmp: String) -> String {
-        let m: Int = Int(tmp) ?? 0
-        let tmp = m.formattedWithSeparator
-        let price: String = "NT$ \(tmp)"
-        
-        return price
-    }
+    
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
