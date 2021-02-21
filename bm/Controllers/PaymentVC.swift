@@ -133,7 +133,6 @@ class PaymentVC: MyTableVC {
                         if key == label {
                             let type1 = getClassType(value: property.value)
                             if type1.contains("String") {
-                                let t: String = property.value as! String
                                 rows![idx][idx1]["value"] = property.value as! String
                             } else if type1.contains("Int") {
                                 let tmp: Int = property.value as! Int

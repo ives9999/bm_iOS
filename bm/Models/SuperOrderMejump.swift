@@ -20,13 +20,3 @@ class SuperOrderMejump: SuperModel {
     @objc dynamic var title: String = ""
     @objc dynamic var unit: String = "組"
 }
-
-class SuperOrderMejumps: SuperModel {
-    @objc dynamic var success: Bool = false
-    @objc dynamic var rows: [SuperOrderMejump] = Array()
-    
-    override func printRows() {
-        let row = rows[0]
-        row.printRow()
-    }
-}

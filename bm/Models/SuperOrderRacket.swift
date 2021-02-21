@@ -21,13 +21,3 @@ class SuperOrderRacket: SuperModel {
     @objc dynamic var price: Int = -1
     @objc dynamic var unit: String = "隻"
 }
-
-class SuperOrderRackets: SuperModel {
-    @objc dynamic var success: Bool = false
-    @objc dynamic var rows: [SuperOrderRacket] = Array()
-    
-    override func printRows() {
-        let row = rows[0]
-        row.printRow()
-    }
-}
