@@ -24,8 +24,8 @@ class MemberOrderListVC: MyTableVC {
 //        searchRows = _searchRows
         
         super.viewDidLoad()
-        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
-        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
+        let cellNibName = UINib(nibName: "OrderListCell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "OrderListCell")
         
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.lightGray
@@ -85,6 +85,35 @@ class MemberOrderListVC: MyTableVC {
             //self.page = self.page + 1 in CollectionView
         }
     }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return lists1.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "OrderListCell", for: indexPath) as? OrderListCell {
+            
+            let row = lists1[indexPath.row] as! SuperOrder
+            //row.printRow()
+            
+            cell.updateOrderViews(indexPath: indexPath, row: row)
+            
+            return cell
+        } else {
+            return ListCell()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if superOrders != nil {
+            let superOrder = superOrders!.rows[indexPath.row]
+            //toShowProduct(token: superProduct.token)
+            let token = superOrder.token
+            toPayment(order_token: token)
+        }
+    }
+    
     
     @IBAction func prevBtnPressed(_ sender: Any) {
         //goHome()
