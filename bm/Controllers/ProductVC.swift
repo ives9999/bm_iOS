@@ -70,7 +70,7 @@ class ProductVC: ListVC, List1CellDelegate {
             //print(tmps)
             //print("===============")
             if page == 1 {
-                lists1 = [SuperProducts]()
+                lists1 = [SuperProduct]()
             }
             lists1 += tmps
             //print(self.lists)

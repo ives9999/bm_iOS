@@ -18,6 +18,9 @@ class OrderService: DataService {
     var tokenExpireDate: String = ""
     var order_token: String = ""
     
+    override func getListURL() -> String {
+        return URL_ORDER_LIST
+    }
     override func getSource() -> String? {
         return "order"
     }

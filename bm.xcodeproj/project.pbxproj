@@ -101,6 +101,9 @@
 		B35C4F4D2196F5E500F8AEB2 /* EditCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B35C4F4B2196F5E500F8AEB2 /* EditCell.xib */; };
 		B35F8DD91F8F64310073BD70 /* Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35F8DD81F8F64310073BD70 /* Home.swift */; };
 		B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35F8DDA1F8F66490073BD70 /* HomeVideoCell.swift */; };
+		B362263225E236C100D98317 /* MemberOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B362263125E236C100D98317 /* MemberOrderListVC.swift */; };
+		B362265325E2AD3300D98317 /* OrderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B362265125E2AD3300D98317 /* OrderListCell.swift */; };
+		B362265425E2AD3300D98317 /* OrderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B362265225E2AD3300D98317 /* OrderListCell.xib */; };
 		B3649414207DCA790030CF44 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3649413207DCA790030CF44 /* SCLAlertView.swift */; };
 		B3649416207DCB280030CF44 /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3649415207DCB280030CF44 /* SCLExtensions.swift */; };
 		B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36CBD4E20DCBBF600E52B9C /* TempPlayDateVC.swift */; };
@@ -444,6 +447,9 @@
 		B35C4F4B2196F5E500F8AEB2 /* EditCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditCell.xib; sourceTree = "<group>"; };
 		B35F8DD81F8F64310073BD70 /* Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Home.swift; sourceTree = "<group>"; };
 		B35F8DDA1F8F66490073BD70 /* HomeVideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVideoCell.swift; sourceTree = "<group>"; };
+		B362263125E236C100D98317 /* MemberOrderListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberOrderListVC.swift; sourceTree = "<group>"; };
+		B362265125E2AD3300D98317 /* OrderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListCell.swift; sourceTree = "<group>"; };
+		B362265225E2AD3300D98317 /* OrderListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderListCell.xib; sourceTree = "<group>"; };
 		B3649413207DCA790030CF44 /* SCLAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
 		B3649415207DCB280030CF44 /* SCLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLExtensions.swift; sourceTree = "<group>"; };
 		B36CBD4E20DCBBF600E52B9C /* TempPlayDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayDateVC.swift; sourceTree = "<group>"; };
@@ -778,6 +784,8 @@
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
 				B3D4950B25DF67D900D7BF42 /* PaymentCell.swift */,
 				B3D4950C25DF67D900D7BF42 /* PaymentCell.xib */,
+				B362265125E2AD3300D98317 /* OrderListCell.swift */,
+				B362265225E2AD3300D98317 /* OrderListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1154,6 +1162,7 @@
 				B3B7587425A1B06B006ACC33 /* ShowProductVC.swift */,
 				B3B7587A25A5C1BB006ACC33 /* OrderVC.swift */,
 				B3031D6925CD46A50044830C /* PaymentVC.swift */,
+				B362263125E236C100D98317 /* MemberOrderListVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1362,6 +1371,7 @@
 				B36D66C1229A828A00502D62 /* ManagerCourseCell.xib in Resources */,
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
 				B3FB9B1E2407C9CB0051186F /* Member.storyboard in Resources */,
+				B362265425E2AD3300D98317 /* OrderListCell.xib in Resources */,
 				B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */,
 				B3B758C725AD414E006ACC33 /* NumberCell.xib in Resources */,
 				B3CB73DA23D410CD00892F75 /* OneLineCell.xib in Resources */,
@@ -1573,6 +1583,7 @@
 				B36D66BD229A585700502D62 /* SuperCourse.swift in Sources */,
 				B3DEBE18210CB30E003699A0 /* ArenaService.swift in Sources */,
 				B3DEBE0F2106FDB1003699A0 /* ListCell.swift in Sources */,
+				B362265325E2AD3300D98317 /* OrderListCell.swift in Sources */,
 				B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
 				B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */,
@@ -1648,6 +1659,7 @@
 				B3CB73D923D410CD00892F75 /* OneLineCell.swift in Sources */,
 				B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
+				B362263225E236C100D98317 /* MemberOrderListVC.swift in Sources */,
 				B39453E1223CE905005E3027 /* CancelButton.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
 				B387EFEA25DE2FC700B397F8 /* SuperOrderClothes.swift in Sources */,

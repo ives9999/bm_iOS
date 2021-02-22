@@ -17,13 +17,16 @@ class MemberVC: MyTableVC {
     @IBOutlet weak var forgetPasswordIcon: UIImageView!
     @IBOutlet weak var forgetPasswordBtn: UIButton!
     
-    let _sections: [String] = ["會員資料"]
+    let _sections: [String] = ["會員資料", "訂單"]
     //let _sections: [String] = ["會員資料", "報名"]
     let fixedRows: [Dictionary<String, String>] = [
         ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
         ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
     ]
     var memberRows: [Dictionary<String, String>] = [Dictionary<String, String>]()
+    var orderRows: [Dictionary<String, String>] = [
+        ["text": "訂單查詢", "icon": "order", "segue": TO_MEMBER_ORDER_LIST]
+    ]
     let signupRows: [Dictionary<String, String>] = [
         ["text": "課程報名", "icon": "account", "segue": TO_SIGNUP_LIST]
     ]
@@ -79,6 +82,7 @@ class MemberVC: MyTableVC {
         memberRows.append(new)
         
         _rows.append(memberRows)
+        _rows.append(orderRows)
         _rows.append(signupRows)
         //print(_rows)
         setData(sections: _sections, rows: _rows)
@@ -173,6 +177,8 @@ class MemberVC: MyTableVC {
                      //present(vc, animated: true, completion: nil)
                  //}
                 performSegue(withIdentifier: "toA", sender: nil)
+            } else if segue == TO_MEMBER_ORDER_LIST {
+                toMemberOrderList()
             }
         }
     }

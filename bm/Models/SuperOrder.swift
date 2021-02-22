@@ -189,3 +189,28 @@ class SuperOrder: SuperModel {
         return product_price
     }
 }
+
+class SuperOrders: SuperModel {
+    @objc dynamic var success: Bool = false
+    @objc dynamic var page: Int = 0
+    @objc dynamic var totalCount: Int = 0
+    @objc dynamic var perPage: Int = 0
+    @objc dynamic var rows: [SuperOrder] = Array()
+    
+    override func printRows() {
+        let row = rows[0]
+        row.printRow()
+    }
+    
+    override func getRows<SuperOrder>() -> [SuperOrder]? {
+        return (rows as! [SuperOrder])
+    }
+    
+    override func getRowFromIdx<T>(_ idx: Int) -> T? where T : SuperModel {
+        if rows.count >= idx {
+            return (rows[idx] as! T)
+        } else {
+            return nil
+        }
+    }
+}
