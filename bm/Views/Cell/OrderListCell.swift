@@ -29,7 +29,7 @@ class OrderListCell: SuperCell {
         
         nameLbl.text = row.product.name
         dateLbl.text = row.created_at_show
-        priceLbl.text = String(row.amount_show)
+        priceLbl.text = row.amount_show
         orderNoLbl.text = row.order_no
         noLbl.text = String(indexPath.row+1)
         
