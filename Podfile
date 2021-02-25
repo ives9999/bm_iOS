@@ -24,6 +24,8 @@ target 'bm' do
   pod 'SwiftyJSON' , '~> 4.2.0'
   pod 'SwiftyXMLParser' , :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
   pod 'CryptoSwift' , '~> 0.14.0'
+  pod 'SnapKit', '~> 5.0.0'
+  pod 'JXBanner'
 end
 
 target 'bmNotificationServiceExtension' do

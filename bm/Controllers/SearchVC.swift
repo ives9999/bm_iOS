@@ -41,7 +41,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     var times: [String: Any] = [String: Any]()
     var keyword: String = ""
     
+    var firstTimeLoading: Bool = true
+    
     override func viewDidLoad() {
+        
+        
         
         model = Team.instance
         myTablView = tableView
@@ -59,7 +63,19 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
 //        if !Session.shared.exist(key: Session.shared.loginResetKey) {
 //            Session.shared.loginReset = gReset
 //        }
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (firstTimeLoading) {
+            if #available(iOS 13.0, *) {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(identifier: "banner")  as? BannerVC {
+                    viewController.modalPresentationStyle = .overCurrentContext
+                    present(viewController, animated: true, completion: nil)
+                    show(viewController, sender: nil)
+                }
+            }
+        }
     }
     
 //    override func viewDidAppear(_ animated: Bool) {

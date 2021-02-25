@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,7 +22,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="臨打" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hAb-Q7-dkO">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fbn-nY-DP6">
@@ -57,7 +57,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BZG-Qs-wSQ" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMx-d2-eep">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hMx-d2-eep">
                                         <rect key="frame" x="191" y="8" width="32" height="34"/>
                                         <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -82,6 +82,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="aJ9-6P-u9a"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="aJ9-6P-u9a" firstAttribute="trailing" secondItem="X9c-VN-HVh" secondAttribute="trailing" id="2RM-hU-Jyr"/>
@@ -99,7 +100,6 @@
                             <constraint firstItem="FcP-ze-zC8" firstAttribute="leading" secondItem="aJ9-6P-u9a" secondAttribute="leading" id="rXz-KD-khc"/>
                             <constraint firstItem="X9c-VN-HVh" firstAttribute="top" secondItem="Req-IZ-nd0" secondAttribute="bottom" id="yLR-ar-udL"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="aJ9-6P-u9a"/>
                     </view>
                     <navigationItem key="navigationItem" id="Agn-u2-7Ah"/>
                     <connections>
@@ -126,7 +126,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="臨打" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfS-oN-pNs">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -157,6 +157,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="MKJ-0G-bAL"/>
                         <constraints>
                             <constraint firstItem="MKJ-0G-bAL" firstAttribute="trailing" secondItem="hIU-gT-JFe" secondAttribute="trailing" id="09A-oF-I9l"/>
                             <constraint firstItem="YjS-X6-jiY" firstAttribute="top" secondItem="MKJ-0G-bAL" secondAttribute="top" id="8Yc-QK-Sku"/>
@@ -172,7 +173,6 @@
                             <constraint firstItem="YjS-X6-jiY" firstAttribute="leading" secondItem="MKJ-0G-bAL" secondAttribute="leading" id="xF9-WZ-cRp"/>
                             <constraint firstItem="cWc-gh-sIH" firstAttribute="leading" secondItem="MKJ-0G-bAL" secondAttribute="leading" constant="12" id="zX9-C8-KX6"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="MKJ-0G-bAL"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="臨打" image="tempPlay" id="OIH-0z-1IF"/>
                     <navigationItem key="navigationItem" id="qdk-ew-vX5"/>
@@ -200,7 +200,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="顯示臨打" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31T-Ck-L6a">
                                         <rect key="frame" x="169" y="19" width="76.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BAw-aE-4fj">
@@ -249,7 +249,7 @@
                                                     <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="p0o-LJ-hGx"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g60-MJ-d0q" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g60-MJ-d0q" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="78" y="0.0" width="62" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="Cmj-8C-Zx6"/>
@@ -270,6 +270,7 @@
                                 </constraints>
                             </view>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="obQ-5G-fgW"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="kjd-vi-xhQ" firstAttribute="leading" secondItem="obQ-5G-fgW" secondAttribute="leading" id="8ac-Zx-2ee"/>
@@ -279,7 +280,6 @@
                             <constraint firstItem="obQ-5G-fgW" firstAttribute="trailing" secondItem="MVL-bJ-APa" secondAttribute="trailing" id="YJf-sb-IAd"/>
                             <constraint firstItem="kjd-vi-xhQ" firstAttribute="trailing" secondItem="obQ-5G-fgW" secondAttribute="trailing" id="rq1-Xb-nx0"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="obQ-5G-fgW"/>
                     </view>
                     <navigationItem key="navigationItem" id="OgV-fv-2jn"/>
                     <connections>
@@ -311,7 +311,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="臨打" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nd2-FW-fzb">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -330,7 +330,7 @@
                                 <rect key="frame" x="0.0" y="108" width="414" height="654"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9QR-jK-rdm">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9QR-jK-rdm">
                                 <rect key="frame" x="147" y="792" width="120" height="34"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -346,6 +346,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="MId-N4-3lE"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="DpE-TG-fU1" secondAttribute="bottom" id="2ab-Z5-TTe"/>
@@ -362,7 +363,6 @@
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="wIa-be-ZTa"/>
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="top" secondItem="MId-N4-3lE" secondAttribute="top" id="xYF-jR-S3y"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="MId-N4-3lE"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="臨打" image="tempPlay" id="bjH-9J-pNs"/>
                     <connections>
@@ -378,7 +378,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UJy-DK-SL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="222" y="-962"/>
+            <point key="canvasLocation" x="-109" y="-974"/>
         </scene>
         <!--Temp Play DateVC-->
         <scene sceneID="6EB-Lt-ctB">
@@ -406,7 +406,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="開放臨打日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPF-SV-psO">
                                         <rect key="frame" x="149.5" y="18.5" width="115" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -428,6 +428,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="4NC-Y4-KNc"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="31u-nZ-1LZ" firstAttribute="top" secondItem="4NC-Y4-KNc" secondAttribute="top" id="54t-Cc-Te5"/>
@@ -442,7 +443,6 @@
                             <constraint firstItem="31u-nZ-1LZ" firstAttribute="leading" secondItem="kwM-OZ-VxO" secondAttribute="leading" id="pa9-Nl-fTc"/>
                             <constraint firstItem="6Pb-69-Tk5" firstAttribute="top" secondItem="31u-nZ-1LZ" secondAttribute="bottom" id="wQz-O0-hsW"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="4NC-Y4-KNc"/>
                     </view>
                     <navigationItem key="navigationItem" id="cU4-x5-KkL"/>
                     <connections>
@@ -481,7 +481,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期臨打球友列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vFD-E4-vIm">
                                         <rect key="frame" x="130.5" y="18.5" width="153" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -503,6 +503,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="bp2-qj-eqk"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="iPb-3Y-5bf" firstAttribute="top" secondItem="SYy-1A-eGW" secondAttribute="bottom" id="7v4-G0-EMe"/>
@@ -517,7 +518,6 @@
                             <constraint firstItem="bp2-qj-eqk" firstAttribute="trailing" secondItem="iPb-3Y-5bf" secondAttribute="trailing" id="u1V-fZ-uU4"/>
                             <constraint firstItem="bp2-qj-eqk" firstAttribute="bottom" secondItem="iPb-3Y-5bf" secondAttribute="bottom" id="xHB-JZ-tkl"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="bp2-qj-eqk"/>
                     </view>
                     <navigationItem key="navigationItem" id="Yha-GI-el3"/>
                     <connections>
@@ -555,7 +555,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="會員資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9m-1p-DCF">
                                         <rect key="frame" x="168.5" y="18.5" width="77" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -576,6 +576,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="72Q-wl-fFD"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="hG5-WS-6vA" firstAttribute="leading" secondItem="72Q-wl-fFD" secondAttribute="leading" id="F6G-Lr-0Th"/>
@@ -589,7 +590,6 @@
                             <constraint firstItem="hG5-WS-6vA" firstAttribute="trailing" secondItem="72Q-wl-fFD" secondAttribute="trailing" id="oij-Gz-8Wy"/>
                             <constraint firstItem="hG5-WS-6vA" firstAttribute="top" secondItem="QoC-sN-SW0" secondAttribute="bottom" id="uGj-72-4c7"/>
                         </constraints>
-                        <viewLayoutGuide key="safeArea" id="72Q-wl-fFD"/>
                     </view>
                     <navigationItem key="navigationItem" id="ekV-lQ-ddI"/>
                     <connections>
@@ -668,5 +668,8 @@
         <image name="background" width="377.5" height="670"/>
         <image name="prev" width="20.5" height="20.5"/>
         <image name="tempPlay" width="25" height="25"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

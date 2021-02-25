@@ -26,6 +26,13 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
     var keyword: String = ""
     
     var params: [String: Any] = [String: Any]()
+    
+    lazy var bannerAd: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .red
+        return view
+    }()
         
     override func viewDidLoad() {
             
@@ -56,12 +63,6 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
         if !Member.instance.justGetMemberOne && Member.instance.isLoggedIn {
             _updatePlayerIDWhenIsNull()
         }
-        
-        let b: UIView = UIView(frame: UIScreen.main.bounds)
-        b.backgroundColor = UIColor(white: 0.0, alpha: 0.54)
-        //UIApplication.shared.keyWindow?.addSubview(b)
-        view.addSubview(b)
-        view.bringSubview(toFront: b)
     }
     
 //    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {

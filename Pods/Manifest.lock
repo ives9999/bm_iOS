@@ -6,6 +6,37 @@ PODS:
   - Device.swift (1.2.2)
   - ECPayPaymentGatewayKit (1.0.0)
   - IQKeyboardManagerSwift (6.5.6)
+  - JXBanner (0.3.2):
+    - JXBanner/Banner (= 0.3.2)
+    - JXBanner/PageControl (= 0.3.2)
+  - JXBanner/Banner (0.3.2):
+    - JXBanner/Banner/API (= 0.3.2)
+    - JXBanner/Banner/Banner (= 0.3.2)
+    - JXBanner/Banner/Cell (= 0.3.2)
+    - JXBanner/Banner/Common (= 0.3.2)
+    - JXBanner/Banner/Transform (= 0.3.2)
+  - JXBanner/Banner/API (0.3.2):
+    - JXBanner/Banner/Cell
+    - JXBanner/PageControl
+  - JXBanner/Banner/Banner (0.3.2):
+    - JXBanner/Banner/API
+    - JXBanner/Banner/Common
+    - JXBanner/Banner/Transform
+  - JXBanner/Banner/Cell (0.3.2)
+  - JXBanner/Banner/Common (0.3.2)
+  - JXBanner/Banner/Transform (0.3.2):
+    - JXBanner/Banner/API
+  - JXBanner/PageControl (0.3.2):
+    - JXPageControl
+  - JXPageControl (0.1.3):
+    - JXPageControl/Common (= 0.1.3)
+    - JXPageControl/Jump (= 0.1.3)
+    - JXPageControl/Transform (= 0.1.3)
+  - JXPageControl/Common (0.1.3)
+  - JXPageControl/Jump (0.1.3):
+    - JXPageControl/Common
+  - JXPageControl/Transform (0.1.3):
+    - JXPageControl/Common
   - KeychainSwift (16.0.1)
   - OneSignal (2.16.2)
   - PromiseKit (6.8.5):
@@ -19,6 +50,7 @@ PODS:
     - PromiseKit/CorePromise
   - ReachabilitySwift (5.0.0)
   - SelectionDialog (3.0.0)
+  - SnapKit (5.0.1)
   - Socket.IO-Client-Swift (16.0.0):
     - Starscream (~> 4.0)
   - Starscream (4.0.4)
@@ -35,11 +67,13 @@ DEPENDENCIES:
   - Device.swift
   - ECPayPaymentGatewayKit (~> 1.0.0)
   - IQKeyboardManagerSwift
+  - JXBanner
   - KeychainSwift (~> 16.0)
   - OneSignal (< 3.0, >= 2.6.2)
   - PromiseKit (~> 6.8.3)
   - ReachabilitySwift
   - SelectionDialog
+  - SnapKit (~> 5.0.0)
   - Socket.IO-Client-Swift
   - SwiftyJSON (~> 4.2.0)
   - SwiftyXMLParser (from `https://github.com/yahoojapan/SwiftyXMLParser.git`)
@@ -55,11 +89,14 @@ SPEC REPOS:
     - Device.swift
     - ECPayPaymentGatewayKit
     - IQKeyboardManagerSwift
+    - JXBanner
+    - JXPageControl
     - KeychainSwift
     - OneSignal
     - PromiseKit
     - ReachabilitySwift
     - SelectionDialog
+    - SnapKit
     - Socket.IO-Client-Swift
     - Starscream
     - SwiftyJSON
@@ -83,11 +120,14 @@ SPEC CHECKSUMS:
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
   ECPayPaymentGatewayKit: 9d8787050df7323fd1cb399db2a220527d19550e
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  JXBanner: e4c6ce1c78eba281b5200a3eaf4ed46c6c5257a2
+  JXPageControl: eea52838699a4949063e600b25eb9e8b6e20ae3f
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
   OneSignal: 678872eea3e733ce20c75a5d18a803c75ec2a32f
   PromiseKit: 9616b0afef31eae56ab9ce044c8ec2b8612a15cd
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SelectionDialog: 9f4b63f2fc004f2b834a9980870a698f98516897
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Socket.IO-Client-Swift: ff35cb6e4831f681441ce25bc1078039ca8602ea
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
@@ -96,6 +136,6 @@ SPEC CHECKSUMS:
   TRVideoView: dc9617f61f7d3b207b2a5ad8afe401ef7c03e51e
   UIColor_Hex_Swift: 8be7432edacb7fa91c78aa05ef3c30b66e4f9415
 
-PODFILE CHECKSUM: 2a13900b6112d4f377091cd1eda13b633e557f60
+PODFILE CHECKSUM: e86d6e500a939b03417a7d3fcf91574885ddda33
 
 COCOAPODS: 1.10.1
