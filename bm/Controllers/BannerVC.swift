@@ -23,8 +23,26 @@ class BannerVC: BaseViewController {
         return banner
     }()
     
+    var bView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor(white: 1, alpha: 0.5)
+        self.view.addSubview(bView)
+        bView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.edges.equalToSuperview().inset(30)
+        }
+        bView.addSubview(banner)
+        banner.snp.makeConstraints { maker in
+            maker.left.right.top.equalToSuperview()
+            maker.height.equalToSuperview().multipliedBy(0.75)
+        }
+        
     }
     
     @IBAction func goThat() {
@@ -32,3 +50,46 @@ class BannerVC: BaseViewController {
         print("go go")
     }
 }
+
+//MARK:- JXBannerDataSource
+extension BannerVC: JXBannerDataSource {
+    
+    //register cell
+    func jxBanner(_ banner: JXBannerType)-> JXBannerCellRegister {
+        return JXBannerCellRegister(type: JXBannerCell.self, reuseIdentifier: "JXDefaultVCCell")
+    }
+    
+    //輪播總數
+    func jxBanner(numberOfItems banner: JXBannerType) -> Int {
+        return pageCount
+    }
+    
+    //輪播cell設置
+    func jxBanner(_ banner: JXBannerType, cellForItemAt index: Int, cell: UICollectionViewCell) -> UICollectionViewCell {
+        let tempCell: JXBannerCell = cell as! JXBannerCell
+        tempCell.layer.cornerRadius = 8
+        tempCell.layer.masksToBounds = true
+        tempCell.imageView.image = UIImage(named: "banner_placeholder")
+        tempCell.msgLabel.text = String(index) + "---他真的來囉"
+        return tempCell
+    }
+    
+    //banner 設置
+    func jxBanner(_ banner: JXBannerType, layoutParams: JXBannerLayoutParams) -> JXBannerLayoutParams {
+        return layoutParams.itemSize(CGSize(width: UIScreen.main.bounds.width, height: 200)).itemSpacing(20)
+    }
+}
+
+//MARK:- JXBannerDelegate
+extension BannerVC: JXBannerDelegate {
+    
+    public func jxBanner(_ banner: JXBannerType, didSelectItemAt index: Int) {
+        print(index)
+    }
+}
+
+
+
+
+
+
