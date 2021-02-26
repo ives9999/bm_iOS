@@ -45,8 +45,6 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     
     override func viewDidLoad() {
         
-        
-        
         model = Team.instance
         myTablView = tableView
         sections = ["", "更多"]
@@ -69,12 +67,15 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         if (firstTimeLoading) {
             if #available(iOS 13.0, *) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let viewController = storyboard.instantiateViewController(identifier: "banner")  as? BannerVC {
+                if let viewController = storyboard.instantiateViewController(identifier: "banner")  as? HomeTotalAdVC {
                     viewController.modalPresentationStyle = .overCurrentContext
                     present(viewController, animated: true, completion: nil)
-                    show(viewController, sender: nil)
                 }
+            } else {
+                let viewController = self.storyboard!.instantiateViewController(withIdentifier: "banner") as! HomeTotalAdVC
+                self.navigationController!.pushViewController(viewController, animated: true)
             }
+            firstTimeLoading = false
         }
     }
     

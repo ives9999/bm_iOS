@@ -1387,10 +1387,10 @@
             </objects>
             <point key="canvasLocation" x="310" y="656"/>
         </scene>
-        <!--BannerVC-->
+        <!--Home Total AdVC-->
         <scene sceneID="LUO-NO-mSb">
             <objects>
-                <viewController storyboardIdentifier="banner" id="OVk-YF-0r0" customClass="BannerVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="banner" id="OVk-YF-0r0" customClass="HomeTotalAdVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3EZ-rU-M0E">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

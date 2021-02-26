@@ -10,7 +10,7 @@ import Foundation
 import SnapKit
 import JXBanner
 
-class BannerVC: BaseViewController {
+class HomeTotalAdVC: BaseViewController {
     
     var pageCount = 3
     lazy var banner: JXBanner = {
@@ -52,7 +52,7 @@ class BannerVC: BaseViewController {
 }
 
 //MARK:- JXBannerDataSource
-extension BannerVC: JXBannerDataSource {
+extension HomeTotalAdVC: JXBannerDataSource {
     
     //register cell
     func jxBanner(_ banner: JXBannerType)-> JXBannerCellRegister {
@@ -81,7 +81,7 @@ extension BannerVC: JXBannerDataSource {
 }
 
 //MARK:- JXBannerDelegate
-extension BannerVC: JXBannerDelegate {
+extension HomeTotalAdVC: JXBannerDelegate {
     
     public func jxBanner(_ banner: JXBannerType, didSelectItemAt index: Int) {
         print(index)
