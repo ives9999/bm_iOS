@@ -170,7 +170,7 @@ enum TAB: String {
         
         switch idx {
         case 0:
-            return tabBarController.selectedViewController as! TempPlayVC
+            return tabBarController.selectedViewController as! SearchVC
         case 1:
             return tabBarController.selectedViewController as! CourseVC
         case 2:
@@ -180,7 +180,7 @@ enum TAB: String {
         case 4:
             return tabBarController.selectedViewController as! MoreVC
         default:
-            return TempPlayVC()
+            return SearchVC()
         }
     }
 }

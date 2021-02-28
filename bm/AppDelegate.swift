@@ -86,13 +86,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //let color = UIColor(red: 128/255, green: 100/255, blue: 0, alpha: 1)
         //setStatusBarBackgroundColor(color: color)
         
-        let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: (window?.frame.width)!, height: UIApplication.shared.statusBarFrame.height))
-        label.backgroundColor = UIColor(STATUS_GREEN)
-        //建立一個Label並且為全黑底色，高度20px，寬度與整個window同寬
-        window?.rootViewController?.view.addSubview(label)
-        //self.window.backgroundColor = [UIColor blackColor];
-        
-        
         let deviceType: DeviceType = UIDevice.current.deviceType
         if deviceType == .simulator {
             gSimulate = true
@@ -137,7 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                                                         sourceApplication: sourceApplication,
 //                                                         annotation: annotation)
 //        }
-        return false;
+        return false
     }
     
     //      stop facebook login support for 1.5.0 above

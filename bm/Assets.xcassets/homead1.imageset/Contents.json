@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "blacklist.png",
+      "filename" : "homead1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "blacklist@2x.png",
+      "filename" : "homead1-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "blacklist@3x.png",
+      "filename" : "homead1-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
