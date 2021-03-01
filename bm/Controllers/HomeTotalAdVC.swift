@@ -48,7 +48,7 @@ class HomeTotalAdVC: BaseViewController {
         super.viewDidLoad()
         
         //主要的background view設為mask
-        view.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        //view.backgroundColor = UIColor(white: 1, alpha: 0.8)
         
         //放置banner的container view
         self.view.addSubview(adContainer)

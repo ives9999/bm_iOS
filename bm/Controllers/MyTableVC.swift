@@ -139,16 +139,17 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UITableViewHeaderFooterView()
-        view.layer.backgroundColor = UIColor.clear.cgColor
+        view.backgroundColor = UIColor.white
         
         return view
     }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UITableViewHeaderFooterView()
-        view.layer.backgroundColor = UIColor.clear.cgColor
-        
-        return view
-    }
+    
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let view = UITableViewHeaderFooterView()
+//        view.backgroundColor = UIColor.white
+//        
+//        return view
+//    }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
@@ -157,12 +158,14 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
             header.textLabel?.textColor = UIColor.black
         }
     }
+    
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         let footer = view as! UITableViewHeaderFooterView
         let separator: UIView = UIView(frame: CGRect(x: 15, y: 0, width: footer.frame.width, height: 1))
         separator.layer.backgroundColor = UIColor("#6c6c6e").cgColor
         //footer.addSubview(separator)
     }
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == page * PERPAGE - 2 {
             page += 1
