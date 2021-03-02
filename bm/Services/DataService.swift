@@ -292,7 +292,7 @@ class DataService {
                 }
                 //print(data)
                 let json = JSON(data)
-                //print(json)
+                print(json)
                 self.setData1(row: json)
                 
                 //var images: [String] = [String]()

@@ -57,6 +57,7 @@ class OrderService: DataService {
                     completion(true)
                 } else {
                     self.msg = json["msg"].stringValue
+                    completion(false)
                 }
             } else {
                 //print(response.result.error)

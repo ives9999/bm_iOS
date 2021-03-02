@@ -756,7 +756,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toPayment(ecpay_token: String?=nil, order_token: String, tokenExpireDate: String?=nil) {
+    func toPayment(order_token: String, ecpay_token: String?=nil, tokenExpireDate: String?=nil) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_PAYMENT)  as? PaymentVC {

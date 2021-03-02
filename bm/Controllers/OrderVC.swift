@@ -297,17 +297,17 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         OrderService.instance.update(t: SuperOrder.self, params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
+                let order_token: String = OrderService.instance.order_token
                 if self.total > 0 {
                     let ecpay_token: String = OrderService.instance.ecpay_token
                     let tokenExpireDate: String = OrderService.instance.tokenExpireDate
-                    let order_token: String = OrderService.instance.order_token
                     self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
                         //print("aaa")
-                        self.toPayment(ecpay_token: ecpay_token, order_token: order_token, tokenExpireDate: tokenExpireDate)
+                        self.toPayment(order_token: order_token, ecpay_token: ecpay_token, tokenExpireDate: tokenExpireDate)
                     }
                 } else {
                     self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
-                        self.prev()
+                        self.toPayment(order_token: order_token)
                     }
                 }
             } else {

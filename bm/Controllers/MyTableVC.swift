@@ -144,12 +144,12 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         return view
     }
     
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        let view = UITableViewHeaderFooterView()
-//        view.backgroundColor = UIColor.white
-//        
-//        return view
-//    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UITableViewHeaderFooterView()
+        view.backgroundColor = UIColor.white
+
+        return view
+    }
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         if let header = view as? UITableViewHeaderFooterView {
