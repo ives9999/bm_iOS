@@ -23,6 +23,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     var sex: String = "M"
     var old_selected_city: String = ""
     var member_token: String = ""
+    var isFeaturedChange: Bool = false
     
     var testData: [String: String] = [
 //        EMAIL_KEY: "ives@housetube.tw",
@@ -237,23 +238,13 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
     }
     
-//    override func checkboxValueChanged(checked: Bool) {
-//        let item = getFormItemFromKey(PRIVACY_KEY)
-//        if !checked {
-//            warning("必須同意隱私權條款，才能註冊")
-//            item?.value = nil
-//        } else {
-//            item?.value = "1"
-//        }
-//        self.agreePrivacy = checked
-//    }
-    
-//    override func sexValueChanged(sex: String) {
-//
-//        let item = getFormItemFromKey(SEX_KEY)
-//        self.sex = sex
-//        item?.value = sex
-//    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            featuredView.setPickedImage(image: pickedImage)
+            isFeaturedChange = true
+        }
+        dismiss(animated: true, completion: nil)
+    }
     
     func isImageSet(_ b: Bool) {}
     
@@ -388,7 +379,9 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
         //print(params)
         
-        MemberService.instance.update(_params: params, image: nil) { (success) in
+        let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
+        
+        MemberService.instance.update(_params: params, image: image) { (success) in
             if success {
                 Global.instance.removeSpinner(superView: self.view)
                 if MemberService.instance.success {
