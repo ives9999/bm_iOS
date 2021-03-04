@@ -126,7 +126,6 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let c = section_keys[section].count
         return section_keys[section].count
     }
     
@@ -246,6 +245,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         dismiss(animated: true, completion: nil)
     }
     
+    // after choice image b is true
     func isImageSet(_ b: Bool) {}
     
     func myPresent(_ viewController: UIViewController) {
@@ -378,6 +378,9 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             params[TOKEN_KEY] = member_token
         }
         params["do"] = "update"
+        if isFeaturedChange {
+            params["featured"] = "1"
+        }
         //print(params)
         
         let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
