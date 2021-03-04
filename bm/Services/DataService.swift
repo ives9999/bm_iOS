@@ -463,11 +463,11 @@ class DataService {
         
         let url: String = getUpdateURL()
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-        var params: [String: String] = ["source": "app","channel":CHANNEL]
+        var params: [String: String] = ["source": "app","channel":CHANNEL,"device":"app"]
         params.merge(_params)
         
-        //print(url)
-        //print(params)
+        print(url)
+        print(params)
         msg = ""
         Alamofire.upload(
             multipartFormData: { (multipartFormData) in
@@ -481,7 +481,8 @@ class DataService {
             },
             usingThreshold: UInt64.init(),
             to: url,
-            method: .post, headers: headers
+            method: .post,
+            headers: headers
         ) { (result) in
             
             switch result {
@@ -491,12 +492,12 @@ class DataService {
                         guard let data = response.result.value else {
                             self.handleErrorMsg("伺服器錯誤，請洽管理員")
                             //print("data error")
+                            self.msg = "伺服器錯誤，請洽管理員"
                             completion(false)
                             return
                         }
-                        //print(data)
                         let json = JSON(data)
-                        //print(json)
+                        print(json)
                         self.success = json["success"].boolValue
                         if self.success {
                             self.id = json["id"].intValue

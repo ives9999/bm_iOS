@@ -41,8 +41,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     var times: [String: Any] = [String: Any]()
     var keyword: String = ""
     
-    //var firstTimeLoading: Bool = false
-    var firstTimeLoading: Bool = true
+    var firstTimeLoading: Bool = false
+    //var firstTimeLoading: Bool = true
     
     override func viewDidLoad() {
         

@@ -377,6 +377,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         if member_token.count > 0 {
             params[TOKEN_KEY] = member_token
         }
+        params["do"] = "update"
         //print(params)
         
         let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
