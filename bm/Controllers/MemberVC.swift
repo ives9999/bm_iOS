@@ -247,7 +247,9 @@ class MemberVC: MyTableVC {
         self.setValidateRow()
         self.tableView.reloadData()
         nicknameLbl.text = Member.instance.nickname
-        avatarImageView.downloaded(from: Member.instance.avatar)
+        if Member.instance.avatar.count > 0 {
+            avatarImageView.downloaded(from: Member.instance.avatar)
+        }
         loginBtn.setTitle("登出", for: .normal)
         registerBtn.isHidden = true
         registerIcon.isHidden = true
