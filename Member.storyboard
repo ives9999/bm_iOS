@@ -1067,6 +1067,7 @@
                     <tabBarItem key="tabBarItem" title="會員" image="member" id="p65-Zk-2yj"/>
                     <navigationItem key="navigationItem" id="Qdh-tv-BEY"/>
                     <connections>
+                        <outlet property="avatarImageView" destination="H1p-AH-ugJ" id="1Xi-E4-zUw"/>
                         <outlet property="forgetPasswordBtn" destination="Qbu-I3-Mbg" id="nvu-By-1AI"/>
                         <outlet property="forgetPasswordIcon" destination="Lxb-Ek-TDO" id="c2c-n7-uid"/>
                         <outlet property="loginBtn" destination="mc0-Id-FyL" id="TJK-vx-dg4"/>
@@ -1699,7 +1700,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="2ff-JT-Wdj"/>
+        <segue reference="ous-Dp-pXL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="377.5" height="670"/>

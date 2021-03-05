@@ -466,8 +466,8 @@ class DataService {
         var params: [String: String] = ["source": "app","channel":CHANNEL,"device":"app"]
         params.merge(_params)
         
-        print(url)
-        print(params)
+        //print(url)
+        //print(params)
         msg = ""
         Alamofire.upload(
             multipartFormData: { (multipartFormData) in
@@ -497,7 +497,7 @@ class DataService {
                             return
                         }
                         let json = JSON(data)
-                        print(json)
+                        //print(json)
                         self.success = json["success"].boolValue
                         if self.success {
                             self.id = json["id"].intValue

@@ -26,13 +26,13 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     var isFeaturedChange: Bool = false
     
     var testData: [String: String] = [
-//        EMAIL_KEY: "ives@housetube.tw",
+//        EMAIL_KEY: "john@housetube.tw",
 //        PASSWORD_KEY: "1234",
 //        REPASSWORD_KEY: "1234",
-//        NAME_KEY: "孫志煌",
-//        NICKNAME_KEY: "列車長",
+//        NAME_KEY: "孫士君",
+//        NICKNAME_KEY: "孫世君",
 //        DOB_KEY: "1969-01-05",
-//        MOBILE_KEY: "0911299994",
+//        MOBILE_KEY: "0911299998",
 //        TEL_KEY: "062295888",
 //        CITY_ID_KEY: "218",
 //        "city_name": "台南市",
@@ -103,7 +103,9 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 }
             }
             old_selected_city = String(Member.instance.getData(key: CITY_ID_KEY) as! Int)
-            featuredView.setPickedImage(url: Member.instance.avatar)
+            if Member.instance.avatar.count > 0 {
+                featuredView.setPickedImage(url: Member.instance.avatar)
+            }
         } else {
             if testData.count > 0 {
                 for (key, value) in testData {

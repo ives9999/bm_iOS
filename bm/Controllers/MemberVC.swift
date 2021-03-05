@@ -16,6 +16,7 @@ class MemberVC: MyTableVC {
     @IBOutlet weak var registerIcon: UIImageView!
     @IBOutlet weak var forgetPasswordIcon: UIImageView!
     @IBOutlet weak var forgetPasswordBtn: UIButton!
+    @IBOutlet weak var avatarImageView: UIImageView!
     
     let _sections: [String] = ["會員資料", "訂單"]
     //let _sections: [String] = ["會員資料", "報名"]
@@ -242,27 +243,28 @@ class MemberVC: MyTableVC {
            }
        }
        
-       public func _loginBlock() {
-           self.setValidateRow()
-           self.tableView.reloadData()
-           nicknameLbl.text = Member.instance.nickname
-           loginBtn.setTitle("登出", for: .normal)
-           registerBtn.isHidden = true
-           registerIcon.isHidden = true
-           forgetPasswordBtn.isHidden = true
-           forgetPasswordIcon.isHidden = true
+    public func _loginBlock() {
+        self.setValidateRow()
+        self.tableView.reloadData()
+        nicknameLbl.text = Member.instance.nickname
+        avatarImageView.downloaded(from: Member.instance.avatar)
+        loginBtn.setTitle("登出", for: .normal)
+        registerBtn.isHidden = true
+        registerIcon.isHidden = true
+        forgetPasswordBtn.isHidden = true
+        forgetPasswordIcon.isHidden = true
     
-           tableView.isHidden = false
-       }
-       public func _logoutBlock() {
-           nicknameLbl.text = "未登入"
-           loginBtn.setTitle("登入", for: .normal)
-           registerBtn.isHidden = false
-           registerIcon.isHidden = false
-           forgetPasswordBtn.isHidden = false
-           forgetPasswordIcon.isHidden = false
-           tableView.isHidden = true
-       }
+        tableView.isHidden = false
+    }
+    public func _logoutBlock() {
+        nicknameLbl.text = "未登入"
+        loginBtn.setTitle("登入", for: .normal)
+        registerBtn.isHidden = false
+        registerIcon.isHidden = false
+        forgetPasswordBtn.isHidden = false
+        forgetPasswordIcon.isHidden = false
+        tableView.isHidden = true
+    }
     
 }
 
