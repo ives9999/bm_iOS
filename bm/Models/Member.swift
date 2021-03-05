@@ -141,7 +141,13 @@ class Member {
             return session.getString(AVATAR_KEY)
         }
         set {
-            session.set(AVATAR_KEY, newValue)
+            var avatar = ""
+            if newValue.count > 0 {
+                if !newValue.hasPrefix("http://") || !newValue.hasPrefix("https://") {
+                    avatar = BASE_URL + newValue
+                }
+            }
+            session.set(AVATAR_KEY, avatar)
         }
     }
     var player_id: String {

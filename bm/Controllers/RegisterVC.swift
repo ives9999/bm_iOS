@@ -50,8 +50,6 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
 
         self.hideKeyboardWhenTappedAround()
         
-        initData()
-        
         imagePicker.delegate = self
         featuredView.gallery = imagePicker
         featuredView.delegate = self
@@ -61,6 +59,8 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         
         hideKeyboardWhenTappedAround()
         FormItemCellType.registerCell(for: tableView)
+        
+        initData()
     }
     
     func initData() {
@@ -103,6 +103,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 }
             }
             old_selected_city = String(Member.instance.getData(key: CITY_ID_KEY) as! Int)
+            featuredView.setPickedImage(url: Member.instance.avatar)
         } else {
             if testData.count > 0 {
                 for (key, value) in testData {
