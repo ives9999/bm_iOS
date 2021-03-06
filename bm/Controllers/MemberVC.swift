@@ -266,6 +266,7 @@ class MemberVC: MyTableVC {
         forgetPasswordBtn.isHidden = false
         forgetPasswordIcon.isHidden = false
         tableView.isHidden = true
+        avatarImageView.image = UIImage(named: "menuProfileIcon")
     }
     
 }
