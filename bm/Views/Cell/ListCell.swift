@@ -119,8 +119,13 @@ class ListCell: SuperCell {
     
     func updateTeam(indexPath: IndexPath, data: SuperData) {
         if let item = data.data[CITY_KEY] {
-            listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
-            listCityBtn.indexPath = indexPath
+            let city = item["show"] as! String
+            if city.count > 0 {
+                listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
+                listCityBtn.indexPath = indexPath
+            } else {
+                listCityBtn.isHidden = true
+            }
         }
         if let item = data.data[ARENA_KEY] {
             listArenaTxt.text = (emptyToSpace(item["show"] as! String))
@@ -137,8 +142,13 @@ class ListCell: SuperCell {
     }
     func updateCoach(indexPath: IndexPath, data: SuperData) {
         if let item = data.data[CITYS_KEY] {
-            listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
-            listCityBtn.indexPath = indexPath
+            let city = item["show"] as! String
+            if city.count > 0 {
+                listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
+                listCityBtn.indexPath = indexPath
+            } else {
+                listCityBtn.isHidden = true
+            }
         }
         if let item = data.data[MOBILE_KEY] {
             listArenaTxt.text = (item["show"] as! String)
