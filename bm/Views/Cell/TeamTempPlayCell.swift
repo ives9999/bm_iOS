@@ -20,8 +20,8 @@ class TeamTempPlayCell: SuperCell, UITextFieldDelegate {
     var generalSwitch: UISwitch!
     var iden: String = ""
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
         
         generalTextField = SuperTextField(frame: CGRect.zero)
         generalTextField.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingDidEnd)
@@ -55,14 +55,14 @@ class TeamTempPlayCell: SuperCell, UITextFieldDelegate {
         //generalTextField.delegate = self
         //generalTextField.tag = row["idx"] as! Int
         iden = row["key"] as! String
-        if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
+        if row["atype"] as! UITableViewCell.AccessoryType != UITableViewCell.AccessoryType.none {
             //generalTextField.isHidden = true
             if row["show"] != nil {
                 detailTextLabel?.text = (row["show"] as! String)
             } else {
                 detailTextLabel?.text = ""
             }
-            accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         } else {
             if row["itype"] != nil {
                 let itype: String = row["itype"] as! String
@@ -93,7 +93,7 @@ class TeamTempPlayCell: SuperCell, UITextFieldDelegate {
                 }
             }
             
-            accessoryType = UITableViewCellAccessoryType.none
+            accessoryType = UITableViewCell.AccessoryType.none
         }
         textLabel?.text = (row["ch"] as! String)
         setNeedsLayout()

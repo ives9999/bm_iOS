@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 protocol BackDelegate {
     func setBack(params: [String: Any])
@@ -72,7 +73,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         searchTableView.register(editCellNib, forCellReuseIdentifier: "search_cell")
         
         tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
     
     override func viewWillAppear(_ animated: Bool) {

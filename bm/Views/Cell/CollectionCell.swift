@@ -47,7 +47,7 @@ class CollectionCell: UICollectionViewCell {
         titleLbl.text = data.title
         let featured = data.featured
         let aspect = featured.size.width / featured.size.height
-        let constraint = NSLayoutConstraint(item: featuredView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: featuredView, attribute: NSLayoutAttribute.height, multiplier: aspect, constant: 0)
+        let constraint = NSLayoutConstraint(item: featuredView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: featuredView, attribute: NSLayoutConstraint.Attribute.height, multiplier: aspect, constant: 0)
         //let constraint = NSLayoutConstraint(item: featuredView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.size.width/aspect)
         constraint.priority = UILayoutPriority(rawValue: 999)
         aspectConstraint = constraint

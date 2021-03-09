@@ -14,8 +14,8 @@ class TempPlaySignupOneCell: SuperCell {
     var titleLbl: MyLabel!
     var valueLbl: MyLabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
         
         iconView = UIImageView(frame: CGRect.zero)
         contentView.addSubview(iconView)
@@ -82,7 +82,7 @@ class TempPlaySignupOneCell: SuperCell {
             more = row["more"] as! Bool
         }
         if (more) {
-            accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+            accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         }
         
         setNeedsLayout()

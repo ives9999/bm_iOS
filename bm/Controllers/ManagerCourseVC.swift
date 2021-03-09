@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     
@@ -52,13 +53,13 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
                 if self.superCourses != nil {
                     if self.superCourses!.totalCount == 0 {
                         let alert = SCLAlertView()
-                        alert.showInfo("目前無您管理的課程")
+                        alert.showInfo("目前無您管理的課程", subTitle: "")
                     } else {
                         self.tableView.reloadData()
                     }
                 } else {
                     let alert = SCLAlertView()
-                    alert.showWarning("無法取得課程資料，請洽管理員")
+                    alert.showWarning("無法取得課程資料，請洽管理員", subTitle: "")
                 }
             } else {
                 self.warning(CourseService.instance.msg)

@@ -26,8 +26,8 @@ class TeamTempPlayListCell: SuperCell {
     
     var cellDelegate: TeamTempPlayListCellDelegate?
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
         bkView = UIView(frame: CGRect.zero)
         nameLbl = SuperLabel(frame: CGRect.zero)
         cityBtn = CityButton(frame: CGRect.zero)

@@ -86,12 +86,12 @@ class ImagePickerView: UIView {
     
     func openGallery() {
         //print("aaa")
-        gallery!.sourceType = UIImagePickerControllerSourceType.photoLibrary
+        gallery!.sourceType = UIImagePickerController.SourceType.photoLibrary
         gallery!.allowsEditing = true
         delegate!.myPresent(gallery!)
     }
     func openCamera() {
-        gallery!.sourceType = UIImagePickerControllerSourceType.camera
+        gallery!.sourceType = UIImagePickerController.SourceType.camera
         gallery!.allowsEditing = true
         gallery!.cameraCaptureMode = .photo
         gallery!.modalPresentationStyle = .fullScreen

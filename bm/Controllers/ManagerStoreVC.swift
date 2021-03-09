@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SCLAlertView
 
 class ManagerStoreVC: MyTableVC {
     
@@ -41,13 +42,13 @@ class ManagerStoreVC: MyTableVC {
                 if self.superStores != nil {
                     if self.superStores!.totalCount == 0 {
                         let alert = SCLAlertView()
-                        alert.showInfo("目前無您管理的體育用品店")
+                        alert.showInfo("目前無您管理的體育用品店", subTitle: "")
                     } else {
                         self.tableView.reloadData()
                     }
                 } else {
                     let alert = SCLAlertView()
-                    alert.showWarning("無法取得體育用品店資料，請洽管理員")
+                    alert.showWarning("無法取得體育用品店資料，請洽管理員", subTitle: "")
                 }
             } else {
                 self.warning(CourseService.instance.msg)

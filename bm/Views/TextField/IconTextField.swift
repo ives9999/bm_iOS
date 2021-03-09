@@ -58,7 +58,7 @@ class IconTextField: SuperTextField {
     @IBInspectable var placeholderColor : UIColor? {
         didSet {
             let rawString = attributedPlaceholder?.string != nil ? attributedPlaceholder!.string : ""
-            let str = NSAttributedString(string: rawString, attributes: [NSAttributedStringKey.foregroundColor:placeholderColor])
+            let str = NSAttributedString(string: rawString, attributes: [NSAttributedString.Key.foregroundColor:placeholderColor])
             attributedPlaceholder = str
         }
     }

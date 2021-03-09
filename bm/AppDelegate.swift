@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         
 //        let status:OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Stage)
+        ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Prod)
         
         Member.instance.justGetMemberOne = false
         return true

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class ManagerFunctionVC: MyTableVC {
 
@@ -59,7 +60,7 @@ class ManagerFunctionVC: MyTableVC {
         
         let row: [String: Any] = _rows[indexPath.row]
         cell.setRow(row: row)
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        cell.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
         return cell
     }

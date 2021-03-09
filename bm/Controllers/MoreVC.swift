@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class MoreVC: MyTableVC {
         
@@ -55,7 +56,7 @@ class MoreVC: MyTableVC {
                 showCloseButton: true
             )
             let alert = SCLAlertView(appearance: appearance)
-            alert.showInfo(version)
+            alert.showInfo(version, subTitle: "")
         } else {
             let row: [String: Any] = rows![indexPath.section][indexPath.row]
             //print(row)

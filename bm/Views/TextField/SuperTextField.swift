@@ -41,14 +41,14 @@ class SuperTextField: UITextField {
         self.createToolbar()
         self.borderWidth(1)
         self.borderColor(UIColor.white)
-        self.borderStyle = UITextBorderStyle.line
+        self.borderStyle = UITextField.BorderStyle.line
         self.align(.right)
         
         //self.font = UIFont(name: fontName, size: fontSize)
     }
     
     func placeholder(_ text: String) {
-        self.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedStringKey.foregroundColor: UIColor(PLACEHOLDER)])
+        self.attributedPlaceholder = NSAttributedString(string: text, attributes: [NSAttributedString.Key.foregroundColor: UIColor(PLACEHOLDER)])
     }
     
     override func awakeFromNib() {
@@ -60,22 +60,22 @@ class SuperTextField: UITextField {
         setupView()
     }
     override func textRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
+        return bounds.inset(by: padding)
     }
     
     override func placeholderRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
+        return bounds.inset(by: padding)
     }
     
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return UIEdgeInsetsInsetRect(bounds, padding)
+        return bounds.inset(by: padding)
     }
     func createToolbar() {
         let toolbar = UIToolbar()
         toolbar.barStyle = UIBarStyle.default
         toolbar.sizeToFit()
-        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target: nil, action: nil)
-        let done: UIBarButtonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItemStyle.done, target: father, action: #selector(father?.dismissKeyboard))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.fixedSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "完成", style: UIBarButtonItem.Style.done, target: father, action: #selector(father?.dismissKeyboard))
         flexibleSpace.width = toolbar.frame.width - done.width
         toolbar.items = [flexibleSpace, done]
         self.inputAccessoryView = toolbar

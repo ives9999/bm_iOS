@@ -26,9 +26,9 @@ class BlackListCell: SuperCell {
     var accessoryBtn: UIButton?
     var blacklistCellDelegate: BlackListCellDelegate?
 
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    init(style: UITableViewCell.AccessoryType, reuseIdentifier: String?) {
         cancelBtn = CancelButton()
-        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
+        super.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
         
         memberNameLbl = MyLabel(frame: CGRect.zero)
         contentView.addSubview(memberNameLbl)
@@ -113,7 +113,7 @@ class BlackListCell: SuperCell {
         let tap = UITapGestureRecognizer(target: self, action: #selector(call))
         memberMobileLbl.addGestureRecognizer(tap)
         
-         accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         
         setNeedsLayout()
     }

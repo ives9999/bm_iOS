@@ -46,7 +46,7 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     
         tableView.register(TeamTempPlayListCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         
         

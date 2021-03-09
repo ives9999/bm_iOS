@@ -26,8 +26,8 @@ class ListCell: SuperCell {
     
     var cellDelegate: ListCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +39,7 @@ class ListCell: SuperCell {
         listFeatured.image = data.featured
         listMarker.padding(top: 0, left: 0, bottom: 0, right: 0)
         listCityBtn.setTextSize(14)
-        listCityBtn.alignH = UIControlContentHorizontalAlignment.center
+        listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
         
         if iden == "team" {
             listMarker.isHidden = true
@@ -50,7 +50,7 @@ class ListCell: SuperCell {
         } else if iden == "arena" {
             updateArena(indexPath: indexPath, data: data)
         }
-        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     }
     
     func updateCourseViews(indexPath: IndexPath, data: SuperCourse) {
@@ -61,7 +61,7 @@ class ListCell: SuperCell {
         }
         
         listCityBtn.setTextSize(14)
-        listCityBtn.alignH = UIControlContentHorizontalAlignment.center
+        listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
         
         let citys = data.coach.citys
         if (citys.count > 0) {
@@ -74,7 +74,7 @@ class ListCell: SuperCell {
         listBallTxt.isHidden = true
         listMarker.isHidden = true
         
-        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     }
     
     func updateStoreViews(indexPath: IndexPath, data: SuperStore) {
@@ -85,7 +85,7 @@ class ListCell: SuperCell {
         }
         
         listCityBtn.setTextSize(14)
-        listCityBtn.alignH = UIControlContentHorizontalAlignment.center
+        listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
         
         listCityBtn.setTitle(data.city)
         listArenaTxt.text = data.address
@@ -114,7 +114,7 @@ class ListCell: SuperCell {
         }
         listBallTxt.isHidden = true
         
-        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     }
     
     func updateTeam(indexPath: IndexPath, data: SuperData) {

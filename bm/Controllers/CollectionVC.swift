@@ -80,7 +80,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
 
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
-        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         collectionView.addSubview(refreshControl)
         
         self.view.addSubview(collectionView)

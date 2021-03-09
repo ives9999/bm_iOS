@@ -680,7 +680,7 @@ class Global {
         let tbC = ctrl.tabBarController
         //tbC!.tabBar.barTintColor = UIColor.red
         tbC!.tabBar.barTintColor = UIColor(TABBAR_BACKGROUND)
-        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: FONT_NAME, size: FONT_SIZE_TABBAR)!], for: UIControlState.normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: FONT_NAME, size: FONT_SIZE_TABBAR)!], for: UIControl.State.normal)
 //        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: UIControlState.normal)
 //        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor(MY_GREEN)], for: UIControlState.selected)
     }
@@ -800,7 +800,7 @@ class Global {
     
     private func _addSpinner(spinner: UIActivityIndicatorView, superView: UIView) {
         spinner.center = superView.center
-        spinner.activityIndicatorViewStyle = .whiteLarge
+        spinner.style = .whiteLarge
         spinner.color = #colorLiteral(red: 0.6862745098, green: 0.9882352941, blue: 0.4823529412, alpha: 1)
         spinner.startAnimating()
         superView.addSubview(spinner)
@@ -823,7 +823,7 @@ class Global {
     }
 }
 extension UIFont {
-    func withTraits(traits:UIFontDescriptorSymbolicTraits) -> UIFont {
+    func withTraits(traits:UIFontDescriptor.SymbolicTraits) -> UIFont {
         let descriptor = fontDescriptor.withSymbolicTraits(traits)
         return UIFont(descriptor: descriptor!, size: 0) //size 0 means keep size as it is
     }
@@ -1478,7 +1478,7 @@ extension String {
     }
     
     func height(font: UIFont)-> CGFloat {
-        let fontAttr = [NSAttributedStringKey.font: font]
+        let fontAttr = [NSAttributedString.Key.font: font]
         let size = (self as NSString).size(withAttributes: fontAttr)
         return size.height
     }
@@ -1726,7 +1726,7 @@ extension UIColor {
 
 extension UIImageView {
     
-    func downloaded(from url: URL, contentMode mode: UIViewContentMode = UIView.ContentMode.scaleAspectFit) {
+    func downloaded(from url: URL, contentMode mode: UIView.ContentMode = UIView.ContentMode.scaleAspectFit) {
         contentMode = mode
         URLSession.shared.dataTask(with: url) { data, response, error in
             guard
@@ -1742,7 +1742,7 @@ extension UIImageView {
         }.resume()
     }
     
-    func downloaded(from link: String, contentMode mode: UIViewContentMode = UIView.ContentMode.scaleAspectFit) {
+    func downloaded(from link: String, contentMode mode: UIView.ContentMode = UIView.ContentMode.scaleAspectFit) {
         //print(link)
         guard let url = URL(string: link) else {return}
         downloaded(from: url, contentMode: mode)
@@ -2031,7 +2031,7 @@ extension DropDownTextField {
         self.addSubview(animationView)
         animationView.frame = CGRect(x: 0.0, y: initialHeight, width: bounds.width, height: bounds.height - initialHeight)
         //animationView.frame = CGRect(x: 0.0, y: initialHeight, width: bounds.width, height: 0)
-        self.sendSubview(toBack: animationView)
+        self.sendSubviewToBack(animationView)
         //animationView.backgroundColor = dropDownColor
         animationView.backgroundColor = UIColor.red
         animationView.isHidden = true

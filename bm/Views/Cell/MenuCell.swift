@@ -14,8 +14,8 @@ class MenuCell: SuperCell {
     var titleLbl: MyLabel!
     //var tempPlayLbl: MyLabel!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
         
         iconView = UIImageView(frame: CGRect.zero)
         contentView.addSubview(iconView)
@@ -72,7 +72,7 @@ class MenuCell: SuperCell {
                 titleLbl.textColor = row["color"] as? UIColor
             }
         }
-        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         if row["detail"] != nil {
             detailTextLabel?.text = (row["detail"] as! String)
         }

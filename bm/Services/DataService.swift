@@ -292,7 +292,7 @@ class DataService {
                 }
                 //print(data)
                 let json = JSON(data)
-                print(json)
+                //print(json)
                 self.setData1(row: json)
                 
                 //var images: [String] = [String]()
@@ -472,7 +472,7 @@ class DataService {
         Alamofire.upload(
             multipartFormData: { (multipartFormData) in
                 if image != nil {
-                    let imageData: Data = UIImageJPEGRepresentation(image!, 0.2)! as Data
+                    let imageData: Data = image!.jpegData(compressionQuality: 0.2)! as Data
                     multipartFormData.append(imageData, withName: "file", fileName: "test.jpg", mimeType: "image/jpeg")
                 }
                 for (key, value) in params {
@@ -541,7 +541,7 @@ class DataService {
         //print(body)
         Alamofire.upload( multipartFormData: { (multipartFormData) in
             if image != nil {
-                let imageData: Data = UIImageJPEGRepresentation(image!, 0.2)! as Data
+                let imageData: Data = image!.jpegData(compressionQuality: 0.2)! as Data
                 //print(imageData)
                 //let base64: String = imageData.base64EncodedString(options: .lineLength64Characters)
                 multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)

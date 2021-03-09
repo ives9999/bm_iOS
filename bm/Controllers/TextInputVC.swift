@@ -8,6 +8,7 @@
 
 import UIKit
 import UIColor_Hex_Swift
+import SCLAlertView
 
 protocol TextInputDelegate: class {
     //[key:"content", type:TEXT_INPUT_TYPE,text:"課程說明",indexPath:indexPath]

@@ -43,7 +43,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
         featuredView.delegate = self
         
         tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         hideKeyboardWhenTappedAround()
         FormItemCellType.registerCell(for: tableView)

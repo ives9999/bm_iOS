@@ -137,7 +137,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 600
         tableViewConstraintHeight.constant = 1000
     }
@@ -146,7 +146,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         
         signupTableView.dataSource = self
         signupTableView.delegate = self
-        signupTableView.rowHeight = UITableViewAutomaticDimension
+        signupTableView.rowHeight = UITableView.automaticDimension
         signupTableView.estimatedRowHeight = 300
         signupTableViewConstraintHeight.constant = 1000
     }
@@ -155,7 +155,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         
         coachTableView.dataSource = self
         coachTableView.delegate = self
-        coachTableView.rowHeight = UITableViewAutomaticDimension
+        coachTableView.rowHeight = UITableView.automaticDimension
         coachTableView.estimatedRowHeight = 600
         coachTableViewConstraintHeight.constant = 3000
     }

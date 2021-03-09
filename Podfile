@@ -15,7 +15,6 @@ target 'bm' do
   pod 'SwipeCellKit'
   pod 'ReachabilitySwift'
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
-  pod "SelectionDialog"
   
   pod 'ECPayPaymentGatewayKit', '~> 1.0.0'
   pod 'PromiseKit' , '~> 6.8.3'
@@ -26,6 +25,7 @@ target 'bm' do
   pod 'CryptoSwift' , '~> 0.14.0'
   pod 'SnapKit', '~> 5.0.0'
   pod 'JXBanner'
+  pod 'SCLAlertView'
 end
 
 target 'bmNotificationServiceExtension' do

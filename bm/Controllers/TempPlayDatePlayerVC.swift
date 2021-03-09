@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class TempPlayDatePlayerVC: MyTableVC, TempPlayDatePlayerCellDelegate {
 
@@ -64,7 +65,7 @@ class TempPlayDatePlayerVC: MyTableVC, TempPlayDatePlayerCellDelegate {
         alert.addButton("加入黑名單", action: {
             self.addBlackList(memberName: row.name, memberToken: row.token, teamToken: self.teamToken)
         })
-        alert.showInfo("動作")
+        alert.showInfo("動作", subTitle: "")
     }
     
     func call(position: Int) {

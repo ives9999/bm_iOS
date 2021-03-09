@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class ShowTempPlayVC: MyTableVC {
     
@@ -68,7 +69,7 @@ class ShowTempPlayVC: MyTableVC {
         scrollView.contentSize = CGSize(width: view.bounds.width, height: 5000)
         view.addSubview(scrollView)
         
-        view.bringSubview(toFront: buttomView)
+        view.bringSubviewToFront(buttomView)
         
         containerView = UIView(frame: CGRect(x: 0, y: 0, width: scrollView.contentSize.width, height: scrollView.contentSize.height))
         containerView.backgroundColor = UIColor.clear
@@ -121,8 +122,8 @@ class ShowTempPlayVC: MyTableVC {
         arenaBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
         //cityBtn.cornerRadius(18)
         arenaBtn.cornerRadius(18)
-        cityBtn.addTarget(self, action: #selector(city), for: UIControlEvents.touchUpInside)
-        arenaBtn.addTarget(self, action: #selector(self.arena), for: UIControlEvents.touchUpInside)
+        cityBtn.addTarget(self, action: #selector(city), for: UIControl.Event.touchUpInside)
+        arenaBtn.addTarget(self, action: #selector(self.arena), for: UIControl.Event.touchUpInside)
         
 //        plusOneBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
 //        cancelPlusOneBtn.padding(top: 3, left: 22, bottom: 3, right: 22)
@@ -139,11 +140,11 @@ class ShowTempPlayVC: MyTableVC {
         myTablView.register(TempPlaySignupCell.self, forCellReuseIdentifier: "cell")
         myTablView.isScrollEnabled = false
         myTablView.backgroundColor = UIColor.black
-        myTablView.separatorStyle = UITableViewCellSeparatorStyle.none
+        myTablView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
-        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
         scrollView.addSubview(refreshControl)
         
         //print(view.frame)

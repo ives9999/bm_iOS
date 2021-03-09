@@ -56,7 +56,7 @@ class PaymentVC: MyTableVC {
         let cellNibName = UINib(nibName: "PaymentCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "PaymentCell")
         tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         //refresh()
         

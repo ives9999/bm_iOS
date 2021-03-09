@@ -36,7 +36,7 @@ class MyMapVC: BaseViewController, MKMapViewDelegate {
     }
     
     func centerMapOnLocation(location: CLLocationCoordinate2D) {
-        let span = MKCoordinateSpanMake(0.002, 0.002)
+        let span = MKCoordinateSpan(latitudeDelta: 0.002, longitudeDelta: 0.002)
         let region = MKCoordinateRegion(center: location, span: span)
         myMapView.setRegion(region, animated: true)
     }

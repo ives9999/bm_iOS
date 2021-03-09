@@ -88,7 +88,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         tableView.dataSource = self
         tableView.delegate = self
         
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         //tableView.estimatedRowHeight = 600
         tableViewConstraintHeight.constant = 600
     }

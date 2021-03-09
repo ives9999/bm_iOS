@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 //import FBSDKLoginKit
 
 class LoginVC: BaseViewController, UITextFieldDelegate {

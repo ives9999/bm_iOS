@@ -36,19 +36,19 @@ class SuperButton: UIButton {
     }
     
     func commonInit(){
-        self.setTitleColor(UIColor.white, for: UIControlState.normal)
+        self.setTitleColor(UIColor.white, for: UIControl.State.normal)
         self.titleLabel?.font = UIFont(name: fontName, size: fontSize)
         self.alignH = .left
         self.alignV = .center
         self.cornerRadius = 12
         self.padding(top: 3, left: 8, bottom: 3, right: 8)
     }
-    open var alignH: UIControlContentHorizontalAlignment = UIControlContentHorizontalAlignment.left {
+    open var alignH: UIControl.ContentHorizontalAlignment = UIControl.ContentHorizontalAlignment.left {
         didSet {
             contentHorizontalAlignment = alignH
         }
     }
-    open var alignV: UIControlContentVerticalAlignment = UIControlContentVerticalAlignment.center {
+    open var alignV: UIControl.ContentVerticalAlignment = UIControl.ContentVerticalAlignment.center {
         didSet {
             contentVerticalAlignment = alignV
         }
@@ -59,7 +59,7 @@ class SuperButton: UIButton {
         }
     }
     func setColor(textColor: UIColor, bkColor: UIColor) {
-        self.setTitleColor(textColor, for: UIControlState.normal)
+        self.setTitleColor(textColor, for: UIControl.State.normal)
         self.backgroundColor = bkColor
     }
     func padding(top: CGFloat, left: CGFloat, bottom: CGFloat, right: CGFloat) {

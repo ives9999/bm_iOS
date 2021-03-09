@@ -103,9 +103,9 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         var cell: FormCell? = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell
         if cell == nil {
             //print("cell is nil")
-            cell = FormCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
-            cell!.accessoryType = UITableViewCellAccessoryType.none
-            cell!.selectionStyle = UITableViewCellSelectionStyle.none
+            cell = FormCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
+            cell!.accessoryType = UITableViewCell.AccessoryType.none
+            cell!.selectionStyle = UITableViewCell.SelectionStyle.none
         } else {
             cell!.accessoryType = .none
         }

@@ -31,7 +31,7 @@ class MemberOrderListVC: MyTableVC {
         tableView.separatorColor = UIColor.lightGray
         
         tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         refresh()
     }

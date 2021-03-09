@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 protocol EditCourseDelegate {
     func isReload(_ yes: Bool)
@@ -230,8 +231,8 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage: UIImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
             featuredView.setPickedImage(image: pickedImage)
             isFeaturedChange = true
         }

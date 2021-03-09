@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class CoachVC: ListVC {
     
     let _searchRows: [[String: Any]] = [
-        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入教練名稱關鍵字","text_field":true],
-        ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0]
+        ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入教練名稱關鍵字","text_field":true],
+        ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0]
         ]
     
     override func viewDidLoad() {

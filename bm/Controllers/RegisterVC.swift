@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ValueChangedDelegate {
     
@@ -55,7 +56,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         featuredView.delegate = self
         
         tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         hideKeyboardWhenTappedAround()
         FormItemCellType.registerCell(for: tableView)
@@ -240,8 +241,8 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage: UIImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
             featuredView.setPickedImage(image: pickedImage)
             isFeaturedChange = true
         }

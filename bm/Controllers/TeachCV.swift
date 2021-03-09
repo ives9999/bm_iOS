@@ -13,7 +13,7 @@ class TeachCV: CollectionVC {
     let _type:String = "teach"
     
     let _searchRows: [[String: Any]] = [
-        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入教學名稱關鍵字","text_field":true]
+        ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入教學名稱關鍵字","text_field":true]
         ]
         
     override func viewDidLoad() {

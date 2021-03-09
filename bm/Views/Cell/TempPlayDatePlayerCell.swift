@@ -18,8 +18,8 @@ class TempPlayDatePlayerCell: SuperCell {
     var mobileLbl: MyLabel!
     var tempPlayDatePlayerCellDelegate: TempPlayDatePlayerCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
         
         noLbl = MyLabel(frame: CGRect.zero)
         contentView.addSubview(noLbl)
@@ -75,7 +75,7 @@ class TempPlayDatePlayerCell: SuperCell {
         }
         titleLbl.text = name
         
-        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         mobileLbl.tag = position
         let tap = UITapGestureRecognizer(target: self, action: #selector(call))
         mobileLbl.addGestureRecognizer(tap)

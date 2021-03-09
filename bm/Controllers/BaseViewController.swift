@@ -10,6 +10,7 @@ import UIKit
 import OneSignal
 import Reachability
 import WebKit
+import SCLAlertView
 
 class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate  {
     
@@ -187,7 +188,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func beginRefresh() {
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
-        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
     }
     func endRefresh() {
         if refreshControl.isRefreshing {
@@ -354,7 +355,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         alert.addButton("加入", action: {
             self._addBlackList(txt.text!, memberToken: memberToken, teamToken: teamToken)
         })
-        alert.showEdit("請輸入理由")
+        alert.showEdit("請輸入理由", subTitle: "")
     }
     func _addBlackList(_ reason: String, memberToken: String, teamToken: String) {
         Global.instance.addSpinner(superView: self.view)
@@ -392,7 +393,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             let center: CGPoint = loadingMask!.center
             loadingSpinner = UIActivityIndicatorView()
             loadingSpinner!.center = center
-            loadingSpinner!.activityIndicatorViewStyle = .whiteLarge
+            loadingSpinner!.style = .whiteLarge
             loadingSpinner!.color = #colorLiteral(red: 0.6862745098, green: 0.9882352941, blue: 0.4823529412, alpha: 1)
             loadingSpinner!.startAnimating()
             loadingMask!.addSubview(loadingSpinner!)
@@ -956,7 +957,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func sexValueChanged(sex: String) {}
     
     func alertError(title: String, msg: String) {
-        let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
         self.present(alert, animated: true)
     }

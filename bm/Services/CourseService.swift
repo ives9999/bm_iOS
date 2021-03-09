@@ -76,7 +76,7 @@ class CourseService: DataService {
         Alamofire.upload(
             multipartFormData: { (multipartFormData) in
                 if image != nil {
-                    let imageData: Data = UIImageJPEGRepresentation(image!, 0.2)! as Data
+                    let imageData: Data = image!.jpegData(compressionQuality: 0.2)! as Data
                     multipartFormData.append(imageData, withName: "file", fileName: "test.jpg", mimeType: "image/jpeg")
                 }
                 for (key, value) in params {

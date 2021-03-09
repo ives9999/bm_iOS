@@ -84,7 +84,7 @@ class EditCell: SuperCell, UITextFieldDelegate {
             clearBtn.isHidden = true
         }
         if row["atype"] != nil {
-            if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
+            if row["atype"] as! UITableViewCell.AccessoryType != UITableViewCell.AccessoryType.none {
                 editText.isHidden = true
                 onoff.isHidden = true
                 detailLbl.isHidden = false

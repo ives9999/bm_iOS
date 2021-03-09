@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, EditCellDelegate {
     
@@ -17,14 +18,14 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     var type: String!
     var model: Team!
     var _rows: [[String: Any]] = [
-        ["ch":"關鍵字","atype":UITableViewCellAccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true],
-        ["ch":"縣市","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
+        ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true],
+        ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
         //            ["ch": "區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":"team_area","show":"全部","segue":TO_ARENA,"sender":0],
-        ["ch":"日期","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_WEEKDAYS_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int]()],
-        ["ch":"時段","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_START_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
+        ["ch":"日期","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":TEAM_WEEKDAYS_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int]()],
+        ["ch":"時段","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":TEAM_PLAY_START_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
 //        ["ch":"結束時間","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_END_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
-        ["ch":"球館","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int]()],
-        ["ch":"程度","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String]()]
+        ["ch":"球館","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int]()],
+        ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":TEAM_DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String]()]
     ]
     
     var tables = [
@@ -150,7 +151,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         Global.instance.removeSpinner(superView: view)
         let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
         let cell = tableView.cellForRow(at: indexPath) as! EditCell
-        if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
+        if row["atype"] as! UITableViewCell.AccessoryType != UITableViewCell.AccessoryType.none {
             if row["segue"] != nil {
                 let segue: String = row["segue"] as! String
                 //print(iden)

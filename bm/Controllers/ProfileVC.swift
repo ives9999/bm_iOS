@@ -73,7 +73,7 @@ class ProfileVC: MyTableVC {
         var cell: UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "cell")
         if cell == nil {
             //print("cell is nil")
-            cell = UITableViewCell(style: UITableViewCellStyle.value1, reuseIdentifier: "cell")
+            cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
             cell?.selectionStyle = .none
         }
         //let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
@@ -129,7 +129,7 @@ class ProfileVC: MyTableVC {
         cell!.textLabel!.text = "\(field)"
         cell!.detailTextLabel!.text = "\(data)"
         if key == "validate" || key == "type" {
-            cell!.accessoryType = UITableViewCellAccessoryType.none
+            cell!.accessoryType = UITableViewCell.AccessoryType.none
         } else {
             let chevron = UIImage(named: "greater1")
             cell!.accessoryType = .disclosureIndicator

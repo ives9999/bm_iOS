@@ -38,7 +38,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         initData()
         
         tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         
         FormItemCellType.registerCell(for: tableView)
     }

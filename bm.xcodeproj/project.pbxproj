@@ -105,7 +105,6 @@
 		B362265325E2AD3300D98317 /* OrderListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B362265125E2AD3300D98317 /* OrderListCell.swift */; };
 		B362265425E2AD3300D98317 /* OrderListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B362265225E2AD3300D98317 /* OrderListCell.xib */; };
 		B362265D25E54C9D00D98317 /* HomeTotalAdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B362265C25E54C9D00D98317 /* HomeTotalAdVC.swift */; };
-		B3649414207DCA790030CF44 /* SCLAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3649413207DCA790030CF44 /* SCLAlertView.swift */; };
 		B3649416207DCB280030CF44 /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3649415207DCB280030CF44 /* SCLExtensions.swift */; };
 		B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36CBD4E20DCBBF600E52B9C /* TempPlayDateVC.swift */; };
 		B36CBD5120DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36CBD5020DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift */; };
@@ -232,6 +231,7 @@
 		B3DEBE18210CB30E003699A0 /* ArenaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE17210CB30E003699A0 /* ArenaService.swift */; };
 		B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE19210D6AC2003699A0 /* ListVC.swift */; };
 		B3DEBE1C2110432F003699A0 /* Teach.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE1B2110432F003699A0 /* Teach.swift */; };
+		B3E4D09425F71B2500D78210 /* SelectionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D09325F71B2500D78210 /* SelectionDialog.swift */; };
 		B3E72A191F9CBE9F0008A6B1 /* TeachCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A181F9CBE9F0008A6B1 /* TeachCV.swift */; };
 		B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */; };
 		B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */; };
@@ -452,7 +452,6 @@
 		B362265125E2AD3300D98317 /* OrderListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListCell.swift; sourceTree = "<group>"; };
 		B362265225E2AD3300D98317 /* OrderListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderListCell.xib; sourceTree = "<group>"; };
 		B362265C25E54C9D00D98317 /* HomeTotalAdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTotalAdVC.swift; sourceTree = "<group>"; };
-		B3649413207DCA790030CF44 /* SCLAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLAlertView.swift; sourceTree = "<group>"; };
 		B3649415207DCB280030CF44 /* SCLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLExtensions.swift; sourceTree = "<group>"; };
 		B36CBD4E20DCBBF600E52B9C /* TempPlayDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayDateVC.swift; sourceTree = "<group>"; };
 		B36CBD5020DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayDatePlayerVC.swift; sourceTree = "<group>"; };
@@ -579,6 +578,8 @@
 		B3DEBE17210CB30E003699A0 /* ArenaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaService.swift; sourceTree = "<group>"; };
 		B3DEBE19210D6AC2003699A0 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
 		B3DEBE1B2110432F003699A0 /* Teach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teach.swift; sourceTree = "<group>"; };
+		B3E4D04225F7032000D78210 /* ECPayPaymentGatewayKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ECPayPaymentGatewayKit.xcframework; path = Pods/ECPayPaymentGatewayKit/ECPayPaymentGatewayKit.xcframework; sourceTree = "<group>"; };
+		B3E4D09325F71B2500D78210 /* SelectionDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionDialog.swift; sourceTree = "<group>"; };
 		B3E72A181F9CBE9F0008A6B1 /* TeachCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachCV.swift; sourceTree = "<group>"; };
 		B3E72A1B1F9F9F330008A6B1 /* bm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bm-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -818,10 +819,10 @@
 				B3ED38DA1FB488CB0003F083 /* ImagePickerView.swift */,
 				B3ED38DC1FB4A06C0003F083 /* MyLabel.swift */,
 				B3ED38E71FB852EB0003F083 /* FormCell.swift */,
-				B3649413207DCA790030CF44 /* SCLAlertView.swift */,
 				B3649415207DCB280030CF44 /* SCLExtensions.swift */,
 				B33C1AC421C3F848006F2BEB /* DrawLine.swift */,
 				B3B758D225AD55E7006ACC33 /* GMStepper.swift */,
+				B3E4D09325F71B2500D78210 /* SelectionDialog.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1016,6 +1017,7 @@
 		F59B543DD41ED7F128853F13 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B3E4D04225F7032000D78210 /* ECPayPaymentGatewayKit.xcframework */,
 				9C5D58D06320800C79615904 /* Pods_bm.framework */,
 				44013B063878E5AA0587495E /* Pods_bmNotificationServiceExtension.framework */,
 			);
@@ -1467,7 +1469,7 @@
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
-				"${BUILT_PRODUCTS_DIR}/SelectionDialog/SelectionDialog.framework",
+				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
@@ -1490,7 +1492,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SelectionDialog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
@@ -1682,7 +1684,6 @@
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
 				B39453712343256C000DF98E /* SignupListCell.swift in Sources */,
 				B358B0B822A100EF00F1A4E6 /* SectionFormItem.swift in Sources */,
-				B3649414207DCA790030CF44 /* SCLAlertView.swift in Sources */,
 				B3756EDE21B901C5006893E1 /* TimeCell.swift in Sources */,
 				B358B0BF22A168C700F1A4E6 /* SingleSelectCell.swift in Sources */,
 				F96931971FB953960005C13F /* City.swift in Sources */,
@@ -1726,6 +1727,7 @@
 				B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */,
 				B3310D9722AD54000062EF98 /* SuperTextView.swift in Sources */,
 				B3B758BE25AC6134006ACC33 /* ClothesSizeCell.swift in Sources */,
+				B3E4D09425F71B2500D78210 /* SelectionDialog.swift in Sources */,
 				B3E88BE92380F2D1001F015A /* CalendarSignupCell.swift in Sources */,
 				B33C1AC121BE635E006F2BEB /* ContentFormItem.swift in Sources */,
 				B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */,
@@ -1848,6 +1850,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B177D5D81630D703CAC77139 /* Pods-bmNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1872,6 +1875,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4E1880A5AC2826BFBBEC6447 /* Pods-bmNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -1894,6 +1898,7 @@
 		F94E7D421F83636B00F550FD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -1960,6 +1965,7 @@
 		F94E7D431F83636B00F550FD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
@@ -2043,7 +2049,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2074,7 +2080,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -54,7 +54,7 @@ class HomeTotalAdVC: BaseViewController {
         self.view.addSubview(adContainer)
         adContainer.snp.makeConstraints { make in
             make.center.equalToSuperview()
-            make.edges.equalTo(self.view).inset(UIEdgeInsetsMake(50, 10, 50, 10))
+            make.edges.equalTo(self.view).inset(UIEdgeInsets(top: 50, left: 10, bottom: 50, right: 10))
         }
         
         //banner

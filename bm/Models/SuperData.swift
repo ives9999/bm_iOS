@@ -28,8 +28,8 @@ class SuperData {
     
     let transferPair: [String: String] = [CITY_KEY:"city_id",ARENA_KEY:"arena_id"]
     
-    let none: UITableViewCellAccessoryType = UITableViewCellAccessoryType.none
-    let more: UITableViewCellAccessoryType = UITableViewCellAccessoryType.disclosureIndicator
+    let none: UITableViewCell.AccessoryType = UITableViewCell.AccessoryType.none
+    let more: UITableViewCell.AccessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     let defaultPad: UIKeyboardType = UIKeyboardType.default
     let numberPad: UIKeyboardType = UIKeyboardType.numberPad
     let phonePad: UIKeyboardType = UIKeyboardType.phonePad

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate, EditCellDelegate {
     
@@ -136,7 +137,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             key = row["key"]! as! String
         }
         let cell = tableView.cellForRow(at: indexPath) as! EditCell
-        if row["atype"] as! UITableViewCellAccessoryType != UITableViewCellAccessoryType.none {
+        if row["atype"] as! UITableViewCell.AccessoryType != UITableViewCell.AccessoryType.none {
             if row["segue"] != nil {
                 let segue: String = row["segue"] as! String
                 //print(iden)
@@ -362,8 +363,8 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         }
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage: UIImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let pickedImage: UIImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
             featuredView.setPickedImage(image: pickedImage)
             isFeaturedChange = true
         }
@@ -435,7 +436,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
     
     func clear(indexPath: IndexPath) {
         let dataRow = _getRowByindexPath(indexPath: indexPath)
-        if dataRow["atype"] != nil && (dataRow["atype"] as! UITableViewCellAccessoryType == .disclosureIndicator) {
+        if dataRow["atype"] != nil && (dataRow["atype"] as! UITableViewCell.AccessoryType == .disclosureIndicator) {
             if dataRow["key"] != nil {
                 let key = dataRow["key"] as! String
                 //print(key)

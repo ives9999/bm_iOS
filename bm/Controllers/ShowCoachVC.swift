@@ -212,7 +212,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func initCourseTableView() {
-        courseTableView.rowHeight = UITableViewAutomaticDimension
+        courseTableView.rowHeight = UITableView.automaticDimension
         courseTableView.estimatedRowHeight = 600
         courseTableViewHeight.constant = 2000
         courseTableView.delegate = self
@@ -220,7 +220,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func initContactTableView() {
-        contactTableView.rowHeight = UITableViewAutomaticDimension
+        contactTableView.rowHeight = UITableView.automaticDimension
         contactTableView.estimatedRowHeight = 600
         contactTableViewHeight.constant = 2000
         contactTableView.delegate = self
@@ -597,7 +597,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     func initCollectionView() {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         layout.minimumInteritemSpacing = 0
         layout.minimumLineSpacing = 0
         

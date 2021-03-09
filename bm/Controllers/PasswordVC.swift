@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class PasswordVC: UIViewController {
     
@@ -56,7 +57,7 @@ class PasswordVC: UIViewController {
         
         
         submitBtn = SubmitButton()
-        submitBtn.addTarget(self, action: #selector(submit(_:)), for: UIControlEvents.touchUpInside)
+        submitBtn.addTarget(self, action: #selector(submit(_:)), for: UIControl.Event.touchUpInside)
         
         view.addSubview(emailLbl)
         view.addSubview(emailTxt)

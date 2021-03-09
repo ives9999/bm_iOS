@@ -15,8 +15,8 @@ class TempPlaySignupCell: SuperCell {
     let constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
     //let columns: 
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: UITableViewCellStyle.value1, reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
         nameLbl = SuperLabel()
         contentView.addSubview(nameLbl)
         created_atLbl = SuperLabel()
@@ -67,7 +67,7 @@ class TempPlaySignupCell: SuperCell {
             let d: Date = df.date(from: str)!
             created_atLbl.text = d.toString(format: "yyyy-MM-dd HH:mm")
         }
-        accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
         setNeedsLayout()
     }
     
