@@ -11,6 +11,6 @@
 #endif
 
 
-FOUNDATION_EXPORT double SelectionDialogVersionNumber;
-FOUNDATION_EXPORT const unsigned char SelectionDialogVersionString[];
+FOUNDATION_EXPORT double SCLAlertViewVersionNumber;
+FOUNDATION_EXPORT const unsigned char SCLAlertViewVersionString[];
 
