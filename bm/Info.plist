@@ -61,8 +61,6 @@
 	<string>App需要你同意，才能使用地圖位置</string>
 	<key>NSLocationUsageDescription</key>
 	<string>App需要你同意，才能使用地圖位置</string>
-	<key>NSMainNibFile</key>
-	<string>main</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App需要你同意，才能使用相簿</string>
 	<key>UIBackgroundModes</key>
