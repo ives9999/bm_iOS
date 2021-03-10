@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    private func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         
 //        let status:OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
@@ -130,6 +130,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                                                         sourceApplication: sourceApplication,
 //                                                         annotation: annotation)
 //        }
+        let i = 6
         return false
     }
     

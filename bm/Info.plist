@@ -53,10 +53,18 @@
 			<string></string>
 		</dict>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>App需要你同意，才能使用媒體資料庫</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Set featured image from camera</string>
+	<string>App需要你同意，才能使用相機</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>App需要你同意，才能使用地圖位置</string>
+	<key>NSLocationUsageDescription</key>
+	<string>App需要你同意，才能使用地圖位置</string>
+	<key>NSMainNibFile</key>
+	<string>main</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>set featured image from library</string>
+	<string>App需要你同意，才能使用相簿</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
