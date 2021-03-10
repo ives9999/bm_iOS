@@ -996,6 +996,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func warning(_ msg: String) {
         _warning(msg: msg)
     }
+    
     func warning(msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
         _warning(title: "警告", msg: msg, showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
     }
