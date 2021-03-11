@@ -16,7 +16,7 @@ target 'bm' do
   pod 'ReachabilitySwift'
   pod 'OneSignal', '>= 2.6.2', '< 3.0'
   
-  #pod 'ECPayPaymentGatewayKit', '~> 1.0.0'
+  pod 'ECPayPaymentGatewayKit', '~> 1.0.1'
   pod 'PromiseKit' , '~> 6.8.3'
   pod 'IQKeyboardManagerSwift'
   pod 'KeychainSwift' , '~> 16.0'

@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F95F48FB16570090FC56DC7 /* Pods_bm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75BAE7A41AFB7D68DC8FAA77 /* Pods_bm.framework */; };
+		ABBFBA4D0E8A6559C8B2065A /* Pods_bmNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550328015F642ECFACE4836B /* Pods_bmNotificationServiceExtension.framework */; };
 		B3031D6A25CD46A50044830C /* PaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3031D6925CD46A50044830C /* PaymentVC.swift */; };
 		B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33B217AF31100C32CE2 /* SubmitButton.swift */; };
 		B306F33E217D9B3B00C32CE2 /* AreaSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */; };
@@ -232,8 +234,6 @@
 		B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE19210D6AC2003699A0 /* ListVC.swift */; };
 		B3DEBE1C2110432F003699A0 /* Teach.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE1B2110432F003699A0 /* Teach.swift */; };
 		B3E4D09425F71B2500D78210 /* SelectionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D09325F71B2500D78210 /* SelectionDialog.swift */; };
-		B3E4D14C25F9B2BF00D78210 /* ECPayPaymentGatewayKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35489DE25F87A6000908585 /* ECPayPaymentGatewayKit.xcframework */; };
-		B3E4D14D25F9B2C000D78210 /* ECPayPaymentGatewayKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B35489DE25F87A6000908585 /* ECPayPaymentGatewayKit.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B3E72A191F9CBE9F0008A6B1 /* TeachCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A181F9CBE9F0008A6B1 /* TeachCV.swift */; };
 		B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */; };
 		B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */; };
@@ -276,8 +276,6 @@
 		B3FB9B222407F5EC0051186F /* Team.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B212407F5EC0051186F /* Team.storyboard */; };
 		B3FB9B252407F7280051186F /* Course.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B232407F7280051186F /* Course.storyboard */; };
 		B3FB9B272407F7EE0051186F /* TempPlay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B262407F7EE0051186F /* TempPlay.storyboard */; };
-		F07CD1A1BB728D94904CA85F /* Pods_bm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C5D58D06320800C79615904 /* Pods_bm.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		F509DE101A4597741A285B3C /* Pods_bmNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44013B063878E5AA0587495E /* Pods_bmNotificationServiceExtension.framework */; };
 		F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90423B81F83748C00DC8B1E /* TeamVC.swift */; };
 		F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D1F1F83636A00F550FD /* AppDelegate.swift */; };
 		F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D211F83636A00F550FD /* HomeVC.swift */; };
@@ -350,7 +348,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				B3E4D14D25F9B2C000D78210 /* ECPayPaymentGatewayKit.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,12 +355,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		44013B063878E5AA0587495E /* Pods_bmNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bmNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E1880A5AC2826BFBBEC6447 /* Pods-bmNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
-		72E3E29BA5330C6E6B9965FA /* Pods-bm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.release.xcconfig"; path = "Pods/Target Support Files/Pods-bm/Pods-bm.release.xcconfig"; sourceTree = "<group>"; };
-		8887FB55CE42CC9156BD0571 /* Pods-bm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bm/Pods-bm.debug.xcconfig"; sourceTree = "<group>"; };
-		9C5D58D06320800C79615904 /* Pods_bm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B177D5D81630D703CAC77139 /* Pods-bmNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.debug.xcconfig"; path = "Pods/Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		1BF4FC3AFF68FB06C224D822 /* Pods-bmNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		4054E4A543DE782EB9603BD8 /* Pods-bm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.release.xcconfig"; path = "Target Support Files/Pods-bm/Pods-bm.release.xcconfig"; sourceTree = "<group>"; };
+		550328015F642ECFACE4836B /* Pods_bmNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bmNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75BAE7A41AFB7D68DC8FAA77 /* Pods_bm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A55FE07F39F6E1E09A8B562 /* Pods-bmNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		B3031D6925CD46A50044830C /* PaymentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentVC.swift; sourceTree = "<group>"; };
 		B306F33B217AF31100C32CE2 /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		B306F33D217D9B3B00C32CE2 /* AreaSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaSelectVC.swift; sourceTree = "<group>"; };
@@ -448,7 +444,6 @@
 		B34A210221B6A6D300EE6E1C /* MoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCell.swift; sourceTree = "<group>"; };
 		B34A210321B6A6D300EE6E1C /* MoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreCell.xib; sourceTree = "<group>"; };
 		B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayEditVC.swift; sourceTree = "<group>"; };
-		B35489DE25F87A6000908585 /* ECPayPaymentGatewayKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = ECPayPaymentGatewayKit.xcframework; sourceTree = "<group>"; };
 		B358B0AF229D4F4F00F1A4E6 /* EditCourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCourseVC.swift; sourceTree = "<group>"; };
 		B358B0B1229D722300F1A4E6 /* CourseForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseForm.swift; sourceTree = "<group>"; };
 		B358B0B322A0F66A00F1A4E6 /* PriceUnitFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceUnitFormItem.swift; sourceTree = "<group>"; };
@@ -638,6 +633,7 @@
 		B3FB9B212407F5EC0051186F /* Team.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Team.storyboard; sourceTree = SOURCE_ROOT; };
 		B3FB9B242407F7280051186F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Course.storyboard; sourceTree = "<group>"; };
 		B3FB9B262407F7EE0051186F /* TempPlay.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TempPlay.storyboard; sourceTree = SOURCE_ROOT; };
+		C07B51ECA709DFF2E833E7A9 /* Pods-bm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.debug.xcconfig"; path = "Target Support Files/Pods-bm/Pods-bm.debug.xcconfig"; sourceTree = "<group>"; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
 		F94E7D1C1F83636A00F550FD /* bm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94E7D1F1F83636A00F550FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -670,7 +666,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F509DE101A4597741A285B3C /* Pods_bmNotificationServiceExtension.framework in Frameworks */,
+				ABBFBA4D0E8A6559C8B2065A /* Pods_bmNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -678,8 +674,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F07CD1A1BB728D94904CA85F /* Pods_bm.framework in Frameworks */,
-				B3E4D14C25F9B2BF00D78210 /* ECPayPaymentGatewayKit.xcframework in Frameworks */,
+				4F95F48FB16570090FC56DC7 /* Pods_bm.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -700,15 +695,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AEF72A5B3B19F707E4454F79 /* Pods */ = {
+		63D42DAB174E7A5EECEECE44 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8887FB55CE42CC9156BD0571 /* Pods-bm.debug.xcconfig */,
-				72E3E29BA5330C6E6B9965FA /* Pods-bm.release.xcconfig */,
-				B177D5D81630D703CAC77139 /* Pods-bmNotificationServiceExtension.debug.xcconfig */,
-				4E1880A5AC2826BFBBEC6447 /* Pods-bmNotificationServiceExtension.release.xcconfig */,
+				C07B51ECA709DFF2E833E7A9 /* Pods-bm.debug.xcconfig */,
+				4054E4A543DE782EB9603BD8 /* Pods-bm.release.xcconfig */,
+				8A55FE07F39F6E1E09A8B562 /* Pods-bmNotificationServiceExtension.debug.xcconfig */,
+				1BF4FC3AFF68FB06C224D822 /* Pods-bmNotificationServiceExtension.release.xcconfig */,
 			);
 			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 		B306F3412180344300C32CE2 /* Switch */ = {
@@ -1033,8 +1029,8 @@
 			isa = PBXGroup;
 			children = (
 				B3E4D04225F7032000D78210 /* ECPayPaymentGatewayKit.xcframework */,
-				9C5D58D06320800C79615904 /* Pods_bm.framework */,
-				44013B063878E5AA0587495E /* Pods_bmNotificationServiceExtension.framework */,
+				75BAE7A41AFB7D68DC8FAA77 /* Pods_bm.framework */,
+				550328015F642ECFACE4836B /* Pods_bmNotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1042,14 +1038,13 @@
 		F94E7D131F83636A00F550FD = {
 			isa = PBXGroup;
 			children = (
-				B35489DE25F87A6000908585 /* ECPayPaymentGatewayKit.xcframework */,
 				F94E7D1E1F83636A00F550FD /* bm */,
 				F94E7D331F83636B00F550FD /* bmTests */,
 				F94E7D3E1F83636B00F550FD /* bmUITests */,
 				B30C95401FE82DA0005F71EF /* bmNotificationServiceExtension */,
 				F94E7D1D1F83636A00F550FD /* Products */,
-				AEF72A5B3B19F707E4454F79 /* Pods */,
 				F59B543DD41ED7F128853F13 /* Frameworks */,
+				63D42DAB174E7A5EECEECE44 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1234,7 +1229,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B30C95471FE82DA1005F71EF /* Build configuration list for PBXNativeTarget "bmNotificationServiceExtension" */;
 			buildPhases = (
-				3B2EF7A939E6272649969A67 /* [CP] Check Pods Manifest.lock */,
+				B6306F1508438D73B14032CE /* [CP] Check Pods Manifest.lock */,
 				B30C953B1FE82DA0005F71EF /* Sources */,
 				B30C953C1FE82DA0005F71EF /* Frameworks */,
 				B30C953D1FE82DA0005F71EF /* Resources */,
@@ -1252,14 +1247,14 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F94E7D441F83636B00F550FD /* Build configuration list for PBXNativeTarget "bm" */;
 			buildPhases = (
-				BAF73931C936E7B0C667205A /* [CP] Check Pods Manifest.lock */,
+				2287D8CF620AB48B7831FD15 /* [CP] Check Pods Manifest.lock */,
 				F94E7D181F83636A00F550FD /* Sources */,
 				F94E7D191F83636A00F550FD /* Frameworks */,
 				F94E7D1A1F83636A00F550FD /* Resources */,
 				B36440C01F86467600B477F9 /* CopyFiles */,
-				5F8D8643203D0E44C1D83C60 /* [CP] Embed Pods Frameworks */,
 				B30C954A1FE82DA1005F71EF /* Embed App Extensions */,
 				B3E4D14E25F9B2C000D78210 /* Embed Frameworks */,
+				3CEDD7B18508E4D8CC0C5C76 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1451,25 +1446,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3B2EF7A939E6272649969A67 /* [CP] Check Pods Manifest.lock */ = {
+		2287D8CF620AB48B7831FD15 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-bmNotificationServiceExtension-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-bm-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5F8D8643203D0E44C1D83C60 /* [CP] Embed Pods Frameworks */ = {
+		3CEDD7B18508E4D8CC0C5C76 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1495,6 +1494,7 @@
 				"${BUILT_PRODUCTS_DIR}/SwipeCellKit/SwipeCellKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TRVideoView/TRVideoView.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
+				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ECPayPaymentGatewayKit/ECPayPaymentGatewayKit.framework/ECPayPaymentGatewayKit",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
@@ -1517,24 +1517,29 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwipeCellKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TRVideoView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ECPayPaymentGatewayKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bm/Pods-bm-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BAF73931C936E7B0C667205A /* [CP] Check Pods Manifest.lock */ = {
+		B6306F1508438D73B14032CE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			inputFileListPaths = (
 			);
 			inputPaths = (
 				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
 				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-bm-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-bmNotificationServiceExtension-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1863,7 +1868,7 @@
 /* Begin XCBuildConfiguration section */
 		B30C95481FE82DA1005F71EF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B177D5D81630D703CAC77139 /* Pods-bmNotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 8A55FE07F39F6E1E09A8B562 /* Pods-bmNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
@@ -1874,11 +1879,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
@@ -1892,7 +1893,7 @@
 		};
 		B30C95491FE82DA1005F71EF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4E1880A5AC2826BFBBEC6447 /* Pods-bmNotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = 1BF4FC3AFF68FB06C224D822 /* Pods-bmNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
@@ -1903,11 +1904,7 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2039,15 +2036,14 @@
 				OTHER_LDFLAGS = "";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		F94E7D451F83636B00F550FD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8887FB55CE42CC9156BD0571 /* Pods-bm.debug.xcconfig */;
+			baseConfigurationReference = C07B51ECA709DFF2E833E7A9 /* Pods-bm.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2067,10 +2063,7 @@
 				);
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2083,7 +2076,7 @@
 		};
 		F94E7D461F83636B00F550FD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72E3E29BA5330C6E6B9965FA /* Pods-bm.release.xcconfig */;
+			baseConfigurationReference = 4054E4A543DE782EB9603BD8 /* Pods-bm.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -2102,10 +2095,7 @@
 				);
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.6.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2123,11 +2113,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				INFOPLIST_FILE = bmTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bmTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -2144,11 +2130,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				INFOPLIST_FILE = bmTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bmTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -2164,11 +2146,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				INFOPLIST_FILE = bmUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bmUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -2184,11 +2162,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				INFOPLIST_FILE = bmUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bmUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

@@ -4,6 +4,7 @@ PODS:
     - Alamofire (~> 4.9)
   - CryptoSwift (0.14.0)
   - Device.swift (1.2.2)
+  - ECPayPaymentGatewayKit (1.0.1)
   - IQKeyboardManagerSwift (6.5.6)
   - JXBanner (0.3.2):
     - JXBanner/Banner (= 0.3.2)
@@ -64,6 +65,7 @@ DEPENDENCIES:
   - AlamofireImage
   - CryptoSwift (~> 0.14.0)
   - Device.swift
+  - ECPayPaymentGatewayKit (~> 1.0.1)
   - IQKeyboardManagerSwift
   - JXBanner
   - KeychainSwift (~> 16.0)
@@ -85,6 +87,7 @@ SPEC REPOS:
     - AlamofireImage
     - CryptoSwift
     - Device.swift
+    - ECPayPaymentGatewayKit
     - IQKeyboardManagerSwift
     - JXBanner
     - JXPageControl
@@ -115,6 +118,7 @@ SPEC CHECKSUMS:
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
   CryptoSwift: 35a10419f4dbf0619c13f8c1c180037e115323fa
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
+  ECPayPaymentGatewayKit: d6a52efdf9f09aa94651ec7f667ec862d25536ef
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   JXBanner: e4c6ce1c78eba281b5200a3eaf4ed46c6c5257a2
   JXPageControl: eea52838699a4949063e600b25eb9e8b6e20ae3f
@@ -132,6 +136,6 @@ SPEC CHECKSUMS:
   TRVideoView: dc9617f61f7d3b207b2a5ad8afe401ef7c03e51e
   UIColor_Hex_Swift: 8be7432edacb7fa91c78aa05ef3c30b66e4f9415
 
-PODFILE CHECKSUM: d41fc8f6ab29443a5aa6484426e1f8c9759ff7ac
+PODFILE CHECKSUM: b26b1d335c9165cac3c0753e4e6f1e88487ae35a
 
 COCOAPODS: 1.10.1

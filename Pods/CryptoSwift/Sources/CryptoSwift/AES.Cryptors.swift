@@ -16,7 +16,6 @@
 // MARK: Cryptors
 
 extension AES: Cryptors {
-    
     public func makeEncryptor() throws -> Cryptor & Updatable {
         let worker = try blockMode.worker(blockSize: AES.blockSize, cipherOperation: encrypt)
         if worker is StreamModeWorker {
