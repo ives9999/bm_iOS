@@ -88,7 +88,6 @@
 		B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A210221B6A6D300EE6E1C /* MoreCell.swift */; };
 		B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B34A210321B6A6D300EE6E1C /* MoreCell.xib */; };
 		B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */; };
-		B35489DF25F87A6000908585 /* ECPayPaymentGatewayKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35489DE25F87A6000908585 /* ECPayPaymentGatewayKit.xcframework */; };
 		B358B0B0229D4F4F00F1A4E6 /* EditCourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0AF229D4F4F00F1A4E6 /* EditCourseVC.swift */; };
 		B358B0B2229D722300F1A4E6 /* CourseForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B1229D722300F1A4E6 /* CourseForm.swift */; };
 		B358B0B422A0F66A00F1A4E6 /* PriceUnitFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B322A0F66A00F1A4E6 /* PriceUnitFormItem.swift */; };
@@ -233,6 +232,8 @@
 		B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE19210D6AC2003699A0 /* ListVC.swift */; };
 		B3DEBE1C2110432F003699A0 /* Teach.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE1B2110432F003699A0 /* Teach.swift */; };
 		B3E4D09425F71B2500D78210 /* SelectionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D09325F71B2500D78210 /* SelectionDialog.swift */; };
+		B3E4D14C25F9B2BF00D78210 /* ECPayPaymentGatewayKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B35489DE25F87A6000908585 /* ECPayPaymentGatewayKit.xcframework */; };
+		B3E4D14D25F9B2C000D78210 /* ECPayPaymentGatewayKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B35489DE25F87A6000908585 /* ECPayPaymentGatewayKit.xcframework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B3E72A191F9CBE9F0008A6B1 /* TeachCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A181F9CBE9F0008A6B1 /* TeachCV.swift */; };
 		B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */; };
 		B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */; };
@@ -341,6 +342,17 @@
 			dstSubfolderSpec = 16;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B3E4D14E25F9B2C000D78210 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				B3E4D14D25F9B2C000D78210 /* ECPayPaymentGatewayKit.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -667,7 +679,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F07CD1A1BB728D94904CA85F /* Pods_bm.framework in Frameworks */,
-				B35489DF25F87A6000908585 /* ECPayPaymentGatewayKit.xcframework in Frameworks */,
+				B3E4D14C25F9B2BF00D78210 /* ECPayPaymentGatewayKit.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1247,6 +1259,7 @@
 				B36440C01F86467600B477F9 /* CopyFiles */,
 				5F8D8643203D0E44C1D83C60 /* [CP] Embed Pods Frameworks */,
 				B30C954A1FE82DA1005F71EF /* Embed App Extensions */,
+				B3E4D14E25F9B2C000D78210 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1856,7 +1869,7 @@
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
@@ -1885,7 +1898,7 @@
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
@@ -2043,7 +2056,7 @@
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = default;
 				DEVELOPMENT_TEAM = BYF37727CY;
@@ -2079,7 +2092,7 @@
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_ACTIVITY_MODE = "";
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
