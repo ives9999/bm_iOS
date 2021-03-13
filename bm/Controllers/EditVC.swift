@@ -363,12 +363,16 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         }
     }
     
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage: UIImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
-            featuredView.setPickedImage(image: pickedImage)
-            isFeaturedChange = true
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var selectedImage: UIImage?
+        if let editedImage = info[.editedImage] as? UIImage {
+            selectedImage = editedImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            selectedImage = originalImage
         }
-        dismiss(animated: true, completion: nil)
+        featuredView.setPickedImage(image: selectedImage!)
+        picker.dismiss(animated: true, completion: nil)
     }
     
     // ImagePickerDelegate

@@ -703,7 +703,6 @@
 				8A55FE07F39F6E1E09A8B562 /* Pods-bmNotificationServiceExtension.debug.xcconfig */,
 				1BF4FC3AFF68FB06C224D822 /* Pods-bmNotificationServiceExtension.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -1125,6 +1124,7 @@
 				B3ED38D61FB2A3E80003F083 /* EditProfileVC.swift */,
 				B3A253D12567D6EB004B8A03 /* EditStoreVC.swift */,
 				F94FF4341FB4322C00D167B6 /* EditVC.swift */,
+				B362265C25E54C9D00D98317 /* HomeTotalAdVC.swift */,
 				F94E7D211F83636A00F550FD /* HomeVC.swift */,
 				B3DEBE19210D6AC2003699A0 /* ListVC.swift */,
 				B3BBDD8E240E54D000EB9856 /* LoginVC.swift */,
@@ -1132,6 +1132,7 @@
 				B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */,
 				B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */,
 				B3A5A28320B2CB80001A846F /* ManagerVC.swift */,
+				B362263125E236C100D98317 /* MemberOrderListVC.swift */,
 				B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */,
 				B3485C9623F841BE0078265D /* MemberVC.swift */,
 				B3E72A211FA08A170008A6B1 /* MenuVC.swift */,
@@ -1139,7 +1140,10 @@
 				B3310D8D22ABB4820062EF98 /* MultiSelectVC.swift */,
 				B31739EE21787960004CFEDE /* MyMapVC.swift */,
 				B322F8041FC52CAE00DE98FB /* MyTableVC.swift */,
+				B3B7587A25A5C1BB006ACC33 /* OrderVC.swift */,
 				B30C954B1FEA8CDA005F71EF /* PasswordVC.swift */,
+				B3031D6925CD46A50044830C /* PaymentVC.swift */,
+				B3B7585C259CB8FE006ACC33 /* ProductVC.swift */,
 				F94EAA1F1FB023B800B1762C /* ProfileVC.swift */,
 				B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */,
 				B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */,
@@ -1153,6 +1157,7 @@
 				B3E8C29A220603310008ED25 /* ShowCoachVC.swift */,
 				B3839EB722CF0261003F3620 /* ShowCourseVC.swift */,
 				B39453D82230E849005E3027 /* ShowPNVC.swift */,
+				B3B7587425A1B06B006ACC33 /* ShowProductVC.swift */,
 				B36E334325480007001336C2 /* ShowStoreVC.swift */,
 				B3308C501FDA5311006A83B6 /* ShowTempPlayVC.swift */,
 				B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */,
@@ -1173,12 +1178,6 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
-				B3B7585C259CB8FE006ACC33 /* ProductVC.swift */,
-				B3B7587425A1B06B006ACC33 /* ShowProductVC.swift */,
-				B3B7587A25A5C1BB006ACC33 /* OrderVC.swift */,
-				B3031D6925CD46A50044830C /* PaymentVC.swift */,
-				B362263125E236C100D98317 /* MemberOrderListVC.swift */,
-				B362265C25E54C9D00D98317 /* HomeTotalAdVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1874,13 +1873,13 @@
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1899,13 +1898,13 @@
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2052,7 +2051,7 @@
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = default;
 				DEVELOPMENT_TEAM = BYF37727CY;
@@ -2064,7 +2063,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
@@ -2085,7 +2084,7 @@
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_ACTIVITY_MODE = "";
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
@@ -2096,7 +2095,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.6.0;
+				MARKETING_VERSION = 1.6.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";

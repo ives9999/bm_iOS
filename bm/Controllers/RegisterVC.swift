@@ -27,22 +27,23 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     var isFeaturedChange: Bool = false
     
     var testData: [String: String] = [
-//        EMAIL_KEY: "john@housetube.tw",
-//        PASSWORD_KEY: "1234",
-//        REPASSWORD_KEY: "1234",
-//        NAME_KEY: "孫士君",
-//        NICKNAME_KEY: "孫世君",
-//        DOB_KEY: "1969-01-05",
-//        MOBILE_KEY: "0911299998",
-//        TEL_KEY: "062295888",
-//        CITY_ID_KEY: "218",
-//        "city_name": "台南市",
-//        AREA_ID_KEY: "219",
-//        "area_name": "中西區",
-//        ROAD_KEY: "南華街101號8樓",
-//        FB_KEY: "https://www.facebook.com/ives.sun",
-//        LINE_KEY: "ives9999"
-        :]
+        EMAIL_KEY: "john@housetube.tw",
+        PASSWORD_KEY: "1234",
+        REPASSWORD_KEY: "1234",
+        NAME_KEY: "孫士君",
+        NICKNAME_KEY: "孫世君",
+        DOB_KEY: "1969-01-05",
+        MOBILE_KEY: "0911299998",
+        TEL_KEY: "062295888",
+        CITY_ID_KEY: "218",
+        "city_name": "台南市",
+        AREA_ID_KEY: "219",
+        "area_name": "中西區",
+        ROAD_KEY: "南華街101號8樓",
+        FB_KEY: "https://www.facebook.com/ives.sun",
+        LINE_KEY: "ives9999"
+        //:]
+    ]
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -241,12 +242,16 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
     }
     
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let pickedImage: UIImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
-            featuredView.setPickedImage(image: pickedImage)
-            isFeaturedChange = true
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var selectedImage: UIImage?
+        if let editedImage = info[.editedImage] as? UIImage {
+            selectedImage = editedImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            selectedImage = originalImage
         }
-        dismiss(animated: true, completion: nil)
+        featuredView.setPickedImage(image: selectedImage!)
+        picker.dismiss(animated: true, completion: nil)
     }
     
     // after choice image b is true

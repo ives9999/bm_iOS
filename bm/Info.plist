@@ -59,9 +59,9 @@
 	<string>App需要你同意，才能使用相機</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>App需要你同意，才能使用地圖位置</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App需要你同意，才能使用地圖位置</string>
 	<key>NSLocationUsageDescription</key>
+	<string>App需要你同意，才能使用地圖位置</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>App需要你同意，才能使用地圖位置</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>App需要你同意，才能使用相簿</string>
