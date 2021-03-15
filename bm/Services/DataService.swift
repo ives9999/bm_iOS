@@ -79,49 +79,72 @@ class DataService {
         if _filter != nil {
             filter.merge(_filter!)
         }
-        print(filter.toJSONString())
+        //print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        print(url)
+        //print(url)
                 
         Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    //print("get response result value error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                let json = JSON(data)
+            switch response.result {
+            case .success(let value):
+                let json = JSON(value)
                 //print(json)
-                let s: T1 = JSONParse.parse(data: json)
-                //print(type(of: s))
-                //self.superModel.printRows()
-                //self.superCourses = JSONParse.parse(data: json)
-                self.superModel = s
-                
-                let rows: [T] = s.getRows() ?? [T]()
-                for row in rows {
-                    row.filterRow()
-                    //row.printRow()
+                var s: T1? = nil
+                do {
+                    s = try JSONParse.parse(data: json, l: 5)
+                } catch {
+                    
                 }
-                completion(true)
-//                self.makeNeedDownloadImageArr(rows, t: T.self)
-//                let needDownload: Int = self.needDownloads.count
-//                if needDownload > 0 {
-//                    self.needDownloadImage(needDownload, t: T1.self, completion: completion)
-//                } else {
-//                    completion(true)
-//                }
-            } else {
-                self.msg = "網路錯誤，請稍後再試"
+                if (s != nil) {
+                    self.superModel = s!
+
+                    let rows: [T] = s!.getRows() ?? [T]()
+                    for row in rows {
+                        row.filterRow()
+                        //row.printRow()
+                    }
+                    completion(true)
+                } else {
+                    self.msg = "解析伺服器字串錯誤，請洽管理員"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
                 completion(false)
-                debugPrint(response.result.error as Any)
+                print(error)
+                return
             }
+            
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    //print("get response result value error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                let json: JSON = JSON(data)
+//                print(json)
+//                let s: T1 = JSONParse.parse(data: json)
+//                //print(type(of: s))
+//                //self.superModel.printRows()
+//                //self.superCourses = JSONParse.parse(data: json)
+//                self.superModel = s
+//
+//                let rows: [T] = s.getRows() ?? [T]()
+//                for row in rows {
+//                    row.filterRow()
+//                    //row.printRow()
+//                }
+//                completion(true)
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//                debugPrint(response.result.error as Any)
+//            }
         }
     }
     
