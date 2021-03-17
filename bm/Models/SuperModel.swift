@@ -263,7 +263,14 @@ class SuperModel: NSObject, JSONParsable {
     }
     public func printRows() {}
     
-    public func filterRow(){}
+    public func filterRow(){
+//        if featured_path.count > 0 {
+//            if !featured_path.hasPrefix("http://") || !featured_path.hasPrefix("https://") {
+//                featured_path = BASE_URL + featured_path
+//                //print(featured_path)
+//            }
+//        }
+    }
     
     /*
     func parse1(data: JSON) {

@@ -53,23 +53,24 @@ class ListCell: SuperCell {
         accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     }
     
-    func updateCourseViews(indexPath: IndexPath, data: SuperCourse) {
+    func updateCourseViews(indexPath: IndexPath, data: CourseTable) {
         listTitleTxt.text = data.title
         if data.featured_path.count > 0 {
             //print(data.featured_path)
             listFeatured.downloaded(from: data.featured_path)
         }
         
-        listCityBtn.setTextSize(14)
-        listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
-        
-        let citys = data.coach.citys
-        if (citys.count > 0) {
-            listCityBtn.setTitle(citys[0].name)
+        if data.city_show.count > 0 {
+            listCityBtn.isHidden = false
+            listCityBtn.setTextSize(14)
+            listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
+            listCityBtn.setTitle(data.city_show)
+        } else {
+            listCityBtn.isHidden = true
         }
-        listArenaTxt.text = data.price_text_short
+        listArenaTxt.text = data.price_short_show
         listDayTxt.text = data.weekday_text
-        listIntervalTxt.text = data.start_time_text + "~" + data.end_time_text
+        listIntervalTxt.text = data.start_time_show + "~" + data.end_time_show
         
         listBallTxt.isHidden = true
         listMarker.isHidden = true

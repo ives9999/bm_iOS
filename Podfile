@@ -32,3 +32,15 @@ target 'bmNotificationServiceExtension' do
   use_frameworks!
   pod 'OneSignal', '>=2.6.2', '<3.0'
 end
+
+static_frameworks = ['ECPayPaymentGatewayKit']
+pre_install do |installer|
+  installer.pod_targets.each do |pod|
+    if static_frameworks.include?(pod.name)
+      puts "#{pod.name} installed as static framework!"
+      def pod.static_framework?;
+        true
+      end
+    end
+  end
+end

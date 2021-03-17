@@ -41,8 +41,8 @@ class CourseView: UIView {
     public func update(_ date: String, _ superCourse: SuperCourse, _ background_color: UIColor) {
         containerView.backgroundColor = background_color
         
-        startTimeTxt.text = superCourse.start_time_text
-        endTimeTxt.text = superCourse.end_time_text
+        startTimeTxt.text = superCourse.start_time_show
+        endTimeTxt.text = superCourse.end_time_show
         priceTxt.text = superCourse.price_text_short
         let citys = superCourse.coach.citys
         

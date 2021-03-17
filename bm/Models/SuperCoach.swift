@@ -37,8 +37,8 @@ class SuperCoach: SuperModel {
     @objc dynamic var created_id: Int = 0
     @objc dynamic var created_at: String = ""
     @objc dynamic var updated_at: String = ""
-    @objc dynamic var featured_path: String = ""
     @objc dynamic var thumb: String = ""
+    @objc dynamic var featured_path: String = ""
     
     override func filterRow() {
         if featured_path.count > 0 {

@@ -58,6 +58,8 @@ class DataService {
     var superModel: SuperModel = SuperModel()
     var able: SuperModel = SuperModel() // for signup list able model
     
+    var table: Table = Table()
+    
     init() {
         _model = Team.instance
     }
@@ -70,6 +72,48 @@ class DataService {
     func setData1(row: JSON)->Dictionary<String, [String: Any]> {
         let list = Dictionary<String, [String: Any]>()
         return list
+    }
+    
+    func getList<T: Table>(t:T.Type, token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+        
+        self.needDownloads = [Dictionary<String, Any>]()
+        var filter: [String: Any] = ["source": "app", "channel": CHANNEL, "page": page, "perPage": perPage]
+        if _filter != nil {
+            filter.merge(_filter!)
+        }
+        //print(filter.toJSONString())
+        
+        var url: String = getListURL()
+        if (token != nil) {
+            url = url + "/" + token!
+        }
+        //print(url)
+                
+        Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(_):
+                var s: T? = nil
+                do {
+                    if response.data != nil {
+                        //print(response.data)
+                        s = try JSONDecoder().decode(t, from: response.data!)
+                        if s != nil {
+                            self.table = s!
+                            //s!.printRow()
+                        }
+                        completion(true)
+                    }
+                } catch {
+                    print("Error:\(error)")
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
     }
     
     func getList<T: SuperModel, T1: SuperModel>(t:T.Type, t1: T1.Type, token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {

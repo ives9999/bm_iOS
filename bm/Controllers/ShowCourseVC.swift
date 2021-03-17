@@ -233,7 +233,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             tableRows.removeValue(forKey: "date");
             tableRowKeys = tableRowKeys.filter{$0 != "date"}
         }
-        let interval = superCourse!.start_time_text + " ~ " + superCourse!.end_time_text
+        let interval = superCourse!.start_time_show + " ~ " + superCourse!.end_time_show
         tableRows["interval"]!["content"] = interval
         
         let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.superCourse!.content+"</body></html>"
@@ -256,8 +256,8 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     func setSignupData() {
         let date_model: SuperDate = superCourse!.date_model
         let date: String = date_model.date
-        let start_time: String = superCourse!.start_time_text
-        let end_time: String = superCourse!.end_time_text
+        let start_time: String = superCourse!.start_time_show
+        let end_time: String = superCourse!.end_time_show
         let next_time = "下次上課時間：\(date) \(start_time) ~ \(end_time)"
         signupDateLbl.text = next_time
 //        let nextCourseTime: [String: String] = superCourse!.nextCourseTime

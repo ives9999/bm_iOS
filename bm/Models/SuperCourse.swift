@@ -35,10 +35,7 @@ class SuperCourse: SuperModel {
     @objc dynamic var start_time: String = ""
     @objc dynamic var end_time: String = ""
     @objc dynamic var deadline: String = ""
-    @objc dynamic var start_time_text: String = ""
-    @objc dynamic var end_time_text: String = ""
     @objc dynamic var youtube: String = ""
-    
     
     @objc dynamic var content: String = ""
     @objc dynamic var status: String = "online"
@@ -48,9 +45,10 @@ class SuperCourse: SuperModel {
     @objc dynamic var created_id: Int = 0
     @objc dynamic var created_at: String = ""
     @objc dynamic var updated_at: String = ""
-    @objc dynamic var created_at_text: String = ""
+    
     @objc dynamic var featured_path: String = ""
     @objc dynamic var thumb: String = ""
+    @objc dynamic var city_id: Int = -1
     
     @objc dynamic var featured: UIImage = UIImage(named: "nophoto")!
     @objc dynamic var coach: SuperCoach = SuperCoach()
@@ -63,13 +61,32 @@ class SuperCourse: SuperModel {
     @objc dynamic var signup_normal_models: [SuperSignupNormal] = [SuperSignupNormal]()
     @objc dynamic var signup_standby_models: [SuperSignupStandby] = [SuperSignupStandby]()
     
+    var created_at_show: String = ""
+    var start_time_show: String = ""
+    var end_time_show: String = ""
+    var city_show: String = ""
+    
     override func filterRow() {
-        created_at_text = created_at.noTime()
+        
+        //super.filterRow()
         if featured_path.count > 0 {
             if !featured_path.hasPrefix("http://") || !featured_path.hasPrefix("https://") {
                 featured_path = BASE_URL + featured_path
                 //print(featured_path)
             }
+        }
+        created_at_show = created_at.noTime()
+        
+        if city_id > 0 {
+            city_show = Global.instance.zoneIDToName(city_id)
+        }
+        
+        if start_time.count > 0 {
+            start_time_show = start_time.noSec()
+        }
+        
+        if end_time.count > 0 {
+            end_time_show = end_time.noSec()
         }
     }
     

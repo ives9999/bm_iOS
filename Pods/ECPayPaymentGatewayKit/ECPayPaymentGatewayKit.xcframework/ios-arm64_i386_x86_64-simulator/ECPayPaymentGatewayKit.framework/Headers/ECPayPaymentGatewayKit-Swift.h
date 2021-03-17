@@ -425,6 +425,13 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit25TestingTokenCallbackState")
 
 
 
+SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit16UserAgentFetcher")
+@interface UserAgentFetcher : NSObject
+- (NSString * _Nonnull)fetch SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 @class WKUserContentController;
 @class WKScriptMessage;
 
@@ -1016,6 +1023,13 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit25TestingTokenCallbackState")
 
 
 
+SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit16UserAgentFetcher")
+@interface UserAgentFetcher : NSObject
+- (NSString * _Nonnull)fetch SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 @class WKUserContentController;
 @class WKScriptMessage;
 
@@ -1605,6 +1619,13 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit25TestingTokenCallbackState")
 
 
 
+
+
+SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit16UserAgentFetcher")
+@interface UserAgentFetcher : NSObject
+- (NSString * _Nonnull)fetch SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
 
 
 @class WKUserContentController;
