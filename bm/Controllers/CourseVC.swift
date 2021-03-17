@@ -58,7 +58,7 @@ class CourseVC: ListVC {
     
     override func getDataEnd(success: Bool) {
         if success {
-            let table: Table = CourseService.instance.table
+            let table: Table = CourseService.instance.table!
             coursesTable = (table as! CoursesTable)
             //superCourses = CourseService.instance.superCourses
             let tmps: [CourseTable] = coursesTable!.rows
@@ -102,6 +102,7 @@ class CourseVC: ListVC {
                 let row = lists1[indexPath.row] as? CourseTable
                 if row != nil {
                     row!.filterRow()
+                    //row!.printRow()
                     cell.updateCourseViews(indexPath: indexPath, data: row!)
                 }
                 

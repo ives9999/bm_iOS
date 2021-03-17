@@ -68,7 +68,7 @@ class ListCell: SuperCell {
         } else {
             listCityBtn.isHidden = true
         }
-        listArenaTxt.text = data.price_short_show
+        listArenaTxt.text = data.price_desc
         listDayTxt.text = data.weekday_text
         listIntervalTxt.text = data.start_time_show + "~" + data.end_time_show
         

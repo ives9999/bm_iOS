@@ -16,8 +16,8 @@ class StoreVC: ListVC, List1CellDelegate {
         ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":0,"value":"","value_type":"Array"]
     ]
     var params1: [String: Any]?
-    var superStores: SuperStores? = nil
-    internal(set) public var lists1: [SuperModel] = [SuperModel]()
+    var storesTable: StoresTable? = nil
+    internal(set) public var lists1: [Table] = [Table]()
     
     //let session: UserDefaults = UserDefaults.standard
             
@@ -52,7 +52,7 @@ class StoreVC: ListVC, List1CellDelegate {
         //print(page)
         Global.instance.addSpinner(superView: self.view)
 
-        dataService.getList(t: SuperStore.self, t1: SuperStores.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
+        dataService.getList(t: StoresTable.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)
@@ -65,22 +65,22 @@ class StoreVC: ListVC, List1CellDelegate {
 
     override func getDataEnd(success: Bool) {
         if success {
-            let superModel: SuperModel = dataService.superModel
-            superStores = (superModel as! SuperStores)
+            let table: Table = dataService.table!
+            storesTable = (table as! StoresTable)
             //superCourses = CourseService.instance.superCourses
-            let tmps: [SuperStore] = superStores!.rows
+            let tmps: [StoreTable] = storesTable!.rows
 
             //print(tmps)
             //print("===============")
             if page == 1 {
-                lists1 = [SuperStores]()
+                lists1 = [StoresTable]()
             }
             lists1 += tmps
             //print(self.lists)
-            page = superStores!.page
+            page = storesTable!.page
             if page == 1 {
-                totalCount = superStores!.totalCount
-                perPage = superStores!.perPage
+                totalCount = storesTable!.totalCount
+                perPage = storesTable!.perPage
                 let _pageCount: Int = totalCount / perPage
                 totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
                 //print(self.totalPage)
@@ -106,7 +106,8 @@ class StoreVC: ListVC, List1CellDelegate {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? List1Cell {
                 
                 cell.cellDelegate = self
-                let row = lists1[indexPath.row] as! SuperStore
+                let row = lists1[indexPath.row] as! StoreTable
+                row.filterRow()
                 //row.printRow()
                 
                 cell.updateStoreViews(indexPath: indexPath, row: row)
@@ -131,8 +132,8 @@ class StoreVC: ListVC, List1CellDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == self.tableView {
-            if superStores != nil {
-                let superStore = superStores!.rows[indexPath.row]
+            if storesTable != nil {
+                let superStore = storesTable!.rows[indexPath.row]
                 performSegue(withIdentifier: TO_SHOW_STORE, sender: superStore)
             }
             
@@ -153,10 +154,10 @@ class StoreVC: ListVC, List1CellDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let showVC: ShowStoreVC = segue.destination as? ShowStoreVC {
-            assert(sender as? SuperStore != nil)
-            let superStore: SuperStore = sender as! SuperStore
-            showVC.superStore = superStore
-            showVC.store_token = superStore.token
+            assert(sender as? StoreTable != nil)
+            let storeTable: StoreTable = sender as! StoreTable
+            //showVC.storeTable = storeTable
+            showVC.store_token = storeTable.token
         }
     }
     

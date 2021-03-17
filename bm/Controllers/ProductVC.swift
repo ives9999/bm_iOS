@@ -15,8 +15,8 @@ class ProductVC: ListVC, List1CellDelegate {
         ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":0,"value":"","value_type":"Array"]
     ]
     var params1: [String: Any]?
-    var superProducts: SuperProducts? = nil
-    internal(set) public var lists1: [SuperModel] = [SuperModel]()
+    var productsTable: ProductsTable? = nil
+    internal(set) public var lists1: [Table] = [Table]()
         
     override func viewDidLoad() {
         myTablView = tableView
@@ -49,7 +49,7 @@ class ProductVC: ListVC, List1CellDelegate {
         //print(page)
         Global.instance.addSpinner(superView: self.view)
 
-        dataService.getList(t: SuperProduct.self, t1: SuperProducts.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
+        dataService.getList(t: ProductsTable.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
             if (success) {
                 self.getDataEnd(success: success)
                 Global.instance.removeSpinner(superView: self.view)
@@ -62,22 +62,22 @@ class ProductVC: ListVC, List1CellDelegate {
 
     override func getDataEnd(success: Bool) {
         if success {
-            let superModel: SuperModel = dataService.superModel
-            superProducts = (superModel as! SuperProducts)
+            let table: Table = dataService.table!
+            productsTable = (table as! ProductsTable)
             //superCourses = CourseService.instance.superCourses
-            let tmps: [SuperProduct] = superProducts!.rows
+            let tmps: [ProductTable] = productsTable!.rows
 
             //print(tmps)
             //print("===============")
             if page == 1 {
-                lists1 = [SuperProduct]()
+                lists1 = [ProductTable]()
             }
             lists1 += tmps
             //print(self.lists)
-            page = superProducts!.page
+            page = productsTable!.page
             if page == 1 {
-                totalCount = superProducts!.totalCount
-                perPage = superProducts!.perPage
+                totalCount = productsTable!.totalCount
+                perPage = productsTable!.perPage
                 let _pageCount: Int = totalCount / perPage
                 totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
                 //print(self.totalPage)
@@ -103,7 +103,8 @@ class ProductVC: ListVC, List1CellDelegate {
             if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? List1Cell {
                 
                 cell.cellDelegate = self
-                let row = lists1[indexPath.row] as! SuperProduct
+                let row = lists1[indexPath.row] as! ProductTable
+                row.filterRow()
                 //row.printRow()
                 
                 cell.updateProductViews(indexPath: indexPath, row: row)
@@ -128,10 +129,10 @@ class ProductVC: ListVC, List1CellDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == self.tableView {
-            if superProducts != nil {
-                let superProduct = superProducts!.rows[indexPath.row]
+            if productsTable != nil {
+                let productTable = productsTable!.rows[indexPath.row]
                 //toShowProduct(token: superProduct.token)
-                let token = superProduct.token
+                let token = productTable.token
                 if #available(iOS 13.0, *) {
                     let storyboard = UIStoryboard(name: "More", bundle: nil)
                     if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_PRODUCT)  as? ShowProductVC {
@@ -176,9 +177,9 @@ class ProductVC: ListVC, List1CellDelegate {
     func cellCity(indexPath: IndexPath?) {
         //print(indexPath!.row)
         
-        let superProduct = superProducts!.rows[indexPath!.row]
+        let productTable = productsTable!.rows[indexPath!.row]
         toOrder(
-            superProduct: superProduct,
+            productTable: productTable,
             login: { vc in vc.toLogin() },
             register: { vc in vc.toRegister() }
         )

@@ -87,7 +87,7 @@ class List1Cell: UITableViewCell {
 //        }
     }
     
-    func updateStoreViews(indexPath: IndexPath, row: SuperStore) {
+    func updateStoreViews(indexPath: IndexPath, row: StoreTable) {
         //data.printRow()
         self.backgroundColor = UIColor.clear
         
@@ -98,10 +98,10 @@ class List1Cell: UITableViewCell {
         }
         
         titleLbl.text = row.name
-        cityBtn.setTitle(row.city)
+        cityBtn.setTitle(row.city_show)
         addressLbl.text = row.address
-        telLbl.text = row.tel_text
-        business_timeLbl.text = row.open_time_text + "~" + row.close_time_text
+        telLbl.text = row.tel_show
+        business_timeLbl.text = row.open_time_show + "~" + row.close_time_show
         
         cityBtn.indexPath = indexPath
         mapIcon.indexPath = indexPath
@@ -148,7 +148,7 @@ class List1Cell: UITableViewCell {
         //print(contentView.frame.height)
     }
     
-    func updateProductViews(indexPath: IndexPath, row: SuperProduct) {
+    func updateProductViews(indexPath: IndexPath, row: ProductTable) {
         //data.printRow()
         self.backgroundColor = UIColor.black
         
@@ -159,7 +159,11 @@ class List1Cell: UITableViewCell {
         
         titleLbl.text = row.name
         cityBtn.setTitle("購買")
-        telLbl.text = "價格： \(row.prices[0].price_member) 元"
+        if row.prices.count > 0 {
+            telLbl.text = "價格： \(row.prices[0].price_member) 元"
+        } else {
+            telLbl.text = "未提供"
+        }
         
         cityBtn.indexPath = indexPath
         

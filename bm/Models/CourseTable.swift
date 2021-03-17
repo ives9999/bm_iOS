@@ -26,6 +26,7 @@ class CoursesTable: Table {
     
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         success = try container.decode(Bool.self, forKey: .success)
         page = try container.decode(Int.self, forKey: .page)
@@ -37,10 +38,8 @@ class CoursesTable: Table {
 
 class CourseTable: Table {
     
-    var id: Int = -1
+    //var id: Int = -1
     var title: String = ""
-    var channel: String = ""
-    var slug: String = ""
     var coach_id: Int = -1
     var price: Int = -1
     var price_unit: String = ""
@@ -50,25 +49,16 @@ class CourseTable: Table {
     
     var cycle: Int = -1
     var cycle_unit: String = ""
-    var start_date: String = ""
-    var end_date: String = ""
     var weekday: Int = -1
     var weekday_text: String = ""
+    var start_date: String = ""
+    var end_date: String = ""
     var start_time: String = ""
     var end_time: String = ""
     var deadline: String = ""
     var youtube: String = ""
 
     var content: String = ""
-    var status: String = "online"
-    var token: String = ""
-    var sort_order: Int = 0
-    var pv: Int = 0
-    var created_id: Int = 0
-    var created_at: String = ""
-    var updated_at: String = ""
-
-    var featured_path: String = ""
     var city_id: Int = -1
 
     //var nextCourseTime: [String: String] = [String: String]()
@@ -76,7 +66,6 @@ class CourseTable: Table {
     var signup_id: Int = 0
     //var weekday_arr: [Int] = [Int]()
 
-    var created_at_show: String = ""
     var start_time_show: String = ""
     var end_time_show: String = ""
     var city_show: String = ""
@@ -86,10 +75,7 @@ class CourseTable: Table {
     var kind_show: String = ""
     
     enum CodingKeys: String, CodingKey {
-        case id
         case title
-        case channel
-        case slug
         case coach_id
         case price
         case price_unit
@@ -99,17 +85,14 @@ class CourseTable: Table {
         case cycle_unit
         case start_date
         case end_date
+        case start_time
+        case end_time
+        case weekday
+        case weekday_text
         case deadline
         case youtube
         case content
-        case status
-        case token
-        case sort_order
-        case pv
         case created_id
-        case created_at
-        case update_at
-        case featured_path
         case thumb
         case city_id
         //case nextCourseTime
@@ -121,10 +104,7 @@ class CourseTable: Table {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int.self, forKey: .id)
-        title = try container.decode(String.self, forKey: .title)
-        do {channel = try container.decode(String.self, forKey: .channel)}catch{channel = ""}
-        do {slug = try container.decode(String.self, forKey: .slug)}catch{slug = ""}
+        do {title = try container.decode(String.self, forKey: .title)}catch{title=""}
         do {coach_id = try container.decode(Int.self, forKey: .coach_id)}catch{coach_id = 0}
         do {price = try container.decode(Int.self, forKey: .price)}catch{price = 0}
         do {price_unit = try container.decode(String.self, forKey: .price_unit)}catch{price_unit = ""}
@@ -134,17 +114,14 @@ class CourseTable: Table {
         do {cycle_unit = try container.decode(String.self, forKey: .cycle_unit)}catch{cycle_unit = ""}
         do {start_date = try container.decode(String.self, forKey: .start_date)}catch{start_date = ""}
         do {end_date = try container.decode(String.self, forKey: .end_date)}catch{end_date = ""}
+        do {start_time = try container.decode(String.self, forKey: .start_time)}catch{start_time = ""}
+        do {end_time = try container.decode(String.self, forKey: .end_time)}catch{end_time = ""}
+        do {weekday = try container.decode(Int.self, forKey: .weekday)}catch{weekday = 0}
+        do {weekday_text = try container.decode(String.self, forKey: .weekday_text)}catch{weekday_text = ""}
         do {deadline = try container.decode(String.self, forKey: .deadline)}catch{deadline = ""}
         do {youtube = try container.decode(String.self, forKey: .youtube)}catch{youtube = ""}
         do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
-        do {status = try container.decode(String.self, forKey: .status)}catch{status = "online"}
-        do {token = try container.decode(String.self, forKey: .token)}catch{token = ""}
-        do {sort_order = try container.decode(Int.self, forKey: .sort_order)}catch{sort_order = 0}
-        do {pv = try container.decode(Int.self, forKey: .pv)}catch{pv = 0}
         do {created_id = try container.decode(Int.self, forKey: .created_id)}catch{created_id = 0}
-        do {created_at = try container.decode(String.self, forKey: .created_at)}catch{created_at = ""}
-        do {updated_at = try container.decode(String.self, forKey: .update_at)}catch{updated_at = ""}
-        do {featured_path = try container.decode(String.self, forKey: .featured_path)}catch{featured_path = ""}
         do {city_id = try container.decode(Int.self, forKey: .city_id)}catch{city_id = 0}
         do {isSignup = try container.decode(Bool.self, forKey: .isSignup)}catch{isSignup = false}
         do {signup_id = try container.decode(Int.self, forKey: .signup_id)}catch{signup_id = 0}
@@ -152,14 +129,7 @@ class CourseTable: Table {
     
     override func filterRow() {
         
-        //super.filterRow()
-        if featured_path.count > 0 {
-            if !featured_path.hasPrefix("http://") || !featured_path.hasPrefix("https://") {
-                featured_path = BASE_URL + featured_path
-                //print(featured_path)
-            }
-        }
-        created_at_show = created_at.noTime()
+        super.filterRow()
         
         if city_id > 0 {
             city_show = Global.instance.zoneIDToName(city_id)

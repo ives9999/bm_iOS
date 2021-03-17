@@ -713,7 +713,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toOrder(superProduct: SuperProduct, login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
+    func toOrder(productTable: ProductTable, login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
         
         var msg: String = ""
         if !Member.instance.isLoggedIn {
@@ -746,7 +746,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                 if #available(iOS 13.0, *) {
                     let storyboard = UIStoryboard(name: "More", bundle: nil)
                     if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
-                        viewController.superProduct = superProduct
+                        viewController.productTable = productTable
                         show(viewController, sender: nil)
                     }
                 } else {

@@ -10,7 +10,7 @@ import Foundation
 
 class OrderVC: MyTableVC, ValueChangedDelegate {
 
-    var superProduct: SuperProduct = SuperProduct()
+    var productTable: ProductTable? = nil
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var submitButton: SubmitButton!
     
@@ -25,7 +25,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     override func viewDidLoad() {
         
         myTablView = tableView
-        form = OrderForm(type: self.superProduct.type)
+        form = OrderForm(type: self.productTable!.type)
 
         super.viewDidLoad()
         //print(superProduct)
@@ -33,7 +33,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         submitButton.setTitle("訂購")
         
         titleLbl.textColor = UIColor.black
-        titleLbl.text = superProduct.name
+        titleLbl.text = productTable!.name
 
         initData()
         
@@ -46,7 +46,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     func initData() {
         
         if let productNameItem = getFormItemFromKey("Product_Name") {
-            productNameItem.value = superProduct.name
+            productNameItem.value = productTable!.name
             productNameItem.make()
         }
         
@@ -71,16 +71,16 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
         
         if let numberItem = getFormItemFromKey(NUMBER_KEY) as? NumberFormItem {
-            numberItem.min = superProduct.order_min
-            numberItem.max = superProduct.order_max
+            numberItem.min = productTable!.order_min
+            numberItem.max = productTable!.order_max
         }
         
         if let colorItem = getFormItemFromKey(COLOR_KEY) as? Color1FormItem {
             var res: [[String: String]] = [[String: String]]()
-            for color in superProduct.colors {
-                let dict: [String: String] = [color: color]
-                res.append(dict)
-            }
+//            for color in productTable!.colors {
+//                let dict: [String: String] = [color: color]
+//                res.append(dict)
+//            }
             colorItem.setTags(tags: res)
             //print(superProduct.color)
         }
@@ -89,27 +89,27 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             
             var res: [[String: String]] = [[String: String]]()
             
-            for size in superProduct.sizes {
-                let dict: [String: String] = [size: size]
-                res.append(dict)
-            }
+//            for size in productTable!.sizes {
+//                let dict: [String: String] = [size: size]
+//                res.append(dict)
+//            }
             clothesSizeItem.setTags(tags: res)
         }
         
         if let weightItem = getFormItemFromKey(WEIGHT_KEY) as? WeightFormItem {
             
             var res: [[String: String]] = [[String: String]]()
-            for size in superProduct.weights {
-                let dict: [String: String] = [size: size]
-                res.append(dict)
-            }
+//            for size in productTable!.weights {
+//                let dict: [String: String] = [size: size]
+//                res.append(dict)
+//            }
             weightItem.setTags(tags: res)
         }
         
-        if superProduct.type == "mejump" {
+        if productTable!.type == "mejump" {
             if let typeItem = getFormItemFromKey("type") as? TagFormItem {
                 var res: [[String: String]] = [[String: String]]()
-                for price in superProduct.prices {
+                for price in productTable!.prices {
                     //price.printRow()
                     let type: String = price.price_title
                     let typePrice: String = String(price.price_member)
@@ -127,16 +127,16 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
         
         if getFormItemFromKey(NUMBER_KEY) != nil {
-            selected_number = superProduct.order_min
+            selected_number = productTable!.order_min
         }
         
         if getFormItemFromKey(SUBTOTAL_KEY) != nil {
-            selected_price = superProduct.prices[selected_idx].price_member
+            selected_price = productTable!.prices[selected_idx].price_member
             updateSubTotal()
         }
         
         if getFormItemFromKey(SHIPPING_FEE_KEY) != nil {
-            shippingFee = superProduct.prices[selected_idx].shipping_fee
+            shippingFee = productTable!.prices[selected_idx].shipping_fee
             updateShippingFee()
         }
     }
@@ -190,7 +190,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     }
     
     func updateShippingFee() {
-        shippingFee = superProduct.prices[selected_idx].shipping_fee
+        shippingFee = productTable!.prices[selected_idx].shipping_fee
         if let priceItem = getFormItemFromKey(SHIPPING_FEE_KEY) {
             //shippingFee = price
             priceItem.value = String(shippingFee)
@@ -217,7 +217,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             let id: Int = Int(key)!
             //print(id)
             var idx: Int = 0
-            for price in superProduct.prices {
+            for price in productTable!.prices {
                 if price.id == id {
                     selected_price = price.price_member
                     self.selected_idx = idx
@@ -254,9 +254,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         var params: [String: String] = [String: String]()
         
         params["device"] = "app"
-        params["product_id"] = String(superProduct.id)
-        params["type"] = superProduct.type
-        params["price_id"] = String(superProduct.prices[selected_idx].id)
+        params["product_id"] = String(productTable!.id)
+        params["type"] = productTable!.type
+        params["price_id"] = String(productTable!.prices[selected_idx].id)
         
         params["member_id"] = String(Member.instance.id)
         params["order_name"] = Member.instance.name

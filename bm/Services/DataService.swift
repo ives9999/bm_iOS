@@ -58,7 +58,7 @@ class DataService {
     var superModel: SuperModel = SuperModel()
     var able: SuperModel = SuperModel() // for signup list able model
     
-    var table: Table = Table()
+    var table: Table?
     
     init() {
         _model = Team.instance
@@ -101,11 +101,19 @@ class DataService {
                         if s != nil {
                             self.table = s!
                             //s!.printRow()
+                            completion(true)
+                        } else {
+                            self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                            completion(false)
                         }
-                        completion(true)
+                    } else {
+                        self.msg = "沒有任何伺服器回傳的訊息"
+                        completion(false)
                     }
                 } catch {
-                    print("Error:\(error)")
+                    //print("Error:\(error)")
+                    self.msg = error.localizedDescription
+                    completion(false)
                 }
             case .failure(let error):
                 self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
