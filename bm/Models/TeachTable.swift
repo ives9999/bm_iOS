@@ -54,6 +54,7 @@ class TeachTable: Table {
     
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         do {title = try container.decode(String.self, forKey: .title)}catch{title=""}
         do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}

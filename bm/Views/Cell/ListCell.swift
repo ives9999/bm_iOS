@@ -34,9 +34,12 @@ class ListCell: SuperCell {
         super.init(coder: aDecoder)
     }
     
-    func updateViews(indexPath: IndexPath, data: SuperData, iden: String = "team") {
+    func updateTeachViews(indexPath: IndexPath, data: TeachTable) {
         listTitleTxt.text = data.title
-        listFeatured.image = data.featured
+        if data.featured_path.count > 0 {
+            //print(data.featured_path)
+            listFeatured.downloaded(from: data.featured_path)
+        }
         listMarker.padding(top: 0, left: 0, bottom: 0, right: 0)
         listCityBtn.setTextSize(14)
         listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center

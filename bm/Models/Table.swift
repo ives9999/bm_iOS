@@ -41,8 +41,9 @@ class Table: Codable {
     }
     
     public func filterRow(){
+        
         if featured_path.count > 0 {
-            if !featured_path.hasPrefix("http://") || !featured_path.hasPrefix("https://") {
+            if !featured_path.hasPrefix("http://") && !featured_path.hasPrefix("https://") {
                 featured_path = BASE_URL + featured_path
                 //print(featured_path)
             }

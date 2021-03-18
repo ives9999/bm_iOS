@@ -164,58 +164,58 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         return lists.count
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        var size: CGSize!
-        let data = lists[indexPath.row]
-        
-        testLabelReset()
-        testLabel.text = data.title
-        testLabel.sizeToFit()
-        let lineCount = getTestLabelLineCount(textCount: data.title.count)
-        //let lineNum: Int = Int((testLabel.frame.size.height / textHeight).rounded(FloatingPointRoundingRule.up))
-        
-//        print("3.\(indexPath.row):\(lineCount)")
-//        print("3.\(indexPath.row):\(textHeight)")
-//        print("3.\(indexPath.row):\(testLabel.frame.size.height)")
-        let titleLblHeight = textHeight * CGFloat(lineCount)
-        
-        let featured = data.featured
-        let w = featured.size.width
-        let h = featured.size.height
-        let aspect = w / h
-        let featuredViewHeight = cellWidth / aspect
-        
-        var cellHeight: CGFloat
-        cellHeight = titleLblHeight + featuredViewHeight + textHeight + 4*CELL_EDGE_MARGIN
-        //print("\(indexPath.row).\(cellHeight)")
-        size = CGSize(width: cellWidth, height: cellHeight)
-        //print("3.\(indexPath.row):\(titleLblHeight)")
-        //print("3.\(indexPath.row):\(featuredViewHeight)")
-        //print("3.\(indexPath.row):\(cellHeight)")
-        
-//        if list.vimeo.count == 0 && list.youtube.count == 0 {
-//            let imageWidth = list.featured.size.width
-//            let imageHeight = list.featured.size.height
-//            //print("image width: \(imageWidth), height: \(imageHeight)")
-//
-//            cellHeight = TITLE_HEIGHT
-//            if imageWidth < cellWidth - CELL_EDGE_MARGIN*2 {
-//                cellHeight += imageHeight
-//            } else {
-//                cellHeight += (imageHeight/imageWidth) * (cellWidth-(CELL_EDGE_MARGIN*2))
-//            }
-//            //cellHeight += cellWidth * 0.75
-//            cellHeight += CELL_EDGE_MARGIN
-//            //print("cell width: \(cellWidth), height: \(cellHeight)")
-//            size = CGSize(width: cellWidth, height: cellHeight)
-//        } else {
-//            cellHeight = (cellWidth - CELL_EDGE_MARGIN * 2) * 0.75 + CELL_EDGE_MARGIN * 2
-//            size = CGSize(width: cellWidth, height: cellHeight)
-//            //print("cell_width: \(cellWidth), cell_height: \(cellHeight)")
-//        }
-        //print("cell width: \(cellWidth!), height: \(cellHeight)")
-        return size
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        var size: CGSize!
+//        let data = lists[indexPath.row]
+//        
+//        testLabelReset()
+//        testLabel.text = data.title
+//        testLabel.sizeToFit()
+//        let lineCount = getTestLabelLineCount(textCount: data.title.count)
+//        //let lineNum: Int = Int((testLabel.frame.size.height / textHeight).rounded(FloatingPointRoundingRule.up))
+//        
+////        print("3.\(indexPath.row):\(lineCount)")
+////        print("3.\(indexPath.row):\(textHeight)")
+////        print("3.\(indexPath.row):\(testLabel.frame.size.height)")
+//        let titleLblHeight = textHeight * CGFloat(lineCount)
+//        
+//        let featured = data.featured
+//        let w = featured.size.width
+//        let h = featured.size.height
+//        let aspect = w / h
+//        let featuredViewHeight = cellWidth / aspect
+//        
+//        var cellHeight: CGFloat
+//        cellHeight = titleLblHeight + featuredViewHeight + textHeight + 4*CELL_EDGE_MARGIN
+//        //print("\(indexPath.row).\(cellHeight)")
+//        size = CGSize(width: cellWidth, height: cellHeight)
+//        //print("3.\(indexPath.row):\(titleLblHeight)")
+//        //print("3.\(indexPath.row):\(featuredViewHeight)")
+//        //print("3.\(indexPath.row):\(cellHeight)")
+//        
+////        if list.vimeo.count == 0 && list.youtube.count == 0 {
+////            let imageWidth = list.featured.size.width
+////            let imageHeight = list.featured.size.height
+////            //print("image width: \(imageWidth), height: \(imageHeight)")
+////
+////            cellHeight = TITLE_HEIGHT
+////            if imageWidth < cellWidth - CELL_EDGE_MARGIN*2 {
+////                cellHeight += imageHeight
+////            } else {
+////                cellHeight += (imageHeight/imageWidth) * (cellWidth-(CELL_EDGE_MARGIN*2))
+////            }
+////            //cellHeight += cellWidth * 0.75
+////            cellHeight += CELL_EDGE_MARGIN
+////            //print("cell width: \(cellWidth), height: \(cellHeight)")
+////            size = CGSize(width: cellWidth, height: cellHeight)
+////        } else {
+////            cellHeight = (cellWidth - CELL_EDGE_MARGIN * 2) * 0.75 + CELL_EDGE_MARGIN * 2
+////            size = CGSize(width: cellWidth, height: cellHeight)
+////            //print("cell_width: \(cellWidth), cell_height: \(cellHeight)")
+////        }
+//        //print("cell width: \(cellWidth!), height: \(cellHeight)")
+//        return size
+//    }
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
 //        return UIEdgeInsets(top: 5.0, left: 5.0, bottom: 30.0, right: 5.0)
 //    }

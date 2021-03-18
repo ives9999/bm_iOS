@@ -92,16 +92,24 @@ class DataService {
         Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
             switch response.result {
-            case .success(_):
+            case .success(let value):
                 var s: T? = nil
                 do {
                     if response.data != nil {
-//                        let json = JSON(value)
-//                        print(json)
+                        //let json = JSON(value)
+                        //print(json)
                         s = try JSONDecoder().decode(t, from: response.data!)
                         if s != nil {
                             self.table = s!
                             //s!.printRow()
+                            
+                            let a1: TeachesTable = s! as! TeachesTable
+                            let rows:[TeachTable] = a1.rows
+                            for row in rows {
+                                row.filterRow()
+                                row.printRow()
+                            }
+                            
                             completion(true)
                         } else {
                             self.msg = "解析JSON字串時，得到空直，請洽管理員"

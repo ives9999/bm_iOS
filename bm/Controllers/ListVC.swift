@@ -220,7 +220,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
                 
                 cell.cellDelegate = self
                 let row = lists[indexPath.row]
-                cell.updateViews(indexPath: indexPath, data: row, iden: _type)
+                //cell.updateViews(indexPath: indexPath, data: row, iden: _type)
                 
                 return cell
             } else {

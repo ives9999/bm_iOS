@@ -45,6 +45,11 @@ class CollectionCell: UICollectionViewCell {
     func updateTeach(data: TeachTable, idx: Int) {
         self.idx = idx
         titleLbl.text = data.title
+        
+        if data.featured_path.count > 0 {
+            //print(data.featured_path)
+            featuredView.downloaded(from: data.featured_path)
+        }
 //        let featured = data.featured
 //        let aspect = featured.size.width / featured.size.height
 //        let constraint = NSLayoutConstraint(item: featuredView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: featuredView, attribute: NSLayoutConstraint.Attribute.height, multiplier: aspect, constant: 0)
