@@ -41,15 +41,6 @@ class ListCell: SuperCell {
         listCityBtn.setTextSize(14)
         listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
         
-        if iden == "team" {
-            listMarker.isHidden = true
-            updateTeam(indexPath: indexPath, data: data)
-        } else if iden == "coach" {
-            listMarker.isHidden = true
-            updateCoach(indexPath: indexPath, data: data)
-        } else if iden == "arena" {
-            updateArena(indexPath: indexPath, data: data)
-        }
         accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     }
     
@@ -78,115 +69,140 @@ class ListCell: SuperCell {
         accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
     }
     
-    func updateStoreViews(indexPath: IndexPath, data: SuperStore) {
+//    func updateStoreViews(indexPath: IndexPath, data: SuperStore) {
+//        listTitleTxt.text = data.name
+//        if data.featured_path.count > 0 {
+//            //print(data.featured_path)
+//            listFeatured.downloaded(from: data.featured_path)
+//        }
+//
+//        listCityBtn.setTextSize(14)
+//        listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
+//
+//        listCityBtn.setTitle(data.city)
+//        listArenaTxt.text = data.address
+//        listDayTxt.text = data.tel_text
+//        listIntervalTxt.text = data.open_time_text + "~" + data.close_time_text
+//
+//        var showManager = false;
+//        if data.managers.count > 0 {
+//            let member_id = Member.instance.id
+//            for manager in data.managers {
+//                //print(manager)
+//                if let tmp = manager["id"] as? String {
+//                    let manager_id = Int(tmp)
+//                    if member_id == manager_id {
+//                        showManager = true
+//                        break
+//                    }
+//                }
+//            }
+//        }
+//        if showManager {
+//            listMarker.isHidden = false
+//            //listMarker.text = "管理"
+//        } else {
+//            listMarker.isHidden = true
+//        }
+//        listBallTxt.isHidden = true
+//
+//        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+//    }
+    
+    func updateTeam(indexPath: IndexPath, data: TeamTable) {
+        
         listTitleTxt.text = data.name
+        
         if data.featured_path.count > 0 {
             //print(data.featured_path)
             listFeatured.downloaded(from: data.featured_path)
         }
         
-        listCityBtn.setTextSize(14)
-        listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
-        
-        listCityBtn.setTitle(data.city)
-        listArenaTxt.text = data.address
-        listDayTxt.text = data.tel_text
-        listIntervalTxt.text = data.open_time_text + "~" + data.close_time_text
-        
-        var showManager = false;
-        if data.managers.count > 0 {
-            let member_id = Member.instance.id
-            for manager in data.managers {
-                //print(manager)
-                if let tmp = manager["id"] as? String {
-                    let manager_id = Int(tmp)
-                    if member_id == manager_id {
-                        showManager = true
-                        break
-                    }
-                }
-            }
-        }
-        if showManager {
-            listMarker.isHidden = false
-            //listMarker.text = "管理"
+        if data.city_show.count > 0 {
+            listCityBtn.isHidden = false
+            listCityBtn.setTextSize(14)
+            listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
+            listCityBtn.setTitle(data.city_show)
         } else {
-            listMarker.isHidden = true
+            listCityBtn.isHidden = true
         }
-        listBallTxt.isHidden = true
         
-        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        listArenaTxt.text = data.arena_name
+        listBallTxt.text = data.ball
+        listDayTxt.text = data.weekdays_show
+        listIntervalTxt.text = data.interval_show
+        listMarker.isHidden = true
     }
     
-    func updateTeam(indexPath: IndexPath, data: SuperData) {
-        if let item = data.data[CITY_KEY] {
-            let city = item["show"] as! String
-            if city.count > 0 {
-                listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
-                listCityBtn.indexPath = indexPath
-            } else {
-                listCityBtn.isHidden = true
-            }
+    func updateCoach(indexPath: IndexPath, data: CoachTable) {
+        
+        listTitleTxt.text = data.name
+        
+        if data.featured_path.count > 0 {
+            //print(data.featured_path)
+            listFeatured.downloaded(from: data.featured_path)
         }
-        if let item = data.data[ARENA_KEY] {
-            listArenaTxt.text = (emptyToSpace(item["show"] as! String))
+        
+        if data.city_show.count > 0 {
+            listCityBtn.isHidden = false
+            listCityBtn.setTextSize(14)
+            listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
+            listCityBtn.setTitle(data.city_show)
+        } else {
+            listCityBtn.isHidden = true
         }
-        if let item = data.data[TEAM_BALL_KEY] {
-            listBallTxt.text = (item["show"] as! String)
+        
+        listArenaTxt.text = data.mobile_show
+        if data.seniority > 0 {
+            listBallTxt.text = "年資: " + String(data.seniority) + "年"
+        } else {
+            listBallTxt.text = "年資未提供"
         }
-        if let item = data.data[TEAM_WEEKDAYS_KEY] {
-            listDayTxt.text = (emptyToSpace(item["show"] as! String))
+        if data.line.count > 0 {
+            listDayTxt.text = "line id: " + data.line
+        } else {
+            listDayTxt.text = "line 未提供"
         }
-        if let item = data.data[TEAM_INTERVAL_KEY] {
-            listIntervalTxt.text = (item["show"] as! String)
-        }
-    }
-    func updateCoach(indexPath: IndexPath, data: SuperData) {
-        if let item = data.data[CITYS_KEY] {
-            let city = item["show"] as! String
-            if city.count > 0 {
-                listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
-                listCityBtn.indexPath = indexPath
-            } else {
-                listCityBtn.isHidden = true
-            }
-        }
-        if let item = data.data[MOBILE_KEY] {
-            listArenaTxt.text = (item["show"] as! String)
-        }
-        if let item = data.data[COACH_SENIORITY_KEY] {
-            listBallTxt.text = "年資: " + (item["show"] as! String)
-        }
-        if let item = data.data[LINE_KEY] {
-            listDayTxt.text = "line id: " + (item["show"] as! String)
-        }
+
         listIntervalTxt.text = ""
+        listMarker.isHidden = true
     }
-    func updateArena(indexPath: IndexPath, data: SuperData) {
-        if let item = data.data[CITY_KEY] {
-            listCityBtn.setTitle(emptyToSpace(item["show"] as! String))
-            listCityBtn.indexPath = indexPath
+    
+    func updateArena(indexPath: IndexPath, data: ArenaTable) {
+        
+        listTitleTxt.text = data.name
+        
+        if data.featured_path.count > 0 {
+            listFeatured.downloaded(from: data.featured_path)
         }
-        if let item = data.data[TEL_KEY] {
-            listArenaTxt.text = (item["show"] as! String)
+        
+        if data.city_show.count > 0 {
+            listCityBtn.isHidden = false
+            listCityBtn.setTextSize(14)
+            listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
+            listCityBtn.setTitle(data.city_show)
+        } else {
+            listCityBtn.isHidden = true
         }
-        if let item = data.data[AREA_KEY] {
-            let area = item["show"] as! String
-            listBallTxt.text = area
-            if (area == "未提供") {
-                listMarker.isHidden = true
-            } else {
-                listMarker.isHidden = false
-                listMarker.indexPath = indexPath
-            }
+        
+        listArenaTxt.text = data.tel_show
+
+        if data.area_show.count > 0 {
+            listBallTxt.text = data.area_show
+            listMarker.isHidden = false
+            listMarker.indexPath = indexPath
+        } else {
+            listBallTxt.text = "未提供"
+            listMarker.isHidden = true
         }
-        if let item = data.data[ARENA_INTERVAL_KEY] {
-            listDayTxt.text = (item["show"] as! String)
-        }
-        if let item = data.data[ARENA_AIR_CONDITION_KEY] {
-            listIntervalTxt.text = "空調: " + (item["show"] as! String)
-        }
+        listDayTxt.text = data.interval_show
+        listIntervalTxt.text = data.air_condition_show
     }
+    
+    //在CollectionCell中
+//    func updateTeach(indexPath: IndexPath, data: TeachTable) {
+//
+//    }
     
     @IBAction func cityPressed(sender: UIButton) {
         let cityBtn = sender as! CityButton

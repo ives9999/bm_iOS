@@ -58,7 +58,7 @@ class CourseVC: ListVC {
     
     override func getDataEnd(success: Bool) {
         if success {
-            let table: Table = CourseService.instance.table!
+            let table: Table = dataService.table!
             coursesTable = (table as! CoursesTable)
             //superCourses = CourseService.instance.superCourses
             let tmps: [CourseTable] = coursesTable!.rows

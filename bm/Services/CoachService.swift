@@ -21,6 +21,10 @@ class CoachService: DataService {
         _model = Coach.instance
     }
     
+    override func getListURL() -> String {
+        return URL_COACH_LIST
+    }
+    
     override func getSource() -> String? {
         return "coach"
     }

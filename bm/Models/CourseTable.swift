@@ -93,7 +93,6 @@ class CourseTable: Table {
         case youtube
         case content
         case created_id
-        case thumb
         case city_id
         //case nextCourseTime
         case isSignup

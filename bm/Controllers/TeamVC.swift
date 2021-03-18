@@ -24,6 +24,10 @@ class TeamVC: ListVC {
         ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":TEAM_DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String]()]
         ]
     
+    var teamsTable: TeamsTable? = nil
+    internal(set) public var lists1: [Table] = [Table]()
+    var params1: [String: Any]?
+    
     override func viewDidLoad() {
         myTablView = tableView
         dataService = TeamService.instance
@@ -33,6 +37,88 @@ class TeamVC: ListVC {
         Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
+    }
+    
+    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
+        //print(page)
+        Global.instance.addSpinner(superView: self.view)
+        
+        dataService.getList(t: TeamsTable.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
+            if (success) {
+                self.getDataEnd(success: success)
+                Global.instance.removeSpinner(superView: self.view)
+            } else {
+                Global.instance.removeSpinner(superView: self.view)
+                self.warning(self.dataService.msg)
+            }
+        }
+    }
+    
+    override func getDataEnd(success: Bool) {
+        if success {
+            let table: Table = dataService.table!
+            teamsTable = (table as! TeamsTable)
+            //superCourses = CourseService.instance.superCourses
+            let tmps: [TeamTable] = teamsTable!.rows
+            
+            //print(tmps)
+            //print("===============")
+            if page == 1 {
+                lists1 = [TeamsTable]()
+            }
+            lists1 += tmps
+            //print(self.lists)
+            page = teamsTable!.page
+            if page == 1 {
+                totalCount = teamsTable!.totalCount
+                perPage = teamsTable!.perPage
+                let _pageCount: Int = totalCount / perPage
+                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+                //print(self.totalPage)
+                if refreshControl.isRefreshing {
+                    refreshControl.endRefreshing()
+                }
+            }
+            myTablView.reloadData()
+            //self.page = self.page + 1 in CollectionView
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == self.tableView {
+            return lists1.count
+        } else {
+            return searchRows.count
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == self.tableView {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
+                
+                cell.cellDelegate = self
+                let row = lists1[indexPath.row] as? TeamTable
+                if row != nil {
+                    row!.filterRow()
+                    //row!.printRow()
+                    cell.updateTeam(indexPath: indexPath, data: row!)
+                }
+                
+                return cell
+            } else {
+                return ListCell()
+            }
+        } else if tableView == searchTableView {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
+                cell.editCellDelegate = self
+                let searchRow = searchRows[indexPath.row]
+                //print(searchRow)
+                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
+                return cell
+            }
+        }
+        
+        return UITableViewCell()
     }
     
     @IBAction func manager(_ sender: Any) {

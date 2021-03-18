@@ -42,22 +42,19 @@ class CollectionCell: UICollectionViewCell {
         createdAtIcon.tintColor = UIColor("#265B03")
     }
     
-    func updateViews(data: SuperData, idx: Int) {
+    func updateTeach(data: TeachTable, idx: Int) {
         self.idx = idx
         titleLbl.text = data.title
-        let featured = data.featured
-        let aspect = featured.size.width / featured.size.height
-        let constraint = NSLayoutConstraint(item: featuredView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: featuredView, attribute: NSLayoutConstraint.Attribute.height, multiplier: aspect, constant: 0)
-        //let constraint = NSLayoutConstraint(item: featuredView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.size.width/aspect)
-        constraint.priority = UILayoutPriority(rawValue: 999)
-        aspectConstraint = constraint
-        //featuredViewHeightConstraint.constant = frame.size.width / aspect
-        featuredView.image = featured
+//        let featured = data.featured
+//        let aspect = featured.size.width / featured.size.height
+//        let constraint = NSLayoutConstraint(item: featuredView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: featuredView, attribute: NSLayoutConstraint.Attribute.height, multiplier: aspect, constant: 0)
         
-        pvLbl.text = "瀏覽數：" + (data.data[PV_KEY]!["show"] as! String)
-        var createdAt: String = (data.data[CREATED_AT_KEY]!["show"] as! String)
-        createdAt = createdAt.toDateTime().toString()
-        createdAtLbl.text = "建立時間：" + createdAt
+//        constraint.priority = UILayoutPriority(rawValue: 999)
+//        aspectConstraint = constraint
+//        featuredView.image = featured
+        
+        pvLbl.text = "瀏覽數：" + String(data.pv)
+        createdAtLbl.text = "建立時間：" + data.created_at_show
         
         setNeedsLayout()
     }

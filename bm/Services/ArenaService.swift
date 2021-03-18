@@ -17,6 +17,14 @@ class ArenaService: DataService {
         _model = Arena.instance
     }
     
+    override func getListURL() -> String {
+        return URL_ARENA_LIST
+    }
+    
+    override func getSource() -> String? {
+        return "arena"
+    }
+    
     override func setData(id: Int, title: String, path: String, token: String, youtube: String, vimeo: String) -> Arena {
         let superData = Arena(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
         return superData

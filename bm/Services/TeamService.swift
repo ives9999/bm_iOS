@@ -27,6 +27,14 @@ class TeamService: DataService {
         _model = Team.instance
     }
     
+    override func getListURL() -> String {
+        return URL_TEAM_LIST
+    }
+    
+    override func getSource() -> String? {
+        return "team"
+    }
+    
     override func setData(id: Int, title: String, path: String, token: String, youtube: String, vimeo: String) -> Team {
         let superData = Team(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
         return superData

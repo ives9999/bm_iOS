@@ -238,7 +238,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
 //            let frame: CGRect = cell.featuredView.frame
 //            //print("featured frame: \(frame)")
 //            cell.featuredView.frame = CGRect(x: frame.origin.x, y: frame.origin.y, width: width, height: height)
-            cell.updateViews(data: data, idx: indexPath.row)
+            //cell.updateViews(data: data, idx: indexPath.row)
             //print("4.\(indexPath.row):\(cell.frame.size.height)")
             
             return cell
@@ -394,12 +394,12 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         
     }
     
-    private func testLabelReset() {
+    public func testLabelReset() {
         testLabel.frame = CGRect.zero
         testLabel.frame.size.width = cellWidth-(2*CELL_EDGE_MARGIN)
     }
     
-    private func getTestLabelLineCount(textCount: Int = 0)-> Int {
+    public func getTestLabelLineCount(textCount: Int = 0)-> Int {
         let textSize = CGSize(width: CGFloat(testLabel.frame.size.width), height: CGFloat(MAXFLOAT))
         let rHeight: Int = lroundf(Float(testLabel.sizeThatFits(textSize).height))
         let charSize: Int = lroundf(Float(testLabel.font.pointSize))

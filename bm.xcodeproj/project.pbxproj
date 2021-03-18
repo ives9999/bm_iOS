@@ -238,6 +238,10 @@
 		B3E4D09425F71B2500D78210 /* SelectionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D09325F71B2500D78210 /* SelectionDialog.swift */; };
 		B3E4D17C25FF9E3900D78210 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D17B25FF9E3500D78210 /* Table.swift */; };
 		B3E4D18125FF9E7500D78210 /* CourseTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D18025FF9E7500D78210 /* CourseTable.swift */; };
+		B3E4D1C32601FD0A00D78210 /* TeamTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D1C22601FD0900D78210 /* TeamTable.swift */; };
+		B3E4D1C826024C8F00D78210 /* CoachTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D1C726024C8E00D78210 /* CoachTable.swift */; };
+		B3E4D1CD2602DD7E00D78210 /* ArenaTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D1CC2602DD7E00D78210 /* ArenaTable.swift */; };
+		B3E4D1D22602EF1900D78210 /* TeachTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D1D12602EF1900D78210 /* TeachTable.swift */; };
 		B3E72A191F9CBE9F0008A6B1 /* TeachCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A181F9CBE9F0008A6B1 /* TeachCV.swift */; };
 		B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */; };
 		B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */; };
@@ -597,6 +601,10 @@
 		B3E4D09325F71B2500D78210 /* SelectionDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionDialog.swift; sourceTree = "<group>"; };
 		B3E4D17B25FF9E3500D78210 /* Table.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table.swift; sourceTree = "<group>"; };
 		B3E4D18025FF9E7500D78210 /* CourseTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseTable.swift; sourceTree = "<group>"; };
+		B3E4D1C22601FD0900D78210 /* TeamTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTable.swift; sourceTree = "<group>"; };
+		B3E4D1C726024C8E00D78210 /* CoachTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachTable.swift; sourceTree = "<group>"; };
+		B3E4D1CC2602DD7E00D78210 /* ArenaTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaTable.swift; sourceTree = "<group>"; };
+		B3E4D1D12602EF1900D78210 /* TeachTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachTable.swift; sourceTree = "<group>"; };
 		B3E72A181F9CBE9F0008A6B1 /* TeachCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachCV.swift; sourceTree = "<group>"; };
 		B3E72A1B1F9F9F330008A6B1 /* bm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bm-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -1229,6 +1237,10 @@
 				B3E4D18025FF9E7500D78210 /* CourseTable.swift */,
 				B36241362601B3CA008FAD1B /* ProductTable.swift */,
 				B362413B2601D7CA008FAD1B /* StoreTable.swift */,
+				B3E4D1C22601FD0900D78210 /* TeamTable.swift */,
+				B3E4D1C726024C8E00D78210 /* CoachTable.swift */,
+				B3E4D1CC2602DD7E00D78210 /* ArenaTable.swift */,
+				B3E4D1D12602EF1900D78210 /* TeachTable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1602,6 +1614,7 @@
 				B3B758F325BB08CD006ACC33 /* OrderService.swift in Sources */,
 				B3B758F925BEEDF9006ACC33 /* SuperOrder.swift in Sources */,
 				B31ADD9325905387003E86BD /* Zone.swift in Sources */,
+				B3E4D1D22602EF1900D78210 /* TeachTable.swift in Sources */,
 				B3A9844C255918CF00DCD0F6 /* List1Cell.swift in Sources */,
 				B3A253DE256A9E43004B8A03 /* CityFormItem.swift in Sources */,
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,
@@ -1689,6 +1702,7 @@
 				B3B7589B25A95EAD006ACC33 /* Color1FormItem.swift in Sources */,
 				B3310D8A22AA20A50062EF98 /* CourseKindFormItem.swift in Sources */,
 				B3308C4D1FD9575E006A83B6 /* Tag.swift in Sources */,
+				B3E4D1C826024C8F00D78210 /* CoachTable.swift in Sources */,
 				B3E8C2A22207E0DC0008ED25 /* CityButton.swift in Sources */,
 				B31106EB221EC20A007A5D49 /* SuperSignup.swift in Sources */,
 				B3E4D18125FF9E7500D78210 /* CourseTable.swift in Sources */,
@@ -1801,6 +1815,7 @@
 				B362265D25E54C9D00D98317 /* HomeTotalAdVC.swift in Sources */,
 				B3ED38D91FB463D00003F083 /* Team.swift in Sources */,
 				F96931991FB958110005C13F /* CitySelectVC.swift in Sources */,
+				B3E4D1CD2602DD7E00D78210 /* ArenaTable.swift in Sources */,
 				B3ED38D71FB2A3E80003F083 /* EditProfileVC.swift in Sources */,
 				B3A253E4256BCBB8004B8A03 /* AreaFormItem.swift in Sources */,
 				B33C1ABF21BD7F2C006F2BEB /* WeekdayFormItem.swift in Sources */,
@@ -1808,6 +1823,7 @@
 				B306FEA521F72F0E00403FE2 /* ShowTimetableVC.swift in Sources */,
 				B3A253D22567D6ED004B8A03 /* EditStoreVC.swift in Sources */,
 				B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */,
+				B3E4D1C32601FD0A00D78210 /* TeamTable.swift in Sources */,
 				B39453DB2230F516005E3027 /* OneSignal.swift in Sources */,
 				B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */,
 				B306FEA321F1A35700403FE2 /* SuperDatePicker.swift in Sources */,
