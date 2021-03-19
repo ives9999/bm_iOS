@@ -203,7 +203,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         Global.instance.addSpinner(superView: tableView)
         Global.instance.removeSpinner(superView: tableView)
         if tableView == self.tableView {
-            let data = lists[indexPath.row]
+            let data = lists1[indexPath.row]
             var iden = TO_SHOW
             if _type == "coach" {
                 iden = TO_SHOW_COACh
@@ -238,7 +238,6 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var destinationNavigationController: UINavigationController?
         if segue.identifier == TO_SHOW {
             if let showVC: ShowVC = segue.destination as? ShowVC {
                 assert(sender as? SuperData != nil)

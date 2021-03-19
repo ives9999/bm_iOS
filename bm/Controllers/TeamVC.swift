@@ -96,6 +96,16 @@ class TeamVC: ListVC {
         return UITableViewCell()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == TO_SHOW {
+            if let showVC: ShowVC = segue.destination as? ShowVC {
+                let table = sender as! TeamTable
+                let show_in: Show_IN = Show_IN(type: iden, id: table.id, token: table.token, title: table.name)
+                showVC.initShowVC(sin: show_in)
+            }
+        }
+    }
+    
     @IBAction func manager(_ sender: Any) {
         if !Member.instance.isLoggedIn {
             SCLAlertView().showError("警告", subTitle: "請先登入為會員")

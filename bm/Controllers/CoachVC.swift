@@ -88,6 +88,17 @@ class CoachVC: ListVC {
         return UITableViewCell()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == TO_SHOW_COACh {
+            if let showCoachVC: ShowCoachVC = segue.destination as? ShowCoachVC {
+                let table = sender as! CoachTable
+                let show_in: Show_IN = Show_IN(type: iden, id: table.id, token: table.token, title: table.name)
+                showCoachVC.initShowVC(sin: show_in)
+                showCoachVC.backDelegate = self
+            }
+        }
+    }
+    
     @IBAction func manager(_ sender: Any) {
         if !Member.instance.isLoggedIn {
             SCLAlertView().showError("警告", subTitle: "請先登入為會員")

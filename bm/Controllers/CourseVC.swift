@@ -115,10 +115,10 @@ class CourseVC: ListVC {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == TO_SHOW_COURSE {
-            let superCourse = sender as! SuperCourse
+            let table = sender as! CourseTable
             let vc: ShowCourseVC = segue.destination as! ShowCourseVC
-            vc.title = superCourse.title
-            vc.course_token = superCourse.token
+            vc.title = table.title
+            vc.course_token = table.token
         } else if segue.identifier == TO_MANAGER_COURSE {
             let vc: ManagerCourseVC = segue.destination as! ManagerCourseVC
             vc.manager_token = Member.instance.token
