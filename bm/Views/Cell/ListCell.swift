@@ -34,18 +34,18 @@ class ListCell: SuperCell {
         super.init(coder: aDecoder)
     }
     
-    func updateTeachViews(indexPath: IndexPath, data: TeachTable) {
-        listTitleTxt.text = data.title
-        if data.featured_path.count > 0 {
-            //print(data.featured_path)
-            listFeatured.downloaded(from: data.featured_path)
-        }
-        listMarker.padding(top: 0, left: 0, bottom: 0, right: 0)
-        listCityBtn.setTextSize(14)
-        listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
-        
-        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
-    }
+//    func updateTeachViews(indexPath: IndexPath, data: TeachTable) {
+//        listTitleTxt.text = data.title
+//        if data.featured_path.count > 0 {
+//            //print(data.featured_path)
+//            listFeatured.downloaded(from: data.featured_path)
+//        }
+//        listMarker.padding(top: 0, left: 0, bottom: 0, right: 0)
+//        listCityBtn.setTextSize(14)
+//        listCityBtn.alignH = UIControl.ContentHorizontalAlignment.center
+//        
+//        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+//    }
     
     func updateCourseViews(indexPath: IndexPath, data: CourseTable) {
         listTitleTxt.text = data.title

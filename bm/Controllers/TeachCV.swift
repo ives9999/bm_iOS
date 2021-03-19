@@ -14,11 +14,8 @@ class TeachCV: ListVC {
         ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入教學名稱關鍵字","text_field":true]
         ]
     
-    var teachesTable: TeachesTable? = nil
-    internal(set) public var lists1: [Table] = [Table]()
-    
-    var params1: [String: Any]?
-        
+    var mysTable: TeachesTable?
+            
     override func viewDidLoad() {
         myTablView = tableView
         dataService = TeachService.instance
@@ -26,50 +23,32 @@ class TeachCV: ListVC {
         _type = "teach"
         _titleField = "title"
         super.viewDidLoad()
+        let cellNibName = UINib(nibName: "TeachCell", bundle: nil)
+        myTablView.register(cellNibName, forCellReuseIdentifier: "listcell")
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.lightGray
     }
     
-    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-        //print(page)
-        Global.instance.addSpinner(superView: self.view)
-        
-        dataService.getList(t: TeachesTable.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
-            if (success) {
-                self.getDataEnd(success: success)
-                Global.instance.removeSpinner(superView: self.view)
-            } else {
-                Global.instance.removeSpinner(superView: self.view)
-                //self.warning(self.dataService.msg)
-            }
-        }
+    override func refresh() {
+        page = 1
+        getDataStart(t: TeachesTable.self)
     }
     
     override func getDataEnd(success: Bool) {
         if success {
-            let table: Table = dataService.table!
-            teachesTable = (table as! TeachesTable)
-            //superCourses = CourseService.instance.superCourses
-            let tmps: [TeachTable] = teachesTable!.rows
             
-            //print(tmps)
-            //print("===============")
-            if page == 1 {
-                lists1 = [TeachTable]()
-            }
-            lists1 += tmps
-            //print(self.lists)
-            page = teachesTable!.page
-            if page == 1 {
-                totalCount = teachesTable!.totalCount
-                perPage = teachesTable!.perPage
-                let _pageCount: Int = totalCount / perPage
-                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                //print(self.totalPage)
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
+            mysTable = (tables as? TeachesTable)
+            if mysTable != nil {
+                let tmps: [TeachTable] = mysTable!.rows
+                
+                if page == 1 {
+                    lists1 = [TeachTable]()
                 }
+                lists1 += tmps
+                myTablView.reloadData()
+            } else {
+                warning("轉換Table出錯，請洽管理員")
             }
-            myTablView.reloadData()
-            //self.page = self.page + 1 in CollectionView
         }
     }
     
@@ -83,9 +62,9 @@ class TeachCV: ListVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? TeachCell {
                 
-                cell.cellDelegate = self
+                //cell.cellDelegate = self
                 let row = lists1[indexPath.row] as? TeachTable
                 if row != nil {
                     row!.filterRow()

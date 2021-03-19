@@ -35,10 +35,10 @@ class CourseCalendarVC: ListVC {
     ]
     
     var superCourses: SuperCourses? = nil
-    internal(set) public var lists1: [SuperModel] = [SuperModel]()
+    internal(set) public var lists2: [SuperModel] = [SuperModel]()
     
     //let session: UserDefaults = UserDefaults.standard
-    var params1: [String: Any] = [String: Any]()
+    var params2: [String: Any] = [String: Any]()
     
     var y: Int = Date().getY()
     var m: Int = Date().getm()
@@ -163,9 +163,9 @@ class CourseCalendarVC: ListVC {
         //print(page)
         Global.instance.addSpinner(superView: self.view)
         
-        params1.merge(["member_token": Member.instance.token])
-        params1.merge(["y": y])
-        params1.merge(["m": m])
+        params2.merge(["member_token": Member.instance.token])
+        params2.merge(["y": y])
+        params2.merge(["m": m])
         //monthLastDay = Global.instance.getMonthLastDay(year: year, month: month)
         selectedYearTxt.text = String(y)
         selectedMonthTxt.text = String(m)
@@ -193,9 +193,9 @@ class CourseCalendarVC: ListVC {
             //print(tmps)
             //print("===============")
             if page == 1 {
-                lists1 = [SuperCourse]()
+                lists2 = [SuperCourse]()
             }
-            lists1 += tmps
+            lists2 += tmps
             //print(self.lists)
 
             makeCourseArr()

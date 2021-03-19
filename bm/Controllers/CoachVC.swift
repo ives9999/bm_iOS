@@ -16,11 +16,8 @@ class CoachVC: ListVC {
         ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0]
     ]
     
-    var coachesTable: CoachesTable? = nil
-    internal(set) public var lists1: [Table] = [Table]()
-    
-    var params1: [String: Any]?
-    
+    var mysTable: CoachesTable?
+        
     override func viewDidLoad() {
         myTablView = tableView
         dataService = CoachService.instance
@@ -32,48 +29,25 @@ class CoachVC: ListVC {
         super.viewDidLoad()
     }
     
-    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-        //print(page)
-        Global.instance.addSpinner(superView: self.view)
-        
-        dataService.getList(t: CoachesTable.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
-            if (success) {
-                self.getDataEnd(success: success)
-                Global.instance.removeSpinner(superView: self.view)
-            } else {
-                Global.instance.removeSpinner(superView: self.view)
-                self.warning(self.dataService.msg)
-            }
-        }
+    override func refresh() {
+        page = 1
+        getDataStart(t: CoachesTable.self)
     }
     
     override func getDataEnd(success: Bool) {
         if success {
-            let table: Table = dataService.table!
-            coachesTable = (table as! CoachesTable)
-            //superCourses = CourseService.instance.superCourses
-            let tmps: [CoachTable] = coachesTable!.rows
             
-            //print(tmps)
-            //print("===============")
-            if page == 1 {
-                lists1 = [CoachTable]()
-            }
-            lists1 += tmps
-            //print(self.lists)
-            page = coachesTable!.page
-            if page == 1 {
-                totalCount = coachesTable!.totalCount
-                perPage = coachesTable!.perPage
-                let _pageCount: Int = totalCount / perPage
-                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                //print(self.totalPage)
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
+            mysTable = (tables as? CoachesTable)
+            if mysTable != nil {
+                let tmps: [CoachTable] = mysTable!.rows
+                
+                if page == 1 {
+                    lists1 = [CoachTable]()
                 }
+                lists1 += tmps
+                
+                myTablView.reloadData()
             }
-            myTablView.reloadData()
-            //self.page = self.page + 1 in CollectionView
         }
     }
     

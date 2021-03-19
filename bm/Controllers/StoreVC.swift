@@ -15,9 +15,7 @@ class StoreVC: ListVC, List1CellDelegate {
         ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""],
         ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":0,"value":"","value_type":"Array"]
     ]
-    var params1: [String: Any]?
-    var storesTable: StoresTable? = nil
-    internal(set) public var lists1: [Table] = [Table]()
+    var mysTable: StoresTable?
     
     //let session: UserDefaults = UserDefaults.standard
             
@@ -43,53 +41,26 @@ class StoreVC: ListVC, List1CellDelegate {
         //refresh()
     }
     
-    override func refresh() { //called by ListVC viewWillAppear
+    override func refresh() {
         page = 1
-        getDataStart()
+        getDataStart(t: StoresTable.self)
     }
     
-    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-        //print(page)
-        Global.instance.addSpinner(superView: self.view)
-
-        dataService.getList(t: StoresTable.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
-            if (success) {
-                self.getDataEnd(success: success)
-                Global.instance.removeSpinner(superView: self.view)
-            } else {
-                Global.instance.removeSpinner(superView: self.view)
-                self.warning(self.dataService.msg)
-            }
-        }
-    }
-
     override func getDataEnd(success: Bool) {
         if success {
-            let table: Table = dataService.table!
-            storesTable = (table as! StoresTable)
-            //superCourses = CourseService.instance.superCourses
-            let tmps: [StoreTable] = storesTable!.rows
-
-            //print(tmps)
-            //print("===============")
-            if page == 1 {
-                lists1 = [StoresTable]()
-            }
-            lists1 += tmps
-            //print(self.lists)
-            page = storesTable!.page
-            if page == 1 {
-                totalCount = storesTable!.totalCount
-                perPage = storesTable!.perPage
-                let _pageCount: Int = totalCount / perPage
-                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                //print(self.totalPage)
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
+            
+            mysTable = (tables as? StoresTable)
+            if mysTable != nil {
+                let tmps: [StoreTable] = mysTable!.rows
+                
+                if page == 1 {
+                    lists1 = [StoreTable]()
                 }
+                lists1 += tmps
+                myTablView.reloadData()
+            } else {
+                warning("轉換Table出錯，請洽管理員")
             }
-            myTablView.reloadData()
-            //self.page = self.page + 1 in CollectionView
         }
     }
     
@@ -132,8 +103,8 @@ class StoreVC: ListVC, List1CellDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == self.tableView {
-            if storesTable != nil {
-                let superStore = storesTable!.rows[indexPath.row]
+            if mysTable != nil {
+                let superStore = mysTable!.rows[indexPath.row]
                 performSegue(withIdentifier: TO_SHOW_STORE, sender: superStore)
             }
             

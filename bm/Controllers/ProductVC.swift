@@ -14,9 +14,8 @@ class ProductVC: ListVC, List1CellDelegate {
         ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入商品名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""],
         ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":0,"value":"","value_type":"Array"]
     ]
-    var params1: [String: Any]?
-    var productsTable: ProductsTable? = nil
-    internal(set) public var lists1: [Table] = [Table]()
+    
+    var mysTable: ProductsTable?
         
     override func viewDidLoad() {
         myTablView = tableView
@@ -40,53 +39,25 @@ class ProductVC: ListVC, List1CellDelegate {
         //refresh()
     }
     
-    override func refresh() { //called by ListVC viewWillAppear
+    override func refresh() {
         page = 1
-        getDataStart()
+        getDataStart(t: ProductsTable.self)
     }
     
-    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-        //print(page)
-        Global.instance.addSpinner(superView: self.view)
-
-        dataService.getList(t: ProductsTable.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
-            if (success) {
-                self.getDataEnd(success: success)
-                Global.instance.removeSpinner(superView: self.view)
-            } else {
-                Global.instance.removeSpinner(superView: self.view)
-                self.warning(self.dataService.msg)
-            }
-        }
-    }
-
     override func getDataEnd(success: Bool) {
         if success {
-            let table: Table = dataService.table!
-            productsTable = (table as! ProductsTable)
-            //superCourses = CourseService.instance.superCourses
-            let tmps: [ProductTable] = productsTable!.rows
-
-            //print(tmps)
-            //print("===============")
-            if page == 1 {
-                lists1 = [ProductTable]()
-            }
-            lists1 += tmps
-            //print(self.lists)
-            page = productsTable!.page
-            if page == 1 {
-                totalCount = productsTable!.totalCount
-                perPage = productsTable!.perPage
-                let _pageCount: Int = totalCount / perPage
-                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                //print(self.totalPage)
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
+            
+            mysTable = (tables as? ProductsTable)
+            if mysTable != nil {
+                let tmps: [ProductTable] = mysTable!.rows
+                
+                if page == 1 {
+                    lists1 = [ProductTable]()
                 }
+                lists1 += tmps
+                
+                myTablView.reloadData()
             }
-            myTablView.reloadData()
-            //self.page = self.page + 1 in CollectionView
         }
     }
     
@@ -129,8 +100,8 @@ class ProductVC: ListVC, List1CellDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == self.tableView {
-            if productsTable != nil {
-                let productTable = productsTable!.rows[indexPath.row]
+            if mysTable != nil {
+                let productTable = mysTable!.rows[indexPath.row]
                 //toShowProduct(token: superProduct.token)
                 let token = productTable.token
                 if #available(iOS 13.0, *) {
@@ -177,11 +148,13 @@ class ProductVC: ListVC, List1CellDelegate {
     func cellCity(indexPath: IndexPath?) {
         //print(indexPath!.row)
         
-        let productTable = productsTable!.rows[indexPath!.row]
-        toOrder(
-            productTable: productTable,
-            login: { vc in vc.toLogin() },
-            register: { vc in vc.toRegister() }
-        )
+        let productTable = mysTable?.rows[indexPath!.row]
+        if productTable != nil {
+            toOrder(
+                productTable: productTable!,
+                login: { vc in vc.toLogin() },
+                register: { vc in vc.toRegister() }
+            )
+        }
     }
 }

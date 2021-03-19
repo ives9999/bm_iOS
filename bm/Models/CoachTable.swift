@@ -8,18 +8,10 @@
 
 import Foundation
 
-class CoachesTable: Table {
-    var success: Bool = false
-    var page: Int = -1
-    var totalCount: Int = -1
-    var perPage: Int = -1
+class CoachesTable: Tables {
     var rows: [CoachTable] = [CoachTable]()
     
     enum CodingKeys: String, CodingKey {
-        case success
-        case page
-        case totalCount
-        case perPage
         case rows
     }
     
@@ -27,10 +19,6 @@ class CoachesTable: Table {
         try super.init(from: decoder)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        success = try container.decode(Bool.self, forKey: .success)
-        page = try container.decode(Int.self, forKey: .page)
-        totalCount = try container.decode(Int.self, forKey: .totalCount)
-        perPage = try container.decode(Int.self, forKey: .perPage)
         rows = try container.decode([CoachTable].self, forKey: .rows)
     }
 }

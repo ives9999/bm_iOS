@@ -59,6 +59,7 @@ class DataService {
     var able: SuperModel = SuperModel() // for signup list able model
     
     var table: Table?
+    var tables: Tables?
     
     init() {
         _model = Team.instance
@@ -74,25 +75,26 @@ class DataService {
         return list
     }
     
-    func getList<T: Table>(t:T.Type, token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+    func getList<T: Tables>(t:T.Type, token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
         self.needDownloads = [Dictionary<String, Any>]()
         var filter: [String: Any] = ["source": "app", "channel": CHANNEL, "page": page, "perPage": perPage]
         if _filter != nil {
             filter.merge(_filter!)
         }
-        print(filter.toJSONString())
+        //print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        print(url)
+        //print(url)
                 
         Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
             switch response.result {
-            case .success(let value):
+            //case .success(let value):
+            case .success(_):
                 var s: T? = nil
                 do {
                     if response.data != nil {
@@ -100,15 +102,15 @@ class DataService {
                         //print(json)
                         s = try JSONDecoder().decode(t, from: response.data!)
                         if s != nil {
-                            self.table = s!
+                            self.tables = s!
                             //s!.printRow()
                             
-                            let a1: TeachesTable = s! as! TeachesTable
-                            let rows:[TeachTable] = a1.rows
-                            for row in rows {
-                                row.filterRow()
-                                row.printRow()
-                            }
+//                            let a1: TeachesTable = s! as! TeachesTable
+//                            let rows:[TeachTable] = a1.rows
+//                            for row in rows {
+//                                row.filterRow()
+//                                row.printRow()
+//                            }
                             
                             completion(true)
                         } else {

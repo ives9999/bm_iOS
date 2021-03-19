@@ -21,12 +21,8 @@ class CourseVC: ListVC {
         ["title":"結束時間之前","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":END_TIME_KEY,"show":"不限","segue":TO_SINGLE_SELECT,"sender":[String: Any](),"value":"","value_type":"String"]
     ]
     
-    var coursesTable: CoursesTable? = nil
-    internal(set) public var lists1: [Table] = [Table]()
+    var mysTable: CoursesTable?
     
-    //let session: UserDefaults = UserDefaults.standard
-    var params1: [String: Any]?
-
     override func viewDidLoad() {
         
         myTablView = tableView
@@ -41,48 +37,26 @@ class CourseVC: ListVC {
         super.viewDidLoad()
     }
     
-    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-        //print(page)
-        Global.instance.addSpinner(superView: self.view)
-        
-        dataService.getList(t: CoursesTable.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
-            if (success) {
-                self.getDataEnd(success: success)
-                Global.instance.removeSpinner(superView: self.view)
-            } else {
-                Global.instance.removeSpinner(superView: self.view)
-                self.warning(self.dataService.msg)
-            }
-        }
+    override func refresh() {
+        page = 1
+        getDataStart(t: CoursesTable.self)
     }
     
     override func getDataEnd(success: Bool) {
         if success {
-            let table: Table = dataService.table!
-            coursesTable = (table as! CoursesTable)
-            //superCourses = CourseService.instance.superCourses
-            let tmps: [CourseTable] = coursesTable!.rows
             
-            //print(tmps)
-            //print("===============")
-            if page == 1 {
-                lists1 = [CoursesTable]()
-            }
-            lists1 += tmps
-            //print(self.lists)
-            page = coursesTable!.page
-            if page == 1 {
-                totalCount = coursesTable!.totalCount
-                perPage = coursesTable!.perPage
-                let _pageCount: Int = totalCount / perPage
-                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                //print(self.totalPage)
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
+            mysTable = (tables as? CoursesTable)
+            if mysTable != nil {
+                let tmps: [CourseTable] = mysTable!.rows
+                
+                if page == 1 {
+                    lists1 = [CourseTable]()
                 }
+                lists1 += tmps
+                myTablView.reloadData()
+            } else {
+                warning("轉換Table出錯，請洽管理員")
             }
-            myTablView.reloadData()
-            //self.page = self.page + 1 in CollectionView
         }
     }
     
@@ -126,8 +100,8 @@ class CourseVC: ListVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == self.tableView {
-            if coursesTable != nil {
-                let courseTable = coursesTable!.rows[indexPath.row]
+            if mysTable != nil {
+                let courseTable = mysTable!.rows[indexPath.row]
                 performSegue(withIdentifier: TO_SHOW_COURSE, sender: courseTable)
             }
             

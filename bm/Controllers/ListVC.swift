@@ -53,6 +53,9 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     
     var searchPanelisHidden = true
     
+    internal(set) public var lists1: [Table] = [Table]()
+    var params1: [String: Any]?
+    var tables: Tables?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -83,94 +86,51 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         }
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        newY = scrollView.contentOffset.y
-        if newY < 0 { newY = 0 }
-        //print(newY)
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        newY = scrollView.contentOffset.y
-        if newY < 0 { newY = 0 }
-        //print(scrollView.contentOffset.y)
-    }
-    
-    func prepareParams(city_type: String="simple") {
-        params.removeAll()
-        params["k"] = keyword
-        var city_ids:[Int] = [Int]()
-        if citys.count > 0 {
-            for city in citys {
-                city_ids.append(city.id)
-            }
-        }
-        if city_ids.count > 0 {
-            params["city_id"] = city_ids
-            params["city_type"] = city_type
-        }
-        var area_ids:[Int] = [Int]()
-        if areas.count > 0 {
-            for area in areas {
-                area_ids.append(area.id)
-            }
-        }
-        if area_ids.count > 0 {
-            params["area_id"] = area_ids
-        }
-        params["air_condition"] = (air_condition) ? 1 : 0
-        params["bathroom"] = (bathroom) ? 1 : 0
-        params["parking"] = (parking) ? 1 : 0
-        
-        if weekdays.count > 0 {
-            params["play_days"] = weekdays
-        }
-        if times.count > 0 {
-            params["use_date_range"] = 1
-            let play_start = times[TEAM_PLAY_START_KEY] as! String
-            let time = play_start + ":00 - 24:00:00"
-            params["play_time"] = time
-        }
-        
-        var arena_ids:[Int] = [Int]()
-        if arenas.count > 0 {
-            for arena in arenas {
-                arena_ids.append(arena.id)
-            }
-        }
-        if arena_ids.count > 0 {
-            params["arena_id"] = arena_ids
-        }
-        
-        var _degrees:[String] = [String]()
-        if degrees.count > 0 {
-            for degree in degrees {
-                let value = degree.value
-                _degrees.append(DEGREE.DBValue(value))
-            }
-        }
-        if _degrees.count > 0 {
-            params["degree"] = _degrees
-        }
-    }
-
     override func refresh() {
         page = 1
         getDataStart()
     }
     
-    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-        //print(page)
-        Global.instance.addSpinner(superView: self.view)
+    func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
         
-        dataService.getList(type: iden, titleField: titleField, params: params, page: page, perPage: perPage, filter: nil) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
+        Global.instance.addSpinner(superView: self.view)
+
+        dataService.getList(t: t, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
             if (success) {
+                self.tables = self.dataService.tables!
+                self.page = self.tables!.page
+                if self.page == 1 {
+                    self.totalCount = self.tables!.totalCount
+                    self.perPage = self.tables!.perPage
+                    let _pageCount: Int = self.totalCount / self.perPage
+                    self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
+                    //print(self.totalPage)
+                    if self.refreshControl.isRefreshing {
+                        self.refreshControl.endRefreshing()
+                    }
+                }
                 self.getDataEnd(success: success)
+                Global.instance.removeSpinner(superView: self.view)
             } else {
+                Global.instance.removeSpinner(superView: self.view)
                 self.warning(self.dataService.msg)
             }
         }
     }
+    
+//    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
+//        //print(page)
+//        Global.instance.addSpinner(superView: self.view)
+//
+//        dataService.getList(type: iden, titleField: titleField, params: params, page: page, perPage: perPage, filter: nil) { (success) in
+//            Global.instance.removeSpinner(superView: self.view)
+//            if (success) {
+//                self.getDataEnd(success: success)
+//            } else {
+//                self.warning(self.dataService.msg)
+//            }
+//        }
+//    }
     
     override func getDataEnd(success: Bool) {
         if success {
@@ -397,6 +357,76 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
             self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.workAreaHeight, width:self.containerView.frame.width, height:0)
         }
         tableView.isScrollEnabled = true
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        newY = scrollView.contentOffset.y
+        if newY < 0 { newY = 0 }
+        //print(newY)
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        newY = scrollView.contentOffset.y
+        if newY < 0 { newY = 0 }
+        //print(scrollView.contentOffset.y)
+    }
+    
+    func prepareParams(city_type: String="simple") {
+        params.removeAll()
+        params["k"] = keyword
+        var city_ids:[Int] = [Int]()
+        if citys.count > 0 {
+            for city in citys {
+                city_ids.append(city.id)
+            }
+        }
+        if city_ids.count > 0 {
+            params["city_id"] = city_ids
+            params["city_type"] = city_type
+        }
+        var area_ids:[Int] = [Int]()
+        if areas.count > 0 {
+            for area in areas {
+                area_ids.append(area.id)
+            }
+        }
+        if area_ids.count > 0 {
+            params["area_id"] = area_ids
+        }
+        params["air_condition"] = (air_condition) ? 1 : 0
+        params["bathroom"] = (bathroom) ? 1 : 0
+        params["parking"] = (parking) ? 1 : 0
+        
+        if weekdays.count > 0 {
+            params["play_days"] = weekdays
+        }
+        if times.count > 0 {
+            params["use_date_range"] = 1
+            let play_start = times[TEAM_PLAY_START_KEY] as! String
+            let time = play_start + ":00 - 24:00:00"
+            params["play_time"] = time
+        }
+        
+        var arena_ids:[Int] = [Int]()
+        if arenas.count > 0 {
+            for arena in arenas {
+                arena_ids.append(arena.id)
+            }
+        }
+        if arena_ids.count > 0 {
+            params["arena_id"] = arena_ids
+        }
+        
+        var _degrees:[String] = [String]()
+        if degrees.count > 0 {
+            for degree in degrees {
+                let value = degree.value
+                _degrees.append(DEGREE.DBValue(value))
+            }
+        }
+        if _degrees.count > 0 {
+            params["degree"] = _degrees
+        }
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {

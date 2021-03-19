@@ -242,6 +242,8 @@
 		B3E4D1C826024C8F00D78210 /* CoachTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D1C726024C8E00D78210 /* CoachTable.swift */; };
 		B3E4D1CD2602DD7E00D78210 /* ArenaTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D1CC2602DD7E00D78210 /* ArenaTable.swift */; };
 		B3E4D1D22602EF1900D78210 /* TeachTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D1D12602EF1900D78210 /* TeachTable.swift */; };
+		B3E4D1D82603395300D78210 /* TeachCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D1D62603395300D78210 /* TeachCell.swift */; };
+		B3E4D1D92603395300D78210 /* TeachCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3E4D1D72603395300D78210 /* TeachCell.xib */; };
 		B3E72A191F9CBE9F0008A6B1 /* TeachCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A181F9CBE9F0008A6B1 /* TeachCV.swift */; };
 		B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */; };
 		B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */; };
@@ -605,6 +607,8 @@
 		B3E4D1C726024C8E00D78210 /* CoachTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachTable.swift; sourceTree = "<group>"; };
 		B3E4D1CC2602DD7E00D78210 /* ArenaTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaTable.swift; sourceTree = "<group>"; };
 		B3E4D1D12602EF1900D78210 /* TeachTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachTable.swift; sourceTree = "<group>"; };
+		B3E4D1D62603395300D78210 /* TeachCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachCell.swift; sourceTree = "<group>"; };
+		B3E4D1D72603395300D78210 /* TeachCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeachCell.xib; sourceTree = "<group>"; };
 		B3E72A181F9CBE9F0008A6B1 /* TeachCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeachCV.swift; sourceTree = "<group>"; };
 		B3E72A1B1F9F9F330008A6B1 /* bm-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "bm-Bridging-Header.h"; sourceTree = "<group>"; };
 		B3E72A1C1F9F9F340008A6B1 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
@@ -815,6 +819,8 @@
 				B3D4950C25DF67D900D7BF42 /* PaymentCell.xib */,
 				B362265125E2AD3300D98317 /* OrderListCell.swift */,
 				B362265225E2AD3300D98317 /* OrderListCell.xib */,
+				B3E4D1D62603395300D78210 /* TeachCell.swift */,
+				B3E4D1D72603395300D78210 /* TeachCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1420,6 +1426,7 @@
 				B3B758ED25B0763A006ACC33 /* WeightCell.xib in Resources */,
 				B3FB9B202407F3750051186F /* More.storyboard in Resources */,
 				B3A9844D255918CF00DCD0F6 /* List1Cell.xib in Resources */,
+				B3E4D1D92603395300D78210 /* TeachCell.xib in Resources */,
 				B3E88BEA2380F2D1001F015A /* CalendarSignupCell.xib in Resources */,
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
@@ -1619,6 +1626,7 @@
 				B3A253DE256A9E43004B8A03 /* CityFormItem.swift in Sources */,
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,
 				B3308C511FDA5311006A83B6 /* ShowTempPlayVC.swift in Sources */,
+				B3E4D1D82603395300D78210 /* TeachCell.swift in Sources */,
 				B3310D8E22ABB4820062EF98 /* MultiSelectVC.swift in Sources */,
 				B387EFF625DE316100B397F8 /* SuperOrderMejump.swift in Sources */,
 				B3200045254304D20061442D /* SuperStore.swift in Sources */,

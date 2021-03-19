@@ -19,11 +19,8 @@ class ArenaVC: ListVC {
         ["ch":"停車場","atype":UITableViewCell.AccessoryType.none,"key":ARENA_PARKING_KEY,"show":"全部","segue":"","sender":0,"switch":true]
     ]
     
-    var arenasTable: ArenasTable? = nil
-    internal(set) public var lists1: [Table] = [Table]()
-    
-    var params1: [String: Any]?    
-    
+    var mysTable: ArenasTable?
+        
     override func viewDidLoad() {
         myTablView = tableView
         dataService = ArenaService.instance
@@ -33,48 +30,26 @@ class ArenaVC: ListVC {
         super.viewDidLoad()
     }
     
-    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-        //print(page)
-        Global.instance.addSpinner(superView: self.view)
-        
-        dataService.getList(t: ArenasTable.self, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
-            if (success) {
-                self.getDataEnd(success: success)
-                Global.instance.removeSpinner(superView: self.view)
-            } else {
-                Global.instance.removeSpinner(superView: self.view)
-                self.warning(self.dataService.msg)
-            }
-        }
+    override func refresh() {
+        page = 1
+        getDataStart(t: ArenasTable.self)
     }
     
     override func getDataEnd(success: Bool) {
         if success {
-            let table: Table = dataService.table!
-            arenasTable = (table as! ArenasTable)
-            //superCourses = CourseService.instance.superCourses
-            let tmps: [ArenaTable] = arenasTable!.rows
             
-            //print(tmps)
-            //print("===============")
-            if page == 1 {
-                lists1 = [ArenaTable]()
-            }
-            lists1 += tmps
-            //print(self.lists)
-            page = arenasTable!.page
-            if page == 1 {
-                totalCount = arenasTable!.totalCount
-                perPage = arenasTable!.perPage
-                let _pageCount: Int = totalCount / perPage
-                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                //print(self.totalPage)
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
+            mysTable = (tables as? ArenasTable)
+            if mysTable != nil {
+                let tmps: [ArenaTable] = mysTable!.rows
+                
+                if page == 1 {
+                    lists1 = [ArenaTable]()
                 }
+                lists1 += tmps
+                myTablView.reloadData()
+            } else {
+                warning("轉換Table出錯，請洽管理員")
             }
-            myTablView.reloadData()
-            //self.page = self.page + 1 in CollectionView
         }
     }
     
