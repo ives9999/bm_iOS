@@ -90,6 +90,16 @@ class ArenaVC: ListVC {
         return UITableViewCell()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == TO_SHOW {
+            if let showVC: ShowVC = segue.destination as? ShowVC {
+                let table = sender as! ArenaTable
+                let show_in: Show_IN = Show_IN(type: iden, id: table.id, token: table.token, title: table.name)
+                showVC.initShowVC(sin: show_in)
+            }
+        }
+    }
+    
     override func showMap(indexPath: IndexPath) {
         let row = lists[indexPath.row]
         let address = row.data[ADDRESS_KEY]!["value"] as! String
