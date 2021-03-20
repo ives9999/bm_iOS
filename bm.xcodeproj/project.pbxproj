@@ -276,6 +276,10 @@
 		B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */; };
 		B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */; };
 		B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222F1F91DE7300A8C402 /* Show_IN.swift */; };
+		B3F6B44C2604F4B40000F9E0 /* DateTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B44B2604F4B40000F9E0 /* DateTable.swift */; };
+		B3F6B4512605002E0000F9E0 /* SignupNormalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B4502605002E0000F9E0 /* SignupNormalTable.swift */; };
+		B3F6B456260500650000F9E0 /* SignupCancelTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B455260500650000F9E0 /* SignupCancelTable.swift */; };
+		B3F6B45B260500AC0000F9E0 /* SignupStandbyTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B45A260500AC0000F9E0 /* SignupStandbyTab.swift */; };
 		B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */; };
 		B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B6215D27BE005CBBC1 /* Checkbox.swift */; };
 		B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */; };
@@ -643,6 +647,10 @@
 		B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreeSelectVC.swift; sourceTree = "<group>"; };
 		B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVC.swift; sourceTree = "<group>"; };
 		B3F2222F1F91DE7300A8C402 /* Show_IN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show_IN.swift; sourceTree = "<group>"; };
+		B3F6B44B2604F4B40000F9E0 /* DateTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTable.swift; sourceTree = "<group>"; };
+		B3F6B4502605002E0000F9E0 /* SignupNormalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNormalTable.swift; sourceTree = "<group>"; };
+		B3F6B455260500650000F9E0 /* SignupCancelTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCancelTable.swift; sourceTree = "<group>"; };
+		B3F6B45A260500AC0000F9E0 /* SignupStandbyTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupStandbyTab.swift; sourceTree = "<group>"; };
 		B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		B3F8C3B6215D27BE005CBBC1 /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC_next.swift; sourceTree = "<group>"; };
@@ -1247,6 +1255,10 @@
 				B3E4D1C726024C8E00D78210 /* CoachTable.swift */,
 				B3E4D1CC2602DD7E00D78210 /* ArenaTable.swift */,
 				B3E4D1D12602EF1900D78210 /* TeachTable.swift */,
+				B3F6B44B2604F4B40000F9E0 /* DateTable.swift */,
+				B3F6B4502605002E0000F9E0 /* SignupNormalTable.swift */,
+				B3F6B455260500650000F9E0 /* SignupCancelTable.swift */,
+				B3F6B45A260500AC0000F9E0 /* SignupStandbyTab.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1625,6 +1637,7 @@
 				B3A9844C255918CF00DCD0F6 /* List1Cell.swift in Sources */,
 				B3A253DE256A9E43004B8A03 /* CityFormItem.swift in Sources */,
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,
+				B3F6B4512605002E0000F9E0 /* SignupNormalTable.swift in Sources */,
 				B3308C511FDA5311006A83B6 /* ShowTempPlayVC.swift in Sources */,
 				B3E4D1D82603395300D78210 /* TeachCell.swift in Sources */,
 				B3310D8E22ABB4820062EF98 /* MultiSelectVC.swift in Sources */,
@@ -1729,6 +1742,7 @@
 				B362263225E236C100D98317 /* MemberOrderListVC.swift in Sources */,
 				B39453E1223CE905005E3027 /* CancelButton.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
+				B3F6B45B260500AC0000F9E0 /* SignupStandbyTab.swift in Sources */,
 				B387EFEA25DE2FC700B397F8 /* SuperOrderClothes.swift in Sources */,
 				B306FE9C21F0DA8000403FE2 /* DateSelectVC.swift in Sources */,
 				B358B0B622A0FB5200F1A4E6 /* SingleSelectVC.swift in Sources */,
@@ -1759,6 +1773,7 @@
 				B3310D8C22AA28260062EF98 /* CycleUnitFormItem.swift in Sources */,
 				B35C4F4C2196F5E500F8AEB2 /* EditCell.swift in Sources */,
 				B31739EF21787960004CFEDE /* MyMapVC.swift in Sources */,
+				B3F6B456260500650000F9E0 /* SignupCancelTable.swift in Sources */,
 				B36CBD5920E13F7A00E52B9C /* TempPlayDatePlayerCell.swift in Sources */,
 				B3ED38F01FB9AD460003F083 /* ArenaSelectVC.swift in Sources */,
 				B323390A21B6B8E4003EB84D /* FormItem.swift in Sources */,
@@ -1791,6 +1806,7 @@
 				B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */,
 				B3B4EFC025807CA800EE15D0 /* SexFormItem.swift in Sources */,
 				B3B758AA25AC04AC006ACC33 /* TagCell.swift in Sources */,
+				B3F6B44C2604F4B40000F9E0 /* DateTable.swift in Sources */,
 				B36CBD5120DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift in Sources */,
 				B33C1AC521C3F848006F2BEB /* DrawLine.swift in Sources */,
 				B31ADD992591FDF3003E86BD /* FormItemCell.swift in Sources */,

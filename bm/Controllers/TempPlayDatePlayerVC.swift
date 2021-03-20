@@ -74,6 +74,7 @@ class TempPlayDatePlayerVC: MyTableVC, TempPlayDatePlayerCellDelegate {
         let mobile: String = row.mobile
         mobile.makeCall()
     }
+    
     @IBAction func prevBtnPressed(_ sender: Any) {
         prev()
     }

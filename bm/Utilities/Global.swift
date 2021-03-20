@@ -2109,6 +2109,91 @@ class DropDownCell: UITableViewCell {
     }
 }
 
+enum PropertyTypes: String {
+    case OptionalInt = "Optional<Int>"
+    case SwiftInt = "Swift.Int"
+    case Int = "Int"
+    case OptionalString = "Optional<String>"
+    case SwiftString = "Swift.String"
+    case String = "String"
+    case OptionalBool = "Optional<Bool>"
+    case SwiftBool = "Swift.Bool"
+    case Bool = "Bool"
+}
+
+extension String {
+    
+    func getTypeOfProperty()-> String? {
+        var res: String = ""
+        if
+            self == PropertyTypes.OptionalInt.rawValue ||
+            self == PropertyTypes.SwiftInt.rawValue ||
+            self == PropertyTypes.Int.rawValue {
+                res = PropertyTypes.Int.rawValue
+        } else if
+            self == PropertyTypes.OptionalString.rawValue ||
+            self == PropertyTypes.SwiftString.rawValue ||
+            self == PropertyTypes.String.rawValue {
+                res = PropertyTypes.String.rawValue
+        } else if
+            self == PropertyTypes.OptionalBool.rawValue ||
+            self == PropertyTypes.SwiftBool.rawValue ||
+            self == PropertyTypes.Bool.rawValue {
+                res = PropertyTypes.Bool.rawValue
+        }
+        return res
+    }
+    
+    //Property Type Comparison
+//    func propertyIsOfType(typeString: String, type: PropertyTypes)-> Bool {
+//        if getTypeOfProperty(propertyName) == type.rawValue {
+//            return true
+//        }
+//
+//        return false
+//    }
+}
+
+extension Mirror {
+
+//    label=>Optional("coach_id"):value=>Optional(40):type=>Optional("Int")
+//    label=>Optional("price"):value=>Optional(450):type=>Optional("Int")
+//    label=>Optional("price_unit"):value=>Optional("week"):type=>Optional("String")
+//    label=>Optional("price_desc"):value=>Optional("每週開課，每位學員450元"):type=>Optional("String")
+    
+    func toDictionary() -> [[String: Any]] {
+        var dict = [[String: Any]]()
+
+        // Properties of this instance:
+        for attr in self.children {
+            
+            if let propertyName = attr.label {
+                var res: [String: Any] = [String: Any]()
+                res["label"] = propertyName as String
+                res["value"] = attr.value
+                res["type"] = String(describing: type(of: attr.value))
+                dict.append(res)
+            }
+        }
+
+        // Add properties of superclass:
+        if let parent = self.superclassMirror {
+            for attr in parent.children {
+                
+                if let propertyName = attr.label {
+                    var res: [String: Any] = [String: Any]()
+                    res["label"] = propertyName as String
+                    res["value"] = attr.value
+                    res["type"] = String(describing: type(of: attr.value))
+                    dict.append(res)
+                }
+            }
+        }
+
+        return dict
+    }
+}
+
 
 
 

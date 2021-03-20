@@ -51,17 +51,16 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }()
     var contentViewConstraintHeight: NSLayoutConstraint?
     
-    var tableRowKeys:[String] = ["weekday_text","interval","date","price_text_long","people_limit_text","kind_text","pv","created_at_text"]
+    var tableRowKeys:[String] = ["weekday_text","interval_show","date","price_text_long","people_limit_text","kind_text","pv","created_at_show"]
     var tableRows: [String: [String:String]] = [
         "weekday_text":["icon":"calendar","title":"星期","content":""],
-        "interval":["icon":"clock","title":"時段","content":""],
+        "interval_show":["icon":"clock","title":"時段","content":""],
         "date":["icon":"calendar","title":"期間","content":""],
         "price_text_long":["icon":"money","title":"收費","content":""],
         "people_limit_text":["icon":"group","title":"限制人數","content":""],
         "kind_text": ["icon":"cycle","title":"週期","content":""],       // "signup_count":["icon":"group","title":"已報名人數","content":""],
         "pv":["icon":"pv","title":"瀏覽數","content":""],
-        "created_at_text":["icon":"calendar","title":"建立日期","content":""]
-        
+        "created_at_show":["icon":"calendar","title":"建立日期","content":""]
     ]
     
     let signupTableRowKeys:[String] = ["date", "deadline"]
@@ -81,8 +80,10 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"]
     ]
     
-    var superCourse: SuperCourse?
-    var superCoach: SuperCoach?
+    //var courseTable: courseTable?
+    //var coachTable: coachTable?
+    var courseTable: CourseTable?
+    var coachTable: CoachTable?
     
     var fromNet: Bool = false
     var signup_date: JSON = JSON()
@@ -101,6 +102,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         scrollView.backgroundColor = UIColor.clear
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
+        
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
         signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
         coachTableView.register(cellNib, forCellReuseIdentifier: "cell")
@@ -180,36 +182,45 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
             let params: [String: String] = ["token": course_token!, "member_token": Member.instance.token]
-            CourseService.instance.getOne(t: SuperCourse.self, params: params) { (success) in
+            CourseService.instance.getOne(t: CourseTable.self, params: params) { (success) in
                 if (success) {
-                    let superModel: SuperModel = CourseService.instance.superModel
-                    self.superCourse =
-                        (superModel as! SuperCourse)
+                    let table: Table = CourseService.instance.table!
+                    self.courseTable = table as? CourseTable
                     
-                    if self.superCourse != nil {
-                        //self.superCourse!.date_model.printRow()
-                        self.superCoach = self.superCourse!.coach
-                        //self.superCourse!.signup_normal_models
-                        self.setMainData()
-                        self.setFeatured()
-                        self.setCoachData()
-                        self.setSignupData()
+                    if self.courseTable != nil {
+                        //self.courseTable?.printRow()
+                        
+                        //self.courseTable!.date_model.printRow()
+                        //self.coachTable = self.courseTable!.coach
+                        //self.courseTable!.signup_normal_models
+                        
+                        self.setMainData() // setup course basic data
+                        self.setFeatured() // setup featured
+                        
+                        if self.courseTable!.coachTable != nil { // setup coach for course data
+                            self.coachTable = self.courseTable!.coachTable
+                            self.setCoachData()
+                        }
+                        if self.courseTable!.dateTable != nil { // setup next time course time
+                            //self.courseTable!.dateTable?.printRow()
+                            self.setNextTime()
+                        }
                         self.fromNet = true
                         
                         self.tableView.reloadData()
                         self.signupTableView.reloadData()
                         self.coachTableView.reloadData()
                         
-                        if self.superCourse!.isSignup {
-                            self.signupButton.setTitle("取消報名")
-                        } else {
-                            let count = self.superCourse!.signup_normal_models.count
-                            if count >= self.superCourse!.people_limit {
-                                self.signupButton.setTitle("候補")
-                            } else {
-                                self.signupButton.setTitle("報名")
-                            }
-                        }
+//                        if self.coachTable!.isSignup {
+//                            self.signupButton.setTitle("取消報名")
+//                        } else {
+//                            let count = self.coachTable!.signup_normal_models.count
+//                            if count >= self.coachTable!.people_limit {
+//                                self.signupButton.setTitle("候補")
+//                            } else {
+//                                self.signupButton.setTitle("報名")
+//                            }
+//                        }
                     }
                 }
                 Global.instance.removeSpinner(superView: self.view)
@@ -219,58 +230,97 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func setMainData() {
+        
+        let mirror: Mirror = Mirror(reflecting: courseTable!)
+        let propertys: [[String: Any]] = mirror.toDictionary()
+        
         for key in tableRowKeys {
-            if (superCourse!.responds(to: Selector(key))) {
-                let content: String = String(describing:(superCourse!.value(forKey: key))!)
-                tableRows[key]!["content"] = content
+            
+            for property in propertys {
+                
+                if ((property["label"] as! String) == key) {
+                    var type: String = property["type"] as! String
+                    type = type.getTypeOfProperty()!
+                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+                    var content: String = ""
+                    if type == "Int" {
+                        content = String(property["value"] as! Int)
+                    } else if type == "Bool" {
+                        content = String(property["value"] as! Bool)
+                    } else if type == "String" {
+                        content = property["value"] as! String
+                    }
+                    tableRows[key]!["content"] = content
+                    break
+                }
             }
         }
         
-        if !superCourse!.start_date.isEmpty {
-            let date = superCourse!.start_date + " ~ " + superCourse!.end_date
+        if !courseTable!.start_date.isEmpty {
+            let date = courseTable!.start_date + " ~ " + courseTable!.end_date
             tableRows["date"]!["content"] = date
         } else {
             tableRows.removeValue(forKey: "date");
             tableRowKeys = tableRowKeys.filter{$0 != "date"}
         }
-        let interval = superCourse!.start_time_show + " ~ " + superCourse!.end_time_show
-        tableRows["interval"]!["content"] = interval
+        let interval = courseTable!.start_time_show + " ~ " + courseTable!.end_time_show
+        tableRows["interval_show"]!["content"] = interval
         
-        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.superCourse!.content+"</body></html>"
+        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.courseTable!.content+"</body></html>"
         
         contentView!.loadHTMLString(content, baseURL: nil)
     }
     
     func setFeatured() {
         
-        if superCourse!.featured_path.count > 0 {
-            let featured_path = superCourse!.featured_path
+        if courseTable!.featured_path.count > 0 {
+            let featured_path = courseTable!.featured_path
             if featured_path.count > 0 {
                 //print(featured_path)
                 featured.downloaded(from: featured_path)
             }
         }
-        //featured.image = superCourse!.featured
+        //featured.image = courseTable!.featured
     }
     
-    func setSignupData() {
-        let date_model: SuperDate = superCourse!.date_model
-        let date: String = date_model.date
-        let start_time: String = superCourse!.start_time_show
-        let end_time: String = superCourse!.end_time_show
+    func setNextTime() {
+        let dateTable: DateTable = courseTable!.dateTable!
+        let date: String = dateTable.date
+        let start_time: String = courseTable!.start_time_show
+        let end_time: String = courseTable!.end_time_show
         let next_time = "下次上課時間：\(date) \(start_time) ~ \(end_time)"
         signupDateLbl.text = next_time
-//        let nextCourseTime: [String: String] = superCourse!.nextCourseTime
+        
+        
+//        let nextCourseTime: [String: String] = courseTable!.nextCourseTime
 //        for key in signupTableRowKeys {
 //            signupTableRows[key]!["content"] = nextCourseTime[key]
 //        }
     }
     
     func setCoachData() {
+        //coachTable!.printRow()
+        let mirror: Mirror = Mirror(reflecting: coachTable!)
+        let propertys: [[String: Any]] = mirror.toDictionary()
         for key in coachTableRowKeys {
-            if (superCoach!.responds(to: Selector(key))) {
-                let content: String = String(describing:(self.superCoach!.value(forKey: key))!)
-                coachTableRows[key]!["content"] = content
+            
+            for property in propertys {
+                
+                if ((property["label"] as! String) == key) {
+                    var type: String = property["type"] as! String
+                    type = type.getTypeOfProperty()!
+                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+                    var content: String = ""
+                    if type == "Int" {
+                        content = String(property["value"] as! Int)
+                    } else if type == "Bool" {
+                        content = String(property["value"] as! Bool)
+                    } else if type == "String" {
+                        content = property["value"] as! String
+                    }
+                    coachTableRows[key]!["content"] = content
+                    break
+                }
             }
         }
         //print(self.coachTableRows)
@@ -283,15 +333,18 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             if tableView == self.tableView {
                 return tableRowKeys.count
             } else if tableView == self.signupTableView {
-                if superCourse != nil {
-                    //let normal_count: Int = superCourse!.signup_normal_models.count
-                    let standby_count: Int = superCourse!.signup_standby_models.count
-                    let people_limit: Int = superCourse!.people_limit
-                    return people_limit + standby_count + 1
+                if courseTable != nil {
+                    //let normal_count: Int = courseTable!.signupNormalTables.count
+                    let standby_count: Int = courseTable!.signupStandbyTables.count
+                    let people_limit: Int = courseTable!.people_limit
+                    let count = people_limit + standby_count + 1
+                    //print(count)
+                    return count
                 } else {
                     return 0
                 }
             } else if tableView == self.coachTableView {
+                //print(coachTableRowKeys.count)
                 return coachTableRowKeys.count
             } else {
                 return 0
@@ -315,6 +368,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                 let content = row["content"] ?? ""
                 _caculateCellHeight(content)
             }
+            //cellHeight = 36
         } else if tableView == self.signupTableView {
 //            let key = signupTableRowKeys[indexPath.row]
 //            if signupTableRows[key] != nil {
@@ -366,30 +420,30 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         } else if tableView == self.signupTableView {
             let cell: OlCell = tableView.dequeueReusableCell(withIdentifier: "signupCell", for: indexPath) as! OlCell
             
-            let people_limit = superCourse!.people_limit
-            let normal_count = superCourse!.signup_normal_models.count
-            let standby_count = superCourse!.signup_standby_models.count
+            let people_limit = courseTable!.people_limit
+            let normal_count = courseTable!.signupNormalTables.count
+            let standby_count = courseTable!.signupStandbyTables.count
             if indexPath.row < people_limit {
                 cell.numberLbl.text = "\(indexPath.row + 1)."
                 if normal_count > 0 {
                     if indexPath.row < normal_count {
-                        let signup_normal_model = superCourse!.signup_normal_models[indexPath.row]
+                        let signup_normal_model = courseTable!.signupNormalTables[indexPath.row]
                         cell.nameLbl.text = signup_normal_model.member_name
                     }
                 }
             } else if indexPath.row >= people_limit && indexPath.row < people_limit + standby_count {
                 cell.numberLbl.text = "候補\(indexPath.row - people_limit + 1)."
-                let signup_standby_model = superCourse!.signup_standby_models[indexPath.row - people_limit]
+                let signup_standby_model = courseTable!.signupStandbyTables[indexPath.row - people_limit]
                 cell.nameLbl.text = signup_standby_model.member_name
             } else {
-                let remain: Int = people_limit - superCourse!.signup_normal_models.count
+                let remain: Int = people_limit - courseTable!.signupNormalTables.count
                 var remain_text = "還有\(remain)個名額"
                 if remain == 0 {
                     remain_text = "已經額滿，請排候補"
                 }
                 cell.numberLbl.text = remain_text
             }
-            
+
             if indexPath.row == people_limit + standby_count - 1 {
 
                 UIView.animate(withDuration: 0, animations: {self.signupTableView.layoutIfNeeded()}) { (complete) in
@@ -454,20 +508,20 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         if tableView == self.coachTableView {
             let key = coachTableRowKeys[indexPath.row]
             if key == NAME_KEY {
-                let sender: Show_IN = Show_IN(type: source,id:superCoach!.id,token:superCoach!.token,title:superCoach!.name)
+                let sender: Show_IN = Show_IN(type: source,id:coachTable!.id,token:coachTable!.token,title:coachTable!.name)
                 performSegue(withIdentifier: TO_SHOW, sender: sender)
             } else if key == MOBILE_KEY {
-                superCoach!.mobile.makeCall()
+                coachTable!.mobile.makeCall()
             } else if key == LINE_KEY {
-                superCoach!.line.line()
+                coachTable!.line.line()
             } else if key == FB_KEY {
-                superCoach!.fb.fb()
+                coachTable!.fb.fb()
             } else if key == YOUTUBE_KEY {
-                superCoach!.youtube.youtube()
+                coachTable!.youtube.youtube()
             } else if key == WEBSITE_KEY {
-                superCoach!.website.website()
+                coachTable!.website.website()
             } else if key == EMAIL_KEY {
-                superCoach!.email.email()
+                coachTable!.email.email()
             }
         }
     }
@@ -569,24 +623,28 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             warning("請先登入會員")
             return
         }
-        Global.instance.addSpinner(superView: view)
-        CourseService.instance.signup(token: course_token!, member_token: Member.instance.token, date_token: superCourse!.date_model.token, course_deadline: course_deadline) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            let msg = CourseService.instance.msg
-            var title = "警告"
-            var closeAction: UIAlertAction?
-            if CourseService.instance.success {
-                title = "提示"
-                closeAction = UIAlertAction(title: "關閉", style: .default, handler: { (action) in
-                    self.refresh()
-                })
-            } else {
-                closeAction = UIAlertAction(title: "關閉", style: .default, handler: nil)
+        if courseTable!.dateTable != nil {
+            Global.instance.addSpinner(superView: view)
+            CourseService.instance.signup(token: course_token!, member_token: Member.instance.token, date_token: courseTable!.dateTable!.token, course_deadline: course_deadline) { (success) in
+                Global.instance.removeSpinner(superView: self.view)
+                let msg = CourseService.instance.msg
+                var title = "警告"
+                var closeAction: UIAlertAction?
+                if CourseService.instance.success {
+                    title = "提示"
+                    closeAction = UIAlertAction(title: "關閉", style: .default, handler: { (action) in
+                        self.refresh()
+                    })
+                } else {
+                    closeAction = UIAlertAction(title: "關閉", style: .default, handler: nil)
+                }
+                let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+                alert.addAction(closeAction!)
+
+                self.present(alert, animated: true, completion: nil)
             }
-            let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-            alert.addAction(closeAction!)
-            
-            self.present(alert, animated: true, completion: nil)
+        } else {
+            warning("無法取得日期參數，所以無法報名，請通知管理員 - signup")
         }
     }
     
@@ -596,19 +654,23 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
         //print(Member.instance.token)
-        Global.instance.addSpinner(superView: view)
-        CourseService.instance.signup_date(token: course_token!, member_token: Member.instance.token, date_token: superCourse!.date_model.token) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if (success) {
-                self.signup_date = CourseService.instance.signup_date
-                self.isSignup = self.signup_date["isSignup"].boolValue
-                self.isStandby = self.signup_date["isStandby"].boolValue
-                self.canCancelSignup = self.signup_date["cancel"].boolValue
-                //self.signup_id = self.signup_date["signup_id"].intValue
-                self.course_date = self.signup_date["date"].stringValue
-                self.course_deadline = self.signup_date["deadline"].stringValue
-                self.showSignupModal()
+        if courseTable!.dateTable != nil {
+            Global.instance.addSpinner(superView: view)
+            CourseService.instance.signup_date(token: course_token!, member_token: Member.instance.token, date_token: courseTable!.dateTable!.token) { (success) in
+                Global.instance.removeSpinner(superView: self.view)
+                if (success) {
+                    self.signup_date = CourseService.instance.signup_date
+                    self.isSignup = self.signup_date["isSignup"].boolValue
+                    self.isStandby = self.signup_date["isStandby"].boolValue
+                    self.canCancelSignup = self.signup_date["cancel"].boolValue
+                    //self.signup_id = self.signup_date["signup_id"].intValue
+                    self.course_date = self.signup_date["date"].stringValue
+                    self.course_deadline = self.signup_date["deadline"].stringValue
+                    self.showSignupModal()
+                }
             }
+        } else {
+            warning("無法取得日期參數，所以無法報名，請通知管理員 - signupButtonPressed")
         }
     }
     

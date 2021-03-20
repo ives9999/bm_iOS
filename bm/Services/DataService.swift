@@ -499,6 +499,67 @@ class DataService {
         }
     }
     
+    func getOne<T: Table>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
+        
+        var body: [String: Any] = ["device": "app","strip_html": false]
+        if params["token"] != nil {
+            body["token"] = params["token"]
+        }
+        if params["member_token"] != nil {
+            body["member_token"] = params["member_token"]
+        }
+        
+        print(body)
+        let source: String? = getSource()
+        var url: String?
+        if source != nil {
+            url = String(format: URL_ONE, source!)
+        }
+        print(url)
+        if url != nil {
+            Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+                
+                switch response.result {
+                //case .success(let value):
+                case .success(_):
+                    var s: T? = nil
+                    do {
+                        if response.data != nil {
+                            //let json = JSON(value)
+                            //print(json)
+                            s = try JSONDecoder().decode(t, from: response.data!)
+                            if s != nil {
+                                self.table = s!
+                                self.table!.filterRow()
+                                //s!.printRow()
+//                                let s1: CourseTable = s as! CourseTable
+//                                if s1.dateTable != nil {
+//                                    s1.dateTable?.printRow()
+//                                }
+                                completion(true)
+                            } else {
+                                self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                                completion(false)
+                            }
+                        } else {
+                            self.msg = "沒有任何伺服器回傳的訊息"
+                            completion(false)
+                        }
+                    } catch {
+                        //print("Error:\(error)")
+                        self.msg = error.localizedDescription
+                        completion(false)
+                    }
+                case .failure(let error):
+                    self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                    completion(false)
+                    print(error)
+                    return
+                }
+            }
+        }
+    }
+    
     func getOne<T: SuperModel>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
         
         var body: [String: Any] = ["device": "app","strip_html": false]
