@@ -84,20 +84,20 @@ class TempPlaySignupOneVC: MyTableVC {
     }
     
     func initIsTeamManager(completion: @escaping CompletionHandler) {
-        _getManagerList(source: "team", titleField: "name") { (success) in
-            if success {
-                //print(self.managerLists)
-                for i in 0 ..< self.managerLists.count {
-                    let list: SuperData = self.managerLists[i]
-                    if list.id == self.team_id {
-                        self.isTeamManager = true
-                        self.memberOne.append(["black_list":["title":"加入黑名單","more":true,"icon":"blacklist"]])
-                        break
-                    }
-                }
-            }
-            completion(success)
-        }
+//        _getManagerList(source: "team", titleField: "name") { (success) in
+//            if success {
+//                //print(self.managerLists)
+//                for i in 0 ..< self.managerLists.count {
+//                    let list: SuperData = self.managerLists[i]
+//                    if list.id == self.team_id {
+//                        self.isTeamManager = true
+//                        self.memberOne.append(["black_list":["title":"加入黑名單","more":true,"icon":"blacklist"]])
+//                        break
+//                    }
+//                }
+//            }
+//            completion(success)
+//        }
     }
     
     func initMemberOne() {

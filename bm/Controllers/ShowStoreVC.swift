@@ -37,10 +37,10 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }()
     var contentViewConstraintHeight: NSLayoutConstraint?
     
-    var superStore: SuperStore?
+    var storeTable: StoreTable?
     var store_token: String?
     
-    var tableRowKeys:[String] = ["tel_text","mobile_text","address","fb","line","website","email","business_time","pv","created_at_text"]
+    var tableRowKeys:[String] = ["tel_text","mobile_text","address","fb","line","website","email","business_time","pv","created_at_show"]
     var tableRows: [String: [String:String]] = [
         "tel_text":["icon":"tel","title":"市內電話","content":""],
         "mobile_text":["icon":"mobile","title":"行動電話","content":""],
@@ -51,7 +51,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         "email":["icon":"email1","title":"email","content":""],
         "business_time":["icon":"clock","title":"營業時間","content":""],
         "pv":["icon":"pv","title":"瀏覽數","content":""],
-        "created_at_text":["icon":"calendar","title":"建立日期","content":""]
+        "created_at_show":["icon":"calendar","title":"建立日期","content":""]
     ]
     
     var fromNet: Bool = false
@@ -60,7 +60,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //print(superStore)
+        //print(storeTable)
         scrollView.backgroundColor = UIColor.clear
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
@@ -113,13 +113,12 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
             let params: [String: String] = ["token": store_token!, "member_token": Member.instance.token]
-            StoreService.instance.getOne(t: SuperStore.self, params: params) { (success) in
+            StoreService.instance.getOne(t: StoreTable.self, params: params) { (success) in
                 if (success) {
-                    let superModel: SuperModel = StoreService.instance.superModel
-                    self.superStore =
-                        (superModel as! SuperStore)
+                    let table: Table = StoreService.instance.table!
+                    self.storeTable = table as? StoreTable
                     
-                    if self.superStore != nil {
+                    if self.storeTable != nil {
                         self.setMainData()
                         self.setFeatured()
                         self.fromNet = true
@@ -135,9 +134,9 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     func setFeatured() {
         
-        if superStore != nil {
-            if superStore!.featured_path.count > 0 {
-                let featured_path = superStore!.featured_path
+        if storeTable != nil {
+            if storeTable!.featured_path.count > 0 {
+                let featured_path = storeTable!.featured_path
                 if featured_path.count > 0 {
                     //print(featured_path)
                     featured.downloaded(from: featured_path)
@@ -148,26 +147,43 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func setMainData() {
-        if superStore != nil {
-            for key in tableRowKeys {
-                if (superStore!.responds(to: Selector(key))) {
-                    let content: String = String(describing:(superStore!.value(forKey: key))!)
+        
+        let mirror: Mirror = Mirror(reflecting: storeTable!)
+        let propertys: [[String: Any]] = mirror.toDictionary()
+        
+        for key in tableRowKeys {
+            
+            for property in propertys {
+                
+                if ((property["label"] as! String) == key) {
+                    var type: String = property["type"] as! String
+                    type = type.getTypeOfProperty()!
+                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+                    var content: String = ""
+                    if type == "Int" {
+                        content = String(property["value"] as! Int)
+                    } else if type == "Bool" {
+                        content = String(property["value"] as! Bool)
+                    } else if type == "String" {
+                        content = property["value"] as! String
+                    }
                     tableRows[key]!["content"] = content
+                    break
                 }
             }
-            
-            if !superStore!.open_time.isEmpty {
-                let business_time = superStore!.open_time_text + " ~ " + superStore!.close_time_text
-                tableRows["business_time"]!["content"] = business_time
-            } else {
-                tableRows.removeValue(forKey: "business_time");
-                tableRowKeys = tableRowKeys.filter{$0 != "business_time"}
-            }
-            
-            let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.superStore!.content+"</body></html>"
-            
-            contentView!.loadHTMLString(content, baseURL: nil)
         }
+        
+        if !storeTable!.open_time.isEmpty {
+            let business_time = storeTable!.open_time_show + " ~ " + storeTable!.close_time_show
+            tableRows["business_time"]!["content"] = business_time
+        } else {
+            tableRows.removeValue(forKey: "business_time");
+            tableRowKeys = tableRowKeys.filter{$0 != "business_time"}
+        }
+        
+        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.storeTable!.content+"</body></html>"
+        
+        contentView!.loadHTMLString(content, baseURL: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -239,15 +255,15 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         if tableView == self.tableView {
             let key = tableRowKeys[indexPath.row]
             if key == MOBILE_KEY {
-                superStore!.mobile.makeCall()
+                storeTable!.mobile.makeCall()
             } else if key == LINE_KEY {
-                superStore!.line.line()
+                storeTable!.line.line()
             } else if key == FB_KEY {
-                superStore!.fb.fb()
+                storeTable!.fb.fb()
             } else if key == WEBSITE_KEY {
-                superStore!.website.website()
+                storeTable!.website.website()
             } else if key == EMAIL_KEY {
-                superStore!.email.email()
+                storeTable!.email.email()
             }
         }
     }

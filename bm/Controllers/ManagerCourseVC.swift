@@ -17,7 +17,7 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     var token: String? = nil
     var manager_token: String? = nil
     
-    var superCourses: SuperCourses? = nil
+    var coursesTable: CoursesTable? = nil
     
     var isReload: Bool = true
 
@@ -45,13 +45,13 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
         }
         
         Global.instance.addSpinner(superView: self.view)
-        CourseService.instance.getList(t: SuperCourse.self, t1: SuperCourses.self, token: token, _filter: filter, page: 1, perPage: 100) { (success) in
+        CourseService.instance.getList(t: CoursesTable.self, token: token, _filter: filter, page: 1, perPage: PERPAGE) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                self.superCourses = (CourseService.instance.superModel as! SuperCourses)
-                //self.superCourses!.printRows()
-                if self.superCourses != nil {
-                    if self.superCourses!.totalCount == 0 {
+                self.coursesTable = (CourseService.instance.tables as! CoursesTable)
+                //self.coursesTable!.printRows()
+                if self.coursesTable != nil {
+                    if self.coursesTable!.totalCount == 0 {
                         let alert = SCLAlertView()
                         alert.showInfo("目前無您管理的課程", subTitle: "")
                     } else {
@@ -70,8 +70,8 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if superCourses != nil {
-            return superCourses!.rows.count
+        if coursesTable != nil {
+            return coursesTable!.rows.count
         } else {
             return 0
         }
@@ -84,8 +84,8 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ManagerCourseCell
         //cell.blacklistCellDelegate = self
-        if superCourses != nil && superCourses!.rows.indices.contains(indexPath.row) {
-            let row = superCourses!.rows[indexPath.row]
+        if coursesTable != nil && coursesTable!.rows.indices.contains(indexPath.row) {
+            let row = coursesTable!.rows[indexPath.row]
             //row.printRow()
             cell.forRow(row: row)
         }
@@ -95,9 +95,9 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var row: SuperCourse? = nil
-        if superCourses != nil && superCourses!.rows.indices.contains(indexPath.row) {
-            row = superCourses!.rows[indexPath.row]
+        var row: CourseTable? = nil
+        if coursesTable != nil && coursesTable!.rows.indices.contains(indexPath.row) {
+            row = coursesTable!.rows[indexPath.row]
         }
         
         var title = "課程"

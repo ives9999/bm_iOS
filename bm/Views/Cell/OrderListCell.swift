@@ -25,9 +25,13 @@ class OrderListCell: SuperCell {
         priceLbl.textColor = UIColor(MY_RED)
     }
     
-    func updateOrderViews(indexPath: IndexPath, row: SuperOrder) {
+    func updateOrderViews(indexPath: IndexPath, row: OrderTable) {
         
-        nameLbl.text = row.product.name
+        if row.product != nil {
+            nameLbl.text = row.product!.name
+        } else {
+            nameLbl.text = "無法取得商品名稱，請洽管理員"
+        }
         dateLbl.text = row.created_at_show
         priceLbl.text = row.amount_show
         orderNoLbl.text = row.order_no

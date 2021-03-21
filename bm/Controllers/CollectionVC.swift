@@ -122,12 +122,12 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
         //print(page)
         Global.instance.addSpinner(superView: self.view)
         
-        dataService.getList(type: iden, titleField: titleField, params:params, page: page, perPage: perPage, filter: nil) { (success) in
-            if (success) {
-                self.getDataEnd(success: success)
-                Global.instance.removeSpinner(superView: self.view)
-            }
-        }
+//        dataService.getList(type: iden, titleField: titleField, params:params, page: page, perPage: perPage, filter: nil) { (success) in
+//            if (success) {
+//                self.getDataEnd(success: success)
+//                Global.instance.removeSpinner(superView: self.view)
+//            }
+//        }
     }
     func getDataEnd(success: Bool) {
         if success {

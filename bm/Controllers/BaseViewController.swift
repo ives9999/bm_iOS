@@ -318,31 +318,25 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
 //        })
 //    }
     
-    func _getManagerList(source: String, titleField: String, completion: @escaping CompletionHandler) {
-        Global.instance.addSpinner(superView: self.view)
-        let filter: [[Any]] = [
-            ["channel", "=", CHANNEL],
-            ["manager_id", "=", Member.instance.id]
-        ]
-        let params: Dictionary<String, Any> = [String: Any]()
-        dataService.getList(type: source, titleField: titleField, params:params, page: 1, perPage: 100, filter: filter) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if success {
-                self.managerLists = self.dataService.dataLists
-                //print(self.myTeamLists)
-                //                    for team in self.myTeamLists {
-                //                        let row: [String: Any] = ["text": team.title, "id": team.id, "token": team.token, "segue": TO_TEAM_TEMP_PLAY,"detail":"臨打"]
-                //                        self._rows[1].append(row)
-                //                    }
-                //print(self.myTeamLists)
-                
-                completion(true)
-            } else {
-                self.msg = self.dataService.msg
-                completion(false)
-            }
-        }
-    }
+//    func _getManagerList(source: String, titleField: String, completion: @escaping CompletionHandler) {
+//        Global.instance.addSpinner(superView: self.view)
+//        let filter: [[Any]] = [
+//            ["channel", "=", CHANNEL],
+//            ["manager_id", "=", Member.instance.id]
+//        ]
+//        let params: Dictionary<String, Any> = [String: Any]()
+//        dataService.getList(type: source, titleField: titleField, params:params, page: 1, perPage: 100, filter: filter) { (success) in
+//            Global.instance.removeSpinner(superView: self.view)
+//            if success {
+//                self.managerLists = self.dataService.dataLists
+//
+//                completion(true)
+//            } else {
+//                self.msg = self.dataService.msg
+//                completion(false)
+//            }
+//        }
+//    }
     
     func addBlackList(memberName: String, memberToken: String, teamToken: String) {
         warning(msg:"是否真的要將球友"+memberName+"設為黑名單\n之後可以解除", closeButtonTitle: "取消", buttonTitle: "確定", buttonAction: {
@@ -713,7 +707,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toOrder(productTable: ProductTable, login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
+    func toOrder(product_token: String, login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
         
         var msg: String = ""
         if !Member.instance.isLoggedIn {
@@ -746,11 +740,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                 if #available(iOS 13.0, *) {
                     let storyboard = UIStoryboard(name: "More", bundle: nil)
                     if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
-                        viewController.productTable = productTable
+                        viewController.product_token = product_token
                         show(viewController, sender: nil)
                     }
                 } else {
                     let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
+                    viewController.product_token = product_token
                     self.navigationController!.pushViewController(viewController, animated: true)
                 }
             }

@@ -86,9 +86,9 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     var eventTag: Int = 0
     
     var show_in: Show_IN?
-    var superCoach: SuperCoach?
+    var coachTable: CoachTable?
     var timetables: Timetables?
-    var superCourses: SuperCourses?
+    var coursesTable: CoursesTable?
     var featured: UIImage?
     var city_id: Int = 0
     var params: [String: Any] = [String: Any]()
@@ -168,13 +168,13 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     override func refresh() {
         Global.instance.addSpinner(superView: view)
         let params: [String: String] = ["token": show_in!.token]
-        CoachService.instance.getOne(t: SuperCoach.self, params: params){ (success1) in
+        CoachService.instance.getOne(t: CoachTable.self, params: params){ (success1) in
             if (success1) {
-                let superModel: SuperModel = CoachService.instance.superModel
-                self.superCoach = (superModel as! SuperCoach)
-                //self.superCoach!.printRow()
+                let table: Table = CoachService.instance.table!
+                self.coachTable = table as? CoachTable
+                //self.coachTable!.printRow()
                 //self.setData() move to getFeatured
-                if self.superCoach != nil {
+                if self.coachTable != nil {
                     self.setData()
                     self.fromNet = true
                     //self.getFeatured()
@@ -184,14 +184,14 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 
                 var filter: [String: Any] = [String: Any]()
                 filter.merge(["status": "online"])
-                if self.superCoach != nil {
-                    filter.merge(["coach_id": self.superCoach!.id])
+                if self.coachTable != nil {
+                    filter.merge(["coach_id": self.coachTable!.id])
                 }
-                CourseService.instance.getList(t: SuperCourse.self, t1: SuperCourses.self, token: self.show_in!.token, _filter: filter, page: 1, perPage: 100) { (success2) in
+                CourseService.instance.getList(t: CoursesTable.self, token: self.show_in!.token, _filter: filter, page: 1, perPage: 100) { (success2) in
                     Global.instance.removeSpinner(superView: self.view)
                     if (success2) {
-                        self.superCourses = (CourseService.instance.superModel as! SuperCourses)
-                        //self.superCourses!.printRows()
+                        self.coursesTable = (CourseService.instance.tables as! CoursesTable)
+                        //self.coursesTable!.printRows()
                         self.courseTableView.reloadData()
                     } else {
                         self.warning(CourseService.instance.msg)
@@ -277,11 +277,11 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             if tableView == contactTableView {
                 return contactTableRowKeys.count
             } else if tableView == courseTableView {
-                if superCourses != nil {
-                    if superCourses!.rows.count == 0 {
+                if coursesTable != nil {
+                    if coursesTable!.rows.count == 0 {
                         courseTableViewHeight.constant = 0
                     }
-                    return superCourses!.rows.count
+                    return coursesTable!.rows.count
                 } else {
                     courseTableViewHeight.constant = 0
                     return 0
@@ -329,12 +329,12 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         } else if tableView == courseTableView {
             let cell = tableView.dequeueReusableCell(withIdentifier: "courseCell", for: indexPath) as! ManagerCourseCell
             //cell.blacklistCellDelegate = self
-            if superCourses != nil && superCourses!.rows.indices.contains(indexPath.row) {
-                let row = superCourses!.rows[indexPath.row]
+            if coursesTable != nil && coursesTable!.rows.indices.contains(indexPath.row) {
+                let row = coursesTable!.rows[indexPath.row]
                 //row.printRow()
                 cell.forRow(row: row)
             }
-            if indexPath.row == superCourses!.rows.count - 1 {
+            if indexPath.row == coursesTable!.rows.count - 1 {
                 UIView.animate(withDuration: 0, animations: {self.courseTableView.layoutIfNeeded()}) { (complete) in
                     var heightOfTableView: CGFloat = 0.0
                     let cells = self.courseTableView.visibleCells
@@ -357,21 +357,21 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         if tableView == contactTableView {
             let key = contactTableRowKeys[indexPath.row]
             if key == MOBILE_KEY {
-                superCoach!.mobile.makeCall()
+                coachTable!.mobile.makeCall()
             } else if key == LINE_KEY {
-                superCoach!.line.line()
+                coachTable!.line.line()
             } else if key == FB_KEY {
-                superCoach!.fb.fb()
+                coachTable!.fb.fb()
             } else if key == YOUTUBE_KEY {
-                superCoach!.youtube.youtube()
+                coachTable!.youtube.youtube()
             } else if key == WEBSITE_KEY {
-                superCoach!.website.website()
+                coachTable!.website.website()
             } else if key == EMAIL_KEY {
-                superCoach!.email.email()
+                coachTable!.email.email()
             }
         } else if tableView == courseTableView {
-            if superCourses != nil {
-                let sender = superCourses!.rows[indexPath.row]
+            if coursesTable != nil {
+                let sender = coursesTable!.rows[indexPath.row]
                 performSegue(withIdentifier: TO_SHOW_COURSE, sender: sender)
             }
         }
@@ -398,9 +398,9 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func setData() {
-        if superCoach != nil {
-            if superCoach!.citys.count > 0 {
-                for city in superCoach!.citys {
+        if coachTable != nil {
+            if coachTable!.citys.count > 0 {
+                for city in coachTable!.citys {
                     city_id = city.id
                     params["city_id"] = [city_id]
                     params["city_type"] = "all"
@@ -409,29 +409,48 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             } else {
                 cityBtn.isHidden = true
             }
-            //print(BASE_URL + superCoach!.featured_path)
-            //featuredView.af_setImage(withURL: URL(string: BASE_URL + superCoach!.featured_path)!)
+            //print(BASE_URL + coachTable!.featured_path)
+            //featuredView.af_setImage(withURL: URL(string: BASE_URL + coachTable!.featured_path)!)
             //featuredView.image = featured
+            
+            let mirror: Mirror = Mirror(reflecting: coachTable!)
+            let propertys: [[String: Any]] = mirror.toDictionary()
+            
             for key in contactTableRowKeys {
-                if (self.superCoach!.responds(to: Selector(key))) {
-                    let content: String = String(describing:(self.superCoach!.value(forKey: key))!)
-                    contactTableRows[key]!["content"] = content
+                
+                for property in propertys {
+                    
+                    if ((property["label"] as! String) == key) {
+                        var type: String = property["type"] as! String
+                        type = type.getTypeOfProperty()!
+                        //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+                        var content: String = ""
+                        if type == "Int" {
+                            content = String(property["value"] as! Int)
+                        } else if type == "Bool" {
+                            content = String(property["value"] as! Bool)
+                        } else if type == "String" {
+                            content = property["value"] as! String
+                        }
+                        contactTableRows[key]!["content"] = content
+                        break
+                    }
                 }
             }
             
-            setWeb(webView: chargeWebView, content: superCoach!.charge)
-            setWeb(webView: expWebView, content: superCoach!.exp)
-            setWeb(webView: licenseWebView, content: superCoach!.license)
-            setWeb(webView: featWebView, content: superCoach!.feat)
-            setWeb(webView: detailWebView, content: superCoach!.content)
+            setWeb(webView: chargeWebView, content: coachTable!.charge)
+            setWeb(webView: expWebView, content: coachTable!.exp)
+            setWeb(webView: licenseWebView, content: coachTable!.license)
+            setWeb(webView: featWebView, content: coachTable!.feat)
+            setWeb(webView: detailWebView, content: coachTable!.content)
         }
     }
     
     func setFeatured() {
         
-        if superCoach!.featured_path.count > 0 {
+        if coachTable!.featured_path.count > 0 {
             
-            DataService.instance1.getImage(_url: superCoach!.featured_path) { (success) in
+            DataService.instance1.getImage(_url: coachTable!.featured_path) { (success) in
                 self.featured = DataService.instance1.image
                 self.featuredView.image = self.featured
                 self.featuredLayout()
@@ -447,7 +466,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func getFeatured() {
-        DataService.instance1.getImage(_url: BASE_URL + superCoach!.featured_path) { (success) in
+        DataService.instance1.getImage(_url: BASE_URL + coachTable!.featured_path) { (success) in
             self.featured = DataService.instance1.image
             self.featuredLayout()
         }

@@ -28,7 +28,7 @@ class ShowProductVC: BaseViewController {
     
     @IBOutlet weak var submitButton: SubmitButton!
     
-    var superProduct: SuperProduct?
+    var productTable: ProductTable?
     var product_token: String?
         
     override func viewDidLoad() {
@@ -60,13 +60,13 @@ class ShowProductVC: BaseViewController {
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
             let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
-            ProductService.instance.getOne(t: SuperProduct.self, params: params) { (success) in
+            ProductService.instance.getOne(t: ProductTable.self, params: params) { (success) in
                 if (success) {
-                    let superModel: SuperModel = ProductService.instance.superModel
-                    self.superProduct = (superModel as! SuperProduct)
+                    let table: Table = ProductService.instance.table!
+                    self.productTable = (table as! ProductTable)
                     //self.superProduct!.printRow()
                     
-                    self.titleLbl.text = self.superProduct?.name
+                    self.titleLbl.text = self.productTable?.name
                     self.setFeatured()
                     self.setImages()
                     self.setContent()
@@ -79,9 +79,9 @@ class ShowProductVC: BaseViewController {
     
     func setFeatured() {
         
-        if superProduct != nil {
-            if superProduct!.featured_path.count > 0 {
-                let featured_path = superProduct!.featured_path
+        if productTable != nil {
+            if productTable!.featured_path.count > 0 {
+                let featured_path = productTable!.featured_path
                 if featured_path.count > 0 {
                     //print(featured_path)
                     featured.downloaded(from: featured_path)
@@ -91,10 +91,10 @@ class ShowProductVC: BaseViewController {
     }
     
     func setImages() {
-        if superProduct != nil {
-            if superProduct!.images.count > 0 {
+        if productTable != nil {
+            if productTable!.images.count > 0 {
                 
-                let h: CGFloat = imageContainerView.showImages(images: superProduct!.images)
+                let h: CGFloat = imageContainerView.showImages(images: productTable!.images)
                 imageContainerViewConstraintHeight.constant = h
                 changeScrollViewContentSize()
             }
@@ -102,7 +102,7 @@ class ShowProductVC: BaseViewController {
     }
     
     func setContent() {
-        if superProduct != nil {
+        if productTable != nil {
             
             
 //            let textView = UITextView()
@@ -121,7 +121,7 @@ class ShowProductVC: BaseViewController {
             let textView: SuperTextView = SuperTextView(frame: CGRect.zero)
             contentView.addSubview(textView)
             textView.isScrollEnabled = false
-            textView.text = superProduct!.content
+            textView.text = productTable!.content
             
             let fixedWidth = textView.superview!.frame.size.width
             let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -175,12 +175,15 @@ class ShowProductVC: BaseViewController {
     
     @IBAction func submitBtnPressed(_ sender: Any) {
         //print("purchase")
-        
-//        toOrder(
-//            superProduct: superProduct!,
-//            login: { vc in vc.toLogin() },
-//            register: { vc in vc.toRegister() }
-//        )
+        if product_token != nil {
+            toOrder(
+                product_token: product_token!,
+                login: { vc in vc.toLogin() },
+                register: { vc in vc.toRegister() }
+            )
+        } else {
+            warning("")
+        }
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {

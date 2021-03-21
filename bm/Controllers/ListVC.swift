@@ -179,7 +179,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
             if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
                 
                 cell.cellDelegate = self
-                let row = lists[indexPath.row]
+                //let row = lists[indexPath.row]
                 //cell.updateViews(indexPath: indexPath, data: row, iden: _type)
                 
                 return cell

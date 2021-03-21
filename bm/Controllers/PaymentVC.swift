@@ -16,7 +16,7 @@ class PaymentVC: MyTableVC {
     var ecpay_token: String = ""
     var order_token: String = ""
     var tokenExpireDate: String = ""
-    var superOrder: SuperOrder? = nil
+    var orderTable: OrderTable? = nil
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -105,16 +105,24 @@ class PaymentVC: MyTableVC {
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
             let params: [String: String] = ["token": order_token, "member_token": Member.instance.token]
-            OrderService.instance.getOne(t: SuperOrder.self, params: params) { (success) in
+            OrderService.instance.getOne(t: OrderTable.self, params: params) { (success) in
                 if (success) {
-                    let superModel: SuperModel = OrderService.instance.superModel
-                    self.superOrder = (superModel as! SuperOrder)
-                    //self.superOrder!.product.printRow()
-                    
-                    self.titleLbl.text = self.superOrder?.product.name
-                    
-                    self.setupOrderData()
-                    self.tableView.reloadData()
+                    if OrderService.instance.table != nil {
+                        let table: Table = OrderService.instance.table!
+                        if let tmp = table as? OrderTable {
+                            self.orderTable = tmp
+                            //self.superOrder!.product.printRow()
+                            
+                            self.titleLbl.text = self.orderTable!.product!.name
+                            
+                            self.setupOrderData()
+                            self.tableView.reloadData()
+                        } else {
+                            self.warning("轉換 table to OrderTable 錯誤，請洽管理員")
+                        }
+                    } else {
+                        self.warning("無法取得 service 的回傳資料，請聯絡管理員")
+                    }
                 }
                 Global.instance.removeSpinner(superView: self.view)
                 self.endRefresh()
@@ -124,26 +132,32 @@ class PaymentVC: MyTableVC {
     
     private func setupOrderData() {
         
-        if superOrder != nil {
-            let mirror: Mirror = Mirror(reflecting: superOrder!)
-            for property in mirror.children {
-                let label = property.label
+        if orderTable != nil {
+            
+            let mirror: Mirror = Mirror(reflecting: orderTable!)
+            let propertys: [[String: Any]] = mirror.toDictionary()
+            
+            for property in propertys {
+                let label: String = property["label"] as! String
                 for (idx, row) in rows!.enumerated() {
                     for (idx1, row1) in row.enumerated() {
                         let key: String = row1["key"] as! String
                         if key == label {
-                            let type1 = getClassType(value: property.value)
-                            if type1.contains("String") {
-                                rows![idx][idx1]["value"] = property.value as! String
-                            } else if type1.contains("Int") {
-                                let tmp: Int = property.value as! Int
-                                rows![idx][idx1]["value"] = String(tmp)
+                            var type: String = property["type"] as! String
+                            type = type.getTypeOfProperty()!
+                            //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+                            if type == "Int" {
+                                rows![idx][idx1]["value"] = String(property["value"] as! Int)
+                            } else if type == "Bool" {
+                                rows![idx][idx1]["value"] = String(property["value"] as! Bool)
+                            } else if type == "String" {
+                                rows![idx][idx1]["value"] = property["value"] as! String
                             }
                         }
                     }
                 }
+                
             }
-            
             //print(rows)
         }
     }

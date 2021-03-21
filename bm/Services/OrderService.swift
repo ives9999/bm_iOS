@@ -25,7 +25,7 @@ class OrderService: DataService {
         return "order"
     }
     
-    func update<T: SuperModel>(t: T.Type, token: String = "", params: [String: String], completion: @escaping CompletionHandler) {
+    func update(token: String = "", params: [String: String], completion: @escaping CompletionHandler) {
         
         var url: String = URL_ORDER
         if token.count > 0 {

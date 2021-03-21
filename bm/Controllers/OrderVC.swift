@@ -10,9 +10,11 @@ import Foundation
 
 class OrderVC: MyTableVC, ValueChangedDelegate {
 
-    var productTable: ProductTable? = nil
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var submitButton: SubmitButton!
+    
+    var product_token: String? = nil
+    var productTable: ProductTable? = nil
     
     var sub_total: Int = 0
     var shippingFee: Int = 0
@@ -25,7 +27,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     override func viewDidLoad() {
         
         myTablView = tableView
-        form = OrderForm(type: self.productTable!.type)
 
         super.viewDidLoad()
         //print(superProduct)
@@ -33,17 +34,39 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         submitButton.setTitle("訂購")
         
         titleLbl.textColor = UIColor.black
-        titleLbl.text = productTable!.name
-
-        initData()
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
         
         FormItemCellType.registerCell(for: tableView)
+        
+        refresh()
+    }
+    
+    override func refresh() {
+        Global.instance.addSpinner(superView: view)
+        page = 1
+        let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
+        ProductService.instance.getOne(t: ProductTable.self, params: params) { (success) in
+            if (success) {
+                let table: Table = ProductService.instance.table!
+                self.productTable = (table as! ProductTable)
+                //self.superProduct!.printRow()
+                
+                self.initData()
+            }
+            Global.instance.removeSpinner(superView: self.view)
+            self.endRefresh()
+        }
     }
     
     func initData() {
+        
+        form = OrderForm(type: self.productTable!.type)
+        section_keys = form.getSectionKeys()
+        sections = form.getSections()
+        
+        titleLbl.text = productTable!.name
         
         if let productNameItem = getFormItemFromKey("Product_Name") {
             productNameItem.value = productTable!.name
@@ -77,10 +100,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         if let colorItem = getFormItemFromKey(COLOR_KEY) as? Color1FormItem {
             var res: [[String: String]] = [[String: String]]()
-//            for color in productTable!.colors {
-//                let dict: [String: String] = [color: color]
-//                res.append(dict)
-//            }
+            for color in productTable!.colors {
+                let dict: [String: String] = [color: color]
+                res.append(dict)
+            }
             colorItem.setTags(tags: res)
             //print(superProduct.color)
         }
@@ -89,20 +112,20 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             
             var res: [[String: String]] = [[String: String]]()
             
-//            for size in productTable!.sizes {
-//                let dict: [String: String] = [size: size]
-//                res.append(dict)
-//            }
+            for size in productTable!.sizes {
+                let dict: [String: String] = [size: size]
+                res.append(dict)
+            }
             clothesSizeItem.setTags(tags: res)
         }
         
         if let weightItem = getFormItemFromKey(WEIGHT_KEY) as? WeightFormItem {
             
             var res: [[String: String]] = [[String: String]]()
-//            for size in productTable!.weights {
-//                let dict: [String: String] = [size: size]
-//                res.append(dict)
-//            }
+            for size in productTable!.weights {
+                let dict: [String: String] = [size: size]
+                res.append(dict)
+            }
             weightItem.setTags(tags: res)
         }
         
@@ -139,6 +162,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             shippingFee = productTable!.prices[selected_idx].shipping_fee
             updateShippingFee()
         }
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -146,7 +170,11 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section_keys[section].count
+        if section_keys.count == 0 {
+            return 0
+        } else {
+            return section_keys[section].count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -294,7 +322,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
         
-        OrderService.instance.update(t: SuperOrder.self, params: params) { (success) in
+        OrderService.instance.update(params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
                 let order_token: String = OrderService.instance.order_token

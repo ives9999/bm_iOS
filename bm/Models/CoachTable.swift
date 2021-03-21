@@ -40,6 +40,7 @@ class CoachTable: Table {
     var manager_id: Int = -1
     var color: String = ""
     var city_id: Int = -1
+    var citys: [CityTable] = [CityTable]()
     
     var city_show: String = ""
     var mobile_show: String = ""
@@ -61,6 +62,7 @@ class CoachTable: Table {
         case manager_id
         case color
         case city_id
+        case citys
     }
     
     required init(from decoder: Decoder) throws {
@@ -82,6 +84,7 @@ class CoachTable: Table {
         do {manager_id = try container.decode(Int.self, forKey: .manager_id)}catch{manager_id = 0}
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
         do {city_id = try container.decode(Int.self, forKey: .city_id)}catch{city_id = 0}
+        do {citys = try container.decode([CityTable].self, forKey: .citys)}catch{citys = [CityTable]()}
     }
     
     override func filterRow() {

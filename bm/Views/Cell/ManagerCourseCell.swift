@@ -18,14 +18,14 @@ class ManagerCourseCell: SuperCell {
         // Initialization code
     }
 
-    func forRow(row: SuperCourse) {
+    func forRow(row: CourseTable) {
         titleLbl.text = row.title
         if row.featured_path.count > 0 {
             featured.downloaded(from: row.featured_path)
         }
     }
     
-    func forStoreRow(row: SuperStore) {
+    func forStoreRow(row: StoreTable) {
         titleLbl.text = row.name
         if row.featured_path.count > 0 {
             featured.downloaded(from: row.featured_path)

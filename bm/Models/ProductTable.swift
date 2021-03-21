@@ -38,13 +38,13 @@ class ProductTable: Table {
     var content: String = ""
     var alias: String = ""
     
-//    var images: [String] = [String]()
+    var images: [String] = [String]()
     var prices: [ProductPriceTable] = [ProductPriceTable]()
-//    var colors: [String] = [String]()
-//    var sizes: [String] = [String]()
-//    var weights: [String] = [String]()
-//    var shippings: [String] = [String]()
-//    var gateways: [String] = [String]()
+    var colors: [String] = [String]()
+    var sizes: [String] = [String]()
+    var weights: [String] = [String]()
+    var shippings: [String] = [String]()
+    var gateways: [String] = [String]()
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -59,6 +59,12 @@ class ProductTable: Table {
         case content
         case alias
         case prices
+        case images
+        case colors
+        case sizes
+        case weights
+        case shippings
+        case gateways
     }
     
     required init(from decoder: Decoder) throws {
@@ -76,11 +82,25 @@ class ProductTable: Table {
         do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {alias = try container.decode(String.self, forKey: .alias)}catch{alias = ""}
         do {prices = try container.decode([ProductPriceTable].self, forKey: .prices)}catch{prices=[ProductPriceTable]()}
+        do {images = try container.decode([String].self, forKey: .images)}catch{images=[String]()}
+        do {colors = try container.decode([String].self, forKey: .colors)}catch{colors=[String]()}
+        do {sizes = try container.decode([String].self, forKey: .sizes)}catch{sizes=[String]()}
+        do {weights = try container.decode([String].self, forKey: .weights)}catch{weights=[String]()}
+        do {shippings = try container.decode([String].self, forKey: .shippings)}catch{shippings=[String]()}
+        do {gateways = try container.decode([String].self, forKey: .gateways)}catch{gateways=[String]()}
     }
     
     override func filterRow() {
         
         super.filterRow()
+        if images.count > 0 {
+            for (idx, image) in images.enumerated() {
+                if !image.hasPrefix("http://") || !image.hasPrefix("https://") {
+                    let _image = BASE_URL + image
+                    images[idx] = _image
+                }
+            }
+        }
     }
 }
 

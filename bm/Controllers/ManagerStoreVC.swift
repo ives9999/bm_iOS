@@ -13,7 +13,7 @@ class ManagerStoreVC: MyTableVC {
     
     var token: String?
     var manager_token: String?
-    var superStores: SuperStores?
+    var storesTable: StoresTable?
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -34,13 +34,13 @@ class ManagerStoreVC: MyTableVC {
         }
         
         Global.instance.addSpinner(superView: self.view)
-        CourseService.instance.getList(t: SuperStore.self, t1: SuperStores.self, token: token, _filter: filter, page: 1, perPage: 100) { (success) in
+        StoreService.instance.getList(t: StoresTable.self, token: token, _filter: filter, page: 1, perPage: 100) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                self.superStores = (StoreService.instance.superModel as! SuperStores)
+                self.storesTable = (StoreService.instance.tables as! StoresTable)
                 //self.superCourses!.printRows()
-                if self.superStores != nil {
-                    if self.superStores!.totalCount == 0 {
+                if self.storesTable != nil {
+                    if self.storesTable!.totalCount == 0 {
                         let alert = SCLAlertView()
                         alert.showInfo("目前無您管理的體育用品店", subTitle: "")
                     } else {
@@ -59,8 +59,8 @@ class ManagerStoreVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if superStores != nil {
-            return superStores!.rows.count
+        if storesTable != nil {
+            return storesTable!.rows.count
         } else {
             return 0
         }
@@ -69,8 +69,8 @@ class ManagerStoreVC: MyTableVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ManagerCourseCell
         //cell.blacklistCellDelegate = self
-        if superStores != nil && superStores!.rows.indices.contains(indexPath.row) {
-            let row = superStores!.rows[indexPath.row]
+        if storesTable != nil && storesTable!.rows.indices.contains(indexPath.row) {
+            let row = storesTable!.rows[indexPath.row]
             //row.printRow()
             cell.forStoreRow(row: row)
         }
@@ -80,9 +80,9 @@ class ManagerStoreVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var row: SuperStore? = nil
-        if superStores != nil && superStores!.rows.indices.contains(indexPath.row) {
-            row = superStores!.rows[indexPath.row]
+        var row: StoreTable? = nil
+        if storesTable != nil && storesTable!.rows.indices.contains(indexPath.row) {
+            row = storesTable!.rows[indexPath.row]
         }
         
         var title = "體育用品店"

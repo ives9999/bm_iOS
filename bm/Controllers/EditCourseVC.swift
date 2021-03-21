@@ -27,7 +27,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     var course_token: String? = nil
     var coach_token: String? = nil
     
-    var superCourse: SuperCourse? = nil
+    var courseTable: CourseTable? = nil
     
     var delegate: EditCourseDelegate?
 
@@ -61,11 +61,11 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     override func refresh() {
         Global.instance.addSpinner(superView: view)
         let params: [String: String] = ["token": course_token!]
-        CourseService.instance.getOne(t: SuperCourse.self, params: params) { (success) in
+        CourseService.instance.getOne(t: CourseTable.self, params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                let superModel = CourseService.instance.superModel
-                self.superCourse = (superModel as! SuperCourse)
+                let table: Table = CourseService.instance.table!
+                self.courseTable = table as? CourseTable
                 self.putValue()
                 self.tableView.reloadData()
             } else {
@@ -76,8 +76,8 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     func putValue() {
-        if superCourse != nil {
-            let mirror: Mirror? = Mirror(reflecting: superCourse!)
+        if courseTable != nil {
+            let mirror: Mirror? = Mirror(reflecting: courseTable!)
             if mirror != nil {
                 for formItem in self.form.formItems {
                     let name = formItem.name!
@@ -97,7 +97,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                 }
             }
             //featuredView.s
-            let featured_path = superCourse!.featured_path
+            let featured_path = courseTable!.featured_path
             if featured_path.count > 0 {
                 //print(featured_path)
                 featuredView.setPickedImage(url: featured_path)

@@ -280,6 +280,10 @@
 		B3F6B4512605002E0000F9E0 /* SignupNormalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B4502605002E0000F9E0 /* SignupNormalTable.swift */; };
 		B3F6B456260500650000F9E0 /* SignupCancelTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B455260500650000F9E0 /* SignupCancelTable.swift */; };
 		B3F6B45B260500AC0000F9E0 /* SignupStandbyTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B45A260500AC0000F9E0 /* SignupStandbyTab.swift */; };
+		B3F6B4632605C9190000F9E0 /* CityTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B4622605C9180000F9E0 /* CityTable.swift */; };
+		B3F6B4682605D5200000F9E0 /* ShippingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B4672605D5200000F9E0 /* ShippingTable.swift */; };
+		B3F6B46D2605E80F0000F9E0 /* PaymentTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B46C2605E80F0000F9E0 /* PaymentTable.swift */; };
+		B3F6B47A260603A70000F9E0 /* OrderTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B479260603A70000F9E0 /* OrderTable.swift */; };
 		B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */; };
 		B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B6215D27BE005CBBC1 /* Checkbox.swift */; };
 		B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */; };
@@ -651,6 +655,10 @@
 		B3F6B4502605002E0000F9E0 /* SignupNormalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNormalTable.swift; sourceTree = "<group>"; };
 		B3F6B455260500650000F9E0 /* SignupCancelTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCancelTable.swift; sourceTree = "<group>"; };
 		B3F6B45A260500AC0000F9E0 /* SignupStandbyTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupStandbyTab.swift; sourceTree = "<group>"; };
+		B3F6B4622605C9180000F9E0 /* CityTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTable.swift; sourceTree = "<group>"; };
+		B3F6B4672605D5200000F9E0 /* ShippingTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingTable.swift; sourceTree = "<group>"; };
+		B3F6B46C2605E80F0000F9E0 /* PaymentTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTable.swift; sourceTree = "<group>"; };
+		B3F6B479260603A70000F9E0 /* OrderTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTable.swift; sourceTree = "<group>"; };
 		B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		B3F8C3B6215D27BE005CBBC1 /* Checkbox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkbox.swift; sourceTree = "<group>"; };
 		B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC_next.swift; sourceTree = "<group>"; };
@@ -1259,6 +1267,10 @@
 				B3F6B4502605002E0000F9E0 /* SignupNormalTable.swift */,
 				B3F6B455260500650000F9E0 /* SignupCancelTable.swift */,
 				B3F6B45A260500AC0000F9E0 /* SignupStandbyTab.swift */,
+				B3F6B4622605C9180000F9E0 /* CityTable.swift */,
+				B3F6B4672605D5200000F9E0 /* ShippingTable.swift */,
+				B3F6B46C2605E80F0000F9E0 /* PaymentTable.swift */,
+				B3F6B479260603A70000F9E0 /* OrderTable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1636,6 +1648,7 @@
 				B3E4D1D22602EF1900D78210 /* TeachTable.swift in Sources */,
 				B3A9844C255918CF00DCD0F6 /* List1Cell.swift in Sources */,
 				B3A253DE256A9E43004B8A03 /* CityFormItem.swift in Sources */,
+				B3F6B46D2605E80F0000F9E0 /* PaymentTable.swift in Sources */,
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,
 				B3F6B4512605002E0000F9E0 /* SignupNormalTable.swift in Sources */,
 				B3308C511FDA5311006A83B6 /* ShowTempPlayVC.swift in Sources */,
@@ -1818,6 +1831,7 @@
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */,
 				B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */,
+				B3F6B4632605C9190000F9E0 /* CityTable.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* TeachService.swift in Sources */,
 				B3E8C2A022074CC90008ED25 /* SuperCity.swift in Sources */,
 				B326C7CC256E2F0D0048A2C2 /* SelectAreasVC.swift in Sources */,
@@ -1826,6 +1840,7 @@
 				B33C1AB921BD10B8006F2BEB /* StatusFormItem.swift in Sources */,
 				B3A2542225723F5B004B8A03 /* SelectManagers.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
+				B3F6B47A260603A70000F9E0 /* OrderTable.swift in Sources */,
 				B3B4EF5D257B614C00EE15D0 /* PrivacyFormItem.swift in Sources */,
 				B3B7589125A816D2006ACC33 /* PlainFormItem.swift in Sources */,
 				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
@@ -1834,6 +1849,7 @@
 				B30C954C1FEA8CDA005F71EF /* PasswordVC.swift in Sources */,
 				B3649416207DCB280030CF44 /* SCLExtensions.swift in Sources */,
 				B3756EE521B95DD5006893E1 /* ColorSelectVC.swift in Sources */,
+				B3F6B4682605D5200000F9E0 /* ShippingTable.swift in Sources */,
 				B326C7BC256CE0950048A2C2 /* SelectCitysVC.swift in Sources */,
 				B3E4D17C25FF9E3900D78210 /* Table.swift in Sources */,
 				B362265D25E54C9D00D98317 /* HomeTotalAdVC.swift in Sources */,
@@ -1935,7 +1951,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1960,7 +1976,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2119,7 +2135,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
@@ -2151,7 +2167,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.6.2;
+				MARKETING_VERSION = 1.7.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";

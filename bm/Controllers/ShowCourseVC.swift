@@ -585,7 +585,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         let signup_html = "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
         let cancel_signup_html = "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
         let cant_cancel_signup_html = "已經超過取消報名期限，無法取消\r\n" + "報名課程日期是：" + course_date + "\r\n" + "報名取消截止時間是：" + course_deadline.noSec()
-        let standby_html = "此課程報名已經額滿，請排候補" + "\r\n" + signup_html
+        //let standby_html = "此課程報名已經額滿，請排候補" + "\r\n" + signup_html
         
         var title: String = ""
         var msg = signup_html

@@ -40,17 +40,17 @@ class ManagerVC: MyTableVC {
         getManagerList()
     }
     func getManagerList() {
-        if Member.instance.isLoggedIn {
-            _getManagerList(source: source, titleField: titleField) { (success) in
-                if (success) {
-                    self.tableView.reloadData()
-                    self.refreshControl.endRefreshing()
-                } else {
-                    self.warning(self.msg)
-                    self.refreshControl.endRefreshing()
-                }
-            }
-        }
+//        if Member.instance.isLoggedIn {
+//            _getManagerList(source: source, titleField: titleField) { (success) in
+//                if (success) {
+//                    self.tableView.reloadData()
+//                    self.refreshControl.endRefreshing()
+//                } else {
+//                    self.warning(self.msg)
+//                    self.refreshControl.endRefreshing()
+//                }
+//            }
+//        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
