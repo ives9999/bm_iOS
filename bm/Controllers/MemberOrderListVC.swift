@@ -31,7 +31,7 @@ class MemberOrderListVC: ListVC {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
         
-        refresh()
+        //refresh()
     }
     
     override func refresh() {

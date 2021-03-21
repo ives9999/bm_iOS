@@ -525,16 +525,16 @@ class DataService {
                     var s: T? = nil
                     do {
                         if response.data != nil {
-                            //let json = JSON(value)
-                            //print(json)
+//                            let json = JSON(value)
+//                            print(json)
                             s = try JSONDecoder().decode(t, from: response.data!)
                             if s != nil {
                                 self.table = s!
                                 self.table!.filterRow()
                                 //s!.printRow()
-//                                let s1: ProductTable = s as! ProductTable
-//                                for image in s1.images {
-//                                    print(image)
+//                                let s1: OrderTable = s as! OrderTable
+//                                for image in s1.product!.prices {
+//                                    image.printRow()
 //                                }
 //                                if s1.images != nil {
 //                                    s1.images.printRow()

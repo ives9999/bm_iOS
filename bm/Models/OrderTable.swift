@@ -58,8 +58,8 @@ class OrderTable: Table {
     var product: ProductTable?
     
     var order_clothes: [OrderClothesTable] = [OrderClothesTable]()
-    var order_rackets: [OrderRacketTable] = [OrderRacketTable]()
-    var order_mejumps: [OrderMeJumpTable] = [OrderMeJumpTable]()
+    var order_racket: [OrderRacketTable] = [OrderRacketTable]()
+    var order_mejump: [OrderMeJumpTable] = [OrderMeJumpTable]()
     
     var attribute: String = ""
     var unit: String = "件"
@@ -108,8 +108,8 @@ class OrderTable: Table {
         case product
         
         case order_clothes
-        case order_rackets
-        case order_mejumps
+        case order_racket
+        case order_mejump
         case attribute
         case address
         case product_name
@@ -149,8 +149,8 @@ class OrderTable: Table {
         do {product = try container.decode(ProductTable.self, forKey: .product)}catch{product = nil}
         
         do {order_clothes = try container.decode([OrderClothesTable].self, forKey: .order_clothes)}catch{order_clothes = [OrderClothesTable]()}
-        do {order_rackets = try container.decode([OrderRacketTable].self, forKey: .order_clothes)}catch{order_rackets = [OrderRacketTable]()}
-        do {order_mejumps = try container.decode([OrderMeJumpTable].self, forKey: .order_clothes)}catch{order_mejumps = [OrderMeJumpTable]()}
+        do {order_racket = try container.decode([OrderRacketTable].self, forKey: .order_clothes)}catch{order_racket = [OrderRacketTable]()}
+        do {order_mejump = try container.decode([OrderMeJumpTable].self, forKey: .order_clothes)}catch{order_mejump = [OrderMeJumpTable]()}
         
         do {attribute = try container.decode(String.self, forKey: .attribute)}catch{attribute = ""}
         do {address = try container.decode(String.self, forKey: .address)}catch{address = ""}
@@ -172,8 +172,8 @@ class OrderTable: Table {
         var product_price: Int = getProductPrice()
         product_price = product_price * quantity
         
-        product_price_show = thousandNumber(product_price)
-        shipping_fee_show = thousandNumber(shipping_fee)
+        product_price_show = thousandNumber(product_price) + "元"
+        shipping_fee_show = thousandNumber(shipping_fee) + "元"
         amount_show = thousandNumber(amount) + "元"
         
         created_at_show = created_at.noSec()
@@ -216,7 +216,7 @@ class OrderTable: Table {
                 attributes.append(attribute)
             }
         } else if product_type == "racket" {
-            for item in order_rackets {
+            for item in order_racket {
                 let color: String = item.color
                 let weight: String = item.weight
                 unit = item.unit
@@ -230,7 +230,7 @@ class OrderTable: Table {
                 attributes.append(attribute)
             }
         } else if product_type == "mejump" {
-            for item in order_mejumps {
+            for item in order_mejump {
                 let title: String = item.title
                 unit = item.unit
                 let quantity: String = String(item.quantity) + unit
@@ -262,11 +262,11 @@ class OrderTable: Table {
                 price_id = tmp.price_id
             }
         } else if product_type == "racket" {
-            for tmp in order_rackets {
+            for tmp in order_racket {
                 price_id = tmp.price_id
             }
         } else if product_type == "mejump" {
-            for tmp in order_mejumps {
+            for tmp in order_mejump {
                 price_id = tmp.price_id
             }
         }
@@ -274,17 +274,18 @@ class OrderTable: Table {
     }
     
     private func getProductPrice()-> Int {
-        let price_id: Int = getProductPriceID()
+        //let price_id: Int = getProductPriceID()
         
         var product_price: Int = 9999999
-        if product != nil {
+        if product != nil && product!.prices.count > 0 {
             let prices: [ProductPriceTable] = product!.prices
-            for price in prices {
-                if price.id == price_id {
-                    product_price = price.price_member
-                    break
-                }
-            }
+            product_price = prices[0].price_member
+//            for price in prices {
+//                if price.id == price_id {
+//                    product_price = price.price_member
+//                    break
+//                }
+//            }
         }
         return product_price
     }

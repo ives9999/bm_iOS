@@ -40,10 +40,10 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     var storeTable: StoreTable?
     var store_token: String?
     
-    var tableRowKeys:[String] = ["tel_text","mobile_text","address","fb","line","website","email","business_time","pv","created_at_show"]
+    var tableRowKeys:[String] = ["tel_show","mobile_show","address","fb","line","website","email","business_time","pv","created_at_show"]
     var tableRows: [String: [String:String]] = [
-        "tel_text":["icon":"tel","title":"市內電話","content":""],
-        "mobile_text":["icon":"mobile","title":"行動電話","content":""],
+        "tel_show":["icon":"tel","title":"市內電話","content":""],
+        "mobile_show":["icon":"mobile","title":"行動電話","content":""],
         "address":["icon":"marker","title":"住址","content":""],
         "fb":["icon":"fb","title":"FB","content":""],
         "line":["icon":"line","title":"line","content":""],

@@ -247,8 +247,10 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         var selectedImage: UIImage?
         if let editedImage = info[.editedImage] as? UIImage {
             selectedImage = editedImage
+            isFeaturedChange = true
         } else if let originalImage = info[.originalImage] as? UIImage {
             selectedImage = originalImage
+            isFeaturedChange = true
         }
         featuredView.setPickedImage(image: selectedImage!)
         picker.dismiss(animated: true, completion: nil)
