@@ -161,7 +161,7 @@ class StoreVC: ListVC, List1CellDelegate {
     
     func cellShowMap(indexPath: IndexPath?) {
         if indexPath != nil {
-            let row = lists1[indexPath!.row] as! SuperStore
+            let row = lists1[indexPath!.row] as! StoreTable
             _showMap(title: row.name, address: row.address)
         } else {
             warning("index path 為空值，請洽管理員")
@@ -170,7 +170,7 @@ class StoreVC: ListVC, List1CellDelegate {
     
     func cellTel(indexPath: IndexPath?) {
         if indexPath != nil {
-            let row = lists1[indexPath!.row] as! SuperStore
+            let row = lists1[indexPath!.row] as! StoreTable
             row.tel.makeCall()
         } else {
             warning("index path 為空值，請洽管理員")
@@ -179,7 +179,7 @@ class StoreVC: ListVC, List1CellDelegate {
     
     func cellMobile(indexPath: IndexPath?) {
         if indexPath != nil {
-            let row = lists1[indexPath!.row] as! SuperStore
+            let row = lists1[indexPath!.row] as! StoreTable
             row.mobile.makeCall()
         } else {
             warning("index path 為空值，請洽管理員")
@@ -199,7 +199,7 @@ class StoreVC: ListVC, List1CellDelegate {
     
     func cellEdit(indexPath: IndexPath?) {
         if indexPath != nil {
-            let row = lists1[indexPath!.row] as! SuperStore
+            let row = lists1[indexPath!.row] as! StoreTable
             if #available(iOS 13.0, *) {
                 let storyboard = UIStoryboard(name: "More", bundle: nil)
                 if let viewController = storyboard.instantiateViewController(identifier: TO_EDIT_STORE) as? EditStoreVC {
@@ -220,7 +220,7 @@ class StoreVC: ListVC, List1CellDelegate {
     
     func cellDelete(indexPath: IndexPath?) {
         if indexPath != nil {
-            let row = lists1[indexPath!.row] as! SuperStore
+            let row = lists1[indexPath!.row] as! StoreTable
             let appearance = SCLAlertView.SCLAppearance(
                 showCloseButton: false
             )
