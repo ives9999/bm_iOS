@@ -260,6 +260,12 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     func isImageSet(_ b: Bool) {}
     
     func myPresent(_ viewController: UIViewController) {
+//        if let popoverController = viewController.popoverPresentationController {
+//            let popView = viewController.view
+//            popoverController.sourceView = viewController.view
+//            popoverController.sourceRect = CGRect(x: popView!.bounds.midX, y: popView!.bounds.midY, width: 0, height: 0)
+//            popoverController.permittedArrowDirections = []
+//        }
         self.present(viewController, animated: true, completion: nil)
     }
 

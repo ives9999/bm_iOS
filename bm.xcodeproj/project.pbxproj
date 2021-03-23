@@ -1945,7 +1945,7 @@
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
@@ -1970,7 +1970,7 @@
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
@@ -2123,7 +2123,7 @@
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = default;
 				DEVELOPMENT_TEAM = BYF37727CY;
@@ -2156,7 +2156,7 @@
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEBUG_ACTIVITY_MODE = "";
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;

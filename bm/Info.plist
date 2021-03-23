@@ -54,17 +54,17 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>App需要你同意，才能使用媒體資料庫</string>
+	<string>App需要你同意，才能使用媒體資料庫，然後設定會員圖片或設定本APP所提供各種功能的相片</string>
 	<key>NSCameraUsageDescription</key>
-	<string>App需要你同意，才能使用相機</string>
+	<string>App需要你同意，才能使用相機，然後設定會員圖片或設定各種功能的相片</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>App需要你同意，才能使用地圖位置</string>
+	<string>App需要你同意，才能使用地圖位置來找到APP所提供資料的位置</string>
 	<key>NSLocationUsageDescription</key>
-	<string>App需要你同意，才能使用地圖位置</string>
+	<string>App需要你同意，才能使用地圖位置來找到APP所提供資料的位置</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>App需要你同意，才能使用地圖位置</string>
+	<string>App需要你同意，才能使用地圖位置來找到APP所提供資料的位置</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>App需要你同意，才能使用相簿</string>
+	<string>App需要你同意，才能使用相簿，然後設定會員圖片或設定本APP所提供功能的相片</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

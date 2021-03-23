@@ -437,6 +437,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_REGISTER) as? RegisterVC {
                 //viewController.delegate = self
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {

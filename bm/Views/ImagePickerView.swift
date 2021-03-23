@@ -69,7 +69,7 @@ class ImagePickerView: UIView {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //print("touch end")
-        let slide: UIAlertController = UIAlertController(title: "", message: "新增圖片從", preferredStyle: .actionSheet)
+        let slide: UIAlertController = UIAlertController(title: "", message: "新增圖片從", preferredStyle: .alert)
         let pictureAction: UIAlertAction = UIAlertAction(title: "照片", style: .default) { (action) in
             //print(action)
             self.openGallery()
