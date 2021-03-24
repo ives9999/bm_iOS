@@ -27,23 +27,23 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     var isFeaturedChange: Bool = false
     
     var testData: [String: String] = [
-        EMAIL_KEY: "john@housetube.tw",
-        PASSWORD_KEY: "1234",
-        REPASSWORD_KEY: "1234",
-        NAME_KEY: "孫士君",
-        NICKNAME_KEY: "孫世君",
-        DOB_KEY: "1969-01-05",
-        MOBILE_KEY: "0911299998",
-        TEL_KEY: "062295888",
-        CITY_ID_KEY: "218",
-        "city_name": "台南市",
-        AREA_ID_KEY: "219",
-        "area_name": "中西區",
-        ROAD_KEY: "南華街101號8樓",
-        FB_KEY: "https://www.facebook.com/ives.sun",
-        LINE_KEY: "ives9999"
-        //:]
-    ]
+//        EMAIL_KEY: "john@housetube.tw",
+//        PASSWORD_KEY: "1234",
+//        REPASSWORD_KEY: "1234",
+//        NAME_KEY: "孫士君",
+//        NICKNAME_KEY: "孫世君",
+//        DOB_KEY: "1969-01-05",
+//        MOBILE_KEY: "0911299998",
+//        TEL_KEY: "062295888",
+//        CITY_ID_KEY: "218",
+//        "city_name": "台南市",
+//        AREA_ID_KEY: "219",
+//        "area_name": "中西區",
+//        ROAD_KEY: "南華街101號8樓",
+//        FB_KEY: "https://www.facebook.com/ives.sun",
+//        LINE_KEY: "ives9999"
+        :]
+    //]
     
     override func viewDidLoad() {
         myTablView = tableView
