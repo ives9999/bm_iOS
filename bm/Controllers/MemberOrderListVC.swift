@@ -39,6 +39,33 @@ class MemberOrderListVC: ListVC {
         getDataStart(t: OrdersTable.self)
     }
     
+    override func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
+        
+        Global.instance.addSpinner(superView: self.view)
+
+        dataService.getList(t: t, token: Member.instance.token, _filter: params1, page: page, perPage: perPage) { (success) in
+            if (success) {
+                self.tables = self.dataService.tables!
+                self.page = self.tables!.page
+                if self.page == 1 {
+                    self.totalCount = self.tables!.totalCount
+                    self.perPage = self.tables!.perPage
+                    let _pageCount: Int = self.totalCount / self.perPage
+                    self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
+                    //print(self.totalPage)
+                    if self.refreshControl.isRefreshing {
+                        self.refreshControl.endRefreshing()
+                    }
+                }
+                self.getDataEnd(success: success)
+                Global.instance.removeSpinner(superView: self.view)
+            } else {
+                Global.instance.removeSpinner(superView: self.view)
+                self.warning(self.dataService.msg)
+            }
+        }
+    }
+    
     override func getDataEnd(success: Bool) {
         if success {
             
