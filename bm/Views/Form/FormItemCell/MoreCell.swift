@@ -51,6 +51,8 @@ class MoreCell: FormItemCell {
             }
         }
         promptBtn.isHidden = (formItem.tooltip == nil) ? true : false
-        requiredImageView.isHidden = !formItem.isRequired
+        if requiredImageView != nil {
+            requiredImageView.isHidden = !formItem.isRequired
+        }
     }
 }

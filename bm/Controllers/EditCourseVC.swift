@@ -13,7 +13,7 @@ protocol EditCourseDelegate {
     func isReload(_ yes: Bool)
 }
 
-class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ContentEditDelegate {
+class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ContentEditDelegate, ValueChangedDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var featuredView: ImagePickerView!
@@ -138,6 +138,12 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             if let formUpdatableCell = cell as? FormUPdatable {
                 item!.indexPath = indexPath
                 formUpdatableCell.update(with: item!)
+            }
+            
+            if item!.uiProperties.cellType == FormItemCellType.textField {
+                if let formCell = cell as? FormItemCell {
+                    formCell.valueDelegate = self
+                }
             }
         } else {
             cell = UITableViewCell()
@@ -303,9 +309,11 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         for formItem in form.formItems {
             if formItem.value != nil {
                 let value = formItem.value!
+                print(formItem.name)
                 params[formItem.name!] = value
             }
         }
+        //print(params)
         if action == "INSERT" {
             params[CREATED_ID_KEY] = String(Member.instance.id)
             params["cat_id"] = String(44)
@@ -316,7 +324,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         if coach_token != nil {
             params["coach_token"] = coach_token!
         }
-        //print(params)
+        print(params)
         let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
         CourseService.instance.update(_params: params, image: image) { (success) in
             if success {
@@ -352,6 +360,11 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                 SCLAlertView().showWarning("錯誤", subTitle: "新增 / 修改失敗，伺服器無法新增成功，請稍後再試")
             }
         }
+    }
+    
+    func textFieldTextChanged(formItem: FormItem, text: String) {
+        formItem.value = text
+        //print(text)
     }
     
     @IBAction func cancel(_ sender: Any) {

@@ -87,6 +87,7 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
         if coursesTable != nil && coursesTable!.rows.indices.contains(indexPath.row) {
             let row = coursesTable!.rows[indexPath.row]
             //row.printRow()
+            row.filterRow()
             cell.forRow(row: row)
         }
         
