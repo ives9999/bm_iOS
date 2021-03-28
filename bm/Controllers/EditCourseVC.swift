@@ -309,7 +309,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         for formItem in form.formItems {
             if formItem.value != nil {
                 let value = formItem.value!
-                print(formItem.name)
+                //print(formItem.name)
                 params[formItem.name!] = value
             }
         }
@@ -324,7 +324,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         if coach_token != nil {
             params["coach_token"] = coach_token!
         }
-        print(params)
+        //print(params)
         let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
         CourseService.instance.update(_params: params, image: image) { (success) in
             if success {
