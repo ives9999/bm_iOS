@@ -77,6 +77,9 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
+        
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.lightGray
     }
     
     override func viewWillAppear(_ animated: Bool) {

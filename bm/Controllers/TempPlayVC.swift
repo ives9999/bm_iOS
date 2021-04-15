@@ -8,25 +8,19 @@
 
 import UIKit
 
-class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
+class TempPlayVC: ListVC {
 
     // outlets
     
-    var model: Team!
+    //var model: Team!
     let cell_constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
-    internal(set) public var lists: [DATA] = [DATA]()
     
-    var citys: [City] = [City]()
-    var arenas: [Arena] = [Arena]()
     var days: [Int] = [Int]()
-    var degrees: [Degree] = [Degree]()
+    
+    var mysTable: TeamsTable?
     
     //key has type, play_start_time, play_end_time, time
-    var times: [String: Any] = [String: Any]()
-    var keyword: String = ""
-    
-    var params: [String: Any] = [String: Any]()
-    
+        
     lazy var bannerAd: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -36,19 +30,21 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
         
     override func viewDidLoad() {
             
-        model = Team.instance
-        sections = model.temp_play_list_sections
+        //model = Team.instance
+        //sections = model.temp_play_list_sections
         myTablView = tableView
+        dataService = TeamService.instance
         super.viewDidLoad()
         //print(degrees)
         
         
-        NotificationCenter.default.addObserver(self, selector: #selector(memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+        //NotificationCenter.default.addObserver(self, selector: #selector(memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     
-        tableView.register(TeamTempPlayListCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ListTeamCell.self, forCellReuseIdentifier: "cell")
         tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-        
+        let cellNibName = UINib(nibName: "ListTeamCell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "ListTeamCell")
         
         
 //        refreshControl = UIRefreshControl()
@@ -56,12 +52,29 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
 //        refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
 //        tableView.addSubview(refreshControl)
         
-        prepareParams()
-        refresh()
+        //prepareParams()
+        //refresh()
         
         //OneSignal.postNotification(["contents": ["en": "hello",PUSH_LANGUAGE: "有人報名臨打"], "include_player_ids": [PUSH_TEST_PLAYID]])
         if !Member.instance.justGetMemberOne && Member.instance.isLoggedIn {
             _updatePlayerIDWhenIsNull()
+        }
+    }
+    
+    override func getDataEnd(success: Bool) {
+        if success {
+            mysTable = (tables as? TeamsTable)
+            if mysTable != nil {
+                let tmps: [TeamTable] = mysTable!.rows
+                
+                if page == 1 {
+                    lists1 = [TeamTable]()
+                }
+                lists1 += tmps
+                myTablView.reloadData()
+            } else {
+                warning("轉換Table出錯，請洽管理員")
+            }
         }
     }
     
@@ -73,20 +86,20 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
 //        print("scroll view did end decelerating")
 //    }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let offsetY = scrollView.contentOffset.y
-        let contentHeight = scrollView.contentSize.height
-        if offsetY > contentHeight - scrollView.frame.size.height {
-            page += 1
-            //print("current page: \(page)")
-            //print(totalPage)
-            if page <= totalPage {
-                getDataStart(page: page, perPage: PERPAGE)
-            }
-        }
-    }
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        let offsetY = scrollView.contentOffset.y
+//        let contentHeight = scrollView.contentSize.height
+//        if offsetY > contentHeight - scrollView.frame.size.height {
+//            page += 1
+//            //print("current page: \(page)")
+//            //print(totalPage)
+//            if page <= totalPage {
+//                getDataStart(page: page, perPage: PERPAGE)
+//            }
+//        }
+//    }
     
-    func prepareParams(city_type: String="simple") {
+    override func prepareParams(city_type: String="simple") {
         var city_ids:[Int] = [Int]()
         if citys.count > 0 {
             for city in citys {
@@ -143,32 +156,34 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lists.count
+        return lists1.count
     }
     
-     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cell_constant.height
-     }
+//     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return cell_constant.height
+//     }
  
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
         let cell: TeamTempPlayListCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamTempPlayListCell
-        cell.cellDelegate = self
-        let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
-        cell.forRow(row: row)
+        //cell.cellDelegate = self
+        let row = lists1[indexPath.row] as! TeamTable
+        row.filterRow()
+        //let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
+        //cell.forRow(row: row)
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
-        let token: String = row[TOKEN_KEY]!["value"] as! String
-        performSegue(withIdentifier: TO_TEMP_PLAY_SHOW, sender: token)
-    }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //print(indexPath.row)
+        //let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
+        //let token: String = row[TOKEN_KEY]!["value"] as! String
+        if mysTable != nil {
+            let teamTable = mysTable!.rows[indexPath.row]
+            performSegue(withIdentifier: TO_SHOW_STORE, sender: teamTable.token)
+        }
+        //performSegue(withIdentifier: TO_TEMP_PLAY_SHOW, sender: token)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -178,55 +193,6 @@ class TempPlayVC: MyTableVC, TeamTempPlayListCellDelegate {
         }
     }
     
-    override func refresh() {
-        page = 1
-        getDataStart()
-    }
-    
-    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-        loadingShow()
-//        if (!isLoading) {
-//            Global.instance.addSpinner(superView: self.view)
-//            isLoading = true
-//        }
-        TeamService.instance.tempPlay_list(params:params,page: page, perPage: perPage) { (success) in
-            if success {
-                self.loadingHide()
-//                if (self.isLoading) {
-//                    Global.instance.removeSpinner(superView: self.view)
-//                    self.isLoading = false
-//                }
-                self.getDataEnd(success: success)
-            }
-        }
-    }
-    override func getDataEnd(success: Bool) {
-        if success {
-            let tmps = TeamService.instance.tempPlayList
-            if page == 1 {
-                lists = [DATA]()
-            }
-            lists += tmps
-            //print(self.lists)
-            totalCount = TeamService.instance.totalCount
-            if totalCount > 0 {
-                perPage = TeamService.instance.perPage
-                page = TeamService.instance.page
-                if page == 1 {
-                    let _pageCount: Int = totalCount / perPage
-                    totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                    if refreshControl.isRefreshing {
-                        refreshControl.endRefreshing()
-                    }
-                }
-                tableView.reloadData()
-                //self.page = self.page + 1 in CollectionView
-            }
-        }
-    }
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
     
     @objc func cityBtnPressed(sender: UIButton) {
         //print(sender.tag)

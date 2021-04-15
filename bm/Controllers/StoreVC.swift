@@ -21,8 +21,8 @@ class StoreVC: ListVC, List1CellDelegate {
             
     override func viewDidLoad() {
         myTablView = tableView
-        myTablView.allowsMultipleSelectionDuringEditing = false
-        myTablView.isUserInteractionEnabled = true
+        //myTablView.allowsMultipleSelectionDuringEditing = false
+        //myTablView.isUserInteractionEnabled = true
         dataService = StoreService.instance
         _type = "store"
         _titleField = "name"
@@ -31,12 +31,6 @@ class StoreVC: ListVC, List1CellDelegate {
         super.viewDidLoad()
         let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
-        
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = UIColor.lightGray
-        
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableView.automaticDimension
         
         //refresh()
     }
@@ -104,8 +98,8 @@ class StoreVC: ListVC, List1CellDelegate {
         
         if tableView == self.tableView {
             if mysTable != nil {
-                let superStore = mysTable!.rows[indexPath.row]
-                performSegue(withIdentifier: TO_SHOW_STORE, sender: superStore)
+                let storeTable = mysTable!.rows[indexPath.row]
+                performSegue(withIdentifier: TO_SHOW_STORE, sender: storeTable)
             }
             
         } else if tableView == searchTableView {

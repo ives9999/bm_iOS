@@ -89,13 +89,7 @@ class List1Cell: UITableViewCell {
     
     func updateStoreViews(indexPath: IndexPath, row: StoreTable) {
         //data.printRow()
-        self.backgroundColor = UIColor.clear
-        
-        if row.featured_path.count > 0 {
-            
-            featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
-            listFeatured.downloaded(from: row.featured_path)
-        }
+        _updateViews(indexPath: indexPath, row: row.self)
         
         titleLbl.text = row.name
         cityBtn.setTitle(row.city_show)
@@ -181,6 +175,21 @@ class List1Cell: UITableViewCell {
         let chevron = UIImage(named: "greater1")
         self.accessoryType = .disclosureIndicator
         self.accessoryView = UIImageView(image: chevron!)
+    }
+    
+    func updateTeamViews(indexPath: IndexPath, row: TeamTable) {
+        
+    }
+    
+    func _updateViews<T: Table>(indexPath: IndexPath, row: T) {
+        
+        self.backgroundColor = UIColor.clear
+        
+        if row.featured_path.count > 0 {
+            
+            featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
+            listFeatured.downloaded(from: row.featured_path)
+        }
     }
     
     override func layoutSubviews() {

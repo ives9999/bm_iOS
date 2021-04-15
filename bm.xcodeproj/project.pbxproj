@@ -218,6 +218,8 @@
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
 		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
 		B3BBDD95240FE88D00EB9856 /* SuperSignupCancel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD94240FE88D00EB9856 /* SuperSignupCancel.swift */; };
+		B3C495232627457700D4F727 /* ListTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C495212627457700D4F727 /* ListTeamCell.swift */; };
+		B3C495242627457700D4F727 /* ListTeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C495222627457700D4F727 /* ListTeamCell.xib */; };
 		B3CB73D923D410CD00892F75 /* OneLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73D723D410CD00892F75 /* OneLineCell.swift */; };
 		B3CB73DA23D410CD00892F75 /* OneLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CB73D823D410CD00892F75 /* OneLineCell.xib */; };
 		B3CB73DC23D5B14B00892F75 /* SuperDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73DB23D5B14B00892F75 /* SuperDate.swift */; };
@@ -590,6 +592,8 @@
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
 		B3BBDD94240FE88D00EB9856 /* SuperSignupCancel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperSignupCancel.swift; sourceTree = "<group>"; };
+		B3C495212627457700D4F727 /* ListTeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTeamCell.swift; sourceTree = "<group>"; };
+		B3C495222627457700D4F727 /* ListTeamCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTeamCell.xib; sourceTree = "<group>"; };
 		B3CB73D723D410CD00892F75 /* OneLineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineCell.swift; sourceTree = "<group>"; };
 		B3CB73D823D410CD00892F75 /* OneLineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OneLineCell.xib; sourceTree = "<group>"; };
 		B3CB73DB23D5B14B00892F75 /* SuperDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperDate.swift; sourceTree = "<group>"; };
@@ -837,6 +841,8 @@
 				B362265225E2AD3300D98317 /* OrderListCell.xib */,
 				B3E4D1D62603395300D78210 /* TeachCell.swift */,
 				B3E4D1D72603395300D78210 /* TeachCell.xib */,
+				B3C495212627457700D4F727 /* ListTeamCell.swift */,
+				B3C495222627457700D4F727 /* ListTeamCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1459,6 +1465,7 @@
 				B3B4EF57257B59EA00EE15D0 /* PrivacyCell.xib in Resources */,
 				B3FB9B222407F5EC0051186F /* Team.storyboard in Resources */,
 				B3B758A325A960B0006ACC33 /* Color1Cell.xib in Resources */,
+				B3C495242627457700D4F727 /* ListTeamCell.xib in Resources */,
 				F94E7D271F83636A00F550FD /* Assets.xcassets in Resources */,
 				B34A210121B696AA00EE6E1C /* TextFieldCell.xib in Resources */,
 				B39453722343256C000DF98E /* SignupListCell.xib in Resources */,
@@ -1631,6 +1638,7 @@
 				B3B758B125AC5051006ACC33 /* TagFormItem.swift in Sources */,
 				B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */,
 				B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */,
+				B3C495232627457700D4F727 /* ListTeamCell.swift in Sources */,
 				B3B758C625AD414E006ACC33 /* NumberCell.swift in Sources */,
 				B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */,
 				B3A253D8256A57B6004B8A03 /* StoreForm.swift in Sources */,
