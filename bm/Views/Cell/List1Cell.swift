@@ -144,12 +144,7 @@ class List1Cell: UITableViewCell {
     
     func updateProductViews(indexPath: IndexPath, row: ProductTable) {
         //data.printRow()
-        self.backgroundColor = UIColor.black
-        
-        if row.featured_path.count > 0 {
-            featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
-            listFeatured.downloaded(from: row.featured_path)
-        }
+        _updateViews(indexPath: indexPath, row: row.self)
         
         titleLbl.text = row.name
         cityBtn.setTitle("購買")
