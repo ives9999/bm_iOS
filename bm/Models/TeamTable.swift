@@ -47,15 +47,19 @@ class TeamTable: Table {
     var temp_quantity: Int = 0
     var temp_content: String = ""
     var temp_status: String = ""
+    var temp_signup_count: Int = 0
     var color: String = ""
     var city_id: Int = -1
-    var weekdays: [Int] = [Int]()
+    var weekdays: [Team_WeekdaysTable] = [Team_WeekdaysTable]()
+    var arena: ArenaTable?
     
     var city_show: String = ""
     var play_start_show: String = ""
     var play_end_show: String = ""
     var weekdays_show: String = ""
     var interval_show: String = ""
+    var temp_quantity_show: String = ""
+    var temp_signup_count_show: String = ""
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -79,9 +83,11 @@ class TeamTable: Table {
         case temp_quantity
         case temp_content
         case temp_status
+        case temp_signup_count
         case color
         case city_id
         case weekdays
+        case arena
     }
     
     required init(from decoder: Decoder) throws {
@@ -109,7 +115,11 @@ class TeamTable: Table {
         do {temp_content = try container.decode(String.self, forKey: .temp_content)}catch{temp_content = ""}
         do {temp_status = try container.decode(String.self, forKey: .temp_status)}catch{temp_status = ""}
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
-        do {weekdays = try container.decode([Int].self, forKey: .weekdays)}catch{weekdays = [Int]()}
+        
+        temp_signup_count = try container.decodeIfPresent(Int.self, forKey: .temp_signup_count) ?? 0
+        weekdays = try container.decodeIfPresent([Team_WeekdaysTable].self, forKey: .weekdays) ?? [Team_WeekdaysTable]()
+        arena = try container.decodeIfPresent(ArenaTable.self, forKey: .arena) ?? nil
+        //do {arena = try container.decode(ArenaTable.self, forKey: .arena)}catch{arena = nil}
     }
     
     override func filterRow() {
@@ -128,10 +138,18 @@ class TeamTable: Table {
             play_end_show = play_end.noSec()
         }
         
+        if temp_status == "on" {
+            temp_quantity_show = "臨打：\(temp_quantity)位"
+            temp_signup_count_show = "報名：\(temp_signup_count)位"
+        } else {
+            temp_quantity_show = "未開放"
+            temp_signup_count_show = "未開放"
+        }
+        
         if weekdays.count > 0 {
             var show: [String] = [String]()
             for weekday in weekdays {
-                let tmp: String = WEEKDAY.intToString(weekday)
+                let tmp: String = WEEKDAY.intToString(weekday.weekday)
                 show.append(tmp)
             }
             weekdays_show = show.joined(separator: ",")

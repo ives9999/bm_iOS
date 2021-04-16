@@ -13,7 +13,6 @@ import SwiftyJSON
 class OrderService: DataService {
     
     static let instance = OrderService()
-    var superProduct: SuperProduct = SuperProduct()
     var ecpay_token: String = ""
     var tokenExpireDate: String = ""
     var order_token: String = ""

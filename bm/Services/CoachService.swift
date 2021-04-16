@@ -13,9 +13,8 @@ import Alamofire
 class CoachService: DataService {
     
     static let instance = CoachService()
-    
     var superCoach: SuperCoach = SuperCoach()
-    
+        
     override init() {
         super.init()
         _model = Coach.instance

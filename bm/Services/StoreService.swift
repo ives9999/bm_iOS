@@ -10,12 +10,9 @@ import Foundation
 
 class StoreService: DataService {
     static let instance = StoreService()
-    var superStores: SuperStores = SuperStores()
-    var superStore: SuperStore = SuperStore()
     
     override init() {
         super.init()
-        superModel = SuperStores(dict: [String : Any]())
     }
     
     override func getListURL() -> String {

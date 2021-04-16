@@ -34,7 +34,7 @@ class CourseCalendarVC: ListVC {
         ["title":"結束時間之前","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":END_TIME_KEY,"show":"不限","segue":TO_SINGLE_SELECT,"sender":[String: Any](),"value":"","value_type":"String"]
     ]
     
-    var superCourses: SuperCourses? = nil
+    var mysTable: CoursesTable? = nil
     internal(set) public var lists2: [SuperModel] = [SuperModel]()
     
     //let session: UserDefaults = UserDefaults.standard
@@ -185,26 +185,19 @@ class CourseCalendarVC: ListVC {
     
     override func getDataEnd(success: Bool) {
         if success {
-            let superModel: SuperModel = CourseService.instance.superModel
-            superCourses = (superModel as! SuperCourses)
-            //superCourses = CourseService.instance.superCourses
-            let tmps: [SuperCourse] = superCourses!.rows
             
-            //print(tmps)
-            //print("===============")
-            if page == 1 {
-                lists2 = [SuperCourse]()
+            mysTable = (tables as? CoursesTable)
+            if mysTable != nil {
+                let tmps: [CourseTable] = mysTable!.rows
+                
+                if page == 1 {
+                    lists1 = [CourseTable]()
+                }
+                lists1 += tmps
+                myTablView.reloadData()
+            } else {
+                warning("轉換Table出錯，請洽管理員")
             }
-            lists2 += tmps
-            //print(self.lists)
-
-            makeCourseArr()
-            //print(dateCourses)
-            if refreshControl.isRefreshing {
-                refreshControl.endRefreshing()
-            }
-            myTablView.reloadData()
-            //self.page = self.page + 1 in CollectionView
         }
     }
     
@@ -217,17 +210,17 @@ class CourseCalendarVC: ListVC {
         }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        let d: [String: Any] = dateCourses[indexPath.row]
-        guard let courses: [SuperCourse] = d["rows"] as? [SuperCourse] else { return 44}
-        if courses.count > 0 {
-            let height: Int = course_height * courses.count + ((courses.count-1)*10) + 80
-            return CGFloat(height)
-        } else {
-            return 44
-        }
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//
+//        let d: [String: Any] = dateCourses[indexPath.row]
+//        guard let courses: [Course] = d["rows"] as? [SuperCourse] else { return 44}
+//        if courses.count > 0 {
+//            let height: Int = course_height * courses.count + ((courses.count-1)*10) + 80
+//            return CGFloat(height)
+//        } else {
+//            return 44
+//        }
+//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -279,15 +272,15 @@ class CourseCalendarVC: ListVC {
                 course["weekday_i"] = weekday_i
                 course["weekday_c"] = weekday_c
                 
-                var rows: [SuperCourse] = [SuperCourse]()
+                var rows: [CourseTable] = [CourseTable]()
                 for superModel in lists1 {
-                    if let superCourse = superModel as? SuperCourse {
+                    if let courseTable = superModel as? CourseTable {
                         //superCourse.printRow()
-                        for weekday in superCourse.weekday_arr {
-                            if weekday == weekday_i {
-                                rows.append(superCourse)
-                            }
-                        }
+//                        for weekday in courseTable.weekday_arr {
+//                            if weekday == weekday_i {
+//                                rows.append(superCourse)
+//                            }
+//                        }
                     }
                 }
                 course["rows"] = rows

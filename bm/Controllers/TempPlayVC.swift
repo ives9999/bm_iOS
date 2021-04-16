@@ -40,11 +40,11 @@ class TempPlayVC: ListVC {
         
         //NotificationCenter.default.addObserver(self, selector: #selector(memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     
-        //tableView.register(ListTeamCell.self, forCellReuseIdentifier: "cell")
+        //tableView.register(TeamListCell.self, forCellReuseIdentifier: "cell")
         //tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-//        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
-//        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
+        let cellNibName = UINib(nibName: "TeamListCell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
         
 //        refreshControl = UIRefreshControl()
@@ -171,14 +171,14 @@ class TempPlayVC: ListVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? List1Cell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? TeamListCell {
             
             //cell.cellDelegate = self
             let row = lists1[indexPath.row] as! TeamTable
             row.filterRow()
             //row.printRow()
             
-            cell.updateTeamViews(indexPath: indexPath, row: row)
+            cell.updateViews(indexPath: indexPath, row: row)
             
             return cell
         } else {

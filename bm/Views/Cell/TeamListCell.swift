@@ -8,26 +8,45 @@
 
 import UIKit
 
-class TeamListCell: SuperCell {
+class TeamListCell: List2Cell {
     
-    @IBOutlet weak var listFeatured: UIImageView!
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var cityBtn: CityButton!
     @IBOutlet weak var areanBtn: CityButton!
     @IBOutlet weak var weekendLbl: SuperLabel!
     @IBOutlet weak var intervalLbl: SuperLabel!
-    @IBOutlet weak var tempplay_countLbl: SuperLabel!
+    @IBOutlet weak var temp_qnantityLbl: SuperLabel!
     @IBOutlet weak var signup_countLbl: SuperLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func updateViews(indexPath: IndexPath, row: TeamTable) {
+        
+        _updateViews(indexPath: indexPath, row: row.self)
+        titleLbl.text = row.name
+        cityBtn.setTitle(row.city_show)
+        if row.arena != nil {
+            areanBtn.setTitle(row.arena!.name)
+        } else {
+            areanBtn.isHidden = true
+        }
+        
+        if row.weekdays_show.count > 0 {
+            weekendLbl.text = row.weekdays_show
+        } else {
+            weekendLbl.text = "未提供"
+        }
+        
+        if row.interval_show.count > 0 {
+            intervalLbl.text = row.interval_show
+        } else {
+            intervalLbl.text = "未提供"
+        }
+        
+        temp_qnantityLbl.text = row.temp_quantity_show
+        signup_countLbl.text = row.temp_signup_count_show
     }
     
 }

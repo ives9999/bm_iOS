@@ -66,18 +66,6 @@ class SuperModel: NSObject, JSONParsable {
                 } else if key == "managers" {
                     let parsedArray = setArrayDictionary(value, on: property, forKey: key)
                     setValue(parsedArray, forKey: key)
-                } else if key == "prices" {
-                    let parsedArray: [SuperProductPrice] = parse(property: property, array: arrayValue) as! [SuperProductPrice]
-                    setValue(parsedArray, forKey: key)
-                } else if key == "order_clothes" {
-                    let parsedArray: [SuperOrderClothes] = parse(property: property, array: arrayValue) as! [SuperOrderClothes]
-                    setValue(parsedArray, forKey: key)
-                } else if key == "order_racket" {
-                    let parsedArray: [SuperOrderRacket] = parse(property: property, array: arrayValue) as! [SuperOrderRacket]
-                    setValue(parsedArray, forKey: key)
-                } else if key == "order_mejump" {
-                    let parsedArray: [SuperOrderMejump] = parse(property: property, array: arrayValue) as! [SuperOrderMejump]
-                    setValue(parsedArray, forKey: key)
                 } else if
                     key == "images" || key == "sizes" || key == "weights" || key == "shippings" || key == "gateways" || key == "colors" {
                     let parsedArray = setArray(value, on: property, forKey: key)
@@ -101,15 +89,6 @@ class SuperModel: NSObject, JSONParsable {
                     setValue(superDate, forKey: key)
                 } else if key == "nextCourseTime" {
                     setValue(value, on: property, forKey: key)
-                } else if key == "payment" {
-                    let model: SuperPayment = JSONParse.parse(data: value)
-                    setValue(model, forKey: key)
-                } else if key == "shipping" {
-                    let model: SuperShipping = JSONParse.parse(data: value)
-                    setValue(model, forKey: key)
-                } else if key == "product" {
-                    let model: SuperProduct = JSONParse.parse(data: value)
-                    setValue(model, forKey: key)
                 }
 //                else if key == "colors" {
 //                    let parsed: [String: Any] = setDictionary(value, on: property, forKey: key)
