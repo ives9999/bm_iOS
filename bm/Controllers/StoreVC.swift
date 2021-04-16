@@ -29,8 +29,6 @@ class StoreVC: ListVC, List1CellDelegate {
         searchRows = _searchRows
         
         super.viewDidLoad()
-        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
-        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
         //refresh()
     }

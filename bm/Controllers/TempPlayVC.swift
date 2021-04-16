@@ -40,11 +40,11 @@ class TempPlayVC: ListVC {
         
         //NotificationCenter.default.addObserver(self, selector: #selector(memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     
-        tableView.register(ListTeamCell.self, forCellReuseIdentifier: "cell")
-        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        //tableView.register(ListTeamCell.self, forCellReuseIdentifier: "cell")
+        //tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         
-        let cellNibName = UINib(nibName: "ListTeamCell", bundle: nil)
-        tableView.register(cellNibName, forCellReuseIdentifier: "ListTeamCell")
+//        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
+//        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
         
 //        refreshControl = UIRefreshControl()
@@ -59,6 +59,11 @@ class TempPlayVC: ListVC {
         if !Member.instance.justGetMemberOne && Member.instance.isLoggedIn {
             _updatePlayerIDWhenIsNull()
         }
+    }
+    
+    override func refresh() {
+        page = 1
+        getDataStart(t: TeamsTable.self)
     }
     
     override func getDataEnd(success: Bool) {
@@ -166,14 +171,19 @@ class TempPlayVC: ListVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
-        let cell: TeamTempPlayListCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TeamTempPlayListCell
-        //cell.cellDelegate = self
-        let row = lists1[indexPath.row] as! TeamTable
-        row.filterRow()
-        //let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
-        //cell.forRow(row: row)
-        
-        return cell
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? List1Cell {
+            
+            //cell.cellDelegate = self
+            let row = lists1[indexPath.row] as! TeamTable
+            row.filterRow()
+            //row.printRow()
+            
+            cell.updateTeamViews(indexPath: indexPath, row: row)
+            
+            return cell
+        } else {
+            return ListCell()
+        }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

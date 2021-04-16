@@ -135,9 +135,7 @@ class List1Cell: UITableViewCell {
 //            deleteIcon.isHidden = false
 //        }
         
-        let chevron = UIImage(named: "greater1")
-        self.accessoryType = .disclosureIndicator
-        self.accessoryView = UIImageView(image: chevron!)
+        
         
         //print(contentView.frame.height)
     }
@@ -149,7 +147,10 @@ class List1Cell: UITableViewCell {
         titleLbl.text = row.name
         cityBtn.setTitle("購買")
         if row.prices.count > 0 {
-            telLbl.text = "價格： \(row.prices[0].price_member) 元"
+            let tmp: String = (row.prices[0].price_member).formattedWithSeparator
+            //let tmp = m.formattedWithSeparator
+            let price: String = "NT$ \(tmp)"
+            telLbl.text = "價格： \(price) 元"
         } else {
             telLbl.text = "未提供"
         }
@@ -166,14 +167,13 @@ class List1Cell: UITableViewCell {
         refreshIcon.visibility = .gone
         editIcon.visibility = .gone
         deleteIcon.visibility = .gone
-        
-        let chevron = UIImage(named: "greater1")
-        self.accessoryType = .disclosureIndicator
-        self.accessoryView = UIImageView(image: chevron!)
     }
     
     func updateTeamViews(indexPath: IndexPath, row: TeamTable) {
         
+        _updateViews(indexPath: indexPath, row: row.self)
+        titleLbl.text = row.name
+        cityBtn.setTitle(row.city_show)
     }
     
     func _updateViews<T: Table>(indexPath: IndexPath, row: T) {
@@ -185,6 +185,10 @@ class List1Cell: UITableViewCell {
             featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
             listFeatured.downloaded(from: row.featured_path)
         }
+        
+        let chevron = UIImage(named: "greater1")
+        self.accessoryType = .disclosureIndicator
+        self.accessoryView = UIImageView(image: chevron!)
     }
     
     override func layoutSubviews() {

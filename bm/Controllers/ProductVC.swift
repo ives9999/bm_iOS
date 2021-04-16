@@ -27,14 +27,8 @@ class ProductVC: ListVC, List1CellDelegate {
         searchRows = _searchRows
         
         super.viewDidLoad()
-        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
-        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
-        
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = UIColor.lightGray
-        
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableView.automaticDimension
+//        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
+//        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
         //refresh()
     }

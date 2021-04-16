@@ -64,13 +64,16 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         setIden(item:_type, titleField: _titleField)
-        let cellNibName = UINib(nibName: "ListCell", bundle: nil)
-        myTablView.register(cellNibName, forCellReuseIdentifier: "listcell")
+        //let cellNibName = UINib(nibName: "ListCell", bundle: nil)
+        //myTablView.register(cellNibName, forCellReuseIdentifier: "listcell")
         
         layerHeight = workAreaHeight - 100
         
         searchTableView.dataSource = self
         searchTableView.delegate = self
+        
+        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
         let editCellNib = UINib(nibName: "EditCell", bundle: nil)
         searchTableView.register(editCellNib, forCellReuseIdentifier: "search_cell")
