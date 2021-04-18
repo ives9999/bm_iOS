@@ -10,7 +10,6 @@ import UIKit
 
 class TeamListCell: List2Cell {
     
-    @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var cityBtn: CityButton!
     @IBOutlet weak var areanBtn: CityButton!
     @IBOutlet weak var weekendLbl: SuperLabel!
@@ -19,7 +18,14 @@ class TeamListCell: List2Cell {
     @IBOutlet weak var signup_countLbl: SuperLabel!
 
     override func awakeFromNib() {
+        
         super.awakeFromNib()
+        let _icons = [mapIcon, mobileIcon, likeIcon]
+        let _constraints = [mapConstraint, mobileConstraint, likeConstraint]
+        for (idx,_icon) in _icons.enumerated() {
+            let w: CGFloat = CGFloat(idx+1) * iconMargin + CGFloat(idx) * iconWidth
+            icons.append(["icon": _icon!, "constraint": _constraints[idx]!, "constant": w])
+        }
     }
 
     func updateViews(indexPath: IndexPath, row: TeamTable) {
@@ -47,6 +53,16 @@ class TeamListCell: List2Cell {
         
         temp_qnantityLbl.text = row.temp_quantity_show
         signup_countLbl.text = row.temp_signup_count_show
+        
+        if row.mobile.isEmpty {
+            hiddenIcon(mobileIcon)
+        }
+        
+        refreshIcon.indexPath = indexPath
+        cityBtn.indexPath = indexPath
+        mapIcon.indexPath = indexPath
+        mobileIcon.indexPath = indexPath
+        likeIcon.indexPath = indexPath
     }
     
 }

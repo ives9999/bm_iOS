@@ -17,6 +17,7 @@ protocol List1CellDelegate {
     func cellEdit(indexPath: IndexPath?)
     func cellDelete(indexPath: IndexPath?)
     func cellCity(indexPath: IndexPath?)
+    func cellLike(indexPath: IndexPath?)
 }
 
 class List1Cell: UITableViewCell {
@@ -297,4 +298,15 @@ class List1Cell: UITableViewCell {
         }
         method(indexPath)
     }
+}
+
+extension List1CellDelegate {
+    func cellShowMap(indexPath: IndexPath?){}
+    func cellTel(indexPath: IndexPath?){}
+    func cellMobile(indexPath: IndexPath?){}
+    func cellRefresh(indexPath: IndexPath?){}
+    func cellEdit(indexPath: IndexPath?){}
+    func cellDelete(indexPath: IndexPath?){}
+    func cellCity(indexPath: IndexPath?){}
+    func cellLike(indexPath: IndexPath?){}
 }

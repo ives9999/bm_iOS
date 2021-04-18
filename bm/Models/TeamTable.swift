@@ -158,5 +158,9 @@ class TeamTable: Table {
         if play_start.count > 0 && play_end.count > 0 {
             interval_show = play_start.noSec() + " ~ " + play_end.noSec()
         }
+        
+        if arena != nil {
+            arena!.filterRow()
+        }
     }
 }

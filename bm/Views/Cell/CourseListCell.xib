@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="245" id="KGk-i7-Jjw" customClass="TeamListCell" customModule="bm" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="245" id="KGk-i7-Jjw" customClass="CourseListCell" customModule="bm" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="558" height="245"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -37,10 +37,6 @@
                             <action selector="cityBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9il-zf-uHj"/>
                         </connections>
                     </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CG0-0i-QKl" customClass="CityButton" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="165" y="39" width="31" height="30"/>
-                        <state key="normal" title="球館"/>
-                    </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="星期幾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ka9-Tn-K1B" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="122" y="79" width="52" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -53,14 +49,14 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="臨打人數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dm1-Ne-oAd" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="122" y="110" width="70" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dm1-Ne-oAd" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="122" y="110" width="35" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="報名人數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWR-S3-v17" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="204" y="110" width="70" height="21"/>
+                        <rect key="frame" x="169" y="110" width="70" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -68,19 +64,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXk-uA-8gX" userLabel="IconView">
                         <rect key="frame" x="0.0" y="141" width="558" height="36"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zqf-7l-AHB" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="16" y="0.0" width="36" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="36" id="1aD-CV-jEm"/>
-                                    <constraint firstAttribute="height" constant="36" id="dH4-F0-4y8"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="map"/>
-                                <connections>
-                                    <action selector="mapBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="yD9-uO-hwO"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snr-gS-hGQ" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="68" y="0.0" width="36" height="36"/>
+                                <rect key="frame" x="16" y="0.0" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="TiK-F6-fd4"/>
                                     <constraint firstAttribute="width" constant="36" id="bLs-aq-d10"/>
@@ -91,7 +76,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKV-v7-798" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="120" y="0.0" width="36" height="36"/>
+                                <rect key="frame" x="68" y="0.0" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="12q-tA-8Vf"/>
                                     <constraint firstAttribute="height" constant="36" id="eYa-87-ECn"/>
@@ -118,14 +103,18 @@
                             <constraint firstItem="Snr-gS-hGQ" firstAttribute="centerY" secondItem="tXk-uA-8gX" secondAttribute="centerY" id="BbY-CT-Mxb"/>
                             <constraint firstAttribute="trailing" secondItem="FtH-Dd-7Hx" secondAttribute="trailing" constant="16" id="CO2-10-l0H"/>
                             <constraint firstItem="FtH-Dd-7Hx" firstAttribute="centerY" secondItem="tXk-uA-8gX" secondAttribute="centerY" id="DhH-bE-0eU"/>
-                            <constraint firstItem="nKV-v7-798" firstAttribute="leading" secondItem="tXk-uA-8gX" secondAttribute="leading" constant="120" id="PEj-LI-T9A"/>
+                            <constraint firstItem="nKV-v7-798" firstAttribute="leading" secondItem="tXk-uA-8gX" secondAttribute="leading" constant="68" id="PEj-LI-T9A"/>
                             <constraint firstAttribute="height" constant="36" id="Sw6-LC-lYL"/>
-                            <constraint firstItem="Zqf-7l-AHB" firstAttribute="leading" secondItem="tXk-uA-8gX" secondAttribute="leading" constant="16" id="VRv-xV-r4D"/>
                             <constraint firstItem="nKV-v7-798" firstAttribute="centerY" secondItem="tXk-uA-8gX" secondAttribute="centerY" id="Vie-8J-kaD"/>
-                            <constraint firstItem="Snr-gS-hGQ" firstAttribute="leading" secondItem="tXk-uA-8gX" secondAttribute="leading" constant="68" id="YCb-V3-GvK"/>
-                            <constraint firstItem="Zqf-7l-AHB" firstAttribute="centerY" secondItem="tXk-uA-8gX" secondAttribute="centerY" id="Zv5-BJ-1Oq"/>
+                            <constraint firstItem="Snr-gS-hGQ" firstAttribute="leading" secondItem="tXk-uA-8gX" secondAttribute="leading" constant="16" id="YCb-V3-GvK"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="價格" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dj-Xn-fhB" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="165" y="45" width="35" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
@@ -136,17 +125,17 @@
                     <constraint firstAttribute="trailing" secondItem="tXk-uA-8gX" secondAttribute="trailing" id="Gig-EA-uV9"/>
                     <constraint firstItem="ej3-df-e93" firstAttribute="top" secondItem="qTk-GY-GT2" secondAttribute="bottom" constant="10" id="N1U-R2-LwE"/>
                     <constraint firstItem="8i0-Nr-dEA" firstAttribute="leading" secondItem="Ka9-Tn-K1B" secondAttribute="trailing" constant="12" id="P6L-aD-Iot"/>
+                    <constraint firstItem="9dj-Xn-fhB" firstAttribute="leading" secondItem="ej3-df-e93" secondAttribute="trailing" constant="12" id="QCO-HV-Z73"/>
                     <constraint firstItem="tXk-uA-8gX" firstAttribute="top" secondItem="Dm1-Ne-oAd" secondAttribute="bottom" constant="10" id="RMD-pS-m8x"/>
                     <constraint firstItem="Ka9-Tn-K1B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="TNQ-lg-Q93"/>
                     <constraint firstItem="ej3-df-e93" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="Wux-7Z-iNj"/>
                     <constraint firstItem="JWR-S3-v17" firstAttribute="top" secondItem="Ka9-Tn-K1B" secondAttribute="bottom" constant="10" id="d7W-Vs-9l3"/>
                     <constraint firstItem="B0M-vi-qBv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="fMz-pj-ECk"/>
                     <constraint firstItem="Dm1-Ne-oAd" firstAttribute="top" secondItem="Ka9-Tn-K1B" secondAttribute="bottom" constant="10" id="gMt-yq-i7k"/>
+                    <constraint firstItem="9dj-Xn-fhB" firstAttribute="top" secondItem="qTk-GY-GT2" secondAttribute="bottom" constant="16" id="hS6-RH-5Fy"/>
                     <constraint firstItem="tXk-uA-8gX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="iOl-Fs-drt"/>
                     <constraint firstItem="B0M-vi-qBv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="mN8-LA-u1i"/>
-                    <constraint firstItem="CG0-0i-QKl" firstAttribute="leading" secondItem="ej3-df-e93" secondAttribute="trailing" constant="12" id="onT-mp-n1L"/>
                     <constraint firstItem="JWR-S3-v17" firstAttribute="leading" secondItem="Dm1-Ne-oAd" secondAttribute="trailing" constant="12" id="sqD-xo-qoe"/>
-                    <constraint firstItem="CG0-0i-QKl" firstAttribute="top" secondItem="qTk-GY-GT2" secondAttribute="bottom" constant="10" id="uAN-3A-LKt"/>
                     <constraint firstItem="qTk-GY-GT2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="uOq-Df-6xs"/>
                     <constraint firstItem="8i0-Nr-dEA" firstAttribute="top" secondItem="ej3-df-e93" secondAttribute="bottom" constant="10" id="ukM-6e-ifN"/>
                 </constraints>
@@ -154,20 +143,18 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="areanBtn" destination="CG0-0i-QKl" id="Pdy-bU-4br"/>
                 <outlet property="cityBtn" destination="ej3-df-e93" id="0uP-mD-hak"/>
                 <outlet property="iconView" destination="tXk-uA-8gX" id="Ure-kr-cnU"/>
                 <outlet property="intervalLbl" destination="8i0-Nr-dEA" id="qH8-O4-wnd"/>
                 <outlet property="likeConstraint" destination="PEj-LI-T9A" id="p7B-j0-373"/>
                 <outlet property="likeIcon" destination="nKV-v7-798" id="7JC-YK-ZPm"/>
                 <outlet property="listFeatured" destination="B0M-vi-qBv" id="Usf-EW-2Gt"/>
-                <outlet property="mapConstraint" destination="VRv-xV-r4D" id="vmQ-M6-gtu"/>
-                <outlet property="mapIcon" destination="Zqf-7l-AHB" id="yy4-tT-xKS"/>
                 <outlet property="mobileConstraint" destination="YCb-V3-GvK" id="1Ap-1e-gZo"/>
                 <outlet property="mobileIcon" destination="Snr-gS-hGQ" id="zRh-Pb-17Z"/>
+                <outlet property="people_limitLbl" destination="Dm1-Ne-oAd" id="dZ9-s9-swQ"/>
+                <outlet property="priceLbl" destination="9dj-Xn-fhB" id="Lgd-8e-Tve"/>
                 <outlet property="refreshIcon" destination="FtH-Dd-7Hx" id="cwI-gv-fZf"/>
                 <outlet property="signup_countLbl" destination="JWR-S3-v17" id="Egz-co-rqh"/>
-                <outlet property="temp_qnantityLbl" destination="Dm1-Ne-oAd" id="NPE-LT-R83"/>
                 <outlet property="titleLbl" destination="qTk-GY-GT2" id="5Xm-0N-0u2"/>
                 <outlet property="weekendLbl" destination="Ka9-Tn-K1B" id="dxg-KR-Rjp"/>
             </connections>
@@ -176,7 +163,6 @@
     </objects>
     <resources>
         <image name="like" width="25" height="25"/>
-        <image name="map" width="25" height="25"/>
         <image name="mobile" width="25" height="25"/>
         <image name="refresh" width="25" height="25"/>
     </resources>

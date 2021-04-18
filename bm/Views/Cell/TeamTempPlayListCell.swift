@@ -69,11 +69,11 @@ class TeamTempPlayListCell: SuperCell {
         cityBtn.setTitle((row["city"]!["show"] as! String), for: .normal)
         let city_id = row["city"]!["value"] as! Int
         cityBtn.tag = city_id
-        cityBtn.addTarget(cellDelegate, action: #selector(TempPlayVC.cityBtnPressed(sender:)), for: .touchUpInside)
+        //cityBtn.addTarget(cellDelegate, action: #selector(TempPlayVC.cityBtnPressed(sender:)), for: .touchUpInside)
         arenaBtn.setTitle((row["arena"]!["show"] as! String), for: .normal)
         let arena_id = row["arena"]!["value"] as! Int
         arenaBtn.tag = arena_id
-        arenaBtn.addTarget(cellDelegate, action: #selector(TempPlayVC.arenaBtnPressed(sender:)), for: .touchUpInside)
+        //arenaBtn.addTarget(cellDelegate, action: #selector(TempPlayVC.arenaBtnPressed(sender:)), for: .touchUpInside)
         
         let quantity: Int = (row["count"]!["quantity"] as! Int)
         let signup: Int = (row["count"]!["signup"] as! Int)

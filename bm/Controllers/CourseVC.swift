@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class CourseVC: ListVC {
+class CourseVC: ListVC, List1CellDelegate {
     
     @IBOutlet weak var managerBtn: UIButton!
     
@@ -26,15 +26,16 @@ class CourseVC: ListVC {
     override func viewDidLoad() {
         
         myTablView = tableView
-        myTablView.allowsMultipleSelectionDuringEditing = false
-        myTablView.isUserInteractionEnabled = true
         dataService = CourseService.instance
-        _type = "course"
-        _titleField = "title"
+        //_type = "course"
+        //_titleField = "title"
         searchRows = _searchRows
         Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
+        
+        let cellNibName = UINib(nibName: "CourseListCell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
     }
     
     override func refresh() {
@@ -70,14 +71,14 @@ class CourseVC: ListVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? CourseListCell {
                 
                 cell.cellDelegate = self
                 let row = lists1[indexPath.row] as? CourseTable
                 if row != nil {
                     row!.filterRow()
                     //row!.printRow()
-                    cell.updateCourseViews(indexPath: indexPath, data: row!)
+                    cell.updateViews(indexPath: indexPath, row: row!)
                 }
                 
                 return cell

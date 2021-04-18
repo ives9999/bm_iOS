@@ -43,6 +43,7 @@ class CourseTable: Table {
     var cycle_unit: String = ""
     var weekday: Int = -1
     var weekday_text: String = ""
+    var weekday_arr: [Int] = [Int]()
     var start_date: String = ""
     var end_date: String = ""
     var start_time: String = ""
@@ -70,6 +71,9 @@ class CourseTable: Table {
     var price_short_show: String = ""
     var people_limit_show: String = ""
     var kind_show: String = ""
+    var weekdays_show: String = ""
+    var interval_show: String = ""
+    var signup_count_show: String = ""
     
     enum CodingKeys: String, CodingKey {
         case title
@@ -91,6 +95,7 @@ class CourseTable: Table {
         case end_time
         case weekday
         case weekday_text
+        case weekday_arr
         case deadline
         case youtube
         case content
@@ -99,7 +104,6 @@ class CourseTable: Table {
         //case nextCourseTime
         case isSignup
         case signup_id
-        case weekday_arr
         
         case coachTable = "coach" // php json的key值
         case dateTable = "date_model"
@@ -138,10 +142,13 @@ class CourseTable: Table {
         do {signup_id = try container.decode(Int.self, forKey: .signup_id)}catch{signup_id = 0}
         
         do {coachTable = try container.decode(CoachTable.self, forKey: .coachTable)}catch{coachTable = nil}
-        do {dateTable = try container.decode(DateTable.self, forKey: .dateTable)}catch{coachTable = nil}
+        
+        do {dateTable = try container.decode(DateTable.self, forKey: .dateTable)}catch{dateTable = nil}
         
         do {signupNormalTables = try container.decode([SignupNormalTable].self, forKey: .signupNormalTables)}catch{signupNormalTables = [SignupNormalTable]()}
         do {signupStandbyTables = try container.decode([SignupStandbyTable].self, forKey: .signupStandbyTables)}catch{signupStandbyTables = [SignupStandbyTable]()}
+        
+        weekday_arr = try container.decodeIfPresent([Int].self, forKey: .weekday_arr) ?? [Int]()
     }
     
     override func filterRow() {
@@ -158,6 +165,35 @@ class CourseTable: Table {
         
         if end_time.count > 0 {
             end_time_show = end_time.noSec()
+        }
+        
+        if start_time.count > 0 && end_time.count > 0 {
+            interval_show = start_time_show + " ~ " + end_time_show
+        }
+        
+        if weekday_arr.count > 0 {
+            var show: [String] = [String]()
+            for weekday in weekday_arr {
+                let tmp: String = WEEKDAY.intToString(weekday)
+                show.append(tmp)
+            }
+            weekdays_show = show.joined(separator: ",")
+        }
+        
+        if people_limit > 0 {
+            people_limit_show = "\(people_limit)位"
+        } else {
+            people_limit_show = "未提供報名"
+        }
+        
+        if signupNormalTables.count > 0 {
+            signup_count_show = "\(signupNormalTables.count)位"
+        } else {
+            signup_count_show = "0位"
+        }
+        
+        if coachTable != nil {
+            coachTable!.filterRow()
         }
     }
     

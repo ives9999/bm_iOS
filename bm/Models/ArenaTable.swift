@@ -51,6 +51,7 @@ class ArenaTable: Table {
     var tel_show: String = ""
     var interval_show: String = ""
     var air_condition_show: String = ""
+    var address: String = ""
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -108,6 +109,10 @@ class ArenaTable: Table {
         
         if area_id > 0 {
             area_show = Global.instance.zoneIDToName(area_id)
+        }
+        
+        if city_id > 0 && area_id > 0 {
+            address = city_show + area_show + road
         }
         
         if tel.count > 0 {

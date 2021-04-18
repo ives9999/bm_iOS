@@ -8,12 +8,12 @@
 
 import UIKit
 
-class TempPlayVC: ListVC {
+class TempPlayVC: ListVC, List1CellDelegate {
 
     // outlets
     
     //var model: Team!
-    let cell_constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
+    //let cell_constant: TEAM_TEMP_PLAY_CELL = TEAM_TEMP_PLAY_CELL()
     
     var days: [Int] = [Int]()
     
@@ -21,12 +21,12 @@ class TempPlayVC: ListVC {
     
     //key has type, play_start_time, play_end_time, time
         
-    lazy var bannerAd: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .red
-        return view
-    }()
+//    lazy var bannerAd: UIView = {
+//        let view = UIView()
+//        view.translatesAutoresizingMaskIntoConstraints = false
+//        view.backgroundColor = .red
+//        return view
+//    }()
         
     override func viewDidLoad() {
             
@@ -173,7 +173,7 @@ class TempPlayVC: ListVC {
         //print("section: \(indexPath.section), row: \(indexPath.row)")
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? TeamListCell {
             
-            //cell.cellDelegate = self
+            cell.cellDelegate = self
             let row = lists1[indexPath.row] as! TeamTable
             row.filterRow()
             //row.printRow()
@@ -203,22 +203,66 @@ class TempPlayVC: ListVC {
         }
     }
     
-    
-    @objc func cityBtnPressed(sender: UIButton) {
-        //print(sender.tag)
-        resetParams()
-        citys.append(City(id: sender.tag, name: ""))
-        prepareParams(city_type: "all")
-        refresh()
+    func cellRefresh(indexPath: IndexPath?) {
+        if indexPath != nil {
+            if params1 != nil && !params1!.isEmpty {
+                params1!.removeAll()
+            }
+            self.refresh()
+        } else {
+            warning("index path 為空值，請洽管理員")
+        }
     }
     
-    @objc func arenaBtnPressed(sender: UIButton) {
-        //print(sender.tag)
-        resetParams()
-        arenas.append(Arena(id: sender.tag, name: ""))
-        prepareParams()
-        refresh()
+    func cellMobile(indexPath: IndexPath?) {
+        if indexPath != nil {
+            let row = lists1[indexPath!.row] as! TeamTable
+            print(row.mobile)
+            //row.mobile.makeCall()
+        } else {
+            warning("index path 為空值，請洽管理員")
+        }
     }
+    
+    func cellShowMap(indexPath: IndexPath?) {
+        if indexPath != nil {
+            let row = lists1[indexPath!.row] as! TeamTable
+            if row.arena != nil {
+                //print(row.arena!.address)
+                _showMap(title: row.name, address: row.arena!.address)
+            } else {
+                warning("球隊沒有輸入球館位置")
+            }
+        } else {
+            warning("index path 為空值，請洽管理員")
+        }
+    }
+    
+    func cellLike(indexPath: IndexPath?) {
+        if indexPath != nil {
+            let row = lists1[indexPath!.row] as! TeamTable
+            print(row.id)
+        } else {
+            warning("index path 為空值，請洽管理員")
+        }
+    }
+    
+    
+//    @objc func cityBtnPressed(sender: UIButton) {
+//        //print(sender.tag)
+//        resetParams()
+//        citys.append(City(id: sender.tag, name: ""))
+//        prepareParams(city_type: "all")
+//        refresh()
+//    }
+//
+//    @objc func arenaBtnPressed(sender: UIButton) {
+//        //print(sender.tag)
+//        resetParams()
+//        arenas.append(Arena(id: sender.tag, name: ""))
+//        prepareParams()
+//        refresh()
+//    }
 }
 
 

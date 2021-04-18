@@ -105,9 +105,11 @@ class DataService {
                             self.tables = s!
                             //s!.printRow()
                             
-//                            let a1: TeachesTable = s! as! TeachesTable
-//                            let rows:[TeachTable] = a1.rows
+//                            let a1: CoursesTable = s! as! CoursesTable
+//                            let rows:[CourseTable] = a1.rows
 //                            for row in rows {
+//                                print(row.coachTable)
+//                                row.coachTable?.printRow()
 //                                row.filterRow()
 //                                row.printRow()
 //                            }
