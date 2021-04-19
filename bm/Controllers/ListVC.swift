@@ -645,4 +645,11 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
             }
         }
     }
+    
+    func cellRefresh<T: Table>(row: T) {
+        if params1 != nil && !params1!.isEmpty {
+            params1!.removeAll()
+        }
+        self.refresh()
+    }
 }

@@ -8,6 +8,18 @@
 
 import UIKit
 
+protocol List1CellDelegate {
+    //func searchCity(indexPath: IndexPath)
+    func cellShowMap(indexPath: IndexPath?)
+    func cellTel(indexPath: IndexPath?)
+    func cellMobile(indexPath: IndexPath?)
+    func cellRefresh<T: Table>(row: T)
+    func cellEdit(indexPath: IndexPath?)
+    func cellDelete(indexPath: IndexPath?)
+    func cellCity(indexPath: IndexPath?)
+    func cellLike(indexPath: IndexPath?)
+}
+
 class List2Cell: UITableViewCell {
     
     @IBOutlet weak var listFeatured: UIImageView!
@@ -30,11 +42,13 @@ class List2Cell: UITableViewCell {
     
     var cellDelegate: List1CellDelegate?
     
+    var table: Table?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
     
-    func _updateViews<T: Table>(indexPath: IndexPath, row: T) {
+    func _updateViews<T: Table>(row: T) {
         
         self.backgroundColor = UIColor.clear
         
@@ -76,11 +90,18 @@ class List2Cell: UITableViewCell {
     }
     
     @IBAction func refreshBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { indexPath in
+        let _sender = sender as! SuperButton
+        if _sender.row != nil {
+            //row = _sender.row as! T
             if cellDelegate != nil {
-                cellDelegate!.cellRefresh(indexPath: indexPath)
+                cellDelegate!.cellRefresh(row: _sender.row!.self)
             }
         }
+//        self._pressed(sender: sender) { indexPath in
+//            if cellDelegate != nil {
+//                cellDelegate!.cellRefresh(row: row)
+//            }
+//        }
     }
     
     @IBAction func cityBtnPressed(sender: UIButton) {
@@ -127,3 +148,16 @@ class List2Cell: UITableViewCell {
         }
     }
 }
+
+
+extension List1CellDelegate {
+    func cellShowMap(indexPath: IndexPath?){}
+    func cellTel(indexPath: IndexPath?){}
+    func cellMobile(indexPath: IndexPath?){}
+    func cellRefresh<T: Table>(row: T){}
+    func cellEdit(indexPath: IndexPath?){}
+    func cellDelete(indexPath: IndexPath?){}
+    func cellCity(indexPath: IndexPath?){}
+    func cellLike(indexPath: IndexPath?){}
+}
+

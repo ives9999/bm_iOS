@@ -23,7 +23,7 @@ class CourseListCell: List2Cell {
 
     func updateViews(indexPath: IndexPath, row: CourseTable) {
         
-        _updateViews(indexPath: indexPath, row: row.self)
+        _updateViews(row: row.self)
         titleLbl.text = row.title
         cityBtn.setTitle(row.city_show)
         
@@ -71,7 +71,7 @@ class CourseListCell: List2Cell {
             hiddenIcon(mobileIcon)
         }
         
-        refreshIcon.indexPath = indexPath
+        refreshIcon.row = row
         cityBtn.indexPath = indexPath
         mobileIcon.indexPath = indexPath
         likeIcon.indexPath = indexPath

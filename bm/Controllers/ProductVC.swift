@@ -127,18 +127,6 @@ class ProductVC: ListVC, List1CellDelegate {
         }
     }
     
-    func cellShowMap(indexPath: IndexPath?) {}
-    
-    func cellTel(indexPath: IndexPath?) {}
-    
-    func cellMobile(indexPath: IndexPath?) {}
-    
-    func cellRefresh(indexPath: IndexPath?) {}
-    
-    func cellEdit(indexPath: IndexPath?) {}
-    
-    func cellDelete(indexPath: IndexPath?) {}
-    
     func cellCity(indexPath: IndexPath?) {
         //print(indexPath!.row)
         

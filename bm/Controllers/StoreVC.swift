@@ -178,16 +178,16 @@ class StoreVC: ListVC, List1CellDelegate {
         }
     }
     
-    func cellRefresh(indexPath: IndexPath?) {
-        if indexPath != nil {
-            if params1 != nil && !params1!.isEmpty {
-                params1!.removeAll()
-            }
-            self.refresh()
-        } else {
-            warning("index path 為空值，請洽管理員")
-        }
-    }
+//    func cellRefresh(indexPath: IndexPath?) {
+//        if indexPath != nil {
+//            if params1 != nil && !params1!.isEmpty {
+//                params1!.removeAll()
+//            }
+//            self.refresh()
+//        } else {
+//            warning("index path 為空值，請洽管理員")
+//        }
+//    }
     
     func cellEdit(indexPath: IndexPath?) {
         if indexPath != nil {

@@ -8,18 +8,6 @@
 
 import UIKit
 
-protocol List1CellDelegate {
-    //func searchCity(indexPath: IndexPath)
-    func cellShowMap(indexPath: IndexPath?)
-    func cellTel(indexPath: IndexPath?)
-    func cellMobile(indexPath: IndexPath?)
-    func cellRefresh(indexPath: IndexPath?)
-    func cellEdit(indexPath: IndexPath?)
-    func cellDelete(indexPath: IndexPath?)
-    func cellCity(indexPath: IndexPath?)
-    func cellLike(indexPath: IndexPath?)
-}
-
 class List1Cell: UITableViewCell {
 
     @IBOutlet weak var listFeatured: UIImageView!
@@ -273,7 +261,7 @@ class List1Cell: UITableViewCell {
     
     @IBAction func refreshBtnPressed(sender: UIButton) {
         self._pressed(sender: sender) { indexPath in
-            cellDelegate?.cellRefresh(indexPath: indexPath)
+            //cellDelegate?.cellRefresh(indexPath: indexPath)
         }
     }
     
@@ -298,15 +286,4 @@ class List1Cell: UITableViewCell {
         }
         method(indexPath)
     }
-}
-
-extension List1CellDelegate {
-    func cellShowMap(indexPath: IndexPath?){}
-    func cellTel(indexPath: IndexPath?){}
-    func cellMobile(indexPath: IndexPath?){}
-    func cellRefresh(indexPath: IndexPath?){}
-    func cellEdit(indexPath: IndexPath?){}
-    func cellDelete(indexPath: IndexPath?){}
-    func cellCity(indexPath: IndexPath?){}
-    func cellLike(indexPath: IndexPath?){}
 }

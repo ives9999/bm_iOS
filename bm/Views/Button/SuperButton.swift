@@ -15,6 +15,7 @@ class SuperButton: UIButton {
     
     var indexPath: IndexPath?
     var key: String?
+    var row: Table?
     
     convenience init(frame: CGRect, textColor: UIColor, bkColor: UIColor) {
         self.init(frame: frame)

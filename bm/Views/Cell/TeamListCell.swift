@@ -30,7 +30,7 @@ class TeamListCell: List2Cell {
 
     func updateViews(indexPath: IndexPath, row: TeamTable) {
         
-        _updateViews(indexPath: indexPath, row: row.self)
+        _updateViews(row: row.self)
         titleLbl.text = row.name
         cityBtn.setTitle(row.city_show)
         if row.arena != nil {
