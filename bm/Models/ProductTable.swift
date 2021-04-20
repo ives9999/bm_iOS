@@ -25,7 +25,6 @@ class ProductsTable: Tables {
 
 class ProductTable: Table {
     
-    var name: String = ""
     var type: String = ""
     var color: String = ""
     var size: String = ""
@@ -47,7 +46,6 @@ class ProductTable: Table {
     var gateways: [String] = [String]()
     
     enum CodingKeys: String, CodingKey {
-        case name
         case type
         case color
         case size
@@ -70,7 +68,6 @@ class ProductTable: Table {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {name = try container.decode(String.self, forKey: .name)}catch{name=""}
         do {type = try container.decode(String.self, forKey: .type)}catch{type = ""}
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
         do {size = try container.decode(String.self, forKey: .size)}catch{size = ""}

@@ -26,9 +26,7 @@ class TeamsTable: Tables {
 
 class TeamTable: Table {
     
-    var name: String = ""
     var leader: String = ""
-    var mobile: String = ""
     var email: String = ""
     var website: String = ""
     var fb: String = ""
@@ -49,11 +47,9 @@ class TeamTable: Table {
     var temp_status: String = ""
     var temp_signup_count: Int = 0
     var color: String = ""
-    var city_id: Int = -1
     var weekdays: [Team_WeekdaysTable] = [Team_WeekdaysTable]()
     var arena: ArenaTable?
     
-    var city_show: String = ""
     var play_start_show: String = ""
     var play_end_show: String = ""
     var weekdays_show: String = ""
@@ -62,7 +58,6 @@ class TeamTable: Table {
     var temp_signup_count_show: String = ""
     
     enum CodingKeys: String, CodingKey {
-        case name
         case leader
         case mobile
         case email
@@ -85,7 +80,6 @@ class TeamTable: Table {
         case temp_status
         case temp_signup_count
         case color
-        case city_id
         case weekdays
         case arena
     }
@@ -93,7 +87,6 @@ class TeamTable: Table {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {name = try container.decode(String.self, forKey: .name)}catch{name=""}
         do {leader = try container.decode(String.self, forKey: .leader)}catch{leader = ""}
         do {mobile = try container.decode(String.self, forKey: .mobile)}catch{mobile = ""}
         do {website = try container.decode(String.self, forKey: .website)}catch{website = ""}
@@ -111,7 +104,6 @@ class TeamTable: Table {
         do {youtube = try container.decode(String.self, forKey: .youtube)}catch{youtube = ""}
         do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {temp_quantity = try container.decode(Int.self, forKey: .temp_quantity)}catch{temp_quantity = 0}
-        do {city_id = try container.decode(Int.self, forKey: .city_id)}catch{city_id = 0}
         do {temp_content = try container.decode(String.self, forKey: .temp_content)}catch{temp_content = ""}
         do {temp_status = try container.decode(String.self, forKey: .temp_status)}catch{temp_status = ""}
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
@@ -125,10 +117,6 @@ class TeamTable: Table {
     override func filterRow() {
         
         super.filterRow()
-        
-        if city_id > 0 {
-            city_show = Global.instance.zoneIDToName(city_id)
-        }
         
         if play_start.count > 0 {
             play_start_show = play_start.noSec()

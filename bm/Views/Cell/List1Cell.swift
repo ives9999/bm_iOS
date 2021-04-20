@@ -8,37 +8,20 @@
 
 import UIKit
 
-class List1Cell: UITableViewCell {
+class List1Cell: List2Cell {
 
-    @IBOutlet weak var listFeatured: UIImageView!
-    @IBOutlet weak var titleLbl: SuperLabel!
-    @IBOutlet weak var cityBtn: CityButton!
     @IBOutlet weak var addressLbl: SuperLabel!
     @IBOutlet weak var telLbl: SuperLabel!
     @IBOutlet weak var business_timeLbl: SuperLabel!
     
-    @IBOutlet weak var iconView: UIView!
-    @IBOutlet weak var mapIcon: SuperButton!
     @IBOutlet weak var telIcon: SuperButton!
-    @IBOutlet weak var mobileIcon: SuperButton!
-    @IBOutlet weak var refreshIcon: SuperButton!
     @IBOutlet weak var editIcon: SuperButton!
     @IBOutlet weak var deleteIcon: SuperButton!
     
-    @IBOutlet weak var mapConstraint: NSLayoutConstraint!
     @IBOutlet weak var telConstraint: NSLayoutConstraint!
-    @IBOutlet weak var mobileConstraint: NSLayoutConstraint!
     @IBOutlet weak var refreshConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var featuredHConstraint: NSLayoutConstraint!
-    
-    var icons: [[String: Any]] = [[String: Any]]()
-    let iconWidth: CGFloat = 36
-    let iconMargin: CGFloat = 16
-    
-    var cellDelegate: List1CellDelegate?
-    
-    var featured_h: CGFloat = 0
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -78,7 +61,7 @@ class List1Cell: UITableViewCell {
     
     func updateStoreViews(indexPath: IndexPath, row: StoreTable) {
         //data.printRow()
-        _updateViews(indexPath: indexPath, row: row.self)
+        _updateViews(row)
         
         titleLbl.text = row.name
         cityBtn.setTitle(row.city_show)
@@ -86,13 +69,13 @@ class List1Cell: UITableViewCell {
         telLbl.text = row.tel_show
         business_timeLbl.text = row.open_time_show + "~" + row.close_time_show
         
-        cityBtn.indexPath = indexPath
-        mapIcon.indexPath = indexPath
-        telIcon.indexPath = indexPath
-        mobileIcon.indexPath = indexPath
-        refreshIcon.indexPath = indexPath
-        editIcon.indexPath = indexPath
-        deleteIcon.indexPath = indexPath
+        cityBtn.row = row
+        mapIcon.row = row
+        telIcon.row = row
+        mobileIcon.row = row
+        refreshIcon.row = row
+        editIcon.row = row
+        deleteIcon.row = row
         
         if row.address.isEmpty {
             hiddenIcon(mapIcon)
@@ -131,7 +114,7 @@ class List1Cell: UITableViewCell {
     
     func updateProductViews(indexPath: IndexPath, row: ProductTable) {
         //data.printRow()
-        _updateViews(indexPath: indexPath, row: row.self)
+        _updateViews(row)
         
         titleLbl.text = row.name
         cityBtn.setTitle("購買")
@@ -144,7 +127,7 @@ class List1Cell: UITableViewCell {
             telLbl.text = "未提供"
         }
         
-        cityBtn.indexPath = indexPath
+        cityBtn.row = row
         
         business_timeLbl.visibility = .gone
         addressLbl.visibility = .gone
@@ -160,24 +143,9 @@ class List1Cell: UITableViewCell {
     
     func updateTeamViews(indexPath: IndexPath, row: TeamTable) {
         
-        _updateViews(indexPath: indexPath, row: row.self)
+        _updateViews(row)
         titleLbl.text = row.name
         cityBtn.setTitle(row.city_show)
-    }
-    
-    func _updateViews<T: Table>(indexPath: IndexPath, row: T) {
-        
-        self.backgroundColor = UIColor.clear
-        
-        if row.featured_path.count > 0 {
-            
-            featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
-            listFeatured.downloaded(from: row.featured_path)
-        }
-        
-        let chevron = UIImage(named: "greater1")
-        self.accessoryType = .disclosureIndicator
-        self.accessoryView = UIImageView(image: chevron!)
     }
     
     override func layoutSubviews() {
@@ -191,99 +159,5 @@ class List1Cell: UITableViewCell {
             let featured_margin_h: CGFloat = (cellH - iconWidth - 16 - featured_h) / 2
             featuredHConstraint.constant = featured_margin_h
         }
-    }
-    
-    func hiddenIcon(_ icon: SuperButton) {
-        
-//        let constraints = icon.superview!.constraints
-//        for constraint in constraints {
-//            if constraint.secondItem == nil {
-//                continue
-//            }
-//            let firstType = String(describing: firstItem.self)
-//            var _firstItem = constraint.firstItem as? UIView
-//            if (firstType == "SuperButton") {
-//                _firstItem = constraint.firstItem as! SuperButton
-//            }
-//            let secondType = String(describing: secondItem.self)
-//            var _secondItem = constraint.secondItem as? UIView
-//            if (secondType == "SuperButton") {
-//                _secondItem = constraint.secondItem as! SuperButton
-//            }
-//
-//
-//            if _firstItem == firstItem && _secondItem == secondItem && constraint.constant == constant &&  constraint.firstAttribute == NSLayoutConstraint.Attribute.leading && constraint.secondAttribute == NSLayoutConstraint.Attribute.trailing {
-//                constraint.constant = 0
-//            }
-//        }
-        //print(leftMargin?.constant)
-        //icon.widthConstraint?.constant = 0
-        for (idx, _icon) in icons.enumerated() {
-            if _icon["icon"] as! SuperButton == icon {
-                icons.remove(at: idx)
-            }
-        }
-        for (idx, _) in icons.enumerated() {
-            let w: CGFloat = CGFloat(idx+1) * iconMargin + CGFloat(idx) * iconWidth
-            icons[idx]["constant"] = w
-            let constraint: NSLayoutConstraint = icons[idx]["constraint"] as! NSLayoutConstraint
-            constraint.constant = w
-        }
-        icon.visibility = .gone
-    }
-    
-    @IBAction func cityBtnPressed(sender: UIButton) {
-        let _sender = sender as! SuperButton
-        var indexPath: IndexPath?
-        if _sender.indexPath != nil {
-            indexPath = _sender.indexPath!
-            cellDelegate?.cellCity(indexPath: indexPath)
-        }
-    }
-    
-    @IBAction func mapBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { indexPath in
-            cellDelegate?.cellShowMap(indexPath: indexPath)
-        }
-    }
-    
-    @IBAction func telBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { indexPath in
-            cellDelegate?.cellTel(indexPath: indexPath)
-        }
-    }
-    
-    @IBAction func mobileBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { indexPath in
-            cellDelegate?.cellMobile(indexPath: indexPath)
-        }
-    }
-    
-    @IBAction func refreshBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { indexPath in
-            //cellDelegate?.cellRefresh(indexPath: indexPath)
-        }
-    }
-    
-    @IBAction func editBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { indexPath in
-            cellDelegate?.cellEdit(indexPath: indexPath)
-        }
-    }
-    
-    @IBAction func deleteBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { indexPath in
-            cellDelegate?.cellDelete(indexPath: indexPath)
-        }
-    }
-
-    private func _pressed(sender: UIButton, method: (IndexPath?)-> Void) {
-        
-        let _sender = sender as! SuperButton
-        var indexPath: IndexPath?
-        if _sender.indexPath != nil {
-            indexPath = _sender.indexPath!
-        }
-        method(indexPath)
     }
 }

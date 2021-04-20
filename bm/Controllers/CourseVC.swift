@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class CourseVC: ListVC, List1CellDelegate {
+class CourseVC: ListVC {
     
     @IBOutlet weak var managerBtn: UIButton!
     
@@ -78,7 +78,7 @@ class CourseVC: ListVC, List1CellDelegate {
                 if row != nil {
                     row!.filterRow()
                     //row!.printRow()
-                    cell.updateViews(indexPath: indexPath, row: row!)
+                    cell.updateViews(row!)
                 }
                 
                 return cell

@@ -63,14 +63,14 @@ class ArenaVC: ListVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "Listcell", for: indexPath) as? List2Cell {
                 
                 cell.cellDelegate = self
                 let row = lists1[indexPath.row] as? ArenaTable
                 if row != nil {
                     row!.filterRow()
                     //row!.printRow()
-                    cell.updateArena(indexPath: indexPath, data: row!)
+                    //cell.updateViews(row: row!)
                 }
                 
                 return cell

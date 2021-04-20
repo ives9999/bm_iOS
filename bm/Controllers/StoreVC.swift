@@ -9,7 +9,7 @@
 import Foundation
 import SCLAlertView
 
-class StoreVC: ListVC, List1CellDelegate {
+class StoreVC: ListVC {
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""],

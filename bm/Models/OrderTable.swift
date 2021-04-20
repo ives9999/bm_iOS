@@ -64,7 +64,6 @@ class OrderTable: Table {
     var attribute: String = ""
     var unit: String = "件"
     
-    var address: String = ""
     var product_name: String = ""
     var quantity_show: String = ""
     var product_price_show: String = ""
@@ -111,7 +110,6 @@ class OrderTable: Table {
         case order_racket
         case order_mejump
         case attribute
-        case address
         case product_name
         case unit
     }
@@ -153,7 +151,6 @@ class OrderTable: Table {
         do {order_mejump = try container.decode([OrderMeJumpTable].self, forKey: .order_clothes)}catch{order_mejump = [OrderMeJumpTable]()}
         
         do {attribute = try container.decode(String.self, forKey: .attribute)}catch{attribute = ""}
-        do {address = try container.decode(String.self, forKey: .address)}catch{address = ""}
         do {unit = try container.decode(String.self, forKey: .unit)}catch{unit = ""}
         
     }
@@ -384,7 +381,6 @@ class OrderMeJumpTable: Table {
     var price_id: Int = -1
     var quantity: Int = -1
     var price: Int = -1
-    var title: String = ""
     var unit: String = "組"
     
     enum CodingKeys: String, CodingKey {
@@ -405,7 +401,6 @@ class OrderMeJumpTable: Table {
         do {price_id = try container.decode(Int.self, forKey: .price_id)}catch{price_id = -1}
         do {price = try container.decode(Int.self, forKey: .price)}catch{price = -1}
         do {quantity = try container.decode(Int.self, forKey: .quantity)}catch{quantity = -1}
-        do {title = try container.decode(String.self, forKey: .title)}catch{title = ""}
         do {unit = try container.decode(String.self, forKey: .unit)}catch{unit = "組"}
         
     }

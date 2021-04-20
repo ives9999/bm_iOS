@@ -25,11 +25,8 @@ class StoresTable: Tables {
 }
 
 class StoreTable: Table {
-    
-    var name: String = ""
-    
+        
     var tel: String = ""
-    var mobile: String = ""
     var fb: String = ""
     var website: String = ""
     var email: String = ""
@@ -38,24 +35,19 @@ class StoreTable: Table {
     var open_time: String = ""
     var close_time: String = ""
     
-    var city_id: Int = -1
     var area_id: Int = -1
     var road: String = ""
     var zip: Int = -1
     
     var content: String = ""
     
-    var address: String = ""
     var tel_show: String = ""
-    var mobile_show: String = ""
     var open_time_show: String = ""
     var close_time_show: String = ""
-    var city_show: String = ""
     
     var managers: [[String: Any]] = [[String: Any]]()
     
     enum CodingKeys: String, CodingKey {
-        case name
         case tel
         case mobile
         case fb
@@ -64,7 +56,6 @@ class StoreTable: Table {
         case line
         case open_time
         case close_time
-        case city_id
         case area_id
         case road
         case zip
@@ -74,7 +65,6 @@ class StoreTable: Table {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {name = try container.decode(String.self, forKey: .name)}catch{name=""}
         do {tel = try container.decode(String.self, forKey: .tel)}catch{tel = ""}
         do {mobile = try container.decode(String.self, forKey: .mobile)}catch{mobile = ""}
         do {fb = try container.decode(String.self, forKey: .fb)}catch{fb = ""}
@@ -84,7 +74,6 @@ class StoreTable: Table {
         do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {open_time = try container.decode(String.self, forKey: .open_time)}catch{open_time = ""}
         do {close_time = try container.decode(String.self, forKey: .close_time)}catch{close_time = ""}
-        do {city_id = try container.decode(Int.self, forKey: .city_id)}catch{city_id = -1}
         do {area_id = try container.decode(Int.self, forKey: .area_id)}catch{area_id = -1}
         do {road = try container.decode(String.self, forKey: .road)}catch{road = ""}
         do {zip = try container.decode(Int.self, forKey: .zip)}catch{zip = -1}
@@ -93,22 +82,14 @@ class StoreTable: Table {
     override func filterRow() {
         super.filterRow()
         
-        if city_id > 0 && area_id > 0 {
+        if self.city_id > 0 && area_id > 0 {
             let city_name = Global.instance.zoneIDToName(city_id)
             let area_name = Global.instance.zoneIDToName(area_id)
             address = String(zip) + city_name + area_name + road
         }
         
-        if city_id > 0 {
-            city_show = Global.instance.zoneIDToName(city_id)
-        }
-        
         if tel.count > 0 {
             tel_show = tel.telShow()
-        }
-        
-        if mobile.count > 0 {
-            mobile_show = mobile.mobileShow()
         }
         
         if open_time.count > 0 {

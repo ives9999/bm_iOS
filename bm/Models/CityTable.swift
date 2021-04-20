@@ -11,12 +11,10 @@ import Foundation
 class CityTable: Table {
     
     var parent_id: Int = -1
-    var name: String = ""
     var zip: Int = -1
     
     enum CodingKeys: String, CodingKey {
         case parent_id
-        case name
         case zip
     }
     
@@ -24,7 +22,6 @@ class CityTable: Table {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         do {parent_id = try container.decode(Int.self, forKey: .parent_id)}catch{parent_id=0}
-        do {name = try container.decode(String.self, forKey: .name)}catch{name = ""}
         do {zip = try container.decode(Int.self, forKey: .zip)}catch{zip = -1}
     }
     

@@ -217,6 +217,8 @@
 		B3C4952B26287D1100D4F727 /* TeamListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C4952926287D1100D4F727 /* TeamListCell.xib */; };
 		B3C49534262AC2C100D4F727 /* CourseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C49532262AC2C000D4F727 /* CourseListCell.swift */; };
 		B3C49535262AC2C100D4F727 /* CourseListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C49533262AC2C000D4F727 /* CourseListCell.xib */; };
+		B3C4953E262E671100D4F727 /* CoachListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4953C262E670F00D4F727 /* CoachListCell.swift */; };
+		B3C4953F262E671200D4F727 /* CoachListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C4953D262E670F00D4F727 /* CoachListCell.xib */; };
 		B3CB73D923D410CD00892F75 /* OneLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73D723D410CD00892F75 /* OneLineCell.swift */; };
 		B3CB73DA23D410CD00892F75 /* OneLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CB73D823D410CD00892F75 /* OneLineCell.xib */; };
 		B3CB73DC23D5B14B00892F75 /* SuperDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73DB23D5B14B00892F75 /* SuperDate.swift */; };
@@ -588,6 +590,8 @@
 		B3C4952926287D1100D4F727 /* TeamListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamListCell.xib; sourceTree = "<group>"; };
 		B3C49532262AC2C000D4F727 /* CourseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListCell.swift; sourceTree = "<group>"; };
 		B3C49533262AC2C000D4F727 /* CourseListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseListCell.xib; sourceTree = "<group>"; };
+		B3C4953C262E670F00D4F727 /* CoachListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachListCell.swift; sourceTree = "<group>"; };
+		B3C4953D262E670F00D4F727 /* CoachListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoachListCell.xib; sourceTree = "<group>"; };
 		B3CB73D723D410CD00892F75 /* OneLineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineCell.swift; sourceTree = "<group>"; };
 		B3CB73D823D410CD00892F75 /* OneLineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OneLineCell.xib; sourceTree = "<group>"; };
 		B3CB73DB23D5B14B00892F75 /* SuperDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperDate.swift; sourceTree = "<group>"; };
@@ -842,6 +846,8 @@
 				B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */,
 				B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
+				B3C4953C262E670F00D4F727 /* CoachListCell.swift */,
+				B3C4953D262E670F00D4F727 /* CoachListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1466,6 +1472,7 @@
 				B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */,
 				B3C49535262AC2C100D4F727 /* CourseListCell.xib in Resources */,
 				B3B4EFC825807EDD00EE15D0 /* SexCell.xib in Resources */,
+				B3C4953F262E671200D4F727 /* CoachListCell.xib in Resources */,
 				B3C4952B26287D1100D4F727 /* TeamListCell.xib in Resources */,
 				B316FED72112F13600FB990C /* CollectionCell.xib in Resources */,
 				F94E7D251F83636A00F550FD /* Main.storyboard in Resources */,
@@ -1803,6 +1810,7 @@
 				B3CB73E223E3185E00892F75 /* OlCell.swift in Sources */,
 				B3310D9422ACBCC30062EF98 /* ContentEditVC.swift in Sources */,
 				B3E72A281FA20D280008A6B1 /* MemberService.swift in Sources */,
+				B3C4953E262E671100D4F727 /* CoachListCell.swift in Sources */,
 				B3310D9722AD54000062EF98 /* SuperTextView.swift in Sources */,
 				B3B758BE25AC6134006ACC33 /* ClothesSizeCell.swift in Sources */,
 				B3E4D09425F71B2500D78210 /* SelectionDialog.swift in Sources */,

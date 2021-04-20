@@ -24,8 +24,6 @@ class CoachesTable: Tables {
 }
 
 class CoachTable: Table {
-    var name: String = ""
-    var mobile: String = ""
     var email: String = ""
     var website: String = ""
     var fb: String = ""
@@ -39,15 +37,11 @@ class CoachTable: Table {
     var content: String = ""
     var manager_id: Int = -1
     var color: String = ""
-    var city_id: Int = -1
     var citys: [CityTable] = [CityTable]()
     
-    var city_show: String = ""
-    var mobile_show: String = ""
-    
+    var seniority_show: String = ""
+        
     enum CodingKeys: String, CodingKey {
-        case name
-        case mobile
         case email
         case website
         case fb
@@ -61,15 +55,12 @@ class CoachTable: Table {
         case content
         case manager_id
         case color
-        case city_id
         case citys
     }
     
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {name = try container.decode(String.self, forKey: .name)}catch{name=""}
-        do {mobile = try container.decode(String.self, forKey: .mobile)}catch{mobile = ""}
         do {email = try container.decode(String.self, forKey: .email)}catch{email = ""}
         do {website = try container.decode(String.self, forKey: .website)}catch{website = ""}
         do {fb = try container.decode(String.self, forKey: .fb)}catch{fb = ""}
@@ -83,7 +74,6 @@ class CoachTable: Table {
         do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {manager_id = try container.decode(Int.self, forKey: .manager_id)}catch{manager_id = 0}
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
-        do {city_id = try container.decode(Int.self, forKey: .city_id)}catch{city_id = 0}
         do {citys = try container.decode([CityTable].self, forKey: .citys)}catch{citys = [CityTable]()}
     }
     
@@ -91,12 +81,8 @@ class CoachTable: Table {
         
         super.filterRow()
         
-        if city_id > 0 {
-            city_show = Global.instance.zoneIDToName(city_id)
-        }
-        
-        if mobile.count > 0 {
-            mobile_show = mobile.mobileShow()
+        if seniority >= 0 {
+            seniority_show = "\(seniority)年"
         }
     }
 }

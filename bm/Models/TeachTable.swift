@@ -26,14 +26,12 @@ class TeachesTable: Tables {
 
 class TeachTable: Table {
     
-    var title: String = ""
     var content: String = ""
     var youtube: String = ""
     var provider: String = ""
     var provider_url: String = ""
     
     enum CodingKeys: String, CodingKey {
-        case title
         case content
         case youtube
         case provider
@@ -44,8 +42,6 @@ class TeachTable: Table {
         try super.init(from: decoder)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {title = try container.decode(String.self, forKey: .title)}catch{title=""}
-        do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {youtube = try container.decode(String.self, forKey: .youtube)}catch{youtube = ""}
         do {provider = try container.decode(String.self, forKey: .provider)}catch{provider = ""}
         do {provider_url = try container.decode(String.self, forKey: .provider_url)}catch{provider_url = ""}

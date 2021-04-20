@@ -10,20 +10,21 @@ import UIKit
 
 protocol List1CellDelegate {
     //func searchCity(indexPath: IndexPath)
-    func cellShowMap(indexPath: IndexPath?)
-    func cellTel(indexPath: IndexPath?)
-    func cellMobile(indexPath: IndexPath?)
-    func cellRefresh<T: Table>(row: T)
-    func cellEdit(indexPath: IndexPath?)
-    func cellDelete(indexPath: IndexPath?)
-    func cellCity(indexPath: IndexPath?)
-    func cellLike(indexPath: IndexPath?)
+    func cellShowMap(row: Table)
+    func cellTel(row: Table)
+    func cellMobile(row: Table)
+    func cellRefresh()
+    func cellEdit(row: Table)
+    func cellDelete(row: Table)
+    func cellCity(row: Table)
+    func cellLike(row: Table)
 }
 
 class List2Cell: UITableViewCell {
     
     @IBOutlet weak var listFeatured: UIImageView!
     @IBOutlet weak var titleLbl: SuperLabel!
+    @IBOutlet weak var cityBtn: CityButton!
     
     @IBOutlet weak var iconView: UIView!
     @IBOutlet weak var mapIcon: SuperButton!
@@ -48,12 +49,43 @@ class List2Cell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    func _updateViews<T: Table>(row: T) {
+    func updateViews(_ _row: Table) {
+        
+        _updateViews(_row)
+        
+        if _row.name.count > 0 {
+            titleLbl.text = _row.name
+        } else if _row.title.count > 0 {
+            titleLbl.text = _row.title
+        }
+        
+        if _row.city_show.count > 0 {
+            cityBtn.setTitle(_row.city_show)
+        } else {
+            cityBtn.isHidden = true
+        }
+        
+        
+        refreshIcon.row = _row
+        if mobileIcon != nil {
+            mobileIcon.row = _row
+        }
+        if mapIcon != nil {
+            mapIcon.row = _row
+        }
+        if cityBtn != nil {
+            cityBtn.row = _row
+        }
+        likeIcon.row = _row
+    }
+    
+    func _updateViews(_ row: Table) {
         
         self.backgroundColor = UIColor.clear
         
         if row.featured_path.count > 0 {
             
+            //print(row.featured_path)
             featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
             listFeatured.downloaded(from: row.featured_path)
         }
@@ -79,22 +111,12 @@ class List2Cell: UITableViewCell {
         icon.visibility = .gone
     }
     
-    private func _pressed(sender: UIButton, method: (IndexPath?)-> Void) {
-        
-        let _sender = sender as! SuperButton
-        var indexPath: IndexPath?
-        if _sender.indexPath != nil {
-            indexPath = _sender.indexPath!
-        }
-        method(indexPath)
-    }
-    
     @IBAction func refreshBtnPressed(sender: UIButton) {
         let _sender = sender as! SuperButton
         if _sender.row != nil {
             //row = _sender.row as! T
             if cellDelegate != nil {
-                cellDelegate!.cellRefresh(row: _sender.row!.self)
+                cellDelegate!.cellRefresh()
             }
         }
 //        self._pressed(sender: sender) { indexPath in
@@ -105,59 +127,67 @@ class List2Cell: UITableViewCell {
     }
     
     @IBAction func cityBtnPressed(sender: UIButton) {
-        let _sender = sender as! SuperButton
-        var indexPath: IndexPath?
-        if _sender.indexPath != nil {
-            indexPath = _sender.indexPath!
+        self._pressed(sender: sender) { (row) in
             if cellDelegate != nil {
-                cellDelegate!.cellCity(indexPath: indexPath)
+                cellDelegate!.cellCity(row: row)
             }
         }
     }
     
     @IBAction func mapBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { indexPath in
+        self._pressed(sender: sender) { row in
             if cellDelegate != nil {
-                cellDelegate!.cellShowMap(indexPath: indexPath)
+                cellDelegate!.cellShowMap(row: row)
             }
         }
     }
     
     @IBAction func telBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { indexPath in
+        self._pressed(sender: sender) { row in
             if cellDelegate != nil {
-                cellDelegate!.cellTel(indexPath: indexPath)
+                cellDelegate!.cellTel(row: row)
             }
         }
     }
     
     @IBAction func mobileBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { indexPath in
+        
+        self._pressed(sender: sender) { row in
             if cellDelegate != nil {
-                cellDelegate!.cellMobile(indexPath: indexPath)
+                cellDelegate!.cellMobile(row: row)
             }
         }
     }
     
     @IBAction func likeBtnPressed(sender: UIButton) {
         
-        self._pressed(sender: sender) { indexPath in
+        self._pressed(sender: sender) { row in
             if cellDelegate != nil {
-                cellDelegate!.cellLike(indexPath: indexPath)
+                cellDelegate!.cellLike(row: row)
             }
+        }
+    }
+    
+    private func _pressed(sender: UIButton, method: (Table)-> Void) {
+        
+        let _sender = sender as! SuperButton
+        var row: Table?
+        if _sender.row != nil {
+            row = _sender.row
+            method(row!)
         }
     }
 }
 
 
 extension List1CellDelegate {
-    func cellShowMap(indexPath: IndexPath?){}
-    func cellTel(indexPath: IndexPath?){}
-    func cellMobile(indexPath: IndexPath?){}
-    func cellRefresh<T: Table>(row: T){}
-    func cellEdit(indexPath: IndexPath?){}
-    func cellDelete(indexPath: IndexPath?){}
-    func cellCity(indexPath: IndexPath?){}
-    func cellLike(indexPath: IndexPath?){}
+    func cellShowMap(row: Table){}
+    func cellTel(row: Table){}
+    func cellMobile(row: Table){}
+    func cellRefresh(){}
+    func cellEdit(row: Table){}
+    func cellDelete(row: Table){}
+    func cellCity(row: Table){}
+    func cellLike(row: Table){}
 }
 

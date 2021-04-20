@@ -10,7 +10,6 @@ import UIKit
 
 class TeamListCell: List2Cell {
     
-    @IBOutlet weak var cityBtn: CityButton!
     @IBOutlet weak var areanBtn: CityButton!
     @IBOutlet weak var weekendLbl: SuperLabel!
     @IBOutlet weak var intervalLbl: SuperLabel!
@@ -28,41 +27,37 @@ class TeamListCell: List2Cell {
         }
     }
 
-    func updateViews(indexPath: IndexPath, row: TeamTable) {
+    override func updateViews(_ _row: Table) {
         
-        _updateViews(row: row.self)
-        titleLbl.text = row.name
-        cityBtn.setTitle(row.city_show)
-        if row.arena != nil {
-            areanBtn.setTitle(row.arena!.name)
-        } else {
-            areanBtn.isHidden = true
+        super.updateViews(_row)
+        
+        let row: TeamTable? = _row as? TeamTable ?? nil
+        if row != nil {
+            if row!.arena != nil {
+                areanBtn.setTitle(row!.arena!.name)
+            } else {
+                areanBtn.isHidden = true
+            }
+            
+            if row!.weekdays_show.count > 0 {
+                weekendLbl.text = row!.weekdays_show
+            } else {
+                weekendLbl.text = "未提供"
+            }
+            
+            if row!.interval_show.count > 0 {
+                intervalLbl.text = row!.interval_show
+            } else {
+                intervalLbl.text = "未提供"
+            }
+            
+            temp_qnantityLbl.text = row!.temp_quantity_show
+            signup_countLbl.text = row!.temp_signup_count_show
+            
+            if row!.mobile.isEmpty {
+                hiddenIcon(mobileIcon)
+            }
         }
-        
-        if row.weekdays_show.count > 0 {
-            weekendLbl.text = row.weekdays_show
-        } else {
-            weekendLbl.text = "未提供"
-        }
-        
-        if row.interval_show.count > 0 {
-            intervalLbl.text = row.interval_show
-        } else {
-            intervalLbl.text = "未提供"
-        }
-        
-        temp_qnantityLbl.text = row.temp_quantity_show
-        signup_countLbl.text = row.temp_signup_count_show
-        
-        if row.mobile.isEmpty {
-            hiddenIcon(mobileIcon)
-        }
-        
-        refreshIcon.indexPath = indexPath
-        cityBtn.indexPath = indexPath
-        mapIcon.indexPath = indexPath
-        mobileIcon.indexPath = indexPath
-        likeIcon.indexPath = indexPath
     }
     
 }

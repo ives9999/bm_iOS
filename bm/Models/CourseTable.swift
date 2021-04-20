@@ -27,7 +27,6 @@ class CoursesTable: Tables {
 class CourseTable: Table {
     
     //var id: Int = -1
-    var title: String = ""
     var coach_id: Int = -1
     var price: Int = -1
     var price_unit: String = ""
@@ -52,7 +51,6 @@ class CourseTable: Table {
     var youtube: String = ""
 
     var content: String = ""
-    var city_id: Int = -1
     
     var coachTable: CoachTable?
     var dateTable: DateTable?
@@ -66,7 +64,6 @@ class CourseTable: Table {
 
     var start_time_show: String = ""
     var end_time_show: String = ""
-    var city_show: String = ""
     var price_long_show: String = ""
     var price_short_show: String = ""
     var people_limit_show: String = ""
@@ -76,7 +73,6 @@ class CourseTable: Table {
     var signup_count_show: String = ""
     
     enum CodingKeys: String, CodingKey {
-        case title
         case coach_id
         case price
         case price_unit
@@ -100,7 +96,6 @@ class CourseTable: Table {
         case youtube
         case content
         case created_id
-        case city_id
         //case nextCourseTime
         case isSignup
         case signup_id
@@ -114,7 +109,6 @@ class CourseTable: Table {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {title = try container.decode(String.self, forKey: .title)}catch{title=""}
         do {coach_id = try container.decode(Int.self, forKey: .coach_id)}catch{coach_id = 0}
         do {price = try container.decode(Int.self, forKey: .price)}catch{price = 0}
         do {price_unit = try container.decode(String.self, forKey: .price_unit)}catch{price_unit = ""}
@@ -137,7 +131,6 @@ class CourseTable: Table {
         do {youtube = try container.decode(String.self, forKey: .youtube)}catch{youtube = ""}
         do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {created_id = try container.decode(Int.self, forKey: .created_id)}catch{created_id = 0}
-        do {city_id = try container.decode(Int.self, forKey: .city_id)}catch{city_id = 0}
         do {isSignup = try container.decode(Bool.self, forKey: .isSignup)}catch{isSignup = false}
         do {signup_id = try container.decode(Int.self, forKey: .signup_id)}catch{signup_id = 0}
         
@@ -154,10 +147,6 @@ class CourseTable: Table {
     override func filterRow() {
         
         super.filterRow()
-        
-        if city_id > 0 {
-            city_show = Global.instance.zoneIDToName(city_id)
-        }
         
         if start_time.count > 0 {
             start_time_show = start_time.noSec()
@@ -193,6 +182,7 @@ class CourseTable: Table {
         }
         
         if coachTable != nil {
+            self.mobile = coachTable!.mobile
             coachTable!.filterRow()
         }
     }

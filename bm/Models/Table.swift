@@ -29,7 +29,11 @@ class Tables: Codable {
 class Table: Codable {
     
     var id: Int = -1
+    var name: String = ""
+    var title: String = ""
     var channel: String = ""
+    var mobile: String = ""
+    var city_id: Int = -1
     var slug: String = ""
     var status: String = "online"
     var token: String = ""
@@ -43,10 +47,16 @@ class Table: Codable {
     var created_at_show: String = ""
     var updated_at_show: String = ""
     
+    var address: String = ""
+    var city_show: String = ""
+    var mobile_show: String = ""
+    
     required init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
         do {id = try container.decode(Int.self, forKey: .id)}catch{id = 0}
+        do {name = try container.decode(String.self, forKey: .name)}catch{name = ""}
+        do {title = try container.decode(String.self, forKey: .title)}catch{title = ""}
         do {channel = try container.decode(String.self, forKey: .channel)}catch{channel = ""}
         do {slug = try container.decode(String.self, forKey: .slug)}catch{slug = ""}
         do {status = try container.decode(String.self, forKey: .status)}catch{status = "online"}
@@ -56,6 +66,9 @@ class Table: Codable {
         do {pv = try container.decode(Int.self, forKey: .pv)}catch{pv = 0}
         do {created_at = try container.decode(String.self, forKey: .created_at)}catch{created_at = ""}
         do {updated_at = try container.decode(String.self, forKey: .updated_at)}catch{updated_at = ""}
+        
+        mobile = try container.decodeIfPresent(String.self, forKey: .mobile) ?? ""
+        city_id = try container.decodeIfPresent(Int.self, forKey: .city_id) ?? -1
     }
     
     public func filterRow(){
@@ -65,6 +78,14 @@ class Table: Codable {
                 featured_path = BASE_URL + featured_path
                 //print(featured_path)
             }
+        }
+        
+        if city_id > 0 {
+            city_show = Global.instance.zoneIDToName(city_id)
+        }
+        
+        if mobile.count > 0 {
+            mobile_show = mobile.mobileShow()
         }
         
         if created_at.count > 0 {

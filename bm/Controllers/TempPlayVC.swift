@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TempPlayVC: ListVC, List1CellDelegate {
+class TempPlayVC: ListVC {
 
     // outlets
     
@@ -174,11 +174,13 @@ class TempPlayVC: ListVC, List1CellDelegate {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? TeamListCell {
             
             cell.cellDelegate = self
-            let row = lists1[indexPath.row] as! TeamTable
-            row.filterRow()
-            //row.printRow()
+            let row = lists1[indexPath.row] as? TeamTable
+            if row != nil {
+                row!.filterRow()
+                //row.printRow()
             
-            cell.updateViews(indexPath: indexPath, row: row)
+                cell.updateViews(row!)
+            }
             
             return cell
         } else {
@@ -203,39 +205,15 @@ class TempPlayVC: ListVC, List1CellDelegate {
         }
     }
     
-    func cellMobile(indexPath: IndexPath?) {
-        if indexPath != nil {
-            let row = lists1[indexPath!.row] as! TeamTable
-            print(row.mobile)
-            //row.mobile.makeCall()
-        } else {
-            warning("index path 為空值，請洽管理員")
-        }
-    }
-    
-    func cellShowMap(indexPath: IndexPath?) {
-        if indexPath != nil {
-            let row = lists1[indexPath!.row] as! TeamTable
-            if row.arena != nil {
-                //print(row.arena!.address)
-                _showMap(title: row.name, address: row.arena!.address)
-            } else {
-                warning("球隊沒有輸入球館位置")
-            }
-        } else {
-            warning("index path 為空值，請洽管理員")
-        }
-    }
-    
-    func cellLike(indexPath: IndexPath?) {
-        if indexPath != nil {
-            let row = lists1[indexPath!.row] as! TeamTable
-            print(row.id)
-        } else {
-            warning("index path 為空值，請洽管理員")
-        }
-    }
-    
+//    func cellMobile(indexPath: IndexPath?) {
+//        if indexPath != nil {
+//            let row = lists1[indexPath!.row] as! TeamTable
+//            print(row.mobile)
+//            //row.mobile.makeCall()
+//        } else {
+//            warning("index path 為空值，請洽管理員")
+//        }
+//    }    
     
 //    @objc func cityBtnPressed(sender: UIButton) {
 //        //print(sender.tag)

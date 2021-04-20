@@ -21,12 +21,15 @@ class CoachVC: ListVC {
     override func viewDidLoad() {
         myTablView = tableView
         dataService = CoachService.instance
-        _type = "coach"
-        _titleField = "name"
+        //_type = "coach"
+        //_titleField = "name"
         searchRows = _searchRows
         //Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
+        
+        let cellNibName = UINib(nibName: "CoachListCell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
     }
     
     override func refresh() {
@@ -61,14 +64,14 @@ class CoachVC: ListVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? CoachListCell {
                 
                 cell.cellDelegate = self
                 let row = lists1[indexPath.row] as? CoachTable
                 if row != nil {
                     row!.filterRow()
                     //row!.printRow()
-                    cell.updateCoach(indexPath: indexPath, data: row!)
+                    cell.updateViews(row!)
                 }
                 
                 return cell

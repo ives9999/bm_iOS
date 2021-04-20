@@ -13,7 +13,7 @@ protocol BackDelegate {
     func setBack(params: [String: Any])
 }
 
-class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, BackDelegate {
+class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, BackDelegate, List1CellDelegate {
     func setBack(params: [String: Any]) {
         self.params = params
     }
@@ -182,7 +182,7 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? ListCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "Listcell", for: indexPath) as? List2Cell {
                 
                 cell.cellDelegate = self
                 //let row = lists[indexPath.row]
@@ -646,10 +646,47 @@ class ListVC: MyTableVC, ListCellDelegate, EditCellDelegate, CitySelectDelegate,
         }
     }
     
-    func cellRefresh<T: Table>(row: T) {
+    func cellRefresh() {
         if params1 != nil && !params1!.isEmpty {
             params1!.removeAll()
         }
         self.refresh()
+    }
+    
+    func cellMobile(row: Table) {
+        print(row.mobile)
+        //row.mobile.makeCall()
+    }
+    
+    func cellShowMap(row: Table) {
+        
+        var name: String = ""
+        if row.name.count > 0 {
+            name = row.name
+        } else if row.title.count > 0 {
+            name = row.title
+        }
+        _showMap(title: name, address: row.address)
+        
+//        if indexPath != nil {
+//            let row = lists1[indexPath!.row] as! TeamTable
+//            if row.arena != nil {
+//                //print(row.arena!.address)
+//                _showMap(title: row.name, address: row.arena!.address)
+//            } else {
+//                warning("球隊沒有輸入球館位置")
+//            }
+//        } else {
+//            warning("index path 為空值，請洽管理員")
+//        }
+    }
+    
+    func cellLike(row: Table) {
+//        if indexPath != nil {
+//            let row = lists1[indexPath!.row] as! TeamTable
+//            print(row.id)
+//        } else {
+//            warning("index path 為空值，請洽管理員")
+//        }
     }
 }

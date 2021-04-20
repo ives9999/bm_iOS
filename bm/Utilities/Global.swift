@@ -1771,18 +1771,20 @@ extension UIImageView {
     func heightForUrl(url: String, width: CGFloat)-> CGFloat {
         
         var featured_h: CGFloat = 0
-        let featured_size: CGSize = (self.sizeOfImageAt(url))!
-        //print("featured height: \(featured_h)")
-        if featured_size.width > 0 && featured_size.height > 0 {
-            let w = featured_size.width
-            let h = featured_size.height
-            let scale: CGFloat
-            if w > h {
-                scale = width / w
-            } else {
-                scale = width / h
+        let featured_size: CGSize? = (self.sizeOfImageAt(url))
+        //print("featured height: \(featunred_h)")
+        if featured_size != nil {
+            if featured_size!.width > 0 && featured_size!.height > 0 {
+                let w = featured_size!.width
+                let h = featured_size!.height
+                let scale: CGFloat
+                if w > h {
+                    scale = width / w
+                } else {
+                    scale = width / h
+                }
+                featured_h = h * scale
             }
-            featured_h = h * scale
         }
         
         return featured_h

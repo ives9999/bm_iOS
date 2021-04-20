@@ -26,7 +26,6 @@ class ArenasTable: Tables {
 
 class ArenaTable: Table {
     
-    var name: String = ""
     var tel: String = ""
     var fb: String = ""
     var website: String = ""
@@ -34,7 +33,6 @@ class ArenaTable: Table {
     var open_time: String = ""
     var close_time: String = ""
     var block: Int = -1
-    var city_id: Int = -1
     var area_id: Int = -1
     var road: String = ""
     var zip: Int = -1
@@ -46,15 +44,12 @@ class ArenaTable: Table {
     var manager_id: Int = -1
     var color: String = ""
     
-    var city_show: String = ""
     var area_show: String = ""
     var tel_show: String = ""
     var interval_show: String = ""
     var air_condition_show: String = ""
-    var address: String = ""
     
     enum CodingKeys: String, CodingKey {
-        case name
         case tel
         case email
         case website
@@ -62,7 +57,6 @@ class ArenaTable: Table {
         case open_time
         case close_time
         case block
-        case city_id
         case area_id
         case road
         case zip
@@ -78,7 +72,6 @@ class ArenaTable: Table {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {name = try container.decode(String.self, forKey: .name)}catch{name=""}
         do {tel = try container.decode(String.self, forKey: .tel)}catch{tel = ""}
         do {email = try container.decode(String.self, forKey: .email)}catch{email = ""}
         do {website = try container.decode(String.self, forKey: .website)}catch{website = ""}
@@ -95,7 +88,6 @@ class ArenaTable: Table {
         do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {manager_id = try container.decode(Int.self, forKey: .manager_id)}catch{manager_id = 0}
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
-        do {city_id = try container.decode(Int.self, forKey: .city_id)}catch{city_id = 0}
         do {area_id = try container.decode(Int.self, forKey: .area_id)}catch{area_id = 0}
     }
     
@@ -103,16 +95,8 @@ class ArenaTable: Table {
         
         super.filterRow()
         
-        if city_id > 0 {
-            city_show = Global.instance.zoneIDToName(city_id)
-        }
-        
         if area_id > 0 {
             area_show = Global.instance.zoneIDToName(area_id)
-        }
-        
-        if city_id > 0 && area_id > 0 {
-            address = city_show + area_show + road
         }
         
         if tel.count > 0 {
