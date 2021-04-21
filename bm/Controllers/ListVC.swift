@@ -666,7 +666,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         } else if row.title.count > 0 {
             name = row.title
         }
-        _showMap(title: name, address: row.address)
+        print(row.address)
+       // _showMap(title: name, address: row.address)
         
 //        if indexPath != nil {
 //            let row = lists1[indexPath!.row] as! TeamTable

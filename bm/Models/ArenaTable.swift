@@ -48,6 +48,7 @@ class ArenaTable: Table {
     var tel_show: String = ""
     var interval_show: String = ""
     var air_condition_show: String = ""
+    var parking_show: String = ""
     
     enum CodingKeys: String, CodingKey {
         case tel
@@ -114,6 +115,16 @@ class ArenaTable: Table {
             air_condition_show = "空調：無"
         default:
             air_condition_show = "未提供"
+        }
+        
+        if parking > 0 {
+            parking_show = "\(parking)個"
+        } else {
+            parking_show = "未提供"
+        }
+        
+        if city_id > 0 && area_id > 0 {
+            address = "\(city_show)\(area_show)\(road)"
         }
     }
 }

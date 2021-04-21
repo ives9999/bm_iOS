@@ -73,12 +73,15 @@ class List2Cell: UITableViewCell {
         
         
         refreshIcon.row = _row
+        
         if mobileIcon != nil {
             mobileIcon.row = _row
         }
+        
         if mapIcon != nil {
             mapIcon.row = _row
         }
+        
         if cityBtn != nil {
             cityBtn.row = _row
         }

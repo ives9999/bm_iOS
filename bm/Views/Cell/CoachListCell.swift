@@ -20,6 +20,13 @@ class CoachListCell: List2Cell {
         mobileLbl.setTextGeneral()
         seniorityLbl.setTextGeneral()
         lineLbl.setTextGeneral()
+        
+        let _icons = [likeIcon, mobileIcon]
+        let _constraints = [likeConstraint, mobileConstraint]
+        for (idx,_icon) in _icons.enumerated() {
+            let w: CGFloat = CGFloat(idx+1) * iconMargin + CGFloat(idx) * iconWidth
+            icons.append(["icon": _icon!, "constraint": _constraints[idx]!, "constant": w])
+        }
     }
     
     override func updateViews(_ _row: Table) {

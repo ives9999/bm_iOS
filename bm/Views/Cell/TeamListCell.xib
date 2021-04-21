@@ -69,7 +69,7 @@
                         <rect key="frame" x="0.0" y="141" width="558" height="36"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zqf-7l-AHB" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="16" y="0.0" width="36" height="36"/>
+                                <rect key="frame" x="120" y="0.0" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="1aD-CV-jEm"/>
                                     <constraint firstAttribute="height" constant="36" id="dH4-F0-4y8"/>
@@ -91,7 +91,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKV-v7-798" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="120" y="0.0" width="36" height="36"/>
+                                <rect key="frame" x="16" y="0.0" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="12q-tA-8Vf"/>
                                     <constraint firstAttribute="height" constant="36" id="eYa-87-ECn"/>
@@ -118,9 +118,9 @@
                             <constraint firstItem="Snr-gS-hGQ" firstAttribute="centerY" secondItem="tXk-uA-8gX" secondAttribute="centerY" id="BbY-CT-Mxb"/>
                             <constraint firstAttribute="trailing" secondItem="FtH-Dd-7Hx" secondAttribute="trailing" constant="16" id="CO2-10-l0H"/>
                             <constraint firstItem="FtH-Dd-7Hx" firstAttribute="centerY" secondItem="tXk-uA-8gX" secondAttribute="centerY" id="DhH-bE-0eU"/>
-                            <constraint firstItem="nKV-v7-798" firstAttribute="leading" secondItem="tXk-uA-8gX" secondAttribute="leading" constant="120" id="PEj-LI-T9A"/>
+                            <constraint firstItem="nKV-v7-798" firstAttribute="leading" secondItem="tXk-uA-8gX" secondAttribute="leading" constant="16" id="PEj-LI-T9A"/>
                             <constraint firstAttribute="height" constant="36" id="Sw6-LC-lYL"/>
-                            <constraint firstItem="Zqf-7l-AHB" firstAttribute="leading" secondItem="tXk-uA-8gX" secondAttribute="leading" constant="16" id="VRv-xV-r4D"/>
+                            <constraint firstItem="Zqf-7l-AHB" firstAttribute="leading" secondItem="tXk-uA-8gX" secondAttribute="leading" constant="120" id="VRv-xV-r4D"/>
                             <constraint firstItem="nKV-v7-798" firstAttribute="centerY" secondItem="tXk-uA-8gX" secondAttribute="centerY" id="Vie-8J-kaD"/>
                             <constraint firstItem="Snr-gS-hGQ" firstAttribute="leading" secondItem="tXk-uA-8gX" secondAttribute="leading" constant="68" id="YCb-V3-GvK"/>
                             <constraint firstItem="Zqf-7l-AHB" firstAttribute="centerY" secondItem="tXk-uA-8gX" secondAttribute="centerY" id="Zv5-BJ-1Oq"/>

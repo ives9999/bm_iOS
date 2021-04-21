@@ -25,9 +25,12 @@ class ArenaVC: ListVC {
         myTablView = tableView
         dataService = ArenaService.instance
         searchRows = _searchRows
-        _type = "arena"
-        _titleField = "name"
+//        _type = "arena"
+//        _titleField = "name"
         super.viewDidLoad()
+        
+        let cellNibName = UINib(nibName: "ArenaListCell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
     }
     
     override func refresh() {
@@ -63,14 +66,14 @@ class ArenaVC: ListVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "Listcell", for: indexPath) as? List2Cell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ArenaListCell {
                 
                 cell.cellDelegate = self
                 let row = lists1[indexPath.row] as? ArenaTable
                 if row != nil {
                     row!.filterRow()
                     //row!.printRow()
-                    //cell.updateViews(row: row!)
+                    cell.updateViews(row!)
                 }
                 
                 return cell
@@ -118,5 +121,12 @@ class ArenaVC: ListVC {
             searchPanelisHidden = true
             unmask()
         }
+    }
+    
+    override func cellMobile(row: Table) {
+        
+        let _row: ArenaTable = row as! ArenaTable
+        print(_row.tel)
+        //_row.tel.makeCall()
     }
 }

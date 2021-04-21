@@ -1,29 +1,28 @@
 //
-//  TeamListCell.swift
+//  ArenaListCell.swift
 //  bm
 //
-//  Created by ives on 2021/4/15.
+//  Created by ives sun on 2021/4/21.
 //  Copyright © 2021 bm. All rights reserved.
 //
 
 import UIKit
 
-class TeamListCell: List2Cell {
+class ArenaListCell: List2Cell {
     
-    @IBOutlet weak var areanBtn: CityButton!
-    @IBOutlet weak var weekendLbl: SuperLabel!
+    @IBOutlet weak var areaBtn: CityButton!
+    @IBOutlet weak var telLbl: SuperLabel!
+    @IBOutlet weak var parkingLbl: SuperLabel!
     @IBOutlet weak var intervalLbl: SuperLabel!
-    @IBOutlet weak var temp_qnantityLbl: SuperLabel!
-    @IBOutlet weak var signup_countLbl: SuperLabel!
+    @IBOutlet weak var air_conditionLbl: SuperLabel!
 
     override func awakeFromNib() {
-        
         super.awakeFromNib()
         
-        weekendLbl.setTextGeneral()
+        telLbl.setTextGeneral()
         intervalLbl.setTextGeneral()
-        temp_qnantityLbl.setTextGeneral()
-        signup_countLbl.setTextGeneral()
+        parkingLbl.setTextGeneral()
+        air_conditionLbl.setTextGeneral()
         
         let _icons = [likeIcon, mobileIcon, mapIcon]
         let _constraints = [likeConstraint, mobileConstraint, mapConstraint]
@@ -32,23 +31,23 @@ class TeamListCell: List2Cell {
             icons.append(["icon": _icon!, "constraint": _constraints[idx]!, "constant": w])
         }
     }
-
+    
     override func updateViews(_ _row: Table) {
         
         super.updateViews(_row)
         
-        let row: TeamTable? = _row as? TeamTable ?? nil
+        let row: ArenaTable? = _row as? ArenaTable ?? nil
         if row != nil {
-            if row!.arena != nil {
-                areanBtn.setTitle(row!.arena!.name)
+            if row!.area_id > 0 {
+                areaBtn.setTitle(row!.area_show)
             } else {
-                areanBtn.isHidden = true
+                areaBtn.isHidden = true
             }
             
-            if row!.weekdays_show.count > 0 {
-                weekendLbl.text = row!.weekdays_show
+            if row!.tel.count > 0 {
+                telLbl.text = row!.tel_show
             } else {
-                weekendLbl.text = "未提供"
+                telLbl.text = "未提供"
             }
             
             if row!.interval_show.count > 0 {
@@ -57,10 +56,10 @@ class TeamListCell: List2Cell {
                 intervalLbl.text = "未提供"
             }
             
-            temp_qnantityLbl.text = row!.temp_quantity_show
-            signup_countLbl.text = row!.temp_signup_count_show
+            air_conditionLbl.text = row!.air_condition_show
+            parkingLbl.text = "停車:\(row!.parking_show)"
             
-            if row!.mobile.isEmpty {
+            if row!.tel.isEmpty {
                 hiddenIcon(mobileIcon)
             }
         }
