@@ -17,7 +17,13 @@ class CourseListCell: List2Cell {
     @IBOutlet weak var signup_countLbl: SuperLabel!
 
     override func awakeFromNib() {
+        
         super.awakeFromNib()
+        priceLbl.highlight()
+        weekendLbl.setTextGeneral()
+        intervalLbl.setTextGeneral()
+        people_limitLbl.setTextGeneral()
+        signup_countLbl.setTextGeneral()
     }
 
     override func updateViews(_ _row: Table) {

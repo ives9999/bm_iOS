@@ -9,9 +9,6 @@
 import UIKit
 
 class SuperLabel: UILabel {
-
-    var fontName: String = FONT_NAME
-    var fontSize: CGFloat = FONT_SIZE_TITLE
     
     var indexPath: IndexPath?
     var key: String?
@@ -30,14 +27,28 @@ class SuperLabel: UILabel {
         
         self.textColor = UIColor.white
         self.backgroundColor = UIColor.clear
-        self.font = UIFont(name: fontName, size: fontSize)
+        self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
         self.textAlignment = NSTextAlignment.center
         
         self.numberOfLines = 1
     }
     
     func setTextSize(_ size: CGFloat) {
-        self.font = UIFont(name: fontName, size: size)
+        self.font = UIFont(name: FONT_NAME, size: size)
+    }
+    
+    func setTextTitle() {
+        self.font = UIFont(name: FONT_BOLD_NAME, size: FONT_SIZE_TITLE)
+    }
+    
+    func setTextGeneral() {
+        self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
+        self.textColor = UIColor(TEXTGRAY)
+    }
+    
+    func highlight() {
+        self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
+        self.textColor = UIColor(MY_WEIGHT_RED)
     }
 
     func setTextColor(_ color: UIColor) {

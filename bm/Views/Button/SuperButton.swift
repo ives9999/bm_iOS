@@ -10,9 +10,6 @@ import UIKit
 
 class SuperButton: UIButton {
 
-    var fontName: String = FONT_NAME
-    var fontSize: CGFloat = FONT_SIZE_TITLE
-    
     var indexPath: IndexPath?
     var key: String?
     var row: Table?
@@ -38,7 +35,7 @@ class SuperButton: UIButton {
     
     func commonInit(){
         self.setTitleColor(UIColor.white, for: UIControl.State.normal)
-        self.titleLabel?.font = UIFont(name: fontName, size: fontSize)
+        self.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
         self.alignH = .left
         self.alignV = .center
         self.cornerRadius = 12
@@ -70,7 +67,7 @@ class SuperButton: UIButton {
         self.layer.cornerRadius = value
     }
     func setTextSize(_ size: CGFloat) {
-        self.titleLabel?.font = UIFont(name: fontName, size: size)
+        self.titleLabel?.font = UIFont(name: FONT_NAME, size: size)
     }
     func setTitle(_ title: String) {
         setTitle(title, for: .normal)

@@ -16,6 +16,10 @@ class CoachListCell: List2Cell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        mobileLbl.setTextGeneral()
+        seniorityLbl.setTextGeneral()
+        lineLbl.setTextGeneral()
     }
     
     override func updateViews(_ _row: Table) {
@@ -31,15 +35,15 @@ class CoachListCell: List2Cell {
             }
             
             if row!.seniority >= 0 {
-                seniorityLbl.text = "年資：\(row!.seniority_show)"
+                seniorityLbl.text = "年資:\(row!.seniority_show)"
             } else {
-                seniorityLbl.text = "年資：未提供"
+                seniorityLbl.text = "年資:未提供"
             }
 
             if row!.line.count > 0 {
-                lineLbl.text = "Line ID：\(row!.line)"
+                lineLbl.text = "Line ID:\(row!.line)"
             } else {
-                lineLbl.text = "Line ID：未提供"
+                lineLbl.text = "Line ID:未提供"
             }
 
         }

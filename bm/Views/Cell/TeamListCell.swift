@@ -19,6 +19,12 @@ class TeamListCell: List2Cell {
     override func awakeFromNib() {
         
         super.awakeFromNib()
+        
+        weekendLbl.setTextGeneral()
+        intervalLbl.setTextGeneral()
+        temp_qnantityLbl.setTextGeneral()
+        signup_countLbl.setTextGeneral()
+        
         let _icons = [mapIcon, mobileIcon, likeIcon]
         let _constraints = [mapConstraint, mobileConstraint, likeConstraint]
         for (idx,_icon) in _icons.enumerated() {

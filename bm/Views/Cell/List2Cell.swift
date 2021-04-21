@@ -47,6 +47,12 @@ class List2Cell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        titleLbl.setTextTitle()
+        
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(CELL_SELECTED)
+        selectedBackgroundView = bgColorView
     }
     
     func updateViews(_ _row: Table) {

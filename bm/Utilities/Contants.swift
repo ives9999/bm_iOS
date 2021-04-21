@@ -76,8 +76,10 @@ let URL_TT_UPDATE = "\(URL_HOME)%@/tt/update"
 let URL_UPDATE = "\(URL_HOME)%@/update"
 
 // Font
-let FONT_NAME: String = "Apple SD Gothic Neo"
-let FONT_SIZE_TITLE: CGFloat = 22
+let FONT_NAME: String = "HelveticaNeue"
+let FONT_BOLD_NAME: String = "HelveticaNeue-Bold"
+let FONT_SIZE_TITLE: CGFloat = 24
+let FONT_SIZE_GENERAL: CGFloat = 19
 let FONT_SIZE_TABBAR: CGFloat = 14
 
 // List pages
@@ -163,11 +165,12 @@ let TO_TIMETABLE: String = "toTimeTable"
 let TO_VALIDATE: String = "toValidate"
 
 // color
-let CELL_SELECTED = "#665D65"
+let CELL_SELECTED = "#363636"
 let MY_BLACK = "#000000"
 let MY_GREEN = "#a6d903"
 let MY_RED = "#f11b90"
 let MY_LIGHT_RED = "#FF4081"
+let MY_WEIGHT_RED = "#FF3030"
 let MY_GRAY = "#717171"
 let MY_WHITE = "#FFFFFF"
 let CITY_BUTTON = "#fceb4c"
@@ -181,6 +184,7 @@ let TAG_SELECTED_BACKGROUND = MY_BLACK
 let TAG_SELECTED_BOLDCOLOR = MY_RED
 let TAG_SELECTED_TEXTCOLOR = MY_WHITE
 let TEXTBORDER = MY_GREEN
+let TEXTGRAY = "#BFBFBF"
 let PLACEHOLDER = "#8b8f90"
 let TEXTBACKGROUND = "#3d3f41"
 let DARKBACKGROUND = "#282828"
