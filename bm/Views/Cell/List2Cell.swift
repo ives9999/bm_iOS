@@ -65,10 +65,12 @@ class List2Cell: UITableViewCell {
             titleLbl.text = _row.title
         }
         
-        if _row.city_show.count > 0 {
-            cityBtn.setTitle(_row.city_show)
-        } else {
-            cityBtn.isHidden = true
+        if cityBtn != nil {
+            if _row.city_show.count > 0 {
+                cityBtn.setTitle(_row.city_show)
+            } else {
+                cityBtn.isHidden = true
+            }
         }
         
         
@@ -119,6 +121,19 @@ class List2Cell: UITableViewCell {
         }
         icon.visibility = .gone
     }
+    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        //print(contentView.frame.height)
+//        let cellH = contentView.frame.height
+//
+//        if featured_h > 0 {
+//            // 16 is margin*2
+//            //print(listFeatured.image!.size)
+//            let featured_margin_h: CGFloat = (cellH - iconWidth - 16 - featured_h) / 2
+//            featuredHConstraint.constant = featured_margin_h
+//        }
+//    }
     
     @IBAction func refreshBtnPressed(sender: UIButton) {
         let _sender = sender as! SuperButton

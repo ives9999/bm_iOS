@@ -72,8 +72,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         searchTableView.dataSource = self
         searchTableView.delegate = self
         
-        let cellNibName = UINib(nibName: "List1Cell", bundle: nil)
-        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
+        let cellNibName = UINib(nibName: "List2Cell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "lis2Cell")
         
         let editCellNib = UINib(nibName: "EditCell", bundle: nil)
         searchTableView.register(editCellNib, forCellReuseIdentifier: "search_cell")

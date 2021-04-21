@@ -166,8 +166,6 @@
 		B3A9038E2385537900A986F7 /* CourseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A9038D2385537900A986F7 /* CourseView.xib */; };
 		B3A9039023857A1200A986F7 /* CourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9038F23857A1200A986F7 /* CourseView.swift */; };
 		B3A9843125552DBB00DCD0F6 /* ManagerStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */; };
-		B3A9844C255918CF00DCD0F6 /* List1Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A9844A255918CF00DCD0F6 /* List1Cell.swift */; };
-		B3A9844D255918CF00DCD0F6 /* List1Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3A9844B255918CF00DCD0F6 /* List1Cell.xib */; };
 		B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */; };
 		B3AE92C82629523600223B2A /* List2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE92C72629523600223B2A /* List2Cell.swift */; };
 		B3AE92DC26295E4F00223B2A /* SuperCoach.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE92DB26295E4F00223B2A /* SuperCoach.swift */; };
@@ -175,6 +173,10 @@
 		B3AE9324262962E200223B2A /* Team_WeekdaysTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE9323262962E200223B2A /* Team_WeekdaysTable.swift */; };
 		B3AE937B262FCC5F00223B2A /* ArenaListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE9379262FCC5F00223B2A /* ArenaListCell.swift */; };
 		B3AE937C262FCC5F00223B2A /* ArenaListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3AE937A262FCC5F00223B2A /* ArenaListCell.xib */; };
+		B3AE9382262FED6B00223B2A /* StoreListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE9380262FED6B00223B2A /* StoreListCell.swift */; };
+		B3AE9383262FED6B00223B2A /* StoreListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3AE9381262FED6B00223B2A /* StoreListCell.xib */; };
+		B3AE9389262FEE5700223B2A /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE9387262FEE5700223B2A /* ProductListCell.swift */; };
+		B3AE938A262FEE5700223B2A /* ProductListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3AE9388262FEE5700223B2A /* ProductListCell.xib */; };
 		B3B4B61022CA247500245CC8 /* SomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4B60E22CA247500245CC8 /* SomeCell.swift */; };
 		B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4B60F22CA247500245CC8 /* SomeCell.xib */; };
 		B3B4EF56257B59EA00EE15D0 /* PrivacyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */; };
@@ -541,8 +543,6 @@
 		B3A9038D2385537900A986F7 /* CourseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseView.xib; sourceTree = "<group>"; };
 		B3A9038F23857A1200A986F7 /* CourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseView.swift; sourceTree = "<group>"; };
 		B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerStoreVC.swift; sourceTree = "<group>"; };
-		B3A9844A255918CF00DCD0F6 /* List1Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List1Cell.swift; sourceTree = "<group>"; };
-		B3A9844B255918CF00DCD0F6 /* List1Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = List1Cell.xib; sourceTree = "<group>"; };
 		B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionHeaderView.swift; sourceTree = "<group>"; };
 		B3AE92C72629523600223B2A /* List2Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List2Cell.swift; sourceTree = "<group>"; };
 		B3AE92DB26295E4F00223B2A /* SuperCoach.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SuperCoach.swift; path = bm/Models/SuperCoach.swift; sourceTree = SOURCE_ROOT; };
@@ -550,6 +550,10 @@
 		B3AE9323262962E200223B2A /* Team_WeekdaysTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Team_WeekdaysTable.swift; sourceTree = "<group>"; };
 		B3AE9379262FCC5F00223B2A /* ArenaListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaListCell.swift; sourceTree = "<group>"; };
 		B3AE937A262FCC5F00223B2A /* ArenaListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArenaListCell.xib; sourceTree = "<group>"; };
+		B3AE9380262FED6B00223B2A /* StoreListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListCell.swift; sourceTree = "<group>"; };
+		B3AE9381262FED6B00223B2A /* StoreListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreListCell.xib; sourceTree = "<group>"; };
+		B3AE9387262FEE5700223B2A /* ProductListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCell.swift; sourceTree = "<group>"; };
+		B3AE9388262FEE5700223B2A /* ProductListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListCell.xib; sourceTree = "<group>"; };
 		B3B4B60E22CA247500245CC8 /* SomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeCell.swift; sourceTree = "<group>"; };
 		B3B4B60F22CA247500245CC8 /* SomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SomeCell.xib; sourceTree = "<group>"; };
 		B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyCell.swift; sourceTree = "<group>"; };
@@ -812,8 +816,6 @@
 				B35C4F4B2196F5E500F8AEB2 /* EditCell.xib */,
 				B306FEAB21F8422B00403FE2 /* IconCell.swift */,
 				B306FEAC21F8422B00403FE2 /* IconCell.xib */,
-				B3A9844A255918CF00DCD0F6 /* List1Cell.swift */,
-				B3A9844B255918CF00DCD0F6 /* List1Cell.xib */,
 				B3AE92C72629523600223B2A /* List2Cell.swift */,
 				B3DEBE0D2106FDB1003699A0 /* ListCell.swift */,
 				B3DEBE0E2106FDB1003699A0 /* ListCell.xib */,
@@ -854,6 +856,10 @@
 				B3C4953D262E670F00D4F727 /* CoachListCell.xib */,
 				B3AE9379262FCC5F00223B2A /* ArenaListCell.swift */,
 				B3AE937A262FCC5F00223B2A /* ArenaListCell.xib */,
+				B3AE9380262FED6B00223B2A /* StoreListCell.swift */,
+				B3AE9381262FED6B00223B2A /* StoreListCell.xib */,
+				B3AE9387262FEE5700223B2A /* ProductListCell.swift */,
+				B3AE9388262FEE5700223B2A /* ProductListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1458,9 +1464,9 @@
 				B3310D9222ACA57A0062EF98 /* ContentCell.xib in Resources */,
 				B3B758ED25B0763A006ACC33 /* WeightCell.xib in Resources */,
 				B3FB9B202407F3750051186F /* More.storyboard in Resources */,
-				B3A9844D255918CF00DCD0F6 /* List1Cell.xib in Resources */,
 				B3E4D1D92603395300D78210 /* TeachCell.xib in Resources */,
 				B3E88BEA2380F2D1001F015A /* CalendarSignupCell.xib in Resources */,
+				B3AE938A262FEE5700223B2A /* ProductListCell.xib in Resources */,
 				B33426041FEFCDE300A760BD /* Images.xcassets in Resources */,
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
 				B3AE937C262FCC5F00223B2A /* ArenaListCell.xib in Resources */,
@@ -1483,6 +1489,7 @@
 				B3C4952B26287D1100D4F727 /* TeamListCell.xib in Resources */,
 				B316FED72112F13600FB990C /* CollectionCell.xib in Resources */,
 				F94E7D251F83636A00F550FD /* Main.storyboard in Resources */,
+				B3AE9383262FED6B00223B2A /* StoreListCell.xib in Resources */,
 				B3B4EF71257C8BFB00EE15D0 /* PasswordCell.xib in Resources */,
 				B3B758AB25AC04AC006ACC33 /* TagCell.xib in Resources */,
 				B3FB9B252407F7280051186F /* Course.storyboard in Resources */,
@@ -1660,7 +1667,6 @@
 				B3B758F325BB08CD006ACC33 /* OrderService.swift in Sources */,
 				B31ADD9325905387003E86BD /* Zone.swift in Sources */,
 				B3E4D1D22602EF1900D78210 /* TeachTable.swift in Sources */,
-				B3A9844C255918CF00DCD0F6 /* List1Cell.swift in Sources */,
 				B3A253DE256A9E43004B8A03 /* CityFormItem.swift in Sources */,
 				B3F6B46D2605E80F0000F9E0 /* PaymentTable.swift in Sources */,
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,
@@ -1716,6 +1722,7 @@
 				B358B0B0229D4F4F00F1A4E6 /* EditCourseVC.swift in Sources */,
 				B326C7C2256E2AEB0048A2C2 /* SelectAreaVC.swift in Sources */,
 				B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */,
+				B3AE9382262FED6B00223B2A /* StoreListCell.swift in Sources */,
 				F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */,
 				B39453DE2232948F005E3027 /* PNCell.swift in Sources */,
 				B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */,
@@ -1732,6 +1739,7 @@
 				B36241372601B3CA008FAD1B /* ProductTable.swift in Sources */,
 				B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */,
 				B3310D9922AE302A0062EF98 /* ClearButton.swift in Sources */,
+				B3AE9389262FEE5700223B2A /* ProductListCell.swift in Sources */,
 				B36CBD5720DFF7B000E52B9C /* JSONParse.swift in Sources */,
 				F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */,
 				B3B7585D259CB8FE006ACC33 /* ProductVC.swift in Sources */,

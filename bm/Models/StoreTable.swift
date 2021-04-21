@@ -44,6 +44,7 @@ class StoreTable: Table {
     var tel_show: String = ""
     var open_time_show: String = ""
     var close_time_show: String = ""
+    var interval_show: String = ""
     
     var managers: [[String: Any]] = [[String: Any]]()
     
@@ -98,6 +99,10 @@ class StoreTable: Table {
         
         if close_time.count > 0 {
             close_time_show = close_time.noSec()
+        }
+        
+        if open_time.count > 0 && close_time.count > 0 {
+            interval_show = "\(open_time)~\(close_time)"
         }
     }
 }

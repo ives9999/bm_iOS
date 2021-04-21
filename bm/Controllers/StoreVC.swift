@@ -21,14 +21,15 @@ class StoreVC: ListVC {
             
     override func viewDidLoad() {
         myTablView = tableView
-        //myTablView.allowsMultipleSelectionDuringEditing = false
-        //myTablView.isUserInteractionEnabled = true
         dataService = StoreService.instance
-        _type = "store"
-        _titleField = "name"
+//        _type = "store"
+//        _titleField = "name"
         searchRows = _searchRows
         
         super.viewDidLoad()
+        
+        let cellNibName = UINib(nibName: "StoreListCell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
         //refresh()
     }
@@ -66,14 +67,16 @@ class StoreVC: ListVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? List1Cell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? StoreListCell {
                 
                 cell.cellDelegate = self
-                let row = lists1[indexPath.row] as! StoreTable
-                row.filterRow()
-                //row.printRow()
+                let row = lists1[indexPath.row] as? StoreTable
+                if row != nil {
+                    row!.filterRow()
+                    //row!.printRow()
                 
-                cell.updateStoreViews(indexPath: indexPath, row: row)
+                    cell.updateViews(row!)
+                }
                 
                 return cell
             } else {
@@ -151,32 +154,7 @@ class StoreVC: ListVC {
         //print(params1)
     }
     
-    func cellShowMap(indexPath: IndexPath?) {
-        if indexPath != nil {
-            let row = lists1[indexPath!.row] as! StoreTable
-            _showMap(title: row.name, address: row.address)
-        } else {
-            warning("index path 為空值，請洽管理員")
-        }
-    }
     
-    func cellTel(indexPath: IndexPath?) {
-        if indexPath != nil {
-            let row = lists1[indexPath!.row] as! StoreTable
-            row.tel.makeCall()
-        } else {
-            warning("index path 為空值，請洽管理員")
-        }
-    }
-    
-    func cellMobile(indexPath: IndexPath?) {
-        if indexPath != nil {
-            let row = lists1[indexPath!.row] as! StoreTable
-            row.mobile.makeCall()
-        } else {
-            warning("index path 為空值，請洽管理員")
-        }
-    }
     
 //    func cellRefresh(indexPath: IndexPath?) {
 //        if indexPath != nil {
@@ -328,6 +306,13 @@ class StoreVC: ListVC {
         row["value"] = ""
         row["show"] = "全部"
         replaceRows(key, row)
+    }
+    
+    override func cellMobile(row: Table) {
+        
+        let _row: StoreTable = row as! StoreTable
+        print(_row.tel)
+        //_row.tel.makeCall()
     }
     
     
