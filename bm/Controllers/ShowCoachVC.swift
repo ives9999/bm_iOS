@@ -57,6 +57,8 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var licenseViewHeight: NSLayoutConstraint!
     @IBOutlet weak var featViewHeight: NSLayoutConstraint!
     @IBOutlet weak var detailViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var likeButton: LikeButton!
+    
     var lastView: UIView!
     
     var h: CGFloat = 0

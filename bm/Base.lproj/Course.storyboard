@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -299,7 +299,7 @@
                                 <rect key="frame" x="0.0" y="758" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Iba-Pw-pJn">
-                                        <rect key="frame" x="191.5" y="7.5" width="31" height="35"/>
+                                        <rect key="frame" x="168.5" y="7.5" width="77" height="35"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1v5-xT-scn" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="31" height="35"/>
@@ -311,6 +311,13 @@
                                                 <connections>
                                                     <action selector="signupButtonPressed:" destination="ZZa-2U-rNz" eventType="touchUpInside" id="taN-ok-LvS"/>
                                                 </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTk-sv-0Nb" customClass="LikeButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="47" y="0.0" width="30" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="dgW-DT-ByZ"/>
+                                                </constraints>
+                                                <state key="normal" title="like"/>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -350,6 +357,7 @@
                         <outlet property="contentLbl" destination="a1J-aW-JsJ" id="IA0-01-nrW"/>
                         <outlet property="courseDataLbl" destination="uVt-2n-TRc" id="8lB-2H-814"/>
                         <outlet property="featured" destination="I9U-D1-tnd" id="1Mi-aI-H3N"/>
+                        <outlet property="likeButton" destination="VTk-sv-0Nb" id="X37-oL-xPa"/>
                         <outlet property="scrollContainerView" destination="ORk-cu-jAE" id="kqI-68-0h3"/>
                         <outlet property="scrollView" destination="lfl-RI-5GV" id="nyn-hc-0DQ"/>
                         <outlet property="signupButton" destination="1v5-xT-scn" id="5NW-z3-FwD"/>
@@ -1327,24 +1335,6 @@
         <image name="plus" width="25" height="25"/>
         <image name="prev" width="20.5" height="20.5"/>
         <image name="search" width="25" height="25"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

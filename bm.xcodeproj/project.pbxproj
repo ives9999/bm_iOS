@@ -24,6 +24,7 @@
 		B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEA921F7446F00403FE2 /* TimetableService.swift */; };
 		B306FEAD21F8422B00403FE2 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEAB21F8422B00403FE2 /* IconCell.swift */; };
 		B306FEAE21F8422B00403FE2 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B306FEAC21F8422B00403FE2 /* IconCell.xib */; };
+		B307AA31263840EE001F685D /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307AA30263840EE001F685D /* LikeButton.swift */; };
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -398,6 +399,7 @@
 		B306FEA921F7446F00403FE2 /* TimetableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimetableService.swift; sourceTree = "<group>"; };
 		B306FEAB21F8422B00403FE2 /* IconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
 		B306FEAC21F8422B00403FE2 /* IconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
+		B307AA30263840EE001F685D /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
 		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1044,6 +1046,7 @@
 				B3E8C2A12207E0DC0008ED25 /* CityButton.swift */,
 				B39453E0223CE905005E3027 /* CancelButton.swift */,
 				B3310D9822AE302A0062EF98 /* ClearButton.swift */,
+				B307AA30263840EE001F685D /* LikeButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -1889,6 +1892,7 @@
 				B306FEA321F1A35700403FE2 /* SuperDatePicker.swift in Sources */,
 				B317855B20D9089600765CA1 /* BlackListCell.swift in Sources */,
 				B306F340217DA15000C32CE2 /* Area.swift in Sources */,
+				B307AA31263840EE001F685D /* LikeButton.swift in Sources */,
 				B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -27,6 +27,7 @@ class ShowProductVC: BaseViewController {
     @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
     
     @IBOutlet weak var submitButton: SubmitButton!
+    @IBOutlet weak var likeButton: LikeButton!
     
     var productTable: ProductTable?
     var product_token: String?

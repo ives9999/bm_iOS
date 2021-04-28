@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -99,7 +100,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教練" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ae5-TU-DnJ">
-                                        <rect key="frame" x="186.5" y="18.5" width="41" height="27"/>
+                                        <rect key="frame" x="186.5" y="19" width="41.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -119,9 +120,6 @@
                                     <constraint firstItem="CXW-ZU-dDh" firstAttribute="centerY" secondItem="k3Y-KA-sLj" secondAttribute="centerY" id="oMB-hP-asr"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="n23-TM-rvs">
-                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
-                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UeS-dR-qEx" customClass="SuperScrollView" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                                 <subviews>
@@ -319,19 +317,38 @@
                                     <constraint firstItem="xeD-8R-KJQ" firstAttribute="width" secondItem="UeS-dR-qEx" secondAttribute="width" id="wUO-xd-v9r"/>
                                 </constraints>
                             </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZDj-Uv-Vlc" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="zcA-JE-qOp">
+                                        <rect key="frame" x="192" y="10" width="30" height="30"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2i-Bv-LZE" customClass="LikeButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="like"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="zcA-JE-qOp" firstAttribute="centerX" secondItem="ZDj-Uv-Vlc" secondAttribute="centerX" id="87X-gp-QLE"/>
+                                    <constraint firstAttribute="height" constant="50" id="Jcs-2a-KpB"/>
+                                    <constraint firstItem="zcA-JE-qOp" firstAttribute="centerY" secondItem="ZDj-Uv-Vlc" secondAttribute="centerY" id="Weo-Ms-V8d"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="TJv-46-gGn"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="n23-TM-rvs" firstAttribute="trailing" secondItem="TJv-46-gGn" secondAttribute="trailing" id="1TZ-d9-SEI"/>
                             <constraint firstAttribute="trailing" secondItem="k3Y-KA-sLj" secondAttribute="trailing" id="3k3-rI-hEK"/>
-                            <constraint firstItem="TJv-46-gGn" firstAttribute="bottom" secondItem="n23-TM-rvs" secondAttribute="bottom" id="6Y6-oC-hBf"/>
-                            <constraint firstItem="n23-TM-rvs" firstAttribute="leading" secondItem="TJv-46-gGn" secondAttribute="leading" id="9Ks-kw-yQF"/>
+                            <constraint firstItem="ZDj-Uv-Vlc" firstAttribute="leading" secondItem="TJv-46-gGn" secondAttribute="leading" id="4NX-TR-eem"/>
                             <constraint firstItem="TJv-46-gGn" firstAttribute="trailing" secondItem="UeS-dR-qEx" secondAttribute="trailing" id="Ccr-q7-RgY"/>
                             <constraint firstItem="k3Y-KA-sLj" firstAttribute="top" secondItem="TJv-46-gGn" secondAttribute="top" id="EeX-HG-pAN"/>
                             <constraint firstItem="UeS-dR-qEx" firstAttribute="top" secondItem="k3Y-KA-sLj" secondAttribute="bottom" id="JCB-A4-pIs"/>
                             <constraint firstItem="k3Y-KA-sLj" firstAttribute="leading" secondItem="TJv-46-gGn" secondAttribute="leading" id="JSi-Nq-y6a"/>
-                            <constraint firstItem="n23-TM-rvs" firstAttribute="top" secondItem="k3Y-KA-sLj" secondAttribute="bottom" id="U88-zw-P5R"/>
+                            <constraint firstItem="TJv-46-gGn" firstAttribute="bottom" secondItem="ZDj-Uv-Vlc" secondAttribute="bottom" id="P3i-pA-CVD"/>
+                            <constraint firstItem="ZDj-Uv-Vlc" firstAttribute="trailing" secondItem="TJv-46-gGn" secondAttribute="trailing" id="RbT-cW-OHu"/>
                             <constraint firstItem="TJv-46-gGn" firstAttribute="bottom" secondItem="UeS-dR-qEx" secondAttribute="bottom" id="jaI-rN-QY5"/>
                             <constraint firstItem="UeS-dR-qEx" firstAttribute="leading" secondItem="TJv-46-gGn" secondAttribute="leading" id="tf2-4I-pHf"/>
                         </constraints>
@@ -363,6 +380,7 @@
                         <outlet property="licenseLbl" destination="gWz-19-g2D" id="SnY-Tb-dBo"/>
                         <outlet property="licenseView" destination="gfA-Le-et9" id="Fel-kZ-iVR"/>
                         <outlet property="licenseViewHeight" destination="Tjv-eH-qHH" id="WFf-ph-RYy"/>
+                        <outlet property="likeButton" destination="f2i-Bv-LZE" id="Ty4-XB-mG4"/>
                         <outlet property="scrollContainerView" destination="xeD-8R-KJQ" id="oYI-cc-zb9"/>
                         <outlet property="scrollView" destination="UeS-dR-qEx" id="0ae-dC-4OB"/>
                         <outlet property="titleLbl" destination="ae5-TU-DnJ" id="p5N-61-J3p"/>

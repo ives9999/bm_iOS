@@ -36,6 +36,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var coachDataLbl: SuperLabel!
     @IBOutlet weak var contentLbl: SuperLabel!
     @IBOutlet weak var signupButton: SubmitButton!
+    @IBOutlet weak var likeButton: LikeButton!
     //@IBOutlet weak var signupListButton: CancelButton!
     
     var contentView: WKWebView? = {
@@ -113,6 +114,8 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         
         signupButton.setTitle("報名")
         //signupListButton.setTitle("報名列表")
+        
+        
         
         beginRefresh()
         scrollView.addSubview(refreshControl)

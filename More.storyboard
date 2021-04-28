@@ -1264,8 +1264,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BXx-Du-gqq" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="wtf-r7-6Ru">
-                                        <rect key="frame" x="147.5" y="8" width="119" height="34"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="wtf-r7-6Ru">
+                                        <rect key="frame" x="115" y="8" width="184" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bLQ-Ko-6w0" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
@@ -1281,8 +1281,12 @@
                                                     <action selector="submitBtnPressed:" destination="tNU-cp-fqk" eventType="touchUpInside" id="Bg8-AU-6V2"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5O-q2-1x3" customClass="LikeButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="62" y="0.0" width="46" height="34"/>
+                                                <state key="normal" title="Button"/>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5Q-Ev-pfe" customClass="CancelButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="73" y="0.0" width="46" height="34"/>
+                                                <rect key="frame" x="138" y="0.0" width="46" height="34"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="cancel:" destination="XPE-Pw-Llr" eventType="touchUpInside" id="Xo6-z3-QeO"/>
@@ -1295,9 +1299,7 @@
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="wtf-r7-6Ru" firstAttribute="centerY" secondItem="BXx-Du-gqq" secondAttribute="centerY" id="GA8-ET-EeV"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="IUR-i1-5F7"/>
                                     <constraint firstItem="wtf-r7-6Ru" firstAttribute="centerX" secondItem="BXx-Du-gqq" secondAttribute="centerX" id="K5z-9A-dz8"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="l3I-UD-dgV"/>
                                     <constraint firstAttribute="height" constant="50" id="xbp-y7-o7G"/>
                                 </constraints>
                             </view>
@@ -1327,6 +1329,7 @@
                         <outlet property="imageContainerView" destination="BeW-fM-Liv" id="NMJ-DK-dyx"/>
                         <outlet property="imageContainerViewConstraintHeight" destination="K0y-Xq-uu5" id="0Bb-FH-fTG"/>
                         <outlet property="imageDataLbl" destination="NPx-Cf-3OD" id="uhs-1V-Adu"/>
+                        <outlet property="likeButton" destination="i5O-q2-1x3" id="phU-cI-ofD"/>
                         <outlet property="scrollContainerView" destination="aOo-EN-TkR" id="Z1c-Xb-wu8"/>
                         <outlet property="scrollView" destination="ZXy-gC-bR9" id="aek-qS-hl9"/>
                         <outlet property="submitButton" destination="bLQ-Ko-6w0" id="c0N-Nb-ut2"/>
