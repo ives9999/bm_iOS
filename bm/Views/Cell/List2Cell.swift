@@ -18,6 +18,8 @@ protocol List1CellDelegate {
     func cellDelete(row: Table)
     func cellCity(row: Table)
     func cellLike(row: Table)
+    func cellWarning(msg: String)
+    func cellToLogin()
 }
 
 class List2Cell: UITableViewCell {
@@ -30,7 +32,7 @@ class List2Cell: UITableViewCell {
     @IBOutlet weak var mapIcon: SuperButton!
     @IBOutlet weak var mobileIcon: SuperButton!
     @IBOutlet weak var refreshIcon: SuperButton!
-    @IBOutlet weak var likeIcon: SuperButton!
+    @IBOutlet weak var likeIcon: LikeIcon!
     
     @IBOutlet weak var mapConstraint: NSLayoutConstraint!
     @IBOutlet weak var mobileConstraint: NSLayoutConstraint!
@@ -45,6 +47,8 @@ class List2Cell: UITableViewCell {
     
     var table: Table?
     
+    //var isLike: Bool = false
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -53,7 +57,27 @@ class List2Cell: UITableViewCell {
         let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(CELL_SELECTED)
         selectedBackgroundView = bgColorView
+        
+        let likeImg = UIImage(named: "like")
+        likeIcon.setBackgroundImage(likeImg, for: .normal)
     }
+    
+    func _updateViews(_ row: Table) {
+        
+        self.backgroundColor = UIColor.clear
+        
+        if row.featured_path.count > 0 {
+            
+            //print(row.featured_path)
+            featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
+            listFeatured.downloaded(from: row.featured_path)
+        }
+        
+        let chevron = UIImage(named: "greater1")
+        self.accessoryType = .disclosureIndicator
+        self.accessoryView = UIImageView(image: chevron!)
+    }
+
     
     func updateViews(_ _row: Table) {
         
@@ -73,6 +97,8 @@ class List2Cell: UITableViewCell {
             }
         }
         
+        likeIcon.isLike = !_row.like
+        likeIcon.setLike()
         
         refreshIcon.row = _row
         
@@ -88,22 +114,6 @@ class List2Cell: UITableViewCell {
             cityBtn.row = _row
         }
         likeIcon.row = _row
-    }
-    
-    func _updateViews(_ row: Table) {
-        
-        self.backgroundColor = UIColor.clear
-        
-        if row.featured_path.count > 0 {
-            
-            //print(row.featured_path)
-            featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
-            listFeatured.downloaded(from: row.featured_path)
-        }
-        
-        let chevron = UIImage(named: "greater1")
-        self.accessoryType = .disclosureIndicator
-        self.accessoryView = UIImageView(image: chevron!)
     }
     
     func hiddenIcon(_ icon: SuperButton) {
@@ -186,8 +196,17 @@ class List2Cell: UITableViewCell {
     @IBAction func likeBtnPressed(sender: UIButton) {
         
         self._pressed(sender: sender) { row in
-            if cellDelegate != nil {
-                cellDelegate!.cellLike(row: row)
+            
+            if (Member.instance.isLoggedIn) {
+                likeIcon.setLike()
+                if cellDelegate != nil {
+                    cellDelegate!.cellLike(row: row)
+                }
+            } else {
+                //warning
+                if cellDelegate != nil {
+                    cellDelegate!.cellToLogin()
+                }
             }
         }
     }
@@ -213,5 +232,7 @@ extension List1CellDelegate {
     func cellDelete(row: Table){}
     func cellCity(row: Table){}
     func cellLike(row: Table){}
+    func cellWarning(msg: String){}
+    func cellToLogin(){}
 }
 

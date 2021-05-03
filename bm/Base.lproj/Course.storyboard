@@ -318,6 +318,9 @@
                                                     <constraint firstAttribute="height" constant="35" id="dgW-DT-ByZ"/>
                                                 </constraints>
                                                 <state key="normal" title="like"/>
+                                                <connections>
+                                                    <action selector="likeButtonPressed:" destination="ZZa-2U-rNz" eventType="touchUpInside" id="hB9-SS-2XO"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

@@ -25,6 +25,15 @@ class ArenaService: DataService {
         return "arena"
     }
     
+    override func getLikeURL(token: String? = nil) -> String {
+        var url: String = URL_ARENA_LIKE
+        if token != nil {
+            url = url + "/" + token!
+        }
+        
+        return url
+    }
+    
     override func setData(id: Int, title: String, path: String, token: String, youtube: String, vimeo: String) -> Arena {
         let superData = Arena(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
         return superData

@@ -12,6 +12,7 @@ import SCLAlertView
 class ShowTempPlayVC: MyTableVC {
     
     var token: String!
+    //var myTable: TeamTable?
     var model: Team!
     var scrollView: UIScrollView!
     var bkView: UIImageView!
@@ -47,6 +48,8 @@ class ShowTempPlayVC: MyTableVC {
     
     //var refreshControl: UIRefreshControl!
     
+    var isLike: Bool = false
+    
     // outlet
     @IBOutlet weak var titleLbl: UILabel!
     //@IBOutlet weak var tableView: UITableView!
@@ -54,10 +57,12 @@ class ShowTempPlayVC: MyTableVC {
     @IBOutlet weak var buttomView: StaticBottomView!
     @IBOutlet weak var plusOneButton: SubmitButton!
     @IBOutlet weak var cancelPlusButton: CancelButton!
+    @IBOutlet weak var likeButton: LikeButton!
     
     override func viewDidLoad() {
-        model = Team.instance
+        //model = Team.instance
         myTablView = UITableView()
+        dataService = CourseService.instance
         
         super.viewDidLoad()
         
@@ -261,13 +266,17 @@ class ShowTempPlayVC: MyTableVC {
     override func refresh() {
         //_layout()
         Global.instance.addSpinner(superView: self.view)
-        TeamService.instance.getOne(type: "team", token: token) { (success) in
+        dataService.getOne(type: "team", token: token) { (success) in
             if success {
                 Global.instance.removeSpinner(superView: self.view)
                 //print(self.model.data)
 //                let tmp:[[String:String]] = [["nickname":"ives"]]
 //                self.model.data["signups"]!["value"] = [[String:String]]()
 //                self.model.data["signups"]!["value"] = tmp
+                
+                //self.isLike = self.teamTable!.like
+                //self.likeButton.initStatus(self.isLike, self.teamTable!.like_count)
+                
                 self.setPage()
                 self.myTablView.reloadData()
                 self.refreshControl.endRefreshing()
@@ -515,6 +524,16 @@ class ShowTempPlayVC: MyTableVC {
     }
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return .portrait
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            isLike = !isLike
+            likeButton.setLike(isLike)
+            //dataService.like(token: teamTable!.token, able_id: teamTable!.id)
+        }
     }
 }
 

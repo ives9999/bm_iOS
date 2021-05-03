@@ -83,7 +83,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     //var courseTable: courseTable?
     //var coachTable: coachTable?
-    var courseTable: CourseTable?
+    var myTable: CourseTable?
     var coachTable: CoachTable?
     
     var fromNet: Bool = false
@@ -97,9 +97,12 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     var cellHeight: CGFloat = 40
     
+    var isLike: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        dataService = CourseService.instance
         scrollView.backgroundColor = UIColor.clear
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
@@ -114,8 +117,6 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         
         signupButton.setTitle("報名")
         //signupListButton.setTitle("報名列表")
-        
-        
         
         beginRefresh()
         scrollView.addSubview(refreshControl)
@@ -185,12 +186,12 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
             let params: [String: String] = ["token": course_token!, "member_token": Member.instance.token]
-            CourseService.instance.getOne(t: CourseTable.self, params: params) { (success) in
+            dataService.getOne(t: CourseTable.self, params: params) { (success) in
                 if (success) {
-                    let table: Table = CourseService.instance.table!
-                    self.courseTable = table as? CourseTable
+                    let table: Table = self.dataService.table!
+                    self.myTable = table as? CourseTable
                     
-                    if self.courseTable != nil {
+                    if self.myTable != nil {
                         //self.courseTable?.printRow()
                         
                         //self.courseTable!.date_model.printRow()
@@ -200,15 +201,18 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                         self.setMainData() // setup course basic data
                         self.setFeatured() // setup featured
                         
-                        if self.courseTable!.coachTable != nil { // setup coach for course data
-                            self.coachTable = self.courseTable!.coachTable
+                        if self.myTable!.coachTable != nil { // setup coach for course data
+                            self.coachTable = self.myTable!.coachTable
                             self.setCoachData()
                         }
-                        if self.courseTable!.dateTable != nil { // setup next time course time
+                        if self.myTable!.dateTable != nil { // setup next time course time
                             //self.courseTable!.dateTable?.printRow()
                             self.setNextTime()
                         }
                         self.fromNet = true
+                        
+                        self.isLike = self.myTable!.like
+                        self.likeButton.initStatus(self.isLike, self.myTable!.like_count)
                         
                         self.tableView.reloadData()
                         self.signupTableView.reloadData()
@@ -234,7 +238,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     func setMainData() {
         
-        let mirror: Mirror = Mirror(reflecting: courseTable!)
+        let mirror: Mirror = Mirror(reflecting: myTable!)
         let propertys: [[String: Any]] = mirror.toDictionary()
         
         for key in tableRowKeys {
@@ -259,25 +263,25 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         
-        if !courseTable!.start_date.isEmpty {
-            let date = courseTable!.start_date + " ~ " + courseTable!.end_date
+        if !myTable!.start_date.isEmpty {
+            let date = myTable!.start_date + " ~ " + myTable!.end_date
             tableRows["date"]!["content"] = date
         } else {
             tableRows.removeValue(forKey: "date");
             tableRowKeys = tableRowKeys.filter{$0 != "date"}
         }
-        let interval = courseTable!.start_time_show + " ~ " + courseTable!.end_time_show
+        let interval = myTable!.start_time_show + " ~ " + myTable!.end_time_show
         tableRows["interval_show"]!["content"] = interval
         
-        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.courseTable!.content+"</body></html>"
+        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.myTable!.content+"</body></html>"
         
         contentView!.loadHTMLString(content, baseURL: nil)
     }
     
     func setFeatured() {
         
-        if courseTable!.featured_path.count > 0 {
-            let featured_path = courseTable!.featured_path
+        if myTable!.featured_path.count > 0 {
+            let featured_path = myTable!.featured_path
             if featured_path.count > 0 {
                 //print(featured_path)
                 featured.downloaded(from: featured_path)
@@ -287,10 +291,10 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func setNextTime() {
-        let dateTable: DateTable = courseTable!.dateTable!
+        let dateTable: DateTable = myTable!.dateTable!
         let date: String = dateTable.date
-        let start_time: String = courseTable!.start_time_show
-        let end_time: String = courseTable!.end_time_show
+        let start_time: String = myTable!.start_time_show
+        let end_time: String = myTable!.end_time_show
         let next_time = "下次上課時間：\(date) \(start_time) ~ \(end_time)"
         signupDateLbl.text = next_time
         
@@ -336,10 +340,10 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             if tableView == self.tableView {
                 return tableRowKeys.count
             } else if tableView == self.signupTableView {
-                if courseTable != nil {
+                if myTable != nil {
                     //let normal_count: Int = courseTable!.signupNormalTables.count
-                    let standby_count: Int = courseTable!.signupStandbyTables.count
-                    let people_limit: Int = courseTable!.people_limit
+                    let standby_count: Int = myTable!.signupStandbyTables.count
+                    let people_limit: Int = myTable!.people_limit
                     let count = people_limit + standby_count + 1
                     //print(count)
                     return count
@@ -404,7 +408,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                 let icon = row["icon"] ?? ""
                 let title = row["title"] ?? ""
                 let content = row["content"] ?? ""
-                cell.update(icon: icon, title: title, content: content, contentH: cellHeight)
+                cell.update(icon: icon, title: title, content: content)
             }
             
             if indexPath.row == tableRowKeys.count - 1 {
@@ -423,23 +427,23 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         } else if tableView == self.signupTableView {
             let cell: OlCell = tableView.dequeueReusableCell(withIdentifier: "signupCell", for: indexPath) as! OlCell
             
-            let people_limit = courseTable!.people_limit
-            let normal_count = courseTable!.signupNormalTables.count
-            let standby_count = courseTable!.signupStandbyTables.count
+            let people_limit = myTable!.people_limit
+            let normal_count = myTable!.signupNormalTables.count
+            let standby_count = myTable!.signupStandbyTables.count
             if indexPath.row < people_limit {
                 cell.numberLbl.text = "\(indexPath.row + 1)."
                 if normal_count > 0 {
                     if indexPath.row < normal_count {
-                        let signup_normal_model = courseTable!.signupNormalTables[indexPath.row]
+                        let signup_normal_model = myTable!.signupNormalTables[indexPath.row]
                         cell.nameLbl.text = signup_normal_model.member_name
                     }
                 }
             } else if indexPath.row >= people_limit && indexPath.row < people_limit + standby_count {
                 cell.numberLbl.text = "候補\(indexPath.row - people_limit + 1)."
-                let signup_standby_model = courseTable!.signupStandbyTables[indexPath.row - people_limit]
+                let signup_standby_model = myTable!.signupStandbyTables[indexPath.row - people_limit]
                 cell.nameLbl.text = signup_standby_model.member_name
             } else {
-                let remain: Int = people_limit - courseTable!.signupNormalTables.count
+                let remain: Int = people_limit - myTable!.signupNormalTables.count
                 var remain_text = "還有\(remain)個名額"
                 if remain == 0 {
                     remain_text = "已經額滿，請排候補"
@@ -484,7 +488,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                     content = content.mobileShow()
                 }
                 let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
-                cell.update(icon: icon, title: title, content: content, contentH: cellHeight, isPressed: isPressed)
+                cell.update(icon: icon, title: title, content: content, isPressed: isPressed)
             }
             
             if indexPath.row == coachTableRowKeys.count - 1 {
@@ -626,9 +630,9 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             warning("請先登入會員")
             return
         }
-        if courseTable!.dateTable != nil {
+        if myTable!.dateTable != nil {
             Global.instance.addSpinner(superView: view)
-            CourseService.instance.signup(token: course_token!, member_token: Member.instance.token, date_token: courseTable!.dateTable!.token, course_deadline: course_deadline) { (success) in
+            CourseService.instance.signup(token: course_token!, member_token: Member.instance.token, date_token: myTable!.dateTable!.token, course_deadline: course_deadline) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 let msg = CourseService.instance.msg
                 var title = "警告"
@@ -657,12 +661,12 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             return
         }
         //print(Member.instance.token)
-        if courseTable!.dateTable != nil {
+        if myTable!.dateTable != nil {
             Global.instance.addSpinner(superView: view)
-            CourseService.instance.signup_date(token: course_token!, member_token: Member.instance.token, date_token: courseTable!.dateTable!.token) { (success) in
+            CourseService.instance.signup_date(token: course_token!, member_token: Member.instance.token, date_token: myTable!.dateTable!.token) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if (success) {
-                    self.signup_date = CourseService.instance.signup_date
+                    self.signup_date = self.dataService.signup_date
                     self.isSignup = self.signup_date["isSignup"].boolValue
                     self.isStandby = self.signup_date["isStandby"].boolValue
                     self.canCancelSignup = self.signup_date["cancel"].boolValue
@@ -679,6 +683,16 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func signupListButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_SIGNUP_LIST, sender: nil)
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            isLike = !isLike
+            likeButton.setLike(isLike)
+            dataService.like(token: myTable!.token, able_id: myTable!.id)
+        }
     }
 
     @IBAction func prevBtnPressed(_ sender: Any) {

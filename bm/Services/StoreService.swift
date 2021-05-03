@@ -22,4 +22,13 @@ class StoreService: DataService {
     override func getSource() -> String? {
         return "store"
     }
+    
+    override func getLikeURL(token: String? = nil) -> String {
+        var url: String = URL_STORE_LIKE
+        if token != nil {
+            url = url + "/" + token!
+        }
+        
+        return url
+    }
 }

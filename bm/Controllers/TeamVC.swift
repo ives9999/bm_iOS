@@ -48,7 +48,7 @@ class TeamVC: ListVC {
     override func getDataEnd(success: Bool) {
         if success {
             
-            let mysTable = (tables as? TeamsTable)
+            mysTable = (tables as? TeamsTable)
             if mysTable != nil {
                 let tmps: [TeamTable] = mysTable!.rows
                 
@@ -99,15 +99,22 @@ class TeamVC: ListVC {
         return UITableViewCell()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_SHOW {
-            if let showVC: ShowVC = segue.destination as? ShowVC {
-                let table = sender as! TeamTable
-                let show_in: Show_IN = Show_IN(type: iden, id: table.id, token: table.token, title: table.name)
-                showVC.initShowVC(sin: show_in)
-            }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if mysTable != nil {
+            let myTable = mysTable!.rows[indexPath.row]
+            toShowTeam(token: myTable.token)
         }
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == TO_SHOW {
+//            if let showVC: ShowVC = segue.destination as? ShowVC {
+//                let table = sender as! TeamTable
+//                let show_in: Show_IN = Show_IN(type: iden, id: table.id, token: table.token, title: table.name)
+//                showVC.initShowVC(sin: show_in)
+//            }
+//        }
+//    }
     
     @IBAction func manager(_ sender: Any) {
         if !Member.instance.isLoggedIn {

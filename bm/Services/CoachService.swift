@@ -28,6 +28,15 @@ class CoachService: DataService {
         return "coach"
     }
     
+    override func getLikeURL(token: String? = nil) -> String {
+        var url: String = URL_COACH_LIKE
+        if token != nil {
+            url = url + "/" + token!
+        }
+        
+        return url
+    }
+    
     override func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
         
         //print(model)

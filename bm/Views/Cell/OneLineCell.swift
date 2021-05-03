@@ -54,7 +54,7 @@ class OneLineCell: SuperCell {
         // Configure the view for the selected state
     }
     
-    func update(icon: String, title: String, content: String, contentH: CGFloat=0, isPressed: Bool=false) {
+    func update(icon: String, title: String, content: String, isPressed: Bool=false) {
         if icon.count > 0 {
             iconView.image = UIImage(named: icon)
         }

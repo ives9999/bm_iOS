@@ -78,6 +78,7 @@ class CourseVC: ListVC {
                 if row != nil {
                     row!.filterRow()
                     //row!.printRow()
+                    //print(row!.like);
                     cell.updateViews(row!)
                 }
                 
@@ -102,8 +103,8 @@ class CourseVC: ListVC {
         
         if tableView == self.tableView {
             if mysTable != nil {
-                let courseTable = mysTable!.rows[indexPath.row]
-                performSegue(withIdentifier: TO_SHOW_COURSE, sender: courseTable)
+                let myTable = mysTable!.rows[indexPath.row]
+                performSegue(withIdentifier: TO_SHOW_COURSE, sender: myTable)
             }
             
         } else if tableView == searchTableView {

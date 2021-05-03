@@ -69,7 +69,7 @@
                                     <action selector="mobileBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="CUP-FO-eWM"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKV-v7-798" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nKV-v7-798" customClass="LikeIcon" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="16" y="0.0" width="36" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="12q-tA-8Vf"/>

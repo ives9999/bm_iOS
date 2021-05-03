@@ -82,6 +82,10 @@ class DataService {
         if _filter != nil {
             filter.merge(_filter!)
         }
+        
+        if (Member.instance.isLoggedIn) {
+            filter.merge(["member_token":Member.instance.token])
+        }
         print(filter.toJSONString())
         
         var url: String = getListURL()
@@ -135,6 +139,90 @@ class DataService {
                 return
             }
         }
+    }
+    
+    func getOne<T: Table>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
+        
+        var body: [String: Any] = ["device": "app","strip_html": false]
+        if params["token"] != nil {
+            body["token"] = params["token"]
+        }
+        if params["member_token"] != nil {
+            body["member_token"] = params["member_token"]
+        }
+        
+        //print(body)
+        let source: String? = getSource()
+        var url: String?
+        if source != nil {
+            url = String(format: URL_ONE, source!)
+        }
+        //print(url)
+        if url != nil {
+            Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+                
+                switch response.result {
+                //case .success(let value):
+                case .success(_):
+                    var s: T? = nil
+                    do {
+                        if response.data != nil {
+//                            let json = JSON(value)
+//                            print(json)
+                            s = try JSONDecoder().decode(t, from: response.data!)
+                            if s != nil {
+                                self.table = s!
+                                self.table!.filterRow()
+                                //s!.printRow()
+//                                let s1: OrderTable = s as! OrderTable
+//                                for image in s1.product!.prices {
+//                                    image.printRow()
+//                                }
+//                                if s1.images != nil {
+//                                    s1.images.printRow()
+//                                }
+                                completion(true)
+                            } else {
+                                self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                                completion(false)
+                            }
+                        } else {
+                            self.msg = "沒有任何伺服器回傳的訊息"
+                            completion(false)
+                        }
+                    } catch {
+                        //print("Error:\(error)")
+                        self.msg = error.localizedDescription
+                        completion(false)
+                    }
+                case .failure(let error):
+                    self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                    completion(false)
+                    print(error)
+                    return
+                }
+            }
+        }
+    }
+    
+    //token is able token
+    func like(token: String, able_id: Int) {
+        
+        let likeUrl: String = getLikeURL(token: token)
+        print(likeUrl)
+        let url = URL(string: likeUrl)
+        var request = URLRequest(url: url!)
+        
+        let member_token: String = Member.instance.token
+        let body: [String: Any] = ["device":"app","member_token":member_token,"able_id":able_id]
+        print(body)
+        request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        
+        request.httpMethod = "POST"
+        let task = URLSession.shared.dataTask(with: request)
+        
+        task.resume()
     }
     
 //    func getList<T: SuperModel, T1: SuperModel>(t:T.Type, t1: T1.Type, token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
@@ -354,6 +442,7 @@ class DataService {
         }
     
     func getListURL()-> String { return ""}
+    func getLikeURL(token: String? = nil)-> String { return ""}
     func getCalendarURL(token: String? = nil)-> String { return ""}
     func getUpdateURL()-> String {return ""}
     
@@ -497,70 +586,6 @@ class DataService {
                 self.msg = "網路錯誤，請稍後再試"
                 completion(false)
                 debugPrint(response.result.error as Any)
-            }
-        }
-    }
-    
-    func getOne<T: Table>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
-        
-        var body: [String: Any] = ["device": "app","strip_html": false]
-        if params["token"] != nil {
-            body["token"] = params["token"]
-        }
-        if params["member_token"] != nil {
-            body["member_token"] = params["member_token"]
-        }
-        
-        //print(body)
-        let source: String? = getSource()
-        var url: String?
-        if source != nil {
-            url = String(format: URL_ONE, source!)
-        }
-        //print(url)
-        if url != nil {
-            Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-                
-                switch response.result {
-                //case .success(let value):
-                case .success(_):
-                    var s: T? = nil
-                    do {
-                        if response.data != nil {
-//                            let json = JSON(value)
-//                            print(json)
-                            s = try JSONDecoder().decode(t, from: response.data!)
-                            if s != nil {
-                                self.table = s!
-                                self.table!.filterRow()
-                                //s!.printRow()
-//                                let s1: OrderTable = s as! OrderTable
-//                                for image in s1.product!.prices {
-//                                    image.printRow()
-//                                }
-//                                if s1.images != nil {
-//                                    s1.images.printRow()
-//                                }
-                                completion(true)
-                            } else {
-                                self.msg = "解析JSON字串時，得到空直，請洽管理員"
-                                completion(false)
-                            }
-                        } else {
-                            self.msg = "沒有任何伺服器回傳的訊息"
-                            completion(false)
-                        }
-                    } catch {
-                        //print("Error:\(error)")
-                        self.msg = error.localizedDescription
-                        completion(false)
-                    }
-                case .failure(let error):
-                    self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-                    completion(false)
-                    print(error)
-                    return
-                }
             }
         }
     }

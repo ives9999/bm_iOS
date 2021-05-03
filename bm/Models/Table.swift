@@ -39,6 +39,8 @@ class Table: Codable {
     var token: String = ""
     var sort_order: Int = 0
     var pv: Int = 0
+    var like: Bool = false
+    var like_count: Int = 0
     var created_id: Int = 0
     var featured_path: String = ""
     var created_at: String = ""
@@ -64,6 +66,8 @@ class Table: Codable {
         do {featured_path = try container.decode(String.self, forKey: .featured_path)}catch{featured_path = ""}
         do {sort_order = try container.decode(Int.self, forKey: .sort_order)}catch{sort_order = 0}
         do {pv = try container.decode(Int.self, forKey: .pv)}catch{pv = 0}
+        do {like = try container.decode(Bool.self, forKey: .like)}catch{like = false}
+        do {like_count = try container.decode(Int.self, forKey: .like_count)}catch{like_count = 0}
         do {created_at = try container.decode(String.self, forKey: .created_at)}catch{created_at = ""}
         do {updated_at = try container.decode(String.self, forKey: .updated_at)}catch{updated_at = ""}
         

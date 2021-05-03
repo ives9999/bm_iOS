@@ -30,6 +30,15 @@ class CourseService: DataService {
         return "course"
     }
     
+    override func getLikeURL(token: String? = nil) -> String {
+        var url: String = URL_COURSE_LIKE
+        if token != nil {
+            url = url + "/" + token!
+        }
+        
+        return url
+    }
+    
     override func getCalendarURL(token: String? = nil) -> String {
         var url: String = URL_COURSE_CALENDAR
         if token != nil {

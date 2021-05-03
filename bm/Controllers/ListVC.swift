@@ -683,11 +683,18 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     func cellLike(row: Table) {
-//        if indexPath != nil {
-//            let row = lists1[indexPath!.row] as! TeamTable
-//            print(row.id)
-//        } else {
-//            warning("index path 為空值，請洽管理員")
-//        }
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            dataService.like(token: row.token, able_id: row.id)
+        }
+    }
+    
+    func cellWarning(msg: String) {
+        warning(msg)
+    }
+    
+    func cellToLogin() {
+        toLogin()
     }
 }
