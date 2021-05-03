@@ -7,26 +7,54 @@
 //
 
 import UIKit
+import WebKit
 
-class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var tableView: SuperTableView!
+    @IBOutlet weak var featured: UIImageView!
+    
+    @IBOutlet weak var mainDataLbl: SuperLabel!
+    @IBOutlet weak var signupDataLbl: SuperLabel!
+    @IBOutlet weak var contentDataLbl: SuperLabel!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var scrollContainerView: UIView!
+    
+    @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
+    
+    var contentView: WKWebView? = {
+        
+        //Create configuration
+        let configuration = WKWebViewConfiguration()
+        //configuration.userContentController = controller
+        
+        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        webView.backgroundColor = UIColor.clear
+        webView.scrollView.isScrollEnabled = false
+        return webView
+    }()
     
     var team_token: String?
     var myTable: TeamTable?
     
-    var tableRowKeys:[String] = ["weekday_text","interval_show","date","price_text_long","people_limit_text","kind_text","pv","created_at_show"]
+    var tableRowKeys:[String] = ["arena","interval_show","ball","manager","mobile_show","fb","youtube","website","email","pv","created_at_show"]
     var tableRows: [String: [String:String]] = [
-        "weekday_text":["icon":"calendar","title":"星期","content":""],
+        "arena":["icon":"calendar","title":"球館","content":""],
         "interval_show":["icon":"clock","title":"時段","content":""],
-        "date":["icon":"calendar","title":"期間","content":""],
-        "price_text_long":["icon":"money","title":"收費","content":""],
-        "people_limit_text":["icon":"group","title":"限制人數","content":""],
-        "kind_text": ["icon":"cycle","title":"週期","content":""],       // "signup_count":["icon":"group","title":"已報名人數","content":""],
+        "ball":["icon":"calendar","title":"球種","content":""],
+        "manager":["icon":"money","title":"隊長","content":""],
+        "mobile_show":["icon":"group","title":"行動電話","content":""],
+        "fb": ["icon":"cycle","title":"FB","content":""],
+        "youtube":["icon":"group","title":"Youtube","content":""],
+        "website":["icon":"group","title":"網站","content":""],
+        "email":["icon":"group","title":"EMail","content":""],
         "pv":["icon":"pv","title":"瀏覽數","content":""],
         "created_at_show":["icon":"calendar","title":"建立日期","content":""]
     ]
+    
+    var contentViewConstraintHeight: NSLayoutConstraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +63,47 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
+        
+        initTableView()
 
         refresh()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        mainDataLbl.text = "球隊資料"
+        signupDataLbl.text = "報名資料"
+        contentDataLbl.text = "詳細介紹"
+        mainDataLbl.textColor = UIColor(MY_RED)
+        signupDataLbl.textColor = UIColor(MY_RED)
+        contentDataLbl.textColor = UIColor(MY_RED)
+        mainDataLbl.textAlignment = .left
+        signupDataLbl.textAlignment = .left
+        contentDataLbl.textAlignment = .left
+        
+    }
+    
+    func initTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 600
+        //tableViewConstraintHeight.constant = 1000
+    }
+    
+    func initContentView() {
+        
+        scrollContainerView.addSubview(contentView!)
+        var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint
+        
+        c1 = NSLayoutConstraint(item: contentView!, attribute: .leading, relatedBy: .equal, toItem: contentView!.superview, attribute: .leading, multiplier: 1, constant: 8)
+        c2 = NSLayoutConstraint(item: contentView!, attribute: .top, relatedBy: .equal, toItem: contentDataLbl, attribute: .bottom, multiplier: 1, constant: 8)
+        c3 = NSLayoutConstraint(item: contentView!, attribute: .trailing, relatedBy: .equal, toItem: contentView!.superview, attribute: .trailing, multiplier: 1, constant: 8)
+        contentViewConstraintHeight = NSLayoutConstraint(item: contentView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+        contentView!.translatesAutoresizingMaskIntoConstraints = false
+        scrollContainerView.addConstraints([c1,c2,c3,contentViewConstraintHeight!])
+        contentView!.uiDelegate = self
+        contentView!.navigationDelegate = self
     }
     
     override func refresh() {
@@ -50,14 +117,13 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     self.myTable = table as? TeamTable
                     
                     if self.myTable != nil {
-                        //self.courseTable?.printRow()
-                        
-                        //self.courseTable!.date_model.printRow()
+                        self.myTable!.filterRow()
                         //self.coachTable = self.courseTable!.coach
                         //self.courseTable!.signup_normal_models
                         
-                        //self.setMainData() // setup course basic data
-                        //self.setFeatured() // setup featured
+                        self.titleLbl.text = self.myTable?.name
+                        self.setMainData() // setup course basic data
+                        self.setFeatured() // setup featured
                         
                         //if self.myTable!.dateTable != nil { // setup next time course time
                             //self.courseTable!.dateTable?.printRow()
@@ -84,9 +150,53 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     }
                 }
                 Global.instance.removeSpinner(superView: self.view)
-                self.endRefresh()
+                //self.endRefresh()
             }
         }
+    }
+    
+    func setFeatured() {
+        
+        if myTable!.featured_path.count > 0 {
+            let featured_path = myTable!.featured_path
+            if featured_path.count > 0 {
+                //print(featured_path)
+                featured.downloaded(from: featured_path)
+            }
+        }
+        //featured.image = courseTable!.featured
+    }
+    
+    func setMainData() {
+        
+        let mirror: Mirror = Mirror(reflecting: myTable!)
+        let propertys: [[String: Any]] = mirror.toDictionary()
+        
+        for key in tableRowKeys {
+            
+            for property in propertys {
+                
+                if ((property["label"] as! String) == key) {
+                    var type: String = property["type"] as! String
+                    type = type.getTypeOfProperty()!
+                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+                    var content: String = ""
+                    if type == "Int" {
+                        content = String(property["value"] as! Int)
+                    } else if type == "Bool" {
+                        content = String(property["value"] as! Bool)
+                    } else if type == "String" {
+                        content = property["value"] as! String
+                    }
+                    tableRows[key]!["content"] = content
+                    break
+                }
+            }
+        }
+        
+        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.myTable!.content+"</body></html>"
+        
+        contentView!.loadHTMLString(content, baseURL: nil)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
