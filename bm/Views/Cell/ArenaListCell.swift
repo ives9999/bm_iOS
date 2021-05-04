@@ -56,7 +56,11 @@ class ArenaListCell: List2Cell {
                 intervalLbl.text = "未提供"
             }
             
-            air_conditionLbl.text = row!.air_condition_show
+            if (row!.air_condition >= 0) {
+                air_conditionLbl.text = "空調：\(row!.air_condition_show)"
+            } else {
+                air_conditionLbl.text = "未提供"
+            }
             parkingLbl.text = "停車:\(row!.parking_show)"
             
             if row!.tel.isEmpty {

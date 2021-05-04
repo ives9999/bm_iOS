@@ -110,9 +110,9 @@ class ArenaTable: Table {
         
         switch air_condition {
         case 1:
-            air_condition_show = "空調：有"
+            air_condition_show = "有"
         case 0:
-            air_condition_show = "空調：無"
+            air_condition_show = "無"
         default:
             air_condition_show = "未提供"
         }

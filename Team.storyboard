@@ -263,18 +263,6 @@
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayd-RJ-lxK">
-                                        <rect key="frame" x="332" y="19.5" width="32" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="1h0-Qa-F5b"/>
-                                            <constraint firstAttribute="width" constant="32" id="SWQ-mA-QTe"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
-                                        <state key="normal" image="gear"/>
-                                        <connections>
-                                            <action selector="manager:" destination="hk6-fe-bLP" eventType="touchUpInside" id="ngm-MV-LxV"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7B4-96-hjo">
                                         <rect key="frame" x="370" y="16" width="32" height="32"/>
                                         <constraints>
@@ -289,12 +277,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="ayd-RJ-lxK" firstAttribute="trailing" secondItem="7B4-96-hjo" secondAttribute="leading" constant="-6" id="B3j-we-EXB"/>
                                     <constraint firstItem="7B4-96-hjo" firstAttribute="centerY" secondItem="h8g-qX-Kzm" secondAttribute="centerY" id="D8L-MC-Skp"/>
                                     <constraint firstItem="QGB-uY-eI7" firstAttribute="centerY" secondItem="h8g-qX-Kzm" secondAttribute="centerY" id="dCe-7J-F5c"/>
                                     <constraint firstItem="QGB-uY-eI7" firstAttribute="centerX" secondItem="h8g-qX-Kzm" secondAttribute="centerX" id="e1j-c4-8Jx"/>
                                     <constraint firstAttribute="height" constant="64" id="oYA-ey-ZO1"/>
-                                    <constraint firstItem="ayd-RJ-lxK" firstAttribute="centerY" secondItem="h8g-qX-Kzm" secondAttribute="centerY" id="sV3-je-ZWU"/>
                                     <constraint firstAttribute="trailing" secondItem="7B4-96-hjo" secondAttribute="trailing" constant="12" id="tBs-9B-hau"/>
                                 </constraints>
                             </view>
@@ -325,7 +311,6 @@
                     <tabBarItem key="tabBarItem" title="球隊" image="team" id="iO8-yt-rXK"/>
                     <navigationItem key="navigationItem" title="球隊" id="owA-9M-Mfg"/>
                     <connections>
-                        <outlet property="managerBtn" destination="ayd-RJ-lxK" id="8ga-4O-AxJ"/>
                         <outlet property="tableView" destination="rJI-Y4-Ooh" id="hYG-z3-4Uc"/>
                         <segue destination="alg-aA-jQr" kind="show" identifier="toShow" id="AlK-fI-QxB"/>
                         <segue destination="PXR-mV-nC1" kind="show" identifier="toManager" id="xCJ-lv-P9J"/>
@@ -511,7 +496,6 @@
     </scenes>
     <resources>
         <image name="background" width="377.5" height="670"/>
-        <image name="gear" width="25" height="25"/>
         <image name="nophoto" width="900" height="514"/>
         <image name="prev" width="20.5" height="20.5"/>
         <image name="search" width="25" height="25"/>

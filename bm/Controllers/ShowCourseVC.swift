@@ -128,10 +128,10 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         signupDataLbl.text = "報名資料"
         coachDataLbl.text = "教練資料"
         contentLbl.text = "詳細介紹"
-        courseDataLbl.textColor = UIColor(MY_RED)
-        signupDataLbl.textColor = UIColor(MY_RED)
-        coachDataLbl.textColor = UIColor(MY_RED)
-        contentLbl.textColor = UIColor(MY_RED)
+        courseDataLbl.setTextTitle()
+        signupDataLbl.setTextTitle()
+        coachDataLbl.setTextTitle()
+        contentLbl.setTextTitle()
         courseDataLbl.textAlignment = .left
         signupDataLbl.textAlignment = .left
         coachDataLbl.textAlignment = .left

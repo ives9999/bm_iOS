@@ -43,17 +43,16 @@ class ShowArenaVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     var myTable: ArenaTable?
     
-    var tableRowKeys:[String] = ["arena","interval_show","ball","leader","mobile_show","fb","youtube","website","email","pv","created_at_show"]
+    var tableRowKeys:[String] = ["tel_show","address","fb","interval_show","block","bathroom","air_condition_show","parking_show","pv","created_at_show"]
     var tableRows: [String: [String:String]] = [
-        "arena":["icon":"arena","title":"球館","content":""],
-        "interval_show":["icon":"clock","title":"時段","content":""],
-        "ball":["icon":"ball","title":"球種","content":""],
-        "leader":["icon":"member1","title":"隊長","content":""],
-        "mobile_show":["icon":"mobile","title":"行動電話","content":""],
+        "tel_show":["icon":"tel","title":"電話","content":""],
+        "address":["icon":"map","title":"住址","content":""],
         "fb": ["icon":"fb","title":"FB","content":""],
-        "youtube":["icon":"youtube","title":"Youtube","content":""],
-        "website":["icon":"website","title":"網站","content":""],
-        "email":["icon":"email1","title":"EMail","content":""],
+        "interval_show":["icon":"clock","title":"時段","content":""],
+        "block":["icon":"block","title":"場地","content":""],
+        "bathroom":["icon":"bathroom","title":"浴室","content":""],
+        "air_condition_show":["icon":"air_condition","title":"空調","content":""],
+        "parking_show":["icon":"parking","title":"停車場","content":""],
         "pv":["icon":"pv","title":"瀏覽數","content":""],
         "created_at_show":["icon":"calendar","title":"建立日期","content":""]
     ]
@@ -61,6 +60,7 @@ class ShowArenaVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     var contentViewConstraintHeight: NSLayoutConstraint?
     
     var isLike: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

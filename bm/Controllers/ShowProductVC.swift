@@ -29,13 +29,15 @@ class ShowProductVC: BaseViewController {
     @IBOutlet weak var submitButton: SubmitButton!
     @IBOutlet weak var likeButton: LikeButton!
     
-    var productTable: ProductTable?
+    var myTable: ProductTable?
     var product_token: String?
+    
+    var isLike: Bool = false
         
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //print(superStore)
+        dataService = ProductService.instance
         imageDataLbl.text = "更多圖片"
         contentLbl.text = "詳細介紹"
         submitButton.setTitle("購買")
@@ -61,16 +63,19 @@ class ShowProductVC: BaseViewController {
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
             let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
-            ProductService.instance.getOne(t: ProductTable.self, params: params) { (success) in
+            dataService.getOne(t: ProductTable.self, params: params) { (success) in
                 if (success) {
                     let table: Table = ProductService.instance.table!
-                    self.productTable = (table as! ProductTable)
+                    self.myTable = (table as! ProductTable)
                     //self.superProduct!.printRow()
                     
-                    self.titleLbl.text = self.productTable?.name
+                    self.titleLbl.text = self.myTable?.name
                     self.setFeatured()
                     self.setImages()
                     self.setContent()
+                    
+                    self.isLike = self.myTable!.like
+                    self.likeButton.initStatus(self.isLike, self.myTable!.like_count)
                 }
                 Global.instance.removeSpinner(superView: self.view)
                 self.endRefresh()
@@ -80,9 +85,9 @@ class ShowProductVC: BaseViewController {
     
     func setFeatured() {
         
-        if productTable != nil {
-            if productTable!.featured_path.count > 0 {
-                let featured_path = productTable!.featured_path
+        if myTable != nil {
+            if myTable!.featured_path.count > 0 {
+                let featured_path = myTable!.featured_path
                 if featured_path.count > 0 {
                     //print(featured_path)
                     featured.downloaded(from: featured_path)
@@ -92,10 +97,10 @@ class ShowProductVC: BaseViewController {
     }
     
     func setImages() {
-        if productTable != nil {
-            if productTable!.images.count > 0 {
+        if myTable != nil {
+            if myTable!.images.count > 0 {
                 
-                let h: CGFloat = imageContainerView.showImages(images: productTable!.images)
+                let h: CGFloat = imageContainerView.showImages(images: myTable!.images)
                 imageContainerViewConstraintHeight.constant = h
                 changeScrollViewContentSize()
             }
@@ -103,7 +108,7 @@ class ShowProductVC: BaseViewController {
     }
     
     func setContent() {
-        if productTable != nil {
+        if myTable != nil {
             
             
 //            let textView = UITextView()
@@ -122,7 +127,7 @@ class ShowProductVC: BaseViewController {
             let textView: SuperTextView = SuperTextView(frame: CGRect.zero)
             contentView.addSubview(textView)
             textView.isScrollEnabled = false
-            textView.text = productTable!.content
+            textView.text = myTable!.content
             
             let fixedWidth = textView.superview!.frame.size.width
             let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
@@ -194,5 +199,15 @@ class ShowProductVC: BaseViewController {
     @IBAction func prevBtnPressed(_ sender: Any) {
         //goHome()
         prev()
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            isLike = !isLike
+            likeButton.setLike(isLike)
+            dataService.like(token: myTable!.token, able_id: myTable!.id)
+        }
     }
 }

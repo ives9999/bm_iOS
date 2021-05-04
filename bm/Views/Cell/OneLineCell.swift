@@ -61,7 +61,10 @@ class OneLineCell: SuperCell {
         if title.count > 0 {
             titleLbl.text = title
         }
+        titleLbl.setTextGeneral()
+        
         contentLbl.text = content
+        contentLbl.setTextGeneral()
         //contentHeight.constant = contentH
         
         if isPressed {

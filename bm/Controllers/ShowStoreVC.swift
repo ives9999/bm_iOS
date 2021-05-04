@@ -24,6 +24,8 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var tableViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var likeButton: LikeButton!
+    
     var contentView: WKWebView? = {
         
         //Create configuration
@@ -37,7 +39,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }()
     var contentViewConstraintHeight: NSLayoutConstraint?
     
-    var storeTable: StoreTable?
+    var myTable: StoreTable?
     var store_token: String?
     
     var tableRowKeys:[String] = ["tel_show","mobile_show","address","fb","line","website","email","business_time","pv","created_at_show"]
@@ -57,10 +59,13 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     var fromNet: Bool = false
     //var cellHeight: CGFloat = 40
     
+    var isLike: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         //print(storeTable)
+        dataService = StoreService.instance
         scrollView.backgroundColor = UIColor.clear
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
@@ -113,15 +118,18 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
             let params: [String: String] = ["token": store_token!, "member_token": Member.instance.token]
-            StoreService.instance.getOne(t: StoreTable.self, params: params) { (success) in
+            dataService.getOne(t: StoreTable.self, params: params) { (success) in
                 if (success) {
                     let table: Table = StoreService.instance.table!
-                    self.storeTable = table as? StoreTable
+                    self.myTable = table as? StoreTable
                     
-                    if self.storeTable != nil {
+                    if self.myTable != nil {
                         self.setMainData()
                         self.setFeatured()
                         self.fromNet = true
+                        
+                        self.isLike = self.myTable!.like
+                        self.likeButton.initStatus(self.isLike, self.myTable!.like_count)
                         
                         self.tableView.reloadData()
                     }
@@ -134,9 +142,9 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     func setFeatured() {
         
-        if storeTable != nil {
-            if storeTable!.featured_path.count > 0 {
-                let featured_path = storeTable!.featured_path
+        if myTable != nil {
+            if myTable!.featured_path.count > 0 {
+                let featured_path = myTable!.featured_path
                 if featured_path.count > 0 {
                     //print(featured_path)
                     featured.downloaded(from: featured_path)
@@ -148,7 +156,7 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     func setMainData() {
         
-        let mirror: Mirror = Mirror(reflecting: storeTable!)
+        let mirror: Mirror = Mirror(reflecting: myTable!)
         let propertys: [[String: Any]] = mirror.toDictionary()
         
         for key in tableRowKeys {
@@ -173,15 +181,15 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             }
         }
         
-        if !storeTable!.open_time.isEmpty {
-            let business_time = storeTable!.open_time_show + " ~ " + storeTable!.close_time_show
+        if !myTable!.open_time.isEmpty {
+            let business_time = myTable!.open_time_show + " ~ " + myTable!.close_time_show
             tableRows["business_time"]!["content"] = business_time
         } else {
             tableRows.removeValue(forKey: "business_time");
             tableRowKeys = tableRowKeys.filter{$0 != "business_time"}
         }
         
-        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.storeTable!.content+"</body></html>"
+        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.myTable!.content+"</body></html>"
         
         contentView!.loadHTMLString(content, baseURL: nil)
     }
@@ -255,15 +263,15 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         if tableView == self.tableView {
             let key = tableRowKeys[indexPath.row]
             if key == MOBILE_KEY {
-                storeTable!.mobile.makeCall()
+                myTable!.mobile.makeCall()
             } else if key == LINE_KEY {
-                storeTable!.line.line()
+                myTable!.line.line()
             } else if key == FB_KEY {
-                storeTable!.fb.fb()
+                myTable!.fb.fb()
             } else if key == WEBSITE_KEY {
-                storeTable!.website.website()
+                myTable!.website.website()
             } else if key == EMAIL_KEY {
-                storeTable!.email.email()
+                myTable!.email.email()
             }
         }
     }
@@ -311,6 +319,16 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         scrollView.contentSize = CGSize(width: view.frame.width, height: h)
         ContainerViewConstraintHeight.constant = h
         //print(h1)
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            isLike = !isLike
+            likeButton.setLike(isLike)
+            dataService.like(token: myTable!.token, able_id: myTable!.id)
+        }
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {

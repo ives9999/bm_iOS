@@ -26,18 +26,6 @@
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cqp-5n-stc">
-                                        <rect key="frame" x="332" y="19.5" width="32" height="25"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="32" id="O0n-fz-uNn"/>
-                                            <constraint firstAttribute="width" constant="32" id="SQh-X8-jnI"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
-                                        <state key="normal" image="gear"/>
-                                        <connections>
-                                            <action selector="manager:" destination="fZf-Fb-4DO" eventType="touchUpInside" id="uVU-MB-flJ"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d7O-wy-nZE">
                                         <rect key="frame" x="370" y="16" width="32" height="32"/>
                                         <constraints>
@@ -54,8 +42,6 @@
                                 <constraints>
                                     <constraint firstItem="cHN-BZ-oKv" firstAttribute="centerY" secondItem="4i0-LR-Nzf" secondAttribute="centerY" id="5JY-jr-nJd"/>
                                     <constraint firstItem="cHN-BZ-oKv" firstAttribute="centerX" secondItem="4i0-LR-Nzf" secondAttribute="centerX" id="KvG-MJ-SMX"/>
-                                    <constraint firstItem="Cqp-5n-stc" firstAttribute="trailing" secondItem="d7O-wy-nZE" secondAttribute="leading" constant="-6" id="U2v-aZ-jue"/>
-                                    <constraint firstItem="Cqp-5n-stc" firstAttribute="centerY" secondItem="4i0-LR-Nzf" secondAttribute="centerY" id="VnL-xZ-siB"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="aTJ-7P-hKI"/>
                                     <constraint firstAttribute="trailing" secondItem="d7O-wy-nZE" secondAttribute="trailing" constant="12" id="oha-ar-WBh"/>
                                     <constraint firstAttribute="height" constant="64" id="uNe-Jd-JqO"/>
@@ -88,7 +74,6 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="課程" image="course" id="vxG-ZA-wGh"/>
                     <connections>
-                        <outlet property="managerBtn" destination="Cqp-5n-stc" id="a3n-ls-PO1"/>
                         <outlet property="tableView" destination="P13-eV-hn3" id="rvO-sD-nRJ"/>
                         <segue destination="HrW-2D-NhE" kind="showDetail" identifier="toManagerCourse" id="gqh-nG-WJt"/>
                         <segue destination="t8q-W4-dib" kind="showDetail" identifier="toSingleSelect" id="A4Z-Qs-ID8"/>
