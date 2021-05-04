@@ -349,7 +349,6 @@
                         <outlet property="tableView" destination="Iz0-ts-ZTW" id="glu-Q3-n9t"/>
                         <segue destination="9g8-JV-KVv" kind="show" identifier="toCity" id="e7e-xA-HgL"/>
                         <segue destination="p5f-19-izc" kind="show" identifier="toManager" id="f4Q-EU-SfD"/>
-                        <segue destination="CEK-eb-g2g" kind="show" identifier="toShowCoach" id="Cah-Oy-n7m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5cH-ZS-Ng2" userLabel="First Responder" sceneMemberID="firstResponder"/>

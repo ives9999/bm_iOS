@@ -91,16 +91,23 @@ class CoachVC: ListVC {
         return UITableViewCell()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_SHOW_COACh {
-            if let showCoachVC: ShowCoachVC = segue.destination as? ShowCoachVC {
-                let table = sender as! CoachTable
-                let show_in: Show_IN = Show_IN(type: iden, id: table.id, token: table.token, title: table.name)
-                showCoachVC.initShowVC(sin: show_in)
-                showCoachVC.backDelegate = self
-            }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if mysTable != nil {
+            let myTable = mysTable!.rows[indexPath.row]
+            toShowCoach(token: myTable.token)
         }
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == TO_SHOW_COACh {
+//            if let showCoachVC: ShowCoachVC = segue.destination as? ShowCoachVC {
+//                let table = sender as! CoachTable
+//                let show_in: Show_IN = Show_IN(type: iden, id: table.id, token: table.token, title: table.name)
+//                showCoachVC.initShowVC(sin: show_in)
+//                showCoachVC.backDelegate = self
+//            }
+//        }
+//    }
     
     @IBAction func manager(_ sender: Any) {
         if !Member.instance.isLoggedIn {

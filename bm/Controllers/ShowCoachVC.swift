@@ -87,14 +87,16 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     let columnNum: Int = 8
     var eventTag: Int = 0
     
-    var show_in: Show_IN?
-    var coachTable: CoachTable?
+    //var show_in: Show_IN?
+    var myTable: CoachTable?
     var timetables: Timetables?
     var coursesTable: CoursesTable?
     var featured: UIImage?
     var city_id: Int = 0
     var params: [String: Any] = [String: Any]()
     var backDelegate: BackDelegate?
+    
+    var coach_token: String?
     
     var fromNet: Bool = false
     
@@ -112,9 +114,11 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     ]
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        titleLbl.text = show_in!.title
         frameWidth = view.frame.width
+        
+        dataService = CoachService.instance
         
         h = contactLbl.bounds.height * 7
         
@@ -169,14 +173,14 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     override func refresh() {
         Global.instance.addSpinner(superView: view)
-        let params: [String: String] = ["token": show_in!.token]
-        CoachService.instance.getOne(t: CoachTable.self, params: params){ (success1) in
+        let params: [String: String] = ["token": coach_token!, "member_token": Member.instance.token]
+        dataService.getOne(t: CoachTable.self, params: params){ (success1) in
             if (success1) {
-                let table: Table = CoachService.instance.table!
-                self.coachTable = table as? CoachTable
+                let table: Table = self.dataService.table!
+                self.myTable = table as? CoachTable
                 //self.coachTable!.printRow()
                 //self.setData() move to getFeatured
-                if self.coachTable != nil {
+                if self.myTable != nil {
                     self.setData()
                     self.fromNet = true
                     //self.getFeatured()
@@ -186,10 +190,11 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 
                 var filter: [String: Any] = [String: Any]()
                 filter.merge(["status": "online"])
-                if self.coachTable != nil {
-                    filter.merge(["coach_id": self.coachTable!.id])
+                if self.myTable != nil {
+                    filter.merge(["coach_id": self.myTable!.id])
                 }
-                CourseService.instance.getList(t: CoursesTable.self, token: self.show_in!.token, _filter: filter, page: 1, perPage: 100) { (success2) in
+                
+                CourseService.instance.getList(t: CoursesTable.self, token: self.coach_token!, _filter: filter, page: 1, perPage: 100) { (success2) in
                     Global.instance.removeSpinner(superView: self.view)
                     if (success2) {
                         self.coursesTable = (CourseService.instance.tables as! CoursesTable)
@@ -359,17 +364,17 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         if tableView == contactTableView {
             let key = contactTableRowKeys[indexPath.row]
             if key == MOBILE_KEY {
-                coachTable!.mobile.makeCall()
+                myTable!.mobile.makeCall()
             } else if key == LINE_KEY {
-                coachTable!.line.line()
+                myTable!.line.line()
             } else if key == FB_KEY {
-                coachTable!.fb.fb()
+                myTable!.fb.fb()
             } else if key == YOUTUBE_KEY {
-                coachTable!.youtube.youtube()
+                myTable!.youtube.youtube()
             } else if key == WEBSITE_KEY {
-                coachTable!.website.website()
+                myTable!.website.website()
             } else if key == EMAIL_KEY {
-                coachTable!.email.email()
+                myTable!.email.email()
             }
         } else if tableView == courseTableView {
             if coursesTable != nil {
@@ -389,8 +394,8 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             if let id = sender as? Int {
                 showTimetableVC.tt_id = id
             }
-            showTimetableVC.source = show_in!.type
-            showTimetableVC.token = show_in!.token
+            //showTimetableVC.source = show_in!.type
+            showTimetableVC.token = coach_token
         } else if segue.identifier == TO_SHOW_COURSE {
             let superCourse = sender as! SuperCourse
             let vc: ShowCourseVC = segue.destination as! ShowCourseVC
@@ -400,9 +405,9 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func setData() {
-        if coachTable != nil {
-            if coachTable!.citys.count > 0 {
-                for city in coachTable!.citys {
+        if myTable != nil {
+            if myTable!.citys.count > 0 {
+                for city in myTable!.citys {
                     city_id = city.id
                     params["city_id"] = [city_id]
                     params["city_type"] = "all"
@@ -415,7 +420,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             //featuredView.af_setImage(withURL: URL(string: BASE_URL + coachTable!.featured_path)!)
             //featuredView.image = featured
             
-            let mirror: Mirror = Mirror(reflecting: coachTable!)
+            let mirror: Mirror = Mirror(reflecting: myTable!)
             let propertys: [[String: Any]] = mirror.toDictionary()
             
             for key in contactTableRowKeys {
@@ -440,19 +445,19 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 }
             }
             
-            setWeb(webView: chargeWebView, content: coachTable!.charge)
-            setWeb(webView: expWebView, content: coachTable!.exp)
-            setWeb(webView: licenseWebView, content: coachTable!.license)
-            setWeb(webView: featWebView, content: coachTable!.feat)
-            setWeb(webView: detailWebView, content: coachTable!.content)
+            setWeb(webView: chargeWebView, content: myTable!.charge)
+            setWeb(webView: expWebView, content: myTable!.exp)
+            setWeb(webView: licenseWebView, content: myTable!.license)
+            setWeb(webView: featWebView, content: myTable!.feat)
+            setWeb(webView: detailWebView, content: myTable!.content)
         }
     }
     
     func setFeatured() {
         
-        if coachTable!.featured_path.count > 0 {
+        if myTable!.featured_path.count > 0 {
             
-            DataService.instance1.getImage(_url: coachTable!.featured_path) { (success) in
+            DataService.instance1.getImage(_url: myTable!.featured_path) { (success) in
                 self.featured = DataService.instance1.image
                 self.featuredView.image = self.featured
                 self.featuredLayout()
@@ -468,7 +473,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func getFeatured() {
-        DataService.instance1.getImage(_url: BASE_URL + coachTable!.featured_path) { (success) in
+        DataService.instance1.getImage(_url: BASE_URL + myTable!.featured_path) { (success) in
             self.featured = DataService.instance1.image
             self.featuredLayout()
         }
@@ -527,7 +532,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     func initShowVC(sin: Show_IN) {
-        self.show_in = sin
+        //self.show_in = sin
     }
     
     @IBAction func cityBtnPressed(_ sender: Any) {

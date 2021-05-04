@@ -89,6 +89,7 @@ class TeamTable: Table {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         do {leader = try container.decode(String.self, forKey: .leader)}catch{leader = ""}
         do {mobile = try container.decode(String.self, forKey: .mobile)}catch{mobile = ""}
+        do {email = try container.decode(String.self, forKey: .email)}catch{email = ""}
         do {website = try container.decode(String.self, forKey: .website)}catch{website = ""}
         do {fb = try container.decode(String.self, forKey: .fb)}catch{fb = ""}
         do {arena_id = try container.decode(Int.self, forKey: .arena_id)}catch{arena_id = -1}

@@ -77,7 +77,7 @@
         <!--Show CoachVC-->
         <scene sceneID="hpy-Yq-2Rr">
             <objects>
-                <viewController storyboardIdentifier="UIViewController-tTg-jR-J80" id="tTg-jR-J80" customClass="ShowCoachVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toShowCoach" id="tTg-jR-J80" customClass="ShowCoachVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eQ6-wT-0gt">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -386,12 +386,11 @@
                         <outlet property="titleLbl" destination="ae5-TU-DnJ" id="p5N-61-J3p"/>
                         <segue destination="isk-Il-okD" kind="show" identifier="toShowTimeTable" id="oKL-Gk-zBn"/>
                         <segue destination="IRL-em-4Fr" kind="custom" customClass="SWRevealViewControllerSegueSetController" id="xCT-HQ-HRw"/>
-                        <segue destination="LBW-zN-Bv6" kind="showDetail" identifier="toShowCourse" id="25S-Pg-i4z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6sA-Si-aaz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="71" y="2210"/>
+            <point key="canvasLocation" x="217" y="2246"/>
         </scene>
         <!--Text InputVC-->
         <scene sceneID="QRP-sP-fbK">

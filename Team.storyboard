@@ -27,6 +27,9 @@
                                             <constraint firstAttribute="width" constant="33" id="kcN-pA-MMB"/>
                                         </constraints>
                                         <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="ZZa-2U-rNz" eventType="touchUpInside" id="0iv-uB-3Ya"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSl-Mb-3BG">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
@@ -173,10 +176,10 @@
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Iba-Pw-pJn">
-                                        <rect key="frame" x="168.5" y="7.5" width="77" height="35"/>
+                                        <rect key="frame" x="192" y="7.5" width="30" height="35"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1v5-xT-scn" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="31" height="35"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1v5-xT-scn" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="y5h-kW-fLZ"/>
                                                 </constraints>
@@ -184,11 +187,14 @@
                                                 <state key="normal" title="報名"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTk-sv-0Nb" customClass="LikeButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="47" y="0.0" width="30" height="35"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="30" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="dgW-DT-ByZ"/>
                                                 </constraints>
                                                 <state key="normal" title="like"/>
+                                                <connections>
+                                                    <action selector="likeButtonPressed:" destination="ZZa-2U-rNz" eventType="touchUpInside" id="eQS-9P-L53"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -224,11 +230,15 @@
                         <outlet property="ContainerViewConstraintHeight" destination="4gt-hm-zsq" id="HDe-0n-JV7"/>
                         <outlet property="contentDataLbl" destination="a1J-aW-JsJ" id="Rza-3C-yNN"/>
                         <outlet property="featured" destination="I9U-D1-tnd" id="HVZ-cZ-xDj"/>
+                        <outlet property="likeButton" destination="VTk-sv-0Nb" id="bKA-xb-j1k"/>
                         <outlet property="mainDataLbl" destination="uVt-2n-TRc" id="RpD-Xc-sL9"/>
                         <outlet property="scrollContainerView" destination="ORk-cu-jAE" id="bfP-4Q-GEC"/>
                         <outlet property="scrollView" destination="lfl-RI-5GV" id="jyo-Yf-YV9"/>
                         <outlet property="signupDataLbl" destination="GJg-kc-5vb" id="5oa-uO-T4q"/>
+                        <outlet property="signupTableView" destination="TW3-yY-PBt" id="DCD-Sn-JI0"/>
+                        <outlet property="signupTableViewConstraintHeight" destination="YIB-3P-53u" id="RcH-u2-Qn2"/>
                         <outlet property="tableView" destination="QDC-d9-WhK" id="tWA-y2-hgc"/>
+                        <outlet property="tableViewConstraintHeight" destination="R7s-DU-6k4" id="16Q-IK-d1V"/>
                         <outlet property="titleLbl" destination="HSl-Mb-3BG" id="qU4-nG-hsc"/>
                     </connections>
                 </viewController>

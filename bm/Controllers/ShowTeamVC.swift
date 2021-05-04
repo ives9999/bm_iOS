@@ -11,9 +11,12 @@ import WebKit
 
 class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
     
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var tableView: SuperTableView!
     @IBOutlet weak var featured: UIImageView!
+    @IBOutlet weak var titleLbl: UILabel!
+    
+    @IBOutlet weak var tableView: SuperTableView!
+    @IBOutlet weak var signupTableView: SuperTableView!
+    
     
     @IBOutlet weak var mainDataLbl: SuperLabel!
     @IBOutlet weak var signupDataLbl: SuperLabel!
@@ -22,7 +25,11 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContainerView: UIView!
     
+    @IBOutlet weak var tableViewConstraintHeight: NSLayoutConstraint!
+    @IBOutlet weak var signupTableViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var likeButton: LikeButton!
     
     var contentView: WKWebView? = {
         
@@ -39,22 +46,24 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     var team_token: String?
     var myTable: TeamTable?
     
-    var tableRowKeys:[String] = ["arena","interval_show","ball","manager","mobile_show","fb","youtube","website","email","pv","created_at_show"]
+    var tableRowKeys:[String] = ["arena","interval_show","ball","leader","mobile_show","fb","youtube","website","email","pv","created_at_show"]
     var tableRows: [String: [String:String]] = [
-        "arena":["icon":"calendar","title":"球館","content":""],
+        "arena":["icon":"arena","title":"球館","content":""],
         "interval_show":["icon":"clock","title":"時段","content":""],
-        "ball":["icon":"calendar","title":"球種","content":""],
-        "manager":["icon":"money","title":"隊長","content":""],
-        "mobile_show":["icon":"group","title":"行動電話","content":""],
-        "fb": ["icon":"cycle","title":"FB","content":""],
-        "youtube":["icon":"group","title":"Youtube","content":""],
-        "website":["icon":"group","title":"網站","content":""],
-        "email":["icon":"group","title":"EMail","content":""],
+        "ball":["icon":"ball","title":"球種","content":""],
+        "leader":["icon":"member1","title":"隊長","content":""],
+        "mobile_show":["icon":"mobile","title":"行動電話","content":""],
+        "fb": ["icon":"fb","title":"FB","content":""],
+        "youtube":["icon":"youtube","title":"Youtube","content":""],
+        "website":["icon":"website","title":"網站","content":""],
+        "email":["icon":"email1","title":"EMail","content":""],
         "pv":["icon":"pv","title":"瀏覽數","content":""],
         "created_at_show":["icon":"calendar","title":"建立日期","content":""]
     ]
     
     var contentViewConstraintHeight: NSLayoutConstraint?
+    
+    var isLike: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,15 +72,21 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
+        signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
         
         initTableView()
+        initSignupTableView()
+        initContentView()
 
+        beginRefresh()
+        scrollView.addSubview(refreshControl)
         refresh()
     }
     
     override func viewWillLayoutSubviews() {
         mainDataLbl.text = "球隊資料"
-        signupDataLbl.text = "報名資料"
+        signupDataLbl.text = "臨打報名"
+        signupDataLbl.isHidden = true
         contentDataLbl.text = "詳細介紹"
         mainDataLbl.textColor = UIColor(MY_RED)
         signupDataLbl.textColor = UIColor(MY_RED)
@@ -88,7 +103,16 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 600
-        //tableViewConstraintHeight.constant = 1000
+        tableViewConstraintHeight.constant = 1000
+    }
+    
+    func initSignupTableView() {
+
+        signupTableView.dataSource = self
+        signupTableView.delegate = self
+        signupTableView.rowHeight = UITableView.automaticDimension
+        //signupTableView.estimatedRowHeight = 300
+        signupTableViewConstraintHeight.constant = 0
     }
     
     func initContentView() {
@@ -118,7 +142,6 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                     
                     if self.myTable != nil {
                         self.myTable!.filterRow()
-                        //self.coachTable = self.courseTable!.coach
                         //self.courseTable!.signup_normal_models
                         
                         self.titleLbl.text = self.myTable?.name
@@ -131,22 +154,11 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         //}
                         //self.fromNet = true
                         
-                        //self.isLike = self.myTable!.like
-                        //self.likeButton.initStatus(self.isLike, self.courseTable!.like_count)
+                        self.isLike = self.myTable!.like
+                        self.likeButton.initStatus(self.isLike, self.myTable!.like_count)
                         
                         self.tableView.reloadData()
                         //self.signupTableView.reloadData()
-                        
-//                        if self.coachTable!.isSignup {
-//                            self.signupButton.setTitle("取消報名")
-//                        } else {
-//                            let count = self.coachTable!.signup_normal_models.count
-//                            if count >= self.coachTable!.people_limit {
-//                                self.signupButton.setTitle("候補")
-//                            } else {
-//                                self.signupButton.setTitle("報名")
-//                            }
-//                        }
                     }
                 }
                 Global.instance.removeSpinner(superView: self.view)
@@ -164,7 +176,6 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                 featured.downloaded(from: featured_path)
             }
         }
-        //featured.image = courseTable!.featured
     }
     
     func setMainData() {
@@ -199,6 +210,61 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         contentView!.loadHTMLString(content, baseURL: nil)
     }
     
+    func setNextTime() {
+//        let dateTable: DateTable = myTable!.dateTable!
+//        let date: String = dateTable.date
+//        let start_time: String = myTable!.start_time_show
+//        let end_time: String = myTable!.end_time_show
+//        let next_time = "下次上課時間：\(date) \(start_time) ~ \(end_time)"
+//        signupDateLbl.text = next_time
+        
+        
+//        let nextCourseTime: [String: String] = courseTable!.nextCourseTime
+//        for key in signupTableRowKeys {
+//            signupTableRows[key]!["content"] = nextCourseTime[key]
+//        }
+    }
+    
+    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.contentView!.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+            if complete != nil {
+                self.contentView!.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
+                    self.contentViewConstraintHeight!.constant = height as! CGFloat
+                    self.changeScrollViewContentSize()
+                })
+            }
+            
+        })
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x != 0 {
+            scrollView.contentOffset.x = 0
+        }
+    }
+    
+    func changeScrollViewContentSize() {
+        
+        let h1 = featured.bounds.size.height
+        let h2 = mainDataLbl.bounds.size.height
+        let h3 = tableViewConstraintHeight.constant
+        let h6 = contentDataLbl.bounds.size.height
+        let h7 = contentViewConstraintHeight!.constant
+        let h8 = signupDataLbl.bounds.size.height
+        let h9 = signupTableViewConstraintHeight.constant
+        //print(contentViewConstraintHeight)
+        
+        //let h: CGFloat = h1 + h2 + h3 + h4 + h5
+        let h: CGFloat = h1 + h2 + h3 + h6 + h7 + h8 + h9 + 300
+        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
+        ContainerViewConstraintHeight.constant = h
+        //print(h1)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
             return tableRowKeys.count
@@ -227,15 +293,24 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         if tableView == self.tableView {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
             
+            //填入資料
             let key = tableRowKeys[indexPath.row]
             if tableRows[key] != nil {
-                let row = tableRows[key]!
+                var row = tableRows[key]!
                 let icon = row["icon"] ?? ""
                 let title = row["title"] ?? ""
+                if (key == "arena") {
+                    if (myTable != nil && myTable!.arena != nil) {
+                        row["content"] = myTable!.arena!.name
+                    } else {
+                        row["content"] = "未提供"
+                    }
+                }
                 let content = row["content"] ?? ""
                 cell.update(icon: icon, title: title, content: content)
             }
             
+            //計算高度
             if indexPath.row == tableRowKeys.count - 1 {
                 UIView.animate(withDuration: 0, animations: {self.tableView.layoutIfNeeded()}) { (complete) in
                     var heightOfTableView: CGFloat = 0.0
@@ -244,13 +319,27 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         heightOfTableView += cell.frame.height
                     }
                     //print(heightOfTableView)
-                    //self.tableViewConstraintHeight.constant = heightOfTableView
-                    //self.changeScrollViewContentSize()
+                    self.tableViewConstraintHeight.constant = heightOfTableView
+                    self.changeScrollViewContentSize()
                 }
             }
             return cell
         }
         return UITableViewCell()
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            isLike = !isLike
+            likeButton.setLike(isLike)
+            dataService.like(token: myTable!.token, able_id: myTable!.id)
+        }
+    }
+    
+    @IBAction func prevBtnPressed(_ sender: Any) {
+        prev()
     }
 
 }
