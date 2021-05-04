@@ -1,25 +1,23 @@
 //
-//  ShowTeamVC.swift
+//  ShowArenaVC.swift
 //  bm
 //
-//  Created by ives on 2021/5/2.
+//  Created by ives sun on 2021/5/4.
 //  Copyright © 2021 bm. All rights reserved.
 //
 
 import UIKit
 import WebKit
 
-class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
-    
+class ShowArenaVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
+
+    var arena_token: String?
     @IBOutlet weak var featured: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     
     @IBOutlet weak var tableView: SuperTableView!
-    @IBOutlet weak var signupTableView: SuperTableView!
-    
     
     @IBOutlet weak var mainDataLbl: SuperLabel!
-    @IBOutlet weak var signupDataLbl: SuperLabel!
     @IBOutlet weak var contentDataLbl: SuperLabel!
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -43,8 +41,7 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         return webView
     }()
     
-    var team_token: String?
-    var myTable: TeamTable?
+    var myTable: ArenaTable?
     
     var tableRowKeys:[String] = ["arena","interval_show","ball","leader","mobile_show","fb","youtube","website","email","pv","created_at_show"]
     var tableRows: [String: [String:String]] = [
@@ -64,37 +61,29 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     var contentViewConstraintHeight: NSLayoutConstraint?
     
     var isLike: Bool = false
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dataService = TeamService.instance
+
+        dataService = ArenaService.instance
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
-        signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
         
         initTableView()
-        initSignupTableView()
         initContentView()
 
         beginRefresh()
         scrollView.addSubview(refreshControl)
         refresh()
     }
-    
+
     override func viewWillLayoutSubviews() {
-        mainDataLbl.text = "球隊資料"
-        signupDataLbl.text = "臨打報名"
-        signupDataLbl.isHidden = true
+        mainDataLbl.text = "球館資料"
         contentDataLbl.text = "詳細介紹"
         mainDataLbl.textColor = UIColor(MY_RED)
-        signupDataLbl.textColor = UIColor(MY_RED)
         contentDataLbl.textColor = UIColor(MY_RED)
         mainDataLbl.textAlignment = .left
-        signupDataLbl.textAlignment = .left
         contentDataLbl.textAlignment = .left
-        
     }
     
     func initTableView() {
@@ -104,15 +93,6 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 600
         tableViewConstraintHeight.constant = 1000
-    }
-    
-    func initSignupTableView() {
-
-        signupTableView.dataSource = self
-        signupTableView.delegate = self
-        signupTableView.rowHeight = UITableView.automaticDimension
-        //signupTableView.estimatedRowHeight = 300
-        signupTableViewConstraintHeight.constant = 0
     }
     
     func initContentView() {
@@ -131,14 +111,14 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     }
     
     override func refresh() {
-        if team_token != nil {
+        if arena_token != nil {
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
-            let params: [String: String] = ["token": team_token!, "member_token": Member.instance.token]
-            dataService.getOne(t: TeamTable.self, params: params) { (success) in
+            let params: [String: String] = ["token": arena_token!, "member_token": Member.instance.token]
+            dataService.getOne(t: ArenaTable.self, params: params) { (success) in
                 if (success) {
                     let table: Table = self.dataService.table!
-                    self.myTable = table as? TeamTable
+                    self.myTable = table as? ArenaTable
                     
                     if self.myTable != nil {
                         self.myTable!.filterRow()
@@ -148,17 +128,10 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
                         self.setMainData() // setup course basic data
                         self.setFeatured() // setup featured
                         
-                        //if self.myTable!.dateTable != nil { // setup next time course time
-                            //self.courseTable!.dateTable?.printRow()
-                           // self.setNextTime()
-                        //}
-                        //self.fromNet = true
-                        
                         self.isLike = self.myTable!.like
                         self.likeButton.initStatus(self.isLike, self.myTable!.like_count)
                         
                         self.tableView.reloadData()
-                        //self.signupTableView.reloadData()
                     }
                 }
                 Global.instance.removeSpinner(superView: self.view)
@@ -210,21 +183,6 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         contentView!.loadHTMLString(content, baseURL: nil)
     }
     
-    func setNextTime() {
-//        let dateTable: DateTable = myTable!.dateTable!
-//        let date: String = dateTable.date
-//        let start_time: String = myTable!.start_time_show
-//        let end_time: String = myTable!.end_time_show
-//        let next_time = "下次上課時間：\(date) \(start_time) ~ \(end_time)"
-//        signupDateLbl.text = next_time
-        
-        
-//        let nextCourseTime: [String: String] = courseTable!.nextCourseTime
-//        for key in signupTableRowKeys {
-//            signupTableRows[key]!["content"] = nextCourseTime[key]
-//        }
-    }
-    
     override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
     }
@@ -254,12 +212,10 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         let h3 = tableViewConstraintHeight.constant
         let h6 = contentDataLbl.bounds.size.height
         let h7 = contentViewConstraintHeight!.constant
-        let h8 = signupDataLbl.bounds.size.height
-        let h9 = signupTableViewConstraintHeight.constant
         //print(contentViewConstraintHeight)
         
         //let h: CGFloat = h1 + h2 + h3 + h4 + h5
-        let h: CGFloat = h1 + h2 + h3 + h6 + h7 + h8 + h9 + 300
+        let h: CGFloat = h1 + h2 + h3 + h6 + h7 + 300
         scrollView.contentSize = CGSize(width: view.frame.width, height: h)
         ContainerViewConstraintHeight.constant = h
         //print(h1)
@@ -268,22 +224,7 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
             return tableRowKeys.count
-        }
-//        else if tableView == self.signupTableView {
-//            if courseTable != nil {
-//                //let normal_count: Int = courseTable!.signupNormalTables.count
-//                let standby_count: Int = courseTable!.signupStandbyTables.count
-//                let people_limit: Int = courseTable!.people_limit
-//                let count = people_limit + standby_count + 1
-//                //print(count)
-//                return count
-//            } else {
-//                return 0
-//            }
-//        } else if tableView == self.coachTableView {
-//            //print(coachTableRowKeys.count)
-//            return coachTableRowKeys.count
-        else {
+        } else {
             return 0
         }
     }
@@ -296,16 +237,9 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
             //填入資料
             let key = tableRowKeys[indexPath.row]
             if tableRows[key] != nil {
-                var row = tableRows[key]!
+                let row = tableRows[key]!
                 let icon = row["icon"] ?? ""
                 let title = row["title"] ?? ""
-                if (key == "arena") {
-                    if (myTable != nil && myTable!.arena != nil) {
-                        row["content"] = myTable!.arena!.name
-                    } else {
-                        row["content"] = "未提供"
-                    }
-                }
                 let content = row["content"] ?? ""
                 cell.update(icon: icon, title: title, content: content)
             }

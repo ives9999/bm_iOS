@@ -212,7 +212,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
             let data = lists1[indexPath.row]
             var iden = TO_SHOW
             if _type == "coach" {
-                iden = TO_SHOW_COACh
+                iden = TO_SHOW_COACH
             }
             performSegue(withIdentifier: iden, sender: data)
         } else if tableView == searchTableView {
@@ -251,7 +251,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
                 let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
                 showVC.initShowVC(sin: show_in)
             }
-        } else if segue.identifier == TO_SHOW_COACh {
+        } else if segue.identifier == TO_SHOW_COACH {
             if let showCoachVC: ShowCoachVC = segue.destination as? ShowCoachVC {
                 assert(sender as? SuperData != nil)
                 let data: SuperData = sender as! SuperData

@@ -181,6 +181,7 @@
 		B3AE9383262FED6B00223B2A /* StoreListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3AE9381262FED6B00223B2A /* StoreListCell.xib */; };
 		B3AE9389262FEE5700223B2A /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE9387262FEE5700223B2A /* ProductListCell.swift */; };
 		B3AE938A262FEE5700223B2A /* ProductListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3AE9388262FEE5700223B2A /* ProductListCell.xib */; };
+		B3AE93B22640FBE700223B2A /* ShowArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE93B12640FBE700223B2A /* ShowArenaVC.swift */; };
 		B3B4B61022CA247500245CC8 /* SomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4B60E22CA247500245CC8 /* SomeCell.swift */; };
 		B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4B60F22CA247500245CC8 /* SomeCell.xib */; };
 		B3B4EF56257B59EA00EE15D0 /* PrivacyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */; };
@@ -560,6 +561,7 @@
 		B3AE9381262FED6B00223B2A /* StoreListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreListCell.xib; sourceTree = "<group>"; };
 		B3AE9387262FEE5700223B2A /* ProductListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCell.swift; sourceTree = "<group>"; };
 		B3AE9388262FEE5700223B2A /* ProductListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListCell.xib; sourceTree = "<group>"; };
+		B3AE93B12640FBE700223B2A /* ShowArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowArenaVC.swift; sourceTree = "<group>"; };
 		B3B4B60E22CA247500245CC8 /* SomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeCell.swift; sourceTree = "<group>"; };
 		B3B4B60F22CA247500245CC8 /* SomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SomeCell.xib; sourceTree = "<group>"; };
 		B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyCell.swift; sourceTree = "<group>"; };
@@ -1245,6 +1247,7 @@
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B39E5FAA263ED55400C40BA7 /* ShowTeamVC.swift */,
+				B3AE93B12640FBE700223B2A /* ShowArenaVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1851,6 +1854,7 @@
 				B3DEBE1221078191003699A0 /* Coach.swift in Sources */,
 				B3ED38E41FB77BD20003F083 /* NumberTextField.swift in Sources */,
 				B3CB73E023D5C1A700892F75 /* SuperSignupStandby.swift in Sources */,
+				B3AE93B22640FBE700223B2A /* ShowArenaVC.swift in Sources */,
 				B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */,
