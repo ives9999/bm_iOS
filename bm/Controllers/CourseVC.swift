@@ -104,7 +104,7 @@ class CourseVC: ListVC {
         if tableView == self.tableView {
             if mysTable != nil {
                 let myTable = mysTable!.rows[indexPath.row]
-                performSegue(withIdentifier: TO_SHOW_COURSE, sender: myTable)
+                toShowCourse(token: myTable.token)
             }
             
         } else if tableView == searchTableView {
@@ -116,12 +116,7 @@ class CourseVC: ListVC {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == TO_SHOW_COURSE {
-            let table = sender as! CourseTable
-            let vc: ShowCourseVC = segue.destination as! ShowCourseVC
-            vc.title = table.title
-            vc.course_token = table.token
-        } else if segue.identifier == TO_MANAGER_COURSE {
+        if segue.identifier == TO_MANAGER_COURSE {
             let vc: ManagerCourseVC = segue.destination as! ManagerCourseVC
             vc.manager_token = Member.instance.token
         } else if segue.identifier == TO_MULTI_SELECT || segue.identifier == TO_SINGLE_SELECT {

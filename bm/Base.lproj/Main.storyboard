@@ -326,6 +326,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2i-Bv-LZE" customClass="LikeButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                 <state key="normal" title="like"/>
+                                                <connections>
+                                                    <action selector="likeButtonPressed:" destination="tTg-jR-J80" eventType="touchUpInside" id="tqL-3d-A0R"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>

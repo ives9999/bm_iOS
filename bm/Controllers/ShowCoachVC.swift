@@ -113,6 +113,8 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         PV_KEY:["icon":"pv","title":"瀏覽數","content":""]
     ]
     
+    var isLike: Bool = false
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -122,7 +124,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         
         h = contactLbl.bounds.height * 7
         
-        let cellNib = UINib(nibName: "IconCell", bundle: nil)
+        let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
         contactTableView.register(cellNib, forCellReuseIdentifier: "cell")
         initContactTableView()
         
@@ -181,9 +183,13 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 //self.coachTable!.printRow()
                 //self.setData() move to getFeatured
                 if self.myTable != nil {
+                    self.myTable!.filterRow()
+                    self.titleLbl.text = self.myTable!.name
                     self.setData()
                     self.fromNet = true
                     //self.getFeatured()
+                    self.isLike = self.myTable!.like
+                    self.likeButton.initStatus(self.isLike, self.myTable!.like_count)
                     self.contactTableView.reloadData()
                     self.setFeatured()
                 }
@@ -197,9 +203,11 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
                 CourseService.instance.getList(t: CoursesTable.self, token: self.coach_token!, _filter: filter, page: 1, perPage: 100) { (success2) in
                     Global.instance.removeSpinner(superView: self.view)
                     if (success2) {
-                        self.coursesTable = (CourseService.instance.tables as! CoursesTable)
-                        //self.coursesTable!.printRows()
-                        self.courseTableView.reloadData()
+                        self.coursesTable = (CourseService.instance.tables as? CoursesTable)
+                        if (self.coursesTable != nil) {
+                            //self.coursesTable!.printRows()
+                            self.courseTableView.reloadData()
+                        }
                     } else {
                         self.warning(CourseService.instance.msg)
                     }
@@ -301,7 +309,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == contactTableView {
-            let cell = (tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! IconCell)
+            let cell = (tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell)
             let key = contactTableRowKeys[indexPath.row]
             if contactTableRows[key] != nil {
                 let row = contactTableRows[key]!
@@ -338,6 +346,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             //cell.blacklistCellDelegate = self
             if coursesTable != nil && coursesTable!.rows.indices.contains(indexPath.row) {
                 let row = coursesTable!.rows[indexPath.row]
+                row.filterRow()
                 //row.printRow()
                 cell.forRow(row: row)
             }
@@ -379,7 +388,7 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         } else if tableView == courseTableView {
             if coursesTable != nil {
                 let sender = coursesTable!.rows[indexPath.row]
-                performSegue(withIdentifier: TO_SHOW_COURSE, sender: sender)
+                toShowCourse(token: sender.token)
             }
         }
     }
@@ -396,11 +405,6 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
             }
             //showTimetableVC.source = show_in!.type
             showTimetableVC.token = coach_token
-        } else if segue.identifier == TO_SHOW_COURSE {
-            let superCourse = sender as! SuperCourse
-            let vc: ShowCourseVC = segue.destination as! ShowCourseVC
-            vc.title = superCourse.title
-            vc.course_token = superCourse.token
         }
     }
     
@@ -456,11 +460,10 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     func setFeatured() {
         
         if myTable!.featured_path.count > 0 {
-            
-            DataService.instance1.getImage(_url: myTable!.featured_path) { (success) in
-                self.featured = DataService.instance1.image
-                self.featuredView.image = self.featured
-                self.featuredLayout()
+            let featured_path = myTable!.featured_path
+            if featured_path.count > 0 {
+                //print(featured_path)
+                featuredView.downloaded(from: featured_path)
             }
         }
     }
@@ -472,12 +475,12 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         webView.loadHTMLString(html, baseURL: nil)
     }
     
-    func getFeatured() {
-        DataService.instance1.getImage(_url: BASE_URL + myTable!.featured_path) { (success) in
-            self.featured = DataService.instance1.image
-            self.featuredLayout()
-        }
-    }
+//    func getFeatured() {
+//        DataService.instance1.getImage(_url: BASE_URL + myTable!.featured_path) { (success) in
+//            self.featured = DataService.instance1.image
+//            self.featuredLayout()
+//        }
+//    }
     
     
     
@@ -659,6 +662,16 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         }
         
         return cell
+    }
+    
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            isLike = !isLike
+            likeButton.setLike(isLike)
+            dataService.like(token: myTable!.token, able_id: myTable!.id)
+        }
     }
 }
 

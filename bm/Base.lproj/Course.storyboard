@@ -93,7 +93,6 @@
                         <segue destination="HrW-2D-NhE" kind="showDetail" identifier="toManagerCourse" id="gqh-nG-WJt"/>
                         <segue destination="t8q-W4-dib" kind="showDetail" identifier="toSingleSelect" id="A4Z-Qs-ID8"/>
                         <segue destination="cuj-18-UDi" kind="showDetail" identifier="toMultiSelect" id="NO9-v4-wOp"/>
-                        <segue destination="ZZa-2U-rNz" kind="showDetail" identifier="toShowCourse" id="CEV-J6-MNI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p4y-tZ-S2b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -103,7 +102,7 @@
         <!--Show CourseVC-->
         <scene sceneID="N0V-9M-qgG">
             <objects>
-                <viewController storyboardIdentifier="UIViewController-ZZa-2U-rNz" id="ZZa-2U-rNz" customClass="ShowCourseVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toShowCourse" id="ZZa-2U-rNz" customClass="ShowCourseVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H7q-yk-6nf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1327,7 +1326,6 @@
         <segue reference="x4H-6S-8nE"/>
         <segue reference="NO9-v4-wOp"/>
         <segue reference="A4Z-Qs-ID8"/>
-        <segue reference="YBu-8w-Gih"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="377.5" height="670"/>
