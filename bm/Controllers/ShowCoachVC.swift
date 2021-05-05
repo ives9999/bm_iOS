@@ -155,15 +155,17 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     }
     
     override func viewWillLayoutSubviews() {
-        contactLbl.setTextColor(UIColor(MY_RED))
+        
+        contactLbl.setTextTitle()
         //timetableLbl.setTextColor(UIColor(MY_RED))
-        chargeLbl.setTextColor(UIColor(MY_RED))
-        expLbl.setTextColor(UIColor(MY_RED))
-        licenseLbl.setTextColor(UIColor(MY_RED))
-        featLbl.setTextColor(UIColor(MY_RED))
-        detailLbl.setTextColor(UIColor(MY_RED))
-        courseLbl.setTextColor(UIColor(MY_RED))
+        chargeLbl.setTextTitle()
+        expLbl.setTextTitle()
+        licenseLbl.setTextTitle()
+        featLbl.setTextTitle()
+        detailLbl.setTextTitle()
+        courseLbl.setTextTitle()
         //initCollectionView()
+        
         contactLbl.textAlignment = .left
         chargeLbl.textAlignment = .left
         expLbl.textAlignment = .left

@@ -80,8 +80,10 @@ class ShowArenaVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
     override func viewWillLayoutSubviews() {
         mainDataLbl.text = "球館資料"
         contentDataLbl.text = "詳細介紹"
-        mainDataLbl.textColor = UIColor(MY_RED)
-        contentDataLbl.textColor = UIColor(MY_RED)
+        
+        mainDataLbl.setTextTitle()
+        contentDataLbl.setTextTitle()
+        
         mainDataLbl.textAlignment = .left
         contentDataLbl.textAlignment = .left
     }

@@ -1222,11 +1222,13 @@
 				B3A253E9256CBA4C004B8A03 /* SelectCityVC.swift */,
 				B3A2542125723F5B004B8A03 /* SelectManagers.swift */,
 				B385A07B22BCB28E00BC3ADF /* SelectVC.swift */,
+				B3AE93B12640FBE700223B2A /* ShowArenaVC.swift */,
 				B3E8C29A220603310008ED25 /* ShowCoachVC.swift */,
 				B3839EB722CF0261003F3620 /* ShowCourseVC.swift */,
 				B39453D82230E849005E3027 /* ShowPNVC.swift */,
 				B3B7587425A1B06B006ACC33 /* ShowProductVC.swift */,
 				B36E334325480007001336C2 /* ShowStoreVC.swift */,
+				B39E5FAA263ED55400C40BA7 /* ShowTeamVC.swift */,
 				B3308C501FDA5311006A83B6 /* ShowTempPlayVC.swift */,
 				B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */,
 				B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */,
@@ -1246,8 +1248,6 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
-				B39E5FAA263ED55400C40BA7 /* ShowTeamVC.swift */,
-				B3AE93B12640FBE700223B2A /* ShowArenaVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

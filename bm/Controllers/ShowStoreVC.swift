@@ -83,9 +83,9 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         storeDataLbl.text = "體育用品店資料"
         contentLbl.text = "詳細介紹"
         
-        storeDataLbl.textColor = UIColor(MY_RED)
+        storeDataLbl.setTextTitle()
         storeDataLbl.textAlignment = .left
-        contentLbl.textColor = UIColor(MY_RED)
+        contentLbl.setTextTitle()
         contentLbl.textAlignment = .left
     }
     

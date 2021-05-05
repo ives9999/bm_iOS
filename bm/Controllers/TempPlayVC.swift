@@ -192,18 +192,19 @@ class TempPlayVC: ListVC {
         //let row: Dictionary<String, [String: Any]> = lists[indexPath.row]
         //let token: String = row[TOKEN_KEY]!["value"] as! String
         if mysTable != nil {
-            let teamTable = mysTable!.rows[indexPath.row]
-            performSegue(withIdentifier: TO_SHOW_STORE, sender: teamTable.token)
+            let myTable = mysTable!.rows[indexPath.row]
+            toShowTeam(token: myTable.token)
+            //performSegue(withIdentifier: TO_SHOW_STORE, sender: teamTable.token)
         }
         //performSegue(withIdentifier: TO_TEMP_PLAY_SHOW, sender: token)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_TEMP_PLAY_SHOW {
-            let tempPlayShowVC: ShowTempPlayVC = segue.destination as! ShowTempPlayVC
-            tempPlayShowVC.token = sender as? String
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == TO_TEMP_PLAY_SHOW {
+//            let tempPlayShowVC: ShowTempPlayVC = segue.destination as! ShowTempPlayVC
+//            tempPlayShowVC.token = sender as? String
+//        }
+//    }
     
 //    func cellMobile(indexPath: IndexPath?) {
 //        if indexPath != nil {

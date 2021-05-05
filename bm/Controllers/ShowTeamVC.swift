@@ -88,9 +88,11 @@ class ShowTeamVC: BaseViewController, UITableViewDelegate, UITableViewDataSource
         signupDataLbl.text = "臨打報名"
         signupDataLbl.isHidden = true
         contentDataLbl.text = "詳細介紹"
-        mainDataLbl.textColor = UIColor(MY_RED)
-        signupDataLbl.textColor = UIColor(MY_RED)
-        contentDataLbl.textColor = UIColor(MY_RED)
+        
+        mainDataLbl.setTextTitle()
+        signupDataLbl.setTextTitle()
+        contentDataLbl.setTextTitle()
+        
         mainDataLbl.textAlignment = .left
         signupDataLbl.textAlignment = .left
         contentDataLbl.textAlignment = .left

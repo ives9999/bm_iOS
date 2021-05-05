@@ -43,10 +43,13 @@ class ShowProductVC: BaseViewController {
         submitButton.setTitle("購買")
         
         titleLbl.textColor = UIColor.black
-        imageDataLbl.textColor = UIColor(MY_RED)
+        
+        imageDataLbl.setTextTitle()
         imageDataLbl.textAlignment = .left
-        contentLbl.textColor = UIColor(MY_RED)
+        
+        contentLbl.setTextTitle()
         contentLbl.textAlignment = .left
+        
         imageContainerView.backgroundColor = UIColor.clear
         contentView.backgroundColor = UIColor.clear
         scrollView.backgroundColor = UIColor.clear
@@ -128,6 +131,8 @@ class ShowProductVC: BaseViewController {
             contentView.addSubview(textView)
             textView.isScrollEnabled = false
             textView.text = myTable!.content
+            textView.textColor = UIColor(TEXTGRAY)
+            textView.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
             
             let fixedWidth = textView.superview!.frame.size.width
             let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
