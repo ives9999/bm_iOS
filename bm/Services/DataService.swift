@@ -61,6 +61,8 @@ class DataService {
     var table: Table?
     var tables: Tables?
     
+    var jsonData: Data?
+    
     init() {
         _model = Team.instance
     }
@@ -193,6 +195,53 @@ class DataService {
                     } catch {
                         //print("Error:\(error)")
                         self.msg = error.localizedDescription
+                        completion(false)
+                    }
+                case .failure(let error):
+                    self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                    completion(false)
+                    print(error)
+                    return
+                }
+            }
+        }
+    }
+    
+    func getOne1(params: [String: String], completion: @escaping CompletionHandler){
+        
+        var body: [String: Any] = ["device": "app","strip_html": false]
+        if params["token"] != nil {
+            body["token"] = params["token"]
+        }
+        if params["member_token"] != nil {
+            body["member_token"] = params["member_token"]
+        }
+        
+        print(body)
+        let source: String? = getSource()
+        var url: String?
+        if source != nil {
+            url = String(format: URL_ONE, source!)
+        }
+        print(url)
+        if url != nil {
+            Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+                
+                switch response.result {
+                //case .success(let value):
+                case .success(_):
+                    if response.data != nil {
+//                            let json = JSON(value)
+//                            print(json)
+                        if (response.data != nil) {
+                            self.jsonData = response.data!
+                            completion(true)
+                        } else {
+                            self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                            completion(false)
+                        }
+                    } else {
+                        self.msg = "沒有任何伺服器回傳的訊息"
                         completion(false)
                     }
                 case .failure(let error):

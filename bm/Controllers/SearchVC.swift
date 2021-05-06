@@ -47,12 +47,6 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     
     override func viewDidLoad() {
         
-        
-        let n: Int = 5
-        print(n.Type)
-        //print(Int.self)
-        //print(Int.Type)
-        
         model = Team.instance
         myTablView = tableView
         sections = ["", "更多"]

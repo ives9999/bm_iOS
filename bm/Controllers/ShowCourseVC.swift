@@ -95,6 +95,7 @@ class ShowCourseVC: Show1VC {
         //print(Int.Type)
         
         //refresh1(Table.Type)
+        refresh()
     }
     
     override func viewWillLayoutSubviews() {
@@ -132,10 +133,16 @@ class ShowCourseVC: Show1VC {
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
             let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
-            dataService.getOne(t: CourseTable.self, params: params) { (success) in
+            dataService.getOne1(params: params) { (success) in
                 if (success) {
-                    let table: Table = self.dataService.table!
-                    self.myTable = table as? CourseTable
+                    
+                    let jsonData: Data = self.dataService.jsonData!
+                    //let table: Table = self.dataService.table!
+                    do {
+                        self.myTable = try JSONDecoder().decode(CourseTable.self, from: jsonData)
+                    } catch {
+                        self.warning(error.localizedDescription)
+                    }
                     
                     if self.myTable != nil {
                         //self.courseTable?.printRow()
@@ -621,3 +628,4 @@ class ShowCourseVC: Show1VC {
     
 
 }
+
