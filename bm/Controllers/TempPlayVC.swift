@@ -35,8 +35,7 @@ class TempPlayVC: ListVC {
         myTablView = tableView
         dataService = TeamService.instance
         super.viewDidLoad()
-        //print(degrees)
-        
+        //print(degrees)        
         
         //NotificationCenter.default.addObserver(self, selector: #selector(memberDidChange(_:)), name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     

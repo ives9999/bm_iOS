@@ -795,12 +795,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Course", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_COURSE)  as? ShowCourseVC {
-                viewController.course_token = token
+                viewController.token = token
                 show(viewController, sender: nil)
             }
         } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_PRODUCT) as! ShowProductVC
-            viewController.product_token = token
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_COURSE) as! ShowCourseVC
+            viewController.token = token
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

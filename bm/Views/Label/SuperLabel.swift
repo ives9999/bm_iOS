@@ -28,7 +28,7 @@ class SuperLabel: UILabel {
         self.textColor = UIColor.white
         self.backgroundColor = UIColor.clear
         self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
-        self.textAlignment = NSTextAlignment.center
+        self.textAlignment = NSTextAlignment.left
         
         self.numberOfLines = 1
     }

@@ -395,20 +395,20 @@ class ShowCoachVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_SHOW {
-            let sender = sender as! Show_IN
-            let showVC: ShowVC = segue.destination as! ShowVC
-            showVC.show_in = sender
-        } else if segue.identifier == TO_SHOW_TIMETABLE {
-            let showTimetableVC: ShowTimetableVC = segue.destination as! ShowTimetableVC
-            if let id = sender as? Int {
-                showTimetableVC.tt_id = id
-            }
-            //showTimetableVC.source = show_in!.type
-            showTimetableVC.token = coach_token
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == TO_SHOW {
+//            let sender = sender as! Show_IN
+//            let showVC: ShowVC = segue.destination as! ShowVC
+//            showVC.show_in = sender
+//        } else if segue.identifier == TO_SHOW_TIMETABLE {
+//            let showTimetableVC: ShowTimetableVC = segue.destination as! ShowTimetableVC
+//            if let id = sender as? Int {
+//                showTimetableVC.tt_id = id
+//            }
+//            //showTimetableVC.source = show_in!.type
+//            showTimetableVC.token = coach_token
+//        }
+//    }
     
     func setData() {
         if myTable != nil {

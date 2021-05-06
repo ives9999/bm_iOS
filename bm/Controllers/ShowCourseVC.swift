@@ -7,50 +7,29 @@
 //
 
 import UIKit
-import WebKit
 import SwiftyJSON
 
-class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
+class ShowCourseVC: Show1VC {
     
-    var course_token: String?
-    var source: String = "coach"
-    var delegate: EditCourseDelegate?
+    //var source: String = "coach"
+    //var delegate: EditCourseDelegate?
     
-    @IBOutlet weak var tableViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var signupTableViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var coachTableViewConstraintHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var scrollContainerView: UIView!
-    @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
-    @IBOutlet weak var featured: UIImageView!
     @IBOutlet weak var courseDataLbl: SuperLabel!
     
-    @IBOutlet weak var tableView: SuperTableView!
+    
     @IBOutlet weak var signupTableView: SuperTableView!
     @IBOutlet weak var coachTableView: SuperTableView!
     
     @IBOutlet weak var signupDataLbl: SuperLabel!
     @IBOutlet weak var signupDateLbl: SuperLabel!
     @IBOutlet weak var coachDataLbl: SuperLabel!
-    @IBOutlet weak var contentLbl: SuperLabel!
-    @IBOutlet weak var signupButton: SubmitButton!
-    @IBOutlet weak var likeButton: LikeButton!
-    //@IBOutlet weak var signupListButton: CancelButton!
     
-    var contentView: WKWebView? = {
-        
-        //Create configuration
-        let configuration = WKWebViewConfiguration()
-        //configuration.userContentController = controller
-        
-        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
-        webView.backgroundColor = UIColor.clear
-        webView.scrollView.isScrollEnabled = false
-        return webView
-    }()
-    var contentViewConstraintHeight: NSLayoutConstraint?
+    @IBOutlet weak var signupButton: SubmitButton!
+    
+    //@IBOutlet weak var signupListButton: CancelButton!
     
     var tableRowKeys:[String] = ["weekday_text","interval_show","date","price_text_long","people_limit_text","kind_text","pv","created_at_show"]
     var tableRows: [String: [String:String]] = [
@@ -83,6 +62,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     
     //var courseTable: courseTable?
     //var coachTable: coachTable?
+    
     var myTable: CourseTable?
     var coachTable: CoachTable?
     
@@ -95,22 +75,15 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     var course_date: String = ""
     var course_deadline: String = ""
     
-    var cellHeight: CGFloat = 40
-    
-    var isLike: Bool = false
-    
     override func viewDidLoad() {
-        super.viewDidLoad()
 
         dataService = CourseService.instance
         scrollView.backgroundColor = UIColor.clear
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
-        
-        tableView.register(cellNib, forCellReuseIdentifier: "cell")
         signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
         coachTableView.register(cellNib, forCellReuseIdentifier: "cell")
-        initTableView()
+        
         initSignupTableView()
         initCoachTableView()
         initContentView()
@@ -118,9 +91,10 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         signupButton.setTitle("報名")
         //signupListButton.setTitle("報名列表")
         
-        beginRefresh()
-        scrollView.addSubview(refreshControl)
-        refresh()
+        super.viewDidLoad()
+        //print(Int.Type)
+        
+        //refresh1(Table.Type)
     }
     
     override func viewWillLayoutSubviews() {
@@ -128,24 +102,11 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         signupDataLbl.text = "報名資料"
         coachDataLbl.text = "教練資料"
         contentLbl.text = "詳細介紹"
+        
         courseDataLbl.setTextTitle()
         signupDataLbl.setTextTitle()
         coachDataLbl.setTextTitle()
         contentLbl.setTextTitle()
-        courseDataLbl.textAlignment = .left
-        signupDataLbl.textAlignment = .left
-        coachDataLbl.textAlignment = .left
-        contentLbl.textAlignment = .left
-        
-    }
-    
-    func initTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 600
-        tableViewConstraintHeight.constant = 1000
     }
     
     func initSignupTableView() {
@@ -166,26 +127,11 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         coachTableViewConstraintHeight.constant = 3000
     }
     
-    func initContentView() {
-        
-        scrollContainerView.addSubview(contentView!)
-        var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint
-        
-        c1 = NSLayoutConstraint(item: contentView!, attribute: .leading, relatedBy: .equal, toItem: contentView!.superview, attribute: .leading, multiplier: 1, constant: 8)
-        c2 = NSLayoutConstraint(item: contentView!, attribute: .top, relatedBy: .equal, toItem: contentLbl, attribute: .bottom, multiplier: 1, constant: 16)
-        c3 = NSLayoutConstraint(item: contentView!, attribute: .trailing, relatedBy: .equal, toItem: contentView!.superview, attribute: .trailing, multiplier: 1, constant: 8)
-        contentViewConstraintHeight = NSLayoutConstraint(item: contentView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
-        contentView!.translatesAutoresizingMaskIntoConstraints = false
-        scrollContainerView.addConstraints([c1,c2,c3,contentViewConstraintHeight!])
-        contentView!.uiDelegate = self
-        contentView!.navigationDelegate = self
-    }
-    
     override func refresh() {
-        if course_token != nil {
+        if token != nil {
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
-            let params: [String: String] = ["token": course_token!, "member_token": Member.instance.token]
+            let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
             dataService.getOne(t: CourseTable.self, params: params) { (success) in
                 if (success) {
                     let table: Table = self.dataService.table!
@@ -236,6 +182,18 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    override func setFeatured() {
+        
+        if myTable!.featured_path.count > 0 {
+            let featured_path = myTable!.featured_path
+            if featured_path.count > 0 {
+                //print(featured_path)
+                featured.downloaded(from: featured_path)
+            }
+        }
+        //featured.image = courseTable!.featured
+    }
+    
     func setMainData() {
         
         let mirror: Mirror = Mirror(reflecting: myTable!)
@@ -270,24 +228,11 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             tableRows.removeValue(forKey: "date");
             tableRowKeys = tableRowKeys.filter{$0 != "date"}
         }
-        let interval = myTable!.start_time_show + " ~ " + myTable!.end_time_show
-        tableRows["interval_show"]!["content"] = interval
+        tableRows["interval_show"]!["content"] = myTable!.interval_show
         
         let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.myTable!.content+"</body></html>"
         
         contentView!.loadHTMLString(content, baseURL: nil)
-    }
-    
-    func setFeatured() {
-        
-        if myTable!.featured_path.count > 0 {
-            let featured_path = myTable!.featured_path
-            if featured_path.count > 0 {
-                //print(featured_path)
-                featured.downloaded(from: featured_path)
-            }
-        }
-        //featured.image = courseTable!.featured
     }
     
     func setNextTime() {
@@ -333,7 +278,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         //print(self.coachTableRows)
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if !fromNet {
             return 0
         } else {
@@ -389,15 +334,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         return cellHeight
     }
     
-    private func _caculateCellHeight(_ content: String) {
-        let base: CGFloat = 40.0
-        let limit: Int = 18
-        let n: CGFloat = CGFloat((content.count / limit) + 1)
-        cellHeight = base * n
-        //print("\(title):\(content.count):\(contentHeight.constant)")
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == self.tableView {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
@@ -515,8 +452,8 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         if tableView == self.coachTableView {
             let key = coachTableRowKeys[indexPath.row]
             if key == NAME_KEY {
-                let sender: Show_IN = Show_IN(type: source,id:coachTable!.id,token:coachTable!.token,title:coachTable!.name)
-                performSegue(withIdentifier: TO_SHOW, sender: sender)
+                //let sender: Show_IN = Show_IN(type: source,id:coachTable!.id,token:coachTable!.token,title:coachTable!.name)
+                //performSegue(withIdentifier: TO_SHOW, sender: sender)
             } else if key == MOBILE_KEY {
                 coachTable!.mobile.makeCall()
             } else if key == LINE_KEY {
@@ -541,33 +478,19 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         } else if segue.identifier == TO_SIGNUP_LIST {
             let signupListVC: SignupListVC = segue.destination as! SignupListVC
             signupListVC.able = "course"
-            signupListVC.able_token = course_token!
+            signupListVC.able_token = token!
         }
     }
     
-    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+    private func _caculateCellHeight(_ content: String) {
+        let base: CGFloat = 40.0
+        let limit: Int = 18
+        let n: CGFloat = CGFloat((content.count / limit) + 1)
+        cellHeight = base * n
+        //print("\(title):\(content.count):\(contentHeight.constant)")
     }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.contentView!.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
-            if complete != nil {
-                self.contentView!.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
-                    self.contentViewConstraintHeight!.constant = height as! CGFloat
-                    self.changeScrollViewContentSize()
-                })
-            }
-            
-        })
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x != 0 {
-            scrollView.contentOffset.x = 0
-        }
-    }
-    
-    func changeScrollViewContentSize() {
+    override func changeScrollViewContentSize() {
         
         let h1 = featured.bounds.size.height
         let h2 = courseDataLbl.bounds.size.height
@@ -632,12 +555,12 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         }
         if myTable!.dateTable != nil {
             Global.instance.addSpinner(superView: view)
-            CourseService.instance.signup(token: course_token!, member_token: Member.instance.token, date_token: myTable!.dateTable!.token, course_deadline: course_deadline) { (success) in
+            dataService.signup(token: token!, member_token: Member.instance.token, date_token: myTable!.dateTable!.token, course_deadline: course_deadline) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 let msg = CourseService.instance.msg
                 var title = "警告"
                 var closeAction: UIAlertAction?
-                if CourseService.instance.success {
+                if self.dataService.success {
                     title = "提示"
                     closeAction = UIAlertAction(title: "關閉", style: .default, handler: { (action) in
                         self.refresh()
@@ -663,7 +586,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         //print(Member.instance.token)
         if myTable!.dateTable != nil {
             Global.instance.addSpinner(superView: view)
-            CourseService.instance.signup_date(token: course_token!, member_token: Member.instance.token, date_token: myTable!.dateTable!.token) { (success) in
+            dataService.signup_date(token: token!, member_token: Member.instance.token, date_token: myTable!.dateTable!.token) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if (success) {
                     self.signup_date = self.dataService.signup_date
@@ -695,11 +618,6 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
 
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        if delegate != nil {
-            delegate!.isReload(false)
-        }
-        prev()
-    }
+    
 
 }

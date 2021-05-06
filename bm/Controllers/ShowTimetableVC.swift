@@ -263,13 +263,13 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_SHOW {
-            let sender = sender as! Show_IN
-            let showVC: ShowVC = segue.destination as! ShowVC
-            showVC.show_in = sender
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == TO_SHOW {
+//            let sender = sender as! Show_IN
+//            let showVC: ShowVC = segue.destination as! ShowVC
+//            showVC.show_in = sender
+//        }
+//    }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView.contentOffset.x != 0 {

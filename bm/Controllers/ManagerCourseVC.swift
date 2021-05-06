@@ -158,17 +158,17 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
             }
             vc.delegate = self
         } else if segue.identifier == TO_SHOW_COURSE {
-            let vc: ShowCourseVC = segue.destination as! ShowCourseVC
-            vc.delegate = self
-            if sender != nil {
-                let row: [String: String] = sender as! [String: String]
-                if row["title"] != nil {
-                    vc.title = row["title"]
-                }
-                if row["token"] != nil {
-                    vc.course_token = row["token"]
-                }
-            }
+//            let vc: ShowCourseVC = segue.destination as! ShowCourseVC
+//            vc.delegate = self
+//            if sender != nil {
+//                let row: [String: String] = sender as! [String: String]
+//                if row["title"] != nil {
+//                    vc.title = row["title"]
+//                }
+//                if row["token"] != nil {
+//                    vc.course_token = row["token"]
+//                }
+//            }
         }
     }
     

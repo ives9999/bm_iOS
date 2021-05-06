@@ -263,12 +263,12 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let showVC: ShowVC = segue.destination as? ShowVC {
-            assert(sender as? SuperData != nil)
-            let data: SuperData = sender as! SuperData
-            let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
-            showVC.initShowVC(sin: show_in)
-        }
+//        if let showVC: ShowVC = segue.destination as? ShowVC {
+//            assert(sender as? SuperData != nil)
+//            let data: SuperData = sender as! SuperData
+//            let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
+//            showVC.initShowVC(sin: show_in)
+//        }
     }
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         //print("will display section: \(indexPath.section) row: \(indexPath.row)")
