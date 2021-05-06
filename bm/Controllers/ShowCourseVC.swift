@@ -94,7 +94,7 @@ class ShowCourseVC: Show1VC {
         super.viewDidLoad()
         //print(Int.Type)
         
-        //refresh1(Table.Type)
+        //refresh1(CourseTable.self)
         refresh()
     }
     
@@ -128,49 +128,41 @@ class ShowCourseVC: Show1VC {
         coachTableViewConstraintHeight.constant = 3000
     }
     
-    override func refresh() {
-        if token != nil {
-            Global.instance.addSpinner(superView: view)
-            //print(Member.instance.token)
-            let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
-            dataService.getOne1(params: params) { (success) in
-                if (success) {
-                    
-                    let jsonData: Data = self.dataService.jsonData!
-                    //let table: Table = self.dataService.table!
-                    do {
-                        self.myTable = try JSONDecoder().decode(CourseTable.self, from: jsonData)
-                    } catch {
-                        self.warning(error.localizedDescription)
-                    }
-                    
-                    if self.myTable != nil {
-                        //self.courseTable?.printRow()
-                        
-                        //self.courseTable!.date_model.printRow()
-                        //self.coachTable = self.courseTable!.coach
-                        //self.courseTable!.signup_normal_models
-                        
-                        self.setMainData() // setup course basic data
-                        self.setFeatured() // setup featured
-                        
-                        if self.myTable!.coachTable != nil { // setup coach for course data
-                            self.coachTable = self.myTable!.coachTable
-                            self.setCoachData()
-                        }
-                        if self.myTable!.dateTable != nil { // setup next time course time
-                            //self.courseTable!.dateTable?.printRow()
-                            self.setNextTime()
-                        }
-                        self.fromNet = true
-                        
-                        self.isLike = self.myTable!.like
-                        self.likeButton.initStatus(self.isLike, self.myTable!.like_count)
-                        
-                        self.tableView.reloadData()
-                        self.signupTableView.reloadData()
-                        self.coachTableView.reloadData()
-                        
+    override func setData(_ jsonData: Data) {
+        do {
+            myTable = try JSONDecoder().decode(CourseTable.self, from: jsonData)
+        } catch {
+            warning(error.localizedDescription)
+        }
+        
+        if myTable != nil {
+            myTable?.filterRow()
+            //self.courseTable?.printRow()
+            
+            //self.courseTable!.date_model.printRow()
+            //self.coachTable = self.courseTable!.coach
+            //self.courseTable!.signup_normal_models
+            
+            setMainData() // setup course basic data
+            setFeatured(t: myTable!) // setup featured
+            
+            if myTable!.coachTable != nil { // setup coach for course data
+                coachTable = self.myTable!.coachTable
+                setCoachData()
+            }
+            if myTable!.dateTable != nil { // setup next time course time
+                //self.courseTable!.dateTable?.printRow()
+                setNextTime()
+            }
+            fromNet = true
+            
+            isLike = myTable!.like
+            likeButton.initStatus(isLike, myTable!.like_count)
+            
+            tableView.reloadData()
+            signupTableView.reloadData()
+            coachTableView.reloadData()
+            
 //                        if self.coachTable!.isSignup {
 //                            self.signupButton.setTitle("取消報名")
 //                        } else {
@@ -181,24 +173,7 @@ class ShowCourseVC: Show1VC {
 //                                self.signupButton.setTitle("報名")
 //                            }
 //                        }
-                    }
-                }
-                Global.instance.removeSpinner(superView: self.view)
-                self.endRefresh()
-            }
         }
-    }
-    
-    override func setFeatured() {
-        
-        if myTable!.featured_path.count > 0 {
-            let featured_path = myTable!.featured_path
-            if featured_path.count > 0 {
-                //print(featured_path)
-                featured.downloaded(from: featured_path)
-            }
-        }
-        //featured.image = courseTable!.featured
     }
     
     func setMainData() {

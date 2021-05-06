@@ -81,13 +81,32 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         contentView!.navigationDelegate = self
     }
     
-    func refresh1<T: Table>(_ a: T.Type) {
+    override func refresh() {
+        if token != nil {
+            Global.instance.addSpinner(superView: view)
+            //print(Member.instance.token)
+            let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
+            dataService.getOne1(params: params) { (success) in
+                if (success) {
+                    let jsonData: Data = self.dataService.jsonData!
+                    self.setData(jsonData)
+                }
+                Global.instance.removeSpinner(superView: self.view)
+                self.endRefresh()
+            }
+        }
+    }
+    
+    func setData(_ jsonData: Data) {}
+    
+    func refresh1<T: Table>(_ t: T.Type) {
         if token != nil {
             let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
-            dataService.getOne(t: a, params: params) { (success) in
+            dataService.getOne(t: t, params: params) { (success) in
                 if (success) {
                     let table: Table = self.dataService.table!
                     let my = table as! T
+                    //print(type(of: my))
                     my.filterRow()
                     
                 }
@@ -97,15 +116,14 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         }
     }
     
-    func setFeatured() {
-        
-//        if myTable!.featured_path.count > 0 {
-//            let featured_path = myTable!.featured_path
-//            if featured_path.count > 0 {
-//                //print(featured_path)
-//                featured.downloaded(from: featured_path)
-//            }
-//        }
+    func setFeatured<T: Table>(t: T) {
+
+        if t.featured_path.count > 0 {
+            if t.featured_path.count > 0 {
+                print(t.featured_path)
+                featured.downloaded(from: t.featured_path)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
