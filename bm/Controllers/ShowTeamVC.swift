@@ -44,7 +44,8 @@ class ShowTeamVC: Show1VC {
             "pv":["icon":"pv","title":"瀏覽數","content":""],
             "created_at_show":["icon":"calendar","title":"建立日期","content":""]
         ]
-        refresh()
+        //refresh()
+        refresh1(TeamTable.self)
     }
     
     override func viewWillLayoutSubviews() {
@@ -67,21 +68,21 @@ class ShowTeamVC: Show1VC {
         //signupTableViewConstraintHeight.constant = 0
     }
     
-    override func setData<T: Table>(_ jsonData: Data, _ t:T.Type) {
-        super.setData(jsonData, t)
+    override func setData() {
         
-        if myTable != nil {
-            table = myTable
-            myTable!.filterRow()
-            
-            setMainData() // setup course basic data
-            setFeatured() // setup featured
-            
-            isLike = myTable!.like
-            likeButton.initStatus(isLike, myTable!.like_count)
-            
-            tableView.reloadData()
-            //signupTableView.reloadData()
+        if (table != nil) {
+            myTable = table as? TeamTable
+            if (myTable != nil) {
+                myTable!.filterRow()
+                
+                setMainData()
+                
+                isLike = myTable!.like
+                likeButton.initStatus(isLike, myTable!.like_count)
+                
+                tableView.reloadData()
+                //signupTableView.reloadData()
+            }
         }
     }
     

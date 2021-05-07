@@ -231,8 +231,8 @@ class DataService {
                 //case .success(let value):
                 case .success(_):
                     if response.data != nil {
-//                            let json = JSON(value)
-//                            print(json)
+                        //let json = JSON(value)
+                        //print(json)
                         if (response.data != nil) {
                             self.jsonData = response.data!
                             completion(true)

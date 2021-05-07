@@ -91,12 +91,11 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
     override func refresh() {
         if token != nil {
             Global.instance.addSpinner(superView: view)
-            //print(Member.instance.token)
             let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
             dataService.getOne1(params: params) { (success) in
                 if (success) {
-                    let jsonData: Data = self.dataService.jsonData!
-                    self.setData(jsonData, CourseTable.self)
+                    //let jsonData: Data = self.dataService.jsonData!
+                    //self.parseJSON(jsonData)
                 }
                 Global.instance.removeSpinner(superView: self.view)
                 self.endRefresh()
@@ -104,29 +103,37 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         }
     }
     
-    func setData<T: Table>(_ jsonData: Data, _ t:T.Type) {
-        
-        do {
-            table = try JSONDecoder().decode(t, from: jsonData)
-        } catch {
-            warning(error.localizedDescription)
-        }
-    }
+    //func parseJSON(_ jsonData: Data) {}
+    
+    func setData() {}
     
     func refresh1<T: Table>(_ t: T.Type) {
         if token != nil {
             let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
-            dataService.getOne(t: t, params: params) { (success) in
+            dataService.getOne1(params: params) { (success) in
                 if (success) {
-                    let table: Table = self.dataService.table!
-                    let my = table as! T
-                    //print(type(of: my))
-                    my.filterRow()
-                    
+                    let jsonData: Data = self.dataService.jsonData!
+                    do {
+                        self.table = try JSONDecoder().decode(t, from: jsonData)
+                        if (self.table != nil) {
+                            self.table!.filterRow()
+                            
+                            if (self.table!.name.count > 0) {
+                                self.titleLbl.text = self.table!.name
+                            } else {
+                                self.titleLbl.text = self.table!.title
+                            }
+                            self.setFeatured()
+                            //self.setMainData()
+                            
+                            self.setData()
+                        }
+                        //let my = self.table as? T
+                    } catch {
+                        self.warning(error.localizedDescription)
+                    }
                 }
-                
             }
-            
         }
     }
     

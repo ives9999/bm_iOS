@@ -86,8 +86,8 @@ class ShowCourseVC: Show1VC {
             "created_at_show":["icon":"calendar","title":"建立日期","content":""]
         ]
         
-        //refresh1(CourseTable.self)
-        refresh()
+        refresh1(CourseTable.self)
+        //refresh()
     }
     
     override func viewWillLayoutSubviews() {
@@ -120,48 +120,51 @@ class ShowCourseVC: Show1VC {
         coachTableViewConstraintHeight.constant = 3000
     }
     
-    override func setData<T: Table>(_ jsonData: Data, _ t:T.Type) {
-        super.setData(jsonData, t)
+//    override func parseJSON(_ jsonData: Data) {
+//        self.setData(jsonData, CourseTable.self)
+//    }
+    
+    override func setData() {
         
-        if myTable != nil {
-            table = myTable
-            myTable!.filterRow()
-            //self.courseTable?.printRow()
+        if table != nil {
+            myTable = table as? CourseTable
+            if (myTable != nil) {
+                myTable!.filterRow()
+                //self.courseTable?.printRow()
+                
+                setMainData()
+                
+                //self.coachTable = self.courseTable!.coach
+                //self.courseTable!.signup_normal_models
+                
+                if myTable!.coachTable != nil { // setup coach for course data
+                    coachTable = self.myTable!.coachTable
+                    setCoachData()
+                }
+                if myTable!.dateTable != nil { // setup next time course time
+                    //self.courseTable!.dateTable?.printRow()
+                    setNextTime()
+                }
+                fromNet = true
+                
+                isLike = myTable!.like
+                likeButton.initStatus(isLike, myTable!.like_count)
+                
+                tableView.reloadData()
+                signupTableView.reloadData()
+                coachTableView.reloadData()
             
-            //self.courseTable!.date_model.printRow()
-            //self.coachTable = self.courseTable!.coach
-            //self.courseTable!.signup_normal_models
-            
-            setMainData() // setup course basic data
-            setFeatured() // setup featured
-            
-            if myTable!.coachTable != nil { // setup coach for course data
-                coachTable = self.myTable!.coachTable
-                setCoachData()
+//                if self.coachTable!.isSignup {
+//                    self.signupButton.setTitle("取消報名")
+//                } else {
+//                    let count = self.coachTable!.signup_normal_models.count
+//                    if count >= self.coachTable!.people_limit {
+//                        self.signupButton.setTitle("候補")
+//                    } else {
+//                        self.signupButton.setTitle("報名")
+//                    }
+//                }
             }
-            if myTable!.dateTable != nil { // setup next time course time
-                //self.courseTable!.dateTable?.printRow()
-                setNextTime()
-            }
-            fromNet = true
-            
-            isLike = myTable!.like
-            likeButton.initStatus(isLike, myTable!.like_count)
-            
-            tableView.reloadData()
-            signupTableView.reloadData()
-            coachTableView.reloadData()
-            
-//                        if self.coachTable!.isSignup {
-//                            self.signupButton.setTitle("取消報名")
-//                        } else {
-//                            let count = self.coachTable!.signup_normal_models.count
-//                            if count >= self.coachTable!.people_limit {
-//                                self.signupButton.setTitle("候補")
-//                            } else {
-//                                self.signupButton.setTitle("報名")
-//                            }
-//                        }
         }
     }
     
