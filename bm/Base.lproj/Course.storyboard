@@ -341,10 +341,10 @@
                         <outlet property="coachDataLbl" destination="pR9-it-PkG" id="hew-GU-8rT"/>
                         <outlet property="coachTableView" destination="m6U-A8-ron" id="ozw-Gq-C93"/>
                         <outlet property="coachTableViewConstraintHeight" destination="Jb9-Dk-IyG" id="dbt-gp-g7c"/>
-                        <outlet property="contentLbl" destination="a1J-aW-JsJ" id="IA0-01-nrW"/>
-                        <outlet property="courseDataLbl" destination="uVt-2n-TRc" id="8lB-2H-814"/>
+                        <outlet property="contentDataLbl" destination="a1J-aW-JsJ" id="1hK-Zz-qw9"/>
                         <outlet property="featured" destination="I9U-D1-tnd" id="1Mi-aI-H3N"/>
                         <outlet property="likeButton" destination="VTk-sv-0Nb" id="X37-oL-xPa"/>
+                        <outlet property="mainDataLbl" destination="uVt-2n-TRc" id="ilg-9h-bFr"/>
                         <outlet property="scrollContainerView" destination="ORk-cu-jAE" id="kqI-68-0h3"/>
                         <outlet property="scrollView" destination="lfl-RI-5GV" id="nyn-hc-0DQ"/>
                         <outlet property="signupButton" destination="1v5-xT-scn" id="5NW-z3-FwD"/>

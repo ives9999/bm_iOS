@@ -11,14 +11,8 @@ import SwiftyJSON
 
 class ShowCourseVC: Show1VC {
     
-    //var source: String = "coach"
-    //var delegate: EditCourseDelegate?
-    
     @IBOutlet weak var signupTableViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var coachTableViewConstraintHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var courseDataLbl: SuperLabel!
-    
     
     @IBOutlet weak var signupTableView: SuperTableView!
     @IBOutlet weak var coachTableView: SuperTableView!
@@ -30,18 +24,6 @@ class ShowCourseVC: Show1VC {
     @IBOutlet weak var signupButton: SubmitButton!
     
     //@IBOutlet weak var signupListButton: CancelButton!
-    
-    var tableRowKeys:[String] = ["weekday_text","interval_show","date","price_text_long","people_limit_text","kind_text","pv","created_at_show"]
-    var tableRows: [String: [String:String]] = [
-        "weekday_text":["icon":"calendar","title":"星期","content":""],
-        "interval_show":["icon":"clock","title":"時段","content":""],
-        "date":["icon":"calendar","title":"期間","content":""],
-        "price_text_long":["icon":"money","title":"收費","content":""],
-        "people_limit_text":["icon":"group","title":"限制人數","content":""],
-        "kind_text": ["icon":"cycle","title":"週期","content":""],       // "signup_count":["icon":"group","title":"已報名人數","content":""],
-        "pv":["icon":"pv","title":"瀏覽數","content":""],
-        "created_at_show":["icon":"calendar","title":"建立日期","content":""]
-    ]
     
     let signupTableRowKeys:[String] = ["date", "deadline"]
     var signupTableRows: [String: [String:String]] = [
@@ -86,28 +68,38 @@ class ShowCourseVC: Show1VC {
         
         initSignupTableView()
         initCoachTableView()
-        initContentView()
         
         signupButton.setTitle("報名")
         //signupListButton.setTitle("報名列表")
         
         super.viewDidLoad()
-        //print(Int.Type)
+        
+        tableRowKeys = ["weekday_text","interval_show","date","price_text_long","people_limit_text","kind_text","pv","created_at_show"]
+        tableRows = [
+            "weekday_text":["icon":"calendar","title":"星期","content":""],
+            "interval_show":["icon":"clock","title":"時段","content":""],
+            "date":["icon":"calendar","title":"期間","content":""],
+            "price_text_long":["icon":"money","title":"收費","content":""],
+            "people_limit_text":["icon":"group","title":"限制人數","content":""],
+            "kind_text": ["icon":"cycle","title":"週期","content":""],       // "signup_count":["icon":"group","title":"已報名人數","content":""],
+            "pv":["icon":"pv","title":"瀏覽數","content":""],
+            "created_at_show":["icon":"calendar","title":"建立日期","content":""]
+        ]
         
         //refresh1(CourseTable.self)
         refresh()
     }
     
     override func viewWillLayoutSubviews() {
-        courseDataLbl.text = "課程資料"
+        mainDataLbl.text = "課程資料"
         signupDataLbl.text = "報名資料"
         coachDataLbl.text = "教練資料"
-        contentLbl.text = "詳細介紹"
+        contentDataLbl.text = "詳細介紹"
         
-        courseDataLbl.setTextTitle()
+        mainDataLbl.setTextTitle()
         signupDataLbl.setTextTitle()
         coachDataLbl.setTextTitle()
-        contentLbl.setTextTitle()
+        contentDataLbl.setTextTitle()
     }
     
     func initSignupTableView() {
@@ -128,15 +120,12 @@ class ShowCourseVC: Show1VC {
         coachTableViewConstraintHeight.constant = 3000
     }
     
-    override func setData(_ jsonData: Data) {
-        do {
-            myTable = try JSONDecoder().decode(CourseTable.self, from: jsonData)
-        } catch {
-            warning(error.localizedDescription)
-        }
+    override func setData<T: Table>(_ jsonData: Data, _ t:T.Type) {
+        super.setData(jsonData, t)
         
         if myTable != nil {
-            myTable?.filterRow()
+            table = myTable
+            myTable!.filterRow()
             //self.courseTable?.printRow()
             
             //self.courseTable!.date_model.printRow()
@@ -144,7 +133,7 @@ class ShowCourseVC: Show1VC {
             //self.courseTable!.signup_normal_models
             
             setMainData() // setup course basic data
-            setFeatured(t: myTable!) // setup featured
+            setFeatured() // setup featured
             
             if myTable!.coachTable != nil { // setup coach for course data
                 coachTable = self.myTable!.coachTable
@@ -176,7 +165,7 @@ class ShowCourseVC: Show1VC {
         }
     }
     
-    func setMainData() {
+    override func setMainData() {
         
         let mirror: Mirror = Mirror(reflecting: myTable!)
         let propertys: [[String: Any]] = mirror.toDictionary()
@@ -285,37 +274,7 @@ class ShowCourseVC: Show1VC {
             }
         }
     }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if tableView == self.tableView {
-            let key = tableRowKeys[indexPath.row]
-            if tableRows[key] != nil {
-                let row = tableRows[key]!
-                let content = row["content"] ?? ""
-                _caculateCellHeight(content)
-            }
-        } else if tableView == self.coachTableView {
-            let key = coachTableRowKeys[indexPath.row]
-            if coachTableRows[key] != nil {
-                let row = coachTableRows[key]!
-                let content = row["content"] ?? ""
-                _caculateCellHeight(content)
-            }
-            //cellHeight = 36
-        } else if tableView == self.signupTableView {
-//            let key = signupTableRowKeys[indexPath.row]
-//            if signupTableRows[key] != nil {
-//                let row = signupTableRows[key]!
-//                let content = row["content"] ?? ""
-//                _caculateCellHeight(content)
-//            }
-            cellHeight = 36
-        }
-        
-        return cellHeight
-    }
-    
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == self.tableView {
@@ -464,22 +423,14 @@ class ShowCourseVC: Show1VC {
         }
     }
     
-    private func _caculateCellHeight(_ content: String) {
-        let base: CGFloat = 40.0
-        let limit: Int = 18
-        let n: CGFloat = CGFloat((content.count / limit) + 1)
-        cellHeight = base * n
-        //print("\(title):\(content.count):\(contentHeight.constant)")
-    }
-    
     override func changeScrollViewContentSize() {
         
         let h1 = featured.bounds.size.height
-        let h2 = courseDataLbl.bounds.size.height
+        let h2 = mainDataLbl.bounds.size.height
         let h3 = tableViewConstraintHeight.constant
         let h4 = coachDataLbl.bounds.size.height
         let h5 = coachTableViewConstraintHeight.constant
-        let h6 = contentLbl.bounds.size.height
+        let h6 = contentDataLbl.bounds.size.height
         let h7 = contentViewConstraintHeight!.constant
         let h8 = signupDataLbl.bounds.size.height
         let h9 = signupTableViewConstraintHeight.constant
@@ -590,16 +541,7 @@ class ShowCourseVC: Show1VC {
         performSegue(withIdentifier: TO_SIGNUP_LIST, sender: nil)
     }
     
-    @IBAction func likeButtonPressed(_ sender: Any) {
-        if (!Member.instance.isLoggedIn) {
-            toLogin()
-        } else {
-            isLike = !isLike
-            likeButton.setLike(isLike)
-            dataService.like(token: myTable!.token, able_id: myTable!.id)
-        }
-    }
-
+    
     
 
 }

@@ -12,7 +12,9 @@ import WebKit
 class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var contentLbl: SuperLabel!
+    
+    @IBOutlet weak var mainDataLbl: SuperLabel!
+    @IBOutlet weak var contentDataLbl: SuperLabel!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContainerView: UIView!
@@ -41,9 +43,12 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
     
     var cellHeight: CGFloat = 40
     
+    var tableRowKeys:[String] = [String]()
+    var tableRows: [String: [String:String]] = [String: [String: String]]()
+    
     var isLike: Bool = false
     var token: String?
-    
+    var table: Table?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +57,8 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
         
         initTableView()
+        initContentView()
+        
         beginRefresh()
         scrollView.addSubview(refreshControl)
         //refresh()
@@ -72,7 +79,7 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint
         
         c1 = NSLayoutConstraint(item: contentView!, attribute: .leading, relatedBy: .equal, toItem: contentView!.superview, attribute: .leading, multiplier: 1, constant: 8)
-        c2 = NSLayoutConstraint(item: contentView!, attribute: .top, relatedBy: .equal, toItem: contentLbl, attribute: .bottom, multiplier: 1, constant: 16)
+        c2 = NSLayoutConstraint(item: contentView!, attribute: .top, relatedBy: .equal, toItem: contentDataLbl, attribute: .bottom, multiplier: 1, constant: 16)
         c3 = NSLayoutConstraint(item: contentView!, attribute: .trailing, relatedBy: .equal, toItem: contentView!.superview, attribute: .trailing, multiplier: 1, constant: 8)
         contentViewConstraintHeight = NSLayoutConstraint(item: contentView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
         contentView!.translatesAutoresizingMaskIntoConstraints = false
@@ -89,7 +96,7 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
             dataService.getOne1(params: params) { (success) in
                 if (success) {
                     let jsonData: Data = self.dataService.jsonData!
-                    self.setData(jsonData)
+                    self.setData(jsonData, CourseTable.self)
                 }
                 Global.instance.removeSpinner(superView: self.view)
                 self.endRefresh()
@@ -97,7 +104,14 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         }
     }
     
-    func setData(_ jsonData: Data) {}
+    func setData<T: Table>(_ jsonData: Data, _ t:T.Type) {
+        
+        do {
+            table = try JSONDecoder().decode(t, from: jsonData)
+        } catch {
+            warning(error.localizedDescription)
+        }
+    }
     
     func refresh1<T: Table>(_ t: T.Type) {
         if token != nil {
@@ -116,14 +130,27 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         }
     }
     
-    func setFeatured<T: Table>(t: T) {
+    func setFeatured() {
 
-        if t.featured_path.count > 0 {
-            if t.featured_path.count > 0 {
-                print(t.featured_path)
-                featured.downloaded(from: t.featured_path)
-            }
+        if (table != nil && table!.featured_path.count > 0) {
+            featured.downloaded(from: table!.featured_path)
+        } else {
+            warning("沒有取得內容資料值，請稍後再試或洽管理員")
         }
+    }
+    
+//    func setFeatured<T: Table>(t: T) {
+//
+//        if t.featured_path.count > 0 {
+//            if t.featured_path.count > 0 {
+//                print(t.featured_path)
+//                featured.downloaded(from: t.featured_path)
+//            }
+//        }
+//    }
+    
+    func setMainData() {
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -135,10 +162,12 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
     }
     
     override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
         super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        
         self.contentView!.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
             if complete != nil {
                 self.contentView!.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
@@ -160,10 +189,22 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
     
     }
     
+    @IBAction func likeButtonPressed(_ sender: Any) {
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            if (table != nil) {
+                isLike = !isLike
+                likeButton.setLike(isLike)
+                dataService.like(token: table!.token, able_id: table!.id)
+            } else {
+                warning("沒有取得內容資料值，請稍後再試或洽管理員")
+            }
+        }
+    }
+
+    
     @IBAction func prevBtnPressed(_ sender: Any) {
-//        if delegate != nil {
-//            delegate!.isReload(false)
-//        }
         prev()
     }
 }
