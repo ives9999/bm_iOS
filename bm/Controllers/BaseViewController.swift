@@ -698,12 +698,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_PRODUCT)  as? ShowProductVC {
-                viewController.product_token = token
+                viewController.token = token
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_PRODUCT) as! ShowProductVC
-            viewController.product_token = token
+            viewController.token = token
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -823,12 +823,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_COACH)  as? ShowCoachVC {
-                viewController.coach_token = token
+                viewController.token = token
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_COACH) as! ShowCoachVC
-            viewController.coach_token = token
+            viewController.token = token
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -837,12 +837,26 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_ARENA)  as? ShowArenaVC {
-                viewController.arena_token = token
+                viewController.token = token
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_ARENA) as! ShowArenaVC
-            viewController.arena_token = token
+            viewController.token = token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toShowStore(token: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "More", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_STORE)  as? ShowStoreVC {
+                viewController.token = token
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_STORE) as! ShowStoreVC
+            viewController.token = token
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

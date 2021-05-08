@@ -39,8 +39,6 @@ class StoreTable: Table {
     var road: String = ""
     var zip: Int = -1
     
-    var content: String = ""
-    
     var tel_show: String = ""
     var open_time_show: String = ""
     var close_time_show: String = ""
@@ -60,7 +58,6 @@ class StoreTable: Table {
         case area_id
         case road
         case zip
-        case content
     }
     
     required init(from decoder: Decoder) throws {
@@ -72,7 +69,6 @@ class StoreTable: Table {
         do {website = try container.decode(String.self, forKey: .website)}catch{website = ""}
         do {email = try container.decode(String.self, forKey: .email)}catch{email = ""}
         do {line = try container.decode(String.self, forKey: .line)}catch{line = ""}
-        do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {open_time = try container.decode(String.self, forKey: .open_time)}catch{open_time = ""}
         do {close_time = try container.decode(String.self, forKey: .close_time)}catch{close_time = ""}
         do {area_id = try container.decode(Int.self, forKey: .area_id)}catch{area_id = -1}

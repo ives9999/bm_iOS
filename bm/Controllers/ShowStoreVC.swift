@@ -9,217 +9,84 @@
 import Foundation
 import WebKit
 
-class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
-    
-    @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var scrollContainerView: UIView!
-    
-    @IBOutlet weak var featured: UIImageView!
-    
-    @IBOutlet weak var storeDataLbl: SuperLabel!
-    @IBOutlet weak var contentLbl: SuperLabel!
-    
-    @IBOutlet weak var tableView: SuperTableView!
-    
-    @IBOutlet weak var tableViewConstraintHeight: NSLayoutConstraint!
-    @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var likeButton: LikeButton!
-    
-    var contentView: WKWebView? = {
-        
-        //Create configuration
-        let configuration = WKWebViewConfiguration()
-        //configuration.userContentController = controller
-        
-        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
-        webView.backgroundColor = UIColor.clear
-        webView.scrollView.isScrollEnabled = false
-        return webView
-    }()
-    var contentViewConstraintHeight: NSLayoutConstraint?
+class ShowStoreVC: Show1VC {
     
     var myTable: StoreTable?
-    var store_token: String?
-    
-    var tableRowKeys:[String] = ["tel_show","mobile_show","address","fb","line","website","email","business_time","pv","created_at_show"]
-    var tableRows: [String: [String:String]] = [
-        "tel_show":["icon":"tel","title":"市內電話","content":""],
-        "mobile_show":["icon":"mobile","title":"行動電話","content":""],
-        "address":["icon":"marker","title":"住址","content":""],
-        "fb":["icon":"fb","title":"FB","content":""],
-        "line":["icon":"line","title":"line","content":""],
-        "website":["icon":"website","title":"網站","content":""],
-        "email":["icon":"email1","title":"email","content":""],
-        "business_time":["icon":"clock","title":"營業時間","content":""],
-        "pv":["icon":"pv","title":"瀏覽數","content":""],
-        "created_at_show":["icon":"calendar","title":"建立日期","content":""]
-    ]
-    
-    var fromNet: Bool = false
-    //var cellHeight: CGFloat = 40
-    
-    var isLike: Bool = false
     
     override func viewDidLoad() {
-        super.viewDidLoad()
 
-        //print(storeTable)
         dataService = StoreService.instance
-        scrollView.backgroundColor = UIColor.clear
         
-        let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "cell")
+        super.viewDidLoad()
         
-        initTableView()
-        initContentView()
+        tableRowKeys = ["tel_show","mobile_show","address","fb","line","website","email","business_time","pv","created_at_show"]
+        tableRows = [
+            "tel_show":["icon":"tel","title":"市內電話","content":""],
+            "mobile_show":["icon":"mobile","title":"行動電話","content":""],
+            "address":["icon":"marker","title":"住址","content":""],
+            "fb":["icon":"fb","title":"FB","content":""],
+            "line":["icon":"line","title":"line","content":""],
+            "website":["icon":"website","title":"網站","content":""],
+            "email":["icon":"email1","title":"email","content":""],
+            "business_time":["icon":"clock","title":"營業時間","content":""],
+            "pv":["icon":"pv","title":"瀏覽數","content":""],
+            "created_at_show":["icon":"calendar","title":"建立日期","content":""]
+        ]
         
-        beginRefresh()
-        scrollView.addSubview(refreshControl)
-        refresh()
+        refresh(StoreTable.self)
     }
     
     override func viewWillLayoutSubviews() {
-        storeDataLbl.text = "體育用品店資料"
-        contentLbl.text = "詳細介紹"
+        mainDataLbl.text = "體育用品店資料"
+        contentDataLbl.text = "詳細介紹"
         
-        storeDataLbl.setTextTitle()
-        storeDataLbl.textAlignment = .left
-        contentLbl.setTextTitle()
-        contentLbl.textAlignment = .left
+        mainDataLbl.setTextTitle()
+        contentDataLbl.setTextTitle()
     }
     
-    func initTableView() {
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.rowHeight = UITableView.automaticDimension
-        //tableView.estimatedRowHeight = 600
-        tableViewConstraintHeight.constant = 600
-    }
-    
-    func initContentView() {
-        
-        scrollContainerView.addSubview(contentView!)
-        var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint
-        
-        c1 = NSLayoutConstraint(item: contentView!, attribute: .leading, relatedBy: .equal, toItem: contentView!.superview, attribute: .leading, multiplier: 1, constant: 8)
-        c2 = NSLayoutConstraint(item: contentView!, attribute: .top, relatedBy: .equal, toItem: contentLbl, attribute: .bottom, multiplier: 1, constant: 8)
-        c3 = NSLayoutConstraint(item: contentView!, attribute: .trailing, relatedBy: .equal, toItem: contentView!.superview, attribute: .trailing, multiplier: 1, constant: 8)
-        contentViewConstraintHeight = NSLayoutConstraint(item: contentView!, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
-        contentView!.translatesAutoresizingMaskIntoConstraints = false
-        scrollContainerView.addConstraints([c1,c2,c3,contentViewConstraintHeight!])
-        contentView!.uiDelegate = self
-        contentView!.navigationDelegate = self
-    }
-    
-    override func refresh() {
-        if store_token != nil {
-            Global.instance.addSpinner(superView: view)
-            //print(Member.instance.token)
-            let params: [String: String] = ["token": store_token!, "member_token": Member.instance.token]
-            dataService.getOne(t: StoreTable.self, params: params) { (success) in
-                if (success) {
-                    let table: Table = StoreService.instance.table!
-                    self.myTable = table as? StoreTable
-                    
-                    if self.myTable != nil {
-                        self.setMainData()
-                        self.setFeatured()
-                        self.fromNet = true
-                        
-                        self.isLike = self.myTable!.like
-                        self.likeButton.initStatus(self.isLike, self.myTable!.like_count)
-                        
-                        self.tableView.reloadData()
-                    }
-                }
-                Global.instance.removeSpinner(superView: self.view)
-                self.endRefresh()
-            }
-        }
-    }
-    
-    func setFeatured() {
-        
-        if myTable != nil {
-            if myTable!.featured_path.count > 0 {
-                let featured_path = myTable!.featured_path
-                if featured_path.count > 0 {
-                    //print(featured_path)
-                    featured.downloaded(from: featured_path)
-                }
-            }
-            //featured.image = superCourse!.featured
-        }
-    }
-    
-    func setMainData() {
-        
-        let mirror: Mirror = Mirror(reflecting: myTable!)
-        let propertys: [[String: Any]] = mirror.toDictionary()
-        
-        for key in tableRowKeys {
-            
-            for property in propertys {
-                
-                if ((property["label"] as! String) == key) {
-                    var type: String = property["type"] as! String
-                    type = type.getTypeOfProperty()!
-                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
-                    var content: String = ""
-                    if type == "Int" {
-                        content = String(property["value"] as! Int)
-                    } else if type == "Bool" {
-                        content = String(property["value"] as! Bool)
-                    } else if type == "String" {
-                        content = property["value"] as! String
-                    }
-                    tableRows[key]!["content"] = content
-                    break
-                }
-            }
-        }
-        
-        if !myTable!.open_time.isEmpty {
-            let business_time = myTable!.open_time_show + " ~ " + myTable!.close_time_show
-            tableRows["business_time"]!["content"] = business_time
-        } else {
-            tableRows.removeValue(forKey: "business_time");
-            tableRowKeys = tableRowKeys.filter{$0 != "business_time"}
-        }
-        
-        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.myTable!.content+"</body></html>"
-        
-        contentView!.loadHTMLString(content, baseURL: nil)
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if fromNet {
-            return tableRowKeys.count
-        } else {
-            return 0
-        }
-    }
-    
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        
-//        if tableView == self.tableView {
-//            let key = tableRowKeys[indexPath.row]
-//            if tableRows[key] != nil {
-//                let row = tableRows[key]!
-//                let content = row["content"] ?? ""
-//                _caculateCellHeight(content)
-//                print("\(key):\(content.count):\(cellHeight)")
+//    override func refresh() {
+//        if store_token != nil {
+//            Global.instance.addSpinner(superView: view)
+//            //print(Member.instance.token)
+//            let params: [String: String] = ["token": store_token!, "member_token": Member.instance.token]
+//            dataService.getOne(t: StoreTable.self, params: params) { (success) in
+//                if (success) {
+//                    let table: Table = StoreService.instance.table!
+//                    self.myTable = table as? StoreTable
+//
+//                    if self.myTable != nil {
+//                        self.setMainData()
+//                        self.setFeatured()
+//                        self.fromNet = true
+//
+//                        self.isLike = self.myTable!.like
+//                        self.likeButton.initStatus(self.isLike, self.myTable!.like_count)
+//
+//                        self.tableView.reloadData()
+//                    }
+//                }
+//                Global.instance.removeSpinner(superView: self.view)
+//                self.endRefresh()
 //            }
 //        }
-//        
-//        //return 120
-//        return cellHeight
-//        return UITableViewAutomaticDimension
 //    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func setData() {
+        
+        if table != nil {
+            myTable = table as? StoreTable
+            if (myTable != nil) {
+                setMainData(myTable!)
+                tableView.reloadData()
+            }
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableRowKeys.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == self.tableView {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
@@ -276,41 +143,14 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         }
     }
     
-    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
-    }
     
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.contentView!.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
-            if complete != nil {
-                self.contentView!.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
-                    self.contentViewConstraintHeight!.constant = height as! CGFloat
-                    self.changeScrollViewContentSize()
-                })
-            }
-            
-        })
-    }
     
-//    private func _caculateCellHeight(_ content: String) {
-//        let base: CGFloat = 40.0
-//        let limit: Int = 18
-//        let n: CGFloat = CGFloat((content.count / limit) + 1)
-//        cellHeight = base * n
-//    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x != 0 {
-            scrollView.contentOffset.x = 0
-        }
-    }
-    
-    func changeScrollViewContentSize() {
+    override func changeScrollViewContentSize() {
         
         let h1 = featured.bounds.size.height
-        let h2 = storeDataLbl.bounds.size.height
+        let h2 = mainDataLbl.bounds.size.height
         let h3 = tableViewConstraintHeight.constant
-        let h6 = contentLbl.bounds.size.height
+        let h6 = contentDataLbl.bounds.size.height
         let h7 = contentViewConstraintHeight!.constant
 
         //print(contentViewConstraintHeight)
@@ -319,23 +159,6 @@ class ShowStoreVC: BaseViewController, UITableViewDelegate, UITableViewDataSourc
         scrollView.contentSize = CGSize(width: view.frame.width, height: h)
         ContainerViewConstraintHeight.constant = h
         //print(h1)
-    }
-    
-    @IBAction func likeButtonPressed(_ sender: Any) {
-        if (!Member.instance.isLoggedIn) {
-            toLogin()
-        } else {
-            isLike = !isLike
-            likeButton.setLike(isLike)
-            dataService.like(token: myTable!.token, able_id: myTable!.id)
-        }
-    }
-    
-    @IBAction func prevBtnPressed(_ sender: Any) {
-//        if delegate != nil {
-//            delegate!.isReload(false)
-//        }
-        prev()
     }
 }
 

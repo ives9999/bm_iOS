@@ -40,7 +40,6 @@ class ArenaTable: Table {
     var parking: Int = -1
     var bathroom: Int = -1
     var charge: String = ""
-    var content: String = ""
     var manager_id: Int = -1
     var color: String = ""
     
@@ -65,7 +64,6 @@ class ArenaTable: Table {
         case parking
         case bathroom
         case charge
-        case content
         case manager_id
         case color
     }
@@ -86,7 +84,6 @@ class ArenaTable: Table {
         do {parking = try container.decode(Int.self, forKey: .parking)}catch{parking = -1}
         do {bathroom = try container.decode(Int.self, forKey: .bathroom)}catch{bathroom = -1}
         do {charge = try container.decode(String.self, forKey: .charge)}catch{charge = ""}
-        do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {manager_id = try container.decode(Int.self, forKey: .manager_id)}catch{manager_id = 0}
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
         do {area_id = try container.decode(Int.self, forKey: .area_id)}catch{area_id = 0}

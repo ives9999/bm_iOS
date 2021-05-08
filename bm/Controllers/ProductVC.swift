@@ -101,12 +101,12 @@ class ProductVC: ListVC {
                     let storyboard = UIStoryboard(name: "More", bundle: nil)
                     if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_PRODUCT)  as? ShowProductVC {
                         
-                        viewController.product_token = token
+                        viewController.token = token
                         show(viewController, sender: nil)
                     }
                 } else {
                     let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_PRODUCT) as! ShowProductVC
-                    viewController.product_token = token
+                    viewController.token = token
                     self.navigationController!.pushViewController(viewController, animated: true)
                 }
             }

@@ -100,7 +100,8 @@ class StoreVC: ListVC {
         if tableView == self.tableView {
             if mysTable != nil {
                 let storeTable = mysTable!.rows[indexPath.row]
-                performSegue(withIdentifier: TO_SHOW_STORE, sender: storeTable)
+                toShowStore(token: storeTable.token)
+                //performSegue(withIdentifier: TO_SHOW_STORE, sender: storeTable)
             }
             
         } else if tableView == searchTableView {
@@ -115,15 +116,6 @@ class StoreVC: ListVC {
                 
             }
             //performSegue(withIdentifier: segue, sender: indexPath)
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let showVC: ShowStoreVC = segue.destination as? ShowStoreVC {
-            assert(sender as? StoreTable != nil)
-            let storeTable: StoreTable = sender as! StoreTable
-            //showVC.storeTable = storeTable
-            showVC.store_token = storeTable.token
         }
     }
     

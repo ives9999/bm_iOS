@@ -60,7 +60,6 @@ class ShowCourseVC: Show1VC {
     override func viewDidLoad() {
 
         dataService = CourseService.instance
-        scrollView.backgroundColor = UIColor.clear
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
         signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
@@ -86,7 +85,7 @@ class ShowCourseVC: Show1VC {
             "created_at_show":["icon":"calendar","title":"建立日期","content":""]
         ]
         
-        refresh1(CourseTable.self)
+        refresh(CourseTable.self)
         //refresh()
     }
     
@@ -120,19 +119,15 @@ class ShowCourseVC: Show1VC {
         coachTableViewConstraintHeight.constant = 3000
     }
     
-//    override func parseJSON(_ jsonData: Data) {
-//        self.setData(jsonData, CourseTable.self)
-//    }
-    
     override func setData() {
         
         if table != nil {
             myTable = table as? CourseTable
             if (myTable != nil) {
-                myTable!.filterRow()
+                //myTable!.filterRow()
                 //self.courseTable?.printRow()
                 
-                setMainData()
+                setMainData(myTable!)
                 
                 //self.coachTable = self.courseTable!.coach
                 //self.courseTable!.signup_normal_models
@@ -146,10 +141,7 @@ class ShowCourseVC: Show1VC {
                     setNextTime()
                 }
                 fromNet = true
-                
-                isLike = myTable!.like
-                likeButton.initStatus(isLike, myTable!.like_count)
-                
+                                
                 tableView.reloadData()
                 signupTableView.reloadData()
                 coachTableView.reloadData()
@@ -168,46 +160,17 @@ class ShowCourseVC: Show1VC {
         }
     }
     
-    override func setMainData() {
-        
-        let mirror: Mirror = Mirror(reflecting: myTable!)
-        let propertys: [[String: Any]] = mirror.toDictionary()
-        
-        for key in tableRowKeys {
-            
-            for property in propertys {
-                
-                if ((property["label"] as! String) == key) {
-                    var type: String = property["type"] as! String
-                    type = type.getTypeOfProperty()!
-                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
-                    var content: String = ""
-                    if type == "Int" {
-                        content = String(property["value"] as! Int)
-                    } else if type == "Bool" {
-                        content = String(property["value"] as! Bool)
-                    } else if type == "String" {
-                        content = property["value"] as! String
-                    }
-                    tableRows[key]!["content"] = content
-                    break
-                }
-            }
-        }
-        
-        if !myTable!.start_date.isEmpty {
-            let date = myTable!.start_date + " ~ " + myTable!.end_date
-            tableRows["date"]!["content"] = date
-        } else {
-            tableRows.removeValue(forKey: "date");
-            tableRowKeys = tableRowKeys.filter{$0 != "date"}
-        }
-        tableRows["interval_show"]!["content"] = myTable!.interval_show
-        
-        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.myTable!.content+"</body></html>"
-        
-        contentView!.loadHTMLString(content, baseURL: nil)
-    }
+//    override func setMainData() {
+//
+//        if !myTable!.start_date.isEmpty {
+//            let date = myTable!.start_date + " ~ " + myTable!.end_date
+//            tableRows["date"]!["content"] = date
+//        } else {
+//            tableRows.removeValue(forKey: "date");
+//            tableRowKeys = tableRowKeys.filter{$0 != "date"}
+//        }
+//        tableRows["interval_show"]!["content"] = myTable!.interval_show
+//    }
     
     func setNextTime() {
         let dateTable: DateTable = myTable!.dateTable!

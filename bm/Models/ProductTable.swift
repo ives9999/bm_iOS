@@ -34,7 +34,6 @@ class ProductTable: Table {
     var order_min: Int = 1
     var order_max: Int = 1
     
-    var content: String = ""
     var alias: String = ""
     
     var images: [String] = [String]()
@@ -54,7 +53,6 @@ class ProductTable: Table {
         case gateway
         case order_min
         case order_max
-        case content
         case alias
         case prices
         case images
@@ -76,7 +74,6 @@ class ProductTable: Table {
         do {gateway = try container.decode(String.self, forKey: .gateway)}catch{gateway = ""}
         do {order_min = try container.decode(Int.self, forKey: .order_min)}catch{order_min = 1}
         do {order_max = try container.decode(Int.self, forKey: .order_max)}catch{order_max = 1}
-        do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {alias = try container.decode(String.self, forKey: .alias)}catch{alias = ""}
         do {prices = try container.decode([ProductPriceTable].self, forKey: .prices)}catch{prices=[ProductPriceTable]()}
         do {images = try container.decode([String].self, forKey: .images)}catch{images=[String]()}
@@ -92,7 +89,7 @@ class ProductTable: Table {
         super.filterRow()
         if images.count > 0 {
             for (idx, image) in images.enumerated() {
-                if !image.hasPrefix("http://") || !image.hasPrefix("https://") {
+                if !image.hasPrefix("http://") && !image.hasPrefix("https://") {
                     let _image = BASE_URL + image
                     images[idx] = _image
                 }

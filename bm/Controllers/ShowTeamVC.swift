@@ -45,7 +45,7 @@ class ShowTeamVC: Show1VC {
             "created_at_show":["icon":"calendar","title":"建立日期","content":""]
         ]
         //refresh()
-        refresh1(TeamTable.self)
+        refresh(TeamTable.self)
     }
     
     override func viewWillLayoutSubviews() {
@@ -73,12 +73,9 @@ class ShowTeamVC: Show1VC {
         if (table != nil) {
             myTable = table as? TeamTable
             if (myTable != nil) {
-                myTable!.filterRow()
+                //myTable!.filterRow()
                 
-                setMainData()
-                
-                isLike = myTable!.like
-                likeButton.initStatus(isLike, myTable!.like_count)
+                setMainData(myTable!)
                 
                 tableView.reloadData()
                 //signupTableView.reloadData()
@@ -86,37 +83,33 @@ class ShowTeamVC: Show1VC {
         }
     }
     
-    override func setMainData() {
-        
-        let mirror: Mirror = Mirror(reflecting: myTable!)
-        let propertys: [[String: Any]] = mirror.toDictionary()
-        
-        for key in tableRowKeys {
-            
-            for property in propertys {
-                
-                if ((property["label"] as! String) == key) {
-                    var type: String = property["type"] as! String
-                    type = type.getTypeOfProperty()!
-                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
-                    var content: String = ""
-                    if type == "Int" {
-                        content = String(property["value"] as! Int)
-                    } else if type == "Bool" {
-                        content = String(property["value"] as! Bool)
-                    } else if type == "String" {
-                        content = property["value"] as! String
-                    }
-                    tableRows[key]!["content"] = content
-                    break
-                }
-            }
-        }
-        
-        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+self.myTable!.content+"</body></html>"
-        
-        contentView!.loadHTMLString(content, baseURL: nil)
-    }
+//    override func setMainData() {
+//
+//        let mirror: Mirror = Mirror(reflecting: myTable!)
+//        let propertys: [[String: Any]] = mirror.toDictionary()
+//
+//        for key in tableRowKeys {
+//
+//            for property in propertys {
+//
+//                if ((property["label"] as! String) == key) {
+//                    var type: String = property["type"] as! String
+//                    type = type.getTypeOfProperty()!
+//                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+//                    var content: String = ""
+//                    if type == "Int" {
+//                        content = String(property["value"] as! Int)
+//                    } else if type == "Bool" {
+//                        content = String(property["value"] as! Bool)
+//                    } else if type == "String" {
+//                        content = property["value"] as! String
+//                    }
+//                    tableRows[key]!["content"] = content
+//                    break
+//                }
+//            }
+//        }
+//    }
     
     func setNextTime() {
 //        let dateTable: DateTable = myTable!.dateTable!

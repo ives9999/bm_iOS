@@ -50,8 +50,6 @@ class CourseTable: Table {
     var deadline: String = ""
     var youtube: String = ""
 
-    var content: String = ""
-    
     var coachTable: CoachTable?
     var dateTable: DateTable?
     var signupNormalTables: [SignupNormalTable] = [SignupNormalTable]()
@@ -94,7 +92,6 @@ class CourseTable: Table {
         case weekday_arr
         case deadline
         case youtube
-        case content
         case created_id
         //case nextCourseTime
         case isSignup
@@ -129,7 +126,6 @@ class CourseTable: Table {
         do {weekday_text = try container.decode(String.self, forKey: .weekday_text)}catch{weekday_text = ""}
         do {deadline = try container.decode(String.self, forKey: .deadline)}catch{deadline = ""}
         do {youtube = try container.decode(String.self, forKey: .youtube)}catch{youtube = ""}
-        do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {created_id = try container.decode(Int.self, forKey: .created_id)}catch{created_id = 0}
         do {isSignup = try container.decode(Bool.self, forKey: .isSignup)}catch{isSignup = false}
         do {signup_id = try container.decode(Int.self, forKey: .signup_id)}catch{signup_id = 0}

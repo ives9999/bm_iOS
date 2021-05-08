@@ -26,13 +26,11 @@ class TeachesTable: Tables {
 
 class TeachTable: Table {
     
-    var content: String = ""
     var youtube: String = ""
     var provider: String = ""
     var provider_url: String = ""
     
     enum CodingKeys: String, CodingKey {
-        case content
         case youtube
         case provider
         case provider_url

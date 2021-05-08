@@ -38,7 +38,6 @@ class TeamTable: Table {
     var ball: String = ""
     var degree: String = ""
     var charge: String = ""
-    var content: String = ""
     var manager_id: Int = -1
     var temp_fee_M: Int = -1
     var temp_fee_F: Int = -1
@@ -71,7 +70,6 @@ class TeamTable: Table {
         case ball
         case degree
         case charge
-        case content
         case manager_id
         case temp_fee_M
         case temp_fee_F
@@ -103,7 +101,6 @@ class TeamTable: Table {
         do {temp_fee_M = try container.decode(Int.self, forKey: .temp_fee_M)}catch{temp_fee_M = -1}
         do {temp_fee_F = try container.decode(Int.self, forKey: .temp_fee_F)}catch{temp_fee_F = -1}
         do {youtube = try container.decode(String.self, forKey: .youtube)}catch{youtube = ""}
-        do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {temp_quantity = try container.decode(Int.self, forKey: .temp_quantity)}catch{temp_quantity = 0}
         do {temp_content = try container.decode(String.self, forKey: .temp_content)}catch{temp_content = ""}
         do {temp_status = try container.decode(String.self, forKey: .temp_status)}catch{temp_status = ""}

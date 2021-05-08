@@ -342,7 +342,7 @@
         <!--Show StoreVC-->
         <scene sceneID="u9q-bQ-B9F">
             <objects>
-                <viewController id="MM3-rH-prO" customClass="ShowStoreVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toShowStore" id="MM3-rH-prO" customClass="ShowStoreVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="KUT-mR-p9I">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -507,14 +507,15 @@
                     <navigationItem key="navigationItem" id="hww-Mj-9fe"/>
                     <connections>
                         <outlet property="ContainerViewConstraintHeight" destination="7Fb-gK-YiP" id="4IQ-Qu-uzd"/>
-                        <outlet property="contentLbl" destination="ePE-lO-8hh" id="FaK-Ue-Ocj"/>
+                        <outlet property="contentDataLbl" destination="ePE-lO-8hh" id="NC6-hy-TGv"/>
                         <outlet property="featured" destination="Kzl-dl-Q1D" id="rV1-SB-rNK"/>
                         <outlet property="likeButton" destination="MSa-OJ-czE" id="fZK-n0-aLD"/>
+                        <outlet property="mainDataLbl" destination="jzg-jh-FWp" id="BWg-84-QRN"/>
                         <outlet property="scrollContainerView" destination="dhX-s3-hn7" id="Zbn-Xp-h5v"/>
                         <outlet property="scrollView" destination="Kem-El-iLq" id="9ii-WU-Rew"/>
-                        <outlet property="storeDataLbl" destination="jzg-jh-FWp" id="XPu-0t-pfF"/>
                         <outlet property="tableView" destination="O6a-DZ-rz9" id="4Co-RF-vdM"/>
                         <outlet property="tableViewConstraintHeight" destination="sYh-vY-hRG" id="mMr-Mo-kYY"/>
+                        <outlet property="titleLbl" destination="jtU-3j-IVt" id="UE0-WA-Tbz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxD-eU-zBF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1248,7 +1249,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="tNU-cp-fqk" eventType="touchUpInside" id="GK5-V7-J0N"/>
                                             <action selector="prevBtnPressed:" destination="o4v-AV-CC1" eventType="touchUpInside" id="WLF-1Y-X6d"/>
                                         </connections>
                                     </button>
@@ -1302,7 +1302,6 @@
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="cancel:" destination="XPE-Pw-Llr" eventType="touchUpInside" id="s8j-0X-k0C"/>
-                                                    <action selector="cancelBtnPressed:" destination="tNU-cp-fqk" eventType="touchUpInside" id="09O-JM-UoE"/>
                                                     <action selector="cancelBtnPressed:" destination="o4v-AV-CC1" eventType="touchUpInside" id="QxD-fr-IWl"/>
                                                 </connections>
                                             </button>
@@ -1364,7 +1363,7 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="tNU-cp-fqk" eventType="touchUpInside" id="OaE-fi-was"/>
+                                            <action selector="prevBtnPressed:" destination="tNU-cp-fqk" eventType="touchUpInside" id="wiw-4w-ix3"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wUU-qa-vNk" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
@@ -1478,9 +1477,6 @@
                                                 <state key="normal" title="購買">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="submitBtnPressed:" destination="tNU-cp-fqk" eventType="touchUpInside" id="Bg8-AU-6V2"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5O-q2-1x3" customClass="LikeButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="62" y="0.0" width="46" height="34"/>
@@ -1527,9 +1523,9 @@
                     <connections>
                         <outlet property="ContainerViewConstraintHeight" destination="PmA-jA-s7r" id="EXX-lH-iSb"/>
                         <outlet property="contentConstraintViewHeight" destination="klg-Ef-Nrf" id="JvN-Eb-LiR"/>
-                        <outlet property="contentLbl" destination="awf-cI-p1O" id="rx1-MQ-ycm"/>
-                        <outlet property="contentView" destination="166-90-2za" id="Xi7-eL-aU4"/>
-                        <outlet property="featured" destination="Afx-XK-ws2" id="89q-NQ-JdF"/>
+                        <outlet property="contentDataLbl" destination="awf-cI-p1O" id="4ck-Pa-8Lz"/>
+                        <outlet property="descView" destination="166-90-2za" id="SUm-nL-qVJ"/>
+                        <outlet property="featured" destination="Afx-XK-ws2" id="Ts7-PN-6nE"/>
                         <outlet property="imageContainerView" destination="BeW-fM-Liv" id="NMJ-DK-dyx"/>
                         <outlet property="imageContainerViewConstraintHeight" destination="K0y-Xq-uu5" id="0Bb-FH-fTG"/>
                         <outlet property="imageDataLbl" destination="NPx-Cf-3OD" id="uhs-1V-Adu"/>
@@ -1621,8 +1617,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="f4Q-EU-SfD"/>
-        <segue reference="e7e-xA-HgL"/>
+        <segue reference="Wr7-FG-b1z"/>
+        <segue reference="cDK-8u-UPz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="377.5" height="670"/>

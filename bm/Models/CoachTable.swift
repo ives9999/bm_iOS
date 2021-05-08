@@ -34,7 +34,6 @@ class CoachTable: Table {
     var feat: String = ""
     var license: String = ""
     var charge: String = ""
-    var content: String = ""
     var manager_id: Int = -1
     var color: String = ""
     var citys: [CityTable] = [CityTable]()
@@ -52,7 +51,6 @@ class CoachTable: Table {
         case feat
         case license
         case charge
-        case content
         case manager_id
         case color
         case citys
@@ -71,7 +69,6 @@ class CoachTable: Table {
         do {feat = try container.decode(String.self, forKey: .feat)}catch{feat = ""}
         do {license = try container.decode(String.self, forKey: .license)}catch{license = ""}
         do {charge = try container.decode(String.self, forKey: .charge)}catch{charge = ""}
-        do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {manager_id = try container.decode(Int.self, forKey: .manager_id)}catch{manager_id = 0}
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
         do {citys = try container.decode([CityTable].self, forKey: .citys)}catch{citys = [CityTable]()}

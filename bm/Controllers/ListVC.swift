@@ -256,7 +256,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
                 assert(sender as? SuperData != nil)
                 let data: SuperData = sender as! SuperData
                 let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
-                showCoachVC.initShowVC(sin: show_in)
+                //showCoachVC.initShowVC(sin: show_in)
                 showCoachVC.backDelegate = self
             }
         } else if segue.identifier == TO_MAP {

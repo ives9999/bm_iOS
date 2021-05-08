@@ -37,6 +37,7 @@ class Table: Codable {
     var slug: String = ""
     var status: String = "online"
     var token: String = ""
+    var content: String = ""
     var sort_order: Int = 0
     var pv: Int = 0
     var like: Bool = false
@@ -63,6 +64,7 @@ class Table: Codable {
         do {slug = try container.decode(String.self, forKey: .slug)}catch{slug = ""}
         do {status = try container.decode(String.self, forKey: .status)}catch{status = "online"}
         do {token = try container.decode(String.self, forKey: .token)}catch{token = ""}
+        do {content = try container.decode(String.self, forKey: .content)}catch{content = ""}
         do {featured_path = try container.decode(String.self, forKey: .featured_path)}catch{featured_path = ""}
         do {sort_order = try container.decode(Int.self, forKey: .sort_order)}catch{sort_order = 0}
         do {pv = try container.decode(Int.self, forKey: .pv)}catch{pv = 0}

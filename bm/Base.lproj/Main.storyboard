@@ -247,13 +247,6 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1P-TQ-Vjp">
-                                                <rect key="frame" x="0.0" y="1204" width="414" height="100"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="100" id="Syr-PZ-lXO"/>
-                                                </constraints>
-                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -272,10 +265,8 @@
                                             <constraint firstItem="2vu-2O-XcJ" firstAttribute="top" secondItem="H9G-V6-q4e" secondAttribute="bottom" constant="16" id="EG5-ap-lio"/>
                                             <constraint firstAttribute="trailing" secondItem="2cH-Ec-uUM" secondAttribute="trailing" constant="8" id="EwR-GX-DKf"/>
                                             <constraint firstAttribute="trailing" secondItem="feW-tD-CCY" secondAttribute="trailing" constant="8" id="FWD-9n-DRZ"/>
-                                            <constraint firstItem="d1P-TQ-Vjp" firstAttribute="leading" secondItem="xeD-8R-KJQ" secondAttribute="leading" id="Fnm-Er-rwY"/>
                                             <constraint firstAttribute="trailing" secondItem="IY8-IF-PiG" secondAttribute="trailing" id="I8Y-fu-oJr"/>
                                             <constraint firstItem="pro-xp-EfP" firstAttribute="top" secondItem="xeD-8R-KJQ" secondAttribute="top" constant="8" id="IQN-sf-jPH"/>
-                                            <constraint firstAttribute="trailing" secondItem="d1P-TQ-Vjp" secondAttribute="trailing" id="Jb7-VB-4nB"/>
                                             <constraint firstItem="IY8-IF-PiG" firstAttribute="leading" secondItem="xeD-8R-KJQ" secondAttribute="leading" id="JuO-JC-fgs"/>
                                             <constraint firstItem="pro-xp-EfP" firstAttribute="leading" secondItem="xeD-8R-KJQ" secondAttribute="leading" constant="8" id="L0N-x3-Xe8"/>
                                             <constraint firstItem="gfA-Le-et9" firstAttribute="leading" secondItem="xeD-8R-KJQ" secondAttribute="leading" id="Nv3-mu-5pr"/>
@@ -303,7 +294,6 @@
                                             <constraint firstItem="2cH-Ec-uUM" firstAttribute="top" secondItem="sfs-8L-cyc" secondAttribute="bottom" constant="16" id="wfN-oG-5BB"/>
                                             <constraint firstAttribute="trailing" secondItem="gfA-Le-et9" secondAttribute="trailing" id="wqd-M8-yyX"/>
                                             <constraint firstAttribute="trailing" secondItem="VG6-v2-dbK" secondAttribute="trailing" id="xgD-xF-Ujw"/>
-                                            <constraint firstItem="d1P-TQ-Vjp" firstAttribute="top" secondItem="2cH-Ec-uUM" secondAttribute="bottom" constant="8" id="zg9-nU-iDx"/>
                                             <constraint firstAttribute="trailing" secondItem="1GD-kX-C87" secondAttribute="trailing" constant="8" id="zrs-ux-m9p"/>
                                         </constraints>
                                     </view>
@@ -363,29 +353,26 @@
                         <outlet property="chargeView" destination="IY8-IF-PiG" id="x6J-v8-dL8"/>
                         <outlet property="chargeViewHeight" destination="px2-fo-0Jm" id="H9E-ua-PbJ"/>
                         <outlet property="cityBtn" destination="pro-xp-EfP" id="9L2-Qg-Vry"/>
-                        <outlet property="contactLbl" destination="Cem-vU-RXA" id="iBu-zv-94q"/>
-                        <outlet property="contactTableView" destination="VG6-v2-dbK" id="bzl-Jx-vgQ"/>
-                        <outlet property="contactTableViewHeight" destination="iOi-h6-Luj" id="RzH-cJ-sM0"/>
+                        <outlet property="contentDataLbl" destination="2cH-Ec-uUM" id="GcE-Yb-px6"/>
                         <outlet property="courseLbl" destination="H9G-V6-q4e" id="Gph-8f-lC3"/>
                         <outlet property="courseTableView" destination="2vu-2O-XcJ" id="l24-h4-xeK"/>
                         <outlet property="courseTableViewHeight" destination="Q6K-Pt-B9I" id="o7g-lg-hVZ"/>
-                        <outlet property="detailLbl" destination="2cH-Ec-uUM" id="Nto-U5-2Ys"/>
-                        <outlet property="detailView" destination="d1P-TQ-Vjp" id="RQU-Pk-eXs"/>
-                        <outlet property="detailViewHeight" destination="Syr-PZ-lXO" id="xRz-1C-pWh"/>
                         <outlet property="expLbl" destination="Imj-n6-SYR" id="bBd-Rg-3fY"/>
                         <outlet property="expView" destination="Ika-KA-qs7" id="etf-yg-a7t"/>
                         <outlet property="expViewHeight" destination="3Ht-yJ-SNV" id="G5G-eM-bwf"/>
                         <outlet property="featLbl" destination="feW-tD-CCY" id="hWj-KT-shl"/>
                         <outlet property="featView" destination="sfs-8L-cyc" id="Kkf-ya-c9p"/>
                         <outlet property="featViewHeight" destination="eNZ-3Z-S5q" id="3aa-WS-fcM"/>
-                        <outlet property="featuredView" destination="mCb-u1-gex" id="Cac-0n-Ohu"/>
-                        <outlet property="featuredViewHeight" destination="HDj-DB-XAR" id="Zy7-45-gCm"/>
+                        <outlet property="featured" destination="mCb-u1-gex" id="VJZ-2A-Bfl"/>
                         <outlet property="licenseLbl" destination="gWz-19-g2D" id="SnY-Tb-dBo"/>
                         <outlet property="licenseView" destination="gfA-Le-et9" id="Fel-kZ-iVR"/>
                         <outlet property="licenseViewHeight" destination="Tjv-eH-qHH" id="WFf-ph-RYy"/>
                         <outlet property="likeButton" destination="f2i-Bv-LZE" id="Ty4-XB-mG4"/>
+                        <outlet property="mainDataLbl" destination="Cem-vU-RXA" id="7Fb-vx-3F7"/>
                         <outlet property="scrollContainerView" destination="xeD-8R-KJQ" id="oYI-cc-zb9"/>
                         <outlet property="scrollView" destination="UeS-dR-qEx" id="0ae-dC-4OB"/>
+                        <outlet property="tableView" destination="VG6-v2-dbK" id="IKU-HF-Xuk"/>
+                        <outlet property="tableViewConstraintHeight" destination="iOi-h6-Luj" id="cQz-aV-c5c"/>
                         <outlet property="titleLbl" destination="ae5-TU-DnJ" id="p5N-61-J3p"/>
                         <segue destination="isk-Il-okD" kind="show" identifier="toShowTimeTable" id="oKL-Gk-zBn"/>
                         <segue destination="IRL-em-4Fr" kind="custom" customClass="SWRevealViewControllerSegueSetController" id="xCT-HQ-HRw"/>

@@ -53,10 +53,13 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "cell")
+        scrollView.backgroundColor = UIColor.clear
+        if (tableView != nil) {
+            let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
+            tableView.register(cellNib, forCellReuseIdentifier: "cell")
+            initTableView()
+        }
         
-        initTableView()
         initContentView()
         
         beginRefresh()
@@ -88,26 +91,22 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         contentView!.navigationDelegate = self
     }
     
-    override func refresh() {
-        if token != nil {
-            Global.instance.addSpinner(superView: view)
-            let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
-            dataService.getOne1(params: params) { (success) in
-                if (success) {
-                    //let jsonData: Data = self.dataService.jsonData!
-                    //self.parseJSON(jsonData)
-                }
-                Global.instance.removeSpinner(superView: self.view)
-                self.endRefresh()
-            }
-        }
-    }
+//    override func refresh() {
+//        if token != nil {
+//            Global.instance.addSpinner(superView: view)
+//            let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
+//            dataService.getOne1(params: params) { (success) in
+//                if (success) {
+//                    //let jsonData: Data = self.dataService.jsonData!
+//                    //self.parseJSON(jsonData)
+//                }
+//                Global.instance.removeSpinner(superView: self.view)
+//                self.endRefresh()
+//            }
+//        }
+//    }
     
-    //func parseJSON(_ jsonData: Data) {}
-    
-    func setData() {}
-    
-    func refresh1<T: Table>(_ t: T.Type) {
+    func refresh<T: Table>(_ t: T.Type) {
         if token != nil {
             let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
             dataService.getOne1(params: params) { (success) in
@@ -123,12 +122,12 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
                             } else {
                                 self.titleLbl.text = self.table!.title
                             }
-                            self.setFeatured()
-                            //self.setMainData()
                             
+                            self.setFeatured()
                             self.setData()
+                            self.setContent()
+                            self.setLike()
                         }
-                        //let my = self.table as? T
                     } catch {
                         self.warning(error.localizedDescription)
                     }
@@ -137,6 +136,8 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         }
     }
     
+    func setData() {}
+    
     func setFeatured() {
 
         if (table != nil && table!.featured_path.count > 0) {
@@ -144,6 +145,17 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         } else {
             warning("沒有取得內容資料值，請稍後再試或洽管理員")
         }
+    }
+    
+    func setContent() {
+        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+table!.content+"</body></html>"
+        
+        contentView!.loadHTMLString(content, baseURL: nil)
+    }
+    
+    func setLike() {
+        isLike = table!.like
+        likeButton.initStatus(isLike, table!.like_count)
     }
     
 //    func setFeatured<T: Table>(t: T) {
@@ -156,8 +168,32 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
 //        }
 //    }
     
-    func setMainData() {
+    func setMainData<T: Table>(_ t: T) {
         
+        let mirror: Mirror = Mirror(reflecting: t)
+        let propertys: [[String: Any]] = mirror.toDictionary()
+        
+        for key in tableRowKeys {
+            
+            for property in propertys {
+                
+                if ((property["label"] as! String) == key) {
+                    var type: String = property["type"] as! String
+                    type = type.getTypeOfProperty()!
+                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+                    var content: String = ""
+                    if type == "Int" {
+                        content = String(property["value"] as! Int)
+                    } else if type == "Bool" {
+                        content = String(property["value"] as! Bool)
+                    } else if type == "String" {
+                        content = property["value"] as! String
+                    }
+                    tableRows[key]!["content"] = content
+                    break
+                }
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -192,9 +228,7 @@ class Show1VC: BaseViewController, UITableViewDelegate, UITableViewDataSource, W
         }
     }
     
-    func changeScrollViewContentSize() {
-    
-    }
+    func changeScrollViewContentSize() {}
     
     @IBAction func likeButtonPressed(_ sender: Any) {
         if (!Member.instance.isLoggedIn) {
