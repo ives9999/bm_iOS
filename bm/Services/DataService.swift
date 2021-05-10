@@ -258,13 +258,13 @@ class DataService {
     func like(token: String, able_id: Int) {
         
         let likeUrl: String = getLikeURL(token: token)
-        print(likeUrl)
+        //print(likeUrl)
         let url = URL(string: likeUrl)
         var request = URLRequest(url: url!)
         
         let member_token: String = Member.instance.token
         let body: [String: Any] = ["device":"app","member_token":member_token,"able_id":able_id]
-        print(body)
+        //print(body)
         request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
