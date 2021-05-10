@@ -26,7 +26,6 @@ class ArenasTable: Tables {
 
 class ArenaTable: Table {
     
-    var tel: String = ""
     var fb: String = ""
     var website: String = ""
     var email: String = ""
@@ -44,13 +43,11 @@ class ArenaTable: Table {
     var color: String = ""
     
     var area_show: String = ""
-    var tel_show: String = ""
     var interval_show: String = ""
     var air_condition_show: String = ""
     var parking_show: String = ""
     
     enum CodingKeys: String, CodingKey {
-        case tel
         case email
         case website
         case fb
@@ -71,7 +68,6 @@ class ArenaTable: Table {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {tel = try container.decode(String.self, forKey: .tel)}catch{tel = ""}
         do {email = try container.decode(String.self, forKey: .email)}catch{email = ""}
         do {website = try container.decode(String.self, forKey: .website)}catch{website = ""}
         do {fb = try container.decode(String.self, forKey: .fb)}catch{fb = ""}
@@ -95,10 +91,6 @@ class ArenaTable: Table {
         
         if area_id > 0 {
             area_show = Global.instance.zoneIDToName(area_id)
-        }
-        
-        if tel.count > 0 {
-            tel_show = tel.telShow()
         }
         
         if open_time.count > 0 && close_time.count > 0 {

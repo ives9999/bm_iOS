@@ -44,12 +44,6 @@ class ArenaListCell: List2Cell {
                 areaBtn.isHidden = true
             }
             
-            if row!.tel.count > 0 {
-                telLbl.text = row!.tel_show
-            } else {
-                telLbl.text = "未提供"
-            }
-            
             if row!.interval_show.count > 0 {
                 intervalLbl.text = row!.interval_show
             } else {
@@ -62,10 +56,6 @@ class ArenaListCell: List2Cell {
                 air_conditionLbl.text = "未提供"
             }
             parkingLbl.text = "停車:\(row!.parking_show)"
-            
-            if row!.tel.isEmpty {
-                hiddenIcon(mobileIcon)
-            }
         }
     }
     

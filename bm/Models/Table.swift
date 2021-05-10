@@ -32,6 +32,7 @@ class Table: Codable {
     var name: String = ""
     var title: String = ""
     var channel: String = ""
+    var tel: String = ""
     var mobile: String = ""
     var city_id: Int = -1
     var slug: String = ""
@@ -52,6 +53,7 @@ class Table: Codable {
     
     var address: String = ""
     var city_show: String = ""
+    var tel_show: String = ""
     var mobile_show: String = ""
     
     required init(from decoder: Decoder) throws {
@@ -73,6 +75,7 @@ class Table: Codable {
         do {created_at = try container.decode(String.self, forKey: .created_at)}catch{created_at = ""}
         do {updated_at = try container.decode(String.self, forKey: .updated_at)}catch{updated_at = ""}
         
+        tel = try container.decodeIfPresent(String.self, forKey: .tel) ?? ""
         mobile = try container.decodeIfPresent(String.self, forKey: .mobile) ?? ""
         city_id = try container.decodeIfPresent(Int.self, forKey: .city_id) ?? -1
     }
@@ -88,6 +91,10 @@ class Table: Codable {
         
         if city_id > 0 {
             city_show = Global.instance.zoneIDToName(city_id)
+        }
+        
+        if tel.count > 0 {
+            tel_show = tel.telShow()
         }
         
         if mobile.count > 0 {

@@ -129,11 +129,4 @@ class ArenaVC: ListVC {
             unmask()
         }
     }
-    
-    override func cellMobile(row: Table) {
-        
-        let _row: ArenaTable = row as! ArenaTable
-        print(_row.tel)
-        //_row.tel.makeCall()
-    }
 }

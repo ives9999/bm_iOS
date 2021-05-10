@@ -26,7 +26,6 @@ class StoresTable: Tables {
 
 class StoreTable: Table {
         
-    var tel: String = ""
     var fb: String = ""
     var website: String = ""
     var email: String = ""
@@ -39,7 +38,6 @@ class StoreTable: Table {
     var road: String = ""
     var zip: Int = -1
     
-    var tel_show: String = ""
     var open_time_show: String = ""
     var close_time_show: String = ""
     var interval_show: String = ""
@@ -47,7 +45,6 @@ class StoreTable: Table {
     var managers: [[String: Any]] = [[String: Any]]()
     
     enum CodingKeys: String, CodingKey {
-        case tel
         case mobile
         case fb
         case website
@@ -63,7 +60,6 @@ class StoreTable: Table {
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        do {tel = try container.decode(String.self, forKey: .tel)}catch{tel = ""}
         do {mobile = try container.decode(String.self, forKey: .mobile)}catch{mobile = ""}
         do {fb = try container.decode(String.self, forKey: .fb)}catch{fb = ""}
         do {website = try container.decode(String.self, forKey: .website)}catch{website = ""}
@@ -83,10 +79,6 @@ class StoreTable: Table {
             let city_name = Global.instance.zoneIDToName(city_id)
             let area_name = Global.instance.zoneIDToName(area_id)
             address = String(zip) + city_name + area_name + road
-        }
-        
-        if tel.count > 0 {
-            tel_show = tel.telShow()
         }
         
         if open_time.count > 0 {

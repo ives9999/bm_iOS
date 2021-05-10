@@ -487,9 +487,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         replaceRows(key, row)
     }
     
-    func setCityData(id: Int, name: String) {
-        
-    }
+    func setCityData(id: Int, name: String) {}
     
     func setCitysData(res: [City]) {
         //print(res)
@@ -612,8 +610,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         searchTableView.reloadData()
     }
     
-    func showMap(indexPath: IndexPath) {
-    }
+    func showMap(indexPath: IndexPath) {}
     
     func searchCity(indexPath: IndexPath) {
         let row = lists[indexPath.row]
@@ -654,7 +651,11 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     func cellMobile(row: Table) {
-        print(row.mobile)
+        if (row.mobile_show.count > 0) {
+            print(row.mobile)
+        } else if (row.tel_show.count > 0) {
+            print(row.tel)
+        }
         //row.mobile.makeCall()
     }
     

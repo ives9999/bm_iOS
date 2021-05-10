@@ -299,17 +299,5 @@ class StoreVC: ListVC {
         row["show"] = "全部"
         replaceRows(key, row)
     }
-    
-    override func cellMobile(row: Table) {
-        
-        let _row: StoreTable = row as! StoreTable
-        print(_row.tel)
-        //_row.tel.makeCall()
-    }
-    
-    
-//    @IBAction func prevBtnPressed(_ sender: Any) {
-//        prev()
-//    }
 }
 

@@ -50,11 +50,6 @@ class StoreListCell: List2Cell {
             if row!.address.count > 0 {
                 addressLbl.text = row!.address
             }
-
-
-            if row!.tel.isEmpty {
-                hiddenIcon(mobileIcon)
-            }
             
             if row!.address.isEmpty {
                 hiddenIcon(mapIcon)

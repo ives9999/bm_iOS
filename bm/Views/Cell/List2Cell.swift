@@ -97,6 +97,10 @@ class List2Cell: UITableViewCell {
             }
         }
         
+        if (_row.mobile_show.count == 0 && _row.tel_show.count == 0) {
+            hiddenIcon(mobileIcon)
+        }
+        
         likeIcon.isLike = !_row.like
         likeIcon.setLike()
         

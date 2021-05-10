@@ -179,6 +179,7 @@ class CourseTable: Table {
         
         if coachTable != nil {
             self.mobile = coachTable!.mobile
+            self.mobile_show = self.mobile.mobileShow()
             coachTable!.filterRow()
         }
     }
