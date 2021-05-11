@@ -11,7 +11,8 @@ import UIKit
 class MenuCell: SuperCell {
     
     var iconView: UIImageView!
-    var titleLbl: MyLabel!
+    var titleLbl: SuperLabel!
+    //var titleLbl: MyLabel!
     //var tempPlayLbl: MyLabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -20,9 +21,10 @@ class MenuCell: SuperCell {
         iconView = UIImageView(frame: CGRect.zero)
         contentView.addSubview(iconView)
         
-        titleLbl = MyLabel(frame: CGRect.zero)
+        titleLbl = SuperLabel(frame: CGRect.zero)
         contentView.addSubview(titleLbl)
         _constraint()
+        titleLbl.setTextGeneral()
         
 //        tempPlayLbl = MyLabel(frame: CGRect.zero)
 //        tempPlayLbl.text = "臨打"
@@ -54,7 +56,6 @@ class MenuCell: SuperCell {
         iconView.clipsToBounds = true
         iconView.contentMode = .scaleAspectFit
         titleLbl.sizeToFit()
-        
     }
     
     func setRow(row: [String: Any]) {
@@ -82,13 +83,5 @@ class MenuCell: SuperCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

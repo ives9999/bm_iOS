@@ -22,7 +22,12 @@ class OrderListCell: SuperCell {
         nameLbl.numberOfLines = 0
         
         priceLbl.textAlignment = .right
-        priceLbl.textColor = UIColor(MY_RED)
+        //priceLbl.textColor = UIColor(MY_RED)
+        
+        nameLbl.setTextTitle()
+        orderNoLbl.setTextGeneral()
+        dateLbl.setTextGeneral()
+        priceLbl.highlight()
     }
     
     func updateOrderViews(indexPath: IndexPath, row: OrderTable) {

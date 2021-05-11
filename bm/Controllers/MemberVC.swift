@@ -18,7 +18,7 @@ class MemberVC: MyTableVC {
     @IBOutlet weak var forgetPasswordBtn: UIButton!
     @IBOutlet weak var avatarImageView: UIImageView!
     
-    let _sections: [String] = ["會員資料", "訂單"]
+    let _sections: [String] = ["會員資料", "訂單", "喜歡"]
     //let _sections: [String] = ["會員資料", "報名"]
     let fixedRows: [Dictionary<String, String>] = [
         ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
@@ -27,6 +27,11 @@ class MemberVC: MyTableVC {
     var memberRows: [Dictionary<String, String>] = [Dictionary<String, String>]()
     var orderRows: [Dictionary<String, String>] = [
         ["text": "訂單查詢", "icon": "order", "segue": TO_MEMBER_ORDER_LIST]
+    ]
+    let likeRows: [Dictionary<String, String>] = [
+        ["text": "球隊","icon":"like","segue":TO_LIKE],
+        ["text": "球館","icon":"like","segue":TO_LIKE],
+        ["text": "教練","icon":"like","segue":TO_LIKE]
     ]
     let signupRows: [Dictionary<String, String>] = [
         ["text": "課程報名", "icon": "account", "segue": TO_SIGNUP_LIST]
@@ -84,6 +89,7 @@ class MemberVC: MyTableVC {
         
         _rows.append(memberRows)
         _rows.append(orderRows)
+        _rows.append(likeRows)
         _rows.append(signupRows)
         //print(_rows)
         setData(sections: _sections, rows: _rows)
@@ -94,7 +100,7 @@ class MemberVC: MyTableVC {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 45
+        return 60
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -180,6 +186,8 @@ class MemberVC: MyTableVC {
                 performSegue(withIdentifier: "toA", sender: nil)
             } else if segue == TO_MEMBER_ORDER_LIST {
                 toMemberOrderList()
+            } else if segue == TO_LIKE {
+                
             }
         }
     }
