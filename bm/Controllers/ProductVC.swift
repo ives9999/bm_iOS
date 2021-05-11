@@ -126,18 +126,13 @@ class ProductVC: ListVC {
         }
     }
     
-    func cellCity(indexPath: IndexPath?) {
+    override func cellCity(row: Table) {
         //print(indexPath!.row)
         
-        let productTable = mysTable?.rows[indexPath!.row]
-        if productTable != nil {
-            toOrder(
-                product_token: productTable!.token,
-                login: { vc in vc.toLogin() },
-                register: { vc in vc.toRegister() }
-            )
-        } else {
-            
-        }
+        toOrder(
+            product_token: row.token,
+            login: { vc in vc.toLogin() },
+            register: { vc in vc.toRegister() }
+        )
     }
 }

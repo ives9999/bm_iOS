@@ -199,7 +199,7 @@ class StoreVC: ListVC {
         }
     }
     
-    func cellCity(indexPath: IndexPath?) {
+    override func cellCity(row: Table) {
         
     }
     

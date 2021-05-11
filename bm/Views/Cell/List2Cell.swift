@@ -93,13 +93,13 @@ class List2Cell: UITableViewCell {
             if _row.city_show.count > 0 {
                 cityBtn.setTitle(_row.city_show)
             } else {
-                cityBtn.isHidden = true
+                //cityBtn.isHidden = true
             }
         }
         
-        if (_row.mobile_show.count == 0 && _row.tel_show.count == 0) {
-            hiddenIcon(mobileIcon)
-        }
+//        if (_row.mobile_show.count == 0 && _row.tel_show.count == 0) {
+//            hiddenIcon(mobileIcon)
+//        }
         
         likeIcon.isLike = !_row.like
         likeIcon.setLike()
@@ -117,6 +117,7 @@ class List2Cell: UITableViewCell {
         if cityBtn != nil {
             cityBtn.row = _row
         }
+        
         likeIcon.row = _row
     }
     
@@ -225,7 +226,6 @@ class List2Cell: UITableViewCell {
         }
     }
 }
-
 
 extension List1CellDelegate {
     func cellShowMap(row: Table){}

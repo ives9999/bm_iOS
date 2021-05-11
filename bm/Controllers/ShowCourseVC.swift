@@ -136,6 +136,7 @@ class ShowCourseVC: Show1VC {
                     coachTable = self.myTable!.coachTable
                     setCoachData()
                 }
+                
                 if myTable!.dateTable != nil { // setup next time course time
                     //self.courseTable!.dateTable?.printRow()
                     setNextTime()

@@ -33,6 +33,9 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ej3-df-e93" customClass="CityButton" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="169" y="39" width="31" height="30"/>
                         <state key="normal" title="購買"/>
+                        <connections>
+                            <action selector="cityBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="dCe-3w-dNR"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="價格" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ka9-Tn-K1B" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="122" y="43" width="35" height="21"/>
@@ -96,6 +99,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
                 <outlet property="buyBtn" destination="ej3-df-e93" id="BqY-qj-jsc"/>
+                <outlet property="cityBtn" destination="ej3-df-e93" id="0k8-cZ-igA"/>
                 <outlet property="iconView" destination="tXk-uA-8gX" id="Ure-kr-cnU"/>
                 <outlet property="likeConstraint" destination="PEj-LI-T9A" id="p7B-j0-373"/>
                 <outlet property="likeIcon" destination="nKV-v7-798" id="7JC-YK-ZPm"/>

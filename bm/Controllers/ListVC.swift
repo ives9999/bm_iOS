@@ -683,6 +683,10 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
 //        }
     }
     
+    func cellCity(row: Table) {
+        let i = 6
+    }
+    
     func cellLike(row: Table) {
         if (!Member.instance.isLoggedIn) {
             toLogin()
