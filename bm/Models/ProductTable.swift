@@ -103,14 +103,14 @@ class ProductPriceTable: Table {
     var product_id: Int = -1
     var price_title: String = ""
     var price_title_alias: String = ""
-    var price_member: Int = -1
-    var price_nonmember: Int = -1
-    var price_dummy: Int = -1
+    var price_member: Int = 100000000
+    var price_nonmember: Int = 1000000000
+    var price_dummy: Int = 100000000
     var price_desc: String = ""
-    var shipping_fee: Int = -1
-    var shipping_fee_unit: Int = -1
+    var shipping_fee: Int = 0
+    var shipping_fee_unit: Int = 0
     var shippint_fee_desc: String = ""
-    var tax: Int = -1
+    var tax: Int = 0
     
     enum CodingKeys: String, CodingKey {
         case product_id
@@ -133,12 +133,12 @@ class ProductPriceTable: Table {
         do {product_id = try container.decode(Int.self, forKey: .product_id)}catch{product_id = -1}
         do {price_title = try container.decode(String.self, forKey: .price_title)}catch{price_title = ""}
         do {price_title_alias = try container.decode(String.self, forKey: .price_title_alias)}catch{price_title_alias = ""}
-        do {price_member = try container.decode(Int.self, forKey: .price_member)}catch{price_member = -1}
-        do {price_nonmember = try container.decode(Int.self, forKey: .price_nonmember)}catch{price_nonmember = -1}
-        do {price_dummy = try container.decode(Int.self, forKey: .price_dummy)}catch{price_dummy = -1}
+        do {price_member = try container.decode(Int.self, forKey: .price_member)}catch{price_member = 1000000}
+        do {price_nonmember = try container.decode(Int.self, forKey: .price_nonmember)}catch{price_nonmember = 1000000}
+        do {price_dummy = try container.decode(Int.self, forKey: .price_dummy)}catch{price_dummy = 100000000}
         do {price_desc = try container.decode(String.self, forKey: .price_desc)}catch{price_desc = ""}
-        do {shipping_fee = try container.decode(Int.self, forKey: .shipping_fee)}catch{shipping_fee = -1}
-        do {shipping_fee_unit = try container.decode(Int.self, forKey: .shipping_fee_unit)}catch{shipping_fee_unit = -1}
+        do {shipping_fee = try container.decode(Int.self, forKey: .shipping_fee)}catch{shipping_fee = 0}
+        do {shipping_fee_unit = try container.decode(Int.self, forKey: .shipping_fee_unit)}catch{shipping_fee_unit = 0}
         do {shippint_fee_desc = try container.decode(String.self, forKey: .shippint_fee_desc)}catch{shippint_fee_desc = ""}
         do {tax = try container.decode(Int.self, forKey: .tax)}catch{tax = 1}
     }

@@ -160,6 +160,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         if getFormItemFromKey(SHIPPING_FEE_KEY) != nil {
             shippingFee = productTable!.prices[selected_idx].shipping_fee
+            print(shippingFee)
             updateShippingFee()
         }
         tableView.reloadData()
@@ -305,7 +306,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["amount"] = totalFormItem?.value
         
         let shippingFeeFormItem = getFormItemFromKey(SHIPPING_FEE_KEY)
-        params["shipping_fee"] = shippingFeeFormItem?.value
+        if (shippingFeeFormItem != nil) {
+            params["shipping_fee"] = shippingFeeFormItem?.value
+        }
         
         if let item = getFormItemFromKey(COLOR_KEY) {
             params["color"] = item.value
