@@ -62,7 +62,7 @@ class PaymentVC: MyTableVC {
         
         if ecpay_token.count > 0 {
             
-            let name: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String)!
+                                                                        let name: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String)!
             ECPayPaymentGatewayManager.sharedInstance().createPayment(
                 token: ecpay_token,
                 useResultPage: 1,
