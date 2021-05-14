@@ -64,19 +64,19 @@ class MemberLikeListVC: ListVC {
     override func getDataEnd(success: Bool) {
         if success {
             
-            mysTable = (tables as? OrdersTable)
-            if mysTable != nil {
-                let tmps: [OrderTable] = mysTable!.rows
-                
-                if page == 1 {
-                    lists1 = [OrderTable]()
-                }
-                lists1 += tmps
-                myTablView.reloadData()
-            } else {
-                warning("轉換Table出錯，請洽管理員")
-            }
-        }
+//            mysTable = (tables as? OrdersTable)
+//            if mysTable != nil {
+//                let tmps: [OrderTable] = mysTable!.rows
+//
+//                if page == 1 {
+//                    lists1 = [OrderTable]()
+//                }
+//                lists1 += tmps
+//                myTablView.reloadData()
+//            } else {
+//                warning("轉換Table出錯，請洽管理員")
+//            }
+       }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -100,11 +100,11 @@ class MemberLikeListVC: ListVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if mysTable != nil {
-            let orderTable = mysTable!.rows[indexPath.row]
-            //toShowProduct(token: superProduct.token)
-            let token = orderTable.token
-            toPayment(order_token: token)
-        }
+//        if mysTable != nil {
+//            let orderTable = mysTable!.rows[indexPath.row]
+//            //toShowProduct(token: superProduct.token)
+//            let token = orderTable.token
+//            toPayment(order_token: token)
+//        }
     }
 }
