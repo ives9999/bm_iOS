@@ -34,21 +34,22 @@ class ManagerStoreVC: MyTableVC {
         }
         
         Global.instance.addSpinner(superView: self.view)
-        StoreService.instance.getList(t: StoresTable.self, token: token, _filter: filter, page: 1, perPage: 100) { (success) in
+        StoreService.instance.getList(token: token, _filter: filter, page: 1, perPage: 100) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                self.storesTable = (StoreService.instance.tables as! StoresTable)
-                //self.superCourses!.printRows()
-                if self.storesTable != nil {
-                    if self.storesTable!.totalCount == 0 {
-                        let alert = SCLAlertView()
-                        alert.showInfo("目前無您管理的體育用品店", subTitle: "")
+                
+                do {
+                    if (self.dataService.jsonData != nil) {
+                        try self.storesTable = JSONDecoder().decode(StoresTable.self, from: self.dataService.jsonData!)
+                        if (self.storesTable != nil) {
+                            //self.coursesTable!.printRows()
+                            self.tableView.reloadData()
+                        }
                     } else {
-                        self.tableView.reloadData()
+                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                     }
-                } else {
-                    let alert = SCLAlertView()
-                    alert.showWarning("無法取得體育用品店資料，請洽管理員", subTitle: "")
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
                 }
             } else {
                 self.warning(CourseService.instance.msg)

@@ -43,21 +43,34 @@ class MemberOrderListVC: ListVC {
         
         Global.instance.addSpinner(superView: self.view)
 
-        dataService.getList(t: t, token: Member.instance.token, _filter: params1, page: page, perPage: perPage) { (success) in
+        dataService.getList(token: Member.instance.token, _filter: params1, page: page, perPage: perPage) { (success) in
             if (success) {
-                self.tables = self.dataService.tables!
-                self.page = self.tables!.page
-                if self.page == 1 {
-                    self.totalCount = self.tables!.totalCount
-                    self.perPage = self.tables!.perPage
-                    let _pageCount: Int = self.totalCount / self.perPage
-                    self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
-                    //print(self.totalPage)
-                    if self.refreshControl.isRefreshing {
-                        self.refreshControl.endRefreshing()
+                
+                do {
+                    if (self.dataService.jsonData != nil) {
+                        try self.tables = JSONDecoder().decode(t, from: self.dataService.jsonData!)
+                        if (self.tables != nil) {
+                            //self.coursesTable!.printRows()
+                            self.page = self.tables!.page
+                            if self.page == 1 {
+                                self.totalCount = self.tables!.totalCount
+                                self.perPage = self.tables!.perPage
+                                let _pageCount: Int = self.totalCount / self.perPage
+                                self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
+                                //print(self.totalPage)
+                                if self.refreshControl.isRefreshing {
+                                    self.refreshControl.endRefreshing()
+                                }
+                            }
+                            self.getDataEnd(success: success)
+                        }
+                    } else {
+                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                     }
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
                 }
-                self.getDataEnd(success: success)
+                                
                 Global.instance.removeSpinner(superView: self.view)
             } else {
                 Global.instance.removeSpinner(superView: self.view)

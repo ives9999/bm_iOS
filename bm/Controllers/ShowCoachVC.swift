@@ -389,13 +389,21 @@ class ShowCoachVC: Show1VC {
         if myTable != nil {
             filter.merge(["coach_id": myTable!.id])
             
-            CourseService.instance.getList(t: CoursesTable.self, token: token!, _filter: filter, page: 1, perPage: 100) { (success2) in
+            CourseService.instance.getList(token: token!, _filter: filter, page: 1, perPage: 100) { (success2) in
                 Global.instance.removeSpinner(superView: self.view)
                 if (success2) {
-                    self.coursesTable = (CourseService.instance.tables as? CoursesTable)
-                    if (self.coursesTable != nil) {
-                        //self.coursesTable!.printRows()
-                        self.courseTableView.reloadData()
+                    do {
+                        if (self.dataService.jsonData != nil) {
+                            try self.coursesTable = JSONDecoder().decode(CoursesTable.self, from: CourseService.instance.jsonData!)
+                            if (self.coursesTable != nil) {
+                                //self.coursesTable!.printRows()
+                                self.courseTableView.reloadData()
+                            }
+                        } else {
+                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                        }
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
                     }
                 } else {
                     self.warning(CourseService.instance.msg)

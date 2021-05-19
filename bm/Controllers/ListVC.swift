@@ -103,21 +103,33 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         
         Global.instance.addSpinner(superView: self.view)
 
-        dataService.getList(t: t, token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
+        dataService.getList(token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
             if (success) {
-                self.tables = self.dataService.tables!
-                self.page = self.tables!.page
-                if self.page == 1 {
-                    self.totalCount = self.tables!.totalCount
-                    self.perPage = self.tables!.perPage
-                    let _pageCount: Int = self.totalCount / self.perPage
-                    self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
-                    //print(self.totalPage)
-                    if self.refreshControl.isRefreshing {
-                        self.refreshControl.endRefreshing()
+                var s: T? = nil
+                do {
+                    if (self.dataService.jsonData != nil) {
+                        s = try JSONDecoder().decode(t, from: self.dataService.jsonData!)
+                    } else {
+                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                     }
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
                 }
-                self.getDataEnd(success: success)
+                if (s != nil) {
+                    self.tables = s!
+                    self.page = self.tables!.page
+                    if self.page == 1 {
+                        self.totalCount = self.tables!.totalCount
+                        self.perPage = self.tables!.perPage
+                        let _pageCount: Int = self.totalCount / self.perPage
+                        self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
+                        //print(self.totalPage)
+                        if self.refreshControl.isRefreshing {
+                            self.refreshControl.endRefreshing()
+                        }
+                    }
+                    self.getDataEnd(success: success)
+                }
                 Global.instance.removeSpinner(superView: self.view)
             } else {
                 Global.instance.removeSpinner(superView: self.view)

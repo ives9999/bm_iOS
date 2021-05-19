@@ -45,22 +45,24 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
         }
         
         Global.instance.addSpinner(superView: self.view)
-        CourseService.instance.getList(t: CoursesTable.self, token: token, _filter: filter, page: 1, perPage: PERPAGE) { (success) in
+        CourseService.instance.getList(token: token, _filter: filter, page: 1, perPage: PERPAGE) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                self.coursesTable = (CourseService.instance.tables as! CoursesTable)
-                //self.coursesTable!.printRows()
-                if self.coursesTable != nil {
-                    if self.coursesTable!.totalCount == 0 {
-                        let alert = SCLAlertView()
-                        alert.showInfo("目前無您管理的課程", subTitle: "")
+                
+                do {
+                    if (self.dataService.jsonData != nil) {
+                        try self.coursesTable = JSONDecoder().decode(CoursesTable.self, from: CourseService.instance.jsonData!)
+                        if (self.coursesTable != nil) {
+                            //self.coursesTable!.printRows()
+                            self.tableView.reloadData()
+                        }
                     } else {
-                        self.tableView.reloadData()
+                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                     }
-                } else {
-                    let alert = SCLAlertView()
-                    alert.showWarning("無法取得課程資料，請洽管理員", subTitle: "")
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
                 }
+                
             } else {
                 self.warning(CourseService.instance.msg)
             }

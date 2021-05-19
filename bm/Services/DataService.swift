@@ -77,7 +77,7 @@ class DataService {
         return list
     }
     
-    func getList<T: Tables>(t:T.Type, token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+    func getList(token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
         self.needDownloads = [Dictionary<String, Any>]()
         var filter: [String: Any] = ["source": "app", "channel": CHANNEL, "page": page, "perPage": perPage]
@@ -101,16 +101,16 @@ class DataService {
             switch response.result {
             //case .success(let value):
             case .success(_):
-                var s: T? = nil
-                do {
-                    if response.data != nil {
-                        //let json = JSON(value)
-                        //print(json)
-                        s = try JSONDecoder().decode(t, from: response.data!)
-                        if s != nil {
-                            self.tables = s!
-                            //s!.printRow()
-                            
+                if response.data != nil {
+                    //let json = JSON(value)
+                    //print(json)
+                    self.jsonData = response.data
+                    completion(true)
+                    //s = try JSONDecoder().decode(t, from: response.data!)
+                    //if s != nil {
+                        //self.tables = s!
+                        //s!.printRow()
+                        
 //                            let a1: CoursesTable = s! as! CoursesTable
 //                            let rows:[CourseTable] = a1.rows
 //                            for row in rows {
@@ -119,19 +119,14 @@ class DataService {
 //                                row.filterRow()
 //                                row.printRow()
 //                            }
-                            
-                            completion(true)
-                        } else {
-                            self.msg = "解析JSON字串時，得到空直，請洽管理員"
-                            completion(false)
-                        }
-                    } else {
-                        self.msg = "沒有任何伺服器回傳的訊息"
-                        completion(false)
-                    }
-                } catch {
-                    //print("Error:\(error)")
-                    self.msg = error.localizedDescription
+                        
+                        //completion(true)
+//                        } else {
+//                            self.msg = "解析JSON字串時，得到空直，請洽管理員"
+//                            completion(false)
+//                        }
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
                     completion(false)
                 }
             case .failure(let error):
