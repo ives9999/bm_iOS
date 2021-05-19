@@ -677,6 +677,19 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
+    func toTeam(member_like: Bool=false) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Team", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "Team") as? TeamVC {
+                viewController.member_like = member_like
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Team") as! TeamVC
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toProduct() {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)

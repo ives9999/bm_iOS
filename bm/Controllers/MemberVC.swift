@@ -195,7 +195,7 @@ class MemberVC: MyTableVC {
                 }
                 //toMemberLikeList(able_type)
                 if (able_type == "team") {
-                    //toTeam
+                    toTeam(member_like: true)
                 }
             }
         }

@@ -348,7 +348,10 @@ class MemberService: DataService {
             "page": page,
             "perpage": perPage
         ]
+        print(body)
+        
         let url: String = URL_MEMBER_LIKELIST
+        print(url)
         
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
