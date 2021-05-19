@@ -29,8 +29,8 @@ class TeamVC: ListVC {
     override func viewDidLoad() {
         myTablView = tableView
         dataService = TeamService.instance
-        _type = "team"
-        _titleField = "name"
+        //_type = "team"
+        //_titleField = "name"
         searchRows = _searchRows
         Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)

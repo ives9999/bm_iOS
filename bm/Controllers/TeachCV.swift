@@ -20,8 +20,8 @@ class TeachCV: ListVC {
         myTablView = tableView
         dataService = TeachService.instance
         searchRows = _searchRows
-        _type = "teach"
-        _titleField = "title"
+        //_type = "teach"
+        //_titleField = "title"
         super.viewDidLoad()
         let cellNibName = UINib(nibName: "TeachCell", bundle: nil)
         myTablView.register(cellNibName, forCellReuseIdentifier: "listcell")
@@ -68,7 +68,7 @@ class TeachCV: ListVC {
                 let row = lists1[indexPath.row] as? TeachTable
                 if row != nil {
                     row!.filterRow()
-                    row!.printRow()
+                    //row!.printRow()
                     cell.updateTeachViews(indexPath: indexPath, data: row!)
                 }
                 
@@ -93,7 +93,7 @@ class TeachCV: ListVC {
         if segue.identifier == TO_SHOW {
             if let showVC: ShowVC = segue.destination as? ShowVC {
                 let table = sender as! TeachTable
-                let show_in: Show_IN = Show_IN(type: iden, id: table.id, token: table.token, title: table.title)
+                let show_in: Show_IN = Show_IN(type: "teach", id: table.id, token: table.token, title: table.title)
                 showVC.initShowVC(sin: show_in)
             }
         }

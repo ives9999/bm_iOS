@@ -31,28 +31,37 @@ class MemberLikeListVC: ListVC {
     
     override func refresh() {
         page = 1
-        getDataStart(t: OrdersTable.self)
+        getDataStart()
     }
     
-    override func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
+    override func getDataStart(page: Int = 1, perPage: Int = PERPAGE) {
         
         Global.instance.addSpinner(superView: self.view)
 
-        dataService.getList(t: t, token: Member.instance.token, _filter: params1, page: page, perPage: perPage) { (success) in
+        MemberService.instance.likelist(able_type: able_type, page: page, perPage: perPage) { (success) in
             if (success) {
-                self.tables = self.dataService.tables!
-                self.page = self.tables!.page
-                if self.page == 1 {
-                    self.totalCount = self.tables!.totalCount
-                    self.perPage = self.tables!.perPage
-                    let _pageCount: Int = self.totalCount / self.perPage
-                    self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
-                    //print(self.totalPage)
-                    if self.refreshControl.isRefreshing {
-                        self.refreshControl.endRefreshing()
+                
+                //let jsonData = self.dataService.jsonData
+                do {
+                    let s: TeamsTable = try JSONDecoder().decode(TeamsTable.self, from: self.dataService.jsonData!)
+                    self.tables = s
+                    self.page = self.tables!.page
+                    if self.page == 1 {
+                        self.totalCount = self.tables!.totalCount
+                        self.perPage = self.tables!.perPage
+                        let _pageCount: Int = self.totalCount / self.perPage
+                        self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
+                        //print(self.totalPage)
+                        if self.refreshControl.isRefreshing {
+                            self.refreshControl.endRefreshing()
+                        }
                     }
+                    self.getDataEnd(success: success)
+                } catch {
+                    self.msg = error.localizedDescription
                 }
-                self.getDataEnd(success: success)
+                //self.tables = self.dataService.tables!
+                
                 Global.instance.removeSpinner(superView: self.view)
             } else {
                 Global.instance.removeSpinner(superView: self.view)

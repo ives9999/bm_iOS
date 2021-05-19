@@ -47,6 +47,7 @@ let URL_HOME = "\(BASE_URL)/app/"
 let URL_LIKE = "\(URL_HOME)%@" // use URL_COURSE_LIKE etc...
 let URL_LIST = "\(URL_HOME)%@"
 let URL_LOGIN = URL_HOME + "login"
+let URL_MEMBER_LIKELIST = URL_HOME + "member/likelist"
 let URL_MEMBER_BLACKLIST = URL_HOME + "member/blacklist"
 let URL_MEMBER_GETONE = URL_HOME + "member/getOne"
 let URL_MEMBER_SIGNUP_CALENDAR = URL_HOME + "member/signup_calendar"

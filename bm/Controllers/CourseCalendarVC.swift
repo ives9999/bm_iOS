@@ -59,8 +59,8 @@ class CourseCalendarVC: ListVC {
         
         myTablView = tableView
         //dataService = MemberService.instance
-        _type = "course"
-        _titleField = "title"
+        //_type = "course"
+        //_titleField = "title"
         searchRows = _searchRows
         //Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)

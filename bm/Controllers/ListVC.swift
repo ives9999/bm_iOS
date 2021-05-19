@@ -14,13 +14,14 @@ protocol BackDelegate {
 }
 
 class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, BackDelegate, List1CellDelegate {
+    
     func setBack(params: [String: Any]) {
         self.params = params
     }
     
-    var _type: String = "coach"
-    var _titleField: String = "name"
-    internal(set) public var lists: [SuperData] = [SuperData]()
+    //var _type: String = "coach"
+    //var _titleField: String = "name"
+    //internal(set) public var lists: [SuperData] = [SuperData]()
     
     var newY: CGFloat = 0
     
@@ -62,8 +63,9 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        setIden(item:_type, titleField: _titleField)
+        //setIden(item:_type, titleField: _titleField)
         //let cellNibName = UINib(nibName: "ListCell", bundle: nil)
         //myTablView.register(cellNibName, forCellReuseIdentifier: "listcell")
         
@@ -140,13 +142,13 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     
     override func getDataEnd(success: Bool) {
         if success {
-            let tmps: [SuperData] = dataService.dataLists
+            //let tmps: [SuperData] = dataService.dataLists
             //print(tmps)
             //print("===============")
             if page == 1 {
-                lists = [SuperData]()
+                //lists = [SuperData]()
             }
-            lists += tmps
+            //lists += tmps
             //print(self.lists)
             page = dataService.page
             if page == 1 {
@@ -174,7 +176,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
-            return lists.count
+            return lists1.count
         } else {
             return searchRows.count
         }
@@ -210,10 +212,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         Global.instance.removeSpinner(superView: tableView)
         if tableView == self.tableView {
             let data = lists1[indexPath.row]
-            var iden = TO_SHOW
-            if _type == "coach" {
-                iden = TO_SHOW_COACH
-            }
+            let iden = TO_SHOW
+            
             performSegue(withIdentifier: iden, sender: data)
         } else if tableView == searchTableView {
             let row = searchRows[indexPath.row]
@@ -246,16 +246,16 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == TO_SHOW {
             if let showVC: ShowVC = segue.destination as? ShowVC {
-                assert(sender as? SuperData != nil)
-                let data: SuperData = sender as! SuperData
+                //assert(sender as? SuperData != nil)
+                let data: TeachTable = sender as! TeachTable
                 let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
                 showVC.initShowVC(sin: show_in)
             }
         } else if segue.identifier == TO_SHOW_COACH {
             if let showCoachVC: ShowCoachVC = segue.destination as? ShowCoachVC {
-                assert(sender as? SuperData != nil)
-                let data: SuperData = sender as! SuperData
-                let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
+                //assert(sender as? SuperData != nil)
+                //let data: SuperData = sender as! SuperData
+                //let show_in: Show_IN = Show_IN(type: iden, id: data.id, token: data.token, title: data.title)
                 //showCoachVC.initShowVC(sin: show_in)
                 showCoachVC.backDelegate = self
             }
@@ -322,9 +322,9 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
             tempPlayVC.degrees = degrees
             tempPlayVC.keyword = keyword
         } else if segue.identifier == TO_MANAGER {
-            let managerVC: ManagerVC = segue.destination as! ManagerVC
-            managerVC.source = _type
-            managerVC.titleField = _titleField
+//            let managerVC: ManagerVC = segue.destination as! ManagerVC
+//            managerVC.source = _type
+//            managerVC.titleField = _titleField
         }
     }
     
@@ -613,15 +613,17 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     func showMap(indexPath: IndexPath) {}
     
     func searchCity(indexPath: IndexPath) {
-        let row = lists[indexPath.row]
+        let row = lists1[indexPath.row]
         var key = CITY_KEY
-        if _type == "coach" {
-            key = CITYS_KEY
-        }
-        let city_id = row.data[key]!["value"] as! Int
-        citys.removeAll()
-        citys.append(City(id: city_id, name: ""))
-        prepareParams(city_type: "all")
+//        if _type == "coach" {
+//            key = CITYS_KEY
+//        }
+        
+        //為了拿掉lists，暫時先mark
+//        let city_id = row.data[key]!["value"] as! Int
+//        citys.removeAll()
+//        citys.append(City(id: city_id, name: ""))
+//        prepareParams(city_type: "all")
         refresh()
     }
     

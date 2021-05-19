@@ -111,8 +111,8 @@ class ArenaVC: ListVC {
 //    }
     
     override func showMap(indexPath: IndexPath) {
-        let row = lists[indexPath.row]
-        let address = row.data[ADDRESS_KEY]!["value"] as! String
+        let row = lists1[indexPath.row]
+        let address = row.address
         let title = row.title
         let sender: [String: String] = [
             "title": title,

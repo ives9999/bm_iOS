@@ -193,7 +193,10 @@ class MemberVC: MyTableVC {
                 if (row.keyExist(key: "able_type") && row["able_type"] != nil) {
                     able_type = row["able_type"] as? String ?? "team"
                 }
-                toMemberLikeList(able_type)
+                //toMemberLikeList(able_type)
+                if (able_type == "team") {
+                    //toTeam
+                }
             }
         }
     }

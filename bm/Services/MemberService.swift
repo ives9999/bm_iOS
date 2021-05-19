@@ -292,7 +292,8 @@ class MemberService: DataService {
         }
     }
     
-    func blacklist(token:String,completion:@escaping CompletionHandler) {
+    func blacklist(token: String, completion: @escaping CompletionHandler) {
+        
         let body: [String: Any] = ["source": "app","channel":CHANNEL,"token":token]
         let url: String = URL_MEMBER_BLACKLIST
         //print(url)
@@ -332,6 +333,47 @@ class MemberService: DataService {
                     self.msg = "網路錯誤，請稍後再試"
                     completion(false)
                 }
+            }
+        }
+    }
+    
+    func likelist(able_type: String, like_list: String = "喜歡", page: Int=1, perPage: Int=20, completion: @escaping CompletionHandler) {
+        
+        let body: [String: Any] = [
+            "device": "app",
+            "channel": CHANNEL,
+            "member_token": Member.instance.token,
+            "able_type": able_type,
+            "like_list": like_list,
+            "page": page,
+            "perpage": perPage
+        ]
+        let url: String = URL_MEMBER_LIKELIST
+        
+        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            //case .success(let value):
+            case .success(_):
+                if response.data != nil {
+                    //let json = JSON(value)
+                    //print(json)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
+                    }
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
             }
         }
     }

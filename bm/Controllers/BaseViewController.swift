@@ -862,6 +862,21 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
+    //目前還是使用ShowVC
+//    func toShowTeach(token: String) {
+//        if #available(iOS 13.0, *) {
+//            let storyboard = UIStoryboard(name: "More", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_TEACH)  as? ShowArenaVC {
+//                viewController.token = token
+//                show(viewController, sender: nil)
+//            }
+//        } else {
+//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_ARENA) as! ShowArenaVC
+//            viewController.token = token
+//            self.navigationController!.pushViewController(viewController, animated: true)
+//        }
+//    }
+    
     func toShowStore(token: String) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
