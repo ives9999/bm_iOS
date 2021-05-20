@@ -19,6 +19,7 @@ class ProductVC: ListVC {
         
     override func viewDidLoad() {
         myTablView = tableView
+        able_type = "product"
         dataService = ProductService.instance
         //_type = "product"
         //_titleField = "name"

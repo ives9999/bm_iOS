@@ -686,23 +686,77 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Team") as! TeamVC
+            viewController.member_like = member_like
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
     
-    func toProduct() {
+    func toCourse(member_like: Bool=false) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Course", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "Course") as? CourseVC {
+                viewController.member_like = member_like
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Course") as! CourseVC
+            viewController.member_like = member_like
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toProduct(member_like: Bool=false) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_PRODUCT) as? ProductVC {
-                //self.navigationController?.pushViewController(viewController, animated: true)
-                //self.present(viewController, animated: true, completion: nil)
-//                if moreVCDelegate != nil {
-//                    viewController.moreVCDelegate = self
-//                }
+                viewController.member_like = member_like
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_PRODUCT) as! ProductVC
+            viewController.member_like = member_like
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toCoach(member_like: Bool=false) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "More", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-fEf-Ib-3oR") as? CoachVC {
+                viewController.member_like = member_like
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-fEf-Ib-3oR") as! CoachVC
+            viewController.member_like = member_like
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toStore(member_like: Bool=false) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "More", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toStore") as? StoreVC {
+                viewController.member_like = member_like
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toStore") as! StoreVC
+            viewController.member_like = member_like
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toArena(member_like: Bool=false) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "More", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toArena") as? ArenaVC {
+                viewController.member_like = member_like
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toArena") as! ArenaVC
+            viewController.member_like = member_like
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -800,21 +854,6 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_ORDER_LIST) as! MemberOrderListVC
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
-    }
-    
-    func toMemberLikeList(_ able_type: String) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_LIKE_LIST)  as? MemberLikeListVC {
-                
-                viewController.able_type = able_type
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_LIKE_LIST) as! MemberLikeListVC
-            viewController.able_type = able_type
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

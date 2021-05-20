@@ -29,6 +29,7 @@ class TeamVC: ListVC {
     override func viewDidLoad() {
         myTablView = tableView
         dataService = TeamService.instance
+        able_type = "team"
         //_type = "team"
         //_titleField = "name"
         searchRows = _searchRows

@@ -25,7 +25,6 @@
 		B306FEAD21F8422B00403FE2 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEAB21F8422B00403FE2 /* IconCell.swift */; };
 		B306FEAE21F8422B00403FE2 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B306FEAC21F8422B00403FE2 /* IconCell.xib */; };
 		B307AA31263840EE001F685D /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307AA30263840EE001F685D /* LikeButton.swift */; };
-		B30953F4264A5E1700111AA9 /* MemberLikeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30953F3264A5E1700111AA9 /* MemberLikeListVC.swift */; };
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -404,7 +403,6 @@
 		B306FEAB21F8422B00403FE2 /* IconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
 		B306FEAC21F8422B00403FE2 /* IconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		B307AA30263840EE001F685D /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
-		B30953F3264A5E1700111AA9 /* MemberLikeListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberLikeListVC.swift; sourceTree = "<group>"; };
 		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1253,7 +1251,6 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
-				B30953F3264A5E1700111AA9 /* MemberLikeListVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1761,7 +1758,6 @@
 				B3485C9723F841BE0078265D /* MemberVC.swift in Sources */,
 				B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */,
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
-				B30953F4264A5E1700111AA9 /* MemberLikeListVC.swift in Sources */,
 				B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */,
 				B3B758D325AD55E7006ACC33 /* GMStepper.swift in Sources */,
 				B3B758CD25AD4215006ACC33 /* NumberFormItem.swift in Sources */,

@@ -20,6 +20,7 @@ class CoachVC: ListVC {
         
     override func viewDidLoad() {
         myTablView = tableView
+        able_type = "coach"
         dataService = CoachService.instance
         //_type = "coach"
         //_titleField = "name"

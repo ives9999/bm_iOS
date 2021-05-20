@@ -26,6 +26,7 @@ class CourseVC: ListVC {
     override func viewDidLoad() {
         
         myTablView = tableView
+        able_type = "course"
         dataService = CourseService.instance
         //_type = "course"
         //_titleField = "title"

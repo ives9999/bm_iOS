@@ -23,6 +23,7 @@ class ArenaVC: ListVC {
         
     override func viewDidLoad() {
         myTablView = tableView
+        able_type = "arena"
         dataService = ArenaService.instance
         searchRows = _searchRows
 //        _type = "arena"

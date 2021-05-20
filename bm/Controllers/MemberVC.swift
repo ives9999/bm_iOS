@@ -32,8 +32,9 @@ class MemberVC: MyTableVC {
         ["text": "球隊","icon":"like","segue":TO_LIKE,"able_type":"team"],
         ["text": "球館","icon":"like","segue":TO_LIKE,"able_type":"arena"],
         ["text": "教練","icon":"like","segue":TO_LIKE,"able_type":"coach"],
-        ["text": "商品","icon":"product","segue":TO_LIKE,"able_type":"product"],
-        ["text": "體育用品店","icon":"store","segue":TO_LIKE,"able_type":"store"]
+        ["text": "課程","icon":"like","segue":TO_LIKE,"able_type":"course"],
+        ["text": "商品","icon":"like","segue":TO_LIKE,"able_type":"product"],
+        ["text": "體育用品店","icon":"like","segue":TO_LIKE,"able_type":"store"]
     ]
     let signupRows: [Dictionary<String, String>] = [
         ["text": "課程報名", "icon": "account", "segue": TO_SIGNUP_LIST]
@@ -196,6 +197,18 @@ class MemberVC: MyTableVC {
                 //toMemberLikeList(able_type)
                 if (able_type == "team") {
                     toTeam(member_like: true)
+                } else if (able_type == "course") {
+                    toCourse(member_like: true)
+                } else if (able_type == "product") {
+                    toProduct(member_like: true)
+                } else if (able_type == "coach") {
+                    toCoach(member_like: true)
+                } else if (able_type == "arena") {
+                    toArena(member_like: true)
+                } else if (able_type == "store") {
+                    toStore(member_like: true)
+                } else {
+                    warning("沒有這個喜歡的連結")
                 }
             }
         }

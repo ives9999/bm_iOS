@@ -21,6 +21,7 @@ class StoreVC: ListVC {
             
     override func viewDidLoad() {
         myTablView = tableView
+        able_type = "store"
         dataService = StoreService.instance
 //        _type = "store"
 //        _titleField = "name"

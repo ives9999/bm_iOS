@@ -19,7 +19,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         self.params = params
     }
     
-    //var _type: String = "coach"
+    var able_type: String = "coach"
     //var _titleField: String = "name"
     //internal(set) public var lists: [SuperData] = [SuperData]()
     
@@ -108,7 +108,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         Global.instance.addSpinner(superView: self.view)
         
         if (member_like) {
-            MemberService.instance.likelist(able_type: "team") { (success) in
+            MemberService.instance.likelist(able_type: able_type) { (success) in
                 self.jsonData = MemberService.instance.jsonData
                 self._dataToTable(t: t, success)
             }

@@ -160,7 +160,7 @@
         <!--球館-->
         <scene sceneID="rU9-us-FPg">
             <objects>
-                <viewController title="球館" id="NIB-Wk-iZw" customClass="ArenaVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toArena" title="球館" id="NIB-Wk-iZw" customClass="ArenaVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NkK-tG-RSP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -765,7 +765,7 @@
         <!--StoreVC-->
         <scene sceneID="Z3V-J1-6nx">
             <objects>
-                <viewController id="Nap-sO-qjg" customClass="StoreVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toStore" id="Nap-sO-qjg" customClass="StoreVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="i8T-2f-Ld1">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
