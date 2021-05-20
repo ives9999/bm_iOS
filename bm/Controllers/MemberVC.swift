@@ -29,12 +29,12 @@ class MemberVC: MyTableVC {
         ["text": "訂單查詢", "icon": "order", "segue": TO_MEMBER_ORDER_LIST]
     ]
     let likeRows: [Dictionary<String, String>] = [
-        ["text": "球隊","icon":"like","segue":TO_LIKE,"able_type":"team"],
-        ["text": "球館","icon":"like","segue":TO_LIKE,"able_type":"arena"],
-        ["text": "教練","icon":"like","segue":TO_LIKE,"able_type":"coach"],
-        ["text": "課程","icon":"like","segue":TO_LIKE,"able_type":"course"],
-        ["text": "商品","icon":"like","segue":TO_LIKE,"able_type":"product"],
-        ["text": "體育用品店","icon":"like","segue":TO_LIKE,"able_type":"store"]
+        ["text": "球隊","icon":"team","segue":TO_LIKE,"able_type":"team"],
+        ["text": "球館","icon":"arena","segue":TO_LIKE,"able_type":"arena"],
+        ["text": "教練","icon":"coach","segue":TO_LIKE,"able_type":"coach"],
+        ["text": "課程","icon":"course","segue":TO_LIKE,"able_type":"course"],
+        ["text": "商品","icon":"product","segue":TO_LIKE,"able_type":"product"],
+        ["text": "體育用品店","icon":"store","segue":TO_LIKE,"able_type":"store"]
     ]
     let signupRows: [Dictionary<String, String>] = [
         ["text": "課程報名", "icon": "account", "segue": TO_SIGNUP_LIST]
