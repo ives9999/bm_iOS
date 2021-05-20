@@ -257,6 +257,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h8g-qX-Kzm">
                                 <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uVU-Kd-flA" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="9n9-C1-Esh"/>
+                                            <constraint firstAttribute="height" constant="26" id="w4M-PG-Wng"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="hk6-fe-bLP" eventType="touchUpInside" id="LU4-MT-nSg"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGB-uY-eI7">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
@@ -277,7 +288,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="uVU-Kd-flA" firstAttribute="centerY" secondItem="h8g-qX-Kzm" secondAttribute="centerY" id="97j-Vl-5bn"/>
                                     <constraint firstItem="7B4-96-hjo" firstAttribute="centerY" secondItem="h8g-qX-Kzm" secondAttribute="centerY" id="D8L-MC-Skp"/>
+                                    <constraint firstItem="uVU-Kd-flA" firstAttribute="leading" secondItem="h8g-qX-Kzm" secondAttribute="leading" constant="12" id="Q3P-qi-Kro"/>
                                     <constraint firstItem="QGB-uY-eI7" firstAttribute="centerY" secondItem="h8g-qX-Kzm" secondAttribute="centerY" id="dCe-7J-F5c"/>
                                     <constraint firstItem="QGB-uY-eI7" firstAttribute="centerX" secondItem="h8g-qX-Kzm" secondAttribute="centerX" id="e1j-c4-8Jx"/>
                                     <constraint firstAttribute="height" constant="64" id="oYA-ey-ZO1"/>

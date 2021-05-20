@@ -20,6 +20,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4i0-LR-Nzf">
                                 <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfe-UG-knR" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="J76-tM-Pzd"/>
+                                            <constraint firstAttribute="height" constant="26" id="jx5-Gw-rkO"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="fZf-Fb-4DO" eventType="touchUpInside" id="O6I-3h-hwd"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHN-BZ-oKv">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
@@ -41,8 +52,10 @@
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="cHN-BZ-oKv" firstAttribute="centerY" secondItem="4i0-LR-Nzf" secondAttribute="centerY" id="5JY-jr-nJd"/>
+                                    <constraint firstItem="nfe-UG-knR" firstAttribute="leading" secondItem="4i0-LR-Nzf" secondAttribute="leading" constant="12" id="J8m-jQ-Iw7"/>
                                     <constraint firstItem="cHN-BZ-oKv" firstAttribute="centerX" secondItem="4i0-LR-Nzf" secondAttribute="centerX" id="KvG-MJ-SMX"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="aTJ-7P-hKI"/>
+                                    <constraint firstItem="nfe-UG-knR" firstAttribute="centerY" secondItem="4i0-LR-Nzf" secondAttribute="centerY" id="f1O-5W-iD3"/>
                                     <constraint firstAttribute="trailing" secondItem="d7O-wy-nZE" secondAttribute="trailing" constant="12" id="oha-ar-WBh"/>
                                     <constraint firstAttribute="height" constant="64" id="uNe-Jd-JqO"/>
                                     <constraint firstItem="d7O-wy-nZE" firstAttribute="centerY" secondItem="4i0-LR-Nzf" secondAttribute="centerY" id="yTS-sh-Ik5"/>
