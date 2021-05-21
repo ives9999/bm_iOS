@@ -703,4 +703,30 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     func cellToLogin() {
         toLogin()
     }
+    
+    func toSelectWeekday(key: String? = nil, selecteds: [Int]? = nil) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-OKL-6q-hzR") as? WeekdaysSelectVC {
+                if key != nil {
+                    viewController.key = key
+                }
+                if selecteds != nil {
+                    viewController.selecteds = selecteds!
+                }
+                viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-OKL-6q-hzR") as! WeekdaysSelectVC
+            if key != nil {
+                viewController.key = key
+            }
+            if selecteds != nil {
+                viewController.selecteds = selecteds!
+            }
+            viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
 }

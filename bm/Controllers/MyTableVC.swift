@@ -114,8 +114,7 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         return cell!
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
     
     //header and footer
     

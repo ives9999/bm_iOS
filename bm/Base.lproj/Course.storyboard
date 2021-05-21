@@ -45,7 +45,7 @@
                                         </constraints>
                                         <state key="normal" image="search"/>
                                         <connections>
-                                            <action selector="searchBtnPressed:" destination="fZf-Fb-4DO" eventType="touchUpInside" id="rdC-M3-plr"/>
+                                            <action selector="searchBtnPressed:" destination="fZf-Fb-4DO" eventType="touchUpInside" id="xMZ-fM-dvz"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -403,7 +403,6 @@
                                         </constraints>
                                         <state key="normal" image="search"/>
                                         <connections>
-                                            <action selector="searchBtnPressed:" destination="fZf-Fb-4DO" eventType="touchUpInside" id="Zw8-Yu-oaj"/>
                                             <action selector="searchBtnPressed:" destination="T0x-jP-JLI" eventType="touchUpInside" id="ney-3d-Mof"/>
                                         </connections>
                                     </button>

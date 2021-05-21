@@ -16,6 +16,7 @@ protocol WeekdaysSelectDelegate: class {
 class WeekdaysSelectVC: MyTableVC {
 
     weak var delegate: WeekdaysSelectDelegate?
+    var key: String? = nil
     var selecteds: [Int] = [Int]()
     var weekdays: [[String: Any]] = Global.instance.weekdays
     

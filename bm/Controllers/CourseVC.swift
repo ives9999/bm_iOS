@@ -15,8 +15,8 @@ class CourseVC: ListVC {
     
     let _searchRows: [[String: Any]] = [
         ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String"],
-        ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":0,"value":"","value_type":"Array"],
-        ["title":"日期","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":[Int](),"value":"","value_type":"Array"],
+        ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":"","value_type":"Array"],
+        ["title":"日期","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int](),"value":"","value_type":"Array"],
         ["title":"開始時間之後","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"不限","segue":TO_SINGLE_SELECT,"sender":[String: Any](),"value":"","value_type":"String"],
         ["title":"結束時間之前","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":END_TIME_KEY,"show":"不限","segue":TO_SINGLE_SELECT,"sender":[String: Any](),"value":"","value_type":"String"]
     ]
@@ -111,46 +111,82 @@ class CourseVC: ListVC {
         } else if tableView == searchTableView {
             let row = searchRows[indexPath.row]
             let segue: String = row["segue"] as! String
-            performSegue(withIdentifier: segue, sender: indexPath)
+            if (segue == TO_CITY) {
+                var key: String? = nil
+                if (row.keyExist(key: "key") && row["key"] != nil) {
+                    key = row["key"] as? String
+                }
+                var selected: String? = nil
+                if (row.keyExist(key: "value") && row["value"] != nil) {
+                    selected = row["value"] as? String
+                }
+                toSelectCity(key: key, selected: selected, _delegate: self)
+            } else if (segue == TO_SELECT_WEEKDAY) {
+                toSelectWeekday()
+            } else {
+                performSegue(withIdentifier: segue, sender: indexPath)
+            }
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == TO_MANAGER_COURSE {
-            let vc: ManagerCourseVC = segue.destination as! ManagerCourseVC
-            vc.manager_token = Member.instance.token
-        } else if segue.identifier == TO_MULTI_SELECT || segue.identifier == TO_SINGLE_SELECT {
-            let indexPath = sender as! IndexPath
-            let row = searchRows[indexPath.row]
-            let title: String = row["title"] as! String
-            let key: String = row["key"] as! String
-            var rows1: [[String: String]] = [[String: String]]()
-            
-            var vc: SelectVC?
-            if segue.identifier == TO_MULTI_SELECT {
-                vc = segue.destination as! MultiSelectVC
-                if key == WEEKDAY_KEY {
-                    rows1 = WEEKDAY.makeSelect()
-                    vc!.rows1 = rows1
-                }
-            } else if segue.identifier == TO_SINGLE_SELECT {
-                vc = segue.destination as! SingleSelectVC
-                if key == START_TIME_KEY || key == END_TIME_KEY {
-                    let times = Global.instance.makeTimes()
-                    for time in times {
-                        rows1.append(["title": time, "value": time+":00"])
+    override func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
+        var row = getDefinedRow(WEEKDAY_KEY)
+        var texts: [String] = [String]()
+        weekdays = res
+        if weekdays.count > 0 {
+            for weekday in weekdays {
+                for gweekday in Global.instance.weekdays {
+                    if weekday == gweekday["value"] as! Int {
+                        let text = gweekday["simple_text"]
+                        texts.append(text! as! String)
+                        break
                     }
-                    vc!.rows1 = rows1
                 }
             }
-            if vc != nil {
-                vc!.title = title
-                vc!.key = key
-                vc!.setDelegate(self)
-            }
+            row["show"] = texts.joined(separator: ",")
+        } else {
+            row["show"] = "全部"
         }
+        replaceRows(TEAM_WEEKDAYS_KEY, row)
+        tableView.reloadData()
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        if segue.identifier == TO_MANAGER_COURSE {
+//            let vc: ManagerCourseVC = segue.destination as! ManagerCourseVC
+//            vc.manager_token = Member.instance.token
+//        } else if segue.identifier == TO_MULTI_SELECT || segue.identifier == TO_SINGLE_SELECT {
+//            let indexPath = sender as! IndexPath
+//            let row = searchRows[indexPath.row]
+//            let title: String = row["title"] as! String
+//            let key: String = row["key"] as! String
+//            var rows1: [[String: String]] = [[String: String]]()
+//
+//            var vc: SelectVC?
+//            if segue.identifier == TO_MULTI_SELECT {
+//                vc = segue.destination as! MultiSelectVC
+//                if key == WEEKDAY_KEY {
+//                    rows1 = WEEKDAY.makeSelect()
+//                    vc!.rows1 = rows1
+//                }
+//            } else if segue.identifier == TO_SINGLE_SELECT {
+//                vc = segue.destination as! SingleSelectVC
+//                if key == START_TIME_KEY || key == END_TIME_KEY {
+//                    let times = Global.instance.makeTimes()
+//                    for time in times {
+//                        rows1.append(["title": time, "value": time+":00"])
+//                    }
+//                    vc!.rows1 = rows1
+//                }
+//            }
+//            if vc != nil {
+//                vc!.title = title
+//                vc!.key = key
+//                vc!.setDelegate(self)
+//            }
+//        }
+//    }
     
     override func layerSubmit(view: UIButton) {
         searchPanelisHidden = true
@@ -206,6 +242,9 @@ class CourseVC: ListVC {
         if key == START_TIME_KEY || key == END_TIME_KEY {
             row["value"] = selected
             show = selected.noSec()
+        } else if (key == CITY_KEY) {
+            row["value"] = selected
+            show = Global.instance.zoneIDToName(Int(selected)!)
         }
         row["show"] = show
         replaceRows(key, row)
