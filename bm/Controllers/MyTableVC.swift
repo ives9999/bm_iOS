@@ -74,10 +74,8 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
-    func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-    }
-    func getDataEnd(success: Bool) {
-    }
+    func getDataStart(page: Int=1, perPage: Int=PERPAGE) {}
+    func getDataEnd(success: Bool) {}
 
     func numberOfSections(in tableView: UITableView) -> Int {
         var count: Int?
@@ -194,8 +192,8 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         return res
     }
     
-    func setIden(item: String, titleField: String) {
-        self.iden = item
-        self.titleField = titleField
-    }
+//    func setIden(item: String, titleField: String) {
+//        self.iden = item
+//        self.titleField = titleField
+//    }
 }
