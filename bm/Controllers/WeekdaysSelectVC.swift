@@ -13,6 +13,12 @@ protocol WeekdaysSelectDelegate: class {
     func setWeekdaysData(res: [Int], indexPath: IndexPath?)
 }
 
+//extension WeekdaysSelectDelegate {
+//    func setWeekdaysData(res: [Int], indexPath: IndexPath?){
+//        let i = 6
+//    }
+//}
+
 class WeekdaysSelectVC: MyTableVC {
 
     weak var delegate: WeekdaysSelectDelegate?

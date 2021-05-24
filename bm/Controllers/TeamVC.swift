@@ -14,25 +14,24 @@ class TeamVC: ListVC {
     
     //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var managerBtn: UIButton!
-    
-    let _searchRows: [[String: Any]] = [
-        ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true],
-        ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
-        ["ch":"球館","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int]()],
-        ["ch":"日期","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":TEAM_WEEKDAYS_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int]()],
-        ["ch":"時段","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":TEAM_PLAY_START_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
-        ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":TEAM_DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String]()]
-        ]
-    
+        
     var mysTable: TeamsTable?
         
     override func viewDidLoad() {
+        
         myTablView = tableView
         dataService = TeamService.instance
         able_type = "team"
         //_type = "team"
         //_titleField = "name"
-        searchRows = _searchRows
+        searchRows = [
+            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true],
+            ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
+            ["ch":"球館","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int]()],
+            ["ch":"日期","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int]()],
+            ["ch":"時段","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":TEAM_PLAY_START_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
+            ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":TEAM_DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String]()]
+            ]
         Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
@@ -101,9 +100,89 @@ class TeamVC: ListVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if mysTable != nil {
-            let myTable = mysTable!.rows[indexPath.row]
-            toShowTeam(token: myTable.token)
+        if tableView == self.tableView {
+            if mysTable != nil {
+                let myTable = mysTable!.rows[indexPath.row]
+                toShowTeam(token: myTable.token)
+            }
+        } else if tableView == searchTableView {
+            let row = searchRows[indexPath.row]
+            
+            var key: String? = nil
+            if (row.keyExist(key: "key") && row["key"] != nil) {
+                key = row["key"] as? String
+            }
+            
+            let segue: String = row["segue"] as! String
+            if (segue == TO_CITY) {
+                var selected: String? = nil
+                if (row.keyExist(key: "value") && row["value"] != nil) {
+                    selected = row["value"] as? String
+                }
+                toSelectCity(key: key, selected: selected, delegate: self)
+            } else if (segue == TO_SELECT_WEEKDAY) {
+                
+                var selecteds: [Int] = [Int]()
+                if (row.keyExist(key: "value") && row["value"] != nil) {
+                    let tmp = row["value"] as? String
+                    let values = tmp?.components(separatedBy: ",")
+                    if (values != nil) {
+                        for value in values! {
+                            if let tmp1 = Int(value) {
+                                selecteds.append(tmp1)
+                            }
+                        }
+                    }
+                }
+                toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
+            } else if (segue == TO_SELECT_TIME) {
+                
+                var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
+                if (key == END_TIME_KEY) {
+                    type = SELECT_TIME_TYPE.play_end
+                }
+                
+                var selecteds: [String] = [String]()
+                if (row.keyExist(key: "value") && row["value"] != nil) {
+                    let selected = row["value"] as? String
+                    if (selected != nil) {
+                        selecteds.append(selected!)
+                    }
+                }
+                
+                toSelectTime(key: key, selecteds: selecteds, input: ["type": type], delegate: self)
+            } else if segue == TO_ARENA {
+    
+                var citys: [Int] = [Int]()
+                var city: Int? = nil
+                var row = getDefinedRow(CITY_KEY)
+                if let value: String = row["value"] as? String {
+                    city = Int(value)
+                    if (city != nil) {
+                        citys.append(city!)
+                    }
+                }
+                
+                if (city == nil) {
+                    warning("請先選擇縣市")
+                } else {
+                
+                    //取得選擇球館的代號
+                    row = getDefinedRow(ARENA_KEY)
+                    var selecteds: [Int] = [Int]()
+                    if let value: String = row["value"] as? String {
+                        let values = value.components(separatedBy: ",")
+                        for value in values {
+                            if let tmp = Int(value) {
+                                selecteds.append(tmp)
+                            }
+                        }
+                    }
+                    toSelectArena(selecteds: selecteds, citys: citys, delegate: self)
+                }
+            } else {
+                performSegue(withIdentifier: segue, sender: indexPath)
+            }
         }
     }
     

@@ -56,6 +56,8 @@ class Table: Codable {
     var tel_show: String = ""
     var mobile_show: String = ""
     
+    init(){}
+    
     required init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)

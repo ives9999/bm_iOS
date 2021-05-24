@@ -178,7 +178,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                     if selectItem.selected_city_ids.count > 0 {
                         selected = String(selectItem.selected_city_ids[0])
                     }
-                    toSelectCity(key: key, selected: selected, _delegate: self)
+                    toSelectCity(key: key, selected: selected, delegate: self)
                 } else if key == AREA_ID_KEY {
                     let cityItem: CityFormItem = getFormItemFromKey(CITY_ID_KEY)! as! CityFormItem
                     if cityItem.value == nil {

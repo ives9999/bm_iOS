@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, WeekdaysSelectDelegate, TimeSelectDelegate, ColorSelectDelegate, StatusSelectDelegate, TextInputDelegate {
+class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource, ColorSelectDelegate, StatusSelectDelegate, TextInputDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -506,7 +506,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         }
     }
     
-    func setWeekdaysData(res: [Int], indexPath: IndexPath? = nil) {
+    override func setWeekdaysData(res: [Int], indexPath: IndexPath? = nil) {
         if indexPath != nil {
             let item = form.formItems[indexPath!.row] as! WeekdayFormItem
             item.weekdays = res
@@ -527,7 +527,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
 //        editTableView.reloadData()
 //    }
     
-    func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+    override func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
         let time = res[0]
         if indexPath != nil {
             let item = form.formItems[indexPath!.row] as! TimeFormItem

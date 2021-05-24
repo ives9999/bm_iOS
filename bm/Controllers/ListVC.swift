@@ -13,7 +13,7 @@ protocol BackDelegate {
     func setBack(params: [String: Any])
 }
 
-class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, BackDelegate, List1CellDelegate {
+class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, DegreeSelectDelegate, BackDelegate, List1CellDelegate {
     
     func setBack(params: [String: Any]) {
         self.params = params
@@ -38,8 +38,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     var searchRows: [[String: Any]] = [[String: Any]]()
     
     var keyword: String = ""
-    var citys: [City] = [City]()
-    var areas: [Area] = [Area]()
+    //var citys: [City] = [City]()
+    //var areas: [Area] = [Area]()
     var air_condition: Bool = false
     var bathroom: Bool = false
     var parking: Bool = false
@@ -107,6 +107,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         
         Global.instance.addSpinner(superView: self.view)
         
+        //會員喜歡列表也一並使用此程式
         if (member_like) {
             MemberService.instance.likelist(able_type: able_type) { (success) in
                 self.jsonData = MemberService.instance.jsonData
@@ -168,7 +169,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var height: CGFloat = 0
         if tableView == searchTableView {
-            height = 30
+            height = 50
         }
         return height
     }
@@ -207,8 +208,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Global.instance.addSpinner(superView: tableView)
-        Global.instance.removeSpinner(superView: tableView)
+        //Global.instance.addSpinner(superView: tableView)
+        //Global.instance.removeSpinner(superView: tableView)
         if tableView == self.tableView {
             let data = lists1[indexPath.row]
             let iden = TO_SHOW
@@ -218,20 +219,20 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
             let row = searchRows[indexPath.row]
             let segue: String = row["segue"] as! String
             if segue.count > 0 {
-                if segue == TO_AREA && citys.count == 0 {
+                if segue == TO_AREA {
                     SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
-                } else if segue == TO_ARENA && citys.count == 0 {
+                } else if segue == TO_ARENA {
                     SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
                 } else if segue == TO_SELECT_TIME {
-                    if row["key"] as! String == TEAM_PLAY_START_KEY {
+                    if row["key"] as! String == START_TIME_KEY {
                         times["type"] = SELECT_TIME_TYPE.play_start
-                        if times[TEAM_PLAY_START_KEY] != nil {
-                            times["time"] = times[TEAM_PLAY_START_KEY]
+                        if times[START_TIME_KEY] != nil {
+                            times["time"] = times[START_TIME_KEY]
                         }
                     } else {
                         times["type"] = SELECT_TIME_TYPE.play_end
-                        if times[TEAM_PLAY_END_KEY] != nil {
-                            times["time"] = times[TEAM_PLAY_END_KEY]
+                        if times[END_TIME_KEY] != nil {
+                            times["time"] = times[END_TIME_KEY]
                         }
                     }
                     performSegue(withIdentifier: segue, sender: row["sender"])
@@ -265,48 +266,36 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
                 mapVC.address = hashMap["address"]!
             }
         } else if segue.identifier == TO_CITY {
-            let citySelectVC: CitySelectVC = segue.destination as! CitySelectVC
-            citySelectVC.delegate = self
-            citySelectVC.source = "search"
-            citySelectVC.type = "simple"
-            citySelectVC.select = "multi"
-            citySelectVC.citys = citys
+//            let citySelectVC: CitySelectVC = segue.destination as! CitySelectVC
+//            citySelectVC.delegate = self
+//            citySelectVC.source = "search"
+//            citySelectVC.type = "simple"
+//            citySelectVC.select = "multi"
+//            citySelectVC.citys = citys
         } else if segue.identifier == TO_AREA {
-            if let areaSelectVC = segue.destination as? AreaSelectVC {
-                var _citys: [Int] = [Int]()
-                //citys.append(City(id: 10, name: ""))
-                for city in citys {
-                    _citys.append(city.id)
-                }
-                areaSelectVC.delegate = self
-                areaSelectVC.source = "search"
-                areaSelectVC.type = "simple"
-                areaSelectVC.select = "multi"
-                areaSelectVC.citys = _citys
-                areaSelectVC.areas = areas
-            }
-        } else if segue.identifier == TO_ARENA {
-            let arenaSelectVC: ArenaSelectVC = segue.destination as! ArenaSelectVC
-            arenaSelectVC.source = "search"
-            arenaSelectVC.type = "simple"
-            arenaSelectVC.select = "multi"
-            var _citys: [Int] = [Int]()
-            for city in citys {
-                _citys.append(city.id)
-            }
-            arenaSelectVC.citys = _citys
-            arenaSelectVC.arenas = arenas
-            arenaSelectVC.delegate = self
+//            if let areaSelectVC = segue.destination as? AreaSelectVC {
+//                var _citys: [Int] = [Int]()
+//                //citys.append(City(id: 10, name: ""))
+//                for city in citys {
+//                    _citys.append(city.id)
+//                }
+//                areaSelectVC.delegate = self
+//                areaSelectVC.source = "search"
+//                areaSelectVC.type = "simple"
+//                areaSelectVC.select = "multi"
+//                areaSelectVC.citys = _citys
+//                areaSelectVC.areas = areas
+//            }
         } else if segue.identifier == TO_SELECT_WEEKDAY {
-            let weekdaysSelectVC: WeekdaysSelectVC = segue.destination as! WeekdaysSelectVC
-            weekdaysSelectVC.source = "search"
-            weekdaysSelectVC.selecteds = weekdays
-            weekdaysSelectVC.delegate = self
+//            let weekdaysSelectVC: WeekdaysSelectVC = segue.destination as! WeekdaysSelectVC
+//            weekdaysSelectVC.source = "search"
+//            weekdaysSelectVC.selecteds = weekdays
+//            weekdaysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
-            let timeSelectVC: TimeSelectVC = segue.destination as! TimeSelectVC
-            timeSelectVC.source = "search"
-            timeSelectVC.input = times
-            timeSelectVC.delegate = self
+//            let timeSelectVC: TimeSelectVC = segue.destination as! TimeSelectVC
+//            timeSelectVC.source = "search"
+//            timeSelectVC.input = times
+//            timeSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_DEGREE {
             let degreeSelectVC: DegreeSelectVC = segue.destination as! DegreeSelectVC
             degreeSelectVC.source = "search"
@@ -314,12 +303,12 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
             degreeSelectVC.delegate = self
         } else if segue.identifier == TO_TEMP_PLAY_LIST {
             let tempPlayVC: TempPlayVC = segue.destination as! TempPlayVC
-            tempPlayVC.citys = citys
-            tempPlayVC.arenas = arenas
-            tempPlayVC.days = weekdays
-            tempPlayVC.times = times
-            tempPlayVC.degrees = degrees
-            tempPlayVC.keyword = keyword
+            //tempPlayVC.citys = citys
+            //tempPlayVC.arenas = arenas
+            //tempPlayVC.days = weekdays
+            //tempPlayVC.times = times
+            //tempPlayVC.degrees = degrees
+            //.keyword = keyword
         } else if segue.identifier == TO_MANAGER {
 //            let managerVC: ManagerVC = segue.destination as! ManagerVC
 //            managerVC.source = _type
@@ -376,61 +365,61 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     func prepareParams(city_type: String="simple") {
-        params.removeAll()
-        params["k"] = keyword
-        var city_ids:[Int] = [Int]()
-        if citys.count > 0 {
-            for city in citys {
-                city_ids.append(city.id)
-            }
-        }
-        if city_ids.count > 0 {
-            params["city_id"] = city_ids
-            params["city_type"] = city_type
-        }
-        var area_ids:[Int] = [Int]()
-        if areas.count > 0 {
-            for area in areas {
-                area_ids.append(area.id)
-            }
-        }
-        if area_ids.count > 0 {
-            params["area_id"] = area_ids
-        }
-        params["air_condition"] = (air_condition) ? 1 : 0
-        params["bathroom"] = (bathroom) ? 1 : 0
-        params["parking"] = (parking) ? 1 : 0
-        
-        if weekdays.count > 0 {
-            params["play_days"] = weekdays
-        }
-        if times.count > 0 {
-            params["use_date_range"] = 1
-            let play_start = times[TEAM_PLAY_START_KEY] as! String
-            let time = play_start + ":00 - 24:00:00"
-            params["play_time"] = time
-        }
-        
-        var arena_ids:[Int] = [Int]()
-        if arenas.count > 0 {
-            for arena in arenas {
-                arena_ids.append(arena.id)
-            }
-        }
-        if arena_ids.count > 0 {
-            params["arena_id"] = arena_ids
-        }
-        
-        var _degrees:[String] = [String]()
-        if degrees.count > 0 {
-            for degree in degrees {
-                let value = degree.value
-                _degrees.append(DEGREE.DBValue(value))
-            }
-        }
-        if _degrees.count > 0 {
-            params["degree"] = _degrees
-        }
+//        params.removeAll()
+//        params["k"] = keyword
+//        var city_ids:[Int] = [Int]()
+//        if citys.count > 0 {
+//            for city in citys {
+//                city_ids.append(city.id)
+//            }
+//        }
+//        if city_ids.count > 0 {
+//            params["city_id"] = city_ids
+//            params["city_type"] = city_type
+//        }
+//        var area_ids:[Int] = [Int]()
+//        if areas.count > 0 {
+//            for area in areas {
+//                area_ids.append(area.id)
+//            }
+//        }
+//        if area_ids.count > 0 {
+//            params["area_id"] = area_ids
+//        }
+//        params["air_condition"] = (air_condition) ? 1 : 0
+//        params["bathroom"] = (bathroom) ? 1 : 0
+//        params["parking"] = (parking) ? 1 : 0
+//
+//        if weekdays.count > 0 {
+//            params["play_days"] = weekdays
+//        }
+//        if times.count > 0 {
+//            params["use_date_range"] = 1
+//            let play_start = times[START_TIME_KEY] as! String
+//            let time = play_start + ":00 - 24:00:00"
+//            params["play_time"] = time
+//        }
+//
+//        var arena_ids:[Int] = [Int]()
+//        if arenas.count > 0 {
+//            for arena in arenas {
+//                arena_ids.append(arena.id)
+//            }
+//        }
+//        if arena_ids.count > 0 {
+//            params["arena_id"] = arena_ids
+//        }
+//
+//        var _degrees:[String] = [String]()
+//        if degrees.count > 0 {
+//            for degree in degrees {
+//                let value = degree.value
+//                _degrees.append(DEGREE.DBValue(value))
+//            }
+//        }
+//        if _degrees.count > 0 {
+//            params["degree"] = _degrees
+//        }
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {
@@ -466,23 +455,26 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         //print(row)
         
         let key = row["key"] as! String
-        switch key {
-        case CITY_KEY:
-            citys.removeAll()
-        case AREA_KEY:
-            areas.removeAll()
-        case TEAM_WEEKDAYS_KEY:
-            weekdays.removeAll()
-        case TEAM_PLAY_START_KEY:
-            times.removeAll()
-        case ARENA_KEY:
-            arenas.removeAll()
-        case TEAM_DEGREE_KEY:
-            degrees.removeAll()
-        default:
-            _ = 1
-        }
+//        switch key {
+//        case CITY_KEY:
+//            citys.removeAll()
+//        case AREA_KEY:
+//            areas.removeAll()
+//        case WEEKDAY_KEY:
+//            weekdays.removeAll()
+//        case START_TIME_KEY:
+//            times.removeAll()
+//        case END_TIME_KEY:
+//            times.removeAll()
+//        case ARENA_KEY:
+//            arenas.removeAll()
+//        case TEAM_DEGREE_KEY:
+//            degrees.removeAll()
+//        default:
+//            _ = 1
+//        }
         row["show"] = "全部"
+        row["value"] = ""
         replaceRows(key, row)
     }
     
@@ -492,9 +484,9 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         //print(res)
         var row = getDefinedRow(CITY_KEY)
         var texts: [String] = [String]()
-        citys = res
-        if citys.count > 0 {
-            for city in citys {
+        //citys = res
+        if res.count > 0 {
+            for city in res {
                 let text = city.name
                 texts.append(text)
             }
@@ -510,9 +502,9 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         //print(res)
         var row = getDefinedRow(AREA_KEY)
         var texts: [String] = [String]()
-        areas = res
-        if areas.count > 0 {
-            for area in areas {
+        //areas = res
+        if res.count > 0 {
+            for area in res {
                 let text = area.name
                 texts.append(text)
             }
@@ -524,20 +516,19 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         searchTableView.reloadData()
     }
     
-    func setArenaData(id: Int, name: String) {
-        //not use
-    }
-    func setArenasData(res: [Arena]) {
-        //print(res)
+    //選擇球館後
+    override func setArenaData(res: [ArenaTable]) {
         var row = getDefinedRow(ARENA_KEY)
-        var texts: [String] = [String]()
-        arenas = res
-        if arenas.count > 0 {
-            for arena in arenas {
-                let text = arena.title
-                texts.append(text)
+        var names: [String] = [String]()
+        var ids: [String] = [String]()
+        //areas = res
+        if res.count > 0 {
+            for arenaTable in res {
+                names.append(arenaTable.name)
+                ids.append(String(arenaTable.id))
             }
-            row["show"] = texts.joined(separator: ",")
+            row["show"] = names.joined(separator: ",")
+            row["value"] = ids.joined(separator: ",")
         } else {
             row["show"] = "全部"
         }
@@ -545,12 +536,48 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         searchTableView.reloadData()
     }
     
-    func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
-        var row = getDefinedRow(TEAM_WEEKDAYS_KEY)
+//    func setArenasData(res: [Arena]) {
+//        //print(res)
+//        var row = getDefinedRow(ARENA_KEY)
+//        var texts: [String] = [String]()
+//        arenas = res
+//        if arenas.count > 0 {
+//            for arena in arenas {
+//                let text = arena.title
+//                texts.append(text)
+//            }
+//            row["show"] = texts.joined(separator: ",")
+//        } else {
+//            row["show"] = "全部"
+//        }
+//        replaceRows(ARENA_KEY, row)
+//        searchTableView.reloadData()
+//    }
+    
+    //city select return this
+    override func singleSelected(key: String, selected: String) {
+        var row = getDefinedRow(key)
+        var show = ""
+        if key == START_TIME_KEY || key == END_TIME_KEY {
+            row["value"] = selected
+            show = selected.noSec()
+        } else if (key == CITY_KEY) {
+            row["value"] = selected
+            show = Global.instance.zoneIDToName(Int(selected)!)
+        }
+        row["show"] = show
+        replaceRows(key, row)
+        searchTableView.reloadData()
+    }
+    
+    override func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
+        var row = getDefinedRow(WEEKDAY_KEY)
         var texts: [String] = [String]()
+        var values: [String] = [String]()
         weekdays = res
         if weekdays.count > 0 {
             for day in weekdays {
+                values.append(String(day))
                 for gday in Global.instance.weekdays {
                     if day == gday["value"] as! Int {
                         let text = gday["simple_text"]
@@ -560,14 +587,16 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
                 }
             }
             row["show"] = texts.joined(separator: ",")
+        
+            row["value"] = values.joined(separator: ",")
         } else {
             row["show"] = "全部"
         }
-        replaceRows(TEAM_WEEKDAYS_KEY, row)
+        replaceRows(WEEKDAY_KEY, row)
         searchTableView.reloadData()
     }
     
-    func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+    override func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
         let time = res[0]
         var row: [String: Any]
         var text = ""
@@ -578,16 +607,18 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         }
         switch type {
         case SELECT_TIME_TYPE.play_start:
-            times[TEAM_PLAY_START_KEY] = time
-            row = getDefinedRow(TEAM_PLAY_START_KEY)
+            times[START_TIME_KEY] = time
+            row = getDefinedRow(START_TIME_KEY)
             row["show"] = text
-            replaceRows(TEAM_PLAY_START_KEY, row)
+            row["value"] = text
+            replaceRows(START_TIME_KEY, row)
             break
         case SELECT_TIME_TYPE.play_end:
-            times[TEAM_PLAY_END_KEY] = time
-            row = getDefinedRow(TEAM_PLAY_END_KEY)
+            times[END_TIME_KEY] = time
+            row = getDefinedRow(END_TIME_KEY)
             row["show"] = text
-            replaceRows(TEAM_PLAY_END_KEY, row)
+            row["value"] = text
+            replaceRows(END_TIME_KEY, row)
             break
         }
         searchTableView.reloadData()
@@ -612,8 +643,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     func showMap(indexPath: IndexPath) {}
     
     func searchCity(indexPath: IndexPath) {
-        let row = lists1[indexPath.row]
-        var key = CITY_KEY
+        //let row = lists1[indexPath.row]
+        //var key = CITY_KEY
 //        if _type == "coach" {
 //            key = CITYS_KEY
 //        }
@@ -623,7 +654,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
 //        citys.removeAll()
 //        citys.append(City(id: city_id, name: ""))
 //        prepareParams(city_type: "all")
-        refresh()
+        //refresh()
     }
     
     func getDefinedRow(_ key: String) -> [String: Any] {
@@ -685,7 +716,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     func cellCity(row: Table) {
-        let i = 6
+        //let i = 6
     }
     
     func cellLike(row: Table) {
@@ -702,31 +733,5 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     
     func cellToLogin() {
         toLogin()
-    }
-    
-    func toSelectWeekday(key: String? = nil, selecteds: [Int]? = nil) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-OKL-6q-hzR") as? WeekdaysSelectVC {
-                if key != nil {
-                    viewController.key = key
-                }
-                if selecteds != nil {
-                    viewController.selecteds = selecteds!
-                }
-                viewController.delegate = self
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-OKL-6q-hzR") as! WeekdaysSelectVC
-            if key != nil {
-                viewController.key = key
-            }
-            if selecteds != nil {
-                viewController.selecteds = selecteds!
-            }
-            viewController.delegate = self
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
     }
 }

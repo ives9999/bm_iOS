@@ -1341,6 +1341,7 @@ class DataService {
                 }
                 let json = JSON(data)
                 //print(json)
+                self.citysandareas.removeAll()
                 for (city_id, item) in json {
                     let id: Int = item["id"].intValue
                     let city_name: String = item["name"].stringValue

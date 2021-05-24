@@ -13,13 +13,7 @@ class CourseVC: ListVC {
     
     @IBOutlet weak var managerBtn: UIButton!
     
-    let _searchRows: [[String: Any]] = [
-        ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String"],
-        ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":"","value_type":"Array"],
-        ["title":"日期","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int](),"value":"","value_type":"Array"],
-        ["title":"開始時間之後","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"不限","segue":TO_SINGLE_SELECT,"sender":[String: Any](),"value":"","value_type":"String"],
-        ["title":"結束時間之前","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":END_TIME_KEY,"show":"不限","segue":TO_SINGLE_SELECT,"sender":[String: Any](),"value":"","value_type":"String"]
-    ]
+    //let _searchRows: [[String: Any]] =
     
     var mysTable: CoursesTable?
     
@@ -30,7 +24,13 @@ class CourseVC: ListVC {
         dataService = CourseService.instance
         //_type = "course"
         //_titleField = "title"
-        searchRows = _searchRows
+        searchRows = [
+            ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String"],
+            ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":"","value_type":"Array"],
+            ["title":"星期幾","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int](),"value":"","value_type":"Array"],
+            ["title":"開始時間","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"不限","segue":TO_SELECT_TIME,"sender":[String: Any](),"value":"","value_type":"String"],
+            ["title":"結束時間","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":END_TIME_KEY,"show":"不限","segue":TO_SELECT_TIME,"sender":[String: Any](),"value":"","value_type":"String"]
+        ]
         Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
@@ -107,49 +107,79 @@ class CourseVC: ListVC {
                 let myTable = mysTable!.rows[indexPath.row]
                 toShowCourse(token: myTable.token)
             }
-            
         } else if tableView == searchTableView {
             let row = searchRows[indexPath.row]
+            
+            var key: String? = nil
+            if (row.keyExist(key: "key") && row["key"] != nil) {
+                key = row["key"] as? String
+            }
+            
             let segue: String = row["segue"] as! String
             if (segue == TO_CITY) {
-                var key: String? = nil
-                if (row.keyExist(key: "key") && row["key"] != nil) {
-                    key = row["key"] as? String
-                }
                 var selected: String? = nil
                 if (row.keyExist(key: "value") && row["value"] != nil) {
                     selected = row["value"] as? String
                 }
-                toSelectCity(key: key, selected: selected, _delegate: self)
+                toSelectCity(key: key, selected: selected, delegate: self)
             } else if (segue == TO_SELECT_WEEKDAY) {
-                toSelectWeekday()
+                
+                var selecteds: [Int] = [Int]()
+                if (row.keyExist(key: "value") && row["value"] != nil) {
+                    let tmp = row["value"] as? String
+                    let values = tmp?.components(separatedBy: ",")
+                    if (values != nil) {
+                        for value in values! {
+                            if let tmp1 = Int(value) {
+                                selecteds.append(tmp1)
+                            }
+                        }
+                    }
+                }
+                toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
+            } else if (segue == TO_SELECT_TIME) {
+                
+                var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
+                if (key == END_TIME_KEY) {
+                    type = SELECT_TIME_TYPE.play_end
+                }
+                
+                var selecteds: [String] = [String]()
+                if (row.keyExist(key: "value") && row["value"] != nil) {
+                    let selected = row["value"] as? String
+                    if (selected != nil) {
+                        selecteds.append(selected!)
+                    }
+                }
+                
+                toSelectTime(key: key, selecteds: selecteds, input: ["type": type], delegate: self)
             } else {
                 performSegue(withIdentifier: segue, sender: indexPath)
             }
         }
     }
     
-    override func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
-        var row = getDefinedRow(WEEKDAY_KEY)
-        var texts: [String] = [String]()
-        weekdays = res
-        if weekdays.count > 0 {
-            for weekday in weekdays {
-                for gweekday in Global.instance.weekdays {
-                    if weekday == gweekday["value"] as! Int {
-                        let text = gweekday["simple_text"]
-                        texts.append(text! as! String)
-                        break
-                    }
-                }
-            }
-            row["show"] = texts.joined(separator: ",")
-        } else {
-            row["show"] = "全部"
-        }
-        replaceRows(TEAM_WEEKDAYS_KEY, row)
-        tableView.reloadData()
-    }
+//    func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
+//        var row = getDefinedRow(WEEKDAY_KEY)
+//        var texts: [String] = [String]()
+//        weekdays = res
+//        if weekdays.count > 0 {
+//            for weekday in weekdays {
+//                for gweekday in Global.instance.weekdays {
+//                    if weekday == gweekday["value"] as! Int {
+//                        let text = gweekday["simple_text"]
+//                        texts.append(text! as! String)
+//                        break
+//                    }
+//                }
+//            }
+//            row["show"] = texts.joined(separator: ",")
+//        } else {
+//            row["show"] = "全部"
+//        }
+//        replaceRows(TEAM_WEEKDAYS_KEY, row)
+//        tableView.reloadData()
+//    }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //
@@ -188,14 +218,14 @@ class CourseVC: ListVC {
 //        }
 //    }
     
-    override func layerSubmit(view: UIButton) {
-        searchPanelisHidden = true
-        unmask()
-        prepareParams()
-        refresh()
-    }
+//    override func layerSubmit(view: UIButton) {
+//        searchPanelisHidden = true
+//        unmask()
+//        prepareParams()
+//        refresh()
+//    }
     
-    func prepareParams() {
+    override func prepareParams(city_type: String) {
         params1 = [String: Any]()
         for row in searchRows {
             let key: String = row["key"] as! String
@@ -235,54 +265,39 @@ class CourseVC: ListVC {
             unmask()
         }
     }
-
-    override func singleSelected(key: String, selected: String) {
-        var row = getDefinedRow(key)
-        var show = ""
-        if key == START_TIME_KEY || key == END_TIME_KEY {
-            row["value"] = selected
-            show = selected.noSec()
-        } else if (key == CITY_KEY) {
-            row["value"] = selected
-            show = Global.instance.zoneIDToName(Int(selected)!)
-        }
-        row["show"] = show
-        replaceRows(key, row)
-        searchTableView.reloadData()
-    }
-    
-    override func multiSelected(key: String, selecteds: [String]) {
-        var row = getDefinedRow(key)
-        var show = ""
-        if key == WEEKDAY_KEY {
-            var texts: [String] = [String]()
-            for selected in selecteds {
-                let text = WEEKDAY.intToString(Int(selected)!)
-                texts.append(text)
-            }
-            show = texts.joined(separator: ",")
-        } else if key == CITY_KEY {
-            var citys: [[String: String]] = [[String: String]]()
-            if session.array(forKey: "citys") != nil {
-                citys = (session.array(forKey: "citys") as! [[String: String]])
-                //print(citys)
-            }
-            var texts: [String] = [String]()
-            for selected in selecteds {
-                for city in citys {
-                    if city["value"] == selected {
-                        let text = city["title"]!
-                        texts.append(text)
-                        break
-                    }
-                }
-            }
-            show = texts.joined(separator: ",")
-        }
-        row["show"] = show
-        row["value"] = selecteds.joined(separator: ",")
-        replaceRows(key, row)
-        searchTableView.reloadData()
-    }
+//
+//    override func multiSelected(key: String, selecteds: [String]) {
+//        var row = getDefinedRow(key)
+//        var show = ""
+//        if key == WEEKDAY_KEY {
+//            var texts: [String] = [String]()
+//            for selected in selecteds {
+//                let text = WEEKDAY.intToString(Int(selected)!)
+//                texts.append(text)
+//            }
+//            show = texts.joined(separator: ",")
+//        } else if key == CITY_KEY {
+//            var citys: [[String: String]] = [[String: String]]()
+//            if session.array(forKey: "citys") != nil {
+//                citys = (session.array(forKey: "citys") as! [[String: String]])
+//                //print(citys)
+//            }
+//            var texts: [String] = [String]()
+//            for selected in selecteds {
+//                for city in citys {
+//                    if city["value"] == selected {
+//                        let text = city["title"]!
+//                        texts.append(text)
+//                        break
+//                    }
+//                }
+//            }
+//            show = texts.joined(separator: ",")
+//        }
+//        row["show"] = show
+//        row["value"] = selecteds.joined(separator: ",")
+//        replaceRows(key, row)
+//        searchTableView.reloadData()
+//    }
 }
 

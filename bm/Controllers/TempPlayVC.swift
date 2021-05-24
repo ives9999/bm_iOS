@@ -103,60 +103,60 @@ class TempPlayVC: ListVC {
 //        }
 //    }
     
-    override func prepareParams(city_type: String="simple") {
-        var city_ids:[Int] = [Int]()
-        if citys.count > 0 {
-            for city in citys {
-                city_ids.append(city.id)
-            }
-        }
-        if city_ids.count > 0 {
-            params["city_id"] = city_ids
-            params["city_type"] = city_type
-        }
-        if days.count > 0 {
-            params["play_days"] = days
-        }
-        if times.count > 0 {
-            params["use_date_range"] = 1
-            let play_start = times[TEAM_PLAY_START_KEY] as! String
-            let time = play_start + ":00 - 24:00:00"
-            params["play_time"] = time
-        }
-        
-        var arena_ids:[Int] = [Int]()
-        if arenas.count > 0 {
-            for arena in arenas {
-                arena_ids.append(arena.id)
-            }
-        }
-        if arena_ids.count > 0 {
-            params["arena_id"] = arena_ids
-        }
-        
-        var _degrees:[String] = [String]()
-        if degrees.count > 0 {
-            for degree in degrees {
-                let value = degree.value
-                _degrees.append(DEGREE.DBValue(value))
-            }
-        }
-        if _degrees.count > 0 {
-            params["degree"] = _degrees
-        }
-        
-        if keyword.count > 0 {
-            params["k"] = keyword
-        }
-    }
+//    override func prepareParams(city_type: String="simple") {
+//        var city_ids:[Int] = [Int]()
+//        if citys.count > 0 {
+//            for city in citys {
+//                city_ids.append(city.id)
+//            }
+//        }
+//        if city_ids.count > 0 {
+//            params["city_id"] = city_ids
+//            params["city_type"] = city_type
+//        }
+//        if days.count > 0 {
+//            params["play_days"] = days
+//        }
+//        if times.count > 0 {
+//            params["use_date_range"] = 1
+//            let play_start = times[TEAM_PLAY_START_KEY] as! String
+//            let time = play_start + ":00 - 24:00:00"
+//            params["play_time"] = time
+//        }
+//
+//        var arena_ids:[Int] = [Int]()
+//        if arenas.count > 0 {
+//            for arena in arenas {
+//                arena_ids.append(arena.id)
+//            }
+//        }
+//        if arena_ids.count > 0 {
+//            params["arena_id"] = arena_ids
+//        }
+//
+//        var _degrees:[String] = [String]()
+//        if degrees.count > 0 {
+//            for degree in degrees {
+//                let value = degree.value
+//                _degrees.append(DEGREE.DBValue(value))
+//            }
+//        }
+//        if _degrees.count > 0 {
+//            params["degree"] = _degrees
+//        }
+//
+//        if keyword.count > 0 {
+//            params["k"] = keyword
+//        }
+//    }
     
     func resetParams() {
-        citys.removeAll()
-        arenas.removeAll()
-        days.removeAll()
-        degrees.removeAll()
-        times.removeAll()
-        keyword = ""
+//        citys.removeAll()
+//        arenas.removeAll()
+//        days.removeAll()
+//        degrees.removeAll()
+//        times.removeAll()
+//        keyword = ""
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

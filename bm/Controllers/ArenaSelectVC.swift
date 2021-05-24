@@ -10,13 +10,17 @@ import UIKit
 import UIColor_Hex_Swift
 
 protocol ArenaSelectDelegate: class {
-    func setArenaData(id: Int, name: String)
-    func setArenasData(res: [Arena])
+    func setArenaData(res: [ArenaTable])
+    //func setArenasData(res: [Arena])
 }
 
 class ArenaSelectVC: MyTableVC {
     
-    var arenas: [Arena] = [Arena]()
+    var arenas: [ArenaTable] = [ArenaTable]()
+    var key: String? = nil
+    
+    //已經選擇球館的id
+    var selecteds: [Int] = [Int]()
     
     //要顯示球館的縣市編號
     var citys: [Int] = [Int]()
@@ -95,19 +99,19 @@ class ArenaSelectVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         let city_id = citys[section]
-        let item = citysandarenas[city_id] as! [String: Any]
+        let item = citysandarenas[city_id]!
         return (item["name"] as! String)
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SuperCell
-        let arena = getArena(indexPath)
+        let arenaTable = getArena(indexPath)
     
-        cell.textLabel!.text = arena.title
+        cell.textLabel!.text = arenaTable.name
         var isSelected = false
-        for _arena in arenas {
-            if _arena.id == arena.id {
+        for selected in selecteds {
+            if arenaTable.id == selected {
                 isSelected = true
                 break
             }
@@ -122,14 +126,14 @@ class ArenaSelectVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Global.instance.addSpinner(superView: view)
-        Global.instance.removeSpinner(superView: view)
+        //Global.instance.addSpinner(superView: view)
+        //Global.instance.removeSpinner(superView: view)
         
-        let arena: Arena = getArena(indexPath)
-        delegate?.setArenaData(id: arena.id, name: arena.title)
-        if select == "just one" {
-            back()
-        }
+        let arena: ArenaTable = getArena(indexPath)
+        //delegate?.setArenaData(id: arena.id, name: arena.title)
+//        if select == "just one" {
+//            back()
+//        }
         let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         if cell.accessoryType == .checkmark {//not select
             unSetSelectedStyle(cell)
@@ -138,14 +142,27 @@ class ArenaSelectVC: MyTableVC {
             setSelectedStyle(cell)
             arenas.append(arena)
         }
+        
+        submit()
     }
     
-    private func getArena(_ indexPath: IndexPath)-> Arena {
+    private func getArena(_ indexPath: IndexPath)-> ArenaTable {
         let city_id = citys[indexPath.section]
         let rows = citysandarenas[city_id]!["rows"] as! [[String: Any]]
         let row = rows[indexPath.row]
         
-        return Arena(id: row["id"] as! Int, name: row["name"] as! String)
+        let arenaTable: ArenaTable = ArenaTable()
+        if let id: Int = row["id"] as? Int {
+            arenaTable.id = id
+        }
+        
+        if let name: String = row["name"] as? String {
+            arenaTable.name = name
+        }
+        
+        return arenaTable
+        
+        //return ArenaTable(id: row["id"] as! Int, name: row["name"] as! String)
     }
     
     func setSelectedStyle(_ cell: UITableViewCell) {
@@ -159,8 +176,14 @@ class ArenaSelectVC: MyTableVC {
         cell.tintColor = UIColor.white
     }
     @IBAction func submit() {
-        delegate?.setArenasData(res: arenas)
-        prev()
+        
+        if (delegate != nil) {
+            delegate!.setArenaData(res: arenas)
+            prev()
+        } else {
+            warning("沒有傳送delegate，請洽管理員，或重試")
+        }
+        //delegate?.setArenasData(res: arenas)
     }
     
     @IBAction func cancel() {

@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, EditCellDelegate {
+class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, DegreeSelectDelegate, EditCellDelegate {
     
     @IBOutlet weak var submitBtn: UIButton!
     
@@ -180,7 +180,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        var destinationNavigationController: UINavigationController?
+        //var destinationNavigationController: UINavigationController?
         if segue.identifier == TO_CITY {
             let citySelectVC: CitySelectVC = segue.destination as! CitySelectVC
             
@@ -190,17 +190,17 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
             citySelectVC.select = "multi"
             citySelectVC.citys = citys
         } else if segue.identifier == TO_ARENA {
-            let arenaSelectVC: ArenaSelectVC = segue.destination as! ArenaSelectVC
-            arenaSelectVC.source = "search"
-            arenaSelectVC.type = "simple"
-            arenaSelectVC.select = "multi"
-            var _citys: [Int] = [Int]()
-            for city in citys {
-                _citys.append(city.id)
-            }
-            arenaSelectVC.citys = _citys
-            arenaSelectVC.arenas = arenas
-            arenaSelectVC.delegate = self
+//            let arenaSelectVC: ArenaSelectVC = segue.destination as! ArenaSelectVC
+//            arenaSelectVC.source = "search"
+//            arenaSelectVC.type = "simple"
+//            arenaSelectVC.select = "multi"
+//            var _citys: [Int] = [Int]()
+//            for city in citys {
+//                _citys.append(city.id)
+//            }
+//            arenaSelectVC.citys = _citys
+//            arenaSelectVC.arenas = arenas
+//            arenaSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_WEEKDAY {
             let weekdaysSelectVC: WeekdaysSelectVC = segue.destination as! WeekdaysSelectVC
             weekdaysSelectVC.source = "search"
@@ -217,13 +217,13 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
             degreeSelectVC.degrees = degrees
             degreeSelectVC.delegate = self
         } else if segue.identifier == TO_TEMP_PLAY_LIST {
-            let tempPlayVC: TempPlayVC = segue.destination as! TempPlayVC
-            tempPlayVC.citys = citys
-            tempPlayVC.arenas = arenas
-            tempPlayVC.days = weekdays
-            tempPlayVC.times = times
-            tempPlayVC.degrees = degrees
-            tempPlayVC.keyword = keyword
+            //let tempPlayVC: TempPlayVC = segue.destination as! TempPlayVC
+//            tempPlayVC.citys = citys
+//            tempPlayVC.arenas = arenas
+//            tempPlayVC.days = weekdays
+//            tempPlayVC.times = times
+//            tempPlayVC.degrees = degrees
+//            tempPlayVC.keyword = keyword
         }
     }
     
@@ -248,7 +248,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         tableView.reloadData()
     }
     
-    func setArenaData(id: Int, name: String) {
+    override func setArenaData(res: [ArenaTable]) {
         //not use
     }
     func setArenasData(res: [Arena]) {
@@ -269,7 +269,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         tableView.reloadData()
     }
     
-    func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
+    override func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
         var row = getDefinedRow(TEAM_WEEKDAYS_KEY)
         var texts: [String] = [String]()
         weekdays = res
@@ -291,7 +291,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, A
         tableView.reloadData()
     }
     
-    func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+    override func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
         let time = res[0]
         var row: [String: Any]
         var text = ""

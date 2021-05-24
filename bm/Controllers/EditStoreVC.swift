@@ -102,7 +102,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                     if selectItem.selected_city_ids.count > 0 {
                         selected = String(selectItem.selected_city_ids[0])
                     }
-                    toSelectCity(key: key, selected: selected, _delegate: self)
+                    toSelectCity(key: key, selected: selected, delegate: self)
                     
                     //let selecteds: [String] = [String]()
                     //toSelectCitys(key: key, selecteds: selecteds, _delegate: self)

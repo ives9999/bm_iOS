@@ -276,25 +276,25 @@ class StoreVC: ListVC {
         //print(row)
         
         let key = row["key"] as! String
-        switch key {
-        case CITY_KEY:
-            citys.removeAll()
-            if session.array(forKey: "citys") != nil {
-                session.removeObject(forKey: "citys")
-            }
-        case AREA_KEY:
-            areas.removeAll()
-        case TEAM_WEEKDAYS_KEY:
-            weekdays.removeAll()
-        case TEAM_PLAY_START_KEY:
-            times.removeAll()
-        case ARENA_KEY:
-            arenas.removeAll()
-        case TEAM_DEGREE_KEY:
-            degrees.removeAll()
-        default:
-            _ = 1
-        }
+//        switch key {
+//        case CITY_KEY:
+//            citys.removeAll()
+//            if session.array(forKey: "citys") != nil {
+//                session.removeObject(forKey: "citys")
+//            }
+//        case AREA_KEY:
+//            areas.removeAll()
+//        case TEAM_WEEKDAYS_KEY:
+//            weekdays.removeAll()
+//        case TEAM_PLAY_START_KEY:
+//            times.removeAll()
+//        case ARENA_KEY:
+//            arenas.removeAll()
+//        case TEAM_DEGREE_KEY:
+//            degrees.removeAll()
+//        default:
+//            _ = 1
+//        }
         
         row["value"] = ""
         row["show"] = "全部"

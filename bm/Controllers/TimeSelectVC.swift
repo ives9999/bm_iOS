@@ -16,7 +16,9 @@ protocol TimeSelectDelegate: class {
 class TimeSelectVC: MyTableVC {
     
     @IBOutlet weak var titleLbl: SuperLabel!
+    
     //input["type":PLAY_START,"time":time]
+    var key: String? = nil
     var input: [String: Any] = [String: Any]()
     var selecteds: [String] = [String]()
     
@@ -89,18 +91,20 @@ class TimeSelectVC: MyTableVC {
 
         let time: String = allTimes[indexPath.row]
         cell.textLabel?.text = time
-        var selectedTime: String = ""
-        if input["time"] != nil {
-            selectedTime = input["time"] as! String
-        }
-        if time == selectedTime {
-            cell.textLabel?.textColor = UIColor(MY_GREEN)
-            cell.accessoryType = .checkmark
-            cell.tintColor = UIColor(MY_GREEN)
-        } else {
-            cell.textLabel?.textColor = UIColor.white
-            cell.accessoryType = .none
-            cell.tintColor = UIColor.white
+//        var selectedTime: String = ""
+//        if input["time"] != nil {
+//            selectedTime = input["time"] as! String
+//        }
+        for selected in selecteds {
+            if time == selected {
+                cell.textLabel?.textColor = UIColor(MY_GREEN)
+                cell.accessoryType = .checkmark
+                cell.tintColor = UIColor(MY_GREEN)
+            } else {
+                cell.textLabel?.textColor = UIColor.white
+                cell.accessoryType = .none
+                cell.tintColor = UIColor.white
+            }
         }
 
         return cell

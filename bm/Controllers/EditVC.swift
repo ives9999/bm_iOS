@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, ArenaSelectDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate, EditCellDelegate {
+class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate, EditCellDelegate {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -170,17 +170,17 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                 citySelectVC.citys = [City(id: tmp, name: "")]
             }
         } else if segue.identifier == TO_ARENA {
-            let arenaSelectVC: ArenaSelectVC = segue.destination as! ArenaSelectVC
-            arenaSelectVC.delegate = self
-            let tmp = sender as! [String: Int]
-            if tmp["city_id"] != nil {
-                let citys: [Int] = [tmp["city_id"]!]
-                arenaSelectVC.citys = citys
-            }
-            if tmp["arena_id"] != nil {
-                let arenas: [Arena] = [Arena(id:tmp["arena_id"]!, name:"")]
-                arenaSelectVC.arenas = arenas
-            }
+//            let arenaSelectVC: ArenaSelectVC = segue.destination as! ArenaSelectVC
+//            arenaSelectVC.delegate = self
+//            let tmp = sender as! [String: Int]
+//            if tmp["city_id"] != nil {
+//                let citys: [Int] = [tmp["city_id"]!]
+//                arenaSelectVC.citys = citys
+//            }
+//            if tmp["arena_id"] != nil {
+//                let arenas: [Arena] = [Arena(id:tmp["arena_id"]!, name:"")]
+//                arenaSelectVC.arenas = arenas
+//            }
         } else if segue.identifier == TO_SELECT_WEEKDAY {
             let weekdaysSelectVC: WeekdaysSelectVC = segue.destination as! WeekdaysSelectVC
             weekdaysSelectVC.selecteds = (sender as! [Int])
@@ -294,20 +294,20 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
     {
         //not use
     }
-    func setArenaData(id: Int, name: String) {
-        let arena_id: Int = model.data[ARENA_KEY]!["value"] as! Int
-        if arena_id != id {
-            let arena = Arena(id: id, name: name)
-            model.updateArena(arena)
-            model.data[ARENA_KEY]!["change"] = true
-            self.tableView.reloadData()
-        }
+    override func setArenaData(res: [ArenaTable]) {
+//        let arena_id: Int = model.data[ARENA_KEY]!["value"] as! Int
+//        if arena_id != id {
+//            let arena = Arena(id: id, name: name)
+//            model.updateArena(arena)
+//            model.data[ARENA_KEY]!["change"] = true
+//            self.tableView.reloadData()
+//        }
     }
     func setArenasData(res: [Arena])
     {
         //not use
     }
-    func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
+    override func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
         let days: [Int] = model.data[TEAM_WEEKDAYS_KEY]!["value"] as! [Int]
         if !res.containsSameElements(as: days) {
             model.updateWeekdays(res)
@@ -315,7 +315,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             self.tableView.reloadData()
         }
     }
-    func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+    override func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
         let time = res[0]
         switch type {
         case SELECT_TIME_TYPE.play_start:
