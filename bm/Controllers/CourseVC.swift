@@ -124,18 +124,7 @@ class CourseVC: ListVC {
                 toSelectCity(key: key, selected: selected, delegate: self)
             } else if (segue == TO_SELECT_WEEKDAY) {
                 
-                var selecteds: [Int] = [Int]()
-                if (row.keyExist(key: "value") && row["value"] != nil) {
-                    let tmp = row["value"] as? String
-                    let values = tmp?.components(separatedBy: ",")
-                    if (values != nil) {
-                        for value in values! {
-                            if let tmp1 = Int(value) {
-                                selecteds.append(tmp1)
-                            }
-                        }
-                    }
-                }
+                let selecteds: [Int] = valueToArray(t: Int.self, row: row)
                 toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
             } else if (segue == TO_SELECT_TIME) {
                 
@@ -144,14 +133,7 @@ class CourseVC: ListVC {
                     type = SELECT_TIME_TYPE.play_end
                 }
                 
-                var selecteds: [String] = [String]()
-                if (row.keyExist(key: "value") && row["value"] != nil) {
-                    let selected = row["value"] as? String
-                    if (selected != nil) {
-                        selecteds.append(selected!)
-                    }
-                }
-                
+                let selecteds: [String] = valueToArray(t: String.self, row: row)
                 toSelectTime(key: key, selecteds: selecteds, input: ["type": type], delegate: self)
             } else {
                 performSegue(withIdentifier: segue, sender: indexPath)

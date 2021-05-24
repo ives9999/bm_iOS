@@ -675,6 +675,61 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         }
     }
     
+    //存在row的value只是單純的文字，陣列值使用","來區隔，例如"1,2,3"，但當要傳回選擇頁面時，必須轉回陣列[1,2,3]
+    func valueToArray<T>(t:T.Type, row: [String: Any])-> [T] {
+        
+        var selecteds: [T] = [T]()
+        //print(t)
+        var type: String = "String"
+        if (t.self == Int.self) {
+            type = "Int"
+        }
+        if let value: String = row["value"] as? String {
+            let values = value.components(separatedBy: ",")
+            for value in values {
+                if (type == "Int") {
+                    if let tmp = Int(value) {
+                        selecteds.append(tmp as! T)
+                    }
+                } else if (type == "String") {
+                    if let tmp = value as? T {
+                        selecteds.append(tmp)
+                    }
+                }
+            }
+        }
+        
+        return selecteds
+    }
+    
+    func arrayToValue<T>(t: T.Type, res: [T])-> String {
+        
+        var value: String = ""
+        
+        var type: String = "String"
+        if (t.self == Int.self) {
+            type = "Int"
+        }
+        
+        var values: [String] = [String]()
+        if (res.count > 0) {
+            for one in res {
+                if (type == "Int") {
+                    if let tmp = String(one) {
+                        values.append(tmp)
+                    }
+                } else if (type == "String") {
+                    values.append(one as! String)
+                }
+            }
+            value = values.joined(separator: ",")
+        } else {
+            value = ""
+        }
+        
+        return value
+    }
+    
     func cellRefresh() {
         if params1 != nil && !params1!.isEmpty {
             params1!.removeAll()
