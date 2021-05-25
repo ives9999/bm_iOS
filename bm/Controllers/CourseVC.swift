@@ -239,14 +239,6 @@ class CourseVC: ListVC {
         }
     }
     
-    @IBAction func searchBtnPressed(_ sender: Any) {
-        if searchPanelisHidden {
-            showSearchPanel()
-        } else {
-            searchPanelisHidden = true
-            unmask()
-        }
-    }
 //
 //    override func multiSelected(key: String, selecteds: [String]) {
 //        var row = getDefinedRow(key)

@@ -265,37 +265,6 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
                 mapVC.annotationTitle = hashMap["title"]!
                 mapVC.address = hashMap["address"]!
             }
-        } else if segue.identifier == TO_CITY {
-//            let citySelectVC: CitySelectVC = segue.destination as! CitySelectVC
-//            citySelectVC.delegate = self
-//            citySelectVC.source = "search"
-//            citySelectVC.type = "simple"
-//            citySelectVC.select = "multi"
-//            citySelectVC.citys = citys
-        } else if segue.identifier == TO_AREA {
-//            if let areaSelectVC = segue.destination as? AreaSelectVC {
-//                var _citys: [Int] = [Int]()
-//                //citys.append(City(id: 10, name: ""))
-//                for city in citys {
-//                    _citys.append(city.id)
-//                }
-//                areaSelectVC.delegate = self
-//                areaSelectVC.source = "search"
-//                areaSelectVC.type = "simple"
-//                areaSelectVC.select = "multi"
-//                areaSelectVC.citys = _citys
-//                areaSelectVC.areas = areas
-//            }
-        } else if segue.identifier == TO_SELECT_WEEKDAY {
-//            let weekdaysSelectVC: WeekdaysSelectVC = segue.destination as! WeekdaysSelectVC
-//            weekdaysSelectVC.source = "search"
-//            weekdaysSelectVC.selecteds = weekdays
-//            weekdaysSelectVC.delegate = self
-        } else if segue.identifier == TO_SELECT_TIME {
-//            let timeSelectVC: TimeSelectVC = segue.destination as! TimeSelectVC
-//            timeSelectVC.source = "search"
-//            timeSelectVC.input = times
-//            timeSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_DEGREE {
             let degreeSelectVC: DegreeSelectVC = segue.destination as! DegreeSelectVC
             degreeSelectVC.source = "search"
@@ -365,65 +334,42 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     func prepareParams(city_type: String="simple") {
-//        params.removeAll()
-//        params["k"] = keyword
-//        var city_ids:[Int] = [Int]()
-//        if citys.count > 0 {
-//            for city in citys {
-//                city_ids.append(city.id)
+        params1 = [String: Any]()
+        for row in searchRows {
+            let key: String = row["key"] as! String
+            let value: String = row["value"] as! String
+            if value.count == 0 {
+                continue
+            }
+            params1![key] = value
+            
+//            let value_type: String = row["value_type"] as! String
+//            if value_type == "Array" {
+//                var values: [String] = [String]()
+//                if value.contains(",") {
+//                    values = value.components(separatedBy: ",")
+//                } else {
+//                    values.append(value)
+//                }
+//                params1![key] = values
+//            } else {
+//                params1![key] = value
 //            }
-//        }
-//        if city_ids.count > 0 {
-//            params["city_id"] = city_ids
-//            params["city_type"] = city_type
-//        }
-//        var area_ids:[Int] = [Int]()
-//        if areas.count > 0 {
-//            for area in areas {
-//                area_ids.append(area.id)
-//            }
-//        }
-//        if area_ids.count > 0 {
-//            params["area_id"] = area_ids
-//        }
-//        params["air_condition"] = (air_condition) ? 1 : 0
-//        params["bathroom"] = (bathroom) ? 1 : 0
-//        params["parking"] = (parking) ? 1 : 0
-//
-//        if weekdays.count > 0 {
-//            params["play_days"] = weekdays
-//        }
-//        if times.count > 0 {
-//            params["use_date_range"] = 1
-//            let play_start = times[START_TIME_KEY] as! String
-//            let time = play_start + ":00 - 24:00:00"
-//            params["play_time"] = time
-//        }
-//
-//        var arena_ids:[Int] = [Int]()
-//        if arenas.count > 0 {
-//            for arena in arenas {
-//                arena_ids.append(arena.id)
-//            }
-//        }
-//        if arena_ids.count > 0 {
-//            params["arena_id"] = arena_ids
-//        }
-//
-//        var _degrees:[String] = [String]()
-//        if degrees.count > 0 {
-//            for degree in degrees {
-//                let value = degree.value
-//                _degrees.append(DEGREE.DBValue(value))
-//            }
-//        }
-//        if _degrees.count > 0 {
-//            params["degree"] = _degrees
-//        }
+        }
+        print(params1)
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {
         prev()
+    }
+    
+    @IBAction func searchBtnPressed(_ sender: Any) {
+        if searchPanelisHidden {
+            showSearchPanel()
+        } else {
+            searchPanelisHidden = true
+            unmask()
+        }
     }
     
     @objc override func layerSubmit(view: UIButton) {
@@ -531,6 +477,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
             row["value"] = ids.joined(separator: ",")
         } else {
             row["show"] = "全部"
+            row["value"] = ""
         }
         replaceRows(ARENA_KEY, row)
         searchTableView.reloadData()
@@ -702,6 +649,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         return selecteds
     }
     
+    //目前暫時沒有用到
     func arrayToValue<T>(t: T.Type, res: [T])-> String {
         
         var value: String = ""
@@ -715,8 +663,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         if (res.count > 0) {
             for one in res {
                 if (type == "Int") {
-                    if let tmp = String(one) {
-                        values.append(tmp)
+                    if let tmp: Int = one as? Int {
+                        values.append(String(tmp))
                     }
                 } else if (type == "String") {
                     values.append(one as! String)
