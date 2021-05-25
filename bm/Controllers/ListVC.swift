@@ -13,7 +13,7 @@ protocol BackDelegate {
     func setBack(params: [String: Any])
 }
 
-class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, DegreeSelectDelegate, BackDelegate, List1CellDelegate {
+class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, BackDelegate, List1CellDelegate {
     
     func setBack(params: [String: Any]) {
         self.params = params
@@ -447,16 +447,19 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     func setAreasData(res: [Area]) {
         //print(res)
         var row = getDefinedRow(AREA_KEY)
-        var texts: [String] = [String]()
+        var names: [String] = [String]()
+        var ids: [String] = [String]()
         //areas = res
         if res.count > 0 {
             for area in res {
-                let text = area.name
-                texts.append(text)
+                names.append(area.name)
+                ids.append(String(area.id))
             }
-            row["show"] = texts.joined(separator: ",")
+            row["show"] = names.joined(separator: ",")
+            row["value"] = ids.joined(separator: ",")
         } else {
             row["show"] = "全部"
+            row["value"] = ""
         }
         replaceRows(AREA_KEY, row)
         searchTableView.reloadData()
@@ -571,7 +574,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         searchTableView.reloadData()
     }
     
-    func setDegreeData(res: [Degree]) {
+    override func setDegreeData(res: [Degree]) {
         var row = getDefinedRow(TEAM_DEGREE_KEY)
         var texts: [String] = [String]()
         degrees = res

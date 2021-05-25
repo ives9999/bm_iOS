@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, DegreeSelectDelegate, EditCellDelegate {
+class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, EditCellDelegate {
     
     @IBOutlet weak var submitBtn: UIButton!
     
@@ -317,7 +317,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, D
         tableView.reloadData()
     }
     
-    func setDegreeData(res: [Degree]) {
+    override func setDegreeData(res: [Degree]) {
         var row = getDefinedRow(TEAM_DEGREE_KEY)
         var texts: [String] = [String]()
         degrees = res

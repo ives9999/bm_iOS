@@ -117,13 +117,4 @@ class CoachVC: ListVC {
             performSegue(withIdentifier: TO_MANAGER, sender: nil)
         }
     }
-    
-    @IBAction func searchBtnPressed(_ sender: Any) {
-        if searchPanelisHidden {
-            showSearchPanel()
-        } else {
-            searchPanelisHidden = true
-            unmask()
-        }
-    }
 }

@@ -153,13 +153,4 @@ class TeachCV: ListVC {
 //    @IBAction func prevBtnPressed(_ sender: Any) {
 //        dismiss(animated: true, completion: nil)
 //    }
-    
-    @IBAction func searchBtnPressed(_ sender: Any) {
-        if searchPanelisHidden {
-            showSearchPanel()
-        } else {
-            searchPanelisHidden = true
-            unmask()
-        }
-    }
 }

@@ -30,11 +30,12 @@ class ShowTeamVC: Show1VC {
         
         super.viewDidLoad()
         
-        tableRowKeys = ["arena","interval_show","ball","leader","mobile_show","fb","youtube","website","email","pv","created_at_show"]
+        tableRowKeys = ["arena","interval_show","ball","degree_show","leader","mobile_show","fb","youtube","website","email","pv","created_at_show"]
         tableRows = [
             "arena":["icon":"arena","title":"球館","content":""],
             "interval_show":["icon":"clock","title":"時段","content":""],
             "ball":["icon":"ball","title":"球種","content":""],
+            "degree_show":["icon":"degree","title":"程度","content":""],
             "leader":["icon":"member1","title":"隊長","content":""],
             "mobile_show":["icon":"mobile","title":"行動電話","content":""],
             "fb": ["icon":"fb","title":"FB","content":""],

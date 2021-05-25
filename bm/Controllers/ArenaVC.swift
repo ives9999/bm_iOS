@@ -121,13 +121,4 @@ class ArenaVC: ListVC {
         ]
         performSegue(withIdentifier: TO_MAP, sender: sender)
     }
-
-    @IBAction func searchBtnPressed(_ sender: Any) {
-        if searchPanelisHidden {
-            showSearchPanel()
-        } else {
-            searchPanelisHidden = true
-            unmask()
-        }
-    }
 }

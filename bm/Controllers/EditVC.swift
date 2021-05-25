@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, TextInputDelegate, DegreeSelectDelegate, ImagePickerViewDelegate, EditCellDelegate {
+class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, TextInputDelegate, ImagePickerViewDelegate, EditCellDelegate {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -350,7 +350,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         //print(model.data)
     }
     
-    func setDegreeData(res: [Degree]) {
+    override func setDegreeData(res: [Degree]) {
         let old: [String] = model.data[TEAM_DEGREE_KEY]!["value"] as! [String]
         var res1: [String] = [String]()
         for degree in res {

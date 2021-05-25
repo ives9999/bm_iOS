@@ -19,6 +19,9 @@ class DegreeSelectVC: MyTableVC {
     //var degrees: [[String: Any]] = [[String: Any]]()
     var allDegrees: [Degree] = [Degree]()
     var delegate: DegreeSelectDelegate?
+    var selecteds: [String]?
+    
+    var key: String?
     
     var source: String = "setup"
     //縣市的類型：all所有的縣市，simple比較簡單的縣市

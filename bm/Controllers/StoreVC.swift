@@ -262,15 +262,6 @@ class StoreVC: ListVC {
         }
     }
     
-    @IBAction func searchBtnPressed(_ sender: Any) {
-        if searchPanelisHidden {
-            showSearchPanel()
-        } else {
-            searchPanelisHidden = true
-            unmask()
-        }
-    }
-    
     override func clear(indexPath: IndexPath) {
         var row = searchRows[indexPath.row]
         //print(row)

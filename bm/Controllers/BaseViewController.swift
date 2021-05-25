@@ -12,7 +12,7 @@ import Reachability
 import WebKit
 import SCLAlertView
 
-class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate {
+class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate, DegreeSelectDelegate {
     
     var msg: String = ""
     var dataService: DataService = DataService()
@@ -47,6 +47,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?){}
     //ArenaSelectDelegate
     func setArenaData(res: [ArenaTable]){}
+    //DegreeSelectDelegate
+    func setDegreeData(res: [Degree]){}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -578,6 +580,32 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             }
             if (citys != nil) {
                 viewController.citys = citys!
+            }
+            viewController.delegate = delegate
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toSelectDegree(key: String? = nil, selecteds: [String]? = nil, delegate: BaseViewController) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Team", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-8Wp-Vh-56J") as? DegreeSelectVC {
+                if key != nil {
+                    viewController.key = key
+                }
+                if selecteds != nil {
+                    viewController.selecteds = selecteds!
+                }
+                viewController.delegate = delegate
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-8Wp-Vh-56J") as! DegreeSelectVC
+            if key != nil {
+                viewController.key = key
+            }
+            if selecteds != nil {
+                viewController.selecteds = selecteds!
             }
             viewController.delegate = delegate
             self.navigationController!.pushViewController(viewController, animated: true)

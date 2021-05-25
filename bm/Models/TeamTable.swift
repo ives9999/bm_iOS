@@ -53,6 +53,7 @@ class TeamTable: Table {
     var play_end_show: String = ""
     var weekdays_show: String = ""
     var interval_show: String = ""
+    var degree_show: String = ""
     var temp_quantity_show: String = ""
     var temp_signup_count_show: String = ""
     
@@ -143,6 +144,16 @@ class TeamTable: Table {
         
         if play_start.count > 0 && play_end.count > 0 {
             interval_show = play_start.noSec() + " ~ " + play_end.noSec()
+        }
+        
+        if (degree.count > 0) {
+            let degrees: [String] = degree.components(separatedBy: ",")
+            var show: [String] = [String]()
+            for value in degrees {
+                let tmp: String = DEGREE.enumFromString(string: value).rawValue
+                show.append(tmp)
+            }
+            degree_show = show.joined(separator: ",")
         }
         
         if arena != nil {

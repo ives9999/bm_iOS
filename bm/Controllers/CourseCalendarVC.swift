@@ -298,15 +298,6 @@ class CourseCalendarVC: ListVC {
             performSegue(withIdentifier: TO_MANAGER_COURSE, sender: nil)
         }
     }
-    
-    @IBAction func searchBtnPressed(_ sender: Any) {
-        if searchPanelisHidden {
-            showSearchPanel()
-        } else {
-            searchPanelisHidden = true
-            unmask()
-        }
-    }
 
     override func singleSelected(key: String, selected: String) {
         var row = getDefinedRow(key)
