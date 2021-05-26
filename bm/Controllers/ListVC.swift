@@ -45,7 +45,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     var parking: Bool = false
     var arenas: [Arena] = [Arena]()
     var weekdays: [Int] = [Int]()
-    var degrees: [Degree] = [Degree]()
+    //var degrees: [Degree] = [Degree]()
     
     //key has type, play_start_time, play_end_time, time
     var times: [String: Any] = [String: Any]()
@@ -266,12 +266,12 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
                 mapVC.address = hashMap["address"]!
             }
         } else if segue.identifier == TO_SELECT_DEGREE {
-            let degreeSelectVC: DegreeSelectVC = segue.destination as! DegreeSelectVC
-            degreeSelectVC.source = "search"
-            degreeSelectVC.degrees = degrees
-            degreeSelectVC.delegate = self
+//            let degreeSelectVC: DegreeSelectVC = segue.destination as! DegreeSelectVC
+//            degreeSelectVC.source = "search"
+//            degreeSelectVC.degrees = degrees
+//            degreeSelectVC.delegate = self
         } else if segue.identifier == TO_TEMP_PLAY_LIST {
-            let tempPlayVC: TempPlayVC = segue.destination as! TempPlayVC
+            //let tempPlayVC: TempPlayVC = segue.destination as! TempPlayVC
             //tempPlayVC.citys = citys
             //tempPlayVC.arenas = arenas
             //tempPlayVC.days = weekdays
@@ -574,19 +574,22 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         searchTableView.reloadData()
     }
     
-    override func setDegreeData(res: [Degree]) {
-        var row = getDefinedRow(TEAM_DEGREE_KEY)
-        var texts: [String] = [String]()
-        degrees = res
-        if degrees.count > 0 {
-            for degree in degrees {
-                texts.append(degree.text)
+    override func setDegreeData(res: [DEGREE]) {
+        var row = getDefinedRow(DEGREE_KEY)
+        var names: [String] = [String]()
+        var values: [String] = [String]()
+        if res.count > 0 {
+            for degree in res {
+                names.append(degree.rawValue)
+                values.append(DEGREE.DBValue(degree))
             }
-            row["show"] = texts.joined(separator: ",")
+            row["show"] = names.joined(separator: ",")
+            row["value"] = values.joined(separator: ",")
         } else {
             row["show"] = "全部"
+            row["value"] = ""
         }
-        replaceRows(TEAM_DEGREE_KEY, row)
+        replaceRows(DEGREE_KEY, row)
         searchTableView.reloadData()
     }
     
@@ -635,15 +638,17 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
             type = "Int"
         }
         if let value: String = row["value"] as? String {
-            let values = value.components(separatedBy: ",")
-            for value in values {
-                if (type == "Int") {
-                    if let tmp = Int(value) {
-                        selecteds.append(tmp as! T)
-                    }
-                } else if (type == "String") {
-                    if let tmp = value as? T {
-                        selecteds.append(tmp)
+            if (value.count > 0) {
+                let values = value.components(separatedBy: ",")
+                for value in values {
+                    if (type == "Int") {
+                        if let tmp = Int(value) {
+                            selecteds.append(tmp as! T)
+                        }
+                    } else {
+                        if let tmp = value as? T {
+                            selecteds.append(tmp)
+                        }
                     }
                 }
             }

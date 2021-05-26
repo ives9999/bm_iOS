@@ -10,18 +10,18 @@ import UIKit
 import UIColor_Hex_Swift
 
 protocol DegreeSelectDelegate: class {
-    func setDegreeData(res: [Degree])
+    func setDegreeData(res: [DEGREE])
 }
 
 class DegreeSelectVC: MyTableVC {
 
-    var degrees: [Degree] = [Degree]()
+    //var degrees: [Degree] = [Degree]()
     //var degrees: [[String: Any]] = [[String: Any]]()
-    var allDegrees: [Degree] = [Degree]()
+    //var allDegrees: [Degree] = [Degree]()
+    var rows1: [DEGREE] = [DEGREE.high, DEGREE.soso, DEGREE.new]
     var delegate: DegreeSelectDelegate?
-    var selecteds: [String]?
-    
-    var key: String?
+    var selecteds: [DEGREE] = [DEGREE]()
+    //var degrees: [DEGREE] = [DEGREE]()
     
     var source: String = "setup"
     //縣市的類型：all所有的縣市，simple比較簡單的縣市
@@ -31,11 +31,11 @@ class DegreeSelectVC: MyTableVC {
         super.viewDidLoad()
 
         //[DEGREE.new: "新手"], [DEGREE.soso: "普通"], [DEGREE.high: "高手"]
-        let tmp = DEGREE.all()
+        //let tmp = DEGREE.all()
         //print(tmp)
-        for (_, item) in tmp.enumerated() {
-            allDegrees.append(Degree(value: item.key, text: item.value))
-        }
+//        for (_, item) in tmp.enumerated() {
+//            allDegrees.append(Degree(value: item.key, text: item.value))
+//        }
         
         tableView.register(
             SuperCell.self, forCellReuseIdentifier: "cell")
@@ -45,21 +45,23 @@ class DegreeSelectVC: MyTableVC {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return allDegrees.count
+        return rows1.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SuperCell
 
-        let row = allDegrees[indexPath.row]
-        cell.textLabel!.text = row.text
+        let row = rows1[indexPath.row]
+        cell.textLabel!.text = row.rawValue
+        
         var isChecked: Bool = false
-        for degree in degrees {
-            if row.value == degree.value {
+        for selected in selecteds {
+            if selected == row {
                 isChecked = true
                 break
             }
         }
+        
         if isChecked {
             setSelectedStyle(cell)
         } else {
@@ -70,15 +72,16 @@ class DegreeSelectVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
-        let row = allDegrees[indexPath.row]
+        let row = rows1[indexPath.row]
         
         if cell.accessoryType == .checkmark {
             unSetSelectedStyle(cell)
-            degrees = degrees.filter{$0.value != row.value}
+            selecteds = selecteds.filter{$0 != row}
         } else {
             setSelectedStyle(cell)
-            degrees.append(row)
+            selecteds.append(row)
         }
     }
     
@@ -100,7 +103,7 @@ class DegreeSelectVC: MyTableVC {
         prev()
     }
     @IBAction func submit() {
-        self.delegate?.setDegreeData(res: degrees)
+        self.delegate?.setDegreeData(res: selecteds)
         prev()
     }
 }

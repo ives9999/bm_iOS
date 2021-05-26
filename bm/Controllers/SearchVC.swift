@@ -212,10 +212,10 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, E
             timeSelectVC.input = times
             timeSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_DEGREE {
-            let degreeSelectVC: DegreeSelectVC = segue.destination as! DegreeSelectVC
-            degreeSelectVC.source = "search"
-            degreeSelectVC.degrees = degrees
-            degreeSelectVC.delegate = self
+//            let degreeSelectVC: DegreeSelectVC = segue.destination as! DegreeSelectVC
+//            degreeSelectVC.source = "search"
+//            degreeSelectVC.degrees = degrees
+//            degreeSelectVC.delegate = self
         } else if segue.identifier == TO_TEMP_PLAY_LIST {
             //let tempPlayVC: TempPlayVC = segue.destination as! TempPlayVC
 //            tempPlayVC.citys = citys
@@ -317,20 +317,20 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, E
         tableView.reloadData()
     }
     
-    override func setDegreeData(res: [Degree]) {
-        var row = getDefinedRow(TEAM_DEGREE_KEY)
-        var texts: [String] = [String]()
-        degrees = res
-        if degrees.count > 0 {
-            for degree in degrees {
-                texts.append(degree.text)
-            }
-            row["show"] = texts.joined(separator: ",")
-        } else {
-            row["show"] = "全部"
-        }
-        replaceRows(TEAM_DEGREE_KEY, row)
-        tableView.reloadData()
+    override func setDegreeData(res: [DEGREE]) {
+//        var row = getDefinedRow(TEAM_DEGREE_KEY)
+//        var texts: [String] = [String]()
+//        degrees = res
+//        if degrees.count > 0 {
+//            for degree in degrees {
+//                texts.append(degree.text)
+//            }
+//            row["show"] = texts.joined(separator: ",")
+//        } else {
+//            row["show"] = "全部"
+//        }
+//        replaceRows(TEAM_DEGREE_KEY, row)
+//        tableView.reloadData()
     }
     
     func setTextField(iden: String, value: String) {

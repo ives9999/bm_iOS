@@ -199,9 +199,9 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             let key = _sender["key"] as! String
             textInputVC.key = key
         } else if segue.identifier == TO_SELECT_DEGREE {
-            let degreeSelectVC: DegreeSelectVC = segue.destination as! DegreeSelectVC
-            degreeSelectVC.delegate = self
-            degreeSelectVC.degrees = (sender as! [Degree])
+//            let degreeSelectVC: DegreeSelectVC = segue.destination as! DegreeSelectVC
+//            degreeSelectVC.delegate = self
+//            degreeSelectVC.degrees = (sender as! [Degree])
         }
     }
     
@@ -350,17 +350,17 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         //print(model.data)
     }
     
-    override func setDegreeData(res: [Degree]) {
-        let old: [String] = model.data[TEAM_DEGREE_KEY]!["value"] as! [String]
-        var res1: [String] = [String]()
-        for degree in res {
-            res1.append(DEGREE.DBValue(degree.value))
-        }
-        if !res1.containsSameElements(as: old) {
-            model.updateDegree(res)
-            model.data[TEAM_DEGREE_KEY]!["change"] = true
-            self.tableView.reloadData()
-        }
+    override func setDegreeData(res: [DEGREE]) {
+//        let old: [String] = model.data[TEAM_DEGREE_KEY]!["value"] as! [String]
+//        var res1: [String] = [String]()
+//        for degree in res {
+//            res1.append(DEGREE.DBValue(degree.value))
+//        }
+//        if !res1.containsSameElements(as: old) {
+//            model.updateDegree(res)
+//            model.data[TEAM_DEGREE_KEY]!["change"] = true
+//            self.tableView.reloadData()
+//        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {

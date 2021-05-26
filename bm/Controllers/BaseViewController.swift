@@ -48,7 +48,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     //ArenaSelectDelegate
     func setArenaData(res: [ArenaTable]){}
     //DegreeSelectDelegate
-    func setDegreeData(res: [Degree]){}
+    func setDegreeData(res: [DEGREE]){}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -586,13 +586,11 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toSelectDegree(key: String? = nil, selecteds: [String]? = nil, delegate: BaseViewController) {
+    func toSelectDegree(selecteds: [DEGREE]? = nil, delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Team", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-8Wp-Vh-56J") as? DegreeSelectVC {
-                if key != nil {
-                    viewController.key = key
-                }
+                
                 if selecteds != nil {
                     viewController.selecteds = selecteds!
                 }
@@ -601,9 +599,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-8Wp-Vh-56J") as! DegreeSelectVC
-            if key != nil {
-                viewController.key = key
-            }
+            
             if selecteds != nil {
                 viewController.selecteds = selecteds!
             }

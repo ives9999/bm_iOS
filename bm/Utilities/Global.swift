@@ -273,7 +273,7 @@ enum TEXT_INPUT_TYPE: String {
     case timetable_coach = "課程說明"
 }
 enum DEGREE: String {
-    case new = "新手"
+    case new = "新手"//新手 是 rawValue
     case soso = "普通"
     case high = "高手"
     

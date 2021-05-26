@@ -154,7 +154,14 @@ class TeamVC: ListVC {
                     let selecteds: [Int] = valueToArray(t: Int.self, row: row)
                     toSelectArena(selecteds: selecteds, citys: citys, delegate: self)
                 }
-            } else if (segue == TO_DEGREE) {
+            } else if (segue == TO_SELECT_DEGREE) {
+                
+                let tmps: [String] = valueToArray(t: String.self, row: row)
+                var selecteds: [DEGREE] = [DEGREE]()
+                for tmp in tmps {
+                    selecteds.append(DEGREE.enumFromString(string: tmp))
+                }
+                toSelectDegree(selecteds: selecteds, delegate: self)
             } else {
                 performSegue(withIdentifier: segue, sender: indexPath)
             }
