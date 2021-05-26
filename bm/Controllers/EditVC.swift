@@ -401,7 +401,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         }
         return res!
     }
-    func setTextField(iden: String, value: String) {
+    func setTextField(key: String, value: String) {
         for (key, _) in model.data {
             if key == iden {
                 let item: [String: Any] = model.data[key]!

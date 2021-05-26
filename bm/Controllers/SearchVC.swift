@@ -333,7 +333,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate, CitySelectDelegate, E
 //        tableView.reloadData()
     }
     
-    func setTextField(iden: String, value: String) {
+    func setTextField(key: String, value: String) {
         keyword = value
     }
     func setSwitch(indexPath: IndexPath, value: Bool) {

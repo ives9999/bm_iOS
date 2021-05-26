@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EditCellDelegate {
-    func setTextField(iden: String, value: String)
+    func setTextField(key: String, value: String)
     func setSwitch(indexPath: IndexPath, value: Bool)
     func clear(indexPath: IndexPath)
 }
@@ -23,7 +23,7 @@ class EditCell: SuperCell, UITextFieldDelegate {
     @IBOutlet weak var editText: SuperTextField!
     @IBOutlet weak var onoff: SuperSwitch!
     
-    var iden: String = ""
+    var key: String = ""
     var editCellDelegate: EditCellDelegate?
     
     override func awakeFromNib() {
@@ -41,7 +41,7 @@ class EditCell: SuperCell, UITextFieldDelegate {
         //generalTextField.tag = row["idx"] as! Int
         clearBtn.isHidden = !isClear
         clearBtn.indexPath = indexPath
-        iden = row["key"] as! String
+        key = row["key"] as! String
         
         if row["text_field"] != nil && (row["text_field"] as! Bool) {
             //detailLbl.text = ""
@@ -112,7 +112,7 @@ class EditCell: SuperCell, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         //print("tag: \(iden)")
         //print("text: \(textField.text)")
-        editCellDelegate?.setTextField(iden: iden, value: textField.text!)
+        editCellDelegate?.setTextField(key: key, value: textField.text!)
     }
     
     @objc func switchDidValueChanged(sender: UISwitch) {

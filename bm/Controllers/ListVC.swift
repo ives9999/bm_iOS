@@ -37,7 +37,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     
     var searchRows: [[String: Any]] = [[String: Any]]()
     
-    var keyword: String = ""
+    //var keyword: String = ""
     //var citys: [City] = [City]()
     //var areas: [Area] = [Area]()
     var air_condition: Bool = false
@@ -392,8 +392,12 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         }
     }
     
-    func setTextField(iden: String, value: String) {
-        keyword = value
+    func setTextField(key: String, value: String) {
+        
+        var row = getDefinedRow(key)
+        row["value"] = value
+        replaceRows(key, row)
+        //keyword = value
     }
     
     func clear(indexPath: IndexPath) {

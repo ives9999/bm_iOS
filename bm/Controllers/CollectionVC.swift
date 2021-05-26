@@ -385,7 +385,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     func setSwitch(indexPath: IndexPath, value: Bool) {
     }
     
-    func setTextField(iden: String, value: String) {
+    func setTextField(key: String, value: String) {
         //print(value)
         keyword = value
     }
