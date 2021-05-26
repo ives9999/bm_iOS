@@ -692,7 +692,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toSelectCitys(key: String? = nil, selecteds: [String]? = nil, _delegate: BaseViewController) {
+    func toSelectCitys(key: String? = nil, selecteds: [String]? = nil, delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Select", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_CITYS) as? SelectCitysVC {
@@ -702,7 +702,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                 if selecteds != nil {
                     viewController.selecteds = selecteds!
                 }
-                viewController.delegate = self
+                viewController.delegate = delegate
                 show(viewController, sender: nil)
             }
         } else {
@@ -713,12 +713,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             if selecteds != nil {
                 viewController.selecteds = selecteds!
             }
-            viewController.delegate = self
+            viewController.delegate = delegate
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
     
-    func toSelectArea(key: String? = nil, city_id: Int? = nil, selected: String? = nil, _delegate: BaseViewController) {
+    func toSelectArea(key: String? = nil, city_id: Int? = nil, selected: String? = nil, delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Select", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_AREA) as? SelectAreaVC {
@@ -731,7 +731,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                 if city_id != nil {
                     viewController.city_id = city_id
                 }
-                viewController.delegate = self
+                viewController.delegate = delegate
                 show(viewController, sender: nil)
             }
         } else {
@@ -743,7 +743,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             if selected != nil {
                 viewController.selected = selected
             }
-            viewController.delegate = self
+            viewController.delegate = delegate
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -774,7 +774,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toSelectManagers(selecteds: [String]? = nil, _delegate: BaseViewController) {
+    func toSelectManagers(selecteds: [String]? = nil, delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Select", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_MANAGERS)  as? SelectManagersVC {
@@ -783,7 +783,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                 if selecteds != nil {
                     viewController.selecteds = selecteds!
                 }
-                viewController.delegate = self
+                viewController.delegate = delegate
                 show(viewController, sender: nil)
             }
         } else {
@@ -792,7 +792,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             if selecteds != nil {
                 viewController.selecteds = selecteds!
             }
-            viewController.delegate = self
+            viewController.delegate = delegate
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

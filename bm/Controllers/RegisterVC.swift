@@ -190,7 +190,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                         if selectItem.selected_area_ids.count > 0 {
                             selected = String(selectItem.selected_area_ids[0])
                         }
-                        toSelectArea(key: key, city_id: city_id, selected: selected, _delegate: self)
+                        toSelectArea(key: key, city_id: city_id, selected: selected, delegate: self)
                     }
                 } else if key == DOB_KEY {
                     let dobItem: DateFormItem = getFormItemFromKey(key!)! as! DateFormItem

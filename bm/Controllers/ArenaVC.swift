@@ -10,22 +10,20 @@ import UIKit
 
 class ArenaVC: ListVC {
     
-    let _searchRows: [[String: Any]] = [
-        ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球場名稱關鍵字","text_field":true],
-        ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0],
-        ["ch":"區域","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":AREA_KEY,"show":"全部","segue":TO_AREA,"sender":0],
-        ["ch":"空調","atype":UITableViewCell.AccessoryType.none,"key":ARENA_AIR_CONDITION_KEY,"show":"全部","segue":"","sender":0,"switch":true],
-        ["ch":"盥洗室","atype":UITableViewCell.AccessoryType.none,"key":ARENA_BATHROOM_KEY,"show":"全部","segue":"","sender":0,"switch":true],
-        ["ch":"停車場","atype":UITableViewCell.AccessoryType.none,"key":ARENA_PARKING_KEY,"show":"全部","segue":"","sender":0,"switch":true]
-    ]
-    
     var mysTable: ArenasTable?
         
     override func viewDidLoad() {
         myTablView = tableView
         able_type = "arena"
         dataService = ArenaService.instance
-        searchRows = _searchRows
+        searchRows = [
+            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球場名稱關鍵字","text_field":true,"value":""],
+            ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":""],
+            ["ch":"區域","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":AREA_KEY,"show":"全部","segue":TO_AREA,"sender":0,"value":""],
+            ["ch":"空調","atype":UITableViewCell.AccessoryType.none,"key":ARENA_AIR_CONDITION_KEY,"show":"全部","segue":"","sender":0,"switch":true,"value":""],
+            ["ch":"盥洗室","atype":UITableViewCell.AccessoryType.none,"key":ARENA_BATHROOM_KEY,"show":"全部","segue":"","sender":0,"switch":true,"value":""],
+            ["ch":"停車場","atype":UITableViewCell.AccessoryType.none,"key":ARENA_PARKING_KEY,"show":"全部","segue":"","sender":0,"switch":true,"value":""]
+        ]
 //        _type = "arena"
 //        _titleField = "name"
         super.viewDidLoad()
@@ -95,9 +93,53 @@ class ArenaVC: ListVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if mysTable != nil {
-            let myTable = mysTable!.rows[indexPath.row]
-            toShowArena(token: myTable.token)
+        if tableView == self.tableView {
+            if mysTable != nil {
+                let myTable = mysTable!.rows[indexPath.row]
+                toShowArena(token: myTable.token)
+            }
+        } else if tableView == searchTableView {
+            let row = searchRows[indexPath.row]
+            
+            var key: String? = nil
+            if (row.keyExist(key: "key") && row["key"] != nil) {
+                key = row["key"] as? String
+            }
+            
+            let segue: String = row["segue"] as! String
+            if (segue == TO_CITY) {
+                var selected: String? = nil
+                if (row.keyExist(key: "value") && row["value"] != nil) {
+                    selected = row["value"] as? String
+                }
+                toSelectCity(key: key, selected: selected, delegate: self)
+            } else if segue == TO_AREA {
+                
+                //var citys: [Int] = [Int]()
+                var city: Int? = nil
+                var row = getDefinedRow(CITY_KEY)
+                if let value: String = row["value"] as? String {
+                    city = Int(value)
+//                    if (city != nil) {
+//                        citys.append(city!)
+//                    }
+                }
+                
+                if (city == nil) {
+                    warning("請先選擇縣市")
+                } else {
+                
+                    //取得選擇球館的代號
+                    row = getDefinedRow(AREA_KEY)
+                    var selected: String? = nil
+                    if (row.keyExist(key: "value") && row["value"] != nil) {
+                        selected = row["value"] as? String
+                    }
+                    toSelectArea(key: key, city_id: city, selected: selected, delegate: self)
+                }
+            } else {
+                performSegue(withIdentifier: segue, sender: indexPath)
+            }
         }
     }
     

@@ -74,7 +74,11 @@ class SingleSelectVC: SelectVC {
         if !cancel {
             if delegate != nil {
                 let _key = ((key == nil) ? "" : key)!
-                delegate!.singleSelected(key: _key, selected: row["value"]!)
+                if (delegate != nil) {
+                    delegate!.singleSelected(key: _key, selected: row["value"]!)
+                } else {
+                    warning("沒有傳入代理程式，請洽管理員")
+                }
             }
             setSelectedStyle(cell)
             prev()

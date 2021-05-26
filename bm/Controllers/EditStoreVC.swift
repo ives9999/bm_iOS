@@ -119,7 +119,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                         if selectItem.selected_area_ids.count > 0 {
                             selected = String(selectItem.selected_area_ids[0])
                         }
-                        toSelectArea(key: key, city_id: city_id, selected: selected, _delegate: self)
+                        toSelectArea(key: key, city_id: city_id, selected: selected, delegate: self)
                     }
                 } else if key == OPEN_TIME_KEY || key == CLOSE_TIME_KEY {
                     let times = Global.instance.makeTimes()
@@ -130,7 +130,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
                     toSingleSelect(key: key, title: item!.title, rows: rows, _delegate: self)
                 } else if key == MANAGERS_KEY {
                     //toSelectCity(key: key, selected: "", _delegate: self)
-                    toSelectManagers(_delegate: self)
+                    toSelectManagers(delegate: self)
                 }
             }
         }

@@ -343,6 +343,10 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
             }
             params1![key] = value
             
+            params1!["air_condition"] = (air_condition) ? 1 : 0
+            params1!["bathroom"] = (bathroom) ? 1 : 0
+            params1!["parking"] = (parking) ? 1 : 0
+            
 //            let value_type: String = row["value_type"] as! String
 //            if value_type == "Array" {
 //                var values: [String] = [String]()
@@ -515,7 +519,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         if key == START_TIME_KEY || key == END_TIME_KEY {
             row["value"] = selected
             show = selected.noSec()
-        } else if (key == CITY_KEY) {
+        } else if (key == CITY_KEY || key == AREA_KEY) {
             row["value"] = selected
             show = Global.instance.zoneIDToName(Int(selected)!)
         }
