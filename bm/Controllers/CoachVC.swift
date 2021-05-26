@@ -11,11 +11,6 @@ import SCLAlertView
 
 class CoachVC: ListVC {
     
-    let _searchRows: [[String: Any]] = [
-        ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入教練名稱關鍵字","text_field":true],
-        ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0]
-    ]
-    
     var mysTable: CoachesTable?
         
     override func viewDidLoad() {
@@ -24,7 +19,10 @@ class CoachVC: ListVC {
         dataService = CoachService.instance
         //_type = "coach"
         //_titleField = "name"
-        searchRows = _searchRows
+        searchRows = [
+            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入教練名稱關鍵字","text_field":true,"value":""],
+            ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":""]
+        ]
         //Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
@@ -93,9 +91,27 @@ class CoachVC: ListVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if mysTable != nil {
-            let myTable = mysTable!.rows[indexPath.row]
-            toShowCoach(token: myTable.token)
+        if tableView == self.tableView {
+            if mysTable != nil {
+                let myTable = mysTable!.rows[indexPath.row]
+                toShowCoach(token: myTable.token)
+            }
+        } else if tableView == searchTableView {
+            let row = searchRows[indexPath.row]
+            
+            var key: String? = nil
+            if (row.keyExist(key: "key") && row["key"] != nil) {
+                key = row["key"] as? String
+            }
+            
+            let segue: String = row["segue"] as! String
+            if (segue == TO_CITY) {
+                var selected: String? = nil
+                if (row.keyExist(key: "value") && row["value"] != nil) {
+                    selected = row["value"] as? String
+                }
+                toSelectCity(key: key, selected: selected, delegate: self)
+            }
         }
     }
     
