@@ -22,7 +22,7 @@ class StoreVC: ListVC {
 //        _type = "store"
 //        _titleField = "name"
         searchRows = [
-            ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""],
+            ["title":"店名關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入店名名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""],
             ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":"","value_type":"Array"]
         ]
         
