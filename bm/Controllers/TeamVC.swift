@@ -168,15 +168,19 @@ class TeamVC: ListVC {
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == TO_SHOW {
-//            if let showVC: ShowVC = segue.destination as? ShowVC {
-//                let table = sender as! TeamTable
-//                let show_in: Show_IN = Show_IN(type: iden, id: table.id, token: table.token, title: table.name)
-//                showVC.initShowVC(sin: show_in)
-//            }
-//        }
-//    }
+    override func cellArena(row: Table) {
+        if let myTable: TeamTable = row as? TeamTable {
+            let key: String = ARENA_KEY
+            let arena_id: Int = myTable.arena_id
+            var row = getDefinedRow(key)
+            row["value"] = String(arena_id)
+            replaceRows(key, row)
+            prepareParams()
+            refresh()
+        } else {
+            warning("轉為TeamTable失敗，請洽管理員")
+        }
+    }
     
     @IBAction func manager(_ sender: Any) {
         if !Member.instance.isLoggedIn {

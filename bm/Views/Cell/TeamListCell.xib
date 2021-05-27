@@ -40,6 +40,9 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CG0-0i-QKl" customClass="CityButton" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="165" y="39" width="31" height="30"/>
                         <state key="normal" title="球館"/>
+                        <connections>
+                            <action selector="arenaBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="sh8-Fl-vDC"/>
+                        </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="星期幾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ka9-Tn-K1B" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="122" y="79" width="52" height="21"/>
@@ -154,7 +157,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="areanBtn" destination="CG0-0i-QKl" id="Pdy-bU-4br"/>
+                <outlet property="arenaBtn" destination="CG0-0i-QKl" id="VEd-KM-rqK"/>
                 <outlet property="cityBtn" destination="ej3-df-e93" id="0uP-mD-hak"/>
                 <outlet property="iconView" destination="tXk-uA-8gX" id="Ure-kr-cnU"/>
                 <outlet property="intervalLbl" destination="8i0-Nr-dEA" id="qH8-O4-wnd"/>

@@ -10,7 +10,6 @@ import UIKit
 
 class ArenaListCell: List2Cell {
     
-    @IBOutlet weak var areaBtn: CityButton!
     @IBOutlet weak var telLbl: SuperLabel!
     @IBOutlet weak var parkingLbl: SuperLabel!
     @IBOutlet weak var intervalLbl: SuperLabel!

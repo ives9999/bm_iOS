@@ -125,6 +125,9 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="neZ-gY-Rqa" customClass="CityButton" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="165" y="39" width="31" height="30"/>
                         <state key="normal" title="區域"/>
+                        <connections>
+                            <action selector="areaBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Lo5-CT-ygv"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

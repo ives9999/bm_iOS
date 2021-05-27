@@ -17,6 +17,8 @@ protocol List1CellDelegate {
     func cellEdit(row: Table)
     func cellDelete(row: Table)
     func cellCity(row: Table)
+    func cellArea(row: Table)
+    func cellArena(row: Table)
     func cellLike(row: Table)
     func cellWarning(msg: String)
     func cellToLogin()
@@ -26,7 +28,10 @@ class List2Cell: UITableViewCell {
     
     @IBOutlet weak var listFeatured: UIImageView!
     @IBOutlet weak var titleLbl: SuperLabel!
+    
     @IBOutlet weak var cityBtn: CityButton!
+    @IBOutlet weak var areaBtn: CityButton!
+    @IBOutlet weak var arenaBtn: CityButton!
     
     @IBOutlet weak var iconView: UIView!
     @IBOutlet weak var mapIcon: SuperButton!
@@ -118,6 +123,14 @@ class List2Cell: UITableViewCell {
             cityBtn.row = _row
         }
         
+        if areaBtn != nil {
+            areaBtn.row = _row
+        }
+        
+        if arenaBtn != nil {
+            arenaBtn.row = _row
+        }
+        
         likeIcon.row = _row
     }
     
@@ -169,6 +182,22 @@ class List2Cell: UITableViewCell {
         self._pressed(sender: sender) { (row) in
             if cellDelegate != nil {
                 cellDelegate!.cellCity(row: row)
+            }
+        }
+    }
+    
+    @IBAction func areaBtnPressed(sender: UIButton) {
+        self._pressed(sender: sender) { (row) in
+            if cellDelegate != nil {
+                cellDelegate!.cellArea(row: row)
+            }
+        }
+    }
+    
+    @IBAction func arenaBtnPressed(sender: UIButton) {
+        self._pressed(sender: sender) { (row) in
+            if cellDelegate != nil {
+                cellDelegate!.cellArena(row: row)
             }
         }
     }
@@ -235,6 +264,8 @@ extension List1CellDelegate {
     func cellEdit(row: Table){}
     func cellDelete(row: Table){}
     func cellCity(row: Table){}
+    func cellArea(row: Table){}
+    func cellArena(row: Table){}
     func cellLike(row: Table){}
     func cellWarning(msg: String){}
     func cellToLogin(){}

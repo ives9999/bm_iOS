@@ -143,15 +143,19 @@ class ArenaVC: ListVC {
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == TO_SHOW {
-//            if let showVC: ShowVC = segue.destination as? ShowVC {
-//                let table = sender as! ArenaTable
-//                let show_in: Show_IN = Show_IN(type: iden, id: table.id, token: table.token, title: table.name)
-//                showVC.initShowVC(sin: show_in)
-//            }
-//        }
-//    }
+    override func cellArea(row: Table) {
+        if let myTable: ArenaTable = row as? ArenaTable {
+            let key: String = AREA_KEY
+            let area_id: Int = myTable.area_id
+            var row = getDefinedRow(key)
+            row["value"] = String(area_id)
+            replaceRows(key, row)
+            prepareParams()
+            refresh()
+        } else {
+            warning("轉為ArenaTable失敗，請洽管理員")
+        }
+    }
     
     override func showMap(indexPath: IndexPath) {
         let row = lists1[indexPath.row]

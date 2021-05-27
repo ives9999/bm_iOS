@@ -10,7 +10,6 @@ import UIKit
 
 class TeamListCell: List2Cell {
     
-    @IBOutlet weak var areanBtn: CityButton!
     @IBOutlet weak var weekendLbl: SuperLabel!
     @IBOutlet weak var intervalLbl: SuperLabel!
     @IBOutlet weak var temp_qnantityLbl: SuperLabel!
@@ -40,9 +39,9 @@ class TeamListCell: List2Cell {
         let row: TeamTable? = _row as? TeamTable ?? nil
         if row != nil {
             if row!.arena != nil {
-                areanBtn.setTitle(row!.arena!.name)
+                arenaBtn.setTitle(row!.arena!.name)
             } else {
-                areanBtn.isHidden = true
+                arenaBtn.isHidden = true
             }
             
             if row!.weekdays_show.count > 0 {

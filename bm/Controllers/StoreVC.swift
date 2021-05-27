@@ -121,46 +121,6 @@ class StoreVC: ListVC {
         }
     }
     
-//    override func prepareParams(city_type: String="simple") {
-//        params1 = [String: Any]()
-//        if keyword.count > 0 {
-//            params1!["k"] = keyword
-//        }
-//        for row in searchRows {
-//            let key: String = row["key"] as! String
-//            let value: String = row["value"] as! String
-//            if value.count == 0 {
-//                continue
-//            }
-//            let value_type: String = row["value_type"] as! String
-//            if value_type == "Array" {
-//                var values: [String] = [String]()
-//                if value.contains(",") {
-//                    values = value.components(separatedBy: ",")
-//                } else {
-//                    values.append(value)
-//                }
-//                params1![key] = values
-//            } else {
-//                params1![key] = value
-//            }
-//        }
-//        //print(params1)
-//    }
-    
-    
-    
-//    func cellRefresh(indexPath: IndexPath?) {
-//        if indexPath != nil {
-//            if params1 != nil && !params1!.isEmpty {
-//                params1!.removeAll()
-//            }
-//            self.refresh()
-//        } else {
-//            warning("index path 為空值，請洽管理員")
-//        }
-//    }
-    
     func cellEdit(indexPath: IndexPath?) {
         if indexPath != nil {
             let row = lists1[indexPath!.row] as! StoreTable
@@ -199,10 +159,6 @@ class StoreVC: ListVC {
         } else {
             warning("index path 為空值，請洽管理員")
         }
-    }
-    
-    override func cellCity(row: Table) {
-        
     }
     
     private func _delete(token: String) {

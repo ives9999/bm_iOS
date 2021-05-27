@@ -661,11 +661,12 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     
     func cellMobile(row: Table) {
         if (row.mobile_show.count > 0) {
-            print(row.mobile)
+            //print(row.mobile)
+            row.mobile.makeCall()
         } else if (row.tel_show.count > 0) {
-            print(row.tel)
+            //print(row.tel)
+            row.tel.makeCall()
         }
-        //row.mobile.makeCall()
     }
     
     func cellShowMap(row: Table) {
@@ -676,8 +677,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         } else if row.title.count > 0 {
             name = row.title
         }
-        print(row.address)
-       // _showMap(title: name, address: row.address)
+        //print(row.address)
+        _showMap(title: name, address: row.address)
         
 //        if indexPath != nil {
 //            let row = lists1[indexPath!.row] as! TeamTable
@@ -696,11 +697,14 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         let key: String = CITY_KEY
         let city_id: Int = row.city_id
         var row = getDefinedRow(key)
-        row["value"] = city_id
+        row["value"] = String(city_id)
         replaceRows(key, row)
         prepareParams()
         refresh()
     }
+    
+    func cellArena(row: Table) {}
+    func cellArea(row: Table) {}
     
     func cellLike(row: Table) {
         if (!Member.instance.isLoggedIn) {
