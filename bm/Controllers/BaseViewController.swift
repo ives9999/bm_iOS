@@ -797,16 +797,22 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    func toTeam(member_like: Bool=false) {
+    func toTeam(member_like: Bool=false, params: [String: Any]?=nil) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Team", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "Team") as? TeamVC {
                 viewController.member_like = member_like
+                if (params != nil) {
+                    viewController.params1 = params
+                }
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Team") as! TeamVC
             viewController.member_like = member_like
+            if (params != nil) {
+                viewController.params1 = params
+            }
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

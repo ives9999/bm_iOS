@@ -180,7 +180,7 @@ enum TAB: String {
         case 4:
             return tabBarController.selectedViewController as! MoreVC
         default:
-            return SearchVC()
+            return tabBarController.selectedViewController as! SearchVC
         }
     }
 }

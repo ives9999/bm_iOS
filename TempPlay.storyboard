@@ -342,7 +342,7 @@
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="submit:" destination="Qui-jL-mMT" eventType="touchUpInside" id="7MW-bG-hvn"/>
+                                    <action selector="submit:" destination="Qui-jL-mMT" eventType="touchUpInside" id="huA-n8-nhT"/>
                                 </connections>
                             </button>
                         </subviews>

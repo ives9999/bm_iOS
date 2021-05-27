@@ -25,7 +25,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     
     var newY: CGFloat = 0
     
-    let searchTableView: UITableView = {
+    var searchTableView: UITableView = {
         let cv = UITableView(frame: .zero, style: .plain)
         cv.backgroundColor = UIColor.black
         return cv
@@ -43,12 +43,12 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
 //    var air_condition: Bool = false
 //    var bathroom: Bool = false
 //    var parking: Bool = false
-    var arenas: [Arena] = [Arena]()
-    var weekdays: [Int] = [Int]()
+    //var arenas: [Arena] = [Arena]()
+    //var weekdays: [Int] = [Int]()
     //var degrees: [Degree] = [Degree]()
     
     //key has type, play_start_time, play_end_time, time
-    var times: [String: Any] = [String: Any]()
+    //var times: [String: Any] = [String: Any]()
     
     var params: [String: Any] = [String: Any]()
     
@@ -216,30 +216,30 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
             
             performSegue(withIdentifier: iden, sender: data)
         } else if tableView == searchTableView {
-            let row = searchRows[indexPath.row]
-            let segue: String = row["segue"] as! String
-            if segue.count > 0 {
-                if segue == TO_AREA {
-                    SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
-                } else if segue == TO_ARENA {
-                    SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
-                } else if segue == TO_SELECT_TIME {
-                    if row["key"] as! String == START_TIME_KEY {
-                        times["type"] = SELECT_TIME_TYPE.play_start
-                        if times[START_TIME_KEY] != nil {
-                            times["time"] = times[START_TIME_KEY]
-                        }
-                    } else {
-                        times["type"] = SELECT_TIME_TYPE.play_end
-                        if times[END_TIME_KEY] != nil {
-                            times["time"] = times[END_TIME_KEY]
-                        }
-                    }
-                    performSegue(withIdentifier: segue, sender: row["sender"])
-                } else {
-                    performSegue(withIdentifier: segue, sender: row["sender"])
-                }
-            }
+//            let row = searchRows[indexPath.row]
+//            let segue: String = row["segue"] as! String
+//            if segue.count > 0 {
+//                if segue == TO_AREA {
+//                    SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
+//                } else if segue == TO_ARENA {
+//                    SCLAlertView().showError("錯誤", subTitle: "請先選擇縣市")
+//                } else if segue == TO_SELECT_TIME {
+//                    if row["key"] as! String == START_TIME_KEY {
+//                        times["type"] = SELECT_TIME_TYPE.play_start
+//                        if times[START_TIME_KEY] != nil {
+//                            times["time"] = times[START_TIME_KEY]
+//                        }
+//                    } else {
+//                        times["type"] = SELECT_TIME_TYPE.play_end
+//                        if times[END_TIME_KEY] != nil {
+//                            times["time"] = times[END_TIME_KEY]
+//                        }
+//                    }
+//                    performSegue(withIdentifier: segue, sender: row["sender"])
+//                } else {
+//                    performSegue(withIdentifier: segue, sender: row["sender"])
+//                }
+//            }
         }
     }
     
@@ -534,9 +534,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         var row = getDefinedRow(WEEKDAY_KEY)
         var texts: [String] = [String]()
         var values: [String] = [String]()
-        weekdays = res
-        if weekdays.count > 0 {
-            for day in weekdays {
+        if res.count > 0 {
+            for day in res {
                 values.append(String(day))
                 for gday in Global.instance.weekdays {
                     if day == gday["value"] as! Int {
@@ -567,14 +566,14 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         }
         switch type {
         case SELECT_TIME_TYPE.play_start:
-            times[START_TIME_KEY] = time
+            //times[START_TIME_KEY] = time
             row = getDefinedRow(START_TIME_KEY)
             row["show"] = text
             row["value"] = text
             replaceRows(START_TIME_KEY, row)
             break
         case SELECT_TIME_TYPE.play_end:
-            times[END_TIME_KEY] = time
+            //times[END_TIME_KEY] = time
             row = getDefinedRow(END_TIME_KEY)
             row["show"] = text
             row["value"] = text
