@@ -1174,6 +1174,7 @@
                                         <state key="normal" image="search"/>
                                         <connections>
                                             <action selector="searchBtnPressed:" destination="NIB-Wk-iZw" eventType="touchUpInside" id="KrS-Xh-agq"/>
+                                            <action selector="searchBtnPressed:" destination="kQw-8n-y0W" eventType="touchUpInside" id="Pun-na-PTk"/>
                                             <action selector="searchBtnPressed:" destination="fEf-Ib-3oR" eventType="touchUpInside" id="Uti-xj-9cb"/>
                                         </connections>
                                     </button>

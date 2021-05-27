@@ -10,11 +10,6 @@ import Foundation
 
 class ProductVC: ListVC {
     
-    let _searchRows: [[String: Any]] = [
-        ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入商品名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""],
-        ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":0,"value":"","value_type":"Array"]
-    ]
-    
     var mysTable: ProductsTable?
         
     override func viewDidLoad() {
@@ -23,7 +18,9 @@ class ProductVC: ListVC {
         dataService = ProductService.instance
         //_type = "product"
         //_titleField = "name"
-        searchRows = _searchRows
+        searchRows = [
+            ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入商品名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""]
+        ]
         
         super.viewDidLoad()
         let cellNibName = UINib(nibName: "ProductListCell", bundle: nil)
@@ -114,15 +111,11 @@ class ProductVC: ListVC {
             
         } else if tableView == searchTableView {
             
-            let row = searchRows[indexPath.row]
-            let segue: String = row["segue"] as! String
+//            let row = searchRows[indexPath.row]
+//            let segue: String = row["segue"] as! String
+//
+//            let key: String = row["key"] as! String
             
-            let key: String = row["key"] as! String
-            if segue == TO_MULTI_SELECT {
-                toMultiSelect(key: key, _delegate: self)
-            } else if segue == TO_SINGLE_SELECT {
-                
-            }
             //performSegue(withIdentifier: segue, sender: indexPath)
         }
     }

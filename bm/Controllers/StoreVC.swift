@@ -11,10 +11,6 @@ import SCLAlertView
 
 class StoreVC: ListVC {
     
-    let _searchRows: [[String: Any]] = [
-        ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""],
-        ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_MULTI_SELECT,"sender":0,"value":"","value_type":"Array"]
-    ]
     var mysTable: StoresTable?
     
     //let session: UserDefaults = UserDefaults.standard
@@ -25,7 +21,10 @@ class StoreVC: ListVC {
         dataService = StoreService.instance
 //        _type = "store"
 //        _titleField = "name"
-        searchRows = _searchRows
+        searchRows = [
+            ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入課程名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""],
+            ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":"","value_type":"Array"]
+        ]
         
         super.viewDidLoad()
         
@@ -111,10 +110,12 @@ class StoreVC: ListVC {
             let segue: String = row["segue"] as! String
             
             let key: String = row["key"] as! String
-            if segue == TO_MULTI_SELECT {
-                toMultiSelect(key: key, _delegate: self)
-            } else if segue == TO_SINGLE_SELECT {
-                
+            if (segue == TO_CITY) {
+                var selected: String? = nil
+                if (row.keyExist(key: "value") && row["value"] != nil) {
+                    selected = row["value"] as? String
+                }
+                toSelectCity(key: key, selected: selected, delegate: self)
             }
             //performSegue(withIdentifier: segue, sender: indexPath)
         }
@@ -260,36 +261,6 @@ class StoreVC: ListVC {
         } else {
             performSegue(withIdentifier: TO_MANAGER_STORE, sender: nil)
         }
-    }
-    
-    override func clear(indexPath: IndexPath) {
-        var row = searchRows[indexPath.row]
-        //print(row)
-        
-        let key = row["key"] as! String
-//        switch key {
-//        case CITY_KEY:
-//            citys.removeAll()
-//            if session.array(forKey: "citys") != nil {
-//                session.removeObject(forKey: "citys")
-//            }
-//        case AREA_KEY:
-//            areas.removeAll()
-//        case TEAM_WEEKDAYS_KEY:
-//            weekdays.removeAll()
-//        case TEAM_PLAY_START_KEY:
-//            times.removeAll()
-//        case ARENA_KEY:
-//            arenas.removeAll()
-//        case TEAM_DEGREE_KEY:
-//            degrees.removeAll()
-//        default:
-//            _ = 1
-//        }
-        
-        row["value"] = ""
-        row["show"] = "全部"
-        replaceRows(key, row)
     }
 }
 

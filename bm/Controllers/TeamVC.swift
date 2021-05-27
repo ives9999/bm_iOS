@@ -163,7 +163,7 @@ class TeamVC: ListVC {
                 }
                 toSelectDegree(selecteds: selecteds, delegate: self)
             } else {
-                performSegue(withIdentifier: segue, sender: indexPath)
+                //performSegue(withIdentifier: segue, sender: indexPath)
             }
         }
     }

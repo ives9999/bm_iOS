@@ -24,7 +24,14 @@ class SuperSwitch: UISwitch {
     }
     
     func commonInit()  {
-        onTintColor = UIColor(MY_RED)
-        tintColor = UIColor.gray
+        //backgroundColor = UIColor.red
+        if #available(iOS 13.0, *) {
+            subviews.first?.subviews.first?.backgroundColor = UIColor(MY_GRAY)
+        } else if #available(iOS 12.0, *) {
+            subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor(MY_GRAY)
+        }
+        onTintColor = UIColor(MY_LIGHT_RED)
+//        tintColor = UIColor.green
+//        clipsToBounds = true
     }
 }

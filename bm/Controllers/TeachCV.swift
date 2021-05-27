@@ -10,16 +10,14 @@ import UIKit
 
 class TeachCV: ListVC {
         
-    let _searchRows: [[String: Any]] = [
-        ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入教學名稱關鍵字","text_field":true]
-        ]
-    
     var mysTable: TeachesTable?
             
     override func viewDidLoad() {
         myTablView = tableView
         dataService = TeachService.instance
-        searchRows = _searchRows
+        searchRows = [
+            ["ch":"標題關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入教學名稱關鍵字","text_field":true,"value":""]
+            ]
         //_type = "teach"
         //_titleField = "title"
         super.viewDidLoad()

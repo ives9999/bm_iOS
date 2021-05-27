@@ -138,7 +138,7 @@ class ArenaVC: ListVC {
                     toSelectArea(key: key, city_id: city, selected: selected, delegate: self)
                 }
             } else {
-                performSegue(withIdentifier: segue, sender: indexPath)
+                //performSegue(withIdentifier: segue, sender: indexPath)
             }
         }
     }

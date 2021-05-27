@@ -136,7 +136,7 @@ class CourseVC: ListVC {
                 let selecteds: [String] = valueToArray(t: String.self, row: row)
                 toSelectTime(key: key, selecteds: selecteds, input: ["type": type], delegate: self)
             } else {
-                performSegue(withIdentifier: segue, sender: indexPath)
+                //performSegue(withIdentifier: segue, sender: indexPath)
             }
         }
     }

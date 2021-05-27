@@ -40,9 +40,9 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     //var keyword: String = ""
     //var citys: [City] = [City]()
     //var areas: [Area] = [Area]()
-    var air_condition: Bool = false
-    var bathroom: Bool = false
-    var parking: Bool = false
+//    var air_condition: Bool = false
+//    var bathroom: Bool = false
+//    var parking: Bool = false
     var arenas: [Arena] = [Arena]()
     var weekdays: [Int] = [Int]()
     //var degrees: [Degree] = [Degree]()
@@ -343,9 +343,9 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
             }
             params1![key] = value
             
-            params1!["air_condition"] = (air_condition) ? 1 : 0
-            params1!["bathroom"] = (bathroom) ? 1 : 0
-            params1!["parking"] = (parking) ? 1 : 0
+//            params1!["air_condition"] = (air_condition) ? 1 : 0
+//            params1!["bathroom"] = (bathroom) ? 1 : 0
+//            params1!["parking"] = (parking) ? 1 : 0
             
 //            let value_type: String = row["value_type"] as! String
 //            if value_type == "Array" {
@@ -385,15 +385,17 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     func setSwitch(indexPath: IndexPath, value: Bool) {
-        let row = searchRows[indexPath.row]
+        var row = searchRows[indexPath.row]
         let key = row["key"] as! String
-        if (key == ARENA_AIR_CONDITION_KEY) {
-            air_condition = value
-        } else if (key == ARENA_BATHROOM_KEY) {
-            bathroom = value
-        } else if (key == ARENA_PARKING_KEY) {
-            parking = value
-        }
+        row["value"] = (value) ? "1" : ""
+        replaceRows(key, row)
+//        if (key == ARENA_AIR_CONDITION_KEY) {
+//            air_condition = value
+//        } else if (key == ARENA_BATHROOM_KEY) {
+//            bathroom = value
+//        } else if (key == ARENA_PARKING_KEY) {
+//            parking = value
+//        }
     }
     
     func setTextField(key: String, value: String) {
