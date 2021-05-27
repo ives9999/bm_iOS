@@ -810,8 +810,6 @@
 		B322F8061FC6ABEA00DE98FB /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				B39E5FA3263D4F0800C40BA7 /* List2Cell.swift */,
-				B39E5FA4263D4F0800C40BA7 /* List2Cell.xib */,
 				B3AE9379262FCC5F00223B2A /* ArenaListCell.swift */,
 				B3AE937A262FCC5F00223B2A /* ArenaListCell.xib */,
 				B317855A20D9089600765CA1 /* BlackListCell.swift */,
@@ -830,6 +828,8 @@
 				B35C4F4B2196F5E500F8AEB2 /* EditCell.xib */,
 				B306FEAB21F8422B00403FE2 /* IconCell.swift */,
 				B306FEAC21F8422B00403FE2 /* IconCell.xib */,
+				B39E5FA3263D4F0800C40BA7 /* List2Cell.swift */,
+				B39E5FA4263D4F0800C40BA7 /* List2Cell.xib */,
 				B3DEBE0D2106FDB1003699A0 /* ListCell.swift */,
 				B3DEBE0E2106FDB1003699A0 /* ListCell.xib */,
 				B36D66BE229A828A00502D62 /* ManagerCourseCell.swift */,

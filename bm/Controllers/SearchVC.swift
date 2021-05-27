@@ -266,7 +266,7 @@ class SearchVC: ListVC, UINavigationControllerDelegate {
     @IBAction func submit(_ sender: Any) {
         
         prepareParams()
-        toTeam(params: params1)
+        toTeam(params: params)
         //refresh()
     }
     

@@ -207,29 +207,29 @@ class CourseVC: ListVC {
 //        refresh()
 //    }
     
-    override func prepareParams(city_type: String) {
-        params1 = [String: Any]()
-        for row in searchRows {
-            let key: String = row["key"] as! String
-            let value: String = row["value"] as! String
-            if value.count == 0 {
-                continue
-            }
-            let value_type: String = row["value_type"] as! String
-            if value_type == "Array" {
-                var values: [String] = [String]()
-                if value.contains(",") {
-                    values = value.components(separatedBy: ",")
-                } else {
-                    values.append(value)
-                }
-                params1![key] = values
-            } else {
-                params1![key] = value
-            }
-        }
-        //print(params1)
-    }
+//    override func prepareParams(city_type: String) {
+//        params = [String: Any]()
+//        for row in searchRows {
+//            let key: String = row["key"] as! String
+//            let value: String = row["value"] as! String
+//            if value.count == 0 {
+//                continue
+//            }
+//            let value_type: String = row["value_type"] as! String
+//            if value_type == "Array" {
+//                var values: [String] = [String]()
+//                if value.contains(",") {
+//                    values = value.components(separatedBy: ",")
+//                } else {
+//                    values.append(value)
+//                }
+//                params![key] = values
+//            } else {
+//                params![key] = value
+//            }
+//        }
+//        //print(params1)
+//    }
 
     @IBAction func manager(_ sender: Any) {
         if !Member.instance.isLoggedIn {

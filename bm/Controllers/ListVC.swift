@@ -16,7 +16,7 @@ protocol BackDelegate {
 class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, BackDelegate, List1CellDelegate {
     
     func setBack(params: [String: Any]) {
-        self.params = params
+        //self.params = params
     }
     
     var able_type: String = "coach"
@@ -36,26 +36,11 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     var layerHeight: CGFloat = 0
     
     var searchRows: [[String: Any]] = [[String: Any]]()
-    
-    //var keyword: String = ""
-    //var citys: [City] = [City]()
-    //var areas: [Area] = [Area]()
-//    var air_condition: Bool = false
-//    var bathroom: Bool = false
-//    var parking: Bool = false
-    //var arenas: [Arena] = [Arena]()
-    //var weekdays: [Int] = [Int]()
-    //var degrees: [Degree] = [Degree]()
-    
-    //key has type, play_start_time, play_end_time, time
-    //var times: [String: Any] = [String: Any]()
-    
-    var params: [String: Any] = [String: Any]()
-    
+        
     var searchPanelisHidden = true
     
     internal(set) public var lists1: [Table] = [Table]()
-    var params1: [String: Any]?
+    var params: [String: Any]?
     
     var jsonData: Data? = nil
     var tables: Tables?
@@ -114,7 +99,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
                 self._dataToTable(t: t, success)
             }
         } else {
-            dataService.getList(token: nil, _filter: params1, page: page, perPage: perPage) { (success) in
+            dataService.getList(token: nil, _filter: params, page: page, perPage: perPage) { (success) in
                 self.jsonData = self.dataService.jsonData
                 self._dataToTable(t: t, success)
             }
@@ -334,33 +319,20 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     func prepareParams(city_type: String="simple") {
-        params1 = [String: Any]()
+        params = [String: Any]()
         for row in searchRows {
-            let key: String = row["key"] as! String
-            let value: String = row["value"] as! String
-            if value.count == 0 {
-                continue
+            
+            if let key: String = row["key"] as? String {
+                if let value: String = row["value"] as? String {
+                    if value.count == 0 {
+                        continue
+                    }
+                    params![key] = value
+                }
+                
             }
-            params1![key] = value
-            
-//            params1!["air_condition"] = (air_condition) ? 1 : 0
-//            params1!["bathroom"] = (bathroom) ? 1 : 0
-//            params1!["parking"] = (parking) ? 1 : 0
-            
-//            let value_type: String = row["value_type"] as! String
-//            if value_type == "Array" {
-//                var values: [String] = [String]()
-//                if value.contains(",") {
-//                    values = value.components(separatedBy: ",")
-//                } else {
-//                    values.append(value)
-//                }
-//                params1![key] = values
-//            } else {
-//                params1![key] = value
-//            }
         }
-        print(params1)
+        //print(params)
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {
@@ -604,21 +576,6 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     
     func showMap(indexPath: IndexPath) {}
     
-    func searchCity(indexPath: IndexPath) {
-        //let row = lists1[indexPath.row]
-        //var key = CITY_KEY
-//        if _type == "coach" {
-//            key = CITYS_KEY
-//        }
-        
-        //為了拿掉lists，暫時先mark
-//        let city_id = row.data[key]!["value"] as! Int
-//        citys.removeAll()
-//        citys.append(City(id: city_id, name: ""))
-//        prepareParams(city_type: "all")
-        //refresh()
-    }
-    
     func getDefinedRow(_ key: String) -> [String: Any] {
         for row in searchRows {
             if row["key"] as! String == key {
@@ -696,8 +653,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     func cellRefresh() {
-        if params1 != nil && !params1!.isEmpty {
-            params1!.removeAll()
+        if params != nil && !params!.isEmpty {
+            params!.removeAll()
         }
         self.refresh()
     }
@@ -736,7 +693,13 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     func cellCity(row: Table) {
-        //let i = 6
+        let key: String = CITY_KEY
+        let city_id: Int = row.city_id
+        var row = getDefinedRow(key)
+        row["value"] = city_id
+        replaceRows(key, row)
+        prepareParams()
+        refresh()
     }
     
     func cellLike(row: Table) {

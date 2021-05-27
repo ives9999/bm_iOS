@@ -803,7 +803,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             if let viewController = storyboard.instantiateViewController(identifier: "Team") as? TeamVC {
                 viewController.member_like = member_like
                 if (params != nil) {
-                    viewController.params1 = params
+                    viewController.params = params
                 }
                 show(viewController, sender: nil)
             }
@@ -811,7 +811,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Team") as! TeamVC
             viewController.member_like = member_like
             if (params != nil) {
-                viewController.params1 = params
+                viewController.params = params
             }
             self.navigationController!.pushViewController(viewController, animated: true)
         }

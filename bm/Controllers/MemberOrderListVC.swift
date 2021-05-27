@@ -43,7 +43,7 @@ class MemberOrderListVC: ListVC {
         
         Global.instance.addSpinner(superView: self.view)
 
-        dataService.getList(token: Member.instance.token, _filter: params1, page: page, perPage: perPage) { (success) in
+        dataService.getList(token: Member.instance.token, _filter: params, page: page, perPage: perPage) { (success) in
             if (success) {
                 
                 do {
