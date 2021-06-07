@@ -148,13 +148,13 @@ class DataService {
             body["member_token"] = params["member_token"]
         }
         
-        print(body)
+        //print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        print(url)
+        //print(url)
         if url != nil {
             Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
                 
@@ -212,13 +212,13 @@ class DataService {
             body["member_token"] = params["member_token"]
         }
         
-        print(body)
+        //print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        print(url)
+        //print(url)
         if url != nil {
             Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
                 

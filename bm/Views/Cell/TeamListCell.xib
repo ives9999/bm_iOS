@@ -51,25 +51,25 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時段" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8i0-Nr-dEA" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="186" y="79" width="35" height="21"/>
+                        <rect key="frame" x="122" y="110" width="35" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="臨打人數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dm1-Ne-oAd" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="122" y="110" width="70" height="21"/>
+                        <rect key="frame" x="122" y="141" width="70" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="報名人數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWR-S3-v17" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="204" y="110" width="70" height="21"/>
+                        <rect key="frame" x="204" y="141" width="70" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXk-uA-8gX" userLabel="IconView">
-                        <rect key="frame" x="0.0" y="141" width="558" height="36"/>
+                        <rect key="frame" x="0.0" y="172" width="558" height="36"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zqf-7l-AHB" customClass="SuperButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="120" y="0.0" width="36" height="36"/>
@@ -138,20 +138,20 @@
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tXk-uA-8gX" secondAttribute="bottom" constant="8" id="Dmr-eW-DGN"/>
                     <constraint firstAttribute="trailing" secondItem="tXk-uA-8gX" secondAttribute="trailing" id="Gig-EA-uV9"/>
                     <constraint firstItem="ej3-df-e93" firstAttribute="top" secondItem="qTk-GY-GT2" secondAttribute="bottom" constant="10" id="N1U-R2-LwE"/>
-                    <constraint firstItem="8i0-Nr-dEA" firstAttribute="leading" secondItem="Ka9-Tn-K1B" secondAttribute="trailing" constant="12" id="P6L-aD-Iot"/>
+                    <constraint firstItem="8i0-Nr-dEA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="P6L-aD-Iot"/>
                     <constraint firstItem="tXk-uA-8gX" firstAttribute="top" secondItem="Dm1-Ne-oAd" secondAttribute="bottom" constant="10" id="RMD-pS-m8x"/>
                     <constraint firstItem="Ka9-Tn-K1B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="TNQ-lg-Q93"/>
                     <constraint firstItem="ej3-df-e93" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="Wux-7Z-iNj"/>
-                    <constraint firstItem="JWR-S3-v17" firstAttribute="top" secondItem="Ka9-Tn-K1B" secondAttribute="bottom" constant="10" id="d7W-Vs-9l3"/>
+                    <constraint firstItem="JWR-S3-v17" firstAttribute="top" secondItem="8i0-Nr-dEA" secondAttribute="bottom" constant="10" id="d7W-Vs-9l3"/>
                     <constraint firstItem="B0M-vi-qBv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="fMz-pj-ECk"/>
-                    <constraint firstItem="Dm1-Ne-oAd" firstAttribute="top" secondItem="Ka9-Tn-K1B" secondAttribute="bottom" constant="10" id="gMt-yq-i7k"/>
+                    <constraint firstItem="Dm1-Ne-oAd" firstAttribute="top" secondItem="8i0-Nr-dEA" secondAttribute="bottom" constant="10" id="gMt-yq-i7k"/>
                     <constraint firstItem="tXk-uA-8gX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="iOl-Fs-drt"/>
                     <constraint firstItem="B0M-vi-qBv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="mN8-LA-u1i"/>
                     <constraint firstItem="CG0-0i-QKl" firstAttribute="leading" secondItem="ej3-df-e93" secondAttribute="trailing" constant="12" id="onT-mp-n1L"/>
                     <constraint firstItem="JWR-S3-v17" firstAttribute="leading" secondItem="Dm1-Ne-oAd" secondAttribute="trailing" constant="12" id="sqD-xo-qoe"/>
                     <constraint firstItem="CG0-0i-QKl" firstAttribute="top" secondItem="qTk-GY-GT2" secondAttribute="bottom" constant="10" id="uAN-3A-LKt"/>
                     <constraint firstItem="qTk-GY-GT2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="uOq-Df-6xs"/>
-                    <constraint firstItem="8i0-Nr-dEA" firstAttribute="top" secondItem="ej3-df-e93" secondAttribute="bottom" constant="10" id="ukM-6e-ifN"/>
+                    <constraint firstItem="8i0-Nr-dEA" firstAttribute="top" secondItem="Ka9-Tn-K1B" secondAttribute="bottom" constant="10" id="ukM-6e-ifN"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

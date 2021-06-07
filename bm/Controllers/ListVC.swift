@@ -306,17 +306,17 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         tableView.isScrollEnabled = true
     }
     
-    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        newY = scrollView.contentOffset.y
-        if newY < 0 { newY = 0 }
-        //print(newY)
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        newY = scrollView.contentOffset.y
-        if newY < 0 { newY = 0 }
-        //print(scrollView.contentOffset.y)
-    }
+//    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+//        newY = scrollView.contentOffset.y
+//        if newY < 0 { newY = 0 }
+//        //print(newY)
+//    }
+//
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        newY = scrollView.contentOffset.y
+//        if newY < 0 { newY = 0 }
+//        //print(scrollView.contentOffset.y)
+//    }
     
     func prepareParams(city_type: String="simple") {
         params = [String: Any]()
@@ -329,7 +329,6 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
                     }
                     params![key] = value
                 }
-                
             }
         }
         //print(params)

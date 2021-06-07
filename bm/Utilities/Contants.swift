@@ -96,7 +96,7 @@ let IPAD_CELL_ON_ROW:Int = 2
 let CELL_EDGE_MARGIN: CGFloat = 8
 let TITLE_HEIGHT: CGFloat = 27
 let FEATURED_HEIGHT: CGFloat = 200
-let PERPAGE: Int = 20
+let PERPAGE: Int = 6
 
 let STATUSBAR_HEIGHT:CGFloat = 16
 

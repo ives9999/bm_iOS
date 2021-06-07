@@ -38,11 +38,11 @@ class TeamVC: ListVC {
         
         let cellNibName = UINib(nibName: "TeamListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
+        page = 1
     }
     
     override func refresh() {
-        page = 1
-        getDataStart(t: TeamsTable.self)
+        getDataStart(t: TeamsTable.self, page: page, perPage: PERPAGE)
     }
     
     override func getDataEnd(success: Bool) {
@@ -60,6 +60,7 @@ class TeamVC: ListVC {
                 myTablView.reloadData()
             }
         }
+        Global.instance.removeSpinner(superView: view)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

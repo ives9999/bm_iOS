@@ -191,8 +191,15 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         return res
     }
     
-//    func setIden(item: String, titleField: String) {
-//        self.iden = item
-//        self.titleField = titleField
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        //let idx = scrollView.contentOffset.y
+//        let indexPath = tableView.indexPathsForVisibleRows?.last
+//        if indexPath?.row == 5 {
+//            refresh()
+//        }
 //    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        refresh()
+    }
 }

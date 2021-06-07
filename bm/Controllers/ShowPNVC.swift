@@ -75,11 +75,11 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         changeScrollViewContentSize()
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.contentOffset.x != 0 {
-            scrollView.contentOffset.x = 0
-        }
-    }
+//    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView.contentOffset.x != 0 {
+//            scrollView.contentOffset.x = 0
+//        }
+//    }
     
     func changeScrollViewContentSize() {
         let height: CGFloat = tableView.contentSize.height
