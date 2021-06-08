@@ -27,6 +27,12 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     var iden: String!
     var titleField: String!
     
+    var member_like: Bool = false
+    var able_type: String = "coach"
+    var jsonData: Data? = nil
+    var tables: Tables?
+    var params: [String: Any]?
+    
 //    sections = ["商品", "訂單", "付款", "訂購人"]
 //    rows = [
 //        [["name":"商品名稱", "value":"value"],["name":"商品屬性", "value":"attributes"]],
@@ -74,8 +80,70 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
+    func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
+        
+        Global.instance.addSpinner(superView: self.view)
+        
+        //會員喜歡列表也一並使用此程式
+        if (member_like) {
+            MemberService.instance.likelist(able_type: able_type) { (success) in
+                self.jsonData = MemberService.instance.jsonData
+                self._dataToTable(t: t, success)
+            }
+        } else {
+            dataService.getList(token: nil, _filter: params, page: page, perPage: perPage) { (success) in
+                self.jsonData = self.dataService.jsonData
+                self._dataToTable(t: t, success)
+            }
+        }
+    }
+    
+    func _dataToTable<T: Tables>(t: T.Type, _ success: Bool) {
+        if (success) {
+            var s: T? = nil
+            do {
+                if (jsonData != nil) {
+                    s = try JSONDecoder().decode(t, from: jsonData!)
+                } else {
+                    warning("無法從伺服器取得正確的json資料，請洽管理員")
+                }
+            } catch {
+                msg = "解析JSON字串時，得到空值，請洽管理員"
+            }
+            if (s != nil) {
+                tables = s!
+                getDataEnd(success: success)
+            }
+            Global.instance.removeSpinner(superView: view)
+        } else {
+            Global.instance.removeSpinner(superView: view)
+            warning(dataService.msg)
+        }
+    }
+    
     func getDataStart(page: Int=1, perPage: Int=PERPAGE) {}
-    func getDataEnd(success: Bool) {}
+    
+    func getDataEnd(success: Bool) {
+        
+        if page == 1 {
+            //lists = [SuperData]()
+        }
+        //lists += tmps
+        //print(self.lists)
+        page = dataService.page
+        if page == 1 {
+            totalCount = tables!.totalCount
+            perPage = tables!.perPage
+            let _pageCount: Int = totalCount / perPage
+            totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+            //print(totalPage)
+        }
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+        myTablView.reloadData()
+        //self.page = self.page + 1 in CollectionView
+    }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         var count: Int?
@@ -164,12 +232,13 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == page * PERPAGE - 2 {
+        //print(indexPath.row)
+        if indexPath.row == page * perPage - 2 {
             page += 1
             //print("current page: \(page)")
             //print(totalPage)
             if page <= totalPage {
-                getDataStart(page: page, perPage: PERPAGE)
+                getDataStart(page: page, perPage: perPage)
             }
         }
     }
@@ -199,7 +268,7 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
 //        }
 //    }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        refresh()
-    }
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        refresh()
+//    }
 }

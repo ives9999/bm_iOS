@@ -19,7 +19,6 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         //self.params = params
     }
     
-    var able_type: String = "coach"
     //var _titleField: String = "name"
     //internal(set) public var lists: [SuperData] = [SuperData]()
     
@@ -40,12 +39,6 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     var searchPanelisHidden = true
     
     internal(set) public var lists1: [Table] = [Table]()
-    var params: [String: Any]?
-    
-    var jsonData: Data? = nil
-    var tables: Tables?
-    
-    var member_like: Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -86,69 +79,6 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     override func refresh() {
         page = 1
         getDataStart()
-    }
-    
-    func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
-        
-        Global.instance.addSpinner(superView: self.view)
-        
-        //會員喜歡列表也一並使用此程式
-        if (member_like) {
-            MemberService.instance.likelist(able_type: able_type) { (success) in
-                self.jsonData = MemberService.instance.jsonData
-                self._dataToTable(t: t, success)
-            }
-        } else {
-            dataService.getList(token: nil, _filter: params, page: page, perPage: perPage) { (success) in
-                self.jsonData = self.dataService.jsonData
-                self._dataToTable(t: t, success)
-            }
-        }
-    }
-    
-    func _dataToTable<T: Tables>(t: T.Type, _ success: Bool) {
-        if (success) {
-            var s: T? = nil
-            do {
-                if (jsonData != nil) {
-                    s = try JSONDecoder().decode(t, from: jsonData!)
-                } else {
-                    warning("無法從伺服器取得正確的json資料，請洽管理員")
-                }
-            } catch {
-                msg = "解析JSON字串時，得到空值，請洽管理員"
-            }
-            if (s != nil) {
-                tables = s!
-                getDataEnd(success: success)
-            }
-            Global.instance.removeSpinner(superView: view)
-        } else {
-            Global.instance.removeSpinner(superView: view)
-            warning(dataService.msg)
-        }
-    }
-    
-    override func getDataEnd(success: Bool) {
-        
-        if page == 1 {
-            //lists = [SuperData]()
-        }
-        //lists += tmps
-        //print(self.lists)
-        page = dataService.page
-        if page == 1 {
-            totalCount = dataService.totalCount
-            perPage = dataService.perPage
-            let _pageCount: Int = totalCount / perPage
-            totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-            //print(self.totalPage)
-        }
-        if refreshControl.isRefreshing {
-            refreshControl.endRefreshing()
-        }
-        myTablView.reloadData()
-        //self.page = self.page + 1 in CollectionView
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

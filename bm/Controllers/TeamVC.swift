@@ -38,11 +38,16 @@ class TeamVC: ListVC {
         
         let cellNibName = UINib(nibName: "TeamListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
-        page = 1
     }
     
     override func refresh() {
+        page = 1
         getDataStart(t: TeamsTable.self, page: page, perPage: PERPAGE)
+    }
+    
+    override func getDataStart(page: Int = 1, perPage: Int = PERPAGE) {
+        
+        super.getDataStart(t: TeamsTable.self, page: page, perPage: PERPAGE)
     }
     
     override func getDataEnd(success: Bool) {
@@ -54,8 +59,17 @@ class TeamVC: ListVC {
                 
                 if page == 1 {
                     lists1 = [TeamTable]()
+                    totalCount = tables!.totalCount
+                    perPage = tables!.perPage
+                    let _pageCount: Int = totalCount / perPage
+                    totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+                    //print(totalPage)
                 }
                 lists1 += tmps
+                
+                if refreshControl.isRefreshing {
+                    refreshControl.endRefreshing()
+                }
                 
                 myTablView.reloadData()
             }
