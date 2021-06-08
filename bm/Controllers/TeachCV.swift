@@ -25,30 +25,52 @@ class TeachCV: ListVC {
         myTablView.register(cellNibName, forCellReuseIdentifier: "listcell")
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.lightGray
+        
+        refresh()
     }
     
-    override func refresh() {
-        page = 1
-        getDataStart(t: TeachesTable.self)
-    }
+//    override func refresh() {
+//        page = 1
+//        getDataStart(page: page, perPage: PERPAGE)
+//    }
     
-    override func getDataEnd(success: Bool) {
-        if success {
-            
-            mysTable = (tables as? TeachesTable)
-            if mysTable != nil {
-                let tmps: [TeachTable] = mysTable!.rows
-                
-                if page == 1 {
-                    lists1 = [TeachTable]()
-                }
-                lists1 += tmps
-                myTablView.reloadData()
+    override func genericTable() {
+        
+        do {
+            if (jsonData != nil) {
+                mysTable = try JSONDecoder().decode(TeachesTable.self, from: jsonData!)
             } else {
-                warning("轉換Table出錯，請洽管理員")
+                warning("無法從伺服器取得正確的json資料，請洽管理員")
             }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        if (mysTable != nil) {
+            tables = mysTable!
+            if (page == 1) {
+                lists1 = [TeachTable]()
+            }
+            lists1 += mysTable!.rows
         }
     }
+    
+//    override func getDataEnd(success: Bool) {
+//        if success {
+//
+//            mysTable = (tables as? TeachesTable)
+//            if mysTable != nil {
+//                let tmps: [TeachTable] = mysTable!.rows
+//
+//                if page == 1 {
+//                    lists1 = [TeachTable]()
+//                }
+//                lists1 += tmps
+//                myTablView.reloadData()
+//            } else {
+//                warning("轉換Table出錯，請洽管理員")
+//            }
+//        }
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {

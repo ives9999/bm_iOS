@@ -80,6 +80,11 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
+    override func refresh() {
+        page = 1
+        getDataStart(page: page, perPage: PERPAGE)
+    }
+    
     func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
         
         Global.instance.addSpinner(superView: self.view)
@@ -88,61 +93,77 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         if (member_like) {
             MemberService.instance.likelist(able_type: able_type) { (success) in
                 self.jsonData = MemberService.instance.jsonData
-                self._dataToTable(t: t, success)
+                self.getDataEnd(success: success)
             }
         } else {
             dataService.getList(token: nil, _filter: params, page: page, perPage: perPage) { (success) in
                 self.jsonData = self.dataService.jsonData
-                self._dataToTable(t: t, success)
+                self.getDataEnd(success: success)
             }
         }
     }
     
-    func _dataToTable<T: Tables>(t: T.Type, _ success: Bool) {
-        if (success) {
-            var s: T? = nil
-            do {
-                if (jsonData != nil) {
-                    s = try JSONDecoder().decode(t, from: jsonData!)
-                } else {
-                    warning("無法從伺服器取得正確的json資料，請洽管理員")
-                }
-            } catch {
-                msg = "解析JSON字串時，得到空值，請洽管理員"
+//    func _dataToTable<T: Tables>(t: T.Type, _ success: Bool) {
+//        if (success) {
+//            var s: T? = nil
+//            do {
+//                if (jsonData != nil) {
+//                    s = try JSONDecoder().decode(t, from: jsonData!)
+//                } else {
+//                    warning("無法從伺服器取得正確的json資料，請洽管理員")
+//                }
+//            } catch {
+//                msg = "解析JSON字串時，得到空值，請洽管理員"
+//            }
+//            if (s != nil) {
+//                tables = s!
+//                getDataEnd(success: success)
+//            }
+//            Global.instance.removeSpinner(superView: view)
+//        } else {
+//            Global.instance.removeSpinner(superView: view)
+//            warning(dataService.msg)
+//        }
+//    }
+    
+    func genericTable() {}
+    func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
+        Global.instance.addSpinner(superView: self.view)
+        
+        //會員喜歡列表也一並使用此程式
+        if (member_like) {
+            MemberService.instance.likelist(able_type: able_type) { (success) in
+                self.jsonData = MemberService.instance.jsonData
+                self.getDataEnd(success: success)
             }
-            if (s != nil) {
-                tables = s!
-                getDataEnd(success: success)
-            }
-            Global.instance.removeSpinner(superView: view)
         } else {
-            Global.instance.removeSpinner(superView: view)
-            warning(dataService.msg)
+            dataService.getList(token: nil, _filter: params, page: page, perPage: perPage) { (success) in
+                self.jsonData = self.dataService.jsonData
+                self.getDataEnd(success: success)
+            }
         }
     }
-    
-    func getDataStart(page: Int=1, perPage: Int=PERPAGE) {}
     
     func getDataEnd(success: Bool) {
         
-        if page == 1 {
-            //lists = [SuperData]()
+        if (jsonData != nil) {
+            genericTable()
+            if page == 1 {
+                totalCount = tables!.totalCount
+                perPage = tables!.perPage
+                let _pageCount: Int = totalCount / perPage
+                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+                //print(totalPage)
+            }
+            if refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
+            }
+            myTablView.reloadData()
+            //self.page = self.page + 1 in CollectionView
+        } else {
+            warning("沒有取得回傳的json字串，請洽管理員")
         }
-        //lists += tmps
-        //print(self.lists)
-        page = dataService.page
-        if page == 1 {
-            totalCount = tables!.totalCount
-            perPage = tables!.perPage
-            let _pageCount: Int = totalCount / perPage
-            totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-            //print(totalPage)
-        }
-        if refreshControl.isRefreshing {
-            refreshControl.endRefreshing()
-        }
-        myTablView.reloadData()
-        //self.page = self.page + 1 in CollectionView
+        Global.instance.removeSpinner(superView: view)
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {

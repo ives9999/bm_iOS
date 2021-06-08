@@ -37,30 +37,52 @@ class CourseVC: ListVC {
         
         let cellNibName = UINib(nibName: "CourseListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
+        
+        refresh()
     }
     
-    override func refresh() {
-        page = 1
-        getDataStart(t: CoursesTable.self)
-    }
+//    override func refresh() {
+//        page = 1
+//        getDataStart(page: page, perPage: PERPAGE)
+//    }
     
-    override func getDataEnd(success: Bool) {
-        if success {
-            
-            mysTable = (tables as? CoursesTable)
-            if mysTable != nil {
-                let tmps: [CourseTable] = mysTable!.rows
-                
-                if page == 1 {
-                    lists1 = [CourseTable]()
-                }
-                lists1 += tmps
-                myTablView.reloadData()
+    override func genericTable() {
+        
+        do {
+            if (jsonData != nil) {
+                mysTable = try JSONDecoder().decode(CoursesTable.self, from: jsonData!)
             } else {
-                warning("轉換Table出錯，請洽管理員")
+                warning("無法從伺服器取得正確的json資料，請洽管理員")
             }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        if (mysTable != nil) {
+            tables = mysTable!
+            if (page == 1) {
+                lists1 = [CourseTable]()
+            }
+            lists1 += mysTable!.rows
         }
     }
+    
+//    override func getDataEnd(success: Bool) {
+//        if success {
+//
+//            mysTable = (tables as? CoursesTable)
+//            if mysTable != nil {
+//                let tmps: [CourseTable] = mysTable!.rows
+//
+//                if page == 1 {
+//                    lists1 = [CourseTable]()
+//                }
+//                lists1 += tmps
+//                myTablView.reloadData()
+//            } else {
+//                warning("轉換Table出錯，請洽管理員")
+//            }
+//        }
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {

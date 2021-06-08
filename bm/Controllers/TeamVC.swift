@@ -38,44 +38,66 @@ class TeamVC: ListVC {
         
         let cellNibName = UINib(nibName: "TeamListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
-    }
-    
-    override func refresh() {
-        page = 1
-        getDataStart(t: TeamsTable.self, page: page, perPage: PERPAGE)
-    }
-    
-    override func getDataStart(page: Int = 1, perPage: Int = PERPAGE) {
         
-        super.getDataStart(t: TeamsTable.self, page: page, perPage: PERPAGE)
+        refresh()
     }
     
-    override func getDataEnd(success: Bool) {
-        if success {
-            
-            mysTable = (tables as? TeamsTable)
-            if mysTable != nil {
-                let tmps: [TeamTable] = mysTable!.rows
-                
-                if page == 1 {
-                    lists1 = [TeamTable]()
-                    totalCount = tables!.totalCount
-                    perPage = tables!.perPage
-                    let _pageCount: Int = totalCount / perPage
-                    totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                    //print(totalPage)
-                }
-                lists1 += tmps
-                
-                if refreshControl.isRefreshing {
-                    refreshControl.endRefreshing()
-                }
-                
-                myTablView.reloadData()
+//    override func refresh() {
+//        page = 1
+//        getDataStart(page: page, perPage: PERPAGE)
+//    }
+    
+//    override func getDataStart(page: Int = 1, perPage: Int = PERPAGE) {
+//
+//        super.getDataStart(t: TeamsTable.self, page: page, perPage: PERPAGE)
+//    }
+    
+    override func genericTable() {
+        
+        do {
+            if (jsonData != nil) {
+                mysTable = try JSONDecoder().decode(TeamsTable.self, from: jsonData!)
+            } else {
+                warning("無法從伺服器取得正確的json資料，請洽管理員")
             }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
         }
-        Global.instance.removeSpinner(superView: view)
+        if (mysTable != nil) {
+            tables = mysTable!
+            if (page == 1) {
+                lists1 = [TeamTable]()
+            }
+            lists1 += mysTable!.rows
+        }
     }
+    
+//    override func getDataEnd(success: Bool) {
+//        if success {
+//
+//            if (jsonData != nil) {
+//                genericTable()
+//            }
+//
+//            if tables != nil {
+//
+//                if page == 1 {
+//                    totalCount = tables!.totalCount
+//                    perPage = tables!.perPage
+//                    let _pageCount: Int = totalCount / perPage
+//                    totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+//                    //print(totalPage)
+//                }
+//
+//                if refreshControl.isRefreshing {
+//                    refreshControl.endRefreshing()
+//                }
+//
+//                myTablView.reloadData()
+//            }
+//        }
+//        Global.instance.removeSpinner(superView: view)
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {

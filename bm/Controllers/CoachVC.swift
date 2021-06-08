@@ -29,29 +29,51 @@ class CoachVC: ListVC {
         
         let cellNibName = UINib(nibName: "CoachListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
+        
+        refresh()
     }
     
-    override func refresh() {
-        page = 1
-        getDataStart(t: CoachesTable.self)
-    }
+//    override func refresh() {
+//        page = 1
+//        getDataStart(page: page, perPage: PERPAGE)
+//    }
     
-    override func getDataEnd(success: Bool) {
-        if success {
-            
-            mysTable = (tables as? CoachesTable)
-            if mysTable != nil {
-                let tmps: [CoachTable] = mysTable!.rows
-                
-                if page == 1 {
-                    lists1 = [CoachTable]()
-                }
-                lists1 += tmps
-                
-                myTablView.reloadData()
+    override func genericTable() {
+        
+        do {
+            if (jsonData != nil) {
+                mysTable = try JSONDecoder().decode(CoachesTable.self, from: jsonData!)
+            } else {
+                warning("無法從伺服器取得正確的json資料，請洽管理員")
             }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        if (mysTable != nil) {
+            tables = mysTable!
+            if (page == 1) {
+                lists1 = [CoachTable]()
+            }
+            lists1 += mysTable!.rows
         }
     }
+    
+//    override func getDataEnd(success: Bool) {
+//        if success {
+//            
+//            mysTable = (tables as? CoachesTable)
+//            if mysTable != nil {
+//                let tmps: [CoachTable] = mysTable!.rows
+//                
+//                if page == 1 {
+//                    lists1 = [CoachTable]()
+//                }
+//                lists1 += tmps
+//                
+//                myTablView.reloadData()
+//            }
+//        }
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {

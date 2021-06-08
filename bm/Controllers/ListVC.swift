@@ -69,17 +69,17 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         tableView.separatorColor = UIColor.lightGray
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    //override func viewWillAppear(_ animated: Bool) {
         //print(params)
-        if searchPanelisHidden {
-            refresh()
-        }
-    }
+        //if searchPanelisHidden {
+            //refresh()
+        //}
+    //}
     
-    override func refresh() {
-        page = 1
-        getDataStart()
-    }
+//    override func refresh() {
+//        page = 1
+//        getDataStart()
+//    }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         var height: CGFloat = 0
