@@ -41,6 +41,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     
     let body_css = "<style>body{background-color:#000;padding-left:8px;padding-right:8px;margin-top:0;padding-top:0;color:#888888;font-size:18px;}a{color:#a6d903;}</style>"
     
+    var searchPanel: SearchPanel = SearchPanel()
+    
     //WeekdaysSelectDelegate
     func setWeekdaysData(res: [Int], indexPath: IndexPath?){}
     //TimeSelectDelegate
