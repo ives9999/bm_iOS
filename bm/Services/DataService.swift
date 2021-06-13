@@ -36,7 +36,7 @@ class DataService {
     //var featureds: [UIImage] = [UIImage]()
     
     var citys: [City] = [City]()
-    var arenas: [Arena] = [Arena]()
+    var arenas: [ArenaTable] = [ArenaTable]()
     var citysandarenas:[Int:[String:Any]] = [Int:[String:Any]]()
     var citysandareas:[Int:[String:Any]] = [Int:[String:Any]]()
     var msg:String = ""
@@ -88,7 +88,7 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        //print(filter.toJSONString())
+        print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
@@ -1313,11 +1313,14 @@ class DataService {
                 }
                 let json = JSON(data)
                 let jsonArray: [JSON] = json[].arrayValue
-                self.arenas = [Arena]()
+                self.arenas = [ArenaTable]()
                 for arena in jsonArray {
                     let id: Int = arena["id"].intValue
                     let name: String = arena["name"].stringValue
-                    self.arenas.append(Arena(id: id, name: name))
+                    let arenaTable: ArenaTable = ArenaTable()
+                    arenaTable.id = id
+                    arenaTable.name = name
+                    self.arenas.append(arenaTable)
                 }
                 
                 completion(true)

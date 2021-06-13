@@ -10,7 +10,7 @@ import Foundation
 
 class SelectCityVC: SingleSelectVC {
     
-    var selecteds: [String] = [String]()
+    //var selecteds: [String] = [String]()
     
     override func viewDidLoad() {
         myTablView = tableView

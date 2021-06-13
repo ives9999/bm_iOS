@@ -257,7 +257,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         self.present(viewController, animated: true, completion: nil)
     }
     
-    override func singleSelected(key: String, selected: String) {
+    override func singleSelected(key: String, selected: String, show: String?=nil) {
         let item = getFormItemFromKey(key)
         if item != nil {
             item!.value = selected

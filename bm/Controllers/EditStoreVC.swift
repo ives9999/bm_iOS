@@ -204,7 +204,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
         }
     }
     
-    override func singleSelected(key: String, selected: String) {
+    override func singleSelected(key: String, selected: String, show: String?=nil) {
         
         let item = getFormItemFromKey(key)
         if item != nil {

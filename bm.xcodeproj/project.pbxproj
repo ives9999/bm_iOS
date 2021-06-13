@@ -25,6 +25,7 @@
 		B306FEAD21F8422B00403FE2 /* IconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306FEAB21F8422B00403FE2 /* IconCell.swift */; };
 		B306FEAE21F8422B00403FE2 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B306FEAC21F8422B00403FE2 /* IconCell.xib */; };
 		B307AA31263840EE001F685D /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307AA30263840EE001F685D /* LikeButton.swift */; };
+		B309C1E22675F45E00CCFE61 /* SelectArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B309C1E12675F45E00CCFE61 /* SelectArenaVC.swift */; };
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -228,6 +229,7 @@
 		B3C49535262AC2C100D4F727 /* CourseListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C49533262AC2C000D4F727 /* CourseListCell.xib */; };
 		B3C4953E262E671100D4F727 /* CoachListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4953C262E670F00D4F727 /* CoachListCell.swift */; };
 		B3C4953F262E671200D4F727 /* CoachListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C4953D262E670F00D4F727 /* CoachListCell.xib */; };
+		B3CA52AD2675160300E9EAE9 /* SelectTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CA52AC2675160300E9EAE9 /* SelectTimeVC.swift */; };
 		B3CB73D923D410CD00892F75 /* OneLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73D723D410CD00892F75 /* OneLineCell.swift */; };
 		B3CB73DA23D410CD00892F75 /* OneLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CB73D823D410CD00892F75 /* OneLineCell.xib */; };
 		B3CB73DC23D5B14B00892F75 /* SuperDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73DB23D5B14B00892F75 /* SuperDate.swift */; };
@@ -404,6 +406,7 @@
 		B306FEAB21F8422B00403FE2 /* IconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconCell.swift; sourceTree = "<group>"; };
 		B306FEAC21F8422B00403FE2 /* IconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		B307AA30263840EE001F685D /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
+		B309C1E12675F45E00CCFE61 /* SelectArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectArenaVC.swift; sourceTree = "<group>"; };
 		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -610,6 +613,7 @@
 		B3C49533262AC2C000D4F727 /* CourseListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CourseListCell.xib; sourceTree = "<group>"; };
 		B3C4953C262E670F00D4F727 /* CoachListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachListCell.swift; sourceTree = "<group>"; };
 		B3C4953D262E670F00D4F727 /* CoachListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoachListCell.xib; sourceTree = "<group>"; };
+		B3CA52AC2675160300E9EAE9 /* SelectTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeVC.swift; sourceTree = "<group>"; };
 		B3CB73D723D410CD00892F75 /* OneLineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineCell.swift; sourceTree = "<group>"; };
 		B3CB73D823D410CD00892F75 /* OneLineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OneLineCell.xib; sourceTree = "<group>"; };
 		B3CB73DB23D5B14B00892F75 /* SuperDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuperDate.swift; sourceTree = "<group>"; };
@@ -1254,6 +1258,8 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
+				B3CA52AC2675160300E9EAE9 /* SelectTimeVC.swift */,
+				B309C1E12675F45E00CCFE61 /* SelectArenaVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1871,6 +1877,7 @@
 				B3E8C2A022074CC90008ED25 /* SuperCity.swift in Sources */,
 				B326C7CC256E2F0D0048A2C2 /* SelectAreasVC.swift in Sources */,
 				B323390B21B6B8E4003EB84D /* FormValidableProtocol.swift in Sources */,
+				B309C1E22675F45E00CCFE61 /* SelectArenaVC.swift in Sources */,
 				B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */,
 				B33C1AB921BD10B8006F2BEB /* StatusFormItem.swift in Sources */,
 				B3A2542225723F5B004B8A03 /* SelectManagers.swift in Sources */,
@@ -1900,6 +1907,7 @@
 				B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */,
 				B306FEA521F72F0E00403FE2 /* ShowTimetableVC.swift in Sources */,
 				B3A253D22567D6ED004B8A03 /* EditStoreVC.swift in Sources */,
+				B3CA52AD2675160300E9EAE9 /* SelectTimeVC.swift in Sources */,
 				B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */,
 				B3E4D1C32601FD0A00D78210 /* TeamTable.swift in Sources */,
 				B39453DB2230F516005E3027 /* OneSignal.swift in Sources */,

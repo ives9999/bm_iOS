@@ -13,7 +13,7 @@ protocol BackDelegate {
     func setBack(params: [String: Any])
 }
 
-class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegate, BackDelegate, List1CellDelegate {
+class ListVC: MyTableVC, CitySelectDelegate, AreaSelectDelegate, BackDelegate, List1CellDelegate {
     
     func setBack(params: [String: Any]) {
         //self.params = params
@@ -33,8 +33,6 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     let padding: CGFloat = 20
     let headerHeight: CGFloat = 84
     var layerHeight: CGFloat = 0
-    
-    var searchRows: [[String: Any]] = [[String: Any]]()
         
     var searchPanelisHidden = true
     
@@ -248,7 +246,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
 //        //print(scrollView.contentOffset.y)
 //    }
     
-    func prepareParams(city_type: String="simple") {
+    override func prepareParams(city_type: String="simple") {
         params = [String: Any]()
         for row in searchRows {
             
@@ -270,7 +268,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     
     @IBAction func searchBtnPressed(_ sender: Any) {
         if searchPanelisHidden {
-            showSearchPanel()
+            searchPanel.showSearchPanel(baseVC: self, view: view, newY: newY, searchRows: searchRows)
+            //showSearchPanel()
         } else {
             searchPanelisHidden = true
             unmask()
@@ -285,7 +284,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
         refresh()
     }
     
-    func setSwitch(indexPath: IndexPath, value: Bool) {
+    override func setSwitch(indexPath: IndexPath, value: Bool) {
         var row = searchRows[indexPath.row]
         let key = row["key"] as! String
         row["value"] = (value) ? "1" : ""
@@ -299,16 +298,13 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
 //        }
     }
     
-    func setTextField(key: String, value: String) {
+    override func setTextField(key: String, value: String) {
         
-        var row = getDefinedRow(key)
-        row["value"] = value
-        replaceRows(key, row)
-        //keyword = value
+        searchPanel.setTextField(key: key, value: value)
     }
     
-    func clear(indexPath: IndexPath) {
-        var row = searchRows[indexPath.row]
+    override func clear(indexPath: IndexPath) {
+        let row = searchRows[indexPath.row]
         //print(row)
         
         let key = row["key"] as! String
@@ -330,9 +326,7 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
 //        default:
 //            _ = 1
 //        }
-        row["show"] = "全部"
-        row["value"] = ""
-        replaceRows(key, row)
+        searchPanel.clear(key: key)
     }
     
     func setCityData(id: Int, name: String) {}
@@ -416,44 +410,48 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
 //    }
     
     //city select return this
-    override func singleSelected(key: String, selected: String) {
-        var row = getDefinedRow(key)
-        var show = ""
-        if key == START_TIME_KEY || key == END_TIME_KEY {
-            row["value"] = selected
-            show = selected.noSec()
-        } else if (key == CITY_KEY || key == AREA_KEY) {
-            row["value"] = selected
-            show = Global.instance.zoneIDToName(Int(selected)!)
-        }
-        row["show"] = show
-        replaceRows(key, row)
-        searchTableView.reloadData()
+    override func singleSelected(key: String, selected: String, show: String?=nil) {
+        
+//        var row = getDefinedRow(key)
+//        var show = ""
+//        if key == START_TIME_KEY || key == END_TIME_KEY {uyt
+//            row["value"] = selected
+//            show = selected.noSec()
+//        } else if (key == CITY_KEY || key == AREA_KEY) {
+//            row["value"] = selected
+//            show = Global.instance.zoneIDToName(Int(selected)!)
+//        }
+//        row["show"] = show
+//        replaceRows(key, row)
+//        searchTableView.reloadData()
+        searchPanel.singleSelected(key: key, selected: selected, show: show)
     }
     
     override func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
-        var row = getDefinedRow(WEEKDAY_KEY)
-        var texts: [String] = [String]()
-        var values: [String] = [String]()
-        if res.count > 0 {
-            for day in res {
-                values.append(String(day))
-                for gday in Global.instance.weekdays {
-                    if day == gday["value"] as! Int {
-                        let text = gday["simple_text"]
-                        texts.append(text! as! String)
-                        break
-                    }
-                }
-            }
-            row["show"] = texts.joined(separator: ",")
+//        var row = getDefinedRow(WEEKDAY_KEY)
+//        var texts: [String] = [String]()
+//        var values: [String] = [String]()
+//        if res.count > 0 {
+//            for day in res {
+//                values.append(String(day))
+//                for gday in Global.instance.weekdays {
+//                    if day == gday["value"] as! Int {
+//                        let text = gday["simple_text"]
+//                        texts.append(text! as! String)
+//                        break
+//                    }
+//                }
+//            }
+//            row["show"] = texts.joined(separator: ",")
+//
+//            row["value"] = values.joined(separator: ",")
+//        } else {
+//            row["show"] = "全部"
+//        }
+//        replaceRows(WEEKDAY_KEY, row)
+//        searchTableView.reloadData()
         
-            row["value"] = values.joined(separator: ",")
-        } else {
-            row["show"] = "全部"
-        }
-        replaceRows(WEEKDAY_KEY, row)
-        searchTableView.reloadData()
+        searchPanel.setWeekdaysData(res: res)
     }
     
     override func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
@@ -485,22 +483,8 @@ class ListVC: MyTableVC, EditCellDelegate, CitySelectDelegate, AreaSelectDelegat
     }
     
     override func setDegreeData(res: [DEGREE]) {
-        var row = getDefinedRow(DEGREE_KEY)
-        var names: [String] = [String]()
-        var values: [String] = [String]()
-        if res.count > 0 {
-            for degree in res {
-                names.append(degree.rawValue)
-                values.append(DEGREE.DBValue(degree))
-            }
-            row["show"] = names.joined(separator: ",")
-            row["value"] = values.joined(separator: ",")
-        } else {
-            row["show"] = "全部"
-            row["value"] = ""
-        }
-        replaceRows(DEGREE_KEY, row)
-        searchTableView.reloadData()
+        
+        searchPanel.setDegreeData(res: res)
     }
     
     func showMap(indexPath: IndexPath) {}

@@ -299,7 +299,7 @@ class CourseCalendarVC: ListVC {
         }
     }
 
-    override func singleSelected(key: String, selected: String) {
+    override func singleSelected(key: String, selected: String, show: String?=nil) {
         var row = getDefinedRow(key)
         var show = ""
         if key == START_TIME_KEY || key == END_TIME_KEY {

@@ -86,9 +86,9 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
-        
+
         Global.instance.addSpinner(superView: self.view)
-        
+
         //會員喜歡列表也一並使用此程式
         if (member_like) {
             MemberService.instance.likelist(able_type: able_type) { (success) in

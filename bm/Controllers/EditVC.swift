@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, TextInputDelegate, ImagePickerViewDelegate, EditCellDelegate {
+class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CitySelectDelegate, TextInputDelegate, ImagePickerViewDelegate {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -401,7 +401,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         }
         return res!
     }
-    func setTextField(key: String, value: String) {
+    override func setTextField(key: String, value: String) {
         for (key, _) in model.data {
             if key == iden {
                 let item: [String: Any] = model.data[key]!
@@ -435,10 +435,8 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         }
         //print(model.data)
     }
-    func setSwitch(indexPath: IndexPath, value: Bool) {
-    }
     
-    func clear(indexPath: IndexPath) {
+    override func clear(indexPath: IndexPath) {
         let dataRow = _getRowByindexPath(indexPath: indexPath)
         if dataRow["atype"] != nil && (dataRow["atype"] as! UITableViewCell.AccessoryType == .disclosureIndicator) {
             if dataRow["key"] != nil {

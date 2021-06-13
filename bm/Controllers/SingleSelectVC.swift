@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SingleSelectDelegate: SelectDelegate {
-    func singleSelected(key: String, selected: String)
+    func singleSelected(key: String, selected: String, show: String?)
 }
 
 class SingleSelectVC: SelectVC {
@@ -75,7 +75,7 @@ class SingleSelectVC: SelectVC {
             if delegate != nil {
                 let _key = ((key == nil) ? "" : key)!
                 if (delegate != nil) {
-                    delegate!.singleSelected(key: _key, selected: row["value"]!)
+                    delegate!.singleSelected(key: _key, selected: row["value"]!, show: nil)
                 } else {
                     warning("沒有傳入代理程式，請洽管理員")
                 }

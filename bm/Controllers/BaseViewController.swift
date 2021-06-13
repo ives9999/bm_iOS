@@ -12,7 +12,7 @@ import Reachability
 import WebKit
 import SCLAlertView
 
-class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate, DegreeSelectDelegate {
+class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate, DegreeSelectDelegate, EditCellDelegate {
     
     var msg: String = ""
     var dataService: DataService = DataService()
@@ -42,6 +42,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     let body_css = "<style>body{background-color:#000;padding-left:8px;padding-right:8px;margin-top:0;padding-top:0;color:#888888;font-size:18px;}a{color:#a6d903;}</style>"
     
     var searchPanel: SearchPanel = SearchPanel()
+    var searchRows: [[String: Any]] = [[String: Any]]()
     
     //WeekdaysSelectDelegate
     func setWeekdaysData(res: [Int], indexPath: IndexPath?){}
@@ -51,6 +52,10 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func setArenaData(res: [ArenaTable]){}
     //DegreeSelectDelegate
     func setDegreeData(res: [DEGREE]){}
+    //EditCellDeldgate
+    func setTextField(key: String, value: String) {}
+    func setSwitch(indexPath: IndexPath, value: Bool) {}
+    func clear(indexPath: IndexPath) {}
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +112,9 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         containerView.backgroundColor = UIColor.black
         _addLayer()
     }
+    
     func _addLayer() {}
+    
     func layerAddSubmitBtn(upView: UIView) {
         containerView.addSubview(layerSubmitBtn)
         let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 12)
@@ -162,6 +169,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         })
     }
     func otherAnimation(){}
+    func prepareParams(city_type: String="simple") {}
+    
     @objc func unmask(){}
     @objc func layerSubmit(view: UIButton){}
     @objc func layerDelete(view: UIButton){}
@@ -528,61 +537,55 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     }
     
     //input["type":PLAY_START,"time":time]
-    func toSelectTime(key: String? = nil, selecteds: [String]? = nil, input: [String: Any], delegate: BaseViewController) {
+    func toSelectTime(key: String? = nil, selected: String? = nil, delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-3jC-Sa-5eM") as? TimeSelectVC {
+            let storyboard = UIStoryboard(name: "Select", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toSelectTime") as? SelectTimeVC {
                 if key != nil {
                     viewController.key = key
                 }
-                if selecteds != nil {
-                    viewController.selecteds = selecteds!
+                if selected != nil {
+                    viewController.selected = selected!
                 }
-                viewController.input = input
                 viewController.delegate = delegate
                 show(viewController, sender: nil)
             }
         } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-3jC-Sa-5eM") as! TimeSelectVC
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toSelectTime") as! SelectTimeVC
             if key != nil {
                 viewController.key = key
             }
-            if selecteds != nil {
-                viewController.selecteds = selecteds!
+            if selected != nil {
+                viewController.selected = selected!
             }
-            viewController.input = input
             viewController.delegate = delegate
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
     
-    func toSelectArena(key: String? = nil, selecteds: [Int]? = nil, citys: [Int]? = nil, delegate: BaseViewController) {
+    func toSelectArena(key: String? = nil, city: Int, selected: String? = nil, delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-nnI-xU-Qec") as? ArenaSelectVC {
+            let storyboard = UIStoryboard(name: "Select", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toSelectArena") as? SelectArenaVC {
                 if key != nil {
                     viewController.key = key
                 }
-                if selecteds != nil {
-                    viewController.selecteds = selecteds!
+                if selected != nil {
+                    viewController.selected = selected!
                 }
-                if (citys != nil) {
-                    viewController.citys = citys!
-                }
+                viewController.city = city
                 viewController.delegate = delegate
                 show(viewController, sender: nil)
             }
         } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-nnI-xU-Qec") as! ArenaSelectVC
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toSelectArena") as! SelectArenaVC
             if key != nil {
                 viewController.key = key
             }
-            if selecteds != nil {
-                viewController.selecteds = selecteds!
+            if selected != nil {
+                viewController.selected = selected!
             }
-            if (citys != nil) {
-                viewController.citys = citys!
-            }
+            viewController.city = city
             viewController.delegate = delegate
             self.navigationController!.pushViewController(viewController, animated: true)
         }
@@ -1226,7 +1229,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     }
     
     func multiSelected(key: String, selecteds: [String]) {}
-    func singleSelected(key: String, selected: String) {}
+    func singleSelected(key: String, selected: String, show: String?=nil) {}
     func selectedManagers(selecteds: [String]) {}
     func dateSelected(key: String, selected: String) {}
     func checkboxValueChanged(checked: Bool) {}

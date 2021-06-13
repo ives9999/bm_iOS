@@ -187,18 +187,20 @@ class SearchVC: ListVC, UINavigationControllerDelegate {
                         type = SELECT_TIME_TYPE.play_end
                     }
                     
-                    let selecteds: [String] = valueToArray(t: String.self, row: row)
-                    toSelectTime(key: key, selecteds: selecteds, input: ["type": type], delegate: self)
+                    var selected: String? = nil
+                    if (row.keyExist(key: "value") && row["value"] != nil) {
+                        selected = row["value"] as? String
+                    }
+                    toSelectTime(key: key, selected: selected, delegate: self)
                 } else if segue == TO_ARENA {
         
-                    var citys: [Int] = [Int]()
                     var city: Int? = nil
                     var row = getDefinedRow(CITY_KEY)
                     if let value: String = row["value"] as? String {
                         city = Int(value)
-                        if (city != nil) {
-                            citys.append(city!)
-                        }
+    //                    if (city != nil) {
+    //                        citys.append(city!)
+    //                    }
                     }
                     
                     if (city == nil) {
@@ -207,8 +209,8 @@ class SearchVC: ListVC, UINavigationControllerDelegate {
                     
                         //取得選擇球館的代號
                         row = getDefinedRow(ARENA_KEY)
-                        let selecteds: [Int] = valueToArray(t: Int.self, row: row)
-                        toSelectArena(selecteds: selecteds, citys: citys, delegate: self)
+                        let selected: String = row["value"] as! String
+                        toSelectArena(city: city!, selected: selected, delegate: self)
                     }
                 } else if (segue == TO_SELECT_DEGREE) {
                     
