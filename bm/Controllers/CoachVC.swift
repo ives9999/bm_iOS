@@ -76,64 +76,30 @@ class CoachVC: ListVC {
 //    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView {
-            return lists1.count
-        } else {
-            return searchRows.count
-        }
+        return lists1.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? CoachListCell {
-                
-                cell.cellDelegate = self
-                let row = lists1[indexPath.row] as? CoachTable
-                if row != nil {
-                    row!.filterRow()
-                    //row!.printRow()
-                    cell.updateViews(row!)
-                }
-                
-                return cell
-            } else {
-                return ListCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? CoachListCell {
+            
+            cell.cellDelegate = self
+            let row = lists1[indexPath.row] as? CoachTable
+            if row != nil {
+                row!.filterRow()
+                //row!.printRow()
+                cell.updateViews(row!)
             }
-        } else if tableView == searchTableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
-                cell.editCellDelegate = self
-                let searchRow = searchRows[indexPath.row]
-                //print(searchRow)
-                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
-                return cell
-            }
+            
+            return cell
+        } else {
+            return ListCell()
         }
-        
-        return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == self.tableView {
-            if mysTable != nil {
-                let myTable = mysTable!.rows[indexPath.row]
-                toShowCoach(token: myTable.token)
-            }
-        } else if tableView == searchTableView {
-            let row = searchRows[indexPath.row]
-            
-            var key: String? = nil
-            if (row.keyExist(key: "key") && row["key"] != nil) {
-                key = row["key"] as? String
-            }
-            
-            let segue: String = row["segue"] as! String
-            if (segue == TO_CITY) {
-                var selected: String? = nil
-                if (row.keyExist(key: "value") && row["value"] != nil) {
-                    selected = row["value"] as? String
-                }
-                toSelectCity(key: key, selected: selected, delegate: self)
-            }
+        if mysTable != nil {
+            let myTable = mysTable!.rows[indexPath.row]
+            toShowCoach(token: myTable.token)
         }
     }
     

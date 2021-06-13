@@ -13,7 +13,7 @@ protocol BackDelegate {
     func setBack(params: [String: Any])
 }
 
-class ListVC: MyTableVC, CitySelectDelegate, AreaSelectDelegate, BackDelegate, List1CellDelegate {
+class ListVC: MyTableVC, BackDelegate, List1CellDelegate {
     
     func setBack(params: [String: Any]) {
         //self.params = params
@@ -285,17 +285,9 @@ class ListVC: MyTableVC, CitySelectDelegate, AreaSelectDelegate, BackDelegate, L
     }
     
     override func setSwitch(indexPath: IndexPath, value: Bool) {
-        var row = searchRows[indexPath.row]
-        let key = row["key"] as! String
-        row["value"] = (value) ? "1" : ""
-        replaceRows(key, row)
-//        if (key == ARENA_AIR_CONDITION_KEY) {
-//            air_condition = value
-//        } else if (key == ARENA_BATHROOM_KEY) {
-//            bathroom = value
-//        } else if (key == ARENA_PARKING_KEY) {
-//            parking = value
-//        }
+        
+        searchPanel.setSwitch(indexPath: indexPath, value: value)
+        
     }
     
     override func setTextField(key: String, value: String) {
@@ -308,88 +300,70 @@ class ListVC: MyTableVC, CitySelectDelegate, AreaSelectDelegate, BackDelegate, L
         //print(row)
         
         let key = row["key"] as! String
-//        switch key {
-//        case CITY_KEY:
-//            citys.removeAll()
-//        case AREA_KEY:
-//            areas.removeAll()
-//        case WEEKDAY_KEY:
-//            weekdays.removeAll()
-//        case START_TIME_KEY:
-//            times.removeAll()
-//        case END_TIME_KEY:
-//            times.removeAll()
-//        case ARENA_KEY:
-//            arenas.removeAll()
-//        case TEAM_DEGREE_KEY:
-//            degrees.removeAll()
-//        default:
-//            _ = 1
-//        }
         searchPanel.clear(key: key)
     }
     
-    func setCityData(id: Int, name: String) {}
+    //func setCityData(id: Int, name: String) {}
     
-    func setCitysData(res: [City]) {
-        //print(res)
-        var row = getDefinedRow(CITY_KEY)
-        var texts: [String] = [String]()
-        //citys = res
-        if res.count > 0 {
-            for city in res {
-                let text = city.name
-                texts.append(text)
-            }
-            row["show"] = texts.joined(separator: ",")
-        } else {
-            row["show"] = "全部"
-        }
-        replaceRows(CITY_KEY, row)
-        searchTableView.reloadData()
-    }
+//    func setCitysData(res: [City]) {
+//        //print(res)
+//        var row = getDefinedRow(CITY_KEY)
+//        var texts: [String] = [String]()
+//        //citys = res
+//        if res.count > 0 {
+//            for city in res {
+//                let text = city.name
+//                texts.append(text)
+//            }
+//            row["show"] = texts.joined(separator: ",")
+//        } else {
+//            row["show"] = "全部"
+//        }
+//        replaceRows(CITY_KEY, row)
+//        searchTableView.reloadData()
+//    }
     
-    func setAreasData(res: [Area]) {
-        //print(res)
-        var row = getDefinedRow(AREA_KEY)
-        var names: [String] = [String]()
-        var ids: [String] = [String]()
-        //areas = res
-        if res.count > 0 {
-            for area in res {
-                names.append(area.name)
-                ids.append(String(area.id))
-            }
-            row["show"] = names.joined(separator: ",")
-            row["value"] = ids.joined(separator: ",")
-        } else {
-            row["show"] = "全部"
-            row["value"] = ""
-        }
-        replaceRows(AREA_KEY, row)
-        searchTableView.reloadData()
-    }
+//    func setAreasData(res: [Area]) {
+//        //print(res)
+//        var row = getDefinedRow(AREA_KEY)
+//        var names: [String] = [String]()
+//        var ids: [String] = [String]()
+//        //areas = res
+//        if res.count > 0 {
+//            for area in res {
+//                names.append(area.name)
+//                ids.append(String(area.id))
+//            }
+//            row["show"] = names.joined(separator: ",")
+//            row["value"] = ids.joined(separator: ",")
+//        } else {
+//            row["show"] = "全部"
+//            row["value"] = ""
+//        }
+//        replaceRows(AREA_KEY, row)
+//        searchTableView.reloadData()
+//    }
     
     //選擇球館後
-    override func setArenaData(res: [ArenaTable]) {
-        var row = getDefinedRow(ARENA_KEY)
-        var names: [String] = [String]()
-        var ids: [String] = [String]()
-        //areas = res
-        if res.count > 0 {
-            for arenaTable in res {
-                names.append(arenaTable.name)
-                ids.append(String(arenaTable.id))
-            }
-            row["show"] = names.joined(separator: ",")
-            row["value"] = ids.joined(separator: ",")
-        } else {
-            row["show"] = "全部"
-            row["value"] = ""
-        }
-        replaceRows(ARENA_KEY, row)
-        searchTableView.reloadData()
-    }
+//    override func setArenaData(res: [ArenaTable]) {
+//        var row = getDefinedRow(ARENA_KEY)
+//        var names: [String] = [String]()
+//        var ids: [String] = [String]()
+//        //areas = res
+//        if res.count > 0 {
+//            for arenaTable in res {
+//                names.append(arenaTable.name)
+//                ids.append(String(arenaTable.id))
+//            }
+//            row["show"] = names.joined(separator: ",")
+//            row["value"] = ids.joined(separator: ",")
+//        } else {
+//            row["show"] = "全部"
+//            row["value"] = ""
+//        }
+//        replaceRows(ARENA_KEY, row)
+//        searchTableView.reloadData()
+//    }
     
 //    func setArenasData(res: [Arena]) {
 //        //print(res)
@@ -454,33 +428,33 @@ class ListVC: MyTableVC, CitySelectDelegate, AreaSelectDelegate, BackDelegate, L
         searchPanel.setWeekdaysData(res: res)
     }
     
-    override func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
-        let time = res[0]
-        var row: [String: Any]
-        var text = ""
-        if time == "" {
-            text = "全部"
-        } else {
-            text = time
-        }
-        switch type {
-        case SELECT_TIME_TYPE.play_start:
-            //times[START_TIME_KEY] = time
-            row = getDefinedRow(START_TIME_KEY)
-            row["show"] = text
-            row["value"] = text
-            replaceRows(START_TIME_KEY, row)
-            break
-        case SELECT_TIME_TYPE.play_end:
-            //times[END_TIME_KEY] = time
-            row = getDefinedRow(END_TIME_KEY)
-            row["show"] = text
-            row["value"] = text
-            replaceRows(END_TIME_KEY, row)
-            break
-        }
-        searchTableView.reloadData()
-    }
+//    override func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+//        let time = res[0]
+//        var row: [String: Any]
+//        var text = ""
+//        if time == "" {
+//            text = "全部"
+//        } else {
+//            text = time
+//        }
+//        switch type {
+//        case SELECT_TIME_TYPE.play_start:
+//            //times[START_TIME_KEY] = time
+//            row = getDefinedRow(START_TIME_KEY)
+//            row["show"] = text
+//            row["value"] = text
+//            replaceRows(START_TIME_KEY, row)
+//            break
+//        case SELECT_TIME_TYPE.play_end:
+//            //times[END_TIME_KEY] = time
+//            row = getDefinedRow(END_TIME_KEY)
+//            row["show"] = text
+//            row["value"] = text
+//            replaceRows(END_TIME_KEY, row)
+//            break
+//        }
+//        searchTableView.reloadData()
+//    }
     
     override func setDegreeData(res: [DEGREE]) {
         

@@ -78,66 +78,33 @@ class StoreVC: ListVC {
 //    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView {
-            return lists1.count
-        } else {
-            return searchRows.count
-        }
+        return lists1.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? StoreListCell {
-                
-                cell.cellDelegate = self
-                let row = lists1[indexPath.row] as? StoreTable
-                if row != nil {
-                    row!.filterRow()
-                    //row!.printRow()
-                
-                    cell.updateViews(row!)
-                }
-                
-                return cell
-            } else {
-                return ListCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? StoreListCell {
+            
+            cell.cellDelegate = self
+            let row = lists1[indexPath.row] as? StoreTable
+            if row != nil {
+                row!.filterRow()
+                //row!.printRow()
+            
+                cell.updateViews(row!)
             }
-        } else if tableView == searchTableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
-                cell.editCellDelegate = self
-                let searchRow = searchRows[indexPath.row]
-                //print(searchRow)
-                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
-                return cell
-            }
+            
+            return cell
+        } else {
+            return ListCell()
         }
-        
-        return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if tableView == self.tableView {
-            if mysTable != nil {
-                let storeTable = mysTable!.rows[indexPath.row]
-                toShowStore(token: storeTable.token)
-                //performSegue(withIdentifier: TO_SHOW_STORE, sender: storeTable)
-            }
-            
-        } else if tableView == searchTableView {
-            
-            let row = searchRows[indexPath.row]
-            let segue: String = row["segue"] as! String
-            
-            let key: String = row["key"] as! String
-            if (segue == TO_CITY) {
-                var selected: String? = nil
-                if (row.keyExist(key: "value") && row["value"] != nil) {
-                    selected = row["value"] as? String
-                }
-                toSelectCity(key: key, selected: selected, delegate: self)
-            }
-            //performSegue(withIdentifier: segue, sender: indexPath)
+        if mysTable != nil {
+            let storeTable = mysTable!.rows[indexPath.row]
+            toShowStore(token: storeTable.token)
+            //performSegue(withIdentifier: TO_SHOW_STORE, sender: storeTable)
         }
     }
     

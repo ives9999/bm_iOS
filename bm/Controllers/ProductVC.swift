@@ -72,71 +72,44 @@ class ProductVC: ListVC {
 //    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView {
-            return lists1.count
-        } else {
-            return searchRows.count
-        }
+        return lists1.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ProductListCell {
-                
-                cell.cellDelegate = self
-                let row = lists1[indexPath.row] as? ProductTable
-                if row != nil {
-                    row!.filterRow()
-                    //row!.printRow()
-                
-                    cell.updateViews(row!)
-                }
-                return cell
-            } else {
-                return ListCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ProductListCell {
+            
+            cell.cellDelegate = self
+            let row = lists1[indexPath.row] as? ProductTable
+            if row != nil {
+                row!.filterRow()
+                //row!.printRow()
+            
+                cell.updateViews(row!)
             }
-        } else if tableView == searchTableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
-                cell.editCellDelegate = self
-                let searchRow = searchRows[indexPath.row]
-                //print(searchRow)
-                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
-                return cell
-            }
+            return cell
+        } else {
+            return ListCell()
         }
-        
-        return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if tableView == self.tableView {
-            if mysTable != nil {
-                let productTable = mysTable!.rows[indexPath.row]
-                //toShowProduct(token: superProduct.token)
-                let token = productTable.token
-                if #available(iOS 13.0, *) {
-                    let storyboard = UIStoryboard(name: "More", bundle: nil)
-                    if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_PRODUCT)  as? ShowProductVC {
-                        
-                        viewController.token = token
-                        show(viewController, sender: nil)
-                    }
-                } else {
-                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_PRODUCT) as! ShowProductVC
+        if mysTable != nil {
+            let productTable = mysTable!.rows[indexPath.row]
+            //toShowProduct(token: superProduct.token)
+            let token = productTable.token
+            if #available(iOS 13.0, *) {
+                let storyboard = UIStoryboard(name: "More", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_PRODUCT)  as? ShowProductVC {
+                    
                     viewController.token = token
-                    self.navigationController!.pushViewController(viewController, animated: true)
+                    show(viewController, sender: nil)
                 }
+            } else {
+                let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_PRODUCT) as! ShowProductVC
+                viewController.token = token
+                self.navigationController!.pushViewController(viewController, animated: true)
             }
-            
-        } else if tableView == searchTableView {
-            
-//            let row = searchRows[indexPath.row]
-//            let segue: String = row["segue"] as! String
-//
-//            let key: String = row["key"] as! String
-            
-            //performSegue(withIdentifier: segue, sender: indexPath)
         }
     }
     

@@ -319,6 +319,16 @@ class SearchPanel: UIViewController {
         replaceRows(key, row)
     }
     
+    func setSwitch(indexPath: IndexPath, value: Bool) {
+        
+        var row = searchRows[indexPath.row]
+        let key = row["key"] as! String
+        row["value"] = (value) ? "1" : ""
+        replaceRows(key, row)
+        
+        reloadSearchTable()
+    }
+    
     func reloadSearchTable() {
     
         searchTableView.reloadData()
@@ -424,6 +434,30 @@ extension SearchPanel: UITableViewDelegate {
                 selecteds.append(DEGREE.enumFromString(string: tmp))
             }
             baseVC!.toSelectDegree(selecteds: selecteds, delegate: baseVC!)
+        } else if segue == TO_AREA {
+            
+            //var citys: [Int] = [Int]()
+            var city: Int? = nil
+            var row = getDefinedRow(CITY_KEY)
+            if let value: String = row["value"] as? String {
+                city = Int(value)
+//                    if (city != nil) {
+//                        citys.append(city!)
+//                    }
+            }
+            
+            if (city == nil) {
+                baseVC!.warning("請先選擇縣市")
+            } else {
+            
+                //取得選擇球館的代號
+                row = getDefinedRow(AREA_KEY)
+                var selected: String? = nil
+                if (row.keyExist(key: "value") && row["value"] != nil) {
+                    selected = row["value"] as? String
+                }
+                baseVC!.toSelectArea(key: key, city_id: city, selected: selected, delegate: baseVC!)
+            }
         } else {
             //performSegue(withIdentifier: segue, sender: indexPath)
         }
