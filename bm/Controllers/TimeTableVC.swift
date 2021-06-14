@@ -186,7 +186,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         present(alert, animated: true, completion: nil)
     }
     
-    @objc override func layerSubmit(view: UIButton) {
+    @objc func layerSubmit(view: UIButton) {
         if TTEditAction == "UPDATE" {
             let (isChange, msg) = form.isChanged()
             if !isChange {
@@ -205,7 +205,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         prepareParams()
     }
     
-    override func layerDelete(view: UIButton) {
+    func layerDelete(view: UIButton) {
         warning(msg: "是否真的要刪除此事件？", closeButtonTitle: "取消", buttonTitle: "確定") {
             self._layerDelete()
         }
@@ -269,21 +269,21 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         let layerY = workAreaHeight + newY
         var frame = CGRect(x:padding, y:layerY, width:view.frame.width-(2*padding), height:layerY)
         layerBtnCount = btnCount
-        addLayer(superView: collectionView, frame: frame)
+        //addLayer(superView: collectionView, frame: frame)
         let y = newY
         frame = CGRect(x: padding, y: y, width: containerView.frame.width, height: layerY)
-        animation(frame: frame)
+        //animation(frame: frame)
     }
-    override func _addLayer() {
+    func _addLayer() {
         editTableView.isHidden = false
         containerView.addSubview(editTableView)
-        layerAddSubmitBtn(upView: editTableView)
-        layerAddCancelBtn(upView: editTableView)
-        if layerBtnCount > 2 {
-            layerAddDeleteBtn(upView: editTableView)
-        }
+//        layerAddSubmitBtn(upView: editTableView)
+//        layerAddCancelBtn(upView: editTableView)
+//        if layerBtnCount > 2 {
+//            layerAddDeleteBtn(upView: editTableView)
+//        }
     }
-    override func otherAnimation() {
+    func otherAnimation() {
         let frame = containerView.frame
         editTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 500)
     }

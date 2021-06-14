@@ -122,6 +122,14 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         refresh()
     }
     
+    func addStatic(height: CGFloat, superView: UIView) {
+        let w = view.frame.width
+        let h = view.frame.height
+        let mainBound = CGRect(x: 0, y: h-height, width: w, height: height)
+        staticButtomView = StaticBottomView.init(frame: mainBound)
+        superView.addSubview(staticButtomView!)
+    }
+    
     override func viewDidLayoutSubviews() {
         addStatic(height: 50, superView: view)
         signupBtn!.translatesAutoresizingMaskIntoConstraints = false
