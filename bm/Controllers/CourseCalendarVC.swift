@@ -10,7 +10,7 @@ import UIKit
 import SCLAlertView
 //import SelectionDialog
 
-class CourseCalendarVC: ListVC {
+class CourseCalendarVC: MyTableVC {
     
     @IBOutlet weak var managerBtn: UIButton!
     @IBOutlet weak var yearTxt: UILabel!
@@ -224,39 +224,19 @@ class CourseCalendarVC: ListVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if tableView == myTablView {
-//            let cell = CalendarSignupCell(style: .default, reuseIdentifier: "cell")
-//            let dateCourse = dateCourses[indexPath.row]
-//            cell.update(dateCourse, course_width: course_width, course_height: course_height, course_gap: course_gap)
-//            return cell
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "calendar_signup_cell", for: indexPath) as? CalendarSignupCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "calendar_signup_cell", for: indexPath) as? CalendarSignupCell {
 
-                for view in cell.courseContainer.subviews {
-                    view.removeFromSuperview()
-                }
-                //cell.dateTxt.text = ""
-                let dateCourse = dateCourses[indexPath.row]
-                cell.update(dateCourse, course_width: course_width, course_height: course_height, course_gap: course_gap)
+            for view in cell.courseContainer.subviews {
+                view.removeFromSuperview()
+            }
+            //cell.dateTxt.text = ""
+            let dateCourse = dateCourses[indexPath.row]
+            cell.update(dateCourse, course_width: course_width, course_height: course_height, course_gap: course_gap)
 
-                return cell
-            } else {
-                return CalendarSignupCell()
-            }
-        } else if tableView == searchTableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
-                cell.editCellDelegate = self
-                let searchRow = searchRows[indexPath.row]
-                //print(searchRow)
-                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
-                return cell
-            }
+            return cell
+        } else {
+            return CalendarSignupCell()
         }
-               
-        return UITableViewCell()
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
     }
     
     func makeCourseArr() {
@@ -299,49 +279,49 @@ class CourseCalendarVC: ListVC {
         }
     }
 
-    override func singleSelected(key: String, selected: String, show: String?=nil) {
-        var row = getDefinedRow(key)
-        var show = ""
-        if key == START_TIME_KEY || key == END_TIME_KEY {
-            row["value"] = selected
-            show = selected.noSec()
-        }
-        row["show"] = show
-        replaceRows(key, row)
-        searchTableView.reloadData()
-    }
+//    override func singleSelected(key: String, selected: String, show: String?=nil) {
+//        var row = getDefinedRow(key)
+//        var show = ""
+//        if key == START_TIME_KEY || key == END_TIME_KEY {
+//            row["value"] = selected
+//            show = selected.noSec()
+//        }
+//        row["show"] = show
+//        replaceRows(key, row)
+//        searchTableView.reloadData()
+//    }
     
-    override func multiSelected(key: String, selecteds: [String]) {
-        var row = getDefinedRow(key)
-        var show = ""
-        if key == WEEKDAY_KEY {
-            var texts: [String] = [String]()
-            for selected in selecteds {
-                let text = WEEKDAY.intToString(Int(selected)!)
-                texts.append(text)
-            }
-            show = texts.joined(separator: ",")
-        } else if key == CITY_KEY {
-            var citys: [[String: String]] = [[String: String]]()
-            if session.array(forKey: "citys") != nil {
-                citys = (session.array(forKey: "citys") as! [[String: String]])
-                //print(citys)
-            }
-            var texts: [String] = [String]()
-            for selected in selecteds {
-                for city in citys {
-                    if city["value"] == selected {
-                        let text = city["title"]!
-                        texts.append(text)
-                        break
-                    }
-                }
-            }
-            show = texts.joined(separator: ",")
-        }
-        row["show"] = show
-        row["value"] = selecteds.joined(separator: ",")
-        replaceRows(key, row)
-        searchTableView.reloadData()
-    }
+//    override func multiSelected(key: String, selecteds: [String]) {
+//        var row = getDefinedRow(key)
+//        var show = ""
+//        if key == WEEKDAY_KEY {
+//            var texts: [String] = [String]()
+//            for selected in selecteds {
+//                let text = WEEKDAY.intToString(Int(selected)!)
+//                texts.append(text)
+//            }
+//            show = texts.joined(separator: ",")
+//        } else if key == CITY_KEY {
+//            var citys: [[String: String]] = [[String: String]]()
+//            if session.array(forKey: "citys") != nil {
+//                citys = (session.array(forKey: "citys") as! [[String: String]])
+//                //print(citys)
+//            }
+//            var texts: [String] = [String]()
+//            for selected in selecteds {
+//                for city in citys {
+//                    if city["value"] == selected {
+//                        let text = city["title"]!
+//                        texts.append(text)
+//                        break
+//                    }
+//                }
+//            }
+//            show = texts.joined(separator: ",")
+//        }
+//        row["show"] = show
+//        row["value"] = selecteds.joined(separator: ",")
+//        replaceRows(key, row)
+//        searchTableView.reloadData()
+//    }
 }

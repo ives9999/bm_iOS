@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class CoachVC: ListVC {
+class CoachVC: MyTableVC {
     
     var mysTable: CoachesTable?
         

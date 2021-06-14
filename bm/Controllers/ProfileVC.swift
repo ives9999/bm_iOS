@@ -152,9 +152,4 @@ class ProfileVC: MyTableVC {
         vc.key = sender as! String
         vc.delegate = self
     }
-    
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
 }

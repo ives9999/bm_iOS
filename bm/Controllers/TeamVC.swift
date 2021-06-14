@@ -10,7 +10,7 @@ import UIKit
 import Device_swift
 import SCLAlertView
 
-class TeamVC: ListVC {
+class TeamVC: MyTableVC {
     
     //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var managerBtn: UIButton!

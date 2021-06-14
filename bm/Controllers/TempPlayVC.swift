@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TempPlayVC: ListVC {
+class TempPlayVC: MyTableVC {
 
     // outlets
     

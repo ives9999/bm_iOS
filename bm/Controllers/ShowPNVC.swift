@@ -149,10 +149,4 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
             OneSignal.presentAppSettings()
         }
     }
-
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-        //self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-    }
-
 }

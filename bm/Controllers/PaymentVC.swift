@@ -194,11 +194,6 @@ class PaymentVC: MyTableVC {
         prev()
     }
     
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        //goHome()
-        prev()
-    }
-    
     private func getClassType(value: Any) -> String {
         var dynamicType = String(reflecting: type(of: value))
         dynamicType = dynamicType.replacingOccurrences(of: "Swift.", with: "")

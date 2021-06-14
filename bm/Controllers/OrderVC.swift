@@ -350,9 +350,4 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     @IBAction func cancelBtnPressed(_ sender: Any) {
         prev()
     }
-    
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        //goHome()
-        prev()
-    }
 }

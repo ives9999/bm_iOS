@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class CourseVC: ListVC {
+class CourseVC: MyTableVC {
     
     @IBOutlet weak var managerBtn: UIButton!
     

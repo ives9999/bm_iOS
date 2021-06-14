@@ -30,8 +30,8 @@ class OrderService: DataService {
         if token.count > 0 {
             url = String(format: URL_ORDER, "/"+token)
         }
-        print(url)
-        print(params)
+        //print(url)
+        //print(params)
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             

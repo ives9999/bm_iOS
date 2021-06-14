@@ -91,9 +91,6 @@ class ManagerVC: MyTableVC {
         }
     }
 
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
     @IBAction func addTeamBtnPressed(_ sender: Any) {
         if !Member.instance.isLoggedIn {
             SCLAlertView().showError("警告", subTitle: "請先登入為會員")

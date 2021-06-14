@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArenaVC: ListVC {
+class ArenaVC: MyTableVC {
     
     var mysTable: ArenasTable?
         
@@ -119,14 +119,14 @@ class ArenaVC: ListVC {
         }
     }
     
-    override func showMap(indexPath: IndexPath) {
-        let row = lists1[indexPath.row]
-        let address = row.address
-        let title = row.title
-        let sender: [String: String] = [
-            "title": title,
-            "address": address
-        ]
-        performSegue(withIdentifier: TO_MAP, sender: sender)
-    }
+//    override func showMap(indexPath: IndexPath) {
+//        let row = lists1[indexPath.row]
+//        let address = row.address
+//        let title = row.title
+//        let sender: [String: String] = [
+//            "title": title,
+//            "address": address
+//        ]
+//        performSegue(withIdentifier: TO_MAP, sender: sender)
+//    }
 }

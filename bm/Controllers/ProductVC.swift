@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ProductVC: ListVC {
+class ProductVC: MyTableVC {
     
     var mysTable: ProductsTable?
         

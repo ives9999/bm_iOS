@@ -245,7 +245,6 @@
 		B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE13210781FD003699A0 /* CoachService.swift */; };
 		B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE15210CA83A003699A0 /* ArenaVC.swift */; };
 		B3DEBE18210CB30E003699A0 /* ArenaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE17210CB30E003699A0 /* ArenaService.swift */; };
-		B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE19210D6AC2003699A0 /* ListVC.swift */; };
 		B3DEBE1C2110432F003699A0 /* Teach.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE1B2110432F003699A0 /* Teach.swift */; };
 		B3E4D09425F71B2500D78210 /* SelectionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D09325F71B2500D78210 /* SelectionDialog.swift */; };
 		B3E4D17C25FF9E3900D78210 /* Table.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E4D17B25FF9E3500D78210 /* Table.swift */; };
@@ -629,7 +628,6 @@
 		B3DEBE13210781FD003699A0 /* CoachService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachService.swift; sourceTree = "<group>"; };
 		B3DEBE15210CA83A003699A0 /* ArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaVC.swift; sourceTree = "<group>"; };
 		B3DEBE17210CB30E003699A0 /* ArenaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaService.swift; sourceTree = "<group>"; };
-		B3DEBE19210D6AC2003699A0 /* ListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVC.swift; sourceTree = "<group>"; };
 		B3DEBE1B2110432F003699A0 /* Teach.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Teach.swift; sourceTree = "<group>"; };
 		B3E4D04225F7032000D78210 /* ECPayPaymentGatewayKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = ECPayPaymentGatewayKit.xcframework; path = Pods/ECPayPaymentGatewayKit/ECPayPaymentGatewayKit.xcframework; sourceTree = "<group>"; };
 		B3E4D09325F71B2500D78210 /* SelectionDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionDialog.swift; sourceTree = "<group>"; };
@@ -1203,7 +1201,6 @@
 				F94FF4341FB4322C00D167B6 /* EditVC.swift */,
 				B362265C25E54C9D00D98317 /* HomeTotalAdVC.swift */,
 				F94E7D211F83636A00F550FD /* HomeVC.swift */,
-				B3DEBE19210D6AC2003699A0 /* ListVC.swift */,
 				B3BBDD8E240E54D000EB9856 /* LoginVC.swift */,
 				B36D66B6229997AC00502D62 /* ManagerCourseVC.swift */,
 				B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */,
@@ -1888,7 +1885,6 @@
 				B39E5FA5263D4F0800C40BA7 /* List2Cell.swift in Sources */,
 				F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */,
 				B3ED38F21FBAD4C30003F083 /* WeekdaysSelectVC.swift in Sources */,
-				B3DEBE1A210D6AC2003699A0 /* ListVC.swift in Sources */,
 				B30C954C1FEA8CDA005F71EF /* PasswordVC.swift in Sources */,
 				B3649416207DCB280030CF44 /* SCLExtensions.swift in Sources */,
 				B3756EE521B95DD5006893E1 /* ColorSelectVC.swift in Sources */,

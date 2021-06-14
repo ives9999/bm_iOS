@@ -127,8 +127,4 @@ class ManagerFunctionVC: MyTableVC {
             }
         }
     }
-
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
 }

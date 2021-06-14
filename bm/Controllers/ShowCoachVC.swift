@@ -83,7 +83,7 @@ class ShowCoachVC: Show1VC {
     var coursesTable: CoursesTable?
     var city_id: Int = 0
     var params: [String: Any] = [String: Any]()
-    var backDelegate: BackDelegate?
+    //var backDelegate: BackDelegate?
         
     //var fromNet: Bool = false
         
@@ -503,7 +503,7 @@ class ShowCoachVC: Show1VC {
     
     @IBAction func cityBtnPressed(_ sender: Any) {
         //performSegue(withIdentifier: TO_HOME, sender: nil)
-        backDelegate?.setBack(params: params)
+        //backDelegate?.setBack(params: params)
         prev()
     }
     

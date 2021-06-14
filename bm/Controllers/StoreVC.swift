@@ -9,7 +9,7 @@
 import Foundation
 import SCLAlertView
 
-class StoreVC: ListVC {
+class StoreVC: MyTableVC {
     
     var mysTable: StoresTable?
     
@@ -164,39 +164,39 @@ class StoreVC: ListVC {
         }
     }
     
-    override func multiSelected(key: String, selecteds: [String]) {
-        var row = getDefinedRow(key)
-        var show = ""
-        if key == WEEKDAY_KEY {
-            var texts: [String] = [String]()
-            for selected in selecteds {
-                let text = WEEKDAY.intToString(Int(selected)!)
-                texts.append(text)
-            }
-            show = texts.joined(separator: ",")
-        } else if key == CITY_KEY {
-            var citys: [[String: String]] = [[String: String]]()
-            if session.array(forKey: "citys") != nil {
-                citys = (session.array(forKey: "citys") as! [[String: String]])
-                //print(citys)
-            }
-            var texts: [String] = [String]()
-            for selected in selecteds {
-                for city in citys {
-                    if city["value"] == selected {
-                        let text = city["title"]!
-                        texts.append(text)
-                        break
-                    }
-                }
-            }
-            show = texts.joined(separator: ",")
-        }
-        row["show"] = show
-        row["value"] = selecteds.joined(separator: ",")
-        replaceRows(key, row)
-        searchTableView.reloadData()
-    }
+//    override func multiSelected(key: String, selecteds: [String]) {
+//        var row = getDefinedRow(key)
+//        var show = ""
+//        if key == WEEKDAY_KEY {
+//            var texts: [String] = [String]()
+//            for selected in selecteds {
+//                let text = WEEKDAY.intToString(Int(selected)!)
+//                texts.append(text)
+//            }
+//            show = texts.joined(separator: ",")
+//        } else if key == CITY_KEY {
+//            var citys: [[String: String]] = [[String: String]]()
+//            if session.array(forKey: "citys") != nil {
+//                citys = (session.array(forKey: "citys") as! [[String: String]])
+//                //print(citys)
+//            }
+//            var texts: [String] = [String]()
+//            for selected in selecteds {
+//                for city in citys {
+//                    if city["value"] == selected {
+//                        let text = city["title"]!
+//                        texts.append(text)
+//                        break
+//                    }
+//                }
+//            }
+//            show = texts.joined(separator: ",")
+//        }
+//        row["show"] = show
+//        row["value"] = selecteds.joined(separator: ",")
+//        replaceRows(key, row)
+//        searchTableView.reloadData()
+//    }
     
     @IBAction func manager(_ sender: Any) {
         if !Member.instance.isLoggedIn {

@@ -120,10 +120,6 @@ class TeamTempPlayEditVC: MyTableVC, TeamTempPlayCellDelegate {
         }
         return res!
     }
-
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
     
     @IBAction func submit(_ sender: Any) {
         var isPass = true

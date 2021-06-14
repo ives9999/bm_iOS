@@ -65,10 +65,6 @@ class SelectVC: MyTableVC {
         prev()
     }
     
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
-    
     func alertError(_ msg: String) {
         
         warning(msg: msg, buttonTitle: "回上一頁", buttonAction: {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource {
+class MyTableVC: BaseViewController, List1CellDelegate {
 
     var sections: [String]?
     var section_keys: [[String]] = [[String]]()
@@ -32,6 +32,9 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     var jsonData: Data? = nil
     var tables: Tables?
     var params: [String: Any]?
+    
+    var lists1: [Table] = [Table]()
+    var newY: CGFloat = 0
     
 //    sections = ["商品", "訂單", "付款", "訂購人"]
 //    rows = [
@@ -78,6 +81,14 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
             sections = form.getSections()
             section_keys = form.getSectionKeys()
         }
+        
+        let cellNibName = UINib(nibName: "List2Cell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "lis2Cell")
+        tableView.estimatedRowHeight = 44
+        tableView.rowHeight = UITableView.automaticDimension
+        
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.lightGray
     }
     
     override func refresh() {
@@ -166,6 +177,236 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
         Global.instance.removeSpinner(superView: view)
     }
 
+    
+    
+    
+    
+    
+    
+    override func prepareParams(city_type: String="simple") {
+        params = [String: Any]()
+        for row in searchRows {
+            
+            if let key: String = row["key"] as? String {
+                if let value: String = row["value"] as? String {
+                    if value.count == 0 {
+                        continue
+                    }
+                    params![key] = value
+                }
+            }
+        }
+        //print(params)
+    }
+    
+    override func singleSelected(key: String, selected: String, show: String?=nil) {
+        
+        searchPanel.singleSelected(key: key, selected: selected, show: show)
+    }
+    
+    override func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
+        
+        searchPanel.setWeekdaysData(res: res)
+    }
+    
+    override func setDegreeData(res: [DEGREE]) {
+        
+        searchPanel.setDegreeData(res: res)
+    }
+    
+    override func setSwitch(indexPath: IndexPath, value: Bool) {
+        
+        searchPanel.setSwitch(indexPath: indexPath, value: value)
+        
+    }
+    
+    override func setTextField(key: String, value: String) {
+        
+        searchPanel.setTextField(key: key, value: value)
+    }
+    
+    override func clear(indexPath: IndexPath) {
+        let row = searchRows[indexPath.row]
+        //print(row)
+        
+        let key = row["key"] as! String
+        searchPanel.clear(key: key)
+    }
+    
+    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
+        let key = section_keys[indexPath.section][indexPath.row]
+        return getFormItemFromKey(key)
+    }
+    
+    func getFormItemFromKey(_ key: String)-> FormItem? {
+        var res: FormItem? = nil
+        for formItem in form.formItems {
+            if key == formItem.name {
+                res = formItem
+                break
+            }
+        }
+
+        return res
+    }
+
+    func getDefinedRow(_ key: String) -> [String: Any] {
+        for row in searchRows {
+            if row["key"] as! String == key {
+                return row
+            }
+        }
+        return [String: Any]()
+    }
+
+    func replaceRows(_ key: String, _ row: [String: Any]) {
+        for (idx, _row) in searchRows.enumerated() {
+            if _row["key"] as! String == key {
+                searchRows[idx] = row
+                break;
+            }
+        }
+    }
+    
+    //存在row的value只是單純的文字，陣列值使用","來區隔，例如"1,2,3"，但當要傳回選擇頁面時，必須轉回陣列[1,2,3]
+    func valueToArray<T>(t:T.Type, row: [String: Any])-> [T] {
+
+        var selecteds: [T] = [T]()
+        //print(t)
+        var type: String = "String"
+        if (t.self == Int.self) {
+            type = "Int"
+        }
+        if let value: String = row["value"] as? String {
+            if (value.count > 0) {
+                let values = value.components(separatedBy: ",")
+                for value in values {
+                    if (type == "Int") {
+                        if let tmp = Int(value) {
+                            selecteds.append(tmp as! T)
+                        }
+                    } else {
+                        if let tmp = value as? T {
+                            selecteds.append(tmp)
+                        }
+                    }
+                }
+            }
+        }
+
+        return selecteds
+    }
+    
+    //目前暫時沒有用到
+    func arrayToValue<T>(t: T.Type, res: [T])-> String {
+        
+        var value: String = ""
+        
+        var type: String = "String"
+        if (t.self == Int.self) {
+            type = "Int"
+        }
+        
+        var values: [String] = [String]()
+        if (res.count > 0) {
+            for one in res {
+                if (type == "Int") {
+                    if let tmp: Int = one as? Int {
+                        values.append(String(tmp))
+                    }
+                } else if (type == "String") {
+                    values.append(one as! String)
+                }
+            }
+            value = values.joined(separator: ",")
+        } else {
+            value = ""
+        }
+        
+        return value
+    }
+    
+    @IBAction func prevBtnPressed(_ sender: Any) {
+        prev()
+    }
+    
+    @IBAction func searchBtnPressed(_ sender: Any) {
+        searchPanel.showSearchPanel(baseVC: self, view: view, newY: newY, searchRows: searchRows)
+    }
+    
+    func cellRefresh() {
+        if params != nil && !params!.isEmpty {
+            params!.removeAll()
+        }
+        self.refresh()
+    }
+    
+    func cellMobile(row: Table) {
+        if (row.mobile_show.count > 0) {
+            //print(row.mobile)
+            row.mobile.makeCall()
+        } else if (row.tel_show.count > 0) {
+            //print(row.tel)
+            row.tel.makeCall()
+        }
+    }
+    
+    func cellShowMap(row: Table) {
+        
+        var name: String = ""
+        if row.name.count > 0 {
+            name = row.name
+        } else if row.title.count > 0 {
+            name = row.title
+        }
+        //print(row.address)
+        _showMap(title: name, address: row.address)
+        
+//        if indexPath != nil {
+//            let row = lists1[indexPath!.row] as! TeamTable
+//            if row.arena != nil {
+//                //print(row.arena!.address)
+//                _showMap(title: row.name, address: row.arena!.address)
+//            } else {
+//                warning("球隊沒有輸入球館位置")
+//            }
+//        } else {
+//            warning("index path 為空值，請洽管理員")
+//        }
+    }
+    
+    func cellCity(row: Table) {
+        let key: String = CITY_KEY
+        let city_id: Int = row.city_id
+        var row = getDefinedRow(key)
+        row["value"] = String(city_id)
+        replaceRows(key, row)
+        prepareParams()
+        refresh()
+    }
+    
+    func cellArena(row: Table) {}
+    func cellArea(row: Table) {}
+    
+    func cellLike(row: Table) {
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            dataService.like(token: row.token, able_id: row.id)
+        }
+    }
+    
+    func cellWarning(msg: String) {
+        warning(msg)
+    }
+    
+    func cellToLogin() {
+        toLogin()
+    }
+}
+
+extension MyTableVC: UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         var count: Int?
         if sections == nil {
@@ -177,6 +418,11 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if (lists1.count > 0) {
+            return lists1.count
+        }
+        
         var count: Int?
         if rows == nil {
             count = 0
@@ -187,23 +433,29 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell: FormCell? = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell
-        if cell == nil {
-            //print("cell is nil")
-            cell = FormCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
-            cell!.accessoryType = UITableViewCell.AccessoryType.none
-            cell!.selectionStyle = UITableViewCell.SelectionStyle.none
-        } else {
-            cell!.accessoryType = .none
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "Listcell", for: indexPath) as? List2Cell {
+            
+            cell.cellDelegate = self
+            //let row = lists[indexPath.row]
+            //cell.updateViews(indexPath: indexPath, data: row, iden: _type)
+            
+            return cell
         }
         
-        let row: [String: Any] = rows![indexPath.section][indexPath.row]
-        let field: String = row["text"] as! String
-        cell!.textLabel!.text = field
-        return cell!
+//        if var cell: FormCell = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell {
+//            cell = FormCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
+//            cell.accessoryType = UITableViewCell.AccessoryType.none
+//            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+//
+//            let row: [String: Any] = rows![indexPath.section][indexPath.row]
+//            let field: String = row["text"] as! String
+//            cell.textLabel!.text = field
+//            return cell
+//        }
+        
+        return UITableViewCell()
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
     
     //header and footer
     
@@ -263,33 +515,14 @@ class MyTableVC: BaseViewController, UITableViewDelegate, UITableViewDataSource 
             }
         }
     }
+}
+
+extension MyTableVC: UITableViewDelegate {
     
-    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
-        let key = section_keys[indexPath.section][indexPath.row]
-        return getFormItemFromKey(key)
-    }
-    
-    func getFormItemFromKey(_ key: String)-> FormItem? {
-        var res: FormItem? = nil
-        for formItem in form.formItems {
-            if key == formItem.name {
-                res = formItem
-                break
-            }
-        }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = lists1[indexPath.row]
+        let iden = TO_SHOW
         
-        return res
+        performSegue(withIdentifier: iden, sender: data)
     }
-    
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        //let idx = scrollView.contentOffset.y
-//        let indexPath = tableView.indexPathsForVisibleRows?.last
-//        if indexPath?.row == 5 {
-//            refresh()
-//        }
-//    }
-    
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        refresh()
-//    }
 }

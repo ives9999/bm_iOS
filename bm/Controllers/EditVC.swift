@@ -209,10 +209,6 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         prev()
     }
     
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
-    
     @IBAction func submit(_ sender: Any) {
         var params:[String: Any]!
         var isPass: Bool = true

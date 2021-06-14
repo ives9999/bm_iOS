@@ -37,10 +37,10 @@ class MoreVC: MyTableVC {
         //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let cell: MenuCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
         //cell.delegate = self
-        
+
         let row: [String: Any] = rows![indexPath.section][indexPath.row]
         cell.setRow(row: row)
-        
+
         return cell
     }
     
@@ -86,8 +86,4 @@ class MoreVC: MyTableVC {
             }
         }
     }
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
-    
 }

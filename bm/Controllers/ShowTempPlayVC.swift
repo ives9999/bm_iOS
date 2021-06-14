@@ -378,10 +378,6 @@ class ShowTempPlayVC: MyTableVC {
         print("arena")
     }
 
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-
     @IBAction func plusOne(_ sender: Any) {
         if !Member.instance.isLoggedIn {
             SCLAlertView().showWarning("警告", subTitle: "請先登入為會員")

@@ -374,7 +374,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         prev()
     }
     
-    @IBAction func prevBtnPressed(_ sender: Any) {
+    @IBAction override func prevBtnPressed(_ sender: Any) {
         if delegate != nil {
             delegate!.isReload(false)
         }

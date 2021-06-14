@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MemberOrderListVC: ListVC {
+class MemberOrderListVC: MyTableVC {
     
     var mysTable: OrdersTable? = nil
     
@@ -31,7 +31,7 @@ class MemberOrderListVC: ListVC {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
         
-        //refresh()
+        refresh()
     }
     
     override func refresh() {

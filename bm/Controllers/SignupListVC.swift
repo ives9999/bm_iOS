@@ -101,8 +101,4 @@ class SignupListVC: MyTableVC {
         
         return cell
     }
-
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
 }

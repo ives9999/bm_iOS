@@ -197,10 +197,6 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
             performSegue(withIdentifier: TO_EDIT_COURSE, sender: nil)
         }
     }
-
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
     
     func isReload(_ yes: Bool) {
         self.isReload = yes

@@ -130,8 +130,4 @@ class ManagerStoreVC: MyTableVC {
             performSegue(withIdentifier: TO_EDIT_STORE, sender: nil)
         }
     }
-
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
 }

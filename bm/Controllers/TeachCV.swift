@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeachCV: ListVC {
+class TeachCV: MyTableVC {
         
     var mysTable: TeachesTable?
             
@@ -73,40 +73,24 @@ class TeachCV: ListVC {
 //    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView {
-            return lists1.count
-        } else {
-            return searchRows.count
-        }
+        return lists1.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if tableView == self.tableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? TeachCell {
-                
-                //cell.cellDelegate = self
-                let row = lists1[indexPath.row] as? TeachTable
-                if row != nil {
-                    row!.filterRow()
-                    //row!.printRow()
-                    cell.updateTeachViews(indexPath: indexPath, data: row!)
-                }
-                
-                return cell
-            } else {
-                return ListCell()
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? TeachCell {
+            
+            //cell.cellDelegate = self
+            let row = lists1[indexPath.row] as? TeachTable
+            if row != nil {
+                row!.filterRow()
+                //row!.printRow()
+                cell.updateTeachViews(indexPath: indexPath, data: row!)
             }
-        } else if tableView == searchTableView {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
-                cell.editCellDelegate = self
-                let searchRow = searchRows[indexPath.row]
-                //print(searchRow)
-                cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
-                return cell
-            }
+            
+            return cell
+        } else {
+            return ListCell()
         }
-        
-        return UITableViewCell()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

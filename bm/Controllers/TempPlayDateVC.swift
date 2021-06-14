@@ -66,9 +66,6 @@ class TempPlayDateVC: MyTableVC {
         vc.teamName = name
     }
 
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

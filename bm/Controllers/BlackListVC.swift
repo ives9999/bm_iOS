@@ -71,10 +71,6 @@ class BlackListVC: MyTableVC, BlackListCellDelegate {
         let memo:String = row["memo"]! as! String
         info(memo)
     }
-
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        prev()
-    }
     
     func cancel(position: Int) {
         //print(position)

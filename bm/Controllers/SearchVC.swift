@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class SearchVC: ListVC, UINavigationControllerDelegate {
+class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     @IBOutlet weak var submitBtn: UIButton!
     
@@ -61,7 +61,7 @@ class SearchVC: ListVC, UINavigationControllerDelegate {
         
         super.viewDidLoad()
         
-        searchTableView = tableView
+        //searchTableView = tableView
         let cellNib = UINib(nibName: "EditCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
         //submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
