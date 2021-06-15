@@ -50,6 +50,21 @@ extension BaseViewController {
         }
     }
     
+    //manager_token is member token
+    func toManagerCourse(manager_token: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Course", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-HrW-2D-NhE")  as? ManagerCourseVC {
+                viewController.manager_token = manager_token
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-HrW-2D-NhE") as! ManagerCourseVC
+            viewController.manager_token = manager_token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toMemberOrderList() {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
@@ -614,7 +629,7 @@ extension BaseViewController {
             if let viewController = storyboard.instantiateViewController(identifier: "Team") as? TeamVC {
                 viewController.member_like = member_like
                 if (params != nil) {
-                    viewController.params = params
+                    viewController.params = params!
                 }
                 show(viewController, sender: nil)
             }
@@ -622,7 +637,7 @@ extension BaseViewController {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Team") as! TeamVC
             viewController.member_like = member_like
             if (params != nil) {
-                viewController.params = params
+                viewController.params = params!
             }
             self.navigationController!.pushViewController(viewController, animated: true)
         }

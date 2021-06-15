@@ -31,7 +31,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
     var able_type: String = "coach"
     var jsonData: Data? = nil
     var tables: Tables?
-    var params: [String: Any]?
+    var params: [String: Any] = [String: Any]()
     
     var lists1: [Table] = [Table]()
     var newY: CGFloat = 0
@@ -192,7 +192,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
                     if value.count == 0 {
                         continue
                     }
-                    params![key] = value
+                    params[key] = value
                 }
             }
         }
@@ -335,9 +335,8 @@ class MyTableVC: BaseViewController, List1CellDelegate {
     }
     
     func cellRefresh() {
-        if params != nil && !params!.isEmpty {
-            params!.removeAll()
-        }
+        params.removeAll()
+        
         self.refresh()
     }
     
