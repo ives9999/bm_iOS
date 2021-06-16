@@ -120,8 +120,8 @@ extension XMLConfigurationManager {
   @objc public func initialize(env: ECPayPaymentGatewayKit.EnvironmentType)
   @objc public func sdkEnvironmentString() -> Swift.String
   @objc public func createPayment(token: Swift.String, merchantID: Swift.String = "", useResultPage: Swift.Int = 1, appStoreName: Swift.String = "", language: Swift.String = "zh-TW", callback: @escaping ECPayPaymentGatewayKit.CallbackFunction)
-  @objc public func testToGetTestingTradeToken(paymentUIType: Swift.Int, is3D: Swift.Bool = true, merchantID: Swift.String, aesKey: Swift.String, aesIV: Swift.String, callback: @escaping ECPayPaymentGatewayKit.CallbackFunction)
-  @objc public func testToGetTestingUserToken(is3D: Swift.Bool = true, merchantID: Swift.String, aesKey: Swift.String, aesIV: Swift.String, callback: @escaping ECPayPaymentGatewayKit.CallbackFunction)
+  @objc public func testToGetTestingTradeToken(paymentUIType: Swift.Int, is3D: Swift.Bool = true, merchantID: Swift.String, aesKey: Swift.String, aesIV: Swift.String, parameters: [Swift.String : Any]? = nil, callback: @escaping ECPayPaymentGatewayKit.CallbackFunction)
+  @objc public func testToGetTestingUserToken(is3D: Swift.Bool = true, merchantID: Swift.String, aesKey: Swift.String, aesIV: Swift.String, parameters: [Swift.String : Any]? = nil, callback: @escaping ECPayPaymentGatewayKit.CallbackFunction)
   @objc public func testToLaunchApiTestUI(tokenType: Swift.Int, tokenTypeString: Swift.String, token: Swift.String, callback: @escaping ECPayPaymentGatewayKit.CallbackFunction)
   @objc public func testInit()
   @objc public func testAlamofire()
@@ -307,8 +307,8 @@ extension Message {
   public init(base64Encoded base64String: Swift.String) throws
 }
 @_hasMissingDesignatedInitializers @objcMembers public class TestingTokenManager {
-  public static func getUserToken(_ is3D: Swift.Bool = true, _ merchantID: Swift.String, _ aesKey: Swift.String, _ aesIV: Swift.String) -> PromiseKit.Promise<ECPayPaymentGatewayKit.TestingTokenManager.TestingUserTokenResponseModel>
-  public static func getTradeToken(_ paymentUIType: Swift.Int = 0, _ is3D: Swift.Bool = true, _ merchantID: Swift.String, _ aesKey: Swift.String, _ aesIV: Swift.String) -> PromiseKit.Promise<ECPayPaymentGatewayKit.TestingTokenManager.TestingTradeTokenResponseModel>
+  public static func getUserToken(_ is3D: Swift.Bool = true, _ merchantID: Swift.String, _ aesKey: Swift.String, _ aesIV: Swift.String, _ parameters: [Swift.String : Any]? = nil) -> PromiseKit.Promise<ECPayPaymentGatewayKit.TestingTokenManager.TestingUserTokenResponseModel>
+  public static func getTradeToken(_ paymentUIType: Swift.Int = 0, _ is3D: Swift.Bool = true, _ merchantID: Swift.String, _ aesKey: Swift.String, _ aesIV: Swift.String, _ parameters: [Swift.String : Any]? = nil) -> PromiseKit.Promise<ECPayPaymentGatewayKit.TestingTokenManager.TestingTradeTokenResponseModel>
   @objc deinit
 }
 extension TestingTokenManager {

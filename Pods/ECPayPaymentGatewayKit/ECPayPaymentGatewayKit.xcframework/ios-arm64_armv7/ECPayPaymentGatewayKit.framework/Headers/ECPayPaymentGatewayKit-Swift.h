@@ -328,8 +328,8 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit26ECPayPaymentGatewayManager")
 - (void)initializeWithEnv:(enum EnvironmentType)env;
 - (NSString * _Nonnull)sdkEnvironmentString SWIFT_WARN_UNUSED_RESULT;
 - (void)createPaymentWithToken:(NSString * _Nonnull)token merchantID:(NSString * _Nonnull)merchantID useResultPage:(NSInteger)useResultPage appStoreName:(NSString * _Nonnull)appStoreName language:(NSString * _Nonnull)language callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
-- (void)testToGetTestingTradeTokenWithPaymentUIType:(NSInteger)paymentUIType is3D:(BOOL)is3D merchantID:(NSString * _Nonnull)merchantID aesKey:(NSString * _Nonnull)aesKey aesIV:(NSString * _Nonnull)aesIV callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
-- (void)testToGetTestingUserTokenWithIs3D:(BOOL)is3D merchantID:(NSString * _Nonnull)merchantID aesKey:(NSString * _Nonnull)aesKey aesIV:(NSString * _Nonnull)aesIV callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
+- (void)testToGetTestingTradeTokenWithPaymentUIType:(NSInteger)paymentUIType is3D:(BOOL)is3D merchantID:(NSString * _Nonnull)merchantID aesKey:(NSString * _Nonnull)aesKey aesIV:(NSString * _Nonnull)aesIV parameters:(NSDictionary<NSString *, id> * _Nullable)parameters callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
+- (void)testToGetTestingUserTokenWithIs3D:(BOOL)is3D merchantID:(NSString * _Nonnull)merchantID aesKey:(NSString * _Nonnull)aesKey aesIV:(NSString * _Nonnull)aesIV parameters:(NSDictionary<NSString *, id> * _Nullable)parameters callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
 - (void)testToLaunchApiTestUIWithTokenType:(NSInteger)tokenType tokenTypeString:(NSString * _Nonnull)tokenTypeString token:(NSString * _Nonnull)token callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
 - (void)testInit;
 - (void)testAlamofire;
@@ -926,8 +926,8 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit26ECPayPaymentGatewayManager")
 - (void)initializeWithEnv:(enum EnvironmentType)env;
 - (NSString * _Nonnull)sdkEnvironmentString SWIFT_WARN_UNUSED_RESULT;
 - (void)createPaymentWithToken:(NSString * _Nonnull)token merchantID:(NSString * _Nonnull)merchantID useResultPage:(NSInteger)useResultPage appStoreName:(NSString * _Nonnull)appStoreName language:(NSString * _Nonnull)language callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
-- (void)testToGetTestingTradeTokenWithPaymentUIType:(NSInteger)paymentUIType is3D:(BOOL)is3D merchantID:(NSString * _Nonnull)merchantID aesKey:(NSString * _Nonnull)aesKey aesIV:(NSString * _Nonnull)aesIV callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
-- (void)testToGetTestingUserTokenWithIs3D:(BOOL)is3D merchantID:(NSString * _Nonnull)merchantID aesKey:(NSString * _Nonnull)aesKey aesIV:(NSString * _Nonnull)aesIV callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
+- (void)testToGetTestingTradeTokenWithPaymentUIType:(NSInteger)paymentUIType is3D:(BOOL)is3D merchantID:(NSString * _Nonnull)merchantID aesKey:(NSString * _Nonnull)aesKey aesIV:(NSString * _Nonnull)aesIV parameters:(NSDictionary<NSString *, id> * _Nullable)parameters callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
+- (void)testToGetTestingUserTokenWithIs3D:(BOOL)is3D merchantID:(NSString * _Nonnull)merchantID aesKey:(NSString * _Nonnull)aesKey aesIV:(NSString * _Nonnull)aesIV parameters:(NSDictionary<NSString *, id> * _Nullable)parameters callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
 - (void)testToLaunchApiTestUIWithTokenType:(NSInteger)tokenType tokenTypeString:(NSString * _Nonnull)tokenTypeString token:(NSString * _Nonnull)token callback:(void (^ _Nonnull)(CallbackState * _Nonnull))callback;
 - (void)testInit;
 - (void)testAlamofire;

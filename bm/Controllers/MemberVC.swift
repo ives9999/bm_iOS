@@ -20,20 +20,20 @@ class MemberVC: MyTableVC {
     
     let _sections: [String] = ["會員資料", "訂單", "喜歡", "管理"]
     
-    let heightForSection: CGFloat = 34
-    var searchSections: [ExpandableItems] = [
-        ExpandableItems(isExpanded: true, items: []),
-        ExpandableItems(isExpanded: true, items: []),
-        ExpandableItems(isExpanded: false, items: []),
-        ExpandableItems(isExpanded: true, items: [])
+    var mySections: [[String: Any]] = [
+        ["name": "會員資料", "isExpanded": true, "key": "data"],
+        ["name": "訂單", "isExpanded": true, "key": "order"],
+        ["name": "喜歡", "isExpanded": false, "key": "like"],
+        ["name": "管理", "isExpanded": true, "key": "manager"]
     ]
+    
+    var myRows: [[String: Any]] = [[String: Any]]()
     
     //let _sections: [String] = ["會員資料", "報名"]
     let fixedRows: [Dictionary<String, String>] = [
         ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
         ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
     ]
-    
     var memberRows: [Dictionary<String, String>] = [Dictionary<String, String>]()
     
     var orderRows: [Dictionary<String, String>] = [
@@ -53,15 +53,31 @@ class MemberVC: MyTableVC {
         ["text": "課程","icon":"course","segue":"toManagerCourse","able_type":"course"]
     ]
     
-    let signupRows: [Dictionary<String, String>] = [
-        ["text": "課程報名", "icon": "account", "segue": TO_SIGNUP_LIST]
+    let heightForSection: CGFloat = 34
+    var searchSections: [ExpandableItems] = [
+        ExpandableItems(isExpanded: true, items: []),
+        ExpandableItems(isExpanded: true, items: []),
+        ExpandableItems(isExpanded: false, items: []),
+        ExpandableItems(isExpanded: true, items: [])
     ]
     
-    var _rows: [[Dictionary<String, Any>]] = [[Dictionary<String, Any>]]()
+    
+//    let signupRows: [Dictionary<String, String>] = [
+//        ["text": "課程報名", "icon": "account", "segue": TO_SIGNUP_LIST]
+//    ]
+//    var _rows: [[Dictionary<String, Any>]] = [[Dictionary<String, Any>]]()
 
     override func viewDidLoad() {
         myTablView = tableView
+        
         super.viewDidLoad()
+        
+        myRows = [
+            ["key":"data", "rows": fixedRows],
+            ["key":"order", "rows": orderRows],
+            ["key":"like", "rows": likeRows],
+            ["key":"manager", "rows": courseRows],
+        ]
 
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
     }
@@ -86,7 +102,7 @@ class MemberVC: MyTableVC {
     }
     
     func setValidateRow() {
-        _rows.removeAll()
+        //_rows.removeAll()
         memberRows.removeAll()
         memberRows = fixedRows
         if Member.instance.isLoggedIn {// detected validate status
@@ -108,49 +124,146 @@ class MemberVC: MyTableVC {
         let new: Dictionary<String, String> = ["text": "重新整理", "icon": "refresh", "segue": TO_REFRESH]
         memberRows.append(new)
         
-        _rows.append(memberRows)
-        _rows.append(orderRows)
-        _rows.append(likeRows)
-        _rows.append(courseRows)
-        _rows.append(signupRows)
+//        _rows.append(memberRows)
+//        _rows.append(orderRows)
+//        _rows.append(likeRows)
+//        _rows.append(courseRows)
+//        _rows.append(signupRows)
         //print(_rows)
-        setData(sections: _sections, rows: _rows)
+        //setData(sections: _sections, rows: _rows)
+    }
+    
+    func getSectionName(idx: Int)-> String {
+        
+        var name: String = ""
+        let row: [String: Any] = mySections[idx]
+        if (row.keyExist(key: "name")) {
+            if let tmp: String = row["name"] as? String {
+                name = tmp
+            }
+        }
+        
+        return name
+    }
+    
+    func getSectionKey(idx: Int)-> String {
+        
+        var key: String = ""
+        let row: [String: Any] = mySections[idx]
+        if (row.keyExist(key: "key")) {
+            if let tmp: String = row["key"] as? String {
+                key = tmp
+            }
+        }
+        
+        return key
+    }
+    
+    func getSectionExpanded(idx: Int)-> Bool {
+        
+        var b: Bool = true
+        let row: [String: Any] = mySections[idx]
+        if (row.keyExist(key: "isExpanded")) {
+            if let tmp: Bool = row["isExpanded"] as? Bool {
+                b = tmp
+            }
+        }
+        
+        return b
+    }
+    
+    func getSectionRowFromMyRowsByKey(key: String)-> [String: Any] {
+        
+        for row in myRows {
+            if row.keyExist(key: key) {
+                if let key1: String = row["key"] as? String {
+                    if key == key1 {
+                        return row
+                    }
+                }
+            }
+        }
+        
+        return [String: Any]()
+    }
+    
+    func getRowRowsFromMyRowsBykey(key: String)-> [[String: String]] {
+        
+        let sectionRow: [String: Any] = getSectionRowFromMyRowsByKey(key: key)
+        if (sectionRow.keyExist(key: "rows")) {
+            if let tmp: [[String: String]] = sectionRow as? [[String: String]] {
+                return tmp
+            }
+        }
+        
+        return [[String: String]]()
+    }
+    
+    func getRowFromIndexPath(indexPath: IndexPath)-> [[String: String]] {
+        
+        let section: Int = indexPath.section
+        let key: String = getSectionKey(idx: section)
+        let tmp: [[String: String]] = getRowRowsFromMyRowsBykey(key: key)
+        
+        return tmp
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !searchSections[section].isExpanded {
-            return 0
+        
+        var count: Int = 0
+        let mySection: [String: Any] = mySections[section]
+        if (mySection.keyExist(key: "isExpander")) {
+            let isExpanded: Bool = mySection["isExpander"] as? Bool ?? true
+            if (isExpanded) {
+                if let key: String = mySection["key"] as? String {
+                    let someRow: [String: Any] = getRowFromKey(key: key)
+                    if (someRow.keyExist(key: "rows")) {
+                        if let rows: [[String: String]] = someRow["rows"] as? [[String: String]] {
+                            count = rows.count
+                        }
+                    }
+                }
+            }
         }
         
-        if (section == 0) {
-            //searchSections[0].items = [String]()
-            return memberRows.count
-        } else if (section == 1) {
-            return orderRows.count
-        } else if (section == 2) {
-            return likeRows.count
-        } else if (section == 3) {
-            return courseRows.count
-        } else {
-            return 0
-        }
+        return count
+        
+//        if !searchSections[section].isExpanded {
+//            return 0
+//        }
+//
+//        if (section == 0) {
+//            //searchSections[0].items = [String]()
+//            return memberRows.count
+//        } else if (section == 1) {
+//            return orderRows.count
+//        } else if (section == 2) {
+//            return likeRows.count
+//        } else if (section == 3) {
+//            return courseRows.count
+//        } else {
+//            return 0
+//        }
         //return searchSections[section].items.count
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         let headerView = UIView()
         headerView.backgroundColor = UIColor.white
         headerView.tag = section
         
         let titleLabel = UILabel()
-        titleLabel.text = sections?[section]
+        titleLabel.text = getSectionName(idx: section)
         titleLabel.textColor = UIColor.black
         titleLabel.sizeToFit()
         titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
         headerView.addSubview(titleLabel)
         
+        let isExpanded = getSectionExpanded(idx: section)
         let mark = UIImageView(image: UIImage(named: "to_right"))
         mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
+        toggleMark(mark: mark, isExpanded: isExpanded)
         headerView.addSubview(mark)
         
         let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
@@ -374,22 +487,23 @@ class MemberVC: MyTableVC {
         var indexPaths: [IndexPath] = [IndexPath]()
         
         if (section == 0) {
-            for i in 0...memberRows.count {
+            for i in 0...memberRows.count-1 {
                 let indexPath = IndexPath(row: i, section: section)
                 indexPaths.append(indexPath)
             }
         } else if (section == 1) {
-            for i in 0...orderRows.count {
+            for i in 0...orderRows.count-1 {
                 let indexPath = IndexPath(row: i, section: section)
                 indexPaths.append(indexPath)
             }
         } else if (section == 2) {
-            for i in 0...likeRows.count {
+            for i in 0...likeRows.count-1 {
+                print(i)
                 let indexPath = IndexPath(row: i, section: section)
                 indexPaths.append(indexPath)
             }
         } else if (section == 3) {
-            for i in 0...courseRows.count {
+            for i in 0...courseRows.count-1 {
                 let indexPath = IndexPath(row: i, section: section)
                 indexPaths.append(indexPath)
             }
@@ -406,14 +520,21 @@ class MemberVC: MyTableVC {
         
         if isExpanded {
             tableView.deleteRows(at: indexPaths, with: .fade)
-            if mark != nil {
-                mark?.image = UIImage(named: "to_right")
-            }
         } else {
             tableView.insertRows(at: indexPaths, with: .fade)
-            if mark != nil {
-                mark?.image = UIImage(named: "to_down")
-            }
+        }
+        
+        if mark != nil {
+            toggleMark(mark: mark!, isExpanded: isExpanded)
+        }
+    }
+    
+    func toggleMark(mark: UIImageView, isExpanded: Bool) {
+        
+        if (isExpanded) {
+            mark.image = UIImage(named: "to_down")
+        } else {
+            mark.image = UIImage(named: "to_right")
         }
     }
 }

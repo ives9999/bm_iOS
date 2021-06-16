@@ -22,7 +22,7 @@ target 'bm' do
   pod 'KeychainSwift' , '~> 16.0'
   pod 'SwiftyJSON' , '~> 4.2.0'
   pod 'SwiftyXMLParser' , :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
-  pod 'CryptoSwift' , '~> 0.14.0'
+  pod 'CryptoSwift'
   pod 'SnapKit', '~> 5.0.0'
   pod 'JXBanner'
   pod 'SCLAlertView'
