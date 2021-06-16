@@ -20,6 +20,14 @@ class MemberVC: MyTableVC {
     
     let _sections: [String] = ["會員資料", "訂單", "喜歡", "管理"]
     
+    let heightForSection: CGFloat = 34
+    var searchSections: [ExpandableItems] = [
+        ExpandableItems(isExpanded: true, items: []),
+        ExpandableItems(isExpanded: true, items: []),
+        ExpandableItems(isExpanded: false, items: []),
+        ExpandableItems(isExpanded: true, items: [])
+    ]
+    
     //let _sections: [String] = ["會員資料", "報名"]
     let fixedRows: [Dictionary<String, String>] = [
         ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
@@ -42,7 +50,7 @@ class MemberVC: MyTableVC {
     ]
     
     let courseRows: [Dictionary<String, String>] = [
-        ["text": "課程","icon":"course","segue":TO_LIKE,"able_type":"course"]
+        ["text": "課程","icon":"course","segue":"toManagerCourse","able_type":"course"]
     ]
     
     let signupRows: [Dictionary<String, String>] = [
@@ -107,6 +115,48 @@ class MemberVC: MyTableVC {
         _rows.append(signupRows)
         //print(_rows)
         setData(sections: _sections, rows: _rows)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if !searchSections[section].isExpanded {
+            return 0
+        }
+        
+        if (section == 0) {
+            //searchSections[0].items = [String]()
+            return memberRows.count
+        } else if (section == 1) {
+            return orderRows.count
+        } else if (section == 2) {
+            return likeRows.count
+        } else if (section == 3) {
+            return courseRows.count
+        } else {
+            return 0
+        }
+        //return searchSections[section].items.count
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.white
+        headerView.tag = section
+        
+        let titleLabel = UILabel()
+        titleLabel.text = sections?[section]
+        titleLabel.textColor = UIColor.black
+        titleLabel.sizeToFit()
+        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
+        headerView.addSubview(titleLabel)
+        
+        let mark = UIImageView(image: UIImage(named: "to_right"))
+        mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
+        headerView.addSubview(mark)
+        
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+        headerView.addGestureRecognizer(gesture)
+        
+        return headerView
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -221,6 +271,8 @@ class MemberVC: MyTableVC {
                 } else {
                     warning("沒有這個喜歡的連結")
                 }
+            } else if segue == "toManagerCourse" {
+                toManagerCourse(manager_token: Member.instance.token)
             }
         }
     }
@@ -310,5 +362,59 @@ class MemberVC: MyTableVC {
         avatarImageView.image = UIImage(named: "menuProfileIcon")
     }
     
+    @objc func handleExpandClose(gesture : UITapGestureRecognizer) {
+        let headerView = gesture.view!
+        let section = headerView.tag
+        let tmp = headerView.subviews.filter({$0 is UIImageView})
+        var mark: UIImageView?
+        if tmp.count > 0 {
+            mark = tmp[0] as? UIImageView
+        }
+        
+        var indexPaths: [IndexPath] = [IndexPath]()
+        
+        if (section == 0) {
+            for i in 0...memberRows.count {
+                let indexPath = IndexPath(row: i, section: section)
+                indexPaths.append(indexPath)
+            }
+        } else if (section == 1) {
+            for i in 0...orderRows.count {
+                let indexPath = IndexPath(row: i, section: section)
+                indexPaths.append(indexPath)
+            }
+        } else if (section == 2) {
+            for i in 0...likeRows.count {
+                let indexPath = IndexPath(row: i, section: section)
+                indexPaths.append(indexPath)
+            }
+        } else if (section == 3) {
+            for i in 0...courseRows.count {
+                let indexPath = IndexPath(row: i, section: section)
+                indexPaths.append(indexPath)
+            }
+        }
+        
+        
+//        for idx in searchSections[section].items.indices {
+//            let indexPath = IndexPath(row: idx, section: section)
+//            indexPaths.append(indexPath)
+//        }
+        
+        let isExpanded = searchSections[section].isExpanded
+        searchSections[section].isExpanded = !isExpanded
+        
+        if isExpanded {
+            tableView.deleteRows(at: indexPaths, with: .fade)
+            if mark != nil {
+                mark?.image = UIImage(named: "to_right")
+            }
+        } else {
+            tableView.insertRows(at: indexPaths, with: .fade)
+            if mark != nil {
+                mark?.image = UIImage(named: "to_down")
+            }
+        }
+    }
 }
 

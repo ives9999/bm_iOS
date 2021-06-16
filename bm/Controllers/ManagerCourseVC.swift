@@ -22,9 +22,12 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     var isReload: Bool = true
 
     override func viewDidLoad() {
-        myTablView = tableView
-        super.viewDidLoad()
         
+        myTablView = tableView
+        able_type = "course"
+        dataService = CourseService.instance
+        
+        super.viewDidLoad()
         
         let cellNib = UINib(nibName: "ManagerCourseCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
@@ -33,6 +36,26 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
             params["manager_token"] = manager_token!
         }
         refresh()
+    }
+    
+    override func genericTable() {
+        
+        do {
+            if (jsonData != nil) {
+                mysTable = try JSONDecoder().decode(CoursesTable.self, from: jsonData!)
+            } else {
+                warning("無法從伺服器取得正確的json資料，請洽管理員")
+            }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        if (mysTable != nil) {
+            tables = mysTable!
+            if (page == 1) {
+                lists1 = [CourseTable]()
+            }
+            lists1 += mysTable!.rows
+        }
     }
     
 //    override func refresh() {

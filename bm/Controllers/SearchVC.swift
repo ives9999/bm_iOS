@@ -56,7 +56,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         
         searchSections = [
             ExpandableItems(isExpanded: true, items: ["keyword",CITY_KEY,WEEKDAY_KEY, START_TIME_KEY]),
-            ExpandableItems(isExpanded: true, items: [ARENA_KEY,DEGREE_KEY])
+            ExpandableItems(isExpanded: false, items: [ARENA_KEY,DEGREE_KEY])
         ]
         
         super.viewDidLoad()
@@ -157,8 +157,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Global.instance.addSpinner(superView: view)
-        Global.instance.removeSpinner(superView: view)
+        //Global.instance.addSpinner(superView: view)
+        //Global.instance.removeSpinner(superView: view)
         let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
         let cell = tableView.cellForRow(at: indexPath) as! EditCell
         
@@ -182,10 +182,10 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                     toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
                 } else if (segue == TO_SELECT_TIME) {
                     
-                    var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
-                    if (key == END_TIME_KEY) {
-                        type = SELECT_TIME_TYPE.play_end
-                    }
+//                    var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
+//                    if (key == END_TIME_KEY) {
+//                        type = SELECT_TIME_TYPE.play_end
+//                    }
                     
                     var selected: String? = nil
                     if (row.keyExist(key: "value") && row["value"] != nil) {
