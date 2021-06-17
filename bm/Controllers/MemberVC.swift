@@ -18,7 +18,7 @@ class MemberVC: MyTableVC {
     @IBOutlet weak var forgetPasswordBtn: UIButton!
     @IBOutlet weak var avatarImageView: UIImageView!
     
-    let _sections: [String] = ["會員資料", "訂單", "喜歡", "管理"]
+    //let _sections: [String] = ["會員資料", "訂單", "喜歡", "管理"]
     
     var mySections: [[String: Any]] = [
         ["name": "會員資料", "isExpanded": true, "key": "data"],
@@ -54,12 +54,13 @@ class MemberVC: MyTableVC {
     ]
     
     let heightForSection: CGFloat = 34
-    var searchSections: [ExpandableItems] = [
-        ExpandableItems(isExpanded: true, items: []),
-        ExpandableItems(isExpanded: true, items: []),
-        ExpandableItems(isExpanded: false, items: []),
-        ExpandableItems(isExpanded: true, items: [])
-    ]
+    
+//    var searchSections: [ExpandableItems] = [
+//        ExpandableItems(isExpanded: true, items: []),
+//        ExpandableItems(isExpanded: true, items: []),
+//        ExpandableItems(isExpanded: false, items: []),
+//        ExpandableItems(isExpanded: true, items: [])
+//    ]
     
     
 //    let signupRows: [Dictionary<String, String>] = [
@@ -73,7 +74,7 @@ class MemberVC: MyTableVC {
         super.viewDidLoad()
         
         myRows = [
-            ["key":"data", "rows": fixedRows],
+            ["key":"data", "rows": memberRows],
             ["key":"order", "rows": orderRows],
             ["key":"like", "rows": likeRows],
             ["key":"manager", "rows": courseRows],
@@ -123,6 +124,7 @@ class MemberVC: MyTableVC {
 //        }
         let new: Dictionary<String, String> = ["text": "重新整理", "icon": "refresh", "segue": TO_REFRESH]
         memberRows.append(new)
+        myRows[0]["rows"] = memberRows
         
 //        _rows.append(memberRows)
 //        _rows.append(orderRows)
@@ -133,6 +135,12 @@ class MemberVC: MyTableVC {
         //setData(sections: _sections, rows: _rows)
     }
     
+//    var mySections: [[String: Any]] = [
+//        ["name": "會員資料", "isExpanded": true, "key": "data"],
+//        ["name": "訂單", "isExpanded": true, "key": "order"],
+//        ["name": "喜歡", "isExpanded": false, "key": "like"],
+//        ["name": "管理", "isExpanded": true, "key": "manager"]
+//    ]
     func getSectionName(idx: Int)-> String {
         
         var name: String = ""
@@ -172,14 +180,19 @@ class MemberVC: MyTableVC {
         return b
     }
     
+//    myRows = [
+//        ["key":"data", "rows": fixedRows],
+//        ["key":"order", "rows": orderRows],
+//        ["key":"like", "rows": likeRows],
+//        ["key":"manager", "rows": courseRows],
+//    ]
+    
     func getSectionRowFromMyRowsByKey(key: String)-> [String: Any] {
         
         for row in myRows {
-            if row.keyExist(key: key) {
-                if let key1: String = row["key"] as? String {
-                    if key == key1 {
-                        return row
-                    }
+            if let key1: String = row["key"] as? String {
+                if key == key1 {
+                    return row
                 }
             }
         }
@@ -187,11 +200,20 @@ class MemberVC: MyTableVC {
         return [String: Any]()
     }
     
+    func getSectionRowFromMyRowsByIdx(idx: Int)-> [String: Any] {
+        
+        return myRows[idx]
+    }
+    
+//    let fixedRows: [[String: String]] = [
+//        ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
+//        ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
+//    ]
     func getRowRowsFromMyRowsBykey(key: String)-> [[String: String]] {
         
         let sectionRow: [String: Any] = getSectionRowFromMyRowsByKey(key: key)
         if (sectionRow.keyExist(key: "rows")) {
-            if let tmp: [[String: String]] = sectionRow as? [[String: String]] {
+            if let tmp: [[String: String]] = sectionRow["rows"] as? [[String: String]] {
                 return tmp
             }
         }
@@ -199,29 +221,32 @@ class MemberVC: MyTableVC {
         return [[String: String]]()
     }
     
-    func getRowFromIndexPath(indexPath: IndexPath)-> [[String: String]] {
+    //["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
+    func getRowFromIndexPath(indexPath: IndexPath)-> [String: String] {
         
         let section: Int = indexPath.section
         let key: String = getSectionKey(idx: section)
-        let tmp: [[String: String]] = getRowRowsFromMyRowsBykey(key: key)
+        let rows: [[String: String]] = getRowRowsFromMyRowsBykey(key: key)
+        let row: [String: String] = rows[indexPath.row]
         
-        return tmp
+        return row
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return mySections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         var count: Int = 0
         let mySection: [String: Any] = mySections[section]
-        if (mySection.keyExist(key: "isExpander")) {
-            let isExpanded: Bool = mySection["isExpander"] as? Bool ?? true
+        if (mySection.keyExist(key: "isExpanded")) {
+            let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
             if (isExpanded) {
                 if let key: String = mySection["key"] as? String {
-                    let someRow: [String: Any] = getRowFromKey(key: key)
-                    if (someRow.keyExist(key: "rows")) {
-                        if let rows: [[String: String]] = someRow["rows"] as? [[String: String]] {
-                            count = rows.count
-                        }
-                    }
+                    let rows: [[String: String]] = getRowRowsFromMyRowsBykey(key: key)
+                    count = rows.count
                 }
             }
         }
@@ -286,7 +311,7 @@ class MemberVC: MyTableVC {
         //cell.delegate = self
         //print(rows)
                 
-        let row: [String: Any] = rows![indexPath.section][indexPath.row]
+        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
         cell.setRow(row: row)
         
         if indexPath.section == 1 && indexPath.row == 0 {
@@ -298,10 +323,10 @@ class MemberVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        let row: [String: Any] = _rows[indexPath.section][indexPath.row]
+        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
         //print(row)
-        if row["segue"] != nil {
-            let segue = row["segue"] as! String
+        if row.keyExist(key: "segue") && row["segue"] != nil {
+            let segue: String = row["segue"]!
             //print("segue: \(segue)")
             if segue == TO_PROFILE {
                 toRegister()
@@ -333,7 +358,7 @@ class MemberVC: MyTableVC {
                 
                 var sender: String = ""
                 if row["type"] != nil {
-                    sender = row["type"] as! String
+                    sender = row["type"]!
                 }
                 if #available(iOS 13.0, *) {
                     let storyboard = UIStoryboard(name: "Member", bundle: nil)
@@ -366,7 +391,7 @@ class MemberVC: MyTableVC {
             } else if segue == TO_LIKE {
                 var able_type: String = "team"
                 if (row.keyExist(key: "able_type") && row["able_type"] != nil) {
-                    able_type = row["able_type"] as? String ?? "team"
+                    able_type = row["able_type"]!
                 }
                 //toMemberLikeList(able_type)
                 if (able_type == "team") {
@@ -476,6 +501,7 @@ class MemberVC: MyTableVC {
     }
     
     @objc func handleExpandClose(gesture : UITapGestureRecognizer) {
+        
         let headerView = gesture.view!
         let section = headerView.tag
         let tmp = headerView.subviews.filter({$0 is UIImageView})
@@ -486,28 +512,35 @@ class MemberVC: MyTableVC {
         
         var indexPaths: [IndexPath] = [IndexPath]()
         
-        if (section == 0) {
-            for i in 0...memberRows.count-1 {
-                let indexPath = IndexPath(row: i, section: section)
-                indexPaths.append(indexPath)
-            }
-        } else if (section == 1) {
-            for i in 0...orderRows.count-1 {
-                let indexPath = IndexPath(row: i, section: section)
-                indexPaths.append(indexPath)
-            }
-        } else if (section == 2) {
-            for i in 0...likeRows.count-1 {
-                print(i)
-                let indexPath = IndexPath(row: i, section: section)
-                indexPaths.append(indexPath)
-            }
-        } else if (section == 3) {
-            for i in 0...courseRows.count-1 {
-                let indexPath = IndexPath(row: i, section: section)
-                indexPaths.append(indexPath)
-            }
+        let key: String = getSectionKey(idx: section)
+        let rows: [[String: String]] = getRowRowsFromMyRowsBykey(key: key)
+        for (i, _) in rows.enumerated() {
+            let indexPath = IndexPath(row: i, section: section)
+            indexPaths.append(indexPath)
         }
+        
+//        if (section == 0) {
+//            for i in 0...memberRows.count-1 {
+//                let indexPath = IndexPath(row: i, section: section)
+//                indexPaths.append(indexPath)
+//            }
+//        } else if (section == 1) {
+//            for i in 0...orderRows.count-1 {
+//                let indexPath = IndexPath(row: i, section: section)
+//                indexPaths.append(indexPath)
+//            }
+//        } else if (section == 2) {
+//            for i in 0...likeRows.count-1 {
+//                print(i)
+//                let indexPath = IndexPath(row: i, section: section)
+//                indexPaths.append(indexPath)
+//            }
+//        } else if (section == 3) {
+//            for i in 0...courseRows.count-1 {
+//                let indexPath = IndexPath(row: i, section: section)
+//                indexPaths.append(indexPath)
+//            }
+//        }
         
         
 //        for idx in searchSections[section].items.indices {
@@ -515,8 +548,11 @@ class MemberVC: MyTableVC {
 //            indexPaths.append(indexPath)
 //        }
         
-        let isExpanded = searchSections[section].isExpanded
-        searchSections[section].isExpanded = !isExpanded
+        let isExpanded = getSectionExpanded(idx: section)
+        if (mySections[section].keyExist(key: "isExpanded")) {
+            mySections[section]["isExpanded"] = !isExpanded
+            //searchSections[section].isExpanded = !isExpanded
+        }
         
         if isExpanded {
             tableView.deleteRows(at: indexPaths, with: .fade)
