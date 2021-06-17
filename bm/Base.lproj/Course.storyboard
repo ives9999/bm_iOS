@@ -1079,7 +1079,7 @@
         <!--Edit CourseVC-->
         <scene sceneID="n2i-2C-naV">
             <objects>
-                <viewController id="FL6-tC-Cb5" customClass="EditCourseVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editCourse" id="FL6-tC-Cb5" customClass="EditCourseVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PCP-Cn-N2Y">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1321,8 +1321,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="fYu-zk-ZTm"/>
         <segue reference="x4H-6S-8nE"/>
-        <segue reference="NO9-v4-wOp"/>
-        <segue reference="A4Z-Qs-ID8"/>
+        <segue reference="aHG-Uf-e4X"/>
+        <segue reference="kcV-jt-cPw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="377.5" height="670"/>

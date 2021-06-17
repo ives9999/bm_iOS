@@ -118,12 +118,14 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
             
             let alert = UIAlertController(title: title, message: "選擇動作", preferredStyle: .alert)
             let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
-                let sender: [String: String] = ["title": title, "token": myTable.token]
-                self.performSegue(withIdentifier: TO_SHOW_COURSE, sender: sender)
+                self.toShowCourse(token: myTable.token)
+                //let sender: [String: String] = ["title": title, "token": myTable.token]
+                //self.performSegue(withIdentifier: TO_SHOW_COURSE, sender: sender)
             }
             let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
-                let sender: [String: String] = ["title": title, "token": myTable.token]
-                self.performSegue(withIdentifier: TO_EDIT_COURSE, sender: sender)
+                self.toEditCourse(token: myTable.token)
+//                let sender: [String: String] = ["title": title, "token": myTable.token]
+//                self.performSegue(withIdentifier: TO_EDIT_COURSE, sender: sender)
             }
             let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
                 
@@ -150,37 +152,27 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_EDIT_COURSE {
-            let vc: EditCourseVC = segue.destination as! EditCourseVC
-            if sender != nil { //edit
-                let row: [String: String] = sender as! [String: String]
-                if row["title"] != nil {
-                    vc.title = row["title"]
-                }
-                if row["token"] != nil {
-                    vc.course_token = row["token"]
-                }
-            } else { //add
-                vc.course_token = ""
-                vc.title = "新增課程"
-            }
-            if token != nil {
-                vc.coach_token = token
-            }
-            vc.delegate = self
-        } else if segue.identifier == TO_SHOW_COURSE {
-//            let vc: ShowCourseVC = segue.destination as! ShowCourseVC
-//            vc.delegate = self
-//            if sender != nil {
-//                let row: [String: String] = sender as! [String: String]
-//                if row["title"] != nil {
-//                    vc.title = row["title"]
-//                }
-//                if row["token"] != nil {
-//                    vc.course_token = row["token"]
-//                }
+        
+//        if sender != nil { //edit
+//            let row: [String: String] = sender as! [String: String]
+//            if row["title"] != nil {
+//                vc.title = row["title"]
 //            }
-        }
+//            if row["token"] != nil {
+//                vc.course_token = row["token"]
+//            }
+//        } else { //add
+//            vc.course_token = ""
+//            vc.title = "新增課程"
+//        }
+//
+//        if segue.identifier == TO_EDIT_COURSE {
+//            let vc: EditCourseVC = segue.destination as! EditCourseVC
+//            if token != nil {
+//                vc.coach_token = token
+//            }
+//            vc.delegate = self
+//        }
     }
     
     private func _delete(token: String) {

@@ -67,6 +67,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                 let table: Table = CourseService.instance.table!
                 self.courseTable = table as? CourseTable
                 self.putValue()
+                self.titleLbl.text = table.title
                 self.tableView.reloadData()
             } else {
                 self.warning(CourseService.instance.msg)
@@ -77,25 +78,53 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     func putValue() {
         if courseTable != nil {
-            let mirror: Mirror? = Mirror(reflecting: courseTable!)
-            if mirror != nil {
-                for formItem in self.form.formItems {
-                    let name = formItem.name!
-                    for (property, value) in mirror!.children {
-                        if name == property {
-                            let typeof = type(of: value)
-                            if typeof == String.self {
-                                formItem.value = value as? String
-                            } else if typeof == Int.self {
-                                let tmp = value as! Int
-                                formItem.value = String(tmp)
-                            }
-                            formItem.make()
+            
+            let mirror: Mirror = Mirror(reflecting: courseTable!)
+            let propertys: [[String: Any]] = mirror.toDictionary()
+            
+            for formItem in form.formItems {
+                
+                for property in propertys {
+                    
+                    if ((property["label"] as! String) == formItem.name) {
+                        var type: String = property["type"] as! String
+                        type = type.getTypeOfProperty()!
+                        //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+                        var content: String = ""
+                        if type == "Int" {
+                            content = String(property["value"] as! Int)
+                        } else if type == "Bool" {
+                            content = String(property["value"] as! Bool)
+                        } else if type == "String" {
+                            content = property["value"] as! String
                         }
-                        
+                        formItem.value = content
+                        formItem.make()
+                        break
                     }
                 }
             }
+            
+            
+//            let mirror: Mirror? = Mirror(reflecting: courseTable!)
+//            if mirror != nil {
+//                for formItem in self.form.formItems {
+//                    let name = formItem.name!
+//                    for (property, value) in mirror!.children {
+//                        if name == property {
+//                            let typeof = type(of: value)
+//                            if typeof == String.self {
+//                                formItem.value = value as? String
+//                            } else if typeof == Int.self {
+//                                let tmp = value as! Int
+//                                formItem.value = String(tmp)
+//                            }
+//                            formItem.make()
+//                        }
+//
+//                    }
+//                }
+//            }
             //featuredView.s
             let featured_path = courseTable!.featured_path
             if featured_path.count > 0 {
@@ -153,8 +182,6 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Global.instance.addSpinner(superView: view)
-        Global.instance.removeSpinner(superView: view)
         
         let item = getFormItemFromIdx(indexPath)
         if item != nil {

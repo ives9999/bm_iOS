@@ -78,9 +78,11 @@ class CourseService: DataService {
     override func update(_params: [String : String], image: UIImage?, completion: @escaping CompletionHandler) {
         
         let url: String = String(format: URL_UPDATE, "course")
+        //print(url)
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
         var params: [String: String] = ["source": "app","channel":CHANNEL]
         params.merge(_params)
+        //print(params)
         
         Alamofire.upload(
             multipartFormData: { (multipartFormData) in
