@@ -98,7 +98,7 @@ class CourseTable: Table {
         case signup_id
         
         case coachTable = "coach" // php json的key值
-        case dateTable = "date_model"
+        case dateTable = "dateTable"
         case signupNormalTables = "signup_normal_models"
         case signupStandbyTables = "signup_standby_models"
     }

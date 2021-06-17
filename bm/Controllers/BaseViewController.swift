@@ -533,7 +533,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                     let city_s: [String: [String: Any]] = [String(city_id): area_s]
                     
                     var allAreas: [String: [String: Any]] = self.session.getAllAreas()
-                    if allAreas != nil && allAreas.count > 0 {
+                    if allAreas.count > 0 {
                         allAreas[String(city_id)] = area_s
                         self.session.set(allAreas, forKey: "areas")
                     } else {
@@ -561,7 +561,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                     
                     var res: [String: [String: Any]] = [String: [String: Any]]()
                     let city = DataService.instance1.citysandareas
-                    for (city_id, city_value) in city {
+                    for (city_id, _) in city {
                         var city_name = ""
                         if city[city_id] != nil {
                             city_name = city[city_id]!["name"] as! String
@@ -588,7 +588,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                         let city_s: [String: [String: Any]] = [String(city_id): area_s]
                         
                         var allAreas: [String: [String: Any]] = self.session.getAllAreas()
-                        if allAreas != nil && allAreas.count > 0 {
+                        if allAreas.count > 0 {
                             allAreas[String(city_id)] = area_s
                             self.session.set(allAreas, forKey: "areas")
                         } else {

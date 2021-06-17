@@ -129,7 +129,7 @@ class ShowCourseVC: Show1VC {
                 
                 setMainData(myTable!)
                 
-                //self.coachTable = self.courseTable!.coach
+                //coachTable = courseTable!.coach
                 //self.courseTable!.signup_normal_models
                 
                 if myTable!.coachTable != nil { // setup coach for course data
@@ -146,17 +146,21 @@ class ShowCourseVC: Show1VC {
                 tableView.reloadData()
                 signupTableView.reloadData()
                 coachTableView.reloadData()
+                
+                if (myTable!.people_limit == 0) {
+                    signupButton.visibility = .invisible
+                }
             
-//                if self.coachTable!.isSignup {
-//                    self.signupButton.setTitle("取消報名")
-//                } else {
-//                    let count = self.coachTable!.signup_normal_models.count
-//                    if count >= self.coachTable!.people_limit {
-//                        self.signupButton.setTitle("候補")
-//                    } else {
-//                        self.signupButton.setTitle("報名")
-//                    }
-//                }
+                if myTable!.isSignup {
+                    signupButton.setTitle("取消報名")
+                } else {
+                    let count = myTable!.signupNormalTables.count
+                    if count >= myTable!.people_limit {
+                        self.signupButton.setTitle("候補")
+                    } else {
+                        self.signupButton.setTitle("報名")
+                    }
+                }
             }
         }
     }
@@ -174,12 +178,17 @@ class ShowCourseVC: Show1VC {
 //    }
     
     func setNextTime() {
-        let dateTable: DateTable = myTable!.dateTable!
-        let date: String = dateTable.date
-        let start_time: String = myTable!.start_time_show
-        let end_time: String = myTable!.end_time_show
-        let next_time = "下次上課時間：\(date) \(start_time) ~ \(end_time)"
-        signupDateLbl.text = next_time
+        
+        if (myTable?.people_limit ?? 0 <= 0) {
+            signupDateLbl.text = "暫不開放報名"
+        } else {
+            let dateTable: DateTable = myTable!.dateTable!
+            let date: String = dateTable.date
+            let start_time: String = myTable!.start_time_show
+            let end_time: String = myTable!.end_time_show
+            let next_time = "下次上課時間：\(date) \(start_time) ~ \(end_time)"
+            signupDateLbl.text = next_time
+        }
         
         
 //        let nextCourseTime: [String: String] = courseTable!.nextCourseTime
@@ -223,7 +232,7 @@ class ShowCourseVC: Show1VC {
             if tableView == self.tableView {
                 return tableRowKeys.count
             } else if tableView == self.signupTableView {
-                if myTable != nil {
+                if myTable != nil && myTable!.people_limit > 0 {
                     //let normal_count: Int = courseTable!.signupNormalTables.count
                     let standby_count: Int = myTable!.signupStandbyTables.count
                     let people_limit: Int = myTable!.people_limit
@@ -463,7 +472,7 @@ class ShowCourseVC: Show1VC {
                 if self.dataService.success {
                     title = "提示"
                     closeAction = UIAlertAction(title: "關閉", style: .default, handler: { (action) in
-                        self.refresh()
+                        self.refresh(CourseTable.self)
                     })
                 } else {
                     closeAction = UIAlertAction(title: "關閉", style: .default, handler: nil)
@@ -474,7 +483,7 @@ class ShowCourseVC: Show1VC {
                 self.present(alert, animated: true, completion: nil)
             }
         } else {
-            warning("無法取得日期參數，所以無法報名，請通知管理員 - signup")
+            warning("無法報名，請通知管理員 - signup")
         }
     }
     
@@ -497,6 +506,8 @@ class ShowCourseVC: Show1VC {
                     self.course_date = self.signup_date["date"].stringValue
                     self.course_deadline = self.signup_date["deadline"].stringValue
                     self.showSignupModal()
+                } else {
+                    self.warning(self.dataService.msg)
                 }
             }
         } else {

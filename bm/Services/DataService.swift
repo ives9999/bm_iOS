@@ -88,13 +88,13 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        print(filter.toJSONString())
+        //print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        print(url)
+        //print(url)
                 
         Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
@@ -867,7 +867,7 @@ class DataService {
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
-                    self.msg = "網路錯誤，請稍後再試"
+                    self.msg = "無法解析伺服器傳回值錯誤，請洽管理員"
                     completion(false)
                     return
                 }
@@ -882,7 +882,7 @@ class DataService {
                 }
                 completion(true)
             } else {
-                self.msg = "網路錯誤，請稍後再試"
+                self.msg = "取得報名日期錯誤，請洽管理員"
                 completion(false)
             }
         }

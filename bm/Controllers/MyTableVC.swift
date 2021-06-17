@@ -176,12 +176,6 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         }
         Global.instance.removeSpinner(superView: view)
     }
-
-    
-    
-    
-    
-    
     
     override func prepareParams(city_type: String="simple") {
         params = [String: Any]()
