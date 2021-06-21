@@ -303,7 +303,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
     {
         //not use
     }
-    override func setWeekdaysData(res: [Int], indexPath: IndexPath?) {
+    override func setWeekdaysData(res: [Int]) {
         let days: [Int] = model.data[TEAM_WEEKDAYS_KEY]!["value"] as! [Int]
         if !res.containsSameElements(as: days) {
             model.updateWeekdays(res)

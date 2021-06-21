@@ -51,7 +51,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     var searchRows: [[String: Any]] = [[String: Any]]()
     
     //WeekdaysSelectDelegate
-    func setWeekdaysData(res: [Int], indexPath: IndexPath?){}
+    func setWeekdaysData(res: [Int]){}
     //TimeSelectDelegate
     func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?){}
     //ArenaSelectDelegate

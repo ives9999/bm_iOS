@@ -10,7 +10,7 @@ import UIKit
 import UIColor_Hex_Swift
 
 protocol WeekdaysSelectDelegate: class {
-    func setWeekdaysData(res: [Int], indexPath: IndexPath?)
+    func setWeekdaysData(res: [Int])
 }
 
 //extension WeekdaysSelectDelegate {
@@ -131,7 +131,7 @@ class WeekdaysSelectVC: MyTableVC {
         prev()
     }
     @IBAction func submit() {
-        self.delegate?.setWeekdaysData(res: selecteds, indexPath: indexPath)
+        self.delegate?.setWeekdaysData(res: selecteds)
         prev()
     }
 }

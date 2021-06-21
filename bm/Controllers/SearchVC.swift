@@ -322,7 +322,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                         //取得選擇球館的代號
                         row = getDefinedRow(ARENA_KEY)
                         let selected: String = row["value"] as! String
-                        toSelectArena(city: city!, selected: selected, delegate: self)
+                        toSelectArena(key: key, city: city!, selected: selected, delegate: self)
                     }
                 } else if (segue == TO_SELECT_DEGREE) {
                     
@@ -344,6 +344,72 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     func getDefinedRow(_ section: Int, _ row: Int) -> [String: Any] {
         let key = searchSections[section].items[row]
         return getDefinedRow(key)
+    }
+    
+    override func singleSelected(key: String, selected: String, show: String?=nil) {
+        
+        var row = getDefinedRow(key)
+        var _show = ""
+        if key == START_TIME_KEY || key == END_TIME_KEY {
+            row["value"] = selected
+            _show = selected.noSec()
+        } else if (key == CITY_KEY || key == AREA_KEY) {
+            row["value"] = selected
+            _show = Global.instance.zoneIDToName(Int(selected)!)
+        } else if (key == ARENA_KEY) {
+            row["value"] = selected
+            if (show != nil) {
+                _show = show!
+            }
+        }
+        row["show"] = _show
+        replaceRows(key, row)
+        tableView.reloadData()
+    }
+    
+    override func setWeekdaysData(res: [Int]) {
+        var row = getDefinedRow(WEEKDAY_KEY)
+        var texts: [String] = [String]()
+        var values: [String] = [String]()
+        if res.count > 0 {
+            for day in res {
+                values.append(String(day))
+                for gday in Global.instance.weekdays {
+                    if day == gday["value"] as! Int {
+                        let text = gday["simple_text"]
+                        texts.append(text! as! String)
+                        break
+                    }
+                }
+            }
+            row["show"] = texts.joined(separator: ",")
+        
+            row["value"] = values.joined(separator: ",")
+        } else {
+            row["show"] = "全部"
+        }
+        replaceRows(WEEKDAY_KEY, row)
+        tableView.reloadData()
+    }
+    
+    override func setDegreeData(res: [DEGREE]) {
+        
+        var row = getDefinedRow(DEGREE_KEY)
+        var names: [String] = [String]()
+        var values: [String] = [String]()
+        if res.count > 0 {
+            for degree in res {
+                names.append(degree.rawValue)
+                values.append(DEGREE.DBValue(degree))
+            }
+            row["show"] = names.joined(separator: ",")
+            row["value"] = values.joined(separator: ",")
+        } else {
+            row["show"] = "全部"
+            row["value"] = ""
+        }
+        replaceRows(DEGREE_KEY, row)
+        tableView.reloadData()
     }
     
     @objc func tabPressed(sender: UITapGestureRecognizer) {

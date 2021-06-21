@@ -506,14 +506,14 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         }
     }
     
-    override func setWeekdaysData(res: [Int], indexPath: IndexPath? = nil) {
-        if indexPath != nil {
-            let item = form.formItems[indexPath!.row] as! WeekdayFormItem
-            item.weekdays = res
-            
-            editTableView.reloadData()
-        }
-    }
+//    override func setWeekdaysData(res: [Int], indexPath: IndexPath? = nil) {
+//        if indexPath != nil {
+//            let item = form.formItems[indexPath!.row] as! WeekdayFormItem
+//            item.weekdays = res
+//            
+//            editTableView.reloadData()
+//        }
+//    }
     
     override func dateSelected(key: String, selected: String) {
         print(selected)
