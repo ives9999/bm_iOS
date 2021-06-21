@@ -14,9 +14,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     @IBOutlet weak var submitBtn: UIButton!
     @IBOutlet weak var likeTab: Tag!
     @IBOutlet weak var searchTab: Tag!
+    @IBOutlet weak var allTab: Tag!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     var searchTags: [[String: Any]] = [[String: Any]]()
-    
+    var selectedTagIdx: Int = 0
     let heightForSection: CGFloat = 34
     
     var mysTable: TeamsTable?
@@ -30,6 +32,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         
         //model = Team.instance
         myTablView = tableView
+        dataService = TeamService.instance
         able_type = "team"
         sections = ["", "更多"]
         Global.instance.setupTabbar(self)
@@ -59,17 +62,29 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         let cellNib = UINib(nibName: "EditCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
         
+        let cellNibName = UINib(nibName: "TeamListCell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
+        
         searchTags = [
-            ["key": "like", "selected": false, "tag": 0, "class": likeTab],
-            ["key": "search", "selected": false, "tag": 1, "class": searchTab]
+            ["key": "like", "selected": true, "tag": 0, "class": likeTab],
+            ["key": "search", "selected": false, "tag": 1, "class": searchTab],
+            ["key": "all", "selected": false, "tag": 2, "class": allTab]
         ]
         
         //print(searchTags)
         
-        let likeTap1 = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
-        likeTab.addGestureRecognizer(likeTap1)
-        let searchTap1 = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
-        searchTab.addGestureRecognizer(searchTap1)
+        let likeTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
+        likeTab.addGestureRecognizer(likeTap)
+        let searchTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
+        searchTab.addGestureRecognizer(searchTap)
+        let allTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
+        allTab.addGestureRecognizer(allTap)
+        
+        updateTabSelected(idx: selectedTagIdx)
+        submitBtn.visibility = .invisible
+        tableViewBottomConstraint.constant = 0
+        
+        refresh()
         
         //submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
         //submitBtn.layer.cornerRadius = 12
@@ -79,6 +94,24 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 //        if !Session.shared.exist(key: Session.shared.loginResetKey) {
 //            Session.shared.loginReset = gReset
 //        }
+    }
+    
+    override func refresh() {
+        
+        //member like team list
+        switch selectedTagIdx {
+        case 0:
+            member_like = true
+            page = 1
+            getDataStart(page: page, perPage: PERPAGE)
+        case 2:
+            member_like = false
+            page = 1
+            getDataStart(page: page, perPage: PERPAGE)
+        default:
+            let i = 6
+        
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -104,63 +137,135 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 //        }
 //    }
     
+    override func genericTable() {
+        
+        do {
+            if (jsonData != nil) {
+                mysTable = try JSONDecoder().decode(TeamsTable.self, from: jsonData!)
+            } else {
+                warning("無法從伺服器取得正確的json資料，請洽管理員")
+            }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        if (mysTable != nil) {
+            tables = mysTable!
+            if (page == 1) {
+                lists1 = [TeamTable]()
+            }
+            lists1 += mysTable!.rows
+        }
+    }
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return searchSections.count
+        
+        if (selectedTagIdx == 1) {
+            return searchSections.count
+        } else {
+            return 1
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !searchSections[section].isExpanded {
-            return 0
+        
+        var count: Int = 0
+        
+        switch selectedTagIdx {
+            
+        case 0:
+            count = lists1.count
+        case 1:
+            if !searchSections[section].isExpanded {
+                count = 0
+            } else {
+                count = searchSections[section].items.count
+            }
+        case 2:
+            count = lists1.count
+        default:
+            count = searchSections.count
+        
         }
-        return searchSections[section].items.count
+        return count
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if section == 0 {
+        
+        if (selectedTagIdx == 1) {
+            if section == 0 {
+                return 0
+            }
+            return heightForSection
+        } else {
             return 0
         }
-        return heightForSection
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.white
-        headerView.tag = section
         
-        let titleLabel = UILabel()
-        titleLabel.text = sections?[section]
-        titleLabel.textColor = UIColor.black
-        titleLabel.sizeToFit()
-        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
-        headerView.addSubview(titleLabel)
-        
-        let mark = UIImageView(image: UIImage(named: "to_right"))
-        mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
-        headerView.addSubview(mark)
-        
-        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
-        headerView.addGestureRecognizer(gesture)
-        
-        return headerView
+        if (selectedTagIdx == 1) {
+            let headerView = UIView()
+            headerView.backgroundColor = UIColor.white
+            headerView.tag = section
+            
+            let titleLabel = UILabel()
+            titleLabel.text = sections?[section]
+            titleLabel.textColor = UIColor.black
+            titleLabel.sizeToFit()
+            titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
+            headerView.addSubview(titleLabel)
+            
+            let mark = UIImageView(image: UIImage(named: "to_right"))
+            mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
+            headerView.addSubview(mark)
+            
+            let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+            headerView.addGestureRecognizer(gesture)
+            
+            return headerView
+        } else {
+            return UIView()
+        }
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 60
+//    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //print("section: \(indexPath.section), row: \(indexPath.row)")
-        let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
-        cell.editCellDelegate = self
+        switch selectedTagIdx {
+        case 0, 2:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? TeamListCell {
+                
+                cell.cellDelegate = self
+                let row = lists1[indexPath.row] as? TeamTable
+                if row != nil {
+                    row!.filterRow()
+                    //row!.printRow()
+                    cell.updateViews(row!)
+                }
+                
+                return cell
+            } else {
+                return ListCell()
+            }
+        case 1:
+            //print("section: \(indexPath.section), row: \(indexPath.row)")
+            let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
+            cell.editCellDelegate = self
+            
+            let searchRow = getDefinedRow(indexPath.section, indexPath.row)
+            //print(searchRow)
+            cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
+    //        let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
+    //        cell.forRow(indexPath: indexPath, row: row, isClear: true)
+            
+            return cell
+        default:
+            return UITableViewCell()
+        }
         
-        let searchRow = getDefinedRow(indexPath.section, indexPath.row)
-        //print(searchRow)
-        cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
-//        let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
-//        cell.forRow(indexPath: indexPath, row: row, isClear: true)
-        
-        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -247,35 +352,41 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
             
             let selectedTag: [String: Any] = searchTags[idx]
             if let selected: Bool = selectedTag["selected"] as? Bool {
-                
+
                 //按了其他頁面的按鈕
                 if (!selected) {
-                    print("another")
+                    updateTabSelected(idx: idx)
+                    selectedTagIdx = idx
+                    if (selectedTagIdx == 1) {
+                        submitBtn.visibility = .visible
+                        tableViewBottomConstraint.constant = 100
+                        tableView.reloadData()
+                    } else {
+                        submitBtn.visibility = .invisible
+                        tableViewBottomConstraint.constant = 0
+                        refresh()
+                    }
                 }
             }
-            
-            for (i, var searchTag) in searchTags.enumerated() {
-                
-                if (i == idx) {
-                    searchTag["selected"] = true
-                } else {
-                    searchTag["selected"] = false
-                }
-                searchTags[i] = searchTag
-            }
-            
-            setTabSelected()
         }
     }
     
-//    @objc func searchTabPressed(sender: UITapGestureRecognizer) {
-//
-//        //print(sender.view?.tag)
-//        searchTab.selected = true
-//        searchTab.setSelectedStyle()
-//    }
+    private func updateTabSelected(idx: Int) {
+        
+        // set user click which tag, set tag selected is true
+        for (i, var searchTag) in searchTags.enumerated() {
+            
+            if (i == idx) {
+                searchTag["selected"] = true
+            } else {
+                searchTag["selected"] = false
+            }
+            searchTags[i] = searchTag
+        }
+        setTabSelectedStyle()
+    }
     
-    private func setTabSelected() {
+    private func setTabSelectedStyle() {
         
         for searchTag in searchTags {
             if (searchTag.keyExist(key: "class")) {
