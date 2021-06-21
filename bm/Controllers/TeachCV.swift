@@ -93,15 +93,15 @@ class TeachCV: MyTableVC {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_SHOW {
-            if let showVC: ShowVC = segue.destination as? ShowVC {
-                let table = sender as! TeachTable
-                let show_in: Show_IN = Show_IN(type: "teach", id: table.id, token: table.token, title: table.title)
-                showVC.initShowVC(sin: show_in)
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == TO_SHOW {
+//            if let showVC: ShowVC = segue.destination as? ShowVC {
+//                let table = sender as! TeachTable
+//                let show_in: Show_IN = Show_IN(type: "teach", id: table.id, token: table.token, title: table.title)
+//                showVC.initShowVC(sin: show_in)
+//            }
+//        }
+//    }
     
 //    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        // #warning Incomplete implementation, return the number of items

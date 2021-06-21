@@ -159,7 +159,7 @@
 		B39E5FA5263D4F0800C40BA7 /* List2Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39E5FA3263D4F0800C40BA7 /* List2Cell.swift */; };
 		B39E5FA6263D4F0800C40BA7 /* List2Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B39E5FA4263D4F0800C40BA7 /* List2Cell.xib */; };
 		B39E5FAB263ED55400C40BA7 /* ShowTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39E5FAA263ED55400C40BA7 /* ShowTeamVC.swift */; };
-		B39E5FEA2642A3AD00C40BA7 /* Show1VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39E5FE92642A3AB00C40BA7 /* Show1VC.swift */; };
+		B39E5FEA2642A3AD00C40BA7 /* ShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39E5FE92642A3AB00C40BA7 /* ShowVC.swift */; };
 		B3A0D699226DD290008A7D47 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A0D698226DD290008A7D47 /* Session.swift */; };
 		B3A253D22567D6ED004B8A03 /* EditStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A253D12567D6EB004B8A03 /* EditStoreVC.swift */; };
 		B3A253D8256A57B6004B8A03 /* StoreForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A253D7256A57B6004B8A03 /* StoreForm.swift */; };
@@ -286,7 +286,6 @@
 		B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */; };
 		B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F51FBC0A7C0003F083 /* TextInputVC.swift */; };
 		B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */; };
-		B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */; };
 		B3F222301F91DE7300A8C402 /* Show_IN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F2222F1F91DE7300A8C402 /* Show_IN.swift */; };
 		B3F6B44C2604F4B40000F9E0 /* DateTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B44B2604F4B40000F9E0 /* DateTable.swift */; };
 		B3F6B4512605002E0000F9E0 /* SignupNormalTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B4502605002E0000F9E0 /* SignupNormalTable.swift */; };
@@ -544,7 +543,7 @@
 		B39E5FA3263D4F0800C40BA7 /* List2Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List2Cell.swift; sourceTree = "<group>"; };
 		B39E5FA4263D4F0800C40BA7 /* List2Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = List2Cell.xib; sourceTree = "<group>"; };
 		B39E5FAA263ED55400C40BA7 /* ShowTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTeamVC.swift; sourceTree = "<group>"; };
-		B39E5FE92642A3AB00C40BA7 /* Show1VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show1VC.swift; sourceTree = "<group>"; };
+		B39E5FE92642A3AB00C40BA7 /* ShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVC.swift; sourceTree = "<group>"; };
 		B3A0D698226DD290008A7D47 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 		B3A253D12567D6EB004B8A03 /* EditStoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditStoreVC.swift; sourceTree = "<group>"; };
 		B3A253D7256A57B6004B8A03 /* StoreForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreForm.swift; sourceTree = "<group>"; };
@@ -674,7 +673,6 @@
 		B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectVC.swift; sourceTree = "<group>"; };
 		B3ED38F51FBC0A7C0003F083 /* TextInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputVC.swift; sourceTree = "<group>"; };
 		B3ED38F71FBC476B0003F083 /* DegreeSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DegreeSelectVC.swift; sourceTree = "<group>"; };
-		B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowVC.swift; sourceTree = "<group>"; };
 		B3F2222F1F91DE7300A8C402 /* Show_IN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Show_IN.swift; sourceTree = "<group>"; };
 		B3F6B44B2604F4B40000F9E0 /* DateTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTable.swift; sourceTree = "<group>"; };
 		B3F6B4502605002E0000F9E0 /* SignupNormalTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupNormalTable.swift; sourceTree = "<group>"; };
@@ -1233,7 +1231,7 @@
 				B3A2542125723F5B004B8A03 /* SelectManagers.swift */,
 				B3CA52AC2675160300E9EAE9 /* SelectTimeVC.swift */,
 				B385A07B22BCB28E00BC3ADF /* SelectVC.swift */,
-				B39E5FE92642A3AB00C40BA7 /* Show1VC.swift */,
+				B39E5FE92642A3AB00C40BA7 /* ShowVC.swift */,
 				B3AE93B12640FBE700223B2A /* ShowArenaVC.swift */,
 				B3E8C29A220603310008ED25 /* ShowCoachVC.swift */,
 				B3839EB722CF0261003F3620 /* ShowCourseVC.swift */,
@@ -1243,7 +1241,6 @@
 				B39E5FAA263ED55400C40BA7 /* ShowTeamVC.swift */,
 				B3308C501FDA5311006A83B6 /* ShowTempPlayVC.swift */,
 				B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */,
-				B3F2222B1F90C9CD00A8C402 /* ShowVC.swift */,
 				B39A216E23420881006C9FF7 /* SignupListVC.swift */,
 				B358B0B522A0FB5200F1A4E6 /* SingleSelectVC.swift */,
 				B3756EEE21BA6F19006893E1 /* StatusSelectVC.swift */,
@@ -1839,7 +1836,6 @@
 				B3756EE221B95974006893E1 /* ColorCell.swift in Sources */,
 				B3B4EF77257C8ECF00EE15D0 /* PasswordFormItem.swift in Sources */,
 				B3B7587B25A5C1BE006ACC33 /* OrderVC.swift in Sources */,
-				B3F2222C1F90C9CD00A8C402 /* ShowVC.swift in Sources */,
 				B3B758B725AC5FDA006ACC33 /* ClothesSizeFormItem.swift in Sources */,
 				B323391321B6C947003EB84D /* FormItemCellType.swift in Sources */,
 				B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */,
@@ -1913,7 +1909,7 @@
 				B39453DB2230F516005E3027 /* OneSignal.swift in Sources */,
 				B3ED38EC1FB9AB9D0003F083 /* Arena.swift in Sources */,
 				B306FEA321F1A35700403FE2 /* SuperDatePicker.swift in Sources */,
-				B39E5FEA2642A3AD00C40BA7 /* Show1VC.swift in Sources */,
+				B39E5FEA2642A3AD00C40BA7 /* ShowVC.swift in Sources */,
 				B317855B20D9089600765CA1 /* BlackListCell.swift in Sources */,
 				B306F340217DA15000C32CE2 /* Area.swift in Sources */,
 				B307AA31263840EE001F685D /* LikeButton.swift in Sources */,
@@ -1999,7 +1995,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.6.6;
+				MARKETING_VERSION = 1.6.7;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2024,7 +2020,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 1.6.6;
+				MARKETING_VERSION = 1.6.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2183,7 +2179,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.6.6;
+				MARKETING_VERSION = 1.6.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
@@ -2215,7 +2211,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.6.6;
+				MARKETING_VERSION = 1.6.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";

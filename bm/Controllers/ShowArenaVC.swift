@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class ShowArenaVC: Show1VC {
+class ShowArenaVC: ShowVC {
     
     @IBOutlet weak var signupTableViewConstraintHeight: NSLayoutConstraint!
     

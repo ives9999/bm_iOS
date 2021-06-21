@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ShowProductVC: Show1VC {
+class ShowProductVC: ShowVC {
     
     @IBOutlet weak var imageDataLbl: SuperLabel!
     

@@ -11,7 +11,7 @@ import WebKit
 import SwiftyJSON
 import AlamofireImage
 
-class ShowCoachVC: Show1VC {
+class ShowCoachVC: ShowVC {
     
     @IBOutlet weak var cityBtn: CityButton!
     //@IBOutlet weak var contactLbl: SuperLabel!

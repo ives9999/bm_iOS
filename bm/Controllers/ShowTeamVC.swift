@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class ShowTeamVC: Show1VC {
+class ShowTeamVC: ShowVC {
     
     @IBOutlet weak var signupTableView: SuperTableView!
     

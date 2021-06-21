@@ -115,14 +115,14 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let showVC: ShowVC = segue.destination as? ShowVC {
-            assert(sender as? Home != nil)
-            let home: Home = sender as! Home
-            let show_in: Show_IN = Show_IN(type: home.type, id: home.id, token: home.token, title: home.title)
-            showVC.initShowVC(sin: show_in)
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let showVC: ShowVC = segue.destination as? ShowVC {
+//            assert(sender as? Home != nil)
+//            let home: Home = sender as! Home
+//            let show_in: Show_IN = Show_IN(type: home.type, id: home.id, token: home.token, title: home.title)
+//            showVC.initShowVC(sin: show_in)
+//        }
+//    }
     
 //    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
 //        print("will display section: \(indexPath.section) row: \(indexPath.row)")

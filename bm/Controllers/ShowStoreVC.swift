@@ -9,7 +9,7 @@
 import Foundation
 import WebKit
 
-class ShowStoreVC: Show1VC {
+class ShowStoreVC: ShowVC {
     
     var myTable: StoreTable?
     

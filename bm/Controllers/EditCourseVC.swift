@@ -59,16 +59,31 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     override func refresh() {
+        
         Global.instance.addSpinner(superView: view)
         let params: [String: String] = ["token": course_token!]
-        CourseService.instance.getOne(t: CourseTable.self, params: params) { (success) in
+        CourseService.instance.getOne(params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                let table: Table = CourseService.instance.table!
-                self.courseTable = table as? CourseTable
-                self.putValue()
-                self.titleLbl.text = table.title
-                self.tableView.reloadData()
+                let jsonData: Data = CourseService.instance.jsonData!
+                do {
+                    self.courseTable = try JSONDecoder().decode(CourseTable.self, from: jsonData)
+                    if (self.courseTable != nil) {
+                        self.courseTable!.filterRow()
+                        self.putValue()
+                        self.titleLbl.text = self.courseTable!.title
+                        self.tableView.reloadData()
+                    }
+                } catch {
+                    self.warning(error.localizedDescription)
+                }
+                
+                
+//                let table: Table = CourseService.instance.table!
+//                self.courseTable = table as? CourseTable
+//                self.putValue()
+//                self.titleLbl.text = table.title
+//                self.tableView.reloadData()
             } else {
                 self.warning(CourseService.instance.msg)
             }

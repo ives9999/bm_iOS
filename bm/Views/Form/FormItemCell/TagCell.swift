@@ -13,7 +13,7 @@ class TagCell: FormItemCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var containViewHeight: NSLayoutConstraint!
     
-    let labelWidth: CGFloat = 100
+    let labelWidth: CGFloat = 50
     let labelHeight: CGFloat = 30
     let horizonMergin: CGFloat = 8
     let vericalMergin: CGFloat = 8
@@ -106,7 +106,7 @@ class TagCell: FormItemCell {
         //高度
         h = NSLayoutConstraint(item: block, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: labelHeight)
         block.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addConstraints([left, up, w, h])
+        containerView.addConstraints([left, up])
     }
         
     @objc func handleTap(sender: UITapGestureRecognizer) {

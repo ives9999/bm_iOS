@@ -138,7 +138,7 @@ class DataService {
         }
     }
     
-    func getOne<T: Table>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
+    func getOne1<T: Table>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
         
         var body: [String: Any] = ["device": "app","strip_html": false]
         if params["token"] != nil {
@@ -164,20 +164,10 @@ class DataService {
                     var s: T? = nil
                     do {
                         if response.data != nil {
-//                            let json = JSON(value)
-//                            print(json)
                             s = try JSONDecoder().decode(t, from: response.data!)
                             if s != nil {
                                 self.table = s!
                                 self.table!.filterRow()
-                                //s!.printRow()
-//                                let s1: OrderTable = s as! OrderTable
-//                                for image in s1.product!.prices {
-//                                    image.printRow()
-//                                }
-//                                if s1.images != nil {
-//                                    s1.images.printRow()
-//                                }
                                 completion(true)
                             } else {
                                 self.msg = "解析JSON字串時，得到空直，請洽管理員"
@@ -202,7 +192,7 @@ class DataService {
         }
     }
     
-    func getOne1(params: [String: String], completion: @escaping CompletionHandler){
+    func getOne(params: [String: String], completion: @escaping CompletionHandler){
         
         var body: [String: Any] = ["device": "app","strip_html": false]
         if params["token"] != nil {

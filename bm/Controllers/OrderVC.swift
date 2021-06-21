@@ -47,7 +47,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         Global.instance.addSpinner(superView: view)
         page = 1
         let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
-        ProductService.instance.getOne(t: ProductTable.self, params: params) { (success) in
+        ProductService.instance.getOne1(t: ProductTable.self, params: params) { (success) in
             if (success) {
                 let table: Table = ProductService.instance.table!
                 self.productTable = (table as! ProductTable)

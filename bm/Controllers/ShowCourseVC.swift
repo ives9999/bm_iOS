@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class ShowCourseVC: Show1VC {
+class ShowCourseVC: ShowVC {
     
     @IBOutlet weak var signupTableViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var coachTableViewConstraintHeight: NSLayoutConstraint!
@@ -387,17 +387,17 @@ class ShowCourseVC: Show1VC {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_SHOW {
-            let sender = sender as! Show_IN
-            let showVC: ShowVC = segue.destination as! ShowVC
-            showVC.show_in = sender
-        } else if segue.identifier == TO_SIGNUP_LIST {
-            let signupListVC: SignupListVC = segue.destination as! SignupListVC
-            signupListVC.able = "course"
-            signupListVC.able_token = token!
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == TO_SHOW {
+//            let sender = sender as! Show_IN
+//            let showVC: ShowVC = segue.destination as! ShowVC
+//            showVC.show_in = sender
+//        } else if segue.identifier == TO_SIGNUP_LIST {
+//            let signupListVC: SignupListVC = segue.destination as! SignupListVC
+//            signupListVC.able = "course"
+//            signupListVC.able_token = token!
+//        }
+//    }
     
     override func changeScrollViewContentSize() {
         

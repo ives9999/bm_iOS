@@ -12,24 +12,16 @@ import SCLAlertView
 class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     @IBOutlet weak var submitBtn: UIButton!
+    @IBOutlet weak var likeTab: Tag!
+    @IBOutlet weak var searchTab: Tag!
+    
+    var searchTags: [[String: Any]] = [[String: Any]]()
     
     let heightForSection: CGFloat = 34
     
     var mysTable: TeamsTable?
-    //search type: temp_play, coach, team, teach
-    var type: String!
-    var model: Team!
     
     var searchSections: [ExpandableItems] = [ExpandableItems]()
-
-//    var citys: [City] = [City]()
-//    var arenas: [Arena] = [Arena]()
-//    var weekdays: [Int] = [Int]()
-//    var degrees: [Degree] = [Degree]()
-    
-    //key has type, play_start_time, play_end_time, time
-    var times: [String: Any] = [String: Any]()
-    var keyword: String = ""
     
     var firstTimeLoading: Bool = false
     //var firstTimeLoading: Bool = true
@@ -42,6 +34,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         sections = ["", "更多"]
         Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
+        
+        //likeTab.topInset = 20
         
         searchRows = [
             ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true,"value":""],
@@ -64,6 +58,19 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         //searchTableView = tableView
         let cellNib = UINib(nibName: "EditCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
+        
+        searchTags = [
+            ["key": "like", "selected": false, "tag": 0, "class": likeTab],
+            ["key": "search", "selected": false, "tag": 1, "class": searchTab]
+        ]
+        
+        //print(searchTags)
+        
+        let likeTap1 = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
+        likeTab.addGestureRecognizer(likeTap1)
+        let searchTap1 = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
+        searchTab.addGestureRecognizer(searchTap1)
+        
         //submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
         //submitBtn.layer.cornerRadius = 12
 //        citys.append(City(id: 218, name: ""))
@@ -234,7 +241,52 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         return getDefinedRow(key)
     }
     
-    @objc func handleExpandClose(gesture : UITapGestureRecognizer) {
+    @objc func tabPressed(sender: UITapGestureRecognizer) {
+                
+        if let idx: Int = sender.view?.tag {
+            
+            let selectedTag: [String: Any] = searchTags[idx]
+            if let selected: Bool = selectedTag["selected"] as? Bool {
+                
+                //按了其他頁面的按鈕
+                if (!selected) {
+                    print("another")
+                }
+            }
+            
+            for (i, var searchTag) in searchTags.enumerated() {
+                
+                if (i == idx) {
+                    searchTag["selected"] = true
+                } else {
+                    searchTag["selected"] = false
+                }
+                searchTags[i] = searchTag
+            }
+            
+            setTabSelected()
+        }
+    }
+    
+//    @objc func searchTabPressed(sender: UITapGestureRecognizer) {
+//
+//        //print(sender.view?.tag)
+//        searchTab.selected = true
+//        searchTab.setSelectedStyle()
+//    }
+    
+    private func setTabSelected() {
+        
+        for searchTag in searchTags {
+            if (searchTag.keyExist(key: "class")) {
+                let tag: Tag = (searchTag["class"] as? Tag)!
+                tag.selected = searchTag["selected"] as! Bool
+                tag.setSelectedStyle()
+            }
+        }
+    }
+    
+    @objc func handleExpandClose(gesture: UITapGestureRecognizer) {
         let headerView = gesture.view!
         let section = headerView.tag
         let tmp = headerView.subviews.filter({$0 is UIImageView})

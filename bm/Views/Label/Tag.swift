@@ -8,13 +8,20 @@
 
 import UIKit
 
-class Tag: SuperLabel {
+@IBDesignable class Tag: SuperLabel {
     
-    let topInset: CGFloat = 2
-    let bottomInset: CGFloat = 2
-    let leftInset: CGFloat = 2
-    let rightInset: CGFloat = 2
-    let radius: CGFloat = 5
+//    var topInset: CGFloat = 8
+//    var bottomInset: CGFloat = 8
+//    var leftInset: CGFloat = 16
+//    var rightInset: CGFloat = 16
+//    var radius: CGFloat = 5
+    
+    @IBInspectable var topInset: CGFloat = 8
+    @IBInspectable var bottomInset: CGFloat = 8
+    @IBInspectable var leftInset: CGFloat = 16
+    @IBInspectable var rightInset: CGFloat = 16
+    
+    @IBInspectable var radius: CGFloat = 5
     
     var value: String = ""
     var selected: Bool = false
@@ -83,17 +90,18 @@ class Tag: SuperLabel {
         setBorder(width: border_width, color: self.unSelected_borderColor)
         setTextColor(self.unSelected_textColor)
     }
-//    override func drawText(in rect: CGRect) {
-//        let insets: UIEdgeInsets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
-//        super.drawText(in: UIEdgeInsetsInsetRect(rect, insets))
-//    }
     
-//    override var intrinsicContentSize: CGSize {
-//        var intrinsicSuperViewContentSize = super.intrinsicContentSize
-//        intrinsicSuperViewContentSize.height += topInset + bottomInset
-//        intrinsicSuperViewContentSize.width += leftInset + rightInset
-//        return intrinsicSuperViewContentSize
-//    }
+    override func drawText(in rect: CGRect) {
+        let insets: UIEdgeInsets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+        super.drawText(in: rect.inset(by: insets))
+    }
+
+    override var intrinsicContentSize: CGSize {
+        var intrinsicSuperViewContentSize = super.intrinsicContentSize
+        intrinsicSuperViewContentSize.height += topInset + bottomInset
+        intrinsicSuperViewContentSize.width += leftInset + rightInset
+        return intrinsicSuperViewContentSize
+    }
  
     /*
     // Only override draw() if you perform custom drawing.
@@ -105,3 +113,4 @@ class Tag: SuperLabel {
     
 
 }
+

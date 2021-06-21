@@ -105,7 +105,7 @@ class PaymentVC: MyTableVC {
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
             let params: [String: String] = ["token": order_token, "member_token": Member.instance.token]
-            OrderService.instance.getOne(t: OrderTable.self, params: params) { (success) in
+            OrderService.instance.getOne1(t: OrderTable.self, params: params) { (success) in
                 if (success) {
                     if OrderService.instance.table != nil {
                         let table: Table = OrderService.instance.table!
