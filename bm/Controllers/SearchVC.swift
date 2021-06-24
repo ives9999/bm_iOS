@@ -84,6 +84,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         submitBtn.visibility = .invisible
         tableViewBottomConstraint.constant = 0
         
+        member_like = true
         refresh()
         
         //submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
@@ -96,23 +97,23 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 //        }
     }
     
-    override func refresh() {
-        
-        //member like team list
-        switch selectedTagIdx {
-        case 0:
-            member_like = true
-            page = 1
-            getDataStart(page: page, perPage: PERPAGE)
-        case 2:
-            member_like = false
-            page = 1
-            getDataStart(page: page, perPage: PERPAGE)
-        default:
-            let i = 6
-        
-        }
-    }
+//    override func refresh() {
+//
+//        //member like team list
+//        switch selectedTagIdx {
+//        case 0:
+//            member_like = true
+//            page = 1
+//            getDataStart(page: page, perPage: PERPAGE)
+//        case 2:
+//            member_like = false
+//            page = 1
+//            getDataStart(page: page, perPage: PERPAGE)
+//        default:
+//            let i = 6
+//
+//        }
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         if (firstTimeLoading) {
@@ -423,13 +424,22 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 if (!selected) {
                     updateTabSelected(idx: idx)
                     selectedTagIdx = idx
-                    if (selectedTagIdx == 1) {
+                    switch selectedTagIdx {
+                    case 1:
                         submitBtn.visibility = .visible
                         tableViewBottomConstraint.constant = 100
                         tableView.reloadData()
-                    } else {
+                    case 0:
+                        member_like = true
                         submitBtn.visibility = .invisible
                         tableViewBottomConstraint.constant = 0
+                        refresh()
+                    case 2:
+                        member_like = false
+                        submitBtn.visibility = .invisible
+                        tableViewBottomConstraint.constant = 0
+                        refresh()
+                    default:
                         refresh()
                     }
                 }
