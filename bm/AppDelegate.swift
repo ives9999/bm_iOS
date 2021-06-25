@@ -130,7 +130,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                                                         sourceApplication: sourceApplication,
 //                                                         annotation: annotation)
 //        }
-        let i = 6
         return false
     }
     

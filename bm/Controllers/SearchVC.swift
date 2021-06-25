@@ -16,6 +16,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     @IBOutlet weak var searchTab: Tag!
     @IBOutlet weak var allTab: Tag!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomView: StaticBottomView!
     
     var searchTags: [[String: Any]] = [[String: Any]]()
     var selectedTagIdx: Int = 0
@@ -81,7 +82,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         allTab.addGestureRecognizer(allTap)
         
         updateTabSelected(idx: selectedTagIdx)
-        submitBtn.visibility = .invisible
+        //submitBtn.visibility = .invisible
+        bottomView.visibility = .invisible
         tableViewBottomConstraint.constant = 0
         
         member_like = true
@@ -426,17 +428,20 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                     selectedTagIdx = idx
                     switch selectedTagIdx {
                     case 1:
-                        submitBtn.visibility = .visible
+                        //submitBtn.visibility = .visible
+                        bottomView.visibility = .visible
                         tableViewBottomConstraint.constant = 100
                         tableView.reloadData()
                     case 0:
                         member_like = true
-                        submitBtn.visibility = .invisible
+                        //submitBtn.visibility = .invisible
+                        bottomView.visibility = .invisible
                         tableViewBottomConstraint.constant = 0
                         refresh()
                     case 2:
                         member_like = false
-                        submitBtn.visibility = .invisible
+                        //submitBtn.visibility = .invisible
+                        bottomView.visibility = .invisible
                         tableViewBottomConstraint.constant = 0
                         refresh()
                     default:

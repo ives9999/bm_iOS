@@ -111,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfQ-iA-1gN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="600" y="-2298"/>
+            <point key="canvasLocation" x="106" y="-2636"/>
         </scene>
         <!--臨打-->
         <scene sceneID="3fs-rG-RyT">
@@ -296,7 +296,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZb-89-3QI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1374" y="-886"/>
+            <point key="canvasLocation" x="1445" y="-903"/>
         </scene>
         <!--首頁-->
         <scene sceneID="3a3-E3-xcE">
@@ -328,24 +328,9 @@
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qE9-4T-nY3">
-                                <rect key="frame" x="0.0" y="188" width="414" height="574"/>
+                                <rect key="frame" x="0.0" y="188" width="414" height="624"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9QR-jK-rdm">
-                                <rect key="frame" x="147" y="792" width="120" height="34"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="NB6-3e-480"/>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="vBn-vn-nzR"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
-                                <state key="normal" title="送出">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="submit:" destination="Qui-jL-mMT" eventType="touchUpInside" id="huA-n8-nhT"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RQt-D8-szo" userLabel="TagView">
                                 <rect key="frame" x="0.0" y="108" width="414" height="80"/>
                                 <subviews>
@@ -407,6 +392,34 @@
                                     <constraint firstItem="Ut6-mE-UVp" firstAttribute="centerX" secondItem="RQt-D8-szo" secondAttribute="centerX" id="XN0-ge-cSA"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="do6-ZF-uhG" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="KHf-bj-fLt">
+                                        <rect key="frame" x="191.5" y="7.5" width="31" height="35"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pNg-s1-mKD" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="31" height="35"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="35" id="PzR-Zu-ubQ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <state key="normal" title="送出"/>
+                                                <connections>
+                                                    <action selector="plusOne:" destination="dhS-d1-hPU" eventType="touchUpInside" id="5an-1e-qgo"/>
+                                                    <action selector="submit:" destination="Qui-jL-mMT" eventType="touchUpInside" id="k1c-De-ZqJ"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="KHf-bj-fLt" firstAttribute="centerY" secondItem="do6-ZF-uhG" secondAttribute="centerY" id="TgU-wu-YEb"/>
+                                    <constraint firstAttribute="height" constant="50" id="huK-BM-CIT"/>
+                                    <constraint firstItem="KHf-bj-fLt" firstAttribute="centerX" secondItem="do6-ZF-uhG" secondAttribute="centerX" id="vvO-va-OLz"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MId-N4-3lE"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -415,26 +428,28 @@
                             <constraint firstItem="qE9-4T-nY3" firstAttribute="top" secondItem="RQt-D8-szo" secondAttribute="bottom" id="4uR-el-DDZ"/>
                             <constraint firstAttribute="trailing" secondItem="mB9-AG-XQD" secondAttribute="trailing" id="ASM-ZO-0E1"/>
                             <constraint firstItem="RQt-D8-szo" firstAttribute="top" secondItem="mB9-AG-XQD" secondAttribute="bottom" id="Aq6-KW-eBJ"/>
+                            <constraint firstItem="do6-ZF-uhG" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="CkF-Pj-ejo"/>
+                            <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="do6-ZF-uhG" secondAttribute="bottom" id="LaI-mx-EAz"/>
                             <constraint firstItem="qE9-4T-nY3" firstAttribute="trailing" secondItem="MId-N4-3lE" secondAttribute="trailing" id="T04-he-iac"/>
                             <constraint firstItem="DpE-TG-fU1" firstAttribute="top" secondItem="mB9-AG-XQD" secondAttribute="bottom" id="XU1-uN-x7r"/>
                             <constraint firstItem="qE9-4T-nY3" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="Xao-qN-A0B"/>
                             <constraint firstItem="MId-N4-3lE" firstAttribute="trailing" secondItem="RQt-D8-szo" secondAttribute="trailing" id="YJe-vb-eSp"/>
-                            <constraint firstItem="9QR-jK-rdm" firstAttribute="centerX" secondItem="U4o-jl-FLJ" secondAttribute="centerX" id="YQ5-Jv-muf"/>
                             <constraint firstItem="DpE-TG-fU1" firstAttribute="trailing" secondItem="MId-N4-3lE" secondAttribute="trailing" id="dSJ-Ts-xhF"/>
-                            <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="qE9-4T-nY3" secondAttribute="bottom" constant="100" id="eT5-6v-l8u"/>
+                            <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="qE9-4T-nY3" secondAttribute="bottom" constant="50" id="eT5-6v-l8u"/>
                             <constraint firstItem="RQt-D8-szo" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="jmq-hU-1to"/>
+                            <constraint firstItem="do6-ZF-uhG" firstAttribute="trailing" secondItem="MId-N4-3lE" secondAttribute="trailing" id="nr3-Et-rYN"/>
                             <constraint firstItem="DpE-TG-fU1" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="pzD-KP-ssu"/>
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="wIa-be-ZTa"/>
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="top" secondItem="MId-N4-3lE" secondAttribute="top" id="xYF-jR-S3y"/>
-                            <constraint firstItem="9QR-jK-rdm" firstAttribute="top" secondItem="qE9-4T-nY3" secondAttribute="bottom" constant="30" id="yEI-Qw-9bL"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="臨打" image="tempPlay" id="bjH-9J-pNs"/>
                     <connections>
                         <outlet property="allTab" destination="3wo-WS-JEn" id="gKz-Jt-vXw"/>
+                        <outlet property="bottomView" destination="do6-ZF-uhG" id="b1r-Fv-L2i"/>
                         <outlet property="likeTab" destination="a4f-r7-ShZ" id="yuP-VJ-AGa"/>
                         <outlet property="searchTab" destination="6n9-Nc-cnf" id="IFO-4A-C7S"/>
-                        <outlet property="submitBtn" destination="9QR-jK-rdm" id="joa-9p-0QF"/>
+                        <outlet property="submitBtn" destination="pNg-s1-mKD" id="8cL-fO-8u6"/>
                         <outlet property="tableView" destination="qE9-4T-nY3" id="INU-li-bW2"/>
                         <outlet property="tableViewBottomConstraint" destination="eT5-6v-l8u" id="5EL-cN-Yi9"/>
                         <segue destination="qAn-U1-oxM" kind="show" identifier="toCity" id="itP-1S-HdR"/>
@@ -447,7 +462,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UJy-DK-SL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-110.14492753623189" y="-974.33035714285711"/>
+            <point key="canvasLocation" x="-845" y="-1126"/>
         </scene>
         <!--Temp Play DateVC-->
         <scene sceneID="6EB-Lt-ctB">
