@@ -111,92 +111,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfQ-iA-1gN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="106" y="-2636"/>
-        </scene>
-        <!--臨打-->
-        <scene sceneID="3fs-rG-RyT">
-            <objects>
-                <viewController id="89D-SL-Zb3" customClass="TempPlayVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="xs1-xk-eGo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YjS-X6-jiY">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="臨打" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfS-oN-pNs">
-                                        <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.65098039215686276" green="0.85098039215686272" blue="0.011764705882352941" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="lfS-oN-pNs" firstAttribute="centerY" secondItem="YjS-X6-jiY" secondAttribute="centerY" id="2PL-bv-Fx2"/>
-                                    <constraint firstItem="lfS-oN-pNs" firstAttribute="centerX" secondItem="YjS-X6-jiY" secondAttribute="centerX" id="EJR-vA-A37"/>
-                                    <constraint firstAttribute="height" constant="64" id="pCs-bH-GgH"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cWc-gh-sIH">
-                                <rect key="frame" x="12" y="19" width="33" height="26"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="26" id="0Lo-PQ-7SJ"/>
-                                    <constraint firstAttribute="width" constant="33" id="kuZ-J9-yzP"/>
-                                </constraints>
-                                <state key="normal" image="prev"/>
-                                <connections>
-                                    <action selector="prevBtnPressed:" destination="89D-SL-Zb3" eventType="touchUpInside" id="WPs-ap-r8s"/>
-                                    <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="jeb-UX-ASC"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="hIU-gT-JFe">
-                                <rect key="frame" x="0.0" y="64" width="414" height="744"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DqK-vF-DVl">
-                                <rect key="frame" x="0.0" y="64" width="414" height="744"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="MKJ-0G-bAL"/>
-                        <constraints>
-                            <constraint firstItem="MKJ-0G-bAL" firstAttribute="trailing" secondItem="hIU-gT-JFe" secondAttribute="trailing" id="09A-oF-I9l"/>
-                            <constraint firstItem="YjS-X6-jiY" firstAttribute="top" secondItem="MKJ-0G-bAL" secondAttribute="top" id="8Yc-QK-Sku"/>
-                            <constraint firstItem="DqK-vF-DVl" firstAttribute="leading" secondItem="MKJ-0G-bAL" secondAttribute="leading" id="8bu-WF-xpU"/>
-                            <constraint firstItem="MKJ-0G-bAL" firstAttribute="trailing" secondItem="DqK-vF-DVl" secondAttribute="trailing" id="9k9-7q-2b8"/>
-                            <constraint firstItem="MKJ-0G-bAL" firstAttribute="trailing" secondItem="YjS-X6-jiY" secondAttribute="trailing" id="Oid-kw-gUm"/>
-                            <constraint firstItem="hIU-gT-JFe" firstAttribute="leading" secondItem="MKJ-0G-bAL" secondAttribute="leading" id="PAa-XK-Vyz"/>
-                            <constraint firstItem="cWc-gh-sIH" firstAttribute="centerY" secondItem="YjS-X6-jiY" secondAttribute="centerY" id="S25-Zv-4rf"/>
-                            <constraint firstItem="DqK-vF-DVl" firstAttribute="top" secondItem="YjS-X6-jiY" secondAttribute="bottom" id="TJJ-9x-1Lk"/>
-                            <constraint firstItem="hIU-gT-JFe" firstAttribute="top" secondItem="YjS-X6-jiY" secondAttribute="bottom" id="USj-By-Yn0"/>
-                            <constraint firstItem="MKJ-0G-bAL" firstAttribute="bottom" secondItem="DqK-vF-DVl" secondAttribute="bottom" id="mOD-92-nOb"/>
-                            <constraint firstItem="MKJ-0G-bAL" firstAttribute="bottom" secondItem="hIU-gT-JFe" secondAttribute="bottom" id="sDk-eI-zAq"/>
-                            <constraint firstItem="YjS-X6-jiY" firstAttribute="leading" secondItem="MKJ-0G-bAL" secondAttribute="leading" id="xF9-WZ-cRp"/>
-                            <constraint firstItem="cWc-gh-sIH" firstAttribute="leading" secondItem="MKJ-0G-bAL" secondAttribute="leading" constant="12" id="zX9-C8-KX6"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="臨打" image="tempPlay" id="OIH-0z-1IF"/>
-                    <navigationItem key="navigationItem" id="qdk-ew-vX5"/>
-                    <connections>
-                        <outlet property="tableView" destination="DqK-vF-DVl" id="7CS-vI-PXn"/>
-                        <segue destination="dhS-d1-hPU" kind="show" identifier="toTempPlayShow" id="12Y-zR-5Ts"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uIj-cG-Hfp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="q6c-HO-2wn" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="722" y="-865"/>
+            <point key="canvasLocation" x="-284" y="-2632"/>
         </scene>
         <!--Show Temp PlayVC-->
         <scene sceneID="KHM-x0-RDP">
             <objects>
                 <viewController id="dhS-d1-hPU" customClass="ShowTempPlayVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1SE-qg-yzC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kjd-vi-xhQ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="顯示臨打" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31T-Ck-L6a">
                                         <rect key="frame" x="169" y="19" width="76.5" height="26.5"/>
@@ -212,7 +138,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="DGI-iw-IlB"/>
                                             <action selector="prevBtnPressed:" destination="dhS-d1-hPU" eventType="touchUpInside" id="fCx-BK-1qG"/>
                                         </connections>
                                     </button>
@@ -234,7 +159,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MVL-bJ-APa" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="758" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Its-0c-UjM">
                                         <rect key="frame" x="137" y="7.5" width="140" height="35"/>
@@ -309,7 +234,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mB9-AG-XQD">
                                 <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="臨打" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nd2-FW-fzb">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nd2-FW-fzb">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <color key="textColor" systemColor="darkTextColor"/>
@@ -443,7 +368,7 @@
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="top" secondItem="MId-N4-3lE" secondAttribute="top" id="xYF-jR-S3y"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="臨打" image="tempPlay" id="bjH-9J-pNs"/>
+                    <tabBarItem key="tabBarItem" title="球隊" image="team" id="bjH-9J-pNs"/>
                     <connections>
                         <outlet property="allTab" destination="3wo-WS-JEn" id="gKz-Jt-vXw"/>
                         <outlet property="bottomView" destination="do6-ZF-uhG" id="b1r-Fv-L2i"/>
@@ -452,17 +377,11 @@
                         <outlet property="submitBtn" destination="pNg-s1-mKD" id="8cL-fO-8u6"/>
                         <outlet property="tableView" destination="qE9-4T-nY3" id="INU-li-bW2"/>
                         <outlet property="tableViewBottomConstraint" destination="eT5-6v-l8u" id="5EL-cN-Yi9"/>
-                        <segue destination="qAn-U1-oxM" kind="show" identifier="toCity" id="itP-1S-HdR"/>
-                        <segue destination="wMJ-eN-4G1" kind="show" identifier="toWeekday" id="H3p-LU-aVa"/>
-                        <segue destination="Rte-ty-2eA" kind="show" identifier="toSelectTime" id="mvW-Q8-ZFE"/>
-                        <segue destination="GKU-nk-gmn" kind="show" identifier="toArena" id="CFj-m8-ABA"/>
-                        <segue destination="IXC-ZK-jzO" kind="show" identifier="toSelectDegree" id="2Di-nR-q4w"/>
-                        <segue destination="89D-SL-Zb3" kind="show" identifier="toTempplayList" id="8tV-rJ-z3b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UJy-DK-SL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-845" y="-1126"/>
+            <point key="canvasLocation" x="-974" y="-1118"/>
         </scene>
         <!--Temp Play DateVC-->
         <scene sceneID="6EB-Lt-ctB">
@@ -484,7 +403,6 @@
                                         <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="R6S-rJ-jUX" eventType="touchUpInside" id="Oco-sz-hro"/>
-                                            <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="po4-IX-E7S"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="開放臨打日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pPF-SV-psO">
@@ -558,7 +476,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="PMY-vs-biN"/>
                                             <action selector="prevBtnPressed:" destination="GuJ-5M-2A0" eventType="touchUpInside" id="ZgQ-av-xep"/>
                                         </connections>
                                     </button>
@@ -633,7 +550,6 @@
                                         <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="ivA-0I-eys" eventType="touchUpInside" id="4GF-bc-Fka"/>
-                                            <action selector="prevBtnPressed:" destination="q6c-HO-2wn" eventType="touchUpInside" id="Evf-ql-coi"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="會員資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9m-1p-DCF">
@@ -762,7 +678,7 @@
     <resources>
         <image name="background" width="377.5" height="670"/>
         <image name="prev" width="20.5" height="20.5"/>
-        <image name="tempPlay" width="25" height="25"/>
+        <image name="team" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

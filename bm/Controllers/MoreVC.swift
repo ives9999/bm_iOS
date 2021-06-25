@@ -15,7 +15,7 @@ class MoreVC: MyTableVC {
         [
             ["text": "商品", "icon": "product", "segue": TO_PRODUCT, "color": UIColor(MY_LIGHT_RED)],
             ["text": "教練", "icon": "coach", "segue": TO_COACH, "color": UIColor(MY_WHITE)],
-            ["text": "球館", "icon": "arena", "segue": TO_ARENA, "color": UIColor(MY_WHITE)],
+//            ["text": "球館", "icon": "arena", "segue": TO_ARENA, "color": UIColor(MY_WHITE)],
             ["text": "教學", "icon": "course", "segue": TO_COURSE, "color": UIColor(MY_WHITE)],
             ["text": "體育用品店", "icon": "store", "segue": TO_STORE, "color": UIColor(MY_WHITE)],
             ["text": "推播訊息", "icon": "bell", "segue": TO_PN, "color": UIColor(MY_WHITE)],

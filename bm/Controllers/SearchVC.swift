@@ -274,73 +274,81 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Global.instance.addSpinner(superView: view)
         //Global.instance.removeSpinner(superView: view)
-        let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
-        let cell = tableView.cellForRow(at: indexPath) as! EditCell
-        
-        if row["atype"] as! UITableViewCell.AccessoryType != UITableViewCell.AccessoryType.none {
+        if (selectedTagIdx == 1) {
             
-            var key: String? = nil
-            if (row.keyExist(key: "key") && row["key"] != nil) {
-                key = row["key"] as? String
-            }
+            let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
+            let cell = tableView.cellForRow(at: indexPath) as! EditCell
             
-            if let segue: String = row["segue"] as? String {
-                if (segue == TO_CITY) {
-                    var selected: String? = nil
-                    if (row.keyExist(key: "value") && row["value"] != nil) {
-                        selected = row["value"] as? String
-                    }
-                    toSelectCity(key: key, selected: selected, delegate: self)
-                } else if (segue == TO_SELECT_WEEKDAY) {
-                    
-                    let selecteds: [Int] = valueToArray(t: Int.self, row: row)
-                    toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
-                } else if (segue == TO_SELECT_TIME) {
-                    
-//                    var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
-//                    if (key == END_TIME_KEY) {
-//                        type = SELECT_TIME_TYPE.play_end
-//                    }
-                    
-                    var selected: String? = nil
-                    if (row.keyExist(key: "value") && row["value"] != nil) {
-                        selected = row["value"] as? String
-                    }
-                    toSelectTime(key: key, selected: selected, delegate: self)
-                } else if segue == TO_ARENA {
-        
-                    var city: Int? = nil
-                    var row = getDefinedRow(CITY_KEY)
-                    if let value: String = row["value"] as? String {
-                        city = Int(value)
-    //                    if (city != nil) {
-    //                        citys.append(city!)
-    //                    }
-                    }
-                    
-                    if (city == nil) {
-                        warning("請先選擇縣市")
-                    } else {
-                    
-                        //取得選擇球館的代號
-                        row = getDefinedRow(ARENA_KEY)
-                        let selected: String = row["value"] as! String
-                        toSelectArena(key: key, city: city!, selected: selected, delegate: self)
-                    }
-                } else if (segue == TO_SELECT_DEGREE) {
-                    
-                    let tmps: [String] = valueToArray(t: String.self, row: row)
-                    var selecteds: [DEGREE] = [DEGREE]()
-                    for tmp in tmps {
-                        selecteds.append(DEGREE.enumFromString(string: tmp))
-                    }
-                    toSelectDegree(selecteds: selecteds, delegate: self)
-                } else {
-                    //performSegue(withIdentifier: segue, sender: indexPath)
+            if row["atype"] as! UITableViewCell.AccessoryType != UITableViewCell.AccessoryType.none {
+                
+                var key: String? = nil
+                if (row.keyExist(key: "key") && row["key"] != nil) {
+                    key = row["key"] as? String
                 }
+                
+                if let segue: String = row["segue"] as? String {
+                    if (segue == TO_CITY) {
+                        var selected: String? = nil
+                        if (row.keyExist(key: "value") && row["value"] != nil) {
+                            selected = row["value"] as? String
+                        }
+                        toSelectCity(key: key, selected: selected, delegate: self)
+                    } else if (segue == TO_SELECT_WEEKDAY) {
+                        
+                        let selecteds: [Int] = valueToArray(t: Int.self, row: row)
+                        toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
+                    } else if (segue == TO_SELECT_TIME) {
+                        
+    //                    var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
+    //                    if (key == END_TIME_KEY) {
+    //                        type = SELECT_TIME_TYPE.play_end
+    //                    }
+                        
+                        var selected: String? = nil
+                        if (row.keyExist(key: "value") && row["value"] != nil) {
+                            selected = row["value"] as? String
+                        }
+                        toSelectTime(key: key, selected: selected, delegate: self)
+                    } else if segue == TO_ARENA {
+            
+                        var city: Int? = nil
+                        var row = getDefinedRow(CITY_KEY)
+                        if let value: String = row["value"] as? String {
+                            city = Int(value)
+        //                    if (city != nil) {
+        //                        citys.append(city!)
+        //                    }
+                        }
+                        
+                        if (city == nil) {
+                            warning("請先選擇縣市")
+                        } else {
+                        
+                            //取得選擇球館的代號
+                            row = getDefinedRow(ARENA_KEY)
+                            let selected: String = row["value"] as! String
+                            toSelectArena(key: key, city: city!, selected: selected, delegate: self)
+                        }
+                    } else if (segue == TO_SELECT_DEGREE) {
+                        
+                        let tmps: [String] = valueToArray(t: String.self, row: row)
+                        var selecteds: [DEGREE] = [DEGREE]()
+                        for tmp in tmps {
+                            selecteds.append(DEGREE.enumFromString(string: tmp))
+                        }
+                        toSelectDegree(selecteds: selecteds, delegate: self)
+                    } else {
+                        //performSegue(withIdentifier: segue, sender: indexPath)
+                    }
+                }
+            } else {
+                cell.editText.becomeFirstResponder()
             }
-        } else {
-            cell.editText.becomeFirstResponder()
+        } else if (selectedTagIdx == 0 || selectedTagIdx == 2) {
+            if mysTable != nil {
+                let myTable = mysTable!.rows[indexPath.row]
+                toShowTeam(token: myTable.token)
+            }
         }
     }
     

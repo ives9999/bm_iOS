@@ -2433,10 +2433,10 @@
             </objects>
             <point key="canvasLocation" x="1620" y="-3004"/>
         </scene>
-        <!--Team-->
+        <!--toArena-->
         <scene sceneID="5wy-lj-0Ys">
             <objects>
-                <viewControllerPlaceholder storyboardName="Team" referencedIdentifier="Team" id="Pox-1q-dQz" sceneMemberID="viewController">
+                <viewControllerPlaceholder storyboardName="More" referencedIdentifier="toArena" id="Pox-1q-dQz" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="QWa-vO-cu7"/>
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nP6-fJ-9En" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -234,6 +234,7 @@
                             <constraint firstItem="g6Y-AK-76q" firstAttribute="bottom" secondItem="4mb-SH-JK7" secondAttribute="bottom" id="vqR-bj-beT"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="球館" image="arena" id="bjH-9J-pNt"/>
                     <connections>
                         <outlet property="tableView" destination="4mb-SH-JK7" id="mee-5x-3Mw"/>
                         <segue destination="3hL-Fr-nG3" kind="show" identifier="toShow" id="EIA-wN-WfT"/>
@@ -1622,6 +1623,7 @@
         <segue reference="cDK-8u-UPz"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arena" width="25" height="25"/>
         <image name="background" width="377.5" height="670"/>
         <image name="coach" width="25" height="25"/>
         <image name="more" width="25" height="25"/>
