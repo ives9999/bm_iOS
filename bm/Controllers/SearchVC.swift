@@ -423,6 +423,13 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         tableView.reloadData()
     }
     
+    override func setTextField(key: String, value: String) {
+        
+        var row = getDefinedRow(key)
+        row["value"] = value
+        replaceRows(key, row)
+    }
+    
     @objc func tabPressed(sender: UITapGestureRecognizer) {
                 
         if let idx: Int = sender.view?.tag {

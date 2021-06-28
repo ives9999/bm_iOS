@@ -99,4 +99,16 @@ class SingleSelectVC: SelectVC {
     override func setDelegate(_ delegate: SelectDelegate) {
         self.delegate = (delegate as! SingleSelectDelegate)
     }
+    
+    func setSelectedStyle(_ cell: SingleSelectCell) {
+        cell.accessoryType = .checkmark
+        cell.titleLbl?.textColor = UIColor(MY_GREEN)
+        cell.tintColor = UIColor(MY_GREEN)
+    }
+    
+    func unSetSelectedStyle(_ cell: SingleSelectCell) {
+        cell.accessoryType = .none
+        cell.titleLbl?.textColor = UIColor.white
+        cell.tintColor = UIColor.white
+    }
 }

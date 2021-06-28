@@ -167,6 +167,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         let item = getFormItemFromIdx(indexPath)
         if item != nil {
             if item!.name != nil {
