@@ -147,6 +147,7 @@
 		B3839EB822CF0261003F3620 /* ShowCourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3839EB722CF0261003F3620 /* ShowCourseVC.swift */; };
 		B385A07A22B9336C00BC3ADF /* CourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385A07922B9336C00BC3ADF /* CourseVC.swift */; };
 		B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B385A07B22BCB28E00BC3ADF /* SelectVC.swift */; };
+		B392B492268D8ACA007D4DD1 /* ShowTeachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B392B491268D8ACA007D4DD1 /* ShowTeachVC.swift */; };
 		B39453712343256C000DF98E /* SignupListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B394536F2343256C000DF98E /* SignupListCell.swift */; };
 		B39453722343256C000DF98E /* SignupListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B39453702343256C000DF98E /* SignupListCell.xib */; };
 		B39453D92230E849005E3027 /* ShowPNVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B39453D82230E849005E3027 /* ShowPNVC.swift */; };
@@ -531,6 +532,7 @@
 		B3839EB722CF0261003F3620 /* ShowCourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowCourseVC.swift; sourceTree = "<group>"; };
 		B385A07922B9336C00BC3ADF /* CourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseVC.swift; sourceTree = "<group>"; };
 		B385A07B22BCB28E00BC3ADF /* SelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectVC.swift; sourceTree = "<group>"; };
+		B392B491268D8ACA007D4DD1 /* ShowTeachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTeachVC.swift; sourceTree = "<group>"; };
 		B394536F2343256C000DF98E /* SignupListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupListCell.swift; sourceTree = "<group>"; };
 		B39453702343256C000DF98E /* SignupListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignupListCell.xib; sourceTree = "<group>"; };
 		B39453D82230E849005E3027 /* ShowPNVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowPNVC.swift; sourceTree = "<group>"; };
@@ -1257,6 +1259,7 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
+				B392B491268D8ACA007D4DD1 /* ShowTeachVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1757,6 +1760,7 @@
 				B36CBD5520DFCC9E00E52B9C /* SuperModel.swift in Sources */,
 				B36241372601B3CA008FAD1B /* ProductTable.swift in Sources */,
 				B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */,
+				B392B492268D8ACA007D4DD1 /* ShowTeachVC.swift in Sources */,
 				B3310D9922AE302A0062EF98 /* ClearButton.swift in Sources */,
 				B3AE9389262FEE5700223B2A /* ProductListCell.swift in Sources */,
 				B36CBD5720DFF7B000E52B9C /* JSONParse.swift in Sources */,

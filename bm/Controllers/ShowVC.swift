@@ -28,6 +28,8 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     
     @IBOutlet weak var likeButton: LikeButton!
     
+    //var show_in: Show_IN?
+    
     var contentView: WKWebView? = {
         
         //Create configuration
@@ -66,6 +68,10 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         scrollView.addSubview(refreshControl)
         //refresh()
     }
+    
+//    func initShowVC(sin: Show_IN) {
+//        self.show_in = sin
+//    }
 
     func initTableView() {
         tableView.dataSource = self
@@ -107,9 +113,12 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
 //    }
     
     func refresh<T: Table>(_ t: T.Type) {
+        
         if token != nil {
+            Global.instance.addSpinner(superView: self.view)
             let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
             dataService.getOne(params: params) { (success) in
+                Global.instance.removeSpinner(superView: self.view)
                 if (success) {
                     let jsonData: Data = self.dataService.jsonData!
                     do {

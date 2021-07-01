@@ -190,7 +190,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
                 }
             }
         }
-        print(params)
+        //print(params)
     }
     
     override func singleSelected(key: String, selected: String, show: String?=nil) {

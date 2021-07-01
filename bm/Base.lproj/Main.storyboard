@@ -2461,6 +2461,67 @@
             </objects>
             <point key="canvasLocation" x="952.79999999999995" y="1384.8575712143929"/>
         </scene>
+        <!--Show TeachVC-->
+        <scene sceneID="7mS-NP-qpZ">
+            <objects>
+                <viewController storyboardIdentifier="toShowTeach" id="inI-QX-0L6" customClass="ShowTeachVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rrw-jv-9o6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WCs-aG-vaW" customClass="ShowCoach">
+                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBb-qP-k51" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="Jl5-0k-Mxo"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="26" id="gKB-yd-KZK"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="pWu-Dg-RD6"/>
+                                            <constraint firstAttribute="width" constant="33" id="tGF-zh-dem"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="tTg-jR-J80" eventType="touchUpInside" id="YUs-HG-CrS"/>
+                                            <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="yhf-nN-eVQ"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教學" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxR-nt-tLr">
+                                        <rect key="frame" x="186.5" y="19" width="41.5" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="0YU-rF-K4t"/>
+                                    <constraint firstItem="UxR-nt-tLr" firstAttribute="centerX" secondItem="WCs-aG-vaW" secondAttribute="centerX" id="1t8-8i-W44"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="1zN-Dy-8yy"/>
+                                    <constraint firstItem="UxR-nt-tLr" firstAttribute="centerY" secondItem="WCs-aG-vaW" secondAttribute="centerY" id="78u-0i-SyF"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="Mqw-lg-INo"/>
+                                    <constraint firstItem="ZBb-qP-k51" firstAttribute="leading" secondItem="WCs-aG-vaW" secondAttribute="leading" constant="12" id="PlG-Fv-uBT"/>
+                                    <constraint firstItem="UxR-nt-tLr" firstAttribute="centerX" secondItem="WCs-aG-vaW" secondAttribute="centerX" id="UvV-9Z-rEv"/>
+                                    <constraint firstItem="ZBb-qP-k51" firstAttribute="leading" secondItem="WCs-aG-vaW" secondAttribute="leading" constant="12" id="dKG-k5-gHk"/>
+                                    <constraint firstItem="UxR-nt-tLr" firstAttribute="centerY" secondItem="WCs-aG-vaW" secondAttribute="centerY" id="lcW-o3-w3U"/>
+                                    <constraint firstItem="ZBb-qP-k51" firstAttribute="centerY" secondItem="WCs-aG-vaW" secondAttribute="centerY" id="qHy-w3-S0Q"/>
+                                    <constraint firstItem="ZBb-qP-k51" firstAttribute="centerY" secondItem="WCs-aG-vaW" secondAttribute="centerY" id="uAA-jO-tDF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="LVX-rX-I2x"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="WCs-aG-vaW" firstAttribute="top" secondItem="LVX-rX-I2x" secondAttribute="top" id="8FW-8v-ePm"/>
+                            <constraint firstItem="WCs-aG-vaW" firstAttribute="leading" secondItem="LVX-rX-I2x" secondAttribute="leading" id="Jfs-Y1-s03"/>
+                            <constraint firstItem="WCs-aG-vaW" firstAttribute="trailing" secondItem="LVX-rX-I2x" secondAttribute="trailing" id="cWo-m8-NvX"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3OK-w2-8OZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1238" y="1155"/>
+        </scene>
         <!--UIViewController-ZfU-fN-VKi-->
         <scene sceneID="1Vy-Jx-X77">
             <objects>

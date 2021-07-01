@@ -451,7 +451,7 @@ class ShowCourseVC: ShowVC {
             }))
         }
         
-        let closeAction = UIAlertAction(title: "關閉", style: .default, handler: nil)
+        let closeAction = UIAlertAction(title: "取消", style: .default, handler: nil)
         alert.addAction(closeAction)
         
         self.present(alert, animated: true, completion: nil)
@@ -471,7 +471,7 @@ class ShowCourseVC: ShowVC {
                 var closeAction: UIAlertAction?
                 if self.dataService.success {
                     title = "提示"
-                    closeAction = UIAlertAction(title: "關閉", style: .default, handler: { (action) in
+                    closeAction = UIAlertAction(title: "取消", style: .default, handler: { (action) in
                         self.refresh(CourseTable.self)
                     })
                 } else {
@@ -518,9 +518,5 @@ class ShowCourseVC: ShowVC {
     @IBAction func signupListButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: TO_SIGNUP_LIST, sender: nil)
     }
-    
-    
-    
-
 }
 

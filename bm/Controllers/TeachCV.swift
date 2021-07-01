@@ -93,6 +93,13 @@ class TeachCV: MyTableVC {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if mysTable != nil {
+            let myTable = mysTable!.rows[indexPath.row]
+            toShowTeach(token: myTable.token)
+        }
+    }
+    
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == TO_SHOW {
 //            if let showVC: ShowVC = segue.destination as? ShowVC {

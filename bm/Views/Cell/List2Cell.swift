@@ -98,7 +98,7 @@ class List2Cell: UITableViewCell {
             if _row.city_show.count > 0 {
                 cityBtn.setTitle(_row.city_show)
             } else {
-                //cityBtn.isHidden = true
+                cityBtn.isHidden = true
             }
         }
         

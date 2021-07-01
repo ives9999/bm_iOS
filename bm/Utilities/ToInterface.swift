@@ -543,6 +543,20 @@ extension BaseViewController {
         }
     }
     
+    func toShowTeach(token: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_TEACH)  as? ShowTeachVC {
+                viewController.token = token
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_TEACH) as! ShowTeachVC
+            viewController.token = token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toShowTeam(token: String) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Team", bundle: nil)

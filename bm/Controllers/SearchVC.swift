@@ -443,21 +443,20 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                     selectedTagIdx = idx
                     switch selectedTagIdx {
                     case 1:
-                        //submitBtn.visibility = .visible
                         bottomView.visibility = .visible
                         tableViewBottomConstraint.constant = 100
                         tableView.reloadData()
                     case 0:
                         member_like = true
-                        //submitBtn.visibility = .invisible
                         bottomView.visibility = .invisible
                         tableViewBottomConstraint.constant = 0
+                        params.removeAll()
                         refresh()
                     case 2:
                         member_like = false
-                        //submitBtn.visibility = .invisible
                         bottomView.visibility = .invisible
                         tableViewBottomConstraint.constant = 0
+                        params.removeAll()
                         refresh()
                     default:
                         refresh()
