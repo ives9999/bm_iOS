@@ -198,11 +198,18 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let item = getFormItemFromIdx(indexPath)
-        if item != nil {
-            if item!.segue != nil {
-                let segue = item!.segue!
-                performSegue(withIdentifier: segue, sender: indexPath)
+        let row = getFormItemFromIdx(indexPath)
+        if row != nil {
+            if (row!.name != nil) {
+                let key = row!.name!
+                if (key == PRICE_UNIT_KEY) {
+                    var selected: String? = nil
+                    if (row!.value != nil) {
+                        selected = row!.value
+                    }
+                    toSelectSingle(t: SelectPriceUnitVC.self, key: key, selected: selected, delegate: self)
+                }
+                //performSegue(withIdentifier: segue, sender: indexPath)
             }
         }
     }

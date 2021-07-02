@@ -434,6 +434,33 @@ extension BaseViewController {
         }
     }
     
+    func toSelectSingle<T>(t: T.Type, key: String?, selected: String?, delegate: BaseViewController, able_type: String?=nil) where T: SingleSelectVC {
+        
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Select", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toSelectSingle") as? T {
+                if key != nil {
+                    viewController.key = key
+                }
+                if selected != nil {
+                    viewController.selected = selected
+                }
+                viewController.delegate = delegate
+                show(viewController, sender: nil)
+            }
+        } else {
+//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toSelectSingle") as! T
+//            if key != nil {
+//                viewController.key = key
+//            }
+//            if selected != nil {
+//                viewController.selected = selected
+//            }
+//            viewController.delegate = delegate
+//            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     //input["type":PLAY_START,"time":time]
     func toSelectTime(key: String? = nil, selected: String? = nil, delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
