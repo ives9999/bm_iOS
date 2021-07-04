@@ -13,7 +13,7 @@ protocol EditCourseDelegate {
     func isReload(_ yes: Bool)
 }
 
-class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ContentEditDelegate, ValueChangedDelegate {
+class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ValueChangedDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var featuredView: ImagePickerView!
@@ -202,89 +202,110 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         if row != nil {
             if (row!.name != nil) {
                 let key = row!.name!
-                if (key == PRICE_UNIT_KEY) {
+                if (key == PRICE_UNIT_KEY || key == CYCLE_UNIT_KEY || key == COURSE_KIND_KEY || key == START_TIME_KEY || key == END_TIME_KEY) {
                     var selected: String? = nil
                     if (row!.value != nil) {
                         selected = row!.value
                     }
-                    toSelectSingle(t: SelectPriceUnitVC.self, key: key, selected: selected, delegate: self)
+                    toSelectSingle(key: key, selected: selected, delegate: self)
+                } else if (key == START_DATE_KEY || key == END_DATE_KEY) {
+                    var selected: String? = nil
+                    if (row!.value != nil) {
+                        selected = row!.value
+                    }
+                    toSelectDate(key: key, selected: selected)
+                } else if (key == WEEKDAY_KEY) {
+                    let items: [String] = row!.sender as! [String]
+                    var selecteds: [Int] = [Int]()
+                    for item in items {
+                        if let tmp: Int = Int(item) {
+                            selecteds.append(tmp)
+                        }
+                    }
+                    toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
+                } else if (key == CONTENT_KEY) {
+                    var content: String? = nil
+                    if row!.sender != nil {
+                        content = row!.sender as? String
+                    }
+                    toEditContent(key: key, title: row!.title, content: content, _delegate: self)
                 }
                 //performSegue(withIdentifier: segue, sender: indexPath)
             }
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        let indexPath = sender as! IndexPath
-        let item = getFormItemFromIdx(indexPath)
-        if item != nil {
-            var rows: [[String: String]]? = nil
-            if segue.identifier == TO_SINGLE_SELECT {
-                
-                let vc: SingleSelectVC = segue.destination as! SingleSelectVC
-                
-                if item!.name == PRICE_UNIT_KEY {
-                    rows = PRICE_UNIT.makeSelect()
-                } else if item!.name == CYCLE_UNIT_KEY {
-                    rows = CYCLE_UNIT.makeSelect()
-                } else if item!.name == COURSE_KIND_KEY {
-                    rows = COURSE_KIND.makeSelect()
-                } else if item!.name == START_TIME_KEY || item!.name == END_TIME_KEY {
-                    let times = Global.instance.makeTimes()
-                    rows = [[String: String]]()
-                    for time in times {
-                        rows!.append(["title": time, "value": time+":00"])
-                    }
-                }
-                if rows != nil {
-                    vc.rows1 = rows
-                }
-                
-                vc.key = item!.name
-                vc.title = item!.title
-                vc.delegate = self
-            } else if segue.identifier == TO_MULTI_SELECT {
-                let vc: MultiSelectVC = segue.destination as! MultiSelectVC
-                
-                if item!.name == WEEKDAY_KEY {
-                    rows = WEEKDAY.makeSelect()
-                    //print(rows)
-                    if item!.sender != nil {
-                        let selecteds = item!.sender as! [String]
-                        //print(selecteds)
-                        vc.selecteds = selecteds
-                    }
-                }
-                
-                if rows != nil {
-                    vc.rows1 = rows
-                }
-                
-                vc.key = item!.name
-                vc.title = item!.title
-                vc.delegate = self
-            } else if segue.identifier == TO_CONTENT_EDIT {
-                let vc: ContentEditVC = segue.destination as! ContentEditVC
-                if item!.name == CONTENT_KEY {
-                    if item!.sender != nil {
-                        let content = item!.sender as! String
-                        vc.content = content
-                    }
-                }
-                vc.key = item!.name
-                vc.title = item!.title
-                vc.delegate = self
-            } else if segue.identifier == TO_SELECT_DATE {
-                let vc: DateSelectVC = segue.destination as! DateSelectVC
-                vc.key = item!.name
-                vc.selected = item!.value!
-                vc.title = item!.title
-                vc.delegate = self
-            }
-            
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//
+//        let indexPath = sender as! IndexPath
+//        let item = getFormItemFromIdx(indexPath)
+//        if item != nil {
+//            var rows: [[String: String]]? = nil
+//            if segue.identifier == TO_SINGLE_SELECT {
+//
+//                let vc: SingleSelectVC = segue.destination as! SingleSelectVC
+//
+//                if item!.name == PRICE_UNIT_KEY {
+//                    rows = PRICE_UNIT.makeSelect()
+//                } else if item!.name == CYCLE_UNIT_KEY {
+//                    rows = CYCLE_UNIT.makeSelect()
+//                } else if item!.name == COURSE_KIND_KEY {
+//                    rows = COURSE_KIND.makeSelect()
+//                } else if item!.name == START_TIME_KEY || item!.name == END_TIME_KEY {
+//                    let times = Global.instance.makeTimes()
+//                    rows = [[String: String]]()
+//                    for time in times {
+//                        rows!.append(["title": time, "value": time+":00"])
+//                    }
+//                }
+//                if rows != nil {
+//                    vc.rows1 = rows
+//                }
+//
+//                vc.key = item!.name
+//                vc.title = item!.title
+//                vc.delegate = self
+//            } else if segue.identifier == TO_MULTI_SELECT {
+//                let vc: MultiSelectVC = segue.destination as! MultiSelectVC
+//
+//                if item!.name == WEEKDAY_KEY {
+//                    rows = WEEKDAY.makeSelect()
+//                    //print(rows)
+//                    if item!.sender != nil {
+//                        let selecteds = item!.sender as! [String]
+//                        //print(selecteds)
+//                        vc.selecteds = selecteds
+//                    }
+//                }
+//
+//                if rows != nil {
+//                    vc.rows1 = rows
+//                }
+//
+//                vc.key = item!.name
+//                vc.title = item!.title
+//                vc.delegate = self
+//            } else if segue.identifier == TO_CONTENT_EDIT {
+//                let vc: ContentEditVC = segue.destination as! ContentEditVC
+//                if item!.name == CONTENT_KEY {
+//                    if item!.sender != nil {
+//                        let content = item!.sender as! String
+//                        vc.content = content
+//                    }
+//                }
+//                vc.key = item!.name
+//                vc.title = item!.title
+//                vc.delegate = self
+//            } else if segue.identifier == TO_SELECT_DATE {
+//                let vc: DateSelectVC = segue.destination as! DateSelectVC
+//                vc.key = item!.name
+//                vc.selected = item!.value!
+//                vc.title = item!.title
+//                vc.delegate = self
+//            }
+//
+//        }
+//    }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
@@ -315,6 +336,16 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
     }
     
+    override func setWeekdaysData(selecteds: [Int]) {
+        let item = getFormItemFromKey(WEEKDAY_KEY)
+        //let tmps: [Int] = selecteds.map({ Int($0)! })
+        let value = String(Global.instance.weekdaysToDBValue(selecteds))
+        
+        item!.value = value
+        item!.make()
+        tableView.reloadData()
+    }
+    
     override func multiSelected(key: String, selecteds: [String]) {
         let item = getFormItemFromKey(key)
         if item != nil {
@@ -329,7 +360,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
     }
     
-    func setContent(key: String, content: String) {
+    override func setContent(key: String, content: String) {
         let item = getFormItemFromKey(key)
         if item != nil {
             item!.value = content
@@ -360,6 +391,8 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
                 let value = formItem.value!
                 //print(formItem.name)
                 params[formItem.name!] = value
+            } else {
+                params[formItem.name!] = ""
             }
         }
         //print(params)

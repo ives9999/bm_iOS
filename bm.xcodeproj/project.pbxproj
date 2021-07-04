@@ -187,7 +187,6 @@
 		B3AE9389262FEE5700223B2A /* ProductListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE9387262FEE5700223B2A /* ProductListCell.swift */; };
 		B3AE938A262FEE5700223B2A /* ProductListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3AE9388262FEE5700223B2A /* ProductListCell.xib */; };
 		B3AE93B22640FBE700223B2A /* ShowArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE93B12640FBE700223B2A /* ShowArenaVC.swift */; };
-		B3B41E9A268EC46D000D22B0 /* SelectPriceUnitVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B41E99268EC46D000D22B0 /* SelectPriceUnitVC.swift */; };
 		B3B4B61022CA247500245CC8 /* SomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4B60E22CA247500245CC8 /* SomeCell.swift */; };
 		B3B4B61122CA247500245CC8 /* SomeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3B4B60F22CA247500245CC8 /* SomeCell.xib */; };
 		B3B4EF56257B59EA00EE15D0 /* PrivacyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */; };
@@ -573,7 +572,6 @@
 		B3AE9387262FEE5700223B2A /* ProductListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListCell.swift; sourceTree = "<group>"; };
 		B3AE9388262FEE5700223B2A /* ProductListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListCell.xib; sourceTree = "<group>"; };
 		B3AE93B12640FBE700223B2A /* ShowArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowArenaVC.swift; sourceTree = "<group>"; };
-		B3B41E99268EC46D000D22B0 /* SelectPriceUnitVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectPriceUnitVC.swift; sourceTree = "<group>"; };
 		B3B4B60E22CA247500245CC8 /* SomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeCell.swift; sourceTree = "<group>"; };
 		B3B4B60F22CA247500245CC8 /* SomeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SomeCell.xib; sourceTree = "<group>"; };
 		B3B4EF54257B59EA00EE15D0 /* PrivacyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyCell.swift; sourceTree = "<group>"; };
@@ -1235,16 +1233,17 @@
 				B3A2542125723F5B004B8A03 /* SelectManagers.swift */,
 				B3CA52AC2675160300E9EAE9 /* SelectTimeVC.swift */,
 				B385A07B22BCB28E00BC3ADF /* SelectVC.swift */,
-				B39E5FE92642A3AB00C40BA7 /* ShowVC.swift */,
 				B3AE93B12640FBE700223B2A /* ShowArenaVC.swift */,
 				B3E8C29A220603310008ED25 /* ShowCoachVC.swift */,
 				B3839EB722CF0261003F3620 /* ShowCourseVC.swift */,
 				B39453D82230E849005E3027 /* ShowPNVC.swift */,
 				B3B7587425A1B06B006ACC33 /* ShowProductVC.swift */,
 				B36E334325480007001336C2 /* ShowStoreVC.swift */,
+				B392B491268D8ACA007D4DD1 /* ShowTeachVC.swift */,
 				B39E5FAA263ED55400C40BA7 /* ShowTeamVC.swift */,
 				B3308C501FDA5311006A83B6 /* ShowTempPlayVC.swift */,
 				B306FEA421F72F0E00403FE2 /* ShowTimetableVC.swift */,
+				B39E5FE92642A3AB00C40BA7 /* ShowVC.swift */,
 				B39A216E23420881006C9FF7 /* SignupListVC.swift */,
 				B358B0B522A0FB5200F1A4E6 /* SingleSelectVC.swift */,
 				B3756EEE21BA6F19006893E1 /* StatusSelectVC.swift */,
@@ -1261,8 +1260,6 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
-				B392B491268D8ACA007D4DD1 /* ShowTeachVC.swift */,
-				B3B41E99268EC46D000D22B0 /* SelectPriceUnitVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1810,7 +1807,6 @@
 				B323390F21B6BBC7003EB84D /* BaseForm.swift in Sources */,
 				B3B75869259CBB27006ACC33 /* ProductService.swift in Sources */,
 				B3B758A225A960B0006ACC33 /* Color1Cell.swift in Sources */,
-				B3B41E9A268EC46D000D22B0 /* SelectPriceUnitVC.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
 				B39453712343256C000DF98E /* SignupListCell.swift in Sources */,
 				B358B0B822A100EF00F1A4E6 /* SectionFormItem.swift in Sources */,
@@ -1997,7 +1993,7 @@
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
@@ -2022,7 +2018,7 @@
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
@@ -2175,7 +2171,7 @@
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_ACTIVITY_MODE = "";
 				"DEBUG_ACTIVITY_MODE[sdk=iphonesimulator*]" = default;
 				DEVELOPMENT_TEAM = BYF37727CY;
@@ -2208,7 +2204,7 @@
 				CODE_SIGN_ENTITLEMENTS = bm/bm.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_ACTIVITY_MODE = "";
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;

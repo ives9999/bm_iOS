@@ -293,8 +293,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["order_email"] = Member.instance.email
         params["gateway"] = "credit_card"
         
-        let city_name = Global.instance.zoneIDToName(Member.instance.city_id)
-        let area_name = Global.instance.zoneIDToName(Member.instance.area_id)
+        let city_name = Global.instance.zoneIDToName(Member.instance.city)
+        let area_name = Global.instance.zoneIDToName(Member.instance.area)
         params["order_city"] = city_name
         params["order_area"] = area_name
         params["order_road"] = Member.instance.road

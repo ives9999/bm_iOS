@@ -94,8 +94,8 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                     }
                     let formItem = getFormItemFromKey(key)
                     if formItem != nil {
-                        if key == AREA_ID_KEY {
-                            let cityFormItem: CityFormItem = (getFormItemFromKey(CITY_ID_KEY) as? CityFormItem)!
+                        if key == AREA_KEY {
+                            let cityFormItem: CityFormItem = (getFormItemFromKey(CITY_KEY) as? CityFormItem)!
                             let areaFormItem: AreaFormItem = (formItem as? AreaFormItem)!
                             areaFormItem.city_id = Int(cityFormItem.value!)
                         }
@@ -104,7 +104,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                     }
                 }
             }
-            old_selected_city = String(Member.instance.getData(key: CITY_ID_KEY) as! Int)
+            old_selected_city = String(Member.instance.getData(key: CITY_KEY) as! Int)
             if Member.instance.avatar.count > 0 {
                 featuredView.setPickedImage(url: Member.instance.avatar)
             }
@@ -113,7 +113,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                 for (key, value) in testData {
                     let formItem = getFormItemFromKey(key)
                     if formItem != nil {
-                        if key == AREA_ID_KEY && testData.keyExist(key: "area_name") {
+                        if key == AREA_KEY && testData.keyExist(key: "area_name") {
                             let _formItem = formItem as! AreaFormItem
                             _formItem.selected_area_names = [testData["area_name"]!]
                         }
@@ -121,7 +121,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                         formItem!.make()
                     }
                 }
-                old_selected_city = testData[CITY_ID_KEY] ?? ""
+                old_selected_city = testData[CITY_KEY] ?? ""
             }
         }
     }
@@ -173,15 +173,16 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             if item!.name != nil {
                 //let segue = item!.segue!
                 let key = item!.name
-                if key == CITY_ID_KEY {
+                if key == CITY_KEY {
                     let selectItem: CityFormItem = item as! CityFormItem
                     var selected: String = ""
                     if selectItem.selected_city_ids.count > 0 {
                         selected = String(selectItem.selected_city_ids[0])
                     }
-                    toSelectCity(key: key, selected: selected, delegate: self)
-                } else if key == AREA_ID_KEY {
-                    let cityItem: CityFormItem = getFormItemFromKey(CITY_ID_KEY)! as! CityFormItem
+                    //toSelectCity(key: key, selected: selected, delegate: self)
+                    toSelectSingle(key: key, selected: selected, delegate: self)
+                } else if key == AREA_KEY {
+                    let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY)! as! CityFormItem
                     if cityItem.value == nil {
                         warning("請先選擇縣市")
                     } else {
@@ -212,12 +213,12 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             if item!.value != selected {
                 item!.reset()
             }
-            if key == AREA_ID_KEY {
+            if key == AREA_KEY {
                 let item1: AreaFormItem = item as! AreaFormItem
-                let cityItem = getFormItemFromKey(CITY_ID_KEY)
+                let cityItem = getFormItemFromKey(CITY_KEY)
                 item1.city_id = Int((cityItem?.value)!)
-            } else if key == CITY_ID_KEY {
-                let item1 = getFormItemFromKey(AREA_ID_KEY)
+            } else if key == CITY_KEY {
+                let item1 = getFormItemFromKey(AREA_KEY)
                 if old_selected_city != selected {
                     if item1 != nil {
                         item1!.reset()
@@ -381,11 +382,11 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             }
         }
         if let city_id = params[CITY_KEY] {
-            params[CITY_ID_KEY] = city_id
+            params[CITY_KEY] = city_id
             params.removeValue(forKey: CITY_KEY)
         }
         if let area_id = params[AREA_KEY] {
-            params[AREA_ID_KEY] = area_id
+            params[AREA_KEY] = area_id
             params.removeValue(forKey: AREA_KEY)
         }
         if member_token.count > 0 {

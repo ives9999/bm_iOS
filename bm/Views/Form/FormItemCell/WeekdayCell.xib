@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,7 +18,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="星期" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HT6-gd-cNj" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="24" y="11.5" width="35" height="21"/>
+                        <rect key="frame" x="8" y="11.5" width="35" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -48,7 +48,7 @@
                         </constraints>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Asc-lh-quM">
-                        <rect key="frame" x="65" y="9.5" width="25" height="25"/>
+                        <rect key="frame" x="49" y="9.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="Ej7-K4-4Rd"/>
                             <constraint firstAttribute="height" constant="25" id="xvy-4f-OOv"/>
@@ -66,7 +66,7 @@
                     <constraint firstItem="Asc-lh-quM" firstAttribute="leading" secondItem="HT6-gd-cNj" secondAttribute="trailing" constant="6" id="dn2-hf-CuX"/>
                     <constraint firstItem="dM3-Mc-5HI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="h1f-hV-IcK"/>
                     <constraint firstItem="HT6-gd-cNj" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mkH-rI-wOf"/>
-                    <constraint firstItem="HT6-gd-cNj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="nvX-Dp-MsV"/>
+                    <constraint firstItem="HT6-gd-cNj" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="nvX-Dp-MsV"/>
                     <constraint firstItem="rSa-QT-UoI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="pJ9-12-JhS"/>
                     <constraint firstAttribute="trailing" secondItem="dM3-Mc-5HI" secondAttribute="trailing" id="qZY-60-kkO"/>
                     <constraint firstItem="rSa-QT-UoI" firstAttribute="leading" secondItem="vMe-kp-gTp" secondAttribute="trailing" constant="8" id="vP8-xU-Jso"/>

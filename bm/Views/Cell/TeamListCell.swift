@@ -41,6 +41,8 @@ class TeamListCell: List2Cell {
             if row!.arena!.name.count > 0 {
                 arenaBtn.setTitle(row!.arena!.name)
                 cityBtn.setTitle(row!.arena!.city_show)
+                cityBtn.isHidden = false
+                arenaBtn.isHidden = false
             } else {
                 cityBtn.isHidden = true
                 arenaBtn.isHidden = true

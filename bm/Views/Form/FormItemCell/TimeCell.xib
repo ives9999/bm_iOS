@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,13 +42,13 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="開始時間" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MYh-mz-Qpp" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="24" y="11.5" width="69.5" height="21"/>
+                        <rect key="frame" x="8" y="11.5" width="69.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bTf-ly-j9b">
-                        <rect key="frame" x="99.5" y="9.5" width="25" height="25"/>
+                        <rect key="frame" x="83.5" y="9.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="LJl-5v-svt"/>
                             <constraint firstAttribute="height" constant="25" id="fic-Ev-1wt"/>
@@ -67,7 +67,7 @@
                     <constraint firstItem="7DN-o4-Zhq" firstAttribute="leading" secondItem="MEU-Ec-o1G" secondAttribute="trailing" id="XRx-8V-B9G"/>
                     <constraint firstItem="MEU-Ec-o1G" firstAttribute="leading" secondItem="6AG-kj-6G1" secondAttribute="trailing" constant="8" id="Yeb-Ju-vb7"/>
                     <constraint firstAttribute="trailing" secondItem="7DN-o4-Zhq" secondAttribute="trailing" id="cWV-lN-ZAh"/>
-                    <constraint firstItem="MYh-mz-Qpp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="oqO-RK-7Ga"/>
+                    <constraint firstItem="MYh-mz-Qpp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="oqO-RK-7Ga"/>
                     <constraint firstItem="MEU-Ec-o1G" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="tBP-YW-3SV"/>
                     <constraint firstItem="6AG-kj-6G1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xc8-IP-GxF"/>
                 </constraints>

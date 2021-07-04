@@ -50,6 +50,37 @@ extension BaseViewController {
         }
     }
     
+    func toEditContent(key: String, title: String, content: String?, _delegate: BaseViewController?) {
+        
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-Rnr-RQ-nbw") as? ContentEditVC {
+                viewController.key = key
+                
+                if (content != nil) {
+                    viewController.content = content
+                }
+                
+                if (_delegate != nil) {
+                    viewController.delegate = _delegate
+                }
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-Rnr-RQ-nbw") as! ContentEditVC
+            viewController.key = key
+            
+            if (content != nil) {
+                viewController.content = content
+            }
+            
+            if (_delegate != nil) {
+                viewController.delegate = _delegate
+            }
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toEditCourse(token: String) {
         
         if #available(iOS 13.0, *) {
@@ -311,31 +342,31 @@ extension BaseViewController {
         }
     }
     
-    func toSelectCity(key: String? = nil, selected: String? = nil, delegate: BaseViewController) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Select", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_CITY) as? SelectCityVC {
-                if key != nil {
-                    viewController.key = key
-                }
-                if selected != nil {
-                    viewController.selected = selected
-                }
-                viewController.delegate = delegate
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SELECT_CITY) as! SelectCityVC
-            if key != nil {
-                viewController.key = key
-            }
-            if selected != nil {
-                viewController.selected = selected
-            }
-            viewController.delegate = delegate
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
-    }
+//    func toSelectCity(key: String? = nil, selected: String? = nil, delegate: BaseViewController) {
+//        if #available(iOS 13.0, *) {
+//            let storyboard = UIStoryboard(name: "Select", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_CITY) as? SelectCityVC {
+//                if key != nil {
+//                    viewController.key = key
+//                }
+//                if selected != nil {
+//                    viewController.selected = selected
+//                }
+//                viewController.delegate = delegate
+//                show(viewController, sender: nil)
+//            }
+//        } else {
+//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SELECT_CITY) as! SelectCityVC
+//            if key != nil {
+//                viewController.key = key
+//            }
+//            if selected != nil {
+//                viewController.selected = selected
+//            }
+//            viewController.delegate = delegate
+//            self.navigationController!.pushViewController(viewController, animated: true)
+//        }
+//    }
     
     func toSelectCitys(key: String? = nil, selecteds: [String]? = nil, delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
@@ -434,11 +465,11 @@ extension BaseViewController {
         }
     }
     
-    func toSelectSingle<T>(t: T.Type, key: String?, selected: String?, delegate: BaseViewController, able_type: String?=nil) where T: SingleSelectVC {
+    func toSelectSingle(key: String?, selected: String?, delegate: BaseViewController, able_type: String?=nil) {
         
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Select", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "toSelectSingle") as? T {
+            if let viewController = storyboard.instantiateViewController(identifier: "toSelectSingle") as? SingleSelectVC {
                 if key != nil {
                     viewController.key = key
                 }
@@ -449,15 +480,15 @@ extension BaseViewController {
                 show(viewController, sender: nil)
             }
         } else {
-//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toSelectSingle") as! T
-//            if key != nil {
-//                viewController.key = key
-//            }
-//            if selected != nil {
-//                viewController.selected = selected
-//            }
-//            viewController.delegate = delegate
-//            self.navigationController!.pushViewController(viewController, animated: true)
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toSelectSingle") as! SingleSelectVC
+            if key != nil {
+                viewController.key = key
+            }
+            if selected != nil {
+                viewController.selected = selected
+            }
+            viewController.delegate = delegate
+            self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
     

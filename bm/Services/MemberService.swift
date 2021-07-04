@@ -40,6 +40,7 @@ class MemberService: DataService {
                 //print(data)
                 self.msg = ""
                 let json: JSON = JSON(data)
+                //print(json)
                 self.success = json["success"].boolValue
                 //print(self.success)
                 if self.success {

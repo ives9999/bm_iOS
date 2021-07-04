@@ -32,6 +32,12 @@ class ContentEditVC: BaseViewController {
         if title != nil {
             titleLbl.text = title
         }
+        
+        contentTextView.layer.borderColor = UIColor.lightGray.cgColor
+        contentTextView.layer.borderWidth = 1.0
+        
+        contentTextView.contentInset = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+        
         if content != nil {
             contentTextView.text = content
             textViewHeight = contentTextView.sizeThatFits(contentTextView.bounds.size).height

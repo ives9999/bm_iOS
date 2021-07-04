@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rVN-vy-6TU" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="28" y="37" width="292" height="20.5"/>
+                        <rect key="frame" x="28" y="37" width="240" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -67,7 +67,7 @@
                     <constraint firstItem="cGD-PP-khr" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="af6-4r-1TF"/>
                     <constraint firstItem="51g-at-Jsg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mK8-JG-0XL"/>
                     <constraint firstItem="rVN-vy-6TU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="8" id="nwd-fO-UtT"/>
-                    <constraint firstAttribute="trailing" secondItem="rVN-vy-6TU" secondAttribute="trailing" constant="8" id="oz3-bT-6Ev"/>
+                    <constraint firstAttribute="trailing" secondItem="rVN-vy-6TU" secondAttribute="trailing" constant="60" id="oz3-bT-6Ev"/>
                     <constraint firstItem="6Jk-p4-u05" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="xqV-tD-z0x"/>
                     <constraint firstItem="rVN-vy-6TU" firstAttribute="top" secondItem="cGD-PP-khr" secondAttribute="bottom" constant="8" id="y7Y-Mm-zrj"/>
                     <constraint firstItem="H82-PO-8KG" firstAttribute="centerY" secondItem="cGD-PP-khr" secondAttribute="centerY" id="zXI-vo-4T8"/>

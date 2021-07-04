@@ -12,7 +12,7 @@ import Reachability
 import WebKit
 import SCLAlertView
 
-class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate, DegreeSelectDelegate, EditCellDelegate {
+class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate, DegreeSelectDelegate, EditCellDelegate, ContentEditDelegate {
     
     //var baseVC: BaseViewController
     
@@ -51,7 +51,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     var searchRows: [[String: Any]] = [[String: Any]]()
     
     //WeekdaysSelectDelegate
-    func setWeekdaysData(res: [Int]){}
+    func setWeekdaysData(selecteds: [Int]){}
     //TimeSelectDelegate
     func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?){}
     //ArenaSelectDelegate
@@ -62,6 +62,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func setTextField(key: String, value: String) {}
     func setSwitch(indexPath: IndexPath, value: Bool) {}
     func clear(indexPath: IndexPath) {}
+    //ContentEditDelegate
+    func setContent(key: String, content: String) {}
     
 //    var wheels: Int = 0
 //    required init() {}

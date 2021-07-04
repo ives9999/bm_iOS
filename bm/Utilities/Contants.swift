@@ -231,7 +231,7 @@ let ISTEAMMANAGER_KEY = "isTeamManager"
 // member
 let MEMBER_FIELD_STRING = [TOKEN_KEY,EMAIL_KEY,NICKNAME_KEY,NAME_KEY,UID_KEY,CHANNEL_KEY,DOB_KEY,SEX_KEY,TEL_KEY,MOBILE_KEY,
                            PID_KEY,AVATAR_KEY,MEMBER_ROLE_KEY,SOCIAL_KEY,PLAYERID_KEY,ROAD_KEY,FB_KEY,LINE_KEY]
-let MEMBER_FIELD_INT = [ID_KEY,VALIDATE_KEY,MEMBER_TYPE_KEY,CITY_ID_KEY,AREA_ID_KEY,ZIP_KEY]
+let MEMBER_FIELD_INT = [ID_KEY,VALIDATE_KEY,MEMBER_TYPE_KEY,"city_id","area_id",ZIP_KEY]
 let MEMBER_FIELD_BOOL = [ISLOGGEDIN_KEY]
 let EMAIL_VALIDATE = 1
 let MOBILE_VALIDATE = 2
@@ -253,7 +253,7 @@ let MEMBER_ARRAY = [
     VALIDATE_KEY: ["text":"驗證","icon":""]
 ]
 let MEMBER_MUST_ARRAY = [
-    NAME_KEY, NICKNAME_KEY, EMAIL_KEY, MOBILE_KEY, SEX_KEY, CITY_ID_KEY, AREA_ID_KEY, ROAD_KEY
+    NAME_KEY, NICKNAME_KEY, EMAIL_KEY, MOBILE_KEY, SEX_KEY, CITY_KEY, AREA_KEY, ROAD_KEY
 ]
 
 let MEMBER_MUST_ARRAY_WARNING = [
@@ -262,8 +262,8 @@ let MEMBER_MUST_ARRAY_WARNING = [
     EMAIL_KEY: "沒有填寫email",
     MOBILE_KEY: "沒有填寫手機",
     SEX_KEY: "沒有選擇性別",
-    CITY_ID_KEY: "沒有選擇縣市",
-    AREA_ID_KEY: "沒有選擇區域",
+    CITY_KEY: "沒有選擇縣市",
+    AREA_KEY: "沒有選擇區域",
     ROAD_KEY: "沒有填寫路名"
 ]
 
@@ -322,14 +322,14 @@ let COURSE_DEADLINE_KEY: String = "cancel_deadline"
 // General key
 let ADDRESS_KEY = "address"
 let AREA_KEY = "area"
-let AREA_ID_KEY = "area_id"
+//let AREA_ID_KEY = "area_id"
 let ARENA_KEY = "arena"
 let CREATED_AT_KEY = "created_at"
 let CREATED_ID_KEY = "created_id"
 let CAT_KEY = "cat_id"
 let CHARGE_KEY = "charge"
 let CITY_KEY = "city"
-let CITY_ID_KEY = "city_id"
+//let CITY_ID_KEY = "city_id"
 let CITYS_KEY = "citys"
 let CLOSE_TIME_KEY = "close_time"
 let CLOTHES_SIZE_KEY = "clothes_size"

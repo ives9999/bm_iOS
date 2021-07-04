@@ -107,7 +107,7 @@ class CourseTable: Table {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         do {coach_id = try container.decode(Int.self, forKey: .coach_id)}catch{coach_id = 0}
-        do {price = try container.decode(Int.self, forKey: .price)}catch{price = 0}
+        do {price = try container.decode(Int.self, forKey: .price)}catch{price = -1}
         do {price_unit = try container.decode(String.self, forKey: .price_unit)}catch{price_unit = ""}
         do {price_desc = try container.decode(String.self, forKey: .price_desc)}catch{price_desc = ""}
         do {price_text_short = try container.decode(String.self, forKey: .price_text_short)}catch{price_text_short = ""}

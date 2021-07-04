@@ -292,7 +292,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                         if (row.keyExist(key: "value") && row["value"] != nil) {
                             selected = row["value"] as? String
                         }
-                        toSelectCity(key: key, selected: selected, delegate: self)
+                        //toSelectCity(key: key, selected: selected, delegate: self)
+                        toSelectSingle(key: key, selected: selected, delegate: self)
                     } else if (segue == TO_SELECT_WEEKDAY) {
                         
                         let selecteds: [Int] = valueToArray(t: Int.self, row: row)
@@ -378,12 +379,12 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         tableView.reloadData()
     }
     
-    override func setWeekdaysData(res: [Int]) {
+    override func setWeekdaysData(selecteds: [Int]) {
         var row = getDefinedRow(WEEKDAY_KEY)
         var texts: [String] = [String]()
         var values: [String] = [String]()
-        if res.count > 0 {
-            for day in res {
+        if selecteds.count > 0 {
+            for day in selecteds {
                 values.append(String(day))
                 for gday in Global.instance.weekdays {
                     if day == gday["value"] as! Int {

@@ -96,22 +96,38 @@ class Member {
             session.set(EMAIL_KEY, newValue)
         }
     }
-    var city_id: Int {
+    var city: Int {
         get {
-            return session.getInt(CITY_ID_KEY)
+            return session.getInt(CITY_KEY)
         }
         set {
-            session.set(CITY_ID_KEY, newValue)
+            session.set(CITY_KEY, newValue)
         }
     }
-    var area_id: Int {
+    var area: Int {
         get {
-            return session.getInt(AREA_ID_KEY)
+            return session.getInt(AREA_KEY)
         }
         set {
-            session.set(AREA_ID_KEY, newValue)
+            session.set(AREA_KEY, newValue)
         }
     }
+//    var city_id: Int {
+//        get {
+//            return session.getInt(CITY_KEY)
+//        }
+//        set {
+//            session.set(CITY_KEY, newValue)
+//        }
+//    }
+//    var area_id: Int {
+//        get {
+//            return session.getInt(AREA_KEY)
+//        }
+//        set {
+//            session.set(AREA_KEY, newValue)
+//        }
+//    }
     var road: String {
         get {
             return session.getString(ROAD_KEY)
@@ -265,8 +281,8 @@ class Member {
         SEX_KEY: ["ch": "性別","type":"String","default":"M"],
         TEL_KEY: ["ch": "市內電話","type":"String","default":""],
         MOBILE_KEY: ["ch": "行動電話","type":"String","default":""],
-        CITY_ID_KEY: ["ch": "縣市","type":"Int","default":"0"],
-        AREA_ID_KEY: ["ch": "區域","type":"Int","default":"0"],
+        CITY_KEY: ["ch": "縣市","type":"Int","default":"0"],
+        AREA_KEY: ["ch": "區域","type":"Int","default":"0"],
         ROAD_KEY: ["ch": "路名","type":"String","default":""],
         ZIP_KEY: ["ch": "郵遞區號","type":"Int","default":"0"],
         PLAYERID_KEY: ["ch": "推播id","type":"String","default":""],
@@ -329,12 +345,18 @@ class Member {
         if let val: String = data[MOBILE_KEY] as? String {
             self.mobile = val
         }
-        if let val: Int = data[CITY_ID_KEY] as? Int {
-            self.city_id = val
+        if let val: Int = data["city_id"] as? Int {
+            self.city = val
         }
-        if let val: Int = data[AREA_ID_KEY] as? Int {
-            self.area_id = val
+        if let val: Int = data["area_id"] as? Int {
+            self.area = val
         }
+//        if let val: Int = data[CITY_KEY] as? Int {
+//            self.city_id = val
+//        }
+//        if let val: Int = data[AREA_KEY] as? Int {
+//            self.area_id = val
+//        }
         if let val: String = data[ROAD_KEY] as? String {
             self.road = val
         }
@@ -403,10 +425,10 @@ class Member {
             return self.tel
         } else if key == MOBILE_KEY {
             return self.mobile
-        } else if key == CITY_ID_KEY {
-            return self.city_id
-        } else if key == AREA_ID_KEY {
-            return self.area_id
+        } else if key == CITY_KEY {
+            return self.city
+        } else if key == AREA_KEY {
+            return self.area
         } else if key == ROAD_KEY {
             return self.road
         } else if key == ZIP_KEY {

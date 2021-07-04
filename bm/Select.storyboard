@@ -587,10 +587,10 @@
             </objects>
             <point key="canvasLocation" x="1193" y="-255"/>
         </scene>
-        <!--Select Price UnitVC-->
+        <!--Single SelectVC-->
         <scene sceneID="rmR-ay-sOe">
             <objects>
-                <viewController storyboardIdentifier="toSelectSingle" id="nop-9R-kY8" customClass="SelectPriceUnitVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toSelectSingle" id="nop-9R-kY8" customClass="SingleSelectVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l3U-sa-6um">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

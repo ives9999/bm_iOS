@@ -198,9 +198,9 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         searchPanel.singleSelected(key: key, selected: selected, show: show)
     }
     
-    override func setWeekdaysData(res: [Int]) {
+    override func setWeekdaysData(selecteds: [Int]) {
         
-        searchPanel.setWeekdaysData(res: res)
+        searchPanel.setWeekdaysData(selecteds: selecteds)
     }
     
     override func setDegreeData(res: [DEGREE]) {

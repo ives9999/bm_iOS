@@ -267,12 +267,12 @@ class SearchPanel: UIViewController {
         reloadSearchTable()
     }
     
-    func setWeekdaysData(res: [Int]) {
+    func setWeekdaysData(selecteds: [Int]) {
         var row = getDefinedRow(WEEKDAY_KEY)
         var texts: [String] = [String]()
         var values: [String] = [String]()
-        if res.count > 0 {
-            for day in res {
+        if selecteds.count > 0 {
+            for day in selecteds {
                 values.append(String(day))
                 for gday in Global.instance.weekdays {
                     if day == gday["value"] as! Int {
@@ -384,28 +384,17 @@ extension SearchPanel: UITableViewDelegate {
         }
         
         let segue: String = row["segue"] as! String
-        if (segue == TO_CITY) {
+        if (segue == TO_CITY || segue == TO_SELECT_TIME) {
             var selected: String? = nil
             if (row.keyExist(key: "value") && row["value"] != nil) {
                 selected = row["value"] as? String
             }
-            baseVC!.toSelectCity(key: key, selected: selected, delegate: baseVC!)
+            //baseVC!.toSelectCity(key: key, selected: selected, delegate: baseVC!)
+            baseVC!.toSelectSingle(key: key, selected: selected, delegate: baseVC!)
         } else if (segue == TO_SELECT_WEEKDAY) {
             
             let selecteds: [Int] = valueToArray(t: Int.self, row: row)
             baseVC!.toSelectWeekday(key: key, selecteds: selecteds, delegate: baseVC!)
-        } else if (segue == TO_SELECT_TIME) {
-            
-//            var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
-//            if (key == END_TIME_KEY) {
-//                type = SELECT_TIME_TYPE.play_end
-//            }
-            
-            var selected: String? = nil
-            if (row.keyExist(key: "value") && row["value"] != nil) {
-                selected = row["value"] as? String
-            }
-            baseVC!.toSelectTime(key: key, selected: selected, delegate: baseVC!)
         } else if segue == TO_ARENA {
             
             var city: Int? = nil
