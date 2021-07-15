@@ -21,7 +21,7 @@ class DataService {
 //    ]
     var id: Int = 0
     var homes: Dictionary<String, [Home]> = Dictionary<String, [Home]>()
-    var dataLists: [SuperData] = [SuperData]()
+    //var dataLists: [SuperData] = [SuperData]()
     var totalCount: Int!
     var page: Int!
     var perPage: Int!
@@ -43,19 +43,19 @@ class DataService {
     var success: Bool = false
     var signup_date: JSON = JSON()//signup_date use
     
-    var _model: SuperData
-    var model: SuperData {
-        get {
-            return _model
-        }
-        set {
-            _model = newValue
-        }
-    }
+//    var _model: SuperData
+//    var model: SuperData {
+//        get {
+//            return _model
+//        }
+//        set {
+//            _model = newValue
+//        }
+//    }
     
     var timetables: Timetables = Timetables()
     
-    var superModel: SuperModel = SuperModel()
+    //var superModel: SuperModel = SuperModel()
     var able: SuperModel = SuperModel() // for signup list able model
     
     var table: Table?
@@ -64,18 +64,18 @@ class DataService {
     var jsonData: Data?
     
     init() {
-        _model = Team.instance
+//        _model = Team.instance
     }
     
-    func setData(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") -> SuperData {
-        let list = SuperData(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
-        return list
-    }
-    
-    func setData1(row: JSON)->Dictionary<String, [String: Any]> {
-        let list = Dictionary<String, [String: Any]>()
-        return list
-    }
+//    func setData(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") -> SuperData {
+//        let list = SuperData(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
+//        return list
+//    }
+//    
+//    func setData1(row: JSON)->Dictionary<String, [String: Any]> {
+//        let list = Dictionary<String, [String: Any]>()
+//        return list
+//    }
     
     func getList(token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
@@ -453,7 +453,7 @@ class DataService {
                     //print(type(of: s))
                     //self.superModel.printRows()
                     //self.superCourses = JSONParse.parse(data: json)
-                    self.superModel = s
+                    //self.superModel = s
                     
                     let rows: [T] = s.getRows() ?? [T]()
                     for row in rows {
@@ -504,7 +504,7 @@ class DataService {
                 //print(data)
                 let json = JSON(data)
                 //print(json)
-                self.setData1(row: json)
+                //self.setData1(row: json)
                 
                 //var images: [String] = [String]()
 //                for (key, item) in self.model.data {
@@ -562,7 +562,7 @@ class DataService {
                 if path.count > 0 {
                     self.getImage(_url: path, completion: { (success) in
                         if success {
-                            self.model.data[FEATURED_KEY]!["value"] = self.image
+                            //self.model.data[FEATURED_KEY]!["value"] = self.image
                             completion(true)
                             //print(team.data)
                         }
@@ -990,7 +990,7 @@ class DataService {
                         }
                         
                         let s: SuperSignups = JSONParse.parse(data: json)
-                        self.superModel = s
+                        //self.superModel = s
                         
                         let rows: [SuperSignup] = s.getRows() ?? [SuperSignup]()
                         for row in rows {
@@ -1146,7 +1146,7 @@ class DataService {
             let d = { (_ success: Bool) in
                 if success {
                     let idx: Int = self.needDownloads[i]["idx"] as! Int
-                    self.setImage(idx, t: T.self)
+                    //self.setImage(idx, t: T.self)
                     //self.superCourses.rows[idx].featured = self.image!
                 }
                 tmp -= 1
@@ -1158,17 +1158,17 @@ class DataService {
         }
     }
     
-    func setImage<T: SuperModel>(_ idx: Int, t: T.Type) {
-        if image != nil {
-            let rows: [T] = superModel.getRows() ?? [T]()
-            if rows.count >= idx {
-                let row = superModel.getRowFromIdx(idx)
-                if row != nil {
-                    row?.setFeatured(image!)
-                }
-            }
-        }
-    }
+//    func setImage<T: SuperModel>(_ idx: Int, t: T.Type) {
+//        if image != nil {
+//            let rows: [T] = superModel.getRows() ?? [T]()
+//            if rows.count >= idx {
+//                let row = superModel.getRowFromIdx(idx)
+//                if row != nil {
+//                    row?.setFeatured(image!)
+//                }
+//            }
+//        }
+//    }
     
     func getShow(type: String, id: Int, token: String, completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app", "id": id, "token": token, "type": type]

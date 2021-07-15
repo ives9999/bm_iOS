@@ -24,27 +24,27 @@ class VideoCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func updateViews(list: SuperData) {
-        //if bUpdate {
-            var link: String?
-            if list.vimeo.count > 0 {
-                link = "https://player.vimeo.com/video/\(list.vimeo)"
-            } else {
-                //link = "https://www.youtube.com/embed/\(list.youtube)?rel=0"
-                link = "https://youtu.be/\(list.youtube)"
-                //print(link)
-            }
-            //print(link)
-            
-            caculateFrame()
-            //print(self.bounds)
-            //print(webView_frame!)
-        let video = TRVideoView(text: link!)
-        video.frame = webView_frame!
-            self.addSubview(video)
-            bUpdate = false
-        //}
-    }
+//    func updateViews(list: SuperData) {
+//        //if bUpdate {
+//            var link: String?
+//            if list.vimeo.count > 0 {
+//                link = "https://player.vimeo.com/video/\(list.vimeo)"
+//            } else {
+//                //link = "https://www.youtube.com/embed/\(list.youtube)?rel=0"
+//                link = "https://youtu.be/\(list.youtube)"
+//                //print(link)
+//            }
+//            //print(link)
+//            
+//            caculateFrame()
+//            //print(self.bounds)
+//            //print(webView_frame!)
+//        let video = TRVideoView(text: link!)
+//        video.frame = webView_frame!
+//            self.addSubview(video)
+//            bUpdate = false
+//        //}
+//    }
     
     func caculateFrame() {
         let bounds_width = self.bounds.width

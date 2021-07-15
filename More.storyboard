@@ -1295,7 +1295,6 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="submitBtnPressed:" destination="tNU-cp-fqk" eventType="touchUpInside" id="oaO-rL-QUz"/>
                                                     <action selector="submitBtnPressed:" destination="o4v-AV-CC1" eventType="touchUpInside" id="wyo-6A-YMx"/>
                                                 </connections>
                                             </button>
@@ -1479,6 +1478,9 @@
                                                 <state key="normal" title="購買">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="submitBtnPressed:" destination="tNU-cp-fqk" eventType="touchUpInside" id="3Ow-kH-x4Z"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i5O-q2-1x3" customClass="LikeButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="62" y="0.0" width="46" height="34"/>

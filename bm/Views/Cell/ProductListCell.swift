@@ -40,6 +40,8 @@ class ProductListCell: List2Cell {
             } else {
                 priceLbl.text = "未提供"
             }
+            
+            cityBtn.isHidden = false
         }
     }
     

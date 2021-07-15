@@ -26,7 +26,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     var totalCount: Int = 100000
     var totalPage: Int = 1
     var textHeight: CGFloat = TITLE_HEIGHT
-    internal(set) public var lists: [SuperData] = [SuperData]()
+    //internal(set) public var lists: [SuperData] = [SuperData]()
     lazy var cellCount: CGFloat = {
         let count: Int = self.deviceType == .iPhone7 ? IPHONE_CELL_ON_ROW : IPAD_CELL_ON_ROW
         return CGFloat(count)
@@ -131,13 +131,13 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     func getDataEnd(success: Bool) {
         if success {
-            let tmps: [SuperData] = dataService.dataLists
-            //print(tmps)
-            //print("===============")
-            if page == 1 {
-                lists = [SuperData]()
-            }
-            lists += tmps
+//            let tmps: [SuperData] = dataService.dataLists
+//            //print(tmps)
+//            //print("===============")
+//            if page == 1 {
+//                lists = [SuperData]()
+//            }
+//            lists += tmps
             //print(self.lists)
             page = dataService.page
             if page == 1 {
@@ -161,7 +161,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         //print(lists.count)
-        return lists.count
+        return 0
     }
 
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -221,7 +221,7 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
 //    }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let data = lists[indexPath.row]
+        //let data = lists[indexPath.row]
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionCell", for: indexPath) as? CollectionCell {
 //            let image = data.featured
 //            let imageWidth: CGFloat = image.size.width
@@ -256,10 +256,10 @@ class CollectionVC: UIViewController, UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let list: SuperData = lists[indexPath.row]
-        if list.vimeo.count == 0 && list.youtube.count == 0 {
-            performSegue(withIdentifier: TO_SHOW, sender: list)
-        }
+//        let list: SuperData = lists[indexPath.row]
+//        if list.vimeo.count == 0 && list.youtube.count == 0 {
+//            performSegue(withIdentifier: TO_SHOW, sender: list)
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

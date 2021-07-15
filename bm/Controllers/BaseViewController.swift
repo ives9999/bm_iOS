@@ -22,7 +22,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     
     var msg: String = ""
     var dataService: DataService = DataService()
-    var managerLists: [SuperData] = [SuperData]()
+    //var managerLists: [SuperData] = [SuperData]()
     var refreshControl: UIRefreshControl!
     let titleBarHeight: CGFloat = 80
     var workAreaHeight: CGFloat = 600

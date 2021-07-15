@@ -57,19 +57,19 @@ class CalendarSignupCell: SuperCell {
             background_color = UIColor(SUNDAY_COLOR)
         }
         
-        if let rows: [SuperCourse] = dateCourse["rows"] as? [SuperCourse] {
-            
-            if rows.count > 0 {
-                var y: Int = 0
-                let x: Int = 0
-                for row in rows {
-                    let v: CourseView = CourseView(frame: CGRect(x: x, y: y, width: width, height: height))
-                    v.update(date, row, background_color)
-                    courseContainer.addSubview(v)
-                    y = y + height + gap
-                }
-            }
-        }
+//        if let rows: [SuperCourse] = dateCourse["rows"] as? [SuperCourse] {
+//            
+//            if rows.count > 0 {
+//                var y: Int = 0
+//                let x: Int = 0
+//                for row in rows {
+//                    let v: CourseView = CourseView(frame: CGRect(x: x, y: y, width: width, height: height))
+//                    v.update(date, row, background_color)
+//                    courseContainer.addSubview(v)
+//                    y = y + height + gap
+//                }
+//            }
+//        }
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

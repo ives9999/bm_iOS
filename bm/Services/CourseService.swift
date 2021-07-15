@@ -14,12 +14,12 @@ import SwiftyJSON
 class CourseService: DataService {
     
     static let instance = CourseService()
-    var superCourses: SuperCourses = SuperCourses()
-    var superCourse: SuperCourse = SuperCourse()
+    //var superCourses: SuperCourses = SuperCourses()
+    //var superCourse: SuperCourse = SuperCourse()
     
     override init() {
         super.init()
-        superModel = SuperCourses(dict: [String : Any]())
+        //superModel = SuperCourses(dict: [String : Any]())
     }
     
     override func getListURL() -> String {
@@ -69,11 +69,11 @@ class CourseService: DataService {
         return url
     }
     
-    override func parseAbleForSingupList(data: JSON) -> SuperModel {
-        let s: SuperCourse = JSONParse.parse(data: data)
-        
-        return s
-    }
+//    override func parseAbleForSingupList(data: JSON) -> SuperModel {
+//        let s: SuperCourse = JSONParse.parse(data: data)
+//        
+//        return s
+//    }
     
     override func update(_params: [String : String], image: UIImage?, completion: @escaping CompletionHandler) {
         

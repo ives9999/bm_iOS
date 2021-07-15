@@ -103,26 +103,26 @@ class CollectionCell1: UICollectionViewCell {
         //print("2.\(self.idx):\(titleLbl.frame.size.height)")
     }
     
-    func updateViews(data: SuperData, idx: Int) {
-        self.idx = idx
-        titleLbl.text = data.title
-        let featured = data.featured
-        featuredView.image = featured
-        pvLbl.text = "瀏覽數：" + (data.data[PV_KEY]!["show"] as! String)
-        var createdAt: String = (data.data[CREATED_AT_KEY]!["show"] as! String)
-        createdAt = createdAt.toDateTime().toString()
-        createdAtLbl.text = "建立時間：" + createdAt
-        
-        let aspect = featured.size.width / featured.size.height
-        //let constraint = NSLayoutConstraint(item: featuredView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: featuredView, attribute: NSLayoutAttribute.height, multiplier: aspect, constant: 0)
-        let constraint = NSLayoutConstraint(item: featuredView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.size.width/aspect)
-        constraint.priority = UILayoutPriority(rawValue: 999)
-        aspectConstraint = constraint
-        
-        //print("1.\(idx):\(self.frame.size.height)")
-        
-        setNeedsLayout()
-    }
+//    func updateViews(data: SuperData, idx: Int) {
+//        self.idx = idx
+//        titleLbl.text = data.title
+//        let featured = data.featured
+//        featuredView.image = featured
+//        pvLbl.text = "瀏覽數：" + (data.data[PV_KEY]!["show"] as! String)
+//        var createdAt: String = (data.data[CREATED_AT_KEY]!["show"] as! String)
+//        createdAt = createdAt.toDateTime().toString()
+//        createdAtLbl.text = "建立時間：" + createdAt
+//        
+//        let aspect = featured.size.width / featured.size.height
+//        //let constraint = NSLayoutConstraint(item: featuredView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: featuredView, attribute: NSLayoutAttribute.height, multiplier: aspect, constant: 0)
+//        let constraint = NSLayoutConstraint(item: featuredView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: frame.size.width/aspect)
+//        constraint.priority = UILayoutPriority(rawValue: 999)
+//        aspectConstraint = constraint
+//        
+//        //print("1.\(idx):\(self.frame.size.height)")
+//        
+//        setNeedsLayout()
+//    }
 }
 
 

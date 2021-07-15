@@ -22,10 +22,10 @@ class TeamService: DataService {
     
     var tempPlayList: [DATA] = [DATA]()
     
-    override init() {
-        super.init()
-        _model = Team.instance
-    }
+//    override init() {
+//        super.init()
+//        _model = Team.instance
+//    }
     
     override func getListURL() -> String {
         return URL_TEAM_LIST
@@ -44,51 +44,51 @@ class TeamService: DataService {
         return url
     }
     
-    override func setData(id: Int, title: String, path: String, token: String, youtube: String, vimeo: String) -> Team {
-        let superData = Team(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
-        return superData
-    }
-    override func setData1(row: JSON) -> Dictionary<String, [String : Any]> {
-        model.listReset()
-        for (key, value) in model.data {
-            if row[key].exists() {
-                _jsonToData(tmp: row[key], key: key, item: value)
-            }
-        }
-        if row["near_date_w"] != JSON.null {
-            let n2: String = row["near_date_w"].stringValue
-            model.data[TEAM_NEAR_DATE_KEY]!["value1"] = n2
-        }
-        var signups:[[String: String]] = [[String: String]]()
-        
-        if row["signups"] != JSON.null {
-            let items: [JSON] = row["signups"].arrayValue
-            for item in items {
-                let member: JSON = item["member"]
-                //print(member)
-                let nickname: String = member["nickname"].stringValue
-                let token: String = member["token"].stringValue
-                let created_at: String = item["created_at"].stringValue
-                let status: String = item["status"].stringValue
-                let off_at: String = item["off_at"].stringValue
-                signups.append(["nickname":nickname, "token":token,"created_at":created_at,"status":status,"off_at":off_at])
-                //print(signups)
-            }
-            if model.data["signups"] == nil {
-                model.data["signups"] = [String: Any]()
-            }
-            model.data["signups"]!["value"] = signups
-            model.data["signups"]!["vtype"] = "array"
-            //print(model.data)
-            
-        }
-        
-        model.initTimeShow()
-        model.updateNearDate()
-        model.updateInterval()
-        model.setAllTextSender()
-        return model.data
-    }
+//    override func setData(id: Int, title: String, path: String, token: String, youtube: String, vimeo: String) -> Team {
+//        let superData = Team(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
+//        return superData
+//    }
+//    override func setData1(row: JSON) -> Dictionary<String, [String : Any]> {
+//        model.listReset()
+//        for (key, value) in model.data {
+//            if row[key].exists() {
+//                _jsonToData(tmp: row[key], key: key, item: value)
+//            }
+//        }
+//        if row["near_date_w"] != JSON.null {
+//            let n2: String = row["near_date_w"].stringValue
+//            model.data[TEAM_NEAR_DATE_KEY]!["value1"] = n2
+//        }
+//        var signups:[[String: String]] = [[String: String]]()
+//        
+//        if row["signups"] != JSON.null {
+//            let items: [JSON] = row["signups"].arrayValue
+//            for item in items {
+//                let member: JSON = item["member"]
+//                //print(member)
+//                let nickname: String = member["nickname"].stringValue
+//                let token: String = member["token"].stringValue
+//                let created_at: String = item["created_at"].stringValue
+//                let status: String = item["status"].stringValue
+//                let off_at: String = item["off_at"].stringValue
+//                signups.append(["nickname":nickname, "token":token,"created_at":created_at,"status":status,"off_at":off_at])
+//                //print(signups)
+//            }
+//            if model.data["signups"] == nil {
+//                model.data["signups"] = [String: Any]()
+//            }
+//            model.data["signups"]!["value"] = signups
+//            model.data["signups"]!["vtype"] = "array"
+//            //print(model.data)
+//            
+//        }
+//        
+//        model.initTimeShow()
+//        model.updateNearDate()
+//        model.updateInterval()
+//        model.setAllTextSender()
+//        return model.data
+//    }
     
     func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["source": "app", "token": token, "strip_html": true]
@@ -103,45 +103,45 @@ class TeamService: DataService {
                     return
                 }
                 let json = JSON(data)
-                for (key, item) in self.model.temp_play_data {
-                    if json[key] != JSON.null {
-                        let tmp = json[key]
-                        var value: Any?
-                        let type: String = item["vtype"] as! String
-                        if type == "Int" {
-                            value = tmp.intValue
-                            self.model.temp_play_data[key]!["value"] = value
-                            self.model.temp_play_data[key]!["show"] = "\(value ?? "")"
-                        } else if type == "String" {
-                            value = tmp.stringValue
-                            self.model.temp_play_data[key]!["value"] = value
-                            self.model.temp_play_data[key]!["show"] = value
-                        } else if type == "array" {
-                            if key == CITY_KEY {
-                                let id: Int = tmp["id"].intValue
-                                let name: String = tmp["name"].stringValue
-                                let city: City = City(id: id, name: name)
-                                self.model.updateCity(city)
-                            } else if key == ARENA_KEY {
-                                let id: Int = tmp["id"].intValue
-                                let name: String = tmp["name"].stringValue
-                                let arena: Arena = Arena(id: id, name: name)
-                                self.model.updateArena(arena)
-                            } else if key == TEAM_WEEKDAYS_KEY {
-                                let tmp1: [JSON] = tmp.arrayValue
-                                var days: [Int] = [Int]()
-                                for item in tmp1 {
-                                    days.append(item["day"].intValue)
-                                }
-                                self.model.updateWeekdays(days)
-                            } else if key == TEAM_DEGREE_KEY {
-                                let tmp1: String = tmp.stringValue
-                                let degrees: [String] = tmp1.components(separatedBy: ",")
-                                self.model.updateDegree(self.strsToDegree(degrees))
-                            }
-                        }
-                    }
-                }
+//                for (key, item) in self.model.temp_play_data {
+//                    if json[key] != JSON.null {
+//                        let tmp = json[key]
+//                        var value: Any?
+//                        let type: String = item["vtype"] as! String
+//                        if type == "Int" {
+//                            value = tmp.intValue
+//                            self.model.temp_play_data[key]!["value"] = value
+//                            self.model.temp_play_data[key]!["show"] = "\(value ?? "")"
+//                        } else if type == "String" {
+//                            value = tmp.stringValue
+//                            self.model.temp_play_data[key]!["value"] = value
+//                            self.model.temp_play_data[key]!["show"] = value
+//                        } else if type == "array" {
+//                            if key == CITY_KEY {
+//                                let id: Int = tmp["id"].intValue
+//                                let name: String = tmp["name"].stringValue
+//                                let city: City = City(id: id, name: name)
+//                                self.model.updateCity(city)
+//                            } else if key == ARENA_KEY {
+//                                let id: Int = tmp["id"].intValue
+//                                let name: String = tmp["name"].stringValue
+//                                let arena: Arena = Arena(id: id, name: name)
+//                                self.model.updateArena(arena)
+//                            } else if key == TEAM_WEEKDAYS_KEY {
+//                                let tmp1: [JSON] = tmp.arrayValue
+//                                var days: [Int] = [Int]()
+//                                for item in tmp1 {
+//                                    days.append(item["day"].intValue)
+//                                }
+//                                self.model.updateWeekdays(days)
+//                            } else if key == TEAM_DEGREE_KEY {
+//                                let tmp1: String = tmp.stringValue
+//                                let degrees: [String] = tmp1.components(separatedBy: ",")
+//                                self.model.updateDegree(self.strsToDegree(degrees))
+//                            }
+//                        }
+//                    }
+//                }
                 completion(true)
             } else {
                 self.msg = "網路錯誤，請稍後再試"
@@ -176,43 +176,43 @@ class TeamService: DataService {
                     let arr: [JSON] = json["rows"].arrayValue
                     //print(arr)
                     
-                    for i in 0 ..< arr.count {
-                        for (key, value) in self.model.data {
-                            if arr[i][key] != JSON.null {
-                                self._jsonToData(tmp: arr[i][key], key: key, item: value)
-                            }
-                        }
-                        //self.model.updateTime(key:TEAM_PLAY_END_KEY)
-                        var data: Dictionary<String, [String: Any]> = self.model.data
-                        
-                        var near_date: Dictionary<String, Any> = [String: Any]()
-                        let n1: String = arr[i]["near_date"].stringValue
-                        let n2: String = arr[i]["near_date_w"].stringValue
-                        near_date["value"] = n1
-                        near_date["value1"] = n2
-                        near_date["show"] = n1 + "(" + n2 + ")"
-                        data["near_date"] = near_date
-                        
-                        var city: Dictionary<String, Any> = [String: Any]()
-                        city["value"] = arr[i]["city_id"].intValue
-                        city["show"] = arr[i]["city_name"].stringValue
-                        data["city"] = city
-                        
-                        var arena: Dictionary<String, Any> = [String: Any]()
-                        arena["value"] = arr[i]["arena_id"].intValue
-                        arena["show"] = arr[i]["arena_name"].stringValue
-                        data["arena"] = arena
-                        
-                        var count: Dictionary<String, Any> = [String: Any]()
-                        let tmp: Int = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
-                        
-                        count["quantity"] = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
-                        count["signup"] = arr[i]["temp_signup_count"].intValue
-                        data["count"] = count
-                        
-                        //print(data)
-                        self.tempPlayList.append(data)
-                    }
+//                    for i in 0 ..< arr.count {
+//                        for (key, value) in self.model.data {
+//                            if arr[i][key] != JSON.null {
+//                                self._jsonToData(tmp: arr[i][key], key: key, item: value)
+//                            }
+//                        }
+//                        //self.model.updateTime(key:TEAM_PLAY_END_KEY)
+//                        var data: Dictionary<String, [String: Any]> = self.model.data
+//
+//                        var near_date: Dictionary<String, Any> = [String: Any]()
+//                        let n1: String = arr[i]["near_date"].stringValue
+//                        let n2: String = arr[i]["near_date_w"].stringValue
+//                        near_date["value"] = n1
+//                        near_date["value1"] = n2
+//                        near_date["show"] = n1 + "(" + n2 + ")"
+//                        data["near_date"] = near_date
+//
+//                        var city: Dictionary<String, Any> = [String: Any]()
+//                        city["value"] = arr[i]["city_id"].intValue
+//                        city["show"] = arr[i]["city_name"].stringValue
+//                        data["city"] = city
+//
+//                        var arena: Dictionary<String, Any> = [String: Any]()
+//                        arena["value"] = arr[i]["arena_id"].intValue
+//                        arena["show"] = arr[i]["arena_name"].stringValue
+//                        data["arena"] = arena
+//
+//                        var count: Dictionary<String, Any> = [String: Any]()
+//                        let tmp: Int = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
+//
+//                        count["quantity"] = arr[i][TEAM_TEMP_QUANTITY_KEY].intValue
+//                        count["signup"] = arr[i]["temp_signup_count"].intValue
+//                        data["count"] = count
+//
+//                        //print(data)
+//                        self.tempPlayList.append(data)
+//                    }
                     completion(true)
                 } else {// total count == 0
                     completion(true)
@@ -298,46 +298,46 @@ class TeamService: DataService {
         }
     }
     
-    func _jsonToData(tmp: JSON, key: String, item: [String: Any]) {
-        var value: Any?
-        let type: String = item["vtype"] as! String
-        if type == "Int" {
-            value = tmp.intValue
-            model.data[key]!["value"] = value
-            model.data[key]!["show"] = "\(value ?? "")"
-        } else if type == "String" {
-            value = tmp.stringValue
-            //print("\(key) => \(value!)")
-            model.data[key]!["value"] = value!
-            model.data[key]!["show"] = value!
-            if key == TEAM_PLAY_START_KEY || key == TEAM_PLAY_END_KEY {
-                model.updateTime(key: key, value as? String)
-            }
-        } else if type == "array" {
-            if key == CITY_KEY {
-                let id: Int = tmp["id"].intValue
-                let name: String = tmp["name"].stringValue
-                let city: City = City(id: id, name: name)
-                model.updateCity(city)
-            } else if key == ARENA_KEY {
-                let id: Int = tmp["id"].intValue
-                let name: String = tmp["name"].stringValue
-                let arena: Arena = Arena(id: id, name: name)
-                model.updateArena(arena)
-            } else if key == TEAM_WEEKDAYS_KEY {
-                let tmp1: [JSON] = tmp.arrayValue
-                var days: [Int] = [Int]()
-                for item in tmp1 {
-                    days.append(item["weekday"].intValue)
-                }
-                model.updateWeekdays(days)
-            } else if key == TEAM_DEGREE_KEY {
-                let tmp1: String = tmp.stringValue
-                let degrees: [String] = tmp1.components(separatedBy: ",")
-                model.updateDegree(strsToDegree(degrees))
-            }
-        }
-    }
+//    func _jsonToData(tmp: JSON, key: String, item: [String: Any]) {
+//        var value: Any?
+//        let type: String = item["vtype"] as! String
+//        if type == "Int" {
+//            value = tmp.intValue
+//            model.data[key]!["value"] = value
+//            model.data[key]!["show"] = "\(value ?? "")"
+//        } else if type == "String" {
+//            value = tmp.stringValue
+//            //print("\(key) => \(value!)")
+//            model.data[key]!["value"] = value!
+//            model.data[key]!["show"] = value!
+//            if key == TEAM_PLAY_START_KEY || key == TEAM_PLAY_END_KEY {
+//                model.updateTime(key: key, value as? String)
+//            }
+//        } else if type == "array" {
+//            if key == CITY_KEY {
+//                let id: Int = tmp["id"].intValue
+//                let name: String = tmp["name"].stringValue
+//                let city: City = City(id: id, name: name)
+//                model.updateCity(city)
+//            } else if key == ARENA_KEY {
+//                let id: Int = tmp["id"].intValue
+//                let name: String = tmp["name"].stringValue
+//                let arena: Arena = Arena(id: id, name: name)
+//                model.updateArena(arena)
+//            } else if key == TEAM_WEEKDAYS_KEY {
+//                let tmp1: [JSON] = tmp.arrayValue
+//                var days: [Int] = [Int]()
+//                for item in tmp1 {
+//                    days.append(item["weekday"].intValue)
+//                }
+//                model.updateWeekdays(days)
+//            } else if key == TEAM_DEGREE_KEY {
+//                let tmp1: String = tmp.stringValue
+//                let degrees: [String] = tmp1.components(separatedBy: ",")
+//                model.updateDegree(strsToDegree(degrees))
+//            }
+//        }
+//    }
     func plusOne(title: String, near_date: String, token: String, completion: @escaping CompletionHandler) {
         var url: String = "\(URL_TEAM_PLUSONE)\(title)?source=app&date=\(near_date)&token=\(token)"
         //print(url)

@@ -21,7 +21,7 @@ class MenuVC: MyTableVC, SwipeTableViewCellDelegate {
     @IBAction func prepareForUnwind(segue: UIStoryboardSegue){}
     @IBOutlet weak var nicknameLbl: UILabel!
     
-    var myTeamLists: [SuperData] = [SuperData]()
+    //var myTeamLists: [SuperData] = [SuperData]()
     let _sections: [String] = ["帳戶"]
     let fixedRows: [[Dictionary<String, Any>]] = [
         [

@@ -53,30 +53,30 @@ class ManagerVC: MyTableVC {
 //        }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return managerLists.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ManagerCourseCell
-        //print(rows)
-        
-        let row: SuperData = managerLists[indexPath.row]
-        //print(row)
-        cell.titleLbl.text = row.title
-        cell.featured.image = row.featured
-        
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row: SuperData = managerLists[indexPath.row]
-        let name: String = row.title
-        let token: String = row.token
-        let sender:[String: String] = ["name": name, "token": token]
-        performSegue(withIdentifier: TO_MANAGER_FUNCTION, sender: sender)
-    }
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return managerLists.count
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ManagerCourseCell
+//        //print(rows)
+//        
+//        let row: SuperData = managerLists[indexPath.row]
+//        //print(row)
+//        cell.titleLbl.text = row.title
+//        cell.featured.image = row.featured
+//        
+//        return cell
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let row: SuperData = managerLists[indexPath.row]
+//        let name: String = row.title
+//        let token: String = row.token
+//        let sender:[String: String] = ["name": name, "token": token]
+//        performSegue(withIdentifier: TO_MANAGER_FUNCTION, sender: sender)
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == TO_MANAGER_FUNCTION {

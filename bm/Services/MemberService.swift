@@ -464,7 +464,7 @@ class MemberService: DataService {
 //                }
                 
                 let s: SuperSignups = JSONParse.parse(data: json)
-                self.superModel = s
+                //self.superModel = s
                 
                 let rows: [SuperSignup] = s.getRows() ?? [SuperSignup]()
                 for row in rows {

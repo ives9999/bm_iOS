@@ -17,7 +17,7 @@ class SignupListVC: MyTableVC {
     var able: String = "course"//來源是什麼，course
     var able_token: String = ""//來源的token
     var signups: SuperSignups?
-    var able_model: SuperCourse = SuperCourse()
+    //var able_model: SuperCourse = SuperCourse()
     var signupRows: [SuperSignup] = [SuperSignup]()
 
     override func viewDidLoad() {
@@ -55,11 +55,11 @@ class SignupListVC: MyTableVC {
     
     override func getDataEnd(success: Bool) {
         if success {
-            signups = dataService.superModel as? SuperSignups
+            //signups = dataService.superModel as? SuperSignups
             
             if page == 1 {
-                able_model = dataService.able as! SuperCourse
-                titleLbl.text = able_model.title + "報名列表"
+                //able_model = dataService.able as! SuperCourse
+                //titleLbl.text = able_model.title + "報名列表"
                 signupRows = [SuperSignup]()
                 totalCount = signups!.totalCount
                 perPage = signups!.perPage
