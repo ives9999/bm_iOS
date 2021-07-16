@@ -11,6 +11,11 @@ import UIKit
 class MyTableVC: BaseViewController, List1CellDelegate {
 
     var sections: [String]?
+    var searchSections: [ExpandableItems] = [ExpandableItems]()
+    
+    var mySections: [[String: Any]] = [[String: Any]]()
+    var myRows: [[String: Any]] = [[String: Any]]()
+    
     var section_keys: [[String]] = [[String]]()
     var rows:[[Dictionary<String, Any>]]?
     internal var myTablView: UITableView!
@@ -252,6 +257,11 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         }
         return [String: Any]()
     }
+    
+    func getDefinedRow(_ section: Int, _ row: Int) -> [String: Any] {
+        let key = searchSections[section].items[row]
+        return getDefinedRow(key)
+    }
 
     func replaceRows(_ key: String, _ row: [String: Any]) {
         for (idx, _row) in searchRows.enumerated() {
@@ -396,6 +406,90 @@ class MyTableVC: BaseViewController, List1CellDelegate {
     func cellToLogin() {
         toLogin()
     }
+    
+    @objc func handleExpandClose(gesture : UITapGestureRecognizer) {
+        
+        let headerView = gesture.view!
+        let section = headerView.tag
+        let tmp = headerView.subviews.filter({$0 is UIImageView})
+        var mark: UIImageView?
+        if tmp.count > 0 {
+            mark = tmp[0] as? UIImageView
+        }
+        
+        var indexPaths: [IndexPath] = [IndexPath]()
+        
+        let key: String = getSectionKey(idx: section)
+        let rows: [[String: String]] = getRowRowsFromMyRowsBykey(key: key)
+        for (i, _) in rows.enumerated() {
+            let indexPath = IndexPath(row: i, section: section)
+            indexPaths.append(indexPath)
+        }
+        
+        let isExpanded = getSectionExpanded(idx: section)
+        if (mySections[section].keyExist(key: "isExpanded")) {
+            mySections[section]["isExpanded"] = !isExpanded
+            //searchSections[section].isExpanded = !isExpanded
+        }
+        
+        if isExpanded {
+            tableView.deleteRows(at: indexPaths, with: .fade)
+        } else {
+            tableView.insertRows(at: indexPaths, with: .fade)
+        }
+        
+        if mark != nil {
+            toggleMark(mark: mark!, isExpanded: isExpanded)
+        }
+    }
+    
+    func toggleMark(mark: UIImageView, isExpanded: Bool) {
+        
+        if (isExpanded) {
+            mark.image = UIImage(named: "to_down")
+        } else {
+            mark.image = UIImage(named: "to_right")
+        }
+    }
+    
+    func getSectionName(idx: Int)-> String {
+        
+        var name: String = ""
+        let row: [String: Any] = mySections[idx]
+        if (row.keyExist(key: "name")) {
+            if let tmp: String = row["name"] as? String {
+                name = tmp
+            }
+        }
+        
+        return name
+    }
+    
+    func getSectionKey(idx: Int)-> String {
+        
+        var key: String = ""
+        let row: [String: Any] = mySections[idx]
+        if (row.keyExist(key: "key")) {
+            if let tmp: String = row["key"] as? String {
+                key = tmp
+            }
+        }
+        
+        return key
+    }
+    
+    func getSectionExpanded(idx: Int)-> Bool {
+        
+        var b: Bool = true
+        let row: [String: Any] = mySections[idx]
+        if (row.keyExist(key: "isExpanded")) {
+            if let tmp: Bool = row["isExpanded"] as? Bool {
+                b = tmp
+            }
+        }
+        
+        return b
+    }
 }
 
 extension MyTableVC: UITableViewDataSource {
@@ -464,16 +558,39 @@ extension MyTableVC: UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.white
+        headerView.tag = section
+        
+        let titleLabel = UILabel()
+        titleLabel.text = sections?[section]
+        titleLabel.textColor = UIColor.black
+        titleLabel.sizeToFit()
+        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: 34)
+        headerView.addSubview(titleLabel)
+        
+        let mark = UIImageView(image: UIImage(named: "to_right"))
+        mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
+        headerView.addSubview(mark)
+        
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+        headerView.addGestureRecognizer(gesture)
+        
+        return headerView
+    }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UITableViewHeaderFooterView()
-        view.backgroundColor = UIColor.white
-        
-        return view
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let view = UITableViewHeaderFooterView()
+//        view.backgroundColor = UIColor.white
+//        
+//        return view
+//    }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UITableViewHeaderFooterView()

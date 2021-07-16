@@ -27,6 +27,34 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     override func viewDidLoad() {
         
         myTablView = tableView
+        
+        //mySections = ["商品名稱", "商品選項", "款項", "寄件資料"]
+        
+        myRows = [
+            ["key":"data", "rows": memberRows],
+            ["key":"order", "rows": orderRows],
+            ["key":"like", "rows": likeRows],
+            ["key":"manager", "rows": courseRows],
+        ]ß
+        
+        myRows = [
+            ["ch":"商品","key":"product","value":"","show":""],
+            ["ch":"數量","key":"quantity","value":"","show":""],
+            ["ch":"小計","key":"subtotal","value":"","show":""],
+            ["ch":"運費","key":"shipping_fee","value":"","show":""],
+            ["ch":"總計","key":"amount","value":"","show":""],
+            ["ch":"姓名","key":"name","value":"","show":""],
+            ["ch":"行動電話","key":"mobile","value":"","show":""],
+            ["ch":"EMail","key":"email","value":"","show":""],
+            ["ch":"住址","key":"address","value":"","show":""]
+        ]
+        
+        mySections = [
+            ExpandableItems(isExpanded: true, items: ["product"]),
+            ExpandableItems(isExpanded: true, items: []),
+            ExpandableItems(isExpanded: true, items: ["subtotal","shipping_fee","amount"]),
+            ExpandableItems(isExpanded: true, items: ["name","mobile","email","address"])
+        ]
 
         super.viewDidLoad()
         //print(superProduct)
@@ -39,6 +67,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         tableView.rowHeight = UITableView.automaticDimension
         
         FormItemCellType.registerCell(for: tableView)
+        
+        let cellNib = UINib(nibName: "PaymentCell", bundle: nil)
+        tableView.register(cellNib, forCellReuseIdentifier: "payment")
         
         refresh()
     }
@@ -71,11 +102,18 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         if let productNameItem = getFormItemFromKey("Product_Name") {
             productNameItem.value = productTable!.name
             productNameItem.make()
+            
+            var row = getDefinedRow("product")
+            row["value"] = productTable!.name
+            row["show"] = productTable!.name
+            replaceRows("product", row)
         }
         
         if let nameItem = getFormItemFromKey(NAME_KEY) {
             nameItem.value = Member.instance.name
             nameItem.make()
+            
+            
         }
         
         if let mobileItem = getFormItemFromKey(MOBILE_KEY) {
@@ -171,41 +209,64 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section_keys.count == 0 {
-            return 0
+//        if section_keys.count == 0 {
+//            return 0
+//        } else {
+//            return section_keys[section].count
+//        }
+        
+        var count: Int = 0
+        if !searchSections[section].isExpanded {
+            count = 0
         } else {
-            return section_keys[section].count
+            count = searchSections[section].items.count
         }
+        
+        return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let item = getFormItemFromIdx(indexPath)
-        //let name = item?.name
-        let cell: UITableViewCell
-        if item != nil {
-            if let cellType = item!.uiProperties.cellType {
-                cell = cellType.dequeueCell(for: tableView, at: indexPath)
-            } else {
-                cell = UITableViewCell()
-            }
-            
-            if let formUpdatableCell = cell as? FormUPdatable {
-                item!.indexPath = indexPath
-                formUpdatableCell.update(with: item!)
-            }
-            
-            if item!.uiProperties.cellType == FormItemCellType.tag || item!.uiProperties.cellType == FormItemCellType.number || item!.uiProperties.cellType == FormItemCellType.weight {
-                if let formCell = cell as? FormItemCell {
-                    formCell.valueDelegate = self
-                }
-            }
-            
-        } else {
-            cell = UITableViewCell()
-        }
+        let item = getDefinedRow(indexPath.section, indexPath.row)
         
-        return cell
+        if let cell: PaymentCell = tableView.dequeueReusableCell(withIdentifier: "payment", for: indexPath) as? PaymentCell {
+            
+            var title: String = ""
+            var content: String = ""
+            if item.keyExist(key: "ch") {
+                title = item["ch"] as! String
+            }
+            if item.keyExist(key: "show") {
+                content = item["show"] as! String
+            }
+            cell.update(title: title, content: content)
+            return cell
+        }
+        //let name = item?.name
+//        let cell: UITableViewCell
+//        if item != nil {
+//            if let cellType = item!.uiProperties.cellType {
+//                cell = cellType.dequeueCell(for: tableView, at: indexPath)
+//            } else {
+//                cell = UITableViewCell()
+//            }
+//
+//            if let formUpdatableCell = cell as? FormUPdatable {
+//                item!.indexPath = indexPath
+//                formUpdatableCell.update(with: item!)
+//            }
+//
+//            if item!.uiProperties.cellType == FormItemCellType.tag || item!.uiProperties.cellType == FormItemCellType.number || item!.uiProperties.cellType == FormItemCellType.weight {
+//                if let formCell = cell as? FormItemCell {
+//                    formCell.valueDelegate = self
+//                }
+//            }
+//
+//        } else {
+//            cell = UITableViewCell()
+//        }
+        
+        return UITableViewCell()
     }
     
     func updateSubTotal() {

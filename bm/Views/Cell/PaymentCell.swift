@@ -26,4 +26,10 @@ class PaymentCell: SuperCell {
         titleLbl.text = (row["name"] as! String)
         contentLbl.text = (row["value"] as! String)
     }
+    
+    func update(title: String, content: String) {
+        
+        titleLbl.text = title
+        contentLbl.text = content
+    }
 }

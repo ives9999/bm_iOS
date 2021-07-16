@@ -23,9 +23,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     let heightForSection: CGFloat = 34
     
     var mysTable: TeamsTable?
-    
-    var searchSections: [ExpandableItems] = [ExpandableItems]()
-    
+        
     var firstTimeLoading: Bool = false
     //var firstTimeLoading: Bool = true
     
@@ -353,10 +351,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         }
     }
     
-    func getDefinedRow(_ section: Int, _ row: Int) -> [String: Any] {
-        let key = searchSections[section].items[row]
-        return getDefinedRow(key)
-    }
+    //move to MyTableVC
+//    func getDefinedRow(_ section: Int, _ row: Int) -> [String: Any] {
+//        let key = searchSections[section].items[row]
+//        return getDefinedRow(key)
+//    }
     
     override func singleSelected(key: String, selected: String, show: String?=nil) {
         
@@ -489,37 +488,6 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 let tag: Tag = (searchTag["class"] as? Tag)!
                 tag.selected = searchTag["selected"] as! Bool
                 tag.setSelectedStyle()
-            }
-        }
-    }
-    
-    @objc func handleExpandClose(gesture: UITapGestureRecognizer) {
-        let headerView = gesture.view!
-        let section = headerView.tag
-        let tmp = headerView.subviews.filter({$0 is UIImageView})
-        var mark: UIImageView?
-        if tmp.count > 0 {
-            mark = tmp[0] as? UIImageView
-        }
-        
-        var indexPaths = [IndexPath]()
-        for idx in searchSections[section].items.indices {
-            let indexPath = IndexPath(row: idx, section: section)
-            indexPaths.append(indexPath)
-        }
-        
-        let isExpanded = searchSections[section].isExpanded
-        searchSections[section].isExpanded = !isExpanded
-        
-        if isExpanded {
-            tableView.deleteRows(at: indexPaths, with: .fade)
-            if mark != nil {
-                mark?.image = UIImage(named: "to_right")
-            }
-        } else {
-            tableView.insertRows(at: indexPaths, with: .fade)
-            if mark != nil {
-                mark?.image = UIImage(named: "to_down")
             }
         }
     }

@@ -989,14 +989,14 @@ class DataService {
                             //print(able.printRow())
                         }
                         
-                        let s: SuperSignups = JSONParse.parse(data: json)
-                        //self.superModel = s
-                        
-                        let rows: [SuperSignup] = s.getRows() ?? [SuperSignup]()
-                        for row in rows {
-                            row.filterRow()
-                            //row.printRow()
-                        }
+//                        let s: SuperSignups = JSONParse.parse(data: json)
+//                        //self.superModel = s
+//                        
+//                        let rows: [SuperSignup] = s.getRows() ?? [SuperSignup]()
+//                        for row in rows {
+//                            row.filterRow()
+//                            //row.printRow()
+//                        }
                         completion(true)
                     } else {
                         self.msg = "網路錯誤，請稍後再試"

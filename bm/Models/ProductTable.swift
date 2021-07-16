@@ -38,6 +38,7 @@ class ProductTable: Table {
     
     var images: [String] = [String]()
     var prices: [ProductPriceTable] = [ProductPriceTable]()
+    var attributes: [ProductAttributeTable] = [ProductAttributeTable]()
     var colors: [String] = [String]()
     var sizes: [String] = [String]()
     var weights: [String] = [String]()
@@ -55,6 +56,7 @@ class ProductTable: Table {
         case order_max
         case alias
         case prices
+        case attributes = "product_attributes"
         case images
         case colors
         case sizes
@@ -82,6 +84,8 @@ class ProductTable: Table {
         do {weights = try container.decode([String].self, forKey: .weights)}catch{weights=[String]()}
         do {shippings = try container.decode([String].self, forKey: .shippings)}catch{shippings=[String]()}
         do {gateways = try container.decode([String].self, forKey: .gateways)}catch{gateways=[String]()}
+        
+        attributes = try container.decodeIfPresent([ProductAttributeTable].self, forKey: .attributes) ?? [ProductAttributeTable]()
     }
     
     override func filterRow() {
@@ -146,5 +150,30 @@ class ProductPriceTable: Table {
     override func filterRow() {
         
         super.filterRow()
+    }
+}
+
+class ProductAttributeTable: Table {
+ 
+    var product_id: Int = -1
+    var attribute: String = ""
+    var alias: String = ""
+    var placeholder: String = ""
+    
+    enum CodingKeys: String, CodingKey {
+        case product_id
+        case attribute
+        case alias
+        case placeholder
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        product_id = try container.decodeIfPresent(Int.self, forKey: .product_id) ?? -1
+        attribute = try container.decodeIfPresent(String.self, forKey: .attribute) ?? ""
+        alias = try container.decodeIfPresent(String.self, forKey: .alias) ?? ""
+        placeholder = try container.decodeIfPresent(String.self, forKey: .placeholder) ?? ""
     }
 }

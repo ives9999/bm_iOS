@@ -58,11 +58,11 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"]
     ]
     var timetable: Timetable?
-    var superCoach: SuperCoach?
+    //var superCoach: SuperCoach?
     
     var signupBtn: SubmitButton?
     var isSignup: Bool = false
-    var signup: SuperSignup?
+    //var signup: SuperSignup?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -155,22 +155,22 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                     self.timetable =
                         TimetableService.instance.timetable
                     //self.timetable!.printRow()
-                    self.superCoach = TimetableService.instance.superCoach
+                    //self.superCoach = TimetableService.instance.superCoach
                     //let mirror: Mirror? = Mirror(reflecting: self.timetable!)
                     
                     self.isSignup = false
-                    if self.timetable!.signups.rows.count > 0 {
-                        for signup in self.timetable!.signups.rows {
-                            //signup.printRow()
-                            if signup.member_id == Member.instance.id {
-                                self.signup = signup
-                                if signup.status == "normal" {
-                                    self.isSignup = true
-                                }
-                                break
-                            }
-                        }
-                    }
+//                    if self.timetable!.signups.rows.count > 0 {
+//                        for signup in self.timetable!.signups.rows {
+//                            //signup.printRow()
+//                            if signup.member_id == Member.instance.id {
+//                                self.signup = signup
+//                                if signup.status == "normal" {
+//                                    self.isSignup = true
+//                                }
+//                                break
+//                            }
+//                        }
+//                    }
                     if self.isSignup {
                         self.signupBtn!.setTitle("取消報名")
                     } else {
@@ -198,10 +198,10 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
                     self.contentViewHeight!.constant = 1000
                     
                     for key in self.coachTableRowKeys {
-                        if (self.superCoach!.responds(to: Selector(key))) {
-                            let content: String = String(describing:(self.superCoach!.value(forKey: key))!)
-                            self.coachTableRows[key]!["content"] = content
-                        }
+//                        if (self.superCoach!.responds(to: Selector(key))) {
+//                            let content: String = String(describing:(self.superCoach!.value(forKey: key))!)
+//                            self.coachTableRows[key]!["content"] = content
+//                        }
                     }
                     //print(self.coachTableRows)
                     self.coachTableView.reloadData()
@@ -253,20 +253,20 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         if tableView == self.coachTableView {
             let key = coachTableRowKeys[indexPath.row]
             if key == NAME_KEY {
-                let sender: Show_IN = Show_IN(type: source!,id:superCoach!.id,token:superCoach!.token,title:superCoach!.name)
-                performSegue(withIdentifier: TO_SHOW, sender: sender)
+                //let sender: Show_IN = Show_IN(type: source!,id:superCoach!.id,token:superCoach!.token,title:superCoach!.name)
+                //performSegue(withIdentifier: TO_SHOW, sender: sender)
             } else if key == MOBILE_KEY {
-                superCoach!.mobile.makeCall()
+                //superCoach!.mobile.makeCall()
             } else if key == LINE_KEY {
-                superCoach!.line.line()
+                //superCoach!.line.line()
             } else if key == FB_KEY {
-                superCoach!.fb.fb()
+                //superCoach!.fb.fb()
             } else if key == YOUTUBE_KEY {
-                superCoach!.youtube.youtube()
+                //superCoach!.youtube.youtube()
             } else if key == WEBSITE_KEY {
-                superCoach!.website.website()
+                //superCoach!.website.website()
             } else if key == EMAIL_KEY {
-                superCoach!.email.email()
+                //superCoach!.email.email()
             }
         }
     }
@@ -334,7 +334,7 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
 //                        }
 //                    }
                 } else {//取消報名
-                    if signup != nil {
+                    //if signup != nil {
 //                        dataService.cancelSignup(type: "timetable", member_token: Member.instance.token, signup_id: self.signup!.id) { (success) in
 //                            Global.instance.removeSpinner(superView: self.view)
 //                            if !success {
@@ -344,9 +344,9 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
 //                                self.refresh()
 //                            }
 //                        }
-                    } else {
+                    //} else {
                         self.warning("沒有取得報名資料，無法取消報名，請洽管理員")
-                    }
+                    //}
                 }
             } else {
                 warning("沒有取得課程表，請重新進入")

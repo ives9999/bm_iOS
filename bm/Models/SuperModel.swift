@@ -58,11 +58,11 @@ class SuperModel: NSObject, JSONParsable {
                     let parseArray = parseInt(arrayValue)
                     setValue(parseArray, forKey: key)
                 } else if key == "signup_normal_models" {
-                    let parseArray: [SuperSignupNormal] = parse(property: property, array: arrayValue) as! [SuperSignupNormal]
-                    setValue(parseArray, forKey: key)
+//                    let parseArray: [SuperSignupNormal] = parse(property: property, array: arrayValue) as! [SuperSignupNormal]
+//                    setValue(parseArray, forKey: key)
                 } else if key == "signup_normal_models" {
-                    let parseArray: [SuperSignupNormal] = parse(property: property, array: arrayValue) as! [SuperSignupNormal]
-                    setValue(parseArray, forKey: key)
+//                    let parseArray: [SuperSignupNormal] = parse(property: property, array: arrayValue) as! [SuperSignupNormal]
+//                    setValue(parseArray, forKey: key)
                 } else if key == "managers" {
                     let parsedArray = setArrayDictionary(value, on: property, forKey: key)
                     setValue(parsedArray, forKey: key)
@@ -79,14 +79,14 @@ class SuperModel: NSObject, JSONParsable {
                 //let dictValue = value.dictionary
                 
                 if key == "city" {
-                    let city: SuperCity = JSONParse.parse(data: value)
-                    setValue(city, forKey: key)
+//                    let city: SuperCity = JSONParse.parse(data: value)
+//                    setValue(city, forKey: key)
                 } else if key == "coach" {
-                    let coach: SuperCoach = JSONParse.parse(data: value)
-                    setValue(coach, forKey: key)
+//                    let coach: SuperCoach = JSONParse.parse(data: value)
+//                    setValue(coach, forKey: key)
                 } else if key == "date_model" {
-                    let superDate: SuperDate = JSONParse.parse(data: value)
-                    setValue(superDate, forKey: key)
+//                    let superDate: SuperDate = JSONParse.parse(data: value)
+//                    setValue(superDate, forKey: key)
                 } else if key == "nextCourseTime" {
                     setValue(value, on: property, forKey: key)
                 }

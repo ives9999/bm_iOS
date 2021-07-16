@@ -16,9 +16,9 @@ class SignupListVC: MyTableVC {
     
     var able: String = "course"//來源是什麼，course
     var able_token: String = ""//來源的token
-    var signups: SuperSignups?
+    //var signups: SuperSignups?
     //var able_model: SuperCourse = SuperCourse()
-    var signupRows: [SuperSignup] = [SuperSignup]()
+    //var signupRows: [SuperSignup] = [SuperSignup]()
 
     override func viewDidLoad() {
         myTablView = tableView
@@ -57,48 +57,48 @@ class SignupListVC: MyTableVC {
         if success {
             //signups = dataService.superModel as? SuperSignups
             
-            if page == 1 {
-                //able_model = dataService.able as! SuperCourse
-                //titleLbl.text = able_model.title + "報名列表"
-                signupRows = [SuperSignup]()
-                totalCount = signups!.totalCount
-                perPage = signups!.perPage
-                let _pageCount: Int = totalCount / perPage
-                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-            }
-            signupRows += signups!.rows
-            page = signups!.page
-            
-            if refreshControl.isRefreshing {
-                refreshControl.endRefreshing()
-            }
-            tableView.reloadData()
+//            if page == 1 {
+//                //able_model = dataService.able as! SuperCourse
+//                //titleLbl.text = able_model.title + "報名列表"
+//                signupRows = [SuperSignup]()
+//                totalCount = signups!.totalCount
+//                perPage = signups!.perPage
+//                let _pageCount: Int = totalCount / perPage
+//                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+//            }
+//            signupRows += signups!.rows
+//            page = signups!.page
+//
+//            if refreshControl.isRefreshing {
+//                refreshControl.endRefreshing()
+//            }
+//            tableView.reloadData()
         }
         self.endRefresh()
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if signupRows.count == 0 {
-            emptyLbl.isHidden = false
-            emptyCons.constant = 20
-            return 0
-        } else {
-            emptyLbl.isHidden = true
-            emptyCons.constant = 0
-            return signupRows.count + 1
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SignupListCell
-        if indexPath.row == 0 {
-            cell.update(no: "序號", signuper: "報名者", signupTime: "報名時間", courseDate: "上課日期")
-        } else {
-            let row = signupRows[indexPath.row - 1]
-            let no = String(indexPath.row)
-            cell.update(no: no, signuper: row.member_name, signupTime: row.created_at.noSec().noYear(), courseDate: row.able_date)
-        }
-        
-        return cell
-    }
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        if signupRows.count == 0 {
+//            emptyLbl.isHidden = false
+//            emptyCons.constant = 20
+//            return 0
+//        } else {
+//            emptyLbl.isHidden = true
+//            emptyCons.constant = 0
+//            return signupRows.count + 1
+//        }
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SignupListCell
+//        if indexPath.row == 0 {
+//            cell.update(no: "序號", signuper: "報名者", signupTime: "報名時間", courseDate: "上課日期")
+//        } else {
+//            let row = signupRows[indexPath.row - 1]
+//            let no = String(indexPath.row)
+//            cell.update(no: no, signuper: row.member_name, signupTime: row.created_at.noSec().noYear(), courseDate: row.able_date)
+//        }
+//        
+//        return cell
+//    }
 }

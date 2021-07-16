@@ -14,7 +14,7 @@ class TimetableService: DataService {
     
     static let instance = TimetableService()
     var timetable: Timetable = Timetable()
-    var superCoach: SuperCoach = SuperCoach()
+    //var superCoach: SuperCoach = SuperCoach()
     
     func getOne(id: Int, source: String, token: String, completion: @escaping CompletionHandler) {
         
@@ -47,7 +47,7 @@ class TimetableService: DataService {
                 if json["type"].exists() {
                     let type: String = json["type"].string!
                     if type == "coach" {
-                        self.superCoach = JSONParse.parse(data: json["model"])
+                        //self.superCoach = JSONParse.parse(data: json["model"])
                         //self.superCoach.printRow()
                     }
                 }

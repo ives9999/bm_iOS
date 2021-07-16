@@ -20,15 +20,6 @@ class MemberVC: MyTableVC {
     
     //let _sections: [String] = ["會員資料", "訂單", "喜歡", "管理"]
     
-    var mySections: [[String: Any]] = [
-        ["name": "會員資料", "isExpanded": true, "key": "data"],
-        ["name": "訂單", "isExpanded": true, "key": "order"],
-        ["name": "喜歡", "isExpanded": false, "key": "like"],
-        ["name": "管理", "isExpanded": true, "key": "manager"]
-    ]
-    
-    var myRows: [[String: Any]] = [[String: Any]]()
-    
     //let _sections: [String] = ["會員資料", "報名"]
     let fixedRows: [Dictionary<String, String>] = [
         ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
@@ -72,6 +63,13 @@ class MemberVC: MyTableVC {
         myTablView = tableView
         
         super.viewDidLoad()
+        
+        mySections = [
+            ["name": "會員資料", "isExpanded": true, "key": "data"],
+            ["name": "訂單", "isExpanded": true, "key": "order"],
+            ["name": "喜歡", "isExpanded": false, "key": "like"],
+            ["name": "管理", "isExpanded": true, "key": "manager"]
+        ]
         
         myRows = [
             ["key":"data", "rows": memberRows],
@@ -498,80 +496,6 @@ class MemberVC: MyTableVC {
         forgetPasswordIcon.isHidden = false
         tableView.isHidden = true
         avatarImageView.image = UIImage(named: "menuProfileIcon")
-    }
-    
-    @objc func handleExpandClose(gesture : UITapGestureRecognizer) {
-        
-        let headerView = gesture.view!
-        let section = headerView.tag
-        let tmp = headerView.subviews.filter({$0 is UIImageView})
-        var mark: UIImageView?
-        if tmp.count > 0 {
-            mark = tmp[0] as? UIImageView
-        }
-        
-        var indexPaths: [IndexPath] = [IndexPath]()
-        
-        let key: String = getSectionKey(idx: section)
-        let rows: [[String: String]] = getRowRowsFromMyRowsBykey(key: key)
-        for (i, _) in rows.enumerated() {
-            let indexPath = IndexPath(row: i, section: section)
-            indexPaths.append(indexPath)
-        }
-        
-//        if (section == 0) {
-//            for i in 0...memberRows.count-1 {
-//                let indexPath = IndexPath(row: i, section: section)
-//                indexPaths.append(indexPath)
-//            }
-//        } else if (section == 1) {
-//            for i in 0...orderRows.count-1 {
-//                let indexPath = IndexPath(row: i, section: section)
-//                indexPaths.append(indexPath)
-//            }
-//        } else if (section == 2) {
-//            for i in 0...likeRows.count-1 {
-//                print(i)
-//                let indexPath = IndexPath(row: i, section: section)
-//                indexPaths.append(indexPath)
-//            }
-//        } else if (section == 3) {
-//            for i in 0...courseRows.count-1 {
-//                let indexPath = IndexPath(row: i, section: section)
-//                indexPaths.append(indexPath)
-//            }
-//        }
-        
-        
-//        for idx in searchSections[section].items.indices {
-//            let indexPath = IndexPath(row: idx, section: section)
-//            indexPaths.append(indexPath)
-//        }
-        
-        let isExpanded = getSectionExpanded(idx: section)
-        if (mySections[section].keyExist(key: "isExpanded")) {
-            mySections[section]["isExpanded"] = !isExpanded
-            //searchSections[section].isExpanded = !isExpanded
-        }
-        
-        if isExpanded {
-            tableView.deleteRows(at: indexPaths, with: .fade)
-        } else {
-            tableView.insertRows(at: indexPaths, with: .fade)
-        }
-        
-        if mark != nil {
-            toggleMark(mark: mark!, isExpanded: isExpanded)
-        }
-    }
-    
-    func toggleMark(mark: UIImageView, isExpanded: Bool) {
-        
-        if (isExpanded) {
-            mark.image = UIImage(named: "to_down")
-        } else {
-            mark.image = UIImage(named: "to_right")
-        }
     }
 }
 
