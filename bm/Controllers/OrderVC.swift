@@ -24,36 +24,46 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     var selected_price: Int = 0
     var selected_idx: Int = 0
     
+    let heightForSection: CGFloat = 34
+    
+    let productRows: [[String: String]] = [
+        ["title": "商品","key":"product","value":"","show":"","cell":"text"]
+    ]
+    
+    var attributeRows: [[String: String]] = [[String: String]]()
+    
+    let amountRows: [[String: String]] = [
+        ["title":"數量","key":"quantity","value":"","show":"","cell":"number"],
+        ["title":"小計","key":"subtotal","value":"","show":"","cell":"text"],
+        ["title":"運費","key":"shipping_fee","value":"","show":"","cell":"text"],
+        ["title":"總計","key":"amount","value":"","show":"","cell":"text"]
+    ]
+    
+    let contactRows: [[String: String]] = [
+        ["title":"姓名","key":NAME_KEY,"value":"","show":"","cell":"text"],
+        ["title":"行動電話","key":MOBILE_KEY,"value":"","show":"","cell":"text"],
+        ["title":"EMail","key":EMAIL_KEY,"value":"","show":"","cell":"text"],
+        ["title":"住址","key":ADDRESS_KEY,"value":"","show":"","cell":"text"]
+    ]
+    
     override func viewDidLoad() {
         
         myTablView = tableView
         
         //mySections = ["商品名稱", "商品選項", "款項", "寄件資料"]
         
-        myRows = [
-            ["key":"data", "rows": memberRows],
-            ["key":"order", "rows": orderRows],
-            ["key":"like", "rows": likeRows],
-            ["key":"manager", "rows": courseRows],
-        ]ß
-        
-        myRows = [
-            ["ch":"商品","key":"product","value":"","show":""],
-            ["ch":"數量","key":"quantity","value":"","show":""],
-            ["ch":"小計","key":"subtotal","value":"","show":""],
-            ["ch":"運費","key":"shipping_fee","value":"","show":""],
-            ["ch":"總計","key":"amount","value":"","show":""],
-            ["ch":"姓名","key":"name","value":"","show":""],
-            ["ch":"行動電話","key":"mobile","value":"","show":""],
-            ["ch":"EMail","key":"email","value":"","show":""],
-            ["ch":"住址","key":"address","value":"","show":""]
+        mySections = [
+            ["name": "商品名稱", "isExpanded": true, "key": "product"],
+            ["name": "商品選項", "isExpanded": true, "key": "attribute"],
+            ["name": "款項", "isExpanded": true, "key": "amount"],
+            ["name": "寄件資料", "isExpanded": true, "key": "contact"]
         ]
         
-        mySections = [
-            ExpandableItems(isExpanded: true, items: ["product"]),
-            ExpandableItems(isExpanded: true, items: []),
-            ExpandableItems(isExpanded: true, items: ["subtotal","shipping_fee","amount"]),
-            ExpandableItems(isExpanded: true, items: ["name","mobile","email","address"])
+        myRows = [
+            ["key":"product", "rows": productRows],
+            ["key":"attribute", "rows": attributeRows],
+            ["key":"amount", "rows": amountRows],
+            ["key":"contact", "rows": contactRows],
         ]
 
         super.viewDidLoad()
@@ -68,8 +78,14 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         FormItemCellType.registerCell(for: tableView)
         
-        let cellNib = UINib(nibName: "PaymentCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "payment")
+        let textNib = UINib(nibName: "PaymentCell", bundle: nil)
+        tableView.register(textNib, forCellReuseIdentifier: "TextCell")
+        
+        let tagNib = UINib(nibName: "TagCell", bundle: nil)
+        tableView.register(tagNib, forCellReuseIdentifier: "TagCell")
+        
+        let numberNib = UINib(nibName: "NumberCell", bundle: nil)
+        tableView.register(numberNib, forCellReuseIdentifier: "NumberCell")
         
         refresh()
     }
@@ -103,37 +119,74 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             productNameItem.value = productTable!.name
             productNameItem.make()
             
-            var row = getDefinedRow("product")
+            var row = getRowRowsFromMyRowsByKey1(key: "product")
             row["value"] = productTable!.name
             row["show"] = productTable!.name
-            replaceRows("product", row)
+            replaceRowByKey(rowKey: "product", _row: row)
         }
         
         if let nameItem = getFormItemFromKey(NAME_KEY) {
             nameItem.value = Member.instance.name
             nameItem.make()
             
-            
+            var row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
+            row["value"] = Member.instance.name
+            row["show"] = Member.instance.name
+            replaceRowByKey(rowKey: NAME_KEY, _row: row)
         }
         
         if let mobileItem = getFormItemFromKey(MOBILE_KEY) {
             mobileItem.value = Member.instance.mobile
             mobileItem.make()
+            
+            var row = getRowRowsFromMyRowsByKey1(key: MOBILE_KEY)
+            row["value"] = Member.instance.mobile
+            row["show"] = Member.instance.mobile
+            replaceRowByKey(rowKey: MOBILE_KEY, _row: row)
         }
         
         if let emailItem = getFormItemFromKey(EMAIL_KEY) {
             emailItem.value = Member.instance.email
             emailItem.make()
+            
+            var row = getRowRowsFromMyRowsByKey1(key: EMAIL_KEY)
+            row["value"] = Member.instance.email
+            row["show"] = Member.instance.email
+            replaceRowByKey(rowKey: EMAIL_KEY, _row: row)
         }
         
         if let addressItem = getFormItemFromKey(ADDRESS_KEY) {
             addressItem.value = Member.instance.road
             addressItem.make()
+            
+            var row = getRowRowsFromMyRowsByKey1(key: ADDRESS_KEY)
+            row["value"] = Member.instance.road
+            row["show"] = Member.instance.road
+            replaceRowByKey(rowKey: ADDRESS_KEY, _row: row)
         }
+        
+        for attribute in productTable!.attributes {
+            var tmp: String = attribute.attribute
+            tmp = tmp.replace(target: "{", withString: "")
+            tmp = tmp.replace(target: "}", withString: "")
+            tmp = tmp.replace(target: "\"", withString: "")
+            
+            //print(arr)
+            let row = ["title":attribute.name,"key":attribute.alias,"value":"","show":tmp,"cell":"tag"]
+            attributeRows.append(row)
+        }
+        //print(attributeRows)
+        myRows[1]["rows"] = attributeRows
         
         if let numberItem = getFormItemFromKey(NUMBER_KEY) as? NumberFormItem {
             numberItem.min = productTable!.order_min
             numberItem.max = productTable!.order_max
+            
+            var row = getRowRowsFromMyRowsByKey1(key: "quantity")
+            let min: String = String(productTable!.order_min)
+            let max: String = String(productTable!.order_max)
+            row["show"] = "\(min),\(max)"
+            replaceRowByKey(rowKey: "quantity", _row: row)
         }
         
         if let colorItem = getFormItemFromKey(COLOR_KEY) as? Color1FormItem {
@@ -198,50 +251,150 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         if getFormItemFromKey(SHIPPING_FEE_KEY) != nil {
             shippingFee = productTable!.prices[selected_idx].shipping_fee
-            print(shippingFee)
+            //print(shippingFee)
             updateShippingFee()
         }
         tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 45
+    }
+    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 60
+//    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return mySections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if section_keys.count == 0 {
-//            return 0
-//        } else {
-//            return section_keys[section].count
-//        }
-        
         var count: Int = 0
-        if !searchSections[section].isExpanded {
-            count = 0
-        } else {
-            count = searchSections[section].items.count
+        let mySection: [String: Any] = mySections[section]
+        if (mySection.keyExist(key: "isExpanded")) {
+            let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
+            if (isExpanded) {
+                if let key: String = mySection["key"] as? String {
+                    let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+                    count = rows.count
+                }
+            }
         }
         
         return count
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.white
+        headerView.tag = section
+        
+        let titleLabel = UILabel()
+        titleLabel.text = getSectionName(idx: section)
+        titleLabel.textColor = UIColor.black
+        titleLabel.sizeToFit()
+        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
+        headerView.addSubview(titleLabel)
+        
+        let isExpanded = getSectionExpanded(idx: section)
+        let mark = UIImageView(image: UIImage(named: "to_right"))
+        mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
+        toggleMark(mark: mark, isExpanded: isExpanded)
+        headerView.addSubview(mark)
+        
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+        headerView.addGestureRecognizer(gesture)
+        
+        return headerView
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let item = getDefinedRow(indexPath.section, indexPath.row)
-        
-        if let cell: PaymentCell = tableView.dequeueReusableCell(withIdentifier: "payment", for: indexPath) as? PaymentCell {
-            
-            var title: String = ""
-            var content: String = ""
-            if item.keyExist(key: "ch") {
-                title = item["ch"] as! String
-            }
-            if item.keyExist(key: "show") {
-                content = item["show"] as! String
-            }
-            cell.update(title: title, content: content)
-            return cell
+        var rowKey: String = ""
+        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
+        if let tmp: String = row["key"] {
+            rowKey = tmp
         }
+        
+        var sectionKey: String = ""
+        let section: [String: Any] = myRows[indexPath.section]
+        if let tmp: String = section["key"] as? String {
+            sectionKey = tmp
+        }
+        
+        var cell_type: String = "text"
+        if (row.keyExist(key: "cell")) {
+            cell_type = row["cell"]!
+        }
+        
+        var title: String = ""
+        var content: String = ""
+        var alias: String = ""
+        var value: String = ""
+        
+        if (cell_type == "tag") {
+            if let cell: TagCell = tableView.dequeueReusableCell(withIdentifier: "TagCell", for: indexPath) as? TagCell {
+                
+                if row.keyExist(key: "title") {
+                    title = row["title"]!
+                }
+                if row.keyExist(key: "show") {
+                    content = row["show"]!
+                }
+                if row.keyExist(key: "value") {
+                    value = row["value"]!
+                }
+                if row.keyExist(key: "key") {
+                    alias = row["key"]!
+                }
+                
+                cell.baseViewControllerDelegate = self
+                cell.update(alias: alias, title: title, attribute_text: content, value: value, sectionKey: sectionKey)
+                return cell
+            }
+        } else if (cell_type == "number") {
+            if let cell: NumberCell = tableView.dequeueReusableCell(withIdentifier: "NumberCell", for: indexPath) as? NumberCell {
+                
+                if row.keyExist(key: "title") {
+                    title = row["title"]!
+                }
+                var min: Double = -1
+                var max: Double = -1
+                if row.keyExist(key: "show") {
+                    let show: String = row["show"]!
+                    let tmp: [String] = show.components(separatedBy: ",")
+                    if (tmp.count == 2) {
+                        if let tmp1: Double = Double(tmp[0]) {
+                            min = tmp1
+                        }
+                        if let tmp2: Double = Double(tmp[1]) {
+                            max = tmp2
+                        }
+                    }
+                }
+                cell.update(title: title, min: min, max: max)
+                return cell
+            }
+        } else if (cell_type == "text") {
+            if let cell: PaymentCell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath) as? PaymentCell {
+                
+                
+                if row.keyExist(key: "title") {
+                    title = row["title"]!
+                }
+                if row.keyExist(key: "show") {
+                    content = row["show"]!
+                }
+                cell.update(title: title, content: content)
+                return cell
+            }
+        }
+        
+        return UITableViewCell()
+        
         //let name = item?.name
 //        let cell: UITableViewCell
 //        if item != nil {
@@ -265,8 +418,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        } else {
 //            cell = UITableViewCell()
 //        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        return UITableViewCell()
     }
     
     func updateSubTotal() {
@@ -295,6 +450,28 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             priceItem.value = String(total)
             priceItem.make()
             tableView.reloadData()
+        }
+    }
+    
+    //size, XL, true, attribute
+    override func setTag(sectionKey: String, rowKey: String, attribute: String, selected: Bool) {
+//        print(alias)
+//        print(attribute)
+//        print(selected)
+//        print(myRowsKey)
+        
+        let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
+        // [["show": "3XL,2XL,XL,L,M,S,XS", "value": "", "key": "size", "title": "尺寸"]]
+        for row in rows {
+            if (row.keyExist(key: "key")) {
+                let key = row["key"]
+                if (key == rowKey) {
+                    var _row = row
+                    _row["value"] = attribute
+                    replaceRowByKey(sectionKey: sectionKey, rowKey: rowKey, _row: _row)
+                    //print(myRows)
+                }
+            }
         }
     }
     

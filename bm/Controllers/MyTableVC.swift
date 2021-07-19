@@ -420,13 +420,13 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         var indexPaths: [IndexPath] = [IndexPath]()
         
         let key: String = getSectionKey(idx: section)
-        let rows: [[String: String]] = getRowRowsFromMyRowsBykey(key: key)
+        let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
         for (i, _) in rows.enumerated() {
             let indexPath = IndexPath(row: i, section: section)
             indexPaths.append(indexPath)
         }
         
-        let isExpanded = getSectionExpanded(idx: section)
+        var isExpanded = getSectionExpanded(idx: section)
         if (mySections[section].keyExist(key: "isExpanded")) {
             mySections[section]["isExpanded"] = !isExpanded
             //searchSections[section].isExpanded = !isExpanded
@@ -438,6 +438,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
             tableView.insertRows(at: indexPaths, with: .fade)
         }
         
+        isExpanded = !isExpanded
         if mark != nil {
             toggleMark(mark: mark!, isExpanded: isExpanded)
         }
@@ -489,6 +490,154 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         }
         
         return b
+    }
+    
+    //    myRows = [
+    //        ["key":"data", "rows": fixedRows],
+    //        ["key":"order", "rows": orderRows],
+    //        ["key":"like", "rows": likeRows],
+    //        ["key":"manager", "rows": courseRows],
+    //    ]
+        
+    func getSectionRowFromMyRowsByKey(key: String)-> [String: Any] {
+        
+        for row in myRows {
+            if let key1: String = row["key"] as? String {
+                if key == key1 {
+                    return row
+                }
+            }
+        }
+        
+        return [String: Any]()
+    }
+        
+    func getSectionRowFromMyRowsByIdx(idx: Int)-> [String: Any] {
+        
+        return myRows[idx]
+    }
+        
+    //    let fixedRows: [[String: String]] = [
+    //        ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
+    //        ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
+    //    ]
+    func getRowRowsFromMyRowsByKey(key: String)-> [[String: String]] {
+        
+        let sectionRow: [String: Any] = getSectionRowFromMyRowsByKey(key: key)
+        if (sectionRow.keyExist(key: "rows")) {
+            if let tmp: [[String: String]] = sectionRow["rows"] as? [[String: String]] {
+                return tmp
+            }
+        }
+        
+        return [[String: String]]()
+    }
+    
+    func getRowRowsFromMyRowsByKey1(key: String) -> [String : String] {
+        
+        
+        for sectionRow in myRows {
+            if (sectionRow.keyExist(key: "rows")) {
+                let rowRows = sectionRow["rows"] as! [[String: String]]
+                for rowRow in rowRows {
+                    if (rowRow["key"] == key) {
+                        return rowRow
+                    }
+                }
+            }
+        }
+        
+        return [String: String]()
+    }
+    
+    func replaceRowByKey(rowKey: String, _row: [String: String]) {
+        
+//        var tmp: [String: String] = [String: String]()
+//        for (key, value) in _row {
+//            if let _value: String = value as? String {
+//                tmp[key] = _value
+//            }
+//        }
+        
+        //var sectionIdx: Int = -1
+        var sectionKey: String = ""
+        for (idx, row) in myRows.enumerated() {
+            
+            // row is  ["key":"product", "rows": productRows]
+            if (row.keyExist(key: "rows")) {
+                let rows: [[String: String]] = row["rows"] as! [[String: String]]
+                for row1 in rows {
+                    if let key1: String = row1["key"] {
+                        if rowKey == key1 {
+                            //sectionIdx = idx
+                            //找出 section row 的 key
+                            sectionKey = myRows[idx]["key"] as! String
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        
+        replaceRowByKey(sectionKey: sectionKey, rowKey: rowKey, _row: _row)
+        
+//        if (sectionIdx >= 0) {
+//            var rows: [[String: String]]? = myRows[sectionIdx]["rows"] as? [[String: String]]
+//            if (rows != nil) {
+//                for (idx, row) in rows!.enumerated() {
+//                    // row is ["title": "商品","key":"product","value":"","show":""]
+//                    if (row.keyExist(key: "key")) {
+//                        if (row["key"] == rowKey) {
+//                            rows![idx] = tmp
+//                            break
+//                        }
+//                    }
+//                }
+//                myRows[sectionIdx]["rows"] = rows!
+//            }
+//        }
+    }
+    
+    func replaceRowByKey(sectionKey: String, rowKey: String, _row: [String: String]) {
+        
+        var tmpRows: [[String: Any]] = [[String: Any]]()
+        
+        
+        for (sectionIdx, sectionRow) in myRows.enumerated() {
+            
+            tmpRows = sectionRow["rows"] as! [[String: Any]]
+            if let sectionKey1: String = sectionRow["key"] as? String {
+                
+                // 1.用section key找出 section row
+                if (sectionKey1 == sectionKey) {
+                    
+                    if let sectionRows: [[String: Any]] = sectionRow["rows"] as? [[String : Any]] {
+                        for (rowIdx, rowRow) in sectionRows.enumerated() {
+                            
+                            if let rowKey1: String = rowRow["key"] as? String {
+                                
+                                //2.用row key找出 row row
+                                if (rowKey1 == rowKey) {
+                                    tmpRows[rowIdx] = _row
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            myRows[sectionIdx]["rows"] = tmpRows
+        }
+    }
+    
+    //["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
+    func getRowFromIndexPath(indexPath: IndexPath)-> [String: String] {
+        
+        let section: Int = indexPath.section
+        let key: String = getSectionKey(idx: section)
+        let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+        let row: [String: String] = rows[indexPath.row]
+        
+        return row
     }
 }
 

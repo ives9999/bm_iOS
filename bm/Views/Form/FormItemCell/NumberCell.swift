@@ -17,6 +17,14 @@ class NumberCell: FormItemCell {
         stepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
     }
     
+    func update(title: String, min: Double, max: Double) {
+        requiredImageView.isHidden = true
+        titleLbl?.text = title
+        
+        stepper.minimumValue = min
+        stepper.maximumValue = max
+    }
+    
     override func update(with formItem: FormItem) {
         
         let _formItem: NumberFormItem = formItem as! NumberFormItem

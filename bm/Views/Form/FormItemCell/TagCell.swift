@@ -13,19 +13,80 @@ class TagCell: FormItemCell {
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var containViewHeight: NSLayoutConstraint!
     
-    let labelWidth: CGFloat = 50
+    var labelWidth: CGFloat = 50
     let labelHeight: CGFloat = 30
-    let horizonMergin: CGFloat = 8
-    let vericalMergin: CGFloat = 8
-    let column: Int = 3
+    let horizonMergin: CGFloat = 30
+    let vericalMergin: CGFloat = 16
+    var column: Int = 3
     var row: Int = 0
     
     var tagLabels: [Tag] = [Tag]()
     var tagDicts: [[String: String]] = [[String: String]]()
+    
+    var alias: String = ""
+    var sectionKey: String = ""
+    var baseViewControllerDelegate: BaseViewController? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    func update(alias: String, title: String, attribute_text: String, value: String, sectionKey: String, tagWidth: CGFloat = 50, column: Int = 3) {
+        
+        requiredImageView.isHidden = true
+        labelWidth = tagWidth
+        self.sectionKey = sectionKey
+        self.alias = alias
+        self.column = column
+        titleLbl!.text = title
+        
+        let attributes: [String] = attribute_text.components(separatedBy: ",")
+        var count = attributes.count
+        
+        var res = count.quotientAndRemainder(dividingBy: column)
+        row = (res.remainder >= 0) ? res.quotient + 1 : res.quotient
+        
+        count = 0
+        for attribute in attributes {
+            let tag: Tag = Tag()
+            containerView.addSubview(tag)
+            tag.tag = count
+            tag.key = attribute
+            tag.value = attribute
+            tag.text = attribute
+            
+            if (attribute == value) {
+                tag.selected = true
+                tag.setSelectedStyle()
+            }
+            
+//            if let _formItem: TagFormItem = formItem as? TagFormItem {
+//                for idx in _formItem.selected_idxs {
+//                    if count == idx {
+//                        tag.selected = true
+//                        tag.setSelectedStyle()
+//                    }
+//                }
+//            }
+            
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+            tag.addGestureRecognizer(gestureRecognizer)
+            tagLabels.append(tag)
+            
+            //tag.backgroundColor = UIColor.red
+            res = count.quotientAndRemainder(dividingBy: column)
+            //print(res)
+            setMargin(block: tag, row_count: res.quotient + 1, column_count: res.remainder + 1)
+            count = count + 1
+        }
+        
+        var height: CGFloat = 70
+        if count > 0 {
+            let marginCount: Int = (row == 1) ? 2 : row*2-1
+            height = CGFloat(row)*labelHeight + CGFloat(marginCount)*vericalMergin
+        }
+        containViewHeight.constant = height
     }
     
     override func update(with formItem: FormItem) {
@@ -112,9 +173,9 @@ class TagCell: FormItemCell {
     @objc func handleTap(sender: UITapGestureRecognizer) {
         let tag = sender.view as! Tag
         
-        let _formItem: TagFormItem = formItem as! TagFormItem
-        _formItem.selected_idxs = [tag.tag]
-        _formItem.value = tag.value
+//        let _formItem: TagFormItem = formItem as! TagFormItem
+//        _formItem.selected_idxs = [tag.tag]
+//        _formItem.value = tag.value
         
         tag.selected = !tag.selected
         tag.setSelectedStyle()
@@ -123,6 +184,10 @@ class TagCell: FormItemCell {
 //        print(tag.value)
         if valueDelegate != nil {
             valueDelegate!.tagChecked(checked: tag.selected, name: self.formItem!.name!, key: tag.key!, value: tag.value)
+        }
+        
+        if (baseViewControllerDelegate != nil) {
+            baseViewControllerDelegate!.setTag(sectionKey: sectionKey, rowKey: alias, attribute: tag.key!, selected: tag.selected)
         }
     }
     

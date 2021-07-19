@@ -65,6 +65,9 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     //ContentEditDelegate
     func setContent(key: String, content: String) {}
     
+    //for tag delegate
+    func setTag(sectionKey: String, rowKey: String, attribute: String, selected: Bool){}
+    
 //    var wheels: Int = 0
 //    required init() {}
 //    init(wheels: Int) {

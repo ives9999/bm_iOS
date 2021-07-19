@@ -139,96 +139,44 @@ class MemberVC: MyTableVC {
 //        ["name": "喜歡", "isExpanded": false, "key": "like"],
 //        ["name": "管理", "isExpanded": true, "key": "manager"]
 //    ]
-    func getSectionName(idx: Int)-> String {
-        
-        var name: String = ""
-        let row: [String: Any] = mySections[idx]
-        if (row.keyExist(key: "name")) {
-            if let tmp: String = row["name"] as? String {
-                name = tmp
-            }
-        }
-        
-        return name
-    }
-    
-    func getSectionKey(idx: Int)-> String {
-        
-        var key: String = ""
-        let row: [String: Any] = mySections[idx]
-        if (row.keyExist(key: "key")) {
-            if let tmp: String = row["key"] as? String {
-                key = tmp
-            }
-        }
-        
-        return key
-    }
-    
-    func getSectionExpanded(idx: Int)-> Bool {
-        
-        var b: Bool = true
-        let row: [String: Any] = mySections[idx]
-        if (row.keyExist(key: "isExpanded")) {
-            if let tmp: Bool = row["isExpanded"] as? Bool {
-                b = tmp
-            }
-        }
-        
-        return b
-    }
-    
-//    myRows = [
-//        ["key":"data", "rows": fixedRows],
-//        ["key":"order", "rows": orderRows],
-//        ["key":"like", "rows": likeRows],
-//        ["key":"manager", "rows": courseRows],
-//    ]
-    
-    func getSectionRowFromMyRowsByKey(key: String)-> [String: Any] {
-        
-        for row in myRows {
-            if let key1: String = row["key"] as? String {
-                if key == key1 {
-                    return row
-                }
-            }
-        }
-        
-        return [String: Any]()
-    }
-    
-    func getSectionRowFromMyRowsByIdx(idx: Int)-> [String: Any] {
-        
-        return myRows[idx]
-    }
-    
-//    let fixedRows: [[String: String]] = [
-//        ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
-//        ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
-//    ]
-    func getRowRowsFromMyRowsBykey(key: String)-> [[String: String]] {
-        
-        let sectionRow: [String: Any] = getSectionRowFromMyRowsByKey(key: key)
-        if (sectionRow.keyExist(key: "rows")) {
-            if let tmp: [[String: String]] = sectionRow["rows"] as? [[String: String]] {
-                return tmp
-            }
-        }
-        
-        return [[String: String]]()
-    }
-    
-    //["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
-    func getRowFromIndexPath(indexPath: IndexPath)-> [String: String] {
-        
-        let section: Int = indexPath.section
-        let key: String = getSectionKey(idx: section)
-        let rows: [[String: String]] = getRowRowsFromMyRowsBykey(key: key)
-        let row: [String: String] = rows[indexPath.row]
-        
-        return row
-    }
+//    func getSectionName(idx: Int)-> String {
+//
+//        var name: String = ""
+//        let row: [String: Any] = mySections[idx]
+//        if (row.keyExist(key: "name")) {
+//            if let tmp: String = row["name"] as? String {
+//                name = tmp
+//            }
+//        }
+//
+//        return name
+//    }
+//
+//    func getSectionKey(idx: Int)-> String {
+//
+//        var key: String = ""
+//        let row: [String: Any] = mySections[idx]
+//        if (row.keyExist(key: "key")) {
+//            if let tmp: String = row["key"] as? String {
+//                key = tmp
+//            }
+//        }
+//
+//        return key
+//    }
+//
+//    func getSectionExpanded(idx: Int)-> Bool {
+//
+//        var b: Bool = true
+//        let row: [String: Any] = mySections[idx]
+//        if (row.keyExist(key: "isExpanded")) {
+//            if let tmp: Bool = row["isExpanded"] as? Bool {
+//                b = tmp
+//            }
+//        }
+//
+//        return b
+//    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -243,7 +191,7 @@ class MemberVC: MyTableVC {
             let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
             if (isExpanded) {
                 if let key: String = mySection["key"] as? String {
-                    let rows: [[String: String]] = getRowRowsFromMyRowsBykey(key: key)
+                    let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
                     count = rows.count
                 }
             }
