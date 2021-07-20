@@ -67,6 +67,10 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     
     //for tag delegate
     func setTag(sectionKey: String, rowKey: String, attribute: String, selected: Bool){}
+    //for NumberCell delegate
+    func stepperValueChanged(sectionKey: String, rowKey: String, number: Int){}
+    //for TextFieldCell delegate
+    func textFieldDidChange(sectionKey: String, rowKey: String, text: String){}
     
 //    var wheels: Int = 0
 //    required init() {}

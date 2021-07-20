@@ -1275,7 +1275,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yzs-re-9CF">
-                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="704"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Knm-tN-Xyi" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
@@ -1324,7 +1324,7 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="TbQ-f2-XH0" firstAttribute="bottom" secondItem="Knm-tN-Xyi" secondAttribute="bottom" id="6w9-Lb-f8c"/>
-                            <constraint firstItem="TbQ-f2-XH0" firstAttribute="bottom" secondItem="Yzs-re-9CF" secondAttribute="bottom" id="AeZ-7s-Cwi"/>
+                            <constraint firstItem="Knm-tN-Xyi" firstAttribute="top" secondItem="Yzs-re-9CF" secondAttribute="bottom" id="AeZ-7s-Cwi"/>
                             <constraint firstItem="cGv-0m-S7b" firstAttribute="trailing" secondItem="TbQ-f2-XH0" secondAttribute="trailing" id="bWH-Kh-XUy"/>
                             <constraint firstItem="Yzs-re-9CF" firstAttribute="trailing" secondItem="TbQ-f2-XH0" secondAttribute="trailing" id="gya-wd-A5Y"/>
                             <constraint firstItem="cGv-0m-S7b" firstAttribute="top" secondItem="TbQ-f2-XH0" secondAttribute="top" id="iVa-AB-yg4"/>

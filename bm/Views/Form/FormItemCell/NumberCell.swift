@@ -11,16 +11,25 @@ import UIKit
 class NumberCell: FormItemCell {
     
     @IBOutlet weak var stepper: GMStepper!
+    
+    var sectionKey: String = ""
+    var rowKey: String = ""
+    var baseViewControllerDelegate: BaseViewController? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
         stepper.addTarget(self, action: #selector(stepperValueChanged), for: .valueChanged)
     }
     
-    func update(title: String, min: Double, max: Double) {
+    func update(sectionKey: String, rowKey: String, title: String, value: Double, min: Double, max: Double) {
+        
+        self.sectionKey = sectionKey
+        self.rowKey = rowKey
+        
         requiredImageView.isHidden = true
         titleLbl?.text = title
         
+        stepper.value = value
         stepper.minimumValue = min
         stepper.maximumValue = max
     }
@@ -40,7 +49,11 @@ class NumberCell: FormItemCell {
         //print(stepper.value)
         formItem?.value = String(Int(stepper.value))
         if valueDelegate != nil {
-            valueDelegate?.stepperValueChanged(number: Int(stepper.value), name: self.formItem!.name!)
+            valueDelegate!.stepperValueChanged(number: Int(stepper.value), name: self.formItem!.name!)
+        }
+        
+        if (baseViewControllerDelegate != nil) {
+            baseViewControllerDelegate!.stepperValueChanged(sectionKey: sectionKey, rowKey: rowKey, number: Int(stepper.value))
         }
     }
 }

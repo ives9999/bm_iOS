@@ -11,6 +11,10 @@ import UIKit
 class TextFieldCell: FormItemCell {
     
     @IBOutlet weak var textField: SuperTextField!
+    
+    var sectionKey: String = ""
+    var rowKey: String = ""
+    var baseViewControllerDelegate: BaseViewController? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,6 +24,10 @@ class TextFieldCell: FormItemCell {
         let _formItem = formItem as! TextFieldFormItem
         if self.valueDelegate != nil {
             valueDelegate!.textFieldTextChanged(formItem: _formItem, text: textField.text!)
+        }
+        
+        if (baseViewControllerDelegate != nil) {
+            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: textField.text!)
         }
     }
     
@@ -45,6 +53,18 @@ class TextFieldCell: FormItemCell {
 //                popTip.bringSubview(toFront: self.superview!)
 //            }
 //        }
+    }
+    
+    func update(sectionKey: String, rowKey: String, title: String, value: String) {
+        
+        self.sectionKey = sectionKey
+        self.rowKey = rowKey
+        
+        requiredImageView.isHidden = true
+        promptBtn.isHidden = true
+        
+        titleLbl?.text = title
+        textField.text = value
     }
     
     override func update(with formItem: FormItem) {
