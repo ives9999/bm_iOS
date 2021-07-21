@@ -233,6 +233,7 @@ enum STATUS: String {
         return res
     }
 }
+
 enum SEX: String {
     case M = "先生"
     case F = "小姐"
@@ -254,15 +255,19 @@ enum SEX: String {
         ]
     }
 }
+
 enum MEMBER_ROLE: String {
     case member, sale, designer, manager, admin
 }
+
 enum SELECT_TIME_TYPE: Int {
     case play_start, play_end
 }
+
 enum SELECT_DATE_TYPE: Int {
     case start, end
 }
+
 enum TEXT_INPUT_TYPE: String {
     case temp_play = "臨打說明"
     case charge = "收費說明"
@@ -272,6 +277,7 @@ enum TEXT_INPUT_TYPE: String {
     case license = "證照"
     case timetable_coach = "課程說明"
 }
+
 enum DEGREE: String {
     case new = "新手"//新手 是 rawValue
     case soso = "普通"
@@ -592,6 +598,29 @@ enum SHIPPING_PROCESS: String {
     static func getRawValueFromString(_ string: String)-> String {
         let res: SHIPPING_PROCESS = stringToEnum(string)
         return res.rawValue
+    }
+}
+
+enum KEYBOARD: String {
+    
+    case `default` = "default"
+    case emailAddress = "emailAddress"
+    case numberPad = "numberPad"
+    case URL = "URL"
+    
+    static func stringToSwift(_ str: String)-> UIKeyboardType {
+        switch str {
+        case "default":
+            return UIKeyboardType.default
+        case "emailAddress":
+            return UIKeyboardType.emailAddress
+        case "numberPad":
+            return UIKeyboardType.numberPad
+        case "URL":
+            return UIKeyboardType.URL
+        default:
+            return UIKeyboardType.default
+        }
     }
 }
 

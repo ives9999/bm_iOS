@@ -639,6 +639,28 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         
         return row
     }
+    
+    func getRowValue(rowKey: String)-> String {
+        
+        let row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
+        var value: String = ""
+        if let tmp: String = row["value"] {
+            value = tmp
+        }
+        
+        return value
+    }
+    
+    func getRowShow(rowKey: String)-> String {
+        
+        let row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
+        var show: String = ""
+        if let tmp: String = row["show"] {
+            show = tmp
+        }
+        
+        return show
+    }
 }
 
 extension MyTableVC: UITableViewDataSource {

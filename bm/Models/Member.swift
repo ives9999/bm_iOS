@@ -144,6 +144,14 @@ class Member {
             session.set(ZIP_KEY, newValue)
         }
     }
+    var address: String {
+        get {
+            return session.getString(ADDRESS_KEY)
+        }
+        set {
+            session.set(ADDRESS_KEY, newValue)
+        }
+    }
     var pid: String {
         get {
             return session.getString(PID_KEY)
@@ -363,6 +371,7 @@ class Member {
         if let val: Int = data[ZIP_KEY] as? Int {
             self.zip = val
         }
+
         if let val: String = data[FB_KEY] as? String {
             self.fb = val
         }
@@ -400,6 +409,11 @@ class Member {
         }
         let val: Int = self.type & TEAM_TYPE
         self.isTeamManager = val > 0 ? true : false
+        
+        let city_name: String = Global.instance.zoneIDToName(self.city)
+        let area_name: String = Global.instance.zoneIDToName(self.area)
+        let address: String = "\(city_name)\(area_name)\(self.zip)\(self.road)"
+        self.address = address
     }
     
     func getData(key: String) -> Any {
@@ -433,6 +447,8 @@ class Member {
             return self.road
         } else if key == ZIP_KEY {
             return self.zip
+        } else if key == ADDRESS_KEY {
+            return self.address
         } else if key == FB_KEY {
             return self.fb
         } else if key == LINE_KEY {

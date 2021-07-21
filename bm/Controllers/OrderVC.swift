@@ -27,23 +27,23 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     let heightForSection: CGFloat = 34
     
     let productRows: [[String: String]] = [
-        ["title": "商品","key":"product","value":"","show":"","cell":"text"]
+        ["title": "商品","key":PRODUCT_KEY,"value":"","show":"","cell":"text"]
     ]
     
     var attributeRows: [[String: String]] = [[String: String]]()
     
     let amountRows: [[String: String]] = [
-        ["title":"數量","key":"quantity","value":"","show":"","cell":"number"],
+        ["title":"數量","key":QUANTITY_KEY,"value":"","show":"","cell":"number"],
         ["title":"小計","key":SUBTOTAL_KEY,"value":"","show":"","cell":"text"],
         ["title":"運費","key":SHIPPING_FEE_KEY,"value":"","show":"","cell":"text"],
         ["title":"總計","key":TOTAL_KEY,"value":"","show":"","cell":"text"]
     ]
     
     let contactRows: [[String: String]] = [
-        ["title":"姓名","key":NAME_KEY,"value":"","show":"","cell":"textField"],
-        ["title":"行動電話","key":MOBILE_KEY,"value":"","show":"","cell":"text"],
-        ["title":"EMail","key":EMAIL_KEY,"value":"","show":"","cell":"text"],
-        ["title":"住址","key":ADDRESS_KEY,"value":"","show":"","cell":"text"]
+        ["title":"姓名","key":NAME_KEY,"value":"","show":"","cell":"textField","keyboard":KEYBOARD.default.rawValue],
+        ["title":"行動電話","key":MOBILE_KEY,"value":"","show":"","cell":"textField","keyboard":KEYBOARD.numberPad.rawValue],
+        ["title":"EMail","key":EMAIL_KEY,"value":"","show":"","cell":"textField","keyboard":KEYBOARD.emailAddress.rawValue],
+        ["title":"住址","key":ADDRESS_KEY,"value":"","show":"","cell":"textField","keyboard":KEYBOARD.default.rawValue]
     ]
     
     override func viewDidLoad() {
@@ -53,17 +53,17 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         //mySections = ["商品名稱", "商品選項", "款項", "寄件資料"]
         
         mySections = [
-            ["name": "商品名稱", "isExpanded": true, "key": "product"],
-            ["name": "商品選項", "isExpanded": true, "key": "attribute"],
-            ["name": "款項", "isExpanded": true, "key": "amount"],
-            ["name": "寄件資料", "isExpanded": true, "key": "contact"]
+            ["name": "商品名稱", "isExpanded": true, "key": PRODUCT_KEY],
+            ["name": "商品選項", "isExpanded": true, "key": ATTRIBUTE_KEY],
+            ["name": "款項", "isExpanded": true, "key": AMOUNT_KEY],
+            ["name": "寄件資料", "isExpanded": true, "key": CONTACT_KEY]
         ]
         
         myRows = [
-            ["key":"product", "rows": productRows],
-            ["key":"attribute", "rows": attributeRows],
-            ["key":"amount", "rows": amountRows],
-            ["key":"contact", "rows": contactRows],
+            ["key":PRODUCT_KEY, "rows": productRows],
+            ["key":ATTRIBUTE_KEY, "rows": attributeRows],
+            ["key":AMOUNT_KEY, "rows": amountRows],
+            ["key":CONTACT_KEY, "rows": contactRows],
         ]
 
         super.viewDidLoad()
@@ -76,7 +76,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         tableView.estimatedRowHeight = 44
         tableView.rowHeight = UITableView.automaticDimension
         
-        FormItemCellType.registerCell(for: tableView)
+        //FormItemCellType.registerCell(for: tableView)
         
         let textNib = UINib(nibName: "PaymentCell", bundle: nil)
         tableView.register(textNib, forCellReuseIdentifier: "TextCell")
@@ -112,61 +112,36 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     func initData() {
         
-        form = OrderForm(type: self.productTable!.type)
-        section_keys = form.getSectionKeys()
-        sections = form.getSections()
+//        form = OrderForm(type: self.productTable!.type)
+//        section_keys = form.getSectionKeys()
+//        sections = form.getSections()
         
         titleLbl.text = productTable!.name
         
-        if let productNameItem = getFormItemFromKey("Product_Name") {
-            productNameItem.value = productTable!.name
-            productNameItem.make()
-            
-            var row = getRowRowsFromMyRowsByKey1(key: "product")
-            row["value"] = productTable!.name
-            row["show"] = productTable!.name
-            replaceRowByKey(rowKey: "product", _row: row)
-        }
+        var row = getRowRowsFromMyRowsByKey1(key: PRODUCT_KEY)
+        row["value"] = productTable!.name
+        row["show"] = productTable!.name
+        replaceRowByKey(rowKey: PRODUCT_KEY, _row: row)
         
-        if let nameItem = getFormItemFromKey(NAME_KEY) {
-            nameItem.value = Member.instance.name
-            nameItem.make()
-            
-            var row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
-            row["value"] = Member.instance.name
-            row["show"] = Member.instance.name
-            replaceRowByKey(rowKey: NAME_KEY, _row: row)
-        }
+        row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
+        row["value"] = Member.instance.name
+        row["show"] = Member.instance.name
+        replaceRowByKey(rowKey: NAME_KEY, _row: row)
         
-        if let mobileItem = getFormItemFromKey(MOBILE_KEY) {
-            mobileItem.value = Member.instance.mobile
-            mobileItem.make()
-            
-            var row = getRowRowsFromMyRowsByKey1(key: MOBILE_KEY)
-            row["value"] = Member.instance.mobile
-            row["show"] = Member.instance.mobile
-            replaceRowByKey(rowKey: MOBILE_KEY, _row: row)
-        }
+        row = getRowRowsFromMyRowsByKey1(key: MOBILE_KEY)
+        row["value"] = Member.instance.mobile
+        row["show"] = Member.instance.mobile
+        replaceRowByKey(rowKey: MOBILE_KEY, _row: row)
         
-        if let emailItem = getFormItemFromKey(EMAIL_KEY) {
-            emailItem.value = Member.instance.email
-            emailItem.make()
-            
-            var row = getRowRowsFromMyRowsByKey1(key: EMAIL_KEY)
-            row["value"] = Member.instance.email
-            row["show"] = Member.instance.email
-            replaceRowByKey(rowKey: EMAIL_KEY, _row: row)
-        }
+        row = getRowRowsFromMyRowsByKey1(key: EMAIL_KEY)
+        row["value"] = Member.instance.email
+        row["show"] = Member.instance.email
+        replaceRowByKey(rowKey: EMAIL_KEY, _row: row)
         
-        if let addressItem = getFormItemFromKey(ADDRESS_KEY) {
-            addressItem.value = Member.instance.road
-            addressItem.make()
-            
-            var row = getRowRowsFromMyRowsByKey1(key: ADDRESS_KEY)
-            row["value"] = Member.instance.road
-            row["show"] = Member.instance.road
-            replaceRowByKey(rowKey: ADDRESS_KEY, _row: row)
-        }
+        row = getRowRowsFromMyRowsByKey1(key: ADDRESS_KEY)
+        row["value"] = Member.instance.address
+        row["show"] = Member.instance.address
+        replaceRowByKey(rowKey: ADDRESS_KEY, _row: row)
         
         for attribute in productTable!.attributes {
             var tmp: String = attribute.attribute
@@ -181,17 +156,50 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         //print(attributeRows)
         myRows[1]["rows"] = attributeRows
         
-        if let numberItem = getFormItemFromKey(NUMBER_KEY) as? NumberFormItem {
-            numberItem.min = productTable!.order_min
-            numberItem.max = productTable!.order_max
-            
-            var row = getRowRowsFromMyRowsByKey1(key: "quantity")
-            let min: String = String(productTable!.order_min)
-            let max: String = String(productTable!.order_max)
-            row["show"] = "\(min),\(max)"
-            row["value"] = "1"
-            replaceRowByKey(rowKey: "quantity", _row: row)
-        }
+        row = getRowRowsFromMyRowsByKey1(key: QUANTITY_KEY)
+        let min: String = String(productTable!.order_min)
+        let max: String = String(productTable!.order_max)
+        row["show"] = "\(min),\(max)"
+        row["value"] = "1"
+        replaceRowByKey(rowKey: QUANTITY_KEY, _row: row)
+        
+        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_FEE_KEY)
+        row["value"] = String(productTable!.prices[selected_idx].shipping_fee)
+        row["show"] = "NT$ " + String(productTable!.prices[selected_idx].shipping_fee) + "元"
+        replaceRowByKey(rowKey: SHIPPING_FEE_KEY, _row: row)
+        
+        selected_price = productTable!.prices[selected_idx].price_member
+        updateSubTotal()
+        
+//        if let productNameItem = getFormItemFromKey("Product_Name") {
+//            productNameItem.value = productTable!.name
+//            productNameItem.make()
+//        }
+//
+//        if let nameItem = getFormItemFromKey(NAME_KEY) {
+//            nameItem.value = Member.instance.name
+//            nameItem.make()
+//        }
+//
+//        if let mobileItem = getFormItemFromKey(MOBILE_KEY) {
+//            mobileItem.value = Member.instance.mobile
+//            mobileItem.make()
+//        }
+//
+//        if let emailItem = getFormItemFromKey(EMAIL_KEY) {
+//            emailItem.value = Member.instance.email
+//            emailItem.make()
+//        }
+//
+//        if let addressItem = getFormItemFromKey(ADDRESS_KEY) {
+//            addressItem.value = Member.instance.road
+//            addressItem.make()
+//        }
+//
+//        if let numberItem = getFormItemFromKey(NUMBER_KEY) as? NumberFormItem {
+//            numberItem.min = productTable!.order_min
+//            numberItem.max = productTable!.order_max
+//        }
         
 //        if let colorItem = getFormItemFromKey(COLOR_KEY) as? Color1FormItem {
 //            var res: [[String: String]] = [[String: String]]()
@@ -244,32 +252,21 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             }
         }
         
-        if getFormItemFromKey(NUMBER_KEY) != nil {
-            selected_number = productTable!.order_min
-        }
-        
-        if getFormItemFromKey(SHIPPING_FEE_KEY) != nil {
-            shippingFee = productTable!.prices[selected_idx].shipping_fee
-            //print(shippingFee)
-            
-            var row = getRowRowsFromMyRowsByKey1(key: SHIPPING_FEE_KEY)
-            row["value"] = String(productTable!.prices[selected_idx].shipping_fee)
-            row["show"] = "NT$ " + String(productTable!.prices[selected_idx].shipping_fee) + "元"
-            replaceRowByKey(rowKey: SHIPPING_FEE_KEY, _row: row)
-            
-            //updateShippingFee()
-        }
-        
-        if getFormItemFromKey(SUBTOTAL_KEY) != nil {
-            selected_price = productTable!.prices[selected_idx].price_member
-            
-//            var row = getRowRowsFromMyRowsByKey1(key: SUBTOTAL_KEY)
-//            row["value"] = String(productTable!.prices[selected_idx].price_member)
-//            row["show"] = "NT$ " + String(productTable!.prices[selected_idx].price_member) + "元"
-//            replaceRowByKey(rowKey: SUBTOTAL_KEY, _row: row)
-            
-            updateSubTotal()
-        }
+//        if getFormItemFromKey(NUMBER_KEY) != nil {
+//            selected_number = productTable!.order_min
+//        }
+//
+//        if getFormItemFromKey(SHIPPING_FEE_KEY) != nil {
+//            shippingFee = productTable!.prices[selected_idx].shipping_fee
+//            //print(shippingFee)
+//            //updateShippingFee()
+//        }
+//
+//        if getFormItemFromKey(SUBTOTAL_KEY) != nil {
+//            selected_price = productTable!.prices[selected_idx].price_member
+//
+//            updateSubTotal()
+//        }
         
         tableView.reloadData()
     }
@@ -409,7 +406,14 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         } else if (cell_type == "textField") {
             if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell {
                 
-                cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value)
+                var keyboard: String = "default"
+                if row.keyExist(key: "keyboard") {
+                    let tmp: String = row["keyboard"]!
+                    keyboard = tmp
+                }
+                
+                cell.baseViewControllerDelegate = self
+                cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, keyboard: keyboard)
                 return cell
             }
         }
@@ -441,9 +445,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
     
     func updateSubTotal() {
         
@@ -543,50 +545,61 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     override func textFieldDidChange(sectionKey: String, rowKey: String, text: String) {
         
-    }
-    
-    func tagChecked(checked: Bool, name: String, key: String, value: String) {
-//        print(checked)
-//        print(key)
-//        print(value)
-        //let item = getFormItemFromKey(name)
-        if name == "type" {
-            let id: Int = Int(key)!
-            //print(id)
-            var idx: Int = 0
-            for price in productTable!.prices {
-                if price.id == id {
-                    selected_price = price.price_member
-                    self.selected_idx = idx
-                    updateSubTotal()
-                    break
+        let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
+        for row in rows {
+            if (row.keyExist(key: "key")) {
+                let key = row["key"]
+                if (key == rowKey) {
+                    var _row = row
+                    _row["value"] = text
+                    _row["show"] = text
+                    replaceRowByKey(sectionKey: sectionKey, rowKey: rowKey, _row: _row)
+                    //print(myRows)
                 }
-                idx = idx + 1
             }
         }
-        
-        //move to cell to implement
-        //item?.value = value
     }
     
-    func stepperValueChanged(number: Int, name: String) {
-        //move to cell to implement
-//        let item = getFormItemFromKey(name)
-//        item?.value = String(number)
-//        var idx: Int = 0
+//    func tagChecked(checked: Bool, name: String, key: String, value: String) {
 //
-//        if let _formItem: TagFormItem = getFormItemFromKey("type") as? TagFormItem {
-//            idx = _formItem.selected_idxs[0]
+//        if name == "type" {
+//            let id: Int = Int(key)!
+//            //print(id)
+//            var idx: Int = 0
+//            for price in productTable!.prices {
+//                if price.id == id {
+//                    selected_price = price.price_member
+//                    self.selected_idx = idx
+//                    updateSubTotal()
+//                    break
+//                }
+//                idx = idx + 1
+//            }
 //        }
-        
-        selected_number = number
-        updateSubTotal()
-        
-        //let price: Int = number * Int(superProduct.prices.price_dummy)
-        //updateSubTotal(price: price)
-    }
+//
+//        //move to cell to implement
+//        //item?.value = value
+//    }
+//
+//    func stepperValueChanged(number: Int, name: String) {
+//        //move to cell to implement
+////        let item = getFormItemFromKey(name)
+////        item?.value = String(number)
+////        var idx: Int = 0
+////
+////        if let _formItem: TagFormItem = getFormItemFromKey("type") as? TagFormItem {
+////            idx = _formItem.selected_idxs[0]
+////        }
+//
+//        selected_number = number
+//        updateSubTotal()
+//
+//        //let price: Int = number * Int(superProduct.prices.price_dummy)
+//        //updateSubTotal(price: price)
+//    }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
+        
         Global.instance.addSpinner(superView: self.view)
         var params: [String: String] = [String: String]()
         
@@ -596,40 +609,44 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["price_id"] = String(productTable!.prices[selected_idx].id)
         
         params["member_id"] = String(Member.instance.id)
-        params["order_name"] = Member.instance.name
-        params["order_tel"] = Member.instance.mobile
-        params["order_email"] = Member.instance.email
+        
+        params["order_name"] = getRowValue(rowKey: NAME_KEY)
+        params["order_tel"] = getRowValue(rowKey: MOBILE_KEY)
+        params["order_email"] = getRowValue(rowKey: EMAIL_KEY)
         params["gateway"] = "credit_card"
         
-        let city_name = Global.instance.zoneIDToName(Member.instance.city)
-        let area_name = Global.instance.zoneIDToName(Member.instance.area)
-        params["order_city"] = city_name
-        params["order_area"] = area_name
-        params["order_road"] = Member.instance.road
+        //let city_name = Global.instance.zoneIDToName(Member.instance.city)
+        //let area_name = Global.instance.zoneIDToName(Member.instance.area)
+        //params["order_city"] = city_name
+        //params["order_area"] = area_name
+        //params["order_road"] = Member.instance.road
         
-        let numberFormItem = getFormItemFromKey(NUMBER_KEY)
-        params["quantity"] = numberFormItem?.value
+        //let numberFormItem = getFormItemFromKey(NUMBER_KEY)
+        //params[QUANTITY_KEY] = numberFormItem?.value
+        params[QUANTITY_KEY] = getRowValue(rowKey: QUANTITY_KEY)
         
-        let totalFormItem = getFormItemFromKey(TOTAL_KEY)
-        params["amount"] = totalFormItem?.value
+//        let totalFormItem = getFormItemFromKey(TOTAL_KEY)
+//        params["amount"] = totalFormItem?.value
+        params[AMOUNT_KEY] = getRowValue(rowKey: TOTAL_KEY)
         
-        let shippingFeeFormItem = getFormItemFromKey(SHIPPING_FEE_KEY)
-        if (shippingFeeFormItem != nil) {
-            params["shipping_fee"] = shippingFeeFormItem?.value
-        }
+//        let shippingFeeFormItem = getFormItemFromKey(SHIPPING_FEE_KEY)
+//        if (shippingFeeFormItem != nil) {
+//            params["shipping_fee"] = shippingFeeFormItem?.value
+//        }
+        params[SHIPPING_FEE_KEY] = getRowValue(rowKey: SHIPPING_FEE_KEY)
         
-        if let item = getFormItemFromKey(COLOR_KEY) {
-            params["color"] = item.value
-        }
-        
-        if let item = getFormItemFromKey(CLOTHES_SIZE_KEY) {
-            params["size"] = item.value
-        }
-        
-        if let item = getFormItemFromKey(WEIGHT_KEY) {
-            params["weight"] = item.value
-        }
-        //print(params)
+//        if let item = getFormItemFromKey(COLOR_KEY) {
+//            params["color"] = item.value
+//        }
+//
+//        if let item = getFormItemFromKey(CLOTHES_SIZE_KEY) {
+//            params["size"] = item.value
+//        }
+//
+//        if let item = getFormItemFromKey(WEIGHT_KEY) {
+//            params["weight"] = item.value
+//        }
+        print(params)
         
         //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
         

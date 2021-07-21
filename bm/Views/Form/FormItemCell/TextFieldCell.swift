@@ -20,42 +20,7 @@ class TextFieldCell: FormItemCell {
         super.awakeFromNib()
     }
     
-    @IBAction func textFieldDidChange(_ textField: UITextField) {
-        let _formItem = formItem as! TextFieldFormItem
-        if self.valueDelegate != nil {
-            valueDelegate!.textFieldTextChanged(formItem: _formItem, text: textField.text!)
-        }
-        
-        if (baseViewControllerDelegate != nil) {
-            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: textField.text!)
-        }
-    }
-    
-    @IBAction func clearBtnPressed(_ sender: Any) {
-        textField.text = ""
-        let _formItem = formItem as! TextFieldFormItem
-        _formItem.reset()
-    }
-    
-    @IBAction func promptBtnPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "提示", message: (formItem?.tooltip)!, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: { (action) in
-            
-        }))
-        self.parentViewController?.present(alert, animated: true, completion: nil)
-        
-//        if popTip.isVisible {
-//            popTip.hide()
-//        } else {
-//            if formItem?.tooltip != nil {
-//                let here = CGRect(x: 100, y: 100, width: 100, height: 30)
-//                popTip.show(text: (formItem?.tooltip)!, direction: .left, maxWidth: 200, in: titleLbl, from: here)
-//                popTip.bringSubview(toFront: self.superview!)
-//            }
-//        }
-    }
-    
-    func update(sectionKey: String, rowKey: String, title: String, value: String) {
+    func update(sectionKey: String, rowKey: String, title: String, value: String, keyboard: String="default") {
         
         self.sectionKey = sectionKey
         self.rowKey = rowKey
@@ -65,6 +30,7 @@ class TextFieldCell: FormItemCell {
         
         titleLbl?.text = title
         textField.text = value
+        textField.keyboardType = KEYBOARD.stringToSwift(keyboard)
     }
     
     override func update(with formItem: FormItem) {
@@ -84,5 +50,46 @@ class TextFieldCell: FormItemCell {
         requiredImageView.isHidden = !_formItem.isRequired
         
         self.formItem = formItem
+    }
+    
+    @IBAction func textFieldDidChange(_ textField: UITextField) {
+        if let _formItem = formItem as? TextFieldFormItem {
+            if self.valueDelegate != nil {
+                valueDelegate!.textFieldTextChanged(formItem: _formItem, text: textField.text!)
+            }
+        }
+        
+        if (baseViewControllerDelegate != nil) {
+            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: textField.text!)
+        }
+    }
+    
+    @IBAction func clearBtnPressed(_ sender: Any) {
+        textField.text = ""
+        if let _formItem = formItem as? TextFieldFormItem {
+            _formItem.reset()
+        }
+        
+        if (baseViewControllerDelegate != nil) {
+            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: "")
+        }
+    }
+    
+    @IBAction func promptBtnPressed(_ sender: Any) {
+        let alert = UIAlertController(title: "提示", message: (formItem?.tooltip)!, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: { (action) in
+            
+        }))
+        self.parentViewController?.present(alert, animated: true, completion: nil)
+        
+//        if popTip.isVisible {
+//            popTip.hide()
+//        } else {
+//            if formItem?.tooltip != nil {
+//                let here = CGRect(x: 100, y: 100, width: 100, height: 30)
+//                popTip.show(text: (formItem?.tooltip)!, direction: .left, maxWidth: 200, in: titleLbl, from: here)
+//                popTip.bringSubview(toFront: self.superview!)
+//            }
+//        }
     }
 }

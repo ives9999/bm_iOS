@@ -397,6 +397,7 @@ class MemberService: DataService {
             let tmp = json[key].boolValue
             data[key] = tmp
         }
+        
         data[ISLOGGEDIN_KEY] = true
         //print(data)
         Member.instance.setData(data: data)
