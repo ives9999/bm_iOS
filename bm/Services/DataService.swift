@@ -742,6 +742,65 @@ class DataService {
         }
     }
     
+    func update(token: String = "", params: [String: String], completion: @escaping CompletionHandler) {
+        
+        var url: String = URL_ORDER
+        if token.count > 0 {
+            url = String(format: URL_ORDER, "/"+token)
+        }
+        //print(url)
+        //print(params)
+        
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+            
+            
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                //print(data)
+//                self.msg = ""
+//                let json: JSON = JSON(data)
+//                //print(json)
+//                self.success = json["success"].boolValue
+//                //print(self.success)
+//                if self.success {
+////                    self.ecpay_token = json["token"].stringValue
+////                    self.tokenExpireDate = json["tokenExpireDate"].stringValue
+////                    self.order_token = json["order_token"].stringValue
+//                    completion(true)
+//                } else {
+//                    self.msg = json["msg"].stringValue
+//                    completion(false)
+//                }
+//            } else {
+//                //print(response.result.error)
+//                self.msg = "網路或伺服器錯誤，請聯絡管理員或請稍後再試"
+//                completion(false)
+//            }
+        }
+    }
+    
     func update(type: String, params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
         
         let url: String = String(format: URL_UPDATE, type)

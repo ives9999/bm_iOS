@@ -35,7 +35,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     let amountRows: [[String: String]] = [
         ["title":"數量","key":QUANTITY_KEY,"value":"","show":"","cell":"number"],
         ["title":"小計","key":SUBTOTAL_KEY,"value":"","show":"","cell":"text"],
-        ["title":"運費","key":SHIPPING_FEE_KEY,"value":"","show":"","cell":"text"],
+        //["title":"運費","key":SHIPPING_FEE_KEY,"value":"","show":"","cell":"text"],
         ["title":"總計","key":TOTAL_KEY,"value":"","show":"","cell":"text"]
     ]
     
@@ -55,15 +55,15 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         mySections = [
             ["name": "商品名稱", "isExpanded": true, "key": PRODUCT_KEY],
             ["name": "商品選項", "isExpanded": true, "key": ATTRIBUTE_KEY],
-            ["name": "款項", "isExpanded": true, "key": AMOUNT_KEY],
-            ["name": "寄件資料", "isExpanded": true, "key": CONTACT_KEY]
+            ["name": "款項", "isExpanded": true, "key": AMOUNT_KEY]
+            //["name": "寄件資料", "isExpanded": true, "key": CONTACT_KEY]
         ]
         
         myRows = [
             ["key":PRODUCT_KEY, "rows": productRows],
             ["key":ATTRIBUTE_KEY, "rows": attributeRows],
-            ["key":AMOUNT_KEY, "rows": amountRows],
-            ["key":CONTACT_KEY, "rows": contactRows],
+            ["key":AMOUNT_KEY, "rows": amountRows]
+            //["key":CONTACT_KEY, "rows": contactRows],
         ]
 
         super.viewDidLoad()
@@ -89,6 +89,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
         tableView.register(textFieldNib, forCellReuseIdentifier: "TextFieldCell")
+        
+        submitButton.setTitle("加入購物車")
         
         refresh()
     }
@@ -123,25 +125,25 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         row["show"] = productTable!.name
         replaceRowByKey(rowKey: PRODUCT_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
-        row["value"] = Member.instance.name
-        row["show"] = Member.instance.name
-        replaceRowByKey(rowKey: NAME_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
+//        row["value"] = Member.instance.name
+//        row["show"] = Member.instance.name
+//        replaceRowByKey(rowKey: NAME_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: MOBILE_KEY)
-        row["value"] = Member.instance.mobile
-        row["show"] = Member.instance.mobile
-        replaceRowByKey(rowKey: MOBILE_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: MOBILE_KEY)
+//        row["value"] = Member.instance.mobile
+//        row["show"] = Member.instance.mobile
+//        replaceRowByKey(rowKey: MOBILE_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: EMAIL_KEY)
-        row["value"] = Member.instance.email
-        row["show"] = Member.instance.email
-        replaceRowByKey(rowKey: EMAIL_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: EMAIL_KEY)
+//        row["value"] = Member.instance.email
+//        row["show"] = Member.instance.email
+//        replaceRowByKey(rowKey: EMAIL_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: ADDRESS_KEY)
-        row["value"] = Member.instance.address
-        row["show"] = Member.instance.address
-        replaceRowByKey(rowKey: ADDRESS_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: ADDRESS_KEY)
+//        row["value"] = Member.instance.address
+//        row["show"] = Member.instance.address
+//        replaceRowByKey(rowKey: ADDRESS_KEY, _row: row)
         
         for attribute in productTable!.attributes {
             var tmp: String = attribute.attribute
@@ -163,10 +165,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         row["value"] = "1"
         replaceRowByKey(rowKey: QUANTITY_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_FEE_KEY)
-        row["value"] = String(productTable!.prices[selected_idx].shipping_fee)
-        row["show"] = "NT$ " + String(productTable!.prices[selected_idx].shipping_fee) + "元"
-        replaceRowByKey(rowKey: SHIPPING_FEE_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_FEE_KEY)
+//        row["value"] = String(productTable!.prices[selected_idx].shipping_fee)
+//        row["show"] = "NT$ " + String(productTable!.prices[selected_idx].shipping_fee) + "元"
+//        replaceRowByKey(rowKey: SHIPPING_FEE_KEY, _row: row)
         
         selected_price = productTable!.prices[selected_idx].price_member
         updateSubTotal()
@@ -461,8 +463,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //
 //        }
         
-        //updateTotal()
-        updateShippingFee()
+        updateTotal()
+        //放入購物車，還不用計算運費
+        //updateShippingFee()
     }
     
     func updateShippingFee() {
@@ -605,15 +608,15 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         params["device"] = "app"
         params["product_id"] = String(productTable!.id)
-        params["type"] = productTable!.type
+        //params["type"] = productTable!.type
         params["price_id"] = String(productTable!.prices[selected_idx].id)
         
         params["member_id"] = String(Member.instance.id)
         
-        params["order_name"] = getRowValue(rowKey: NAME_KEY)
-        params["order_tel"] = getRowValue(rowKey: MOBILE_KEY)
-        params["order_email"] = getRowValue(rowKey: EMAIL_KEY)
-        params["gateway"] = "credit_card"
+//        params["order_name"] = getRowValue(rowKey: NAME_KEY)
+//        params["order_tel"] = getRowValue(rowKey: MOBILE_KEY)
+//        params["order_email"] = getRowValue(rowKey: EMAIL_KEY)
+//        params["gateway"] = "credit_card"
         
         //let city_name = Global.instance.zoneIDToName(Member.instance.city)
         //let area_name = Global.instance.zoneIDToName(Member.instance.area)
@@ -629,11 +632,32 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        params["amount"] = totalFormItem?.value
         params[AMOUNT_KEY] = getRowValue(rowKey: TOTAL_KEY)
         
+        var selected_attributes: [String] = [String]()
+        let attributes: [[String: String]] = myRows[1]["rows"] as! [[String: String]]
+        for attribute in attributes {
+            
+            var value: String = ""
+            var alias: String = ""
+            var name: String = ""
+            if let tmp: String = attribute["value"] {
+                value = tmp
+            }
+            if let tmp: String = attribute["key"] {
+                alias = tmp
+            }
+            if let tmp: String = attribute["title"] {
+                name = tmp
+            }
+            value = "{name:\(name),alias:\(alias),value:\(value)}"
+            selected_attributes.append(value)
+        }
+        params["attribute"] = selected_attributes.joined(separator: ",")
+        
 //        let shippingFeeFormItem = getFormItemFromKey(SHIPPING_FEE_KEY)
 //        if (shippingFeeFormItem != nil) {
 //            params["shipping_fee"] = shippingFeeFormItem?.value
 //        }
-        params[SHIPPING_FEE_KEY] = getRowValue(rowKey: SHIPPING_FEE_KEY)
+        //params[SHIPPING_FEE_KEY] = getRowValue(rowKey: SHIPPING_FEE_KEY)
         
 //        if let item = getFormItemFromKey(COLOR_KEY) {
 //            params["color"] = item.value
@@ -650,21 +674,21 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
         
-        OrderService.instance.update(params: params) { (success) in
+        CartService.instance.update(params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                let order_token: String = OrderService.instance.order_token
+                //let order_token: String = CartService.instance.order_token
                 if self.total > 0 {
-                    let ecpay_token: String = OrderService.instance.ecpay_token
-                    let tokenExpireDate: String = OrderService.instance.tokenExpireDate
-                    self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
-                        //print("aaa")
-                        self.toPayment(order_token: order_token, ecpay_token: ecpay_token, tokenExpireDate: tokenExpireDate)
-                    }
+//                    let ecpay_token: String = CartService.instance.ecpay_token
+//                    let tokenExpireDate: String = CartService.instance.tokenExpireDate
+//                    self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
+//                        //print("aaa")
+//                        self.toPayment(order_token: order_token, ecpay_token: ecpay_token, tokenExpireDate: tokenExpireDate)
+//                    }
                 } else {
-                    self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
-                        self.toPayment(order_token: order_token)
-                    }
+//                    self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
+//                        self.toPayment(order_token: order_token)
+//                    }
                 }
             } else {
                 self.warning(OrderService.instance.msg)

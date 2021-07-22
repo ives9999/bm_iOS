@@ -642,7 +642,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
     
     func getRowValue(rowKey: String)-> String {
         
-        let row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
+        let row = getRowRowsFromMyRowsByKey1(key: rowKey)
         var value: String = ""
         if let tmp: String = row["value"] {
             value = tmp
@@ -653,7 +653,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
     
     func getRowShow(rowKey: String)-> String {
         
-        let row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
+        let row = getRowRowsFromMyRowsByKey1(key: rowKey)
         var show: String = ""
         if let tmp: String = row["show"] {
             show = tmp
