@@ -607,6 +607,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         var params: [String: String] = [String: String]()
         
         params["device"] = "app"
+        params["do"] = "update"
+        params["member_token"] = Member.instance.token
         params["product_id"] = String(productTable!.id)
         //params["type"] = productTable!.type
         params["price_id"] = String(productTable!.prices[selected_idx].id)
@@ -678,18 +680,18 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             Global.instance.removeSpinner(superView: self.view)
             if success {
                 //let order_token: String = CartService.instance.order_token
-                if self.total > 0 {
+//                if self.total > 0 {
 //                    let ecpay_token: String = CartService.instance.ecpay_token
 //                    let tokenExpireDate: String = CartService.instance.tokenExpireDate
 //                    self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
 //                        //print("aaa")
 //                        self.toPayment(order_token: order_token, ecpay_token: ecpay_token, tokenExpireDate: tokenExpireDate)
 //                    }
-                } else {
+//                } else {
 //                    self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
 //                        self.toPayment(order_token: order_token)
 //                    }
-                }
+//                }
             } else {
                 self.warning(OrderService.instance.msg)
             }

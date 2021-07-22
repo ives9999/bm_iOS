@@ -20,6 +20,11 @@ class OrderService: DataService {
     override func getListURL() -> String {
         return URL_ORDER_LIST
     }
+    
+    override func getUpdateURL()-> String {
+        return URL_ORDER_UPDATE
+    }
+    
     override func getSource() -> String? {
         return "order"
     }

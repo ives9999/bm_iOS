@@ -744,12 +744,12 @@ class DataService {
     
     func update(token: String = "", params: [String: String], completion: @escaping CompletionHandler) {
         
-        var url: String = URL_ORDER
+        var url: String = getUpdateURL()
         if token.count > 0 {
-            url = String(format: URL_ORDER, "/"+token)
+            url = url + "/" + token
         }
-        //print(url)
-        //print(params)
+        print(url)
+        print(params)
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             

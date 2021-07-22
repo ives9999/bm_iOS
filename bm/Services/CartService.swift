@@ -16,6 +16,10 @@ class CartService: DataService {
         return URL_CART_LIST
     }
     
+    override func getUpdateURL()-> String {
+        return URL_CART_UPDATE
+    }
+    
     override func getSource() -> String? {
         return "cart"
     }
