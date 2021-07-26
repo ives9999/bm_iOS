@@ -22,6 +22,18 @@ extension BaseViewController {
         }
     }
     
+    func toCart(member_like: Bool=false) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toCart") as? CartVC {
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toCart") as! CartVC
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toCoach(member_like: Bool=false) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)

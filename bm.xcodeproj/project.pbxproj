@@ -126,6 +126,9 @@
 		B36E334425480007001336C2 /* ShowStoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E334325480007001336C2 /* ShowStoreVC.swift */; };
 		B370EFAD26A836470022E599 /* CartTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370EFAC26A836470022E599 /* CartTable.swift */; };
 		B370EFB226A849120022E599 /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370EFB126A849120022E599 /* CartService.swift */; };
+		B370EFBF26AD3F2B0022E599 /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370EFBE26AD3F2B0022E599 /* CartVC.swift */; };
+		B370EFCF26AD50840022E599 /* CartListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B370EFCD26AD50840022E599 /* CartListCell.swift */; };
+		B370EFD026AD50840022E599 /* CartListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B370EFCE26AD50840022E599 /* CartListCell.xib */; };
 		B37510591FA74EBC00CDF1A0 /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */; };
 		B375105B1FA96C0500CDF1A0 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = B375105A1FA96C0500CDF1A0 /* Member.swift */; };
 		B3756EDA21B8E50E006893E1 /* WeekdayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3756ED821B8E50E006893E1 /* WeekdayCell.swift */; };
@@ -499,6 +502,9 @@
 		B36E334325480007001336C2 /* ShowStoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowStoreVC.swift; sourceTree = "<group>"; };
 		B370EFAC26A836470022E599 /* CartTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTable.swift; sourceTree = "<group>"; };
 		B370EFB126A849120022E599 /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
+		B370EFBE26AD3F2B0022E599 /* CartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
+		B370EFCD26AD50840022E599 /* CartListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartListCell.swift; sourceTree = "<group>"; };
+		B370EFCE26AD50840022E599 /* CartListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartListCell.xib; sourceTree = "<group>"; };
 		B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
 		B375105A1FA96C0500CDF1A0 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		B3756ED821B8E50E006893E1 /* WeekdayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdayCell.swift; sourceTree = "<group>"; };
@@ -850,6 +856,8 @@
 				B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */,
 				B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
+				B370EFCD26AD50840022E599 /* CartListCell.swift */,
+				B370EFCE26AD50840022E599 /* CartListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1237,6 +1245,7 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
+				B370EFBE26AD3F2B0022E599 /* CartVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1462,6 +1471,7 @@
 				B3B758A325A960B0006ACC33 /* Color1Cell.xib in Resources */,
 				F94E7D271F83636A00F550FD /* Assets.xcassets in Resources */,
 				B34A210121B696AA00EE6E1C /* TextFieldCell.xib in Resources */,
+				B370EFD026AD50840022E599 /* CartListCell.xib in Resources */,
 				B39453722343256C000DF98E /* SignupListCell.xib in Resources */,
 				B3756EF321BA7567006893E1 /* StatusSelectCell.xib in Resources */,
 				B3756EE321B95974006893E1 /* ColorCell.xib in Resources */,
@@ -1749,6 +1759,7 @@
 				B3B7588B25A802A7006ACC33 /* OrderForm.swift in Sources */,
 				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
+				B370EFBF26AD3F2B0022E599 /* CartVC.swift in Sources */,
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
 				B3B4EFC725807EDD00EE15D0 /* SexCell.swift in Sources */,
 				B31AF7DC267340B100D68778 /* SearchPanel.swift in Sources */,
@@ -1828,6 +1839,7 @@
 				B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */,
+				B370EFCF26AD50840022E599 /* CartListCell.swift in Sources */,
 				B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */,
 				B3F6B4632605C9190000F9E0 /* CityTable.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* TeachService.swift in Sources */,

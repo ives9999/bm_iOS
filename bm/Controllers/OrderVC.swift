@@ -603,7 +603,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     @IBAction func submitBtnPressed(_ sender: Any) {
         
-        Global.instance.addSpinner(superView: self.view)
         var params: [String: String] = [String: String]()
         
         params["device"] = "app"
@@ -634,6 +633,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        params["amount"] = totalFormItem?.value
         params[AMOUNT_KEY] = getRowValue(rowKey: TOTAL_KEY)
         
+        //是否有選擇商品屬性
+        var isAttribute: Bool = true
+        
         var selected_attributes: [String] = [String]()
         let attributes: [[String: String]] = myRows[1]["rows"] as! [[String: String]]
         for attribute in attributes {
@@ -650,10 +652,15 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             if let tmp: String = attribute["title"] {
                 name = tmp
             }
-            value = "{name:\(name),alias:\(alias),value:\(value)}"
-            selected_attributes.append(value)
+            
+            if (value.count == 0) {
+                isAttribute = false
+                warning("請先選擇\(name)")
+            } else {
+                value = "{name:\(name),alias:\(alias),value:\(value)}"
+                selected_attributes.append(value)
+            }
         }
-        params["attribute"] = selected_attributes.joined(separator: ",")
         
 //        let shippingFeeFormItem = getFormItemFromKey(SHIPPING_FEE_KEY)
 //        if (shippingFeeFormItem != nil) {
@@ -672,28 +679,35 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        if let item = getFormItemFromKey(WEIGHT_KEY) {
 //            params["weight"] = item.value
 //        }
-        print(params)
         
-        //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
-        
-        CartService.instance.update(params: params) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if success {
-                //let order_token: String = CartService.instance.order_token
-//                if self.total > 0 {
-//                    let ecpay_token: String = CartService.instance.ecpay_token
-//                    let tokenExpireDate: String = CartService.instance.tokenExpireDate
-//                    self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
-//                        //print("aaa")
-//                        self.toPayment(order_token: order_token, ecpay_token: ecpay_token, tokenExpireDate: tokenExpireDate)
-//                    }
-//                } else {
-//                    self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
-//                        self.toPayment(order_token: order_token)
-//                    }
-//                }
-            } else {
-                self.warning(OrderService.instance.msg)
+        if (isAttribute) {
+            
+            Global.instance.addSpinner(superView: self.view)
+            params["attribute"] = selected_attributes.joined(separator: ",")
+            print(params)
+            
+            //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
+            
+            CartService.instance.update(params: params) { (success) in
+                Global.instance.removeSpinner(superView: self.view)
+                if success {
+                    self.info("已經加入購物車了")
+                    //let order_token: String = CartService.instance.order_token
+    //                if self.total > 0 {
+    //                    let ecpay_token: String = CartService.instance.ecpay_token
+    //                    let tokenExpireDate: String = CartService.instance.tokenExpireDate
+    //                    self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
+    //                        //print("aaa")
+    //                        self.toPayment(order_token: order_token, ecpay_token: ecpay_token, tokenExpireDate: tokenExpireDate)
+    //                    }
+    //                } else {
+    //                    self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
+    //                        self.toPayment(order_token: order_token)
+    //                    }
+    //                }
+                } else {
+                    self.warning(CartService.instance.msg)
+                }
             }
         }
     }

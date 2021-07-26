@@ -1,36 +1,36 @@
 //
-//  MemberOrderList.swift
+//  CartVC.swift
 //  bm
 //
-//  Created by ives on 2021/2/21.
+//  Created by ives on 2021/7/25.
 //  Copyright © 2021 bm. All rights reserved.
 //
 
 import Foundation
 
-class MemberOrderListVC: MyTableVC {
+class CartVC: MyTableVC {
     
-    var mysTable: OrdersTable? = nil
+    var mysTable: CartsTable? = nil
     
     override func viewDidLoad() {
         myTablView = tableView
 //        myTablView.allowsMultipleSelectionDuringEditing = false
 //        myTablView.isUserInteractionEnabled = true
-        dataService = OrderService.instance
+        dataService = CartService.instance
 //        _type = "order"
 //        _titleField = "name"
 //        searchRows = _searchRows
         
         super.viewDidLoad()
-        let cellNibName = UINib(nibName: "OrderListCell", bundle: nil)
-        tableView.register(cellNibName, forCellReuseIdentifier: "OrderListCell")
+        let cellNibName = UINib(nibName: "CartListCell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "CartListCell")
         
         refresh()
     }
     
     override func refresh() {
         page = 1
-        getDataStart(t: OrdersTable.self)
+        getDataStart(t: CartsTable.self)
     }
     
     override func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
@@ -76,12 +76,12 @@ class MemberOrderListVC: MyTableVC {
     override func getDataEnd(success: Bool) {
         if success {
             
-            mysTable = (tables as? OrdersTable)
+            mysTable = (tables as? CartsTable)
             if mysTable != nil {
-                let tmps: [OrderTable] = mysTable!.rows
+                let tmps: [CartTable] = mysTable!.rows
                 
                 if page == 1 {
-                    lists1 = [OrderTable]()
+                    lists1 = [CartTable]()
                 }
                 lists1 += tmps
                 myTablView.reloadData()
@@ -96,13 +96,13 @@ class MemberOrderListVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "OrderListCell", for: indexPath) as? OrderListCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
             
-            let row = lists1[indexPath.row] as! OrderTable
+            let row = lists1[indexPath.row] as! CartTable
             row.filterRow()
             //row.printRow()
             
-            cell.updateOrderViews(indexPath: indexPath, row: row)
+            cell.updateViews(indexPath: indexPath, row: row)
             
             return cell
         } else {
@@ -110,13 +110,5 @@ class MemberOrderListVC: MyTableVC {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if mysTable != nil {
-            let orderTable = mysTable!.rows[indexPath.row]
-            //toShowProduct(token: superProduct.token)
-            let token = orderTable.token
-            toPayment(order_token: token)
-        }
-    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
 }
