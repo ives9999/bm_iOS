@@ -1678,10 +1678,10 @@
             </objects>
             <point key="canvasLocation" x="988" y="-1521"/>
         </scene>
-        <!--CartVC-->
+        <!--Member Cart ListVC-->
         <scene sceneID="M20-a0-rmo">
             <objects>
-                <viewController storyboardIdentifier="toCart" id="M4V-sg-RS1" customClass="CartVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toMemberCartList" id="M4V-sg-RS1" customClass="MemberCartListVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AJK-Yr-YpW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1699,7 +1699,7 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prevBtnPressed:" destination="M4V-sg-RS1" eventType="touchUpInside" id="MhB-Ad-C2R"/>
+                                            <action selector="prevBtnPressed:" destination="M4V-sg-RS1" eventType="touchUpInside" id="4vS-sB-NGs"/>
                                             <action selector="prevBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="qIL-1j-TDC"/>
                                         </connections>
                                     </button>
@@ -1744,15 +1744,13 @@
                                                 <state key="normal" title="購買">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
-                                                <connections>
-                                                    <action selector="submitBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="nsg-Bk-W9f"/>
-                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s1E-fR-cgb" customClass="CancelButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="73" y="0.0" width="46" height="34"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="cancelBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="Kao-9G-aT4"/>
+                                                    <action selector="cancelBtnPressed:" destination="M4V-sg-RS1" eventType="touchUpInside" id="uAC-j7-hYh"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -1786,6 +1784,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="submitButton" destination="i60-fy-sdb" id="dDa-g0-rq2"/>
                         <outlet property="tableView" destination="Aq5-z3-qNs" id="aEx-5e-b49"/>
                     </connections>
                 </viewController>

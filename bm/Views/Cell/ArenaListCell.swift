@@ -55,6 +55,10 @@ class ArenaListCell: List2Cell {
                 air_conditionLbl.text = "未提供"
             }
             parkingLbl.text = "停車:\(row!.parking_show)"
+            
+            let chevron = UIImage(named: "greater1")
+            self.accessoryType = .disclosureIndicator
+            self.accessoryView = UIImageView(image: chevron!)
         }
     }
     

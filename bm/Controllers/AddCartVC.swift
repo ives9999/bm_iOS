@@ -8,14 +8,16 @@
 
 import Foundation
 
-class OrderVC: MyTableVC, ValueChangedDelegate {
+class AddCartVC: MyTableVC, ValueChangedDelegate {
 
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var submitButton: SubmitButton!
     
     var product_token: String? = nil
+    var cartItem_token: String? = nil
     var productTable: ProductTable? = nil
-    
+    var cartItemTable: CartItemTable? = nil
+        
     var sub_total: Int = 0
     var shippingFee: Int = 0
     var total: Int = 0
@@ -98,17 +100,42 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     override func refresh() {
         Global.instance.addSpinner(superView: view)
         page = 1
-        let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
-        ProductService.instance.getOne1(t: ProductTable.self, params: params) { (success) in
-            if (success) {
-                let table: Table = ProductService.instance.table!
-                self.productTable = (table as! ProductTable)
-                //self.superProduct!.printRow()
-                
-                self.initData()
+        
+        if (product_token != nil) {
+            let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
+            ProductService.instance.getOne(params: params) { (success) in
+                if (success) {
+                    
+                    let jsonData: Data = ProductService.instance.jsonData!
+                    do {
+                        self.productTable = try JSONDecoder().decode(ProductTable.self, from: jsonData)
+                    } catch {
+                        self.warning(error.localizedDescription)
+                    }
+                    self.initData()
+                }
+                Global.instance.removeSpinner(superView: self.view)
+                self.endRefresh()
             }
-            Global.instance.removeSpinner(superView: self.view)
-            self.endRefresh()
+        }
+        
+        if (cartItem_token != nil) {
+            
+            let params: [String: String] = ["cartItem_token": cartItem_token!, "member_token": Member.instance.token]
+            CartService.instance.getOne(params: params) { (success) in
+                if (success) {
+                    
+                    let jsonData: Data = CartService.instance.jsonData!
+                    do {
+                        self.cartItemTable = try JSONDecoder().decode(CartItemTable.self, from: jsonData)
+                    } catch {
+                        self.warning(error.localizedDescription)
+                    }
+                }
+
+                Global.instance.removeSpinner(superView: self.view)
+                self.endRefresh()
+            }
         }
     }
     
@@ -683,7 +710,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         if (isAttribute) {
             
             Global.instance.addSpinner(superView: self.view)
-            params["attribute"] = selected_attributes.joined(separator: ",")
+            params["attribute"] = selected_attributes.joined(separator: "|")
             print(params)
             
             //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")

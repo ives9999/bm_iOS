@@ -8,9 +8,14 @@
 
 import Foundation
 
-class CartVC: MyTableVC {
+class MemberCartListVC: MyTableVC {
     
     var mysTable: CartsTable? = nil
+    
+    var myTable: CartTable? = nil
+    var cartItemsTable: [CartItemTable] = [CartItemTable]()
+    
+    @IBOutlet weak var submitButton: SubmitButton!
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -22,6 +27,8 @@ class CartVC: MyTableVC {
 //        searchRows = _searchRows
         
         super.viewDidLoad()
+        
+        submitButton.setTitle("結帳")
         let cellNibName = UINib(nibName: "CartListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "CartListCell")
         
@@ -44,18 +51,6 @@ class CartVC: MyTableVC {
                     if (self.dataService.jsonData != nil) {
                         try self.tables = JSONDecoder().decode(t, from: self.dataService.jsonData!)
                         if (self.tables != nil) {
-                            //self.coursesTable!.printRows()
-                            self.page = self.tables!.page
-                            if self.page == 1 {
-                                self.totalCount = self.tables!.totalCount
-                                self.perPage = self.tables!.perPage
-                                let _pageCount: Int = self.totalCount / self.perPage
-                                self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
-                                //print(self.totalPage)
-                                if self.refreshControl.isRefreshing {
-                                    self.refreshControl.endRefreshing()
-                                }
-                            }
                             self.getDataEnd(success: success)
                         }
                     } else {
@@ -75,18 +70,19 @@ class CartVC: MyTableVC {
     
     override func getDataEnd(success: Bool) {
         if success {
-            
             mysTable = (tables as? CartsTable)
-            if mysTable != nil {
-                let tmps: [CartTable] = mysTable!.rows
-                
-                if page == 1 {
-                    lists1 = [CartTable]()
-                }
-                lists1 += tmps
-                myTablView.reloadData()
+            if mysTable == nil {
+                warning("購物車中無商品，或購物車超過一個錯誤，請洽管理員")
             } else {
-                warning("轉換Table出錯，請洽管理員")
+                if (mysTable!.rows.count != 1) {
+                    warning("購物車中無商品，或購物車超過一個錯誤，請洽管理員")
+                } else {
+                    
+                    myTable = mysTable!.rows[0]
+                    cartItemsTable = myTable!.items
+                    lists1 += cartItemsTable
+                    myTablView.reloadData()
+                }
             }
         }
     }
@@ -98,7 +94,8 @@ class CartVC: MyTableVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
             
-            let row = lists1[indexPath.row] as! CartTable
+            cell.cellDelegate = self
+            let row = lists1[indexPath.row] as! CartItemTable
             row.filterRow()
             //row.printRow()
             
@@ -111,4 +108,22 @@ class CartVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
+    
+    override func cellEdit(row: Table) {
+        
+        toAddCart(
+            cartItem_token: row.token,
+            login: { vc in vc.toLogin() },
+            register: { vc in vc.toRegister() }
+        )
+    }
+    
+    override func cellDelete(row: Table) {
+        
+        
+    }
+    
+    @IBAction func cancelBtnPressed(_ sender: Any) {
+        prev()
+    }
 }

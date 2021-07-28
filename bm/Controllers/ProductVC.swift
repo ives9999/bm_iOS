@@ -116,7 +116,7 @@ class ProductVC: MyTableVC {
     override func cellCity(row: Table) {
         //print(indexPath!.row)
         
-        toOrder(
+        toAddCart(
             product_token: row.token,
             login: { vc in vc.toLogin() },
             register: { vc in vc.toRegister() }

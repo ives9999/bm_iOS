@@ -54,6 +54,10 @@ class StoreListCell: List2Cell {
             if row!.address.isEmpty {
                 hiddenIcon(mapIcon)
             }
+            
+            let chevron = UIImage(named: "greater1")
+            self.accessoryType = .disclosureIndicator
+            self.accessoryView = UIImageView(image: chevron!)
         }
     }
 }

@@ -63,8 +63,10 @@ class List2Cell: UITableViewCell {
         bgColorView.backgroundColor = UIColor(CELL_SELECTED)
         selectedBackgroundView = bgColorView
         
-        let likeImg = UIImage(named: "like")
-        likeIcon.setBackgroundImage(likeImg, for: .normal)
+        if (likeIcon != nil) {
+            let likeImg = UIImage(named: "like")
+            likeIcon.setBackgroundImage(likeImg, for: .normal)
+        }
     }
     
     func _updateViews(_ row: Table) {
@@ -77,10 +79,6 @@ class List2Cell: UITableViewCell {
             featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
             listFeatured.downloaded(from: row.featured_path)
         }
-        
-        let chevron = UIImage(named: "greater1")
-        self.accessoryType = .disclosureIndicator
-        self.accessoryView = UIImageView(image: chevron!)
     }
 
     
@@ -106,8 +104,10 @@ class List2Cell: UITableViewCell {
 //            hiddenIcon(mobileIcon)
 //        }
         
-        likeIcon.isLike = !_row.like
-        likeIcon.setLike()
+        if (likeIcon != nil) {
+            likeIcon.isLike = !_row.like
+            likeIcon.setLike()
+        }
         
         refreshIcon.row = _row
         
@@ -131,7 +131,9 @@ class List2Cell: UITableViewCell {
             arenaBtn.row = _row
         }
         
-        likeIcon.row = _row
+        if (likeIcon != nil) {
+            likeIcon.row = _row
+        }
     }
     
     func hiddenIcon(_ icon: SuperButton) {
@@ -245,7 +247,7 @@ class List2Cell: UITableViewCell {
         }
     }
     
-    private func _pressed(sender: UIButton, method: (Table)-> Void) {
+    func _pressed(sender: UIButton, method: (Table)-> Void) {
         
         let _sender = sender as! SuperButton
         var row: Table?

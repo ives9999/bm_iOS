@@ -42,6 +42,10 @@ class ProductListCell: List2Cell {
             }
             
             cityBtn.isHidden = false
+            
+            let chevron = UIImage(named: "greater1")
+            self.accessoryType = .disclosureIndicator
+            self.accessoryView = UIImageView(image: chevron!)
         }
     }
     

@@ -390,6 +390,8 @@ class MyTableVC: BaseViewController, List1CellDelegate {
     
     func cellArena(row: Table) {}
     func cellArea(row: Table) {}
+    func cellEdit(row: Table) {}
+    func cellDelete(row: Table) {}
     
     func cellLike(row: Table) {
         if (!Member.instance.isLoggedIn) {

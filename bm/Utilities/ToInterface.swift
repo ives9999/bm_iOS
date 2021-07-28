@@ -8,6 +8,52 @@
 
 extension BaseViewController {
     
+    func toAddCart(product_token: String?=nil, cartItem_token: String?=nil, login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
+        
+        var msg: String = ""
+        if !Member.instance.isLoggedIn {
+            warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
+                self.goHomeThen(completion: login)
+            }
+        } else {
+            for key in MEMBER_MUST_ARRAY {
+                let type: String = Member.instance.info[key]!["type"]!
+                let tmp = Member.instance.getData(key: key)
+                if type == "Int" {
+                    if let value: Int = tmp as? Int {
+                        if value == 0 {
+                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+                        }
+                    }
+                } else if type == "String" {
+                    if let value = tmp as? String {
+                        if value.count == 0 {
+                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+                        }
+                    }
+                }
+            }
+            if msg.count > 0 {
+                warning(msg: msg, showCloseButton: true, buttonTitle: "填寫") {
+                    self.goHomeThen(completion: register)
+                }
+            } else {
+                if #available(iOS 13.0, *) {
+                    let storyboard = UIStoryboard(name: "More", bundle: nil)
+                    if let viewController = storyboard.instantiateViewController(identifier: TO_ADD_CART)  as? AddCartVC {
+                        viewController.product_token = product_token
+                        viewController.cartItem_token = cartItem_token
+                        show(viewController, sender: nil)
+                    }
+                } else {
+                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ADD_CART) as! AddCartVC
+                    viewController.product_token = product_token
+                    self.navigationController!.pushViewController(viewController, animated: true)
+                }
+            }
+        }
+    }
+    
     func toArena(member_like: Bool=false) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
@@ -22,14 +68,15 @@ extension BaseViewController {
         }
     }
     
-    func toCart(member_like: Bool=false) {
+    func toMemberCartList(member_like: Bool=false) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "toCart") as? CartVC {
+            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_CART_LIST) as? MemberCartListVC {
+                
                 show(viewController, sender: nil)
             }
         } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toCart") as! CartVC
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_CART_LIST) as! MemberCartListVC
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -170,50 +217,50 @@ extension BaseViewController {
         }
     }
     
-    func toOrder(product_token: String, login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
-        
-        var msg: String = ""
-        if !Member.instance.isLoggedIn {
-            warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
-                self.goHomeThen(completion: login)
-            }
-        } else {
-            for key in MEMBER_MUST_ARRAY {
-                let type: String = Member.instance.info[key]!["type"]!
-                let tmp = Member.instance.getData(key: key)
-                if type == "Int" {
-                    if let value: Int = tmp as? Int {
-                        if value == 0 {
-                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
-                        }
-                    }
-                } else if type == "String" {
-                    if let value = tmp as? String {
-                        if value.count == 0 {
-                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
-                        }
-                    }
-                }
-            }
-            if msg.count > 0 {
-                warning(msg: msg, showCloseButton: true, buttonTitle: "填寫") {
-                    self.goHomeThen(completion: register)
-                }
-            } else {
-                if #available(iOS 13.0, *) {
-                    let storyboard = UIStoryboard(name: "More", bundle: nil)
-                    if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
-                        viewController.product_token = product_token
-                        show(viewController, sender: nil)
-                    }
-                } else {
-                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
-                    viewController.product_token = product_token
-                    self.navigationController!.pushViewController(viewController, animated: true)
-                }
-            }
-        }
-    }
+//    func toOrder(product_token: String, login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
+//
+//        var msg: String = ""
+//        if !Member.instance.isLoggedIn {
+//            warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
+//                self.goHomeThen(completion: login)
+//            }
+//        } else {
+//            for key in MEMBER_MUST_ARRAY {
+//                let type: String = Member.instance.info[key]!["type"]!
+//                let tmp = Member.instance.getData(key: key)
+//                if type == "Int" {
+//                    if let value: Int = tmp as? Int {
+//                        if value == 0 {
+//                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+//                        }
+//                    }
+//                } else if type == "String" {
+//                    if let value = tmp as? String {
+//                        if value.count == 0 {
+//                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+//                        }
+//                    }
+//                }
+//            }
+//            if msg.count > 0 {
+//                warning(msg: msg, showCloseButton: true, buttonTitle: "填寫") {
+//                    self.goHomeThen(completion: register)
+//                }
+//            } else {
+//                if #available(iOS 13.0, *) {
+//                    let storyboard = UIStoryboard(name: "More", bundle: nil)
+//                    if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
+//                        viewController.product_token = product_token
+//                        show(viewController, sender: nil)
+//                    }
+//                } else {
+//                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
+//                    viewController.product_token = product_token
+//                    self.navigationController!.pushViewController(viewController, animated: true)
+//                }
+//            }
+//        }
+//    }
     
     func toPayment(order_token: String, ecpay_token: String?=nil, tokenExpireDate: String?=nil) {
         if #available(iOS 13.0, *) {

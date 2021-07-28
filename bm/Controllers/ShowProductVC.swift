@@ -136,7 +136,7 @@ class ShowProductVC: ShowVC {
     @IBAction func submitBtnPressed(_ sender: Any) {
         //print("purchase")
         if token != nil {
-            toOrder(
+            toAddCart(
                 product_token: token!,
                 login: { vc in vc.toLogin() },
                 register: { vc in vc.toRegister() }

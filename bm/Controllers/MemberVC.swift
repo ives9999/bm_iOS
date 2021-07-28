@@ -28,7 +28,7 @@ class MemberVC: MyTableVC {
     var memberRows: [Dictionary<String, String>] = [Dictionary<String, String>]()
     
     var orderRows: [Dictionary<String, String>] = [
-        ["text": "購物車", "icon": "cart", "segue": TO_CART],
+        ["text": "購物車", "icon": "cart", "segue": TO_MEMBER_CART_LIST],
         ["text": "訂單查詢", "icon": "order", "segue": TO_MEMBER_ORDER_LIST]
     ]
     
@@ -335,8 +335,8 @@ class MemberVC: MyTableVC {
                 performSegue(withIdentifier: "toA", sender: nil)
             } else if segue == TO_MEMBER_ORDER_LIST {
                 toMemberOrderList()
-            } else if segue == TO_CART {
-                toCart()
+            } else if segue == TO_MEMBER_CART_LIST {
+                toMemberCartList()
             } else if segue == TO_LIKE {
                 var able_type: String = "team"
                 if (row.keyExist(key: "able_type") && row["able_type"] != nil) {

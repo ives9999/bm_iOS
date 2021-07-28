@@ -52,7 +52,9 @@ class CoachListCell: List2Cell {
             } else {
                 lineLbl.text = "Line ID:未提供"
             }
-
+            let chevron = UIImage(named: "greater1")
+            self.accessoryType = .disclosureIndicator
+            self.accessoryView = UIImageView(image: chevron!)
         }
     }
 }

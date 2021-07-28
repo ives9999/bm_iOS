@@ -105,24 +105,32 @@ class PaymentVC: MyTableVC {
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
             let params: [String: String] = ["token": order_token, "member_token": Member.instance.token]
-            OrderService.instance.getOne1(t: OrderTable.self, params: params) { (success) in
+            OrderService.instance.getOne(params: params) { (success) in
                 if (success) {
-                    if OrderService.instance.table != nil {
-                        let table: Table = OrderService.instance.table!
-                        if let tmp = table as? OrderTable {
-                            self.orderTable = tmp
-                            //self.superOrder!.product.printRow()
-                            
-                            self.titleLbl.text = self.orderTable!.product!.name
-                            
-                            self.setupOrderData()
-                            self.tableView.reloadData()
-                        } else {
-                            self.warning("轉換 table to OrderTable 錯誤，請洽管理員")
-                        }
-                    } else {
-                        self.warning("無法取得 service 的回傳資料，請聯絡管理員")
+                    
+                    let jsonData: Data = ProductService.instance.jsonData!
+                    do {
+                        self.orderTable = try JSONDecoder().decode(OrderTable.self, from: jsonData)
+                    } catch {
+                        self.warning(error.localizedDescription)
                     }
+                    
+//                    if OrderService.instance.table != nil {
+//                        let table: Table = OrderService.instance.table!
+//                        if let tmp = table as? OrderTable {
+//                            self.orderTable = tmp
+//                            //self.superOrder!.product.printRow()
+//
+//                            self.titleLbl.text = self.orderTable!.product!.name
+//
+//                            self.setupOrderData()
+//                            self.tableView.reloadData()
+//                        } else {
+//                            self.warning("轉換 table to OrderTable 錯誤，請洽管理員")
+//                        }
+//                    } else {
+//                        self.warning("無法取得 service 的回傳資料，請聯絡管理員")
+//                    }
                 }
                 Global.instance.removeSpinner(superView: self.view)
                 self.endRefresh()

@@ -1232,10 +1232,10 @@
             </objects>
             <point key="canvasLocation" x="-2200" y="-1138"/>
         </scene>
-        <!--OrderVC-->
+        <!--Add CartVC-->
         <scene sceneID="aae-Fx-anz">
             <objects>
-                <viewController storyboardIdentifier="toOrder" id="o4v-AV-CC1" customClass="OrderVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toAddCart" id="o4v-AV-CC1" customClass="AddCartVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UtV-4m-LmY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

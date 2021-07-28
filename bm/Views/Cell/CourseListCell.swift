@@ -76,6 +76,9 @@ class CourseListCell: List2Cell {
             } else {
                 hiddenIcon(mobileIcon)
             }
+            let chevron = UIImage(named: "greater1")
+            self.accessoryType = .disclosureIndicator
+            self.accessoryView = UIImageView(image: chevron!)
         }
     }
 }

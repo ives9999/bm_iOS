@@ -45,31 +45,18 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="itv-Ai-US5" userLabel="IconView">
-                        <rect key="frame" x="0.0" y="116" width="569" height="36"/>
+                        <rect key="frame" x="0.0" y="132" width="569" height="36"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="enr-h5-OGe" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="120" y="0.0" width="36" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="36" id="Nxg-2z-6Qf"/>
-                                    <constraint firstAttribute="height" constant="36" id="Xm7-wc-yau"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="map"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YNE-zH-Bng" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="68" y="0.0" width="36" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="Vmi-PX-18p"/>
-                                    <constraint firstAttribute="width" constant="36" id="iLb-MS-zeL"/>
-                                </constraints>
-                                <state key="normal" backgroundImage="mobile"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vis-Iy-xlY" customClass="LikeIcon" customModule="bm" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hs7-XB-kPo" customClass="SuperButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="16" y="0.0" width="36" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="36" id="WYw-3g-Ju4"/>
-                                    <constraint firstAttribute="height" constant="36" id="gtC-Rk-eAa"/>
+                                    <constraint firstAttribute="width" constant="36" id="3OB-62-gPC"/>
+                                    <constraint firstAttribute="height" constant="36" id="lRa-ln-Ulr"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="like"/>
+                                <state key="normal" backgroundImage="edit1"/>
+                                <connections>
+                                    <action selector="editBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="0B8-QN-Zqh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tqv-tI-gA3" customClass="SuperButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="517" y="0.0" width="36" height="36"/>
@@ -78,24 +65,43 @@
                                     <constraint firstAttribute="width" constant="36" id="kgT-Tl-PTH"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="refresh"/>
+                                <connections>
+                                    <action selector="refreshBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="8rk-dF-g7t"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udM-bG-BYH" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="68" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="sTC-EJ-qeZ"/>
+                                    <constraint firstAttribute="width" constant="36" id="th2-7W-i3a"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="delete"/>
+                                <connections>
+                                    <action selector="deleteBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Sgj-XA-8eQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="vis-Iy-xlY" firstAttribute="centerY" secondItem="itv-Ai-US5" secondAttribute="centerY" id="0qR-ob-Ubs"/>
                             <constraint firstAttribute="trailing" secondItem="Tqv-tI-gA3" secondAttribute="trailing" constant="16" id="55e-Ui-5e6"/>
-                            <constraint firstItem="YNE-zH-Bng" firstAttribute="leading" secondItem="itv-Ai-US5" secondAttribute="leading" constant="68" id="83A-pS-gXF"/>
+                            <constraint firstItem="udM-bG-BYH" firstAttribute="centerY" secondItem="itv-Ai-US5" secondAttribute="centerY" id="7P8-H9-ta7"/>
                             <constraint firstItem="Tqv-tI-gA3" firstAttribute="centerY" secondItem="itv-Ai-US5" secondAttribute="centerY" id="A6K-tD-O3H"/>
-                            <constraint firstItem="vis-Iy-xlY" firstAttribute="leading" secondItem="itv-Ai-US5" secondAttribute="leading" constant="16" id="BFN-vv-Uw0"/>
                             <constraint firstAttribute="height" constant="36" id="FgA-b7-V59"/>
-                            <constraint firstItem="enr-h5-OGe" firstAttribute="leading" secondItem="itv-Ai-US5" secondAttribute="leading" constant="120" id="Otn-VU-dmO"/>
-                            <constraint firstItem="enr-h5-OGe" firstAttribute="centerY" secondItem="itv-Ai-US5" secondAttribute="centerY" id="rnD-fQ-myv"/>
-                            <constraint firstItem="YNE-zH-Bng" firstAttribute="centerY" secondItem="itv-Ai-US5" secondAttribute="centerY" id="sbi-34-20r"/>
+                            <constraint firstItem="hs7-XB-kPo" firstAttribute="centerY" secondItem="itv-Ai-US5" secondAttribute="centerY" id="J2n-kM-A7P"/>
+                            <constraint firstItem="hs7-XB-kPo" firstAttribute="leading" secondItem="itv-Ai-US5" secondAttribute="leading" constant="16" id="O3x-mo-UNd"/>
+                            <constraint firstItem="udM-bG-BYH" firstAttribute="leading" secondItem="itv-Ai-US5" secondAttribute="leading" constant="68" id="h2e-u8-bUm"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="數量" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k3B-Qc-eWA" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="122" y="101" width="35" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="k3B-Qc-eWA" firstAttribute="top" secondItem="ykc-FF-n2j" secondAttribute="bottom" constant="10" id="07V-84-kyw"/>
                     <constraint firstItem="8Ue-I6-go0" firstAttribute="top" secondItem="0G3-mS-FsD" secondAttribute="bottom" constant="10" id="2T1-Vu-5E2"/>
                     <constraint firstAttribute="trailing" secondItem="itv-Ai-US5" secondAttribute="trailing" id="Bf6-6o-S9P"/>
                     <constraint firstItem="ZbC-ti-89y" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="DkG-da-4bD"/>
@@ -104,9 +110,11 @@
                     <constraint firstItem="ykc-FF-n2j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="QkU-uV-aL3"/>
                     <constraint firstItem="ykc-FF-n2j" firstAttribute="top" secondItem="8Ue-I6-go0" secondAttribute="bottom" constant="10" id="RNf-CL-eh4"/>
                     <constraint firstItem="0G3-mS-FsD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="V2U-Mi-KEh"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="itv-Ai-US5" secondAttribute="bottom" constant="16" id="YkV-vU-9pI"/>
                     <constraint firstItem="8Ue-I6-go0" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="gym-U2-YFY"/>
-                    <constraint firstItem="itv-Ai-US5" firstAttribute="top" secondItem="ZbC-ti-89y" secondAttribute="bottom" constant="10" id="j4c-gl-Vfg"/>
+                    <constraint firstItem="itv-Ai-US5" firstAttribute="top" secondItem="k3B-Qc-eWA" secondAttribute="bottom" constant="10" id="j4c-gl-Vfg"/>
                     <constraint firstItem="itv-Ai-US5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="jYp-uq-0eU"/>
+                    <constraint firstItem="k3B-Qc-eWA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="zvT-CR-Aou"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -114,15 +122,20 @@
             <connections>
                 <outlet property="amountLbl" destination="ykc-FF-n2j" id="18b-rB-cqu"/>
                 <outlet property="attributeLbl" destination="8Ue-I6-go0" id="Ck9-jg-As1"/>
+                <outlet property="deleteIcon" destination="udM-bG-BYH" id="UO1-8i-J2s"/>
+                <outlet property="editIcon" destination="hs7-XB-kPo" id="V6I-T2-HHs"/>
+                <outlet property="iconView" destination="itv-Ai-US5" id="Zph-V8-b6c"/>
+                <outlet property="listFeatured" destination="ZbC-ti-89y" id="qBF-W2-aSH"/>
+                <outlet property="quantityLbl" destination="k3B-Qc-eWA" id="Uzt-G7-WmH"/>
+                <outlet property="refreshIcon" destination="Tqv-tI-gA3" id="zMj-fy-pJy"/>
                 <outlet property="titleLbl" destination="0G3-mS-FsD" id="Zyc-yD-ls6"/>
             </connections>
             <point key="canvasLocation" x="392" y="186"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="like" width="25" height="25"/>
-        <image name="map" width="25" height="25"/>
-        <image name="mobile" width="25" height="25"/>
+        <image name="delete" width="25" height="25"/>
+        <image name="edit1" width="25" height="25"/>
         <image name="refresh" width="25" height="25"/>
     </resources>
 </document>

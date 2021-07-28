@@ -31,5 +31,9 @@ class PaymentCell: SuperCell {
         
         titleLbl.text = title
         contentLbl.text = content
+        
+        let chevron = UIImage(named: "greater1")
+        self.accessoryType = .disclosureIndicator
+        self.accessoryView = UIImageView(image: chevron!)
     }
 }

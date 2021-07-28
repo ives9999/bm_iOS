@@ -12,27 +12,65 @@ class CartListCell: List2Cell {
     
     @IBOutlet weak var attributeLbl: SuperLabel!
     @IBOutlet weak var amountLbl: SuperLabel!
+    @IBOutlet weak var quantityLbl: SuperLabel!
+    
+    @IBOutlet weak var editIcon: SuperButton!
+    @IBOutlet weak var deleteIcon: SuperButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        amountLbl.highlight()
     }
 
-    func updateViews(indexPath: IndexPath, row: CartTable) {
+    func updateViews(indexPath: IndexPath, row: CartItemTable) {
         
-//        if row.product != nil {
-//            nameLbl.text = row.product!.name
-//        } else {
-//            nameLbl.text = "無法取得商品名稱，請洽管理員"
-//        }
-//        dateLbl.text = row.created_at_show
-//        priceLbl.text = row.amount_show
-//        orderNoLbl.text = row.order_no
-//        noLbl.text = String(indexPath.row+1)
+        super.updateViews(row)
         
-        let chevron = UIImage(named: "greater1")
-        self.accessoryType = .disclosureIndicator
-        self.accessoryView = UIImageView(image: chevron!)
+        if row.product != nil && row.product!.featured_path.count > 0 {
+            
+            //print(row.featured_path)
+            featured_h = listFeatured.heightForUrl(url: row.product!.featured_path, width: 90)
+            listFeatured.downloaded(from: row.product!.featured_path)
+        }
+        
+        if (row.product != nil) {
+            titleLbl.text = row.product!.name
+        }
+        
+        var attribute_text: String = ""
+        if (row.attributes.count > 0) {
+            
+            for (idx, attribute) in row.attributes.enumerated() {
+                attribute_text += attribute["name"]! + ":" + attribute["value"]!
+                if (idx < row.attributes.count - 1) {
+                    attribute_text += " | "
+                }
+            }
+        }
+        attributeLbl.text = attribute_text
+        
+        amountLbl.text = row.amount_show
+        
+        quantityLbl.text = "數量：\(row.quantity)"
+        
+        editIcon.row = row
+        deleteIcon.row = row
     }
     
+    @IBAction func editBtnPressed(sender: UIButton) {
+        self._pressed(sender: sender) { (row) in
+            if cellDelegate != nil {
+                cellDelegate!.cellEdit(row: row)
+            }
+        }
+    }
+    
+    @IBAction func deleteBtnPressed(sender: UIButton) {
+        self._pressed(sender: sender) { (row) in
+            if cellDelegate != nil {
+                cellDelegate!.cellDelete(row: row)
+            }
+        }
+    }
 }

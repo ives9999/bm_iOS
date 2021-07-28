@@ -32,11 +32,14 @@ class CartTable: Table {
     var cancel_at: String = ""
     var delete_at: String = ""
     
+    var items: [CartItemTable] = [CartItemTable]()
+    
     enum CodingKeys: String, CodingKey {
         case order_id
         case member_id
         case cancel_at
         case delete_at
+        case items
     }
     
     required init(from decoder: Decoder) throws {
@@ -48,6 +51,8 @@ class CartTable: Table {
         
         do {delete_at = try container.decode(String.self, forKey: .delete_at)}catch{delete_at = ""}
         do {cancel_at = try container.decode(String.self, forKey: .cancel_at)}catch{cancel_at = ""}
+        
+        items = try container.decodeIfPresent([CartItemTable].self, forKey: .items) ?? [CartItemTable]()
     }
 }
 
@@ -55,16 +60,27 @@ class CartItemTable: Table {
     
     var cart_id: Int = 0
     var product_id: Int = 0
-    var price: Int = 0
+    var attribute: String = ""
+    var amount: Int = 0
     var discount: Int = 0
     var quantity: Int = 0
+    var product: ProductTable?
+    
+    //[name:尺寸]
+    //[alias:size]
+    //[value:M]
+    var attributes: [[String: String]] = [[String: String]]()
+    
+    var amount_show: String = ""
     
     enum CodingKeys: String, CodingKey {
         case cart_id
         case product_id
-        case price
+        case attribute
+        case amount
         case discount
         case quantity
+        case product
     }
     
     required init(from decoder: Decoder) throws {
@@ -74,8 +90,45 @@ class CartItemTable: Table {
         
         cart_id = try container.decodeIfPresent(Int.self, forKey: .cart_id) ?? -1
         product_id = try container.decodeIfPresent(Int.self, forKey: .product_id) ?? -1
-        price = try container.decodeIfPresent(Int.self, forKey: .price) ?? -1
+        attribute = try container.decodeIfPresent(String.self, forKey: .attribute) ?? ""
+        amount = try container.decodeIfPresent(Int.self, forKey: .amount) ?? -1
         discount = try container.decodeIfPresent(Int.self, forKey: .discount) ?? -1
         quantity = try container.decodeIfPresent(Int.self, forKey: .quantity) ?? -1
+        product = try container.decodeIfPresent(ProductTable.self, forKey: .product) ?? nil
+    }
+    
+    override func filterRow() {
+        
+        super.filterRow()
+        product?.filterRow()
+        
+        //{name:尺寸,alias:size,value:M}|{name:尺寸,alias:size,value:M}
+        let tmps: [String] = attribute.components(separatedBy: "|")
+        for var tmp in tmps {
+            
+            //{name:尺寸,alias:size,value:M}
+            tmp = tmp.replace(target: "{", withString: "")
+            tmp = tmp.replace(target: "}", withString: "")
+            
+            //name:尺寸,alias:size,value:M
+            let arr: [String] = tmp.components(separatedBy: ",")
+            
+            //[name:尺寸]
+            //[alias:size]
+            //[value:M]
+            var a: [String: String] = [String: String]()
+            for str in arr {
+                let b: [String] = str.components(separatedBy: ":")
+                a[b[0]] = b[1]
+            }
+            
+            attributes.append(a)
+        }
+        
+        if (amount > 0) {
+            amount_show = "NT$ \(amount.formattedWithSeparator) 元"
+        } else {
+            amount_show = "未提供"
+        }
     }
 }

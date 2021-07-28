@@ -66,6 +66,10 @@ class TeamListCell: List2Cell {
             if row!.mobile.isEmpty {
                 hiddenIcon(mobileIcon)
             }
+            
+            let chevron = UIImage(named: "greater1")
+            self.accessoryType = .disclosureIndicator
+            self.accessoryView = UIImageView(image: chevron!)
         }
     }
     
