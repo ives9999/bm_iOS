@@ -16,6 +16,7 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
     var product_token: String? = nil
     var cartItem_token: String? = nil
     var productTable: ProductTable? = nil
+    var cartTable: CartTable? = nil
     var cartItemTable: CartItemTable? = nil
         
     var sub_total: Int = 0
@@ -25,6 +26,8 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
     var selected_number: Int = 1
     var selected_price: Int = 0
     var selected_idx: Int = 0
+    
+    var bInit: Bool = false
     
     let heightForSection: CGFloat = 34
     
@@ -121,16 +124,25 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
         
         if (cartItem_token != nil) {
             
-            let params: [String: String] = ["cartItem_token": cartItem_token!, "member_token": Member.instance.token]
+            let params: [String: String] = ["cart_item_token": cartItem_token!, "member_token": Member.instance.token]
             CartService.instance.getOne(params: params) { (success) in
                 if (success) {
                     
                     let jsonData: Data = CartService.instance.jsonData!
                     do {
-                        self.cartItemTable = try JSONDecoder().decode(CartItemTable.self, from: jsonData)
+                        self.cartTable = try JSONDecoder().decode(CartTable.self, from: jsonData)
+                        if (self.cartTable != nil) {
+                            if (self.cartTable!.items.count > 0) {
+                                self.cartItemTable = self.cartTable!.items[0]
+                                self.cartItemTable?.filterRow()
+                                self.productTable = self.cartItemTable!.product
+                                self.productTable?.filterRow()
+                            }
+                        }
                     } catch {
                         self.warning(error.localizedDescription)
                     }
+                    self.initData()
                 }
 
                 Global.instance.removeSpinner(superView: self.view)
@@ -145,12 +157,13 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
 //        section_keys = form.getSectionKeys()
 //        sections = form.getSections()
         
-        titleLbl.text = productTable!.name
-        
-        var row = getRowRowsFromMyRowsByKey1(key: PRODUCT_KEY)
-        row["value"] = productTable!.name
-        row["show"] = productTable!.name
-        replaceRowByKey(rowKey: PRODUCT_KEY, _row: row)
+        if (productTable != nil) {
+            titleLbl.text = productTable!.name
+            
+            var row = getRowRowsFromMyRowsByKey1(key: PRODUCT_KEY)
+            row["value"] = productTable!.name
+            row["show"] = productTable!.name
+            replaceRowByKey(rowKey: PRODUCT_KEY, _row: row)
         
 //        row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
 //        row["value"] = Member.instance.name
@@ -172,33 +185,54 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
 //        row["show"] = Member.instance.address
 //        replaceRowByKey(rowKey: ADDRESS_KEY, _row: row)
         
-        for attribute in productTable!.attributes {
-            var tmp: String = attribute.attribute
-            tmp = tmp.replace(target: "{", withString: "")
-            tmp = tmp.replace(target: "}", withString: "")
-            tmp = tmp.replace(target: "\"", withString: "")
             
-            //print(arr)
-            let row = ["title":attribute.name,"key":attribute.alias,"value":"","show":tmp,"cell":"tag"]
-            attributeRows.append(row)
-        }
-        //print(attributeRows)
-        myRows[1]["rows"] = attributeRows
-        
-        row = getRowRowsFromMyRowsByKey1(key: QUANTITY_KEY)
-        let min: String = String(productTable!.order_min)
-        let max: String = String(productTable!.order_max)
-        row["show"] = "\(min),\(max)"
-        row["value"] = "1"
-        replaceRowByKey(rowKey: QUANTITY_KEY, _row: row)
+            for attribute in productTable!.attributes {
+                var tmp: String = attribute.attribute
+                tmp = tmp.replace(target: "{", withString: "")
+                tmp = tmp.replace(target: "}", withString: "")
+                tmp = tmp.replace(target: "\"", withString: "")
+                
+                //show is 湖水綠,極致黑,經典白,太空灰
+                //name is 顏色
+                //key is color
+                var value: String = ""
+                let alias: String = attribute.alias
+                if (cartItemTable != nil) {
+                    for item_attributes in cartItemTable!.attributes {
+                        for (_, value1) in item_attributes {
+                            if (value1 == alias) {
+                                value = item_attributes["value"]!
+                                break
+                            }
+                        }
+                    }
+                }
+                
+                let row = ["title":attribute.name,"key":alias,"value":value,"show":tmp,"cell":"tag"]
+                attributeRows.append(row)
+            }
+            //print(attributeRows)
+            myRows[1]["rows"] = attributeRows
+            
+            row = getRowRowsFromMyRowsByKey1(key: QUANTITY_KEY)
+            let min: String = String(productTable!.order_min)
+            let max: String = String(productTable!.order_max)
+            row["show"] = "\(min),\(max)"
+            row["value"] = "1"
+            
+            if (cartItemTable != nil) {
+                selected_number = cartItemTable!.quantity
+                row["value"] = String(selected_number)
+            }
+            replaceRowByKey(rowKey: QUANTITY_KEY, _row: row)
         
 //        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_FEE_KEY)
 //        row["value"] = String(productTable!.prices[selected_idx].shipping_fee)
 //        row["show"] = "NT$ " + String(productTable!.prices[selected_idx].shipping_fee) + "元"
 //        replaceRowByKey(rowKey: SHIPPING_FEE_KEY, _row: row)
         
-        selected_price = productTable!.prices[selected_idx].price_member
-        updateSubTotal()
+            selected_price = productTable!.prices[selected_idx].price_member
+            updateSubTotal()
         
 //        if let productNameItem = getFormItemFromKey("Product_Name") {
 //            productNameItem.value = productTable!.name
@@ -261,25 +295,25 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
 //            weightItem.setTags(tags: res)
 //        }
         
-        if productTable!.type == "mejump" {
-            if let typeItem = getFormItemFromKey("type") as? TagFormItem {
-                var res: [[String: String]] = [[String: String]]()
-                for price in productTable!.prices {
-                    //price.printRow()
-                    let type: String = price.price_title
-                    let typePrice: String = String(price.price_member)
-                    let str: String = type + " " + typePrice
-                    let dict: [String: String] = [String(price.id): str]
-                    res.append(dict)
+            if productTable!.type == "mejump" {
+                if let typeItem = getFormItemFromKey("type") as? TagFormItem {
+                    var res: [[String: String]] = [[String: String]]()
+                    for price in productTable!.prices {
+                        //price.printRow()
+                        let type: String = price.price_title
+                        let typePrice: String = String(price.price_member)
+                        let str: String = type + " " + typePrice
+                        let dict: [String: String] = [String(price.id): str]
+                        res.append(dict)
+                    }
+    //                let sortedByKeys = dicts.keys.sorted(by: <)
+    //                var _dicts: [String: String] = [String: String]()
+    //                for sortedBykey in sortedByKeys {
+    //                    _dicts[sortedBykey] = dicts[sortedBykey]
+    //                }
+                    typeItem.setTags(tags: res)
                 }
-//                let sortedByKeys = dicts.keys.sorted(by: <)
-//                var _dicts: [String: String] = [String: String]()
-//                for sortedBykey in sortedByKeys {
-//                    _dicts[sortedBykey] = dicts[sortedBykey]
-//                }
-                typeItem.setTags(tags: res)
             }
-        }
         
 //        if getFormItemFromKey(NUMBER_KEY) != nil {
 //            selected_number = productTable!.order_min
@@ -297,7 +331,9 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
 //            updateSubTotal()
 //        }
         
-        tableView.reloadData()
+            bInit = true
+            tableView.reloadData()
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -310,7 +346,10 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return mySections.count
+        if (bInit) {
+            return mySections.count
+        }
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

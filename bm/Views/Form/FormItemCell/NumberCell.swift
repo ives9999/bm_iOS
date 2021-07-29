@@ -29,9 +29,10 @@ class NumberCell: FormItemCell {
         requiredImageView.isHidden = true
         titleLbl?.text = title
         
-        stepper.value = value
         stepper.minimumValue = min
         stepper.maximumValue = max
+        stepper.value = value
+        //stepper.label.text = "5"
     }
     
     override func update(with formItem: FormItem) {
