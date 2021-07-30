@@ -37,6 +37,7 @@ class MemberCartListVC: MyTableVC {
     
     override func refresh() {
         page = 1
+        lists1.removeAll()
         getDataStart(t: CartsTable.self)
     }
     
@@ -120,7 +121,13 @@ class MemberCartListVC: MyTableVC {
     
     override func cellDelete(row: Table) {
         
-        
+        warning(msg: "是否確定要刪除呢？", closeButtonTitle: "關閉", buttonTitle: "確定") {
+            
+            Global.instance.addSpinner(superView: self.view)
+            self.dataService.delete(token: row.token, type: "cart_item") { (success) in
+                
+            }
+        }
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {

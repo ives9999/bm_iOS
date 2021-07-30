@@ -34,6 +34,8 @@ class ProductTable: Table {
     var order_min: Int = 1
     var order_max: Int = 1
     
+    var cart_token: String = ""
+    
     var alias: String = ""
     
     var images: [String] = [String]()
@@ -54,6 +56,7 @@ class ProductTable: Table {
         case gateway
         case order_min
         case order_max
+        case cart_token
         case alias
         case prices
         case attributes = "product_attributes"
@@ -86,6 +89,7 @@ class ProductTable: Table {
         do {gateways = try container.decode([String].self, forKey: .gateways)}catch{gateways=[String]()}
         
         attributes = try container.decodeIfPresent([ProductAttributeTable].self, forKey: .attributes) ?? [ProductAttributeTable]()
+        cart_token = try container.decodeIfPresent(String.self, forKey: .cart_token) ?? ""
     }
     
     override func filterRow() {

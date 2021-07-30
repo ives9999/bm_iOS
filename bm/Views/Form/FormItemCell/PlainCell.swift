@@ -11,10 +11,23 @@ import UIKit
 class PlainCell: FormItemCell {
     
     @IBOutlet weak var detailLbl: SuperLabel!
+    
+    var sectionKey: String = ""
+    var rowKey: String = ""
+    var baseViewControllerDelegate: BaseViewController? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    func update(sectionKey: String, rowKey: String, title: String, show: String) {
+        
+        self.sectionKey = sectionKey
+        self.rowKey = rowKey
+        
+        titleLbl?.text = title
+        detailLbl?.text = show
     }
 
     override func update(with formItem: FormItem) {

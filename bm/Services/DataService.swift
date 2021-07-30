@@ -199,13 +199,13 @@ class DataService {
             body[key] = param
         }
         
-        print(body)
+        //print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        print(url)
+        //print(url)
         if url != nil {
             Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
                 
@@ -878,8 +878,8 @@ class DataService {
     func delete(token: String, type: String, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["source": "app", "channel": "bm", "token": token]
         let url: String = String(format: URL_DELETE, type)
-        //print(url)
-        //print(body)
+        print(url)
+        print(body)
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {

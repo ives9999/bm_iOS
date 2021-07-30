@@ -83,8 +83,8 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
         
         //FormItemCellType.registerCell(for: tableView)
         
-        let textNib = UINib(nibName: "PaymentCell", bundle: nil)
-        tableView.register(textNib, forCellReuseIdentifier: "TextCell")
+        let plainNib = UINib(nibName: "PlainCell", bundle: nil)
+        tableView.register(plainNib, forCellReuseIdentifier: "PlainCell")
         
         let tagNib = UINib(nibName: "TagCell", bundle: nil)
         tableView.register(tagNib, forCellReuseIdentifier: "TagCell")
@@ -123,6 +123,8 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
         }
         
         if (cartItem_token != nil) {
+            
+            submitButton.setTitle("更新購物車")
             
             let params: [String: String] = ["cart_item_token": cartItem_token!, "member_token": Member.instance.token]
             CartService.instance.getOne(params: params) { (success) in
@@ -466,9 +468,9 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
                 return cell
             }
         } else if (cell_type == "text") {
-            if let cell: PaymentCell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath) as? PaymentCell {
+            if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
                 
-                cell.update(title: title, content: show)
+                cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, show: show)
                 return cell
             }
         } else if (cell_type == "textField") {
@@ -674,7 +676,14 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
         params["device"] = "app"
         params["do"] = "update"
         params["member_token"] = Member.instance.token
-        params["product_id"] = String(productTable!.id)
+        
+        if (cartItem_token != nil) {
+            params["cartItem_token"] = cartItem_token
+        }
+        if (productTable != nil) {
+            params["product_id"] = String(productTable!.id)
+            params["cart_token"] = productTable!.cart_token
+        }
         //params["type"] = productTable!.type
         params["price_id"] = String(productTable!.prices[selected_idx].id)
         
@@ -757,7 +766,11 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
             CartService.instance.update(params: params) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if success {
-                    self.info("已經加入購物車了")
+                    if (self.cartItem_token == nil) {
+                        self.info("已經加入購物車了")
+                    } else {
+                        self.info("已經更新購物車了")
+                    }
                     //let order_token: String = CartService.instance.order_token
     //                if self.total > 0 {
     //                    let ecpay_token: String = CartService.instance.ecpay_token
