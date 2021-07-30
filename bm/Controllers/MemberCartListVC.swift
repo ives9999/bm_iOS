@@ -121,11 +121,16 @@ class MemberCartListVC: MyTableVC {
     
     override func cellDelete(row: Table) {
         
-        warning(msg: "是否確定要刪除呢？", closeButtonTitle: "關閉", buttonTitle: "確定") {
+        warning(msg: "是否確定要刪除呢？", closeButtonTitle: "取消", buttonTitle: "確定") {
             
             Global.instance.addSpinner(superView: self.view)
             self.dataService.delete(token: row.token, type: "cart_item") { (success) in
-                
+                if (success) {
+                    self.refresh()
+                } else {
+                    self.warning(self.dataService.msg)
+                }
+                Global.instance.removeSpinner(superView: self.view)
             }
         }
     }

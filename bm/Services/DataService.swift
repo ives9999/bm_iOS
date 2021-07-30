@@ -876,8 +876,8 @@ class DataService {
     }
     
     func delete(token: String, type: String, completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["source": "app", "channel": "bm", "token": token]
-        let url: String = String(format: URL_DELETE, type)
+        let body: [String: String] = ["source": "app", "channel": "bm", "token": token, "type": "cart_item"]
+        let url: String = String(format: URL_DELETE, "cart")
         print(url)
         print(body)
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
