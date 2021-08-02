@@ -125,6 +125,7 @@
                 <outlet property="deleteIcon" destination="udM-bG-BYH" id="UO1-8i-J2s"/>
                 <outlet property="editIcon" destination="hs7-XB-kPo" id="V6I-T2-HHs"/>
                 <outlet property="iconView" destination="itv-Ai-US5" id="Zph-V8-b6c"/>
+                <outlet property="iconViewConstraint" destination="FgA-b7-V59" id="ive-iE-ZQX"/>
                 <outlet property="listFeatured" destination="ZbC-ti-89y" id="qBF-W2-aSH"/>
                 <outlet property="quantityLbl" destination="k3B-Qc-eWA" id="Uzt-G7-WmH"/>
                 <outlet property="refreshIcon" destination="Tqv-tI-gA3" id="zMj-fy-pJy"/>

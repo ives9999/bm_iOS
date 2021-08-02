@@ -759,31 +759,20 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
             
             Global.instance.addSpinner(superView: self.view)
             params["attribute"] = selected_attributes.joined(separator: "|")
-            print(params)
-            
-            //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
+            //print(params)
             
             CartService.instance.update(params: params) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if success {
+                    var msg: String = ""
                     if (self.cartItem_token == nil) {
-                        self.info("已經加入購物車了")
+                        msg = "已經加入購物車了"
                     } else {
-                        self.info("已經更新購物車了")
+                        msg = "已經更新購物車了"
                     }
-                    //let order_token: String = CartService.instance.order_token
-    //                if self.total > 0 {
-    //                    let ecpay_token: String = CartService.instance.ecpay_token
-    //                    let tokenExpireDate: String = CartService.instance.tokenExpireDate
-    //                    self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
-    //                        //print("aaa")
-    //                        self.toPayment(order_token: order_token, ecpay_token: ecpay_token, tokenExpireDate: tokenExpireDate)
-    //                    }
-    //                } else {
-    //                    self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
-    //                        self.toPayment(order_token: order_token)
-    //                    }
-    //                }
+                    self.info(msg: msg, showCloseButton: true, buttonTitle: "前往結帳") {
+                        self.toMemberCartList()
+                    }
                 } else {
                     self.warning(CartService.instance.msg)
                 }

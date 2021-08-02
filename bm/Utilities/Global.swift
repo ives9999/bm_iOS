@@ -547,6 +547,71 @@ enum ORDER_PROCESS: String {
     }
 }
 
+enum GATEWAY: String {
+    
+    case credit_card = "信用卡"
+    case store_cvs = "超商代碼"
+    case store_barcode = "超商條碼"
+    case store_pay_711 = "7-11超商取貨付款"
+    case store_pay_family = "全家超商取貨付款"
+    case remit = "匯款"
+    case cash = "現金"
+    
+    static func stringToEnum(_ enumString: String) -> GATEWAY {
+        switch enumString {
+        case "credit_card":
+            return .credit_card
+        case "store_cvs":
+            return .store_cvs
+        case "store_barcode":
+            return .store_barcode
+        case "store_pay_711":
+            return .store_pay_711
+        case "store_pay_family":
+            return .store_pay_family
+        case "remit":
+            return .remit
+        case "cash":
+            return .cash
+        default:
+            return .credit_card
+        }
+    }
+    
+    static func getRawValueFromString(_ string: String)-> String {
+        let res: GATEWAY = stringToEnum(string)
+        return res.rawValue
+    }
+}
+
+enum SHIPPING_WAY: String {
+    
+    case direct = "宅配"
+    case store_711 = "7-11超商取貨"
+    case store_family = "全家超商取貨"
+    case cash = "面交"
+    
+    static func stringToEnum(_ enumString: String) -> SHIPPING_WAY {
+        switch enumString {
+        case "direct":
+            return .direct
+        case "store_711":
+            return .store_711
+        case "store_family":
+            return .store_family
+        case "cash":
+            return .cash
+        default:
+            return .direct
+        }
+    }
+    
+    static func getRawValueFromString(_ string: String)-> String {
+        let res: SHIPPING_WAY = stringToEnum(string)
+        return res.rawValue
+    }
+}
+
 enum PAYMENT_PROCESS: String {
     case normal = "未付款"
     case code = "取得付款代碼"

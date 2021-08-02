@@ -29,6 +29,7 @@ class MemberCartListVC: MyTableVC {
         super.viewDidLoad()
         
         submitButton.setTitle("結帳")
+        
         let cellNibName = UINib(nibName: "CartListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "CartListCell")
         
@@ -133,6 +134,14 @@ class MemberCartListVC: MyTableVC {
                 Global.instance.removeSpinner(superView: self.view)
             }
         }
+    }
+    
+    @IBAction func submitBtnPressed(_ sender: Any) {
+        
+        toOrder(
+            login: { vc in vc.toLogin() },
+            register: { vc in vc.toRegister() }
+        )
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {

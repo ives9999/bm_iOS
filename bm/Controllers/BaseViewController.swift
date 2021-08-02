@@ -71,6 +71,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func stepperValueChanged(sectionKey: String, rowKey: String, number: Int){}
     //for TextFieldCell delegate
     func textFieldDidChange(sectionKey: String, rowKey: String, text: String){}
+    //for RadioCell delegate
+    func radioDidChange(sectionKey: String, rowKey: String, checked: Bool){}
     
 //    var wheels: Int = 0
 //    required init() {}

@@ -39,6 +39,7 @@ class List2Cell: UITableViewCell {
     @IBOutlet weak var refreshIcon: SuperButton!
     @IBOutlet weak var likeIcon: LikeIcon!
     
+    @IBOutlet weak var iconViewConstraint: NSLayoutConstraint!
     @IBOutlet weak var mapConstraint: NSLayoutConstraint!
     @IBOutlet weak var mobileConstraint: NSLayoutConstraint!
     @IBOutlet weak var likeConstraint: NSLayoutConstraint!

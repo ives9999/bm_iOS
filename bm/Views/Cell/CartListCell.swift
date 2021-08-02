@@ -58,6 +58,26 @@ class CartListCell: List2Cell {
         deleteIcon.row = row
     }
     
+    func update(sectionKey: String, rowKey: String, title: String, featured_path: String, attribute: String, amount: String, quantity: String) {
+        
+        
+        featured_h = listFeatured.heightForUrl(url: featured_path, width: 90)
+        listFeatured.downloaded(from: featured_path)
+        
+        titleLbl.text = title
+        
+        attributeLbl.text = attribute
+        
+        amountLbl.text = amount
+        
+        quantityLbl.text = "數量：\(quantity)"
+        
+        if (iconView != nil) {
+            iconView.isHidden = true
+            iconViewConstraint.constant = 0
+        }
+    }
+    
     @IBAction func editBtnPressed(sender: UIButton) {
         self._pressed(sender: sender) { (row) in
             if cellDelegate != nil {

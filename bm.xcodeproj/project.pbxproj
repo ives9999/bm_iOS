@@ -233,6 +233,11 @@
 		B3C4953E262E671100D4F727 /* CoachListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4953C262E670F00D4F727 /* CoachListCell.swift */; };
 		B3C4953F262E671200D4F727 /* CoachListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C4953D262E670F00D4F727 /* CoachListCell.xib */; };
 		B3CA52AD2675160300E9EAE9 /* SelectTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CA52AC2675160300E9EAE9 /* SelectTimeVC.swift */; };
+		B3CABD8326B4561300FD0E4D /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CABD8226B4561300FD0E4D /* OrderVC.swift */; };
+		B3CABD8926B6A66B00FD0E4D /* RadioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CABD8726B6A66B00FD0E4D /* RadioCell.swift */; };
+		B3CABD8A26B6A66B00FD0E4D /* RadioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CABD8826B6A66B00FD0E4D /* RadioCell.xib */; };
+		B3CABD9026B6E4DA00FD0E4D /* MemoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CABD8E26B6E4DA00FD0E4D /* MemoCell.swift */; };
+		B3CABD9126B6E4DA00FD0E4D /* MemoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CABD8F26B6E4DA00FD0E4D /* MemoCell.xib */; };
 		B3CB73D923D410CD00892F75 /* OneLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73D723D410CD00892F75 /* OneLineCell.swift */; };
 		B3CB73DA23D410CD00892F75 /* OneLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CB73D823D410CD00892F75 /* OneLineCell.xib */; };
 		B3CB73E223E3185E00892F75 /* OlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73E123E3185D00892F75 /* OlCell.swift */; };
@@ -609,6 +614,11 @@
 		B3C4953C262E670F00D4F727 /* CoachListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachListCell.swift; sourceTree = "<group>"; };
 		B3C4953D262E670F00D4F727 /* CoachListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CoachListCell.xib; sourceTree = "<group>"; };
 		B3CA52AC2675160300E9EAE9 /* SelectTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectTimeVC.swift; sourceTree = "<group>"; };
+		B3CABD8226B4561300FD0E4D /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
+		B3CABD8726B6A66B00FD0E4D /* RadioCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioCell.swift; sourceTree = "<group>"; };
+		B3CABD8826B6A66B00FD0E4D /* RadioCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RadioCell.xib; sourceTree = "<group>"; };
+		B3CABD8E26B6E4DA00FD0E4D /* MemoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoCell.swift; sourceTree = "<group>"; };
+		B3CABD8F26B6E4DA00FD0E4D /* MemoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemoCell.xib; sourceTree = "<group>"; };
 		B3CB73D723D410CD00892F75 /* OneLineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneLineCell.swift; sourceTree = "<group>"; };
 		B3CB73D823D410CD00892F75 /* OneLineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OneLineCell.xib; sourceTree = "<group>"; };
 		B3CB73E123E3185D00892F75 /* OlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OlCell.swift; sourceTree = "<group>"; };
@@ -804,6 +814,8 @@
 				B317855A20D9089600765CA1 /* BlackListCell.swift */,
 				B3E88BE72380F2D1001F015A /* CalendarSignupCell.swift */,
 				B3E88BE82380F2D1001F015A /* CalendarSignupCell.xib */,
+				B370EFCD26AD50840022E599 /* CartListCell.swift */,
+				B370EFCE26AD50840022E599 /* CartListCell.xib */,
 				B3C4953C262E670F00D4F727 /* CoachListCell.swift */,
 				B3C4953D262E670F00D4F727 /* CoachListCell.xib */,
 				B316FED42112F13600FB990C /* CollectionCell.swift */,
@@ -856,8 +868,6 @@
 				B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */,
 				B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
-				B370EFCD26AD50840022E599 /* CartListCell.swift */,
-				B370EFCE26AD50840022E599 /* CartListCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1013,6 +1023,10 @@
 				B3756ED921B8E50E006893E1 /* WeekdayCell.xib */,
 				B3B758EA25B0763A006ACC33 /* WeightCell.swift */,
 				B3B758EB25B0763A006ACC33 /* WeightCell.xib */,
+				B3CABD8726B6A66B00FD0E4D /* RadioCell.swift */,
+				B3CABD8826B6A66B00FD0E4D /* RadioCell.xib */,
+				B3CABD8E26B6E4DA00FD0E4D /* MemoCell.swift */,
+				B3CABD8F26B6E4DA00FD0E4D /* MemoCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1246,6 +1260,7 @@
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
+				B3CABD8226B4561300FD0E4D /* OrderVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1491,11 +1506,13 @@
 				B39E5FA6263D4F0800C40BA7 /* List2Cell.xib in Resources */,
 				B35C4F4D2196F5E500F8AEB2 /* EditCell.xib in Resources */,
 				B306FEAE21F8422B00403FE2 /* IconCell.xib in Resources */,
+				B3CABD9126B6E4DA00FD0E4D /* MemoCell.xib in Resources */,
 				B3DEBE102106FDB1003699A0 /* ListCell.xib in Resources */,
 				B3A9038E2385537900A986F7 /* CourseView.xib in Resources */,
 				B3A253F0256CBB40004B8A03 /* Select.storyboard in Resources */,
 				B3D4950E25DF67D900D7BF42 /* PaymentCell.xib in Resources */,
 				B39453DF2232948F005E3027 /* PNCell.xib in Resources */,
+				B3CABD8A26B6A66B00FD0E4D /* RadioCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1842,12 +1859,14 @@
 				B370EFCF26AD50840022E599 /* CartListCell.swift in Sources */,
 				B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */,
 				B3F6B4632605C9190000F9E0 /* CityTable.swift in Sources */,
+				B3CABD9026B6E4DA00FD0E4D /* MemoCell.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* TeachService.swift in Sources */,
 				B326C7CC256E2F0D0048A2C2 /* SelectAreasVC.swift in Sources */,
 				B323390B21B6B8E4003EB84D /* FormValidableProtocol.swift in Sources */,
 				B309C1E22675F45E00CCFE61 /* SelectArenaVC.swift in Sources */,
 				B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */,
 				B33C1AB921BD10B8006F2BEB /* StatusFormItem.swift in Sources */,
+				B3CABD8326B4561300FD0E4D /* OrderVC.swift in Sources */,
 				B3A2542225723F5B004B8A03 /* SelectManagers.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 				B3F6B47A260603A70000F9E0 /* OrderTable.swift in Sources */,
@@ -1865,6 +1884,7 @@
 				B3E4D17C25FF9E3900D78210 /* Table.swift in Sources */,
 				B362265D25E54C9D00D98317 /* HomeTotalAdVC.swift in Sources */,
 				F96931991FB958110005C13F /* CitySelectVC.swift in Sources */,
+				B3CABD8926B6A66B00FD0E4D /* RadioCell.swift in Sources */,
 				B3E4D1CD2602DD7E00D78210 /* ArenaTable.swift in Sources */,
 				B3ED38D71FB2A3E80003F083 /* EditProfileVC.swift in Sources */,
 				B3A253E4256BCBB8004B8A03 /* AreaFormItem.swift in Sources */,

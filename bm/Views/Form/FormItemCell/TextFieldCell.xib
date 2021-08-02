@@ -90,7 +90,7 @@
     </objects>
     <designables>
         <designable name="mRn-Ga-cUS">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="27" height="48"/>
         </designable>
     </designables>
     <resources>
