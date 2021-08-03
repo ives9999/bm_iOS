@@ -39,13 +39,25 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     var shippingRows: [[String: String]] = []
     
-    let invoiceRows: [[String: String]] = [
-        ["title": "發票","key":INVOICE_KEY,"value":"","show":"","cell":"more"]
+    var invoiceRows: [[String: String]] = []
+    
+    var invoiceFixedRows: [[String: String]] = [
+        ["title": "發票(本商城目前僅提供電子發票)","key":INVOICE_KEY,"value":"","show":"","cell":"more"]
     ]
     
-    var invoiceRows1: [[String: String]] = [
+    var invoiceOptionRows: [[String: String]] = [
         ["title": "個人","key":PERSONAL_KEY,"value":"true","show":"","cell":"radio"],
         ["title": "公司","key":COMPANY_KEY,"value":"false","show":"","cell":"radio"]
+    ]
+    
+    let invoicePersonalRows: [[String: String]] = [
+        ["title":"EMail","key":EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
+    ]
+    
+    let invoiceCompanyRows: [[String: String]] = [
+        ["title":"統一編編","key":COMPANY_TAX_KEY,"value":"","show":"","cell":"textField"],
+        ["title":"公司行號抬頭","key":COMPANY_KEY,"value":"","show":"","cell":"textField"],
+        ["title":"EMail","key":EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
     ]
     
     var memberRows: [[String: String]] = []
@@ -55,11 +67,20 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     ]
     
     var blackView = UIView()
-    var searchTableView: UITableView = {
+    var invoiceTable: UITableView = {
         let cv = UITableView(frame: .zero, style: .plain)
-        cv.backgroundColor = UIColor.black
+        cv.estimatedRowHeight = 44
+        cv.rowHeight = UITableView.automaticDimension
+        
+        cv.separatorStyle = .singleLine
+        cv.separatorColor = UIColor.lightGray
+        
         return cv
     }()
+    let invoiceTableHeight: CGFloat = 180
+    let blackViewHeight: CGFloat = 250
+    let blackViewPaddingLeft: CGFloat = 20
+    let cancelBtn: CancelButton = CancelButton()
     
     override func viewDidLoad() {
         
@@ -68,7 +89,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         super.viewDidLoad()
         //print(superProduct)
         self.hideKeyboardWhenTappedAround()
-        submitButton.setTitle("送出")
+        submitButton.setTitle("結帳")
         
         let plainNib = UINib(nibName: "PlainCell", bundle: nil)
         tableView.register(plainNib, forCellReuseIdentifier: "PlainCell")
@@ -158,21 +179,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                         cartItemTable.filterRow()
                         amount += cartItemTable.amount
                         
-                        var row:[String: String] = ["title":"商品金額","key":"amount","value":String(amount),"show":"NT$ \(String(amount))","cell":"text"]
-                        amountRows.append(row)
-                        
-                        let shipping_fee: Int = 60
-                        row = ["title":"運費","key":"shipping_fee","value":String(shipping_fee),"show":"NT$ \(String(shipping_fee))","cell":"text"]
-                        amountRows.append(row)
-                        
-                        let tax: Int = 0
-                        row = ["title":"稅","key":"tax","value":String(tax),"show":"NT$ \(String(tax))","cell":"text"]
-                        amountRows.append(row)
-                        
-                        let amount: Int = 60
-                        row = ["title":"總金額","key":"tax","value":String(amount),"show":"NT$ \(String(amount))","cell":"text"]
-                        amountRows.append(row)
-                        
                         productTable = cartItemTable.product
                         
                         var attribute_text: String = ""
@@ -186,9 +192,29 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                             }
                         }
                         
-                        row = ["title":productTable!.name,"key":PRODUCT_KEY,"value":"","show":"","cell":"cart","featured_path":productTable!.featured_path,"attribute":attribute_text,"amount":cartItemTable.amount_show,"quantity":String(cartItemTable.quantity)]
+                        let row:[String: String] = ["title":productTable!.name,"key":PRODUCT_KEY,"value":"","show":"","cell":"cart","featured_path":productTable!.featured_path,"attribute":attribute_text,"amount":cartItemTable.amount_show,"quantity":String(cartItemTable.quantity)]
                         productRows.append(row)
                     }
+                    
+                    let amount_show: String = amount.formattedWithSeparator
+                    var row:[String: String] = ["title":"商品金額","key":"amount","value":String(amount),"show":"NT$ \(amount_show)","cell":"text"]
+                    amountRows.append(row)
+                    
+                    var shipping_fee: Int = 60
+                    if (amount > 1000) { shipping_fee = 0}
+                    let shipping_fee_show: String = shipping_fee.formattedWithSeparator
+                    row = ["title":"運費","key":"shipping_fee","value":String(shipping_fee),"show":"NT$ \(shipping_fee_show)","cell":"text"]
+                    amountRows.append(row)
+                    
+                    let tax: Int = Int(Double(amount) * 0.05)
+                    let tax_show: String = tax.formattedWithSeparator
+                    row = ["title":"稅","key":"tax","value":String(tax),"show":"NT$ \(tax_show)","cell":"text"]
+                    amountRows.append(row)
+                    
+                    let total: Int = amount + shipping_fee + tax
+                    let total_show: String = total.formattedWithSeparator
+                    row = ["title":"總金額","key":"total","value":String(total),"show":"NT$ \(total_show)","cell":"text"]
+                    amountRows.append(row)
                     
                     let gateway: String = productTable!.gateway
                     var arr: [String] = gateway.components(separatedBy: ",")
@@ -239,6 +265,16 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             ["title":"EMail","key":EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"],
             ["title":"住址","key":ADDRESS_KEY,"value":"\(Member.instance.address)","show":"\(Member.instance.address)","cell":"textField"]
         ]
+        
+        for invoiceFixedRow in invoiceFixedRows {
+            
+            invoiceRows.append(invoiceFixedRow)
+        }
+        
+        for invoicePersonalRow in invoicePersonalRows {
+            
+            invoiceRows.append(invoicePersonalRow)
+        }
         
         myRows = [
             ["key":PRODUCT_KEY, "rows": productRows],
@@ -360,7 +396,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        if (tableView == searchTableView) {
+        if (tableView == invoiceTable) {
             return 1
         } else {
             return mySections.count
@@ -371,8 +407,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         var count: Int = 0
         
-        if (tableView == searchTableView) {
-            count = invoiceRows1.count
+        if (tableView == invoiceTable) {
+            count = invoiceOptionRows.count
         } else {
         
             let mySection: [String: Any] = mySections[section]
@@ -392,7 +428,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if (tableView == searchTableView) {
+        if (tableView == invoiceTable) {
             return UIView()
         } else {
         
@@ -422,10 +458,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if (tableView == searchTableView) {
+        if (tableView == invoiceTable) {
             if let cell: RadioCell = tableView.dequeueReusableCell(withIdentifier: "RadioCell", for: indexPath) as? RadioCell {
                 
-                let row: [String: String] = invoiceRows1[indexPath.row]
+                let row: [String: String] = invoiceOptionRows[indexPath.row]
                 
                 let rowKey: String = row["key"]!
                 
@@ -562,45 +598,73 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        //var rowKey: String = ""
-        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-        
-        var cell_type: String = "text"
-        if (row.keyExist(key: "cell")) {
-            cell_type = row["cell"]!
-        }
-        
-        if (cell_type == "more") {
+        if (tableView == invoiceTable) {
             
-            maskView = view.mask()
+            let rowKey: String = invoiceOptionRows[indexPath.row]["key"]!
+            let checked: Bool = Bool(invoiceOptionRows[indexPath.row]["value"]!)!
+            radioDidChange(sectionKey: INVOICE_KEY, rowKey: rowKey, checked: !checked)
+        } else {
+            //var rowKey: String = ""
+            let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
             
-            let frame: CGRect = CGRect(x:20, y:(maskView.frame.height-200)/2, width:maskView.frame.width-(2*20), height:200)
-            blackView.frame = frame
-            blackView.backgroundColor = UIColor.black
-            maskView.addSubview(blackView)
+            var cell_type: String = "text"
+            if (row.keyExist(key: "cell")) {
+                cell_type = row["cell"]!
+            }
             
-            addTableView()
+            if (cell_type == "more") {
+                
+                maskView = view.mask()
+                
+                let frame: CGRect = CGRect(x:blackViewPaddingLeft, y:(maskView.frame.height-blackViewHeight)/2, width:maskView.frame.width-(2*blackViewPaddingLeft), height:blackViewHeight)
+                blackView.frame = frame
+                blackView.backgroundColor = UIColor.black
+                maskView.addSubview(blackView)
+                let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
+                gesture.cancelsTouchesInView = false
+                maskView.addGestureRecognizer(gesture)
+                
+                addInvoiceSelectView()
+                addCancelBtn()
+            }
         }
     }
     
-    func addTableView() {
+    @objc override func unmask(){
         
-        let frame = view.frame
-        searchTableView.frame = CGRect(x: 0, y: 0, width: blackView.frame.width, height: frame.height - 300)
-        searchTableView.dataSource = self
-        searchTableView.delegate = self
+        maskView.unmask()
+    }
+    
+    func addInvoiceSelectView() {
         
-        searchTableView.estimatedRowHeight = 44
-        searchTableView.rowHeight = UITableView.automaticDimension
+        //let frame = view.frame
+        invoiceTable.frame = CGRect(x: 0, y: 0, width: blackView.frame.width, height: invoiceTableHeight)
+        invoiceTable.dataSource = self
+        invoiceTable.delegate = self
         
-        searchTableView.separatorStyle = .singleLine
-        searchTableView.separatorColor = UIColor.lightGray
+        invoiceTable.backgroundColor = .clear
         
-        searchTableView.backgroundColor = UIColor.clear
-        blackView.addSubview(searchTableView)
+        blackView.addSubview(invoiceTable)
         
         let radioNib = UINib(nibName: "RadioCell", bundle: nil)
-        searchTableView.register(radioNib, forCellReuseIdentifier: "RadioCell")
+        invoiceTable.register(radioNib, forCellReuseIdentifier: "RadioCell")
+    }
+    
+    func addCancelBtn() {
+        
+        blackView.addSubview(cancelBtn)
+        
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: cancelBtn, attribute: .top, relatedBy: .equal, toItem: invoiceTable, attribute: .bottom, multiplier: 1, constant: 12)
+//        var offset:CGFloat = 0
+//        if btnCount == 2 {
+//            offset = 60
+//        }
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: cancelBtn, attribute: .centerX, relatedBy: .equal, toItem: cancelBtn.superview, attribute: .centerX, multiplier: 1, constant: 0)
+        cancelBtn.translatesAutoresizingMaskIntoConstraints = false
+        blackView.addConstraints([c1,c2])
+        
+        cancelBtn.addTarget(self, action: #selector(unmask), for: .touchUpInside)
+        self.cancelBtn.isHidden = false
     }
     
     func updateSubTotal() {
@@ -675,17 +739,46 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     override func radioDidChange(sectionKey: String, rowKey: String, checked: Bool) {
         
+        //點選發票選項
+        invoiceRows.removeAll()
         if (sectionKey == INVOICE_KEY) {
             
-            for (idx, var row) in invoiceRows1.enumerated() {
+            for invoiceFixedRow in invoiceFixedRows {
+                invoiceRows.append(invoiceFixedRow)
+            }
+            
+            for (idx, var row) in invoiceOptionRows.enumerated() {
                 if (row["key"] == rowKey) {
                     row["value"] = String(checked)
                 } else {
                     row["value"] = String(!checked)
                 }
-                invoiceRows1[idx] = row
+                invoiceOptionRows[idx] = row
             }
+            
+            var selectedRow: [String: String] = [String: String]()
+            for row in invoiceOptionRows {
+                if (row["value"] == "true") {
+                    selectedRow = row
+                }
+            }
+            //print(selectedRow)
+            let selectedKey: String = selectedRow["key"]!
+            if (selectedKey == PERSONAL_KEY) {
+                for invoicePersonalRow in invoicePersonalRows {
+                    invoiceRows.append(invoicePersonalRow)
+                }
+            } else {
+                for invoiceCompanyRow in invoiceCompanyRows {
+                    invoiceRows.append(invoiceCompanyRow)
+                }
+            }
+            
+            replaceRowsByKey(sectionKey: INVOICE_KEY, rows: invoiceRows)
+            
             maskView.removeFromSuperview()
+            
+            invoiceTable.reloadData()
             
         } else {
             let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
@@ -726,48 +819,53 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
+        
         Global.instance.addSpinner(superView: self.view)
         var params: [String: String] = [String: String]()
         
         params["device"] = "app"
-        params["product_id"] = String(productTable!.id)
-        params["type"] = productTable!.type
-        params["price_id"] = String(productTable!.prices[selected_idx].id)
+        params["cart_id"] = String(cartTable!.id)
+        params["amount"] = getRowValue(rowKey: "amount")
+        params["shipping_fee"] = getRowValue(rowKey: "shopping_fee")
+        params["tax"] = getRowValue(rowKey: "tax")
+        params["total"] = getRowValue(rowKey: "total")
         
         params["member_id"] = String(Member.instance.id)
-        params["order_name"] = Member.instance.name
-        params["order_tel"] = Member.instance.mobile
-        params["order_email"] = Member.instance.email
+        params["order_name"] = getRowValue(rowKey: "name")
+        params["order_tel"] = getRowValue(rowKey: "tel")
+        params["order_email"] = getRowValue(rowKey: "email")
+        
+        
         params["gateway"] = "credit_card"
         
-        let city_name = Global.instance.zoneIDToName(Member.instance.city)
-        let area_name = Global.instance.zoneIDToName(Member.instance.area)
-        params["order_city"] = city_name
-        params["order_area"] = area_name
-        params["order_road"] = Member.instance.road
+//        let city_name = Global.instance.zoneIDToName(Member.instance.city)
+//        let area_name = Global.instance.zoneIDToName(Member.instance.area)
+//        params["order_city"] = city_name
+//        params["order_area"] = area_name
+//        params["order_road"] = Member.instance.road
         
-        let numberFormItem = getFormItemFromKey(NUMBER_KEY)
-        params["quantity"] = numberFormItem?.value
+//        let numberFormItem = getFormItemFromKey(NUMBER_KEY)
+//        params["quantity"] = numberFormItem?.value
+//
+//        let totalFormItem = getFormItemFromKey(TOTAL_KEY)
+//        params["amount"] = totalFormItem?.value
+//
+//        let shippingFeeFormItem = getFormItemFromKey(SHIPPING_FEE_KEY)
+//        if (shippingFeeFormItem != nil) {
+//            params["shipping_fee"] = shippingFeeFormItem?.value
+//        }
         
-        let totalFormItem = getFormItemFromKey(TOTAL_KEY)
-        params["amount"] = totalFormItem?.value
-        
-        let shippingFeeFormItem = getFormItemFromKey(SHIPPING_FEE_KEY)
-        if (shippingFeeFormItem != nil) {
-            params["shipping_fee"] = shippingFeeFormItem?.value
-        }
-        
-        if let item = getFormItemFromKey(COLOR_KEY) {
-            params["color"] = item.value
-        }
-        
-        if let item = getFormItemFromKey(CLOTHES_SIZE_KEY) {
-            params["size"] = item.value
-        }
-        
-        if let item = getFormItemFromKey(WEIGHT_KEY) {
-            params["weight"] = item.value
-        }
+//        if let item = getFormItemFromKey(COLOR_KEY) {
+//            params["color"] = item.value
+//        }
+//
+//        if let item = getFormItemFromKey(CLOTHES_SIZE_KEY) {
+//            params["size"] = item.value
+//        }
+//
+//        if let item = getFormItemFromKey(WEIGHT_KEY) {
+//            params["weight"] = item.value
+//        }
         //print(params)
         
         //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")

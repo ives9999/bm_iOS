@@ -631,6 +631,18 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         }
     }
     
+    func replaceRowsByKey(sectionKey: String, rows: [[String: String]]) {
+        
+        for (sectionIdx, sectionRow) in myRows.enumerated() {
+            
+            if let sectionKey1: String = sectionRow["key"] as? String {
+                if (sectionKey1 == sectionKey) {
+                    myRows[sectionIdx]["rows"] = rows
+                }
+            }
+        }
+    }
+    
     //["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
     func getRowFromIndexPath(indexPath: IndexPath)-> [String: String] {
         

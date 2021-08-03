@@ -1626,6 +1626,13 @@ extension UIView {
         return maskView
     }
     
+    func unmask() {
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+        self.removeFromSuperview()
+    }
+    
     func tempPlayShowTableConstraint(_ items:[[String: UILabel]]) -> [NSLayoutConstraint] {
         var constraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
         var views: [String: UILabel] = [String: UILabel]()

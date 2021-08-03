@@ -28,7 +28,7 @@ class MemberCartListVC: MyTableVC {
         
         super.viewDidLoad()
         
-        submitButton.setTitle("結帳")
+        submitButton.setTitle("成立訂單")
         
         let cellNibName = UINib(nibName: "CartListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "CartListCell")
