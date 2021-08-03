@@ -1609,10 +1609,21 @@ extension Array where Element: Comparable {
 }
 
 extension UIView {
+    
     enum Visibility {
         case visible
         case invisible
         case gone
+    }
+    
+    func mask()-> UIView {
+        
+        let maskView: UIView = UIView()
+        maskView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height)
+        maskView.backgroundColor = UIColor(hex: "#888888", alpha: 0.9)
+        self.addSubview(maskView)
+        
+        return maskView
     }
     
     func tempPlayShowTableConstraint(_ items:[[String: UILabel]]) -> [NSLayoutConstraint] {

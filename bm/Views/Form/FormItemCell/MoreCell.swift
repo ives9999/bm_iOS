@@ -11,6 +11,10 @@ import UIKit
 class MoreCell: FormItemCell {
     
     @IBOutlet weak var detailLbl: SuperLabel!
+    
+    var sectionKey: String = ""
+    var rowKey: String = ""
+    var baseViewControllerDelegate: BaseViewController? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,6 +42,17 @@ class MoreCell: FormItemCell {
         formItem?.sender = nil
         clearBtn.isHidden = true
         detailLbl.text = ""
+    }
+    
+    func update(sectionKey: String, rowKey: String, title: String, value: String, show: String) {
+        
+        self.sectionKey = sectionKey
+        self.rowKey = rowKey
+        
+        titleLbl!.text = title
+        detailLbl.text = show
+        
+        promptBtn.isHidden = true
     }
     
     override func update(with formItem: FormItem) {

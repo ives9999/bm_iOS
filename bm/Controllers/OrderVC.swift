@@ -40,12 +40,26 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     var shippingRows: [[String: String]] = []
     
     let invoiceRows: [[String: String]] = [
-        ["title": "電子發票","key":INVOICE_KEY,"value":"","show":"","cell":"text"]
+        ["title": "發票","key":INVOICE_KEY,"value":"","show":"","cell":"more"]
     ]
+    
+    var invoiceRows1: [[String: String]] = [
+        ["title": "個人","key":PERSONAL_KEY,"value":"true","show":"","cell":"radio"],
+        ["title": "公司","key":COMPANY_KEY,"value":"false","show":"","cell":"radio"]
+    ]
+    
+    var memberRows: [[String: String]] = []
     
     let memoRows: [[String: String]] = [
         ["title": "留言","key":MEMO_KEY,"value":"","show":"","cell":"memo"]
     ]
+    
+    var blackView = UIView()
+    var searchTableView: UITableView = {
+        let cv = UITableView(frame: .zero, style: .plain)
+        cv.backgroundColor = UIColor.black
+        return cv
+    }()
     
     override func viewDidLoad() {
         
@@ -67,6 +81,12 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         let memoNib = UINib(nibName: "MemoCell", bundle: nil)
         tableView.register(memoNib, forCellReuseIdentifier: "MemoCell")
+        
+        let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
+        tableView.register(textFieldNib, forCellReuseIdentifier: "TextFieldCell")
+        
+        let moreNib = UINib(nibName: "MoreCell", bundle: nil)
+        tableView.register(moreNib, forCellReuseIdentifier: "MoreCell")
         
         refresh()
     }
@@ -138,7 +158,19 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                         cartItemTable.filterRow()
                         amount += cartItemTable.amount
                         
-                        var row:[String: String] = ["title":"總金額","key":"amount","value":String(amount),"show":String(amount),"cell":"text"]
+                        var row:[String: String] = ["title":"商品金額","key":"amount","value":String(amount),"show":"NT$ \(String(amount))","cell":"text"]
+                        amountRows.append(row)
+                        
+                        let shipping_fee: Int = 60
+                        row = ["title":"運費","key":"shipping_fee","value":String(shipping_fee),"show":"NT$ \(String(shipping_fee))","cell":"text"]
+                        amountRows.append(row)
+                        
+                        let tax: Int = 0
+                        row = ["title":"稅","key":"tax","value":String(tax),"show":"NT$ \(String(tax))","cell":"text"]
+                        amountRows.append(row)
+                        
+                        let amount: Int = 60
+                        row = ["title":"總金額","key":"tax","value":String(amount),"show":"NT$ \(String(amount))","cell":"text"]
                         amountRows.append(row)
                         
                         productTable = cartItemTable.product
@@ -197,7 +229,15 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             ["name": "付款方式", "isExpanded": true, "key": GATEWAY_KEY],
             ["name": "寄送方式", "isExpanded": true, "key": SHIPPING_KEY],
             ["name": "電子發票", "isExpanded": true, "key": INVOICE_KEY],
+            ["name": "收件人資料", "isExpanded": true, "key": MEMBER_KEY],
             ["name": "其他留言", "isExpanded": true, "key": MEMO_KEY]
+        ]
+        
+        memberRows = [
+            ["title":"姓名","key":NAME_KEY,"value":"\(Member.instance.name)","show":"\(Member.instance.name)","cell":"textField"],
+            ["title":"電話","key":MOBILE_KEY,"value":"\(Member.instance.mobile)","show":"\(Member.instance.mobile)","cell":"textField"],
+            ["title":"EMail","key":EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"],
+            ["title":"住址","key":ADDRESS_KEY,"value":"\(Member.instance.address)","show":"\(Member.instance.address)","cell":"textField"]
         ]
         
         myRows = [
@@ -206,6 +246,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             ["key":GATEWAY_KEY, "rows": gatewayRows],
             ["key":SHIPPING_KEY, "rows": shippingRows],
             ["key":INVOICE_KEY, "rows": invoiceRows],
+            ["key":MEMBER_KEY, "rows": memberRows],
             ["key":MEMO_KEY, "rows": memoRows]
         ]
         
@@ -318,18 +359,30 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return mySections.count
+        
+        if (tableView == searchTableView) {
+            return 1
+        } else {
+            return mySections.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         var count: Int = 0
-        let mySection: [String: Any] = mySections[section]
-        if (mySection.keyExist(key: "isExpanded")) {
-            let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
-            if (isExpanded) {
-                if let key: String = mySection["key"] as? String {
-                    let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
-                    count = rows.count
+        
+        if (tableView == searchTableView) {
+            count = invoiceRows1.count
+        } else {
+        
+            let mySection: [String: Any] = mySections[section]
+            if (mySection.keyExist(key: "isExpanded")) {
+                let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
+                if (isExpanded) {
+                    if let key: String = mySection["key"] as? String {
+                        let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+                        count = rows.count
+                    }
                 }
             }
         }
@@ -339,106 +392,141 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.white
-        headerView.tag = section
+        if (tableView == searchTableView) {
+            return UIView()
+        } else {
         
-        let titleLabel = UILabel()
-        titleLabel.text = getSectionName(idx: section)
-        titleLabel.textColor = UIColor.black
-        titleLabel.sizeToFit()
-        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
-        headerView.addSubview(titleLabel)
-        
-        let isExpanded = getSectionExpanded(idx: section)
-        let mark = UIImageView(image: UIImage(named: "to_right"))
-        mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
-        toggleMark(mark: mark, isExpanded: isExpanded)
-        headerView.addSubview(mark)
-        
-        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
-        headerView.addGestureRecognizer(gesture)
-        
-        return headerView
+            let headerView = UIView()
+            headerView.backgroundColor = UIColor.white
+            headerView.tag = section
+            
+            let titleLabel = UILabel()
+            titleLabel.text = getSectionName(idx: section)
+            titleLabel.textColor = UIColor.black
+            titleLabel.sizeToFit()
+            titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
+            headerView.addSubview(titleLabel)
+            
+            let isExpanded = getSectionExpanded(idx: section)
+            let mark = UIImageView(image: UIImage(named: "to_right"))
+            mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
+            toggleMark(mark: mark, isExpanded: isExpanded)
+            headerView.addSubview(mark)
+            
+            let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+            headerView.addGestureRecognizer(gesture)
+            
+            return headerView
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var rowKey: String = ""
-        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-        if let tmp: String = row["key"] {
-            rowKey = tmp
-        }
-        
-        var sectionKey: String = ""
-        let section: [String: Any] = myRows[indexPath.section]
-        if let tmp: String = section["key"] as? String {
-            sectionKey = tmp
-        }
-        
-        var cell_type: String = "text"
-        if (row.keyExist(key: "cell")) {
-            cell_type = row["cell"]!
-        }
-        
-        var title: String = ""
-        var show: String = ""
-        var value: String = ""
-        
-        if row.keyExist(key: "title") {
-            title = row["title"]!
-        }
-        
-        if row.keyExist(key: "show") {
-            show = row["show"]!
-        }
-        
-        if row.keyExist(key: "value") {
-            value = row["value"]!
-        }
-        
-        if (cell_type == "cart") {
-            if let cell: CartListCell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
-                
-                cell.update(sectionKey: sectionKey,rowKey: rowKey,title: title,featured_path:row["featured_path"]!,attribute:row["attribute"]!,amount: row["amount"]!,quantity: row["quantity"]!)
-                return cell
-            }
-        } else if (cell_type == "radio") {
+        if (tableView == searchTableView) {
             if let cell: RadioCell = tableView.dequeueReusableCell(withIdentifier: "RadioCell", for: indexPath) as? RadioCell {
                 
+                let row: [String: String] = invoiceRows1[indexPath.row]
+                
+                let rowKey: String = row["key"]!
+                
+                var title: String = ""
                 if row.keyExist(key: "title") {
                     title = row["title"]!
                 }
                 
-                cell.baseViewControllerDelegate = self
-                cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, checked: Bool(value)!)
-                return cell
-            }
-        } else if (cell_type == "text") {
-            if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
-                
-                cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, show: show)
-                return cell
-            }
-        } else if (cell_type == "textField") {
-            if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell {
-                
-                var keyboard: String = "default"
-                if row.keyExist(key: "keyboard") {
-                    let tmp: String = row["keyboard"]!
-                    keyboard = tmp
+                var value: String = "false"
+                if row.keyExist(key: "value") {
+                    value = row["value"]!
                 }
                 
                 cell.baseViewControllerDelegate = self
-                cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, keyboard: keyboard)
+                cell.update(sectionKey: INVOICE_KEY, rowKey: rowKey, title: title, checked: Bool(value)!)
                 return cell
             }
-        } else if (cell_type == "memo") {
-            if let cell: MemoCell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath) as? MemoCell {
-                
-                cell.baseViewControllerDelegate = self
-                cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value)
-                return cell
+        } else {
+            var rowKey: String = ""
+            let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
+            if let tmp: String = row["key"] {
+                rowKey = tmp
+            }
+            
+            var sectionKey: String = ""
+            let section: [String: Any] = myRows[indexPath.section]
+            if let tmp: String = section["key"] as? String {
+                sectionKey = tmp
+            }
+            
+            var cell_type: String = "text"
+            if (row.keyExist(key: "cell")) {
+                cell_type = row["cell"]!
+            }
+            
+            var title: String = ""
+            var show: String = ""
+            var value: String = ""
+            
+            if row.keyExist(key: "title") {
+                title = row["title"]!
+            }
+            
+            if row.keyExist(key: "show") {
+                show = row["show"]!
+            }
+            
+            if row.keyExist(key: "value") {
+                value = row["value"]!
+            }
+            
+            if (cell_type == "cart") {
+                if let cell: CartListCell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
+                    
+                    cell.update(sectionKey: sectionKey,rowKey: rowKey,title: title,featured_path:row["featured_path"]!,attribute:row["attribute"]!,amount: row["amount"]!,quantity: row["quantity"]!)
+                    return cell
+                }
+            } else if (cell_type == "radio") {
+                if let cell: RadioCell = tableView.dequeueReusableCell(withIdentifier: "RadioCell", for: indexPath) as? RadioCell {
+                    
+                    if row.keyExist(key: "title") {
+                        title = row["title"]!
+                    }
+                    
+                    cell.baseViewControllerDelegate = self
+                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, checked: Bool(value)!)
+                    return cell
+                }
+            } else if (cell_type == "text") {
+                if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
+                    
+                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, show: show)
+                    return cell
+                }
+            } else if (cell_type == "textField") {
+                if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell {
+                    
+                    var keyboard: String = "default"
+                    if row.keyExist(key: "keyboard") {
+                        let tmp: String = row["keyboard"]!
+                        keyboard = tmp
+                    }
+                    
+                    cell.baseViewControllerDelegate = self
+                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, keyboard: keyboard)
+                    return cell
+                }
+            } else if (cell_type == "memo") {
+                if let cell: MemoCell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath) as? MemoCell {
+                    
+                    cell.baseViewControllerDelegate = self
+                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value)
+                    return cell
+                }
+            } else if (cell_type == "more") {
+                if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "MoreCell", for: indexPath) as? MoreCell {
+                    
+                    cell.baseViewControllerDelegate = self
+                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, show: show)
+                    return cell
+                }
             }
         }
         
@@ -470,6 +558,49 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        }
 //        
 //        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        //var rowKey: String = ""
+        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
+        
+        var cell_type: String = "text"
+        if (row.keyExist(key: "cell")) {
+            cell_type = row["cell"]!
+        }
+        
+        if (cell_type == "more") {
+            
+            maskView = view.mask()
+            
+            let frame: CGRect = CGRect(x:20, y:(maskView.frame.height-200)/2, width:maskView.frame.width-(2*20), height:200)
+            blackView.frame = frame
+            blackView.backgroundColor = UIColor.black
+            maskView.addSubview(blackView)
+            
+            addTableView()
+        }
+    }
+    
+    func addTableView() {
+        
+        let frame = view.frame
+        searchTableView.frame = CGRect(x: 0, y: 0, width: blackView.frame.width, height: frame.height - 300)
+        searchTableView.dataSource = self
+        searchTableView.delegate = self
+        
+        searchTableView.estimatedRowHeight = 44
+        searchTableView.rowHeight = UITableView.automaticDimension
+        
+        searchTableView.separatorStyle = .singleLine
+        searchTableView.separatorColor = UIColor.lightGray
+        
+        searchTableView.backgroundColor = UIColor.clear
+        blackView.addSubview(searchTableView)
+        
+        let radioNib = UINib(nibName: "RadioCell", bundle: nil)
+        searchTableView.register(radioNib, forCellReuseIdentifier: "RadioCell")
     }
     
     func updateSubTotal() {
@@ -544,20 +675,34 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     override func radioDidChange(sectionKey: String, rowKey: String, checked: Bool) {
         
-        let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
-        for row in rows {
+        if (sectionKey == INVOICE_KEY) {
             
-            if (row.keyExist(key: "key")) {
-                let key = row["key"]
-                var _row = row
-                var a: Bool = false
-                if (key == rowKey) {
-                    a = checked
+            for (idx, var row) in invoiceRows1.enumerated() {
+                if (row["key"] == rowKey) {
+                    row["value"] = String(checked)
                 } else {
-                    a = !checked
+                    row["value"] = String(!checked)
                 }
-                _row["value"] = String(a)
-                replaceRowByKey(sectionKey: sectionKey, rowKey: key!, _row: _row)
+                invoiceRows1[idx] = row
+            }
+            maskView.removeFromSuperview()
+            
+        } else {
+            let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
+            for row in rows {
+                
+                if (row.keyExist(key: "key")) {
+                    let key = row["key"]
+                    var _row = row
+                    var a: Bool = false
+                    if (key == rowKey) {
+                        a = checked
+                    } else {
+                        a = !checked
+                    }
+                    _row["value"] = String(a)
+                    replaceRowByKey(sectionKey: sectionKey, rowKey: key!, _row: _row)
+                }
             }
         }
         tableView.reloadData()

@@ -30,7 +30,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     let session: UserDefaults = UserDefaults.standard
     
     //layer
-    let maskView = UIView()
+    var maskView = UIView()
     var containerView = UIView(frame: .zero)
     let layerSubmitBtn: SubmitButton = SubmitButton()
     let layerCancelBtn: CancelButton = CancelButton()
