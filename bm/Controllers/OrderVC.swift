@@ -203,17 +203,17 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     var shipping_fee: Int = 60
                     if (amount > 1000) { shipping_fee = 0}
                     let shipping_fee_show: String = shipping_fee.formattedWithSeparator
-                    row = ["title":"運費","key":"shipping_fee","value":String(shipping_fee),"show":"NT$ \(shipping_fee_show)","cell":"text"]
+                    row = ["title":"運費","key":SHIPPING_KEY,"value":String(shipping_fee),"show":"NT$ \(shipping_fee_show)","cell":"text"]
                     amountRows.append(row)
                     
                     let tax: Int = Int(Double(amount) * 0.05)
                     let tax_show: String = tax.formattedWithSeparator
-                    row = ["title":"稅","key":"tax","value":String(tax),"show":"NT$ \(tax_show)","cell":"text"]
+                    row = ["title":"稅","key":TAX_KEY,"value":String(tax),"show":"NT$ \(tax_show)","cell":"text"]
                     amountRows.append(row)
                     
                     let total: Int = amount + shipping_fee + tax
                     let total_show: String = total.formattedWithSeparator
-                    row = ["title":"總金額","key":"total","value":String(total),"show":"NT$ \(total_show)","cell":"text"]
+                    row = ["title":"總金額","key":TOTAL_KEY,"value":String(total),"show":"NT$ \(total_show)","cell":"text"]
                     amountRows.append(row)
                     
                     let gateway: String = productTable!.gateway
@@ -825,18 +825,69 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         params["device"] = "app"
         params["cart_id"] = String(cartTable!.id)
-        params["amount"] = getRowValue(rowKey: "amount")
-        params["shipping_fee"] = getRowValue(rowKey: "shopping_fee")
-        params["tax"] = getRowValue(rowKey: "tax")
-        params["total"] = getRowValue(rowKey: "total")
+        
+        params[AMOUNT_KEY] = getRowValue(rowKey: AMOUNT_KEY)
+        params[SHIPPING_KEY] = getRowValue(rowKey: SHIPPING_KEY)
+        params[TAX_KEY] = getRowValue(rowKey: TAX_KEY)
+        params[TOTAL_KEY] = getRowValue(rowKey: TOTAL_KEY)
+        
+        let gateways = getRowRowsFromMyRowsByKey(key: GATEWAY_KEY)
+        var key: String = "credit_card"
+        for gateway in gateways {
+            if (gateway["value"] == "true") {
+                key = gateway["key"]!
+            }
+        }
+        params[GATEWAY_KEY] = key
+        
+        let shippings = getRowRowsFromMyRowsByKey(key: SHIPPING_KEY)
+        key = "direct"
+        for shipping in shippings {
+            if (shipping["value"] == "true") {
+                key = shipping["key"]!
+            }
+        }
+        params[SHIPPING_KEY] = key
+        
+        //invoice
+        for invoice_option in invoiceOptionRows {
+            if (invoice_option["value"] == "true") {
+                key = invoice_option["key"]!
+            }
+        }
+        params[INVOICE_TYPE_KEY] = key
+        
+        let invoices = getRowRowsFromMyRowsByKey(key: INVOICE_KEY)
+        for invoice in invoices {
+            for (key1, value) in invoice {
+                if (key1 == "key" && value == EMAIL_KEY) {
+                    params[INVOICE_EMAIL_KEY] = invoice["value"]
+                    break
+//                    } else if (invoice["key"] == COMPANY_TAX_KEY) {
+//                        params[COMPANY_TAX_KEY] = invoice["value"]
+//                    } else if (invoice["key"] == COMPANY_KEY) {
+//                        params[COMPANY_KEY] = invoice["value"]
+//                    }
+                } else if (key1 == "key" && value == COMPANY_KEY) {
+                    params[COMPANY_TAX_KEY] = invoice["value"]
+                    break
+                } else if (key1 == "key" && value == COMPANY_TAX_KEY) {
+                    params[COMPANY_NAME_KEY] = invoice["value"]
+                    break
+                }
+            }
+        }
         
         params["member_id"] = String(Member.instance.id)
-        params["order_name"] = getRowValue(rowKey: "name")
-        params["order_tel"] = getRowValue(rowKey: "tel")
-        params["order_email"] = getRowValue(rowKey: "email")
+        params["order_name"] = getRowValue(rowKey: NAME_KEY)
+        params["order_tel"] = getRowValue(rowKey: MOBILE_KEY)
+        params["order_email"] = getRowValue(rowKey: EMAIL_KEY)
+        params["order_address"] = getRowValue(rowKey: ADDRESS_KEY)
+        
+        params[MEMO_KEY] = getRowValue(rowKey: MEMO_KEY)
         
         
-        params["gateway"] = "credit_card"
+//        params["gateway"] = "credit_card"
         
 //        let city_name = Global.instance.zoneIDToName(Member.instance.city)
 //        let area_name = Global.instance.zoneIDToName(Member.instance.area)
@@ -866,7 +917,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        if let item = getFormItemFromKey(WEIGHT_KEY) {
 //            params["weight"] = item.value
 //        }
-        //print(params)
+        print(params)
         
         //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
         
