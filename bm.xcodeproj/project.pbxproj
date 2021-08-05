@@ -1218,6 +1218,7 @@
 				B3310D8D22ABB4820062EF98 /* MultiSelectVC.swift */,
 				B31739EE21787960004CFEDE /* MyMapVC.swift */,
 				B322F8041FC52CAE00DE98FB /* MyTableVC.swift */,
+				B3CABD8226B4561300FD0E4D /* OrderVC.swift */,
 				B30C954B1FEA8CDA005F71EF /* PasswordVC.swift */,
 				B3031D6925CD46A50044830C /* PaymentVC.swift */,
 				B3B7585C259CB8FE006ACC33 /* ProductVC.swift */,
@@ -1253,14 +1254,13 @@
 				F90423B81F83748C00DC8B1E /* TeamVC.swift */,
 				B36CBD5020DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift */,
 				B36CBD4E20DCBBF600E52B9C /* TempPlayDateVC.swift */,
-				B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */,
 				B3FAA0A720CA5C48008F2294 /* TempPlaySignupOneVC.swift */,
+				B3E72A1F1FA054580008A6B1 /* TempPlayVC.swift */,
 				B3ED38F51FBC0A7C0003F083 /* TextInputVC.swift */,
 				B3ED38F31FBB3C3B0003F083 /* TimeSelectVC.swift */,
 				B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */,
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
-				B3CABD8226B4561300FD0E4D /* OrderVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

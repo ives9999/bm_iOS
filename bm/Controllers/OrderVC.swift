@@ -824,6 +824,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         var params: [String: String] = [String: String]()
         
         params["device"] = "app"
+        params["do"] = "update"
         params["cart_id"] = String(cartTable!.id)
         
         params[AMOUNT_KEY] = getRowValue(rowKey: AMOUNT_KEY)
