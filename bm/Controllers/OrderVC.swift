@@ -51,13 +51,13 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     ]
     
     let invoicePersonalRows: [[String: String]] = [
-        ["title":"EMail","key":EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
+        ["title":"EMail","key":INVOICE_EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
     ]
     
     let invoiceCompanyRows: [[String: String]] = [
-        ["title":"統一編編","key":COMPANY_TAX_KEY,"value":"","show":"","cell":"textField"],
-        ["title":"公司行號抬頭","key":COMPANY_KEY,"value":"","show":"","cell":"textField"],
-        ["title":"EMail","key":EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
+        ["title":"統一編編","key":INVOICE_COMPANY_TAX_KEY,"value":"","show":"","cell":"textField"],
+        ["title":"公司行號抬頭","key":INVOICE_COMPANY_NAME_KEY,"value":"","show":"","cell":"textField"],
+        ["title":"EMail","key":INVOICE_EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
     ]
     
     var memberRows: [[String: String]] = []
@@ -869,11 +869,11 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //                    } else if (invoice["key"] == COMPANY_KEY) {
 //                        params[COMPANY_KEY] = invoice["value"]
 //                    }
-                } else if (key1 == "key" && value == COMPANY_KEY) {
-                    params[COMPANY_TAX_KEY] = invoice["value"]
+                } else if (key1 == "key" && value == INVOICE_COMPANY_NAME_KEY) {
+                    params[INVOICE_COMPANY_TAX_KEY] = invoice["value"]
                     break
-                } else if (key1 == "key" && value == COMPANY_TAX_KEY) {
-                    params[COMPANY_NAME_KEY] = invoice["value"]
+                } else if (key1 == "key" && value == INVOICE_COMPANY_TAX_KEY) {
+                    params[INVOICE_COMPANY_NAME_KEY] = invoice["value"]
                     break
                 }
             }
