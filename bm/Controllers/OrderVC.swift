@@ -203,7 +203,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     var shipping_fee: Int = 60
                     if (amount > 1000) { shipping_fee = 0}
                     let shipping_fee_show: String = shipping_fee.formattedWithSeparator
-                    row = ["title":"運費","key":SHIPPING_KEY,"value":String(shipping_fee),"show":"NT$ \(shipping_fee_show)","cell":"text"]
+                    row = ["title":"運費","key":SHIPPING_FEE_KEY,"value":String(shipping_fee),"show":"NT$ \(shipping_fee_show)","cell":"text"]
                     amountRows.append(row)
                     
                     let tax: Int = Int(Double(amount) * 0.05)
@@ -828,9 +828,20 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["cart_id"] = String(cartTable!.id)
         
         params[AMOUNT_KEY] = getRowValue(rowKey: AMOUNT_KEY)
-        params[SHIPPING_KEY] = getRowValue(rowKey: SHIPPING_KEY)
+        params[SHIPPING_FEE_KEY] = getRowValue(rowKey: SHIPPING_FEE_KEY)
         params[TAX_KEY] = getRowValue(rowKey: TAX_KEY)
         params[TOTAL_KEY] = getRowValue(rowKey: TOTAL_KEY)
+        params[DISCOUNT_KEY] = "0"
+        
+        var discount: Int = 0
+        if let tmp: Int = Int(params[DISCOUNT_KEY]!) {
+            discount = tmp
+        }
+        var total: Int = 0
+        if let tmp: Int = Int(params[TOTAL_KEY]!) {
+            total = tmp
+        }
+        params[GRAND_TOTAL_KEY] = String(discount + total)
         
         let gateways = getRowRowsFromMyRowsByKey(key: GATEWAY_KEY)
         var key: String = "credit_card"
@@ -861,7 +872,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         let invoices = getRowRowsFromMyRowsByKey(key: INVOICE_KEY)
         for invoice in invoices {
             for (key1, value) in invoice {
-                if (key1 == "key" && value == EMAIL_KEY) {
+                if (key1 == "key" && value == INVOICE_EMAIL_KEY) {
                     params[INVOICE_EMAIL_KEY] = invoice["value"]
                     break
 //                    } else if (invoice["key"] == COMPANY_TAX_KEY) {
@@ -918,26 +929,45 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        if let item = getFormItemFromKey(WEIGHT_KEY) {
 //            params["weight"] = item.value
 //        }
-        print(params)
+        //print(params)
         
         //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
         
         OrderService.instance.update(params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                let order_token: String = OrderService.instance.order_token
-                if self.total > 0 {
-                    let ecpay_token: String = OrderService.instance.ecpay_token
-                    let tokenExpireDate: String = OrderService.instance.tokenExpireDate
-                    self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
-                        //print("aaa")
-                        self.toPayment(order_token: order_token, ecpay_token: ecpay_token, tokenExpireDate: tokenExpireDate)
+                
+                self.jsonData = OrderService.instance.jsonData
+                do {
+                    if (self.jsonData != nil) {
+                        let table: OrderUpdateResTable = try JSONDecoder().decode(OrderUpdateResTable.self, from: self.jsonData!)
+                        let orderTable: OrderTable? = table.model
+                        if (orderTable != nil) {
+                            let ecpay_token: String = orderTable!.ecpay_token
+                            self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
+                                self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: "")
+                            }
+                        }
+                    } else {
+                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                     }
-                } else {
-                    self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
-                        self.toPayment(order_token: order_token)
-                    }
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
                 }
+                
+//                let order_token: String = OrderService.instance.order_token
+//                if self.total > 0 {
+//                    let ecpay_token: String = OrderService.instance.ecpay_token
+//                    let tokenExpireDate: String = OrderService.instance.tokenExpireDate
+//                    self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
+//                        //print("aaa")
+//                        self.toPayment(order_token: order_token, ecpay_token: ecpay_token, tokenExpireDate: tokenExpireDate)
+//                    }
+//                } else {
+//                    self.info(msg: "訂單已經成立，結帳金額為零，我們會儘速處理您的訂單", buttonTitle: "關閉") {
+//                        self.toPayment(order_token: order_token)
+//                    }
+//                }
             } else {
                 self.warning(OrderService.instance.msg)
             }
@@ -946,5 +976,30 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     @IBAction func cancelBtnPressed(_ sender: Any) {
         prev()
+    }
+}
+
+class OrderUpdateResTable: Codable {
+    
+    var success: Bool = false
+    var id: Int = 0
+    var update: String = "INSERT"
+    var model: OrderTable?
+    
+    enum CodingKeys: String, CodingKey {
+        case success
+        case id
+        case update
+        case model
+    }
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        id = try container.decodeIfPresent(Int.self, forKey: .id) ?? 0
+        update = try container.decodeIfPresent(String.self, forKey: .update) ?? ""
+        model = try container.decodeIfPresent(OrderTable.self, forKey: .model) ?? nil
     }
 }

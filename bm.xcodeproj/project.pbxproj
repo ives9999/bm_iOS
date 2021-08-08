@@ -290,7 +290,6 @@
 		B3F6B456260500650000F9E0 /* SignupCancelTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B455260500650000F9E0 /* SignupCancelTable.swift */; };
 		B3F6B45B260500AC0000F9E0 /* SignupStandbyTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B45A260500AC0000F9E0 /* SignupStandbyTab.swift */; };
 		B3F6B4632605C9190000F9E0 /* CityTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B4622605C9180000F9E0 /* CityTable.swift */; };
-		B3F6B4682605D5200000F9E0 /* ShippingTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B4672605D5200000F9E0 /* ShippingTable.swift */; };
 		B3F6B46D2605E80F0000F9E0 /* PaymentTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B46C2605E80F0000F9E0 /* PaymentTable.swift */; };
 		B3F6B47A260603A70000F9E0 /* OrderTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F6B479260603A70000F9E0 /* OrderTable.swift */; };
 		B3F8C3B5215BD9F4005CBBC1 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */; };
@@ -674,7 +673,6 @@
 		B3F6B455260500650000F9E0 /* SignupCancelTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupCancelTable.swift; sourceTree = "<group>"; };
 		B3F6B45A260500AC0000F9E0 /* SignupStandbyTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupStandbyTab.swift; sourceTree = "<group>"; };
 		B3F6B4622605C9180000F9E0 /* CityTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTable.swift; sourceTree = "<group>"; };
-		B3F6B4672605D5200000F9E0 /* ShippingTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShippingTable.swift; sourceTree = "<group>"; };
 		B3F6B46C2605E80F0000F9E0 /* PaymentTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentTable.swift; sourceTree = "<group>"; };
 		B3F6B479260603A70000F9E0 /* OrderTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTable.swift; sourceTree = "<group>"; };
 		B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
@@ -1283,7 +1281,6 @@
 				B3F6B479260603A70000F9E0 /* OrderTable.swift */,
 				B3F6B46C2605E80F0000F9E0 /* PaymentTable.swift */,
 				B36241362601B3CA008FAD1B /* ProductTable.swift */,
-				B3F6B4672605D5200000F9E0 /* ShippingTable.swift */,
 				B3F6B455260500650000F9E0 /* SignupCancelTable.swift */,
 				B3F6B4502605002E0000F9E0 /* SignupNormalTable.swift */,
 				B3F6B45A260500AC0000F9E0 /* SignupStandbyTab.swift */,
@@ -1878,7 +1875,6 @@
 				B30C954C1FEA8CDA005F71EF /* PasswordVC.swift in Sources */,
 				B3649416207DCB280030CF44 /* SCLExtensions.swift in Sources */,
 				B3756EE521B95DD5006893E1 /* ColorSelectVC.swift in Sources */,
-				B3F6B4682605D5200000F9E0 /* ShippingTable.swift in Sources */,
 				B3AE9324262962E200223B2A /* Team_WeekdaysTable.swift in Sources */,
 				B326C7BC256CE0950048A2C2 /* SelectCitysVC.swift in Sources */,
 				B3E4D17C25FF9E3900D78210 /* Table.swift in Sources */,

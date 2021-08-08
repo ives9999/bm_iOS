@@ -46,18 +46,18 @@ class EditVC: MyTableVC {
             action = "UPDATE"
             //model.neverFill()
             Global.instance.addSpinner(superView: self.view)
-            dataService.getOne(type: source, token: token, completion: { (success) in
-                if success {
-                    Global.instance.removeSpinner(superView: self.view)
-                    //self.titleLbl.text = (self.model.data[NAME_KEY]!["value"] as! String)
-                    //print(self.model.data)
-                    self.tableView.reloadData()
-//                    if let pickedImage: UIImage = self.model.data[FEATURED_KEY]!["value"] as? UIImage {
-//                        self.featuredView.setPickedImage(image: pickedImage)
-//                    }
-                    //self.featuredView.imageView.image = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
-                }
-            })
+//            dataService.getOne(type: source, token: token, completion: { (success) in
+//                if success {
+//                    Global.instance.removeSpinner(superView: self.view)
+//                    //self.titleLbl.text = (self.model.data[NAME_KEY]!["value"] as! String)
+//                    //print(self.model.data)
+//                    self.tableView.reloadData()
+////                    if let pickedImage: UIImage = self.model.data[FEATURED_KEY]!["value"] as? UIImage {
+////                        self.featuredView.setPickedImage(image: pickedImage)
+////                    }
+//                    //self.featuredView.imageView.image = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
+//                }
+//            })
         } else {
             //model.initData()
         }

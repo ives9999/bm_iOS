@@ -199,13 +199,13 @@ class DataService {
             body[key] = param
         }
         
-        //print(body)
+        print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        //print(url)
+        print(url)
         if url != nil {
             Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
                 
@@ -477,149 +477,53 @@ class DataService {
     func getCalendarURL(token: String? = nil)-> String { return ""}
     func getUpdateURL()-> String {return ""}
     
-    func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
-        
-        //print(model)
-        //model.neverFill()
-        downloadImageNum = 0
-        let body: [String: Any] = ["source": "app", "token": token, "strip_html": true]
-        
-        //print(body)
-        let url: String = String(format: URL_ONE, type)
-        //print(url)
-        
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            
-            if response.result.error == nil {
-                //print(response.result.value)
-                guard let data = response.result.value else {
-                    print("get response result value error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                //print(data)
-                let json = JSON(data)
-                //print(json)
-                //self.setData1(row: json)
-                
-                //var images: [String] = [String]()
-//                for (key, item) in self.model.data {
-//                    if json[key] != JSON.null {
-//                        let tmp = json[key]
-//                        var value: Any?
-//                        let vType: String = item["vtype"] as! String
-//                        if vType == "Int" {
-//                            value = tmp.intValue
-//                            self.model.data[key]!["value"] = value
-//                            self.model.data[key]!["show"] = "\(value ?? "")"
-//                        } else if vType == "String" {
-//                            value = tmp.stringValue
-//                            self.model.data[key]!["value"] = value
-//                            self.model.data[key]!["show"] = value
-//                        } else if vType == "array" {
-//                            if key == CITY_KEY {
-//                                let id: Int = tmp["id"].intValue
-//                                let name: String = tmp["name"].stringValue
-//                                let city: City = City(id: id, name: name)
-//                                self.model.updateCity(city)
-//                            } else if key == ARENA_KEY {
-//                                let id: Int = tmp["id"].intValue
-//                                let name: String = tmp["name"].stringValue
-//                                let arena: Arena = Arena(id: id, name: name)
-//                                self.model.updateArena(arena)
-//                            } else if key == TEAM_DAYS_KEY {
-//                                let tmp1: [JSON] = tmp.arrayValue
-//                                var days: [Int] = [Int]()
-//                                for item in tmp1 {
-//                                    days.append(item["day"].intValue)
-//                                }
-//                                self.model.updateDays(days)
-//                            } else if key == TEAM_DEGREE_KEY {
-//                                let tmp1: String = tmp.stringValue
-//                                let degrees: [String] = tmp1.components(separatedBy: ",")
-//                                self.model.updateDegree(self.strsToDegree(degrees))
-//                            }
-//                        } else if vType == "image" {
-//                            if key == FEATURED_KEY {
-//                                var tmp1: String = tmp.stringValue
-//                                if (tmp1.count > 0) {
-//                                    tmp1 = BASE_URL + tmp1
-//                                    self.model.data[key]!["path"] = tmp1
-//                                }
-//                            }
-//                        }
-//                    }
+//    func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
+//        
+//        //print(model)
+//        //model.neverFill()
+//        downloadImageNum = 0
+//        let body: [String: Any] = ["source": "app", "token": token, "strip_html": true]
+//        
+//        //print(body)
+//        let url: String = String(format: URL_ONE, type)
+//        //print(url)
+//        
+//        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//            
+//            if response.result.error == nil {
+//                //print(response.result.value)
+//                guard let data = response.result.value else {
+//                    print("get response result value error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
 //                }
-                
-                //print(self.model.data)
-                
-                //let path: String = self.model.data[FEATURED_KEY]!["path"] as! String
-                let path: String =  json[FEATURED_KEY].stringValue
-                if path.count > 0 {
-                    self.getImage(_url: path, completion: { (success) in
-                        if success {
-                            //self.model.data[FEATURED_KEY]!["value"] = self.image
-                            completion(true)
-                            //print(team.data)
-                        }
-                    })
-                } else {
-                    completion(true)
-                }
-                
-                /*
-                 let id: Int = json["id"].intValue
-                 let channel: String = json["channel"].stringValue
-                 let name: String = json["name"].stringValue
-                 let mobile: String = json["mobile"].stringValue
-                 let email: String = json["email"].stringValue
-                 let website: String = json["website"].stringValue
-                 let fb: String = json["fb"].stringValue
-                 let youtube: String = json["youtube"].stringValue
-                 let play_start: String = json["play_start"].stringValue
-                 let play_end: String = json["play_end"].stringValue
-                 let ball: String = json["ball"].stringValue
-                 let degree: String = json["degree"].stringValue
-                 let slug: String = json["slug"].stringValue
-                 let charge: String = json["charge"].stringValue
-                 let content: String = json["content"].stringValue
-                 let manager_id: Int = json["manager_id"].intValue
-                 let temp_fee_M: Int = json["temp_fee_M"].intValue
-                 let temp_fee_F: Int = json["temp_fee_F"].intValue
-                 let temp_quantity: Int = json["temp_quantity"].intValue
-                 let temp_content: String = json["temp_content"].stringValue
-                 let temp_status: String = json["temp_status"].stringValue
-                 let pv: Int = json["pv"].intValue
-                 let token: String = json["token"].stringValue
-                 let created_id: Int = json["created_id"].intValue
-                 let created_at: String = json["created_at"].stringValue
-                 let updated_at: String = json["updated_id"].stringValue
-                 let thumb: String = json["thumb"].stringValue
-                 let arena_json: JSON = JSON(json["arena"])
-                 let arena: [String: Any] = [
-                 "id": arena_json["id"].intValue, "name": arena_json["name"].stringValue
-                 ]
-                 let days_json: [JSON] = json["days"].arrayValue
-                 var days: [Int] = [Int]()
-                 for day in days_json {
-                 days.append(day["day"].intValue)
-                 }
-                 
-                 var path: String = ""
-                 let path1 = json["featured_path"].stringValue
-                 if (path1.count > 0) {
-                 path = BASE_URL + path1
-                 self.downloadImageNum += 1
-                 }
-                 */
-            } else {
-                self.msg = "網路錯誤，請稍後再試"
-                completion(false)
-                debugPrint(response.result.error as Any)
-            }
-        }
-    }
+//                //print(data)
+//                let json = JSON(data)
+//                //print(json)
+//                //self.setData1(row: json)
+//                
+//
+//                //let path: String = self.model.data[FEATURED_KEY]!["path"] as! String
+//                let path: String =  json[FEATURED_KEY].stringValue
+//                if path.count > 0 {
+//                    self.getImage(_url: path, completion: { (success) in
+//                        if success {
+//                            //self.model.data[FEATURED_KEY]!["value"] = self.image
+//                            completion(true)
+//                            //print(team.data)
+//                        }
+//                    })
+//                } else {
+//                    completion(true)
+//                }
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//                debugPrint(response.result.error as Any)
+//            }
+//        }
+//    }
     
 //    func getOne<T: SuperModel>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
 //
@@ -745,8 +649,8 @@ class DataService {
         if token.count > 0 {
             url = url + "/" + token
         }
-        print(url)
-        print(params)
+//        print(url)
+//        print(params)
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             

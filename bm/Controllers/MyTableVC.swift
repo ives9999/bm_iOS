@@ -494,6 +494,34 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         return b
     }
     
+    func getRowFromKey(rows: [[String: String]], key: String)-> [String: String] {
+        
+        for row in rows {
+            
+            if let key1: String = row["key"] {
+                if (key1 == key) {
+                    return row
+                }
+            }
+        }
+        return [String: String]()
+    }
+    
+    func replaceRowByKey(rows: [[String: String]], key: String, newRow: [String: String])-> [[String: String]] {
+        
+        var _rows = rows
+        for (idx, row) in rows.enumerated() {
+            
+            if let key1: String = row["key"] {
+                if (key1 == key) {
+                    _rows[idx] = newRow
+                    break
+                }
+            }
+        }
+        return _rows
+    }
+    
     //    myRows = [
     //        ["key":"data", "rows": fixedRows],
     //        ["key":"order", "rows": orderRows],

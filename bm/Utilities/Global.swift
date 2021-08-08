@@ -612,12 +612,12 @@ enum SHIPPING_WAY: String {
     }
 }
 
-enum PAYMENT_PROCESS: String {
+enum GATEWAY_PROCESS: String {
     case normal = "未付款"
     case code = "取得付款代碼"
     case complete = "完成付款"
     
-    static func stringToEnum(_ enumString: String) -> PAYMENT_PROCESS {
+    static func stringToEnum(_ enumString: String) -> GATEWAY_PROCESS {
         switch enumString {
         case "normal":
             return .normal
@@ -631,7 +631,7 @@ enum PAYMENT_PROCESS: String {
     }
     
     static func getRawValueFromString(_ string: String)-> String {
-        let res: PAYMENT_PROCESS = stringToEnum(string)
+        let res: GATEWAY_PROCESS = stringToEnum(string)
         return res.rawValue
     }
 }

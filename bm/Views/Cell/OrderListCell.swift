@@ -32,8 +32,8 @@ class OrderListCell: SuperCell {
     
     func updateOrderViews(indexPath: IndexPath, row: OrderTable) {
         
-        if row.product != nil {
-            nameLbl.text = row.product!.name
+        if row.productTable != nil {
+            nameLbl.text = row.productTable!.name
         } else {
             nameLbl.text = "無法取得商品名稱，請洽管理員"
         }
