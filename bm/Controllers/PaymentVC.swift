@@ -71,47 +71,47 @@ class PaymentVC: MyTableVC {
         let cartListNib = UINib(nibName: "CartListCell", bundle: nil)
         tableView.register(cartListNib, forCellReuseIdentifier: "CartListCell")
         
-        refresh()
+        //refresh()
         
-//        if ecpay_token.count > 0 {
-//
-//            let name: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String)!
-//
-//            ECPayPaymentGatewayManager.sharedInstance().createPayment(
-//                token: ecpay_token,
-//                useResultPage: 1,
-//                appStoreName: name,
-//                language: "zh-TW") { (state) in
-////                if let creditPayment: CreatePaymentCallbackState = state as? CreatePaymentCallbackState {
-////                    if let order = creditPayment.OrderInfo {
-////                        print(order)
-////                    }
-////                    if let card = creditPayment.CardInfo {
-////                        print(card)
-////                    }
-////                }
-//
-//                switch state.callbackStateStatus {
-//                case .Success:
-//                    //print("Success")
-//                    self.refresh()
-//
-//                case .Fail:
-//                    //print("Faile")
-//                    self.warning(state.callbackStateMessage)
-//
-//                case .Cancel:
-//                    //print("Cancel")
-//                    self.warning("您已經取消付款")
-//
-//                case .Unknown:
-//                    //print("Unknown")
-//                    self.warning("由於不知名的錯誤，造成付款失敗，請麻煩聯絡管理員")
+        if ecpay_token.count > 0 {
+
+            let name: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String)!
+
+            ECPayPaymentGatewayManager.sharedInstance().createPayment(
+                token: ecpay_token,
+                useResultPage: 1,
+                appStoreName: name,
+                language: "zh-TW") { (state) in
+//                if let creditPayment: CreatePaymentCallbackState = state as? CreatePaymentCallbackState {
+//                    if let order = creditPayment.OrderInfo {
+//                        print(order)
+//                    }
+//                    if let card = creditPayment.CardInfo {
+//                        print(card)
+//                    }
 //                }
-//            }
-//        } else {
-//            refresh()
-//        }
+
+                switch state.callbackStateStatus {
+                case .Success:
+                    //print("Success")
+                    self.refresh()
+
+                case .Fail:
+                    //print("Faile")
+                    self.warning(state.callbackStateMessage)
+
+                case .Cancel:
+                    //print("Cancel")
+                    self.warning("您已經取消付款")
+
+                case .Unknown:
+                    //print("Unknown")
+                    self.warning("由於不知名的錯誤，造成付款失敗，請麻煩聯絡管理員")
+                }
+            }
+        } else {
+            refresh()
+        }
     }
     
     override func refresh() {

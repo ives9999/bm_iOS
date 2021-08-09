@@ -54,6 +54,7 @@ class OrderTable: Table {
     var process: String = ""
     
     var ecpay_token: String = ""
+    var ecpay_token_ExpireDate: String = ""
     
     //var shipping_at: String = ""
     //var gateway_at: String = ""
@@ -122,6 +123,7 @@ class OrderTable: Table {
         case memo
         case process
         case ecpay_token
+        case ecpay_token_ExpireDate
         //case shipping_at
         //case gateway_at
         case complete_at
@@ -179,6 +181,7 @@ class OrderTable: Table {
         do {unit = try container.decode(String.self, forKey: .unit)}catch{unit = ""}
         
         ecpay_token = try container.decodeIfPresent(String.self, forKey: .ecpay_token) ?? ""
+        ecpay_token_ExpireDate = try container.decodeIfPresent(String.self, forKey: .ecpay_token_ExpireDate) ?? ""
         gateway = try container.decodeIfPresent(GatewayTable.self, forKey: .gateway) ?? nil
         items = try container.decodeIfPresent([OrderItemTable].self, forKey: .items) ?? [OrderItemTable]()
         

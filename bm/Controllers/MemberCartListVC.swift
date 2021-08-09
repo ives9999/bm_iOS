@@ -138,12 +138,12 @@ class MemberCartListVC: MyTableVC {
     
     @IBAction func submitBtnPressed(_ sender: Any) {
         
-        toPayment(order_token: "VZsrHrb0AugnuwhxHKnIwU6QJfbUcfl", ecpay_token: "e2bd42a614344b1d8d4a7895deb37b18", tokenExpireDate: "")
+        //toPayment(order_token: "VZsrHrb0AugnuwhxHKnIwU6QJfbUcfl", ecpay_token: "e2bd42a614344b1d8d4a7895deb37b18", tokenExpireDate: "")
         
-//        toOrder(
-//            login: { vc in vc.toLogin() },
-//            register: { vc in vc.toRegister() }
-//        )
+        toOrder(
+            login: { vc in vc.toLogin() },
+            register: { vc in vc.toRegister() }
+        )
     }
     
     @IBAction func cancelBtnPressed(_ sender: Any) {
