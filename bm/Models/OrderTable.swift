@@ -37,6 +37,8 @@ class OrderTable: Table {
     var promo: String = ""
     var discount: Int = 0
     var grand_total: Int = 0
+    var handle_fee: Int = 0
+    
     var invoice_type: String = ""
     var invoice_email: String = ""
     var invoice_company_name: String = ""
@@ -109,6 +111,7 @@ class OrderTable: Table {
         case promo
         case discount
         case grand_total
+        case handle_fee
         case invoice_type
         case invoice_email
         case invoice_company_name
@@ -189,6 +192,7 @@ class OrderTable: Table {
         discount = try container.decodeIfPresent(Int.self, forKey: .discount) ?? 0
         promo = try container.decodeIfPresent(String.self, forKey: .promo) ?? ""
         grand_total = try container.decodeIfPresent(Int.self, forKey: .grand_total) ?? 0
+        handle_fee = try container.decodeIfPresent(Int.self, forKey: .handle_fee) ?? 0
         
         invoice_type = try container.decodeIfPresent(String.self, forKey: .invoice_type) ?? ""
         invoice_email = try container.decodeIfPresent(String.self, forKey: .invoice_email) ?? ""
@@ -428,6 +432,8 @@ class GatewayTable: Table {
     var process: String = ""
     var card6No: String = ""
     var card4No: String = ""
+    var pay_from: String = ""
+    var payment_no: String = ""
     var gateway_at: String = ""
     
     var method_show: String = ""
@@ -440,6 +446,8 @@ class GatewayTable: Table {
         case process
         case card6No
         case card4No
+        case pay_from
+        case payment_no
         case gateway_at
     }
     
@@ -452,6 +460,8 @@ class GatewayTable: Table {
         process = try container.decodeIfPresent(String.self, forKey: .process) ?? ""
         card6No = try container.decodeIfPresent(String.self, forKey: .card6No) ?? ""
         card4No = try container.decodeIfPresent(String.self, forKey: .card4No) ?? ""
+        pay_from = try container.decodeIfPresent(String.self, forKey: .pay_from) ?? ""
+        payment_no = try container.decodeIfPresent(String.self, forKey: .payment_no) ?? ""
         gateway_at = try container.decodeIfPresent(String.self, forKey: .gateway_at) ?? ""
     }
     
