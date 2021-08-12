@@ -196,6 +196,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                         productRows.append(row)
                     }
                     
+                    //price
                     let amount_show: String = amount.formattedWithSeparator
                     var row:[String: String] = ["title":"商品金額","key":"amount","value":String(amount),"show":"NT$ \(amount_show)","cell":"text"]
                     amountRows.append(row)
@@ -216,6 +217,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     row = ["title":"總金額","key":TOTAL_KEY,"value":String(total),"show":"NT$ \(total_show)","cell":"text"]
                     amountRows.append(row)
                     
+                    //gateway
                     let gateway: String = productTable!.gateway
                     var arr: [String] = gateway.components(separatedBy: ",")
                     for tmp in arr {

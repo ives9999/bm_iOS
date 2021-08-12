@@ -32,11 +32,21 @@ class OrderListCell: SuperCell {
     
     func updateOrderViews(indexPath: IndexPath, row: OrderTable) {
         
-        if row.productTable != nil {
-            nameLbl.text = row.productTable!.name
+        let items: [OrderItemTable] = row.items
+        if (items.count > 0) {
+            var name: String = ""
+            let productTable = items[0].product
+            if productTable != nil {
+                name = productTable!.name
+            }
+            if (items.count > 1) {
+                name += "..."
+            }
+            nameLbl.text = name
         } else {
             nameLbl.text = "無法取得商品名稱，請洽管理員"
         }
+        
         dateLbl.text = row.created_at_show
         priceLbl.text = row.amount_show
         orderNoLbl.text = row.order_no

@@ -435,10 +435,12 @@ class GatewayTable: Table {
     var pay_from: String = ""
     var payment_no: String = ""
     var gateway_at: String = ""
+    var expire_at: String = ""
     
     var method_show: String = ""
     var process_show: String = ""
     var gateway_at_show: String = "未付款"
+    var expire_at_show: String = ""
     
     enum CodingKeys: String, CodingKey {
         case order_id
@@ -449,6 +451,7 @@ class GatewayTable: Table {
         case pay_from
         case payment_no
         case gateway_at
+        case expire_at
     }
     
     required init(from decoder: Decoder) throws {
@@ -463,6 +466,7 @@ class GatewayTable: Table {
         pay_from = try container.decodeIfPresent(String.self, forKey: .pay_from) ?? ""
         payment_no = try container.decodeIfPresent(String.self, forKey: .payment_no) ?? ""
         gateway_at = try container.decodeIfPresent(String.self, forKey: .gateway_at) ?? ""
+        expire_at = try container.decodeIfPresent(String.self, forKey: .expire_at) ?? ""
     }
     
     override func filterRow() {
@@ -471,6 +475,7 @@ class GatewayTable: Table {
         method_show = GATEWAY.getRawValueFromString(method)
         process_show = GATEWAY_PROCESS.getRawValueFromString(process)
         gateway_at_show = gateway_at.noSec()
+        expire_at_show = expire_at.noSec()
     }
 }
 
