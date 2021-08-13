@@ -135,6 +135,9 @@ extension XMLConfigurationManager {
   }
   @objc deinit
 }
+public protocol CancelSDKProtocol : ObjectiveC.NSObjectProtocol {
+  var completion: (() -> Swift.Void)? { get set }
+}
 public typealias Padding = Security.SecPadding
 public enum SwiftyRSA {
   @available(iOS 10.0, watchOS 3.0, tvOS 10.0, *)
@@ -402,6 +405,10 @@ extension TestingTokenManager {
   }
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class CreatePaymentCallbackState_OrderInfoResponseModel : ObjectiveC.NSObject, Swift.Codable {
+  @objc public var MerchantTradeNo: Swift.String?
+  @objc public var TradeNo: Swift.String?
+  @objc public var TradeDate: Foundation.Date?
+  public var TradeStatus: Swift.Int?
   required public init(from decoder: Swift.Decoder) throws
   @objc override dynamic public var description: Swift.String {
     @objc get
@@ -410,6 +417,20 @@ extension TestingTokenManager {
   public func encode(to encoder: Swift.Encoder) throws
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class CreatePaymentCallbackState_CardInfoResponseModel : ObjectiveC.NSObject, Swift.Codable {
+  @objc public var AuthCode: Swift.String?
+  @objc public var Gwsr: Swift.String?
+  @objc public var ProcessDate: Foundation.Date?
+  public var Stage: Swift.Int?
+  public var Stast: Swift.Int?
+  public var Staed: Swift.Int?
+  public var Amount: Swift.Int?
+  public var Eci: Swift.Int?
+  @objc public var Card6No: Swift.String?
+  @objc public var Card4No: Swift.String?
+  public var RedDan: Swift.Int?
+  public var RedDeAmt: Swift.Int?
+  public var RedOkAmt: Swift.Int?
+  public var RedYet: Swift.Int?
   required public init(from decoder: Swift.Decoder) throws
   @objc override dynamic public var description: Swift.String {
     @objc get
@@ -418,6 +439,9 @@ extension TestingTokenManager {
   public func encode(to encoder: Swift.Encoder) throws
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class CreatePaymentCallbackState_ATMInfoResponseModel : ObjectiveC.NSObject, Swift.Codable {
+  @objc public var BankCode: Swift.String?
+  @objc public var vAccount: Swift.String?
+  @objc public var ExpireDate: Foundation.Date?
   required public init(from decoder: Swift.Decoder) throws
   @objc override dynamic public var description: Swift.String {
     @objc get
@@ -426,6 +450,9 @@ extension TestingTokenManager {
   public func encode(to encoder: Swift.Encoder) throws
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class CreatePaymentCallbackState_CVSInfoResponseModel : ObjectiveC.NSObject, Swift.Codable {
+  @objc public var PaymentNo: Swift.String?
+  @objc public var ExpireDate: Foundation.Date?
+  @objc public var PaymentURL: Swift.String?
   required public init(from decoder: Swift.Decoder) throws
   @objc override dynamic public var description: Swift.String {
     @objc get
@@ -434,6 +461,10 @@ extension TestingTokenManager {
   public func encode(to encoder: Swift.Encoder) throws
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objcMembers public class CreatePaymentCallbackState_BarcodeInfoResponseModel : ObjectiveC.NSObject, Swift.Codable {
+  @objc public var ExpireDate: Foundation.Date?
+  @objc public var Barcode1: Swift.String?
+  @objc public var Barcode2: Swift.String?
+  @objc public var Barcode3: Swift.String?
   required public init(from decoder: Swift.Decoder) throws
   @objc override dynamic public var description: Swift.String {
     @objc get

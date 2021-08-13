@@ -434,6 +434,12 @@ class GatewayTable: Table {
     var card4No: String = ""
     var pay_from: String = ""
     var payment_no: String = ""
+    var payment_url: String = ""
+    var barcode1: String = ""
+    var barcode2: String = ""
+    var barcode3: String = ""
+    var bank_code: String = ""
+    var bank_account: String = ""
     var gateway_at: String = ""
     var expire_at: String = ""
     
@@ -450,6 +456,12 @@ class GatewayTable: Table {
         case card4No
         case pay_from
         case payment_no
+        case payment_url
+        case barcode1
+        case barcode2
+        case barcode3
+        case bank_code
+        case bank_account
         case gateway_at
         case expire_at
     }
@@ -465,6 +477,12 @@ class GatewayTable: Table {
         card4No = try container.decodeIfPresent(String.self, forKey: .card4No) ?? ""
         pay_from = try container.decodeIfPresent(String.self, forKey: .pay_from) ?? ""
         payment_no = try container.decodeIfPresent(String.self, forKey: .payment_no) ?? ""
+        payment_url = try container.decodeIfPresent(String.self, forKey: .payment_url) ?? ""
+        barcode1 = try container.decodeIfPresent(String.self, forKey: .barcode1) ?? ""
+        barcode2 = try container.decodeIfPresent(String.self, forKey: .barcode2) ?? ""
+        barcode3 = try container.decodeIfPresent(String.self, forKey: .barcode3) ?? ""
+        bank_code = try container.decodeIfPresent(String.self, forKey: .bank_code) ?? ""
+        bank_account = try container.decodeIfPresent(String.self, forKey: .bank_account) ?? ""
         gateway_at = try container.decodeIfPresent(String.self, forKey: .gateway_at) ?? ""
         expire_at = try container.decodeIfPresent(String.self, forKey: .expire_at) ?? ""
     }

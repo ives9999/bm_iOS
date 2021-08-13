@@ -257,6 +257,9 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit26CreatePaymentCallbackState")
 
 SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit47CreatePaymentCallbackState_ATMInfoResponseModel")
 @interface CreatePaymentCallbackState_ATMInfoResponseModel : NSObject
+@property (nonatomic, copy) NSString * _Nullable BankCode;
+@property (nonatomic, copy) NSString * _Nullable vAccount;
+@property (nonatomic, copy) NSDate * _Nullable ExpireDate;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -265,6 +268,10 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit47CreatePaymentCallbackState_ATMInfoRes
 
 SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit51CreatePaymentCallbackState_BarcodeInfoResponseModel")
 @interface CreatePaymentCallbackState_BarcodeInfoResponseModel : NSObject
+@property (nonatomic, copy) NSDate * _Nullable ExpireDate;
+@property (nonatomic, copy) NSString * _Nullable Barcode1;
+@property (nonatomic, copy) NSString * _Nullable Barcode2;
+@property (nonatomic, copy) NSString * _Nullable Barcode3;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -273,6 +280,9 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit51CreatePaymentCallbackState_BarcodeInf
 
 SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit47CreatePaymentCallbackState_CVSInfoResponseModel")
 @interface CreatePaymentCallbackState_CVSInfoResponseModel : NSObject
+@property (nonatomic, copy) NSString * _Nullable PaymentNo;
+@property (nonatomic, copy) NSDate * _Nullable ExpireDate;
+@property (nonatomic, copy) NSString * _Nullable PaymentURL;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -281,6 +291,11 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit47CreatePaymentCallbackState_CVSInfoRes
 
 SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit48CreatePaymentCallbackState_CardInfoResponseModel")
 @interface CreatePaymentCallbackState_CardInfoResponseModel : NSObject
+@property (nonatomic, copy) NSString * _Nullable AuthCode;
+@property (nonatomic, copy) NSString * _Nullable Gwsr;
+@property (nonatomic, copy) NSDate * _Nullable ProcessDate;
+@property (nonatomic, copy) NSString * _Nullable Card6No;
+@property (nonatomic, copy) NSString * _Nullable Card4No;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -289,6 +304,9 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit48CreatePaymentCallbackState_CardInfoRe
 
 SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit49CreatePaymentCallbackState_OrderInfoResponseModel")
 @interface CreatePaymentCallbackState_OrderInfoResponseModel : NSObject
+@property (nonatomic, copy) NSString * _Nullable MerchantTradeNo;
+@property (nonatomic, copy) NSString * _Nullable TradeNo;
+@property (nonatomic, copy) NSDate * _Nullable TradeDate;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -855,6 +873,9 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit26CreatePaymentCallbackState")
 
 SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit47CreatePaymentCallbackState_ATMInfoResponseModel")
 @interface CreatePaymentCallbackState_ATMInfoResponseModel : NSObject
+@property (nonatomic, copy) NSString * _Nullable BankCode;
+@property (nonatomic, copy) NSString * _Nullable vAccount;
+@property (nonatomic, copy) NSDate * _Nullable ExpireDate;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -863,6 +884,10 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit47CreatePaymentCallbackState_ATMInfoRes
 
 SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit51CreatePaymentCallbackState_BarcodeInfoResponseModel")
 @interface CreatePaymentCallbackState_BarcodeInfoResponseModel : NSObject
+@property (nonatomic, copy) NSDate * _Nullable ExpireDate;
+@property (nonatomic, copy) NSString * _Nullable Barcode1;
+@property (nonatomic, copy) NSString * _Nullable Barcode2;
+@property (nonatomic, copy) NSString * _Nullable Barcode3;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -871,6 +896,9 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit51CreatePaymentCallbackState_BarcodeInf
 
 SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit47CreatePaymentCallbackState_CVSInfoResponseModel")
 @interface CreatePaymentCallbackState_CVSInfoResponseModel : NSObject
+@property (nonatomic, copy) NSString * _Nullable PaymentNo;
+@property (nonatomic, copy) NSDate * _Nullable ExpireDate;
+@property (nonatomic, copy) NSString * _Nullable PaymentURL;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -879,6 +907,11 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit47CreatePaymentCallbackState_CVSInfoRes
 
 SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit48CreatePaymentCallbackState_CardInfoResponseModel")
 @interface CreatePaymentCallbackState_CardInfoResponseModel : NSObject
+@property (nonatomic, copy) NSString * _Nullable AuthCode;
+@property (nonatomic, copy) NSString * _Nullable Gwsr;
+@property (nonatomic, copy) NSDate * _Nullable ProcessDate;
+@property (nonatomic, copy) NSString * _Nullable Card6No;
+@property (nonatomic, copy) NSString * _Nullable Card4No;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
@@ -887,6 +920,9 @@ SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit48CreatePaymentCallbackState_CardInfoRe
 
 SWIFT_CLASS("_TtC22ECPayPaymentGatewayKit49CreatePaymentCallbackState_OrderInfoResponseModel")
 @interface CreatePaymentCallbackState_OrderInfoResponseModel : NSObject
+@property (nonatomic, copy) NSString * _Nullable MerchantTradeNo;
+@property (nonatomic, copy) NSString * _Nullable TradeNo;
+@property (nonatomic, copy) NSDate * _Nullable TradeDate;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;

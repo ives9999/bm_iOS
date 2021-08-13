@@ -554,6 +554,7 @@ enum GATEWAY: String {
     case store_barcode = "超商條碼"
     case store_pay_711 = "7-11超商取貨付款"
     case store_pay_family = "全家超商取貨付款"
+    case ATM = "虛擬帳戶"
     case remit = "匯款"
     case cash = "現金"
     
@@ -569,6 +570,8 @@ enum GATEWAY: String {
             return .store_pay_711
         case "store_pay_family":
             return .store_pay_family
+        case "ATM":
+            return .ATM
         case "remit":
             return .remit
         case "cash":

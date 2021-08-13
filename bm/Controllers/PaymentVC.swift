@@ -8,6 +8,7 @@
 
 import Foundation
 import ECPayPaymentGatewayKit
+import SwiftyJSON
 
 class PaymentVC: MyTableVC {
     
@@ -60,6 +61,16 @@ class PaymentVC: MyTableVC {
         ["title": "留言","key":MEMO_KEY,"value":"","show":"","cell":"text"]
     ]
     
+    var gateway: GATEWAY = GATEWAY.credit_card
+    var payment_no: String = ""
+    var expire_at: String = ""
+    var payment_url: String = ""
+    var barcode1: String = ""
+    var barcode2: String = ""
+    var barcode3: String = ""
+    var bank_code: String = ""
+    var bank_account: String = ""
+    
     override func viewDidLoad() {
         myTablView = tableView
 
@@ -82,19 +93,46 @@ class PaymentVC: MyTableVC {
                 useResultPage: 1,
                 appStoreName: name,
                 language: "zh-TW") { (state) in
-//                if let creditPayment: CreatePaymentCallbackState = state as? CreatePaymentCallbackState {
+                
+                if let creditPayment: CreatePaymentCallbackState = state as? CreatePaymentCallbackState {
 //                    if let order = creditPayment.OrderInfo {
-//                        print(order)
+//                        //print(order)
 //                    }
+//
 //                    if let card = creditPayment.CardInfo {
-//                        print(card)
+//                        //print(card)
 //                    }
-//                }
+                    
+                    if let cvs = creditPayment.CVSInfo {
+                        self.payment_no = cvs.PaymentNo!
+                        self.expire_at = cvs.ExpireDate!.toString(format: "yyyy-MM-dd HH:mm:ss")
+                        self.payment_url = cvs.PaymentURL!
+                        self.gateway = GATEWAY.store_cvs
+                    }
+                    
+                    if let barcode = creditPayment.BarcodeInfo {
+                        self.barcode1 = barcode.Barcode1!
+                        self.barcode2 = barcode.Barcode2!
+                        self.barcode3 = barcode.Barcode3!
+                        self.expire_at = barcode.ExpireDate!.toString(format: "yyyy-MM-dd HH:mm:ss")
+                        self.gateway = GATEWAY.store_barcode
+                    }
+                    
+                    if let ATM = creditPayment.ATMInfo {
+                        self.bank_code = ATM.BankCode!
+                        self.bank_account = ATM.vAccount!
+                        self.expire_at = ATM.ExpireDate!.toString(format: "yyyy-MM-dd HH:mm:ss")
+                    }
+                }
 
                 switch state.callbackStateStatus {
                 case .Success:
                     //print("Success")
-                    self.refresh()
+                    if (self.gateway == GATEWAY.credit_card) {
+                        self.refresh()
+                    } else {
+                        self.updateOrder()
+                    }
 
                 case .Fail:
                     //print("Faile")
@@ -132,6 +170,34 @@ class PaymentVC: MyTableVC {
                 }
                 Global.instance.removeSpinner(superView: self.view)
                 self.endRefresh()
+            }
+        }
+    }
+    
+    func updateOrder() {
+        
+        var params: [String: String] = ["token": order_token, "member_token": Member.instance.token]
+        params["expire_at"] = expire_at
+        if (gateway == GATEWAY.store_cvs) {
+            params["payment_no"] = payment_no
+            params["payment_url"] = payment_url
+        } else if (gateway == GATEWAY.store_barcode) {
+            params["barcode1"] = barcode1
+            params["barcode2"] = barcode2
+            params["barcode3"] = barcode3
+        } else if (gateway == GATEWAY.ATM) {
+            params["bank_code"] = bank_code
+            params["bank_account"] = bank_account
+        }
+        
+        OrderService.instance.update(params: params) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            
+            if success {
+                self.refresh()
+                //self.jsonData = OrderService.instance.jsonData
+            } else {
+                self.warning(OrderService.instance.msg)
             }
         }
     }
