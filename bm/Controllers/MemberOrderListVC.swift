@@ -30,64 +30,26 @@ class MemberOrderListVC: MyTableVC {
     
     override func refresh() {
         page = 1
-        getDataStart(t: OrdersTable.self)
+        getDataStart(token: Member.instance.token)
     }
     
-    override func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
+    override func genericTable() {
         
-        Global.instance.addSpinner(superView: self.view)
-
-        dataService.getList(token: Member.instance.token, _filter: params, page: page, perPage: perPage) { (success) in
-            if (success) {
-                
-                do {
-                    if (self.dataService.jsonData != nil) {
-                        try self.tables = JSONDecoder().decode(t, from: self.dataService.jsonData!)
-                        if (self.tables != nil) {
-                            //self.coursesTable!.printRows()
-                            self.page = self.tables!.page
-                            if self.page == 1 {
-                                self.totalCount = self.tables!.totalCount
-                                self.perPage = self.tables!.perPage
-                                let _pageCount: Int = self.totalCount / self.perPage
-                                self.totalPage = (self.totalCount % self.perPage > 0) ? _pageCount + 1 : _pageCount
-                                //print(self.totalPage)
-                                if self.refreshControl.isRefreshing {
-                                    self.refreshControl.endRefreshing()
-                                }
-                            }
-                            self.getDataEnd(success: success)
-                        }
-                    } else {
-                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
-                    }
-                } catch {
-                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
-                }
-                                
-                Global.instance.removeSpinner(superView: self.view)
+        do {
+            if (jsonData != nil) {
+                mysTable = try JSONDecoder().decode(OrdersTable.self, from: jsonData!)
             } else {
-                Global.instance.removeSpinner(superView: self.view)
-                self.warning(self.dataService.msg)
+                warning("無法從伺服器取得正確的json資料，請洽管理員")
             }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
         }
-    }
-    
-    override func getDataEnd(success: Bool) {
-        if success {
-            
-            mysTable = (tables as? OrdersTable)
-            if mysTable != nil {
-                let tmps: [OrderTable] = mysTable!.rows
-                
-                if page == 1 {
-                    lists1 = [OrderTable]()
-                }
-                lists1 += tmps
-                myTablView.reloadData()
-            } else {
-                warning("轉換Table出錯，請洽管理員")
+        if (mysTable != nil) {
+            tables = mysTable!
+            if (page == 1) {
+                lists1 = [OrderTable]()
             }
+            lists1 += mysTable!.rows
         }
     }
     

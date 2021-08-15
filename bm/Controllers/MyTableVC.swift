@@ -101,49 +101,8 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         getDataStart(page: page, perPage: PERPAGE)
     }
     
-    func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
-
-        Global.instance.addSpinner(superView: self.view)
-
-        //會員喜歡列表也一並使用此程式
-        if (member_like) {
-            MemberService.instance.likelist(able_type: able_type) { (success) in
-                self.jsonData = MemberService.instance.jsonData
-                self.getDataEnd(success: success)
-            }
-        } else {
-            dataService.getList(token: nil, _filter: params, page: page, perPage: perPage) { (success) in
-                self.jsonData = self.dataService.jsonData
-                self.getDataEnd(success: success)
-            }
-        }
-    }
-    
-//    func _dataToTable<T: Tables>(t: T.Type, _ success: Bool) {
-//        if (success) {
-//            var s: T? = nil
-//            do {
-//                if (jsonData != nil) {
-//                    s = try JSONDecoder().decode(t, from: jsonData!)
-//                } else {
-//                    warning("無法從伺服器取得正確的json資料，請洽管理員")
-//                }
-//            } catch {
-//                msg = "解析JSON字串時，得到空值，請洽管理員"
-//            }
-//            if (s != nil) {
-//                tables = s!
-//                getDataEnd(success: success)
-//            }
-//            Global.instance.removeSpinner(superView: view)
-//        } else {
-//            Global.instance.removeSpinner(superView: view)
-//            warning(dataService.msg)
-//        }
-//    }
-    
     func genericTable() {}
-    func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
+    func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {
         Global.instance.addSpinner(superView: self.view)
         
         //會員喜歡列表也一並使用此程式
@@ -153,7 +112,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
                 self.getDataEnd(success: success)
             }
         } else {
-            dataService.getList(token: nil, _filter: params, page: page, perPage: perPage) { (success) in
+            dataService.getList(token: token, _filter: params, page: page, perPage: perPage) { (success) in
                 self.jsonData = self.dataService.jsonData
                 self.getDataEnd(success: success)
             }
@@ -828,11 +787,13 @@ extension MyTableVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //print(indexPath.row)
+//        print("page:\(page)")
+//        print("page:\(perPage)")
+//        print("index.row:\(indexPath.row)")
         if indexPath.row == page * perPage - 2 {
             page += 1
-            //print("current page: \(page)")
-            //print(totalPage)
+//            print("current page: \(page)")
+//            print(totalPage)
             if page <= totalPage {
                 getDataStart(page: page, perPage: perPage)
             }

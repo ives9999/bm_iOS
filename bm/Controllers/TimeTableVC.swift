@@ -292,8 +292,8 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         UIView.animate(withDuration: 0.5) {
             self.maskView.alpha = 0
             self.editTableView.isHidden = true
-            self.layerSubmitBtn.isHidden = true
-            self.layerCancelBtn.isHidden = true
+            self.panelSubmitBtn.isHidden = true
+            self.panelCancelBtn.isHidden = true
             self.containerView.frame = CGRect(x:self.padding, y:self.newY+self.workAreaHeight, width:self.containerView.frame.width, height:0)
         }
         collectionView.isScrollEnabled = true

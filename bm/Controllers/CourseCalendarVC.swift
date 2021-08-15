@@ -159,29 +159,29 @@ class CourseCalendarVC: MyTableVC {
         refresh()
     }
     
-    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
-        //print(page)
-        Global.instance.addSpinner(superView: self.view)
-        
-        params2.merge(["member_token": Member.instance.token])
-        params2.merge(["y": y])
-        params2.merge(["m": m])
-        //monthLastDay = Global.instance.getMonthLastDay(year: year, month: month)
-        selectedYearTxt.text = String(y)
-        selectedMonthTxt.text = String(m)
-        let res = MemberService.instance.memberSignupCalendar(year: y, month: m) { (success) in
-            if (success) {
-                self.getDataEnd(success: success)
-            } else {
-                self.warning(self.dataService.msg)
-            }
-            Global.instance.removeSpinner(superView: self.view)
-        }
-        if !res.success {
-            Global.instance.removeSpinner(superView: self.view)
-            warning(res.msg)
-        }
-    }
+//    override func getDataStart(page: Int=1, perPage: Int=PERPAGE) {
+//        //print(page)
+//        Global.instance.addSpinner(superView: self.view)
+//        
+//        params2.merge(["member_token": Member.instance.token])
+//        params2.merge(["y": y])
+//        params2.merge(["m": m])
+//        //monthLastDay = Global.instance.getMonthLastDay(year: year, month: month)
+//        selectedYearTxt.text = String(y)
+//        selectedMonthTxt.text = String(m)
+//        let res = MemberService.instance.memberSignupCalendar(year: y, month: m) { (success) in
+//            if (success) {
+//                self.getDataEnd(success: success)
+//            } else {
+//                self.warning(self.dataService.msg)
+//            }
+//            Global.instance.removeSpinner(superView: self.view)
+//        }
+//        if !res.success {
+//            Global.instance.removeSpinner(superView: self.view)
+//            warning(res.msg)
+//        }
+//    }
     
     override func getDataEnd(success: Bool) {
         if success {

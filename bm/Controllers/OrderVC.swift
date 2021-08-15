@@ -66,7 +66,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         ["title": "留言","key":MEMO_KEY,"value":"","show":"","cell":"memo"]
     ]
     
-    var blackView = UIView()
     var invoiceTable: UITableView = {
         let cv = UITableView(frame: .zero, style: .plain)
         cv.estimatedRowHeight = 44
@@ -116,49 +115,49 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         page = 1
         lists1.removeAll()
-        getDataStart(t: CartsTable.self)
+        getDataStart()
     }
     
-    override func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
-        
-        Global.instance.addSpinner(superView: view)
-        
-        CartService.instance.getList(token: Member.instance.token, _filter: params, page: page, perPage: perPage) { (success) in
-            if (success) {
-                
-                do {
-                    if (CartService.instance.jsonData != nil) {
-                        try self.tables = JSONDecoder().decode(t, from: CartService.instance.jsonData!)
-                        if (self.tables != nil) {
-                            self.getDataEnd(success: success)
-                        }
-                    } else {
-                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
-                    }
-                } catch {
-                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
-                }
-                                
-                Global.instance.removeSpinner(superView: self.view)
-            } else {
-                Global.instance.removeSpinner(superView: self.view)
-                self.warning(self.dataService.msg)
-            }
-        }
-        
-//        let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
-//        ProductService.instance.getOne(params: params) { (success) in
+//    override func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
+//        
+//        Global.instance.addSpinner(superView: view)
+//        
+//        CartService.instance.getList(token: Member.instance.token, _filter: params, page: page, perPage: perPage) { (success) in
 //            if (success) {
-//                let table: Table = ProductService.instance.table!
-//                self.productTable = (table as! ProductTable)
-//                //self.superProduct!.printRow()
-//
-//                self.initData()
+//                
+//                do {
+//                    if (CartService.instance.jsonData != nil) {
+//                        try self.tables = JSONDecoder().decode(t, from: CartService.instance.jsonData!)
+//                        if (self.tables != nil) {
+//                            self.getDataEnd(success: success)
+//                        }
+//                    } else {
+//                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+//                    }
+//                } catch {
+//                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
+//                }
+//                                
+//                Global.instance.removeSpinner(superView: self.view)
+//            } else {
+//                Global.instance.removeSpinner(superView: self.view)
+//                self.warning(self.dataService.msg)
 //            }
-//            Global.instance.removeSpinner(superView: self.view)
-//            self.endRefresh()
 //        }
-    }
+//        
+////        let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
+////        ProductService.instance.getOne(params: params) { (success) in
+////            if (success) {
+////                let table: Table = ProductService.instance.table!
+////                self.productTable = (table as! ProductTable)
+////                //self.superProduct!.printRow()
+////
+////                self.initData()
+////            }
+////            Global.instance.removeSpinner(superView: self.view)
+////            self.endRefresh()
+////        }
+//    }
     
     override func getDataEnd(success: Bool) {
         if success {
@@ -607,7 +606,17 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             radioDidChange(sectionKey: INVOICE_KEY, rowKey: rowKey, checked: !checked)
         } else {
             //var rowKey: String = ""
+            var rowKey: String = ""
             let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
+            if let tmp: String = row["key"] {
+                rowKey = tmp
+            }
+            
+            var sectionKey: String = ""
+            let section: [String: Any] = myRows[indexPath.section]
+            if let tmp: String = section["key"] as? String {
+                sectionKey = tmp
+            }
             
             var cell_type: String = "text"
             if (row.keyExist(key: "cell")) {
@@ -628,6 +637,14 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 
                 addInvoiceSelectView()
                 addCancelBtn()
+            } else if (cell_type == "radio") {
+                var checked: Bool = false
+                if let tmp: String = row["value"] {
+                    if let tmp1: Bool = Bool(tmp) {
+                        checked = tmp1
+                        radioDidChange(sectionKey: sectionKey, rowKey: rowKey, checked: !checked)
+                    }
+                }
             }
         }
     }

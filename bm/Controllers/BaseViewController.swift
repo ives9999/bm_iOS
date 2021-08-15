@@ -31,10 +31,16 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     
     //layer
     var maskView = UIView()
+    var blackView = UIView()
+    var stackView = UIStackView()
+    var panelLeftPadding: CGFloat = 50
+    var panelTopPadding: CGFloat = 30
+    var panelHeight: CGFloat = 400
+    
     var containerView = UIView(frame: .zero)
-    let layerSubmitBtn: SubmitButton = SubmitButton()
-    let layerCancelBtn: CancelButton = CancelButton()
-    let layerDeleteBtn: ClearButton = ClearButton()
+    var panelSubmitBtn: SubmitButton = SubmitButton()
+    var panelCancelBtn: CancelButton = CancelButton()
+    var layerDeleteBtn: ClearButton = ClearButton()
     var layerBtnCount: Int = 2
     
     var staticButtomView: StaticBottomView?
@@ -85,7 +91,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
 
         //setStatusBar(color: UIColor(STATUS_GREEN))
         workAreaHeight = view.bounds.height - titleBarHeight
-        layerCancelBtn.setTitle("取消")
+        panelCancelBtn.setTitle("取消")
         layerDeleteBtn.setTitle("刪除")
     }
     

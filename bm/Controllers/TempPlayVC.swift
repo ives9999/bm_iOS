@@ -62,25 +62,25 @@ class TempPlayVC: MyTableVC {
     
     override func refresh() {
         page = 1
-        getDataStart(t: TeamsTable.self)
+        getDataStart()
     }
     
-    override func getDataEnd(success: Bool) {
-        if success {
-            mysTable = (tables as? TeamsTable)
-            if mysTable != nil {
-                let tmps: [TeamTable] = mysTable!.rows
-                
-                if page == 1 {
-                    lists1 = [TeamTable]()
-                }
-                lists1 += tmps
-                myTablView.reloadData()
-            } else {
-                warning("轉換Table出錯，請洽管理員")
-            }
-        }
-    }
+//    override func getDataEnd(success: Bool) {
+//        if success {
+//            mysTable = (tables as? TeamsTable)
+//            if mysTable != nil {
+//                let tmps: [TeamTable] = mysTable!.rows
+//                
+//                if page == 1 {
+//                    lists1 = [TeamTable]()
+//                }
+//                lists1 += tmps
+//                myTablView.reloadData()
+//            } else {
+//                warning("轉換Table出錯，請洽管理員")
+//            }
+//        }
+//    }
     
 //    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
 //        print("scroll view will begin dragging")

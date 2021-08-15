@@ -29,6 +29,12 @@ class PlainCell: FormItemCell {
         titleLbl?.text = title
         detailLbl?.text = show
     }
+    
+    func update(title: String, show: String) {
+        
+        titleLbl?.text = title
+        detailLbl?.text = show
+    }
 
     override func update(with formItem: FormItem) {
         self.formItem = formItem

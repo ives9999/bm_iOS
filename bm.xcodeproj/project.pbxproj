@@ -25,6 +25,8 @@
 		B306FEAE21F8422B00403FE2 /* IconCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B306FEAC21F8422B00403FE2 /* IconCell.xib */; };
 		B307AA31263840EE001F685D /* LikeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B307AA30263840EE001F685D /* LikeButton.swift */; };
 		B309C1E22675F45E00CCFE61 /* SelectArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B309C1E12675F45E00CCFE61 /* SelectArenaVC.swift */; };
+		B30B584D26C8FA080065681F /* BarcodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30B584B26C8FA080065681F /* BarcodeCell.swift */; };
+		B30B584E26C8FA080065681F /* BarcodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B30B584C26C8FA080065681F /* BarcodeCell.xib */; };
 		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -111,6 +113,7 @@
 		B36241372601B3CA008FAD1B /* ProductTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36241362601B3CA008FAD1B /* ProductTable.swift */; };
 		B362413C2601D7CA008FAD1B /* StoreTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B362413B2601D7CA008FAD1B /* StoreTable.swift */; };
 		B3649416207DCB280030CF44 /* SCLExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3649415207DCB280030CF44 /* SCLExtensions.swift */; };
+		B36AC11B26C6AF9700FE3B5F /* Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36AC11A26C6AF9700FE3B5F /* Panel.swift */; };
 		B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36CBD4E20DCBBF600E52B9C /* TempPlayDateVC.swift */; };
 		B36CBD5120DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36CBD5020DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift */; };
 		B36CBD5320DE00FE00E52B9C /* TempPlayDatePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */; };
@@ -403,6 +406,8 @@
 		B306FEAC21F8422B00403FE2 /* IconCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IconCell.xib; sourceTree = "<group>"; };
 		B307AA30263840EE001F685D /* LikeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeButton.swift; sourceTree = "<group>"; };
 		B309C1E12675F45E00CCFE61 /* SelectArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectArenaVC.swift; sourceTree = "<group>"; };
+		B30B584B26C8FA080065681F /* BarcodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeCell.swift; sourceTree = "<group>"; };
+		B30B584C26C8FA080065681F /* BarcodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BarcodeCell.xib; sourceTree = "<group>"; };
 		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -492,6 +497,7 @@
 		B36241362601B3CA008FAD1B /* ProductTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTable.swift; sourceTree = "<group>"; };
 		B362413B2601D7CA008FAD1B /* StoreTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTable.swift; sourceTree = "<group>"; };
 		B3649415207DCB280030CF44 /* SCLExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SCLExtensions.swift; sourceTree = "<group>"; };
+		B36AC11A26C6AF9700FE3B5F /* Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Panel.swift; sourceTree = "<group>"; };
 		B36CBD4E20DCBBF600E52B9C /* TempPlayDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayDateVC.swift; sourceTree = "<group>"; };
 		B36CBD5020DCBC1A00E52B9C /* TempPlayDatePlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayDatePlayerVC.swift; sourceTree = "<group>"; };
 		B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempPlayDatePlayer.swift; sourceTree = "<group>"; };
@@ -866,6 +872,8 @@
 				B337B9A51FE039ED00C3EE28 /* TempPlaySignupCell.swift */,
 				B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
+				B30B584B26C8FA080065681F /* BarcodeCell.swift */,
+				B30B584C26C8FA080065681F /* BarcodeCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -901,6 +909,7 @@
 				B3B758D225AD55E7006ACC33 /* GMStepper.swift */,
 				B3E4D09325F71B2500D78210 /* SelectionDialog.swift */,
 				B31AF7DB267340B100D68778 /* SearchPanel.swift */,
+				B36AC11A26C6AF9700FE3B5F /* Panel.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1487,6 +1496,7 @@
 				B39453722343256C000DF98E /* SignupListCell.xib in Resources */,
 				B3756EF321BA7567006893E1 /* StatusSelectCell.xib in Resources */,
 				B3756EE321B95974006893E1 /* ColorCell.xib in Resources */,
+				B30B584E26C8FA080065681F /* BarcodeCell.xib in Resources */,
 				B3B758BF25AC6134006ACC33 /* ClothesSizeCell.xib in Resources */,
 				B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */,
 				B3C49535262AC2C100D4F727 /* CourseListCell.xib in Resources */,
@@ -1778,6 +1788,7 @@
 				B3B4EFC725807EDD00EE15D0 /* SexCell.swift in Sources */,
 				B31AF7DC267340B100D68778 /* SearchPanel.swift in Sources */,
 				B3CB73D923D410CD00892F75 /* OneLineCell.swift in Sources */,
+				B30B584D26C8FA080065681F /* BarcodeCell.swift in Sources */,
 				B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
 				B362263225E236C100D98317 /* MemberOrderListVC.swift in Sources */,
@@ -1799,6 +1810,7 @@
 				B358B0BF22A168C700F1A4E6 /* SingleSelectCell.swift in Sources */,
 				F96931971FB953960005C13F /* City.swift in Sources */,
 				B3E88BE6237FCEC0001F015A /* CourseCalendarVC.swift in Sources */,
+				B36AC11B26C6AF9700FE3B5F /* Panel.swift in Sources */,
 				B3E72A201FA054580008A6B1 /* TempPlayVC.swift in Sources */,
 				B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */,
 				B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */,

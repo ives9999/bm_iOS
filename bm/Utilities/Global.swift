@@ -1634,6 +1634,57 @@ extension UIView {
             view.removeFromSuperview()
         }
         self.removeFromSuperview()
+
+    }
+    
+    func blackView(left: CGFloat, top: CGFloat, width: CGFloat, height: CGFloat)-> UIView {
+        let view: UIView = UIView()
+        
+//        let parent_width: CGFloat = self.frame.width
+//        let parent_height: CGFloat = self.frame.height
+//
+//        let width: CGFloat =
+        view.frame = CGRect(x: left, y: top, width: width, height: height)
+        view.backgroundColor = UIColor(hex: "#000000", alpha: 0.9)
+        self.addSubview(view)
+        
+        return view
+    }
+    
+    func addStackView(height: CGFloat = 50)-> UIStackView {
+        
+        let bottomView: UIView = UIView()
+        bottomView.backgroundColor = UIColor.clear
+        self.addSubview(bottomView)
+        
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: bottomView, attribute: .leading, relatedBy: .equal, toItem: bottomView.superview, attribute: .leading, multiplier: 1, constant: 0)
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: bottomView, attribute: .trailing, relatedBy: .equal, toItem: bottomView.superview, attribute: .trailing, multiplier: 1, constant: 0)
+        let c3: NSLayoutConstraint = NSLayoutConstraint(item: bottomView, attribute: .bottom, relatedBy: .equal, toItem: bottomView.superview, attribute: .bottom, multiplier: 1, constant: 0)
+        let c4: NSLayoutConstraint = NSLayoutConstraint(item: bottomView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
+        
+        
+        let c5: NSLayoutConstraint = NSLayoutConstraint(item: bottomView, attribute: .centerX, relatedBy: .equal, toItem: bottomView.superview, attribute: .centerX, multiplier: 1, constant: 0)
+//        let c6: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: view.superview, attribute: .centerY, multiplier: 1, constant: 0)
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        self.addConstraints([c1, c2, c3, c4, c5])
+        
+        let view: UIStackView = UIStackView()
+        bottomView.addSubview(view)
+        //view.backgroundColor = UIColor.green
+        let c6: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: view.superview, attribute: .centerX, multiplier: 1, constant: 0)
+        let c7: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: view.superview, attribute: .centerY, multiplier: 1, constant: 0)
+//        let c8: NSLayoutConstraint = NSLayoutConstraint(item: view1, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200)
+//        let c9: NSLayoutConstraint = NSLayoutConstraint(item: view1, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 59)
+//        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        bottomView.addConstraints([c6, c7])
+        
+        view.axis = .horizontal
+        view.alignment = .center
+        view.distribution = .equalSpacing
+        view.spacing = 40
+        
+        return view
     }
     
     func tempPlayShowTableConstraint(_ items:[[String: UILabel]]) -> [NSLayoutConstraint] {
@@ -1801,6 +1852,34 @@ extension UIView {
         h = NSLayoutConstraint(item: imageView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: image_h)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         self.addConstraints([left, right, top, h])
+    }
+}
+
+extension UIStackView {
+    
+    func addCancelBtn()-> CancelButton {
+        
+        let view: CancelButton = CancelButton()
+        self.addArrangedSubview(view)
+        
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 110)
+        //let c2: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: view.superview, attribute: .centerX, multiplier: 1, constant: 110)
+        //view.translatesAutoresizingMaskIntoConstraints = false
+        //self.addConstraints([c1])
+        
+        return view
+    }
+    
+    func addSubmitBtn()-> SubmitButton {
+        
+        let view: SubmitButton = SubmitButton()
+        self.addArrangedSubview(view)
+        
+        let c1: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 110)
+        //view.translatesAutoresizingMaskIntoConstraints = false
+        //self.addConstraints([c1])
+        
+        return view
     }
 }
 
