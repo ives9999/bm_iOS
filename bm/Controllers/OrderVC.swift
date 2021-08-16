@@ -84,6 +84,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     override func viewDidLoad() {
         
         myTablView = tableView
+        dataService = CartService.instance
 
         super.viewDidLoad()
         //print(superProduct)
@@ -118,16 +119,16 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         getDataStart()
     }
     
-//    override func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
-//        
+//    override func getDataStart(token: String? = nil, page: Int = 1, perPage: Int = PERPAGE) {
+//
 //        Global.instance.addSpinner(superView: view)
-//        
+//
 //        CartService.instance.getList(token: Member.instance.token, _filter: params, page: page, perPage: perPage) { (success) in
 //            if (success) {
-//                
+//
 //                do {
 //                    if (CartService.instance.jsonData != nil) {
-//                        try self.tables = JSONDecoder().decode(t, from: CartService.instance.jsonData!)
+//                        try self.tables = JSONDecoder().decode(CartsTable.self, from: CartService.instance.jsonData!)
 //                        if (self.tables != nil) {
 //                            self.getDataEnd(success: success)
 //                        }
@@ -137,14 +138,14 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //                } catch {
 //                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
 //                }
-//                                
+//
 //                Global.instance.removeSpinner(superView: self.view)
 //            } else {
 //                Global.instance.removeSpinner(superView: self.view)
 //                self.warning(self.dataService.msg)
 //            }
 //        }
-//        
+//
 ////        let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
 ////        ProductService.instance.getOne(params: params) { (success) in
 ////            if (success) {
@@ -159,93 +160,117 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 ////        }
 //    }
     
-    override func getDataEnd(success: Bool) {
-        if success {
-            cartsTable = (tables as? CartsTable)
-            if cartsTable == nil {
+    override func genericTable() {
+        do {
+            if (jsonData != nil) {
+                cartsTable = try JSONDecoder().decode(CartsTable.self, from: jsonData!)
+            } else {
+                warning("無法從伺服器取得正確的json資料，請洽管理員")
+            }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        
+        if cartsTable == nil {
+            warning("購物車中無商品，或購物車超過一個錯誤，請洽管理員")
+        } else {
+            if (cartsTable!.rows.count != 1) {
                 warning("購物車中無商品，或購物車超過一個錯誤，請洽管理員")
             } else {
-                if (cartsTable!.rows.count != 1) {
-                    warning("購物車中無商品，或購物車超過一個錯誤，請洽管理員")
-                } else {
+                
+                //product cell
+                var amount: Int = 0
+                cartTable = cartsTable!.rows[0]
+                cartItemsTable = cartTable!.items
+                for cartItemTable in cartItemsTable {
                     
-                    //product cell
-                    var amount: Int = 0
-                    cartTable = cartsTable!.rows[0]
-                    cartItemsTable = cartTable!.items
-                    for cartItemTable in cartItemsTable {
-                        
-                        cartItemTable.filterRow()
-                        amount += cartItemTable.amount
-                        
-                        productTable = cartItemTable.product
-                        
-                        var attribute_text: String = ""
-                        if (cartItemTable.attributes.count > 0) {
+                    cartItemTable.filterRow()
+                    amount += cartItemTable.amount
+                    
+                    productTable = cartItemTable.product
+                    
+                    var attribute_text: String = ""
+                    if (cartItemTable.attributes.count > 0) {
 
-                            for (idx, attribute) in cartItemTable.attributes.enumerated() {
-                                attribute_text += attribute["name"]! + ":" + attribute["value"]!
-                                if (idx < cartItemTable.attributes.count - 1) {
-                                    attribute_text += " | "
-                                }
+                        for (idx, attribute) in cartItemTable.attributes.enumerated() {
+                            attribute_text += attribute["name"]! + ":" + attribute["value"]!
+                            if (idx < cartItemTable.attributes.count - 1) {
+                                attribute_text += " | "
                             }
                         }
-                        
-                        let row:[String: String] = ["title":productTable!.name,"key":PRODUCT_KEY,"value":"","show":"","cell":"cart","featured_path":productTable!.featured_path,"attribute":attribute_text,"amount":cartItemTable.amount_show,"quantity":String(cartItemTable.quantity)]
-                        productRows.append(row)
                     }
                     
-                    //price
-                    let amount_show: String = amount.formattedWithSeparator
-                    var row:[String: String] = ["title":"商品金額","key":"amount","value":String(amount),"show":"NT$ \(amount_show)","cell":"text"]
-                    amountRows.append(row)
-                    
-                    var shipping_fee: Int = 60
-                    if (amount > 1000) { shipping_fee = 0}
-                    let shipping_fee_show: String = shipping_fee.formattedWithSeparator
-                    row = ["title":"運費","key":SHIPPING_FEE_KEY,"value":String(shipping_fee),"show":"NT$ \(shipping_fee_show)","cell":"text"]
-                    amountRows.append(row)
-                    
-                    let tax: Int = Int(Double(amount) * 0.05)
-                    let tax_show: String = tax.formattedWithSeparator
-                    row = ["title":"稅","key":TAX_KEY,"value":String(tax),"show":"NT$ \(tax_show)","cell":"text"]
-                    amountRows.append(row)
-                    
-                    let total: Int = amount + shipping_fee + tax
-                    let total_show: String = total.formattedWithSeparator
-                    row = ["title":"總金額","key":TOTAL_KEY,"value":String(total),"show":"NT$ \(total_show)","cell":"text"]
-                    amountRows.append(row)
-                    
-                    //gateway
-                    let gateway: String = productTable!.gateway
-                    var arr: [String] = gateway.components(separatedBy: ",")
-                    for tmp in arr {
-                        let title: String = GATEWAY.getRawValueFromString(tmp)
-                        var value: String = "false"
-                        if (tmp == "credit_card") {
-                            value = "true"
-                        }
-                        let row: [String: String] = ["title":title,"key":tmp,"value":value,"show":title,"cell":"radio"]
-                        gatewayRows.append(row)
-                    }
-                    
-                    let shipping: String = productTable!.shipping
-                    arr = shipping.components(separatedBy: ",")
-                    for tmp in arr {
-                        let title: String = SHIPPING_WAY.getRawValueFromString(tmp)
-                        var value: String = "false"
-                        if (tmp == "direct") {
-                            value = "true"
-                        }
-                        let row: [String: String] = ["title":title,"key":tmp,"value":value,"show":title,"cell":"radio"]
-                        shippingRows.append(row)
-                    }
-                    
-                    
-                    initData()
+                    let row:[String: String] = ["title":productTable!.name,"key":PRODUCT_KEY,"value":"","show":"","cell":"cart","featured_path":productTable!.featured_path,"attribute":attribute_text,"amount":cartItemTable.amount_show,"quantity":String(cartItemTable.quantity)]
+                    productRows.append(row)
                 }
+                
+                //price
+                let amount_show: String = amount.formattedWithSeparator
+                var row:[String: String] = ["title":"商品金額","key":"amount","value":String(amount),"show":"NT$ \(amount_show)","cell":"text"]
+                amountRows.append(row)
+                
+                var shipping_fee: Int = 60
+                if (amount > 1000) { shipping_fee = 0}
+                let shipping_fee_show: String = shipping_fee.formattedWithSeparator
+                row = ["title":"運費","key":SHIPPING_FEE_KEY,"value":String(shipping_fee),"show":"NT$ \(shipping_fee_show)","cell":"text"]
+                amountRows.append(row)
+                
+                let tax: Int = Int(Double(amount) * 0.05)
+                let tax_show: String = tax.formattedWithSeparator
+                row = ["title":"稅","key":TAX_KEY,"value":String(tax),"show":"NT$ \(tax_show)","cell":"text"]
+                amountRows.append(row)
+                
+                let total: Int = amount + shipping_fee + tax
+                let total_show: String = total.formattedWithSeparator
+                row = ["title":"總金額","key":TOTAL_KEY,"value":String(total),"show":"NT$ \(total_show)","cell":"text"]
+                amountRows.append(row)
+                
+                //gateway
+                let gateway: String = productTable!.gateway
+                var arr: [String] = gateway.components(separatedBy: ",")
+                for tmp in arr {
+                    let title: String = GATEWAY.getRawValueFromString(tmp)
+                    var value: String = "false"
+                    if (tmp == "credit_card") {
+                        value = "true"
+                    }
+                    let row: [String: String] = ["title":title,"key":tmp,"value":value,"show":title,"cell":"radio"]
+                    gatewayRows.append(row)
+                }
+                
+                let shipping: String = productTable!.shipping
+                arr = shipping.components(separatedBy: ",")
+                for tmp in arr {
+                    let title: String = SHIPPING_WAY.getRawValueFromString(tmp)
+                    var value: String = "false"
+                    if (tmp == "direct") {
+                        value = "true"
+                    }
+                    let row: [String: String] = ["title":title,"key":tmp,"value":value,"show":title,"cell":"radio"]
+                    shippingRows.append(row)
+                }
+                
+                
+                initData()
             }
         }
+        
+    }
+    
+    override func getDataEnd(success: Bool) {
+
+        if (jsonData != nil) {
+            genericTable()
+            
+            if refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
+            }
+            myTablView.reloadData()
+            //self.page = self.page + 1 in CollectionView
+        } else {
+            warning("沒有取得回傳的json字串，請洽管理員")
+        }
+        Global.instance.removeSpinner(superView: view)
     }
     
     func initData() {

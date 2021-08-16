@@ -71,6 +71,8 @@ class PaymentVC: MyTableVC {
     var bank_code: String = ""
     var bank_account: String = ""
     
+    var trade_no: String = ""
+    
     var popupTableView: UITableView = {
         let cv = UITableView(frame: .zero, style: .plain)
         cv.estimatedRowHeight = 44
@@ -111,9 +113,11 @@ class PaymentVC: MyTableVC {
                 language: "zh-TW") { (state) in
                 
                 if let creditPayment: CreatePaymentCallbackState = state as? CreatePaymentCallbackState {
-//                    if let order = creditPayment.OrderInfo {
-//                        //print(order)
-//                    }
+                    if let order = creditPayment.OrderInfo {
+                        if let tmp = order.TradeNo {
+                            self.trade_no = tmp
+                        }
+                    }
 //
 //                    if let card = creditPayment.CardInfo {
 //                        //print(card)
@@ -123,14 +127,14 @@ class PaymentVC: MyTableVC {
                         if let tmp = cvs.PaymentNo {
                             self.payment_no = tmp
                         }
-                        if let tmp = cvs.ExpireDate {
-                            self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
-                        }
                         if let tmp = cvs.PaymentURL {
                             self.payment_url = tmp
                         }
                         if (self.payment_no.count > 0) {
                             self.gateway = GATEWAY.store_cvs
+                            if let tmp = cvs.ExpireDate {
+                                self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
+                            }
                         }
                     }
                     
@@ -144,11 +148,11 @@ class PaymentVC: MyTableVC {
                         if let tmp = barcode.Barcode3 {
                             self.barcode3 = tmp
                         }
-                        if let tmp = barcode.ExpireDate {
-                            self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
-                        }
                         if (self.barcode1.count > 0 && self.barcode1 != "0") {
                             self.gateway = GATEWAY.store_barcode
+                            if let tmp = barcode.ExpireDate {
+                                self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
+                            }
                         }
                     }
                     
@@ -159,11 +163,11 @@ class PaymentVC: MyTableVC {
                         if let tmp = ATM.vAccount {
                             self.bank_account = tmp
                         }
-                        if let tmp = ATM.ExpireDate {
-                            self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
-                        }
                         if (self.bank_account.count > 0) {
                             self.gateway = GATEWAY.ATM
+                            if let tmp = ATM.ExpireDate {
+                                self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
+                            }
                         }
                     }
                 }
@@ -221,6 +225,7 @@ class PaymentVC: MyTableVC {
         
         var params: [String: String] = ["token": order_token, "member_token": Member.instance.token,"do":"update"]
         params["expire_at"] = expire_at
+        params["trade_no"] = trade_no
         if (gateway == GATEWAY.store_cvs) {
             params["payment_no"] = payment_no
             params["payment_url"] = payment_url
