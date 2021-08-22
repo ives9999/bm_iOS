@@ -988,8 +988,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                         let orderTable: OrderTable? = table.model
                         if (orderTable != nil) {
                             let ecpay_token: String = orderTable!.ecpay_token
+                            let ecpay_token_ExpireDate: String = orderTable!.ecpay_token_ExpireDate
                             self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
-                                self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: "")
+                                self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
                             }
                         }
                     } else {
