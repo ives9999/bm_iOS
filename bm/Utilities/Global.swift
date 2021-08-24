@@ -519,19 +519,19 @@ enum PRICE_UNIT: String {
 
 enum ORDER_PROCESS: String {
     case normal = "訂單成立"
+    case gateway = "完成付款"
     case shipping = "出貨中"
-    case payment = "完成付款"
-    case complete = "訂單完成"
+    case complete = "完成取貨"
     case cancel = "訂單取消"
     
     static func stringToEnum(_ enumString: String) -> ORDER_PROCESS {
         switch enumString {
         case "normal":
             return .normal
+        case "gateway":
+            return .gateway
         case "shipping":
             return .shipping
-        case "payment":
-            return .payment
         case "complete":
             return .complete
         case "cancel":
