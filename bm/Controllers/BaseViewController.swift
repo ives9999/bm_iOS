@@ -324,9 +324,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         })
     }
     func _getPlayerID() -> String {
-        let status: OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
+        
         var playerID: String = ""
-        if let temp: String = status.subscriptionStatus.userId {
+        let deviceState = OneSignal.getDeviceState()
+        //let status: OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
+        
+        if let temp: String = deviceState?.userId {
             playerID = temp
         }
         //print(playerID)

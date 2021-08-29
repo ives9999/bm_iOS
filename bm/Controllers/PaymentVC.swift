@@ -224,6 +224,9 @@ class PaymentVC: MyTableVC {
     func updateOrder() {
         
         var params: [String: String] = ["token": order_token, "member_token": Member.instance.token,"do":"update"]
+        
+        //目前的寫法，只有不使用信用卡付款，才會呼叫這個函式，所以order process不用更改
+        params["gateway_process"] = GATEWAY_PROCESS.code.enumToString()
         params["expire_at"] = expire_at
         params["trade_no"] = trade_no
         if (gateway == GATEWAY.store_cvs) {

@@ -524,6 +524,21 @@ enum ORDER_PROCESS: String {
     case complete = "完成取貨"
     case cancel = "訂單取消"
     
+    func enumToString()-> String {
+        switch self {
+        case .normal:
+            return "normal"
+        case .gateway:
+            return "gateway"
+        case .shipping:
+            return "shipping"
+        case .complete:
+            return "complete"
+        case .cancel:
+            return "cancel"
+        }
+    }
+    
     static func stringToEnum(_ enumString: String) -> ORDER_PROCESS {
         switch enumString {
         case "normal":
@@ -545,6 +560,61 @@ enum ORDER_PROCESS: String {
         let res: ORDER_PROCESS = stringToEnum(string)
         return res.rawValue
     }
+}
+
+enum ALL_PROCESS: String {
+    case normal = "訂單成立"
+    case gateway_on = "付款中"
+    case gateway_off = "完成付款，準備出貨"
+    case shipping = "已經出貨了"
+    case store = "商品到達便利商店"
+    case complete = "完成取貨"
+    case cancel = "退貨"
+    
+    func enumToString()-> String {
+        switch self {
+        case .normal:
+            return "normal"
+        case .gateway_on:
+            return "gateway_on"
+        case .gateway_off:
+            return "gateway_off"
+        case .shipping:
+            return "shipping"
+        case .store:
+            return "store"
+        case .complete:
+            return "complete"
+        case .cancel:
+            return "cancel"
+        }
+    }
+    
+    static func intToEnum(_ enumInt: Int) -> ALL_PROCESS {
+        switch enumInt {
+        case 0:
+            return .normal
+        case 1:
+            return .gateway_on
+        case 2:
+            return .gateway_off
+        case 3:
+            return .shipping
+        case 4:
+            return .store
+        case 5:
+            return .complete
+        case 6:
+            return .cancel
+        default:
+            return .normal
+        }
+    }
+
+//    static func getRawValueFromInt(_ int: Int)-> String {
+//        let res: ALL_PROCESS = stringToEnum(string)
+//        return res.rawValue
+//    }
 }
 
 enum GATEWAY: String {
@@ -616,7 +686,8 @@ enum SHIPPING_WAY: String {
 }
 
 enum GATEWAY_PROCESS: String {
-    case normal = "未付款"
+    
+    case normal = "未付款"    //未付款，就是這個normal的 raw value
     case code = "取得付款代碼"
     case complete = "完成付款"
     
@@ -633,6 +704,17 @@ enum GATEWAY_PROCESS: String {
         }
     }
     
+    func enumToString()-> String {
+        switch self {
+        case .normal:
+            return "normal"
+        case .code:
+            return "code"
+        case .complete:
+            return "complete"
+        }
+    }
+    
     static func getRawValueFromString(_ string: String)-> String {
         let res: GATEWAY_PROCESS = stringToEnum(string)
         return res.rawValue
@@ -645,6 +727,21 @@ enum SHIPPING_PROCESS: String {
     case store = "商品已到便利商店"
     case complete = "已完成取貨"
     case back = "貨物退回"
+    
+    func enumToString()-> String {
+        switch self {
+        case .normal:
+            return "normal"
+        case .shipping:
+            return "shipping"
+        case .store:
+            return "store"
+        case .complete:
+            return "complete"
+        case .back:
+            return "back"
+        }
+    }
     
     static func stringToEnum(_ enumString: String) -> SHIPPING_PROCESS {
         switch enumString {

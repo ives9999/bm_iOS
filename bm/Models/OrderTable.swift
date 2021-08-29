@@ -54,6 +54,7 @@ class OrderTable: Table {
     
     var memo: String = ""
     var process: String = ""
+    var all_process: Int = 0
     
     var ecpay_token: String = ""
     var ecpay_token_ExpireDate: String = ""
@@ -90,6 +91,7 @@ class OrderTable: Table {
     var order_tel_show: String = ""
     
     var order_process_show: String = ""
+    var all_process_show: String = ""
     
     //var gateway_at_show: String = "未付款"
     //var gateway_process_show: String = ""
@@ -125,6 +127,7 @@ class OrderTable: Table {
         case order_address
         case memo
         case process
+        case all_process
         case ecpay_token
         case ecpay_token_ExpireDate
         //case shipping_at
@@ -193,6 +196,7 @@ class OrderTable: Table {
         promo = try container.decodeIfPresent(String.self, forKey: .promo) ?? ""
         grand_total = try container.decodeIfPresent(Int.self, forKey: .grand_total) ?? 0
         handle_fee = try container.decodeIfPresent(Int.self, forKey: .handle_fee) ?? 0
+        all_process = try container.decodeIfPresent(Int.self, forKey: .all_process) ?? 0
         
         invoice_type = try container.decodeIfPresent(String.self, forKey: .invoice_type) ?? ""
         invoice_email = try container.decodeIfPresent(String.self, forKey: .invoice_email) ?? ""
@@ -227,6 +231,7 @@ class OrderTable: Table {
         
         created_at_show = created_at.noSec()
         order_process_show = ORDER_PROCESS.getRawValueFromString(process)
+        all_process_show = ALL_PROCESS.intToEnum(all_process).rawValue
         
 //        if gateway_at.count > 0 {
 //            gateway_at_show = gateway_at.noSec()

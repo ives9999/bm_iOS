@@ -146,7 +146,8 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         let receive = sender as! SuperSwitch
         //print(receive.isOn)
         info(msg: "iOS必須透過設定來開啟或關閉是否接收推播功能，因此應用程式將為您開啟設定，請設定完後，再回到羽球密碼", buttonTitle: "確定") {
-            OneSignal.presentAppSettings()
+            
+            //OneSignal.presentAppSettings()
         }
     }
 }

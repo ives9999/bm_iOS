@@ -45,25 +45,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            }
 //        }
         
-        let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: true]
+        //let onesignalInitSettings = [kOSSettingsKeyAutoPrompt: true]
         
         // Replace 'YOUR_APP_ID' with your OneSignal App ID.
         
-        OneSignal.initWithLaunchOptions(
-            launchOptions,
-            appId: "856c8fdb-79fb-418d-a397-d58b9c6b880b",                                        handleNotificationReceived: {
-                notification in
-                
-                MyNotificationReceivedHandler.instance.notificationReceived(notification: notification)
-            self.goShowPNVC()
-        },
-            handleNotificationAction: { result in
-            MyNotificationOpenedHandler.instance.notificationOpened(result: result)
-            self.goShowPNVC()
-        },
-            settings: onesignalInitSettings)
+        OneSignal.initWithLaunchOptions(launchOptions)
+        OneSignal.setAppId("856c8fdb-79fb-418d-a397-d58b9c6b880b")
+        OneSignal.promptForPushNotifications(userResponse: { accepted in
+            print("User accepted notifications: \(accepted)")
+        })
         
-        OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
+        
+        OneSignal.setNotificationWillShowInForegroundHandler(MyOneSignal.instance.notificationWillShowInForegroundBlock)
+        
+        OneSignal.setNotificationOpenedHandler(MyOneSignal.instance.notificationOpenedBlock)
+        
+//        OneSignal.initWithLaunchOptions(
+//            launchOptions,
+//            appId: "856c8fdb-79fb-418d-a397-d58b9c6b880b",                                        handleNotificationReceived: {
+//                notification in
+//
+//                MyNotificationReceivedHandler.instance.notificationReceived(notification: notification)
+//            self.goShowPNVC()
+//        },
+//            handleNotificationAction: { result in
+//            MyNotificationOpenedHandler.instance.notificationOpened(result: result)
+//            self.goShowPNVC()
+//        },
+//            settings: onesignalInitSettings)
+        
+        //OneSignal.inFocusDisplayType = OSNotificationDisplayType.notification;
         
         // Recommend moving the below line to prompt for push after informing the user about
         //   how your app will use them.
@@ -90,7 +101,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if deviceType == .simulator {
             gSimulate = true
         }
-        gSimulate = false
+        //gSimulate = false
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
