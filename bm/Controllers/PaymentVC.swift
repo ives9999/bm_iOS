@@ -332,8 +332,8 @@ class PaymentVC: MyTableVC {
         replaceRowByKey(sectionKey: ORDER_KEY, rowKey: CREATED_AT_KEY, _row: row)
         
         row = getRowRowsFromMyRowsByKey1(key: ORDER_PROCESS_KEY)
-        row[VALUE_KEY] = orderTable!.process
-        row[SHOW_KEY] = orderTable!.order_process_show
+        row[VALUE_KEY] = String(orderTable!.all_process)
+        row[SHOW_KEY] = orderTable!.all_process_show
         replaceRowByKey(sectionKey: ORDER_KEY, rowKey: ORDER_PROCESS_KEY, _row: row)
         
         //gateway

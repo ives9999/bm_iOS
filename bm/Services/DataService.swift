@@ -649,8 +649,8 @@ class DataService {
         if token.count > 0 {
             url = url + "/" + token
         }
-        print(url)
-        print(params)
+        //print(url)
+        //print(params)
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
