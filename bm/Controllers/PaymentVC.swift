@@ -13,6 +13,10 @@ import SwiftyJSON
 class PaymentVC: MyTableVC {
     
     @IBOutlet weak var titleLbl: SuperLabel!
+    @IBOutlet weak var submitBtn: SuperButton!
+    @IBOutlet weak var bottomStaticView: StaticBottomView!
+    
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     
     var ecpay_token: String = ""
     var order_token: String = ""
@@ -102,100 +106,105 @@ class PaymentVC: MyTableVC {
         
         //refresh()
         
+        submitBtn.setTitle("付款")
+        
         if ecpay_token.count > 0 {
+            toECPay()
+        } else {
+            refresh()
+        }
+    }
+    
+    func toECPay() {
+        let name: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String)!
 
-            let name: String = (Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String)!
-
-            ECPayPaymentGatewayManager.sharedInstance().createPayment(
-                token: ecpay_token,
-                useResultPage: 1,
-                appStoreName: name,
-                language: "zh-TW") { (state) in
-                
-                if let creditPayment: CreatePaymentCallbackState = state as? CreatePaymentCallbackState {
-                    if let order = creditPayment.OrderInfo {
-                        if let tmp = order.TradeNo {
-                            self.trade_no = tmp
-                        }
+        ECPayPaymentGatewayManager.sharedInstance().createPayment(
+            token: ecpay_token,
+            useResultPage: 1,
+            appStoreName: name,
+            language: "zh-TW") { (state) in
+            
+            if let creditPayment: CreatePaymentCallbackState = state as? CreatePaymentCallbackState {
+                if let order = creditPayment.OrderInfo {
+                    if let tmp = order.TradeNo {
+                        self.trade_no = tmp
                     }
+                }
 //
 //                    if let card = creditPayment.CardInfo {
 //                        //print(card)
 //                    }
-                    
-                    if let cvs = creditPayment.CVSInfo {
-                        if let tmp = cvs.PaymentNo {
-                            self.payment_no = tmp
-                        }
-                        if let tmp = cvs.PaymentURL {
-                            self.payment_url = tmp
-                        }
-                        if (self.payment_no.count > 0) {
-                            self.gateway = GATEWAY.store_cvs
-                            if let tmp = cvs.ExpireDate {
-                                self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
-                            }
-                        }
+                
+                if let cvs = creditPayment.CVSInfo {
+                    if let tmp = cvs.PaymentNo {
+                        self.payment_no = tmp
                     }
-                    
-                    if let barcode = creditPayment.BarcodeInfo {
-                        if let tmp = barcode.Barcode1 {
-                            self.barcode1 = tmp
-                        }
-                        if let tmp = barcode.Barcode2 {
-                            self.barcode2 = tmp
-                        }
-                        if let tmp = barcode.Barcode3 {
-                            self.barcode3 = tmp
-                        }
-                        if (self.barcode1.count > 0 && self.barcode1 != "0") {
-                            self.gateway = GATEWAY.store_barcode
-                            if let tmp = barcode.ExpireDate {
-                                self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
-                            }
-                        }
+                    if let tmp = cvs.PaymentURL {
+                        self.payment_url = tmp
                     }
-                    
-                    if let ATM = creditPayment.ATMInfo {
-                        if let tmp = ATM.BankCode {
-                            self.bank_code = tmp
-                        }
-                        if let tmp = ATM.vAccount {
-                            self.bank_account = tmp
-                        }
-                        if (self.bank_account.count > 0) {
-                            self.gateway = GATEWAY.ATM
-                            if let tmp = ATM.ExpireDate {
-                                self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
-                            }
+                    if (self.payment_no.count > 0) {
+                        self.gateway = GATEWAY.store_cvs
+                        if let tmp = cvs.ExpireDate {
+                            self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
                         }
                     }
                 }
-
-                switch state.callbackStateStatus {
-                case .Success:
-                    //print("Success")
-                    if (self.gateway == GATEWAY.credit_card) {
-                        self.refresh()
-                    } else {
-                        self.updateOrder()
+                
+                if let barcode = creditPayment.BarcodeInfo {
+                    if let tmp = barcode.Barcode1 {
+                        self.barcode1 = tmp
                     }
-
-                case .Fail:
-                    //print("Faile")
-                    self.warning(state.callbackStateMessage)
-
-                case .Cancel:
-                    //print("Cancel")
-                    self.warning("您已經取消付款")
-
-                case .Unknown:
-                    //print("Unknown")
-                    self.warning("由於不知名的錯誤，造成付款失敗，請麻煩聯絡管理員")
+                    if let tmp = barcode.Barcode2 {
+                        self.barcode2 = tmp
+                    }
+                    if let tmp = barcode.Barcode3 {
+                        self.barcode3 = tmp
+                    }
+                    if (self.barcode1.count > 0 && self.barcode1 != "0") {
+                        self.gateway = GATEWAY.store_barcode
+                        if let tmp = barcode.ExpireDate {
+                            self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
+                        }
+                    }
+                }
+                
+                if let ATM = creditPayment.ATMInfo {
+                    if let tmp = ATM.BankCode {
+                        self.bank_code = tmp
+                    }
+                    if let tmp = ATM.vAccount {
+                        self.bank_account = tmp
+                    }
+                    if (self.bank_account.count > 0) {
+                        self.gateway = GATEWAY.ATM
+                        if let tmp = ATM.ExpireDate {
+                            self.expire_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
+                        }
+                    }
                 }
             }
-        } else {
-            refresh()
+
+            switch state.callbackStateStatus {
+            case .Success:
+                //print("Success")
+                if (self.gateway == GATEWAY.credit_card) {
+                    self.refresh()
+                } else {
+                    self.updateOrder()
+                }
+
+            case .Fail:
+                //print("Faile")
+                self.warning(state.callbackStateMessage)
+
+            case .Cancel:
+                //print("Cancel")
+                self.warning("您已經取消付款")
+
+            case .Unknown:
+                //print("Unknown")
+                self.warning("由於不知名的錯誤，造成付款失敗，請麻煩聯絡管理員")
+            }
         }
     }
     
@@ -269,6 +278,14 @@ class PaymentVC: MyTableVC {
         ]
         
         orderTable!.filterRow()
+        if (orderTable!.all_process > 1) {//已經付費了
+            bottomStaticView.isHidden = true
+            tableViewBottomConstraint.constant = 0
+        } else {
+            bottomStaticView.isHidden = false
+            tableViewBottomConstraint.constant = 100
+        }
+        
         let orderItemsTable = orderTable!.items
         for orderItemTable in orderItemsTable {
             
@@ -739,5 +756,14 @@ class PaymentVC: MyTableVC {
                 self.maskView.removeFromSuperview()
             }
         })
+    }
+    
+    @IBAction func submitBtnPressed(_ sender: Any) {
+        ecpay_token = orderTable!.ecpay_token
+        toECPay()
+    }
+    
+    @IBAction func cancelBtnPressed(_ sender: Any) {
+        prev()
     }
 }

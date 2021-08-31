@@ -1591,16 +1591,58 @@
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LRT-rb-Mkb" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="6tQ-XS-hhx">
+                                        <rect key="frame" x="147.5" y="8" width="119" height="34"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5X1-Hh-TDt" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
+                                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="34" id="JRm-MU-SxS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
+                                                <state key="normal" title="付款">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="submitBtnPressed:" destination="gYa-U5-dpO" eventType="touchUpInside" id="gz1-Ok-dwm"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaV-GJ-Ghi" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="73" y="0.0" width="46" height="34"/>
+                                                <state key="normal" title="Button"/>
+                                                <connections>
+                                                    <action selector="cancel:" destination="XPE-Pw-Llr" eventType="touchUpInside" id="5D8-Nw-tgM"/>
+                                                    <action selector="cancelBtnPressed:" destination="gYa-U5-dpO" eventType="touchUpInside" id="yBM-bH-GGx"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="AnE-5u-yG0"/>
+                                    <constraint firstItem="6tQ-XS-hhx" firstAttribute="centerX" secondItem="LRT-rb-Mkb" secondAttribute="centerX" id="Pc8-hU-J3z"/>
+                                    <constraint firstItem="6tQ-XS-hhx" firstAttribute="centerY" secondItem="LRT-rb-Mkb" secondAttribute="centerY" id="VwK-bz-sHd"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Zpn-yo-EP6"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="7LI-Oi-iup"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="LRT-rb-Mkb" firstAttribute="trailing" secondItem="7LI-Oi-iup" secondAttribute="trailing" id="5H1-mI-1dA"/>
                             <constraint firstItem="7LI-Oi-iup" firstAttribute="bottom" secondItem="dnZ-KH-Iaw" secondAttribute="bottom" id="5tM-qx-en4"/>
                             <constraint firstItem="dnZ-KH-Iaw" firstAttribute="trailing" secondItem="7LI-Oi-iup" secondAttribute="trailing" id="8sp-Ge-5DK"/>
+                            <constraint firstItem="7LI-Oi-iup" firstAttribute="bottom" secondItem="LRT-rb-Mkb" secondAttribute="bottom" id="9LQ-mY-UTq"/>
                             <constraint firstAttribute="trailing" secondItem="jLh-vN-qb6" secondAttribute="trailing" id="F4h-bR-Bxs"/>
                             <constraint firstItem="dnZ-KH-Iaw" firstAttribute="top" secondItem="jLh-vN-qb6" secondAttribute="bottom" id="K3s-oj-fCv"/>
                             <constraint firstItem="jLh-vN-qb6" firstAttribute="top" secondItem="7LI-Oi-iup" secondAttribute="top" id="KjR-ZI-YAo"/>
                             <constraint firstItem="0dk-1v-fXQ" firstAttribute="trailing" secondItem="7LI-Oi-iup" secondAttribute="trailing" id="MVN-pp-WJC"/>
+                            <constraint firstItem="LRT-rb-Mkb" firstAttribute="leading" secondItem="7LI-Oi-iup" secondAttribute="leading" id="Who-Fy-kv0"/>
                             <constraint firstItem="dnZ-KH-Iaw" firstAttribute="leading" secondItem="7LI-Oi-iup" secondAttribute="leading" id="bXj-MD-nba"/>
                             <constraint firstItem="0dk-1v-fXQ" firstAttribute="top" secondItem="jLh-vN-qb6" secondAttribute="bottom" id="d7m-ap-nTy"/>
                             <constraint firstItem="0dk-1v-fXQ" firstAttribute="leading" secondItem="7LI-Oi-iup" secondAttribute="leading" id="fMV-im-CBD"/>
@@ -1610,7 +1652,10 @@
                     </view>
                     <navigationItem key="navigationItem" id="AjB-IM-8hv"/>
                     <connections>
+                        <outlet property="bottomStaticView" destination="LRT-rb-Mkb" id="CLN-JM-Uc2"/>
+                        <outlet property="submitBtn" destination="5X1-Hh-TDt" id="Dcv-ic-G2C"/>
                         <outlet property="tableView" destination="dnZ-KH-Iaw" id="Uua-ER-diI"/>
+                        <outlet property="tableViewBottomConstraint" destination="5tM-qx-en4" id="Jmu-Yt-bqN"/>
                         <outlet property="titleLbl" destination="2JU-1H-0TF" id="6vK-sV-bN6"/>
                     </connections>
                 </viewController>
