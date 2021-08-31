@@ -56,9 +56,14 @@ class MemberCartListVC: MyTableVC {
         }
         if (mysTable != nil) {
             tables = mysTable!
-            myTable = mysTable!.rows[0]
-            cartItemsTable = myTable!.items
-            lists1 += cartItemsTable
+            if (mysTable!.rows.count > 0) {
+                myTable = mysTable!.rows[0]
+                cartItemsTable = myTable!.items
+                lists1 += cartItemsTable
+                submitButton.isHidden = false
+            } else {
+                submitButton.isHidden = true
+            }
         }
     }
 //    override func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
