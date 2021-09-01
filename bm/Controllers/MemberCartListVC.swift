@@ -66,52 +66,6 @@ class MemberCartListVC: MyTableVC {
             }
         }
     }
-//    override func getDataStart<T: Tables>(t: T.Type, page: Int = 1, perPage: Int = PERPAGE) {
-//
-//        Global.instance.addSpinner(superView: self.view)
-//
-//        dataService.getList(token: Member.instance.token, _filter: params, page: page, perPage: perPage) { (success) in
-//            if (success) {
-//
-//                do {
-//                    if (self.dataService.jsonData != nil) {
-//                        try self.tables = JSONDecoder().decode(t, from: self.dataService.jsonData!)
-//                        if (self.tables != nil) {
-//                            self.getDataEnd(success: success)
-//                        }
-//                    } else {
-//                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
-//                    }
-//                } catch {
-//                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
-//                }
-//
-//                Global.instance.removeSpinner(superView: self.view)
-//            } else {
-//                Global.instance.removeSpinner(superView: self.view)
-//                self.warning(self.dataService.msg)
-//            }
-//        }
-//    }
-//
-//    override func getDataEnd(success: Bool) {
-//        if success {
-//            mysTable = (tables as? CartsTable)
-//            if mysTable == nil {
-//                warning("購物車中無商品，或購物車超過一個錯誤，請洽管理員")
-//            } else {
-//                if (mysTable!.rows.count != 1) {
-//                    warning("購物車中無商品，或購物車超過一個錯誤，請洽管理員")
-//                } else {
-//
-//                    myTable = mysTable!.rows[0]
-//                    cartItemsTable = myTable!.items
-//                    lists1 += cartItemsTable
-//                    myTablView.reloadData()
-//                }
-//            }
-//        }
-//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lists1.count
@@ -133,7 +87,11 @@ class MemberCartListVC: MyTableVC {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let cartItemTable = cartItemsTable[indexPath.row]
+        toShowProduct(token: cartItemTable.product!.token)
+    }
     
     override func cellEdit(row: Table) {
         

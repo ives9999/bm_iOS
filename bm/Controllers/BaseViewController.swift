@@ -20,6 +20,9 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
 //        return self
 //    }
     
+    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var searchBtn: UIButton!
+    
     var msg: String = ""
     var dataService: DataService = DataService()
     //var managerLists: [SuperData] = [SuperData]()
@@ -93,6 +96,10 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         workAreaHeight = view.bounds.height - titleBarHeight
         panelCancelBtn.setTitle("取消")
         layerDeleteBtn.setTitle("刪除")
+        
+        let shopping_cart: UIButton = UIButton()
+        shopping_cart.frame = CGRect(x: 100, y: 100, width: 36, height: 36)
+        topView.addSubview(shopping_cart)
     }
     
     override func viewDidAppear(_ animated: Bool) {
