@@ -124,8 +124,6 @@ class MemberCartListVC: MyTableVC {
         
         //toPayment(order_token: "VZsrHrb0AugnuwhxHKnIwU6QJfbUcfl", ecpay_token: "e2bd42a614344b1d8d4a7895deb37b18", tokenExpireDate: "")
         
-        self.cartItemCount = 0
-        self.session.set("cartItemCount", self.cartItemCount)
         toOrder(
             login: { vc in vc.toLogin() },
             register: { vc in vc.toRegister() }

@@ -987,6 +987,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                         let table: OrderUpdateResTable = try JSONDecoder().decode(OrderUpdateResTable.self, from: self.jsonData!)
                         let orderTable: OrderTable? = table.model
                         if (orderTable != nil) {
+                            self.cartItemCount = 0
+                            self.session.set("cartItemCount", self.cartItemCount)
+                            
                             let ecpay_token: String = orderTable!.ecpay_token
                             let ecpay_token_ExpireDate: String = orderTable!.ecpay_token_ExpireDate
                             self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
