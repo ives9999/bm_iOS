@@ -106,6 +106,7 @@
                         <outlet property="submitBtn" destination="hMx-d2-eep" id="NmF-8T-zH6"/>
                         <outlet property="tableView" destination="FcP-ze-zC8" id="f3J-kg-zSK"/>
                         <outlet property="titleLbl" destination="hAb-Q7-dkO" id="gWU-is-OVt"/>
+                        <outlet property="topView" destination="Req-IZ-nd0" id="XEg-EB-qTm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NfQ-iA-1gN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -213,6 +214,7 @@
                         <outlet property="headerView" destination="kjd-vi-xhQ" id="fHJ-54-5xu"/>
                         <outlet property="plusOneButton" destination="VEn-SQ-gja" id="eST-cQ-DBE"/>
                         <outlet property="titleLbl" destination="31T-Ck-L6a" id="tuQ-ty-CPS"/>
+                        <outlet property="topView" destination="kjd-vi-xhQ" id="lpk-bF-OFn"/>
                         <segue destination="ncT-gF-11h" kind="show" identifier="toValidate" id="xcZ-Ad-vEw"/>
                         <segue destination="gpe-8u-8gG" kind="show" identifier="toProfile" id="cK5-nM-2qW"/>
                         <segue destination="ivA-0I-eys" kind="show" identifier="toTempPlaySignupOne" id="pIb-ZG-QGV"/>
@@ -259,10 +261,10 @@
                                 <rect key="frame" x="0.0" y="108" width="414" height="80"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Ut6-mE-UVp">
-                                        <rect key="frame" x="134.5" y="30" width="145" height="20.5"/>
+                                        <rect key="frame" x="26.5" y="22" width="361" height="36.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喜歡" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a4f-r7-ShZ" customClass="Tag" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="35" height="20.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="107" height="36.5"/>
                                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -277,7 +279,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="搜尋" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6n9-Nc-cnf" customClass="Tag" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="55" y="0.0" width="35" height="20.5"/>
+                                                <rect key="frame" x="127" y="0.0" width="107" height="36.5"/>
                                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" red="0.086274509799999996" green="0.086274509799999996" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -292,7 +294,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="全部" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3wo-WS-JEn" customClass="Tag" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="110" y="0.0" width="35" height="20.5"/>
+                                                <rect key="frame" x="254" y="0.0" width="107" height="36.5"/>
                                                 <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
@@ -376,7 +378,7 @@
                         <outlet property="submitBtn" destination="pNg-s1-mKD" id="8cL-fO-8u6"/>
                         <outlet property="tableView" destination="qE9-4T-nY3" id="INU-li-bW2"/>
                         <outlet property="tableViewBottomConstraint" destination="eT5-6v-l8u" id="5EL-cN-Yi9"/>
-                        <outlet property="topView" destination="mB9-AG-XQD" id="xah-yD-YGt"/>
+                        <outlet property="topView" destination="mB9-AG-XQD" id="sRh-TO-Qhu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UJy-DK-SL2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -450,6 +452,7 @@
                     <connections>
                         <outlet property="tableView" destination="6lI-Kj-zyW" id="jr7-Os-qxk"/>
                         <outlet property="titleLbl" destination="pPF-SV-psO" id="L5N-5l-8jD"/>
+                        <outlet property="topView" destination="31u-nZ-1LZ" id="9Li-qi-eIf"/>
                         <segue destination="GuJ-5M-2A0" kind="show" identifier="toTempPlayDatePlayer" id="Vod-gU-BBK"/>
                     </connections>
                 </viewController>
@@ -524,6 +527,7 @@
                     <connections>
                         <outlet property="tableView" destination="KDU-5C-WMW" id="gBh-XA-wj0"/>
                         <outlet property="titleLbl" destination="vFD-E4-vIm" id="eXC-WE-dNP"/>
+                        <outlet property="topView" destination="SYy-1A-eGW" id="fdh-sI-6im"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8KA-DO-z8A" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -595,6 +599,7 @@
                     <connections>
                         <outlet property="tableView" destination="yKJ-E5-Rqy" id="P6Y-vU-9hO"/>
                         <outlet property="titleLbl" destination="b9m-1p-DCF" id="Zxu-Rb-EIt"/>
+                        <outlet property="topView" destination="QoC-sN-SW0" id="9KX-Rb-MQE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fI1-V8-mh5" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -107,6 +107,7 @@
                         <outlet property="nicknameLbl" destination="J6b-Sg-IWd" id="hXA-Iv-YsK"/>
                         <outlet property="sexLbl" destination="F38-uH-Yry" id="rLb-Ax-RDF"/>
                         <outlet property="tableView" destination="qeF-8T-y8a" id="VYr-Rf-G2g"/>
+                        <outlet property="topView" destination="X2C-Oo-LrJ" id="Bda-gQ-NXg"/>
                         <segue destination="cqP-Uv-aIB" kind="show" identifier="toEditProfile" id="ZYe-gk-sBI"/>
                     </connections>
                 </viewController>
@@ -881,6 +882,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="E4c-VF-FGs" id="XVR-Hr-DIk"/>
+                        <outlet property="topView" destination="6T3-zc-5ik" id="2Gv-qK-DEL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZY-z0-aWB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1074,6 +1076,7 @@
                         <outlet property="registerBtn" destination="Bzs-pN-MgL" id="W9r-hQ-3UM"/>
                         <outlet property="registerIcon" destination="9SS-RX-ALH" id="5lS-qe-GYw"/>
                         <outlet property="tableView" destination="qop-cY-EqR" id="YOO-Xe-UtB"/>
+                        <outlet property="topView" destination="wjB-Rp-kZH" id="Ihd-r0-8fk"/>
                         <segue destination="kfU-PJ-07b" kind="show" identifier="toA" id="yqd-tg-r7g"/>
                     </connections>
                 </viewController>
@@ -1238,6 +1241,7 @@
                         <outlet property="monthLbl" destination="Al9-PS-Kjt" id="8dw-4x-idu"/>
                         <outlet property="monthPick" destination="gnh-Tq-kUa" id="sCx-gD-jXj"/>
                         <outlet property="tableView" destination="MAu-yj-ERJ" id="mqf-5s-HXu"/>
+                        <outlet property="topView" destination="F0k-9h-EAM" id="OYH-Kn-Mwf"/>
                         <outlet property="yearLbl" destination="aFt-se-f9l" id="Pdg-YD-wLQ"/>
                         <outlet property="yearPick" destination="H6b-W2-XPh" id="C2a-Sv-wfL"/>
                     </connections>
@@ -1516,6 +1520,7 @@
                         <outlet property="selectedMonthTxt" destination="J9q-kg-2ec" id="Q03-B0-uTk"/>
                         <outlet property="selectedYearTxt" destination="gSD-C7-HDB" id="I6d-ku-poV"/>
                         <outlet property="tableView" destination="yr9-Jw-YwC" id="151-e5-K9C"/>
+                        <outlet property="topView" destination="3Jo-PK-ITV" id="sYL-wo-pa6"/>
                         <outlet property="yearTxt" destination="Mio-Ff-8kF" id="B6N-zk-isH"/>
                         <outlet property="yearView" destination="Bkl-Nt-EhI" id="0kW-d8-fu2"/>
                     </connections>
@@ -1905,6 +1910,7 @@
                     <connections>
                         <outlet property="submitButton" destination="aLF-D9-Ebg" id="lR6-nf-lPm"/>
                         <outlet property="tableView" destination="Fu4-ZM-Sdq" id="gcG-2x-m0a"/>
+                        <outlet property="topView" destination="3a1-ev-dLH" id="OHk-sB-CvR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pfq-R6-0BL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -23,6 +23,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var searchBtn: UIButton!
     
+    let shopping_cart: UIButton = UIButton()
+    
     var msg: String = ""
     var dataService: DataService = DataService()
     //var managerLists: [SuperData] = [SuperData]()
@@ -97,9 +99,21 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         panelCancelBtn.setTitle("取消")
         layerDeleteBtn.setTitle("刪除")
         
-        let shopping_cart: UIButton = UIButton()
-        shopping_cart.frame = CGRect(x: 100, y: 100, width: 36, height: 36)
-        topView.addSubview(shopping_cart)
+        if (topView != nil) {
+            
+            topView.addSubview(shopping_cart)
+            shopping_cart.setImage(UIImage(named: "cart1"), for: .normal)
+            //shopping_cart.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
+            shopping_cart.translatesAutoresizingMaskIntoConstraints = false
+            //shopping_cart.topAnchor.constraint(equalTo: shopping_cart.superview!.topAnchor, constant: 8).isActive = true
+            //shopping_cart.leadingAnchor.constraint(equalTo: shopping_cart.superview!.leadingAnchor, constant: 8).isActive = true
+            shopping_cart.widthAnchor.constraint(equalToConstant: 36).isActive = true
+            shopping_cart.heightAnchor.constraint(equalToConstant: 36).isActive = true
+            shopping_cart.centerYAnchor.constraint(equalTo: shopping_cart.superview!.centerYAnchor).isActive = true
+            shopping_cart.trailingAnchor.constraint(equalTo: shopping_cart.superview!.trailingAnchor, constant: -50).isActive = true
+            
+            shopping_cart.addTarget(self, action: #selector(cartPressed), for: .touchUpInside)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -123,6 +137,16 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         } catch {
             warning("無法開啟測試連結網路警告視窗，請稍後再使用!!")
         }
+        
+        if !Member.instance.isLoggedIn {
+            shopping_cart.isHidden = true
+        } else {
+            shopping_cart.isHidden = false
+        }
+    }
+    
+    @objc func cartPressed() {
+        toMemberCartList()
     }
     
     func mask(y: CGFloat, superView: UIView? = nil, height: CGFloat? = nil) {

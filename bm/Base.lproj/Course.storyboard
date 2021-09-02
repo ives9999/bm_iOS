@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -88,6 +87,7 @@
                     <tabBarItem key="tabBarItem" title="課程" image="course" id="vxG-ZA-wGh"/>
                     <connections>
                         <outlet property="tableView" destination="P13-eV-hn3" id="rvO-sD-nRJ"/>
+                        <outlet property="topView" destination="4i0-LR-Nzf" id="k6d-Oo-mjO"/>
                         <segue destination="HrW-2D-NhE" kind="showDetail" identifier="toManagerCourse" id="gqh-nG-WJt"/>
                         <segue destination="t8q-W4-dib" kind="showDetail" identifier="toSingleSelect" id="A4Z-Qs-ID8"/>
                         <segue destination="cuj-18-UDi" kind="showDetail" identifier="toMultiSelect" id="NO9-v4-wOp"/>
@@ -368,6 +368,7 @@
                         <outlet property="tableView" destination="QDC-d9-WhK" id="1LP-87-7Wj"/>
                         <outlet property="tableViewConstraintHeight" destination="R7s-DU-6k4" id="0Co-49-fIf"/>
                         <outlet property="titleLbl" destination="HSl-Mb-3BG" id="4n8-gn-TQ3"/>
+                        <outlet property="topView" destination="yZ0-g4-hZ8" id="YP9-MT-Vdw"/>
                         <segue destination="u4u-hT-NnN" kind="showDetail" identifier="toShow" id="x4H-6S-8nE"/>
                         <segue destination="8Ov-i5-SS0" kind="showDetail" identifier="toSignupList" id="DMk-QC-ftK"/>
                     </connections>
@@ -646,6 +647,7 @@
                         <outlet property="selectedMonthTxt" destination="FQn-wJ-Le8" id="75T-wL-QpN"/>
                         <outlet property="selectedYearTxt" destination="BYF-b9-Kgu" id="Rez-jx-bj1"/>
                         <outlet property="tableView" destination="AwX-iW-Rfl" id="Os5-YV-fdw"/>
+                        <outlet property="topView" destination="hFe-kJ-soy" id="yEa-V0-78m"/>
                         <outlet property="yearTxt" destination="NU3-6H-v38" id="eZI-8l-IX9"/>
                         <outlet property="yearView" destination="1rw-qD-IMS" id="taF-9z-avh"/>
                     </connections>
@@ -778,6 +780,7 @@
                         <outlet property="timetableDataLbl" destination="W44-vd-bjW" id="7cz-2j-Zm0"/>
                         <outlet property="timetableTitle" destination="Ldj-mG-gIa" id="M67-87-ngH"/>
                         <outlet property="titleLbl" destination="tSg-Vh-SKn" id="0Rf-u4-Lz7"/>
+                        <outlet property="topView" destination="7yj-ZN-pUB" id="RFv-sr-3Uk"/>
                         <segue destination="u4u-hT-NnN" kind="show" identifier="toShow" id="qeF-0J-3pd"/>
                     </connections>
                 </viewController>
@@ -972,6 +975,7 @@
                     <connections>
                         <outlet property="collectionView" destination="9Jd-2O-e9s" id="xlH-2q-7RH"/>
                         <outlet property="titleLbl" destination="lfh-Wl-Z80" id="Xex-aA-Jbf"/>
+                        <outlet property="topView" destination="LJX-Oc-58U" id="Wb5-N4-9Nx"/>
                         <segue destination="jUp-Ku-BR9" kind="show" identifier="toWeekday" id="T5V-F1-cVP"/>
                         <segue destination="ctJ-zg-QTf" kind="show" identifier="toSelectTime" id="7sU-TL-inm"/>
                         <segue destination="Phj-Sm-vVU" kind="show" identifier="toSelectColor" id="Ujz-y4-a2k"/>
@@ -1068,6 +1072,7 @@
                     <connections>
                         <outlet property="tableView" destination="k2G-ew-bgI" id="55F-ag-Q8n"/>
                         <outlet property="titleLbl" destination="a2i-Yd-gYM" id="uKL-bm-dca"/>
+                        <outlet property="topView" destination="Ngt-cj-eIT" id="4Cf-MI-sdD"/>
                         <segue destination="FL6-tC-Cb5" kind="showDetail" identifier="toEditCourse" id="FiR-ti-BE0"/>
                         <segue destination="ZZa-2U-rNz" kind="showDetail" identifier="toShowCourse" id="YBu-8w-Gih"/>
                     </connections>
@@ -1219,6 +1224,7 @@
                         <outlet property="submitBtn" destination="diu-3h-btH" id="A6N-aB-PLt"/>
                         <outlet property="tableView" destination="lLe-Lo-Aw2" id="hKH-Bq-GBG"/>
                         <outlet property="titleLbl" destination="ITK-WY-s8g" id="N8c-Ns-hb2"/>
+                        <outlet property="topView" destination="0Di-Ps-mff" id="6sR-xF-lVo"/>
                         <segue destination="t8q-W4-dib" kind="showDetail" identifier="toSingleSelect" id="kcV-jt-cPw"/>
                         <segue destination="cuj-18-UDi" kind="showDetail" identifier="toMultiSelect" id="aHG-Uf-e4X"/>
                         <segue destination="jqN-AM-8Mc" kind="showDetail" identifier="toContentEdit" id="5PP-Ga-pFb"/>
@@ -1320,9 +1326,9 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="fYu-zk-ZTm"/>
-        <segue reference="x4H-6S-8nE"/>
-        <segue reference="NO9-v4-wOp"/>
-        <segue reference="A4Z-Qs-ID8"/>
+        <segue reference="qeF-0J-3pd"/>
+        <segue reference="aHG-Uf-e4X"/>
+        <segue reference="kcV-jt-cPw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="377.5" height="670"/>

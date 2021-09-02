@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -240,6 +239,7 @@
                         <outlet property="tableView" destination="QDC-d9-WhK" id="tWA-y2-hgc"/>
                         <outlet property="tableViewConstraintHeight" destination="R7s-DU-6k4" id="16Q-IK-d1V"/>
                         <outlet property="titleLbl" destination="HSl-Mb-3BG" id="qU4-nG-hsc"/>
+                        <outlet property="topView" destination="yZ0-g4-hZ8" id="kjJ-4w-n6J"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAS-dJ-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -325,6 +325,7 @@
                     <navigationItem key="navigationItem" title="球隊" id="owA-9M-Mfg"/>
                     <connections>
                         <outlet property="tableView" destination="rJI-Y4-Ooh" id="hYG-z3-4Uc"/>
+                        <outlet property="topView" destination="h8g-qX-Kzm" id="c8T-e5-A2V"/>
                         <segue destination="alg-aA-jQr" kind="show" identifier="toShow" id="AlK-fI-QxB"/>
                         <segue destination="PXR-mV-nC1" kind="show" identifier="toManager" id="xCJ-lv-P9J"/>
                         <segue destination="rYe-4R-eSO" kind="show" identifier="toCity" id="UI0-Ma-Ffm"/>

@@ -116,6 +116,9 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 //    }
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
         if (firstTimeLoading) {
             if #available(iOS 13.0, *) {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)

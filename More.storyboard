@@ -150,6 +150,7 @@
                         <outlet property="tableView" destination="PT6-mH-0Dr" id="PP5-Fk-hbR"/>
                         <outlet property="tableViewHeightCons" destination="ygs-vd-9X8" id="LYI-PB-EQ0"/>
                         <outlet property="titleLbl" destination="7EK-EI-R9v" id="rXO-dE-s0A"/>
+                        <outlet property="topView" destination="kaF-gc-GkK" id="SvU-xg-LOy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0AO-No-Lcb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -333,6 +334,7 @@
                     <navigationItem key="navigationItem" title="教練" id="yjE-Ai-Cll"/>
                     <connections>
                         <outlet property="tableView" destination="Iz0-ts-ZTW" id="glu-Q3-n9t"/>
+                        <outlet property="topView" destination="K8B-44-m3b" id="3QX-Qz-Ouu"/>
                         <segue destination="9g8-JV-KVv" kind="show" identifier="toCity" id="e7e-xA-HgL"/>
                         <segue destination="p5f-19-izc" kind="show" identifier="toManager" id="f4Q-EU-SfD"/>
                     </connections>
@@ -518,6 +520,7 @@
                         <outlet property="tableView" destination="O6a-DZ-rz9" id="4Co-RF-vdM"/>
                         <outlet property="tableViewConstraintHeight" destination="sYh-vY-hRG" id="mMr-Mo-kYY"/>
                         <outlet property="titleLbl" destination="jtU-3j-IVt" id="UE0-WA-Tbz"/>
+                        <outlet property="topView" destination="73p-Y4-f9z" id="Ief-Ea-pxR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AxD-eU-zBF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -608,6 +611,7 @@
                     <navigationItem key="navigationItem" id="gPa-D9-W2n"/>
                     <connections>
                         <outlet property="tableView" destination="3bQ-2k-Vo3" id="7qC-CB-UEP"/>
+                        <outlet property="topView" destination="lPf-YI-n8A" id="SFk-SC-cpQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tyd-rW-WwU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -758,6 +762,7 @@
                         <outlet property="submitBtn" destination="Ve4-D8-wSC" id="Uqh-rS-5HC"/>
                         <outlet property="tableView" destination="TLy-Og-HAA" id="W2v-yZ-Muo"/>
                         <outlet property="titleLbl" destination="Y2t-JY-52o" id="2iz-ba-85e"/>
+                        <outlet property="topView" destination="Oo7-0J-PDS" id="5uv-zr-jC7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BJA-AP-7kT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -842,6 +847,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="UEY-2n-3XU" id="8pg-su-o5z"/>
+                        <outlet property="topView" destination="3tu-1F-GSY" id="9wB-Ef-SUS"/>
                         <segue destination="MM3-rH-prO" kind="show" identifier="toShowStore" id="Lcb-mr-llm"/>
                         <segue destination="TfX-bS-LrQ" kind="show" identifier="toManagerStore" id="6uf-Yz-b4C"/>
                     </connections>
@@ -903,6 +909,7 @@
                     <tabBarItem key="tabBarItem" title="更多" image="more" id="VYJ-DO-xht"/>
                     <connections>
                         <outlet property="tableView" destination="IDb-Ca-u21" id="Ysa-uM-nlx"/>
+                        <outlet property="topView" destination="PW4-au-Cqj" id="Hdy-rW-BrI"/>
                         <segue destination="8Cn-f7-gQ8" kind="show" identifier="toCourse" id="yI0-wB-3GU"/>
                         <segue destination="7B3-vz-daH" kind="show" identifier="toPN" id="rz9-38-tev"/>
                         <segue destination="NIB-Wk-iZw" kind="showDetail" identifier="toArena" id="jHA-Md-ybR"/>
@@ -1227,6 +1234,7 @@
                     </view>
                     <connections>
                         <outlet property="tableView" destination="b01-FV-6H4" id="WZV-jV-Yh1"/>
+                        <outlet property="topView" destination="jsf-L4-c5N" id="93r-Nf-hoP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Kw-a8-iJt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1539,6 +1547,7 @@
                         <outlet property="scrollView" destination="ZXy-gC-bR9" id="aek-qS-hl9"/>
                         <outlet property="submitButton" destination="bLQ-Ko-6w0" id="c0N-Nb-ut2"/>
                         <outlet property="titleLbl" destination="wUU-qa-vNk" id="xqr-rA-0n0"/>
+                        <outlet property="topView" destination="7mx-NQ-m3U" id="McX-zp-X3f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vxB-PZ-xw3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1659,6 +1668,7 @@
                         <outlet property="tableView" destination="dnZ-KH-Iaw" id="Uua-ER-diI"/>
                         <outlet property="tableViewBottomConstraint" destination="5tM-qx-en4" id="Jmu-Yt-bqN"/>
                         <outlet property="titleLbl" destination="2JU-1H-0TF" id="6vK-sV-bN6"/>
+                        <outlet property="topView" destination="jLh-vN-qb6" id="eOP-TF-CXS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cER-jo-Nds" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1667,8 +1677,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Wr7-FG-b1z"/>
-        <segue reference="cDK-8u-UPz"/>
+        <segue reference="f4Q-EU-SfD"/>
+        <segue reference="e7e-xA-HgL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arena" width="25" height="25"/>
