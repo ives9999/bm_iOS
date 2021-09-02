@@ -30,6 +30,9 @@ class CoachVC: MyTableVC {
         let cellNibName = UINib(nibName: "CoachListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
+        // this page show search icon in top
+        searchBtn.visibility = .visible
+        
         refresh()
     }
     

@@ -110,6 +110,8 @@ class MemberCartListVC: MyTableVC {
             self.dataService.delete(token: row.token, type: "cart_item") { (success) in
                 if (success) {
                     self.refresh()
+                    self.cartItemCount -= 1
+                    self.session.set("cartItemCount", self.cartItemCount)
                 } else {
                     self.warning(self.dataService.msg)
                 }
@@ -122,6 +124,8 @@ class MemberCartListVC: MyTableVC {
         
         //toPayment(order_token: "VZsrHrb0AugnuwhxHKnIwU6QJfbUcfl", ecpay_token: "e2bd42a614344b1d8d4a7895deb37b18", tokenExpireDate: "")
         
+        self.cartItemCount = 0
+        self.session.set("cartItemCount", self.cartItemCount)
         toOrder(
             login: { vc in vc.toLogin() },
             register: { vc in vc.toRegister() }

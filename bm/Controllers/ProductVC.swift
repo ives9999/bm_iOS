@@ -26,6 +26,9 @@ class ProductVC: MyTableVC {
         let cellNibName = UINib(nibName: "ProductListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
+        // this page show search icon in top
+        searchBtn.visibility = .visible
+        
         refresh()
     }
     

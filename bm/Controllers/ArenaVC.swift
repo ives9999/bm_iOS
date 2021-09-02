@@ -31,6 +31,9 @@ class ArenaVC: MyTableVC {
         let cellNibName = UINib(nibName: "ArenaListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
+        // this page show search icon in top
+        searchBtn.visibility = .visible
+        
         refresh()
     }
     

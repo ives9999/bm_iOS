@@ -1872,26 +1872,11 @@
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tVg-JS-GAZ">
-                                        <rect key="frame" x="370" y="16" width="32" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="5cn-uP-6px"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="cmI-JB-C6g"/>
-                                            <constraint firstAttribute="width" constant="32" id="gdV-qh-jcI"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="yJw-IR-7Zq"/>
-                                        </constraints>
-                                        <state key="normal" image="search"/>
-                                        <connections>
-                                            <action selector="searchBtnPressed:" destination="By4-ki-Kov" eventType="touchUpInside" id="Xhd-N8-Mma"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="z7U-Sb-9A4" firstAttribute="centerY" secondItem="hlO-wO-ecB" secondAttribute="centerY" id="1q9-X1-CnD"/>
                                     <constraint firstItem="sIb-Fd-sKh" firstAttribute="leading" secondItem="hlO-wO-ecB" secondAttribute="leading" constant="12" id="CS7-Cl-E9A"/>
-                                    <constraint firstItem="tVg-JS-GAZ" firstAttribute="centerY" secondItem="hlO-wO-ecB" secondAttribute="centerY" id="Cda-qW-vai"/>
-                                    <constraint firstAttribute="trailing" secondItem="tVg-JS-GAZ" secondAttribute="trailing" constant="12" id="OGx-nX-urn"/>
                                     <constraint firstItem="z7U-Sb-9A4" firstAttribute="centerX" secondItem="hlO-wO-ecB" secondAttribute="centerX" id="VMp-tc-IY9"/>
                                     <constraint firstAttribute="height" constant="64" id="YQ3-nv-dCO"/>
                                     <constraint firstItem="sIb-Fd-sKh" firstAttribute="centerY" secondItem="hlO-wO-ecB" secondAttribute="centerY" id="dbC-uh-MMg"/>
@@ -2600,13 +2585,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="q87-Mu-6YG"/>
+        <segue reference="Kca-5B-OTe"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="377.5" height="670"/>
         <image name="plus" width="25" height="25"/>
         <image name="prev" width="20.5" height="20.5"/>
-        <image name="search" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

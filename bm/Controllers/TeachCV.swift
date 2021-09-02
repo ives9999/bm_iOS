@@ -26,6 +26,9 @@ class TeachCV: MyTableVC {
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.lightGray
         
+        // this page show search icon in top
+        searchBtn.visibility = .visible
+        
         refresh()
     }
     

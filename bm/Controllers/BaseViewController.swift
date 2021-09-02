@@ -21,9 +21,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
 //    }
     
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var searchBtn: UIButton!
+    //@IBOutlet weak var searchBtn: UIButton!
     
-    let shopping_cart: UIButton = UIButton()
+    let shoppingCartBtn: UIButton = UIButton()
+    let searchBtn: UIButton = UIButton()
+    
+    var cartItemCount: Int = 0
     
     var msg: String = ""
     var dataService: DataService = DataService()
@@ -96,24 +99,10 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
 
         //setStatusBar(color: UIColor(STATUS_GREEN))
         workAreaHeight = view.bounds.height - titleBarHeight
-        panelCancelBtn.setTitle("取消")
-        layerDeleteBtn.setTitle("刪除")
+        searchBtn.visibility = .invisible
         
-        if (topView != nil) {
-            
-            topView.addSubview(shopping_cart)
-            shopping_cart.setImage(UIImage(named: "cart1"), for: .normal)
-            //shopping_cart.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
-            shopping_cart.translatesAutoresizingMaskIntoConstraints = false
-            //shopping_cart.topAnchor.constraint(equalTo: shopping_cart.superview!.topAnchor, constant: 8).isActive = true
-            //shopping_cart.leadingAnchor.constraint(equalTo: shopping_cart.superview!.leadingAnchor, constant: 8).isActive = true
-            shopping_cart.widthAnchor.constraint(equalToConstant: 36).isActive = true
-            shopping_cart.heightAnchor.constraint(equalToConstant: 36).isActive = true
-            shopping_cart.centerYAnchor.constraint(equalTo: shopping_cart.superview!.centerYAnchor).isActive = true
-            shopping_cart.trailingAnchor.constraint(equalTo: shopping_cart.superview!.trailingAnchor, constant: -50).isActive = true
-            
-            shopping_cart.addTarget(self, action: #selector(cartPressed), for: .touchUpInside)
-        }
+        //panelCancelBtn.setTitle("取消")
+        //layerDeleteBtn.setTitle("刪除")
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -138,15 +127,55 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             warning("無法開啟測試連結網路警告視窗，請稍後再使用!!")
         }
         
-        if !Member.instance.isLoggedIn {
-            shopping_cart.isHidden = true
-        } else {
-            shopping_cart.isHidden = false
+        cartItemCount = session.getInt("cartItemCount")
+        shoppingCartBtn.visibility = (Member.instance.isLoggedIn && cartItemCount > 0) ? .visible : .invisible
+        
+        //show top right button
+        if (topView != nil) {
+            addSearchBtn()
+            addShoppingCartBtn()
         }
+    }
+    
+    func addShoppingCartBtn() {
+        
+        topView.addSubview(shoppingCartBtn)
+        shoppingCartBtn.setImage(UIImage(named: "cart1"), for: .normal)
+        
+        var trailing: CGFloat = -50
+        if (searchBtn.visibility == .invisible) {
+            //print(searchBtn.visibility)
+            trailing = -14
+        }
+        
+        shoppingCartBtn.translatesAutoresizingMaskIntoConstraints = false
+        shoppingCartBtn.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        shoppingCartBtn.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        shoppingCartBtn.centerYAnchor.constraint(equalTo: shoppingCartBtn.superview!.centerYAnchor).isActive = true
+        shoppingCartBtn.trailingAnchor.constraint(equalTo: shoppingCartBtn.superview!.trailingAnchor, constant: trailing).isActive = true
+        
+        shoppingCartBtn.addTarget(self, action: #selector(cartPressed), for: .touchUpInside)
     }
     
     @objc func cartPressed() {
         toMemberCartList()
+    }
+    
+    func addSearchBtn() {
+        
+        topView.addSubview(searchBtn)
+        searchBtn.setImage(UIImage(named: "search1"), for: .normal)
+        searchBtn.translatesAutoresizingMaskIntoConstraints = false
+        searchBtn.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        searchBtn.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        searchBtn.centerYAnchor.constraint(equalTo: searchBtn.superview!.centerYAnchor).isActive = true
+        searchBtn.trailingAnchor.constraint(equalTo: searchBtn.superview!.trailingAnchor, constant: -14).isActive = true
+        
+        searchBtn.addTarget(self, action: #selector(searchPressed), for: .touchUpInside)
+    }
+    
+    @objc func searchPressed() {
+        searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, searchRows: searchRows)
     }
     
     func mask(y: CGFloat, superView: UIView? = nil, height: CGFloat? = nil) {

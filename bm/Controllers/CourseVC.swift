@@ -38,6 +38,9 @@ class CourseVC: MyTableVC {
         let cellNibName = UINib(nibName: "CourseListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
+        // this page show search icon in top
+        searchBtn.visibility = .visible
+        
         refresh()
     }
     

@@ -767,6 +767,8 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
                     var msg: String = ""
                     if (self.cartItem_token == nil) {
                         msg = "已經加入購物車了"
+                        self.cartItemCount += 1
+                        self.session.set("cartItemCount", self.cartItemCount)
                     } else {
                         msg = "已經更新購物車了"
                     }

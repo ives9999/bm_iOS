@@ -293,9 +293,9 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         prev()
     }
     
-    @IBAction func searchBtnPressed(_ sender: Any) {
-        searchPanel.showSearchPanel(baseVC: self, view: view, newY: newY, searchRows: searchRows)
-    }
+//    @IBAction func searchBtnPressed(_ sender: Any) {
+//        searchPanel.showSearchPanel(baseVC: self, view: view, newY: newY, searchRows: searchRows)
+//    }
     
     func cellRefresh() {
         params.removeAll()
