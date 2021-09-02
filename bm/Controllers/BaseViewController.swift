@@ -127,6 +127,10 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             warning("無法開啟測試連結網路警告視窗，請稍後再使用!!")
         }
         
+        //當購物車中有商品時，購物車的icon就會出現，如果沒有就不會出現
+        //1.AddCartVC中，商品加入購物車時，+1
+        //2.MemberCartListVC中，移除購物車中的商品時，-1
+        //3.購物車轉成訂單時OrderVC，購物車中的商品數變0
         cartItemCount = session.getInt("cartItemCount")
         shoppingCartBtn.visibility = (Member.instance.isLoggedIn && cartItemCount > 0) ? .visible : .invisible
         
