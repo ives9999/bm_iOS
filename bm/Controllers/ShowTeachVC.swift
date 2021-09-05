@@ -8,66 +8,122 @@
 
 import WebKit
 
-class ShowTeachVC: UIViewController, WKUIDelegate {
+class ShowTeachVC: ShowVC {
     
-    //var show_in: Show_IN?
-    //var show: Dictionary<String, Any> = Dictionary<String, Any>()
-    //var content: String = ""
+    @IBOutlet weak var webViewContainer: UIView!
+    
+    var myTable: TeachTable?
     var webView: WKWebView!
-    let type: String = "teach"
-    var token: String?
-    
-    override func loadView() {
-        let webConfiguation = WKWebViewConfiguration()
-        webView = WKWebView(frame: .zero, configuration: webConfiguation)
-        webView.uiDelegate = self
-        view = webView
-    }
     
     override func viewDidLoad() {
+        
+        dataService = TeachService.instance
+        
         super.viewDidLoad()
-        var url: String? = nil
+        
         if (token != nil) {
-            url = String(format: URL_SHOW, type, token!)
-            //print(url)
-            //let myURL = URL(string: "http://bm.sportpassword.localhost/app/news/show/dBFcLdrDEAuk1WzPRXQvUw5aIcMNVun23yta7kPNddSqCqnquyTjmOMvgngBxUbSX7M55StEs27wgrzG3O0tacXpEMgw18VDSBQrhXs8jHWOkfjR4lXJP8YXuaalhue?device=app")
-            let myRequest = URLRequest(url: URL(string: url!)!)
+            
+            let webConfiguation = WKWebViewConfiguration()
+            webView = WKWebView(frame: webViewContainer.frame, configuration: webConfiguation)
+            webView.uiDelegate = self
+            webViewContainer.addSubview(webView)
+            
+            tableRowKeys = ["pv","created_at_show"]
+            tableRows = [
+                "pv":["icon":"pv","title":"瀏覽數","content":""],
+                "created_at_show":["icon":"calendar","title":"建立日期","content":""]
+            ]
+            
+            refresh(TeachTable.self)
+        }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        mainDataLbl.text = "主要資料"
+        contentDataLbl.text = "詳細介紹"
+        
+        mainDataLbl.setTextTitle()
+        contentDataLbl.setTextTitle()
+    }
+    
+    override func setData() {
+        
+        if (table != nil) {
+            myTable = table as? TeachTable
+            if (myTable != nil) {
+                myTable!.filterRow()
+                
+                setMainData(myTable!)
+                tableView.reloadData()
+            }
+        }
+    }
+    
+    override func setFeatured() {
+
+        if (myTable != nil && myTable!.youtube.count > 0) {
+            let url = "https://www.youtube.com/embed/" + myTable!.youtube
+            let myRequest = URLRequest(url: URL(string: url)!)
             webView.load(myRequest)
         }
-        //print(show_in!)
-
-//        DataService.instance.getShow(type: "news", id: show_in!.id, token: show_in!.token) { (success) in
-//            if success {
-//                self.content = DataService.instance.show_html
-//                print(self.content)
-//                self.reloadData()
-//            }
-//            Global.instance.removeSpinner()
-//            Global.instance.removeProgressLbl()
-//        }
-        //Global.instance.addSpinner(center: self.view.center, superView: self.view)
-        //Global.instance.addProgressLbl(center: self.view.center, superView: self.view)
     }
     
-//    func initShowVC(sin: Show_IN) {
-//        self.show_in = sin
-//    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == self.tableView {
+            return tableRowKeys.count
+        } else {
+            return 0
+        }
+    }
     
-    func reloadData() {
-//        let title: String = show["title"] as? String ?? ""
-//        titleLbl.text = title
-//        if let image: UIImage = show["featured"] as? UIImage {
-//            let width: CGFloat = image.size.width
-//            let height: CGFloat = image.size.height
-//            //print("width: \(width), height: \(height)")
-//            let ratio: CGFloat = width / height
-//            let newHeight = featured.frame.width / ratio
-//            featuredHeight.constant = newHeight
-//            featured.image = image
-//        }
-//        let content: String = show["content"] as? String ?? ""
-//
-//        label.text = content
-        //webView.loadHTMLString(content, baseURL: nil)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if tableView == self.tableView {
+            let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
+            
+            //填入資料
+            let key = tableRowKeys[indexPath.row]
+            if tableRows[key] != nil {
+                let row = tableRows[key]!
+                let icon = row["icon"] ?? ""
+                let title = row["title"] ?? ""
+                let content = row["content"] ?? ""
+                cell.update(icon: icon, title: title, content: content)
+            }
+            
+            //計算高度
+            if indexPath.row == tableRowKeys.count - 1 {
+                UIView.animate(withDuration: 0, animations: {self.tableView.layoutIfNeeded()}) { (complete) in
+                    var heightOfTableView: CGFloat = 0.0
+                    let cells = self.tableView.visibleCells
+                    for cell in cells {
+                        heightOfTableView += cell.frame.height
+                    }
+                    //print(heightOfTableView)
+                    self.tableViewConstraintHeight.constant = heightOfTableView
+                    self.changeScrollViewContentSize()
+                }
+            }
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    override func changeScrollViewContentSize() {
+            
+        let h1 = webViewContainer.bounds.size.height
+        let h2 = mainDataLbl.bounds.size.height
+        let h3 = tableViewConstraintHeight.constant
+        let h6 = contentDataLbl.bounds.size.height
+        let h7 = contentViewConstraintHeight!.constant
+        
+        //print(contentViewConstraintHeight)
+            
+        //let h: CGFloat = h1 + h2 + h3 + h4 + h5
+        let h: CGFloat = h1 + h2 + h3 + h6 + h7 + 300
+        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
+        ContainerViewConstraintHeight.constant = h
+        //print(h1)
     }
 }
+

@@ -850,7 +850,7 @@
                     <connections>
                         <outlet property="tableView" destination="IDb-Ca-u21" id="Ysa-uM-nlx"/>
                         <outlet property="topView" destination="PW4-au-Cqj" id="Hdy-rW-BrI"/>
-                        <segue destination="8Cn-f7-gQ8" kind="show" identifier="toCourse" id="yI0-wB-3GU"/>
+                        <segue destination="8Cn-f7-gQ8" kind="show" identifier="toTeach" id="yI0-wB-3GU"/>
                         <segue destination="7B3-vz-daH" kind="show" identifier="toPN" id="rz9-38-tev"/>
                         <segue destination="NIB-Wk-iZw" kind="showDetail" identifier="toArena" id="jHA-Md-ybR"/>
                         <segue destination="fEf-Ib-3oR" kind="showDetail" identifier="toCoach" id="qm6-H3-3ie"/>
@@ -859,7 +859,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wt5-kF-hRJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2896" y="-1056"/>
+            <point key="canvasLocation" x="-2954" y="-1138"/>
         </scene>
         <!--UIViewController-xCM-NL-W3p-->
         <scene sceneID="wEY-e7-0tZ">

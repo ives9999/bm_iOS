@@ -214,7 +214,7 @@ class DataService {
                 case .success(_):
                     if response.data != nil {
                         //let json = JSON(value)
-                        //print(json)
+                        //print(value)
                         if (response.data != nil) {
                             self.jsonData = response.data!
                             completion(true)

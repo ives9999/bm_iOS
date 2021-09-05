@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TeachCV: MyTableVC {
+class TeachVC: MyTableVC {
         
     var mysTable: TeachesTable?
             
@@ -21,7 +21,7 @@ class TeachCV: MyTableVC {
         //_type = "teach"
         //_titleField = "title"
         super.viewDidLoad()
-        let cellNibName = UINib(nibName: "TeachCell", bundle: nil)
+        let cellNibName = UINib(nibName: "TeachListCell", bundle: nil)
         myTablView.register(cellNibName, forCellReuseIdentifier: "listcell")
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.lightGray
@@ -80,14 +80,14 @@ class TeachCV: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? TeachCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? TeachListCell {
             
-            //cell.cellDelegate = self
+            cell.cellDelegate = self
             let row = lists1[indexPath.row] as? TeachTable
             if row != nil {
                 row!.filterRow()
                 //row!.printRow()
-                cell.updateTeachViews(indexPath: indexPath, data: row!)
+                cell.updateViews(row!)
             }
             
             return cell
