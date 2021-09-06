@@ -2,7 +2,7 @@ PODS:
   - Alamofire (4.9.1)
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
-  - CryptoSwift (1.1.3)
+  - CryptoSwift (1.4.1)
   - Device.swift (1.2.2)
   - ECPayPaymentGatewayKit (1.0.4)
   - IQKeyboardManagerSwift (6.5.6)
@@ -38,7 +38,7 @@ PODS:
   - JXPageControl/Transform (0.1.4):
     - JXPageControl/Common
   - KeychainSwift (16.0.1)
-  - OneSignal (3.6.2)
+  - OneSignal (3.7.0)
   - PromiseKit (6.8.5):
     - PromiseKit/CorePromise (= 6.8.5)
     - PromiseKit/Foundation (= 6.8.5)
@@ -55,15 +55,15 @@ PODS:
     - Starscream (~> 4.0)
   - Starscream (4.0.4)
   - SwiftyJSON (4.2.0)
-  - SwiftyXMLParser (5.3.0)
+  - SwiftyXMLParser (5.4.0)
   - SwipeCellKit (2.7.1)
   - TRVideoView (0.1.5)
-  - UIColor_Hex_Swift (5.1.6)
+  - UIColor_Hex_Swift (5.1.7)
 
 DEPENDENCIES:
   - Alamofire (~> 4.9)
   - AlamofireImage
-  - CryptoSwift (< 1.2.0)
+  - CryptoSwift (~> 1.4.1)
   - Device.swift
   - ECPayPaymentGatewayKit (~> 1.0.4)
   - IQKeyboardManagerSwift
@@ -110,20 +110,20 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyXMLParser:
-    :commit: b7beef45ecba2df71ac831245f71141ec0efb1fb
+    :commit: a188a1cac88248538d21a1d48c8bfa4bcff02f38
     :git: https://github.com/yahoojapan/SwiftyXMLParser.git
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
-  CryptoSwift: 6b6e488df0598b3e9fa49254ed1a65e8c1b1e10b
+  CryptoSwift: 0bc800a7e6a24c4fc9ebeab97d44b0d5f73a78bd
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
   ECPayPaymentGatewayKit: 83661ba841c3300e39926d9137cf3a6e11be7864
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   JXBanner: f493420009aa32097e7cbd18784af2b8ad1eb755
   JXPageControl: d61050ce6df56c95a565ec82b9c2629d9c77eb7e
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
-  OneSignal: a61c6c6bc66d2a0a7565eafee6fca941d6fce121
+  OneSignal: dda98b086108016a3073dc594f0625cda83157c1
   PromiseKit: 9616b0afef31eae56ab9ce044c8ec2b8612a15cd
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
@@ -131,11 +131,11 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
-  SwiftyXMLParser: 0985085180f1ee01916cd9b5c1a4f0a8f493c084
+  SwiftyXMLParser: b0593d3bccd0029fe853ca63ab2f7bd6d7752ec4
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   TRVideoView: dc9617f61f7d3b207b2a5ad8afe401ef7c03e51e
-  UIColor_Hex_Swift: e9d400d774c9b31d82801ca76b5301a38086f590
+  UIColor_Hex_Swift: 31cd3e47440f07a20d2503a36bb0437a445b3c29
 
-PODFILE CHECKSUM: fb7bd20268f609676038a7a4044575ebe639d70d
+PODFILE CHECKSUM: c3d7bcc41e35a157c5d76551246db6c032f08e27
 
 COCOAPODS: 1.10.1

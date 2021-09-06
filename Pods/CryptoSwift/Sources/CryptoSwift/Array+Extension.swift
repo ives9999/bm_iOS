@@ -14,11 +14,13 @@
 //
 
 extension Array {
+  @inlinable
   init(reserveCapacity: Int) {
     self = Array<Element>()
     self.reserveCapacity(reserveCapacity)
   }
 
+  @inlinable
   var slice: ArraySlice<Element> {
     self[self.startIndex ..< self.endIndex]
   }
@@ -64,12 +66,12 @@ extension Array where Element == UInt8 {
   }
 
   public func toHexString() -> String {
-    `lazy`.reduce("") {
+    `lazy`.reduce(into: "") {
       var s = String($1, radix: 16)
       if s.count == 1 {
         s = "0" + s
       }
-      return $0 + s
+      $0 += s
     }
   }
 }

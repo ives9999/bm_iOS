@@ -13,11 +13,11 @@ import OneSignal
 class ShowPNVC: MyTableVC, PNCellDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var emptyLbl: SuperLabel!
-    @IBOutlet weak var emptyCons: NSLayoutConstraint!
+    //@IBOutlet weak var emptyLbl: SuperLabel!
+    //@IBOutlet weak var emptyCons: NSLayoutConstraint!
     @IBOutlet weak var tableViewHeightCons: NSLayoutConstraint!
     @IBOutlet weak var clearBtn: SubmitButton!
-    @IBOutlet weak var scrollView: SuperScrollView!
+    //@IBOutlet weak var scrollView: SuperScrollView!
     @IBOutlet weak var bottomView: StaticBottomView!
     @IBOutlet weak var setupSwitch: SuperSwitch!
     
@@ -48,7 +48,7 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         }
         
         beginRefresh()
-        scrollView.addSubview(refreshControl)
+        //scrollView.addSubview(refreshControl)
         refresh()
         //UIApplication.shared.applicationIconBadgeNumber = 0
     }
@@ -60,13 +60,13 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
     override func refresh() {
         pnArr = MyOneSignal.instance.getSession()
         if pnArr == nil || pnArr!.count == 0 {
-            emptyLbl.isHidden = false
-            emptyCons.constant = 20
+            //emptyLbl.isHidden = false
+            //emptyCons.constant = 20
             clearBtn.isHidden = true
             //bottomView.isHidden = true
         } else {
-            emptyLbl.isHidden = true
-            emptyCons.constant = 0
+            //emptyLbl.isHidden = true
+            //emptyCons.constant = 0
             clearBtn.isHidden = false
             //bottomView.isHidden = false
         }
@@ -86,7 +86,7 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         //let height: CGFloat = 10000
         //print(height)
         
-        scrollView.contentSize = CGSize(width: frameWidth!, height: height)
+        //scrollView.contentSize = CGSize(width: frameWidth!, height: height)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

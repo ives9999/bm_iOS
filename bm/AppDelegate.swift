@@ -51,9 +51,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         OneSignal.initWithLaunchOptions(launchOptions)
         OneSignal.setAppId("856c8fdb-79fb-418d-a397-d58b9c6b880b")
+        
+        // promptForPushNotifications will show the native iOS notification permission prompt.
+        // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
         OneSignal.promptForPushNotifications(userResponse: { accepted in
-            print("User accepted notifications: \(accepted)")
+            //print("User accepted notifications: \(accepted)")
         })
+        
+//        let notificationWillShowInForegroundBlock: OSNotificationWillShowInForegroundBlock = { notification, completion in
+//          print("Received Notification: ", notification.notificationId ?? "no id")
+//          print("launchURL: ", notification.launchURL ?? "no launch url")
+//          print("content_available = \(notification.contentAvailable)")
+//
+//          if notification.notificationId == "example_silent_notif" {
+//            // Complete with null means don't show a notification
+//            completion(nil)
+//          } else {
+//            // Complete with a notification means it will show
+//            completion(notification)
+//          }
+//        }
+//        OneSignal.setNotificationWillShowInForegroundHandler(notificationWillShowInForegroundBlock)
         
         
         OneSignal.setNotificationWillShowInForegroundHandler(MyOneSignal.instance.notificationWillShowInForegroundBlock)

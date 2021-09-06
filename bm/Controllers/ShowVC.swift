@@ -28,8 +28,6 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     
     @IBOutlet weak var likeButton: LikeButton!
     
-    //var show_in: Show_IN?
-    
     var contentView: WKWebView? = {
         
         //Create configuration

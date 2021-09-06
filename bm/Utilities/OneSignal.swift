@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import OneSignal
 import SwiftyJSON
+import SCLAlertView
 
 class MyNotificationService: UNNotificationServiceExtension {
     
@@ -133,9 +134,9 @@ class MyOneSignal {
     
     let notificationWillShowInForegroundBlock: OSNotificationWillShowInForegroundBlock = { notification, completion in
         
-        print("Received Notification: ", notification.notificationId ?? "no id")
-        print("launchURL:", notification.launchURL ?? "no launch url")
-        print("content_available = \(notification.contentAvailable)")
+//        print("Received Notification: ", notification.notificationId ?? "no id")
+//        print("launchURL:", notification.launchURL ?? "no launch url")
+//        print("content_available = \(notification.contentAvailable)")
         
         if notification.notificationId == "example_silent_notif" {
             // Complete with null means don't show a notification
@@ -171,6 +172,8 @@ class MyOneSignal {
             //notificationReceivedEvent.complete(notification)
             //toShowPNVC(context)
             completion(notification)
+            
+            MyOneSignal.instance.showMsg(content!)
         }
     }
     
@@ -178,15 +181,15 @@ class MyOneSignal {
         
         // This block gets called when the user reacts to a notification received
         let notification: OSNotification = result.notification
-        print("Message: ", notification.body ?? "empty body")
-        print("badge number: ", notification.badge)
-        print("notification sound: ", notification.sound ?? "No sound")
+//        print("Message: ", notification.body ?? "empty body")
+//        print("badge number: ", notification.badge)
+//        print("notification sound: ", notification.sound ?? "No sound")
         
         if let additionalData = notification.additionalData {
-            print("additionalData: ", additionalData)
-            if let actionSelected = notification.actionButtons {
-                print("actionSelected: ", actionSelected)
-            }
+//            print("additionalData: ", additionalData)
+//            if let actionSelected = notification.actionButtons {
+//                print("actionSelected: ", actionSelected)
+//            }
             if let actionID = result.action.actionId {
                 //handle the action
                 
@@ -201,6 +204,8 @@ class MyOneSignal {
                     //pnID = getServerPNID(data)
                 }
                 MyOneSignal.instance.save(id: String(id!), title: title, content: content!, pnID: pnID)
+                
+                MyOneSignal.instance.showMsg(content!)
             }
         }
     }
@@ -326,6 +331,13 @@ class MyOneSignal {
             }
         }
         return b
+    }
+    
+    func showMsg(_ content: String) {
+        
+        let appearance = SCLAlertView.SCLAppearance()
+        let alert = SCLAlertView(appearance: appearance)
+        alert.showInfo("通知", subTitle: content)
     }
 }
 

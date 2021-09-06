@@ -43,6 +43,7 @@ extension BaseViewController {
                     if let viewController = storyboard.instantiateViewController(identifier: TO_ADD_CART)  as? AddCartVC {
                         viewController.product_token = product_token
                         viewController.cartItem_token = cartItem_token
+                        viewController.modalPresentationStyle = .fullScreen
                         show(viewController, sender: nil)
                     }
                 } else {
@@ -59,6 +60,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "toArena") as? ArenaVC {
                 viewController.member_like = member_like
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -72,7 +74,7 @@ extension BaseViewController {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_CART_LIST) as? MemberCartListVC {
-                
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -86,6 +88,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-fEf-Ib-3oR") as? CoachVC {
                 viewController.member_like = member_like
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -100,6 +103,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "Course", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "Course") as? CourseVC {
                 viewController.member_like = member_like
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -250,6 +254,7 @@ extension BaseViewController {
                 if #available(iOS 13.0, *) {
                     let storyboard = UIStoryboard(name: "Member", bundle: nil)
                     if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
+                        viewController.modalPresentationStyle = .fullScreen
                         show(viewController, sender: nil)
                     }
                 } else {
@@ -271,6 +276,7 @@ extension BaseViewController {
                 if tokenExpireDate != nil {
                     viewController.tokenExpireDate = tokenExpireDate!
                 }
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -291,6 +297,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_PRODUCT) as? ProductVC {
                 viewController.member_like = member_like
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -607,6 +614,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_ARENA)  as? ShowArenaVC {
                 viewController.token = token
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -621,6 +629,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_COACH)  as? ShowCoachVC {
                 viewController.token = token
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -635,6 +644,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "Course", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_COURSE)  as? ShowCourseVC {
                 viewController.token = token
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -644,11 +654,27 @@ extension BaseViewController {
         }
     }
     
+    func toShowPNVC() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "More", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_PN)  as? ShowPNVC {
+                //viewController.token = token
+                viewController.modalPresentationStyle = .fullScreen
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_PN) as! ShowPNVC
+            //viewController.token = token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toShowStore(token: String) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_STORE)  as? ShowStoreVC {
                 viewController.token = token
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -663,6 +689,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_TEACH)  as? ShowTeachVC {
                 viewController.token = token
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -677,6 +704,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "Team", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_TEAM)  as? ShowTeamVC {
                 viewController.token = token
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -691,6 +719,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_PRODUCT)  as? ShowProductVC {
                 viewController.token = token
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -743,6 +772,7 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "toStore") as? StoreVC {
                 viewController.member_like = member_like
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -767,6 +797,27 @@ extension BaseViewController {
 //        }
 //    }
 
+    func toTeach(member_like: Bool=false, params: [String: Any]?=nil) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-By4-ki-Kov") as? TeachVC {
+                viewController.member_like = member_like
+                if (params != nil) {
+                    viewController.params = params!
+                }
+                viewController.modalPresentationStyle = .fullScreen
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-By4-ki-Kov") as! TeachVC
+            viewController.member_like = member_like
+            if (params != nil) {
+                viewController.params = params!
+            }
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toTeam(member_like: Bool=false, params: [String: Any]?=nil) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Team", bundle: nil)
@@ -775,6 +826,7 @@ extension BaseViewController {
                 if (params != nil) {
                     viewController.params = params!
                 }
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {

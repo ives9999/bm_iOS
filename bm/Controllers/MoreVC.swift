@@ -63,21 +63,29 @@ class MoreVC: MyTableVC {
                 let segue = row["segue"] as! String
                 //print("segue: \(segue)")
                 if segue == TO_PRODUCT {
-                    //toProduct()
+                    toProduct()
                     
-                    if #available(iOS 13.0, *) {
-                        let storyboard = UIStoryboard(name: "More", bundle: nil)
-                        if let viewController = storyboard.instantiateViewController(identifier: TO_PRODUCT) as? ProductVC {
-                            //self.navigationController?.pushViewController(viewController, animated: true)
-                            //self.present(viewController, animated: true, completion: nil)
-                            viewController.modalPresentationStyle = .fullScreen
-                            show(viewController, sender: nil)
-                            //showDetailViewController(viewController, sender: nil)
-                        }
-                    } else {
-                        let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_PRODUCT) as! ProductVC
-                        self.navigationController!.pushViewController(viewController, animated: true)
-                    }
+//                    if #available(iOS 13.0, *) {
+//                        let storyboard = UIStoryboard(name: "More", bundle: nil)
+//                        if let viewController = storyboard.instantiateViewController(identifier: TO_PRODUCT) as? ProductVC {
+//                            //self.navigationController?.pushViewController(viewController, animated: true)
+//                            //self.present(viewController, animated: true, completion: nil)
+//                            viewController.modalPresentationStyle = .fullScreen
+//                            show(viewController, sender: nil)
+//                            //showDetailViewController(viewController, sender: nil)
+//                        }
+//                    } else {
+//                        let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_PRODUCT) as! ProductVC
+//                        self.navigationController!.pushViewController(viewController, animated: true)
+//                    }
+                } else if segue == TO_PN {
+                    toShowPNVC()
+                } else if segue == TO_TEACH {
+                    toTeach()
+                }else if segue == TO_COACH {
+                    toCoach()
+                }else if segue == TO_STORE {
+                    toStore()
                 } else {
                     performSegue(withIdentifier: segue, sender: row["sender"])
                 }
