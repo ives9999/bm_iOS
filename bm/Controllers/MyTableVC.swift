@@ -415,7 +415,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
     }
     
     func getSectionName(idx: Int)-> String {
-        
+
         var name: String = ""
         let row: [String: Any] = mySections[idx]
         if (row.keyExist(key: "name")) {
@@ -423,12 +423,12 @@ class MyTableVC: BaseViewController, List1CellDelegate {
                 name = tmp
             }
         }
-        
+
         return name
     }
-    
+
     func getSectionKey(idx: Int)-> String {
-        
+
         var key: String = ""
         let row: [String: Any] = mySections[idx]
         if (row.keyExist(key: "key")) {
@@ -436,12 +436,12 @@ class MyTableVC: BaseViewController, List1CellDelegate {
                 key = tmp
             }
         }
-        
+
         return key
     }
-    
+
     func getSectionExpanded(idx: Int)-> Bool {
-        
+
         var b: Bool = true
         let row: [String: Any] = mySections[idx]
         if (row.keyExist(key: "isExpanded")) {
@@ -449,7 +449,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
                 b = tmp
             }
         }
-        
+
         return b
     }
     

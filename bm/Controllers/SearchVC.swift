@@ -433,6 +433,78 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         replaceRows(key, row)
     }
     
+    override func cellCity(row: Table) {
+        let _row: TeamTable = row as! TeamTable
+        let arenaTable = _row.arena
+        
+        if (arenaTable != nil) {
+            let key: String = CITY_KEY
+            let city_id: Int = arenaTable!.city_id
+            var row = getDefinedRow(key)
+            row["value"] = String(city_id)
+            replaceRows(key, row)
+            prepareParams()
+            refresh()
+        }
+    }
+    
+    override func cellArena(row: Table) {
+        
+        let _row: TeamTable = row as! TeamTable
+        let arenaTable = _row.arena
+        
+        if (arenaTable != nil) {
+            let key: String = ARENA_KEY
+            let arena_id: Int = arenaTable!.id
+            var row = getDefinedRow(key)
+            row["value"] = String(arena_id)
+            replaceRows(key, row)
+            prepareParams()
+            refresh()
+        }
+    }
+    
+    @objc override func handleExpandClose(gesture : UITapGestureRecognizer) {
+        
+        let headerView = gesture.view!
+        let section = headerView.tag
+        let tmp = headerView.subviews.filter({$0 is UIImageView})
+        var mark: UIImageView?
+        if tmp.count > 0 {
+            mark = tmp[0] as? UIImageView
+        }
+        
+        var indexPaths: [IndexPath] = [IndexPath]()
+        
+//        let key: String = getSectionKey(idx: section)
+        let searchSection: ExpandableItems = searchSections[section]
+        var isExpanded = searchSection.isExpanded
+        searchSections[section].isExpanded = !isExpanded
+        
+        let items: [String] = searchSection.items
+        //let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+        //indexPaths.append(IndexPath(row: 0, section: 1))
+        //indexPaths.append(IndexPath(row: 1, section: 1))
+        for (idx, _) in items.enumerated() {
+            indexPaths.append(IndexPath(row: idx, section: section))
+        }
+//
+//        if (mySections[section].keyExist(key: "isExpanded")) {
+//            mySections[section]["isExpanded"] = !isExpanded
+//        }
+        
+        if isExpanded {
+            tableView.deleteRows(at: indexPaths, with: .fade)
+        } else {
+            tableView.insertRows(at: indexPaths, with: .fade)
+        }
+        
+        isExpanded = !isExpanded
+        if mark != nil {
+            toggleMark(mark: mark!, isExpanded: isExpanded)
+        }
+    }
+    
     @objc func tabPressed(sender: UITapGestureRecognizer) {
                 
         if let idx: Int = sender.view?.tag {
