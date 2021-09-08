@@ -98,9 +98,9 @@ class ProductVC: MyTableVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if mysTable != nil {
-            let productTable = mysTable!.rows[indexPath.row]
+            let row = lists1[indexPath.row]
             //toShowProduct(token: superProduct.token)
-            let token = productTable.token
+            let token = row.token
             if #available(iOS 13.0, *) {
                 let storyboard = UIStoryboard(name: "More", bundle: nil)
                 if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_PRODUCT)  as? ShowProductVC {

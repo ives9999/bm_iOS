@@ -111,10 +111,8 @@ class CourseVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if mysTable != nil {
-            let myTable = mysTable!.rows[indexPath.row]
-            toShowCourse(token: myTable.token)
-        }
+        let row = lists1[indexPath.row]
+        toShowCourse(token: row.token)
     }
 
     @IBAction func manager(_ sender: Any) {

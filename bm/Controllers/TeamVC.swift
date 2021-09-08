@@ -121,10 +121,8 @@ class TeamVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if mysTable != nil {
-            let myTable = mysTable!.rows[indexPath.row]
-            toShowTeam(token: myTable.token)
-        }
+        let row = lists1[indexPath.row]
+        toShowTeam(token: row.token)
     }
     
     override func cellArena(row: Table) {

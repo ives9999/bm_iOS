@@ -104,11 +104,8 @@ class StoreVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if mysTable != nil {
-            let storeTable = mysTable!.rows[indexPath.row]
-            toShowStore(token: storeTable.token)
-            //performSegue(withIdentifier: TO_SHOW_STORE, sender: storeTable)
-        }
+        let row = lists1[indexPath.row]
+        toShowStore(token: row.token)
     }
     
     func cellEdit(indexPath: IndexPath?) {

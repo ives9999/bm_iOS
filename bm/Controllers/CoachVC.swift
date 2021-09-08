@@ -100,10 +100,8 @@ class CoachVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if mysTable != nil {
-            let myTable = mysTable!.rows[indexPath.row]
-            toShowCoach(token: myTable.token)
-        }
+        let row = lists1[indexPath.row]
+        toShowCoach(token: row.token)
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

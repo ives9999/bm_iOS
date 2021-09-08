@@ -38,14 +38,16 @@ class TeamListCell: List2Cell {
         
         let row: TeamTable? = _row as? TeamTable ?? nil
         if row != nil {
-            if row!.arena!.name.count > 0 {
-                arenaBtn.setTitle(row!.arena!.name)
-                cityBtn.setTitle(row!.arena!.city_show)
-                cityBtn.isHidden = false
-                arenaBtn.isHidden = false
-            } else {
-                cityBtn.isHidden = true
-                arenaBtn.isHidden = true
+            if (row!.arena != nil) {
+                if row!.arena!.name.count > 0 {
+                    arenaBtn.setTitle(row!.arena!.name)
+                    cityBtn.setTitle(row!.arena!.city_show)
+                    cityBtn.isHidden = false
+                    arenaBtn.isHidden = false
+                } else {
+                    cityBtn.isHidden = true
+                    arenaBtn.isHidden = true
+                }
             }
             
             if row!.weekdays_show.count > 0 {

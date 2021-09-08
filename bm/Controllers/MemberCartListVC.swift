@@ -89,7 +89,7 @@ class MemberCartListVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let cartItemTable = cartItemsTable[indexPath.row]
+        let cartItemTable = lists1[indexPath.row] as! CartItemTable
         toShowProduct(token: cartItemTable.product!.token)
     }
     

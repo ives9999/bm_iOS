@@ -433,6 +433,23 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         replaceRows(key, row)
     }
     
+    override func clear(indexPath: IndexPath) {
+        
+        let sectionIdx = indexPath.section
+        var idx: Int = 0
+        for i in 0...sectionIdx-1 {
+            idx += searchSections[i].items.count
+        }
+        let rowIdx = indexPath.row
+        idx += rowIdx
+        let row = searchRows[idx]
+        let key = row["key"] as! String
+        var row1 = getDefinedRow(key)
+        row1["show"] = "全部"
+        row1["value"] = ""
+        replaceRows(key, row1)
+    }
+    
     override func cellCity(row: Table) {
         let _row: TeamTable = row as! TeamTable
         let arenaTable = _row.arena
@@ -488,10 +505,6 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         for (idx, _) in items.enumerated() {
             indexPaths.append(IndexPath(row: idx, section: section))
         }
-//
-//        if (mySections[section].keyExist(key: "isExpanded")) {
-//            mySections[section]["isExpanded"] = !isExpanded
-//        }
         
         if isExpanded {
             tableView.deleteRows(at: indexPaths, with: .fade)

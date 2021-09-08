@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +23,7 @@
                             <constraint firstAttribute="width" constant="12" id="miX-IT-71X"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oi-tq-AuG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oi-tq-AuG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="12" y="11.5" width="33" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -42,7 +41,7 @@
                         </connections>
                     </button>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mRn-Ga-cUS" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="88" y="8" width="195" height="28"/>
+                        <rect key="frame" x="120" y="8" width="163" height="28"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                         <connections>
@@ -50,7 +49,7 @@
                         </connections>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-Zp-2Cg">
-                        <rect key="frame" x="51" y="9.5" width="25" height="25"/>
+                        <rect key="frame" x="53" y="9.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="WKb-28-OAM"/>
                             <constraint firstAttribute="height" constant="25" id="avr-P6-XdX"/>
@@ -64,12 +63,12 @@
                 <constraints>
                     <constraint firstItem="eXe-Zp-2Cg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="2TZ-AX-5oA"/>
                     <constraint firstItem="DIs-UN-nhl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="A86-9Y-GaZ"/>
-                    <constraint firstItem="mRn-Ga-cUS" firstAttribute="leading" secondItem="eXe-Zp-2Cg" secondAttribute="trailing" constant="12" id="EuJ-t1-uxo"/>
                     <constraint firstItem="0ml-wn-o2D" firstAttribute="leading" secondItem="mRn-Ga-cUS" secondAttribute="trailing" constant="6" id="YZN-GI-gca"/>
                     <constraint firstItem="mRn-Ga-cUS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="bO9-aa-xxl"/>
-                    <constraint firstItem="eXe-Zp-2Cg" firstAttribute="leading" secondItem="5Oi-tq-AuG" secondAttribute="trailing" constant="6" id="ca6-EN-eNj"/>
+                    <constraint firstItem="mRn-Ga-cUS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="120" id="bZV-nR-4FF"/>
                     <constraint firstAttribute="trailing" secondItem="0ml-wn-o2D" secondAttribute="trailing" constant="6" id="d8W-2L-8P5"/>
                     <constraint firstItem="5Oi-tq-AuG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jOv-mT-aBh"/>
+                    <constraint firstItem="eXe-Zp-2Cg" firstAttribute="leading" secondItem="5Oi-tq-AuG" secondAttribute="trailing" constant="8" id="kLc-Zi-W8y"/>
                     <constraint firstAttribute="bottom" secondItem="mRn-Ga-cUS" secondAttribute="bottom" constant="8" id="l3J-Am-aM0"/>
                     <constraint firstItem="0ml-wn-o2D" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="r16-cI-yYl"/>
                     <constraint firstItem="mRn-Ga-cUS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rXy-Q2-2Ub"/>

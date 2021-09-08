@@ -123,8 +123,8 @@ class EditCell: SuperCell, UITextFieldDelegate {
     
     @objc func clearBtnPressed(sender: UIButton) {
         let _sender = sender as! SuperButton
-        //print(_sender.indexPath?.section)
-        //print(_sender.indexPath?.row)
+        print(_sender.indexPath?.section)
+        print(_sender.indexPath?.row)
         editText.text = ""
         detailLbl.text = "全部"
         editCellDelegate?.clear(indexPath: _sender.indexPath!)

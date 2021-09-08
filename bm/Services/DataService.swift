@@ -88,13 +88,13 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        print(filter.toJSONString())
+        //print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        print(url)
+        //print(url)
                 
         Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
@@ -199,13 +199,13 @@ class DataService {
             body[key] = param
         }
         
-        //print(body)
+        print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        //print(url)
+        print(url)
         if url != nil {
             Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
                 

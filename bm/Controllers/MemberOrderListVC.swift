@@ -74,11 +74,7 @@ class MemberOrderListVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if mysTable != nil {
-            let orderTable = mysTable!.rows[indexPath.row]
-            //toShowProduct(token: superProduct.token)
-            let token = orderTable.token
-            toPayment(order_token: token)
-        }
+        let row = lists1[indexPath.row]
+        toPayment(order_token: row.token)
     }
 }

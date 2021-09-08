@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -160,7 +160,7 @@
                                                 </constraints>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="signupCell" rowHeight="24" id="OFW-h4-eCH" customClass="OlCell" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="28" width="414" height="24"/>
+                                                        <rect key="frame" x="0.0" y="24.5" width="414" height="24"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="OFW-h4-eCH" id="bc1-k0-cQE">
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="24"/>
@@ -970,20 +970,6 @@
                                             <action selector="prevBtnPressed:" destination="HrW-2D-NhE" eventType="touchDown" id="Ohp-Ir-Ecl"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tso-nH-h5i">
-                                        <rect key="frame" x="370" y="16" width="32" height="32"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="8sP-Jl-woX"/>
-                                            <constraint firstAttribute="width" constant="32" id="bCa-Q6-Ia6"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="19"/>
-                                        <state key="normal" image="plus">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="addCourseBtnPressed:" destination="HrW-2D-NhE" eventType="touchUpInside" id="6Qs-Mv-4yG"/>
-                                        </connections>
-                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程管理列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2i-Yd-gYM">
                                         <rect key="frame" x="149.5" y="18.5" width="115" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
@@ -998,8 +984,6 @@
                                     <constraint firstItem="qft-NP-yrC" firstAttribute="leading" secondItem="Ngt-cj-eIT" secondAttribute="leading" constant="12" id="dg8-ng-bmW"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="k8o-Kb-ss2"/>
                                     <constraint firstItem="a2i-Yd-gYM" firstAttribute="centerY" secondItem="Ngt-cj-eIT" secondAttribute="centerY" id="kMb-X2-SEW"/>
-                                    <constraint firstItem="Tso-nH-h5i" firstAttribute="centerY" secondItem="Ngt-cj-eIT" secondAttribute="centerY" id="oaW-UK-EPC"/>
-                                    <constraint firstAttribute="trailing" secondItem="Tso-nH-h5i" secondAttribute="trailing" constant="12" id="oox-9O-gdJ"/>
                                     <constraint firstItem="a2i-Yd-gYM" firstAttribute="centerX" secondItem="Ngt-cj-eIT" secondAttribute="centerX" id="z5Q-LR-cIG"/>
                                 </constraints>
                             </view>

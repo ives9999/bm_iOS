@@ -97,10 +97,8 @@ class TeachVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if mysTable != nil {
-            let myTable = mysTable!.rows[indexPath.row]
-            toShowTeach(token: myTable.token)
-        }
+        let row = lists1[indexPath.row]
+        toShowTeach(token: row.token)
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
