@@ -1162,8 +1162,8 @@
                                             <action selector="prevBtnPressed:" destination="o4v-AV-CC1" eventType="touchUpInside" id="WLF-1Y-X6d"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqJ-Mv-iQ8" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="加入購物車" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqJ-Mv-iQ8" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="159.5" y="19" width="95.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -1247,11 +1247,12 @@
                         <outlet property="submitButton" destination="0XD-q2-jTb" id="ieo-OO-aRu"/>
                         <outlet property="tableView" destination="Yzs-re-9CF" id="j5j-Ri-YZw"/>
                         <outlet property="titleLbl" destination="aqJ-Mv-iQ8" id="rp2-s8-sMe"/>
+                        <outlet property="topView" destination="cGv-0m-S7b" id="YrD-Cb-bgh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wXP-fU-6FU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-6001" y="-1250"/>
+            <point key="canvasLocation" x="-6683" y="-1183"/>
         </scene>
         <!--Show ProductVC-->
         <scene sceneID="eAs-AF-B20">

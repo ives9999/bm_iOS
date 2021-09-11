@@ -276,7 +276,7 @@ extension BaseViewController {
                 if tokenExpireDate != nil {
                     viewController.tokenExpireDate = tokenExpireDate!
                 }
-                viewController.modalPresentationStyle = .fullScreen
+                //viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {

@@ -119,12 +119,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if deviceType == .simulator {
             gSimulate = true
         }
-        //gSimulate = false
+        //gSimulate = true
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Stage)
-        //ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Prod)
+        //ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Stage)
+        ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Prod)
         
         Member.instance.justGetMemberOne = false
         return true

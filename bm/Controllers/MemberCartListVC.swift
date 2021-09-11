@@ -59,8 +59,12 @@ class MemberCartListVC: MyTableVC {
             if (mysTable!.rows.count > 0) {
                 myTable = mysTable!.rows[0]
                 cartItemsTable = myTable!.items
-                lists1 += cartItemsTable
-                submitButton.isHidden = false
+                if (cartItemsTable.count > 0) {
+                    lists1 += cartItemsTable
+                    submitButton.isHidden = false
+                } else {
+                    submitButton.isHidden = true
+                }
             } else {
                 submitButton.isHidden = true
             }

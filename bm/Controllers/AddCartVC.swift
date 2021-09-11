@@ -100,6 +100,11 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
         refresh()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        shoppingCartBtn.visibility = .visible
+    }
     override func refresh() {
         Global.instance.addSpinner(superView: view)
         page = 1
@@ -766,15 +771,16 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
                 if success {
                     var msg: String = ""
                     if (self.cartItem_token == nil) {
-                        msg = "已經加入購物車了"
+                        msg = "成功加入購物車了"
                         self.cartItemCount += 1
                         self.session.set("cartItemCount", self.cartItemCount)
                     } else {
                         msg = "已經更新購物車了"
                     }
-                    self.info(msg: msg, showCloseButton: true, buttonTitle: "前往結帳") {
-                        self.toMemberCartList()
-                    }
+                    self.info(msg)
+//                    self.info(msg: msg, showCloseButton: true, buttonTitle: "前往結帳") {
+//                        self.toMemberCartList()
+//                    }
                 } else {
                     self.warning(CartService.instance.msg)
                 }

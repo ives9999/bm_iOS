@@ -209,13 +209,15 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 var row:[String: String] = ["title":"商品金額","key":"amount","value":String(amount),"show":"NT$ \(amount_show)","cell":"text"]
                 amountRows.append(row)
                 
-                var shipping_fee: Int = 60
+                //var shipping_fee: Int = 60
+                var shipping_fee: Int = 0
                 if (amount > 1000) { shipping_fee = 0}
                 let shipping_fee_show: String = shipping_fee.formattedWithSeparator
                 row = ["title":"運費","key":SHIPPING_FEE_KEY,"value":String(shipping_fee),"show":"NT$ \(shipping_fee_show)","cell":"text"]
                 amountRows.append(row)
                 
-                let tax: Int = Int(Double(amount) * 0.05)
+                //let tax: Int = Int(Double(amount) * 0.05)
+                let tax: Int = 0
                 let tax_show: String = tax.formattedWithSeparator
                 row = ["title":"稅","key":TAX_KEY,"value":String(tax),"show":"NT$ \(tax_show)","cell":"text"]
                 amountRows.append(row)

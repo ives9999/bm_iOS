@@ -563,6 +563,7 @@ enum ORDER_PROCESS: String {
 }
 
 enum ALL_PROCESS: String {
+    case notexist = "不存在"
     case normal = "訂單成立"
     case gateway_on = "付款中"
     case gateway_off = "完成付款，準備出貨"
@@ -573,6 +574,8 @@ enum ALL_PROCESS: String {
     
     func enumToString()-> String {
         switch self {
+        case .notexist:
+            return "notexist"
         case .normal:
             return "normal"
         case .gateway_on:
@@ -593,18 +596,20 @@ enum ALL_PROCESS: String {
     static func intToEnum(_ enumInt: Int) -> ALL_PROCESS {
         switch enumInt {
         case 0:
-            return .normal
+            return .notexist
         case 1:
-            return .gateway_on
+            return .normal
         case 2:
-            return .gateway_off
+            return .gateway_on
         case 3:
-            return .shipping
+            return .gateway_off
         case 4:
-            return .store
+            return .shipping
         case 5:
-            return .complete
+            return .store
         case 6:
+            return .complete
+        case 7:
             return .cancel
         default:
             return .normal

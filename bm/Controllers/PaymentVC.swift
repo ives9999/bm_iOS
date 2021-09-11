@@ -711,7 +711,7 @@ class PaymentVC: MyTableVC {
                     let payment_no: String = orderTable!.gateway!.payment_no
                     let expire_at: String = orderTable!.gateway!.expire_at_show
                     popupRows = [
-                        [TITLE_KEY:"繳款代碼",KEY_KEY:PAYMENT_NO_KEY,VALUE_KEY:payment_no,SHOW_KEY:payment_no,CELL_KEY:"barcode"],
+                        [TITLE_KEY:"繳款代碼",KEY_KEY:PAYMENT_NO_KEY,VALUE_KEY:payment_no,SHOW_KEY:payment_no,CELL_KEY:"text"],
                         [TITLE_KEY:"到期日",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:expire_at,SHOW_KEY:expire_at,CELL_KEY:"text"]
                     ]
                 } else if (method == GATEWAY.store_barcode) {

@@ -414,12 +414,14 @@ class OrderItemTable: Table {
             //[alias:size]
             //[value:M]
             var a: [String: String] = [String: String]()
-            for str in arr {
-                let b: [String] = str.components(separatedBy: ":")
-                a[b[0]] = b[1]
+            if (a.count > 0) {
+                for str in arr {
+                    let b: [String] = str.components(separatedBy: ":")
+                    a[b[0]] = b[1]
+                }
+                
+                attributes.append(a)
             }
-            
-            attributes.append(a)
         }
         
         if (amount > 0) {
