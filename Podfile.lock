@@ -59,7 +59,6 @@ PODS:
   - SwipeCellKit (2.7.1)
   - TRVideoView (0.1.5)
   - UIColor_Hex_Swift (5.1.7)
-  - youtube-ios-player-helper (1.0.3)
   - YouTubePlayer (0.7.2)
 
 DEPENDENCIES:
@@ -82,7 +81,6 @@ DEPENDENCIES:
   - SwipeCellKit
   - TRVideoView
   - UIColor_Hex_Swift
-  - youtube-ios-player-helper
   - YouTubePlayer
 
 SPEC REPOS:
@@ -107,7 +105,6 @@ SPEC REPOS:
     - SwipeCellKit
     - TRVideoView
     - UIColor_Hex_Swift
-    - youtube-ios-player-helper
     - YouTubePlayer
 
 EXTERNAL SOURCES:
@@ -141,9 +138,8 @@ SPEC CHECKSUMS:
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   TRVideoView: dc9617f61f7d3b207b2a5ad8afe401ef7c03e51e
   UIColor_Hex_Swift: 31cd3e47440f07a20d2503a36bb0437a445b3c29
-  youtube-ios-player-helper: 0185c57db23c80d63d6ca11251d110abb8a4ca61
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: e85151bb335d14cb8f4b0af60847751cddbe108f
+PODFILE CHECKSUM: 6bd4deb315c267f90c3e563d3d2a8e578dfbcb17
 
 COCOAPODS: 1.11.1

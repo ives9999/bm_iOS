@@ -29,7 +29,6 @@ target 'bm' do
   pod 'SCLAlertView'
   
   #youtube
-  pod 'youtube-ios-player-helper'
   pod 'YouTubePlayer'
 end
 

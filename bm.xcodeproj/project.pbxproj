@@ -1611,7 +1611,6 @@
 				"${BUILT_PRODUCTS_DIR}/TRVideoView/TRVideoView.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/YouTubePlayer/YouTubePlayer.framework",
-				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ECPayPaymentGatewayKit/ECPayPaymentGatewayKit.framework/ECPayPaymentGatewayKit",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1636,7 +1635,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TRVideoView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ECPayPaymentGatewayKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
