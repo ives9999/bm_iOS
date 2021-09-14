@@ -99,11 +99,13 @@ class TeachVC: MyTableVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let row = lists1[indexPath.row]
         toShowTeach(token: row.token)
+        
+        //performSegue(withIdentifier: "showTeach", sender: row)
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == TO_SHOW {
-//            if let showVC: ShowVC = segue.destination as? ShowVC {
+//        if segue.identifier == "showTeach" {
+//            if let showTeachVC: ShowTeachVC = segue.destination as? ShowTeachVC {
 //                let table = sender as! TeachTable
 //                let show_in: Show_IN = Show_IN(type: "teach", id: table.id, token: table.token, title: table.title)
 //                showVC.initShowVC(sin: show_in)

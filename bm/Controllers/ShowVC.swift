@@ -53,17 +53,19 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        scrollView.backgroundColor = UIColor.clear
         if (tableView != nil) {
             let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
             tableView.register(cellNib, forCellReuseIdentifier: "cell")
             initTableView()
         }
         
-        initContentView()
+        if (scrollView != nil) {
+            initContentView()
+            scrollView.backgroundColor = UIColor.clear
+            beginRefresh()
+            scrollView.addSubview(refreshControl)
+        }
         
-        beginRefresh()
-        scrollView.addSubview(refreshControl)
         //refresh()
     }
     

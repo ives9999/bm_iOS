@@ -82,6 +82,7 @@ class MoreVC: MyTableVC {
                     toShowPNVC()
                 } else if segue == TO_TEACH {
                     toTeach()
+                    //toShowTeach(token: "")
                 }else if segue == TO_COACH {
                     toCoach()
                 }else if segue == TO_STORE {

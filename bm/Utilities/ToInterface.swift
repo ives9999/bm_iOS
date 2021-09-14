@@ -694,7 +694,7 @@ extension BaseViewController {
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_TEACH) as! ShowTeachVC
-            viewController.token = token
+            //viewController.token = token
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

@@ -17,7 +17,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     @IBOutlet weak var allTab: Tag!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomView: StaticBottomView!
-    
+        
     var searchTags: [[String: Any]] = [[String: Any]]()
     var selectedTagIdx: Int = 0
     let heightForSection: CGFloat = 34
@@ -29,15 +29,12 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func viewDidLoad() {
         
-        //model = Team.instance
+        Global.instance.setupTabbar(self)
+        
         myTablView = tableView
         dataService = TeamService.instance
         able_type = "team"
         sections = ["", "更多"]
-        Global.instance.setupTabbar(self)
-        //Global.instance.menuPressedAction(menuBtn, self)
-        
-        //likeTab.topInset = 20
         
         searchRows = [
             ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true,"value":""],
@@ -45,7 +42,6 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
             //            ["ch": "區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":"team_area","show":"全部","segue":TO_ARENA,"sender":0],
             ["ch":"星期幾","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int](),"value":""],
             ["ch":"時段","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any](),"value":""],
-    //        ["ch":"結束時間","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":TEAM_PLAY_END_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any]()],
             ["ch":"球館","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int](),"value":""],
             ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String](),"value":""]
         ]
@@ -57,44 +53,33 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         
         super.viewDidLoad()
         
-        //searchTableView = tableView
         let cellNib = UINib(nibName: "EditCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
-        
+
         let cellNibName = UINib(nibName: "TeamListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
-        
+
         searchTags = [
             ["key": "like", "selected": true, "tag": 0, "class": likeTab],
             ["key": "search", "selected": false, "tag": 1, "class": searchTab],
             ["key": "all", "selected": false, "tag": 2, "class": allTab]
         ]
-        
+
         //print(searchTags)
-        
+
         let likeTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
         likeTab.addGestureRecognizer(likeTap)
         let searchTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
         searchTab.addGestureRecognizer(searchTap)
         let allTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
         allTab.addGestureRecognizer(allTap)
-        
+
         updateTabSelected(idx: selectedTagIdx)
-        //submitBtn.visibility = .invisible
         bottomView.visibility = .invisible
         tableViewBottomConstraint.constant = 0
-        
+
         member_like = true
         refresh()
-        
-        //submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
-        //submitBtn.layer.cornerRadius = 12
-//        citys.append(City(id: 218, name: ""))
-//        citys.append(City(id: 257, name: ""))
-        //Session.shared.clear(key: Session.shared.loginResetKey)
-//        if !Session.shared.exist(key: Session.shared.loginResetKey) {
-//            Session.shared.loginReset = gReset
-//        }
     }
     
 //    override func refresh() {
@@ -115,24 +100,24 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 //        }
 //    }
     
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-        if (firstTimeLoading) {
-            if #available(iOS 13.0, *) {
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let viewController = storyboard.instantiateViewController(identifier: "banner")  as? HomeTotalAdVC {
-                    viewController.modalPresentationStyle = .overCurrentContext
-                    present(viewController, animated: true, completion: nil)
-                }
-            } else {
-                let viewController = self.storyboard!.instantiateViewController(withIdentifier: "banner") as! HomeTotalAdVC
-                self.navigationController!.pushViewController(viewController, animated: true)
-            }
-            firstTimeLoading = false
-        }
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//
+//        super.viewDidAppear(animated)
+//
+//        if (firstTimeLoading) {
+//            if #available(iOS 13.0, *) {
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                if let viewController = storyboard.instantiateViewController(identifier: "banner")  as? HomeTotalAdVC {
+//                    viewController.modalPresentationStyle = .overCurrentContext
+//                    present(viewController, animated: true, completion: nil)
+//                }
+//            } else {
+//                let viewController = self.storyboard!.instantiateViewController(withIdentifier: "banner") as! HomeTotalAdVC
+//                self.navigationController!.pushViewController(viewController, animated: true)
+//            }
+//            firstTimeLoading = false
+//        }
+//    }
     
 //    override func viewDidAppear(_ animated: Bool) {
 //        gReset = Session.shared.loginReset

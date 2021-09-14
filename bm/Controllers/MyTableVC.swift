@@ -75,25 +75,29 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         frameWidth = view.bounds.size.width
         //print("frame width: \(frameWidth)")
         frameHeight = view.bounds.size.height
-        myTablView.backgroundColor = UIColor.clear
-        myTablView.delegate = self
-        myTablView.dataSource = self
-
         beginRefresh()
-        myTablView.addSubview(refreshControl)
+        
+        if (myTablView != nil) {
+            myTablView.backgroundColor = UIColor.clear
+            myTablView.delegate = self
+            myTablView.dataSource = self
+            myTablView.addSubview(refreshControl)
+        }
         
         if form != nil {
             sections = form.getSections()
             section_keys = form.getSectionKeys()
         }
         
-        let cellNibName = UINib(nibName: "List2Cell", bundle: nil)
-        tableView.register(cellNibName, forCellReuseIdentifier: "lis2Cell")
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableView.automaticDimension
-        
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = UIColor.lightGray
+        if (tableView != nil) {
+            let cellNibName = UINib(nibName: "List2Cell", bundle: nil)
+            tableView.register(cellNibName, forCellReuseIdentifier: "lis2Cell")
+            tableView.estimatedRowHeight = 44
+            tableView.rowHeight = UITableView.automaticDimension
+            
+            tableView.separatorStyle = .singleLine
+            tableView.separatorColor = UIColor.lightGray
+        }
     }
     
     override func refresh() {

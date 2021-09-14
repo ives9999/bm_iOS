@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HG5-5B-KRS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HG5-5B-KRS">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1085,7 +1085,7 @@
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </imageView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="oLj-Mk-1z3" customClass="SuperDatePicker" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="8" y="124" width="398" height="353.5"/>
+                                <rect key="frame" x="8" y="124" width="398" height="352"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <locale key="locale" localeIdentifier="zh_TW"/>
                                 <userDefinedRuntimeAttributes>
@@ -1095,7 +1095,7 @@
                                 </userDefinedRuntimeAttributes>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lAd-ie-Gh7" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="191" y="493.5" width="32" height="34"/>
+                                <rect key="frame" x="191" y="492" width="32" height="34"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="34" id="NR3-xy-z3R"/>
@@ -2464,91 +2464,6 @@
             </objects>
             <point key="canvasLocation" x="952.79999999999995" y="1384.8575712143929"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="7mS-NP-qpZ">
-            <objects>
-                <viewController id="inI-QX-0L6" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rrw-jv-9o6">
-                        <rect key="frame" x="0.0" y="0.0" width="500" height="1000"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WCs-aG-vaW" customClass="ShowCoach">
-                                <rect key="frame" x="0.0" y="44" width="500" height="64"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBb-qP-k51" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="Jl5-0k-Mxo"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="26" id="gKB-yd-KZK"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="33" id="pWu-Dg-RD6"/>
-                                            <constraint firstAttribute="width" constant="33" id="tGF-zh-dem"/>
-                                        </constraints>
-                                        <state key="normal" image="prev"/>
-                                        <connections>
-                                            <action selector="prevBtnPressed:" destination="tTg-jR-J80" eventType="touchUpInside" id="YUs-HG-CrS"/>
-                                            <action selector="prevBtnPressed:" destination="zVt-Av-Afw" eventType="touchUpInside" id="yhf-nN-eVQ"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="教學" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UxR-nt-tLr">
-                                        <rect key="frame" x="229.5" y="19" width="41.5" height="26.5"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="0YU-rF-K4t"/>
-                                    <constraint firstItem="UxR-nt-tLr" firstAttribute="centerX" secondItem="WCs-aG-vaW" secondAttribute="centerX" id="1t8-8i-W44"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="1zN-Dy-8yy"/>
-                                    <constraint firstItem="UxR-nt-tLr" firstAttribute="centerY" secondItem="WCs-aG-vaW" secondAttribute="centerY" id="78u-0i-SyF"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="Mqw-lg-INo"/>
-                                    <constraint firstItem="ZBb-qP-k51" firstAttribute="leading" secondItem="WCs-aG-vaW" secondAttribute="leading" constant="12" id="PlG-Fv-uBT"/>
-                                    <constraint firstItem="UxR-nt-tLr" firstAttribute="centerX" secondItem="WCs-aG-vaW" secondAttribute="centerX" id="UvV-9Z-rEv"/>
-                                    <constraint firstItem="ZBb-qP-k51" firstAttribute="leading" secondItem="WCs-aG-vaW" secondAttribute="leading" constant="12" id="dKG-k5-gHk"/>
-                                    <constraint firstItem="UxR-nt-tLr" firstAttribute="centerY" secondItem="WCs-aG-vaW" secondAttribute="centerY" id="lcW-o3-w3U"/>
-                                    <constraint firstItem="ZBb-qP-k51" firstAttribute="centerY" secondItem="WCs-aG-vaW" secondAttribute="centerY" id="qHy-w3-S0Q"/>
-                                    <constraint firstItem="ZBb-qP-k51" firstAttribute="centerY" secondItem="WCs-aG-vaW" secondAttribute="centerY" id="uAA-jO-tDF"/>
-                                </constraints>
-                            </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1b-AL-I3d">
-                                <rect key="frame" x="0.0" y="108" width="500" height="858"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4Y-Mg-3Ej">
-                                        <rect key="frame" x="0.0" y="0.0" width="290" height="1000"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1000" id="gvG-Bw-dvM"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="f4Y-Mg-3Ej" secondAttribute="bottom" id="1Qc-Ss-s1G"/>
-                                    <constraint firstAttribute="trailing" secondItem="f4Y-Mg-3Ej" secondAttribute="trailing" id="cPZ-qZ-3BH"/>
-                                    <constraint firstItem="f4Y-Mg-3Ej" firstAttribute="top" secondItem="p1b-AL-I3d" secondAttribute="top" id="goc-Vc-sHg"/>
-                                    <constraint firstItem="f4Y-Mg-3Ej" firstAttribute="leading" secondItem="p1b-AL-I3d" secondAttribute="leading" id="yFF-dB-BFr"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="LVX-rX-I2x"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="p1b-AL-I3d" firstAttribute="leading" secondItem="LVX-rX-I2x" secondAttribute="leading" id="3pU-94-KJL"/>
-                            <constraint firstItem="WCs-aG-vaW" firstAttribute="top" secondItem="LVX-rX-I2x" secondAttribute="top" id="8FW-8v-ePm"/>
-                            <constraint firstItem="f4Y-Mg-3Ej" firstAttribute="width" secondItem="rrw-jv-9o6" secondAttribute="width" multiplier="0.57971" id="8XY-Nl-Wwe"/>
-                            <constraint firstItem="p1b-AL-I3d" firstAttribute="trailing" secondItem="LVX-rX-I2x" secondAttribute="trailing" id="DeN-ML-t3a"/>
-                            <constraint firstItem="WCs-aG-vaW" firstAttribute="leading" secondItem="LVX-rX-I2x" secondAttribute="leading" id="Jfs-Y1-s03"/>
-                            <constraint firstItem="WCs-aG-vaW" firstAttribute="trailing" secondItem="LVX-rX-I2x" secondAttribute="trailing" id="cWo-m8-NvX"/>
-                            <constraint firstItem="LVX-rX-I2x" firstAttribute="bottom" secondItem="p1b-AL-I3d" secondAttribute="bottom" id="f8O-Jf-t23"/>
-                            <constraint firstItem="p1b-AL-I3d" firstAttribute="top" secondItem="WCs-aG-vaW" secondAttribute="bottom" id="wC0-Sy-csf"/>
-                        </constraints>
-                    </view>
-                    <size key="freeformSize" width="500" height="1000"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3OK-w2-8OZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1238" y="1155"/>
-        </scene>
         <!--UIViewController-ZfU-fN-VKi-->
         <scene sceneID="1Vy-Jx-X77">
             <objects>
@@ -2657,7 +2572,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kHF-gS-rQU">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="754"/>
                                         <subviews>
-                                            <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dYt-V2-nS3">
+                                            <view clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dYt-V2-nS3" customClass="YouTubePlayerView" customModule="YouTubePlayer">
                                                 <rect key="frame" x="0.0" y="8" width="414" height="240"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="240" id="NYZ-8c-njb"/>
@@ -2780,7 +2695,7 @@
                         <outlet property="tableViewConstraintHeight" destination="Tmd-0H-ThQ" id="oOE-nu-9GK"/>
                         <outlet property="titleLbl" destination="ekA-qQ-7fi" id="bjL-r9-qDA"/>
                         <outlet property="topView" destination="3Py-Bc-hTC" id="2Qq-dS-TQO"/>
-                        <outlet property="webViewContainer" destination="dYt-V2-nS3" id="Ofd-38-jvv"/>
+                        <outlet property="youtube" destination="dYt-V2-nS3" id="ej2-0C-TLw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b90-UK-YmL" userLabel="First Responder" sceneMemberID="firstResponder"/>

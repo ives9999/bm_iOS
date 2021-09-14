@@ -27,6 +27,10 @@ target 'bm' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'JXBanner'
   pod 'SCLAlertView'
+  
+  #youtube
+  pod 'youtube-ios-player-helper'
+  pod 'YouTubePlayer'
 end
 
 target 'bmNotificationServiceExtension' do
