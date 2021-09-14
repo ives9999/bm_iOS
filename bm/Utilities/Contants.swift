@@ -184,6 +184,7 @@ let TO_TEMP_PLAY_SIGNUP_ONE: String = "toTempPlaySignupOne"
 let TO_TEXT_INPUT: String = "toTextInput"
 let TO_TIMETABLE: String = "toTimeTable"
 let TO_VALIDATE: String = "toValidate"
+let TO_YOUTUBE_PLAYER: String = "toYoutubePlayer"
 
 // color
 let CELL_SELECTED = "#363636"

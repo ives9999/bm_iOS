@@ -97,8 +97,9 @@ class TeachVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = lists1[indexPath.row]
-        toShowTeach(token: row.token)
+        let row = lists1[indexPath.row] as! TeachTable
+        //toShowTeach(token: row.token)
+        toYoutubePlayer(token: row.youtube)
         
         //performSegue(withIdentifier: "showTeach", sender: row)
     }

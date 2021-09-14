@@ -2462,7 +2462,7 @@
                 <viewControllerPlaceholder storyboardName="Course" referencedIdentifier="UIViewController-ZZa-2U-rNz" id="LBW-zN-Bv6" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UwF-HO-vNZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="952.79999999999995" y="1384.8575712143929"/>
+            <point key="canvasLocation" x="649" y="1181"/>
         </scene>
         <!--UIViewController-ZfU-fN-VKi-->
         <scene sceneID="1Vy-Jx-X77">
@@ -2473,6 +2473,74 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="euM-LR-AyV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-748" y="1533"/>
+        </scene>
+        <!--Youtube PlayerVC-->
+        <scene sceneID="ddN-cd-AjX">
+            <objects>
+                <viewController storyboardIdentifier="toYoutubePlayer" id="UX0-SC-0pG" customClass="YoutubePlayerVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="spd-Qe-Rx3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fob-9E-50z">
+                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfe-f8-fEq" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="a9f-X2-cxX"/>
+                                            <constraint firstAttribute="width" constant="33" id="wML-I3-RIO"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prev:" destination="UX0-SC-0pG" eventType="touchUpInside" id="X5A-Fy-WNN"/>
+                                            <action selector="prevBtnPressed:" destination="wSb-AK-Qq5" eventType="touchUpInside" id="39e-0N-ZYb"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="dfe-f8-fEq" firstAttribute="leading" secondItem="Fob-9E-50z" secondAttribute="leading" constant="12" id="5iu-fE-aNk"/>
+                                    <constraint firstItem="dfe-f8-fEq" firstAttribute="centerY" secondItem="Fob-9E-50z" secondAttribute="centerY" id="CKw-xY-vDC"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="Fuo-eo-3P5"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="MWc-P8-Z1D"/>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="sPs-cL-xKq"/>
+                                    <constraint firstAttribute="height" constant="64" id="tLr-3O-ibp"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="m2q-JF-buK">
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z4y-Rt-sLj" customClass="YouTubePlayerView" customModule="YouTubePlayer">
+                                <rect key="frame" x="0.0" y="331.5" width="414" height="233"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="z4y-Rt-sLj" secondAttribute="height" multiplier="16:9" id="DGB-Wh-yxb"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="tQt-72-Mbr"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="m2q-JF-buK" firstAttribute="trailing" secondItem="tQt-72-Mbr" secondAttribute="trailing" id="6W6-bd-B4T"/>
+                            <constraint firstItem="z4y-Rt-sLj" firstAttribute="leading" secondItem="tQt-72-Mbr" secondAttribute="leading" id="961-Bt-flA"/>
+                            <constraint firstItem="m2q-JF-buK" firstAttribute="top" secondItem="Fob-9E-50z" secondAttribute="bottom" id="9y9-XQ-OaQ"/>
+                            <constraint firstItem="m2q-JF-buK" firstAttribute="leading" secondItem="tQt-72-Mbr" secondAttribute="leading" id="A0z-mH-G9V"/>
+                            <constraint firstItem="z4y-Rt-sLj" firstAttribute="centerY" secondItem="spd-Qe-Rx3" secondAttribute="centerY" id="Dt0-ak-i6W"/>
+                            <constraint firstItem="Fob-9E-50z" firstAttribute="trailing" secondItem="tQt-72-Mbr" secondAttribute="trailing" id="Llr-dQ-eMe"/>
+                            <constraint firstItem="Fob-9E-50z" firstAttribute="top" secondItem="tQt-72-Mbr" secondAttribute="top" id="ePK-9b-Y9F"/>
+                            <constraint firstItem="tQt-72-Mbr" firstAttribute="bottom" secondItem="m2q-JF-buK" secondAttribute="bottom" id="mW1-iL-lzY"/>
+                            <constraint firstItem="Fob-9E-50z" firstAttribute="leading" secondItem="tQt-72-Mbr" secondAttribute="leading" id="uJx-eH-thy"/>
+                            <constraint firstItem="tQt-72-Mbr" firstAttribute="trailing" secondItem="z4y-Rt-sLj" secondAttribute="trailing" id="zJB-8n-fZ7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="youtubePlayerView" destination="z4y-Rt-sLj" id="mo6-pZ-Pgs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FKG-ET-5up" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="309" y="1531"/>
         </scene>
         <!--UIViewController-HrW-2D-NhE-->
         <scene sceneID="Udl-zt-ecR">
@@ -2634,18 +2702,17 @@
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="26r-HL-3Jl">
-                                        <rect key="frame" x="192" y="7.5" width="30" height="35"/>
+                                        <rect key="frame" x="153" y="7.5" width="108" height="35"/>
                                         <subviews>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vs6-rh-TMb" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="35"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="35" id="3Uk-Ff-DEs"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                <state key="normal" title="報名"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="drP-cz-jSC" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="62" height="35"/>
+                                                <state key="normal" title="播放影片"/>
+                                                <connections>
+                                                    <action selector="playVideo:" destination="wSb-AK-Qq5" eventType="touchUpInside" id="Jw7-91-0nk"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjP-Un-uA7" customClass="LikeButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="30" height="35"/>
+                                                <rect key="frame" x="78" y="0.0" width="30" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="35" id="VTE-Nl-SOD"/>
                                                 </constraints>
@@ -2689,6 +2756,7 @@
                         <outlet property="contentDataLbl" destination="M3h-Ti-EzE" id="3C6-Ot-jSf"/>
                         <outlet property="likeButton" destination="CjP-Un-uA7" id="cJe-ix-p5J"/>
                         <outlet property="mainDataLbl" destination="eGN-to-J0p" id="06m-ol-hGr"/>
+                        <outlet property="playVideo" destination="drP-cz-jSC" id="7A6-6y-tkO"/>
                         <outlet property="scrollContainerView" destination="kHF-gS-rQU" id="uiI-n4-Hnk"/>
                         <outlet property="scrollView" destination="TA7-Qx-P1c" id="TKF-km-kMf"/>
                         <outlet property="tableView" destination="THr-PA-wAZ" id="5SY-CA-XIh"/>
@@ -2700,7 +2768,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b90-UK-YmL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="952.79999999999995" y="1384.8575712143929"/>
+            <point key="canvasLocation" x="1187" y="1409"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

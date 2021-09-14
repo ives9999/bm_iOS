@@ -15,6 +15,7 @@ class ShowTeachVC: ShowVC {
     //@IBOutlet weak var webViewContainer: UIView!
     //@IBOutlet weak var youtube: YTPlayerView!
     @IBOutlet weak var youtube: YouTubePlayerView!
+    @IBOutlet weak var playVideo: SubmitButton!
     
     var myTable: TeachTable?
     //var webView: WKWebView!
@@ -31,7 +32,12 @@ class ShowTeachVC: ShowVC {
         //youtube.playVideo()
         //youtube.loadVideoID("uTYodversoM")
         //youtube.play()
-        youtube.playerVars = ["playsinline": "1" as AnyObject]
+        youtube.playerVars = [
+            "controls": "1" as AnyObject,
+            "playsinline": "1" as AnyObject
+        ] as YouTubePlayerView.YouTubePlayerParameters
+        
+        playVideo.setTitle("播放影片")
         
         if (token != nil) {
 
@@ -141,6 +147,10 @@ class ShowTeachVC: ShowVC {
         ContainerViewConstraintHeight.constant = h
         //print(h1)
     }
+    
+    @IBAction func playVideo(_ sender: Any) {
+        toYoutubePlayer(token: myTable!.youtube)
+    }
 }
 
 extension ShowTeachVC: YouTubePlayerDelegate {
@@ -158,13 +168,13 @@ extension ShowTeachVC: YouTubePlayerDelegate {
 //          }
 //    }
     func playerReady(_ videoPlayer: YouTubePlayerView) {
-          print("Player Ready!")
-          //videoPlayer.loadVideoID("uTYodversoM")
+        //print("Player Ready!")
+        //videoPlayer.loadVideoID("uTYodversoM")
         videoPlayer.play()
-      }
+    }
 
     func playerStateChanged(_ videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
-        print("Player state changed!")
+        //print("Player state changed!")
     }
 }
 

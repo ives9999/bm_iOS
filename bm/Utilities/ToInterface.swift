@@ -838,6 +838,21 @@ extension BaseViewController {
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
+    
+    func toYoutubePlayer(token: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_YOUTUBE_PLAYER)  as? YoutubePlayerVC {
+                viewController.token = token
+                viewController.modalPresentationStyle = .fullScreen
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_YOUTUBE_PLAYER) as! YoutubePlayerVC
+            viewController.token = token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
 }
 
 
