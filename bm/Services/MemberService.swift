@@ -124,84 +124,84 @@ class MemberService: DataService {
     
     func logout() {
         Member.instance.isLoggedIn = false
-        Member.instance.reset()
+        //Member.instance.reset()
         //Facebook.instance.logout()
         //NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
     }
     
-    func register(email: String, password: String, repassword: String, completion: @escaping CompletionHandler) {
-        let lowerCaseEmail = email.lowercased()
-        let body: [String: Any] = ["source": "app", "email": lowerCaseEmail, "password": password, "repassword": repassword]
-        
-        Alamofire.request(URL_REGISTER, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    print("data error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                //print(data)
-                let json: JSON = JSON(data)
-                self.success = json["success"].boolValue
-                //print(self.success)
-                if self.success {
-                    self.jsonToMember(json: json)
-                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
-                } else {
-                    let errors: [String] = json["msg"].arrayObject as! [String]
-                    for i in 0 ..< errors.count {
-                        self.msg += errors[i]
-                    }
-                    //print(self.msg)
-                }
-                completion(true)
-            } else {
-                self.msg = "網路錯誤，請稍後再試"
-                completion(false)
-                debugPrint(response.result.error as Any)
-            }
-        }
-    }
+//    func register(email: String, password: String, repassword: String, completion: @escaping CompletionHandler) {
+//        let lowerCaseEmail = email.lowercased()
+//        let body: [String: Any] = ["source": "app", "email": lowerCaseEmail, "password": password, "repassword": repassword]
+//
+//        Alamofire.request(URL_REGISTER, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                //print(data)
+//                let json: JSON = JSON(data)
+//                self.success = json["success"].boolValue
+//                //print(self.success)
+//                if self.success {
+//                    self.jsonToMember(json: json)
+//                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+//                } else {
+//                    let errors: [String] = json["msg"].arrayObject as! [String]
+//                    for i in 0 ..< errors.count {
+//                        self.msg += errors[i]
+//                    }
+//                    //print(self.msg)
+//                }
+//                completion(true)
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//                debugPrint(response.result.error as Any)
+//            }
+//        }
+//    }
     
-    func update(id: Int, field: String, value: inout String, completion: @escaping CompletionHandler) {
-        if field == EMAIL_KEY {
-            value = value.lowercased()
-        }
-        let body: [String: Any] = ["source": "app", field: value, ID_KEY: id]
-        //print(body)
-        //print(URL_MEMBER_UPDATE)
-        msg = ""
-        Alamofire.request(URL_MEMBER_UPDATE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            //print(response.result.error)
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    print("data error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                let json = JSON(data)
-                //print(json)
-                self.success = json["success"].boolValue
-                if self.success {
-                    self.jsonToMember(json: json)
-                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
-                } else {
-                    let errors: [String] = json["error"].arrayObject as! [String]
-                    for i in 0 ..< errors.count {
-                        self.msg += errors[i]
-                    }
-                    //print(self.msg)
-                }
-                completion(true)
-            } else {
-                self.success = false
-                self.msg = "網路錯誤，請稍後再試"
-                completion(false)
-            }
-        }
-    }
+//    func update(id: Int, field: String, value: inout String, completion: @escaping CompletionHandler) {
+//        if field == EMAIL_KEY {
+//            value = value.lowercased()
+//        }
+//        let body: [String: Any] = ["source": "app", field: value, ID_KEY: id]
+//        //print(body)
+//        //print(URL_MEMBER_UPDATE)
+//        msg = ""
+//        Alamofire.request(URL_MEMBER_UPDATE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//            //print(response.result.error)
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                let json = JSON(data)
+//                //print(json)
+//                self.success = json["success"].boolValue
+//                if self.success {
+//                    self.jsonToMember(json: json)
+//                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+//                } else {
+//                    let errors: [String] = json["error"].arrayObject as! [String]
+//                    for i in 0 ..< errors.count {
+//                        self.msg += errors[i]
+//                    }
+//                    //print(self.msg)
+//                }
+//                completion(true)
+//            } else {
+//                self.success = false
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//            }
+//        }
+//    }
     
     func validate(type: String, code: String, token: String, completion: @escaping CompletionHandler) {
         var url: String = ""
@@ -282,43 +282,43 @@ class MemberService: DataService {
         }
     }
     
-    func getOne(token: String, completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["source": "app",TOKEN_KEY: token]
-        //print(URL_MEMBER_GETONE)
-        //print(body)
-        one = nil
-        Alamofire.request(URL_MEMBER_GETONE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            //print(response)
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    print("data error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                let json = JSON(data)
-                //print(json)
-                self.success = json["success"].boolValue
-                if self.success {
-                    self.one = json
-                    if token == Member.instance.token {
-                        self.jsonToMember(json: json)
-                    }
-                    completion(true)
-                } else {
-                    if json["msg"] != JSON.null {
-                        self.msg = json["msg"].stringValue
-                    }
-                    //print(self.msg)
-                    completion(false)
-                }
-            } else {
-                self.success = false
-                self.msg = "網路錯誤，請稍後再試"
-                completion(false)
-            }
-        }
-    }
+//    func getOne(token: String, completion: @escaping CompletionHandler) {
+//        let body: [String: String] = ["source": "app",TOKEN_KEY: token]
+//        //print(URL_MEMBER_GETONE)
+//        //print(body)
+//        one = nil
+//        Alamofire.request(URL_MEMBER_GETONE, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//            //print(response)
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                let json = JSON(data)
+//                //print(json)
+//                self.success = json["success"].boolValue
+//                if self.success {
+//                    self.one = json
+//                    if token == Member.instance.token {
+//                        self.jsonToMember(json: json)
+//                    }
+//                    completion(true)
+//                } else {
+//                    if json["msg"] != JSON.null {
+//                        self.msg = json["msg"].stringValue
+//                    }
+//                    //print(self.msg)
+//                    completion(false)
+//                }
+//            } else {
+//                self.success = false
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//            }
+//        }
+//    }
     
     func blacklist(token: String, completion: @escaping CompletionHandler) {
         
@@ -409,26 +409,26 @@ class MemberService: DataService {
         }
     }
     
-    override func jsonToMember(json: JSON) {
-        //print(json)
-        var data:[String: Any] = [String: Any]()
-        for key in MEMBER_FIELD_STRING {
-            let tmp = json[key].stringValue
-            data[key] = tmp
-        }
-        for key in MEMBER_FIELD_INT {
-            let tmp = json[key].intValue
-            data[key] = tmp
-        }
-        for key in MEMBER_FIELD_BOOL {
-            let tmp = json[key].boolValue
-            data[key] = tmp
-        }
-        
-        data[ISLOGGEDIN_KEY] = true
-        //print(data)
-        Member.instance.setData(data: data)
-    }
+//    override func jsonToMember(json: JSON) {
+//        //print(json)
+//        var data:[String: Any] = [String: Any]()
+//        for key in MEMBER_FIELD_STRING {
+//            let tmp = json[key].stringValue
+//            data[key] = tmp
+//        }
+//        for key in MEMBER_FIELD_INT {
+//            let tmp = json[key].intValue
+//            data[key] = tmp
+//        }
+//        for key in MEMBER_FIELD_BOOL {
+//            let tmp = json[key].boolValue
+//            data[key] = tmp
+//        }
+//
+//        data[ISLOGGEDIN_KEY] = true
+//        //print(data)
+//        Member.instance.setData(data: data)
+//    }
     
     func forgetPassword(email: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()

@@ -126,7 +126,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Stage)
         ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Prod)
         
-        Member.instance.justGetMemberOne = false
+        //Member.instance.justGetMemberOne = false
         return true
     }
     

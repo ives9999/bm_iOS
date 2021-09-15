@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class EditProfileVC: UIViewController {
+class EditProfileVC1: UIViewController {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -28,7 +28,7 @@ class EditProfileVC: UIViewController {
     var model: Member!
     var allSEX: [[String: String]]!
     var value: String!
-    var delegate: ProfileVC?
+    var delegate: ProfileVC1?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,76 +41,76 @@ class EditProfileVC: UIViewController {
         _initDatePicker()
         _initSubmitBtn()
         
-        if let row: [String: String] = model.info[key] {
-            //print(row)
-            titleLbl.text = row["ch"]
-            let data: Any = model.getData(key: key)
-            //print(tmp)
-            var oldValue: String?
-            let type = row["type"]
-            if type == "String" {
-                oldValue = (data as! String)
-                value = oldValue
-            }
-            if key == SEX_KEY {
-                let selected: String = (oldValue == allSEX[0]["key"]) ? "left" : "right"
-                setDataSwitch(left: allSEX[0]["value"]!, right: allSEX[1]["value"]!, selected: selected)
-                
-                dataTxt.isHidden = true
-                datePicker.isHidden = true
-                dataSwitch.isHidden = false
-                submitBtnConstraintTopTxt.isActive = false
-                submitBtnConstraintTopSwitch.isActive = true
-                submitBtnConstraintTopDatePicker.isActive = false
-            } else if key == DOB_KEY {
-                if oldValue?.count == 0 {
-                    oldValue = "2000-01-01"
-                }
-                setDatePicker(startDate: oldValue!)
-                
-                dataTxt.isHidden = true
-                datePicker.isHidden = false
-                dataSwitch.isHidden = true
-                submitBtnConstraintTopTxt.isActive = false
-                submitBtnConstraintTopSwitch.isActive = false
-                submitBtnConstraintTopDatePicker.isActive = true
-            } else if key == EMAIL_KEY {
-                dataTxt.isHidden = false
-                datePicker.isHidden = true
-                dataSwitch.isHidden = true
-                submitBtnConstraintTopTxt.isActive = true
-                submitBtnConstraintTopSwitch.isActive = false
-                submitBtnConstraintTopDatePicker.isActive = false
-                dataTxt.text = oldValue!
-                dataTxt.keyboardType = UIKeyboardType.emailAddress
-            } else if key == MOBILE_KEY {
-                dataTxt.isHidden = false
-                datePicker.isHidden = true
-                dataSwitch.isHidden = true
-                submitBtnConstraintTopTxt.isActive = true
-                submitBtnConstraintTopSwitch.isActive = false
-                submitBtnConstraintTopDatePicker.isActive = false
-                dataTxt.text = oldValue!
-                dataTxt.keyboardType = UIKeyboardType.numberPad
-            } else if key == TEL_KEY {
-                dataTxt.isHidden = false
-                datePicker.isHidden = true
-                dataSwitch.isHidden = true
-                submitBtnConstraintTopTxt.isActive = true
-                submitBtnConstraintTopSwitch.isActive = false
-                submitBtnConstraintTopDatePicker.isActive = false
-                dataTxt.text = oldValue!
-                dataTxt.keyboardType = UIKeyboardType.numberPad
-            } else {
-                dataTxt.isHidden = false
-                datePicker.isHidden = true
-                dataSwitch.isHidden = true
-                submitBtnConstraintTopTxt.isActive = true
-                submitBtnConstraintTopSwitch.isActive = false
-                submitBtnConstraintTopDatePicker.isActive = false
-                dataTxt.text = oldValue!
-            }
-        }
+//        if let row: [String: String] = model.info[key] {
+//            //print(row)
+//            titleLbl.text = row["ch"]
+//            let data: Any = model.getData(key: key)
+//            //print(tmp)
+//            var oldValue: String?
+//            let type = row["type"]
+//            if type == "String" {
+//                oldValue = (data as! String)
+//                value = oldValue
+//            }
+//            if key == SEX_KEY {
+//                let selected: String = (oldValue == allSEX[0]["key"]) ? "left" : "right"
+//                setDataSwitch(left: allSEX[0]["value"]!, right: allSEX[1]["value"]!, selected: selected)
+//                
+//                dataTxt.isHidden = true
+//                datePicker.isHidden = true
+//                dataSwitch.isHidden = false
+//                submitBtnConstraintTopTxt.isActive = false
+//                submitBtnConstraintTopSwitch.isActive = true
+//                submitBtnConstraintTopDatePicker.isActive = false
+//            } else if key == DOB_KEY {
+//                if oldValue?.count == 0 {
+//                    oldValue = "2000-01-01"
+//                }
+//                setDatePicker(startDate: oldValue!)
+//                
+//                dataTxt.isHidden = true
+//                datePicker.isHidden = false
+//                dataSwitch.isHidden = true
+//                submitBtnConstraintTopTxt.isActive = false
+//                submitBtnConstraintTopSwitch.isActive = false
+//                submitBtnConstraintTopDatePicker.isActive = true
+//            } else if key == EMAIL_KEY {
+//                dataTxt.isHidden = false
+//                datePicker.isHidden = true
+//                dataSwitch.isHidden = true
+//                submitBtnConstraintTopTxt.isActive = true
+//                submitBtnConstraintTopSwitch.isActive = false
+//                submitBtnConstraintTopDatePicker.isActive = false
+//                dataTxt.text = oldValue!
+//                dataTxt.keyboardType = UIKeyboardType.emailAddress
+//            } else if key == MOBILE_KEY {
+//                dataTxt.isHidden = false
+//                datePicker.isHidden = true
+//                dataSwitch.isHidden = true
+//                submitBtnConstraintTopTxt.isActive = true
+//                submitBtnConstraintTopSwitch.isActive = false
+//                submitBtnConstraintTopDatePicker.isActive = false
+//                dataTxt.text = oldValue!
+//                dataTxt.keyboardType = UIKeyboardType.numberPad
+//            } else if key == TEL_KEY {
+//                dataTxt.isHidden = false
+//                datePicker.isHidden = true
+//                dataSwitch.isHidden = true
+//                submitBtnConstraintTopTxt.isActive = true
+//                submitBtnConstraintTopSwitch.isActive = false
+//                submitBtnConstraintTopDatePicker.isActive = false
+//                dataTxt.text = oldValue!
+//                dataTxt.keyboardType = UIKeyboardType.numberPad
+//            } else {
+//                dataTxt.isHidden = false
+//                datePicker.isHidden = true
+//                dataSwitch.isHidden = true
+//                submitBtnConstraintTopTxt.isActive = true
+//                submitBtnConstraintTopSwitch.isActive = false
+//                submitBtnConstraintTopDatePicker.isActive = false
+//                dataTxt.text = oldValue!
+//            }
+//        }
         Global.instance.addSpinner(superView: view)
         Global.instance.removeSpinner(superView: view)
     }
@@ -257,29 +257,29 @@ class EditProfileVC: UIViewController {
             value = dataTxt.text
         }
         var value1: String = value
-        MemberService.instance.update(id: Member.instance.id, field: key, value: &value1) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if success {
-                //print(MemberService.instance.success)
-                if MemberService.instance.success {
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    let alert = SCLAlertView(appearance: appearance)
-                    alert.addButton("確定", action: {
-                        if self.delegate != nil {
-                            self.delegate!.refresh()
-                        }
-                        self.dismiss(animated: true, completion: nil)
-                    })
-                    alert.showSuccess("成功", subTitle: "修改個人資料成功")
-                } else {
-                    SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
-                }
-            } else {
-                SCLAlertView().showError("錯誤", subTitle: "更新錯誤")
-            }
-        }
+//        MemberService.instance.update(id: Member.instance.id, field: key, value: &value1) { (success) in
+//            Global.instance.removeSpinner(superView: self.view)
+//            if success {
+//                //print(MemberService.instance.success)
+//                if MemberService.instance.success {
+//                    let appearance = SCLAlertView.SCLAppearance(
+//                        showCloseButton: false
+//                    )
+//                    let alert = SCLAlertView(appearance: appearance)
+//                    alert.addButton("確定", action: {
+//                        if self.delegate != nil {
+//                            self.delegate!.refresh()
+//                        }
+//                        self.dismiss(animated: true, completion: nil)
+//                    })
+//                    alert.showSuccess("成功", subTitle: "修改個人資料成功")
+//                } else {
+//                    SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
+//                }
+//            } else {
+//                SCLAlertView().showError("錯誤", subTitle: "更新錯誤")
+//            }
+//        }
     }
 }
 

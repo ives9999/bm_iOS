@@ -61,6 +61,7 @@ class Table: Codable {
     required init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        
         do {id = try container.decode(Int.self, forKey: .id)}catch{id = 0}
         do {name = try container.decode(String.self, forKey: .name)}catch{name = ""}
         do {title = try container.decode(String.self, forKey: .title)}catch{title = ""}

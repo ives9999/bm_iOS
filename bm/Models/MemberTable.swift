@@ -13,6 +13,12 @@ class MemberTable: Table {
     static let instance = MemberTable()
     
     var nickname: String = ""
+//    var nickname: String {
+//        get {
+//            return UserDefaults.standard.getString(NICKNAME_KEY)
+//        }
+//        set { UserDefaults.standard.set(NICKNAME_KEY, newValue) }
+//    }
     var dob: String = ""
     var sex: String = ""
     var email: String = ""
@@ -35,7 +41,7 @@ class MemberTable: Table {
     var area_show: String = ""
     
     enum CodingKeys: String, CodingKey {
-        
+
         case nickname
         case dob
         case sex
@@ -89,6 +95,12 @@ class MemberTable: Table {
     override func filterRow() {
         super.filterRow()
         
+        if avatar.count > 0 {
+            if !avatar.hasPrefix("http://") || !avatar.hasPrefix("https://") {
+                avatar = BASE_URL + avatar
+            }
+        }
+        
         if (city > 0) {
             city_show = Global.instance.zoneIDToName(city)
         }
@@ -103,7 +115,7 @@ class MemberTable: Table {
     }
     
     func toSession() {
-        
+
         let session: UserDefaults = UserDefaults.standard
         var mirror: Mirror? = Mirror(reflecting: self)
         repeat {

@@ -55,9 +55,9 @@ class TempPlayVC: MyTableVC {
         //refresh()
         
         //OneSignal.postNotification(["contents": ["en": "hello",PUSH_LANGUAGE: "有人報名臨打"], "include_player_ids": [PUSH_TEST_PLAYID]])
-        if !Member.instance.justGetMemberOne && Member.instance.isLoggedIn {
-            _updatePlayerIDWhenIsNull()
-        }
+        //if !Member.instance.justGetMemberOne && Member.instance.isLoggedIn {
+            //_updatePlayerIDWhenIsNull()
+        //}
     }
     
     override func refresh() {

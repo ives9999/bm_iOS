@@ -88,7 +88,6 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                         self.table!.isLoggedIn = true
                         //self.table?.printRow()
                         self.table!.toSession()
-                        self.session.myPrint()
                     }
                 } catch {
                     self.warning(error.localizedDescription)

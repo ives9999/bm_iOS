@@ -17,21 +17,21 @@ extension BaseViewController {
             }
         } else {
             for key in MEMBER_MUST_ARRAY {
-                let type: String = Member.instance.info[key]!["type"]!
-                let tmp = Member.instance.getData(key: key)
-                if type == "Int" {
-                    if let value: Int = tmp as? Int {
-                        if value == 0 {
-                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
-                        }
-                    }
-                } else if type == "String" {
-                    if let value = tmp as? String {
-                        if value.count == 0 {
-                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
-                        }
-                    }
-                }
+//                let type: String = Member.instance.info[key]!["type"]!
+//                let tmp = Member.instance.getData(key: key)
+//                if type == "Int" {
+//                    if let value: Int = tmp as? Int {
+//                        if value == 0 {
+//                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+//                        }
+//                    }
+//                } else if type == "String" {
+//                    if let value = tmp as? String {
+//                        if value.count == 0 {
+//                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+//                        }
+//                    }
+//                }
             }
             if msg.count > 0 {
                 warning(msg: msg, showCloseButton: true, buttonTitle: "填寫") {
@@ -230,21 +230,21 @@ extension BaseViewController {
             }
         } else {
             for key in MEMBER_MUST_ARRAY {
-                let type: String = Member.instance.info[key]!["type"]!
-                let tmp = Member.instance.getData(key: key)
-                if type == "Int" {
-                    if let value: Int = tmp as? Int {
-                        if value == 0 {
-                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
-                        }
-                    }
-                } else if type == "String" {
-                    if let value = tmp as? String {
-                        if value.count == 0 {
-                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
-                        }
-                    }
-                }
+//                let type: String = Member.instance.info[key]!["type"]!
+//                let tmp = Member.instance.getData(key: key)
+//                if type == "Int" {
+//                    if let value: Int = tmp as? Int {
+//                        if value == 0 {
+//                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+//                        }
+//                    }
+//                } else if type == "String" {
+//                    if let value = tmp as? String {
+//                        if value.count == 0 {
+//                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+//                        }
+//                    }
+//                }
             }
             if msg.count > 0 {
                 warning(msg: msg, showCloseButton: true, buttonTitle: "填寫") {

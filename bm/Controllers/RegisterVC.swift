@@ -82,29 +82,37 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             
             member_token = Member.instance.token
             for key in keys {
-                let data = Member.instance.getData(key: key)
-                if Member.instance.info[key] != nil {
-                    let types: [String: String] = Member.instance.info[key]!
-                    let type: String = types["type"]!
-                    var value: String = ""
-                    if type == "String" {
-                        value = data as! String
-                    } else if type == "Int" {
-                        value = String(data as! Int)
-                    }
-                    let formItem = getFormItemFromKey(key)
-                    if formItem != nil {
-                        if key == AREA_KEY {
-                            let cityFormItem: CityFormItem = (getFormItemFromKey(CITY_KEY) as? CityFormItem)!
-                            let areaFormItem: AreaFormItem = (formItem as? AreaFormItem)!
-                            areaFormItem.city_id = Int(cityFormItem.value!)
-                        }
-                        formItem!.value = value
-                        formItem!.make()
-                    }
+                var value: String = ""
+                if let tmp = session.string(forKey: key) {
+                    value = tmp
                 }
+                
+                let formItem = getFormItemFromKey(key)
+                if formItem != nil {
+                    if key == AREA_KEY {
+                        let cityFormItem: CityFormItem = (getFormItemFromKey(CITY_KEY) as? CityFormItem)!
+                        let areaFormItem: AreaFormItem = (formItem as? AreaFormItem)!
+                        areaFormItem.city_id = Int(cityFormItem.value!)
+                    }
+                    formItem!.value = value
+                    formItem!.make()
+                }
+                
+                
+//                let data = Member.instance.getData(key: key)
+//                if Member.instance.info[key] != nil {
+//                    let types: [String: String] = Member.instance.info[key]!
+//                    let type: String = types["type"]!
+//                    var value: String = ""
+//                    if type == "String" {
+//                        value = data as! String
+//                    } else if type == "Int" {
+//                        value = String(data as! Int)
+//                    }
+//
+//                }
             }
-            old_selected_city = String(Member.instance.getData(key: CITY_KEY) as! Int)
+//            old_selected_city = String(Member.instance.getData(key: CITY_KEY) as! Int)
             if Member.instance.avatar.count > 0 {
                 featuredView.setPickedImage(url: Member.instance.avatar)
             }

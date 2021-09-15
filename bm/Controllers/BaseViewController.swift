@@ -300,27 +300,27 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
-    @objc func memberDidChange(_ notif: Notification) {
-        //print("notify")
-        refreshMember { (success) in
-            
-        }
-    }
-    func _getMemberOne(token: String, completion: @escaping CompletionHandler) {
-        MemberService.instance.getOne(token: token, completion: completion)
-    }
-    func refreshMember(completion: @escaping CompletionHandler) {
-        Global.instance.addSpinner(superView: self.view)
-        MemberService.instance.getOne(token: Member.instance.token) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if (success) {
-                completion(true)
-            } else {
-                SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
-                completion(false)
-            }
-        }
-    }
+//    @objc func memberDidChange(_ notif: Notification) {
+//        //print("notify")
+//        refreshMember { (success) in
+//
+//        }
+//    }
+//    func _getMemberOne(token: String, completion: @escaping CompletionHandler) {
+//        MemberService.instance.getOne(token: token, completion: completion)
+//    }
+//    func refreshMember(completion: @escaping CompletionHandler) {
+//        Global.instance.addSpinner(superView: self.view)
+//        MemberService.instance.getOne(token: Member.instance.token) { (success) in
+//            Global.instance.removeSpinner(superView: self.view)
+//            if (success) {
+//                completion(true)
+//            } else {
+//                SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
+//                completion(false)
+//            }
+//        }
+//    }
     
     func makeCalendar(_ _y:Int?, _ _m:Int?)->[String: Any] {
         
@@ -365,28 +365,28 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         return res
     }
     
-    func _updatePlayerIDWhenIsNull() {
-        let token = Member.instance.token
-        //print(token)
-        MemberService.instance.getOne(token: token) { (success) in
-            if (success) {
-                Member.instance.justGetMemberOne = true
-                //print(Member.instance.type)
-                if Member.instance.player_id.count == 0 {
-                    self._updatePlayerID()
-                }
-            }
-        }
-    }
-    func _updatePlayerID() {
-        var player_id = _getPlayerID()
-        //print(player_id)
-        MemberService.instance.update(id: Member.instance.id, field: PLAYERID_KEY, value: &player_id, completion: { (success) in
-            if success {
-                Member.instance.player_id = player_id
-            }
-        })
-    }
+//    func _updatePlayerIDWhenIsNull() {
+//        let token = Member.instance.token
+//        //print(token)
+//        MemberService.instance.getOne(token: token) { (success) in
+//            if (success) {
+//                Member.instance.justGetMemberOne = true
+//                //print(Member.instance.type)
+//                if Member.instance.player_id.count == 0 {
+//                    self._updatePlayerID()
+//                }
+//            }
+//        }
+//    }
+//    func _updatePlayerID() {
+//        var player_id = _getPlayerID()
+//        //print(player_id)
+//        MemberService.instance.update(id: Member.instance.id, field: PLAYERID_KEY, value: &player_id, completion: { (success) in
+//            if success {
+//                Member.instance.player_id = player_id
+//            }
+//        })
+//    }
     func _getPlayerID() -> String {
         
         var playerID: String = ""

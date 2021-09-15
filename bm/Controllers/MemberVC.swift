@@ -88,34 +88,34 @@ class MemberVC: MyTableVC {
         _loginout()
     }
     
-    override func refresh() {
-        //print("refresh")
-        refreshMember { (success) in
-            if success {
-                self._loginout()
-                self.tableView.reloadData()
-            }
-            if self.refreshControl.isRefreshing {
-                self.refreshControl.endRefreshing()
-            }
-        }
-    }
+//    override func refresh() {
+//        //print("refresh")
+//        refreshMember { (success) in
+//            if success {
+//                self._loginout()
+//                self.tableView.reloadData()
+//            }
+//            if self.refreshControl.isRefreshing {
+//                self.refreshControl.endRefreshing()
+//            }
+//        }
+//    }
     
     func setValidateRow() {
         //_rows.removeAll()
         memberRows.removeAll()
         memberRows = fixedRows
         if Member.instance.isLoggedIn {// detected validate status
-            let validate: Int = Member.instance.getData(key: VALIDATE_KEY) as! Int
-            //print(validate)
-            if validate & EMAIL_VALIDATE <= 0 {
-                let new: Dictionary<String, String> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
-                memberRows.append(new)
-            }
-            if validate & MOBILE_VALIDATE <= 0 {
-                let new: Dictionary<String, String> = ["text": "手機認證", "icon": "mobile_validate", "segue": TO_VALIDATE, "type": "mobile"]
-                memberRows.append(new)
-            }
+//            let validate: Int = Member.instance.getData(key: VALIDATE_KEY) as! Int
+//            //print(validate)
+//            if validate & EMAIL_VALIDATE <= 0 {
+//                let new: Dictionary<String, String> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
+//                memberRows.append(new)
+//            }
+//            if validate & MOBILE_VALIDATE <= 0 {
+//                let new: Dictionary<String, String> = ["text": "手機認證", "icon": "mobile_validate", "segue": TO_VALIDATE, "type": "mobile"]
+//                memberRows.append(new)
+//            }
         }
 //        if Member.instance.isTeamManager {
 //            let new: Dictionary<String, String> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]

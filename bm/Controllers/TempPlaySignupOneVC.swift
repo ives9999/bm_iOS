@@ -58,29 +58,29 @@ class TempPlaySignupOneVC: MyTableVC {
     }
     
     func initGetMemberValue(completion: @escaping CompletionHandler) {
-        _getMemberOne(token: memberToken) { (success) in
-            if (success) {
-                guard let one = MemberService.instance.one else {
-                    self.warning("無法取得該會員資訊，請稍後再試")
-                    return
-                }
-                //print(MemberService.instance.one!)
-                for (idx, key) in self.keys.enumerated() {
-                    for (key1, _) in one {
-                        if (key == key1) {
-                            self.memberOne[idx][key]!["value"] = one[key].stringValue
-                            break
-                        }
-                    }
-                }
-                //print(self.memberOne)
-                self.memberName = one["name"].stringValue
-                self.titleLbl.text = self.memberName
-            } else {
-                self.warning(MemberService.instance.msg)
-            }
-            completion(success)
-        }
+//        _getMemberOne(token: memberToken) { (success) in
+//            if (success) {
+//                guard let one = MemberService.instance.one else {
+//                    self.warning("無法取得該會員資訊，請稍後再試")
+//                    return
+//                }
+//                //print(MemberService.instance.one!)
+//                for (idx, key) in self.keys.enumerated() {
+//                    for (key1, _) in one {
+//                        if (key == key1) {
+//                            self.memberOne[idx][key]!["value"] = one[key].stringValue
+//                            break
+//                        }
+//                    }
+//                }
+//                //print(self.memberOne)
+//                self.memberName = one["name"].stringValue
+//                self.titleLbl.text = self.memberName
+//            } else {
+//                self.warning(MemberService.instance.msg)
+//            }
+//            completion(success)
+//        }
     }
     
     func initIsTeamManager(completion: @escaping CompletionHandler) {
