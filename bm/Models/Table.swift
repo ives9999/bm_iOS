@@ -113,9 +113,42 @@ class Table: Codable {
     }
     
     public func printRow() {
-        let mirror: Mirror? = Mirror(reflecting: self)
-        for property in mirror!.children {
-            print("\(property.label ?? "")=>\(property.value)")
-        }
+        
+//        print("id=>\(id)")
+//        print("name=>\(name)")
+//        print("title=>\(title)")
+//        print("address=>\(address)")
+//        print("channel=>\(channel)")
+//        print("tel=>\(tel)")
+//        print("mobile=>\(mobile)")
+//        print("slug=>\(slug)")
+//        print("status=>\(status)")
+//        print("token=>\(token)")
+//        print("content=>\(content)")
+//        print("sort_order=>\(sort_order)")
+//        print("pv=>\(pv)")
+//        print("like=>\(like)")
+//        print("like_count=>\(like_count)")
+//        print("created_id=>\(created_id)")
+//        print("featured_path=>\(featured_path)")
+//        print("created_at=>\(created_at)")
+//        print("updateed_at=>\(updated_at)")
+//        print("created_at_show=>\(created_at_show)")
+//        print("updated_at_show=>\(updated_at_show)")
+//        print("address=>\(address)")
+//        print("city_show=>\(city_show)")
+//        print("tel_show=>\(tel_show)")
+//        print("mobile_show=>\(mobile_show)")
+        
+        var mirror: Mirror? = Mirror(reflecting: self)
+        repeat {
+            for property in mirror!.children {
+                print("\(property.label ?? ""): \(property.value)")
+            }
+            mirror = mirror?.superclassMirror
+        } while mirror != nil
+//        for property in mirror!.children {
+//            print("\(property.label ?? "")=>\(property.value)")
+//        }
     }
 }

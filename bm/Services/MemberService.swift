@@ -30,6 +30,32 @@ class MemberService: DataService {
         //print(URL_LOGIN)
         
         Alamofire.request(URL_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+            switch response.result {
+            case .success(_):
+                if (response.data != nil) {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
+    /*
+    func login(email: String, password: String, playerID: String, completion: @escaping CompletionHandler) {
+        let lowerCaseEmail = email.lowercased()
+        let body: [String: Any] = ["source": "app", "email": lowerCaseEmail, "password": password, "player_id": playerID]
+        //print(body)
+        //print(URL_LOGIN)
+        
+        Alamofire.request(URL_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {
                     print("data error")
@@ -60,6 +86,7 @@ class MemberService: DataService {
             }
         }
     }
+ */
     
     /*
     func login_fb(playerID: String, completion: @escaping CompletionHandler) {

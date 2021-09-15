@@ -38,7 +38,10 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordTxt: UITextField!
     //@IBOutlet weak var facebookLogin: FBLoginButton!
     
+    var table: MemberTable?
+    
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         emailTxt.delegate = self
@@ -50,8 +53,8 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         //passwordTxt.borderWidth(0)
         //passwordTxt.backgroundColor = UIColor.clear
 
-        //emailTxt.text = "ives@housetube.tw"
-        //passwordTxt.text = "K5SD23r6"
+        emailTxt.text = "ives@housetube.tw"
+        passwordTxt.text = "K5SD23r6"
     }
 
     @IBAction func prevBtnPressed(_ sender: Any) {
@@ -76,26 +79,36 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         MemberService.instance.login(email: email, password: password, playerID: playerID) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                if MemberService.instance.success {
-                    if MemberService.instance.msg.count > 0 {
-                        let appearance = SCLAlertView.SCLAppearance(
-                            showCloseButton: false
-                        )
-                        let alert = SCLAlertView(appearance: appearance)
-                        alert.addButton("確定", action: {
-                            self.performSegue(withIdentifier: UNWIND, sender: nil)
-                        })
-                        alert.showWarning("警告", subTitle: MemberService.instance.msg)
+                
+                let jsonData: Data = MemberService.instance.jsonData!
+                do {
+                    self.table = try JSONDecoder().decode(MemberTable.self, from: jsonData)
+                    if (self.table != nil) {
+                        self.table!.filterRow()
+                        self.table!.isLoggedIn = true
+                        //self.table?.printRow()
+                        self.table!.toSession()
+                        self.session.myPrint()
                     }
-                    self.dismiss(animated: true, completion: {
-                        if self.sourceVC != nil {
-                            self.sourceVC!._loginout()
-                        }
-                    })
-                } else {
-                    //print("login failed by error email or password")
-                    SCLAlertView().showError("錯誤", subTitle: MemberService.instance.msg)
+                } catch {
+                    self.warning(error.localizedDescription)
                 }
+                
+                if MemberService.instance.msg.count > 0 {
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    let alert = SCLAlertView(appearance: appearance)
+                    alert.addButton("確定", action: {
+                        self.performSegue(withIdentifier: UNWIND, sender: nil)
+                    })
+                    alert.showWarning("警告", subTitle: MemberService.instance.msg)
+                }
+                self.dismiss(animated: true, completion: {
+                    if self.sourceVC != nil {
+                        self.sourceVC!._loginout()
+                    }
+                })
             } else {
                 //print("login failed by server")
                 let appearance = SCLAlertView.SCLAppearance(
