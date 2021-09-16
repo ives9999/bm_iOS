@@ -31,7 +31,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
 //        return true
 //    }
     
-    var sourceVC: MemberVC? = nil
+    var memberVC: MemberVC? = nil
 
     // outlets
     @IBOutlet weak var emailTxt: UITextField!
@@ -104,8 +104,8 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                     alert.showWarning("警告", subTitle: MemberService.instance.msg)
                 }
                 self.dismiss(animated: true, completion: {
-                    if self.sourceVC != nil {
-                        self.sourceVC!._loginout()
+                    if self.memberVC != nil {
+                        self.memberVC!._loginout()
                     }
                 })
             } else {

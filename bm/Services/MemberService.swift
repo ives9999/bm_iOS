@@ -16,8 +16,12 @@ class MemberService: DataService {
     
     //var msg:String = ""
     //var success: Bool = false
-    var one: JSON? = nil
+    //var one: JSON? = nil
     var blacklists: Array<Dictionary<String, Any>> = Array()
+    
+    override func getSource() -> String? {
+        return "member"
+    }
     
     override func getUpdateURL() -> String {
         return URL_MEMBER_UPDATE
@@ -121,13 +125,13 @@ class MemberService: DataService {
         }
     }
  */
-    
-    func logout() {
-        Member.instance.isLoggedIn = false
+   
+    //logout並沒有使用網路送出資料，所以不用在service中呼叫
+    //func logout() {
         //Member.instance.reset()
         //Facebook.instance.logout()
         //NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
-    }
+    //}
     
 //    func register(email: String, password: String, repassword: String, completion: @escaping CompletionHandler) {
 //        let lowerCaseEmail = email.lowercased()

@@ -88,18 +88,34 @@ class MemberVC: MyTableVC {
         _loginout()
     }
     
-//    override func refresh() {
-//        //print("refresh")
-//        refreshMember { (success) in
-//            if success {
-//                self._loginout()
-//                self.tableView.reloadData()
-//            }
-//            if self.refreshControl.isRefreshing {
-//                self.refreshControl.endRefreshing()
-//            }
-//        }
-//    }
+    override func refresh() {
+        Global.instance.addSpinner(superView: self.view)
+        MemberService.instance.getOne(params: ["token": Member.instance.token, "source": "app"]) { success in
+            
+            Global.instance.removeSpinner(superView: self.view)
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+            }
+            if success {
+                
+                let jsonData: Data = MemberService.instance.jsonData!
+                do {
+                    let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
+                    table.filterRow()
+                    table.isLoggedIn = true
+                    //self.table?.printRow()
+                    table.toSession()
+                    self._loginout()
+                    self.tableView.reloadData()
+                } catch {
+                    self.warning(error.localizedDescription)
+                }
+            } else {
+                self.warning("取得會員資訊錯誤")
+            }
+            
+        }
+    }
     
     func setValidateRow() {
         //_rows.removeAll()
@@ -364,34 +380,45 @@ class MemberVC: MyTableVC {
         }
     }
     
-       override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-           if sender != nil {
-               if segue.identifier == TO_VALIDATE {
-                   let vc: ValidateVC = segue.destination as! ValidateVC
-                   vc.type = sender as! String
-               } else if segue.identifier == TO_LOGIN {
-                   //let vc: LoginVC = segue.destination as! LoginVC
-                   //vc.menuVC = (sender as! MenuVC)
-               } else if segue.identifier == TO_REGISTER {
-                   //let vc: RegisterVC = segue.destination as! RegisterVC
-                   //vc.menuVC = (sender as! MenuVC)
-               } else {
-                
-            }
-           }
-       }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if sender != nil {
+            if segue.identifier == TO_VALIDATE {
+                let vc: ValidateVC = segue.destination as! ValidateVC
+                vc.type = sender as! String
+            } else if segue.identifier == TO_LOGIN {
+                //let vc: LoginVC = segue.destination as! LoginVC
+                //vc.menuVC = (sender as! MenuVC)
+            } else if segue.identifier == TO_REGISTER {
+                //let vc: RegisterVC = segue.destination as! RegisterVC
+                //vc.menuVC = (sender as! MenuVC)
+            } else {
+             
+         }
+        }
+    }
+    
+    func login() {
+        toLogin(memberVC: self)
+//            if let vc = storyboard?.instantiateViewController(withIdentifier: "login") as? LoginVC {
+//                vc.memberVC = self
+//                present(vc, animated: true, completion: nil)
+//            }
+        //performSegue(withIdentifier: TO_LOGIN, sender: self)
+    }
+    
+    func logout() {
+        //1.清空session資料
+        Member.instance.reset()
+        //2.設定登出
+        Member.instance.isLoggedIn = false
+        _loginout()
+    }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
         if Member.instance.isLoggedIn { // logout
-            MemberService.instance.logout()
-            Member.instance.isLoggedIn = false
-            _loginout()
+            logout()
         } else {
-            if let vc = storyboard?.instantiateViewController(withIdentifier: "login") as? LoginVC {
-                vc.sourceVC = self
-                present(vc, animated: true, completion: nil)
-            }
-            //performSegue(withIdentifier: TO_LOGIN, sender: self)
+            login()
         }
     }
     

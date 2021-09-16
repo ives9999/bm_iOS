@@ -112,7 +112,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
 //
 //                }
             }
-//            old_selected_city = String(Member.instance.getData(key: CITY_KEY) as! Int)
+            old_selected_city = String(Member.instance.city)
             if Member.instance.avatar.count > 0 {
                 featuredView.setPickedImage(url: Member.instance.avatar)
             }
@@ -139,11 +139,13 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //print("section:\(section)=>row:\(section_keys[section].count)")
         return section_keys[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        //print("section:\(indexPath.section)=>row:\(indexPath.row)")
         let item = getFormItemFromIdx(indexPath)
         let cell: UITableViewCell
         if item != nil {

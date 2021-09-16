@@ -231,7 +231,8 @@ class PasswordVC: UIViewController {
                     Global.instance.removeSpinner(superView: self.view)
                     if success {
                         if MemberService.instance.success {
-                            MemberService.instance.logout()
+                            Member.instance.reset()
+                            Member.instance.isLoggedIn = false
                             let appearance = SCLAlertView.SCLAppearance(
                                 showCloseButton: false
                             )
