@@ -85,12 +85,12 @@ class MemberVC: MyTableVC {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //refresh()
-        _loginout()
+        loginout()
     }
     
     override func refresh() {
         Global.instance.addSpinner(superView: self.view)
-        MemberService.instance.getOne(params: ["token": Member.instance.token, "source": "app"]) { success in
+        MemberService.instance.getOne(params: ["token": Member.instance.token]) { success in
             
             Global.instance.removeSpinner(superView: self.view)
             if self.refreshControl.isRefreshing {
@@ -101,11 +101,8 @@ class MemberVC: MyTableVC {
                 let jsonData: Data = MemberService.instance.jsonData!
                 do {
                     let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
-                    table.filterRow()
-                    table.isLoggedIn = true
-                    //self.table?.printRow()
-                    table.toSession()
-                    self._loginout()
+                    table.toSession(isLoggedIn: true)
+                    self.loginout()
                     self.tableView.reloadData()
                 } catch {
                     self.warning(error.localizedDescription)
@@ -122,16 +119,16 @@ class MemberVC: MyTableVC {
         memberRows.removeAll()
         memberRows = fixedRows
         if Member.instance.isLoggedIn {// detected validate status
-//            let validate: Int = Member.instance.getData(key: VALIDATE_KEY) as! Int
-//            //print(validate)
-//            if validate & EMAIL_VALIDATE <= 0 {
-//                let new: Dictionary<String, String> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
-//                memberRows.append(new)
-//            }
-//            if validate & MOBILE_VALIDATE <= 0 {
-//                let new: Dictionary<String, String> = ["text": "手機認證", "icon": "mobile_validate", "segue": TO_VALIDATE, "type": "mobile"]
-//                memberRows.append(new)
-//            }
+            let validate: Int = Member.instance.validate
+            print(validate)
+            if validate & EMAIL_VALIDATE <= 0 {
+                let new: Dictionary<String, String> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
+                memberRows.append(new)
+            }
+            if validate & MOBILE_VALIDATE <= 0 {
+                let new: Dictionary<String, String> = ["text": "手機認證", "icon": "mobile_validate", "segue": TO_VALIDATE, "type": "mobile"]
+                memberRows.append(new)
+            }
         }
 //        if Member.instance.isTeamManager {
 //            let new: Dictionary<String, String> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]
@@ -411,7 +408,7 @@ class MemberVC: MyTableVC {
         Member.instance.reset()
         //2.設定登出
         Member.instance.isLoggedIn = false
-        _loginout()
+        loginout()
     }
     
     @IBAction func loginBtnPressed(_ sender: Any) {
@@ -441,7 +438,7 @@ class MemberVC: MyTableVC {
         //performSegue(withIdentifier: TO_PASSWORD, sender: type)
     }
     
-    public func _loginout() {
+    public func loginout() {
            //print(Member.instance.isLoggedIn)
            if Member.instance.isLoggedIn   { // login
                _loginBlock()

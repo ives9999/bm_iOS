@@ -103,7 +103,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                 }
                 self.dismiss(animated: true, completion: {
                     if self.memberVC != nil {
-                        self.memberVC!._loginout()
+                        self.memberVC!.loginout()
                     }
                 })
             } else {
