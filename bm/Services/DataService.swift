@@ -575,11 +575,11 @@ class DataService {
         
         let url: String = getUpdateURL()
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-        var params: [String: String] = ["source": "app","channel":CHANNEL,"device":"app"]
+        var params: [String: String] = ["channel":CHANNEL,"device":"app"]
         params.merge(_params)
         
-        //print(url)
-        //print(params)
+        print(url)
+        print(params)
         msg = ""
         Alamofire.upload(
             multipartFormData: { (multipartFormData) in
@@ -600,39 +600,51 @@ class DataService {
             switch result {
             case .success(let upload, _, _):
                 upload.responseJSON(completionHandler: { (response) in
-                    if response.result.error == nil {
-                        guard let data = response.result.value else {
-                            self.handleErrorMsg("伺服器錯誤，請洽管理員")
-                            //print("data error")
-                            self.msg = "伺服器錯誤，請洽管理員"
-                            completion(false)
-                            return
-                        }
-                        let json = JSON(data)
-                        //print(json)
-                        self.success = json["success"].boolValue
-                        if self.success {
-                            self.id = json["id"].intValue
-                            if _params.keyExist(key: "token") { // update
-                                self.jsonToMember(json: json["model"])
-                            }
-                        } else {
-                            if json["errors"].exists() {
-                                let _errors = json["errors"].arrayValue
-                                for _error in _errors {
-                                    let error: String = _error.stringValue
-                                    self.msg += error + "\n"
-                                }
-                                //self.handleErrorMsg(nil, errors)
-                            }
-                            //print(self.msg)
-                        }
-                        
+                    
+                    if (response.data != nil) {
+                        self.jsonData = response.data
                         completion(true)
                     } else {
-                        self.handleErrorMsg("回傳錯誤值，請洽管理員")
+                        self.msg = "伺服器錯誤，請洽管理員"
                         completion(false)
+                        return
                     }
+                    
+                    
+                    
+//                    if response.result.error == nil {
+//                        guard let data = response.result.value else {
+//                            self.handleErrorMsg("伺服器錯誤，請洽管理員")
+//                            //print("data error")
+//                            self.msg = "伺服器錯誤，請洽管理員"
+//                            completion(false)
+//                            return
+//                        }
+//                        let json = JSON(data)
+//                        //print(json)
+//                        self.success = json["success"].boolValue
+//                        if self.success {
+//                            self.id = json["id"].intValue
+//                            if _params.keyExist(key: "token") { // update
+//                                self.jsonToMember(json: json["model"])
+//                            }
+//                        } else {
+//                            if json["errors"].exists() {
+//                                let _errors = json["errors"].arrayValue
+//                                for _error in _errors {
+//                                    let error: String = _error.stringValue
+//                                    self.msg += error + "\n"
+//                                }
+//                                //self.handleErrorMsg(nil, errors)
+//                            }
+//                            //print(self.msg)
+//                        }
+//
+//                        completion(true)
+//                    } else {
+//                        self.handleErrorMsg("回傳錯誤值，請洽管理員")
+//                        completion(false)
+//                    }
                 })
             case .failure(let error):
                 //print(error)
@@ -702,82 +714,82 @@ class DataService {
         }
     }
     
-    func update(type: String, params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
-        
-        let url: String = String(format: URL_UPDATE, type)
-        //print(url)
-        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-        var body: [String: Any] = ["source": "app","channel":CHANNEL]
-        body.merge(params)
-        //print(body)
-        Alamofire.upload( multipartFormData: { (multipartFormData) in
-            if image != nil {
-                let imageData: Data = image!.jpegData(compressionQuality: 0.2)! as Data
-                //print(imageData)
-                //let base64: String = imageData.base64EncodedString(options: .lineLength64Characters)
-                multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)
-            }
-            //print(params)
-            for (key, value) in body {
-                if key == TEAM_DEGREE_KEY {
-                    for d in value as! [String] {
-                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "degree[]")
-                    }
-                } else if key == TEAM_WEEKDAYS_KEY {
-                    for d in value as! [Int] {
-                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "weekdays[]")
-                    }
-                } else if key == CAT_KEY {
-                    for d in value as! [Int] {
-                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "cat_id[]")
-                    }
-                } else {
-                    multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
-                }
-            }
-            //print(multipartFormData.boundary)
-        }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headers) { (result) in
-            switch result {
-            case .success(let upload, _, _):
-                //                upload.responseString { (response) in
-                //                    print(response)
-                //                    completion(true)
-                //                }
-                upload.responseJSON(completionHandler: { (response) in
-                    //print(response)
-                    if response.result.error == nil {
-                        guard let data = response.result.value else {
-                            print("data error")
-                            return
-                        }
-                        //print(data)
-                        let json = JSON(data)
-                        //self.success = true
-                        self.success = json["success"].boolValue
-                        //print(self.success)
-                        if self.success {
-                            self.id = json["id"].intValue
-                        } else {
-                            if json["fields"].exists() {
-                                let errors: [String: JSON] = json["fields"].dictionary!
-                                for (_, value) in errors {
-                                    let error = value.stringValue
-                                    self.msg += error + "\n"
-                                }
-                            }
-                            //print(self.msg)
-                        }
-                    }
-                    completion(true)
-                })
-            case .failure(let error):
-                //print(error)
-                //onError(error)
-                self.msg = "網路錯誤，請稍後再試"
-                completion(false)
-            }
-        }
-    }
+//    func update(type: String, params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
+//
+//        let url: String = String(format: URL_UPDATE, type)
+//        //print(url)
+//        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+//        var body: [String: Any] = ["source": "app","channel":CHANNEL]
+//        body.merge(params)
+//        //print(body)
+//        Alamofire.upload( multipartFormData: { (multipartFormData) in
+//            if image != nil {
+//                let imageData: Data = image!.jpegData(compressionQuality: 0.2)! as Data
+//                //print(imageData)
+//                //let base64: String = imageData.base64EncodedString(options: .lineLength64Characters)
+//                multipartFormData.append(imageData, withName: key, fileName: filename, mimeType: mimeType)
+//            }
+//            //print(params)
+//            for (key, value) in body {
+//                if key == TEAM_DEGREE_KEY {
+//                    for d in value as! [String] {
+//                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "degree[]")
+//                    }
+//                } else if key == TEAM_WEEKDAYS_KEY {
+//                    for d in value as! [Int] {
+//                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "weekdays[]")
+//                    }
+//                } else if key == CAT_KEY {
+//                    for d in value as! [Int] {
+//                        multipartFormData.append(("\(d)").data(using: .utf8)!, withName: "cat_id[]")
+//                    }
+//                } else {
+//                    multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
+//                }
+//            }
+//            //print(multipartFormData.boundary)
+//        }, usingThreshold: UInt64.init(), to: url, method: .post, headers: headers) { (result) in
+//            switch result {
+//            case .success(let upload, _, _):
+//                //                upload.responseString { (response) in
+//                //                    print(response)
+//                //                    completion(true)
+//                //                }
+//                upload.responseJSON(completionHandler: { (response) in
+//                    //print(response)
+//                    if response.result.error == nil {
+//                        guard let data = response.result.value else {
+//                            print("data error")
+//                            return
+//                        }
+//                        //print(data)
+//                        let json = JSON(data)
+//                        //self.success = true
+//                        self.success = json["success"].boolValue
+//                        //print(self.success)
+//                        if self.success {
+//                            self.id = json["id"].intValue
+//                        } else {
+//                            if json["fields"].exists() {
+//                                let errors: [String: JSON] = json["fields"].dictionary!
+//                                for (_, value) in errors {
+//                                    let error = value.stringValue
+//                                    self.msg += error + "\n"
+//                                }
+//                            }
+//                            //print(self.msg)
+//                        }
+//                    }
+//                    completion(true)
+//                })
+//            case .failure(let error):
+//                //print(error)
+//                //onError(error)
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//            }
+//        }
+//    }
     
     func delete(token: String, type: String, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["source": "app", "channel": "bm", "token": token, "type": "cart_item"]

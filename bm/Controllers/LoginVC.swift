@@ -83,11 +83,9 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                 let jsonData: Data = MemberService.instance.jsonData!
                 do {
                     self.table = try JSONDecoder().decode(MemberTable.self, from: jsonData)
-                    if (self.table != nil) {
-                        self.table!.filterRow()
-                        self.table!.isLoggedIn = true
+                    if (self.table != nil) {                        
                         //self.table?.printRow()
-                        self.table!.toSession()
+                        self.table!.toSession(isLoggedIn: true)
                     }
                 } catch {
                     self.warning(error.localizedDescription)

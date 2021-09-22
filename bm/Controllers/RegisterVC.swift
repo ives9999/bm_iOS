@@ -413,7 +413,13 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         MemberService.instance.update(_params: params, image: image) { (success) in
             if success {
                 Global.instance.removeSpinner(superView: self.view)
-                if MemberService.instance.success {
+                
+                let jsonData: Data = MemberService.instance.jsonData!
+                do {
+                    let table = try JSONDecoder().decode(RegisterUpdateResTable.self, from: jsonData)
+                    if (table.model != nil) {
+                        table.model!.toSession(isLoggedIn: true)
+                    }
                     let appearance = SCLAlertView.SCLAppearance(
                         showCloseButton: false
                     )
@@ -433,10 +439,9 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
                         msg = "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序"
                     }
                     alert.showSuccess("成功", subTitle: msg)
-                    //NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
-                } else {
+                } catch {
+                    //self.warning(error.localizedDescription)
                     self.warning(MemberService.instance.msg)
-                    //SCLAlertView().showWarning("錯誤", subTitle: MemberService.instance.msg)
                 }
             } else {
                 Global.instance.removeSpinner(superView: self.view)
@@ -497,5 +502,30 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
 //        }
 //        self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
 //    }
+}
+
+class RegisterUpdateResTable: Codable {
+    
+    var success: Bool = false
+    var id: Int = 0
+    var update: String = "INSERT"
+    var model: MemberTable?
+    
+    enum CodingKeys: String, CodingKey {
+        case success
+        case id
+        case update
+        case model
+    }
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        id = try container.decodeIfPresent(Int.self, forKey: .id) ?? 0
+        update = try container.decodeIfPresent(String.self, forKey: .update) ?? ""
+        model = try container.decodeIfPresent(MemberTable.self, forKey: .model) ?? nil
+    }
 }
 

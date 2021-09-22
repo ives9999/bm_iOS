@@ -126,8 +126,10 @@ class MemberTable: Table {
 //        validate_show = validateShow(rawValue: validate)
     }
     
-    func toSession() {
+    func toSession(isLoggedIn: Bool = false) {
 
+        self.filterRow()
+        self.isLoggedIn = isLoggedIn
         let session: UserDefaults = UserDefaults.standard
         var mirror: Mirror? = Mirror(reflecting: self)
         repeat {
