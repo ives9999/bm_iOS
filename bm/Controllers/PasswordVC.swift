@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class PasswordVC: UIViewController {
+class PasswordVC: BaseViewController {
     
     var type: String?// forget_password, change_password
     var emailLbl: SuperLabel!
@@ -26,7 +26,7 @@ class PasswordVC: UIViewController {
     @IBOutlet weak var logoView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     
-    var delegate: MemberVC?
+    var delegate: BaseViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -192,9 +192,10 @@ class PasswordVC: UIViewController {
                             )
                             let alertView = SCLAlertView(appearance: appearance)
                             alertView.addButton("成功") {
-                                if self.delegate != nil {
-                                    self.delegate?.refresh()
-                                }
+                                self.prev()
+//                                if self.delegate != nil {
+//                                    self.delegate?.toLogin()
+//                                }
                                 self.dismiss(animated: true, completion: nil)
                             }
                             alertView.showSuccess("成功", subTitle: MemberService.instance.msg)

@@ -1073,7 +1073,7 @@ extension UIViewController {
 
 extension UserDefaults {
     
-    func myPrint() {
+    func dump() {
         for (key, value) in self.dictionaryRepresentation() {
             print("\(key) => \(value)")
         }

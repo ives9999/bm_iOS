@@ -199,13 +199,13 @@ class DataService {
             body[key] = param
         }
         
-        print(body)
+        //print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        print(url)
+        //print(url)
         if url != nil {
             Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
                 
@@ -578,8 +578,8 @@ class DataService {
         var params: [String: String] = ["channel":CHANNEL,"device":"app"]
         params.merge(_params)
         
-        print(url)
-        print(params)
+        //print(url)
+        //print(params)
         msg = ""
         Alamofire.upload(
             multipartFormData: { (multipartFormData) in
@@ -1556,5 +1556,5 @@ class DataService {
         return nil
     }
     
-    func jsonToMember(json: JSON) {}
+    //func jsonToMember(json: JSON) {}
 }

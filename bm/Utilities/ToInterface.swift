@@ -270,6 +270,22 @@ extension BaseViewController {
         }
     }
     
+    func toPassword(type: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "passwo") as? PasswordVC {
+                viewController.type = type
+                viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "passwo") as! PasswordVC
+            viewController.type = type
+            viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toPayment(order_token: String, ecpay_token: String?=nil, tokenExpireDate: String?=nil) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
@@ -840,6 +856,22 @@ extension BaseViewController {
             if (params != nil) {
                 viewController.params = params!
             }
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toValidate(type: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-XsO-Wn-cpI") as? ValidateVC {
+                viewController.type = type
+                viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-XsO-Wn-cpI") as! ValidateVC
+            viewController.type = type
+            viewController.delegate = self
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

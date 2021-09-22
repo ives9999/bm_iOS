@@ -17,7 +17,7 @@ class ValidateVC: BaseViewController {
     @IBOutlet weak var typeTxt: SuperTextField!
     @IBOutlet weak var typeLbl: UILabel!
     
-    var delegate: MemberVC?
+    var delegate: BaseViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()

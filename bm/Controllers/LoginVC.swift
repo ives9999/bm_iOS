@@ -82,30 +82,38 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                 
                 let jsonData: Data = MemberService.instance.jsonData!
                 do {
-                    self.table = try JSONDecoder().decode(MemberTable.self, from: jsonData)
-                    if (self.table != nil) {                        
-                        //self.table?.printRow()
-                        self.table!.toSession(isLoggedIn: true)
+                    let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
+                    
+                    if (!successTable.success) {
+                        self.warning(successTable.msg)
+                    } else {
+                        self.table = try JSONDecoder().decode(MemberTable.self, from: jsonData)
+                        if (self.table != nil) {
+                            self.table?.printRow()
+                            self.table!.toSession(isLoggedIn: true)
+                            
+                            self.dismiss(animated: true, completion: {
+                                if self.memberVC != nil {
+                                    self.memberVC!.loginout()
+                                }
+                            })
+                        }
+                        
+//                        if MemberService.instance.msg.count > 0 {
+//                            let appearance = SCLAlertView.SCLAppearance(
+//                                showCloseButton: false
+//                            )
+//                            let alert = SCLAlertView(appearance: appearance)
+//                            alert.addButton("確定", action: {
+//                                self.performSegue(withIdentifier: UNWIND, sender: nil)
+//                            })
+//                            alert.showWarning("警告", subTitle: MemberService.instance.msg)
+//                        }
                     }
                 } catch {
                     self.warning(error.localizedDescription)
                 }
                 
-                if MemberService.instance.msg.count > 0 {
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    let alert = SCLAlertView(appearance: appearance)
-                    alert.addButton("確定", action: {
-                        self.performSegue(withIdentifier: UNWIND, sender: nil)
-                    })
-                    alert.showWarning("警告", subTitle: MemberService.instance.msg)
-                }
-                self.dismiss(animated: true, completion: {
-                    if self.memberVC != nil {
-                        self.memberVC!.loginout()
-                    }
-                })
             } else {
                 //print("login failed by server")
                 let appearance = SCLAlertView.SCLAppearance(

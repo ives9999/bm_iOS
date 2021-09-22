@@ -102,6 +102,7 @@ class MemberVC: MyTableVC {
                 do {
                     let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
                     table.toSession(isLoggedIn: true)
+                    self.session.dump()
                     self.loginout()
                     self.tableView.reloadData()
                 } catch {
@@ -120,7 +121,7 @@ class MemberVC: MyTableVC {
         memberRows = fixedRows
         if Member.instance.isLoggedIn {// detected validate status
             let validate: Int = Member.instance.validate
-            print(validate)
+            //print(validate)
             if validate & EMAIL_VALIDATE <= 0 {
                 let new: Dictionary<String, String> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
                 memberRows.append(new)
@@ -300,19 +301,7 @@ class MemberVC: MyTableVC {
 //                }
                 //performSegue(withIdentifier: segue, sender: nil)
             } else if segue == TO_PASSWORD {
-                if #available(iOS 13.0, *) {
-                    let storyboard = UIStoryboard(name: "Member", bundle: nil)
-                    if let viewController = storyboard.instantiateViewController(identifier: "passwo") as? PasswordVC {
-                        viewController.type = "change_password"
-                        viewController.delegate = self
-                        show(viewController, sender: nil)
-                    }
-                } else {
-                    let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "passwo") as! PasswordVC
-                    viewController.type = "change_password"
-                    viewController.delegate = self
-                    self.navigationController!.pushViewController(viewController, animated: true)
-                }
+                toPassword(type: "change_password")
                 //performSegue(withIdentifier: segue, sender: "change_password")
             } else if segue == TO_VALIDATE {
                 
@@ -320,19 +309,7 @@ class MemberVC: MyTableVC {
                 if row["type"] != nil {
                     sender = row["type"]!
                 }
-                if #available(iOS 13.0, *) {
-                    let storyboard = UIStoryboard(name: "Member", bundle: nil)
-                    if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-XsO-Wn-cpI") as? ValidateVC {
-                        viewController.type = sender
-                        viewController.delegate = self
-                        show(viewController, sender: nil)
-                    }
-                } else {
-                    let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-XsO-Wn-cpI") as! ValidateVC
-                    viewController.type = sender
-                    viewController.delegate = self
-                    self.navigationController!.pushViewController(viewController, animated: true)
-                }
+                toValidate(type: sender)
                 
                 
                 //performSegue(withIdentifier: segue, sender: sender)
@@ -389,7 +366,6 @@ class MemberVC: MyTableVC {
                 //let vc: RegisterVC = segue.destination as! RegisterVC
                 //vc.menuVC = (sender as! MenuVC)
             } else {
-             
          }
         }
     }
@@ -429,12 +405,13 @@ class MemberVC: MyTableVC {
     }
     
     @IBAction func passwordBtnPressed(_ sender: Any) {
-        let type: String = "forget_password"
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "passwo") as? PasswordVC {
-            vc.type = type
-            vc.delegate = self
-            present(vc, animated: true, completion: nil)
-        }
+        toPassword(type: "forget_password")
+//        let type: String = "forget_password"
+//        if let vc = storyboard?.instantiateViewController(withIdentifier: "passwo") as? PasswordVC {
+//            vc.type = type
+//            vc.delegate = self
+//            present(vc, animated: true, completion: nil)
+//        }
         //performSegue(withIdentifier: TO_PASSWORD, sender: type)
     }
     

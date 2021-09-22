@@ -30,8 +30,8 @@ class MemberService: DataService {
     func login(email: String, password: String, playerID: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
         let body: [String: Any] = ["device": "app", "email": lowerCaseEmail, "password": password, "player_id": playerID]
-//        print(body)
-//        print(URL_LOGIN)
+        //print(body)
+        //print(URL_LOGIN)
         
         Alamofire.request(URL_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             switch response.result {

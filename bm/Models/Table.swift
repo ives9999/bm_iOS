@@ -153,3 +153,15 @@ class Table: Codable {
 //        }
     }
 }
+
+class SuccessTable: Codable {
+    var success: Bool = false
+    var msg: String = ""
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
+    }
+}
