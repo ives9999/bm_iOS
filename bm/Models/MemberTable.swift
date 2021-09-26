@@ -436,7 +436,6 @@ class Member {
     
     func reset() {
         
-        let session: UserDefaults = UserDefaults.standard
         var mirror: Mirror? = Mirror(reflecting: MemberTable())
         repeat {
             for property in mirror!.children {
@@ -467,6 +466,46 @@ class Member {
 //        }
 //        setData(data: data)
 //        self.justGetMemberOne = false
+    }
+    
+    func checkMust() -> String {
+        
+        var msg: String = ""
+        
+        for key in MEMBER_MUST_ARRAY {
+            
+            var isFilled: Bool = false
+            
+            var mirror: Mirror? = Mirror(reflecting: MemberTable())
+            repeat {
+                for property in mirror!.children {
+                    if let name: String = property.label {
+                        if (name == key) {
+                            let t = String(describing: Swift.type(of: property.value))
+                            if (t == String(describing: Swift.type(of: ""))) {
+                                let value = session.getString(name)
+                                if (value.count > 0) {
+                                    isFilled = true
+                                }
+                            } else if (t == String(describing: Swift.type(of: 1))) {
+                                let value = session.getInt(name)
+                                if (value > 0) {
+                                    isFilled = true
+                                }
+                            }
+                            break
+                        }
+                    }
+                }
+                mirror = mirror?.superclassMirror
+            } while mirror != nil
+            
+            if (!isFilled) {
+                msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
+            }
+        }
+        
+        return msg
     }
     
     //init() {

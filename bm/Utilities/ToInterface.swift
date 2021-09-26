@@ -16,7 +16,8 @@ extension BaseViewController {
                 self.goHomeThen(completion: login)
             }
         } else {
-            for key in MEMBER_MUST_ARRAY {
+            msg = Member.instance.checkMust()
+//            for key in MEMBER_MUST_ARRAY {
 //                let type: String = Member.instance.info[key]!["type"]!
 //                let tmp = Member.instance.getData(key: key)
 //                if type == "Int" {
@@ -32,7 +33,7 @@ extension BaseViewController {
 //                        }
 //                    }
 //                }
-            }
+//            }
             if msg.count > 0 {
                 warning(msg: msg, showCloseButton: true, buttonTitle: "填寫") {
                     self.goHomeThen(completion: register)

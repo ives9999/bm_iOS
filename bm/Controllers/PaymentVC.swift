@@ -75,7 +75,11 @@ class PaymentVC: MyTableVC {
     var bank_code: String = ""
     var bank_account: String = ""
     
+    var handle_fee: String = ""
     var trade_no: String = ""
+    var card6No: String = ""
+    var card4No: String = ""
+    var gateway_at: String = ""
     
     var popupTableView: UITableView = {
         let cv = UITableView(frame: .zero, style: .plain)
@@ -125,15 +129,30 @@ class PaymentVC: MyTableVC {
             language: "zh-TW") { (state) in
             
             if let creditPayment: CreatePaymentCallbackState = state as? CreatePaymentCallbackState {
+                
                 if let order = creditPayment.OrderInfo {
                     if let tmp = order.TradeNo {
                         self.trade_no = tmp
                     }
-                }
+                    
+                    self.trade_no = "12345"
+                    self.handle_fee = "7"
+                    self.gateway_at = "2021-09-26"
+                    
+//                    if let tmp = order.T {
 //
-//                    if let card = creditPayment.CardInfo {
-//                        //print(card)
 //                    }
+                }
+
+                if let card = creditPayment.CardInfo {
+                    if let tmp = card.Card4No {
+                        self.card4No = tmp
+                    }
+                    
+                    if let tmp = card.Card6No {
+                        self.card6No = tmp
+                    }
+                }
                 
                 if let cvs = creditPayment.CVSInfo {
                     if let tmp = cvs.PaymentNo {
@@ -187,11 +206,12 @@ class PaymentVC: MyTableVC {
             switch state.callbackStateStatus {
             case .Success:
                 //print("Success")
-                if (self.gateway == GATEWAY.credit_card) {
-                    self.refresh()
-                } else {
-                    self.updateOrder()
-                }
+//                if (self.gateway == GATEWAY.credit_card) {
+//                    self.refresh()
+//                } else {
+//                    self.updateOrder()
+//                }
+                self.updateOrder()
 
             case .Fail:
                 //print("Faile")
@@ -248,6 +268,12 @@ class PaymentVC: MyTableVC {
         } else if (gateway == GATEWAY.ATM) {
             params["bank_code"] = bank_code
             params["bank_account"] = bank_account
+        } else if (gateway == GATEWAY.credit_card) {
+            params["gateway_process"] = GATEWAY_PROCESS.complete.enumToString()
+            params["gateway_at"] = gateway_at
+            params["handle_fee"] = handle_fee
+            params["card4No"] = card4No
+            params["card6No"] = card6No
         }
         
         OrderService.instance.update(params: params) { (success) in

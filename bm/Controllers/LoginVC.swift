@@ -89,7 +89,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                     } else {
                         self.table = try JSONDecoder().decode(MemberTable.self, from: jsonData)
                         if (self.table != nil) {
-                            self.table?.printRow()
+                            //self.table?.printRow()
                             self.table!.toSession(isLoggedIn: true)
                             
                             self.dismiss(animated: true, completion: {

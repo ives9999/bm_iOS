@@ -265,14 +265,14 @@ let MEMBER_MUST_ARRAY = [
 ]
 
 let MEMBER_MUST_ARRAY_WARNING = [
-    NAME_KEY: "沒有填寫姓名",
-    NICKNAME_KEY: "沒有填寫暱稱",
-    EMAIL_KEY: "沒有填寫email",
-    MOBILE_KEY: "沒有填寫手機",
-    SEX_KEY: "沒有選擇性別",
-    CITY_KEY: "沒有選擇縣市",
-    AREA_KEY: "沒有選擇區域",
-    ROAD_KEY: "沒有填寫路名"
+    NAME_KEY: "會員資料沒有填寫姓名",
+    NICKNAME_KEY: "會員資料沒有填寫暱稱",
+    EMAIL_KEY: "會員資料沒有填寫email",
+    MOBILE_KEY: "會員資料沒有填寫手機",
+    SEX_KEY: "會員資料沒有選擇性別",
+    CITY_KEY: "會員資料沒有選擇縣市",
+    AREA_KEY: "會員資料沒有選擇區域",
+    ROAD_KEY: "會員資料沒有填寫路名"
 ]
 
 // Team key
