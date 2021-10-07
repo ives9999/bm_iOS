@@ -135,13 +135,13 @@ class PaymentVC: MyTableVC {
                         self.trade_no = tmp
                     }
                     
-                    self.trade_no = "12345"
-                    self.handle_fee = "7"
-                    self.gateway_at = "2021-09-26"
+                    if let tmp = order.ChargeFee {
+                        self.handle_fee = "\(tmp)"
+                    }
                     
-//                    if let tmp = order.T {
-//
-//                    }
+                    if let tmp: Date = order.PaymentDate {
+                        self.gateway_at = tmp.toString()
+                    }
                 }
 
                 if let card = creditPayment.CardInfo {

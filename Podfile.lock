@@ -2,43 +2,43 @@ PODS:
   - Alamofire (4.9.1)
   - AlamofireImage (3.6.0):
     - Alamofire (~> 4.9)
-  - CryptoSwift (1.4.1)
+  - CryptoSwift (1.4.2)
   - Device.swift (1.2.2)
   - ECPayPaymentGatewayKit (1.0.4)
   - IQKeyboardManagerSwift (6.5.6)
-  - JXBanner (0.3.5):
-    - JXBanner/Banner (= 0.3.5)
-    - JXBanner/PageControl (= 0.3.5)
-  - JXBanner/Banner (0.3.5):
-    - JXBanner/Banner/API (= 0.3.5)
-    - JXBanner/Banner/Banner (= 0.3.5)
-    - JXBanner/Banner/Cell (= 0.3.5)
-    - JXBanner/Banner/Common (= 0.3.5)
-    - JXBanner/Banner/Transform (= 0.3.5)
-  - JXBanner/Banner/API (0.3.5):
+  - JXBanner (0.3.6):
+    - JXBanner/Banner (= 0.3.6)
+    - JXBanner/PageControl (= 0.3.6)
+  - JXBanner/Banner (0.3.6):
+    - JXBanner/Banner/API (= 0.3.6)
+    - JXBanner/Banner/Banner (= 0.3.6)
+    - JXBanner/Banner/Cell (= 0.3.6)
+    - JXBanner/Banner/Common (= 0.3.6)
+    - JXBanner/Banner/Transform (= 0.3.6)
+  - JXBanner/Banner/API (0.3.6):
     - JXBanner/Banner/Cell
     - JXBanner/PageControl
-  - JXBanner/Banner/Banner (0.3.5):
+  - JXBanner/Banner/Banner (0.3.6):
     - JXBanner/Banner/API
     - JXBanner/Banner/Common
     - JXBanner/Banner/Transform
-  - JXBanner/Banner/Cell (0.3.5)
-  - JXBanner/Banner/Common (0.3.5)
-  - JXBanner/Banner/Transform (0.3.5):
+  - JXBanner/Banner/Cell (0.3.6)
+  - JXBanner/Banner/Common (0.3.6)
+  - JXBanner/Banner/Transform (0.3.6):
     - JXBanner/Banner/API
-  - JXBanner/PageControl (0.3.5):
+  - JXBanner/PageControl (0.3.6):
     - JXPageControl
-  - JXPageControl (0.1.4):
-    - JXPageControl/Common (= 0.1.4)
-    - JXPageControl/Jump (= 0.1.4)
-    - JXPageControl/Transform (= 0.1.4)
-  - JXPageControl/Common (0.1.4)
-  - JXPageControl/Jump (0.1.4):
+  - JXPageControl (0.1.5):
+    - JXPageControl/Common (= 0.1.5)
+    - JXPageControl/Jump (= 0.1.5)
+    - JXPageControl/Transform (= 0.1.5)
+  - JXPageControl/Common (0.1.5)
+  - JXPageControl/Jump (0.1.5):
     - JXPageControl/Common
-  - JXPageControl/Transform (0.1.4):
+  - JXPageControl/Transform (0.1.5):
     - JXPageControl/Common
   - KeychainSwift (16.0.1)
-  - OneSignal (3.7.0)
+  - OneSignal (3.8.1)
   - PromiseKit (6.8.5):
     - PromiseKit/CorePromise (= 6.8.5)
     - PromiseKit/Foundation (= 6.8.5)
@@ -55,7 +55,7 @@ PODS:
     - Starscream (~> 4.0)
   - Starscream (4.0.4)
   - SwiftyJSON (4.2.0)
-  - SwiftyXMLParser (5.4.0)
+  - SwiftyXMLParser (5.5.0)
   - SwipeCellKit (2.7.1)
   - TRVideoView (0.1.5)
   - UIColor_Hex_Swift (5.1.7)
@@ -113,20 +113,20 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyXMLParser:
-    :commit: a188a1cac88248538d21a1d48c8bfa4bcff02f38
+    :commit: 41900bb1882e704a25d4946f2dbad71b4bb02b8f
     :git: https://github.com/yahoojapan/SwiftyXMLParser.git
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   AlamofireImage: be9963c6582d68b39e89191f64c82a7d7bf40fdd
-  CryptoSwift: 0bc800a7e6a24c4fc9ebeab97d44b0d5f73a78bd
+  CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
   ECPayPaymentGatewayKit: 83661ba841c3300e39926d9137cf3a6e11be7864
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
-  JXBanner: f493420009aa32097e7cbd18784af2b8ad1eb755
-  JXPageControl: d61050ce6df56c95a565ec82b9c2629d9c77eb7e
+  JXBanner: 348dbef856e786494cbf30fb45d6b84826f2d3c5
+  JXPageControl: e9487b39e2e58fc17790833214f3b8e935bef98b
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
-  OneSignal: dda98b086108016a3073dc594f0625cda83157c1
+  OneSignal: b44755cd425704bdef8d8912030ed26619446773
   PromiseKit: 9616b0afef31eae56ab9ce044c8ec2b8612a15cd
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
@@ -134,7 +134,7 @@ SPEC CHECKSUMS:
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
   Starscream: 5178aed56b316f13fa3bc55694e583d35dd414d9
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
-  SwiftyXMLParser: b0593d3bccd0029fe853ca63ab2f7bd6d7752ec4
+  SwiftyXMLParser: 027d9e6fb54a38d95dccec025bcea9693f699c47
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   TRVideoView: dc9617f61f7d3b207b2a5ad8afe401ef7c03e51e
   UIColor_Hex_Swift: 31cd3e47440f07a20d2503a36bb0437a445b3c29
@@ -142,4 +142,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6bd4deb315c267f90c3e563d3d2a8e578dfbcb17
 
-COCOAPODS: 1.11.1
+COCOAPODS: 1.11.2

@@ -193,11 +193,15 @@ extension JXBaseBanner {
         if params.isPagingEnabled {
             
             // reuse scrollToItem: to mask the bug of inaccurate scroll position
+            var scrollPosition: UICollectionView.ScrollPosition = .centeredHorizontally
+            if layout.params?.scrollDirection == .vertical {
+                scrollPosition = .centeredVertically
+            }
             collectionView.scrollToItem(at: indexPath,
-                                        at: .centeredHorizontally,
+                                        at: scrollPosition,
                                         animated: animated)
             collectionView.scrollToItem(at: indexPath,
-                                        at: .centeredHorizontally,
+                                        at: scrollPosition,
                                         animated: animated)
         }
     }
@@ -222,4 +226,15 @@ extension JXBaseBanner {
         resume()
     }
     
+}
+
+// MARK: - global support for pausing and resume autoScrolling
+public extension JXBaseBanner {
+    func pauseAutoScrolling(){
+        self.pause()
+    }
+    
+    func resumeAutoScrolling() {
+        self.resume()
+    }
 }

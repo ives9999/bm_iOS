@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
 // swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name ECPayPaymentGatewayKit
 import Alamofire
 import CryptoSwift
@@ -23,22 +23,22 @@ import WebKit
   @objc public var inherit: Swift.Bool
   @objc public convenience init(_ title: Swift.String, message: Swift.String)
   @objc public convenience init(_ title: Swift.String, message: Swift.String, action1: Swift.String, action2: Swift.String)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @objcMembers open class CustomErrorMessageParam : ObjectiveC.NSObject {
   @objc public var customErrorAlertTitle: Swift.String
   @objc public var customErrorAlertMessage: Swift.String
   @objc public var completionAfterCustomErrorAlertMessage: Swift.Bool
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @objcMembers public class GwWebviewController : ECPayPaymentGatewayKit.WebViewController {
   @objc public var completion: (() -> Swift.Void)?
   @objc override dynamic public func webView(_ webView: WebKit.WKWebView, didFailProvisionalNavigation navigation: WebKit.WKNavigation!, withError error: Swift.Error)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public protocol KeyExchangeHandler {
   func keyExchangeApiURL() -> Swift.String
@@ -54,8 +54,8 @@ extension UIControl {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class WebViewManager : ObjectiveC.NSObject {
   @objc public static func showWeb(_ url: Swift.String, title: Swift.String? = nil, completion: (() -> Swift.Void)? = nil)
@@ -69,8 +69,8 @@ extension UIControl {
   @objc public static func showNativeWeb(_ url: Swift.String, completion: (() -> Swift.Void)? = nil)
   @objc public static func showNativeWebUseIntermediate(_ url: Swift.String, completion: (() -> Swift.Void)? = nil)
   public static func getIntermediateQueryWithURL(_ url: Swift.String, parameters: [Swift.String : Any] = [:]) -> PromiseKit.Promise<Swift.String>
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public class ClearMessage : ECPayPaymentGatewayKit.Message {
   final public let data: Foundation.Data
@@ -88,8 +88,8 @@ public class ClearMessage : ECPayPaymentGatewayKit.Message {
     case CONF
     case TEXT
     case REGEX
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
     }
@@ -101,8 +101,8 @@ public class ClearMessage : ECPayPaymentGatewayKit.Message {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 extension XMLConfigurationManager {
   public func loadData(merchantID: Swift.String = "", isForceToGetRemoteData: Swift.Bool = false) -> PromiseKit.Promise<Swift.Void>
@@ -361,10 +361,10 @@ extension TestingTokenManager {
   public enum TestingTokenError : Swift.Error {
     case repsonseErrorJustOccurred
     public static func == (a: ECPayPaymentGatewayKit.TestingTokenManager.TestingTokenError, b: ECPayPaymentGatewayKit.TestingTokenManager.TestingTokenError) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
 }
 @objc @_inheritsConvenienceInitializers @objcMembers public class CreatePaymentCallbackState : ECPayPaymentGatewayKit.CallbackState {
@@ -398,8 +398,8 @@ extension TestingTokenManager {
   case PeriodicFixedAmount = 9
   case NationalTravelCard = 10
   case Unknown = 999
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -408,7 +408,11 @@ extension TestingTokenManager {
   @objc public var MerchantTradeNo: Swift.String?
   @objc public var TradeNo: Swift.String?
   @objc public var TradeDate: Foundation.Date?
-  public var TradeStatus: Swift.Int?
+  @objc public var TradeStatus: Swift.String?
+  @objc public var PaymentDate: Foundation.Date?
+  public var TradeAmt: Swift.Int?
+  @objc public var PaymentType: Swift.String?
+  public var ChargeFee: Foundation.Decimal?
   required public init(from decoder: Swift.Decoder) throws
   @objc override dynamic public var description: Swift.String {
     @objc get
@@ -431,6 +435,12 @@ extension TestingTokenManager {
   public var RedDeAmt: Swift.Int?
   public var RedOkAmt: Swift.Int?
   public var RedYet: Swift.Int?
+  @objc public var PeriodType: Swift.String?
+  public var Frequency: Swift.Int?
+  public var ExecTimes: Swift.Int?
+  public var PeriodAmount: Swift.Int?
+  public var TotalSuccessTimes: Swift.Int?
+  public var TotalSuccessAmount: Swift.Int?
   required public init(from decoder: Swift.Decoder) throws
   @objc override dynamic public var description: Swift.String {
     @objc get
@@ -499,8 +509,8 @@ extension WebViewController : WebKit.WKScriptMessageHandler {
 }
 @objc @_inheritsConvenienceInitializers final public class UserAgentFetcher : ObjectiveC.NSObject {
   @objc final public func fetch() -> Swift.String
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public protocol Key : AnyObject {
   var reference: Security.SecKey { get }
@@ -527,8 +537,8 @@ extension Key {
   case Beta
   case Stage
   case Prod
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -562,11 +572,11 @@ public enum APIManagerKeychainKeyStorage : Swift.String {
   case clientPrivatekey
   case serverPublickey
   case clientKeyID
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 @_hasMissingDesignatedInitializers public class APIManagerTools {
   @objc deinit
@@ -582,10 +592,10 @@ public class Signature {
     case sha384
     case sha512
     public static func == (a: ECPayPaymentGatewayKit.Signature.DigestType, b: ECPayPaymentGatewayKit.Signature.DigestType) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   final public let data: Foundation.Data
   public init(data: Foundation.Data)
@@ -601,8 +611,8 @@ public class Signature {
   case Cancel = 2
   case Unknown = 999
   public func toString() -> Swift.String
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -646,8 +656,8 @@ public enum SwiftyRSAError : Swift.Error {
   @objc override dynamic public var description: Swift.String {
     @objc get
   }
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public enum APIManagerError : Swift.Error {
   case unknownError
@@ -686,8 +696,8 @@ public enum APIManagerError : Swift.Error {
   @objc required public init(pemNamed pemName: Swift.String, in bundle: Foundation.Bundle) throws
   @objc required public init(derNamed derName: Swift.String, in bundle: Foundation.Bundle) throws
   @objc public static func publicKeys(pemEncoded pemString: Swift.String) -> [ECPayPaymentGatewayKit._objc_PublicKey]
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc(PrivateKey) public class _objc_PrivateKey : ObjectiveC.NSObject, ECPayPaymentGatewayKit.Key {
   @objc public var reference: Security.SecKey {
@@ -706,13 +716,13 @@ public enum APIManagerError : Swift.Error {
   @objc required public init(pemEncoded pemString: Swift.String) throws
   @objc required public init(pemNamed pemName: Swift.String, in bundle: Foundation.Bundle) throws
   @objc required public init(derNamed derName: Swift.String, in bundle: Foundation.Bundle) throws
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_hasMissingDesignatedInitializers @objc(VerificationResult) public class _objc_VerificationResult : ObjectiveC.NSObject {
   @objc final public let isSuccessful: Swift.Bool
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc(ClearMessage) public class _objc_ClearMessage : ObjectiveC.NSObject, ECPayPaymentGatewayKit.Message {
   @objc public var base64String: Swift.String {
@@ -729,8 +739,8 @@ public enum APIManagerError : Swift.Error {
   @objc public func encrypted(with key: ECPayPaymentGatewayKit._objc_PublicKey, padding: ECPayPaymentGatewayKit.Padding) throws -> ECPayPaymentGatewayKit._objc_EncryptedMessage
   @objc public func signed(with key: ECPayPaymentGatewayKit._objc_PrivateKey, digestType: ECPayPaymentGatewayKit._objc_Signature.DigestType) throws -> ECPayPaymentGatewayKit._objc_Signature
   @objc public func verify(with key: ECPayPaymentGatewayKit._objc_PublicKey, signature: ECPayPaymentGatewayKit._objc_Signature, digestType: ECPayPaymentGatewayKit._objc_Signature.DigestType) throws -> ECPayPaymentGatewayKit._objc_VerificationResult
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc(EncryptedMessage) public class _objc_EncryptedMessage : ObjectiveC.NSObject, ECPayPaymentGatewayKit.Message {
   @objc public var base64String: Swift.String {
@@ -743,8 +753,8 @@ public enum APIManagerError : Swift.Error {
   @objc required public init(data: Foundation.Data)
   @objc required public init(base64Encoded base64String: Swift.String) throws
   @objc public func decrypted(with key: ECPayPaymentGatewayKit._objc_PrivateKey, padding: ECPayPaymentGatewayKit.Padding) throws -> ECPayPaymentGatewayKit._objc_ClearMessage
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @objc(Signature) public class _objc_Signature : ObjectiveC.NSObject {
   @objc public enum DigestType : Swift.Int {
@@ -753,8 +763,8 @@ public enum APIManagerError : Swift.Error {
     case sha256
     case sha384
     case sha512
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
@@ -768,8 +778,8 @@ public enum APIManagerError : Swift.Error {
   required public init(swiftValue: ECPayPaymentGatewayKit.Signature)
   @objc public init(data: Foundation.Data)
   @objc required public init(base64Encoded base64String: Swift.String) throws
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public class PrivateKey : ECPayPaymentGatewayKit.Key {
   final public let reference: Security.SecKey
