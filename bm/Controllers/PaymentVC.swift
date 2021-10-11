@@ -140,7 +140,7 @@ class PaymentVC: MyTableVC {
                     }
                     
                     if let tmp: Date = order.PaymentDate {
-                        self.gateway_at = tmp.toString()
+                        self.gateway_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
                     }
                 }
 

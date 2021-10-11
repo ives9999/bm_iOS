@@ -123,8 +123,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Stage)
-        //ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Prod)
+        //ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Stage)
+        ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Prod)
         
         //Member.instance.justGetMemberOne = false
         return true

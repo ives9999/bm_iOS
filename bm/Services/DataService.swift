@@ -80,7 +80,7 @@ class DataService {
     func getList(token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
         self.needDownloads = [Dictionary<String, Any>]()
-        var filter: [String: Any] = ["source": "app", "channel": CHANNEL, "page": page, "perPage": perPage]
+        var filter: [String: Any] = ["device": "app", "channel": CHANNEL, "page": page, "perPage": perPage]
         if _filter != nil {
             filter.merge(_filter!)
         }
@@ -88,13 +88,13 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        //print(filter.toJSONString())
+        print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        //print(url)
+        print(url)
                 
         Alamofire.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
@@ -259,7 +259,7 @@ class DataService {
 //    func getList<T: SuperModel, T1: SuperModel>(t:T.Type, t1: T1.Type, token: String?, _filter:[String: Any]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
 //
 //        self.needDownloads = [Dictionary<String, Any>]()
-//        var filter: [String: Any] = ["source": "app", "channel": CHANNEL, "page": page, "perPage": perPage]
+//        var filter: [String: Any] = ["device": "app", "channel": CHANNEL, "page": page, "perPage": perPage]
 //        if _filter != nil {
 //            filter.merge(_filter!)
 //        }
@@ -335,7 +335,7 @@ class DataService {
 //    func getList(type: String, titleField: String, params:[String:Any], page: Int, perPage: Int, filter:[[Any]]?, completion: @escaping CompletionHandler) {
 //
 //        self.needDownloads = [Dictionary<String, Any>]()
-//        var body: [String: Any] = ["source": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
+//        var body: [String: Any] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
 //        if filter != nil {
 //            body["where"] = filter
 //        }
@@ -482,7 +482,7 @@ class DataService {
 //        //print(model)
 //        //model.neverFill()
 //        downloadImageNum = 0
-//        let body: [String: Any] = ["source": "app", "token": token, "strip_html": true]
+//        let body: [String: Any] = ["device": "app", "token": token, "strip_html": true]
 //        
 //        //print(body)
 //        let url: String = String(format: URL_ONE, type)
@@ -661,8 +661,8 @@ class DataService {
         if token.count > 0 {
             url = url + "/" + token
         }
-        //print(url)
-        //print(params)
+        print(url)
+        print(params)
         
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             
@@ -719,7 +719,7 @@ class DataService {
 //        let url: String = String(format: URL_UPDATE, type)
 //        //print(url)
 //        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-//        var body: [String: Any] = ["source": "app","channel":CHANNEL]
+//        var body: [String: Any] = ["device": "app","channel":CHANNEL]
 //        body.merge(params)
 //        //print(body)
 //        Alamofire.upload( multipartFormData: { (multipartFormData) in
@@ -792,7 +792,7 @@ class DataService {
 //    }
     
     func delete(token: String, type: String, completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["source": "app", "channel": "bm", "token": token, "type": "cart_item"]
+        let body: [String: String] = ["device": "app", "channel": "bm", "token": token, "type": "cart_item"]
         let url: String = String(format: URL_DELETE, "cart")
         //print(url)
         //print(body)
@@ -878,7 +878,7 @@ class DataService {
         }
     }
 //    func signup(type: String, token: String, member_token: String, tt_id: Int, completion: @escaping CompletionHandler) {
-//        let body: [String: String] = ["source": "app", "channel": "bm","member_token":member_token,"tt_id":String(tt_id)]
+//        let body: [String: String] = ["device": "app", "channel": "bm","member_token":member_token,"tt_id":String(tt_id)]
 //        let url: String = String(format: URL_SIGNUP, type, token)
 //        //print(url)
 //        //print(body)
@@ -907,7 +907,7 @@ class DataService {
 //
 //    }
 //    func cancelSignup(type: String, member_token: String, signup_id: Int, completion: @escaping CompletionHandler) {
-//        let body: [String: String] = ["source": "app", "channel": "bm","member_token":member_token]
+//        let body: [String: String] = ["device": "app", "channel": "bm","member_token":member_token]
 //        let url: String = String(format: URL_CANCEL_SIGNUP, type, signup_id)
 //        //print(url)
 //        //print(body)
@@ -1143,7 +1143,7 @@ class DataService {
 //    }
     
     func getShow(type: String, id: Int, token: String, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app", "id": id, "token": token, "type": type]
+        let body: [String: Any] = ["device": "app", "id": id, "token": token, "type": type]
         let url: String = String(format: URL_SHOW, type)
         //print(url)
         Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseString { (response) in
@@ -1179,7 +1179,7 @@ class DataService {
     }
     
     func getCitys(type: String="all", zone:Bool=false, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app","channel":"bm","type":type,"zone":zone]
+        let body: [String: Any] = ["device": "app","channel":"bm","type":type,"zone":zone]
         Alamofire.request(URL_CITYS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {
@@ -1208,7 +1208,7 @@ class DataService {
     
     // 將不使用了，請使用getCitys代替
     func getAllCitys(completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app"]
+        let body: [String: Any] = ["device": "app"]
         Alamofire.request(URL_CITYS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {
@@ -1235,7 +1235,7 @@ class DataService {
     }
     // 將不使用了，請使用getCitys代替
     func getCustomCitys(completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app"]
+        let body: [String: Any] = ["device": "app"]
         Alamofire.request(URL_CUSTOM_CITYS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {
@@ -1264,7 +1264,7 @@ class DataService {
     }
     
     func getArenaByCityID(city_id: Int, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app", "city": city_id]
+        let body: [String: Any] = ["device": "app", "city": city_id]
         Alamofire.request(URL_ARENA_BY_CITY_ID, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {
@@ -1293,7 +1293,7 @@ class DataService {
         }
     }
     func getArenaByCityIDs(city_ids: [Int],city_type:String, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app", "channel":"bm","citys": city_ids,"city_type":city_type,"version":"1.2.5"]
+        let body: [String: Any] = ["device": "app", "channel":"bm","citys": city_ids,"city_type":city_type,"version":"1.2.5"]
         //print(body)
         //print(URL_ARENA_BY_CITY_IDS)
         Alamofire.request(URL_ARENA_BY_CITY_IDS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
@@ -1330,7 +1330,7 @@ class DataService {
     }
     
     func getAreaByCityIDs(city_ids: [Int],city_type:String, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app", "channel":"bm","citys": city_ids,"city_type":city_type]
+        let body: [String: Any] = ["device": "app", "channel":"bm","citys": city_ids,"city_type":city_type]
         //print(body)
         //print(URL_ARENA_BY_CITY_IDS)
         Alamofire.request(URL_AREA_BY_CITY_IDS, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
@@ -1366,7 +1366,7 @@ class DataService {
     }
     
     func getTT(token: String, type:String, completion: @escaping CompletionHandler) {
-        let body: [String: Any] = ["source": "app", "channel": "bm","token":token]
+        let body: [String: Any] = ["device": "app", "channel": "bm","token":token]
         let url: String = String(format: URL_TT, type)
         //print(url)
         //print(body)
@@ -1405,7 +1405,7 @@ class DataService {
     }
     
     func updateTT(type: String, params:[String:Any], completion: @escaping CompletionHandler) {
-        var body: [String: Any] = ["source": "app", "channel": CHANNEL]
+        var body: [String: Any] = ["device": "app", "channel": CHANNEL]
         body = body.merging(params){ (current, _) in current }
         //print(body)
         let url: String = String(format: URL_TT_UPDATE, type)
@@ -1443,7 +1443,7 @@ class DataService {
     }
     
     func deleteTT(type: String, params:[String:Any], completion: @escaping CompletionHandler) {
-        var body: [String: Any] = ["source": "app", "channel": CHANNEL]
+        var body: [String: Any] = ["device": "app", "channel": CHANNEL]
         body = body.merging(params){ (current, _) in current }
         //print(body)
         let url: String = String(format: URL_TT_DELETE, type)
