@@ -321,6 +321,7 @@
 		F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */; };
 		F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */; };
 		F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB841F9895C300DDEC86 /* CoachVC.swift */; };
+		F9FAB2B6271EFD8100D83CC4 /* SearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -711,6 +712,7 @@
 		F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell1.swift; sourceTree = "<group>"; };
 		F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		F9A1CB841F9895C300DDEC86 /* CoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachVC.swift; sourceTree = "<group>"; };
+		F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1141,6 +1143,7 @@
 		F94E7D1E1F83636A00F550FD /* bm */ = {
 			isa = PBXGroup;
 			children = (
+				F9FAB2B4271EF73C00D83CC4 /* Data */,
 				B3FB9B262407F7EE0051186F /* TempPlay.storyboard */,
 				B3FB9B232407F7280051186F /* Course.storyboard */,
 				B3FB9B212407F5EC0051186F /* Team.storyboard */,
@@ -1297,6 +1300,14 @@
 				B34A20AD21AE962700EE6E1C /* Timetables.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F9FAB2B4271EF73C00D83CC4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1865,6 +1876,7 @@
 				B3CABD9026B6E4DA00FD0E4D /* MemoCell.swift in Sources */,
 				B31CD34826F19D52001B3848 /* MemberTable.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* TeachService.swift in Sources */,
+				F9FAB2B6271EFD8100D83CC4 /* SearchRow.swift in Sources */,
 				B326C7CC256E2F0D0048A2C2 /* SelectAreasVC.swift in Sources */,
 				B323390B21B6B8E4003EB84D /* FormValidableProtocol.swift in Sources */,
 				B309C1E22675F45E00CCFE61 /* SelectArenaVC.swift in Sources */,

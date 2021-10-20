@@ -145,6 +145,11 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         Global.instance.removeSpinner(superView: view)
     }
     
+    func makeSection0Row(isExpanded: Bool=true)-> SearchSection {
+        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        return s
+    }
+    
     override func prepareParams(city_type: String="simple") {
         params = [String: Any]()
         for row in searchRows {

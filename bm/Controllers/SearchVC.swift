@@ -82,6 +82,22 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         refresh()
     }
     
+    override func makeSection0Row(isExpanded: Bool)-> SearchSection {
+        var rows: [SearchRow] = [SearchRow]()
+        let r1: SearchRow = SearchRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
+        rows.append(r1)
+        let r2: SearchRow = SearchRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more")
+        rows.append(r2)
+        let r3: SearchRow = SearchRow(title: "星期幾", show: "全部", key: WEEKDAY_KEY, cell: "more")
+        rows.append(r3)
+        let r4: SearchRow = SearchRow(title: "時段", show: "全部", key: START_TIME_KEY, cell: "more")
+        rows.append(r4)
+
+        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        s.items.append(contentsOf: rows)
+        return s
+    }
+    
 //    override func refresh() {
 //
 //        //member like team list
