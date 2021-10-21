@@ -28,12 +28,28 @@ class SearchRow {
     var show: String = ""
     var key: String = ""
     var cell: String = ""
+    var keyboard: UIKeyboardType = .default
+    var placeholder: String = ""
+    var accessory: UITableViewCell.AccessoryType = UITableViewCell.AccessoryType.none
     
-    init(title: String = "", value: String = "", show: String = "", key: String = "", cell: String = "") {
+    init(
+        title: String = "",
+        value: String = "",
+        show: String = "",
+        key: String = "",
+        cell: String = "",
+        keyboard: UIKeyboardType = .default,
+        placeholder: String = "",
+        accessory: UITableViewCell.AccessoryType = UITableViewCell.AccessoryType.none
+    ) {
+        
         self.title = title
         self.value = value
         self.show = show
         self.key = key
         self.cell = cell
+        self.keyboard = keyboard
+        self.placeholder = placeholder
+        self.accessory = accessory
     }
 }

@@ -106,6 +106,51 @@ class EditCell: SuperCell, UITextFieldDelegate {
         setNeedsLayout()
     }
     
+    func forRow(indexPath:IndexPath, row: SearchRow, isClear: Bool=false) {
+        //print(row)
+        //generalTextField.tag = row["idx"] as! Int
+        clearBtn.isHidden = !isClear
+        clearBtn.indexPath = indexPath
+        key = row.key
+        
+        if row.cell == "textField" {
+            //detailLbl.text = ""
+            editText.isHidden = false
+            onoff.isHidden = true
+            moreImageView.isHidden = true
+            //editText.addTarget(self, action: #selector(textFieldDidBeginEditing(_:)), for: .editingDidBegin)
+            editText.addTarget(self, action: #selector(textFieldDidEndEditing(_:)), for: .editingChanged)
+            
+//            var vType = "String"
+//            if row["vtype"] != nil {
+//                vType = row["vtype"] as! String
+//            }
+            
+            let pad: UIKeyboardType = row.keyboard
+            editText.keyboardType = pad
+            
+            editText.placeholder = row.placeholder
+            //print(iden)
+            editText.text = row.show
+        } else if row.cell == "switch" {
+            editText.isHidden = true
+            onoff.isHidden = false
+            onoff.indexPath = indexPath
+            clearBtn.isHidden = true
+        }
+        
+        if row.accessory != UITableViewCell.AccessoryType.none {
+            editText.isHidden = true
+            onoff.isHidden = true
+            detailLbl.isHidden = false
+            detailLbl.text = row.show
+            moreImageView.isHidden = false
+        }
+        
+        titleLbl.text = row.title
+        setNeedsLayout()
+    }
+    
 //    func textFieldDidBeginEditing(_ textField: UITextField) {
 //        print("start edit")
 //    }

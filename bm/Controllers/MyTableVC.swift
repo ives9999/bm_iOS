@@ -12,6 +12,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
 
     var sections: [String]?
     var searchSections: [ExpandableItems] = [ExpandableItems]()
+    var searchSections1: [SearchSection] = [SearchSection]()
     
     var mySections: [[String: Any]] = [[String: Any]]()
     var myRows: [[String: Any]] = [[String: Any]]()
@@ -145,7 +146,11 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         Global.instance.removeSpinner(superView: view)
     }
     
-    func makeSection0Row(isExpanded: Bool=true)-> SearchSection {
+    func initSectionRows()-> [SearchSection] {
+        return  [SearchSection]()
+    }
+    
+    func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
         let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
         return s
     }
@@ -230,6 +235,22 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         let key = searchSections[section].items[row]
         return getDefinedRow(key)
     }
+    
+    func getRowFromKey(_ key: String)-> SearchRow {
+
+        for section in searchSections1 {
+            for row in section.items {
+                if (row.key == key ) {
+                    return row
+                }
+            }
+        }
+        return SearchRow()
+    }
+    
+    func getRowFromIdx(sectionIdx: Int, rowIdx: Int)-> SearchRow {
+        return searchSections1[sectionIdx].items[rowIdx]
+    }
 
     func replaceRows(_ key: String, _ row: [String: Any]) {
         for (idx, _row) in searchRows.enumerated() {
@@ -261,6 +282,32 @@ class MyTableVC: BaseViewController, List1CellDelegate {
                         if let tmp = value as? T {
                             selecteds.append(tmp)
                         }
+                    }
+                }
+            }
+        }
+
+        return selecteds
+    }
+    
+    func valueToArray<T>(t: T.Type, value: String)-> [T] {
+        var selecteds: [T] = [T]()
+        //print(t)
+        var type: String = "String"
+        if (t.self == Int.self) {
+            type = "Int"
+        }
+        
+        if (value.count > 0) {
+            let values = value.components(separatedBy: ",")
+            for value in values {
+                if (type == "Int") {
+                    if let tmp = Int(value) {
+                        selecteds.append(tmp as! T)
+                    }
+                } else {
+                    if let tmp = value as? T {
+                        selecteds.append(tmp)
                     }
                 }
             }

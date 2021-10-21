@@ -36,25 +36,28 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         able_type = "team"
         sections = ["", "更多"]
         
-        searchRows = [
-            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true,"value":""],
-            ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":""],
-            //            ["ch": "區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":"team_area","show":"全部","segue":TO_ARENA,"sender":0],
-            ["ch":"星期幾","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int](),"value":""],
-            ["ch":"時段","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any](),"value":""],
-            ["ch":"球館","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int](),"value":""],
-            ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String](),"value":""]
-        ]
-        
-        searchSections = [
-            ExpandableItems(isExpanded: true, items: ["keyword",CITY_KEY,WEEKDAY_KEY, START_TIME_KEY]),
-            ExpandableItems(isExpanded: false, items: [ARENA_KEY,DEGREE_KEY])
-        ]
+//        searchRows = [
+//            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true,"value":""],
+//            ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":""],
+//            //            ["ch": "區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":"team_area","show":"全部","segue":TO_ARENA,"sender":0],
+//            ["ch":"星期幾","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int](),"value":""],
+//            ["ch":"時段","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any](),"value":""],
+//            ["ch":"球館","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int](),"value":""],
+//            ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String](),"value":""]
+//        ]
+//
+//        searchSections = [
+//            ExpandableItems(isExpanded: true, items: ["keyword",CITY_KEY,WEEKDAY_KEY, START_TIME_KEY]),
+//            ExpandableItems(isExpanded: false, items: [ARENA_KEY,DEGREE_KEY])
+//        ]
         
         super.viewDidLoad()
         
         let cellNib = UINib(nibName: "EditCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
+        
+        let moreCellNib = UINib(nibName: "MoreCell", bundle: nil)
+        tableView.register(moreCellNib, forCellReuseIdentifier: "moreCell")
 
         let cellNibName = UINib(nibName: "TeamListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
@@ -66,6 +69,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         ]
 
         //print(searchTags)
+        
+        searchSections1 = initSectionRows()
 
         let likeTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
         likeTab.addGestureRecognizer(likeTap)
@@ -82,18 +87,40 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         refresh()
     }
     
-    override func makeSection0Row(isExpanded: Bool)-> SearchSection {
+    override func initSectionRows()-> [SearchSection] {
+
+        var sections: [SearchSection] = [SearchSection]()
+
+        sections.append(makeSection0Row())
+        sections.append(makeSection1Row(false))
+
+        return sections
+    }
+    
+    override func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
         var rows: [SearchRow] = [SearchRow]()
         let r1: SearchRow = SearchRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
         rows.append(r1)
-        let r2: SearchRow = SearchRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more")
+        let r2: SearchRow = SearchRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r2)
-        let r3: SearchRow = SearchRow(title: "星期幾", show: "全部", key: WEEKDAY_KEY, cell: "more")
+        let r3: SearchRow = SearchRow(title: "星期幾", show: "全部", key: WEEKDAY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r3)
-        let r4: SearchRow = SearchRow(title: "時段", show: "全部", key: START_TIME_KEY, cell: "more")
+        let r4: SearchRow = SearchRow(title: "時段", show: "全部", key: START_TIME_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r4)
 
         let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        s.items.append(contentsOf: rows)
+        return s
+    }
+    
+    private func makeSection1Row(_ isExpanded: Bool=true)-> SearchSection {
+        var rows: [SearchRow] = [SearchRow]()
+        let r1: SearchRow = SearchRow(title: "球館", show: "全部", key: ARENA_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        rows.append(r1)
+        let r2: SearchRow = SearchRow(title: "程度", show: "全部", key: DEGREE_KEY, cell:"more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        rows.append(r2)
+
+        let s: SearchSection = SearchSection(title: "更多", isExpanded: isExpanded)
         s.items.append(contentsOf: rows)
         return s
     }
@@ -165,7 +192,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         if (selectedTagIdx == 1) {
-            return searchSections.count
+            return searchSections1.count
         } else {
             return 1
         }
@@ -180,15 +207,15 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         case 0:
             count = lists1.count
         case 1:
-            if !searchSections[section].isExpanded {
+            if !searchSections1[section].isExpanded {
                 count = 0
             } else {
-                count = searchSections[section].items.count
+                count = searchSections1[section].items.count
             }
         case 2:
             count = lists1.count
         default:
-            count = searchSections.count
+            count = searchSections1.count
         
         }
         return count
@@ -257,16 +284,29 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
             }
         case 1:
             //print("section: \(indexPath.section), row: \(indexPath.row)")
-            let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
-            cell.editCellDelegate = self
             
-            let searchRow = getDefinedRow(indexPath.section, indexPath.row)
-            //print(searchRow)
-            cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
+            let row: SearchRow = getRowFromIdx(sectionIdx: indexPath.section, rowIdx: indexPath.row)
+            let cell_type: String = row.cell
+            if (cell_type == "more") {
+                
+                let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as! MoreCell
+                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                return cell
+                
+            } else {
+            
+                let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
+                //print(searchRow)
+                cell.forRow(indexPath: indexPath, row: row, isClear: true)
+                cell.editCellDelegate = self
+                return cell
+            }
+            
+            
     //        let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
     //        cell.forRow(indexPath: indexPath, row: row, isClear: true)
             
-            return cell
+            //return cell
         default:
             return UITableViewCell()
         }
@@ -278,74 +318,63 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         //Global.instance.removeSpinner(superView: view)
         if (selectedTagIdx == 1) {
             
-            let row: [String: Any] = getDefinedRow(indexPath.section, indexPath.row)
-            let cell = tableView.cellForRow(at: indexPath) as! EditCell
+            let row: SearchRow = getRowFromIdx(sectionIdx: indexPath.section, rowIdx: indexPath.row)
+            //let cell = tableView.cellForRow(at: indexPath) as! EditCell
             
-            if row["atype"] as! UITableViewCell.AccessoryType != UITableViewCell.AccessoryType.none {
+            if row.accessory != UITableViewCell.AccessoryType.none {
                 
-                var key: String? = nil
-                if (row.keyExist(key: "key") && row["key"] != nil) {
-                    key = row["key"] as? String
-                }
+                let key: String = row.key
+                let cell_type: String = row.cell
                 
-                if let segue: String = row["segue"] as? String {
-                    if (segue == TO_CITY) {
-                        var selected: String? = nil
-                        if (row.keyExist(key: "value") && row["value"] != nil) {
-                            selected = row["value"] as? String
-                        }
-                        //toSelectCity(key: key, selected: selected, delegate: self)
-                        toSelectSingle(key: key, selected: selected, delegate: self)
-                    } else if (segue == TO_SELECT_WEEKDAY) {
-                        
-                        let selecteds: [Int] = valueToArray(t: Int.self, row: row)
+                if (cell_type == "more") {
+                    if (key == CITY_KEY) {
+                        toSelectCity(key: CITY_KEY, selected: row.value, delegate: self)
+                    } else if (key == WEEKDAY_KEY) {
+                        let selecteds: [Int] = valueToArray(t: Int.self, value: row.value)
                         toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
-                    } else if (segue == TO_SELECT_TIME) {
-                        
-    //                    var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
-    //                    if (key == END_TIME_KEY) {
-    //                        type = SELECT_TIME_TYPE.play_end
-    //                    }
-                        
-                        var selected: String? = nil
-                        if (row.keyExist(key: "value") && row["value"] != nil) {
-                            selected = row["value"] as? String
-                        }
-                        toSelectTime(key: key, selected: selected, delegate: self)
-                    } else if segue == TO_ARENA {
-            
-                        var city: Int? = nil
-                        var row = getDefinedRow(CITY_KEY)
-                        if let value: String = row["value"] as? String {
-                            city = Int(value)
-        //                    if (city != nil) {
-        //                        citys.append(city!)
-        //                    }
-                        }
-                        
-                        if (city == nil) {
-                            warning("請先選擇縣市")
-                        } else {
-                        
-                            //取得選擇球館的代號
-                            row = getDefinedRow(ARENA_KEY)
-                            let selected: String = row["value"] as! String
-                            toSelectArena(key: key, city: city!, selected: selected, delegate: self)
-                        }
-                    } else if (segue == TO_SELECT_DEGREE) {
-                        
-                        let tmps: [String] = valueToArray(t: String.self, row: row)
-                        var selecteds: [DEGREE] = [DEGREE]()
-                        for tmp in tmps {
-                            selecteds.append(DEGREE.enumFromString(string: tmp))
-                        }
-                        toSelectDegree(selecteds: selecteds, delegate: self)
-                    } else {
-                        //performSegue(withIdentifier: segue, sender: indexPath)
                     }
+                } else if (cell_type == START_TIME_KEY) {
+                    
+//                    var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
+//                    if (key == END_TIME_KEY) {
+//                        type = SELECT_TIME_TYPE.play_end
+//                    }
+                    
+                    toSelectTime(key: key, selected: row.value, delegate: self)
+                } else if cell_type == TO_ARENA {
+        
+                    var city: Int? = nil
+                    var row = getRowFromKey(CITY_KEY)
+                    city = Int(row.value)
+//                    if let value: String = row["value"] as? String {
+//                        city = Int(value)
+    //                    if (city != nil) {
+    //                        citys.append(city!)
+    //                    }
+//                    }
+                    
+                    if (city == nil) {
+                        warning("請先選擇縣市")
+                    } else {
+                    
+                        //取得選擇球館的代號
+                        row = getRowFromKey(ARENA_KEY)
+                        let selected: String = row.value
+                        toSelectArena(key: key, city: city!, selected: selected, delegate: self)
+                    }
+                } else if (cell_type == TO_SELECT_DEGREE) {
+                    
+                    let tmps: [String] = valueToArray(t: String.self, value: row.value)
+                    var selecteds: [DEGREE] = [DEGREE]()
+                    for tmp in tmps {
+                        selecteds.append(DEGREE.enumFromString(string: tmp))
+                    }
+                    toSelectDegree(selecteds: selecteds, delegate: self)
+                } else {
+                    //performSegue(withIdentifier: segue, sender: indexPath)
                 }
             } else {
-                cell.editText.becomeFirstResponder()
+                //cell.editText.becomeFirstResponder()
             }
         } else if (selectedTagIdx == 0 || selectedTagIdx == 2) {
             if mysTable != nil {
@@ -363,22 +392,22 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func singleSelected(key: String, selected: String, show: String?=nil) {
         
-        var row = getDefinedRow(key)
+        let row = getRowFromKey(key)
         var _show = ""
         if key == START_TIME_KEY || key == END_TIME_KEY {
-            row["value"] = selected
+            row.value = selected
             _show = selected.noSec()
         } else if (key == CITY_KEY || key == AREA_KEY) {
-            row["value"] = selected
+            row.value = selected
             _show = Global.instance.zoneIDToName(Int(selected)!)
         } else if (key == ARENA_KEY) {
-            row["value"] = selected
+            row.value = selected
             if (show != nil) {
                 _show = show!
             }
         }
-        row["show"] = _show
-        replaceRows(key, row)
+        row.show = _show
+        //replaceRows(key, row)
         tableView.reloadData()
     }
     
@@ -439,7 +468,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         let sectionIdx = indexPath.section
         var idx: Int = 0
         for i in 0...sectionIdx-1 {
-            idx += searchSections[i].items.count
+            idx += searchSections1[i].items.count
         }
         let rowIdx = indexPath.row
         idx += rowIdx
@@ -495,11 +524,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         var indexPaths: [IndexPath] = [IndexPath]()
         
 //        let key: String = getSectionKey(idx: section)
-        let searchSection: ExpandableItems = searchSections[section]
+        let searchSection: SearchSection = searchSections1[section]
         var isExpanded = searchSection.isExpanded
-        searchSections[section].isExpanded = !isExpanded
+        searchSections1[section].isExpanded = !isExpanded
         
-        let items: [String] = searchSection.items
+        let items: [SearchRow] = searchSection.items
         //let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
         //indexPaths.append(IndexPath(row: 0, section: 1))
         //indexPaths.append(IndexPath(row: 1, section: 1))
