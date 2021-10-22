@@ -1265,6 +1265,8 @@ class DataService {
     
     func getArenaByCityID(city_id: Int, completion: @escaping CompletionHandler) {
         let body: [String: Any] = ["device": "app", "city": city_id]
+//        print(URL_ARENA_BY_CITY_ID)
+//        print(body)
         Alamofire.request(URL_ARENA_BY_CITY_ID, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
             if response.result.error == nil {
                 guard let data = response.result.value else {

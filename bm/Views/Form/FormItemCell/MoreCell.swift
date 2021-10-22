@@ -63,6 +63,14 @@ class MoreCell: FormItemCell {
         promptBtn.isHidden = true
     }
     
+    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+        
+        titleLbl!.text = row.title
+        detailLbl.text = row.show
+        
+        promptBtn.isHidden = true
+    }
+    
     override func update(with formItem: FormItem) {
         self.formItem = formItem
         

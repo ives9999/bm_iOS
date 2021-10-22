@@ -27,23 +27,23 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     var isFeaturedChange: Bool = false
     
     var testData: [String: String] = [
-//        EMAIL_KEY: "john@housetube.tw",
-//        PASSWORD_KEY: "1234",
-//        REPASSWORD_KEY: "1234",
-//        NAME_KEY: "孫士君",
-//        NICKNAME_KEY: "孫世君",
-//        DOB_KEY: "1969-01-05",
-//        MOBILE_KEY: "0911299998",
-//        TEL_KEY: "062295888",
-//        CITY_ID_KEY: "218",
-//        "city_name": "台南市",
-//        AREA_ID_KEY: "219",
-//        "area_name": "中西區",
-//        ROAD_KEY: "南華街101號8樓",
-//        FB_KEY: "https://www.facebook.com/ives.sun",
-//        LINE_KEY: "ives9999"
-        :]
-    //]
+        EMAIL_KEY: "john@housetube.tw",
+        PASSWORD_KEY: "1234",
+        REPASSWORD_KEY: "1234",
+        NAME_KEY: "孫士君",
+        NICKNAME_KEY: "孫世君",
+        DOB_KEY: "1969-01-05",
+        MOBILE_KEY: "0911299998",
+        TEL_KEY: "062295888",
+        CITY_KEY: "218",
+        "city_name": "台南市",
+        AREA_KEY: "219",
+        "area_name": "中西區",
+        ROAD_KEY: "南華街101號8樓",
+        FB_KEY: "https://www.facebook.com/ives.sun",
+        LINE_KEY: "ives9999"
+        //:]
+    ]
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -60,78 +60,159 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         tableView.rowHeight = UITableView.automaticDimension
         
         hideKeyboardWhenTappedAround()
-        FormItemCellType.registerCell(for: tableView)
+        //FormItemCellType.registerCell(for: tableView)
+        
+        let moreCellNib = UINib(nibName: "MoreCell", bundle: nil)
+        tableView.register(moreCellNib, forCellReuseIdentifier: "moreCell")
+        
+        let textFieldCellNib = UINib(nibName: "TextFieldCell", bundle: nil)
+        tableView.register(textFieldCellNib, forCellReuseIdentifier: "textFieldCell")
         
         initData()
     }
     
     func initData() {
         
-        if Member.instance.isLoggedIn {
-            form.removeItems(keys: [PASSWORD_KEY, REPASSWORD_KEY, PRIVACY_KEY])
-            form.formItems.remove(at: form.formItems.count - 1)
-            sections = form.getSections()
-            section_keys = form.getSectionKeys()
-            
-            var keys: [String] = [String]()
-            for formItem in form.formItems {
-                if formItem.name != nil {
-                    keys.append(formItem.name!)
-                }
-            }
-            
-            member_token = Member.instance.token
-            for key in keys {
-                var value: String = ""
-                if let tmp = session.string(forKey: key) {
-                    value = tmp
-                }
-                
-                let formItem = getFormItemFromKey(key)
-                if formItem != nil {
-                    if key == AREA_KEY {
-                        let cityFormItem: CityFormItem = (getFormItemFromKey(CITY_KEY) as? CityFormItem)!
-                        let areaFormItem: AreaFormItem = (formItem as? AreaFormItem)!
-                        areaFormItem.city_id = Int(cityFormItem.value!)
-                    }
-                    formItem!.value = value
-                    formItem!.make()
-                }
-                
-                
-//                let data = Member.instance.getData(key: key)
-//                if Member.instance.info[key] != nil {
-//                    let types: [String: String] = Member.instance.info[key]!
-//                    let type: String = types["type"]!
-//                    var value: String = ""
-//                    if type == "String" {
-//                        value = data as! String
-//                    } else if type == "Int" {
-//                        value = String(data as! Int)
-//                    }
-//
-//                }
-            }
-            old_selected_city = String(Member.instance.city)
-            if Member.instance.avatar.count > 0 {
-                featuredView.setPickedImage(url: Member.instance.avatar)
-            }
-        } else {
-            if testData.count > 0 {
-                for (key, value) in testData {
-                    let formItem = getFormItemFromKey(key)
-                    if formItem != nil {
-                        if key == AREA_KEY && testData.keyExist(key: "area_name") {
-                            let _formItem = formItem as! AreaFormItem
-                            _formItem.selected_area_names = [testData["area_name"]!]
-                        }
-                        formItem!.value = value
-                        formItem!.make()
-                    }
-                }
-                old_selected_city = testData[CITY_KEY] ?? ""
-            }
+        var rows: [OneRow] = [OneRow]()
+        var row: OneRow = OneRow(title: "EMail", value: Member.instance.email, show: Member.instance.email, key: EMAIL_KEY, cell: "textField", keyboard: KEYBOARD.emailAddress, placeholder: "service@bm.com")
+        row.msg = "EMail沒有填寫"
+        rows.append(row)
+        if (!Member.instance.isLoggedIn) {
+            row = OneRow(title: "密碼", value: "", show: "", key: PASSWORD_KEY, cell: "password")
+            row.msg = "密碼沒有填寫"
+            rows.append(row)
+            row = OneRow(title: "密碼確認", value: "", show: "", key: REPASSWORD_KEY, cell: "password")
+            row.msg = "密碼確認沒有填寫"
+            rows.append(row)
         }
+        
+        var section: OneSection = makeSectionRow(title: "登入資料", key: "login", rows: rows)
+        oneSections.append(section)
+        
+        rows.removeAll()
+        row = OneRow(title: "姓名", value: Member.instance.name, show: Member.instance.name, key: NAME_KEY, cell: "textField", placeholder: "王大明")
+        row.msg = "姓名沒有填寫"
+        rows.append(row)
+        row = OneRow(title: "暱稱", value: Member.instance.nickname, show: Member.instance.nickname, key: NICKNAME_KEY, cell: "textField", placeholder: "大明哥")
+        row.msg = "暱稱沒有填寫"
+        rows.append(row)
+        row = OneRow(title: "生日", value: Member.instance.dob, show: Member.instance.dob, key: DOB_KEY, cell: "more")
+        rows.append(row)
+        row = OneRow(title: "性別", value: Member.instance.sex, show: Member.instance.sex, key: SEX_KEY, cell: "sex")
+        row.msg = "沒有選擇性別"
+        rows.append(row)
+        section = makeSectionRow(title: "個人資料", key: "data", rows: rows)
+        oneSections.append(section)
+        
+        rows.removeAll()
+        row = OneRow(title: "行動電話", value: Member.instance.mobile, show: Member.instance.mobile, key: MOBILE_KEY, cell: "textField", placeholder: "0939123456")
+        row.msg = "行動電話沒有填寫"
+        rows.append(row)
+        row = OneRow(title: "市內電話", value: Member.instance.tel, show: Member.instance.tel, key: TEL_KEY, cell: "textField", placeholder: "021234567")
+        rows.append(row)
+        row = OneRow(title: "縣市", value: String(Member.instance.city), show: Global.instance.zoneIDToName(Member.instance.city), key: CITY_KEY, cell: "more")
+        row.msg = "沒有選擇縣市"
+        rows.append(row)
+        row = OneRow(title: "區域", value: String(Member.instance.area), show: Global.instance.zoneIDToName(Member.instance.area), key: AREA_KEY, cell: "more")
+        row.msg = "沒有選擇區域"
+        rows.append(row)
+        row = OneRow(title: "住址", value: Member.instance.road, show: Member.instance.road, key: ROAD_KEY, cell: "textField", placeholder: "中山路60號")
+        row.msg = "沒有填寫住址"
+        rows.append(row)
+        section = makeSectionRow(title: "聯絡資料", key: "login", rows: rows)
+        oneSections.append(section)
+        
+        rows.removeAll()
+        row = OneRow(title: "FB", value: Member.instance.fb, show: Member.instance.fb, key: FB_KEY, cell: "textField")
+        rows.append(row)
+        row = OneRow(title: "Line", value: Member.instance.line, show: Member.instance.line, key: LINE_KEY, cell: "textField")
+        rows.append(row)
+        section = makeSectionRow(title: "社群資料", key: "login", rows: rows)
+        oneSections.append(section)
+        
+        if (!Member.instance.isLoggedIn) {
+            rows.removeAll()
+            row = OneRow(title: "隱私權", value: "true", show: "同意隱私權條款", key: PRIVACY_KEY, cell: "privacy")
+            rows.append(row)
+            section = makeSectionRow(title: "隱私權", key: PRIVACY_KEY, rows: rows)
+            oneSections.append(section)
+        }
+        
+        old_selected_city = String(Member.instance.city)
+        if Member.instance.avatar.count > 0 {
+            featuredView.setPickedImage(url: Member.instance.avatar)
+        }
+        
+        for (key, value) in testData {
+            let row: OneRow = getOneRowFromKey(key)
+            row.value = value
+        }
+        
+//        if Member.instance.isLoggedIn {
+//            form.removeItems(keys: [PASSWORD_KEY, REPASSWORD_KEY, PRIVACY_KEY])
+//            form.formItems.remove(at: form.formItems.count - 1)
+//            sections = form.getSections()
+//            section_keys = form.getSectionKeys()
+//
+//            var keys: [String] = [String]()
+//            for formItem in form.formItems {
+//                if formItem.name != nil {
+//                    keys.append(formItem.name!)
+//                }
+//            }
+//
+//            member_token = Member.instance.token
+//            for key in keys {
+//                var value: String = ""
+//                if let tmp = session.string(forKey: key) {
+//                    value = tmp
+//                }
+//
+//                let formItem = getFormItemFromKey(key)
+//                if formItem != nil {
+//                    if key == AREA_KEY {
+//                        let cityFormItem: CityFormItem = (getFormItemFromKey(CITY_KEY) as? CityFormItem)!
+//                        let areaFormItem: AreaFormItem = (formItem as? AreaFormItem)!
+//                        areaFormItem.city_id = Int(cityFormItem.value!)
+//                    }
+//                    formItem!.value = value
+//                    formItem!.make()
+//                }
+//
+//
+////                let data = Member.instance.getData(key: key)
+////                if Member.instance.info[key] != nil {
+////                    let types: [String: String] = Member.instance.info[key]!
+////                    let type: String = types["type"]!
+////                    var value: String = ""
+////                    if type == "String" {
+////                        value = data as! String
+////                    } else if type == "Int" {
+////                        value = String(data as! Int)
+////                    }
+////
+////                }
+//            }
+//            old_selected_city = String(Member.instance.city)
+//            if Member.instance.avatar.count > 0 {
+//                featuredView.setPickedImage(url: Member.instance.avatar)
+//            }
+//        } else {
+//            if testData.count > 0 {
+//                for (key, value) in testData {
+//                    let formItem = getFormItemFromKey(key)
+//                    if formItem != nil {
+//                        if key == AREA_KEY && testData.keyExist(key: "area_name") {
+//                            let _formItem = formItem as! AreaFormItem
+//                            _formItem.selected_area_names = [testData["area_name"]!]
+//                        }
+//                        formItem!.value = value
+//                        formItem!.make()
+//                    }
+//                }
+//                old_selected_city = testData[CITY_KEY] ?? ""
+//            }
+//        }
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -146,34 +227,38 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //print("section:\(indexPath.section)=>row:\(indexPath.row)")
-        let item = getFormItemFromIdx(indexPath)
-        let cell: UITableViewCell
-        if item != nil {
-            if let cellType = item!.uiProperties.cellType {
-                cell = cellType.dequeueCell(for: tableView, at: indexPath)
-            } else {
-                cell = UITableViewCell()
-            }
+        let row = getOneRowFromIdx(sectionIdx: indexPath.section, rowIdx: indexPath.row)
+        //let item = getFormItemFromIdx(indexPath)
+        //let cell: UITableViewCell
+        let cell_type: String = row.cell
+        if (cell_type == "textField") {
             
-            if let formUpdatableCell = cell as? FormUPdatable {
-                item!.indexPath = indexPath
-                formUpdatableCell.update(with: item!)
-            }
-            
-            if item!.uiProperties.cellType == FormItemCellType.textField ||
-                item!.uiProperties.cellType == FormItemCellType.sex ||
-                item!.uiProperties.cellType == FormItemCellType.privacy
-            {
-                if let formCell = cell as? FormItemCell {
-                    formCell.valueDelegate = self
-                }
-            }
-            
-        } else {
-            cell = UITableViewCell()
+        } else if (cell_type == "more") {
+            let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as! MoreCell
+            cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+            return cell
         }
+//        if let cellType = item!.uiProperties.cellType {
+//            cell = cellType.dequeueCell(for: tableView, at: indexPath)
+//        } else {
+//            cell = UITableViewCell()
+//        }
         
-        return cell
+//        if let formUpdatableCell = cell as? FormUPdatable {
+//            item!.indexPath = indexPath
+//            formUpdatableCell.update(with: item!)
+//        }
+        
+//        if item!.uiProperties.cellType == FormItemCellType.textField ||
+//            item!.uiProperties.cellType == FormItemCellType.sex ||
+//            item!.uiProperties.cellType == FormItemCellType.privacy
+//        {
+//            if let formCell = cell as? FormItemCell {
+//                formCell.valueDelegate = self
+//            }
+//        }
+        
+        return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

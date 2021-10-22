@@ -322,6 +322,7 @@
 		F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */; };
 		F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB841F9895C300DDEC86 /* CoachVC.swift */; };
 		F9FAB2B6271EFD8100D83CC4 /* SearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */; };
+		F9FAB2B82721643000D83CC4 /* OneRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAB2B72721643000D83CC4 /* OneRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -713,6 +714,7 @@
 		F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		F9A1CB841F9895C300DDEC86 /* CoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachVC.swift; sourceTree = "<group>"; };
 		F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRow.swift; sourceTree = "<group>"; };
+		F9FAB2B72721643000D83CC4 /* OneRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1306,6 +1308,7 @@
 			isa = PBXGroup;
 			children = (
 				F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */,
+				F9FAB2B72721643000D83CC4 /* OneRow.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -1835,6 +1838,7 @@
 				B36CBD5920E13F7A00E52B9C /* TempPlayDatePlayerCell.swift in Sources */,
 				B3ED38F01FB9AD460003F083 /* ArenaSelectVC.swift in Sources */,
 				B323390A21B6B8E4003EB84D /* FormItem.swift in Sources */,
+				F9FAB2B82721643000D83CC4 /* OneRow.swift in Sources */,
 				B3756EDA21B8E50E006893E1 /* WeekdayCell.swift in Sources */,
 				B3A2541825722C5C004B8A03 /* ManagersFormItem.swift in Sources */,
 				B3E8C29E220715430008ED25 /* SuperScrollView.swift in Sources */,

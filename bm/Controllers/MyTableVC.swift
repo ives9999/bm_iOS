@@ -12,13 +12,16 @@ class MyTableVC: BaseViewController, List1CellDelegate {
 
     var sections: [String]?
     var searchSections: [ExpandableItems] = [ExpandableItems]()
-    var searchSections1: [SearchSection] = [SearchSection]()
     
     var mySections: [[String: Any]] = [[String: Any]]()
     var myRows: [[String: Any]] = [[String: Any]]()
     
     var section_keys: [[String]] = [[String]]()
     var rows:[[Dictionary<String, Any>]]?
+    
+    var searchSections1: [SearchSection] = [SearchSection]()
+    var oneSections: [OneSection] = [OneSection]()
+    
     internal var myTablView: UITableView!
     var frameWidth: CGFloat!
     var frameHeight: CGFloat!
@@ -155,6 +158,13 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         return s
     }
     
+    func makeSectionRow(title: String, key: String, rows: [OneRow], isExpanded: Bool=true)-> OneSection {
+
+        let s: OneSection = OneSection(title: title, key: key, isExpanded: isExpanded)
+        s.items.append(contentsOf: rows)
+        return s
+    }
+    
     override func prepareParams(city_type: String="simple") {
         params = [String: Any]()
         for row in searchRows {
@@ -248,8 +258,24 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         return SearchRow()
     }
     
+    func getOneRowFromKey(_ key: String)-> OneRow {
+
+        for section in oneSections {
+            for row in section.items {
+                if (row.key == key ) {
+                    return row
+                }
+            }
+        }
+        return OneRow()
+    }
+    
     func getRowFromIdx(sectionIdx: Int, rowIdx: Int)-> SearchRow {
         return searchSections1[sectionIdx].items[rowIdx]
+    }
+    
+    func getOneRowFromIdx(sectionIdx: Int, rowIdx: Int)-> OneRow {
+        return oneSections[sectionIdx].items[rowIdx]
     }
 
     func replaceRows(_ key: String, _ row: [String: Any]) {

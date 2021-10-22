@@ -52,6 +52,20 @@ class TextFieldCell: FormItemCell {
         self.formItem = formItem
     }
     
+    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+        
+        titleLbl!.text = row.title
+        textField.text = row.show
+        
+        textField.placeholder(row.placeholder)
+        //textField.keyboardType = row.keyboard.rawValue
+        //textField.tintColor = _formItem.uiProperties.tintColor
+        //promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
+        requiredImageView.isHidden = !row.isRequired
+        
+        promptBtn.isHidden = true
+    }
+    
     @IBAction func textFieldDidChange(_ textField: UITextField) {
         if let _formItem = formItem as? TextFieldFormItem {
             if self.valueDelegate != nil {

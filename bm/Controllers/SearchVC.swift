@@ -8,6 +8,7 @@
 
 import UIKit
 import SCLAlertView
+import CryptoSwift
 
 class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
@@ -332,44 +333,30 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                     } else if (key == WEEKDAY_KEY) {
                         let selecteds: [Int] = valueToArray(t: Int.self, value: row.value)
                         toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
+                    } else if (key == START_TIME_KEY) {
+                        toSelectTime(key: key, selected: row.value, delegate: self)
+                    } else if (key == ARENA_KEY) {
+                        let row1: SearchRow = getRowFromKey(CITY_KEY)
+                        var city_id: Int = 0
+                        
+                        if (row1.value.count > 0) {
+                            if let tmp: Int = Int(row1.value) {
+                                city_id = tmp
+                            }
+                        }
+                        if (city_id <= 0) {
+                            warning("請先選擇縣市")
+                        } else {
+                            toSelectArena(key: key, city: city_id, selected: row.value, delegate: self)
+                        }
+                    } else if (key == DEGREE_KEY) {
+                        let tmps: [String] = valueToArray(t: String.self, value: row.value)
+                        var selecteds: [DEGREE] = [DEGREE]()
+                        for tmp in tmps {
+                            selecteds.append(DEGREE.enumFromString(string: tmp))
+                        }
+                        toSelectDegree(selecteds: selecteds, delegate: self)
                     }
-                } else if (cell_type == START_TIME_KEY) {
-                    
-//                    var type: SELECT_TIME_TYPE = SELECT_TIME_TYPE.play_start
-//                    if (key == END_TIME_KEY) {
-//                        type = SELECT_TIME_TYPE.play_end
-//                    }
-                    
-                    toSelectTime(key: key, selected: row.value, delegate: self)
-                } else if cell_type == TO_ARENA {
-        
-                    var city: Int? = nil
-                    var row = getRowFromKey(CITY_KEY)
-                    city = Int(row.value)
-//                    if let value: String = row["value"] as? String {
-//                        city = Int(value)
-    //                    if (city != nil) {
-    //                        citys.append(city!)
-    //                    }
-//                    }
-                    
-                    if (city == nil) {
-                        warning("請先選擇縣市")
-                    } else {
-                    
-                        //取得選擇球館的代號
-                        row = getRowFromKey(ARENA_KEY)
-                        let selected: String = row.value
-                        toSelectArena(key: key, city: city!, selected: selected, delegate: self)
-                    }
-                } else if (cell_type == TO_SELECT_DEGREE) {
-                    
-                    let tmps: [String] = valueToArray(t: String.self, value: row.value)
-                    var selecteds: [DEGREE] = [DEGREE]()
-                    for tmp in tmps {
-                        selecteds.append(DEGREE.enumFromString(string: tmp))
-                    }
-                    toSelectDegree(selecteds: selecteds, delegate: self)
                 } else {
                     //performSegue(withIdentifier: segue, sender: indexPath)
                 }
@@ -438,7 +425,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func setDegreeData(res: [DEGREE]) {
         
-        var row = getDefinedRow(DEGREE_KEY)
+        let row = getRowFromKey(DEGREE_KEY)
         var names: [String] = [String]()
         var values: [String] = [String]()
         if res.count > 0 {
@@ -446,13 +433,13 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 names.append(degree.rawValue)
                 values.append(DEGREE.DBValue(degree))
             }
-            row["show"] = names.joined(separator: ",")
-            row["value"] = values.joined(separator: ",")
+            row.show = names.joined(separator: ",")
+            row.value = values.joined(separator: ",")
         } else {
-            row["show"] = "全部"
-            row["value"] = ""
+            row.show = "全部"
+            row.value = ""
         }
-        replaceRows(DEGREE_KEY, row)
+        //replaceRows(DEGREE_KEY, row)
         tableView.reloadData()
     }
     
