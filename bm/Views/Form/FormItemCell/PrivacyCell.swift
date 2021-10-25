@@ -36,9 +36,20 @@ class PrivacyCell: FormItemCell {
 
     override func update(with formItem: FormItem) {}
     
+    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+        self.oneRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
+        privacy.addTarget(self, action: #selector(checkboxValueChanged(sender:)), for: .valueChanged)
+    }
+    
     @objc func checkboxValueChanged(sender: Checkbox) {
         if valueDelegate != nil {
             valueDelegate?.privacyChecked(checked: sender.isChecked)
+        }
+        
+        if (cellDelegate != nil) {
+            cellDelegate!.cellPrivacyChanged(sectionIdx: sectionIdx, rowIdx: rowIdx, checked: sender.isChecked)
         }
         //checked is t, unchecked is f.
         //print("privacy value change: \(sender.isChecked)")

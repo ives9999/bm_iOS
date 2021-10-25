@@ -145,6 +145,77 @@ class TagCell: FormItemCell {
         containViewHeight.constant = height
     }
     
+    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+        
+        self.oneRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
+        
+        requiredImageView.isHidden = !row.isRequired
+        titleLbl!.text = row.title
+        
+        let columnNum: Int = 3
+        var rowNum: Int = 0
+        
+        let attributes: [String] = row.show.components(separatedBy: ",")
+        var count: Int = attributes.count
+//        if let _formItem: TagFormItem = formItem as? TagFormItem {
+//
+//            if count == 0 {
+//                tagDicts = _formItem.tags!
+//            }
+//        }
+        var res = count.quotientAndRemainder(dividingBy: columnNum)
+        rowNum = (res.remainder >= 0) ? res.quotient + 1 : res.quotient
+        
+        count = 0
+        for (_, attribute) in attributes.enumerated() {
+            let tag: Tag = Tag()
+            containerView.addSubview(tag)
+            tag.tag = count
+            tag.key = row.key
+            tag.value = attribute
+            tag.text = attribute
+            
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+            tag.addGestureRecognizer(gestureRecognizer)
+            tagLabels.append(tag)
+            
+            res = count.quotientAndRemainder(dividingBy: column)
+            setMargin(block: tag, row_count: res.quotient + 1, column_count: res.remainder + 1)
+            count = count + 1
+            
+//            for (key, value) in tagDict {
+                
+                
+                
+//                if let _formItem: TagFormItem = formItem as? TagFormItem {
+//                    for idx in _formItem.selected_idxs {
+//                        if count == idx {
+//                            tag.selected = true
+//                            tag.setSelectedStyle()
+//                        }
+//                    }
+//                }
+                
+                
+                
+                //tag.backgroundColor = UIColor.red
+                
+                //print(res)
+                
+//                break
+//            }
+        }
+        
+        var height: CGFloat = 70
+        if count > 0 {
+            let marginCount: Int = (rowNum == 1) ? 2 : rowNum*2-1
+            height = CGFloat(rowNum)*labelHeight + CGFloat(marginCount)*vericalMergin
+        }
+        containViewHeight.constant = height
+    }
+    
     //    (1, 1)  (1, 2)  (1, 3)
     //    (2, 1)  (2, 2)  (2, 3)
     //    (3, 1)  (3, 2)  (3, 3)
@@ -188,6 +259,10 @@ class TagCell: FormItemCell {
         
         if (baseViewControllerDelegate != nil) {
             baseViewControllerDelegate!.setTag(sectionKey: sectionKey, rowKey: alias, attribute: tag.key!, selected: tag.selected)
+        }
+        
+        if (cellDelegate != nil) {
+            cellDelegate!.cellSetTag(sectionIdx: sectionIdx, rowIdx: rowIdx, value: tag.value, isChecked: tag.selected)
         }
     }
     

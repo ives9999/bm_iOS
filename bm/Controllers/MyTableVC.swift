@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MyTableVC: BaseViewController, List1CellDelegate {
+class MyTableVC: BaseViewController {
 
     var sections: [String]?
     var searchSections: [ExpandableItems] = [ExpandableItems]()
@@ -258,6 +258,10 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         return SearchRow()
     }
     
+    func getOneRowFromIdx(_ sectionIdx: Int, _ rowIdx: Int) -> OneRow {
+        return oneSections[sectionIdx].items[rowIdx]
+    }
+    
     func getOneRowFromKey(_ key: String)-> OneRow {
 
         for section in oneSections {
@@ -270,12 +274,27 @@ class MyTableVC: BaseViewController, List1CellDelegate {
         return OneRow()
     }
     
+    func getOneRowValue(_ rowKey: String)-> String {
+        let row = getOneRowFromKey(rowKey)
+        return row.value
+    }
+    
     func getRowFromIdx(sectionIdx: Int, rowIdx: Int)-> SearchRow {
         return searchSections1[sectionIdx].items[rowIdx]
     }
     
     func getOneRowFromIdx(sectionIdx: Int, rowIdx: Int)-> OneRow {
         return oneSections[sectionIdx].items[rowIdx]
+    }
+    
+    func getOneRowsFromSectionKey(_ sectionKey: String)-> [OneRow] {
+        for section in oneSections {
+            if (section.key == sectionKey) {
+                return section.items
+            }
+        }
+        
+        return [OneRow]()
     }
 
     func replaceRows(_ key: String, _ row: [String: Any]) {
@@ -419,7 +438,7 @@ class MyTableVC: BaseViewController, List1CellDelegate {
 //        }
     }
     
-    func cellCity(row: Table) {
+    override func cellCity(row: Table) {
         let key: String = CITY_KEY
         let city_id: Int = row.city_id
         var row = getDefinedRow(key)
@@ -819,7 +838,7 @@ extension MyTableVC: UITableViewDataSource {
         headerView.tag = section
         
         let titleLabel = UILabel()
-        titleLabel.text = sections?[section]
+        titleLabel.text = oneSections[section].title
         titleLabel.textColor = UIColor.black
         titleLabel.sizeToFit()
         titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: 34)
@@ -833,6 +852,7 @@ extension MyTableVC: UITableViewDataSource {
         headerView.addGestureRecognizer(gesture)
         
         return headerView
+        //return UIView()
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -842,7 +862,7 @@ extension MyTableVC: UITableViewDataSource {
 //    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //        let view = UITableViewHeaderFooterView()
 //        view.backgroundColor = UIColor.white
-//        
+//
 //        return view
 //    }
     

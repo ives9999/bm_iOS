@@ -12,7 +12,8 @@ import Reachability
 import WebKit
 import SCLAlertView
 
-class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate, DegreeSelectDelegate, EditCellDelegate, ContentEditDelegate {
+class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate, DegreeSelectDelegate, EditCellDelegate, ContentEditDelegate, List1CellDelegate {
+    
     
     //var baseVC: BaseViewController
     
@@ -87,6 +88,13 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func textFieldDidChange(sectionKey: String, rowKey: String, text: String){}
     //for RadioCell delegate
     func radioDidChange(sectionKey: String, rowKey: String, checked: Bool){}
+    
+    func cellCity(row: Table) {}
+    func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String) {}
+    func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {}
+    func cellPrivacyChanged(sectionIdx: Int, rowIdx: Int, checked: Bool) {}
+    func cellSetTag(sectionIdx: Int, rowIdx: Int, value: String, isChecked: Bool) {}
+    func cellNumberChanged(sectionIdx: Int, rowIdx: Int, number: Int) {}
     
 //    var wheels: Int = 0
 //    required init() {}

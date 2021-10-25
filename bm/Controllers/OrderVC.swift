@@ -314,6 +314,29 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             ["key":MEMO_KEY, "rows": memoRows]
         ]
         
+        var amount: Int = 0
+        var row: [OneRow] = [OneRow]()
+        
+        for cartItemTable in cartItemsTable {
+            
+            cartItemTable.filterRow()
+            amount += cartItemTable.amount
+            productTable = cartItemTable.product
+            
+            var attribute_text: String = ""
+            if (cartItemTable.attributes.count > 0) {
+                
+                for (idx, attribute) in cartItemTable.attributes.enumerated() {
+                    attribute_text += attribute["name"]! + ":" + attribute["value"]!
+                    if (idx < cartItemTable.attributes.count - 1) {
+                        attribute_text += " | "
+                    }
+                }
+            }
+            
+            let row = OneRow(title: <#T##String#>, value: <#T##String#>, show: <#T##String#>, key: <#T##String#>, cell: <#T##String#>, keyboard: <#T##KEYBOARD#>, placeholder: <#T##String#>, isRequired: <#T##Bool#>, isClear: <#T##Bool#>, accessory: <#T##UITableViewCell.AccessoryType#>)
+        }
+        
 //        form = OrderForm(type: self.productTable!.type)
 //        section_keys = form.getSectionKeys()
 //        sections = form.getSections()

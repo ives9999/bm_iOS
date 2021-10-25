@@ -12,6 +12,10 @@ class FormItemCell: SuperCell, FormUPdatable {
     
     var formItem: FormItem?
     var valueDelegate: ValueChangedDelegate?
+    var cellDelegate: List1CellDelegate?
+    var oneRow: OneRow = OneRow()
+    var sectionIdx: Int = 0
+    var rowIdx: Int = 0
     
     @IBOutlet weak var titleLbl: SuperLabel?
     @IBOutlet weak var clearBtn: UIButton!

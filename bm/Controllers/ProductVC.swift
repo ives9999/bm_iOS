@@ -87,6 +87,7 @@ class ProductVC: MyTableVC {
                 row!.filterRow()
                 //row!.printRow()
             
+                cell.cellDelegate = self
                 cell.updateViews(row!)
             }
             return cell

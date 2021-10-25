@@ -18,6 +18,7 @@ class TextFieldCell: FormItemCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = UIColor.clear
     }
     
     func update(sectionKey: String, rowKey: String, title: String, value: String, keyboard: String="default") {
@@ -54,12 +55,17 @@ class TextFieldCell: FormItemCell {
     
     func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
         
+        self.oneRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
+        
         titleLbl!.text = row.title
         textField.text = row.show
         
         textField.placeholder(row.placeholder)
-        //textField.keyboardType = row.keyboard.rawValue
-        //textField.tintColor = _formItem.uiProperties.tintColor
+        textField.keyboardType = row.keyboard.enumToSwift()
+        //textField.backgroundColor = UIColor.clear
+        textField.tintColor = UIColor.red
         //promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
         requiredImageView.isHidden = !row.isRequired
         
@@ -75,6 +81,10 @@ class TextFieldCell: FormItemCell {
         
         if (baseViewControllerDelegate != nil) {
             baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: textField.text!)
+        }
+        
+        if (cellDelegate != nil) {
+            cellDelegate!.cellTextChanged(sectionIdx: sectionIdx, rowIdx: rowIdx, str: textField.text!)
         }
     }
     

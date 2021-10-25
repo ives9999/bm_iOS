@@ -60,6 +60,21 @@ class SexCell: FormItemCell {
 //        }
     }
     
+    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+        
+        self.oneRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
+        requiredImageView.isHidden = !row.isRequired
+        if row.value == "M" {
+            male.isChecked = true
+            female.isChecked = false
+        } else {
+            male.isChecked = false
+            female.isChecked = true
+        }
+    }
+    
     @objc func maleValueChanged(sender: Checkbox) {
         
         if sender.isChecked {
@@ -69,7 +84,12 @@ class SexCell: FormItemCell {
             female.isChecked = true
             self.checked = "F"
         }
-        valueDelegate!.sexChanged(sex: self.checked)
+        
+        if (cellDelegate != nil) {
+            cellDelegate!.cellSexChanged(key: oneRow.key, sectionIdx: sectionIdx, rowIdx: rowIdx, sex: self.checked)
+        }
+        //valueDelegate!.sexChanged(sex: self.checked)
+        
 //        if myDelegate != nil {
 //            myDelegate?.sexValueChanged(sex: self.checked)
 //        }
@@ -84,7 +104,11 @@ class SexCell: FormItemCell {
             male.isChecked = true
             self.checked = "M"
         }
-        valueDelegate!.sexChanged(sex: self.checked)
+        
+        if (cellDelegate != nil) {
+            cellDelegate!.cellSexChanged(key: oneRow.key, sectionIdx: sectionIdx, rowIdx: rowIdx, sex: self.checked)
+        }
+        //valueDelegate!.sexChanged(sex: self.checked)
 //        if myDelegate != nil {
 //            myDelegate?.sexValueChanged(sex: self.checked)
 //        }

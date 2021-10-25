@@ -792,6 +792,21 @@ enum KEYBOARD: String {
             return UIKeyboardType.default
         }
     }
+    
+    func enumToSwift()-> UIKeyboardType {
+        switch self {
+        case .default:
+            return UIKeyboardType.default
+        case .emailAddress:
+            return UIKeyboardType.emailAddress
+        case .numberPad:
+            return UIKeyboardType.numberPad
+        case .URL:
+            return UIKeyboardType.URL
+        default:
+            return UIKeyboardType.default
+        }
+    }
 }
 
 let df : DateFormatter = {

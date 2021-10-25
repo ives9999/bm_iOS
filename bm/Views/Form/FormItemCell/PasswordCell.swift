@@ -39,6 +39,28 @@ class PasswordCell: TextFieldCell, UITextFieldDelegate {
         }
     }
     
+    override func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+        
+        self.oneRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
+        
+        titleLbl!.text = row.title
+        textField.text = row.value
+        
+        textField.placeholder(row.placeholder)
+        textField.keyboardType = row.keyboard.enumToSwift()
+        //textField.tintColor = _formItem.uiProperties.tintColor
+        requiredImageView.isHidden = !row.isRequired
+        
+        textField.delegate = self
+        
+        if row.value.count > 0 {
+            let p = textToStar(input: row.value)
+            textField.text = p
+        }
+    }
+    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
 //        print("textField.text: \(textField.text!)")
@@ -46,11 +68,12 @@ class PasswordCell: TextFieldCell, UITextFieldDelegate {
 //        print("string: \(string)")
 //        print("")
         
-        let _formItem = formItem as! PasswordFormItem
-        if _formItem.value == nil {
-            _formItem.value = ""
-        }
-        _formItem.value! += string
+        oneRow.value += string
+//        let _formItem = formItem as! PasswordFormItem
+//        if _formItem.value == nil {
+//            _formItem.value = ""
+//        }
+//        _formItem.value! += string
                 
         var p: String = ""
         if textField.text != nil && textField.text!.count > 0 {

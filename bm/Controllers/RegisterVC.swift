@@ -27,23 +27,23 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     var isFeaturedChange: Bool = false
     
     var testData: [String: String] = [
-        EMAIL_KEY: "john@housetube.tw",
-        PASSWORD_KEY: "1234",
-        REPASSWORD_KEY: "1234",
-        NAME_KEY: "孫士君",
-        NICKNAME_KEY: "孫世君",
-        DOB_KEY: "1969-01-05",
-        MOBILE_KEY: "0911299998",
-        TEL_KEY: "062295888",
-        CITY_KEY: "218",
-        "city_name": "台南市",
-        AREA_KEY: "219",
-        "area_name": "中西區",
-        ROAD_KEY: "南華街101號8樓",
-        FB_KEY: "https://www.facebook.com/ives.sun",
-        LINE_KEY: "ives9999"
-        //:]
-    ]
+//        EMAIL_KEY: "john@housetube.tw",
+//        PASSWORD_KEY: "1234",
+//        REPASSWORD_KEY: "1234",
+//        NAME_KEY: "孫士君",
+//        NICKNAME_KEY: "孫世君",
+//        DOB_KEY: "1969-01-05",
+//        MOBILE_KEY: "0911299998",
+//        TEL_KEY: "062295888",
+//        CITY_KEY: "218",
+//        "city_name": "台南市",
+//        AREA_KEY: "219",
+//        "area_name": "中西區",
+//        ROAD_KEY: "南華街101號8樓",
+//        FB_KEY: "https://www.facebook.com/ives.sun",
+//        LINE_KEY: "ives9999"
+        :]
+//    ]
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -56,8 +56,6 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         featuredView.gallery = imagePicker
         featuredView.delegate = self
         
-        tableView.estimatedRowHeight = 44
-        tableView.rowHeight = UITableView.automaticDimension
         
         hideKeyboardWhenTappedAround()
         //FormItemCellType.registerCell(for: tableView)
@@ -67,6 +65,18 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         
         let textFieldCellNib = UINib(nibName: "TextFieldCell", bundle: nil)
         tableView.register(textFieldCellNib, forCellReuseIdentifier: "textFieldCell")
+        
+        let dateCellNib = UINib(nibName: "DateCell", bundle: nil)
+        tableView.register(dateCellNib, forCellReuseIdentifier: "dateCell")
+        
+        let sexCellNib = UINib(nibName: "SexCell", bundle: nil)
+        tableView.register(sexCellNib, forCellReuseIdentifier: "sexCell")
+        
+        let privacyCellNib = UINib(nibName: "PrivacyCell", bundle: nil)
+        tableView.register(privacyCellNib, forCellReuseIdentifier: "privacyCell")
+        
+        let passwordCellNib = UINib(nibName: "PasswordCell", bundle: nil)
+        tableView.register(passwordCellNib, forCellReuseIdentifier: "passwordCell")
         
         initData()
     }
@@ -96,8 +106,12 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         row = OneRow(title: "暱稱", value: Member.instance.nickname, show: Member.instance.nickname, key: NICKNAME_KEY, cell: "textField", placeholder: "大明哥")
         row.msg = "暱稱沒有填寫"
         rows.append(row)
-        row = OneRow(title: "生日", value: Member.instance.dob, show: Member.instance.dob, key: DOB_KEY, cell: "more")
+        row = OneRow(title: "生日", value: Member.instance.dob, show: Member.instance.dob, key: DOB_KEY, cell: "date")
         rows.append(row)
+        
+        if (Member.instance.sex.count == 0) {
+            Member.instance.sex = "M"
+        }
         row = OneRow(title: "性別", value: Member.instance.sex, show: Member.instance.sex, key: SEX_KEY, cell: "sex")
         row.msg = "沒有選擇性別"
         rows.append(row)
@@ -105,10 +119,10 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         oneSections.append(section)
         
         rows.removeAll()
-        row = OneRow(title: "行動電話", value: Member.instance.mobile, show: Member.instance.mobile, key: MOBILE_KEY, cell: "textField", placeholder: "0939123456")
+        row = OneRow(title: "行動電話", value: Member.instance.mobile, show: Member.instance.mobile, key: MOBILE_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "0939123456")
         row.msg = "行動電話沒有填寫"
         rows.append(row)
-        row = OneRow(title: "市內電話", value: Member.instance.tel, show: Member.instance.tel, key: TEL_KEY, cell: "textField", placeholder: "021234567")
+        row = OneRow(title: "市內電話", value: Member.instance.tel, show: Member.instance.tel, key: TEL_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "021234567")
         rows.append(row)
         row = OneRow(title: "縣市", value: String(Member.instance.city), show: Global.instance.zoneIDToName(Member.instance.city), key: CITY_KEY, cell: "more")
         row.msg = "沒有選擇縣市"
@@ -123,9 +137,9 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         oneSections.append(section)
         
         rows.removeAll()
-        row = OneRow(title: "FB", value: Member.instance.fb, show: Member.instance.fb, key: FB_KEY, cell: "textField")
+        row = OneRow(title: "FB", value: Member.instance.fb, show: Member.instance.fb, key: FB_KEY, cell: "textField", isRequired: false)
         rows.append(row)
-        row = OneRow(title: "Line", value: Member.instance.line, show: Member.instance.line, key: LINE_KEY, cell: "textField")
+        row = OneRow(title: "Line", value: Member.instance.line, show: Member.instance.line, key: LINE_KEY, cell: "textField", isRequired: false)
         rows.append(row)
         section = makeSectionRow(title: "社群資料", key: "login", rows: rows)
         oneSections.append(section)
@@ -146,6 +160,11 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         for (key, value) in testData {
             let row: OneRow = getOneRowFromKey(key)
             row.value = value
+            if (key == CITY_KEY || key == AREA_KEY) {
+                row.show = Global.instance.zoneIDToName(Int(value)!)
+            } else {
+                row.show = value
+            }
         }
         
 //        if Member.instance.isLoggedIn {
@@ -219,9 +238,15 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         return 40
     }
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return oneSections.count
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print("section:\(section)=>row:\(section_keys[section].count)")
-        return section_keys[section].count
+        return oneSections[section].items.count
+        //return section_keys[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -232,9 +257,33 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         //let cell: UITableViewCell
         let cell_type: String = row.cell
         if (cell_type == "textField") {
-            
+            let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as! TextFieldCell
+            cell.cellDelegate = self
+            cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+            return cell
         } else if (cell_type == "more") {
             let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as! MoreCell
+            cell.cellDelegate = self
+            cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+            return cell
+        } else if (cell_type == "date") {
+            let cell: DateCell = tableView.dequeueReusableCell(withIdentifier: "dateCell", for: indexPath) as! DateCell
+            cell.cellDelegate = self
+            cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+            return cell
+        } else if (cell_type == "sex") {
+            let cell: SexCell = tableView.dequeueReusableCell(withIdentifier: "sexCell", for: indexPath) as! SexCell
+            cell.cellDelegate = self
+            cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+            return cell
+        } else if (cell_type == "privacy") {
+            let cell: PrivacyCell = tableView.dequeueReusableCell(withIdentifier: "privacyCell", for: indexPath) as! PrivacyCell
+            cell.cellDelegate = self
+            cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+            return cell
+        } else if (cell_type == "password") {
+            let cell: PasswordCell = tableView.dequeueReusableCell(withIdentifier: "passwordCell", for: indexPath) as! PasswordCell
+            cell.cellDelegate = self
             cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
             return cell
         }
@@ -263,80 +312,104 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let item = getFormItemFromIdx(indexPath)
-        if item != nil {
-            if item!.name != nil {
-                //let segue = item!.segue!
-                let key = item!.name
-                if key == CITY_KEY {
-                    let selectItem: CityFormItem = item as! CityFormItem
-                    var selected: String = ""
-                    if selectItem.selected_city_ids.count > 0 {
-                        selected = String(selectItem.selected_city_ids[0])
-                    }
-                    //toSelectCity(key: key, selected: selected, delegate: self)
-                    toSelectSingle(key: key, selected: selected, delegate: self)
-                } else if key == AREA_KEY {
-                    let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY)! as! CityFormItem
-                    if cityItem.value == nil {
-                        warning("請先選擇縣市")
-                    } else {
-                        let city_id = Int(cityItem.value!)
-                        let selectItem: AreaFormItem = item as! AreaFormItem
-                        var selected: String = ""
-                        if selectItem.selected_area_ids.count > 0 {
-                            selected = String(selectItem.selected_area_ids[0])
-                        }
-                        toSelectArea(key: key, city_id: city_id, selected: selected, delegate: self)
-                    }
-                } else if key == DOB_KEY {
-                    let dobItem: DateFormItem = getFormItemFromKey(key!)! as! DateFormItem
-                    var selected: String?
-                    if dobItem.value != nil {
-                        selected = dobItem.value!
-                    }
-                    toSelectDate(key: key, selected: selected)
-                }
+        //let item = getFormItemFromIdx(indexPath)
+        let row = getOneRowFromIdx(sectionIdx: indexPath.section, rowIdx: indexPath.row)
+        let key = row.key
+        if key == CITY_KEY {
+//                    let selectItem: CityFormItem = item as! CityFormItem
+//                    var selected: String = ""
+//                    if selectItem.selected_city_ids.count > 0 {
+//                        selected = String(selectItem.selected_city_ids[0])
+//                    }
+            //toSelectCity(key: key, selected: selected, delegate: self)
+            toSelectSingle(key: key, selected: row.value, delegate: self)
+        } else if key == AREA_KEY {
+            let row1: OneRow = getOneRowFromKey(CITY_KEY)
+            var city_id: Int = 0
+            if let tmp: Int = Int(row1.value) {
+                city_id = tmp
             }
+            if (city_id == 0) {
+                warning("請先選擇縣市")
+            } else {
+                toSelectArea(key: key, city_id: city_id, selected: row.value, delegate: self)
+            }
+            
+//                    if row1.value == nil {
+//                        warning("請先選擇縣市")
+//                    } else {
+                
+//                        let selectItem: AreaFormItem = item as! AreaFormItem
+//                        var selected: String = ""
+//                        if selectItem.selected_area_ids.count > 0 {
+//                            selected = String(selectItem.selected_area_ids[0])
+//                        }
+//                    }
+//                    let cityItem: CityFormItem = getFormItemFromKey(CITY_KEY)! as! CityFormItem
+//                    if cityItem.value == nil {
+//                        warning("請先選擇縣市")
+//                    } else {
+//                        let city_id = Int(cityItem.value!)
+//                        let selectItem: AreaFormItem = item as! AreaFormItem
+//                        var selected: String = ""
+//                        if selectItem.selected_area_ids.count > 0 {
+//                            selected = String(selectItem.selected_area_ids[0])
+//                        }
+//                        toSelectArea(key: key, city_id: city_id, selected: selected, delegate: self)
+//                    }
+        } else if key == DOB_KEY {
+            
+//                    let dobItem: DateFormItem = getFormItemFromKey(key!)! as! DateFormItem
+//                    var selected: String?
+//                    if dobItem.value != nil {
+//                        selected = dobItem.value!
+//                    }
+            toSelectDate(key: key, selected: row.value)
         }
     }
     
     override func singleSelected(key: String, selected: String, show: String?=nil) {
         
-        let item = getFormItemFromKey(key)
-        if item != nil {
-            if item!.value != selected {
-                item!.reset()
-            }
-            if key == AREA_KEY {
-                let item1: AreaFormItem = item as! AreaFormItem
-                let cityItem = getFormItemFromKey(CITY_KEY)
-                item1.city_id = Int((cityItem?.value)!)
-            } else if key == CITY_KEY {
-                let item1 = getFormItemFromKey(AREA_KEY)
-                if old_selected_city != selected {
-                    if item1 != nil {
-                        item1!.reset()
-                    }
-                    old_selected_city = selected
-                }
-            }
-            item!.value = selected
-            item!.make()
-            tableView.reloadData()
+        //let item = getFormItemFromKey(key)
+        let row: OneRow = getOneRowFromKey(key)
+        row.value = selected
+//        if row.value != selected {
+//            row.reset()
+//        }
+        if key == AREA_KEY {
+            row.show = Global.instance.zoneIDToName(Int(selected)!)
+//            let cityRow = getOneRowFromKey(CITY_KEY)
+//            cityRow.value = row.value
+        } else if key == CITY_KEY {
+            old_selected_city = selected
+            row.show = Global.instance.zoneIDToName(Int(selected)!)
+            //let item1 = getFormItemFromKey(AREA_KEY)
+//            if old_selected_city != selected {
+//                if item1 != nil {
+//                    item1!.reset()
+//                }
+//                old_selected_city = selected
+//            }
         }
+        //item!.value = selected
+        //item!.make()
+        tableView.reloadData()
     }
     
     override func dateSelected(key: String, selected: String) {
-        let item = getFormItemFromKey(key)
-        if item != nil {
-            if item!.value != selected {
-                item!.reset()
-            }
-            item!.value = selected
-            item!.make()
-            tableView.reloadData()
-        }
+        //let item = getFormItemFromKey(key)
+        let row: OneRow = getOneRowFromKey(key)
+        row.value = selected
+        row.show = selected
+        tableView.reloadData()
+//        if item != nil {
+//            if item!.value != selected {
+//                item!.reset()
+//            }
+//            item!.value = selected
+//            item!.make()
+//            tableView.reloadData()
+//        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -455,83 +528,129 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
+        
+        var msg: String = ""
+        for section in oneSections {
+            for row in section.items {
+                if (row.isRequired && row.value.count == 0) {
+                    msg += row.msg + "\n"
+                }
+            }
+        }
+        
+        if (!Member.instance.isLoggedIn) {
+            let password: String = getOneRowValue(PASSWORD_KEY)
+            let repassword: String = getOneRowValue(REPASSWORD_KEY)
+            if (password != repassword) {
+                msg += "密碼不符合" + "\n"
+            }
+
+            let privacy: Bool = Bool(getOneRowValue(PRIVACY_KEY))!
+            if (!privacy) {
+                msg += "必須同意隱私權政策才能完成註冊"
+            }
+        }
+        
+        if (msg.count > 0) {
+            warning(msg)
+        } else {
     
-        for formItem in form.formItems {
-            formItem.checkValidity()
-            if !formItem.isValid {
-                if formItem.msg != nil {
-                    warning(formItem.msg!)
-                } else {
-                    warning("有錯誤")
+    //        for formItem in form.formItems {
+    //            formItem.checkValidity()
+    //            if !formItem.isValid {
+    //                if formItem.msg != nil {
+    //                    warning(formItem.msg!)
+    //                } else {
+    //                    warning("有錯誤")
+    //                }
+    //                break
+    //            }
+    //        }
+            
+            Global.instance.addSpinner(superView: self.view)
+            var params:[String: String] = [String: String]()
+            
+            for section in oneSections {
+                for row in section.items {
+                    params[row.key] = row.value
                 }
-                break
             }
-        }
-        
-        Global.instance.addSpinner(superView: self.view)
-        var params:[String: String] = [String: String]()
-        for formItem in form.formItems {
-            if formItem.value != nil {
-                let value = formItem.value!
-                params[formItem.name!] = value
+            
+//            for formItem in form.formItems {
+//                if formItem.value != nil {
+//                    let value = formItem.value!
+//                    params[formItem.name!] = value
+//                }
+//            }
+            
+//            if let city_id = params[CITY_KEY] {
+//                params[CITY_KEY] = city_id
+//                params.removeValue(forKey: CITY_KEY)
+//            }
+//
+//            if let area_id = params[AREA_KEY] {
+//                params[AREA_KEY] = area_id
+//                params.removeValue(forKey: AREA_KEY)
+//            }
+            
+            if member_token.count > 0 {
+                params[TOKEN_KEY] = member_token
             }
-        }
-        if let city_id = params[CITY_KEY] {
-            params[CITY_KEY] = city_id
-            params.removeValue(forKey: CITY_KEY)
-        }
-        if let area_id = params[AREA_KEY] {
-            params[AREA_KEY] = area_id
-            params.removeValue(forKey: AREA_KEY)
-        }
-        if member_token.count > 0 {
-            params[TOKEN_KEY] = member_token
-        }
-        params["do"] = "update"
-        if isFeaturedChange {
-            params["featured"] = "1"
-        }
-        //print(params)
-        
-        let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
-        
-        MemberService.instance.update(_params: params, image: image) { (success) in
-            if success {
-                Global.instance.removeSpinner(superView: self.view)
-                
-                let jsonData: Data = MemberService.instance.jsonData!
-                do {
-                    let table = try JSONDecoder().decode(RegisterUpdateResTable.self, from: jsonData)
-                    if (table.model != nil) {
-                        table.model!.toSession(isLoggedIn: true)
-                    }
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    let alert = SCLAlertView(appearance: appearance)
-                    alert.addButton("確定", action: {
-                        //print("ok")
-                        if self.member_token.count == 0 {
-                            self.dismiss(animated: true, completion: nil)
+            
+            params["do"] = "update"
+            if isFeaturedChange {
+                params["featured"] = "1"
+            }
+            //print(params)
+            
+            let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
+            
+            MemberService.instance.update(_params: params, image: image) { (success) in
+                if success {
+                    Global.instance.removeSpinner(superView: self.view)
+                    
+                    let jsonData: Data = MemberService.instance.jsonData!
+                    do {
+                        let table = try JSONDecoder().decode(RegisterUpdateResTable.self, from: jsonData)
+                        if (!table.success) {
+                            var msg: String = ""
+                            for error in table.errors {
+                                msg += error + "\n"
+                            }
+                            self.warning(msg)
+                        } else {
+                            if (table.model != nil) {
+                                table.model!.toSession(isLoggedIn: true)
+                            }
+                            let appearance = SCLAlertView.SCLAppearance(
+                                showCloseButton: false
+                            )
+                            let alert = SCLAlertView(appearance: appearance)
+                            alert.addButton("確定", action: {
+                                //print("ok")
+                                if self.member_token.count == 0 {
+                                    self.dismiss(animated: true, completion: nil)
+                                }
+                            })
+                            var msg: String = ""
+                            if self.member_token.count > 0 {
+                                msg = "修改成功"
+                                //let data = Member.instance.getData(key: NAME_KEY)
+                                //print(data)
+                            } else {
+                                msg = "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序"
+                            }
+                            alert.showSuccess("成功", subTitle: msg)
                         }
-                    })
-                    var msg: String = ""
-                    if self.member_token.count > 0 {
-                        msg = "修改成功"
-                        //let data = Member.instance.getData(key: NAME_KEY)
-                        //print(data)
-                    } else {
-                        msg = "註冊成功，已經寄出email與手機的認證訊息，請繼續完成認證程序"
+                    } catch {
+                        //self.warning(error.localizedDescription)
+                        self.warning(MemberService.instance.msg)
                     }
-                    alert.showSuccess("成功", subTitle: msg)
-                } catch {
-                    //self.warning(error.localizedDescription)
-                    self.warning(MemberService.instance.msg)
+                } else {
+                    Global.instance.removeSpinner(superView: self.view)
+                    self.warning("伺服器錯誤，請稍後再試，或洽管理人員")
+                    //SCLAlertView().showWarning("錯誤", subTitle: "註冊失敗，伺服器錯誤，請稍後再試")
                 }
-            } else {
-                Global.instance.removeSpinner(superView: self.view)
-                self.warning("伺服器錯誤，請稍後再試，或洽管理人員")
-                //SCLAlertView().showWarning("錯誤", subTitle: "註冊失敗，伺服器錯誤，請稍後再試")
             }
         }
     }
@@ -557,29 +676,50 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
     }
     
-    func textFieldTextChanged(formItem: FormItem, text: String) {
-        formItem.value = text
-        //print(text)
+//    func textFieldTextChanged(formItem: FormItem, text: String) {
+//        formItem.value = text
+//        //print(text)
+//    }
+    
+    
+    override func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {
+        let row = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        row.value = str
+        row.show = str
     }
     
-    func sexChanged(sex: String) {
-        let item = getFormItemFromKey(SEX_KEY)
-        self.sex = sex
-        item?.value = sex
-        //print(sex)
+    override func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String) {
+        let row = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        row.value = sex
+        row.show = sex
     }
     
-    func privacyChecked(checked: Bool) {
-        let item = getFormItemFromKey(PRIVACY_KEY)
+    override func cellPrivacyChanged(sectionIdx: Int, rowIdx: Int, checked: Bool) {
+        let row = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        row.value = String(checked)
         if !checked {
             warning("必須同意隱私權條款，才能註冊")
-            item?.value = nil
-        } else {
-            item?.value = "1"
         }
-        self.agreePrivacy = checked
-        //print(checked)
     }
+    
+//    func sexChanged(sex: String) {
+//        let item = getFormItemFromKey(SEX_KEY)
+//        self.sex = sex
+//        item?.value = sex
+//        //print(sex)
+//    }
+//    
+//    func privacyChecked(checked: Bool) {
+//        let item = getFormItemFromKey(PRIVACY_KEY)
+//        if !checked {
+//            warning("必須同意隱私權條款，才能註冊")
+//            item?.value = nil
+//        } else {
+//            item?.value = "1"
+//        }
+//        self.agreePrivacy = checked
+//        //print(checked)
+//    }
     
 //    func backToMenu() {
 //        if self.menuVC != nil {
@@ -592,12 +732,14 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
 class RegisterUpdateResTable: Codable {
     
     var success: Bool = false
+    var errors: [String] = [String]()
     var id: Int = 0
     var update: String = "INSERT"
     var model: MemberTable?
     
     enum CodingKeys: String, CodingKey {
         case success
+        case errors
         case id
         case update
         case model
@@ -608,6 +750,7 @@ class RegisterUpdateResTable: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        errors = try container.decodeIfPresent([String].self, forKey: .errors) ?? [String]()
         id = try container.decodeIfPresent(Int.self, forKey: .id) ?? 0
         update = try container.decodeIfPresent(String.self, forKey: .update) ?? ""
         model = try container.decodeIfPresent(MemberTable.self, forKey: .model) ?? nil

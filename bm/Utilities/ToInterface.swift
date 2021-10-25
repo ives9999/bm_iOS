@@ -17,27 +17,15 @@ extension BaseViewController {
             }
         } else {
             msg = Member.instance.checkMust()
-//            for key in MEMBER_MUST_ARRAY {
-//                let type: String = Member.instance.info[key]!["type"]!
-//                let tmp = Member.instance.getData(key: key)
-//                if type == "Int" {
-//                    if let value: Int = tmp as? Int {
-//                        if value == 0 {
-//                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
-//                        }
-//                    }
-//                } else if type == "String" {
-//                    if let value = tmp as? String {
-//                        if value.count == 0 {
-//                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
-//                        }
-//                    }
-//                }
-//            }
-            if msg.count > 0 {
+
+            if (msg.count > 0) {
                 warning(msg: msg, showCloseButton: true, buttonTitle: "填寫") {
                     self.goHomeThen(completion: register)
                 }
+            }
+            msg = Member.instance.checkValidate(must: 3)
+            if msg.count > 0 {
+                warning(msg)
             } else {
                 if #available(iOS 13.0, *) {
                     let storyboard = UIStoryboard(name: "More", bundle: nil)

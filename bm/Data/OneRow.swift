@@ -66,4 +66,11 @@ class OneRow {
         self.isClear = isClear
         self.accessory = accessory
     }
+    
+    required init() {}
+    
+    func reset() {
+        value = ""
+        show = ""
+    }
 }

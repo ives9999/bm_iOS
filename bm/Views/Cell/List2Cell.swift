@@ -22,6 +22,13 @@ protocol List1CellDelegate {
     func cellLike(row: Table)
     func cellWarning(msg: String)
     func cellToLogin()
+    
+    func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String)
+    func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String)
+    func cellPrivacyChanged(sectionIdx: Int, rowIdx: Int, checked: Bool)
+    
+    func cellSetTag(sectionIdx: Int, rowIdx: Int, value: String, isChecked: Bool)
+    func cellNumberChanged(sectionIdx: Int, rowIdx: Int, number: Int)
 }
 
 class List2Cell: UITableViewCell {
@@ -267,11 +274,15 @@ extension List1CellDelegate {
     func cellRefresh(){}
     func cellEdit(row: Table){}
     func cellDelete(row: Table){}
-    func cellCity(row: Table){}
+ //   func cellCity(row: Table){}
     func cellArea(row: Table){}
     func cellArena(row: Table){}
     func cellLike(row: Table){}
     func cellWarning(msg: String){}
     func cellToLogin(){}
+    
+//    func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String) {}
+//    func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {}
+//    func cellPrivacyChanged(sectionIdx: Int, rowIdx: Int, checked: Bool) {}
 }
 

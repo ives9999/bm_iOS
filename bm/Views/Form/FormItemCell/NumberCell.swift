@@ -46,15 +46,41 @@ class NumberCell: FormItemCell {
         stepper.maximumValue = Double(_formItem.max)
     }
     
+    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+        self.oneRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
+        
+        requiredImageView.isHidden = !row.isRequired
+        titleLbl!.text = row.title
+        
+        requiredImageView.isHidden = !row.isRequired
+        
+        let tmp: [String] = row.show.components(separatedBy: ",")
+        if tmp.count > 1 {
+            if let tmp1: Double = Double(tmp[0]) {
+                stepper.minimumValue = tmp1
+            }
+            if let tmp2: Double = Double(tmp[1]) {
+                stepper.maximumValue = tmp2
+            }
+        }
+    }
+    
     @objc func stepperValueChanged(stepper: GMStepper) {
         //print(stepper.value)
         formItem?.value = String(Int(stepper.value))
+        
         if valueDelegate != nil {
             valueDelegate!.stepperValueChanged(number: Int(stepper.value), name: self.formItem!.name!)
         }
         
         if (baseViewControllerDelegate != nil) {
             baseViewControllerDelegate!.stepperValueChanged(sectionKey: sectionKey, rowKey: rowKey, number: Int(stepper.value))
+        }
+        
+        if (cellDelegate != nil) {
+            cellDelegate?.cellNumberChanged(sectionIdx: sectionIdx, rowIdx: rowIdx, number: Int(stepper.value))
         }
     }
 }
