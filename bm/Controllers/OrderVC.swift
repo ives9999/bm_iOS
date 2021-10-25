@@ -31,6 +31,21 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     let heightForSection: CGFloat = 34
     
+    var invoiceOptionRows: [OneRow] = [
+        OneRow(title: "個人", value: "true", show: "", key: PERSONAL_KEY, cell: "radio"),
+        OneRow(title: "公司", value: "false", show: "", key: COMPANY_KEY, cell: "radio")
+    ]
+    
+    let invoicePersonalRows: [OneRow] = [
+        OneRow(title: "EMail", value: "\(Member.instance.email)", show:"\(Member.instance.email)", key: INVOICE_EMAIL_KEY, cell:"textField")
+    ]
+    
+    let invoiceCompanyRows: [OneRow] = [
+        OneRow(title: "統一編編", value: "", show:"", key: INVOICE_COMPANY_TAX_KEY, cell: "textField"),
+        OneRow(title: "公司行號抬頭", value: "", show:"", key :INVOICE_COMPANY_NAME_KEY, cell: "textField"),
+        OneRow(title: "EMail", value: "\(Member.instance.email)", show: "\(Member.instance.email)", key: INVOICE_EMAIL_KEY, cell: "textField")
+    ]
+    
     var productRows: [[String: String]] = []
     
     var amountRows: [[String: String]] = []
@@ -41,24 +56,24 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     var invoiceRows: [[String: String]] = []
     
-    var invoiceFixedRows: [[String: String]] = [
-        ["title": "發票(本商城目前僅提供電子發票)","key":INVOICE_KEY,"value":"","show":"","cell":"more"]
-    ]
-    
-    var invoiceOptionRows: [[String: String]] = [
-        ["title": "個人","key":PERSONAL_KEY,"value":"true","show":"","cell":"radio"],
-        ["title": "公司","key":COMPANY_KEY,"value":"false","show":"","cell":"radio"]
-    ]
-    
-    let invoicePersonalRows: [[String: String]] = [
-        ["title":"EMail","key":INVOICE_EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
-    ]
-    
-    let invoiceCompanyRows: [[String: String]] = [
-        ["title":"統一編編","key":INVOICE_COMPANY_TAX_KEY,"value":"","show":"","cell":"textField"],
-        ["title":"公司行號抬頭","key":INVOICE_COMPANY_NAME_KEY,"value":"","show":"","cell":"textField"],
-        ["title":"EMail","key":INVOICE_EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
-    ]
+//    var invoiceFixedRows: [[String: String]] = [
+//        ["title": "發票(本商城目前僅提供電子發票)","key":INVOICE_KEY,"value":"","show":"","cell":"more"]
+//    ]
+//
+//    var invoiceOptionRows: [[String: String]] = [
+//        ["title": "個人","key":PERSONAL_KEY,"value":"true","show":"","cell":"radio"],
+//        ["title": "公司","key":COMPANY_KEY,"value":"false","show":"","cell":"radio"]
+//    ]
+//
+//    let invoicePersonalRows: [[String: String]] = [
+//        ["title":"EMail","key":INVOICE_EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
+//    ]
+//
+//    let invoiceCompanyRows: [[String: String]] = [
+//        ["title":"統一編編","key":INVOICE_COMPANY_TAX_KEY,"value":"","show":"","cell":"textField"],
+//        ["title":"公司行號抬頭","key":INVOICE_COMPANY_NAME_KEY,"value":"","show":"","cell":"textField"],
+//        ["title":"EMail","key":INVOICE_EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
+//    ]
     
     var memberRows: [[String: String]] = []
     
@@ -228,29 +243,29 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 amountRows.append(row)
                 
                 //gateway
-                let gateway: String = productTable!.gateway
-                var arr: [String] = gateway.components(separatedBy: ",")
-                for tmp in arr {
-                    let title: String = GATEWAY.getRawValueFromString(tmp)
-                    var value: String = "false"
-                    if (tmp == "credit_card") {
-                        value = "true"
-                    }
-                    let row: [String: String] = ["title":title,"key":tmp,"value":value,"show":title,"cell":"radio"]
-                    gatewayRows.append(row)
-                }
+//                let gateway: String = productTable!.gateway
+//                var arr: [String] = gateway.components(separatedBy: ",")
+//                for tmp in arr {
+//                    let title: String = GATEWAY.getRawValueFromString(tmp)
+//                    var value: String = "false"
+//                    if (tmp == "credit_card") {
+//                        value = "true"
+//                    }
+//                    let row: [String: String] = ["title":title,"key":tmp,"value":value,"show":title,"cell":"radio"]
+//                    gatewayRows.append(row)
+//                }
                 
-                let shipping: String = productTable!.shipping
-                arr = shipping.components(separatedBy: ",")
-                for tmp in arr {
-                    let title: String = SHIPPING_WAY.getRawValueFromString(tmp)
-                    var value: String = "false"
-                    if (tmp == "direct") {
-                        value = "true"
-                    }
-                    let row: [String: String] = ["title":title,"key":tmp,"value":value,"show":title,"cell":"radio"]
-                    shippingRows.append(row)
-                }
+//                let shipping: String = productTable!.shipping
+//                arr = shipping.components(separatedBy: ",")
+//                for tmp in arr {
+//                    let title: String = SHIPPING_WAY.getRawValueFromString(tmp)
+//                    var value: String = "false"
+//                    if (tmp == "direct") {
+//                        value = "true"
+//                    }
+//                    let row: [String: String] = ["title":title,"key":tmp,"value":value,"show":title,"cell":"radio"]
+//                    shippingRows.append(row)
+//                }
                 
                 
                 initData()
@@ -277,45 +292,45 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     func initData() {
         
-        mySections = [
-            ["name": "商品", "isExpanded": true, "key": PRODUCT_KEY],
-            ["name": "金額", "isExpanded": true, "key": AMOUNT_KEY],
-            ["name": "付款方式", "isExpanded": true, "key": GATEWAY_KEY],
-            ["name": "寄送方式", "isExpanded": true, "key": SHIPPING_KEY],
-            ["name": "電子發票", "isExpanded": true, "key": INVOICE_KEY],
-            ["name": "收件人資料", "isExpanded": true, "key": MEMBER_KEY],
-            ["name": "其他留言", "isExpanded": true, "key": MEMO_KEY]
-        ]
-        
-        memberRows = [
-            ["title":"姓名","key":NAME_KEY,"value":"\(Member.instance.name)","show":"\(Member.instance.name)","cell":"textField"],
-            ["title":"電話","key":MOBILE_KEY,"value":"\(Member.instance.mobile)","show":"\(Member.instance.mobile)","cell":"textField"],
-            ["title":"EMail","key":EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"],
-            ["title":"住址","key":ADDRESS_KEY,"value":"\(Member.instance.address)","show":"\(Member.instance.address)","cell":"textField"]
-        ]
-        
-        for invoiceFixedRow in invoiceFixedRows {
-            
-            invoiceRows.append(invoiceFixedRow)
-        }
-        
-        for invoicePersonalRow in invoicePersonalRows {
-            
-            invoiceRows.append(invoicePersonalRow)
-        }
-        
-        myRows = [
-            ["key":PRODUCT_KEY, "rows": productRows],
-            ["key":AMOUNT_KEY, "rows": amountRows],
-            ["key":GATEWAY_KEY, "rows": gatewayRows],
-            ["key":SHIPPING_KEY, "rows": shippingRows],
-            ["key":INVOICE_KEY, "rows": invoiceRows],
-            ["key":MEMBER_KEY, "rows": memberRows],
-            ["key":MEMO_KEY, "rows": memoRows]
-        ]
+//        mySections = [
+//            ["name": "商品", "isExpanded": true, "key": PRODUCT_KEY],
+//            ["name": "金額", "isExpanded": true, "key": AMOUNT_KEY],
+//            ["name": "付款方式", "isExpanded": true, "key": GATEWAY_KEY],
+//            ["name": "寄送方式", "isExpanded": true, "key": SHIPPING_KEY],
+//            ["name": "電子發票", "isExpanded": true, "key": INVOICE_KEY],
+//            ["name": "收件人資料", "isExpanded": true, "key": MEMBER_KEY],
+//            ["name": "其他留言", "isExpanded": true, "key": MEMO_KEY]
+//        ]
+//
+//        memberRows = [
+//            ["title":"姓名","key":NAME_KEY,"value":"\(Member.instance.name)","show":"\(Member.instance.name)","cell":"textField"],
+//            ["title":"電話","key":MOBILE_KEY,"value":"\(Member.instance.mobile)","show":"\(Member.instance.mobile)","cell":"textField"],
+//            ["title":"EMail","key":EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"],
+//            ["title":"住址","key":ADDRESS_KEY,"value":"\(Member.instance.address)","show":"\(Member.instance.address)","cell":"textField"]
+//        ]
+//
+//        for invoiceFixedRow in invoiceFixedRows {
+//
+//            invoiceRows.append(invoiceFixedRow)
+//        }
+//
+//        for invoicePersonalRow in invoicePersonalRows {
+//
+//            invoiceRows.append(invoicePersonalRow)
+//        }
+//
+//        myRows = [
+//            ["key":PRODUCT_KEY, "rows": productRows],
+//            ["key":AMOUNT_KEY, "rows": amountRows],
+//            ["key":GATEWAY_KEY, "rows": gatewayRows],
+//            ["key":SHIPPING_KEY, "rows": shippingRows],
+//            ["key":INVOICE_KEY, "rows": invoiceRows],
+//            ["key":MEMBER_KEY, "rows": memberRows],
+//            ["key":MEMO_KEY, "rows": memoRows]
+//        ]
         
         var amount: Int = 0
-        var row: [OneRow] = [OneRow]()
+        var rows: [OneRow] = [OneRow]()
         
         for cartItemTable in cartItemsTable {
             
@@ -334,8 +349,101 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 }
             }
             
-            let row = OneRow(title: <#T##String#>, value: <#T##String#>, show: <#T##String#>, key: <#T##String#>, cell: <#T##String#>, keyboard: <#T##KEYBOARD#>, placeholder: <#T##String#>, isRequired: <#T##Bool#>, isClear: <#T##Bool#>, accessory: <#T##UITableViewCell.AccessoryType#>)
+            let row = OneRow(title: productTable!.name, key: PRODUCT_KEY, cell: "cart")
+            row.featured_path = productTable!.featured_path
+            row.attribute = attribute_text
+            row.amount = cartItemTable.amount_show
+            row.quantity = String(cartItemTable.quantity)
+            
+            rows.append(row)
         }
+        
+        var section = makeSectionRow(title: "商品", key: PRODUCT_KEY, rows: rows)
+        oneSections.append(section)
+        
+        //price
+        rows.removeAll()
+        let amount_show: String = amount.formattedWithSeparator
+        var row = OneRow(title: "商品金額", value: String(amount), show: "NT$ \(amount_show)", key: AMOUNT_KEY, cell: "text")
+        rows.append(row)
+        
+        var shipping_fee: Int = 0
+        if (amount > 1000) {shipping_fee = 0}
+        let shipping_fee_show: String = shipping_fee.formattedWithSeparator
+        row = OneRow(title: "運費", value: String(shipping_fee), show: "NT$ \(shipping_fee_show)", key: SHIPPING_FEE_KEY, cell: "text")
+        rows.append(row)
+        
+        let tax: Int = 0
+        let tax_show: String = tax.formattedWithSeparator
+        row = OneRow(title: "税", value: String(tax), show: "NT$ \(tax_show)", key: TAX_KEY, cell: "text")
+        rows.append(row)
+        
+        let total: Int = amount + shipping_fee + tax
+        let total_show: String = total.formattedWithSeparator
+        row = OneRow(title: "總金額", value: String(total), show: "NT$ \(total_show)", key: TOTAL_KEY, cell: "text")
+        rows.append(row)
+        
+        section = makeSectionRow(title: "金額", key: AMOUNT_KEY, rows: rows)
+        oneSections.append(section)
+        
+        //gateway
+        rows.removeAll()
+        let gateway: String = productTable!.gateway
+        var arr: [String] = gateway.components(separatedBy: ",")
+        for tmp in arr {
+            let title: String = GATEWAY.getRawValueFromString(tmp)
+            var value: String = "false"
+            if (tmp == "credit_card") {
+                value = "true"
+            }
+            row = OneRow(title: title, value: value, show: title, key: tmp, cell: "radio")
+            rows.append(row)
+        }
+        section = makeSectionRow(title: "付款方式", key: GATEWAY_KEY, rows: rows)
+        oneSections.append(section)
+        
+        //shipping
+        rows.removeAll()
+        let shipping: String = productTable!.shipping
+        arr = shipping.components(separatedBy: ",")
+        for tmp in arr {
+            let title: String = SHIPPING_WAY.getRawValueFromString(tmp)
+            var value: String = "false"
+            if (tmp == "direct") {
+                value = "true"
+            }
+            row = OneRow(title: title, value: value, show: title, key: tmp, cell: "radio")
+            rows.append(row)
+        }
+        section = makeSectionRow(title: "到貨方式", key: SHIPPING_KEY, rows: rows)
+        oneSections.append(section)
+        
+        rows.removeAll()
+        row = OneRow(title: "發票(目前僅提供電子發票)", value: INVOICE_PERSONAL_KEY, show: "", key: INVOICE_KEY, cell: "more")
+        rows.append(row)
+        rows.append(contentsOf: invoicePersonalRows)
+        section = makeSectionRow(title: "電子發票", key: INVOICE_KEY, rows: rows)
+        oneSections.append(section)
+        
+        //member
+        rows.removeAll()
+        row = OneRow(title: "姓名", value: Member.instance.name, show: Member.instance.name, key: NAME_KEY, cell: "textField", placeholder: "王大明")
+        rows.append(row)
+        row = OneRow(title: "電話", value: Member.instance.mobile, show: Member.instance.mobile, key: MOBILE_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "0939123456")
+        rows.append(row)
+        row = OneRow(title: "EMail", value: Member.instance.email, show: Member.instance.email, key: EMAIL_KEY, cell: "textField", keyboard: KEYBOARD.emailAddress, placeholder: "service@bm.com")
+        rows.append(row)
+        row = OneRow(title: "住址", value: Member.instance.address, show: Member.instance.address, key: ADDRESS_KEY, cell: "textField", placeholder: "台北市信義區中山路60號")
+        rows.append(row)
+        section = makeSectionRow(title: "收件人資料", key: MEMBER_KEY, rows: rows)
+        oneSections.append(section)
+        
+        //memo
+        rows.removeAll()
+        row = OneRow(title: "留言", value: "", show: "", key: MEMO_KEY, cell: "textField", placeholder: "請於上班時間送達")
+        rows.append(row)
+        section = makeSectionRow(title: "其他留言", key: MEMO_KEY, rows: rows)
+        oneSections.append(section)
         
 //        form = OrderForm(type: self.productTable!.type)
 //        section_keys = form.getSectionKeys()
