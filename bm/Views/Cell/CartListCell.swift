@@ -16,6 +16,10 @@ class CartListCell: List2Cell {
     
     @IBOutlet weak var editIcon: SuperButton!
     @IBOutlet weak var deleteIcon: SuperButton!
+    
+    var oneRow: OneRow = OneRow()
+    var sectionIdx: Int = 0
+    var rowIdx: Int = 0
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -71,6 +75,29 @@ class CartListCell: List2Cell {
         amountLbl.text = amount
         
         quantityLbl.text = "數量：\(quantity)"
+        
+        if (iconView != nil) {
+            iconView.isHidden = true
+            iconViewConstraint.constant = 0
+        }
+    }
+    
+    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+        
+        self.oneRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
+        
+        featured_h = listFeatured.heightForUrl(url: row.featured_path, width: 90)
+        listFeatured.downloaded(from: row.featured_path)
+        
+        titleLbl.text = row.title
+        
+        attributeLbl.text = row.attribute
+        
+        amountLbl.text = row.amount
+        
+        quantityLbl.text = "數量：\(row.quantity)"
         
         if (iconView != nil) {
             iconView.isHidden = true

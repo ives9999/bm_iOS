@@ -20,6 +20,8 @@ class OneSection {
         self.isExpanded = isExpanded
         self.items = items
     }
+    
+    required init() {}
 }
 
 class OneRow {

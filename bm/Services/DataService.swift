@@ -102,8 +102,8 @@ class DataService {
             //case .success(let value):
             case .success(_):
                 if response.data != nil {
-                    //let json = JSON(value)
-                    //print(json)
+//                    let json = JSON(value)
+//                    print(json)
                     self.jsonData = response.data
                     completion(true)
                     //s = try JSONDecoder().decode(t, from: response.data!)

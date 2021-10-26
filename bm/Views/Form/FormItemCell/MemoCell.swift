@@ -29,6 +29,16 @@ class MemoCell: FormItemCell {
         memoTextField.text = value
     }
     
+    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+        
+        self.oneRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
+        
+        titleLbl?.text = row.title
+        memoTextField.text = row.value
+    }
+    
     @IBAction func textFieldDidChange(_ textField: UITextField) {
         if (baseViewControllerDelegate != nil) {
             baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: textField.text!)

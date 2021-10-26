@@ -296,6 +296,16 @@ class MyTableVC: BaseViewController {
         
         return [OneRow]()
     }
+    
+    func getSectionFromKey(_ key: String)-> OneSection {
+        for oneSection in oneSections {
+            if (key == oneSection.key) {
+                return oneSection
+            }
+        }
+        
+        return OneSection()
+    }
 
     func replaceRows(_ key: String, _ row: [String: Any]) {
         for (idx, _row) in searchRows.enumerated() {
@@ -481,18 +491,22 @@ class MyTableVC: BaseViewController {
         
         var indexPaths: [IndexPath] = [IndexPath]()
         
-        let key: String = getSectionKey(idx: section)
-        let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+        //let key: String = getSectionKey(idx: section)
+        //let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+        let rows: [OneRow] = oneSections[section].items
         for (i, _) in rows.enumerated() {
             let indexPath = IndexPath(row: i, section: section)
             indexPaths.append(indexPath)
         }
         
-        var isExpanded = getSectionExpanded(idx: section)
-        if (mySections[section].keyExist(key: "isExpanded")) {
-            mySections[section]["isExpanded"] = !isExpanded
-            //searchSections[section].isExpanded = !isExpanded
-        }
+        var isExpanded = oneSections[section].isExpanded
+        oneSections[section].isExpanded = !isExpanded
+        
+//        var isExpanded = getSectionExpanded(idx: section)
+//        if (mySections[section].keyExist(key: "isExpanded")) {
+//            mySections[section]["isExpanded"] = !isExpanded
+//            //searchSections[section].isExpanded = !isExpanded
+//        }
         
         if isExpanded {
             tableView.deleteRows(at: indexPaths, with: .fade)

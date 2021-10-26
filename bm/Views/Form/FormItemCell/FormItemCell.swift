@@ -12,6 +12,7 @@ class FormItemCell: SuperCell, FormUPdatable {
     
     var formItem: FormItem?
     var valueDelegate: ValueChangedDelegate?
+    
     var cellDelegate: List1CellDelegate?
     var oneRow: OneRow = OneRow()
     var sectionIdx: Int = 0

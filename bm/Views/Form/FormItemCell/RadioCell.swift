@@ -46,6 +46,20 @@ class RadioCell: FormItemCell {
         radio.isChecked = checked
     }
     
+    func update(sectionKey: String, sectionIdx: Int, rowIdx: Int, row: OneRow) {
+        
+        self.oneRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
+        
+        //section key is 傳入 radio group的key，例如 order 中，傳入的是 gateway or shipping，而發票則是，invoice，用來判斷回傳時，該更新那個rows
+        self.sectionKey = sectionKey
+        
+        titleLbl?.text = row.title
+        
+        radio.isChecked = Bool(row.value)!
+    }
+    
     @objc func radioValueChanged(sender: Checkbox) {
         if valueDelegate != nil {
             valueDelegate?.privacyChecked(checked: sender.isChecked)
@@ -53,6 +67,10 @@ class RadioCell: FormItemCell {
         
         if (baseViewControllerDelegate != nil) {
             baseViewControllerDelegate!.radioDidChange(sectionKey: sectionKey, rowKey: rowKey, checked: sender.isChecked)
+        }
+        
+        if (cellDelegate != nil) {
+            cellDelegate?.cellRadioChanged(key: sectionKey, sectionIdx: sectionIdx, rowIdx: rowIdx, isChecked: sender.isChecked)
         }
         //checked is t, unchecked is f.
         //print("privacy value change: \(sender.isChecked)")
