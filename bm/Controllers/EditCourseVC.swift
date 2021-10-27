@@ -156,12 +156,13 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        let item = getFormItemFromIdx(indexPath)
-        if item!.name == CONTENT_KEY {
-            return 200
-        } else {
-            return 60
-        }
+//        let item = getFormItemFromIdx(indexPath)
+//        if item!.name == CONTENT_KEY {
+//            return 200
+//        } else {
+//            return 60
+//        }
+        return 60
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -170,69 +171,69 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let item = getFormItemFromIdx(indexPath)
-        let cell: UITableViewCell
-        if item != nil {
-            if let cellType = item!.uiProperties.cellType {
-                cell = cellType.dequeueCell(for: tableView, at: indexPath)
-            } else {
-                cell = UITableViewCell()
-            }
-            
-            if let formUpdatableCell = cell as? FormUPdatable {
-                item!.indexPath = indexPath
-                formUpdatableCell.update(with: item!)
-            }
-            
-            if item!.uiProperties.cellType == FormItemCellType.textField {
-                if let formCell = cell as? FormItemCell {
-                    formCell.valueDelegate = self
-                }
-            }
-        } else {
-            cell = UITableViewCell()
-        }
+        //let item = getFormItemFromIdx(indexPath)
+        let cell: UITableViewCell = UITableViewCell()
+//        if item != nil {
+//            if let cellType = item!.uiProperties.cellType {
+//                cell = cellType.dequeueCell(for: tableView, at: indexPath)
+//            } else {
+//                cell = UITableViewCell()
+//            }
+//
+//            if let formUpdatableCell = cell as? FormUPdatable {
+//                item!.indexPath = indexPath
+//                formUpdatableCell.update(with: item!)
+//            }
+//
+//            if item!.uiProperties.cellType == FormItemCellType.textField {
+//                if let formCell = cell as? FormItemCell {
+//                    formCell.valueDelegate = self
+//                }
+//            }
+//        } else {
+//            cell = UITableViewCell()
+//        }
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let row = getFormItemFromIdx(indexPath)
-        if row != nil {
-            if (row!.name != nil) {
-                let key = row!.name!
-                if (key == PRICE_UNIT_KEY || key == CYCLE_UNIT_KEY || key == COURSE_KIND_KEY || key == START_TIME_KEY || key == END_TIME_KEY) {
-                    var selected: String? = nil
-                    if (row!.value != nil) {
-                        selected = row!.value
-                    }
-                    toSelectSingle(key: key, selected: selected, delegate: self)
-                } else if (key == START_DATE_KEY || key == END_DATE_KEY) {
-                    var selected: String? = nil
-                    if (row!.value != nil) {
-                        selected = row!.value
-                    }
-                    toSelectDate(key: key, selected: selected)
-                } else if (key == WEEKDAY_KEY) {
-                    let items: [String] = row!.sender as! [String]
-                    var selecteds: [Int] = [Int]()
-                    for item in items {
-                        if let tmp: Int = Int(item) {
-                            selecteds.append(tmp)
-                        }
-                    }
-                    toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
-                } else if (key == CONTENT_KEY) {
-                    var content: String? = nil
-                    if row!.sender != nil {
-                        content = row!.sender as? String
-                    }
-                    toEditContent(key: key, title: row!.title, content: content, _delegate: self)
-                }
-                //performSegue(withIdentifier: segue, sender: indexPath)
-            }
-        }
+//        let row = getFormItemFromIdx(indexPath)
+//        if row != nil {
+//            if (row!.name != nil) {
+//                let key = row!.name!
+//                if (key == PRICE_UNIT_KEY || key == CYCLE_UNIT_KEY || key == COURSE_KIND_KEY || key == START_TIME_KEY || key == END_TIME_KEY) {
+//                    var selected: String? = nil
+//                    if (row!.value != nil) {
+//                        selected = row!.value
+//                    }
+//                    toSelectSingle(key: key, selected: selected, delegate: self)
+//                } else if (key == START_DATE_KEY || key == END_DATE_KEY) {
+//                    var selected: String? = nil
+//                    if (row!.value != nil) {
+//                        selected = row!.value
+//                    }
+//                    toSelectDate(key: key, selected: selected)
+//                } else if (key == WEEKDAY_KEY) {
+//                    let items: [String] = row!.sender as! [String]
+//                    var selecteds: [Int] = [Int]()
+//                    for item in items {
+//                        if let tmp: Int = Int(item) {
+//                            selecteds.append(tmp)
+//                        }
+//                    }
+//                    toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
+//                } else if (key == CONTENT_KEY) {
+//                    var content: String? = nil
+//                    if row!.sender != nil {
+//                        content = row!.sender as? String
+//                    }
+//                    toEditContent(key: key, title: row!.title, content: content, _delegate: self)
+//                }
+//                //performSegue(withIdentifier: segue, sender: indexPath)
+//            }
+//        }
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -328,54 +329,54 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     }
     
     override func singleSelected(key: String, selected: String, show: String?=nil) {
-        let item = getFormItemFromKey(key)
-        if item != nil {
-            item!.value = selected
-            item!.make()
-            tableView.reloadData()
-        }
+//        let item = getFormItemFromKey(key)
+//        if item != nil {
+//            item!.value = selected
+//            item!.make()
+//            tableView.reloadData()
+//        }
     }
     
     override func setWeekdaysData(selecteds: [Int]) {
-        let item = getFormItemFromKey(WEEKDAY_KEY)
-        //let tmps: [Int] = selecteds.map({ Int($0)! })
-        let value = String(Global.instance.weekdaysToDBValue(selecteds))
-        
-        item!.value = value
-        item!.make()
-        tableView.reloadData()
+//        let item = getFormItemFromKey(WEEKDAY_KEY)
+//        //let tmps: [Int] = selecteds.map({ Int($0)! })
+//        let value = String(Global.instance.weekdaysToDBValue(selecteds))
+//
+//        item!.value = value
+//        item!.make()
+//        tableView.reloadData()
     }
     
     override func multiSelected(key: String, selecteds: [String]) {
-        let item = getFormItemFromKey(key)
-        if item != nil {
-            var value: String = "-1"
-            if item!.name! == WEEKDAY_KEY {
-                let tmps: [Int] = selecteds.map({ Int($0)! })
-                value = String(Global.instance.weekdaysToDBValue(tmps))
-            }
-            item!.value = value
-            item!.make()
-            tableView.reloadData()
-        }
+//        let item = getFormItemFromKey(key)
+//        if item != nil {
+//            var value: String = "-1"
+//            if item!.name! == WEEKDAY_KEY {
+//                let tmps: [Int] = selecteds.map({ Int($0)! })
+//                value = String(Global.instance.weekdaysToDBValue(tmps))
+//            }
+//            item!.value = value
+//            item!.make()
+//            tableView.reloadData()
+//        }
     }
     
     override func setContent(key: String, content: String) {
-        let item = getFormItemFromKey(key)
-        if item != nil {
-            item!.value = content
-            item!.make()
-            tableView.reloadData()
-        }
+//        let item = getFormItemFromKey(key)
+//        if item != nil {
+//            item!.value = content
+//            item!.make()
+//            tableView.reloadData()
+//        }
     }
     
     override func dateSelected(key: String, selected: String) {
-        let item = getFormItemFromKey(key)
-        if item != nil {
-            item!.value = selected
-            item!.make()
-            tableView.reloadData()
-        }
+//        let item = getFormItemFromKey(key)
+//        if item != nil {
+//            item!.value = selected
+//            item!.make()
+//            tableView.reloadData()
+//        }
     }
     
     @IBAction func submit(_ sender: Any) {

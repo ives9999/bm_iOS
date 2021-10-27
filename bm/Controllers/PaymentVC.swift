@@ -25,45 +25,45 @@ class PaymentVC: MyTableVC {
     
     let heightForSection: CGFloat = 34
     
-    var productRows: [[String: String]] = []
-    
-    var orderRows: [[String: String]] = [
-        [TITLE_KEY:"訂單編號", KEY_KEY:ORDER_NO_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
-        [TITLE_KEY:"商品金額", KEY_KEY:AMOUNT_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
-        [TITLE_KEY:"運費", KEY_KEY:SHIPPING_FEE_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
-        [TITLE_KEY:"稅", KEY_KEY:TAX_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
-        [TITLE_KEY:"訂單金額", KEY_KEY:TOTAL_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
-        [TITLE_KEY:"訂單建立時間", KEY_KEY:CREATED_AT_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
-        [TITLE_KEY:"訂單狀態", KEY_KEY:ORDER_PROCESS_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"]
-    ]
-    
-    var gatewayRows: [[String: String]] = [
-        [TITLE_KEY:"付款方式", KEY_KEY:GATEWAY_METHOD_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"more"],
-        [TITLE_KEY:"付款狀態", KEY_KEY:GATEWAY_PROCESS_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
-        [TITLE_KEY:"付款時間", KEY_KEY:GATEWAY_AT_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"]
-    ]
-    
-    var shippingRows: [[String: String]] = [
-        [TITLE_KEY:"到貨方式", KEY_KEY:SHIPPING_METHOD_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
-        [TITLE_KEY:"到貨狀態", KEY_KEY:SHIPPING_PROCESS_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
-        [TITLE_KEY:"出貨時間", KEY_KEY:SHIPPING_AT_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"]
-    ]
-    
-    var invoiceRows: [[String: String]] = [
-        [TITLE_KEY:"發票種類", KEY_KEY:INVOICE_TYPE_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
-        [TITLE_KEY:"寄送EMail", KEY_KEY:INVOICE_EMAIL_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"]
-    ]
-    
-    var memberRows: [[String: String]] = [
-        [TITLE_KEY:"姓名",KEY_KEY:NAME_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"text"],
-        [TITLE_KEY:"電話",KEY_KEY:MOBILE_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"text"],
-        [TITLE_KEY:"EMail",KEY_KEY:EMAIL_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"text"],
-        [TITLE_KEY:"住址",KEY_KEY:ADDRESS_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"text"]
-    ]
-    
-    let memoRows: [[String: String]] = [
-        [TITLE_KEY: "留言",KEY_KEY:MEMO_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"text"]
-    ]
+//    var productRows: [[String: String]] = []
+//
+//    var orderRows: [[String: String]] = [
+//        [TITLE_KEY:"訂單編號", KEY_KEY:ORDER_NO_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
+//        [TITLE_KEY:"商品金額", KEY_KEY:AMOUNT_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
+//        [TITLE_KEY:"運費", KEY_KEY:SHIPPING_FEE_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
+//        [TITLE_KEY:"稅", KEY_KEY:TAX_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
+//        [TITLE_KEY:"訂單金額", KEY_KEY:TOTAL_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
+//        [TITLE_KEY:"訂單建立時間", KEY_KEY:CREATED_AT_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
+//        [TITLE_KEY:"訂單狀態", KEY_KEY:ORDER_PROCESS_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"]
+//    ]
+//
+//    var gatewayRows: [[String: String]] = [
+//        [TITLE_KEY:"付款方式", KEY_KEY:GATEWAY_METHOD_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"more"],
+//        [TITLE_KEY:"付款狀態", KEY_KEY:GATEWAY_PROCESS_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
+//        [TITLE_KEY:"付款時間", KEY_KEY:GATEWAY_AT_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"]
+//    ]
+//
+//    var shippingRows: [[String: String]] = [
+//        [TITLE_KEY:"到貨方式", KEY_KEY:SHIPPING_METHOD_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
+//        [TITLE_KEY:"到貨狀態", KEY_KEY:SHIPPING_PROCESS_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
+//        [TITLE_KEY:"出貨時間", KEY_KEY:SHIPPING_AT_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"]
+//    ]
+//
+//    var invoiceRows: [[String: String]] = [
+//        [TITLE_KEY:"發票種類", KEY_KEY:INVOICE_TYPE_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"],
+//        [TITLE_KEY:"寄送EMail", KEY_KEY:INVOICE_EMAIL_KEY, VALUE_KEY:"", SHOW_KEY:"", CELL_KEY:"text"]
+//    ]
+//
+//    var memberRows: [[String: String]] = [
+//        [TITLE_KEY:"姓名",KEY_KEY:NAME_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"text"],
+//        [TITLE_KEY:"電話",KEY_KEY:MOBILE_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"text"],
+//        [TITLE_KEY:"EMail",KEY_KEY:EMAIL_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"text"],
+//        [TITLE_KEY:"住址",KEY_KEY:ADDRESS_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"text"]
+//    ]
+//
+//    let memoRows: [[String: String]] = [
+//        [TITLE_KEY: "留言",KEY_KEY:MEMO_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"text"]
+//    ]
     
     var gateway: GATEWAY = GATEWAY.credit_card
     var payment_no: String = ""
@@ -92,7 +92,8 @@ class PaymentVC: MyTableVC {
         return cv
     }()
     
-    var popupRows: [[String: String]] = [[String: String]]()
+    //var popupRows: [[String: String]] = [[String: String]]()
+    var popupRows: [OneRow] = [OneRow]()
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -293,15 +294,15 @@ class PaymentVC: MyTableVC {
         titleLbl.text = orderTable!.order_no
         titleLbl.textColor = UIColor.black
         
-        mySections = [
-            ["name": "商品", "isExpanded": true, KEY_KEY: PRODUCT_KEY],
-            ["name": "訂單", "isExpanded": true, KEY_KEY: ORDER_KEY],
-            ["name": "付款方式", "isExpanded": true, KEY_KEY: GATEWAY_KEY],
-            ["name": "寄送方式", "isExpanded": true, KEY_KEY: SHIPPING_KEY],
-            ["name": "電子發票", "isExpanded": true, KEY_KEY: INVOICE_KEY],
-            ["name": "訂購人資料", "isExpanded": true, KEY_KEY: MEMBER_KEY],
-            ["name": "其他留言", "isExpanded": true, KEY_KEY: MEMO_KEY]
-        ]
+//        mySections = [
+//            ["name": "商品", "isExpanded": true, KEY_KEY: PRODUCT_KEY],
+//            ["name": "訂單", "isExpanded": true, KEY_KEY: ORDER_KEY],
+//            ["name": "付款方式", "isExpanded": true, KEY_KEY: GATEWAY_KEY],
+//            ["name": "寄送方式", "isExpanded": true, KEY_KEY: SHIPPING_KEY],
+//            ["name": "電子發票", "isExpanded": true, KEY_KEY: INVOICE_KEY],
+//            ["name": "訂購人資料", "isExpanded": true, KEY_KEY: MEMBER_KEY],
+//            ["name": "其他留言", "isExpanded": true, KEY_KEY: MEMO_KEY]
+//        ]
         
         orderTable!.filterRow()
         if (orderTable!.all_process > 1) {//已經付費了
@@ -411,7 +412,7 @@ class PaymentVC: MyTableVC {
         
         //gateway
         rows.removeAll()
-        row = OneRow(title: "付款方式", value: orderTable!.gateway!.method, show: orderTable!.gateway!.method_show, key: GATEWAY_METHOD_KEY, cell: "text")
+        row = OneRow(title: "付款方式", value: orderTable!.gateway!.method, show: orderTable!.gateway!.method_show, key: GATEWAY_METHOD_KEY, cell: "more")
         rows.append(row)
         row = OneRow(title: "付款狀態", value: orderTable!.gateway!.process, show: orderTable!.gateway!.process_show, key: GATEWAY_PROCESS_KEY, cell: "text")
         rows.append(row)
@@ -617,7 +618,7 @@ class PaymentVC: MyTableVC {
         if (tableView == popupTableView) {
             return 1
         } else {
-            return mySections.count
+            return oneSections.count
         }
     }
     
@@ -628,16 +629,22 @@ class PaymentVC: MyTableVC {
         if (tableView == popupTableView) {
             return popupRows.count
         } else {
-            let mySection: [String: Any] = mySections[section]
-            if (mySection.keyExist(key: "isExpanded")) {
-                let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
-                if (isExpanded) {
-                    if let key: String = mySection[KEY_KEY] as? String {
-                        let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
-                        count = rows.count
-                    }
-                }
+            let tmp = oneSections[section]
+            if (tmp.isExpanded) {
+                count = tmp.items.count
+            } else {
+                count = 0
             }
+//            let mySection: [String: Any] = mySections[section]
+//            if (mySection.keyExist(key: "isExpanded")) {
+//                let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
+//                if (isExpanded) {
+//                    if let key: String = mySection[KEY_KEY] as? String {
+//                        let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+//                        count = rows.count
+//                    }
+//                }
+//            }
         }
         
         return count
@@ -653,13 +660,13 @@ class PaymentVC: MyTableVC {
             headerView.tag = section
             
             let titleLabel = UILabel()
-            titleLabel.text = getSectionName(idx: section)
+            titleLabel.text = oneSections[section].title
             titleLabel.textColor = UIColor.black
             titleLabel.sizeToFit()
             titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
             headerView.addSubview(titleLabel)
             
-            let isExpanded = getSectionExpanded(idx: section)
+            let isExpanded = oneSections[section].isExpanded
             let mark = UIImageView(image: UIImage(named: "to_right"))
             mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
             toggleMark(mark: mark, isExpanded: isExpanded)
@@ -676,92 +683,109 @@ class PaymentVC: MyTableVC {
         
         if (tableView == popupTableView) {
             
-            let row: [String: String] = popupRows[indexPath.row]
-            var title: String = ""
-            if let tmp: String = row[TITLE_KEY] {
-                title = tmp
-            }
-            var show: String = ""
-            if let tmp: String = row[SHOW_KEY] {
-                show = tmp
-            }
-            var cell_type = "text"
-            if let tmp: String = row[CELL_KEY] {
-                cell_type = tmp
-            }
-            if (cell_type == "text") {
+            let row: OneRow = popupRows[indexPath.row]
+            
+            if (row.cell == "text") {
                 if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
-                    cell.update(title: title, show: show)
+                    cell.update(title: row.title, show: row.show)
                     return cell
                 }
-            } else if (cell_type == "barcode") {
+            } else if (row.cell == "barcode") {
                 if let cell: BarcodeCell = tableView.dequeueReusableCell(withIdentifier: "BarcodeCell", for: indexPath) as? BarcodeCell {
-                    cell.update(title: title, barcode: show)
+                    cell.update(title: row.title, barcode: row.show)
                     return cell
                 }
             }
         } else {
             
-            var sectionKey: String = ""
-            let section: [String: Any] = myRows[indexPath.section]
-            if let tmp: String = section[KEY_KEY] as? String {
-                sectionKey = tmp
-            }
+            let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
             
-            var rowKey: String = ""
-            var row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-            if let tmp: String = row[KEY_KEY] {
-                rowKey = tmp
-            }
-            
-            var cell_type: String = "text"
-            if (row.keyExist(key: CELL_KEY)) {
-                cell_type = row[CELL_KEY]!
-            }
-            
-            var title: String = ""
-            var show: String = ""
-            var value: String = ""
-            
-            if row.keyExist(key: TITLE_KEY) {
-                title = row[TITLE_KEY]!
-            }
-            
-            if row.keyExist(key: SHOW_KEY) {
-                show = row[SHOW_KEY]!
-            }
-            
-            if row.keyExist(key: VALUE_KEY) {
-                value = row[VALUE_KEY]!
-            }
-            
-//            if (rowKey == GATEWAY_METHOD_KEY) {
-//                let method: GATEWAY = GATEWAY.stringToEnum(orderTable!.gateway!.method)
-//
-//                if (method == GATEWAY.store_cvs || method == GATEWAY.store_barcode || method == GATEWAY.ATM) {
-//                    cell_type = "more"
-//                }
-//            }
-            
-            if (cell_type == "cart") {
+            if (row.cell == "cart") {
                 if let cell: CartListCell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
                     
-                    cell.update(sectionKey: sectionKey,rowKey: rowKey,title: title,featured_path:row["featured_path"]!,attribute:row["attribute"]!,amount: row["amount"]!,quantity: row["quantity"]!)
+                    cell.cellDelegate = self
+                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                    //cell.update(sectionKey: sectionKey,rowKey: rowKey,title: title,featured_path:row["featured_path"]!,attribute:row["attribute"]!,amount: row["amount"]!,quantity: row["quantity"]!)
                     return cell
                 }
-            } else if (cell_type == "text") {
+            } else if (row.cell == "text") {
+                
                 if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
                     
-                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, show: show)
+                    cell.update(title: row.title, show: row.show)
                     return cell
                 }
-            } else if (cell_type == "more") {
+            } else if (row.cell == "more") {
                 if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "MoreCell", for: indexPath) as? MoreCell {
                     
-                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, show: show)
+                    cell.cellDelegate = self
+                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+//                    cell.baseViewControllerDelegate = self
+//                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, show: show)
                     return cell
                 }
             }
+            
+//            var sectionKey: String = ""
+//            let section: [String: Any] = myRows[indexPath.section]
+//            if let tmp: String = section[KEY_KEY] as? String {
+//                sectionKey = tmp
+//            }
+//
+//            var rowKey: String = ""
+//            var row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
+//            if let tmp: String = row[KEY_KEY] {
+//                rowKey = tmp
+//            }
+//
+//            var cell_type: String = "text"
+//            if (row.keyExist(key: CELL_KEY)) {
+//                cell_type = row[CELL_KEY]!
+//            }
+//
+//            var title: String = ""
+//            var show: String = ""
+//            var value: String = ""
+//
+//            if row.keyExist(key: TITLE_KEY) {
+//                title = row[TITLE_KEY]!
+//            }
+//
+//            if row.keyExist(key: SHOW_KEY) {
+//                show = row[SHOW_KEY]!
+//            }
+//
+//            if row.keyExist(key: VALUE_KEY) {
+//                value = row[VALUE_KEY]!
+//            }
+//
+////            if (rowKey == GATEWAY_METHOD_KEY) {
+////                let method: GATEWAY = GATEWAY.stringToEnum(orderTable!.gateway!.method)
+////
+////                if (method == GATEWAY.store_cvs || method == GATEWAY.store_barcode || method == GATEWAY.ATM) {
+////                    cell_type = "more"
+////                }
+////            }
+//
+//            if (cell_type == "cart") {
+//                if let cell: CartListCell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
+//
+//                    cell.update(sectionKey: sectionKey,rowKey: rowKey,title: title,featured_path:row["featured_path"]!,attribute:row["attribute"]!,amount: row["amount"]!,quantity: row["quantity"]!)
+//                    return cell
+//                }
+//            } else if (cell_type == "text") {
+//                if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
+//
+//                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, show: show)
+//                    return cell
+//                }
+//            } else if (cell_type == "more") {
+//                if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "MoreCell", for: indexPath) as? MoreCell {
+//
+//                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, show: show)
+//                    return cell
+//                }
+//            }
         }
         
         return UITableViewCell()
@@ -769,27 +793,25 @@ class PaymentVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        var rowKey: String = ""
-        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-        if let tmp: String = row[KEY_KEY] {
-            rowKey = tmp
-        }
-        
-        var sectionKey: String = ""
-        let section: [String: Any] = myRows[indexPath.section]
-        if let tmp: String = section[KEY_KEY] as? String {
-            sectionKey = tmp
-        }
+//        var rowKey: String = ""
+//        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
+//        if let tmp: String = row[KEY_KEY] {
+//            rowKey = tmp
+//        }
+//
+//        var sectionKey: String = ""
+//        let section: [String: Any] = myRows[indexPath.section]
+//        if let tmp: String = section[KEY_KEY] as? String {
+//            sectionKey = tmp
+//        }
         
 //        print(sectionKey)
 //        print(rowKey)
         
-        if (sectionKey == GATEWAY_KEY && rowKey == GATEWAY_METHOD_KEY) {
+        let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
+        
+        if (row.key == GATEWAY_METHOD_KEY) {
             if (orderTable != nil) {
-                //print(orderTable!.gateway!.printRow())
-                
-                //let panel: Panel = Panel(baseVC: self)
-                //panel.show(rows: gatewayRows)
                 maskView = view.mask()
                 let top: CGFloat = (maskView.frame.height-panelHeight)/2
                 blackView = maskView.blackView(left: panelLeftPadding, top: top, width: maskView.frame.width-2*panelLeftPadding, height:panelHeight)
@@ -822,40 +844,112 @@ class PaymentVC: MyTableVC {
                     let bank_account: String = orderTable!.gateway!.bank_account
                     let expire_at: String = orderTable!.gateway!.expire_at_show
                     popupRows = [
-                        [TITLE_KEY:"銀行代號",KEY_KEY:BANK_CODE_KEY,VALUE_KEY:bank_code,SHOW_KEY:bank_code,CELL_KEY:"text"],
-                        [TITLE_KEY:"銀行帳號",KEY_KEY:BANK_ACCOUNT_KEY,VALUE_KEY:bank_account,SHOW_KEY:bank_account,CELL_KEY:"text"],
-                        [TITLE_KEY:"到期日",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:expire_at,SHOW_KEY:expire_at,CELL_KEY:"text"]
-                    ]
+                        OneRow(title: "銀行代號", value: bank_code, show: bank_code, key: BANK_CODE_KEY, cell: "text"),
+                        OneRow(title: "銀行帳號", value: bank_account, show: bank_account, key: BANK_ACCOUNT_KEY, cell: "text"),
+                        OneRow(title: "到期日", value: expire_at, show: expire_at, key: EXPIRE_AT_KEY, cell: "text")
+                        ]
+                    
                 } else if (method == GATEWAY.store_cvs) {
                     let payment_no: String = orderTable!.gateway!.payment_no
                     let expire_at: String = orderTable!.gateway!.expire_at_show
                     popupRows = [
-                        [TITLE_KEY:"繳款代碼",KEY_KEY:PAYMENT_NO_KEY,VALUE_KEY:payment_no,SHOW_KEY:payment_no,CELL_KEY:"text"],
-                        [TITLE_KEY:"到期日",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:expire_at,SHOW_KEY:expire_at,CELL_KEY:"text"]
-                    ]
+                        OneRow(title: "繳款代碼", value: payment_no, show: payment_no, key: PAYMENT_NO_KEY, cell: "text"),
+                        OneRow(title: "到期日", value: expire_at, show: expire_at, key: EXPIRE_AT_KEY, cell: "text")
+                        ]
                 } else if (method == GATEWAY.store_barcode) {
                     let barcode1: String = orderTable!.gateway!.barcode1
                     let barcode2: String = orderTable!.gateway!.barcode2
                     let barcode3: String = orderTable!.gateway!.barcode3
-                    let expire_at: String = orderTable!.gateway!.expire_at_show
                     popupRows = [
-                        [TITLE_KEY:"繳款條碼1",KEY_KEY:BARCODE1_KEY,VALUE_KEY:barcode1,SHOW_KEY:barcode1,CELL_KEY:"barcode"],
-                        [TITLE_KEY:"繳款條碼2",KEY_KEY:BARCODE2_KEY,VALUE_KEY:barcode2,SHOW_KEY:barcode2,CELL_KEY:"barcode"],
-                        [TITLE_KEY:"繳款條碼3",KEY_KEY:BARCODE3_KEY,VALUE_KEY:barcode3,SHOW_KEY:barcode3,CELL_KEY:"barcode"],
-                        [TITLE_KEY:"到期日",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:expire_at,SHOW_KEY:expire_at,CELL_KEY:"text"]
+                        OneRow(title: "繳款條碼1", value: barcode1, show: barcode1, key: BARCODE1_KEY, cell: "barcode"),
+                        OneRow(title: "繳款條碼2", value: barcode2, show: barcode2, key: BARCODE2_KEY, cell: "barcode"),
+                        OneRow(title: "繳款條碼3", value: barcode3, show: barcode3, key: BARCODE3_KEY, cell: "barcode"),
+                        OneRow(title: "到期日", value: expire_at, show: expire_at, key: EXPIRE_AT_KEY, cell: "text")
                     ]
                 } else if (method == GATEWAY.credit_card) {
                     let card6No: String = orderTable!.gateway!.card6No
                     let card4No: String = orderTable!.gateway!.card4No
                     popupRows = [
-                        [TITLE_KEY:"信用卡前6碼",KEY_KEY:PAYMENT_NO_KEY,VALUE_KEY:card6No,SHOW_KEY:card6No,CELL_KEY:"text"],
-                        [TITLE_KEY:"信用卡後4碼",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:card4No,SHOW_KEY:card4No,CELL_KEY:"text"]
-                    ]
+                        OneRow(title: "信用卡前6碼", value: card6No, show: card6No, key: "", cell: "text"),
+                        OneRow(title: "信用卡後4碼", value: card4No, show: card4No, key: "", cell: "text")
+                        ]
                 }
-                
                 popupTableView.reloadData()
             }
         }
+        
+//        if (sectionKey == GATEWAY_KEY && rowKey == GATEWAY_METHOD_KEY) {
+//            if (orderTable != nil) {
+//                //print(orderTable!.gateway!.printRow())
+//
+//                //let panel: Panel = Panel(baseVC: self)
+//                //panel.show(rows: gatewayRows)
+//                maskView = view.mask()
+//                let top: CGFloat = (maskView.frame.height-panelHeight)/2
+//                blackView = maskView.blackView(left: panelLeftPadding, top: top, width: maskView.frame.width-2*panelLeftPadding, height:panelHeight)
+//
+//                popupTableView.frame = CGRect(x: 0, y: 0, width: blackView.frame.width, height: blackView.frame.height-80)
+//                popupTableView.dataSource = self
+//                popupTableView.delegate = self
+//
+//                popupTableView.backgroundColor = .clear
+//
+//                blackView.addSubview(popupTableView)
+//
+//                let plainNib = UINib(nibName: "PlainCell", bundle: nil)
+//                popupTableView.register(plainNib, forCellReuseIdentifier: "PlainCell")
+//                let barcodeNib = UINib(nibName: "BarcodeCell", bundle: nil)
+//                popupTableView.register(barcodeNib, forCellReuseIdentifier: "BarcodeCell")
+//
+//                stackView = blackView.addStackView(height: 80)
+//
+//                panelCancelBtn = stackView.addCancelBtn()
+//                //panelSubmitBtn = stackView.addSubmitBtn()
+//                panelCancelBtn.addTarget(self, action: #selector(panelCancelAction), for: .touchUpInside)
+//                let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
+//                gesture.cancelsTouchesInView = false
+//                maskView.addGestureRecognizer(gesture)
+//
+//                let method: GATEWAY = GATEWAY.stringToEnum(orderTable!.gateway!.method)
+//                if (method == GATEWAY.ATM) {
+//                    let bank_code: String = orderTable!.gateway!.bank_code
+//                    let bank_account: String = orderTable!.gateway!.bank_account
+//                    let expire_at: String = orderTable!.gateway!.expire_at_show
+//                    popupRows = [
+//                        [TITLE_KEY:"銀行代號",KEY_KEY:BANK_CODE_KEY,VALUE_KEY:bank_code,SHOW_KEY:bank_code,CELL_KEY:"text"],
+//                        [TITLE_KEY:"銀行帳號",KEY_KEY:BANK_ACCOUNT_KEY,VALUE_KEY:bank_account,SHOW_KEY:bank_account,CELL_KEY:"text"],
+//                        [TITLE_KEY:"到期日",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:expire_at,SHOW_KEY:expire_at,CELL_KEY:"text"]
+//                    ]
+//                } else if (method == GATEWAY.store_cvs) {
+//                    let payment_no: String = orderTable!.gateway!.payment_no
+//                    let expire_at: String = orderTable!.gateway!.expire_at_show
+//                    popupRows = [
+//                        [TITLE_KEY:"繳款代碼",KEY_KEY:PAYMENT_NO_KEY,VALUE_KEY:payment_no,SHOW_KEY:payment_no,CELL_KEY:"text"],
+//                        [TITLE_KEY:"到期日",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:expire_at,SHOW_KEY:expire_at,CELL_KEY:"text"]
+//                    ]
+//                } else if (method == GATEWAY.store_barcode) {
+//                    let barcode1: String = orderTable!.gateway!.barcode1
+//                    let barcode2: String = orderTable!.gateway!.barcode2
+//                    let barcode3: String = orderTable!.gateway!.barcode3
+//                    let expire_at: String = orderTable!.gateway!.expire_at_show
+//                    popupRows = [
+//                        [TITLE_KEY:"繳款條碼1",KEY_KEY:BARCODE1_KEY,VALUE_KEY:barcode1,SHOW_KEY:barcode1,CELL_KEY:"barcode"],
+//                        [TITLE_KEY:"繳款條碼2",KEY_KEY:BARCODE2_KEY,VALUE_KEY:barcode2,SHOW_KEY:barcode2,CELL_KEY:"barcode"],
+//                        [TITLE_KEY:"繳款條碼3",KEY_KEY:BARCODE3_KEY,VALUE_KEY:barcode3,SHOW_KEY:barcode3,CELL_KEY:"barcode"],
+//                        [TITLE_KEY:"到期日",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:expire_at,SHOW_KEY:expire_at,CELL_KEY:"text"]
+//                    ]
+//                } else if (method == GATEWAY.credit_card) {
+//                    let card6No: String = orderTable!.gateway!.card6No
+//                    let card4No: String = orderTable!.gateway!.card4No
+//                    popupRows = [
+//                        [TITLE_KEY:"信用卡前6碼",KEY_KEY:PAYMENT_NO_KEY,VALUE_KEY:card6No,SHOW_KEY:card6No,CELL_KEY:"text"],
+//                        [TITLE_KEY:"信用卡後4碼",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:card4No,SHOW_KEY:card4No,CELL_KEY:"text"]
+//                    ]
+//                }
+//
+//                popupTableView.reloadData()
+//            }
+//        }
     }
     
     @objc func panelCancelAction(){

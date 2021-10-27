@@ -199,7 +199,6 @@ class MyTableVC: BaseViewController {
     override func setSwitch(indexPath: IndexPath, value: Bool) {
         
         searchPanel.setSwitch(indexPath: indexPath, value: value)
-        
     }
     
     override func setTextField(key: String, value: String) {
@@ -215,22 +214,22 @@ class MyTableVC: BaseViewController {
         searchPanel.clear(key: key)
     }
     
-    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
-        let key = section_keys[indexPath.section][indexPath.row]
-        return getFormItemFromKey(key)
-    }
+//    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
+//        let key = section_keys[indexPath.section][indexPath.row]
+//        return getFormItemFromKey(key)
+//    }
     
-    func getFormItemFromKey(_ key: String)-> FormItem? {
-        var res: FormItem? = nil
-        for formItem in form.formItems {
-            if key == formItem.name {
-                res = formItem
-                break
-            }
-        }
-
-        return res
-    }
+//    func getFormItemFromKey(_ key: String)-> FormItem? {
+//        var res: FormItem? = nil
+//        for formItem in form.formItems {
+//            if key == formItem.name {
+//                res = formItem
+//                break
+//            }
+//        }
+//
+//        return res
+//    }
 
     func getDefinedRow(_ key: String) -> [String: Any] {
         for row in searchRows {
@@ -240,7 +239,7 @@ class MyTableVC: BaseViewController {
         }
         return [String: Any]()
     }
-    
+
     func getDefinedRow(_ section: Int, _ row: Int) -> [String: Any] {
         let key = searchSections[section].items[row]
         return getDefinedRow(key)

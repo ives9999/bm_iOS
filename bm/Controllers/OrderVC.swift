@@ -953,6 +953,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         //updateSubTotal(price: price)
 //    }
     
+    //the key is section key not row key
     override func cellRadioChanged(key: String, sectionIdx: Int, rowIdx: Int, isChecked: Bool) {
         
         //點選發票選項
@@ -989,8 +990,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             let section: OneSection = oneSections[sectionIdx]
             rows = section.items
             
-            for row in rows {
-                if (row.key == key) {
+            for (idx, row) in rows.enumerated() {
+                if (idx == rowIdx) {
                     row.value = String(isChecked)
                 } else {
                     row.value = String(!isChecked)
