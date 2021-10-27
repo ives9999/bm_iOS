@@ -97,6 +97,10 @@ class TextFieldCell: FormItemCell {
         if (baseViewControllerDelegate != nil) {
             baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: "")
         }
+        
+        if (cellDelegate != nil) {
+            
+        }
     }
     
     @IBAction func promptBtnPressed(_ sender: Any) {

@@ -312,6 +312,8 @@ class PaymentVC: MyTableVC {
             tableViewBottomConstraint.constant = 100
         }
         
+        var rows: [OneRow] = [OneRow]()
+        
         let orderItemsTable = orderTable!.items
         for orderItemTable in orderItemsTable {
             
@@ -329,153 +331,244 @@ class PaymentVC: MyTableVC {
                 }
             }
             
-            let row:[String: String] = [TITLE_KEY:productTable!.name,KEY_KEY:PRODUCT_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"cart","featured_path":productTable!.featured_path,"attribute":attribute_text,"amount":orderItemTable.amount_show,"quantity":String(orderItemTable.quantity)]
-            productRows.append(row)
+            let row = OneRow(title: productTable!.name, key: PRODUCT_KEY, cell: "cart")
+            row.featured_path = productTable!.featured_path
+            row.attribute = attribute_text
+            row.amount = orderItemTable.amount_show
+            row.quantity = String(orderItemTable.quantity)
+            
+            rows.append(row)
+            
+//            let row:[String: String] = [TITLE_KEY:productTable!.name,KEY_KEY:PRODUCT_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"cart","featured_path":productTable!.featured_path,"attribute":attribute_text,"amount":orderItemTable.amount_show,"quantity":String(orderItemTable.quantity)]
+//            productRows.append(row)
         }
         
-        myRows = [
-            [KEY_KEY:PRODUCT_KEY, "rows": productRows],
-            [KEY_KEY:ORDER_KEY, "rows": orderRows],
-            [KEY_KEY:GATEWAY_KEY, "rows": gatewayRows],
-            [KEY_KEY:SHIPPING_KEY, "rows": shippingRows],
-            [KEY_KEY:INVOICE_KEY, "rows": invoiceRows],
-            [KEY_KEY:MEMBER_KEY, "rows": memberRows],
-            [KEY_KEY:MEMO_KEY, "rows": memoRows]
-        ]
+        var section = makeSectionRow(title: "商品", key: PRODUCT_KEY, rows: rows)
+        oneSections.append(section)
+        
+//        myRows = [
+//            [KEY_KEY:PRODUCT_KEY, "rows": productRows],
+//            [KEY_KEY:ORDER_KEY, "rows": orderRows],
+//            [KEY_KEY:GATEWAY_KEY, "rows": gatewayRows],
+//            [KEY_KEY:SHIPPING_KEY, "rows": shippingRows],
+//            [KEY_KEY:INVOICE_KEY, "rows": invoiceRows],
+//            [KEY_KEY:MEMBER_KEY, "rows": memberRows],
+//            [KEY_KEY:MEMO_KEY, "rows": memoRows]
+//        ]
         
         //order
-        var row: [String: String] = getRowRowsFromMyRowsByKey1(key: ORDER_NO_KEY)
-        row[VALUE_KEY] = orderTable!.order_no
-        row[SHOW_KEY] = orderTable!.order_no
-        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: ORDER_NO_KEY, _row: row)
+        rows.removeAll()
+        var row = OneRow(title: "訂單編號", value: orderTable!.order_no, show: orderTable!.order_no, key: ORDER_NO_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "商品金額", value: String(orderTable!.amount), show: orderTable!.amount_show, key: AMOUNT_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "運費", value: String(orderTable!.shipping_fee), show: orderTable!.shipping_fee_show, key: SHIPPING_FEE_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "税", value: String(orderTable!.tax), show: orderTable!.tax_show, key: TAX_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "訂單金額", value: String(orderTable!.total), show: orderTable!.total_show, key: TOTAL_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "訂單建立時間", value: String(orderTable!.created_at), show: orderTable!.created_at_show, key: CREATED_AT_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "訂單狀態", value: String(orderTable!.all_process), show: orderTable!.all_process_show, key: ORDER_PROCESS_KEY, cell: "text")
+        rows.append(row)
+        section = makeSectionRow(title: "訂單", key: ORDER_KEY, rows: rows)
+        oneSections.append(section)
+//        var row: [String: String] = getRowRowsFromMyRowsByKey1(key: ORDER_NO_KEY)
+//        row[VALUE_KEY] = orderTable!.order_no
+//        row[SHOW_KEY] = orderTable!.order_no
+//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: ORDER_NO_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: AMOUNT_KEY)
-        row[VALUE_KEY] = String(orderTable!.amount)
-        row[SHOW_KEY] = orderTable!.amount_show
-        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: AMOUNT_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: AMOUNT_KEY)
+//        row[VALUE_KEY] = String(orderTable!.amount)
+//        row[SHOW_KEY] = orderTable!.amount_show
+//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: AMOUNT_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_FEE_KEY)
-        row[VALUE_KEY] = String(orderTable!.shipping_fee)
-        row[SHOW_KEY] = orderTable!.shipping_fee_show
-        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: SHIPPING_FEE_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_FEE_KEY)
+//        row[VALUE_KEY] = String(orderTable!.shipping_fee)
+//        row[SHOW_KEY] = orderTable!.shipping_fee_show
+//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: SHIPPING_FEE_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: TAX_KEY)
-        row[VALUE_KEY] = String(orderTable!.tax)
-        row[SHOW_KEY] = orderTable!.tax_show
-        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: TAX_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: TAX_KEY)
+//        row[VALUE_KEY] = String(orderTable!.tax)
+//        row[SHOW_KEY] = orderTable!.tax_show
+//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: TAX_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: TOTAL_KEY)
-        row[VALUE_KEY] = String(orderTable!.total)
-        row[SHOW_KEY] = orderTable!.total_show
-        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: TOTAL_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: TOTAL_KEY)
+//        row[VALUE_KEY] = String(orderTable!.total)
+//        row[SHOW_KEY] = orderTable!.total_show
+//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: TOTAL_KEY, _row: row)
+//
+//        row = getRowRowsFromMyRowsByKey1(key: CREATED_AT_KEY)
+//        row[VALUE_KEY] = orderTable!.created_at
+//        row[SHOW_KEY] = orderTable!.created_at_show
+//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: CREATED_AT_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: CREATED_AT_KEY)
-        row[VALUE_KEY] = orderTable!.created_at
-        row[SHOW_KEY] = orderTable!.created_at_show
-        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: CREATED_AT_KEY, _row: row)
-        
-        row = getRowRowsFromMyRowsByKey1(key: ORDER_PROCESS_KEY)
-        row[VALUE_KEY] = String(orderTable!.all_process)
-        row[SHOW_KEY] = orderTable!.all_process_show
-        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: ORDER_PROCESS_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: ORDER_PROCESS_KEY)
+//        row[VALUE_KEY] = String(orderTable!.all_process)
+//        row[SHOW_KEY] = orderTable!.all_process_show
+//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: ORDER_PROCESS_KEY, _row: row)
         
         //gateway
-        row = getRowRowsFromMyRowsByKey1(key: GATEWAY_METHOD_KEY)
-        row[VALUE_KEY] = orderTable!.gateway!.method
-        row[SHOW_KEY] = orderTable!.gateway!.method_show
-        replaceRowByKey(sectionKey: GATEWAY_KEY, rowKey: GATEWAY_METHOD_KEY, _row: row)
+        rows.removeAll()
+        row = OneRow(title: "付款方式", value: orderTable!.gateway!.method, show: orderTable!.gateway!.method_show, key: GATEWAY_METHOD_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "付款狀態", value: orderTable!.gateway!.process, show: orderTable!.gateway!.process_show, key: GATEWAY_PROCESS_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "付款時間", value: orderTable!.gateway!.gateway_at, show: orderTable!.gateway!.gateway_at_show, key: GATEWAY_AT_KEY, cell: "text")
+        rows.append(row)
+        section = makeSectionRow(title: "付款方式", key: GATEWAY_KEY, rows: rows)
+        oneSections.append(section)
         
-        row = getRowRowsFromMyRowsByKey1(key: GATEWAY_AT_KEY)
-        row[VALUE_KEY] = orderTable!.gateway?.gateway_at
-        row[SHOW_KEY] = orderTable!.gateway?.gateway_at_show
-        replaceRowByKey(sectionKey: GATEWAY_KEY, rowKey: GATEWAY_AT_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: GATEWAY_METHOD_KEY)
+//        row[VALUE_KEY] = orderTable!.gateway!.method
+//        row[SHOW_KEY] = orderTable!.gateway!.method_show
+//        replaceRowByKey(sectionKey: GATEWAY_KEY, rowKey: GATEWAY_METHOD_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: GATEWAY_PROCESS_KEY)
-        row[VALUE_KEY] = orderTable!.gateway!.process
-        row[SHOW_KEY] = orderTable!.gateway!.process_show
-        replaceRowByKey(sectionKey: GATEWAY_KEY, rowKey: GATEWAY_PROCESS_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: GATEWAY_AT_KEY)
+//        row[VALUE_KEY] = orderTable!.gateway?.gateway_at
+//        row[SHOW_KEY] = orderTable!.gateway?.gateway_at_show
+//        replaceRowByKey(sectionKey: GATEWAY_KEY, rowKey: GATEWAY_AT_KEY, _row: row)
+        
+//        row = getRowRowsFromMyRowsByKey1(key: GATEWAY_PROCESS_KEY)
+//        row[VALUE_KEY] = orderTable!.gateway!.process
+//        row[SHOW_KEY] = orderTable!.gateway!.process_show
+//        replaceRowByKey(sectionKey: GATEWAY_KEY, rowKey: GATEWAY_PROCESS_KEY, _row: row)
         
         //shipping
-        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_METHOD_KEY)
-        row[VALUE_KEY] = orderTable!.shipping!.method
-        row[SHOW_KEY] = orderTable!.shipping!.method_show
-        shippingRows = replaceRowByKey(rows: shippingRows, key: SHIPPING_METHOD_KEY, newRow: row)
+        rows.removeAll()
+        row = OneRow(title: "到貨方式", value: orderTable!.shipping!.method, show: orderTable!.shipping!.method_show, key: SHIPPING_METHOD_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "到貨狀態", value: orderTable!.shipping!.process, show: orderTable!.shipping!.process_show, key: SHIPPING_PROCESS_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "出貨時間", value: orderTable!.shipping!.shipping_at, show: orderTable!.shipping!.shipping_at_show, key: SHIPPING_AT_KEY, cell: "text")
+        rows.append(row)
+        if (orderTable!.shipping?.method == "store_711" || orderTable!.shipping?.method == "store_family") {
+            row = OneRow(title: "到達商店時間", value: orderTable!.shipping!.store_at, show: orderTable!.shipping!.store_at_show, key: SHIPPING_STORE_AT_KEY, cell: "text")
+            rows.append(row)
+        }
+        row = OneRow(title: "到貨時間", value: orderTable!.shipping!.complete_at, show: orderTable!.shipping!.complete_at_show, key: SHIPPING_COMPLETE_AT_KEY, cell: "text")
+        rows.append(row)
+        if (orderTable!.shipping!.back_at.count > 0) {
+            row = OneRow(title: "退貨時間", value: orderTable!.shipping!.back_at, show: orderTable!.shipping!.back_at_show, key: SHIPPING_BACK_AT_KEY, cell: "text")
+            rows.append(row)
+        }
+        section = makeSectionRow(title: "到貨方式", key: SHIPPING_KEY, rows: rows)
+        oneSections.append(section)
+        
+//        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_METHOD_KEY)
+//        row[VALUE_KEY] = orderTable!.shipping!.method
+//        row[SHOW_KEY] = orderTable!.shipping!.method_show
+//        shippingRows = replaceRowByKey(rows: shippingRows, key: SHIPPING_METHOD_KEY, newRow: row)
         //replaceRowByKey(sectionKey: SHIPPING_KEY, rowKey: SHIPPING_METHOD_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_AT_KEY)
-        row[VALUE_KEY] = orderTable!.shipping?.shipping_at
-        row[SHOW_KEY] = orderTable!.shipping?.shipping_at_show
-        shippingRows = replaceRowByKey(rows: shippingRows, key: SHIPPING_AT_KEY, newRow: row)
+//        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_AT_KEY)
+//        row[VALUE_KEY] = orderTable!.shipping?.shipping_at
+//        row[SHOW_KEY] = orderTable!.shipping?.shipping_at_show
+//        shippingRows = replaceRowByKey(rows: shippingRows, key: SHIPPING_AT_KEY, newRow: row)
         //replaceRowByKey(sectionKey: SHIPPING_KEY, rowKey: SHIPPING_AT_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_PROCESS_KEY)
-        row[VALUE_KEY] = orderTable!.shipping!.process
-        row[SHOW_KEY] = orderTable!.shipping!.process_show
-        shippingRows = replaceRowByKey(rows: shippingRows, key: SHIPPING_PROCESS_KEY, newRow: row)
+//        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_PROCESS_KEY)
+//        row[VALUE_KEY] = orderTable!.shipping!.process
+//        row[SHOW_KEY] = orderTable!.shipping!.process_show
+//        shippingRows = replaceRowByKey(rows: shippingRows, key: SHIPPING_PROCESS_KEY, newRow: row)
         //replaceRowByKey(sectionKey: SHIPPING_KEY, rowKey: SHIPPING_PROCESS_KEY, _row: row)
         
-        if (orderTable!.shipping?.method == "store_711" || orderTable!.shipping?.method == "store_family") {
-            row = [TITLE_KEY:"到達商店時間", KEY_KEY:SHIPPING_STORE_AT_KEY, VALUE_KEY:orderTable!.shipping!.store_at, SHOW_KEY:orderTable!.shipping!.store_at_show, CELL_KEY:"text"]
-            shippingRows.append(row)
-        }
+//        if (orderTable!.shipping?.method == "store_711" || orderTable!.shipping?.method == "store_family") {
+//            row = [TITLE_KEY:"到達商店時間", KEY_KEY:SHIPPING_STORE_AT_KEY, VALUE_KEY:orderTable!.shipping!.store_at, SHOW_KEY:orderTable!.shipping!.store_at_show, CELL_KEY:"text"]
+//            shippingRows.append(row)
+//        }
         
-        row = [TITLE_KEY:"到貨時間", KEY_KEY:SHIPPING_COMPLETE_AT_KEY, VALUE_KEY:orderTable!.shipping!.complete_at, SHOW_KEY:orderTable!.shipping!.complete_at_show, CELL_KEY:"text"]
-        shippingRows.append(row)
+//        row = [TITLE_KEY:"到貨時間", KEY_KEY:SHIPPING_COMPLETE_AT_KEY, VALUE_KEY:orderTable!.shipping!.complete_at, SHOW_KEY:orderTable!.shipping!.complete_at_show, CELL_KEY:"text"]
+//        shippingRows.append(row)
         
-        if (orderTable!.shipping!.back_at.count > 0) {
-            row = [TITLE_KEY:"退貨時間", KEY_KEY:SHIPPING_BACK_AT_KEY, VALUE_KEY:orderTable!.shipping!.back_at, SHOW_KEY:orderTable!.shipping!.back_at_show, CELL_KEY:"text"]
-            shippingRows.append(row)
-        }
-        replaceRowsByKey(sectionKey: SHIPPING_KEY, rows: shippingRows)
+//        if (orderTable!.shipping!.back_at.count > 0) {
+//            row = [TITLE_KEY:"退貨時間", KEY_KEY:SHIPPING_BACK_AT_KEY, VALUE_KEY:orderTable!.shipping!.back_at, SHOW_KEY:orderTable!.shipping!.back_at_show, CELL_KEY:"text"]
+//            shippingRows.append(row)
+//        }
+//        replaceRowsByKey(sectionKey: SHIPPING_KEY, rows: shippingRows)
         
         //invoice
+        rows.removeAll()
         let invoice_type: String = orderTable!.invoice_type
-        row = getRowFromKey(rows: invoiceRows, key: INVOICE_TYPE_KEY)
-        row[VALUE_KEY] = invoice_type
-        row[SHOW_KEY] = orderTable!.invoice_type_show
-        invoiceRows = replaceRowByKey(rows: invoiceRows, key: INVOICE_TYPE_KEY, newRow: row)
-        
+        row = OneRow(title: "發票種類", value: invoice_type, show: orderTable!.invoice_type_show, key: INVOICE_TYPE_KEY, cell: "text")
+        rows.append(row)
         if (invoice_type == "company") {
-            row = [TITLE_KEY:"公司或行號名稱", KEY_KEY:INVOICE_COMPANY_NAME_KEY, VALUE_KEY:orderTable!.invoice_company_name, SHOW_KEY:orderTable!.invoice_company_name, CELL_KEY:"text"]
-            invoiceRows.append(row)
-            row = [TITLE_KEY:"統一編號", KEY_KEY:INVOICE_COMPANY_TAX_KEY, VALUE_KEY:orderTable!.invoice_company_tax, SHOW_KEY:orderTable!.invoice_company_tax, CELL_KEY:"text"]
-            invoiceRows.append(row)
+            row = OneRow(title: "公司或行號名稱", value: orderTable!.invoice_company_name, show: orderTable!.invoice_company_name, key: INVOICE_COMPANY_NAME_KEY, cell: "text")
+            rows.append(row)
+            row = OneRow(title: "統一編號", value: orderTable!.invoice_company_tax, show: orderTable!.invoice_company_tax, key: INVOICE_COMPANY_TAX_KEY, cell: "text")
+            rows.append(row)
         }
+        row = OneRow(title: "發票種類", value: orderTable!.invoice_email, show: orderTable!.invoice_email, key: INVOICE_EMAIL_KEY, cell: "text")
+        rows.append(row)
+        section = makeSectionRow(title: "電子發票", key: INVOICE_KEY, rows: rows)
+        oneSections.append(section)
         
-        row = getRowFromKey(rows: invoiceRows, key: INVOICE_EMAIL_KEY)
-        row[VALUE_KEY] = orderTable!.invoice_email
-        row[SHOW_KEY] = orderTable!.invoice_email
-        invoiceRows = replaceRowByKey(rows: invoiceRows, key: INVOICE_EMAIL_KEY, newRow: row)
+//        let invoice_type: String = orderTable!.invoice_type
+//        row = getRowFromKey(rows: invoiceRows, key: INVOICE_TYPE_KEY)
+//        row[VALUE_KEY] = invoice_type
+//        row[SHOW_KEY] = orderTable!.invoice_type_show
+//        invoiceRows = replaceRowByKey(rows: invoiceRows, key: INVOICE_TYPE_KEY, newRow: row)
         
-        replaceRowsByKey(sectionKey: INVOICE_KEY, rows: invoiceRows)
+//        if (invoice_type == "company") {
+//            row = [TITLE_KEY:"公司或行號名稱", KEY_KEY:INVOICE_COMPANY_NAME_KEY, VALUE_KEY:orderTable!.invoice_company_name, SHOW_KEY:orderTable!.invoice_company_name, CELL_KEY:"text"]
+//            invoiceRows.append(row)
+//            row = [TITLE_KEY:"統一編號", KEY_KEY:INVOICE_COMPANY_TAX_KEY, VALUE_KEY:orderTable!.invoice_company_tax, SHOW_KEY:orderTable!.invoice_company_tax, CELL_KEY:"text"]
+//            invoiceRows.append(row)
+//        }
+        
+//        row = getRowFromKey(rows: invoiceRows, key: INVOICE_EMAIL_KEY)
+//        row[VALUE_KEY] = orderTable!.invoice_email
+//        row[SHOW_KEY] = orderTable!.invoice_email
+//        invoiceRows = replaceRowByKey(rows: invoiceRows, key: INVOICE_EMAIL_KEY, newRow: row)
+//
+//        replaceRowsByKey(sectionKey: INVOICE_KEY, rows: invoiceRows)
         //myRows[4]["rows"] = invoiceRows
         
         //member
-        row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
-        row[VALUE_KEY] = orderTable!.order_name
-        row[SHOW_KEY] = orderTable!.order_name
-        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: NAME_KEY, _row: row)
+        rows.removeAll()
+        row = OneRow(title: "姓名", value: orderTable!.order_name, show: orderTable!.order_name, key: NAME_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "電話", value: orderTable!.order_tel, show: orderTable!.order_tel, key: MOBILE_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "EMail", value: orderTable!.order_email, show: orderTable!.order_email, key: EMAIL_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "住址", value: orderTable!.order_address, show: orderTable!.order_address, key: ADDRESS_KEY, cell: "text")
+        rows.append(row)
+        section = makeSectionRow(title: "電子發票", key: INVOICE_KEY, rows: rows)
+        oneSections.append(section)
         
-        row = getRowRowsFromMyRowsByKey1(key: MOBILE_KEY)
-        row[VALUE_KEY] = orderTable!.order_tel
-        row[SHOW_KEY] = orderTable!.order_tel_show
-        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: MOBILE_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
+//        row[VALUE_KEY] = orderTable!.order_name
+//        row[SHOW_KEY] = orderTable!.order_name
+//        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: NAME_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: EMAIL_KEY)
-        row[VALUE_KEY] = orderTable!.order_email
-        row[SHOW_KEY] = orderTable!.order_email
-        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: EMAIL_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: MOBILE_KEY)
+//        row[VALUE_KEY] = orderTable!.order_tel
+//        row[SHOW_KEY] = orderTable!.order_tel_show
+//        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: MOBILE_KEY, _row: row)
         
-        row = getRowRowsFromMyRowsByKey1(key: ADDRESS_KEY)
-        row[VALUE_KEY] = orderTable!.order_address
-        row[SHOW_KEY] = orderTable!.order_address
-        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: ADDRESS_KEY, _row: row)
+//        row = getRowRowsFromMyRowsByKey1(key: EMAIL_KEY)
+//        row[VALUE_KEY] = orderTable!.order_email
+//        row[SHOW_KEY] = orderTable!.order_email
+//        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: EMAIL_KEY, _row: row)
+        
+//        row = getRowRowsFromMyRowsByKey1(key: ADDRESS_KEY)
+//        row[VALUE_KEY] = orderTable!.order_address
+//        row[SHOW_KEY] = orderTable!.order_address
+//        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: ADDRESS_KEY, _row: row)
         
         //memo
-        row = getRowRowsFromMyRowsByKey1(key: MEMO_KEY)
-        row[VALUE_KEY] = orderTable!.memo
-        row[SHOW_KEY] = orderTable!.memo
-        replaceRowByKey(sectionKey: MEMO_KEY, rowKey: MEMO_KEY, _row: row)
+        rows.removeAll()
+        row = OneRow(title: "其他留言", value: orderTable!.memo, show: orderTable!.memo, key: MEMO_KEY, cell: "text")
+        rows.append(row)
+        section = makeSectionRow(title: "其他留言", key: MEMO_KEY, rows: rows)
+        oneSections.append(section)
+        
+//        row = getRowRowsFromMyRowsByKey1(key: MEMO_KEY)
+//        row[VALUE_KEY] = orderTable!.memo
+//        row[SHOW_KEY] = orderTable!.memo
+//        replaceRowByKey(sectionKey: MEMO_KEY, rowKey: MEMO_KEY, _row: row)
         
         
         tableView.reloadData()

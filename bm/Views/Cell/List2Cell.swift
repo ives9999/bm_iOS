@@ -30,6 +30,7 @@ protocol List1CellDelegate {
     func cellSetTag(sectionIdx: Int, rowIdx: Int, value: String, isChecked: Bool)
     func cellNumberChanged(sectionIdx: Int, rowIdx: Int, number: Int)
     func cellRadioChanged(key: String, sectionIdx: Int, rowIdx: Int, isChecked: Bool)
+    func cellClear(sectionIdx: Int, rowIdx: Int)
 }
 
 class List2Cell: UITableViewCell {

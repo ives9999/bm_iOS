@@ -100,7 +100,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         myTablView = tableView
         dataService = CartService.instance
-
+        
         super.viewDidLoad()
         //print(superProduct)
         self.hideKeyboardWhenTappedAround()
@@ -801,6 +801,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         if (tableView == invoiceTable) {
             
+            let row: OneRow = invoiceOptionRows[indexPath.row]
+            let checked: Bool = Bool(row.value)!
+            cellRadioChanged(key: INVOICE_TYPE_KEY, sectionIdx: indexPath.section, rowIdx: indexPath.row, isChecked: !checked)
             //let rowKey: String = invoiceOptionRows[indexPath.row]["key"]!
             //let checked: Bool = Bool(invoiceOptionRows[indexPath.row]["value"]!)!
             //radioDidChange(sectionKey: INVOICE_KEY, rowKey: rowKey, checked: !checked)
@@ -832,9 +835,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 blackView.frame = frame
                 blackView.backgroundColor = UIColor.black
                 maskView.addSubview(blackView)
-                let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
-                gesture.cancelsTouchesInView = false
-                maskView.addGestureRecognizer(gesture)
+                
+//                let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
+//                gesture.cancelsTouchesInView = false
+//                maskView.addGestureRecognizer(gesture)
                 
                 addInvoiceSelectView()
                 addCancelBtn()
@@ -845,6 +849,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
     }
     
+    
     @objc override func unmask(){
         
         maskView.unmask()
@@ -854,8 +859,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         //let frame = view.frame
         invoiceTable.frame = CGRect(x: 0, y: 0, width: blackView.frame.width, height: invoiceTableHeight)
+        
         invoiceTable.dataSource = self
         invoiceTable.delegate = self
+        invoiceTable.isUserInteractionEnabled = true
         
         invoiceTable.backgroundColor = .clear
         
@@ -970,8 +977,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             section.items.append(row)
             if (idx1 == 0) {
                 section.items.append(contentsOf: invoicePersonalRows)
+                row.value = INVOICE_PERSONAL_KEY
             } else {
                 section.items.append(contentsOf: invoiceCompanyRows)
+                row.value = INVOICE_COMPANY_KEY
             }
             
             invoiceTable.reloadData()
@@ -991,12 +1000,25 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         tableView.reloadData()
     }
     
-    override func radioDidChange(sectionKey: String, rowKey: String, checked: Bool) {
+    override func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {
         
-        //點選發票選項
-        invoiceRows.removeAll()
-        if (sectionKey == INVOICE_KEY) {
-            
+        let row: OneRow = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        row.value = str
+        row.show = str
+    }
+    
+    override func cellClear(sectionIdx: Int, rowIdx: Int) {
+        let row: OneRow = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        row.value = ""
+        row.show = ""
+    }
+    
+//    override func radioDidChange(sectionKey: String, rowKey: String, checked: Bool) {
+//
+//        //點選發票選項
+//        invoiceRows.removeAll()
+//        if (sectionKey == INVOICE_KEY) {
+//
 //            for invoiceFixedRow in invoiceFixedRows {
 //                invoiceRows.append(invoiceFixedRow)
 //            }
@@ -1031,46 +1053,46 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //            replaceRowsByKey(sectionKey: INVOICE_KEY, rows: invoiceRows)
 //
 //            maskView.removeFromSuperview()
-            
-            invoiceTable.reloadData()
-            
-        } else {
-            let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
-            for row in rows {
-                
-                if (row.keyExist(key: "key")) {
-                    let key = row["key"]
-                    var _row = row
-                    var a: Bool = false
-                    if (key == rowKey) {
-                        a = checked
-                    } else {
-                        a = !checked
-                    }
-                    _row["value"] = String(a)
-                    replaceRowByKey(sectionKey: sectionKey, rowKey: key!, _row: _row)
-                }
-            }
-        }
-        tableView.reloadData()
-    }
+//
+//            invoiceTable.reloadData()
+//
+//        } else {
+//            let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
+//            for row in rows {
+//
+//                if (row.keyExist(key: "key")) {
+//                    let key = row["key"]
+//                    var _row = row
+//                    var a: Bool = false
+//                    if (key == rowKey) {
+//                        a = checked
+//                    } else {
+//                        a = !checked
+//                    }
+//                    _row["value"] = String(a)
+//                    replaceRowByKey(sectionKey: sectionKey, rowKey: key!, _row: _row)
+//                }
+//            }
+//        }
+//        tableView.reloadData()
+//    }
     
-    override func textFieldDidChange(sectionKey: String, rowKey: String, text: String) {
-        
-        let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
-        for row in rows {
-            if (row.keyExist(key: "key")) {
-                let key = row["key"]
-                if (key == rowKey) {
-                    var _row = row
-                    _row["value"] = text
-                    _row["show"] = text
-                    replaceRowByKey(sectionKey: sectionKey, rowKey: rowKey, _row: _row)
-                    //print(myRows)
-                }
-            }
-        }
-    }
+//    override func textFieldDidChange(sectionKey: String, rowKey: String, text: String) {
+//        
+//        let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
+//        for row in rows {
+//            if (row.keyExist(key: "key")) {
+//                let key = row["key"]
+//                if (key == rowKey) {
+//                    var _row = row
+//                    _row["value"] = text
+//                    _row["show"] = text
+//                    replaceRowByKey(sectionKey: sectionKey, rowKey: rowKey, _row: _row)
+//                    //print(myRows)
+//                }
+//            }
+//        }
+//    }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
         
@@ -1081,10 +1103,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["do"] = "update"
         params["cart_id"] = String(cartTable!.id)
         
-        params[AMOUNT_KEY] = getRowValue(rowKey: AMOUNT_KEY)
-        params[SHIPPING_FEE_KEY] = getRowValue(rowKey: SHIPPING_FEE_KEY)
-        params[TAX_KEY] = getRowValue(rowKey: TAX_KEY)
-        params[TOTAL_KEY] = getRowValue(rowKey: TOTAL_KEY)
+        params[AMOUNT_KEY] = getOneRowValue(AMOUNT_KEY)
+        params[SHIPPING_FEE_KEY] = getOneRowValue(SHIPPING_FEE_KEY)
+        params[TAX_KEY] = getOneRowValue(TAX_KEY)
+        params[TOTAL_KEY] = getOneRowValue(TOTAL_KEY)
         params[DISCOUNT_KEY] = "0"
         
         var discount: Int = 0
@@ -1097,58 +1119,74 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
         params[GRAND_TOTAL_KEY] = String(discount + total)
         
-        let gateways = getRowRowsFromMyRowsByKey(key: GATEWAY_KEY)
-        var key: String = "credit_card"
-        for gateway in gateways {
-            if (gateway["value"] == "true") {
-                key = gateway["key"]!
+        var rows = getOneRowsFromSectionKey(GATEWAY_KEY)
+        for row in rows {
+            if (row.value == "true") {
+                params[GATEWAY_KEY] = row.key
             }
         }
-        params[GATEWAY_KEY] = key
+//        let gateways = getRowRowsFromMyRowsByKey(key: GATEWAY_KEY)
+//        var key: String = "credit_card"
+//        for gateway in gateways {
+//            if (gateway["value"] == "true") {
+//                key = gateway["key"]!
+//            }
+//        }
+//        params[GATEWAY_KEY] = key
         
-        let shippings = getRowRowsFromMyRowsByKey(key: SHIPPING_KEY)
-        key = "direct"
-        for shipping in shippings {
-            if (shipping["value"] == "true") {
-                key = shipping["key"]!
+        rows = getOneRowsFromSectionKey(SHIPPING_KEY)
+        for row in rows {
+            if (row.value == "true") {
+                params[SHIPPING_KEY] = row.key
             }
         }
-        params[SHIPPING_KEY] = key
+//        let shippings = getRowRowsFromMyRowsByKey(key: SHIPPING_KEY)
+//        key = "direct"
+//        for shipping in shippings {
+//            if (shipping["value"] == "true") {
+//                key = shipping["key"]!
+//            }
+//        }
+//        params[SHIPPING_KEY] = key
         
         //invoice
+        rows = getOneRowsFromSectionKey(INVOICE_KEY)
+        let invoice_type: String = (rows[0].value == INVOICE_PERSONAL_KEY) ? "personal" : "company"
+        params[INVOICE_TYPE_KEY] = invoice_type
+        if (invoice_type == INVOICE_COMPANY_KEY) {
+            params[INVOICE_COMPANY_TAX_KEY] = getOneRowValue(INVOICE_COMPANY_TAX_KEY)
+            params[INVOICE_COMPANY_NAME_KEY] = getOneRowValue(INVOICE_COMPANY_NAME_KEY)
+        }
+        params[INVOICE_EMAIL_KEY] = getOneRowValue(INVOICE_EMAIL_KEY)
 //        for invoice_option in invoiceOptionRows {
 //            if (invoice_option["value"] == "true") {
 //                key = invoice_option["key"]!
 //            }
 //        }
-        params[INVOICE_TYPE_KEY] = key
-        
-        let invoices = getRowRowsFromMyRowsByKey(key: INVOICE_KEY)
-        for invoice in invoices {
-            for (key1, value) in invoice {
-                if (key1 == "key" && value == INVOICE_EMAIL_KEY) {
-                    params[INVOICE_EMAIL_KEY] = invoice["value"]
-                    break
-//                    } else if (invoice["key"] == COMPANY_TAX_KEY) {
-//                        params[COMPANY_TAX_KEY] = invoice["value"]
-//                    } else if (invoice["key"] == COMPANY_KEY) {
-//                        params[COMPANY_KEY] = invoice["value"]
-//                    }
-                } else if (key1 == "key" && value == INVOICE_COMPANY_NAME_KEY) {
-                    params[INVOICE_COMPANY_TAX_KEY] = invoice["value"]
-                    break
-                } else if (key1 == "key" && value == INVOICE_COMPANY_TAX_KEY) {
-                    params[INVOICE_COMPANY_NAME_KEY] = invoice["value"]
-                    break
-                }
-            }
-        }
+//        params[INVOICE_TYPE_KEY] = key
+//
+//        let invoices = getRowRowsFromMyRowsByKey(key: INVOICE_KEY)
+//        for invoice in invoices {
+//            for (key1, value) in invoice {
+//                if (key1 == "key" && value == INVOICE_EMAIL_KEY) {
+//                    params[INVOICE_EMAIL_KEY] = invoice["value"]
+//                    break
+//
+//                } else if (key1 == "key" && value == INVOICE_COMPANY_NAME_KEY) {
+//                    params[INVOICE_COMPANY_TAX_KEY] = invoice["value"]
+//                    break
+//                } else if (key1 == "key" && value == INVOICE_COMPANY_TAX_KEY) {
+//                    params[INVOICE_COMPANY_NAME_KEY] = invoice["value"]
+//                    break
+//                }
+//            }
+//        }
         
         params["member_id"] = String(Member.instance.id)
-        params["order_name"] = getRowValue(rowKey: NAME_KEY)
-        params["order_tel"] = getRowValue(rowKey: MOBILE_KEY)
-        params["order_email"] = getRowValue(rowKey: EMAIL_KEY)
-        params["order_address"] = getRowValue(rowKey: ADDRESS_KEY)
+        params["order_name"] = getOneRowValue(NAME_KEY)
+        params["order_tel"] = getOneRowValue(MOBILE_KEY)
+        params["order_email"] = getOneRowValue(EMAIL_KEY)
+        params["order_address"] = getOneRowValue(ADDRESS_KEY)
         
         params[MEMO_KEY] = getRowValue(rowKey: MEMO_KEY)
         
@@ -1183,7 +1221,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        if let item = getFormItemFromKey(WEIGHT_KEY) {
 //            params["weight"] = item.value
 //        }
-        //print(params)
+        print(params)
         
         //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
         
