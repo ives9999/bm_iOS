@@ -29,6 +29,7 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         super.viewDidLoad()
         
         clearBtn.setTitle("全部清除")
+        setupSwitch.isHidden = true
         
         //MyOneSignal.instance.save(id: "012", title: "eee", content: "這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1，這是測試內容1")
         
@@ -82,7 +83,7 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
 //    }
     
     func changeScrollViewContentSize() {
-        let height: CGFloat = tableView.contentSize.height
+        //let height: CGFloat = tableView.contentSize.height
         //let height: CGFloat = 10000
         //print(height)
         

@@ -185,29 +185,56 @@ class MyOneSignal {
 //        print("badge number: ", notification.badge)
 //        print("notification sound: ", notification.sound ?? "No sound")
         
-        if let additionalData = notification.additionalData {
-//            print("additionalData: ", additionalData)
-//            if let actionSelected = notification.actionButtons {
-//                print("actionSelected: ", actionSelected)
-//            }
-            if let actionID = result.action.actionId {
-                //handle the action
-                
-                let actionType = result.action.type
-                let data = result.notification.additionalData
-                let id = result.notification.notificationId
-                let title = result.notification.title
-                let content = result.notification.body
+        let data = notification.additionalData
 
-                var pnID = "0"
-                if (data != nil) {
-                    //pnID = getServerPNID(data)
-                }
-                MyOneSignal.instance.save(id: String(id!), title: title, content: content!, pnID: pnID)
-                
-                MyOneSignal.instance.showMsg(content!)
-            }
+        let id = notification.notificationId
+        let title = notification.title
+        let content = notification.body
+
+//            let smallIcon = notification.smallIcon
+//            let largeIcon = notification.largeIcon
+//            let bigPicture = notification.bigPicture
+//            let smallIconAccentColor = notification.smallIconAccentColor
+        let sound = notification.sound
+//            let ledColor = notification.ledColor
+//            let lockScreenVisibility = notification.lockScreenVisibility
+//            let groupKey = notification.groupKey
+//            let groupMessage = notification.groupMessage
+//            let fromProjectNumber = notification.fromProjectNumber
+        let rawPayload = notification.rawPayload
+
+        var pnID = "0"
+        if (data != nil) {
+            //pnID = getServerPNID(data)
         }
+        MyOneSignal.instance.save(id: String(id!), title: title, content: content!, pnID: pnID)
+
+        MyOneSignal.instance.showMsg(content!)
+
+        
+//        if let additionalData = notification.additionalData {
+////            print("additionalData: ", additionalData)
+////            if let actionSelected = notification.actionButtons {
+////                print("actionSelected: ", actionSelected)
+////            }
+//            if let actionID = result.action.actionId {
+//                //handle the action
+//
+//                let actionType = result.action.type
+//                let data = result.notification.additionalData
+//                let id = result.notification.notificationId
+//                let title = result.notification.title
+//                let content = result.notification.body
+//
+//                var pnID = "0"
+//                if (data != nil) {
+//                    //pnID = getServerPNID(data)
+//                }
+//                MyOneSignal.instance.save(id: String(id!), title: title, content: content!, pnID: pnID)
+//
+//                MyOneSignal.instance.showMsg(content!)
+//            }
+//        }
     }
     
 //    func openHandler(result: OSNotificationOpenedResult) {
@@ -319,7 +346,7 @@ class MyOneSignal {
     }
     
     func isExist(id: String)-> Bool {
-        var pnArr: Array<Dictionary<String, String>>? = self.getSession()
+        let pnArr: Array<Dictionary<String, String>>? = self.getSession()
         var b: Bool = false
         if pnArr != nil {
             for pnObj: Dictionary<String, String> in pnArr! {

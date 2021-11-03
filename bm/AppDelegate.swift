@@ -56,6 +56,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
         OneSignal.promptForPushNotifications(userResponse: { accepted in
             //print("User accepted notifications: \(accepted)")
+            
+        }, fallbackToSettings: true)
+        
+        OneSignal.register(forProvisionalAuthorization: { accepted in
+            //handle authorization
         })
         
 //        let notificationWillShowInForegroundBlock: OSNotificationWillShowInForegroundBlock = { notification, completion in
