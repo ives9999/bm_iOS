@@ -219,15 +219,15 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         }
         //print(params)
         unmask()
-        Global.instance.addSpinner(superView: view)
-        dataService.deleteTT(type: "coach", params: params) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if success {
-                self.refreshEvent()
-            } else {
-                self.warning(self.dataService.msg)
-            }
-        }
+//        Global.instance.addSpinner(superView: view)
+//        dataService.deleteTT(type: "coach", params: params) { (success) in
+//            Global.instance.removeSpinner(superView: self.view)
+//            if success {
+//                self.refreshEvent()
+//            } else {
+//                self.warning(self.dataService.msg)
+//            }
+//        }
     }
     
     @IBAction func addTimeTableBtnPressed(_ sender: Any) {
@@ -251,15 +251,15 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         }
         //print(params)
         unmask()
-        Global.instance.addSpinner(superView: view)
-        dataService.updateTT(type: "coach", params: params) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if success {
-                self.refreshEvent()
-            } else {
-                self.warning(self.dataService.msg)
-            }
-        }
+//        Global.instance.addSpinner(superView: view)
+//        dataService.updateTT(type: "coach", params: params) { (success) in
+//            Global.instance.removeSpinner(superView: self.view)
+//            if success {
+//                self.refreshEvent()
+//            } else {
+//                self.warning(self.dataService.msg)
+//            }
+//        }
     }
     
     func showEditEvent(_ btnCount: Int) {
@@ -301,13 +301,13 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     
     override func refresh() {
         Global.instance.addSpinner(superView: self.view)
-        dataService.getTT(token: token, type: source) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if success {
-                self.refreshEvent()
-            }
-            self.endRefresh()
-        }
+//        dataService.getTT(token: token, type: source) { (success) in
+//            Global.instance.removeSpinner(superView: self.view)
+//            if success {
+//                self.refreshEvent()
+//            }
+//            self.endRefresh()
+//        }
     }
     
     func refreshEvent() {

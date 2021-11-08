@@ -252,7 +252,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //print("section:\(indexPath.section)=>row:\(indexPath.row)")
-        let row = getOneRowFromIdx(sectionIdx: indexPath.section, rowIdx: indexPath.row)
+        let row = getOneRowFromIdx(indexPath.section, indexPath.row)
         //let item = getFormItemFromIdx(indexPath)
         //let cell: UITableViewCell
         let cell_type: String = row.cell
@@ -313,7 +313,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         //let item = getFormItemFromIdx(indexPath)
-        let row = getOneRowFromIdx(sectionIdx: indexPath.section, rowIdx: indexPath.row)
+        let row = getOneRowFromIdx(indexPath.section, indexPath.row)
         let key = row.key
         if key == CITY_KEY {
 //                    let selectItem: CityFormItem = item as! CityFormItem
@@ -683,19 +683,19 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     
     
     override func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {
-        let row = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        let row = getOneRowFromIdx(sectionIdx, rowIdx)
         row.value = str
         row.show = str
     }
     
     override func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String) {
-        let row = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        let row = getOneRowFromIdx(sectionIdx, rowIdx)
         row.value = sex
         row.show = sex
     }
     
     override func cellPrivacyChanged(sectionIdx: Int, rowIdx: Int, checked: Bool) {
-        let row = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        let row = getOneRowFromIdx(sectionIdx, rowIdx)
         row.value = String(checked)
         if !checked {
             warning("必須同意隱私權條款，才能註冊")

@@ -63,7 +63,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     let body_css = "<style>body{background-color:#000;padding-left:8px;padding-right:8px;margin-top:0;padding-top:0;color:#888888;font-size:18px;}a{color:#a6d903;}</style>"
     
     var searchPanel: SearchPanel = SearchPanel()
-    var searchRows: [[String: Any]] = [[String: Any]]()
+    var searchSections: [SearchSection] = [SearchSection]()
     
     //WeekdaysSelectDelegate
     func setWeekdaysData(selecteds: [Int]){}
@@ -189,7 +189,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     }
     
     @objc func searchPressed() {
-        searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, searchRows: searchRows)
+        searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, searchSections: searchSections)
     }
     
     func mask(y: CGFloat, superView: UIView? = nil, height: CGFloat? = nil) {
@@ -595,9 +595,9 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         let rows = session.getAreasByCity(city_id)
         //print(rows)
         if rows.count == 0 {
-            let city_ids: [Int] = [city_id]
+            //let city_ids: [Int] = [city_id]
             Global.instance.addSpinner(superView: view)
-            DataService.instance1.getAreaByCityIDs(city_ids: city_ids,city_type: "") { (success) in
+            DataService.instance1.getAreaByCityIDs(city_ids: "",city_type: "") { (success) in
                 if success {
                     
                     let city = DataService.instance1.citysandareas
@@ -646,11 +646,12 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         
         //session.removeObject(forKey: "areas")
         let rows = session.getAreasByCitys(city_ids)
+        let citys1: String = Global.instance.intsToStringComma(city_ids)
         //print(rows)
         if rows.count < city_ids.count {
             //let city_ids: [Int] = [city_id]
             Global.instance.addSpinner(superView: view)
-            DataService.instance1.getAreaByCityIDs(city_ids: city_ids,city_type: "") { (success) in
+            DataService.instance1.getAreaByCityIDs(city_ids: citys1,city_type: "") { (success) in
                 if success {
                     
                     var res: [String: [String: Any]] = [String: [String: Any]]()

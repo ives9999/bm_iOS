@@ -21,29 +21,31 @@ class MemberVC: MyTableVC {
     //let _sections: [String] = ["會員資料", "訂單", "喜歡", "管理"]
     
     //let _sections: [String] = ["會員資料", "報名"]
-    let fixedRows: [Dictionary<String, String>] = [
-        ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
-        ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
-    ]
-    var memberRows: [Dictionary<String, String>] = [Dictionary<String, String>]()
+//    let fixedRows: [Dictionary<String, String>] = [
+//        ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
+//        ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
+//    ]
+//    var memberRows: [Dictionary<String, String>] = [Dictionary<String, String>]()
+//
+//    var orderRows: [Dictionary<String, String>] = [
+//        ["text": "購物車", "icon": "cart", "segue": TO_MEMBER_CART_LIST],
+//        ["text": "訂單查詢", "icon": "order", "segue": TO_MEMBER_ORDER_LIST]
+//    ]
+//
+//    let likeRows: [Dictionary<String, String>] = [
+//        ["text": "球隊","icon":"team","segue":TO_LIKE,"able_type":"team"],
+//        ["text": "球館","icon":"arena","segue":TO_LIKE,"able_type":"arena"],
+//        ["text": "教練","icon":"coach","segue":TO_LIKE,"able_type":"coach"],
+//        ["text": "課程","icon":"course","segue":TO_LIKE,"able_type":"course"],
+//        ["text": "商品","icon":"product","segue":TO_LIKE,"able_type":"product"],
+//        ["text": "體育用品店","icon":"store","segue":TO_LIKE,"able_type":"store"]
+//    ]
+//
+//    let courseRows: [Dictionary<String, String>] = [
+//        ["text": "課程","icon":"course","segue":"toManagerCourse","able_type":"course"]
+//    ]
     
-    var orderRows: [Dictionary<String, String>] = [
-        ["text": "購物車", "icon": "cart", "segue": TO_MEMBER_CART_LIST],
-        ["text": "訂單查詢", "icon": "order", "segue": TO_MEMBER_ORDER_LIST]
-    ]
-    
-    let likeRows: [Dictionary<String, String>] = [
-        ["text": "球隊","icon":"team","segue":TO_LIKE,"able_type":"team"],
-        ["text": "球館","icon":"arena","segue":TO_LIKE,"able_type":"arena"],
-        ["text": "教練","icon":"coach","segue":TO_LIKE,"able_type":"coach"],
-        ["text": "課程","icon":"course","segue":TO_LIKE,"able_type":"course"],
-        ["text": "商品","icon":"product","segue":TO_LIKE,"able_type":"product"],
-        ["text": "體育用品店","icon":"store","segue":TO_LIKE,"able_type":"store"]
-    ]
-    
-    let courseRows: [Dictionary<String, String>] = [
-        ["text": "課程","icon":"course","segue":"toManagerCourse","able_type":"course"]
-    ]
+    var memberSections: [MemberSection] = [MemberSection]()
     
     let heightForSection: CGFloat = 34
     
@@ -65,19 +67,19 @@ class MemberVC: MyTableVC {
         
         super.viewDidLoad()
         
-        mySections = [
-            ["name": "會員資料", "isExpanded": true, "key": "data"],
-            ["name": "訂單", "isExpanded": true, "key": "order"],
-            ["name": "喜歡", "isExpanded": false, "key": "like"],
-            ["name": "管理", "isExpanded": true, "key": "manager"]
-        ]
-        
-        myRows = [
-            ["key":"data", "rows": memberRows],
-            ["key":"order", "rows": orderRows],
-            ["key":"like", "rows": likeRows],
-            ["key":"manager", "rows": courseRows],
-        ]
+//        mySections = [
+//            ["name": "會員資料", "isExpanded": true, "key": "data"],
+//            ["name": "訂單", "isExpanded": true, "key": "order"],
+//            ["name": "喜歡", "isExpanded": false, "key": "like"],
+//            ["name": "管理", "isExpanded": true, "key": "manager"]
+//        ]
+//
+//        myRows = [
+//            ["key":"data", "rows": memberRows],
+//            ["key":"order", "rows": orderRows],
+//            ["key":"like", "rows": likeRows],
+//            ["key":"manager", "rows": courseRows],
+//        ]
 
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
     }
@@ -86,6 +88,135 @@ class MemberVC: MyTableVC {
         super.viewDidAppear(animated)
         //refresh()
         loginout()
+    }
+    
+    func initSectionRows1() -> [MemberSection] {
+        
+        if (memberSections.count > 0) {
+            return memberSections
+        }
+        
+        var sections: [MemberSection] = [MemberSection]()
+        
+        sections.append(makeSection0Row1())
+        sections.append(makeSection1Row1())
+        sections.append(makeSection2Row1(isEpanded: false))
+        sections.append(makeSection3Row1())
+        
+        return sections
+    }
+    
+    func makeSection0Row1(isEpanded: Bool = true)-> MemberSection {
+        
+        var rows: [MemberRow] = [MemberRow]()
+        
+        let fixedRows = makeSection0FixRow()
+        rows.append(contentsOf: fixedRows)
+        
+        let validateRows = makeSection0ValidateRow()
+        rows.append(contentsOf: validateRows)
+        
+        let refreshRows = makeSection0RefreshRow()
+        rows.append(contentsOf: refreshRows)
+        
+        let s: MemberSection = MemberSection(title: "會員資料", isExpanded: isEpanded, items: rows)
+        
+        return s
+    }
+    
+    func makeSection0FixRow()-> [MemberRow] {
+        
+        var rows: [MemberRow] = [MemberRow]()
+        
+        let r1: MemberRow = MemberRow(title: "帳戶資料", icon: "account", segue: TO_PROFILE)
+        rows.append(r1)
+        
+        let r2: MemberRow = MemberRow(title: "更改密碼", icon: "password", segue: TO_PASSWORD)
+        rows.append(r2)
+        
+        return rows
+    }
+    
+    func makeSection0RefreshRow()-> [MemberRow] {
+        
+        var rows: [MemberRow] = [MemberRow]()
+        
+        let r1: MemberRow = MemberRow(title: "重新整理", icon: "refresh", segue: TO_REFRESH)
+        rows.append(r1)
+        
+        return rows
+    }
+    
+    func makeSection0ValidateRow() -> [MemberRow] {
+        
+        var rows: [MemberRow] = [MemberRow]()
+        
+        let validate: Int = Member.instance.validate
+        
+        if (validate & EMAIL_VALIDATE <= 0) {
+            let r: MemberRow = MemberRow(title: "email認證", icon: "email1", segue: TO_VALIDATE)
+            r.validate_type = "email"
+            rows.append(r)
+        }
+        
+        if (validate & MOBILE_VALIDATE <= 0) {
+            let r: MemberRow = MemberRow(title: "手機認證", icon: "mobile", segue: TO_VALIDATE)
+            r.validate_type = "mobile"
+            rows.append(r)
+        }
+        
+        return rows
+    }
+    
+    func makeSection1Row1(isEpanded: Bool = true)-> MemberSection {
+        
+        var rows: [MemberRow] = [MemberRow]()
+        
+        let r1: MemberRow = MemberRow(title: "購物車", icon: "cart", segue: TO_MEMBER_CART_LIST)
+        rows.append(r1)
+        
+        let r2: MemberRow = MemberRow(title: "訂單查詢", icon: "order", segue: TO_MEMBER_ORDER_LIST)
+        rows.append(r2)
+        
+        let s: MemberSection = MemberSection(title: "訂單查詢", isExpanded: isEpanded, items: rows)
+        
+        return s
+    }
+    
+    func makeSection2Row1(isEpanded: Bool = true)-> MemberSection {
+        
+        var rows: [MemberRow] = [MemberRow]()
+        
+        let r1: MemberRow = MemberRow(title: "球隊", icon: "team", segue: TO_LIKE, able_type: "team")
+        rows.append(r1)
+        let r2: MemberRow = MemberRow(title: "球館", icon: "arena", segue: TO_LIKE, able_type: "arena")
+        rows.append(r2)
+        let r3: MemberRow = MemberRow(title: "教學", icon: "teach", segue: TO_LIKE, able_type: "teach")
+        rows.append(r3)
+        let r4: MemberRow = MemberRow(title: "教練", icon: "coach", segue: TO_LIKE, able_type: "coach")
+        rows.append(r4)
+        let r5: MemberRow = MemberRow(title: "課程", icon: "course", segue: TO_LIKE, able_type: "course")
+        rows.append(r5)
+        let r6: MemberRow = MemberRow(title: "商品", icon: "product", segue: TO_LIKE, able_type: "product")
+        rows.append(r6)
+        let r7: MemberRow = MemberRow(title: "體育用品店", icon: "store", segue: TO_LIKE, able_type: "store")
+        rows.append(r7)
+        
+        let s: MemberSection = MemberSection(title: "喜歡", isExpanded: isEpanded, items: rows)
+        
+        return s
+    }
+    
+    func makeSection3Row1(isEpanded: Bool = true)-> MemberSection {
+
+        var rows: [MemberRow] = [MemberRow]()
+        
+        let r1: MemberRow = MemberRow(title: "課程", icon: "course", segue: "manager_course")
+        rows.append(r1)
+
+        let s: MemberSection = MemberSection(title: "管理", isExpanded: isEpanded, items: rows)
+
+        return s
     }
     
     override func refresh() {
@@ -115,38 +246,38 @@ class MemberVC: MyTableVC {
         }
     }
     
-    func setValidateRow() {
-        //_rows.removeAll()
-        memberRows.removeAll()
-        memberRows = fixedRows
-        if Member.instance.isLoggedIn {// detected validate status
-            let validate: Int = Member.instance.validate
-            //print(validate)
-            if validate & EMAIL_VALIDATE <= 0 {
-                let new: Dictionary<String, String> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
-                memberRows.append(new)
-            }
-            if validate & MOBILE_VALIDATE <= 0 {
-                let new: Dictionary<String, String> = ["text": "手機認證", "icon": "mobile_validate", "segue": TO_VALIDATE, "type": "mobile"]
-                memberRows.append(new)
-            }
-        }
-//        if Member.instance.isTeamManager {
-//            let new: Dictionary<String, String> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]
-//            memberRows.append(new)
+//    func setValidateRow() {
+//        //_rows.removeAll()
+//        memberRows.removeAll()
+//        memberRows = fixedRows
+//        if Member.instance.isLoggedIn {// detected validate status
+//            let validate: Int = Member.instance.validate
+//            //print(validate)
+//            if validate & EMAIL_VALIDATE <= 0 {
+//                let new: Dictionary<String, String> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
+//                memberRows.append(new)
+//            }
+//            if validate & MOBILE_VALIDATE <= 0 {
+//                let new: Dictionary<String, String> = ["text": "手機認證", "icon": "mobile_validate", "segue": TO_VALIDATE, "type": "mobile"]
+//                memberRows.append(new)
+//            }
 //        }
-        let new: Dictionary<String, String> = ["text": "重新整理", "icon": "refresh", "segue": TO_REFRESH]
-        memberRows.append(new)
-        myRows[0]["rows"] = memberRows
-        
-//        _rows.append(memberRows)
-//        _rows.append(orderRows)
-//        _rows.append(likeRows)
-//        _rows.append(courseRows)
-//        _rows.append(signupRows)
-        //print(_rows)
-        //setData(sections: _sections, rows: _rows)
-    }
+////        if Member.instance.isTeamManager {
+////            let new: Dictionary<String, String> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]
+////            memberRows.append(new)
+////        }
+//        let new: Dictionary<String, String> = ["text": "重新整理", "icon": "refresh", "segue": TO_REFRESH]
+//        memberRows.append(new)
+//        myRows[0]["rows"] = memberRows
+//
+////        _rows.append(memberRows)
+////        _rows.append(orderRows)
+////        _rows.append(likeRows)
+////        _rows.append(courseRows)
+////        _rows.append(signupRows)
+//        //print(_rows)
+//        //setData(sections: _sections, rows: _rows)
+//    }
     
 //    var mySections: [[String: Any]] = [
 //        ["name": "會員資料", "isExpanded": true, "key": "data"],
@@ -195,22 +326,26 @@ class MemberVC: MyTableVC {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        return mySections.count
+        return memberSections.count
+        //return mySections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         var count: Int = 0
-        let mySection: [String: Any] = mySections[section]
-        if (mySection.keyExist(key: "isExpanded")) {
-            let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
-            if (isExpanded) {
-                if let key: String = mySection["key"] as? String {
-                    let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
-                    count = rows.count
-                }
-            }
+        if (memberSections[section].isExpanded) {
+            count = memberSections[section].items.count
         }
+//        let mySection: [String: Any] = mySections[section]
+//        if (mySection.keyExist(key: "isExpanded")) {
+//            let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
+//            if (isExpanded) {
+//                if let key: String = mySection["key"] as? String {
+//                    let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+//                    count = rows.count
+//                }
+//            }
+//        }
         
         return count
         
@@ -240,13 +375,13 @@ class MemberVC: MyTableVC {
         headerView.tag = section
         
         let titleLabel = UILabel()
-        titleLabel.text = getSectionName(idx: section)
+        titleLabel.text = memberSections[section].title
         titleLabel.textColor = UIColor.black
         titleLabel.sizeToFit()
         titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
         headerView.addSubview(titleLabel)
         
-        let isExpanded = getSectionExpanded(idx: section)
+        let isExpanded = memberSections[section].isExpanded
         let mark = UIImageView(image: UIImage(named: "to_right"))
         mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
         toggleMark(mark: mark, isExpanded: isExpanded)
@@ -272,7 +407,8 @@ class MemberVC: MyTableVC {
         //cell.delegate = self
         //print(rows)
                 
-        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
+        let row: MemberRow = memberSections[indexPath.section].items[indexPath.row]
+        //let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
         cell.setRow(row: row)
         
         if indexPath.section == 1 && indexPath.row == 0 {
@@ -284,74 +420,103 @@ class MemberVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-        //print(row)
-        if row.keyExist(key: "segue") && row["segue"] != nil {
-            let segue: String = row["segue"]!
-            //print("segue: \(segue)")
-            if segue == TO_PROFILE {
-                toRegister()
-//                if #available(iOS 13.0, *) {
-//                    let storyboard = UIStoryboard(name: "Member", bundle: nil)
-//                    let viewController = storyboard.instantiateViewController(identifier: "UIViewController-vfe-V8-Hfx")
-//                    show(viewController, sender: nil)
-//                } else {
-//                    let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-vfe-V8-Hfx") as! ProfileVC
-//                    self.navigationController!.pushViewController(viewController, animated: true)
-//                }
-                //performSegue(withIdentifier: segue, sender: nil)
-            } else if segue == TO_PASSWORD {
-                toPassword(type: "change_password")
-                //performSegue(withIdentifier: segue, sender: "change_password")
-            } else if segue == TO_VALIDATE {
-                
-                var sender: String = ""
-                if row["type"] != nil {
-                    sender = row["type"]!
-                }
-                toValidate(type: sender)
-                
-                
-                //performSegue(withIdentifier: segue, sender: sender)
-            } else if segue == TO_BLACKLIST {
-                performSegue(withIdentifier: segue, sender: nil)
-            } else if segue == TO_REFRESH {
-                refresh()
-            } else if segue == TO_SIGNUP_LIST {
-             
-                 //if let vc = storyboard?.instantiateViewController(withIdentifier: "toS") as? CourseCalendarVC {
-                     //present(vc, animated: true, completion: nil)
-                 //}
-                performSegue(withIdentifier: "toA", sender: nil)
-            } else if segue == TO_MEMBER_ORDER_LIST {
-                toMemberOrderList()
-            } else if segue == TO_MEMBER_CART_LIST {
-                toMemberCartList()
-            } else if segue == TO_LIKE {
-                var able_type: String = "team"
-                if (row.keyExist(key: "able_type") && row["able_type"] != nil) {
-                    able_type = row["able_type"]!
-                }
-                //toMemberLikeList(able_type)
-                if (able_type == "team") {
-                    toTeam(member_like: true)
-                } else if (able_type == "course") {
-                    toCourse(member_like: true)
-                } else if (able_type == "product") {
-                    toProduct(member_like: true)
-                } else if (able_type == "coach") {
-                    toCoach(member_like: true)
-                } else if (able_type == "arena") {
-                    toArena(member_like: true)
-                } else if (able_type == "store") {
-                    toStore(member_like: true)
-                } else {
-                    warning("沒有這個喜歡的連結")
-                }
-            } else if segue == "toManagerCourse" {
-                toManagerCourse(manager_token: Member.instance.token)
+        let row: MemberRow = memberSections[indexPath.section].items[indexPath.row]
+        let segue: String = row.segue
+        if segue == TO_PROFILE {
+            toRegister()
+        } else if segue == TO_PASSWORD {
+            toPassword(type: "change_password")
+        } else if segue == TO_VALIDATE {
+            toValidate(type: row.validate_type)
+        } else if segue == TO_BLACKLIST {
+            performSegue(withIdentifier: segue, sender: nil)
+        } else if segue == TO_REFRESH {
+            refresh()
+        } else if segue == TO_SIGNUP_LIST {
+            performSegue(withIdentifier: "toA", sender: nil)
+        } else if segue == TO_MEMBER_ORDER_LIST {
+            toMemberOrderList()
+        } else if segue == TO_MEMBER_CART_LIST {
+            toMemberCartList()
+        } else if segue == TO_LIKE {
+            let able_type: String = row.able_type
+            
+            if (able_type == "team") {
+                toTeam(member_like: true)
+            } else if (able_type == "course") {
+                toCourse(member_like: true)
+            } else if (able_type == "product") {
+                toProduct(member_like: true)
+            } else if (able_type == "coach") {
+                toCoach(member_like: true)
+            } else if (able_type == "arena") {
+                toArena(member_like: true, isShowPrev: true)
+            } else if (able_type == "store") {
+                toStore(member_like: true)
+            } else {
+                warning("沒有這個喜歡的連結")
             }
+        } else if segue == "toManagerCourse" {
+            toManagerCourse(manager_token: Member.instance.token)
         }
+        
+        
+        //let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
+        //print(row)
+//        if row.keyExist(key: "segue") && row["segue"] != nil {
+//            let segue: String = row["segue"]!
+//            //print("segue: \(segue)")
+//            if segue == TO_PROFILE {
+//                toRegister()
+//
+//            } else if segue == TO_PASSWORD {
+//                toPassword(type: "change_password")
+//                //performSegue(withIdentifier: segue, sender: "change_password")
+//            } else if segue == TO_VALIDATE {
+//
+//                var sender: String = ""
+//                if row["type"] != nil {
+//                    sender = row["type"]!
+//                }
+//                toValidate(type: sender)
+//
+//
+//                //performSegue(withIdentifier: segue, sender: sender)
+//            } else if segue == TO_BLACKLIST {
+//                performSegue(withIdentifier: segue, sender: nil)
+//            } else if segue == TO_REFRESH {
+//                refresh()
+//            } else if segue == TO_SIGNUP_LIST {
+//                performSegue(withIdentifier: "toA", sender: nil)
+//            } else if segue == TO_MEMBER_ORDER_LIST {
+//                toMemberOrderList()
+//            } else if segue == TO_MEMBER_CART_LIST {
+//                toMemberCartList()
+//            } else if segue == TO_LIKE {
+//                var able_type: String = "team"
+//                if (row.keyExist(key: "able_type") && row["able_type"] != nil) {
+//                    able_type = row["able_type"]!
+//                }
+//                //toMemberLikeList(able_type)
+//                if (able_type == "team") {
+//                    toTeam(member_like: true)
+//                } else if (able_type == "course") {
+//                    toCourse(member_like: true)
+//                } else if (able_type == "product") {
+//                    toProduct(member_like: true)
+//                } else if (able_type == "coach") {
+//                    toCoach(member_like: true)
+//                } else if (able_type == "arena") {
+//                    toArena(member_like: true)
+//                } else if (able_type == "store") {
+//                    toStore(member_like: true)
+//                } else {
+//                    warning("沒有這個喜歡的連結")
+//                }
+//            } else if segue == "toManagerCourse" {
+//                toManagerCourse(manager_token: Member.instance.token)
+//            }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -416,16 +581,17 @@ class MemberVC: MyTableVC {
     }
     
     public func loginout() {
-           //print(Member.instance.isLoggedIn)
-           if Member.instance.isLoggedIn   { // login
-               _loginBlock()
-           } else {
-               _logoutBlock()
-           }
+        //print(Member.instance.isLoggedIn)
+        if Member.instance.isLoggedIn   { // login
+           _loginBlock()
+        } else {
+           _logoutBlock()
        }
+    }
        
     public func _loginBlock() {
-        self.setValidateRow()
+        
+        memberSections = initSectionRows1()
         self.tableView.reloadData()
         nicknameLbl.text = Member.instance.nickname
         if Member.instance.avatar.count > 0 {
@@ -439,6 +605,7 @@ class MemberVC: MyTableVC {
     
         tableView.isHidden = false
     }
+    
     public func _logoutBlock() {
         nicknameLbl.text = "未登入"
         loginBtn.setTitle("登入", for: .normal)
@@ -448,6 +615,47 @@ class MemberVC: MyTableVC {
         forgetPasswordIcon.isHidden = false
         tableView.isHidden = true
         avatarImageView.image = UIImage(named: "menuProfileIcon")
+    }
+    
+    @objc override func handleExpandClose(gesture : UITapGestureRecognizer) {
+        
+        let headerView = gesture.view!
+        let section = headerView.tag
+        let tmp = headerView.subviews.filter({$0 is UIImageView})
+        var mark: UIImageView?
+        if tmp.count > 0 {
+            mark = tmp[0] as? UIImageView
+        }
+        
+        var indexPaths: [IndexPath] = [IndexPath]()
+        
+        //let key: String = getSectionKey(idx: section)
+        //let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+        let rows: [MemberRow] = memberSections[section].items
+        for (i, _) in rows.enumerated() {
+            let indexPath = IndexPath(row: i, section: section)
+            indexPaths.append(indexPath)
+        }
+        
+        var isExpanded = memberSections[section].isExpanded
+        memberSections[section].isExpanded = !isExpanded
+        
+//        var isExpanded = getSectionExpanded(idx: section)
+//        if (mySections[section].keyExist(key: "isExpanded")) {
+//            mySections[section]["isExpanded"] = !isExpanded
+//            //searchSections[section].isExpanded = !isExpanded
+//        }
+        
+        if isExpanded {
+            tableView.deleteRows(at: indexPaths, with: .fade)
+        } else {
+            tableView.insertRows(at: indexPaths, with: .fade)
+        }
+        
+        isExpanded = !isExpanded
+        if mark != nil {
+            toggleMark(mark: mark!, isExpanded: isExpanded)
+        }
     }
 }
 

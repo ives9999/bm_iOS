@@ -464,7 +464,7 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let row = getOneRowFromIdx(sectionIdx: indexPath.section, rowIdx: indexPath.row)
+        let row = getOneRowFromIdx(indexPath.section, indexPath.row)
         let cell_type: String = row.cell
 //        var rowKey: String = ""
 //        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
@@ -642,14 +642,14 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
     }
     
     override func cellSetTag(sectionIdx: Int, rowIdx: Int, value: String, isChecked: Bool) {
-        let row: OneRow = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
         if (isChecked) {
             row.value = value
         }
     }
     
     override func cellNumberChanged(sectionIdx: Int, rowIdx: Int, number: Int) {
-        let row: OneRow = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
         row.value = String(number)
         selected_number = number
         updateSubTotal()

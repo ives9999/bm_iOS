@@ -18,9 +18,11 @@ class ProductVC: MyTableVC {
         dataService = ProductService.instance
         //_type = "product"
         //_titleField = "name"
-        searchRows = [
-            ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入商品名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""]
-        ]
+//        searchRows = [
+//            ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入商品名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""]
+//        ]
+        
+        searchSections = initSectionRows()
         
         super.viewDidLoad()
         let cellNibName = UINib(nibName: "ProductListCell", bundle: nil)
@@ -30,6 +32,25 @@ class ProductVC: MyTableVC {
         searchBtn.visibility = .visible
         
         refresh()
+    }
+    
+    override func initSectionRows()-> [SearchSection] {
+
+        var sections: [SearchSection] = [SearchSection]()
+
+        sections.append(makeSection0Row())
+
+        return sections
+    }
+    
+    override func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
+        var rows: [SearchRow] = [SearchRow]()
+        let r1: SearchRow = SearchRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
+        rows.append(r1)
+
+        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        s.items.append(contentsOf: rows)
+        return s
     }
     
 //    override func refresh() {

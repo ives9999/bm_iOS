@@ -36,14 +36,16 @@ class SearchPanel: UIViewController {
     var myView: UIView? = nil
     var baseVC: BaseViewController? = nil
     
-    var searchRows: [[String: Any]] = [[String: Any]]()
+    //var searchRows: [[String: Any]] = [[String: Any]]()
+    var searchSections: [SearchSection] = [SearchSection]()
     
-    func showSearchPanel(baseVC: BaseViewController, view: UIView, newY: CGFloat, searchRows: [[String: Any]]) {
+    //func showSearchPanel(baseVC: BaseViewController, view: UIView, newY: CGFloat, searchRows: [[String: Any]]) {
+    func showSearchPanel(baseVC: BaseViewController, view: UIView, newY: CGFloat, searchSections: [SearchSection]) {
         
         self.myView = view
         self.baseVC = baseVC
         self.newY = 0
-        self.searchRows = searchRows
+        self.searchSections = searchSections
         
         searchPanelisHidden = false
         
@@ -157,7 +159,7 @@ class SearchPanel: UIViewController {
         
         unmask()
         if (baseVC != nil) {
-            baseVC!.searchRows = searchRows
+            baseVC!.searchSections = searchSections
             baseVC!.prepareParams()
             baseVC!.refresh()
         }
@@ -201,7 +203,7 @@ class SearchPanel: UIViewController {
     }
     
     //存在row的value只是單純的文字，陣列值使用","來區隔，例如"1,2,3"，但當要傳回選擇頁面時，必須轉回陣列[1,2,3]
-    func valueToArray<T>(t:T.Type, row: [String: Any])-> [T] {
+    func valueToArray<T>(t:T.Type, row: SearchRow)-> [T] {
         
         var selecteds: [T] = [T]()
         //print(t)
@@ -209,18 +211,17 @@ class SearchPanel: UIViewController {
         if (t.self == Int.self) {
             type = "Int"
         }
-        if let value: String = row["value"] as? String {
-            if (value.count > 0) {
-                let values = value.components(separatedBy: ",")
-                for value in values {
-                    if (type == "Int") {
-                        if let tmp = Int(value) {
-                            selecteds.append(tmp as! T)
-                        }
-                    } else {
-                        if let tmp = value as? T {
-                            selecteds.append(tmp)
-                        }
+        
+        if (row.value.count > 0) {
+            let values = row.value.components(separatedBy: ",")
+            for value in values {
+                if (type == "Int") {
+                    if let tmp = Int(value) {
+                        selecteds.append(tmp as! T)
+                    }
+                } else {
+                    if let tmp = value as? T {
+                        selecteds.append(tmp)
                     }
                 }
             }
@@ -229,46 +230,48 @@ class SearchPanel: UIViewController {
         return selecteds
     }
     
-    func getDefinedRow(_ key: String) -> [String: Any] {
-        for row in searchRows {
-            if row["key"] as! String == key {
-                return row
+    func getDefinedRow(_ key: String) -> SearchRow {
+        for section in searchSections {
+            for row in section.items {
+                if row.key == key {
+                    return row
+                }
             }
         }
-        return [String: Any]()
+        return SearchRow()
     }
     
-    func replaceRows(_ key: String, _ row: [String: Any]) {
-        for (idx, _row) in searchRows.enumerated() {
-            if _row["key"] as! String == key {
-                searchRows[idx] = row
-                break;
-            }
-        }
-    }
+//    func replaceRows(_ key: String, _ row: [String: Any]) {
+//        for (idx, _row) in searchRows.enumerated() {
+//            if _row["key"] as! String == key {
+//                searchRows[idx] = row
+//                break;
+//            }
+//        }
+//    }
     
     func singleSelected(key: String, selected: String, show: String?=nil) {
-        var row = getDefinedRow(key)
+        let row = getDefinedRow(key)
         var _show = ""
         if key == START_TIME_KEY || key == END_TIME_KEY {
-            row["value"] = selected
+            row.value = selected
             _show = selected.noSec()
         } else if (key == CITY_KEY || key == AREA_KEY) {
-            row["value"] = selected
+            row.value = selected
             _show = Global.instance.zoneIDToName(Int(selected)!)
         } else if (key == ARENA_KEY) {
-            row["value"] = selected
+            row.value = selected
             if (show != nil) {
                 _show = show!
             }
         }
-        row["show"] = _show
-        replaceRows(key, row)
+        row.show = _show
+        //replaceRows(key, row)
         reloadSearchTable()
     }
     
     func setWeekdaysData(selecteds: [Int]) {
-        var row = getDefinedRow(WEEKDAY_KEY)
+        let row = getDefinedRow(WEEKDAY_KEY)
         var texts: [String] = [String]()
         var values: [String] = [String]()
         if selecteds.count > 0 {
@@ -282,19 +285,19 @@ class SearchPanel: UIViewController {
                     }
                 }
             }
-            row["show"] = texts.joined(separator: ",")
+            row.show = texts.joined(separator: ",")
         
-            row["value"] = values.joined(separator: ",")
+            row.value = values.joined(separator: ",")
         } else {
-            row["show"] = "全部"
+            row.show = "全部"
         }
-        replaceRows(WEEKDAY_KEY, row)
+        //replaceRows(WEEKDAY_KEY, row)
         reloadSearchTable()
     }
     
     func setDegreeData(res: [DEGREE]) {
         
-        var row = getDefinedRow(DEGREE_KEY)
+        let row = getDefinedRow(DEGREE_KEY)
         var names: [String] = [String]()
         var values: [String] = [String]()
         if res.count > 0 {
@@ -302,29 +305,29 @@ class SearchPanel: UIViewController {
                 names.append(degree.rawValue)
                 values.append(DEGREE.DBValue(degree))
             }
-            row["show"] = names.joined(separator: ",")
-            row["value"] = values.joined(separator: ",")
+            row.show = names.joined(separator: ",")
+            row.value = values.joined(separator: ",")
         } else {
-            row["show"] = "全部"
-            row["value"] = ""
+            row.show = "全部"
+            row.value = ""
         }
-        replaceRows(DEGREE_KEY, row)
+        //replaceRows(DEGREE_KEY, row)
         reloadSearchTable()
     }
     
     func setTextField(key: String, value: String) {
         
-        var row = getDefinedRow(key)
-        row["value"] = value
-        replaceRows(key, row)
+        let row = getDefinedRow(key)
+        row.value = value
+        //replaceRows(key, row)
     }
     
     func setSwitch(indexPath: IndexPath, value: Bool) {
         
-        var row = searchRows[indexPath.row]
-        let key = row["key"] as! String
-        row["value"] = (value) ? "1" : ""
-        replaceRows(key, row)
+        let row = searchSections[indexPath.section].items[indexPath.row]
+        //let key = row.key
+        row.value = (value) ? "1" : ""
+        //replaceRows(key, row)
         
         reloadSearchTable()
     }
@@ -336,10 +339,10 @@ class SearchPanel: UIViewController {
     
     func clear(key: String) {
         
-        var row = getDefinedRow(key)
-        row["show"] = "全部"
-        row["value"] = ""
-        replaceRows(key, row)
+        let row = getDefinedRow(key)
+        row.show = "全部"
+        row.value = ""
+        //replaceRows(key, row)
     }
 }
 
@@ -351,20 +354,20 @@ extension SearchPanel: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return searchSections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchRows.count
+        return searchSections[section].items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
             cell.editCellDelegate = baseVC
-            let searchRow = searchRows[indexPath.row]
+            let row = searchSections[indexPath.section].items[indexPath.row]
             //print(searchRow["key"])
-            cell.forRow(indexPath: indexPath, row: searchRow, isClear: true)
+            cell.forRow(indexPath: indexPath, row: row, isClear: true)
             return cell
         }
         
@@ -376,31 +379,24 @@ extension SearchPanel: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let row = searchRows[indexPath.row]
+        let row = searchSections[indexPath.section].items[indexPath.row]
         
-        var key: String? = nil
-        if (row.keyExist(key: "key") && row["key"] != nil) {
-            key = row["key"] as? String
-        }
+        let key: String = row.key
         
-        let segue: String = row["segue"] as! String
-        if (segue == TO_CITY || segue == TO_SELECT_TIME) {
-            var selected: String? = nil
-            if (row.keyExist(key: "value") && row["value"] != nil) {
-                selected = row["value"] as? String
-            }
-            //baseVC!.toSelectCity(key: key, selected: selected, delegate: baseVC!)
+        let cell: String = row.cell
+        if (cell == TO_CITY || cell == TO_SELECT_TIME) {
+            let selected: String = row.value
             baseVC!.toSelectSingle(key: key, selected: selected, delegate: baseVC!)
-        } else if (segue == TO_SELECT_WEEKDAY) {
+        } else if (cell == TO_SELECT_WEEKDAY) {
             
             let selecteds: [Int] = valueToArray(t: Int.self, row: row)
             baseVC!.toSelectWeekday(key: key, selecteds: selecteds, delegate: baseVC!)
-        } else if segue == TO_ARENA {
+        } else if cell == TO_ARENA {
             
-            var city: Int? = nil
             var row = getDefinedRow(CITY_KEY)
-            if let value: String = row["value"] as? String {
-                city = Int(value)
+            var city: Int? = nil
+            if let value: Int = Int(row.value) {
+                city = value
 //                    if (city != nil) {
 //                        citys.append(city!)
 //                    }
@@ -412,10 +408,10 @@ extension SearchPanel: UITableViewDelegate {
             
                 //取得選擇球館的代號
                 row = getDefinedRow(ARENA_KEY)
-                let selected: String = row["value"] as! String
+                let selected: String = row.value
                 baseVC!.toSelectArena(key: key, city: city!, selected: selected, delegate: baseVC!)
             }
-        } else if (segue == TO_SELECT_DEGREE) {
+        } else if (cell == TO_SELECT_DEGREE) {
             
             let tmps: [String] = valueToArray(t: String.self, row: row)
             var selecteds: [DEGREE] = [DEGREE]()
@@ -423,13 +419,13 @@ extension SearchPanel: UITableViewDelegate {
                 selecteds.append(DEGREE.enumFromString(string: tmp))
             }
             baseVC!.toSelectDegree(selecteds: selecteds, delegate: baseVC!)
-        } else if segue == TO_AREA {
+        } else if cell == TO_AREA {
             
             //var citys: [Int] = [Int]()
-            var city: Int? = nil
             var row = getDefinedRow(CITY_KEY)
-            if let value: String = row["value"] as? String {
-                city = Int(value)
+            var city: Int? = nil
+            if let value: Int = Int(row.value) {
+                city = value
 //                    if (city != nil) {
 //                        citys.append(city!)
 //                    }
@@ -441,10 +437,8 @@ extension SearchPanel: UITableViewDelegate {
             
                 //取得選擇球館的代號
                 row = getDefinedRow(AREA_KEY)
-                var selected: String? = nil
-                if (row.keyExist(key: "value") && row["value"] != nil) {
-                    selected = row["value"] as? String
-                }
+                let selected: String = row.value
+        
                 baseVC!.toSelectArea(key: key, city_id: city, selected: selected, delegate: baseVC!)
             }
         } else {

@@ -58,6 +58,24 @@ class MenuCell: SuperCell {
         titleLbl.sizeToFit()
     }
     
+    func setRow(row: MemberRow) {
+        
+        if row.icon.count > 0 {
+            iconView.isHidden = false
+            iconView.image = UIImage(named: row.icon)
+        } else {
+            iconView.isHidden = true
+        }
+ 
+        titleLbl.text = row.title
+        titleLbl.textColor = row.color
+        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        
+        detailTextLabel?.text = row.show
+        
+        setNeedsLayout()
+    }
+    
     func setRow(row: [String: Any]) {
         
         if row["icon"] != nil {

@@ -35,13 +35,13 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         homeCV.delegate = self
         homeCV.dataSource = self
         
-        TeamService.instance.getHomes { (success) in
-            if success {
-                self.homes = TeamService.instance.homes
-                self.homeCV.reloadData()
-            }
-            Global.instance.removeSpinner(superView: self.view)
-        }
+//        TeamService.instance.getHomes { (success) in
+//            if success {
+//                self.homes = TeamService.instance.homes
+//                self.homeCV.reloadData()
+//            }
+//            Global.instance.removeSpinner(superView: self.view)
+//        }
         Global.instance.addSpinner(superView: self.view)
     }
     

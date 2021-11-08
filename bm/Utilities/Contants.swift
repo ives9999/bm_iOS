@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 typealias CompletionHandler = (_ Success: Bool) -> ()
 typealias DATA = Dictionary<String, [String: Any]>
@@ -454,7 +455,7 @@ let IDEN_SINGLE_SELECT = "UIViewController-Exi-DF-oVO"
 let IDEN_MULTI_SELECT = "UIViewController-RNp-jr-1LT"
 
 // Header
-let HEADER = ["Content-Type": "application/json; charset=utf-8"]
+let HEADER: HTTPHeaders = ["Content-Type": "application/json; charset=utf-8"]
 
 // Team Temp play list
 struct TEAM_TEMP_PLAY_CELL {

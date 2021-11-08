@@ -384,10 +384,10 @@ class ShowCoachVC: ShowVC {
     }
     
     func getCourseList() {
-        var filter: [String: Any] = [String: Any]()
+        var filter: [String: String] = [String: String]()
         filter.merge(["status": "online"])
         if myTable != nil {
-            filter.merge(["coach_id": myTable!.id])
+            filter.merge(["coach_id": String(myTable!.id)])
             
             CourseService.instance.getList(token: token!, _filter: filter, page: 1, perPage: 100) { (success2) in
                 Global.instance.removeSpinner(superView: self.view)

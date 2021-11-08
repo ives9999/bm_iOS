@@ -19,10 +19,12 @@ class CoachVC: MyTableVC {
         dataService = CoachService.instance
         //_type = "coach"
         //_titleField = "name"
-        searchRows = [
-            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入教練名稱關鍵字","text_field":true,"value":""],
-            ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":""]
-        ]
+//        searchRows = [
+//            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入教練名稱關鍵字","text_field":true,"value":""],
+//            ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":""]
+//        ]
+        
+        searchSections = initSectionRows()
         //Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
@@ -34,6 +36,28 @@ class CoachVC: MyTableVC {
         searchBtn.visibility = .visible
         
         refresh()
+    }
+    
+    override func initSectionRows()-> [SearchSection] {
+
+        var sections: [SearchSection] = [SearchSection]()
+
+        sections.append(makeSection0Row())
+        //sections.append(makeSection1Row(false))
+
+        return sections
+    }
+    
+    override func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
+        var rows: [SearchRow] = [SearchRow]()
+        let r1: SearchRow = SearchRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
+        rows.append(r1)
+        let r2: SearchRow = SearchRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        rows.append(r2)
+
+        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        s.items.append(contentsOf: rows)
+        return s
     }
     
 //    override func refresh() {

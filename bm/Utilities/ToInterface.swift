@@ -44,11 +44,12 @@ extension BaseViewController {
         }
     }
     
-    func toArena(member_like: Bool=false) {
+    func toArena(member_like: Bool=false, isShowPrev: Bool=false) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "toArena") as? ArenaVC {
                 viewController.member_like = member_like
+                viewController.isShowPrev = isShowPrev
                 viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
@@ -217,7 +218,7 @@ extension BaseViewController {
     
     func toOrder(login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
 
-        var msg: String = ""
+        let msg: String = ""
         if !Member.instance.isLoggedIn {
             warning(msg: "必須先登入會員，才能進行購買", showCloseButton: true, buttonTitle: "登入") {
                 self.goHomeThen(completion: login)
@@ -807,7 +808,7 @@ extension BaseViewController {
 //        }
 //    }
 
-    func toTeach(member_like: Bool=false, params: [String: Any]?=nil) {
+    func toTeach(member_like: Bool=false, params: [String: String]?=nil) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-By4-ki-Kov") as? TeachVC {
@@ -828,7 +829,7 @@ extension BaseViewController {
         }
     }
     
-    func toTeam(member_like: Bool=false, params: [String: Any]?=nil) {
+    func toTeam(member_like: Bool=false, params: [String: String]?=nil) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Team", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "Team") as? TeamVC {

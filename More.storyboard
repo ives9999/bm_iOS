@@ -158,6 +158,18 @@
                                     <constraint firstItem="sfO-PD-WM6" firstAttribute="centerX" secondItem="j88-uB-Kay" secondAttribute="centerX" id="wz4-Qm-HaQ"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UJo-iB-5jy">
+                                <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="OcQ-Fx-goW"/>
+                                    <constraint firstAttribute="width" constant="33" id="Ytd-Ar-hYt"/>
+                                </constraints>
+                                <state key="normal" image="prev"/>
+                                <connections>
+                                    <action selector="prevBtnPressed:" destination="NIB-Wk-iZw" eventType="touchUpInside" id="Z05-ao-7rT"/>
+                                    <action selector="prevBtnPressed:" destination="7B3-vz-daH" eventType="touchUpInside" id="nYG-Rs-cwu"/>
+                                </connections>
+                            </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="CpJ-ZY-OmS">
                                 <rect key="frame" x="0.0" y="64" width="414" height="778"/>
                             </imageView>
@@ -177,13 +189,16 @@
                             <constraint firstItem="CpJ-ZY-OmS" firstAttribute="trailing" secondItem="g6Y-AK-76q" secondAttribute="trailing" id="GhY-hZ-aKk"/>
                             <constraint firstAttribute="bottom" secondItem="CpJ-ZY-OmS" secondAttribute="bottom" id="I35-8V-GMg"/>
                             <constraint firstItem="4mb-SH-JK7" firstAttribute="leading" secondItem="g6Y-AK-76q" secondAttribute="leading" id="MhH-un-r5P"/>
+                            <constraint firstItem="UJo-iB-5jy" firstAttribute="leading" secondItem="g6Y-AK-76q" secondAttribute="leading" constant="12" id="TyP-St-T76"/>
                             <constraint firstItem="g6Y-AK-76q" firstAttribute="trailing" secondItem="4mb-SH-JK7" secondAttribute="trailing" id="XQ9-wz-bXY"/>
                             <constraint firstItem="j88-uB-Kay" firstAttribute="top" secondItem="g6Y-AK-76q" secondAttribute="top" id="hJ6-XA-mpd"/>
+                            <constraint firstItem="UJo-iB-5jy" firstAttribute="centerY" secondItem="j88-uB-Kay" secondAttribute="centerY" id="jgG-2G-g4B"/>
                             <constraint firstItem="g6Y-AK-76q" firstAttribute="bottom" secondItem="4mb-SH-JK7" secondAttribute="bottom" id="vqR-bj-beT"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="球館" image="arena" id="bjH-9J-pNt"/>
                     <connections>
+                        <outlet property="prevBtn" destination="UJo-iB-5jy" id="UJE-db-dso"/>
                         <outlet property="tableView" destination="4mb-SH-JK7" id="mee-5x-3Mw"/>
                         <outlet property="topView" destination="j88-uB-Kay" id="5gR-Bg-U7C"/>
                         <segue destination="3hL-Fr-nG3" kind="show" identifier="toShow" id="EIA-wN-WfT"/>
@@ -1578,8 +1593,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="f4Q-EU-SfD"/>
-        <segue reference="e7e-xA-HgL"/>
+        <segue reference="Wr7-FG-b1z"/>
+        <segue reference="cDK-8u-UPz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arena" width="25" height="25"/>

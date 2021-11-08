@@ -27,7 +27,7 @@ class ManagerStoreVC: MyTableVC {
     }
     
     override func refresh() {
-        var filter: [String: Any] = [String: Any]()
+        var filter: [String: String] = [String: String]()
         filter.merge(["status": "online"])
         if manager_token != nil {
             filter.merge(["manager_token": manager_token!])

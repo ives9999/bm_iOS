@@ -24,14 +24,16 @@ class TeamVC: MyTableVC {
         able_type = "team"
         //_type = "team"
         //_titleField = "name"
-        searchRows = [
-            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true,"value":""],
-            ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":""],
-            ["ch":"球館","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int](),"value":""],
-            ["ch":"星期幾","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int](),"value":""],
-            ["ch":"時段","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any](),"value":""],
-            ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String](),"value":""]
-            ]
+//        searchRows = [
+//            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true,"value":""],
+//            ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":""],
+//            ["ch":"球館","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int](),"value":""],
+//            ["ch":"星期幾","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int](),"value":""],
+//            ["ch":"時段","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any](),"value":""],
+//            ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String](),"value":""]
+//            ]
+        
+        searchSections = initSectionRows()
         Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
@@ -40,6 +42,35 @@ class TeamVC: MyTableVC {
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
         refresh()
+    }
+    
+    override func initSectionRows()-> [SearchSection] {
+
+        var sections: [SearchSection] = [SearchSection]()
+
+        sections.append(makeSection0Row())
+
+        return sections
+    }
+    
+    override func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
+        var rows: [SearchRow] = [SearchRow]()
+        let r1: SearchRow = SearchRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
+        rows.append(r1)
+        let r2: SearchRow = SearchRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        rows.append(r2)
+        let r3: SearchRow = SearchRow(title: "球館", show: "全部", key: ARENA_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        rows.append(r3)
+        let r4: SearchRow = SearchRow(title: "星期幾", show: "全部", key: WEEKDAY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        rows.append(r4)
+        let r5: SearchRow = SearchRow(title: "時段", show: "全部", key: START_TIME_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        rows.append(r5)
+        let r6: SearchRow = SearchRow(title: "程度", show: "全部", key: DEGREE_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        rows.append(r6)
+
+        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        s.items.append(contentsOf: rows)
+        return s
     }
     
 //    override func refresh() {
@@ -129,9 +160,9 @@ class TeamVC: MyTableVC {
         if let myTable: TeamTable = row as? TeamTable {
             let key: String = ARENA_KEY
             let arena_id: Int = myTable.arena_id
-            var row = getDefinedRow(key)
-            row["value"] = String(arena_id)
-            replaceRows(key, row)
+            let row = getSearchRowFromKey(key)
+            row.value = String(arena_id)
+            //replaceRows(key, row)
             prepareParams()
             refresh()
         } else {
@@ -141,7 +172,8 @@ class TeamVC: MyTableVC {
     
     @IBAction func manager(_ sender: Any) {
         if !Member.instance.isLoggedIn {
-            SCLAlertView().showError("警告", subTitle: "請先登入為會員")
+            warning("請先登入為會員")
+            //SCLAlertView().showError("警告", subTitle: "請先登入為會員")
         } else {
             performSegue(withIdentifier: TO_MANAGER, sender: nil)
         }

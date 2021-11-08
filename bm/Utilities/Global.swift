@@ -803,8 +803,6 @@ enum KEYBOARD: String {
             return UIKeyboardType.numberPad
         case .URL:
             return UIKeyboardType.URL
-        default:
-            return UIKeyboardType.default
         }
     }
 }
@@ -1012,6 +1010,16 @@ class Global {
             }
         }
         return value
+    }
+    
+    func intsToStringComma(_ ints: [Int])-> String {
+        
+        var tmp: [String] = [String]()
+        for val in ints {
+            tmp.append(String(val))
+        }
+        
+        return tmp.joined(separator: ",")
     }
     
     private func _addSpinner(spinner: UIActivityIndicatorView, superView: UIView) {
@@ -1979,7 +1987,7 @@ extension UIStackView {
         let view: CancelButton = CancelButton()
         self.addArrangedSubview(view)
         
-        let c1: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 110)
+        //let c1: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 110)
         //let c2: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: view.superview, attribute: .centerX, multiplier: 1, constant: 110)
         //view.translatesAutoresizingMaskIntoConstraints = false
         //self.addConstraints([c1])
@@ -1992,7 +2000,7 @@ extension UIStackView {
         let view: SubmitButton = SubmitButton()
         self.addArrangedSubview(view)
         
-        let c1: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 110)
+        //let c1: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 110)
         //view.translatesAutoresizingMaskIntoConstraints = false
         //self.addConstraints([c1])
         

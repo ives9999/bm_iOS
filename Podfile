@@ -6,7 +6,7 @@ target 'bm' do
   use_frameworks!
 
   # Pods for bm
-  pod 'Alamofire', '~> 4.9'
+  pod 'Alamofire', '~> 5.4'
   pod 'Socket.IO-Client-Swift'
   pod 'Device.swift'
   pod 'AlamofireImage'

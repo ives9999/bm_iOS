@@ -29,11 +29,11 @@ class MemberService: DataService {
     
     func login(email: String, password: String, playerID: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
-        let body: [String: Any] = ["device": "app", "email": lowerCaseEmail, "password": password, "player_id": playerID]
+        let body: [String: String] = ["device": "app", "email": lowerCaseEmail, "password": password, "player_id": playerID]
         //print(body)
         //print(URL_LOGIN)
         
-        Alamofire.request(URL_LOGIN, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+        AF.request(URL_LOGIN, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             switch response.result {
             case .success(_):
                 if (response.data != nil) {
@@ -214,36 +214,61 @@ class MemberService: DataService {
         } else if (type == "mobile") {
             url = URL_MOBILE_VALIDATE
         }
-        let body: [String: Any] = ["source": "app", "code": code, TOKEN_KEY: token]
+        let body: [String: String] = ["source": "app", "code": code, TOKEN_KEY: token]
         //print(url)
         //print(body)
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             //print(response)
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    print("data error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                let json = JSON(data)
-                //print(json)
-                self.success = json["success"].boolValue
-                if self.success {
-                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
-                    completion(true)
-                } else {
-                    if json["msg"] != JSON.null {
-                        self.msg = json["msg"].stringValue
+            
+            switch response.result {
+            //case .success(let value):
+            case .success(_):
+                if response.data != nil {
+                    //let json = JSON(value)
+                    //print(value)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
                     }
-                    //print(self.msg)
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
                     completion(false)
                 }
-            } else {
-                self.success = false
-                self.msg = "網路錯誤，請稍後再試"
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
                 completion(false)
+                print(error)
+                return
             }
+        
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                let json = JSON(data)
+//                //print(json)
+//                self.success = json["success"].boolValue
+//                if self.success {
+//                    NotificationCenter.default.post(name: NOTIF_MEMBER_DID_CHANGE, object: nil)
+//                    completion(true)
+//                } else {
+//                    if json["msg"] != JSON.null {
+//                        self.msg = json["msg"].stringValue
+//                    }
+//                    //print(self.msg)
+//                    completion(false)
+//                }
+//            } else {
+//                self.success = false
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//            }
         }
     }
     
@@ -257,32 +282,57 @@ class MemberService: DataService {
         let body: [String: String] = ["source": "app","value": value,TOKEN_KEY: token]
         //print(url)
         //print(body)
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             //print(response)
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    print("data error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                let json = JSON(data)
-                //print(json)
-                self.success = json["success"].boolValue
-                if self.success {
-                    completion(true)
-                } else {
-                    if json["msg"] != JSON.null {
-                        self.msg = json["msg"].stringValue
+            
+            switch response.result {
+            //case .success(let value):
+            case .success(_):
+                if response.data != nil {
+                    //let json = JSON(value)
+                    //print(value)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
                     }
-                    //print(self.msg)
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
                     completion(false)
                 }
-            } else {
-                self.success = false
-                self.msg = "網路錯誤，請稍後再試"
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
                 completion(false)
+                print(error)
+                return
             }
+        
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                let json = JSON(data)
+//                //print(json)
+//                self.success = json["success"].boolValue
+//                if self.success {
+//                    completion(true)
+//                } else {
+//                    if json["msg"] != JSON.null {
+//                        self.msg = json["msg"].stringValue
+//                    }
+//                    //print(self.msg)
+//                    completion(false)
+//                }
+//            } else {
+//                self.success = false
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//            }
         }
     }
     
@@ -326,66 +376,92 @@ class MemberService: DataService {
     
     func blacklist(token: String, completion: @escaping CompletionHandler) {
         
-        let body: [String: Any] = ["source": "app","channel":CHANNEL,"token":token]
+        let body: [String: String] = ["source": "app","channel":CHANNEL,"token":token]
         let url: String = URL_MEMBER_BLACKLIST
         //print(url)
         //print(body)
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    print("get response result value error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                let json = JSON(data)
-                //print(json)
-                let success:Bool = json["success"].boolValue
-                if (success) {
-                    self.blacklists.removeAll()
-                    let rows: [JSON] = json["rows"].arrayValue
-                    for row in rows {
-                        //print(row)
-                        let id: Int = row["id"].intValue
-                        let memberName: String = row["name"].stringValue
-                        let memberMobile: String = row["mobile"].stringValue
-                        let memberToken: String = row["token"].stringValue
-                        let date: String = row["created_at"].stringValue.noSec()
-                        let memo: String = row["memo"].stringValue
-                        let teamObj: JSON = row["team"]
-                        let teamName: String = teamObj["name"].stringValue
-                        let teamToken: String = teamObj["token"].stringValue
-                        let d:Dictionary<String, Any> = ["id":id,"memberName":memberName,"memberMobile":memberMobile,"memberToken":memberToken,"date":date,"teamName":teamName,"memo":memo,"teamToken":teamToken]
-                        self.blacklists.append(d)
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            //case .success(let value):
+            case .success(_):
+                if response.data != nil {
+                    //let json = JSON(value)
+                    //print(value)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
                     }
-                    //print(self.blacklists)
-                    completion(true)
                 } else {
-                    self.msg = "無法取得管理球隊的黑名單，請稍後再試"
-                    self.msg = "網路錯誤，請稍後再試"
+                    self.msg = "沒有任何伺服器回傳的訊息"
                     completion(false)
                 }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
             }
+        
+            
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("get response result value error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                let json = JSON(data)
+//                //print(json)
+//                let success:Bool = json["success"].boolValue
+//                if (success) {
+//                    self.blacklists.removeAll()
+//                    let rows: [JSON] = json["rows"].arrayValue
+//                    for row in rows {
+//                        //print(row)
+//                        let id: Int = row["id"].intValue
+//                        let memberName: String = row["name"].stringValue
+//                        let memberMobile: String = row["mobile"].stringValue
+//                        let memberToken: String = row["token"].stringValue
+//                        let date: String = row["created_at"].stringValue.noSec()
+//                        let memo: String = row["memo"].stringValue
+//                        let teamObj: JSON = row["team"]
+//                        let teamName: String = teamObj["name"].stringValue
+//                        let teamToken: String = teamObj["token"].stringValue
+//                        let d:Dictionary<String, Any> = ["id":id,"memberName":memberName,"memberMobile":memberMobile,"memberToken":memberToken,"date":date,"teamName":teamName,"memo":memo,"teamToken":teamToken]
+//                        self.blacklists.append(d)
+//                    }
+//                    //print(self.blacklists)
+//                    completion(true)
+//                } else {
+//                    self.msg = "無法取得管理球隊的黑名單，請稍後再試"
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                }
+//            }
         }
     }
     
     func likelist(able_type: String, like_list: String = "喜歡", page: Int=1, perPage: Int=20, completion: @escaping CompletionHandler) {
         
-        let body: [String: Any] = [
+        let body: [String: String] = [
             "device": "app",
             "channel": CHANNEL,
             "member_token": Member.instance.token,
             "able_type": able_type,
             "like_list": like_list,
-            "page": page,
-            "perpage": perPage
+            "page": String(page),
+            "perpage": String(perPage)
         ]
         //print(body)
         
         let url: String = URL_MEMBER_LIKELIST
         //print(url)
         
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
             switch response.result {
             //case .success(let value):
@@ -436,37 +512,88 @@ class MemberService: DataService {
     
     func forgetPassword(email: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
-        let body: [String: Any] = ["source": "app", "email": lowerCaseEmail]
+        let body: [String: String] = ["source": "app", "email": lowerCaseEmail]
         
-        Alamofire.request(URL_FORGET_PASSWORD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    print("get response result value error")
-                    return
+        AF.request(URL_FORGET_PASSWORD, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            //case .success(let value):
+            case .success(_):
+                if response.data != nil {
+                    //let json = JSON(value)
+                    //print(value)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
+                    }
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
                 }
-                let json = JSON(data)
-                self.success = json["success"].boolValue
-                self.msg = json["msg"].stringValue
-                completion(true)
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
             }
+        
+            
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("get response result value error")
+//                    return
+//                }
+//                let json = JSON(data)
+//                self.success = json["success"].boolValue
+//                self.msg = json["msg"].stringValue
+//                completion(true)
+//            }
         }
     }
     
     func changePassword(oldPassword: String, password: String, rePassword: String, completion: @escaping CompletionHandler) {
         let token: String = Member.instance.token
-        let body: [String: Any] = ["source": "app", "password_old": oldPassword,"password":password,"repassword":rePassword,"token":token]
+        let body: [String: String] = ["source": "app", "password_old": oldPassword,"password":password,"repassword":rePassword,"token":token]
         
-        Alamofire.request(URL_CHANGE_PASSWORD, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    print("get response result value error")
-                    return
+        AF.request(URL_CHANGE_PASSWORD, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            //case .success(let value):
+            case .success(_):
+                if response.data != nil {
+                    //let json = JSON(value)
+                    //print(value)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
+                    }
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
                 }
-                let json = JSON(data)
-                self.success = json["success"].boolValue
-                self.msg = json["msg"].stringValue
-                completion(true)
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
             }
+        
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("get response result value error")
+//                    return
+//                }
+//                let json = JSON(data)
+//                self.success = json["success"].boolValue
+//                self.msg = json["msg"].stringValue
+//                completion(true)
+//            }
         }
     }
     
@@ -479,36 +606,48 @@ class MemberService: DataService {
         let url: String = URL_MEMBER_SIGNUP_CALENDAR
         //print(url)
         let body: [String: String] = ["y":String(year),"m":String(month),"member_token":member_token!,"source":source,"device": "app", "channel": "bm"]
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
-            if response.result.error == nil {
-                guard let data = response.result.value else {
-                    //print("get response result value error")
-                    self.msg = "網路錯誤，請稍後再試"
+            switch response.result {
+            //case .success(let value):
+            case .success(_):
+                if response.data != nil {
+                    //let json = JSON(value)
+                    //print(value)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
+                    }
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
                     completion(false)
-                    return
                 }
-                let json = JSON(data)
-                //print(json["able"])
-//                if json["able"].exists() {
-//                    self.able = self.parseAbleForSingupList(data: json["able"])
-//                    //print(able.printRow())
-//                }
-                
-//                let s: SuperSignups = JSONParse.parse(data: json)
-//                //self.superModel = s
-//                
-//                let rows: [SuperSignup] = s.getRows() ?? [SuperSignup]()
-//                for row in rows {
-//                    row.filterRow()
-//                    //row.printRow()
-//                }
-                completion(true)
-            } else {
-                self.msg = "網路錯誤，請稍後再試"
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
                 completion(false)
-                debugPrint(response.result.error as Any)
+                print(error)
+                return
             }
+            
+            
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    //print("get response result value error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                let json = JSON(data)
+//                //print(json["able"])
+//                completion(true)
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//                debugPrint(response.result.error as Any)
+//            }
         }
         
         return (res, "")

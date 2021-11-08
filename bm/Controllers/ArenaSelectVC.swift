@@ -51,9 +51,11 @@ class ArenaSelectVC: MyTableVC {
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.white
         //print(citys)
+        
+        let citys1: String = Global.instance.intsToStringComma(citys)
         Global.instance.addSpinner(superView: self.tableView)
         
-        TeamService.instance.getArenaByCityIDs(city_ids: citys,city_type: type) { (success) in
+        TeamService.instance.getArenaByCityIDs(city_ids: citys1,city_type: type) { (success) in
             if success {
                 //self.arenas = TeamService.instance.arenas
                 //print(self.citys)

@@ -71,7 +71,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 
         //print(searchTags)
         
-        searchSections1 = initSectionRows()
+        searchSections = initSectionRows()
 
         let likeTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
         likeTab.addGestureRecognizer(likeTap)
@@ -193,7 +193,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         if (selectedTagIdx == 1) {
-            return searchSections1.count
+            return searchSections.count
         } else {
             return 1
         }
@@ -208,15 +208,15 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         case 0:
             count = lists1.count
         case 1:
-            if !searchSections1[section].isExpanded {
+            if !searchSections[section].isExpanded {
                 count = 0
             } else {
-                count = searchSections1[section].items.count
+                count = searchSections[section].items.count
             }
         case 2:
             count = lists1.count
         default:
-            count = searchSections1.count
+            count = searchSections.count
         
         }
         return count
@@ -286,7 +286,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         case 1:
             //print("section: \(indexPath.section), row: \(indexPath.row)")
             
-            let row: SearchRow = getRowFromIdx(sectionIdx: indexPath.section, rowIdx: indexPath.row)
+            let row: SearchRow = getSearchRowFromIdx(indexPath.section, indexPath.row)
             let cell_type: String = row.cell
             if (cell_type == "more") {
                 
@@ -319,7 +319,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         //Global.instance.removeSpinner(superView: view)
         if (selectedTagIdx == 1) {
             
-            let row: SearchRow = getRowFromIdx(sectionIdx: indexPath.section, rowIdx: indexPath.row)
+            let row: SearchRow = getSearchRowFromIdx(indexPath.section, indexPath.row)
             //let cell = tableView.cellForRow(at: indexPath) as! EditCell
             
             if row.accessory != UITableViewCell.AccessoryType.none {
@@ -336,7 +336,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                     } else if (key == START_TIME_KEY) {
                         toSelectTime(key: key, selected: row.value, delegate: self)
                     } else if (key == ARENA_KEY) {
-                        let row1: SearchRow = getRowFromKey(CITY_KEY)
+                        let row1: SearchRow = getSearchRowFromKey(CITY_KEY)
                         var city_id: Int = 0
                         
                         if (row1.value.count > 0) {
@@ -379,7 +379,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func singleSelected(key: String, selected: String, show: String?=nil) {
         
-        let row = getRowFromKey(key)
+        let row = getSearchRowFromKey(key)
         var _show = ""
         if key == START_TIME_KEY || key == END_TIME_KEY {
             row.value = selected
@@ -399,7 +399,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     }
     
     override func setWeekdaysData(selecteds: [Int]) {
-        var row = getDefinedRow(WEEKDAY_KEY)
+        let row = getSearchRowFromKey(WEEKDAY_KEY)
         var texts: [String] = [String]()
         var values: [String] = [String]()
         if selecteds.count > 0 {
@@ -413,19 +413,19 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                     }
                 }
             }
-            row["show"] = texts.joined(separator: ",")
+            row.show = texts.joined(separator: ",")
         
-            row["value"] = values.joined(separator: ",")
+            row.value = values.joined(separator: ",")
         } else {
-            row["show"] = "全部"
+            row.show = "全部"
         }
-        replaceRows(WEEKDAY_KEY, row)
+        //replaceRows(WEEKDAY_KEY, row)
         tableView.reloadData()
     }
     
     override func setDegreeData(res: [DEGREE]) {
         
-        let row = getRowFromKey(DEGREE_KEY)
+        let row = getSearchRowFromKey(DEGREE_KEY)
         var names: [String] = [String]()
         var values: [String] = [String]()
         if res.count > 0 {
@@ -445,9 +445,9 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func setTextField(key: String, value: String) {
         
-        var row = getDefinedRow(key)
-        row["value"] = value
-        replaceRows(key, row)
+        let row = getSearchRowFromKey(key)
+        row.value = value
+        //replaceRows(key, row)
     }
     
     override func clear(indexPath: IndexPath) {
@@ -455,16 +455,16 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         let sectionIdx = indexPath.section
         var idx: Int = 0
         for i in 0...sectionIdx-1 {
-            idx += searchSections1[i].items.count
+            idx += searchSections[i].items.count
         }
         let rowIdx = indexPath.row
         idx += rowIdx
-        let row = searchRows[idx]
-        let key = row["key"] as! String
-        var row1 = getDefinedRow(key)
-        row1["show"] = "全部"
-        row1["value"] = ""
-        replaceRows(key, row1)
+        let row = searchSections[sectionIdx].items[idx]
+        //let key = row.key
+        //var row1 = getDefinedRow(key)
+        row.show = "全部"
+        row.value = ""
+        //replaceRows(key, row1)
     }
     
     override func cellCity(row: Table) {
@@ -474,9 +474,9 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         if (arenaTable != nil) {
             let key: String = CITY_KEY
             let city_id: Int = arenaTable!.city_id
-            var row = getDefinedRow(key)
-            row["value"] = String(city_id)
-            replaceRows(key, row)
+            let row = getSearchRowFromKey(key)
+            row.value = String(city_id)
+            //replaceRows(key, row)
             prepareParams()
             refresh()
         }
@@ -490,9 +490,9 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         if (arenaTable != nil) {
             let key: String = ARENA_KEY
             let arena_id: Int = arenaTable!.id
-            var row = getDefinedRow(key)
-            row["value"] = String(arena_id)
-            replaceRows(key, row)
+            let row = getSearchRowFromKey(key)
+            row.value = String(arena_id)
+            //replaceRows(key, row)
             prepareParams()
             refresh()
         }
@@ -511,9 +511,9 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         var indexPaths: [IndexPath] = [IndexPath]()
         
 //        let key: String = getSectionKey(idx: section)
-        let searchSection: SearchSection = searchSections1[section]
+        let searchSection: SearchSection = searchSections[section]
         var isExpanded = searchSection.isExpanded
-        searchSections1[section].isExpanded = !isExpanded
+        searchSections[section].isExpanded = !isExpanded
         
         let items: [SearchRow] = searchSection.items
         //let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)

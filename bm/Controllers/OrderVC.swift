@@ -972,7 +972,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 }
             }
             
-            let section: OneSection = getSectionFromKey(INVOICE_KEY)
+            let section: OneSection = getOneSectionFromKey(INVOICE_KEY)
             section.items.removeAll()
             let row = OneRow(title: "發票(目前僅提供電子發票)", value: "", show: "", key: INVOICE_KEY, cell: "more")
             section.items.append(row)
@@ -1003,13 +1003,13 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     override func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {
         
-        let row: OneRow = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
         row.value = str
         row.show = str
     }
     
     override func cellClear(sectionIdx: Int, rowIdx: Int) {
-        let row: OneRow = getOneRowFromIdx(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
         row.value = ""
         row.show = ""
     }

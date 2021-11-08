@@ -27,38 +27,38 @@ class TimetableService: DataService {
         let url: String = String(format: URL_ONE, "timetable")
         //print(url)
         
-        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-            
-            if response.result.error == nil {
-                //print(response.result.value)
-                guard let data = response.result.value else {
-                    print("get response result value error")
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                    return
-                }
-                //print(data)
-                let json = JSON(data)
-                //print(json)
-                let tt = json["tt"]
-                //print(tt)
-                self.timetable = JSONParse.parse(data: tt)
-                //self.timetable.printRow()
-                if json["type"].exists() {
-                    let type: String = json["type"].string!
-                    if type == "coach" {
-                        //self.superCoach = JSONParse.parse(data: json["model"])
-                        //self.superCoach.printRow()
-                    }
-                }
-                completion(true)
-                
-            } else {
-                self.msg = "網路錯誤，請稍後再試"
-                completion(false)
-                debugPrint(response.result.error as Any)
-            }
-            
-        }
+//        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//
+//            if response.result.error == nil {
+//                //print(response.result.value)
+//                guard let data = response.result.value else {
+//                    print("get response result value error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                //print(data)
+//                let json = JSON(data)
+//                //print(json)
+//                let tt = json["tt"]
+//                //print(tt)
+//                self.timetable = JSONParse.parse(data: tt)
+//                //self.timetable.printRow()
+//                if json["type"].exists() {
+//                    let type: String = json["type"].string!
+//                    if type == "coach" {
+//                        //self.superCoach = JSONParse.parse(data: json["model"])
+//                        //self.superCoach.printRow()
+//                    }
+//                }
+//                completion(true)
+//
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//                debugPrint(response.result.error as Any)
+//            }
+//
+//        }
     }
 }

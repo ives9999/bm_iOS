@@ -47,9 +47,11 @@ class AreaSelectVC: MyTableVC {
         tableView.separatorStyle = .singleLine
         tableView.separatorColor = UIColor.white
         
+        let citys1: String = Global.instance.intsToStringComma(citys)
+        
         Global.instance.addSpinner(superView: self.tableView)
         
-        TeamService.instance.getAreaByCityIDs(city_ids: citys,city_type: type) { (success) in
+        TeamService.instance.getAreaByCityIDs(city_ids: citys1,city_type: type) { (success) in
             if success {
                 //print(self.citys)
                 let tmp = TeamService.instance.citysandareas

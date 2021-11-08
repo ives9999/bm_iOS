@@ -11,7 +11,7 @@ import UIKit
 class MyTableVC: BaseViewController {
 
     var sections: [String]?
-    var searchSections: [ExpandableItems] = [ExpandableItems]()
+    //var searchSections: [ExpandableItems] = [ExpandableItems]()
     
     var mySections: [[String: Any]] = [[String: Any]]()
     var myRows: [[String: Any]] = [[String: Any]]()
@@ -19,7 +19,7 @@ class MyTableVC: BaseViewController {
     var section_keys: [[String]] = [[String]]()
     var rows:[[Dictionary<String, Any>]]?
     
-    var searchSections1: [SearchSection] = [SearchSection]()
+    //var searchSections: [SearchSection] = [SearchSection]()
     var oneSections: [OneSection] = [OneSection]()
     
     internal var myTablView: UITableView!
@@ -40,7 +40,7 @@ class MyTableVC: BaseViewController {
     var able_type: String = "coach"
     var jsonData: Data? = nil
     var tables: Tables?
-    var params: [String: Any] = [String: Any]()
+    var params: [String: String] = [String: String]()
     
     var lists1: [Table] = [Table]()
     var newY: CGFloat = 0
@@ -166,16 +166,21 @@ class MyTableVC: BaseViewController {
     }
     
     override func prepareParams(city_type: String="simple") {
-        params = [String: Any]()
-        for row in searchRows {
+        params = [String: String]()
+        for section in searchSections {
             
-            if let key: String = row["key"] as? String {
-                if let value: String = row["value"] as? String {
-                    if value.count == 0 {
-                        continue
-                    }
-                    params[key] = value
+            for row in section.items {
+                if row.value.count > 0 {
+                    params[row.key] = row.value
                 }
+//                if let key: String = row["key"] as? String {
+//                    if let value: String = row["value"] as? String {
+//                        if value.count == 0 {
+//                            continue
+//                        }
+//                        params[key] = value
+//                    }
+//                }
             }
         }
         //print(params)
@@ -207,10 +212,10 @@ class MyTableVC: BaseViewController {
     }
     
     override func clear(indexPath: IndexPath) {
-        let row = searchRows[indexPath.row]
+        let row = searchSections[indexPath.section].items[indexPath.row]
         //print(row)
         
-        let key = row["key"] as! String
+        let key = row.key
         searchPanel.clear(key: key)
     }
     
@@ -231,23 +236,25 @@ class MyTableVC: BaseViewController {
 //        return res
 //    }
 
-    func getDefinedRow(_ key: String) -> [String: Any] {
-        for row in searchRows {
-            if row["key"] as! String == key {
-                return row
-            }
-        }
-        return [String: Any]()
-    }
-
-    func getDefinedRow(_ section: Int, _ row: Int) -> [String: Any] {
-        let key = searchSections[section].items[row]
-        return getDefinedRow(key)
-    }
+//    func getDefinedRow(_ key: String) -> SearchRow {
+//        for section in searchSections {
+//            for row in section.items {
+//                if row.key == key {
+//                    return row
+//                }
+//            }
+//        }
+//        return SearchRow()
+//    }
+//
+//    func getDefinedRow(_ section: Int, _ row: Int) -> SearchRow {
+//        let key = searchSections[section].items[row]
+//        return getDefinedRow(key)
+//    }
     
-    func getRowFromKey(_ key: String)-> SearchRow {
+    func getSearchRowFromKey(_ key: String)-> SearchRow {
 
-        for section in searchSections1 {
+        for section in searchSections {
             for row in section.items {
                 if (row.key == key ) {
                     return row
@@ -255,6 +262,14 @@ class MyTableVC: BaseViewController {
             }
         }
         return SearchRow()
+    }
+    
+    func getSearchRowFromIdx(_ sectionIdx: Int, _ rowIdx: Int) -> SearchRow {
+        return searchSections[sectionIdx].items[rowIdx]
+    }
+    
+    func getSearchRowFromIdx(sectionIdx: Int, rowIdx: Int)-> SearchRow {
+        return searchSections[sectionIdx].items[rowIdx]
     }
     
     func getOneRowFromIdx(_ sectionIdx: Int, _ rowIdx: Int) -> OneRow {
@@ -278,14 +293,6 @@ class MyTableVC: BaseViewController {
         return row.value
     }
     
-    func getRowFromIdx(sectionIdx: Int, rowIdx: Int)-> SearchRow {
-        return searchSections1[sectionIdx].items[rowIdx]
-    }
-    
-    func getOneRowFromIdx(sectionIdx: Int, rowIdx: Int)-> OneRow {
-        return oneSections[sectionIdx].items[rowIdx]
-    }
-    
     func getOneRowsFromSectionKey(_ sectionKey: String)-> [OneRow] {
         for section in oneSections {
             if (section.key == sectionKey) {
@@ -296,7 +303,7 @@ class MyTableVC: BaseViewController {
         return [OneRow]()
     }
     
-    func getSectionFromKey(_ key: String)-> OneSection {
+    func getOneSectionFromKey(_ key: String)-> OneSection {
         for oneSection in oneSections {
             if (key == oneSection.key) {
                 return oneSection
@@ -306,17 +313,17 @@ class MyTableVC: BaseViewController {
         return OneSection()
     }
 
-    func replaceRows(_ key: String, _ row: [String: Any]) {
-        for (idx, _row) in searchRows.enumerated() {
-            if _row["key"] as! String == key {
-                searchRows[idx] = row
-                break;
-            }
-        }
-    }
+//    func replaceRows(_ key: String, _ row: [String: Any]) {
+//        for (idx, _row) in searchRows.enumerated() {
+//            if _row["key"] as! String == key {
+//                searchRows[idx] = row
+//                break;
+//            }
+//        }
+//    }
     
     //存在row的value只是單純的文字，陣列值使用","來區隔，例如"1,2,3"，但當要傳回選擇頁面時，必須轉回陣列[1,2,3]
-    func valueToArray<T>(t:T.Type, row: [String: Any])-> [T] {
+    func valueToArray<T>(t:T.Type, row: SearchRow)-> [T] {
 
         var selecteds: [T] = [T]()
         //print(t)
@@ -324,18 +331,16 @@ class MyTableVC: BaseViewController {
         if (t.self == Int.self) {
             type = "Int"
         }
-        if let value: String = row["value"] as? String {
-            if (value.count > 0) {
-                let values = value.components(separatedBy: ",")
-                for value in values {
-                    if (type == "Int") {
-                        if let tmp = Int(value) {
-                            selecteds.append(tmp as! T)
-                        }
-                    } else {
-                        if let tmp = value as? T {
-                            selecteds.append(tmp)
-                        }
+        if (row.value.count > 0) {
+            let values = row.value.components(separatedBy: ",")
+            for value in values {
+                if (type == "Int") {
+                    if let tmp = Int(value) {
+                        selecteds.append(tmp as! T)
+                    }
+                } else {
+                    if let tmp = value as? T {
+                        selecteds.append(tmp)
                     }
                 }
             }
@@ -352,17 +357,15 @@ class MyTableVC: BaseViewController {
             type = "Int"
         }
         
-        if (value.count > 0) {
-            let values = value.components(separatedBy: ",")
-            for value in values {
-                if (type == "Int") {
-                    if let tmp = Int(value) {
-                        selecteds.append(tmp as! T)
-                    }
-                } else {
-                    if let tmp = value as? T {
-                        selecteds.append(tmp)
-                    }
+        let values = value.components(separatedBy: ",")
+        for value in values {
+            if (type == "Int") {
+                if let tmp = Int(value) {
+                    selecteds.append(tmp as! T)
+                }
+            } else {
+                if let tmp = value as? T {
+                    selecteds.append(tmp)
                 }
             }
         }
@@ -450,9 +453,9 @@ class MyTableVC: BaseViewController {
     override func cellCity(row: Table) {
         let key: String = CITY_KEY
         let city_id: Int = row.city_id
-        var row = getDefinedRow(key)
-        row["value"] = String(city_id)
-        replaceRows(key, row)
+        let row = getSearchRowFromKey(key)
+        row.value = String(city_id)
+        //replaceRows(key, row)
         prepareParams()
         refresh()
     }
