@@ -298,6 +298,11 @@ class MyTableVC: BaseViewController {
 //        searchPanel.showSearchPanel(baseVC: self, view: view, newY: newY, searchRows: searchRows)
 //    }
     
+    override func cellClear(sectionIdx: Int, rowIdx: Int) {
+        super.cellClear(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        searchPanel.searchTableView.reloadData()
+    }
+    
     func cellMobile(row: Table) {
         if (row.mobile_show.count > 0) {
             //print(row.mobile)

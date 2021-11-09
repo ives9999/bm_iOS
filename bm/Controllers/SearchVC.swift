@@ -291,6 +291,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
             if (cell_type == "more") {
                 
                 let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as! MoreCell
+                cell.cellDelegate = self
                 cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
                 return cell
                 
@@ -328,7 +329,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 let cell_type: String = row.cell
                 
                 if (cell_type == "more") {
-                    
+                    moreClickForSearch(key: key, row: row, delegate: self)
                 } else {
                     //performSegue(withIdentifier: segue, sender: indexPath)
                 }
@@ -439,36 +440,36 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         //replaceRows(key, row1)
     }
     
-    override func cellCity(row: Table) {
-        let _row: TeamTable = row as! TeamTable
-        let arenaTable = _row.arena
-        
-        if (arenaTable != nil) {
-            let key: String = CITY_KEY
-            let city_id: Int = arenaTable!.city_id
-            let row = getSearchRowFromKey(key)
-            row.value = String(city_id)
-            //replaceRows(key, row)
-            prepareParams()
-            refresh()
-        }
-    }
-    
-    override func cellArena(row: Table) {
-        
-        let _row: TeamTable = row as! TeamTable
-        let arenaTable = _row.arena
-        
-        if (arenaTable != nil) {
-            let key: String = ARENA_KEY
-            let arena_id: Int = arenaTable!.id
-            let row = getSearchRowFromKey(key)
-            row.value = String(arena_id)
-            //replaceRows(key, row)
-            prepareParams()
-            refresh()
-        }
-    }
+//    override func cellCity(row: Table) {
+//        let _row: TeamTable = row as! TeamTable
+//        let arenaTable = _row.arena
+//
+//        if (arenaTable != nil) {
+//            let key: String = CITY_KEY
+//            let city_id: Int = arenaTable!.city_id
+//            let row = getSearchRowFromKey(key)
+//            row.value = String(city_id)
+//            //replaceRows(key, row)
+//            prepareParams()
+//            refresh()
+//        }
+//    }
+//
+//    override func cellArena(row: Table) {
+//
+//        let _row: TeamTable = row as! TeamTable
+//        let arenaTable = _row.arena
+//
+//        if (arenaTable != nil) {
+//            let key: String = ARENA_KEY
+//            let arena_id: Int = arenaTable!.id
+//            let row = getSearchRowFromKey(key)
+//            row.value = String(arena_id)
+//            //replaceRows(key, row)
+//            prepareParams()
+//            refresh()
+//        }
+//    }
     
     override func cellMap(row: Table) {
         

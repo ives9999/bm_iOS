@@ -40,8 +40,12 @@ class MemoCell: FormItemCell {
     }
     
     @IBAction func textFieldDidChange(_ textField: UITextField) {
-        if (baseViewControllerDelegate != nil) {
-            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: textField.text!)
+//        if (baseViewControllerDelegate != nil) {
+//            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: textField.text!)
+//        }
+        
+        if (cellDelegate != nil) {
+            cellDelegate?.cellTextChanged(sectionIdx: sectionIdx, rowIdx: rowIdx, str: textField.text!)
         }
     }
 }

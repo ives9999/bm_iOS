@@ -97,9 +97,9 @@ class TextFieldCell: FormItemCell {
             }
         }
         
-        if (baseViewControllerDelegate != nil) {
-            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: textField.text!)
-        }
+//        if (baseViewControllerDelegate != nil) {
+//            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: textField.text!)
+//        }
         
         if (cellDelegate != nil) {
             cellDelegate!.cellTextChanged(sectionIdx: sectionIdx, rowIdx: rowIdx, str: textField.text!)
@@ -112,12 +112,12 @@ class TextFieldCell: FormItemCell {
             _formItem.reset()
         }
         
-        if (baseViewControllerDelegate != nil) {
-            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: "")
-        }
+//        if (baseViewControllerDelegate != nil) {
+//            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: "")
+//        }
         
         if (cellDelegate != nil) {
-            
+            cellDelegate!.cellClear(sectionIdx: sectionIdx, rowIdx: rowIdx)
         }
     }
     

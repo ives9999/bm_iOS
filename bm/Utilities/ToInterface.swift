@@ -389,7 +389,7 @@ extension BaseViewController {
         }
     }
     
-    func toSelectArena(key: String? = nil, city: Int, selected: String? = nil, delegate: BaseViewController) {
+    func toSelectArena(key: String? = nil, city_id: Int, selected: String? = nil, delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Select", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "toSelectArena") as? SelectArenaVC {
@@ -399,7 +399,7 @@ extension BaseViewController {
                 if selected != nil {
                     viewController.selected = selected!
                 }
-                viewController.city = city
+                viewController.city = city_id
                 viewController.delegate = delegate
                 show(viewController, sender: nil)
             }
@@ -411,7 +411,7 @@ extension BaseViewController {
             if selected != nil {
                 viewController.selected = selected!
             }
-            viewController.city = city
+            viewController.city = city_id
             viewController.delegate = delegate
             self.navigationController!.pushViewController(viewController, animated: true)
         }

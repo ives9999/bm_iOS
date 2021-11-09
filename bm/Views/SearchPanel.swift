@@ -431,56 +431,6 @@ extension SearchPanel: UITableViewDelegate {
             baseVC!.moreClickForSearch(key: key, row: row, delegate: baseVC!)
 //            let selected: String = row.value
 //            baseVC!.toSelectSingle(key: key, selected: selected, delegate: baseVC!)
-        } else if cell == TO_ARENA {
-            
-            var row = getDefinedRow(CITY_KEY)
-            var city: Int? = nil
-            if let value: Int = Int(row.value) {
-                city = value
-//                    if (city != nil) {
-//                        citys.append(city!)
-//                    }
-            }
-            
-            if (city == nil) {
-                baseVC!.warning("請先選擇縣市")
-            } else {
-            
-                //取得選擇球館的代號
-                row = getDefinedRow(ARENA_KEY)
-                let selected: String = row.value
-                baseVC!.toSelectArena(key: key, city: city!, selected: selected, delegate: baseVC!)
-            }
-        } else if (cell == TO_SELECT_DEGREE) {
-            
-            let tmps: [String] = valueToArray(t: String.self, row: row)
-            var selecteds: [DEGREE] = [DEGREE]()
-            for tmp in tmps {
-                selecteds.append(DEGREE.enumFromString(string: tmp))
-            }
-            baseVC!.toSelectDegree(selecteds: selecteds, delegate: baseVC!)
-        } else if cell == TO_AREA {
-            
-            //var citys: [Int] = [Int]()
-            var row = getDefinedRow(CITY_KEY)
-            var city: Int? = nil
-            if let value: Int = Int(row.value) {
-                city = value
-//                    if (city != nil) {
-//                        citys.append(city!)
-//                    }
-            }
-            
-            if (city == nil) {
-                baseVC!.warning("請先選擇縣市")
-            } else {
-            
-                //取得選擇球館的代號
-                row = getDefinedRow(AREA_KEY)
-                let selected: String = row.value
-        
-                baseVC!.toSelectArea(key: key, city_id: city, selected: selected, delegate: baseVC!)
-            }
         } else {
             //performSegue(withIdentifier: segue, sender: indexPath)
         }

@@ -87,18 +87,35 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     //for NumberCell delegate
     func stepperValueChanged(sectionKey: String, rowKey: String, number: Int){}
     //for TextFieldCell delegate
-    func textFieldDidChange(sectionKey: String, rowKey: String, text: String){}
+    //func textFieldDidChange(sectionIdx: Int, rowIdx: Int, str: String){}
     //for RadioCell delegate
     func radioDidChange(sectionKey: String, rowKey: String, checked: Bool){}
     
     func cellCity(row: Table) {}
     func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String) {}
-    func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {}
+    func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {
+        let row: SearchRow = getSearchRowFromIdx(sectionIdx, rowIdx)
+        row.value = str
+        row.show = str
+    }
     func cellPrivacyChanged(sectionIdx: Int, rowIdx: Int, checked: Bool) {}
     func cellSetTag(sectionIdx: Int, rowIdx: Int, value: String, isChecked: Bool) {}
     func cellNumberChanged(sectionIdx: Int, rowIdx: Int, number: Int) {}
     func cellRadioChanged(key: String, sectionIdx: Int, rowIdx: Int, isChecked: Bool) {}
-    func cellClear(sectionIdx: Int, rowIdx: Int) {}
+    
+    func cellClear(sectionIdx: Int, rowIdx: Int) {
+        let row: SearchRow = getSearchRowFromIdx(sectionIdx, rowIdx)
+        if (row.key == CITY_KEY) {
+            var row1: SearchRow = getSearchRowFromKey(AREA_KEY)
+            row1.value = ""
+            row1.show = "全部"
+            row1 = getSearchRowFromKey(ARENA_KEY)
+            row1.value = ""
+            row1.show = "全部"
+        }
+        row.value = ""
+        row.show = ""
+    }
     
     func cellSwitchChanged(key: String, sectionIdx: Int, rowIdx: Int, isSwitch: Bool) {
         
@@ -229,10 +246,24 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         
         if (key == CITY_KEY) {
             toSelectCity(key: CITY_KEY, selected: row.value, delegate: self)
+        } else if (key == AREA_KEY) {
+            let row1: SearchRow = getSearchRowFromKey(CITY_KEY)
+            var city_id: Int = 0
+            
+            if (row1.value.count > 0) {
+                if let tmp: Int = Int(row1.value) {
+                    city_id = tmp
+                }
+            }
+            if (city_id <= 0) {
+                warning("請先選擇縣市")
+            } else {
+                toSelectArea(key: key, city_id: city_id, selected: row.value, delegate: self)
+            }
         } else if (key == WEEKDAY_KEY) {
             let selecteds: [Int] = valueToArray(t: Int.self, value: row.value)
             toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
-        } else if (key == START_TIME_KEY) {
+        } else if (key == START_TIME_KEY || key == END_TIME_KEY) {
             toSelectTime(key: key, selected: row.value, delegate: self)
         } else if (key == ARENA_KEY) {
             let row1: SearchRow = getSearchRowFromKey(CITY_KEY)
@@ -246,7 +277,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             if (city_id <= 0) {
                 warning("請先選擇縣市")
             } else {
-                toSelectArena(key: key, city: city_id, selected: row.value, delegate: self)
+                toSelectArena(key: key, city_id: city_id, selected: row.value, delegate: self)
             }
         } else if (key == DEGREE_KEY) {
             let tmps: [String] = valueToArray(t: String.self, value: row.value)

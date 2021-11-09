@@ -20,7 +20,7 @@ class MoreCell: FormItemCell {
         super.awakeFromNib()
         detailLbl.textAlignment = NSTextAlignment.right
         detailLbl.text = ""
-        clearBtn.isHidden = true
+        clearBtn.isHidden = false
     }
     
     @IBAction func clearBtnPressed(_ sender: Any) {
@@ -40,8 +40,11 @@ class MoreCell: FormItemCell {
         formItem?.value = nil
         formItem?.show = ""
         formItem?.sender = nil
-        clearBtn.isHidden = true
-        detailLbl.text = ""
+        //clearBtn.isHidden = true
+        detailLbl.text = "全部"
+        if cellDelegate != nil {
+            cellDelegate?.cellClear(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        }
     }
     
     func update(sectionKey: String, rowKey: String, title: String, value: String, show: String) {
@@ -56,6 +59,10 @@ class MoreCell: FormItemCell {
     }
     
     func update(sectionIdx: Int, rowIdx: Int, row: SearchRow) {
+        
+        self.searchRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
         
         titleLbl!.text = row.title
         detailLbl.text = row.show
