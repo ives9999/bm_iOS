@@ -10,7 +10,7 @@ import UIKit
 
 protocol List1CellDelegate {
     //func searchCity(indexPath: IndexPath)
-    func cellShowMap(row: Table)
+    func cellMap(row: Table)
     func cellTel(row: Table)
     func cellMobile(row: Table)
     func cellRefresh()
@@ -30,6 +30,7 @@ protocol List1CellDelegate {
     func cellSetTag(sectionIdx: Int, rowIdx: Int, value: String, isChecked: Bool)
     func cellNumberChanged(sectionIdx: Int, rowIdx: Int, number: Int)
     func cellRadioChanged(key: String, sectionIdx: Int, rowIdx: Int, isChecked: Bool)
+    func cellSwitchChanged(key: String, sectionIdx: Int, rowIdx: Int, isSwitch: Bool)
     func cellClear(sectionIdx: Int, rowIdx: Int)
 }
 
@@ -218,7 +219,7 @@ class List2Cell: UITableViewCell {
     @IBAction func mapBtnPressed(sender: UIButton) {
         self._pressed(sender: sender) { row in
             if cellDelegate != nil {
-                cellDelegate!.cellShowMap(row: row)
+                cellDelegate!.cellMap(row: row)
             }
         }
     }
@@ -270,16 +271,16 @@ class List2Cell: UITableViewCell {
 }
 
 extension List1CellDelegate {
-    func cellShowMap(row: Table){}
+//    func cellMap(row: Table){}
     func cellTel(row: Table){}
     func cellMobile(row: Table){}
-    func cellRefresh(){}
+//    func cellRefresh(){}
     func cellEdit(row: Table){}
     func cellDelete(row: Table){}
- //   func cellCity(row: Table){}
+//   func cellCity(row: Table){}
     func cellArea(row: Table){}
     func cellArena(row: Table){}
-    func cellLike(row: Table){}
+//    func cellLike(row: Table){}
     func cellWarning(msg: String){}
     func cellToLogin(){}
     

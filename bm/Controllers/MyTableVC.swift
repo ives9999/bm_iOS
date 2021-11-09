@@ -10,17 +10,16 @@ import UIKit
 
 class MyTableVC: BaseViewController {
 
-    var sections: [String]?
+    //var sections: [String]?
     //var searchSections: [ExpandableItems] = [ExpandableItems]()
     
-    var mySections: [[String: Any]] = [[String: Any]]()
-    var myRows: [[String: Any]] = [[String: Any]]()
+    //var mySections: [[String: Any]] = [[String: Any]]()
+    //var myRows: [[String: Any]] = [[String: Any]]()
     
-    var section_keys: [[String]] = [[String]]()
-    var rows:[[Dictionary<String, Any>]]?
+    //var section_keys: [[String]] = [[String]]()
+    //var rows:[[Dictionary<String, Any>]]?
     
     //var searchSections: [SearchSection] = [SearchSection]()
-    var oneSections: [OneSection] = [OneSection]()
     
     internal var myTablView: UITableView!
     var frameWidth: CGFloat!
@@ -40,7 +39,6 @@ class MyTableVC: BaseViewController {
     var able_type: String = "coach"
     var jsonData: Data? = nil
     var tables: Tables?
-    var params: [String: String] = [String: String]()
     
     var lists1: [Table] = [Table]()
     var newY: CGFloat = 0
@@ -69,10 +67,10 @@ class MyTableVC: BaseViewController {
         super.init(coder: aDecoder)
     }
     
-    func setData(sections: [String], rows: [[Dictionary<String, Any>]]) {
-        self.sections = sections
-        self.rows = rows
-    }
+//    func setData(sections: [String], rows: [[Dictionary<String, Any>]]) {
+//        self.sections = sections
+//        self.rows = rows
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,10 +86,10 @@ class MyTableVC: BaseViewController {
             myTablView.addSubview(refreshControl)
         }
         
-        if form != nil {
-            sections = form.getSections()
-            section_keys = form.getSectionKeys()
-        }
+//        if form != nil {
+//            sections = form.getSections()
+//            section_keys = form.getSectionKeys()
+//        }
         
         if (tableView != nil) {
             let cellNibName = UINib(nibName: "List2Cell", bundle: nil)
@@ -252,66 +250,7 @@ class MyTableVC: BaseViewController {
 //        return getDefinedRow(key)
 //    }
     
-    func getSearchRowFromKey(_ key: String)-> SearchRow {
-
-        for section in searchSections {
-            for row in section.items {
-                if (row.key == key ) {
-                    return row
-                }
-            }
-        }
-        return SearchRow()
-    }
     
-    func getSearchRowFromIdx(_ sectionIdx: Int, _ rowIdx: Int) -> SearchRow {
-        return searchSections[sectionIdx].items[rowIdx]
-    }
-    
-    func getSearchRowFromIdx(sectionIdx: Int, rowIdx: Int)-> SearchRow {
-        return searchSections[sectionIdx].items[rowIdx]
-    }
-    
-    func getOneRowFromIdx(_ sectionIdx: Int, _ rowIdx: Int) -> OneRow {
-        return oneSections[sectionIdx].items[rowIdx]
-    }
-    
-    func getOneRowFromKey(_ key: String)-> OneRow {
-
-        for section in oneSections {
-            for row in section.items {
-                if (row.key == key ) {
-                    return row
-                }
-            }
-        }
-        return OneRow()
-    }
-    
-    func getOneRowValue(_ rowKey: String)-> String {
-        let row = getOneRowFromKey(rowKey)
-        return row.value
-    }
-    
-    func getOneRowsFromSectionKey(_ sectionKey: String)-> [OneRow] {
-        for section in oneSections {
-            if (section.key == sectionKey) {
-                return section.items
-            }
-        }
-        
-        return [OneRow]()
-    }
-    
-    func getOneSectionFromKey(_ key: String)-> OneSection {
-        for oneSection in oneSections {
-            if (key == oneSection.key) {
-                return oneSection
-            }
-        }
-        
-        return OneSection()
-    }
 
 //    func replaceRows(_ key: String, _ row: [String: Any]) {
 //        for (idx, _row) in searchRows.enumerated() {
@@ -321,57 +260,6 @@ class MyTableVC: BaseViewController {
 //            }
 //        }
 //    }
-    
-    //存在row的value只是單純的文字，陣列值使用","來區隔，例如"1,2,3"，但當要傳回選擇頁面時，必須轉回陣列[1,2,3]
-    func valueToArray<T>(t:T.Type, row: SearchRow)-> [T] {
-
-        var selecteds: [T] = [T]()
-        //print(t)
-        var type: String = "String"
-        if (t.self == Int.self) {
-            type = "Int"
-        }
-        if (row.value.count > 0) {
-            let values = row.value.components(separatedBy: ",")
-            for value in values {
-                if (type == "Int") {
-                    if let tmp = Int(value) {
-                        selecteds.append(tmp as! T)
-                    }
-                } else {
-                    if let tmp = value as? T {
-                        selecteds.append(tmp)
-                    }
-                }
-            }
-        }
-
-        return selecteds
-    }
-    
-    func valueToArray<T>(t: T.Type, value: String)-> [T] {
-        var selecteds: [T] = [T]()
-        //print(t)
-        var type: String = "String"
-        if (t.self == Int.self) {
-            type = "Int"
-        }
-        
-        let values = value.components(separatedBy: ",")
-        for value in values {
-            if (type == "Int") {
-                if let tmp = Int(value) {
-                    selecteds.append(tmp as! T)
-                }
-            } else {
-                if let tmp = value as? T {
-                    selecteds.append(tmp)
-                }
-            }
-        }
-
-        return selecteds
-    }
     
     //目前暫時沒有用到
     func arrayToValue<T>(t: T.Type, res: [T])-> String {
@@ -410,12 +298,6 @@ class MyTableVC: BaseViewController {
 //        searchPanel.showSearchPanel(baseVC: self, view: view, newY: newY, searchRows: searchRows)
 //    }
     
-    func cellRefresh() {
-        params.removeAll()
-        
-        self.refresh()
-    }
-    
     func cellMobile(row: Table) {
         if (row.mobile_show.count > 0) {
             //print(row.mobile)
@@ -424,30 +306,6 @@ class MyTableVC: BaseViewController {
             //print(row.tel)
             row.tel.makeCall()
         }
-    }
-    
-    func cellShowMap(row: Table) {
-        
-        var name: String = ""
-        if row.name.count > 0 {
-            name = row.name
-        } else if row.title.count > 0 {
-            name = row.title
-        }
-        //print(row.address)
-        _showMap(title: name, address: row.address)
-        
-//        if indexPath != nil {
-//            let row = lists1[indexPath!.row] as! TeamTable
-//            if row.arena != nil {
-//                //print(row.arena!.address)
-//                _showMap(title: row.name, address: row.arena!.address)
-//            } else {
-//                warning("球隊沒有輸入球館位置")
-//            }
-//        } else {
-//            warning("index path 為空值，請洽管理員")
-//        }
     }
     
     override func cellCity(row: Table) {
@@ -464,14 +322,6 @@ class MyTableVC: BaseViewController {
     func cellArea(row: Table) {}
     func cellEdit(row: Table) {}
     func cellDelete(row: Table) {}
-    
-    func cellLike(row: Table) {
-        if (!Member.instance.isLoggedIn) {
-            toLogin()
-        } else {
-            dataService.like(token: row.token, able_id: row.id)
-        }
-    }
     
     func cellWarning(msg: String) {
         warning(msg)
@@ -531,266 +381,266 @@ class MyTableVC: BaseViewController {
         }
     }
     
-    func getSectionName(idx: Int)-> String {
-
-        var name: String = ""
-        let row: [String: Any] = mySections[idx]
-        if (row.keyExist(key: "name")) {
-            if let tmp: String = row["name"] as? String {
-                name = tmp
-            }
-        }
-
-        return name
-    }
-
-    func getSectionKey(idx: Int)-> String {
-
-        var key: String = ""
-        let row: [String: Any] = mySections[idx]
-        if (row.keyExist(key: "key")) {
-            if let tmp: String = row["key"] as? String {
-                key = tmp
-            }
-        }
-
-        return key
-    }
-
-    func getSectionExpanded(idx: Int)-> Bool {
-
-        var b: Bool = true
-        let row: [String: Any] = mySections[idx]
-        if (row.keyExist(key: "isExpanded")) {
-            if let tmp: Bool = row["isExpanded"] as? Bool {
-                b = tmp
-            }
-        }
-
-        return b
-    }
-    
-    func getRowFromKey(rows: [[String: String]], key: String)-> [String: String] {
-        
-        for row in rows {
-            
-            if let key1: String = row["key"] {
-                if (key1 == key) {
-                    return row
-                }
-            }
-        }
-        return [String: String]()
-    }
-    
-    func replaceRowByKey(rows: [[String: String]], key: String, newRow: [String: String])-> [[String: String]] {
-        
-        var _rows = rows
-        for (idx, row) in rows.enumerated() {
-            
-            if let key1: String = row["key"] {
-                if (key1 == key) {
-                    _rows[idx] = newRow
-                    break
-                }
-            }
-        }
-        return _rows
-    }
-    
-    //    myRows = [
-    //        ["key":"data", "rows": fixedRows],
-    //        ["key":"order", "rows": orderRows],
-    //        ["key":"like", "rows": likeRows],
-    //        ["key":"manager", "rows": courseRows],
-    //    ]
-        
-    func getSectionRowFromMyRowsByKey(key: String)-> [String: Any] {
-        
-        for row in myRows {
-            if let key1: String = row["key"] as? String {
-                if key == key1 {
-                    return row
-                }
-            }
-        }
-        
-        return [String: Any]()
-    }
-        
-    func getSectionRowFromMyRowsByIdx(idx: Int)-> [String: Any] {
-        
-        return myRows[idx]
-    }
-        
-    //    let fixedRows: [[String: String]] = [
-    //        ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
-    //        ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
-    //    ]
-    func getRowRowsFromMyRowsByKey(key: String)-> [[String: String]] {
-        
-        let sectionRow: [String: Any] = getSectionRowFromMyRowsByKey(key: key)
-        if (sectionRow.keyExist(key: "rows")) {
-            if let tmp: [[String: String]] = sectionRow["rows"] as? [[String: String]] {
-                return tmp
-            }
-        }
-        
-        return [[String: String]]()
-    }
-    
-    func getRowRowsFromMyRowsByKey1(key: String) -> [String : String] {
-        
-        
-        for sectionRow in myRows {
-            if (sectionRow.keyExist(key: "rows")) {
-                let rowRows = sectionRow["rows"] as! [[String: String]]
-                for rowRow in rowRows {
-                    if (rowRow["key"] == key) {
-                        return rowRow
-                    }
-                }
-            }
-        }
-        
-        return [String: String]()
-    }
-    
-    func replaceRowByKey(rowKey: String, _row: [String: String]) {
-        
-//        var tmp: [String: String] = [String: String]()
-//        for (key, value) in _row {
-//            if let _value: String = value as? String {
-//                tmp[key] = _value
+//    func getSectionName(idx: Int)-> String {
+//
+//        var name: String = ""
+//        let row: [String: Any] = mySections[idx]
+//        if (row.keyExist(key: "name")) {
+//            if let tmp: String = row["name"] as? String {
+//                name = tmp
 //            }
 //        }
-        
-        //var sectionIdx: Int = -1
-        var sectionKey: String = ""
-        for (idx, row) in myRows.enumerated() {
-            
-            // row is  ["key":"product", "rows": productRows]
-            if (row.keyExist(key: "rows")) {
-                let rows: [[String: String]] = row["rows"] as! [[String: String]]
-                for row1 in rows {
-                    if let key1: String = row1["key"] {
-                        if rowKey == key1 {
-                            //sectionIdx = idx
-                            //找出 section row 的 key
-                            sectionKey = myRows[idx]["key"] as! String
-                            break
-                        }
-                    }
-                }
-            }
-        }
-        
-        replaceRowByKey(sectionKey: sectionKey, rowKey: rowKey, _row: _row)
-        
-//        if (sectionIdx >= 0) {
-//            var rows: [[String: String]]? = myRows[sectionIdx]["rows"] as? [[String: String]]
-//            if (rows != nil) {
-//                for (idx, row) in rows!.enumerated() {
-//                    // row is ["title": "商品","key":"product","value":"","show":""]
-//                    if (row.keyExist(key: "key")) {
-//                        if (row["key"] == rowKey) {
-//                            rows![idx] = tmp
+//
+//        return name
+//    }
+//
+//    func getSectionKey(idx: Int)-> String {
+//
+//        var key: String = ""
+//        let row: [String: Any] = mySections[idx]
+//        if (row.keyExist(key: "key")) {
+//            if let tmp: String = row["key"] as? String {
+//                key = tmp
+//            }
+//        }
+//
+//        return key
+//    }
+//
+//    func getSectionExpanded(idx: Int)-> Bool {
+//
+//        var b: Bool = true
+//        let row: [String: Any] = mySections[idx]
+//        if (row.keyExist(key: "isExpanded")) {
+//            if let tmp: Bool = row["isExpanded"] as? Bool {
+//                b = tmp
+//            }
+//        }
+//
+//        return b
+//    }
+//
+//    func getRowFromKey(rows: [[String: String]], key: String)-> [String: String] {
+//
+//        for row in rows {
+//
+//            if let key1: String = row["key"] {
+//                if (key1 == key) {
+//                    return row
+//                }
+//            }
+//        }
+//        return [String: String]()
+//    }
+//
+//    func replaceRowByKey(rows: [[String: String]], key: String, newRow: [String: String])-> [[String: String]] {
+//
+//        var _rows = rows
+//        for (idx, row) in rows.enumerated() {
+//
+//            if let key1: String = row["key"] {
+//                if (key1 == key) {
+//                    _rows[idx] = newRow
+//                    break
+//                }
+//            }
+//        }
+//        return _rows
+//    }
+//
+//    //    myRows = [
+//    //        ["key":"data", "rows": fixedRows],
+//    //        ["key":"order", "rows": orderRows],
+//    //        ["key":"like", "rows": likeRows],
+//    //        ["key":"manager", "rows": courseRows],
+//    //    ]
+//
+//    func getSectionRowFromMyRowsByKey(key: String)-> [String: Any] {
+//
+//        for row in myRows {
+//            if let key1: String = row["key"] as? String {
+//                if key == key1 {
+//                    return row
+//                }
+//            }
+//        }
+//
+//        return [String: Any]()
+//    }
+//
+//    func getSectionRowFromMyRowsByIdx(idx: Int)-> [String: Any] {
+//
+//        return myRows[idx]
+//    }
+//
+//    //    let fixedRows: [[String: String]] = [
+//    //        ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
+//    //        ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
+//    //    ]
+//    func getRowRowsFromMyRowsByKey(key: String)-> [[String: String]] {
+//
+//        let sectionRow: [String: Any] = getSectionRowFromMyRowsByKey(key: key)
+//        if (sectionRow.keyExist(key: "rows")) {
+//            if let tmp: [[String: String]] = sectionRow["rows"] as? [[String: String]] {
+//                return tmp
+//            }
+//        }
+//
+//        return [[String: String]]()
+//    }
+//
+//    func getRowRowsFromMyRowsByKey1(key: String) -> [String : String] {
+//
+//
+//        for sectionRow in myRows {
+//            if (sectionRow.keyExist(key: "rows")) {
+//                let rowRows = sectionRow["rows"] as! [[String: String]]
+//                for rowRow in rowRows {
+//                    if (rowRow["key"] == key) {
+//                        return rowRow
+//                    }
+//                }
+//            }
+//        }
+//
+//        return [String: String]()
+//    }
+//
+//    func replaceRowByKey(rowKey: String, _row: [String: String]) {
+//
+////        var tmp: [String: String] = [String: String]()
+////        for (key, value) in _row {
+////            if let _value: String = value as? String {
+////                tmp[key] = _value
+////            }
+////        }
+//
+//        //var sectionIdx: Int = -1
+//        var sectionKey: String = ""
+//        for (idx, row) in myRows.enumerated() {
+//
+//            // row is  ["key":"product", "rows": productRows]
+//            if (row.keyExist(key: "rows")) {
+//                let rows: [[String: String]] = row["rows"] as! [[String: String]]
+//                for row1 in rows {
+//                    if let key1: String = row1["key"] {
+//                        if rowKey == key1 {
+//                            //sectionIdx = idx
+//                            //找出 section row 的 key
+//                            sectionKey = myRows[idx]["key"] as! String
 //                            break
 //                        }
 //                    }
 //                }
-//                myRows[sectionIdx]["rows"] = rows!
 //            }
 //        }
-    }
-    
-    func replaceRowByKey(sectionKey: String, rowKey: String, _row: [String: String]) {
-        
-        var tmpRows: [[String: Any]] = [[String: Any]]()
-        
-        
-        for (sectionIdx, sectionRow) in myRows.enumerated() {
-            
-            tmpRows = sectionRow["rows"] as! [[String: Any]]
-            if let sectionKey1: String = sectionRow["key"] as? String {
-                
-                // 1.用section key找出 section row
-                if (sectionKey1 == sectionKey) {
-                    
-                    if let sectionRows: [[String: Any]] = sectionRow["rows"] as? [[String : Any]] {
-                        for (rowIdx, rowRow) in sectionRows.enumerated() {
-                            
-                            if let rowKey1: String = rowRow["key"] as? String {
-                                
-                                //2.用row key找出 row row
-                                if (rowKey1 == rowKey) {
-                                    tmpRows[rowIdx] = _row
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            myRows[sectionIdx]["rows"] = tmpRows
-        }
-    }
-    
-    func replaceRowsByKey(sectionKey: String, rows: [[String: String]]) {
-        
-        for (sectionIdx, sectionRow) in myRows.enumerated() {
-            
-            if let sectionKey1: String = sectionRow["key"] as? String {
-                if (sectionKey1 == sectionKey) {
-                    myRows[sectionIdx]["rows"] = rows
-                }
-            }
-        }
-    }
-    
-    //["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
-    func getRowFromIndexPath(indexPath: IndexPath)-> [String: String] {
-        
-        let section: Int = indexPath.section
-        let key: String = getSectionKey(idx: section)
-        let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
-        let row: [String: String] = rows[indexPath.row]
-        
-        return row
-    }
-    
-    func getRowValue(rowKey: String)-> String {
-        
-        let row = getRowRowsFromMyRowsByKey1(key: rowKey)
-        var value: String = ""
-        if let tmp: String = row["value"] {
-            value = tmp
-        }
-        
-        return value
-    }
-    
-    func getRowShow(rowKey: String)-> String {
-        
-        let row = getRowRowsFromMyRowsByKey1(key: rowKey)
-        var show: String = ""
-        if let tmp: String = row["show"] {
-            show = tmp
-        }
-        
-        return show
-    }
+//
+//        replaceRowByKey(sectionKey: sectionKey, rowKey: rowKey, _row: _row)
+//
+////        if (sectionIdx >= 0) {
+////            var rows: [[String: String]]? = myRows[sectionIdx]["rows"] as? [[String: String]]
+////            if (rows != nil) {
+////                for (idx, row) in rows!.enumerated() {
+////                    // row is ["title": "商品","key":"product","value":"","show":""]
+////                    if (row.keyExist(key: "key")) {
+////                        if (row["key"] == rowKey) {
+////                            rows![idx] = tmp
+////                            break
+////                        }
+////                    }
+////                }
+////                myRows[sectionIdx]["rows"] = rows!
+////            }
+////        }
+//    }
+//
+//    func replaceRowByKey(sectionKey: String, rowKey: String, _row: [String: String]) {
+//
+//        var tmpRows: [[String: Any]] = [[String: Any]]()
+//
+//
+//        for (sectionIdx, sectionRow) in myRows.enumerated() {
+//
+//            tmpRows = sectionRow["rows"] as! [[String: Any]]
+//            if let sectionKey1: String = sectionRow["key"] as? String {
+//
+//                // 1.用section key找出 section row
+//                if (sectionKey1 == sectionKey) {
+//
+//                    if let sectionRows: [[String: Any]] = sectionRow["rows"] as? [[String : Any]] {
+//                        for (rowIdx, rowRow) in sectionRows.enumerated() {
+//
+//                            if let rowKey1: String = rowRow["key"] as? String {
+//
+//                                //2.用row key找出 row row
+//                                if (rowKey1 == rowKey) {
+//                                    tmpRows[rowIdx] = _row
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            myRows[sectionIdx]["rows"] = tmpRows
+//        }
+//    }
+//
+//    func replaceRowsByKey(sectionKey: String, rows: [[String: String]]) {
+//
+//        for (sectionIdx, sectionRow) in myRows.enumerated() {
+//
+//            if let sectionKey1: String = sectionRow["key"] as? String {
+//                if (sectionKey1 == sectionKey) {
+//                    myRows[sectionIdx]["rows"] = rows
+//                }
+//            }
+//        }
+//    }
+//
+//    //["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
+//    func getRowFromIndexPath(indexPath: IndexPath)-> [String: String] {
+//
+//        let section: Int = indexPath.section
+//        let key: String = getSectionKey(idx: section)
+//        let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+//        let row: [String: String] = rows[indexPath.row]
+//
+//        return row
+//    }
+//
+//    func getRowValue(rowKey: String)-> String {
+//
+//        let row = getRowRowsFromMyRowsByKey1(key: rowKey)
+//        var value: String = ""
+//        if let tmp: String = row["value"] {
+//            value = tmp
+//        }
+//
+//        return value
+//    }
+//
+//    func getRowShow(rowKey: String)-> String {
+//
+//        let row = getRowRowsFromMyRowsByKey1(key: rowKey)
+//        var show: String = ""
+//        if let tmp: String = row["show"] {
+//            show = tmp
+//        }
+//
+//        return show
+//    }
 }
 
 extension MyTableVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        var count: Int?
-        if sections == nil {
-            count = 1
-        } else {
-            count = sections!.count
-        }
-        return count!
+        let count: Int = 1
+//        if sections == nil {
+//            count = 1
+//        } else {
+//            count = sections!.count
+//        }
+        return count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -799,13 +649,13 @@ extension MyTableVC: UITableViewDataSource {
             return lists1.count
         }
         
-        var count: Int?
-        if rows == nil {
-            count = 0
-        } else {
-            count = rows![section].count
-        }
-        return count!
+        let count: Int = 1
+//        if rows == nil {
+//            count = 0
+//        } else {
+//            count = rows![section].count
+//        }
+        return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -840,11 +690,13 @@ extension MyTableVC: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if sections == nil {
-            return nil
-        } else {
-            return sections![section]
-        }
+//        if sections == nil {
+//            return nil
+//        } else {
+//            return sections![section]
+//        }
+        
+        return ""
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

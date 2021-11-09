@@ -64,6 +64,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     
     var searchPanel: SearchPanel = SearchPanel()
     var searchSections: [SearchSection] = [SearchSection]()
+    var oneSections: [OneSection] = [OneSection]()
+    var params: [String: String] = [String: String]()
     
     //WeekdaysSelectDelegate
     func setWeekdaysData(selecteds: [Int]){}
@@ -97,6 +99,37 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func cellNumberChanged(sectionIdx: Int, rowIdx: Int, number: Int) {}
     func cellRadioChanged(key: String, sectionIdx: Int, rowIdx: Int, isChecked: Bool) {}
     func cellClear(sectionIdx: Int, rowIdx: Int) {}
+    
+    func cellSwitchChanged(key: String, sectionIdx: Int, rowIdx: Int, isSwitch: Bool) {
+        
+        let row = searchSections[sectionIdx].items[rowIdx]
+        row.value = String(isSwitch)
+    }
+    
+    func cellMap(row: Table) {
+        
+        var name: String = ""
+        if row.name.count > 0 {
+            name = row.name
+        } else if row.title.count > 0 {
+            name = row.title
+        }
+        //print(row.address)
+        _showMap(title: name, address: row.address)
+    }
+    
+    func cellLike(row: Table) {
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            dataService.like(token: row.token, able_id: row.id)
+        }
+    }
+    
+    func cellRefresh() {
+        params.removeAll()
+        refresh()
+    }
     
 //    var wheels: Int = 0
 //    required init() {}
@@ -192,22 +225,171 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, searchSections: searchSections)
     }
     
-    func mask(y: CGFloat, superView: UIView? = nil, height: CGFloat? = nil) {
-        maskView.backgroundColor = UIColor(white: 1, alpha: 0.8)
-        maskView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(unmask)))
-        var _view = view
-        if superView != nil {
-            _view = superView
-        }
-        _view?.addSubview(maskView)
+    func moreClickForSearch(key: String, row: SearchRow, delegate: BaseViewController) {
         
-        var _height = view.bounds.height - titleBarHeight
-        if height != nil {
-            _height = height!
+        if (key == CITY_KEY) {
+            toSelectCity(key: CITY_KEY, selected: row.value, delegate: self)
+        } else if (key == WEEKDAY_KEY) {
+            let selecteds: [Int] = valueToArray(t: Int.self, value: row.value)
+            toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
+        } else if (key == START_TIME_KEY) {
+            toSelectTime(key: key, selected: row.value, delegate: self)
+        } else if (key == ARENA_KEY) {
+            let row1: SearchRow = getSearchRowFromKey(CITY_KEY)
+            var city_id: Int = 0
+            
+            if (row1.value.count > 0) {
+                if let tmp: Int = Int(row1.value) {
+                    city_id = tmp
+                }
+            }
+            if (city_id <= 0) {
+                warning("請先選擇縣市")
+            } else {
+                toSelectArena(key: key, city: city_id, selected: row.value, delegate: self)
+            }
+        } else if (key == DEGREE_KEY) {
+            let tmps: [String] = valueToArray(t: String.self, value: row.value)
+            var selecteds: [DEGREE] = [DEGREE]()
+            for tmp in tmps {
+                selecteds.append(DEGREE.enumFromString(string: tmp))
+            }
+            toSelectDegree(selecteds: selecteds, delegate: self)
         }
-        maskView.frame = CGRect(x: 0, y: y, width: (_view?.frame.width)!, height: _height)
-        maskView.alpha = 0
     }
+    
+//    func getRowFromKey<T>(_ key: String)-> T {
+//
+//    }
+    
+    func getSearchRowFromKey(_ key: String)-> SearchRow {
+
+        for section in searchSections {
+            for row in section.items {
+                if (row.key == key ) {
+                    return row
+                }
+            }
+        }
+        return SearchRow()
+    }
+    
+    func getSearchRowFromIdx(_ sectionIdx: Int, _ rowIdx: Int) -> SearchRow {
+        return searchSections[sectionIdx].items[rowIdx]
+    }
+    
+    func getSearchRowFromIdx(sectionIdx: Int, rowIdx: Int)-> SearchRow {
+        return searchSections[sectionIdx].items[rowIdx]
+    }
+    
+    func getOneRowFromIdx(_ sectionIdx: Int, _ rowIdx: Int) -> OneRow {
+        return oneSections[sectionIdx].items[rowIdx]
+    }
+    
+    func getOneRowFromKey(_ key: String)-> OneRow {
+
+        for section in oneSections {
+            for row in section.items {
+                if (row.key == key ) {
+                    return row
+                }
+            }
+        }
+        return OneRow()
+    }
+    
+    func getOneRowValue(_ rowKey: String)-> String {
+        let row = getOneRowFromKey(rowKey)
+        return row.value
+    }
+    
+    func getOneRowsFromSectionKey(_ sectionKey: String)-> [OneRow] {
+        for section in oneSections {
+            if (section.key == sectionKey) {
+                return section.items
+            }
+        }
+        
+        return [OneRow]()
+    }
+    
+    func getOneSectionFromKey(_ key: String)-> OneSection {
+        for oneSection in oneSections {
+            if (key == oneSection.key) {
+                return oneSection
+            }
+        }
+        
+        return OneSection()
+    }
+    
+    //存在row的value只是單純的文字，陣列值使用","來區隔，例如"1,2,3"，但當要傳回選擇頁面時，必須轉回陣列[1,2,3]
+    func valueToArray<T>(t:T.Type, row: SearchRow)-> [T] {
+
+        var selecteds: [T] = [T]()
+        //print(t)
+        var type: String = "String"
+        if (t.self == Int.self) {
+            type = "Int"
+        }
+        if (row.value.count > 0) {
+            let values = row.value.components(separatedBy: ",")
+            for value in values {
+                if (type == "Int") {
+                    if let tmp = Int(value) {
+                        selecteds.append(tmp as! T)
+                    }
+                } else {
+                    if let tmp = value as? T {
+                        selecteds.append(tmp)
+                    }
+                }
+            }
+        }
+
+        return selecteds
+    }
+    
+    func valueToArray<T>(t: T.Type, value: String)-> [T] {
+        var selecteds: [T] = [T]()
+        //print(t)
+        var type: String = "String"
+        if (t.self == Int.self) {
+            type = "Int"
+        }
+        
+        let values = value.components(separatedBy: ",")
+        for value in values {
+            if (type == "Int") {
+                if let tmp = Int(value) {
+                    selecteds.append(tmp as! T)
+                }
+            } else {
+                if let tmp = value as? T {
+                    selecteds.append(tmp)
+                }
+            }
+        }
+
+        return selecteds
+    }
+    
+//    func mask(y: CGFloat, superView: UIView? = nil, height: CGFloat? = nil) {
+//        maskView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+//        maskView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(unmask)))
+//        var _view = view
+//        if superView != nil {
+//            _view = superView
+//        }
+//        _view?.addSubview(maskView)
+//        
+//        var _height = view.bounds.height - titleBarHeight
+//        if height != nil {
+//            _height = height!
+//        }
+//        maskView.frame = CGRect(x: 0, y: y, width: (_view?.frame.width)!, height: _height)
+//        maskView.alpha = 0
+//    }
     
 //    func addLayer(superView: UIView, frame: CGRect) {
 //        superView.addSubview(containerView)
@@ -274,7 +456,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
 //    func otherAnimation(){}
 //
 //
-    @objc func unmask(){}
+//    @objc func unmask(){}
 //    @objc func layerSubmit(view: UIButton){}
 //    @objc func layerDelete(view: UIButton){}
 //    @objc func layerCancel(view: UIButton){unmask()}

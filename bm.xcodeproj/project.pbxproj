@@ -248,8 +248,6 @@
 		B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */; };
 		B3D4950D25DF67D900D7BF42 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D4950B25DF67D900D7BF42 /* PaymentCell.swift */; };
 		B3D4950E25DF67D900D7BF42 /* PaymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3D4950C25DF67D900D7BF42 /* PaymentCell.xib */; };
-		B3DEBE0F2106FDB1003699A0 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE0D2106FDB1003699A0 /* ListCell.swift */; };
-		B3DEBE102106FDB1003699A0 /* ListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3DEBE0E2106FDB1003699A0 /* ListCell.xib */; };
 		B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE13210781FD003699A0 /* CoachService.swift */; };
 		B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE15210CA83A003699A0 /* ArenaVC.swift */; };
 		B3DEBE18210CB30E003699A0 /* ArenaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE17210CB30E003699A0 /* ArenaService.swift */; };
@@ -306,6 +304,8 @@
 		B3FB9B272407F7EE0051186F /* TempPlay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B262407F7EE0051186F /* TempPlay.storyboard */; };
 		F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90423B81F83748C00DC8B1E /* TeamVC.swift */; };
 		F9308B3B2737743F002531A1 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3A2737743F002531A1 /* MemberRow.swift */; };
+		F9308B3E273954AB002531A1 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3C273954AB002531A1 /* SwitchCell.swift */; };
+		F9308B3F273954AB002531A1 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9308B3D273954AB002531A1 /* SwitchCell.xib */; };
 		F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D1F1F83636A00F550FD /* AppDelegate.swift */; };
 		F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D211F83636A00F550FD /* HomeVC.swift */; };
 		F94E7D251F83636A00F550FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94E7D231F83636A00F550FD /* Main.storyboard */; };
@@ -631,8 +631,6 @@
 		B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		B3D4950B25DF67D900D7BF42 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
 		B3D4950C25DF67D900D7BF42 /* PaymentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentCell.xib; sourceTree = "<group>"; };
-		B3DEBE0D2106FDB1003699A0 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
-		B3DEBE0E2106FDB1003699A0 /* ListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCell.xib; sourceTree = "<group>"; };
 		B3DEBE13210781FD003699A0 /* CoachService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachService.swift; sourceTree = "<group>"; };
 		B3DEBE15210CA83A003699A0 /* ArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaVC.swift; sourceTree = "<group>"; };
 		B3DEBE17210CB30E003699A0 /* ArenaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaService.swift; sourceTree = "<group>"; };
@@ -693,6 +691,8 @@
 		B45D9C2D818D36544B377579 /* Pods-bm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.release.xcconfig"; path = "Target Support Files/Pods-bm/Pods-bm.release.xcconfig"; sourceTree = "<group>"; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
 		F9308B3A2737743F002531A1 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
+		F9308B3C273954AB002531A1 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
+		F9308B3D273954AB002531A1 /* SwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
 		F94E7D1C1F83636A00F550FD /* bm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94E7D1F1F83636A00F550FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F94E7D211F83636A00F550FD /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -837,8 +837,6 @@
 				B306FEAC21F8422B00403FE2 /* IconCell.xib */,
 				B39E5FA3263D4F0800C40BA7 /* List2Cell.swift */,
 				B39E5FA4263D4F0800C40BA7 /* List2Cell.xib */,
-				B3DEBE0D2106FDB1003699A0 /* ListCell.swift */,
-				B3DEBE0E2106FDB1003699A0 /* ListCell.xib */,
 				B36D66BE229A828A00502D62 /* ManagerCourseCell.swift */,
 				B36D66BF229A828A00502D62 /* ManagerCourseCell.xib */,
 				B322F8091FC6AD1800DE98FB /* MenuCell.swift */,
@@ -1036,6 +1034,8 @@
 				B3CABD8826B6A66B00FD0E4D /* RadioCell.xib */,
 				B3CABD8E26B6E4DA00FD0E4D /* MemoCell.swift */,
 				B3CABD8F26B6E4DA00FD0E4D /* MemoCell.xib */,
+				F9308B3C273954AB002531A1 /* SwitchCell.swift */,
+				F9308B3D273954AB002531A1 /* SwitchCell.xib */,
 			);
 			path = FormItemCell;
 			sourceTree = "<group>";
@@ -1480,6 +1480,7 @@
 				B3756EED21BA6AAA006893E1 /* StatusCell.xib in Resources */,
 				B3756EDB21B8E50E006893E1 /* WeekdayCell.xib in Resources */,
 				B36D66C1229A828A00502D62 /* ManagerCourseCell.xib in Resources */,
+				F9308B3F273954AB002531A1 /* SwitchCell.xib in Resources */,
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
 				B3FB9B1E2407C9CB0051186F /* Member.storyboard in Resources */,
 				B362265425E2AD3300D98317 /* OrderListCell.xib in Resources */,
@@ -1525,7 +1526,6 @@
 				B35C4F4D2196F5E500F8AEB2 /* EditCell.xib in Resources */,
 				B306FEAE21F8422B00403FE2 /* IconCell.xib in Resources */,
 				B3CABD9126B6E4DA00FD0E4D /* MemoCell.xib in Resources */,
-				B3DEBE102106FDB1003699A0 /* ListCell.xib in Resources */,
 				B3A9038E2385537900A986F7 /* CourseView.xib in Resources */,
 				B3A253F0256CBB40004B8A03 /* Select.storyboard in Resources */,
 				B3D4950E25DF67D900D7BF42 /* PaymentCell.xib in Resources */,
@@ -1720,7 +1720,6 @@
 				B3C49534262AC2C100D4F727 /* CourseListCell.swift in Sources */,
 				B306FEA821F737D700403FE2 /* SuperTableView.swift in Sources */,
 				B3DEBE18210CB30E003699A0 /* ArenaService.swift in Sources */,
-				B3DEBE0F2106FDB1003699A0 /* ListCell.swift in Sources */,
 				B362265325E2AD3300D98317 /* OrderListCell.swift in Sources */,
 				F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */,
 				B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */,
@@ -1762,6 +1761,7 @@
 				B3756EEF21BA6F19006893E1 /* StatusSelectVC.swift in Sources */,
 				B36E334425480007001336C2 /* ShowStoreVC.swift in Sources */,
 				B3ED38DB1FB488CB0003F083 /* ImagePickerView.swift in Sources */,
+				F9308B3E273954AB002531A1 /* SwitchCell.swift in Sources */,
 				B36CBD5520DFCC9E00E52B9C /* SuperModel.swift in Sources */,
 				B36241372601B3CA008FAD1B /* ProductTable.swift in Sources */,
 				B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */,

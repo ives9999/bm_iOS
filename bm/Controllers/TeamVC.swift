@@ -147,7 +147,7 @@ class TeamVC: MyTableVC {
             
             return cell
         } else {
-            return ListCell()
+            return UITableViewCell()
         }
     }
     

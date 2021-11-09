@@ -82,7 +82,6 @@ class ShowCoachVC: ShowVC {
     var timetables: Timetables?
     var coursesTable: CoursesTable?
     var city_id: Int = 0
-    var params: [String: Any] = [String: Any]()
     //var backDelegate: BackDelegate?
         
     //var fromNet: Bool = false
@@ -359,7 +358,7 @@ class ShowCoachVC: ShowVC {
                 if myTable!.citys.count > 0 {
                     for city in myTable!.citys {
                         city_id = city.id
-                        params["city_id"] = [city_id]
+                        params["city_id"] = String(city_id)
                         params["city_type"] = "all"
                         cityBtn.setTitle(city.name)
                     }

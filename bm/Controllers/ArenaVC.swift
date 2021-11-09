@@ -62,8 +62,12 @@ class ArenaVC: MyTableVC {
         rows.append(r2)
         let r3: SearchRow = SearchRow(title: "區域", show: "全部", key: AREA_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r3)
-//        let r4: SearchRow = SearchRow(title: "時段", show: "全部", key: START_TIME_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
-//        rows.append(r4)
+        let r4: SearchRow = SearchRow(title: "空調", value: "false", show: "全部", key: ARENA_AIR_CONDITION_KEY, cell: "switch")
+        rows.append(r4)
+        let r5: SearchRow = SearchRow(title: "盥洗室", value: "false", show: "全部", key: ARENA_BATHROOM_KEY, cell: "switch")
+        rows.append(r5)
+        let r6: SearchRow = SearchRow(title: "停車場", value: "false", show: "全部", key: ARENA_PARKING_KEY, cell: "switch")
+        rows.append(r6)
 
         let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
         s.items.append(contentsOf: rows)
@@ -130,7 +134,7 @@ class ArenaVC: MyTableVC {
             
             return cell
         } else {
-            return ListCell()
+            return UITableViewCell()
         }
     }
     

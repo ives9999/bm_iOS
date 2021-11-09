@@ -113,7 +113,7 @@ class ProductVC: MyTableVC {
             }
             return cell
         } else {
-            return ListCell()
+            return UITableViewCell()
         }
     }
     

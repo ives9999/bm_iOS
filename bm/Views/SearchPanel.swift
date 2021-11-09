@@ -88,8 +88,17 @@ class SearchPanel: UIViewController {
         searchTableView.dataSource = self
         searchTableView.delegate = self
         
-        let editCellNib = UINib(nibName: "EditCell", bundle: nil)
-        searchTableView.register(editCellNib, forCellReuseIdentifier: "search_cell")
+        let plainNib = UINib(nibName: "PlainCell", bundle: nil)
+        searchTableView.register(plainNib, forCellReuseIdentifier: "PlainCell")
+        
+        let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
+        searchTableView.register(textFieldNib, forCellReuseIdentifier: "TextFieldCell")
+        
+        let moreCellNib = UINib(nibName: "MoreCell", bundle: nil)
+        searchTableView.register(moreCellNib, forCellReuseIdentifier: "MoreCell")
+        
+        let switchCellNib = UINib(nibName: "SwitchCell", bundle: nil)
+        searchTableView.register(switchCellNib, forCellReuseIdentifier: "SwitchCell")
         
         searchTableView.estimatedRowHeight = 44
         searchTableView.rowHeight = UITableView.automaticDimension
@@ -363,13 +372,47 @@ extension SearchPanel: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
-            cell.editCellDelegate = baseVC
-            let row = searchSections[indexPath.section].items[indexPath.row]
-            //print(searchRow["key"])
-            cell.forRow(indexPath: indexPath, row: row, isClear: true)
+        let row = searchSections[indexPath.section].items[indexPath.row]
+        let cell_type: String = row.cell
+        
+        if (cell_type == "more") {
+            
+            let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "MoreCell", for: indexPath) as! MoreCell
+            cell.cellDelegate = baseVC
+            cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
             return cell
+            
+        } else if (row.cell == "text") {
+            
+            if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
+                
+                cell.update(title: row.title, show: row.show)
+                return cell
+            }
+        } else if (cell_type == "textField") {
+            if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell {
+                
+                cell.cellDelegate = baseVC
+                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                return cell
+            }
+        } else if (cell_type == "switch") {
+            if let cell: SwitchCell = tableView.dequeueReusableCell(withIdentifier: "SwitchCell", for: indexPath) as? SwitchCell {
+                
+                cell.cellDelegate = baseVC
+                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                return cell
+            }
         }
+                                                          
+        
+//        if let cell = tableView.dequeueReusableCell(withIdentifier: "search_cell", for: indexPath) as? EditCell {
+//            cell.editCellDelegate = baseVC
+//            let row = searchSections[indexPath.section].items[indexPath.row]
+//            //print(searchRow["key"])
+//            cell.forRow(indexPath: indexPath, row: row, isClear: true)
+//            return cell
+//        }
         
         return UITableViewCell()
     }
@@ -384,13 +427,10 @@ extension SearchPanel: UITableViewDelegate {
         let key: String = row.key
         
         let cell: String = row.cell
-        if (cell == TO_CITY || cell == TO_SELECT_TIME) {
-            let selected: String = row.value
-            baseVC!.toSelectSingle(key: key, selected: selected, delegate: baseVC!)
-        } else if (cell == TO_SELECT_WEEKDAY) {
-            
-            let selecteds: [Int] = valueToArray(t: Int.self, row: row)
-            baseVC!.toSelectWeekday(key: key, selecteds: selecteds, delegate: baseVC!)
+        if (cell == "more") {
+            baseVC!.moreClickForSearch(key: key, row: row, delegate: baseVC!)
+//            let selected: String = row.value
+//            baseVC!.toSelectSingle(key: key, selected: selected, delegate: baseVC!)
         } else if cell == TO_ARENA {
             
             var row = getDefinedRow(CITY_KEY)

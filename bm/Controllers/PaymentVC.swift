@@ -956,7 +956,7 @@ class PaymentVC: MyTableVC {
         unmask()
     }
     
-    override func unmask() {
+    @objc func unmask() {
         
         UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.maskView.frame = CGRect(x:0, y:self.view.frame.height, width:self.view.frame.width, height:self.view.frame.height)

@@ -15,6 +15,7 @@ class FormItemCell: SuperCell, FormUPdatable {
     
     var cellDelegate: List1CellDelegate?
     var oneRow: OneRow = OneRow()
+    var searchRow: SearchRow = SearchRow()
     var sectionIdx: Int = 0
     var rowIdx: Int = 0
     

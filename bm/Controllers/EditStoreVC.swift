@@ -48,8 +48,8 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
         hideKeyboardWhenTappedAround()
         FormItemCellType.registerCell(for: tableView)
         
-        sections = form.getSections()
-        section_keys = form.getSectionKeys()
+//        sections = form.getSections()
+//        section_keys = form.getSectionKeys()
 //        print(sections)
 //        print(section_keys)
         if store_token != nil && store_token!.count > 0 {
@@ -62,7 +62,8 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section_keys[section].count
+        //return section_keys[section].count
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

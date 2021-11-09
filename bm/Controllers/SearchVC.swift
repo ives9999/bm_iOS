@@ -35,7 +35,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         myTablView = tableView
         dataService = TeamService.instance
         able_type = "team"
-        sections = ["", "更多"]
+        //sections = ["", "更多"]
         
 //        searchRows = [
 //            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true,"value":""],
@@ -242,7 +242,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
             headerView.tag = section
             
             let titleLabel = UILabel()
-            titleLabel.text = sections?[section]
+            //titleLabel.text = sections?[section]
             titleLabel.textColor = UIColor.black
             titleLabel.sizeToFit()
             titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
@@ -281,7 +281,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 
                 return cell
             } else {
-                return ListCell()
+                return UITableViewCell()
             }
         case 1:
             //print("section: \(indexPath.section), row: \(indexPath.row)")
@@ -328,35 +328,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 let cell_type: String = row.cell
                 
                 if (cell_type == "more") {
-                    if (key == CITY_KEY) {
-                        toSelectCity(key: CITY_KEY, selected: row.value, delegate: self)
-                    } else if (key == WEEKDAY_KEY) {
-                        let selecteds: [Int] = valueToArray(t: Int.self, value: row.value)
-                        toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
-                    } else if (key == START_TIME_KEY) {
-                        toSelectTime(key: key, selected: row.value, delegate: self)
-                    } else if (key == ARENA_KEY) {
-                        let row1: SearchRow = getSearchRowFromKey(CITY_KEY)
-                        var city_id: Int = 0
-                        
-                        if (row1.value.count > 0) {
-                            if let tmp: Int = Int(row1.value) {
-                                city_id = tmp
-                            }
-                        }
-                        if (city_id <= 0) {
-                            warning("請先選擇縣市")
-                        } else {
-                            toSelectArena(key: key, city: city_id, selected: row.value, delegate: self)
-                        }
-                    } else if (key == DEGREE_KEY) {
-                        let tmps: [String] = valueToArray(t: String.self, value: row.value)
-                        var selecteds: [DEGREE] = [DEGREE]()
-                        for tmp in tmps {
-                            selecteds.append(DEGREE.enumFromString(string: tmp))
-                        }
-                        toSelectDegree(selecteds: selecteds, delegate: self)
-                    }
+                    
                 } else {
                     //performSegue(withIdentifier: segue, sender: indexPath)
                 }
@@ -496,6 +468,13 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
             prepareParams()
             refresh()
         }
+    }
+    
+    override func cellMap(row: Table) {
+        
+        let _row: TeamTable = row as! TeamTable
+        let arenaTable = _row.arena
+        _showMap(title: _row.name, address: arenaTable!.address)
     }
     
     @objc override func handleExpandClose(gesture : UITapGestureRecognizer) {

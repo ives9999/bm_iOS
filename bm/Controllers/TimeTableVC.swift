@@ -40,7 +40,6 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     }()
 
     fileprivate var form: TimeTableForm = TimeTableForm()
-    var params: [String: String] = [String: String]()
     let test: [String: String] = [TT_TITLE:"練球",TT_WEEKDAY:"2",TT_START_DATE:"2019-01-01",TT_END_DATE:"2019-03-31",TT_START_TIME:"14:00",TT_END_TIME:"17:00",TT_CHARGE:"800",TT_LIMIT:"6",TT_COLOR:"warning",TT_STATUS:"online",TT_CONTENT:"大家來練球"]
     var TTEditAction: String = "INSERT"
 
@@ -265,7 +264,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
     func showEditEvent(_ btnCount: Int) {
         collectionView.isScrollEnabled = false
         editTableView.reloadData()
-        mask(y: newY, superView: collectionView)
+        //mask(y: newY, superView: collectionView)
         let layerY = workAreaHeight + newY
         var frame = CGRect(x:padding, y:layerY, width:view.frame.width-(2*padding), height:layerY)
         layerBtnCount = btnCount
@@ -288,7 +287,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         editTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 500)
     }
     
-    @objc override func unmask() {
+    @objc func unmask() {
         UIView.animate(withDuration: 0.5) {
             self.maskView.alpha = 0
             self.editTableView.isHidden = true

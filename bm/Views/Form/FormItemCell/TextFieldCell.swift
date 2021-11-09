@@ -72,6 +72,24 @@ class TextFieldCell: FormItemCell {
         promptBtn.isHidden = true
     }
     
+    func update(sectionIdx: Int, rowIdx: Int, row: SearchRow) {
+        
+        self.searchRow = row
+        self.sectionIdx = sectionIdx
+        self.rowIdx = rowIdx
+        
+        titleLbl!.text = row.title
+        textField.text = row.show
+        
+        textField.placeholder(row.placeholder)
+        //textField.keyboardType = row.keyboard.enumToSwift()
+        //textField.backgroundColor = UIColor.clear
+        textField.tintColor = UIColor.red
+        //promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
+        
+        promptBtn.isHidden = true
+    }
+    
     @IBAction func textFieldDidChange(_ textField: UITextField) {
         if let _formItem = formItem as? TextFieldFormItem {
             if self.valueDelegate != nil {

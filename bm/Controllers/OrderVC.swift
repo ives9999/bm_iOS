@@ -850,8 +850,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     }
     
     
-    @objc override func unmask(){
-        
+    @objc func unmask(){
+
         maskView.unmask()
     }
     
@@ -1189,7 +1189,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["order_email"] = getOneRowValue(EMAIL_KEY)
         params["order_address"] = getOneRowValue(ADDRESS_KEY)
         
-        params[MEMO_KEY] = getRowValue(rowKey: MEMO_KEY)
+        params[MEMO_KEY] = getOneRowValue(MEMO_KEY)
         
         
 //        params["gateway"] = "credit_card"

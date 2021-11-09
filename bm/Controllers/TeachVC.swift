@@ -113,7 +113,7 @@ class TeachVC: MyTableVC {
             
             return cell
         } else {
-            return ListCell()
+            return UITableViewCell()
         }
     }
     
