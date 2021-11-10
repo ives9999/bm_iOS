@@ -13,7 +13,7 @@ class FormItemCell: SuperCell, FormUPdatable {
     var formItem: FormItem?
     var valueDelegate: ValueChangedDelegate?
     
-    var cellDelegate: List1CellDelegate?
+    var cellDelegate: List2CellDelegate?
     var oneRow: OneRow = OneRow()
     var searchRow: SearchRow = SearchRow()
     var sectionIdx: Int = 0

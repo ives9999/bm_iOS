@@ -14,6 +14,9 @@ class TeamListCell: List2Cell {
     @IBOutlet weak var intervalLbl: SuperLabel!
     @IBOutlet weak var temp_qnantityLbl: SuperLabel!
     @IBOutlet weak var signup_countLbl: SuperLabel!
+    
+    var _icons: [SuperButton] = [SuperButton]()
+    var _constraints: [NSLayoutConstraint] = [NSLayoutConstraint]()
 
     override func awakeFromNib() {
         
@@ -24,11 +27,21 @@ class TeamListCell: List2Cell {
         temp_qnantityLbl.setTextGeneral()
         signup_countLbl.setTextGeneral()
         
-        let _icons = [likeIcon, mobileIcon, mapIcon]
-        let _constraints = [likeConstraint, mobileConstraint, mapConstraint]
+        _icons = [likeIcon, mobileIcon, mapIcon]
+        _constraints = [likeConstraint, mobileConstraint, mapConstraint]
         for (idx,_icon) in _icons.enumerated() {
             let w: CGFloat = CGFloat(idx+1) * iconMargin + CGFloat(idx) * iconWidth
-            icons.append(["icon": _icon!, "constraint": _constraints[idx]!, "constant": w])
+            icons.append(["icon": _icon, "constraint": _constraints[idx], "constant": w])
+        }
+    }
+    
+    func showIcon(_ icon: SuperButton) {
+        
+        var iconIdx: Int = 0
+        for (idx, _icon) in _icons.enumerated() {
+            if _icon == icon {
+                iconIdx = idx
+            }
         }
     }
 
@@ -67,6 +80,9 @@ class TeamListCell: List2Cell {
             
             if row!.mobile.isEmpty {
                 hiddenIcon(mobileIcon)
+                //mobileIcon.isHidden = true
+            } else {
+                mobileIcon.isHidden = false
             }
             
             let chevron = UIImage(named: "greater1")

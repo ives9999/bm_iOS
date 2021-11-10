@@ -12,7 +12,7 @@ import Reachability
 import WebKit
 import SCLAlertView
 
-class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate, DegreeSelectDelegate, EditCellDelegate, ContentEditDelegate, List1CellDelegate {
+class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate, DegreeSelectDelegate, EditCellDelegate, ContentEditDelegate, List2CellDelegate {
     
     
     //var baseVC: BaseViewController
@@ -91,7 +91,38 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     //for RadioCell delegate
     func radioDidChange(sectionKey: String, rowKey: String, checked: Bool){}
     
-    func cellCity(row: Table) {}
+    func cellCity(row: Table) {
+        let key: String = CITY_KEY
+        let city_id: Int = row.city_id
+        let row = getSearchRowFromKey(key)
+        row.value = String(city_id)
+        //replaceRows(key, row)
+        prepareParams()
+        refresh()
+    }
+    
+    //must implement for every class
+    func cellArea(row: Table) {}
+    func cellArena(row: Table) {}
+    
+    //用這個函式來打行動電話或市內電話，因為icon只有一個
+    func cellMobile(row: Table) {
+        if (row.mobile_show.count > 0) {
+            //print(row.mobile)
+            row.mobile.makeCall()
+        } else if (row.tel_show.count > 0) {
+            row.tel.makeCall()
+        }
+    }
+    
+    //暫時沒有作用
+    func cellTel(row: Table) {
+        if (row.tel_show.count > 0) {
+            //print(row.tel)
+            row.tel.makeCall()
+        }
+    }
+    
     func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String) {}
     func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {
         let row: SearchRow = getSearchRowFromIdx(sectionIdx, rowIdx)
@@ -120,7 +151,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func cellSwitchChanged(key: String, sectionIdx: Int, rowIdx: Int, isSwitch: Bool) {
         
         let row = searchSections[sectionIdx].items[rowIdx]
-        row.value = String(isSwitch)
+        let val: String = (isSwitch) ? "1" : "0"
+        row.value = val
     }
     
     func cellMap(row: Table) {

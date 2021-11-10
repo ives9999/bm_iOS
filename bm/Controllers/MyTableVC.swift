@@ -185,37 +185,37 @@ class MyTableVC: BaseViewController {
     }
     
     override func singleSelected(key: String, selected: String, show: String?=nil) {
-        
+
         searchPanel.singleSelected(key: key, selected: selected, show: show)
     }
     
-    override func setWeekdaysData(selecteds: [Int]) {
-        
-        searchPanel.setWeekdaysData(selecteds: selecteds)
-    }
-    
-    override func setDegreeData(res: [DEGREE]) {
-        
-        searchPanel.setDegreeData(res: res)
-    }
-    
-    override func setSwitch(indexPath: IndexPath, value: Bool) {
-        
-        searchPanel.setSwitch(indexPath: indexPath, value: value)
-    }
-    
-    override func setTextField(key: String, value: String) {
-        
-        searchPanel.setTextField(key: key, value: value)
-    }
-    
-    override func clear(indexPath: IndexPath) {
-        let row = searchSections[indexPath.section].items[indexPath.row]
-        //print(row)
-        
-        let key = row.key
-        searchPanel.clear(key: key)
-    }
+//    override func setWeekdaysData(selecteds: [Int]) {
+//
+//        searchPanel.setWeekdaysData(selecteds: selecteds)
+//    }
+//
+//    override func setDegreeData(res: [DEGREE]) {
+//
+//        searchPanel.setDegreeData(res: res)
+//    }
+//
+//    override func setSwitch(indexPath: IndexPath, value: Bool) {
+//
+//        searchPanel.setSwitch(indexPath: indexPath, value: value)
+//    }
+//
+//    override func setTextField(key: String, value: String) {
+//
+//        searchPanel.setTextField(key: key, value: value)
+//    }
+//
+//    override func clear(indexPath: IndexPath) {
+//        let row = searchSections[indexPath.section].items[indexPath.row]
+//        //print(row)
+//
+//        let key = row.key
+//        searchPanel.clear(key: key)
+//    }
     
 //    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
 //        let key = section_keys[indexPath.section][indexPath.row]
@@ -303,28 +303,8 @@ class MyTableVC: BaseViewController {
         searchPanel.searchTableView.reloadData()
     }
     
-    func cellMobile(row: Table) {
-        if (row.mobile_show.count > 0) {
-            //print(row.mobile)
-            row.mobile.makeCall()
-        } else if (row.tel_show.count > 0) {
-            //print(row.tel)
-            row.tel.makeCall()
-        }
-    }
-    
-    override func cellCity(row: Table) {
-        let key: String = CITY_KEY
-        let city_id: Int = row.city_id
-        let row = getSearchRowFromKey(key)
-        row.value = String(city_id)
-        //replaceRows(key, row)
-        prepareParams()
-        refresh()
-    }
-    
-    func cellArena(row: Table) {}
-    func cellArea(row: Table) {}
+//    func cellArena(row: Table) {}
+//    func cellArea(row: Table) {}
     func cellEdit(row: Table) {}
     func cellDelete(row: Table) {}
     

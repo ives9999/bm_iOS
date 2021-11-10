@@ -36,7 +36,8 @@ class SwitchCell: FormItemCell {
         self.rowIdx = rowIdx
         
         titleLbl?.text = row.title
-        onoff.setOn(Bool(row.value)!, animated: true)
+        let val: Bool = (row.value == "1") ? true : false
+        onoff.setOn(val, animated: true)
     }
     
     @objc func switchDidValueChanged(sender: UISwitch) {

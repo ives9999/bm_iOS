@@ -212,32 +212,32 @@ class SearchPanel: UIViewController {
     }
     
     //存在row的value只是單純的文字，陣列值使用","來區隔，例如"1,2,3"，但當要傳回選擇頁面時，必須轉回陣列[1,2,3]
-    func valueToArray<T>(t:T.Type, row: SearchRow)-> [T] {
-        
-        var selecteds: [T] = [T]()
-        //print(t)
-        var type: String = "String"
-        if (t.self == Int.self) {
-            type = "Int"
-        }
-        
-        if (row.value.count > 0) {
-            let values = row.value.components(separatedBy: ",")
-            for value in values {
-                if (type == "Int") {
-                    if let tmp = Int(value) {
-                        selecteds.append(tmp as! T)
-                    }
-                } else {
-                    if let tmp = value as? T {
-                        selecteds.append(tmp)
-                    }
-                }
-            }
-        }
-        
-        return selecteds
-    }
+//    func valueToArray<T>(t:T.Type, row: SearchRow)-> [T] {
+//        
+//        var selecteds: [T] = [T]()
+//        //print(t)
+//        var type: String = "String"
+//        if (t.self == Int.self) {
+//            type = "Int"
+//        }
+//        
+//        if (row.value.count > 0) {
+//            let values = row.value.components(separatedBy: ",")
+//            for value in values {
+//                if (type == "Int") {
+//                    if let tmp = Int(value) {
+//                        selecteds.append(tmp as! T)
+//                    }
+//                } else {
+//                    if let tmp = value as? T {
+//                        selecteds.append(tmp)
+//                    }
+//                }
+//            }
+//        }
+//        
+//        return selecteds
+//    }
     
     func getDefinedRow(_ key: String) -> SearchRow {
         for section in searchSections {
@@ -279,80 +279,80 @@ class SearchPanel: UIViewController {
         reloadSearchTable()
     }
     
-    func setWeekdaysData(selecteds: [Int]) {
-        let row = getDefinedRow(WEEKDAY_KEY)
-        var texts: [String] = [String]()
-        var values: [String] = [String]()
-        if selecteds.count > 0 {
-            for day in selecteds {
-                values.append(String(day))
-                for gday in Global.instance.weekdays {
-                    if day == gday["value"] as! Int {
-                        let text = gday["simple_text"]
-                        texts.append(text! as! String)
-                        break
-                    }
-                }
-            }
-            row.show = texts.joined(separator: ",")
-        
-            row.value = values.joined(separator: ",")
-        } else {
-            row.show = "全部"
-        }
-        //replaceRows(WEEKDAY_KEY, row)
-        reloadSearchTable()
-    }
-    
-    func setDegreeData(res: [DEGREE]) {
-        
-        let row = getDefinedRow(DEGREE_KEY)
-        var names: [String] = [String]()
-        var values: [String] = [String]()
-        if res.count > 0 {
-            for degree in res {
-                names.append(degree.rawValue)
-                values.append(DEGREE.DBValue(degree))
-            }
-            row.show = names.joined(separator: ",")
-            row.value = values.joined(separator: ",")
-        } else {
-            row.show = "全部"
-            row.value = ""
-        }
-        //replaceRows(DEGREE_KEY, row)
-        reloadSearchTable()
-    }
-    
-    func setTextField(key: String, value: String) {
-        
-        let row = getDefinedRow(key)
-        row.value = value
-        //replaceRows(key, row)
-    }
-    
-    func setSwitch(indexPath: IndexPath, value: Bool) {
-        
-        let row = searchSections[indexPath.section].items[indexPath.row]
-        //let key = row.key
-        row.value = (value) ? "1" : ""
-        //replaceRows(key, row)
-        
-        reloadSearchTable()
-    }
+//    func setWeekdaysData(selecteds: [Int]) {
+//        let row = getDefinedRow(WEEKDAY_KEY)
+//        var texts: [String] = [String]()
+//        var values: [String] = [String]()
+//        if selecteds.count > 0 {
+//            for day in selecteds {
+//                values.append(String(day))
+//                for gday in Global.instance.weekdays {
+//                    if day == gday["value"] as! Int {
+//                        let text = gday["simple_text"]
+//                        texts.append(text! as! String)
+//                        break
+//                    }
+//                }
+//            }
+//            row.show = texts.joined(separator: ",")
+//        
+//            row.value = values.joined(separator: ",")
+//        } else {
+//            row.show = "全部"
+//        }
+//        //replaceRows(WEEKDAY_KEY, row)
+//        reloadSearchTable()
+//    }
+//    
+//    func setDegreeData(res: [DEGREE]) {
+//        
+//        let row = getDefinedRow(DEGREE_KEY)
+//        var names: [String] = [String]()
+//        var values: [String] = [String]()
+//        if res.count > 0 {
+//            for degree in res {
+//                names.append(degree.rawValue)
+//                values.append(DEGREE.DBValue(degree))
+//            }
+//            row.show = names.joined(separator: ",")
+//            row.value = values.joined(separator: ",")
+//        } else {
+//            row.show = "全部"
+//            row.value = ""
+//        }
+//        //replaceRows(DEGREE_KEY, row)
+//        reloadSearchTable()
+//    }
+//    
+//    func setTextField(key: String, value: String) {
+//        
+//        let row = getDefinedRow(key)
+//        row.value = value
+//        //replaceRows(key, row)
+//    }
+//    
+//    func setSwitch(indexPath: IndexPath, value: Bool) {
+//        
+//        let row = searchSections[indexPath.section].items[indexPath.row]
+//        //let key = row.key
+//        row.value = (value) ? "1" : ""
+//        //replaceRows(key, row)
+//        
+//        reloadSearchTable()
+//    }
     
     func reloadSearchTable() {
     
         searchTableView.reloadData()
     }
     
-    func clear(key: String) {
-        
-        let row = getDefinedRow(key)
-        row.show = "全部"
-        row.value = ""
-        //replaceRows(key, row)
-    }
+//    func clear(key: String) {
+//
+//        let row = getDefinedRow(key)
+//        row.show = "全部"
+//        row.value = ""
+//        //replaceRows(key, row)
+//    }
 }
 
 extension SearchPanel: UITableViewDataSource {

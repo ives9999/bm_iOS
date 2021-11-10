@@ -8,32 +8,6 @@
 
 import UIKit
 
-protocol List1CellDelegate {
-    //func searchCity(indexPath: IndexPath)
-    func cellMap(row: Table)
-    func cellTel(row: Table)
-    func cellMobile(row: Table)
-    func cellRefresh()
-    func cellEdit(row: Table)
-    func cellDelete(row: Table)
-    func cellCity(row: Table)
-    func cellArea(row: Table)
-    func cellArena(row: Table)
-    func cellLike(row: Table)
-    func cellWarning(msg: String)
-    func cellToLogin()
-    
-    func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String)
-    func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String)
-    func cellPrivacyChanged(sectionIdx: Int, rowIdx: Int, checked: Bool)
-    
-    func cellSetTag(sectionIdx: Int, rowIdx: Int, value: String, isChecked: Bool)
-    func cellNumberChanged(sectionIdx: Int, rowIdx: Int, number: Int)
-    func cellRadioChanged(key: String, sectionIdx: Int, rowIdx: Int, isChecked: Bool)
-    func cellSwitchChanged(key: String, sectionIdx: Int, rowIdx: Int, isSwitch: Bool)
-    func cellClear(sectionIdx: Int, rowIdx: Int)
-}
-
 class List2Cell: UITableViewCell {
     
     @IBOutlet weak var listFeatured: UIImageView!
@@ -59,7 +33,7 @@ class List2Cell: UITableViewCell {
     let iconMargin: CGFloat = 16
     var featured_h: CGFloat = 0
     
-    var cellDelegate: List1CellDelegate?
+    var cellDelegate: List2CellDelegate?
     
     var table: Table?
     
@@ -114,6 +88,8 @@ class List2Cell: UITableViewCell {
         
 //        if (_row.mobile_show.count == 0 && _row.tel_show.count == 0) {
 //            hiddenIcon(mobileIcon)
+//        } else {
+//            mobileIcon.isHidden = false
 //        }
         
         if (likeIcon != nil) {
@@ -200,6 +176,7 @@ class List2Cell: UITableViewCell {
         }
     }
     
+    //if page is arena list, arena press is this
     @IBAction func areaBtnPressed(sender: UIButton) {
         self._pressed(sender: sender) { (row) in
             if cellDelegate != nil {
@@ -270,16 +247,42 @@ class List2Cell: UITableViewCell {
     }
 }
 
-extension List1CellDelegate {
+protocol List2CellDelegate {
+    //func searchCity(indexPath: IndexPath)
+    func cellMap(row: Table)
+    func cellTel(row: Table)
+    func cellMobile(row: Table)
+    func cellRefresh()
+    func cellEdit(row: Table)
+    func cellDelete(row: Table)
+    func cellCity(row: Table)
+    func cellArea(row: Table)
+    func cellArena(row: Table)
+    func cellLike(row: Table)
+    func cellWarning(msg: String)
+    func cellToLogin()
+    
+    func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String)
+    func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String)
+    func cellPrivacyChanged(sectionIdx: Int, rowIdx: Int, checked: Bool)
+    
+    func cellSetTag(sectionIdx: Int, rowIdx: Int, value: String, isChecked: Bool)
+    func cellNumberChanged(sectionIdx: Int, rowIdx: Int, number: Int)
+    func cellRadioChanged(key: String, sectionIdx: Int, rowIdx: Int, isChecked: Bool)
+    func cellSwitchChanged(key: String, sectionIdx: Int, rowIdx: Int, isSwitch: Bool)
+    func cellClear(sectionIdx: Int, rowIdx: Int)
+}
+
+extension List2CellDelegate {
 //    func cellMap(row: Table){}
-    func cellTel(row: Table){}
-    func cellMobile(row: Table){}
+//    func cellTel(row: Table){}
+//    func cellMobile(row: Table){}
 //    func cellRefresh(){}
     func cellEdit(row: Table){}
     func cellDelete(row: Table){}
 //   func cellCity(row: Table){}
-    func cellArea(row: Table){}
-    func cellArena(row: Table){}
+//    func cellArea(row: Table){}
+//    func cellArena(row: Table){}
 //    func cellLike(row: Table){}
     func cellWarning(msg: String){}
     func cellToLogin(){}
