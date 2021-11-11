@@ -175,9 +175,20 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         }
     }
     
+    func cellEdit(row: Table){}
+    func cellDelete(row: Table){}
+    
     func cellRefresh() {
         params.removeAll()
         refresh()
+    }
+    
+    func cellWarning(msg: String) {
+        warning(msg)
+    }
+    
+    func cellToLogin() {
+        toLogin()
     }
     
 //    var wheels: Int = 0

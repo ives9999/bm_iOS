@@ -104,6 +104,7 @@ class CartItemTable: Table {
         
         //{name:尺寸,alias:size,value:M}|{name:尺寸,alias:size,value:M}
         let tmps: [String] = attribute.components(separatedBy: "|")
+        attributes.removeAll() 
         for var tmp in tmps {
             
             //{name:尺寸,alias:size,value:M}
@@ -117,7 +118,7 @@ class CartItemTable: Table {
             //[alias:size]
             //[value:M]
             var a: [String: String] = [String: String]()
-            if (a.count > 0) {
+            if (arr.count > 0) {
                 for str in arr {
                     let b: [String] = str.components(separatedBy: ":")
                     a[b[0]] = b[1]

@@ -43,6 +43,27 @@ class TeamListCell: List2Cell {
                 iconIdx = idx
             }
         }
+        
+        var newIcons: [SuperButton] = [SuperButton]()
+        for tmp in icons {
+            newIcons.append(tmp["icon"] as! SuperButton)
+        }
+        newIcons.insert(icon, at: iconIdx)
+        
+        icons.removeAll()
+        icons = [[String: Any]]()
+        for (idx,_icon) in newIcons.enumerated() {
+            let w: CGFloat = CGFloat(idx+1) * iconMargin + CGFloat(idx) * iconWidth
+            icons.append(["icon": _icon, "constraint": _constraints[idx], "constant": w])
+        }
+        
+        for (idx, _) in icons.enumerated() {
+            let w: CGFloat = CGFloat(idx+1) * iconMargin + CGFloat(idx) * iconWidth
+            icons[idx]["constant"] = w
+            let constraint: NSLayoutConstraint = icons[idx]["constraint"] as! NSLayoutConstraint
+            constraint.constant = w
+        }
+        icon.visibility = .visible
     }
 
     override func updateViews(_ _row: Table) {
@@ -78,11 +99,12 @@ class TeamListCell: List2Cell {
             temp_qnantityLbl.text = row!.temp_quantity_show
             signup_countLbl.text = row!.temp_signup_count_show
             
-            if row!.mobile.isEmpty {
+            if row!.mobile.isEmpty && mobileIcon.visibility == .visible {
                 hiddenIcon(mobileIcon)
-                //mobileIcon.isHidden = true
             } else {
-                mobileIcon.isHidden = false
+                if mobileIcon.visibility == .gone {
+                    showIcon(mobileIcon)
+                }
             }
             
             let chevron = UIImage(named: "greater1")

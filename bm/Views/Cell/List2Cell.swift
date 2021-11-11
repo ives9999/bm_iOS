@@ -273,22 +273,22 @@ protocol List2CellDelegate {
     func cellClear(sectionIdx: Int, rowIdx: Int)
 }
 
-extension List2CellDelegate {
+//extension List2CellDelegate {
 //    func cellMap(row: Table){}
 //    func cellTel(row: Table){}
 //    func cellMobile(row: Table){}
 //    func cellRefresh(){}
-    func cellEdit(row: Table){}
-    func cellDelete(row: Table){}
+//    func cellEdit(row: Table){}
+//    func cellDelete(row: Table){}
 //   func cellCity(row: Table){}
 //    func cellArea(row: Table){}
 //    func cellArena(row: Table){}
 //    func cellLike(row: Table){}
-    func cellWarning(msg: String){}
-    func cellToLogin(){}
+//    func cellWarning(msg: String){}
+//    func cellToLogin(){}
     
 //    func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String) {}
 //    func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {}
 //    func cellPrivacyChanged(sectionIdx: Int, rowIdx: Int, checked: Bool) {}
-}
+//}
 

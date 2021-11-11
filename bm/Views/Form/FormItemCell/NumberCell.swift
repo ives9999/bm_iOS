@@ -65,6 +65,7 @@ class NumberCell: FormItemCell {
                 stepper.maximumValue = tmp2
             }
         }
+        stepper.value = Double(row.value)!
     }
     
     @objc func stepperValueChanged(stepper: GMStepper) {

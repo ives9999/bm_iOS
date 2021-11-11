@@ -59,8 +59,12 @@ class MemberCartListVC: MyTableVC {
             if (mysTable!.rows.count > 0) {
                 myTable = mysTable!.rows[0]
                 cartItemsTable = myTable!.items
+                for cartItemTable in cartItemsTable {
+                    cartItemTable.filterRow()
+                    lists1.append(cartItemTable)
+                }
                 if (cartItemsTable.count > 0) {
-                    lists1 += cartItemsTable
+                    //lists1 += cartItemsTable
                     submitButton.isHidden = false
                 } else {
                     submitButton.isHidden = true
@@ -78,12 +82,27 @@ class MemberCartListVC: MyTableVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
             
-            cell.cellDelegate = self
+            
             let row = lists1[indexPath.row] as! CartItemTable
             row.filterRow()
             //row.printRow()
             
+            cell.cellDelegate = self
+            
+//            var attribute_text: String = ""
+//            if (row.attributes.count > 0) {
+//
+//                for (idx, attribute) in row.attributes.enumerated() {
+//                    attribute_text += attribute["name"]! + ":" + attribute["value"]!
+//                    if (idx < row.attributes.count - 1) {
+//                        attribute_text += " | "
+//                    }
+//                }
+//            }
+            
             cell.updateViews(indexPath: indexPath, row: row)
+            
+            //cell.update(sectionKey: "", rowKey: "", title: row.title, featured_path: row.product!.featured_path, attribute: attribute_text, amount: row.amount_show, quantity: String(row.quantity))
             
             return cell
         } else {

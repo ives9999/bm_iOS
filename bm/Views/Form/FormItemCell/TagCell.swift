@@ -177,6 +177,11 @@ class TagCell: FormItemCell {
             tag.value = attribute
             tag.text = attribute
             
+            if attribute == row.value {
+                tag.selected = true
+                tag.setSelectedStyle()
+            }
+            
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
             tag.addGestureRecognizer(gestureRecognizer)
             tagLabels.append(tag)

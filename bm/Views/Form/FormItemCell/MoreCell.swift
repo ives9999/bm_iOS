@@ -79,6 +79,7 @@ class MoreCell: FormItemCell {
         titleLbl!.text = row.title
         detailLbl.text = row.show
         
+        requiredImageView.isHidden = !row.isRequired
         promptBtn.isHidden = true
     }
     

@@ -106,7 +106,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         row = OneRow(title: "暱稱", value: Member.instance.nickname, show: Member.instance.nickname, key: NICKNAME_KEY, cell: "textField", placeholder: "大明哥")
         row.msg = "暱稱沒有填寫"
         rows.append(row)
-        row = OneRow(title: "生日", value: Member.instance.dob, show: Member.instance.dob, key: DOB_KEY, cell: "date")
+        row = OneRow(title: "生日", value: Member.instance.dob, show: Member.instance.dob, key: DOB_KEY, cell: "date", isRequired: false)
         rows.append(row)
         
         if (Member.instance.sex.count == 0) {
@@ -122,7 +122,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         row = OneRow(title: "行動電話", value: Member.instance.mobile, show: Member.instance.mobile, key: MOBILE_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "0939123456")
         row.msg = "行動電話沒有填寫"
         rows.append(row)
-        row = OneRow(title: "市內電話", value: Member.instance.tel, show: Member.instance.tel, key: TEL_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "021234567")
+        row = OneRow(title: "市內電話", value: Member.instance.tel, show: Member.instance.tel, key: TEL_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "021234567", isRequired: false)
         rows.append(row)
         row = OneRow(title: "縣市", value: String(Member.instance.city), show: Global.instance.zoneIDToName(Member.instance.city), key: CITY_KEY, cell: "more")
         row.msg = "沒有選擇縣市"

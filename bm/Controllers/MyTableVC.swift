@@ -305,16 +305,16 @@ class MyTableVC: BaseViewController {
     
 //    func cellArena(row: Table) {}
 //    func cellArea(row: Table) {}
-    func cellEdit(row: Table) {}
-    func cellDelete(row: Table) {}
-    
-    func cellWarning(msg: String) {
-        warning(msg)
-    }
-    
-    func cellToLogin() {
-        toLogin()
-    }
+//    func cellEdit(row: Table) {}
+//    func cellDelete(row: Table) {}
+//
+//    func cellWarning(msg: String) {
+//        warning(msg)
+//    }
+//
+//    func cellToLogin() {
+//        toLogin()
+//    }
     
     @objc func handleExpandClose(gesture : UITapGestureRecognizer) {
         

@@ -1147,26 +1147,26 @@
 		F94E7D1E1F83636A00F550FD /* bm */ = {
 			isa = PBXGroup;
 			children = (
-				F9FAB2B4271EF73C00D83CC4 /* Data */,
-				B3FB9B262407F7EE0051186F /* TempPlay.storyboard */,
-				B3FB9B232407F7280051186F /* Course.storyboard */,
-				B3FB9B212407F5EC0051186F /* Team.storyboard */,
-				B3FB9B1F2407F3750051186F /* More.storyboard */,
-				B30C953A1FE82447005F71EF /* bm.entitlements */,
-				F94E7D2B1F83636A00F550FD /* Info.plist */,
-				B3FB9B1D2407C9CB0051186F /* Member.storyboard */,
 				F94E7D1F1F83636A00F550FD /* AppDelegate.swift */,
 				F94E7D261F83636A00F550FD /* Assets.xcassets */,
-				B33426031FEFCDE300A760BD /* Images.xcassets */,
+				B30C953A1FE82447005F71EF /* bm.entitlements */,
 				F94E7D4D1F83660B00F550FD /* Controllers */,
+				B3FB9B232407F7280051186F /* Course.storyboard */,
+				F9FAB2B4271EF73C00D83CC4 /* Data */,
+				B33426031FEFCDE300A760BD /* Images.xcassets */,
+				F94E7D2B1F83636A00F550FD /* Info.plist */,
 				F94E7D281F83636A00F550FD /* LaunchScreen.storyboard */,
 				F94E7D231F83636A00F550FD /* Main.storyboard */,
+				B3FB9B1D2407C9CB0051186F /* Member.storyboard */,
 				F94E7D4E1F83662600F550FD /* Models */,
+				B3FB9B1F2407F3750051186F /* More.storyboard */,
+				B3A253EF256CBB40004B8A03 /* Select.storyboard */,
 				B32FBCF61F849A7D003D39CC /* Services */,
 				B3E72A1A1F9F9F0B0008A6B1 /* Support files */,
+				B3FB9B212407F5EC0051186F /* Team.storyboard */,
+				B3FB9B262407F7EE0051186F /* TempPlay.storyboard */,
 				B31361E51F87869400BDA53D /* Utilities */,
 				B32FBCEF1F84831C003D39CC /* Views */,
-				B3A253EF256CBB40004B8A03 /* Select.storyboard */,
 			);
 			path = bm;
 			sourceTree = "<group>";
