@@ -28,7 +28,6 @@
 		B309C1E22675F45E00CCFE61 /* SelectArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B309C1E12675F45E00CCFE61 /* SelectArenaVC.swift */; };
 		B30B584D26C8FA080065681F /* BarcodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30B584B26C8FA080065681F /* BarcodeCell.swift */; };
 		B30B584E26C8FA080065681F /* BarcodeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B30B584C26C8FA080065681F /* BarcodeCell.xib */; };
-		B30C95391FE765FB005F71EF /* Facebook.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95381FE765FB005F71EF /* Facebook.swift */; };
 		B30C95421FE82DA0005F71EF /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C95411FE82DA0005F71EF /* NotificationService.swift */; };
 		B30C95461FE82DA0005F71EF /* bmNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B30C954C1FEA8CDA005F71EF /* PasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C954B1FEA8CDA005F71EF /* PasswordVC.swift */; };
@@ -306,6 +305,7 @@
 		F9308B3B2737743F002531A1 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3A2737743F002531A1 /* MemberRow.swift */; };
 		F9308B3E273954AB002531A1 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3C273954AB002531A1 /* SwitchCell.swift */; };
 		F9308B3F273954AB002531A1 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9308B3D273954AB002531A1 /* SwitchCell.xib */; };
+		F9308B41273E6A04002531A1 /* SignupDateTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B40273E6A04002531A1 /* SignupDateTable.swift */; };
 		F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D1F1F83636A00F550FD /* AppDelegate.swift */; };
 		F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D211F83636A00F550FD /* HomeVC.swift */; };
 		F94E7D251F83636A00F550FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94E7D231F83636A00F550FD /* Main.storyboard */; };
@@ -408,7 +408,6 @@
 		B309C1E12675F45E00CCFE61 /* SelectArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectArenaVC.swift; sourceTree = "<group>"; };
 		B30B584B26C8FA080065681F /* BarcodeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarcodeCell.swift; sourceTree = "<group>"; };
 		B30B584C26C8FA080065681F /* BarcodeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BarcodeCell.xib; sourceTree = "<group>"; };
-		B30C95381FE765FB005F71EF /* Facebook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Facebook.swift; sourceTree = "<group>"; };
 		B30C953A1FE82447005F71EF /* bm.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bm.entitlements; sourceTree = "<group>"; };
 		B30C953F1FE82DA0005F71EF /* bmNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = bmNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30C95411FE82DA0005F71EF /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
@@ -693,6 +692,7 @@
 		F9308B3A2737743F002531A1 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
 		F9308B3C273954AB002531A1 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		F9308B3D273954AB002531A1 /* SwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
+		F9308B40273E6A04002531A1 /* SignupDateTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupDateTable.swift; sourceTree = "<group>"; };
 		F94E7D1C1F83636A00F550FD /* bm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94E7D1F1F83636A00F550FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F94E7D211F83636A00F550FD /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -1285,13 +1285,13 @@
 				B3E4D18025FF9E7500D78210 /* CourseTable.swift */,
 				B3F6B44B2604F4B40000F9E0 /* DateTable.swift */,
 				B3591B6F2164CC6100E0919C /* Degree.swift */,
-				B30C95381FE765FB005F71EF /* Facebook.swift */,
 				B35F8DD81F8F64310073BD70 /* Home.swift */,
 				B31CD34726F19D52001B3848 /* MemberTable.swift */,
 				B3F6B479260603A70000F9E0 /* OrderTable.swift */,
 				B3F6B46C2605E80F0000F9E0 /* PaymentTable.swift */,
 				B36241362601B3CA008FAD1B /* ProductTable.swift */,
 				B3F6B455260500650000F9E0 /* SignupCancelTable.swift */,
+				F9308B40273E6A04002531A1 /* SignupDateTable.swift */,
 				B3F6B4502605002E0000F9E0 /* SignupNormalTable.swift */,
 				B3F6B45A260500AC0000F9E0 /* SignupStandbyTab.swift */,
 				B362413B2601D7CA008FAD1B /* StoreTable.swift */,
@@ -1744,6 +1744,7 @@
 				B3ED38EA1FB87EE50003F083 /* TeamService.swift in Sources */,
 				B3756EF221BA7567006893E1 /* StatusSelectCell.swift in Sources */,
 				B35F8DD91F8F64310073BD70 /* Home.swift in Sources */,
+				F9308B41273E6A04002531A1 /* SignupDateTable.swift in Sources */,
 				B323390D21B6B995003EB84D /* FormConformity.swift in Sources */,
 				B306FEAD21F8422B00403FE2 /* IconCell.swift in Sources */,
 				B358B0B0229D4F4F00F1A4E6 /* EditCourseVC.swift in Sources */,
@@ -1791,7 +1792,6 @@
 				B3A9039023857A1200A986F7 /* CourseView.swift in Sources */,
 				B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */,
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
-				B30C95391FE765FB005F71EF /* Facebook.swift in Sources */,
 				B3B7588B25A802A7006ACC33 /* OrderForm.swift in Sources */,
 				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,

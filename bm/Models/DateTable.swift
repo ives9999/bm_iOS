@@ -29,10 +29,7 @@ class DateTable: Table {
     }
     
     override func filterRow() {
-        
         super.filterRow()
-        
-        
     }
     
     override public func printRow() {

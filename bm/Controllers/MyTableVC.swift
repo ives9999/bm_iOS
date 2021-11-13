@@ -37,7 +37,6 @@ class MyTableVC: BaseViewController {
     
     var member_like: Bool = false
     var able_type: String = "coach"
-    var jsonData: Data? = nil
     var tables: Tables?
     
     var lists1: [Table] = [Table]()

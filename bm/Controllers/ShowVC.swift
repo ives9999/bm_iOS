@@ -237,6 +237,12 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         }
     }
     
+//    func beginRefresh<T: Table>(_ t: T.Type) {
+//        refreshControl = UIRefreshControl()
+//        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
+//        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+//    }
+    
     func changeScrollViewContentSize() {}
     
     @IBAction func likeButtonPressed(_ sender: Any) {
@@ -252,7 +258,6 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
             }
         }
     }
-
     
     @IBAction func prevBtnPressed(_ sender: Any) {
         prev()

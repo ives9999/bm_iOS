@@ -185,26 +185,42 @@ class PasswordVC: BaseViewController {
                 MemberService.instance.forgetPassword(email: email!, completion: { (success) in
                     Global.instance.removeSpinner(superView: self.view)
                     if success {
-                        if MemberService.instance.success {
-                            
-                            let appearance = SCLAlertView.SCLAppearance(
-                                showCloseButton: false
-                            )
-                            let alertView = SCLAlertView(appearance: appearance)
-                            alertView.addButton("成功") {
-                                self.prev()
-//                                if self.delegate != nil {
-//                                    self.delegate?.toLogin()
-//                                }
-                                self.dismiss(animated: true, completion: nil)
+                        
+                        self.jsonData = MemberService.instance.jsonData
+                        var s: SuccessTable = SuccessTable()
+                        do {
+                            if (self.jsonData != nil) {
+                                s = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
+                            } else {
+                                self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                             }
-                            alertView.showSuccess("成功", subTitle: MemberService.instance.msg)
-                            
-                            
-                            //SCLAlertView().showSuccess("成功", subTitle: MemberService.instance.msg)
-                        } else {
-                            SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
+                        } catch {
+                            self.warning("解析JSON字串時，得到空值，請洽管理員")
                         }
+                        
+                        if s.success {
+                            self.info(s.msg)
+                        } else {
+                            self.warning(s.msg)
+                        }
+                        
+//                        if MemberService.instance.success {
+//
+//                            let appearance = SCLAlertView.SCLAppearance(
+//                                showCloseButton: false
+//                            )
+//                            let alertView = SCLAlertView(appearance: appearance)
+//                            alertView.addButton("成功") {
+//                                self.prev()
+//                                self.dismiss(animated: true, completion: nil)
+//                            }
+//                            alertView.showSuccess("成功", subTitle: MemberService.instance.msg)
+//
+//
+//                            //SCLAlertView().showSuccess("成功", subTitle: MemberService.instance.msg)
+//                        } else {
+//                            SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
+//                        }
                     }
                 })
             }
@@ -231,23 +247,43 @@ class PasswordVC: BaseViewController {
                 MemberService.instance.changePassword(oldPassword:oldPwdTxt.text!,password: newPwdTxt.text!,rePassword: rePwdTxt.text!, completion: { (success) in
                     Global.instance.removeSpinner(superView: self.view)
                     if success {
-                        if MemberService.instance.success {
-                            Member.instance.reset()
-                            Member.instance.isLoggedIn = false
-                            let appearance = SCLAlertView.SCLAppearance(
-                                showCloseButton: false
-                            )
-                            let alertView = SCLAlertView(appearance: appearance)
-                            alertView.addButton("關閉") {
-                                if self.delegate != nil {
-                                    self.delegate?.refresh()
-                                }
-                                self.dismiss(animated: true, completion: nil)
+                        
+                        self.jsonData = MemberService.instance.jsonData
+                        var s: SuccessTable = SuccessTable()
+                        do {
+                            if (self.jsonData != nil) {
+                                s = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
+                            } else {
+                                self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                             }
-                            alertView.showSuccess("成功", subTitle: "更改密碼成功，請使用新密碼重新登入")
-                        } else {
-                            SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
+                        } catch {
+                            self.warning("解析JSON字串時，得到空值，請洽管理員")
                         }
+                        
+                        if s.success {
+                            self.info("更改密碼成功，請使用新密碼重新登入")
+                        } else {
+                            self.warning(s.msg)
+                        }
+                        
+                        
+//                        if MemberService.instance.success {
+//                            Member.instance.reset()
+//                            Member.instance.isLoggedIn = false
+//                            let appearance = SCLAlertView.SCLAppearance(
+//                                showCloseButton: false
+//                            )
+//                            let alertView = SCLAlertView(appearance: appearance)
+//                            alertView.addButton("關閉") {
+//                                if self.delegate != nil {
+//                                    self.delegate?.refresh()
+//                                }
+//                                self.dismiss(animated: true, completion: nil)
+//                            }
+//                            alertView.showSuccess("成功", subTitle: "更改密碼成功，請使用新密碼重新登入")
+//                        } else {
+//                            SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
+//                        }
                     }
                 })
             }

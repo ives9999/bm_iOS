@@ -30,6 +30,10 @@ class CourseService: DataService {
         return "course"
     }
     
+    override func getUpdateURL()-> String {
+        return String(format: URL_UPDATE, "course")
+    }
+    
     override func getLikeURL(token: String? = nil) -> String {
         var url: String = URL_COURSE_LIKE
         if token != nil {
@@ -75,13 +79,13 @@ class CourseService: DataService {
 //        return s
 //    }
     
-    override func update(_params: [String : String], image: UIImage?, completion: @escaping CompletionHandler) {
+//    override func update(_params: [String : String], image: UIImage?, completion: @escaping CompletionHandler) {
         
-        let url: String = String(format: URL_UPDATE, "course")
-        //print(url)
-        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-        var params: [String: String] = ["source": "app","channel":CHANNEL]
-        params.merge(_params)
+//        let url: String = String(format: URL_UPDATE, "course")
+//        //print(url)
+//        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+//        var params: [String: String] = ["source": "app","channel":CHANNEL]
+//        params.merge(_params)
         //print(params)
         
 //        Alamofire.upload(
@@ -135,5 +139,5 @@ class CourseService: DataService {
 //                completion(false)
 //            }
 //        }
-    }
+//    }
 }

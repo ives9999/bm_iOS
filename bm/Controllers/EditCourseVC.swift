@@ -30,6 +30,9 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     var courseTable: CourseTable? = nil
     
     var delegate: EditCourseDelegate?
+    
+    var section_keys: [[String]] = [[String]]()
+    var sections: [String]?
 
     override func viewDidLoad() {
         myTablView = tableView
@@ -48,8 +51,8 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         hideKeyboardWhenTappedAround()
         FormItemCellType.registerCell(for: tableView)
         
-//        sections = form.getSections()
-//        section_keys = form.getSectionKeys()
+        sections = form.getSections()
+        section_keys = form.getSectionKeys()
 //        print(sections)
 //        print(section_keys)
         if course_token != nil && course_token!.count > 0 {
@@ -156,47 +159,98 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-//        let item = getFormItemFromIdx(indexPath)
-//        if item!.name == CONTENT_KEY {
-//            return 200
-//        } else {
-//            return 60
-//        }
-        return 60
+        let item = getFormItemFromIdx(indexPath)
+        if item!.name == CONTENT_KEY {
+            return 200
+        } else {
+            return 60
+        }
+        //return 60
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        var count: Int = 1
+        if sections == nil {
+            count = 1
+        } else {
+            count = sections!.count
+        }
+        return count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return section_keys[section].count
-        return 1
+        return section_keys[section].count
+        //return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+            
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.white
+        headerView.tag = section
+        
+        let titleLabel = UILabel()
+        titleLabel.text = sections?[section]
+        titleLabel.textColor = UIColor.black
+        titleLabel.sizeToFit()
+        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: 34)
+        headerView.addSubview(titleLabel)
+        
+        let mark = UIImageView(image: UIImage(named: "to_right"))
+        mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
+        headerView.addSubview(mark)
+        
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+        headerView.addGestureRecognizer(gesture)
+        
+        return headerView
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //let item = getFormItemFromIdx(indexPath)
-        let cell: UITableViewCell = UITableViewCell()
-//        if item != nil {
-//            if let cellType = item!.uiProperties.cellType {
-//                cell = cellType.dequeueCell(for: tableView, at: indexPath)
-//            } else {
-//                cell = UITableViewCell()
-//            }
-//
-//            if let formUpdatableCell = cell as? FormUPdatable {
-//                item!.indexPath = indexPath
-//                formUpdatableCell.update(with: item!)
-//            }
-//
-//            if item!.uiProperties.cellType == FormItemCellType.textField {
-//                if let formCell = cell as? FormItemCell {
-//                    formCell.valueDelegate = self
-//                }
-//            }
-//        } else {
-//            cell = UITableViewCell()
-//        }
+        let item = getFormItemFromIdx(indexPath)
+        let cell: UITableViewCell
+        if item != nil {
+            if let cellType = item!.uiProperties.cellType {
+                cell = cellType.dequeueCell(for: tableView, at: indexPath)
+            } else {
+                cell = UITableViewCell()
+            }
+
+            if let formUpdatableCell = cell as? FormUPdatable {
+                item!.indexPath = indexPath
+                formUpdatableCell.update(with: item!)
+            }
+
+            if item!.uiProperties.cellType == FormItemCellType.textField {
+                if let formCell = cell as? FormItemCell {
+                    formCell.valueDelegate = self
+                }
+            }
+        } else {
+            cell = UITableViewCell()
+        }
         
         return cell
     }
+    
+    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
+        let key = section_keys[indexPath.section][indexPath.row]
+        return getFormItemFromKey(key)
+    }
+    
+    func getFormItemFromKey(_ key: String)-> FormItem? {
+        var res: FormItem? = nil
+        for formItem in form.formItems {
+            if key == formItem.name {
+                res = formItem
+                break
+            }
+        }
+
+        return res
+    }
+
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -412,34 +466,55 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
         CourseService.instance.update(_params: params, image: image) { (success) in
             if success {
-                if CourseService.instance.success {
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    let alert = SCLAlertView(appearance: appearance)
-                    if (action == "INSERT") {
-                        alert.addButton("確定", action: {
-                            if self.delegate != nil {
-                                self.delegate!.isReload(true)
+                
+                self.jsonData = CourseService.instance.jsonData
+                do {
+                    if (self.jsonData != nil) {
+                        let table: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
+                        if table.success {
+                            self.info(msg: "修改成功", buttonTitle: "關閉") {
+                                if self.delegate != nil {
+                                    self.delegate!.isReload(true)
+                                }
                             }
-                            self.dismiss(animated: true, completion: nil)
-                        })
+                        } else {
+                            self.warning(table.msg)
+                        }
                     } else {
-                        alert.addButton("回上一頁", action: {
-                            if self.delegate != nil {
-                            
-                                self.delegate!.isReload(true)
-                            }
-                            self.dismiss(animated: true, completion: nil)
-                        })
-                        alert.addButton("繼續修改", action: {
-                        })
+                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                     }
-                    alert.showSuccess("成功", subTitle: "新增 / 修改成功")
-                    NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
-                } else {
-                    SCLAlertView().showWarning("錯誤", subTitle: CourseService.instance.msg)
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
                 }
+                
+//                if CourseService.instance.success {
+//                    let appearance = SCLAlertView.SCLAppearance(
+//                        showCloseButton: false
+//                    )
+//                    let alert = SCLAlertView(appearance: appearance)
+//                    if (action == "INSERT") {
+//                        alert.addButton("確定", action: {
+//                            if self.delegate != nil {
+//                                self.delegate!.isReload(true)
+//                            }
+//                            self.dismiss(animated: true, completion: nil)
+//                        })
+//                    } else {
+//                        alert.addButton("回上一頁", action: {
+//                            if self.delegate != nil {
+//
+//                                self.delegate!.isReload(true)
+//                            }
+//                            self.dismiss(animated: true, completion: nil)
+//                        })
+//                        alert.addButton("繼續修改", action: {
+//                        })
+//                    }
+//                    alert.showSuccess("成功", subTitle: "新增 / 修改成功")
+//                    NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+//                } else {
+//                    SCLAlertView().showWarning("錯誤", subTitle: CourseService.instance.msg)
+//                }
             } else {
                 SCLAlertView().showWarning("錯誤", subTitle: "新增 / 修改失敗，伺服器無法新增成功，請稍後再試")
             }

@@ -81,6 +81,8 @@ class MoreCell: FormItemCell {
         
         requiredImageView.isHidden = !row.isRequired
         promptBtn.isHidden = true
+        
+        clearBtn.isHidden = !row.isClear
     }
     
     override func update(with formItem: FormItem) {
@@ -93,6 +95,7 @@ class MoreCell: FormItemCell {
                 clearBtn.isHidden = false
             }
         }
+        
         promptBtn.isHidden = (formItem.tooltip == nil) ? true : false
         if requiredImageView != nil {
             requiredImageView.isHidden = !formItem.isRequired

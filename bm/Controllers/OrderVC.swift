@@ -1222,7 +1222,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //        if let item = getFormItemFromKey(WEIGHT_KEY) {
 //            params["weight"] = item.value
 //        }
-        print(params)
+//        print(params)
         
         //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
         

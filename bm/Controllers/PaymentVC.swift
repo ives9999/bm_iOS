@@ -412,7 +412,7 @@ class PaymentVC: MyTableVC {
         
         //gateway
         rows.removeAll()
-        row = OneRow(title: "付款方式", value: orderTable!.gateway!.method, show: orderTable!.gateway!.method_show, key: GATEWAY_METHOD_KEY, cell: "more")
+        row = OneRow(title: "付款方式", value: orderTable!.gateway!.method, show: orderTable!.gateway!.method_show, key: GATEWAY_METHOD_KEY, cell: "more", isClear: false)
         rows.append(row)
         row = OneRow(title: "付款狀態", value: orderTable!.gateway!.process, show: orderTable!.gateway!.process_show, key: GATEWAY_PROCESS_KEY, cell: "text")
         rows.append(row)

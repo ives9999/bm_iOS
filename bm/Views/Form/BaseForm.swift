@@ -93,14 +93,14 @@ class BaseForm {
         for (idx, formItem) in formItems.enumerated() {
         
             if !findSection && formItem.uiProperties.cellType == FormItemCellType.section {
-                    findSection = true
-                    rows = [String]()
+                findSection = true
+                rows = [String]()
                 continue
             }
             if findSection && formItem.uiProperties.cellType == FormItemCellType.section {
-                    res.append(rows)
-                    rows = [String]()
-                    continue
+                res.append(rows)
+                rows = [String]()
+                continue
             }
             if findSection {
                 rows.append(formItem.name!)

@@ -85,8 +85,19 @@ class ShowCourseVC: ShowVC {
             "created_at_show":["icon":"calendar","title":"建立日期","content":""]
         ]
         
+        if (scrollView != nil) {
+            initContentView()
+            scrollView.backgroundColor = UIColor.clear
+            beginRefresh()
+            scrollView.addSubview(refreshControl)
+        }
+        
         refresh(CourseTable.self)
         //refresh()
+    }
+    
+    override func refresh() {
+        refresh(CourseTable.self)
     }
     
     override func viewWillLayoutSubviews() {
@@ -286,6 +297,7 @@ class ShowCourseVC: ShowVC {
             let standby_count = myTable!.signupStandbyTables.count
             if indexPath.row < people_limit {
                 cell.numberLbl.text = "\(indexPath.row + 1)."
+                cell.nameLbl.text = ""
                 if normal_count > 0 {
                     if indexPath.row < normal_count {
                         let signup_normal_model = myTable!.signupNormalTables[indexPath.row]
@@ -298,8 +310,10 @@ class ShowCourseVC: ShowVC {
                 cell.nameLbl.text = signup_standby_model.member_name
             } else {
                 let remain: Int = people_limit - myTable!.signupNormalTables.count
-                var remain_text = "還有\(remain)個名額"
-                if remain == 0 {
+                var remain_text = ""
+                if (remain > 0) {
+                    remain_text = "還有\(remain)個名額"
+                } else {
                     remain_text = "已經額滿，請排候補"
                 }
                 cell.numberLbl.text = remain_text
@@ -465,22 +479,40 @@ class ShowCourseVC: ShowVC {
         if myTable!.dateTable != nil {
             Global.instance.addSpinner(superView: view)
             dataService.signup(token: token!, member_token: Member.instance.token, date_token: myTable!.dateTable!.token, course_deadline: course_deadline) { (success) in
+                
                 Global.instance.removeSpinner(superView: self.view)
-                let msg = CourseService.instance.msg
-                var title = "警告"
-                var closeAction: UIAlertAction?
-                if self.dataService.success {
-                    title = "提示"
-                    closeAction = UIAlertAction(title: "取消", style: .default, handler: { (action) in
-                        self.refresh(CourseTable.self)
-                    })
-                } else {
-                    closeAction = UIAlertAction(title: "關閉", style: .default, handler: nil)
+                
+                do {
+                    if (self.dataService.jsonData != nil) {
+                        let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
+                        if (successTable.success) {
+                            self.info(msg: successTable.msg, buttonTitle: "關閉") {
+                                self.refresh(CourseTable.self)
+                            }
+                        } else {
+                            self.warning("報名沒有成功，請洽管理員")
+                        }
+                    }
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
                 }
-                let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-                alert.addAction(closeAction!)
-
-                self.present(alert, animated: true, completion: nil)
+                
+                
+//                let msg = CourseService.instance.msg
+//                var title = "警告"
+//                var closeAction: UIAlertAction?
+//                if self.dataService.success {
+//                    title = "提示"
+//                    closeAction = UIAlertAction(title: "取消", style: .default, handler: { (action) in
+//                        self.refresh(CourseTable.self)
+//                    })
+//                } else {
+//                    closeAction = UIAlertAction(title: "關閉", style: .default, handler: nil)
+//                }
+//                let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
+//                alert.addAction(closeAction!)
+//
+//                self.present(alert, animated: true, completion: nil)
             }
         } else {
             warning("無法報名，請通知管理員 - signup")
@@ -498,14 +530,29 @@ class ShowCourseVC: ShowVC {
             dataService.signup_date(token: token!, member_token: Member.instance.token, date_token: myTable!.dateTable!.token) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if (success) {
-                    self.signup_date = self.dataService.signup_date
-                    self.isSignup = self.signup_date["isSignup"].boolValue
-                    self.isStandby = self.signup_date["isStandby"].boolValue
-                    self.canCancelSignup = self.signup_date["cancel"].boolValue
-                    //self.signup_id = self.signup_date["signup_id"].intValue
-                    self.course_date = self.signup_date["date"].stringValue
-                    self.course_deadline = self.signup_date["deadline"].stringValue
-                    self.showSignupModal()
+                    
+                    do {
+                        if self.dataService.jsonData != nil {
+                            let signupDateTable: SignupDateTable = try JSONDecoder().decode(SignupDateTable.self, from: self.dataService.jsonData!)
+                            self.isSignup = signupDateTable.isSignup
+                            self.isStandby = signupDateTable.isStandby
+                            self.canCancelSignup = signupDateTable.cancel
+                            self.course_date = signupDateTable.date
+                            self.course_deadline = signupDateTable.deadline
+                            self.showSignupModal()
+                        }
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    }
+                    
+//                    self.signup_date = self.dataService.signup_date
+//                    self.isSignup = self.signup_date["isSignup"].boolValue
+//                    self.isStandby = self.signup_date["isStandby"].boolValue
+//                    self.canCancelSignup = self.signup_date["cancel"].boolValue
+//                    //self.signup_id = self.signup_date["signup_id"].intValue
+//                    self.course_date = self.signup_date["date"].stringValue
+//                    self.course_deadline = self.signup_date["deadline"].stringValue
+//                    self.showSignupModal()
                 } else {
                     self.warning(self.dataService.msg)
                 }

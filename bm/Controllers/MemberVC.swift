@@ -92,9 +92,9 @@ class MemberVC: MyTableVC {
     
     func initSectionRows1() -> [MemberSection] {
         
-        if (memberSections.count > 0) {
-            return memberSections
-        }
+//        if (memberSections.count > 0) {
+//            return memberSections
+//        }
         
         var sections: [MemberSection] = [MemberSection]()
         
@@ -211,7 +211,7 @@ class MemberVC: MyTableVC {
 
         var rows: [MemberRow] = [MemberRow]()
         
-        let r1: MemberRow = MemberRow(title: "課程", icon: "course", segue: "manager_course")
+        let r1: MemberRow = MemberRow(title: "課程", icon: "course", segue: "toManagerCourse")
         rows.append(r1)
 
         let s: MemberSection = MemberSection(title: "管理", isExpanded: isEpanded, items: rows)

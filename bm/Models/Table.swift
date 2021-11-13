@@ -158,6 +158,8 @@ class SuccessTable: Codable {
     var success: Bool = false
     var msg: String = ""
     
+    init(){}
+    
     required init(from decoder: Decoder) throws {
         
         let container = try decoder.container(keyedBy: CodingKeys.self)

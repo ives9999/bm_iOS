@@ -103,28 +103,30 @@ class CartItemTable: Table {
         product?.filterRow()
         
         //{name:尺寸,alias:size,value:M}|{name:尺寸,alias:size,value:M}
-        let tmps: [String] = attribute.components(separatedBy: "|")
-        attributes.removeAll() 
-        for var tmp in tmps {
-            
-            //{name:尺寸,alias:size,value:M}
-            tmp = tmp.replace(target: "{", withString: "")
-            tmp = tmp.replace(target: "}", withString: "")
-            
-            //name:尺寸,alias:size,value:M
-            let arr: [String] = tmp.components(separatedBy: ",")
-            
-            //[name:尺寸]
-            //[alias:size]
-            //[value:M]
-            var a: [String: String] = [String: String]()
-            if (arr.count > 0) {
-                for str in arr {
-                    let b: [String] = str.components(separatedBy: ":")
-                    a[b[0]] = b[1]
-                }
+        if (attribute.count > 0) {
+            let tmps: [String] = attribute.components(separatedBy: "|")
+            attributes.removeAll()
+            for var tmp in tmps {
                 
-                attributes.append(a)
+                //{name:尺寸,alias:size,value:M}
+                tmp = tmp.replace(target: "{", withString: "")
+                tmp = tmp.replace(target: "}", withString: "")
+                
+                //name:尺寸,alias:size,value:M
+                let arr: [String] = tmp.components(separatedBy: ",")
+                
+                //[name:尺寸]
+                //[alias:size]
+                //[value:M]
+                var a: [String: String] = [String: String]()
+                if (arr.count > 0) {
+                    for str in arr {
+                        let b: [String] = str.components(separatedBy: ":")
+                        a[b[0]] = b[1]
+                    }
+                    
+                    attributes.append(a)
+                }
             }
         }
         

@@ -214,9 +214,9 @@ class MemberService: DataService {
         } else if (type == "mobile") {
             url = URL_MOBILE_VALIDATE
         }
-        let body: [String: String] = ["source": "app", "code": code, TOKEN_KEY: token]
-        //print(url)
-        //print(body)
+        let body: [String: String] = ["device": "app", "code": code, TOKEN_KEY: token]
+//        print(url)
+//        print(body)
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             //print(response)
             
@@ -557,6 +557,8 @@ class MemberService: DataService {
     func changePassword(oldPassword: String, password: String, rePassword: String, completion: @escaping CompletionHandler) {
         let token: String = Member.instance.token
         let body: [String: String] = ["source": "app", "password_old": oldPassword,"password":password,"repassword":rePassword,"token":token]
+        //print(body)
+        //print(URL_CHANGE_PASSWORD)
         
         AF.request(URL_CHANGE_PASSWORD, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             

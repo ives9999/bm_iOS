@@ -47,17 +47,41 @@ class ValidateVC: BaseViewController {
             MemberService.instance.validate(type: type, code: code, token: Member.instance.token) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if (success) {
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    let alert = SCLAlertView(appearance: appearance)
-                    alert.addButton("確定", action: {
-                        if self.delegate != nil {
-                            self.delegate?.refresh()
+                    
+                    self.jsonData = MemberService.instance.jsonData
+                    var s: SuccessTable = SuccessTable()
+                    do {
+                        if (self.jsonData != nil) {
+                            s = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
+                        } else {
+                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                         }
-                        self.prev()
-                    })
-                    alert.showInfo("訊息", subTitle: "認證成功")
+                    } catch {
+                        self.warning("解析JSON字串時，得到空值，請洽管理員")
+                    }
+                    
+                    if s.success {
+                        self.info(msg: "認證成功", buttonTitle: "關閉") {
+                            if self.delegate != nil {
+                                self.delegate!.refresh()
+                                self.prev()
+                            }
+                        }
+                    } else {
+                        self.warning(s.msg)
+                    }
+                    
+//                    let appearance = SCLAlertView.SCLAppearance(
+//                        showCloseButton: false
+//                    )
+//                    let alert = SCLAlertView(appearance: appearance)
+//                    alert.addButton("確定", action: {
+//                        if self.delegate != nil {
+//                            self.delegate?.refresh()
+//                        }
+//                        self.prev()
+//                    })
+//                    alert.showInfo("訊息", subTitle: "認證成功")
                 } else {
                     SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
                 }

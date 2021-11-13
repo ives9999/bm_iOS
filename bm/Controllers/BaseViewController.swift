@@ -66,6 +66,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     var searchSections: [SearchSection] = [SearchSection]()
     var oneSections: [OneSection] = [OneSection]()
     var params: [String: String] = [String: String]()
+    var jsonData: Data? = nil
     
     //WeekdaysSelectDelegate
     func setWeekdaysData(selecteds: [Int]){}
@@ -560,6 +561,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
     }
+    
     func endRefresh() {
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
