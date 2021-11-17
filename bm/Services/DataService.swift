@@ -645,10 +645,10 @@ class DataService {
     
     func signup(token: String, member_token: String, date_token: String, course_deadline: String, completion: @escaping CompletionHandler) {
         let url = getSignupURL(token: token)
-        print(url)
+        //print(url)
         let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "able_date_token": date_token, "cancel_deadline": course_deadline]
         
-        print(body)
+        //print(body)
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
             switch response.result {
