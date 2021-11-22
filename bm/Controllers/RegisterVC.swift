@@ -167,6 +167,10 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             }
         }
         
+        if Member.instance.isLoggedIn {
+            member_token = Member.instance.token
+        }
+        
 //        if Member.instance.isLoggedIn {
 //            form.removeItems(keys: [PASSWORD_KEY, REPASSWORD_KEY, PRIVACY_KEY])
 //            form.formItems.remove(at: form.formItems.count - 1)

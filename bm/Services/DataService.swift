@@ -96,13 +96,13 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        //print(filter.toJSONString())
+        print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        //print(url)
+        print(url)
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
@@ -112,8 +112,8 @@ class DataService {
             //case .success(let value):
             case .success(_):
                 if response.data != nil {
-//                    let json = JSON(value)
-//                    print(json)
+                    //let json = JSON(value)
+                    //print(json)
                     self.jsonData = response.data
                     completion(true)
                     //s = try JSONDecoder().decode(t, from: response.data!)
@@ -378,8 +378,8 @@ class DataService {
         var params: [String: String] = ["channel":CHANNEL,"device":"app"]
         params.merge(_params)
 
-        //print(url)
-        //print(params)
+//        print(url)
+//        print(params)
         msg = ""
         AF.upload(
             multipartFormData: { (multipartFormData) in
@@ -397,6 +397,7 @@ class DataService {
             headers: headers
         )
             .responseJSON(completionHandler: { response in
+                //print(response.value)
                 if (response.data != nil) {
                     self.jsonData = response.data
                     completion(true)
@@ -872,95 +873,95 @@ class DataService {
 //        }
 //    }
     
-    func getImage(_url: String, completion: @escaping CompletionHandler) {
-        var url = _url
-        if (!_url.startWith("http://") && !_url.startWith("https://")) {
-            url = BASE_URL + _url
-        }
-        //print(url)
-//        let urlRequest = URLRequest(url: URL(string: url)!)
-//        URLCache.shared.removeCachedResponse(for: urlRequest)
-//        URLCache.shared.removeAllCachedResponses()
-        
-        AF.request(url).responseData { (response) in
-            
-            switch response.result {
-            case .success(_):
-                if response.data != nil {
-                    self.jsonData = response.data
-                    completion(true)
-                } else {
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                }
-            case .failure(let error):
-                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-                completion(false)
-                print(error)
-                return
-            }
-            //debugPrint(response)
-//            if response.result.isSuccess {
-//                if response.response?.statusCode == 200 {
-//                    if let data = response.data {
-//                        self.image = UIImage(data: data)
-//                    } else {
-//                        self.image = UIImage(named: "nophoto")
-//                    }
+//    func getImage(_url: String, completion: @escaping CompletionHandler) {
+//        var url = _url
+//        if (!_url.startWith("http://") && !_url.startWith("https://")) {
+//            url = BASE_URL + _url
+//        }
+//        //print(url)
+////        let urlRequest = URLRequest(url: URL(string: url)!)
+////        URLCache.shared.removeCachedResponse(for: urlRequest)
+////        URLCache.shared.removeAllCachedResponses()
+//
+//        AF.request(url).responseData { (response) in
+//
+//            switch response.result {
+//            case .success(_):
+//                if response.data != nil {
+//                    self.jsonData = response.data
+//                    completion(true)
 //                } else {
-//                    self.image = UIImage(named: "nophoto")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
 //                }
-//                //print(self.image!.size.width)
-//                //image?.af_imageAspectScaled(toFill: )
-//            } else {
-//                self.image = UIImage(named: "nophoto")
+//            case .failure(let error):
+//                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+//                completion(false)
+//                print(error)
+//                return
 //            }
-//            completion(true)
-        }
-//        Alamofire.request(url).responseImage(completionHandler: { (response) in
-//            if response.result.isSuccess {
-//                guard let image = response.result.value else { return }
-//                print(image.size.width)
-//                self.image = image
-//            } else {
-//                //print("download image false: \(url)")
-//                self.image = UIImage(named: "nophoto")
+//            //debugPrint(response)
+////            if response.result.isSuccess {
+////                if response.response?.statusCode == 200 {
+////                    if let data = response.data {
+////                        self.image = UIImage(data: data)
+////                    } else {
+////                        self.image = UIImage(named: "nophoto")
+////                    }
+////                } else {
+////                    self.image = UIImage(named: "nophoto")
+////                }
+////                //print(self.image!.size.width)
+////                //image?.af_imageAspectScaled(toFill: )
+////            } else {
+////                self.image = UIImage(named: "nophoto")
+////            }
+////            completion(true)
+//        }
+////        Alamofire.request(url).responseImage(completionHandler: { (response) in
+////            if response.result.isSuccess {
+////                guard let image = response.result.value else { return }
+////                print(image.size.width)
+////                self.image = image
+////            } else {
+////                //print("download image false: \(url)")
+////                self.image = UIImage(named: "nophoto")
+////            }
+////            completion(true)
+////        })
+//    }
+    
+//    func makeNeedDownloadImageArr<T: SuperModel>(_ rows: [SuperModel], t: T.Type) {
+//        for i in 0 ..< rows.count {
+//            let row: T = rows[i] as! T
+//            row.filterRow()
+//            //row.printRow()
+//            let featured_path = row.getFeaturedPath()
+//            if featured_path.count > 0 {
+//                let path = BASE_URL + featured_path
+//                self.needDownloads.append(["idx": i, "path": path])
 //            }
-//            completion(true)
-//        })
-    }
+//        }
+//    }
     
-    func makeNeedDownloadImageArr<T: SuperModel>(_ rows: [SuperModel], t: T.Type) {
-        for i in 0 ..< rows.count {
-            let row: T = rows[i] as! T
-            row.filterRow()
-            //row.printRow()
-            let featured_path = row.getFeaturedPath()
-            if featured_path.count > 0 {
-                let path = BASE_URL + featured_path
-                self.needDownloads.append(["idx": i, "path": path])
-            }
-        }
-    }
-    
-    func needDownloadImage<T: SuperModel>(_ needDownload: Int, t: T.Type, completion: @escaping CompletionHandler) {
-        var tmp: Int = needDownload
-        for i in 0 ..< needDownload {
-            let imageUrl = self.needDownloads[i]["path"] as! String
-            let d = { (_ success: Bool) in
-                if success {
-                    let idx: Int = self.needDownloads[i]["idx"] as! Int
-                    //self.setImage(idx, t: T.self)
-                    //self.superCourses.rows[idx].featured = self.image!
-                }
-                tmp -= 1
-                if (tmp == 0) {
-                    completion(true)
-                }
-            }
-            self.getImage(_url: imageUrl, completion: d)
-        }
-    }
+//    func needDownloadImage<T: SuperModel>(_ needDownload: Int, t: T.Type, completion: @escaping CompletionHandler) {
+//        var tmp: Int = needDownload
+//        for i in 0 ..< needDownload {
+//            let imageUrl = self.needDownloads[i]["path"] as! String
+//            let d = { (_ success: Bool) in
+//                if success {
+//                    let idx: Int = self.needDownloads[i]["idx"] as! Int
+//                    //self.setImage(idx, t: T.self)
+//                    //self.superCourses.rows[idx].featured = self.image!
+//                }
+//                tmp -= 1
+//                if (tmp == 0) {
+//                    completion(true)
+//                }
+//            }
+//            self.getImage(_url: imageUrl, completion: d)
+//        }
+//    }
     
 //    func setImage<T: SuperModel>(_ idx: Int, t: T.Type) {
 //        if image != nil {
@@ -993,9 +994,9 @@ class DataService {
 //        }
 //    }
     
-    func getCitys(type: String="all", zone:Bool=false, completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["device": "app","channel":"bm","type": type,"zone": String(zone)]
-        AF.request(URL_CITYS, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+//    func getCitys(type: String="all", zone:Bool=false, completion: @escaping CompletionHandler) {
+//        let body: [String: String] = ["device": "app","channel":"bm","type": type,"zone": String(zone)]
+//        AF.request(URL_CITYS, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
 //            if response.result.error == nil {
 //                guard let data = response.result.value else {
 //                    print("data error")
@@ -1018,13 +1019,13 @@ class DataService {
 //                self.msg = "網路錯誤，請稍後再試"
 //                completion(false)
 //            }
-        }
-    }
+//        }
+//    }
     
     // 將不使用了，請使用getCitys代替
-    func getAllCitys(completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["device": "app"]
-        AF.request(URL_CITYS, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+//    func getAllCitys(completion: @escaping CompletionHandler) {
+//        let body: [String: String] = ["device": "app"]
+//        AF.request(URL_CITYS, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
 //            if response.result.error == nil {
 //                guard let data = response.result.value else {
 //                    print("data error")
@@ -1046,12 +1047,12 @@ class DataService {
 //                self.msg = "網路錯誤，請稍後再試"
 //                completion(false)
 //            }
-        }
-    }
+//        }
+//    }
     // 將不使用了，請使用getCitys代替
-    func getCustomCitys(completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["device": "app"]
-        AF.request(URL_CUSTOM_CITYS, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+//    func getCustomCitys(completion: @escaping CompletionHandler) {
+//        let body: [String: String] = ["device": "app"]
+//        AF.request(URL_CUSTOM_CITYS, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
 //            if response.result.error == nil {
 //                guard let data = response.result.value else {
 //                    print("data error")
@@ -1075,14 +1076,30 @@ class DataService {
 //                self.msg = "網路錯誤，請稍後再試"
 //                completion(false)
 //            }
-        }
-    }
+//        }
+//    }
     
     func getArenaByCityID(city_id: Int, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["device": "app", "city": String(city_id)]
-//        print(URL_ARENA_BY_CITY_ID)
-//        print(body)
+        //print(URL_ARENA_BY_CITY_ID)
+        //print(body)
         AF.request(URL_ARENA_BY_CITY_ID, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
 //            if response.result.error == nil {
 //                guard let data = response.result.value else {
 //                    print("data error")
@@ -1109,11 +1126,12 @@ class DataService {
 //            }
         }
     }
-    func getArenaByCityIDs(city_ids: String,city_type:String, completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["device": "app", "channel":"bm","citys": city_ids,"city_type":city_type,"version":"1.2.5"]
+    
+//    func getArenaByCityIDs(city_ids: String,city_type:String, completion: @escaping CompletionHandler) {
+//        let body: [String: String] = ["device": "app", "channel":"bm","citys": city_ids,"city_type":city_type,"version":"1.2.5"]
         //print(body)
         //print(URL_ARENA_BY_CITY_IDS)
-        AF.request(URL_ARENA_BY_CITY_IDS, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+//        AF.request(URL_ARENA_BY_CITY_IDS, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
 //            if response.result.error == nil {
 //                guard let data = response.result.value else {
 //                    print("data error")
@@ -1143,14 +1161,14 @@ class DataService {
 //                self.msg = "網路錯誤，請稍後再試"
 //                completion(false)
 //            }
-        }
-    }
+//        }
+//    }
     
-    func getAreaByCityIDs(city_ids: String,city_type:String, completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["device": "app", "channel":"bm","citys": city_ids,"city_type":city_type]
+//    func getAreaByCityIDs(city_ids: String,city_type:String, completion: @escaping CompletionHandler) {
+//        let body: [String: String] = ["device": "app", "channel":"bm","citys": city_ids,"city_type":city_type]
         //print(body)
         //print(URL_ARENA_BY_CITY_IDS)
-        AF.request(URL_AREA_BY_CITY_IDS, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+//        AF.request(URL_AREA_BY_CITY_IDS, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
 //            if response.result.error == nil {
 //                guard let data = response.result.value else {
 //                    print("data error")
@@ -1179,8 +1197,8 @@ class DataService {
 //                self.msg = "網路錯誤，請稍後再試"
 //                completion(false)
 //            }
-        }
-    }
+//        }
+//    }
     
 //    func getTT(token: String, type:String, completion: @escaping CompletionHandler) {
 //        let body: [String: Any] = ["device": "app", "channel": "bm","token":token]

@@ -58,17 +58,17 @@ class MoreCell: FormItemCell {
         promptBtn.isHidden = true
     }
     
-    func update(sectionIdx: Int, rowIdx: Int, row: SearchRow) {
-        
-        self.searchRow = row
-        self.sectionIdx = sectionIdx
-        self.rowIdx = rowIdx
-        
-        titleLbl!.text = row.title
-        detailLbl.text = row.show
-        
-        promptBtn.isHidden = true
-    }
+//    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+//
+//        self.oneRow = row
+//        self.sectionIdx = sectionIdx
+//        self.rowIdx = rowIdx
+//
+//        titleLbl!.text = row.title
+//        detailLbl.text = row.show
+//
+//        promptBtn.isHidden = true
+//    }
     
     func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
         

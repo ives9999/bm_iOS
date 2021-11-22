@@ -54,8 +54,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         
         super.viewDidLoad()
         
-        let cellNib = UINib(nibName: "EditCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "cell")
+//        let cellNib = UINib(nibName: "EditCell", bundle: nil)
+//        tableView.register(cellNib, forCellReuseIdentifier: "cell")
+        
+        let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
+        tableView.register(textFieldNib, forCellReuseIdentifier: "textFieldCell")
         
         let moreCellNib = UINib(nibName: "MoreCell", bundle: nil)
         tableView.register(moreCellNib, forCellReuseIdentifier: "moreCell")
@@ -71,7 +74,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 
         //print(searchTags)
         
-        searchSections = initSectionRows()
+        oneSections = initSectionRows1()
 
         let likeTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
         likeTab.addGestureRecognizer(likeTap)
@@ -88,40 +91,40 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         refresh()
     }
     
-    override func initSectionRows()-> [SearchSection] {
+    func initSectionRows1()-> [OneSection] {
 
-        var sections: [SearchSection] = [SearchSection]()
+        var sections: [OneSection] = [OneSection]()
 
-        sections.append(makeSection0Row())
-        sections.append(makeSection1Row(false))
+        sections.append(makeSection0Row1())
+        sections.append(makeSection1Row1(false))
 
         return sections
     }
     
-    override func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
-        var rows: [SearchRow] = [SearchRow]()
-        let r1: SearchRow = SearchRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
+    func makeSection0Row1(_ isExpanded: Bool=true)-> OneSection {
+        var rows: [OneRow] = [OneRow]()
+        let r1: OneRow = OneRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
         rows.append(r1)
-        let r2: SearchRow = SearchRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r2: OneRow = OneRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r2)
-        let r3: SearchRow = SearchRow(title: "星期幾", show: "全部", key: WEEKDAY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r3: OneRow = OneRow(title: "星期幾", show: "全部", key: WEEKDAY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r3)
-        let r4: SearchRow = SearchRow(title: "時段", show: "全部", key: START_TIME_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r4: OneRow = OneRow(title: "時段", show: "全部", key: START_TIME_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r4)
 
-        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        let s: OneSection = OneSection(title: "一般", key: "general", isExpanded: isExpanded)
         s.items.append(contentsOf: rows)
         return s
     }
     
-    private func makeSection1Row(_ isExpanded: Bool=true)-> SearchSection {
-        var rows: [SearchRow] = [SearchRow]()
-        let r1: SearchRow = SearchRow(title: "球館", show: "全部", key: ARENA_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+    private func makeSection1Row1(_ isExpanded: Bool=true)-> OneSection {
+        var rows: [OneRow] = [OneRow]()
+        let r1: OneRow = OneRow(title: "球館", show: "全部", key: ARENA_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r1)
-        let r2: SearchRow = SearchRow(title: "程度", show: "全部", key: DEGREE_KEY, cell:"more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r2: OneRow = OneRow(title: "程度", show: "全部", key: DEGREE_KEY, cell:"more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r2)
 
-        let s: SearchSection = SearchSection(title: "更多", isExpanded: isExpanded)
+        let s: OneSection = OneSection(title: "更多", key: "more", isExpanded: isExpanded)
         s.items.append(contentsOf: rows)
         return s
     }
@@ -193,7 +196,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     override func numberOfSections(in tableView: UITableView) -> Int {
         
         if (selectedTagIdx == 1) {
-            return searchSections.count
+            return oneSections.count
         } else {
             return 1
         }
@@ -208,15 +211,15 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         case 0:
             count = lists1.count
         case 1:
-            if !searchSections[section].isExpanded {
+            if !oneSections[section].isExpanded {
                 count = 0
             } else {
-                count = searchSections[section].items.count
+                count = oneSections[section].items.count
             }
         case 2:
             count = lists1.count
         default:
-            count = searchSections.count
+            count = oneSections.count
         
         }
         return count
@@ -225,41 +228,41 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if (selectedTagIdx == 1) {
-            if section == 0 {
-                return 0
-            }
+//            if section == 0 {
+//                return 0
+//            }
             return heightForSection
         } else {
             return 0
         }
     }
     
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        if (selectedTagIdx == 1) {
-            let headerView = UIView()
-            headerView.backgroundColor = UIColor.white
-            headerView.tag = section
-            
-            let titleLabel = UILabel()
-            //titleLabel.text = sections?[section]
-            titleLabel.textColor = UIColor.black
-            titleLabel.sizeToFit()
-            titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
-            headerView.addSubview(titleLabel)
-            
-            let mark = UIImageView(image: UIImage(named: "to_right"))
-            mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
-            headerView.addSubview(mark)
-            
-            let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
-            headerView.addGestureRecognizer(gesture)
-            
-            return headerView
-        } else {
-            return UIView()
-        }
-    }
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//
+//        if (selectedTagIdx == 1) {
+//            let headerView = UIView()
+//            headerView.backgroundColor = UIColor.white
+//            headerView.tag = section
+//
+//            let titleLabel = UILabel()
+//            titleLabel.text = oneSections[section].title
+//            titleLabel.textColor = UIColor.black
+//            titleLabel.sizeToFit()
+//            titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
+//            headerView.addSubview(titleLabel)
+//
+//            let mark = UIImageView(image: UIImage(named: "to_right"))
+//            mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
+//            headerView.addSubview(mark)
+//
+//            let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+//            headerView.addGestureRecognizer(gesture)
+//
+//            return headerView
+//        } else {
+//            return UIView()
+//        }
+//    }
     
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return 60
@@ -286,7 +289,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         case 1:
             //print("section: \(indexPath.section), row: \(indexPath.row)")
             
-            let row: SearchRow = getSearchRowFromIdx(indexPath.section, indexPath.row)
+            let row: OneRow = getOneRowFromIdx(indexPath.section, indexPath.row)
             let cell_type: String = row.cell
             if (cell_type == "more") {
                 
@@ -295,13 +298,22 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
                 return cell
                 
-            } else {
-            
-                let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
-                //print(searchRow)
-                cell.forRow(indexPath: indexPath, row: row, isClear: true)
-                cell.editCellDelegate = self
+            } else if (row.cell == "textField") {
+                
+                let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as! TextFieldCell
+                    
+                //let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as! TextFieldCell
+                cell.cellDelegate = self
+                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                
                 return cell
+            } else {
+//
+//                let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
+//                //print(searchRow)
+//                cell.forRow(indexPath: indexPath, row: row, isClear: true)
+//                cell.editCellDelegate = self
+                return UITableViewCell()
             }
             
             
@@ -320,7 +332,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         //Global.instance.removeSpinner(superView: view)
         if (selectedTagIdx == 1) {
             
-            let row: SearchRow = getSearchRowFromIdx(indexPath.section, indexPath.row)
+            let row: OneRow = getOneRowFromIdx(indexPath.section, indexPath.row)
             //let cell = tableView.cellForRow(at: indexPath) as! EditCell
             
             if row.accessory != UITableViewCell.AccessoryType.none {
@@ -329,7 +341,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 let cell_type: String = row.cell
                 
                 if (cell_type == "more") {
-                    moreClickForSearch(key: key, row: row, delegate: self)
+                    moreClickForOne(key: key, row: row, delegate: self)
                 } else {
                     //performSegue(withIdentifier: segue, sender: indexPath)
                 }
@@ -352,7 +364,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func singleSelected(key: String, selected: String, show: String?=nil) {
         
-        let row = getSearchRowFromKey(key)
+        let row = getOneRowFromKey(key)
         var _show = ""
         if key == START_TIME_KEY || key == END_TIME_KEY {
             row.value = selected
@@ -372,7 +384,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     }
     
     override func setWeekdaysData(selecteds: [Int]) {
-        let row = getSearchRowFromKey(WEEKDAY_KEY)
+        let row = getOneRowFromKey(WEEKDAY_KEY)
         var texts: [String] = [String]()
         var values: [String] = [String]()
         if selecteds.count > 0 {
@@ -398,7 +410,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func setDegreeData(res: [DEGREE]) {
         
-        let row = getSearchRowFromKey(DEGREE_KEY)
+        let row = getOneRowFromKey(DEGREE_KEY)
         var names: [String] = [String]()
         var values: [String] = [String]()
         if res.count > 0 {
@@ -418,7 +430,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func setTextField(key: String, value: String) {
         
-        let row = getSearchRowFromKey(key)
+        let row = getOneRowFromKey(key)
         row.value = value
         //replaceRows(key, row)
     }
@@ -428,11 +440,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         let sectionIdx = indexPath.section
         var idx: Int = 0
         for i in 0...sectionIdx-1 {
-            idx += searchSections[i].items.count
+            idx += oneSections[i].items.count
         }
         let rowIdx = indexPath.row
         idx += rowIdx
-        let row = searchSections[sectionIdx].items[idx]
+        let row = oneSections[sectionIdx].items[idx]
         //let key = row.key
         //var row1 = getDefinedRow(key)
         row.show = "全部"
@@ -447,7 +459,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         if (arenaTable != nil) {
             let key: String = CITY_KEY
             let city_id: Int = arenaTable!.city_id
-            let row = getSearchRowFromKey(key)
+            let row = getOneRowFromKey(key)
             row.value = String(city_id)
             //replaceRows(key, row)
             prepareParams()
@@ -463,7 +475,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         if (arenaTable != nil) {
             let key: String = ARENA_KEY
             let arena_id: Int = arenaTable!.id
-            let row = getSearchRowFromKey(key)
+            let row = getOneRowFromKey(key)
             row.value = String(arena_id)
             //replaceRows(key, row)
             prepareParams()
@@ -491,11 +503,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         var indexPaths: [IndexPath] = [IndexPath]()
         
 //        let key: String = getSectionKey(idx: section)
-        let searchSection: SearchSection = searchSections[section]
-        var isExpanded = searchSection.isExpanded
-        searchSections[section].isExpanded = !isExpanded
+        let oneSection: OneSection = oneSections[section]
+        var isExpanded = oneSection.isExpanded
+        oneSections[section].isExpanded = !isExpanded
         
-        let items: [SearchRow] = searchSection.items
+        let items: [OneRow] = oneSection.items
         //let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
         //indexPaths.append(IndexPath(row: 0, section: 1))
         //indexPaths.append(IndexPath(row: 1, section: 1))

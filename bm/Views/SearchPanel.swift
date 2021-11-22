@@ -37,15 +37,15 @@ class SearchPanel: UIViewController {
     var baseVC: BaseViewController? = nil
     
     //var searchRows: [[String: Any]] = [[String: Any]]()
-    var searchSections: [SearchSection] = [SearchSection]()
+    var oneSections: [OneSection] = [OneSection]()
     
     //func showSearchPanel(baseVC: BaseViewController, view: UIView, newY: CGFloat, searchRows: [[String: Any]]) {
-    func showSearchPanel(baseVC: BaseViewController, view: UIView, newY: CGFloat, searchSections: [SearchSection]) {
+    func showSearchPanel(baseVC: BaseViewController, view: UIView, newY: CGFloat, oneSections: [OneSection]) {
         
         self.myView = view
         self.baseVC = baseVC
         self.newY = 0
-        self.searchSections = searchSections
+        self.oneSections = oneSections
         
         searchPanelisHidden = false
         
@@ -168,7 +168,7 @@ class SearchPanel: UIViewController {
         
         unmask()
         if (baseVC != nil) {
-            baseVC!.searchSections = searchSections
+            baseVC!.oneSections = oneSections
             baseVC!.prepareParams()
             baseVC!.refresh()
         }
@@ -239,15 +239,15 @@ class SearchPanel: UIViewController {
 //        return selecteds
 //    }
     
-    func getDefinedRow(_ key: String) -> SearchRow {
-        for section in searchSections {
+    func getDefinedRow(_ key: String) -> OneRow {
+        for section in oneSections {
             for row in section.items {
                 if row.key == key {
                     return row
                 }
             }
         }
-        return SearchRow()
+        return OneRow()
     }
     
 //    func replaceRows(_ key: String, _ row: [String: Any]) {
@@ -279,30 +279,30 @@ class SearchPanel: UIViewController {
         reloadSearchTable()
     }
     
-//    func setWeekdaysData(selecteds: [Int]) {
-//        let row = getDefinedRow(WEEKDAY_KEY)
-//        var texts: [String] = [String]()
-//        var values: [String] = [String]()
-//        if selecteds.count > 0 {
-//            for day in selecteds {
-//                values.append(String(day))
-//                for gday in Global.instance.weekdays {
-//                    if day == gday["value"] as! Int {
-//                        let text = gday["simple_text"]
-//                        texts.append(text! as! String)
-//                        break
-//                    }
-//                }
-//            }
-//            row.show = texts.joined(separator: ",")
-//        
-//            row.value = values.joined(separator: ",")
-//        } else {
-//            row.show = "全部"
-//        }
-//        //replaceRows(WEEKDAY_KEY, row)
-//        reloadSearchTable()
-//    }
+    func setWeekdaysData(selecteds: [Int]) {
+        let row = getDefinedRow(WEEKDAY_KEY)
+        var texts: [String] = [String]()
+        var values: [String] = [String]()
+        if selecteds.count > 0 {
+            for day in selecteds {
+                values.append(String(day))
+                for gday in Global.instance.weekdays {
+                    if day == gday["value"] as! Int {
+                        let text = gday["simple_text"]
+                        texts.append(text! as! String)
+                        break
+                    }
+                }
+            }
+            row.show = texts.joined(separator: ",")
+        
+            row.value = values.joined(separator: ",")
+        } else {
+            row.show = "全部"
+        }
+        //replaceRows(WEEKDAY_KEY, row)
+        reloadSearchTable()
+    }
 //    
 //    func setDegreeData(res: [DEGREE]) {
 //        
@@ -363,16 +363,16 @@ extension SearchPanel: UITableViewDataSource {
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return searchSections.count
+        return oneSections.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchSections[section].items.count
+        return oneSections[section].items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let row = searchSections[indexPath.section].items[indexPath.row]
+        let row = oneSections[indexPath.section].items[indexPath.row]
         let cell_type: String = row.cell
         
         if (cell_type == "more") {
@@ -422,13 +422,13 @@ extension SearchPanel: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let row = searchSections[indexPath.section].items[indexPath.row]
+        let row = oneSections[indexPath.section].items[indexPath.row]
         
         let key: String = row.key
         
         let cell: String = row.cell
         if (cell == "more") {
-            baseVC!.moreClickForSearch(key: key, row: row, delegate: baseVC!)
+            baseVC!.moreClickForOne(key: key, row: row, delegate: baseVC!)
 //            let selected: String = row.value
 //            baseVC!.toSelectSingle(key: key, selected: selected, delegate: baseVC!)
         } else {

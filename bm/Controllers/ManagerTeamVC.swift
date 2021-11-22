@@ -1,15 +1,15 @@
 //
-//  ManagerCourseVC.swift
+//  ManagerTeamVC.swift
 //  bm
 //
-//  Created by ives on 2019/5/25.
-//  Copyright © 2019 bm. All rights reserved.
+//  Created by ives on 2021/11/19.
+//  Copyright © 2021 bm. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import SCLAlertView
 
-class ManagerCourseVC: MyTableVC, EditCourseDelegate {
+class ManagerTeamVC: MyTableVC {
     
     @IBOutlet weak var titleLbl: UILabel!
     
@@ -17,24 +17,28 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     var token: String? = nil
     var manager_token: String? = nil
     
-    var mysTable: CoursesTable?
+    var mysTable: TeamsTable?
     
     var isReload: Bool = true
 
     override func viewDidLoad() {
         
         myTablView = tableView
-        able_type = "course"
-        dataService = CourseService.instance
+        able_type = "team"
+        dataService = TeamService.instance
         
         super.viewDidLoad()
         
-        let cellNib = UINib(nibName: "ManagerCourseCell", bundle: nil)
+        let cellNib = UINib(nibName: "ManagerTeamCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
         
         if (manager_token != nil) {
             params["manager_token"] = manager_token!
         }
+        
+        //必須指定status，預設是只會出現上線的
+        params["status"] = "all"
+        
         refresh()
     }
     
@@ -42,17 +46,18 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
         
         do {
             if (jsonData != nil) {
-                mysTable = try JSONDecoder().decode(CoursesTable.self, from: jsonData!)
+                mysTable = try JSONDecoder().decode(TeamsTable.self, from: jsonData!)
             } else {
                 warning("無法從伺服器取得正確的json資料，請洽管理員")
             }
         } catch {
-            msg = "解析JSON字串時，得到空值，請洽管理員"
+            warning("解析JSON字串時，得到空值，請洽管理員")
         }
+        
         if (mysTable != nil) {
             tables = mysTable!
             if (page == 1) {
-                lists1 = [CourseTable]()
+                lists1 = [TeamTable]()
             }
             lists1 += mysTable!.rows
         }
@@ -97,10 +102,10 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ManagerCourseCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ManagerTeamCell
         //cell.blacklistCellDelegate = self
         
-        let row = lists1[indexPath.row] as? CourseTable
+        let row = lists1[indexPath.row] as? TeamTable
         if (row != nil) {
             row!.filterRow()
             cell.forRow(row: row!)
@@ -118,12 +123,12 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
             
             let alert = UIAlertController(title: title, message: "選擇動作", preferredStyle: .alert)
             let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
-                self.toShowCourse(token: myTable.token)
+                self.toShowTeam(token: myTable.token)
                 //let sender: [String: String] = ["title": title, "token": myTable.token]
                 //self.performSegue(withIdentifier: TO_SHOW_COURSE, sender: sender)
             }
             let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
-                self.toEditCourse(token: myTable.token)
+                self.toEditTeam(token: myTable.token)
 //                let sender: [String: String] = ["title": title, "token": myTable.token]
 //                self.performSegue(withIdentifier: TO_EDIT_COURSE, sender: sender)
             }
@@ -149,30 +154,6 @@ class ManagerCourseVC: MyTableVC, EditCourseDelegate {
             alert.addAction(action4)
             present(alert, animated: true, completion: nil)
         }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-//        if sender != nil { //edit
-//            let row: [String: String] = sender as! [String: String]
-//            if row["title"] != nil {
-//                vc.title = row["title"]
-//            }
-//            if row["token"] != nil {
-//                vc.course_token = row["token"]
-//            }
-//        } else { //add
-//            vc.course_token = ""
-//            vc.title = "新增課程"
-//        }
-//
-//        if segue.identifier == TO_EDIT_COURSE {
-//            let vc: EditCourseVC = segue.destination as! EditCourseVC
-//            if token != nil {
-//                vc.coach_token = token
-//            }
-//            vc.delegate = self
-//        }
     }
     
     private func _delete(token: String) {

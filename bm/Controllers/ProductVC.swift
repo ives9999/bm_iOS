@@ -22,7 +22,7 @@ class ProductVC: MyTableVC {
 //            ["title":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入商品名稱關鍵字","text_field":true,"value":"","value_type":"String","segue":""]
 //        ]
         
-        searchSections = initSectionRows()
+        oneSections = initSectionRows()
         
         super.viewDidLoad()
         let cellNibName = UINib(nibName: "ProductListCell", bundle: nil)
@@ -34,21 +34,21 @@ class ProductVC: MyTableVC {
         refresh()
     }
     
-    override func initSectionRows()-> [SearchSection] {
+    override func initSectionRows()-> [OneSection] {
 
-        var sections: [SearchSection] = [SearchSection]()
+        var sections: [OneSection] = [OneSection]()
 
-        sections.append(makeSection0Row())
+        sections.append(makeSectionRow())
 
         return sections
     }
     
-    override func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
-        var rows: [SearchRow] = [SearchRow]()
-        let r1: SearchRow = SearchRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
+    override func makeSectionRow(_ isExpanded: Bool=true)-> OneSection {
+        var rows: [OneRow] = [OneRow]()
+        let r1: OneRow = OneRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
         rows.append(r1)
 
-        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        let s: OneSection = OneSection(title: "一般", isExpanded: isExpanded)
         s.items.append(contentsOf: rows)
         return s
     }

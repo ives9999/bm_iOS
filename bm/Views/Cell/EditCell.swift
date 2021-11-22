@@ -106,7 +106,7 @@ class EditCell: SuperCell, UITextFieldDelegate {
         setNeedsLayout()
     }
     
-    func forRow(indexPath:IndexPath, row: SearchRow, isClear: Bool=false) {
+    func forRow(indexPath:IndexPath, row: OneRow, isClear: Bool=false) {
         //print(row)
         //generalTextField.tag = row["idx"] as! Int
         clearBtn.isHidden = !isClear
@@ -126,7 +126,7 @@ class EditCell: SuperCell, UITextFieldDelegate {
 //                vType = row["vtype"] as! String
 //            }
             
-            let pad: UIKeyboardType = row.keyboard
+            let pad: UIKeyboardType = row.keyboard.enumToSwift()
             editText.keyboardType = pad
             
             editText.placeholder = row.placeholder

@@ -583,110 +583,6 @@
             </objects>
             <point key="canvasLocation" x="282" y="-3188"/>
         </scene>
-        <!--Area SelectVC-->
-        <scene sceneID="8se-mo-ZdO">
-            <objects>
-                <viewController storyboardIdentifier="UIViewController-rNf-pN-AQF" id="rNf-pN-AQF" customClass="AreaSelectVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0tH-bk-Y6u">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="psQ-y0-HDc">
-                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="區域" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jvb-ZP-eHB">
-                                        <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VYS-WD-ZIv">
-                                        <rect key="frame" x="12" y="23" width="24" height="18"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="18" id="QVV-PE-O1v"/>
-                                            <constraint firstAttribute="width" constant="24" id="aiw-Xh-ylc"/>
-                                        </constraints>
-                                        <state key="normal" image="prev"/>
-                                        <connections>
-                                            <action selector="back:" destination="rNf-pN-AQF" eventType="touchUpInside" id="hcG-8A-sCc"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="VYS-WD-ZIv" firstAttribute="centerY" secondItem="psQ-y0-HDc" secondAttribute="centerY" id="RUK-WX-Qvl"/>
-                                    <constraint firstAttribute="height" constant="64" id="S4q-8Q-Vh4"/>
-                                    <constraint firstItem="jvb-ZP-eHB" firstAttribute="centerX" secondItem="psQ-y0-HDc" secondAttribute="centerX" id="SIP-qd-4dV"/>
-                                    <constraint firstItem="jvb-ZP-eHB" firstAttribute="centerY" secondItem="psQ-y0-HDc" secondAttribute="centerY" id="Xui-b6-VG3"/>
-                                    <constraint firstItem="VYS-WD-ZIv" firstAttribute="leading" secondItem="psQ-y0-HDc" secondAttribute="leading" constant="12" id="qJK-01-ZXR"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="qc4-ZN-bgb"/>
-                                </constraints>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="qkE-Cf-u6W">
-                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
-                            </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t91-ES-VLr">
-                                <rect key="frame" x="0.0" y="108" width="414" height="704"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JhC-DH-udG" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r00-Q1-Luh">
-                                        <rect key="frame" x="191" y="8" width="32" height="34"/>
-                                        <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="34" id="Jld-Qc-EAf"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
-                                        <state key="normal" title="提交">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="submit:" destination="rNf-pN-AQF" eventType="touchUpInside" id="22H-c2-ZXj"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="4hT-rS-Lnb"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="BkA-Up-Znd"/>
-                                    <constraint firstItem="r00-Q1-Luh" firstAttribute="centerX" secondItem="JhC-DH-udG" secondAttribute="centerX" id="OlG-UO-F48"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="g5B-LI-Ojc"/>
-                                    <constraint firstItem="r00-Q1-Luh" firstAttribute="centerY" secondItem="JhC-DH-udG" secondAttribute="centerY" id="jox-zZ-vTT"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="fEh-XE-zIw"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="JhC-DH-udG" secondAttribute="trailing" id="1Fo-dG-ARr"/>
-                            <constraint firstItem="qkE-Cf-u6W" firstAttribute="leading" secondItem="fEh-XE-zIw" secondAttribute="leading" id="3ZT-T4-Lgs"/>
-                            <constraint firstItem="psQ-y0-HDc" firstAttribute="leading" secondItem="fEh-XE-zIw" secondAttribute="leading" id="9BI-pW-R3t"/>
-                            <constraint firstItem="qkE-Cf-u6W" firstAttribute="top" secondItem="psQ-y0-HDc" secondAttribute="bottom" id="EHK-Nl-3T8"/>
-                            <constraint firstItem="fEh-XE-zIw" firstAttribute="bottom" secondItem="qkE-Cf-u6W" secondAttribute="bottom" id="GOc-rk-mqy"/>
-                            <constraint firstItem="psQ-y0-HDc" firstAttribute="trailing" secondItem="fEh-XE-zIw" secondAttribute="trailing" id="Nvw-LC-6VH"/>
-                            <constraint firstItem="fEh-XE-zIw" firstAttribute="bottom" secondItem="t91-ES-VLr" secondAttribute="bottom" constant="50" id="SGq-XV-nGi"/>
-                            <constraint firstItem="t91-ES-VLr" firstAttribute="top" secondItem="psQ-y0-HDc" secondAttribute="bottom" id="W3I-i0-yhC"/>
-                            <constraint firstItem="t91-ES-VLr" firstAttribute="leading" secondItem="fEh-XE-zIw" secondAttribute="leading" id="aAs-iG-6y8"/>
-                            <constraint firstItem="JhC-DH-udG" firstAttribute="leading" secondItem="fEh-XE-zIw" secondAttribute="leading" id="hoO-KX-fSH"/>
-                            <constraint firstItem="psQ-y0-HDc" firstAttribute="top" secondItem="fEh-XE-zIw" secondAttribute="top" id="qCC-lf-gzu"/>
-                            <constraint firstItem="fEh-XE-zIw" firstAttribute="trailing" secondItem="t91-ES-VLr" secondAttribute="trailing" id="rOr-2A-WVU"/>
-                            <constraint firstItem="fEh-XE-zIw" firstAttribute="bottom" secondItem="JhC-DH-udG" secondAttribute="bottom" id="zDs-lV-0FT"/>
-                            <constraint firstItem="fEh-XE-zIw" firstAttribute="trailing" secondItem="qkE-Cf-u6W" secondAttribute="trailing" id="zYK-0C-bjB"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="A4e-v1-beF"/>
-                    <connections>
-                        <outlet property="submitBtn" destination="r00-Q1-Luh" id="nYc-H1-wWt"/>
-                        <outlet property="tableView" destination="t91-ES-VLr" id="Ryc-fa-4Q7"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eq2-bS-RNa" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="465" y="-4730"/>
-        </scene>
         <!--Status SelectVC-->
         <scene sceneID="7Wb-41-Sdn">
             <objects>
@@ -712,7 +608,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="back:" destination="rNf-pN-AQF" eventType="touchUpInside" id="ZA5-Ma-Kbl"/>
                                             <action selector="prevBtnPressed:" destination="Cyt-Jb-jyE" eventType="touchUpInside" id="X8m-V5-qfN"/>
                                             <action selector="prevBtnPressed:" destination="ERS-sh-cNj" eventType="touchUpInside" id="nTp-JZ-jF9"/>
                                         </connections>
@@ -794,7 +689,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="back:" destination="rNf-pN-AQF" eventType="touchUpInside" id="rWb-7k-NFA"/>
                                             <action selector="prevBtnPressed:" destination="Cyt-Jb-jyE" eventType="touchUpInside" id="bhG-0e-JPs"/>
                                         </connections>
                                     </button>
@@ -876,7 +770,6 @@
                                         <connections>
                                             <action selector="back" destination="nnI-xU-Qec" eventType="touchUpInside" id="qSc-k1-hbC"/>
                                             <action selector="back:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="3IP-NE-j2u"/>
-                                            <action selector="back:" destination="rNf-pN-AQF" eventType="touchUpInside" id="YWY-zP-dJa"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -925,7 +818,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="submit" destination="nnI-xU-Qec" eventType="touchUpInside" id="ARi-Ik-W23"/>
-                                                    <action selector="submit:" destination="rNf-pN-AQF" eventType="touchUpInside" id="M0X-dW-J0S"/>
                                                     <action selector="submitWithSender:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="Ufi-c5-4vX"/>
                                                 </connections>
                                             </button>
@@ -1064,7 +956,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="back:" destination="rNf-pN-AQF" eventType="touchUpInside" id="gQD-qN-ak6"/>
                                             <action selector="prevBtnPressed:" destination="bUa-fD-2pO" eventType="touchUpInside" id="a1y-GX-yyI"/>
                                             <action selector="prevBtnPressed:" destination="Cyt-Jb-jyE" eventType="touchUpInside" id="zDC-2n-Aw9"/>
                                         </connections>
@@ -1107,7 +998,6 @@
                                 </state>
                                 <connections>
                                     <action selector="submit:" destination="bUa-fD-2pO" eventType="touchUpInside" id="M1n-h1-9tl"/>
-                                    <action selector="submit:" destination="rNf-pN-AQF" eventType="touchUpInside" id="lSn-7V-Etk"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1973,7 +1863,6 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="back:" destination="rNf-pN-AQF" eventType="touchUpInside" id="KNp-sV-yfI"/>
                                             <action selector="back:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="iaO-bY-1mT"/>
                                         </connections>
                                     </button>
@@ -2013,7 +1902,6 @@
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="submit:" destination="rNf-pN-AQF" eventType="touchUpInside" id="nmV-2h-YOj"/>
                                                     <action selector="submitWithSender:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="5s8-mf-PF3"/>
                                                 </connections>
                                             </button>
@@ -2093,7 +1981,6 @@
                                         <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="back" destination="OKL-6q-hzR" eventType="touchUpInside" id="etE-ur-lnH"/>
-                                            <action selector="back:" destination="rNf-pN-AQF" eventType="touchUpInside" id="vGZ-fr-fUn"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2135,7 +2022,6 @@
                                                 <connections>
                                                     <action selector="submit" destination="nnI-xU-Qec" eventType="touchUpInside" id="JMZ-Sd-H2n"/>
                                                     <action selector="submit" destination="OKL-6q-hzR" eventType="touchUpInside" id="fMk-bG-5Gd"/>
-                                                    <action selector="submit:" destination="rNf-pN-AQF" eventType="touchUpInside" id="8pj-YJ-1l2"/>
                                                     <action selector="submitWithSender:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="ar2-uw-CG6"/>
                                                 </connections>
                                             </button>
@@ -2219,7 +2105,6 @@
                                         <connections>
                                             <action selector="back" destination="3jC-Sa-5eM" eventType="touchUpInside" id="4XZ-z1-bXW"/>
                                             <action selector="back" destination="OKL-6q-hzR" eventType="touchUpInside" id="S8S-cC-PFa"/>
-                                            <action selector="back:" destination="rNf-pN-AQF" eventType="touchUpInside" id="nrD-ZT-Yyw"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -2260,7 +2145,6 @@
                                                     <action selector="submit" destination="nnI-xU-Qec" eventType="touchUpInside" id="7fW-86-vLd"/>
                                                     <action selector="submit" destination="OKL-6q-hzR" eventType="touchUpInside" id="dKb-Nz-W4S"/>
                                                     <action selector="submit" destination="3jC-Sa-5eM" eventType="touchUpInside" id="fZg-Kh-aWk"/>
-                                                    <action selector="submit:" destination="rNf-pN-AQF" eventType="touchUpInside" id="Kxn-4p-Aec"/>
                                                     <action selector="submitWithSender:" destination="Lz9-4q-3c9" eventType="touchUpInside" id="UdD-E4-AiQ"/>
                                                 </connections>
                                             </button>

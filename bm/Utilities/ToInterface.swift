@@ -60,19 +60,6 @@ extension BaseViewController {
         }
     }
     
-    func toMemberCartList(member_like: Bool=false) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_CART_LIST) as? MemberCartListVC {
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_CART_LIST) as! MemberCartListVC
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
-    }
-    
     func toCoach(member_like: Bool=false) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
@@ -149,6 +136,21 @@ extension BaseViewController {
         }
     }
     
+    func toEditTeam(token: String) {
+        
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Team", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "editTeam") as? EditTeamVC {
+                viewController.course_token = token
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "editTeam") as! EditTeamVC
+            viewController.course_token = token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     //manager_token is member token
     func toManagerCourse(manager_token: String) {
         if #available(iOS 13.0, *) {
@@ -160,6 +162,34 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-HrW-2D-NhE") as! ManagerCourseVC
             viewController.manager_token = manager_token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    //manager_token is member token
+    func toManagerTeam(manager_token: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Team", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toManagerTeam")  as? ManagerTeamVC {
+                viewController.manager_token = manager_token
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerTeam") as! ManagerTeamVC
+            viewController.manager_token = manager_token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toMemberCartList(member_like: Bool=false) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_CART_LIST) as? MemberCartListVC {
+                viewController.modalPresentationStyle = .fullScreen
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_CART_LIST) as! MemberCartListVC
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

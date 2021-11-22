@@ -29,7 +29,7 @@ class ArenaVC: MyTableVC {
 //            ["ch":"停車場","atype":UITableViewCell.AccessoryType.none,"key":ARENA_PARKING_KEY,"show":"全部","segue":"","sender":0,"switch":true,"value":""]
 //        ]
         
-        searchSections = initSectionRows()
+        oneSections = initSectionRows()
 //        _type = "arena"
 //        _titleField = "name"
         super.viewDidLoad()
@@ -45,31 +45,31 @@ class ArenaVC: MyTableVC {
         refresh()
     }
     
-    override func initSectionRows()-> [SearchSection] {
+    override func initSectionRows()-> [OneSection] {
 
-        var sections: [SearchSection] = [SearchSection]()
+        var sections: [OneSection] = [OneSection]()
 
-        sections.append(makeSection0Row())
+        sections.append(makeSectionRow())
 
         return sections
     }
     
-    override func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
-        var rows: [SearchRow] = [SearchRow]()
-        let r1: SearchRow = SearchRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
+    override func makeSectionRow(_ isExpanded: Bool=true)-> OneSection {
+        var rows: [OneRow] = [OneRow]()
+        let r1: OneRow = OneRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
         rows.append(r1)
-        let r2: SearchRow = SearchRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r2: OneRow = OneRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r2)
-        let r3: SearchRow = SearchRow(title: "區域", show: "全部", key: AREA_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r3: OneRow = OneRow(title: "區域", show: "全部", key: AREA_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r3)
-        let r4: SearchRow = SearchRow(title: "空調", value: "0", show: "全部", key: ARENA_AIR_CONDITION_KEY, cell: "switch")
+        let r4: OneRow = OneRow(title: "空調", value: "0", show: "全部", key: ARENA_AIR_CONDITION_KEY, cell: "switch")
         rows.append(r4)
-        let r5: SearchRow = SearchRow(title: "盥洗室", value: "0", show: "全部", key: ARENA_BATHROOM_KEY, cell: "switch")
+        let r5: OneRow = OneRow(title: "盥洗室", value: "0", show: "全部", key: ARENA_BATHROOM_KEY, cell: "switch")
         rows.append(r5)
-        let r6: SearchRow = SearchRow(title: "停車場", value: "0", show: "全部", key: ARENA_PARKING_KEY, cell: "switch")
+        let r6: OneRow = OneRow(title: "停車場", value: "0", show: "全部", key: ARENA_PARKING_KEY, cell: "switch")
         rows.append(r6)
 
-        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        let s: OneSection = OneSection(title: "一般", key: "general", isExpanded: isExpanded)
         s.items.append(contentsOf: rows)
         return s
     }
@@ -149,7 +149,7 @@ class ArenaVC: MyTableVC {
         if let myTable: ArenaTable = row as? ArenaTable {
             let key: String = AREA_KEY
             let area_id: Int = myTable.area_id
-            let row = getSearchRowFromKey(key)
+            let row = getOneRowFromKey(key)
             row.value = String(area_id)
             //replaceRows(key, row)
             prepareParams()

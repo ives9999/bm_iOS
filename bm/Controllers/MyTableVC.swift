@@ -36,7 +36,7 @@ class MyTableVC: BaseViewController {
     var titleField: String!
     
     var member_like: Bool = false
-    var able_type: String = "coach"
+    
     var tables: Tables?
     
     var lists1: [Table] = [Table]()
@@ -129,11 +129,13 @@ class MyTableVC: BaseViewController {
         if (jsonData != nil) {
             genericTable()
             if page == 1 {
-                totalCount = tables!.totalCount
-                perPage = tables!.perPage
-                let _pageCount: Int = totalCount / perPage
-                totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
-                //print(totalPage)
+                if (tables != nil) {
+                    totalCount = tables!.totalCount
+                    perPage = tables!.perPage
+                    let _pageCount: Int = totalCount / perPage
+                    totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+                    //print(totalPage)
+                }
             }
             if refreshControl.isRefreshing {
                 refreshControl.endRefreshing()
@@ -146,12 +148,12 @@ class MyTableVC: BaseViewController {
         Global.instance.removeSpinner(superView: view)
     }
     
-    func initSectionRows()-> [SearchSection] {
-        return  [SearchSection]()
+    func initSectionRows()-> [OneSection] {
+        return  [OneSection]()
     }
     
-    func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
-        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+    func makeSectionRow(_ isExpanded: Bool=true)-> OneSection {
+        let s: OneSection = OneSection(title: "一般", key: "", isExpanded: isExpanded)
         return s
     }
     
@@ -164,7 +166,7 @@ class MyTableVC: BaseViewController {
     
     override func prepareParams(city_type: String="simple") {
         params = [String: String]()
-        for section in searchSections {
+        for section in oneSections {
             
             for row in section.items {
                 if row.value.count > 0 {
@@ -184,14 +186,22 @@ class MyTableVC: BaseViewController {
     }
     
     override func singleSelected(key: String, selected: String, show: String?=nil) {
-
-        searchPanel.singleSelected(key: key, selected: selected, show: show)
+        
+        super.singleSelected(key: key, selected: selected, show: show)
+        tableView.reloadData()
     }
     
-//    override func setWeekdaysData(selecteds: [Int]) {
-//
-//        searchPanel.setWeekdaysData(selecteds: selecteds)
-//    }
+    override func dateSelected(key: String, selected: String) {
+        
+        super.dateSelected(key: key, selected: selected)
+        tableView.reloadData()
+    }
+    
+    override func setWeekdaysData(selecteds: [Int]) {
+
+        super.setWeekdaysData(selecteds: selecteds)
+        tableView.reloadData()
+    }
 //
 //    override func setDegreeData(res: [DEGREE]) {
 //
@@ -696,7 +706,11 @@ extension MyTableVC: UITableViewDataSource {
         titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: 34)
         headerView.addSubview(titleLabel)
         
-        let mark = UIImageView(image: UIImage(named: "to_right"))
+        var expanded_image: String = "to_right"
+        if oneSections[section].isExpanded {
+            expanded_image = "to_down"
+        }
+        let mark = UIImageView(image: UIImage(named: expanded_image))
         mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
         headerView.addSubview(mark)
         

@@ -211,8 +211,10 @@ class MemberVC: MyTableVC {
 
         var rows: [MemberRow] = [MemberRow]()
         
-        let r1: MemberRow = MemberRow(title: "課程", icon: "course", segue: "toManagerCourse")
+        let r1: MemberRow = MemberRow(title: "球隊", icon: "team", segue: "toManagerTeam")
         rows.append(r1)
+        let r2: MemberRow = MemberRow(title: "課程", icon: "course", segue: "toManagerCourse")
+        rows.append(r2)
 
         let s: MemberSection = MemberSection(title: "管理", isExpanded: isEpanded, items: rows)
 
@@ -458,6 +460,8 @@ class MemberVC: MyTableVC {
             }
         } else if segue == "toManagerCourse" {
             toManagerCourse(manager_token: Member.instance.token)
+        } else if segue == "toManagerTeam" {
+            toManagerTeam(manager_token: Member.instance.token)
         }
         
         

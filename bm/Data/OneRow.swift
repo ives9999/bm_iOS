@@ -21,6 +21,12 @@ class OneSection {
         self.items = items
     }
     
+    init(title: String = "", isExpanded: Bool = true, items: [OneRow] = [OneRow]()) {
+        self.title = title
+        self.isExpanded = isExpanded
+        self.items = items
+    }
+    
     required init() {}
 }
 
@@ -34,7 +40,7 @@ class OneRow {
     var keyboard: KEYBOARD = .default
     var placeholder: String = ""
     var prompt: String = ""
-    var isRequired: Bool = true
+    var isRequired: Bool = false
     var isClear: Bool = true
     var accessory: UITableViewCell.AccessoryType = UITableViewCell.AccessoryType.none
     
@@ -52,7 +58,7 @@ class OneRow {
         cell: String = "",
         keyboard: KEYBOARD = .default,
         placeholder: String = "",
-        isRequired: Bool = true,
+        isRequired: Bool = false,
         isClear: Bool = true,
         accessory: UITableViewCell.AccessoryType = UITableViewCell.AccessoryType.none
     ) {

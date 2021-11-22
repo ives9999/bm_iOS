@@ -1,18 +1,14 @@
 //
-//  EditCourseVC.swift
+//  EditTeamVC.swift
 //  bm
 //
-//  Created by ives on 2019/5/28.
-//  Copyright © 2019 bm. All rights reserved.
+//  Created by ives on 2021/11/19.
+//  Copyright © 2021 bm. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-protocol EditCourseDelegate {
-    func isReload(_ yes: Bool)
-}
-
-class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate {
+class EditTeamVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate {
     
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var featuredView: ImagePickerView!
@@ -26,7 +22,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     var course_token: String? = nil
     var coach_token: String? = nil
     
-    var myTable: CourseTable? = nil
+    var myTable: TeamTable? = nil
     
     var delegate: EditCourseDelegate?
     
@@ -48,26 +44,49 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         featuredView.delegate = self
         
         hideKeyboardWhenTappedAround()
+        FormItemCellType.registerCell(for: tableView)
         
-        let moreCellNib = UINib(nibName: "MoreCell", bundle: nil)
-        tableView.register(moreCellNib, forCellReuseIdentifier: "moreCell")
-        
-        let textFieldCellNib = UINib(nibName: "TextFieldCell", bundle: nil)
-        tableView.register(textFieldCellNib, forCellReuseIdentifier: "textFieldCell")
-        
-        let dateCellNib = UINib(nibName: "DateCell", bundle: nil)
-        tableView.register(dateCellNib, forCellReuseIdentifier: "dateCell")
-        
-        
-//        FormItemCellType.registerCell(for: tableView)
-//
-//        sections = form.getSections()
-//        section_keys = form.getSectionKeys()
-        
+        sections = form.getSections()
+        section_keys = form.getSectionKeys()
 //        print(sections)
 //        print(section_keys)
         if course_token != nil && course_token!.count > 0 {
             refresh()
+        }
+        
+    }
+    
+    override func refresh() {
+        
+        Global.instance.addSpinner(superView: view)
+        let params: [String: String] = ["token": course_token!]
+        CourseService.instance.getOne(params: params) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if success {
+                let jsonData: Data = CourseService.instance.jsonData!
+                do {
+                    self.myTable = try JSONDecoder().decode(TeamTable.self, from: jsonData)
+                    if (self.myTable != nil) {
+                        self.myTable!.filterRow()
+                        self.initData()
+                        //self.putValue()
+                        self.titleLbl.text = self.myTable!.title
+                        self.tableView.reloadData()
+                    }
+                } catch {
+                    self.warning(error.localizedDescription)
+                }
+                
+                
+//                let table: Table = CourseService.instance.table!
+//                self.courseTable = table as? CourseTable
+//                self.putValue()
+//                self.titleLbl.text = table.title
+//                self.tableView.reloadData()
+            } else {
+                self.warning(CourseService.instance.msg)
+            }
+            self.endRefresh()
         }
     }
     
@@ -75,8 +94,8 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         
         if myTable != nil {
             var rows: [OneRow] = [OneRow]()
-            var row: OneRow = OneRow(title: "標題", value: myTable!.title, show: myTable!.title, key: TITLE_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "兒童訓練班")
-            row.msg = "標題沒有填寫"
+            var row: OneRow = OneRow(title: "名稱", value: myTable!.name, show: myTable!.name, key: TITLE_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "羽球密碼羽球隊")
+            row.msg = "球隊名稱沒有填寫"
             rows.append(row)
             row = OneRow(title: "youtube代碼", value: myTable!.youtube, show: myTable!.youtube, key: YOUTUBE_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "請輸入youtube代碼", isRequired: false)
             rows.append(row)
@@ -119,200 +138,165 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
     }
     
-    override func refresh() {
-        
-        Global.instance.addSpinner(superView: view)
-        let params: [String: String] = ["token": course_token!]
-        CourseService.instance.getOne(params: params) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if success {
-                let jsonData: Data = CourseService.instance.jsonData!
-                do {
-                    self.myTable = try JSONDecoder().decode(CourseTable.self, from: jsonData)
-                    if (self.myTable != nil) {
-                        self.myTable!.filterRow()
-                        self.initData()
-                        //self.putValue()
-                        self.titleLbl.text = self.myTable!.title
-                        self.tableView.reloadData()
+    func putValue() {
+        if courseTable != nil {
+            
+            let mirror: Mirror = Mirror(reflecting: courseTable!)
+            let propertys: [[String: Any]] = mirror.toDictionary()
+            
+            for formItem in form.formItems {
+                
+                for property in propertys {
+                    
+                    if ((property["label"] as! String) == formItem.name) {
+                        var type: String = property["type"] as! String
+                        type = type.getTypeOfProperty()!
+                        //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+                        var content: String = ""
+                        if type == "Int" {
+                            content = String(property["value"] as! Int)
+                        } else if type == "Bool" {
+                            content = String(property["value"] as! Bool)
+                        } else if type == "String" {
+                            content = property["value"] as! String
+                        }
+                        formItem.value = content
+                        formItem.make()
+                        break
                     }
-                } catch {
-                    self.warning(error.localizedDescription)
                 }
-                
-                
-//                let table: Table = CourseService.instance.table!
-//                self.courseTable = table as? CourseTable
-//                self.putValue()
-//                self.titleLbl.text = table.title
-//                self.tableView.reloadData()
-            } else {
-                self.warning(CourseService.instance.msg)
             }
-            self.endRefresh()
-        }
-    }
-    
-//    func putValue() {
-//        if courseTable != nil {
-//
-//            let mirror: Mirror = Mirror(reflecting: courseTable!)
-//            let propertys: [[String: Any]] = mirror.toDictionary()
-//
-//            for formItem in form.formItems {
-//
-//                for property in propertys {
-//
-//                    if ((property["label"] as! String) == formItem.name) {
-//                        var type: String = property["type"] as! String
-//                        type = type.getTypeOfProperty()!
-//                        //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
-//                        var content: String = ""
-//                        if type == "Int" {
-//                            content = String(property["value"] as! Int)
-//                        } else if type == "Bool" {
-//                            content = String(property["value"] as! Bool)
-//                        } else if type == "String" {
-//                            content = property["value"] as! String
+            
+            
+//            let mirror: Mirror? = Mirror(reflecting: courseTable!)
+//            if mirror != nil {
+//                for formItem in self.form.formItems {
+//                    let name = formItem.name!
+//                    for (property, value) in mirror!.children {
+//                        if name == property {
+//                            let typeof = type(of: value)
+//                            if typeof == String.self {
+//                                formItem.value = value as? String
+//                            } else if typeof == Int.self {
+//                                let tmp = value as! Int
+//                                formItem.value = String(tmp)
+//                            }
+//                            formItem.make()
 //                        }
-//                        formItem.value = content
-//                        formItem.make()
-//                        break
+//
 //                    }
 //                }
 //            }
-//
-//            let featured_path = courseTable!.featured_path
-//            if featured_path.count > 0 {
-//                //print(featured_path)
-//                featuredView.setPickedImage(url: featured_path)
-//            }
-//            //featuredView.setPickedImage(image: superCourse!.featured)
-//        }
-//    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
+            //featuredView.s
+            let featured_path = courseTable!.featured_path
+            if featured_path.count > 0 {
+                //print(featured_path)
+                featuredView.setPickedImage(url: featured_path)
+            }
+            //featuredView.setPickedImage(image: superCourse!.featured)
+        }
     }
     
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//
-//        let item = getFormItemFromIdx(indexPath)
-//        if item!.name == CONTENT_KEY {
-//            return 200
-//        } else {
-//            return 60
-//        }
-//        //return 60
-//    }
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        let item = getFormItemFromIdx(indexPath)
+        if item!.name == CONTENT_KEY {
+            return 200
+        } else {
+            return 60
+        }
+        //return 60
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-//        var count: Int = 1
-//        if sections == nil {
-//            count = 1
-//        } else {
-//            count = sections!.count
-//        }
-//        return count
-        return oneSections.count
+        var count: Int = 1
+        if sections == nil {
+            count = 1
+        } else {
+            count = sections!.count
+        }
+        return count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return oneSections[section].items.count
-        //return section_keys[section].count
+        return section_keys[section].count
         //return 1
     }
     
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//        let headerView = UIView()
-//        headerView.backgroundColor = UIColor.white
-//        headerView.tag = section
-//
-//        let titleLabel = UILabel()
-//        titleLabel.text = sections?[section]
-//        titleLabel.textColor = UIColor.black
-//        titleLabel.sizeToFit()
-//        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: 34)
-//        headerView.addSubview(titleLabel)
-//
-//        let mark = UIImageView(image: UIImage(named: "to_right"))
-//        mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
-//        headerView.addSubview(mark)
-//
-//        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
-//        headerView.addGestureRecognizer(gesture)
-//
-//        return headerView
-//    }
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+            
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.white
+        headerView.tag = section
+        
+        let titleLabel = UILabel()
+        titleLabel.text = sections?[section]
+        titleLabel.textColor = UIColor.black
+        titleLabel.sizeToFit()
+        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: 34)
+        headerView.addSubview(titleLabel)
+        
+        let mark = UIImageView(image: UIImage(named: "to_right"))
+        mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
+        headerView.addSubview(mark)
+        
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+        headerView.addGestureRecognizer(gesture)
+        
+        return headerView
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let row = getOneRowFromIdx(indexPath.section, indexPath.row)
-        let cell_type: String = row.cell
-        
-        if (cell_type == "textField") {
-            if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as? TextFieldCell {
-                
-                //let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as! TextFieldCell
-                cell.cellDelegate = self
-                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                
-                return cell
+        let item = getFormItemFromIdx(indexPath)
+        let cell: UITableViewCell
+        if item != nil {
+            if let cellType = item!.uiProperties.cellType {
+                cell = cellType.dequeueCell(for: tableView, at: indexPath)
+            } else {
+                cell = UITableViewCell()
             }
-        } else if (row.cell == "more") {
-            if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as? MoreCell {
-                
-                cell.cellDelegate = self
-                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
 
-                return cell
+            if let formUpdatableCell = cell as? FormUPdatable {
+                item!.indexPath = indexPath
+                formUpdatableCell.update(with: item!)
             }
+
+//            if item!.uiProperties.cellType == FormItemCellType.textField {
+//                if let formCell = cell as? FormItemCell {
+//                    formCell.valueDelegate = self
+//                }
+//            }
+        } else {
+            cell = UITableViewCell()
         }
-//        if item != nil {
-//            if let cellType = item!.uiProperties.cellType {
-//                cell = cellType.dequeueCell(for: tableView, at: indexPath)
-//            } else {
-//                cell = UITableViewCell()
-//            }
-//
-//            if let formUpdatableCell = cell as? FormUPdatable {
-//                item!.indexPath = indexPath
-//                formUpdatableCell.update(with: item!)
-//            }
-//
-//        } else {
-//            cell = UITableViewCell()
-//        }
         
-        return UITableViewCell()
+        return cell
     }
     
-//    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
-//        let key = section_keys[indexPath.section][indexPath.row]
-//        return getFormItemFromKey(key)
-//    }
+    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
+        let key = section_keys[indexPath.section][indexPath.row]
+        return getFormItemFromKey(key)
+    }
     
-//    func getFormItemFromKey(_ key: String)-> FormItem? {
-//        var res: FormItem? = nil
-//        for formItem in form.formItems {
-//            if key == formItem.name {
-//                res = formItem
-//                break
-//            }
-//        }
-//
-//        return res
-//    }
+    func getFormItemFromKey(_ key: String)-> FormItem? {
+        var res: FormItem? = nil
+        for formItem in form.formItems {
+            if key == formItem.name {
+                res = formItem
+                break
+            }
+        }
+
+        return res
+    }
 
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
-        
-        if (row.cell == "more") {
-            moreClickForOne(key: row.key, row: row, delegate: self)
-        }
         
 //        let row = getFormItemFromIdx(indexPath)
 //        if row != nil {
@@ -437,22 +421,22 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     // ImagePickerDelegate
     func isImageSet(_ b: Bool) {
-        isFeaturedChange = b
+        //isFeaturedChange = b
     }
     func myPresent(_ viewController: UIViewController) {
         self.present(viewController, animated: true, completion: nil)
     }
     
-//    override func singleSelected(key: String, selected: String, show: String?=nil) {
+    override func singleSelected(key: String, selected: String, show: String?=nil) {
 //        let item = getFormItemFromKey(key)
 //        if item != nil {
 //            item!.value = selected
 //            item!.make()
 //            tableView.reloadData()
 //        }
-//    }
+    }
     
-//    override func setWeekdaysData(selecteds: [Int]) {
+    override func setWeekdaysData(selecteds: [Int]) {
 //        let item = getFormItemFromKey(WEEKDAY_KEY)
 //        //let tmps: [Int] = selecteds.map({ Int($0)! })
 //        let value = String(Global.instance.weekdaysToDBValue(selecteds))
@@ -460,9 +444,9 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
 //        item!.value = value
 //        item!.make()
 //        tableView.reloadData()
-//    }
+    }
     
- //   override func multiSelected(key: String, selecteds: [String]) {
+    override func multiSelected(key: String, selecteds: [String]) {
 //        let item = getFormItemFromKey(key)
 //        if item != nil {
 //            var value: String = "-1"
@@ -474,25 +458,25 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
 //            item!.make()
 //            tableView.reloadData()
 //        }
-//    }
+    }
     
-//    override func setContent(key: String, content: String) {
+    override func setContent(key: String, content: String) {
 //        let item = getFormItemFromKey(key)
 //        if item != nil {
 //            item!.value = content
 //            item!.make()
 //            tableView.reloadData()
 //        }
-//    }
+    }
     
-//    override func dateSelected(key: String, selected: String) {
+    override func dateSelected(key: String, selected: String) {
 //        let item = getFormItemFromKey(key)
 //        if item != nil {
 //            item!.value = selected
 //            item!.make()
 //            tableView.reloadData()
 //        }
-//    }
+    }
     
     @IBAction func submit(_ sender: Any) {
         
@@ -502,69 +486,83 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
         }
         
         var params:[String: String] = [String: String]()
-        
-        var msg: String = ""
-        for section in oneSections {
-            for row in section.items {
-                params[row.key] = row.value
-                if row.isRequired && row.value.count == 0 {
-                    msg += row.msg + "\n"
-                }
+        for formItem in form.formItems {
+            if formItem.value != nil {
+                let value = formItem.value!
+                //print(formItem.name)
+                params[formItem.name!] = value
+            } else {
+                params[formItem.name!] = ""
             }
         }
-        
-        if msg.count > 0 {
-            warning(msg)
-        } else {
-            //print(params)
-            if action == "INSERT" {
-                params[CREATED_ID_KEY] = String(Member.instance.id)
-                params["cat_id"] = String(44)
-            }
-            if course_token != nil {
-                params["course_token"] = course_token!
-            }
-            if coach_token != nil {
-                params["coach_token"] = coach_token!
-            }
-            //print(params)
-            let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
-            CourseService.instance.update(_params: params, image: image) { (success) in
-                if success {
-                    
-                    self.jsonData = CourseService.instance.jsonData
-                    do {
-                        if (self.jsonData != nil) {
-                            let table: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
-                            if table.success {
-                                self.info(msg: "修改成功", buttonTitle: "關閉") {
-                                    if self.delegate != nil {
-                                        self.delegate!.isReload(true)
-                                    }
+        //print(params)
+        if action == "INSERT" {
+            params[CREATED_ID_KEY] = String(Member.instance.id)
+            params["cat_id"] = String(44)
+        }
+        if course_token != nil {
+            params["course_token"] = course_token!
+        }
+        if coach_token != nil {
+            params["coach_token"] = coach_token!
+        }
+        //print(params)
+        let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
+        CourseService.instance.update(_params: params, image: image) { (success) in
+            if success {
+                
+                self.jsonData = CourseService.instance.jsonData
+                do {
+                    if (self.jsonData != nil) {
+                        let table: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
+                        if table.success {
+                            self.info(msg: "修改成功", buttonTitle: "關閉") {
+                                if self.delegate != nil {
+                                    self.delegate!.isReload(true)
                                 }
-                            } else {
-                                self.warning(table.msg)
                             }
                         } else {
-                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                            self.warning(table.msg)
                         }
-                    } catch {
-                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    } else {
+                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                     }
-                } else {
-                    self.warning("新增 / 修改失敗，伺服器無法新增成功，請稍後再試")
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
                 }
+                
+//                if CourseService.instance.success {
+//                    let appearance = SCLAlertView.SCLAppearance(
+//                        showCloseButton: false
+//                    )
+//                    let alert = SCLAlertView(appearance: appearance)
+//                    if (action == "INSERT") {
+//                        alert.addButton("確定", action: {
+//                            if self.delegate != nil {
+//                                self.delegate!.isReload(true)
+//                            }
+//                            self.dismiss(animated: true, completion: nil)
+//                        })
+//                    } else {
+//                        alert.addButton("回上一頁", action: {
+//                            if self.delegate != nil {
+//
+//                                self.delegate!.isReload(true)
+//                            }
+//                            self.dismiss(animated: true, completion: nil)
+//                        })
+//                        alert.addButton("繼續修改", action: {
+//                        })
+//                    }
+//                    alert.showSuccess("成功", subTitle: "新增 / 修改成功")
+//                    NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
+//                } else {
+//                    SCLAlertView().showWarning("錯誤", subTitle: CourseService.instance.msg)
+//                }
+            } else {
+                self.warning("新增 / 修改失敗，伺服器無法新增成功，請稍後再試")
             }
         }
-//        for formItem in form.formItems {
-//            if formItem.value != nil {
-//                let value = formItem.value!
-//                //print(formItem.name)
-//                params[formItem.name!] = value
-//            } else {
-//                params[formItem.name!] = ""
-//            }
-//        }
     }
     
     func textFieldTextChanged(formItem: FormItem, text: String) {

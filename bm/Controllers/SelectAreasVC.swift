@@ -21,11 +21,11 @@ class SelectAreasVC: MultiSelectVC {
 
             //print(selected)
             if city_ids!.count > 0 {
-                let session_rows = getAreasFromCitys(city_ids!) { rows in
+                //let session_rows = getAreasFromCitys(city_ids!) { rows in
                     //print(rows)
                     //self.rows1Bridge(rowsFromSession: rows)
-                    self.tableView.reloadData()
-                }
+                    //self.tableView.reloadData()
+                //}
                 //rows1Bridge(rowsFromSession: session_rows)
             }
         }

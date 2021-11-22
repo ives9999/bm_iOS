@@ -26,7 +26,7 @@ class StoreVC: MyTableVC {
 //            ["title":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":"","value_type":"Array"]
 //        ]
         
-        searchSections = initSectionRows()
+        oneSections = initSectionRows()
         
         super.viewDidLoad()
         
@@ -39,23 +39,23 @@ class StoreVC: MyTableVC {
         refresh()
     }
     
-    override func initSectionRows()-> [SearchSection] {
+    override func initSectionRows()-> [OneSection] {
 
-        var sections: [SearchSection] = [SearchSection]()
+        var sections: [OneSection] = [OneSection]()
 
-        sections.append(makeSection0Row())
+        sections.append(makeSectionRow())
 
         return sections
     }
     
-    override func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
-        var rows: [SearchRow] = [SearchRow]()
-        let r1: SearchRow = SearchRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
+    override func makeSectionRow(_ isExpanded: Bool=true)-> OneSection {
+        var rows: [OneRow] = [OneRow]()
+        let r1: OneRow = OneRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
         rows.append(r1)
-        let r2: SearchRow = SearchRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r2: OneRow = OneRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r2)
 
-        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        let s: OneSection = OneSection(title: "一般", isExpanded: isExpanded)
         s.items.append(contentsOf: rows)
         return s
     }

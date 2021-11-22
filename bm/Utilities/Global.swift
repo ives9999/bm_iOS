@@ -818,13 +818,13 @@ class Global {
     static let instance = Global()
     
     let weekdays: [[String: Any]] = [
-        ["value":1,"text":"星期一","simple_text":"一","checked":false],
-        ["value":2,"text":"星期二","simple_text":"二","checked":false],
-        ["value":3,"text":"星期三","simple_text":"三","checked":false],
-        ["value":4,"text":"星期四","simple_text":"四","checked":false],
-        ["value":5,"text":"星期五","simple_text":"五","checked":false],
-        ["value":6,"text":"星期六","simple_text":"六","checked":false],
-        ["value":7,"text":"星期日","simple_text":"日","checked":false]
+        ["value":0,"text":"星期一","simple_text":"一","checked":false],
+        ["value":1,"text":"星期二","simple_text":"二","checked":false],
+        ["value":2,"text":"星期三","simple_text":"三","checked":false],
+        ["value":3,"text":"星期四","simple_text":"四","checked":false],
+        ["value":4,"text":"星期五","simple_text":"五","checked":false],
+        ["value":5,"text":"星期六","simple_text":"六","checked":false],
+        ["value":6,"text":"星期日","simple_text":"日","checked":false]
     ]
     
     func today()-> String {

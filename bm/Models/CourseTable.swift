@@ -60,6 +60,8 @@ class CourseTable: Table {
     var signup_id: Int = 0
     //var weekday_arr: [Int] = [Int]()
 
+    var price_unit_show: String = ""
+    var cycle_unit_show: String = ""
     var start_time_show: String = ""
     var end_time_show: String = ""
     var price_long_show: String = ""
@@ -154,6 +156,18 @@ class CourseTable: Table {
         
         if start_time.count > 0 && end_time.count > 0 {
             interval_show = start_time_show + " ~ " + end_time_show
+        }
+        
+        if price_unit.count > 0 {
+            price_unit_show = PRICE_UNIT.enumFromString(string: price_unit).rawValue
+        }
+        
+        if kind.count > 0 {
+            kind_show = COURSE_KIND.enumFromString(string: kind).rawValue
+        }
+        
+        if cycle_unit.count > 0 {
+            cycle_unit_show = CYCLE_UNIT.enumFromString(string: cycle_unit).rawValue
         }
         
         if weekday_arr.count > 0 {

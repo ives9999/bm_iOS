@@ -11,7 +11,7 @@ import Foundation
 class SelectArenaVC: SingleSelectVC {
     
     var city: Int? = nil
-    var arenas: [ArenaTable] = [ArenaTable]()
+    var mysTable: [ArenaTable] = [ArenaTable]()
     
     override func viewDidLoad() {
         
@@ -23,9 +23,20 @@ class SelectArenaVC: SingleSelectVC {
         
         TeamService.instance.getArenaByCityID(city_id: city!) { (success) in
             if success {
+                
+                self.jsonData = TeamService.instance.jsonData
+                do {
+                    if (self.jsonData != nil) {
+                        self.mysTable = try JSONDecoder().decode([ArenaTable].self, from: self.jsonData!)
+                    } else {
+                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                    }
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                }
                 //self.arenas = TeamService.instance.arenas
                 //print(self.citys)
-                self.arenas = TeamService.instance.arenas
+                //self.arenas = TeamService.instance.arenas
                 self.rows1Bridge()
                 
                 self.tableView.reloadData()
@@ -41,7 +52,7 @@ class SelectArenaVC: SingleSelectVC {
         } else {
             rows1 = [[String: String]]()
         }
-        for arena in arenas {
+        for arena in mysTable {
             rows1!.append(["title": arena.name, "value": String(arena.id)])
         }
     }

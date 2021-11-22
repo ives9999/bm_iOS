@@ -33,7 +33,7 @@ class TeamVC: MyTableVC {
 //            ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String](),"value":""]
 //            ]
         
-        searchSections = initSectionRows()
+        oneSections = initSectionRows()
         Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
@@ -44,31 +44,31 @@ class TeamVC: MyTableVC {
         refresh()
     }
     
-    override func initSectionRows()-> [SearchSection] {
+    override func initSectionRows()-> [OneSection] {
 
-        var sections: [SearchSection] = [SearchSection]()
+        var sections: [OneSection] = [OneSection]()
 
-        sections.append(makeSection0Row())
+        sections.append(makeSectionRow())
 
         return sections
     }
     
-    override func makeSection0Row(_ isExpanded: Bool=true)-> SearchSection {
-        var rows: [SearchRow] = [SearchRow]()
-        let r1: SearchRow = SearchRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
+    override func makeSectionRow(_ isExpanded: Bool=true)-> OneSection {
+        var rows: [OneRow] = [OneRow]()
+        let r1: OneRow = OneRow(title: "關鍵字", key: KEYWORD_KEY, cell: "textField")
         rows.append(r1)
-        let r2: SearchRow = SearchRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r2: OneRow = OneRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r2)
-        let r3: SearchRow = SearchRow(title: "球館", show: "全部", key: ARENA_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r3: OneRow = OneRow(title: "球館", show: "全部", key: ARENA_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r3)
-        let r4: SearchRow = SearchRow(title: "星期幾", show: "全部", key: WEEKDAY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r4: OneRow = OneRow(title: "星期幾", show: "全部", key: WEEKDAY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r4)
-        let r5: SearchRow = SearchRow(title: "時段", show: "全部", key: START_TIME_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r5: OneRow = OneRow(title: "時段", show: "全部", key: START_TIME_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r5)
-        let r6: SearchRow = SearchRow(title: "程度", show: "全部", key: DEGREE_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r6: OneRow = OneRow(title: "程度", show: "全部", key: DEGREE_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r6)
 
-        let s: SearchSection = SearchSection(title: "一般", isExpanded: isExpanded)
+        let s: OneSection = OneSection(title: "一般", isExpanded: isExpanded)
         s.items.append(contentsOf: rows)
         return s
     }
@@ -160,7 +160,7 @@ class TeamVC: MyTableVC {
         if let myTable: TeamTable = row as? TeamTable {
             let key: String = ARENA_KEY
             let arena_id: Int = myTable.arena_id
-            let row = getSearchRowFromKey(key)
+            let row = getOneRowFromKey(key)
             row.value = String(arena_id)
             //replaceRows(key, row)
             prepareParams()

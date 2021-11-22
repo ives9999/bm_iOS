@@ -11,8 +11,9 @@ import OneSignal
 import Reachability
 import WebKit
 import SCLAlertView
+import CryptoSwift
 
-class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, ArenaSelectDelegate, DegreeSelectDelegate, EditCellDelegate, ContentEditDelegate, List2CellDelegate {
+class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, EditCellDelegate, ContentEditDelegate, List2CellDelegate {
     
     
     //var baseVC: BaseViewController
@@ -63,13 +64,13 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     let body_css = "<style>body{background-color:#000;padding-left:8px;padding-right:8px;margin-top:0;padding-top:0;color:#888888;font-size:18px;}a{color:#a6d903;}</style>"
     
     var searchPanel: SearchPanel = SearchPanel()
-    var searchSections: [SearchSection] = [SearchSection]()
+//    var searchSections: [SearchSection] = [SearchSection]()
     var oneSections: [OneSection] = [OneSection]()
     var params: [String: String] = [String: String]()
     var jsonData: Data? = nil
     
-    //WeekdaysSelectDelegate
-    func setWeekdaysData(selecteds: [Int]){}
+    var able_type: String = "coach"
+    
     //TimeSelectDelegate
     func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?){}
     //ArenaSelectDelegate
@@ -95,7 +96,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func cellCity(row: Table) {
         let key: String = CITY_KEY
         let city_id: Int = row.city_id
-        let row = getSearchRowFromKey(key)
+        let row = getOneRowFromKey(key)
         row.value = String(city_id)
         //replaceRows(key, row)
         prepareParams()
@@ -126,7 +127,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     
     func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String) {}
     func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {
-        let row: SearchRow = getSearchRowFromIdx(sectionIdx, rowIdx)
+        let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
         row.value = str
         row.show = str
     }
@@ -136,22 +137,38 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     func cellRadioChanged(key: String, sectionIdx: Int, rowIdx: Int, isChecked: Bool) {}
     
     func cellClear(sectionIdx: Int, rowIdx: Int) {
-        let row: SearchRow = getSearchRowFromIdx(sectionIdx, rowIdx)
-        if (row.key == CITY_KEY) {
-            var row1: SearchRow = getSearchRowFromKey(AREA_KEY)
-            row1.value = ""
-            row1.show = "全部"
-            row1 = getSearchRowFromKey(ARENA_KEY)
-            row1.value = ""
-            row1.show = "全部"
+//        if searchSections.count > sectionIdx && searchSections[sectionIdx].items.count > rowIdx {
+//            let row: SearchRow = getSearchRowFromIdx(sectionIdx, rowIdx)
+//            if (row.key == CITY_KEY) {
+//                var row1: SearchRow = getSearchRowFromKey(AREA_KEY)
+//                row1.value = ""
+//                row1.show = "全部"
+//                row1 = getSearchRowFromKey(ARENA_KEY)
+//                row1.value = ""
+//                row1.show = "全部"
+//            }
+//            row.value = ""
+//            row.show = ""
+//        }
+        
+        if oneSections.count > sectionIdx && oneSections[sectionIdx].items.count > rowIdx {
+            let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
+            if (row.key == CITY_KEY) {
+                var row1: OneRow = getOneRowFromKey(AREA_KEY)
+                row1.value = ""
+                row1.show = "全部"
+                row1 = getOneRowFromKey(ARENA_KEY)
+                row1.value = ""
+                row1.show = "全部"
+            }
+            row.value = ""
+            row.show = ""
         }
-        row.value = ""
-        row.show = ""
     }
     
     func cellSwitchChanged(key: String, sectionIdx: Int, rowIdx: Int, isSwitch: Bool) {
         
-        let row = searchSections[sectionIdx].items[rowIdx]
+        let row = oneSections[sectionIdx].items[rowIdx]
         let val: String = (isSwitch) ? "1" : "0"
         row.value = val
     }
@@ -283,15 +300,15 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     }
     
     @objc func searchPressed() {
-        searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, searchSections: searchSections)
+        searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, oneSections: oneSections)
     }
     
-    func moreClickForSearch(key: String, row: SearchRow, delegate: BaseViewController) {
+    func moreClickForOne(key: String, row: OneRow, delegate: BaseViewController) {
         
         if (key == CITY_KEY) {
             toSelectCity(key: CITY_KEY, selected: row.value, delegate: self)
         } else if (key == AREA_KEY) {
-            let row1: SearchRow = getSearchRowFromKey(CITY_KEY)
+            let row1: OneRow = getOneRowFromKey(CITY_KEY)
             var city_id: Int = 0
             
             if (row1.value.count > 0) {
@@ -305,12 +322,24 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                 toSelectArea(key: key, city_id: city_id, selected: row.value, delegate: self)
             }
         } else if (key == WEEKDAY_KEY) {
-            let selecteds: [Int] = valueToArray(t: Int.self, value: row.value)
+            //let selecteds: [Int] = valueToArray(t: Int.self, value: row.value)
+            
+            var selecteds: [Int] = [Int]()
+            var i: Int = 0
+            while (i < 7) {
+                let n = (pow(2, i) as NSDecimalNumber).intValue
+                if Int(row.value)! & n > 0 {
+                    selecteds.append(i)
+                }
+                i += 1
+            }
+            
+            
             toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
         } else if (key == START_TIME_KEY || key == END_TIME_KEY) {
             toSelectTime(key: key, selected: row.value, delegate: self)
         } else if (key == ARENA_KEY) {
-            let row1: SearchRow = getSearchRowFromKey(CITY_KEY)
+            let row1: OneRow = getOneRowFromKey(CITY_KEY)
             var city_id: Int = 0
             
             if (row1.value.count > 0) {
@@ -330,6 +359,10 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
                 selecteds.append(DEGREE.enumFromString(string: tmp))
             }
             toSelectDegree(selecteds: selecteds, delegate: self)
+        } else if (key == PRICE_UNIT_KEY || key == COURSE_KIND_KEY || key == CYCLE_UNIT_KEY) {
+            toSelectSingle(key: key, selected: row.value, delegate: self, able_type: able_type)
+        } else if (key == START_DATE_KEY || key == END_DATE_KEY) {
+            toSelectDate(key: key, selected: row.value)
         }
     }
     
@@ -337,25 +370,25 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
 //
 //    }
     
-    func getSearchRowFromKey(_ key: String)-> SearchRow {
-
-        for section in searchSections {
-            for row in section.items {
-                if (row.key == key ) {
-                    return row
-                }
-            }
-        }
-        return SearchRow()
-    }
-    
-    func getSearchRowFromIdx(_ sectionIdx: Int, _ rowIdx: Int) -> SearchRow {
-        return searchSections[sectionIdx].items[rowIdx]
-    }
-    
-    func getSearchRowFromIdx(sectionIdx: Int, rowIdx: Int)-> SearchRow {
-        return searchSections[sectionIdx].items[rowIdx]
-    }
+//    func getSearchRowFromKey(_ key: String)-> SearchRow {
+//
+//        for section in searchSections {
+//            for row in section.items {
+//                if (row.key == key ) {
+//                    return row
+//                }
+//            }
+//        }
+//        return SearchRow()
+//    }
+//
+//    func getSearchRowFromIdx(_ sectionIdx: Int, _ rowIdx: Int) -> SearchRow {
+//        return searchSections[sectionIdx].items[rowIdx]
+//    }
+//
+//    func getSearchRowFromIdx(sectionIdx: Int, rowIdx: Int)-> SearchRow {
+//        return searchSections[sectionIdx].items[rowIdx]
+//    }
     
     func getOneRowFromIdx(_ sectionIdx: Int, _ rowIdx: Int) -> OneRow {
         return oneSections[sectionIdx].items[rowIdx]
@@ -399,7 +432,7 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     }
     
     //存在row的value只是單純的文字，陣列值使用","來區隔，例如"1,2,3"，但當要傳回選擇頁面時，必須轉回陣列[1,2,3]
-    func valueToArray<T>(t:T.Type, row: SearchRow)-> [T] {
+    func valueToArray<T>(t:T.Type, row: OneRow)-> [T] {
 
         var selecteds: [T] = [T]()
         //print(t)
@@ -433,15 +466,17 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             type = "Int"
         }
         
-        let values = value.components(separatedBy: ",")
-        for value in values {
-            if (type == "Int") {
-                if let tmp = Int(value) {
-                    selecteds.append(tmp as! T)
-                }
-            } else {
-                if let tmp = value as? T {
-                    selecteds.append(tmp)
+        if value.count > 0 {
+            let values = value.components(separatedBy: ",")
+            for value in values {
+                if (type == "Int") {
+                    if let tmp = Int(value) {
+                        selecteds.append(tmp as! T)
+                    }
+                } else {
+                    if let tmp = value as? T {
+                        selecteds.append(tmp)
+                    }
                 }
             }
         }
@@ -813,29 +848,29 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     //             ["id": "5", "name": "新北市"],
     //             ["id": "6", "name": "台北市"]
     //           ]
-    func getCitys(completion1: @escaping (_ rows: [[String: String]]) -> Void) -> [[String: String]] {
-        
-        //session.removeObject(forKey: "citys")
-        let rows = session.getArrayDictionary("citys")
-        if rows.count == 0 {
-            Global.instance.addSpinner(superView: view)
-            DataService.instance1.getCitys() { (success) in
-                if success {
-                    let rows = DataService.instance1.citys
-                    //print(rows)
-                    var citys = [[String: String]]()
-                    for row in rows { // row is City object
-                        citys.append(["name": row.name, "id": String(row.id)])
-                    }
-                    self.session.set(citys, forKey: "citys")
-                    //self.tableView.reloadData()
-                    completion1(citys)
-                }
-                Global.instance.removeSpinner(superView: self.view)
-            }
-        }
-        return rows
-    }
+//    func getCitys(completion1: @escaping (_ rows: [[String: String]]) -> Void) -> [[String: String]] {
+//
+//        //session.removeObject(forKey: "citys")
+//        let rows = session.getArrayDictionary("citys")
+//        if rows.count == 0 {
+//            Global.instance.addSpinner(superView: view)
+//            DataService.instance1.getCitys() { (success) in
+//                if success {
+//                    let rows = DataService.instance1.citys
+//                    //print(rows)
+//                    var citys = [[String: String]]()
+//                    for row in rows { // row is City object
+//                        citys.append(["name": row.name, "id": String(row.id)])
+//                    }
+//                    self.session.set(citys, forKey: "citys")
+//                    //self.tableView.reloadData()
+//                    completion1(citys)
+//                }
+//                Global.instance.removeSpinner(superView: self.view)
+//            }
+//        }
+//        return rows
+//    }
     
     // return is [
     //             "52": [
@@ -847,116 +882,116 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     //                     ]
     //                  ]
     //           ]
-    func getAreasFromCity(_ city_id: Int, completion1: @escaping (_ rows: [[String: String]]) -> Void) -> [[String: String]] {
-        
-        //session.removeObject(forKey: "areas")
-        let rows = session.getAreasByCity(city_id)
-        //print(rows)
-        if rows.count == 0 {
-            //let city_ids: [Int] = [city_id]
-            Global.instance.addSpinner(superView: view)
-            DataService.instance1.getAreaByCityIDs(city_ids: "",city_type: "") { (success) in
-                if success {
-                    
-                    let city = DataService.instance1.citysandareas
-                    var city_name = ""
-                    if city[city_id] != nil {
-                        city_name = city[city_id]!["name"] as! String
-                    }
-                    
-                    var areas: [[String: String]] = [[String: String]]()
-                    for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
-                        var area_id: String = ""
-                        var area_name: String = ""
-                        for (key, value) in row {
-                            if key == "id" {
-                                area_id = String(value as! Int)
-                            }
-                            if key == "name" {
-                                area_name = value as! String
-                            }
-                        }
-                        if area_id.count > 0 && area_name.count > 0 {
-                            areas.append(["id":area_id,"name":area_name])
-                        }
-                    }
-                    //print(areas)
-                    let area_s: [String: Any] = ["id": String(city_id), "name": city_name, "rows": areas]
-                    let city_s: [String: [String: Any]] = [String(city_id): area_s]
-                    
-                    var allAreas: [String: [String: Any]] = self.session.getAllAreas()
-                    if allAreas.count > 0 {
-                        allAreas[String(city_id)] = area_s
-                        self.session.set(allAreas, forKey: "areas")
-                    } else {
-                        self.session.set(city_s, forKey: "areas")
-                    }
-                    completion1(areas)
-                    
-                    Global.instance.removeSpinner(superView: self.view)
-                }
-            }
-        }
-        return rows
-    }
+//    func getAreasFromCity(_ city_id: Int, completion1: @escaping (_ rows: [[String: String]]) -> Void) -> [[String: String]] {
+//        
+//        //session.removeObject(forKey: "areas")
+//        let rows = session.getAreasByCity(city_id)
+//        //print(rows)
+//        if rows.count == 0 {
+//            //let city_ids: [Int] = [city_id]
+//            Global.instance.addSpinner(superView: view)
+//            DataService.instance1.getAreaByCityIDs(city_ids: "",city_type: "") { (success) in
+//                if success {
+//                    
+//                    let city = DataService.instance1.citysandareas
+//                    var city_name = ""
+//                    if city[city_id] != nil {
+//                        city_name = city[city_id]!["name"] as! String
+//                    }
+//                    
+//                    var areas: [[String: String]] = [[String: String]]()
+//                    for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
+//                        var area_id: String = ""
+//                        var area_name: String = ""
+//                        for (key, value) in row {
+//                            if key == "id" {
+//                                area_id = String(value as! Int)
+//                            }
+//                            if key == "name" {
+//                                area_name = value as! String
+//                            }
+//                        }
+//                        if area_id.count > 0 && area_name.count > 0 {
+//                            areas.append(["id":area_id,"name":area_name])
+//                        }
+//                    }
+//                    //print(areas)
+//                    let area_s: [String: Any] = ["id": String(city_id), "name": city_name, "rows": areas]
+//                    let city_s: [String: [String: Any]] = [String(city_id): area_s]
+//                    
+//                    var allAreas: [String: [String: Any]] = self.session.getAllAreas()
+//                    if allAreas.count > 0 {
+//                        allAreas[String(city_id)] = area_s
+//                        self.session.set(allAreas, forKey: "areas")
+//                    } else {
+//                        self.session.set(city_s, forKey: "areas")
+//                    }
+//                    completion1(areas)
+//                    
+//                    Global.instance.removeSpinner(superView: self.view)
+//                }
+//            }
+//        }
+//        return rows
+//    }
     
-    func getAreasFromCitys(_ city_ids: [Int], completion1: @escaping (_ rows: [String: [String: Any]]) -> Void) -> [String: [String: Any]] {
-        
-        //session.removeObject(forKey: "areas")
-        let rows = session.getAreasByCitys(city_ids)
-        let citys1: String = Global.instance.intsToStringComma(city_ids)
-        //print(rows)
-        if rows.count < city_ids.count {
-            //let city_ids: [Int] = [city_id]
-            Global.instance.addSpinner(superView: view)
-            DataService.instance1.getAreaByCityIDs(city_ids: citys1,city_type: "") { (success) in
-                if success {
-                    
-                    var res: [String: [String: Any]] = [String: [String: Any]]()
-                    let city = DataService.instance1.citysandareas
-                    for (city_id, _) in city {
-                        var city_name = ""
-                        if city[city_id] != nil {
-                            city_name = city[city_id]!["name"] as! String
-                        }
-                        
-                        var areas: [[String: String]] = [[String: String]]()
-                        for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
-                            var area_id: String = ""
-                            var area_name: String = ""
-                            for (key, value) in row {
-                                if key == "id" {
-                                    area_id = String(value as! Int)
-                                }
-                                if key == "name" {
-                                    area_name = value as! String
-                                }
-                            }
-                            if area_id.count > 0 && area_name.count > 0 {
-                                areas.append(["id":area_id,"name":area_name])
-                            }
-                        }
-                        //print(areas)
-                        let area_s: [String: Any] = ["id": String(city_id), "name": city_name, "rows": areas]
-                        let city_s: [String: [String: Any]] = [String(city_id): area_s]
-                        
-                        var allAreas: [String: [String: Any]] = self.session.getAllAreas()
-                        if allAreas.count > 0 {
-                            allAreas[String(city_id)] = area_s
-                            self.session.set(allAreas, forKey: "areas")
-                        } else {
-                            self.session.set(city_s, forKey: "areas")
-                        }
-                        res[String(city_id)] = area_s
-                    }
-                    completion1(res)
-                    
-                    Global.instance.removeSpinner(superView: self.view)
-                }
-            }
-        }
-        return rows
-    }
+//    func getAreasFromCitys(_ city_ids: [Int], completion1: @escaping (_ rows: [String: [String: Any]]) -> Void) -> [String: [String: Any]] {
+//        
+//        //session.removeObject(forKey: "areas")
+//        let rows = session.getAreasByCitys(city_ids)
+//        let citys1: String = Global.instance.intsToStringComma(city_ids)
+//        //print(rows)
+//        if rows.count < city_ids.count {
+//            //let city_ids: [Int] = [city_id]
+//            Global.instance.addSpinner(superView: view)
+//            DataService.instance1.getAreaByCityIDs(city_ids: citys1,city_type: "") { (success) in
+//                if success {
+//                    
+//                    var res: [String: [String: Any]] = [String: [String: Any]]()
+//                    let city = DataService.instance1.citysandareas
+//                    for (city_id, _) in city {
+//                        var city_name = ""
+//                        if city[city_id] != nil {
+//                            city_name = city[city_id]!["name"] as! String
+//                        }
+//                        
+//                        var areas: [[String: String]] = [[String: String]]()
+//                        for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
+//                            var area_id: String = ""
+//                            var area_name: String = ""
+//                            for (key, value) in row {
+//                                if key == "id" {
+//                                    area_id = String(value as! Int)
+//                                }
+//                                if key == "name" {
+//                                    area_name = value as! String
+//                                }
+//                            }
+//                            if area_id.count > 0 && area_name.count > 0 {
+//                                areas.append(["id":area_id,"name":area_name])
+//                            }
+//                        }
+//                        //print(areas)
+//                        let area_s: [String: Any] = ["id": String(city_id), "name": city_name, "rows": areas]
+//                        let city_s: [String: [String: Any]] = [String(city_id): area_s]
+//                        
+//                        var allAreas: [String: [String: Any]] = self.session.getAllAreas()
+//                        if allAreas.count > 0 {
+//                            allAreas[String(city_id)] = area_s
+//                            self.session.set(allAreas, forKey: "areas")
+//                        } else {
+//                            self.session.set(city_s, forKey: "areas")
+//                        }
+//                        res[String(city_id)] = area_s
+//                    }
+//                    completion1(res)
+//                    
+//                    Global.instance.removeSpinner(superView: self.view)
+//                }
+//            }
+//        }
+//        return rows
+//    }
     
     func getAreaByAreaID(_ area_id: Int) -> [String: String] {
         let area = self.session.getAreaByAreaID(area_id)
@@ -965,9 +1000,84 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
     }
     
     func multiSelected(key: String, selecteds: [String]) {}
-    func singleSelected(key: String, selected: String, show: String?=nil) {}
+    
+    func singleSelected(key: String, selected: String, show: String?=nil) {
+        
+        if searchPanel.baseVC != nil {
+            searchPanel.singleSelected(key: key, selected: selected, show: show)
+        } else {
+            let row = getOneRowFromKey(key)
+            row.value = selected
+            var _show = ""
+            if key == START_TIME_KEY || key == END_TIME_KEY {
+                _show = selected.noSec()
+            }
+            //在dateSelected
+//            else if (key == START_DATE_KEY || key == END_DATE_KEY) {
+//                _show = selected
+            else if (key == CITY_KEY || key == AREA_KEY) {
+                _show = Global.instance.zoneIDToName(Int(selected)!)
+            } else if (key == ARENA_KEY) {
+                if (show != nil) {
+                    _show = show!
+                }
+            } else if (key == PRICE_UNIT_KEY) {
+                _show = PRICE_UNIT.enumFromString(string: row.value).rawValue
+            } else if (key == COURSE_KIND_KEY) {
+                _show = COURSE_KIND.enumFromString(string: row.value).rawValue
+            } else if (key == CYCLE_UNIT_KEY) {
+                _show = CYCLE_UNIT.enumFromString(string: row.value).rawValue
+            } else if (key == WEEKDAY_KEY) {
+//                row.value = String(Global.instance.weekdaysToDBValue(selected))
+//
+//                var a: [String] = [String]()
+//                let weekday_arr = selected.split(separator: ",")
+//                for weekday in weekday_arr {
+//                    let tmp: String = WEEKDAY.intToString(weekday)
+//                    a.append(tmp)
+//                }
+//                weekdays_show = show.joined(separator: ",")
+            }
+            
+            row.show = _show
+            //replaceRows(key, row)
+        }
+    }
+    
+    //WeekdaysSelectDelegate
+    func setWeekdaysData(selecteds: [Int]) {
+        if searchPanel.baseVC != nil {
+            searchPanel.setWeekdaysData(selecteds: selecteds)
+        } else {
+            let row = getOneRowFromKey(WEEKDAY_KEY)
+            var texts: [String] = [String]()
+            var value: Int = 0
+            if selecteds.count > 0 {
+                for day in selecteds {
+                    value += (pow(2, day) as NSDecimalNumber).intValue
+                    for gday in Global.instance.weekdays {
+                        if day == gday["value"] as! Int {
+                            let text = gday["simple_text"]
+                            texts.append(text! as! String)
+                            break
+                        }
+                    }
+                }
+                row.show = texts.joined(separator: ",")
+                row.value = String(value)
+            } else {
+                row.show = "全部"
+            }
+        }
+    }
+    
     func selectedManagers(selecteds: [String]) {}
-    func dateSelected(key: String, selected: String) {}
+    func dateSelected(key: String, selected: String) {
+        
+        let row = getOneRowFromKey(key)
+        row.value = selected
+        row.show = selected
+    }
     func checkboxValueChanged(checked: Bool) {}
     func sexValueChanged(sex: String) {}
     

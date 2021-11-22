@@ -204,7 +204,6 @@
                         <segue destination="3hL-Fr-nG3" kind="show" identifier="toShow" id="EIA-wN-WfT"/>
                         <segue destination="0xZ-rD-dCO" kind="show" identifier="toMap" id="2RB-tg-LFe"/>
                         <segue destination="9g8-JV-KVv" kind="show" identifier="toCity" id="cDK-8u-UPz"/>
-                        <segue destination="aEc-Jp-kj0" kind="show" identifier="toArea" id="5Nm-Wc-gVO"/>
                         <segue destination="p5f-19-izc" kind="show" identifier="toManager" id="Wr7-FG-b1z"/>
                     </connections>
                 </viewController>

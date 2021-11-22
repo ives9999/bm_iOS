@@ -38,6 +38,7 @@ class WeekdaysSelectVC: MyTableVC {
         //print(selectedDays)
         
         if selecteds.count > 0 {
+            
             for weekday in selecteds {
                 for (index, item) in weekdays.enumerated() {
                     let value: Int = item["value"] as! Int
@@ -96,7 +97,7 @@ class WeekdaysSelectVC: MyTableVC {
             cell.tintColor = UIColor(MY_GREEN)
             weekdays[indexPath.row]["checked"] = true
         }
-        let weekday = indexPath.row + 1
+        let weekday = indexPath.row
         var isExist = false
         var at = 0
         for (idx, selectWeekday) in selecteds.enumerated() {
