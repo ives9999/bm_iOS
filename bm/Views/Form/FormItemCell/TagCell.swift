@@ -25,7 +25,7 @@ class TagCell: FormItemCell {
     
     var alias: String = ""
     var sectionKey: String = ""
-    var baseViewControllerDelegate: BaseViewController? = nil
+    //var baseViewControllerDelegate: BaseViewController? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -262,9 +262,9 @@ class TagCell: FormItemCell {
             valueDelegate!.tagChecked(checked: tag.selected, name: self.formItem!.name!, key: tag.key!, value: tag.value)
         }
         
-        if (baseViewControllerDelegate != nil) {
-            baseViewControllerDelegate!.setTag(sectionKey: sectionKey, rowKey: alias, attribute: tag.key!, selected: tag.selected)
-        }
+//        if (baseViewControllerDelegate != nil) {
+//            baseViewControllerDelegate!.setTag(sectionKey: sectionKey, rowKey: alias, attribute: tag.key!, selected: tag.selected)
+//        }
         
         if (cellDelegate != nil) {
             cellDelegate!.cellSetTag(sectionIdx: sectionIdx, rowIdx: rowIdx, value: tag.value, isChecked: tag.selected)

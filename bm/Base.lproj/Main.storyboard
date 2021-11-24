@@ -1517,17 +1517,14 @@
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="704"/>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="323-Eq-Isg" customClass="SuperTextView" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="32" y="16" width="350" height="128"/>
+                                        <rect key="frame" x="16" y="32" width="382" height="385"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="128" id="vku-QM-Ms6"/>
-                                        </constraints>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="namePhonePad"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3A-7E-Fq4" customClass="ClearButton" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="184" y="160" width="46" height="30"/>
+                                        <rect key="frame" x="184" y="449" width="46" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="clear:" destination="Rnr-RQ-nbw" eventType="touchUpInside" id="qPT-i0-CN7"/>
@@ -1535,17 +1532,18 @@
                                     </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="323-Eq-Isg" firstAttribute="top" secondItem="Hou-Nq-d63" secondAttribute="top" constant="16" id="Cwh-8J-wwK"/>
+                                    <constraint firstItem="323-Eq-Isg" firstAttribute="top" secondItem="Hou-Nq-d63" secondAttribute="top" constant="32" id="Cwh-8J-wwK"/>
                                     <constraint firstItem="a3A-7E-Fq4" firstAttribute="centerX" secondItem="Hou-Nq-d63" secondAttribute="centerX" id="Hm4-pz-u5J"/>
+                                    <constraint firstAttribute="bottom" secondItem="a3A-7E-Fq4" secondAttribute="bottom" constant="200" id="M0c-Zf-KdH"/>
                                     <constraint firstAttribute="trailing" secondItem="crs-x6-ouT" secondAttribute="trailing" id="OfF-nW-J56"/>
-                                    <constraint firstAttribute="trailing" secondItem="323-Eq-Isg" secondAttribute="trailing" constant="32" id="U9P-iu-IHS"/>
-                                    <constraint firstItem="a3A-7E-Fq4" firstAttribute="top" secondItem="323-Eq-Isg" secondAttribute="bottom" constant="16" id="aNp-eB-Q54"/>
+                                    <constraint firstAttribute="trailing" secondItem="323-Eq-Isg" secondAttribute="trailing" constant="16" id="U9P-iu-IHS"/>
+                                    <constraint firstItem="a3A-7E-Fq4" firstAttribute="top" secondItem="323-Eq-Isg" secondAttribute="bottom" constant="32" id="aNp-eB-Q54"/>
                                     <constraint firstItem="crs-x6-ouT" firstAttribute="leading" secondItem="Hou-Nq-d63" secondAttribute="leading" id="g5D-Im-oCJ"/>
                                     <constraint firstItem="crs-x6-ouT" firstAttribute="height" secondItem="Hou-Nq-d63" secondAttribute="height" id="gmk-N0-nTj"/>
                                     <constraint firstAttribute="bottom" secondItem="crs-x6-ouT" secondAttribute="bottom" constant="-25" id="kTm-7D-ajF"/>
                                     <constraint firstItem="crs-x6-ouT" firstAttribute="centerY" secondItem="Hou-Nq-d63" secondAttribute="centerY" id="qkI-H0-gSN"/>
                                     <constraint firstItem="crs-x6-ouT" firstAttribute="width" secondItem="Hou-Nq-d63" secondAttribute="width" id="rcV-PH-3bJ"/>
-                                    <constraint firstItem="323-Eq-Isg" firstAttribute="leading" secondItem="Hou-Nq-d63" secondAttribute="leading" constant="32" id="x0F-dF-Ah0"/>
+                                    <constraint firstItem="323-Eq-Isg" firstAttribute="leading" secondItem="Hou-Nq-d63" secondAttribute="leading" constant="16" id="x0F-dF-Ah0"/>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUw-e0-iTA" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
@@ -1607,7 +1605,6 @@
                     <connections>
                         <outlet property="clearBtn" destination="a3A-7E-Fq4" id="kK9-bg-N9o"/>
                         <outlet property="contentTextView" destination="323-Eq-Isg" id="2A4-b7-bFS"/>
-                        <outlet property="height" destination="vku-QM-Ms6" id="OQX-80-34E"/>
                         <outlet property="scrollView" destination="Hou-Nq-d63" id="G6T-wI-6h1"/>
                         <outlet property="titleLbl" destination="bGi-gf-oQY" id="SK8-lG-XVR"/>
                         <outlet property="topView" destination="KhY-Gz-vjQ" id="mEN-Am-Nx6"/>

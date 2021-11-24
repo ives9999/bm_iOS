@@ -175,7 +175,7 @@
 		B3A253EA256CBA4D004B8A03 /* SelectCityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A253E9256CBA4C004B8A03 /* SelectCityVC.swift */; };
 		B3A253F0256CBB40004B8A03 /* Select.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3A253EF256CBB40004B8A03 /* Select.storyboard */; };
 		B3A2541825722C5C004B8A03 /* ManagersFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A2541725722C5A004B8A03 /* ManagersFormItem.swift */; };
-		B3A2542225723F5B004B8A03 /* SelectManagers.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A2542125723F5B004B8A03 /* SelectManagers.swift */; };
+		B3A2542225723F5B004B8A03 /* SelectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A2542125723F5B004B8A03 /* SelectManager.swift */; };
 		B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28320B2CB80001A846F /* ManagerVC.swift */; };
 		B3A5A28620B32152001A846F /* ManagerFunctionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */; };
 		B3A5A28820B68981001A846F /* ValidateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A5A28720B68981001A846F /* ValidateVC.swift */; };
@@ -559,7 +559,7 @@
 		B3A253E9256CBA4C004B8A03 /* SelectCityVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityVC.swift; sourceTree = "<group>"; };
 		B3A253EF256CBB40004B8A03 /* Select.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Select.storyboard; sourceTree = "<group>"; };
 		B3A2541725722C5A004B8A03 /* ManagersFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagersFormItem.swift; sourceTree = "<group>"; };
-		B3A2542125723F5B004B8A03 /* SelectManagers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManagers.swift; sourceTree = "<group>"; };
+		B3A2542125723F5B004B8A03 /* SelectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectManager.swift; sourceTree = "<group>"; };
 		B3A5A28320B2CB80001A846F /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerFunctionVC.swift; sourceTree = "<group>"; };
 		B3A5A28720B68981001A846F /* ValidateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidateVC.swift; sourceTree = "<group>"; };
@@ -1241,7 +1241,7 @@
 				B309C1E12675F45E00CCFE61 /* SelectArenaVC.swift */,
 				B326C7BB256CE0950048A2C2 /* SelectCitysVC.swift */,
 				B3A253E9256CBA4C004B8A03 /* SelectCityVC.swift */,
-				B3A2542125723F5B004B8A03 /* SelectManagers.swift */,
+				B3A2542125723F5B004B8A03 /* SelectManager.swift */,
 				B3CA52AC2675160300E9EAE9 /* SelectTimeVC.swift */,
 				B385A07B22BCB28E00BC3ADF /* SelectVC.swift */,
 				B3AE93B12640FBE700223B2A /* ShowArenaVC.swift */,
@@ -1895,7 +1895,7 @@
 				B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */,
 				B33C1AB921BD10B8006F2BEB /* StatusFormItem.swift in Sources */,
 				B3CABD8326B4561300FD0E4D /* OrderVC.swift in Sources */,
-				B3A2542225723F5B004B8A03 /* SelectManagers.swift in Sources */,
+				B3A2542225723F5B004B8A03 /* SelectManager.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 				B3F6B47A260603A70000F9E0 /* OrderTable.swift in Sources */,
 				B3B4EF5D257B614C00EE15D0 /* PrivacyFormItem.swift in Sources */,

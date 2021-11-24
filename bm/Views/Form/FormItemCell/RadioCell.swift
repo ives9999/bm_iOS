@@ -14,7 +14,7 @@ class RadioCell: FormItemCell {
     
     var sectionKey: String = ""
     var rowKey: String = ""
-    var baseViewControllerDelegate: BaseViewController? = nil
+    //var baseViewControllerDelegate: BaseViewController? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -65,9 +65,9 @@ class RadioCell: FormItemCell {
             valueDelegate?.privacyChecked(checked: sender.isChecked)
         }
         
-        if (baseViewControllerDelegate != nil) {
-            baseViewControllerDelegate!.radioDidChange(sectionKey: sectionKey, rowKey: rowKey, checked: sender.isChecked)
-        }
+//        if (baseViewControllerDelegate != nil) {
+//            baseViewControllerDelegate!.radioDidChange(sectionKey: sectionKey, rowKey: rowKey, checked: sender.isChecked)
+//        }
         
         if (cellDelegate != nil) {
             cellDelegate?.cellRadioChanged(key: sectionKey, sectionIdx: sectionIdx, rowIdx: rowIdx, isChecked: sender.isChecked)

@@ -14,7 +14,7 @@ class NumberCell: FormItemCell {
     
     var sectionKey: String = ""
     var rowKey: String = ""
-    var baseViewControllerDelegate: BaseViewController? = nil
+    //var baseViewControllerDelegate: BaseViewController? = nil
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -76,9 +76,9 @@ class NumberCell: FormItemCell {
             valueDelegate!.stepperValueChanged(number: Int(stepper.value), name: self.formItem!.name!)
         }
         
-        if (baseViewControllerDelegate != nil) {
-            baseViewControllerDelegate!.stepperValueChanged(sectionKey: sectionKey, rowKey: rowKey, number: Int(stepper.value))
-        }
+//        if (baseViewControllerDelegate != nil) {
+//            baseViewControllerDelegate!.stepperValueChanged(sectionKey: sectionKey, rowKey: rowKey, number: Int(stepper.value))
+//        }
         
         if (cellDelegate != nil) {
             cellDelegate?.cellNumberChanged(sectionIdx: sectionIdx, rowIdx: rowIdx, number: Int(stepper.value))

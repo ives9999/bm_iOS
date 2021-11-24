@@ -97,6 +97,7 @@ extension BaseViewController {
             if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-Rnr-RQ-nbw") as? ContentEditVC {
                 viewController.key = key
                 
+                viewController.title = title
                 if (content != nil) {
                     viewController.content = content
                 }
@@ -547,24 +548,26 @@ extension BaseViewController {
         }
     }
     
-    func toSelectManagers(selecteds: [String]? = nil, delegate: BaseViewController) {
+    func toSelectManager(manager_id: Int = 0, manager_token: String = "", delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Select", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_MANAGERS)  as? SelectManagersVC {
+            if let viewController = storyboard.instantiateViewController(identifier: TO_SELECT_MANAGERS)  as? SelectManagerVC {
                 
                 viewController.key = MANAGERS_KEY
-                if selecteds != nil {
-                    viewController.selecteds = selecteds!
-                }
+                //if selecteds != nil {
+                viewController.manager_id = manager_id
+                viewController.manager_token = manager_token
+                //}
                 viewController.delegate = delegate
                 show(viewController, sender: nil)
             }
         } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SELECT_MANAGERS) as! SelectManagersVC
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SELECT_MANAGERS) as! SelectManagerVC
             viewController.key = MANAGERS_KEY
-            if selecteds != nil {
-                viewController.selecteds = selecteds!
-            }
+            //if selecteds != nil {
+            viewController.manager_id = manager_id
+            viewController.manager_token = manager_token
+            //}
             viewController.delegate = delegate
             self.navigationController!.pushViewController(viewController, animated: true)
         }

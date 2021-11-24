@@ -135,7 +135,8 @@ class EditTeamVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
             oneSections.append(section)
             
             rows.removeAll()
-            row = OneRow(title: "隊長", value: String(myTable!.manager_id), show: String(myTable!.manager_id), key: MANAGER_ID_KEY, cell: "more", isRequired: false)
+            row = OneRow(title: "隊長", value: String(myTable!.manager_id), show: myTable!.manager_nickname, key: MANAGER_ID_KEY, cell: "more", isRequired: false)
+            row.token = myTable!.manager_token
             rows.append(row)
             row = OneRow(title: "line", value: myTable!.line, show: myTable!.line, key: LINE_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "david221")
             rows.append(row)

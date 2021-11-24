@@ -49,6 +49,7 @@ class OneRow {
     var amount: String = ""
     var quantity: String = ""
     var msg: String = ""
+    var token: String = ""
     
     init(
         title: String = "",

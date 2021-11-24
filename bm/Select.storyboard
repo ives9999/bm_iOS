@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -399,10 +399,10 @@
             </objects>
             <point key="canvasLocation" x="-588.40579710144937" y="26.785714285714285"/>
         </scene>
-        <!--Select ManagersVC-->
+        <!--Select ManagerVC-->
         <scene sceneID="Nlf-6X-jlg">
             <objects>
-                <viewController storyboardIdentifier="toSelectManagers" id="n2n-d3-6Bz" customClass="SelectManagersVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toSelectManagers" id="n2n-d3-6Bz" customClass="SelectManagerVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XDt-3z-QiI">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -440,74 +440,162 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="VxF-7C-PmT">
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AZB-9H-E7c">
-                                <rect key="frame" x="0.0" y="530" width="414" height="282"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xN1-CT-nO8" customClass="StaticBottomView" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者金鑰：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Eu-YI-0Tc" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="12" y="146.5" width="104" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PZw-yY-w7h" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="124" y="132" width="233" height="49.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AF-WW-lTK">
+                                <rect key="frame" x="373" y="144.5" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="Akf-Di-9vT"/>
+                                    <constraint firstAttribute="height" constant="25" id="esc-Y7-D2E"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="delete"/>
+                                <connections>
+                                    <action selector="clear:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="SZF-kM-PLL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ps-N5-sQH" customClass="CityButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="180.5" y="251.5" width="53" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="驗證"/>
+                                <connections>
+                                    <action selector="validate:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="BE0-yh-l8n"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9C-i3-rwO" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="12" y="193.5" width="163.5" height="39"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="question" imagePlacement="leading" title="如何取得會員金鑰" titleAlignment="center">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
+                                </buttonConfiguration>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="NAW-hh-oa1">
+                                <rect key="frame" x="12" y="314.5" width="402" height="95.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="dTB-qj-azA">
-                                        <rect key="frame" x="163" y="8" width="88" height="34"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="EIF-Gc-3lw" userLabel="暱稱">
+                                        <rect key="frame" x="0.0" y="0.0" width="179" height="20.5"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Sx-2L-GcA" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="34" id="bIK-kj-8kP"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
-                                                <state key="normal" title="提交">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="submit:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="k98-eX-rAn"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QzF-YU-WnT" customClass="CancelButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="57" y="0.0" width="31" height="34"/>
-                                                <state key="normal" title="取消"/>
-                                                <connections>
-                                                    <action selector="cancel:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="8fR-Om-uSV"/>
-                                                </connections>
-                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者暱稱：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S2t-Bo-Idr" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="104" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="小米哥" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OSP-UU-m4d" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="127" y="0.0" width="52" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="6OW-dy-xEM" userLabel="email">
+                                        <rect key="frame" x="0.0" y="37.5" width="259" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者email：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tT8-Bh-a6w" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="110" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="david@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NPH-kr-suC" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="124" y="0.0" width="135" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cXu-3W-dQX" userLabel="手機">
+                                        <rect key="frame" x="0.0" y="75" width="223.5" height="20.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者手機：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FsQ-mM-k33" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="104" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0920123456" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GtM-3j-e8d" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="124" y="0.0" width="99.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xyi-Eq-Osj" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="80" y="460" width="80" height="31"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="Rh6-jg-LdU"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Tpj-OJ-lWm"/>
-                                    <constraint firstItem="dTB-qj-azA" firstAttribute="centerX" secondItem="xN1-CT-nO8" secondAttribute="centerX" id="aDG-EJ-b0g"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="cDv-4u-4uV"/>
-                                    <constraint firstItem="dTB-qj-azA" firstAttribute="centerY" secondItem="xN1-CT-nO8" secondAttribute="centerY" id="gZE-Ln-1HA"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="idA-mE-BGL"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="wED-Xa-PoL"/>
+                                    <constraint firstAttribute="width" constant="80" id="Zei-yX-Asj"/>
                                 </constraints>
-                            </view>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="送出"/>
+                                <connections>
+                                    <action selector="submit:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="eBD-hZ-TVt"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnx-Ue-CBM" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="254" y="460" width="80" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="lfu-zh-XGa"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="取消"/>
+                                <connections>
+                                    <action selector="cancel:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="De2-BK-J1T"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fIo-WB-xew"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Mk1-yQ-DD7" firstAttribute="top" secondItem="fIo-WB-xew" secondAttribute="top" id="1ol-df-unT"/>
-                            <constraint firstItem="AZB-9H-E7c" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" id="44F-qU-COH"/>
-                            <constraint firstItem="xN1-CT-nO8" firstAttribute="trailing" secondItem="fIo-WB-xew" secondAttribute="trailing" id="5KJ-f7-5va"/>
+                            <constraint firstItem="cnx-Ue-CBM" firstAttribute="centerY" secondItem="Xyi-Eq-Osj" secondAttribute="centerY" id="1wF-dc-SFc"/>
+                            <constraint firstItem="fIo-WB-xew" firstAttribute="trailing" secondItem="cnx-Ue-CBM" secondAttribute="trailing" constant="80" id="3ZF-8U-gDE"/>
                             <constraint firstItem="fIo-WB-xew" firstAttribute="bottom" secondItem="VxF-7C-PmT" secondAttribute="bottom" id="64q-t7-3GT"/>
-                            <constraint firstItem="AZB-9H-E7c" firstAttribute="trailing" secondItem="fIo-WB-xew" secondAttribute="trailing" id="Hi6-Vg-fSM"/>
+                            <constraint firstItem="Xyi-Eq-Osj" firstAttribute="top" secondItem="NAW-hh-oa1" secondAttribute="bottom" constant="50" id="9fy-5G-5KR"/>
+                            <constraint firstItem="2ps-N5-sQH" firstAttribute="top" secondItem="PZw-yY-w7h" secondAttribute="bottom" constant="70" id="CqT-Y9-T2y"/>
+                            <constraint firstItem="PZw-yY-w7h" firstAttribute="leading" secondItem="7Eu-YI-0Tc" secondAttribute="trailing" constant="8" id="Esa-e0-wfS"/>
+                            <constraint firstItem="X9C-i3-rwO" firstAttribute="leading" secondItem="7Eu-YI-0Tc" secondAttribute="leading" id="GpI-3M-JZz"/>
+                            <constraint firstItem="Xyi-Eq-Osj" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" constant="80" id="HNn-VU-9K3"/>
+                            <constraint firstItem="7Eu-YI-0Tc" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" constant="12" id="Jxn-Yl-RA2"/>
                             <constraint firstItem="VxF-7C-PmT" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" id="MMW-IC-Qhj"/>
-                            <constraint firstItem="AZB-9H-E7c" firstAttribute="top" secondItem="Mk1-yQ-DD7" secondAttribute="bottom" constant="422" id="Msw-Ku-QCl"/>
-                            <constraint firstItem="fIo-WB-xew" firstAttribute="bottom" secondItem="xN1-CT-nO8" secondAttribute="bottom" id="NqM-jh-JMB"/>
-                            <constraint firstItem="xN1-CT-nO8" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" id="SbC-bl-VlO"/>
+                            <constraint firstItem="6AF-WW-lTK" firstAttribute="leading" secondItem="PZw-yY-w7h" secondAttribute="trailing" constant="16" id="QWZ-xN-hWd"/>
                             <constraint firstItem="Mk1-yQ-DD7" firstAttribute="trailing" secondItem="fIo-WB-xew" secondAttribute="trailing" id="VcC-hV-bxH"/>
+                            <constraint firstItem="2ps-N5-sQH" firstAttribute="centerX" secondItem="XDt-3z-QiI" secondAttribute="centerX" id="Ypj-II-Kbk"/>
                             <constraint firstItem="Mk1-yQ-DD7" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" id="ZvQ-el-8lB"/>
+                            <constraint firstItem="PZw-yY-w7h" firstAttribute="centerY" secondItem="7Eu-YI-0Tc" secondAttribute="centerY" id="aqY-oU-CpV"/>
+                            <constraint firstItem="PZw-yY-w7h" firstAttribute="top" secondItem="Mk1-yQ-DD7" secondAttribute="bottom" constant="24" id="bLz-wS-2kG"/>
                             <constraint firstItem="VxF-7C-PmT" firstAttribute="trailing" secondItem="fIo-WB-xew" secondAttribute="trailing" id="cKe-w8-pvU"/>
-                            <constraint firstItem="xN1-CT-nO8" firstAttribute="top" secondItem="AZB-9H-E7c" secondAttribute="bottom" id="fBg-qv-6of"/>
                             <constraint firstItem="VxF-7C-PmT" firstAttribute="top" secondItem="Mk1-yQ-DD7" secondAttribute="bottom" id="hQH-2l-DUw"/>
+                            <constraint firstItem="NAW-hh-oa1" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" constant="12" id="ivI-BD-M9Q"/>
+                            <constraint firstItem="fIo-WB-xew" firstAttribute="trailing" secondItem="NAW-hh-oa1" secondAttribute="trailing" id="kG4-S0-VN6"/>
+                            <constraint firstItem="fIo-WB-xew" firstAttribute="trailing" secondItem="6AF-WW-lTK" secondAttribute="trailing" constant="16" id="lNL-N0-EAa"/>
+                            <constraint firstItem="X9C-i3-rwO" firstAttribute="top" secondItem="PZw-yY-w7h" secondAttribute="bottom" constant="12" id="qCA-rI-SzA"/>
+                            <constraint firstItem="6AF-WW-lTK" firstAttribute="centerY" secondItem="PZw-yY-w7h" secondAttribute="centerY" id="s2T-l8-UIb"/>
+                            <constraint firstItem="NAW-hh-oa1" firstAttribute="top" secondItem="2ps-N5-sQH" secondAttribute="bottom" constant="32" id="sN8-yt-G2W"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="AZB-9H-E7c" id="1c6-mJ-wzz"/>
+                        <outlet property="clearBtn" destination="6AF-WW-lTK" id="l72-GM-sks"/>
+                        <outlet property="emailLbl" destination="NPH-kr-suC" id="0L8-0a-MYa"/>
+                        <outlet property="manager_tokenField" destination="PZw-yY-w7h" id="yXA-rV-nqL"/>
+                        <outlet property="memberStackView" destination="NAW-hh-oa1" id="ctl-79-SIX"/>
+                        <outlet property="mobileLbl" destination="GtM-3j-e8d" id="EJo-oT-8pI"/>
+                        <outlet property="nicknameLbl" destination="OSP-UU-m4d" id="GqG-A0-6td"/>
                         <outlet property="titleLbl" destination="OQS-3E-JGc" id="0GY-f0-JhY"/>
+                        <outlet property="topView" destination="Mk1-yQ-DD7" id="vo9-iq-xdF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rtM-Xu-P6F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -689,9 +777,16 @@
             <point key="canvasLocation" x="-213" y="-99"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="PZw-yY-w7h">
+            <size key="intrinsicContentSize" width="27" height="49.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="background" width="377.5" height="670"/>
+        <image name="delete" width="25" height="25"/>
         <image name="prev" width="20.5" height="20.5"/>
+        <image name="question" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

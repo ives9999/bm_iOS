@@ -408,49 +408,49 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         tableView.reloadData()
     }
     
-    override func setDegreeData(res: [DEGREE]) {
-        
-        let row = getOneRowFromKey(DEGREE_KEY)
-        var names: [String] = [String]()
-        var values: [String] = [String]()
-        if res.count > 0 {
-            for degree in res {
-                names.append(degree.rawValue)
-                values.append(DEGREE.DBValue(degree))
-            }
-            row.show = names.joined(separator: ",")
-            row.value = values.joined(separator: ",")
-        } else {
-            row.show = "全部"
-            row.value = ""
-        }
-        //replaceRows(DEGREE_KEY, row)
-        tableView.reloadData()
-    }
+//    override func setDegreeData(res: [DEGREE]) {
+//
+//        let row = getOneRowFromKey(DEGREE_KEY)
+//        var names: [String] = [String]()
+//        var values: [String] = [String]()
+//        if res.count > 0 {
+//            for degree in res {
+//                names.append(degree.rawValue)
+//                values.append(DEGREE.DBValue(degree))
+//            }
+//            row.show = names.joined(separator: ",")
+//            row.value = values.joined(separator: ",")
+//        } else {
+//            row.show = "全部"
+//            row.value = ""
+//        }
+//        //replaceRows(DEGREE_KEY, row)
+//        tableView.reloadData()
+//    }
     
-    override func setTextField(key: String, value: String) {
-        
-        let row = getOneRowFromKey(key)
-        row.value = value
-        //replaceRows(key, row)
-    }
+//    override func setTextField(key: String, value: String) {
+//
+//        let row = getOneRowFromKey(key)
+//        row.value = value
+//        //replaceRows(key, row)
+//    }
     
-    override func clear(indexPath: IndexPath) {
-        
-        let sectionIdx = indexPath.section
-        var idx: Int = 0
-        for i in 0...sectionIdx-1 {
-            idx += oneSections[i].items.count
-        }
-        let rowIdx = indexPath.row
-        idx += rowIdx
-        let row = oneSections[sectionIdx].items[idx]
-        //let key = row.key
-        //var row1 = getDefinedRow(key)
-        row.show = "全部"
-        row.value = ""
-        //replaceRows(key, row1)
-    }
+//    override func clear(indexPath: IndexPath) {
+//
+//        let sectionIdx = indexPath.section
+//        var idx: Int = 0
+//        for i in 0...sectionIdx-1 {
+//            idx += oneSections[i].items.count
+//        }
+//        let rowIdx = indexPath.row
+//        idx += rowIdx
+//        let row = oneSections[sectionIdx].items[idx]
+//        //let key = row.key
+//        //var row1 = getDefinedRow(key)
+//        row.show = "全部"
+//        row.value = ""
+//        //replaceRows(key, row1)
+//    }
     
     override func cellCity(row: Table) {
         let _row: TeamTable = row as! TeamTable

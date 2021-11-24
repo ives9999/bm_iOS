@@ -224,10 +224,10 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
 //        }
     }
     
-    override func selectedManagers(selecteds: [String]) {
-        
-        let key = MANAGERS_KEY
-    }
+//    override func selectedManagers(selecteds: [String]) {
+//
+//        let key = MANAGERS_KEY
+//    }
     
     func isImageSet(_ b: Bool) {
     }

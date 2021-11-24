@@ -107,6 +107,7 @@ class MyTableVC: BaseViewController {
     }
     
     func genericTable() {}
+    
     func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {
         Global.instance.addSpinner(superView: self.view)
         
@@ -202,6 +203,21 @@ class MyTableVC: BaseViewController {
         super.setWeekdaysData(selecteds: selecteds)
         tableView.reloadData()
     }
+    
+    override func setContent(key: String, content: String) {
+        super.setContent(key: key, content: content)
+        tableView.reloadData()
+    }
+    
+    override func selectedManager(selected: Int, show: String, token: String) {
+        super.selectedManager(selected: selected, show: show, token: token)
+        tableView.reloadData()
+    }
+    
+//    override func setDegrees(key: String, res: [DEGREE]) {
+//        super.setDegrees(key: key, res: res)
+//        tableView.reloadData()
+//    }
 //
 //    override func setDegreeData(res: [DEGREE]) {
 //

@@ -72,26 +72,26 @@ class BaseViewController: UIViewController, List2CellDelegate {
     var able_type: String = "coach"
     
     //TimeSelectDelegate
-    func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?){}
+    //func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?){}
     //ArenaSelectDelegate
-    func setArenaData(res: [ArenaTable]){}
+    //func setArenaData(res: [ArenaTable]){}
     //DegreeSelectDelegate
-    func setDegreeData(res: [DEGREE]){}
+    //func setDegreeData(res: [DEGREE]){}
     //EditCellDeldgate
-    func setTextField(key: String, value: String) {}
-    func setSwitch(indexPath: IndexPath, value: Bool) {}
-    func clear(indexPath: IndexPath) {}
+    //func setTextField(key: String, value: String) {}
+    //func setSwitch(indexPath: IndexPath, value: Bool) {}
+    //func clear(indexPath: IndexPath) {}
     //ContentEditDelegate
-    func setContent(key: String, content: String) {}
+    //func setContent(key: String, content: String) {}
     
     //for tag delegate
-    func setTag(sectionKey: String, rowKey: String, attribute: String, selected: Bool){}
+    //func setTag(sectionKey: String, rowKey: String, attribute: String, selected: Bool){}
     //for NumberCell delegate
-    func stepperValueChanged(sectionKey: String, rowKey: String, number: Int){}
+    //func stepperValueChanged(sectionKey: String, rowKey: String, number: Int){}
     //for TextFieldCell delegate
     //func textFieldDidChange(sectionIdx: Int, rowIdx: Int, str: String){}
     //for RadioCell delegate
-    func radioDidChange(sectionKey: String, rowKey: String, checked: Bool){}
+    //func radioDidChange(sectionKey: String, rowKey: String, checked: Bool){}
     
     func cellCity(row: Table) {
         let key: String = CITY_KEY
@@ -367,6 +367,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
             toSelectDate(key: key, selected: row.value)
         } else if (key == CONTENT_KEY || key == CHARGE_KEY) {
             toEditContent(key: key, title: row.title, content: row.value, _delegate: self)
+        } else if (key == MANAGER_ID_KEY) {
+            toSelectManager(manager_id: Int(row.value)!, manager_token: row.token, delegate: self)
         }
     }
     
@@ -1075,7 +1077,13 @@ class BaseViewController: UIViewController, List2CellDelegate {
         }
     }
     
-    func selectedManagers(selecteds: [String]) {}
+    func selectedManager(selected: Int, show: String, token: String) {
+        let row = getOneRowFromKey(MANAGER_ID_KEY)
+        row.value = String(selected)
+        row.show = show
+        row.token = token
+    }
+    
     func dateSelected(key: String, selected: String) {
         
         let row = getOneRowFromKey(key)
@@ -1084,6 +1092,31 @@ class BaseViewController: UIViewController, List2CellDelegate {
     }
     func checkboxValueChanged(checked: Bool) {}
     func sexValueChanged(sex: String) {}
+    
+    func setDegrees(res: [DEGREE]) {
+        let row = getOneRowFromKey(DEGREE_KEY)
+        var names: [String] = [String]()
+        var values: [String] = [String]()
+        if res.count > 0 {
+            for degree in res {
+                names.append(degree.rawValue)
+                values.append(DEGREE.DBValue(degree))
+            }
+            row.show = names.joined(separator: ",")
+            row.value = values.joined(separator: ",")
+        } else {
+            row.show = "全部"
+            row.value = ""
+        }
+        //replaceRows(DEGREE_KEY, row)
+        //tableView.reloadData()
+    }
+    
+    func setContent(key: String, content: String) {
+        let row = getOneRowFromKey(key)
+        row.value = content
+        row.show = content
+    }
     
     func alertError(title: String, msg: String) {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)

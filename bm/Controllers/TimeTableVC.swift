@@ -526,7 +526,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
 //        editTableView.reloadData()
 //    }
     
-    override func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
+    func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?) {
         let time = res[0]
         if indexPath != nil {
             let item = form.formItems[indexPath!.row] as! TimeFormItem

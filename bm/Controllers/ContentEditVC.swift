@@ -40,7 +40,7 @@ class ContentEditVC: BaseViewController {
         
         if content != nil {
             contentTextView.text = content
-            textViewHeight = contentTextView.sizeThatFits(contentTextView.bounds.size).height
+            //textViewHeight = contentTextView.sizeThatFits(contentTextView.bounds.size).height
             //height.constant = a.height
             //scrollView.contentSize.height = a.height + 500
         }
@@ -48,10 +48,10 @@ class ContentEditVC: BaseViewController {
         hideKeyboardWhenTappedAround()
     }
     
-    override func viewWillLayoutSubviews() {
-        height.constant = textViewHeight
-        scrollView.contentSize = CGSize(width: view.frame.width, height: textViewHeight + 100)
-    }
+//    override func viewWillLayoutSubviews() {
+//        height.constant = textViewHeight
+//        scrollView.contentSize = CGSize(width: view.frame.width, height: textViewHeight + 100)
+//    }
     
     @IBAction func submit(_ sender: Any) {
         if delegate != nil && key != nil {

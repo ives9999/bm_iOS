@@ -99,7 +99,7 @@ class DegreeSelectVC: MyTableVC {
         prev()
     }
     @IBAction func submit() {
-        self.delegate?.setDegreeData(res: selecteds)
+        self.delegate?.setDegrees(res: selecteds)
         prev()
     }
 }

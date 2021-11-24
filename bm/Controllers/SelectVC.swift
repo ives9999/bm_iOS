@@ -20,8 +20,8 @@ class SelectVC: MyTableVC {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.separatorStyle = .singleLine
-        tableView.separatorColor = UIColor.white
+//        tableView.separatorStyle = .singleLine
+//        tableView.separatorColor = UIColor.white
 //        if key != nil && key == CITY_KEY {
 //            getCitys()
 //        }
