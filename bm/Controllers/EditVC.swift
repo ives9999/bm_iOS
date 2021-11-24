@@ -117,7 +117,7 @@ class EditVC: MyTableVC {
         
         //print("section: \(indexPath.section), row: \(indexPath.row)")
         let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
-        cell.editCellDelegate = self
+        //cell.editCellDelegate = self
         //let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
         //print(row)
         //if indexPath.section == 0 && indexPath.row == 0 {

@@ -9,9 +9,9 @@
 import UIKit
 import UIColor_Hex_Swift
 
-protocol WeekdaysSelectDelegate: class {
-    func setWeekdaysData(selecteds: [Int])
-}
+//protocol WeekdaysSelectDelegate: class {
+//    func setWeekdaysData(selecteds: [Int])
+//}
 
 //extension WeekdaysSelectDelegate {
 //    func setWeekdaysData(res: [Int], indexPath: IndexPath?){
@@ -21,7 +21,7 @@ protocol WeekdaysSelectDelegate: class {
 
 class WeekdaysSelectVC: MyTableVC {
 
-    weak var delegate: WeekdaysSelectDelegate?
+    weak var delegate: BaseViewController?
     var key: String? = nil
     var selecteds: [Int] = [Int]()
     var weekdays: [[String: Any]] = Global.instance.weekdays

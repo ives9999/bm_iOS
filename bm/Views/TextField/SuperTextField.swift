@@ -12,6 +12,7 @@ import UIKit
 class SuperTextField: UITextField {
     var fontName: String = FONT_NAME
     var fontSize: CGFloat = FONT_SIZE_TITLE
+    //var fontSize: CGFloat = 12
     var father: UIViewController?
     let padding = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8);
 
@@ -38,7 +39,7 @@ class SuperTextField: UITextField {
         self.backgroundColor = UIColor.black
         self.textColor = UIColor.white
         self.font = UIFont(name: fontName, size: fontSize)
-        self.createToolbar()
+//        self.createToolbar()
         self.borderWidth(1)
         self.borderColor(UIColor.white)
         self.borderStyle = UITextField.BorderStyle.line

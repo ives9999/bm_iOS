@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol MultiSelectDelegate: SelectDelegate {
-    func multiSelected(key: String, selecteds: [String])
-}
+//protocol MultiSelectDelegate: SelectDelegate {
+//    func multiSelected(key: String, selecteds: [String])
+//}
 
 class MultiSelectVC: SelectVC {
     
     var selecteds: [String] = [String]()
-    var delegate: MultiSelectDelegate?
+    var delegate: BaseViewController?
     
 
     override func viewDidLoad() {
@@ -88,7 +88,7 @@ class MultiSelectVC: SelectVC {
         }
     }
     
-    override func setDelegate(_ delegate: SelectDelegate) {
-        self.delegate = (delegate as! MultiSelectDelegate)
-    }
+//    override func setDelegate(_ delegate: SelectDelegate) {
+//        self.delegate = (delegate as! MultiSelectDelegate)
+//    }
 }

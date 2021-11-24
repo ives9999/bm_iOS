@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol EditCourseDelegate {
+protocol ReloadDelegate {
     func isReload(_ yes: Bool)
 }
 
@@ -28,10 +28,10 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
     
     var myTable: CourseTable? = nil
     
-    var delegate: EditCourseDelegate?
+    var delegate: ReloadDelegate?
     
-    var section_keys: [[String]] = [[String]]()
-    var sections: [String]?
+//    var section_keys: [[String]] = [[String]]()
+//    var sections: [String]?
 
     override func viewDidLoad() {
         myTablView = tableView
@@ -207,20 +207,19 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
 //    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-//        var count: Int = 1
-//        if sections == nil {
-//            count = 1
-//        } else {
-//            count = sections!.count
-//        }
-//        return count
+        
         return oneSections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return oneSections[section].items.count
-        //return section_keys[section].count
-        //return 1
+        var count: Int = 0
+        if !oneSections[section].isExpanded {
+            count = 0
+        } else {
+            count = oneSections[section].items.count
+        }
+        
+        return count
     }
     
 //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -519,7 +518,7 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             //print(params)
             if action == "INSERT" {
                 params[CREATED_ID_KEY] = String(Member.instance.id)
-                params["cat_id"] = String(44)
+                params["cat_id"] = String(41)
             }
             if course_token != nil {
                 params["course_token"] = course_token!

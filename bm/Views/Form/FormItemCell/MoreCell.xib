@@ -24,8 +24,8 @@
                             <constraint firstAttribute="height" constant="12" id="Iqu-J3-OGV"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p01-9n-Y35" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="12" y="11.5" width="185" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p01-9n-Y35" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="12" y="11.5" width="33" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -37,8 +37,8 @@
                             <constraint firstAttribute="width" constant="18" id="ouT-ta-ZJU"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKx-Kg-Wy8" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="213" y="12" width="44" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKx-Kg-Wy8" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="85" y="12" width="172" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -55,7 +55,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sv0-vd-Ps2">
-                        <rect key="frame" x="203" y="9.5" width="25" height="25"/>
+                        <rect key="frame" x="51" y="9.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="H6g-mN-0Yz"/>
                             <constraint firstAttribute="height" constant="25" id="YnJ-y1-ZBw"/>
@@ -69,7 +69,7 @@
                 <constraints>
                     <constraint firstItem="Asi-Je-fj7" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5zY-pg-Vfn"/>
                     <constraint firstItem="Jgc-OF-HXF" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9lI-es-W7l"/>
-                    <constraint firstItem="oKx-Kg-Wy8" firstAttribute="leading" secondItem="p01-9n-Y35" secondAttribute="trailing" constant="16" id="Scy-1A-hv6"/>
+                    <constraint firstItem="oKx-Kg-Wy8" firstAttribute="leading" secondItem="p01-9n-Y35" secondAttribute="trailing" constant="40" id="Scy-1A-hv6"/>
                     <constraint firstItem="oKx-Kg-Wy8" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="T45-II-OJa"/>
                     <constraint firstItem="ICd-xR-yJI" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="X3f-Lj-6Bd"/>
                     <constraint firstAttribute="trailing" secondItem="Asi-Je-fj7" secondAttribute="trailing" constant="6" id="cSg-b8-Ejd"/>

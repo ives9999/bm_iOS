@@ -8,10 +8,10 @@
 
 import UIKit
 
-protocol DateSelectDelegate: class {
-    //func setDateData(res: String, type: SELECT_DATE_TYPE, indexPath: IndexPath?)
-    func dateSelected(key: String, selected: String)
-}
+//protocol DateSelectDelegate: class {
+//    //func setDateData(res: String, type: SELECT_DATE_TYPE, indexPath: IndexPath?)
+//    func dateSelected(key: String, selected: String)
+//}
 
 class DateSelectVC: BaseViewController {
 
@@ -19,7 +19,7 @@ class DateSelectVC: BaseViewController {
     @IBOutlet weak var datePicker: SuperDatePicker!
     @IBOutlet weak var submitBtn: SubmitButton!
     
-    var delegate: DateSelectDelegate?
+    var delegate: BaseViewController?
     
     //input["type":START,"date":date]
     //var type: SELECT_DATE_TYPE = SELECT_DATE_TYPE.start

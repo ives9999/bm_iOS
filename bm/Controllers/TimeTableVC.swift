@@ -427,7 +427,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                     weekdaysSelectVC.selecteds = realSender
                 }
             }
-            weekdaysSelectVC.delegate = self
+            //weekdaysSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_DATE {
             let dateSelectVC: DateSelectVC = segue.destination as! DateSelectVC
 //            if indexPath != nil {
@@ -440,7 +440,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                     dateSelectVC.selected = realSender["date"] as! String
                 }
             }
-            dateSelectVC.delegate = self
+            //dateSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_TIME {
             let timeSelectVC: TimeSelectVC = segue.destination as! TimeSelectVC
             timeSelectVC.select = "just one"
@@ -453,7 +453,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
                     timeSelectVC.input = realSender
                 }
             }
-            timeSelectVC.delegate = self
+            //timeSelectVC.delegate = self
         } else if segue.identifier == TO_SELECT_COLOR {
             let colorSelectVC: ColorSelectVC = segue.destination as! ColorSelectVC
             colorSelectVC.delegate = self

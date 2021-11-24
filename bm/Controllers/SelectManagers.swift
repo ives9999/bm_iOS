@@ -8,14 +8,10 @@
 
 import Foundation
 
-protocol SelectManagersDelegate: SelectDelegate {
-    func selectedManagers(selecteds: [String])
-}
-
 class SelectManagersVC: SelectVC, UITextFieldDelegate {
     
     var selecteds: [String] = [String]()
-    var delegate: SelectManagersDelegate?
+    var delegate: BaseViewController?
     
     private var dropDown: DropDownTextField!
     private var flavourOptions: [String] = [String]()
@@ -44,8 +40,8 @@ class SelectManagersVC: SelectVC, UITextFieldDelegate {
             height: 300
         )
         dropDown = DropDownTextField(frame: dropDownFrame, title: "", options: flavourOptions)
-        dropDown.delegate = self
-        dropDown.textField.delegate = self
+        //dropDown.delegate = self
+        //dropDown.textField.delegate = self
         
         view.addSubview(dropDown)
     }
@@ -86,13 +82,13 @@ class SelectManagersVC: SelectVC, UITextFieldDelegate {
     }
 }
 
-extension SelectManagersVC: DropDownTextFieldDelegate {
-    
-    func menuDidAnimate(up: Bool) {
-        print("animating up; \(up)")
-    }
-    
-    func optionSelected(option: String) {
-        print("option selected: \(option)")
-    }
-}
+//extension SelectManagersVC: DropDownTextFieldDelegate {
+//
+//    func menuDidAnimate(up: Bool) {
+//        print("animating up; \(up)")
+//    }
+//
+//    func optionSelected(option: String) {
+//        print("option selected: \(option)")
+//    }
+//}

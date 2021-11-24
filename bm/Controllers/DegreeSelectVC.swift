@@ -9,17 +9,13 @@
 import UIKit
 import UIColor_Hex_Swift
 
-protocol DegreeSelectDelegate: class {
-    func setDegreeData(res: [DEGREE])
-}
-
 class DegreeSelectVC: MyTableVC {
 
     //var degrees: [Degree] = [Degree]()
     //var degrees: [[String: Any]] = [[String: Any]]()
     //var allDegrees: [Degree] = [Degree]()
     var rows1: [DEGREE] = [DEGREE.high, DEGREE.soso, DEGREE.new]
-    var delegate: DegreeSelectDelegate?
+    var delegate: BaseViewController?
     var selecteds: [DEGREE] = [DEGREE]()
     //var degrees: [DEGREE] = [DEGREE]()
     

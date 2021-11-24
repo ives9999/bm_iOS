@@ -96,13 +96,13 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        print(filter.toJSONString())
+        //print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        print(url)
+        //print(url)
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
@@ -112,8 +112,8 @@ class DataService {
             //case .success(let value):
             case .success(_):
                 if response.data != nil {
-                    //let json = JSON(value)
-                    //print(json)
+//                    let json = JSON(value)
+//                    print(json)
                     self.jsonData = response.data
                     completion(true)
                     //s = try JSONDecoder().decode(t, from: response.data!)
@@ -207,6 +207,10 @@ class DataService {
         var body: [String: String] = ["device": "app","strip_html": "false"]
         for (key, param) in params {
             body[key] = param
+        }
+        
+        if (Member.instance.isLoggedIn) {
+            body.merge(["member_token":Member.instance.token])
         }
         
         //print(body)

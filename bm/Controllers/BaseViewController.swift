@@ -13,7 +13,7 @@ import WebKit
 import SCLAlertView
 import CryptoSwift
 
-class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDelegate, SelectManagersDelegate, DateSelectDelegate, FormItemDelegate, WeekdaysSelectDelegate, TimeSelectDelegate, DegreeSelectDelegate, EditCellDelegate, ContentEditDelegate, List2CellDelegate {
+class BaseViewController: UIViewController, List2CellDelegate {
     
     
     //var baseVC: BaseViewController
@@ -325,13 +325,15 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             //let selecteds: [Int] = valueToArray(t: Int.self, value: row.value)
             
             var selecteds: [Int] = [Int]()
-            var i: Int = 0
-            while (i < 7) {
-                let n = (pow(2, i) as NSDecimalNumber).intValue
-                if Int(row.value)! & n > 0 {
-                    selecteds.append(i)
+            if row.value.count > 0 {
+                var i: Int = 0
+                while (i < 7) {
+                    let n = (pow(2, i) as NSDecimalNumber).intValue
+                    if Int(row.value)! & n > 0 {
+                        selecteds.append(i)
+                    }
+                    i += 1
                 }
-                i += 1
             }
             
             
@@ -363,6 +365,8 @@ class BaseViewController: UIViewController, MultiSelectDelegate, SingleSelectDel
             toSelectSingle(key: key, selected: row.value, delegate: self, able_type: able_type)
         } else if (key == START_DATE_KEY || key == END_DATE_KEY) {
             toSelectDate(key: key, selected: row.value)
+        } else if (key == CONTENT_KEY || key == CHARGE_KEY) {
+            toEditContent(key: key, title: row.title, content: row.value, _delegate: self)
         }
     }
     

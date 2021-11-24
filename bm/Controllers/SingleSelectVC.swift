@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol SingleSelectDelegate: SelectDelegate {
-    func singleSelected(key: String, selected: String, show: String?)
-}
+//protocol SingleSelectDelegate: SelectDelegate {
+//    func singleSelected(key: String, selected: String, show: String?)
+//}
 
 class SingleSelectVC: SelectVC {
     
     var selected: String? = nil
-    var delegate: SingleSelectDelegate?
+    var delegate: BaseViewController?
     
     var rawRows: [String] = [String]()
 
@@ -145,9 +145,9 @@ class SingleSelectVC: SelectVC {
 //        }
     }
     
-    override func setDelegate(_ delegate: SelectDelegate) {
-        self.delegate = (delegate as! SingleSelectDelegate)
-    }
+//    override func setDelegate(_ delegate: SelectDelegate) {
+//        self.delegate = (delegate as! SingleSelectDelegate)
+//    }
     
     func setSelectedStyle(_ cell: SingleSelectCell) {
         cell.accessoryType = .checkmark

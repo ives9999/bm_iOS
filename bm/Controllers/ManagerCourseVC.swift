@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class ManagerCourseVC: MyTableVC, EditCourseDelegate {
+class ManagerCourseVC: MyTableVC {
     
     @IBOutlet weak var titleLbl: UILabel!
     

@@ -572,7 +572,7 @@
         <!--Edit TeamVC-->
         <scene sceneID="53M-0H-Phk">
             <objects>
-                <viewController storyboardIdentifier="editTeam" id="kAb-mq-SLF" customClass="EditTeamVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="editTeam" id="kAb-mq-SLF" customClass="EditTeamVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="k1c-3X-rmD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

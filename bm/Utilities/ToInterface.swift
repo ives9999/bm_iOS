@@ -141,12 +141,12 @@ extension BaseViewController {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Team", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "editTeam") as? EditTeamVC {
-                viewController.course_token = token
+                viewController.team_token = token
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "editTeam") as! EditTeamVC
-            viewController.course_token = token
+            viewController.team_token = token
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

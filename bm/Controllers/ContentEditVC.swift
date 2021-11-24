@@ -8,9 +8,9 @@
 
 import UIKit
 
-protocol ContentEditDelegate: class {
-    func setContent(key: String, content: String)
-}
+//protocol ContentEditDelegate: class {
+//    func setContent(key: String, content: String)
+//}
 
 class ContentEditVC: BaseViewController {
     
@@ -22,7 +22,7 @@ class ContentEditVC: BaseViewController {
     
     var key: String? = nil
     var content: String? = nil
-    var delegate: ContentEditDelegate? = nil
+    var delegate: BaseViewController? = nil
     var type: TEXT_INPUT_TYPE = TEXT_INPUT_TYPE.content
     var textViewHeight: CGFloat = 0
 

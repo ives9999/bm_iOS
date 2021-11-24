@@ -27,6 +27,7 @@ class TeamsTable: Tables {
 class TeamTable: Table {
     
     var leader: String = ""
+    var line: String = ""
     var email: String = ""
     var website: String = ""
     var fb: String = ""
@@ -56,9 +57,12 @@ class TeamTable: Table {
     var degree_show: String = ""
     var temp_quantity_show: String = ""
     var temp_signup_count_show: String = ""
+    var temp_fee_M_show: String = "男"
+    var temp_fee_F_show: String = "女"
     
     enum CodingKeys: String, CodingKey {
         case leader
+        case line
         case mobile
         case email
         case website
@@ -87,6 +91,7 @@ class TeamTable: Table {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         do {leader = try container.decode(String.self, forKey: .leader)}catch{leader = ""}
+        do {line = try container.decode(String.self, forKey: .line)}catch{line = ""}
         do {mobile = try container.decode(String.self, forKey: .mobile)}catch{mobile = ""}
         do {email = try container.decode(String.self, forKey: .email)}catch{email = ""}
         do {website = try container.decode(String.self, forKey: .website)}catch{website = ""}

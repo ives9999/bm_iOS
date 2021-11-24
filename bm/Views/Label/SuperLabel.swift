@@ -27,6 +27,7 @@ class SuperLabel: UILabel {
         
         self.textColor = UIColor.white
         self.backgroundColor = UIColor.clear
+        //self.backgroundColor = UIColor.gray
         self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
         self.textAlignment = NSTextAlignment.left
         
