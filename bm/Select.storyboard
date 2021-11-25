@@ -588,12 +588,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelBtn" destination="cnx-Ue-CBM" id="bAq-Md-uz1"/>
                         <outlet property="clearBtn" destination="6AF-WW-lTK" id="l72-GM-sks"/>
                         <outlet property="emailLbl" destination="NPH-kr-suC" id="0L8-0a-MYa"/>
                         <outlet property="manager_tokenField" destination="PZw-yY-w7h" id="yXA-rV-nqL"/>
                         <outlet property="memberStackView" destination="NAW-hh-oa1" id="ctl-79-SIX"/>
                         <outlet property="mobileLbl" destination="GtM-3j-e8d" id="EJo-oT-8pI"/>
                         <outlet property="nicknameLbl" destination="OSP-UU-m4d" id="GqG-A0-6td"/>
+                        <outlet property="submitBtn" destination="Xyi-Eq-Osj" id="7wh-aS-bUY"/>
                         <outlet property="titleLbl" destination="OQS-3E-JGc" id="0GY-f0-JhY"/>
                         <outlet property="topView" destination="Mk1-yQ-DD7" id="vo9-iq-xdF"/>
                     </connections>

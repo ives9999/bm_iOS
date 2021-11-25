@@ -33,7 +33,7 @@ class TeamTable: Table {
     var fb: String = ""
     var youtube: String = ""
     var arena_id: Int = -1
-    var arena_name: String = ""
+    //var arena_name: String = ""
     var play_start: String = ""
     var play_end: String = ""
     var ball: String = ""
@@ -71,7 +71,7 @@ class TeamTable: Table {
         case fb
         case youtube
         case arena_id
-        case arena_name
+        //case arena_name
         case play_start
         case play_end
         case ball
@@ -101,7 +101,7 @@ class TeamTable: Table {
         do {website = try container.decode(String.self, forKey: .website)}catch{website = ""}
         do {fb = try container.decode(String.self, forKey: .fb)}catch{fb = ""}
         do {arena_id = try container.decode(Int.self, forKey: .arena_id)}catch{arena_id = -1}
-        do {arena_name = try container.decode(String.self, forKey: .arena_name)}catch{arena_name = ""}
+        //do {arena_name = try container.decode(String.self, forKey: .arena_name)}catch{arena_name = ""}
         do {play_start = try container.decode(String.self, forKey: .play_start)}catch{play_start = ""}
         do {play_end = try container.decode(String.self, forKey: .play_end)}catch{play_end = ""}
         do {ball = try container.decode(String.self, forKey: .ball)}catch{ball = ""}

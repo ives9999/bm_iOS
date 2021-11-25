@@ -16,6 +16,8 @@ class SelectManagerVC: SelectVC, UITextFieldDelegate {
     @IBOutlet var emailLbl: SuperLabel!
     @IBOutlet var mobileLbl: SuperLabel!
     @IBOutlet var memberStackView: UIStackView!
+    @IBOutlet var submitBtn: SubmitButton!
+    @IBOutlet var cancelBtn: CancelButton!
     
     var selected: Int = 0
     var delegate: BaseViewController?
@@ -37,7 +39,10 @@ class SelectManagerVC: SelectVC, UITextFieldDelegate {
         
         manager_tokenField.text = manager_token
         clearBtn.setTitle("", for: .normal)
-        //memberStackView.isHidden = true
+        
+        memberStackView.isHidden = true
+        submitBtn.isHidden = true
+        cancelBtn.isHidden = true
         
         //self.view.layoutMargins = UIEdgeInsets(top: self.view.layoutMargins.top, left: 12.0, bottom: self.view.layoutMargins.bottom, right: 12.0)
         //view.backgroundColor = UIColor.white
@@ -61,12 +66,16 @@ class SelectManagerVC: SelectVC, UITextFieldDelegate {
                     if successTable.success {
                         self.managerTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
                         if self.managerTable != nil {
+                            
                             self.manager_id = self.managerTable!.id
                             self.manager_token = self.managerTable!.token
                             self.nicknameLbl.text = self.managerTable!.nickname
                             self.emailLbl.text = self.managerTable!.email
                             self.mobileLbl.text = self.managerTable!.mobile
+                            
                             self.memberStackView.isHidden = false
+                            self.submitBtn.isHidden = false
+                            self.cancelBtn.isHidden = false
                         }
                     } else {
                         self.warning("管理員金鑰錯誤，系統無此會員!!")
@@ -127,7 +136,7 @@ class SelectManagerVC: SelectVC, UITextFieldDelegate {
 //    }
     
     @IBAction func validate(_ sender: Any) {
-        memberStackView.isHidden = true
+        //memberStackView.isHidden = true
         let manager_token: String = manager_tokenField.text!
         getMemberOne(token: manager_token)
     }

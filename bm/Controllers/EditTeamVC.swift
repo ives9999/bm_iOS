@@ -101,7 +101,7 @@ class EditTeamVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
             row = OneRow(title: "縣市", value: String(myTable!.city_id), show: myTable!.city_show, key: CITY_KEY, cell: "more", keyboard: KEYBOARD.default, placeholder: "", isRequired: true)
             row.msg = "沒有選擇縣市"
             rows.append(row)
-            row = OneRow(title: "球館", value: String(myTable!.arena_id), show: myTable!.arena_name, key: ARENA_KEY, cell: "more", keyboard: KEYBOARD.default, placeholder: "", isRequired: true)
+            row = OneRow(title: "球館", value: String(myTable!.arena_id), show: myTable!.arena!.name, key: ARENA_KEY, cell: "more", keyboard: KEYBOARD.default, placeholder: "", isRequired: true)
             rows.append(row)
             
             var section: OneSection = makeSectionRow(title: "基本資料", key: "general", rows: rows)

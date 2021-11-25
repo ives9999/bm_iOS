@@ -78,6 +78,9 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         let passwordCellNib = UINib(nibName: "PasswordCell", bundle: nil)
         tableView.register(passwordCellNib, forCellReuseIdentifier: "passwordCell")
         
+        let plainCellNib = UINib(nibName: "PlainCell", bundle: nil)
+        tableView.register(plainCellNib, forCellReuseIdentifier: "plainCell")
+        
         initData()
     }
     
@@ -114,6 +117,8 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
         row = OneRow(title: "性別", value: Member.instance.sex, show: Member.instance.sex, key: SEX_KEY, cell: "sex")
         row.msg = "沒有選擇性別"
+        rows.append(row)
+        row = OneRow(title: "金鑰", value: Member.instance.token, show: Member.instance.token, key: TOKEN_KEY, cell: "text", isRequired: false)
         rows.append(row)
         section = makeSectionRow(title: "個人資料", key: "data", rows: rows)
         oneSections.append(section)
@@ -290,6 +295,13 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
             cell.cellDelegate = self
             cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
             return cell
+        } else if (row.cell == "text") {
+            
+            if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "plainCell", for: indexPath) as? PlainCell {
+                
+                cell.update(title: row.title, show: row.show)
+                return cell
+            }
         }
 //        if let cellType = item!.uiProperties.cellType {
 //            cell = cellType.dequeueCell(for: tableView, at: indexPath)
