@@ -104,20 +104,4 @@ class CartListCell: List2Cell {
             iconViewConstraint.constant = 0
         }
     }
-    
-    @IBAction func editBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { (row) in
-            if cellDelegate != nil {
-                cellDelegate!.cellEdit(row: row)
-            }
-        }
-    }
-    
-    @IBAction func deleteBtnPressed(sender: UIButton) {
-        self._pressed(sender: sender) { (row) in
-            if cellDelegate != nil {
-                cellDelegate!.cellDelete(row: row)
-            }
-        }
-    }
 }

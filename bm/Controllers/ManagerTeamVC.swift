@@ -9,13 +9,7 @@
 import Foundation
 import SCLAlertView
 
-class ManagerTeamVC: MyTableVC {
-    
-    @IBOutlet weak var titleLbl: UILabel!
-    
-    var name: String? = nil
-    var token: String? = nil
-    var manager_token: String? = nil
+class ManagerTeamVC: ManagerVC {
     
     var mysTable: TeamsTable?
     
@@ -31,13 +25,6 @@ class ManagerTeamVC: MyTableVC {
         
         let cellNib = UINib(nibName: "ManagerTeamCell", bundle: nil)
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
-        
-        if (manager_token != nil) {
-            params["manager_token"] = manager_token!
-        }
-        
-        //必須指定status，預設是只會出現上線的
-        params["status"] = "all"
         
         refresh()
     }
@@ -96,18 +83,15 @@ class ManagerTeamVC: MyTableVC {
 //        }
 //    }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return lists1.count
-    }
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ManagerTeamCell
         //cell.blacklistCellDelegate = self
         
         let row = lists1[indexPath.row] as? TeamTable
         if (row != nil) {
             row!.filterRow()
+            cell.cellDelegate = self
             cell.forRow(row: row!)
         }
         
@@ -116,69 +100,64 @@ class ManagerTeamVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if mysTable != nil {
-            let myTable = mysTable!.rows[indexPath.row]
-            
-            let title = myTable.title
-            
-            let alert = UIAlertController(title: title, message: "選擇動作", preferredStyle: .alert)
-            let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
-                self.toShowTeam(token: myTable.token)
-                //let sender: [String: String] = ["title": title, "token": myTable.token]
-                //self.performSegue(withIdentifier: TO_SHOW_COURSE, sender: sender)
-            }
-            let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
-                self.toEditTeam(token: myTable.token)
-//                let sender: [String: String] = ["title": title, "token": myTable.token]
-//                self.performSegue(withIdentifier: TO_EDIT_COURSE, sender: sender)
-            }
-            let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
-                
-                let appearance = SCLAlertView.SCLAppearance(
-                    showCloseButton: false
-                )
-                let alert = SCLAlertView(appearance: appearance)
-                alert.addButton("確定", action: {
-                    self._delete(token: self.token!)
-                    self.prevBtnPressed("")
-                })
-                alert.addButton("取消", action: {
-                })
-                alert.showWarning("警告", subTitle: "是否確定要刪除")
-            }
-            let action4 = UIAlertAction(title: "取消", style: .default) { (action) in
-            }
-            alert.addAction(action1)
-            alert.addAction(action2)
-            alert.addAction(action3)
-            alert.addAction(action4)
-            present(alert, animated: true, completion: nil)
+        let row = lists1[indexPath.row] as? TeamTable
+        if row != nil {
+            toShowTeam(token: row!.token)
         }
+        
+//        if mysTable != nil {
+//            let myTable = mysTable!.rows[indexPath.row]
+//
+//            let title = myTable.title
+//
+//            let alert = UIAlertController(title: title, message: "選擇動作", preferredStyle: .alert)
+//            let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
+//                self.toShowTeam(token: myTable.token)
+//                //let sender: [String: String] = ["title": title, "token": myTable.token]
+//                //self.performSegue(withIdentifier: TO_SHOW_COURSE, sender: sender)
+//            }
+//            let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
+//                self.toEditTeam(token: myTable.token)
+//            }
+//            let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
+//
+//                let appearance = SCLAlertView.SCLAppearance(
+//                    showCloseButton: false
+//                )
+//                let alert = SCLAlertView(appearance: appearance)
+//                alert.addButton("確定", action: {
+//                    self._delete(token: self.token!)
+//                    self.prevBtnPressed("")
+//                })
+//                alert.addButton("取消", action: {
+//                })
+//                alert.showWarning("警告", subTitle: "是否確定要刪除")
+//            }
+//            let action4 = UIAlertAction(title: "取消", style: .default) { (action) in
+//            }
+//            alert.addAction(action1)
+//            alert.addAction(action2)
+//            alert.addAction(action3)
+//            alert.addAction(action4)
+//            present(alert, animated: true, completion: nil)
+//        }
     }
     
-    private func _delete(token: String) {
-        Global.instance.addSpinner(superView: self.view)
-        dataService.delete(token: token, type: able_type) { (success) in
-            if success {
-                Global.instance.removeSpinner(superView: self.view)
-                if (!self.dataService.success) {
-                    self.warning("無法刪除，請稍後再試")
-                }
-                NotificationCenter.default.post(name: NOTIF_TEAM_UPDATE, object: nil)
-                self.refresh()
-            } else {
-                self.warning("無法刪除，請稍後再試")
-            }
-        }
+    override func cellEdit(row: Table) {
+        toEditTeam(token: row.token, _delegate: self)
     }
     
-    @IBAction func addCourseBtnPressed(_ sender: Any) {
-        if !Member.instance.isLoggedIn {
-            warning("請先登入為會員")
-        } else {
-            performSegue(withIdentifier: TO_EDIT_COURSE, sender: nil)
-        }
+    override func addPressed() {
+        toEditTeam(token: "", _delegate: self)
     }
+    
+//    @IBAction func addCourseBtnPressed(_ sender: Any) {
+//        if !Member.instance.isLoggedIn {
+//            warning("請先登入為會員")
+//        } else {
+//            performSegue(withIdentifier: TO_EDIT_COURSE, sender: nil)
+//        }
+//    }
     
     func isReload(_ yes: Bool) {
         self.isReload = yes

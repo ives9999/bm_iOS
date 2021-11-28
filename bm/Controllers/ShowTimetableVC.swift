@@ -126,16 +126,16 @@ class ShowTimetableVC: BaseViewController, UITableViewDelegate, UITableViewDataS
         let w = view.frame.width
         let h = view.frame.height
         let mainBound = CGRect(x: 0, y: h-height, width: w, height: height)
-        staticButtomView = StaticBottomView.init(frame: mainBound)
-        superView.addSubview(staticButtomView!)
+        //staticButtomView = StaticBottomView.init(frame: mainBound)
+        //superView.addSubview(staticButtomView!)
     }
     
     override func viewDidLayoutSubviews() {
         addStatic(height: 50, superView: view)
         signupBtn!.translatesAutoresizingMaskIntoConstraints = false
-        staticButtomView!.addSubview(signupBtn!)
-        signupBtn!.centerXAnchor.constraint(equalTo: staticButtomView!.centerXAnchor).isActive = true
-        signupBtn!.centerYAnchor.constraint(equalTo: staticButtomView!.centerYAnchor).isActive = true
+        //staticButtomView!.addSubview(signupBtn!)
+        //signupBtn!.centerXAnchor.constraint(equalTo: staticButtomView!.centerXAnchor).isActive = true
+        //signupBtn!.centerYAnchor.constraint(equalTo: staticButtomView!.centerYAnchor).isActive = true
     }
     
     override func viewWillLayoutSubviews() {

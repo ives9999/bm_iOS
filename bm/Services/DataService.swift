@@ -213,13 +213,13 @@ class DataService {
             body.merge(["member_token":Member.instance.token])
         }
         
-        print(body)
+        //print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        print(url)
+        //print(url)
         if url != nil {
             AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
                 
@@ -382,8 +382,8 @@ class DataService {
         var params: [String: String] = ["channel":CHANNEL,"device":"app"]
         params.merge(_params)
 
-//        print(url)
-//        print(params)
+        //print(url)
+        //print(params)
         msg = ""
         AF.upload(
             multipartFormData: { (multipartFormData) in
@@ -577,26 +577,38 @@ class DataService {
 //    }
     
     func delete(token: String, type: String, completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["device": "app", "channel": "bm", "token": token, "type": "cart_item"]
-        let url: String = String(format: URL_DELETE, "cart")
+        
+        let body: [String: String] = ["device": "app", "channel": "bm", "token": token, "type": type]
+        
+        let source: String? = getSource()
+        var url: String?
+        if source != nil {
+            url = String(format: URL_DELETE, source!)
+        }
+        //let url: String = String(format: URL_DELETE, "cart")
         //print(url)
         //print(body)
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
-            
-            switch response.result {
-            case .success(_):
-                if response.data != nil {
-                    self.jsonData = response.data
-                    completion(true)
-                } else {
-                    self.msg = "網路錯誤，請稍後再試"
+        if url == nil {
+            msg = "沒有網址錯誤，請洽管理員"
+            completion(false)
+        } else {
+            AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+                
+                switch response.result {
+                case .success(_):
+                    if response.data != nil {
+                        self.jsonData = response.data
+                        completion(true)
+                    } else {
+                        self.msg = "網路錯誤，請稍後再試"
+                        completion(false)
+                    }
+                case .failure(let error):
+                    self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
                     completion(false)
+                    print(error)
+                    return
                 }
-            case .failure(let error):
-                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-                completion(false)
-                print(error)
-                return
             }
         }
     }

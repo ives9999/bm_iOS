@@ -25,8 +25,10 @@ class BaseViewController: UIViewController, List2CellDelegate {
     @IBOutlet weak var topView: UIView!
     //@IBOutlet weak var searchBtn: UIButton!
     
+    //出現在topView的按鈕
     let shoppingCartBtn: UIButton = UIButton()
     let searchBtn: UIButton = UIButton()
+    let addBtn: UIButton = UIButton()
     
     var cartItemCount: Int = 0
     
@@ -53,7 +55,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     var layerDeleteBtn: ClearButton = ClearButton()
     var layerBtnCount: Int = 2
     
-    var staticButtomView: StaticBottomView?
+    //var staticButtomView: StaticBottomView?
     
     //loading
     var isLoading: Bool = false
@@ -221,6 +223,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
         //setStatusBar(color: UIColor(STATUS_GREEN))
         workAreaHeight = view.bounds.height - titleBarHeight
         searchBtn.visibility = .invisible
+        addBtn.visibility = .invisible
         
         //panelCancelBtn.setTitle("取消")
         //layerDeleteBtn.setTitle("刪除")
@@ -259,6 +262,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
         if (topView != nil) {
             addSearchBtn()
             addShoppingCartBtn()
+            addAddBtn()
         }
     }
     
@@ -290,6 +294,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
         
         topView.addSubview(searchBtn)
         searchBtn.setImage(UIImage(named: "search1"), for: .normal)
+        
         searchBtn.translatesAutoresizingMaskIntoConstraints = false
         searchBtn.widthAnchor.constraint(equalToConstant: 36).isActive = true
         searchBtn.heightAnchor.constraint(equalToConstant: 36).isActive = true
@@ -302,6 +307,28 @@ class BaseViewController: UIViewController, List2CellDelegate {
     @objc func searchPressed() {
         searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, oneSections: oneSections)
     }
+    
+    func addAddBtn() {
+        
+        topView.addSubview(addBtn)
+        addBtn.setImage(UIImage(named: "add"), for: .normal)
+        
+        var trailing: CGFloat = -50
+        if (shoppingCartBtn.visibility == .invisible) {
+            //print(searchBtn.visibility)
+            trailing = -14
+        }
+        
+        addBtn.translatesAutoresizingMaskIntoConstraints = false
+        addBtn.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        addBtn.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        addBtn.centerYAnchor.constraint(equalTo: searchBtn.superview!.centerYAnchor).isActive = true
+        addBtn.trailingAnchor.constraint(equalTo: searchBtn.superview!.trailingAnchor, constant: trailing).isActive = true
+        
+        addBtn.addTarget(self, action: #selector(addPressed), for: .touchUpInside)
+    }
+    
+    @objc func addPressed() {}
     
     func moreClickForOne(key: String, row: OneRow, delegate: BaseViewController) {
         

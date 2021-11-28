@@ -13,6 +13,10 @@ class Team_WeekdaysTable: Table {
     var team_id: Int = -1
     var weekday: Int = -1
     
+    override init() {
+        super.init()
+    }
+    
     enum CodingKeys: String, CodingKey {
         case team_id
         case weekday

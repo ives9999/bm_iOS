@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class EditVC: MyTableVC {
+class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -17,14 +17,13 @@ class EditVC: MyTableVC {
     @IBOutlet weak var submitBtn: SubmitButton!
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
-    var token: String = ""
+    var token: String?
     var isFeaturedChange: Bool = false
-    //var model: SuperData = Team.instance
-    var action: String = "INSERT"
-    var source: String = "team"
-    var ch: String = "球隊"
+    
+    var delegate: BaseViewController?
     
     override func viewDidLoad() {
+        
         //print("token: \(token)")
  
         //let token: String = model.data[TEAM_TOKEN_KEY]!["value"] as! String
@@ -42,97 +41,88 @@ class EditVC: MyTableVC {
 //            ch = "球館"
 //        }
         
-        if token.count > 0 {
-            action = "UPDATE"
-            //model.neverFill()
-            Global.instance.addSpinner(superView: self.view)
-//            dataService.getOne(type: source, token: token, completion: { (success) in
-//                if success {
-//                    Global.instance.removeSpinner(superView: self.view)
-//                    //self.titleLbl.text = (self.model.data[NAME_KEY]!["value"] as! String)
-//                    //print(self.model.data)
-//                    self.tableView.reloadData()
-////                    if let pickedImage: UIImage = self.model.data[FEATURED_KEY]!["value"] as? UIImage {
-////                        self.featuredView.setPickedImage(image: pickedImage)
-////                    }
-//                    //self.featuredView.imageView.image = (model.data[TEAM_FEATURED_KEY]!["value"] as! UIImage)
-//                }
-//            })
-        } else {
-            //model.initData()
-        }
- 
-        
-        //print(_rows)
-        //setData(sections: model.sections, rows: _rows)
-        //sections = model.sections
-        myTablView = tableView
         super.viewDidLoad()
         
-//        submitBtn.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 6, right: 20)
-//        submitBtn.layer.cornerRadius = 12
+        titleLbl.text = title
         
-        let editCellNib = UINib(nibName: "EditCell", bundle: nil)
-        tableView.register(editCellNib, forCellReuseIdentifier: "cell")
-        
-        //imagePicker.delegate = self
-        //featuredView.gallery = imagePicker
-        //featuredView.delegate = self
-        
-        //print(model.data)
+        imagePicker.delegate = self
+        featuredView.gallery = imagePicker
+        featuredView.delegate = self
         
         hideKeyboardWhenTappedAround()
-        Global.instance.addSpinner(superView: self.view)
-        Global.instance.removeSpinner(superView: self.view)
         
+        let moreCellNib = UINib(nibName: "MoreCell", bundle: nil)
+        tableView.register(moreCellNib, forCellReuseIdentifier: "moreCell")
         
-        if (action == "UPDATE") {
-            titleLbl.text = "更新" + ch
-        } else {
-            titleLbl.text = "新增" + ch
-        }
+        let textFieldCellNib = UINib(nibName: "TextFieldCell", bundle: nil)
+        tableView.register(textFieldCellNib, forCellReuseIdentifier: "textFieldCell")
+        
+        let dateCellNib = UINib(nibName: "DateCell", bundle: nil)
+        tableView.register(dateCellNib, forCellReuseIdentifier: "dateCell")
+        
+        let contentCellNib = UINib(nibName: "ContentCell", bundle: nil)
+        tableView.register(contentCellNib, forCellReuseIdentifier: "contentCell")
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+
+        return oneSections.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count: Int = 0
-//        for (_, value) in model.data {
-//            if value["section"] != nil {
-//                let _section: Int = value["section"] as! Int
-//                if section == _section {
-//                    if value["row"] != nil {
-//                        count += 1
-//                    }
-//                }
-//            }
-//        }
-        //print("section: \(section), count: \(count)")
+        if !oneSections[section].isExpanded {
+            count = 0
+        } else {
+            count = oneSections[section].items.count
+        }
+        
         return count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //print("section: \(indexPath.section), row: \(indexPath.row)")
-        let cell: EditCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! EditCell
-        //cell.editCellDelegate = self
-        //let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
-        //print(row)
-        //if indexPath.section == 0 && indexPath.row == 0 {
-            //print(row)
-        //}
-        //cell.forRow(indexPath: indexPath, row: row, isClear: true)
+        let row = getOneRowFromIdx(indexPath.section, indexPath.row)
+        let cell_type: String = row.cell
         
-        return cell
+        if (cell_type == "textField") {
+            if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as? TextFieldCell {
+                
+                //let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as! TextFieldCell
+                cell.cellDelegate = self
+                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                
+                return cell
+            }
+        } else if (row.cell == "more") {
+            if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as? MoreCell {
+                
+                cell.cellDelegate = self
+                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+
+                return cell
+            }
+        }
+        
+        return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Global.instance.addSpinner(superView: view)
-        Global.instance.removeSpinner(superView: view)
+        
+        let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
+        
+        if (row.cell == "more") {
+            moreClickForOne(key: row.key, row: row, delegate: self)
+        }
+        
+//        Global.instance.addSpinner(superView: view)
+//        Global.instance.removeSpinner(superView: view)
         //let row: [String: Any] = _getRowByindexPath(indexPath: indexPath)
-        var key = NAME_KEY
+//        var key = NAME_KEY
 //        if row["key"] != nil {
 //            key = row["key"]! as! String
 //        }
@@ -158,6 +148,107 @@ class EditVC: MyTableVC {
 //        } else {
 //            cell.editText.becomeFirstResponder()
 //        }
+    }
+    
+    @IBAction func submit(_ sender: Any) {
+        
+        var action = "UPDATE"
+        if token != nil && token!.count == 0 {
+            action = "INSERT"
+        }
+        
+        var params:[String: String] = [String: String]()
+        
+        var msg: String = ""
+        for section in oneSections {
+            for row in section.items {
+                params[row.key] = row.value
+                if row.isRequired && row.show.count == 0 {
+                    msg += row.msg + "\n"
+                }
+            }
+        }
+        
+        if msg.count > 0 {
+            warning(msg)
+        } else {
+            //print(params)
+            if action == "INSERT" {
+                params[CREATED_ID_KEY] = String(Member.instance.id)
+                params["cat_id"] = String(21)
+            }
+            
+            if token != nil && token!.count > 0 {
+                params["token"] = token!
+            }
+            
+            //params["do"] = "update"
+            
+            //print(params)
+            let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
+            dataService.update(_params: params, image: image) { (success) in
+                if success {
+                    
+                    self.jsonData = self.dataService.jsonData
+                    do {
+                        if (self.jsonData != nil) {
+                            let table: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
+                            if table.success {
+                                self.info(msg: "修改成功", buttonTitle: "關閉") {
+                                    if self.delegate != nil {
+                                        self.delegate!.refresh()
+                                        self.prev()
+                                    }
+                                }
+                            } else {
+                                self.warning(table.msg)
+                            }
+                        } else {
+                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                        }
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    }
+                } else {
+                    self.warning("新增 / 修改失敗，伺服器無法新增成功，請稍後再試")
+                }
+            }
+        }
+    }
+    
+    @IBAction func cancel(_ sender: Any) {
+//        if delegate != nil {
+//            delegate!.isReload(false)
+//        }
+        prev()
+    }
+    
+    @IBAction override func prevBtnPressed(_ sender: Any) {
+//        if delegate != nil {
+//            delegate!.isReload(false)
+//        }
+        prev()
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var selectedImage: UIImage?
+        if let editedImage = info[.editedImage] as? UIImage {
+            selectedImage = editedImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            selectedImage = originalImage
+        }
+        featuredView.setPickedImage(image: selectedImage!)
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    // ImagePickerDelegate
+    func isImageSet(_ b: Bool) {
+        isFeaturedChange = b
+    }
+    
+    func myPresent(_ viewController: UIViewController) {
+        self.present(viewController, animated: true, completion: nil)
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

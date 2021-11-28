@@ -25,7 +25,7 @@ class MyTableVC: BaseViewController {
     var frameWidth: CGFloat!
     var frameHeight: CGFloat!
     
-    var form: BaseForm!
+    //var form: BaseForm!
     
     var page: Int = 1
     var perPage: Int = PERPAGE

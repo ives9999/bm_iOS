@@ -10,11 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="106" id="KGk-i7-Jjw" customClass="ManagerTeamCell" customModule="bm" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="366" height="106"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="175" id="KGk-i7-Jjw" customClass="ManagerTeamCell" customModule="bm" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="366" height="106"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="175"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nophoto" translatesAutoresizingMaskIntoConstraints="NO" id="iq3-Jm-Wv7">
@@ -31,29 +31,88 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="greater1" translatesAutoresizingMaskIntoConstraints="NO" id="Xdu-Ey-4VH">
-                        <rect key="frame" x="332" y="29" width="18" height="18"/>
+                        <rect key="frame" x="341" y="29" width="18" height="18"/>
                     </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9sB-IU-f00" userLabel="IconView">
+                        <rect key="frame" x="0.0" y="78" width="375" height="36"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FPP-vP-bxU" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="16" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="yU3-Sb-dUr"/>
+                                    <constraint firstAttribute="height" constant="36" id="zMc-fa-BZ4"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="edit1"/>
+                                <connections>
+                                    <action selector="editBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="548-Do-fLH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="50m-uv-MIL" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="323" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="kT6-aG-Dkw"/>
+                                    <constraint firstAttribute="width" constant="36" id="krs-qh-Ouf"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="refresh"/>
+                                <connections>
+                                    <action selector="refreshBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="1tu-Vw-ume"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="in2-Ds-0cI" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="68" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="8jD-Ze-TRZ"/>
+                                    <constraint firstAttribute="width" constant="36" id="tzf-VN-Q8L"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="delete"/>
+                                <connections>
+                                    <action selector="deleteBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lah-60-0xe"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="50m-uv-MIL" firstAttribute="centerY" secondItem="9sB-IU-f00" secondAttribute="centerY" id="Awe-E4-bwf"/>
+                            <constraint firstItem="FPP-vP-bxU" firstAttribute="centerY" secondItem="9sB-IU-f00" secondAttribute="centerY" id="Doz-ni-yEo"/>
+                            <constraint firstItem="in2-Ds-0cI" firstAttribute="leading" secondItem="9sB-IU-f00" secondAttribute="leading" constant="68" id="Ffe-Y8-iUA"/>
+                            <constraint firstItem="in2-Ds-0cI" firstAttribute="centerY" secondItem="9sB-IU-f00" secondAttribute="centerY" id="Lym-dI-Cd9"/>
+                            <constraint firstAttribute="trailing" secondItem="50m-uv-MIL" secondAttribute="trailing" constant="16" id="o0R-nU-U5p"/>
+                            <constraint firstAttribute="height" constant="36" id="rNl-lM-hSA"/>
+                            <constraint firstItem="FPP-vP-bxU" firstAttribute="leading" secondItem="9sB-IU-f00" secondAttribute="leading" constant="16" id="zqO-8G-UJe"/>
+                        </constraints>
+                    </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="Shu-sM-ttz" firstAttribute="centerY" secondItem="iq3-Jm-Wv7" secondAttribute="centerY" id="6LJ-Oo-h4B"/>
-                    <constraint firstAttribute="bottom" secondItem="iq3-Jm-Wv7" secondAttribute="bottom" constant="8" id="8D3-KN-QEr"/>
                     <constraint firstItem="iq3-Jm-Wv7" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="AS7-K6-TIX"/>
+                    <constraint firstItem="9sB-IU-f00" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="GvV-T3-vLJ"/>
+                    <constraint firstAttribute="bottom" secondItem="9sB-IU-f00" secondAttribute="bottom" constant="16" id="MJT-AT-9vz"/>
+                    <constraint firstItem="9sB-IU-f00" firstAttribute="top" secondItem="iq3-Jm-Wv7" secondAttribute="bottom" constant="10" id="PSA-QU-ipV"/>
                     <constraint firstItem="iq3-Jm-Wv7" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="VL9-BI-aRm"/>
+                    <constraint firstAttribute="trailing" secondItem="9sB-IU-f00" secondAttribute="trailing" id="kgH-vF-BQJ"/>
                     <constraint firstItem="Xdu-Ey-4VH" firstAttribute="centerY" secondItem="iq3-Jm-Wv7" secondAttribute="centerY" id="lPU-dD-u20"/>
                     <constraint firstItem="Shu-sM-ttz" firstAttribute="leading" secondItem="iq3-Jm-Wv7" secondAttribute="trailing" constant="16" id="m7p-f6-8QN"/>
                     <constraint firstAttribute="trailing" secondItem="Xdu-Ey-4VH" secondAttribute="trailing" constant="16" id="qBA-5p-EFW"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="featured" destination="iq3-Jm-Wv7" id="kY2-in-2Nc"/>
+                <outlet property="deleteIcon" destination="in2-Ds-0cI" id="tPL-ZX-AVV"/>
+                <outlet property="editIcon" destination="FPP-vP-bxU" id="Eiz-d4-Ecs"/>
+                <outlet property="listFeatured" destination="iq3-Jm-Wv7" id="JDU-x6-Mqd"/>
+                <outlet property="refreshIcon" destination="50m-uv-MIL" id="bwN-kK-UYT"/>
                 <outlet property="titleLbl" destination="Shu-sM-ttz" id="vZO-3a-xnG"/>
             </connections>
-            <point key="canvasLocation" x="168.11594202898553" y="143.30357142857142"/>
+            <point key="canvasLocation" x="174.63768115942031" y="166.40625"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="delete" width="25" height="25"/>
+        <image name="edit1" width="25" height="25"/>
         <image name="greater1" width="18" height="18"/>
         <image name="nophoto" width="900" height="514"/>
+        <image name="refresh" width="25" height="25"/>
     </resources>
 </document>

@@ -90,9 +90,9 @@ class ManagerFunctionVC: MyTableVC {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == TO_EDIT {
-            let vc: EditVC = segue.destination as! EditVC
-            vc.token = token
-            vc.source = source
+//            let vc: EditVC = segue.destination as! EditVC
+//            vc.token = token
+//            vc.source = source
         } else if segue.identifier == TO_TEAM_TEMP_PLAY {
             let vc: TeamTempPlayEditVC = segue.destination as! TeamTempPlayEditVC
             vc.token = token

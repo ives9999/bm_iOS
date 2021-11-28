@@ -44,6 +44,10 @@ class TeamService: DataService {
         return url
     }
     
+    override func getUpdateURL()-> String {
+        return String(format: URL_UPDATE, "team")
+    }
+    
     func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["source": "app", "token": token, "strip_html": "true"]
         

@@ -51,6 +51,7 @@ class TeamTable: Table {
     var color: String = ""
     var weekdays: [Team_WeekdaysTable] = [Team_WeekdaysTable]()
     var arena: ArenaTable?
+    var signupDate: SignupDateTable?
     
     var play_start_show: String = ""
     var play_end_show: String = ""
@@ -59,8 +60,14 @@ class TeamTable: Table {
     var degree_show: String = ""
     var temp_quantity_show: String = ""
     var temp_signup_count_show: String = ""
-    var temp_fee_M_show: String = "男"
-    var temp_fee_F_show: String = "女"
+    var temp_fee_M_show: String = ""
+    var temp_fee_F_show: String = ""
+    var last_signup_date: String = ""
+    
+    override init(){
+        super.init()
+        arena = ArenaTable()
+    }
     
     enum CodingKeys: String, CodingKey {
         case leader
@@ -89,6 +96,7 @@ class TeamTable: Table {
         case color
         case weekdays
         case arena
+        case signupDate = "signup_date"
     }
     
     required init(from decoder: Decoder) throws {
@@ -121,6 +129,7 @@ class TeamTable: Table {
         temp_signup_count = try container.decodeIfPresent(Int.self, forKey: .temp_signup_count) ?? 0
         weekdays = try container.decodeIfPresent([Team_WeekdaysTable].self, forKey: .weekdays) ?? [Team_WeekdaysTable]()
         arena = try container.decodeIfPresent(ArenaTable.self, forKey: .arena) ?? nil
+        signupDate = try container.decodeIfPresent(SignupDateTable.self, forKey: .signupDate) ?? nil
         //do {arena = try container.decode(ArenaTable.self, forKey: .arena)}catch{arena = nil}
     }
     
@@ -140,7 +149,7 @@ class TeamTable: Table {
             temp_quantity_show = "臨打：\(temp_quantity)位"
             temp_signup_count_show = "報名：\(temp_signup_count)位"
         } else {
-            temp_quantity_show = "臨打：未開放"
+            temp_quantity_show = ""
             temp_signup_count_show = ""
         }
         
@@ -169,6 +178,11 @@ class TeamTable: Table {
         
         if arena != nil {
             arena!.filterRow()
+        }
+        
+        if signupDate != nil {
+            signupDate?.filterRow()
+            last_signup_date = signupDate!.date
         }
     }
 }

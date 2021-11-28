@@ -9,7 +9,7 @@
 import UIKit
 import SCLAlertView
 
-class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate, ValueChangedDelegate {
+class RegisterVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate {
     
     // Outlets
     @IBOutlet weak var titleLbl: UILabel!
@@ -47,7 +47,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
     
     override func viewDidLoad() {
         myTablView = tableView
-        form = RegisterForm()
+        //form = RegisterForm()
         super.viewDidLoad()
 
         self.hideKeyboardWhenTappedAround()
@@ -158,6 +158,7 @@ class RegisterVC: MyTableVC, UITextFieldDelegate, UIImagePickerControllerDelegat
         }
         
         old_selected_city = String(Member.instance.city)
+        
         if Member.instance.avatar.count > 0 {
             featuredView.setPickedImage(url: Member.instance.avatar)
         }

@@ -11,6 +11,8 @@ import Foundation
 class SignupDateTable: Table {
     
     var success: Bool = true
+    var signupable_id: Int = 0
+    var signupable_type: String = ""
     var isSignup: Bool = false
     var cancel: Bool = false
     var date: String = ""
@@ -22,6 +24,8 @@ class SignupDateTable: Table {
     
     enum CodingKeys: String, CodingKey {
         case success
+        case signupable_id
+        case signupable_type
         case isSignup
         case cancel
         case date
@@ -37,6 +41,8 @@ class SignupDateTable: Table {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? true
+        signupable_id = try container.decodeIfPresent(Int.self, forKey: .signupable_id) ?? 0
+        signupable_type = try container.decodeIfPresent(String.self, forKey: .signupable_type) ?? ""
         isSignup = try container.decodeIfPresent(Bool.self, forKey: .isSignup) ?? false
         cancel = try container.decodeIfPresent(Bool.self, forKey: .cancel) ?? false
         date = try container.decodeIfPresent(String.self, forKey: .date) ?? ""

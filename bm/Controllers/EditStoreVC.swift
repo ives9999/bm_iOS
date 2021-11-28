@@ -30,7 +30,7 @@ class EditStoreVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContr
     
     override func viewDidLoad() {
         myTablView = tableView
-        form = StoreForm()
+        //form = StoreForm()
         super.viewDidLoad()
         
         if title == nil {

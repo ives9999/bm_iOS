@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ManagerTeamCell: SuperCell {
-    
-    @IBOutlet weak var featured: UIImageView!
-    @IBOutlet weak var titleLbl: SuperLabel!
+class ManagerTeamCell: List2Cell {
+        
+    @IBOutlet weak var editIcon: SuperButton!
+    @IBOutlet weak var deleteIcon: SuperButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,9 +19,14 @@ class ManagerTeamCell: SuperCell {
     }
 
     func forRow(row: TeamTable) {
+        
+        editIcon.row = row
+        deleteIcon.row = row
+        refreshIcon.row = row
+        
         titleLbl.text = row.name
         if row.featured_path.count > 0 {
-            featured.downloaded(from: row.featured_path)
+            listFeatured.downloaded(from: row.featured_path)
         }
     }
     

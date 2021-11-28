@@ -8,63 +8,85 @@
 
 import Foundation
 
-class EditTeamVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate {
-    
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var featuredView: ImagePickerView!
-    @IBOutlet weak var submitBtn: SubmitButton!
-    
-    var imagePicker: UIImagePickerController = UIImagePickerController()
-    
-    var isFeaturedChange: Bool = false
-    
-    //var title: String? = nil
-    var team_token: String? = nil
+class EditTeamVC: EditVC {
     
     var myTable: TeamTable? = nil
     
-    var delegate: ReloadDelegate?
-
+//    var testData: [String: String] = [
+//        TITLE_KEY: "測試與球隊",
+//        CITY_KEY: "218",
+//        ARENA_KEY: "6",
+//        WEEKDAY_KEY: "3",
+//        START_TIME_KEY: "19:00",
+//        END_TIME_KEY: "21:00",
+//        DEGREE_KEY: "high,soso",
+//        TEAM_BALL_KEY: "RSL4號",
+//        TEAM_TEMP_FEE_M_KEY: "300",
+//        TEAM_TEMP_FEE_F_KEY: "200",
+//        TEAM_LEADER_KEY: "2",
+//        LINE_KEY: "rich@gmail.com",
+//        MOBILE_KEY: "0920123456",
+//        EMAIL_KEY: "john@housetube.tw",
+//        YOUTUBE_KEY: "youtube",
+//        FB_KEY: "fb",
+//        CHARGE_KEY: "收費詳細說明",
+//        CONTENT_KEY: "這是內容說明"
+//    ]
+    
     override func viewDidLoad() {
+        
         myTablView = tableView
-        super.viewDidLoad()
-
+        dataService = TeamService.instance
         if title == nil {
             title = "課程"
         }
-        titleLbl.text = title
         
-        imagePicker.delegate = self
-        featuredView.gallery = imagePicker
-        featuredView.delegate = self
+        super.viewDidLoad()
         
-        hideKeyboardWhenTappedAround()
-        
-        let moreCellNib = UINib(nibName: "MoreCell", bundle: nil)
-        tableView.register(moreCellNib, forCellReuseIdentifier: "moreCell")
-        
-        let textFieldCellNib = UINib(nibName: "TextFieldCell", bundle: nil)
-        tableView.register(textFieldCellNib, forCellReuseIdentifier: "textFieldCell")
-        
-        let dateCellNib = UINib(nibName: "DateCell", bundle: nil)
-        tableView.register(dateCellNib, forCellReuseIdentifier: "dateCell")
-        
-        let contentCellNib = UINib(nibName: "ContentCell", bundle: nil)
-        tableView.register(contentCellNib, forCellReuseIdentifier: "contentCell")
-        
-        if team_token != nil && team_token!.count > 0 {
+        if token != nil && token!.count > 0 {
             refresh()
+        } else {
+            myTable = TeamTable()
+            myTable!.name = "測試與球隊"
+            myTable!.city_id = 218
+            myTable!.arena_id = 6
+            let arena: ArenaTable = ArenaTable()
+            arena.name = "艾婕"
+            myTable!.arena = arena
+            let weekdays1: Team_WeekdaysTable = Team_WeekdaysTable()
+            weekdays1.weekday = 2
+            let weekdays2: Team_WeekdaysTable = Team_WeekdaysTable()
+            weekdays2.weekday = 4
+            myTable!.weekdays = [weekdays1, weekdays2]
+            myTable!.play_start = "19:00:00"
+            myTable!.play_end = "21:00:00"
+            myTable!.degree = "high,soso"
+            myTable!.ball = "RSL4號"
+            myTable!.temp_fee_M = 300
+            myTable!.temp_fee_F = 200
+            myTable!.manager_id = 1
+            myTable!.manager_nickname = "xxx"
+            myTable!.line = "rich@gmail.com"
+            myTable!.mobile = "0920123456"
+            myTable!.email = "john@housetube.tw"
+            myTable!.youtube = "youtube"
+            myTable!.fb = "fb"
+            myTable!.charge = "收費詳細說明"
+            myTable!.content = "這是內容說明"
+            myTable!.filterRow()
+            
+            initData()
         }
     }
     
     override func refresh() {
         
         Global.instance.addSpinner(superView: view)
-        let params: [String: String] = ["token": team_token!]
-        TeamService.instance.getOne(params: params) { (success) in
+        let params: [String: String] = ["token": token!]
+        dataService.getOne(params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                let jsonData: Data = TeamService.instance.jsonData!
+                let jsonData: Data = self.dataService.jsonData!
                 do {
                     self.myTable = try JSONDecoder().decode(TeamTable.self, from: jsonData)
                     if (self.myTable != nil) {
@@ -93,73 +115,92 @@ class EditTeamVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
     
     func initData() {
         
-        if myTable != nil {
-            var rows: [OneRow] = [OneRow]()
-            var row: OneRow = OneRow(title: "名稱", value: myTable!.name, show: myTable!.name, key: TITLE_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "羽球密碼羽球隊")
-            row.msg = "球隊名稱沒有填寫"
-            rows.append(row)
-            row = OneRow(title: "縣市", value: String(myTable!.city_id), show: myTable!.city_show, key: CITY_KEY, cell: "more", keyboard: KEYBOARD.default, placeholder: "", isRequired: true)
-            row.msg = "沒有選擇縣市"
-            rows.append(row)
-            row = OneRow(title: "球館", value: String(myTable!.arena_id), show: myTable!.arena!.name, key: ARENA_KEY, cell: "more", keyboard: KEYBOARD.default, placeholder: "", isRequired: true)
-            rows.append(row)
-            
-            var section: OneSection = makeSectionRow(title: "基本資料", key: "general", rows: rows)
-            oneSections.append(section)
-            
-            rows.removeAll()
-            var weekdays: Int = 0
-            for weekday in myTable!.weekdays {
-                let n: Int = (pow(2, weekday.weekday) as NSDecimalNumber).intValue
-                weekdays = weekdays & n
-            }
-            row = OneRow(title: "星期幾", value: String(weekdays), show: myTable!.weekdays_show, key: WEEKDAY_KEY, cell: "more", isRequired: true)
-            row.msg = "沒有選擇星期幾"
-            rows.append(row)
-            row = OneRow(title: "開始時間", value: myTable!.play_start, show: myTable!.play_start_show, key: START_TIME_KEY, cell: "more", isRequired: true)
-            row.msg = "沒有選擇開始時間"
-            rows.append(row)
-            row = OneRow(title: "結束時間", value: myTable!.play_end, show: myTable!.play_end_show, key: END_TIME_KEY, cell: "more", isRequired: true)
-            row.msg = "沒有選擇結束時間"
-            rows.append(row)
-            row = OneRow(title: "程度", value: myTable!.degree, show: myTable!.degree_show, key: PRICE_UNIT_KEY, cell: "more", isRequired: false)
-            rows.append(row)
-            row = OneRow(title: "球種", value: myTable!.ball, show: myTable!.ball, key: TEAM_BALL_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "RSL4號球")
-            rows.append(row)
-            row = OneRow(title: "臨打費用-男", value: String(myTable!.temp_fee_M), show: myTable!.temp_fee_M_show, key: TEAM_TEMP_FEE_M_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "300")
-            rows.append(row)
-            row = OneRow(title: "臨打費用-女", value: String(myTable!.temp_fee_F), show: myTable!.temp_fee_F_show, key: TEAM_TEMP_FEE_F_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "200")
-            rows.append(row)
-            
-            section = makeSectionRow(title: "打球資料", key: "charge", rows: rows)
-            oneSections.append(section)
-            
-            rows.removeAll()
-            row = OneRow(title: "隊長", value: String(myTable!.manager_id), show: myTable!.manager_nickname, key: MANAGER_ID_KEY, cell: "more", isRequired: false)
-            row.token = myTable!.manager_token
-            rows.append(row)
-            row = OneRow(title: "line", value: myTable!.line, show: myTable!.line, key: LINE_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "david221")
-            rows.append(row)
-            row = OneRow(title: "行動電話", value: myTable!.mobile, show: myTable!.mobile, key: MOBILE_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "0939123456")
-            rows.append(row)
-            row = OneRow(title: "EMail", value: myTable!.email, show: myTable!.email, key: EMAIL_KEY, cell: "textField", keyboard: KEYBOARD.emailAddress, placeholder: "service@bm.com")
-            rows.append(row)
-            row = OneRow(title: "youtube代碼", value: myTable!.youtube, show: myTable!.youtube, key: YOUTUBE_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "請輸入youtube代碼", isRequired: false)
-            rows.append(row)
-            row = OneRow(title: "FB", value: myTable!.fb, show: myTable!.fb, key: FB_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "請輸入FB網址", isRequired: false)
-            rows.append(row)
-            
-            
-            section = makeSectionRow(title: "聯絡資料", key: "course", rows: rows)
-            oneSections.append(section)
-            
-            row = OneRow(title: "收費詳細說明", value: myTable!.charge, show: myTable!.charge, key: CHARGE_KEY, cell: "more")
-            rows.append(row)
-            row = OneRow(title: "更多詳細說明", value: myTable!.content, show: myTable!.content, key: CONTENT_KEY, cell: "more")
-            rows.append(row)
-            
-            section = makeSectionRow(title: "詳細說明", key: "content", rows: rows)
-            oneSections.append(section)
+        if myTable == nil {
+            myTable = TeamTable()
+        }
+        
+        var rows: [OneRow] = [OneRow]()
+        var row: OneRow = OneRow(title: "名稱", value: myTable!.name, show: myTable!.name, key: NAME_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "羽球密碼羽球隊", isRequired: true)
+        row.msg = "球隊名稱沒有填寫"
+        rows.append(row)
+        row = OneRow(title: "縣市", value: String(myTable!.city_id), show: myTable!.city_show, key: CITY_KEY, cell: "more", keyboard: KEYBOARD.default, placeholder: "", isRequired: true)
+        row.msg = "沒有選擇縣市"
+        rows.append(row)
+        row = OneRow(title: "球館", value: String(myTable!.arena_id), show: myTable!.arena!.name, key: "arena_id", cell: "more", keyboard: KEYBOARD.default, placeholder: "", isRequired: true)
+        row.msg = "沒有選擇球館"
+        rows.append(row)
+        
+        var section: OneSection = makeSectionRow(title: "基本資料", key: "general", rows: rows)
+        oneSections.append(section)
+        
+        rows.removeAll()
+        var weekdays: Int = 0
+        for weekday in myTable!.weekdays {
+            let n: Int = (pow(2, weekday.weekday) as NSDecimalNumber).intValue
+            weekdays = weekdays | n
+        }
+        row = OneRow(title: "星期幾", value: String(weekdays), show: myTable!.weekdays_show, key: WEEKDAY_KEY, cell: "more", isRequired: true)
+        row.msg = "沒有選擇星期幾"
+        rows.append(row)
+        row = OneRow(title: "開始時間", value: myTable!.play_start, show: myTable!.play_start_show, key: TEAM_PLAY_START_KEY, cell: "more", isRequired: true)
+        row.msg = "沒有選擇開始時間"
+        rows.append(row)
+        row = OneRow(title: "結束時間", value: myTable!.play_end, show: myTable!.play_end_show, key: TEAM_PLAY_END_KEY, cell: "more", isRequired: true)
+        row.msg = "沒有選擇結束時間"
+        rows.append(row)
+        row = OneRow(title: "程度", value: myTable!.degree, show: myTable!.degree_show, key: DEGREE_KEY, cell: "more")
+        rows.append(row)
+        row = OneRow(title: "球種", value: myTable!.ball, show: myTable!.ball, key: TEAM_BALL_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "RSL4號球")
+        rows.append(row)
+        section = makeSectionRow(title: "打球資料", key: "charge", rows: rows)
+        oneSections.append(section)
+        
+        rows.removeAll()
+        row = OneRow(title: "臨打日期", value: myTable!.last_signup_date, show: myTable!.last_signup_date, key: TEAM_TEMP_DATE_KEY, cell: "more")
+        rows.append(row)
+        row = OneRow(title: "臨打名額", value: String(myTable!.temp_quantity), show: myTable!.temp_quantity_show, key: TEAM_TEMP_QUANTITY_KEY, cell: "textField")
+        rows.append(row)
+        row = OneRow(title: "臨打狀態", value: String(myTable!.temp_quantity), show: myTable!.temp_quantity_show, key: TEAM_TEMP_STATUS_KEY, cell: "more")
+        rows.append(row)
+        row = OneRow(title: "臨打費用-男", value: String(myTable!.temp_fee_M), show: String(myTable!.temp_fee_M), key: TEAM_TEMP_FEE_M_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "300")
+        rows.append(row)
+        row = OneRow(title: "臨打費用-女", value: String(myTable!.temp_fee_F), show: String(myTable!.temp_fee_F), key: TEAM_TEMP_FEE_F_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "200")
+        rows.append(row)
+        row = OneRow(title: "臨打說明", value: myTable!.temp_content, show: myTable!.temp_content, key: TEAM_TEMP_CONTENT_KEY, cell: "more")
+        rows.append(row)
+        section = makeSectionRow(title: "臨打資料", key: "tempplay", rows: rows)
+        oneSections.append(section)
+        
+        rows.removeAll()
+        row = OneRow(title: "隊長", value: String(myTable!.manager_id), show: myTable!.manager_nickname, key: MANAGER_ID_KEY, cell: "more", isRequired: false)
+        row.token = myTable!.manager_token
+        rows.append(row)
+        row = OneRow(title: "line", value: myTable!.line, show: myTable!.line, key: LINE_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "david221")
+        rows.append(row)
+        row = OneRow(title: "行動電話", value: myTable!.mobile, show: myTable!.mobile, key: MOBILE_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "0939123456")
+        rows.append(row)
+        row = OneRow(title: "EMail", value: myTable!.email, show: myTable!.email, key: EMAIL_KEY, cell: "textField", keyboard: KEYBOARD.emailAddress, placeholder: "service@bm.com")
+        rows.append(row)
+        row = OneRow(title: "youtube代碼", value: myTable!.youtube, show: myTable!.youtube, key: YOUTUBE_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "請輸入youtube代碼", isRequired: false)
+        rows.append(row)
+        row = OneRow(title: "FB", value: myTable!.fb, show: myTable!.fb, key: FB_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "請輸入FB網址", isRequired: false)
+        rows.append(row)
+        
+        
+        section = makeSectionRow(title: "聯絡資料", key: "course", rows: rows)
+        oneSections.append(section)
+        
+        rows.removeAll()
+        row = OneRow(title: "收費詳細說明", value: myTable!.charge, show: myTable!.charge, key: CHARGE_KEY, cell: "more")
+        rows.append(row)
+        row = OneRow(title: "更多詳細說明", value: myTable!.content, show: myTable!.content, key: CONTENT_KEY, cell: "more")
+        rows.append(row)
+        
+        section = makeSectionRow(title: "詳細說明", key: "content", rows: rows)
+        oneSections.append(section)
+        
+        if myTable!.featured_path.count > 0 {
+            featuredView.setPickedImage(url: myTable!.featured_path)
         }
     }
     
@@ -201,60 +242,60 @@ class EditTeamVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
 //        }
 //    }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 40
+//    }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return oneSections.count
-    }
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return oneSections.count
+//    }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count: Int = 0
-        if !oneSections[section].isExpanded {
-            count = 0
-        } else {
-            count = oneSections[section].items.count
-        }
-        
-        return count
-    }
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        var count: Int = 0
+//        if !oneSections[section].isExpanded {
+//            count = 0
+//        } else {
+//            count = oneSections[section].items.count
+//        }
+//        
+//        return count
+//    }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let row = getOneRowFromIdx(indexPath.section, indexPath.row)
-        let cell_type: String = row.cell
-        
-        if (cell_type == "textField") {
-            if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as? TextFieldCell {
-                
-                //let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as! TextFieldCell
-                cell.cellDelegate = self
-                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                
-                return cell
-            }
-        } else if (row.cell == "more") {
-            if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as? MoreCell {
-                
-                cell.cellDelegate = self
-                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-
-                return cell
-            }
-        }
-        
-        return UITableViewCell()
-    }
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        let row = getOneRowFromIdx(indexPath.section, indexPath.row)
+//        let cell_type: String = row.cell
+//
+//        if (cell_type == "textField") {
+//            if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as? TextFieldCell {
+//
+//                //let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as! TextFieldCell
+//                cell.cellDelegate = self
+//                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+//
+//                return cell
+//            }
+//        } else if (row.cell == "more") {
+//            if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as? MoreCell {
+//
+//                cell.cellDelegate = self
+//                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+//
+//                return cell
+//            }
+//        }
+//
+//        return UITableViewCell()
+//    }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
-        
-        if (row.cell == "more") {
-            moreClickForOne(key: row.key, row: row, delegate: self)
-        }
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
+//
+//        if (row.cell == "more") {
+//            moreClickForOne(key: row.key, row: row, delegate: self)
+//        }
+//    }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //
@@ -328,105 +369,15 @@ class EditTeamVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
 //        }
 //    }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        var selectedImage: UIImage?
-        if let editedImage = info[.editedImage] as? UIImage {
-            selectedImage = editedImage
-        } else if let originalImage = info[.originalImage] as? UIImage {
-            selectedImage = originalImage
-        }
-        featuredView.setPickedImage(image: selectedImage!)
-        picker.dismiss(animated: true, completion: nil)
-    }
+//    func textFieldTextChanged(formItem: FormItem, text: String) {
+//        formItem.value = text
+//        //print(text)
+//    }
     
-    // ImagePickerDelegate
-    func isImageSet(_ b: Bool) {
-        //isFeaturedChange = b
-    }
-    func myPresent(_ viewController: UIViewController) {
-        self.present(viewController, animated: true, completion: nil)
-    }
-    
-    @IBAction func submit(_ sender: Any) {
-        
-        var action = "UPDATE"
-        if team_token != nil && team_token!.count == 0 {
-            action = "INSERT"
-        }
-        
-        var params:[String: String] = [String: String]()
-        
-        var msg: String = ""
-        for section in oneSections {
-            for row in section.items {
-                params[row.key] = row.value
-                if row.isRequired && row.value.count == 0 {
-                    msg += row.msg + "\n"
-                }
-            }
-        }
-        
-        if msg.count > 0 {
-            warning(msg)
-        } else {
-            //print(params)
-            if action == "INSERT" {
-                params[CREATED_ID_KEY] = String(Member.instance.id)
-                params["cat_id"] = String(21)
-            }
-            if team_token != nil {
-                params["team_token"] = team_token!
-            }
-            
-            //print(params)
-            let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
-            CourseService.instance.update(_params: params, image: image) { (success) in
-                if success {
-                    
-                    self.jsonData = CourseService.instance.jsonData
-                    do {
-                        if (self.jsonData != nil) {
-                            let table: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
-                            if table.success {
-                                self.info(msg: "修改成功", buttonTitle: "關閉") {
-                                    if self.delegate != nil {
-                                        self.delegate!.isReload(true)
-                                    }
-                                }
-                            } else {
-                                self.warning(table.msg)
-                            }
-                        } else {
-                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
-                        }
-                    } catch {
-                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
-                    }
-                } else {
-                    self.warning("新增 / 修改失敗，伺服器無法新增成功，請稍後再試")
-                }
-            }
-        }
-    }
-    
-    func textFieldTextChanged(formItem: FormItem, text: String) {
-        formItem.value = text
-        //print(text)
-    }
-    
-    @IBAction func cancel(_ sender: Any) {
-        if delegate != nil {
-            delegate!.isReload(false)
-        }
-        prev()
-    }
-    
-    @IBAction override func prevBtnPressed(_ sender: Any) {
-        if delegate != nil {
-            delegate!.isReload(false)
-        }
-        prev()
-    }
-
+//    @IBAction func cancel(_ sender: Any) {
+//        if delegate != nil {
+//            delegate!.isReload(false)
+//        }
+//        prev()
+//    }
 }

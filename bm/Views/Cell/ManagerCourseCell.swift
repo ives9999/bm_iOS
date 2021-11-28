@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ManagerCourseCell: SuperCell {
+class ManagerCourseCell: List2Cell {
     
-    @IBOutlet weak var featured: UIImageView!
-    @IBOutlet weak var titleLbl: SuperLabel!
+    @IBOutlet weak var editIcon: SuperButton!
+    @IBOutlet weak var deleteIcon: SuperButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,16 +19,26 @@ class ManagerCourseCell: SuperCell {
     }
 
     func forRow(row: CourseTable) {
+        
+        editIcon.row = row
+        deleteIcon.row = row
+        refreshIcon.row = row
+        
         titleLbl.text = row.title
         if row.featured_path.count > 0 {
-            featured.downloaded(from: row.featured_path)
+            listFeatured.downloaded(from: row.featured_path)
         }
     }
     
     func forStoreRow(row: StoreTable) {
+        
+        editIcon.row = row
+        deleteIcon.row = row
+        refreshIcon.row = row
+        
         titleLbl.text = row.name
         if row.featured_path.count > 0 {
-            featured.downloaded(from: row.featured_path)
+            listFeatured.downloaded(from: row.featured_path)
         }
     }
     

@@ -12,61 +12,27 @@ protocol ReloadDelegate {
     func isReload(_ yes: Bool)
 }
 
-class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate {
-    
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var featuredView: ImagePickerView!
-    @IBOutlet weak var submitBtn: SubmitButton!
-    
-    var imagePicker: UIImagePickerController = UIImagePickerController()
-    
-    var isFeaturedChange: Bool = false
+class EditCourseVC: EditVC {
     
     //var title: String? = nil
-    var course_token: String? = nil
     var coach_token: String? = nil
-    
     var myTable: CourseTable? = nil
     
-    var delegate: ReloadDelegate?
     
 //    var section_keys: [[String]] = [[String]]()
 //    var sections: [String]?
 
     override func viewDidLoad() {
+        
         myTablView = tableView
-        form = CourseForm()
-        super.viewDidLoad()
-
+        dataService = CourseService.instance
         if title == nil {
             title = "課程"
         }
-        titleLbl.text = title
         
-        imagePicker.delegate = self
-        featuredView.gallery = imagePicker
-        featuredView.delegate = self
+        super.viewDidLoad()
         
-        hideKeyboardWhenTappedAround()
-        
-        let moreCellNib = UINib(nibName: "MoreCell", bundle: nil)
-        tableView.register(moreCellNib, forCellReuseIdentifier: "moreCell")
-        
-        let textFieldCellNib = UINib(nibName: "TextFieldCell", bundle: nil)
-        tableView.register(textFieldCellNib, forCellReuseIdentifier: "textFieldCell")
-        
-        let dateCellNib = UINib(nibName: "DateCell", bundle: nil)
-        tableView.register(dateCellNib, forCellReuseIdentifier: "dateCell")
-        
-        
-//        FormItemCellType.registerCell(for: tableView)
-//
-//        sections = form.getSections()
-//        section_keys = form.getSectionKeys()
-        
-//        print(sections)
-//        print(section_keys)
-        if course_token != nil && course_token!.count > 0 {
+        if token != nil && token!.count > 0 {
             refresh()
         }
     }
@@ -112,21 +78,25 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
             rows.append(row)
             row = OneRow(title: "人數限制", value: String(myTable!.people_limit), show: String(myTable!.people_limit), key: PEOPLE_LIMIT_KEY, cell: "textField", isRequired: false)
             rows.append(row)
-            row = OneRow(title: "詳細介紹", value: myTable!.content, show: myTable!.content, key: CONTACT_KEY, cell: "textField", isRequired: false)
+            row = OneRow(title: "詳細介紹", value: myTable!.content, show: myTable!.content, key: CONTENT_KEY, cell: "more", isRequired: false)
             rows.append(row)
             section = makeSectionRow(title: "課程", key: "course", rows: rows)
             oneSections.append(section)
+            
+            if myTable!.featured_path.count > 0 {
+                featuredView.setPickedImage(url: myTable!.featured_path)
+            }
         }
     }
     
     override func refresh() {
         
         Global.instance.addSpinner(superView: view)
-        let params: [String: String] = ["token": course_token!]
-        CourseService.instance.getOne(params: params) { (success) in
+        let params: [String: String] = ["token": token!]
+        dataService.getOne(params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                let jsonData: Data = CourseService.instance.jsonData!
+                let jsonData: Data = self.dataService.jsonData!
                 do {
                     self.myTable = try JSONDecoder().decode(CourseTable.self, from: jsonData)
                     if (self.myTable != nil) {
@@ -191,9 +161,9 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
 //        }
 //    }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
-    }
+//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return 45
+//    }
     
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //
@@ -206,21 +176,6 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
 //        //return 60
 //    }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return oneSections.count
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count: Int = 0
-        if !oneSections[section].isExpanded {
-            count = 0
-        } else {
-            count = oneSections[section].items.count
-        }
-        
-        return count
-    }
     
 //    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 //
@@ -245,29 +200,9 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
 //        return headerView
 //    }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let row = getOneRowFromIdx(indexPath.section, indexPath.row)
-        let cell_type: String = row.cell
         
-        if (cell_type == "textField") {
-            if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as? TextFieldCell {
-                
-                //let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as! TextFieldCell
-                cell.cellDelegate = self
-                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                
-                return cell
-            }
-        } else if (row.cell == "more") {
-            if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath) as? MoreCell {
-                
-                cell.cellDelegate = self
-                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-
-                return cell
-            }
-        }
 //        if item != nil {
 //            if let cellType = item!.uiProperties.cellType {
 //                cell = cellType.dequeueCell(for: tableView, at: indexPath)
@@ -284,8 +219,8 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
 //            cell = UITableViewCell()
 //        }
         
-        return UITableViewCell()
-    }
+//        return UITableViewCell()
+//    }
     
 //    func getFormItemFromIdx(_ indexPath: IndexPath)-> FormItem? {
 //        let key = section_keys[indexPath.section][indexPath.row]
@@ -422,25 +357,25 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
 //        }
 //    }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        
-        var selectedImage: UIImage?
-        if let editedImage = info[.editedImage] as? UIImage {
-            selectedImage = editedImage
-        } else if let originalImage = info[.originalImage] as? UIImage {
-            selectedImage = originalImage
-        }
-        featuredView.setPickedImage(image: selectedImage!)
-        picker.dismiss(animated: true, completion: nil)
-    }
-    
-    // ImagePickerDelegate
-    func isImageSet(_ b: Bool) {
-        isFeaturedChange = b
-    }
-    func myPresent(_ viewController: UIViewController) {
-        self.present(viewController, animated: true, completion: nil)
-    }
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//
+//        var selectedImage: UIImage?
+//        if let editedImage = info[.editedImage] as? UIImage {
+//            selectedImage = editedImage
+//        } else if let originalImage = info[.originalImage] as? UIImage {
+//            selectedImage = originalImage
+//        }
+//        featuredView.setPickedImage(image: selectedImage!)
+//        picker.dismiss(animated: true, completion: nil)
+//    }
+//
+//    // ImagePickerDelegate
+//    func isImageSet(_ b: Bool) {
+//        isFeaturedChange = b
+//    }
+//    func myPresent(_ viewController: UIViewController) {
+//        self.present(viewController, animated: true, completion: nil)
+//    }
     
 //    override func singleSelected(key: String, selected: String, show: String?=nil) {
 //        let item = getFormItemFromKey(key)
@@ -492,97 +427,4 @@ class EditCourseVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationCont
 //            tableView.reloadData()
 //        }
 //    }
-    
-    @IBAction func submit(_ sender: Any) {
-        
-        var action = "UPDATE"
-        if course_token != nil && course_token!.count == 0 {
-            action = "INSERT"
-        }
-        
-        var params:[String: String] = [String: String]()
-        
-        var msg: String = ""
-        for section in oneSections {
-            for row in section.items {
-                params[row.key] = row.value
-                if row.isRequired && row.value.count == 0 {
-                    msg += row.msg + "\n"
-                }
-            }
-        }
-        
-        if msg.count > 0 {
-            warning(msg)
-        } else {
-            //print(params)
-            if action == "INSERT" {
-                params[CREATED_ID_KEY] = String(Member.instance.id)
-                params["cat_id"] = String(41)
-            }
-            if course_token != nil {
-                params["course_token"] = course_token!
-            }
-            if coach_token != nil {
-                params["coach_token"] = coach_token!
-            }
-            //print(params)
-            let image: UIImage? = isFeaturedChange ? featuredView.imageView.image : nil
-            CourseService.instance.update(_params: params, image: image) { (success) in
-                if success {
-                    
-                    self.jsonData = CourseService.instance.jsonData
-                    do {
-                        if (self.jsonData != nil) {
-                            let table: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
-                            if table.success {
-                                self.info(msg: "修改成功", buttonTitle: "關閉") {
-                                    if self.delegate != nil {
-                                        self.delegate!.isReload(true)
-                                    }
-                                }
-                            } else {
-                                self.warning(table.msg)
-                            }
-                        } else {
-                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
-                        }
-                    } catch {
-                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
-                    }
-                } else {
-                    self.warning("新增 / 修改失敗，伺服器無法新增成功，請稍後再試")
-                }
-            }
-        }
-//        for formItem in form.formItems {
-//            if formItem.value != nil {
-//                let value = formItem.value!
-//                //print(formItem.name)
-//                params[formItem.name!] = value
-//            } else {
-//                params[formItem.name!] = ""
-//            }
-//        }
-    }
-    
-    func textFieldTextChanged(formItem: FormItem, text: String) {
-        formItem.value = text
-        //print(text)
-    }
-    
-    @IBAction func cancel(_ sender: Any) {
-        if delegate != nil {
-            delegate!.isReload(false)
-        }
-        prev()
-    }
-    
-    @IBAction override func prevBtnPressed(_ sender: Any) {
-        if delegate != nil {
-            delegate!.isReload(false)
-        }
-        prev()
-    }
-
 }
