@@ -383,7 +383,7 @@ class DataService {
         params.merge(_params)
 
         //print(url)
-        //print(params)
+        print(params)
         msg = ""
         AF.upload(
             multipartFormData: { (multipartFormData) in

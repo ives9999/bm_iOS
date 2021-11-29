@@ -55,6 +55,7 @@ class Table: Codable {
     var city_show: String = ""
     var tel_show: String = ""
     var mobile_show: String = ""
+    var status_show: String = "上線"
     
     init(){}
     
@@ -111,6 +112,8 @@ class Table: Codable {
         if updated_at.count > 0 {
             updated_at_show = updated_at.noTime()
         }
+        
+        status_show = STATUS(status: status).rawValue
     }
     
     public func printRow() {

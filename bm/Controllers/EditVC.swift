@@ -43,7 +43,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         
         super.viewDidLoad()
         
-        titleLbl.text = title
+        //titleLbl.text = title
         
         imagePicker.delegate = self
         featuredView.gallery = imagePicker
@@ -62,6 +62,9 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         
         let contentCellNib = UINib(nibName: "ContentCell", bundle: nil)
         tableView.register(contentCellNib, forCellReuseIdentifier: "contentCell")
+        
+        let switchCellNib = UINib(nibName: "SwitchCell", bundle: nil)
+        tableView.register(switchCellNib, forCellReuseIdentifier: "switchCell")
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -104,6 +107,13 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                 cell.cellDelegate = self
                 cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
 
+                return cell
+            }
+        } else if (cell_type == "switch") {
+            if let cell: SwitchCell = tableView.dequeueReusableCell(withIdentifier: "switchCell", for: indexPath) as? SwitchCell {
+                
+                cell.cellDelegate = self
+                cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
                 return cell
             }
         }
@@ -150,14 +160,12 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
 //        }
     }
     
-    @IBAction func submit(_ sender: Any) {
+    func submit(_ sender: Any) {
         
         var action = "UPDATE"
         if token != nil && token!.count == 0 {
             action = "INSERT"
         }
-        
-        var params:[String: String] = [String: String]()
         
         var msg: String = ""
         for section in oneSections {
@@ -175,7 +183,6 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             //print(params)
             if action == "INSERT" {
                 params[CREATED_ID_KEY] = String(Member.instance.id)
-                params["cat_id"] = String(21)
             }
             
             if token != nil && token!.count > 0 {
@@ -207,7 +214,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                             self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                         }
                     } catch {
-                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                        self.warning("解析JSON字串時，得到空值，請洽管理員")
                     }
                 } else {
                     self.warning("新增 / 修改失敗，伺服器無法新增成功，請稍後再試")

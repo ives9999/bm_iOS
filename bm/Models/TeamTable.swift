@@ -60,6 +60,7 @@ class TeamTable: Table {
     var degree_show: String = ""
     var temp_quantity_show: String = ""
     var temp_signup_count_show: String = ""
+    var temp_status_show: String = "上線"
     var temp_fee_M_show: String = ""
     var temp_fee_F_show: String = ""
     var last_signup_date: String = ""
@@ -152,6 +153,8 @@ class TeamTable: Table {
             temp_quantity_show = ""
             temp_signup_count_show = ""
         }
+        
+        temp_status_show = STATUS(status: temp_status).rawValue
         
         if weekdays.count > 0 {
             var show: [String] = [String]()

@@ -93,7 +93,7 @@ class EditTeamVC: EditVC {
                         self.myTable!.filterRow()
                         self.initData()
                         //self.putValue()
-                        self.titleLbl.text = self.myTable!.title
+                        self.titleLbl.text = self.myTable!.name
                         self.tableView.reloadData()
                     }
                 } catch {
@@ -152,6 +152,8 @@ class EditTeamVC: EditVC {
         rows.append(row)
         row = OneRow(title: "球種", value: myTable!.ball, show: myTable!.ball, key: TEAM_BALL_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "RSL4號球")
         rows.append(row)
+        row = OneRow(title: "球隊狀態", value: myTable!.status, show: myTable!.status_show, key: STATUS_KEY, cell: "switch")
+        rows.append(row)
         section = makeSectionRow(title: "打球資料", key: "charge", rows: rows)
         oneSections.append(section)
         
@@ -160,7 +162,7 @@ class EditTeamVC: EditVC {
         rows.append(row)
         row = OneRow(title: "臨打名額", value: String(myTable!.temp_quantity), show: myTable!.temp_quantity_show, key: TEAM_TEMP_QUANTITY_KEY, cell: "textField")
         rows.append(row)
-        row = OneRow(title: "臨打狀態", value: String(myTable!.temp_quantity), show: myTable!.temp_quantity_show, key: TEAM_TEMP_STATUS_KEY, cell: "more")
+        row = OneRow(title: "臨打狀態", value: myTable!.temp_status, show: myTable!.temp_status_show, key: TEAM_TEMP_STATUS_KEY, cell: "switch")
         rows.append(row)
         row = OneRow(title: "臨打費用-男", value: String(myTable!.temp_fee_M), show: String(myTable!.temp_fee_M), key: TEAM_TEMP_FEE_M_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "300")
         rows.append(row)
@@ -202,6 +204,13 @@ class EditTeamVC: EditVC {
         if myTable!.featured_path.count > 0 {
             featuredView.setPickedImage(url: myTable!.featured_path)
         }
+    }
+    
+    @IBAction override func submit(_ sender: Any) {
+        
+        params.removeAll()
+        params["cat_id"] = String(21)
+        super.submit(sender)
     }
     
 //    func putValue() {

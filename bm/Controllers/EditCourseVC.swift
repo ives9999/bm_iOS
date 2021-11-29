@@ -123,6 +123,13 @@ class EditCourseVC: EditVC {
         }
     }
     
+    @IBAction override func submit(_ sender: Any) {
+        
+        params.removeAll()
+        params["cat_id"] = String(41)
+        super.submit(sender)
+    }
+    
 //    func putValue() {
 //        if courseTable != nil {
 //

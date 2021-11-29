@@ -171,8 +171,14 @@ class BaseViewController: UIViewController, List2CellDelegate {
     func cellSwitchChanged(key: String, sectionIdx: Int, rowIdx: Int, isSwitch: Bool) {
         
         let row = oneSections[sectionIdx].items[rowIdx]
-        let val: String = (isSwitch) ? "1" : "0"
-        row.value = val
+        if key == ARENA_PARKING_KEY || key == ARENA_BATHROOM_KEY || key == ARENA_AIR_CONDITION_KEY {
+            let val: String = (isSwitch) ? "1" : "0"
+            row.value = val
+        } else {
+            let val: String = (isSwitch) ? "online": "offline"
+            row.value = val
+            row.show = STATUS(status: val).rawValue
+        }
     }
     
     func cellMap(row: Table) {
