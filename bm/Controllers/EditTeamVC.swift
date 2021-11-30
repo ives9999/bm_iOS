@@ -160,7 +160,7 @@ class EditTeamVC: EditVC {
         rows.removeAll()
         row = OneRow(title: "臨打日期", value: myTable!.last_signup_date, show: myTable!.last_signup_date, key: TEAM_TEMP_DATE_KEY, cell: "more")
         rows.append(row)
-        row = OneRow(title: "臨打名額", value: String(myTable!.temp_quantity), show: myTable!.temp_quantity_show, key: TEAM_TEMP_QUANTITY_KEY, cell: "textField")
+        row = OneRow(title: "臨打名額", value: String(myTable!.temp_quantity), show: String(myTable!.temp_quantity), key: TEAM_TEMP_QUANTITY_KEY, cell: "textField")
         rows.append(row)
         row = OneRow(title: "臨打狀態", value: myTable!.temp_status, show: myTable!.temp_status_show, key: TEAM_TEMP_STATUS_KEY, cell: "switch")
         rows.append(row)

@@ -213,8 +213,10 @@ class MemberVC: MyTableVC {
         
         let r1: MemberRow = MemberRow(title: "球隊", icon: "team", segue: "toManagerTeam")
         rows.append(r1)
-        let r2: MemberRow = MemberRow(title: "課程", icon: "course", segue: "toManagerCourse")
+        let r2: MemberRow = MemberRow(title: "球隊申請管理權", icon: "team", segue: "toRequestManagerTeam")
         rows.append(r2)
+        let r3: MemberRow = MemberRow(title: "課程", icon: "course", segue: "toManagerCourse")
+        rows.append(r3)
 
         let s: MemberSection = MemberSection(title: "管理", isExpanded: isEpanded, items: rows)
 

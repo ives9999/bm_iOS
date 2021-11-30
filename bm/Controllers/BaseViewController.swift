@@ -396,9 +396,9 @@ class BaseViewController: UIViewController, List2CellDelegate {
             toSelectDegree(selecteds: selecteds, delegate: self)
         } else if (key == PRICE_UNIT_KEY || key == COURSE_KIND_KEY || key == CYCLE_UNIT_KEY) {
             toSelectSingle(key: key, selected: row.value, delegate: self, able_type: able_type)
-        } else if (key == START_DATE_KEY || key == END_DATE_KEY) {
+        } else if (key == START_DATE_KEY || key == END_DATE_KEY || key == TEAM_TEMP_DATE_KEY) {
             toSelectDate(key: key, selected: row.value)
-        } else if (key == CONTENT_KEY || key == CHARGE_KEY) {
+        } else if (key == CONTENT_KEY || key == CHARGE_KEY || key == TEAM_TEMP_CONTENT_KEY) {
             toEditContent(key: key, title: row.title, content: row.value, _delegate: self)
         } else if (key == MANAGER_ID_KEY) {
             toSelectManager(manager_id: Int(row.value)!, manager_token: row.token, delegate: self)

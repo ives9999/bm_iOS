@@ -36,7 +36,15 @@ class SwitchCell: FormItemCell {
         self.rowIdx = rowIdx
         
         titleLbl?.text = row.title
-        let val: Bool = (row.value == "1") ? true : false
+        
+        let key = row.key
+        var val: Bool = false
+        
+        if key == STATUS_KEY || key == TEAM_TEMP_STATUS_KEY {
+            val = (row.value == "online") ? true : false
+        } else {
+            val = (row.value == "1") ? true : false
+        }
         onoff.setOn(val, animated: true)
     }
     
