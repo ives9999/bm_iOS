@@ -308,6 +308,7 @@
 		F94DECE02747929A00A9DA17 /* ManagerTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */; };
 		F94DECE12747929A00A9DA17 /* ManagerTeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */; };
 		F94DECE32747CFC700A9DA17 /* EditTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECE22747CFC700A9DA17 /* EditTeamVC.swift */; };
+		F94DECE52756237800A9DA17 /* RequestManagerTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */; };
 		F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D1F1F83636A00F550FD /* AppDelegate.swift */; };
 		F94E7D221F83636A00F550FD /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D211F83636A00F550FD /* HomeVC.swift */; };
 		F94E7D251F83636A00F550FD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F94E7D231F83636A00F550FD /* Main.storyboard */; };
@@ -696,6 +697,7 @@
 		F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamCell.swift; sourceTree = "<group>"; };
 		F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagerTeamCell.xib; sourceTree = "<group>"; };
 		F94DECE22747CFC700A9DA17 /* EditTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamVC.swift; sourceTree = "<group>"; };
+		F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagerTeamVC.swift; sourceTree = "<group>"; };
 		F94E7D1C1F83636A00F550FD /* bm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F94E7D1F1F83636A00F550FD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F94E7D211F83636A00F550FD /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
@@ -1272,6 +1274,7 @@
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
+				F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1795,6 +1798,7 @@
 				B3E8C2A22207E0DC0008ED25 /* CityButton.swift in Sources */,
 				B3E4D18125FF9E7500D78210 /* CourseTable.swift in Sources */,
 				B3A9039023857A1200A986F7 /* CourseView.swift in Sources */,
+				F94DECE52756237800A9DA17 /* RequestManagerTeamVC.swift in Sources */,
 				B3ED38F41FBB3C3B0003F083 /* TimeSelectVC.swift in Sources */,
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
 				B3B7588B25A802A7006ACC33 /* OrderForm.swift in Sources */,

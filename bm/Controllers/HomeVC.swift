@@ -66,18 +66,20 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let key: String = TeamService.instance.sectionToKey(section: section).key
-        let number: Int = homes[key]!.count
+//        let key: String = TeamService.instance.sectionToKey(section: section).key
+//        let number: Int = homes[key]!.count
+//
+//        return number
         
-        return number
+        return 0
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionView.elementKindSectionHeader:
             if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "HomeCollectionHeaderView", for: indexPath) as? HomeCollectionHeaderView {
-                let headerTitle = TeamService.instance.sectionToKey(section: indexPath.section).chTitle
-                headerView.titleLbl.text = headerTitle
+//                let headerTitle = TeamService.instance.sectionToKey(section: indexPath.section).chTitle
+//                headerView.titleLbl.text = headerTitle
                 return headerView
             } else {
                 return UICollectionReusableView()
@@ -90,29 +92,31 @@ class HomeVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         //print("cellForItemAt section: \(indexPath.section) row: \(indexPath.row)")
-        let home = TeamService.instance.getHomeItem(indexPath: indexPath)
-        if home.vimeo.count > 0 || home.youtube.count > 0 {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeVideoCell", for: indexPath) as? HomeVideoCell {
-                cell.updateViews(home: home)
-                
-                return cell
-            }
-        } else {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeImageCell", for: indexPath) as? HomeImageCell {
-                cell.updateViews(home: home)
-                
-                return cell
-            }
-        }
-        return HomeImageCell()
+//        let home = TeamService.instance.getHomeItem(indexPath: indexPath)
+//        if home.vimeo.count > 0 || home.youtube.count > 0 {
+//            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeVideoCell", for: indexPath) as? HomeVideoCell {
+//                cell.updateViews(home: home)
+//
+//                return cell
+//            }
+//        } else {
+//            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeImageCell", for: indexPath) as? HomeImageCell {
+//                cell.updateViews(home: home)
+//
+//                return cell
+//            }
+//        }
+//        return HomeImageCell()
+        
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section > 0 {
-            let home: Home = TeamService.instance.getHomeItem(indexPath: indexPath)
-            //print(home)
-            performSegue(withIdentifier: "ShowSegue", sender: home)
-        }
+//        if indexPath.section > 0 {
+//            let home: Home = TeamService.instance.getHomeItem(indexPath: indexPath)
+//            //print(home)
+//            performSegue(withIdentifier: "ShowSegue", sender: home)
+//        }
     }
     
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

@@ -48,6 +48,10 @@ class TeamService: DataService {
         return String(format: URL_UPDATE, "team")
     }
     
+    override func getIsNameExistUrl()->String {
+        return String(format: URL_ISNAMEEXIST, "team")
+    }
+    
     func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["source": "app", "token": token, "strip_html": "true"]
         
@@ -438,17 +442,17 @@ class TeamService: DataService {
         }
     }
     
-    override func strsToDegree(_ strs: [String])-> [Degree] {
-        
-        var res: [Degree] = [Degree]()
-        for str in strs {
-            let value = DEGREE.enumFromString(string: str)
-            let text = value.rawValue
-            let degree = Degree(value: value, text: text)
-            res.append(degree)
-        }
-        return res
-    }
+//    override func strsToDegree(_ strs: [String])-> [Degree] {
+//
+//        var res: [Degree] = [Degree]()
+//        for str in strs {
+//            let value = DEGREE.enumFromString(string: str)
+//            let text = value.rawValue
+//            let degree = Degree(value: value, text: text)
+//            res.append(degree)
+//        }
+//        return res
+//    }
     
 //    override func setData(id: Int, title: String, path: String, token: String, youtube: String, vimeo: String) -> Team {
 //        let superData = Team(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)

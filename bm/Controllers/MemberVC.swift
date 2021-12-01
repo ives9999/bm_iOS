@@ -464,6 +464,8 @@ class MemberVC: MyTableVC {
             toManagerCourse(manager_token: Member.instance.token)
         } else if segue == "toManagerTeam" {
             toManagerTeam(manager_token: Member.instance.token)
+        } else if segue == "toRequestManagerTeam" {
+            toRequestManagerTeam()
         }
         
         

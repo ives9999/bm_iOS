@@ -68,19 +68,97 @@ class DataService {
     
     var jsonData: Data?
     
-    init() {
-//        _model = Team.instance
+    init() {}
+    
+    func delete(token: String, type: String, completion: @escaping CompletionHandler) {
+        
+        let body: [String: String] = ["device": "app", "channel": "bm", "token": token, "type": type]
+        
+        let source: String? = getSource()
+        var url: String?
+        if source != nil {
+            url = String(format: URL_DELETE, source!)
+        }
+        //let url: String = String(format: URL_DELETE, "cart")
+        //print(url)
+        //print(body)
+        if url == nil {
+            msg = "沒有網址錯誤，請洽管理員"
+            completion(false)
+        } else {
+            AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+                
+                switch response.result {
+                case .success(_):
+                    if response.data != nil {
+                        self.jsonData = response.data
+                        completion(true)
+                    } else {
+                        self.msg = "網路錯誤，請稍後再試"
+                        completion(false)
+                    }
+                case .failure(let error):
+                    self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                    completion(false)
+                    print(error)
+                    return
+                }
+            }
+        }
     }
     
-//    func setData(id: Int, title: String, path: String, token: String, youtube: String = "", vimeo: String = "") -> SuperData {
-//        let list = SuperData(id: id, title: title, path: path, token: token, youtube: youtube, vimeo: vimeo)
-//        return list
-//    }
-//    
-//    func setData1(row: JSON)->Dictionary<String, [String: Any]> {
-//        let list = Dictionary<String, [String: Any]>()
-//        return list
-//    }
+    func getCalendarURL(token: String? = nil)-> String { return ""}
+    
+    func getArenaByCityID(city_id: Int, completion: @escaping CompletionHandler) {
+        let body: [String: String] = ["device": "app", "city": String(city_id)]
+        //print(URL_ARENA_BY_CITY_ID)
+        //print(body)
+        AF.request(URL_ARENA_BY_CITY_ID, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                let json = JSON(data)
+//                let jsonArray: [JSON] = json[].arrayValue
+//                self.arenas = [ArenaTable]()
+//                for arena in jsonArray {
+//                    let id: Int = arena["id"].intValue
+//                    let name: String = arena["name"].stringValue
+//                    let arenaTable: ArenaTable = ArenaTable()
+//                    arenaTable.id = id
+//                    arenaTable.name = name
+//                    self.arenas.append(arenaTable)
+//                }
+//
+//                completion(true)
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//            }
+        }
+    }
+    
+    func getIsNameExistUrl()->String { return "" }
+    func getLikeURL(token: String? = nil)-> String { return ""}
     
     func getList(token: String?, _filter:[String: String]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
@@ -148,59 +226,7 @@ class DataService {
         }
     }
     
-//    func getOne1<T: Table>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
-//        
-//        var body: [String: Any] = ["device": "app","strip_html": false]
-//        if params["token"] != nil {
-//            body["token"] = params["token"]
-//        }
-//        if params["member_token"] != nil {
-//            body["member_token"] = params["member_token"]
-//        }
-//        
-//        //print(body)
-//        let source: String? = getSource()
-//        var url: String?
-//        if source != nil {
-//            url = String(format: URL_ONE, source!)
-//        }
-//        //print(url)
-//        if url != nil {
-//            Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-//                
-//                switch response.result {
-//                //case .success(let value):
-//                case .success(_):
-//                    var s: T? = nil
-//                    do {
-//                        if response.data != nil {
-//                            s = try JSONDecoder().decode(t, from: response.data!)
-//                            if s != nil {
-//                                self.table = s!
-//                                self.table!.filterRow()
-//                                completion(true)
-//                            } else {
-//                                self.msg = "解析JSON字串時，得到空直，請洽管理員"
-//                                completion(false)
-//                            }
-//                        } else {
-//                            self.msg = "沒有任何伺服器回傳的訊息"
-//                            completion(false)
-//                        }
-//                    } catch {
-//                        //print("Error:\(error)")
-//                        self.msg = error.localizedDescription
-//                        completion(false)
-//                    }
-//                case .failure(let error):
-//                    self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-//                    completion(false)
-//                    print(error)
-//                    return
-//                }
-//            }
-//        }
-//    }
+    func getListURL()-> String { return ""}
     
     func getOne(params: [String: String], completion: @escaping CompletionHandler){
         
@@ -249,6 +275,42 @@ class DataService {
         }
     }
     
+    func getSignupDateURL(token: String)-> String { return ""}
+    func getSignupURL(token: String)-> String { return ""}
+    
+    func getSource()-> String? {
+        return nil
+    }
+    
+    func isNameExist(name: String, completion: @escaping CompletionHandler) {
+        
+        let url: String = getIsNameExistUrl()
+        print(url)
+        let params: [String: String] = ["device": "app", "channel": CHANNEL, "name": name, "member_token": Member.instance.token]
+        print(params)
+        
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON {
+            (response) in
+            
+            switch response.result {
+                
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
     //token is able token
     func like(token: String, able_id: Int) {
         
@@ -268,112 +330,99 @@ class DataService {
         
         task.resume()
     }
-
     
-//    func calendar<T: SuperModel, T1: SuperModel>(t:T.Type, t1: T1.Type, token: String?, _filter:[String: Any]?, completion: @escaping CompletionHandler) {
-//
-//            self.needDownloads = [Dictionary<String, Any>]()
-//            var filter: [String: Any] = ["device": "app", "channel": CHANNEL]
-//            if _filter != nil {
-//                filter.merge(_filter!)
-//            }
-//            //print(filter.toJSONString())
-//
-//            var url: String = getCalendarURL()
-//            if (token != nil) {
-//                url = url + "/" + token!
-//            }
-//            //print(url)
-//
-//            AF.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-//
-//                if response.result.error == nil {
-//                    guard let data = response.result.value else {
-//                        //print("get response result value error")
-//                        self.msg = "網路錯誤，請稍後再試"
-//                        completion(false)
-//                        return
-//                    }
-//                    let json = JSON(data)
-//                    //print(json)
-//                    let s: T1 = JSONParse.parse(data: json)
-//                    //print(type(of: s))
-//                    //self.superModel.printRows()
-//                    //self.superCourses = JSONParse.parse(data: json)
-//                    //self.superModel = s
-//
-//                    let rows: [T] = s.getRows() ?? [T]()
-//                    for row in rows {
-//                        row.filterRow()
-//                    }
-//                    completion(true)
-//    //                self.makeNeedDownloadImageArr(rows, t: T.self)
-//    //                let needDownload: Int = self.needDownloads.count
-//    //                if needDownload > 0 {
-//    //                    self.needDownloadImage(needDownload, t: T1.self, completion: completion)
-//    //                } else {
-//    //                    completion(true)
-//    //                }
-//                } else {
-//                    self.msg = "網路錯誤，請稍後再試"
-//                    completion(false)
-//                    debugPrint(response.result.error as Any)
-//                }
-//            }
-//        }
-    
-    func getListURL()-> String { return ""}
-    func getLikeURL(token: String? = nil)-> String { return ""}
-    func getCalendarURL(token: String? = nil)-> String { return ""}
-    func getUpdateURL()-> String {return ""}
-    
-//    func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
-//        
-//        //print(model)
-//        //model.neverFill()
-//        downloadImageNum = 0
-//        let body: [String: Any] = ["device": "app", "token": token, "strip_html": true]
-//        
-//        //print(body)
-//        let url: String = String(format: URL_ONE, type)
-//        //print(url)
-//        
-//        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
-//            
+    func signup(token: String, member_token: String, date_token: String, course_deadline: String, completion: @escaping CompletionHandler) {
+        let url = getSignupURL(token: token)
+        //print(url)
+        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "able_date_token": date_token, "cancel_deadline": course_deadline]
+        
+        //print(body)
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
 //            if response.result.error == nil {
-//                //print(response.result.value)
 //                guard let data = response.result.value else {
-//                    print("get response result value error")
+//                    print("data error")
 //                    self.msg = "網路錯誤，請稍後再試"
 //                    completion(false)
 //                    return
 //                }
 //                //print(data)
-//                let json = JSON(data)
-//                //print(json)
-//                //self.setData1(row: json)
-//                
-//
-//                //let path: String = self.model.data[FEATURED_KEY]!["path"] as! String
-//                let path: String =  json[FEATURED_KEY].stringValue
-//                if path.count > 0 {
-//                    self.getImage(_url: path, completion: { (success) in
-//                        if success {
-//                            //self.model.data[FEATURED_KEY]!["value"] = self.image
-//                            completion(true)
-//                            //print(team.data)
-//                        }
-//                    })
-//                } else {
-//                    completion(true)
+//                let json: JSON = JSON(data)
+//                self.success = json["success"].boolValue
+//                if json["msg"].exists() {
+//                    self.msg = json["msg"].stringValue
 //                }
+//                completion(self.success)
 //            } else {
 //                self.msg = "網路錯誤，請稍後再試"
 //                completion(false)
-//                debugPrint(response.result.error as Any)
 //            }
-//        }
-//    }
+        }
+    }
+    
+    func signup_date(token: String, member_token: String, date_token: String, completion: @escaping CompletionHandler) {
+        let url = getSignupDateURL(token: token)
+        //print(url)
+        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "date_token": date_token]
+        //print(body)
+        
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    print("data error")
+//                    self.msg = "無法解析伺服器傳回值錯誤，請洽管理員"
+//                    completion(false)
+//                    return
+//                }
+//                //print(data)
+//                let json: JSON = JSON(data)
+//                //print(json)
+//                self.success = json["success"].boolValue
+//                if self.success {
+//                    self.signup_date = json
+//                } else {
+//                    self.msg = json["msg"].stringValue
+//                }
+//                completion(true)
+//            } else {
+//                self.msg = "取得報名日期錯誤，請洽管理員"
+//                completion(false)
+//            }
+        }
+    }
+    
+    func getUpdateURL()-> String {return ""}
     
     func update(_params: [String: String], image: UIImage?, completion: @escaping CompletionHandler) {
         
@@ -499,6 +548,169 @@ class DataService {
         }
     }
     
+//    func getOne1<T: Table>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
+//        
+//        var body: [String: Any] = ["device": "app","strip_html": false]
+//        if params["token"] != nil {
+//            body["token"] = params["token"]
+//        }
+//        if params["member_token"] != nil {
+//            body["member_token"] = params["member_token"]
+//        }
+//        
+//        //print(body)
+//        let source: String? = getSource()
+//        var url: String?
+//        if source != nil {
+//            url = String(format: URL_ONE, source!)
+//        }
+//        //print(url)
+//        if url != nil {
+//            Alamofire.request(url!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//                
+//                switch response.result {
+//                //case .success(let value):
+//                case .success(_):
+//                    var s: T? = nil
+//                    do {
+//                        if response.data != nil {
+//                            s = try JSONDecoder().decode(t, from: response.data!)
+//                            if s != nil {
+//                                self.table = s!
+//                                self.table!.filterRow()
+//                                completion(true)
+//                            } else {
+//                                self.msg = "解析JSON字串時，得到空直，請洽管理員"
+//                                completion(false)
+//                            }
+//                        } else {
+//                            self.msg = "沒有任何伺服器回傳的訊息"
+//                            completion(false)
+//                        }
+//                    } catch {
+//                        //print("Error:\(error)")
+//                        self.msg = error.localizedDescription
+//                        completion(false)
+//                    }
+//                case .failure(let error):
+//                    self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+//                    completion(false)
+//                    print(error)
+//                    return
+//                }
+//            }
+//        }
+//    }
+    
+    
+    
+    
+
+    
+//    func calendar<T: SuperModel, T1: SuperModel>(t:T.Type, t1: T1.Type, token: String?, _filter:[String: Any]?, completion: @escaping CompletionHandler) {
+//
+//            self.needDownloads = [Dictionary<String, Any>]()
+//            var filter: [String: Any] = ["device": "app", "channel": CHANNEL]
+//            if _filter != nil {
+//                filter.merge(_filter!)
+//            }
+//            //print(filter.toJSONString())
+//
+//            var url: String = getCalendarURL()
+//            if (token != nil) {
+//                url = url + "/" + token!
+//            }
+//            //print(url)
+//
+//            AF.request(url, method: .post, parameters: filter, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//
+//                if response.result.error == nil {
+//                    guard let data = response.result.value else {
+//                        //print("get response result value error")
+//                        self.msg = "網路錯誤，請稍後再試"
+//                        completion(false)
+//                        return
+//                    }
+//                    let json = JSON(data)
+//                    //print(json)
+//                    let s: T1 = JSONParse.parse(data: json)
+//                    //print(type(of: s))
+//                    //self.superModel.printRows()
+//                    //self.superCourses = JSONParse.parse(data: json)
+//                    //self.superModel = s
+//
+//                    let rows: [T] = s.getRows() ?? [T]()
+//                    for row in rows {
+//                        row.filterRow()
+//                    }
+//                    completion(true)
+//    //                self.makeNeedDownloadImageArr(rows, t: T.self)
+//    //                let needDownload: Int = self.needDownloads.count
+//    //                if needDownload > 0 {
+//    //                    self.needDownloadImage(needDownload, t: T1.self, completion: completion)
+//    //                } else {
+//    //                    completion(true)
+//    //                }
+//                } else {
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    debugPrint(response.result.error as Any)
+//                }
+//            }
+//        }
+    
+    
+    
+//    func getOne(type: String, token: String, completion: @escaping CompletionHandler) {
+//        
+//        //print(model)
+//        //model.neverFill()
+//        downloadImageNum = 0
+//        let body: [String: Any] = ["device": "app", "token": token, "strip_html": true]
+//        
+//        //print(body)
+//        let url: String = String(format: URL_ONE, type)
+//        //print(url)
+//        
+//        Alamofire.request(url, method: .post, parameters: body, encoding: JSONEncoding.default, headers: HEADER).responseJSON { (response) in
+//            
+//            if response.result.error == nil {
+//                //print(response.result.value)
+//                guard let data = response.result.value else {
+//                    print("get response result value error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                //print(data)
+//                let json = JSON(data)
+//                //print(json)
+//                //self.setData1(row: json)
+//                
+//
+//                //let path: String = self.model.data[FEATURED_KEY]!["path"] as! String
+//                let path: String =  json[FEATURED_KEY].stringValue
+//                if path.count > 0 {
+//                    self.getImage(_url: path, completion: { (success) in
+//                        if success {
+//                            //self.model.data[FEATURED_KEY]!["value"] = self.image
+//                            completion(true)
+//                            //print(team.data)
+//                        }
+//                    })
+//                } else {
+//                    completion(true)
+//                }
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//                debugPrint(response.result.error as Any)
+//            }
+//        }
+//    }
+    
+    
+    
 //    func update(type: String, params: [String: Any], _ image: UIImage?, key: String, filename: String, mimeType: String, completion: @escaping CompletionHandler) {
 //
 //        let url: String = String(format: URL_UPDATE, type)
@@ -576,133 +788,9 @@ class DataService {
 //        }
 //    }
     
-    func delete(token: String, type: String, completion: @escaping CompletionHandler) {
-        
-        let body: [String: String] = ["device": "app", "channel": "bm", "token": token, "type": type]
-        
-        let source: String? = getSource()
-        var url: String?
-        if source != nil {
-            url = String(format: URL_DELETE, source!)
-        }
-        //let url: String = String(format: URL_DELETE, "cart")
-        //print(url)
-        //print(body)
-        if url == nil {
-            msg = "沒有網址錯誤，請洽管理員"
-            completion(false)
-        } else {
-            AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
-                
-                switch response.result {
-                case .success(_):
-                    if response.data != nil {
-                        self.jsonData = response.data
-                        completion(true)
-                    } else {
-                        self.msg = "網路錯誤，請稍後再試"
-                        completion(false)
-                    }
-                case .failure(let error):
-                    self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-                    completion(false)
-                    print(error)
-                    return
-                }
-            }
-        }
-    }
     
-    func signup_date(token: String, member_token: String, date_token: String, completion: @escaping CompletionHandler) {
-        let url = getSignupDateURL(token: token)
-        //print(url)
-        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "date_token": date_token]
-        //print(body)
-        
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
-            
-            switch response.result {
-            case .success(_):
-                if response.data != nil {
-                    self.jsonData = response.data
-                    completion(true)
-                } else {
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                }
-            case .failure(let error):
-                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-                completion(false)
-                print(error)
-                return
-            }
-//            if response.result.error == nil {
-//                guard let data = response.result.value else {
-//                    print("data error")
-//                    self.msg = "無法解析伺服器傳回值錯誤，請洽管理員"
-//                    completion(false)
-//                    return
-//                }
-//                //print(data)
-//                let json: JSON = JSON(data)
-//                //print(json)
-//                self.success = json["success"].boolValue
-//                if self.success {
-//                    self.signup_date = json
-//                } else {
-//                    self.msg = json["msg"].stringValue
-//                }
-//                completion(true)
-//            } else {
-//                self.msg = "取得報名日期錯誤，請洽管理員"
-//                completion(false)
-//            }
-        }
-    }
     
-    func signup(token: String, member_token: String, date_token: String, course_deadline: String, completion: @escaping CompletionHandler) {
-        let url = getSignupURL(token: token)
-        //print(url)
-        let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "able_date_token": date_token, "cancel_deadline": course_deadline]
-        
-        //print(body)
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
-            
-            switch response.result {
-            case .success(_):
-                if response.data != nil {
-                    self.jsonData = response.data
-                    completion(true)
-                } else {
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                }
-            case .failure(let error):
-                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-                completion(false)
-                print(error)
-                return
-            }
-//            if response.result.error == nil {
-//                guard let data = response.result.value else {
-//                    print("data error")
-//                    self.msg = "網路錯誤，請稍後再試"
-//                    completion(false)
-//                    return
-//                }
-//                //print(data)
-//                let json: JSON = JSON(data)
-//                self.success = json["success"].boolValue
-//                if json["msg"].exists() {
-//                    self.msg = json["msg"].stringValue
-//                }
-//                completion(self.success)
-//            } else {
-//                self.msg = "網路錯誤，請稍後再試"
-//                completion(false)
-//            }
-        }
-    }
+    
 //    func signup(type: String, token: String, member_token: String, tt_id: Int, completion: @escaping CompletionHandler) {
 //        let body: [String: String] = ["device": "app", "channel": "bm","member_token":member_token,"tt_id":String(tt_id)]
 //        let url: String = String(format: URL_SIGNUP, type, token)
@@ -762,8 +850,7 @@ class DataService {
 //
 //    }
     
-    func getSignupURL(token: String)-> String { return ""}
-    func getSignupDateURL(token: String)-> String { return ""}
+    
     
     func signup_list(token: String? = nil, page: Int = 1, perPage: Int = 8, completion: @escaping CompletionHandler) {
         let url: String = getSignupListURL(token: token)
@@ -1095,53 +1182,7 @@ class DataService {
 //        }
 //    }
     
-    func getArenaByCityID(city_id: Int, completion: @escaping CompletionHandler) {
-        let body: [String: String] = ["device": "app", "city": String(city_id)]
-        //print(URL_ARENA_BY_CITY_ID)
-        //print(body)
-        AF.request(URL_ARENA_BY_CITY_ID, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
-            
-            switch response.result {
-            case .success(_):
-                if response.data != nil {
-                    self.jsonData = response.data
-                    completion(true)
-                } else {
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                }
-            case .failure(let error):
-                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-                completion(false)
-                print(error)
-                return
-            }
-//            if response.result.error == nil {
-//                guard let data = response.result.value else {
-//                    print("data error")
-//                    self.msg = "網路錯誤，請稍後再試"
-//                    completion(false)
-//                    return
-//                }
-//                let json = JSON(data)
-//                let jsonArray: [JSON] = json[].arrayValue
-//                self.arenas = [ArenaTable]()
-//                for arena in jsonArray {
-//                    let id: Int = arena["id"].intValue
-//                    let name: String = arena["name"].stringValue
-//                    let arenaTable: ArenaTable = ArenaTable()
-//                    arenaTable.id = id
-//                    arenaTable.name = name
-//                    self.arenas.append(arenaTable)
-//                }
-//
-//                completion(true)
-//            } else {
-//                self.msg = "網路錯誤，請稍後再試"
-//                completion(false)
-//            }
-        }
-    }
+    
     
 //    func getArenaByCityIDs(city_ids: String,city_type:String, completion: @escaping CompletionHandler) {
 //        let body: [String: String] = ["device": "app", "channel":"bm","citys": city_ids,"city_type":city_type,"version":"1.2.5"]
@@ -1321,81 +1362,81 @@ class DataService {
 //
 //    }
     
-    func parseHomeJSON(array: [Dictionary<String, Any>], titleField: String, type: String, video: Bool=false) -> [Home] {
-        var result: [Home] = [Home]()
-        var i: Int = 0
-        for item in array {
-            let id: Int = item["id"] as? Int ?? 0
-            let title: String = item[titleField] as? String ?? ""
-            var path: String = item["featured_path"] as? String ?? ""
-            if (path.count > 0) {
-                path = BASE_URL + path
-            }
-            let youtube: String = item["youtube"] as? String ?? ""
-            let vimeo: String = item["vimeo"] as? String ?? ""
-            let token: String = item["token"] as? String ?? ""
-            let home = Home(id: id, title: title, path: path, youtube: youtube, vimeo: vimeo, token: token, type: type)
-            result.append(home)
-            i += 1
-        }
-        
-        return result
-    }
+//    func parseHomeJSON(array: [Dictionary<String, Any>], titleField: String, type: String, video: Bool=false) -> [Home] {
+//        var result: [Home] = [Home]()
+//        var i: Int = 0
+//        for item in array {
+//            let id: Int = item["id"] as? Int ?? 0
+//            let title: String = item[titleField] as? String ?? ""
+//            var path: String = item["featured_path"] as? String ?? ""
+//            if (path.count > 0) {
+//                path = BASE_URL + path
+//            }
+//            let youtube: String = item["youtube"] as? String ?? ""
+//            let vimeo: String = item["vimeo"] as? String ?? ""
+//            let token: String = item["token"] as? String ?? ""
+//            let home = Home(id: id, title: title, path: path, youtube: youtube, vimeo: vimeo, token: token, type: type)
+//            result.append(home)
+//            i += 1
+//        }
+//        
+//        return result
+//    }
+//    
+//    func getHomeItem(indexPath: IndexPath) -> Home {
+//        let key: String = sectionToKey(section: indexPath.section).key
+//        return homes[key]![indexPath.row]
+//    }
     
-    func getHomeItem(indexPath: IndexPath) -> Home {
-        let key: String = sectionToKey(section: indexPath.section).key
-        return homes[key]![indexPath.row]
-    }
+//    func sectionToKey(section: Int) -> (key: String, chTitle: String, type: String) {
+//        var key: String
+//        var chTitle: String
+//        var type : String
+//        switch section {
+//        case 0:
+//            key = "teaches"
+//            type = "cours"
+//            chTitle = "課程"
+//            break
+//        case 1:
+//            key = "news"
+//            type = "news"
+//            chTitle = "新聞"
+//            break
+//        case 2:
+//            key = "arenas"
+//            type = "arena"
+//            chTitle = "球館"
+//            break
+//        default:
+//            key = "teaches"
+//            type = "cours"
+//            chTitle = "課程"
+//        }
+//
+//        return (key, chTitle, type)
+//    }
     
-    func sectionToKey(section: Int) -> (key: String, chTitle: String, type: String) {
-        var key: String
-        var chTitle: String
-        var type : String
-        switch section {
-        case 0:
-            key = "teaches"
-            type = "cours"
-            chTitle = "課程"
-            break
-        case 1:
-            key = "news"
-            type = "news"
-            chTitle = "新聞"
-            break
-        case 2:
-            key = "arenas"
-            type = "arena"
-            chTitle = "球館"
-            break
-        default:
-            key = "teaches"
-            type = "cours"
-            chTitle = "課程"
-        }
-        
-        return (key, chTitle, type)
-    }
-    
-    func strsToDegree(_ strs: [String])-> [Degree] {
-        return [Degree]()
-    }
-    
-    func handleErrorMsg(_ msg: String?, _ msgs: [String: JSON]? = nil) {
-        if msg != nil {
-            self.msg = msg!
-        } else {
-            if msgs != nil {
-                for (_, value) in msgs! {
-                    let error = value.stringValue
-                    self.msg += error + "\n"
-                }
-            }
-        }
-    }
-    
-    func getSource()-> String? {
-        return nil
-    }
+//    func strsToDegree(_ strs: [String])-> [Degree] {
+//        return [Degree]()
+//    }
+//
+//    func handleErrorMsg(_ msg: String?, _ msgs: [String: JSON]? = nil) {
+//        if msg != nil {
+//            self.msg = msg!
+//        } else {
+//            if msgs != nil {
+//                for (_, value) in msgs! {
+//                    let error = value.stringValue
+//                    self.msg += error + "\n"
+//                }
+//            }
+//        }
+//    }
+//
+//    func getSource()-> String? {
+//        return nil
+//    }
     
     //func jsonToMember(json: JSON) {}
 }
