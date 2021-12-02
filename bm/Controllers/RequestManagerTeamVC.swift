@@ -14,6 +14,7 @@ class RequestManagerTeamVC: BaseViewController {
     @IBOutlet var teamNameClearBtn: UIButton!
     @IBOutlet var managerTokenClearBtn: UIButton!
     @IBOutlet var managerView: UIView!
+    @IBOutlet var imageView: UIView!
     @IBOutlet var teamNameTF: SuperTextField!
     @IBOutlet var memberStackView: UIStackView!
     @IBOutlet var manager_tokenTF: SuperTextField!
@@ -38,6 +39,7 @@ class RequestManagerTeamVC: BaseViewController {
         
         managerView.isHidden = true
         line2.isHidden = true
+        imageView.isHidden = true
     }
     
     func checkManagerToken() {
@@ -99,6 +101,7 @@ class RequestManagerTeamVC: BaseViewController {
 
                             self.memberStackView.isHidden = false
                             self.line2.isHidden = false
+                            self.imageView.isHidden = false
                             //self.submitBtn.isHidden = false
                             //self.cancelBtn.isHidden = false
                         }
@@ -133,5 +136,9 @@ class RequestManagerTeamVC: BaseViewController {
     
     @IBAction func tokenClear() {
         manager_tokenTF.text = ""
+    }
+    
+    @IBAction func prev1() {
+        prev()
     }
 }

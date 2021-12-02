@@ -118,7 +118,7 @@ class RegisterVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
         row = OneRow(title: "性別", value: Member.instance.sex, show: Member.instance.sex, key: SEX_KEY, cell: "sex")
         row.msg = "沒有選擇性別"
         rows.append(row)
-        row = OneRow(title: "金鑰", value: Member.instance.token, show: Member.instance.token, key: TOKEN_KEY, cell: "text", isRequired: false)
+        row = OneRow(title: "金鑰", value: Member.instance.token, show: Member.instance.token, key: TOKEN_KEY, cell: "textField", isRequired: false)
         rows.append(row)
         section = makeSectionRow(title: "個人資料", key: "data", rows: rows)
         oneSections.append(section)

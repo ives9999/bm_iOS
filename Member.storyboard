@@ -1938,6 +1938,7 @@
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
+                                            <action selector="prev1" destination="qAZ-Re-mX9" eventType="touchUpInside" id="7Qb-gX-epR"/>
                                             <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="7Yq-ml-u9o"/>
                                         </connections>
                                     </button>
@@ -2228,6 +2229,7 @@
                     </view>
                     <connections>
                         <outlet property="emailLbl" destination="COJ-iG-hYB" id="dWx-WM-s75"/>
+                        <outlet property="imageView" destination="Ndp-WG-2fb" id="B5V-5r-Hft"/>
                         <outlet property="line2" destination="4ry-Bu-v3J" id="ghn-q3-qoT"/>
                         <outlet property="managerTokenClearBtn" destination="hRr-bT-bhr" id="iNq-HH-l5E"/>
                         <outlet property="managerView" destination="dME-oW-mqX" id="8V9-mm-lil"/>

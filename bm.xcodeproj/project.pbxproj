@@ -1236,6 +1236,7 @@
 				B3031D6925CD46A50044830C /* PaymentVC.swift */,
 				B3B7585C259CB8FE006ACC33 /* ProductVC.swift */,
 				B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */,
+				F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */,
 				B3F8C3B8215DFD72005CBBC1 /* SearchVC_next.swift */,
 				B3F8C3B4215BD9F4005CBBC1 /* SearchVC.swift */,
 				B326C7CB256E2F0D0048A2C2 /* SelectAreasVC.swift */,
@@ -1274,7 +1275,6 @@
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
-				F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2011,7 +2011,7 @@
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -2036,7 +2036,7 @@
 				DEVELOPMENT_TEAM = BYF37727CY;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MARKETING_VERSION = 1.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
@@ -2195,7 +2195,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = bm/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
@@ -2227,7 +2227,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = bm/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.8.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
