@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RequestManagerTeamVC: BaseViewController {
+class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ImagePickerViewDelegate {
     
     @IBOutlet var teamNameClearBtn: UIButton!
     @IBOutlet var managerTokenClearBtn: UIButton!
@@ -25,6 +25,11 @@ class RequestManagerTeamVC: BaseViewController {
     @IBOutlet var cancelBtn: CancelButton!
     @IBOutlet var line2: UIView!
     
+    @IBOutlet var teamImageView1: ImagePickerView!
+    @IBOutlet var teamImageView2: ImagePickerView!
+    
+    var imagerPicker: MyImagePickerVC = MyImagePickerVC()
+    
     var managerTable: MemberTable?
     
     override func viewDidLoad() {
@@ -32,14 +37,24 @@ class RequestManagerTeamVC: BaseViewController {
         dataService = TeamService.instance
         able_type = "team"
         
+        imagerPicker.delegate = self
+        
+        teamImageView1.gallery = imagerPicker
+        teamImageView1.delegate = self
+        teamImageView1.idx = 1
+        
+        teamImageView2.gallery = imagerPicker
+        teamImageView2.delegate = self
+        teamImageView2.idx = 2
+        
         super.viewDidLoad()
         
         teamNameClearBtn.setTitle("", for: .normal)
         managerTokenClearBtn.setTitle("", for: .normal)
         
-        managerView.isHidden = true
-        line2.isHidden = true
-        imageView.isHidden = true
+//        managerView.isHidden = true
+//        line2.isHidden = true
+//        imageView.isHidden = true
     }
     
     func checkManagerToken() {
@@ -77,6 +92,35 @@ class RequestManagerTeamVC: BaseViewController {
                 }
             }
         }
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        var selectedImage: UIImage?
+        if let editedImage = info[.editedImage] as? UIImage {
+            selectedImage = editedImage
+        } else if let originalImage = info[.originalImage] as? UIImage {
+            selectedImage = originalImage
+        }
+        
+        if selectedImage != nil {
+            if let p: MyImagePickerVC = picker as? MyImagePickerVC {
+                if p.idx == 1 {
+                    teamImageView1.setPickedImage(image: selectedImage!)
+                } else {
+                    teamImageView2.setPickedImage(image: selectedImage!)
+                }
+            }
+        }
+        
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
+    func isImageSet(_ b: Bool) {}
+    
+    func myPresent(_ viewController: UIViewController) {
+        
+        self.present(viewController, animated: true, completion: nil)
     }
     
     func getMemberOne(token: String) {

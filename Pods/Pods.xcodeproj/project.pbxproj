@@ -15,6 +15,7 @@
 			dependencies = (
 			);
 			name = OneSignal;
+			productName = OneSignal;
 		};
 		CBCE9B18CA9646B54112F0397F81ED1C /* ECPayPaymentGatewayKit */ = {
 			isa = PBXAggregateTarget;
@@ -25,6 +26,7 @@
 			dependencies = (
 			);
 			name = ECPayPaymentGatewayKit;
+			productName = ECPayPaymentGatewayKit;
 		};
 /* End PBXAggregateTarget section */
 
@@ -776,7 +778,7 @@
 		3964770D0A9735FCB83D3E43C1753ACA /* PromiseKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PromiseKit-dummy.m"; sourceTree = "<group>"; };
 		39F0DB62A7367C9EDF8334BE7D82188E /* Array+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Array+Extension.swift"; path = "Sources/CryptoSwift/Array+Extension.swift"; sourceTree = "<group>"; };
 		3A96AEF18265B7B4A1BB560A3BEFCFE0 /* IQUITextFieldView+Additions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "IQUITextFieldView+Additions.swift"; path = "IQKeyboardManagerSwift/Categories/IQUITextFieldView+Additions.swift"; sourceTree = "<group>"; };
-		3B4EA0897C9F541499F8DCF1FB725A1A /* YTPlayer.html */ = {isa = PBXFileReference; includeInIndex = 1; name = YTPlayer.html; path = YouTubePlayer/YouTubePlayer/YTPlayer.html; sourceTree = "<group>"; };
+		3B4EA0897C9F541499F8DCF1FB725A1A /* YTPlayer.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html; name = YTPlayer.html; path = YouTubePlayer/YouTubePlayer/YTPlayer.html; sourceTree = "<group>"; };
 		3B81FA60AD489F03F278B6525CF390EE /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
 		3B8F889DF510BCF67876665398BE4F66 /* AES.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AES.swift; path = Sources/CryptoSwift/AES.swift; sourceTree = "<group>"; };
 		3BA2A2BFF30B5BAF7EE5F29EB9CF1038 /* AlamofireImage-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AlamofireImage-prefix.pch"; sourceTree = "<group>"; };
@@ -952,7 +954,7 @@
 		98F2EA8025BED7910A3405D457425A0B /* UIImage+AlamofireImage.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIImage+AlamofireImage.swift"; path = "Source/UIImage+AlamofireImage.swift"; sourceTree = "<group>"; };
 		9ACF89DBF0F15FC35C5220E9B83B90EF /* SwipeAccessibilityCustomAction.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwipeAccessibilityCustomAction.swift; path = Source/SwipeAccessibilityCustomAction.swift; sourceTree = "<group>"; };
 		9B0736A09F7135623913956AEC7D22C4 /* Array+Foundation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Array+Foundation.swift"; path = "Sources/CryptoSwift/Foundation/Array+Foundation.swift"; sourceTree = "<group>"; };
-		9B34406175A261A572CC6A5271194371 /* ECPayPaymentGatewayKit.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; path = ECPayPaymentGatewayKit.xcframework; sourceTree = "<group>"; };
+		9B34406175A261A572CC6A5271194371 /* ECPayPaymentGatewayKit.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = wrapper.xcframework; path = ECPayPaymentGatewayKit.xcframework; sourceTree = "<group>"; };
 		9C1460035F120535ECC328FE5F9AAEF1 /* PromiseKit-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PromiseKit-prefix.pch"; sourceTree = "<group>"; };
 		9C1AC7C77EE81DF41A48ED614F3003A2 /* AnyPromise.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyPromise.swift; path = Sources/AnyPromise.swift; sourceTree = "<group>"; };
 		9C338DC6861282D9CA2F49616CB74B71 /* SCLAlertView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SCLAlertView.release.xcconfig; sourceTree = "<group>"; };
@@ -960,7 +962,7 @@
 		9CBC295A97B5F5C9798AC2609FF4B841 /* ReachabilitySwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ReachabilitySwift-Info.plist"; sourceTree = "<group>"; };
 		9CE62746F27026BD29F003D2944B988C /* ISO78164Padding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ISO78164Padding.swift; path = Sources/CryptoSwift/ISO78164Padding.swift; sourceTree = "<group>"; };
 		9D443E759FE97A6C0CA5A3B5E4142EBA /* SwipeCellKit */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwipeCellKit; path = SwipeCellKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E00817494078568D6934409A7BA6B06 /* SocketIOClientConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClientConfiguration.swift; path = Source/SocketIO/Client/SocketIOClientConfiguration.swift; sourceTree = "<group>"; };
 		9E0FD012ADC3C7179C684035672383E5 /* KeychainSwift */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = KeychainSwift; path = KeychainSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E127E1E502C8299260FAA86E8F941DD /* UIColor_Hex_Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor_Hex_Swift-prefix.pch"; sourceTree = "<group>"; };
@@ -1438,7 +1440,6 @@
 				0DC82EE2835791A532A936952EFAC446 /* ZeroPadding.swift */,
 				9F8B67E7BB6215D06C13AF338CD581BB /* Support Files */,
 			);
-			name = CryptoSwift;
 			path = CryptoSwift;
 			sourceTree = "<group>";
 		};
@@ -1448,7 +1449,6 @@
 				F3485A55DB62D27ABCCA663CFAF13E2B /* Reachability.swift */,
 				789C6DFEC3950DFFA4211D5BF3B8CB60 /* Support Files */,
 			);
-			name = ReachabilitySwift;
 			path = ReachabilitySwift;
 			sourceTree = "<group>";
 		};
@@ -1515,7 +1515,6 @@
 				30FC4B7E217977B2F6F0ECA50761FC76 /* UIColorInputError.swift */,
 				4FF33CD3F475EE2C9D40571A320D0792 /* Support Files */,
 			);
-			name = UIColor_Hex_Swift;
 			path = UIColor_Hex_Swift;
 			sourceTree = "<group>";
 		};
@@ -1525,7 +1524,6 @@
 				8D56B5C121C4EF9F11008B3402C01719 /* Frameworks */,
 				FB61335F80FE47C3A8BC1D9B6F524C49 /* Support Files */,
 			);
-			name = ECPayPaymentGatewayKit;
 			path = ECPayPaymentGatewayKit;
 			sourceTree = "<group>";
 		};
@@ -1556,7 +1554,6 @@
 				1EA50B4FA2E4A1E4CE277C209677E0E0 /* SwipeTransitionLayout.swift */,
 				D4C22484995FC227423C53457DDF469E /* Support Files */,
 			);
-			name = SwipeCellKit;
 			path = SwipeCellKit;
 			sourceTree = "<group>";
 		};
@@ -1590,7 +1587,6 @@
 				CCF9775E19DD9356CF338F6DC4088224 /* SwiftyJSON.swift */,
 				80631C97F5ACC65D01AC0C86A6673AC4 /* Support Files */,
 			);
-			name = SwiftyJSON;
 			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
@@ -1681,7 +1677,6 @@
 				BEE22254B2E9FBF8FC96F514CD36313F /* Resources */,
 				BAFD6CE73BF3EAAAB9E08843197820D8 /* Support Files */,
 			);
-			name = YouTubePlayer;
 			path = YouTubePlayer;
 			sourceTree = "<group>";
 		};
@@ -1693,7 +1688,6 @@
 				F8E900C608CF70AC6858EA62517D2205 /* Support Files */,
 				B9C52BF2B3ACFF3D4DFC48552C61111F /* UIKit */,
 			);
-			name = PromiseKit;
 			path = PromiseKit;
 			sourceTree = "<group>";
 		};
@@ -1737,7 +1731,6 @@
 				B0B3A9F87FCE7EE6D31F802382061F2F /* WSEngine.swift */,
 				2DBA0D0E840B839FCED639681142A2E1 /* Support Files */,
 			);
-			name = Starscream;
 			path = Starscream;
 			sourceTree = "<group>";
 		};
@@ -1781,7 +1774,6 @@
 				33BF92B697DE52EA90E1E036BD5BC357 /* Validation.swift */,
 				658EAFC3F53D42C0F9A0BEE23B358035 /* Support Files */,
 			);
-			name = Alamofire;
 			path = Alamofire;
 			sourceTree = "<group>";
 		};
@@ -1806,7 +1798,6 @@
 				47ED51770FC10712815C273B02F7DD4C /* Frameworks */,
 				23083AE84F92E6B9BB36D7C7F5225D6A /* Support Files */,
 			);
-			name = OneSignal;
 			path = OneSignal;
 			sourceTree = "<group>";
 		};
@@ -1921,7 +1912,6 @@
 				63D3224B43BEFBFE9BEDF6A83EF76E79 /* IQUIViewController+Additions.swift */,
 				648654D030104BF069951734A6792890 /* Support Files */,
 			);
-			name = IQKeyboardManagerSwift;
 			path = IQKeyboardManagerSwift;
 			sourceTree = "<group>";
 		};
@@ -1932,7 +1922,6 @@
 				C868728A2D1036F9BA664998497DA1AB /* SCLExtensions.swift */,
 				F5172CE2E18EDB5E5B1575DD588FDA99 /* Support Files */,
 			);
-			name = SCLAlertView;
 			path = SCLAlertView;
 			sourceTree = "<group>";
 		};
@@ -1992,7 +1981,6 @@
 				1AB83539D39F502E97C1F86C88390D90 /* UILayoutSupport+Extensions.swift */,
 				855E03B812D1A626420819DFD16954C9 /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -2019,7 +2007,6 @@
 				F0ADC0A6033308977F950F86B87AE791 /* TegKeychainConstants.swift */,
 				D2C17744F473292F1927D21ADEB31338 /* Support Files */,
 			);
-			name = KeychainSwift;
 			path = KeychainSwift;
 			sourceTree = "<group>";
 		};
@@ -2072,7 +2059,6 @@
 				2AD5CA45884547A835678647676417F2 /* PageControl */,
 				D11D45CB902D932B1046250522D3CA84 /* Support Files */,
 			);
-			name = JXBanner;
 			path = JXBanner;
 			sourceTree = "<group>";
 		};
@@ -2120,7 +2106,6 @@
 				870B577D1E09D9918DF06BB3A392774C /* SocketTypes.swift */,
 				F41727122C805A57FBF78B0BA82F45F8 /* Support Files */,
 			);
-			name = "Socket.IO-Client-Swift";
 			path = "Socket.IO-Client-Swift";
 			sourceTree = "<group>";
 		};
@@ -2162,7 +2147,6 @@
 				284EE43F1F2247A4CE419F009232DDC7 /* URLparameter.swift */,
 				F06F98353BCBF6522CD904928B8336CC /* Support Files */,
 			);
-			name = TRVideoView;
 			path = TRVideoView;
 			sourceTree = "<group>";
 		};
@@ -2209,7 +2193,6 @@
 				F0249B2068609E8B9D80AFCF41A3B841 /* UIDeviceExtension.swift */,
 				A90D46FFEDC09557C9887B60787C7C1B /* Support Files */,
 			);
-			name = Device.swift;
 			path = Device.swift;
 			sourceTree = "<group>";
 		};
@@ -2238,7 +2221,6 @@
 				DFFAD12792A50F8701B97D8D1759BF66 /* UIImageView+AlamofireImage.swift */,
 				2FF6F50FA1858AC7EAC76F8AF828BB91 /* Support Files */,
 			);
-			name = AlamofireImage;
 			path = AlamofireImage;
 			sourceTree = "<group>";
 		};
@@ -2356,7 +2338,6 @@
 				098CF19776DB9ABE71F78C7C2AE68205 /* XML.swift */,
 				9CFADB698170AFEA6B17E4DD93D4D129 /* Support Files */,
 			);
-			name = SwiftyXMLParser;
 			path = SwiftyXMLParser;
 			sourceTree = "<group>";
 		};
@@ -2462,7 +2443,6 @@
 				E93B5E8DCA30218FE02C29B8E2F9BF7B /* Support Files */,
 				FDC563995A1AA81DBBEE4BFB4997124B /* Transform */,
 			);
-			name = JXPageControl;
 			path = JXPageControl;
 			sourceTree = "<group>";
 		};
@@ -4760,7 +4740,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4811,7 +4791,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -4889,7 +4869,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_OBJC_WEAK = NO;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -5177,8 +5157,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -5191,7 +5170,7 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.6;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";

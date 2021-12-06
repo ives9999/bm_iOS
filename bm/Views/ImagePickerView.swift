@@ -23,6 +23,7 @@ class ImagePickerView: UIView {
     var imageView: UIImageView = UIImageView(frame: CGRect.zero)
     var delegate: ImagePickerViewDelegate?
     var gallery: UIImagePickerController?
+    var idx: Int = 0
     
     func setupView() {
         self.backgroundColor = UIColor.black
@@ -70,14 +71,17 @@ class ImagePickerView: UIView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         //print("touch end")
         let slide: UIAlertController = UIAlertController(title: "", message: "新增圖片從", preferredStyle: .alert)
+        
         let pictureAction: UIAlertAction = UIAlertAction(title: "照片", style: .default) { (action) in
             //print(action)
             self.openGallery()
         }
+        
         slide.addAction(pictureAction)
         let cameraAction: UIAlertAction = UIAlertAction(title: "相機", style: .default) { (action) in
             self.openCamera()
         }
+        
         slide.addAction(cameraAction)
         let cancelAction: UIAlertAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         slide.addAction(cancelAction)
@@ -88,8 +92,12 @@ class ImagePickerView: UIView {
         //print("aaa")
         gallery!.sourceType = UIImagePickerController.SourceType.photoLibrary
         gallery!.allowsEditing = true
+        if let i: MyImagePickerVC = gallery as? MyImagePickerVC {
+            i.idx = idx
+        }
         delegate!.myPresent(gallery!)
     }
+    
     func openCamera() {
         gallery!.sourceType = UIImagePickerController.SourceType.camera
         gallery!.allowsEditing = true

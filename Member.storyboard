@@ -2237,6 +2237,8 @@
                         <outlet property="memberStackView" destination="V4k-4t-y3k" id="8cj-oD-Qjs"/>
                         <outlet property="mobileLbl" destination="alI-Hl-kYc" id="Lkb-4m-7iP"/>
                         <outlet property="nicknameLbl" destination="hLd-0n-Bkl" id="9cH-Fv-zL7"/>
+                        <outlet property="teamImageView1" destination="vnz-DA-mL6" id="4pP-X3-4MI"/>
+                        <outlet property="teamImageView2" destination="5Ea-yh-Eex" id="dib-H3-h9f"/>
                         <outlet property="teamNameClearBtn" destination="59d-Zt-5oh" id="s1d-xq-ztA"/>
                         <outlet property="teamNameTF" destination="XNU-Fc-XqJ" id="aOC-7A-A0E"/>
                         <outlet property="topView" destination="7S9-oP-A93" id="Sby-ah-O1W"/>

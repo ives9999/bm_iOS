@@ -324,6 +324,7 @@
 		F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */; };
 		F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */; };
 		F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB841F9895C300DDEC86 /* CoachVC.swift */; };
+		F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */; };
 		F9FAB2B6271EFD8100D83CC4 /* SearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */; };
 		F9FAB2B82721643000D83CC4 /* OneRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAB2B72721643000D83CC4 /* OneRow.swift */; };
 /* End PBXBuildFile section */
@@ -719,6 +720,7 @@
 		F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell1.swift; sourceTree = "<group>"; };
 		F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		F9A1CB841F9895C300DDEC86 /* CoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachVC.swift; sourceTree = "<group>"; };
+		F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImagePickerVC.swift; sourceTree = "<group>"; };
 		F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRow.swift; sourceTree = "<group>"; };
 		F9FAB2B72721643000D83CC4 /* OneRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -916,6 +918,7 @@
 				B3E4D09325F71B2500D78210 /* SelectionDialog.swift */,
 				B31AF7DB267340B100D68778 /* SearchPanel.swift */,
 				B36AC11A26C6AF9700FE3B5F /* Panel.swift */,
+				F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1785,6 +1788,7 @@
 				B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */,
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
 				B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */,
+				F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */,
 				B3B758D325AD55E7006ACC33 /* GMStepper.swift in Sources */,
 				B3B758CD25AD4215006ACC33 /* NumberFormItem.swift in Sources */,
 				B31106E9221E5285007A5D49 /* StaticBottomView.swift in Sources */,

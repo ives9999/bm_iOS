@@ -18,10 +18,10 @@ let CHANNEL = "bm"
 // URL Constants
 let REMOTE_BASE_URL = "https://bm.sportpassword.com"
 //let REMOTE_BASE_URL = "http://192.168.100.120"
-//let REMOTE_BASE_URL = "http://192.168.100.150"
 //let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
 //let LOCALHOST_BASE_URL = "http://192.168.100.17"
-let LOCALHOST_BASE_URL = "http://192.168.100.120"
+//let LOCALHOST_BASE_URL = "http://192.168.100.120"
+let LOCALHOST_BASE_URL = "http://sandbox.sportpassword.com"
 let BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
 
 let URL_AREA_BY_CITY_IDS = URL_HOME + "area_by_citys"
