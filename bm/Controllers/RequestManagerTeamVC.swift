@@ -164,6 +164,20 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
         }
     }
     
+    @IBAction func submit(_ sender: Any) {
+        
+        let manager_type: String = able_type
+        let manager_type_token: String = ""
+        let manager_token: String = manager_tokenTF.text!
+        let member_token: String = Member.instance.token
+        
+        params["manager_type"] = manager_type
+        params["manager_type_token"] = manager_type_token
+        params["manager_token"] = manager_token
+        params["member_token"] = Member.instance.token
+        params["do"] = "update"
+    }
+    
     @IBAction func validate(_ sender: Any) {
         //memberStackView.isHidden = true
         let manager_token: String = manager_tokenTF.text!
@@ -183,6 +197,10 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
     }
     
     @IBAction func prev1() {
+        prev()
+    }
+    
+    @IBAction func cancel() {
         prev()
     }
 }
