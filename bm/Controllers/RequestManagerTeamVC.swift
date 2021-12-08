@@ -42,7 +42,7 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
         teamImageView1.gallery = imagerPicker
         teamImageView1.delegate = self
         teamImageView1.idx = 1
-        
+
         teamImageView2.gallery = imagerPicker
         teamImageView2.delegate = self
         teamImageView2.idx = 2
