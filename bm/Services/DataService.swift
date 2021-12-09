@@ -184,14 +184,14 @@ class DataService {
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
-        AF.request(url, method: .post, parameters: filter, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
+        AF.request(url, method: .post, parameters: filter, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
+            //let str = String(decoding: response.data!, as: UTF8.self)
+            //print(str)
             switch response.result {
-            //case .success(let value):
             case .success(_):
                 if response.data != nil {
-//                    let json = JSON(value)
-//                    print(json)
+
                     self.jsonData = response.data
                     completion(true)
                     //s = try JSONDecoder().decode(t, from: response.data!)
@@ -431,18 +431,26 @@ class DataService {
         var params: [String: String] = ["channel":CHANNEL,"device":"app"]
         params.merge(_params)
         
-        print(url)
-        print(params)
+        //print(url)
+        //print(params)
+        
+//        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+//
+//            let str = String(decoding: response.data!, as: UTF8.self)
+//            print(str)
+//            let i = 6
+//        }
         
         msg = ""
         AF.upload(
             multipartFormData: { (multipartFormData) in
                 if images != nil {
-                    
+
                     for (idx, image) in images!.enumerated() {
                         let imageData: Data = image.jpegData(compressionQuality: 0.2)! as Data
-                        let fileName: String = "image" + String(idx + 1)
-                        multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpeg")
+                        let withName: String = "image" + String(idx + 1)
+                        let fileName: String = "image" + String(idx + 1) + ".jpg"
+                        multipartFormData.append(imageData, withName: withName, fileName: fileName, mimeType: "image/jpeg")
                     }
                 }
                 for (key, value) in params {
@@ -455,7 +463,9 @@ class DataService {
             headers: headers
         )
             .responseJSON(completionHandler: { response in
-                //print(response.value)
+                
+//                let str = String(decoding: response.data!, as: UTF8.self)
+//                print(str)
                 if (response.data != nil) {
                     self.jsonData = response.data
                     completion(true)

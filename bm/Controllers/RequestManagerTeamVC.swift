@@ -14,9 +14,10 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
     @IBOutlet var teamNameClearBtn: UIButton!
     @IBOutlet var managerTokenClearBtn: UIButton!
     @IBOutlet var managerView: UIView!
-    //@IBOutlet var imageView: UIView!
+    @IBOutlet var imageStack: UIView!
+    @IBOutlet var line1: UIView!
     @IBOutlet var teamNameTF: SuperTextField!
-    @IBOutlet var memberStackView: UIStackView!
+    @IBOutlet var memberStack: UIStackView!
     @IBOutlet var manager_tokenTF: SuperTextField!
     @IBOutlet var nicknameLbl: SuperLabel!
     @IBOutlet var emailLbl: SuperLabel!
@@ -24,6 +25,8 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
     @IBOutlet var submitBtn: SubmitButton!
     @IBOutlet var cancelBtn: CancelButton!
     @IBOutlet var line2: UIView!
+    @IBOutlet var line3: UIView!
+    @IBOutlet var buttonStack: UIStackView!
     
     @IBOutlet var teamImageView1: ImagePickerView!
     @IBOutlet var teamImageView2: ImagePickerView!
@@ -54,15 +57,21 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
         teamNameClearBtn.setTitle("", for: .normal)
         managerTokenClearBtn.setTitle("", for: .normal)
         
-//        managerView.isHidden = true
-//        line2.isHidden = true
-//        imageView.isHidden = true
+        //teamNameTF.text = "早安羽球隊"
+        //manager_tokenTF.text = "bbeq9v41HVRBOgPNEA9pmAEH6abNZPs"
+        
+        line1.isHidden = true
+        managerView.isHidden = true
+        line2.isHidden = true
+        imageStack.isHidden = true
+        line3.isHidden = true
     }
     
     func checkManagerToken() {
         
+        line1.isHidden = false
         managerView.isHidden = false
-        memberStackView.isHidden = true
+        memberStack.isHidden = true
     }
     
     @IBAction func isNameExist() {
@@ -146,12 +155,11 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
                             self.emailLbl.text = self.managerTable!.email
                             self.mobileLbl.text = self.managerTable!.mobile
 
-                            self.memberStackView.isHidden = false
+                            self.memberStack.isHidden = false
                             self.line2.isHidden = false
-                            self.teamImageView1.isHidden = false
-                            self.teamImageView2.isHidden = false
-                            self.submitBtn.isHidden = false
-                            self.cancelBtn.isHidden = false
+                            self.line3.isHidden = false
+                            self.imageStack.isHidden = false
+                            self.buttonStack.isHidden = false
                         }
                     } else {
                         self.warning("管理員金鑰錯誤，系統無此會員!!")
@@ -197,7 +205,7 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
         } else {
             msg += "請上傳第一張圖片\n"
         }
-        
+
         if let image2: UIImage = teamImageView2.imageView.image {
             images.append(image2)
         } else {
@@ -217,11 +225,13 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
                         if (!table.success) {
                             self.warning(table.msg)
                         } else {
-                            self.info("已經送出審核資料，我們會盡快通過審核")
+                            self.info(msg: "已經送出審核資料，我們會盡快通過審核", buttonTitle: "關閉") {
+                                self.prev1()
+                            }
                         }
                     } catch {
                         //self.warning(error.localizedDescription)
-                        self.warning(MemberService.instance.msg)
+                        self.warning(self.dataService.msg)
                     }
                 } else {
                     Global.instance.removeSpinner(superView: self.view)
