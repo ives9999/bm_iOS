@@ -160,6 +160,7 @@ class Table: Codable {
 class SuccessTable: Codable {
     var success: Bool = false
     var msg: String = ""
+    var token: String = ""
     
     init(){}
     
@@ -168,5 +169,6 @@ class SuccessTable: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
         msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
+        token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
     }
 }

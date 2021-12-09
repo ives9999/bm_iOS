@@ -124,7 +124,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if deviceType == .simulator {
             gSimulate = true
         }
-        //gSimulate = false
+        gSimulate = true
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         

@@ -174,13 +174,13 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        //print(filter.toJSONString())
+        print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        //print(url)
+        print(url)
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
@@ -424,6 +424,53 @@ class DataService {
     
     func getUpdateURL()-> String {return ""}
     
+    func requestManager(_params: [String: String], images: [UIImage]?, completion: @escaping CompletionHandler) {
+        
+        let url: String = URL_REQUEST_MANAGER
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+        var params: [String: String] = ["channel":CHANNEL,"device":"app"]
+        params.merge(_params)
+        
+        print(url)
+        print(params)
+        
+        msg = ""
+        AF.upload(
+            multipartFormData: { (multipartFormData) in
+                if images != nil {
+                    
+                    for (idx, image) in images!.enumerated() {
+                        let imageData: Data = image.jpegData(compressionQuality: 0.2)! as Data
+                        let fileName: String = "image" + String(idx + 1)
+                        multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpeg")
+                    }
+                }
+                for (key, value) in params {
+                    multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
+                }
+            },
+            to: url,
+            usingThreshold: UInt64.init(),
+            method: .post,
+            headers: headers
+        )
+            .responseJSON(completionHandler: { response in
+                //print(response.value)
+                if (response.data != nil) {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "伺服器錯誤，請洽管理員"
+                    completion(false)
+                    return
+                }
+            })
+            .uploadProgress(queue: .main, closure: { progress in
+                //Current upload progress of file
+                //print("Upload Progress: \(progress.fractionCompleted)")
+            })
+    }
+    
     func update(_params: [String: String], image: UIImage?, completion: @escaping CompletionHandler) {
         
         let url: String = getUpdateURL()
@@ -440,6 +487,7 @@ class DataService {
                     let imageData: Data = image!.jpegData(compressionQuality: 0.2)! as Data
                     multipartFormData.append(imageData, withName: "file", fileName: "test.jpg", mimeType: "image/jpeg")
                 }
+                
                 for (key, value) in params {
                     multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
                 }
@@ -516,36 +564,53 @@ class DataService {
                 print(error)
                 return
             }
-            
-            
-//            if response.result.error == nil {
-//                guard let data = response.result.value else {
-//                    print("data error")
-//                    self.msg = "網路錯誤，請稍後再試"
-//                    completion(false)
-//                    return
-//                }
-//                //print(data)
-//                self.msg = ""
-//                let json: JSON = JSON(data)
-//                //print(json)
-//                self.success = json["success"].boolValue
-//                //print(self.success)
-//                if self.success {
-////                    self.ecpay_token = json["token"].stringValue
-////                    self.tokenExpireDate = json["tokenExpireDate"].stringValue
-////                    self.order_token = json["order_token"].stringValue
-//                    completion(true)
-//                } else {
-//                    self.msg = json["msg"].stringValue
-//                    completion(false)
-//                }
-//            } else {
-//                //print(response.result.error)
-//                self.msg = "網路或伺服器錯誤，請聯絡管理員或請稍後再試"
-//                completion(false)
-//            }
         }
+    }
+    
+    func update(_params: [String: String], images: [UIImage]?, completion: @escaping CompletionHandler) {
+        
+        let url: String = getUpdateURL()
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+        var params: [String: String] = ["channel":CHANNEL,"device":"app"]
+        params.merge(_params)
+
+        //print(url)
+        //print(params)
+        msg = ""
+        AF.upload(
+            multipartFormData: { (multipartFormData) in
+                if images != nil {
+                    
+                    for (idx, image) in images!.enumerated() {
+                        let imageData: Data = image.jpegData(compressionQuality: 0.2)! as Data
+                        let fileName: String = "image" + String(idx + 1)
+                        multipartFormData.append(imageData, withName: "file", fileName: fileName, mimeType: "image/jpeg")
+                    }
+                }
+                for (key, value) in params {
+                    multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
+                }
+            },
+            to: url,
+            usingThreshold: UInt64.init(),
+            method: .post,
+            headers: headers
+        )
+            .responseJSON(completionHandler: { response in
+                //print(response.value)
+                if (response.data != nil) {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "伺服器錯誤，請洽管理員"
+                    completion(false)
+                    return
+                }
+            })
+            .uploadProgress(queue: .main, closure: { progress in
+                //Current upload progress of file
+                //print("Upload Progress: \(progress.fractionCompleted)")
+            })
     }
     
 //    func getOne1<T: Table>(t: T.Type, params: [String: String], completion: @escaping CompletionHandler){
