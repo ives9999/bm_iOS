@@ -22,6 +22,8 @@ class TeamService: DataService {
     
     var tempPlayList: [DATA] = [DATA]()
     
+    let able_type: String = "team"
+    
 //    override init() {
 //        super.init()
 //        _model = Team.instance
@@ -45,11 +47,17 @@ class TeamService: DataService {
     }
     
     override func getUpdateURL()-> String {
-        return String(format: URL_UPDATE, "team")
+        return String(format: URL_UPDATE, able_type)
     }
     
     override func getIsNameExistUrl()->String {
-        return String(format: URL_ISNAMEEXIST, "team")
+        return String(format: URL_ISNAMEEXIST, able_type)
+    }
+    
+    override func getSignupURL(token: String)-> String {
+        let url: String = String(format: URL_SIGNUP, able_type, token)
+        
+        return url
     }
     
     func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {

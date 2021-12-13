@@ -31,7 +31,7 @@ class ShowArenaVC: ShowVC {
             "air_condition_show":["icon":"air_condition","title":"空調","content":""],
             "parking_show":["icon":"parking","title":"停車場","content":""],
             "pv":["icon":"pv","title":"瀏覽數","content":""],
-            "created_at_show":["icon":"calendar","title":"建立日期","content":""]
+            "created_at_show":["icon":"date","title":"建立日期","content":""]
         ]
         refresh(ArenaTable.self)
     }

@@ -1345,7 +1345,13 @@ extension Date {
         let y = _y==nil ? Date().getY() : _y
         let m = _m==nil ? Date().getm() : _m
         let d = 1
-        return "\(y!)-\(m!)-\(d)".toDate()
+        
+        let dateString: String = "\(y!)-\(m!)-\(d)"
+        var res: Date = Date()
+        if let tmp: Date = dateString.toDate() {
+            res = tmp
+        }
+        return res
     }
     
     func endOfMonth(_ _y: Int?=nil, _ _m: Int?=nil)-> Date {
@@ -1369,6 +1375,18 @@ extension Date {
         let date = endOfMonth(y!, m!)
         
         return date.getd()
+    }
+    
+    func isEqualTo(_ date: Date) -> Bool {
+        return self == date
+    }
+      
+    func isGreaterThan(_ date: Date) -> Bool {
+        return self > date
+    }
+      
+    func isSmallerThan(_ date: Date) -> Bool {
+       return self < date
     }
 }
 
@@ -1446,7 +1464,7 @@ extension String {
         }
     }
     
-    func toDate(format: String = "yyyy-MM-dd") -> Date {
+    func toDate(format: String = "yyyy-MM-dd") -> Date? {
         //Create Date Formatter
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "zh_TW")
@@ -1454,7 +1472,7 @@ extension String {
         dateFormatter.dateFormat = format
         
         //Parse into NSDate
-        let dateFromString : Date = dateFormatter.date(from: self)!
+        let dateFromString: Date? = dateFormatter.date(from: self)
         
         //Return Parsed Date
         return dateFromString

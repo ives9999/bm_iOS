@@ -160,6 +160,8 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
 //        }
     }
     
+    func submitValidate() {}
+    
     func submit(_ sender: Any) {
         
         var action = "UPDATE"
@@ -167,7 +169,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
             action = "INSERT"
         }
         
-        var msg: String = ""
+        msg = ""
         for section in oneSections {
             for row in section.items {
                 params[row.key] = row.value
@@ -176,6 +178,8 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                 }
             }
         }
+        
+        submitValidate()
         
         if msg.count > 0 {
             warning(msg)

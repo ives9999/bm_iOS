@@ -246,24 +246,25 @@ class CourseCalendarVC: MyTableVC {
                 var course: [String: Any] = [String: Any]()
                 let date: String = String(format: "%4d-%02d-%02d", y, m, day)
                 course["date"] = date
-                let d: Date = date.toDate()
-                let weekday_i: Int = d.dateToWeekday()
-                let weekday_c: String = d.dateToWeekdayForChinese()
-                course["weekday_i"] = weekday_i
-                course["weekday_c"] = weekday_c
-                
-                var rows: [CourseTable] = [CourseTable]()
-                for superModel in lists1 {
-                    if let courseTable = superModel as? CourseTable {
-                        //superCourse.printRow()
-//                        for weekday in courseTable.weekday_arr {
-//                            if weekday == weekday_i {
-//                                rows.append(superCourse)
-//                            }
-//                        }
+                if let d: Date? = date.toDate() {
+                    let weekday_i: Int = d!.dateToWeekday()
+                    let weekday_c: String = d!.dateToWeekdayForChinese()
+                    course["weekday_i"] = weekday_i
+                    course["weekday_c"] = weekday_c
+                    
+                    let rows: [CourseTable] = [CourseTable]()
+                    for superModel in lists1 {
+                        if let courseTable = superModel as? CourseTable {
+                            //superCourse.printRow()
+    //                        for weekday in courseTable.weekday_arr {
+    //                            if weekday == weekday_i {
+    //                                rows.append(superCourse)
+    //                            }
+    //                        }
+                        }
                     }
+                    course["rows"] = rows
                 }
-                course["rows"] = rows
                 
                 dateCourses.append(course)
             }

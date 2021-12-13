@@ -111,7 +111,7 @@ class ShowCoachVC: ShowVC {
             WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],
             EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"],
             COACH_SENIORITY_KEY:["icon":"seniority","title":"年資","content":""],
-            CREATED_AT_KEY:["icon":"calendar","title":"建立日期","content":""],
+            CREATED_AT_KEY:["icon":"date","title":"建立日期","content":""],
             PV_KEY:["icon":"pv","title":"瀏覽數","content":""]
         ]
         

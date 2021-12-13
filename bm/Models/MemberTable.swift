@@ -517,6 +517,39 @@ class Member {
         return msg
     }
     
+    func checkEMailValidate() -> Bool {
+        
+        var isValidate: Bool = false
+        
+        if Member.instance.validate & 1 > 0 {
+            isValidate = true
+        }
+        
+        return isValidate
+    }
+    
+    func checkMobileValidate() -> Bool {
+        
+        var isValidate: Bool = false
+        
+        if Member.instance.validate & 2 > 0 {
+            isValidate = true
+        }
+        
+        return isValidate
+    }
+    
+    func checkPIDValidate() -> Bool {
+        
+        var isValidate: Bool = false
+        
+        if Member.instance.validate & 4 > 0 {
+            isValidate = true
+        }
+        
+        return isValidate
+    }
+    
     //init() {
         //var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
         //let folder: String = path[0] as! String

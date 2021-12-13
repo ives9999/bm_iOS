@@ -134,6 +134,8 @@ class EditTeamVC: EditVC {
         oneSections.append(section)
         
         rows.removeAll()
+        row = OneRow(title: "球隊狀態", value: myTable!.status, show: myTable!.status_show, key: STATUS_KEY, cell: "switch")
+        rows.append(row)
         var weekdays: Int = 0
         for weekday in myTable!.weekdays {
             let n: Int = (pow(2, weekday.weekday) as NSDecimalNumber).intValue
@@ -152,17 +154,15 @@ class EditTeamVC: EditVC {
         rows.append(row)
         row = OneRow(title: "球種", value: myTable!.ball, show: myTable!.ball, key: TEAM_BALL_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "RSL4號球")
         rows.append(row)
-        row = OneRow(title: "球隊狀態", value: myTable!.status, show: myTable!.status_show, key: STATUS_KEY, cell: "switch")
-        rows.append(row)
         section = makeSectionRow(title: "打球資料", key: "charge", rows: rows)
         oneSections.append(section)
         
         rows.removeAll()
+        row = OneRow(title: "臨打狀態", value: myTable!.temp_status, show: myTable!.temp_status_show, key: TEAM_TEMP_STATUS_KEY, cell: "switch")
+        rows.append(row)
         row = OneRow(title: "臨打日期", value: myTable!.last_signup_date, show: myTable!.last_signup_date, key: TEAM_TEMP_DATE_KEY, cell: "more")
         rows.append(row)
         row = OneRow(title: "臨打名額", value: String(myTable!.temp_quantity), show: String(myTable!.temp_quantity), key: TEAM_TEMP_QUANTITY_KEY, cell: "textField")
-        rows.append(row)
-        row = OneRow(title: "臨打狀態", value: myTable!.temp_status, show: myTable!.temp_status_show, key: TEAM_TEMP_STATUS_KEY, cell: "switch")
         rows.append(row)
         row = OneRow(title: "臨打費用-男", value: String(myTable!.temp_fee_M), show: String(myTable!.temp_fee_M), key: TEAM_TEMP_FEE_M_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "300")
         rows.append(row)
@@ -211,6 +211,18 @@ class EditTeamVC: EditVC {
         params.removeAll()
         params["cat_id"] = String(21)
         super.submit(sender)
+    }
+    
+    override func submitValidate() {
+        
+        let row: OneRow = getOneRowFromKey(TEAM_TEMP_DATE_KEY)
+        let temp_date_string: String = row.value
+        if let temp_date = temp_date_string.toDate() {
+            //print(temp_date)
+            if temp_date.isSmallerThan(Date()) {
+                msg = "臨打日期必須在明天之後\n"
+            }
+        }
     }
     
 //    func putValue() {

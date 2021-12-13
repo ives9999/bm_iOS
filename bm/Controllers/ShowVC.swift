@@ -49,6 +49,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     var isLike: Bool = false
     var token: String?
     var table: Table?
+    var memberRows: [MemberRow] = [MemberRow]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,8 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         
         //refresh()
     }
+    
+    func initData() {}
     
 //    func initShowVC(sin: Show_IN) {
 //        self.show_in = sin
@@ -132,6 +135,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
                                 self.titleLbl.text = self.table!.title
                             }
                             
+                            self.initData()
                             self.setData()
                             self.setFeatured()
                             self.setContent()

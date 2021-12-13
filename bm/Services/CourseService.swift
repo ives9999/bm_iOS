@@ -17,6 +17,8 @@ class CourseService: DataService {
     //var superCourses: SuperCourses = SuperCourses()
     //var superCourse: SuperCourse = SuperCourse()
     
+    let able_type: String = "course"
+    
     override init() {
         super.init()
         //superModel = SuperCourses(dict: [String : Any]())
@@ -31,7 +33,7 @@ class CourseService: DataService {
     }
     
     override func getUpdateURL()-> String {
-        return String(format: URL_UPDATE, "course")
+        return String(format: URL_UPDATE, able_type)
     }
     
     override func getLikeURL(token: String? = nil) -> String {
@@ -53,7 +55,7 @@ class CourseService: DataService {
     }
     
     override func getSignupListURL(token: String? = nil)-> String {
-        var url: String = String(format: URL_SIGNUP_LIST, "course")
+        var url: String = String(format: URL_SIGNUP_LIST, able_type)
         if token != nil {
             url = url + "/" + token!
         }
@@ -62,13 +64,13 @@ class CourseService: DataService {
     }
     
     override func getSignupURL(token: String)-> String {
-        let url: String = String(format: URL_SIGNUP, "course", token)
+        let url: String = String(format: URL_SIGNUP, able_type, token)
         
         return url
     }
     
     override func getSignupDateURL(token: String)-> String {
-        let url: String = String(format: URL_SIGNUP_DATE, "course", token)
+        let url: String = String(format: URL_SIGNUP_DATE, able_type, token)
         
         return url
     }

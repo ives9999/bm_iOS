@@ -329,9 +329,8 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="z4K-R4-yIY"/>
                                 </constraints>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" id="RiV-Jf-Npv">
-                                <rect key="frame" x="0.0" y="49" width="414" height="744"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="IGY-ev-jvQ">
+                                <rect key="frame" x="0.0" y="64" width="414" height="778"/>
                             </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kem-El-iLq">
                                 <rect key="frame" x="0.0" y="64" width="414" height="744"/>
@@ -443,11 +442,15 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="73p-Y4-f9z" secondAttribute="trailing" id="AVg-UA-U3k"/>
                             <constraint firstItem="Ke2-bq-5Eo" firstAttribute="leading" secondItem="KK4-Sj-BQs" secondAttribute="leading" id="FhE-vH-A3J"/>
+                            <constraint firstItem="IGY-ev-jvQ" firstAttribute="trailing" secondItem="KK4-Sj-BQs" secondAttribute="trailing" id="HmG-f1-e7H"/>
                             <constraint firstItem="Ke2-bq-5Eo" firstAttribute="trailing" secondItem="KK4-Sj-BQs" secondAttribute="trailing" id="Kbd-Zp-EdS"/>
                             <constraint firstItem="73p-Y4-f9z" firstAttribute="top" secondItem="KK4-Sj-BQs" secondAttribute="top" id="LUr-3Z-T0c"/>
                             <constraint firstItem="Kem-El-iLq" firstAttribute="leading" secondItem="KK4-Sj-BQs" secondAttribute="leading" id="SOs-DX-6ag"/>
+                            <constraint firstAttribute="bottom" secondItem="IGY-ev-jvQ" secondAttribute="bottom" id="VIZ-wS-MQ9"/>
                             <constraint firstItem="73p-Y4-f9z" firstAttribute="leading" secondItem="KK4-Sj-BQs" secondAttribute="leading" id="Yeh-5E-D7C"/>
                             <constraint firstItem="KK4-Sj-BQs" firstAttribute="trailing" secondItem="Kem-El-iLq" secondAttribute="trailing" id="a8e-Vc-gQP"/>
+                            <constraint firstItem="IGY-ev-jvQ" firstAttribute="leading" secondItem="KK4-Sj-BQs" secondAttribute="leading" id="g9p-78-Spu"/>
+                            <constraint firstItem="IGY-ev-jvQ" firstAttribute="top" secondItem="73p-Y4-f9z" secondAttribute="bottom" id="jeB-pE-WHl"/>
                             <constraint firstItem="Kem-El-iLq" firstAttribute="top" secondItem="73p-Y4-f9z" secondAttribute="bottom" id="kly-hw-cWW"/>
                             <constraint firstItem="KK4-Sj-BQs" firstAttribute="bottom" secondItem="Kem-El-iLq" secondAttribute="bottom" id="vsg-V5-Ho4"/>
                             <constraint firstItem="KK4-Sj-BQs" firstAttribute="bottom" secondItem="Ke2-bq-5Eo" secondAttribute="bottom" id="xRc-ur-J3f"/>

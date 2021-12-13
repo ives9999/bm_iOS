@@ -75,14 +75,14 @@ class ShowCourseVC: ShowVC {
         
         tableRowKeys = ["weekday_text","interval_show","date","price_text_long","people_limit_text","kind_text","pv","created_at_show"]
         tableRows = [
-            "weekday_text":["icon":"calendar","title":"星期","content":""],
+            "weekday_text":["icon":"date","title":"星期","content":""],
             "interval_show":["icon":"clock","title":"時段","content":""],
-            "date":["icon":"calendar","title":"期間","content":""],
+            "date":["icon":"date","title":"期間","content":""],
             "price_text_long":["icon":"money","title":"收費","content":""],
             "people_limit_text":["icon":"group","title":"限制人數","content":""],
             "kind_text": ["icon":"cycle","title":"週期","content":""],       // "signup_count":["icon":"group","title":"已報名人數","content":""],
             "pv":["icon":"pv","title":"瀏覽數","content":""],
-            "created_at_show":["icon":"calendar","title":"建立日期","content":""]
+            "created_at_show":["icon":"date","title":"建立日期","content":""]
         ]
         
         if (scrollView != nil) {

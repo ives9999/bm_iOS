@@ -23,14 +23,14 @@ class ShowStoreVC: ShowVC {
         tableRows = [
             "tel_show":["icon":"tel","title":"市內電話","content":""],
             "mobile_show":["icon":"mobile","title":"行動電話","content":""],
-            "address":["icon":"marker","title":"住址","content":""],
+            "address":["icon":"map","title":"住址","content":""],
             "fb":["icon":"fb","title":"FB","content":""],
             "line":["icon":"line","title":"line","content":""],
             "website":["icon":"website","title":"網站","content":""],
             "email":["icon":"email1","title":"email","content":""],
             "business_time":["icon":"clock","title":"營業時間","content":""],
             "pv":["icon":"pv","title":"瀏覽數","content":""],
-            "created_at_show":["icon":"calendar","title":"建立日期","content":""]
+            "created_at_show":["icon":"date","title":"建立日期","content":""]
         ]
         
         refresh(StoreTable.self)
