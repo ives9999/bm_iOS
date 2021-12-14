@@ -96,7 +96,7 @@ class TeamListCell: List2Cell {
                 intervalLbl.text = "未提供"
             }
             
-            temp_qnantityLbl.text = row!.temp_quantity_show
+            temp_qnantityLbl.text = row!.people_limit_show
             signup_countLbl.text = row!.temp_signup_count_show
             
             if row!.mobile.isEmpty && mobileIcon.visibility == .visible {

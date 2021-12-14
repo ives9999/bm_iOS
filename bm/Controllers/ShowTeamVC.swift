@@ -163,7 +163,7 @@ class ShowTeamVC: ShowVC {
             }
         }
         
-        if myTable!.temp_quantity == 0 {
+        if myTable!.people_limit == 0 {
             isTempPlay = false
         }
     }
@@ -219,7 +219,7 @@ class ShowTeamVC: ShowVC {
         } else if tableView == self.signupTableView {
             if myTable != nil && isTempPlay {
                 
-                let people_limit: Int = myTable!.temp_quantity
+                let people_limit: Int = myTable!.people_limit
                 //let normal_count: Int = courseTable!.signupNormalTables.count
                 //let standby_count: Int = courseTable!.signupStandbyTables.count
                 //let people_limit: Int = courseTable!.people_limit
@@ -288,7 +288,7 @@ class ShowTeamVC: ShowVC {
         } else if tableView == signupTableView {
             let cell: OlCell = tableView.dequeueReusableCell(withIdentifier: "signupCell", for: indexPath) as! OlCell
             
-            let people_limit = myTable!.temp_quantity
+            let people_limit = myTable!.people_limit
             //let normal_count = myTable!.signupNormalTables.count
             //let standby_count = myTable!.signupStandbyTables.count
             if indexPath.row < people_limit {
@@ -384,7 +384,7 @@ class ShowTeamVC: ShowVC {
                         let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
                         if (successTable.success) {
                             self.info(msg: successTable.msg, buttonTitle: "關閉") {
-                                self.refresh(CourseTable.self)
+                                self.refresh(TeamTable.self)
                             }
                         } else {
                             self.warning("報名沒有成功，請洽管理員")

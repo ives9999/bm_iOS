@@ -44,7 +44,7 @@ class TeamTable: Table {
     var manager_nickname: String = ""
     var temp_fee_M: Int = -1
     var temp_fee_F: Int = -1
-    var temp_quantity: Int = 0
+    var people_limit: Int = 0
     var temp_content: String = ""
     var temp_status: String = ""
     var temp_signup_count: Int = 0
@@ -58,7 +58,7 @@ class TeamTable: Table {
     var weekdays_show: String = ""
     var interval_show: String = ""
     var degree_show: String = ""
-    var temp_quantity_show: String = ""
+    var people_limit_show: String = ""
     var temp_signup_count_show: String = ""
     var temp_status_show: String = "上線"
     var temp_fee_M_show: String = ""
@@ -90,7 +90,7 @@ class TeamTable: Table {
         case manager_nickname
         case temp_fee_M
         case temp_fee_F
-        case temp_quantity
+        case people_limit
         case temp_content
         case temp_status
         case temp_signup_count
@@ -122,7 +122,7 @@ class TeamTable: Table {
         do {temp_fee_M = try container.decode(Int.self, forKey: .temp_fee_M)}catch{temp_fee_M = -1}
         do {temp_fee_F = try container.decode(Int.self, forKey: .temp_fee_F)}catch{temp_fee_F = -1}
         do {youtube = try container.decode(String.self, forKey: .youtube)}catch{youtube = ""}
-        do {temp_quantity = try container.decode(Int.self, forKey: .temp_quantity)}catch{temp_quantity = 0}
+        do {people_limit = try container.decode(Int.self, forKey: .people_limit)}catch{people_limit = 0}
         do {temp_content = try container.decode(String.self, forKey: .temp_content)}catch{temp_content = ""}
         do {temp_status = try container.decode(String.self, forKey: .temp_status)}catch{temp_status = ""}
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
@@ -147,10 +147,10 @@ class TeamTable: Table {
         }
         
         if temp_status == "on" {
-            temp_quantity_show = "臨打：\(temp_quantity)位"
+            people_limit_show = "臨打：\(people_limit)位"
             temp_signup_count_show = "報名：\(temp_signup_count)位"
         } else {
-            temp_quantity_show = ""
+            people_limit_show = ""
             temp_signup_count_show = ""
         }
         

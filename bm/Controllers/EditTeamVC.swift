@@ -162,7 +162,7 @@ class EditTeamVC: EditVC {
         rows.append(row)
         row = OneRow(title: "臨打日期", value: myTable!.last_signup_date, show: myTable!.last_signup_date, key: TEAM_TEMP_DATE_KEY, cell: "more")
         rows.append(row)
-        row = OneRow(title: "臨打名額", value: String(myTable!.temp_quantity), show: String(myTable!.temp_quantity), key: TEAM_TEMP_QUANTITY_KEY, cell: "textField")
+        row = OneRow(title: "臨打名額", value: String(myTable!.people_limit), show: String(myTable!.people_limit), key: PEOPLE_LIMIT_KEY, cell: "textField")
         rows.append(row)
         row = OneRow(title: "臨打費用-男", value: String(myTable!.temp_fee_M), show: String(myTable!.temp_fee_M), key: TEAM_TEMP_FEE_M_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "300")
         rows.append(row)
