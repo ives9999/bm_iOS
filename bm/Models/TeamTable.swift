@@ -53,6 +53,10 @@ class TeamTable: Table {
     var arena: ArenaTable?
     var signupDate: SignupDateTable?
     
+    var isSignup: Bool = false
+    var signupNormalTables: [SignupNormalTable] = [SignupNormalTable]()
+    var signupStandbyTables: [SignupStandbyTable] = [SignupStandbyTable]()
+    
     var play_start_show: String = ""
     var play_end_show: String = ""
     var weekdays_show: String = ""
@@ -98,6 +102,9 @@ class TeamTable: Table {
         case weekdays
         case arena
         case signupDate = "signup_date"
+        case isSignup
+        case signupNormalTables = "signup_normal_models"
+        case signupStandbyTables = "signup_standby_models"
     }
     
     required init(from decoder: Decoder) throws {
@@ -131,6 +138,9 @@ class TeamTable: Table {
         weekdays = try container.decodeIfPresent([Team_WeekdaysTable].self, forKey: .weekdays) ?? [Team_WeekdaysTable]()
         arena = try container.decodeIfPresent(ArenaTable.self, forKey: .arena) ?? nil
         signupDate = try container.decodeIfPresent(SignupDateTable.self, forKey: .signupDate) ?? nil
+        isSignup = try container.decodeIfPresent(Bool.self, forKey: .isSignup) ?? false
+        signupNormalTables = try container.decodeIfPresent([SignupNormalTable].self, forKey: .signupNormalTables) ?? [SignupNormalTable]()
+        signupStandbyTables = try container.decodeIfPresent([SignupStandbyTable].self, forKey: .signupStandbyTables) ?? [SignupStandbyTable]()
         //do {arena = try container.decode(ArenaTable.self, forKey: .arena)}catch{arena = nil}
     }
     

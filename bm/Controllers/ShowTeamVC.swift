@@ -144,6 +144,21 @@ class ShowTeamVC: ShowVC {
             }
         }
         
+        if (myTable!.people_limit == 0) {
+            signupButton.visibility = .invisible
+        }
+    
+        if myTable!.isSignup {
+            signupButton.setTitle("取消報名")
+        } else {
+            let count = myTable!.signupNormalTables.count
+            if count >= myTable!.people_limit {
+                self.signupButton.setTitle("候補")
+            } else {
+                self.signupButton.setTitle("報名")
+            }
+        }
+        
         signupTableView.reloadData()
     }
     
@@ -220,10 +235,9 @@ class ShowTeamVC: ShowVC {
             if myTable != nil && isTempPlay {
                 
                 let people_limit: Int = myTable!.people_limit
-                //let normal_count: Int = courseTable!.signupNormalTables.count
-                //let standby_count: Int = courseTable!.signupStandbyTables.count
-                //let people_limit: Int = courseTable!.people_limit
-                let count = people_limit //+ standby_count + 1
+                //let normal_count: Int = myTable!.signupNormalTables.count
+                let standby_count: Int = myTable!.signupStandbyTables.count
+                let count = people_limit + standby_count + 1
                 //print(count)
                 return count
             } else {
@@ -289,35 +303,33 @@ class ShowTeamVC: ShowVC {
             let cell: OlCell = tableView.dequeueReusableCell(withIdentifier: "signupCell", for: indexPath) as! OlCell
             
             let people_limit = myTable!.people_limit
-            //let normal_count = myTable!.signupNormalTables.count
-            //let standby_count = myTable!.signupStandbyTables.count
+            let normal_count = myTable!.signupNormalTables.count
+            let standby_count = myTable!.signupStandbyTables.count
             if indexPath.row < people_limit {
                 cell.numberLbl.text = "\(indexPath.row + 1)."
                 cell.nameLbl.text = ""
-//                if normal_count > 0 {
-//                    if indexPath.row < normal_count {
-//                        let signup_normal_model = myTable!.signupNormalTables[indexPath.row]
-//                        cell.nameLbl.text = signup_normal_model.member_name
-//                    }
-//                }
+                if normal_count > 0 {
+                    if indexPath.row < normal_count {
+                        let signup_normal_model = myTable!.signupNormalTables[indexPath.row]
+                        cell.nameLbl.text = signup_normal_model.member_name
+                    }
+                }
+            } else if indexPath.row >= people_limit && indexPath.row < people_limit + standby_count {
+                cell.numberLbl.text = "候補\(indexPath.row - people_limit + 1)."
+                let signup_standby_model = myTable!.signupStandbyTables[indexPath.row - people_limit]
+                cell.nameLbl.text = signup_standby_model.member_name
+            } else {
+                let remain: Int = people_limit - myTable!.signupNormalTables.count
+                var remain_text = ""
+                if (remain > 0) {
+                    remain_text = "還有\(remain)個名額"
+                } else {
+                    remain_text = "已經額滿，請排候補"
+                }
+                cell.numberLbl.text = remain_text
             }
-//            else if indexPath.row >= people_limit && indexPath.row < people_limit + standby_count {
-//                cell.numberLbl.text = "候補\(indexPath.row - people_limit + 1)."
-//                let signup_standby_model = myTable!.signupStandbyTables[indexPath.row - people_limit]
-//                cell.nameLbl.text = signup_standby_model.member_name
-//            } else {
-//                let remain: Int = people_limit - myTable!.signupNormalTables.count
-//                var remain_text = ""
-//                if (remain > 0) {
-//                    remain_text = "還有\(remain)個名額"
-//                } else {
-//                    remain_text = "已經額滿，請排候補"
-//                }
-//                cell.numberLbl.text = remain_text
-//            }
 
-            //if indexPath.row == people_limit + standby_count - 1 {
-            if indexPath.row == people_limit - 1 {
+            if indexPath.row == people_limit + standby_count - 1 {
 
                 UIView.animate(withDuration: 0, animations: {self.signupTableView.layoutIfNeeded()}) { (complete) in
                     var heightOfTableView: CGFloat = 0.0
