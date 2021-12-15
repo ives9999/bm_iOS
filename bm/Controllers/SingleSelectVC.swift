@@ -53,21 +53,21 @@ class SingleSelectVC: SelectVC {
                 title = "結束時間"
             }
             
-            let start: String = "07:00"
-            let end: String = "23:00"
-            let interval: Int = 30
-            
-            var s = start.toDateTime(format: "HH:mm")
-            let e = end.toDateTime(format: "HH:mm")
-            //rawRows.append(s.toString(format: "HH:mm"))
-            var t: String = s.toString(format: "HH:mm")
-            rows1!.append(["title": t, "value": t])
-            while s < e {
-                s = s.addingTimeInterval(TimeInterval(Double(interval)*60.0))
-                t = s.toString(format: "HH:mm")
-                rows1!.append(["title": t, "value": t])
-                //rawRows.append(s.toString(format: "HH:mm"))
-            }
+//            let start: String = "07:00"
+//            let end: String = "23:00"
+//            let interval: Int = 30
+//
+//            var s = start.toDateTime(format: "HH:mm")
+//            let e = end.toDateTime(format: "HH:mm")
+//            //rawRows.append(s.toString(format: "HH:mm"))
+//            var t: String = s.toString(format: "HH:mm")
+//            rows1!.append(["title": t, "value": t])
+//            while s < e {
+//                s = s.addingTimeInterval(TimeInterval(Double(interval)*60.0))
+//                t = s.toString(format: "HH:mm")
+//                rows1!.append(["title": t, "value": t])
+//                //rawRows.append(s.toString(format: "HH:mm"))
+//            }
         } else if (key == CITY_KEY) {
             
             let citys: [City] = Global.instance.getCitys()

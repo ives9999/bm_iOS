@@ -36,7 +36,9 @@ class DateSelectVC: BaseViewController {
         }
         //datePicker.backgroundColor = UIColor.white
         //datePicker.setValue(UIColor.red, forKey: "textColor")
-        datePicker.date = selected.toDateTime(format: "yyyy-MM-dd")
+        if let tmp: Date = selected.toDateTime(format: "yyyy-MM-dd") {
+            datePicker.date = tmp
+        }
     }
     
     @IBAction func submit(_ sender: Any) {

@@ -51,10 +51,22 @@ class Timetable: SuperModel {
     var _color: MYCOLOR = .success
     
     override func filterRow() {
-        _start_hour = start_time.toDateTime(format:"HH:mm:ss").getH()
-        _end_hour = end_time.toDateTime(format:"HH:mm:ss").getH()
-        _start_minute = start_time.toDateTime(format:"HH:mm:ss").geti()
-        _end_minute = end_time.toDateTime(format:"HH:mm:ss").geti()
+        if let tmp = start_time.toDateTime(format:"HH:mm:ss") {
+            _start_hour = tmp.getH()
+        }
+        
+        if let tmp = end_time.toDateTime(format:"HH:mm:ss") {
+            _end_hour = tmp.getH()
+        }
+        
+        if let tmp = start_time.toDateTime(format:"HH:mm:ss") {
+            _start_minute = tmp.geti()
+        }
+        
+        if let tmp = end_time.toDateTime(format:"HH:mm:ss") {
+            _end_minute = tmp.geti()
+        }
+        
         _color = MYCOLOR(color: color)
     }
 }

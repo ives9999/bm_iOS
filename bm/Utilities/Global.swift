@@ -837,12 +837,15 @@ class Global {
     func makeTimes(start_time: String="07:00", end_time: String="23:00", interval: Int=60)-> [String] {
         
         var allTimes: [String] = [String]()
-        var s = start_time.toDateTime(format: "HH:mm")
-        let e = end_time.toDateTime(format: "HH:mm")
-        allTimes.append(s.toString(format: "HH:mm"))
-        while s < e {
-            s = s.addingTimeInterval(TimeInterval(Double(interval)*60.0))
-            allTimes.append(s.toString(format: "HH:mm"))
+        var s: Date? = start_time.toDateTime(format: "HH:mm")
+        let e: Date? = end_time.toDateTime(format: "HH:mm")
+        
+        if s != nil && e != nil {
+            allTimes.append(s!.toString(format: "HH:mm"))
+            while s! < e! {
+                s = s!.addingTimeInterval(TimeInterval(Double(interval)*60.0))
+                allTimes.append(s!.toString(format: "HH:mm"))
+            }
         }
         
         return allTimes
@@ -1473,10 +1476,12 @@ extension String {
         }
     }
     
-    func toDate(format: String = "yyyy-MM-dd") -> Date? {
+    func toDate(format: String = "yyyy-MM-dd", locale: Bool = true) -> Date? {
         //Create Date Formatter
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "zh_TW")
+        if locale {
+            dateFormatter.locale = Locale(identifier: "zh_TW")
+        }
         //Specify Format of String to Parse
         dateFormatter.dateFormat = format
         
@@ -1487,10 +1492,14 @@ extension String {
         return dateFromString
     }
     
-    func toDateTime(format: String = "yyyy-MM-dd HH:mm:ss") -> Date {
+    func toDateTime(format: String = "yyyy-MM-dd HH:mm:ss", locale: Bool = true) -> Date? {
         //Create Date Formatter
         let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "zh_TW")
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale.current
+//        if locale {
+//            dateFormatter.locale = Locale(identifier: "zh_TW")
+//        }
         //Specify Format of String to Parse
         dateFormatter.dateFormat = format
         

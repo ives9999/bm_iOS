@@ -173,10 +173,10 @@ class ShowTeamVC: ShowVC {
         }
         
         if myTable!.signupDate != nil {
-            let temp_date_string: String = myTable!.signupDate!.date
+            let temp_date_string: String = myTable!.signupDate!.date + " 00:00:00"
             //let temp_date_string = "aaa"
-            if let temp_date: Date = temp_date_string.toDate() {
-                if temp_date.isSmallerThan(Date()) {
+            if let temp_date: Date = temp_date_string.toDateTime() {
+                if temp_date.isGreaterThan(Date()) {
                     isTempPlay = false
                 }
             }
@@ -392,8 +392,9 @@ class ShowTeamVC: ShowVC {
         
         if myTable != nil && myTable!.signupDate != nil {
             
-            if let deadline_date: Date = myTable!.signupDate!.deadline.toDate() {
-                if Date() > deadline_date {
+            //print(myTable!.signupDate!.deadline)
+            if let deadline_time: Date = myTable!.signupDate!.deadline.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
+                if Date() > deadline_time {
                     warning("已經超過報名截止時間，請下次再報名")
                     return
                 }

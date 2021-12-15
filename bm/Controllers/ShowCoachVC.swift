@@ -516,8 +516,16 @@ class ShowCoachVC: ShowVC {
                 let y1 = (CGFloat(row._start_hour-startNum)+CGFloat(row._start_minute)/60)
                 let y: CGFloat = y1 * timetableCellHeight + timetableCellBorderWidth
                 
-                let start_time = row.start_time.toDateTime(format:"HH:mm:ss")
-                let end_time = row.end_time.toDateTime(format:"HH:mm:ss")
+                var start_time: Date = Date()
+                if let tmp = row.start_time.toDateTime(format:"HH:mm:ss") {
+                    start_time = tmp
+                }
+                
+                var end_time: Date = Date()
+                if let tmp = row.end_time.toDateTime(format:"HH:mm:ss") {
+                    end_time = tmp
+                }
+                
                 let elapsed = CGFloat(end_time.timeIntervalSince(start_time)/(60*60))
                 let height: CGFloat = elapsed * timetableCellHeight - 2 * timetableCellBorderWidth
                 

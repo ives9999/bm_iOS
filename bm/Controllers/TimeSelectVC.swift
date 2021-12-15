@@ -42,13 +42,15 @@ class TimeSelectVC: MyTableVC {
 
         var title: String = ""
         //print(input)
-        var s = start.toDateTime(format: "HH:mm")
-        let e = end.toDateTime(format: "HH:mm")
-        allTimes.append(s.toString(format: "HH:mm"))
-        while s < e {
-            s = s.addingTimeInterval(TimeInterval(Double(interval)*60.0))
-            allTimes.append(s.toString(format: "HH:mm"))
-        }
+        
+        allTimes = Global.instance.makeTimes(start_time: start, end_time: end, interval: interval)
+//        var s = start.toDateTime(format: "HH:mm")
+//        let e = end.toDateTime(format: "HH:mm")
+//        allTimes.append(s.toString(format: "HH:mm"))
+//        while s < e {
+//            s = s.addingTimeInterval(TimeInterval(Double(interval)*60.0))
+//            allTimes.append(s.toString(format: "HH:mm"))
+//        }
         
         if input["type"] != nil {
             let type: SELECT_TIME_TYPE = input["type"] as! SELECT_TIME_TYPE
