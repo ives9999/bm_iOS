@@ -55,6 +55,14 @@ class SignupDateTable: Table {
     
     override func filterRow() {
         super.filterRow()
+        
+//        if deadline.count == 0 {
+//            let now = Date().myNow()
+//            let signup_date: String = myTable!.signupDate!.date
+//            let play_start: String = myTable!.play_start
+//            let play_date_string: String = signup_date + " " + play_start
+//            let play_date: Date? = play_date_string.toDate()
+//        }
     }
     
     override public func printRow() {

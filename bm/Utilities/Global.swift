@@ -1388,6 +1388,15 @@ extension Date {
     func isSmallerThan(_ date: Date) -> Bool {
        return self < date
     }
+    
+    func myNow() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "zh_Hant_TW")
+        formatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
+        let now: String = formatter.string(from: self)
+        
+        return now
+    }
 }
 
 extension CGRect {

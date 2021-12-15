@@ -95,8 +95,14 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="截止時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rC-mu-Z7D" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="8" y="428.5" width="69.5" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TW3-yY-PBt" customClass="SuperTableView" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="424.5" width="414" height="100"/>
+                                                <rect key="frame" x="0.0" y="461" width="414" height="100"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="100" id="YIB-3P-53u"/>
@@ -137,7 +143,7 @@
                                                 </prototypes>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1J-aW-JsJ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="540.5" width="398" height="30"/>
+                                                <rect key="frame" x="8" y="577" width="398" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Rq8-ic-C4D"/>
                                                 </constraints>
@@ -151,8 +157,10 @@
                                             <constraint firstItem="I9U-D1-tnd" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="0Y9-mG-qYv"/>
                                             <constraint firstItem="a1J-aW-JsJ" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="0oh-HE-CVn"/>
                                             <constraint firstItem="QDC-d9-WhK" firstAttribute="top" secondItem="uVt-2n-TRc" secondAttribute="bottom" constant="8" id="1pv-TY-5rb"/>
+                                            <constraint firstItem="8rC-mu-Z7D" firstAttribute="top" secondItem="Hzk-Sc-G0x" secondAttribute="bottom" constant="12" id="8vD-nF-1o4"/>
+                                            <constraint firstItem="8rC-mu-Z7D" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="Brw-hF-QpA"/>
                                             <constraint firstItem="uVt-2n-TRc" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="Buj-NO-GTp"/>
-                                            <constraint firstItem="TW3-yY-PBt" firstAttribute="top" secondItem="Hzk-Sc-G0x" secondAttribute="bottom" constant="8" id="DrT-Ae-EhQ"/>
+                                            <constraint firstItem="TW3-yY-PBt" firstAttribute="top" secondItem="8rC-mu-Z7D" secondAttribute="bottom" constant="12" id="DrT-Ae-EhQ"/>
                                             <constraint firstItem="GJg-kc-5vb" firstAttribute="leading" secondItem="ORk-cu-jAE" secondAttribute="leading" constant="8" id="Etg-sS-FvJ"/>
                                             <constraint firstAttribute="trailing" secondItem="GJg-kc-5vb" secondAttribute="trailing" constant="8" id="Mi8-B7-seg"/>
                                             <constraint firstAttribute="trailing" secondItem="QDC-d9-WhK" secondAttribute="trailing" id="Ofl-IJ-IFg"/>
@@ -262,6 +270,7 @@
                         <outlet property="signupButton" destination="1v5-xT-scn" id="sJF-6v-BzQ"/>
                         <outlet property="signupButtonContainer" destination="2tC-b2-7BO" id="fO9-l7-j1W"/>
                         <outlet property="signupDataLbl" destination="GJg-kc-5vb" id="5oa-uO-T4q"/>
+                        <outlet property="signupDeadlineLbl" destination="8rC-mu-Z7D" id="yvV-S4-2P9"/>
                         <outlet property="signupTableView" destination="TW3-yY-PBt" id="DCD-Sn-JI0"/>
                         <outlet property="signupTableViewConstraintHeight" destination="YIB-3P-53u" id="RcH-u2-Qn2"/>
                         <outlet property="signupTimeLbl" destination="Hzk-Sc-G0x" id="Pyq-6w-MKD"/>

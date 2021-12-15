@@ -15,6 +15,7 @@ class ShowTeamVC: ShowVC {
     
     @IBOutlet weak var signupDataLbl: SuperLabel!
     @IBOutlet weak var signupTimeLbl: SuperLabel!
+    @IBOutlet weak var signupDeadlineLbl: SuperLabel!
     
     @IBOutlet weak var signupTableViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var signupButton: SubmitButton!
@@ -45,6 +46,7 @@ class ShowTeamVC: ShowVC {
         contentDataLbl.setTextTitle()
         
         signupTimeLbl.setTextGeneral()
+        signupDeadlineLbl.setTextGeneral()
         
         signupButton.setTitle("報名")
         
@@ -84,7 +86,7 @@ class ShowTeamVC: ShowVC {
         memberRows.append(row)
         row = MemberRow(title: "隊長", icon: "group", show: myTable!.manager_nickname)
         memberRows.append(row)
-        row = MemberRow(title: "行動電話", icon: "mobile", show: myTable!.mobile)
+        row = MemberRow(title: "行動電話", icon: "mobile", show: myTable!.mobile_show)
         memberRows.append(row)
         row = MemberRow(title: "line", icon: "line", show: myTable!.line)
         memberRows.append(row)
@@ -134,6 +136,7 @@ class ShowTeamVC: ShowVC {
             signupDataLbl.text = "目前球隊不開放臨打"
             signupButtonContainer.visibility = .invisible
             signupTimeLbl.visibility = .invisible
+            signupDeadlineLbl.visibility = .invisible
             self.signupTableViewConstraintHeight.constant = 20
             self.changeScrollViewContentSize()
         } else {
@@ -141,6 +144,7 @@ class ShowTeamVC: ShowVC {
             signupTimeLbl.visibility = .visible
             if myTable != nil && myTable!.signupDate != nil {
                 signupTimeLbl.text = "下次臨打時間：" + myTable!.signupDate!.date + " " + myTable!.interval_show
+                signupDeadlineLbl.text = "報名截止時間：" + myTable!.signupDate!.deadline.noSec()
             }
         }
         
@@ -358,10 +362,12 @@ class ShowTeamVC: ShowVC {
         let h7 = contentViewConstraintHeight!.constant
         let h8 = signupDataLbl.bounds.size.height
         let h9 = signupTableViewConstraintHeight.constant
+        let h10 = signupTimeLbl.bounds.size.height
+        let h11 = signupDeadlineLbl.bounds.size.height
         //print(contentViewConstraintHeight)
             
         //let h: CGFloat = h1 + h2 + h3 + h4 + h5
-        let h: CGFloat = h1 + h2 + h3 + h6 + h7 + h8 + h9 + 300
+        let h: CGFloat = h1 + h2 + h3 + h6 + h7 + h8 + h9 + h10 + h11 + 300
         scrollView.contentSize = CGSize(width: view.frame.width, height: h)
         ContainerViewConstraintHeight.constant = h
         //print(h1)
@@ -386,11 +392,18 @@ class ShowTeamVC: ShowVC {
         
         if myTable != nil && myTable!.signupDate != nil {
             
+            if let deadline_date: Date = myTable!.signupDate!.deadline.toDate() {
+                if Date() > deadline_date {
+                    warning("已經超過報名截止時間，請下次再報名")
+                    return
+                }
+            }
+            
             Global.instance.addSpinner(superView: view)
             dataService.signup(token: myTable!.token, member_token: Member.instance.token, date_token: myTable!.signupDate!.token) { (success) in
-                
+
                 Global.instance.removeSpinner(superView: self.view)
-                
+
                 do {
                     if (self.dataService.jsonData != nil) {
                         let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
@@ -405,23 +418,6 @@ class ShowTeamVC: ShowVC {
                 } catch {
                     self.msg = "解析JSON字串時，得到空值，請洽管理員"
                 }
-                
-                
-//                let msg = CourseService.instance.msg
-//                var title = "警告"
-//                var closeAction: UIAlertAction?
-//                if self.dataService.success {
-//                    title = "提示"
-//                    closeAction = UIAlertAction(title: "取消", style: .default, handler: { (action) in
-//                        self.refresh(CourseTable.self)
-//                    })
-//                } else {
-//                    closeAction = UIAlertAction(title: "關閉", style: .default, handler: nil)
-//                }
-//                let alert = UIAlertController(title: title, message: msg, preferredStyle: .alert)
-//                alert.addAction(closeAction!)
-//
-//                self.present(alert, animated: true, completion: nil)
             }
         }
     }
