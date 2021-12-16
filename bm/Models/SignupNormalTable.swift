@@ -16,6 +16,7 @@ class SignupNormalTable: Table {
     var able_date_id: Int = -1
     var cancel_deadline: String = ""
     var member_name: String = ""
+    var member_token: String = ""
     
     enum CodingKeys: String, CodingKey {
         case member_id
@@ -24,6 +25,7 @@ class SignupNormalTable: Table {
         case able_date_id
         case cancel_deadline
         case member_name
+        case member_token
     }
     
     required init(from decoder: Decoder) throws {
@@ -35,6 +37,8 @@ class SignupNormalTable: Table {
         do {signupable_type = try container.decode(String.self, forKey: .signupable_type)}catch{signupable_type = ""}
         do {cancel_deadline = try container.decode(String.self, forKey: .cancel_deadline)}catch{cancel_deadline = ""}
         do {member_name = try container.decode(String.self, forKey: .member_name)}catch{member_name = ""}
+        
+        member_token = try container.decodeIfPresent(String.self, forKey: .member_token) ?? ""
     }
     
     override func filterRow() {

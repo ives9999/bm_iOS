@@ -266,4 +266,6 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     @IBAction func prevBtnPressed(_ sender: Any) {
         prev()
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
 }

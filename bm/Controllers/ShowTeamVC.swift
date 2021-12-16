@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import SCLAlertView
 
 class ShowTeamVC: ShowVC {
     
@@ -168,20 +169,35 @@ class ShowTeamVC: ShowVC {
     
     func isTempPlayOnline() {
         
+        //1.如果臨打狀態是關閉，關閉臨打
         if myTable!.temp_status == "offline" {
             isTempPlay = false
         }
         
+        //2.如果沒有設定臨打日期，關閉臨打
         if myTable!.signupDate != nil {
             let temp_date_string: String = myTable!.signupDate!.date + " 00:00:00"
-            //let temp_date_string = "aaa"
-            if let temp_date: Date = temp_date_string.toDateTime() {
-                if temp_date.isGreaterThan(Date()) {
+            
+            //3.如果臨打日期超過現在的日期，關閉臨打
+            if let temp_date: Date = temp_date_string.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
+                
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd"
+                
+                let today_string: String = formatter.string(from: Date()) + " 23:59:59"
+                
+                var today: Date = Date()
+                if let tmp: Date = today_string.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
+                    today = tmp
+                }
+                
+                if temp_date.isGreaterThan(today) {
                     isTempPlay = false
                 }
             }
         }
         
+        //3.如果管理者設定報名臨打名額是0，關閉臨打
         if myTable!.people_limit == 0 {
             isTempPlay = false
         }
@@ -353,6 +369,79 @@ class ShowTeamVC: ShowVC {
         return UITableViewCell()
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if tableView == signupTableView {
+            if myTable != nil {
+                if myTable!.manager_token == Member.instance.token {
+                    let people_limit = myTable!.people_limit
+                    if (indexPath.row < people_limit) {
+                        let signup_normal_model = myTable!.signupNormalTables[indexPath.row]
+                        //print(signup_normal_model.member_token)
+                        getMemberOne(member_token: signup_normal_model.member_token)
+                        
+                    } else {
+                        let signup_standby_model = myTable!.signupStandbyTables[indexPath.row]
+                        getMemberOne(member_token: signup_standby_model.member_token)
+                    }
+                } else {
+                    warning("只有球隊管理員可以檢視報名者資訊")
+                }
+            }
+        }
+    }
+    
+    func getMemberOne(member_token: String) {
+        
+        MemberService.instance.getOne(params: ["token": member_token]) { success in
+            
+            Global.instance.removeSpinner(superView: self.view)
+            
+            if success {
+                
+                let jsonData: Data = MemberService.instance.jsonData!
+                do {
+                    let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
+                    if successTable.success {
+                        let memberTable: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
+                        if memberTable.id > 0 {
+                            self.showTempMemberInfo(memberTable)
+                        }
+                    } else {
+                        self.warning(successTable.msg)
+                    }
+                } catch {
+                    self.warning(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func showTempMemberInfo(_ memberTable: MemberTable) {
+        
+        let apperance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            showCircularIcon: true
+        )
+        
+        let alertView = SCLAlertView(appearance: apperance)
+        let alertViewIcon = UIImage(named: "member1")
+        
+        let a: UITextView = alertView.addTextView()
+        a.text = "真實姓名：" + memberTable.name + "\n"
+        + "聯絡電話：" + memberTable.mobile + "\n"
+        + "聯絡EMail：" + memberTable.email
+        
+        alertView.addButton("打電話") {
+            memberTable.mobile.makeCall()
+        }
+        
+        alertView.addButton("關閉", backgroundColor: UIColor(MY_GRAY)) {
+            alertView.hideView()
+        }
+        alertView.showSuccess(memberTable.nickname, subTitle: "資料如下：", circleIconImage: alertViewIcon)
+    }
+    
     override func changeScrollViewContentSize() {
             
         let h1 = featured.bounds.size.height
@@ -394,8 +483,14 @@ class ShowTeamVC: ShowVC {
             
             //print(myTable!.signupDate!.deadline)
             if let deadline_time: Date = myTable!.signupDate!.deadline.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
-                if Date() > deadline_time {
-                    warning("已經超過報名截止時間，請下次再報名")
+                let now: Date = Date().myNow()
+                if now > deadline_time {
+                    
+                    var msg: String = "已經超過報名截止時間，請下次再報名"
+                    if myTable!.isSignup {
+                        msg = "已經超過取消報名截止時間，無法取消報名"
+                    }
+                    warning(msg)
                     return
                 }
             }

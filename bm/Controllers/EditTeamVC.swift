@@ -217,7 +217,7 @@ class EditTeamVC: EditVC {
         
         let row: OneRow = getOneRowFromKey(TEAM_TEMP_DATE_KEY)
         let temp_date_string: String = row.value
-        if let temp_date = temp_date_string.toDate() {
+        if let temp_date = temp_date_string.toDateTime(format: "yyyy-MM-dd") {
             //print(temp_date)
             if temp_date.isSmallerThan(Date()) {
                 msg = "臨打日期必須在明天之後\n"

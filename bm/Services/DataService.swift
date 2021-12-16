@@ -228,7 +228,7 @@ class DataService {
     
     func getListURL()-> String { return ""}
     
-    func getOne(params: [String: String], completion: @escaping CompletionHandler){
+    func getOne(params: [String: String], completion: @escaping CompletionHandler) {
         
         var body: [String: String] = ["device": "app","strip_html": "false"]
         for (key, param) in params {
@@ -246,9 +246,11 @@ class DataService {
             url = String(format: URL_ONE, source!)
         }
         //print(url)
+        
         if url != nil {
             AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
                 
+                //print(response.value)
                 switch response.result {
                 //case .success(let value):
                 case .success(_):
@@ -333,13 +335,13 @@ class DataService {
     
     func signup(token: String, member_token: String, date_token: String, course_deadline: String? = nil, completion: @escaping CompletionHandler) {
         let url = getSignupURL(token: token)
-        print(url)
+        //print(url)
         var body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "able_date_token": date_token]
         if course_deadline != nil {
             body["cancel_deadline"] = course_deadline
         }
         
-        print(body)
+        //print(body)
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
             switch response.result {

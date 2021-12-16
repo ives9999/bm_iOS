@@ -1351,7 +1351,7 @@ extension Date {
         
         let dateString: String = "\(y!)-\(m!)-\(d)"
         var res: Date = Date()
-        if let tmp: Date = dateString.toDate() {
+        if let tmp: Date = dateString.toDateTime(format: "yyyy-MM-dd") {
             res = tmp
         }
         return res
@@ -1392,20 +1392,31 @@ extension Date {
        return self < date
     }
     
-    func myNow() -> String {
+    func myNow(format: String =  "yyyy-MM-dd HH:mm:ss", locale: Bool = false) -> Date {
+        
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "zh_Hant_TW")
-        formatter.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm:ss")
-        let now: String = formatter.string(from: self)
+        formatter.setLocalizedDateFormatFromTemplate(format)
+        
+        let tmp: String = formatter.string(from: self)
+        var now: Date = Date()
+        
+        if format == "yyyy-MM-dd HH:mm:ss" {
+            if let tmp1: Date = tmp.toDateTime(format: format, locale: locale) {
+                now = tmp1
+            }
+        }
         
         return now
     }
 }
 
 extension CGRect {
+    
     func setWidth(_ width: CGFloat) -> CGRect {
         return CGRect(x: self.origin.x, y: self.origin.y, width: width, height: self.size.height)
     }
+    
     func setX(_ x: CGFloat) -> CGRect {
         return CGRect(x: x, y: self.origin.y, width: self.size.width, height: self.size.height)
     }
@@ -1476,30 +1487,32 @@ extension String {
         }
     }
     
-    func toDate(format: String = "yyyy-MM-dd", locale: Bool = true) -> Date? {
-        //Create Date Formatter
-        let dateFormatter = DateFormatter()
-        if locale {
-            dateFormatter.locale = Locale(identifier: "zh_TW")
-        }
-        //Specify Format of String to Parse
-        dateFormatter.dateFormat = format
-        
-        //Parse into NSDate
-        let dateFromString: Date? = dateFormatter.date(from: self)
-        
-        //Return Parsed Date
-        return dateFromString
-    }
+//    func toDate(format: String = "yyyy-MM-dd", locale: Bool = true) -> Date? {
+//        //Create Date Formatter
+//        let dateFormatter = DateFormatter()
+//        if locale {
+//            dateFormatter.locale = Locale(identifier: "zh_TW")
+//        }
+//        //Specify Format of String to Parse
+//        dateFormatter.dateFormat = format
+//
+//        //Parse into NSDate
+//        let dateFromString: Date? = dateFormatter.date(from: self)
+//
+//        //Return Parsed Date
+//        return dateFromString
+//    }
     
     func toDateTime(format: String = "yyyy-MM-dd HH:mm:ss", locale: Bool = true) -> Date? {
         //Create Date Formatter
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale.current
-//        if locale {
-//            dateFormatter.locale = Locale(identifier: "zh_TW")
-//        }
+//        dateFormatter.timeZone = TimeZone.current
+//        dateFormatter.locale = Locale.current
+        if locale {
+            dateFormatter.locale = Locale(identifier: "zh_TW")
+        } else {
+            dateFormatter.timeZone = TimeZone(abbreviation: "GMT+0:00")
+        }
         //Specify Format of String to Parse
         dateFormatter.dateFormat = format
         

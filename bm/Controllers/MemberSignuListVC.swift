@@ -92,7 +92,7 @@ class MemberSignuListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSource
         let weekday01 = "\(y!)-\(m!)-01"
         res["weekday01"] = weekday01
         
-        var beginWeekday = weekday01.toDate()!.dateToWeekday()
+        var beginWeekday = weekday01.toDateTime(format: "yyyy-MM-dd")!.dateToWeekday()
         beginWeekday = beginWeekday == 0 ? 7 : beginWeekday;
         res["beginWeekday"] = beginWeekday
 
@@ -106,7 +106,7 @@ class MemberSignuListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSource
         let weekday31 = "\(y!)-\(m!)-\(monthLastDay)"
         res["weekday31"] = weekday31
         
-        let endWeekday = weekday31.toDate()!.dateToWeekday()
+        let endWeekday = weekday31.toDateTime(format: "yyyy-MM-dd")!.dateToWeekday()
         res["endWeekday"] = endWeekday
 
         //算出共需幾個日曆的格子

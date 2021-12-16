@@ -246,7 +246,7 @@ class CourseCalendarVC: MyTableVC {
                 var course: [String: Any] = [String: Any]()
                 let date: String = String(format: "%4d-%02d-%02d", y, m, day)
                 course["date"] = date
-                if let d: Date? = date.toDate() {
+                if let d: Date? = date.toDateTime(format: "yyyy-MM-dd") {
                     let weekday_i: Int = d!.dateToWeekday()
                     let weekday_c: String = d!.dateToWeekdayForChinese()
                     course["weekday_i"] = weekday_i

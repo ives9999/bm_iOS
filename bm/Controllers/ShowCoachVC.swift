@@ -311,7 +311,7 @@ class ShowCoachVC: ShowVC {
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.tableView {
             let key = tableRowKeys[indexPath.row]
             if key == MOBILE_KEY {
