@@ -654,15 +654,15 @@ extension BaseViewController {
         }
     }
     
-    func toSelectWeekday(key: String? = nil, selecteds: [Int]? = nil, delegate: BaseViewController) {
+    func toSelectWeekdays(key: String? = nil, selecteds: Int = 0, delegate: BaseViewController) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-OKL-6q-hzR") as? WeekdaysSelectVC {
                 if key != nil {
                     viewController.key = key
                 }
-                if selecteds != nil {
-                    viewController.selecteds = selecteds!
+                if selecteds > 0 {
+                    viewController.selecteds = selecteds
                 }
                 viewController.delegate = delegate
                 show(viewController, sender: nil)
@@ -672,8 +672,8 @@ extension BaseViewController {
             if key != nil {
                 viewController.key = key
             }
-            if selecteds != nil {
-                viewController.selecteds = selecteds!
+            if selecteds > 0 {
+                viewController.selecteds = selecteds
             }
             viewController.delegate = delegate
             self.navigationController!.pushViewController(viewController, animated: true)

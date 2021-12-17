@@ -198,7 +198,7 @@ class MyTableVC: BaseViewController {
         tableView.reloadData()
     }
     
-    override func setWeekdaysData(selecteds: [Int]) {
+    override func setWeekdaysData(selecteds: Int) {
 
         super.setWeekdaysData(selecteds: selecteds)
         tableView.reloadData()

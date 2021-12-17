@@ -279,26 +279,23 @@ class SearchPanel: UIViewController {
         reloadSearchTable()
     }
     
-    func setWeekdaysData(selecteds: [Int]) {
-        let row = getDefinedRow(WEEKDAY_KEY)
-        var texts: [String] = [String]()
-        var values: [String] = [String]()
-        if selecteds.count > 0 {
-            for day in selecteds {
-                values.append(String(day))
-                for gday in Global.instance.weekdays {
-                    if day == gday["value"] as! Int {
-                        let text = gday["simple_text"]
-                        texts.append(text! as! String)
-                        break
-                    }
+    func setWeekdaysData(selecteds: Int) {
+        let row = getDefinedRow(WEEKDAYS_KEY)
+        var shows: [String] = [String]()
+        if selecteds > 0 {
+            var i = 1
+            while (i <= 7) {
+                let n: Int = (pow(2, i) as NSDecimalNumber).intValue
+                if selecteds & n > 0 {
+                    shows.append(WEEKDAY(weekday: i).toShortString())
                 }
+                i += 1
             }
-            row.show = texts.joined(separator: ",")
-        
-            row.value = values.joined(separator: ",")
+            
+            row.show = shows.joined(separator: ",")
+            row.value = String(selecteds)
         } else {
-            row.show = "全部"
+            row.show = ""
         }
         //replaceRows(WEEKDAY_KEY, row)
         reloadSearchTable()

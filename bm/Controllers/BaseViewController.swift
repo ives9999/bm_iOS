@@ -370,7 +370,23 @@ class BaseViewController: UIViewController, List2CellDelegate {
             }
             
             
-            toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
+            //toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
+        } else if (key == WEEKDAYS_KEY) {
+            var selecteds: Int = 0
+
+            if row.value.count > 0 {
+                var i: Int = 1
+                while (i <= 7) {
+                    let n = (pow(2, i) as NSDecimalNumber).intValue
+                    if Int(row.value)! & n > 0 {
+                        selecteds = selecteds | n
+                    }
+                    i += 1
+                }
+            }
+            
+            
+            toSelectWeekdays(key: key, selecteds: selecteds, delegate: self)
         } else if (key == START_TIME_KEY || key == END_TIME_KEY) {
             toSelectTime(key: key, selected: row.value, delegate: self)
         } else if (key == ARENA_KEY) {
@@ -1084,28 +1100,36 @@ class BaseViewController: UIViewController, List2CellDelegate {
     }
     
     //WeekdaysSelectDelegate
-    func setWeekdaysData(selecteds: [Int]) {
+    func setWeekdaysData(selecteds: Int) {
         if searchPanel.baseVC != nil {
             searchPanel.setWeekdaysData(selecteds: selecteds)
         } else {
-            let row = getOneRowFromKey(WEEKDAY_KEY)
-            var texts: [String] = [String]()
-            var value: Int = 0
-            if selecteds.count > 0 {
-                for day in selecteds {
-                    value += (pow(2, day) as NSDecimalNumber).intValue
-                    for gday in Global.instance.weekdays {
-                        if day == gday["value"] as! Int {
-                            let text = gday["simple_text"]
-                            texts.append(text! as! String)
-                            break
-                        }
+            let row = getOneRowFromKey(WEEKDAYS_KEY)
+            var shows: [String] = [String]()
+            if selecteds > 0 {
+                var i = 1
+                while (i <= 7) {
+                    let n: Int = (pow(2, i) as NSDecimalNumber).intValue
+                    if selecteds & n > 0 {
+                        shows.append(WEEKDAY(weekday: i).toShortString())
                     }
+                    i += 1
                 }
-                row.show = texts.joined(separator: ",")
-                row.value = String(value)
+                
+//                for day in selecteds {
+//                    value += (pow(2, day) as NSDecimalNumber).intValue
+//                    for gday in Global.instance.weekdays {
+//                        if day == gday["value"] as! Int {
+//                            let text = gday["simple_text"]
+//                            texts.append(text! as! String)
+//                            break
+//                        }
+//                    }
+//                }
+                row.show = shows.joined(separator: ",")
+                row.value = String(selecteds)
             } else {
-                row.show = "全部"
+                row.show = ""
             }
         }
     }

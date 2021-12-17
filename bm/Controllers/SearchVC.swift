@@ -383,28 +383,30 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         tableView.reloadData()
     }
     
-    override func setWeekdaysData(selecteds: [Int]) {
-        let row = getOneRowFromKey(WEEKDAY_KEY)
-        var texts: [String] = [String]()
-        var values: [String] = [String]()
-        if selecteds.count > 0 {
-            for day in selecteds {
-                values.append(String(day))
-                for gday in Global.instance.weekdays {
-                    if day == gday["value"] as! Int {
-                        let text = gday["simple_text"]
-                        texts.append(text! as! String)
-                        break
-                    }
-                }
-            }
-            row.show = texts.joined(separator: ",")
+    override func setWeekdaysData(selecteds: Int) {
         
-            row.value = values.joined(separator: ",")
-        } else {
-            row.show = "全部"
-        }
+//        let row = getOneRowFromKey(WEEKDAY_KEY)
+//        var texts: [String] = [String]()
+//        var values: [String] = [String]()
+//        if selecteds.count > 0 {
+//            for day in selecteds {
+//                values.append(String(day))
+//                for gday in Global.instance.weekdays {
+//                    if day == gday["value"] as! Int {
+//                        let text = gday["simple_text"]
+//                        texts.append(text! as! String)
+//                        break
+//                    }
+//                }
+//            }
+//            row.show = texts.joined(separator: ",")
+//
+//            row.value = values.joined(separator: ",")
+//        } else {
+//            row.show = "全部"
+//        }
         //replaceRows(WEEKDAY_KEY, row)
+        super.setWeekdaysData(selecteds: selecteds)
         tableView.reloadData()
     }
     

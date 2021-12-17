@@ -432,7 +432,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
             if let _sender: [String: Any?] = sender as? [String: Any?] {
                 if _sender["sender"] != nil {
                     let realSender: [Int] = _sender["sender"] as! [Int]
-                    weekdaysSelectVC.selecteds = realSender
+                    //weekdaysSelectVC.selecteds = realSender
                 }
             }
             //weekdaysSelectVC.delegate = self

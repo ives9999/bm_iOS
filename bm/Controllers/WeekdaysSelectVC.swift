@@ -8,6 +8,7 @@
 
 import UIKit
 import UIColor_Hex_Swift
+import SwiftyJSON
 
 //protocol WeekdaysSelectDelegate: class {
 //    func setWeekdaysData(selecteds: [Int])
@@ -23,8 +24,12 @@ class WeekdaysSelectVC: MyTableVC {
 
     weak var delegate: BaseViewController?
     var key: String? = nil
-    var selecteds: [Int] = [Int]()
-    var weekdays: [[String: Any]] = Global.instance.weekdays
+    var selecteds: Int = 0
+    //var weekdays: [[String: Any]] = Global.instance.weekdays
+    var selected_weekdays: [WEEKDAY] = [WEEKDAY]()
+    let weekdays: [WEEKDAY] = [
+                WEEKDAY.mon, WEEKDAY.tue, WEEKDAY.wed, WEEKDAY.thu, WEEKDAY.fri, WEEKDAY.sat, WEEKDAY.sun
+            ]
     
     //來源的程式：目前有team的setup跟search
     var source: String = "setup"
@@ -37,16 +42,16 @@ class WeekdaysSelectVC: MyTableVC {
         super.viewDidLoad()
         //print(selectedDays)
         
-        if selecteds.count > 0 {
+        if selecteds > 0 {
             
-            for weekday in selecteds {
-                for (index, item) in weekdays.enumerated() {
-                    let value: Int = item["value"] as! Int
-                    if weekday == value {
-                        weekdays[index]["checked"] = true
-                        break
-                    }
+            var i: Int = 1
+            while (i <= 7) {
+                let n = Int(pow(2.0, Double(i)))
+                if selecteds & n > 0 {
+                    let w: WEEKDAY = WEEKDAY(weekday: i)
+                    selected_weekdays.append(w)
                 }
+                i += 1
             }
         }
         //print(days)
@@ -66,10 +71,18 @@ class WeekdaysSelectVC: MyTableVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SuperCell
 
-        let item: [String: Any] = weekdays[indexPath.row]
+        //let item: [String: Any] = weekdays[indexPath.row]
         
-        cell.textLabel!.text = (item["text"] as! String)
-        let checked: Bool = item["checked"] as! Bool
+        cell.textLabel!.text = weekdays[indexPath.row].toString()
+        
+        var checked: Bool = false
+        for selected_weekday in selected_weekdays {
+            if selected_weekday == weekdays[indexPath.row] {
+                checked = true
+                break
+            }
+        }
+        
         if checked {
             cell.accessoryType = .checkmark
             cell.textLabel?.textColor = UIColor(MY_GREEN)
@@ -86,38 +99,44 @@ class WeekdaysSelectVC: MyTableVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell: UITableViewCell = tableView.cellForRow(at: indexPath)!
         
+        let n: Int = (pow(2, indexPath.row + 1) as NSDecimalNumber).intValue
         if cell.accessoryType == .checkmark {
             cell.accessoryType = .none
             cell.textLabel?.textColor = UIColor.white
             cell.tintColor = UIColor.white
-            weekdays[indexPath.row]["checked"] = false
+            
+            selecteds = selecteds ^ n
+            //weekdays[indexPath.row]["checked"] = false
         } else {
             cell.accessoryType = .checkmark
             cell.textLabel?.textColor = UIColor(MY_GREEN)
             cell.tintColor = UIColor(MY_GREEN)
-            weekdays[indexPath.row]["checked"] = true
+            //weekdays[indexPath.row]["checked"] = true
+            selecteds = selecteds | n
         }
-        let weekday = indexPath.row
-        var isExist = false
-        var at = 0
-        for (idx, selectWeekday) in selecteds.enumerated() {
-            if selectWeekday == weekday {
-                isExist = true
-                at = idx
-                break
-            }
-        }
-        if isExist {
-            selecteds.remove(at: at)
-        } else {
-            if select == "just one" {
-                selecteds.removeAll()
-            }
-            selecteds.append(weekday)
-        }
-        if select == "just one" && selecteds.count > 0 {
-            submit()
-        }
+        
+//        let weekday = indexPath.row
+//        var isExist = false
+//        var at = 0
+//        for (idx, selectWeekday) in selecteds.enumerated() {
+//            if selectWeekday == weekday {
+//                isExist = true
+//                at = idx
+//                break
+//            }
+//        }
+//
+//        if isExist {
+//            selecteds.remove(at: at)
+//        } else {
+//            if select == "just one" {
+//                selecteds.removeAll()
+//            }
+//            selecteds.append(weekday)
+//        }
+//        if select == "just one" && selecteds.count > 0 {
+//            submit()
+//        }
     }
     
     func resetSelect() {

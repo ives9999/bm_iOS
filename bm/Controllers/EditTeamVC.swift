@@ -141,7 +141,7 @@ class EditTeamVC: EditVC {
             let n: Int = (pow(2, weekday.weekday) as NSDecimalNumber).intValue
             weekdays = weekdays | n
         }
-        row = OneRow(title: "星期幾", value: String(weekdays), show: myTable!.weekdays_show, key: WEEKDAY_KEY, cell: "more", isRequired: true)
+        row = OneRow(title: "星期幾", value: String(weekdays), show: myTable!.weekdays_show, key: WEEKDAYS_KEY, cell: "more", isRequired: true)
         row.msg = "沒有選擇星期幾"
         rows.append(row)
         row = OneRow(title: "開始時間", value: myTable!.play_start, show: myTable!.play_start_show, key: TEAM_PLAY_START_KEY, cell: "more", isRequired: true)

@@ -124,6 +124,25 @@ enum WEEKDAY: Int {
         }
     }
     
+    func toShortString()->String {
+        switch self {
+        case .mon:
+            return "一"
+        case .tue:
+            return "二"
+        case .wed:
+            return "三"
+        case .thu:
+            return "四"
+        case .fri:
+            return "五"
+        case .sat:
+            return "六"
+        case .sun:
+            return "日"
+        }
+    }
+    
     static func intToString(_ value: Int)-> String {
         switch value {
         case 1:
