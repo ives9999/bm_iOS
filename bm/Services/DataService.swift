@@ -287,9 +287,9 @@ class DataService {
     func isNameExist(name: String, completion: @escaping CompletionHandler) {
         
         let url: String = getIsNameExistUrl()
-        print(url)
+        //print(url)
         let params: [String: String] = ["device": "app", "channel": CHANNEL, "name": name, "member_token": Member.instance.token]
-        print(params)
+        //print(params)
         
         AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON {
             (response) in
@@ -331,6 +331,63 @@ class DataService {
         let task = URLSession.shared.dataTask(with: request)
         
         task.resume()
+    }
+    
+    func requestManager(_params: [String: String], images: [UIImage]?, completion: @escaping CompletionHandler) {
+        
+        let url: String = URL_REQUEST_MANAGER
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+        var params: [String: String] = ["channel":CHANNEL,"device":"app"]
+        params.merge(_params)
+        
+        //print(url)
+        //print(params)
+        
+//        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+//
+//            let str = String(decoding: response.data!, as: UTF8.self)
+//            print(str)
+//            let i = 6
+//        }
+        
+        msg = ""
+        AF.upload(
+            multipartFormData: { (multipartFormData) in
+                if images != nil {
+
+                    for (idx, image) in images!.enumerated() {
+                        let imageData: Data = image.jpegData(compressionQuality: 0.2)! as Data
+                        let withName: String = "image" + String(idx + 1)
+                        let fileName: String = "image" + String(idx + 1) + ".jpg"
+                        multipartFormData.append(imageData, withName: withName, fileName: fileName, mimeType: "image/jpeg")
+                    }
+                }
+                for (key, value) in params {
+                    multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
+                }
+            },
+            to: url,
+            usingThreshold: UInt64.init(),
+            method: .post,
+            headers: headers
+        )
+            .responseJSON(completionHandler: { response in
+                
+//                let str = String(decoding: response.data!, as: UTF8.self)
+//                print(str)
+                if (response.data != nil) {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "伺服器錯誤，請洽管理員"
+                    completion(false)
+                    return
+                }
+            })
+            .uploadProgress(queue: .main, closure: { progress in
+                //Current upload progress of file
+                //print("Upload Progress: \(progress.fractionCompleted)")
+            })
     }
     
     func signup(token: String, member_token: String, date_token: String, course_deadline: String? = nil, completion: @escaping CompletionHandler) {
@@ -428,63 +485,6 @@ class DataService {
     }
     
     func getUpdateURL()-> String {return ""}
-    
-    func requestManager(_params: [String: String], images: [UIImage]?, completion: @escaping CompletionHandler) {
-        
-        let url: String = URL_REQUEST_MANAGER
-        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-        var params: [String: String] = ["channel":CHANNEL,"device":"app"]
-        params.merge(_params)
-        
-        //print(url)
-        //print(params)
-        
-//        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
-//
-//            let str = String(decoding: response.data!, as: UTF8.self)
-//            print(str)
-//            let i = 6
-//        }
-        
-        msg = ""
-        AF.upload(
-            multipartFormData: { (multipartFormData) in
-                if images != nil {
-
-                    for (idx, image) in images!.enumerated() {
-                        let imageData: Data = image.jpegData(compressionQuality: 0.2)! as Data
-                        let withName: String = "image" + String(idx + 1)
-                        let fileName: String = "image" + String(idx + 1) + ".jpg"
-                        multipartFormData.append(imageData, withName: withName, fileName: fileName, mimeType: "image/jpeg")
-                    }
-                }
-                for (key, value) in params {
-                    multipartFormData.append(("\(value)").data(using: .utf8)!, withName: key)
-                }
-            },
-            to: url,
-            usingThreshold: UInt64.init(),
-            method: .post,
-            headers: headers
-        )
-            .responseJSON(completionHandler: { response in
-                
-//                let str = String(decoding: response.data!, as: UTF8.self)
-//                print(str)
-                if (response.data != nil) {
-                    self.jsonData = response.data
-                    completion(true)
-                } else {
-                    self.msg = "伺服器錯誤，請洽管理員"
-                    completion(false)
-                    return
-                }
-            })
-            .uploadProgress(queue: .main, closure: { progress in
-                //Current upload progress of file
-                //print("Upload Progress: \(progress.fractionCompleted)")
-            })
-    }
     
     func update(_params: [String: String], image: UIImage?, completion: @escaping CompletionHandler) {
         

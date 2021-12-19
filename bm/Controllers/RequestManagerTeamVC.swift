@@ -178,7 +178,7 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
     
     @IBAction func submit(_ sender: Any) {
         
-        let manager_type: String = able_type
+        //let manager_type: String = able_type
         //let manager_type_token: String = ""
         let manager_token: String = manager_tokenTF.text!
         let member_token: String = Member.instance.token
@@ -193,7 +193,7 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
             msg += "沒有填寫管理者金鑰\n"
         }
         
-        params["manager_type"] = manager_type
+        params["manager_type"] = able_type
         params["manager_type_token"] = manager_type_token
         params["manager_token"] = manager_token
         params["member_token"] = member_token
