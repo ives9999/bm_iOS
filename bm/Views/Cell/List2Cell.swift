@@ -277,6 +277,7 @@ protocol List2CellDelegate {
     func cellLike(row: Table)
     func cellWarning(msg: String)
     func cellToLogin()
+    func cellSignup(row: Table)
     
     func cellSexChanged(key: String, sectionIdx: Int, rowIdx: Int, sex: String)
     func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String)

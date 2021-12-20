@@ -147,6 +147,10 @@ class ManagerTeamVC: ManagerVC {
         toEditTeam(token: row.token, _delegate: self)
     }
     
+    override func cellSignup(row: Table) {
+        toManagerTeamSignup()
+    }
+    
     override func addPressed() {
         toEditTeam(token: "", _delegate: self)
     }

@@ -119,6 +119,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
         }
     }
     
+    func cellSignup(row: Table) {}
+    
     //暫時沒有作用
     func cellTel(row: Table) {
         if (row.tel_show.count > 0) {

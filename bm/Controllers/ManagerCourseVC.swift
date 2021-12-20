@@ -169,6 +169,10 @@ class ManagerCourseVC: ManagerVC {
         toEditCourse(token: row.token, _delegate: self)
     }
     
+    override func cellSignup(row: Table) {
+        toManagerCourseSignup()
+    }
+    
 //    @IBAction func addCourseBtnPressed(_ sender: Any) {
 //        if !Member.instance.isLoggedIn {
 //            warning("請先登入為會員")

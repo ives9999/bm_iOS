@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -69,6 +69,17 @@
                                     <action selector="deleteBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="lah-60-0xe"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ceo-kQ-Aaa" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="120" y="0.0" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="Aa7-VI-E68"/>
+                                    <constraint firstAttribute="width" constant="36" id="j1r-oT-VvI"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="signup"/>
+                                <connections>
+                                    <action selector="signBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="fBd-4M-lOv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -76,6 +87,8 @@
                             <constraint firstItem="FPP-vP-bxU" firstAttribute="centerY" secondItem="9sB-IU-f00" secondAttribute="centerY" id="Doz-ni-yEo"/>
                             <constraint firstItem="in2-Ds-0cI" firstAttribute="leading" secondItem="9sB-IU-f00" secondAttribute="leading" constant="68" id="Ffe-Y8-iUA"/>
                             <constraint firstItem="in2-Ds-0cI" firstAttribute="centerY" secondItem="9sB-IU-f00" secondAttribute="centerY" id="Lym-dI-Cd9"/>
+                            <constraint firstItem="Ceo-kQ-Aaa" firstAttribute="leading" secondItem="9sB-IU-f00" secondAttribute="leading" constant="120" id="MNe-wd-lDy"/>
+                            <constraint firstItem="Ceo-kQ-Aaa" firstAttribute="centerY" secondItem="9sB-IU-f00" secondAttribute="centerY" id="a36-x7-UDW"/>
                             <constraint firstAttribute="trailing" secondItem="50m-uv-MIL" secondAttribute="trailing" constant="16" id="o0R-nU-U5p"/>
                             <constraint firstAttribute="height" constant="36" id="rNl-lM-hSA"/>
                             <constraint firstItem="FPP-vP-bxU" firstAttribute="leading" secondItem="9sB-IU-f00" secondAttribute="leading" constant="16" id="zqO-8G-UJe"/>
@@ -103,6 +116,7 @@
                 <outlet property="editIcon" destination="FPP-vP-bxU" id="Eiz-d4-Ecs"/>
                 <outlet property="listFeatured" destination="iq3-Jm-Wv7" id="JDU-x6-Mqd"/>
                 <outlet property="refreshIcon" destination="50m-uv-MIL" id="bwN-kK-UYT"/>
+                <outlet property="signupIcon" destination="Ceo-kQ-Aaa" id="ZWx-Qs-e7m"/>
                 <outlet property="titleLbl" destination="Shu-sM-ttz" id="vZO-3a-xnG"/>
             </connections>
             <point key="canvasLocation" x="174.63768115942031" y="166.40625"/>
@@ -114,5 +128,6 @@
         <image name="greater1" width="18" height="18"/>
         <image name="nophoto" width="900" height="514"/>
         <image name="refresh" width="25" height="25"/>
+        <image name="signup" width="25" height="25"/>
     </resources>
 </document>

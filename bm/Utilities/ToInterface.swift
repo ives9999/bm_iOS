@@ -179,6 +179,22 @@ extension BaseViewController {
         }
     }
     
+    func toManagerCourseSignup() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            let viewController = storyboard.instantiateViewController(identifier: "toxyz")  as! ManagerCourseSignupVC
+            let i = 6
+//            if let viewController = storyboard.instantiateViewController(identifier: "toManagerCourseSignup")  as? ManagerCourseSignupVC {
+//                //viewController.manager_token = manager_token
+//                show(viewController, sender: nil)
+//            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerCourseSignup") as! ManagerCourseSignupVC
+            //viewController.manager_token = manager_token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     //manager_token is member token
     func toManagerTeam(manager_token: String) {
         if #available(iOS 13.0, *) {
@@ -190,6 +206,20 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerTeam") as! ManagerTeamVC
             viewController.manager_token = manager_token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toManagerTeamSignup() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toManagerTeamSignup")  as? ManagerTeamSignupVC {
+                //viewController.manager_token = manager_token
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerTeamSignup") as! ManagerTeamSignupVC
+            //viewController.manager_token = manager_token
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
