@@ -563,7 +563,7 @@ class ShowCourseVC: ShowVC {
     }
     
     @IBAction func signupListButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_SIGNUP_LIST, sender: nil)
+        performSegue(withIdentifier: TO_SIGNUPLIST, sender: nil)
     }
 }
 

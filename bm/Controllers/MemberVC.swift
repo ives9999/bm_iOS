@@ -436,7 +436,7 @@ class MemberVC: MyTableVC {
             performSegue(withIdentifier: segue, sender: nil)
         } else if segue == TO_REFRESH {
             refresh()
-        } else if segue == TO_SIGNUP_LIST {
+        } else if segue == TO_SIGNUPLIST {
             performSegue(withIdentifier: "toA", sender: nil)
         } else if segue == TO_MEMBER_ORDER_LIST {
             toMemberOrderList()

@@ -2428,78 +2428,79 @@
             <point key="canvasLocation" x="3139" y="-1516"/>
         </scene>
         <!--Manager Course SignupVC-->
-        <scene sceneID="xST-H8-w2K">
+        <scene sceneID="QWc-VF-oaZ">
             <objects>
-                <viewController storyboardIdentifier="toxyz" id="eMo-3P-tkR" customClass="ManagerCourseSignupVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="euG-Vk-Lfe">
+                <viewController storyboardIdentifier="toManagerCourseSignup" id="y65-Hc-0Zm" customClass="ManagerCourseSignupVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="58Z-bt-hXY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cqi-RR-DaW">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2r-LI-UCc">
                                 <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YsZ-wF-wrL">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84V-u6-dRe">
                                         <rect key="frame" x="12" y="19" width="33" height="26"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="26" id="AkW-tz-azW"/>
-                                            <constraint firstAttribute="width" constant="33" id="YGP-ZK-GdF"/>
+                                            <constraint firstAttribute="height" constant="26" id="noD-Jo-2Bp"/>
+                                            <constraint firstAttribute="width" constant="33" id="pZT-64-Tjb"/>
                                         </constraints>
                                         <state key="normal" image="prev"/>
                                         <connections>
-                                            <action selector="prev1" destination="44A-2y-PC4" eventType="touchUpInside" id="QHH-tY-VIF"/>
-                                            <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="2Ci-tS-4fa"/>
-                                            <action selector="prevBtnPressed:" destination="eMo-3P-tkR" eventType="touchUpInside" id="2te-9d-e1N"/>
+                                            <action selector="prev1" destination="44A-2y-PC4" eventType="touchUpInside" id="obY-nt-K6o"/>
+                                            <action selector="prevBtnPressed:" destination="7XI-bz-e2e" eventType="touchUpInside" id="0o6-8q-HKW"/>
+                                            <action selector="prevBtnPressed:" destination="y65-Hc-0Zm" eventType="touchUpInside" id="IRA-md-oLK"/>
+                                            <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="go7-Ri-WPN"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程報名管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLi-94-2kl">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程報名管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FLA-kd-RY1">
                                         <rect key="frame" x="150" y="19" width="114.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <viewLayoutGuide key="safeArea" id="qij-07-4Y4"/>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstItem="YsZ-wF-wrL" firstAttribute="leading" secondItem="cqi-RR-DaW" secondAttribute="leading" constant="12" id="5v9-og-gkH"/>
-                                    <constraint firstItem="VLi-94-2kl" firstAttribute="centerX" secondItem="cqi-RR-DaW" secondAttribute="centerX" id="d8v-OP-rge"/>
-                                    <constraint firstItem="YsZ-wF-wrL" firstAttribute="centerY" secondItem="cqi-RR-DaW" secondAttribute="centerY" id="dI0-1m-UEs"/>
-                                    <constraint firstItem="VLi-94-2kl" firstAttribute="centerY" secondItem="cqi-RR-DaW" secondAttribute="centerY" id="uMv-eK-YXM"/>
-                                    <constraint firstAttribute="height" constant="64" id="x4h-Gp-rbX"/>
+                                    <constraint firstItem="FLA-kd-RY1" firstAttribute="centerY" secondItem="l2r-LI-UCc" secondAttribute="centerY" id="5VW-Ix-w5Y"/>
+                                    <constraint firstItem="84V-u6-dRe" firstAttribute="leading" secondItem="l2r-LI-UCc" secondAttribute="leading" constant="12" id="7bj-c9-Uq9"/>
+                                    <constraint firstAttribute="height" constant="64" id="9Qa-Ph-9eB"/>
+                                    <constraint firstItem="84V-u6-dRe" firstAttribute="centerY" secondItem="l2r-LI-UCc" secondAttribute="centerY" id="f3c-PY-M1I"/>
+                                    <constraint firstItem="FLA-kd-RY1" firstAttribute="centerX" secondItem="l2r-LI-UCc" secondAttribute="centerX" id="lMq-8X-RGs"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="nDL-zS-7qN">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="BNg-Xg-ugF">
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </imageView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fAF-3L-3ig">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YoQ-XL-928">
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="tB4-Za-Md2"/>
+                        <viewLayoutGuide key="safeArea" id="G5f-wS-qyy"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="fAF-3L-3ig" secondAttribute="trailing" id="21x-aU-3CW"/>
-                            <constraint firstItem="cqi-RR-DaW" firstAttribute="trailing" secondItem="tB4-Za-Md2" secondAttribute="trailing" id="95b-vq-FWk"/>
-                            <constraint firstItem="nDL-zS-7qN" firstAttribute="leading" secondItem="tB4-Za-Md2" secondAttribute="leading" id="Khb-0z-NA4"/>
-                            <constraint firstItem="nDL-zS-7qN" firstAttribute="trailing" secondItem="tB4-Za-Md2" secondAttribute="trailing" id="M2b-Fz-YsW"/>
-                            <constraint firstItem="tB4-Za-Md2" firstAttribute="bottom" secondItem="fAF-3L-3ig" secondAttribute="bottom" id="VzJ-8g-pMf"/>
-                            <constraint firstItem="cqi-RR-DaW" firstAttribute="top" secondItem="tB4-Za-Md2" secondAttribute="top" id="XhH-80-ndB"/>
-                            <constraint firstItem="nDL-zS-7qN" firstAttribute="top" secondItem="cqi-RR-DaW" secondAttribute="bottom" id="hA7-S8-bff"/>
-                            <constraint firstItem="tB4-Za-Md2" firstAttribute="bottom" secondItem="nDL-zS-7qN" secondAttribute="bottom" id="jhZ-uG-azq"/>
-                            <constraint firstItem="cqi-RR-DaW" firstAttribute="leading" secondItem="tB4-Za-Md2" secondAttribute="leading" id="mHK-S7-vKg"/>
-                            <constraint firstItem="fAF-3L-3ig" firstAttribute="leading" secondItem="tB4-Za-Md2" secondAttribute="leading" id="rte-y9-7Jq"/>
-                            <constraint firstItem="fAF-3L-3ig" firstAttribute="top" secondItem="cqi-RR-DaW" secondAttribute="bottom" id="tnU-zT-Uih"/>
+                            <constraint firstItem="BNg-Xg-ugF" firstAttribute="top" secondItem="l2r-LI-UCc" secondAttribute="bottom" id="0Eu-g5-ApK"/>
+                            <constraint firstItem="G5f-wS-qyy" firstAttribute="bottom" secondItem="YoQ-XL-928" secondAttribute="bottom" id="0lo-4w-qJK"/>
+                            <constraint firstItem="BNg-Xg-ugF" firstAttribute="trailing" secondItem="G5f-wS-qyy" secondAttribute="trailing" id="41Q-bg-rsH"/>
+                            <constraint firstItem="l2r-LI-UCc" firstAttribute="top" secondItem="G5f-wS-qyy" secondAttribute="top" id="6Ai-Dh-EMJ"/>
+                            <constraint firstAttribute="trailing" secondItem="l2r-LI-UCc" secondAttribute="trailing" id="FkO-Gr-o1L"/>
+                            <constraint firstItem="l2r-LI-UCc" firstAttribute="leading" secondItem="G5f-wS-qyy" secondAttribute="leading" id="XTv-ch-E2M"/>
+                            <constraint firstItem="YoQ-XL-928" firstAttribute="top" secondItem="l2r-LI-UCc" secondAttribute="bottom" id="p5Q-Hh-fBX"/>
+                            <constraint firstItem="BNg-Xg-ugF" firstAttribute="leading" secondItem="G5f-wS-qyy" secondAttribute="leading" id="rxT-Os-wes"/>
+                            <constraint firstItem="G5f-wS-qyy" firstAttribute="bottom" secondItem="BNg-Xg-ugF" secondAttribute="bottom" id="seb-16-57R"/>
+                            <constraint firstItem="YoQ-XL-928" firstAttribute="leading" secondItem="G5f-wS-qyy" secondAttribute="leading" id="t2B-1B-JxH"/>
+                            <constraint firstItem="YoQ-XL-928" firstAttribute="trailing" secondItem="G5f-wS-qyy" secondAttribute="trailing" id="zgl-uy-nyT"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tableView" destination="fAF-3L-3ig" id="byH-Q1-9B5"/>
-                        <outlet property="topView" destination="cqi-RR-DaW" id="Sx8-xK-448"/>
+                        <outlet property="tableView" destination="YoQ-XL-928" id="QOf-Mz-LRf"/>
+                        <outlet property="topView" destination="l2r-LI-UCc" id="6kf-GQ-CV7"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bAd-7Q-Dpa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pJ7-R8-RaM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3768" y="-1496"/>
+            <point key="canvasLocation" x="3907" y="-1516"/>
         </scene>
     </scenes>
     <designables>

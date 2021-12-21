@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HG5-5B-KRS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HG5-5B-KRS">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -1162,17 +1162,8 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="eZ6-Xv-UYk">
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="目前尚無資料" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Aft-hb-6pH" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="120" width="375" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="AQZ-RL-RX7"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ja9-jE-Drs">
-                                <rect key="frame" x="0.0" y="140" width="414" height="722"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -1183,19 +1174,16 @@
                             <constraint firstItem="Ja9-jE-Drs" firstAttribute="leading" secondItem="dS1-ol-M6K" secondAttribute="leading" id="L2C-7k-iIL"/>
                             <constraint firstItem="dS1-ol-M6K" firstAttribute="bottom" secondItem="eZ6-Xv-UYk" secondAttribute="bottom" id="LnD-jb-iWU"/>
                             <constraint firstItem="5UG-wL-nd7" firstAttribute="top" secondItem="dS1-ol-M6K" secondAttribute="top" id="Pet-lP-4dH"/>
-                            <constraint firstItem="Aft-hb-6pH" firstAttribute="top" secondItem="5UG-wL-nd7" secondAttribute="bottom" constant="12" id="SN4-hu-LoR"/>
                             <constraint firstItem="Ja9-jE-Drs" firstAttribute="trailing" secondItem="dS1-ol-M6K" secondAttribute="trailing" id="Set-FF-uj1"/>
-                            <constraint firstItem="Ja9-jE-Drs" firstAttribute="top" secondItem="Aft-hb-6pH" secondAttribute="bottom" id="XD7-s3-Msp"/>
                             <constraint firstItem="5UG-wL-nd7" firstAttribute="leading" secondItem="9bv-xD-MMv" secondAttribute="leading" id="bA9-bc-Cls"/>
                             <constraint firstItem="dS1-ol-M6K" firstAttribute="trailing" secondItem="5UG-wL-nd7" secondAttribute="trailing" id="cOB-ii-kN0"/>
                             <constraint firstItem="eZ6-Xv-UYk" firstAttribute="top" secondItem="5UG-wL-nd7" secondAttribute="bottom" id="dom-K1-JlM"/>
                             <constraint firstItem="eZ6-Xv-UYk" firstAttribute="leading" secondItem="9bv-xD-MMv" secondAttribute="leading" id="fQ5-yR-Kft"/>
                             <constraint firstItem="dS1-ol-M6K" firstAttribute="trailing" secondItem="eZ6-Xv-UYk" secondAttribute="trailing" id="kJO-KR-4aj"/>
+                            <constraint firstItem="Ja9-jE-Drs" firstAttribute="top" secondItem="5UG-wL-nd7" secondAttribute="bottom" id="qrF-ar-jPm"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emptyCons" destination="AQZ-RL-RX7" id="lxT-Nk-WX3"/>
-                        <outlet property="emptyLbl" destination="Aft-hb-6pH" id="SgE-Fk-4VD"/>
                         <outlet property="tableView" destination="Ja9-jE-Drs" id="eqe-yh-44D"/>
                         <outlet property="titleLbl" destination="mbW-za-DfR" id="P05-BG-QuN"/>
                         <outlet property="topView" destination="5UG-wL-nd7" id="NWX-7b-nZd"/>
@@ -1203,7 +1191,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ID-MU-mUn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1748" y="1532"/>
+            <point key="canvasLocation" x="1926" y="1548"/>
         </scene>
         <!--ManagerVC-->
         <scene sceneID="Joe-Qd-tZ0">

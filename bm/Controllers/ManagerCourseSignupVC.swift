@@ -1,8 +1,8 @@
 //
-//  ManagerCourseSignupVC.swift
+//  YouVC.swift
 //  bm
 //
-//  Created by ives on 2021/12/19.
+//  Created by ives on 2021/12/20.
 //  Copyright © 2021 bm. All rights reserved.
 //
 
@@ -11,9 +11,7 @@ import Foundation
 class ManagerCourseSignupVC: ManagerSignupVC {
     
     override func viewDidLoad() {
-        able_type = "course"
-        //rows = _rows
-        super.viewDidLoad()
         
+        super.viewDidLoad()
     }
 }

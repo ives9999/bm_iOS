@@ -319,7 +319,7 @@
 		F94FF4351FB4322C00D167B6 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94FF4341FB4322C00D167B6 /* EditVC.swift */; };
 		F964CDDB276F5CBA004F1C78 /* ManagerSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F964CDDA276F5CBA004F1C78 /* ManagerSignupVC.swift */; };
 		F964CDDD276F602F004F1C78 /* ManagerTeamSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F964CDDC276F602F004F1C78 /* ManagerTeamSignupVC.swift */; };
-		F964CDDF276F631D004F1C78 /* ManagerCourseSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F964CDDE276F631D004F1C78 /* ManagerCourseSignupVC.swift */; };
+		F964CDE127707260004F1C78 /* ManagerCourseSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F964CDE027707260004F1C78 /* ManagerCourseSignupVC.swift */; };
 		F96931971FB953960005C13F /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96931961FB953960005C13F /* City.swift */; };
 		F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969319C1FD12B930005C13F /* TeamTempPlayCell.swift */; };
 		F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */; };
@@ -718,7 +718,7 @@
 		F94FF4341FB4322C00D167B6 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		F964CDDA276F5CBA004F1C78 /* ManagerSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSignupVC.swift; sourceTree = "<group>"; };
 		F964CDDC276F602F004F1C78 /* ManagerTeamSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamSignupVC.swift; sourceTree = "<group>"; };
-		F964CDDE276F631D004F1C78 /* ManagerCourseSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerCourseSignupVC.swift; sourceTree = "<group>"; };
+		F964CDE027707260004F1C78 /* ManagerCourseSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerCourseSignupVC.swift; sourceTree = "<group>"; };
 		F96931961FB953960005C13F /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		F969319C1FD12B930005C13F /* TeamTempPlayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayCell.swift; sourceTree = "<group>"; };
 		F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayListCell.swift; sourceTree = "<group>"; };
@@ -1227,7 +1227,7 @@
 				B362265C25E54C9D00D98317 /* HomeTotalAdVC.swift */,
 				F94E7D211F83636A00F550FD /* HomeVC.swift */,
 				B3BBDD8E240E54D000EB9856 /* LoginVC.swift */,
-				F964CDDE276F631D004F1C78 /* ManagerCourseSignupVC.swift */,
+				F964CDE027707260004F1C78 /* ManagerCourseSignupVC.swift */,
 				B36D66B6229997AC00502D62 /* ManagerCourseVC.swift */,
 				B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */,
 				F964CDDA276F5CBA004F1C78 /* ManagerSignupVC.swift */,
@@ -1898,7 +1898,6 @@
 				B31ADD992591FDF3003E86BD /* FormItemCell.swift in Sources */,
 				B3ED38E41FB77BD20003F083 /* NumberTextField.swift in Sources */,
 				B3AE93B22640FBE700223B2A /* ShowArenaVC.swift in Sources */,
-				F964CDDF276F631D004F1C78 /* ManagerCourseSignupVC.swift in Sources */,
 				B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
 				B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */,
@@ -1909,6 +1908,7 @@
 				B31CD34826F19D52001B3848 /* MemberTable.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* TeachService.swift in Sources */,
 				F9FAB2B6271EFD8100D83CC4 /* SearchRow.swift in Sources */,
+				F964CDE127707260004F1C78 /* ManagerCourseSignupVC.swift in Sources */,
 				B326C7CC256E2F0D0048A2C2 /* SelectAreasVC.swift in Sources */,
 				B323390B21B6B8E4003EB84D /* FormValidableProtocol.swift in Sources */,
 				B309C1E22675F45E00CCFE61 /* SelectArenaVC.swift in Sources */,

@@ -300,6 +300,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     
     func addSearchBtn() {
         
+        //search default is hidden set in viewDidLoad
         topView.addSubview(searchBtn)
         searchBtn.setImage(UIImage(named: "search1"), for: .normal)
         
