@@ -85,7 +85,7 @@ class ShowTeamVC: ShowVC {
         memberRows.append(row)
         row = MemberRow(title: "程度", icon: "degree", show: myTable!.degree_show)
         memberRows.append(row)
-        row = MemberRow(title: "隊長", icon: "group", show: myTable!.manager_nickname)
+        row = MemberRow(title: "管理者", icon: "group", show: myTable!.manager_nickname)
         memberRows.append(row)
         row = MemberRow(title: "行動電話", icon: "mobile", show: myTable!.mobile_show)
         memberRows.append(row)
