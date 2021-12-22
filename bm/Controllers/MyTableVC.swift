@@ -92,7 +92,7 @@ class MyTableVC: BaseViewController {
         
         if (tableView != nil) {
             let cellNibName = UINib(nibName: "List2Cell", bundle: nil)
-            tableView.register(cellNibName, forCellReuseIdentifier: "lis2Cell")
+            tableView.register(cellNibName, forCellReuseIdentifier: "listcell")
             tableView.estimatedRowHeight = 44
             tableView.rowHeight = UITableView.automaticDimension
             
@@ -670,7 +670,7 @@ extension MyTableVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "Listcell", for: indexPath) as? List2Cell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "listcell", for: indexPath) as? List2Cell {
             
             cell.cellDelegate = self
             //let row = lists[indexPath.row]

@@ -60,6 +60,15 @@ class TeamService: DataService {
         return url
     }
     
+    override func getSignupListURL(token: String? = nil)-> String {
+        var url: String = String(format: URL_SIGNUP_LIST, able_type)
+        if token != nil {
+            url = url + "/" + token!
+        }
+        
+        return url
+    }
+    
     func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["source": "app", "token": token, "strip_html": "true"]
         

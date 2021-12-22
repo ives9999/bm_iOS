@@ -14,7 +14,7 @@ class SignupListVC: MyTableVC {
     @IBOutlet weak var emptyLbl: SuperLabel!
     @IBOutlet weak var emptyCons: NSLayoutConstraint!
     
-    var able: String = "course"//來源是什麼，course
+    //var able: String = "course"//來源是什麼，course
     var able_token: String = ""//來源的token
     //var signups: SuperSignups?
     //var able_model: SuperCourse = SuperCourse()
@@ -22,16 +22,17 @@ class SignupListVC: MyTableVC {
 
     override func viewDidLoad() {
         myTablView = tableView
+        able_type = "team"
         super.viewDidLoad()
         //print(able_token)
 
-        if able == "course" {
-            dataService = CourseService.instance
-        }
+        //if able_type == "course" {
+            dataService = TeamService.instance
+        //}
         
         let cell = UINib(nibName: "SignupListCell", bundle: nil)
         tableView.register(cell, forCellReuseIdentifier: "cell")
-        emptyLbl.isHidden = true
+        //emptyLbl.isHidden = true
         refresh()
     }
     
@@ -40,18 +41,19 @@ class SignupListVC: MyTableVC {
         getDataStart()
     }
     
-//    override func getDataStart(page: Int = 1, perPage: Int = PERPAGE) {
-//        Global.instance.addSpinner(superView: self.view)
-//        
-//        dataService.signup_list(token: able_token, page: page, perPage: perPage) { (success) in
-//            Global.instance.removeSpinner(superView: self.view)
-//            if success {
-//                self.getDataEnd(success: success)
-//            } else {
-//                self.warning(self.dataService.msg)
-//            }
-//        }
-//    }
+    override func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {
+        
+        Global.instance.addSpinner(superView: self.view)
+        
+        dataService.signup_list(token: able_token, page: page, perPage: perPage) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if success {
+                self.getDataEnd(success: success)
+            } else {
+                self.warning(self.dataService.msg)
+            }
+        }
+    }
     
     override func getDataEnd(success: Bool) {
         if success {

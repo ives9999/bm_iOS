@@ -11,6 +11,7 @@ import Foundation
 class ManagerSignupVC: MyTableVC {
     
     var managerRows: [MemberRow] = [MemberRow]()
+    var able_token: String = ""
     
     override func viewDidLoad() {
         myTablView = tableView
@@ -53,10 +54,11 @@ class ManagerSignupVC: MyTableVC {
         //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let row: MemberRow = managerRows[indexPath.row]
         let segue = row.segue
+        
         if segue == TO_LASTSIGNUPLIST {
-            toSignupList(able_type: able_type, isLast: true)
+            toSignupList(able_type: able_type, able_token: able_token, isLast: true)
         } else if segue == TO_SIGNUPLIST {
-            toSignupList(able_type: able_type)
+            toSignupList(able_type: able_type, able_token: able_token)
         } else if segue == TO_TEACH {
             toTeach()
             //toShowTeach(token: "")

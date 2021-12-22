@@ -112,5 +112,4 @@ class TeamListCell: List2Cell {
             self.accessoryView = UIImageView(image: chevron!)
         }
     }
-    
 }

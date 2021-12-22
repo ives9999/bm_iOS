@@ -8,29 +8,47 @@
 
 import UIKit
 
-class SignupListCell: SuperCell {
+class SignupListCell: List2Cell {
     
-    @IBOutlet weak var noLbl: SuperLabel!
-    @IBOutlet weak var signuperLbl: SuperLabel!
-    @IBOutlet weak var signupTimeLbl: SuperLabel!
-    @IBOutlet weak var courseDateLbl: SuperLabel!
+    @IBOutlet weak var weekendLbl: SuperLabel!
+    @IBOutlet weak var signupTime: SuperLabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
     
-    func update(no: String, signuper: String, signupTime: String, courseDate: String) {
-        noLbl.text = no
-        signuperLbl.text = signuper
-        signupTimeLbl.text = signupTime
-        courseDateLbl.text = courseDate
+    func update(_row: Table) {
+        
+        let row: TeamTable? = _row as? TeamTable ?? nil
+        if row != nil {
+            if (row!.arena != nil) {
+                if row!.arena!.name.count > 0 {
+                    arenaBtn.setTitle(row!.arena!.name)
+                    cityBtn.setTitle(row!.arena!.city_show)
+                    cityBtn.isHidden = false
+                    arenaBtn.isHidden = false
+                } else {
+                    cityBtn.isHidden = true
+                    arenaBtn.isHidden = true
+                }
+            }
+            
+            if row!.weekdays_show.count > 0 {
+                weekendLbl.text = row!.weekdays_show
+            } else {
+                weekendLbl.text = "未提供"
+            }
+            
+//            if row!.interval_show.count > 0 {
+//                intervalLbl.text = row!.interval_show
+//            } else {
+//                intervalLbl.text = "未提供"
+//            }
+            
+            let chevron = UIImage(named: "greater1")
+            self.accessoryType = .disclosureIndicator
+            self.accessoryView = UIImageView(image: chevron!)
+        }
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-    
 }

@@ -227,7 +227,7 @@
 		B3B758F325BB08CD006ACC33 /* OrderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B758F225BB08CB006ACC33 /* OrderService.swift */; };
 		B3BBDD90240E54D100EB9856 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8E240E54D000EB9856 /* LoginVC.swift */; };
 		B3BBDD91240E54D100EB9856 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */; };
-		B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */; };
+		B3BBDD93240E64ED00EB9856 /* MemberSignupListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3BBDD92240E64EC00EB9856 /* MemberSignupListVC.swift */; };
 		B3C4952A26287D1100D4F727 /* TeamListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C4952826287D1100D4F727 /* TeamListCell.swift */; };
 		B3C4952B26287D1100D4F727 /* TeamListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3C4952926287D1100D4F727 /* TeamListCell.xib */; };
 		B3C49534262AC2C100D4F727 /* CourseListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C49532262AC2C000D4F727 /* CourseListCell.swift */; };
@@ -616,7 +616,7 @@
 		B3B758F225BB08CB006ACC33 /* OrderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderService.swift; sourceTree = "<group>"; };
 		B3BBDD8E240E54D000EB9856 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		B3BBDD8F240E54D000EB9856 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
-		B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignuListVC.swift; sourceTree = "<group>"; };
+		B3BBDD92240E64EC00EB9856 /* MemberSignupListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberSignupListVC.swift; sourceTree = "<group>"; };
 		B3C4952826287D1100D4F727 /* TeamListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamListCell.swift; sourceTree = "<group>"; };
 		B3C4952926287D1100D4F727 /* TeamListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TeamListCell.xib; sourceTree = "<group>"; };
 		B3C49532262AC2C000D4F727 /* CourseListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseListCell.swift; sourceTree = "<group>"; };
@@ -1237,7 +1237,7 @@
 				B3A5A28320B2CB80001A846F /* ManagerVC.swift */,
 				B370EFBE26AD3F2B0022E599 /* MemberCartListVC.swift */,
 				B362263125E236C100D98317 /* MemberOrderListVC.swift */,
-				B3BBDD92240E64EC00EB9856 /* MemberSignuListVC.swift */,
+				B3BBDD92240E64EC00EB9856 /* MemberSignupListVC.swift */,
 				B3485C9623F841BE0078265D /* MemberVC.swift */,
 				B30C954F1FED68A0005F71EF /* MoreVC.swift */,
 				B3310D8D22ABB4820062EF98 /* MultiSelectVC.swift */,
@@ -1700,7 +1700,7 @@
 				F94FF4351FB4322C00D167B6 /* EditVC.swift in Sources */,
 				B370EFB226A849120022E599 /* CartService.swift in Sources */,
 				B3B758B125AC5051006ACC33 /* TagFormItem.swift in Sources */,
-				B3BBDD93240E64ED00EB9856 /* MemberSignuListVC.swift in Sources */,
+				B3BBDD93240E64ED00EB9856 /* MemberSignupListVC.swift in Sources */,
 				B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */,
 				B3B758C625AD414E006ACC33 /* NumberCell.swift in Sources */,
 				B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */,

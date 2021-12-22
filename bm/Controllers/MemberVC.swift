@@ -98,15 +98,16 @@ class MemberVC: MyTableVC {
         
         var sections: [MemberSection] = [MemberSection]()
         
-        sections.append(makeSection0Row1())
-        sections.append(makeSection1Row1())
-        sections.append(makeSection2Row1(isEpanded: false))
-        sections.append(makeSection3Row1())
+        sections.append(makeSection0Row())
+        sections.append(makeSection1Row())
+        sections.append(makeSection2Row(isEpanded: false))
+        sections.append(makeSection3Row())
+        sections.append(makeSection4Row())
         
         return sections
     }
     
-    func makeSection0Row1(isEpanded: Bool = true)-> MemberSection {
+    func makeSection0Row(isEpanded: Bool = true)-> MemberSection {
         
         var rows: [MemberRow] = [MemberRow]()
         
@@ -168,7 +169,7 @@ class MemberVC: MyTableVC {
         return rows
     }
     
-    func makeSection1Row1(isEpanded: Bool = true)-> MemberSection {
+    func makeSection1Row(isEpanded: Bool = true)-> MemberSection {
         
         var rows: [MemberRow] = [MemberRow]()
         
@@ -183,7 +184,7 @@ class MemberVC: MyTableVC {
         return s
     }
     
-    func makeSection2Row1(isEpanded: Bool = true)-> MemberSection {
+    func makeSection2Row(isEpanded: Bool = true)-> MemberSection {
         
         var rows: [MemberRow] = [MemberRow]()
         
@@ -207,7 +208,21 @@ class MemberVC: MyTableVC {
         return s
     }
     
-    func makeSection3Row1(isEpanded: Bool = true)-> MemberSection {
+    func makeSection3Row(isEpanded: Bool = true)-> MemberSection {
+
+        var rows: [MemberRow] = [MemberRow]()
+        
+        let r1: MemberRow = MemberRow(title: "球隊", icon: "team", segue: TO_MEMBER_SIGNUPLIST, able_type: "team")
+        rows.append(r1)
+        let r2: MemberRow = MemberRow(title: "課程", icon: "course", segue: TO_MEMBER_SIGNUPLIST, able_type: "course")
+        rows.append(r2)
+
+        let s: MemberSection = MemberSection(title: "報名", isExpanded: isEpanded, items: rows)
+
+        return s
+    }
+    
+    func makeSection4Row(isEpanded: Bool = true)-> MemberSection {
 
         var rows: [MemberRow] = [MemberRow]()
         
@@ -442,6 +457,9 @@ class MemberVC: MyTableVC {
             toMemberOrderList()
         } else if segue == TO_MEMBER_CART_LIST {
             toMemberCartList()
+        } else if segue == TO_MEMBER_SIGNUPLIST {
+            let able_type: String = row.able_type
+            toMemberSignuplist(able_type: able_type)
         } else if segue == TO_LIKE {
             let able_type: String = row.able_type
             

@@ -1078,23 +1078,22 @@
                         <outlet property="registerIcon" destination="9SS-RX-ALH" id="5lS-qe-GYw"/>
                         <outlet property="tableView" destination="qop-cY-EqR" id="YOO-Xe-UtB"/>
                         <outlet property="topView" destination="wjB-Rp-kZH" id="Ihd-r0-8fk"/>
-                        <segue destination="kfU-PJ-07b" kind="show" identifier="toA" id="yqd-tg-r7g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0y-lF-F2G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1822" y="-1434"/>
         </scene>
-        <!--Member Signu ListVC-->
+        <!--Member Signup ListVC-->
         <scene sceneID="gOe-wE-Uja">
             <objects>
-                <viewController id="kfU-PJ-07b" customClass="MemberSignuListVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toMemberSignuplist" id="kfU-PJ-07b" customClass="MemberSignupListVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pnp-XL-p50">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F0k-9h-EAM">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="報名列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2X-RC-B7U">
                                         <rect key="frame" x="169" y="19" width="76.5" height="26.5"/>
@@ -1102,20 +1101,34 @@
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0b-1U-FSe">
+                                        <rect key="frame" x="12" y="23" width="24" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="0Cr-Db-KOa"/>
+                                            <constraint firstAttribute="width" constant="24" id="BCQ-Tz-88H"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="kfU-PJ-07b" eventType="touchUpInside" id="ND7-b9-6nR"/>
+                                            <action selector="prevBtnPressed:" destination="G5m-sq-lsN" eventType="touchUpInside" id="RHe-SX-Rf9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="q2X-RC-B7U" firstAttribute="centerX" secondItem="F0k-9h-EAM" secondAttribute="centerX" id="5c7-l5-pgr"/>
                                     <constraint firstItem="q2X-RC-B7U" firstAttribute="centerY" secondItem="F0k-9h-EAM" secondAttribute="centerY" id="GLi-MN-vhk"/>
+                                    <constraint firstItem="F0b-1U-FSe" firstAttribute="leading" secondItem="F0k-9h-EAM" secondAttribute="leading" constant="12" id="LFL-qY-ycz"/>
                                     <constraint firstAttribute="height" constant="64" id="Pth-0b-kK4"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="dvR-UT-iMG"/>
+                                    <constraint firstItem="F0b-1U-FSe" firstAttribute="centerY" secondItem="F0k-9h-EAM" secondAttribute="centerY" id="msj-qp-ALh"/>
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="eWb-fQ-2hb">
-                                <rect key="frame" x="0.0" y="64" width="414" height="744"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jxR-Fz-NbE">
-                                <rect key="frame" x="0.0" y="64" width="414" height="128"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="128"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="hgh-lm-ND1">
                                         <rect key="frame" x="149.5" y="12" width="115.5" height="20.5"/>
@@ -1204,7 +1217,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="MAu-yj-ERJ">
-                                <rect key="frame" x="0.0" y="200" width="414" height="608"/>
+                                <rect key="frame" x="0.0" y="244" width="414" height="618"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CalendarSignupCell" rowHeight="83" id="o8d-1o-xNl">
@@ -2530,7 +2543,7 @@
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="ous-Dp-pXL"/>
+        <segue reference="2ff-JT-Wdj"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="377.5" height="670"/>

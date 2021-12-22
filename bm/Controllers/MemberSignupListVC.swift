@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemberSignuListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSource {
+class MemberSignupListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var yearLbl: SuperLabel!
     @IBOutlet weak var monthLbl: SuperLabel!
@@ -39,6 +39,15 @@ class MemberSignuListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSource
         monthPick.selectRow(m!-1, inComponent: 0, animated: true)
         
         calendarParams = makeCalendar()
+        
+        let cellNibName = UINib(nibName: "SignupListCell", bundle: nil)
+        tableView.register(cellNibName, forCellReuseIdentifier: "signupListCell")
+        
+        refresh()
+    }
+    
+    override func refresh() {
+        
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -124,5 +133,30 @@ class MemberSignuListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSource
         res["next_year"] = next_year
         
         return res
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "signupListCell", for: indexPath) as? SignupListCell {
+            
+            //cell.cellDelegate = self
+            //let row = lists[indexPath.row]
+            //cell.updateViews(indexPath: indexPath, data: row, iden: _type)
+            
+            return cell
+        }
+        
+//        if var cell: FormCell = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell {
+//            cell = FormCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
+//            cell.accessoryType = UITableViewCell.AccessoryType.none
+//            cell.selectionStyle = UITableViewCell.SelectionStyle.none
+//
+//            let row: [String: Any] = rows![indexPath.section][indexPath.row]
+//            let field: String = row["text"] as! String
+//            cell.textLabel!.text = field
+//            return cell
+//        }
+        
+        return UITableViewCell()
     }
 }

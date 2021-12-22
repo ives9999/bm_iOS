@@ -148,7 +148,7 @@ class ManagerTeamVC: ManagerVC {
     }
     
     override func cellSignup(row: Table) {
-        toManagerTeamSignup()
+        toManagerTeamSignup(able_type: able_type, able_token: row.token)
     }
     
     override func addPressed() {

@@ -278,11 +278,14 @@ class DataService {
     }
     
     func getSignupDateURL(token: String)-> String { return ""}
+    func getSignupListURL(token: String? = nil)-> String { return ""}
     func getSignupURL(token: String)-> String { return ""}
     
     func getSource()-> String? {
         return nil
     }
+    
+    func getUpdateURL()-> String {return ""}
     
     func isNameExist(name: String, completion: @escaping CompletionHandler) {
         
@@ -484,7 +487,51 @@ class DataService {
         }
     }
     
-    func getUpdateURL()-> String {return ""}
+    func signup_list(token: String? = nil, page: Int = 1, perPage: Int = 20, completion: @escaping CompletionHandler) {
+        let url: String = getSignupListURL(token: token)
+        print(url)
+        let body: [String: String] = ["device": "app", "channel": "bm", "page":String(page), "perPage":String(perPage)]
+        print(body)
+        
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+                    
+//            if response.result.error == nil {
+//                guard let data = response.result.value else {
+//                    //print("get response result value error")
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                    return
+//                }
+//                let json = JSON(data)
+//                //print(json["able"])
+//                if json["able"].exists() {
+//                    self.able = self.parseAbleForSingupList(data: json["able"])
+//                    //print(able.printRow())
+//                }
+//                completion(true)
+//            } else {
+//                self.msg = "網路錯誤，請稍後再試"
+//                completion(false)
+//                debugPrint(response.result.error as Any)
+//            }
+        }
+    }
     
     func update(_params: [String: String], image: UIImage?, completion: @escaping CompletionHandler) {
         
@@ -930,56 +977,7 @@ class DataService {
 //
 //    }
     
-    
-    
-    func signup_list(token: String? = nil, page: Int = 1, perPage: Int = 8, completion: @escaping CompletionHandler) {
-        let url: String = getSignupListURL(token: token)
-        //print(url)
-        let body: [String: String] = ["device": "app", "channel": "bm", "page":String(page), "perPage":String(perPage)]
-        //print(body)
-        
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
-            
-            switch response.result {
-            case .success(_):
-                if response.data != nil {
-                    self.jsonData = response.data
-                    completion(true)
-                } else {
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                }
-            case .failure(let error):
-                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-                completion(false)
-                print(error)
-                return
-            }
-                    
-//            if response.result.error == nil {
-//                guard let data = response.result.value else {
-//                    //print("get response result value error")
-//                    self.msg = "網路錯誤，請稍後再試"
-//                    completion(false)
-//                    return
-//                }
-//                let json = JSON(data)
-//                //print(json["able"])
-//                if json["able"].exists() {
-//                    self.able = self.parseAbleForSingupList(data: json["able"])
-//                    //print(able.printRow())
-//                }
-//                completion(true)
-//            } else {
-//                self.msg = "網路錯誤，請稍後再試"
-//                completion(false)
-//                debugPrint(response.result.error as Any)
-//            }
-        }
-    }
-    
-    func getSignupListURL(token: String? = nil)-> String { return ""}
-    func parseAbleForSingupList(data: JSON)-> SuperModel { return SuperModel() }
+    //func parseAbleForSingupList(data: JSON)-> SuperModel { return SuperModel() }
     
 //    func getHomes(completion: @escaping CompletionHandler) {
 //        let body: [String: Any] = ["device": "app"]
