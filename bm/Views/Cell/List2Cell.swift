@@ -97,7 +97,9 @@ class List2Cell: UITableViewCell {
             likeIcon.setLike()
         }
         
-        refreshIcon.row = _row
+        if refreshIcon != nil {
+            refreshIcon.row = _row
+        }
         
         if mobileIcon != nil {
             mobileIcon.row = _row

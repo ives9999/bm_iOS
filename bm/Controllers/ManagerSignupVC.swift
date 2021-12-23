@@ -55,10 +55,8 @@ class ManagerSignupVC: MyTableVC {
         let row: MemberRow = managerRows[indexPath.row]
         let segue = row.segue
         
-        if segue == TO_LASTSIGNUPLIST {
+        if segue == TO_MANAGER_SIGNUPLIST {
             toSignupList(able_type: able_type, able_token: able_token, isLast: true)
-        } else if segue == TO_SIGNUPLIST {
-            toSignupList(able_type: able_type, able_token: able_token)
         } else if segue == TO_TEACH {
             toTeach()
             //toShowTeach(token: "")

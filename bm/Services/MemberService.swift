@@ -599,15 +599,16 @@ class MemberService: DataService {
         }
     }
     
-    func memberSignupCalendar(year: Int, month: Int, member_token: String? = nil, source: String = "course", completion: @escaping CompletionHandler)-> (success: Bool, msg: String) {
-        var res = true
-        if member_token == nil {
-            res = false
-            return (res, "沒有傳輸會員碼錯誤，請洽管理員")
-        }
+    func memberSignupCalendar(year: Int, month: Int, member_token: String? = nil, able_type: String = "course", completion: @escaping CompletionHandler) {
+//        var res = true
+//        if member_token == nil {
+//            res = false
+//            return (res, "沒有傳輸會員碼錯誤，請洽管理員")
+//        }
         let url: String = URL_MEMBER_SIGNUP_CALENDAR
-        //print(url)
-        let body: [String: String] = ["y":String(year),"m":String(month),"member_token":member_token!,"source":source,"device": "app", "channel": "bm"]
+        print(url)
+        let body: [String: String] = ["y":String(year),"m":String(month),"member_token":member_token!,"able_type":able_type,"device": "app", "channel": "bm"]
+        print(body)
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
             switch response.result {
@@ -652,7 +653,7 @@ class MemberService: DataService {
 //            }
         }
         
-        return (res, "")
+        //return (res, "")
     }
 }
 

@@ -659,7 +659,7 @@ extension MyTableVC: UITableViewDataSource {
             return lists1.count
         }
         
-        let count: Int = 1
+        let count: Int = 0
 //        if rows == nil {
 //            count = 0
 //        } else {

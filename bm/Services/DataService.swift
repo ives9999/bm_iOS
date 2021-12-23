@@ -489,9 +489,9 @@ class DataService {
     
     func signup_list(token: String? = nil, page: Int = 1, perPage: Int = 20, completion: @escaping CompletionHandler) {
         let url: String = getSignupListURL(token: token)
-        print(url)
+        //print(url)
         let body: [String: String] = ["device": "app", "channel": "bm", "page":String(page), "perPage":String(perPage)]
-        print(body)
+        //print(body)
         
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             

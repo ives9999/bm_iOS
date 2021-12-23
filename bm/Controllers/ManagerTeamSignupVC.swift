@@ -21,11 +21,11 @@ class ManagerTeamSignupVC: ManagerSignupVC {
         
         var rows: [MemberRow] = [MemberRow]()
         
-        let r1: MemberRow = MemberRow(title: "最新報名列表", icon: "signup", segue: TO_LASTSIGNUPLIST)
+        let r1: MemberRow = MemberRow(title: "最新報名列表", icon: "signup", segue: TO_MANAGER_SIGNUPLIST)
         r1.color = UIColor(MY_LIGHT_WHITE)
         rows.append(r1)
         
-        let r2: MemberRow = MemberRow(title: "歷史報名列表", icon: "signup", segue: TO_SIGNUPLIST)
+        let r2: MemberRow = MemberRow(title: "歷史報名列表", icon: "signup", segue: TO_MANAGER_SIGNUPLIST)
         r2.color = UIColor(MY_LIGHT_WHITE)
         rows.append(r2)
         

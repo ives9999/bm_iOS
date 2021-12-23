@@ -169,7 +169,7 @@ class TeamTable: Table {
         if weekdays.count > 0 {
             var show: [String] = [String]()
             for weekday in weekdays {
-                let tmp: String = WEEKDAY(weekday: weekday.weekday).toShortString()
+                let tmp: String = WEEKDAY(weekday: weekday.weekday).toString()
                 show.append(tmp)
             }
             weekdays_show = show.joined(separator: ",")

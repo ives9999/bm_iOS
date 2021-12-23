@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class MemberSignupListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -23,7 +24,10 @@ class MemberSignupListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSourc
     
     var calendarParams: [String: Any] = [String: Any]()
     
+    var signupNormalTables: [SignupNormalTable] = [SignupNormalTable]()
+    
     override func viewDidLoad() {
+        
         myTablView = tableView
         super.viewDidLoad()
 
@@ -48,6 +52,66 @@ class MemberSignupListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSourc
     
     override func refresh() {
         
+        page = 1
+        getDataStart(page: page, perPage: PERPAGE)
+    }
+    
+    override func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {
+        Global.instance.addSpinner(superView: self.view)
+        
+        MemberService.instance.memberSignupCalendar(year: 0, month: 0, member_token: Member.instance.token, able_type: able_type) { (success) in
+            if (success) {
+                self.jsonData = MemberService.instance.jsonData
+                self.getDataEnd(success: success)
+            }
+        }
+    }
+    
+    override func getDataEnd(success: Bool) {
+        
+        if (jsonData != nil) {
+            genericTable()
+            if page == 1 {
+                if (tables != nil) {
+                    totalCount = tables!.totalCount
+                    perPage = tables!.perPage
+                    let _pageCount: Int = totalCount / perPage
+                    totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
+                    //print(totalPage)
+                }
+            }
+            if refreshControl.isRefreshing {
+                refreshControl.endRefreshing()
+            }
+            myTablView.reloadData()
+            //self.page = self.page + 1 in CollectionView
+        } else {
+            warning("沒有取得回傳的json字串，請洽管理員")
+        }
+        Global.instance.removeSpinner(superView: view)
+    }
+    
+    override func genericTable() {
+        
+        do {
+            if (jsonData != nil) {
+//                let str = String(decoding: jsonData!, as: UTF8.self)
+//                print(str)
+                let signupResultTable = try JSONDecoder().decode(SignupResultTable.self, from: jsonData!)
+                if (signupResultTable.success) {
+                    self.signupNormalTables = signupResultTable.rows
+                }
+            } else {
+                warning("無法從伺服器取得正確的json資料，請洽管理員")
+            }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        
+        if (page == 1) {
+            lists1 = [SignupNormalTable]()
+        }
+        lists1 += signupNormalTables
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -139,9 +203,9 @@ class MemberSignupListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSourc
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "signupListCell", for: indexPath) as? SignupListCell {
             
-            //cell.cellDelegate = self
-            //let row = lists[indexPath.row]
-            //cell.updateViews(indexPath: indexPath, data: row, iden: _type)
+            let signupNormalTable: SignupNormalTable = signupNormalTables[indexPath.row]
+            signupNormalTable.filterRow()
+            cell.update(_row: signupNormalTable)
             
             return cell
         }
@@ -158,5 +222,23 @@ class MemberSignupListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSourc
 //        }
         
         return UITableViewCell()
+    }
+}
+
+class SignupResultTable: Codable {
+    
+    var success: Bool = false
+    var msg: String = ""
+    var rows: [SignupNormalTable] = [SignupNormalTable]()
+    
+    init(){}
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
+        rows = try container.decodeIfPresent([SignupNormalTable].self, forKey: .rows) ?? [SignupNormalTable]()
     }
 }
