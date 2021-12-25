@@ -826,6 +826,47 @@ enum KEYBOARD: String {
     }
 }
 
+enum SIGNUP_STATUS: String {
+    case normal = "報名"
+    case standby = "候補"
+    case cancel = "取消"
+    
+    static let allValues = [normal, standby, cancel]
+    
+    init(status: String) {
+        switch status {
+        case "normal":
+            self = .normal
+        case "standby":
+            self = .standby
+        case "cancel":
+            self = .cancel
+        default:
+            self = .normal
+        }
+    }
+    
+    func toString()->String {
+        switch self {
+        case .normal:
+            return "normal"
+        case .standby:
+            return "standby"
+        case .cancel:
+            return "cancel"
+        }
+    }
+    
+    static func all()-> [[String: Any]] {
+        var res: [[String: Any]] = [[String: Any]]()
+        for item in allValues {
+            res.append(["key":item.toString(), "value":item, "ch":item.rawValue])
+        }
+        
+        return res
+    }
+}
+
 let df : DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

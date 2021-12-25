@@ -210,17 +210,6 @@ class MemberSignupListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSourc
             return cell
         }
         
-//        if var cell: FormCell = tableView.dequeueReusableCell(withIdentifier: "cell") as? FormCell {
-//            cell = FormCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: "cell")
-//            cell.accessoryType = UITableViewCell.AccessoryType.none
-//            cell.selectionStyle = UITableViewCell.SelectionStyle.none
-//
-//            let row: [String: Any] = rows![indexPath.section][indexPath.row]
-//            let field: String = row["text"] as! String
-//            cell.textLabel!.text = field
-//            return cell
-//        }
-        
         return UITableViewCell()
     }
 }

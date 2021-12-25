@@ -23,11 +23,12 @@ class ManagerSignupVC: MyTableVC {
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
         
         managerRows = initRows()
+        print(able_token)
     }
     
     func initRows()-> [MemberRow] {
         
-        var rows: [MemberRow] = [MemberRow]()
+        let rows: [MemberRow] = [MemberRow]()
         
         return rows
     }
@@ -56,16 +57,7 @@ class ManagerSignupVC: MyTableVC {
         let segue = row.segue
         
         if segue == TO_MANAGER_SIGNUPLIST {
-            toSignupList(able_type: able_type, able_token: able_token, isLast: true)
-        } else if segue == TO_TEACH {
-            toTeach()
-            //toShowTeach(token: "")
-        }else if segue == TO_COACH {
-            toCoach()
-        }else if segue == TO_STORE {
-            toStore()
-        } else {
-            //performSegue(withIdentifier: segue, sender: row["sender"])
+            toManagerSignupList(able_type: able_type, able_token: able_token)
         }
     }
 }

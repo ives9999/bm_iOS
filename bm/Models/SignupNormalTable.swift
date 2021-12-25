@@ -17,7 +17,9 @@ class SignupNormalTable: Table {
     var cancel_deadline: String = ""
     var member_name: String = ""
     var member_token: String = ""
+    
     var teamTable: TeamTable?
+    var memberTable: MemberTable?
     
     enum CodingKeys: String, CodingKey {
         case member_id
@@ -28,6 +30,7 @@ class SignupNormalTable: Table {
         case member_name
         case member_token
         case teamTable
+        case memberTable
     }
     
     required init(from decoder: Decoder) throws {
@@ -42,13 +45,37 @@ class SignupNormalTable: Table {
         
         member_token = try container.decodeIfPresent(String.self, forKey: .member_token) ?? ""
         teamTable = try container.decodeIfPresent(TeamTable.self, forKey: .teamTable) ?? nil
+        memberTable = try container.decodeIfPresent(MemberTable.self, forKey: .memberTable) ?? nil
     }
     
     override func filterRow() {
         
         super.filterRow()
+        
+        if created_at.count > 0 {
+            created_at_show = created_at.noSec()
+        }
+        
+        if updated_at.count > 0 {
+            updated_at_show = updated_at.noSec()
+        }
+        
+        if let tmp: Date = created_at.toDateTime() {
+            
+            let weekday: String = tmp.dateToWeekdayForChinese()
+            created_at_show = created_at_show + "(" + weekday + ")"
+        }
+        
         if (teamTable != nil) {
             teamTable!.filterRow()
+        }
+        
+        if (memberTable != nil) {
+            memberTable!.filterRow()
+        }
+        
+        if (status.count > 0) {
+            status_show = SIGNUP_STATUS(status: status).rawValue
         }
     }
     

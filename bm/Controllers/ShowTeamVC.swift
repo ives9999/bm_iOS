@@ -191,7 +191,7 @@ class ShowTeamVC: ShowVC {
                     today = tmp
                 }
                 
-                if temp_date.isGreaterThan(today) {
+                if !temp_date.isGreaterThan(today) {
                     isTempPlay = false
                 }
             }

@@ -607,9 +607,9 @@ class MemberService: DataService {
 //        }
         let url: String = URL_MEMBER_SIGNUP_CALENDAR
         print(url)
-        let body: [String: String] = ["y":String(year),"m":String(month),"member_token":member_token!,"able_type":able_type,"device": "app", "channel": "bm"]
-        print(body)
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        let params: [String: String] = ["y":String(year),"m":String(month),"member_token":member_token!,"able_type":able_type,"device": "app", "channel": "bm"]
+        print(params)
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
             switch response.result {
             //case .success(let value):

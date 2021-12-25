@@ -336,6 +336,40 @@ class DataService {
         task.resume()
     }
     
+    func managerSignupList(able_type: String, able_token: String, completion: @escaping CompletionHandler) {
+        
+        let url = String(format: URL_MANAGER_SIGNUPLIST, able_type)
+        let params: [String: String] = ["channel":CHANNEL,"device":"app","able_token":able_token,"manager_token":Member.instance.token]
+        
+        //print(url)
+        //print(params)
+        
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    //print(response.value)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
+                    }
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
     func requestManager(_params: [String: String], images: [UIImage]?, completion: @escaping CompletionHandler) {
         
         let url: String = URL_REQUEST_MANAGER

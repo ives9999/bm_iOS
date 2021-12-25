@@ -1534,6 +1534,80 @@
             </objects>
             <point key="canvasLocation" x="-1368" y="-786"/>
         </scene>
+        <!--Manager Signup ListVC-->
+        <scene sceneID="2pY-fL-5Px">
+            <objects>
+                <viewController storyboardIdentifier="toManagerSignupList" id="kqC-S8-ULp" customClass="ManagerSignupListVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kzj-fk-Zcy">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JYi-iw-cqu">
+                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSz-CD-Zs7">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="33" id="48A-Yk-H0z"/>
+                                            <constraint firstAttribute="height" constant="26" id="VJh-sW-3KS"/>
+                                        </constraints>
+                                        <state key="normal" image="prev"/>
+                                        <connections>
+                                            <action selector="prev1" destination="44A-2y-PC4" eventType="touchUpInside" id="fa8-bP-yux"/>
+                                            <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="Epm-Sq-ewP"/>
+                                            <action selector="prevBtnPressed:" destination="kqC-S8-ULp" eventType="touchUpInside" id="bn3-i4-RUR"/>
+                                            <action selector="prevBtnPressed:" destination="7XI-bz-e2e" eventType="touchUpInside" id="tyJ-T6-SHM"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊報名管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfA-WB-iqx">
+                                        <rect key="frame" x="150" y="19" width="114.5" height="26.5"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="EOt-G8-Vh8"/>
+                                    <constraint firstItem="XSz-CD-Zs7" firstAttribute="leading" secondItem="JYi-iw-cqu" secondAttribute="leading" constant="12" id="S9e-sc-lfN"/>
+                                    <constraint firstItem="XSz-CD-Zs7" firstAttribute="centerY" secondItem="JYi-iw-cqu" secondAttribute="centerY" id="feY-bx-r1N"/>
+                                    <constraint firstItem="hfA-WB-iqx" firstAttribute="centerX" secondItem="JYi-iw-cqu" secondAttribute="centerX" id="lPR-qJ-IFf"/>
+                                    <constraint firstItem="hfA-WB-iqx" firstAttribute="centerY" secondItem="JYi-iw-cqu" secondAttribute="centerY" id="sQC-al-ILO"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="FCG-iU-Zj7">
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FEM-T4-z5f">
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="CkI-R7-1Mx"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JYi-iw-cqu" firstAttribute="leading" secondItem="CkI-R7-1Mx" secondAttribute="leading" id="2Ii-Tu-ham"/>
+                            <constraint firstItem="JYi-iw-cqu" firstAttribute="trailing" secondItem="CkI-R7-1Mx" secondAttribute="trailing" id="ACa-yf-By9"/>
+                            <constraint firstItem="FEM-T4-z5f" firstAttribute="leading" secondItem="CkI-R7-1Mx" secondAttribute="leading" id="CB9-Lz-ca1"/>
+                            <constraint firstItem="FEM-T4-z5f" firstAttribute="trailing" secondItem="CkI-R7-1Mx" secondAttribute="trailing" id="GVh-YS-DH6"/>
+                            <constraint firstItem="CkI-R7-1Mx" firstAttribute="bottom" secondItem="FCG-iU-Zj7" secondAttribute="bottom" id="clu-dh-ckg"/>
+                            <constraint firstItem="FEM-T4-z5f" firstAttribute="top" secondItem="JYi-iw-cqu" secondAttribute="bottom" id="fGF-aY-4DU"/>
+                            <constraint firstItem="CkI-R7-1Mx" firstAttribute="bottom" secondItem="FEM-T4-z5f" secondAttribute="bottom" id="i6P-oC-yET"/>
+                            <constraint firstItem="JYi-iw-cqu" firstAttribute="top" secondItem="CkI-R7-1Mx" secondAttribute="top" id="iJB-Py-BSu"/>
+                            <constraint firstItem="FCG-iU-Zj7" firstAttribute="top" secondItem="JYi-iw-cqu" secondAttribute="bottom" id="nes-32-Arh"/>
+                            <constraint firstItem="FCG-iU-Zj7" firstAttribute="leading" secondItem="CkI-R7-1Mx" secondAttribute="leading" id="p97-nn-TWT"/>
+                            <constraint firstItem="FCG-iU-Zj7" firstAttribute="trailing" secondItem="CkI-R7-1Mx" secondAttribute="trailing" id="veC-6E-VpT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="FEM-T4-z5f" id="p19-fN-Psg"/>
+                        <outlet property="topView" destination="JYi-iw-cqu" id="ljD-BQ-qW1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KNR-A6-ZDL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3210" y="-870"/>
+        </scene>
         <!--RegisterVC-->
         <scene sceneID="IwU-ge-T1b">
             <objects>
@@ -2434,7 +2508,7 @@
         <!--Manager Course SignupVC-->
         <scene sceneID="QWc-VF-oaZ">
             <objects>
-                <viewController storyboardIdentifier="toManagerCourseSignup" id="y65-Hc-0Zm" customClass="ManagerCourseSignupVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toManagerCourseSignup" id="y65-Hc-0Zm" customClass="ManagerCourseSignupVC" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="58Z-bt-hXY">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

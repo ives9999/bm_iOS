@@ -194,6 +194,23 @@ extension BaseViewController {
         }
     }
     
+    func toManagerSignupList(able_type: String, able_token: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            
+            if let viewController = storyboard.instantiateViewController(identifier: "toManagerSignupList")  as? ManagerSignupListVC {
+                viewController.able_type = able_type
+                viewController.able_token = able_token
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerCourseSignupList") as! ManagerSignupListVC
+            viewController.able_type = able_type
+            viewController.able_token = able_token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     //manager_token is member token
     func toManagerTeam(manager_token: String) {
         if #available(iOS 13.0, *) {
