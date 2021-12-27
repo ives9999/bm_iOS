@@ -1238,6 +1238,7 @@
 				F964CDE027707260004F1C78 /* ManagerCourseSignupVC.swift */,
 				B36D66B6229997AC00502D62 /* ManagerCourseVC.swift */,
 				B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */,
+				F964CDE227744D76004F1C78 /* ManagerSignupListVC.swift */,
 				F964CDDA276F5CBA004F1C78 /* ManagerSignupVC.swift */,
 				B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */,
 				F964CDDC276F602F004F1C78 /* ManagerTeamSignupVC.swift */,
@@ -1295,7 +1296,6 @@
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
-				F964CDE227744D76004F1C78 /* ManagerSignupListVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
