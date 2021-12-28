@@ -606,9 +606,9 @@ class MemberService: DataService {
 //            return (res, "沒有傳輸會員碼錯誤，請洽管理員")
 //        }
         let url: String = URL_MEMBER_SIGNUP_CALENDAR
-        print(url)
+        //print(url)
         let params: [String: String] = ["y":String(year),"m":String(month),"member_token":member_token!,"able_type":able_type,"device": "app", "channel": "bm"]
-        print(params)
+        //print(params)
         AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
             switch response.result {

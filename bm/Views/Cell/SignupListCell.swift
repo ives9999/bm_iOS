@@ -30,36 +30,34 @@ class SignupListCell: List2Cell {
         let row: SignupNormalTable? = _row as? SignupNormalTable ?? nil
         
         if (row != nil) {
-            let teamTable: TeamTable?
-            if let tmp: TeamTable = row?.teamTable {
-                teamTable = tmp
+            let ableTable: AbleTable?
+            if let tmp: AbleTable = row?.ableTable {
+                ableTable = tmp
             } else {
-                teamTable = TeamTable()
+                ableTable = AbleTable()
             }
             
-            if (teamTable != nil) {
-                updateViews(teamTable!)
+            if (ableTable != nil) {
+                updateViews(ableTable!)
                 
-                if (teamTable!.arena != nil) {
-                    if teamTable!.arena!.name.count > 0 {
-                        arenaBtn.setTitle(teamTable!.arena!.name)
-                        cityBtn.setTitle(teamTable!.arena!.city_show)
-                        cityBtn.isHidden = false
-                        arenaBtn.isHidden = false
-                    } else {
-                        cityBtn.isHidden = true
-                        arenaBtn.isHidden = true
-                    }
+                if ableTable!.arena_name.count > 0 {
+                    arenaBtn.setTitle(ableTable!.arena_name)
+                    cityBtn.setTitle(ableTable!.city_show)
+                    cityBtn.isHidden = false
+                    arenaBtn.isHidden = false
+                } else {
+                    cityBtn.isHidden = true
+                    arenaBtn.isHidden = true
                 }
                 
-                if teamTable!.weekdays_show.count > 0 {
-                    weekendLbl.text = teamTable!.weekdays_show
+                if ableTable!.weekdays_show.count > 0 {
+                    weekendLbl.text = ableTable!.weekdays_show
                 } else {
                     weekendLbl.text = "未提供"
                 }
                 
-                if teamTable!.interval_show.count > 0 {
-                    intervalLbl.text = teamTable!.interval_show
+                if ableTable!.interval_show.count > 0 {
+                    intervalLbl.text = ableTable!.interval_show
                 } else {
                     intervalLbl.text = ""
                 }
@@ -68,6 +66,8 @@ class SignupListCell: List2Cell {
 //                self.accessoryType = .disclosureIndicator
 //                self.accessoryView = UIImageView(image: chevron!)
             }
+            
+            signupTime.text = row!.created_at_show
         }
     }
 }

@@ -63,7 +63,7 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="狀態" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQl-pd-4zr" customClass="Tag" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="177" y="16" width="35" height="21"/>
+                        <rect key="frame" x="177" y="8.5" width="67" height="36.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -103,4 +103,9 @@
             <point key="canvasLocation" x="261.59420289855075" y="229.01785714285714"/>
         </tableViewCell>
     </objects>
+    <designables>
+        <designable name="XQl-pd-4zr">
+            <size key="intrinsicContentSize" width="67" height="36.5"/>
+        </designable>
+    </designables>
 </document>
