@@ -23,7 +23,7 @@ class ManagerSignupVC: MyTableVC {
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
         
         managerRows = initRows()
-        print(able_token)
+        //print(able_token)
     }
     
     func initRows()-> [MemberRow] {

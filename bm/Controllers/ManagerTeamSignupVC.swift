@@ -24,9 +24,9 @@ class ManagerTeamSignupVC: ManagerSignupVC {
         r1.color = UIColor(MY_LIGHT_WHITE)
         rows.append(r1)
         
-        let r3: MemberRow = MemberRow(title: "黑名單", icon: "blacklist", segue: TO_BLACKLIST)
-        r3.color = UIColor(MY_LIGHT_WHITE)
-        rows.append(r3)
+        let r2: MemberRow = MemberRow(title: "黑名單", icon: "blacklist", segue: TO_BLACKLIST)
+        r2.color = UIColor(MY_LIGHT_WHITE)
+        rows.append(r2)
         
         return rows
     }
