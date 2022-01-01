@@ -31,63 +31,64 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="姓名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="75g-Yi-RHB" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="110" y="49" width="35" height="21"/>
+                        <rect key="frame" x="157" y="16" width="35" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="報名時間：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTn-dE-Oum" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="110" y="124" width="87" height="21"/>
+                        <rect key="frame" x="110" y="133" width="87" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2021-10-28 19:00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3MC-49-b3R" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="197" y="124" width="163.5" height="21"/>
+                        <rect key="frame" x="197" y="133" width="163.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SD1-fB-8x2" customClass="CityButton" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="392" y="44.5" width="83" height="30"/>
-                        <state key="normal" title="0911211994"/>
-                        <connections>
-                            <action selector="mobileBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="k9I-T2-Las"/>
-                        </connections>
-                    </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lZP-kH-U5b" customClass="CityButton" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="110" y="82" width="121" height="30"/>
+                        <rect key="frame" x="110" y="91" width="121" height="30"/>
                         <state key="normal" title="david@gmail.com"/>
                         <connections>
                             <action selector="emailBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ghg-os-MRt"/>
                         </connections>
                     </button>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="singup_normal" translatesAutoresizingMaskIntoConstraints="NO" id="jcL-X3-DHD">
-                        <rect key="frame" x="157" y="14" width="48" height="25"/>
+                        <rect key="frame" x="204" y="14" width="48" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="48" id="9yk-Dr-MfJ"/>
                             <constraint firstAttribute="height" constant="25" id="O0M-kr-EFz"/>
                         </constraints>
                     </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SD1-fB-8x2" customClass="CityButton" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="110" y="49" width="83" height="30"/>
+                        <state key="normal" title="0911211994"/>
+                        <connections>
+                            <action selector="mobileBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="k9I-T2-Las"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="lZP-kH-U5b" firstAttribute="top" secondItem="SD1-fB-8x2" secondAttribute="bottom" constant="12" id="1be-39-t1a"/>
                     <constraint firstItem="Pga-7Q-ctH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="1un-Sc-wYO"/>
+                    <constraint firstItem="jcL-X3-DHD" firstAttribute="centerY" secondItem="Pga-7Q-ctH" secondAttribute="centerY" id="2Wp-Ea-aZx"/>
+                    <constraint firstItem="75g-Yi-RHB" firstAttribute="leading" secondItem="Pga-7Q-ctH" secondAttribute="trailing" constant="12" id="3xd-DD-RR0"/>
+                    <constraint firstItem="SD1-fB-8x2" firstAttribute="leading" secondItem="Pga-7Q-ctH" secondAttribute="leading" id="5iy-v8-LNy"/>
+                    <constraint firstItem="SD1-fB-8x2" firstAttribute="top" secondItem="Pga-7Q-ctH" secondAttribute="bottom" constant="12" id="BVN-nw-JXe"/>
                     <constraint firstItem="jcL-X3-DHD" firstAttribute="centerY" secondItem="Pga-7Q-ctH" secondAttribute="centerY" id="FSz-7p-YgZ"/>
                     <constraint firstItem="HTn-dE-Oum" firstAttribute="leading" secondItem="Pga-7Q-ctH" secondAttribute="leading" id="I9K-Bv-JXw"/>
-                    <constraint firstItem="lZP-kH-U5b" firstAttribute="top" secondItem="75g-Yi-RHB" secondAttribute="bottom" constant="12" id="K3z-2T-5dL"/>
-                    <constraint firstItem="75g-Yi-RHB" firstAttribute="top" secondItem="Pga-7Q-ctH" secondAttribute="bottom" constant="12" id="NCi-bG-UGp"/>
                     <constraint firstItem="Pga-7Q-ctH" firstAttribute="leading" secondItem="FCM-aa-c9Z" secondAttribute="trailing" constant="12" id="NaH-4h-Wvl"/>
                     <constraint firstItem="lZP-kH-U5b" firstAttribute="leading" secondItem="Pga-7Q-ctH" secondAttribute="leading" id="S1q-lX-ala"/>
                     <constraint firstItem="FCM-aa-c9Z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="Uwc-Oe-MB1"/>
-                    <constraint firstItem="75g-Yi-RHB" firstAttribute="leading" secondItem="Pga-7Q-ctH" secondAttribute="leading" id="W2L-yM-kyk"/>
                     <constraint firstItem="3MC-49-b3R" firstAttribute="centerY" secondItem="HTn-dE-Oum" secondAttribute="centerY" id="Wf0-S4-MWi"/>
                     <constraint firstItem="HTn-dE-Oum" firstAttribute="top" secondItem="lZP-kH-U5b" secondAttribute="bottom" constant="12" id="XO6-t3-DnA"/>
                     <constraint firstItem="3MC-49-b3R" firstAttribute="leading" secondItem="HTn-dE-Oum" secondAttribute="trailing" id="YMC-Ml-mJI"/>
-                    <constraint firstItem="SD1-fB-8x2" firstAttribute="centerY" secondItem="75g-Yi-RHB" secondAttribute="centerY" id="eMj-P9-NJa"/>
-                    <constraint firstAttribute="trailing" secondItem="SD1-fB-8x2" secondAttribute="trailing" constant="16" id="etR-kn-Jhv"/>
                     <constraint firstItem="FCM-aa-c9Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="hZs-cA-jjP"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HTn-dE-Oum" secondAttribute="bottom" constant="16" id="kLy-d6-YuT"/>
-                    <constraint firstItem="jcL-X3-DHD" firstAttribute="leading" secondItem="Pga-7Q-ctH" secondAttribute="trailing" constant="12" id="mTf-Zj-kUC"/>
+                    <constraint firstItem="75g-Yi-RHB" firstAttribute="centerY" secondItem="Pga-7Q-ctH" secondAttribute="centerY" id="sZ4-m5-vie"/>
+                    <constraint firstItem="jcL-X3-DHD" firstAttribute="leading" secondItem="75g-Yi-RHB" secondAttribute="trailing" constant="12" id="uiq-MC-DB1"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

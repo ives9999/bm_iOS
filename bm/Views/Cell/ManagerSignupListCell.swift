@@ -25,7 +25,7 @@ class ManagerSignupListCell: List2Cell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        nicknameLbl.setTextGeneral()
+        nicknameLbl.setTextTitle()
         titleLbl.setTextGeneral()
         
         signupLbl.highlight()
@@ -54,7 +54,6 @@ class ManagerSignupListCell: List2Cell {
                 
                 nicknameLbl.text = memberTable!.nickname
                 titleLbl.text = memberTable!.name
-                signupTime.text = row!.created_at_show
                 
                 mobileBtn.setTitle(memberTable!.mobile)
                 mobile = memberTable!.mobile
@@ -63,7 +62,9 @@ class ManagerSignupListCell: List2Cell {
                 email = memberTable!.email
             }
             
-            let status_enum = SIGNUP_STATUS(status: row!.status)
+            signupTime.text = row!.created_at_show
+            
+            let status_enum: SIGNUP_STATUS = SIGNUP_STATUS(status: row!.status)
             if (status_enum == SIGNUP_STATUS.normal) {
                 statusIV.image = UIImage(named: "signup_normal")
             } else if (status_enum == SIGNUP_STATUS.cancel) {
