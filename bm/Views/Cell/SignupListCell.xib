@@ -30,6 +30,13 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signup_normal" translatesAutoresizingMaskIntoConstraints="NO" id="2YJ-OU-Soa">
+                        <rect key="frame" x="161" y="10" width="48" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="iNH-EZ-GrD"/>
+                            <constraint firstAttribute="width" constant="48" id="jN5-ad-Srq"/>
+                        </constraints>
+                    </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1dW-9B-Lz5" customClass="CityButton" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="114" y="45" width="31" height="30"/>
                         <state key="normal" title="縣市"/>
@@ -64,6 +71,7 @@
                     </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="2YJ-OU-Soa" firstAttribute="centerY" secondItem="CCa-Qf-zE6" secondAttribute="centerY" id="0Sb-kv-od2"/>
                     <constraint firstItem="1dW-9B-Lz5" firstAttribute="top" secondItem="CCa-Qf-zE6" secondAttribute="bottom" constant="12" id="4XF-D3-8aE"/>
                     <constraint firstItem="01o-lh-9Ge" firstAttribute="top" secondItem="1dW-9B-Lz5" secondAttribute="bottom" constant="8" id="58r-tY-ioo"/>
                     <constraint firstItem="gCW-4f-hA7" firstAttribute="leading" secondItem="1dW-9B-Lz5" secondAttribute="trailing" constant="16" id="931-Mh-3Kk"/>
@@ -80,6 +88,7 @@
                     <constraint firstItem="01o-lh-9Ge" firstAttribute="leading" secondItem="CCa-Qf-zE6" secondAttribute="leading" id="hWw-wz-uTX"/>
                     <constraint firstItem="z9Q-ms-YAQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="lZm-BR-EgN"/>
                     <constraint firstItem="CCa-Qf-zE6" firstAttribute="leading" secondItem="z9Q-ms-YAQ" secondAttribute="trailing" constant="16" id="oml-03-3aH"/>
+                    <constraint firstItem="2YJ-OU-Soa" firstAttribute="leading" secondItem="CCa-Qf-zE6" secondAttribute="trailing" constant="12" id="vD4-pP-uBp"/>
                     <constraint firstItem="1dW-9B-Lz5" firstAttribute="leading" secondItem="CCa-Qf-zE6" secondAttribute="leading" id="xSH-Mq-lu5"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="LMd-ZJ-WEe" secondAttribute="bottom" constant="12" id="yrL-WH-ssY"/>
                 </constraints>
@@ -93,10 +102,14 @@
                 <outlet property="listFeatured" destination="z9Q-ms-YAQ" id="Dw0-7w-9W6"/>
                 <outlet property="signupLbl" destination="LMd-ZJ-WEe" id="kFs-9j-VF2"/>
                 <outlet property="signupTime" destination="PZq-eg-unv" id="F2R-Ko-fGv"/>
+                <outlet property="statusIV" destination="2YJ-OU-Soa" id="AAt-4Z-oIv"/>
                 <outlet property="titleLbl" destination="CCa-Qf-zE6" id="UHZ-oG-LPe"/>
                 <outlet property="weekendLbl" destination="01o-lh-9Ge" id="luG-Hx-gEb"/>
             </connections>
             <point key="canvasLocation" x="271.73913043478262" y="0.6696428571428571"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="signup_normal" width="48" height="25"/>
+    </resources>
 </document>

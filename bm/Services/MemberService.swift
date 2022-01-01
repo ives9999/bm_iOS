@@ -599,7 +599,7 @@ class MemberService: DataService {
         }
     }
     
-    func memberSignupCalendar(year: Int, month: Int, member_token: String? = nil, able_type: String = "course", completion: @escaping CompletionHandler) {
+    func memberSignupCalendar(year: Int, month: Int, member_token: String? = nil, able_type: String = "course", page: Int, perPage: Int, completion: @escaping CompletionHandler) {
 //        var res = true
 //        if member_token == nil {
 //            res = false
@@ -607,7 +607,16 @@ class MemberService: DataService {
 //        }
         let url: String = URL_MEMBER_SIGNUP_CALENDAR
         //print(url)
-        let params: [String: String] = ["y":String(year),"m":String(month),"member_token":member_token!,"able_type":able_type,"device": "app", "channel": "bm"]
+        let params: [String: String] = [
+            "y":String(year),
+            "m":String(month),
+            "member_token":member_token!,
+            "able_type":able_type,
+            "page":String(page),
+            "perPage":String(perPage),
+            "device": "app",
+            "channel": "bm"
+        ]
         //print(params)
         AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             

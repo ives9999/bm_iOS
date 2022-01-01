@@ -10,15 +10,20 @@ import Foundation
 
 class ManagerSignupVC: MyTableVC {
     
+    @IBOutlet weak var titleLbl: UILabel!
+    
     var managerRows: [MemberRow] = [MemberRow]()
     var able_token: String = ""
+    var able_title: String = ""
     
     override func viewDidLoad() {
         myTablView = tableView
         //rows = _rows
         super.viewDidLoad()
-        //Global.instance.setupTabbar(self)
-        //Global.instance.menuPressedAction(menuBtn, self)
+        
+        titleLbl.text = able_title + "報名管理"
+//        titleLbl.font = UIFont(name: FONT_BOLD_NAME, size: FONT_SIZE_TITLE)
+//        titleLbl.setTextColor(UIColor.black)
 
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
         
@@ -28,9 +33,25 @@ class ManagerSignupVC: MyTableVC {
     
     func initRows()-> [MemberRow] {
         
-        let rows: [MemberRow] = [MemberRow]()
+        var rows: [MemberRow] = [MemberRow]()
+        
+        var tmp: String = "臨打報名列表"
+        if (able_type == "course") {
+            tmp = "課程報名管理"
+        }
+        let r1: MemberRow = MemberRow(title: tmp, icon: "signup", segue: TO_MANAGER_SIGNUPLIST)
+        r1.color = UIColor(MY_WEIGHT_RED)
+        rows.append(r1)
+        
+        let r2: MemberRow = MemberRow(title: "黑名單", icon: "blacklist", segue: TO_BLACKLIST)
+        r2.color = UIColor(MY_LIGHT_WHITE)
+        rows.append(r2)
         
         return rows
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,7 +78,7 @@ class ManagerSignupVC: MyTableVC {
         let segue = row.segue
         
         if segue == TO_MANAGER_SIGNUPLIST {
-            toManagerSignupList(able_type: able_type, able_token: able_token)
+            toManagerSignupList(able_type: able_type, able_token: able_token, able_title: able_title)
         }
     }
 }

@@ -41,13 +41,14 @@ class MenuCell: SuperCell {
         c2 = NSLayoutConstraint(item: iconView, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 15)
         c3 = NSLayoutConstraint(item: iconView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16)
         c4 = NSLayoutConstraint(item: iconView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24)
+//        c5 = NSLayoutConstraint(item: iconView, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1, constant: 24)
         iconView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addConstraints([c1,c2,c3,c4])
         
         c1 = NSLayoutConstraint(item: titleLbl, attribute: .leading, relatedBy: .equal, toItem: iconView, attribute: .trailing, multiplier: 1, constant: 16)
         c2 = NSLayoutConstraint(item: titleLbl, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 15)
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addConstraints([c1,c2])
+        contentView.addConstraints([c1,c2,c3])
     }
     
     override func layoutSubviews() {

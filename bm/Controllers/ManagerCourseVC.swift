@@ -170,7 +170,7 @@ class ManagerCourseVC: ManagerVC {
     }
     
     override func cellSignup(row: Table) {
-        toManagerCourseSignup()
+        toManagerSignup(able_type: able_type, able_token: row.token, able_title: row.title)
     }
     
 //    @IBAction func addCourseBtnPressed(_ sender: Any) {

@@ -178,35 +178,41 @@ extension BaseViewController {
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
-    
-    func toManagerCourseSignup() {
+
+    func toManagerSignup(able_type: String, able_token: String, able_title: String) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
             
-            if let viewController = storyboard.instantiateViewController(identifier: "toManagerCourseSignup")  as? ManagerCourseSignupVC {
-                //viewController.manager_token = manager_token
+            if let viewController = storyboard.instantiateViewController(identifier: "toManagerSignup")  as? ManagerSignupVC {
+                viewController.able_type = able_type
+                viewController.able_token = able_token
+                viewController.able_title = able_title
                 show(viewController, sender: nil)
             }
         } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerCourseSignup") as! ManagerCourseSignupVC
-            //viewController.manager_token = manager_token
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerSignup") as! ManagerSignupVC
+            viewController.able_type = able_type
+            viewController.able_token = able_token
+            viewController.able_title = able_title
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
     
-    func toManagerSignupList(able_type: String, able_token: String) {
+    func toManagerSignupList(able_type: String, able_token: String, able_title: String) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
             
             if let viewController = storyboard.instantiateViewController(identifier: "toManagerSignupList")  as? ManagerSignupListVC {
                 viewController.able_type = able_type
                 viewController.able_token = able_token
+                viewController.able_title = able_title
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerCourseSignupList") as! ManagerSignupListVC
             viewController.able_type = able_type
             viewController.able_token = able_token
+            viewController.able_title = able_title
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -226,21 +232,23 @@ extension BaseViewController {
         }
     }
     
-    func toManagerTeamSignup(able_type: String, able_token: String) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "toManagerTeamSignup")  as? ManagerTeamSignupVC {
-                viewController.able_type = able_type
-                viewController.able_token = able_token
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerTeamSignup") as! ManagerTeamSignupVC
-            viewController.able_type = able_type
-            viewController.able_token = able_token
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
-    }
+//    func toManagerTeamSignup(able_type: String, able_token: String, able_title: String) {
+//        if #available(iOS 13.0, *) {
+//            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: "toManagerTeamSignup")  as? ManagerTeamSignupVC {
+//                viewController.able_type = able_type
+//                viewController.able_token = able_token
+//                viewController.able_title = able_title
+//                show(viewController, sender: nil)
+//            }
+//        } else {
+//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerTeamSignup") as! ManagerTeamSignupVC
+//            viewController.able_type = able_type
+//            viewController.able_token = able_token
+//            viewController.able_title = able_title
+//            self.navigationController!.pushViewController(viewController, animated: true)
+//        }
+//    }
     
     func toMemberCartList(member_like: Bool=false) {
         if #available(iOS 13.0, *) {

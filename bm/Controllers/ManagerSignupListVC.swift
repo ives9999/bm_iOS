@@ -11,7 +11,11 @@ import Foundation
 class ManagerSignupListVC: MyTableVC {
     
     var able_token: String?
+    var able_title: String = ""
     
+    @IBOutlet weak var titleLbl: UILabel!
+    
+    var signupListResultTable: SignupListResultTable?
     var signupNormalTables: [SignupNormalTable] = [SignupNormalTable]()
     
     override func viewDidLoad() {
@@ -22,6 +26,8 @@ class ManagerSignupListVC: MyTableVC {
         } else if (able_type == "course") {
             dataService = CourseService.instance
         }
+        
+        titleLbl.text = able_title + "報名會員列表"
         
         super.viewDidLoad()
 
@@ -41,7 +47,7 @@ class ManagerSignupListVC: MyTableVC {
         Global.instance.addSpinner(superView: self.view)
         
         if (able_token != nil) {
-            dataService.managerSignupList(able_type: able_type, able_token: able_token!) { (success) in
+            dataService.managerSignupList(able_type: able_type, able_token: able_token!, page: page, perPage: perPage) { (success) in
                 
                 Global.instance.removeSpinner(superView: self.view)
                 if (success) {
@@ -59,9 +65,9 @@ class ManagerSignupListVC: MyTableVC {
         if (jsonData != nil) {
             genericTable()
             if page == 1 {
-                if (tables != nil) {
-                    totalCount = tables!.totalCount
-                    perPage = tables!.perPage
+                if (signupListResultTable != nil) {
+                    totalCount = signupListResultTable!.totalCount
+                    perPage = signupListResultTable!.perPage
                     let _pageCount: Int = totalCount / perPage
                     totalPage = (totalCount % perPage > 0) ? _pageCount + 1 : _pageCount
                     //print(totalPage)
@@ -84,11 +90,15 @@ class ManagerSignupListVC: MyTableVC {
             if (jsonData != nil) {
 //                let str = String(decoding: jsonData!, as: UTF8.self)
 //                print(str)
-                let SignupListResultTable = try JSONDecoder().decode(SignupListResultTable.self, from: jsonData!)
-                if (SignupListResultTable.success) {
-                    self.signupNormalTables = SignupListResultTable.rows
+                self.signupListResultTable = try JSONDecoder().decode(SignupListResultTable.self, from: jsonData!)
+                if (self.signupListResultTable != nil) {
+                    if (self.signupListResultTable!.success) {
+                        self.signupNormalTables = self.signupListResultTable!.rows
+                    } else {
+                        warning(self.signupListResultTable!.msg)
+                    }
                 } else {
-                    warning(SignupListResultTable.msg)
+                    warning("解析JSON字串失敗，請洽管理員")
                 }
             } else {
                 warning("無法從伺服器取得正確的json資料，請洽管理員")
@@ -107,20 +117,28 @@ class ManagerSignupListVC: MyTableVC {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "managerSignupListCell", for: indexPath) as? ManagerSignupListCell {
             
-            let signupNormalTable: SignupNormalTable = signupNormalTables[indexPath.row]
-            signupNormalTable.filterRow()
-            cell.update(_row: signupNormalTable)
+            if let tmp: SignupNormalTable = lists1[indexPath.row] as? SignupNormalTable {
+                tmp.filterRow()
+                cell.update(_row: tmp)
+            }
             
             return cell
         }
         
         return UITableViewCell()
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
 
 class SignupListResultTable: Codable {
     
     var success: Bool = false
+    var page: Int = -1
+    var totalCount: Int = -1
+    var perPage: Int = -1
     var msg: String = ""
     var rows: [SignupNormalTable] = [SignupNormalTable]()
     
@@ -131,6 +149,9 @@ class SignupListResultTable: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        page = try container.decode(Int.self, forKey: .page)
+        totalCount = try container.decode(Int.self, forKey: .totalCount)
+        perPage = try container.decode(Int.self, forKey: .perPage)
         msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
         rows = try container.decodeIfPresent([SignupNormalTable].self, forKey: .rows) ?? [SignupNormalTable]()
     }

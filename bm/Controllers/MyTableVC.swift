@@ -82,7 +82,9 @@ class MyTableVC: BaseViewController {
             myTablView.backgroundColor = UIColor.clear
             myTablView.delegate = self
             myTablView.dataSource = self
-            myTablView.addSubview(refreshControl)
+            if (refreshControl != nil) {
+                myTablView.addSubview(refreshControl)
+            }
         }
         
 //        if form != nil {

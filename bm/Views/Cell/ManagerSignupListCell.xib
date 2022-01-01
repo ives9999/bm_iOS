@@ -62,16 +62,17 @@
                             <action selector="emailBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="Ghg-os-MRt"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="狀態" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XQl-pd-4zr" customClass="Tag" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="177" y="8.5" width="67" height="36.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="singup_normal" translatesAutoresizingMaskIntoConstraints="NO" id="jcL-X3-DHD">
+                        <rect key="frame" x="157" y="14" width="48" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="48" id="9yk-Dr-MfJ"/>
+                            <constraint firstAttribute="height" constant="25" id="O0M-kr-EFz"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Pga-7Q-ctH" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="1un-Sc-wYO"/>
-                    <constraint firstItem="XQl-pd-4zr" firstAttribute="centerY" secondItem="Pga-7Q-ctH" secondAttribute="centerY" id="23w-J1-xZO"/>
+                    <constraint firstItem="jcL-X3-DHD" firstAttribute="centerY" secondItem="Pga-7Q-ctH" secondAttribute="centerY" id="FSz-7p-YgZ"/>
                     <constraint firstItem="HTn-dE-Oum" firstAttribute="leading" secondItem="Pga-7Q-ctH" secondAttribute="leading" id="I9K-Bv-JXw"/>
                     <constraint firstItem="lZP-kH-U5b" firstAttribute="top" secondItem="75g-Yi-RHB" secondAttribute="bottom" constant="12" id="K3z-2T-5dL"/>
                     <constraint firstItem="75g-Yi-RHB" firstAttribute="top" secondItem="Pga-7Q-ctH" secondAttribute="bottom" constant="12" id="NCi-bG-UGp"/>
@@ -84,9 +85,9 @@
                     <constraint firstItem="3MC-49-b3R" firstAttribute="leading" secondItem="HTn-dE-Oum" secondAttribute="trailing" id="YMC-Ml-mJI"/>
                     <constraint firstItem="SD1-fB-8x2" firstAttribute="centerY" secondItem="75g-Yi-RHB" secondAttribute="centerY" id="eMj-P9-NJa"/>
                     <constraint firstAttribute="trailing" secondItem="SD1-fB-8x2" secondAttribute="trailing" constant="16" id="etR-kn-Jhv"/>
-                    <constraint firstItem="XQl-pd-4zr" firstAttribute="leading" secondItem="Pga-7Q-ctH" secondAttribute="trailing" constant="32" id="hF4-40-OEr"/>
                     <constraint firstItem="FCM-aa-c9Z" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="hZs-cA-jjP"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HTn-dE-Oum" secondAttribute="bottom" constant="16" id="kLy-d6-YuT"/>
+                    <constraint firstItem="jcL-X3-DHD" firstAttribute="leading" secondItem="Pga-7Q-ctH" secondAttribute="trailing" constant="12" id="mTf-Zj-kUC"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -97,15 +98,13 @@
                 <outlet property="nicknameLbl" destination="Pga-7Q-ctH" id="a3J-cb-Jma"/>
                 <outlet property="signupLbl" destination="HTn-dE-Oum" id="myX-dx-xia"/>
                 <outlet property="signupTime" destination="3MC-49-b3R" id="jjp-JJ-bW8"/>
-                <outlet property="statusLbl" destination="XQl-pd-4zr" id="rT6-lw-ZVQ"/>
+                <outlet property="statusIV" destination="jcL-X3-DHD" id="vzg-Fc-iM6"/>
                 <outlet property="titleLbl" destination="75g-Yi-RHB" id="1yX-Z0-u4U"/>
             </connections>
             <point key="canvasLocation" x="261.59420289855075" y="229.01785714285714"/>
         </tableViewCell>
     </objects>
-    <designables>
-        <designable name="XQl-pd-4zr">
-            <size key="intrinsicContentSize" width="67" height="36.5"/>
-        </designable>
-    </designables>
+    <resources>
+        <image name="singup_normal" width="48" height="25"/>
+    </resources>
 </document>

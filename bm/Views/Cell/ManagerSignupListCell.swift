@@ -17,7 +17,7 @@ class ManagerSignupListCell: List2Cell {
     @IBOutlet weak var mobileBtn: CityButton!
     @IBOutlet weak var emaileBtn: CityButton!
     
-    @IBOutlet weak var statusLbl: Tag!
+    @IBOutlet weak var statusIV: UIImageView!
     
     var mobile: String?
     var email: String?
@@ -63,9 +63,13 @@ class ManagerSignupListCell: List2Cell {
                 email = memberTable!.email
             }
             
-            statusLbl.text = row!.status_show
-            if (row!.status == "cancel") {
-                statusLbl.selectedStyle()
+            let status_enum = SIGNUP_STATUS(status: row!.status)
+            if (status_enum == SIGNUP_STATUS.normal) {
+                statusIV.image = UIImage(named: "signup_normal")
+            } else if (status_enum == SIGNUP_STATUS.cancel) {
+                statusIV.image = UIImage(named: "cancel")
+            } else if (status_enum == SIGNUP_STATUS.standby) {
+                statusIV.image = UIImage(named: "signup_standby")
             }
         }
     }

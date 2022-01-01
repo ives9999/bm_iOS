@@ -91,6 +91,8 @@ class Table: Codable {
                 featured_path = BASE_URL + featured_path
                 //print(featured_path)
             }
+        } else {
+            featured_path = BASE_URL + "/imgs/nophoto.png"
         }
         
         if city_id > 0 {

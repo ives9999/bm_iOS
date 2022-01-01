@@ -336,10 +336,17 @@ class DataService {
         task.resume()
     }
     
-    func managerSignupList(able_type: String, able_token: String, completion: @escaping CompletionHandler) {
+    func managerSignupList(able_type: String, able_token: String, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
         let url = String(format: URL_MANAGER_SIGNUPLIST, able_type)
-        let params: [String: String] = ["channel":CHANNEL,"device":"app","able_token":able_token,"manager_token":Member.instance.token]
+        let params: [String: String] = [
+            "channel":CHANNEL,
+            "device":"app",
+            "page":String(page),
+            "perPage":String(perPage),
+            "able_token":able_token,
+            "manager_token":Member.instance.token
+        ]
         
         //print(url)
         //print(params)

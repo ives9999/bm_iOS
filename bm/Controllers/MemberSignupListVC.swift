@@ -59,7 +59,7 @@ class MemberSignupListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSourc
     override func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {
         Global.instance.addSpinner(superView: self.view)
         
-        MemberService.instance.memberSignupCalendar(year: 0, month: 0, member_token: Member.instance.token, able_type: able_type) { (success) in
+        MemberService.instance.memberSignupCalendar(year: 0, month: 0, member_token: Member.instance.token, able_type: able_type, page: page, perPage: perPage) { (success) in
             if (success) {
                 self.jsonData = MemberService.instance.jsonData
                 self.getDataEnd(success: success)
@@ -212,11 +212,18 @@ class MemberSignupListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSourc
         
         return UITableViewCell()
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
 
 class SignupResultTable: Codable {
     
     var success: Bool = false
+    var page: Int = -1
+    var totalCount: Int = -1
+    var perPage: Int = -1
     var msg: String = ""
     var rows: [SignupNormalTable] = [SignupNormalTable]()
     
