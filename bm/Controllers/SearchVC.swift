@@ -410,25 +410,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         tableView.reloadData()
     }
     
-//    override func setDegreeData(res: [DEGREE]) {
-//
-//        let row = getOneRowFromKey(DEGREE_KEY)
-//        var names: [String] = [String]()
-//        var values: [String] = [String]()
-//        if res.count > 0 {
-//            for degree in res {
-//                names.append(degree.rawValue)
-//                values.append(DEGREE.DBValue(degree))
-//            }
-//            row.show = names.joined(separator: ",")
-//            row.value = values.joined(separator: ",")
-//        } else {
-//            row.show = "全部"
-//            row.value = ""
-//        }
-//        //replaceRows(DEGREE_KEY, row)
-//        tableView.reloadData()
-//    }
+    override func setDegrees(res: [DEGREE]) {
+
+        super.setDegrees(res: res)
+        tableView.reloadData()
+    }
     
 //    override func setTextField(key: String, value: String) {
 //

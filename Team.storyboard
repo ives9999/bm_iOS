@@ -419,15 +419,8 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="hPN-zB-xkv">
                                         <rect key="frame" x="163" y="8" width="88" height="34"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LT7-9Z-pwT" customClass="CancelButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="31" height="34"/>
-                                                <state key="normal" title="取消"/>
-                                                <connections>
-                                                    <action selector="cancel" destination="8Wp-Vh-56J" eventType="touchUpInside" id="Kjr-TC-aDE"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C9A-Yn-DyN" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="56" y="0.0" width="32" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="soO-IE-vWX"/>
@@ -438,6 +431,13 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="submit" destination="8Wp-Vh-56J" eventType="touchUpInside" id="WvX-Pp-o3C"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LT7-9Z-pwT" customClass="CancelButton" customModule="bm" customModuleProvider="target">
+                                                <rect key="frame" x="57" y="0.0" width="31" height="34"/>
+                                                <state key="normal" title="取消"/>
+                                                <connections>
+                                                    <action selector="cancel" destination="8Wp-Vh-56J" eventType="touchUpInside" id="Kjr-TC-aDE"/>
                                                 </connections>
                                             </button>
                                         </subviews>
