@@ -129,7 +129,7 @@ class MemberVC: MyTableVC {
         
         var rows: [MemberRow] = [MemberRow]()
         
-        let r1: MemberRow = MemberRow(title: "帳戶資料", icon: "account", segue: TO_PROFILE)
+        let r1: MemberRow = MemberRow(title: "帳戶資料", icon: "member", segue: TO_PROFILE)
         rows.append(r1)
         
         let r2: MemberRow = MemberRow(title: "更改密碼", icon: "password", segue: TO_PASSWORD)

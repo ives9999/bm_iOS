@@ -79,6 +79,8 @@ class ShowTeamVC: ShowVC {
         myTable = table as? TeamTable
         var row: MemberRow = MemberRow(title: "球館", icon: "arena1", show: myTable!.arena!.name)
         memberRows.append(row)
+        row = MemberRow(title: "星期", icon: "date", show: myTable!.weekdays_show)
+        memberRows.append(row)
         row = MemberRow(title: "時段", icon: "clock", show: myTable!.interval_show)
         memberRows.append(row)
         row = MemberRow(title: "球種", icon: "ball", show: myTable!.ball)

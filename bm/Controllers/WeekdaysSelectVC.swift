@@ -143,7 +143,6 @@ class WeekdaysSelectVC: MyTableVC {
         
     }
     
-
     @IBAction func back() {
         prev()
     }

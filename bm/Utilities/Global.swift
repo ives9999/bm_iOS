@@ -1577,7 +1577,7 @@ extension String {
         dateFormatter.dateFormat = format
         
         //Parse into NSDate
-        let dateFromString : Date = dateFormatter.date(from: self)!
+        let dateFromString : Date? = dateFormatter.date(from: self)
         
         //Return Parsed Date
         return dateFromString

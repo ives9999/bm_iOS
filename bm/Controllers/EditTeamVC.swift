@@ -46,34 +46,34 @@ class EditTeamVC: EditVC {
         if token != nil && token!.count > 0 {
             refresh()
         } else {
-            myTable = TeamTable()
-            myTable!.name = "測試與球隊"
-            myTable!.city_id = 218
-            myTable!.arena_id = 6
-            let arena: ArenaTable = ArenaTable()
-            arena.name = "艾婕"
-            myTable!.arena = arena
-            let weekdays1: Team_WeekdaysTable = Team_WeekdaysTable()
-            weekdays1.weekday = 2
-            let weekdays2: Team_WeekdaysTable = Team_WeekdaysTable()
-            weekdays2.weekday = 4
-            myTable!.weekdays = [weekdays1, weekdays2]
-            myTable!.play_start = "19:00:00"
-            myTable!.play_end = "21:00:00"
-            myTable!.degree = "high,soso"
-            myTable!.ball = "RSL4號"
-            myTable!.temp_fee_M = 300
-            myTable!.temp_fee_F = 200
-            myTable!.manager_id = 1
-            myTable!.manager_nickname = "xxx"
-            myTable!.line = "rich@gmail.com"
-            myTable!.mobile = "0920123456"
-            myTable!.email = "john@housetube.tw"
-            myTable!.youtube = "youtube"
-            myTable!.fb = "fb"
-            myTable!.charge = "收費詳細說明"
-            myTable!.content = "這是內容說明"
-            myTable!.filterRow()
+//            myTable = TeamTable()
+//            myTable!.name = "測試與球隊"
+//            myTable!.city_id = 218
+//            myTable!.arena_id = 6
+//            let arena: ArenaTable = ArenaTable()
+//            arena.name = "艾婕"
+//            myTable!.arena = arena
+//            let weekdays1: Team_WeekdaysTable = Team_WeekdaysTable()
+//            weekdays1.weekday = 2
+//            let weekdays2: Team_WeekdaysTable = Team_WeekdaysTable()
+//            weekdays2.weekday = 4
+//            myTable!.weekdays = [weekdays1, weekdays2]
+//            myTable!.play_start = "19:00:00"
+//            myTable!.play_end = "21:00:00"
+//            myTable!.degree = "high,soso"
+//            myTable!.ball = "RSL4號"
+//            myTable!.temp_fee_M = 300
+//            myTable!.temp_fee_F = 200
+//            myTable!.manager_id = 1
+//            myTable!.manager_nickname = "xxx"
+//            myTable!.line = "rich@gmail.com"
+//            myTable!.mobile = "0920123456"
+//            myTable!.email = "john@housetube.tw"
+//            myTable!.youtube = "youtube"
+//            myTable!.fb = "fb"
+//            myTable!.charge = "收費詳細說明"
+//            myTable!.content = "這是內容說明"
+//            myTable!.filterRow()
             
             initData()
         }

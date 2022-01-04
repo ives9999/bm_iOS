@@ -62,7 +62,7 @@ class CourseVC: MyTableVC {
         rows.append(r1)
         let r2: OneRow = OneRow(title: "縣市", show: "全部", key: CITY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r2)
-        let r3: OneRow = OneRow(title: "星期幾", show: "全部", key: WEEKDAY_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
+        let r3: OneRow = OneRow(title: "星期幾", show: "全部", key: WEEKDAYS_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r3)
         let r4: OneRow = OneRow(title: "開始時間", show: "全部", key: START_TIME_KEY, cell: "more", accessory: UITableViewCell.AccessoryType.disclosureIndicator)
         rows.append(r4)

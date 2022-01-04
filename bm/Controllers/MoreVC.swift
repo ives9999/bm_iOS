@@ -53,7 +53,7 @@ class MoreVC: MyTableVC {
         let r4: MemberRow = MemberRow(title: "體育用品店", icon: "store", segue: TO_STORE)
         rows.append(r4)
         
-        let r5: MemberRow = MemberRow(title: "推播訊息", icon: "bell", segue: TO_PN)
+        let r5: MemberRow = MemberRow(title: "推播訊息", icon: "push", segue: TO_PN)
         rows.append(r5)
         
         let r6: MemberRow = MemberRow(title: "版本", icon: "version")

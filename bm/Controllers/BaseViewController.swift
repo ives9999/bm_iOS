@@ -358,8 +358,6 @@ class BaseViewController: UIViewController, List2CellDelegate {
                 toSelectArea(key: key, city_id: city_id, selected: row.value, delegate: self)
             }
         } else if (key == WEEKDAY_KEY) {
-            //let selecteds: [Int] = valueToArray(t: Int.self, value: row.value)
-            
             var selecteds: [Int] = [Int]()
             if row.value.count > 0 {
                 var i: Int = 0
@@ -371,8 +369,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
                     i += 1
                 }
             }
-            
-            
+                        
             //toSelectWeekday(key: key, selecteds: selecteds, delegate: self)
         } else if (key == WEEKDAYS_KEY) {
             var selecteds: Int = 0
@@ -387,7 +384,6 @@ class BaseViewController: UIViewController, List2CellDelegate {
                     i += 1
                 }
             }
-            
             
             toSelectWeekdays(key: key, selecteds: selecteds, delegate: self)
         } else if (key == START_TIME_KEY || key == END_TIME_KEY) {
