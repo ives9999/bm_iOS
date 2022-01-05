@@ -28,6 +28,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     var firstTimeLoading: Bool = false
     //var firstTimeLoading: Bool = true
     
+    //當按下球館搜尋時，必須把球館名稱記錄到oneRow的球館show上
+    
     override func viewDidLoad() {
         
         Global.instance.setupTabbar(self)
@@ -184,6 +186,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         } catch {
             msg = "解析JSON字串時，得到空值，請洽管理員"
         }
+        
         if (mysTable != nil) {
             tables = mysTable!
             if (page == 1) {
@@ -449,6 +452,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
             let city_id: Int = arenaTable!.city_id
             let row = getOneRowFromKey(key)
             row.value = String(city_id)
+            row.show = Global.instance.zoneIDToName(city_id)
             //replaceRows(key, row)
             prepareParams()
             refresh()
@@ -462,10 +466,17 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 
         if (arenaTable != nil) {
             let key: String = ARENA_KEY
+            
             let arena_id: Int = arenaTable!.id
-            let row = getOneRowFromKey(key)
-            row.value = String(arena_id)
-            //replaceRows(key, row)
+            let row2 = getOneRowFromKey(key)
+            
+            row2.value = String(arena_id)
+            row2.show = arenaTable!.name
+            
+            let row3: OneRow = getOneRowFromKey(CITY_KEY)
+            row3.value = String(arenaTable!.city_id)
+            row3.show = Global.instance.zoneIDToName(arenaTable!.city_id)
+
             prepareParams()
             refresh()
         }

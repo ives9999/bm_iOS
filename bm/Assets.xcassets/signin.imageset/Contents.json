@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "power.png",
+      "filename" : "signin.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "power@2x.png",
+      "filename" : "signin@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "power@3x.png",
+      "filename" : "signin@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

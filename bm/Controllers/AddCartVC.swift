@@ -105,6 +105,7 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
         super.viewDidAppear(animated)
         shoppingCartBtn.visibility = .visible
     }
+    
     override func refresh() {
         Global.instance.addSpinner(superView: view)
         page = 1
@@ -862,10 +863,10 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
                     } else {
                         msg = "已經更新購物車了"
                     }
-                    self.info(msg)
-//                    self.info(msg: msg, showCloseButton: true, buttonTitle: "前往結帳") {
-//                        self.toMemberCartList()
-//                    }
+                    //self.info(msg)
+                    self.info(msg: msg, showCloseButton: false, buttonTitle: "關閉") {
+                        self.toMemberCartList()
+                    }
                 } else {
                     self.warning(CartService.instance.msg)
                 }

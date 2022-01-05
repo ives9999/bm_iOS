@@ -1009,7 +1009,7 @@
                                             <stackView opaque="NO" contentMode="scaleAspectFit" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="ujB-b1-DuJ" userLabel="register">
                                                 <rect key="frame" x="218" y="0.0" width="70" height="25"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register" translatesAutoresizingMaskIntoConstraints="NO" id="9SS-RX-ALH">
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="signin" translatesAutoresizingMaskIntoConstraints="NO" id="9SS-RX-ALH">
                                                         <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="25" id="DPh-I9-UYR"/>
@@ -2549,13 +2549,13 @@
         <image name="logo" width="200" height="42"/>
         <image name="member" width="25" height="25"/>
         <image name="menuProfileIcon" width="99" height="99"/>
-        <image name="password" width="18" height="18"/>
+        <image name="password" width="25" height="25"/>
         <image name="password_textfield" width="257" height="43"/>
-        <image name="power" width="16" height="17"/>
+        <image name="power" width="25" height="25"/>
         <image name="prev" width="20.5" height="20.5"/>
         <image name="question" width="25" height="25"/>
-        <image name="register" width="16" height="16"/>
         <image name="search" width="25" height="25"/>
+        <image name="signin" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
