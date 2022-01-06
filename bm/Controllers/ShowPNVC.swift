@@ -126,6 +126,8 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
         tableViewHeightCons.constant = tableView.contentSize.height
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
+    
     func remove(id: String) {
         //print(id)
         warning(msg: "是否確定刪除此訊息", showCloseButton: true, buttonTitle: "刪除") {

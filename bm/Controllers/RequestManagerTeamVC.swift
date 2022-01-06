@@ -31,6 +31,8 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
     @IBOutlet var teamImageView1: ImagePickerView!
     @IBOutlet var teamImageView2: ImagePickerView!
     
+    @IBOutlet var member_private_keyDoc: SuperButton!
+    
     var imagerPicker: MyImagePickerVC = MyImagePickerVC()
     
     var managerTable: MemberTable?
@@ -263,6 +265,12 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
     
     @IBAction func prev1() {
         prev()
+    }
+    
+    @IBAction func toMemberPrivateKeyDoc() {
+        
+        let url: String = "https://bm.sportpassword.com/doc/member_private_key.html"
+        url.website()
     }
     
     @IBAction func cancel() {

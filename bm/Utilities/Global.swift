@@ -1632,9 +1632,9 @@ extension String {
             let webURL = URL(string: self)!
             let application = UIApplication.shared
             if application.canOpenURL(appURL) {
-                application.openURL(appURL)
+                application.open(appURL, options: [:], completionHandler: nil)
             } else {
-                application.openURL(webURL)
+                application.open(webURL, options: [:], completionHandler: nil)
             }
         }
     }
@@ -1651,9 +1651,9 @@ extension String {
             let webURL = URL(string: self)!
             let application = UIApplication.shared
             if application.canOpenURL(appURL) {
-                application.openURL(appURL)
+                application.open(appURL, options: [:], completionHandler: nil)
             } else {
-                application.openURL(webURL)
+                application.open(webURL, options: [:], completionHandler: nil)
             }
         }
     }
@@ -1663,20 +1663,20 @@ extension String {
             let app = "line://ti/p/@"+self
             let appURL = URL(string: app)!
             let application = UIApplication.shared
-            application.openURL(appURL)
+            application.open(appURL, options: [:], completionHandler: nil)
         }
     }
     
     func website() {
         if self.count > 0 {
-            UIApplication.shared.openURL(URL(string: self)!)
+            UIApplication.shared.open(URL(string: self)!, options: [:], completionHandler: nil)
         }
     }
     
     func email() {
         if self.count > 0 {
             let url = "mailto:\(self)"
-            UIApplication.shared.openURL(URL(string: url)!)
+            UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
         }
     }
     
