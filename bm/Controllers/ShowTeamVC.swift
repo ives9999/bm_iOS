@@ -429,10 +429,29 @@ class ShowTeamVC: ShowVC {
         let alertView = SCLAlertView(appearance: apperance)
         let alertViewIcon = UIImage(named: "member1")
         
-        let a: UITextView = alertView.addTextView()
-        a.text = "真實姓名：" + memberTable.name + "\n"
-        + "聯絡電話：" + memberTable.mobile + "\n"
-        + "聯絡EMail：" + memberTable.email
+        // Creat the subview
+        let subview = UIView(frame: CGRect(x:0, y:0, width:220, height:100))
+        //subview.backgroundColor = UIColor.red
+        //let x = (subview.frame.width - 10) / 2
+
+        let a: String = "姓名：" + memberTable.name + "\n"
+        + "電話：" + memberTable.mobile_show + "\n"
+        + "EMail：" + memberTable.email
+        
+        // Add textfield 1
+        let textfield1 = UITextView(frame: CGRect(x:0, y:0, width:subview.frame.width, height:subview.frame.height))
+        //textfield1.backgroundColor = UIColor.yellow
+        textfield1.text = a
+        textfield1.font = UIFont(name: textfield1.font!.fontName, size: 18)
+        subview.addSubview(textfield1)
+
+        // Add the subview to the alert's UI property
+        alertView.customSubview = subview
+        
+//        let a: UITextView = alertView.addTextView()
+//        a.frame = CGRect(x: 0, y: 0, width: 216, height: 300)
+//
+
         
         alertView.addButton("打電話") {
             memberTable.mobile.makeCall()
@@ -441,7 +460,7 @@ class ShowTeamVC: ShowVC {
         alertView.addButton("關閉", backgroundColor: UIColor(MY_GRAY)) {
             alertView.hideView()
         }
-        alertView.showSuccess(memberTable.nickname, subTitle: "資料如下：", circleIconImage: alertViewIcon)
+        alertView.showSuccess(memberTable.nickname, subTitle: "", circleIconImage: alertViewIcon)
     }
     
     override func changeScrollViewContentSize() {
