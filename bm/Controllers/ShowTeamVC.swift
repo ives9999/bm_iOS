@@ -178,23 +178,31 @@ class ShowTeamVC: ShowVC {
         
         //2.如果沒有設定臨打日期，關閉臨打
         if myTable!.signupDate != nil {
-            let temp_date_string: String = myTable!.signupDate!.date + " 00:00:00"
+            let temp_date_string: String = myTable!.signupDate!.date
+            
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            let now_string: String = formatter.string(from: Date())
             
             //3.如果臨打日期超過現在的日期，關閉臨打
-            if let temp_date: Date = temp_date_string.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
+            if let temp_date: Date = temp_date_string.toDateTime(format: "yyyy-MM-dd", locale: false) {
                 
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd"
-                
-                let today_string: String = formatter.string(from: Date()) + " 23:59:59"
-                
-                var today: Date = Date()
-                if let tmp: Date = today_string.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
-                    today = tmp
+                var now: Date = Date()
+                if let tmp: Date = now_string.toDateTime(format: "yyyy-MM-dd", locale: false) {
+                    now = tmp
                 }
                 
-                if !temp_date.isGreaterThan(today) {
-                    isTempPlay = false
+                //(1)如果報名日期剛好也是臨打日期則可以報名
+                if (temp_date.isEqualTo(now)) {
+                    isTempPlay = true
+                } else {
+                    //(2)如果報名日期已經過了臨打日期則無法報名
+                    if (temp_date.isSmallerThan(now)) {
+                        isTempPlay = false
+                    //(3)如果報名日期還沒過了臨打日期則無法報名
+                    } else {
+                        isTempPlay = true
+                    }
                 }
             }
         }
