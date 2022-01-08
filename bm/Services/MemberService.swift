@@ -215,8 +215,8 @@ class MemberService: DataService {
             url = URL_MOBILE_VALIDATE
         }
         let body: [String: String] = ["device": "app", "code": code, TOKEN_KEY: token]
-//        print(url)
-//        print(body)
+        //print(url)
+        //print(body)
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             //print(response)
             
