@@ -205,6 +205,10 @@ class BaseViewController: UIViewController, List2CellDelegate {
     
     func cellEdit(row: Table){}
     func cellDelete(row: Table){}
+    func cellPrompt(sectionIdx: Int, rowIdx: Int){
+        let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
+        info(row.prompt)
+    }
     
     func cellRefresh() {
         params.removeAll()
@@ -339,7 +343,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     
     @objc func addPressed() {}
     
-    func moreClickForOne(key: String, row: OneRow, delegate: BaseViewController) {
+    func cellMoreClick(key: String, row: OneRow, delegate: BaseViewController) {
         
         if (key == CITY_KEY) {
             toSelectCity(key: CITY_KEY, selected: row.value, delegate: self)
@@ -386,8 +390,22 @@ class BaseViewController: UIViewController, List2CellDelegate {
             }
             
             toSelectWeekdays(key: key, selecteds: selecteds, delegate: self)
-        } else if (key == START_TIME_KEY || key == END_TIME_KEY) {
+        } else if (key == START_TIME_KEY || key == END_TIME_KEY || key == TEAM_PLAY_START_KEY || key == TEAM_PLAY_END_KEY) {
             toSelectTime(key: key, selected: row.value, delegate: self)
+        } else if (key == AREA_KEY) {
+            let row1: OneRow = getOneRowFromKey(CITY_KEY)
+            var city_id: Int = 0
+            
+            if (row1.value.count > 0) {
+                if let tmp: Int = Int(row1.value) {
+                    city_id = tmp
+                }
+            }
+            if (city_id <= 0) {
+                warning("請先選擇縣市")
+            } else {
+                toSelectArea(key: key, city_id: city_id, selected: row.value, delegate: self)
+            }
         } else if (key == ARENA_KEY) {
             let row1: OneRow = getOneRowFromKey(CITY_KEY)
             var city_id: Int = 0
@@ -1063,7 +1081,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
             let row = getOneRowFromKey(key)
             row.value = selected
             var _show = ""
-            if key == START_TIME_KEY || key == END_TIME_KEY {
+            if key == START_TIME_KEY || key == END_TIME_KEY || key == TEAM_PLAY_START_KEY || key == TEAM_PLAY_END_KEY {
                 _show = selected.noSec()
             }
             //在dateSelected

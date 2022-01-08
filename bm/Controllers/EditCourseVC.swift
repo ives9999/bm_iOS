@@ -252,7 +252,7 @@ class EditCourseVC: EditVC {
         let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
         
         if (row.cell == "more") {
-            moreClickForOne(key: row.key, row: row, delegate: self)
+            cellMoreClick(key: row.key, row: row, delegate: self)
         }
         
 //        let row = getFormItemFromIdx(indexPath)

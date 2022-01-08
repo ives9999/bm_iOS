@@ -344,7 +344,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 let cell_type: String = row.cell
                 
                 if (cell_type == "more") {
-                    moreClickForOne(key: key, row: row, delegate: self)
+                    cellMoreClick(key: key, row: row, delegate: self)
                 } else {
                     //performSegue(withIdentifier: segue, sender: indexPath)
                 }

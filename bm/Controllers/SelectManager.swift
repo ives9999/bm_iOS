@@ -19,6 +19,8 @@ class SelectManagerVC: SelectVC, UITextFieldDelegate {
     @IBOutlet var submitBtn: SubmitButton!
     @IBOutlet var cancelBtn: CancelButton!
     
+    @IBOutlet var member_private_keyDoc: SuperButton!
+    
     var selected: Int = 0
     var delegate: BaseViewController?
     var manager_id: Int = 0
@@ -152,6 +154,12 @@ class SelectManagerVC: SelectVC, UITextFieldDelegate {
     
     @IBAction func clear(_ sender: Any) {
         manager_tokenField.text = ""
+    }
+    
+    @IBAction func toMemberPrivateKeyDoc() {
+        
+        let url: String = "https://bm.sportpassword.com/doc/member_private_key.html"
+        url.website()
     }
 }
 

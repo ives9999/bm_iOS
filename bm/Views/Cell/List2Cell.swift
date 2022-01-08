@@ -290,6 +290,7 @@ protocol List2CellDelegate {
     func cellRadioChanged(key: String, sectionIdx: Int, rowIdx: Int, isChecked: Bool)
     func cellSwitchChanged(key: String, sectionIdx: Int, rowIdx: Int, isSwitch: Bool)
     func cellClear(sectionIdx: Int, rowIdx: Int)
+    func cellPrompt(sectionIdx: Int, rowIdx: Int)
 }
 
 //extension List2CellDelegate {

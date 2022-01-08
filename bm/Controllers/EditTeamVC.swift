@@ -46,7 +46,7 @@ class EditTeamVC: EditVC {
         if token != nil && token!.count > 0 {
             refresh()
         } else {
-//            myTable = TeamTable()
+            myTable = TeamTable()
 //            myTable!.name = "測試與球隊"
 //            myTable!.city_id = 218
 //            myTable!.arena_id = 6
@@ -120,13 +120,19 @@ class EditTeamVC: EditVC {
         }
         
         var rows: [OneRow] = [OneRow]()
-        var row: OneRow = OneRow(title: "名稱", value: myTable!.name, show: myTable!.name, key: NAME_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "羽球密碼羽球隊", isRequired: true)
+        
+        let manager_id: String = (myTable!.manager_id <= 0) ? "" : String(myTable!.manager_id)
+        var row: OneRow = OneRow(title: "管理員", value: manager_id, show: myTable!.manager_nickname, key: MANAGER_ID_KEY, cell: "more", isRequired: false)
+        row.prompt = "如果新增者就是管理者，就不用填寫此項目"
+        row.token = myTable!.manager_token
+        rows.append(row)
+        row = OneRow(title: "名稱", value: myTable!.name, show: myTable!.name, key: NAME_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "羽球密碼羽球隊", isRequired: true)
         row.msg = "球隊名稱沒有填寫"
         rows.append(row)
         row = OneRow(title: "縣市", value: String(myTable!.city_id), show: myTable!.city_show, key: CITY_KEY, cell: "more", keyboard: KEYBOARD.default, placeholder: "", isRequired: true)
         row.msg = "沒有選擇縣市"
         rows.append(row)
-        row = OneRow(title: "球館", value: String(myTable!.arena_id), show: myTable!.arena!.name, key: "arena_id", cell: "more", keyboard: KEYBOARD.default, placeholder: "", isRequired: true)
+        row = OneRow(title: "球館", value: String(myTable!.arena_id), show: myTable!.arena!.name, key: ARENA_KEY, cell: "more", keyboard: KEYBOARD.default, placeholder: "", isRequired: true)
         row.msg = "沒有選擇球館"
         rows.append(row)
         
@@ -162,11 +168,26 @@ class EditTeamVC: EditVC {
         rows.append(row)
         row = OneRow(title: "臨打日期", value: myTable!.last_signup_date, show: myTable!.last_signup_date, key: TEAM_TEMP_DATE_KEY, cell: "more")
         rows.append(row)
-        row = OneRow(title: "臨打名額", value: String(myTable!.people_limit), show: String(myTable!.people_limit), key: PEOPLE_LIMIT_KEY, cell: "textField")
+        
+        var people_limit: String = ""
+        if (myTable!.people_limit > 0) {
+            people_limit = String(myTable!.people_limit)
+        }
+        row = OneRow(title: "臨打名額", value: people_limit, show: people_limit, key: PEOPLE_LIMIT_KEY, cell: "textField")
         rows.append(row)
-        row = OneRow(title: "臨打費用-男", value: String(myTable!.temp_fee_M), show: String(myTable!.temp_fee_M), key: TEAM_TEMP_FEE_M_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "300")
+        
+        var temp_fee_M: String = ""
+        if (myTable!.temp_fee_M >= 0) {
+            temp_fee_M = String(myTable!.temp_fee_M)
+        }
+        row = OneRow(title: "臨打費用-男", value: temp_fee_M, show: temp_fee_M, key: TEAM_TEMP_FEE_M_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "300")
+        
+        var temp_fee_F: String = ""
+        if (myTable!.temp_fee_F >= 0) {
+            temp_fee_F = String(myTable!.temp_fee_F)
+        }
         rows.append(row)
-        row = OneRow(title: "臨打費用-女", value: String(myTable!.temp_fee_F), show: String(myTable!.temp_fee_F), key: TEAM_TEMP_FEE_F_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "200")
+        row = OneRow(title: "臨打費用-女", value: temp_fee_F, show: temp_fee_F, key: TEAM_TEMP_FEE_F_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "200")
         rows.append(row)
         row = OneRow(title: "臨打說明", value: myTable!.temp_content, show: myTable!.temp_content, key: TEAM_TEMP_CONTENT_KEY, cell: "more")
         rows.append(row)
@@ -174,9 +195,6 @@ class EditTeamVC: EditVC {
         oneSections.append(section)
         
         rows.removeAll()
-        row = OneRow(title: "隊長", value: String(myTable!.manager_id), show: myTable!.manager_nickname, key: MANAGER_ID_KEY, cell: "more", isRequired: false)
-        row.token = myTable!.manager_token
-        rows.append(row)
         row = OneRow(title: "line", value: myTable!.line, show: myTable!.line, key: LINE_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "david221")
         rows.append(row)
         row = OneRow(title: "行動電話", value: myTable!.mobile, show: myTable!.mobile, key: MOBILE_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "0939123456")

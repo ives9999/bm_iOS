@@ -206,6 +206,12 @@ class MyTableVC: BaseViewController {
         tableView.reloadData()
     }
     
+    override func setDegrees(res: [DEGREE]) {
+        
+        super.setDegrees(res: res)
+        tableView.reloadData()
+    }
+    
     override func setContent(key: String, content: String) {
         super.setContent(key: key, content: content)
         tableView.reloadData()

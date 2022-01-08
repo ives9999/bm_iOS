@@ -126,7 +126,7 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
         let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
         
         if (row.cell == "more") {
-            moreClickForOne(key: row.key, row: row, delegate: self)
+            cellMoreClick(key: row.key, row: row, delegate: self)
         }
         
 //        Global.instance.addSpinner(superView: view)
@@ -205,7 +205,8 @@ class EditVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationController
                         if (self.jsonData != nil) {
                             let table: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
                             if table.success {
-                                self.info(msg: "修改成功", buttonTitle: "關閉") {
+                                self.msg = (action == "INSERT") ? "新增成功" : "修改成功"
+                                self.info(msg: self.msg, buttonTitle: "關閉") {
                                     if self.delegate != nil {
                                         self.delegate!.refresh()
                                         self.prev()

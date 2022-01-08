@@ -1512,7 +1512,7 @@
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardType="namePhonePad"/>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a3A-7E-Fq4" customClass="ClearButton" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="184" y="449" width="46" height="30"/>
+                                        <rect key="frame" x="352" y="449" width="46" height="30"/>
                                         <state key="normal" title="Button"/>
                                         <connections>
                                             <action selector="clear:" destination="Rnr-RQ-nbw" eventType="touchUpInside" id="qPT-i0-CN7"/>
@@ -1521,11 +1521,11 @@
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="323-Eq-Isg" firstAttribute="top" secondItem="Hou-Nq-d63" secondAttribute="top" constant="32" id="Cwh-8J-wwK"/>
-                                    <constraint firstItem="a3A-7E-Fq4" firstAttribute="centerX" secondItem="Hou-Nq-d63" secondAttribute="centerX" id="Hm4-pz-u5J"/>
                                     <constraint firstAttribute="bottom" secondItem="a3A-7E-Fq4" secondAttribute="bottom" constant="200" id="M0c-Zf-KdH"/>
                                     <constraint firstAttribute="trailing" secondItem="crs-x6-ouT" secondAttribute="trailing" id="OfF-nW-J56"/>
                                     <constraint firstAttribute="trailing" secondItem="323-Eq-Isg" secondAttribute="trailing" constant="16" id="U9P-iu-IHS"/>
                                     <constraint firstItem="a3A-7E-Fq4" firstAttribute="top" secondItem="323-Eq-Isg" secondAttribute="bottom" constant="32" id="aNp-eB-Q54"/>
+                                    <constraint firstAttribute="trailing" secondItem="a3A-7E-Fq4" secondAttribute="trailing" constant="16" id="duZ-Kq-vr7"/>
                                     <constraint firstItem="crs-x6-ouT" firstAttribute="leading" secondItem="Hou-Nq-d63" secondAttribute="leading" id="g5D-Im-oCJ"/>
                                     <constraint firstItem="crs-x6-ouT" firstAttribute="height" secondItem="Hou-Nq-d63" secondAttribute="height" id="gmk-N0-nTj"/>
                                     <constraint firstAttribute="bottom" secondItem="crs-x6-ouT" secondAttribute="bottom" constant="-25" id="kTm-7D-ajF"/>

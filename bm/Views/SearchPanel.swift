@@ -425,7 +425,7 @@ extension SearchPanel: UITableViewDelegate {
         
         let cell: String = row.cell
         if (cell == "more") {
-            baseVC!.moreClickForOne(key: key, row: row, delegate: baseVC!)
+            baseVC!.cellMoreClick(key: key, row: row, delegate: baseVC!)
 //            let selected: String = row.value
 //            baseVC!.toSelectSingle(key: key, selected: selected, delegate: baseVC!)
         } else {

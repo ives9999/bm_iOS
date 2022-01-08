@@ -441,18 +441,18 @@
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者金鑰：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Eu-YI-0Tc" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="12" y="146.5" width="104" height="20.5"/>
+                                <rect key="frame" x="12" y="187" width="104" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PZw-yY-w7h" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="124" y="132" width="233" height="49.5"/>
+                                <rect key="frame" x="124" y="172.5" width="233" height="49.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AF-WW-lTK">
-                                <rect key="frame" x="373" y="144.5" width="25" height="25"/>
+                                <rect key="frame" x="373" y="185" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="Akf-Di-9vT"/>
                                     <constraint firstAttribute="height" constant="25" id="esc-Y7-D2E"/>
@@ -464,7 +464,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ps-N5-sQH" customClass="CityButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="180.5" y="251.5" width="53" height="31"/>
+                                <rect key="frame" x="180.5" y="292" width="53" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="驗證"/>
                                 <connections>
@@ -472,14 +472,17 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X9C-i3-rwO" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="12" y="193.5" width="163.5" height="39"/>
+                                <rect key="frame" x="12" y="234" width="163.5" height="39"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="question" imagePlacement="leading" title="如何取得會員金鑰" titleAlignment="center">
                                     <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="toMemberPrivateKeyDoc" destination="n2n-d3-6Bz" eventType="touchUpInside" id="GSB-Wn-CNK"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="NAW-hh-oa1">
-                                <rect key="frame" x="12" y="314.5" width="402" height="95.5"/>
+                                <rect key="frame" x="12" y="355" width="402" height="95.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="EIF-Gc-3lw" userLabel="暱稱">
                                         <rect key="frame" x="0.0" y="0.0" width="179" height="20.5"/>
@@ -535,7 +538,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xyi-Eq-Osj" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="80" y="460" width="80" height="31"/>
+                                <rect key="frame" x="80" y="500.5" width="80" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="Zei-yX-Asj"/>
                                 </constraints>
@@ -546,7 +549,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cnx-Ue-CBM" customClass="CancelButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="254" y="460" width="80" height="31"/>
+                                <rect key="frame" x="254" y="500.5" width="80" height="31"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="lfu-zh-XGa"/>
                                 </constraints>
@@ -556,6 +559,12 @@
                                     <action selector="cancel:" destination="n2n-d3-6Bz" eventType="touchUpInside" id="De2-BK-J1T"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="★如果新增者就是管理員時，就不用填寫此欄位" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qmq-Ec-gpa">
+                                <rect key="frame" x="12" y="128" width="363.5" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="systemPinkColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fIo-WB-xew"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -572,11 +581,13 @@
                             <constraint firstItem="7Eu-YI-0Tc" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" constant="12" id="Jxn-Yl-RA2"/>
                             <constraint firstItem="VxF-7C-PmT" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" id="MMW-IC-Qhj"/>
                             <constraint firstItem="6AF-WW-lTK" firstAttribute="leading" secondItem="PZw-yY-w7h" secondAttribute="trailing" constant="16" id="QWZ-xN-hWd"/>
+                            <constraint firstItem="qmq-Ec-gpa" firstAttribute="top" secondItem="Mk1-yQ-DD7" secondAttribute="bottom" constant="20" id="RRj-Wq-S7Q"/>
                             <constraint firstItem="Mk1-yQ-DD7" firstAttribute="trailing" secondItem="fIo-WB-xew" secondAttribute="trailing" id="VcC-hV-bxH"/>
                             <constraint firstItem="2ps-N5-sQH" firstAttribute="centerX" secondItem="XDt-3z-QiI" secondAttribute="centerX" id="Ypj-II-Kbk"/>
                             <constraint firstItem="Mk1-yQ-DD7" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" id="ZvQ-el-8lB"/>
                             <constraint firstItem="PZw-yY-w7h" firstAttribute="centerY" secondItem="7Eu-YI-0Tc" secondAttribute="centerY" id="aqY-oU-CpV"/>
-                            <constraint firstItem="PZw-yY-w7h" firstAttribute="top" secondItem="Mk1-yQ-DD7" secondAttribute="bottom" constant="24" id="bLz-wS-2kG"/>
+                            <constraint firstItem="qmq-Ec-gpa" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" constant="12" id="bBp-z6-9qh"/>
+                            <constraint firstItem="PZw-yY-w7h" firstAttribute="top" secondItem="qmq-Ec-gpa" secondAttribute="bottom" constant="24" id="bLz-wS-2kG"/>
                             <constraint firstItem="VxF-7C-PmT" firstAttribute="trailing" secondItem="fIo-WB-xew" secondAttribute="trailing" id="cKe-w8-pvU"/>
                             <constraint firstItem="VxF-7C-PmT" firstAttribute="top" secondItem="Mk1-yQ-DD7" secondAttribute="bottom" id="hQH-2l-DUw"/>
                             <constraint firstItem="NAW-hh-oa1" firstAttribute="leading" secondItem="fIo-WB-xew" secondAttribute="leading" constant="12" id="ivI-BD-M9Q"/>
@@ -593,6 +604,7 @@
                         <outlet property="emailLbl" destination="NPH-kr-suC" id="0L8-0a-MYa"/>
                         <outlet property="manager_tokenField" destination="PZw-yY-w7h" id="yXA-rV-nqL"/>
                         <outlet property="memberStackView" destination="NAW-hh-oa1" id="ctl-79-SIX"/>
+                        <outlet property="member_private_keyDoc" destination="X9C-i3-rwO" id="iq4-pf-A2F"/>
                         <outlet property="mobileLbl" destination="GtM-3j-e8d" id="EJo-oT-8pI"/>
                         <outlet property="nicknameLbl" destination="OSP-UU-m4d" id="GqG-A0-6td"/>
                         <outlet property="submitBtn" destination="Xyi-Eq-Osj" id="7wh-aS-bUY"/>
@@ -794,6 +806,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

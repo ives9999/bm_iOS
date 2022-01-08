@@ -28,11 +28,12 @@ class MoreCell: FormItemCell {
     }
     
     @IBAction func promptBtnPressed(_ sender: Any) {
-        let alert = UIAlertController(title: "提示", message: (formItem?.tooltip)!, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: { (action) in
-            
-        }))
-        self.parentViewController?.present(alert, animated: true, completion: nil)
+//        let alert = UIAlertController(title: "提示", message: (formItem?.tooltip)!, preferredStyle: .alert)
+//        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: { (action) in
+//
+//        }))
+//        self.parentViewController?.present(alert, animated: true, completion: nil)
+        cellDelegate?.cellPrompt(sectionIdx: sectionIdx, rowIdx: rowIdx)
     }
     
     func clear() {
@@ -80,7 +81,8 @@ class MoreCell: FormItemCell {
         detailLbl.text = row.show
         
         requiredImageView.isHidden = !row.isRequired
-        promptBtn.isHidden = true
+        
+        promptBtn.isHidden = (row.prompt.count > 0) ? false : true
         
         clearBtn.isHidden = !row.isClear
     }
