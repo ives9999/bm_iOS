@@ -130,7 +130,7 @@ class MemberCartListVC: MyTableVC {
         warning(msg: "是否確定要刪除呢？", closeButtonTitle: "取消", buttonTitle: "確定") {
             
             Global.instance.addSpinner(superView: self.view)
-            self.dataService.delete(token: row.token, type: "cart_item") { (success) in
+            self.dataService.delete(token: row.token, type: "cart_item", status: "delete") { (success) in
                 if (success) {
                     self.refresh()
                     self.cartItemCount -= 1

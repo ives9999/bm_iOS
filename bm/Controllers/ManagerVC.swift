@@ -23,7 +23,7 @@ class ManagerVC: MyTableVC {
             params["manager_token"] = manager_token!
         }
         //必須指定status，預設是只會出現上線的
-        params["status"] = "all"
+        params["status"] = "online,offline"
         
         super.viewDidLoad()
         

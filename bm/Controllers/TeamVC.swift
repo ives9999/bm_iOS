@@ -41,6 +41,7 @@ class TeamVC: MyTableVC {
         let cellNibName = UINib(nibName: "TeamListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
         
+        params.merge(["status":"online"])
         refresh()
     }
     

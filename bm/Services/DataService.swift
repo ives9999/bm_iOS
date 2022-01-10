@@ -70,9 +70,9 @@ class DataService {
     
     init() {}
     
-    func delete(token: String, type: String, completion: @escaping CompletionHandler) {
+    func delete(token: String, type: String, status: String = "trash", completion: @escaping CompletionHandler) {
         
-        let body: [String: String] = ["device": "app", "channel": "bm", "token": token, "type": type]
+        let body: [String: String] = ["device": "app", "channel": "bm", "token": token, "type": type, "status": status]
         
         let source: String? = getSource()
         var url: String?
@@ -174,13 +174,13 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        //print(filter.toJSONString())
+        print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        //print(url)
+        print(url)
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")

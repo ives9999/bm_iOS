@@ -151,6 +151,36 @@ class ManagerTeamVC: ManagerVC {
         toManagerSignup(able_type: able_type, able_token: row.token, able_title: row.name)
     }
     
+    override func cellDelete(row: Table) {
+        msg = "是否確定要刪除此球隊？"
+        warning(msg: msg, closeButtonTitle: "取消", buttonTitle: "刪除") {
+            Global.instance.addSpinner(superView: self.view)
+            self.dataService.delete(token: row.token, type: self.able_type) { success in
+                Global.instance.removeSpinner(superView: self.view)
+                if (success) {
+                    do {
+                        self.jsonData = self.dataService.jsonData
+                        if (self.jsonData != nil) {
+                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
+                            if (!successTable.success) {
+                                self.warning(successTable.msg)
+                            } else {
+                                self.refresh()
+                            }
+                        } else {
+                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                        }
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                        self.warning(self.msg)
+                    }
+                } else {
+                    self.warning("刪除失敗，請洽管理員")
+                }
+            }
+        }
+    }
+    
     override func addPressed() {
         toEditTeam(token: "", _delegate: self)
     }
