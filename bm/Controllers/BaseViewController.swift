@@ -434,7 +434,14 @@ class BaseViewController: UIViewController, List2CellDelegate {
         } else if (key == CONTENT_KEY || key == CHARGE_KEY || key == TEAM_TEMP_CONTENT_KEY) {
             toEditContent(key: key, title: row.title, content: row.value, _delegate: self)
         } else if (key == MANAGER_ID_KEY) {
-            toSelectManager(manager_id: Int(row.value)!, manager_token: row.token, delegate: self)
+            if row.value.count == 0 {
+                row.value = "0"
+            }
+            var value: Int = 0
+            if let tmp: Int = Int(row.value) {
+                value = tmp
+            }
+            toSelectManager(manager_id: value, manager_token: row.token, delegate: self)
         }
     }
     

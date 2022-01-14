@@ -205,6 +205,8 @@ class ShowTeamVC: ShowVC {
                     }
                 }
             }
+        } else {
+            isTempPlay = false
         }
         
         //3.如果管理者設定報名臨打名額是0，關閉臨打
