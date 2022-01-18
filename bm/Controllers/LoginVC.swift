@@ -53,8 +53,8 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         //passwordTxt.borderWidth(0)
         //passwordTxt.backgroundColor = UIColor.clear
 
-        //emailTxt.text = "ives@housetube.tw"
-        //passwordTxt.text = "K5SD23r6"
+//        emailTxt.text = "ives@housetube.tw"
+//        passwordTxt.text = "K5SD23r6"
     }
 
     @IBAction func prevBtnPressed(_ sender: Any) {

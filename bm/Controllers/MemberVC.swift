@@ -64,8 +64,11 @@ class MemberVC: MyTableVC {
 
     override func viewDidLoad() {
         myTablView = tableView
+        able_type = "member"
         
         super.viewDidLoad()
+        
+        dataService = MemberService.instance
         
 //        mySections = [
 //            ["name": "會員資料", "isExpanded": true, "key": "data"],
@@ -103,6 +106,7 @@ class MemberVC: MyTableVC {
         sections.append(makeSection2Row(isEpanded: false))
         sections.append(makeSection3Row())
         sections.append(makeSection4Row())
+        sections.append(makeSection5Row())
         
         return sections
     }
@@ -234,6 +238,18 @@ class MemberVC: MyTableVC {
         rows.append(r3)
 
         let s: MemberSection = MemberSection(title: "管理", isExpanded: isEpanded, items: rows)
+
+        return s
+    }
+    
+    func makeSection5Row(isEpanded: Bool = true)-> MemberSection {
+
+        var rows: [MemberRow] = [MemberRow]()
+        
+        let r1: MemberRow = MemberRow(title: "刪除會員", icon: "delete", segue: "delete")
+        rows.append(r1)
+
+        let s: MemberSection = MemberSection(title: "刪除", isExpanded: isEpanded, items: rows)
 
         return s
     }
@@ -484,6 +500,8 @@ class MemberVC: MyTableVC {
             toManagerTeam(manager_token: Member.instance.token)
         } else if segue == "toRequestManagerTeam" {
             toRequestManagerTeam()
+        } else if segue == "delete" {
+            delete()
         }
         
         
@@ -681,6 +699,43 @@ class MemberVC: MyTableVC {
         isExpanded = !isExpanded
         if mark != nil {
             toggleMark(mark: mark!, isExpanded: isExpanded)
+        }
+    }
+    
+    func delete() {
+        msg = "是否確定要刪除自己的會員資料？"
+        warning(msg: msg, closeButtonTitle: "取消", buttonTitle: "刪除") {
+            Global.instance.addSpinner(superView: self.view)
+            self.dataService.delete(token: Member.instance.token, type: self.able_type) { success in
+                Global.instance.removeSpinner(superView: self.view)
+                if (success) {
+                    do {
+                        self.jsonData = self.dataService.jsonData
+                        if (self.jsonData != nil) {
+                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
+                            if (!successTable.success) {
+                                self.warning(successTable.msg)
+                            } else {
+                                self.deleteEnd()
+                            }
+                        } else {
+                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                        }
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                        self.warning(self.msg)
+                    }
+                } else {
+                    self.warning("刪除失敗，請洽管理員")
+                }
+            }
+        }
+    }
+    
+    func deleteEnd() {
+        
+        info(msg: "您的帳號已經被刪除，羽球密碼感謝您的支持", buttonTitle: "關閉") {
+            self.logout()
         }
     }
 }
