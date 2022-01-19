@@ -174,20 +174,20 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        //print(filter.toJSONString())
+        print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        //print(url)
+        print(url)
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
         AF.request(url, method: .post, parameters: filter, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
-            //let str = String(decoding: response.data!, as: UTF8.self)
-            //print(str)
+            let str = String(decoding: response.data!, as: UTF8.self)
+            print(str)
             switch response.result {
             case .success(_):
                 if response.data != nil {
@@ -250,7 +250,8 @@ class DataService {
         if url != nil {
             AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
                 
-                //print(response.value)
+//                let str = String(decoding: response.data!, as: UTF8.self)
+//                print(str)
                 switch response.result {
                 //case .success(let value):
                 case .success(_):
@@ -436,14 +437,17 @@ class DataService {
     
     func signup(token: String, member_token: String, date_token: String, course_deadline: String? = nil, completion: @escaping CompletionHandler) {
         let url = getSignupURL(token: token)
-        //print(url)
+        print(url)
         var body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "able_date_token": date_token]
         if course_deadline != nil {
             body["cancel_deadline"] = course_deadline
         }
         
-        //print(body)
+        print(body)
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            let str = String(decoding: response.data!, as: UTF8.self)
+            print(str)
             
             switch response.result {
             case .success(_):
