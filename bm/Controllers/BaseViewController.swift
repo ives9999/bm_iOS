@@ -8,7 +8,6 @@
 
 import UIKit
 import OneSignal
-import Reachability
 import WebKit
 import SCLAlertView
 import CryptoSwift
@@ -33,6 +32,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     var cartItemCount: Int = 0
     
     var msg: String = ""
+    var myError: MYERROR = MYERROR.NOERROR
     var dataService: DataService = DataService()
     //var managerLists: [SuperData] = [SuperData]()
     var refreshControl: UIRefreshControl!
@@ -62,6 +62,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
     var loadingMask: UIView?
     var loadingSpinner: UIActivityIndicatorView?
     var loadingText: UILabel?
+    
+    var isNetworkExist: Bool = false
     
     let body_css = "<style>body{background-color:#000;padding-left:8px;padding-right:8px;margin-top:0;padding-top:0;color:#888888;font-size:18px;}a{color:#a6d903;}</style>"
     
@@ -230,7 +232,13 @@ class BaseViewController: UIViewController, List2CellDelegate {
 //    }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+//        if !Reachability.isConnectedToNetwork(){
+//            warning("無法連到網路，請檢查您的網路設定")
+//            return
+//        }
 
         //setStatusBar(color: UIColor(STATUS_GREEN))
         workAreaHeight = view.bounds.height - titleBarHeight
@@ -242,25 +250,11 @@ class BaseViewController: UIViewController, List2CellDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let reachability = try! Reachability()
-        
-        reachability.whenReachable = { reachability in
-            if reachability.connection == .wifi {
-                //print("WiFi")
-            } else {
-                //print("Cellular")
-            }
-        }
-        reachability.whenUnreachable = { _ in
-            self.warning(msg: "沒有連接網路，所以無法使用此app", buttonTitle: "確定", buttonAction: {
-                exit(0)
-            })
-        }
-        
-        do {
-            try reachability.startNotifier()
-        } catch {
-            warning("無法開啟測試連結網路警告視窗，請稍後再使用!!")
+
+        if (!testNetwork()) {
+            myError = MYERROR.NONETWORK
+            warning(myError.toString())
+            return
         }
         
         //當購物車中有商品時，購物車的icon就會出現，如果沒有就不會出現
@@ -1197,6 +1191,16 @@ class BaseViewController: UIViewController, List2CellDelegate {
         let row = getOneRowFromKey(key)
         row.value = content
         row.show = content
+    }
+    
+    func testNetwork()-> Bool {
+        
+        var bConnect: Bool = false
+        if Connectivity.isConnectedToInternet {
+             bConnect = true
+        }
+        
+        return bConnect
     }
     
     func alertError(title: String, msg: String) {

@@ -447,6 +447,13 @@ class MemberService: DataService {
     
     func likelist(able_type: String, like_list: String = "喜歡", page: Int=1, perPage: Int=20, completion: @escaping CompletionHandler) {
         
+        if (!testNetwork()) {
+            //msg = "無法連到網路，請檢查您的網路設定"
+            myError = MYERROR.NONETWORK
+            completion(false)
+            return
+        }
+        
         let body: [String: String] = [
             "device": "app",
             "channel": CHANNEL,

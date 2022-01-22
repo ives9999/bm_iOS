@@ -1,11 +1,11 @@
 PODS:
-  - Alamofire (5.4.4)
+  - Alamofire (5.5.0)
   - AlamofireImage (4.2.0):
     - Alamofire (~> 5.4)
   - CryptoSwift (1.4.2)
   - Device.swift (1.2.2)
   - ECPayPaymentGatewayKit (1.0.5)
-  - IQKeyboardManagerSwift (6.5.6)
+  - IQKeyboardManagerSwift (6.5.9)
   - JXBanner (0.3.6):
     - JXBanner/Banner (= 0.3.6)
     - JXBanner/PageControl (= 0.3.6)
@@ -38,7 +38,7 @@ PODS:
   - JXPageControl/Transform (0.1.5):
     - JXPageControl/Common
   - KeychainSwift (16.0.1)
-  - OneSignal (3.8.1)
+  - OneSignal (3.10.0)
   - PromiseKit (6.8.5):
     - PromiseKit/CorePromise (= 6.8.5)
     - PromiseKit/Foundation (= 6.8.5)
@@ -48,7 +48,6 @@ PODS:
     - PromiseKit/CorePromise
   - PromiseKit/UIKit (6.8.5):
     - PromiseKit/CorePromise
-  - ReachabilitySwift (5.0.0)
   - SCLAlertView (0.8)
   - SnapKit (5.0.1)
   - Socket.IO-Client-Swift (16.0.1):
@@ -72,7 +71,6 @@ DEPENDENCIES:
   - KeychainSwift (~> 16.0)
   - OneSignal (< 4.0, >= 3.0.0)
   - PromiseKit (~> 6.8.3)
-  - ReachabilitySwift
   - SCLAlertView
   - SnapKit (~> 5.0.0)
   - Socket.IO-Client-Swift
@@ -96,7 +94,6 @@ SPEC REPOS:
     - KeychainSwift
     - OneSignal
     - PromiseKit
-    - ReachabilitySwift
     - SCLAlertView
     - SnapKit
     - Socket.IO-Client-Swift
@@ -113,22 +110,21 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SwiftyXMLParser:
-    :commit: 41900bb1882e704a25d4946f2dbad71b4bb02b8f
+    :commit: d7a1d23f04c86c1cd2e8f19247dd15d74e0ea8be
     :git: https://github.com/yahoojapan/SwiftyXMLParser.git
 
 SPEC CHECKSUMS:
-  Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
+  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
   ECPayPaymentGatewayKit: f11b3d42274d2e8150bd0e039b11ae3f0a115a89
-  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
   JXBanner: 348dbef856e786494cbf30fb45d6b84826f2d3c5
   JXPageControl: e9487b39e2e58fc17790833214f3b8e935bef98b
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
-  OneSignal: b44755cd425704bdef8d8912030ed26619446773
+  OneSignal: 198da4de73fb7bd6e45bc04221a7f16efca057ad
   PromiseKit: 9616b0afef31eae56ab9ce044c8ec2b8612a15cd
-  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   Socket.IO-Client-Swift: c116d6dc9fd6be9c259bacfe143f8725bce7d79e
@@ -140,6 +136,6 @@ SPEC CHECKSUMS:
   UIColor_Hex_Swift: 31cd3e47440f07a20d2503a36bb0437a445b3c29
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: 9ffc7b335e1ce5d3a9d6526c68d578739a1fbff1
+PODFILE CHECKSUM: a758f5ae3ff7ac95f4e5e38fd7e4aa7a5e9ee094
 
 COCOAPODS: 1.11.2

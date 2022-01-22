@@ -117,17 +117,25 @@ class MyTableVC: BaseViewController {
         if (member_like) {
             MemberService.instance.likelist(able_type: able_type) { (success) in
                 self.jsonData = MemberService.instance.jsonData
+                self.myError = MemberService.instance.myError
                 self.getDataEnd(success: success)
             }
         } else {
             dataService.getList(token: token, _filter: params, page: page, perPage: perPage) { (success) in
                 self.jsonData = self.dataService.jsonData
+                self.myError = self.dataService.myError
                 self.getDataEnd(success: success)
             }
         }
     }
     
     func getDataEnd(success: Bool) {
+        
+        Global.instance.removeSpinner(superView: view)
+        if (!success) {
+            isNetworkExist = false
+            return
+        }
         
         if (jsonData != nil) {
             genericTable()
@@ -148,7 +156,6 @@ class MyTableVC: BaseViewController {
         } else {
             warning("沒有取得回傳的json字串，請洽管理員")
         }
-        Global.instance.removeSpinner(superView: view)
     }
     
     func initSectionRows()-> [OneSection] {

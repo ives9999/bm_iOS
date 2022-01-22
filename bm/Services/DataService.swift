@@ -45,6 +45,7 @@ class DataService {
     var citysandarenas:[Int:[String:Any]] = [Int:[String:Any]]()
     var citysandareas:[Int:[String:Any]] = [Int:[String:Any]]()
     var msg:String = ""
+    var myError: MYERROR = MYERROR.NOERROR
     var success: Bool = false
     var signup_date: JSON = JSON()//signup_date use
     
@@ -162,6 +163,13 @@ class DataService {
     
     func getList(token: String?, _filter:[String: String]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
+        if (!testNetwork()) {
+            myError = MYERROR.NONETWORK
+            //msg = "無法連到網路，請檢查您的網路設定"
+            completion(false)
+            return
+        }
+        
         self.needDownloads = [Dictionary<String, Any>]()
         var filter: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
         if (_filter != nil) {
@@ -174,20 +182,20 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        print(filter.toJSONString())
+        //print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        print(url)
+        //print(url)
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
         AF.request(url, method: .post, parameters: filter, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
             let str = String(decoding: response.data!, as: UTF8.self)
-            print(str)
+            //print(str)
             switch response.result {
             case .success(_):
                 if response.data != nil {
@@ -437,17 +445,17 @@ class DataService {
     
     func signup(token: String, member_token: String, date_token: String, course_deadline: String? = nil, completion: @escaping CompletionHandler) {
         let url = getSignupURL(token: token)
-        print(url)
+        //print(url)
         var body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "able_date_token": date_token]
         if course_deadline != nil {
             body["cancel_deadline"] = course_deadline
         }
         
-        print(body)
+        //print(body)
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
             let str = String(decoding: response.data!, as: UTF8.self)
-            print(str)
+            //print(str)
             
             switch response.result {
             case .success(_):
@@ -576,6 +584,16 @@ class DataService {
 //                debugPrint(response.result.error as Any)
 //            }
         }
+    }
+    
+    func testNetwork()-> Bool {
+        
+        var bConnect: Bool = false
+        if Connectivity.isConnectedToInternet {
+             bConnect = true
+        }
+        
+        return bConnect
     }
     
     func update(_params: [String: String], image: UIImage?, completion: @escaping CompletionHandler) {
@@ -1562,4 +1580,11 @@ class DataService {
 //    }
     
     //func jsonToMember(json: JSON) {}
+}
+
+struct Connectivity {
+  static let sharedInstance = NetworkReachabilityManager()!
+  static var isConnectedToInternet:Bool {
+      return self.sharedInstance.isReachable
+    }
 }

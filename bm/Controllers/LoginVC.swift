@@ -70,9 +70,11 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         //print(email)
         if email.count == 0 {
             SCLAlertView().showWarning("警告", subTitle: "請填寫email")
+            return
         }
         if password.count == 0 {
             SCLAlertView().showWarning("警告", subTitle: "請填寫密碼")
+            return
         }
         let playerID: String = _getPlayerID()
         Global.instance.addSpinner(superView: self.view)

@@ -13,6 +13,20 @@ import Device_swift
 var gSimulate:Bool = false
 var gReset: Bool = false
 
+enum MYERROR: Int {
+    case NONETWORK = 1
+    case NOERROR = 100
+    
+    func toString()-> String {
+        switch self {
+        case .NONETWORK:
+            return "無法連到網路，請檢查您的網路設定"
+        case .NOERROR:
+            return "沒有錯誤"
+        }
+    }
+}
+
 enum MYCOLOR: Int {
     case primary = 0x245580
     case warning = 0xF1C40F

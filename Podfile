@@ -13,7 +13,7 @@ target 'bm' do
   pod 'TRVideoView'
   pod 'UIColor_Hex_Swift'
   pod 'SwipeCellKit'
-  pod 'ReachabilitySwift'
+  #pod 'ReachabilitySwift'
   pod 'OneSignal', '>= 3.0.0', '< 4.0'
   
   pod 'ECPayPaymentGatewayKit', '~> 1.0.4'

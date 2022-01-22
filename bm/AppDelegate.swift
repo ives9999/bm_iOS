@@ -11,8 +11,6 @@ import Device_swift
 import UIColor_Hex_Swift
 import OneSignal
 import ECPayPaymentGatewayKit
-//import FacebookCore
-//import FBSDKCoreKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
