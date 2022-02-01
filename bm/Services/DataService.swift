@@ -182,13 +182,13 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        //print(filter.toJSONString())
+        print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        //print(url)
+        print(url)
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
@@ -454,7 +454,7 @@ class DataService {
         //print(body)
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
-            let str = String(decoding: response.data!, as: UTF8.self)
+            //let str = String(decoding: response.data!, as: UTF8.self)
             //print(str)
             
             switch response.result {

@@ -17,6 +17,7 @@ class ManagerSignupListVC: MyTableVC {
     
     var signupListResultTable: SignupListResultTable?
     var signupNormalTables: [SignupNormalTable] = [SignupNormalTable]()
+    var signupSections: [SignupSection] = [SignupSection]()
     
     override func viewDidLoad() {
         
@@ -107,20 +108,98 @@ class ManagerSignupListVC: MyTableVC {
             msg = "解析JSON字串時，得到空值，請洽管理員"
         }
         
-        if (page == 1) {
-            lists1 = [SignupNormalTable]()
+//        if (page == 1) {
+//            lists1 = [SignupNormalTable]()
+//        }
+//        lists1 += signupNormalTables
+        //var rows: [SignupNormalTable] = [SignupNormalTable]()
+        //var sectionIdx: Int = 0
+        
+        for signupNormalTable in signupNormalTables {
+            
+            if (signupNormalTable.dateTable != nil) {
+                
+                let dateTable: DateTable = signupNormalTable.dateTable!
+                let date: String = dateTable.date
+                
+                var bExist: Bool = false
+                for signupSection in signupSections {
+                    if (signupSection.date == date) {
+                        signupSection.rows.append(signupNormalTable)
+                        bExist = true
+                    }
+                }
+                
+                if (!bExist) {
+                    let signupSection: SignupSection = SignupSection()
+                    signupSection.date = date
+                    signupSection.rows.append(signupNormalTable)
+                    signupSections.append(signupSection)
+                }
+            }
         }
-        lists1 += signupNormalTables
+        
+        //print(signupSections)
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        let count: Int = signupSections.count
+
+        return count
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        
+        return 34
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.white
+        headerView.tag = section
+        
+        let titleLabel = UILabel()
+        titleLabel.text = signupSections[section].date
+        titleLabel.textColor = UIColor.black
+        titleLabel.sizeToFit()
+        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: 34)
+        headerView.addSubview(titleLabel)
+        
+        var expanded_image: String = "to_right"
+        if signupSections[section].isExpanded {
+            expanded_image = "to_down"
+        }
+        let mark = UIImageView(image: UIImage(named: expanded_image))
+        mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
+        headerView.addSubview(mark)
+        
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+        headerView.addGestureRecognizer(gesture)
+        
+        return headerView
+        //return UIView()
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        var count: Int = 0
+        if (!signupSections[section].isExpanded) {
+            count = 0
+        } else {
+            count = signupSections[section].rows.count
+        }
+
+        return count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "managerSignupListCell", for: indexPath) as? ManagerSignupListCell {
             
-            if let tmp: SignupNormalTable = lists1[indexPath.row] as? SignupNormalTable {
-                tmp.filterRow()
-                cell.update(_row: tmp)
-            }
+            let signupNormalTable = signupSections[indexPath.section].rows[indexPath.row]
+            signupNormalTable.filterRow()
+            cell.update(_row: signupNormalTable)
             
             return cell
         }
@@ -130,6 +209,39 @@ class ManagerSignupListVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+    }
+    
+    @objc override func handleExpandClose(gesture : UITapGestureRecognizer) {
+        
+        let headerView = gesture.view!
+        let section = headerView.tag
+        let tmp = headerView.subviews.filter({$0 is UIImageView})
+        var mark: UIImageView?
+        if tmp.count > 0 {
+            mark = tmp[0] as? UIImageView
+        }
+        
+        var indexPaths: [IndexPath] = [IndexPath]()
+        
+        let rows: [SignupNormalTable] = signupSections[section].rows
+        for (i, _) in rows.enumerated() {
+            let indexPath = IndexPath(row: i, section: section)
+            indexPaths.append(indexPath)
+        }
+        
+        var isExpanded = signupSections[section].isExpanded
+        signupSections[section].isExpanded = !isExpanded
+        
+        if isExpanded {
+            tableView.deleteRows(at: indexPaths, with: .fade)
+        } else {
+            tableView.insertRows(at: indexPaths, with: .fade)
+        }
+        
+        isExpanded = !isExpanded
+        if mark != nil {
+            toggleMark(mark: mark!, isExpanded: isExpanded)
+        }
     }
 }
 
@@ -155,4 +267,11 @@ class SignupListResultTable: Codable {
         msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
         rows = try container.decodeIfPresent([SignupNormalTable].self, forKey: .rows) ?? [SignupNormalTable]()
     }
+}
+
+class SignupSection {
+    
+    var date: String = ""
+    var rows: [SignupNormalTable] = [SignupNormalTable]()
+    var isExpanded: Bool = true
 }

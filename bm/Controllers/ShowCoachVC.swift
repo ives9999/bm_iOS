@@ -147,58 +147,9 @@ class ShowCoachVC: ShowVC {
         //initCollectionView()
     }
     
-//    override func refresh() {
-//        Global.instance.addSpinner(superView: view)
-//        let params: [String: String] = ["token": coach_token!, "member_token": Member.instance.token]
-//        dataService.getOne(t: CoachTable.self, params: params){ (success1) in
-//            if (success1) {
-//                let table: Table = self.dataService.table!
-//                self.myTable = table as? CoachTable
-//                //self.coachTable!.printRow()
-//                //self.setData() move to getFeatured
-//                if self.myTable != nil {
-//                    self.myTable!.filterRow()
-//                    self.titleLbl.text = self.myTable!.name
-//                    self.setData()
-//                    self.fromNet = true
-//                    //self.getFeatured()
-//                    self.isLike = self.myTable!.like
-//                    self.likeButton.initStatus(self.isLike, self.myTable!.like_count)
-//                    self.contactTableView.reloadData()
-//                    self.setFeatured()
-//                }
-//
-//                var filter: [String: Any] = [String: Any]()
-//                filter.merge(["status": "online"])
-//                if self.myTable != nil {
-//                    filter.merge(["coach_id": self.myTable!.id])
-//                }
-//
-//                CourseService.instance.getList(t: CoursesTable.self, token: self.coach_token!, _filter: filter, page: 1, perPage: 100) { (success2) in
-//                    Global.instance.removeSpinner(superView: self.view)
-//                    if (success2) {
-//                        self.coursesTable = (CourseService.instance.tables as? CoursesTable)
-//                        if (self.coursesTable != nil) {
-//                            //self.coursesTable!.printRows()
-//                            self.courseTableView.reloadData()
-//                        }
-//                    } else {
-//                        self.warning(CourseService.instance.msg)
-//                    }
-//                    self.endRefresh()
-//                }
-////                CoachService.instance.getTT(token: self.show_in!.token, type: self.show_in!.type) { (success2) in
-////                    self.endRefresh()
-////                    if (success2) {
-////                        self.timetables = CoachService.instance.timetables
-////                        self.setTimetableEvent()
-////                    }
-////                }
-//            }
-//            Global.instance.removeSpinner(superView: self.view)
-//            self.endRefresh()
-//        }
-//    }
+    override func refresh() {
+        refresh(CoachTable.self)
+    }
     
     func initCourseTableView() {
         

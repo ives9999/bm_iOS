@@ -44,6 +44,10 @@ class ShowStoreVC: ShowVC {
         contentDataLbl.setTextTitle()
     }
     
+    override func refresh() {
+        refresh(StoreTable.self)
+    }
+    
 //    override func refresh() {
 //        if store_token != nil {
 //            Global.instance.addSpinner(superView: view)

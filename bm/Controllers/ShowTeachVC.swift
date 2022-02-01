@@ -64,6 +64,10 @@ class ShowTeachVC: ShowVC {
         contentDataLbl.setTextTitle()
     }
     
+    override func refresh() {
+        refresh(TeachTable.self)
+    }
+    
     override func setData() {
 
         if (table != nil) {

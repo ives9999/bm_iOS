@@ -15,7 +15,7 @@ class TeamVC: MyTableVC {
     //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var managerBtn: UIButton!
         
-    var mysTable: TeamsTable?
+    //var mysTable: TeamsTable?
         
     override func viewDidLoad() {
         
@@ -84,26 +84,27 @@ class TeamVC: MyTableVC {
 //        super.getDataStart(t: TeamsTable.self, page: page, perPage: PERPAGE)
 //    }
     
-    override func genericTable() {
-        
-        do {
-            if (jsonData != nil) {
-                mysTable = try JSONDecoder().decode(TeamsTable.self, from: jsonData!)
-            } else {
-                warning("無法從伺服器取得正確的json資料，請洽管理員")
-            }
-        } catch {
-            msg = "解析JSON字串時，得到空值，請洽管理員"
-        }
-        if (mysTable != nil) {
-            tables = mysTable!
-            if (page == 1) {
-                lists1 = [TeamTable]()
-            }
-            lists1 += mysTable!.rows
-        }
-    }
-    
+//    override func genericTable() {
+//
+//        do {
+//            if (jsonData != nil) {
+//                mysTable = try JSONDecoder().decode(TeamsTable.self, from: jsonData!)
+//            } else {
+//                warning("無法從伺服器取得正確的json資料，請洽管理員")
+//            }
+//        } catch {
+//            msg = "解析JSON字串時，得到空值，請洽管理員"
+//        }
+//        if (mysTable != nil) {
+//            tables = mysTable!
+//            if (page == 1) {
+//                lists1 = [TeamTable]()
+//            }
+//
+//            lists1 += mysTable!.rows
+//        }
+//    }
+//
 //    override func getDataEnd(success: Bool) {
 //        if success {
 //

@@ -175,26 +175,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 //        }
 //    }
     
-    override func genericTable() {
-        
-        do {
-            if (jsonData != nil) {
-                mysTable = try JSONDecoder().decode(TeamsTable.self, from: jsonData!)
-            } else {
-                warning("無法從伺服器取得正確的json資料，請洽管理員")
-            }
-        } catch {
-            msg = "解析JSON字串時，得到空值，請洽管理員"
-        }
-        
-        if (mysTable != nil) {
-            tables = mysTable!
-            if (page == 1) {
-                lists1 = [TeamTable]()
-            }
-            lists1 += mysTable!.rows
-        }
-    }
+    
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -231,9 +212,6 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
         if (selectedTagIdx == 1) {
-//            if section == 0 {
-//                return 0
-//            }
             return heightForSection
         } else {
             return 0

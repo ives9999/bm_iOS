@@ -70,6 +70,10 @@ class ShowTeamVC: ShowVC {
         refresh(TeamTable.self)
     }
     
+    override func refresh() {
+        refresh(TeamTable.self)
+    }
+    
     override func initData() {
         
         if myTable == nil {

@@ -100,19 +100,10 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         contentView!.navigationDelegate = self
     }
     
-//    override func refresh() {
-//        if token != nil {
-//            Global.instance.addSpinner(superView: view)
-//            let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
-//            dataService.getOne1(params: params) { (success) in
-//                if (success) {
-//                    //let jsonData: Data = self.dataService.jsonData!
-//                    //self.parseJSON(jsonData)
-//                }
-//                Global.instance.removeSpinner(superView: self.view)
-//                self.endRefresh()
-//            }
-//        }
+//    override func beginRefresh() {
+//        refreshControl = UIRefreshControl()
+//        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
+//        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
 //    }
     
     func refresh<T: Table>(_ t: T.Type) {

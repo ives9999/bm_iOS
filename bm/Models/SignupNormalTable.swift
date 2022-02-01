@@ -21,6 +21,7 @@ class SignupNormalTable: Table {
     //var teamTable: TeamTable?
     var ableTable: AbleTable?
     var memberTable: MemberTable?
+    var dateTable: DateTable?
     
     enum CodingKeys: String, CodingKey {
         case member_id
@@ -32,6 +33,7 @@ class SignupNormalTable: Table {
         case member_token
         case ableTable
         case memberTable
+        case dateTable
     }
     
     required init(from decoder: Decoder) throws {
@@ -47,6 +49,7 @@ class SignupNormalTable: Table {
         member_token = try container.decodeIfPresent(String.self, forKey: .member_token) ?? ""
         ableTable = try container.decodeIfPresent(AbleTable.self, forKey: .ableTable) ?? nil
         memberTable = try container.decodeIfPresent(MemberTable.self, forKey: .memberTable) ?? nil
+        dateTable = try container.decodeIfPresent(DateTable.self, forKey: .dateTable) ?? nil
     }
     
     override func filterRow() {

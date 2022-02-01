@@ -51,6 +51,10 @@ class ShowProductVC: ShowVC {
         imageDataLbl.setTextTitle()
     }
     
+    override func refresh() {
+        refresh(ProductTable.self)
+    }
+    
     override func initContentView() {}
     
 //    override func refresh() {

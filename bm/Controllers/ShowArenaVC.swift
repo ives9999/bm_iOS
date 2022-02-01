@@ -44,6 +44,10 @@ class ShowArenaVC: ShowVC {
         contentDataLbl.setTextTitle()
     }
     
+    override func refresh() {
+        refresh(ArenaTable.self)
+    }
+    
     override func setData() {
         
         if table != nil {

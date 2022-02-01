@@ -108,8 +108,6 @@ class MyTableVC: BaseViewController {
         getDataStart(page: page, perPage: PERPAGE)
     }
     
-    func genericTable() {}
-    
     func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {
         Global.instance.addSpinner(superView: self.view)
         
@@ -155,6 +153,40 @@ class MyTableVC: BaseViewController {
             //self.page = self.page + 1 in CollectionView
         } else {
             warning("沒有取得回傳的json字串，請洽管理員")
+        }
+    }
+    
+    func genericTable() {
+        
+        var mysTable: TeamsTable?
+        do {
+            if (jsonData != nil) {
+                mysTable = try JSONDecoder().decode(TeamsTable.self, from: jsonData!)
+            } else {
+                warning("無法從伺服器取得正確的json資料，請洽管理員")
+            }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        
+        if (mysTable != nil) {
+            tables = mysTable!
+            if (page == 1) {
+                lists1 = [TeamTable]()
+            }
+            
+            var teamRows: [TeamTable] = mysTable!.rows
+            var signupRows: [TeamTable] = [TeamTable]()
+            var notSignupRows: [TeamTable] = [TeamTable]()
+            for teamRow in teamRows {
+                teamRow.filterRow()
+                teamRow.isTempPlay ? signupRows.append(teamRow) : notSignupRows.append(teamRow)
+            }
+            teamRows.removeAll()
+            teamRows.append(contentsOf: signupRows)
+            teamRows.append(contentsOf: notSignupRows)
+            
+            lists1 += teamRows
         }
     }
     
@@ -660,11 +692,7 @@ extension MyTableVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         let count: Int = 1
-//        if sections == nil {
-//            count = 1
-//        } else {
-//            count = sections!.count
-//        }
+
         return count
     }
     
@@ -675,11 +703,7 @@ extension MyTableVC: UITableViewDataSource {
         }
         
         let count: Int = 0
-//        if rows == nil {
-//            count = 0
-//        } else {
-//            count = rows![section].count
-//        }
+
         return count
     }
     

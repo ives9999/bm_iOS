@@ -54,6 +54,7 @@ class TeamTable: Table {
     var signupDate: SignupDateTable?
     
     var isSignup: Bool = false
+    var isTempPlay: Bool = false
     var signupNormalTables: [SignupNormalTable] = [SignupNormalTable]()
     var signupStandbyTables: [SignupStandbyTable] = [SignupStandbyTable]()
     
@@ -103,6 +104,7 @@ class TeamTable: Table {
         case arena
         case signupDate = "signup_date"
         case isSignup
+        case isTempPlay
         case signupNormalTables = "signup_normal_models"
         case signupStandbyTables = "signup_standby_models"
     }
@@ -139,6 +141,7 @@ class TeamTable: Table {
         arena = try container.decodeIfPresent(ArenaTable.self, forKey: .arena) ?? nil
         signupDate = try container.decodeIfPresent(SignupDateTable.self, forKey: .signupDate) ?? nil
         isSignup = try container.decodeIfPresent(Bool.self, forKey: .isSignup) ?? false
+        isTempPlay = try container.decodeIfPresent(Bool.self, forKey: .isTempPlay) ?? false
         signupNormalTables = try container.decodeIfPresent([SignupNormalTable].self, forKey: .signupNormalTables) ?? [SignupNormalTable]()
         signupStandbyTables = try container.decodeIfPresent([SignupStandbyTable].self, forKey: .signupStandbyTables) ?? [SignupStandbyTable]()
         //do {arena = try container.decode(ArenaTable.self, forKey: .arena)}catch{arena = nil}
@@ -156,11 +159,11 @@ class TeamTable: Table {
             play_end_show = play_end.noSec()
         }
         
-        if temp_status == "on" {
+        if isTempPlay {
             people_limit_show = "臨打：\(people_limit)位"
             temp_signup_count_show = "報名：\(temp_signup_count)位"
         } else {
-            people_limit_show = ""
+            people_limit_show = "目前未提供臨打"
             temp_signup_count_show = ""
         }
         
