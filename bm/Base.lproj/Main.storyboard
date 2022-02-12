@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="HG5-5B-KRS">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -121,6 +120,9 @@
                                     <constraint firstItem="CXW-ZU-dDh" firstAttribute="centerY" secondItem="k3Y-KA-sLj" secondAttribute="centerY" id="oMB-hP-asr"/>
                                 </constraints>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="XKJ-om-QLG">
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                            </imageView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UeS-dR-qEx" customClass="SuperScrollView" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                                 <subviews>
@@ -337,13 +339,17 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="k3Y-KA-sLj" secondAttribute="trailing" id="3k3-rI-hEK"/>
                             <constraint firstItem="ZDj-Uv-Vlc" firstAttribute="leading" secondItem="TJv-46-gGn" secondAttribute="leading" id="4NX-TR-eem"/>
+                            <constraint firstItem="XKJ-om-QLG" firstAttribute="top" secondItem="k3Y-KA-sLj" secondAttribute="bottom" id="88B-ms-dkB"/>
                             <constraint firstItem="TJv-46-gGn" firstAttribute="trailing" secondItem="UeS-dR-qEx" secondAttribute="trailing" id="Ccr-q7-RgY"/>
                             <constraint firstItem="k3Y-KA-sLj" firstAttribute="top" secondItem="TJv-46-gGn" secondAttribute="top" id="EeX-HG-pAN"/>
                             <constraint firstItem="UeS-dR-qEx" firstAttribute="top" secondItem="k3Y-KA-sLj" secondAttribute="bottom" id="JCB-A4-pIs"/>
                             <constraint firstItem="k3Y-KA-sLj" firstAttribute="leading" secondItem="TJv-46-gGn" secondAttribute="leading" id="JSi-Nq-y6a"/>
                             <constraint firstItem="TJv-46-gGn" firstAttribute="bottom" secondItem="ZDj-Uv-Vlc" secondAttribute="bottom" id="P3i-pA-CVD"/>
                             <constraint firstItem="ZDj-Uv-Vlc" firstAttribute="trailing" secondItem="TJv-46-gGn" secondAttribute="trailing" id="RbT-cW-OHu"/>
+                            <constraint firstItem="TJv-46-gGn" firstAttribute="bottom" secondItem="XKJ-om-QLG" secondAttribute="bottom" id="U2W-Jp-BQk"/>
+                            <constraint firstItem="XKJ-om-QLG" firstAttribute="trailing" secondItem="TJv-46-gGn" secondAttribute="trailing" id="grR-RY-8Yf"/>
                             <constraint firstItem="TJv-46-gGn" firstAttribute="bottom" secondItem="UeS-dR-qEx" secondAttribute="bottom" id="jaI-rN-QY5"/>
+                            <constraint firstItem="XKJ-om-QLG" firstAttribute="leading" secondItem="TJv-46-gGn" secondAttribute="leading" id="lBQ-U7-db1"/>
                             <constraint firstItem="UeS-dR-qEx" firstAttribute="leading" secondItem="TJv-46-gGn" secondAttribute="leading" id="tf2-4I-pHf"/>
                         </constraints>
                     </view>

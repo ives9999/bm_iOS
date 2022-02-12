@@ -102,7 +102,7 @@ class ShowCoachVC: ShowVC {
         
         super.viewDidLoad()
         
-        tableRowKeys = [MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY,COACH_SENIORITY_KEY,CREATED_AT_KEY,PV_KEY]
+        tableRowKeys = [MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY,"seniority_show",CREATED_AT_KEY,PV_KEY]
         tableRows = [
             MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
             LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"false"],
@@ -110,7 +110,7 @@ class ShowCoachVC: ShowVC {
             YOUTUBE_KEY:["icon":"youtube","title":"youtube","content":"","isPressed":"true"],
             WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],
             EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"],
-            COACH_SENIORITY_KEY:["icon":"seniority","title":"年資","content":""],
+            "seniority_show":["icon":"seniority","title":"年資","content":""],
             CREATED_AT_KEY:["icon":"date","title":"建立日期","content":""],
             PV_KEY:["icon":"pv","title":"瀏覽數","content":""]
         ]
@@ -191,7 +191,7 @@ class ShowCoachVC: ShowVC {
                     courseTableViewHeight.constant = 0
                     return 0
                 } else {
-                    print(coursesTable!.rows.count)
+                    //print(coursesTable!.rows.count)
                     courseTableViewHeight.constant = 100
                     return coursesTable!.rows.count
                 }
@@ -241,7 +241,7 @@ class ShowCoachVC: ShowVC {
                 let row = coursesTable!.rows[indexPath.row]
                 row.filterRow()
                 //row.printRow()
-                cell.forRow(row: row)
+                cell.forRow(row: row, isShowManager: false)
             }
             if indexPath.row == coursesTable!.rows.count - 1 {
                 UIView.animate(withDuration: 0, animations: {self.courseTableView.layoutIfNeeded()}) { (complete) in

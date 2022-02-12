@@ -330,10 +330,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 //cell.editText.becomeFirstResponder()
             }
         } else if (selectedTagIdx == 0 || selectedTagIdx == 2) {
-            if mysTable != nil {
-                let myTable = mysTable!.rows[indexPath.row]
-                toShowTeam(token: myTable.token)
-            }
+            //if mysTable != nil {
+                //let myTable = mysTable!.rows[indexPath.row]
+            let row = lists1[indexPath.row]
+            toShowTeam(token: row.token)
+            //}
         }
     }
     

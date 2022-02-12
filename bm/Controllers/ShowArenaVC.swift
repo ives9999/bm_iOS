@@ -20,13 +20,13 @@ class ShowArenaVC: ShowVC {
         dataService = ArenaService.instance
         
         super.viewDidLoad()
-        tableRowKeys = ["tel_show","address","fb","interval_show","block","bathroom_show","air_condition_show","parking_show","pv","created_at_show"]
+        tableRowKeys = ["tel_show","address","fb","interval_show","block_show","bathroom_show","air_condition_show","parking_show","pv","created_at_show"]
         tableRows = [
             "tel_show":["icon":"tel","title":"電話","content":""],
             "address":["icon":"map","title":"住址","content":""],
             "fb": ["icon":"fb","title":"FB","content":""],
             "interval_show":["icon":"clock","title":"時段","content":""],
-            "block":["icon":"block","title":"場地","content":""],
+            "block_show":["icon":"block","title":"場地","content":""],
             "bathroom_show":["icon":"bathroom","title":"浴室","content":""],
             "air_condition_show":["icon":"air_condition","title":"空調","content":""],
             "parking_show":["icon":"parking","title":"停車場","content":""],

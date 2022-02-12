@@ -19,7 +19,7 @@ class ManagerCourseCell: List2Cell {
         // Initialization code
     }
 
-    func forRow(row: CourseTable) {
+    func forRow(row: CourseTable, isShowManager: Bool = true) {
         
         editIcon.row = row
         deleteIcon.row = row
@@ -30,6 +30,8 @@ class ManagerCourseCell: List2Cell {
         if row.featured_path.count > 0 {
             listFeatured.downloaded(from: row.featured_path)
         }
+        
+        iconView.isHidden = !isShowManager
     }
     
     func forStoreRow(row: StoreTable) {

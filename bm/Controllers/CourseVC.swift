@@ -31,7 +31,7 @@ class CourseVC: MyTableVC {
 //            ["title":"開始時間","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"不限","segue":TO_SELECT_TIME,"sender":[String: Any](),"value":"","value_type":"String"],
 //            ["title":"結束時間","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":END_TIME_KEY,"show":"不限","segue":TO_SELECT_TIME,"sender":[String: Any](),"value":"","value_type":"String"]
 //        ]
-        Global.instance.setupTabbar(self)
+        //Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         
         oneSections = initSectionRows()

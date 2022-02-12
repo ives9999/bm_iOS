@@ -194,8 +194,8 @@ class DataService {
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
         AF.request(url, method: .post, parameters: filter, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
-            let str = String(decoding: response.data!, as: UTF8.self)
-            //print(str)
+//            let str = String(decoding: response.data!, as: UTF8.self)
+//            print(str)
             switch response.result {
             case .success(_):
                 if response.data != nil {

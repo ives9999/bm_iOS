@@ -34,7 +34,7 @@ class TeamVC: MyTableVC {
 //            ]
         
         oneSections = initSectionRows()
-        Global.instance.setupTabbar(self)
+        //Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
         super.viewDidLoad()
         
