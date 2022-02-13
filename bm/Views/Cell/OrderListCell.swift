@@ -77,10 +77,10 @@ class OrderListCell: SuperCell {
         noLbl.text = String(indexPath.row+1)
         
         orderAllProcessLbl.text = row.all_process_show
-        gatewayProcessLbl.text = row.gateway!.process_show
-        shippingProcessLbl.text = row.shipping!.process_show
-        gatewayMethodLbl.text = row.gateway!.method_show
-        shippingMethodLbl.text = row.shipping!.method_show
+        gatewayProcessLbl.text = row.gateway?.process_show
+        shippingProcessLbl.text = row.shipping?.process_show
+        gatewayMethodLbl.text = row.gateway?.method_show
+        shippingMethodLbl.text = row.shipping?.method_show
         
         let chevron = UIImage(named: "greater1")
         self.accessoryType = .disclosureIndicator
