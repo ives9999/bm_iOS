@@ -216,7 +216,11 @@ class MemberSignupListVC: MyTableVC, UIPickerViewDelegate, UIPickerViewDataSourc
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let row = lists1[indexPath.row] as? SignupNormalTable {
             if (row.ableTable != nil) {
-                toShowTeam(token: row.ableTable!.token)
+                if (able_type == "team") {
+                    toShowTeam(token: row.ableTable!.token)
+                } else if (able_type == "course") {
+                    toShowCourse(token: row.ableTable!.token)
+                }
             }
         }
     }

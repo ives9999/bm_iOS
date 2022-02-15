@@ -103,6 +103,8 @@ class AbleTable: Table {
     var weekdays_show: String = ""
     var interval_show: String = ""
     
+    var able_type: String = ""
+    
     enum CodingKeys: String, CodingKey {
         case arena_name
         case arena_id

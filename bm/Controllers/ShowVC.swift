@@ -118,19 +118,24 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
                     do {
                         self.table = try JSONDecoder().decode(t, from: jsonData)
                         if (self.table != nil) {
-                            self.table!.filterRow()
-                            
-                            if (self.table!.name.count > 0) {
-                                self.titleLbl.text = self.table!.name
+                            if (self.table!.id == 0) {
+                                //token錯誤，所以無法解析
+                                self.warning("token錯誤，所以無法解析")
                             } else {
-                                self.titleLbl.text = self.table!.title
+                                self.table!.filterRow()
+                                
+                                if (self.table!.name.count > 0) {
+                                    self.titleLbl.text = self.table!.name
+                                } else {
+                                    self.titleLbl.text = self.table!.title
+                                }
+                                
+                                self.initData()
+                                self.setData()
+                                self.setFeatured()
+                                self.setContent()
+                                self.setLike()
                             }
-                            
-                            self.initData()
-                            self.setData()
-                            self.setFeatured()
-                            self.setContent()
-                            self.setLike()
                         }
                     } catch {
                         self.warning(error.localizedDescription)

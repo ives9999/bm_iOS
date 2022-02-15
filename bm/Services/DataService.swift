@@ -258,8 +258,8 @@ class DataService {
         if url != nil {
             AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
                 
-//                let str = String(decoding: response.data!, as: UTF8.self)
-//                print(str)
+                let str = String(decoding: response.data!, as: UTF8.self)
+                print(str)
                 switch response.result {
                 //case .success(let value):
                 case .success(_):
