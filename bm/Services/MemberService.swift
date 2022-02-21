@@ -463,10 +463,10 @@ class MemberService: DataService {
             "page": String(page),
             "perpage": String(perPage)
         ]
-        print(body)
+        //print(body)
         
         let url: String = URL_MEMBER_LIKELIST
-        print(url)
+        //print(url)
         
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             

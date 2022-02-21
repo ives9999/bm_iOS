@@ -206,7 +206,6 @@ class EditTeamVC: EditVC {
         row = OneRow(title: "FB", value: myTable!.fb, show: myTable!.fb, key: FB_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "請輸入FB網址", isRequired: false)
         rows.append(row)
         
-        
         section = makeSectionRow(title: "聯絡資料", key: "course", rows: rows)
         oneSections.append(section)
         

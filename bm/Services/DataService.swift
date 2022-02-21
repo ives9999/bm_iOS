@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import AlamofireImage
 import SwiftyJSON
+import OneSignal
 
 struct FooRequestParameters : Codable {
     let paramName1: Int
@@ -247,19 +248,19 @@ class DataService {
             body.merge(["member_token":Member.instance.token])
         }
         
-        print(body)
+        //print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        print(url)
+        //print(url)
         
         if url != nil {
             AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
                 
-                let str = String(decoding: response.data!, as: UTF8.self)
-                print(str)
+//                let str = String(decoding: response.data!, as: UTF8.self)
+//                print(str)
                 switch response.result {
                 //case .success(let value):
                 case .success(_):
@@ -287,6 +288,19 @@ class DataService {
     }
     
     func getSignupDateURL(token: String)-> String { return ""}
+
+    func getPlayerID() -> String {
+        
+        var playerID: String = ""
+        let deviceState = OneSignal.getDeviceState()
+        
+        if let temp: String = deviceState?.userId {
+            playerID = temp
+        }
+        
+        return playerID
+    }
+    
     func getSignupListURL(token: String? = nil)-> String { return ""}
     func getSignupURL(token: String)-> String { return ""}
     
@@ -445,13 +459,16 @@ class DataService {
     
     func signup(token: String, member_token: String, date_token: String, course_deadline: String? = nil, completion: @escaping CompletionHandler) {
         let url = getSignupURL(token: token)
-        //print(url)
-        var body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "able_date_token": date_token]
+        print(url)
+        
+        let player_id: String = getPlayerID()
+        //print(player_id)
+        var body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "able_date_token": date_token, "player_id": player_id]
         if course_deadline != nil {
             body["cancel_deadline"] = course_deadline
         }
         
-        //print(body)
+        print(body)
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
             //let str = String(decoding: response.data!, as: UTF8.self)

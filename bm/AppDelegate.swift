@@ -129,6 +129,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Stage)
         ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Prod)
         
+        if #available(iOS 13.0, *) {
+            self.window?.overrideUserInterfaceStyle = .light
+        }
+        
         //Member.instance.justGetMemberOne = false
         return true
     }
