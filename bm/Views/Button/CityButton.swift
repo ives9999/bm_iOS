@@ -32,7 +32,10 @@ class CityButton: SuperButton {
     }
     
     override func setTitle(_ title: String) {
-        setTitle(title, for: .normal)
+        
+        let newTitle: String = title.truncate(length: 5)
+        
+        setTitle(newTitle, for: .normal)
     }
 
 }
