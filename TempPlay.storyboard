@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -250,12 +250,10 @@
                                     <constraint firstItem="Nd2-FW-fzb" firstAttribute="centerX" secondItem="mB9-AG-XQD" secondAttribute="centerX" id="y9G-es-oVc"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="DpE-TG-fU1">
-                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qE9-4T-nY3">
                                 <rect key="frame" x="0.0" y="188" width="414" height="624"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RQt-D8-szo" userLabel="TagView">
                                 <rect key="frame" x="0.0" y="108" width="414" height="80"/>
@@ -311,7 +309,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Ut6-mE-UVp" firstAttribute="centerY" secondItem="RQt-D8-szo" secondAttribute="centerY" id="4aL-cA-HEV"/>
                                     <constraint firstAttribute="height" constant="80" id="ILu-JU-m93"/>
@@ -348,23 +346,19 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="MId-N4-3lE"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="DpE-TG-fU1" secondAttribute="bottom" id="2ab-Z5-TTe"/>
                             <constraint firstItem="qE9-4T-nY3" firstAttribute="top" secondItem="RQt-D8-szo" secondAttribute="bottom" id="4uR-el-DDZ"/>
                             <constraint firstAttribute="trailing" secondItem="mB9-AG-XQD" secondAttribute="trailing" id="ASM-ZO-0E1"/>
                             <constraint firstItem="RQt-D8-szo" firstAttribute="top" secondItem="mB9-AG-XQD" secondAttribute="bottom" id="Aq6-KW-eBJ"/>
                             <constraint firstItem="do6-ZF-uhG" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="CkF-Pj-ejo"/>
                             <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="do6-ZF-uhG" secondAttribute="bottom" id="LaI-mx-EAz"/>
                             <constraint firstItem="qE9-4T-nY3" firstAttribute="trailing" secondItem="MId-N4-3lE" secondAttribute="trailing" id="T04-he-iac"/>
-                            <constraint firstItem="DpE-TG-fU1" firstAttribute="top" secondItem="mB9-AG-XQD" secondAttribute="bottom" id="XU1-uN-x7r"/>
                             <constraint firstItem="qE9-4T-nY3" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="Xao-qN-A0B"/>
                             <constraint firstItem="MId-N4-3lE" firstAttribute="trailing" secondItem="RQt-D8-szo" secondAttribute="trailing" id="YJe-vb-eSp"/>
-                            <constraint firstItem="DpE-TG-fU1" firstAttribute="trailing" secondItem="MId-N4-3lE" secondAttribute="trailing" id="dSJ-Ts-xhF"/>
                             <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="qE9-4T-nY3" secondAttribute="bottom" constant="50" id="eT5-6v-l8u"/>
                             <constraint firstItem="RQt-D8-szo" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="jmq-hU-1to"/>
                             <constraint firstItem="do6-ZF-uhG" firstAttribute="trailing" secondItem="MId-N4-3lE" secondAttribute="trailing" id="nr3-Et-rYN"/>
-                            <constraint firstItem="DpE-TG-fU1" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="pzD-KP-ssu"/>
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="wIa-be-ZTa"/>
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="top" secondItem="MId-N4-3lE" secondAttribute="top" id="xYF-jR-S3y"/>
                         </constraints>

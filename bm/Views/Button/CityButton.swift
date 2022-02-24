@@ -14,7 +14,7 @@ class CityButton: SuperButton {
         super.init(frame: .zero)
     }
     
-    required override init(frame: CGRect) {
+    required init(frame: CGRect) {
         super.init(frame: frame)
     }
     
@@ -26,7 +26,9 @@ class CityButton: SuperButton {
     override func commonInit() {
         super.commonInit()
         setColor(textColor: UIColor.black, bkColor: UIColor(CITY_BUTTON))
-        contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
+//        var configuration = Configuration.filled()
+//        configuration.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 12, bottom: 4, trailing: 12)
+        //contentEdgeInsets = UIEdgeInsets(top: 4, left: 8, bottom: 4, right: 8)
         contentHorizontalAlignment = UIControl.ContentHorizontalAlignment.center
         contentVerticalAlignment = UIControl.ContentVerticalAlignment.center
     }
