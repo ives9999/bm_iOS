@@ -40,11 +40,18 @@ class SuperLabel: UILabel {
     
     func setTextTitle() {
         self.font = UIFont(name: FONT_BOLD_NAME, size: FONT_SIZE_TITLE)
+        self.textColor = UIColor(MY_GREEN)
+    }
+    
+    func setTextSectionTitle() {
+        self.font = UIFont(name: FONT_BOLD_NAME, size: FONT_SIZE_TITLE)
+        self.textColor = UIColor(MY_WHITE)
+        self.textAlignment = NSTextAlignment.center
     }
     
     func setTextGeneral() {
         self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
-        self.textColor = UIColor(TEXTGRAY)
+        self.textColor = UIColor(MY_WHITE)
     }
     
     func highlight() {

@@ -52,6 +52,8 @@ class List2Cell: UITableViewCell {
             let likeImg = UIImage(named: "like")
             likeIcon.setBackgroundImage(likeImg, for: .normal)
         }
+        
+        listFeatured.layer.cornerRadius = 7.0
     }
     
     func _updateViews(_ row: Table) {

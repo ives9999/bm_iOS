@@ -11,18 +11,23 @@ import WebKit
 
 class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate,  WKNavigationDelegate {
     
-    @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var titleLbl: SuperLabel!
     
     @IBOutlet weak var mainDataLbl: SuperLabel!
     @IBOutlet weak var contentDataLbl: SuperLabel!
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContainerView: UIView!
+    @IBOutlet weak var bottomView: UIStackView!
+    
+    @IBOutlet weak var featured: UIImageView!
+    @IBOutlet weak var dataContainerView: UIView!
     
     @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewConstraintHeight: NSLayoutConstraint!
     
-    @IBOutlet weak var featured: UIImageView!
+    @IBOutlet weak var featuredConstraintHeight: NSLayoutConstraint!
+    @IBOutlet weak var dataConstraintHeight: NSLayoutConstraint!
     
     @IBOutlet weak var tableView: SuperTableView!
     
@@ -41,7 +46,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     }()
     var contentViewConstraintHeight: NSLayoutConstraint?
     
-    var cellHeight: CGFloat = 40
+    var scrollContainerHeight: CGFloat = 0
     
     var tableRowKeys:[String] = [String]()
     var tableRows: [String: [String:String]] = [String: [String: String]]()
@@ -67,6 +72,13 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
             scrollView.addSubview(refreshControl)
         }
         
+        if (bottomView != nil) {
+            bottomView.backgroundColor = UIColor(BOTTOM_VIEW_BACKGROUND)
+        }
+        
+        dataContainerView.layer.cornerRadius = 26.0
+        dataContainerView.clipsToBounds = true
+        
         //refresh()
     }
     
@@ -81,8 +93,8 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         tableView.delegate = self
         
         tableView.rowHeight = UITableView.automaticDimension
-        tableView.estimatedRowHeight = 600
-        tableViewConstraintHeight.constant = 1000
+        tableView.estimatedRowHeight = 40
+        tableViewConstraintHeight.constant = 600
     }
     
     func initContentView() {
@@ -123,18 +135,11 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
                                 self.warning("token錯誤，所以無法解析")
                             } else {
                                 self.table!.filterRow()
-                                
-                                if (self.table!.name.count > 0) {
-                                    self.titleLbl.text = self.table!.name
-                                } else {
-                                    self.titleLbl.text = self.table!.title
-                                }
-                                
+                                self.setFeatured()
                                 self.initData()
                                 self.setData()
-                                self.setFeatured()
                                 self.setContent()
-                                self.setLike()
+//                                self.setLike()
                             }
                         }
                     } catch {
@@ -145,12 +150,25 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         }
     }
     
-    func setData() {}
+    func setData() {
+        if (self.table!.name.count > 0) {
+            self.titleLbl.text = self.table!.name
+        } else {
+            self.titleLbl.text = self.table!.title
+        }
+        self.titleLbl.setTextTitle()
+    }
     
     func setFeatured() {
+        
+        let screen_width: CGFloat = UIScreen.main.bounds.width
 
         if (table != nil && table!.featured_path.count > 0) {
+            let featured_h: CGFloat = featured.heightForUrl(url: table!.featured_path, width: screen_width)
+            featuredConstraintHeight.constant = featured_h
             featured.downloaded(from: table!.featured_path)
+            scrollContainerHeight += featuredConstraintHeight.constant
+            //print("featured:\(scrollContainerHeight)")
         } else {
             warning("沒有取得內容資料值，請稍後再試或洽管理員")
         }
@@ -223,8 +241,14 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         self.contentView!.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
             if complete != nil {
                 self.contentView!.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
-                    self.contentViewConstraintHeight!.constant = height as! CGFloat
-                    self.changeScrollViewContentSize()
+                    
+                    if let tmp = height as? CGFloat {
+                        self.contentViewConstraintHeight!.constant = tmp
+                        self.dataConstraintHeight.constant += self.contentViewConstraintHeight?.constant ?? 0
+                        self.scrollContainerHeight += self.dataConstraintHeight.constant
+                        self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollContainerHeight)
+                    }
+                    //self.changeScrollViewContentSize()
                 })
             }
             

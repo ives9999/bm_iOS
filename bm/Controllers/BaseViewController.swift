@@ -97,6 +97,109 @@ class BaseViewController: UIViewController, List2CellDelegate {
     //for RadioCell delegate
     //func radioDidChange(sectionKey: String, rowKey: String, checked: Bool){}
     
+    
+    func __alert(showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) -> SCLAlertView {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: showCloseButton
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        alert.addButton(buttonTitle, action: buttonAction)
+        return alert
+    }
+    
+    func __alert()-> SCLAlertView {
+        
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alert = SCLAlertView(appearance: appearance)
+        
+        alert.addButton("關閉", backgroundColor: UIColor(MY_GRAY), textColor: UIColor(MY_WHITE)) {
+            alert.hideView()
+        }
+        
+        return alert
+    }
+    
+    func _getPlayerID() -> String {
+        
+        var playerID: String = ""
+        let deviceState = OneSignal.getDeviceState()
+        //let status: OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
+        
+        if let temp: String = deviceState?.userId {
+            playerID = temp
+        }
+        //print(playerID)
+        //if userID != nil {
+        //let user = PFUser.cu
+        //}
+        return playerID
+    }
+    
+    func _warning(title: String, msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        let alert = __alert(showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
+        alert.showWarning(title, subTitle: msg)
+    }
+    
+    func _warning(title: String, msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        let alert = __alert(showCloseButton: true, buttonTitle: buttonTitle, buttonAction: buttonAction)
+        alert.showWarning(title, subTitle: msg, closeButtonTitle: closeButtonTitle)
+    }
+    
+    func _warning(msg: String) {
+        let alert = __alert()
+        alert.showWarning("警告", subTitle: msg)
+    }
+    
+    func addAddBtn() {
+        
+        topView.addSubview(addBtn)
+        addBtn.setImage(UIImage(named: "add"), for: .normal)
+        
+        var trailing: CGFloat = -50
+        if (shoppingCartBtn.visibility == .invisible) {
+            //print(searchBtn.visibility)
+            trailing = -14
+        }
+        
+        addBtn.translatesAutoresizingMaskIntoConstraints = false
+        addBtn.widthAnchor.constraint(equalToConstant: 45).isActive = true
+        addBtn.heightAnchor.constraint(equalToConstant: 45).isActive = true
+        addBtn.centerYAnchor.constraint(equalTo: searchBtn.superview!.centerYAnchor).isActive = true
+        addBtn.trailingAnchor.constraint(equalTo: searchBtn.superview!.trailingAnchor, constant: trailing).isActive = true
+        
+        addBtn.addTarget(self, action: #selector(addPressed), for: .touchUpInside)
+    }
+    
+    func addBlackList(memberName: String, memberToken: String, teamToken: String) {
+        warning(msg:"是否真的要將球友"+memberName+"設為黑名單\n之後可以解除", closeButtonTitle: "取消", buttonTitle: "確定", buttonAction: {
+            self.reasonBox(memberToken: memberToken, teamToken: teamToken)
+        })
+    }
+    
+    @objc func addPressed() {}
+    
+    func addShoppingCartBtn() {
+        
+        topView.addSubview(shoppingCartBtn)
+        shoppingCartBtn.setImage(UIImage(named: "cart1"), for: .normal)
+        
+        var trailing: CGFloat = -50
+        if (searchBtn.visibility == .invisible) {
+            //print(searchBtn.visibility)
+            trailing = -14
+        }
+        
+        shoppingCartBtn.translatesAutoresizingMaskIntoConstraints = false
+        shoppingCartBtn.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        shoppingCartBtn.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        shoppingCartBtn.centerYAnchor.constraint(equalTo: shoppingCartBtn.superview!.centerYAnchor).isActive = true
+        shoppingCartBtn.trailingAnchor.constraint(equalTo: shoppingCartBtn.superview!.trailingAnchor, constant: trailing).isActive = true
+        
+        shoppingCartBtn.addTarget(self, action: #selector(cartPressed), for: .touchUpInside)
+    }
+    
     func cellCity(row: Table) {
         let key: String = CITY_KEY
         let city_id: Int = row.city_id
@@ -272,25 +375,22 @@ class BaseViewController: UIViewController, List2CellDelegate {
         }
     }
     
-    func addShoppingCartBtn() {
-        
-        topView.addSubview(shoppingCartBtn)
-        shoppingCartBtn.setImage(UIImage(named: "cart1"), for: .normal)
-        
-        var trailing: CGFloat = -50
-        if (searchBtn.visibility == .invisible) {
-            //print(searchBtn.visibility)
-            trailing = -14
-        }
-        
-        shoppingCartBtn.translatesAutoresizingMaskIntoConstraints = false
-        shoppingCartBtn.widthAnchor.constraint(equalToConstant: 36).isActive = true
-        shoppingCartBtn.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        shoppingCartBtn.centerYAnchor.constraint(equalTo: shoppingCartBtn.superview!.centerYAnchor).isActive = true
-        shoppingCartBtn.trailingAnchor.constraint(equalTo: shoppingCartBtn.superview!.trailingAnchor, constant: trailing).isActive = true
-        
-        shoppingCartBtn.addTarget(self, action: #selector(cartPressed), for: .touchUpInside)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //setNeedsStatusBarAppearanceUpdate()
+        let statusBarView = UIView()
+        view.addSubview(statusBarView)
+        statusBarView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            statusBarView.topAnchor.constraint(equalTo: view.topAnchor),
+            statusBarView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            statusBarView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            statusBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
+        statusBarView.backgroundColor = UIColor(MY_GREEN)
     }
+    
+    //override var preferredStatusBarStyle: UIStatusBarStyle { UIColor.green }
     
     @objc func cartPressed() {
         toMemberCartList()
@@ -314,28 +414,6 @@ class BaseViewController: UIViewController, List2CellDelegate {
     @objc func searchPressed() {
         searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, oneSections: oneSections)
     }
-    
-    func addAddBtn() {
-        
-        topView.addSubview(addBtn)
-        addBtn.setImage(UIImage(named: "add"), for: .normal)
-        
-        var trailing: CGFloat = -50
-        if (shoppingCartBtn.visibility == .invisible) {
-            //print(searchBtn.visibility)
-            trailing = -14
-        }
-        
-        addBtn.translatesAutoresizingMaskIntoConstraints = false
-        addBtn.widthAnchor.constraint(equalToConstant: 45).isActive = true
-        addBtn.heightAnchor.constraint(equalToConstant: 45).isActive = true
-        addBtn.centerYAnchor.constraint(equalTo: searchBtn.superview!.centerYAnchor).isActive = true
-        addBtn.trailingAnchor.constraint(equalTo: searchBtn.superview!.trailingAnchor, constant: trailing).isActive = true
-        
-        addBtn.addTarget(self, action: #selector(addPressed), for: .touchUpInside)
-    }
-    
-    @objc func addPressed() {}
     
     func cellMoreClick(key: String, row: OneRow, delegate: BaseViewController) {
         
@@ -763,21 +841,6 @@ class BaseViewController: UIViewController, List2CellDelegate {
 //            }
 //        })
 //    }
-    func _getPlayerID() -> String {
-        
-        var playerID: String = ""
-        let deviceState = OneSignal.getDeviceState()
-        //let status: OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
-        
-        if let temp: String = deviceState?.userId {
-            playerID = temp
-        }
-        //print(playerID)
-        //if userID != nil {
-        //let user = PFUser.cu
-        //}
-        return playerID
-    }
     
     //直接在LoginVC執行
 //    func _loginFB() {
@@ -821,11 +884,6 @@ class BaseViewController: UIViewController, List2CellDelegate {
 //        }
 //    }
     
-    func addBlackList(memberName: String, memberToken: String, teamToken: String) {
-        warning(msg:"是否真的要將球友"+memberName+"設為黑名單\n之後可以解除", closeButtonTitle: "取消", buttonTitle: "確定", buttonAction: {
-            self.reasonBox(memberToken: memberToken, teamToken: teamToken)
-        })
-    }
     func reasonBox(memberToken: String, teamToken: String) {
         let alert = SCLAlertView()
         let txt = alert.addTextField()
@@ -1207,44 +1265,6 @@ class BaseViewController: UIViewController, List2CellDelegate {
         let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
         self.present(alert, animated: true)
-    }
-    
-    func __alert(showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) -> SCLAlertView {
-        let appearance = SCLAlertView.SCLAppearance(
-            showCloseButton: showCloseButton
-        )
-        let alert = SCLAlertView(appearance: appearance)
-        alert.addButton(buttonTitle, action: buttonAction)
-        return alert
-    }
-    
-    func __alert()-> SCLAlertView {
-        
-        let appearance = SCLAlertView.SCLAppearance(
-            showCloseButton: false
-        )
-        let alert = SCLAlertView(appearance: appearance)
-        
-        alert.addButton("關閉", backgroundColor: UIColor(MY_GRAY), textColor: UIColor(MY_WHITE)) {
-            alert.hideView()
-        }
-        
-        return alert
-    }
-    
-    func _warning(title: String, msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
-        let alert = __alert(showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
-        alert.showWarning(title, subTitle: msg)
-    }
-    
-    func _warning(title: String, msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
-        let alert = __alert(showCloseButton: true, buttonTitle: buttonTitle, buttonAction: buttonAction)
-        alert.showWarning(title, subTitle: msg, closeButtonTitle: closeButtonTitle)
-    }
-    
-    func _warning(msg: String) {
-        let alert = __alert()
-        alert.showWarning("警告", subTitle: msg)
     }
     
     func warning(_ msg: String) {

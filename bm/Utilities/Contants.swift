@@ -93,9 +93,9 @@ let URL_UPDATE = "\(URL_HOME)%@/update"
 
 // Font
 let FONT_NAME: String = "HelveticaNeue"
-let FONT_BOLD_NAME: String = "HelveticaNeue-Bold"
-let FONT_SIZE_TITLE: CGFloat = 24
-let FONT_SIZE_GENERAL: CGFloat = 19
+let FONT_BOLD_NAME: String = "Arial-BoldMT"
+let FONT_SIZE_TITLE: CGFloat = 21
+let FONT_SIZE_GENERAL: CGFloat = 13
 let FONT_SIZE_TABBAR: CGFloat = 14
 
 // List pages
@@ -196,6 +196,7 @@ let TO_VALIDATE: String = "toValidate"
 let TO_YOUTUBE_PLAYER: String = "toYoutubePlayer"
 
 // color
+let BOTTOM_VIEW_BACKGROUND = "#555555"
 let CELL_SELECTED = "#363636"
 let MY_BLACK = "#000000"
 let MY_GREEN = "#a6d903"
@@ -206,7 +207,7 @@ let MY_WEIGHT_RED = "#FF3030"
 let MY_GRAY = "#717171"
 let MY_WHITE = "#FFFFFF"
 let LIKE_BUTTON = "#007AC3"
-let CITY_BUTTON = "#fceb4c"
+let CITY_BUTTON = "#555555"
 let CLEAR_BUTTON = "#999999"
 let STATUS_GREEN = "#658501"
 let TABBAR_BACKGROUND = "#0d0d0d"

@@ -56,7 +56,11 @@ class MoreVC: MyTableVC {
         let r5: MemberRow = MemberRow(title: "推播訊息", icon: "push", segue: TO_PN)
         rows.append(r5)
         
-        let r6: MemberRow = MemberRow(title: "版本", icon: "version")
+        let nsObject: Any? = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
+        
+        //Then just cast the object as a String, but be careful, you may want to double check for nil
+        let version = nsObject as! String
+        let r6: MemberRow = MemberRow(title: "版本", icon: "version", show: version)
         rows.append(r6)
         
         return rows
@@ -82,18 +86,18 @@ class MoreVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        if (indexPath.row == moreRows.count-1) {
-            //First get the nsObject by defining as an optional anyObject
-            let nsObject: Any? = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
-            
-            //Then just cast the object as a String, but be careful, you may want to double check for nil
-            let version = nsObject as! String
-            let appearance = SCLAlertView.SCLAppearance(
-                showCloseButton: true
-            )
-            let alert = SCLAlertView(appearance: appearance)
-            alert.showInfo(version, subTitle: "")
-        } else {
+//        if (indexPath.row == moreRows.count-1) {
+//            //First get the nsObject by defining as an optional anyObject
+//            let nsObject: Any? = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
+//
+//            //Then just cast the object as a String, but be careful, you may want to double check for nil
+//            let version = nsObject as! String
+//            let appearance = SCLAlertView.SCLAppearance(
+//                showCloseButton: true
+//            )
+//            let alert = SCLAlertView(appearance: appearance)
+//            alert.showInfo(version, subTitle: "")
+//        } else {
             let row: MemberRow = moreRows[indexPath.row]
             let segue = row.segue
             if segue == TO_PRODUCT {
@@ -110,6 +114,6 @@ class MoreVC: MyTableVC {
             } else {
                 //performSegue(withIdentifier: segue, sender: row["sender"])
             }
-        }
+        //}
     }
 }

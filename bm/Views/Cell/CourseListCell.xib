@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,51 +17,51 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="B0M-vi-qBv">
-                        <rect key="frame" x="8" y="16" width="90" height="90"/>
+                        <rect key="frame" x="8" y="20" width="90" height="90"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="90" id="WCy-8q-87M"/>
                             <constraint firstAttribute="height" constant="90" id="wNh-Px-4gw"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="隊名" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTk-GY-GT2" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="122" y="8" width="35" height="21"/>
+                        <rect key="frame" x="122" y="24" width="35" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ej3-df-e93" customClass="CityButton" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="122" y="39" width="31" height="30"/>
+                        <rect key="frame" x="122" y="55" width="31" height="30"/>
                         <state key="normal" title="縣市"/>
                         <connections>
                             <action selector="cityBtnPressedWithSender:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="9il-zf-uHj"/>
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="星期幾" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ka9-Tn-K1B" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="122" y="79" width="52" height="21"/>
+                        <rect key="frame" x="122" y="95" width="52" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時段" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8i0-Nr-dEA" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="186" y="79" width="35" height="21"/>
+                        <rect key="frame" x="186" y="95" width="35" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="人數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dm1-Ne-oAd" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="122" y="110" width="35" height="21"/>
+                        <rect key="frame" x="122" y="126" width="35" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="報名人數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JWR-S3-v17" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="169" y="110" width="70" height="21"/>
+                        <rect key="frame" x="189" y="126" width="70" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tXk-uA-8gX" userLabel="IconView">
-                        <rect key="frame" x="0.0" y="141" width="558" height="36"/>
+                        <rect key="frame" x="0.0" y="157" width="558" height="36"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snr-gS-hGQ" customClass="SuperButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="68" y="0.0" width="36" height="36"/>
@@ -110,7 +109,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="價格" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9dj-Xn-fhB" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="165" y="45" width="35" height="21"/>
+                        <rect key="frame" x="165" y="61" width="35" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -121,7 +120,7 @@
                     <constraint firstItem="qTk-GY-GT2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="16S-Hg-Aet"/>
                     <constraint firstItem="Dm1-Ne-oAd" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="3V7-si-JeH"/>
                     <constraint firstItem="Ka9-Tn-K1B" firstAttribute="top" secondItem="ej3-df-e93" secondAttribute="bottom" constant="10" id="4qw-JV-3Q2"/>
-                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tXk-uA-8gX" secondAttribute="bottom" constant="8" id="Dmr-eW-DGN"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="tXk-uA-8gX" secondAttribute="bottom" constant="24" id="Dmr-eW-DGN"/>
                     <constraint firstAttribute="trailing" secondItem="tXk-uA-8gX" secondAttribute="trailing" id="Gig-EA-uV9"/>
                     <constraint firstItem="ej3-df-e93" firstAttribute="top" secondItem="qTk-GY-GT2" secondAttribute="bottom" constant="10" id="N1U-R2-LwE"/>
                     <constraint firstItem="8i0-Nr-dEA" firstAttribute="leading" secondItem="Ka9-Tn-K1B" secondAttribute="trailing" constant="12" id="P6L-aD-Iot"/>
@@ -130,13 +129,13 @@
                     <constraint firstItem="Ka9-Tn-K1B" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="TNQ-lg-Q93"/>
                     <constraint firstItem="ej3-df-e93" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="122" id="Wux-7Z-iNj"/>
                     <constraint firstItem="JWR-S3-v17" firstAttribute="top" secondItem="Ka9-Tn-K1B" secondAttribute="bottom" constant="10" id="d7W-Vs-9l3"/>
-                    <constraint firstItem="B0M-vi-qBv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="fMz-pj-ECk"/>
+                    <constraint firstItem="B0M-vi-qBv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="20" id="fMz-pj-ECk"/>
                     <constraint firstItem="Dm1-Ne-oAd" firstAttribute="top" secondItem="Ka9-Tn-K1B" secondAttribute="bottom" constant="10" id="gMt-yq-i7k"/>
                     <constraint firstItem="9dj-Xn-fhB" firstAttribute="top" secondItem="qTk-GY-GT2" secondAttribute="bottom" constant="16" id="hS6-RH-5Fy"/>
                     <constraint firstItem="tXk-uA-8gX" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="iOl-Fs-drt"/>
                     <constraint firstItem="B0M-vi-qBv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="mN8-LA-u1i"/>
-                    <constraint firstItem="JWR-S3-v17" firstAttribute="leading" secondItem="Dm1-Ne-oAd" secondAttribute="trailing" constant="12" id="sqD-xo-qoe"/>
-                    <constraint firstItem="qTk-GY-GT2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="uOq-Df-6xs"/>
+                    <constraint firstItem="JWR-S3-v17" firstAttribute="leading" secondItem="Dm1-Ne-oAd" secondAttribute="trailing" constant="32" id="sqD-xo-qoe"/>
+                    <constraint firstItem="qTk-GY-GT2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="uOq-Df-6xs"/>
                     <constraint firstItem="8i0-Nr-dEA" firstAttribute="top" secondItem="ej3-df-e93" secondAttribute="bottom" constant="10" id="ukM-6e-ifN"/>
                 </constraints>
             </tableViewCellContentView>
