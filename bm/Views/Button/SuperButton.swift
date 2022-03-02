@@ -36,9 +36,9 @@ class SuperButton: UIButton {
     func commonInit(){
         self.setTitleColor(UIColor.white, for: UIControl.State.normal)
         self.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
-        self.alignH = .left
+        self.alignH = .center
         self.alignV = .center
-        self.cornerRadius = 4
+        self.cornerRadius = MY_BUTTON_CORNER
         self.padding(top: 3, left: 8, bottom: 3, right: 8)
     }
     

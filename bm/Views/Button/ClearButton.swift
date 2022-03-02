@@ -26,10 +26,11 @@ class ClearButton: SuperButton {
     }
     
     override func commonInit() {
+        super.commonInit()
         setTitle("清除", for: .normal)
         setColor(textColor: UIColor.white, bkColor: UIColor(CLEAR_BUTTON))
-        self.cornerRadius = 12
-        contentEdgeInsets = UIEdgeInsets(top: 8, left: 36, bottom: 8, right: 36)
+        //self.cornerRadius = MY_BUTTON_CORNER
+        //contentEdgeInsets = UIEdgeInsets(top: 8, left: 36, bottom: 8, right: 36)
     }
 
 }

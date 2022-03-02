@@ -75,28 +75,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     
     var able_type: String = "coach"
     
-    //TimeSelectDelegate
-    //func setTimeData(res: [String], type: SELECT_TIME_TYPE, indexPath: IndexPath?){}
-    //ArenaSelectDelegate
-    //func setArenaData(res: [ArenaTable]){}
-    //DegreeSelectDelegate
-    //func setDegreeData(res: [DEGREE]){}
-    //EditCellDeldgate
-    //func setTextField(key: String, value: String) {}
-    //func setSwitch(indexPath: IndexPath, value: Bool) {}
-    //func clear(indexPath: IndexPath) {}
-    //ContentEditDelegate
-    //func setContent(key: String, content: String) {}
-    
-    //for tag delegate
-    //func setTag(sectionKey: String, rowKey: String, attribute: String, selected: Bool){}
-    //for NumberCell delegate
-    //func stepperValueChanged(sectionKey: String, rowKey: String, number: Int){}
-    //for TextFieldCell delegate
-    //func textFieldDidChange(sectionIdx: Int, rowIdx: Int, str: String){}
-    //for RadioCell delegate
-    //func radioDidChange(sectionKey: String, rowKey: String, checked: Bool){}
-    
+    var screen_width: CGFloat = 0
     
     func __alert(showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) -> SCLAlertView {
         let appearance = SCLAlertView.SCLAppearance(
@@ -347,6 +326,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
         workAreaHeight = view.bounds.height - titleBarHeight
         searchBtn.visibility = .invisible
         addBtn.visibility = .invisible
+        
+        screen_width = UIScreen.main.bounds.width
         
         //panelCancelBtn.setTitle("取消")
         //layerDeleteBtn.setTitle("刪除")

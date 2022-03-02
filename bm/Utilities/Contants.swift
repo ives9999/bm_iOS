@@ -206,7 +206,7 @@ let MY_LIGHT_RED = "#FF4081"
 let MY_WEIGHT_RED = "#FF3030"
 let MY_GRAY = "#717171"
 let MY_WHITE = "#FFFFFF"
-let LIKE_BUTTON = "#007AC3"
+let LIKE_BUTTON = "#a6d903"
 let CITY_BUTTON = "#555555"
 let CLEAR_BUTTON = "#999999"
 let STATUS_GREEN = "#658501"
@@ -447,6 +447,8 @@ let WEEKDAYS_KEY: String = "weekdays"
 let WEIGHT_KEY: String = "weight"
 let YOUTUBE_KEY = "youtube"
 let ZIP_KEY = "zip"
+
+let MY_BUTTON_CORNER: CGFloat = 6.0
 
 // Course key
 let CYCLE_UNIT_KEY: String = "cycle_unit"

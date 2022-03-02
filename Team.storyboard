@@ -461,62 +461,67 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="4Ur-T9-gzC"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="7pw-ph-Yp9"/>
                             </scrollView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="zR8-bm-IWo">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffc-Eg-EnS">
                                 <rect key="frame" x="0.0" y="802" width="414" height="60"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1s4-b8-25W">
-                                        <rect key="frame" x="0.0" y="0.0" width="80" height="60"/>
-                                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ab-Ym-8wy" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="30" y="10" width="120" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="7Le-z4-5c6"/>
-                                            <constraint firstAttribute="width" constant="80" id="oA9-5f-V5Y"/>
+                                            <constraint firstAttribute="height" constant="40" id="EBd-pX-82C"/>
+                                            <constraint firstAttribute="width" constant="120" id="RYM-d4-XCn"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oRH-gW-mVv">
-                                        <rect key="frame" x="334" y="0.0" width="80" height="60"/>
-                                        <color key="backgroundColor" systemColor="systemPinkColor"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGu-QZ-rco" customClass="LikeButton" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="210" y="10" width="120" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="80" id="1xr-PL-DBg"/>
-                                            <constraint firstAttribute="height" constant="60" id="NqU-Yg-Yg1"/>
+                                            <constraint firstAttribute="width" constant="120" id="3RK-a9-YcS"/>
+                                            <constraint firstAttribute="height" constant="40" id="AMr-qH-aOC"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
                                 </subviews>
+                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="Oxi-fX-JhD"/>
-                                    <constraint firstAttribute="height" constant="60" id="Su2-8F-m2D"/>
+                                    <constraint firstAttribute="height" constant="60" id="2LX-hb-De0"/>
+                                    <constraint firstItem="dGu-QZ-rco" firstAttribute="centerY" secondItem="ffc-Eg-EnS" secondAttribute="centerY" id="7FS-AS-IgQ"/>
+                                    <constraint firstItem="8ab-Ym-8wy" firstAttribute="leading" secondItem="ffc-Eg-EnS" secondAttribute="leading" constant="30" id="H44-Zo-N61"/>
+                                    <constraint firstItem="8ab-Ym-8wy" firstAttribute="centerY" secondItem="ffc-Eg-EnS" secondAttribute="centerY" id="NZe-bY-ZBc"/>
+                                    <constraint firstItem="dGu-QZ-rco" firstAttribute="leading" secondItem="ffc-Eg-EnS" secondAttribute="leading" constant="210" id="beW-CE-N7Y"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="X4V-N9-Dea"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="rYO-dF-h2F" firstAttribute="top" secondItem="X4V-N9-Dea" secondAttribute="top" id="2Gn-Np-kZF"/>
-                            <constraint firstItem="zR8-bm-IWo" firstAttribute="top" secondItem="rYO-dF-h2F" secondAttribute="bottom" id="N9g-MO-C5b"/>
+                            <constraint firstItem="X4V-N9-Dea" firstAttribute="bottom" secondItem="ffc-Eg-EnS" secondAttribute="bottom" id="3XI-Kc-GvT"/>
+                            <constraint firstItem="ffc-Eg-EnS" firstAttribute="trailing" secondItem="X4V-N9-Dea" secondAttribute="trailing" id="deK-VN-s07"/>
                             <constraint firstItem="rYO-dF-h2F" firstAttribute="leading" secondItem="X4V-N9-Dea" secondAttribute="leading" id="dj5-EC-HPJ"/>
-                            <constraint firstItem="zR8-bm-IWo" firstAttribute="leading" secondItem="X4V-N9-Dea" secondAttribute="leading" id="iMc-ZT-DNQ"/>
-                            <constraint firstItem="zR8-bm-IWo" firstAttribute="trailing" secondItem="X4V-N9-Dea" secondAttribute="trailing" id="lXy-Kb-h7S"/>
+                            <constraint firstItem="ffc-Eg-EnS" firstAttribute="leading" secondItem="X4V-N9-Dea" secondAttribute="leading" id="pYW-KG-Eo7"/>
                             <constraint firstItem="X4V-N9-Dea" firstAttribute="trailing" secondItem="rYO-dF-h2F" secondAttribute="trailing" id="xoz-My-i1D"/>
-                            <constraint firstItem="X4V-N9-Dea" firstAttribute="bottom" secondItem="zR8-bm-IWo" secondAttribute="bottom" id="yD2-U5-UHV"/>
+                            <constraint firstItem="ffc-Eg-EnS" firstAttribute="top" secondItem="rYO-dF-h2F" secondAttribute="bottom" id="zxL-kI-phj"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="ContainerViewConstraintHeight" destination="LYM-fR-lRd" id="0zG-Eu-i2z"/>
-                        <outlet property="bottomView" destination="zR8-bm-IWo" id="hA3-Cm-THf"/>
+                        <outlet property="bottomView" destination="ffc-Eg-EnS" id="a2u-Oo-ja4"/>
                         <outlet property="contentDataLbl" destination="cT9-6O-IDa" id="VJu-Iy-tLb"/>
                         <outlet property="dataConstraintHeight" destination="WZn-Cj-a85" id="iRU-si-9Fd"/>
                         <outlet property="dataContainerView" destination="6XC-pI-ilq" id="m6V-aI-kAY"/>
                         <outlet property="featured" destination="8m9-3j-qmg" id="QVF-Ov-DNu"/>
                         <outlet property="featuredConstraintHeight" destination="h78-Xz-BBg" id="Okl-Dm-Sal"/>
+                        <outlet property="likeButton" destination="dGu-QZ-rco" id="4ea-sA-nfz"/>
+                        <outlet property="likeButtonConstraintLeading" destination="beW-CE-N7Y" id="VJs-0i-W8I"/>
                         <outlet property="scrollContainerView" destination="jah-0S-PJV" id="dig-7e-vYV"/>
                         <outlet property="scrollView" destination="rYO-dF-h2F" id="nG2-Pz-CxP"/>
+                        <outlet property="signupButton" destination="8ab-Ym-8wy" id="KII-PQ-m3g"/>
+                        <outlet property="signupButtonConstraintLeading" destination="H44-Zo-N61" id="Hiq-EM-UJd"/>
                         <outlet property="signupDataLbl" destination="61q-TL-Fba" id="f2h-l3-Lqt"/>
                         <outlet property="signupDeadlineLbl" destination="60E-5i-fC9" id="ADg-7A-LeJ"/>
                         <outlet property="signupTableView" destination="cOp-bT-ZZf" id="XGB-Lv-U2d"/>
-                        <outlet property="signupTableViewConstraintHeight" destination="MFI-oW-8cw" id="WNy-Mc-3o1"/>
+                        <outlet property="signupTableViewConstraintHeight" destination="MFI-oW-8cw" id="cK4-Op-ZhF"/>
                         <outlet property="signupTimeLbl" destination="02X-mk-ewo" id="284-e4-o8L"/>
                         <outlet property="tableView" destination="R63-7e-Ko8" id="5sr-dK-M1B"/>
                         <outlet property="tableViewConstraintHeight" destination="aZs-Ek-tOU" id="CA8-ib-FNh"/>
@@ -525,7 +530,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H3J-eK-00D" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1488.4057971014495" y="1340.625"/>
+            <point key="canvasLocation" x="1491" y="1353"/>
         </scene>
         <!--球隊-->
         <scene sceneID="Biv-Rk-NsK">
@@ -987,9 +992,6 @@
         <image name="team" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemPinkColor">
             <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -21,6 +21,7 @@ class ShowTeamVC: ShowVC {
     @IBOutlet weak var signupTableViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var signupButton: SubmitButton!
     @IBOutlet weak var signupButtonContainer: UIView!
+    @IBOutlet weak var signupButtonConstraintLeading: NSLayoutConstraint!
         
     var myTable: TeamTable?
     
@@ -35,6 +36,8 @@ class ShowTeamVC: ShowVC {
         
         initSignupTableView()
         
+        bottom_button_count = 2
+        
         super.viewDidLoad()
         
 //        mainDataLbl.text = "主要資料"
@@ -45,13 +48,20 @@ class ShowTeamVC: ShowVC {
         signupDataLbl.setTextSectionTitle()
         contentDataLbl.setTextSectionTitle()
 //
-//        signupButton.setTitle("報名")
-//
+        signupButton.setTitle("報名")
+
         refresh(TeamTable.self)
     }
     
     override func refresh() {
         refresh(TeamTable.self)
+    }
+    
+    override func setBottomButtonPaddint() {
+        
+        let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
+        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + button_width
+        signupButtonConstraintLeading.constant = padding
     }
     
     override func initData() {
@@ -136,20 +146,20 @@ class ShowTeamVC: ShowVC {
             }
         }
         
-//        if (myTable!.people_limit == 0) {
-//            signupButton.visibility = .invisible
-//        }
-//
-//        if myTable!.isSignup {
-//            signupButton.setTitle("取消報名")
-//        } else {
-//            let count = myTable!.signupNormalTables.count
-//            if count >= myTable!.people_limit {
-//                self.signupButton.setTitle("候補")
-//            } else {
-//                self.signupButton.setTitle("報名")
-//            }
-//        }
+        if (myTable!.people_limit == 0) {
+            signupButton.visibility = .invisible
+        }
+
+        if myTable!.isSignup {
+            signupButton.setTitle("取消報名")
+        } else {
+            let count = myTable!.signupNormalTables.count
+            if count >= myTable!.people_limit {
+                self.signupButton.setTitle("候補")
+            } else {
+                self.signupButton.setTitle("報名")
+            }
+        }
         
         signupTableView.reloadData()
     }

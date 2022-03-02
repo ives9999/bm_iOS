@@ -18,12 +18,12 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContainerView: UIView!
-    @IBOutlet weak var bottomView: UIStackView!
+    @IBOutlet weak var bottomView: UIView!
     
     @IBOutlet weak var featured: UIImageView!
     @IBOutlet weak var dataContainerView: UIView!
     
-    @IBOutlet weak var ContainerViewConstraintHeight: NSLayoutConstraint!
+    @IBOutlet weak var containerViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var tableViewConstraintHeight: NSLayoutConstraint!
     
     @IBOutlet weak var featuredConstraintHeight: NSLayoutConstraint!
@@ -32,6 +32,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     @IBOutlet weak var tableView: SuperTableView!
     
     @IBOutlet weak var likeButton: LikeButton!
+    @IBOutlet weak var likeButtonConstraintLeading: NSLayoutConstraint!
     
     var contentView: WKWebView? = {
         
@@ -55,6 +56,8 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     var token: String?
     var table: Table?
     var memberRows: [MemberRow] = [MemberRow]()
+    let button_width: CGFloat = 120
+    var bottom_button_count: Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,14 +82,12 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         dataContainerView.layer.cornerRadius = 26.0
         dataContainerView.clipsToBounds = true
         
+        setBottomButtonPaddint()
+        
         //refresh()
     }
     
     func initData() {}
-    
-//    func initShowVC(sin: Show_IN) {
-//        self.show_in = sin
-//    }
 
     func initTableView() {
         tableView.dataSource = self
@@ -112,11 +113,11 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         contentView!.navigationDelegate = self
     }
     
-//    override func beginRefresh() {
-//        refreshControl = UIRefreshControl()
-//        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
-//        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
-//    }
+    func setBottomButtonPaddint() {
+        
+        let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
+        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + button_width
+    }
     
     func refresh<T: Table>(_ t: T.Type) {
         
@@ -139,7 +140,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
                                 self.initData()
                                 self.setData()
                                 self.setContent()
-//                                self.setLike()
+                                self.setLike()
                             }
                         }
                     } catch {
@@ -160,8 +161,6 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     }
     
     func setFeatured() {
-        
-        let screen_width: CGFloat = UIScreen.main.bounds.width
 
         if (table != nil && table!.featured_path.count > 0) {
             let featured_h: CGFloat = featured.heightForUrl(url: table!.featured_path, width: screen_width)
@@ -184,16 +183,6 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         isLike = table!.like
         likeButton.initStatus(isLike, table!.like_count)
     }
-    
-//    func setFeatured<T: Table>(t: T) {
-//
-//        if t.featured_path.count > 0 {
-//            if t.featured_path.count > 0 {
-//                print(t.featured_path)
-//                featured.downloaded(from: t.featured_path)
-//            }
-//        }
-//    }
     
     func setMainData<T: Table>(_ t: T) {
         
