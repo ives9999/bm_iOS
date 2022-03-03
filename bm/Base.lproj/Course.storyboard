@@ -79,10 +79,10 @@
             </objects>
             <point key="canvasLocation" x="496" y="-611"/>
         </scene>
-        <!--Show CourseVC-->
+        <!--View Controller-->
         <scene sceneID="N0V-9M-qgG">
             <objects>
-                <viewController storyboardIdentifier="toShowCourse" id="ZZa-2U-rNz" customClass="ShowCourseVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ZZa-2U-rNz" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="H7q-yk-6nf">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -345,12 +345,76 @@
                         <outlet property="titleLbl" destination="HSl-Mb-3BG" id="4n8-gn-TQ3"/>
                         <outlet property="topView" destination="yZ0-g4-hZ8" id="YP9-MT-Vdw"/>
                         <segue destination="u4u-hT-NnN" kind="showDetail" identifier="toShow" id="x4H-6S-8nE"/>
-                        <segue destination="8Ov-i5-SS0" kind="showDetail" identifier="toSignupList" id="DMk-QC-ftK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAS-dJ-gn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="952.79999999999995" y="1384.8575712143929"/>
+        </scene>
+        <!--Show CourseVC-->
+        <scene sceneID="jYt-ja-bLg">
+            <objects>
+                <viewController storyboardIdentifier="toShowCourse" id="g8Z-F3-Zav" customClass="ShowCourseVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kdv-2S-TZ8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cf-ES-pTA">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K0q-Iv-opJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="420" height="1000"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ePY-DL-fiv">
+                                                <rect key="frame" x="0.0" y="0.0" width="420" height="128"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="128" id="nlP-wn-Z6H"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1000" id="0ja-V0-Vaa"/>
+                                            <constraint firstAttribute="trailing" secondItem="ePY-DL-fiv" secondAttribute="trailing" id="ED4-Ub-DQt"/>
+                                            <constraint firstItem="ePY-DL-fiv" firstAttribute="top" secondItem="K0q-Iv-opJ" secondAttribute="top" id="goZ-Ig-t0T"/>
+                                            <constraint firstAttribute="width" constant="420" id="lLr-KS-Gvi"/>
+                                            <constraint firstItem="ePY-DL-fiv" firstAttribute="leading" secondItem="K0q-Iv-opJ" secondAttribute="leading" id="weY-5F-x37"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="K0q-Iv-opJ" firstAttribute="top" secondItem="NXC-VF-M1S" secondAttribute="top" id="0Iq-pT-Qgf"/>
+                                    <constraint firstItem="K0q-Iv-opJ" firstAttribute="leading" secondItem="NXC-VF-M1S" secondAttribute="leading" id="Lie-1p-DMw"/>
+                                    <constraint firstItem="K0q-Iv-opJ" firstAttribute="bottom" secondItem="NXC-VF-M1S" secondAttribute="bottom" id="aYc-zc-lHV"/>
+                                    <constraint firstItem="K0q-Iv-opJ" firstAttribute="trailing" secondItem="NXC-VF-M1S" secondAttribute="trailing" id="pJ6-Bt-SKS"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="NXC-VF-M1S"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="Slj-YJ-lRe"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gfd-01-HFL"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Gfd-01-HFL" firstAttribute="trailing" secondItem="1Cf-ES-pTA" secondAttribute="trailing" id="2Dv-u9-oBB"/>
+                            <constraint firstItem="Gfd-01-HFL" firstAttribute="bottom" secondItem="1Cf-ES-pTA" secondAttribute="bottom" id="2xw-7F-eaV"/>
+                            <constraint firstItem="1Cf-ES-pTA" firstAttribute="leading" secondItem="Gfd-01-HFL" secondAttribute="leading" id="5mV-T1-Mxk"/>
+                            <constraint firstItem="1Cf-ES-pTA" firstAttribute="top" secondItem="Gfd-01-HFL" secondAttribute="top" id="8bI-ev-2Hx"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="containerViewConstraintHeight" destination="0ja-V0-Vaa" id="UX8-AF-RCJ"/>
+                        <outlet property="containerViewConstraintWidth" destination="lLr-KS-Gvi" id="mlt-L1-d7l"/>
+                        <outlet property="featured" destination="ePY-DL-fiv" id="NXY-wQ-iFZ"/>
+                        <outlet property="featuredConstraintHeight" destination="nlP-wn-Z6H" id="8CK-Nc-OKw"/>
+                        <outlet property="scrollContainerView" destination="K0q-Iv-opJ" id="KVN-dN-mgP"/>
+                        <outlet property="scrollView" destination="1Cf-ES-pTA" id="Ehr-i4-KN4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wzU-0f-BLP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1737.68115942029" y="1384.8214285714284"/>
         </scene>
         <!--課程-->
         <scene sceneID="Bxb-h1-yjD">
@@ -1194,7 +1258,7 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="UIViewController-yIz-IN-JqC" id="8Ov-i5-SS0" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MQ4-rh-j75" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1748" y="1532"/>
+            <point key="canvasLocation" x="1546" y="1892"/>
         </scene>
         <!--UIViewController-OKL-6q-hzR-->
         <scene sceneID="L1M-Xo-OVP">
@@ -1278,6 +1342,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

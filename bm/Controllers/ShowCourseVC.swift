@@ -62,14 +62,15 @@ class ShowCourseVC: ShowVC {
         dataService = CourseService.instance
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
-        signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
-        coachTableView.register(cellNib, forCellReuseIdentifier: "cell")
-        
-        initSignupTableView()
-        initCoachTableView()
-        
-        signupButton.setTitle("報名")
+//        signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
+//        coachTableView.register(cellNib, forCellReuseIdentifier: "cell")
+//
+//        initSignupTableView()
+//        initCoachTableView()
+//
+//        signupButton.setTitle("報名")
         //signupListButton.setTitle("報名列表")
+        //containerViewConstraintWidth.constant = screen_width
         
         super.viewDidLoad()
         
@@ -85,12 +86,15 @@ class ShowCourseVC: ShowVC {
             "created_at_show":["icon":"date","title":"建立日期","content":""]
         ]
         
-        if (scrollView != nil) {
-            initContentView()
-            scrollView.backgroundColor = UIColor.clear
-            beginRefresh()
-            scrollView.addSubview(refreshControl)
-        }
+        containerViewConstraintWidth.constant = screen_width
+        containerViewConstraintHeight.constant = 2000
+        
+//        if (scrollView != nil) {
+//            initContentView()
+//            scrollView.backgroundColor = UIColor.clear
+//            beginRefresh()
+//            scrollView.addSubview(refreshControl)
+//        }
         
         refresh(CourseTable.self)
         //refresh()
@@ -100,17 +104,17 @@ class ShowCourseVC: ShowVC {
         refresh(CourseTable.self)
     }
     
-    override func viewWillLayoutSubviews() {
-        mainDataLbl.text = "課程資料"
-        signupDataLbl.text = "報名資料"
-        coachDataLbl.text = "教練資料"
-        contentDataLbl.text = "詳細介紹"
-        
-        mainDataLbl.setTextTitle()
-        signupDataLbl.setTextTitle()
-        coachDataLbl.setTextTitle()
-        contentDataLbl.setTextTitle()
-    }
+//    override func viewWillLayoutSubviews() {
+//        mainDataLbl.text = "課程資料"
+//        signupDataLbl.text = "報名資料"
+//        coachDataLbl.text = "教練資料"
+//        contentDataLbl.text = "詳細介紹"
+//        
+//        mainDataLbl.setTextTitle()
+//        signupDataLbl.setTextTitle()
+//        coachDataLbl.setTextTitle()
+//        contentDataLbl.setTextTitle()
+//    }
     
     func initSignupTableView() {
         
