@@ -105,6 +105,10 @@ class CourseTable: Table {
         case signupStandbyTables = "signup_standby_models"
     }
     
+    override init(){
+        super.init()
+    }
+    
     required init(from decoder: Decoder) throws {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)

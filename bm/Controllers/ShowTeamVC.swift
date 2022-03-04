@@ -249,7 +249,6 @@ class ShowTeamVC: ShowVC {
                         heightOfTableView += cell.frame.height
                     }
                     
-                    
                     self.tableViewConstraintHeight.constant = heightOfTableView
                     self.dataConstraintHeight.constant += heightOfTableView
                     

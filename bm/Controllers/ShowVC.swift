@@ -25,6 +25,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     
     @IBOutlet weak var containerViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var containerViewConstraintWidth: NSLayoutConstraint!
+    @IBOutlet weak var dataContainerConstraintTop: NSLayoutConstraint!
     @IBOutlet weak var tableViewConstraintHeight: NSLayoutConstraint!
     
     @IBOutlet weak var featuredConstraintHeight: NSLayoutConstraint!
@@ -70,19 +71,24 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         }
         
         if (scrollView != nil) {
-            //initContentView()
-            //scrollView.backgroundColor = UIColor.clear
+            initContentView()
             beginRefresh()
             scrollView.addSubview(refreshControl)
         }
         
-        if (bottomView != nil) {
-            bottomView.backgroundColor = UIColor(BOTTOM_VIEW_BACKGROUND)
+        if (dataContainerView != nil) {
             dataContainerView.layer.cornerRadius = 26.0
             dataContainerView.clipsToBounds = true
+        }
+        
+        if (bottomView != nil) {
+            bottomView.backgroundColor = UIColor(BOTTOM_VIEW_BACKGROUND)
             
             setBottomButtonPaddint()
         }
+        
+        containerViewConstraintWidth.constant = screen_width
+        containerViewConstraintHeight.constant = 2000
         
         //refresh()
     }
@@ -137,10 +143,10 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
                             } else {
                                 self.table!.filterRow()
                                 self.setFeatured()
-//                                self.initData()
-//                                self.setData()
-//                                self.setContent()
-//                                self.setLike()
+                                self.initData()
+                                self.setData()
+                                self.setContent()
+                                self.setLike()
                             }
                         }
                     } catch {
@@ -168,8 +174,10 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
             
             featured.downloaded(from: table!.featured_path)
             scrollContainerHeight += featuredConstraintHeight.constant
-            containerViewConstraintHeight.constant = scrollContainerHeight + 200
+            containerViewConstraintHeight.constant = scrollContainerHeight
             //print("featured:\(scrollContainerHeight)")
+            
+            dataContainerConstraintTop.constant = featured_h - 30
         } else {
             warning("沒有取得內容資料值，請稍後再試或洽管理員")
         }

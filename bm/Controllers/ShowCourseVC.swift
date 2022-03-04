@@ -19,12 +19,12 @@ class ShowCourseVC: ShowVC {
     
     @IBOutlet weak var signupDataLbl: SuperLabel!
     @IBOutlet weak var signupDateLbl: SuperLabel!
+    @IBOutlet weak var signupDeadlineLbl: SuperLabel!
     @IBOutlet weak var coachDataLbl: SuperLabel!
     
     @IBOutlet weak var signupButton: SubmitButton!
-    
-    //@IBOutlet weak var signupListButton: CancelButton!
-    
+    @IBOutlet weak var signupButtonConstraintLeading: NSLayoutConstraint!
+        
     let signupTableRowKeys:[String] = ["date", "deadline"]
     var signupTableRows: [String: [String:String]] = [
         "date":["icon":"calendar","title":"報名上課日期","content":"","isPressed":"false"],
@@ -41,9 +41,6 @@ class ShowCourseVC: ShowVC {
         WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],
         EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"]
     ]
-    
-    //var courseTable: courseTable?
-    //var coachTable: coachTable?
     
     var myTable: CourseTable?
     var coachTable: CoachTable?
@@ -62,59 +59,81 @@ class ShowCourseVC: ShowVC {
         dataService = CourseService.instance
         
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
-//        signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
-//        coachTableView.register(cellNib, forCellReuseIdentifier: "cell")
-//
-//        initSignupTableView()
-//        initCoachTableView()
-//
-//        signupButton.setTitle("報名")
+        signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
+        coachTableView.register(cellNib, forCellReuseIdentifier: "cell")
+
+        initSignupTableView()
+        initCoachTableView()
+        
+        bottom_button_count = 2
+
+        signupButton.setTitle("報名")
         //signupListButton.setTitle("報名列表")
         //containerViewConstraintWidth.constant = screen_width
         
         super.viewDidLoad()
         
-        tableRowKeys = ["weekday_text","interval_show","date","price_text_long","people_limit_text","kind_text","pv","created_at_show"]
-        tableRows = [
-            "weekday_text":["icon":"date","title":"星期","content":""],
-            "interval_show":["icon":"clock","title":"時段","content":""],
-            "date":["icon":"date","title":"期間","content":""],
-            "price_text_long":["icon":"money","title":"收費","content":""],
-            "people_limit_text":["icon":"group","title":"限制人數","content":""],
-            "kind_text": ["icon":"cycle","title":"週期","content":""],       // "signup_count":["icon":"group","title":"已報名人數","content":""],
-            "pv":["icon":"pv","title":"瀏覽數","content":""],
-            "created_at_show":["icon":"date","title":"建立日期","content":""]
-        ]
+//        tableRowKeys = ["weekday_text","interval_show","date","price_text_long","people_limit_text","kind_text","pv","created_at_show"]
+//        tableRows = [
+//            "weekday_text":["icon":"date","title":"星期","content":""],
+//            "interval_show":["icon":"clock","title":"時段","content":""],
+//            "date":["icon":"date","title":"期間","content":""],
+//            "price_text_long":["icon":"money","title":"收費","content":""],
+//            "people_limit_text":["icon":"group","title":"限制人數","content":""],
+//            "kind_text": ["icon":"cycle","title":"週期","content":""],       // "signup_count":["icon":"group","title":"已報名人數","content":""],
+//            "pv":["icon":"pv","title":"瀏覽數","content":""],
+//            "created_at_show":["icon":"date","title":"建立日期","content":""]
+//        ]
         
-        containerViewConstraintWidth.constant = screen_width
-        containerViewConstraintHeight.constant = 2000
+        signupDataLbl.text = "報名資料"
+        signupDataLbl.setTextSectionTitle()
+        coachDataLbl.text = "教練資料"
+        coachDataLbl.setTextSectionTitle()
+        contentDataLbl.text = "詳細介紹"
+        contentDataLbl.setTextSectionTitle()
         
-//        if (scrollView != nil) {
-//            initContentView()
-//            scrollView.backgroundColor = UIColor.clear
-//            beginRefresh()
-//            scrollView.addSubview(refreshControl)
-//        }
+        scrollContainerHeight += dataConstraintHeight.constant
+        containerViewConstraintHeight.constant = scrollContainerHeight
         
         refresh(CourseTable.self)
         //refresh()
+    }
+    
+    override func initData() {
+        
+        if myTable == nil {
+            myTable = CourseTable()
+        }
+        
+        myTable = table as? CourseTable
+        var row: MemberRow = MemberRow(title: "星期", icon: "date", show: myTable!.weekday_text)
+        memberRows.append(row)
+        row = MemberRow(title: "時段", icon: "clock", show: myTable!.interval_show)
+        memberRows.append(row)
+        row = MemberRow(title: "期間", icon: "date", show: myTable!.dateTable!.date)
+        memberRows.append(row)
+        row = MemberRow(title: "收費", icon: "money", show: myTable!.price_text_long)
+        memberRows.append(row)
+        row = MemberRow(title: "限制人數", icon: "group", show: myTable!.people_limit_text)
+        memberRows.append(row)
+        row = MemberRow(title: "週期", icon: "cycle", show: myTable!.kind_text)
+        memberRows.append(row)
+        row = MemberRow(title: "瀏覽數", icon: "pv", show: String(myTable!.pv))
+        memberRows.append(row)
+        row = MemberRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
+        memberRows.append(row)
     }
     
     override func refresh() {
         refresh(CourseTable.self)
     }
     
-//    override func viewWillLayoutSubviews() {
-//        mainDataLbl.text = "課程資料"
-//        signupDataLbl.text = "報名資料"
-//        coachDataLbl.text = "教練資料"
-//        contentDataLbl.text = "詳細介紹"
-//        
-//        mainDataLbl.setTextTitle()
-//        signupDataLbl.setTextTitle()
-//        coachDataLbl.setTextTitle()
-//        contentDataLbl.setTextTitle()
-//    }
+    override func setBottomButtonPaddint() {
+        
+        let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
+        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + button_width
+        signupButtonConstraintLeading.constant = padding
+    }
     
     func initSignupTableView() {
         
@@ -136,22 +155,23 @@ class ShowCourseVC: ShowVC {
     
     override func setData() {
         
+        super.setData()
         if table != nil {
             myTable = table as? CourseTable
             if (myTable != nil) {
                 //myTable!.filterRow()
                 //self.courseTable?.printRow()
                 
-                setMainData(myTable!)
+                //setMainData(myTable!)
                 
-                //coachTable = courseTable!.coach
+                //coachTable = myTable!.coachTable
                 //self.courseTable!.signup_normal_models
                 
                 if myTable!.coachTable != nil { // setup coach for course data
                     coachTable = self.myTable!.coachTable
                     setCoachData()
                 }
-                
+
                 if myTable!.dateTable != nil { // setup next time course time
                     //self.courseTable!.dateTable?.printRow()
                     setNextTime()
@@ -203,8 +223,8 @@ class ShowCourseVC: ShowVC {
             let end_time: String = myTable!.end_time_show
             let next_time = "下次上課時間：\(date) \(start_time) ~ \(end_time)"
             signupDateLbl.text = next_time
+            //signupDeadlineLbl.text = "報名截止時間：" + myTable!.signupDate!.deadline.noSec()
         }
-        
         
 //        let nextCourseTime: [String: String] = courseTable!.nextCourseTime
 //        for key in signupTableRowKeys {
@@ -245,7 +265,8 @@ class ShowCourseVC: ShowVC {
             return 0
         } else {
             if tableView == self.tableView {
-                return tableRowKeys.count
+                return memberRows.count
+                //return tableRowKeys.count
             } else if tableView == self.signupTableView {
                 if myTable != nil && myTable!.people_limit > 0 {
                     //let normal_count: Int = courseTable!.signupNormalTables.count
@@ -271,27 +292,39 @@ class ShowCourseVC: ShowVC {
         if tableView == self.tableView {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
             
-            let key = tableRowKeys[indexPath.row]
-            if tableRows[key] != nil {
-                let row = tableRows[key]!
-                let icon = row["icon"] ?? ""
-                let title = row["title"] ?? ""
-                let content = row["content"] ?? ""
-                cell.update(icon: icon, title: title, content: content)
-            }
+            let row: MemberRow = memberRows[indexPath.row]
+            cell.update(icon: row.icon, title: row.title, content: row.show)
             
-            if indexPath.row == tableRowKeys.count - 1 {
+//            let key = tableRowKeys[indexPath.row]
+//            if tableRows[key] != nil {
+//                let row = tableRows[key]!
+//                let icon = row["icon"] ?? ""
+//                let title = row["title"] ?? ""
+//                let content = row["content"] ?? ""
+//                cell.update(icon: icon, title: title, content: content)
+//            }
+            
+            //計算高度
+            if indexPath.row == memberRows.count - 1 {
                 UIView.animate(withDuration: 0, animations: {self.tableView.layoutIfNeeded()}) { (complete) in
                     var heightOfTableView: CGFloat = 0.0
                     let cells = self.tableView.visibleCells
                     for cell in cells {
                         heightOfTableView += cell.frame.height
                     }
-                    //print(heightOfTableView)
+                    
                     self.tableViewConstraintHeight.constant = heightOfTableView
-                    self.changeScrollViewContentSize()
+                    self.dataConstraintHeight.constant += heightOfTableView
+                    
+                    self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+                    
+                    //self.scrollContainerHeight += self.tableViewConstraintHeight.constant
+                    //print("tableView:\(self.scrollContainerHeight)")
+                    //self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollContainerHeight)
                 }
             }
+            
             return cell
         } else if tableView == self.signupTableView {
             let cell: OlCell = tableView.dequeueReusableCell(withIdentifier: "signupCell", for: indexPath) as! OlCell
@@ -332,8 +365,13 @@ class ShowCourseVC: ShowVC {
                         heightOfTableView += cell.frame.height
                     }
                     //print(heightOfTableView)
+                                        
                     self.signupTableViewConstraintHeight.constant = heightOfTableView
-                    self.changeScrollViewContentSize()
+                    self.dataConstraintHeight.constant += heightOfTableView
+                    
+                    self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+                    //self.changeScrollViewContentSize()
                 }
             }
             return cell
@@ -373,7 +411,12 @@ class ShowCourseVC: ShowVC {
                     }
                     //print(heightOfTableView)
                     self.coachTableViewConstraintHeight.constant = heightOfTableView
-                    self.changeScrollViewContentSize()
+                    //self.changeScrollViewContentSize()
+                    
+                    self.dataConstraintHeight.constant += heightOfTableView
+                    
+                    self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    self.containerViewConstraintHeight.constant = self.scrollContainerHeight
                 }
             }
             return cell
@@ -417,25 +460,25 @@ class ShowCourseVC: ShowVC {
 //        }
 //    }
     
-    override func changeScrollViewContentSize() {
-        
-        let h1 = featured.bounds.size.height
-        let h2 = mainDataLbl.bounds.size.height
-        let h3 = tableViewConstraintHeight.constant
-        let h4 = coachDataLbl.bounds.size.height
-        let h5 = coachTableViewConstraintHeight.constant
-        let h6 = contentDataLbl.bounds.size.height
-        let h7 = contentViewConstraintHeight!.constant
-        let h8 = signupDataLbl.bounds.size.height
-        let h9 = signupTableViewConstraintHeight.constant
-        //print(contentViewConstraintHeight)
-        
-        //let h: CGFloat = h1 + h2 + h3 + h4 + h5
-        let h: CGFloat = h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + 300
-        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
-        containerViewConstraintHeight.constant = h
-        //print(h1)
-    }
+//    override func changeScrollViewContentSize() {
+//
+//        let h1 = featured.bounds.size.height
+//        let h2 = mainDataLbl.bounds.size.height
+//        let h3 = tableViewConstraintHeight.constant
+//        let h4 = coachDataLbl.bounds.size.height
+//        let h5 = coachTableViewConstraintHeight.constant
+//        let h6 = contentDataLbl.bounds.size.height
+//        let h7 = contentViewConstraintHeight!.constant
+//        let h8 = signupDataLbl.bounds.size.height
+//        let h9 = signupTableViewConstraintHeight.constant
+//        //print(contentViewConstraintHeight)
+//
+//        //let h: CGFloat = h1 + h2 + h3 + h4 + h5
+//        let h: CGFloat = h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + 300
+//        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
+//        containerViewConstraintHeight.constant = h
+//        //print(h1)
+//    }
     
     func showSignupModal() {
         

@@ -443,6 +443,7 @@
                                             <constraint firstAttribute="trailing" secondItem="8m9-3j-qmg" secondAttribute="trailing" id="3Ea-dM-Ari"/>
                                             <constraint firstItem="6XC-pI-ilq" firstAttribute="leading" secondItem="jah-0S-PJV" secondAttribute="leading" id="F4b-de-Onn"/>
                                             <constraint firstAttribute="height" constant="900" id="LYM-fR-lRd"/>
+                                            <constraint firstAttribute="width" constant="414" id="Zsl-o5-ndq"/>
                                             <constraint firstItem="8m9-3j-qmg" firstAttribute="leading" secondItem="jah-0S-PJV" secondAttribute="leading" id="cgx-QP-fVr"/>
                                             <constraint firstItem="8m9-3j-qmg" firstAttribute="top" secondItem="jah-0S-PJV" secondAttribute="top" id="kWi-H0-ANg"/>
                                             <constraint firstItem="6XC-pI-ilq" firstAttribute="top" secondItem="jah-0S-PJV" secondAttribute="top" constant="200" id="pf8-tS-rlC"/>
@@ -507,8 +508,11 @@
                     </view>
                     <connections>
                         <outlet property="bottomView" destination="ffc-Eg-EnS" id="a2u-Oo-ja4"/>
+                        <outlet property="containerViewConstraintHeight" destination="LYM-fR-lRd" id="0oR-xI-0vy"/>
+                        <outlet property="containerViewConstraintWidth" destination="Zsl-o5-ndq" id="hiT-Rl-VrO"/>
                         <outlet property="contentDataLbl" destination="cT9-6O-IDa" id="VJu-Iy-tLb"/>
                         <outlet property="dataConstraintHeight" destination="WZn-Cj-a85" id="iRU-si-9Fd"/>
+                        <outlet property="dataContainerConstraintTop" destination="pf8-tS-rlC" id="7yQ-6m-NMt"/>
                         <outlet property="dataContainerView" destination="6XC-pI-ilq" id="m6V-aI-kAY"/>
                         <outlet property="featured" destination="8m9-3j-qmg" id="QVF-Ov-DNu"/>
                         <outlet property="featuredConstraintHeight" destination="h78-Xz-BBg" id="Okl-Dm-Sal"/>
