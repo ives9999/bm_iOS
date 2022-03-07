@@ -122,7 +122,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     func setBottomButtonPaddint() {
         
         let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
-        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + button_width
+        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + CGFloat(bottom_button_count-1)*button_width
     }
     
     func refresh<T: Table>(_ t: T.Type) {

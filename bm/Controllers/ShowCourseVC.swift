@@ -25,22 +25,22 @@ class ShowCourseVC: ShowVC {
     @IBOutlet weak var signupButton: SubmitButton!
     @IBOutlet weak var signupButtonConstraintLeading: NSLayoutConstraint!
         
-    let signupTableRowKeys:[String] = ["date", "deadline"]
-    var signupTableRows: [String: [String:String]] = [
-        "date":["icon":"calendar","title":"報名上課日期","content":"","isPressed":"false"],
-        "deadline":["icon":"clock","title":"報名截止時間","content":"","isPressed":"false"]
-    ]
-    
-    let coachTableRowKeys:[String] = [NAME_KEY,MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY]
-    var coachTableRows: [String: [String:String]] = [
-        NAME_KEY:["icon":"coach","title":"教練","content":"","isPressed":"true"],
-        MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
-        LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"false"],
-        FB_KEY:["icon":"fb","title":"fb","content":"","isPressed":"true"],
-        YOUTUBE_KEY:["icon":"youtube","title":"youtube","content":"","isPressed":"true"],
-        WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],
-        EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"]
-    ]
+//    let signupTableRowKeys:[String] = ["date", "deadline"]
+//    var signupTableRows: [String: [String:String]] = [
+//        "date":["icon":"calendar","title":"報名上課日期","content":"","isPressed":"false"],
+//        "deadline":["icon":"clock","title":"報名截止時間","content":"","isPressed":"false"]
+//    ]
+//
+//    let coachTableRowKeys:[String] = [NAME_KEY,MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY]
+//    var coachTableRows: [String: [String:String]] = [
+//        NAME_KEY:["icon":"coach","title":"教練","content":"","isPressed":"true"],
+//        MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
+//        LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"false"],
+//        FB_KEY:["icon":"fb","title":"fb","content":"","isPressed":"true"],
+//        YOUTUBE_KEY:["icon":"youtube","title":"youtube","content":"","isPressed":"true"],
+//        WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],
+//        EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"]
+//    ]
     
     var myTable: CourseTable?
     var coachTable: CoachTable?
@@ -53,6 +53,8 @@ class ShowCourseVC: ShowVC {
     var signup_id: Int = 0
     var course_date: String = ""
     var course_deadline: String = ""
+    
+    var coachRows: [MemberRow] = [MemberRow]()
     
     override func viewDidLoad() {
 
@@ -122,6 +124,21 @@ class ShowCourseVC: ShowVC {
         memberRows.append(row)
         row = MemberRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
         memberRows.append(row)
+        
+        var coachRow: MemberRow = MemberRow(title: "教練", icon: "coach", show: myTable!.coachTable?.name ?? "")
+        coachRows.append(coachRow)
+        coachRow = MemberRow(title: "行動電話", icon: "mobile", show: myTable!.coachTable?.mobile ?? "")
+        coachRows.append(coachRow)
+        coachRow = MemberRow(title: "LINE", icon: "line", show: myTable!.coachTable?.line ?? "")
+        coachRows.append(coachRow)
+        coachRow = MemberRow(title: "FB", icon: "fb", show: myTable!.coachTable?.fb ?? "")
+        coachRows.append(coachRow)
+        coachRow = MemberRow(title: "YOUTUBE", icon: "youtube", show: myTable!.coachTable?.youtube ?? "")
+        coachRows.append(coachRow)
+        coachRow = MemberRow(title: "網站", icon: "website", show: myTable!.coachTable?.website ?? "")
+        coachRows.append(coachRow)
+        coachRow = MemberRow(title: "EMail", icon: "email1", show: myTable!.coachTable?.email ?? "")
+        coachRows.append(coachRow)
     }
     
     override func refresh() {
@@ -167,10 +184,10 @@ class ShowCourseVC: ShowVC {
                 //coachTable = myTable!.coachTable
                 //self.courseTable!.signup_normal_models
                 
-                if myTable!.coachTable != nil { // setup coach for course data
-                    coachTable = self.myTable!.coachTable
-                    setCoachData()
-                }
+//                if myTable!.coachTable != nil { // setup coach for course data
+//                    coachTable = self.myTable!.coachTable
+//                    setCoachData()
+//                }
 
                 if myTable!.dateTable != nil { // setup next time course time
                     //self.courseTable!.dateTable?.printRow()
@@ -232,33 +249,33 @@ class ShowCourseVC: ShowVC {
 //        }
     }
     
-    func setCoachData() {
-        //coachTable!.printRow()
-        let mirror: Mirror = Mirror(reflecting: coachTable!)
-        let propertys: [[String: Any]] = mirror.toDictionary()
-        for key in coachTableRowKeys {
-            
-            for property in propertys {
-                
-                if ((property["label"] as! String) == key) {
-                    var type: String = property["type"] as! String
-                    type = type.getTypeOfProperty()!
-                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
-                    var content: String = ""
-                    if type == "Int" {
-                        content = String(property["value"] as! Int)
-                    } else if type == "Bool" {
-                        content = String(property["value"] as! Bool)
-                    } else if type == "String" {
-                        content = property["value"] as! String
-                    }
-                    coachTableRows[key]!["content"] = content
-                    break
-                }
-            }
-        }
-        //print(self.coachTableRows)
-    }
+//    func setCoachData() {
+//        //coachTable!.printRow()
+//        let mirror: Mirror = Mirror(reflecting: coachTable!)
+//        let propertys: [[String: Any]] = mirror.toDictionary()
+//        for key in coachTableRowKeys {
+//
+//            for property in propertys {
+//
+//                if ((property["label"] as! String) == key) {
+//                    var type: String = property["type"] as! String
+//                    type = type.getTypeOfProperty()!
+//                    //print("label=>\(property["label"]):value=>\(property["value"]):type=>\(type)")
+//                    var content: String = ""
+//                    if type == "Int" {
+//                        content = String(property["value"] as! Int)
+//                    } else if type == "Bool" {
+//                        content = String(property["value"] as! Bool)
+//                    } else if type == "String" {
+//                        content = property["value"] as! String
+//                    }
+//                    coachTableRows[key]!["content"] = content
+//                    break
+//                }
+//            }
+//        }
+//        //print(self.coachTableRows)
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if !fromNet {
@@ -280,7 +297,7 @@ class ShowCourseVC: ShowVC {
                 }
             } else if tableView == self.coachTableView {
                 //print(coachTableRowKeys.count)
-                return coachTableRowKeys.count
+                return coachRows.count
             } else {
                 return 0
             }
@@ -388,20 +405,23 @@ class ShowCourseVC: ShowVC {
         } else if tableView == self.coachTableView {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
             
-            let key = coachTableRowKeys[indexPath.row]
-            if coachTableRows[key] != nil {
-                let row = coachTableRows[key]!
-                let icon = row["icon"] ?? ""
-                let title = row["title"] ?? ""
-                var content = row["content"] ?? ""
-                if key == MOBILE_KEY && content.count > 0 {
-                    content = content.mobileShow()
-                }
-                let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
-                cell.update(icon: icon, title: title, content: content, isPressed: isPressed)
-            }
+            let row: MemberRow = coachRows[indexPath.row]
+            cell.update(icon: row.icon, title: row.title, content: row.show)
             
-            if indexPath.row == coachTableRowKeys.count - 1 {
+//            let key = coachTableRowKeys[indexPath.row]
+//            if coachTableRows[key] != nil {
+//                let row = coachTableRows[key]!
+//                let icon = row["icon"] ?? ""
+//                let title = row["title"] ?? ""
+//                var content = row["content"] ?? ""
+//                if key == MOBILE_KEY && content.count > 0 {
+//                    content = content.mobileShow()
+//                }
+//                let isPressed = NSString(string: row["isPressed"] ?? "false").boolValue
+//                cell.update(icon: icon, title: title, content: content, isPressed: isPressed)
+//            }
+            
+            if indexPath.row == coachRows.count - 1 {
                 
                 UIView.animate(withDuration: 0, animations: {self.coachTableView.layoutIfNeeded()}) { (complete) in
                     var heightOfTableView: CGFloat = 0.0
@@ -428,7 +448,7 @@ class ShowCourseVC: ShowVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if tableView == self.coachTableView {
-            let key = coachTableRowKeys[indexPath.row]
+            let key = coachRows[indexPath.row].title
             if key == NAME_KEY {
                 //let sender: Show_IN = Show_IN(type: source,id:coachTable!.id,token:coachTable!.token,title:coachTable!.name)
                 //performSegue(withIdentifier: TO_SHOW, sender: sender)

@@ -42,11 +42,11 @@ class ShowTeamVC: ShowVC {
         
 //        mainDataLbl.text = "主要資料"
         signupDataLbl.text = "臨打報名"
-        contentDataLbl.text = "詳細介紹"
+//        contentDataLbl.text = "詳細介紹"
 //
 //        mainDataLbl.setTextTitle()
         signupDataLbl.setTextSectionTitle()
-        contentDataLbl.setTextSectionTitle()
+//        contentDataLbl.setTextSectionTitle()
 //
         signupButton.setTitle("報名")
 
