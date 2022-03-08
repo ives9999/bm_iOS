@@ -51,7 +51,7 @@ class SuperLabel: UILabel {
     
     func setTextGeneral() {
         self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
-        self.textColor = UIColor(MY_WHITE)
+        self.textColor = UIColor(TEXT_WHITE)
     }
     
     func highlight() {

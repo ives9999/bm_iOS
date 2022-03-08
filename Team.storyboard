@@ -484,7 +484,7 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.36470588235294116" green="0.36470588235294116" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="2LX-hb-De0"/>
                                     <constraint firstItem="dGu-QZ-rco" firstAttribute="centerY" secondItem="ffc-Eg-EnS" secondAttribute="centerY" id="7FS-AS-IgQ"/>

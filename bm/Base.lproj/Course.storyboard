@@ -582,7 +582,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.36470588235294116" green="0.36470588235294116" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="NoY-ex-C0e" firstAttribute="leading" secondItem="UPP-If-AiI" secondAttribute="leading" constant="210" id="OR1-95-qfb"/>
                                     <constraint firstItem="aMp-ru-1K9" firstAttribute="leading" secondItem="UPP-If-AiI" secondAttribute="leading" constant="30" id="PTB-7e-GIa"/>
