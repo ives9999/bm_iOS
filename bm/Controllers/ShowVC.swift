@@ -84,7 +84,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         if (bottomView != nil) {
             bottomView.backgroundColor = UIColor(BOTTOM_VIEW_BACKGROUND)
             
-            setBottomButtonPaddint()
+            setBottomButtonPadding()
         }
         
         containerViewConstraintWidth.constant = screen_width
@@ -119,7 +119,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         contentView!.navigationDelegate = self
     }
     
-    func setBottomButtonPaddint() {
+    func setBottomButtonPadding() {
         
         let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
         likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + CGFloat(bottom_button_count-1)*button_width

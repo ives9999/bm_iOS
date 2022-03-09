@@ -71,7 +71,7 @@ class ShowArenaVC: ShowVC {
         memberRows.append(row)
     }
     
-    override func setBottomButtonPaddint() {
+    override func setBottomButtonPadding() {
         
         let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
         likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding
