@@ -19,30 +19,57 @@ class ShowStoreVC: ShowVC {
         
         super.viewDidLoad()
         
-        tableRowKeys = ["tel_show","mobile_show","address","fb","line","website","email","business_time","pv","created_at_show"]
-        tableRows = [
-            "tel_show":["icon":"tel","title":"市內電話","content":""],
-            "mobile_show":["icon":"mobile","title":"行動電話","content":""],
-            "address":["icon":"map","title":"住址","content":""],
-            "fb":["icon":"fb","title":"FB","content":""],
-            "line":["icon":"line","title":"line","content":""],
-            "website":["icon":"website","title":"網站","content":""],
-            "email":["icon":"email1","title":"email","content":""],
-            "business_time":["icon":"clock","title":"營業時間","content":""],
-            "pv":["icon":"pv","title":"瀏覽數","content":""],
-            "created_at_show":["icon":"date","title":"建立日期","content":""]
-        ]
+//        tableRowKeys = ["tel_show","mobile_show","address","fb","line","website","email","business_time","pv","created_at_show"]
+//        tableRows = [
+//            "tel_show":["icon":"tel","title":"市內電話","content":""],
+//            "mobile_show":["icon":"mobile","title":"行動電話","content":""],
+//            "address":["icon":"map","title":"住址","content":""],
+//            "fb":["icon":"fb","title":"FB","content":""],
+//            "line":["icon":"line","title":"line","content":""],
+//            "website":["icon":"website","title":"網站","content":""],
+//            "email":["icon":"email1","title":"email","content":""],
+//            "business_time":["icon":"clock","title":"營業時間","content":""],
+//            "pv":["icon":"pv","title":"瀏覽數","content":""],
+//            "created_at_show":["icon":"date","title":"建立日期","content":""]
+//        ]
         
         refresh(StoreTable.self)
     }
     
-    override func viewWillLayoutSubviews() {
-        mainDataLbl.text = "體育用品店資料"
-        contentDataLbl.text = "詳細介紹"
+    override func initData() {
         
-        mainDataLbl.setTextTitle()
-        contentDataLbl.setTextTitle()
+        if myTable == nil {
+            myTable = StoreTable()
+        }
+        
+        myTable = table as? StoreTable
+        var row: MemberRow = MemberRow(title: "市內電話", icon: "tel", show: myTable!.tel_show)
+        memberRows.append(row)
+        row = MemberRow(title: "行動電話", icon: "mobile", show: myTable!.mobile_show)
+        memberRows.append(row)
+        row = MemberRow(title: "住址", icon: "map", show: myTable!.address)
+        memberRows.append(row)
+        row = MemberRow(title: "fb", icon: "fb", show: myTable!.fb)
+        memberRows.append(row)
+        row = MemberRow(title: "line", icon: "line", show: myTable!.line)
+        memberRows.append(row)
+        row = MemberRow(title: "EMail", icon: "email1", show: myTable!.email)
+        memberRows.append(row)
+        row = MemberRow(title: "營業時間", icon: "clock", show: myTable!.interval_show)
+        memberRows.append(row)
+        row = MemberRow(title: "瀏覽數", icon: "pv", show: String(myTable!.pv))
+        memberRows.append(row)
+        row = MemberRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
+        memberRows.append(row)
     }
+    
+//    override func viewWillLayoutSubviews() {
+//        mainDataLbl.text = "體育用品店資料"
+//        contentDataLbl.text = "詳細介紹"
+//
+//        mainDataLbl.setTextTitle()
+//        contentDataLbl.setTextTitle()
+//    }
     
     override func refresh() {
         refresh(StoreTable.self)
@@ -77,17 +104,18 @@ class ShowStoreVC: ShowVC {
     
     override func setData() {
         
+        super.setData()
         if table != nil {
             myTable = table as? StoreTable
             if (myTable != nil) {
-                setMainData(myTable!)
+                //setMainData(myTable!)
                 tableView.reloadData()
             }
         }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableRowKeys.count
+        return memberRows.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,23 +123,26 @@ class ShowStoreVC: ShowVC {
         if tableView == self.tableView {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
             
-            let key = tableRowKeys[indexPath.row]
-            if tableRows[key] != nil {
-                let row = tableRows[key]!
-                let icon = row["icon"] ?? ""
-                let title = row["title"] ?? ""
-                var content = row["content"] ?? ""
-                if key == "fb" && !content.isEmpty {
-                    content = "連結請按此"
-                }
-                if key == "website" && !content.isEmpty {
-                    content = "連結請按此"
-                }
-                cell.update(icon: icon, title: title, content: content)
-                    //print("\(key):\(cell.frame.height)")
-            }
+            let row: MemberRow = memberRows[indexPath.row]
+            cell.update(icon: row.icon, title: row.title, content: row.show)
             
-            if indexPath.row == tableRowKeys.count - 1 {
+//            let key = tableRowKeys[indexPath.row]
+//            if tableRows[key] != nil {
+//                let row = tableRows[key]!
+//                let icon = row["icon"] ?? ""
+//                let title = row["title"] ?? ""
+//                var content = row["content"] ?? ""
+//                if key == "fb" && !content.isEmpty {
+//                    content = "連結請按此"
+//                }
+//                if key == "website" && !content.isEmpty {
+//                    content = "連結請按此"
+//                }
+//                cell.update(icon: icon, title: title, content: content)
+//                    //print("\(key):\(cell.frame.height)")
+//            }
+            
+            if indexPath.row == memberRows.count - 1 {
                 UIView.animate(withDuration: 0, animations: {self.tableView.layoutIfNeeded()}) { (complete) in
                     var heightOfTableView: CGFloat = 0.0
                     let cells = self.tableView.visibleCells
@@ -120,7 +151,12 @@ class ShowStoreVC: ShowVC {
                     }
                     //print(heightOfTableView)
                     self.tableViewConstraintHeight.constant = heightOfTableView
-                    self.changeScrollViewContentSize()
+                    self.dataConstraintHeight.constant += heightOfTableView
+                    
+                    self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+//                    self.tableViewConstraintHeight.constant = heightOfTableView
+//                    self.changeScrollViewContentSize()
                 }
             }
             return cell
@@ -149,20 +185,20 @@ class ShowStoreVC: ShowVC {
     
     
     
-    override func changeScrollViewContentSize() {
-        
-        let h1 = featured.bounds.size.height
-        let h2 = mainDataLbl.bounds.size.height
-        let h3 = tableViewConstraintHeight.constant
-        let h6 = contentDataLbl.bounds.size.height
-        let h7 = contentViewConstraintHeight!.constant
-
-        //print(contentViewConstraintHeight)
-        
-        let h: CGFloat = h1 + h2 + h3 + h6 + h7 + 300
-        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
-        containerViewConstraintHeight.constant = h
-        //print(h1)
-    }
+//    override func changeScrollViewContentSize() {
+//
+//        let h1 = featured.bounds.size.height
+//        let h2 = mainDataLbl.bounds.size.height
+//        let h3 = tableViewConstraintHeight.constant
+//        let h6 = contentDataLbl.bounds.size.height
+//        let h7 = contentViewConstraintHeight!.constant
+//
+//        //print(contentViewConstraintHeight)
+//
+//        let h: CGFloat = h1 + h2 + h3 + h6 + h7 + 300
+//        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
+//        containerViewConstraintHeight.constant = h
+//        //print(h1)
+//    }
 }
 

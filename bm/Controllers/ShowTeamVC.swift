@@ -59,8 +59,12 @@ class ShowTeamVC: ShowVC {
     
     override func setBottomButtonPadding() {
         
+        if (signupButton.isHidden) {
+            bottom_button_count -= 1
+        }
+        
         let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
-        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + button_width
+        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + CGFloat(bottom_button_count-1)*button_width
         signupButtonConstraintLeading.constant = padding
     }
     
@@ -136,7 +140,7 @@ class ShowTeamVC: ShowVC {
             signupTimeLbl.visibility = .invisible
             signupDeadlineLbl.visibility = .invisible
             self.signupTableViewConstraintHeight.constant = 20
-            self.changeScrollViewContentSize()
+            //self.changeScrollViewContentSize()
         } else {
             //signupButtonContainer.visibility = .visible
             signupTimeLbl.visibility = .visible
@@ -148,6 +152,7 @@ class ShowTeamVC: ShowVC {
         
         if (myTable!.people_limit == 0) {
             signupButton.visibility = .invisible
+            setBottomButtonPadding()
         }
 
         if myTable!.isSignup {
@@ -421,10 +426,10 @@ class ShowTeamVC: ShowVC {
         //print(contentViewConstraintHeight)
             
         dataConstraintHeight.constant = h3 + h9
-        print("data height:\(dataConstraintHeight.constant)")
+        //print("data height:\(dataConstraintHeight.constant)")
         //let h: CGFloat = h1 + h2 + h3 + h4 + h5
         let h: CGFloat = featuredConstraintHeight.constant + dataConstraintHeight.constant + 300
-        print("scroll height:\(h)")
+        //print("scroll height:\(h)")
         
         //scrollContainerView.heightConstraint?.constant = h
         //scrollView.frame.height = h

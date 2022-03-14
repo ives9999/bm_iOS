@@ -91,11 +91,6 @@ class ShowCourseVC: ShowVC {
         signupDataLbl.setTextSectionTitle()
         coachDataLbl.text = "教練資料"
         coachDataLbl.setTextSectionTitle()
-        contentDataLbl.text = "詳細介紹"
-        contentDataLbl.setTextSectionTitle()
-        
-        scrollContainerHeight += dataConstraintHeight.constant
-        containerViewConstraintHeight.constant = scrollContainerHeight
         
         refresh(CourseTable.self)
         //refresh()
@@ -147,8 +142,12 @@ class ShowCourseVC: ShowVC {
     
     override func setBottomButtonPadding() {
         
+        if (signupButton.isHidden) {
+            bottom_button_count -= 1
+        }
+        
         let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
-        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + button_width
+        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + CGFloat(bottom_button_count-1)*button_width
         signupButtonConstraintLeading.constant = padding
     }
     

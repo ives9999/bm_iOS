@@ -19,6 +19,7 @@ class ShowProductVC: ShowVC {
     @IBOutlet weak var contentConstraintViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var submitButton: SubmitButton!
+    @IBOutlet weak var submitButtonConstraintLeading: NSLayoutConstraint!
     
     var myTable: ProductTable?
             
@@ -27,35 +28,41 @@ class ShowProductVC: ShowVC {
 
         dataService = ProductService.instance
         
-        submitButton.setTitle("購買")
+        //titleLbl.textColor = UIColor.black
         
-        titleLbl.textColor = UIColor.black
-        
-        imageContainerView.backgroundColor = UIColor.clear
-        descView.backgroundColor = UIColor.clear
         //scrollView.backgroundColor = UIColor.clear
         
         //imageContainerViewConstraintHeight.constant = 0
         //contentConstraintViewHeight.constant = 0
         
+        bottom_button_count = 2
+        
         super.viewDidLoad()
+        
+        imageDataLbl.text = "更多圖片"
+        imageDataLbl.setTextSectionTitle()
+        
+        submitButton.setTitle("購買")
+        
+        //imageContainerView.backgroundColor = UIColor.clear
+        //descView.backgroundColor = UIColor.clear
+        
+        //contentConstraintViewHeight.constant = 0
+        
         refresh(ProductTable.self)
     }
     
-    override func viewWillLayoutSubviews() {
-        
-        imageDataLbl.text = "更多圖片"
-        contentDataLbl.text = "詳細介紹"
-        
-        contentDataLbl.setTextTitle()
-        imageDataLbl.setTextTitle()
-    }
+//    override func viewWillLayoutSubviews() {
+//
+//        contentDataLbl.setTextTitle()
+//        imageDataLbl.setTextTitle()
+//    }
     
     override func refresh() {
         refresh(ProductTable.self)
     }
     
-    override func initContentView() {}
+//    override func initContentView() {}
     
 //    override func refresh() {
 //        if product_token != nil {
@@ -84,31 +91,45 @@ class ShowProductVC: ShowVC {
     
     override func setData() {
         
+        super.setData()
         if table != nil {
             myTable = table as? ProductTable
             if (myTable != nil) {
                 //myTable!.filterRow()
                 //self.courseTable?.printRow()
-                setContent()
+                //setContent()  已經在showVC的refresh有執行了
                 setImages()
             }
         }
     }
     
-    override func setContent() {
-        let textView: SuperTextView = SuperTextView(frame: CGRect.zero)
-        descView.addSubview(textView)
-        textView.isScrollEnabled = false
-        textView.text = myTable!.content
-        textView.textColor = UIColor(TEXTGRAY)
-        textView.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
+    override func setBottomButtonPadding() {
         
-        let fixedWidth = textView.superview!.frame.size.width
-        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
-        textView.frame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
-        
-        contentConstraintViewHeight.constant = textView.frame.height
+        let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
+        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + CGFloat(bottom_button_count-1)*button_width
+        submitButtonConstraintLeading.constant = padding
     }
+    
+//    override func setContent() {
+//        let textView: SuperTextView = SuperTextView(frame: CGRect.zero)
+//        textView.backgroundColor = UIColor.clear
+//        descView.addSubview(textView)
+//        textView.isScrollEnabled = false
+//        textView.text = myTable!.content
+//        textView.textColor = UIColor(TEXTGRAY)
+//        textView.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
+//
+//        let fixedWidth = textView.superview!.frame.size.width
+//        let newSize = textView.sizeThatFits(CGSize(width: fixedWidth, height: CGFloat.greatestFiniteMagnitude))
+//        textView.frame.size = CGSize(width: max(newSize.width, fixedWidth), height: newSize.height)
+//
+//        contentConstraintViewHeight.constant = contentConstraintViewHeight.constant
+//
+//        self.dataConstraintHeight.constant += contentConstraintViewHeight.constant
+//
+//        self.scrollContainerHeight += self.dataConstraintHeight.constant
+//        self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+//    }
     
     func setImages() {
         if myTable != nil {
@@ -116,26 +137,31 @@ class ShowProductVC: ShowVC {
                 
                 let h: CGFloat = imageContainerView.showImages(images: myTable!.images)
                 imageContainerViewConstraintHeight.constant = h
-                changeScrollViewContentSize()
+                
+                self.dataConstraintHeight.constant += imageContainerViewConstraintHeight.constant
+                
+                self.scrollContainerHeight += self.dataConstraintHeight.constant
+                self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+                //changeScrollViewContentSize()
             }
         }
     }
 
-    override func changeScrollViewContentSize() {
-        
-        let h1 = featured.bounds.size.height
-        let h2 = imageDataLbl.bounds.size.height
-        let h3 = imageContainerViewConstraintHeight.constant
-        let h4 = contentDataLbl.bounds.size.height
-        let h5 = contentConstraintViewHeight.constant
-
-        //print(contentViewConstraintHeight)
-        
-        let h: CGFloat = h1 + h2 + h3 + h4 + h5 + 300
-        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
-        containerViewConstraintHeight.constant = h
-        //print(h1)
-    }
+//    override func changeScrollViewContentSize() {
+//
+//        let h1 = featured.bounds.size.height
+//        let h2 = imageDataLbl.bounds.size.height
+//        let h3 = imageContainerViewConstraintHeight.constant
+//        let h4 = contentDataLbl.bounds.size.height
+//        let h5 = contentConstraintViewHeight.constant
+//
+//        //print(contentViewConstraintHeight)
+//
+//        let h: CGFloat = h1 + h2 + h3 + h4 + h5 + 300
+//        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
+//        containerViewConstraintHeight.constant = h
+//        //print(h1)
+//    }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
         //print("purchase")

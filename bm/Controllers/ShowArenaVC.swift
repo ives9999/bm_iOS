@@ -33,11 +33,6 @@ class ShowArenaVC: ShowVC {
 //            "pv":["icon":"pv","title":"瀏覽數","content":""],
 //            "created_at_show":["icon":"date","title":"建立日期","content":""]
 //        ]
-        bottom_button_count = 1
-        
-        
-        scrollContainerHeight += dataConstraintHeight.constant
-        containerViewConstraintHeight.constant = scrollContainerHeight
         
         refresh(ArenaTable.self)
     }
@@ -49,7 +44,7 @@ class ShowArenaVC: ShowVC {
         }
         
         myTable = table as? ArenaTable
-        var row: MemberRow = MemberRow(title: "電話", icon: "tel", show: myTable!.tel)
+        var row: MemberRow = MemberRow(title: "電話", icon: "tel", show: myTable!.tel_show)
         memberRows.append(row)
         row = MemberRow(title: "住址", icon: "map", show: myTable!.address)
         memberRows.append(row)
@@ -69,12 +64,6 @@ class ShowArenaVC: ShowVC {
         memberRows.append(row)
         row = MemberRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
         memberRows.append(row)
-    }
-    
-    override func setBottomButtonPadding() {
-        
-        let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
-        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding
     }
 
 //    override func viewWillLayoutSubviews() {

@@ -16,7 +16,7 @@ class ShowCoachVC: ShowVC {
     @IBOutlet weak var cityBtn: CityButton!
     //@IBOutlet weak var contactLbl: SuperLabel!
     @IBOutlet weak var courseLbl: SuperLabel!
-    @IBOutlet weak var timetableLbl: SuperLabel!
+    //@IBOutlet weak var timetableLbl: SuperLabel!
     @IBOutlet weak var chargeLbl: SuperLabel!
     @IBOutlet weak var expLbl: SuperLabel!
     @IBOutlet weak var licenseLbl: SuperLabel!
@@ -26,8 +26,8 @@ class ShowCoachVC: ShowVC {
     //@IBOutlet weak var featuredView: UIImageView!
     //@IBOutlet weak var contactTableView: SuperTableView!
     @IBOutlet weak var courseTableView: SuperTableView!
-    @IBOutlet weak var timetableView: UIView!
-    @IBOutlet weak var timetableCollectionView: UICollectionView!
+//    @IBOutlet weak var timetableView: UIView!
+//    @IBOutlet weak var timetableCollectionView: UICollectionView!
     
     @IBOutlet weak var chargeView: UIView!
     var chargeWebView: SuperWebView = SuperWebView()
@@ -43,8 +43,8 @@ class ShowCoachVC: ShowVC {
     //@IBOutlet weak var featuredViewHeight: NSLayoutConstraint!
     //@IBOutlet weak var contactTableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var courseTableViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var timetableViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var timetableConllectionViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var timetableViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var timetableConllectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var chargeViewHeight: NSLayoutConstraint!
     @IBOutlet weak var expViewHeight: NSLayoutConstraint!
     @IBOutlet weak var licenseViewHeight: NSLayoutConstraint!
@@ -102,18 +102,31 @@ class ShowCoachVC: ShowVC {
         
         super.viewDidLoad()
         
-        tableRowKeys = [MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY,"seniority_show",CREATED_AT_KEY,PV_KEY]
-        tableRows = [
-            MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
-            LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"false"],
-            FB_KEY:["icon":"fb","title":"fb","content":"","isPressed":"true"],
-            YOUTUBE_KEY:["icon":"youtube","title":"youtube","content":"","isPressed":"true"],
-            WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],
-            EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"],
-            "seniority_show":["icon":"seniority","title":"年資","content":""],
-            CREATED_AT_KEY:["icon":"date","title":"建立日期","content":""],
-            PV_KEY:["icon":"pv","title":"瀏覽數","content":""]
-        ]
+        courseLbl.text = "課程資料"
+        courseLbl.setTextSectionTitle()
+        chargeLbl.text = "教練資料"
+        chargeLbl.setTextSectionTitle()
+        expLbl.text = "收費方式"
+        expLbl.setTextSectionTitle()
+        expLbl.text = "經歷"
+        expLbl.setTextSectionTitle()
+        licenseLbl.text = "證照"
+        licenseLbl.setTextSectionTitle()
+        featLbl.text = "比賽成績"
+        featLbl.setTextSectionTitle()
+        
+//        tableRowKeys = [MOBILE_KEY,LINE_KEY,FB_KEY,YOUTUBE_KEY,WEBSITE_KEY,EMAIL_KEY,"seniority_show",CREATED_AT_KEY,PV_KEY]
+//        tableRows = [
+//            MOBILE_KEY:["icon":"mobile","title":"行動電話","content":"","isPressed":"true"],
+//            LINE_KEY:["icon":"line","title":"line id","content":"","isPressed":"false"],
+//            FB_KEY:["icon":"fb","title":"fb","content":"","isPressed":"true"],
+//            YOUTUBE_KEY:["icon":"youtube","title":"youtube","content":"","isPressed":"true"],
+//            WEBSITE_KEY:["icon":"website","title":"網站","content":"","isPressed":"true"],
+//            EMAIL_KEY:["icon":"email1","title":"email","content":"","isPressed":"true"],
+//            "seniority_show":["icon":"seniority","title":"年資","content":""],
+//            CREATED_AT_KEY:["icon":"date","title":"建立日期","content":""],
+//            PV_KEY:["icon":"pv","title":"瀏覽數","content":""]
+//        ]
         
         //frameWidth = view.frame.width
         
@@ -134,18 +147,45 @@ class ShowCoachVC: ShowVC {
         refresh(CoachTable.self)
     }
     
-    override func viewWillLayoutSubviews() {
+    override func initData() {
         
-        mainDataLbl.setTextTitle()
-        //timetableLbl.setTextColor(UIColor(MY_RED))
-        chargeLbl.setTextTitle()
-        expLbl.setTextTitle()
-        licenseLbl.setTextTitle()
-        featLbl.setTextTitle()
-        //detailLbl.setTextTitle()
-        courseLbl.setTextTitle()
-        //initCollectionView()
+        if myTable == nil {
+            myTable = CoachTable()
+        }
+        
+        myTable = table as? CoachTable
+        var row: MemberRow = MemberRow(title: "行動電話", icon: "mobile", show: myTable!.mobile)
+        memberRows.append(row)
+        row = MemberRow(title: "line", icon: "line", show: myTable!.line)
+        memberRows.append(row)
+        row = MemberRow(title: "fb", icon: "fb", show: myTable!.fb)
+        memberRows.append(row)
+        row = MemberRow(title: "youtube", icon: "youtube", show: myTable!.youtube)
+        memberRows.append(row)
+        row = MemberRow(title: "網站", icon: "website", show: myTable!.website)
+        memberRows.append(row)
+        row = MemberRow(title: "EMail", icon: "email1", show: myTable!.email)
+        memberRows.append(row)
+        row = MemberRow(title: "年資", icon: "seniority", show: myTable!.seniority_show)
+        memberRows.append(row)
+        row = MemberRow(title: "瀏覽數", icon: "pv", show: String(myTable!.pv))
+        memberRows.append(row)
+        row = MemberRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
+        memberRows.append(row)
     }
+    
+//    override func viewWillLayoutSubviews() {
+//
+//        mainDataLbl.setTextTitle()
+//        //timetableLbl.setTextColor(UIColor(MY_RED))
+//        chargeLbl.setTextTitle()
+//        expLbl.setTextTitle()
+//        licenseLbl.setTextTitle()
+//        featLbl.setTextTitle()
+//        //detailLbl.setTextTitle()
+//        courseLbl.setTextTitle()
+//        //initCollectionView()
+//    }
     
     override func refresh() {
         refresh(CoachTable.self)
@@ -184,7 +224,7 @@ class ShowCoachVC: ShowVC {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
-            return tableRowKeys.count
+            return memberRows.count
         } else if tableView == courseTableView {
             if coursesTable != nil {
                 if coursesTable!.rows.count == 0 {
@@ -209,28 +249,37 @@ class ShowCoachVC: ShowVC {
         if tableView == self.tableView {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
             
+            let row: MemberRow = memberRows[indexPath.row]
+            cell.update(icon: row.icon, title: row.title, content: row.show)
+            
             //填入資料
-            let key = tableRowKeys[indexPath.row]
-            if tableRows[key] != nil {
-                let row = tableRows[key]!
-                let icon = row["icon"] ?? ""
-                let title = row["title"] ?? ""
-                
-                let content = row["content"] ?? ""
-                cell.update(icon: icon, title: title, content: content)
-            }
+//            let key = tableRowKeys[indexPath.row]
+//            if tableRows[key] != nil {
+//                let row = tableRows[key]!
+//                let icon = row["icon"] ?? ""
+//                let title = row["title"] ?? ""
+//
+//                let content = row["content"] ?? ""
+//                cell.update(icon: icon, title: title, content: content)
+//            }
             
             //計算高度
-            if indexPath.row == tableRowKeys.count - 1 {
+            if indexPath.row == memberRows.count - 1 {
                 UIView.animate(withDuration: 0, animations: {self.tableView.layoutIfNeeded()}) { (complete) in
                     var heightOfTableView: CGFloat = 0.0
                     let cells = self.tableView.visibleCells
                     for cell in cells {
                         heightOfTableView += cell.frame.height
                     }
-                    //print(heightOfTableView)
+                    
                     self.tableViewConstraintHeight.constant = heightOfTableView
-                    self.changeScrollViewContentSize()
+                    self.dataConstraintHeight.constant += heightOfTableView
+                    
+                    self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+                    //print(heightOfTableView)
+                    //self.tableViewConstraintHeight.constant = heightOfTableView
+                    //self.changeScrollViewContentSize()
                 }
             }
             return cell
@@ -243,6 +292,7 @@ class ShowCoachVC: ShowVC {
                 //row.printRow()
                 cell.forRow(row: row, isShowManager: false)
             }
+            
             if indexPath.row == coursesTable!.rows.count - 1 {
                 UIView.animate(withDuration: 0, animations: {self.courseTableView.layoutIfNeeded()}) { (complete) in
                     var heightOfTableView: CGFloat = 0.0
@@ -250,9 +300,15 @@ class ShowCoachVC: ShowVC {
                     for cell in cells {
                         heightOfTableView += cell.frame.height
                     }
-                    //print(heightOfTableView)
+                    
                     self.courseTableViewHeight.constant = heightOfTableView
-                    self.changeScrollViewContentSize()
+                    self.dataConstraintHeight.constant += heightOfTableView
+                    
+                    self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+                    //print(heightOfTableView)
+                    //self.courseTableViewHeight.constant = heightOfTableView
+                    //self.changeScrollViewContentSize()
                 }
             }
             return cell
@@ -303,6 +359,8 @@ class ShowCoachVC: ShowVC {
     
     override func setData() {
         
+        super.setData()
+        
         if (table != nil) {
             myTable = table as? CoachTable
             if (myTable != nil) {
@@ -311,13 +369,13 @@ class ShowCoachVC: ShowVC {
                         city_id = city.id
                         params["city_id"] = String(city_id)
                         params["city_type"] = "all"
-                        cityBtn.setTitle(city.name)
+                        //cityBtn.setTitle(city.name)
                     }
                 } else {
-                    cityBtn.isHidden = true
+                    //cityBtn.isHidden = true
                 }
                 
-                setMainData(myTable!)
+                //setMainData(myTable!)
                 
                 tableView.reloadData()
                 //signupTableView.reloadData()
@@ -326,7 +384,6 @@ class ShowCoachVC: ShowVC {
                 setWeb(webView: expWebView, content: myTable!.exp)
                 setWeb(webView: licenseWebView, content: myTable!.license)
                 setWeb(webView: featWebView, content: myTable!.feat)
-                //setWeb(webView: detailWebView, content: myTable!.content)
             }
         }
         
@@ -399,20 +456,44 @@ class ShowCoachVC: ShowVC {
                     if webView == self.chargeWebView {
                         self.chargeHeight = _height
                         self.chargeViewHeight!.constant = _height
+                        self.dataConstraintHeight.constant += _height
+                        
+                        self.scrollContainerHeight += self.dataConstraintHeight.constant
+                        self.containerViewConstraintHeight.constant = self.scrollContainerHeight
                     } else if (webView == self.expWebView) {
                         self.expHeight = _height
                         self.expViewHeight!.constant = _height
+                        
+                        self.dataConstraintHeight.constant += _height
+                        
+                        self.scrollContainerHeight += self.dataConstraintHeight.constant
+                        self.containerViewConstraintHeight.constant = self.scrollContainerHeight
                     } else if (webView == self.licenseWebView) {
                         self.licenseHeight = _height
                         self.licenseViewHeight!.constant = _height
+                        
+                        self.dataConstraintHeight.constant += _height
+                        
+                        self.scrollContainerHeight += self.dataConstraintHeight.constant
+                        self.containerViewConstraintHeight.constant = self.scrollContainerHeight
                     } else if (webView == self.featWebView) {
                         self.featHeight = _height
                         self.featViewHeight!.constant = _height
+                        
+                        self.dataConstraintHeight.constant += _height
+                        
+                        self.scrollContainerHeight += self.dataConstraintHeight.constant
+                        self.containerViewConstraintHeight.constant = self.scrollContainerHeight
                     } else if (webView == self.contentView) {
                         //self.contentViewConstraintHeight = _height
                         self.contentViewConstraintHeight!.constant = _height
+                        
+                        self.dataConstraintHeight.constant += _height
+                        
+                        self.scrollContainerHeight += self.dataConstraintHeight.constant
+                        self.containerViewConstraintHeight.constant = self.scrollContainerHeight
                     }
-                    self.changeScrollViewContentSize()
+                    //self.changeScrollViewContentSize()
                 })
             }
             
@@ -429,27 +510,27 @@ class ShowCoachVC: ShowVC {
 //        changeScrollViewContentSize()
 //    }
     
-    override func changeScrollViewContentSize() {
-        
-        let h1 = featured.bounds.size.height
-        let h2 = mainDataLbl.bounds.size.height
-        let h3 = tableViewConstraintHeight.constant
-        let h4 = chargeLbl.bounds.size.height
-        let h5 = chargeViewHeight.constant
-        let h6 = expLbl.bounds.size.height
-        let h7 = expViewHeight.constant
-        let h8 = licenseLbl.bounds.size.height
-        let h9 = licenseViewHeight.constant
-        let h10 = contentDataLbl.bounds.size.height
-        let h11 = contentViewConstraintHeight!.constant
-        let h12 = courseLbl.bounds.size.height
-        let h13 = courseTableViewHeight.constant
-        //print(contentViewConstraintHeight)
-        
-        let h = h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + h10 + h11 + h12 + h13 + 500
-        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
-        containerViewConstraintHeight.constant = h
-    }
+//    override func changeScrollViewContentSize() {
+//
+//        let h1 = featured.bounds.size.height
+//        let h2 = mainDataLbl.bounds.size.height
+//        let h3 = tableViewConstraintHeight.constant
+//        let h4 = chargeLbl.bounds.size.height
+//        let h5 = chargeViewHeight.constant
+//        let h6 = expLbl.bounds.size.height
+//        let h7 = expViewHeight.constant
+//        let h8 = licenseLbl.bounds.size.height
+//        let h9 = licenseViewHeight.constant
+//        let h10 = contentDataLbl.bounds.size.height
+//        let h11 = contentViewConstraintHeight!.constant
+//        let h12 = courseLbl.bounds.size.height
+//        let h13 = courseTableViewHeight.constant
+//        //print(contentViewConstraintHeight)
+//
+//        let h = h1 + h2 + h3 + h4 + h5 + h6 + h7 + h8 + h9 + h10 + h11 + h12 + h13 + 500
+//        scrollView.contentSize = CGSize(width: view.frame.width, height: h)
+//        containerViewConstraintHeight.constant = h
+//    }
     
     @IBAction func cityBtnPressed(_ sender: Any) {
         //performSegue(withIdentifier: TO_HOME, sender: nil)
@@ -457,126 +538,126 @@ class ShowCoachVC: ShowVC {
         prev()
     }
     
-    func setTimetableEvent() {
-        let width: CGFloat = timetableCellWidth - 2 * timetableCellBorderWidth
-        timetableCollectionView.isUserInteractionEnabled = true
-        if timetables!.rows.count > 0 {
-            for i in 0 ... timetables!.rows.count-1 {
-                let row = timetables!.rows[i]
-                let x: CGFloat = CGFloat(row.weekday) * timetableCellWidth + timetableCellBorderWidth
-                let y1 = (CGFloat(row._start_hour-startNum)+CGFloat(row._start_minute)/60)
-                let y: CGFloat = y1 * timetableCellHeight + timetableCellBorderWidth
-                
-                var start_time: Date = Date()
-                if let tmp = row.start_time.toDateTime(format:"HH:mm:ss") {
-                    start_time = tmp
-                }
-                
-                var end_time: Date = Date()
-                if let tmp = row.end_time.toDateTime(format:"HH:mm:ss") {
-                    end_time = tmp
-                }
-                
-                let elapsed = CGFloat(end_time.timeIntervalSince(start_time)/(60*60))
-                let height: CGFloat = elapsed * timetableCellHeight - 2 * timetableCellBorderWidth
-                
-                var frame = CGRect(x: x, y: y, width: width, height: height)
-                //print(frame)
-                let v: UIView = UIView(frame: frame)
-                timetableCollectionView.addSubview(v)
-                
-                let absFrame = v.convert(v.bounds, to: scrollView)
-                v.removeFromSuperview()
-                //print(absFrame)
-                let absView = UIView(frame: absFrame)
-                absView.isUserInteractionEnabled = true
-                absView.backgroundColor = row._color.toColor()
-                absView.tag = 1000 + i
-                
-                //print(height)
-                frame = CGRect(x: 3, y: 3, width: width-6, height: height-6)
-                let titleLbl = UILabel(frame: frame)
-                //titleLbl.backgroundColor = UIColor.white
-                titleLbl.font = titleLbl.font.withSize(14)
-                titleLbl.textAlignment = .center
-                titleLbl.text = row.title
-                titleLbl.textColor = UIColor.black
-                titleLbl.numberOfLines = 0
-                //titleLbl.sizeToFit()
-                absView.addSubview(titleLbl)
-                
-                /*
-                 let line = DrawLine(frame: CGRect(x: 5, y: 35, width: width-10, height: 1))
-                 absView.addSubview(line)
-                 
-                 frame = CGRect(x: 3, y: 40, width: width, height: height-20)
-                 let contentLbl = UILabel(frame: frame)
-                 contentLbl.text = "人數：\n" + row.limit_text
-                 contentLbl.font = UIFont(name: contentLbl.font.fontName, size: 12)
-                 contentLbl.textColor = UIColor.black
-                 contentLbl.numberOfLines = 0
-                 contentLbl.sizeToFit()
-                 absView.addSubview(contentLbl)
-                 */
-                
-                let tap = UITapGestureRecognizer(target: self, action: #selector(clickTimetableEvent))
-                absView.addGestureRecognizer(tap)
-                
-                scrollView.addSubview(absView)
-            }
-        }
-    }
-    
-    @objc func clickTimetableEvent(sender: UITapGestureRecognizer) {
-        Global.instance.addSpinner(superView: view)
-        Global.instance.removeSpinner(superView: view)
-        guard let a = (sender.view) else {return}
-        let idx: Int = a.tag - 1000
-        //print(idx)
-        eventTag = idx + 1000
-        //print(eventTag)
-        let event = timetables!.rows[idx]
-        performSegue(withIdentifier: TO_SHOW_TIMETABLE, sender: event.id)
-    }
-    
-    func initCollectionView() {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        timetableCellWidth = timetableCollectionView.frame.width/CGFloat(columnNum)
-        layout.itemSize = CGSize(width: timetableCellWidth, height: timetableCellHeight)
-        timetableCollectionView.collectionViewLayout = layout
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //print((endNum-startNum)*columnNum)
-        return (endNum-startNum)*columnNum
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //print(indexPath.row)
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TimetableCell", for: indexPath)
-        
-        let startTime: Int = indexPath.row / columnNum + startNum
-        let weekday: Int = indexPath.row % columnNum
-        
-        let contentView = cell.contentView
-        contentView.layer.borderWidth = timetableCellBorderWidth
-        contentView.layer.borderColor = UIColor.gray.cgColor
-        cell.tag = (startTime - startNum)*columnNum + weekday
-        
-        let timeLabel = cell.contentView.subviews[0] as! SuperLabel
-        timeLabel.setTextSize(15.0)
-        
-        if weekday == 0 {
-            timeLabel.text = "\(startTime)-\(startTime+1)"
-        } else {
-            timeLabel.text = ""
-        }
-        
-        return cell
-    }
+//    func setTimetableEvent() {
+//        let width: CGFloat = timetableCellWidth - 2 * timetableCellBorderWidth
+//        timetableCollectionView.isUserInteractionEnabled = true
+//        if timetables!.rows.count > 0 {
+//            for i in 0 ... timetables!.rows.count-1 {
+//                let row = timetables!.rows[i]
+//                let x: CGFloat = CGFloat(row.weekday) * timetableCellWidth + timetableCellBorderWidth
+//                let y1 = (CGFloat(row._start_hour-startNum)+CGFloat(row._start_minute)/60)
+//                let y: CGFloat = y1 * timetableCellHeight + timetableCellBorderWidth
+//
+//                var start_time: Date = Date()
+//                if let tmp = row.start_time.toDateTime(format:"HH:mm:ss") {
+//                    start_time = tmp
+//                }
+//
+//                var end_time: Date = Date()
+//                if let tmp = row.end_time.toDateTime(format:"HH:mm:ss") {
+//                    end_time = tmp
+//                }
+//
+//                let elapsed = CGFloat(end_time.timeIntervalSince(start_time)/(60*60))
+//                let height: CGFloat = elapsed * timetableCellHeight - 2 * timetableCellBorderWidth
+//
+//                var frame = CGRect(x: x, y: y, width: width, height: height)
+//                //print(frame)
+//                let v: UIView = UIView(frame: frame)
+//                timetableCollectionView.addSubview(v)
+//
+//                let absFrame = v.convert(v.bounds, to: scrollView)
+//                v.removeFromSuperview()
+//                //print(absFrame)
+//                let absView = UIView(frame: absFrame)
+//                absView.isUserInteractionEnabled = true
+//                absView.backgroundColor = row._color.toColor()
+//                absView.tag = 1000 + i
+//
+//                //print(height)
+//                frame = CGRect(x: 3, y: 3, width: width-6, height: height-6)
+//                let titleLbl = UILabel(frame: frame)
+//                //titleLbl.backgroundColor = UIColor.white
+//                titleLbl.font = titleLbl.font.withSize(14)
+//                titleLbl.textAlignment = .center
+//                titleLbl.text = row.title
+//                titleLbl.textColor = UIColor.black
+//                titleLbl.numberOfLines = 0
+//                //titleLbl.sizeToFit()
+//                absView.addSubview(titleLbl)
+//
+//                /*
+//                 let line = DrawLine(frame: CGRect(x: 5, y: 35, width: width-10, height: 1))
+//                 absView.addSubview(line)
+//
+//                 frame = CGRect(x: 3, y: 40, width: width, height: height-20)
+//                 let contentLbl = UILabel(frame: frame)
+//                 contentLbl.text = "人數：\n" + row.limit_text
+//                 contentLbl.font = UIFont(name: contentLbl.font.fontName, size: 12)
+//                 contentLbl.textColor = UIColor.black
+//                 contentLbl.numberOfLines = 0
+//                 contentLbl.sizeToFit()
+//                 absView.addSubview(contentLbl)
+//                 */
+//
+//                let tap = UITapGestureRecognizer(target: self, action: #selector(clickTimetableEvent))
+//                absView.addGestureRecognizer(tap)
+//
+//                scrollView.addSubview(absView)
+//            }
+//        }
+//    }
+//
+//    @objc func clickTimetableEvent(sender: UITapGestureRecognizer) {
+//        Global.instance.addSpinner(superView: view)
+//        Global.instance.removeSpinner(superView: view)
+//        guard let a = (sender.view) else {return}
+//        let idx: Int = a.tag - 1000
+//        //print(idx)
+//        eventTag = idx + 1000
+//        //print(eventTag)
+//        let event = timetables!.rows[idx]
+//        performSegue(withIdentifier: TO_SHOW_TIMETABLE, sender: event.id)
+//    }
+//
+//    func initCollectionView() {
+//        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+//        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        layout.minimumInteritemSpacing = 0
+//        layout.minimumLineSpacing = 0
+//
+//        timetableCellWidth = timetableCollectionView.frame.width/CGFloat(columnNum)
+//        layout.itemSize = CGSize(width: timetableCellWidth, height: timetableCellHeight)
+//        timetableCollectionView.collectionViewLayout = layout
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        //print((endNum-startNum)*columnNum)
+//        return (endNum-startNum)*columnNum
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        //print(indexPath.row)
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TimetableCell", for: indexPath)
+//
+//        let startTime: Int = indexPath.row / columnNum + startNum
+//        let weekday: Int = indexPath.row % columnNum
+//
+//        let contentView = cell.contentView
+//        contentView.layer.borderWidth = timetableCellBorderWidth
+//        contentView.layer.borderColor = UIColor.gray.cgColor
+//        cell.tag = (startTime - startNum)*columnNum + weekday
+//
+//        let timeLabel = cell.contentView.subviews[0] as! SuperLabel
+//        timeLabel.setTextSize(15.0)
+//
+//        if weekday == 0 {
+//            timeLabel.text = "\(startTime)-\(startTime+1)"
+//        } else {
+//            timeLabel.text = ""
+//        }
+//
+//        return cell
+//    }
 }
 

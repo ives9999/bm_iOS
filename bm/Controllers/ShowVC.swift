@@ -71,7 +71,6 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         }
         
         if (scrollView != nil) {
-            initContentView()
             beginRefresh()
             scrollView.addSubview(refreshControl)
         }
@@ -79,6 +78,10 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         if (dataContainerView != nil) {
             dataContainerView.layer.cornerRadius = 26.0
             dataContainerView.clipsToBounds = true
+        }
+        
+        if (contentView != nil) {
+            initContentView()
         }
         
         if (bottomView != nil) {
@@ -89,6 +92,12 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         
         containerViewConstraintWidth.constant = screen_width
         containerViewConstraintHeight.constant = 2000
+        
+        contentDataLbl.text = "詳細介紹"
+        contentDataLbl.setTextSectionTitle()
+        
+        scrollContainerHeight += dataConstraintHeight.constant
+        containerViewConstraintHeight.constant = scrollContainerHeight
         
         //refresh()
     }
@@ -184,6 +193,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     }
     
     func setContent() {
+        let n = table!.content
         let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+table!.content+"</body></html>"
         
         contentView!.loadHTMLString(content, baseURL: nil)
