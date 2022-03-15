@@ -40,7 +40,7 @@ class SuperLabel: UILabel {
     
     func setTextTitle() {
         self.font = UIFont(name: FONT_BOLD_NAME, size: FONT_SIZE_TITLE)
-        self.textColor = UIColor(MY_GREEN)
+        self.textColor = UIColor(MY_WHITE)
     }
     
     func setTextSectionTitle() {

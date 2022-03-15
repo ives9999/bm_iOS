@@ -287,7 +287,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rYO-dF-h2F">
-                                <rect key="frame" x="0.0" y="44" width="414" height="758"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="748"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jah-0S-PJV">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="900"/>
@@ -311,7 +311,7 @@
                                                                     <constraint firstAttribute="width" constant="33" id="LBB-rV-o0G"/>
                                                                     <constraint firstAttribute="height" constant="26" id="ouD-fv-izm"/>
                                                                 </constraints>
-                                                                <state key="normal" image="restart" catalog="system"/>
+                                                                <state key="normal" image="prev"/>
                                                                 <connections>
                                                                     <action selector="prevBtnPressed:" destination="RGq-og-ITn" eventType="touchUpInside" id="Ezf-xp-uI4"/>
                                                                     <action selector="prevBtnPressed:" destination="ZZa-2U-rNz" eventType="touchUpInside" id="tYp-EG-Ccp"/>
@@ -461,20 +461,23 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="4Ur-T9-gzC"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="7pw-ph-Yp9"/>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffc-Eg-EnS">
-                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ffc-Eg-EnS" customClass="BottomView" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="792" width="414" height="70"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ab-Ym-8wy" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="30" y="10" width="120" height="40"/>
+                                        <rect key="frame" x="30" y="15" width="120" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="EBd-pX-82C"/>
                                             <constraint firstAttribute="width" constant="120" id="RYM-d4-XCn"/>
                                         </constraints>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="signupButtonPressed:" destination="RGq-og-ITn" eventType="touchUpInside" id="c79-Wi-MWk"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGu-QZ-rco" customClass="LikeButton" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="210" y="10" width="120" height="40"/>
+                                        <rect key="frame" x="210" y="15" width="120" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="120" id="3RK-a9-YcS"/>
                                             <constraint firstAttribute="height" constant="40" id="AMr-qH-aOC"/>
@@ -483,9 +486,9 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.36470588235294116" green="0.36470588235294116" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="2LX-hb-De0"/>
+                                    <constraint firstAttribute="height" constant="70" id="2LX-hb-De0"/>
                                     <constraint firstItem="dGu-QZ-rco" firstAttribute="centerY" secondItem="ffc-Eg-EnS" secondAttribute="centerY" id="7FS-AS-IgQ"/>
                                     <constraint firstItem="8ab-Ym-8wy" firstAttribute="leading" secondItem="ffc-Eg-EnS" secondAttribute="leading" constant="30" id="H44-Zo-N61"/>
                                     <constraint firstItem="8ab-Ym-8wy" firstAttribute="centerY" secondItem="ffc-Eg-EnS" secondAttribute="centerY" id="NZe-bY-ZBc"/>
@@ -494,7 +497,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="X4V-N9-Dea"/>
-                        <color key="backgroundColor" red="0.36470588240000001" green="0.36470588240000001" blue="0.36470588240000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="rYO-dF-h2F" firstAttribute="top" secondItem="X4V-N9-Dea" secondAttribute="top" id="2Gn-Np-kZF"/>
                             <constraint firstItem="X4V-N9-Dea" firstAttribute="bottom" secondItem="ffc-Eg-EnS" secondAttribute="bottom" id="3XI-Kc-GvT"/>
@@ -990,8 +993,7 @@
     <resources>
         <image name="background" width="377.5" height="670"/>
         <image name="nophoto" width="900" height="514"/>
-        <image name="prev" width="20.5" height="20.5"/>
-        <image name="restart" catalog="system" width="120" height="128"/>
+        <image name="prev" width="25" height="25"/>
         <image name="team" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

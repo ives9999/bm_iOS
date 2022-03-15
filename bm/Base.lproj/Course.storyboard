@@ -384,7 +384,7 @@
                                                                     <constraint firstAttribute="width" constant="33" id="94W-Xe-0pd"/>
                                                                     <constraint firstAttribute="height" constant="26" id="zfn-Zd-3Sf"/>
                                                                 </constraints>
-                                                                <state key="normal" image="restart" catalog="system"/>
+                                                                <state key="normal" image="prev"/>
                                                                 <connections>
                                                                     <action selector="prevBtnPressed:" destination="g8Z-F3-Zav" eventType="touchUpInside" id="395-or-0bt"/>
                                                                 </connections>
@@ -554,7 +554,7 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="NXC-VF-M1S"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="Slj-YJ-lRe"/>
                             </scrollView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPP-If-AiI">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPP-If-AiI" customClass="BottomView" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="802" width="414" height="60"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aMp-ru-1K9" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
@@ -1551,8 +1551,7 @@
         <image name="gear" width="25" height="25"/>
         <image name="nophoto" width="900" height="514"/>
         <image name="plus" width="25" height="25"/>
-        <image name="prev" width="20.5" height="20.5"/>
-        <image name="restart" catalog="system" width="120" height="128"/>
+        <image name="prev" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

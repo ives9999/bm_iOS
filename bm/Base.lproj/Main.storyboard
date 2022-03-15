@@ -423,7 +423,7 @@
                                                                     <constraint firstAttribute="width" constant="33" id="Tia-Jf-f1s"/>
                                                                     <constraint firstAttribute="height" constant="26" id="XhP-W6-Htp"/>
                                                                 </constraints>
-                                                                <state key="normal" image="restart" catalog="system"/>
+                                                                <state key="normal" image="prev"/>
                                                                 <connections>
                                                                     <action selector="prevBtnPressed:" destination="dSv-5R-j4i" eventType="touchUpInside" id="4Th-Fv-py2"/>
                                                                 </connections>
@@ -2419,16 +2419,6 @@
             </objects>
             <point key="canvasLocation" x="1684" y="-2067"/>
         </scene>
-        <!--register-->
-        <scene sceneID="JNH-QO-H8X">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="register" storyboardName="Member" referencedIdentifier="register" id="xkK-ma-V61" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="gZK-fP-odZ"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9KN-tK-FTn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3039" y="-1415"/>
-        </scene>
         <!--UIViewController-vfe-V8-Hfx-->
         <scene sceneID="IoN-NY-ezd">
             <objects>
@@ -2832,8 +2822,7 @@
     <resources>
         <image name="background" width="377.5" height="670"/>
         <image name="plus" width="25" height="25"/>
-        <image name="prev" width="20.5" height="20.5"/>
-        <image name="restart" catalog="system" width="120" height="128"/>
+        <image name="prev" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

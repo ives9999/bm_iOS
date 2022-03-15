@@ -18,7 +18,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollContainerView: UIView!
-    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var bottomView: BottomView!
     
     @IBOutlet weak var featured: UIImageView!
     @IBOutlet weak var dataContainerView: UIView!

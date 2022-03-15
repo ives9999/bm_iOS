@@ -479,7 +479,7 @@
                                                                     <constraint firstAttribute="height" constant="26" id="502-da-W0S"/>
                                                                     <constraint firstAttribute="width" constant="33" id="ddd-fJ-Psd"/>
                                                                 </constraints>
-                                                                <state key="normal" image="restart" catalog="system"/>
+                                                                <state key="normal" image="prev"/>
                                                                 <connections>
                                                                     <action selector="prevBtnPressed:" destination="Lij-YE-05T" eventType="touchUpInside" id="hxb-wd-PPH"/>
                                                                     <action selector="prevBtnPressed:" destination="T1c-f4-kja" eventType="touchUpInside" id="rfm-HL-G6c"/>
@@ -1216,7 +1216,7 @@
                                                                     <constraint firstAttribute="width" constant="33" id="K7f-Zl-nWy"/>
                                                                     <constraint firstAttribute="height" constant="26" id="uAe-6g-uOO"/>
                                                                 </constraints>
-                                                                <state key="normal" image="restart" catalog="system"/>
+                                                                <state key="normal" image="prev"/>
                                                                 <connections>
                                                                     <action selector="prevBtnPressed:" destination="Lij-YE-05T" eventType="touchUpInside" id="ZBe-fw-8X1"/>
                                                                 </connections>
@@ -1586,7 +1586,7 @@
                                                                     <constraint firstAttribute="height" constant="26" id="4je-6L-drm"/>
                                                                     <constraint firstAttribute="width" constant="33" id="Ujm-6P-aX2"/>
                                                                 </constraints>
-                                                                <state key="normal" image="restart" catalog="system"/>
+                                                                <state key="normal" image="prev"/>
                                                                 <connections>
                                                                     <action selector="prevBtnPressed:" destination="1U3-lr-VA1" eventType="touchUpInside" id="9MS-P1-kJl"/>
                                                                 </connections>
@@ -2076,8 +2076,7 @@
         <image name="more" width="25" height="25"/>
         <image name="nophoto" width="900" height="514"/>
         <image name="plus" width="25" height="25"/>
-        <image name="prev" width="20.5" height="20.5"/>
-        <image name="restart" catalog="system" width="120" height="128"/>
+        <image name="prev" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -18,7 +18,7 @@ class ShowPNVC: MyTableVC, PNCellDelegate {
     @IBOutlet weak var tableViewHeightCons: NSLayoutConstraint!
     @IBOutlet weak var clearBtn: SubmitButton!
     //@IBOutlet weak var scrollView: SuperScrollView!
-    @IBOutlet weak var bottomView: StaticBottomView!
+    @IBOutlet weak var bottomView: BottomView!
     @IBOutlet weak var setupSwitch: SuperSwitch!
     
     var pnArr: [[String: String]]?

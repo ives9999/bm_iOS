@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StaticBottomView: UIView {
+class BottomView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,7 +21,7 @@ class StaticBottomView: UIView {
     }
     
     func commonInit()  {
-        backgroundColor = UIColor(MY_GREEN)
+        backgroundColor = UIColor(BOTTOM_VIEW_BACKGROUND)
     }
     
     func myAttach() {

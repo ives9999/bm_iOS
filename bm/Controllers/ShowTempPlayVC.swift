@@ -54,7 +54,7 @@ class ShowTempPlayVC: MyTableVC {
     @IBOutlet weak var titleLbl: UILabel!
     //@IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var buttomView: StaticBottomView!
+    @IBOutlet weak var buttomView: BottomView!
     @IBOutlet weak var plusOneButton: SubmitButton!
     @IBOutlet weak var cancelPlusButton: CancelButton!
     @IBOutlet weak var likeButton: LikeButton!

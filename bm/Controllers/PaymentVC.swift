@@ -14,7 +14,7 @@ class PaymentVC: MyTableVC {
     
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var submitBtn: SuperButton!
-    @IBOutlet weak var bottomStaticView: StaticBottomView!
+    @IBOutlet weak var bottomStaticView: BottomView!
     
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     

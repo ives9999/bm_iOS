@@ -17,7 +17,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     @IBOutlet weak var searchTab: Tag!
     @IBOutlet weak var allTab: Tag!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomView: StaticBottomView!
+    @IBOutlet weak var bottomView: BottomView!
         
     var searchTags: [[String: Any]] = [[String: Any]]()
     var selectedTagIdx: Int = 0

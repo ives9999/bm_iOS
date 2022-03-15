@@ -18,7 +18,7 @@ class LikeButton: SuperButton {
     var count: Int = 0
     
     let likeString: String = "like1"
-    let unLikeString: String = "like"
+    let unLikeString: String = "likeongreenno"
 
     init() {
         super.init(frame: .zero)
