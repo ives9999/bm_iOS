@@ -196,7 +196,7 @@ let TO_VALIDATE: String = "toValidate"
 let TO_YOUTUBE_PLAYER: String = "toYoutubePlayer"
 
 // color
-let BOTTOM_VIEW_BACKGROUND = "#555555"
+let BOTTOM_VIEW_BACKGROUND = "#5D5D5D"
 let CELL_SELECTED = "#363636"
 let MY_BLACK = "#000000"
 let MY_GREEN = "#a6d903"

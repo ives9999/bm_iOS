@@ -55,7 +55,7 @@ class LikeButton: SuperButton {
             tintColor = .red
         } else {
             likeIcon = UIImage(named: unLikeString)
-            tintColor = .white
+            tintColor = .black
         }
         setImage(likeIcon, for: .normal)
         setTitle("\(initCount)人", for: .normal)
@@ -76,7 +76,7 @@ class LikeButton: SuperButton {
             tintColor = .red
         } else {
             likeIcon = UIImage(named: unLikeString)
-            tintColor = .white
+            tintColor = .black
         }
         setImage(likeIcon, for: .normal)
     }

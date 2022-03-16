@@ -193,7 +193,6 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     }
     
     func setContent() {
-        let n = table!.content
         let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+table!.content+"</body></html>"
         
         contentView!.loadHTMLString(content, baseURL: nil)

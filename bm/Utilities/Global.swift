@@ -965,16 +965,16 @@ class Global {
         }
     }
     
-    func setupTabbar(_ ctrl: UIViewController) {
-        let tbC = ctrl.tabBarController
-        //tbC!.tabBar.barTintColor = UIColor.red
-        if (tbC != nil) {
-            tbC!.tabBar.barTintColor = UIColor(TABBAR_BACKGROUND)
-            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: FONT_NAME, size: FONT_SIZE_TABBAR)!], for: UIControl.State.normal)
-        }
-//        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: UIControlState.normal)
-//        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor(MY_GREEN)], for: UIControlState.selected)
-    }
+//    func setupTabbar(_ ctrl: UIViewController) {
+//        let tbC = ctrl.tabBarController
+//        //tbC!.tabBar.barTintColor = UIColor.red
+//        if (tbC != nil) {
+//            tbC!.tabBar.barTintColor = UIColor(TABBAR_BACKGROUND)
+//            UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: FONT_NAME, size: FONT_SIZE_TABBAR)!], for: UIControl.State.normal)
+//        }
+////        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.white], for: UIControlState.normal)
+////        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor(MY_GREEN)], for: UIControlState.selected)
+//    }
     
     func menuPressedAction(_ menuBtn: UIButton, _ ctrl: UIViewController) {
         menuBtn.addTarget(ctrl.revealViewController(), action: #selector(SWRevealViewController.revealToggle(_:)), for: .touchUpInside)

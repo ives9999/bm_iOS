@@ -1250,7 +1250,7 @@
                                             <constraint firstAttribute="height" constant="26" id="e9P-2L-EkN"/>
                                             <constraint firstAttribute="width" constant="33" id="efg-TM-ESb"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="HrW-2D-NhE" eventType="touchUpInside" id="MgR-JV-t4f"/>
                                             <action selector="prevBtnPressed:" destination="HrW-2D-NhE" eventType="touchDown" id="Ohp-Ir-Ecl"/>
@@ -1319,7 +1319,7 @@
                                             <constraint firstAttribute="height" constant="26" id="Vss-Qp-pDs"/>
                                             <constraint firstAttribute="width" constant="33" id="gaY-pd-mAA"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="FL6-tC-Cb5" eventType="touchUpInside" id="yGI-2F-G2P"/>
                                         </connections>
@@ -1552,6 +1552,7 @@
         <image name="nophoto" width="900" height="514"/>
         <image name="plus" width="25" height="25"/>
         <image name="prev" width="25" height="25"/>
+        <image name="prev_black" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

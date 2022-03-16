@@ -32,7 +32,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func viewDidLoad() {
         
-        Global.instance.setupTabbar(self)
+        //Global.instance.setupTabbar(self)
         
         myTablView = tableView
         dataService = TeamService.instance

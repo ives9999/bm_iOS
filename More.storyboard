@@ -25,7 +25,7 @@
                                             <constraint firstAttribute="height" constant="26" id="jJf-mz-s2B"/>
                                             <constraint firstAttribute="width" constant="33" id="qaa-W2-RWY"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="7B3-vz-daH" eventType="touchUpInside" id="VHd-NE-E76"/>
                                             <action selector="prevBtnPressed:" destination="NIB-Wk-iZw" eventType="touchUpInside" id="cgf-er-MAu"/>
@@ -228,7 +228,7 @@
                                     <constraint firstAttribute="width" constant="33" id="8Xb-hf-nnc"/>
                                     <constraint firstAttribute="height" constant="26" id="ONv-0t-L1w"/>
                                 </constraints>
-                                <state key="normal" image="prev"/>
+                                <state key="normal" image="prev_black"/>
                                 <connections>
                                     <action selector="prevBtnPressed:" destination="NIB-Wk-iZw" eventType="touchUpInside" id="Q33-wU-xwI"/>
                                     <action selector="prevBtnPressed:" destination="fEf-Ib-3oR" eventType="touchUpInside" id="kbV-lj-KBu"/>
@@ -880,7 +880,7 @@
                                             <constraint firstAttribute="width" constant="33" id="3jQ-t0-MvD"/>
                                             <constraint firstAttribute="height" constant="33" id="we8-gA-Jsc"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="Nap-sO-qjg" eventType="touchUpInside" id="HhL-Nm-dDx"/>
                                         </connections>
@@ -1397,7 +1397,7 @@
                                             <constraint firstAttribute="height" constant="33" id="R5U-5B-4Dg"/>
                                             <constraint firstAttribute="width" constant="33" id="zJx-Af-OEd"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="kQw-8n-y0W" eventType="touchUpInside" id="DLM-5e-GAZ"/>
                                         </connections>
@@ -1456,7 +1456,7 @@
                                             <constraint firstAttribute="height" constant="26" id="IzF-VR-wAX"/>
                                             <constraint firstAttribute="width" constant="33" id="cob-zv-Q3f"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="o4v-AV-CC1" eventType="touchUpInside" id="WLF-1Y-X6d"/>
                                         </connections>
@@ -1967,7 +1967,7 @@
                                             <constraint firstAttribute="height" constant="26" id="Q03-jU-gDe"/>
                                             <constraint firstAttribute="width" constant="33" id="yUq-bX-nPG"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="gYa-U5-dpO" eventType="touchUpInside" id="9La-CP-zcZ"/>
                                         </connections>
@@ -2066,8 +2066,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Wr7-FG-b1z"/>
-        <segue reference="cDK-8u-UPz"/>
+        <segue reference="f4Q-EU-SfD"/>
+        <segue reference="e7e-xA-HgL"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arena" width="25" height="25"/>
@@ -2077,6 +2077,7 @@
         <image name="nophoto" width="900" height="514"/>
         <image name="plus" width="25" height="25"/>
         <image name="prev" width="25" height="25"/>
+        <image name="prev_black" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

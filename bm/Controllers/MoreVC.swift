@@ -28,7 +28,7 @@ class MoreVC: MyTableVC {
         myTablView = tableView
         //rows = _rows
         super.viewDidLoad()
-        Global.instance.setupTabbar(self)
+        //Global.instance.setupTabbar(self)
         //Global.instance.menuPressedAction(menuBtn, self)
 
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")

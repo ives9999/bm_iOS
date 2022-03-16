@@ -31,7 +31,7 @@
                                             <constraint firstAttribute="height" constant="18" id="WVg-nz-IvE"/>
                                             <constraint firstAttribute="width" constant="24" id="ZKP-wB-iSM"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="LFC-Iw-rVE"/>
                                         </connections>
@@ -170,7 +170,6 @@
                     <connections>
                         <outlet property="emailTxt" destination="0yo-nU-T3O" id="5e9-5s-b01"/>
                         <outlet property="passwordTxt" destination="69n-Va-wxY" id="guj-JH-2tK"/>
-                        <segue destination="trT-Qb-e9n" kind="show" identifier="toPassword" id="ous-Dp-pXL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blT-yh-XVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -200,7 +199,7 @@
                                             <constraint firstAttribute="width" constant="24" id="8al-Uk-K5J"/>
                                             <constraint firstAttribute="height" constant="18" id="XIs-WI-eFH"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="JeB-mk-bMm"/>
                                         </connections>
@@ -218,7 +217,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhY-Z2-MHj" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="117" y="380.5" width="180" height="43"/>
+                                <rect key="frame" x="117" y="378.5" width="180" height="43"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Nkw-Yy-vA5"/>
@@ -238,7 +237,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySD-eX-vph" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="147" y="301.5" width="120" height="43"/>
+                                <rect key="frame" x="147" y="299.5" width="120" height="43"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="0af-dv-bWd"/>
@@ -258,7 +257,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vic-zn-4Mh" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="118" y="219.5" width="210" height="46"/>
+                                <rect key="frame" x="118" y="221.5" width="210" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="0Vd-2u-HEh"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="3ox-CX-VBF"/>
@@ -325,11 +324,11 @@
             <objects>
                 <viewController storyboardIdentifier="passwo" id="trT-Qb-e9n" customClass="PasswordVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z2o-2r-ldq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5FF-VX-gI0">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘記密碼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11X-Jp-huJ">
                                         <rect key="frame" x="168.5" y="18.5" width="77" height="27"/>
@@ -343,7 +342,7 @@
                                             <constraint firstAttribute="height" constant="18" id="L2s-BF-kr5"/>
                                             <constraint firstAttribute="width" constant="24" id="R1d-Lu-ld8"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="trT-Qb-e9n" eventType="touchUpInside" id="r4Y-hJ-lSX"/>
                                         </connections>
@@ -361,7 +360,7 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="myM-dp-wNG">
-                                <rect key="frame" x="107" y="124" width="200" height="42"/>
+                                <rect key="frame" x="107" y="168" width="200" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="alu-j7-QDT"/>
                                     <constraint firstAttribute="width" constant="200" id="oag-nX-llh"/>
@@ -406,7 +405,7 @@
                                             <constraint firstAttribute="height" constant="18" id="CsC-aQ-Uhh"/>
                                             <constraint firstAttribute="width" constant="24" id="y53-mt-rLS"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="Fdb-fp-XbD" eventType="touchUpInside" id="HOW-il-htJ"/>
                                         </connections>
@@ -665,7 +664,7 @@
                                             <constraint firstAttribute="height" constant="18" id="0Cr-Db-KOa"/>
                                             <constraint firstAttribute="width" constant="24" id="BCQ-Tz-88H"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="kfU-PJ-07b" eventType="touchUpInside" id="ND7-b9-6nR"/>
                                         </connections>
@@ -1101,7 +1100,7 @@
                                             <constraint firstAttribute="width" constant="33" id="48A-Yk-H0z"/>
                                             <constraint firstAttribute="height" constant="26" id="VJh-sW-3KS"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prev1" destination="44A-2y-PC4" eventType="touchUpInside" id="fa8-bP-yux"/>
                                             <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="Epm-Sq-ewP"/>
@@ -1169,7 +1168,7 @@
                                             <constraint firstAttribute="width" constant="33" id="mPb-kP-wdg"/>
                                             <constraint firstAttribute="height" constant="26" id="yf5-h9-qV3"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="Xjz-Rc-OSs"/>
                                         </connections>
@@ -1319,7 +1318,7 @@
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="ONY-4Z-cJT"/>
                                             <constraint firstAttribute="height" constant="18" id="ong-xf-g5R"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="M4V-sg-RS1" eventType="touchUpInside" id="4vS-sB-NGs"/>
                                         </connections>
@@ -1434,7 +1433,7 @@
                                             <constraint firstAttribute="width" constant="24" id="h7C-gr-eCg"/>
                                             <constraint firstAttribute="height" constant="18" id="lu5-e1-O1H"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="C62-n2-UAy" eventType="touchUpInside" id="DMw-Ug-ulG"/>
                                         </connections>
@@ -1546,7 +1545,7 @@
                                             <constraint firstAttribute="width" constant="33" id="7pl-TO-gk7"/>
                                             <constraint firstAttribute="height" constant="26" id="dmF-8K-Mm4"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prev1" destination="44A-2y-PC4" eventType="touchUpInside" id="b5d-Bc-fBl"/>
                                             <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="qOR-qE-Kzy"/>
@@ -1637,18 +1636,18 @@
                                                 <rect key="frame" x="16" y="165" width="382" height="280"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者金鑰：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXd-Pz-BLr" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="17" width="104" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="11" width="104" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DzE-80-1OQ" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="112" y="4" width="229" height="46"/>
+                                                        <rect key="frame" x="112" y="4" width="229" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McF-pq-NPP">
-                                                        <rect key="frame" x="357" y="14.5" width="25" height="25"/>
+                                                        <rect key="frame" x="357" y="8.5" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="8h7-OA-G7u"/>
                                                             <constraint firstAttribute="width" constant="25" id="qB1-0m-gxQ"/>
@@ -1660,7 +1659,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwT-9w-87p" customClass="CityButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="164.5" y="120" width="53" height="31"/>
+                                                        <rect key="frame" x="164.5" y="108" width="53" height="31"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="驗證"/>
                                                         <connections>
@@ -1668,7 +1667,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9C-oz-mUD" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="54" width="163.5" height="39"/>
+                                                        <rect key="frame" x="8" y="42" width="163.5" height="39"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="question" imagePlacement="leading" title="如何取得會員金鑰" titleAlignment="center">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
@@ -1678,7 +1677,7 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="LAv-At-hEc">
-                                                        <rect key="frame" x="0.0" y="171" width="259" height="95.5"/>
+                                                        <rect key="frame" x="0.0" y="159" width="259" height="95.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="59F-c0-JFz" userLabel="暱稱">
                                                                 <rect key="frame" x="0.0" y="0.0" width="179" height="20.5"/>
@@ -1978,7 +1977,7 @@
                                             <constraint firstAttribute="width" constant="33" id="5zt-wX-GzI"/>
                                             <constraint firstAttribute="height" constant="26" id="u7Y-cH-ZUg"/>
                                         </constraints>
-                                        <state key="normal" image="prev"/>
+                                        <state key="normal" image="prev_black"/>
                                         <connections>
                                             <action selector="prev1" destination="44A-2y-PC4" eventType="touchUpInside" id="eoc-fI-Y8n"/>
                                             <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="F0L-Wj-hmd"/>
@@ -2031,22 +2030,22 @@
     </scenes>
     <designables>
         <designable name="DzE-80-1OQ">
-            <size key="intrinsicContentSize" width="26" height="46"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="Pr6-jP-ohX">
             <size key="intrinsicContentSize" width="39" height="39"/>
         </designable>
         <designable name="WWA-5M-l1g">
-            <size key="intrinsicContentSize" width="26" height="46"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="WhY-Z2-MHj">
             <size key="intrinsicContentSize" width="134" height="39"/>
         </designable>
         <designable name="fDf-E9-mCZ">
-            <size key="intrinsicContentSize" width="26" height="46"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="vic-zn-4Mh">
-            <size key="intrinsicContentSize" width="26" height="46"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="ySD-eX-vph">
             <size key="intrinsicContentSize" width="39" height="39"/>
@@ -2066,7 +2065,7 @@
         <image name="password" width="25" height="25"/>
         <image name="password_textfield" width="257" height="43"/>
         <image name="power" width="25" height="25"/>
-        <image name="prev" width="20.5" height="20.5"/>
+        <image name="prev_black" width="25" height="25"/>
         <image name="question" width="25" height="25"/>
         <image name="search" width="25" height="25"/>
         <image name="signin" width="25" height="25"/>
