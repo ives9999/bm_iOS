@@ -676,7 +676,7 @@
     </designables>
     <resources>
         <image name="background" width="377.5" height="670"/>
-        <image name="prev" width="20.5" height="20.5"/>
+        <image name="prev" width="25" height="25"/>
         <image name="team" width="25" height="25"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
