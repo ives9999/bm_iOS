@@ -26,6 +26,7 @@ class MoreVC: MyTableVC {
     
     override func viewDidLoad() {
         myTablView = tableView
+        able_type = "more"
         //rows = _rows
         super.viewDidLoad()
         //Global.instance.setupTabbar(self)

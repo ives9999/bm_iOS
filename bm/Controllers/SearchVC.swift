@@ -37,7 +37,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         myTablView = tableView
         dataService = TeamService.instance
         able_type = "team"
-        //sections = ["", "更多"]
+
+        
         
 //        searchRows = [
 //            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true,"value":""],

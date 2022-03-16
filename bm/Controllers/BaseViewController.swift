@@ -329,6 +329,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
         
         screen_width = UIScreen.main.bounds.width
         
+        setBottomTabFocus()
+        
         //panelCancelBtn.setTitle("取消")
         //layerDeleteBtn.setTitle("刪除")
     }
@@ -864,6 +866,34 @@ class BaseViewController: UIViewController, List2CellDelegate {
 //            }
 //        }
 //    }
+    
+    func setBottomTabFocus() {
+        
+        var idx: Int = 0
+        switch (able_type) {
+        case "team":
+            idx = 0
+        case "course":
+            idx = 1
+        case "member":
+            idx = 2
+        case "arena":
+            idx = 3
+        case "more":
+            idx = 4
+        default:
+            idx = 0
+        }
+        
+        if let tmp = tabBarController?.tabBar {
+            let bottomTabBar: UITabBar = tmp
+            let tabItem: UITabBarItem = bottomTabBar.items![idx]
+            tabItem.image = UIImage(named: able_type + "_g")
+            //以後準備使用
+            //tabItem.badgeValue = "5"
+        }
+        
+    }
     
     func reasonBox(memberToken: String, teamToken: String) {
         let alert = SCLAlertView()
