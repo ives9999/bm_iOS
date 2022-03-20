@@ -12,6 +12,7 @@ class MenuCell: SuperCell {
     
     var iconView: UIImageView!
     var titleLbl: SuperLabel!
+    var greater: UIImageView!
     //var titleLbl: MyLabel!
     //var tempPlayLbl: MyLabel!
     
@@ -20,6 +21,10 @@ class MenuCell: SuperCell {
         
         iconView = UIImageView(frame: CGRect.zero)
         contentView.addSubview(iconView)
+        
+        greater = UIImageView(frame: CGRect.zero)
+        greater.image = UIImage(named: "greater1")
+        contentView.addSubview(greater)
         
         titleLbl = SuperLabel(frame: CGRect.zero)
         contentView.addSubview(titleLbl)
@@ -38,7 +43,7 @@ class MenuCell: SuperCell {
         var c1: NSLayoutConstraint, c2: NSLayoutConstraint, c3: NSLayoutConstraint, c4: NSLayoutConstraint
         
         c1 = NSLayoutConstraint(item: iconView, attribute: .leading, relatedBy: .equal, toItem: contentView, attribute: .leading, multiplier: 1, constant: 32)
-        c2 = NSLayoutConstraint(item: iconView, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 15)
+        c2 = NSLayoutConstraint(item: iconView, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0)
         c3 = NSLayoutConstraint(item: iconView, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 16)
         c4 = NSLayoutConstraint(item: iconView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 24)
 //        c5 = NSLayoutConstraint(item: iconView, attribute: .bottom, relatedBy: .equal, toItem: contentView, attribute: .bottom, multiplier: 1, constant: 24)
@@ -46,9 +51,17 @@ class MenuCell: SuperCell {
         contentView.addConstraints([c1,c2,c3,c4])
         
         c1 = NSLayoutConstraint(item: titleLbl, attribute: .leading, relatedBy: .equal, toItem: iconView, attribute: .trailing, multiplier: 1, constant: 16)
-        c2 = NSLayoutConstraint(item: titleLbl, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 15)
+        //c2 = NSLayoutConstraint(item: titleLbl, attribute: .top, relatedBy: .equal, toItem: contentView, attribute: .top, multiplier: 1, constant: 15)
+        c2 = NSLayoutConstraint(item: titleLbl, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0)
         titleLbl.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addConstraints([c1,c2,c3])
+        contentView.addConstraints([c1,c2])
+        
+        c1 = NSLayoutConstraint(item: greater, attribute: .trailing, relatedBy: .equal, toItem: contentView, attribute: .trailing, multiplier: 1, constant: -16)
+        c2 = NSLayoutConstraint(item: greater, attribute: .centerY, relatedBy: .equal, toItem: contentView, attribute: .centerY, multiplier: 1, constant: 0)
+        c3 = NSLayoutConstraint(item: greater, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20)
+        c4 = NSLayoutConstraint(item: greater, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20)
+        greater.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addConstraints([c1,c2,c3,c4])
     }
     
     override func layoutSubviews() {
@@ -70,9 +83,13 @@ class MenuCell: SuperCell {
  
         titleLbl.text = row.title
         titleLbl.textColor = row.color
-        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+//        accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+//        tintColor = UIColor(MY_WHITE)
         
-        detailTextLabel?.text = row.show
+        if row.show.count > 0 {
+            detailTextLabel?.text = row.show
+            greater.isHidden = true
+        }
         
         setNeedsLayout()
     }

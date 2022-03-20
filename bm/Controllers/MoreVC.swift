@@ -33,6 +33,7 @@ class MoreVC: MyTableVC {
         //Global.instance.menuPressedAction(menuBtn, self)
 
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
+        //tableView.register(MoreCell.self, forCellReuseIdentifier: "cell")
         
         moreRows = initMoreRows()
     }
@@ -75,6 +76,7 @@ class MoreVC: MyTableVC {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
         let cell: MenuCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
+        //let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MoreCell
         //cell.delegate = self
 
         let row: MemberRow = moreRows[indexPath.row]
