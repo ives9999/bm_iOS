@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,8 +23,11 @@
                             <constraint firstAttribute="width" constant="12" id="miX-IT-71X"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oi-tq-AuG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="12" y="11.5" width="33" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oi-tq-AuG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="12" y="11.5" width="60" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="Nod-2R-Q9J"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -42,7 +44,7 @@
                         </connections>
                     </button>
                     <textField opaque="NO" contentMode="left" contentHorizontalAlignment="right" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mRn-Ga-cUS" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="85" y="8" width="192" height="28"/>
+                        <rect key="frame" x="112" y="12" width="165" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="url"/>
                         <connections>
@@ -50,7 +52,7 @@
                         </connections>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-Zp-2Cg">
-                        <rect key="frame" x="57" y="9.5" width="25" height="25"/>
+                        <rect key="frame" x="84" y="9.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="WKb-28-OAM"/>
                             <constraint firstAttribute="height" constant="25" id="avr-P6-XdX"/>
@@ -65,12 +67,12 @@
                     <constraint firstItem="DIs-UN-nhl" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="A86-9Y-GaZ"/>
                     <constraint firstItem="mRn-Ga-cUS" firstAttribute="leading" secondItem="5Oi-tq-AuG" secondAttribute="trailing" constant="40" id="Blh-b2-hnc"/>
                     <constraint firstItem="DIs-UN-nhl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="4" id="JBi-ft-XXU"/>
-                    <constraint firstItem="mRn-Ga-cUS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="bO9-aa-xxl"/>
+                    <constraint firstItem="mRn-Ga-cUS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="bO9-aa-xxl"/>
                     <constraint firstAttribute="trailing" secondItem="0ml-wn-o2D" secondAttribute="trailing" constant="6" id="d8W-2L-8P5"/>
                     <constraint firstItem="eXe-Zp-2Cg" firstAttribute="leading" secondItem="5Oi-tq-AuG" secondAttribute="trailing" constant="12" id="igt-Hy-Xn5"/>
                     <constraint firstItem="5Oi-tq-AuG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jOv-mT-aBh"/>
                     <constraint firstItem="eXe-Zp-2Cg" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="jyW-oH-Pp0"/>
-                    <constraint firstAttribute="bottom" secondItem="mRn-Ga-cUS" secondAttribute="bottom" constant="8" id="l3J-Am-aM0"/>
+                    <constraint firstAttribute="bottom" secondItem="mRn-Ga-cUS" secondAttribute="bottom" constant="12" id="l3J-Am-aM0"/>
                     <constraint firstItem="0ml-wn-o2D" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="r16-cI-yYl"/>
                     <constraint firstItem="mRn-Ga-cUS" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="rXy-Q2-2Ub"/>
                     <constraint firstItem="5Oi-tq-AuG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="ywD-U9-Ol8"/>
@@ -90,7 +92,7 @@
     </objects>
     <designables>
         <designable name="mRn-Ga-cUS">
-            <size key="intrinsicContentSize" width="27" height="49.5"/>
+            <size key="intrinsicContentSize" width="26" height="46"/>
         </designable>
     </designables>
     <resources>

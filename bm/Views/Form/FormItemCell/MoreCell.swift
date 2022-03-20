@@ -18,7 +18,10 @@ class MoreCell: FormItemCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        detailLbl.textAlignment = NSTextAlignment.right
+        
+        titleLbl?.textAlignment = .right
+        detailLbl.textAlignment = NSTextAlignment.left
+        detailLbl.textColor = UIColor(MY_GREEN)
         detailLbl.text = ""
         clearBtn.isHidden = false
     }

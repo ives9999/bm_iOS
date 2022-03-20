@@ -18,6 +18,7 @@ class TextFieldCell: FormItemCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        titleLbl?.textAlignment = .right
         backgroundColor = UIColor.clear
     }
     
@@ -70,6 +71,12 @@ class TextFieldCell: FormItemCell {
         requiredImageView.isHidden = !row.isRequired
         
         promptBtn.isHidden = true
+        
+        textField.borderWidth(0)
+        //textField.borderColor(UIColor(MY_WHITE))
+        textField.backgroundColor = UIColor(MY_BLACK)
+        textField.layer.cornerRadius = 6
+        textField.clipsToBounds = true
     }
     
 //    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
