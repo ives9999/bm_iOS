@@ -12,15 +12,20 @@ import CryptoSwift
 
 class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
-    @IBOutlet weak var submitBtn: UIButton!
-    @IBOutlet weak var likeTab: Tag!
-    @IBOutlet weak var searchTab: Tag!
-    @IBOutlet weak var allTab: Tag!
+    @IBOutlet weak var submitBtn: SubmitButton!
+//    @IBOutlet weak var likeTab: Tag!
+//    @IBOutlet weak var searchTab: Tag!
+//    @IBOutlet weak var allTab: Tag!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var bottomView: BottomView!
+    @IBOutlet weak var tableViewContainer: UIView!
+    @IBOutlet weak var tableViewContainerleading: NSLayoutConstraint!
+    @IBOutlet weak var tableViewContainertrailing: NSLayoutConstraint!
+    @IBOutlet weak var tableViewContainerBottom: NSLayoutConstraint!
+    //@IBOutlet weak var bottomView: BottomView!
+    @IBOutlet weak var topTabContainer: UIStackView!
         
-    var searchTags: [[String: Any]] = [[String: Any]]()
-    var selectedTagIdx: Int = 0
+    var searchTabs: [[String: Any]] = [[String: Any]]()
+    var focusTabIdx: Int = 0
     let heightForSection: CGFloat = 34
     
     var mysTable: TeamsTable?
@@ -60,6 +65,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 //        let cellNib = UINib(nibName: "EditCell", bundle: nil)
 //        tableView.register(cellNib, forCellReuseIdentifier: "cell")
         
+        if (tableViewContainer != nil) {
+            tableViewContainer.layer.cornerRadius = 6.0
+            tableViewContainer.clipsToBounds = true
+        }
+        
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
         tableView.register(textFieldNib, forCellReuseIdentifier: "textFieldCell")
         
@@ -69,26 +79,21 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         let cellNibName = UINib(nibName: "TeamListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
 
-        searchTags = [
-            ["key": "like", "selected": true, "tag": 0, "class": likeTab],
-            ["key": "search", "selected": false, "tag": 1, "class": searchTab],
-            ["key": "all", "selected": false, "tag": 2, "class": allTab]
+        searchTabs = [
+            ["key": "like", "icon": "like", "text": "喜歡", "focus": true, "tag": 0, "class": ""],
+            ["key": "search", "icon": "search_w", "text": "搜尋", "focus": false, "tag": 1, "class": ""],
+            ["key": "all", "icon": "member", "text": "全部", "focus": false, "tag": 2, "class": ""]
         ]
 
         //print(searchTags)
         
         oneSections = initSectionRows1()
+        
+        initTabTop()
 
-        let likeTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
-        likeTab.addGestureRecognizer(likeTap)
-        let searchTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
-        searchTab.addGestureRecognizer(searchTap)
-        let allTap = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
-        allTab.addGestureRecognizer(allTap)
-
-        updateTabSelected(idx: selectedTagIdx)
-        bottomView.visibility = .invisible
+        //bottomView.visibility = .invisible
         tableViewBottomConstraint.constant = 0
+        tableViewContainer.backgroundColor = UIColor.clear
 
         member_like = true
         refresh()
@@ -102,6 +107,49 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         sections.append(makeSection1Row1(false))
 
         return sections
+    }
+    
+    func initTabTop() {
+        
+        let count: Int = 3
+        let tab_width: Int = 80
+        
+        let padding: Int = (Int(screen_width) - count * tab_width) / (count+1)
+        
+        for (idx, searchTab) in searchTabs.enumerated() {
+            let x: Int = idx * tab_width + (idx + 1)*padding
+            let rect: CGRect = CGRect(x: x, y: 0, width: 80, height: 50)
+            
+            let tab = TabTop(frame: rect)
+            if let tmp: Int = searchTab["tag"] as? Int {
+                tab.tag = tmp
+            }
+            
+            var icon: String = "like"
+            if let tmp: String = searchTab["icon"] as? String {
+                icon = tmp
+            }
+            
+            var text: String = "喜歡"
+            if let tmp: String = searchTab["text"] as? String {
+                text = tmp
+            }
+            
+            tab.setData(iconStr: icon, text: text)
+            
+            var isSelected: Bool = false
+            if let tmp: Bool = searchTab["focus"] as? Bool {
+                isSelected = tmp
+            }
+            tab.isFocus(isSelected)
+            
+            let tabTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
+            tab.addGestureRecognizer(tabTap)
+            
+            searchTabs[idx]["class"] = tab
+            
+            topTabContainer.addSubview(tab)
+        }
     }
     
     func makeSection0Row1(_ isExpanded: Bool=true)-> OneSection {
@@ -176,11 +224,9 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 //        }
 //    }
     
-    
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        if (selectedTagIdx == 1) {
+        if (focusTabIdx == 1) {
             return oneSections.count
         } else {
             return 1
@@ -191,7 +237,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         
         var count: Int = 0
         
-        switch selectedTagIdx {
+        switch focusTabIdx {
             
         case 0:
             count = lists1.count
@@ -212,7 +258,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        if (selectedTagIdx == 1) {
+        if (focusTabIdx == 1) {
             return heightForSection
         } else {
             return 0
@@ -252,7 +298,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch selectedTagIdx {
+        switch focusTabIdx {
         case 0, 2:
             if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? TeamListCell {
                 
@@ -312,7 +358,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Global.instance.addSpinner(superView: view)
         //Global.instance.removeSpinner(superView: view)
-        if (selectedTagIdx == 1) {
+        if (focusTabIdx == 1) {
             
             let row: OneRow = getOneRowFromIdx(indexPath.section, indexPath.row)
             //let cell = tableView.cellForRow(at: indexPath) as! EditCell
@@ -330,7 +376,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
             } else {
                 //cell.editText.becomeFirstResponder()
             }
-        } else if (selectedTagIdx == 0 || selectedTagIdx == 2) {
+        } else if (focusTabIdx == 0 || focusTabIdx == 2) {
             //if mysTable != nil {
                 //let myTable = mysTable!.rows[indexPath.row]
             let row = lists1[indexPath.row]
@@ -510,29 +556,26 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 
         if let idx: Int = sender.view?.tag {
             
-            let selectedTag: [String: Any] = searchTags[idx]
-            if let selected: Bool = selectedTag["selected"] as? Bool {
+            let selectedTag: [String: Any] = searchTabs[idx]
+            if let focus: Bool = selectedTag["focus"] as? Bool {
 
                 //按了其他頁面的按鈕
-                if (!selected) {
+                if (!focus) {
                     updateTabSelected(idx: idx)
-                    selectedTagIdx = idx
-                    switch selectedTagIdx {
+                    focusTabIdx = idx
+                    switch focusTabIdx {
                     case 1:
-                        bottomView.visibility = .visible
-                        tableViewBottomConstraint.constant = 100
+                        setFilterView()
                         tableView.reloadData()
                     case 0:
                         member_like = true
-                        bottomView.visibility = .invisible
-                        tableViewBottomConstraint.constant = 0
                         params.removeAll()
+                        setListView()
                         refresh()
                     case 2:
                         member_like = false
-                        bottomView.visibility = .invisible
-                        tableViewBottomConstraint.constant = 0
                         params.removeAll()
+                        setListView()
                         refresh()
                     default:
                         refresh()
@@ -542,28 +585,61 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         }
     }
     
+    private func setFilterView() {
+        //bottomView.visibility = .visible
+        submitBtn.visibility = .visible
+        //submitBtn.setColor(textColor: UIColor(MY_BLACK), bkColor: UIColor(MY_GREEN))
+        submitBtn.backgroundColor = UIColor(MY_GREEN)
+        submitBtn.titleLabel?.textColor = UIColor(MY_BLACK)
+        //submitBtn.setTitleColor(.red, for: .normal)
+        
+        tableViewBottomConstraint.constant = 100
+        tableViewContainer.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        tableViewContainerleading.constant = 4
+        tableViewContainertrailing.constant = 4
+        tableViewContainerBottom.constant = 100
+    }
+    
+    private func setListView() {
+        //bottomView.visibility = .invisible
+        submitBtn.visibility = .invisible
+        
+        tableViewBottomConstraint.constant = 0
+        tableViewContainer.backgroundColor = UIColor.clear
+        tableViewContainerleading.constant = 0
+        tableViewContainertrailing.constant = 0
+        tableViewContainerBottom.constant = 0
+    }
+    
     private func updateTabSelected(idx: Int) {
         
         // set user click which tag, set tag selected is true
-        for (i, var searchTag) in searchTags.enumerated() {
+        for (i, var searchTab) in searchTabs.enumerated() {
             
             if (i == idx) {
-                searchTag["selected"] = true
+                searchTab["focus"] = true
             } else {
-                searchTag["selected"] = false
+                searchTab["focus"] = false
             }
-            searchTags[i] = searchTag
+            searchTabs[i] = searchTab
         }
         setTabSelectedStyle()
     }
     
     private func setTabSelectedStyle() {
         
-        for searchTag in searchTags {
-            if (searchTag.keyExist(key: "class")) {
-                let tag: Tag = (searchTag["class"] as? Tag)!
-                tag.selected = searchTag["selected"] as! Bool
-                tag.setSelectedStyle()
+        for searchTab in searchTabs {
+            
+            if (searchTab.keyExist(key: "class")) {
+                
+                let tab: TabTop = (searchTab["class"] as? TabTop)!
+                
+                var isFocus: Bool = false
+                if let tmp: Bool = searchTab["focus"] as? Bool {
+                    isFocus = tmp
+                }
+                
+                tab.isFocus(isFocus)
             }
         }
     }

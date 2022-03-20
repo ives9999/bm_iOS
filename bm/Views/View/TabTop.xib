@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TabTop" customModule="bm" customModuleProvider="target">
+            <connections>
+                <outlet property="containerView" destination="iN0-l3-epB" id="Ciw-IQ-OpE"/>
+                <outlet property="icon" destination="sAM-Sc-Ccy" id="mau-vQ-g1i"/>
+                <outlet property="line" destination="Um2-76-PD7" id="1p8-jQ-BUT"/>
+                <outlet property="textLbl" destination="pd0-QY-b3B" id="w8x-5g-MZN"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lA2-Mg-nYx">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="48"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sAM-Sc-Ccy">
+                            <rect key="frame" x="16" y="11.5" width="25" height="25"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="25" id="7Mi-Oi-s4h"/>
+                                <constraint firstAttribute="height" constant="25" id="bVv-fG-JA7"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pd0-QY-b3B" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                            <rect key="frame" x="45" y="13.5" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="sAM-Sc-Ccy" firstAttribute="leading" secondItem="lA2-Mg-nYx" secondAttribute="leading" constant="16" id="XpQ-py-Wg2"/>
+                        <constraint firstItem="pd0-QY-b3B" firstAttribute="leading" secondItem="sAM-Sc-Ccy" secondAttribute="trailing" constant="4" id="fvH-oT-jDw"/>
+                        <constraint firstItem="pd0-QY-b3B" firstAttribute="centerY" secondItem="lA2-Mg-nYx" secondAttribute="centerY" id="jrH-D9-Ps8"/>
+                        <constraint firstItem="sAM-Sc-Ccy" firstAttribute="centerY" secondItem="lA2-Mg-nYx" secondAttribute="centerY" id="u9T-gk-sAe"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Um2-76-PD7" userLabel="line">
+                    <rect key="frame" x="0.0" y="48" width="414" height="2"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="2" id="euL-jy-Sab"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Um2-76-PD7" secondAttribute="bottom" id="Fwk-V6-gvo"/>
+                <constraint firstItem="lA2-Mg-nYx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="PSm-x3-Qtz"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Um2-76-PD7" secondAttribute="trailing" id="ZLW-XA-MhZ"/>
+                <constraint firstItem="lA2-Mg-nYx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="aeg-bz-XOY"/>
+                <constraint firstItem="Um2-76-PD7" firstAttribute="top" secondItem="lA2-Mg-nYx" secondAttribute="bottom" id="c1Y-5B-CNs"/>
+                <constraint firstItem="Um2-76-PD7" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hJl-xw-0S6"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="lA2-Mg-nYx" secondAttribute="trailing" id="oy9-Lm-zcv"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="139" y="153"/>
+        </view>
+    </objects>
+</document>
