@@ -404,36 +404,35 @@ class MemberVC: MyTableVC {
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
+
         let headerView = UIView()
-        headerView.backgroundColor = UIColor.white
+        headerView.backgroundColor = UIColor.gray
         headerView.tag = section
-        
+
         let titleLabel = UILabel()
         titleLabel.text = memberSections[section].title
-        titleLabel.textColor = UIColor.black
+        titleLabel.textColor = UIColor.white
         titleLabel.sizeToFit()
         titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
         headerView.addSubview(titleLabel)
         
-        let isExpanded = memberSections[section].isExpanded
-        let mark = UIImageView(image: UIImage(named: "to_right"))
-        mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
-        toggleMark(mark: mark, isExpanded: isExpanded)
-        headerView.addSubview(mark)
+        var expanded_image: String = "to_right_w"
+        if memberSections[section].isExpanded {
+            expanded_image = "to_down_w"
+        }
+        let mark = UIImageView(image: UIImage(named: expanded_image))
         
+        mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
+        headerView.addSubview(mark)
+
         let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
         headerView.addGestureRecognizer(gesture)
-        
+
         return headerView
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 60
+        return 34
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

@@ -82,7 +82,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         searchTabs = [
             ["key": "like", "icon": "like", "text": "喜歡", "focus": true, "tag": 0, "class": ""],
             ["key": "search", "icon": "search_w", "text": "搜尋", "focus": false, "tag": 1, "class": ""],
-            ["key": "all", "icon": "member", "text": "全部", "focus": false, "tag": 2, "class": ""]
+            ["key": "all", "icon": "all_list", "text": "全部", "focus": false, "tag": 2, "class": ""]
         ]
 
         //print(searchTags)

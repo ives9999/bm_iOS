@@ -432,9 +432,9 @@ class MyTableVC: BaseViewController {
     func toggleMark(mark: UIImageView, isExpanded: Bool) {
         
         if (isExpanded) {
-            mark.image = UIImage(named: "to_down")
+            mark.image = UIImage(named: "to_down_w")
         } else {
-            mark.image = UIImage(named: "to_right")
+            mark.image = UIImage(named: "to_right_w")
         }
     }
     
@@ -751,19 +751,19 @@ extension MyTableVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = UIView()
-        headerView.backgroundColor = UIColor.white
+        headerView.backgroundColor = UIColor.gray
         headerView.tag = section
         
         let titleLabel = UILabel()
         titleLabel.text = oneSections[section].title
-        titleLabel.textColor = UIColor.black
+        titleLabel.textColor = UIColor.white
         titleLabel.sizeToFit()
         titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: 34)
         headerView.addSubview(titleLabel)
         
-        var expanded_image: String = "to_right"
+        var expanded_image: String = "to_right_w"
         if oneSections[section].isExpanded {
-            expanded_image = "to_down"
+            expanded_image = "to_down_w"
         }
         let mark = UIImageView(image: UIImage(named: expanded_image))
         mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
