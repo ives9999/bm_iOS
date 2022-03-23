@@ -18,6 +18,7 @@ class PlainCell: FormItemCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        detailLbl.textColor = UIColor(MY_GREEN)
         // Initialization code
     }
     

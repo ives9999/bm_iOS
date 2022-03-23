@@ -17,9 +17,15 @@ class TextFieldCell: FormItemCell {
     var baseViewControllerDelegate: BaseViewController? = nil
 
     override func awakeFromNib() {
+        
         super.awakeFromNib()
+        
         titleLbl?.textAlignment = .right
         backgroundColor = UIColor.clear
+        
+        textField.layer.cornerRadius = 4
+        textField.clipsToBounds = true
+        textField.fontSize = FONT_SIZE_GENERAL
     }
     
     func update(sectionKey: String, rowKey: String, title: String, value: String, keyboard: String="default") {
@@ -35,24 +41,24 @@ class TextFieldCell: FormItemCell {
         textField.keyboardType = KEYBOARD.stringToSwift(keyboard)
     }
     
-    override func update(with formItem: FormItem) {
-        
-        let _formItem = formItem as! TextFieldFormItem
-        _formItem.make()
-        
-        self.titleLbl!.text = _formItem.title
-        textField.text = _formItem.value
-        
-        //let bgColor: UIColor = _formItem.isValid  == false ? .red : .white
-        //textField.layer.backgroundColor = bgColor.cgColor
-        textField.placeholder(_formItem.placeholder)
-        textField.keyboardType = _formItem.uiProperties.keyboardType
-        textField.tintColor = _formItem.uiProperties.tintColor
-        promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
-        requiredImageView.isHidden = !_formItem.isRequired
-        
-        self.formItem = formItem
-    }
+//    override func update(with formItem: FormItem) {
+//
+//        let _formItem = formItem as! TextFieldFormItem
+//        _formItem.make()
+//
+//        self.titleLbl!.text = _formItem.title
+//        textField.text = _formItem.value
+//
+//        //let bgColor: UIColor = _formItem.isValid  == false ? .red : .white
+//        //textField.layer.backgroundColor = bgColor.cgColor
+//        textField.placeholder(_formItem.placeholder)
+//        textField.keyboardType = _formItem.uiProperties.keyboardType
+//        textField.tintColor = _formItem.uiProperties.tintColor
+//        promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
+//        requiredImageView.isHidden = !_formItem.isRequired
+//
+//        self.formItem = formItem
+//    }
     
     func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
         
@@ -67,16 +73,18 @@ class TextFieldCell: FormItemCell {
         textField.keyboardType = row.keyboard.enumToSwift()
         //textField.backgroundColor = UIColor.clear
         textField.tintColor = UIColor.red
-        //promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
+        
         requiredImageView.isHidden = !row.isRequired
         
+        //promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
         promptBtn.isHidden = true
         
-        textField.borderWidth(0)
-        //textField.borderColor(UIColor(MY_WHITE))
         textField.backgroundColor = UIColor(MY_BLACK)
-        textField.layer.cornerRadius = 6
-        textField.clipsToBounds = true
+        textField.layer.borderWidth = 0
+        textField.layer.borderColor = UIColor.clear.cgColor
+        //textField.borderColor(UIColor.clear)
+        textField.textAlignment = .left
+        textField.textColor = UIColor(MY_GREEN)
     }
     
 //    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {

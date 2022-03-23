@@ -12,13 +12,15 @@ class SexCell: FormItemCell {
         
     var male: Checkbox!
     var female: Checkbox!
+    @IBOutlet weak var maleLbl: SuperLabel!
+    @IBOutlet weak var femaleLbl: SuperLabel!
     //var myDelegate: BaseViewController?
     var checked: String = "M"
 
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        male = Checkbox(frame: CGRect(x: 100, y: 10, width: 20, height: 20))
+        male = Checkbox(frame: .zero)
         male.checkedBorderColor = .white
         male.uncheckedBorderColor = .white
         male.borderStyle = .circle
@@ -27,7 +29,7 @@ class SexCell: FormItemCell {
         male.checkmarkStyle = .circle
         male.isChecked = true
         
-        female = Checkbox(frame: CGRect(x: 200, y: 10, width: 20, height: 20))
+        female = Checkbox(frame: .zero)
         female.checkedBorderColor = .white
         female.uncheckedBorderColor = .white
         female.borderStyle = .circle
@@ -42,7 +44,26 @@ class SexCell: FormItemCell {
         female.addTarget(self, action: #selector(femaleValueChanged(sender:)), for: .valueChanged)
         
         self.addSubview(male)
+        male.translatesAutoresizingMaskIntoConstraints = false
+        male.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        male.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        male.leadingAnchor.constraint(equalTo: male.superview!.leadingAnchor, constant: 125).isActive = true
+        male.centerYAnchor.constraint(equalTo: male.superview!.centerYAnchor).isActive = true
+        
+        maleLbl.translatesAutoresizingMaskIntoConstraints = false
+        maleLbl.centerYAnchor.constraint(equalTo: maleLbl.superview!.centerYAnchor).isActive = true
+        maleLbl.leadingAnchor.constraint(equalTo: male.trailingAnchor, constant: 8).isActive = true
+        
         self.addSubview(female)
+        female.translatesAutoresizingMaskIntoConstraints = false
+        female.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        female.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        female.leadingAnchor.constraint(equalTo: maleLbl.trailingAnchor, constant: 45).isActive = true
+        female.centerYAnchor.constraint(equalTo: female.superview!.centerYAnchor).isActive = true
+        
+        femaleLbl.translatesAutoresizingMaskIntoConstraints = false
+        femaleLbl.centerYAnchor.constraint(equalTo: femaleLbl.superview!.centerYAnchor).isActive = true
+        femaleLbl.leadingAnchor.constraint(equalTo: female.trailingAnchor, constant: 8).isActive = true
     }
 
     override func update(with formItem: FormItem) {

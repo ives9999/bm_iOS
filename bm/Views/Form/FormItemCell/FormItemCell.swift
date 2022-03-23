@@ -26,7 +26,7 @@ class FormItemCell: SuperCell, FormUPdatable {
     override func awakeFromNib() {
         super.awakeFromNib()
         if titleLbl != nil {
-            titleLbl!.textAlignment = NSTextAlignment.left
+            titleLbl!.textAlignment = NSTextAlignment.right
         }
     }
     
