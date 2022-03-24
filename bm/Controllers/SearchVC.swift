@@ -66,7 +66,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 //        tableView.register(cellNib, forCellReuseIdentifier: "cell")
         
         if (tableViewContainer != nil) {
-            tableViewContainer.layer.cornerRadius = 6.0
+            tableViewContainer.layer.cornerRadius = CORNER_RADIUS
             tableViewContainer.clipsToBounds = true
         }
         

@@ -95,7 +95,7 @@ let URL_UPDATE = "\(URL_HOME)%@/update"
 let FONT_NAME: String = "HelveticaNeue"
 let FONT_BOLD_NAME: String = "Arial-BoldMT"
 let FONT_SIZE_TITLE: CGFloat = 21
-let FONT_SIZE_GENERAL: CGFloat = 13
+let FONT_SIZE_GENERAL: CGFloat = 15
 let FONT_SIZE_TABBAR: CGFloat = 14
 
 // List pages
@@ -363,6 +363,7 @@ let COLOR_KEY = "color"
 let COMPANY_KEY = "company"
 let CONTACT_KEY = "contact"
 let CONTENT_KEY = "content"
+let CORNER_RADIUS = 6.0
 let CELL_KEY = "cell"
 let CREATED_AT_KEY = "created_at"
 let CREATED_ID_KEY = "created_id"

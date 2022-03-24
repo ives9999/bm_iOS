@@ -27,6 +27,7 @@ class MemoCell: FormItemCell {
         
         titleLbl?.text = title
         memoTextField.text = value
+        memoTextField.textColor = UIColor(MY_GREEN)
     }
     
     func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {

@@ -85,6 +85,7 @@ class TextFieldCell: FormItemCell {
         //textField.borderColor(UIColor.clear)
         textField.textAlignment = .left
         textField.textColor = UIColor(MY_GREEN)
+        textField.fontSize = 32
     }
     
 //    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {

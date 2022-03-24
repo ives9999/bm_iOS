@@ -102,6 +102,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         dataService = CartService.instance
         
         super.viewDidLoad()
+        
         //print(superProduct)
         self.hideKeyboardWhenTappedAround()
         submitButton.setTitle("結帳")
@@ -115,8 +116,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         let radioNib = UINib(nibName: "RadioCell", bundle: nil)
         tableView.register(radioNib, forCellReuseIdentifier: "RadioCell")
         
-        let memoNib = UINib(nibName: "MemoCell", bundle: nil)
-        tableView.register(memoNib, forCellReuseIdentifier: "MemoCell")
+//        let memoNib = UINib(nibName: "MemoCell", bundle: nil)
+//        tableView.register(memoNib, forCellReuseIdentifier: "MemoCell")
         
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
         tableView.register(textFieldNib, forCellReuseIdentifier: "TextFieldCell")
@@ -601,24 +602,32 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         } else {
         
             let headerView = UIView()
-            headerView.backgroundColor = UIColor.white
+            headerView.backgroundColor = UIColor.gray
             headerView.tag = section
             
             let titleLabel = UILabel()
             titleLabel.text = oneSections[section].title
             //titleLabel.text = getSectionName(idx: section)
-            titleLabel.textColor = UIColor.black
+            titleLabel.textColor = UIColor(MY_WHITE)
             titleLabel.sizeToFit()
             titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
             headerView.addSubview(titleLabel)
             
-            let isExpanded = oneSections[section].isExpanded
-            //let isExpanded = getSectionExpanded(idx: section)
-            let mark = UIImageView(image: UIImage(named: "to_right"))
-            mark.frame = CGRect(x: view.frame.width-10-20, y: (heightForSection-20)/2, width: 20, height: 20)
-            toggleMark(mark: mark, isExpanded: isExpanded)
+            var expanded_image: String = "to_right_w"
+            if oneSections[section].isExpanded {
+                expanded_image = "to_down_w"
+            }
+            let mark = UIImageView(image: UIImage(named: expanded_image))
+            //mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
             headerView.addSubview(mark)
             
+            mark.translatesAutoresizingMaskIntoConstraints = false
+            
+            mark.centerYAnchor.constraint(equalTo: mark.superview!.centerYAnchor).isActive = true
+            mark.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            mark.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            mark.trailingAnchor.constraint(equalTo: mark.superview!.trailingAnchor, constant: -16).isActive = true
+                        
             let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
             headerView.addGestureRecognizer(gesture)
             
@@ -745,16 +754,14 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 //                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, keyboard: keyboard)
 //                    return cell
 //                }
-            } else if (row.cell == "memo") {
-                if let cell: MemoCell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath) as? MemoCell {
-                    
-                    cell.cellDelegate = self
-                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                    
-//                    cell.baseViewControllerDelegate = self
-//                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value)
-                    return cell
-                }
+//            } else if (row.cell == "memo") {
+//                if let cell: MemoCell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath) as? MemoCell {
+//
+//                    cell.cellDelegate = self
+//                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+//
+//                    return cell
+//                }
             } else if (row.cell == "more") {
                 if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "MoreCell", for: indexPath) as? MoreCell {
                     

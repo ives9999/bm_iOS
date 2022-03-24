@@ -16,14 +16,17 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="100"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObZ-Ot-OFf" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="12" y="24" width="33" height="52"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ObZ-Ot-OFf" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="12" y="24" width="60" height="52"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="60" id="cKI-Mj-kmm"/>
+                        </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="content" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfe-nq-WeD" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="61" y="39.5" width="243" height="21"/>
+                        <rect key="frame" x="112" y="39.5" width="192" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -34,7 +37,7 @@
                     <constraint firstItem="ObZ-Ot-OFf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="HJ9-Pq-Yug"/>
                     <constraint firstAttribute="bottom" secondItem="ObZ-Ot-OFf" secondAttribute="bottom" constant="24" id="NOn-BA-XjY"/>
                     <constraint firstItem="ObZ-Ot-OFf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SVW-OB-WzS"/>
-                    <constraint firstItem="mfe-nq-WeD" firstAttribute="leading" secondItem="ObZ-Ot-OFf" secondAttribute="trailing" constant="16" id="gEa-6z-EhF"/>
+                    <constraint firstItem="mfe-nq-WeD" firstAttribute="leading" secondItem="ObZ-Ot-OFf" secondAttribute="trailing" constant="40" id="gEa-6z-EhF"/>
                     <constraint firstAttribute="trailing" secondItem="mfe-nq-WeD" secondAttribute="trailing" constant="16" id="jOB-nh-ild"/>
                     <constraint firstItem="ObZ-Ot-OFf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="vpF-jx-ocs"/>
                 </constraints>

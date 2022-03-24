@@ -47,7 +47,7 @@ class SexCell: FormItemCell {
         male.translatesAutoresizingMaskIntoConstraints = false
         male.widthAnchor.constraint(equalToConstant: 20).isActive = true
         male.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        male.leadingAnchor.constraint(equalTo: male.superview!.leadingAnchor, constant: 125).isActive = true
+        male.leadingAnchor.constraint(equalTo: male.superview!.leadingAnchor, constant: 115).isActive = true
         male.centerYAnchor.constraint(equalTo: male.superview!.centerYAnchor).isActive = true
         
         maleLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -58,9 +58,9 @@ class SexCell: FormItemCell {
         female.translatesAutoresizingMaskIntoConstraints = false
         female.widthAnchor.constraint(equalToConstant: 20).isActive = true
         female.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        female.leadingAnchor.constraint(equalTo: maleLbl.trailingAnchor, constant: 45).isActive = true
+        female.leadingAnchor.constraint(equalTo: female.superview!.leadingAnchor, constant: 210).isActive = true
         female.centerYAnchor.constraint(equalTo: female.superview!.centerYAnchor).isActive = true
-        
+
         femaleLbl.translatesAutoresizingMaskIntoConstraints = false
         femaleLbl.centerYAnchor.constraint(equalTo: femaleLbl.superview!.centerYAnchor).isActive = true
         femaleLbl.leadingAnchor.constraint(equalTo: female.trailingAnchor, constant: 8).isActive = true

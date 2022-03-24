@@ -411,7 +411,7 @@ class MemberVC: MyTableVC {
 
         let titleLabel = UILabel()
         titleLabel.text = memberSections[section].title
-        titleLabel.textColor = UIColor.white
+        titleLabel.textColor = UIColor(MY_WHITE)
         titleLabel.sizeToFit()
         titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
         headerView.addSubview(titleLabel)
@@ -422,8 +422,15 @@ class MemberVC: MyTableVC {
         }
         let mark = UIImageView(image: UIImage(named: expanded_image))
         
-        mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
+        //mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
         headerView.addSubview(mark)
+        
+        mark.translatesAutoresizingMaskIntoConstraints = false
+        
+        mark.centerYAnchor.constraint(equalTo: mark.superview!.centerYAnchor).isActive = true
+        mark.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        mark.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        mark.trailingAnchor.constraint(equalTo: mark.superview!.trailingAnchor, constant: -16).isActive = true
 
         let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
         headerView.addGestureRecognizer(gesture)

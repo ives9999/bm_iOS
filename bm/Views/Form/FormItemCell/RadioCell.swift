@@ -19,7 +19,7 @@ class RadioCell: FormItemCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        radio = Checkbox(frame: CGRect(x: 8, y: 10, width: 20, height: 20))
+        radio = Checkbox(frame: .zero)
         radio.checkedBorderColor = .white
         radio.uncheckedBorderColor = .white
         radio.borderStyle = .circle
@@ -34,6 +34,16 @@ class RadioCell: FormItemCell {
         radio.addTarget(self, action: #selector(radioValueChanged(sender:)), for: .valueChanged)
         
         self.addSubview(radio)
+        
+        radio.translatesAutoresizingMaskIntoConstraints = false
+        radio.widthAnchor.constraint(equalToConstant: 20).isActive = true
+        radio.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        radio.centerYAnchor.constraint(equalTo: radio.superview!.centerYAnchor).isActive = true
+        radio.leadingAnchor.constraint(equalTo: radio.superview!.leadingAnchor, constant: 60).isActive = true
+        
+        titleLbl!.translatesAutoresizingMaskIntoConstraints = false
+        titleLbl!.centerYAnchor.constraint(equalTo: titleLbl!.superview!.centerYAnchor).isActive = true
+        titleLbl!.leadingAnchor.constraint(equalTo: radio.trailingAnchor, constant: 40).isActive = true
     }
     
     func update(sectionKey: String, rowKey: String, title: String, checked: Bool=false) {
@@ -56,6 +66,7 @@ class RadioCell: FormItemCell {
         self.sectionKey = sectionKey
         
         titleLbl?.text = row.title
+        titleLbl?.textColor = UIColor(MY_GREEN)
         
         radio.isChecked = Bool(row.value)!
     }
