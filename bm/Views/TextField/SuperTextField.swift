@@ -36,14 +36,15 @@ class SuperTextField: UITextField {
     }
     
     func setupView() {
-        self.backgroundColor = UIColor.black
-        self.textColor = UIColor.white
+        self.backgroundColor = UIColor(MY_BLACK)
+        self.textColor = UIColor(MY_GREEN)
         self.font = UIFont(name: fontName, size: fontSize)
 //        self.createToolbar()
-        self.borderWidth(1)
-        self.borderColor(UIColor.white)
-        self.borderStyle = UITextField.BorderStyle.line
-        self.align(.right)
+        self.borderWidth(0)
+        //self.borderColor(UIColor.white)
+        //self.borderStyle = UITextField.BorderStyle.line
+        self.layer.cornerRadius = 4
+        self.align(.left)
         
         //self.font = UIFont(name: fontName, size: fontSize)
     }

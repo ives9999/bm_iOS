@@ -28,10 +28,15 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
     @IBOutlet var line3: UIView!
     @IBOutlet var buttonStack: UIStackView!
     
+    @IBOutlet var teamNameSubmitBtn: SuperButton!
+    @IBOutlet var tokenSubmitBtn: SuperButton!
+    
     @IBOutlet var teamImageView1: ImagePickerView!
     @IBOutlet var teamImageView2: ImagePickerView!
     
     @IBOutlet var member_private_keyDoc: SuperButton!
+    
+    @IBOutlet weak var dataContainer: UIView!
     
     var imagerPicker: MyImagePickerVC = MyImagePickerVC()
     
@@ -59,8 +64,17 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
         teamNameClearBtn.setTitle("", for: .normal)
         managerTokenClearBtn.setTitle("", for: .normal)
         
+        dataContainer.layer.cornerRadius = CORNER_RADIUS
+        dataContainer.clipsToBounds = true
+        dataContainer.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        
         //teamNameTF.text = "早安羽球隊"
         //manager_tokenTF.text = "bbeq9v41HVRBOgPNEA9pmAEH6abNZPs"
+        
+        teamNameSubmitBtn.backgroundColor = UIColor(MY_GREEN)
+        teamNameSubmitBtn.tintColor = UIColor(MY_BLACK)
+        tokenSubmitBtn.backgroundColor = UIColor(MY_GREEN)
+        tokenSubmitBtn.tintColor = UIColor(MY_BLACK)
         
         line1.isHidden = true
         managerView.isHidden = true

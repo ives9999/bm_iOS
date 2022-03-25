@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性別" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sy3-bo-0Ud" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="12" y="24" width="60" height="52"/>
+                        <rect key="frame" x="20" y="24" width="60" height="52"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="60" id="nV4-qk-Pl7"/>
                         </constraints>
@@ -26,7 +26,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="required" translatesAutoresizingMaskIntoConstraints="NO" id="lRs-GE-fgR">
-                        <rect key="frame" x="0.0" y="44" width="12" height="12"/>
+                        <rect key="frame" x="8" y="44" width="12" height="12"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="12" id="2Qp-p8-1tp"/>
                             <constraint firstAttribute="width" constant="12" id="fE8-Ou-4o1"/>
@@ -49,7 +49,7 @@
                 <constraints>
                     <constraint firstItem="lRs-GE-fgR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="4zw-1c-FgG"/>
                     <constraint firstItem="lRs-GE-fgR" firstAttribute="trailing" secondItem="sy3-bo-0Ud" secondAttribute="leading" id="5oP-i7-Sza"/>
-                    <constraint firstItem="sy3-bo-0Ud" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="9de-hq-VDt"/>
+                    <constraint firstItem="sy3-bo-0Ud" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="9de-hq-VDt"/>
                     <constraint firstAttribute="bottom" secondItem="sy3-bo-0Ud" secondAttribute="bottom" constant="24" id="WDt-Wa-DMU"/>
                     <constraint firstItem="sy3-bo-0Ud" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="24" id="esU-qm-105"/>
                     <constraint firstItem="3Ng-UQ-Atr" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="oX3-zt-s7L"/>

@@ -928,12 +928,13 @@
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="xN7-m4-eLO">
-                                        <rect key="frame" x="147.5" y="8" width="119" height="34"/>
+                                        <rect key="frame" x="113.5" y="8" width="187" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8C-Xj-JxF" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="32" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="100" height="34"/>
                                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" constant="100" id="2vb-KV-YY8"/>
                                                     <constraint firstAttribute="height" constant="34" id="SeL-R2-pqT"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
@@ -945,7 +946,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pn9-BA-Yom" customClass="CancelButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="73" y="0.0" width="46" height="34"/>
+                                                <rect key="frame" x="141" y="0.0" width="46" height="34"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="cancel:" destination="kAb-mq-SLF" eventType="touchUpInside" id="BQ7-3v-sRq"/>
@@ -954,7 +955,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3mj-RE-he7"/>
                                     <constraint firstItem="xN7-m4-eLO" firstAttribute="centerX" secondItem="Syc-M7-oTx" secondAttribute="centerX" id="52h-nG-FSw"/>

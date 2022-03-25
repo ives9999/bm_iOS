@@ -1584,7 +1584,7 @@
                                 <rect key="frame" x="0.0" y="108" width="414" height="858"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxC-L4-sn7">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                        <rect key="frame" x="0.0" y="8" width="414" height="1000"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4u7-pc-1g6" userLabel="team name view">
                                                 <rect key="frame" x="0.0" y="32" width="414" height="100"/>
@@ -1614,8 +1614,11 @@
                                                             <action selector="nameClear" destination="44A-2y-PC4" eventType="touchUpInside" id="6fq-eS-O4u"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fA2-lU-bQ5" customClass="CityButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="180.5" y="66" width="53" height="31"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fA2-lU-bQ5" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                                        <rect key="frame" x="157" y="66" width="100" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="100" id="FZ6-h8-Z9W"/>
+                                                        </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="確認"/>
                                                         <connections>
@@ -1671,8 +1674,11 @@
                                                             <action selector="tokenClear" destination="44A-2y-PC4" eventType="touchUpInside" id="jjh-qL-x6T"/>
                                                         </connections>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwT-9w-87p" customClass="CityButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="164.5" y="120" width="53" height="31"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwT-9w-87p" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                                        <rect key="frame" x="141" y="120" width="100" height="31"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="100" id="4ia-V2-4M8"/>
+                                                        </constraints>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" title="驗證"/>
                                                         <connections>
@@ -1849,11 +1855,10 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="207" height="50"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eEj-vj-rBu" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                                                <rect key="frame" x="63.5" y="0.0" width="80" height="50"/>
+                                                                <rect key="frame" x="53.5" y="0.0" width="100" height="50"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="80" id="FaX-Hm-ujD"/>
                                                                     <constraint firstAttribute="height" constant="50" id="I3J-lS-317"/>
-                                                                    <constraint firstAttribute="width" constant="80" id="bQM-Lx-Utg"/>
+                                                                    <constraint firstAttribute="width" constant="100" id="l9K-bc-9oX"/>
                                                                 </constraints>
                                                                 <state key="normal" title="Button"/>
                                                                 <buttonConfiguration key="configuration" style="plain" title="送出"/>
@@ -1897,7 +1902,7 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="nYv-qx-qPt" secondAttribute="trailing" constant="8" id="1au-RZ-zJO"/>
                                             <constraint firstItem="rix-Vd-rGE" firstAttribute="leading" secondItem="lxC-L4-sn7" secondAttribute="leading" id="4y3-T9-S5p"/>
@@ -1925,8 +1930,8 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="lxC-L4-sn7" secondAttribute="trailing" id="8Xk-5Q-qg3"/>
-                                    <constraint firstItem="lxC-L4-sn7" firstAttribute="top" secondItem="8wG-IB-iUA" secondAttribute="top" id="b5E-xz-aOL"/>
+                                    <constraint firstAttribute="trailing" secondItem="lxC-L4-sn7" secondAttribute="trailing" constant="8" id="8Xk-5Q-qg3"/>
+                                    <constraint firstItem="lxC-L4-sn7" firstAttribute="top" secondItem="8wG-IB-iUA" secondAttribute="top" constant="8" id="b5E-xz-aOL"/>
                                     <constraint firstAttribute="bottom" secondItem="lxC-L4-sn7" secondAttribute="bottom" id="efg-OY-ds0"/>
                                     <constraint firstItem="lxC-L4-sn7" firstAttribute="leading" secondItem="8wG-IB-iUA" secondAttribute="leading" id="f8v-I9-Qlp"/>
                                 </constraints>
@@ -1949,6 +1954,7 @@
                     <connections>
                         <outlet property="buttonStack" destination="rix-Vd-rGE" id="dgy-h6-C7o"/>
                         <outlet property="cancelBtn" destination="Lcd-5Y-bmA" id="nm3-OM-jCv"/>
+                        <outlet property="dataContainer" destination="lxC-L4-sn7" id="ZMH-Xv-1Yd"/>
                         <outlet property="emailLbl" destination="jVh-9T-vZS" id="cB7-v0-Puc"/>
                         <outlet property="imageStack" destination="6jr-n8-Hxb" id="sKg-iv-1ts"/>
                         <outlet property="line1" destination="nYv-qx-qPt" id="3JB-eJ-oEd"/>
@@ -1965,7 +1971,9 @@
                         <outlet property="teamImageView1" destination="hpN-2S-jWp" id="99z-jR-YeI"/>
                         <outlet property="teamImageView2" destination="rQz-K5-WhT" id="oUN-BX-aTb"/>
                         <outlet property="teamNameClearBtn" destination="wdM-nj-49Y" id="TIC-S1-S9N"/>
+                        <outlet property="teamNameSubmitBtn" destination="fA2-lU-bQ5" id="vVa-Pl-C4f"/>
                         <outlet property="teamNameTF" destination="WWA-5M-l1g" id="vCb-H4-x5T"/>
+                        <outlet property="tokenSubmitBtn" destination="jwT-9w-87p" id="7gf-yC-qje"/>
                         <outlet property="topView" destination="iHb-8X-n1g" id="hc5-Nb-1Fm"/>
                     </connections>
                 </viewController>
@@ -2043,22 +2051,22 @@
     </scenes>
     <designables>
         <designable name="DzE-80-1OQ">
-            <size key="intrinsicContentSize" width="26" height="46"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="Pr6-jP-ohX">
             <size key="intrinsicContentSize" width="39" height="39"/>
         </designable>
         <designable name="WWA-5M-l1g">
-            <size key="intrinsicContentSize" width="26" height="46"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="WhY-Z2-MHj">
             <size key="intrinsicContentSize" width="134" height="39"/>
         </designable>
         <designable name="fDf-E9-mCZ">
-            <size key="intrinsicContentSize" width="26" height="46"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="vic-zn-4Mh">
-            <size key="intrinsicContentSize" width="26" height="46"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="ySD-eX-vph">
             <size key="intrinsicContentSize" width="39" height="39"/>

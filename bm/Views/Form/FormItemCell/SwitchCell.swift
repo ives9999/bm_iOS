@@ -45,6 +45,9 @@ class SwitchCell: FormItemCell {
         } else {
             val = (row.value == "1") ? true : false
         }
+        
+        onoff.onTintColor = UIColor(MY_GREEN)
+        onoff.tintColor = UIColor(MY_GRAY)
         onoff.setOn(val, animated: true)
     }
     
