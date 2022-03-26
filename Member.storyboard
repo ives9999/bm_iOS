@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,25 +46,7 @@
                                     <constraint firstAttribute="height" constant="64" id="fbk-LI-54u"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gFF-Mz-ZVy">
-                                <rect key="frame" x="382" y="66" width="20" height="20"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="20" id="Gcq-Qj-n9g"/>
-                                    <constraint firstAttribute="height" constant="20" id="nXG-YW-Iqd"/>
-                                </constraints>
-                                <state key="normal" image="close"/>
-                                <connections>
-                                    <action selector="closeBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="1bK-1d-7Am"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="email" translatesAutoresizingMaskIntoConstraints="NO" id="IvV-U8-27e">
-                                <rect key="frame" x="78.5" y="165" width="257" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="257" id="ac1-Tq-c85"/>
-                                    <constraint firstAttribute="height" constant="43" id="fpZ-9y-BHV"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pr6-jP-ohX" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pr6-jP-ohX" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="78.5" y="306" width="257" height="43"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -84,44 +66,7 @@
                                     <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="IfD-hD-89O"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="jacky@gmail.com" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="0yo-nU-T3O">
-                                <rect key="frame" x="118.5" y="168" width="200" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="4Nh-qB-oVW"/>
-                                    <constraint firstAttribute="width" constant="200" id="Z08-2Y-QT8"/>
-                                </constraints>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
-                                        <color key="value" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="password_textfield" translatesAutoresizingMaskIntoConstraints="NO" id="oWN-d9-N6B">
-                                <rect key="frame" x="78.5" y="228" width="257" height="43"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="4rc-7E-QJ0"/>
-                                    <constraint firstAttribute="width" constant="257" id="KfC-zG-eAg"/>
-                                </constraints>
-                            </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="密碼" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="69n-Va-wxY">
-                                <rect key="frame" x="118.5" y="231" width="200" height="37"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="NuH-Ln-aMw"/>
-                                    <constraint firstAttribute="width" constant="200" id="yD8-pg-Q7U"/>
-                                </constraints>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" secureTextEntry="YES" textContentType="password"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
-                                        <color key="value" red="0.57045853140000002" green="0.57047235969999999" blue="0.57046490910000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqL-EE-CA1">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqL-EE-CA1">
                                 <rect key="frame" x="78.5" y="379" width="77" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="忘記密碼">
@@ -131,7 +76,7 @@
                                     <action selector="passwordBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="Jjo-KT-JkU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NML-Ap-Iec">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NML-Ap-Iec">
                                 <rect key="frame" x="296.5" y="379" width="39" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="註冊">
@@ -144,32 +89,20 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DTV-Ir-EvU"/>
                         <constraints>
-                            <constraint firstItem="69n-Va-wxY" firstAttribute="centerY" secondItem="oWN-d9-N6B" secondAttribute="centerY" id="0Ds-ts-vDO"/>
-                            <constraint firstItem="oWN-d9-N6B" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="3ww-bl-qul"/>
                             <constraint firstItem="fqL-EE-CA1" firstAttribute="top" secondItem="Pr6-jP-ohX" secondAttribute="bottom" constant="30" id="48a-yi-Szq"/>
-                            <constraint firstItem="69n-Va-wxY" firstAttribute="leading" secondItem="oWN-d9-N6B" secondAttribute="leading" constant="40" id="5ZP-k0-d0B"/>
-                            <constraint firstItem="Pr6-jP-ohX" firstAttribute="top" secondItem="oWN-d9-N6B" secondAttribute="bottom" constant="35" id="CvS-nS-ABz"/>
                             <constraint firstItem="NML-Ap-Iec" firstAttribute="trailing" secondItem="Pr6-jP-ohX" secondAttribute="trailing" id="DOk-bR-erR"/>
                             <constraint firstItem="DTV-Ir-EvU" firstAttribute="trailing" secondItem="QQl-Cf-5EQ" secondAttribute="trailing" id="E3d-4A-7WY"/>
                             <constraint firstItem="QQl-Cf-5EQ" firstAttribute="trailing" secondItem="DTV-Ir-EvU" secondAttribute="trailing" id="E5c-78-P10"/>
-                            <constraint firstItem="DTV-Ir-EvU" firstAttribute="trailing" secondItem="gFF-Mz-ZVy" secondAttribute="trailing" constant="12" id="M31-lS-3DY"/>
-                            <constraint firstItem="oWN-d9-N6B" firstAttribute="top" secondItem="IvV-U8-27e" secondAttribute="bottom" constant="20" id="Onj-jX-Lad"/>
-                            <constraint firstItem="IvV-U8-27e" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="Tbl-va-ht1"/>
-                            <constraint firstItem="0yo-nU-T3O" firstAttribute="top" secondItem="QQl-Cf-5EQ" secondAttribute="bottom" constant="60" id="Tjz-u4-E2b"/>
                             <constraint firstItem="QQl-Cf-5EQ" firstAttribute="leading" secondItem="DTV-Ir-EvU" secondAttribute="leading" id="Wlf-zE-B0S"/>
                             <constraint firstItem="fqL-EE-CA1" firstAttribute="leading" secondItem="Pr6-jP-ohX" secondAttribute="leading" id="fm7-Cg-H4r"/>
                             <constraint firstItem="QQl-Cf-5EQ" firstAttribute="top" secondItem="DTV-Ir-EvU" secondAttribute="top" id="iiH-Ye-5sz"/>
-                            <constraint firstItem="gFF-Mz-ZVy" firstAttribute="centerY" secondItem="CP0-Qd-R4O" secondAttribute="centerY" id="lBy-12-gaR"/>
-                            <constraint firstItem="0yo-nU-T3O" firstAttribute="centerY" secondItem="IvV-U8-27e" secondAttribute="centerY" id="lS4-9Z-IPc"/>
-                            <constraint firstItem="0yo-nU-T3O" firstAttribute="leading" secondItem="IvV-U8-27e" secondAttribute="leading" constant="40" id="rei-dX-ZZ6"/>
                             <constraint firstItem="QQl-Cf-5EQ" firstAttribute="top" secondItem="DTV-Ir-EvU" secondAttribute="top" id="vbP-MG-4bH"/>
                             <constraint firstItem="NML-Ap-Iec" firstAttribute="top" secondItem="Pr6-jP-ohX" secondAttribute="bottom" constant="30" id="xo6-XK-qR2"/>
                             <constraint firstItem="Pr6-jP-ohX" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="zeQ-9d-GTF"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailTxt" destination="0yo-nU-T3O" id="5e9-5s-b01"/>
-                        <outlet property="passwordTxt" destination="69n-Va-wxY" id="guj-JH-2tK"/>
+                        <outlet property="topView" destination="QQl-Cf-5EQ" id="YG4-QT-UtJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="blT-yh-XVd" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -217,7 +150,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhY-Z2-MHj" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="117" y="380.5" width="180" height="43"/>
+                                <rect key="frame" x="117" y="382" width="180" height="43"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Nkw-Yy-vA5"/>
@@ -237,7 +170,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySD-eX-vph" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="147" y="301.5" width="120" height="43"/>
+                                <rect key="frame" x="147" y="303" width="120" height="43"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="43" id="0af-dv-bWd"/>
@@ -257,7 +190,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vic-zn-4Mh" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="118" y="219.5" width="210" height="46"/>
+                                <rect key="frame" x="118" y="217.5" width="210" height="49.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="210" id="0Vd-2u-HEh"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="3ox-CX-VBF"/>
@@ -1652,18 +1585,18 @@
                                                 <rect key="frame" x="16" y="165" width="382" height="280"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者金鑰：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXd-Pz-BLr" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="17" width="104" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="18.5" width="104" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DzE-80-1OQ" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="112" y="4" width="229" height="46"/>
+                                                        <rect key="frame" x="112" y="4" width="229" height="49.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McF-pq-NPP">
-                                                        <rect key="frame" x="357" y="14.5" width="25" height="25"/>
+                                                        <rect key="frame" x="357" y="16.5" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="8h7-OA-G7u"/>
                                                             <constraint firstAttribute="width" constant="25" id="qB1-0m-gxQ"/>
@@ -1675,7 +1608,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwT-9w-87p" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="141" y="120" width="100" height="31"/>
+                                                        <rect key="frame" x="141" y="123.5" width="100" height="31"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="4ia-V2-4M8"/>
                                                         </constraints>
@@ -1686,7 +1619,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9C-oz-mUD" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="54" width="163.5" height="39"/>
+                                                        <rect key="frame" x="8" y="57.5" width="163.5" height="39"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="question" imagePlacement="leading" title="如何取得會員金鑰" titleAlignment="center">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
@@ -1696,7 +1629,7 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="LAv-At-hEc">
-                                                        <rect key="frame" x="0.0" y="171" width="259" height="95.5"/>
+                                                        <rect key="frame" x="0.0" y="174.5" width="259" height="95.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="59F-c0-JFz" userLabel="暱稱">
                                                                 <rect key="frame" x="0.0" y="0.0" width="179" height="20.5"/>
@@ -2051,22 +1984,22 @@
     </scenes>
     <designables>
         <designable name="DzE-80-1OQ">
-            <size key="intrinsicContentSize" width="36" height="46"/>
+            <size key="intrinsicContentSize" width="27" height="49.5"/>
         </designable>
         <designable name="Pr6-jP-ohX">
             <size key="intrinsicContentSize" width="39" height="39"/>
         </designable>
         <designable name="WWA-5M-l1g">
-            <size key="intrinsicContentSize" width="36" height="46"/>
+            <size key="intrinsicContentSize" width="27" height="49.5"/>
         </designable>
         <designable name="WhY-Z2-MHj">
             <size key="intrinsicContentSize" width="134" height="39"/>
         </designable>
         <designable name="fDf-E9-mCZ">
-            <size key="intrinsicContentSize" width="36" height="46"/>
+            <size key="intrinsicContentSize" width="27" height="49.5"/>
         </designable>
         <designable name="vic-zn-4Mh">
-            <size key="intrinsicContentSize" width="36" height="46"/>
+            <size key="intrinsicContentSize" width="27" height="49.5"/>
         </designable>
         <designable name="ySD-eX-vph">
             <size key="intrinsicContentSize" width="39" height="39"/>
@@ -2074,17 +2007,14 @@
     </designables>
     <resources>
         <image name="background" width="377.5" height="670"/>
-        <image name="close" width="20" height="20"/>
         <image name="course" width="25" height="25"/>
         <image name="delete" width="25" height="25"/>
         <image name="down" width="32" height="32"/>
-        <image name="email" width="257" height="43"/>
         <image name="forget_password" width="25" height="25"/>
         <image name="gear" width="25" height="25"/>
         <image name="logo" width="200" height="42"/>
         <image name="member" width="25" height="25"/>
         <image name="menuProfileIcon" width="99" height="99"/>
-        <image name="password_textfield" width="257" height="43"/>
         <image name="power" width="25" height="25"/>
         <image name="prev_black" width="25" height="25"/>
         <image name="question" width="25" height="25"/>
