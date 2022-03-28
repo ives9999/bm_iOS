@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -46,28 +46,31 @@
                                     <constraint firstAttribute="height" constant="64" id="fbk-LI-54u"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pr6-jP-ohX" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="78.5" y="306" width="257" height="43"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jrM-AS-IS7" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="82" y="228" width="250" height="50"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="82O-6Z-Irq"/>
-                                    <constraint firstAttribute="width" constant="257" id="s9v-qM-DmA"/>
+                                    <constraint firstAttribute="height" constant="50" id="7kb-KX-EtY"/>
+                                    <constraint firstAttribute="width" constant="250" id="qgU-UK-G3W"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="email"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pr6-jP-ohX" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="82" y="408" width="250" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="82O-6Z-Irq"/>
+                                    <constraint firstAttribute="width" constant="250" id="s9v-qM-DmA"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="登入">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="22"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="loginBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="IfD-hD-89O"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqL-EE-CA1">
-                                <rect key="frame" x="78.5" y="379" width="77" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqL-EE-CA1">
+                                <rect key="frame" x="86" y="478" width="77" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="忘記密碼">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -76,8 +79,8 @@
                                     <action selector="passwordBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="Jjo-KT-JkU"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NML-Ap-Iec">
-                                <rect key="frame" x="296.5" y="379" width="39" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NML-Ap-Iec">
+                                <rect key="frame" x="297" y="478" width="39" height="39"/>
                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                 <state key="normal" title="註冊">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -86,22 +89,41 @@
                                     <action selector="registerBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="Tox-ok-nzT"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="AVv-ec-reU" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="82" y="298" width="250" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="6dq-ZE-qyX"/>
+                                    <constraint firstAttribute="width" constant="250" id="Unp-4O-qZV"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" textContentType="password"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="DTV-Ir-EvU"/>
                         <constraints>
                             <constraint firstItem="fqL-EE-CA1" firstAttribute="top" secondItem="Pr6-jP-ohX" secondAttribute="bottom" constant="30" id="48a-yi-Szq"/>
-                            <constraint firstItem="NML-Ap-Iec" firstAttribute="trailing" secondItem="Pr6-jP-ohX" secondAttribute="trailing" id="DOk-bR-erR"/>
+                            <constraint firstItem="NML-Ap-Iec" firstAttribute="trailing" secondItem="Pr6-jP-ohX" secondAttribute="trailing" constant="4" id="DOk-bR-erR"/>
                             <constraint firstItem="DTV-Ir-EvU" firstAttribute="trailing" secondItem="QQl-Cf-5EQ" secondAttribute="trailing" id="E3d-4A-7WY"/>
                             <constraint firstItem="QQl-Cf-5EQ" firstAttribute="trailing" secondItem="DTV-Ir-EvU" secondAttribute="trailing" id="E5c-78-P10"/>
+                            <constraint firstItem="jrM-AS-IS7" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="QLR-93-34i"/>
+                            <constraint firstItem="AVv-ec-reU" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="SoG-1b-RJi"/>
                             <constraint firstItem="QQl-Cf-5EQ" firstAttribute="leading" secondItem="DTV-Ir-EvU" secondAttribute="leading" id="Wlf-zE-B0S"/>
-                            <constraint firstItem="fqL-EE-CA1" firstAttribute="leading" secondItem="Pr6-jP-ohX" secondAttribute="leading" id="fm7-Cg-H4r"/>
+                            <constraint firstItem="AVv-ec-reU" firstAttribute="top" secondItem="jrM-AS-IS7" secondAttribute="bottom" constant="20" id="ahA-F8-kmx"/>
+                            <constraint firstItem="Pr6-jP-ohX" firstAttribute="top" secondItem="AVv-ec-reU" secondAttribute="bottom" constant="60" id="dSU-bd-IaQ"/>
+                            <constraint firstItem="fqL-EE-CA1" firstAttribute="leading" secondItem="Pr6-jP-ohX" secondAttribute="leading" constant="4" id="fm7-Cg-H4r"/>
                             <constraint firstItem="QQl-Cf-5EQ" firstAttribute="top" secondItem="DTV-Ir-EvU" secondAttribute="top" id="iiH-Ye-5sz"/>
                             <constraint firstItem="QQl-Cf-5EQ" firstAttribute="top" secondItem="DTV-Ir-EvU" secondAttribute="top" id="vbP-MG-4bH"/>
+                            <constraint firstItem="jrM-AS-IS7" firstAttribute="top" secondItem="QQl-Cf-5EQ" secondAttribute="bottom" constant="120" id="wJ8-vU-XA9"/>
                             <constraint firstItem="NML-Ap-Iec" firstAttribute="top" secondItem="Pr6-jP-ohX" secondAttribute="bottom" constant="30" id="xo6-XK-qR2"/>
                             <constraint firstItem="Pr6-jP-ohX" firstAttribute="centerX" secondItem="ksh-hs-DpB" secondAttribute="centerX" id="zeQ-9d-GTF"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="emailTxt" destination="jrM-AS-IS7" id="0AV-pR-Ena"/>
+                        <outlet property="forgetPasswordBtn" destination="fqL-EE-CA1" id="QMX-sb-D5e"/>
+                        <outlet property="passwordTxt" destination="AVv-ec-reU" id="iIE-eM-0Ml"/>
+                        <outlet property="registerBtn" destination="NML-Ap-Iec" id="5m9-vd-h2c"/>
+                        <outlet property="submitBtn" destination="Pr6-jP-ohX" id="3f7-Ir-yHq"/>
                         <outlet property="topView" destination="QQl-Cf-5EQ" id="YG4-QT-UtJ"/>
                     </connections>
                 </viewController>
@@ -149,108 +171,97 @@
                                     <constraint firstItem="KwD-jK-3i4" firstAttribute="centerY" secondItem="hWd-K2-nZw" secondAttribute="centerY" id="nVi-UT-HPf"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhY-Z2-MHj" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="117" y="382" width="180" height="43"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mna-DH-R7E">
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fDf-E9-mCZ" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="82" y="60" width="250" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="ECr-Vv-zzy"/>
+                                            <constraint firstAttribute="height" constant="50" id="X3R-nx-xN1"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vic-zn-4Mh" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="82" y="130" width="250" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="0Vd-2u-HEh"/>
+                                            <constraint firstAttribute="height" constant="50" id="3ox-CX-VBF"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySD-eX-vph" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="82" y="240" width="250" height="40"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="0af-dv-bWd"/>
+                                            <constraint firstAttribute="width" constant="250" id="ea3-xe-FcV"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <state key="normal" title="送出">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="submit:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="XCU-wZ-XJM"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WhY-Z2-MHj" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                                        <rect key="frame" x="82" y="310" width="250" height="40"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="250" id="Nkw-Yy-vA5"/>
+                                            <constraint firstAttribute="height" constant="40" id="dWX-bx-Rzu"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
+                                        <state key="normal" title="重新送出認證碼">
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="resend:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="zcm-tI-W9S"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="180" id="Nkw-Yy-vA5"/>
-                                    <constraint firstAttribute="height" constant="43" id="dWX-bx-Rzu"/>
+                                    <constraint firstItem="fDf-E9-mCZ" firstAttribute="centerX" secondItem="mna-DH-R7E" secondAttribute="centerX" id="HLv-9e-Tux"/>
+                                    <constraint firstItem="WhY-Z2-MHj" firstAttribute="top" secondItem="ySD-eX-vph" secondAttribute="bottom" constant="30" id="M1t-2v-yL8"/>
+                                    <constraint firstItem="vic-zn-4Mh" firstAttribute="centerX" secondItem="mna-DH-R7E" secondAttribute="centerX" id="kyM-Lz-kCI"/>
+                                    <constraint firstItem="ySD-eX-vph" firstAttribute="top" secondItem="vic-zn-4Mh" secondAttribute="bottom" constant="60" id="o8d-Es-jrD"/>
+                                    <constraint firstItem="ySD-eX-vph" firstAttribute="centerX" secondItem="mna-DH-R7E" secondAttribute="centerX" id="sR8-Qf-cP7"/>
+                                    <constraint firstItem="fDf-E9-mCZ" firstAttribute="top" secondItem="mna-DH-R7E" secondAttribute="top" constant="60" id="uQ0-vS-IKK"/>
+                                    <constraint firstItem="vic-zn-4Mh" firstAttribute="top" secondItem="fDf-E9-mCZ" secondAttribute="bottom" constant="20" id="zTa-to-sKD"/>
+                                    <constraint firstItem="WhY-Z2-MHj" firstAttribute="centerX" secondItem="mna-DH-R7E" secondAttribute="centerX" id="zyw-nI-5xB"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                <state key="normal" title="重新送出認證碼">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="22"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="resend:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="zcm-tI-W9S"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ySD-eX-vph" customClass="RoundedButton" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="147" y="303" width="120" height="43"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="0af-dv-bWd"/>
-                                    <constraint firstAttribute="width" constant="120" id="ea3-xe-FcV"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                <state key="normal" title="提交">
-                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="22"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="submit:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="XCU-wZ-XJM"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vic-zn-4Mh" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="118" y="217.5" width="210" height="49.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="210" id="0Vd-2u-HEh"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="42" id="3ox-CX-VBF"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="認證碼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FY4-Qb-vMz" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="24" y="227" width="78" height="30.5"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="26"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCY-rp-evL">
-                                <rect key="frame" x="24" y="154" width="54" height="29"/>
-                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="24"/>
-                                <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fDf-E9-mCZ" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="94" y="147.5" width="288" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="X3R-nx-xN1"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="CAM-UA-l1o"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="WhY-Z2-MHj" firstAttribute="centerX" secondItem="FtC-eI-1dW" secondAttribute="centerX" id="3oW-lf-90l"/>
-                            <constraint firstItem="ySD-eX-vph" firstAttribute="centerX" secondItem="FtC-eI-1dW" secondAttribute="centerX" id="AsR-K9-fng"/>
                             <constraint firstItem="hWd-K2-nZw" firstAttribute="trailing" secondItem="CAM-UA-l1o" secondAttribute="trailing" id="Cgj-R4-mCs"/>
-                            <constraint firstItem="fDf-E9-mCZ" firstAttribute="leading" secondItem="cCY-rp-evL" secondAttribute="trailing" constant="16" id="Ck2-vG-ezi"/>
-                            <constraint firstItem="WhY-Z2-MHj" firstAttribute="top" secondItem="ySD-eX-vph" secondAttribute="bottom" constant="36" id="GvV-EM-y7b"/>
-                            <constraint firstItem="fDf-E9-mCZ" firstAttribute="centerY" secondItem="cCY-rp-evL" secondAttribute="centerY" id="Jcm-xx-p1a"/>
-                            <constraint firstItem="vic-zn-4Mh" firstAttribute="centerY" secondItem="FY4-Qb-vMz" secondAttribute="centerY" id="QOu-aq-h3A"/>
+                            <constraint firstItem="CAM-UA-l1o" firstAttribute="trailing" secondItem="mna-DH-R7E" secondAttribute="trailing" id="OFY-F6-1u7"/>
+                            <constraint firstItem="mna-DH-R7E" firstAttribute="leading" secondItem="CAM-UA-l1o" secondAttribute="leading" id="UCE-No-JwB"/>
                             <constraint firstItem="hWd-K2-nZw" firstAttribute="top" secondItem="CAM-UA-l1o" secondAttribute="top" id="Usd-aE-XIY"/>
-                            <constraint firstItem="FY4-Qb-vMz" firstAttribute="leading" secondItem="CAM-UA-l1o" secondAttribute="leading" constant="24" id="VlJ-Kj-l4u"/>
-                            <constraint firstItem="vic-zn-4Mh" firstAttribute="leading" secondItem="FY4-Qb-vMz" secondAttribute="trailing" constant="16" id="g6Y-op-XEj"/>
-                            <constraint firstItem="cCY-rp-evL" firstAttribute="top" secondItem="hWd-K2-nZw" secondAttribute="bottom" constant="46" id="hnw-CQ-GRb"/>
-                            <constraint firstItem="cCY-rp-evL" firstAttribute="leading" secondItem="CAM-UA-l1o" secondAttribute="leading" constant="24" id="kRu-km-V9D"/>
-                            <constraint firstItem="FY4-Qb-vMz" firstAttribute="top" secondItem="cCY-rp-evL" secondAttribute="bottom" constant="44" id="lAo-Fd-ynq"/>
-                            <constraint firstItem="CAM-UA-l1o" firstAttribute="trailing" secondItem="fDf-E9-mCZ" secondAttribute="trailing" constant="32" id="mA9-tD-S4l"/>
-                            <constraint firstItem="ySD-eX-vph" firstAttribute="top" secondItem="vic-zn-4Mh" secondAttribute="bottom" constant="36" id="qmf-e0-hZP"/>
+                            <constraint firstItem="mna-DH-R7E" firstAttribute="top" secondItem="hWd-K2-nZw" secondAttribute="bottom" id="eQK-Bw-cfM"/>
+                            <constraint firstItem="CAM-UA-l1o" firstAttribute="bottom" secondItem="mna-DH-R7E" secondAttribute="bottom" id="fBo-00-MPW"/>
                             <constraint firstItem="hWd-K2-nZw" firstAttribute="leading" secondItem="CAM-UA-l1o" secondAttribute="leading" id="tVh-iq-bLe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Hcx-PF-EZs"/>
                     <connections>
                         <outlet property="codeTxt" destination="vic-zn-4Mh" id="crr-Kf-yC4"/>
+                        <outlet property="dataContainerView" destination="mna-DH-R7E" id="lbA-Zn-00S"/>
+                        <outlet property="reSendBtn" destination="WhY-Z2-MHj" id="0wa-BM-8U3"/>
+                        <outlet property="submitBtn" destination="ySD-eX-vph" id="jXX-sn-eOy"/>
                         <outlet property="titleLbl" destination="KwD-jK-3i4" id="3iA-MW-soc"/>
-                        <outlet property="typeLbl" destination="cCY-rp-evL" id="QGV-do-5Qo"/>
+                        <outlet property="topView" destination="hWd-K2-nZw" id="Cup-bL-Ppt"/>
                         <outlet property="typeTxt" destination="fDf-E9-mCZ" id="oTa-23-gGn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lgz-ZV-dGl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-177" y="-2190"/>
+            <point key="canvasLocation" x="-178.2608695652174" y="-2190.4017857142858"/>
         </scene>
         <!--PasswordVC-->
         <scene sceneID="oJV-Mq-jGs">
@@ -292,27 +303,27 @@
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="ugP-cM-RNK"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="myM-dp-wNG">
-                                <rect key="frame" x="107" y="168" width="200" height="42"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="alu-j7-QDT"/>
-                                    <constraint firstAttribute="width" constant="200" id="oag-nX-llh"/>
-                                </constraints>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tY6-fL-USB">
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YXC-Ew-abc"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YXC-Ew-abc" firstAttribute="trailing" secondItem="5FF-VX-gI0" secondAttribute="trailing" id="2v1-Jl-mQS"/>
-                            <constraint firstItem="myM-dp-wNG" firstAttribute="centerX" secondItem="z2o-2r-ldq" secondAttribute="centerX" id="Kyh-7W-T7c"/>
+                            <constraint firstItem="tY6-fL-USB" firstAttribute="leading" secondItem="YXC-Ew-abc" secondAttribute="leading" id="G7r-5g-AIg"/>
+                            <constraint firstItem="YXC-Ew-abc" firstAttribute="trailing" secondItem="tY6-fL-USB" secondAttribute="trailing" id="O1j-we-44V"/>
                             <constraint firstItem="5FF-VX-gI0" firstAttribute="top" secondItem="YXC-Ew-abc" secondAttribute="top" id="OlM-zt-mDK"/>
                             <constraint firstItem="5FF-VX-gI0" firstAttribute="leading" secondItem="z2o-2r-ldq" secondAttribute="leading" id="Pjw-NK-S1u"/>
-                            <constraint firstItem="myM-dp-wNG" firstAttribute="top" secondItem="5FF-VX-gI0" secondAttribute="bottom" constant="60" id="YMd-Aa-FTl"/>
+                            <constraint firstItem="YXC-Ew-abc" firstAttribute="bottom" secondItem="tY6-fL-USB" secondAttribute="bottom" id="XNY-7R-v1c"/>
+                            <constraint firstItem="tY6-fL-USB" firstAttribute="top" secondItem="5FF-VX-gI0" secondAttribute="bottom" id="pr2-0R-gxB"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="logoView" destination="myM-dp-wNG" id="mrD-nK-N4v"/>
+                        <outlet property="dataContainerView" destination="tY6-fL-USB" id="FQU-0O-n8V"/>
                         <outlet property="titleLbl" destination="11X-Jp-huJ" id="YE9-qX-Odf"/>
+                        <outlet property="topView" destination="5FF-VX-gI0" id="mqP-NB-cdd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kIG-t9-jES" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1167,7 +1178,7 @@
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="tru-fA-pMe">
-                                        <rect key="frame" x="103.5" y="8" width="207" height="34"/>
+                                        <rect key="frame" x="66.5" y="8" width="281" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t9W-X2-g9O" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="120" height="34"/>
@@ -1185,7 +1196,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w6s-MP-5wx" customClass="CancelButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="161" y="0.0" width="46" height="34"/>
+                                                <rect key="frame" x="161" y="0.0" width="120" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="hmM-sk-dlD"/>
+                                                </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="cancelBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="Ous-R1-hGi"/>
@@ -1219,6 +1233,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cancelBtn" destination="w6s-MP-5wx" id="lX9-OE-cvF"/>
                         <outlet property="dataContainer" destination="OIb-81-1IO" id="GM8-7l-ggp"/>
                         <outlet property="featuredView" destination="gO7-MC-m06" id="yW9-lv-ekR"/>
                         <outlet property="featuredViewContainer" destination="RkV-1v-AMI" id="S8X-Lj-OL6"/>
@@ -1585,18 +1600,18 @@
                                                 <rect key="frame" x="16" y="165" width="382" height="280"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者金鑰：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXd-Pz-BLr" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="18.5" width="104" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="11" width="104" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DzE-80-1OQ" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="112" y="4" width="229" height="49.5"/>
+                                                        <rect key="frame" x="112" y="4" width="229" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McF-pq-NPP">
-                                                        <rect key="frame" x="357" y="16.5" width="25" height="25"/>
+                                                        <rect key="frame" x="357" y="8.5" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="8h7-OA-G7u"/>
                                                             <constraint firstAttribute="width" constant="25" id="qB1-0m-gxQ"/>
@@ -1608,7 +1623,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwT-9w-87p" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="141" y="123.5" width="100" height="31"/>
+                                                        <rect key="frame" x="141" y="108" width="100" height="31"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="4ia-V2-4M8"/>
                                                         </constraints>
@@ -1619,7 +1634,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9C-oz-mUD" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="57.5" width="163.5" height="39"/>
+                                                        <rect key="frame" x="8" y="42" width="163.5" height="39"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="question" imagePlacement="leading" title="如何取得會員金鑰" titleAlignment="center">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
@@ -1629,7 +1644,7 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="LAv-At-hEc">
-                                                        <rect key="frame" x="0.0" y="174.5" width="259" height="95.5"/>
+                                                        <rect key="frame" x="0.0" y="159" width="259" height="95.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="59F-c0-JFz" userLabel="暱稱">
                                                                 <rect key="frame" x="0.0" y="0.0" width="179" height="20.5"/>
@@ -1983,26 +1998,23 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="AVv-ec-reU">
+            <size key="intrinsicContentSize" width="62.5" height="34"/>
+        </designable>
         <designable name="DzE-80-1OQ">
-            <size key="intrinsicContentSize" width="27" height="49.5"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="Pr6-jP-ohX">
             <size key="intrinsicContentSize" width="39" height="39"/>
         </designable>
         <designable name="WWA-5M-l1g">
-            <size key="intrinsicContentSize" width="27" height="49.5"/>
-        </designable>
-        <designable name="WhY-Z2-MHj">
-            <size key="intrinsicContentSize" width="134" height="39"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="fDf-E9-mCZ">
-            <size key="intrinsicContentSize" width="27" height="49.5"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
         <designable name="vic-zn-4Mh">
-            <size key="intrinsicContentSize" width="27" height="49.5"/>
-        </designable>
-        <designable name="ySD-eX-vph">
-            <size key="intrinsicContentSize" width="39" height="39"/>
+            <size key="intrinsicContentSize" width="32" height="34"/>
         </designable>
     </designables>
     <resources>
@@ -2012,7 +2024,6 @@
         <image name="down" width="32" height="32"/>
         <image name="forget_password" width="25" height="25"/>
         <image name="gear" width="25" height="25"/>
-        <image name="logo" width="200" height="42"/>
         <image name="member" width="25" height="25"/>
         <image name="menuProfileIcon" width="99" height="99"/>
         <image name="power" width="25" height="25"/>

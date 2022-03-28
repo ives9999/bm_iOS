@@ -18,7 +18,7 @@ class LikeButton: SuperButton {
     var count: Int = 0
     
     let likeString: String = "like1"
-    let unLikeString: String = "likeongreenno"
+    let unLikeString: String = "like"
 
     init() {
         super.init(frame: .zero)
@@ -37,7 +37,7 @@ class LikeButton: SuperButton {
     
     override func commonInit() {
         super.commonInit()
-        setColor(textColor: UIColor(MY_BLACK), bkColor: UIColor(LIKE_BUTTON))
+        setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MY_BLACK))
         //cornerRadius = MY_BUTTON_CORNER
         //contentEdgeInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         tintColor = .white

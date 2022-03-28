@@ -16,7 +16,8 @@ class PaymentVC: MyTableVC {
     @IBOutlet weak var submitBtn: SuperButton!
     @IBOutlet weak var bottomStaticView: BottomView!
     
-    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+    //@IBOutlet weak var dataContainerBottom: NSLayoutConstraint!
     
     var ecpay_token: String = ""
     var order_token: String = ""
@@ -307,10 +308,14 @@ class PaymentVC: MyTableVC {
         orderTable!.filterRow()
         if (orderTable!.all_process > 1) {//已經付費了
             bottomStaticView.isHidden = true
-            tableViewBottomConstraint.constant = 0
+            //tableViewBottomConstraint.constant = 0
+            dataContainer.translatesAutoresizingMaskIntoConstraints = false
+            dataContainer.bottomAnchor.constraint(equalTo: dataContainer.superview!.bottomAnchor, constant: 0).isActive = true
         } else {
             bottomStaticView.isHidden = false
-            tableViewBottomConstraint.constant = 100
+            //tableViewBottomConstraint.constant = 100
+            dataContainer.translatesAutoresizingMaskIntoConstraints = false
+            dataContainer.bottomAnchor.constraint(equalTo: bottomStaticView.topAnchor, constant: 8).isActive = true
         }
         
         var rows: [OneRow] = [OneRow]()

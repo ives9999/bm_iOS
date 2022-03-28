@@ -107,8 +107,10 @@ class ShowCourseVC: ShowVC {
         memberRows.append(row)
         row = MemberRow(title: "時段", icon: "clock", show: myTable!.interval_show)
         memberRows.append(row)
-        row = MemberRow(title: "期間", icon: "date", show: myTable!.dateTable!.date)
-        memberRows.append(row)
+        if myTable!.dateTable != nil {
+            row = MemberRow(title: "期間", icon: "date", show: myTable!.dateTable!.date)
+            memberRows.append(row)
+        }
         row = MemberRow(title: "收費", icon: "money", show: myTable!.price_text_long)
         memberRows.append(row)
         row = MemberRow(title: "限制人數", icon: "group", show: myTable!.people_limit_text)
@@ -332,8 +334,8 @@ class ShowCourseVC: ShowVC {
                     self.tableViewConstraintHeight.constant = heightOfTableView
                     self.dataConstraintHeight.constant += heightOfTableView
                     
-                    self.scrollContainerHeight += self.dataConstraintHeight.constant
-                    self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+                    //self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    //self.containerViewConstraintHeight.constant = self.scrollContainerHeight
                     
                     //self.scrollContainerHeight += self.tableViewConstraintHeight.constant
                     //print("tableView:\(self.scrollContainerHeight)")
@@ -385,8 +387,8 @@ class ShowCourseVC: ShowVC {
                     self.signupTableViewConstraintHeight.constant = heightOfTableView
                     self.dataConstraintHeight.constant += heightOfTableView
                     
-                    self.scrollContainerHeight += self.dataConstraintHeight.constant
-                    self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+                    //self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    //self.containerViewConstraintHeight.constant = self.scrollContainerHeight
                     //self.changeScrollViewContentSize()
                 }
             }
@@ -434,8 +436,8 @@ class ShowCourseVC: ShowVC {
                     
                     self.dataConstraintHeight.constant += heightOfTableView
                     
-                    self.scrollContainerHeight += self.dataConstraintHeight.constant
-                    self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+                    //self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    //self.containerViewConstraintHeight.constant = self.scrollContainerHeight
                 }
             }
             return cell

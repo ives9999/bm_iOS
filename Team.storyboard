@@ -454,8 +454,7 @@
                                 <constraints>
                                     <constraint firstItem="jah-0S-PJV" firstAttribute="top" secondItem="4Ur-T9-gzC" secondAttribute="top" id="PDd-y3-MSK"/>
                                     <constraint firstItem="jah-0S-PJV" firstAttribute="leading" secondItem="4Ur-T9-gzC" secondAttribute="leading" id="bnd-nX-8VI"/>
-                                    <constraint firstItem="jah-0S-PJV" firstAttribute="width" secondItem="7pw-ph-Yp9" secondAttribute="width" id="pWT-u2-DgL"/>
-                                    <constraint firstItem="jah-0S-PJV" firstAttribute="bottom" secondItem="4Ur-T9-gzC" secondAttribute="bottom" constant="818" id="uGC-7u-Tsj"/>
+                                    <constraint firstItem="jah-0S-PJV" firstAttribute="bottom" secondItem="4Ur-T9-gzC" secondAttribute="bottom" id="uGC-7u-Tsj"/>
                                     <constraint firstItem="jah-0S-PJV" firstAttribute="trailing" secondItem="4Ur-T9-gzC" secondAttribute="trailing" id="yQH-zn-mTB"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="4Ur-T9-gzC"/>
@@ -928,13 +927,13 @@
                                 <rect key="frame" x="0.0" y="812" width="414" height="50"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="xN7-m4-eLO">
-                                        <rect key="frame" x="113.5" y="8" width="187" height="34"/>
+                                        <rect key="frame" x="66.5" y="8" width="281" height="34"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8C-Xj-JxF" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="100" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="120" height="34"/>
                                                 <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="2vb-KV-YY8"/>
+                                                    <constraint firstAttribute="width" constant="120" id="2vb-KV-YY8"/>
                                                     <constraint firstAttribute="height" constant="34" id="SeL-R2-pqT"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="18"/>
@@ -946,7 +945,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pn9-BA-Yom" customClass="CancelButton" customModule="bm" customModuleProvider="target">
-                                                <rect key="frame" x="141" y="0.0" width="46" height="34"/>
+                                                <rect key="frame" x="161" y="0.0" width="120" height="34"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="120" id="LNy-Dc-cSi"/>
+                                                </constraints>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="cancel:" destination="kAb-mq-SLF" eventType="touchUpInside" id="BQ7-3v-sRq"/>

@@ -80,6 +80,7 @@ class ShowArenaVC: ShowVC {
     
     override func setData() {
         
+        super.setData()
         if table != nil {
             myTable = table as? ArenaTable
             if (myTable != nil) {

@@ -17,6 +17,7 @@ class RegisterVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
     @IBOutlet weak var featuredViewContainer: UIView!
     
     @IBOutlet weak var submitBtn: SubmitButton!
+    @IBOutlet weak var cancelBtn: CancelButton!
     
     var imagePicker: UIImagePickerController = UIImagePickerController()
     

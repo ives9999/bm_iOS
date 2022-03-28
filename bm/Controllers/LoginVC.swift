@@ -34,8 +34,11 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     var memberVC: MemberVC? = nil
 
     // outlets
-    @IBOutlet weak var emailTxt: UITextField!
-    @IBOutlet weak var passwordTxt: UITextField!
+    @IBOutlet weak var emailTxt: SuperTextField!
+    @IBOutlet weak var passwordTxt: SuperTextField!
+    @IBOutlet weak var submitBtn: SubmitButton!
+    @IBOutlet weak var forgetPasswordBtn: UIButton!
+    @IBOutlet weak var registerBtn: UIButton!
     //@IBOutlet weak var facebookLogin: FBLoginButton!
     
     var table: MemberTable?
@@ -44,8 +47,27 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
+        
+        emailTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        emailTxt.attributedPlaceholder = NSAttributedString(
+            string: "EMail",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+        )
+        emailTxt.keyboardType = .emailAddress
+        
+        passwordTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        passwordTxt.attributedPlaceholder = NSAttributedString(
+            string: "密碼",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+        )
+        passwordTxt.isSecureTextEntry = true
+        
         emailTxt.delegate = self
         passwordTxt.delegate = self
+        
+        forgetPasswordBtn.setTitleColor(UIColor(MY_GRAY), for: .normal)
+        registerBtn.setTitleColor(UIColor(MY_GREEN), for: .normal)
+        
         //emailTxt.align(.left)
         //emailTxt.borderWidth(0)
         //emailTxt.backgroundColor = UIColor.clear
@@ -81,11 +103,11 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         MemberService.instance.login(email: email, password: password, playerID: playerID) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
-                
+
                 let jsonData: Data = MemberService.instance.jsonData!
                 do {
                     let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
-                    
+
                     if (!successTable.success) {
                         self.warning(successTable.msg)
                     } else {
@@ -93,29 +115,20 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                         if (self.table != nil) {
                             //self.table?.printRow()
                             self.table!.toSession(isLoggedIn: true)
-                            
+
                             self.dismiss(animated: true, completion: {
                                 if self.memberVC != nil {
                                     self.memberVC!.loginout()
                                 }
                             })
                         }
-                        
-//                        if MemberService.instance.msg.count > 0 {
-//                            let appearance = SCLAlertView.SCLAppearance(
-//                                showCloseButton: false
-//                            )
-//                            let alert = SCLAlertView(appearance: appearance)
-//                            alert.addButton("確定", action: {
-//                                self.performSegue(withIdentifier: UNWIND, sender: nil)
-//                            })
-//                            alert.showWarning("警告", subTitle: MemberService.instance.msg)
-//                        }
+
+
                     }
                 } catch {
                     self.warning(error.localizedDescription)
                 }
-                
+
             } else {
                 //print("login failed by server")
                 let appearance = SCLAlertView.SCLAppearance(

@@ -931,7 +931,6 @@
 				B3AB478D1F8BD240008C9EDF /* HomeCollectionHeaderView.swift */,
 				B35F8DDA1F8F66490073BD70 /* HomeVideoCell.swift */,
 				B3E72A231FA08D090008A6B1 /* GradientView.swift */,
-				B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */,
 				B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */,
 				B3ED38DA1FB488CB0003F083 /* ImagePickerView.swift */,
 				B3ED38DC1FB4A06C0003F083 /* MyLabel.swift */,
@@ -1109,6 +1108,7 @@
 				B3310D9822AE302A0062EF98 /* ClearButton.swift */,
 				B307AA30263840EE001F685D /* LikeButton.swift */,
 				B39E5F7B263BCDC100C40BA7 /* LikeIcon.swift */,
+				B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";

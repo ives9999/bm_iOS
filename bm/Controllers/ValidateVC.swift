@@ -15,23 +15,51 @@ class ValidateVC: BaseViewController {
     @IBOutlet weak var codeTxt: SuperTextField!
     var type: String = ""
     @IBOutlet weak var typeTxt: SuperTextField!
-    @IBOutlet weak var typeLbl: UILabel!
+    //@IBOutlet weak var typeLbl: UILabel!
+    @IBOutlet weak var submitBtn: SubmitButton!
+    @IBOutlet weak var reSendBtn: SuperButton!
+    
+    @IBOutlet weak var dataContainerView: UIView!
     
     var delegate: BaseViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        typeTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        typeTxt.textColor = UIColor(MY_GREEN)
+        
+        codeTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        codeTxt.textColor = UIColor(MY_GREEN)
+        
+        codeTxt.attributedPlaceholder = NSAttributedString(
+            string: "認證碼",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+        )
+        
+        reSendBtn.backgroundColor = UIColor(MY_PURPLE)
+        
         if type == "email" {
             titleLbl.text = "email認證"
-            typeLbl.text = "email"
+            //typeLbl.text = "email"
+            
             typeTxt.text = Member.instance.email
+            typeTxt.attributedPlaceholder = NSAttributedString(
+                string: "EMail",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+            )
             typeTxt.keyboardType = UIKeyboardType.emailAddress
         } else if type == "mobile" {
             titleLbl.text = "手機認證"
-            typeLbl.text = "手機"
+            //typeLbl.text = "手機"
+            
             typeTxt.text = Member.instance.mobile
+            typeTxt.attributedPlaceholder = NSAttributedString(
+                string: "手機號碼",
+                attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+            )
             typeTxt.keyboardType = UIKeyboardType.phonePad
+    
             codeTxt.keyboardType = UIKeyboardType.numberPad
         }
         hideKeyboardWhenTappedAround()

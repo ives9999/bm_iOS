@@ -20,7 +20,6 @@ class ShowTeamVC: ShowVC {
     
     @IBOutlet weak var signupTableViewConstraintHeight: NSLayoutConstraint!
     @IBOutlet weak var signupButton: SubmitButton!
-    @IBOutlet weak var signupButtonContainer: UIView!
     @IBOutlet weak var signupButtonConstraintLeading: NSLayoutConstraint!
         
     var myTable: TeamTable?
@@ -75,8 +74,14 @@ class ShowTeamVC: ShowVC {
         }
         
         myTable = table as? TeamTable
-        var row: MemberRow = MemberRow(title: "球館", icon: "arena1", show: myTable!.arena!.name)
+        var row: MemberRow = MemberRow(title: "球館", icon: "arena", show: myTable!.arena!.name)
         memberRows.append(row)
+        if (myTable!.arena != nil) {
+            row = MemberRow(title: "縣市", icon: "map", show: myTable!.arena!.city_show)
+            memberRows.append(row)
+            row = MemberRow(title: "區域", icon: "map", show: myTable!.arena!.area_show)
+            memberRows.append(row)
+        }
         row = MemberRow(title: "星期", icon: "date", show: myTable!.weekdays_show)
         memberRows.append(row)
         row = MemberRow(title: "時段", icon: "clock", show: myTable!.interval_show)
@@ -249,6 +254,9 @@ class ShowTeamVC: ShowVC {
             let row: MemberRow = memberRows[indexPath.row]
             cell.update(icon: row.icon, title: row.title, content: row.show)
             
+//            print("memberRow: \(memberRows.count)")
+//            print("index path: \(indexPath.row)")
+            
             //計算高度
             if indexPath.row == memberRows.count - 1 {
                 UIView.animate(withDuration: 0, animations: {self.tableView.layoutIfNeeded()}) { (complete) in
@@ -261,9 +269,10 @@ class ShowTeamVC: ShowVC {
                     self.tableViewConstraintHeight.constant = heightOfTableView
                     self.dataConstraintHeight.constant += heightOfTableView
                     
-                    self.scrollContainerHeight += self.tableViewConstraintHeight.constant
+                    //self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    //self.containerViewConstraintHeight.constant = self.scrollContainerHeight
                     //print("tableView:\(self.scrollContainerHeight)")
-                    self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollContainerHeight)
+                    //self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollContainerHeight)
                 }
             }
             
@@ -311,9 +320,11 @@ class ShowTeamVC: ShowVC {
                     self.signupTableViewConstraintHeight.constant = heightOfTableView
                     self.dataConstraintHeight.constant += heightOfTableView
                     
-                    self.scrollContainerHeight += self.signupTableViewConstraintHeight.constant
+                    //self.scrollContainerHeight += self.dataConstraintHeight.constant
+                    //self.containerViewConstraintHeight.constant = self.scrollContainerHeight
+                    
                     //print("signup:\(self.scrollContainerHeight)")
-                    self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollContainerHeight)
+                    //self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollContainerHeight)
                     //self.changeScrollViewContentSize()
                 }
             }

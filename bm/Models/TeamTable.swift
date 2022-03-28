@@ -200,5 +200,17 @@ class TeamTable: Table {
             signupDate?.filterRow()
             last_signup_date = signupDate!.date
         }
+        
+        if temp_fee_M >= 0 {
+            temp_fee_M_show = "\(temp_fee_M)元"
+        } else {
+            temp_fee_M_show = "未提供"
+        }
+        
+        if temp_fee_F >= 0 {
+            temp_fee_F_show = "\(temp_fee_F)元"
+        } else {
+            temp_fee_F_show = "未提供"
+        }
     }
 }

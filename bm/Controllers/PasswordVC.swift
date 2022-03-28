@@ -12,80 +12,108 @@ import SCLAlertView
 class PasswordVC: BaseViewController {
     
     var type: String?// forget_password, change_password
-    var emailLbl: SuperLabel!
-    var emailTxt: IconTextField!
+    //var emailLbl: SuperLabel!
+    var emailTxt: SuperTextField!
     var submitBtn: SubmitButton!
-    var oldPwdLbl: SuperLabel!
-    var oldPwdTxt: IconTextField!
-    var newPwdLbl: SuperLabel!
-    var newPwdTxt: IconTextField!
-    var rePwdLbl: SuperLabel!
-    var rePwdTxt: IconTextField!
+    //var oldPwdLbl: SuperLabel!
+    var oldPwdTxt: SuperTextField!
+    //var newPwdLbl: SuperLabel!
+    var newPwdTxt: SuperTextField!
+    //var rePwdLbl: SuperLabel!
+    var rePwdTxt: SuperTextField!
 
     @IBOutlet weak var bkView: UIImageView!
-    @IBOutlet weak var logoView: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
+    @IBOutlet weak var dataContainerView: UIView!
     
     var delegate: BaseViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        emailLbl = SuperLabel()
-        emailLbl.text = "請輸入註冊時的email"
-        emailTxt = IconTextField()
-        emailTxt.set(icon: "email1")
+//        emailLbl = SuperLabel()
+//        emailLbl.text = "請輸入註冊時的email"
+//        emailLbl.setTextSize(FONT_SIZE_GENERAL)
+//        emailLbl.textColor = UIColor(SEARCH_BACKGROUND_PLACEHOLDER)
+        
+        emailTxt = SuperTextField()
+        //emailTxt.set(icon: "email1")
+        emailTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        emailTxt.attributedPlaceholder = NSAttributedString(
+            string: "請輸入註冊時的email",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+        )
         emailTxt.keyboardType = UIKeyboardType.emailAddress
         
-        oldPwdLbl = SuperLabel()
-        oldPwdLbl.text = "舊密碼"
-        oldPwdTxt = IconTextField()
-        oldPwdTxt.set(icon: "password")
+//        oldPwdLbl = SuperLabel()
+//        oldPwdLbl.text = "舊密碼"
+//        oldPwdLbl.setTextSize(FONT_SIZE_GENERAL)
+//        oldPwdLbl.textColor = UIColor(SEARCH_BACKGROUND_PLACEHOLDER)
+        
+        oldPwdTxt = SuperTextField()
+        oldPwdTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        oldPwdTxt.attributedPlaceholder = NSAttributedString(
+            string: "舊密碼",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+        )
         oldPwdTxt.isSecureTextEntry = true
         
-        newPwdLbl = SuperLabel()
-        newPwdLbl.text = "新密碼"
-        newPwdTxt = IconTextField()
-        newPwdTxt.set(icon: "password")
+//        newPwdLbl = SuperLabel()
+//        newPwdLbl.text = "新密碼"
+//        newPwdLbl.setTextSize(FONT_SIZE_GENERAL)
+//        newPwdLbl.textColor = UIColor(SEARCH_BACKGROUND_PLACEHOLDER)
+        
+        newPwdTxt = SuperTextField()
+        newPwdTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        newPwdTxt.attributedPlaceholder = NSAttributedString(
+            string: "新密碼",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+        )
         newPwdTxt.isSecureTextEntry = true
         
-        rePwdLbl = SuperLabel()
-        rePwdLbl.text = "確認密碼"
-        rePwdTxt = IconTextField()
-        rePwdTxt.set(icon: "password")
-        rePwdTxt.isSecureTextEntry = true
+//        rePwdLbl = SuperLabel()
+//        rePwdLbl.text = "確認密碼"
+//        rePwdLbl.setTextSize(FONT_SIZE_GENERAL)
+//        rePwdLbl.textColor = UIColor(SEARCH_BACKGROUND_PLACEHOLDER)
         
+        rePwdTxt = SuperTextField()
+        rePwdTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        rePwdTxt.attributedPlaceholder = NSAttributedString(
+            string: "密碼確認",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+        )
+        rePwdTxt.isSecureTextEntry = true
         
         submitBtn = SubmitButton()
         submitBtn.addTarget(self, action: #selector(submit(_:)), for: UIControl.Event.touchUpInside)
         
-        view.addSubview(emailLbl)
-        view.addSubview(emailTxt)
-        view.addSubview(oldPwdLbl)
-        view.addSubview(oldPwdTxt)
-        view.addSubview(newPwdLbl)
-        view.addSubview(newPwdTxt)
-        view.addSubview(rePwdLbl)
-        view.addSubview(rePwdTxt)
-        view.addSubview(submitBtn)
+        //dataContainerView.addSubview(emailLbl)
+        dataContainerView.addSubview(emailTxt)
+        //dataContainerView.addSubview(oldPwdLbl)
+        dataContainerView.addSubview(oldPwdTxt)
+        //dataContainerView.addSubview(newPwdLbl)
+        dataContainerView.addSubview(newPwdTxt)
+        //dataContainerView.addSubview(rePwdLbl)
+        dataContainerView.addSubview(rePwdTxt)
+        dataContainerView.addSubview(submitBtn)
         
         if type == "forget_password" {
-            emailLbl.isHidden = false
+            //emailLbl.isHidden = false
             emailTxt.isHidden = false
-            oldPwdLbl.isHidden = true
+            //oldPwdLbl.isHidden = true
             oldPwdTxt.isHidden = true
-            newPwdLbl.isHidden = true
+            //newPwdLbl.isHidden = true
             newPwdTxt.isHidden = true
-            rePwdLbl.isHidden = true
+            //rePwdLbl.isHidden = true
             rePwdTxt.isHidden = true
         } else if type == "change_password" {
-            emailLbl.isHidden = true
+            //emailLbl.isHidden = true
             emailTxt.isHidden = true
-            oldPwdLbl.isHidden = false
+            //oldPwdLbl.isHidden = false
             oldPwdTxt.isHidden = false
-            newPwdLbl.isHidden = false
+            //newPwdLbl.isHidden = false
             newPwdTxt.isHidden = false
-            rePwdLbl.isHidden = false
+            //rePwdLbl.isHidden = false
             rePwdTxt.isHidden = false
         }
         
@@ -97,59 +125,67 @@ class PasswordVC: BaseViewController {
         Global.instance.addSpinner(superView: view)
         Global.instance.removeSpinner(superView: view)
         
-        _layout()
+        initLayout()
 
         //print(type)
     }
     
-    private func _layout() {
+    private func initLayout() {
+        
         var c1: NSLayoutConstraint,c2: NSLayoutConstraint,c3: NSLayoutConstraint,c4:NSLayoutConstraint
         
-        c1 = NSLayoutConstraint(item: emailLbl, attribute: .centerX, relatedBy: .equal, toItem: emailLbl.superview, attribute: .centerX, multiplier: 1, constant: 0)
-        c2 = NSLayoutConstraint(item: emailLbl, attribute: .top, relatedBy: .equal, toItem: logoView, attribute: .bottom, multiplier: 1, constant: 50)
-        emailLbl.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints([c1, c2])
+        let emailTxtWidth: CGFloat = 250
+        let emailTxtHeight: CGFloat = 50
+        
+        let emailLblLeading: CGFloat = (screen_width - emailTxtWidth) / 2
+//        c1 = NSLayoutConstraint(item: emailLbl, attribute: .leading, relatedBy: .equal, toItem: emailLbl.superview, attribute: .leading, multiplier: 1, constant: emailLblLeading)
+//        c2 = NSLayoutConstraint(item: emailLbl, attribute: .top, relatedBy: .equal, toItem: emailLbl.superview, attribute: .top, multiplier: 1, constant: 80)
+//        emailLbl.translatesAutoresizingMaskIntoConstraints = false
+//        dataContainerView.addConstraints([c1, c2])
         
         c1 = NSLayoutConstraint(item: emailTxt, attribute: .centerX, relatedBy: .equal, toItem: emailTxt.superview, attribute: .centerX, multiplier: 1, constant: 0)
-        c2 = NSLayoutConstraint(item: emailTxt, attribute: .top, relatedBy: .equal, toItem: emailLbl, attribute: .bottom, multiplier: 1, constant: 12)
-        c3 = NSLayoutConstraint(item: emailTxt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
-        c4 = NSLayoutConstraint(item: emailTxt, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant:43)
+        c2 = NSLayoutConstraint(item: emailTxt, attribute: .top, relatedBy: .equal, toItem: emailTxt.superview, attribute: .top, multiplier: 1, constant: 80)
+        c3 = NSLayoutConstraint(item: emailTxt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: emailTxtWidth)
+        c4 = NSLayoutConstraint(item: emailTxt, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant:emailTxtHeight)
         emailTxt.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints([c1, c2, c3, c4])
+        dataContainerView.addConstraints([c1, c2, c3, c4])
  
         
-        c1 = NSLayoutConstraint(item: oldPwdLbl, attribute: .leading, relatedBy: .equal, toItem: oldPwdLbl.superview, attribute: .leading, multiplier: 1, constant: 16)
-        c2 = NSLayoutConstraint(item: oldPwdLbl, attribute: .top, relatedBy: .equal, toItem: logoView, attribute: .bottom, multiplier: 1, constant: 50)
-        oldPwdLbl.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints([c1, c2])
-        c1 = NSLayoutConstraint(item: oldPwdTxt, attribute: .leading, relatedBy: .equal, toItem: oldPwdLbl, attribute: .trailing, multiplier: 1, constant: 8)
-        c2 = NSLayoutConstraint(item: oldPwdTxt, attribute: .centerY, relatedBy: .equal, toItem: oldPwdLbl, attribute: .centerY, multiplier: 1, constant: 0)
-        c3 = NSLayoutConstraint(item: oldPwdTxt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
-        c4 = NSLayoutConstraint(item: oldPwdTxt, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 43)
+//        c1 = NSLayoutConstraint(item: oldPwdLbl, attribute: .leading, relatedBy: .equal, toItem: oldPwdLbl.superview, attribute: .leading, multiplier: 1, constant: 16)
+//        c2 = NSLayoutConstraint(item: oldPwdLbl, attribute: .top, relatedBy: .equal, toItem: oldPwdLbl.superview, attribute: .top, multiplier: 1, constant: 40)
+//        oldPwdLbl.translatesAutoresizingMaskIntoConstraints = false
+//        view.addConstraints([c1, c2])
+        
+        c1 = NSLayoutConstraint(item: oldPwdTxt, attribute: .top, relatedBy: .equal, toItem: oldPwdTxt.superview, attribute: .top, multiplier: 1, constant: 120)
+        c2 = NSLayoutConstraint(item: oldPwdTxt, attribute: .centerX, relatedBy: .equal, toItem: oldPwdTxt.superview, attribute: .centerX, multiplier: 1, constant: 0)
+        c3 = NSLayoutConstraint(item: oldPwdTxt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: emailTxtWidth)
+        c4 = NSLayoutConstraint(item: oldPwdTxt, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: emailTxtHeight)
         oldPwdTxt.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints([c1, c2, c3, c4])
+        dataContainerView.addConstraints([c1, c2, c3, c4])
         
-        c1 = NSLayoutConstraint(item: newPwdLbl, attribute: .leading, relatedBy: .equal, toItem: newPwdLbl.superview, attribute: .leading, multiplier: 1, constant: 16)
-        c2 = NSLayoutConstraint(item: newPwdLbl, attribute: .top, relatedBy: .equal, toItem: oldPwdLbl, attribute: .bottom, multiplier: 1, constant: 30)
-        newPwdLbl.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints([c1, c2])
-        c1 = NSLayoutConstraint(item: newPwdTxt, attribute: .leading, relatedBy: .equal, toItem: newPwdLbl, attribute: .trailing, multiplier: 1, constant: 8)
-        c2 = NSLayoutConstraint(item: newPwdTxt, attribute: .centerY, relatedBy: .equal, toItem: newPwdLbl, attribute: .centerY, multiplier: 1, constant: 0)
-        c3 = NSLayoutConstraint(item: newPwdTxt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
-        c4 = NSLayoutConstraint(item: newPwdTxt, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 43)
+//        c1 = NSLayoutConstraint(item: newPwdLbl, attribute: .leading, relatedBy: .equal, toItem: newPwdLbl.superview, attribute: .leading, multiplier: 1, constant: 16)
+//        c2 = NSLayoutConstraint(item: newPwdLbl, attribute: .top, relatedBy: .equal, toItem: oldPwdLbl, attribute: .bottom, multiplier: 1, constant: 30)
+//        newPwdLbl.translatesAutoresizingMaskIntoConstraints = false
+//        dataContainerView.addConstraints([c1, c2])
+        
+        c1 = NSLayoutConstraint(item: newPwdTxt, attribute: .top, relatedBy: .equal, toItem: oldPwdTxt, attribute: .bottom, multiplier: 1, constant: 20)
+        c2 = NSLayoutConstraint(item: newPwdTxt, attribute: .centerX, relatedBy: .equal, toItem: newPwdTxt.superview, attribute: .centerX, multiplier: 1, constant: 0)
+        c3 = NSLayoutConstraint(item: newPwdTxt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: emailTxtWidth)
+        c4 = NSLayoutConstraint(item: newPwdTxt, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: emailTxtHeight)
         newPwdTxt.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints([c1, c2, c3, c4])
+        dataContainerView.addConstraints([c1, c2, c3, c4])
         
-        c1 = NSLayoutConstraint(item: rePwdLbl, attribute: .leading, relatedBy: .equal, toItem: rePwdLbl.superview, attribute: .leading, multiplier: 1, constant: 16)
-        c2 = NSLayoutConstraint(item: rePwdLbl, attribute: .top, relatedBy: .equal, toItem: newPwdLbl, attribute: .bottom, multiplier: 1, constant: 30)
-        rePwdLbl.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints([c1, c2])
-        c1 = NSLayoutConstraint(item: rePwdTxt, attribute: .leading, relatedBy: .equal, toItem: rePwdLbl, attribute: .trailing, multiplier: 1, constant: 8)
-        c2 = NSLayoutConstraint(item: rePwdTxt, attribute: .centerY, relatedBy: .equal, toItem: rePwdLbl, attribute: .centerY, multiplier: 1, constant: 0)
-        c3 = NSLayoutConstraint(item: rePwdTxt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
-        c4 = NSLayoutConstraint(item: rePwdTxt, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 43)
+//        c1 = NSLayoutConstraint(item: rePwdLbl, attribute: .leading, relatedBy: .equal, toItem: rePwdLbl.superview, attribute: .leading, multiplier: 1, constant: 16)
+//        c2 = NSLayoutConstraint(item: rePwdLbl, attribute: .top, relatedBy: .equal, toItem: newPwdLbl, attribute: .bottom, multiplier: 1, constant: 30)
+//        rePwdLbl.translatesAutoresizingMaskIntoConstraints = false
+//        dataContainerView.addConstraints([c1, c2])
+        
+        c1 = NSLayoutConstraint(item: rePwdTxt, attribute: .top, relatedBy: .equal, toItem: newPwdTxt, attribute: .bottom, multiplier: 1, constant: 20)
+        c2 = NSLayoutConstraint(item: rePwdTxt, attribute: .centerX, relatedBy: .equal, toItem: rePwdTxt.superview, attribute: .centerX, multiplier: 1, constant: 0)
+        c3 = NSLayoutConstraint(item: rePwdTxt, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: emailTxtWidth)
+        c4 = NSLayoutConstraint(item: rePwdTxt, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: emailTxtHeight)
         rePwdTxt.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints([c1, c2, c3, c4])
+        dataContainerView.addConstraints([c1, c2, c3, c4])
         
         
         var lastItem: Any?
@@ -159,21 +195,23 @@ class PasswordVC: BaseViewController {
             lastItem = rePwdTxt
         }
         c1 = NSLayoutConstraint(item: submitBtn, attribute: .centerX, relatedBy: .equal, toItem: submitBtn.superview, attribute: .centerX, multiplier: 1, constant: 0)
-        c2 = NSLayoutConstraint(item: submitBtn, attribute: .top, relatedBy: .equal, toItem: lastItem, attribute: .bottom, multiplier: 1, constant: 20)
+        c2 = NSLayoutConstraint(item: submitBtn, attribute: .top, relatedBy: .equal, toItem: lastItem, attribute: .bottom, multiplier: 1, constant: 50)
+        c3 = NSLayoutConstraint(item: submitBtn, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: emailTxtWidth)
+        c4 = NSLayoutConstraint(item: submitBtn, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 40)
         submitBtn.translatesAutoresizingMaskIntoConstraints = false
-        view.addConstraints([c1, c2])
+        dataContainerView.addConstraints([c1, c2, c3, c4])
     }
     
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        emailLbl.sizeToFit()
-        oldPwdLbl.sizeToFit()
-        newPwdLbl.sizeToFit()
-        rePwdLbl.sizeToFit()
-        submitBtn.sizeToFit()
-        view.layoutIfNeeded()
-    }
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//        emailLbl.sizeToFit()
+//        oldPwdLbl.sizeToFit()
+//        newPwdLbl.sizeToFit()
+//        rePwdLbl.sizeToFit()
+//        submitBtn.sizeToFit()
+//        view.layoutIfNeeded()
+//    }
     
     @objc func submit(_ sender: Any) {
         if type == "forget_password" {

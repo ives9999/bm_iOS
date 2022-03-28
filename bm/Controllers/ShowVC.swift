@@ -110,7 +110,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 40
-        tableViewConstraintHeight.constant = 600
+        tableViewConstraintHeight.constant = 800
     }
     
     func initContentView() {
@@ -178,10 +178,12 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     func setFeatured() {
 
         if (table != nil && table!.featured_path.count > 0) {
+            
+            featured.downloaded(from: table!.featured_path)
+            
             let featured_h: CGFloat = featured.heightForUrl(url: table!.featured_path, width: screen_width)
             featuredConstraintHeight.constant = featured_h
             
-            featured.downloaded(from: table!.featured_path)
             scrollContainerHeight += featuredConstraintHeight.constant
             containerViewConstraintHeight.constant = scrollContainerHeight
             //print("featured:\(scrollContainerHeight)")

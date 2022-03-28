@@ -50,7 +50,7 @@
     </objects>
     <designables>
         <designable name="VNo-NE-G2y">
-            <size key="intrinsicContentSize" width="36" height="47"/>
+            <size key="intrinsicContentSize" width="32" height="28.5"/>
         </designable>
     </designables>
 </document>
