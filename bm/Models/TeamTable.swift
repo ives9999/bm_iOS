@@ -38,6 +38,7 @@ class TeamTable: Table {
     var play_end: String = ""
     var ball: String = ""
     var degree: String = ""
+    var block: Int = 1
     var charge: String = ""
     var manager_id: Int = -1
     var manager_token: String = ""
@@ -63,6 +64,7 @@ class TeamTable: Table {
     var weekdays_show: String = ""
     var interval_show: String = ""
     var degree_show: String = ""
+    var block_show: String = "1面"
     var people_limit_show: String = ""
     var temp_signup_count_show: String = ""
     var temp_status_show: String = "上線"
@@ -89,6 +91,7 @@ class TeamTable: Table {
         case play_end
         case ball
         case degree
+        case block
         case charge
         case manager_id
         case manager_token
@@ -124,6 +127,7 @@ class TeamTable: Table {
         do {play_end = try container.decode(String.self, forKey: .play_end)}catch{play_end = ""}
         do {ball = try container.decode(String.self, forKey: .ball)}catch{ball = ""}
         do {degree = try container.decode(String.self, forKey: .degree)}catch{degree = ""}
+        do {block = try container.decode(Int.self, forKey: .block)}catch{block = 1}
         do {charge = try container.decode(String.self, forKey: .charge)}catch{charge = ""}
         do {manager_id = try container.decode(Int.self, forKey: .manager_id)}catch{manager_id = 0}
         do {manager_token = try container.decode(String.self, forKey: .manager_token)}catch{manager_token = ""}
@@ -211,6 +215,10 @@ class TeamTable: Table {
             temp_fee_F_show = "\(temp_fee_F)元"
         } else {
             temp_fee_F_show = "未提供"
+        }
+        
+        if block > 1 {
+            block_show = "\(block)面"
         }
     }
 }

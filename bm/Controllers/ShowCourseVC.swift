@@ -558,7 +558,7 @@ class ShowCourseVC: ShowVC {
                                 self.refresh(CourseTable.self)
                             }
                         } else {
-                            self.warning("報名沒有成功，請洽管理員")
+                            self.warning(successTable.msg)
                         }
                     }
                 } catch {

@@ -90,6 +90,8 @@ class ShowTeamVC: ShowVC {
         memberRows.append(row)
         row = MemberRow(title: "程度", icon: "degree", show: myTable!.degree_show)
         memberRows.append(row)
+        row = MemberRow(title: "場地", icon: "arena1", show: myTable!.block_show)
+        memberRows.append(row)
         row = MemberRow(title: "費用-男", icon: "money", show: myTable!.temp_fee_M_show)
         memberRows.append(row)
         row = MemberRow(title: "費用-女", icon: "money", show: myTable!.temp_fee_F_show)
@@ -499,7 +501,7 @@ class ShowTeamVC: ShowVC {
                                 self.refresh(TeamTable.self)
                             }
                         } else {
-                            self.warning("報名沒有成功，請洽管理員")
+                            self.warning(successTable.msg)
                         }
                     }
                 } catch {
