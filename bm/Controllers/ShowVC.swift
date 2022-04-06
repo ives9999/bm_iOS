@@ -13,6 +13,8 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     
     @IBOutlet weak var titleLbl: SuperLabel!
     
+    @IBOutlet weak var showTop: ShowTop!
+    
     @IBOutlet weak var mainDataLbl: SuperLabel!
     @IBOutlet weak var contentDataLbl: SuperLabel!
     
@@ -35,6 +37,8 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     
     @IBOutlet weak var likeButton: LikeButton!
     @IBOutlet weak var likeButtonConstraintLeading: NSLayoutConstraint!
+    
+    //var showTop: ShowTop?
     
     var contentView: WKWebView? = {
         
@@ -89,6 +93,18 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
             
             setBottomButtonPadding()
         }
+        
+        showTop.backgroundColor = UIColor(MY_BLACK)
+        showTop.delegate = self
+        
+//        let gesture = UITapGestureRecognizer(target: self, action: #selector(prev3))
+//        showTop!.prevImageView.addGestureRecognizer(gesture)
+        
+//        if (topViewContainer != nil) {
+//            showTop = ShowTop(frame: CGRect(x: 0, y: 0, width: screen_width, height: 60))
+//            topViewContainer.addSubview(showTop!)
+//
+//        }
         
         containerViewConstraintWidth.constant = screen_width
         containerViewConstraintHeight.constant = 2000
@@ -168,11 +184,11 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     
     func setData() {
         if (self.table!.name.count > 0) {
-            self.titleLbl.text = self.table!.name
+            showTop.titleLbl.text = self.table!.name
         } else {
-            self.titleLbl.text = self.table!.title
+            showTop.titleLbl.text = self.table!.title
         }
-        self.titleLbl.setTextTitle()
+        showTop.titleLbl.setTextTitle()
     }
     
     func setFeatured() {
@@ -291,6 +307,11 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
                 warning("沒有取得內容資料值，請稍後再試或洽管理員")
             }
         }
+    }
+    
+    @objc func prev3() {
+        
+        print("aaa")
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {

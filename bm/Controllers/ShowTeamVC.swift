@@ -133,7 +133,7 @@ class ShowTeamVC: ShowVC {
             if (myTable != nil) {
                 //myTable!.filterRow()
                 setMainData(myTable!)
-
+                
                 //set signup data
                 setSignupData()
 

@@ -23,6 +23,8 @@ class SearchPanel: UIViewController {
     let cancelBtn: CancelButton = CancelButton()
     let deleteBtn: ClearButton = ClearButton()
     var btnCount: Int = 2
+    var btnWidth: CGFloat = 120
+    var btnHeight: CGFloat = 40
     
     let titleBarHeight: CGFloat = 111
     var layerRightLeftPadding: CGFloat = 20
@@ -114,16 +116,22 @@ class SearchPanel: UIViewController {
         
         blackView.addSubview(submitBtn)
         
+//        var offset:CGFloat = 0
+//        if btnCount == 2 {
+//            offset = -60
+//        } else if btnCount == 3 {
+//            offset = -120
+//        }
+        
+        let padding: CGFloat = (baseVC!.screen_width - CGFloat(btnCount) * btnWidth - 2 * layerRightLeftPadding) / CGFloat((btnCount + 1))
+        let leading: CGFloat = padding
+        
         let c1: NSLayoutConstraint = NSLayoutConstraint(item: submitBtn, attribute: .top, relatedBy: .equal, toItem: searchTableView, attribute: .bottom, multiplier: 1, constant: 12)
-        var offset:CGFloat = 0
-        if btnCount == 2 {
-            offset = -60
-        } else if btnCount == 3 {
-            offset = -120
-        }
-        let c2: NSLayoutConstraint = NSLayoutConstraint(item: submitBtn, attribute: .centerX, relatedBy: .equal, toItem: submitBtn.superview, attribute: .centerX, multiplier: 1, constant: offset)
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: submitBtn, attribute: .leading, relatedBy: .equal, toItem: submitBtn.superview, attribute: .leading, multiplier: 1, constant: leading)
+        let c3: NSLayoutConstraint = NSLayoutConstraint(item: submitBtn, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: btnWidth)
+        let c4: NSLayoutConstraint = NSLayoutConstraint(item: submitBtn, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: btnHeight)
         submitBtn.translatesAutoresizingMaskIntoConstraints = false
-        blackView.addConstraints([c1,c2])
+        blackView.addConstraints([c1,c2,c3,c4])
         
         submitBtn.addTarget(self, action: #selector(layerSubmit(view:)), for: .touchUpInside)
         self.submitBtn.isHidden = false
@@ -133,14 +141,19 @@ class SearchPanel: UIViewController {
         
         blackView.addSubview(cancelBtn)
         
+        let padding: CGFloat = (baseVC!.screen_width - CGFloat(btnCount) * btnWidth - 2 * layerRightLeftPadding) / CGFloat((btnCount + 1))
+        let leading: CGFloat = CGFloat(btnCount-1) * btnWidth + CGFloat(btnCount) * padding
+        
         let c1: NSLayoutConstraint = NSLayoutConstraint(item: cancelBtn, attribute: .top, relatedBy: .equal, toItem: searchTableView, attribute: .bottom, multiplier: 1, constant: 12)
-        var offset:CGFloat = 0
-        if btnCount == 2 {
-            offset = 60
-        }
-        let c2: NSLayoutConstraint = NSLayoutConstraint(item: cancelBtn, attribute: .centerX, relatedBy: .equal, toItem: cancelBtn.superview, attribute: .centerX, multiplier: 1, constant: offset)
+//        var offset:CGFloat = 0
+//        if btnCount == 2 {
+//            offset = 60
+//        }
+        let c2: NSLayoutConstraint = NSLayoutConstraint(item: cancelBtn, attribute: .leading, relatedBy: .equal, toItem: cancelBtn.superview, attribute: .leading, multiplier: 1, constant: leading)
+        let c3: NSLayoutConstraint = NSLayoutConstraint(item: cancelBtn, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: btnWidth)
+        let c4: NSLayoutConstraint = NSLayoutConstraint(item: cancelBtn, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: btnHeight)
         cancelBtn.translatesAutoresizingMaskIntoConstraints = false
-        blackView.addConstraints([c1,c2])
+        blackView.addConstraints([c1,c2,c3,c4])
         
         cancelBtn.addTarget(self, action: #selector(layerCancel(view:)), for: .touchUpInside)
         self.cancelBtn.isHidden = false
