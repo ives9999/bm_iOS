@@ -51,6 +51,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         webView.scrollView.isScrollEnabled = false
         return webView
     }()
+    
     var contentViewConstraintHeight: NSLayoutConstraint?
     
     var scrollContainerHeight: CGFloat = 0

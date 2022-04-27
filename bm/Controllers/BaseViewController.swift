@@ -65,7 +65,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     
     var isNetworkExist: Bool = false
     
-    let body_css = "<style>body{background-color:#000;padding-left:8px;padding-right:8px;margin-top:0;padding-top:0;color:#888888;font-size:18px;}a{color:#a6d903;}</style>"
+    let body_css = "<style>body{background-color:#000;padding-left:8px;padding-right:8px;margin-top:0;padding-top:0;color:#888888;font-size:20px;line-height:30px;}a{color:#a6d903;}img{width:400px;}</style>"
     
     var searchPanel: SearchPanel = SearchPanel()
 //    var searchSections: [SearchSection] = [SearchSection]()

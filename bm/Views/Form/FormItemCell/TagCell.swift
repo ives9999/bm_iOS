@@ -226,10 +226,15 @@ class TagCell: FormItemCell {
     //    (3, 1)  (3, 2)  (3, 3)
         
     private func setMargin(block: UILabel, row_count: Int, column_count: Int) {
-        let leading: CGFloat = CGFloat(column_count-1)*labelWidth + CGFloat(column_count)*horizonMergin
+        
+        var leading: CGFloat = 0
+        if column_count > 1 {
+            leading = CGFloat(column_count-1)*labelWidth + CGFloat(column_count)*horizonMergin
+        }
         let top: CGFloat = CGFloat(row_count-1)*labelHeight + CGFloat(row_count)*vericalMergin
         
-        var left: NSLayoutConstraint, up: NSLayoutConstraint, h: NSLayoutConstraint, w: NSLayoutConstraint
+        var left: NSLayoutConstraint, up: NSLayoutConstraint
+            //h: NSLayoutConstraint, w: NSLayoutConstraint
         
         //左邊
         left = NSLayoutConstraint(item: block, attribute: .leading, relatedBy: .equal, toItem: block.superview, attribute: .leading, multiplier: 1, constant: leading)
@@ -238,10 +243,10 @@ class TagCell: FormItemCell {
         up = NSLayoutConstraint(item: block, attribute: .top, relatedBy: .equal, toItem: block.superview, attribute: .top, multiplier: 1, constant: top)
         
         //寬度
-        w = NSLayoutConstraint(item: block, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: labelWidth)
+        //w = NSLayoutConstraint(item: block, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: labelWidth)
         
         //高度
-        h = NSLayoutConstraint(item: block, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: labelHeight)
+        //h = NSLayoutConstraint(item: block, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: labelHeight)
         block.translatesAutoresizingMaskIntoConstraints = false
         containerView.addConstraints([left, up])
     }
