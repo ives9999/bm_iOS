@@ -227,10 +227,7 @@ class TagCell: FormItemCell {
         
     private func setMargin(block: UILabel, row_count: Int, column_count: Int) {
         
-        var leading: CGFloat = 0
-        if column_count > 1 {
-            leading = CGFloat(column_count-1)*labelWidth + CGFloat(column_count)*horizonMergin
-        }
+        let leading: CGFloat = CGFloat(column_count-1)*labelWidth + CGFloat(column_count-1)*horizonMergin
         let top: CGFloat = CGFloat(row_count-1)*labelHeight + CGFloat(row_count)*vericalMergin
         
         var left: NSLayoutConstraint, up: NSLayoutConstraint

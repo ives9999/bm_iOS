@@ -2101,6 +2101,24 @@ extension UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         self.addConstraints([left, right, top, h])
     }
+    
+    func setInfo(info: String, topAnchor: UIView)-> SuperLabel {
+        
+        let label: SuperLabel = SuperLabel()
+        label.text = info
+        label.setTextGeneral()
+        label.textAlignment = .center
+        self.addSubview(label)
+        
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.topAnchor.constraint(equalTo: topAnchor.bottomAnchor, constant: 100).isActive = true
+        label.centerXAnchor.constraint(equalTo: label.superview!.centerXAnchor).isActive = true
+        label.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
+        return label
+    }
 }
 
 extension UIStackView {

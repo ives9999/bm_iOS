@@ -88,7 +88,8 @@ class DataService {
             msg = "沒有網址錯誤，請洽管理員"
             completion(false)
         } else {
-            AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            //AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseDecodable(decoder: jsonDecoder) { (response: DataResponse<)
+            AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
                 
                 switch response.result {
                 case .success(_):
@@ -193,7 +194,7 @@ class DataService {
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
-        AF.request(url, method: .post, parameters: filter, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: filter, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
 //            let str = String(decoding: response.data!, as: UTF8.self)
 //            print(str)
@@ -257,7 +258,7 @@ class DataService {
         //print(url)
         
         if url != nil {
-            AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
                 
 //                let str = String(decoding: response.data!, as: UTF8.self)
 //                print(str)
@@ -317,7 +318,7 @@ class DataService {
         let params: [String: String] = ["device": "app", "channel": CHANNEL, "name": name, "member_token": Member.instance.token]
         //print(params)
         
-        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON {
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response {
             (response) in
             
             switch response.result {
@@ -374,7 +375,7 @@ class DataService {
         //print(url)
         //print(params)
         
-        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             switch response.result {
             case .success(_):
@@ -438,7 +439,7 @@ class DataService {
             method: .post,
             headers: headers
         )
-            .responseJSON(completionHandler: { response in
+            .response(completionHandler: { response in
                 
 //                let str = String(decoding: response.data!, as: UTF8.self)
 //                print(str)
@@ -469,7 +470,7 @@ class DataService {
         }
         
         //print(body)
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             //let str = String(decoding: response.data!, as: UTF8.self)
             //print(str)
@@ -516,7 +517,7 @@ class DataService {
         let body: [String: String] = ["device": "app", "channel": "bm", "member_token": member_token, "date_token": date_token]
         //print(body)
         
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             switch response.result {
             case .success(_):
@@ -563,7 +564,7 @@ class DataService {
         let body: [String: String] = ["device": "app", "channel": "bm", "page":String(page), "perPage":String(perPage)]
         //print(body)
         
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             switch response.result {
             case .success(_):
@@ -639,7 +640,7 @@ class DataService {
             method: .post,
             headers: headers
         )
-            .responseJSON(completionHandler: { response in
+            .response(completionHandler: { response in
                 //print(response.value)
                 if (response.data != nil) {
                     self.jsonData = response.data
@@ -688,7 +689,7 @@ class DataService {
         //print(url)
         //print(params)
         
-        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             switch response.result {
             
@@ -738,7 +739,7 @@ class DataService {
             method: .post,
             headers: headers
         )
-            .responseJSON(completionHandler: { response in
+            .response(completionHandler: { response in
                 //print(response.value)
                 if (response.data != nil) {
                     self.jsonData = response.data

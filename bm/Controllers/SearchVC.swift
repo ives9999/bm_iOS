@@ -35,6 +35,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     //當按下球館搜尋時，必須把球館名稱記錄到oneRow的球館show上
     
+    var mustLoginLbl: SuperLabel?
+    
     override func viewDidLoad() {
         
         //Global.instance.setupTabbar(self)
@@ -96,7 +98,15 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         tableViewContainer.backgroundColor = UIColor.clear
 
         member_like = true
-        refresh()
+        
+        if Member.instance.isLoggedIn {
+            refresh()
+        } else {
+            
+            tableView.visibility = .invisible
+            
+            mustLoginLbl = view.setInfo(info: "請先登入", topAnchor: topTabContainer)
+        }
     }
     
     func initSectionRows1()-> [OneSection] {
@@ -565,16 +575,30 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                     focusTabIdx = idx
                     switch focusTabIdx {
                     case 1:
+                        mustLoginLbl?.visibility = .invisible
                         setFilterView()
+                        tableView.visibility = .visible
                         tableView.reloadData()
                     case 0:
                         member_like = true
                         params.removeAll()
                         setListView()
-                        refresh()
+                        if Member.instance.isLoggedIn {
+                            tableView.visibility = .visible
+                            refresh()
+                        } else {
+                            tableView.visibility = .invisible
+                            if mustLoginLbl == nil {
+                                mustLoginLbl = view.setInfo(info: "請先登入", topAnchor: topTabContainer)
+                            } else {
+                                mustLoginLbl!.visibility = .visible
+                            }
+                        }
                     case 2:
                         member_like = false
                         params.removeAll()
+                        mustLoginLbl?.visibility = .invisible
+                        tableView.visibility = .visible
                         setListView()
                         refresh()
                     default:
@@ -601,7 +625,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     }
     
     private func setListView() {
-        //bottomView.visibility = .invisible
+        
         submitBtn.visibility = .invisible
         
         tableViewBottomConstraint.constant = 0
