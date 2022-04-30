@@ -44,23 +44,6 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         myTablView = tableView
         dataService = TeamService.instance
         able_type = "team"
-
-        
-        
-//        searchRows = [
-//            ["ch":"關鍵字","atype":UITableViewCell.AccessoryType.none,"key":"keyword","show":"","hint":"請輸入球隊名稱關鍵字","text_field":true,"value":""],
-//            ["ch":"縣市","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":CITY_KEY,"show":"全部","segue":TO_CITY,"sender":0,"value":""],
-//            //            ["ch": "區域","atype":UITableViewCellAccessoryType.disclosureIndicator,"key":"team_area","show":"全部","segue":TO_ARENA,"sender":0],
-//            ["ch":"星期幾","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":WEEKDAY_KEY,"show":"全部","segue":TO_SELECT_WEEKDAY,"sender":[Int](),"value":""],
-//            ["ch":"時段","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":START_TIME_KEY,"show":"全部","segue":TO_SELECT_TIME,"sender":[String: Any](),"value":""],
-//            ["ch":"球館","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":ARENA_KEY,"show":"全部","segue":TO_ARENA,"sender":[String:Int](),"value":""],
-//            ["ch":"程度","atype":UITableViewCell.AccessoryType.disclosureIndicator,"key":DEGREE_KEY,"show":"全部","segue":TO_SELECT_DEGREE,"sender":[String](),"value":""]
-//        ]
-//
-//        searchSections = [
-//            ExpandableItems(isExpanded: true, items: ["keyword",CITY_KEY,WEEKDAY_KEY, START_TIME_KEY]),
-//            ExpandableItems(isExpanded: false, items: [ARENA_KEY,DEGREE_KEY])
-//        ]
         
         super.viewDidLoad()
         
@@ -114,7 +97,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         var sections: [OneSection] = [OneSection]()
 
         sections.append(makeSection0Row1())
-        sections.append(makeSection1Row1(false))
+        sections.append(makeSection1Row1(true))
 
         return sections
     }

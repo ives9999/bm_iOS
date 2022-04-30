@@ -220,6 +220,7 @@ class SearchPanel: UIViewController {
                     view.removeFromSuperview()
                 }
                 self.maskView.removeFromSuperview()
+                self.searchPanelisHidden = true
             }
         })
     }

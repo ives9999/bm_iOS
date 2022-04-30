@@ -78,10 +78,14 @@ class CoachVC: MyTableVC {
         }
         if (mysTable != nil) {
             tables = mysTable!
-            if (page == 1) {
-                lists1 = [CoachTable]()
+            if mysTable!.rows.count > 0 {
+                if (page == 1) {
+                    lists1 = [ArenaTable]()
+                }
+                lists1 += mysTable!.rows
+            } else {
+                view.setInfo(info: "目前暫無教練", topAnchor: topView)
             }
-            lists1 += mysTable!.rows
         }
     }
     

@@ -395,7 +395,11 @@ class BaseViewController: UIViewController, List2CellDelegate {
     }
     
     @objc func searchPressed() {
-        searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, oneSections: oneSections)
+        if searchPanel.searchPanelisHidden {
+            searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, oneSections: oneSections)
+        } else {
+            searchPanel.unmask()
+        }
     }
     
     func cellMoreClick(key: String, row: OneRow, delegate: BaseViewController) {

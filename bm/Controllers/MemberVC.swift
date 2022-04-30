@@ -103,7 +103,7 @@ class MemberVC: MyTableVC {
         
         sections.append(makeSection0Row())
         sections.append(makeSection1Row())
-        sections.append(makeSection2Row(isEpanded: false))
+        sections.append(makeSection2Row(isEpanded: true))
         sections.append(makeSection3Row())
         sections.append(makeSection4Row())
         sections.append(makeSection5Row())
@@ -416,24 +416,24 @@ class MemberVC: MyTableVC {
         titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
         headerView.addSubview(titleLabel)
         
-        var expanded_image: String = "to_right_w"
-        if memberSections[section].isExpanded {
-            expanded_image = "to_down_w"
-        }
-        let mark = UIImageView(image: UIImage(named: expanded_image))
-        
-        //mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
-        headerView.addSubview(mark)
-        
-        mark.translatesAutoresizingMaskIntoConstraints = false
-        
-        mark.centerYAnchor.constraint(equalTo: mark.superview!.centerYAnchor).isActive = true
-        mark.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        mark.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        mark.trailingAnchor.constraint(equalTo: mark.superview!.trailingAnchor, constant: -16).isActive = true
-
-        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
-        headerView.addGestureRecognizer(gesture)
+//        var expanded_image: String = "to_right_w"
+//        if memberSections[section].isExpanded {
+//            expanded_image = "to_down_w"
+//        }
+//        let mark = UIImageView(image: UIImage(named: expanded_image))
+//
+//        //mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
+//        headerView.addSubview(mark)
+//
+//        mark.translatesAutoresizingMaskIntoConstraints = false
+//
+//        mark.centerYAnchor.constraint(equalTo: mark.superview!.centerYAnchor).isActive = true
+//        mark.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        mark.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        mark.trailingAnchor.constraint(equalTo: mark.superview!.trailingAnchor, constant: -16).isActive = true
+//
+//        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+//        headerView.addGestureRecognizer(gesture)
 
         return headerView
     }
@@ -488,7 +488,7 @@ class MemberVC: MyTableVC {
             if (able_type == "team") {
                 toTeam(member_like: true)
             } else if (able_type == "course") {
-                toCourse(member_like: true)
+                toCourse(member_like: true, isShowPrev: true)
             } else if (able_type == "product") {
                 toProduct(member_like: true)
             } else if (able_type == "coach") {

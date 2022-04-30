@@ -12,10 +12,10 @@ import SCLAlertView
 class CourseVC: MyTableVC {
     
     @IBOutlet weak var managerBtn: UIButton!
-    
-    //let _searchRows: [[String: Any]] =
-    
+    @IBOutlet var prevBtn: UIButton!
+        
     var mysTable: CoursesTable?
+    var isShowPrev: Bool = false
     
     override func viewDidLoad() {
         
@@ -37,6 +37,8 @@ class CourseVC: MyTableVC {
         oneSections = initSectionRows()
         
         super.viewDidLoad()
+        
+        prevBtn.isHidden = !isShowPrev
         
         let cellNibName = UINib(nibName: "CourseListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "listCell")
@@ -92,10 +94,14 @@ class CourseVC: MyTableVC {
         }
         if (mysTable != nil) {
             tables = mysTable!
-            if (page == 1) {
-                lists1 = [CourseTable]()
+            if mysTable!.rows.count > 0 {
+                if (page == 1) {
+                    lists1 = [CourseTable]()
+                }
+                lists1 += mysTable!.rows
+            } else {
+                view.setInfo(info: "目前暫無課程", topAnchor: topView)
             }
-            lists1 += mysTable!.rows
         }
     }
     

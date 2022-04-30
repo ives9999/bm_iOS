@@ -67,6 +67,8 @@ class MemberCartListVC: MyTableVC {
                     //lists1 += cartItemsTable
                     submitButton.isHidden = false
                 } else {
+                    tableView.isHidden = true
+                    view.setInfo(info: "目前購物車無商品", topAnchor: topView)
                     submitButton.isHidden = true
                 }
             } else {

@@ -71,10 +71,14 @@ class TeachVC: MyTableVC {
         }
         if (mysTable != nil) {
             tables = mysTable!
-            if (page == 1) {
-                lists1 = [TeachTable]()
+            if mysTable!.rows.count > 0 {
+                if (page == 1) {
+                    lists1 = [ArenaTable]()
+                }
+                lists1 += mysTable!.rows
+            } else {
+                view.setInfo(info: "目前暫無教學", topAnchor: topView)
             }
-            lists1 += mysTable!.rows
         }
     }
     

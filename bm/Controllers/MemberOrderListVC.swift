@@ -46,10 +46,14 @@ class MemberOrderListVC: MyTableVC {
         }
         if (mysTable != nil) {
             tables = mysTable!
-            if (page == 1) {
-                lists1 = [OrderTable]()
+            if mysTable!.rows.count > 0 {
+                if (page == 1) {
+                    lists1 = [OrderTable]()
+                }
+                lists1 += mysTable!.rows
+            } else {
+                view.setInfo(info: "目前暫無訂單", topAnchor: topView)
             }
-            lists1 += mysTable!.rows
         }
     }
     

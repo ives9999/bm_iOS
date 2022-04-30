@@ -71,10 +71,14 @@ class ProductVC: MyTableVC {
         }
         if (mysTable != nil) {
             tables = mysTable!
-            if (page == 1) {
-                lists1 = [ProductTable]()
+            if mysTable!.rows.count > 0 {
+                if (page == 1) {
+                    lists1 = [ProductTable]()
+                }
+                lists1 += mysTable!.rows
+            } else {
+                view.setInfo(info: "目前暫無商品", topAnchor: topView)
             }
-            lists1 += mysTable!.rows
         }
     }
     

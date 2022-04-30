@@ -78,10 +78,14 @@ class StoreVC: MyTableVC {
         }
         if (mysTable != nil) {
             tables = mysTable!
-            if (page == 1) {
-                lists1 = [StoreTable]()
+            if mysTable!.rows.count > 0 {
+                if (page == 1) {
+                    lists1 = [StoreTable]()
+                }
+                lists1 += mysTable!.rows
+            } else {
+                view.setInfo(info: "目前暫無體育用品店", topAnchor: topView)
             }
-            lists1 += mysTable!.rows
         }
     }
     

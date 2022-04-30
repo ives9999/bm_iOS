@@ -19,6 +19,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4i0-LR-Nzf">
                                 <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b35-If-T4I">
+                                        <rect key="frame" x="12" y="19" width="33" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="26" id="4Uj-y4-Qy1"/>
+                                            <constraint firstAttribute="width" constant="33" id="cAo-oO-oVS"/>
+                                        </constraints>
+                                        <state key="normal" image="prev_black"/>
+                                        <connections>
+                                            <action selector="prevBtnPressed:" destination="fZf-Fb-4DO" eventType="touchUpInside" id="o7x-yd-SyD"/>
+                                        </connections>
+                                    </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHN-BZ-oKv">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
@@ -32,6 +43,8 @@
                                     <constraint firstItem="cHN-BZ-oKv" firstAttribute="centerX" secondItem="4i0-LR-Nzf" secondAttribute="centerX" id="KvG-MJ-SMX"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="aTJ-7P-hKI"/>
                                     <constraint firstAttribute="height" constant="64" id="uNe-Jd-JqO"/>
+                                    <constraint firstItem="b35-If-T4I" firstAttribute="centerY" secondItem="4i0-LR-Nzf" secondAttribute="centerY" id="vZq-6f-JF7"/>
+                                    <constraint firstItem="b35-If-T4I" firstAttribute="leading" secondItem="4i0-LR-Nzf" secondAttribute="leading" constant="12" id="wu7-MO-jnP"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="P13-eV-hn3">
@@ -53,6 +66,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="課程" image="course" id="vxG-ZA-wGh"/>
                     <connections>
+                        <outlet property="prevBtn" destination="b35-If-T4I" id="Sm0-ht-2KB"/>
                         <outlet property="tableView" destination="P13-eV-hn3" id="rvO-sD-nRJ"/>
                         <outlet property="topView" destination="4i0-LR-Nzf" id="k6d-Oo-mjO"/>
                         <segue destination="HrW-2D-NhE" kind="showDetail" identifier="toManagerCourse" id="gqh-nG-WJt"/>
@@ -1523,8 +1537,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="fYu-zk-ZTm"/>
         <segue reference="x4H-6S-8nE"/>
-        <segue reference="aHG-Uf-e4X"/>
-        <segue reference="kcV-jt-cPw"/>
+        <segue reference="NO9-v4-wOp"/>
+        <segue reference="A4Z-Qs-ID8"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="background" width="377.5" height="670"/>

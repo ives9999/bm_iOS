@@ -178,22 +178,26 @@ class MyTableVC: BaseViewController {
         
         if (mysTable != nil) {
             tables = mysTable!
-            if (page == 1) {
-                lists1 = [TeamTable]()
+            if mysTable!.rows.count > 0 {
+                if (page == 1) {
+                    lists1 = [TeamTable]()
+                }
+                
+                var teamRows: [TeamTable] = mysTable!.rows
+                var signupRows: [TeamTable] = [TeamTable]()
+                var notSignupRows: [TeamTable] = [TeamTable]()
+                for teamRow in teamRows {
+                    teamRow.filterRow()
+                    teamRow.isTempPlay ? signupRows.append(teamRow) : notSignupRows.append(teamRow)
+                }
+                teamRows.removeAll()
+                teamRows.append(contentsOf: signupRows)
+                teamRows.append(contentsOf: notSignupRows)
+                
+                lists1 += teamRows
+            } else {
+                view.setInfo(info: "目前暫無球隊", topAnchor: topView)
             }
-            
-            var teamRows: [TeamTable] = mysTable!.rows
-            var signupRows: [TeamTable] = [TeamTable]()
-            var notSignupRows: [TeamTable] = [TeamTable]()
-            for teamRow in teamRows {
-                teamRow.filterRow()
-                teamRow.isTempPlay ? signupRows.append(teamRow) : notSignupRows.append(teamRow)
-            }
-            teamRows.removeAll()
-            teamRows.append(contentsOf: signupRows)
-            teamRows.append(contentsOf: notSignupRows)
-            
-            lists1 += teamRows
         }
     }
     
@@ -768,23 +772,23 @@ extension MyTableVC: UITableViewDataSource {
         titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: 34)
         headerView.addSubview(titleLabel)
         
-        var expanded_image: String = "to_right_w"
-        if oneSections[section].isExpanded {
-            expanded_image = "to_down_w"
-        }
-        let mark = UIImageView(image: UIImage(named: expanded_image))
-        //mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
-        headerView.addSubview(mark)
-        
-        mark.translatesAutoresizingMaskIntoConstraints = false
-        
-        mark.centerYAnchor.constraint(equalTo: mark.superview!.centerYAnchor).isActive = true
-        mark.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        mark.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        mark.trailingAnchor.constraint(equalTo: mark.superview!.trailingAnchor, constant: -16).isActive = true
-        
-        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
-        headerView.addGestureRecognizer(gesture)
+//        var expanded_image: String = "to_right_w"
+//        if oneSections[section].isExpanded {
+//            expanded_image = "to_down_w"
+//        }
+//        let mark = UIImageView(image: UIImage(named: expanded_image))
+//        //mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
+//        headerView.addSubview(mark)
+//        
+//        mark.translatesAutoresizingMaskIntoConstraints = false
+//        
+//        mark.centerYAnchor.constraint(equalTo: mark.superview!.centerYAnchor).isActive = true
+//        mark.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        mark.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        mark.trailingAnchor.constraint(equalTo: mark.superview!.trailingAnchor, constant: -16).isActive = true
+//        
+//        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+//        headerView.addGestureRecognizer(gesture)
         
         return headerView
         //return UIView()

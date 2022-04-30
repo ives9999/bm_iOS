@@ -56,6 +56,7 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toArena") as! ArenaVC
             viewController.member_like = member_like
+            viewController.isShowPrev = isShowPrev
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -75,17 +76,19 @@ extension BaseViewController {
         }
     }
     
-    func toCourse(member_like: Bool=false) {
+    func toCourse(member_like: Bool=false, isShowPrev: Bool=false) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Course", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "Course") as? CourseVC {
                 viewController.member_like = member_like
+                viewController.isShowPrev = isShowPrev
                 viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Course") as! CourseVC
             viewController.member_like = member_like
+            viewController.isShowPrev = isShowPrev
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
