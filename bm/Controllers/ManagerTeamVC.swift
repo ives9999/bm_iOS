@@ -43,10 +43,14 @@ class ManagerTeamVC: ManagerVC {
         
         if (mysTable != nil) {
             tables = mysTable!
-            if (page == 1) {
-                lists1 = [TeamTable]()
+            if mysTable!.rows.count > 0 {
+                if (page == 1) {
+                    lists1 = [TeamTable]()
+                }
+                lists1 += mysTable!.rows
+            } else {
+                view.setInfo(info: "目前暫無球隊", topAnchor: topView)
             }
-            lists1 += mysTable!.rows
         }
     }
     

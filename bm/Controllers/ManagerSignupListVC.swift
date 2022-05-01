@@ -115,28 +115,34 @@ class ManagerSignupListVC: MyTableVC {
         //var rows: [SignupNormalTable] = [SignupNormalTable]()
         //var sectionIdx: Int = 0
         
-        for signupNormalTable in signupNormalTables {
-            
-            if (signupNormalTable.dateTable != nil) {
+        if self.signupListResultTable!.rows.count > 0 {
+        
+            for signupNormalTable in signupNormalTables {
                 
-                let dateTable: DateTable = signupNormalTable.dateTable!
-                let date: String = dateTable.date
-                
-                var bExist: Bool = false
-                for signupSection in signupSections {
-                    if (signupSection.date == date) {
+                if (signupNormalTable.dateTable != nil) {
+                    
+                    let dateTable: DateTable = signupNormalTable.dateTable!
+                    let date: String = dateTable.date
+                    
+                    var bExist: Bool = false
+                    for signupSection in signupSections {
+                        if (signupSection.date == date) {
+                            signupSection.rows.append(signupNormalTable)
+                            bExist = true
+                        }
+                    }
+                    
+                    if (!bExist) {
+                        let signupSection: SignupSection = SignupSection()
+                        signupSection.date = date
                         signupSection.rows.append(signupNormalTable)
-                        bExist = true
+                        signupSections.append(signupSection)
                     }
                 }
-                
-                if (!bExist) {
-                    let signupSection: SignupSection = SignupSection()
-                    signupSection.date = date
-                    signupSection.rows.append(signupNormalTable)
-                    signupSections.append(signupSection)
-                }
             }
+        } else {
+            tableView.isHidden = true
+            view.setInfo(info: "目前暫無資料", topAnchor: topView)
         }
         
         //print(signupSections)
