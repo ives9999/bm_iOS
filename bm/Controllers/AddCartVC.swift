@@ -850,7 +850,7 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
             
             Global.instance.addSpinner(superView: self.view)
             params["attribute"] = selected_attributes.joined(separator: "|")
-            print(params)
+            //print(params)
             
             CartService.instance.update(params: params) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
