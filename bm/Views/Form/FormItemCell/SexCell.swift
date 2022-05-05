@@ -47,7 +47,7 @@ class SexCell: FormItemCell {
         male.translatesAutoresizingMaskIntoConstraints = false
         male.widthAnchor.constraint(equalToConstant: 20).isActive = true
         male.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        male.leadingAnchor.constraint(equalTo: male.superview!.leadingAnchor, constant: 115).isActive = true
+        male.leadingAnchor.constraint(equalTo: male.superview!.leadingAnchor, constant: 135).isActive = true
         male.centerYAnchor.constraint(equalTo: male.superview!.centerYAnchor).isActive = true
         
         maleLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -58,7 +58,7 @@ class SexCell: FormItemCell {
         female.translatesAutoresizingMaskIntoConstraints = false
         female.widthAnchor.constraint(equalToConstant: 20).isActive = true
         female.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        female.leadingAnchor.constraint(equalTo: female.superview!.leadingAnchor, constant: 210).isActive = true
+        female.leadingAnchor.constraint(equalTo: female.superview!.leadingAnchor, constant: 230).isActive = true
         female.centerYAnchor.constraint(equalTo: female.superview!.centerYAnchor).isActive = true
 
         femaleLbl.translatesAutoresizingMaskIntoConstraints = false
@@ -66,20 +66,17 @@ class SexCell: FormItemCell {
         femaleLbl.leadingAnchor.constraint(equalTo: female.trailingAnchor, constant: 8).isActive = true
     }
 
-    override func update(with formItem: FormItem) {
-        
-        requiredImageView.isHidden = !formItem.isRequired
-        if formItem.value == "M" {
-            male.isChecked = true
-            female.isChecked = false
-        } else {
-            male.isChecked = false
-            female.isChecked = true
-        }
-//        if formItem.delegate != nil {
-//            self.myDelegate = (formItem.delegate as! BaseViewController)
+//    override func update(with formItem: FormItem) {
+//
+//        requiredImageView.isHidden = !formItem.isRequired
+//        if formItem.value == "M" {
+//            male.isChecked = true
+//            female.isChecked = false
+//        } else {
+//            male.isChecked = false
+//            female.isChecked = true
 //        }
-    }
+//    }
     
     func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
         
@@ -90,9 +87,12 @@ class SexCell: FormItemCell {
         if row.value == "M" {
             male.isChecked = true
             female.isChecked = false
-        } else {
+        } else if row.value == "F" {
             male.isChecked = false
             female.isChecked = true
+        } else {
+            male.isChecked = false
+            female.isChecked = false
         }
     }
     

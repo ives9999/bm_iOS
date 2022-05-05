@@ -75,6 +75,7 @@ class TextFieldCell: FormItemCell {
         textField.tintColor = UIColor.red
         
         requiredImageView.isHidden = !row.isRequired
+        //requiredImageView.isHidden = false
         
         //promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
         promptBtn.isHidden = true

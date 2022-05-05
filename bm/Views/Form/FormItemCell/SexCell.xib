@@ -17,9 +17,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="性別" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sy3-bo-0Ud" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="20" y="24" width="60" height="52"/>
+                        <rect key="frame" x="20" y="24" width="80" height="52"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="nV4-qk-Pl7"/>
+                            <constraint firstAttribute="width" constant="80" id="nV4-qk-Pl7"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>

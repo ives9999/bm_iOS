@@ -90,14 +90,14 @@ class RegisterVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
     func initData() {
         
         var rows: [OneRow] = [OneRow]()
-        var row: OneRow = OneRow(title: "EMail", value: Member.instance.email, show: Member.instance.email, key: EMAIL_KEY, cell: "textField", keyboard: KEYBOARD.emailAddress, placeholder: "service@bm.com")
+        var row: OneRow = OneRow(title: "EMail", value: Member.instance.email, show: Member.instance.email, key: EMAIL_KEY, cell: "textField", keyboard: KEYBOARD.emailAddress, placeholder: "service@bm.com", isRequired: true)
         row.msg = "EMail沒有填寫"
         rows.append(row)
         if (!Member.instance.isLoggedIn) {
-            row = OneRow(title: "密碼", value: "", show: "", key: PASSWORD_KEY, cell: "password")
+            row = OneRow(title: "密碼", value: "", show: "", key: PASSWORD_KEY, cell: "password", isRequired: true)
             row.msg = "密碼沒有填寫"
             rows.append(row)
-            row = OneRow(title: "密碼確認", value: "", show: "", key: REPASSWORD_KEY, cell: "password")
+            row = OneRow(title: "密碼確認", value: "", show: "", key: REPASSWORD_KEY, cell: "password", isRequired: true)
             row.msg = "密碼確認沒有填寫"
             rows.append(row)
         }
@@ -106,20 +106,21 @@ class RegisterVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
         oneSections.append(section)
         
         rows.removeAll()
-        row = OneRow(title: "姓名", value: Member.instance.name, show: Member.instance.name, key: NAME_KEY, cell: "textField", placeholder: "王大明")
+        row = OneRow(title: "姓名", value: Member.instance.name, show: Member.instance.name, key: NAME_KEY, cell: "textField", placeholder: "王大明", isRequired: true)
         row.msg = "姓名沒有填寫"
         rows.append(row)
-        row = OneRow(title: "暱稱", value: Member.instance.nickname, show: Member.instance.nickname, key: NICKNAME_KEY, cell: "textField", placeholder: "大明哥")
+        row = OneRow(title: "暱稱", value: Member.instance.nickname, show: Member.instance.nickname, key: NICKNAME_KEY, cell: "textField", placeholder: "大明哥", isRequired: true)
         row.msg = "暱稱沒有填寫"
         rows.append(row)
         row = OneRow(title: "生日", value: Member.instance.dob, show: Member.instance.dob, key: DOB_KEY, cell: "date", isRequired: false)
         rows.append(row)
         
-        if (Member.instance.sex.count == 0) {
-            Member.instance.sex = "M"
+        if (!Member.instance.isLoggedIn) {
+            Member.instance.sex = "none"
         }
-        row = OneRow(title: "性別", value: Member.instance.sex, show: Member.instance.sex, key: SEX_KEY, cell: "sex")
-        row.msg = "沒有選擇性別"
+        print(Member.instance.sex)
+        row = OneRow(title: "性別", value: Member.instance.sex, show: Member.instance.sex, key: SEX_KEY, cell: "sex", isRequired: false)
+        //row.msg = "沒有選擇性別"
         rows.append(row)
         
         if (Member.instance.isLoggedIn) {
@@ -131,18 +132,18 @@ class RegisterVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
         oneSections.append(section)
         
         rows.removeAll()
-        row = OneRow(title: "行動電話", value: Member.instance.mobile, show: Member.instance.mobile, key: MOBILE_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "0939123456")
+        row = OneRow(title: "行動電話", value: Member.instance.mobile, show: Member.instance.mobile, key: MOBILE_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "0939123456", isRequired: true)
         row.msg = "行動電話沒有填寫"
         rows.append(row)
         row = OneRow(title: "市內電話", value: Member.instance.tel, show: Member.instance.tel, key: TEL_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "021234567", isRequired: false)
         rows.append(row)
-        row = OneRow(title: "縣市", value: String(Member.instance.city), show: Global.instance.zoneIDToName(Member.instance.city), key: CITY_KEY, cell: "more")
+        row = OneRow(title: "縣市", value: String(Member.instance.city), show: Global.instance.zoneIDToName(Member.instance.city), key: CITY_KEY, cell: "more", isRequired: true)
         row.msg = "沒有選擇縣市"
         rows.append(row)
-        row = OneRow(title: "區域", value: String(Member.instance.area), show: Global.instance.zoneIDToName(Member.instance.area), key: AREA_KEY, cell: "more")
+        row = OneRow(title: "區域", value: String(Member.instance.area), show: Global.instance.zoneIDToName(Member.instance.area), key: AREA_KEY, cell: "more", isRequired: true)
         row.msg = "沒有選擇區域"
         rows.append(row)
-        row = OneRow(title: "住址", value: Member.instance.road, show: Member.instance.road, key: ROAD_KEY, cell: "textField", placeholder: "中山路60號")
+        row = OneRow(title: "住址", value: Member.instance.road, show: Member.instance.road, key: ROAD_KEY, cell: "textField", placeholder: "中山路60號", isRequired: true)
         row.msg = "沒有填寫住址"
         rows.append(row)
         section = makeSectionRow(title: "聯絡資料", key: "login", rows: rows)

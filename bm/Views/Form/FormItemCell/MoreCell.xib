@@ -24,9 +24,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p01-9n-Y35" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="20" y="24" width="60" height="32"/>
+                        <rect key="frame" x="20" y="24" width="80" height="32"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="g0A-Zx-ceg"/>
+                            <constraint firstAttribute="width" constant="80" id="g0A-Zx-ceg"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -40,7 +40,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detail" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oKx-Kg-Wy8" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="120" y="30" width="137" height="20.5"/>
+                        <rect key="frame" x="140" y="30" width="117" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -57,7 +57,7 @@
                         </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sv0-vd-Ps2">
-                        <rect key="frame" x="86" y="27.5" width="25" height="25"/>
+                        <rect key="frame" x="106" y="27.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="H6g-mN-0Yz"/>
                             <constraint firstAttribute="height" constant="25" id="YnJ-y1-ZBw"/>

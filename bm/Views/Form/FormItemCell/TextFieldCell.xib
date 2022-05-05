@@ -24,9 +24,9 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oi-tq-AuG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="20" y="24" width="60" height="52"/>
+                        <rect key="frame" x="20" y="24" width="80" height="52"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="Nod-2R-Q9J"/>
+                            <constraint firstAttribute="width" constant="80" id="Nod-2R-Q9J"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -44,15 +44,15 @@
                         </connections>
                     </button>
                     <textField opaque="NO" contentMode="left" contentHorizontalAlignment="right" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mRn-Ga-cUS" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="112" y="12" width="165" height="76"/>
+                        <rect key="frame" x="132" y="12" width="145" height="76"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" textContentType="url"/>
+                        <textInputTraits key="textInputTraits" textContentType="url"/>
                         <connections>
                             <action selector="textFieldDidChange:" destination="KGk-i7-Jjw" eventType="editingChanged" id="cRN-Rl-h2E"/>
                         </connections>
                     </textField>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eXe-Zp-2Cg">
-                        <rect key="frame" x="82" y="37.5" width="25" height="25"/>
+                        <rect key="frame" x="102" y="37.5" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="WKb-28-OAM"/>
                             <constraint firstAttribute="height" constant="25" id="avr-P6-XdX"/>

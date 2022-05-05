@@ -18,7 +18,7 @@ class PrivacyCell: FormItemCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        privacy = Checkbox(frame: CGRect(x: 8, y: 10, width: 20, height: 20))
+        privacy = Checkbox(frame: CGRect(x: 70, y: 10, width: 20, height: 20))
         privacy.checkedBorderColor = .white
         privacy.uncheckedBorderColor = .white
         privacy.borderStyle = .square
