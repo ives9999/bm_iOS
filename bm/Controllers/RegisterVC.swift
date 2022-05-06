@@ -30,11 +30,12 @@ class RegisterVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
     var isFeaturedChange: Bool = false
     
     var testData: [String: String] = [
-//        EMAIL_KEY: "john@housetube.tw",
-//        PASSWORD_KEY: "1234",
-//        REPASSWORD_KEY: "1234",
+ //      EMAIL_KEY: "ives@bluemobile.com.tw",
+        //PASSWORD_KEY: "1234",
+        //REPASSWORD_KEY: "1234",
 //        NAME_KEY: "孫士君",
 //        NICKNAME_KEY: "孫世君",
+//        SEX_KEY: "F",
 //        DOB_KEY: "1969-01-05",
 //        MOBILE_KEY: "0911299998",
 //        TEL_KEY: "062295888",
@@ -118,7 +119,6 @@ class RegisterVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
         if (!Member.instance.isLoggedIn) {
             Member.instance.sex = "none"
         }
-        print(Member.instance.sex)
         row = OneRow(title: "性別", value: Member.instance.sex, show: Member.instance.sex, key: SEX_KEY, cell: "sex", isRequired: false)
         //row.msg = "沒有選擇性別"
         rows.append(row)

@@ -8,13 +8,22 @@
 
 import UIKit
 
-class PasswordCell: TextFieldCell, UITextFieldDelegate {
+class PasswordCell: FormItemCell, UITextFieldDelegate {
+    
+    @IBOutlet weak var textField: SuperTextField!
     
     var realPassword: String = ""
 
     override func awakeFromNib() {
+        
         super.awakeFromNib()
-        // Initialization code
+        
+        titleLbl?.textAlignment = .right
+        backgroundColor = UIColor.clear
+        
+        textField.layer.cornerRadius = 4
+        textField.clipsToBounds = true
+        textField.fontSize = FONT_SIZE_GENERAL
     }
     
     override func update(with formItem: FormItem) {
@@ -39,7 +48,7 @@ class PasswordCell: TextFieldCell, UITextFieldDelegate {
         }
     }
     
-    override func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
+    func update(sectionIdx: Int, rowIdx: Int, row: OneRow) {
         
         self.oneRow = row
         self.sectionIdx = sectionIdx
@@ -84,19 +93,7 @@ class PasswordCell: TextFieldCell, UITextFieldDelegate {
         return true
     }
     
-//    @IBAction override func textFieldDidChange(_ textField: UITextField) {
-//        let _formItem = formItem as! PasswordFormItem
-//        
-//        _formItem.value = textField.text
-//        var p: String = ""
-//        if textField.text != nil && textField.text!.count > 0 {
-//            p = textToStar(input: textField.text!)
-//        }
-//        
-//        textField.text = p
-//    }
-    
-    @IBAction override func clearBtnPressed(_ sender: Any) {
+    @IBAction func clearBtnPressed(_ sender: Any) {
         textField.text = ""
         let _formItem = formItem as! PasswordFormItem
         _formItem.reset()

@@ -621,8 +621,8 @@ class DataService {
         var params: [String: String] = ["channel":CHANNEL,"device":"app"]
         params.merge(_params)
 
-        print(url)
-        print(params)
+        //print(url)
+        //print(params)
         msg = ""
         AF.upload(
             multipartFormData: { (multipartFormData) in
