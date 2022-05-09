@@ -217,15 +217,24 @@ class PaymentVC: MyTableVC {
 
             case .Fail:
                 //print("Faile")
-                self.warning(state.callbackStateMessage)
-
+                self.warning(msg: state.callbackStateMessage, buttonTitle: "關閉", buttonAction: {
+                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                    self.toProduct()
+                })
+                
             case .Cancel:
                 //print("Cancel")
-                self.warning("您已經取消付款")
+                self.warning(msg: "您已經取消付款", buttonTitle: "關閉", buttonAction: {
+                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                    self.toProduct()
+                })
 
             case .Unknown:
                 //print("Unknown")
-                self.warning("由於不知名的錯誤，造成付款失敗，請麻煩聯絡管理員")
+                self.warning(msg: "由於不知名的錯誤，造成付款失敗，請麻煩聯絡管理員", buttonTitle: "關閉", buttonAction: {
+                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                    self.toProduct()
+                })
             }
         }
     }
@@ -282,10 +291,17 @@ class PaymentVC: MyTableVC {
             Global.instance.removeSpinner(superView: self.view)
             
             if success {
-                self.refresh()
+                //self.refresh()
                 //self.jsonData = OrderService.instance.jsonData
+                self.info(msg: "付款完成", buttonTitle: "關閉", buttonAction: {
+                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                    self.toProduct()
+                })
             } else {
-                self.warning(OrderService.instance.msg)
+                self.warning(msg: OrderService.instance.msg, buttonTitle: "關閉", buttonAction: {
+                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                    self.toProduct()
+                })
             }
         }
     }

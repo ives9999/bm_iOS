@@ -40,6 +40,7 @@ class OrderListCell: SuperCell {
         orderNoLbl.setTextGeneral()
         dateLbl.setTextGeneral()
         priceLbl.highlight()
+        priceLbl.setTextSize(20)
         
         orderAllProcessLbl.setTextGeneral()
         gatewayProcessLbl.setTextGeneral()

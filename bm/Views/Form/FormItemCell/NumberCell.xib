@@ -17,9 +17,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2np-Sm-k46" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="20" y="24" width="60" height="52"/>
+                        <rect key="frame" x="20" y="24" width="80" height="52"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="qBc-TM-CkR"/>
+                            <constraint firstAttribute="width" constant="80" id="qBc-TM-CkR"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -33,7 +33,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hgY-51-6jy" customClass="GMStepper" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="120" y="35" width="240" height="30"/>
+                        <rect key="frame" x="140" y="35" width="240" height="30"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>

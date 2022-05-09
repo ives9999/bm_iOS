@@ -17,9 +17,9 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skP-Je-zcJ" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="20" y="41.5" width="60" height="21"/>
+                        <rect key="frame" x="20" y="41.5" width="80" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="60" id="4sG-Qh-mM5"/>
+                            <constraint firstAttribute="width" constant="80" id="4sG-Qh-mM5"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -33,7 +33,7 @@
                         </constraints>
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYA-Zw-Pns">
-                        <rect key="frame" x="120" y="16" width="207" height="72"/>
+                        <rect key="frame" x="140" y="16" width="187" height="72"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="72" id="H6X-wZ-bqv"/>

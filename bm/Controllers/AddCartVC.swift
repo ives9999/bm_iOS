@@ -175,36 +175,38 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
             var section: OneSection = makeSectionRow(title: "商品名稱", key: PRODUCT_KEY, rows: rows)
             oneSections.append(section)
             
-            rows.removeAll()
-            for attribute in productTable!.attributes {
-                var tmp: String = attribute.attribute
-                tmp = tmp.replace(target: "{", withString: "")
-                tmp = tmp.replace(target: "}", withString: "")
-                tmp = tmp.replace(target: "\"", withString: "")
-                
-                //show is 湖水綠,極致黑,經典白,太空灰
-                //name is 顏色
-                //key is color
-                var value: String = ""
-                let alias: String = attribute.alias
-                if (cartItemTable != nil) {
-                    for item_attributes in cartItemTable!.attributes {
-                        for (_, value1) in item_attributes {
-                            if (value1 == alias) {
-                                value = item_attributes["value"]!
-                                break
+            if productTable!.attributes.count > 0 {
+                rows.removeAll()
+                for attribute in productTable!.attributes {
+                    var tmp: String = attribute.attribute
+                    tmp = tmp.replace(target: "{", withString: "")
+                    tmp = tmp.replace(target: "}", withString: "")
+                    tmp = tmp.replace(target: "\"", withString: "")
+                    
+                    //show is 湖水綠,極致黑,經典白,太空灰
+                    //name is 顏色
+                    //key is color
+                    var value: String = ""
+                    let alias: String = attribute.alias
+                    if (cartItemTable != nil) {
+                        for item_attributes in cartItemTable!.attributes {
+                            for (_, value1) in item_attributes {
+                                if (value1 == alias) {
+                                    value = item_attributes["value"]!
+                                    break
+                                }
                             }
                         }
                     }
+                    
+                    row = OneRow(title: attribute.name, value: value, show: tmp, key: alias, cell: "tag")
+                    rows.append(row)
+                    //let row = ["title":attribute.name,"key":alias,"value":value,"show":tmp,"cell":"tag"]
+                    //attributeRows.append(row)
                 }
-                
-                row = OneRow(title: attribute.name, value: value, show: tmp, key: alias, cell: "tag")
-                rows.append(row)
-                //let row = ["title":attribute.name,"key":alias,"value":value,"show":tmp,"cell":"tag"]
-                //attributeRows.append(row)
+                section = makeSectionRow(title: "商品選項", key: ATTRIBUTE_KEY, rows: rows)
+                oneSections.append(section)
             }
-            section = makeSectionRow(title: "商品選項", key: ATTRIBUTE_KEY, rows: rows)
-            oneSections.append(section)
             
             rows.removeAll()
             let min: String = String(productTable!.order_min)

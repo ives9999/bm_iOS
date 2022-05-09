@@ -270,6 +270,7 @@ extension BaseViewController {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_ORDER_LIST)  as? MemberOrderListVC {
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {

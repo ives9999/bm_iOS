@@ -610,6 +610,9 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     private func setListView() {
         
         submitBtn.visibility = .invisible
+        if mustLoginLbl == nil {
+            mustLoginLbl?.visibility = .invisible
+        }
         
         tableViewBottomConstraint.constant = 0
         tableViewContainer.backgroundColor = UIColor.clear
