@@ -125,9 +125,9 @@ class TextFieldCell: FormItemCell {
     
     @IBAction func clearBtnPressed(_ sender: Any) {
         textField.text = ""
-        if let _formItem = formItem as? TextFieldFormItem {
-            _formItem.reset()
-        }
+//        if let _formItem = formItem as? TextFieldFormItem {
+//            _formItem.reset()
+//        }
         
 //        if (baseViewControllerDelegate != nil) {
 //            baseViewControllerDelegate?.textFieldDidChange(sectionKey: sectionKey, rowKey: rowKey, text: "")

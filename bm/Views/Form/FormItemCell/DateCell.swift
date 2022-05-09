@@ -27,10 +27,15 @@ class DateCell: MoreCell {
     
     override func clear() {
         super.clear()
-        if formItem != nil {
-            let _formItem = formItem as! DateFormItem
-            _formItem.reset()
-            self.formItem = _formItem
+//        if formItem != nil {
+//            let _formItem = formItem as! DateFormItem
+//            _formItem.reset()
+//            self.formItem = _formItem
+//        }
+        
+        detailLbl.text = ""
+        if cellDelegate != nil {
+            cellDelegate?.cellClear(sectionIdx: sectionIdx, rowIdx: rowIdx)
         }
     }
     

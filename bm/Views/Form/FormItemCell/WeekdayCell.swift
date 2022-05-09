@@ -28,9 +28,9 @@ class WeekdayCell: MoreCell {
     
     override func clear() {
         super.clear()
-        if formItem != nil {
-            formItem!.reset()
-            formItem!.sender = [Int]()
-        }
+//        if formItem != nil {
+//            formItem!.reset()
+//            formItem!.sender = [Int]()
+//        }
     }
 }

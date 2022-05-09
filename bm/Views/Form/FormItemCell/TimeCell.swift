@@ -28,11 +28,11 @@ class TimeCell: MoreCell {
     
     override func clear() {
         super.clear()
-        if formItem != nil {
-            let _formItem = formItem as! TimeFormItem
-            _formItem.reset()
-            self.formItem = _formItem
-        }
+//        if formItem != nil {
+//            let _formItem = formItem as! TimeFormItem
+//            _formItem.reset()
+//            self.formItem = _formItem
+//        }
     }
     
 }

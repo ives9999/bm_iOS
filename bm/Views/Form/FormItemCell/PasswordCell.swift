@@ -95,8 +95,11 @@ class PasswordCell: FormItemCell, UITextFieldDelegate {
     
     @IBAction func clearBtnPressed(_ sender: Any) {
         textField.text = ""
-        let _formItem = formItem as! PasswordFormItem
-        _formItem.reset()
+//        let _formItem = formItem as! PasswordFormItem
+//        _formItem.reset()
+        if (cellDelegate != nil) {
+            cellDelegate!.cellClear(sectionIdx: sectionIdx, rowIdx: rowIdx)
+        }
     }
     
     private func textToStar(input: String)-> String {
