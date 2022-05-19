@@ -14,7 +14,7 @@ class PaymentVC: MyTableVC {
     
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var submitBtn: SuperButton!
-    @IBOutlet weak var bottomStaticView: BottomView!
+    @IBOutlet weak var bottomThreeView: BottomThreeView!
     
     //@IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     //@IBOutlet weak var dataContainerBottom: NSLayoutConstraint!
@@ -112,7 +112,11 @@ class PaymentVC: MyTableVC {
         
         //refresh()
         
-        submitBtn.setTitle("付款")
+        //submitBtn.setTitle("付款")
+        
+        bottomThreeView.delegate = self
+        bottomThreeView.submitButton.setTitle("付款")
+        bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
         
         if ecpay_token.count > 0 {
             toECPay()
@@ -323,15 +327,15 @@ class PaymentVC: MyTableVC {
         
         orderTable!.filterRow()
         if (orderTable!.all_process > 1) {//已經付費了
-            bottomStaticView.isHidden = true
+            bottomThreeView.isHidden = true
             //tableViewBottomConstraint.constant = 0
             dataContainer.translatesAutoresizingMaskIntoConstraints = false
             dataContainer.bottomAnchor.constraint(equalTo: dataContainer.superview!.bottomAnchor, constant: 0).isActive = true
         } else {
-            bottomStaticView.isHidden = false
+            bottomThreeView.isHidden = false
             //tableViewBottomConstraint.constant = 100
             dataContainer.translatesAutoresizingMaskIntoConstraints = false
-            dataContainer.bottomAnchor.constraint(equalTo: bottomStaticView.topAnchor, constant: 8).isActive = true
+            dataContainer.bottomAnchor.constraint(equalTo: bottomThreeView.topAnchor, constant: 8).isActive = true
         }
         
         var rows: [OneRow] = [OneRow]()

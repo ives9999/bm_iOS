@@ -333,6 +333,9 @@
 		F9A6751D27FAF605007C8F47 /* Top.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6751C27FAF605007C8F47 /* Top.swift */; };
 		F9A6751F27FAF766007C8F47 /* Top.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A6751E27FAF766007C8F47 /* Top.xib */; };
 		F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */; };
+		F9F583AE283518C400F77B00 /* BottomThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F583AD283518C400F77B00 /* BottomThreeView.swift */; };
+		F9F583B0283518DF00F77B00 /* BottomThreeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9F583AF283518DF00F77B00 /* BottomThreeView.xib */; };
+		F9F583B2283533C500F77B00 /* ThreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F583B1283533C500F77B00 /* ThreeButton.swift */; };
 		F9FA3C3627E32A3B0094C773 /* _tab_search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FA3C3527E32A3B0094C773 /* _tab_search.swift */; };
 		F9FA3C3C27E4C60C0094C773 /* tab_search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FA3C3B27E4C60C0094C773 /* tab_search.swift */; };
 		F9FA3C3E27E4CC100094C773 /* _tab_search.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9FA3C3D27E4CC100094C773 /* _tab_search.xib */; };
@@ -742,6 +745,9 @@
 		F9A6751C27FAF605007C8F47 /* Top.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top.swift; sourceTree = "<group>"; };
 		F9A6751E27FAF766007C8F47 /* Top.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Top.xib; sourceTree = "<group>"; };
 		F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImagePickerVC.swift; sourceTree = "<group>"; };
+		F9F583AD283518C400F77B00 /* BottomThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomThreeView.swift; sourceTree = "<group>"; };
+		F9F583AF283518DF00F77B00 /* BottomThreeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomThreeView.xib; sourceTree = "<group>"; };
+		F9F583B1283533C500F77B00 /* ThreeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeButton.swift; sourceTree = "<group>"; };
 		F9FA3C3527E32A3B0094C773 /* _tab_search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _tab_search.swift; sourceTree = "<group>"; };
 		F9FA3C3B27E4C60C0094C773 /* tab_search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tab_search.swift; sourceTree = "<group>"; };
 		F9FA3C3D27E4CC100094C773 /* _tab_search.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = _tab_search.xib; sourceTree = "<group>"; };
@@ -1002,6 +1008,8 @@
 				F9A6751A27FAEDC3007C8F47 /* ShowTop.xib */,
 				F9A6751C27FAF605007C8F47 /* Top.swift */,
 				F9A6751E27FAF766007C8F47 /* Top.xib */,
+				F9F583AD283518C400F77B00 /* BottomThreeView.swift */,
+				F9F583AF283518DF00F77B00 /* BottomThreeView.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1115,6 +1123,7 @@
 				B307AA30263840EE001F685D /* LikeButton.swift */,
 				B39E5F7B263BCDC100C40BA7 /* LikeIcon.swift */,
 				B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */,
+				F9F583B1283533C500F77B00 /* ThreeButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -1528,6 +1537,7 @@
 				B3756EED21BA6AAA006893E1 /* StatusCell.xib in Resources */,
 				B3756EDB21B8E50E006893E1 /* WeekdayCell.xib in Resources */,
 				B36D66C1229A828A00502D62 /* ManagerCourseCell.xib in Resources */,
+				F9F583B0283518DF00F77B00 /* BottomThreeView.xib in Resources */,
 				F9308B3F273954AB002531A1 /* SwitchCell.xib in Resources */,
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
 				F94DECE12747929A00A9DA17 /* ManagerTeamCell.xib in Resources */,
@@ -1736,6 +1746,7 @@
 				F9FA3C4427E57A650094C773 /* TabTop.swift in Sources */,
 				B370EFB226A849120022E599 /* CartService.swift in Sources */,
 				B3B758B125AC5051006ACC33 /* TagFormItem.swift in Sources */,
+				F9F583AE283518C400F77B00 /* BottomThreeView.swift in Sources */,
 				B3BBDD93240E64ED00EB9856 /* MemberSignupListVC.swift in Sources */,
 				B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */,
 				B3B758C625AD414E006ACC33 /* NumberCell.swift in Sources */,
@@ -1747,6 +1758,7 @@
 				B3ED38E81FB852EB0003F083 /* FormCell.swift in Sources */,
 				B3E8C29B220603310008ED25 /* ShowCoachVC.swift in Sources */,
 				B36D66B8229997AD00502D62 /* ManagerCourseVC.swift in Sources */,
+				F9F583B2283533C500F77B00 /* ThreeButton.swift in Sources */,
 				B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */,
 				B3A9843125552DBB00DCD0F6 /* ManagerStoreVC.swift in Sources */,
 				B3B758F325BB08CD006ACC33 /* OrderService.swift in Sources */,
