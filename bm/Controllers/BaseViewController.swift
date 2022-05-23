@@ -179,6 +179,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
         shoppingCartBtn.addTarget(self, action: #selector(cartPressed), for: .touchUpInside)
     }
     
+    func backBtnPressed() {}
+        
     func cellCity(row: Table) {
         let key: String = CITY_KEY
         let city_id: Int = row.city_id
@@ -1265,6 +1267,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
         row.value = content
         row.show = content
     }
+    
+    func submitBtnPressed() {}
     
     func testNetwork()-> Bool {
         

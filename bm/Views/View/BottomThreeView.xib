@@ -7,13 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BottomThreeView" customModule="bm" customModuleProvider="target">
-            <connections>
-                <outlet property="cancelButton" destination="BEo-i6-P1m" id="daL-s0-RwP"/>
-                <outlet property="submitButton" destination="ZFe-2a-Jmn" id="jkc-dO-22T"/>
-                <outlet property="threeButton" destination="adM-0d-DCG" id="X3p-nD-sdi"/>
-            </connections>
-        </placeholder>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BottomThreeView" customModule="bm" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
@@ -21,41 +15,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhs-m1-POI">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZFe-2a-Jmn" userLabel="submitButton" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                            <rect key="frame" x="0.0" y="10" width="120" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="DZH-lj-3oD"/>
-                                <constraint firstAttribute="width" constant="120" id="YeD-Xn-IFe"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BEo-i6-P1m" userLabel="cancelButton" customClass="CancelButton" customModule="bm" customModuleProvider="target">
-                            <rect key="frame" x="260" y="10" width="120" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="27X-qc-62H"/>
-                                <constraint firstAttribute="width" constant="120" id="R6B-Zy-rIz"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="adM-0d-DCG" userLabel="threeButton" customClass="ThreeButton" customModule="bm" customModuleProvider="target">
-                            <rect key="frame" x="140" y="10" width="120" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="Mfn-Nx-MeA"/>
-                                <constraint firstAttribute="width" constant="120" id="Oer-ff-B3s"/>
-                            </constraints>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                        </button>
-                    </subviews>
                     <color key="backgroundColor" red="0.36470588235294116" green="0.36470588235294116" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstItem="adM-0d-DCG" firstAttribute="centerY" secondItem="Zhs-m1-POI" secondAttribute="centerY" id="CqH-FI-0Iy"/>
-                        <constraint firstItem="BEo-i6-P1m" firstAttribute="centerY" secondItem="Zhs-m1-POI" secondAttribute="centerY" id="e4P-BR-Qdx"/>
-                        <constraint firstItem="ZFe-2a-Jmn" firstAttribute="centerY" secondItem="Zhs-m1-POI" secondAttribute="centerY" id="m3m-LB-sVA"/>
-                    </constraints>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>

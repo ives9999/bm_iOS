@@ -163,6 +163,32 @@ class DataService {
     func getIsNameExistUrl()->String { return "" }
     func getLikeURL(token: String? = nil)-> String { return ""}
     
+    func ezshipReturnCode(token: String, completion: @escaping CompletionHandler) {
+        let url: String = URL_ORDER_RETURN
+        let params: [String: String] = ["device": "app", "channel": CHANNEL, "token": token]
+        
+        //print(url)
+        //print(params)
+        
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
     func getList(token: String?, _filter:[String: String]?, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
         if (!testNetwork()) {

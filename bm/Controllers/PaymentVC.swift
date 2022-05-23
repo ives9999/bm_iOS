@@ -327,15 +327,12 @@ class PaymentVC: MyTableVC {
         
         orderTable!.filterRow()
         if (orderTable!.all_process > 1) {//已經付費了
-            bottomThreeView.isHidden = true
-            //tableViewBottomConstraint.constant = 0
-            dataContainer.translatesAutoresizingMaskIntoConstraints = false
-            dataContainer.bottomAnchor.constraint(equalTo: dataContainer.superview!.bottomAnchor, constant: 0).isActive = true
-        } else {
-            bottomThreeView.isHidden = false
-            //tableViewBottomConstraint.constant = 100
-            dataContainer.translatesAutoresizingMaskIntoConstraints = false
-            dataContainer.bottomAnchor.constraint(equalTo: bottomThreeView.topAnchor, constant: 8).isActive = true
+            //bottomThreeView.isHidden = true
+            //dataContainer.translatesAutoresizingMaskIntoConstraints = false
+            //dataContainer.bottomAnchor.constraint(equalTo: dataContainer.superview!.bottomAnchor, constant: 0).isActive = true
+            bottomThreeView.submitButton.isHidden = true
+            //bottomThreeView.threeButton.isHidden = true
+            bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
         }
         
         var rows: [OneRow] = [OneRow]()
@@ -384,7 +381,7 @@ class PaymentVC: MyTableVC {
         
         //order
         rows.removeAll()
-        var row = OneRow(title: "訂單編號", value: orderTable!.order_no, show: orderTable!.order_no, key: ORDER_NO_KEY, cell: "text")
+        var row = OneRow(title: "編號", value: orderTable!.order_no, show: orderTable!.order_no, key: ORDER_NO_KEY, cell: "text")
         rows.append(row)
         row = OneRow(title: "商品金額", value: String(orderTable!.amount), show: orderTable!.amount_show, key: AMOUNT_KEY, cell: "text")
         rows.append(row)
@@ -392,11 +389,11 @@ class PaymentVC: MyTableVC {
         rows.append(row)
         row = OneRow(title: "税", value: String(orderTable!.tax), show: orderTable!.tax_show, key: TAX_KEY, cell: "text")
         rows.append(row)
-        row = OneRow(title: "訂單金額", value: String(orderTable!.total), show: orderTable!.total_show, key: TOTAL_KEY, cell: "text")
+        row = OneRow(title: "總金額", value: String(orderTable!.total), show: orderTable!.total_show, key: TOTAL_KEY, cell: "text")
         rows.append(row)
-        row = OneRow(title: "訂單建立時間", value: String(orderTable!.created_at), show: orderTable!.created_at_show, key: CREATED_AT_KEY, cell: "text")
+        row = OneRow(title: "建立時間", value: String(orderTable!.created_at), show: orderTable!.created_at_show, key: CREATED_AT_KEY, cell: "text")
         rows.append(row)
-        row = OneRow(title: "訂單狀態", value: String(orderTable!.all_process), show: orderTable!.all_process_show, key: ORDER_PROCESS_KEY, cell: "text")
+        row = OneRow(title: "狀態", value: String(orderTable!.all_process), show: orderTable!.all_process_show, key: ORDER_PROCESS_KEY, cell: "text")
         rows.append(row)
         section = makeSectionRow(title: "訂單", key: ORDER_KEY, rows: rows)
         oneSections.append(section)
@@ -526,6 +523,10 @@ class PaymentVC: MyTableVC {
             rows.append(row)
         }
         row = OneRow(title: "發票種類", value: orderTable!.invoice_email, show: orderTable!.invoice_email, key: INVOICE_EMAIL_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "發票號碼", value: orderTable!.invoice_no, show: orderTable!.invoice_no, key: INVOICE_NO_KEY, cell: "text")
+        rows.append(row)
+        row = OneRow(title: "開立時間", value: orderTable!.invoice_at, show: orderTable!.invoice_at, key: INVOICE_AT_KEY, cell: "text")
         rows.append(row)
         section = makeSectionRow(title: "電子發票", key: INVOICE_KEY, rows: rows)
         oneSections.append(section)
@@ -996,6 +997,44 @@ class PaymentVC: MyTableVC {
         })
     }
     
+    override func submitBtnPressed() {
+        ecpay_token = orderTable!.ecpay_token
+        toECPay()
+    }
+    
+    override func backBtnPressed() {
+        if order_token.count > 0 {
+            Global.instance.addSpinner(superView: view)
+            //print(Member.instance.token)
+            OrderService.instance.ezshipReturnCode(token: order_token) { (success) in
+                if (success) {
+                    
+                    let jsonData: Data = OrderService.instance.jsonData!
+                    do {
+                        let successTable: BackResTable = try JSONDecoder().decode(BackResTable.self, from: jsonData)
+                        if !successTable.success {
+                            var msg: String = "錯誤訊息：" + successTable.msg
+                            if successTable.error_code.count > 0 {
+                                msg += "\n" + "錯誤編號：" + successTable.error_code
+                            }
+                            self.info(msg)
+                        } else {
+                            var msg: String = "退貨編號：" + successTable.sn_id
+                            if successTable.expire_at.count > 0 {
+                                msg += "\n" + "錯誤編號：" + successTable.expire_at
+                            }
+                            self.info(msg)
+                        }
+                    } catch {
+                        self.warning(error.localizedDescription)
+                    }
+                }
+                Global.instance.removeSpinner(superView: self.view)
+                self.endRefresh()
+            }
+        }
+    }
+    
     @IBAction func submitBtnPressed(_ sender: Any) {
         ecpay_token = orderTable!.ecpay_token
         toECPay()
@@ -1003,5 +1042,39 @@ class PaymentVC: MyTableVC {
     
     @IBAction func cancelBtnPressed(_ sender: Any) {
         prev()
+    }
+}
+
+class BackResTable: Codable {
+    
+    var success: Bool = false
+    var msg: String = ""
+    var sn_id: String = ""
+    var expire_at: String = ""
+    var order_id: Int = 0
+    var error_code: String = ""
+    var url: String = ""
+    
+    enum CodingKeys: String, CodingKey {
+        case success
+        case msg
+        case sn_id
+        case expire_at
+        case order_id
+        case error_code
+        case url
+    }
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
+        sn_id = try container.decodeIfPresent(String.self, forKey: .sn_id) ?? ""
+        expire_at = try container.decodeIfPresent(String.self, forKey: .expire_at) ?? ""
+        order_id = try container.decodeIfPresent(Int.self, forKey: .order_id) ?? 0
+        error_code = try container.decodeIfPresent(String.self, forKey: .error_code) ?? ""
+        url = try container.decodeIfPresent(String.self, forKey: .url) ?? ""
     }
 }

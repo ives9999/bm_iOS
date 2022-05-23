@@ -10,19 +10,22 @@ import UIKit
 
 class BottomThreeView: UIView {
     
-    @IBOutlet weak var submitButton: SubmitButton!
-    @IBOutlet weak var cancelButton: CancelButton!
-    @IBOutlet weak var threeButton: ThreeButton!
+//    @IBOutlet weak var submitButton: SubmitButton!
+//    @IBOutlet weak var cancelButton: CancelButton!
+//    @IBOutlet weak var threeButton: ThreeButton!
+    
+    @IBOutlet weak var containerView: UIView!
+    
+    var submitButton: SubmitButton = SubmitButton()
+    var threeButton: ThreeButton = ThreeButton()
+    var cancelButton: CancelButton = CancelButton()
 
     let nibName = "BottomThreeView"
     var delegate: BaseViewController?
     
     var bottom_button_count: Int = 3
     var button_width: CGFloat = 120
-    
-//    @IBOutlet weak var submitButtonConstraintLeading: NSLayoutConstraint!
-//    @IBOutlet weak var threeButtonConstraintLeading: NSLayoutConstraint!
-//    @IBOutlet weak var cancelButtonConstraintLeading: NSLayoutConstraint!
+    var button_height: CGFloat = 30
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -39,6 +42,14 @@ class BottomThreeView: UIView {
         guard let view = loadViewFromNib() else { return }
         view.frame = self.bounds
         self.addSubview(view)
+        
+        view.addSubview(submitButton)
+        view.addSubview(threeButton)
+        view.addSubview(cancelButton)
+        
+        submitButton.addTarget(self, action: #selector(submit), for: .touchUpInside)
+        threeButton.addTarget(self, action: #selector(back), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
     }
     
     func loadViewFromNib() -> UIView? {
@@ -53,18 +64,54 @@ class BottomThreeView: UIView {
             bottom_button_count -= 1
         }
         
+        if (threeButton.isHidden) {
+            bottom_button_count -= 1
+        }
+
+        if (cancelButton.isHidden) {
+            bottom_button_count -= 1
+        }
+        
         let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
         
-        submitButton.translatesAutoresizingMaskIntoConstraints = false
-        submitButton.leadingAnchor.constraint(equalTo: submitButton.superview!.leadingAnchor, constant: padding).isActive = true
-        threeButton.translatesAutoresizingMaskIntoConstraints = false
-        threeButton.leadingAnchor.constraint(equalTo: submitButton.trailingAnchor, constant: padding).isActive = true
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelButton.leadingAnchor.constraint(equalTo: threeButton.trailingAnchor, constant: padding).isActive = true
+        if (!submitButton.isHidden) {
+            submitButton.translatesAutoresizingMaskIntoConstraints = false
+            submitButton.leadingAnchor.constraint(equalTo: submitButton.superview!.leadingAnchor, constant: padding).isActive = true
+            submitButton.widthAnchor.constraint(equalToConstant: button_width).isActive = true
+            submitButton.heightAnchor.constraint(equalToConstant: button_height).isActive = true
+            submitButton.centerYAnchor.constraint(equalTo: submitButton.superview!.centerYAnchor).isActive = true
+        }
         
-//        submitButtonConstraintLeading.constant = padding
-//        threeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + CGFloat(bottom_button_count-1)*button_width
-//        cancelButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + CGFloat(bottom_button_count-1)*button_width
+        if (!threeButton.isHidden) {
+            let padding2 = button_width * CGFloat(bottom_button_count-2) + CGFloat(bottom_button_count-1) * padding
+            threeButton.translatesAutoresizingMaskIntoConstraints = false
+            threeButton.leadingAnchor.constraint(equalTo: threeButton.superview!.leadingAnchor, constant: padding2).isActive = true
+            threeButton.widthAnchor.constraint(equalToConstant: button_width).isActive = true
+            threeButton.heightAnchor.constraint(equalToConstant: button_height).isActive = true
+            threeButton.centerYAnchor.constraint(equalTo: threeButton.superview!.centerYAnchor).isActive = true
+        }
+
+        if (!cancelButton.isHidden) {
+            let padding2 = button_width * CGFloat(bottom_button_count-1) + CGFloat(bottom_button_count) * padding
+
+            cancelButton.translatesAutoresizingMaskIntoConstraints = false
+            cancelButton.leadingAnchor.constraint(equalTo: cancelButton.superview!.leadingAnchor, constant: padding2).isActive = true
+            cancelButton.widthAnchor.constraint(equalToConstant: button_width).isActive = true
+            cancelButton.heightAnchor.constraint(equalToConstant: button_height).isActive = true
+            cancelButton.centerYAnchor.constraint(equalTo: cancelButton.superview!.centerYAnchor).isActive = true
+        }
+    }
+    
+    @objc func submit() {
+        delegate?.submitBtnPressed()
+    }
+    
+    @objc func back() {
+        delegate?.backBtnPressed()
     }
 
+    @objc func cancel() {
+        //print("cancel")
+        delegate?.prev()
+    }
 }

@@ -40,6 +40,8 @@ class OrderTable: Table {
     var handle_fee: Int = 0
     
     var invoice_type: String = ""
+    var invoice_no: String = ""
+    var invoice_at: String = ""
     var invoice_email: String = ""
     var invoice_company_name: String = ""
     var invoice_company_tax: String = ""
@@ -100,6 +102,7 @@ class OrderTable: Table {
     //var shipping_at_show: String = "準備中"
     
     var invoice_type_show: String = ""
+    var is_back: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case order_no
@@ -115,6 +118,8 @@ class OrderTable: Table {
         case grand_total
         case handle_fee
         case invoice_type
+        case invoice_no
+        case invoice_at
         case invoice_email
         case invoice_company_name
         case invoice_company_tax
@@ -199,6 +204,8 @@ class OrderTable: Table {
         all_process = try container.decodeIfPresent(Int.self, forKey: .all_process) ?? 0
         
         invoice_type = try container.decodeIfPresent(String.self, forKey: .invoice_type) ?? ""
+        invoice_no = try container.decodeIfPresent(String.self, forKey: .invoice_no) ?? ""
+        invoice_at = try container.decodeIfPresent(String.self, forKey: .invoice_at) ?? ""
         invoice_email = try container.decodeIfPresent(String.self, forKey: .invoice_email) ?? ""
         invoice_company_name = try container.decodeIfPresent(String.self, forKey: .invoice_company_name) ?? ""
         invoice_company_tax = try container.decodeIfPresent(String.self, forKey: .invoice_company_tax) ?? ""
@@ -258,6 +265,9 @@ class OrderTable: Table {
         }
         
         order_tel_show = order_tel.mobileShow()
+        
+        complete_at
+        all_process
     }
     
     private func makeAttributes()-> String {
