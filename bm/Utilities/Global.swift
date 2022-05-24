@@ -555,7 +555,8 @@ enum ORDER_PROCESS: String {
     case gateway = "完成付款"
     case shipping = "出貨中"
     case complete = "完成取貨"
-    case cancel = "訂單取消"
+    case returning = "商品退回中"
+    case `return` = "商品已退回"
     
     func enumToString()-> String {
         switch self {
@@ -567,8 +568,10 @@ enum ORDER_PROCESS: String {
             return "shipping"
         case .complete:
             return "complete"
-        case .cancel:
-            return "cancel"
+        case .returning:
+            return "returning"
+        case .return:
+            return "return"
         }
     }
     
@@ -582,8 +585,10 @@ enum ORDER_PROCESS: String {
             return .shipping
         case "complete":
             return .complete
-        case "cancel":
-            return .cancel
+        case "returning":
+            return .returning
+        case "return":
+            return .return
         default:
             return .normal
         }
@@ -603,7 +608,8 @@ enum ALL_PROCESS: String {
     case shipping = "已經出貨了"
     case store = "商品到達便利商店"
     case complete = "完成取貨"
-    case cancel = "退貨"
+    case returning = "商品退回中"
+    case `return` = "商品已退回"
     
     func enumToString()-> String {
         switch self {
@@ -621,8 +627,10 @@ enum ALL_PROCESS: String {
             return "store"
         case .complete:
             return "complete"
-        case .cancel:
-            return "cancel"
+        case .returning:
+            return "returning"
+        case .return:
+            return "return"
         }
     }
     
@@ -643,7 +651,9 @@ enum ALL_PROCESS: String {
         case 6:
             return .complete
         case 7:
-            return .cancel
+            return .returning
+        case 8:
+            return .return
         default:
             return .normal
         }

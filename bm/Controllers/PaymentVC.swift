@@ -315,23 +315,17 @@ class PaymentVC: MyTableVC {
         titleLbl.text = orderTable!.order_no
         titleLbl.textColor = UIColor.black
         
-//        mySections = [
-//            ["name": "商品", "isExpanded": true, KEY_KEY: PRODUCT_KEY],
-//            ["name": "訂單", "isExpanded": true, KEY_KEY: ORDER_KEY],
-//            ["name": "付款方式", "isExpanded": true, KEY_KEY: GATEWAY_KEY],
-//            ["name": "寄送方式", "isExpanded": true, KEY_KEY: SHIPPING_KEY],
-//            ["name": "電子發票", "isExpanded": true, KEY_KEY: INVOICE_KEY],
-//            ["name": "訂購人資料", "isExpanded": true, KEY_KEY: MEMBER_KEY],
-//            ["name": "其他留言", "isExpanded": true, KEY_KEY: MEMO_KEY]
-//        ]
-        
         orderTable!.filterRow()
         if (orderTable!.all_process > 1) {//已經付費了
             //bottomThreeView.isHidden = true
             //dataContainer.translatesAutoresizingMaskIntoConstraints = false
             //dataContainer.bottomAnchor.constraint(equalTo: dataContainer.superview!.bottomAnchor, constant: 0).isActive = true
             bottomThreeView.submitButton.isHidden = true
-            //bottomThreeView.threeButton.isHidden = true
+            
+            if (!orderTable!.canReturn) {
+                bottomThreeView.threeButton.isHidden = true
+            }
+            
             bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
         }
         
@@ -361,23 +355,10 @@ class PaymentVC: MyTableVC {
             row.quantity = String(orderItemTable.quantity)
             
             rows.append(row)
-            
-//            let row:[String: String] = [TITLE_KEY:productTable!.name,KEY_KEY:PRODUCT_KEY,VALUE_KEY:"",SHOW_KEY:"",CELL_KEY:"cart","featured_path":productTable!.featured_path,"attribute":attribute_text,"amount":orderItemTable.amount_show,"quantity":String(orderItemTable.quantity)]
-//            productRows.append(row)
         }
         
         var section = makeSectionRow(title: "商品", key: PRODUCT_KEY, rows: rows)
         oneSections.append(section)
-        
-//        myRows = [
-//            [KEY_KEY:PRODUCT_KEY, "rows": productRows],
-//            [KEY_KEY:ORDER_KEY, "rows": orderRows],
-//            [KEY_KEY:GATEWAY_KEY, "rows": gatewayRows],
-//            [KEY_KEY:SHIPPING_KEY, "rows": shippingRows],
-//            [KEY_KEY:INVOICE_KEY, "rows": invoiceRows],
-//            [KEY_KEY:MEMBER_KEY, "rows": memberRows],
-//            [KEY_KEY:MEMO_KEY, "rows": memoRows]
-//        ]
         
         //order
         rows.removeAll()
@@ -397,40 +378,6 @@ class PaymentVC: MyTableVC {
         rows.append(row)
         section = makeSectionRow(title: "訂單", key: ORDER_KEY, rows: rows)
         oneSections.append(section)
-//        var row: [String: String] = getRowRowsFromMyRowsByKey1(key: ORDER_NO_KEY)
-//        row[VALUE_KEY] = orderTable!.order_no
-//        row[SHOW_KEY] = orderTable!.order_no
-//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: ORDER_NO_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: AMOUNT_KEY)
-//        row[VALUE_KEY] = String(orderTable!.amount)
-//        row[SHOW_KEY] = orderTable!.amount_show
-//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: AMOUNT_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_FEE_KEY)
-//        row[VALUE_KEY] = String(orderTable!.shipping_fee)
-//        row[SHOW_KEY] = orderTable!.shipping_fee_show
-//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: SHIPPING_FEE_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: TAX_KEY)
-//        row[VALUE_KEY] = String(orderTable!.tax)
-//        row[SHOW_KEY] = orderTable!.tax_show
-//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: TAX_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: TOTAL_KEY)
-//        row[VALUE_KEY] = String(orderTable!.total)
-//        row[SHOW_KEY] = orderTable!.total_show
-//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: TOTAL_KEY, _row: row)
-//
-//        row = getRowRowsFromMyRowsByKey1(key: CREATED_AT_KEY)
-//        row[VALUE_KEY] = orderTable!.created_at
-//        row[SHOW_KEY] = orderTable!.created_at_show
-//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: CREATED_AT_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: ORDER_PROCESS_KEY)
-//        row[VALUE_KEY] = String(orderTable!.all_process)
-//        row[SHOW_KEY] = orderTable!.all_process_show
-//        replaceRowByKey(sectionKey: ORDER_KEY, rowKey: ORDER_PROCESS_KEY, _row: row)
         
         //gateway
         rows.removeAll()
@@ -442,21 +389,6 @@ class PaymentVC: MyTableVC {
         rows.append(row)
         section = makeSectionRow(title: "付款方式", key: GATEWAY_KEY, rows: rows)
         oneSections.append(section)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: GATEWAY_METHOD_KEY)
-//        row[VALUE_KEY] = orderTable!.gateway!.method
-//        row[SHOW_KEY] = orderTable!.gateway!.method_show
-//        replaceRowByKey(sectionKey: GATEWAY_KEY, rowKey: GATEWAY_METHOD_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: GATEWAY_AT_KEY)
-//        row[VALUE_KEY] = orderTable!.gateway?.gateway_at
-//        row[SHOW_KEY] = orderTable!.gateway?.gateway_at_show
-//        replaceRowByKey(sectionKey: GATEWAY_KEY, rowKey: GATEWAY_AT_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: GATEWAY_PROCESS_KEY)
-//        row[VALUE_KEY] = orderTable!.gateway!.process
-//        row[SHOW_KEY] = orderTable!.gateway!.process_show
-//        replaceRowByKey(sectionKey: GATEWAY_KEY, rowKey: GATEWAY_PROCESS_KEY, _row: row)
         
         //shipping
         rows.removeAll()
@@ -479,38 +411,6 @@ class PaymentVC: MyTableVC {
         section = makeSectionRow(title: "到貨方式", key: SHIPPING_KEY, rows: rows)
         oneSections.append(section)
         
-//        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_METHOD_KEY)
-//        row[VALUE_KEY] = orderTable!.shipping!.method
-//        row[SHOW_KEY] = orderTable!.shipping!.method_show
-//        shippingRows = replaceRowByKey(rows: shippingRows, key: SHIPPING_METHOD_KEY, newRow: row)
-        //replaceRowByKey(sectionKey: SHIPPING_KEY, rowKey: SHIPPING_METHOD_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_AT_KEY)
-//        row[VALUE_KEY] = orderTable!.shipping?.shipping_at
-//        row[SHOW_KEY] = orderTable!.shipping?.shipping_at_show
-//        shippingRows = replaceRowByKey(rows: shippingRows, key: SHIPPING_AT_KEY, newRow: row)
-        //replaceRowByKey(sectionKey: SHIPPING_KEY, rowKey: SHIPPING_AT_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: SHIPPING_PROCESS_KEY)
-//        row[VALUE_KEY] = orderTable!.shipping!.process
-//        row[SHOW_KEY] = orderTable!.shipping!.process_show
-//        shippingRows = replaceRowByKey(rows: shippingRows, key: SHIPPING_PROCESS_KEY, newRow: row)
-        //replaceRowByKey(sectionKey: SHIPPING_KEY, rowKey: SHIPPING_PROCESS_KEY, _row: row)
-        
-//        if (orderTable!.shipping?.method == "store_711" || orderTable!.shipping?.method == "store_family") {
-//            row = [TITLE_KEY:"到達商店時間", KEY_KEY:SHIPPING_STORE_AT_KEY, VALUE_KEY:orderTable!.shipping!.store_at, SHOW_KEY:orderTable!.shipping!.store_at_show, CELL_KEY:"text"]
-//            shippingRows.append(row)
-//        }
-        
-//        row = [TITLE_KEY:"到貨時間", KEY_KEY:SHIPPING_COMPLETE_AT_KEY, VALUE_KEY:orderTable!.shipping!.complete_at, SHOW_KEY:orderTable!.shipping!.complete_at_show, CELL_KEY:"text"]
-//        shippingRows.append(row)
-        
-//        if (orderTable!.shipping!.back_at.count > 0) {
-//            row = [TITLE_KEY:"退貨時間", KEY_KEY:SHIPPING_BACK_AT_KEY, VALUE_KEY:orderTable!.shipping!.back_at, SHOW_KEY:orderTable!.shipping!.back_at_show, CELL_KEY:"text"]
-//            shippingRows.append(row)
-//        }
-//        replaceRowsByKey(sectionKey: SHIPPING_KEY, rows: shippingRows)
-        
         //invoice
         rows.removeAll()
         let invoice_type: String = orderTable!.invoice_type
@@ -531,27 +431,6 @@ class PaymentVC: MyTableVC {
         section = makeSectionRow(title: "電子發票", key: INVOICE_KEY, rows: rows)
         oneSections.append(section)
         
-//        let invoice_type: String = orderTable!.invoice_type
-//        row = getRowFromKey(rows: invoiceRows, key: INVOICE_TYPE_KEY)
-//        row[VALUE_KEY] = invoice_type
-//        row[SHOW_KEY] = orderTable!.invoice_type_show
-//        invoiceRows = replaceRowByKey(rows: invoiceRows, key: INVOICE_TYPE_KEY, newRow: row)
-        
-//        if (invoice_type == "company") {
-//            row = [TITLE_KEY:"公司或行號名稱", KEY_KEY:INVOICE_COMPANY_NAME_KEY, VALUE_KEY:orderTable!.invoice_company_name, SHOW_KEY:orderTable!.invoice_company_name, CELL_KEY:"text"]
-//            invoiceRows.append(row)
-//            row = [TITLE_KEY:"統一編號", KEY_KEY:INVOICE_COMPANY_TAX_KEY, VALUE_KEY:orderTable!.invoice_company_tax, SHOW_KEY:orderTable!.invoice_company_tax, CELL_KEY:"text"]
-//            invoiceRows.append(row)
-//        }
-        
-//        row = getRowFromKey(rows: invoiceRows, key: INVOICE_EMAIL_KEY)
-//        row[VALUE_KEY] = orderTable!.invoice_email
-//        row[SHOW_KEY] = orderTable!.invoice_email
-//        invoiceRows = replaceRowByKey(rows: invoiceRows, key: INVOICE_EMAIL_KEY, newRow: row)
-//
-//        replaceRowsByKey(sectionKey: INVOICE_KEY, rows: invoiceRows)
-        //myRows[4]["rows"] = invoiceRows
-        
         //member
         rows.removeAll()
         row = OneRow(title: "姓名", value: orderTable!.order_name, show: orderTable!.order_name, key: NAME_KEY, cell: "text")
@@ -565,26 +444,6 @@ class PaymentVC: MyTableVC {
         section = makeSectionRow(title: "電子發票", key: INVOICE_KEY, rows: rows)
         oneSections.append(section)
         
-//        row = getRowRowsFromMyRowsByKey1(key: NAME_KEY)
-//        row[VALUE_KEY] = orderTable!.order_name
-//        row[SHOW_KEY] = orderTable!.order_name
-//        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: NAME_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: MOBILE_KEY)
-//        row[VALUE_KEY] = orderTable!.order_tel
-//        row[SHOW_KEY] = orderTable!.order_tel_show
-//        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: MOBILE_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: EMAIL_KEY)
-//        row[VALUE_KEY] = orderTable!.order_email
-//        row[SHOW_KEY] = orderTable!.order_email
-//        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: EMAIL_KEY, _row: row)
-        
-//        row = getRowRowsFromMyRowsByKey1(key: ADDRESS_KEY)
-//        row[VALUE_KEY] = orderTable!.order_address
-//        row[SHOW_KEY] = orderTable!.order_address
-//        replaceRowByKey(sectionKey: MEMBER_KEY, rowKey: ADDRESS_KEY, _row: row)
-        
         //memo
         rows.removeAll()
         row = OneRow(title: "其他留言", value: orderTable!.memo, show: orderTable!.memo, key: MEMO_KEY, cell: "text")
@@ -592,48 +451,21 @@ class PaymentVC: MyTableVC {
         section = makeSectionRow(title: "其他留言", key: MEMO_KEY, rows: rows)
         oneSections.append(section)
         
-//        row = getRowRowsFromMyRowsByKey1(key: MEMO_KEY)
-//        row[VALUE_KEY] = orderTable!.memo
-//        row[SHOW_KEY] = orderTable!.memo
-//        replaceRowByKey(sectionKey: MEMO_KEY, rowKey: MEMO_KEY, _row: row)
-        
+        //退貨
+        if orderTable!.return != nil {
+            rows.removeAll()
+            row = OneRow(title: "退貨編號", value: orderTable!.return!.sn_id, show: orderTable!.return!.sn_id, key: RETURN_SN_ID_KEY, cell: "text")
+            rows.append(row)
+            row = OneRow(title: "編號到期時間", value: orderTable!.return!.expire_at, show: orderTable!.return!.expire_at, key: RETURN_EXPIRE_AT_KEY, cell: "text")
+            rows.append(row)
+            row = OneRow(title: "退貨時間", value: orderTable!.return!.created_at, show: orderTable!.return!.created_at_show, key: RETURN_CREATED_AT_KEY, cell: "text")
+            rows.append(row)
+            section = makeSectionRow(title: "退貨", key: MEMO_KEY, rows: rows)
+            oneSections.append(section)
+        }
         
         tableView.reloadData()
     }
-    
-//    private func setupOrderData() {
-//        
-//        if orderTable != nil {
-//            
-//            let mirror: Mirror = Mirror(reflecting: orderTable!)
-//            let propertys: [[String: Any]] = mirror.toDictionary()
-//            
-//            for property in propertys {
-//                let label: String = property["label"] as! String
-//                for (idx, row) in rows!.enumerated() {
-//                    for (idx1, row1) in row.enumerated() {
-//                        let key: String = row1[KEY_KEY] as! String
-//                        if key == label {
-//                            var type: String = property["type"] as! String
-//                            type = type.getTypeOfProperty()!
-//                            //print("label=>\(property["label"]):value=>\(property[VALUE_KEY]):type=>\(type)")
-//                            if type == "Int" {
-//                                rows![idx][idx1][VALUE_KEY] = String(property[VALUE_KEY] as! Int)
-//                            } else if type == "Bool" {
-//                                rows![idx][idx1][VALUE_KEY] = String(property[VALUE_KEY] as! Bool)
-//                            } else if type == "String" {
-//                                rows![idx][idx1][VALUE_KEY] = property[VALUE_KEY] as! String
-//                            }
-//                        }
-//                    }
-//                }
-//                
-//            }
-//            //print(rows)
-//        }
-//    }
-    
-    
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
@@ -661,16 +493,6 @@ class PaymentVC: MyTableVC {
             } else {
                 count = 0
             }
-//            let mySection: [String: Any] = mySections[section]
-//            if (mySection.keyExist(key: "isExpanded")) {
-//                let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
-//                if (isExpanded) {
-//                    if let key: String = mySection[KEY_KEY] as? String {
-//                        let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
-//                        count = rows.count
-//                    }
-//                }
-//            }
         }
         
         return count
@@ -751,88 +573,12 @@ class PaymentVC: MyTableVC {
                     return cell
                 }
             }
-            
-//            var sectionKey: String = ""
-//            let section: [String: Any] = myRows[indexPath.section]
-//            if let tmp: String = section[KEY_KEY] as? String {
-//                sectionKey = tmp
-//            }
-//
-//            var rowKey: String = ""
-//            var row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-//            if let tmp: String = row[KEY_KEY] {
-//                rowKey = tmp
-//            }
-//
-//            var cell_type: String = "text"
-//            if (row.keyExist(key: CELL_KEY)) {
-//                cell_type = row[CELL_KEY]!
-//            }
-//
-//            var title: String = ""
-//            var show: String = ""
-//            var value: String = ""
-//
-//            if row.keyExist(key: TITLE_KEY) {
-//                title = row[TITLE_KEY]!
-//            }
-//
-//            if row.keyExist(key: SHOW_KEY) {
-//                show = row[SHOW_KEY]!
-//            }
-//
-//            if row.keyExist(key: VALUE_KEY) {
-//                value = row[VALUE_KEY]!
-//            }
-//
-////            if (rowKey == GATEWAY_METHOD_KEY) {
-////                let method: GATEWAY = GATEWAY.stringToEnum(orderTable!.gateway!.method)
-////
-////                if (method == GATEWAY.store_cvs || method == GATEWAY.store_barcode || method == GATEWAY.ATM) {
-////                    cell_type = "more"
-////                }
-////            }
-//
-//            if (cell_type == "cart") {
-//                if let cell: CartListCell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
-//
-//                    cell.update(sectionKey: sectionKey,rowKey: rowKey,title: title,featured_path:row["featured_path"]!,attribute:row["attribute"]!,amount: row["amount"]!,quantity: row["quantity"]!)
-//                    return cell
-//                }
-//            } else if (cell_type == "text") {
-//                if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
-//
-//                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, show: show)
-//                    return cell
-//                }
-//            } else if (cell_type == "more") {
-//                if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "MoreCell", for: indexPath) as? MoreCell {
-//
-//                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, show: show)
-//                    return cell
-//                }
-//            }
         }
         
         return UITableViewCell()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-//        var rowKey: String = ""
-//        let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-//        if let tmp: String = row[KEY_KEY] {
-//            rowKey = tmp
-//        }
-//
-//        var sectionKey: String = ""
-//        let section: [String: Any] = myRows[indexPath.section]
-//        if let tmp: String = section[KEY_KEY] as? String {
-//            sectionKey = tmp
-//        }
-        
-//        print(sectionKey)
-//        print(rowKey)
         
         let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
         
@@ -903,79 +649,6 @@ class PaymentVC: MyTableVC {
                 popupTableView.reloadData()
             }
         }
-        
-//        if (sectionKey == GATEWAY_KEY && rowKey == GATEWAY_METHOD_KEY) {
-//            if (orderTable != nil) {
-//                //print(orderTable!.gateway!.printRow())
-//
-//                //let panel: Panel = Panel(baseVC: self)
-//                //panel.show(rows: gatewayRows)
-//                maskView = view.mask()
-//                let top: CGFloat = (maskView.frame.height-panelHeight)/2
-//                blackView = maskView.blackView(left: panelLeftPadding, top: top, width: maskView.frame.width-2*panelLeftPadding, height:panelHeight)
-//
-//                popupTableView.frame = CGRect(x: 0, y: 0, width: blackView.frame.width, height: blackView.frame.height-80)
-//                popupTableView.dataSource = self
-//                popupTableView.delegate = self
-//
-//                popupTableView.backgroundColor = .clear
-//
-//                blackView.addSubview(popupTableView)
-//
-//                let plainNib = UINib(nibName: "PlainCell", bundle: nil)
-//                popupTableView.register(plainNib, forCellReuseIdentifier: "PlainCell")
-//                let barcodeNib = UINib(nibName: "BarcodeCell", bundle: nil)
-//                popupTableView.register(barcodeNib, forCellReuseIdentifier: "BarcodeCell")
-//
-//                stackView = blackView.addStackView(height: 80)
-//
-//                panelCancelBtn = stackView.addCancelBtn()
-//                //panelSubmitBtn = stackView.addSubmitBtn()
-//                panelCancelBtn.addTarget(self, action: #selector(panelCancelAction), for: .touchUpInside)
-//                let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
-//                gesture.cancelsTouchesInView = false
-//                maskView.addGestureRecognizer(gesture)
-//
-//                let method: GATEWAY = GATEWAY.stringToEnum(orderTable!.gateway!.method)
-//                if (method == GATEWAY.ATM) {
-//                    let bank_code: String = orderTable!.gateway!.bank_code
-//                    let bank_account: String = orderTable!.gateway!.bank_account
-//                    let expire_at: String = orderTable!.gateway!.expire_at_show
-//                    popupRows = [
-//                        [TITLE_KEY:"銀行代號",KEY_KEY:BANK_CODE_KEY,VALUE_KEY:bank_code,SHOW_KEY:bank_code,CELL_KEY:"text"],
-//                        [TITLE_KEY:"銀行帳號",KEY_KEY:BANK_ACCOUNT_KEY,VALUE_KEY:bank_account,SHOW_KEY:bank_account,CELL_KEY:"text"],
-//                        [TITLE_KEY:"到期日",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:expire_at,SHOW_KEY:expire_at,CELL_KEY:"text"]
-//                    ]
-//                } else if (method == GATEWAY.store_cvs) {
-//                    let payment_no: String = orderTable!.gateway!.payment_no
-//                    let expire_at: String = orderTable!.gateway!.expire_at_show
-//                    popupRows = [
-//                        [TITLE_KEY:"繳款代碼",KEY_KEY:PAYMENT_NO_KEY,VALUE_KEY:payment_no,SHOW_KEY:payment_no,CELL_KEY:"text"],
-//                        [TITLE_KEY:"到期日",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:expire_at,SHOW_KEY:expire_at,CELL_KEY:"text"]
-//                    ]
-//                } else if (method == GATEWAY.store_barcode) {
-//                    let barcode1: String = orderTable!.gateway!.barcode1
-//                    let barcode2: String = orderTable!.gateway!.barcode2
-//                    let barcode3: String = orderTable!.gateway!.barcode3
-//                    let expire_at: String = orderTable!.gateway!.expire_at_show
-//                    popupRows = [
-//                        [TITLE_KEY:"繳款條碼1",KEY_KEY:BARCODE1_KEY,VALUE_KEY:barcode1,SHOW_KEY:barcode1,CELL_KEY:"barcode"],
-//                        [TITLE_KEY:"繳款條碼2",KEY_KEY:BARCODE2_KEY,VALUE_KEY:barcode2,SHOW_KEY:barcode2,CELL_KEY:"barcode"],
-//                        [TITLE_KEY:"繳款條碼3",KEY_KEY:BARCODE3_KEY,VALUE_KEY:barcode3,SHOW_KEY:barcode3,CELL_KEY:"barcode"],
-//                        [TITLE_KEY:"到期日",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:expire_at,SHOW_KEY:expire_at,CELL_KEY:"text"]
-//                    ]
-//                } else if (method == GATEWAY.credit_card) {
-//                    let card6No: String = orderTable!.gateway!.card6No
-//                    let card4No: String = orderTable!.gateway!.card4No
-//                    popupRows = [
-//                        [TITLE_KEY:"信用卡前6碼",KEY_KEY:PAYMENT_NO_KEY,VALUE_KEY:card6No,SHOW_KEY:card6No,CELL_KEY:"text"],
-//                        [TITLE_KEY:"信用卡後4碼",KEY_KEY:EXPIRE_AT_KEY,VALUE_KEY:card4No,SHOW_KEY:card4No,CELL_KEY:"text"]
-//                    ]
-//                }
-//
-//                popupTableView.reloadData()
-//            }
-//        }
     }
     
     @objc func panelCancelAction(){

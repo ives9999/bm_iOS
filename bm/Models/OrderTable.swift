@@ -72,6 +72,7 @@ class OrderTable: Table {
     var gateway: GatewayTable?
     var shipping: ShippingTable?
     var productTable: ProductTable?
+    var `return`: ReturnTable?
     
     var items: [OrderItemTable] = [OrderItemTable]()
 //    var order_clothes: [OrderClothesTable] = [OrderClothesTable]()
@@ -102,7 +103,7 @@ class OrderTable: Table {
     //var shipping_at_show: String = "準備中"
     
     var invoice_type_show: String = ""
-    var is_back: Bool = false
+    var canReturn: Bool = false
     
     enum CodingKeys: String, CodingKey {
         case order_no
@@ -144,6 +145,7 @@ class OrderTable: Table {
         case gateway
         case shipping
         case product
+        case `return`
         
         case items
 //        case order_clothes
@@ -210,6 +212,7 @@ class OrderTable: Table {
         invoice_company_name = try container.decodeIfPresent(String.self, forKey: .invoice_company_name) ?? ""
         invoice_company_tax = try container.decodeIfPresent(String.self, forKey: .invoice_company_tax) ?? ""
         order_address = try container.decodeIfPresent(String.self, forKey: .order_address) ?? ""
+        `return` = try container.decodeIfPresent(ReturnTable.self, forKey: .`return`) ?? nil
     }
     
     override func filterRow() {
@@ -217,6 +220,7 @@ class OrderTable: Table {
         super.filterRow()
         gateway?.filterRow()
         shipping?.filterRow()
+        `return`?.filterRow()
         
         if productTable != nil {
             product_name = productTable!.name
@@ -266,8 +270,24 @@ class OrderTable: Table {
         
         order_tel_show = order_tel.mobileShow()
         
-        complete_at
-        all_process
+        if all_process == 6 {
+            var return_expire_date: Date = Date()
+            if complete_at.count > 0 {
+                let tmp: String = complete_at.noTime() + " 00:00:00"
+                if let c: Date = tmp.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
+                    if let a: Date = Calendar.current.date(byAdding: .day, value: 10, to: c) {
+                        return_expire_date = a
+                    }
+                }
+            }
+            
+            if Date().isSmallerThan(return_expire_date) {
+                canReturn = true
+            }
+        } else {
+            canReturn = false
+        }
+        
     }
     
     private func makeAttributes()-> String {
