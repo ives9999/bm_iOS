@@ -337,6 +337,8 @@
 		F9F583AE283518C400F77B00 /* BottomThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F583AD283518C400F77B00 /* BottomThreeView.swift */; };
 		F9F583B0283518DF00F77B00 /* BottomThreeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9F583AF283518DF00F77B00 /* BottomThreeView.xib */; };
 		F9F583B2283533C500F77B00 /* ThreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F583B1283533C500F77B00 /* ThreeButton.swift */; };
+		F9F804802844F248006FC509 /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F8047E2844F248006FC509 /* DefaultCell.swift */; };
+		F9F804812844F248006FC509 /* DefaultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9F8047F2844F248006FC509 /* DefaultCell.xib */; };
 		F9FA3C3627E32A3B0094C773 /* _tab_search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FA3C3527E32A3B0094C773 /* _tab_search.swift */; };
 		F9FA3C3C27E4C60C0094C773 /* tab_search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FA3C3B27E4C60C0094C773 /* tab_search.swift */; };
 		F9FA3C3E27E4CC100094C773 /* _tab_search.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9FA3C3D27E4CC100094C773 /* _tab_search.xib */; };
@@ -750,6 +752,8 @@
 		F9F583AD283518C400F77B00 /* BottomThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomThreeView.swift; sourceTree = "<group>"; };
 		F9F583AF283518DF00F77B00 /* BottomThreeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomThreeView.xib; sourceTree = "<group>"; };
 		F9F583B1283533C500F77B00 /* ThreeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeButton.swift; sourceTree = "<group>"; };
+		F9F8047E2844F248006FC509 /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
+		F9F8047F2844F248006FC509 /* DefaultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultCell.xib; sourceTree = "<group>"; };
 		F9FA3C3527E32A3B0094C773 /* _tab_search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _tab_search.swift; sourceTree = "<group>"; };
 		F9FA3C3B27E4C60C0094C773 /* tab_search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tab_search.swift; sourceTree = "<group>"; };
 		F9FA3C3D27E4CC100094C773 /* _tab_search.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = _tab_search.xib; sourceTree = "<group>"; };
@@ -873,6 +877,8 @@
 				B3756EE721B96B96006893E1 /* ColorSelectCell.xib */,
 				B3C49532262AC2C000D4F727 /* CourseListCell.swift */,
 				B3C49533262AC2C000D4F727 /* CourseListCell.xib */,
+				F9F8047E2844F248006FC509 /* DefaultCell.swift */,
+				F9F8047F2844F248006FC509 /* DefaultCell.xib */,
 				B35C4F4A2196F5E500F8AEB2 /* EditCell.swift */,
 				B35C4F4B2196F5E500F8AEB2 /* EditCell.xib */,
 				B306FEAB21F8422B00403FE2 /* IconCell.swift */,
@@ -962,17 +968,17 @@
 			isa = PBXGroup;
 			children = (
 				B3DEBE17210CB30E003699A0 /* ArenaService.swift */,
+				B370EFB126A849120022E599 /* CartService.swift */,
 				B3DEBE13210781FD003699A0 /* CoachService.swift */,
 				B36D66BA229A580E00502D62 /* CourseService.swift */,
 				B32FBCF71F849AA7003D39CC /* DataService.swift */,
 				B3E72A271FA20D280008A6B1 /* MemberService.swift */,
+				B3B758F225BB08CB006ACC33 /* OrderService.swift */,
+				B3B75868259CBB27006ACC33 /* ProductService.swift */,
+				B320004E254305410061442D /* StoreService.swift */,
 				B32D9EE521106C5F00999A4A /* TeachService.swift */,
 				B3ED38E91FB87EE50003F083 /* TeamService.swift */,
 				B306FEA921F7446F00403FE2 /* TimetableService.swift */,
-				B320004E254305410061442D /* StoreService.swift */,
-				B3B75868259CBB27006ACC33 /* ProductService.swift */,
-				B3B758F225BB08CB006ACC33 /* OrderService.swift */,
-				B370EFB126A849120022E599 /* CartService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1575,6 +1581,7 @@
 				B3756EF321BA7567006893E1 /* StatusSelectCell.xib in Resources */,
 				B3756EE321B95974006893E1 /* ColorCell.xib in Resources */,
 				B30B584E26C8FA080065681F /* BarcodeCell.xib in Resources */,
+				F9F804812844F248006FC509 /* DefaultCell.xib in Resources */,
 				B3B758BF25AC6134006ACC33 /* ClothesSizeCell.xib in Resources */,
 				B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */,
 				B3C49535262AC2C100D4F727 /* CourseListCell.xib in Resources */,
@@ -1914,6 +1921,7 @@
 				B322F80A1FC6AD1800DE98FB /* MenuCell.swift in Sources */,
 				B3310D8C22AA28260062EF98 /* CycleUnitFormItem.swift in Sources */,
 				B35C4F4C2196F5E500F8AEB2 /* EditCell.swift in Sources */,
+				F9F804802844F248006FC509 /* DefaultCell.swift in Sources */,
 				B31739EF21787960004CFEDE /* MyMapVC.swift in Sources */,
 				B3F6B456260500650000F9E0 /* SignupCancelTable.swift in Sources */,
 				B36CBD5920E13F7A00E52B9C /* TempPlayDatePlayerCell.swift in Sources */,
@@ -2083,7 +2091,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2108,7 +2116,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2267,7 +2275,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
@@ -2299,7 +2307,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.1.0;
+				MARKETING_VERSION = 2.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";

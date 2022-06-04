@@ -269,7 +269,10 @@ class PaymentVC: MyTableVC {
         
         var params: [String: String] = ["token": order_token, "member_token": Member.instance.token,"do":"update"]
         
-        //目前的寫法，只有不使用信用卡付款，才會呼叫這個函式，所以order process不用更改
+        //1.信用卡回傳，(1)刷卡時間，(2)處理費，(3)信用卡前6碼，(4)信用卡後4碼
+        //2.超商代碼回傳，(1)代碼，(2)代碼檢視網址
+        //3.barcode已經停止使用
+        //4.虛擬匯款帳號，(1)銀行代號，(2)銀行帳號
         params["gateway_process"] = GATEWAY_PROCESS.code.enumToString()
         params["expire_at"] = expire_at
         params["trade_no"] = trade_no
@@ -385,7 +388,7 @@ class PaymentVC: MyTableVC {
         rows.append(row)
         row = OneRow(title: "付款狀態", value: orderTable!.gateway!.process, show: orderTable!.gateway!.process_show, key: GATEWAY_PROCESS_KEY, cell: "text")
         rows.append(row)
-        row = OneRow(title: "付款時間", value: orderTable!.gateway!.gateway_at, show: orderTable!.gateway!.gateway_at_show, key: GATEWAY_AT_KEY, cell: "text")
+        row = OneRow(title: "付款時間", value: orderTable!.gateway!.complete_at, show: orderTable!.gateway!.complete_at_show, key: GATEWAY_AT_KEY, cell: "text")
         rows.append(row)
         section = makeSectionRow(title: "付款方式", key: GATEWAY_KEY, rows: rows)
         oneSections.append(section)

@@ -145,10 +145,78 @@ class ProductVC: MyTableVC {
     override func cellCity(row: Table) {
         //print(indexPath!.row)
         
-        toAddCart(
-            product_token: row.token,
-            login: { vc in vc.toLogin() },
-            register: { vc in vc.toRegister() }
-        )
+        if let row1: ProductTable = row as? ProductTable {
+            let type: String = row1.type
+            if type == "code" {
+                toOrder(
+                    login: { vc in vc.toLogin() },
+                    register: { vc in vc.toRegister() },
+                    product_token: row.token
+                )
+
+//                var params: [String: String] = [String: String]()
+//
+//                params["device"] = "app"
+//                params["do"] = "update"
+//                params["member_token"] = Member.instance.token
+//                params["product_id"] = String(row1.id)
+//                params["price_id"] = String(row1.prices[0].id)
+//                params["member_id"] = String(Member.instance.id)
+//                params[QUANTITY_KEY] = getOneRowValue(QUANTITY_KEY)
+//                params[AMOUNT_KEY] = getOneRowValue(TOTAL_KEY)
+//
+//                //是否有選擇商品屬性
+//                var isAttribute: Bool = true
+//
+//                var selected_attributes: [String] = [String]()
+//                //let attributes: [[String: String]] = myRows[1]["rows"] as! [[String: String]]
+//                let rows: [OneRow] = getOneRowsFromSectionKey("attribute")
+//
+//                for row in rows {
+//
+//                    if (row.value.count == 0) {
+//                        isAttribute = false
+//                        warning("請先選擇\(row.title)")
+//                    } else {
+//                        let value: String = "{name:\(row.title),alias:\(row.key),value:\(row.value)}"
+//                        selected_attributes.append(value)
+//                    }
+//                }
+//
+//                if (isAttribute) {
+//
+//                    Global.instance.addSpinner(superView: self.view)
+//                    params["attribute"] = selected_attributes.joined(separator: "|")
+//                    print(params)
+//
+//                    CartService.instance.update(params: params) { (success) in
+//                        Global.instance.removeSpinner(superView: self.view)
+//                        if success {
+//                            var msg: String = ""
+////                            if (self.cartItem_token == nil) {
+////                                msg = "成功加入購物車了"
+////                                self.cartItemCount += 1
+////                                self.session.set("cartItemCount", self.cartItemCount)
+////                            } else {
+////                                msg = "已經更新購物車了"
+////                            }
+//                            //self.info(msg)
+//                            self.info(msg: msg, showCloseButton: false, buttonTitle: "關閉") {
+//                                self.toMemberCartList()
+//                            }
+//                        } else {
+//                            self.warning(CartService.instance.msg)
+//                        }
+//                    }
+//                }
+            } else {
+                
+                toAddCart(
+                    product_token: row.token,
+                    login: { vc in vc.toLogin() },
+                    register: { vc in vc.toRegister() }
+                )
+            }
+        }
     }
 }

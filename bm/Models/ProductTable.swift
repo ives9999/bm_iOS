@@ -26,6 +26,7 @@ class ProductsTable: Tables {
 class ProductTable: Table {
     
     var type: String = ""
+    var coin: Int = 0
     var color: String = ""
     var size: String = ""
     var weight: String = ""
@@ -49,6 +50,7 @@ class ProductTable: Table {
     
     enum CodingKeys: String, CodingKey {
         case type
+        case coin
         case color
         case size
         case weight
@@ -94,6 +96,7 @@ class ProductTable: Table {
         
         attributes = try container.decodeIfPresent([ProductAttributeTable].self, forKey: .attributes) ?? [ProductAttributeTable]()
         cart_token = try container.decodeIfPresent(String.self, forKey: .cart_token) ?? ""
+        coin = try container.decodeIfPresent(Int.self, forKey: .coin) ?? 0
     }
     
     override func filterRow() {

@@ -162,11 +162,10 @@ class OrderTable: Table {
         do {order_no = try container.decode(String.self, forKey: .order_no)}catch{order_no=""}
         do {product_id = try container.decode(Int.self, forKey: .product_id)}catch{product_id = -1}
         do {member_id = try container.decode(Int.self, forKey: .member_id)}catch{member_id = -1}
-        do {shipping_fee = try container.decode(Int.self, forKey: .shipping_fee)}catch{shipping_fee = -1}
+        do {shipping_fee = try container.decode(Int.self, forKey: .shipping_fee)}catch{shipping_fee = 0}
         do {quantity = try container.decode(Int.self, forKey: .quantity)}catch{quantity = -1}
         do {amount = try container.decode(Int.self, forKey: .amount)}catch{amount = -1}
-        do {shipping_fee = try container.decode(Int.self, forKey: .shipping_fee)}catch{shipping_fee = -1}
-        do {tax = try container.decode(Int.self, forKey: .tax)}catch{tax = -1}
+        do {tax = try container.decode(Int.self, forKey: .tax)}catch{tax = 0}
         do {order_name = try container.decode(String.self, forKey: .order_name)}catch{order_name = ""}
         do {order_tel = try container.decode(String.self, forKey: .order_tel)}catch{order_tel = ""}
         do {order_email = try container.decode(String.self, forKey: .order_email)}catch{order_email = ""}
@@ -477,12 +476,12 @@ class GatewayTable: Table {
     var barcode3: String = ""
     var bank_code: String = ""
     var bank_account: String = ""
-    var gateway_at: String = ""
+    var complete_at: String = ""
     var expire_at: String = ""
     
     var method_show: String = ""
     var process_show: String = ""
-    var gateway_at_show: String = "未付款"
+    var complete_at_show: String = "未付款"
     var expire_at_show: String = ""
     
     enum CodingKeys: String, CodingKey {
@@ -499,7 +498,7 @@ class GatewayTable: Table {
         case barcode3
         case bank_code
         case bank_account
-        case gateway_at
+        case complete_at
         case expire_at
     }
     
@@ -520,7 +519,7 @@ class GatewayTable: Table {
         barcode3 = try container.decodeIfPresent(String.self, forKey: .barcode3) ?? ""
         bank_code = try container.decodeIfPresent(String.self, forKey: .bank_code) ?? ""
         bank_account = try container.decodeIfPresent(String.self, forKey: .bank_account) ?? ""
-        gateway_at = try container.decodeIfPresent(String.self, forKey: .gateway_at) ?? ""
+        complete_at = try container.decodeIfPresent(String.self, forKey: .complete_at) ?? ""
         expire_at = try container.decodeIfPresent(String.self, forKey: .expire_at) ?? ""
     }
     
@@ -529,7 +528,7 @@ class GatewayTable: Table {
         super.filterRow()
         method_show = GATEWAY.getRawValueFromString(method)
         process_show = GATEWAY_PROCESS.getRawValueFromString(process)
-        gateway_at_show = gateway_at.noSec()
+        complete_at_show = complete_at.noSec()
         expire_at_show = expire_at.noSec()
     }
 }

@@ -554,6 +554,7 @@ enum ORDER_PROCESS: String {
     case normal = "訂單成立"
     case gateway = "完成付款"
     case shipping = "出貨中"
+    case store = "送達超商"
     case complete = "完成取貨"
     case returning = "商品退回中"
     case `return` = "商品已退回"
@@ -566,6 +567,8 @@ enum ORDER_PROCESS: String {
             return "gateway"
         case .shipping:
             return "shipping"
+        case .store:
+            return "store"
         case .complete:
             return "complete"
         case .returning:
@@ -583,6 +586,8 @@ enum ORDER_PROCESS: String {
             return .gateway
         case "shipping":
             return .shipping
+        case "store":
+            return .store
         case "complete":
             return .complete
         case "returning":
@@ -675,6 +680,7 @@ enum GATEWAY: String {
     case ATM = "虛擬帳戶"
     case remit = "匯款"
     case cash = "現金"
+    case coin = "解碼幣"
     
     static func stringToEnum(_ enumString: String) -> GATEWAY {
         switch enumString {
@@ -694,6 +700,8 @@ enum GATEWAY: String {
             return .remit
         case "cash":
             return .cash
+        case "coin":
+            return .coin
         default:
             return .credit_card
         }
@@ -738,6 +746,7 @@ enum GATEWAY_PROCESS: String {
     case normal = "未付款"    //未付款，就是這個normal的 raw value
     case code = "取得付款代碼"
     case complete = "完成付款"
+    case fail = "付款失敗"
     
     static func stringToEnum(_ enumString: String) -> GATEWAY_PROCESS {
         switch enumString {
@@ -747,6 +756,8 @@ enum GATEWAY_PROCESS: String {
             return .code
         case "complete":
             return .complete
+        case "fail":
+            return .fail
         default:
             return .normal
         }
@@ -760,6 +771,8 @@ enum GATEWAY_PROCESS: String {
             return "code"
         case .complete:
             return "complete"
+        case .fail:
+            return "fail"
         }
     }
     

@@ -46,40 +46,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         OneRow(title: "EMail", value: "\(Member.instance.email)", show: "\(Member.instance.email)", key: INVOICE_EMAIL_KEY, cell: "textField")
     ]
     
-//    var productRows: [[String: String]] = []
-//
-//    var amountRows: [[String: String]] = []
-//
-//    var gatewayRows: [[String: String]] = []
-//
-//    var shippingRows: [[String: String]] = []
-    
     var invoiceRows: [OneRow] = []
-    
-//    var invoiceFixedRows: [[String: String]] = [
-//        ["title": "發票(本商城目前僅提供電子發票)","key":INVOICE_KEY,"value":"","show":"","cell":"more"]
-//    ]
-//
-//    var invoiceOptionRows: [[String: String]] = [
-//        ["title": "個人","key":PERSONAL_KEY,"value":"true","show":"","cell":"radio"],
-//        ["title": "公司","key":COMPANY_KEY,"value":"false","show":"","cell":"radio"]
-//    ]
-//
-//    let invoicePersonalRows: [[String: String]] = [
-//        ["title":"EMail","key":INVOICE_EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
-//    ]
-//
-//    let invoiceCompanyRows: [[String: String]] = [
-//        ["title":"統一編編","key":INVOICE_COMPANY_TAX_KEY,"value":"","show":"","cell":"textField"],
-//        ["title":"公司行號抬頭","key":INVOICE_COMPANY_NAME_KEY,"value":"","show":"","cell":"textField"],
-//        ["title":"EMail","key":INVOICE_EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"]
-//    ]
-    
-//    var memberRows: [[String: String]] = []
-//
-//    let memoRows: [[String: String]] = [
-//        ["title": "留言","key":MEMO_KEY,"value":"","show":"","cell":"memo"]
-//    ]
     
     var invoiceTable: UITableView = {
         let cv = UITableView(frame: .zero, style: .plain)
@@ -125,6 +92,15 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         let moreNib = UINib(nibName: "MoreCell", bundle: nil)
         tableView.register(moreNib, forCellReuseIdentifier: "MoreCell")
         
+        let tagNib = UINib(nibName: "TagCell", bundle: nil)
+        tableView.register(tagNib, forCellReuseIdentifier: "TagCell")
+        
+        let numberNib = UINib(nibName: "NumberCell", bundle: nil)
+        tableView.register(numberNib, forCellReuseIdentifier: "NumberCell")
+        
+        let defaultNib = UINib(nibName: "DefaultCell", bundle: nil)
+        tableView.register(defaultNib, forCellReuseIdentifier: "DefaultCell")
+        
         refresh()
     }
     
@@ -138,46 +114,61 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     override func getDataStart(token: String? = nil, page: Int = 1, perPage: Int = PERPAGE) {
 
         Global.instance.addSpinner(superView: view)
-
-        CartService.instance.getList(token: Member.instance.token, _filter: params, page: page, perPage: perPage) { (success) in
-            if (success) {
-
-                do {
-                    if (CartService.instance.jsonData != nil) {
-                        self.jsonData = CartService.instance.jsonData
-                        try self.tables = JSONDecoder().decode(CartsTable.self, from: self.jsonData!)
-                        if (self.tables != nil) {
-                            self.getDataEnd(success: success)
+        
+        //單一品項購買，沒有使用購物車，直接結帳
+        if product_token != nil {
+            
+            let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
+            ProductService.instance.getOne(params: params) { (success) in
+                if (success) {
+                    do {
+                        if (ProductService.instance.jsonData != nil) {
+                            self.jsonData = ProductService.instance.jsonData
+                            try self.productTable = JSONDecoder().decode(ProductTable.self, from: self.jsonData!)
+                            if (self.productTable != nil) {
+                                self.getDataEnd(success: success)
+                            }
                         }
-                    } else {
-                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
                     }
-                } catch {
-                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    
+                    //self.initData()
                 }
+                Global.instance.removeSpinner(superView: self.view)
+                self.endRefresh()
+            }
+            
+        } else {
 
-                Global.instance.removeSpinner(superView: self.view)
-            } else {
-                Global.instance.removeSpinner(superView: self.view)
-                self.warning(self.dataService.msg)
+            CartService.instance.getList(token: Member.instance.token, _filter: params, page: page, perPage: perPage) { (success) in
+                if (success) {
+
+                    do {
+                        if (CartService.instance.jsonData != nil) {
+                            self.jsonData = CartService.instance.jsonData
+                            try self.tables = JSONDecoder().decode(CartsTable.self, from: self.jsonData!)
+                            if (self.tables != nil) {
+                                self.getDataEnd(success: success)
+                            }
+                        } else {
+                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                        }
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    }
+
+                    Global.instance.removeSpinner(superView: self.view)
+                } else {
+                    Global.instance.removeSpinner(superView: self.view)
+                    self.warning(self.dataService.msg)
+                }
             }
         }
-
-//        let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
-//        ProductService.instance.getOne(params: params) { (success) in
-//            if (success) {
-//                let table: Table = ProductService.instance.table!
-//                self.productTable = (table as! ProductTable)
-//                //self.superProduct!.printRow()
-//
-//                self.initData()
-//            }
-//            Global.instance.removeSpinner(superView: self.view)
-//            self.endRefresh()
-//        }
     }
     
     override func genericTable() {
+        
         do {
             if (jsonData != nil) {
                 cartsTable = try JSONDecoder().decode(CartsTable.self, from: jsonData!)
@@ -188,15 +179,28 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             msg = "解析JSON字串時，得到空值，請洽管理員"
         }
         
-        if cartsTable == nil {
-            warning("購物車中無商品，或購物車超過一個錯誤，請洽管理員")
-        } else {
+        var amount: Int = 0
+        if productTable != nil {
+            amount += productTable!.prices[0].price_member
+            
+            for attribute in productTable!.attributes {
+                var tmp: String = attribute.attribute
+                tmp = tmp.replace(target: "{", withString: "")
+                tmp = tmp.replace(target: "}", withString: "")
+                tmp = tmp.replace(target: "\"", withString: "")
+                
+                //print(arr)
+                let row = ["title":attribute.name,"key":attribute.alias,"value":"","show":tmp,"cell":"tag"]
+                //attributeRows.append(row)
+            }
+        } else if cartsTable != nil {
+        
             if (cartsTable!.rows.count != 1) {
                 warning("購物車中無商品，或購物車超過一個錯誤，請洽管理員")
             } else {
                 
                 //product cell
-                var amount: Int = 0
+                
                 cartTable = cartsTable!.rows[0]
                 cartItemsTable = cartTable!.items
                 for cartItemTable in cartItemsTable {
@@ -216,64 +220,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                             }
                         }
                     }
-                    
-//                    let row:[String: String] = ["title":productTable!.name,"key":PRODUCT_KEY,"value":"","show":"","cell":"cart","featured_path":productTable!.featured_path,"attribute":attribute_text,"amount":cartItemTable.amount_show,"quantity":String(cartItemTable.quantity)]
-//                    productRows.append(row)
                 }
-                
-                //price
-//                let amount_show: String = amount.formattedWithSeparator
-//                var row:[String: String] = ["title":"商品金額","key":"amount","value":String(amount),"show":"NT$ \(amount_show)","cell":"text"]
-//                amountRows.append(row)
-                
-                //var shipping_fee: Int = 60
-//                var shipping_fee: Int = 0
-//                if (amount > 1000) { shipping_fee = 0}
-//                let shipping_fee_show: String = shipping_fee.formattedWithSeparator
-//                row = ["title":"運費","key":SHIPPING_FEE_KEY,"value":String(shipping_fee),"show":"NT$ \(shipping_fee_show)","cell":"text"]
-//                amountRows.append(row)
-                
-                //let tax: Int = Int(Double(amount) * 0.05)
-//                let tax: Int = 0
-//                let tax_show: String = tax.formattedWithSeparator
-//                row = ["title":"稅","key":TAX_KEY,"value":String(tax),"show":"NT$ \(tax_show)","cell":"text"]
-//                amountRows.append(row)
-                
-//                let total: Int = amount + shipping_fee + tax
-//                let total_show: String = total.formattedWithSeparator
-//                row = ["title":"總金額","key":TOTAL_KEY,"value":String(total),"show":"NT$ \(total_show)","cell":"text"]
-//                amountRows.append(row)
-                
-                //gateway
-//                let gateway: String = productTable!.gateway
-//                var arr: [String] = gateway.components(separatedBy: ",")
-//                for tmp in arr {
-//                    let title: String = GATEWAY.getRawValueFromString(tmp)
-//                    var value: String = "false"
-//                    if (tmp == "credit_card") {
-//                        value = "true"
-//                    }
-//                    let row: [String: String] = ["title":title,"key":tmp,"value":value,"show":title,"cell":"radio"]
-//                    gatewayRows.append(row)
-//                }
-                
-//                let shipping: String = productTable!.shipping
-//                arr = shipping.components(separatedBy: ",")
-//                for tmp in arr {
-//                    let title: String = SHIPPING_WAY.getRawValueFromString(tmp)
-//                    var value: String = "false"
-//                    if (tmp == "direct") {
-//                        value = "true"
-//                    }
-//                    let row: [String: String] = ["title":title,"key":tmp,"value":value,"show":title,"cell":"radio"]
-//                    shippingRows.append(row)
-//                }
-                
-                
-                initData()
             }
         }
-        
+        initData()
     }
     
     override func getDataEnd(success: Bool) {
@@ -294,99 +244,136 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     func initData() {
         
-//        mySections = [
-//            ["name": "商品", "isExpanded": true, "key": PRODUCT_KEY],
-//            ["name": "金額", "isExpanded": true, "key": AMOUNT_KEY],
-//            ["name": "付款方式", "isExpanded": true, "key": GATEWAY_KEY],
-//            ["name": "寄送方式", "isExpanded": true, "key": SHIPPING_KEY],
-//            ["name": "電子發票", "isExpanded": true, "key": INVOICE_KEY],
-//            ["name": "收件人資料", "isExpanded": true, "key": MEMBER_KEY],
-//            ["name": "其他留言", "isExpanded": true, "key": MEMO_KEY]
-//        ]
-//
-//        memberRows = [
-//            ["title":"姓名","key":NAME_KEY,"value":"\(Member.instance.name)","show":"\(Member.instance.name)","cell":"textField"],
-//            ["title":"電話","key":MOBILE_KEY,"value":"\(Member.instance.mobile)","show":"\(Member.instance.mobile)","cell":"textField"],
-//            ["title":"EMail","key":EMAIL_KEY,"value":"\(Member.instance.email)","show":"\(Member.instance.email)","cell":"textField"],
-//            ["title":"住址","key":ADDRESS_KEY,"value":"\(Member.instance.address)","show":"\(Member.instance.address)","cell":"textField"]
-//        ]
-//
-//        for invoiceFixedRow in invoiceFixedRows {
-//
-//            invoiceRows.append(invoiceFixedRow)
-//        }
-//
-//        for invoicePersonalRow in invoicePersonalRows {
-//
-//            invoiceRows.append(invoicePersonalRow)
-//        }
-//
-//        myRows = [
-//            ["key":PRODUCT_KEY, "rows": productRows],
-//            ["key":AMOUNT_KEY, "rows": amountRows],
-//            ["key":GATEWAY_KEY, "rows": gatewayRows],
-//            ["key":SHIPPING_KEY, "rows": shippingRows],
-//            ["key":INVOICE_KEY, "rows": invoiceRows],
-//            ["key":MEMBER_KEY, "rows": memberRows],
-//            ["key":MEMO_KEY, "rows": memoRows]
-//        ]
-        
         var amount: Int = 0
         var rows: [OneRow] = [OneRow]()
+        var needShipping: Bool = true
         
-        for cartItemTable in cartItemsTable {
-            
-            cartItemTable.filterRow()
-            amount += cartItemTable.amount
-            productTable = cartItemTable.product
-            
-            var attribute_text: String = ""
-            if (cartItemTable.attributes.count > 0) {
+        var section = makeSectionRow()
+        var row = OneRow()
+        
+        if (cartItemsTable.count > 0) {
+        
+            rows.removeAll()
+            for cartItemTable in cartItemsTable {
                 
-                for (idx, attribute) in cartItemTable.attributes.enumerated() {
-                    attribute_text += attribute["name"]! + ":" + attribute["value"]!
-                    if (idx < cartItemTable.attributes.count - 1) {
-                        attribute_text += " | "
+                cartItemTable.filterRow()
+                amount += cartItemTable.amount
+                productTable = cartItemTable.product
+                
+                var attribute_text: String = ""
+                if (cartItemTable.attributes.count > 0) {
+                    
+                    for (idx, attribute) in cartItemTable.attributes.enumerated() {
+                        attribute_text += attribute["name"]! + ":" + attribute["value"]!
+                        if (idx < cartItemTable.attributes.count - 1) {
+                            attribute_text += " | "
+                        }
                     }
+                }
+                
+                row = OneRow(title: productTable!.name, key: PRODUCT_KEY, cell: "cart")
+                row.featured_path = productTable!.featured_path
+                row.attribute = attribute_text
+                row.amount = cartItemTable.amount_show
+                row.quantity = String(cartItemTable.quantity)
+                
+                rows.append(row)
+            }
+            section = makeSectionRow(title: "商品選項", key: PRODUCT_KEY, rows: rows)
+            oneSections.append(section)
+            
+            //price
+            rows.removeAll()
+            let amount_show: String = amount.formattedWithSeparator
+            row = OneRow(title: "商品金額", value: String(amount), show: "NT$ \(amount_show)", key: AMOUNT_KEY, cell: "text")
+            rows.append(row)
+            
+            var shipping_fee: Int = 0
+            if (amount > 1000) {shipping_fee = 0}
+            let shipping_fee_show: String = shipping_fee.formattedWithSeparator
+            row = OneRow(title: "運費", value: String(shipping_fee), show: "NT$ \(shipping_fee_show)", key: SHIPPING_FEE_KEY, cell: "text")
+            rows.append(row)
+            
+            let tax: Int = 0
+            let tax_show: String = tax.formattedWithSeparator
+            row = OneRow(title: "税", value: String(tax), show: "NT$ \(tax_show)", key: TAX_KEY, cell: "text")
+            rows.append(row)
+            
+            let total: Int = amount + shipping_fee + tax
+            let total_show: String = total.formattedWithSeparator
+            row = OneRow(title: "總金額", value: String(total), show: "NT$ \(total_show)", key: TOTAL_KEY, cell: "text")
+            rows.append(row)
+            
+            section = makeSectionRow(title: "金額", key: AMOUNT_KEY, rows: rows)
+            oneSections.append(section)
+        } else if (productTable != nil) {
+            productTable!.filterRow()
+            amount += productTable!.prices[0].price_member
+            if (productTable!.type == "code") {
+                needShipping = false
+            }
+            
+            row = OneRow(title: productTable!.name, key: PRODUCT_KEY, cell: "default")
+            row.featured_path = productTable!.featured_path
+            //row.attribute = attribute_text
+            row.amount = "NT$" + String(amount)
+            row.quantity = "1"
+            
+            rows.append(row)
+            section = makeSectionRow(title: "商品選項", key: PRODUCT_KEY, rows: rows)
+            oneSections.append(section)
+            
+            if productTable!.attributes.count > 0 {
+                rows.removeAll()
+                for attribute in productTable!.attributes {
+                    var tmp: String = attribute.attribute
+                    tmp = tmp.replace(target: "{", withString: "")
+                    tmp = tmp.replace(target: "}", withString: "")
+                    tmp = tmp.replace(target: "\"", withString: "")
+                    
+                    //show is 湖水綠,極致黑,經典白,太空灰
+                    //name is 顏色
+                    //key is color
+                    var value: String = ""
+                    let alias: String = attribute.alias
+                    
+                    row = OneRow(title: attribute.name, value: value, show: tmp, key: alias, cell: "tag")
+                    rows.append(row)
+                    //let row = ["title":attribute.name,"key":alias,"value":value,"show":tmp,"cell":"tag"]
+                    //attributeRows.append(row)
                 }
             }
             
-            let row = OneRow(title: productTable!.name, key: PRODUCT_KEY, cell: "cart")
-            row.featured_path = productTable!.featured_path
-            row.attribute = attribute_text
-            row.amount = cartItemTable.amount_show
-            row.quantity = String(cartItemTable.quantity)
+//            var attribute_text: String = ""
+//            if (cartItemTable.attributes.count > 0) {
+//
+//                for (idx, attribute) in cartItemTable.attributes.enumerated() {
+//                    attribute_text += attribute["name"]! + ":" + attribute["value"]!
+//                    if (idx < cartItemTable.attributes.count - 1) {
+//                        attribute_text += " | "
+//                    }
+//                }
+//            }
             
+            rows.removeAll()
+            let min: String = String(productTable!.order_min)
+            let max: String = String(productTable!.order_max)
+            let quantity: String = "1"
+            row = OneRow(title: "數量", value: quantity, show: "\(min),\(max)", key: QUANTITY_KEY, cell: "number")
             rows.append(row)
+            row = OneRow(title: "小計", value: "", show: "", key: SUBTOTAL_KEY, cell: "text")
+            rows.append(row)
+            row = OneRow(title: "總計", value: "", show: "", key: TOTAL_KEY, cell: "text")
+            rows.append(row)
+            
+            section = makeSectionRow(title: "款項", key: AMOUNT_KEY, rows: rows)
+            oneSections.append(section)
+            
+            selected_price = productTable!.prices[selected_idx].price_member
+            updateSubTotal()
         }
-        
-        var section = makeSectionRow(title: "商品", key: PRODUCT_KEY, rows: rows)
-        oneSections.append(section)
-        
-        //price
-        rows.removeAll()
-        let amount_show: String = amount.formattedWithSeparator
-        var row = OneRow(title: "商品金額", value: String(amount), show: "NT$ \(amount_show)", key: AMOUNT_KEY, cell: "text")
-        rows.append(row)
-        
-        var shipping_fee: Int = 0
-        if (amount > 1000) {shipping_fee = 0}
-        let shipping_fee_show: String = shipping_fee.formattedWithSeparator
-        row = OneRow(title: "運費", value: String(shipping_fee), show: "NT$ \(shipping_fee_show)", key: SHIPPING_FEE_KEY, cell: "text")
-        rows.append(row)
-        
-        let tax: Int = 0
-        let tax_show: String = tax.formattedWithSeparator
-        row = OneRow(title: "税", value: String(tax), show: "NT$ \(tax_show)", key: TAX_KEY, cell: "text")
-        rows.append(row)
-        
-        let total: Int = amount + shipping_fee + tax
-        let total_show: String = total.formattedWithSeparator
-        row = OneRow(title: "總金額", value: String(total), show: "NT$ \(total_show)", key: TOTAL_KEY, cell: "text")
-        rows.append(row)
-        
-        section = makeSectionRow(title: "金額", key: AMOUNT_KEY, rows: rows)
-        oneSections.append(section)
+
+        //oneSections.append(section)
         
         //gateway
         rows.removeAll()
@@ -404,151 +391,93 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         section = makeSectionRow(title: "付款方式", key: GATEWAY_KEY, rows: rows)
         oneSections.append(section)
         
-        //shipping
-        rows.removeAll()
-        let shipping: String = productTable!.shipping
-        arr = shipping.components(separatedBy: ",")
-        for tmp in arr {
-            let title: String = SHIPPING_WAY.getRawValueFromString(tmp)
-            var value: String = "false"
-            if (tmp == "direct") {
-                value = "true"
+        if (needShipping) {
+            //shipping
+            rows.removeAll()
+            let shipping: String = productTable!.shipping
+            arr = shipping.components(separatedBy: ",")
+            for tmp in arr {
+                let title: String = SHIPPING_WAY.getRawValueFromString(tmp)
+                var value: String = "false"
+                if (tmp == "direct") {
+                    value = "true"
+                }
+                row = OneRow(title: title, value: value, show: title, key: tmp, cell: "radio")
+                rows.append(row)
             }
-            row = OneRow(title: title, value: value, show: title, key: tmp, cell: "radio")
-            rows.append(row)
+            section = makeSectionRow(title: "到貨方式", key: SHIPPING_KEY, rows: rows)
+            oneSections.append(section)
         }
-        section = makeSectionRow(title: "到貨方式", key: SHIPPING_KEY, rows: rows)
-        oneSections.append(section)
         
         rows.removeAll()
-        row = OneRow(title: "發票(目前僅提供電子發票)", value: INVOICE_PERSONAL_KEY, show: "", key: INVOICE_KEY, cell: "more")
+        row = OneRow(title: "發票(目前僅提供電子發票)", value: INVOICE_PERSONAL_KEY, show: "個人", key: INVOICE_KEY, cell: "more")
         rows.append(row)
         rows.append(contentsOf: invoicePersonalRows)
         section = makeSectionRow(title: "電子發票", key: INVOICE_KEY, rows: rows)
         oneSections.append(section)
         
-        //member
-        rows.removeAll()
-        row = OneRow(title: "姓名", value: Member.instance.name, show: Member.instance.name, key: NAME_KEY, cell: "textField", placeholder: "王大明")
-        rows.append(row)
-        row = OneRow(title: "電話", value: Member.instance.mobile, show: Member.instance.mobile, key: MOBILE_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "0939123456")
-        rows.append(row)
-        row = OneRow(title: "EMail", value: Member.instance.email, show: Member.instance.email, key: EMAIL_KEY, cell: "textField", keyboard: KEYBOARD.emailAddress, placeholder: "service@bm.com")
-        rows.append(row)
-        row = OneRow(title: "住址", value: Member.instance.address, show: Member.instance.address, key: ADDRESS_KEY, cell: "textField", placeholder: "台北市信義區中山路60號")
-        rows.append(row)
-        section = makeSectionRow(title: "收件人資料", key: MEMBER_KEY, rows: rows)
-        oneSections.append(section)
+        if (needShipping) {
+            //member
+            rows.removeAll()
+            row = OneRow(title: "姓名", value: Member.instance.name, show: Member.instance.name, key: NAME_KEY, cell: "textField", placeholder: "王大明")
+            rows.append(row)
+            row = OneRow(title: "電話", value: Member.instance.mobile, show: Member.instance.mobile, key: MOBILE_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, placeholder: "0939123456")
+            rows.append(row)
+            row = OneRow(title: "EMail", value: Member.instance.email, show: Member.instance.email, key: EMAIL_KEY, cell: "textField", keyboard: KEYBOARD.emailAddress, placeholder: "service@bm.com")
+            rows.append(row)
+            row = OneRow(title: "住址", value: Member.instance.address, show: Member.instance.address, key: ADDRESS_KEY, cell: "textField", placeholder: "台北市信義區中山路60號")
+            rows.append(row)
+            section = makeSectionRow(title: "收件人資料", key: MEMBER_KEY, rows: rows)
+            oneSections.append(section)
+        }
         
-        //memo
-        rows.removeAll()
-        row = OneRow(title: "留言", value: "", show: "", key: MEMO_KEY, cell: "textField", placeholder: "請於上班時間送達")
-        rows.append(row)
-        section = makeSectionRow(title: "其他留言", key: MEMO_KEY, rows: rows)
-        oneSections.append(section)
+        if (needShipping) {
+            //memo
+            rows.removeAll()
+            row = OneRow(title: "留言", value: "", show: "", key: MEMO_KEY, cell: "textField", placeholder: "請於上班時間送達")
+            rows.append(row)
+            section = makeSectionRow(title: "其他留言", key: MEMO_KEY, rows: rows)
+            oneSections.append(section)
+        }
         
-//        form = OrderForm(type: self.productTable!.type)
-//        section_keys = form.getSectionKeys()
-//        sections = form.getSections()
-//
-//        titleLbl.text = productTable!.name
-//
-//        if let productNameItem = getFormItemFromKey("Product_Name") {
-//            productNameItem.value = productTable!.name
-//            productNameItem.make()
-//        }
-//
-//        if let nameItem = getFormItemFromKey(NAME_KEY) {
-//            nameItem.value = Member.instance.name
-//            nameItem.make()
-//        }
-//
-//        if let mobileItem = getFormItemFromKey(MOBILE_KEY) {
-//            mobileItem.value = Member.instance.mobile
-//            mobileItem.make()
-//        }
-//
-//        if let emailItem = getFormItemFromKey(EMAIL_KEY) {
-//            emailItem.value = Member.instance.email
-//            emailItem.make()
-//        }
-//
-//        if let addressItem = getFormItemFromKey(ADDRESS_KEY) {
-//            addressItem.value = Member.instance.road
-//            addressItem.make()
-//        }
-//
-//        if let numberItem = getFormItemFromKey(NUMBER_KEY) as? NumberFormItem {
-//            numberItem.min = productTable!.order_min
-//            numberItem.max = productTable!.order_max
-//        }
-//
-//        if let colorItem = getFormItemFromKey(COLOR_KEY) as? Color1FormItem {
-//            var res: [[String: String]] = [[String: String]]()
-//            for color in productTable!.colors {
-//                let dict: [String: String] = [color: color]
-//                res.append(dict)
-//            }
-//            colorItem.setTags(tags: res)
-//            //print(superProduct.color)
-//        }
-//
-//        if let clothesSizeItem = getFormItemFromKey(CLOTHES_SIZE_KEY) as? ClothesSizeFormItem {
-//
-//            var res: [[String: String]] = [[String: String]]()
-//
-//            for size in productTable!.sizes {
-//                let dict: [String: String] = [size: size]
-//                res.append(dict)
-//            }
-//            clothesSizeItem.setTags(tags: res)
-//        }
-//
-//        if let weightItem = getFormItemFromKey(WEIGHT_KEY) as? WeightFormItem {
-//
-//            var res: [[String: String]] = [[String: String]]()
-//            for size in productTable!.weights {
-//                let dict: [String: String] = [size: size]
-//                res.append(dict)
-//            }
-//            weightItem.setTags(tags: res)
-//        }
-//
-//        if productTable!.type == "mejump" {
-//            if let typeItem = getFormItemFromKey("type") as? TagFormItem {
-//                var res: [[String: String]] = [[String: String]]()
-//                for price in productTable!.prices {
-//                    //price.printRow()
-//                    let type: String = price.price_title
-//                    let typePrice: String = String(price.price_member)
-//                    let str: String = type + " " + typePrice
-//                    let dict: [String: String] = [String(price.id): str]
-//                    res.append(dict)
-//                }
-////                let sortedByKeys = dicts.keys.sorted(by: <)
-////                var _dicts: [String: String] = [String: String]()
-////                for sortedBykey in sortedByKeys {
-////                    _dicts[sortedBykey] = dicts[sortedBykey]
-////                }
-//                typeItem.setTags(tags: res)
-//            }
-//        }
-//
-//        if getFormItemFromKey(NUMBER_KEY) != nil {
-//            selected_number = productTable!.order_min
-//        }
-//
-//        if getFormItemFromKey(SUBTOTAL_KEY) != nil {
-//            selected_price = productTable!.prices[selected_idx].price_member
-//            updateSubTotal()
-//        }
-//
-//        if getFormItemFromKey(SHIPPING_FEE_KEY) != nil {
-//            shippingFee = productTable!.prices[selected_idx].shipping_fee
-//            print(shippingFee)
-//            updateShippingFee()
-//        }
         tableView.reloadData()
+    }
+    
+    func updateSubTotal() {
+        
+        sub_total = selected_price * selected_number
+        let row = getOneRowFromKey(SUBTOTAL_KEY)
+        row.value = String(sub_total)
+        row.show = "NT$ " + String(sub_total) + "元"
+        
+        updateTotal()
+        //放入購物車，還不用計算運費
+        //updateShippingFee()
+    }
+    
+    func updateTotal() {
+        
+        total = sub_total + shippingFee
+        
+        let row = getOneRowFromKey(TOTAL_KEY)
+        row.value = String(total)
+        row.show = "NT$ " + String(total) + "元"
+        
+        tableView.reloadData()
+    }
+    
+    override func cellSetTag(sectionIdx: Int, rowIdx: Int, value: String, isChecked: Bool) {
+        let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
+        if (isChecked) {
+            row.value = value
+        }
+    }
+    
+    override func cellNumberChanged(sectionIdx: Int, rowIdx: Int, number: Int) {
+        let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
+        row.value = String(number)
+        selected_number = number
+        updateSubTotal()
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -579,17 +508,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             } else {
                 count = 0
             }
-//            count = oneSections[section].items.count
-//            let mySection: [String: Any] = mySections[section]
-//            if (mySection.keyExist(key: "isExpanded")) {
-//                let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
-//                if (isExpanded) {
-//                    if let key: String = mySection["key"] as? String {
-//                        let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
-//                        count = rows.count
-//                    }
-//                }
-//            }
         }
         
         return count
@@ -641,22 +559,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             if let cell: RadioCell = tableView.dequeueReusableCell(withIdentifier: "RadioCell", for: indexPath) as? RadioCell {
                 
                 let row: OneRow = invoiceOptionRows[indexPath.row]
-                //let row: [String: String] = invoiceOptionRows[indexPath.row]
-                
-//                let rowKey: String = row["key"]!
-//
-//                var title: String = ""
-//                if row.keyExist(key: "title") {
-//                    title = row["title"]!
-//                }
-//
-//                var value: String = "false"
-//                if row.keyExist(key: "value") {
-//                    value = row["value"]!
-//                }
-//
-//                cell.baseViewControllerDelegate = self
-//                cell.update(sectionKey: INVOICE_KEY, rowKey: rowKey, title: title, checked: Bool(value)!)
                 cell.cellDelegate = self
                 cell.update(sectionKey: INVOICE_TYPE_KEY, sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
                 
@@ -666,46 +568,12 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         } else {
             
             let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
-        
-//            var rowKey: String = ""
-//            let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-//            if let tmp: String = row["key"] {
-//                rowKey = tmp
-//            }
-            
-//            var sectionKey: String = ""
-//            let section: [String: Any] = myRows[indexPath.section]
-//            if let tmp: String = section["key"] as? String {
-//                sectionKey = tmp
-//            }
-//
-//            var cell_type: String = "text"
-//            if (row.keyExist(key: "cell")) {
-//                cell_type = row["cell"]!
-//            }
-            
-//            var title: String = ""
-//            var show: String = ""
-//            var value: String = ""
-//
-//            if row.keyExist(key: "title") {
-//                title = row["title"]!
-//            }
-//
-//            if row.keyExist(key: "show") {
-//                show = row["show"]!
-//            }
-//
-//            if row.keyExist(key: "value") {
-//                value = row["value"]!
-//            }
             
             if (row.cell == "cart") {
                 if let cell: CartListCell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
-                    
+
                     cell.cellDelegate = self
                     cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                    //cell.update(sectionKey: sectionKey,rowKey: rowKey,title: title,featured_path:row["featured_path"]!,attribute:row["attribute"]!,amount: row["amount"]!,quantity: row["quantity"]!)
                     return cell
                 }
             } else if (row.cell == "radio") {
@@ -713,12 +581,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     
                     cell.cellDelegate = self
                     cell.update(sectionKey: oneSections[indexPath.section].key, sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-//                    if row.keyExist(key: "title") {
-//                        title = row["title"]!
-//                    }
-//
-//                    cell.baseViewControllerDelegate = self
-//                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, checked: Bool(value)!)
                     return cell
                 }
             } else if (row.cell == "text") {
@@ -728,11 +590,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     cell.update(title: row.title, show: row.show)
                     return cell
                 }
-//                if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
-//
-//                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, show: show)
-//                    return cell
-//                }
             } else if (row.cell == "textField") {
                 
                 if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell {
@@ -742,33 +599,32 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
                     return cell
                 }
-//                if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell {
-//
-//                    var keyboard: String = "default"
-//                    if row.keyExist(key: "keyboard") {
-//                        let tmp: String = row["keyboard"]!
-//                        keyboard = tmp
-//                    }
-//
-//                    cell.baseViewControllerDelegate = self
-//                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, keyboard: keyboard)
-//                    return cell
-//                }
-//            } else if (row.cell == "memo") {
-//                if let cell: MemoCell = tableView.dequeueReusableCell(withIdentifier: "MemoCell", for: indexPath) as? MemoCell {
-//
-//                    cell.cellDelegate = self
-//                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-//
-//                    return cell
-//                }
             } else if (row.cell == "more") {
                 if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "MoreCell", for: indexPath) as? MoreCell {
                     
                     cell.cellDelegate = self
                     cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-//                    cell.baseViewControllerDelegate = self
-//                    cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: value, show: show)
+                    return cell
+                }
+            } else if (row.cell == "tag") {
+                if let cell: TagCell = tableView.dequeueReusableCell(withIdentifier: "TagCell", for: indexPath) as? TagCell {
+                    
+                    cell.cellDelegate = self
+                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                    return cell
+                }
+            } else if (row.cell == "number") {
+                if let cell: NumberCell = tableView.dequeueReusableCell(withIdentifier: "NumberCell", for: indexPath) as? NumberCell {
+                    
+                    cell.cellDelegate = self
+                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                    //cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: _value, min: min, max: max)
+                    return cell
+                }
+            } else if (row.cell == "default") {
+                if let cell: DefaultCell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath) as? DefaultCell {
+                    cell.update(featured_path: row.featured_path, title: row.title)
+                    
                     return cell
                 }
             }
@@ -776,32 +632,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         return UITableViewCell()
         
-//        let item = getFormItemFromIdx(indexPath)
-//        //let name = item?.name
-//        let cell: UITableViewCell
-//        if item != nil {
-//            if let cellType = item!.uiProperties.cellType {
-//                cell = cellType.dequeueCell(for: tableView, at: indexPath)
-//            } else {
-//                cell = UITableViewCell()
-//            }
-//            
-//            if let formUpdatableCell = cell as? FormUPdatable {
-//                item!.indexPath = indexPath
-//                formUpdatableCell.update(with: item!)
-//            }
-//            
-//            if item!.uiProperties.cellType == FormItemCellType.tag || item!.uiProperties.cellType == FormItemCellType.number || item!.uiProperties.cellType == FormItemCellType.weight {
-//                if let formCell = cell as? FormItemCell {
-//                    formCell.valueDelegate = self
-//                }
-//            }
-//            
-//        } else {
-//            cell = UITableViewCell()
-//        }
-//        
-//        return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -817,22 +647,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         } else {
             //var rowKey: String = ""
             let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
-//            var rowKey: String = ""
-//            let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-//            if let tmp: String = row["key"] {
-//                rowKey = tmp
-//            }
-//
-//            var sectionKey: String = ""
-//            let section: [String: Any] = myRows[indexPath.section]
-//            if let tmp: String = section["key"] as? String {
-//                sectionKey = tmp
-//            }
-//
-//            var cell_type: String = "text"
-//            if (row.keyExist(key: "cell")) {
-//                cell_type = row["cell"]!
-//            }
             
             if (row.cell == "more") {
                 
@@ -1109,7 +923,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         params["device"] = "app"
         params["do"] = "update"
-        params["cart_id"] = String(cartTable!.id)
+        if (cartsTable != nil) {
+            params["cart_id"] = String(cartTable!.id)
+        }
         
         params[AMOUNT_KEY] = getOneRowValue(AMOUNT_KEY)
         params[SHIPPING_FEE_KEY] = getOneRowValue(SHIPPING_FEE_KEY)
@@ -1148,14 +964,13 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 params[SHIPPING_KEY] = row.key
             }
         }
-//        let shippings = getRowRowsFromMyRowsByKey(key: SHIPPING_KEY)
-//        key = "direct"
-//        for shipping in shippings {
-//            if (shipping["value"] == "true") {
-//                key = shipping["key"]!
-//            }
-//        }
-//        params[SHIPPING_KEY] = key
+        
+        //直接購買會執行的區塊
+        if (productTable != nil && cartsTable == nil) {
+            params["product_id"] = String(productTable!.id)
+            params[QUANTITY_KEY] = getOneRowValue(QUANTITY_KEY)
+            params[AMOUNT_KEY] = String(productTable!.prices[selected_idx].price_member)
+        }
         
         //invoice
         rows = getOneRowsFromSectionKey(INVOICE_KEY)
@@ -1166,29 +981,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             params[INVOICE_COMPANY_NAME_KEY] = getOneRowValue(INVOICE_COMPANY_NAME_KEY)
         }
         params[INVOICE_EMAIL_KEY] = getOneRowValue(INVOICE_EMAIL_KEY)
-//        for invoice_option in invoiceOptionRows {
-//            if (invoice_option["value"] == "true") {
-//                key = invoice_option["key"]!
-//            }
-//        }
-//        params[INVOICE_TYPE_KEY] = key
-//
-//        let invoices = getRowRowsFromMyRowsByKey(key: INVOICE_KEY)
-//        for invoice in invoices {
-//            for (key1, value) in invoice {
-//                if (key1 == "key" && value == INVOICE_EMAIL_KEY) {
-//                    params[INVOICE_EMAIL_KEY] = invoice["value"]
-//                    break
-//
-//                } else if (key1 == "key" && value == INVOICE_COMPANY_NAME_KEY) {
-//                    params[INVOICE_COMPANY_TAX_KEY] = invoice["value"]
-//                    break
-//                } else if (key1 == "key" && value == INVOICE_COMPANY_TAX_KEY) {
-//                    params[INVOICE_COMPANY_NAME_KEY] = invoice["value"]
-//                    break
-//                }
-//            }
-//        }
         
         params["member_id"] = String(Member.instance.id)
         params["order_name"] = getOneRowValue(NAME_KEY)
@@ -1241,15 +1033,19 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 do {
                     if (self.jsonData != nil) {
                         let table: OrderUpdateResTable = try JSONDecoder().decode(OrderUpdateResTable.self, from: self.jsonData!)
-                        let orderTable: OrderTable? = table.model
-                        if (orderTable != nil) {
-                            self.cartItemCount = 0
-                            self.session.set("cartItemCount", self.cartItemCount)
-                            
-                            let ecpay_token: String = orderTable!.ecpay_token
-                            let ecpay_token_ExpireDate: String = orderTable!.ecpay_token_ExpireDate
-                            self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
-                                self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
+                        if (!table.success) {
+                            self.warning(table.msg)
+                        } else {
+                            let orderTable: OrderTable? = table.model
+                            if (orderTable != nil) {
+                                self.cartItemCount = 0
+                                self.session.set("cartItemCount", self.cartItemCount)
+                                
+                                let ecpay_token: String = orderTable!.ecpay_token
+                                let ecpay_token_ExpireDate: String = orderTable!.ecpay_token_ExpireDate
+                                self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
+                                    self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
+                                }
                             }
                         }
                     } else {
@@ -1286,12 +1082,14 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
 class OrderUpdateResTable: Codable {
     
     var success: Bool = false
+    var msg: String = ""
     var id: Int = 0
     var update: String = "INSERT"
     var model: OrderTable?
     
     enum CodingKeys: String, CodingKey {
         case success
+        case msg
         case id
         case update
         case model
@@ -1304,6 +1102,7 @@ class OrderUpdateResTable: Codable {
         success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
         id = try container.decodeIfPresent(Int.self, forKey: .id) ?? 0
         update = try container.decodeIfPresent(String.self, forKey: .update) ?? ""
+        msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
         model = try container.decodeIfPresent(OrderTable.self, forKey: .model) ?? nil
     }
 }

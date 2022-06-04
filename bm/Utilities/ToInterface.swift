@@ -333,7 +333,7 @@ extension BaseViewController {
         }
     }
     
-    func toOrder(login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void) {
+    func toOrder(login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void, product_token: String?=nil) {
 
         let msg: String = ""
         if !Member.instance.isLoggedIn {
@@ -366,6 +366,9 @@ extension BaseViewController {
                 if #available(iOS 13.0, *) {
                     let storyboard = UIStoryboard(name: "Member", bundle: nil)
                     if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
+                        if product_token != nil {
+                            viewController.product_token = product_token
+                        }
                         viewController.modalPresentationStyle = .fullScreen
                         show(viewController, sender: nil)
                     }
