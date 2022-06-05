@@ -478,11 +478,13 @@ class GatewayTable: Table {
     var bank_account: String = ""
     var complete_at: String = ""
     var expire_at: String = ""
+    var return_at: String = ""
     
     var method_show: String = ""
     var process_show: String = ""
     var complete_at_show: String = "未付款"
     var expire_at_show: String = ""
+    var return_at_show: String = ""
     
     enum CodingKeys: String, CodingKey {
         case order_id
@@ -500,6 +502,7 @@ class GatewayTable: Table {
         case bank_account
         case complete_at
         case expire_at
+        case return_at
     }
     
     required init(from decoder: Decoder) throws {
@@ -521,6 +524,7 @@ class GatewayTable: Table {
         bank_account = try container.decodeIfPresent(String.self, forKey: .bank_account) ?? ""
         complete_at = try container.decodeIfPresent(String.self, forKey: .complete_at) ?? ""
         expire_at = try container.decodeIfPresent(String.self, forKey: .expire_at) ?? ""
+        return_at = try container.decodeIfPresent(String.self, forKey: .return_at) ?? ""
     }
     
     override func filterRow() {
@@ -530,6 +534,7 @@ class GatewayTable: Table {
         process_show = GATEWAY_PROCESS.getRawValueFromString(process)
         complete_at_show = complete_at.noSec()
         expire_at_show = expire_at.noSec()
+        return_at_show = return_at.noSec()
     }
 }
 

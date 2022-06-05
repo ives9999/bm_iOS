@@ -147,7 +147,7 @@ class ProductVC: MyTableVC {
         
         if let row1: ProductTable = row as? ProductTable {
             let type: String = row1.type
-            if type == "code" {
+            if type == "coin" {
                 toOrder(
                     login: { vc in vc.toLogin() },
                     register: { vc in vc.toRegister() },

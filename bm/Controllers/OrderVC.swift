@@ -309,7 +309,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         } else if (productTable != nil) {
             productTable!.filterRow()
             amount += productTable!.prices[0].price_member
-            if (productTable!.type == "code") {
+            if (productTable!.type == "coin") {
                 needShipping = false
             }
             
@@ -429,9 +429,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             rows.append(row)
             section = makeSectionRow(title: "收件人資料", key: MEMBER_KEY, rows: rows)
             oneSections.append(section)
-        }
-        
-        if (needShipping) {
             //memo
             rows.removeAll()
             row = OneRow(title: "留言", value: "", show: "", key: MEMO_KEY, cell: "textField", placeholder: "請於上班時間送達")
@@ -835,87 +832,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         row.show = ""
     }
     
-//    override func radioDidChange(sectionKey: String, rowKey: String, checked: Bool) {
-//
-//        //點選發票選項
-//        invoiceRows.removeAll()
-//        if (sectionKey == INVOICE_KEY) {
-//
-//            for invoiceFixedRow in invoiceFixedRows {
-//                invoiceRows.append(invoiceFixedRow)
-//            }
-//
-//            for (idx, var row) in invoiceOptionRows.enumerated() {
-//                if (row["key"] == rowKey) {
-//                    row["value"] = String(checked)
-//                } else {
-//                    row["value"] = String(!checked)
-//                }
-//                invoiceOptionRows[idx] = row
-//            }
-//
-//            var selectedRow: [String: String] = [String: String]()
-//            for row in invoiceOptionRows {
-//                if (row["value"] == "true") {
-//                    selectedRow = row
-//                }
-//            }
-//            //print(selectedRow)
-//            let selectedKey: String = selectedRow["key"]!
-//            if (selectedKey == PERSONAL_KEY) {
-//                for invoicePersonalRow in invoicePersonalRows {
-//                    invoiceRows.append(invoicePersonalRow)
-//                }
-//            } else {
-//                for invoiceCompanyRow in invoiceCompanyRows {
-//                    invoiceRows.append(invoiceCompanyRow)
-//                }
-//            }
-//
-//            replaceRowsByKey(sectionKey: INVOICE_KEY, rows: invoiceRows)
-//
-//            maskView.removeFromSuperview()
-//
-//            invoiceTable.reloadData()
-//
-//        } else {
-//            let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
-//            for row in rows {
-//
-//                if (row.keyExist(key: "key")) {
-//                    let key = row["key"]
-//                    var _row = row
-//                    var a: Bool = false
-//                    if (key == rowKey) {
-//                        a = checked
-//                    } else {
-//                        a = !checked
-//                    }
-//                    _row["value"] = String(a)
-//                    replaceRowByKey(sectionKey: sectionKey, rowKey: key!, _row: _row)
-//                }
-//            }
-//        }
-//        tableView.reloadData()
-//    }
-    
-//    override func textFieldDidChange(sectionKey: String, rowKey: String, text: String) {
-//        
-//        let rows = getRowRowsFromMyRowsByKey(key: sectionKey)
-//        for row in rows {
-//            if (row.keyExist(key: "key")) {
-//                let key = row["key"]
-//                if (key == rowKey) {
-//                    var _row = row
-//                    _row["value"] = text
-//                    _row["show"] = text
-//                    replaceRowByKey(sectionKey: sectionKey, rowKey: rowKey, _row: _row)
-//                    //print(myRows)
-//                }
-//            }
-//        }
-//    }
-    
     @IBAction func submitBtnPressed(_ sender: Any) {
         
         Global.instance.addSpinner(superView: self.view)
@@ -949,14 +865,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                 params[GATEWAY_KEY] = row.key
             }
         }
-//        let gateways = getRowRowsFromMyRowsByKey(key: GATEWAY_KEY)
-//        var key: String = "credit_card"
-//        for gateway in gateways {
-//            if (gateway["value"] == "true") {
-//                key = gateway["key"]!
-//            }
-//        }
-//        params[GATEWAY_KEY] = key
         
         rows = getOneRowsFromSectionKey(SHIPPING_KEY)
         for row in rows {
@@ -1030,6 +938,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             if success {
                 
                 self.jsonData = OrderService.instance.jsonData
+                //print(self.jsonData.)
                 do {
                     if (self.jsonData != nil) {
                         let table: OrderUpdateResTable = try JSONDecoder().decode(OrderUpdateResTable.self, from: self.jsonData!)
@@ -1053,6 +962,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     }
                 } catch {
                     self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    self.warning(self.msg)
                 }
                 
 //                let order_token: String = OrderService.instance.order_token

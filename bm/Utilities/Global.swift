@@ -610,7 +610,7 @@ enum ALL_PROCESS: String {
     case normal = "訂單成立"
     case gateway_on = "付款中"
     case gateway_off = "完成付款，準備出貨"
-    case shipping = "已經出貨了"
+    case shipping = "準備出貨"
     case store = "商品到達便利商店"
     case complete = "完成取貨"
     case returning = "商品退回中"
@@ -747,6 +747,7 @@ enum GATEWAY_PROCESS: String {
     case code = "取得付款代碼"
     case complete = "完成付款"
     case fail = "付款失敗"
+    case `return` = "完成退款"
     
     static func stringToEnum(_ enumString: String) -> GATEWAY_PROCESS {
         switch enumString {
@@ -758,6 +759,8 @@ enum GATEWAY_PROCESS: String {
             return .complete
         case "fail":
             return .fail
+        case "return":
+            return .return
         default:
             return .normal
         }
@@ -773,6 +776,8 @@ enum GATEWAY_PROCESS: String {
             return "complete"
         case .fail:
             return "fail"
+        case .return:
+            return "return"
         }
     }
     
@@ -784,7 +789,7 @@ enum GATEWAY_PROCESS: String {
 
 enum SHIPPING_PROCESS: String {
     case normal = "準備中"
-    case shipping = "出貨中"
+    case shipping = "已經出貨"
     case store = "商品已到便利商店"
     case complete = "已完成取貨"
     case back = "貨物退回"
