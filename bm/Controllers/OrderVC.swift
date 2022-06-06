@@ -898,41 +898,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         params[MEMO_KEY] = getOneRowValue(MEMO_KEY)
         
-        
-//        params["gateway"] = "credit_card"
-        
-//        let city_name = Global.instance.zoneIDToName(Member.instance.city)
-//        let area_name = Global.instance.zoneIDToName(Member.instance.area)
-//        params["order_city"] = city_name
-//        params["order_area"] = area_name
-//        params["order_road"] = Member.instance.road
-        
-//        let numberFormItem = getFormItemFromKey(NUMBER_KEY)
-//        params["quantity"] = numberFormItem?.value
-//
-//        let totalFormItem = getFormItemFromKey(TOTAL_KEY)
-//        params["amount"] = totalFormItem?.value
-//
-//        let shippingFeeFormItem = getFormItemFromKey(SHIPPING_FEE_KEY)
-//        if (shippingFeeFormItem != nil) {
-//            params["shipping_fee"] = shippingFeeFormItem?.value
-//        }
-        
-//        if let item = getFormItemFromKey(COLOR_KEY) {
-//            params["color"] = item.value
-//        }
-//
-//        if let item = getFormItemFromKey(CLOTHES_SIZE_KEY) {
-//            params["size"] = item.value
-//        }
-//
-//        if let item = getFormItemFromKey(WEIGHT_KEY) {
-//            params["weight"] = item.value
-//        }
-//        print(params)
-        
-        //self.toPayment(ecpay_token: "", order_no: "", tokenExpireDate: "")
-        
         OrderService.instance.update(params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
