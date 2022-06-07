@@ -320,7 +320,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             row.quantity = "1"
             
             rows.append(row)
-            section = makeSectionRow(title: "商品選項", key: PRODUCT_KEY, rows: rows)
+            section = makeSectionRow(title: "商品名稱", key: PRODUCT_KEY, rows: rows)
             oneSections.append(section)
             
             if productTable!.attributes.count > 0 {
@@ -342,18 +342,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     //let row = ["title":attribute.name,"key":alias,"value":value,"show":tmp,"cell":"tag"]
                     //attributeRows.append(row)
                 }
+                section = makeSectionRow(title: "商品選項", key: ATTRIBUTE_KEY, rows: rows)
+                oneSections.append(section)
             }
-            
-//            var attribute_text: String = ""
-//            if (cartItemTable.attributes.count > 0) {
-//
-//                for (idx, attribute) in cartItemTable.attributes.enumerated() {
-//                    attribute_text += attribute["name"]! + ":" + attribute["value"]!
-//                    if (idx < cartItemTable.attributes.count - 1) {
-//                        attribute_text += " | "
-//                    }
-//                }
-//            }
             
             rows.removeAll()
             let min: String = String(productTable!.order_min)
@@ -859,7 +850,26 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
         params[GRAND_TOTAL_KEY] = String(discount + total)
         
-        var rows = getOneRowsFromSectionKey(GATEWAY_KEY)
+        //是否有選擇商品屬性
+        var rows: [OneRow] = getOneRowsFromSectionKey("attribute")
+        if (rows.count > 0) {
+        
+            var selected_attributes: [String] = [String]()
+            //let attributes: [[String: String]] = myRows[1]["rows"] as! [[String: String]]
+            
+            for row in rows {
+                
+                if (row.value.count == 0) {
+                    warning("請先選擇\(row.title)")
+                } else {
+                    let value: String = "{name:\(row.title),alias:\(row.key),value:\(row.value)}"
+                    selected_attributes.append(value)
+                }
+            }
+            params["attribute"] = selected_attributes.joined(separator: "|")
+        }
+        
+        rows = getOneRowsFromSectionKey(GATEWAY_KEY)
         for row in rows {
             if (row.value == "true") {
                 params[GATEWAY_KEY] = row.key

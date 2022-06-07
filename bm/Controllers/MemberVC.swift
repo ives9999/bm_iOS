@@ -133,11 +133,13 @@ class MemberVC: MyTableVC {
         
         var rows: [MemberRow] = [MemberRow]()
         
-        let r1: MemberRow = MemberRow(title: "帳戶資料", icon: "member", segue: TO_PROFILE)
-        rows.append(r1)
-        
-        let r2: MemberRow = MemberRow(title: "更改密碼", icon: "password", segue: TO_PASSWORD)
-        rows.append(r2)
+        var r: MemberRow = MemberRow(title: "解碼幣", icon: "member", segue: TO_PROFILE)
+        r.show = Member.instance.coin.formattedWithSeparator
+        rows.append(r)
+        r = MemberRow(title: "帳戶資料", icon: "member", segue: TO_PROFILE)
+        rows.append(r)
+        r = MemberRow(title: "更改密碼", icon: "password", segue: TO_PASSWORD)
+        rows.append(r)
         
         return rows
     }

@@ -19,6 +19,7 @@ class MemberTable: Table {
 //        }
 //        set { UserDefaults.standard.set(NICKNAME_KEY, newValue) }
 //    }
+    var coin: Int = 0
     var dob: String = ""
     var sex: String = ""
     var email: String = ""
@@ -48,6 +49,7 @@ class MemberTable: Table {
     enum CodingKeys: String, CodingKey {
 
         case nickname
+        case coin
         case dob
         case sex
         case email
@@ -81,6 +83,7 @@ class MemberTable: Table {
 //        }
         
         nickname = try container.decodeIfPresent(String.self, forKey: .nickname) ?? ""
+        coin = try container.decodeIfPresent(Int.self, forKey: .coin) ?? 0
         dob = try container.decodeIfPresent(String.self, forKey: .dob) ?? ""
         sex = try container.decodeIfPresent(String.self, forKey: .sex) ?? ""
         email = try container.decodeIfPresent(String.self, forKey: .email) ?? ""
@@ -222,6 +225,14 @@ class Member {
         }
         set {
             session.set(CHANNEL_KEY, newValue)
+        }
+    }
+    var coin: Int {
+        get {
+            return session.getInt(COIN_KEY)
+        }
+        set {
+            session.set(COIN_KEY, newValue)
         }
     }
     var dob: String {
