@@ -339,6 +339,9 @@
 		F9F583B2283533C500F77B00 /* ThreeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F583B1283533C500F77B00 /* ThreeButton.swift */; };
 		F9F804802844F248006FC509 /* DefaultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F8047E2844F248006FC509 /* DefaultCell.swift */; };
 		F9F804812844F248006FC509 /* DefaultCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9F8047F2844F248006FC509 /* DefaultCell.xib */; };
+		F9F80483284EEE1F006FC509 /* MemberCoinListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F80482284EEE1F006FC509 /* MemberCoinListVC.swift */; };
+		F9F80486284F9AD7006FC509 /* MemberCoinListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F80484284F9AD7006FC509 /* MemberCoinListCell.swift */; };
+		F9F80487284F9AD7006FC509 /* MemberCoinListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9F80485284F9AD7006FC509 /* MemberCoinListCell.xib */; };
 		F9FA3C3627E32A3B0094C773 /* _tab_search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FA3C3527E32A3B0094C773 /* _tab_search.swift */; };
 		F9FA3C3C27E4C60C0094C773 /* tab_search.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FA3C3B27E4C60C0094C773 /* tab_search.swift */; };
 		F9FA3C3E27E4CC100094C773 /* _tab_search.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9FA3C3D27E4CC100094C773 /* _tab_search.xib */; };
@@ -754,6 +757,9 @@
 		F9F583B1283533C500F77B00 /* ThreeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeButton.swift; sourceTree = "<group>"; };
 		F9F8047E2844F248006FC509 /* DefaultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCell.swift; sourceTree = "<group>"; };
 		F9F8047F2844F248006FC509 /* DefaultCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultCell.xib; sourceTree = "<group>"; };
+		F9F80482284EEE1F006FC509 /* MemberCoinListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCoinListVC.swift; sourceTree = "<group>"; };
+		F9F80484284F9AD7006FC509 /* MemberCoinListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCoinListCell.swift; sourceTree = "<group>"; };
+		F9F80485284F9AD7006FC509 /* MemberCoinListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCoinListCell.xib; sourceTree = "<group>"; };
 		F9FA3C3527E32A3B0094C773 /* _tab_search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _tab_search.swift; sourceTree = "<group>"; };
 		F9FA3C3B27E4C60C0094C773 /* tab_search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tab_search.swift; sourceTree = "<group>"; };
 		F9FA3C3D27E4CC100094C773 /* _tab_search.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = _tab_search.xib; sourceTree = "<group>"; };
@@ -891,6 +897,8 @@
 				F964CDE527746DBF004F1C78 /* ManagerSignupListCell.xib */,
 				F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */,
 				F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */,
+				F9F80484284F9AD7006FC509 /* MemberCoinListCell.swift */,
+				F9F80485284F9AD7006FC509 /* MemberCoinListCell.xib */,
 				B322F8091FC6AD1800DE98FB /* MenuCell.swift */,
 				B3CB73E123E3185D00892F75 /* OlCell.swift */,
 				B3CB73D723D410CD00892F75 /* OneLineCell.swift */,
@@ -1283,6 +1291,7 @@
 				F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */,
 				B3A5A28320B2CB80001A846F /* ManagerVC.swift */,
 				B370EFBE26AD3F2B0022E599 /* MemberCartListVC.swift */,
+				F9F80482284EEE1F006FC509 /* MemberCoinListVC.swift */,
 				B362263125E236C100D98317 /* MemberOrderListVC.swift */,
 				B3BBDD92240E64EC00EB9856 /* MemberSignupListVC.swift */,
 				B3485C9623F841BE0078265D /* MemberVC.swift */,
@@ -1546,6 +1555,7 @@
 				B3756EED21BA6AAA006893E1 /* StatusCell.xib in Resources */,
 				B3756EDB21B8E50E006893E1 /* WeekdayCell.xib in Resources */,
 				B36D66C1229A828A00502D62 /* ManagerCourseCell.xib in Resources */,
+				F9F80487284F9AD7006FC509 /* MemberCoinListCell.xib in Resources */,
 				F9F583B0283518DF00F77B00 /* BottomThreeView.xib in Resources */,
 				F9308B3F273954AB002531A1 /* SwitchCell.xib in Resources */,
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
@@ -1836,6 +1846,7 @@
 				B3A5A28420B2CB80001A846F /* ManagerVC.swift in Sources */,
 				B31739ED21763CD1004CFEDE /* ArenaMapVC.swift in Sources */,
 				B316FED62112F13600FB990C /* CollectionCell.swift in Sources */,
+				F9F80486284F9AD7006FC509 /* MemberCoinListCell.swift in Sources */,
 				B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */,
 				B3ED38DD1FB4A06C0003F083 /* MyLabel.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,
@@ -1926,6 +1937,7 @@
 				B3F6B456260500650000F9E0 /* SignupCancelTable.swift in Sources */,
 				B36CBD5920E13F7A00E52B9C /* TempPlayDatePlayerCell.swift in Sources */,
 				B323390A21B6B8E4003EB84D /* FormItem.swift in Sources */,
+				F9F80483284EEE1F006FC509 /* MemberCoinListVC.swift in Sources */,
 				F9FAB2B82721643000D83CC4 /* OneRow.swift in Sources */,
 				B3756EDA21B8E50E006893E1 /* WeekdayCell.swift in Sources */,
 				B3A2541825722C5C004B8A03 /* ManagersFormItem.swift in Sources */,

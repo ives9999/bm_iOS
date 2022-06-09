@@ -604,3 +604,60 @@ class Member {
     //        MEMBER_ROLE_KEY: ["ch": "會員角色","type":"String","default":""]
     //    ]
 }
+
+class MemberCoinTable: Table {
+    
+    var member_id: Int = 0
+    var in_out: Bool = false
+    var coin: Int = 0
+    var able_type: String = ""
+    var able_token: String = ""
+    var able_id: Int = 0
+    var price: Int = 0
+    var order_id: Int = 0
+    var coin_show: String = "0"
+    var able_type_show: String = ""
+
+    enum CodingKeys: String, CodingKey {
+        case member_id
+        case in_out
+        case coin
+        case able_type
+        case able_token
+        case able_id
+        case price
+        case order_id
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        member_id = try container.decodeIfPresent(Int.self, forKey: .member_id) ?? 0
+        in_out = try container.decodeIfPresent(Bool.self, forKey: .in_out) ?? false
+        coin = try container.decodeIfPresent(Int.self, forKey: .coin) ?? 0
+        able_type = try container.decodeIfPresent(String.self, forKey: .able_type) ?? ""
+        able_token = try container.decodeIfPresent(String.self, forKey: .able_token) ?? ""
+        able_id = try container.decodeIfPresent(Int.self, forKey: .able_id) ?? 0
+        price = try container.decodeIfPresent(Int.self, forKey: .price) ?? 0
+        order_id = try container.decodeIfPresent(Int.self, forKey: .order_id) ?? 0
+    }
+    
+    override func filterRow() {
+        super.filterRow()
+        
+        if (coin > 0) {
+            coin_show = "NT$ " + coin.formattedWithSeparator
+        }
+        
+        if (able_type.count > 0 && able_id > 0) {
+            
+            able_type_show = "購買訂單檢視"
+        }
+    }
+    
+}

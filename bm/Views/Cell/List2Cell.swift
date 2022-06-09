@@ -42,7 +42,9 @@ class List2Cell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        titleLbl.setTextTitle()
+        if (titleLbl != nil) {
+            titleLbl.setTextTitle()
+        }
         
         let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(CELL_SELECTED)
@@ -53,7 +55,9 @@ class List2Cell: UITableViewCell {
             likeIcon.setBackgroundImage(likeImg, for: .normal)
         }
         
-        listFeatured.layer.cornerRadius = 7.0
+        if (listFeatured != nil) {
+            listFeatured.layer.cornerRadius = 7.0
+        }
     }
     
     func _updateViews(_ row: Table) {

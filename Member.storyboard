@@ -8,6 +8,49 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Member Coin ListVC-->
+        <scene sceneID="2fH-2N-0Dd">
+            <objects>
+                <viewController storyboardIdentifier="toMemberCoinList" id="zYi-56-HxO" customClass="MemberCoinListVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PuG-sV-75r">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nsy-2s-xf2" customClass="Top" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="6Zr-hL-cHZ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="wai-Pk-mz8"/>
+                                    <constraint firstAttribute="height" constant="64" id="whl-zJ-xR0"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5gl-YK-O4T">
+                                <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5Lz-xj-VGk"/>
+                        <color key="backgroundColor" red="0.36470588235294116" green="0.36470588235294116" blue="0.36470588235294116" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <constraints>
+                            <constraint firstItem="nsy-2s-xf2" firstAttribute="top" secondItem="5Lz-xj-VGk" secondAttribute="top" id="2wD-P7-SHJ"/>
+                            <constraint firstItem="nsy-2s-xf2" firstAttribute="leading" secondItem="5Lz-xj-VGk" secondAttribute="leading" id="7RE-Y4-4EI"/>
+                            <constraint firstItem="nsy-2s-xf2" firstAttribute="trailing" secondItem="5Lz-xj-VGk" secondAttribute="trailing" id="JhF-ZS-xfB"/>
+                            <constraint firstItem="5Lz-xj-VGk" firstAttribute="bottom" secondItem="5gl-YK-O4T" secondAttribute="bottom" id="Rd6-TR-UH7"/>
+                            <constraint firstItem="5gl-YK-O4T" firstAttribute="top" secondItem="nsy-2s-xf2" secondAttribute="bottom" id="brK-eP-vxf"/>
+                            <constraint firstItem="5gl-YK-O4T" firstAttribute="leading" secondItem="5Lz-xj-VGk" secondAttribute="leading" id="iHC-iJ-Bjt"/>
+                            <constraint firstItem="5gl-YK-O4T" firstAttribute="trailing" secondItem="5Lz-xj-VGk" secondAttribute="trailing" id="wMr-RV-WL9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="5gl-YK-O4T" id="hQ0-Ki-ffX"/>
+                        <outlet property="top" destination="nsy-2s-xf2" id="Fa8-tv-EFR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="z9Z-WV-JXm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1824" y="-2095"/>
+        </scene>
         <!--LoginVC-->
         <scene sceneID="Oto-La-o8t">
             <objects>
@@ -1600,18 +1643,18 @@
                                                 <rect key="frame" x="16" y="165" width="382" height="280"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者金鑰：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXd-Pz-BLr" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="11" width="104" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="17" width="104" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DzE-80-1OQ" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="112" y="4" width="229" height="34"/>
+                                                        <rect key="frame" x="112" y="4" width="229" height="46"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McF-pq-NPP">
-                                                        <rect key="frame" x="357" y="8.5" width="25" height="25"/>
+                                                        <rect key="frame" x="357" y="14.5" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="8h7-OA-G7u"/>
                                                             <constraint firstAttribute="width" constant="25" id="qB1-0m-gxQ"/>
@@ -1623,7 +1666,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwT-9w-87p" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="141" y="108" width="100" height="31"/>
+                                                        <rect key="frame" x="141" y="120" width="100" height="31"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="4ia-V2-4M8"/>
                                                         </constraints>
@@ -1634,7 +1677,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9C-oz-mUD" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="42" width="163.5" height="39"/>
+                                                        <rect key="frame" x="8" y="54" width="163.5" height="39"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="question" imagePlacement="leading" title="如何取得會員金鑰" titleAlignment="center">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
@@ -1644,7 +1687,7 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="LAv-At-hEc">
-                                                        <rect key="frame" x="0.0" y="159" width="259" height="95.5"/>
+                                                        <rect key="frame" x="0.0" y="171" width="259" height="95.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="59F-c0-JFz" userLabel="暱稱">
                                                                 <rect key="frame" x="0.0" y="0.0" width="179" height="20.5"/>
@@ -1999,22 +2042,22 @@
     </scenes>
     <designables>
         <designable name="AVv-ec-reU">
-            <size key="intrinsicContentSize" width="62.5" height="34"/>
+            <size key="intrinsicContentSize" width="81.5" height="46"/>
         </designable>
         <designable name="DzE-80-1OQ">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="WWA-5M-l1g">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="fDf-E9-mCZ">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="jrM-AS-IS7">
-            <size key="intrinsicContentSize" width="62.5" height="34"/>
+            <size key="intrinsicContentSize" width="81.5" height="46"/>
         </designable>
         <designable name="vic-zn-4Mh">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
     </designables>
     <resources>

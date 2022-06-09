@@ -563,7 +563,7 @@ class MemberService: DataService {
     
     func changePassword(oldPassword: String, password: String, rePassword: String, completion: @escaping CompletionHandler) {
         let token: String = Member.instance.token
-        let body: [String: String] = ["source": "app", "password_old": oldPassword,"password":password,"repassword":rePassword,"token":token]
+        let body: [String: String] = ["device": "app", "password_old": oldPassword,"password":password,"repassword":rePassword,"token":token]
         //print(body)
         //print(URL_CHANGE_PASSWORD)
         
@@ -670,6 +670,42 @@ class MemberService: DataService {
         }
         
         //return (res, "")
+    }
+    
+    func MemberCoinList(member_token: String? = nil, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+        
+        let _member_token: String = (member_token == nil) ? Member.instance.token : member_token!
+        
+        let url: String = URL_MEMBER_COINLIST
+        let params: [String: String] = ["device": "app","member_token":_member_token]
+        
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
+            
+            switch response.result {
+            case .success(let value):
+            //case .success(_):
+                if response.data != nil {
+                    let json = JSON(value)
+                    print(json)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
+                    }
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+        
     }
 }
 

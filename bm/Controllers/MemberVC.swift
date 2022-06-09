@@ -133,7 +133,7 @@ class MemberVC: MyTableVC {
         
         var rows: [MemberRow] = [MemberRow]()
         
-        var r: MemberRow = MemberRow(title: "解碼幣", icon: "member", segue: TO_PROFILE)
+        var r: MemberRow = MemberRow(title: "解碼幣", icon: "member", segue: TO_MEMBER_COIN_LIST)
         r.show = Member.instance.coin.formattedWithSeparator
         rows.append(r)
         r = MemberRow(title: "帳戶資料", icon: "member", segue: TO_PROFILE)
@@ -510,65 +510,9 @@ class MemberVC: MyTableVC {
             toRequestManagerTeam()
         } else if segue == "delete" {
             delete()
+        } else if segue == TO_MEMBER_COIN_LIST {
+            toMemberCoinList()
         }
-        
-        
-        //let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-        //print(row)
-//        if row.keyExist(key: "segue") && row["segue"] != nil {
-//            let segue: String = row["segue"]!
-//            //print("segue: \(segue)")
-//            if segue == TO_PROFILE {
-//                toRegister()
-//
-//            } else if segue == TO_PASSWORD {
-//                toPassword(type: "change_password")
-//                //performSegue(withIdentifier: segue, sender: "change_password")
-//            } else if segue == TO_VALIDATE {
-//
-//                var sender: String = ""
-//                if row["type"] != nil {
-//                    sender = row["type"]!
-//                }
-//                toValidate(type: sender)
-//
-//
-//                //performSegue(withIdentifier: segue, sender: sender)
-//            } else if segue == TO_BLACKLIST {
-//                performSegue(withIdentifier: segue, sender: nil)
-//            } else if segue == TO_REFRESH {
-//                refresh()
-//            } else if segue == TO_SIGNUP_LIST {
-//                performSegue(withIdentifier: "toA", sender: nil)
-//            } else if segue == TO_MEMBER_ORDER_LIST {
-//                toMemberOrderList()
-//            } else if segue == TO_MEMBER_CART_LIST {
-//                toMemberCartList()
-//            } else if segue == TO_LIKE {
-//                var able_type: String = "team"
-//                if (row.keyExist(key: "able_type") && row["able_type"] != nil) {
-//                    able_type = row["able_type"]!
-//                }
-//                //toMemberLikeList(able_type)
-//                if (able_type == "team") {
-//                    toTeam(member_like: true)
-//                } else if (able_type == "course") {
-//                    toCourse(member_like: true)
-//                } else if (able_type == "product") {
-//                    toProduct(member_like: true)
-//                } else if (able_type == "coach") {
-//                    toCoach(member_like: true)
-//                } else if (able_type == "arena") {
-//                    toArena(member_like: true)
-//                } else if (able_type == "store") {
-//                    toStore(member_like: true)
-//                } else {
-//                    warning("沒有這個喜歡的連結")
-//                }
-//            } else if segue == "toManagerCourse" {
-//                toManagerCourse(manager_token: Member.instance.token)
-//            }
-//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
