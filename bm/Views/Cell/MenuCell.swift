@@ -87,8 +87,11 @@ class MenuCell: SuperCell {
 //        tintColor = UIColor(MY_WHITE)
         
         if row.show.count > 0 {
+            detailTextLabel?.isHidden = false
             detailTextLabel?.text = row.show
             greater.isHidden = true
+        } else {
+            detailTextLabel?.isHidden = true
         }
         
         setNeedsLayout()

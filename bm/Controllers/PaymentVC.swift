@@ -80,7 +80,7 @@ class PaymentVC: MyTableVC {
     var trade_no: String = ""
     var card6No: String = ""
     var card4No: String = ""
-    var gateway_at: String = ""
+    var complete_at: String = ""
     
     var popupTableView: UITableView = {
         let cv = UITableView(frame: .zero, style: .plain)
@@ -146,7 +146,7 @@ class PaymentVC: MyTableVC {
                     }
                     
                     if let tmp: Date = order.PaymentDate {
-                        self.gateway_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
+                        self.complete_at = tmp.toString(format: "yyyy-MM-dd HH:mm:ss")
                     }
                 }
 
@@ -288,7 +288,7 @@ class PaymentVC: MyTableVC {
             params["bank_account"] = bank_account
         } else if (gateway == GATEWAY.credit_card) {
             params["gateway_process"] = GATEWAY_PROCESS.complete.enumToString()
-            params["gateway_at"] = gateway_at
+            params["complete_at"] = complete_at
             params["handle_fee"] = handle_fee
             params["card4No"] = card4No
             params["card6No"] = card6No

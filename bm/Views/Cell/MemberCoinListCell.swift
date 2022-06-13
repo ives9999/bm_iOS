@@ -8,33 +8,45 @@
 
 import UIKit
 
-class MemberCoinListCell: List2Cell {
+class MemberCoinListCell: SuperCell {
     
     @IBOutlet weak var noLbl: SuperLabel!
+    @IBOutlet weak var priceSignLbl: SuperLabel!
     @IBOutlet weak var priceLbl: SuperLabel!
     @IBOutlet weak var dateLbl: SuperLabel!
     @IBOutlet weak var able_typeLbl: SuperLabel!
+    @IBOutlet weak var able_typeIcon: UIImageView!
+    @IBOutlet weak var typeButton: SuperButton!
     
     var delegate: MemberCoinListVC?
     var row: MemberCoinTable?
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+                
         if (noLbl != nil) {
-            noLbl.setTextGeneral()
+            noLbl.setTextSize(15)
+            noLbl.setTextColor(UIColor(CITY_BUTTON))
+        }
+        
+        if (priceSignLbl != nil) {
+            priceSignLbl.setTextSize(10)
+            priceSignLbl.setTextColor(UIColor(MY_WHITE))
         }
         
         if (priceLbl != nil) {
-            priceLbl.highlight()
+            priceLbl.setTextSize(16)
+            priceLbl.setTextColor(UIColor(MY_WHITE))
         }
         
         if (able_typeLbl != nil) {
-            able_typeLbl.setTextGeneral()
+            able_typeLbl.setTextSize(16)
+            priceLbl.setTextColor(UIColor(TEXT_WHITE))
         }
         
         if (dateLbl != nil) {
-            dateLbl.setTextGeneral()
+            dateLbl.setTextSize(10)
+            dateLbl.setTextColor(UIColor(MY_LIGHT_WHITE))
         }
     }
 
@@ -45,7 +57,7 @@ class MemberCoinListCell: List2Cell {
         if (row != nil) {
             
             noLbl.text = String(no) + "."
-            priceLbl.text = row!.coin_show
+            priceLbl.text = row!.coin.formattedWithSeparator
             dateLbl.text = row!.created_at.noSec()
             
             if (row!.able_type_show.count > 0) {
@@ -54,6 +66,29 @@ class MemberCoinListCell: List2Cell {
                 tap.cancelsTouchesInView = false
                 able_typeLbl.addGestureRecognizer(tap)
             }
+            
+            if (row!.type_out_enum == MEMBER_COIN_OUT_TYPE.product) {
+                able_typeIcon.image = UIImage(named: "coin_product")
+            } else if (row!.type_out_enum == MEMBER_COIN_OUT_TYPE.course) {
+                able_typeIcon.image = UIImage(named: "coin_course")
+            }
+            
+            typeButton.setTitle(row!.type_in_enum.rawValue)
+            if (row!.type_in_enum == MEMBER_COIN_IN_TYPE.buy) {
+                typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_BUY))
+            } else if (row!.type_in_enum == MEMBER_COIN_IN_TYPE.gift) {
+                typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_GIFT))
+            } else {
+                typeButton.isHidden = true
+            }
+//            typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MY_BUY))
+//            if row!.type_enum == MEMBER_COIN.buy {
+//                typeButton.setTitle(row!.type_enum)
+//                typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MY_BUY))
+//            } else {
+//                typeButton.setTitle("支出")
+//                typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MY_PAY))
+//            }
         }
         
     }

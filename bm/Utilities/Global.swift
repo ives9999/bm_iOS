@@ -293,6 +293,72 @@ enum MEMBER_ROLE: String {
     case member, sale, designer, manager, admin
 }
 
+enum MEMBER_COIN_IN_TYPE: String {
+    
+    case buy = "購買"
+    case gift = "贈品"
+    case none = "無"
+    
+    static func enumFromString(_ value: String) -> MEMBER_COIN_IN_TYPE {
+        
+        switch value {
+        case "buy" :
+            return .buy
+        case "gift":
+            return .gift
+        case "none":
+            return .none
+        default:
+            return .none
+        }
+    }
+    
+    static func DBValue(_ member_coin_in_type: MEMBER_COIN_IN_TYPE) -> String {
+        
+        switch member_coin_in_type {
+        case .buy:
+            return "購買"
+        case .gift:
+            return "贈品"
+        case .none:
+            return "無"
+        }
+    }
+}
+
+enum MEMBER_COIN_OUT_TYPE: String {
+    
+    case product = "商品"
+    case course = "課程"
+    case none = "無"
+    
+    static func enumFromString(_ value: String) -> MEMBER_COIN_OUT_TYPE {
+        
+        switch value {
+        case "product" :
+            return .product
+        case "course":
+            return .course
+        case "none":
+            return .none
+        default :
+            return .none
+        }
+    }
+    
+    static func DBValue(_ member_coin: MEMBER_COIN_OUT_TYPE) -> String {
+        
+        switch member_coin {
+        case .product:
+            return "商品"
+        case .course:
+            return "課程"
+        case .none:
+            return "無"
+        }
+    }
+}
+
 enum SELECT_TIME_TYPE: Int {
     case play_start, play_end
 }
@@ -319,15 +385,16 @@ enum DEGREE: String {
     static func enumFromString(string: String) -> DEGREE {
         switch string {
         case "new" :
-            return self.new
+            return .new
         case "soso" :
-            return self.soso
+            return .soso
         case "high":
-            return self.high
+            return .high
         default :
-            return self.high
+            return .high
         }
     }
+    
     static func DBValue(_ degree: DEGREE) -> String {
         var res: String = ""
         switch degree {
@@ -343,6 +410,7 @@ enum DEGREE: String {
         }
         return res
     }
+    
     static func all() -> [DEGREE: String] {
         var degrees: [DEGREE: String] = [DEGREE: String]()
         degrees[DEGREE.new] = "新手"

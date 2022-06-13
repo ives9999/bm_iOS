@@ -54,6 +54,11 @@ class SuperLabel: UILabel {
         self.textColor = UIColor(TEXT_WHITE)
     }
     
+    func setTextDateTime() {
+        self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
+        self.textColor = UIColor(TEXTDATETIME)
+    }
+    
     func highlight() {
         self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
         self.textColor = UIColor(MY_WEIGHT_RED)

@@ -16,52 +16,79 @@
                 <rect key="frame" x="0.0" y="0.0" width="482" height="125"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="price" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFE-vP-33T" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="51.5" y="32" width="38.5" height="61"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FA3-HZ-9gK" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="424" y="52" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dlz-d1-sYp" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="106" y="52" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w8Q-7x-hRN" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
                         <rect key="frame" x="16" y="52" width="19.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cfF-eR-m6j">
+                        <rect key="frame" x="51.5" y="45" width="35" height="35"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="Jn7-JW-C9u"/>
+                            <constraint firstAttribute="height" constant="35" id="STd-Mv-vrJ"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="NT$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnh-hv-zKz" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="318" y="52" width="33" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFE-vP-33T" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="342.5" y="52.5" width="39.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品訂單名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dlz-d1-sYp" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="102.5" y="47.5" width="104" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022-08-21 15;36" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FA3-HZ-9gK" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="102.5" y="76" width="140" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CFV-4d-e5A" customClass="SuperButton" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="399" y="47" width="67" height="31"/>
+                        <state key="normal" title="Button"/>
+                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="FA3-HZ-9gK" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="3r6-c8-x7d"/>
-                    <constraint firstItem="Dlz-d1-sYp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5x0-mz-pCj"/>
+                    <constraint firstItem="AFE-vP-33T" firstAttribute="bottom" secondItem="wnh-hv-zKz" secondAttribute="bottom" constant="2" id="31q-sV-exY"/>
+                    <constraint firstItem="cfF-eR-m6j" firstAttribute="leading" secondItem="w8Q-7x-hRN" secondAttribute="trailing" constant="16" id="62S-fO-xiI"/>
+                    <constraint firstItem="FA3-HZ-9gK" firstAttribute="leading" secondItem="Dlz-d1-sYp" secondAttribute="leading" id="8SW-Vm-onN"/>
                     <constraint firstItem="w8Q-7x-hRN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CcW-vy-roe"/>
-                    <constraint firstItem="AFE-vP-33T" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="UjJ-qv-VmP"/>
-                    <constraint firstItem="AFE-vP-33T" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="32" id="caN-KP-g7a"/>
-                    <constraint firstItem="AFE-vP-33T" firstAttribute="leading" secondItem="w8Q-7x-hRN" secondAttribute="trailing" constant="16" id="ddT-Xs-8jy"/>
-                    <constraint firstAttribute="bottom" secondItem="AFE-vP-33T" secondAttribute="bottom" constant="32" id="hB8-A9-uC7"/>
-                    <constraint firstItem="Dlz-d1-sYp" firstAttribute="leading" secondItem="AFE-vP-33T" secondAttribute="trailing" constant="16" id="v3g-pI-k6M"/>
-                    <constraint firstAttribute="trailing" secondItem="FA3-HZ-9gK" secondAttribute="trailing" constant="16" id="yR4-S7-4Mz"/>
+                    <constraint firstItem="AFE-vP-33T" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Fyh-48-2NM"/>
+                    <constraint firstItem="Dlz-d1-sYp" firstAttribute="bottom" secondItem="cfF-eR-m6j" secondAttribute="bottom" constant="-12" id="R6i-jF-v2d"/>
+                    <constraint firstItem="CFV-4d-e5A" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SiR-WA-hL8"/>
+                    <constraint firstAttribute="trailing" secondItem="CFV-4d-e5A" secondAttribute="trailing" constant="16" id="WM4-JM-en7"/>
+                    <constraint firstItem="FA3-HZ-9gK" firstAttribute="top" secondItem="Dlz-d1-sYp" secondAttribute="bottom" constant="8" id="cu8-Ap-uFL"/>
+                    <constraint firstItem="AFE-vP-33T" firstAttribute="leading" secondItem="wnh-hv-zKz" secondAttribute="trailing" constant="4" id="i5Y-Jb-ju5"/>
+                    <constraint firstAttribute="trailing" secondItem="AFE-vP-33T" secondAttribute="trailing" constant="100" id="jxV-pR-LG5"/>
+                    <constraint firstItem="cfF-eR-m6j" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="nv7-Su-5Vz"/>
+                    <constraint firstItem="Dlz-d1-sYp" firstAttribute="leading" secondItem="cfF-eR-m6j" secondAttribute="trailing" constant="16" id="tmH-N4-baO"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="FA3-HZ-9gK" secondAttribute="bottom" constant="16" id="wah-HO-r13"/>
+                    <constraint firstItem="Dlz-d1-sYp" firstAttribute="top" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="wfh-18-iWL"/>
                     <constraint firstItem="w8Q-7x-hRN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="z1s-dz-ama"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="able_typeIcon" destination="cfF-eR-m6j" id="3Hv-wH-aeV"/>
                 <outlet property="able_typeLbl" destination="Dlz-d1-sYp" id="PDP-nF-lg2"/>
                 <outlet property="dateLbl" destination="FA3-HZ-9gK" id="6Gh-eF-0ZA"/>
                 <outlet property="noLbl" destination="w8Q-7x-hRN" id="4iM-9W-7No"/>
                 <outlet property="priceLbl" destination="AFE-vP-33T" id="kKE-5u-G7N"/>
+                <outlet property="priceSignLbl" destination="wnh-hv-zKz" id="nlU-Oe-rOl"/>
+                <outlet property="typeButton" destination="CFV-4d-e5A" id="5ng-Rn-1ag"/>
             </connections>
             <point key="canvasLocation" x="255.07246376811597" y="179.79910714285714"/>
         </tableViewCell>

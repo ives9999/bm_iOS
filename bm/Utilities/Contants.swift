@@ -16,7 +16,8 @@ typealias DATA = Dictionary<String, [String: Any]>
 let CHANNEL = "bm"
 
 // URL Constants
-let REMOTE_BASE_URL = "https://bm.sportpassword.com"
+//let REMOTE_BASE_URL = "https://bm.sportpassword.com"
+let REMOTE_BASE_URL = "https://sandbox.sportpassword.com"
 //let REMOTE_BASE_URL = "http://192.168.100.120"
 //let LOCALHOST_BASE_URL = "http://127.0.0.1"
 let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
@@ -201,6 +202,9 @@ let TO_YOUTUBE_PLAYER: String = "toYoutubePlayer"
 // color
 let BOTTOM_VIEW_BACKGROUND = "#5D5D5D"
 let CELL_SELECTED = "#363636"
+let MEMBER_COIN_BUY = "#0D8504"
+let MEMBER_COIN_GIFT = "#0794EA"
+let MEMBER_COIN_PAY = "#893FFF"
 let MY_BLACK = "#000000"
 let MY_GREEN = "#a6d903"
 let MY_RED = "#f11b90"
@@ -209,6 +213,7 @@ let MY_LIGHT_RED = "#FF4081"
 let MY_PURPLE = "#893FFE"
 let MY_WEIGHT_RED = "#FF3030"
 let MY_GRAY = "#717171"
+let MY_PAY = "#893FFF"
 let MY_WHITE = "#FFFFFF"
 let LIKE_BUTTON = "#a6d903"
 let CANCEL_BUTTON = "#444444"
@@ -223,6 +228,7 @@ let TAG_SELECTED_BACKGROUND = MY_BLACK
 let TAG_SELECTED_BOLDCOLOR = MY_RED
 let TAG_SELECTED_TEXTCOLOR = MY_WHITE
 let TEXTBORDER = MY_GREEN
+let TEXTDATETIME = "#AAAAAA"
 let TEXTGRAY = "#BFBFBF"
 let TEXT_WHITE = "#d1d1d1"
 let PLACEHOLDER = "#8b8f90"

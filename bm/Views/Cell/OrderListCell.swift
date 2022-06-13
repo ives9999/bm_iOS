@@ -34,7 +34,6 @@ class OrderListCell: SuperCell {
         nameLbl.numberOfLines = 0
         
         priceLbl.textAlignment = .right
-        //priceLbl.textColor = UIColor(MY_RED)
         
         nameLbl.setTextTitle()
         orderNoLbl.setTextGeneral()

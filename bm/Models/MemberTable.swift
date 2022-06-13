@@ -608,7 +608,9 @@ class Member {
 class MemberCoinTable: Table {
     
     var member_id: Int = 0
-    var in_out: Bool = false
+    var in_out: Bool = true
+    var in_type: String = ""
+    var out_type: String = ""
     var coin: Int = 0
     var able_type: String = ""
     var able_token: String = ""
@@ -617,10 +619,14 @@ class MemberCoinTable: Table {
     var order_id: Int = 0
     var coin_show: String = "0"
     var able_type_show: String = ""
+    var type_in_enum: MEMBER_COIN_IN_TYPE = MEMBER_COIN_IN_TYPE.none
+    var type_out_enum: MEMBER_COIN_OUT_TYPE = MEMBER_COIN_OUT_TYPE.none
 
     enum CodingKeys: String, CodingKey {
         case member_id
         case in_out
+        case in_type
+        case out_type
         case coin
         case able_type
         case able_token
@@ -639,6 +645,8 @@ class MemberCoinTable: Table {
         
         member_id = try container.decodeIfPresent(Int.self, forKey: .member_id) ?? 0
         in_out = try container.decodeIfPresent(Bool.self, forKey: .in_out) ?? false
+        in_type = try container.decodeIfPresent(String.self, forKey: .in_type) ?? ""
+        out_type = try container.decodeIfPresent(String.self, forKey: .out_type) ?? ""
         coin = try container.decodeIfPresent(Int.self, forKey: .coin) ?? 0
         able_type = try container.decodeIfPresent(String.self, forKey: .able_type) ?? ""
         able_token = try container.decodeIfPresent(String.self, forKey: .able_token) ?? ""
@@ -657,6 +665,12 @@ class MemberCoinTable: Table {
         if (able_type.count > 0 && able_id > 0) {
             
             able_type_show = "購買訂單檢視"
+        }
+        
+        if (in_out) {
+            type_in_enum = MEMBER_COIN_IN_TYPE.enumFromString(in_type)
+        } else {
+            type_out_enum = MEMBER_COIN_OUT_TYPE.enumFromString(out_type)
         }
     }
     
