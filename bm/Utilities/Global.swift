@@ -626,6 +626,7 @@ enum ORDER_PROCESS: String {
     case complete = "完成取貨"
     case returning = "商品退回中"
     case `return` = "商品已退回"
+    case gateway_fail = "付款失敗"
     
     func enumToString()-> String {
         switch self {
@@ -643,6 +644,8 @@ enum ORDER_PROCESS: String {
             return "returning"
         case .return:
             return "return"
+        case .gateway_fail:
+            return "gateway_fail"
         }
     }
     
@@ -662,6 +665,8 @@ enum ORDER_PROCESS: String {
             return .returning
         case "return":
             return .return
+        case "gateway_fail":
+            return .gateway_fail
         default:
             return .normal
         }
@@ -683,6 +688,7 @@ enum ALL_PROCESS: String {
     case complete = "完成取貨"
     case returning = "商品退回中"
     case `return` = "商品已退回"
+    case gateway_fail = "付款失敗"
     
     func enumToString()-> String {
         switch self {
@@ -704,6 +710,8 @@ enum ALL_PROCESS: String {
             return "returning"
         case .return:
             return "return"
+        case .gateway_fail:
+            return "gateway_fail"
         }
     }
     
@@ -727,6 +735,8 @@ enum ALL_PROCESS: String {
             return .returning
         case 8:
             return .return
+        case 9:
+            return .gateway_fail
         default:
             return .normal
         }

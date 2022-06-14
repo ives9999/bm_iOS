@@ -220,8 +220,13 @@ class PaymentVC: MyTableVC {
                 self.updateOrder()
 
             case .Fail:
-                //print("Faile")
-                self.warning(msg: state.callbackStateMessage, buttonTitle: "關閉", buttonAction: {
+                //print(state)
+                if (state.callbackStateMessage == "Pay Fail.") {
+                    self.msg = "付款失敗，有可能是信用卡刷卡錯誤，請檢查信用卡資訊是否有誤"
+                } else {
+                    self.msg = state.callbackStateMessage
+                }
+                self.warning(msg: self.msg, buttonTitle: "關閉", buttonAction: {
                     self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
                     self.toProduct()
                 })
