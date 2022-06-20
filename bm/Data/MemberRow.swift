@@ -32,6 +32,7 @@ class MemberRow {
     
     var validate_type: String = ""
     var color: UIColor = UIColor(MY_WHITE)
+    var showGreater: Bool = true
     
     init(
         title: String = "",

@@ -8,33 +8,33 @@
 
 import UIKit
 
-class MenuCell: SuperCell {
+class MenuCell: UITableViewCell {
     
-    var iconView: UIImageView!
-    var titleLbl: SuperLabel!
-    var greater: UIImageView!
+    var iconView: UIImageView = UIImageView()
+    var titleLbl: SuperLabel = SuperLabel()
+    var greater: UIImageView = UIImageView()
+    var showLbl: SuperLabel = SuperLabel()
     //var titleLbl: MyLabel!
     //var tempPlayLbl: MyLabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: UITableViewCell.CellStyle.value1, reuseIdentifier: reuseIdentifier)
-        
-        iconView = UIImageView(frame: CGRect.zero)
+
         contentView.addSubview(iconView)
-        
-        greater = UIImageView(frame: CGRect.zero)
+        contentView.backgroundColor = UIColor.black
+
         greater.image = UIImage(named: "greater1")
         contentView.addSubview(greater)
-        
-        titleLbl = SuperLabel(frame: CGRect.zero)
+
         contentView.addSubview(titleLbl)
-        _constraint()
         titleLbl.setTextGeneral()
-        
-//        tempPlayLbl = MyLabel(frame: CGRect.zero)
-//        tempPlayLbl.text = "臨打"
-//        contentView.addSubview(tempPlayLbl)
+
+        contentView.addSubview(showLbl)
+        showLbl.setTextGeneral()
+
+        _constraint()
     }
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -62,6 +62,10 @@ class MenuCell: SuperCell {
         c4 = NSLayoutConstraint(item: greater, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 20)
         greater.translatesAutoresizingMaskIntoConstraints = false
         contentView.addConstraints([c1,c2,c3,c4])
+        
+        showLbl.translatesAutoresizingMaskIntoConstraints = false
+        showLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -48).isActive = true
+        showLbl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 0).isActive = true
     }
     
     override func layoutSubviews() {
@@ -87,12 +91,14 @@ class MenuCell: SuperCell {
 //        tintColor = UIColor(MY_WHITE)
         
         if row.show.count > 0 {
-            detailTextLabel?.isHidden = false
-            detailTextLabel?.text = row.show
-            greater.isHidden = true
+            showLbl.isHidden = false
+            showLbl.text = row.show
+            //greater.isHidden = true
         } else {
-            detailTextLabel?.isHidden = true
+            showLbl.isHidden = true
         }
+        
+        greater.isHidden =  (row.showGreater) ? false : true
         
         setNeedsLayout()
     }

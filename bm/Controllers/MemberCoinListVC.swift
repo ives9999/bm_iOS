@@ -18,7 +18,7 @@ class MemberCoinListVC: MyTableVC {
         myTablView = tableView
         super.viewDidLoad()
         
-        top.setTitle(title: "解碼幣")
+        top.setTitle(title: "解碼點數")
         top.delegate = self
         
         let cellNibName = UINib(nibName: "MemberCoinListCell", bundle: nil)

@@ -887,7 +887,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         if (productTable != nil && cartsTable == nil) {
             params["product_id"] = String(productTable!.id)
             params[QUANTITY_KEY] = getOneRowValue(QUANTITY_KEY)
-            params[AMOUNT_KEY] = String(productTable!.prices[selected_idx].price_member)
+            params[AMOUNT_KEY] = String(productTable!.prices[selected_idx].price_member * Int(params[QUANTITY_KEY]!)!)
         }
         
         //invoice

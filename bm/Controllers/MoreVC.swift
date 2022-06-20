@@ -63,6 +63,7 @@ class MoreVC: MyTableVC {
         //Then just cast the object as a String, but be careful, you may want to double check for nil
         let version = nsObject as! String
         let r6: MemberRow = MemberRow(title: "版本", icon: "version", show: version)
+        r6.showGreater = false
         rows.append(r6)
         
         return rows

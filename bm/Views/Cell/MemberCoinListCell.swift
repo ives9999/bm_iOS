@@ -13,9 +13,10 @@ class MemberCoinListCell: SuperCell {
     @IBOutlet weak var noLbl: SuperLabel!
     @IBOutlet weak var priceSignLbl: SuperLabel!
     @IBOutlet weak var priceLbl: SuperLabel!
+    @IBOutlet weak var balanceSignLbl: SuperLabel!
+    @IBOutlet weak var balanceLbl: SuperLabel!
     @IBOutlet weak var dateLbl: SuperLabel!
     @IBOutlet weak var able_typeLbl: SuperLabel!
-    @IBOutlet weak var able_typeIcon: UIImageView!
     @IBOutlet weak var typeButton: SuperButton!
     
     var delegate: MemberCoinListVC?
@@ -39,6 +40,16 @@ class MemberCoinListCell: SuperCell {
             priceLbl.setTextColor(UIColor(MY_WHITE))
         }
         
+        if (balanceSignLbl != nil) {
+            balanceSignLbl.setTextSize(10)
+            balanceSignLbl.setTextColor(UIColor(MY_WHITE))
+        }
+        
+        if (balanceLbl != nil) {
+            balanceLbl.setTextSize(16)
+            balanceLbl.setTextColor(UIColor(MY_WHITE))
+        }
+        
         if (able_typeLbl != nil) {
             able_typeLbl.setTextSize(16)
             priceLbl.setTextColor(UIColor(TEXT_WHITE))
@@ -57,8 +68,11 @@ class MemberCoinListCell: SuperCell {
         if (row != nil) {
             
             noLbl.text = String(no) + "."
+            
             priceLbl.text = row!.coin.formattedWithSeparator
             dateLbl.text = row!.created_at.noSec()
+            
+            balanceLbl.text = row!.balance.formattedWithSeparator
             
             if (row!.able_type_show.count > 0) {
                 able_typeLbl.text = row!.able_type_show
@@ -67,19 +81,25 @@ class MemberCoinListCell: SuperCell {
                 able_typeLbl.addGestureRecognizer(tap)
             }
             
-            if (row!.type_out_enum == MEMBER_COIN_OUT_TYPE.product) {
-                able_typeIcon.image = UIImage(named: "coin_product")
-            } else if (row!.type_out_enum == MEMBER_COIN_OUT_TYPE.course) {
-                able_typeIcon.image = UIImage(named: "coin_course")
-            }
             
-            typeButton.setTitle(row!.type_in_enum.rawValue)
-            if (row!.type_in_enum == MEMBER_COIN_IN_TYPE.buy) {
-                typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_BUY))
-            } else if (row!.type_in_enum == MEMBER_COIN_IN_TYPE.gift) {
-                typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_GIFT))
+            if (row!.in_out) {
+                typeButton.setTitle(row!.type_in_enum.rawValue)
+                if (row!.type_in_enum == MEMBER_COIN_IN_TYPE.buy) {
+                    typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_BUY))
+                } else if (row!.type_in_enum == MEMBER_COIN_IN_TYPE.gift) {
+                    typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_GIFT))
+                } else {
+                    typeButton.isHidden = true
+                }
             } else {
-                typeButton.isHidden = true
+                typeButton.setTitle(row!.type_out_enum.rawValue)
+                if (row!.type_out_enum == MEMBER_COIN_OUT_TYPE.product) {
+                    typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_PAY))
+                } else if (row!.type_out_enum == MEMBER_COIN_OUT_TYPE.course) {
+                    typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_PAY))
+                } else {
+                    typeButton.isHidden = true
+                }
             }
 //            typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MY_BUY))
 //            if row!.type_enum == MEMBER_COIN.buy {

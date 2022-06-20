@@ -133,7 +133,7 @@ class MemberVC: MyTableVC {
         
         var rows: [MemberRow] = [MemberRow]()
         
-        var r: MemberRow = MemberRow(title: "解碼幣", icon: "member", segue: TO_MEMBER_COIN_LIST)
+        var r: MemberRow = MemberRow(title: "解碼點數", icon: "coin", segue: TO_MEMBER_COIN_LIST)
         r.show = Member.instance.coin.formattedWithSeparator
         rows.append(r)
         r = MemberRow(title: "帳戶資料", icon: "member", segue: TO_PROFILE)
