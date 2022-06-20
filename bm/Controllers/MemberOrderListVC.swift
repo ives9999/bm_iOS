@@ -79,6 +79,6 @@ class MemberOrderListVC: MyTableVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let row = lists1[indexPath.row]
-        toPayment(order_token: row.token)
+        toPayment(order_token: row.token, source: "member")
     }
 }

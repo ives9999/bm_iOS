@@ -409,17 +409,22 @@ extension BaseViewController {
         }
     }
     
-    func toPayment(order_token: String, ecpay_token: String?=nil, tokenExpireDate: String?=nil) {
+    func toPayment(order_token: String, ecpay_token: String?=nil, tokenExpireDate: String?=nil, source: String = "order") {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_PAYMENT)  as? PaymentVC {
                 if ecpay_token != nil {
                     viewController.ecpay_token = ecpay_token!
                 }
+                
                 viewController.order_token = order_token
+                
                 if tokenExpireDate != nil {
                     viewController.tokenExpireDate = tokenExpireDate!
                 }
+                
+                viewController.source = source
+                
                 //viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }

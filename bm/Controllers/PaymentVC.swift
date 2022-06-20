@@ -22,6 +22,8 @@ class PaymentVC: MyTableVC {
     var ecpay_token: String = ""
     var order_token: String = ""
     var tokenExpireDate: String = ""
+    var source: String = "order"
+    
     var orderTable: OrderTable? = nil
     
     let heightForSection: CGFloat = 34
@@ -335,6 +337,13 @@ class PaymentVC: MyTableVC {
             }
             
             bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
+            if (source == "member") {
+                bottomThreeView.cancelButton.setTitle("上一頁")
+            } else if (source == "order") {
+                bottomThreeView.cancelButton.setTitle("結束")
+            } else {
+                bottomThreeView.cancelButton.setTitle("取消")
+            }
         }
         
         var rows: [OneRow] = [OneRow]()
@@ -713,6 +722,15 @@ class PaymentVC: MyTableVC {
                 Global.instance.removeSpinner(superView: self.view)
                 self.endRefresh()
             }
+        }
+    }
+    
+    override func prev() {
+        if (source == "member") {
+            super.prev()
+        } else if (source == "order") {
+            self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+            super.prev()
         }
     }
     
