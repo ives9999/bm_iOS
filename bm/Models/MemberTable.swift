@@ -618,6 +618,7 @@ class MemberCoinTable: Table {
     var price: Int = 0
     var balance: Int = 0
     var order_id: Int = 0
+    var order_token: String = ""
     var coin_show: String = "0"
     var able_type_show: String = ""
     var type_in_enum: MEMBER_COIN_IN_TYPE = MEMBER_COIN_IN_TYPE.none
@@ -635,6 +636,7 @@ class MemberCoinTable: Table {
         case price
         case balance
         case order_id
+        case order_token
     }
     
     override init() {
@@ -656,6 +658,7 @@ class MemberCoinTable: Table {
         price = try container.decodeIfPresent(Int.self, forKey: .price) ?? 0
         balance = try container.decodeIfPresent(Int.self, forKey: .balance) ?? 0
         order_id = try container.decodeIfPresent(Int.self, forKey: .order_id) ?? 0
+        order_token = try container.decodeIfPresent(String.self, forKey: .order_token) ?? ""
     }
     
     override func filterRow() {

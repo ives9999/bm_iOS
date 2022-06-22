@@ -679,6 +679,9 @@ class MemberService: DataService {
         let url: String = URL_MEMBER_COINLIST
         let params: [String: String] = ["device": "app","member_token":_member_token]
         
+        print(url)
+        print(params)
+        
         AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             switch response.result {

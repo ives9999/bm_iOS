@@ -69,7 +69,6 @@ class MemberCoinListCell: SuperCell {
             
             noLbl.text = String(no) + "."
             
-            priceLbl.text = row!.coin.formattedWithSeparator
             dateLbl.text = row!.created_at.noSec()
             
             balanceLbl.text = row!.balance.formattedWithSeparator
@@ -83,6 +82,7 @@ class MemberCoinListCell: SuperCell {
             
             
             if (row!.in_out) {
+                priceLbl.text = "+" + row!.coin.formattedWithSeparator
                 typeButton.setTitle(row!.type_in_enum.rawValue)
                 if (row!.type_in_enum == MEMBER_COIN_IN_TYPE.buy) {
                     typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_BUY))
@@ -92,6 +92,8 @@ class MemberCoinListCell: SuperCell {
                     typeButton.isHidden = true
                 }
             } else {
+                priceLbl.text = "-" + row!.coin.formattedWithSeparator
+                priceLbl.setTextColor(UIColor(MY_RED))
                 typeButton.setTitle(row!.type_out_enum.rawValue)
                 if (row!.type_out_enum == MEMBER_COIN_OUT_TYPE.product) {
                     typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_PAY))

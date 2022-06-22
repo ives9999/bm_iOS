@@ -86,7 +86,17 @@ class MemberCoinListVC: MyTableVC {
         let row: MemberCoinTable = memberCoinTables[indexPath.row]
         row.filterRow()
         
-        toPayment(order_token: row.able_token)
+        //購買點數，前往查看訂單
+        if MEMBER_COIN_IN_TYPE.enumFromString(row.in_type) == MEMBER_COIN_IN_TYPE.buy && row.order_token.count > 0 {
+            toPayment(order_token: row.order_token, source: "member")
+        }
+        
+        //使用點數購買商品，前往查看訂單
+        if !row.in_out && MEMBER_COIN_OUT_TYPE.enumFromString(row.out_type) == MEMBER_COIN_OUT_TYPE.product && row.able_type == "order" {
+            toPayment(order_token: row.able_token, source: "member")
+        }
+        
+        
         
 //        if let cell = tableView.cellForRow(at: indexPath) as? MemberCoinListCell {
 //
