@@ -870,7 +870,7 @@ enum SHIPPING_PROCESS: String {
     case shipping = "已經出貨"
     case store = "商品已到便利商店"
     case complete = "已完成取貨"
-    case back = "貨物退回"
+    case `return` = "貨物退回"
     
     func enumToString()-> String {
         switch self {
@@ -882,7 +882,7 @@ enum SHIPPING_PROCESS: String {
             return "store"
         case .complete:
             return "complete"
-        case .back:
+        case .return:
             return "back"
         }
     }
@@ -898,7 +898,7 @@ enum SHIPPING_PROCESS: String {
         case "complete":
             return .complete
         case "back":
-            return .back
+            return .return
         default:
             return .normal
         }

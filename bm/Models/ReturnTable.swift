@@ -16,6 +16,8 @@ class ReturnTable: Table {
     var expire_at: String = ""
     var error_msg: String = ""
     
+    var expire_at_show: String = ""
+    
     enum CodingKeys: String, CodingKey {
         case order_id
         case sn_id
@@ -41,6 +43,11 @@ class ReturnTable: Table {
     
     override func filterRow() {
         super.filterRow()
+        
+        if (expire_at.count > 0) {
+            expire_at_show = expire_at.noSec()
+        }
+        
         if created_at.count > 0 {
             created_at_show = created_at.noSec()
         }
