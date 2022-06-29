@@ -106,7 +106,8 @@ class MemberVC: MyTableVC {
         sections.append(makeSection2Row(isEpanded: true))
         sections.append(makeSection3Row())
         sections.append(makeSection4Row())
-        sections.append(makeSection5Row())
+        sections.append(makeSectionBankRow())
+        sections.append(makeSectionXRow())
         
         return sections
     }
@@ -244,7 +245,19 @@ class MemberVC: MyTableVC {
         return s
     }
     
-    func makeSection5Row(isEpanded: Bool = true)-> MemberSection {
+    func makeSectionBankRow(isEpanded: Bool = true)-> MemberSection {
+
+        var rows: [MemberRow] = [MemberRow]()
+        
+        let r1: MemberRow = MemberRow(title: "銀行帳號", icon: "bank", segue: TO_MEMBER_BANK)
+        rows.append(r1)
+
+        let s: MemberSection = MemberSection(title: "銀行帳號", isExpanded: isEpanded, items: rows)
+
+        return s
+    }
+    
+    func makeSectionXRow(isEpanded: Bool = true)-> MemberSection {
 
         var rows: [MemberRow] = [MemberRow]()
         
@@ -508,6 +521,8 @@ class MemberVC: MyTableVC {
             toManagerTeam(manager_token: Member.instance.token)
         } else if segue == "toRequestManagerTeam" {
             toRequestManagerTeam()
+        } else if segue == TO_MEMBER_BANK {
+            toMemberBank()
         } else if segue == "delete" {
             delete()
         } else if segue == TO_MEMBER_COIN_LIST {

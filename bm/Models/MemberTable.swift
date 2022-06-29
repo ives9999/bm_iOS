@@ -683,3 +683,36 @@ class MemberCoinTable: Table {
     }
     
 }
+
+class MemberBankTable: Table {
+    
+    var bank: String = ""
+    var branch: String = ""
+    var bank_code: Int = 0
+    var account: String = ""
+    
+    enum CodingKeys: String, CodingKey {
+        case bank
+        case branch
+        case bank_code
+        case account
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        bank = try container.decodeIfPresent(String.self, forKey: .bank) ?? ""
+        branch = try container.decodeIfPresent(String.self, forKey: .branch) ?? ""
+        bank_code = try container.decodeIfPresent(Int.self, forKey: .bank_code) ?? 0
+        account = try container.decodeIfPresent(String.self, forKey: .account) ?? ""
+    }
+    
+    override func filterRow() {
+        super.filterRow()
+    }
+}

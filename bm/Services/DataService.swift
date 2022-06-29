@@ -167,8 +167,8 @@ class DataService {
         let url: String = URL_ORDER_RETURN
         let params: [String: String] = ["device": "app", "channel": CHANNEL, "token": token]
         
-        print(url)
-        print(params)
+        //print(url)
+        //print(params)
         
         AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             switch response.result {
@@ -210,13 +210,13 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        print(filter.toJSONString())
+        //print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        print(url)
+        //print(url)
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
@@ -275,13 +275,13 @@ class DataService {
             body.merge(["member_token":Member.instance.token])
         }
         
-        print(body)
+        //print(body)
         let source: String? = getSource()
         var url: String?
         if source != nil {
             url = String(format: URL_ONE, source!)
         }
-        print(url)
+        //print(url)
         
         if url != nil {
             AF.request(url!, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in

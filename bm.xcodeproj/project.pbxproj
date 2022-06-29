@@ -325,6 +325,7 @@
 		F969319D1FD12B930005C13F /* TeamTempPlayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F969319C1FD12B930005C13F /* TeamTempPlayCell.swift */; };
 		F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */; };
 		F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */; };
+		F99DF39D286B393300A7C2C6 /* MemberBankVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99DF39C286B393300A7C2C6 /* MemberBankVC.swift */; };
 		F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */; };
 		F9A1CB831F986C2300DDEC86 /* CollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */; };
 		F9A1CB851F9895C300DDEC86 /* CoachVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A1CB841F9895C300DDEC86 /* CoachVC.swift */; };
@@ -743,6 +744,7 @@
 		F969319C1FD12B930005C13F /* TeamTempPlayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayCell.swift; sourceTree = "<group>"; };
 		F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayListCell.swift; sourceTree = "<group>"; };
 		F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
+		F99DF39C286B393300A7C2C6 /* MemberBankVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberBankVC.swift; sourceTree = "<group>"; };
 		F9A1CB7E1F95CD2500DDEC86 /* CollectionCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell1.swift; sourceTree = "<group>"; };
 		F9A1CB821F986C2300DDEC86 /* CollectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionVC.swift; sourceTree = "<group>"; };
 		F9A1CB841F9895C300DDEC86 /* CoachVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachVC.swift; sourceTree = "<group>"; };
@@ -1343,6 +1345,7 @@
 				B3A5A28720B68981001A846F /* ValidateVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
+				F99DF39C286B393300A7C2C6 /* MemberBankVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1889,6 +1892,7 @@
 				B3B7588B25A802A7006ACC33 /* OrderForm.swift in Sources */,
 				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
+				F99DF39D286B393300A7C2C6 /* MemberBankVC.swift in Sources */,
 				B370EFBF26AD3F2B0022E599 /* MemberCartListVC.swift in Sources */,
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
 				F964CDDB276F5CBA004F1C78 /* ManagerSignupVC.swift in Sources */,
@@ -2103,7 +2107,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.2.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2128,7 +2132,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2287,7 +2291,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
@@ -2319,7 +2323,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.1;
+				MARKETING_VERSION = 2.2.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";

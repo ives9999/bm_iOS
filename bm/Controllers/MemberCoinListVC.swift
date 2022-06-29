@@ -51,7 +51,12 @@ class MemberCoinListVC: MyTableVC {
                 //print(jsonData.map { String(format: "%02x", $0) }.joined())
                 let coinResultTable: CoinResultTable = try JSONDecoder().decode(CoinResultTable.self, from: jsonData!)
                 if (coinResultTable.success) {
-                    self.memberCoinTables = coinResultTable.rows
+                    
+                    if coinResultTable.rows.count > 0 {
+                        self.memberCoinTables = coinResultTable.rows
+                    } else {
+                        view.setInfo(info: "目前暫無資料", topAnchor: top)
+                    }
                 }
             } else {
                 warning("無法從伺服器取得正確的json資料，請洽管理員")

@@ -679,17 +679,17 @@ class MemberService: DataService {
         let url: String = URL_MEMBER_COINLIST
         let params: [String: String] = ["device": "app","member_token":_member_token]
         
-        print(url)
-        print(params)
+        //print(url)
+        //print(params)
         
         AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             switch response.result {
-            case .success(let value):
-            //case .success(_):
+            //case .success(let value):
+            case .success(_):
                 if response.data != nil {
-                    let json = JSON(value)
-                    print(json)
+//                    let json = JSON(value)
+//                    print(json)
                     if (response.data != nil) {
                         self.jsonData = response.data!
                         completion(true)
