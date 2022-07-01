@@ -41,6 +41,8 @@ class MemberTable: Table {
     
     var area_show: String = ""
     
+    var bank: MemberBankTable?
+    
     //要顯示時再呼叫即可
 //    var sex_show: String = ""
 //    var validate_show: String = ""
@@ -66,6 +68,7 @@ class MemberTable: Table {
         case line
         case role
         case validate
+        case bank
     }
     
     override init() {
@@ -98,6 +101,8 @@ class MemberTable: Table {
         fb = try container.decodeIfPresent(String.self, forKey: .fb) ?? ""
         line = try container.decodeIfPresent(String.self, forKey: .line) ?? ""
         validate = try container.decodeIfPresent(Int.self, forKey: .validate) ?? 0
+        
+        bank = try container.decodeIfPresent(MemberBankTable.self, forKey: .bank) ?? nil
     }
     
     override func filterRow() {
@@ -140,11 +145,29 @@ class MemberTable: Table {
                 //print("\(property.label ?? ""): \(property.value)")
                 if let label: String = property.label {
                     let value = property.value
-                    session.set(label, value)
+                    if label == "bank" && self.bank != nil {
+                        toBankSession(self.bank!)
+                    } else {
+                        session.set(label, value)
+                    }
                 }
             }
             mirror = mirror?.superclassMirror
         } while mirror != nil
+    }
+    
+    func toBankSession(_ bank: MemberBankTable) {
+        let session: UserDefaults = UserDefaults.standard
+        var mirror1: Mirror? = Mirror(reflecting: bank)
+        repeat {
+            for property1 in mirror1!.children {
+                if let label1: String = property1.label {
+                    let value1 = property1.value
+                    session.set(label1, value1)
+                }
+            }
+            mirror1 = mirror1?.superclassMirror
+        } while mirror1 != nil
     }
     
     func sexShow(rawValue: String) -> String {
@@ -442,6 +465,42 @@ class Member {
         }
         set {
             session.set(ISLOGGEDIN_KEY, newValue)
+        }
+    }
+    
+    var bank: String {
+        get {
+            return session.getString(BANK_BANK_KEY)
+        }
+        set {
+            session.set(BANK_BANK_KEY, newValue)
+        }
+    }
+    
+    var branch: String {
+        get {
+            return session.getString(BANK_BRANCH_KEY)
+        }
+        set {
+            session.set(BANK_BRANCH_KEY, newValue)
+        }
+    }
+    
+    var bank_code: String {
+        get {
+            return session.getString(BANK_CODE_KEY)
+        }
+        set {
+            session.set(BANK_CODE_KEY, newValue)
+        }
+    }
+    
+    var account: String {
+        get {
+            return session.getString(BANK_ACCOUNT_KEY)
+        }
+        set {
+            session.set(BANK_ACCOUNT_KEY, newValue)
         }
     }
     

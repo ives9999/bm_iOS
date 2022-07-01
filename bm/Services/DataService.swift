@@ -292,7 +292,8 @@ class DataService {
                 //case .success(let value):
                 case .success(_):
                     if response.data != nil {
-                        //print(value)
+                        //let str = response.data!.prettyPrintedJSONString
+                        //print(str)
                         if (response.data != nil) {
                             self.jsonData = response.data!
                             completion(true)

@@ -672,6 +672,44 @@ class MemberService: DataService {
         //return (res, "")
     }
     
+    func bank(_params: [String: String], completion: @escaping CompletionHandler) {
+        
+        let url: String = URL_MEMBER_BANK
+        var params: [String: String] = ["channel":CHANNEL,"device":"app"]
+        params.merge(_params)
+        
+        //print(url)
+        //print(params)
+        
+        msg = ""
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            switch response.result {
+            //case .success(let value):
+            case .success(_):
+                if response.data != nil {
+                    //let json = JSON(value)
+                    //print(value)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
+                    }
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
     func MemberCoinList(member_token: String? = nil, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
         let _member_token: String = (member_token == nil) ? Member.instance.token : member_token!

@@ -283,7 +283,7 @@ class MemberVC: MyTableVC {
                 do {
                     let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
                     table.toSession(isLoggedIn: true)
-                    //self.session.dump()
+                    self.session.dump()
                     self.loginout()
                     self.tableView.reloadData()
                 } catch {
