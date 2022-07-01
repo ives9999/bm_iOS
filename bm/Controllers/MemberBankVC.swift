@@ -108,6 +108,24 @@ class MemberBankVC: BaseViewController {
         }
     }
     
+    @IBAction func clearButtonPressed(view: UIView) {
+        if let clearButton: UIButton = view as? UIButton {
+            let tag: Int = clearButton.tag
+            switch (tag) {
+            case 1:
+                self.bankTF.text = ""
+            case 2:
+                self.branchTF.text = ""
+            case 3:
+                self.bankCodeTF.text = ""
+            case 4:
+                self.accountTF.text = ""
+            default:
+                self.warning("此按鈕沒有定義")
+            }
+        }
+    }
+    
     @IBAction func prev1() {
         prev()
     }

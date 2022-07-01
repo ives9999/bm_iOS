@@ -1110,7 +1110,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WsS-2M-hMe">
+                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WsS-2M-hMe">
                                                 <rect key="frame" x="357" y="0.0" width="25" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="25" id="yOA-TR-7oP"/>
@@ -1118,6 +1118,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="delete"/>
                                                 <connections>
+                                                    <action selector="clearButtonPressedWithView:" destination="U6P-nD-Q6A" eventType="touchUpInside" id="17I-sC-bmy"/>
                                                     <action selector="nameClear" destination="44A-2y-PC4" eventType="touchUpInside" id="r64-Ss-Us1"/>
                                                 </connections>
                                             </button>
@@ -1155,7 +1156,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWg-Ch-V8S">
+                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oWg-Ch-V8S">
                                                 <rect key="frame" x="357" y="0.0" width="25" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="25" id="bbr-E7-fx9"/>
@@ -1163,6 +1164,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="delete"/>
                                                 <connections>
+                                                    <action selector="clearButtonPressedWithView:" destination="U6P-nD-Q6A" eventType="touchUpInside" id="I09-mv-jik"/>
                                                     <action selector="nameClear" destination="44A-2y-PC4" eventType="touchUpInside" id="NFl-8L-F8g"/>
                                                 </connections>
                                             </button>
@@ -1201,7 +1203,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8U3-d2-zez">
+                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8U3-d2-zez">
                                                 <rect key="frame" x="248" y="0.0" width="25" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="25" id="HhQ-q7-wfk"/>
@@ -1209,6 +1211,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="delete"/>
                                                 <connections>
+                                                    <action selector="clearButtonPressedWithView:" destination="U6P-nD-Q6A" eventType="touchUpInside" id="tTZ-6t-qD4"/>
                                                     <action selector="nameClear" destination="44A-2y-PC4" eventType="touchUpInside" id="Eil-pY-U8c"/>
                                                 </connections>
                                             </button>
@@ -1245,7 +1248,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMN-Lp-bWB">
+                                            <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rMN-Lp-bWB">
                                                 <rect key="frame" x="357" y="0.0" width="25" height="50"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="25" id="enS-ew-zA1"/>
@@ -1253,6 +1256,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="delete"/>
                                                 <connections>
+                                                    <action selector="clearButtonPressedWithView:" destination="U6P-nD-Q6A" eventType="touchUpInside" id="ITy-ey-ozD"/>
                                                     <action selector="nameClear" destination="44A-2y-PC4" eventType="touchUpInside" id="Wfv-BZ-95k"/>
                                                 </connections>
                                             </button>
