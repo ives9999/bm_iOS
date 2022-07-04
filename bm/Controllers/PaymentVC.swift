@@ -421,8 +421,8 @@ class PaymentVC: MyTableVC {
         }
         row = OneRow(title: "到貨時間", value: orderTable!.shipping!.complete_at, show: orderTable!.shipping!.complete_at_show, key: SHIPPING_COMPLETE_AT_KEY, cell: "text")
         rows.append(row)
-        if (orderTable!.shipping!.back_at.count > 0) {
-            row = OneRow(title: "退貨時間", value: orderTable!.shipping!.back_at, show: orderTable!.shipping!.back_at_show, key: SHIPPING_BACK_AT_KEY, cell: "text")
+        if (orderTable!.shipping!.return_at.count > 0) {
+            row = OneRow(title: "退貨時間", value: orderTable!.shipping!.return_at, show: orderTable!.shipping!.return_at_show, key: SHIPPING_RETURN_AT_KEY, cell: "text")
             rows.append(row)
         }
         section = makeSectionRow(title: "到貨方式", key: SHIPPING_KEY, rows: rows)

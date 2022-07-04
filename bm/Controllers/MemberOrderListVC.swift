@@ -78,7 +78,17 @@ class MemberOrderListVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let row = lists1[indexPath.row]
-        toPayment(order_token: row.token, source: "member")
+        let row = lists1[indexPath.row] as! OrderTable
+        
+        let gateway_method: String = row.gateway!.method
+        if gateway_method == "credit_card" || gateway_method == "store_cvs" {
+            toPayment(order_token: row.token, source: "member")
+        } else if gateway_method == "coin" {
+            
+        } else if gateway_method == "store_pay_711" || gateway_method == "store_pay_family" {
+            toWebView()
+        }
+        
+        //toPayment(order_token: row.token, source: "member")
     }
 }

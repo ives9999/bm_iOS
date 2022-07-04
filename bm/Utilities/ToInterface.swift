@@ -1052,6 +1052,22 @@ extension BaseViewController {
         }
     }
     
+    func toWebView() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "More", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_WEBVIEW) as? WebViewVC {
+                //viewController.type = type
+                //viewController.delegate = self
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController =  self.storyboard!.instantiateViewController(withIdentifier: TO_WEBVIEW) as! WebViewVC
+            //viewController.type = type
+            //viewController.delegate = self
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toYoutubePlayer(token: String) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)

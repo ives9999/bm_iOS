@@ -555,18 +555,19 @@ class ShippingTable: Table {
     var shipping_at: String = ""
     var store_at: String = ""
     var complete_at: String = ""
-    var back_at: String = ""
+    var return_at: String = ""
         
     var UpdateStatusDate: String = ""
     var CVSPaymentNo: String = ""
     var CVSValidationNo: String = ""
     var BookingNote: String = ""
+    
     var method_show: String = ""
     var process_show: String = ""
     var shipping_at_show: String = "準備中"
     var store_at_show: String = ""
     var complete_at_show: String = ""
-    var back_at_show: String = ""
+    var return_at_show: String = ""
     
     enum CodingKeys: String, CodingKey {
         case order_id
@@ -588,7 +589,7 @@ class ShippingTable: Table {
         case shipping_at
         case store_at
         case complete_at
-        case back_at
+        case return_at
     }
     
     required init(from decoder: Decoder) throws {
@@ -614,7 +615,7 @@ class ShippingTable: Table {
         shipping_at = try container.decodeIfPresent(String.self, forKey: .shipping_at) ?? ""
         store_at = try container.decodeIfPresent(String.self, forKey: .store_at) ?? ""
         complete_at = try container.decodeIfPresent(String.self, forKey: .complete_at) ?? ""
-        back_at = try container.decodeIfPresent(String.self, forKey: .back_at) ?? ""
+        return_at = try container.decodeIfPresent(String.self, forKey: .return_at) ?? ""
         
     }
     
@@ -626,7 +627,7 @@ class ShippingTable: Table {
         shipping_at_show = shipping_at.noSec()
         store_at_show = store_at.noSec()
         complete_at_show = complete_at.noSec()
-        back_at_show = back_at.noSec()
+        return_at_show = return_at.noSec()
     }
 }
 

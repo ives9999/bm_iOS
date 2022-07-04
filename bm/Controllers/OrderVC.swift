@@ -925,10 +925,17 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                                 self.cartItemCount = 0
                                 self.session.set("cartItemCount", self.cartItemCount)
                                 
-                                let ecpay_token: String = orderTable!.ecpay_token
-                                let ecpay_token_ExpireDate: String = orderTable!.ecpay_token_ExpireDate
-                                self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
-                                    self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
+                                let gateway_method: String = orderTable!.gateway!.method
+                                if gateway_method == "credit_card" || gateway_method == "store_cvs" {
+                                    let ecpay_token: String = orderTable!.ecpay_token
+                                    let ecpay_token_ExpireDate: String = orderTable!.ecpay_token_ExpireDate
+                                    self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
+                                        self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
+                                    }
+                                } else if gateway_method == "coin" {
+                                    
+                                } else if gateway_method == "store_pay_711" || gateway_method == "store_pay_family" {
+                                    self.toWebView()
                                 }
                             }
                         }
