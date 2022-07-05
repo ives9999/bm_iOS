@@ -789,6 +789,19 @@ enum GATEWAY: String {
         let res: GATEWAY = stringToEnum(string)
         return res.rawValue
     }
+    
+    func enumToECPay()-> String {
+        switch self {
+        case .store_pay_711:
+            return "UNIMARTC2C"
+        case .store_pay_family:
+            return "FAMI"
+//        case .store_hilife
+//            return "HILIFE"
+        default:
+            return "UNIMARTC2C"
+        }
+    }
 }
 
 enum SHIPPING_WAY: String {

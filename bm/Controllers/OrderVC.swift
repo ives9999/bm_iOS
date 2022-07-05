@@ -908,11 +908,13 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         params[MEMO_KEY] = getOneRowValue(MEMO_KEY)
         
+        //func update(token: String = "", params: [String: String], completion: @escaping CompletionHandler)
         OrderService.instance.update(params: params) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
                 
                 self.jsonData = OrderService.instance.jsonData
+                //print(self.jsonData?.prettyPrintedJSONString)
                 //print(self.jsonData.)
                 do {
                     if (self.jsonData != nil) {
@@ -926,14 +928,12 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                                 self.session.set("cartItemCount", self.cartItemCount)
                                 
                                 let gateway_method: String = orderTable!.gateway!.method
-                                if gateway_method == "credit_card" || gateway_method == "store_cvs" {
+                                if gateway_method == "credit_card" || gateway_method == "store_cvs" || gateway_method == "coin" {
                                     let ecpay_token: String = orderTable!.ecpay_token
                                     let ecpay_token_ExpireDate: String = orderTable!.ecpay_token_ExpireDate
                                     self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
                                         self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
                                     }
-                                } else if gateway_method == "coin" {
-                                    
                                 } else if gateway_method == "store_pay_711" || gateway_method == "store_pay_family" {
                                     self.toWebView()
                                 }

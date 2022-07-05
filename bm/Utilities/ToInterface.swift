@@ -1052,18 +1052,16 @@ extension BaseViewController {
         }
     }
     
-    func toWebView() {
+    func toWebView(token: String? = nil) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_WEBVIEW) as? WebViewVC {
-                //viewController.type = type
-                //viewController.delegate = self
+                viewController.token = token
                 show(viewController, sender: nil)
             }
         } else {
             let viewController =  self.storyboard!.instantiateViewController(withIdentifier: TO_WEBVIEW) as! WebViewVC
-            //viewController.type = type
-            //viewController.delegate = self
+            viewController.token = token
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

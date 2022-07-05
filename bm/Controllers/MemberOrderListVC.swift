@@ -84,9 +84,9 @@ class MemberOrderListVC: MyTableVC {
         if gateway_method == "credit_card" || gateway_method == "store_cvs" {
             toPayment(order_token: row.token, source: "member")
         } else if gateway_method == "coin" {
-            
+            toPayment(order_token: row.token, source: "member")
         } else if gateway_method == "store_pay_711" || gateway_method == "store_pay_family" {
-            toWebView()
+            toWebView(token: row.token)
         }
         
         //toPayment(order_token: row.token, source: "member")
