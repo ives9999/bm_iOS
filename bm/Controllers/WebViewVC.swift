@@ -9,7 +9,29 @@
 import Foundation
 import WebKit
 
-class WebViewVC: BaseViewController {
+class WebViewVC: BaseViewController, WKScriptMessageHandler {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard let dict = message.body as? [String : AnyObject] else {
+            return
+        }
+
+        print(dict)
+        
+        guard let message = dict["key"] else {
+            return
+        }
+        
+        let script = "document.getElementById('value').innerText = \"\(message)\""
+        
+        webView.evaluateJavaScript(script) { (result, error) in
+            if let result = result {
+                print("Label is updated with message: \(result)")
+            } else if let error = error {
+                print("An error occurred: \(error)")
+            }
+        }
+    }    
     
     @IBOutlet weak var top: Top!
     @IBOutlet weak var dataContainer: UIView!
@@ -23,6 +45,26 @@ class WebViewVC: BaseViewController {
         
         top.setTitle(title: "web view")
         top.delegate = self
+        
+        //let configuration: WKWebViewConfiguration = WKWebViewConfiguration()
+        //configuration.userContentController.add(self, name: "doStuffMessageHandler")
+        let contentController = webView.configuration.userContentController
+        contentController.add(self, name: "toggleMessageHandler")
+        
+        let js = """
+            var _selector = document.querySelector('input[name=myCheckbox]');
+            _selector.addEventListener('change', function(event) {
+                var message = (_selector.checked) ? "Toggle Switch is on" : "Toggle Switch is off";
+                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.toggleMessageHandler) {
+                    window.webkit.messageHandlers.toggleMessageHandler.postMessage({
+                        "key": message
+                    });
+                }
+            });
+        """
+        
+        let script: WKUserScript = WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+        contentController.addUserScript(script)
         
         if (token != nil) {
             let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
@@ -47,19 +89,23 @@ class WebViewVC: BaseViewController {
     func showWebView(table: Table) {
         
         let orderTable: OrderTable = table as! OrderTable
-        var url: String = "http://bm.sportpassword.localhost/app/order/ecpay2_c2c_map?"
-        url += "LogisticsType=CVS"
+        
+        let path1: String = "http://bm.sportpassword.localhost/c2c.html"
+        var path: String = "http://bm.sportpassword.localhost/app/order/ecpay2_c2c_map?"
+        path += "LogisticsType=CVS"
         if orderTable.gateway != nil {
             let gatewayEnum: GATEWAY = GATEWAY.stringToEnum(orderTable.gateway!.method)
-            url += "&LogisticsSubType=" + gatewayEnum.enumToECPay()
-            url += "&IsCollection=Y&Device=1"
-            url += "&order_token=" + token!
+            path += "&LogisticsSubType=" + gatewayEnum.enumToECPay()
+            path += "&IsCollection=Y&Device=1"
+            path += "&order_token=" + token!
         }
         
         //print(url)
         
-        var request = URLRequest(url: URL(string: url)!)
-        request.httpMethod = "POST"
-        webView.load(request)
+        if let url: URL = URL(string: path1) {
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            webView.load(request)
+        }
     }
 }
