@@ -16,23 +16,29 @@
                 <rect key="frame" x="0.0" y="0.0" width="456" height="282"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商品名稱" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdx-Cj-Eq5" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="40" y="12" width="230" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fdx-Cj-Eq5" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="40" y="12" width="230" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="230" id="lT7-rR-A6O"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
+                        <attributedString key="attributedText">
+                            <fragment content="商品名稱">
+                                <attributes>
+                                    <font key="NSFont" size="17" name=".PingFangTC-Regular"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.25" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金額" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b35-yx-7ox" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="413" y="12" width="35" height="20.5"/>
+                        <rect key="frame" x="413" y="14" width="35" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單編號" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ylb-cA-WgR" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="40" y="48.5" width="70" height="20.5"/>
+                        <rect key="frame" x="40" y="52" width="70" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -44,74 +50,81 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="日期" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nv4-Qa-qC4" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="413" y="48.5" width="35" height="20.5"/>
+                        <rect key="frame" x="413" y="52" width="35" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單狀態：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4y-TR-Gpe" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="40" y="85" width="87" height="21"/>
+                        <rect key="frame" x="40" y="88.5" width="87" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款狀態：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDe-pN-p1T" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="40" y="122" width="87" height="21"/>
+                        <rect key="frame" x="40" y="125.5" width="87" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qOU-mm-qP4" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="131" y="85" width="42" height="21"/>
+                        <rect key="frame" x="131" y="88.5" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到貨狀態：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Br7-jI-d2j" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="40" y="159" width="87" height="21"/>
+                        <rect key="frame" x="40" y="162.5" width="87" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tgd-TC-eif" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="131" y="122" width="42" height="21"/>
+                        <rect key="frame" x="131" y="125.5" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Spi-P6-xyW" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="131" y="159" width="42" height="21"/>
+                        <rect key="frame" x="131" y="162.5" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eB-kd-t8m" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="406" y="159" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2eB-kd-t8m" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="406.5" y="163" width="41.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="到貨方式：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wSk-3V-oyS" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="277" y="159" width="87" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfc-ui-IwC" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="406" y="122" width="42" height="21"/>
+                        <rect key="frame" x="220" y="162.5" width="87" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="付款方式：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3I-CL-e8F" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="277" y="122" width="87" height="21"/>
+                        <rect key="frame" x="220" y="125.5" width="87" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bfc-ui-IwC" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="406.5" y="125" width="41.5" height="22.5"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Label">
+                                <attributes>
+                                    <font key="NSFont" metaFont="system" size="17"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" lineHeightMultiple="1.1000000000000001" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="D4y-TR-Gpe" firstAttribute="leading" secondItem="7AP-3N-vhd" secondAttribute="trailing" constant="12" id="1bp-tx-jYR"/>
+                    <constraint firstItem="bfc-ui-IwC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="y3I-CL-e8F" secondAttribute="trailing" constant="8" id="4hE-CY-IYW"/>
                     <constraint firstItem="y3I-CL-e8F" firstAttribute="centerY" secondItem="KDe-pN-p1T" secondAttribute="centerY" id="7OI-Nx-Y4T"/>
                     <constraint firstItem="Spi-P6-xyW" firstAttribute="leading" secondItem="Br7-jI-d2j" secondAttribute="trailing" constant="4" id="8Ld-N4-U71"/>
                     <constraint firstItem="KDe-pN-p1T" firstAttribute="top" secondItem="D4y-TR-Gpe" secondAttribute="bottom" constant="16" id="CdM-rL-s27"/>
@@ -130,9 +143,9 @@
                     <constraint firstAttribute="trailing" secondItem="2eB-kd-t8m" secondAttribute="trailing" constant="8" id="Wsx-Ys-cfb"/>
                     <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Br7-jI-d2j" secondAttribute="bottom" constant="16" id="a79-A2-ayK"/>
                     <constraint firstItem="Tgd-TC-eif" firstAttribute="centerY" secondItem="KDe-pN-p1T" secondAttribute="centerY" id="alp-xM-Iyc"/>
-                    <constraint firstItem="y3I-CL-e8F" firstAttribute="leading" secondItem="KDe-pN-p1T" secondAttribute="trailing" constant="150" id="bc8-il-db6"/>
+                    <constraint firstItem="y3I-CL-e8F" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="220" id="bc8-il-db6"/>
                     <constraint firstItem="Br7-jI-d2j" firstAttribute="leading" secondItem="7AP-3N-vhd" secondAttribute="trailing" constant="12" id="da8-Pa-jNQ"/>
-                    <constraint firstItem="wSk-3V-oyS" firstAttribute="leading" secondItem="Br7-jI-d2j" secondAttribute="trailing" constant="150" id="fpx-fz-arI"/>
+                    <constraint firstItem="wSk-3V-oyS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="220" id="fpx-fz-arI"/>
                     <constraint firstItem="bfc-ui-IwC" firstAttribute="centerY" secondItem="KDe-pN-p1T" secondAttribute="centerY" id="frD-oM-4P1"/>
                     <constraint firstItem="nv4-Qa-qC4" firstAttribute="centerY" secondItem="Ylb-cA-WgR" secondAttribute="centerY" id="gaA-Tt-n4N"/>
                     <constraint firstItem="Tgd-TC-eif" firstAttribute="leading" secondItem="KDe-pN-p1T" secondAttribute="trailing" constant="4" id="jBt-4l-mKS"/>

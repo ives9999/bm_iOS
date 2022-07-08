@@ -31,7 +31,7 @@ class SuperLabel: UILabel {
         self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
         self.textAlignment = NSTextAlignment.left
         
-        self.numberOfLines = 1
+        self.numberOfLines = 0
     }
     
     func setTextSize(_ size: CGFloat) {

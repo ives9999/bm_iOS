@@ -9,29 +9,7 @@
 import Foundation
 import WebKit
 
-class WebViewVC: BaseViewController, WKScriptMessageHandler {
-    
-    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard let dict = message.body as? [String : AnyObject] else {
-            return
-        }
-
-        print(dict)
-        
-        guard let message = dict["key"] else {
-            return
-        }
-        
-        let script = "document.getElementById('value').innerText = \"\(message)\""
-        
-        webView.evaluateJavaScript(script) { (result, error) in
-            if let result = result {
-                print("Label is updated with message: \(result)")
-            } else if let error = error {
-                print("An error occurred: \(error)")
-            }
-        }
-    }    
+class WebViewVC: BaseViewController {
     
     @IBOutlet weak var top: Top!
     @IBOutlet weak var dataContainer: UIView!
@@ -51,20 +29,20 @@ class WebViewVC: BaseViewController, WKScriptMessageHandler {
         let contentController = webView.configuration.userContentController
         contentController.add(self, name: "toggleMessageHandler")
         
-        let js = """
-            var _selector = document.querySelector('input[name=myCheckbox]');
-            _selector.addEventListener('change', function(event) {
-                var message = (_selector.checked) ? "Toggle Switch is on" : "Toggle Switch is off";
-                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.toggleMessageHandler) {
-                    window.webkit.messageHandlers.toggleMessageHandler.postMessage({
-                        "key": message
-                    });
-                }
-            });
-        """
-        
-        let script: WKUserScript = WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
-        contentController.addUserScript(script)
+//        let js = """
+//            var _selector = document.querySelector('input[name=myCheckbox]');
+//            _selector.addEventListener('change', function(event) {
+//                var message = (_selector.checked) ? "Toggle Switch is on" : "Toggle Switch is off";
+//                if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.toggleMessageHandler) {
+//                    window.webkit.messageHandlers.toggleMessageHandler.postMessage({
+//                        "key": message
+//                    });
+//                }
+//            });
+//        """
+//
+//        let script: WKUserScript = WKUserScript(source: js, injectionTime: .atDocumentEnd, forMainFrameOnly: false)
+//        contentController.addUserScript(script)
         
         if (token != nil) {
             let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
@@ -98,14 +76,41 @@ class WebViewVC: BaseViewController, WKScriptMessageHandler {
             path += "&LogisticsSubType=" + gatewayEnum.enumToECPay()
             path += "&IsCollection=Y&Device=1"
             path += "&order_token=" + token!
+            path += "&phone=iOS"
         }
         
-        //print(url)
+        print(path)
         
-        if let url: URL = URL(string: path1) {
+        if let url: URL = URL(string: path) {
             var request = URLRequest(url: url)
             request.httpMethod = "POST"
             webView.load(request)
         }
+    }
+}
+
+extension WebViewVC: WKScriptMessageHandler {
+    
+    func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+        guard let dict = message.body as? [String : AnyObject] else {
+            return
+        }
+
+        print(dict)
+        prev()
+        
+//        guard let message = dict["key"] else {
+//            return
+//        }
+//
+//        let script = "document.getElementById('value').innerText = \"\(message)\""
+//
+//        webView.evaluateJavaScript(script) { (result, error) in
+//            if let result = result {
+//                print("Label is updated with message: \(result)")
+//            } else if let error = error {
+//                print("An error occurred: \(error)")
+//            }
+//        }
     }
 }
