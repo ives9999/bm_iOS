@@ -795,9 +795,9 @@ enum GATEWAY: String {
         case .store_pay_711:
             return "UNIMARTC2C"
         case .store_pay_family:
-            return "FAMI"
+            return "FAMIC2C"
 //        case .store_hilife
-//            return "HILIFE"
+//            return "HILIFEC2C"
         default:
             return "UNIMARTC2C"
         }

@@ -907,6 +907,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["order_address"] = getOneRowValue(ADDRESS_KEY)
         
         params[MEMO_KEY] = getOneRowValue(MEMO_KEY)
+        print(params)
         
         //func update(token: String = "", params: [String: String], completion: @escaping CompletionHandler)
         OrderService.instance.update(params: params) { (success) in
@@ -927,15 +928,15 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                                 self.cartItemCount = 0
                                 self.session.set("cartItemCount", self.cartItemCount)
                                 
-                                let gateway_method: String = orderTable!.gateway!.method
-                                if gateway_method == "credit_card" || gateway_method == "store_cvs" || gateway_method == "coin" {
+                                var gateway_method: GATEWAY = GATEWAY.stringToEnum(orderTable!.gateway!.method)
+                                if gateway_method == GATEWAY.credit_card || gateway_method == GATEWAY.store_cvs || gateway_method == GATEWAY.coin {
                                     let ecpay_token: String = orderTable!.ecpay_token
                                     let ecpay_token_ExpireDate: String = orderTable!.ecpay_token_ExpireDate
                                     self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
                                         self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
                                     }
-                                } else if gateway_method == "store_pay_711" || gateway_method == "store_pay_family" {
-                                    self.toWebView()
+                                } else if gateway_method == GATEWAY.store_pay_711 || gateway_method == GATEWAY.store_pay_family {
+                                    self.toWebView(token: orderTable!.token, delegate: self)
                                 }
                             }
                         }

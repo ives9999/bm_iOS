@@ -66,6 +66,10 @@ class MemberCartListVC: MyTableVC {
                 if (cartItemsTable.count > 0) {
                     //lists1 += cartItemsTable
                     submitButton.isHidden = false
+                } else {
+                    tableView.isHidden = true
+                    view.setInfo(info: "目前購物車無商品", topAnchor: topView)
+                    submitButton.isHidden = true
                 }
             } else {
                 tableView.isHidden = true
@@ -131,6 +135,7 @@ class MemberCartListVC: MyTableVC {
             
             Global.instance.addSpinner(superView: self.view)
             self.dataService.delete(token: row.token, type: "cart_item", status: "delete") { (success) in
+                Global.instance.removeSpinner(superView: self.view)
                 if (success) {
                     self.refresh()
                     self.cartItemCount -= 1
@@ -138,7 +143,6 @@ class MemberCartListVC: MyTableVC {
                 } else {
                     self.warning(self.dataService.msg)
                 }
-                Global.instance.removeSpinner(superView: self.view)
             }
         }
     }

@@ -74,8 +74,17 @@ class BottomThreeView: UIView {
         
         let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
         
+        //很奇怪
+//        var n: CGFloat = 300
+//        if padding > 62 && padding < 63 {
+//            n = padding
+//        } else {
+//            n = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
+//        }
+        
         if (!submitButton.isHidden) {
             submitButton.translatesAutoresizingMaskIntoConstraints = false
+            //submitButton.leadingAnchor.con
             submitButton.leadingAnchor.constraint(equalTo: submitButton.superview!.leadingAnchor, constant: padding).isActive = true
             submitButton.widthAnchor.constraint(equalToConstant: button_width).isActive = true
             submitButton.heightAnchor.constraint(equalToConstant: button_height).isActive = true

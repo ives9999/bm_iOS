@@ -118,9 +118,9 @@ class PaymentVC: MyTableVC {
         
         bottomThreeView.delegate = self
         bottomThreeView.submitButton.setTitle("付款")
-        bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
         
         if ecpay_token.count > 0 {
+            bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
             toECPay()
         } else {
             refresh()
@@ -259,6 +259,7 @@ class PaymentVC: MyTableVC {
                 if (success) {
                     
                     let jsonData: Data = OrderService.instance.jsonData!
+                    //print(jsonData.prettyPrintedJSONString)
                     do {
                         self.orderTable = try JSONDecoder().decode(OrderTable.self, from: jsonData)
                         self.initData()
@@ -326,6 +327,7 @@ class PaymentVC: MyTableVC {
         titleLbl.textColor = UIColor.black
         
         orderTable!.filterRow()
+        
         if (orderTable!.all_process > 1) {//已經付費了
             //bottomThreeView.isHidden = true
             //dataContainer.translatesAutoresizingMaskIntoConstraints = false
@@ -336,7 +338,6 @@ class PaymentVC: MyTableVC {
                 bottomThreeView.threeButton.isHidden = true
             }
             
-            bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
             if (source == "member") {
                 bottomThreeView.cancelButton.setTitle("上一頁")
             } else if (source == "order") {
@@ -345,6 +346,12 @@ class PaymentVC: MyTableVC {
                 bottomThreeView.cancelButton.setTitle("取消")
             }
         }
+        
+        if (!orderTable!.canReturn) {
+            bottomThreeView.threeButton.isHidden = true
+        }
+        
+        bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
         
         var rows: [OneRow] = [OneRow]()
         
@@ -469,7 +476,7 @@ class PaymentVC: MyTableVC {
         oneSections.append(section)
         
         //退貨
-        if orderTable!.return != nil {
+        if orderTable!.canReturn {
             rows.removeAll()
             row = OneRow(title: "退貨編號", value: orderTable!.return!.sn_id, show: orderTable!.return!.sn_id, key: RETURN_SN_ID_KEY, cell: "text")
             rows.append(row)
@@ -662,6 +669,22 @@ class PaymentVC: MyTableVC {
                         OneRow(title: "信用卡前6碼", value: card6No, show: card6No, key: "", cell: "text"),
                         OneRow(title: "信用卡後4碼", value: card4No, show: card4No, key: "", cell: "text")
                         ]
+                } else if (method == GATEWAY.store_pay_711) {
+                    if (orderTable!.shipping != nil) {
+                        let CVSPaymentNo: String = orderTable!.shipping!.CVSPaymentNo
+                        let CVSValidationNo: String = orderTable!.shipping!.CVSValidationNo
+                        let paymentNo: String = CVSPaymentNo + CVSValidationNo
+                        popupRows = [
+                            OneRow(title: "代碼", value: paymentNo, show: paymentNo, key: PAYMENT_NO_KEY, cell: "text")
+                            ]
+                    }
+                } else if (method == GATEWAY.store_pay_family) {
+                    if (orderTable!.shipping != nil) {
+                        let paymentNo: String = orderTable!.shipping!.BookingNote
+                        popupRows = [
+                            OneRow(title: "代碼", value: paymentNo, show: paymentNo, key: PAYMENT_NO_KEY, cell: "text")
+                            ]
+                    }
                 }
                 popupTableView.reloadData()
             }

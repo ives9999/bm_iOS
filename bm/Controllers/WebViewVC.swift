@@ -15,7 +15,10 @@ class WebViewVC: BaseViewController {
     @IBOutlet weak var dataContainer: UIView!
     @IBOutlet weak var webView: WKWebView!
     
+    var delegate: BaseViewController?
+    
     var token: String?
+    var type: String?
     
     override func viewDidLoad() {
         
@@ -68,7 +71,7 @@ class WebViewVC: BaseViewController {
         
         let orderTable: OrderTable = table as! OrderTable
         
-        let path1: String = "http://bm.sportpassword.localhost/c2c.html"
+        //let path1: String = "http://bm.sportpassword.localhost/c2c.html"
         var path: String = "http://bm.sportpassword.localhost/app/order/ecpay2_c2c_map?"
         path += "LogisticsType=CVS"
         if orderTable.gateway != nil {
@@ -79,7 +82,7 @@ class WebViewVC: BaseViewController {
             path += "&phone=iOS"
         }
         
-        print(path)
+        //print(path)
         
         if let url: URL = URL(string: path) {
             var request = URLRequest(url: url)
@@ -92,11 +95,19 @@ class WebViewVC: BaseViewController {
 extension WebViewVC: WKScriptMessageHandler {
     
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        guard let dict = message.body as? [String : AnyObject] else {
-            return
-        }
+//        guard let dict = message.body as? [String : AnyObject] else {
+//            return
+//        }
 
-        print(dict)
+        //print(dict)
+        type = "order"
+        if (delegate != nil) {
+            delegate!.info(msg: "超商付款取貨，已經完成門市設定，我們將盡快出貨！！", showCloseButton: false, buttonTitle: "關閉") {
+                self.delegate!.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                self.delegate!.toProduct()
+            }
+            //delegate!.info("超商付款取貨，已經完成門市設定，我們將盡快出貨！！")
+        }
         prev()
         
 //        guard let message = dict["key"] else {
