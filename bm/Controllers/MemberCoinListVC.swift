@@ -91,6 +91,8 @@ class MemberCoinListVC: MyTableVC {
         let row: MemberCoinTable = memberCoinTables[indexPath.row]
         row.filterRow()
         
+        //toPayment(order_token: <#T##String#>)
+        
         //購買點數，前往查看訂單
         if MEMBER_COIN_IN_TYPE.enumFromString(row.in_type) == MEMBER_COIN_IN_TYPE.buy && row.order_token.count > 0 {
             toPayment(order_token: row.order_token, source: "member")

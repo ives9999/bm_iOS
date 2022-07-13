@@ -38,6 +38,7 @@ class MemberService: DataService {
             case .success(_):
                 if (response.data != nil) {
                     self.jsonData = response.data
+                    //print(self.jsonData?.prettyPrintedJSONString)
                     completion(true)
                 } else {
                     self.msg = "沒有任何伺服器回傳的訊息"

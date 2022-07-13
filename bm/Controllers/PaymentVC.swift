@@ -476,9 +476,9 @@ class PaymentVC: MyTableVC {
         oneSections.append(section)
         
         //退貨
-        if orderTable!.canReturn {
+        if orderTable!.canReturn && orderTable!.return != nil {
             rows.removeAll()
-            row = OneRow(title: "退貨編號", value: orderTable!.return!.sn_id, show: orderTable!.return!.sn_id, key: RETURN_SN_ID_KEY, cell: "text")
+            row = OneRow(title: "退貨編號", value: orderTable!.return!.sn_id,show: orderTable!.return!.sn_id, key: RETURN_SN_ID_KEY, cell: "text")
             rows.append(row)
             row = OneRow(title: "編號到期時間", value: orderTable!.return!.expire_at, show: orderTable!.return!.expire_at_show, key: RETURN_EXPIRE_AT_KEY, cell: "text")
             rows.append(row)

@@ -30,14 +30,14 @@ class RegisterVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
     var isFeaturedChange: Bool = false
     
     var testData: [String: String] = [
- //      EMAIL_KEY: "ives@bluemobile.com.tw",
-        //PASSWORD_KEY: "1234",
-        //REPASSWORD_KEY: "1234",
+//       EMAIL_KEY: "ives6@bluemobile.com.tw",
+//        PASSWORD_KEY: "1234",
+//        REPASSWORD_KEY: "1234",
 //        NAME_KEY: "孫士君",
 //        NICKNAME_KEY: "孫世君",
 //        SEX_KEY: "F",
 //        DOB_KEY: "1969-01-05",
-//        MOBILE_KEY: "0911299998",
+//        MOBILE_KEY: "0911299990",
 //        TEL_KEY: "062295888",
 //        CITY_KEY: "218",
 //        "city_name": "台南市",
@@ -47,7 +47,7 @@ class RegisterVC: MyTableVC, UIImagePickerControllerDelegate, UINavigationContro
 //        FB_KEY: "https://www.facebook.com/ives.sun",
 //        LINE_KEY: "ives9999"
         :]
-//    ]
+    //]
     
     override func viewDidLoad() {
         myTablView = tableView
