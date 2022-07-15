@@ -27,6 +27,7 @@ class PaymentVC: MyTableVC {
     var orderTable: OrderTable? = nil
     
     let heightForSection: CGFloat = 34
+    var isECPay: Bool = false
     
 //    var productRows: [[String: String]] = []
 //
@@ -121,6 +122,7 @@ class PaymentVC: MyTableVC {
         
         if ecpay_token.count > 0 {
             bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
+            isECPay = true
             toECPay()
         } else {
             refresh()
@@ -262,6 +264,10 @@ class PaymentVC: MyTableVC {
                     //print(jsonData.prettyPrintedJSONString)
                     do {
                         self.orderTable = try JSONDecoder().decode(OrderTable.self, from: jsonData)
+                        
+                        //如果購買解碼點數，則須更新session的值
+                        self.updateMemberCoin()
+                        
                         self.initData()
                     } catch {
                         self.warning(error.localizedDescription)
@@ -300,6 +306,8 @@ class PaymentVC: MyTableVC {
             params["handle_fee"] = handle_fee
             params["card4No"] = card4No
             params["card6No"] = card6No
+        } else if (gateway == GATEWAY.coin) {
+            
         }
         
         OrderService.instance.update(params: params) { (success) in
@@ -310,7 +318,8 @@ class PaymentVC: MyTableVC {
                 //self.jsonData = OrderService.instance.jsonData
                 self.info(msg: "付款完成", buttonTitle: "關閉", buttonAction: {
                     self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                    self.toProduct()
+                    self.refresh()
+                    //self.toProduct()
                 })
             } else {
                 self.warning(msg: OrderService.instance.msg, buttonTitle: "關閉", buttonAction: {
@@ -490,6 +499,99 @@ class PaymentVC: MyTableVC {
         
         tableView.reloadData()
     }
+    
+    func updateMemberCoin() {
+        
+        if (orderTable != nil) {
+            let items: [OrderItemTable] = orderTable!.items
+            if (items.count > 0) {
+                let item: OrderItemTable = items[0]
+                let product: ProductTable = item.product!
+                if (product.type == "coin") {
+                    Member.instance.updateMemberCoin(val: product.coin)
+                }
+            }
+        }
+        
+    }
+    
+    @objc func panelCancelAction(){
+        unmask()
+    }
+    
+    @objc func unmask() {
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.maskView.frame = CGRect(x:0, y:self.view.frame.height, width:self.view.frame.width, height:self.view.frame.height)
+            //self.blackView.frame = CGRect(x:self.panelLeftPadding, y:self.view.frame.height, width:self.view.frame.width-(2*self.panelLeftPadding), height:self.maskView.frame.height-self.panelTopPadding)
+        }, completion: { (finished) in
+            if finished {
+                for view in self.maskView.subviews {
+                    view.removeFromSuperview()
+                }
+                self.maskView.removeFromSuperview()
+            }
+        })
+    }
+    
+    override func submitBtnPressed() {
+        ecpay_token = orderTable!.ecpay_token
+        toECPay()
+    }
+    
+    override func backBtnPressed() {
+        if order_token.count > 0 {
+            Global.instance.addSpinner(superView: view)
+            //print(Member.instance.token)
+            OrderService.instance.ezshipReturnCode(token: order_token) { (success) in
+                if (success) {
+                    
+                    let jsonData: Data = OrderService.instance.jsonData!
+                    do {
+                        let successTable: BackResTable = try JSONDecoder().decode(BackResTable.self, from: jsonData)
+                        if !successTable.success {
+                            var msg: String = "錯誤訊息：" + successTable.msg
+                            if successTable.error_code.count > 0 {
+                                msg += "\n" + "錯誤編號：" + successTable.error_code
+                            }
+                            self.info(msg)
+                        } else {
+                            var msg: String = "退貨編號：" + successTable.sn_id
+                            if successTable.expire_at.count > 0 {
+                                msg += "\n" + "錯誤編號：" + successTable.expire_at
+                            }
+                            self.info(msg)
+                        }
+                    } catch {
+                        self.warning(error.localizedDescription)
+                    }
+                }
+                Global.instance.removeSpinner(superView: self.view)
+                self.endRefresh()
+            }
+        }
+    }
+    
+    override func prev() {
+        if (source == "member") {
+            super.prev()
+        } else if (source == "order") {
+            self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+            super.prev()
+        }
+    }
+    
+    @IBAction func submitBtnPressed(_ sender: Any) {
+        ecpay_token = orderTable!.ecpay_token
+        toECPay()
+    }
+    
+    @IBAction func cancelBtnPressed(_ sender: Any) {
+        prev()
+    }
+}
+
+extension PaymentVC {
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
@@ -689,81 +791,6 @@ class PaymentVC: MyTableVC {
                 popupTableView.reloadData()
             }
         }
-    }
-    
-    @objc func panelCancelAction(){
-        unmask()
-    }
-    
-    @objc func unmask() {
-        
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.maskView.frame = CGRect(x:0, y:self.view.frame.height, width:self.view.frame.width, height:self.view.frame.height)
-            //self.blackView.frame = CGRect(x:self.panelLeftPadding, y:self.view.frame.height, width:self.view.frame.width-(2*self.panelLeftPadding), height:self.maskView.frame.height-self.panelTopPadding)
-        }, completion: { (finished) in
-            if finished {
-                for view in self.maskView.subviews {
-                    view.removeFromSuperview()
-                }
-                self.maskView.removeFromSuperview()
-            }
-        })
-    }
-    
-    override func submitBtnPressed() {
-        ecpay_token = orderTable!.ecpay_token
-        toECPay()
-    }
-    
-    override func backBtnPressed() {
-        if order_token.count > 0 {
-            Global.instance.addSpinner(superView: view)
-            //print(Member.instance.token)
-            OrderService.instance.ezshipReturnCode(token: order_token) { (success) in
-                if (success) {
-                    
-                    let jsonData: Data = OrderService.instance.jsonData!
-                    do {
-                        let successTable: BackResTable = try JSONDecoder().decode(BackResTable.self, from: jsonData)
-                        if !successTable.success {
-                            var msg: String = "錯誤訊息：" + successTable.msg
-                            if successTable.error_code.count > 0 {
-                                msg += "\n" + "錯誤編號：" + successTable.error_code
-                            }
-                            self.info(msg)
-                        } else {
-                            var msg: String = "退貨編號：" + successTable.sn_id
-                            if successTable.expire_at.count > 0 {
-                                msg += "\n" + "錯誤編號：" + successTable.expire_at
-                            }
-                            self.info(msg)
-                        }
-                    } catch {
-                        self.warning(error.localizedDescription)
-                    }
-                }
-                Global.instance.removeSpinner(superView: self.view)
-                self.endRefresh()
-            }
-        }
-    }
-    
-    override func prev() {
-        if (source == "member") {
-            super.prev()
-        } else if (source == "order") {
-            self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-            super.prev()
-        }
-    }
-    
-    @IBAction func submitBtnPressed(_ sender: Any) {
-        ecpay_token = orderTable!.ecpay_token
-        toECPay()
-    }
-    
-    @IBAction func cancelBtnPressed(_ sender: Any) {
-        prev()
     }
 }
 

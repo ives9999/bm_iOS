@@ -374,162 +374,6 @@ class MemberVC: MyTableVC {
 //        return b
 //    }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        return memberSections.count
-        //return mySections.count
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        var count: Int = 0
-        if (memberSections[section].isExpanded) {
-            count = memberSections[section].items.count
-        }
-//        let mySection: [String: Any] = mySections[section]
-//        if (mySection.keyExist(key: "isExpanded")) {
-//            let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
-//            if (isExpanded) {
-//                if let key: String = mySection["key"] as? String {
-//                    let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
-//                    count = rows.count
-//                }
-//            }
-//        }
-        
-        return count
-        
-//        if !searchSections[section].isExpanded {
-//            return 0
-//        }
-//
-//        if (section == 0) {
-//            //searchSections[0].items = [String]()
-//            return memberRows.count
-//        } else if (section == 1) {
-//            return orderRows.count
-//        } else if (section == 2) {
-//            return likeRows.count
-//        } else if (section == 3) {
-//            return courseRows.count
-//        } else {
-//            return 0
-//        }
-        //return searchSections[section].items.count
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.gray
-        headerView.tag = section
-
-        let titleLabel = UILabel()
-        titleLabel.text = memberSections[section].title
-        titleLabel.textColor = UIColor(MY_WHITE)
-        titleLabel.sizeToFit()
-        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
-        headerView.addSubview(titleLabel)
-        
-//        var expanded_image: String = "to_right_w"
-//        if memberSections[section].isExpanded {
-//            expanded_image = "to_down_w"
-//        }
-//        let mark = UIImageView(image: UIImage(named: expanded_image))
-//
-//        //mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
-//        headerView.addSubview(mark)
-//
-//        mark.translatesAutoresizingMaskIntoConstraints = false
-//
-//        mark.centerYAnchor.constraint(equalTo: mark.superview!.centerYAnchor).isActive = true
-//        mark.widthAnchor.constraint(equalToConstant: 20).isActive = true
-//        mark.heightAnchor.constraint(equalToConstant: 20).isActive = true
-//        mark.trailingAnchor.constraint(equalTo: mark.superview!.trailingAnchor, constant: -16).isActive = true
-//
-//        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
-//        headerView.addGestureRecognizer(gesture)
-
-        return headerView
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 34
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        let cell: MenuCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
-        //cell.delegate = self
-        //print(rows)
-                
-        let row: MemberRow = memberSections[indexPath.section].items[indexPath.row]
-        //let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-        cell.setRow(row: row)
-        
-        if indexPath.section == 1 && indexPath.row == 0 {
-            cell.accessoryType = .none
-        }
-        
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        let row: MemberRow = memberSections[indexPath.section].items[indexPath.row]
-        let segue: String = row.segue
-        if segue == TO_PROFILE {
-            toRegister()
-        } else if segue == TO_PASSWORD {
-            toPassword(type: "change_password")
-        } else if segue == TO_VALIDATE {
-            toValidate(type: row.validate_type)
-        } else if segue == TO_BLACKLIST {
-            performSegue(withIdentifier: segue, sender: nil)
-        } else if segue == TO_REFRESH {
-            refresh()
-        } else if segue == TO_SIGNUPLIST {
-            performSegue(withIdentifier: "toA", sender: nil)
-        } else if segue == TO_MEMBER_ORDER_LIST {
-            toMemberOrderList()
-        } else if segue == TO_MEMBER_CART_LIST {
-            toMemberCartList()
-        } else if segue == TO_MEMBER_SIGNUPLIST {
-            let able_type: String = row.able_type
-            toMemberSignuplist(able_type: able_type)
-        } else if segue == TO_LIKE {
-            let able_type: String = row.able_type
-            
-            if (able_type == "team") {
-                toTeam(member_like: true)
-            } else if (able_type == "course") {
-                toCourse(member_like: true, isShowPrev: true)
-            } else if (able_type == "product") {
-                toProduct(member_like: true)
-            } else if (able_type == "coach") {
-                toCoach(member_like: true)
-            } else if (able_type == "arena") {
-                toArena(member_like: true, isShowPrev: true)
-            } else if (able_type == "store") {
-                toStore(member_like: true)
-            } else {
-                warning("沒有這個喜歡的連結")
-            }
-        } else if segue == "toManagerCourse" {
-            toManagerCourse(manager_token: Member.instance.token)
-        } else if segue == "toManagerTeam" {
-            toManagerTeam(manager_token: Member.instance.token)
-        } else if segue == "toRequestManagerTeam" {
-            toRequestManagerTeam()
-        } else if segue == TO_MEMBER_BANK {
-            toMemberBank()
-        } else if segue == "delete" {
-            delete()
-        } else if segue == TO_MEMBER_COIN_LIST {
-            toMemberCoinList()
-        }
-    }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if sender != nil {
             if segue.identifier == TO_VALIDATE {
@@ -703,6 +547,165 @@ class MemberVC: MyTableVC {
         
         info(msg: "您的帳號已經被刪除，羽球密碼感謝您的支持", buttonTitle: "關閉") {
             self.logout()
+        }
+    }
+}
+
+extension MemberVC {
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        
+        return memberSections.count
+        //return mySections.count
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        var count: Int = 0
+        if (memberSections[section].isExpanded) {
+            count = memberSections[section].items.count
+        }
+//        let mySection: [String: Any] = mySections[section]
+//        if (mySection.keyExist(key: "isExpanded")) {
+//            let isExpanded: Bool = mySection["isExpanded"] as? Bool ?? true
+//            if (isExpanded) {
+//                if let key: String = mySection["key"] as? String {
+//                    let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
+//                    count = rows.count
+//                }
+//            }
+//        }
+        
+        return count
+        
+//        if !searchSections[section].isExpanded {
+//            return 0
+//        }
+//
+//        if (section == 0) {
+//            //searchSections[0].items = [String]()
+//            return memberRows.count
+//        } else if (section == 1) {
+//            return orderRows.count
+//        } else if (section == 2) {
+//            return likeRows.count
+//        } else if (section == 3) {
+//            return courseRows.count
+//        } else {
+//            return 0
+//        }
+        //return searchSections[section].items.count
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.gray
+        headerView.tag = section
+
+        let titleLabel = UILabel()
+        titleLabel.text = memberSections[section].title
+        titleLabel.textColor = UIColor(MY_WHITE)
+        titleLabel.sizeToFit()
+        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
+        headerView.addSubview(titleLabel)
+        
+//        var expanded_image: String = "to_right_w"
+//        if memberSections[section].isExpanded {
+//            expanded_image = "to_down_w"
+//        }
+//        let mark = UIImageView(image: UIImage(named: expanded_image))
+//
+//        //mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
+//        headerView.addSubview(mark)
+//
+//        mark.translatesAutoresizingMaskIntoConstraints = false
+//
+//        mark.centerYAnchor.constraint(equalTo: mark.superview!.centerYAnchor).isActive = true
+//        mark.widthAnchor.constraint(equalToConstant: 20).isActive = true
+//        mark.heightAnchor.constraint(equalToConstant: 20).isActive = true
+//        mark.trailingAnchor.constraint(equalTo: mark.superview!.trailingAnchor, constant: -16).isActive = true
+//
+//        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+//        headerView.addGestureRecognizer(gesture)
+
+        return headerView
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 34
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
+        let cell: MenuCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
+        //cell.delegate = self
+        //print(rows)
+                
+        let row: MemberRow = memberSections[indexPath.section].items[indexPath.row]
+        //let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
+        cell.setRow(row: row)
+        
+        if indexPath.section == 1 && indexPath.row == 0 {
+            cell.accessoryType = .none
+        }
+        
+        return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
+        let row: MemberRow = memberSections[indexPath.section].items[indexPath.row]
+        let segue: String = row.segue
+        if segue == TO_PROFILE {
+            toRegister()
+        } else if segue == TO_PASSWORD {
+            toPassword(type: "change_password")
+        } else if segue == TO_VALIDATE {
+            toValidate(type: row.validate_type)
+        } else if segue == TO_BLACKLIST {
+            performSegue(withIdentifier: segue, sender: nil)
+        } else if segue == TO_REFRESH {
+            refresh()
+        } else if segue == TO_SIGNUPLIST {
+            performSegue(withIdentifier: "toA", sender: nil)
+        } else if segue == TO_MEMBER_ORDER_LIST {
+            toMemberOrderList()
+        } else if segue == TO_MEMBER_CART_LIST {
+            toMemberCartList()
+        } else if segue == TO_MEMBER_SIGNUPLIST {
+            let able_type: String = row.able_type
+            toMemberSignuplist(able_type: able_type)
+        } else if segue == TO_LIKE {
+            let able_type: String = row.able_type
+            
+            if (able_type == "team") {
+                toTeam(member_like: true)
+            } else if (able_type == "course") {
+                toCourse(member_like: true, isShowPrev: true)
+            } else if (able_type == "product") {
+                toProduct(member_like: true)
+            } else if (able_type == "coach") {
+                toCoach(member_like: true)
+            } else if (able_type == "arena") {
+                toArena(member_like: true, isShowPrev: true)
+            } else if (able_type == "store") {
+                toStore(member_like: true)
+            } else {
+                warning("沒有這個喜歡的連結")
+            }
+        } else if segue == "toManagerCourse" {
+            toManagerCourse(manager_token: Member.instance.token)
+        } else if segue == "toManagerTeam" {
+            toManagerTeam(manager_token: Member.instance.token)
+        } else if segue == "toRequestManagerTeam" {
+            toRequestManagerTeam()
+        } else if segue == TO_MEMBER_BANK {
+            toMemberBank()
+        } else if segue == "delete" {
+            delete()
+        } else if segue == TO_MEMBER_COIN_LIST {
+            toMemberCoinList()
         }
     }
 }

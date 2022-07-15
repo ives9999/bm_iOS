@@ -620,6 +620,10 @@ class Member {
         return isValidate
     }
     
+    func updateMemberCoin(val: Int) {
+        self.coin += val        
+    }
+    
     //init() {
         //var path: [AnyObject] = NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject]
         //let folder: String = path[0] as! String

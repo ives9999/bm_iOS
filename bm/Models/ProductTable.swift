@@ -38,6 +38,7 @@ class ProductTable: Table {
     var cart_token: String = ""
     
     var alias: String = ""
+    var invoice_name: String = ""
     
     var images: [String] = [String]()
     var prices: [ProductPriceTable] = [ProductPriceTable]()
@@ -60,6 +61,7 @@ class ProductTable: Table {
         case order_max
         case cart_token
         case alias
+        case invoice_name
         case prices
         case attributes = "product_attributes"
         case images
@@ -97,6 +99,7 @@ class ProductTable: Table {
         attributes = try container.decodeIfPresent([ProductAttributeTable].self, forKey: .attributes) ?? [ProductAttributeTable]()
         cart_token = try container.decodeIfPresent(String.self, forKey: .cart_token) ?? ""
         coin = try container.decodeIfPresent(Int.self, forKey: .coin) ?? 0
+        invoice_name = try container.decodeIfPresent(String.self, forKey: .invoice_name) ?? ""
     }
     
     override func filterRow() {

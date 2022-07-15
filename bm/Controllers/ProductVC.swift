@@ -99,49 +99,7 @@ class ProductVC: MyTableVC {
 //        }
 //    }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return lists1.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ProductListCell {
-            
-            cell.cellDelegate = self
-            let row = lists1[indexPath.row] as? ProductTable
-            if row != nil {
-                row!.filterRow()
-                //row!.printRow()
-            
-                cell.cellDelegate = self
-                cell.updateViews(row!)
-            }
-            return cell
-        } else {
-            return UITableViewCell()
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if mysTable != nil {
-            let row = lists1[indexPath.row]
-            //toShowProduct(token: superProduct.token)
-            let token = row.token
-            if #available(iOS 13.0, *) {
-                let storyboard = UIStoryboard(name: "More", bundle: nil)
-                if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_PRODUCT)  as? ShowProductVC {
-                    
-                    viewController.token = token
-                    show(viewController, sender: nil)
-                }
-            } else {
-                let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_PRODUCT) as! ShowProductVC
-                viewController.token = token
-                self.navigationController!.pushViewController(viewController, animated: true)
-            }
-        }
-    }
-    
+    //按下購買按鈕
     override func cellCity(row: Table) {
         //print(indexPath!.row)
         
@@ -216,6 +174,52 @@ class ProductVC: MyTableVC {
                     login: { vc in vc.toLogin() },
                     register: { vc in vc.toRegister() }
                 )
+            }
+        }
+    }
+}
+
+extension ProductVC {
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return lists1.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ProductListCell {
+            
+            cell.cellDelegate = self
+            let row = lists1[indexPath.row] as? ProductTable
+            if row != nil {
+                row!.filterRow()
+                //row!.printRow()
+            
+                cell.cellDelegate = self
+                cell.updateViews(row!)
+            }
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if mysTable != nil {
+            let row = lists1[indexPath.row]
+            //toShowProduct(token: superProduct.token)
+            let token = row.token
+            if #available(iOS 13.0, *) {
+                let storyboard = UIStoryboard(name: "More", bundle: nil)
+                if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_PRODUCT)  as? ShowProductVC {
+                    
+                    viewController.token = token
+                    show(viewController, sender: nil)
+                }
+            } else {
+                let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_PRODUCT) as! ShowProductVC
+                viewController.token = token
+                self.navigationController!.pushViewController(viewController, animated: true)
             }
         }
     }
