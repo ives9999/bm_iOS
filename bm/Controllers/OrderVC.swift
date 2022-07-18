@@ -63,6 +63,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     let blackViewPaddingLeft: CGFloat = 20
     let cancelBtn: CancelButton = CancelButton()
     
+    var grand_total: Int = 0
+    
     override func viewDidLoad() {
         
         myTablView = tableView
@@ -468,197 +470,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         updateSubTotal()
     }
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        if (tableView == invoiceTable) {
-            return 1
-        } else {
-            return oneSections.count
-            //return mySections.count
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        var count: Int = 0
-        
-        if (tableView == invoiceTable) {
-            count = invoiceOptionRows.count
-        } else {
-        
-            let tmp = oneSections[section]
-            if (tmp.isExpanded) {
-                count = tmp.items.count
-            } else {
-                count = 0
-            }
-        }
-        
-        return count
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        if (tableView == invoiceTable) {
-            return UIView()
-        } else {
-        
-            let headerView = UIView()
-            headerView.backgroundColor = UIColor.gray
-            headerView.tag = section
-            
-            let titleLabel = UILabel()
-            titleLabel.text = oneSections[section].title
-            //titleLabel.text = getSectionName(idx: section)
-            titleLabel.textColor = UIColor(MY_WHITE)
-            titleLabel.sizeToFit()
-            titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
-            headerView.addSubview(titleLabel)
-            
-            var expanded_image: String = "to_right_w"
-            if oneSections[section].isExpanded {
-                expanded_image = "to_down_w"
-            }
-            let mark = UIImageView(image: UIImage(named: expanded_image))
-            //mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
-            headerView.addSubview(mark)
-            
-            mark.translatesAutoresizingMaskIntoConstraints = false
-            
-            mark.centerYAnchor.constraint(equalTo: mark.superview!.centerYAnchor).isActive = true
-            mark.widthAnchor.constraint(equalToConstant: 20).isActive = true
-            mark.heightAnchor.constraint(equalToConstant: 20).isActive = true
-            mark.trailingAnchor.constraint(equalTo: mark.superview!.trailingAnchor, constant: -16).isActive = true
-                        
-            let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
-            headerView.addGestureRecognizer(gesture)
-            
-            return headerView
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if (tableView == invoiceTable) {
-            if let cell: RadioCell = tableView.dequeueReusableCell(withIdentifier: "RadioCell", for: indexPath) as? RadioCell {
-                
-                let row: OneRow = invoiceOptionRows[indexPath.row]
-                cell.cellDelegate = self
-                cell.update(sectionKey: INVOICE_TYPE_KEY, sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                
-                //cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                return cell
-            }
-        } else {
-            
-            let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
-            
-            if (row.cell == "cart") {
-                if let cell: CartListCell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
-
-                    cell.cellDelegate = self
-                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                    return cell
-                }
-            } else if (row.cell == "radio") {
-                if let cell: RadioCell = tableView.dequeueReusableCell(withIdentifier: "RadioCell", for: indexPath) as? RadioCell {
-                    
-                    cell.cellDelegate = self
-                    cell.update(sectionKey: oneSections[indexPath.section].key, sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                    return cell
-                }
-            } else if (row.cell == "text") {
-                
-                if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
-                    
-                    cell.update(title: row.title, show: row.show)
-                    return cell
-                }
-            } else if (row.cell == "textField") {
-                
-                if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell {
-                    
-                    //let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as! TextFieldCell
-                    cell.cellDelegate = self
-                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                    return cell
-                }
-            } else if (row.cell == "more") {
-                if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "MoreCell", for: indexPath) as? MoreCell {
-                    
-                    cell.cellDelegate = self
-                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                    return cell
-                }
-            } else if (row.cell == "tag") {
-                if let cell: TagCell = tableView.dequeueReusableCell(withIdentifier: "TagCell", for: indexPath) as? TagCell {
-                    
-                    cell.cellDelegate = self
-                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                    return cell
-                }
-            } else if (row.cell == "number") {
-                if let cell: NumberCell = tableView.dequeueReusableCell(withIdentifier: "NumberCell", for: indexPath) as? NumberCell {
-                    
-                    cell.cellDelegate = self
-                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
-                    //cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: _value, min: min, max: max)
-                    return cell
-                }
-            } else if (row.cell == "default") {
-                if let cell: DefaultCell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath) as? DefaultCell {
-                    cell.update(featured_path: row.featured_path, title: row.title)
-                    
-                    return cell
-                }
-            }
-        }
-        
-        return UITableViewCell()
-        
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if (tableView == invoiceTable) {
-            
-            let row: OneRow = invoiceOptionRows[indexPath.row]
-            let checked: Bool = Bool(row.value)!
-            cellRadioChanged(key: INVOICE_TYPE_KEY, sectionIdx: indexPath.section, rowIdx: indexPath.row, isChecked: !checked)
-            //let rowKey: String = invoiceOptionRows[indexPath.row]["key"]!
-            //let checked: Bool = Bool(invoiceOptionRows[indexPath.row]["value"]!)!
-            //radioDidChange(sectionKey: INVOICE_KEY, rowKey: rowKey, checked: !checked)
-        } else {
-            //var rowKey: String = ""
-            let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
-            
-            if (row.cell == "more") {
-                
-                maskView = view.mask()
-                
-                let frame: CGRect = CGRect(x:blackViewPaddingLeft, y:(maskView.frame.height-blackViewHeight)/2, width:maskView.frame.width-(2*blackViewPaddingLeft), height:blackViewHeight)
-                blackView.frame = frame
-                blackView.backgroundColor = UIColor.black
-                maskView.addSubview(blackView)
-                
-//                let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
-//                gesture.cancelsTouchesInView = false
-//                maskView.addGestureRecognizer(gesture)
-                
-                addInvoiceSelectView()
-                addCancelBtn()
-            } else if (row.cell == "radio") {
-                let checked: Bool = Bool(row.value)!
-                cellRadioChanged(key: row.key, sectionIdx: indexPath.section, rowIdx: indexPath.row, isChecked: !checked)
-            }
-        }
-    }
-    
-    
     @objc func unmask(){
 
         maskView.unmask()
@@ -848,7 +659,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         if let tmp: Int = Int(params[TOTAL_KEY]!) {
             total = tmp
         }
-        params[GRAND_TOTAL_KEY] = String(discount + total)
+        
+        grand_total = discount + total
+        params[GRAND_TOTAL_KEY] = String(grand_total)
         
         //是否有選擇商品屬性
         var rows: [OneRow] = getOneRowsFromSectionKey("attribute")
@@ -907,10 +720,12 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["order_address"] = getOneRowValue(ADDRESS_KEY)
         
         params[MEMO_KEY] = getOneRowValue(MEMO_KEY)
-        print(params)
+        //print(params)
         
         //func update(token: String = "", params: [String: String], completion: @escaping CompletionHandler)
-        OrderService.instance.update(params: params) { (success) in
+        
+        //如果使用coin結帳方式，在這邊就會直接結帳並更新資料庫，然後再轉到paymentVC
+        OrderService.instance.update(params: params) { [self] (success) in
             Global.instance.removeSpinner(superView: self.view)
             if success {
                 
@@ -928,15 +743,23 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                                 self.cartItemCount = 0
                                 self.session.set("cartItemCount", self.cartItemCount)
                                 
-                                var gateway_method: GATEWAY = GATEWAY.stringToEnum(orderTable!.gateway!.method)
-                                if gateway_method == GATEWAY.credit_card || gateway_method == GATEWAY.store_cvs || gateway_method == GATEWAY.coin {
+                                let gateway_method: GATEWAY = GATEWAY.stringToEnum(orderTable!.gateway!.method)
+                                if gateway_method == GATEWAY.credit_card || gateway_method == GATEWAY.store_cvs {
                                     let ecpay_token: String = orderTable!.ecpay_token
                                     let ecpay_token_ExpireDate: String = orderTable!.ecpay_token_ExpireDate
                                     self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
                                         self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
                                     }
                                 } else if gateway_method == GATEWAY.store_pay_711 || gateway_method == GATEWAY.store_pay_family {
-                                    self.toWebView(token: orderTable!.token, delegate: self)
+                                    self.info(msg: "訂單已經成立，是否前往選擇超商門市？", showCloseButton: true, buttonTitle: "是") {
+                                        self.toWebView(token: orderTable!.token, delegate: self)
+                                    }
+                                } else if gateway_method == GATEWAY.coin {
+                                    
+                                    Member.instance.updateMemberCoin(val: -1 * self.grand_total)
+                                    self.info(msg: "訂單成立並已經結帳", buttonTitle: "關閉") {
+                                        self.toPayment(order_token: orderTable!.token)
+                                    }
                                 }
                             }
                         }
@@ -969,6 +792,199 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     
     @IBAction func cancelBtnPressed(_ sender: Any) {
         prev()
+    }
+}
+
+extension OrderVC {
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        
+        if (tableView == invoiceTable) {
+            return 1
+        } else {
+            return oneSections.count
+            //return mySections.count
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        var count: Int = 0
+        
+        if (tableView == invoiceTable) {
+            count = invoiceOptionRows.count
+        } else {
+        
+            let tmp = oneSections[section]
+            if (tmp.isExpanded) {
+                count = tmp.items.count
+            } else {
+                count = 0
+            }
+        }
+        
+        return count
+    }
+    
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        if (tableView == invoiceTable) {
+            return UIView()
+        } else {
+        
+            let headerView = UIView()
+            headerView.backgroundColor = UIColor.gray
+            headerView.tag = section
+            
+            let titleLabel = UILabel()
+            titleLabel.text = oneSections[section].title
+            //titleLabel.text = getSectionName(idx: section)
+            titleLabel.textColor = UIColor(MY_WHITE)
+            titleLabel.sizeToFit()
+            titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
+            headerView.addSubview(titleLabel)
+            
+            var expanded_image: String = "to_right_w"
+            if oneSections[section].isExpanded {
+                expanded_image = "to_down_w"
+            }
+            let mark = UIImageView(image: UIImage(named: expanded_image))
+            //mark.frame = CGRect(x: view.frame.width-10-20, y: (34-20)/2, width: 20, height: 20)
+            headerView.addSubview(mark)
+            
+            mark.translatesAutoresizingMaskIntoConstraints = false
+            
+            mark.centerYAnchor.constraint(equalTo: mark.superview!.centerYAnchor).isActive = true
+            mark.widthAnchor.constraint(equalToConstant: 20).isActive = true
+            mark.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            mark.trailingAnchor.constraint(equalTo: mark.superview!.trailingAnchor, constant: -16).isActive = true
+                        
+            let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleExpandClose))
+            headerView.addGestureRecognizer(gesture)
+            
+            return headerView
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if (tableView == invoiceTable) {
+            if let cell: RadioCell = tableView.dequeueReusableCell(withIdentifier: "RadioCell", for: indexPath) as? RadioCell {
+                
+                let row: OneRow = invoiceOptionRows[indexPath.row]
+                cell.cellDelegate = self
+                cell.update(sectionKey: INVOICE_TYPE_KEY, sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                
+                //cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                return cell
+            }
+        } else {
+            
+            let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
+            
+            if (row.cell == "cart") {
+                if let cell: CartListCell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as? CartListCell {
+
+                    cell.cellDelegate = self
+                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                    return cell
+                }
+            } else if (row.cell == "radio") {
+                if let cell: RadioCell = tableView.dequeueReusableCell(withIdentifier: "RadioCell", for: indexPath) as? RadioCell {
+                    
+                    cell.cellDelegate = self
+                    cell.update(sectionKey: oneSections[indexPath.section].key, sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                    return cell
+                }
+            } else if (row.cell == "text") {
+                
+                if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
+                    
+                    cell.update(title: row.title, show: row.show)
+                    return cell
+                }
+            } else if (row.cell == "textField") {
+                
+                if let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "TextFieldCell", for: indexPath) as? TextFieldCell {
+                    
+                    //let cell: TextFieldCell = tableView.dequeueReusableCell(withIdentifier: "textFieldCell", for: indexPath) as! TextFieldCell
+                    cell.cellDelegate = self
+                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                    return cell
+                }
+            } else if (row.cell == "more") {
+                if let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "MoreCell", for: indexPath) as? MoreCell {
+                    
+                    cell.cellDelegate = self
+                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                    return cell
+                }
+            } else if (row.cell == "tag") {
+                if let cell: TagCell = tableView.dequeueReusableCell(withIdentifier: "TagCell", for: indexPath) as? TagCell {
+                    
+                    cell.cellDelegate = self
+                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                    return cell
+                }
+            } else if (row.cell == "number") {
+                if let cell: NumberCell = tableView.dequeueReusableCell(withIdentifier: "NumberCell", for: indexPath) as? NumberCell {
+                    
+                    cell.cellDelegate = self
+                    cell.update(sectionIdx: indexPath.section, rowIdx: indexPath.row, row: row)
+                    //cell.update(sectionKey: sectionKey, rowKey: rowKey, title: title, value: _value, min: min, max: max)
+                    return cell
+                }
+            } else if (row.cell == "default") {
+                if let cell: DefaultCell = tableView.dequeueReusableCell(withIdentifier: "DefaultCell", for: indexPath) as? DefaultCell {
+                    cell.update(featured_path: row.featured_path, title: row.title)
+                    
+                    return cell
+                }
+            }
+        }
+        
+        return UITableViewCell()
+        
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if (tableView == invoiceTable) {
+            
+            let row: OneRow = invoiceOptionRows[indexPath.row]
+            let checked: Bool = Bool(row.value)!
+            cellRadioChanged(key: INVOICE_TYPE_KEY, sectionIdx: indexPath.section, rowIdx: indexPath.row, isChecked: !checked)
+            //let rowKey: String = invoiceOptionRows[indexPath.row]["key"]!
+            //let checked: Bool = Bool(invoiceOptionRows[indexPath.row]["value"]!)!
+            //radioDidChange(sectionKey: INVOICE_KEY, rowKey: rowKey, checked: !checked)
+        } else {
+            //var rowKey: String = ""
+            let row: OneRow = oneSections[indexPath.section].items[indexPath.row]
+            
+            if (row.cell == "more") {
+                
+                maskView = view.mask()
+                
+                let frame: CGRect = CGRect(x:blackViewPaddingLeft, y:(maskView.frame.height-blackViewHeight)/2, width:maskView.frame.width-(2*blackViewPaddingLeft), height:blackViewHeight)
+                blackView.frame = frame
+                blackView.backgroundColor = UIColor.black
+                maskView.addSubview(blackView)
+                
+//                let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
+//                gesture.cancelsTouchesInView = false
+//                maskView.addGestureRecognizer(gesture)
+                
+                addInvoiceSelectView()
+                addCancelBtn()
+            } else if (row.cell == "radio") {
+                let checked: Bool = Bool(row.value)!
+                cellRadioChanged(key: row.key, sectionIdx: indexPath.section, rowIdx: indexPath.row, isChecked: !checked)
+            }
+        }
     }
 }
 

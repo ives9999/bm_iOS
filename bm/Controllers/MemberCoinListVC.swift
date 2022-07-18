@@ -11,6 +11,7 @@ import Foundation
 class MemberCoinListVC: MyTableVC {
     
     @IBOutlet weak var top: Top!
+    @IBOutlet weak var bottomThreeView: BottomThreeView!
     var memberCoinTables: [MemberCoinTable] = [MemberCoinTable]()
     
     override func viewDidLoad() {
@@ -23,6 +24,12 @@ class MemberCoinListVC: MyTableVC {
         
         let cellNibName = UINib(nibName: "MemberCoinListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "MemberCoinListCell")
+        
+        bottomThreeView.delegate = self
+        bottomThreeView.submitButton.setTitle("購買點數")
+        bottomThreeView.cancelButton.setTitle("回上一頁")
+        bottomThreeView.threeButton.isHidden = true
+        bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
         
         refresh()
     }
@@ -70,6 +77,13 @@ class MemberCoinListVC: MyTableVC {
         }
         lists1 += memberCoinTables
     }
+    
+    override func submitBtnPressed() {
+        toProduct()
+    }
+}
+
+extension MemberCoinListVC {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         

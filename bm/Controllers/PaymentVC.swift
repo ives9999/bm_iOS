@@ -231,22 +231,27 @@ class PaymentVC: MyTableVC {
                     self.msg = state.callbackStateMessage
                 }
                 self.warning(msg: self.msg, buttonTitle: "關閉", buttonAction: {
-                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                    self.toProduct()
+                    self.view.window!.rootViewController?.dismiss(animated: false) {
+                        self.toPayment(order_token: self.order_token)
+                    }
                 })
                 
             case .Cancel:
                 //print("Cancel")
                 self.warning(msg: "您已經取消付款", buttonTitle: "關閉", buttonAction: {
-                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                    self.toProduct()
+                    self.view.window!.rootViewController?.dismiss(animated: false) {
+                        self.toPayment(order_token: self.order_token)
+                    }
+                    
+                    //self.refresh()
                 })
 
             case .Unknown:
                 //print("Unknown")
                 self.warning(msg: "由於不知名的錯誤，造成付款失敗，請麻煩聯絡管理員", buttonTitle: "關閉", buttonAction: {
-                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                    self.toProduct()
+                    self.view.window!.rootViewController?.dismiss(animated: false) {
+                        self.toPayment(order_token: self.order_token)
+                    }
                 })
             }
         }
@@ -317,14 +322,15 @@ class PaymentVC: MyTableVC {
                 //self.refresh()
                 //self.jsonData = OrderService.instance.jsonData
                 self.info(msg: "付款完成", buttonTitle: "關閉", buttonAction: {
-                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                    self.refresh()
-                    //self.toProduct()
+                    self.view.window!.rootViewController?.dismiss(animated: false) {
+                        self.toPayment(order_token: self.order_token)
+                    }
                 })
             } else {
                 self.warning(msg: OrderService.instance.msg, buttonTitle: "關閉", buttonAction: {
-                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                    self.toProduct()
+                    self.view.window!.rootViewController?.dismiss(animated: false) {
+                        self.toProduct()
+                    }
                 })
             }
         }
@@ -573,10 +579,10 @@ class PaymentVC: MyTableVC {
     }
     
     override func prev() {
-        if (source == "member") {
-            super.prev()
-        } else if (source == "order") {
+        if (source == "order") {
             self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+            toProduct()
+        } else {
             super.prev()
         }
     }

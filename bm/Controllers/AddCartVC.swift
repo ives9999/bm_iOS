@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SCLAlertView
 
 class AddCartVC: MyTableVC, ValueChangedDelegate {
 
@@ -449,9 +450,21 @@ class AddCartVC: MyTableVC, ValueChangedDelegate {
                         msg = "已經更新購物車了"
                     }
                     //self.info(msg)
-                    self.info(msg: msg, showCloseButton: false, buttonTitle: "關閉") {
+                    
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    let alert: SCLAlertView = SCLAlertView(appearance: appearance)
+                    alert.addButton("前往購物車") {
                         self.toMemberCartList()
                     }
+                    alert.addButton("繼續購物") {
+                        self.toProduct()
+                    }
+                    alert.showSuccess("成功", subTitle: msg)
+//                    self.info(msg: msg, showCloseButton: false, buttonTitle: "關閉") {
+//                        self.toMemberCartList()
+//                    }
                 } else {
                     self.warning(CartService.instance.msg)
                 }

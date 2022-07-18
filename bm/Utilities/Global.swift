@@ -758,7 +758,7 @@ enum GATEWAY: String {
     case ATM = "虛擬帳戶"
     case remit = "匯款"
     case cash = "現金"
-    case coin = "解碼幣"
+    case coin = "解碼點數"
     
     static func stringToEnum(_ enumString: String) -> GATEWAY {
         switch enumString {
