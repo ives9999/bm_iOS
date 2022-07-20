@@ -48,7 +48,7 @@ class BottomThreeView: UIView {
         view.addSubview(cancelButton)
         
         submitButton.addTarget(self, action: #selector(submit), for: .touchUpInside)
-        threeButton.addTarget(self, action: #selector(back), for: .touchUpInside)
+        threeButton.addTarget(self, action: #selector(three), for: .touchUpInside)
         cancelButton.addTarget(self, action: #selector(cancel), for: .touchUpInside)
     }
     
@@ -115,8 +115,8 @@ class BottomThreeView: UIView {
         delegate?.submitBtnPressed()
     }
     
-    @objc func back() {
-        delegate?.backBtnPressed()
+    @objc func three() {
+        delegate?.threeBtnPressed()
     }
 
     @objc func cancel() {

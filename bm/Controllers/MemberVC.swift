@@ -135,7 +135,7 @@ class MemberVC: MyTableVC {
         var rows: [MemberRow] = [MemberRow]()
         
         var r: MemberRow = MemberRow(title: "解碼點數", icon: "coin", segue: TO_MEMBER_COIN_LIST)
-        r.show = Member.instance.coin.formattedWithSeparator
+        r.show = Member.instance.coin.formattedWithSeparator + " 點"
         rows.append(r)
         r = MemberRow(title: "帳戶資料", icon: "member", segue: TO_PROFILE)
         rows.append(r)
@@ -672,7 +672,7 @@ extension MemberVC {
         } else if segue == TO_MEMBER_ORDER_LIST {
             toMemberOrderList()
         } else if segue == TO_MEMBER_CART_LIST {
-            toMemberCartList()
+            toMemberCartList(source: "member")
         } else if segue == TO_MEMBER_SIGNUPLIST {
             let able_type: String = row.able_type
             toMemberSignuplist(able_type: able_type)

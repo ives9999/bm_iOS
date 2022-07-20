@@ -46,7 +46,7 @@ class MemberBankVC: BaseViewController {
     func initData() {
         bankTF.text = Member.instance.bank
         branchTF.text = Member.instance.branch
-        bankCodeTF.text = Member.instance.bank_code
+        bankCodeTF.text = String(Member.instance.bank_code)
         accountTF.text = Member.instance.account
     }
     

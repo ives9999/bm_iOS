@@ -28,7 +28,7 @@ class MemberCoinListVC: MyTableVC {
         bottomThreeView.delegate = self
         bottomThreeView.submitButton.setTitle("購買點數")
         bottomThreeView.cancelButton.setTitle("回上一頁")
-        bottomThreeView.threeButton.isHidden = true
+        bottomThreeView.threeButton.setTitle("退款")
         bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
         
         refresh()
@@ -80,6 +80,16 @@ class MemberCoinListVC: MyTableVC {
     
     override func submitBtnPressed() {
         toProduct()
+    }
+    
+    override func threeBtnPressed() {
+        msg = ""
+        if (Member.instance.bank.count == 0 || Member.instance.branch.count == 0 || Member.instance.bank_code == 0 || Member.instance.account.count == 0) {
+            msg += "請先填寫完整的銀行匯款資料才能進行退款，是否前往填寫"
+            warning(msg: msg, showCloseButton: true, buttonTitle: "是") {
+                self.toMemberBank()
+            }
+        }
     }
 }
 

@@ -15,6 +15,7 @@ class MemberCoinListCell: SuperCell {
     @IBOutlet weak var priceLbl: SuperLabel!
     @IBOutlet weak var balanceSignLbl: SuperLabel!
     @IBOutlet weak var balanceLbl: SuperLabel!
+    @IBOutlet weak var balanceUnitLbl: SuperLabel!
     @IBOutlet weak var dateLbl: SuperLabel!
     @IBOutlet weak var able_typeLbl: SuperLabel!
     @IBOutlet weak var typeButton: SuperButton!
@@ -48,6 +49,11 @@ class MemberCoinListCell: SuperCell {
         if (balanceLbl != nil) {
             balanceLbl.setTextSize(16)
             balanceLbl.setTextColor(UIColor(MY_WHITE))
+        }
+        
+        if (balanceUnitLbl != nil) {
+            balanceUnitLbl.setTextSize(10)
+            balanceUnitLbl.setTextColor(UIColor(MY_WHITE))
         }
         
         if (able_typeLbl != nil) {
@@ -102,6 +108,10 @@ class MemberCoinListCell: SuperCell {
                 } else {
                     typeButton.isHidden = true
                 }
+            }
+            
+            if (row!.name.count > 0) {
+                able_typeLbl.text = row!.name
             }
 //            typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MY_BUY))
 //            if row!.type_enum == MEMBER_COIN.buy {

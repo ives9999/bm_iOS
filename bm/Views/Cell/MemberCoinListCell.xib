@@ -56,27 +56,33 @@
                             <constraint firstAttribute="bottom" secondItem="FA3-HZ-9gK" secondAttribute="bottom" constant="2" id="wBd-Gk-ymG"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="點數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnh-hv-zKz" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="318" y="52" width="33" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點數" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wsp-Vg-C2v" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="400" y="57.5" width="22.5" height="13.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnh-hv-zKz" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="361" y="57.5" width="11.5" height="13.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFE-vP-33T" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="342.5" y="52.5" width="39.5" height="20.5"/>
+                        <rect key="frame" x="317.5" y="52.5" width="39.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="餘額" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wsp-Vg-C2v" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="388" y="58.5" width="22.5" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbw-De-qpG" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                        <rect key="frame" x="426.5" y="52.5" width="39.5" height="20.5"/>
+                        <rect key="frame" x="414.5" y="52.5" width="39.5" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="點" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5Q-zw-Kwu" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                        <rect key="frame" x="456" y="57.5" width="11.5" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -87,14 +93,16 @@
                     <constraint firstItem="w8Q-7x-hRN" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="CcW-vy-roe"/>
                     <constraint firstItem="AFE-vP-33T" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Fyh-48-2NM"/>
                     <constraint firstItem="wbw-De-qpG" firstAttribute="leading" secondItem="Wsp-Vg-C2v" secondAttribute="trailing" constant="4" id="GY3-mt-Bri"/>
-                    <constraint firstItem="wbw-De-qpG" firstAttribute="bottom" secondItem="Wsp-Vg-C2v" secondAttribute="bottom" constant="2" id="N4u-eZ-MqQ"/>
+                    <constraint firstItem="wbw-De-qpG" firstAttribute="bottom" secondItem="Wsp-Vg-C2v" secondAttribute="bottom" constant="1" id="N4u-eZ-MqQ"/>
                     <constraint firstItem="CFV-4d-e5A" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="SiR-WA-hL8"/>
                     <constraint firstAttribute="bottom" secondItem="w8Q-7x-hRN" secondAttribute="bottom" constant="40" id="ZTf-cQ-0PZ"/>
-                    <constraint firstAttribute="trailing" secondItem="wbw-De-qpG" secondAttribute="trailing" constant="16" id="dME-3K-WMO"/>
-                    <constraint firstItem="AFE-vP-33T" firstAttribute="leading" secondItem="wnh-hv-zKz" secondAttribute="trailing" constant="4" id="i5Y-Jb-ju5"/>
-                    <constraint firstAttribute="trailing" secondItem="AFE-vP-33T" secondAttribute="trailing" constant="100" id="jxV-pR-LG5"/>
+                    <constraint firstItem="l5Q-zw-Kwu" firstAttribute="bottom" secondItem="wbw-De-qpG" secondAttribute="bottom" constant="-2" id="dLx-i1-Sjh"/>
+                    <constraint firstAttribute="trailing" secondItem="wbw-De-qpG" secondAttribute="trailing" constant="28" id="dME-3K-WMO"/>
+                    <constraint firstItem="l5Q-zw-Kwu" firstAttribute="leading" secondItem="wbw-De-qpG" secondAttribute="trailing" constant="2" id="iLL-PO-HrN"/>
+                    <constraint firstAttribute="trailing" secondItem="AFE-vP-33T" secondAttribute="trailing" constant="125" id="jxV-pR-LG5"/>
                     <constraint firstItem="aF3-Y9-xnQ" firstAttribute="leading" secondItem="CFV-4d-e5A" secondAttribute="trailing" constant="16" id="khe-12-5TZ"/>
                     <constraint firstItem="CFV-4d-e5A" firstAttribute="leading" secondItem="w8Q-7x-hRN" secondAttribute="trailing" constant="16" id="lU8-gT-VLC"/>
+                    <constraint firstItem="wnh-hv-zKz" firstAttribute="leading" secondItem="AFE-vP-33T" secondAttribute="trailing" constant="4" id="pKG-6P-iut"/>
                     <constraint firstItem="w8Q-7x-hRN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="40" id="pUY-z4-Wh5"/>
                     <constraint firstItem="wbw-De-qpG" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="s5S-Rh-8H6"/>
                     <constraint firstItem="aF3-Y9-xnQ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="y2J-5t-Dan"/>
@@ -107,6 +115,7 @@
                 <outlet property="able_typeLbl" destination="Dlz-d1-sYp" id="PDP-nF-lg2"/>
                 <outlet property="balanceLbl" destination="wbw-De-qpG" id="kkj-Uy-mgU"/>
                 <outlet property="balanceSignLbl" destination="Wsp-Vg-C2v" id="inF-fa-ggg"/>
+                <outlet property="balanceUnitLbl" destination="l5Q-zw-Kwu" id="xgM-hw-lpO"/>
                 <outlet property="dateLbl" destination="FA3-HZ-9gK" id="6Gh-eF-0ZA"/>
                 <outlet property="noLbl" destination="w8Q-7x-hRN" id="4iM-9W-7No"/>
                 <outlet property="priceLbl" destination="AFE-vP-33T" id="kKE-5u-G7N"/>

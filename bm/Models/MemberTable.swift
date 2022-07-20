@@ -486,9 +486,9 @@ class Member {
         }
     }
     
-    var bank_code: String {
+    var bank_code: Int {
         get {
-            return session.getString(BANK_CODE_KEY)
+            return session.getInt(BANK_CODE_KEY)
         }
         set {
             session.set(BANK_CODE_KEY, newValue)

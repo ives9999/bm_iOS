@@ -17,6 +17,8 @@ class MemberCartListVC: MyTableVC {
     
     @IBOutlet weak var submitButton: SubmitButton!
     
+    var source: String = "order"
+    
     override func viewDidLoad() {
         myTablView = tableView
 //        myTablView.allowsMultipleSelectionDuringEditing = false
@@ -79,6 +81,56 @@ class MemberCartListVC: MyTableVC {
         }
     }
     
+    override func cellEdit(row: Table) {
+        
+        toAddCart(
+            cartItem_token: row.token,
+            login: { vc in vc.toLogin() },
+            register: { vc in vc.toRegister() }
+        )
+    }
+    
+    override func cellDelete(row: Table) {
+        
+        warning(msg: "是否確定要刪除呢？", closeButtonTitle: "取消", buttonTitle: "確定") {
+            
+            Global.instance.addSpinner(superView: self.view)
+            self.dataService.delete(token: row.token, type: "cart_item", status: "delete") { (success) in
+                Global.instance.removeSpinner(superView: self.view)
+                if (success) {
+                    self.refresh()
+                    self.cartItemCount -= 1
+                    self.session.set("cartItemCount", self.cartItemCount)
+                } else {
+                    self.warning(self.dataService.msg)
+                }
+            }
+        }
+    }
+    
+    @IBAction func submitBtnPressed(_ sender: Any) {
+        
+        //toPayment(order_token: "VZsrHrb0AugnuwhxHKnIwU6QJfbUcfl", ecpay_token: "e2bd42a614344b1d8d4a7895deb37b18", tokenExpireDate: "")
+        
+        toOrder(
+            login: { vc in vc.toLogin() },
+            register: { vc in vc.toRegister() }
+        )
+    }
+    
+    @IBAction func cancelBtnPressed(_ sender: Any) {
+        if (source == "member") {
+            prev()
+        } else if (source == "order") {
+            self.view.window!.rootViewController?.dismiss(animated: false) {
+                self.toProduct()
+            }
+        }
+    }
+}
+
+extension MemberCartListVC {
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lists1.count
     }
@@ -118,46 +170,5 @@ class MemberCartListVC: MyTableVC {
         
         let cartItemTable = lists1[indexPath.row] as! CartItemTable
         toShowProduct(token: cartItemTable.product!.token)
-    }
-    
-    override func cellEdit(row: Table) {
-        
-        toAddCart(
-            cartItem_token: row.token,
-            login: { vc in vc.toLogin() },
-            register: { vc in vc.toRegister() }
-        )
-    }
-    
-    override func cellDelete(row: Table) {
-        
-        warning(msg: "是否確定要刪除呢？", closeButtonTitle: "取消", buttonTitle: "確定") {
-            
-            Global.instance.addSpinner(superView: self.view)
-            self.dataService.delete(token: row.token, type: "cart_item", status: "delete") { (success) in
-                Global.instance.removeSpinner(superView: self.view)
-                if (success) {
-                    self.refresh()
-                    self.cartItemCount -= 1
-                    self.session.set("cartItemCount", self.cartItemCount)
-                } else {
-                    self.warning(self.dataService.msg)
-                }
-            }
-        }
-    }
-    
-    @IBAction func submitBtnPressed(_ sender: Any) {
-        
-        //toPayment(order_token: "VZsrHrb0AugnuwhxHKnIwU6QJfbUcfl", ecpay_token: "e2bd42a614344b1d8d4a7895deb37b18", tokenExpireDate: "")
-        
-        toOrder(
-            login: { vc in vc.toLogin() },
-            register: { vc in vc.toRegister() }
-        )
-    }
-    
-    @IBAction func cancelBtnPressed(_ sender: Any) {
-        prev()
     }
 }

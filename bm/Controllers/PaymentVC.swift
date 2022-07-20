@@ -545,7 +545,7 @@ class PaymentVC: MyTableVC {
         toECPay()
     }
     
-    override func backBtnPressed() {
+    override func threeBtnPressed() {
         if order_token.count > 0 {
             Global.instance.addSpinner(superView: view)
             //print(Member.instance.token)
