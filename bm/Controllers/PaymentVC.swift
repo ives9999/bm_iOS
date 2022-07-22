@@ -85,17 +85,6 @@ class PaymentVC: MyTableVC {
     var card4No: String = ""
     var complete_at: String = ""
     
-    var popupTableView: UITableView = {
-        let cv = UITableView(frame: .zero, style: .plain)
-        cv.estimatedRowHeight = 44
-        cv.rowHeight = UITableView.automaticDimension
-        
-        cv.separatorStyle = .singleLine
-        cv.separatorColor = UIColor.lightGray
-        
-        return cv
-    }()
-    
     //var popupRows: [[String: String]] = [[String: String]]()
     var popupRows: [OneRow] = [OneRow]()
     
@@ -519,25 +508,6 @@ class PaymentVC: MyTableVC {
             }
         }
         
-    }
-    
-    @objc func panelCancelAction(){
-        unmask()
-    }
-    
-    @objc func unmask() {
-        
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.maskView.frame = CGRect(x:0, y:self.view.frame.height, width:self.view.frame.width, height:self.view.frame.height)
-            //self.blackView.frame = CGRect(x:self.panelLeftPadding, y:self.view.frame.height, width:self.view.frame.width-(2*self.panelLeftPadding), height:self.maskView.frame.height-self.panelTopPadding)
-        }, completion: { (finished) in
-            if finished {
-                for view in self.maskView.subviews {
-                    view.removeFromSuperview()
-                }
-                self.maskView.removeFromSuperview()
-            }
-        })
     }
     
     override func submitBtnPressed() {

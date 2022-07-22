@@ -238,6 +238,60 @@ class MyTableVC: BaseViewController {
         //print(params)
     }
     
+    func showTableLayer() {
+        maskView = view.mask()
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
+        //gesture.cancelsTouchesInView = false
+        maskView.addGestureRecognizer(gesture)
+        
+        let top: CGFloat = (maskView.frame.height-panelHeight)/2
+        blackView = maskView.blackView(left: panelLeftPadding, top: top, width: maskView.frame.width-2*panelLeftPadding, height:panelHeight)
+        
+        popupTableView.frame = CGRect(x: 0, y: 0, width: blackView.frame.width, height: blackView.frame.height-80)
+        popupTableView.dataSource = self
+        popupTableView.delegate = self
+        
+        popupTableView.backgroundColor = .clear
+        
+        blackView.addSubview(popupTableView)
+        
+        registerPanelCell()
+        
+        stackView = blackView.addStackView(height: 80)
+        
+        addPanelBtn()
+    }
+    
+    func addPanelBtn() {
+        panelCancelBtn = stackView.addCancelBtn()
+        //panelSubmitBtn = stackView.addSubmitBtn()
+        panelCancelBtn.addTarget(self, action: #selector(panelCancelAction), for: .touchUpInside)
+    }
+    
+    func registerPanelCell() {
+        let plainNib = UINib(nibName: "PlainCell", bundle: nil)
+        popupTableView.register(plainNib, forCellReuseIdentifier: "PlainCell")
+    }
+    
+    @objc func panelCancelAction(){
+        unmask()
+    }
+    
+    @objc func unmask() {
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.maskView.frame = CGRect(x:0, y:self.view.frame.height, width:self.view.frame.width, height:self.view.frame.height)
+            //self.blackView.frame = CGRect(x:self.panelLeftPadding, y:self.view.frame.height, width:self.view.frame.width-(2*self.panelLeftPadding), height:self.maskView.frame.height-self.panelTopPadding)
+        }, completion: { (finished) in
+            if finished {
+                for view in self.maskView.subviews {
+                    view.removeFromSuperview()
+                }
+                self.maskView.removeFromSuperview()
+            }
+        })
+    }
+    
     override func singleSelected(key: String, selected: String, show: String?=nil) {
         
         super.singleSelected(key: key, selected: selected, show: show)

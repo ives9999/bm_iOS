@@ -7,12 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
 class MemberCoinListVC: MyTableVC {
     
     @IBOutlet weak var top: Top!
     @IBOutlet weak var bottomThreeView: BottomThreeView!
     var memberCoinTables: [MemberCoinTable] = [MemberCoinTable]()
+    
+    var popupRows: [OneRow] = [OneRow]()
     
     override func viewDidLoad() {
         
@@ -30,6 +33,8 @@ class MemberCoinListVC: MyTableVC {
         bottomThreeView.cancelButton.setTitle("回上一頁")
         bottomThreeView.threeButton.setTitle("退款")
         bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
+        
+        panelHeight = 500
         
         refresh()
     }
@@ -82,6 +87,27 @@ class MemberCoinListVC: MyTableVC {
         toProduct()
     }
     
+    override func addPanelBtn() {
+        
+        panelSubmitBtn = stackView.addSubmitBtn()
+        panelSubmitBtn.addTarget(self, action: #selector(panelSubmitAction), for: .touchUpInside)
+        
+        var configuration = UIButton.Configuration.filled()
+        configuration.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 36, bottom: 4, trailing: 36)
+        configuration.baseBackgroundColor = UIColor(MY_GREEN)
+        panelSubmitBtn.configuration = configuration
+        
+        panelCancelBtn = stackView.addCancelBtn()
+        panelCancelBtn.addTarget(self, action: #selector(panelCancelAction), for: .touchUpInside)
+        
+        configuration.baseBackgroundColor = UIColor(MY_GRAY)
+        panelCancelBtn.configuration = configuration
+    }
+    
+    @objc func panelSubmitAction() {
+        print("aaa")
+    }
+    
     override func threeBtnPressed() {
         msg = ""
         if (Member.instance.bank.count == 0 || Member.instance.branch.count == 0 || Member.instance.bank_code == 0 || Member.instance.account.count == 0) {
@@ -90,21 +116,78 @@ class MemberCoinListVC: MyTableVC {
                 self.toMemberBank()
             }
         }
+        
+        if (msg.count == 0) {
+            MemberService.instance.coinReturn(member_token: Member.instance.token) { success in
+                if (success) {
+                    self.jsonData = MemberService.instance.jsonData
+                    do {
+                        if (self.jsonData != nil) {
+                            //print(jsonData.map { String(format: "%02x", $0) }.joined())
+                            let coinReturnResultTable: CoinReturnResultTable = try JSONDecoder().decode(CoinReturnResultTable.self, from: self.jsonData!)
+                            if (coinReturnResultTable.success) {
+                                
+                                self.popupRows = [
+                                    OneRow(title: "購買：", value: String(coinReturnResultTable.grand_price), show: coinReturnResultTable.grand_price.formattedWithSeparator + " 點", key: "grand_price", cell: "text"),
+                                    OneRow(title: "贈送：", value: String(coinReturnResultTable.grand_give), show: coinReturnResultTable.grand_give.formattedWithSeparator + " 點", key: "grand_give", cell: "text"),
+                                    OneRow(title: "支出：", value: String(coinReturnResultTable.grand_spend), show: coinReturnResultTable.grand_spend.formattedWithSeparator + " 點", key: "grand_spend", cell: "text"),
+                                    OneRow(title: "手續費：", value: String(coinReturnResultTable.handle_fee), show: coinReturnResultTable.handle_fee.formattedWithSeparator + " 點", key: "handle_fee", cell: "text"),
+                                    OneRow(title: "轉帳費：", value: String(coinReturnResultTable.transfer_fee), show:
+                                            coinReturnResultTable.transfer_fee.formattedWithSeparator + " 點", key: "transfer_fee", cell: "text"),
+                                    OneRow(title: "退款金額：", value: String(coinReturnResultTable.return_coin), show:
+                                            coinReturnResultTable.return_coin.formattedWithSeparator + " 點", key: "return_coin", cell: "text")
+                                    ]
+                                self.showTableLayer()
+                            }
+                        } else {
+                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                        }
+                    } catch {
+                        self.warning("解析JSON字串時，得到空值，請洽管理員")
+                    }
+                }
+            }
+        }
     }
 }
 
 extension MemberCoinListVC {
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (tableView == popupTableView) {
+            return popupRows.count
+        } else {
         
-        if let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCoinListCell", for: indexPath) as? MemberCoinListCell {
-            
-            let memberCoinTable: MemberCoinTable = memberCoinTables[indexPath.row]
-            memberCoinTable.filterRow()
-            cell.delegate = self
-            cell.update(_row: memberCoinTable, no: indexPath.row + 1)
-            
-            return cell
+            if (lists1.count > 0) {
+                return lists1.count
+            }
+        }
+        
+        let count: Int = 0
+
+        return count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if (tableView == popupTableView) {
+            if (popupRows.count > 0) {
+                let row: OneRow = popupRows[indexPath.row]
+                if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
+                    cell.update(title: row.title, show: row.show)
+                    return cell
+                }
+            }
+        } else {
+        
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCoinListCell", for: indexPath) as? MemberCoinListCell {
+                
+                let memberCoinTable: MemberCoinTable = memberCoinTables[indexPath.row]
+                memberCoinTable.filterRow()
+                cell.delegate = self
+                cell.update(_row: memberCoinTable, no: indexPath.row + 1)
+                
+                return cell
+            }
         }
         
         return UITableViewCell()
@@ -115,7 +198,7 @@ extension MemberCoinListVC {
         let row: MemberCoinTable = memberCoinTables[indexPath.row]
         row.filterRow()
         
-        //toPayment(order_token: <#T##String#>)
+        //toPayment(order_token: T##String)
         
         //購買點數，前往查看訂單
         if MEMBER_COIN_IN_TYPE.enumFromString(row.in_type) == MEMBER_COIN_IN_TYPE.buy && row.order_token.count > 0 {
@@ -156,5 +239,31 @@ class CoinResultTable: Codable {
         perPage = try container.decodeIfPresent(Int.self, forKey: .perPage) ?? -1
         msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
         rows = try container.decodeIfPresent([MemberCoinTable].self, forKey: .rows) ?? [MemberCoinTable]()
+    }
+}
+
+class CoinReturnResultTable: Codable {
+
+    var success: Bool = false
+    var grand_price: Int = 0
+    var grand_give: Int = 0
+    var grand_spend: Int = 0
+    var handle_fee: Int = 0
+    var transfer_fee: Int = 0
+    var return_coin: Int = 0
+    
+    init() {}
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        grand_price = try container.decodeIfPresent(Int.self, forKey: .grand_price) ?? 0
+        grand_give = try container.decodeIfPresent(Int.self, forKey: .grand_give) ?? 0
+        grand_spend = try container.decodeIfPresent(Int.self, forKey: .grand_spend) ?? 0
+        handle_fee = try container.decodeIfPresent(Int.self, forKey: .handle_fee) ?? 0
+        transfer_fee = try container.decodeIfPresent(Int.self, forKey: .transfer_fee) ?? 0
+        return_coin = try container.decodeIfPresent(Int.self, forKey: .return_coin) ?? 0
     }
 }

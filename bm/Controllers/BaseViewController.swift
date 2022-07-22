@@ -50,8 +50,10 @@ class BaseViewController: UIViewController, List2CellDelegate {
     var panelHeight: CGFloat = 400
     
     var containerView = UIView(frame: .zero)
+    
     var panelSubmitBtn: SubmitButton = SubmitButton()
     var panelCancelBtn: CancelButton = CancelButton()
+    
     var layerDeleteBtn: ClearButton = ClearButton()
     var layerBtnCount: Int = 2
     
@@ -76,6 +78,17 @@ class BaseViewController: UIViewController, List2CellDelegate {
     var able_type: String = "coach"
     
     var screen_width: CGFloat = 0
+    
+    var popupTableView: UITableView = {
+        let cv = UITableView(frame: .zero, style: .plain)
+        cv.estimatedRowHeight = 44
+        cv.rowHeight = UITableView.automaticDimension
+        
+        cv.separatorStyle = .singleLine
+        cv.separatorColor = UIColor.lightGray
+        
+        return cv
+    }()
     
     func __alert(showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) -> SCLAlertView {
         let appearance = SCLAlertView.SCLAppearance(

@@ -92,6 +92,10 @@ class MemberBankVC: BaseViewController {
                         if (!table.success) {
                             self.warning(table.msg)
                         } else {
+                            Member.instance.bank = self.params["bank"]!
+                            Member.instance.branch = self.params["branch"]!
+                            Member.instance.bank_code = Int(self.params["bank_code"]!)!
+                            Member.instance.account = self.params["account"]!
                             self.info("已經更新您銀行帳戶資料")
                         }
                     } catch {
