@@ -36,6 +36,18 @@ class PlainCell: FormItemCell {
         titleLbl?.text = title
         detailLbl?.text = show
     }
+    
+    func update(row: OneRow) {
+        titleLbl?.text = row.title
+        if (row.titleColor != nil) {
+            titleLbl?.textColor = row.titleColor
+        }
+        
+        detailLbl?.text = row.show
+        if (row.showColor != nil) {
+            detailLbl?.textColor = row.showColor
+        }
+    }
 
     override func update(with formItem: FormItem) {
         self.formItem = formItem

@@ -42,6 +42,8 @@ class MyTableVC: BaseViewController {
     var lists1: [Table] = [Table]()
     var newY: CGFloat = 0
     
+    var rowHeight: Int = 44
+    
 //    sections = ["商品", "訂單", "付款", "訂購人"]
 //    rows = [
 //        [["name":"商品名稱", "value":"value"],["name":"商品屬性", "value":"attributes"]],
@@ -238,16 +240,20 @@ class MyTableVC: BaseViewController {
         //print(params)
     }
     
-    func showTableLayer() {
+    func showTableLayer(tableViewHeight: Int) {
         maskView = view.mask()
         let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
         //gesture.cancelsTouchesInView = false
         maskView.addGestureRecognizer(gesture)
         
         let top: CGFloat = (maskView.frame.height-panelHeight)/2
-        blackView = maskView.blackView(left: panelLeftPadding, top: top, width: maskView.frame.width-2*panelLeftPadding, height:panelHeight)
         
-        popupTableView.frame = CGRect(x: 0, y: 0, width: blackView.frame.width, height: blackView.frame.height-80)
+        let layerButtonLayoutHeight: Int = setButtonLayoutHeight()
+        let blackViewHeight: CGFloat = CGFloat(tableViewHeight + layerButtonLayoutHeight)
+        
+        blackView = maskView.blackView(left: panelLeftPadding, top: top, width: maskView.frame.width-2*panelLeftPadding, height: blackViewHeight)
+        
+        popupTableView.frame = CGRect(x: 0, y: 0, width: Int(blackView.frame.width), height: tableViewHeight)
         popupTableView.dataSource = self
         popupTableView.delegate = self
         
@@ -257,13 +263,14 @@ class MyTableVC: BaseViewController {
         
         registerPanelCell()
         
-        stackView = blackView.addStackView(height: 80)
+        bottomView1 = blackView.addBottomView(height: CGFloat(setButtonLayoutHeight()))
+        //stackView = blackView.addStackView(height: CGFloat(setButtonLayoutHeight()))
         
         addPanelBtn()
     }
     
     func addPanelBtn() {
-        panelCancelBtn = stackView.addCancelBtn()
+        panelCancelBtn = bottomView1.addCancelBtn()
         //panelSubmitBtn = stackView.addSubmitBtn()
         panelCancelBtn.addTarget(self, action: #selector(panelCancelAction), for: .touchUpInside)
     }
@@ -271,6 +278,12 @@ class MyTableVC: BaseViewController {
     func registerPanelCell() {
         let plainNib = UINib(nibName: "PlainCell", bundle: nil)
         popupTableView.register(plainNib, forCellReuseIdentifier: "PlainCell")
+    }
+    
+    func setButtonLayoutHeight()-> Int {
+        let buttonViewHeight: Int = 44
+
+        return buttonViewHeight
     }
     
     @objc func panelCancelAction(){

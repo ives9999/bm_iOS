@@ -89,19 +89,28 @@ class MemberCoinListVC: MyTableVC {
     
     override func addPanelBtn() {
         
-        panelSubmitBtn = stackView.addSubmitBtn()
+        panelSubmitBtn = bottomView1.addSubmitBtn()
         panelSubmitBtn.addTarget(self, action: #selector(panelSubmitAction), for: .touchUpInside)
         
         var configuration = UIButton.Configuration.filled()
         configuration.contentInsets = NSDirectionalEdgeInsets(top: 4, leading: 36, bottom: 4, trailing: 36)
         configuration.baseBackgroundColor = UIColor(MY_GREEN)
         panelSubmitBtn.configuration = configuration
-        
-        panelCancelBtn = stackView.addCancelBtn()
+        panelSubmitBtn.topAnchor.constraint(equalTo: panelSubmitBtn.superview!.topAnchor, constant: 16).isActive = true
+
+        panelCancelBtn = bottomView1.addCancelBtn()
         panelCancelBtn.addTarget(self, action: #selector(panelCancelAction), for: .touchUpInside)
-        
+
         configuration.baseBackgroundColor = UIColor(MY_GRAY)
         panelCancelBtn.configuration = configuration
+        
+        panelCancelBtn.bottomAnchor.constraint(equalTo: panelCancelBtn.superview!.bottomAnchor, constant: -16).isActive = true
+    }
+    
+    override func setButtonLayoutHeight() -> Int {
+        let buttonViewHeight: Int = 55
+
+        return buttonViewHeight * 2
     }
     
     @objc func panelSubmitAction() {
@@ -133,11 +142,16 @@ class MemberCoinListVC: MyTableVC {
                                     OneRow(title: "支出：", value: String(coinReturnResultTable.grand_spend), show: coinReturnResultTable.grand_spend.formattedWithSeparator + " 點", key: "grand_spend", cell: "text"),
                                     OneRow(title: "手續費：", value: String(coinReturnResultTable.handle_fee), show: coinReturnResultTable.handle_fee.formattedWithSeparator + " 點", key: "handle_fee", cell: "text"),
                                     OneRow(title: "轉帳費：", value: String(coinReturnResultTable.transfer_fee), show:
-                                            coinReturnResultTable.transfer_fee.formattedWithSeparator + " 點", key: "transfer_fee", cell: "text"),
-                                    OneRow(title: "退款金額：", value: String(coinReturnResultTable.return_coin), show:
-                                            coinReturnResultTable.return_coin.formattedWithSeparator + " 點", key: "return_coin", cell: "text")
+                                            coinReturnResultTable.transfer_fee.formattedWithSeparator + " 點", key: "transfer_fee", cell: "text")
                                     ]
-                                self.showTableLayer()
+                                let row: OneRow = OneRow(title: "退款金額：", value: String(coinReturnResultTable.return_coin), show:
+                                                            coinReturnResultTable.return_coin.formattedWithSeparator + " 點", key: "return_coin", cell: "text")
+                                row.titleColor = UIColor(MY_RED)
+                                row.showColor = UIColor(MY_RED)
+                                self.popupRows.append(row)
+                                
+                                let tableViewHeight: Int = self.rowHeight * self.popupRows.count + 150
+                                self.showTableLayer(tableViewHeight: tableViewHeight)
                             }
                         } else {
                             self.warning("無法從伺服器取得正確的json資料，請洽管理員")
@@ -173,7 +187,7 @@ extension MemberCoinListVC {
             if (popupRows.count > 0) {
                 let row: OneRow = popupRows[indexPath.row]
                 if let cell: PlainCell = tableView.dequeueReusableCell(withIdentifier: "PlainCell", for: indexPath) as? PlainCell {
-                    cell.update(title: row.title, show: row.show)
+                    cell.update(row: row)
                     return cell
                 }
             }

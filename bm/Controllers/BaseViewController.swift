@@ -45,6 +45,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     var maskView = UIView()
     var blackView = UIView()
     var stackView = UIStackView()
+    var bottomView1 = UIView()
     var panelLeftPadding: CGFloat = 50
     var panelTopPadding: CGFloat = 30
     var panelHeight: CGFloat = 400

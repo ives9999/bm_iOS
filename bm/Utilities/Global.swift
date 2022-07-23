@@ -2018,6 +2018,22 @@ extension UIView {
         return view
     }
     
+    func addBottomView(height: CGFloat = 50)-> UIView {
+        let bottomView: UIView = UIView()
+        bottomView.backgroundColor = UIColor.clear
+        self.addSubview(bottomView)
+        bottomView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        bottomView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        bottomView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        bottomView.heightAnchor.constraint(equalToConstant: height).isActive = true
+        
+        bottomView.translatesAutoresizingMaskIntoConstraints = false
+        
+        bottomView.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        
+        return bottomView
+    }
+    
     func addStackView(height: CGFloat = 50)-> UIStackView {
         
         let bottomView: UIView = UIView()
@@ -2028,28 +2044,72 @@ extension UIView {
         let c2: NSLayoutConstraint = NSLayoutConstraint(item: bottomView, attribute: .trailing, relatedBy: .equal, toItem: bottomView.superview, attribute: .trailing, multiplier: 1, constant: 0)
         let c3: NSLayoutConstraint = NSLayoutConstraint(item: bottomView, attribute: .bottom, relatedBy: .equal, toItem: bottomView.superview, attribute: .bottom, multiplier: 1, constant: 0)
         let c4: NSLayoutConstraint = NSLayoutConstraint(item: bottomView, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height)
-        
-        
         let c5: NSLayoutConstraint = NSLayoutConstraint(item: bottomView, attribute: .centerX, relatedBy: .equal, toItem: bottomView.superview, attribute: .centerX, multiplier: 1, constant: 0)
 //        let c6: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: view.superview, attribute: .centerY, multiplier: 1, constant: 0)
         bottomView.translatesAutoresizingMaskIntoConstraints = false
+        bottomView.backgroundColor = UIColor(SEARCH_BACKGROUND)
         self.addConstraints([c1, c2, c3, c4, c5])
         
         let view: UIStackView = UIStackView()
         bottomView.addSubview(view)
         //view.backgroundColor = UIColor.green
-        let c6: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: view.superview, attribute: .centerX, multiplier: 1, constant: 0)
-        let c7: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: view.superview, attribute: .centerY, multiplier: 1, constant: 0)
+//        let c6: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: view.superview, attribute: .centerX, multiplier: 1, constant: 0)
+//        let c7: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerY, relatedBy: .equal, toItem: view.superview, attribute: .centerY, multiplier: 1, constant: 0)
 //        let c8: NSLayoutConstraint = NSLayoutConstraint(item: view1, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 200)
 //        let c9: NSLayoutConstraint = NSLayoutConstraint(item: view1, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 59)
 //        
         view.translatesAutoresizingMaskIntoConstraints = false
-        bottomView.addConstraints([c6, c7])
+        //bottomView.addConstraints([c6])
         
-        view.axis = .horizontal
+        view.centerXAnchor.constraint(equalTo: view.superview!.centerXAnchor).isActive = true
+        view.topAnchor.constraint(equalTo: view.superview!.topAnchor, constant: 16).isActive = true
+        
+        view.axis = .vertical
         view.alignment = .center
-        view.distribution = .equalSpacing
-        view.spacing = 40
+        view.distribution = .equalCentering
+        view.spacing = 20
+        
+        return view
+    }
+    
+    func addCancelBtn()-> CancelButton {
+        
+        let view: CancelButton = CancelButton()
+        self.addSubview(view)
+        
+        view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        //view.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        //self.addArrangedSubview(view)
+        
+        //let c1: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 110)
+        //let c2: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: view.superview, attribute: .centerX, multiplier: 1, constant: 110)
+        //view.translatesAutoresizingMaskIntoConstraints = false
+        //self.addConstraints([c1])
+        
+        return view
+    }
+    
+    func addSubmitBtn()-> SubmitButton {
+        
+        //let view: SubmitButton = SubmitButton()
+        let view: SubmitButton = SubmitButton()
+        self.addSubview(view)
+        
+        view.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        view.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
+        //view.topAnchor.constraint(equalTo: self.topAnchor, constant: 16).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        //self.addArrangedSubview(view)
+        
+        //let c1: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 110)
+        //view.translatesAutoresizingMaskIntoConstraints = false
+        //self.addConstraints([c1])
         
         return view
     }
@@ -2242,25 +2302,13 @@ extension UIView {
 
 extension UIStackView {
     
-    func addCancelBtn()-> CancelButton {
+    func addCancelBtn1()-> CancelButton {
         
         let view: CancelButton = CancelButton()
         self.addArrangedSubview(view)
         
         //let c1: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 110)
         //let c2: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .centerX, relatedBy: .equal, toItem: view.superview, attribute: .centerX, multiplier: 1, constant: 110)
-        //view.translatesAutoresizingMaskIntoConstraints = false
-        //self.addConstraints([c1])
-        
-        return view
-    }
-    
-    func addSubmitBtn()-> SubmitButton {
-        
-        let view: SubmitButton = SubmitButton()
-        self.addArrangedSubview(view)
-        
-        //let c1: NSLayoutConstraint = NSLayoutConstraint(item: view, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 110)
         //view.translatesAutoresizingMaskIntoConstraints = false
         //self.addConstraints([c1])
         

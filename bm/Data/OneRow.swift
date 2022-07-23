@@ -50,6 +50,8 @@ class OneRow {
     var quantity: String = ""
     var msg: String = ""
     var token: String = ""
+    var titleColor: UIColor?
+    var showColor: UIColor?
     
     init(
         title: String = "",

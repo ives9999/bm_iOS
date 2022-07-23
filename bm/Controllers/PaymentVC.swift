@@ -705,7 +705,7 @@ extension PaymentVC {
                 
                 stackView = blackView.addStackView(height: 80)
                 
-                panelCancelBtn = stackView.addCancelBtn()
+                panelCancelBtn = stackView.addCancelBtn1()
                 //panelSubmitBtn = stackView.addSubmitBtn()
                 panelCancelBtn.addTarget(self, action: #selector(panelCancelAction), for: .touchUpInside)
                 let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
