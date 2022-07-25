@@ -755,6 +755,8 @@ enum GATEWAY: String {
     case store_barcode = "超商條碼"
     case store_pay_711 = "7-11超商取貨付款"
     case store_pay_family = "全家超商取貨付款"
+    case store_pay_hilife = "萊爾富超商取貨付款"
+    case store_pay_ok = "OK超商取貨付款"
     case ATM = "虛擬帳戶"
     case remit = "匯款"
     case cash = "現金"
@@ -772,6 +774,10 @@ enum GATEWAY: String {
             return .store_pay_711
         case "store_pay_family":
             return .store_pay_family
+        case "store_pay_hilife":
+            return .store_pay_hilife
+        case "store_pay_ok":
+            return .store_pay_ok
         case "ATM":
             return .ATM
         case "remit":
@@ -796,8 +802,10 @@ enum GATEWAY: String {
             return "UNIMARTC2C"
         case .store_pay_family:
             return "FAMIC2C"
-//        case .store_hilife
-//            return "HILIFEC2C"
+        case .store_pay_hilife:
+            return "HILIFEC2C"
+        case .store_pay_ok:
+            return "OKMARTC2C"
         default:
             return "UNIMARTC2C"
         }
@@ -809,6 +817,8 @@ enum SHIPPING_WAY: String {
     case direct = "宅配"
     case store_711 = "7-11超商取貨"
     case store_family = "全家超商取貨"
+    case store_hilife = "萊爾富超商取貨"
+    case store_ok = "OK超商取貨"
     case cash = "面交"
     
     static func stringToEnum(_ enumString: String) -> SHIPPING_WAY {
@@ -819,6 +829,10 @@ enum SHIPPING_WAY: String {
             return .store_711
         case "store_family":
             return .store_family
+        case "store_hilife":
+            return .store_hilife
+        case "store_ok":
+            return .store_ok
         case "cash":
             return .cash
         default:

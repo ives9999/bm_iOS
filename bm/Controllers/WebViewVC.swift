@@ -72,7 +72,8 @@ class WebViewVC: BaseViewController {
         let orderTable: OrderTable = table as! OrderTable
         
         //let path1: String = "http://bm.sportpassword.localhost/c2c.html"
-        var path: String = "http://bm.sportpassword.localhost/app/order/ecpay2_c2c_map?"
+        var path: String = URL_ECPAY2_C2C_MAP + "?"
+        //var path: String = "http://bm.sportpassword.localhost/app/order/ecpay2_c2c_map?"
         path += "LogisticsType=CVS"
         if orderTable.gateway != nil {
             let gatewayEnum: GATEWAY = GATEWAY.stringToEnum(orderTable.gateway!.method)
@@ -82,7 +83,7 @@ class WebViewVC: BaseViewController {
             path += "&phone=iOS"
         }
         
-        //print(path)
+        print(path)
         
         if let url: URL = URL(string: path) {
             var request = URLRequest(url: url)
@@ -104,7 +105,11 @@ extension WebViewVC: WKScriptMessageHandler {
         if (delegate != nil) {
             delegate!.info(msg: "超商付款取貨，已經完成門市設定，我們將盡快出貨！！", showCloseButton: false, buttonTitle: "關閉") {
                 self.delegate!.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                self.delegate!.toProduct()
+                if (self.token != nil) {
+                    self.delegate!.toPayment(order_token: self.token!)
+                } else {
+                    self.delegate!.toProduct()
+                }
             }
             //delegate!.info("超商付款取貨，已經完成門市設定，我們將盡快出貨！！")
         }

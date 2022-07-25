@@ -606,9 +606,66 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             
             invoiceTable.reloadData()
             unmask()
-        } else {
+        }
+        
+        if (key == GATEWAY_KEY || key == SHIPPING_KEY) {
             let section: OneSection = oneSections[sectionIdx]
             rows = section.items
+            
+            if (isChecked) {
+                //偵測是否按下「7-11貨到付款」，一併更改到貨方式
+                let row = rows[rowIdx]
+                
+                if GATEWAY.stringToEnum(row.key) == GATEWAY.store_pay_711 {
+                
+                    let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
+                    for row1 in rows1 {
+                        if (SHIPPING_WAY.stringToEnum(row1.key) == SHIPPING_WAY.store_711) {
+                            row1.value = "true"
+                        } else {
+                            row1.value = "false"
+                        }
+                    }
+                }
+                
+                //偵測是否按下「family貨到付款」，一併更改到貨方式
+                if GATEWAY.stringToEnum(row.key) == GATEWAY.store_pay_family {
+                
+                    let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
+                    for row1 in rows1 {
+                        if (SHIPPING_WAY.stringToEnum(row1.key) == SHIPPING_WAY.store_family) {
+                            row1.value = "true"
+                        } else {
+                            row1.value = "false"
+                        }
+                    }
+                }
+                
+                if GATEWAY.stringToEnum(row.key) == GATEWAY.store_pay_hilife {
+                
+                    let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
+                    for row1 in rows1 {
+                        if (SHIPPING_WAY.stringToEnum(row1.key) == SHIPPING_WAY.store_hilife) {
+                            row1.value = "true"
+                        } else {
+                            row1.value = "false"
+                        }
+                    }
+                }
+                
+                if GATEWAY.stringToEnum(row.key) == GATEWAY.store_pay_ok {
+                
+                    let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
+                    for row1 in rows1 {
+                        if (SHIPPING_WAY.stringToEnum(row1.key) == SHIPPING_WAY.store_ok) {
+                            row1.value = "true"
+                        } else {
+                            row1.value = "false"
+                        }
+                    }
+                }
+            }
+            
             
             for (idx, row) in rows.enumerated() {
                 if (idx == rowIdx) {
@@ -617,8 +674,9 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     row.value = String(!isChecked)
                 }
             }
+            tableView.reloadData()
         }
-        tableView.reloadData()
+        
     }
     
     override func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {
@@ -750,7 +808,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                                     self.info(msg: "訂單已經成立，是否前往結帳？", showCloseButton: true, buttonTitle: "結帳") {
                                         self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
                                     }
-                                } else if gateway_method == GATEWAY.store_pay_711 || gateway_method == GATEWAY.store_pay_family {
+                                } else if gateway_method == GATEWAY.store_pay_711 || gateway_method == GATEWAY.store_pay_family || gateway_method == GATEWAY.store_pay_hilife ||  gateway_method == GATEWAY.store_pay_ok {
                                     self.info(msg: "訂單已經成立，是否前往選擇超商門市？", showCloseButton: true, buttonTitle: "是") {
                                         self.toWebView(token: orderTable!.token, delegate: self)
                                     }
