@@ -806,3 +806,31 @@ class MemberLotteryTable: Table {
     }
     
 }
+
+class MemberLotteryLogTable: Table {
+    
+    var member_lottery_id: Int = 0
+    var amount: Int = 0
+    
+    enum CodingKeys: String, CodingKey {
+        case member_lottery_id
+        case amount
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        member_lottery_id = try container.decodeIfPresent(Int.self, forKey: .member_lottery_id) ?? 0
+        amount = try container.decodeIfPresent(Int.self, forKey: .amount) ?? 0
+    }
+    
+    override func filterRow() {
+        super.filterRow()
+    }
+    
+}
