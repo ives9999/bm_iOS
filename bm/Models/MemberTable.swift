@@ -744,7 +744,6 @@ class MemberCoinTable: Table {
             type_out_enum = MEMBER_COIN_OUT_TYPE.enumFromString(out_type)
         }
     }
-    
 }
 
 class MemberBankTable: Table {
@@ -778,4 +777,32 @@ class MemberBankTable: Table {
     override func filterRow() {
         super.filterRow()
     }
+}
+
+class MemberLotteryTable: Table {
+    
+    var member_id: Int = 0
+    var level: String = ""
+
+    enum CodingKeys: String, CodingKey {
+        case member_id
+        case level
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        member_id = try container.decodeIfPresent(Int.self, forKey: .member_id) ?? 0
+        level = try container.decodeIfPresent(String.self, forKey: .level) ?? ""
+    }
+    
+    override func filterRow() {
+        super.filterRow()
+    }
+    
 }
