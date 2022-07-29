@@ -137,6 +137,9 @@ class MemberVC: MyTableVC {
         var r: MemberRow = MemberRow(title: "解碼點數", icon: "coin", segue: TO_MEMBER_COIN_LIST)
         r.show = Member.instance.coin.formattedWithSeparator + " 點"
         rows.append(r)
+        r = MemberRow(title: "進階會員", icon: "coin", segue: TO_MEMBER_LEVELUP)
+        //r.show = Member.instance.coin.formattedWithSeparator + " 點"
+        rows.append(r)
         r = MemberRow(title: "帳戶資料", icon: "member", segue: TO_PROFILE)
         rows.append(r)
         r = MemberRow(title: "更改密碼", icon: "password", segue: TO_PASSWORD)
@@ -295,84 +298,6 @@ class MemberVC: MyTableVC {
             
         }
     }
-    
-//    func setValidateRow() {
-//        //_rows.removeAll()
-//        memberRows.removeAll()
-//        memberRows = fixedRows
-//        if Member.instance.isLoggedIn {// detected validate status
-//            let validate: Int = Member.instance.validate
-//            //print(validate)
-//            if validate & EMAIL_VALIDATE <= 0 {
-//                let new: Dictionary<String, String> = ["text": "email認證", "icon": "email1", "segue": TO_VALIDATE, "type": "email"]
-//                memberRows.append(new)
-//            }
-//            if validate & MOBILE_VALIDATE <= 0 {
-//                let new: Dictionary<String, String> = ["text": "手機認證", "icon": "mobile_validate", "segue": TO_VALIDATE, "type": "mobile"]
-//                memberRows.append(new)
-//            }
-//        }
-////        if Member.instance.isTeamManager {
-////            let new: Dictionary<String, String> = ["text": "黑名單", "icon": "blacklist", "segue": TO_BLACKLIST]
-////            memberRows.append(new)
-////        }
-//        let new: Dictionary<String, String> = ["text": "重新整理", "icon": "refresh", "segue": TO_REFRESH]
-//        memberRows.append(new)
-//        myRows[0]["rows"] = memberRows
-//
-////        _rows.append(memberRows)
-////        _rows.append(orderRows)
-////        _rows.append(likeRows)
-////        _rows.append(courseRows)
-////        _rows.append(signupRows)
-//        //print(_rows)
-//        //setData(sections: _sections, rows: _rows)
-//    }
-    
-//    var mySections: [[String: Any]] = [
-//        ["name": "會員資料", "isExpanded": true, "key": "data"],
-//        ["name": "訂單", "isExpanded": true, "key": "order"],
-//        ["name": "喜歡", "isExpanded": false, "key": "like"],
-//        ["name": "管理", "isExpanded": true, "key": "manager"]
-//    ]
-//    func getSectionName(idx: Int)-> String {
-//
-//        var name: String = ""
-//        let row: [String: Any] = mySections[idx]
-//        if (row.keyExist(key: "name")) {
-//            if let tmp: String = row["name"] as? String {
-//                name = tmp
-//            }
-//        }
-//
-//        return name
-//    }
-//
-//    func getSectionKey(idx: Int)-> String {
-//
-//        var key: String = ""
-//        let row: [String: Any] = mySections[idx]
-//        if (row.keyExist(key: "key")) {
-//            if let tmp: String = row["key"] as? String {
-//                key = tmp
-//            }
-//        }
-//
-//        return key
-//    }
-//
-//    func getSectionExpanded(idx: Int)-> Bool {
-//
-//        var b: Bool = true
-//        let row: [String: Any] = mySections[idx]
-//        if (row.keyExist(key: "isExpanded")) {
-//            if let tmp: Bool = row["isExpanded"] as? Bool {
-//                b = tmp
-//            }
-//        }
-//
-//        return b
-//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if sender != nil {
@@ -706,6 +631,8 @@ extension MemberVC {
             delete()
         } else if segue == TO_MEMBER_COIN_LIST {
             toMemberCoinList()
+        } else if segue == TO_MEMBER_LEVELUP {
+            toMemberLevelUp()
         }
     }
 }

@@ -8,6 +8,50 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Member Level UpVC-->
+        <scene sceneID="mI0-Oy-eu1">
+            <objects>
+                <viewController storyboardIdentifier="toMemberLevelUp" id="WB6-ll-QYz" customClass="MemberLevelUpVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Ea-gO-8VL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8jw-Ng-f1i" customClass="Top" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="CeH-8k-9TS"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dqw-ci-meZ" customClass="BottomThreeView" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="a9i-9I-D2n"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="j2E-MZ-vfg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="TrA-rN-6RV"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="TrA-rN-6RV" firstAttribute="bottom" secondItem="Dqw-ci-meZ" secondAttribute="bottom" id="6Ye-Ob-djY"/>
+                            <constraint firstItem="8jw-Ng-f1i" firstAttribute="leading" secondItem="TrA-rN-6RV" secondAttribute="leading" id="Awv-rQ-qOy"/>
+                            <constraint firstItem="8jw-Ng-f1i" firstAttribute="top" secondItem="TrA-rN-6RV" secondAttribute="top" id="PP3-3y-cnv"/>
+                            <constraint firstAttribute="trailing" secondItem="Dqw-ci-meZ" secondAttribute="trailing" id="gf2-fS-IcS"/>
+                            <constraint firstItem="8jw-Ng-f1i" firstAttribute="trailing" secondItem="TrA-rN-6RV" secondAttribute="trailing" id="pyx-lH-0q4"/>
+                            <constraint firstItem="Dqw-ci-meZ" firstAttribute="leading" secondItem="TrA-rN-6RV" secondAttribute="leading" id="uLn-ih-n7h"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomThreeView" destination="Dqw-ci-meZ" id="0Iq-cq-8P2"/>
+                        <outlet property="top" destination="8jw-Ng-f1i" id="uc5-ES-dfs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hbJ-p2-svv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2487" y="-2080"/>
+        </scene>
         <!--Member Coin ListVC-->
         <scene sceneID="2fH-2N-0Dd">
             <objects>
