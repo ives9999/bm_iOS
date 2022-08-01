@@ -72,6 +72,35 @@ class DataService {
     
     init() {}
     
+    func _simpleService(url: String, params: [String: String], completion: @escaping CompletionHandler) {
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
+            
+            switch response.result {
+            //case .success(let value):
+            case .success(_):
+                if response.data != nil {
+//                    let json = JSON(value)
+//                    print(json)
+                    if (response.data != nil) {
+                        self.jsonData = response.data!
+                        completion(true)
+                    } else {
+                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+                        completion(false)
+                    }
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
     func delete(token: String, type: String, status: String = "trash", completion: @escaping CompletionHandler) {
         
         let body: [String: String] = ["device": "app", "channel": "bm", "token": token, "type": type, "status": status]

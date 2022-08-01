@@ -13,14 +13,10 @@ class MemberLevelUpVC: BaseViewController {
     @IBOutlet weak var top: Top!
     @IBOutlet weak var bottomThreeView: BottomThreeView!
     
-    lazy var tableView: MyTableVC2<MemberLevelUpCell, OneRow> = {
-        let tableView = MyTableVC2<MemberLevelUpCell, OneRow>(didSelect: didSelect(item:at:))
+    lazy var tableView: MyTable2VC<MemberLevelUpCell, MemberLevelKindTable> = {
+        let tableView = MyTable2VC<MemberLevelUpCell, MemberLevelKindTable>(didSelect: didSelect(item:at:))
         return tableView
     }()
-    
-    //var myTableView: MyTableVC2<MemberLevelUpCell, OneRow>
-    
-    var oneRows: [OneRow] = [OneRow]()
     
     override func viewDidLoad() {
         
@@ -33,31 +29,28 @@ class MemberLevelUpVC: BaseViewController {
         
         setupBottomThreeView()
         
-        initRows()
+        refresh()
     }
     
-    func didSelect(item: OneRow, at indexPath: IndexPath) {
+    override func refresh() {
+        
+        page = 1
+        Global.instance.addSpinner(superView: self.view)
+        
+        MemberService.instance.levelKind(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
+            if (success) {
+                self.jsonData = MemberService.instance.jsonData
+                let b: Bool = self.tableView.parseJSON(jsonData: self.jsonData)
+                if !b && self.tableView.msg.count == 0 {
+                    self.view.setInfo(info: self.tableView.msg, topAnchor: self.top)
+                }
+            }
+            Global.instance.removeSpinner(superView: self.view)
+        }
+    }
+    
+    func didSelect(item: MemberLevelKindTable, at indexPath: IndexPath) {
         print(item.title + "\(indexPath.row)")
-    }
-    
-    func initRows() {
-        var oneRow: OneRow = OneRow()
-        oneRow.title = "金牌"
-        oneRows.append(oneRow)
-        
-        oneRow = OneRow()
-        oneRow.title = "銀牌"
-        oneRows.append(oneRow)
-        
-        oneRow = OneRow()
-        oneRow.title = "銅牌"
-        oneRows.append(oneRow)
-        
-        oneRow = OneRow()
-        oneRow.title = "鐵牌"
-        oneRows.append(oneRow)
-        
-        tableView.items = oneRows
     }
     
     func setupBottomThreeView() {
@@ -69,13 +62,13 @@ class MemberLevelUpVC: BaseViewController {
     }
 }
 
-class MemberLevelUpCell: BaseTableViewCell<OneRow> {
+class MemberLevelUpCell: BaseTableViewCell<MemberLevelKindTable> {
     
     @IBOutlet weak var titleLbl: SuperLabel!
     
-    override var item: OneRow? {
+    override var item: MemberLevelKindTable? {
         didSet {
-            titleLbl?.text = item?.title
+            titleLbl?.text = item?.name
         }
     }
     
@@ -83,9 +76,30 @@ class MemberLevelUpCell: BaseTableViewCell<OneRow> {
         super.awakeFromNib()
     }
     
-//    func update(row: OneRow) {
-//
-//        titleLbl.text = row.title
-//    }
+}
+
+class LevelKindResultTable: Codable {
+
+    var success: Bool = false
+    var grand_price: Int = 0
+    var grand_give: Int = 0
+    var grand_spend: Int = 0
+    var handle_fee: Int = 0
+    var transfer_fee: Int = 0
+    var return_coin: Int = 0
     
+    init() {}
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        grand_price = try container.decodeIfPresent(Int.self, forKey: .grand_price) ?? 0
+        grand_give = try container.decodeIfPresent(Int.self, forKey: .grand_give) ?? 0
+        grand_spend = try container.decodeIfPresent(Int.self, forKey: .grand_spend) ?? 0
+        handle_fee = try container.decodeIfPresent(Int.self, forKey: .handle_fee) ?? 0
+        transfer_fee = try container.decodeIfPresent(Int.self, forKey: .transfer_fee) ?? 0
+        return_coin = try container.decodeIfPresent(Int.self, forKey: .return_coin) ?? 0
+    }
 }

@@ -9,9 +9,14 @@
 import Foundation
 import UIKit
 
-class MyTableVC2<T: BaseTableViewCell<U>, U>: UITableView, UITableViewDelegate, UITableViewDataSource {
+class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDelegate, UITableViewDataSource {
     
     let cellId: String = "BaseCellID"
+    
+    var page: Int = 1
+    var perPage: Int = PERPAGE
+    var totalCount: Int = 100000
+    var totalPage: Int = 1
     
     var items = [U]() {
         didSet {
@@ -19,8 +24,12 @@ class MyTableVC2<T: BaseTableViewCell<U>, U>: UITableView, UITableViewDelegate, 
         }
     }
     
+    //var rows: [U] = [U]()
+    
     typealias didSelectClosure = ((U, IndexPath) -> Void)?
     var didSelect: didSelectClosure
+    
+    var msg: String = ""
     
     init(didSelect: didSelectClosure) {
         self.didSelect = didSelect
@@ -63,6 +72,45 @@ class MyTableVC2<T: BaseTableViewCell<U>, U>: UITableView, UITableViewDelegate, 
         separatorColor = UIColor.lightGray
     }
     
+    func parseJSON(jsonData: Data?)-> Bool {
+        
+        let _rows: [U] = genericTable2(jsonData: jsonData)
+        if (_rows.count == 0) {
+            return false
+        } else {
+            if (page == 1) {
+                items = [U]()
+            }
+            items += _rows
+        }
+        
+        return true
+    }
+    
+    func genericTable2(jsonData: Data?)-> [U] {
+        
+        var rows: [U] = [U]()
+        do {
+            if (jsonData != nil) {
+                //print(jsonData!.prettyPrintedJSONString)
+                let tables2: Tables2 = try JSONDecoder().decode(Tables2<U>.self, from: jsonData!)
+                if (tables2.success) {
+                    if tables2.rows.count > 0 {
+                        rows += tables2.rows
+                    }
+                } else {
+                    msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
+                }
+            } else {
+                msg = "無法從伺服器取得正確的json資料，請洽管理員"
+            }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        
+        return rows
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
@@ -71,6 +119,9 @@ class MyTableVC2<T: BaseTableViewCell<U>, U>: UITableView, UITableViewDelegate, 
         
         let cell = self.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? BaseTableViewCell<U>
         cell?.backgroundColor = UIColor.clear
+        
+        cell?.setSelectedBackgroundColor()
+        
         cell?.item = items[indexPath.row]
         
         return cell ?? UITableViewCell()
@@ -84,4 +135,14 @@ class MyTableVC2<T: BaseTableViewCell<U>, U>: UITableView, UITableViewDelegate, 
 
 class BaseTableViewCell<U>: UITableViewCell {
     var item: U?
+    
+    override class func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    func setSelectedBackgroundColor() {
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(CELL_SELECTED)
+        selectedBackgroundView = bgColorView
+    }
 }

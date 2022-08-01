@@ -834,3 +834,46 @@ class MemberLotteryLogTable: Table {
     }
     
 }
+
+//class MemberLevelKindTables: Tables2<MemberLevelKindTable> {
+//
+//}
+
+class MemberLevelKindTable: Table {
+    
+    var eng_name: String = ""
+    var price: Int = 0
+    var cycle: Int = 0
+    var cycle_unit: String = ""
+    var lottery: Int = 0
+    var gift_coin: Int = 0
+    
+    enum CodingKeys: String, CodingKey {
+        case eng_name
+        case price
+        case cycle
+        case cycle_unit
+        case lottery
+        case gift_coin
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        eng_name = try container.decodeIfPresent(String.self, forKey: .eng_name) ?? ""
+        price = try container.decodeIfPresent(Int.self, forKey: .price) ?? 0
+        cycle = try container.decodeIfPresent(Int.self, forKey: .cycle) ?? 0
+        cycle_unit = try container.decodeIfPresent(String.self, forKey: .cycle_unit) ?? ""
+        lottery = try container.decodeIfPresent(Int.self, forKey: .lottery) ?? 0
+        gift_coin = try container.decodeIfPresent(Int.self, forKey: .gift_coin) ?? 0
+    }
+    
+    override func filterRow() {
+        super.filterRow()
+    }
+}

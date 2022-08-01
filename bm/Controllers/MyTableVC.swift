@@ -27,11 +27,6 @@ class MyTableVC: BaseViewController {
     
     //var form: BaseForm!
     
-    var page: Int = 1
-    var perPage: Int = PERPAGE
-    var totalCount: Int = 100000
-    var totalPage: Int = 1
-    
     var iden: String!
     var titleField: String!
     
@@ -117,7 +112,7 @@ class MyTableVC: BaseViewController {
         getDataStart(page: page, perPage: PERPAGE)
     }
     
-    func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {
+    override func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {
         Global.instance.addSpinner(superView: self.view)
         
         //會員喜歡列表也一並使用此程式
@@ -136,7 +131,7 @@ class MyTableVC: BaseViewController {
         }
     }
     
-    func getDataEnd(success: Bool) {
+    override func getDataEnd(success: Bool) {
         
         Global.instance.removeSpinner(superView: view)
         if (!success) {
@@ -165,7 +160,7 @@ class MyTableVC: BaseViewController {
         }
     }
     
-    func genericTable() {
+    override func genericTable() {
         
         var mysTable: TeamsTable?
         do {

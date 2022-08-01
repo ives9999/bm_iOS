@@ -41,6 +41,11 @@ class BaseViewController: UIViewController, List2CellDelegate {
     
     let session: UserDefaults = UserDefaults.standard
     
+    var page: Int = 1
+    var perPage: Int = PERPAGE
+    var totalCount: Int = 100000
+    var totalPage: Int = 1
+    
     //layer
     var maskView = UIView()
     var blackView = UIView()
@@ -322,6 +327,10 @@ class BaseViewController: UIViewController, List2CellDelegate {
     func cellToLogin() {
         toLogin()
     }
+    
+    func genericTable() {}
+    func getDataEnd(success: Bool) {}
+    func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {}
     
 //    var wheels: Int = 0
 //    required init() {}

@@ -337,7 +337,7 @@
 		F9A6751F27FAF766007C8F47 /* Top.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A6751E27FAF766007C8F47 /* Top.xib */; };
 		F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */; };
 		F9EDEDAF28927C1B00FB92BB /* MemberLevelUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EDEDAE28927C1B00FB92BB /* MemberLevelUpVC.swift */; };
-		F9EDEDB128928E3400FB92BB /* MyTableVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EDEDB028928E3400FB92BB /* MyTableVC2.swift */; };
+		F9EDEDB128928E3400FB92BB /* MyTable2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EDEDB028928E3400FB92BB /* MyTable2VC.swift */; };
 		F9EDEDB32892C40D00FB92BB /* MemberLevelUpCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9EDEDB22892C40D00FB92BB /* MemberLevelUpCell.xib */; };
 		F9F583AE283518C400F77B00 /* BottomThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9F583AD283518C400F77B00 /* BottomThreeView.swift */; };
 		F9F583B0283518DF00F77B00 /* BottomThreeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9F583AF283518DF00F77B00 /* BottomThreeView.xib */; };
@@ -760,7 +760,7 @@
 		F9A6751E27FAF766007C8F47 /* Top.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Top.xib; sourceTree = "<group>"; };
 		F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImagePickerVC.swift; sourceTree = "<group>"; };
 		F9EDEDAE28927C1B00FB92BB /* MemberLevelUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberLevelUpVC.swift; sourceTree = "<group>"; };
-		F9EDEDB028928E3400FB92BB /* MyTableVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTableVC2.swift; sourceTree = "<group>"; };
+		F9EDEDB028928E3400FB92BB /* MyTable2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTable2VC.swift; sourceTree = "<group>"; };
 		F9EDEDB22892C40D00FB92BB /* MemberLevelUpCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberLevelUpCell.xib; sourceTree = "<group>"; };
 		F9F583AD283518C400F77B00 /* BottomThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomThreeView.swift; sourceTree = "<group>"; };
 		F9F583AF283518DF00F77B00 /* BottomThreeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BottomThreeView.xib; sourceTree = "<group>"; };
@@ -1312,6 +1312,7 @@
 				B3310D8D22ABB4820062EF98 /* MultiSelectVC.swift */,
 				B31739EE21787960004CFEDE /* MyMapVC.swift */,
 				B322F8041FC52CAE00DE98FB /* MyTableVC.swift */,
+				F9EDEDB028928E3400FB92BB /* MyTable2VC.swift */,
 				B3CABD8226B4561300FD0E4D /* OrderVC.swift */,
 				B30C954B1FEA8CDA005F71EF /* PasswordVC.swift */,
 				B3031D6925CD46A50044830C /* PaymentVC.swift */,
@@ -1357,7 +1358,6 @@
 				F99DF39E28715E4C00A7C2C6 /* WebViewVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
-				F9EDEDB028928E3400FB92BB /* MyTableVC2.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1918,7 +1918,7 @@
 				B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
 				B362263225E236C100D98317 /* MemberOrderListVC.swift in Sources */,
-				F9EDEDB128928E3400FB92BB /* MyTableVC2.swift in Sources */,
+				F9EDEDB128928E3400FB92BB /* MyTable2VC.swift in Sources */,
 				B39453E1223CE905005E3027 /* CancelButton.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
 				B3F6B45B260500AC0000F9E0 /* SignupStandbyTab.swift in Sources */,
