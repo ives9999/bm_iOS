@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MemberCoinListCell: SuperCell {
+class MemberCoinListCell: BaseTableViewCell<MemberCoinTable> {
     
     @IBOutlet weak var noLbl: SuperLabel!
     @IBOutlet weak var priceSignLbl: SuperLabel!
@@ -64,6 +64,61 @@ class MemberCoinListCell: SuperCell {
         if (dateLbl != nil) {
             dateLbl.setTextSize(10)
             dateLbl.setTextColor(UIColor(MY_LIGHT_WHITE))
+        }
+    }
+    
+    override var item: MemberCoinTable? {
+        
+        didSet {
+            update2(row: item)
+        }
+    }
+    
+    func update2(row: MemberCoinTable?) {
+        
+        row?.filterRow()
+        
+        if (no != nil) {
+            noLbl.text = String(no! + 1) + "."
+        }
+        
+        dateLbl.text = row!.created_at.noSec()
+        
+        balanceLbl.text = row!.balance.formattedWithSeparator
+        
+        if (row!.able_type_show.count > 0) {
+            able_typeLbl.text = row!.able_type_show
+            let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(able_action))
+            tap.cancelsTouchesInView = false
+            able_typeLbl.addGestureRecognizer(tap)
+        }
+        
+        
+        if (row!.in_out) {
+            priceLbl.text = "+" + row!.coin.formattedWithSeparator
+            typeButton.setTitle(row!.type_in_enum.rawValue)
+            if (row!.type_in_enum == MEMBER_COIN_IN_TYPE.buy) {
+                typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_BUY))
+            } else if (row!.type_in_enum == MEMBER_COIN_IN_TYPE.gift) {
+                typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_GIFT))
+            } else {
+                typeButton.isHidden = true
+            }
+        } else {
+            priceLbl.text = "-" + row!.coin.formattedWithSeparator
+            priceLbl.setTextColor(UIColor(MY_RED))
+            typeButton.setTitle(row!.type_out_enum.rawValue)
+            if (row!.type_out_enum == MEMBER_COIN_OUT_TYPE.product) {
+                typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_PAY))
+            } else if (row!.type_out_enum == MEMBER_COIN_OUT_TYPE.course) {
+                typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_PAY))
+            } else {
+                typeButton.isHidden = true
+            }
+        }
+        
+        if (row!.name.count > 0) {
+            able_typeLbl.text = row!.name
         }
     }
 

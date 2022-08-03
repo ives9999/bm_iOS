@@ -509,70 +509,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         self.cancelBtn.isHidden = false
     }
     
-//    func updateSubTotal() {
-//        if let priceItem = getFormItemFromKey(SUBTOTAL_KEY) {
-//            sub_total = selected_price * selected_number
-//            priceItem.value = String(sub_total)
-//            priceItem.make()
-//            updateShippingFee()
-//            //updateTotal()
-//        }
-//    }
-//    
-//    func updateShippingFee() {
-//        shippingFee = productTable!.prices[selected_idx].shipping_fee
-//        if let priceItem = getFormItemFromKey(SHIPPING_FEE_KEY) {
-//            //shippingFee = price
-//            priceItem.value = String(shippingFee)
-//            priceItem.make()
-//            updateTotal()
-//        }
-//    }
-//    
-//    func updateTotal() {
-//        if let priceItem = getFormItemFromKey(TOTAL_KEY) {
-//            total = sub_total + shippingFee
-//            priceItem.value = String(total)
-//            priceItem.make()
-//            tableView.reloadData()
-//        }
-//    }
-    
-//    func tagChecked(checked: Bool, name: String, key: String, value: String) {
-//
-//        if name == "type" {
-//            let id: Int = Int(key)!
-//            //print(id)
-//            var idx: Int = 0
-//            for price in productTable!.prices {
-//                if price.id == id {
-//                    selected_price = price.price_member
-//                    self.selected_idx = idx
-//                    updateSubTotal()
-//                    break
-//                }
-//                idx = idx + 1
-//            }
-//        }
-//    }
-    
-//    func stepperValueChanged(number: Int, name: String) {
-        //move to cell to implement
-//        let item = getFormItemFromKey(name)
-//        item?.value = String(number)
-//        var idx: Int = 0
-//
-//        if let _formItem: TagFormItem = getFormItemFromKey("type") as? TagFormItem {
-//            idx = _formItem.selected_idxs[0]
-//        }
-        
-//        selected_number = number
-//        updateSubTotal()
-        
-        //let price: Int = number * Int(superProduct.prices.price_dummy)
-        //updateSubTotal(price: price)
-//    }
-    
     //the key is section key not row key
     override func cellRadioChanged(key: String, sectionIdx: Int, rowIdx: Int, isChecked: Bool) {
         
@@ -608,56 +544,25 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             unmask()
         }
         
-        if (key == GATEWAY_KEY || key == SHIPPING_KEY) {
+        //如果是選擇「超商貨到付款」，一併更改到貨方式
+        if (key == GATEWAY_KEY) {
             let section: OneSection = oneSections[sectionIdx]
             rows = section.items
             
             if (isChecked) {
-                //偵測是否按下「7-11貨到付款」，一併更改到貨方式
                 let row = rows[rowIdx]
                 
-                if GATEWAY.stringToEnum(row.key) == GATEWAY.store_pay_711 {
+                let gateway_enum: GATEWAY = GATEWAY.stringToEnum(row.key)
                 
+                if gateway_enum == GATEWAY.store_pay_711 ||
+                    gateway_enum == GATEWAY.store_pay_family ||
+                    gateway_enum == GATEWAY.store_pay_hilife ||
+                    gateway_enum == GATEWAY.store_pay_ok {
+                    
+                    let shipping_enum: SHIPPING_WAY = gateway_enum.mapToShipping()
                     let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
                     for row1 in rows1 {
-                        if (SHIPPING_WAY.stringToEnum(row1.key) == SHIPPING_WAY.store_711) {
-                            row1.value = "true"
-                        } else {
-                            row1.value = "false"
-                        }
-                    }
-                }
-                
-                //偵測是否按下「family貨到付款」，一併更改到貨方式
-                if GATEWAY.stringToEnum(row.key) == GATEWAY.store_pay_family {
-                
-                    let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
-                    for row1 in rows1 {
-                        if (SHIPPING_WAY.stringToEnum(row1.key) == SHIPPING_WAY.store_family) {
-                            row1.value = "true"
-                        } else {
-                            row1.value = "false"
-                        }
-                    }
-                }
-                
-                if GATEWAY.stringToEnum(row.key) == GATEWAY.store_pay_hilife {
-                
-                    let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
-                    for row1 in rows1 {
-                        if (SHIPPING_WAY.stringToEnum(row1.key) == SHIPPING_WAY.store_hilife) {
-                            row1.value = "true"
-                        } else {
-                            row1.value = "false"
-                        }
-                    }
-                }
-                
-                if GATEWAY.stringToEnum(row.key) == GATEWAY.store_pay_ok {
-                
-                    let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
-                    for row1 in rows1 {
-                        if (SHIPPING_WAY.stringToEnum(row1.key) == SHIPPING_WAY.store_ok) {
+                        if (SHIPPING_WAY.stringToEnum(row1.key) == shipping_enum) {
                             row1.value = "true"
                         } else {
                             row1.value = "false"
@@ -665,7 +570,6 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     }
                 }
             }
-            
             
             for (idx, row) in rows.enumerated() {
                 if (idx == rowIdx) {
@@ -677,6 +581,98 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             tableView.reloadData()
         }
         
+        if (key == SHIPPING_KEY) {
+            let section: OneSection = oneSections[sectionIdx]
+            rows = section.items
+
+            if (isChecked) {
+                let row = rows[rowIdx]
+
+                let gateway_enum: GATEWAY = _gatewayChecked()
+                //如果是更改選擇「到貨方式」，則檢查是否為超商貨到付款，如果是不允許更改預設值
+                if gateway_enum == GATEWAY.store_pay_711 ||
+                    gateway_enum == GATEWAY.store_pay_family ||
+                    gateway_enum == GATEWAY.store_pay_hilife ||
+                    gateway_enum == GATEWAY.store_pay_ok {
+
+                    _shippingCheckedForC2C(gateway_enumA: gateway_enum, gateway_enumB: GATEWAY.store_pay_711, msg: "7-11超商貨到付款，到貨方式只能選取7-11到貨", row: row)
+                }
+            }
+
+            for (idx, row) in rows.enumerated() {
+                if (idx == rowIdx) {
+                    row.value = String(isChecked)
+                } else {
+                    row.value = String(!isChecked)
+                }
+            }
+            tableView.reloadData()
+        }
+    }
+    
+    func _gatewayChecked()-> GATEWAY {
+        
+        let rows1 = getOneRowsFromSectionKey(GATEWAY_KEY)
+
+        var key: String = "credit_card"
+        for row1 in rows1 {
+            if (Bool(row1.value)!) {
+                key = row1.key
+                break
+            }
+        }
+        
+        return GATEWAY.stringToEnum(key)
+    }
+    
+    func _shippingChecked()-> SHIPPING_WAY {
+        
+        let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
+
+        var key: String = "credit_card"
+        for row1 in rows1 {
+            if (Bool(row1.value)!) {
+                key = row1.key
+                break
+            }
+        }
+        
+        return SHIPPING_WAY.stringToEnum(key)
+    }
+    
+    func _setGatewayChecked(gateway_enum: GATEWAY) {
+        let rows = getOneRowsFromSectionKey(GATEWAY_KEY)
+        for row in rows {
+            if (GATEWAY.stringToEnum(row.key) == gateway_enum) {
+                row.value = "true"
+            } else {
+                row.value = "false"
+            }
+        }
+    }
+    
+    func _setShippingChecked(shipping_enum: SHIPPING_WAY) {
+        let rows = getOneRowsFromSectionKey(SHIPPING_KEY)
+        for row in rows {
+            if (SHIPPING_WAY.stringToEnum(row.key) == shipping_enum) {
+                row.value = "true"
+            } else {
+                row.value = "false"
+            }
+        }
+    }
+    
+    func _shippingCheckedForC2C(gateway_enumA: GATEWAY, gateway_enumB: GATEWAY, msg: String, row: OneRow) {
+        
+        let shipping_enum = gateway_enumB.mapToShipping()
+        
+        if gateway_enumA == gateway_enumB && SHIPPING_WAY.stringToEnum(row.key) != shipping_enum {
+            warning(msg: msg, buttonTitle: "關閉") {
+                
+                self._setShippingChecked(shipping_enum: gateway_enumA.mapToShipping())
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func cellTextChanged(sectionIdx: Int, rowIdx: Int, str: String) {

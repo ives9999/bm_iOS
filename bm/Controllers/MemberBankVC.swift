@@ -10,7 +10,6 @@ import Foundation
 
 class MemberBankVC: BaseViewController {
     
-    @IBOutlet weak var top: Top!
     @IBOutlet weak var dataContainer: UIView!
     
     @IBOutlet var bankTF: SuperTextField!

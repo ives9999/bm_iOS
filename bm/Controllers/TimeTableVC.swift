@@ -295,7 +295,7 @@ class TimeTableVC: BaseViewController, UICollectionViewDataSource, UICollectionV
         editTableView.frame = CGRect(x: 0, y: 0, width: frame.width, height: 500)
     }
     
-    @objc func unmask() {
+    @objc override func unmask() {
         UIView.animate(withDuration: 0.5) {
             self.maskView.alpha = 0
             self.editTableView.isHidden = true

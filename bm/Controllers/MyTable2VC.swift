@@ -96,6 +96,15 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDel
                 let tables2: Tables2 = try JSONDecoder().decode(Tables2<U>.self, from: jsonData!)
                 if (tables2.success) {
                     if tables2.rows.count > 0 {
+                        
+                        if (page == 1) {
+                            page = tables2.page
+                            perPage = tables2.perPage
+                            totalCount = tables2.totalCount
+                            let _totalPage: Int = totalCount / perPage
+                            totalPage = (totalCount % perPage > 0) ? _totalPage + 1 : _totalPage
+                        }
+                        
                         rows += tables2.rows
                     }
                 } else {
@@ -122,6 +131,7 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDel
         
         cell?.setSelectedBackgroundColor()
         
+        cell?.no = indexPath.row
         cell?.item = items[indexPath.row]
         
         return cell ?? UITableViewCell()
@@ -134,7 +144,9 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDel
 }
 
 class BaseTableViewCell<U>: UITableViewCell {
+    
     var item: U?
+    var no: Int?
     
     override class func awakeFromNib() {
         super.awakeFromNib()

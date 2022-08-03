@@ -10,7 +10,6 @@ import Foundation
 
 class MemberLevelUpVC: BaseViewController {
     
-    @IBOutlet weak var top: Top!
     @IBOutlet weak var bottomThreeView: BottomThreeView!
     
     lazy var tableView: MyTable2VC<MemberLevelUpCell, MemberLevelKindTable> = {
@@ -35,21 +34,21 @@ class MemberLevelUpVC: BaseViewController {
     override func refresh() {
         
         page = 1
+        getDataFromServer()
+    }
+    
+    func getDataFromServer() {
         Global.instance.addSpinner(superView: self.view)
         
         MemberService.instance.levelKind(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
-            if (success) {
-                self.jsonData = MemberService.instance.jsonData
-                let b: Bool = self.tableView.parseJSON(jsonData: self.jsonData)
-                if !b && self.tableView.msg.count == 0 {
-                    self.view.setInfo(info: self.tableView.msg, topAnchor: self.top)
-                }
-            }
             Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
+            }
         }
     }
     
-    func didSelect(item: MemberLevelKindTable, at indexPath: IndexPath) {
+    override func didSelect<T: Table>(item: T, at indexPath: IndexPath) {
         print(item.title + "\(indexPath.row)")
     }
     
@@ -78,28 +77,28 @@ class MemberLevelUpCell: BaseTableViewCell<MemberLevelKindTable> {
     
 }
 
-class LevelKindResultTable: Codable {
-
-    var success: Bool = false
-    var grand_price: Int = 0
-    var grand_give: Int = 0
-    var grand_spend: Int = 0
-    var handle_fee: Int = 0
-    var transfer_fee: Int = 0
-    var return_coin: Int = 0
-    
-    init() {}
-    
-    required init(from decoder: Decoder) throws {
-        
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
-        grand_price = try container.decodeIfPresent(Int.self, forKey: .grand_price) ?? 0
-        grand_give = try container.decodeIfPresent(Int.self, forKey: .grand_give) ?? 0
-        grand_spend = try container.decodeIfPresent(Int.self, forKey: .grand_spend) ?? 0
-        handle_fee = try container.decodeIfPresent(Int.self, forKey: .handle_fee) ?? 0
-        transfer_fee = try container.decodeIfPresent(Int.self, forKey: .transfer_fee) ?? 0
-        return_coin = try container.decodeIfPresent(Int.self, forKey: .return_coin) ?? 0
-    }
-}
+//class LevelKindResultTable: Codable {
+//
+//    var success: Bool = false
+//    var grand_price: Int = 0
+//    var grand_give: Int = 0
+//    var grand_spend: Int = 0
+//    var handle_fee: Int = 0
+//    var transfer_fee: Int = 0
+//    var return_coin: Int = 0
+//    
+//    init() {}
+//    
+//    required init(from decoder: Decoder) throws {
+//        
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        
+//        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+//        grand_price = try container.decodeIfPresent(Int.self, forKey: .grand_price) ?? 0
+//        grand_give = try container.decodeIfPresent(Int.self, forKey: .grand_give) ?? 0
+//        grand_spend = try container.decodeIfPresent(Int.self, forKey: .grand_spend) ?? 0
+//        handle_fee = try container.decodeIfPresent(Int.self, forKey: .handle_fee) ?? 0
+//        transfer_fee = try container.decodeIfPresent(Int.self, forKey: .transfer_fee) ?? 0
+//        return_coin = try container.decodeIfPresent(Int.self, forKey: .return_coin) ?? 0
+//    }
+//}

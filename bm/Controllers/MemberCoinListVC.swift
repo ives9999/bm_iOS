@@ -9,30 +9,34 @@
 import Foundation
 import UIKit
 
-class MemberCoinListVC: MyTableVC {
+class MemberCoinListVC: BaseViewController {
     
-    @IBOutlet weak var top: Top!
     @IBOutlet weak var bottomThreeView: BottomThreeView!
+    
+    lazy var tableView: MyTable2VC<MemberCoinListCell, MemberCoinTable> = {
+        let tableView = MyTable2VC<MemberCoinListCell, MemberCoinTable>(didSelect: didSelect(item:at:))
+        return tableView
+    }()
+    
     var memberCoinTables: [MemberCoinTable] = [MemberCoinTable]()
     
     var popupRows: [OneRow] = [OneRow]()
     
+    var lists1: [Table] = [Table]()
+    
     override func viewDidLoad() {
         
-        myTablView = tableView
         super.viewDidLoad()
         
         top.setTitle(title: "解碼點數")
         top.delegate = self
         
+        tableView.anchor(parent: view, top: top, bottomThreeView: bottomThreeView)
+        
+        setupBottomThreeView()
+        
         let cellNibName = UINib(nibName: "MemberCoinListCell", bundle: nil)
         tableView.register(cellNibName, forCellReuseIdentifier: "MemberCoinListCell")
-        
-        bottomThreeView.delegate = self
-        bottomThreeView.submitButton.setTitle("購買點數")
-        bottomThreeView.cancelButton.setTitle("回上一頁")
-        bottomThreeView.threeButton.setTitle("退款")
-        bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
         
         panelHeight = 500
         
@@ -42,46 +46,66 @@ class MemberCoinListVC: MyTableVC {
     override func refresh() {
         
         page = 1
-        getDataStart(page: page, perPage: PERPAGE)
+        getDataFromServer()
+        //getDataStart(page: page, perPage: PERPAGE)
     }
     
-    override func getDataStart(token: String? = nil, page: Int = 1, perPage: Int = PERPAGE) {
+    func getDataFromServer() {
         Global.instance.addSpinner(superView: self.view)
         
-        MemberService.instance.MemberCoinList(member_token: Member.instance.token, page: page, perPage: perPage) { (success) in
+        MemberService.instance.MemberCoinList(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                self.jsonData = MemberService.instance.jsonData
-                self.getDataEnd(success: success)
+                self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
             }
         }
     }
     
-    override func genericTable() {
-        
-        do {
-            if (jsonData != nil) {
-                //print(jsonData.map { String(format: "%02x", $0) }.joined())
-                let coinResultTable: CoinResultTable = try JSONDecoder().decode(CoinResultTable.self, from: jsonData!)
-                if (coinResultTable.success) {
-                    
-                    if coinResultTable.rows.count > 0 {
-                        self.memberCoinTables = coinResultTable.rows
-                    } else {
-                        view.setInfo(info: "目前暫無資料", topAnchor: top)
-                    }
-                }
-            } else {
-                warning("無法從伺服器取得正確的json資料，請洽管理員")
-            }
-        } catch {
-            warning("解析JSON字串時，得到空值，請洽管理員")
-        }
-        
-        if (page == 1) {
-            lists1 = [MemberCoinTable]()
-        }
-        lists1 += memberCoinTables
+    func setupBottomThreeView() {
+        bottomThreeView.delegate = self
+        bottomThreeView.submitButton.setTitle("購買點數")
+        bottomThreeView.cancelButton.setTitle("回上一頁")
+        bottomThreeView.threeButton.setTitle("退款")
+        bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
     }
+    
+//    override func getDataStart(token: String? = nil, page: Int = 1, perPage: Int = PERPAGE) {
+//        Global.instance.addSpinner(superView: self.view)
+//
+//        MemberService.instance.MemberCoinList(member_token: Member.instance.token, page: page, perPage: perPage) { (success) in
+//            if (success) {
+//                self.jsonData = MemberService.instance.jsonData
+//                self.getDataEnd(success: success)
+//            }
+//        }
+//    }
+//
+//    override func genericTable() {
+//
+//        do {
+//            if (jsonData != nil) {
+//                //print(jsonData.map { String(format: "%02x", $0) }.joined())
+//                let coinResultTable: CoinResultTable = try JSONDecoder().decode(CoinResultTable.self, from: jsonData!)
+//                if (coinResultTable.success) {
+//
+//                    if coinResultTable.rows.count > 0 {
+//                        self.memberCoinTables = coinResultTable.rows
+//                    } else {
+//                        view.setInfo(info: "目前暫無資料", topAnchor: top)
+//                    }
+//                }
+//            } else {
+//                warning("無法從伺服器取得正確的json資料，請洽管理員")
+//            }
+//        } catch {
+//            warning("解析JSON字串時，得到空值，請洽管理員")
+//        }
+//
+//        if (page == 1) {
+//            lists1 = [MemberCoinTable]()
+//        }
+//        lists1 += memberCoinTables
+//    }
     
     override func submitBtnPressed() {
         toProduct()
@@ -152,6 +176,8 @@ class MemberCoinListVC: MyTableVC {
                                 
                                 let tableViewHeight: Int = self.rowHeight * self.popupRows.count + 150
                                 self.showTableLayer(tableViewHeight: tableViewHeight)
+                                self.popupTableView.dataSource = self
+                                self.popupTableView.delegate = self
                             }
                         } else {
                             self.warning("無法從伺服器取得正確的json資料，請洽管理員")
@@ -165,9 +191,9 @@ class MemberCoinListVC: MyTableVC {
     }
 }
 
-extension MemberCoinListVC {
+extension MemberCoinListVC: UITableViewDataSource {
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (tableView == popupTableView) {
             return popupRows.count
         } else {
@@ -182,7 +208,7 @@ extension MemberCoinListVC {
         return count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if (tableView == popupTableView) {
             if (popupRows.count > 0) {
                 let row: OneRow = popupRows[indexPath.row]
@@ -207,7 +233,7 @@ extension MemberCoinListVC {
         return UITableViewCell()
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let row: MemberCoinTable = memberCoinTables[indexPath.row]
         row.filterRow()
@@ -230,6 +256,10 @@ extension MemberCoinListVC {
 //
 //        }
     }
+}
+
+extension MemberCoinListVC: UITableViewDelegate {
+    
 }
 
 class CoinResultTable: Codable {

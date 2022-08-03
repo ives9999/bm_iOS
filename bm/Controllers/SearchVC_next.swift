@@ -58,7 +58,7 @@ class SearchVC_next: BaseViewController {
         maskView.alpha = 0
     }
     
-    @objc func unmask() {
+    @objc override func unmask() {
         UIView.animate(withDuration: 0.5) {
             self.maskView.alpha = 0
             self.collectionView.frame = CGRect(x:self.padding, y:self.view.frame.height, width:self.collectionView.frame.width, height:self.collectionView.frame.height)

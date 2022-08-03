@@ -37,8 +37,6 @@ class MyTableVC: BaseViewController {
     var lists1: [Table] = [Table]()
     var newY: CGFloat = 0
     
-    var rowHeight: Int = 44
-    
 //    sections = ["商品", "訂單", "付款", "訂購人"]
 //    rows = [
 //        [["name":"商品名稱", "value":"value"],["name":"商品屬性", "value":"attributes"]],
@@ -234,72 +232,7 @@ class MyTableVC: BaseViewController {
         }
         //print(params)
     }
-    
-    func showTableLayer(tableViewHeight: Int) {
-        maskView = view.mask()
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
-        //gesture.cancelsTouchesInView = false
-        maskView.addGestureRecognizer(gesture)
-        
-        let top: CGFloat = (maskView.frame.height-panelHeight)/2
-        
-        let layerButtonLayoutHeight: Int = setButtonLayoutHeight()
-        let blackViewHeight: CGFloat = CGFloat(tableViewHeight + layerButtonLayoutHeight)
-        
-        blackView = maskView.blackView(left: panelLeftPadding, top: top, width: maskView.frame.width-2*panelLeftPadding, height: blackViewHeight)
-        
-        popupTableView.frame = CGRect(x: 0, y: 0, width: Int(blackView.frame.width), height: tableViewHeight)
-        popupTableView.dataSource = self
-        popupTableView.delegate = self
-        
-        popupTableView.backgroundColor = .clear
-        
-        blackView.addSubview(popupTableView)
-        
-        registerPanelCell()
-        
-        bottomView1 = blackView.addBottomView(height: CGFloat(setButtonLayoutHeight()))
-        //stackView = blackView.addStackView(height: CGFloat(setButtonLayoutHeight()))
-        
-        addPanelBtn()
-    }
-    
-    func addPanelBtn() {
-        panelCancelBtn = bottomView1.addCancelBtn()
-        //panelSubmitBtn = stackView.addSubmitBtn()
-        panelCancelBtn.addTarget(self, action: #selector(panelCancelAction), for: .touchUpInside)
-    }
-    
-    func registerPanelCell() {
-        let plainNib = UINib(nibName: "PlainCell", bundle: nil)
-        popupTableView.register(plainNib, forCellReuseIdentifier: "PlainCell")
-    }
-    
-    func setButtonLayoutHeight()-> Int {
-        let buttonViewHeight: Int = 44
 
-        return buttonViewHeight
-    }
-    
-    @objc func panelCancelAction(){
-        unmask()
-    }
-    
-    @objc func unmask() {
-        
-        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.maskView.frame = CGRect(x:0, y:self.view.frame.height, width:self.view.frame.width, height:self.view.frame.height)
-            //self.blackView.frame = CGRect(x:self.panelLeftPadding, y:self.view.frame.height, width:self.view.frame.width-(2*self.panelLeftPadding), height:self.maskView.frame.height-self.panelTopPadding)
-        }, completion: { (finished) in
-            if finished {
-                for view in self.maskView.subviews {
-                    view.removeFromSuperview()
-                }
-                self.maskView.removeFromSuperview()
-            }
-        })
-    }
-    
     override func singleSelected(key: String, selected: String, show: String?=nil) {
         
         super.singleSelected(key: key, selected: selected, show: show)

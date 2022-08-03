@@ -796,6 +796,22 @@ enum GATEWAY: String {
         return res.rawValue
     }
     
+    func mapToShipping()-> SHIPPING_WAY {
+        
+        switch self {
+        case .store_pay_711:
+            return SHIPPING_WAY.store_711
+        case .store_pay_family:
+            return SHIPPING_WAY.store_family
+        case .store_pay_hilife:
+            return SHIPPING_WAY.store_hilife
+        case .store_pay_ok:
+            return SHIPPING_WAY.store_ok
+        default:
+            return SHIPPING_WAY.store_711
+        }
+    }
+    
     func enumToECPay()-> String {
         switch self {
         case .store_pay_711:
@@ -895,6 +911,7 @@ enum GATEWAY_PROCESS: String {
 enum SHIPPING_PROCESS: String {
     case normal = "準備中"
     case shipping = "已經出貨"
+    case logistic = "已經送到物流中心"
     case store = "商品已到便利商店"
     case complete = "已完成取貨"
     case `return` = "貨物退回"
@@ -905,6 +922,8 @@ enum SHIPPING_PROCESS: String {
             return "normal"
         case .shipping:
             return "shipping"
+        case .logistic:
+            return "logistic"
         case .store:
             return "store"
         case .complete:
@@ -920,6 +939,8 @@ enum SHIPPING_PROCESS: String {
             return .normal
         case "shipping":
             return .shipping
+        case "logistic":
+            return .logistic
         case "store":
             return .store
         case "complete":

@@ -21,6 +21,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
 //        return self
 //    }
     
+    @IBOutlet weak var top: Top!
     @IBOutlet weak var topView: UIView!
     //@IBOutlet weak var searchBtn: UIButton!
     
@@ -54,6 +55,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     var panelLeftPadding: CGFloat = 50
     var panelTopPadding: CGFloat = 30
     var panelHeight: CGFloat = 400
+    var rowHeight: Int = 44
     
     var containerView = UIView(frame: .zero)
     
@@ -118,7 +120,19 @@ class BaseViewController: UIViewController, List2CellDelegate {
         
         return alert
     }
-    
+
+    func _addBlackList(_ reason: String, memberToken: String, teamToken: String) {
+        Global.instance.addSpinner(superView: self.view)
+        TeamService.instance.addBlackList(teamToken: teamToken, playerToken: memberToken,managerToken:Member.instance.token, reason: reason) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.info("加入黑名單成功")
+            } else {
+                self.warning(TeamService.instance.msg)
+            }
+        }
+    }
+
     func _getPlayerID() -> String {
         
         var playerID: String = ""
@@ -133,6 +147,37 @@ class BaseViewController: UIViewController, List2CellDelegate {
         //let user = PFUser.cu
         //}
         return playerID
+    }
+    
+    func _info(title: String, msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        let alert = __alert(showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
+        alert.showInfo(title, subTitle: msg)
+    }
+    
+    func _info(title: String, msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        let alert = __alert(showCloseButton: true, buttonTitle: buttonTitle, buttonAction: buttonAction)
+        alert.showInfo(title, subTitle: msg, closeButtonTitle: closeButtonTitle)
+    }
+    
+    func _info(msg: String) {
+        let alert = __alert()
+        alert.showInfo("訊息", subTitle: msg)
+    }
+    
+    func _showMap(title: String, address: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-nQN-QD-w9o") as? ArenaMapVC {
+                viewController.annotationTitle = title
+                viewController.address = address
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-nQN-QD-w9o") as! ArenaMapVC
+            viewController.annotationTitle = title
+            viewController.address = address
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
     }
     
     func _warning(title: String, msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
@@ -176,7 +221,28 @@ class BaseViewController: UIViewController, List2CellDelegate {
         })
     }
     
+    func addPanelBtn() {
+        panelCancelBtn = bottomView1.addCancelBtn()
+        //panelSubmitBtn = stackView.addSubmitBtn()
+        panelCancelBtn.addTarget(self, action: #selector(panelCancelAction), for: .touchUpInside)
+    }
+    
     @objc func addPressed() {}
+
+    func addSearchBtn() {
+        
+        //search default is hidden set in viewDidLoad
+        topView.addSubview(searchBtn)
+        searchBtn.setImage(UIImage(named: "search1"), for: .normal)
+        
+        searchBtn.translatesAutoresizingMaskIntoConstraints = false
+        searchBtn.widthAnchor.constraint(equalToConstant: 36).isActive = true
+        searchBtn.heightAnchor.constraint(equalToConstant: 36).isActive = true
+        searchBtn.centerYAnchor.constraint(equalTo: searchBtn.superview!.centerYAnchor).isActive = true
+        searchBtn.trailingAnchor.constraint(equalTo: searchBtn.superview!.trailingAnchor, constant: -14).isActive = true
+        
+        searchBtn.addTarget(self, action: #selector(searchPressed), for: .touchUpInside)
+    }
     
     func addShoppingCartBtn() {
         
@@ -198,8 +264,22 @@ class BaseViewController: UIViewController, List2CellDelegate {
         shoppingCartBtn.addTarget(self, action: #selector(cartPressed), for: .touchUpInside)
     }
     
-    func threeBtnPressed() {}
-        
+    func alertError(title: String, msg: String) {
+        let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
+        self.present(alert, animated: true)
+    }
+    
+    func beginRefresh() {
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
+        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+    }
+
+    @objc func cartPressed() {
+        toMemberCartList()
+    }
+    
     func cellCity(row: Table) {
         let key: String = CITY_KEY
         let city_id: Int = row.city_id
@@ -309,123 +389,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
     }
     
     func cellEdit(row: Table){}
+    
     func cellDelete(row: Table){}
-    func cellPrompt(sectionIdx: Int, rowIdx: Int){
-        let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
-        info(row.prompt)
-    }
-    
-    func cellRefresh() {
-        params.removeAll()
-        refresh()
-    }
-    
-    func cellWarning(msg: String) {
-        warning(msg)
-    }
-    
-    func cellToLogin() {
-        toLogin()
-    }
-    
-    func genericTable() {}
-    func getDataEnd(success: Bool) {}
-    func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {}
-    
-//    var wheels: Int = 0
-//    required init() {}
-//    init(wheels: Int) {
-//        self.wheels = wheels
-//    }
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-//        if !Reachability.isConnectedToNetwork(){
-//            warning("無法連到網路，請檢查您的網路設定")
-//            return
-//        }
-
-        //setStatusBar(color: UIColor(STATUS_GREEN))
-        workAreaHeight = view.bounds.height - titleBarHeight
-        searchBtn.visibility = .invisible
-        addBtn.visibility = .invisible
-        
-        screen_width = UIScreen.main.bounds.width
-        
-        setBottomTabFocus()
-        
-        //panelCancelBtn.setTitle("取消")
-        //layerDeleteBtn.setTitle("刪除")
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-
-        if (!testNetwork()) {
-            myError = MYERROR.NONETWORK
-            warning(myError.toString())
-            return
-        }
-        
-        //當購物車中有商品時，購物車的icon就會出現，如果沒有就不會出現
-        //1.AddCartVC中，商品加入購物車時，+1
-        //2.MemberCartListVC中，移除購物車中的商品時，-1
-        //3.購物車轉成訂單時OrderVC，購物車中的商品數變0
-        cartItemCount = session.getInt("cartItemCount")
-        shoppingCartBtn.visibility = (Member.instance.isLoggedIn && cartItemCount > 0) ? .visible : .invisible
-        
-        //show top right button
-        if (topView != nil) {
-            addSearchBtn()
-            addShoppingCartBtn()
-            addAddBtn()
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //setNeedsStatusBarAppearanceUpdate()
-        let statusBarView = UIView()
-        view.addSubview(statusBarView)
-        statusBarView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            statusBarView.topAnchor.constraint(equalTo: view.topAnchor),
-            statusBarView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            statusBarView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            statusBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        ])
-        statusBarView.backgroundColor = UIColor(MY_GREEN)
-    }
-    
-    //override var preferredStatusBarStyle: UIStatusBarStyle { UIColor.green }
-    
-    @objc func cartPressed() {
-        toMemberCartList()
-    }
-    
-    func addSearchBtn() {
-        
-        //search default is hidden set in viewDidLoad
-        topView.addSubview(searchBtn)
-        searchBtn.setImage(UIImage(named: "search1"), for: .normal)
-        
-        searchBtn.translatesAutoresizingMaskIntoConstraints = false
-        searchBtn.widthAnchor.constraint(equalToConstant: 36).isActive = true
-        searchBtn.heightAnchor.constraint(equalToConstant: 36).isActive = true
-        searchBtn.centerYAnchor.constraint(equalTo: searchBtn.superview!.centerYAnchor).isActive = true
-        searchBtn.trailingAnchor.constraint(equalTo: searchBtn.superview!.trailingAnchor, constant: -14).isActive = true
-        
-        searchBtn.addTarget(self, action: #selector(searchPressed), for: .touchUpInside)
-    }
-    
-    @objc func searchPressed() {
-        if searchPanel.searchPanelisHidden {
-            searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, oneSections: oneSections)
-        } else {
-            searchPanel.unmask()
-        }
-    }
     
     func cellMoreClick(key: String, row: OneRow, delegate: BaseViewController) {
         
@@ -529,6 +494,61 @@ class BaseViewController: UIViewController, List2CellDelegate {
         }
     }
     
+    func cellPrompt(sectionIdx: Int, rowIdx: Int){
+        let row: OneRow = getOneRowFromIdx(sectionIdx, rowIdx)
+        info(row.prompt)
+    }
+    
+    func cellRefresh() {
+        params.removeAll()
+        refresh()
+    }
+    
+    func cellWarning(msg: String) {
+        warning(msg)
+    }
+    
+    func cellToLogin() {
+        toLogin()
+    }
+    
+    func checkboxValueChanged(checked: Bool) {}
+    
+    func dateSelected(key: String, selected: String) {
+        
+        let row = getOneRowFromKey(key)
+        row.value = selected
+        row.show = selected
+    }
+    
+    func endRefresh() {
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
+    }
+    
+    func didSelect<T: Table>(item: T, at indexPath: IndexPath) {
+        print(item.title + "\(indexPath.row)")
+    }
+    
+    func genericTable() {}
+    
+    func getAreaByAreaID(_ area_id: Int) -> [String: String] {
+        let area = self.session.getAreaByAreaID(area_id)
+        
+        return area
+    }
+    func getDataEnd(success: Bool) {}
+    func getDataStart(token: String? = nil, page: Int=1, perPage: Int=PERPAGE) {}
+    
+//    var wheels: Int = 0
+//    required init() {}
+//    init(wheels: Int) {
+//        self.wheels = wheels
+//    }
+
+    //override var preferredStatusBarStyle: UIStatusBarStyle { UIColor.green }
+
 //    func getRowFromKey<T>(_ key: String)-> T {
 //
 //    }
@@ -594,6 +614,359 @@ class BaseViewController: UIViewController, List2CellDelegate {
         return OneSection()
     }
     
+    func goHome() {
+        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    func goHomeThen(completion: @escaping (_ baseViewController: BaseViewController)-> Void) {
+        
+        let tabBarController = self.view.window!.rootViewController as! UITabBarController
+        let idx: Int = tabBarController.selectedIndex
+        let vc: BaseViewController = TAB.idxToController(idx, tabBarController: tabBarController)
+        self.view.window!.rootViewController?.dismiss(animated: true) {
+            completion(vc)
+        }
+    }
+
+    func info(msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        _info(title: "訊息", msg: msg, showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
+    }
+    
+    func info(msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        _info(title: "訊息", msg: msg, closeButtonTitle: closeButtonTitle, buttonTitle: buttonTitle, buttonAction: buttonAction)
+    }
+    
+    func info(_ msg: String) {
+        _info(msg: msg)
+    }
+
+    func loadingShow() {
+        if loadingMask == nil {
+            loadingMask = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+            loadingMask!.backgroundColor = UIColor(white: 0, alpha: 0.8) //you can modify this to whatever you need
+            
+            let center: CGPoint = loadingMask!.center
+            loadingSpinner = UIActivityIndicatorView()
+            loadingSpinner!.center = center
+            loadingSpinner!.style = .whiteLarge
+            loadingSpinner!.color = #colorLiteral(red: 0.6862745098, green: 0.9882352941, blue: 0.4823529412, alpha: 1)
+            loadingSpinner!.startAnimating()
+            loadingMask!.addSubview(loadingSpinner!)
+            
+            loadingText = UILabel(frame: CGRect(x: Int(center.x)-LOADING_WIDTH/2, y: Int(center.y)+LOADING_HEIGHT/2, width: LOADING_WIDTH, height: LOADING_HEIGHT))
+            loadingText!.font = UIFont(name: "Avenir Next", size: 18)
+            loadingText!.textColor = #colorLiteral(red: 0.6862745098, green: 0.9882352941, blue: 0.4823529412, alpha: 1)
+            loadingText!.textAlignment = .center
+            loadingText!.text = LOADING
+            loadingMask!.addSubview(loadingText!)
+        } else {
+            loadingMask!.isHidden = false
+        }
+        view.addSubview(loadingMask!)
+    }
+    
+    func loadingHide() {
+        if loadingMask != nil {
+            loadingMask!.removeFromSuperview()
+            //loadingMask! = nil
+            loadingMask!.isHidden = true
+        }
+    }
+    
+    func makeCalendar(_ _y:Int?, _ _m:Int?)->[String: Any] {
+        
+        let y: Int = (_y == nil) ? Date().getY() : _y!
+        let m: Int = (_m == nil) ? Date().getm() : _m!
+        var res: [String: Any] = [String: Any]()
+        //取得該月1號的星期幾，日曆才知道從星期幾開始顯示
+        let weekday01 = "\(y)-\(m)-01"
+        res["weekday01"] = weekday01
+        
+        var beginWeekday = weekday01.toDateTime(format: "yyyy-MM-dd")!.dateToWeekday()
+        beginWeekday = beginWeekday == 0 ? 7 : beginWeekday;
+        res["beginWeekday"] = beginWeekday
+
+        //取得該月最後一天的日期，30, 31或28，日曆才知道顯示到那一天
+        let monthLastDay = Date().getMonthDays(y, m)
+        res["monthLastDay"] = monthLastDay
+        let monthLastDay_add_begin = monthLastDay + beginWeekday - 1
+        res["monthLastDay_add_begin"] = monthLastDay_add_begin
+
+        //取得該月最後一天的星期幾，計算月曆有幾列需要用到的數字
+        let weekday31 = "\(y)-\(m)-\(monthLastDay)"
+        res["weekday31"] = weekday31
+        
+        let endWeekday = weekday31.toDateTime(format: "yyyy-MM-dd")!.dateToWeekday()
+        res["endWeekday"] = endWeekday
+
+        //算出共需幾個日曆的格子
+        let allMonthGrid = monthLastDay + (beginWeekday-1) + (7-endWeekday);
+        res["allMonthGrid"] = allMonthGrid
+
+        //算出月曆列數，日曆才知道顯示幾列
+        let monthRow = allMonthGrid/7
+        res["monthRow"] = monthRow
+
+        //建立下個月的連結
+        let next_month = m == 12 ? 1 : m+1
+        res["next_month"] = next_month
+        let next_year = m == 12 ? y+1 : y
+        res["next_year"] = next_year
+        
+        return res
+    }
+
+    func multiSelected(key: String, selecteds: [String]) {}
+    
+    @objc func panelCancelAction(){
+        unmask()
+    }
+    
+    func prepareParams(city_type: String="simple") {}
+    
+    func prev() {
+        dismiss(animated: true, completion: nil)
+    }
+
+    func reasonBox(memberToken: String, teamToken: String) {
+        let alert = SCLAlertView()
+        let txt = alert.addTextField()
+        alert.addButton("加入", action: {
+            self._addBlackList(txt.text!, memberToken: memberToken, teamToken: teamToken)
+        })
+        alert.showEdit("請輸入理由", subTitle: "")
+    }
+    
+    @objc func refresh() {}
+    
+    
+    func registerPanelCell() {
+        let plainNib = UINib(nibName: "PlainCell", bundle: nil)
+        popupTableView.register(plainNib, forCellReuseIdentifier: "PlainCell")
+    }
+
+    
+    func showTableLayer(tableViewHeight: Int) {
+        
+        maskView = view.mask()
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(unmask))
+        //gesture.cancelsTouchesInView = false
+        maskView.addGestureRecognizer(gesture)
+        
+        let top: CGFloat = (maskView.frame.height-panelHeight)/2
+        
+        let layerButtonLayoutHeight: Int = setButtonLayoutHeight()
+        let blackViewHeight: CGFloat = CGFloat(tableViewHeight + layerButtonLayoutHeight)
+        
+        blackView = maskView.blackView(left: panelLeftPadding, top: top, width: maskView.frame.width-2*panelLeftPadding, height: blackViewHeight)
+        
+        popupTableView.frame = CGRect(x: 0, y: 0, width: Int(blackView.frame.width), height: tableViewHeight)
+        //popupTableView.dataSource = self
+        //popupTableView.delegate = self
+        
+        popupTableView.backgroundColor = .clear
+        
+        blackView.addSubview(popupTableView)
+        
+        registerPanelCell()
+        
+        bottomView1 = blackView.addBottomView(height: CGFloat(setButtonLayoutHeight()))
+        //stackView = blackView.addStackView(height: CGFloat(setButtonLayoutHeight()))
+        
+        addPanelBtn()
+    }
+
+    @objc func searchPressed() {
+        if searchPanel.searchPanelisHidden {
+            searchPanel.showSearchPanel(baseVC: self, view: view, newY: 0, oneSections: oneSections)
+        } else {
+            searchPanel.unmask()
+        }
+    }
+
+    func selectedManager(selected: Int, show: String, token: String) {
+        let row = getOneRowFromKey(MANAGER_ID_KEY)
+        row.value = String(selected)
+        row.show = show
+        row.token = token
+    }
+
+    func sexValueChanged(sex: String) {}
+    
+    func setDegrees(res: [DEGREE]) {
+        let row = getOneRowFromKey(DEGREE_KEY)
+        var names: [String] = [String]()
+        var values: [String] = [String]()
+        if res.count > 0 {
+            for degree in res {
+                names.append(degree.rawValue)
+                values.append(DEGREE.DBValue(degree))
+            }
+            row.show = names.joined(separator: ",")
+            row.value = values.joined(separator: ",")
+        } else {
+            row.show = "全部"
+            row.value = ""
+        }
+        //replaceRows(DEGREE_KEY, row)
+        //tableView.reloadData()
+    }
+
+    func setBottomTabFocus() {
+        
+        var idx: Int = 0
+        switch (able_type) {
+        case "team":
+            idx = 0
+        case "course":
+            idx = 1
+        case "member":
+            idx = 2
+        case "arena":
+            idx = 3
+        case "more":
+            idx = 4
+        default:
+            idx = 0
+        }
+        
+        if let tmp = tabBarController?.tabBar {
+            let bottomTabBar: UITabBar = tmp
+            let tabItem: UITabBarItem = bottomTabBar.items![idx]
+            tabItem.image = UIImage(named: able_type + "_g")
+            //以後準備使用
+            //tabItem.badgeValue = "5"
+        }
+        
+    }
+    
+    func setButtonLayoutHeight()-> Int {
+        let buttonViewHeight: Int = 44
+
+        return buttonViewHeight
+    }
+
+    func setContent(key: String, content: String) {
+        let row = getOneRowFromKey(key)
+        row.value = content
+        row.show = content
+    }
+    
+    //WeekdaysSelectDelegate
+    func setWeekdaysData(selecteds: Int) {
+        if searchPanel.baseVC != nil {
+            searchPanel.setWeekdaysData(selecteds: selecteds)
+        } else {
+            let row = getOneRowFromKey(WEEKDAYS_KEY)
+            var shows: [String] = [String]()
+            if selecteds > 0 {
+                var i = 1
+                while (i <= 7) {
+                    let n: Int = (pow(2, i) as NSDecimalNumber).intValue
+                    if selecteds & n > 0 {
+                        shows.append(WEEKDAY(weekday: i).toShortString())
+                    }
+                    i += 1
+                }
+                
+//                for day in selecteds {
+//                    value += (pow(2, day) as NSDecimalNumber).intValue
+//                    for gday in Global.instance.weekdays {
+//                        if day == gday["value"] as! Int {
+//                            let text = gday["simple_text"]
+//                            texts.append(text! as! String)
+//                            break
+//                        }
+//                    }
+//                }
+                row.show = shows.joined(separator: ",")
+                row.value = String(selecteds)
+            } else {
+                row.show = ""
+            }
+        }
+    }
+    
+    func showTableView<T: BaseTableViewCell<U>, U: Table>(tableView: MyTable2VC<T, U>, jsonData: Data) {
+        
+        let b: Bool = tableView.parseJSON(jsonData: jsonData)
+        if !b && tableView.msg.count == 0 {
+            view.setInfo(info: tableView.msg, topAnchor: top)
+        }
+    }
+    
+    func singleSelected(key: String, selected: String, show: String?=nil) {
+        
+        if searchPanel.baseVC != nil {
+            searchPanel.singleSelected(key: key, selected: selected, show: show)
+        } else {
+            let row = getOneRowFromKey(key)
+            row.value = selected
+            var _show = ""
+            if key == START_TIME_KEY || key == END_TIME_KEY || key == TEAM_PLAY_START_KEY || key == TEAM_PLAY_END_KEY {
+                _show = selected.noSec()
+            }
+            //在dateSelected
+//            else if (key == START_DATE_KEY || key == END_DATE_KEY) {
+//                _show = selected
+            else if (key == CITY_KEY || key == AREA_KEY) {
+                _show = Global.instance.zoneIDToName(Int(selected)!)
+            } else if (key == ARENA_KEY) {
+                if (show != nil) {
+                    _show = show!
+                }
+            } else if (key == PRICE_UNIT_KEY) {
+                _show = PRICE_UNIT.enumFromString(string: row.value).rawValue
+            } else if (key == COURSE_KIND_KEY) {
+                _show = COURSE_KIND.enumFromString(string: row.value).rawValue
+            } else if (key == CYCLE_UNIT_KEY) {
+                _show = CYCLE_UNIT.enumFromString(string: row.value).rawValue
+            } else if (key == WEEKDAY_KEY) {
+//                row.value = String(Global.instance.weekdaysToDBValue(selected))
+//
+//                var a: [String] = [String]()
+//                let weekday_arr = selected.split(separator: ",")
+//                for weekday in weekday_arr {
+//                    let tmp: String = WEEKDAY.intToString(weekday)
+//                    a.append(tmp)
+//                }
+//                weekdays_show = show.joined(separator: ",")
+            }
+            
+            row.show = _show
+            //replaceRows(key, row)
+        }
+    }
+    
+    func submitBtnPressed() {}
+    
+    func testNetwork()-> Bool {
+        
+        var bConnect: Bool = false
+        if Connectivity.isConnectedToInternet {
+             bConnect = true
+        }
+        
+        return bConnect
+    }
+    
+    func threeBtnPressed() {}
+
+    @objc func unmask() {
+        
+        UIView.animate(withDuration: 0.7, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.maskView.frame = CGRect(x:0, y:self.view.frame.height, width:self.view.frame.width, height:self.view.frame.height)
+            //self.blackView.frame = CGRect(x:self.panelLeftPadding, y:self.view.frame.height, width:self.view.frame.width-(2*self.panelLeftPadding), height:self.maskView.frame.height-self.panelTopPadding)
+        }, completion: { (finished) in
+            if finished {
+                for view in self.maskView.subviews {
+                    view.removeFromSuperview()
+                }
+                self.maskView.removeFromSuperview()
+            }
+        })
+    }
+    
     //存在row的value只是單純的文字，陣列值使用","來區隔，例如"1,2,3"，但當要傳回選擇頁面時，必須轉回陣列[1,2,3]
     func valueToArray<T>(t:T.Type, row: OneRow)-> [T] {
 
@@ -647,350 +1020,76 @@ class BaseViewController: UIViewController, List2CellDelegate {
         return selecteds
     }
     
-//    func mask(y: CGFloat, superView: UIView? = nil, height: CGFloat? = nil) {
-//        maskView.backgroundColor = UIColor(white: 1, alpha: 0.8)
-//        maskView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(unmask)))
-//        var _view = view
-//        if superView != nil {
-//            _view = superView
-//        }
-//        _view?.addSubview(maskView)
-//        
-//        var _height = view.bounds.height - titleBarHeight
-//        if height != nil {
-//            _height = height!
-//        }
-//        maskView.frame = CGRect(x: 0, y: y, width: (_view?.frame.width)!, height: _height)
-//        maskView.alpha = 0
-//    }
-    
-//    func addLayer(superView: UIView, frame: CGRect) {
-//        superView.addSubview(containerView)
-//        containerView.frame = frame
-//        containerView.backgroundColor = UIColor.black
-//        _addLayer()
-//    }
-    
-//    func _addLayer() {}
-    
-//    func layerAddSubmitBtn(upView: UIView) {
-//        containerView.addSubview(layerSubmitBtn)
-//        let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 12)
-//        var offset:CGFloat = 0
-//        if layerBtnCount == 2 {
-//            offset = -60
-//        } else if layerBtnCount == 3 {
-//            offset = -120
-//        }
-//        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerSubmitBtn, attribute: .centerX, relatedBy: .equal, toItem: layerSubmitBtn.superview, attribute: .centerX, multiplier: 1, constant: offset)
-//        layerSubmitBtn.translatesAutoresizingMaskIntoConstraints = false
-//        containerView.addConstraints([c1,c2])
-//        layerSubmitBtn.addTarget(self, action: #selector(layerSubmit(view:)), for: .touchUpInside)
-//        self.layerSubmitBtn.isHidden = false
-//    }
-//    func layerAddCancelBtn(upView: UIView) {
-//        containerView.addSubview(layerCancelBtn)
-//        let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerCancelBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 12)
-//        var offset:CGFloat = 0
-//        if layerBtnCount == 2 {
-//            offset = 60
-//        }
-//        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerCancelBtn, attribute: .centerX, relatedBy: .equal, toItem: layerCancelBtn.superview, attribute: .centerX, multiplier: 1, constant: offset)
-//        layerCancelBtn.translatesAutoresizingMaskIntoConstraints = false
-//        containerView.addConstraints([c1,c2])
-//        layerCancelBtn.addTarget(self, action: #selector(layerCancel(view:)), for: .touchUpInside)
-//        self.layerCancelBtn.isHidden = false
-//    }
-//    func layerAddDeleteBtn(upView: UIView) {
-//        containerView.addSubview(layerDeleteBtn)
-//        let c1: NSLayoutConstraint = NSLayoutConstraint(item: layerDeleteBtn, attribute: .top, relatedBy: .equal, toItem: upView, attribute: .bottom, multiplier: 1, constant: 12)
-//        var offset:CGFloat = 0
-//        if layerBtnCount == 2 {
-//            offset = 60
-//        } else if layerBtnCount == 3 {
-//            offset = 120
-//        }
-//        let c2: NSLayoutConstraint = NSLayoutConstraint(item: layerDeleteBtn, attribute: .centerX, relatedBy: .equal, toItem: layerDeleteBtn.superview, attribute: .centerX, multiplier: 1, constant: offset)
-//        layerDeleteBtn.translatesAutoresizingMaskIntoConstraints = false
-//        containerView.addConstraints([c1,c2])
-//        layerDeleteBtn.addTarget(self, action: #selector(layerDelete(view:)), for: .touchUpInside)
-//        self.layerDeleteBtn.isHidden = false
-//    }
-//    func animation(frame: CGRect) {
-//        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-//            self.maskView.alpha = 1
-//            self.containerView.frame = frame
-//        }, completion: { (finished) in
-//            if finished {
-//                self.otherAnimation()
-//            }
-//        })
-//    }
-//    func otherAnimation(){}
-//
-//
-//    @objc func unmask(){}
-//    @objc func layerSubmit(view: UIButton){}
-//    @objc func layerDelete(view: UIButton){}
-//    @objc func layerCancel(view: UIButton){unmask()}
-    
-    func prepareParams(city_type: String="simple") {}
-    
-    func prev() {
-        dismiss(animated: true, completion: nil)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        //setNeedsStatusBarAppearanceUpdate()
+        let statusBarView = UIView()
+        view.addSubview(statusBarView)
+        statusBarView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            statusBarView.topAnchor.constraint(equalTo: view.topAnchor),
+            statusBarView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            statusBarView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            statusBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+        ])
+        statusBarView.backgroundColor = UIColor(MY_GREEN)
     }
     
-    func goHome() {
-        self.view.window!.rootViewController?.dismiss(animated: true, completion: nil)
-    }
-    
-    func goHomeThen(completion: @escaping (_ baseViewController: BaseViewController)-> Void) {
+    override func viewDidLoad() {
         
-        let tabBarController = self.view.window!.rootViewController as! UITabBarController
-        let idx: Int = tabBarController.selectedIndex
-        let vc: BaseViewController = TAB.idxToController(idx, tabBarController: tabBarController)
-        self.view.window!.rootViewController?.dismiss(animated: true) {
-            completion(vc)
-        }
-    }
-    
-    func beginRefresh() {
-        refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
-        refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
-    }
-    
-    func endRefresh() {
-        if refreshControl.isRefreshing {
-            refreshControl.endRefreshing()
-        }
-    }
-    
-//    @objc func memberDidChange(_ notif: Notification) {
-//        //print("notify")
-//        refreshMember { (success) in
-//
-//        }
-//    }
-//    func _getMemberOne(token: String, completion: @escaping CompletionHandler) {
-//        MemberService.instance.getOne(token: token, completion: completion)
-//    }
-//    func refreshMember(completion: @escaping CompletionHandler) {
-//        Global.instance.addSpinner(superView: self.view)
-//        MemberService.instance.getOne(token: Member.instance.token) { (success) in
-//            Global.instance.removeSpinner(superView: self.view)
-//            if (success) {
-//                completion(true)
-//            } else {
-//                SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
-//                completion(false)
-//            }
-//        }
-//    }
-    
-    func makeCalendar(_ _y:Int?, _ _m:Int?)->[String: Any] {
+        super.viewDidLoad()
         
-        let y: Int = (_y == nil) ? Date().getY() : _y!
-        let m: Int = (_m == nil) ? Date().getm() : _m!
-        var res: [String: Any] = [String: Any]()
-        //取得該月1號的星期幾，日曆才知道從星期幾開始顯示
-        let weekday01 = "\(y)-\(m)-01"
-        res["weekday01"] = weekday01
-        
-        var beginWeekday = weekday01.toDateTime(format: "yyyy-MM-dd")!.dateToWeekday()
-        beginWeekday = beginWeekday == 0 ? 7 : beginWeekday;
-        res["beginWeekday"] = beginWeekday
+//        if !Reachability.isConnectedToNetwork(){
+//            warning("無法連到網路，請檢查您的網路設定")
+//            return
+//        }
 
-        //取得該月最後一天的日期，30, 31或28，日曆才知道顯示到那一天
-        let monthLastDay = Date().getMonthDays(y, m)
-        res["monthLastDay"] = monthLastDay
-        let monthLastDay_add_begin = monthLastDay + beginWeekday - 1
-        res["monthLastDay_add_begin"] = monthLastDay_add_begin
+        //setStatusBar(color: UIColor(STATUS_GREEN))
+        workAreaHeight = view.bounds.height - titleBarHeight
+        searchBtn.visibility = .invisible
+        addBtn.visibility = .invisible
+        
+        screen_width = UIScreen.main.bounds.width
+        
+        setBottomTabFocus()
+        
+        //panelCancelBtn.setTitle("取消")
+        //layerDeleteBtn.setTitle("刪除")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
 
-        //取得該月最後一天的星期幾，計算月曆有幾列需要用到的數字
-        let weekday31 = "\(y)-\(m)-\(monthLastDay)"
-        res["weekday31"] = weekday31
+        if (!testNetwork()) {
+            myError = MYERROR.NONETWORK
+            warning(myError.toString())
+            return
+        }
         
-        let endWeekday = weekday31.toDateTime(format: "yyyy-MM-dd")!.dateToWeekday()
-        res["endWeekday"] = endWeekday
+        //當購物車中有商品時，購物車的icon就會出現，如果沒有就不會出現
+        //1.AddCartVC中，商品加入購物車時，+1
+        //2.MemberCartListVC中，移除購物車中的商品時，-1
+        //3.購物車轉成訂單時OrderVC，購物車中的商品數變0
+        cartItemCount = session.getInt("cartItemCount")
+        shoppingCartBtn.visibility = (Member.instance.isLoggedIn && cartItemCount > 0) ? .visible : .invisible
+        
+        //show top right button
+        if (topView != nil) {
+            addSearchBtn()
+            addShoppingCartBtn()
+            addAddBtn()
+        }
+    }
 
-        //算出共需幾個日曆的格子
-        let allMonthGrid = monthLastDay + (beginWeekday-1) + (7-endWeekday);
-        res["allMonthGrid"] = allMonthGrid
-
-        //算出月曆列數，日曆才知道顯示幾列
-        let monthRow = allMonthGrid/7
-        res["monthRow"] = monthRow
-
-        //建立下個月的連結
-        let next_month = m == 12 ? 1 : m+1
-        res["next_month"] = next_month
-        let next_year = m == 12 ? y+1 : y
-        res["next_year"] = next_year
-        
-        return res
+    func warning(_ msg: String) {
+        _warning(msg: msg)
     }
     
-//    func _updatePlayerIDWhenIsNull() {
-//        let token = Member.instance.token
-//        //print(token)
-//        MemberService.instance.getOne(token: token) { (success) in
-//            if (success) {
-//                Member.instance.justGetMemberOne = true
-//                //print(Member.instance.type)
-//                if Member.instance.player_id.count == 0 {
-//                    self._updatePlayerID()
-//                }
-//            }
-//        }
-//    }
-//    func _updatePlayerID() {
-//        var player_id = _getPlayerID()
-//        //print(player_id)
-//        MemberService.instance.update(id: Member.instance.id, field: PLAYERID_KEY, value: &player_id, completion: { (success) in
-//            if success {
-//                Member.instance.player_id = player_id
-//            }
-//        })
-//    }
-    
-    //直接在LoginVC執行
-//    func _loginFB() {
-//        //print(Facebook.instance.uid)
-//        //print(Facebook.instance.email)
-//        let playerID: String = self._getPlayerID()
-//        Global.instance.addSpinner(superView: self.view)
-//        MemberService.instance.login_fb(playerID: playerID, completion: { (success1) in
-//            Global.instance.removeSpinner(superView: self.view)
-//            if success1 {
-//                if MemberService.instance.success {
-//                    //self.performSegue(withIdentifier: UNWIND, sender: "refresh_team")
-//                } else {
-//                    //print("login failed by error email or password")
-//                    self.warning(MemberService.instance.msg)
-//                }
-//            } else {
-//                self.warning("使用FB登入，但無法新增至資料庫，請洽管理員")
-//                //print("login failed by fb")
-//            }
-//        })
-//    }
-    
-//    func _getManagerList(source: String, titleField: String, completion: @escaping CompletionHandler) {
-//        Global.instance.addSpinner(superView: self.view)
-//        let filter: [[Any]] = [
-//            ["channel", "=", CHANNEL],
-//            ["manager_id", "=", Member.instance.id]
-//        ]
-//        let params: Dictionary<String, Any> = [String: Any]()
-//        dataService.getList(type: source, titleField: titleField, params:params, page: 1, perPage: 100, filter: filter) { (success) in
-//            Global.instance.removeSpinner(superView: self.view)
-//            if success {
-//                self.managerLists = self.dataService.dataLists
-//
-//                completion(true)
-//            } else {
-//                self.msg = self.dataService.msg
-//                completion(false)
-//            }
-//        }
-//    }
-    
-    func setBottomTabFocus() {
-        
-        var idx: Int = 0
-        switch (able_type) {
-        case "team":
-            idx = 0
-        case "course":
-            idx = 1
-        case "member":
-            idx = 2
-        case "arena":
-            idx = 3
-        case "more":
-            idx = 4
-        default:
-            idx = 0
-        }
-        
-        if let tmp = tabBarController?.tabBar {
-            let bottomTabBar: UITabBar = tmp
-            let tabItem: UITabBarItem = bottomTabBar.items![idx]
-            tabItem.image = UIImage(named: able_type + "_g")
-            //以後準備使用
-            //tabItem.badgeValue = "5"
-        }
-        
+    func warning(msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        _warning(title: "警告", msg: msg, showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
     }
     
-    func reasonBox(memberToken: String, teamToken: String) {
-        let alert = SCLAlertView()
-        let txt = alert.addTextField()
-        alert.addButton("加入", action: {
-            self._addBlackList(txt.text!, memberToken: memberToken, teamToken: teamToken)
-        })
-        alert.showEdit("請輸入理由", subTitle: "")
-    }
-    func _addBlackList(_ reason: String, memberToken: String, teamToken: String) {
-        Global.instance.addSpinner(superView: self.view)
-        TeamService.instance.addBlackList(teamToken: teamToken, playerToken: memberToken,managerToken:Member.instance.token, reason: reason) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if (success) {
-                self.info("加入黑名單成功")
-            } else {
-                self.warning(TeamService.instance.msg)
-            }
-        }
-    }
-    
-    func _showMap(title: String, address: String) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-nQN-QD-w9o") as? ArenaMapVC {
-                viewController.annotationTitle = title
-                viewController.address = address
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-nQN-QD-w9o") as! ArenaMapVC
-            viewController.annotationTitle = title
-            viewController.address = address
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
-    }
-    
-    func loadingShow() {
-        if loadingMask == nil {
-            loadingMask = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-            loadingMask!.backgroundColor = UIColor(white: 0, alpha: 0.8) //you can modify this to whatever you need
-            
-            let center: CGPoint = loadingMask!.center
-            loadingSpinner = UIActivityIndicatorView()
-            loadingSpinner!.center = center
-            loadingSpinner!.style = .whiteLarge
-            loadingSpinner!.color = #colorLiteral(red: 0.6862745098, green: 0.9882352941, blue: 0.4823529412, alpha: 1)
-            loadingSpinner!.startAnimating()
-            loadingMask!.addSubview(loadingSpinner!)
-            
-            loadingText = UILabel(frame: CGRect(x: Int(center.x)-LOADING_WIDTH/2, y: Int(center.y)+LOADING_HEIGHT/2, width: LOADING_WIDTH, height: LOADING_HEIGHT))
-            loadingText!.font = UIFont(name: "Avenir Next", size: 18)
-            loadingText!.textColor = #colorLiteral(red: 0.6862745098, green: 0.9882352941, blue: 0.4823529412, alpha: 1)
-            loadingText!.textAlignment = .center
-            loadingText!.text = LOADING
-            loadingMask!.addSubview(loadingText!)
-        } else {
-            loadingMask!.isHidden = false
-        }
-        view.addSubview(loadingMask!)
-    }
-    
-    func loadingHide() {
-        if loadingMask != nil {
-            loadingMask!.removeFromSuperview()
-            //loadingMask! = nil
-            loadingMask!.isHidden = true
-        }
+    func warning(msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
+        _warning(title: "警告", msg: msg, closeButtonTitle: closeButtonTitle, buttonTitle: buttonTitle, buttonAction: buttonAction)
     }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -1010,338 +1109,6 @@ class BaseViewController: UIViewController, List2CellDelegate {
             decisionHandler(.allow)
         }
     }
-    
-    @objc func refresh() {}
-    
-    
-    
-    // return is [
-    //             ["id": "5", "name": "新北市"],
-    //             ["id": "6", "name": "台北市"]
-    //           ]
-//    func getCitys(completion1: @escaping (_ rows: [[String: String]]) -> Void) -> [[String: String]] {
-//
-//        //session.removeObject(forKey: "citys")
-//        let rows = session.getArrayDictionary("citys")
-//        if rows.count == 0 {
-//            Global.instance.addSpinner(superView: view)
-//            DataService.instance1.getCitys() { (success) in
-//                if success {
-//                    let rows = DataService.instance1.citys
-//                    //print(rows)
-//                    var citys = [[String: String]]()
-//                    for row in rows { // row is City object
-//                        citys.append(["name": row.name, "id": String(row.id)])
-//                    }
-//                    self.session.set(citys, forKey: "citys")
-//                    //self.tableView.reloadData()
-//                    completion1(citys)
-//                }
-//                Global.instance.removeSpinner(superView: self.view)
-//            }
-//        }
-//        return rows
-//    }
-    
-    // return is [
-    //             "52": [
-    //                     "id": "52",
-    //                     "name": ["新北市"],
-    //                     "rows": [
-    //                          ["id": "5", "name": "中和"],
-    //                          ["id": "6", "name": "永和"]
-    //                     ]
-    //                  ]
-    //           ]
-//    func getAreasFromCity(_ city_id: Int, completion1: @escaping (_ rows: [[String: String]]) -> Void) -> [[String: String]] {
-//        
-//        //session.removeObject(forKey: "areas")
-//        let rows = session.getAreasByCity(city_id)
-//        //print(rows)
-//        if rows.count == 0 {
-//            //let city_ids: [Int] = [city_id]
-//            Global.instance.addSpinner(superView: view)
-//            DataService.instance1.getAreaByCityIDs(city_ids: "",city_type: "") { (success) in
-//                if success {
-//                    
-//                    let city = DataService.instance1.citysandareas
-//                    var city_name = ""
-//                    if city[city_id] != nil {
-//                        city_name = city[city_id]!["name"] as! String
-//                    }
-//                    
-//                    var areas: [[String: String]] = [[String: String]]()
-//                    for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
-//                        var area_id: String = ""
-//                        var area_name: String = ""
-//                        for (key, value) in row {
-//                            if key == "id" {
-//                                area_id = String(value as! Int)
-//                            }
-//                            if key == "name" {
-//                                area_name = value as! String
-//                            }
-//                        }
-//                        if area_id.count > 0 && area_name.count > 0 {
-//                            areas.append(["id":area_id,"name":area_name])
-//                        }
-//                    }
-//                    //print(areas)
-//                    let area_s: [String: Any] = ["id": String(city_id), "name": city_name, "rows": areas]
-//                    let city_s: [String: [String: Any]] = [String(city_id): area_s]
-//                    
-//                    var allAreas: [String: [String: Any]] = self.session.getAllAreas()
-//                    if allAreas.count > 0 {
-//                        allAreas[String(city_id)] = area_s
-//                        self.session.set(allAreas, forKey: "areas")
-//                    } else {
-//                        self.session.set(city_s, forKey: "areas")
-//                    }
-//                    completion1(areas)
-//                    
-//                    Global.instance.removeSpinner(superView: self.view)
-//                }
-//            }
-//        }
-//        return rows
-//    }
-    
-//    func getAreasFromCitys(_ city_ids: [Int], completion1: @escaping (_ rows: [String: [String: Any]]) -> Void) -> [String: [String: Any]] {
-//        
-//        //session.removeObject(forKey: "areas")
-//        let rows = session.getAreasByCitys(city_ids)
-//        let citys1: String = Global.instance.intsToStringComma(city_ids)
-//        //print(rows)
-//        if rows.count < city_ids.count {
-//            //let city_ids: [Int] = [city_id]
-//            Global.instance.addSpinner(superView: view)
-//            DataService.instance1.getAreaByCityIDs(city_ids: citys1,city_type: "") { (success) in
-//                if success {
-//                    
-//                    var res: [String: [String: Any]] = [String: [String: Any]]()
-//                    let city = DataService.instance1.citysandareas
-//                    for (city_id, _) in city {
-//                        var city_name = ""
-//                        if city[city_id] != nil {
-//                            city_name = city[city_id]!["name"] as! String
-//                        }
-//                        
-//                        var areas: [[String: String]] = [[String: String]]()
-//                        for row in (city[city_id]!["rows"] as! Array<[String: Any]>) {
-//                            var area_id: String = ""
-//                            var area_name: String = ""
-//                            for (key, value) in row {
-//                                if key == "id" {
-//                                    area_id = String(value as! Int)
-//                                }
-//                                if key == "name" {
-//                                    area_name = value as! String
-//                                }
-//                            }
-//                            if area_id.count > 0 && area_name.count > 0 {
-//                                areas.append(["id":area_id,"name":area_name])
-//                            }
-//                        }
-//                        //print(areas)
-//                        let area_s: [String: Any] = ["id": String(city_id), "name": city_name, "rows": areas]
-//                        let city_s: [String: [String: Any]] = [String(city_id): area_s]
-//                        
-//                        var allAreas: [String: [String: Any]] = self.session.getAllAreas()
-//                        if allAreas.count > 0 {
-//                            allAreas[String(city_id)] = area_s
-//                            self.session.set(allAreas, forKey: "areas")
-//                        } else {
-//                            self.session.set(city_s, forKey: "areas")
-//                        }
-//                        res[String(city_id)] = area_s
-//                    }
-//                    completion1(res)
-//                    
-//                    Global.instance.removeSpinner(superView: self.view)
-//                }
-//            }
-//        }
-//        return rows
-//    }
-    
-    func getAreaByAreaID(_ area_id: Int) -> [String: String] {
-        let area = self.session.getAreaByAreaID(area_id)
-        
-        return area
-    }
-    
-    func multiSelected(key: String, selecteds: [String]) {}
-    
-    func singleSelected(key: String, selected: String, show: String?=nil) {
-        
-        if searchPanel.baseVC != nil {
-            searchPanel.singleSelected(key: key, selected: selected, show: show)
-        } else {
-            let row = getOneRowFromKey(key)
-            row.value = selected
-            var _show = ""
-            if key == START_TIME_KEY || key == END_TIME_KEY || key == TEAM_PLAY_START_KEY || key == TEAM_PLAY_END_KEY {
-                _show = selected.noSec()
-            }
-            //在dateSelected
-//            else if (key == START_DATE_KEY || key == END_DATE_KEY) {
-//                _show = selected
-            else if (key == CITY_KEY || key == AREA_KEY) {
-                _show = Global.instance.zoneIDToName(Int(selected)!)
-            } else if (key == ARENA_KEY) {
-                if (show != nil) {
-                    _show = show!
-                }
-            } else if (key == PRICE_UNIT_KEY) {
-                _show = PRICE_UNIT.enumFromString(string: row.value).rawValue
-            } else if (key == COURSE_KIND_KEY) {
-                _show = COURSE_KIND.enumFromString(string: row.value).rawValue
-            } else if (key == CYCLE_UNIT_KEY) {
-                _show = CYCLE_UNIT.enumFromString(string: row.value).rawValue
-            } else if (key == WEEKDAY_KEY) {
-//                row.value = String(Global.instance.weekdaysToDBValue(selected))
-//
-//                var a: [String] = [String]()
-//                let weekday_arr = selected.split(separator: ",")
-//                for weekday in weekday_arr {
-//                    let tmp: String = WEEKDAY.intToString(weekday)
-//                    a.append(tmp)
-//                }
-//                weekdays_show = show.joined(separator: ",")
-            }
-            
-            row.show = _show
-            //replaceRows(key, row)
-        }
-    }
-    
-    //WeekdaysSelectDelegate
-    func setWeekdaysData(selecteds: Int) {
-        if searchPanel.baseVC != nil {
-            searchPanel.setWeekdaysData(selecteds: selecteds)
-        } else {
-            let row = getOneRowFromKey(WEEKDAYS_KEY)
-            var shows: [String] = [String]()
-            if selecteds > 0 {
-                var i = 1
-                while (i <= 7) {
-                    let n: Int = (pow(2, i) as NSDecimalNumber).intValue
-                    if selecteds & n > 0 {
-                        shows.append(WEEKDAY(weekday: i).toShortString())
-                    }
-                    i += 1
-                }
-                
-//                for day in selecteds {
-//                    value += (pow(2, day) as NSDecimalNumber).intValue
-//                    for gday in Global.instance.weekdays {
-//                        if day == gday["value"] as! Int {
-//                            let text = gday["simple_text"]
-//                            texts.append(text! as! String)
-//                            break
-//                        }
-//                    }
-//                }
-                row.show = shows.joined(separator: ",")
-                row.value = String(selecteds)
-            } else {
-                row.show = ""
-            }
-        }
-    }
-    
-    func selectedManager(selected: Int, show: String, token: String) {
-        let row = getOneRowFromKey(MANAGER_ID_KEY)
-        row.value = String(selected)
-        row.show = show
-        row.token = token
-    }
-    
-    func dateSelected(key: String, selected: String) {
-        
-        let row = getOneRowFromKey(key)
-        row.value = selected
-        row.show = selected
-    }
-    func checkboxValueChanged(checked: Bool) {}
-    func sexValueChanged(sex: String) {}
-    
-    func setDegrees(res: [DEGREE]) {
-        let row = getOneRowFromKey(DEGREE_KEY)
-        var names: [String] = [String]()
-        var values: [String] = [String]()
-        if res.count > 0 {
-            for degree in res {
-                names.append(degree.rawValue)
-                values.append(DEGREE.DBValue(degree))
-            }
-            row.show = names.joined(separator: ",")
-            row.value = values.joined(separator: ",")
-        } else {
-            row.show = "全部"
-            row.value = ""
-        }
-        //replaceRows(DEGREE_KEY, row)
-        //tableView.reloadData()
-    }
-    
-    func setContent(key: String, content: String) {
-        let row = getOneRowFromKey(key)
-        row.value = content
-        row.show = content
-    }
-    
-    func submitBtnPressed() {}
-    
-    func testNetwork()-> Bool {
-        
-        var bConnect: Bool = false
-        if Connectivity.isConnectedToInternet {
-             bConnect = true
-        }
-        
-        return bConnect
-    }
-    
-    func alertError(title: String, msg: String) {
-        let alert = UIAlertController(title: title, message: msg, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "確定", style: .default, handler: nil))
-        self.present(alert, animated: true)
-    }
-    
-    func warning(_ msg: String) {
-        _warning(msg: msg)
-    }
-    
-    func warning(msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
-        _warning(title: "警告", msg: msg, showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
-    }
-    func warning(msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
-        _warning(title: "警告", msg: msg, closeButtonTitle: closeButtonTitle, buttonTitle: buttonTitle, buttonAction: buttonAction)
-    }
-    
-    func _info(title: String, msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
-        let alert = __alert(showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
-        alert.showInfo(title, subTitle: msg)
-    }
-    func _info(title: String, msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
-        let alert = __alert(showCloseButton: true, buttonTitle: buttonTitle, buttonAction: buttonAction)
-        alert.showInfo(title, subTitle: msg, closeButtonTitle: closeButtonTitle)
-    }
-    
-    func _info(msg: String) {
-        let alert = __alert()
-        alert.showInfo("訊息", subTitle: msg)
-    }
-    
-    func info(msg: String, showCloseButton: Bool=false, buttonTitle: String, buttonAction: @escaping ()->Void) {
-        _info(title: "訊息", msg: msg, showCloseButton: showCloseButton, buttonTitle: buttonTitle, buttonAction: buttonAction)
-    }
-    func info(msg: String, closeButtonTitle: String, buttonTitle: String, buttonAction: @escaping ()->Void) {
-        _info(title: "訊息", msg: msg, closeButtonTitle: closeButtonTitle, buttonTitle: buttonTitle, buttonAction: buttonAction)
-    }
-    func info(_ msg: String) {
-        _info(msg: msg)
-    }
+
 }
 

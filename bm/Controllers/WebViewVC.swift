@@ -11,7 +11,6 @@ import WebKit
 
 class WebViewVC: BaseViewController {
     
-    @IBOutlet weak var top: Top!
     @IBOutlet weak var dataContainer: UIView!
     @IBOutlet weak var webView: WKWebView!
     
@@ -83,7 +82,7 @@ class WebViewVC: BaseViewController {
             path += "&phone=iOS"
         }
         
-        print(path)
+        //print(path)
         
         if let url: URL = URL(string: path) {
             var request = URLRequest(url: url)
