@@ -622,7 +622,7 @@ class ShippingTable: Table {
     override func filterRow() {
         
         super.filterRow()
-        method_show = SHIPPING_WAY.getRawValueFromString(method)
+        method_show = SHIPPING.getRawValueFromString(method)
         process_show = SHIPPING_PROCESS.getRawValueFromString(process)
         shipping_at_show = shipping_at.noSec()
         store_at_show = store_at.noSec()

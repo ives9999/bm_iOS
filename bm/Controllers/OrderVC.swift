@@ -390,7 +390,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             let shipping: String = productTable!.shipping
             arr = shipping.components(separatedBy: ",")
             for tmp in arr {
-                let title: String = SHIPPING_WAY.getRawValueFromString(tmp)
+                let title: String = SHIPPING.getRawValueFromString(tmp)
                 var value: String = "false"
                 if (tmp == "direct") {
                     value = "true"
@@ -559,10 +559,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
                     gateway_enum == GATEWAY.store_pay_hilife ||
                     gateway_enum == GATEWAY.store_pay_ok {
                     
-                    let shipping_enum: SHIPPING_WAY = gateway_enum.mapToShipping()
+                    let shipping_enum: SHIPPING = gateway_enum.mapToShipping()
                     let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
                     for row1 in rows1 {
-                        if (SHIPPING_WAY.stringToEnum(row1.key) == shipping_enum) {
+                        if (SHIPPING.stringToEnum(row1.key) == shipping_enum) {
                             row1.value = "true"
                         } else {
                             row1.value = "false"
@@ -625,7 +625,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         return GATEWAY.stringToEnum(key)
     }
     
-    func _shippingChecked()-> SHIPPING_WAY {
+    func _shippingChecked()-> SHIPPING {
         
         let rows1 = getOneRowsFromSectionKey(SHIPPING_KEY)
 
@@ -637,7 +637,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             }
         }
         
-        return SHIPPING_WAY.stringToEnum(key)
+        return SHIPPING.stringToEnum(key)
     }
     
     func _setGatewayChecked(gateway_enum: GATEWAY) {
@@ -651,10 +651,10 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         }
     }
     
-    func _setShippingChecked(shipping_enum: SHIPPING_WAY) {
+    func _setShippingChecked(shipping_enum: SHIPPING) {
         let rows = getOneRowsFromSectionKey(SHIPPING_KEY)
         for row in rows {
-            if (SHIPPING_WAY.stringToEnum(row.key) == shipping_enum) {
+            if (SHIPPING.stringToEnum(row.key) == shipping_enum) {
                 row.value = "true"
             } else {
                 row.value = "false"
@@ -666,7 +666,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         
         let shipping_enum = gateway_enumB.mapToShipping()
         
-        if gateway_enumA == gateway_enumB && SHIPPING_WAY.stringToEnum(row.key) != shipping_enum {
+        if gateway_enumA == gateway_enumB && SHIPPING.stringToEnum(row.key) != shipping_enum {
             warning(msg: msg, buttonTitle: "關閉") {
                 
                 self._setShippingChecked(shipping_enum: gateway_enumA.mapToShipping())

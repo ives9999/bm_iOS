@@ -796,19 +796,19 @@ enum GATEWAY: String {
         return res.rawValue
     }
     
-    func mapToShipping()-> SHIPPING_WAY {
+    func mapToShipping()-> SHIPPING {
         
         switch self {
         case .store_pay_711:
-            return SHIPPING_WAY.store_711
+            return SHIPPING.store_711
         case .store_pay_family:
-            return SHIPPING_WAY.store_family
+            return SHIPPING.store_family
         case .store_pay_hilife:
-            return SHIPPING_WAY.store_hilife
+            return SHIPPING.store_hilife
         case .store_pay_ok:
-            return SHIPPING_WAY.store_ok
+            return SHIPPING.store_ok
         default:
-            return SHIPPING_WAY.store_711
+            return SHIPPING.store_711
         }
     }
     
@@ -828,7 +828,7 @@ enum GATEWAY: String {
     }
 }
 
-enum SHIPPING_WAY: String {
+enum SHIPPING: String {
     
     case direct = "宅配"
     case store_711 = "7-11超商取貨"
@@ -837,7 +837,7 @@ enum SHIPPING_WAY: String {
     case store_ok = "OK超商取貨"
     case cash = "面交"
     
-    static func stringToEnum(_ enumString: String) -> SHIPPING_WAY {
+    static func stringToEnum(_ enumString: String) -> SHIPPING {
         switch enumString {
         case "direct":
             return .direct
@@ -857,7 +857,7 @@ enum SHIPPING_WAY: String {
     }
     
     static func getRawValueFromString(_ string: String)-> String {
-        let res: SHIPPING_WAY = stringToEnum(string)
+        let res: SHIPPING = stringToEnum(string)
         return res.rawValue
     }
 }
