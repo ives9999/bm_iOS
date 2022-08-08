@@ -684,7 +684,8 @@ enum ALL_PROCESS: String {
     case gateway_on = "付款中"
     case gateway_off = "完成付款，準備出貨"
     case shipping = "準備出貨"
-    case store = "商品到達便利商店"
+    case logistic = "到達物流中心"
+    case store = "到達便利商店"
     case complete = "完成取貨"
     case returning = "商品退回中"
     case `return` = "商品已退回"
@@ -702,6 +703,8 @@ enum ALL_PROCESS: String {
             return "gateway_off"
         case .shipping:
             return "shipping"
+        case .logistic:
+            return "logistic"
         case .store:
             return "store"
         case .complete:
@@ -727,6 +730,8 @@ enum ALL_PROCESS: String {
             return .gateway_off
         case 4:
             return .shipping
+        case 5:
+            return .logistic
         case 5:
             return .store
         case 6:
