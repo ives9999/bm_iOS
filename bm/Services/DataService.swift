@@ -742,8 +742,8 @@ class DataService {
         if token.count > 0 {
             url = url + "/" + token
         }
-        //print(url)
-        //print(params)
+        print(url)
+        print(params)
         
         AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             

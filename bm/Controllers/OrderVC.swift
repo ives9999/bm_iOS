@@ -774,7 +774,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["order_address"] = getOneRowValue(ADDRESS_KEY)
         
         params[MEMO_KEY] = getOneRowValue(MEMO_KEY)
-        //print(params)
+        print(params)
         
         //func update(token: String = "", params: [String: String], completion: @escaping CompletionHandler)
         

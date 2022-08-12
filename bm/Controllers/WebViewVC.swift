@@ -70,14 +70,33 @@ class WebViewVC: BaseViewController {
         
         let orderTable: OrderTable = table as! OrderTable
         
+        var gateway: GATEWAY = GATEWAY.credit_card
+        if let gatewayTable: GatewayTable = orderTable.gateway {
+            gateway = GATEWAY.stringToEnum(gatewayTable.method)
+        }
+        
+        var shipping: SHIPPING = SHIPPING.direct
+        if let shippingTable: ShippingTable = orderTable.shipping {
+            shipping = SHIPPING.stringToEnum(shippingTable.method)
+        }
+        
+        var isCollection: String = "N"
+        if (gateway == GATEWAY.store_pay_711 && shipping == SHIPPING.store_711) ||
+            (gateway == GATEWAY.store_pay_family && shipping == SHIPPING.store_family) ||
+            (gateway == GATEWAY.store_pay_hilife && shipping == SHIPPING.store_hilife) ||
+            (gateway == GATEWAY.store_pay_ok && shipping == SHIPPING.store_ok)
+        {
+            isCollection = "Y"
+        }
+        
         //let path1: String = "http://bm.sportpassword.localhost/c2c.html"
         var path: String = URL_ECPAY2_C2C_MAP + "?"
         //var path: String = "http://bm.sportpassword.localhost/app/order/ecpay2_c2c_map?"
         path += "LogisticsType=CVS"
         if orderTable.gateway != nil {
-            let gatewayEnum: GATEWAY = GATEWAY.stringToEnum(orderTable.gateway!.method)
-            path += "&LogisticsSubType=" + gatewayEnum.enumToECPay()
-            path += "&IsCollection=Y&Device=1"
+            path += "&LogisticsSubType=" + gateway.enumToECPay()
+            path += "&IsCollection=" + isCollection
+            path += "&Device=1"
             path += "&order_token=" + token!
             path += "&phone=iOS"
         }

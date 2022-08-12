@@ -70,6 +70,8 @@ class PaymentVC: MyTableVC {
 //    ]
     
     var gateway: GATEWAY = GATEWAY.credit_card
+    var shipping: SHIPPING = SHIPPING.direct
+    
     var payment_no: String = ""
     var expire_at: String = ""
     var payment_url: String = ""
@@ -309,12 +311,35 @@ class PaymentVC: MyTableVC {
             
             if success {
                 //self.refresh()
-                //self.jsonData = OrderService.instance.jsonData
-                self.info(msg: "付款完成", buttonTitle: "關閉", buttonAction: {
-                    self.view.window!.rootViewController?.dismiss(animated: false) {
-                        self.toPayment(order_token: self.order_token)
+                self.jsonData = OrderService.instance.jsonData
+                //self.jsonData?.prettyPrintedJSONString
+                do {
+                    let successTable: UpdateResTable = try JSONDecoder().decode(UpdateResTable.self, from: self.jsonData!)
+                    if !successTable.success {
+                        self.msg = "錯誤訊息：" + successTable.msg
+                        self.info(self.msg)
+                    } else {
+                        if let orderTable: OrderTable = successTable.model {
+                            let shippingTable: ShippingTable = orderTable.shipping!
+                            let method: SHIPPING = SHIPPING.stringToEnum(shippingTable.method)
+                            if method == SHIPPING.store_711 || method == SHIPPING.store_family || method == SHIPPING.store_hilife || method == SHIPPING.store_ok {
+                                
+                                self.info(msg: "訂單已經完成付款，是否前往選擇超商門市？", showCloseButton: true, buttonTitle: "是") {
+                                    self.toWebView(token: orderTable.token, delegate: self)
+                                }
+                            } else {
+                                self.info(msg: "付款完成", buttonTitle: "關閉", buttonAction: {
+                                    self.view.window!.rootViewController?.dismiss(animated: false) {
+                                        //if gateway == GATEWAY.credit_card &&
+                                        self.toPayment(order_token: self.order_token)
+                                    }
+                                })
+                            }
+                        }
                     }
-                })
+                } catch {
+                    self.warning(error.localizedDescription)
+                }
             } else {
                 self.warning(msg: OrderService.instance.msg, buttonTitle: "關閉", buttonAction: {
                     self.view.window!.rootViewController?.dismiss(animated: false) {
@@ -801,5 +826,33 @@ class BackResTable: Codable {
         order_id = try container.decodeIfPresent(Int.self, forKey: .order_id) ?? 0
         error_code = try container.decodeIfPresent(String.self, forKey: .error_code) ?? ""
         url = try container.decodeIfPresent(String.self, forKey: .url) ?? ""
+    }
+}
+
+class UpdateResTable: Codable {
+    
+    var success: Bool = false
+    var msg: String = ""
+    var id: Int = 0
+    var update: String = ""
+    var model: OrderTable?
+    
+    enum CodingKeys: String, CodingKey {
+        case success
+        case msg
+        case id
+        case update
+        case model
+    }
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
+        id = try container.decodeIfPresent(Int.self, forKey: .id) ?? 0
+        update = try container.decodeIfPresent(String.self, forKey: .update) ?? ""
+        model = try container.decodeIfPresent(OrderTable.self, forKey: .model) ?? nil
     }
 }
