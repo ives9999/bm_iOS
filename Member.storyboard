@@ -2395,6 +2395,50 @@
             </objects>
             <point key="canvasLocation" x="3139" y="-1516"/>
         </scene>
+        <!--Member Level Up PayVC-->
+        <scene sceneID="ydS-cO-M10">
+            <objects>
+                <viewController storyboardIdentifier="toMemberLevelUpPay" id="8A6-Le-2x2" customClass="MemberLevelUpPayVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SiP-M3-IfB">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BNK-v9-czO" customClass="Top" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="etN-ug-NOR"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gC1-69-Yhc" customClass="BottomThreeView" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="341-11-nM2"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Q6d-q1-eGg"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qEH-Hy-N48"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="BNK-v9-czO" firstAttribute="top" secondItem="qEH-Hy-N48" secondAttribute="top" id="5fP-XE-EZY"/>
+                            <constraint firstAttribute="trailing" secondItem="gC1-69-Yhc" secondAttribute="trailing" id="87x-9n-FXO"/>
+                            <constraint firstItem="gC1-69-Yhc" firstAttribute="leading" secondItem="qEH-Hy-N48" secondAttribute="leading" id="JJD-le-uey"/>
+                            <constraint firstItem="BNK-v9-czO" firstAttribute="trailing" secondItem="qEH-Hy-N48" secondAttribute="trailing" id="JYc-lm-HqO"/>
+                            <constraint firstItem="qEH-Hy-N48" firstAttribute="bottom" secondItem="gC1-69-Yhc" secondAttribute="bottom" id="dGm-5a-afO"/>
+                            <constraint firstItem="BNK-v9-czO" firstAttribute="leading" secondItem="qEH-Hy-N48" secondAttribute="leading" id="mI1-hf-EEt"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bottomThreeView" destination="gC1-69-Yhc" id="cpc-Bl-k2l"/>
+                        <outlet property="top" destination="BNK-v9-czO" id="LAw-MT-kzc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9X3-BK-0A1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3158" y="-2081"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="6CI-ik-ktJ">

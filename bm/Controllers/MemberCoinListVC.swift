@@ -10,9 +10,7 @@ import Foundation
 import UIKit
 
 class MemberCoinListVC: BaseViewController {
-    
-    @IBOutlet weak var bottomThreeView: BottomThreeView!
-    
+        
     lazy var tableView: MyTable2VC<MemberCoinListCell, MemberCoinTable> = {
         let tableView = MyTable2VC<MemberCoinListCell, MemberCoinTable>(didSelect: didSelect(item:at:))
         return tableView
@@ -61,7 +59,7 @@ class MemberCoinListVC: BaseViewController {
         }
     }
     
-    func setupBottomThreeView() {
+    override func setupBottomThreeView() {
         bottomThreeView.delegate = self
         bottomThreeView.submitButton.setTitle("購買點數")
         bottomThreeView.cancelButton.setTitle("回上一頁")

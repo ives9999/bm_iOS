@@ -307,6 +307,22 @@ extension BaseViewController {
         }
     }
     
+    func toMemberLevelUpPay(name: String, price: Int) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_LEVELUPPAY) as? MemberLevelUpPayVC {
+                viewController.modalPresentationStyle = .fullScreen
+                viewController.name = name
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_LEVELUPPAY) as! MemberLevelUpPayVC
+            viewController.modalPresentationStyle = .fullScreen
+            viewController.name = name
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toMemberOrderList() {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)

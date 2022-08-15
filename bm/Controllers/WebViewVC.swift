@@ -23,7 +23,6 @@ class WebViewVC: BaseViewController {
         
         super.viewDidLoad()
         
-        top.setTitle(title: "web view")
         top.delegate = self
         
         //let configuration: WKWebViewConfiguration = WKWebViewConfiguration()
@@ -55,6 +54,7 @@ class WebViewVC: BaseViewController {
                     let jsonData: Data = OrderService.instance.jsonData!
                     do {
                         let orderTable: OrderTable = try JSONDecoder().decode(OrderTable.self, from: jsonData)
+                        self.top.setTitle(title: "選擇超商")
                         self.showWebView(table: orderTable)
                     } catch {
                         self.warning(error.localizedDescription)

@@ -23,6 +23,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     
     @IBOutlet weak var top: Top!
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var bottomThreeView: BottomThreeView!
     //@IBOutlet weak var searchBtn: UIButton!
     
     //出現在topView的按鈕
@@ -838,6 +839,14 @@ class BaseViewController: UIViewController, List2CellDelegate {
             //tabItem.badgeValue = "5"
         }
         
+    }
+    
+    func setupBottomThreeView() {
+        bottomThreeView.delegate = self
+        bottomThreeView.submitButton.setTitle("訂閱")
+        bottomThreeView.cancelButton.setTitle("回上一頁")
+        bottomThreeView.threeButton.setTitle("退訂")
+        bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
     }
     
     func setButtonLayoutHeight()-> Int {

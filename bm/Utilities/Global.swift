@@ -1040,6 +1040,34 @@ enum SIGNUP_STATUS: String {
     }
 }
 
+enum MEMBER_LEVEL: String {
+    
+    case gold = "金牌"
+    case silver = "銀牌"
+    case copper = "銅牌"
+    case steal = "鐵牌"
+    
+    static func stringToEnum(_ enumString: String) -> MEMBER_LEVEL {
+        switch enumString {
+        case "gold":
+            return .gold
+        case "silver":
+            return .silver
+        case "copper":
+            return .copper
+        case "steal":
+            return .steal
+        default:
+            return .steal
+        }
+    }
+    
+    static func getRawValueFromString(_ string: String)-> String {
+        let res: MEMBER_LEVEL = stringToEnum(string)
+        return res.rawValue
+    }
+}
+
 let df : DateFormatter = {
     let formatter = DateFormatter()
     formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

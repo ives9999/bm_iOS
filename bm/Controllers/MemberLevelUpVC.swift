@@ -10,8 +10,6 @@ import Foundation
 
 class MemberLevelUpVC: BaseViewController {
     
-    @IBOutlet weak var bottomThreeView: BottomThreeView!
-    
     lazy var tableView: MyTable2VC<MemberLevelUpCell, MemberLevelKindTable> = {
         let tableView = MyTable2VC<MemberLevelUpCell, MemberLevelKindTable>(didSelect: didSelect(item:at:))
         return tableView
@@ -49,10 +47,13 @@ class MemberLevelUpVC: BaseViewController {
     }
     
     override func didSelect<T: Table>(item: T, at indexPath: IndexPath) {
-        print(item.title + "\(indexPath.row)")
+        //print(item.name + "\(indexPath.row)")
+        if let item1: MemberLevelKindTable = item as? MemberLevelKindTable {
+            toMemberLevelUpPay(name: item1.name, price: item1.price)
+        }
     }
     
-    func setupBottomThreeView() {
+    override func setupBottomThreeView() {
         bottomThreeView.delegate = self
         bottomThreeView.submitButton.setTitle("訂閱")
         bottomThreeView.cancelButton.setTitle("回上一頁")
@@ -64,10 +65,12 @@ class MemberLevelUpVC: BaseViewController {
 class MemberLevelUpCell: BaseTableViewCell<MemberLevelKindTable> {
     
     @IBOutlet weak var titleLbl: SuperLabel!
+    @IBOutlet weak var priceLbl: SuperLabel!
     
     override var item: MemberLevelKindTable? {
         didSet {
             titleLbl?.text = item?.name
+            priceLbl?.text = "NT$: " + String(item!.price) + " 元/月"
         }
     }
     

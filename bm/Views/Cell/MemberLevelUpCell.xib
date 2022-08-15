@@ -19,17 +19,26 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BDI-PM-c2w" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                    <rect key="frame" x="340" y="52" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="a8s-Tx-00E" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="8hm-sb-KDJ"/>
+                <constraint firstItem="BDI-PM-c2w" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="IUo-qp-aPR"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="a8s-Tx-00E" secondAttribute="bottom" constant="16" id="fNM-Vo-lXc"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BDI-PM-c2w" secondAttribute="trailing" constant="32" id="k0L-pT-kXH"/>
                 <constraint firstItem="a8s-Tx-00E" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="qi4-Fn-SFT"/>
                 <constraint firstItem="a8s-Tx-00E" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="32" id="vJv-ln-0qd"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="priceLbl" destination="BDI-PM-c2w" id="1kT-qd-hH0"/>
                 <outlet property="titleLbl" destination="a8s-Tx-00E" id="Imr-vc-dfp"/>
             </connections>
             <point key="canvasLocation" x="139" y="153"/>

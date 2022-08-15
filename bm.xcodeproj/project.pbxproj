@@ -300,6 +300,7 @@
 		B3FB9B252407F7280051186F /* Course.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B232407F7280051186F /* Course.storyboard */; };
 		B3FB9B272407F7EE0051186F /* TempPlay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B262407F7EE0051186F /* TempPlay.storyboard */; };
 		F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90423B81F83748C00DC8B1E /* TeamVC.swift */; };
+		F92FF17028A941280005956D /* MemberLevelUpPayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92FF16F28A941280005956D /* MemberLevelUpPayVC.swift */; };
 		F9308B3B2737743F002531A1 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3A2737743F002531A1 /* MemberRow.swift */; };
 		F9308B3E273954AB002531A1 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3C273954AB002531A1 /* SwitchCell.swift */; };
 		F9308B3F273954AB002531A1 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9308B3D273954AB002531A1 /* SwitchCell.xib */; };
@@ -717,6 +718,7 @@
 		B3FB9B262407F7EE0051186F /* TempPlay.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TempPlay.storyboard; sourceTree = SOURCE_ROOT; };
 		B45D9C2D818D36544B377579 /* Pods-bm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.release.xcconfig"; path = "Target Support Files/Pods-bm/Pods-bm.release.xcconfig"; sourceTree = "<group>"; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
+		F92FF16F28A941280005956D /* MemberLevelUpPayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberLevelUpPayVC.swift; sourceTree = "<group>"; };
 		F9308B3A2737743F002531A1 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
 		F9308B3C273954AB002531A1 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		F9308B3D273954AB002531A1 /* SwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
@@ -1358,6 +1360,7 @@
 				F99DF39E28715E4C00A7C2C6 /* WebViewVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
+				F92FF16F28A941280005956D /* MemberLevelUpPayVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1996,6 +1999,7 @@
 				B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */,
 				B370EFCF26AD50840022E599 /* CartListCell.swift in Sources */,
 				B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */,
+				F92FF17028A941280005956D /* MemberLevelUpPayVC.swift in Sources */,
 				B3F6B4632605C9190000F9E0 /* CityTable.swift in Sources */,
 				B3CABD9026B6E4DA00FD0E4D /* MemoCell.swift in Sources */,
 				B31CD34826F19D52001B3848 /* MemberTable.swift in Sources */,
@@ -2123,7 +2127,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2148,7 +2152,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2307,7 +2311,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
@@ -2339,7 +2343,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.4;
+				MARKETING_VERSION = 2.2.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
