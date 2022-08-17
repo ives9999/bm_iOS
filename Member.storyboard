@@ -2410,6 +2410,18 @@
                                     <constraint firstAttribute="height" constant="64" id="etN-ug-NOR"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="金牌的福利：" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Cc-IP-Bho" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="16" y="128" width="382" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="emw-Wi-7Jm" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
+                                <rect key="frame" x="16" y="168.5" width="382" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gC1-69-Yhc" customClass="BottomThreeView" customModule="bm" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="802" width="414" height="60"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2424,10 +2436,16 @@
                         <constraints>
                             <constraint firstItem="BNK-v9-czO" firstAttribute="top" secondItem="qEH-Hy-N48" secondAttribute="top" id="5fP-XE-EZY"/>
                             <constraint firstAttribute="trailing" secondItem="gC1-69-Yhc" secondAttribute="trailing" id="87x-9n-FXO"/>
+                            <constraint firstItem="emw-Wi-7Jm" firstAttribute="leading" secondItem="qEH-Hy-N48" secondAttribute="leading" constant="16" id="9oL-Fp-uqs"/>
                             <constraint firstItem="gC1-69-Yhc" firstAttribute="leading" secondItem="qEH-Hy-N48" secondAttribute="leading" id="JJD-le-uey"/>
                             <constraint firstItem="BNK-v9-czO" firstAttribute="trailing" secondItem="qEH-Hy-N48" secondAttribute="trailing" id="JYc-lm-HqO"/>
                             <constraint firstItem="qEH-Hy-N48" firstAttribute="bottom" secondItem="gC1-69-Yhc" secondAttribute="bottom" id="dGm-5a-afO"/>
+                            <constraint firstItem="5Cc-IP-Bho" firstAttribute="leading" secondItem="qEH-Hy-N48" secondAttribute="leading" constant="16" id="eF5-yJ-3Si"/>
                             <constraint firstItem="BNK-v9-czO" firstAttribute="leading" secondItem="qEH-Hy-N48" secondAttribute="leading" id="mI1-hf-EEt"/>
+                            <constraint firstItem="5Cc-IP-Bho" firstAttribute="top" secondItem="BNK-v9-czO" secondAttribute="bottom" constant="20" id="nEb-35-6sk"/>
+                            <constraint firstItem="qEH-Hy-N48" firstAttribute="trailing" secondItem="emw-Wi-7Jm" secondAttribute="trailing" constant="16" id="q5M-CI-Cjo"/>
+                            <constraint firstItem="emw-Wi-7Jm" firstAttribute="top" secondItem="5Cc-IP-Bho" secondAttribute="bottom" constant="20" id="slR-U8-1KG"/>
+                            <constraint firstItem="qEH-Hy-N48" firstAttribute="trailing" secondItem="5Cc-IP-Bho" secondAttribute="trailing" constant="16" id="vLJ-rK-jCE"/>
                         </constraints>
                     </view>
                     <connections>

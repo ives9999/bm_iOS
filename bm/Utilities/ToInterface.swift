@@ -307,7 +307,7 @@ extension BaseViewController {
         }
     }
     
-    func toMemberLevelUpPay(name: String, price: Int) {
+    func toMemberLevelUpPay(name: String, price: Int, kind: String) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_LEVELUPPAY) as? MemberLevelUpPayVC {

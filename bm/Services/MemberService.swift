@@ -731,6 +731,17 @@ class MemberService: DataService {
         let url: String = URL_MEMBER_LEVEL_KIND
         let params: [String: String] = ["device": "app","member_token":_member_token]
         
+        //print(url)
+        //print(params)
+        
+        _simpleService(url: url, params: params, completion: completion)
+    }
+    
+    func subscription(kind: String, completion: @escaping CompletionHandler) {
+        
+        let url: String = URL_MEMBER_SUBSCRIPTION
+        let params: [String: String] = ["device": "app","member_token":Member.instance.token, "kind": kind]
+        
         print(url)
         print(params)
         

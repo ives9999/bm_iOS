@@ -49,7 +49,7 @@ class MemberLevelUpVC: BaseViewController {
     override func didSelect<T: Table>(item: T, at indexPath: IndexPath) {
         //print(item.name + "\(indexPath.row)")
         if let item1: MemberLevelKindTable = item as? MemberLevelKindTable {
-            toMemberLevelUpPay(name: item1.name, price: item1.price)
+            toMemberLevelUpPay(name: item1.name, price: item1.price, kind: item1.eng_name)
         }
     }
     
