@@ -313,6 +313,7 @@ extension BaseViewController {
             if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_LEVELUPPAY) as? MemberLevelUpPayVC {
                 viewController.modalPresentationStyle = .fullScreen
                 viewController.name = name
+                viewController.kind = kind
                 show(viewController, sender: nil)
             }
         } else {

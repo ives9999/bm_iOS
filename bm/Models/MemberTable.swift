@@ -20,6 +20,7 @@ class MemberTable: Table {
 //        set { UserDefaults.standard.set(NICKNAME_KEY, newValue) }
 //    }
     var coin: Int = 0
+    var level: String = ""
     var dob: String = ""
     var sex: String = ""
     var email: String = ""
@@ -52,6 +53,7 @@ class MemberTable: Table {
 
         case nickname
         case coin
+        case level
         case dob
         case sex
         case email
@@ -86,6 +88,7 @@ class MemberTable: Table {
 //        }
         
         nickname = try container.decodeIfPresent(String.self, forKey: .nickname) ?? ""
+        level = try container.decodeIfPresent(String.self, forKey: .level) ?? ""
         coin = try container.decodeIfPresent(Int.self, forKey: .coin) ?? 0
         dob = try container.decodeIfPresent(String.self, forKey: .dob) ?? ""
         sex = try container.decodeIfPresent(String.self, forKey: .sex) ?? ""
@@ -256,6 +259,14 @@ class Member {
         }
         set {
             session.set(COIN_KEY, newValue)
+        }
+    }
+    var level: String {
+        get {
+            return session.getString(LEVEL_KEY)
+        }
+        set {
+            session.set(LEVEL_KEY, newValue)
         }
     }
     var dob: String {
@@ -779,61 +790,61 @@ class MemberBankTable: Table {
     }
 }
 
-class MemberLotteryTable: Table {
-    
-    var member_id: Int = 0
-    var level: String = ""
-
-    enum CodingKeys: String, CodingKey {
-        case member_id
-        case level
-    }
-    
-    override init() {
-        super.init()
-    }
-    
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        member_id = try container.decodeIfPresent(Int.self, forKey: .member_id) ?? 0
-        level = try container.decodeIfPresent(String.self, forKey: .level) ?? ""
-    }
-    
-    override func filterRow() {
-        super.filterRow()
-    }
-    
-}
-
-class MemberLotteryLogTable: Table {
-    
-    var member_lottery_id: Int = 0
-    var amount: Int = 0
-    
-    enum CodingKeys: String, CodingKey {
-        case member_lottery_id
-        case amount
-    }
-    
-    override init() {
-        super.init()
-    }
-    
-    required init(from decoder: Decoder) throws {
-        try super.init(from: decoder)
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-        member_lottery_id = try container.decodeIfPresent(Int.self, forKey: .member_lottery_id) ?? 0
-        amount = try container.decodeIfPresent(Int.self, forKey: .amount) ?? 0
-    }
-    
-    override func filterRow() {
-        super.filterRow()
-    }
-    
-}
+//class MemberLotteryTable: Table {
+//    
+//    var member_id: Int = 0
+//    var level: String = ""
+//
+//    enum CodingKeys: String, CodingKey {
+//        case member_id
+//        case level
+//    }
+//    
+//    override init() {
+//        super.init()
+//    }
+//    
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        
+//        member_id = try container.decodeIfPresent(Int.self, forKey: .member_id) ?? 0
+//        level = try container.decodeIfPresent(String.self, forKey: .level) ?? ""
+//    }
+//    
+//    override func filterRow() {
+//        super.filterRow()
+//    }
+//    
+//}
+//
+//class MemberLotteryLogTable: Table {
+//    
+//    var member_lottery_id: Int = 0
+//    var amount: Int = 0
+//    
+//    enum CodingKeys: String, CodingKey {
+//        case member_lottery_id
+//        case amount
+//    }
+//    
+//    override init() {
+//        super.init()
+//    }
+//    
+//    required init(from decoder: Decoder) throws {
+//        try super.init(from: decoder)
+//        let container = try decoder.container(keyedBy: CodingKeys.self)
+//        
+//        member_lottery_id = try container.decodeIfPresent(Int.self, forKey: .member_lottery_id) ?? 0
+//        amount = try container.decodeIfPresent(Int.self, forKey: .amount) ?? 0
+//    }
+//    
+//    override func filterRow() {
+//        super.filterRow()
+//    }
+//    
+//}
 
 //class MemberLevelKindTables: Tables2<MemberLevelKindTable> {
 //
@@ -876,4 +887,32 @@ class MemberLevelKindTable: Table {
     override func filterRow() {
         super.filterRow()
     }
+}
+
+class MemberSubscriptionLogTable: Table {
+    
+    var member_id: Int = 0
+    var amount: Int = 0
+    
+    enum CodingKeys: String, CodingKey {
+        case member_id
+        case amount
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        member_id = try container.decodeIfPresent(Int.self, forKey: .member_id) ?? 0
+        amount = try container.decodeIfPresent(Int.self, forKey: .amount) ?? 0
+    }
+    
+    override func filterRow() {
+        super.filterRow()
+    }
+    
 }

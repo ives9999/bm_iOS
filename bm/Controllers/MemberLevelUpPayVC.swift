@@ -46,7 +46,7 @@ class MemberLevelUpPayVC: BaseViewController {
             Global.instance.removeSpinner(superView: self.view)
             
             self.jsonData = MemberService.instance.jsonData
-            self.jsonData?.prettyPrintedJSONString
+            print(self.jsonData?.prettyPrintedJSONString)
             
             do {
                 if (self.jsonData != nil) {
@@ -69,6 +69,7 @@ class MemberLevelUpPayVC: BaseViewController {
             } catch {
                 self.msg = "解析JSON字串時，得到空值，請洽管理員"
                 self.warning(self.msg)
+                print(error)
             }
             
         }
