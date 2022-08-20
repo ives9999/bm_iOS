@@ -9,7 +9,11 @@
 import Foundation
 import UIKit
 
-class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDelegate, UITableViewDataSource {
+protocol BaseTableViewDelegates: UITableViewDelegate, UITableViewDataSource {
+    func cellForRow(atBaseTableIndexPath: IndexPath)-> UITableViewCell
+}
+
+class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, BaseTableViewDelegates {
     
     let cellId: String = "BaseCellID"
     
@@ -17,6 +21,7 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDel
     var perPage: Int = PERPAGE
     var totalCount: Int = 100000
     var totalPage: Int = 1
+    var msg: String = ""
     
     var items = [U]() {
         didSet {
@@ -29,12 +34,11 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDel
     typealias didSelectClosure = ((U, IndexPath) -> Void)?
     var didSelect: didSelectClosure
     
-    var msg: String = ""
-    
     init(didSelect: didSelectClosure) {
         self.didSelect = didSelect
         super.init(frame: CGRect.zero, style: .plain)
         
+        //register(T.self, forCellReuseIdentifier: T.identifier)
         registerCell()
                 
         delegate = self
@@ -133,22 +137,35 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDel
         return items.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func cellForRow(atBaseTableIndexPath: IndexPath) -> UITableViewCell {
+        //let cell = self.dequeueReusableCell(withIdentifier: T.identifier, for: atBaseTableIndexPath) as? BaseTableViewCell<U>
+        let cell = self.dequeueReusableCell(withIdentifier: cellId, for: atBaseTableIndexPath) as? BaseTableViewCell<U>
         
-        let cell = self.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? BaseTableViewCell<U>
         cell?.backgroundColor = UIColor.clear
-        
-        //cell?.setSelectedBackgroundColor()
-        
-        cell?.no = indexPath.row
-        cell?.item = items[indexPath.row]
-        if cell != nil {
-            if cell!.item!.selected {
-                cell!.setSelectedBackgroundColor()
-            }
-        }
+        cell?.no = atBaseTableIndexPath.row
+        cell?.item = items[atBaseTableIndexPath.row]
         
         return cell ?? UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        return cellForRow(atBaseTableIndexPath: indexPath)
+        
+//        let cell = self.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? BaseTableViewCell<U>
+//        cell?.backgroundColor = UIColor.clear
+//
+//        //cell?.setSelectedBackgroundColor()
+//
+//        cell?.no = indexPath.row
+//        cell?.item = items[indexPath.row]
+//        if cell != nil {
+//            if cell!.item!.selected {
+//                cell!.setSelectedBackgroundColor()
+//            }
+//        }
+//
+//        return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -176,3 +193,21 @@ class BaseTableViewCell<U>: UITableViewCell {
 //        selectedBackgroundView = bgColorView
 //    }
 }
+
+extension UITableViewCell {
+    class var identifier: String {
+        return String(describing: self)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
