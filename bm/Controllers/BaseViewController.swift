@@ -896,12 +896,14 @@ class BaseViewController: UIViewController, List2CellDelegate {
         }
     }
     
-    func showTableView<T: BaseTableViewCell<U>, U: Table>(tableView: MyTable2VC<T, U>, jsonData: Data) {
+    func showTableView<T: BaseTableViewCell<U>, U: Table>(tableView: MyTable2VC<T, U>, jsonData: Data)-> [U] {
         
         let b: Bool = tableView.parseJSON(jsonData: jsonData)
         if !b && tableView.msg.count == 0 {
             view.setInfo(info: tableView.msg, topAnchor: top)
         }
+        
+        return tableView.items
     }
     
     func singleSelected(key: String, selected: String, show: String?=nil) {

@@ -74,6 +74,7 @@ class Table: Codable {
     var tel_show: String = ""
     var mobile_show: String = ""
     var status_show: String = "上線"
+    var selected: Bool = false
     
     init(){}
     

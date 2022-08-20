@@ -97,6 +97,11 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDel
                 if (tables2.success) {
                     if tables2.rows.count > 0 {
                         
+                        for row in rows {
+                            row.filterRow()
+                            setItemSelected(row: row)
+                        }
+                        
                         if (page == 1) {
                             page = tables2.page
                             perPage = tables2.perPage
@@ -120,6 +125,10 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDel
         return rows
     }
     
+    func setItemSelected(row: U) {
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
@@ -129,10 +138,15 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, UITableViewDel
         let cell = self.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? BaseTableViewCell<U>
         cell?.backgroundColor = UIColor.clear
         
-        cell?.setSelectedBackgroundColor()
+        //cell?.setSelectedBackgroundColor()
         
         cell?.no = indexPath.row
         cell?.item = items[indexPath.row]
+        if cell != nil {
+            if cell!.item!.selected {
+                cell!.setSelectedBackgroundColor()
+            }
+        }
         
         return cell ?? UITableViewCell()
     }
@@ -153,8 +167,12 @@ class BaseTableViewCell<U>: UITableViewCell {
     }
     
     func setSelectedBackgroundColor() {
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(CELL_SELECTED)
-        selectedBackgroundView = bgColorView
+        backgroundColor = UIColor(CELL_SELECTED)
     }
+    
+//    func setSelectedBackgroundColor() {
+//        let bgColorView = UIView()
+//        bgColorView.backgroundColor = UIColor(MY_RED)
+//        selectedBackgroundView = bgColorView
+//    }
 }

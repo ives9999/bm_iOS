@@ -15,6 +15,8 @@ class MemberLevelUpVC: BaseViewController {
         return tableView
     }()
     
+    var rows: [MemberLevelKindTable] = [MemberLevelKindTable]()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -41,7 +43,15 @@ class MemberLevelUpVC: BaseViewController {
         MemberService.instance.levelKind(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
+                self.rows = self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
+                for item in self.rows {
+                    let row: MemberLevelKindTable = item as MemberLevelKindTable
+                    if row.eng_name == Member.instance.level {
+                        row.selected = true
+                        break
+                    }
+                }
+                self.tableView.reloadData()
             }
         }
     }
@@ -55,9 +65,9 @@ class MemberLevelUpVC: BaseViewController {
     
     override func setupBottomThreeView() {
         bottomThreeView.delegate = self
-        bottomThreeView.submitButton.setTitle("訂閱")
+        bottomThreeView.submitButton.setTitle("退訂")
         bottomThreeView.cancelButton.setTitle("回上一頁")
-        bottomThreeView.threeButton.setTitle("退訂")
+        bottomThreeView.threeButton.isHidden = true
         bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
     }
 }
