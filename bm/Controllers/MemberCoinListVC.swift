@@ -12,7 +12,7 @@ import UIKit
 class MemberCoinListVC: BaseViewController {
         
     lazy var tableView: MyTable2VC<MemberCoinListCell, MemberCoinTable> = {
-        let tableView = MyTable2VC<MemberCoinListCell, MemberCoinTable>(didSelect: didSelect(item:at:))
+        let tableView = MyTable2VC<MemberCoinListCell, MemberCoinTable>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
         return tableView
     }()
     
@@ -33,8 +33,8 @@ class MemberCoinListVC: BaseViewController {
         
         setupBottomThreeView()
         
-        let cellNibName = UINib(nibName: "MemberCoinListCell", bundle: nil)
-        tableView.register(cellNibName, forCellReuseIdentifier: "MemberCoinListCell")
+//        let cellNibName = UINib(nibName: "MemberCoinListCell", bundle: nil)
+//        tableView.register(cellNibName, forCellReuseIdentifier: "MemberCoinListCell")
         
         panelHeight = 500
         
@@ -57,6 +57,10 @@ class MemberCoinListVC: BaseViewController {
                 self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
             }
         }
+    }
+    
+    func tableViewSetSelected(row: MemberCoinTable)-> Bool {
+        return false
     }
     
     override func setupBottomThreeView() {
@@ -133,6 +137,17 @@ class MemberCoinListVC: BaseViewController {
         let buttonViewHeight: Int = 55
 
         return buttonViewHeight * 2
+    }
+    
+    func didSelect<T: MemberCoinTable>(item: T, at indexPath: IndexPath) {
+        if MEMBER_COIN_IN_TYPE.enumFromString(item.in_type) == MEMBER_COIN_IN_TYPE.buy && item.order_token.count > 0 {
+            toPayment(order_token: item.order_token, source: "member")
+        }
+        
+        //使用點數購買商品，前往查看訂單
+        if !item.in_out && MEMBER_COIN_OUT_TYPE.enumFromString(item.out_type) == MEMBER_COIN_OUT_TYPE.product && item.able_type == "order" {
+            toPayment(order_token: item.able_token, source: "member")
+        }
     }
     
     @objc func panelSubmitAction() {
@@ -215,45 +230,41 @@ extension MemberCoinListVC: UITableViewDataSource {
                     return cell
                 }
             }
-        } else {
-        
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCoinListCell", for: indexPath) as? MemberCoinListCell {
-                
-                let memberCoinTable: MemberCoinTable = memberCoinTables[indexPath.row]
-                memberCoinTable.filterRow()
-                cell.delegate = self
-                cell.update(_row: memberCoinTable, no: indexPath.row + 1)
-                
-                return cell
-            }
         }
+//        else {
+//
+//            if let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCoinListCell", for: indexPath) as? MemberCoinListCell {
+//
+//                let memberCoinTable: MemberCoinTable = memberCoinTables[indexPath.row]
+//                //memberCoinTable.filterRow()
+//                cell.delegate = self
+//                cell.item =
+//                cell.update(_row: memberCoinTable, no: indexPath.row + 1)
+//
+//                return cell
+//            }
+//        }
         
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let row: MemberCoinTable = memberCoinTables[indexPath.row]
-        row.filterRow()
-        
-        //toPayment(order_token: T##String)
-        
-        //購買點數，前往查看訂單
-        if MEMBER_COIN_IN_TYPE.enumFromString(row.in_type) == MEMBER_COIN_IN_TYPE.buy && row.order_token.count > 0 {
-            toPayment(order_token: row.order_token, source: "member")
-        }
-        
-        //使用點數購買商品，前往查看訂單
-        if !row.in_out && MEMBER_COIN_OUT_TYPE.enumFromString(row.out_type) == MEMBER_COIN_OUT_TYPE.product && row.able_type == "order" {
-            toPayment(order_token: row.able_token, source: "member")
-        }
-        
-        
-        
-//        if let cell = tableView.cellForRow(at: indexPath) as? MemberCoinListCell {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 //
+//        let row: MemberCoinTable = memberCoinTables[indexPath.row]
+//        row.filterRow()
+//
+//        //toPayment(order_token: T##String)
+//
+//        //購買點數，前往查看訂單
+//        if MEMBER_COIN_IN_TYPE.enumFromString(row.in_type) == MEMBER_COIN_IN_TYPE.buy && row.order_token.count > 0 {
+//            toPayment(order_token: row.order_token, source: "member")
 //        }
-    }
+//
+//        //使用點數購買商品，前往查看訂單
+//        if !row.in_out && MEMBER_COIN_OUT_TYPE.enumFromString(row.out_type) == MEMBER_COIN_OUT_TYPE.product && row.able_type == "order" {
+//            toPayment(order_token: row.able_token, source: "member")
+//        }
+//    }
 }
 
 extension MemberCoinListVC: UITableViewDelegate {

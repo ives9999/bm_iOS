@@ -896,7 +896,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
         }
     }
     
-    func showTableView<T: BaseTableViewCell<U>, U: Table>(tableView: MyTable2VC<T, U>, jsonData: Data)-> [U] {
+    func showTableView<T: BaseCell<U>, U: Table>(tableView: MyTable2VC<T, U>, jsonData: Data)-> [U] {
         
         let b: Bool = tableView.parseJSON(jsonData: jsonData)
         if !b && tableView.msg.count == 0 {
@@ -950,6 +950,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
     }
     
     func submitBtnPressed() {}
+    
+    //func tableViewSetSelected(row: Table)-> Bool { return false }
     
     func testNetwork()-> Bool {
         

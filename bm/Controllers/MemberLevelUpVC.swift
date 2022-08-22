@@ -11,7 +11,7 @@ import Foundation
 class MemberLevelUpVC: BaseViewController {
     
     lazy var tableView: MyTable2VC<MemberLevelUpCell, MemberLevelKindTable> = {
-        let tableView = MyTable2VC<MemberLevelUpCell, MemberLevelKindTable>(didSelect: didSelect(item:at:))
+        let tableView = MyTable2VC<MemberLevelUpCell, MemberLevelKindTable>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
         return tableView
     }()
     
@@ -24,6 +24,7 @@ class MemberLevelUpVC: BaseViewController {
         top.setTitle(title: "進階會員")
         top.delegate = self
         
+        //tableView.baseViewDelegate = self
         tableView.anchor(parent: view, top: top, bottomThreeView: bottomThreeView)
         
         setupBottomThreeView()
@@ -44,23 +45,16 @@ class MemberLevelUpVC: BaseViewController {
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 self.rows = self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
-                for item in self.rows {
-                    let row: MemberLevelKindTable = item as MemberLevelKindTable
-                    if row.eng_name == Member.instance.level {
-                        row.selected = true
-                        break
-                    }
-                }
-                self.tableView.reloadData()
             }
         }
     }
     
-    override func didSelect<T: Table>(item: T, at indexPath: IndexPath) {
-        //print(item.name + "\(indexPath.row)")
-        if let item1: MemberLevelKindTable = item as? MemberLevelKindTable {
-            toMemberLevelUpPay(name: item1.name, price: item1.price, kind: item1.eng_name)
-        }
+    func tableViewSetSelected(row: MemberLevelKindTable)-> Bool {
+        return row.eng_name == Member.instance.level ? true : false
+    }
+    
+    func didSelect<T: MemberLevelKindTable>(item: T, at indexPath: IndexPath) {
+        toMemberLevelUpPay(name: item.name, price: item.price, kind: item.eng_name)
     }
     
     override func setupBottomThreeView() {
@@ -72,16 +66,16 @@ class MemberLevelUpVC: BaseViewController {
     }
 }
 
-class MemberLevelUpCell: BaseTableViewCell<MemberLevelKindTable> {
+class MemberLevelUpCell: BaseCell<MemberLevelKindTable> {
     
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var priceLbl: SuperLabel!
     
-    override var item: MemberLevelKindTable? {
-        didSet {
-            titleLbl?.text = item?.name
-            priceLbl?.text = "NT$: " + String(item!.price) + " 元/月"
-        }
+    override func configureSubViews() {
+        
+        super.configureSubViews()
+        titleLbl?.text = item?.name
+        priceLbl?.text = "NT$: " + String(item!.price) + " 元/月"
     }
     
     override func awakeFromNib() {

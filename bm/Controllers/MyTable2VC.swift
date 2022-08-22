@@ -13,15 +13,16 @@ protocol BaseTableViewDelegates: UITableViewDelegate, UITableViewDataSource {
     func cellForRow(atBaseTableIndexPath: IndexPath)-> UITableViewCell
 }
 
-class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, BaseTableViewDelegates {
+class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates {
     
-    let cellId: String = "BaseCellID"
+    //let cellId: String = "BaseCellID"
     
     var page: Int = 1
     var perPage: Int = PERPAGE
     var totalCount: Int = 100000
     var totalPage: Int = 1
     var msg: String = ""
+    //var baseViewDelegate: BaseViewController?
     
     var items = [U]() {
         didSet {
@@ -34,12 +35,17 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, BaseTableViewD
     typealias didSelectClosure = ((U, IndexPath) -> Void)?
     var didSelect: didSelectClosure
     
-    init(didSelect: didSelectClosure) {
+    typealias selectedClosure = ((U) -> Bool)?
+    var selected: selectedClosure
+    
+    init(didSelect: didSelectClosure, selected: selectedClosure) {
+        
         self.didSelect = didSelect
+        self.selected = selected
         super.init(frame: CGRect.zero, style: .plain)
         
-        //register(T.self, forCellReuseIdentifier: T.identifier)
-        registerCell()
+        register(T.nibName, forCellReuseIdentifier: T.identifier)
+        //registerCell()
                 
         delegate = self
         dataSource = self
@@ -49,13 +55,13 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, BaseTableViewD
         fatalError("init(coder:) has not been implemented")
     }
     
-    func registerCell() {
+    //func registerCell() {
         
         //register(T.self, forCellReuseIdentifier: cellId)
-        let nibName: String = String(describing: T.self)
-        let cellNibName = UINib(nibName: nibName, bundle: nil)
-        register(cellNibName, forCellReuseIdentifier: cellId)
-    }
+//        let nibName: String = String(describing: T.self)
+//        let cellNibName = UINib(nibName: nibName, bundle: nil)
+        //register(cellNibName, forCellReuseIdentifier: cellId)
+    //}
     
     func anchor(parent: UIView, top: Top, bottomThreeView: BottomThreeView) {
         
@@ -86,6 +92,7 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, BaseTableViewD
                 items = [U]()
             }
             items += _rows
+            reloadData()
         }
         
         return true
@@ -101,9 +108,12 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, BaseTableViewD
                 if (tables2.success) {
                     if tables2.rows.count > 0 {
                         
-                        for row in rows {
+                        for row in tables2.rows {
                             row.filterRow()
-                            setItemSelected(row: row)
+                            
+                            if let b: Bool = selected?(row) {
+                                row.selected = b
+                            }
                         }
                         
                         if (page == 1) {
@@ -129,21 +139,18 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, BaseTableViewD
         return rows
     }
     
-    func setItemSelected(row: U) {
-        
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }
     
     func cellForRow(atBaseTableIndexPath: IndexPath) -> UITableViewCell {
-        //let cell = self.dequeueReusableCell(withIdentifier: T.identifier, for: atBaseTableIndexPath) as? BaseTableViewCell<U>
-        let cell = self.dequeueReusableCell(withIdentifier: cellId, for: atBaseTableIndexPath) as? BaseTableViewCell<U>
+        let cell = self.dequeueReusableCell(withIdentifier: T.identifier, for: atBaseTableIndexPath) as? BaseCell<U>
+        //let cell = self.dequeueReusableCell(withIdentifier: cellId, for: atBaseTableIndexPath) as? BaseCell<U>
         
-        cell?.backgroundColor = UIColor.clear
-        cell?.no = atBaseTableIndexPath.row
-        cell?.item = items[atBaseTableIndexPath.row]
+        let item = items[atBaseTableIndexPath.row]
+        item.no = atBaseTableIndexPath.row
+        
+        cell?.item = item
         
         return cell ?? UITableViewCell()
     }
@@ -151,21 +158,6 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, BaseTableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         return cellForRow(atBaseTableIndexPath: indexPath)
-        
-//        let cell = self.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as? BaseTableViewCell<U>
-//        cell?.backgroundColor = UIColor.clear
-//
-//        //cell?.setSelectedBackgroundColor()
-//
-//        cell?.no = indexPath.row
-//        cell?.item = items[indexPath.row]
-//        if cell != nil {
-//            if cell!.item!.selected {
-//                cell!.setSelectedBackgroundColor()
-//            }
-//        }
-//
-//        return cell ?? UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -174,17 +166,24 @@ class MyTable2VC<T: BaseTableViewCell<U>, U: Table>: UITableView, BaseTableViewD
     }
 }
 
-class BaseTableViewCell<U>: UITableViewCell {
+class BaseCell<U: Table>: UITableViewCell {
     
-    var item: U?
+    var item: U? {
+        didSet {
+            configureSubViews()
+        }
+    }
+
     var no: Int?
+    
+    func configureSubViews() {
+        if (item != nil) {
+            backgroundColor = item!.selected ? UIColor(CELL_SELECTED) : UIColor.clear
+        }
+    }
     
     override class func awakeFromNib() {
         super.awakeFromNib()
-    }
-    
-    func setSelectedBackgroundColor() {
-        backgroundColor = UIColor(CELL_SELECTED)
     }
     
 //    func setSelectedBackgroundColor() {
@@ -197,6 +196,10 @@ class BaseTableViewCell<U>: UITableViewCell {
 extension UITableViewCell {
     class var identifier: String {
         return String(describing: self)
+    }
+    
+    class var nibName: UINib {
+        return UINib(nibName: identifier, bundle: nil)
     }
 }
 
