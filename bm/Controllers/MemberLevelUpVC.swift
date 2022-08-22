@@ -84,28 +84,3 @@ class MemberLevelUpCell: BaseCell<MemberLevelKindTable> {
     
 }
 
-//class LevelKindResultTable: Codable {
-//
-//    var success: Bool = false
-//    var grand_price: Int = 0
-//    var grand_give: Int = 0
-//    var grand_spend: Int = 0
-//    var handle_fee: Int = 0
-//    var transfer_fee: Int = 0
-//    var return_coin: Int = 0
-//    
-//    init() {}
-//    
-//    required init(from decoder: Decoder) throws {
-//        
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//        
-//        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
-//        grand_price = try container.decodeIfPresent(Int.self, forKey: .grand_price) ?? 0
-//        grand_give = try container.decodeIfPresent(Int.self, forKey: .grand_give) ?? 0
-//        grand_spend = try container.decodeIfPresent(Int.self, forKey: .grand_spend) ?? 0
-//        handle_fee = try container.decodeIfPresent(Int.self, forKey: .handle_fee) ?? 0
-//        transfer_fee = try container.decodeIfPresent(Int.self, forKey: .transfer_fee) ?? 0
-//        return_coin = try container.decodeIfPresent(Int.self, forKey: .return_coin) ?? 0
-//    }
-//}
