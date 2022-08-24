@@ -34,15 +34,18 @@ class MemberLevelUpPayVC: BaseViewController {
         
         //let lottery_eng: Int = kind_enum.lottery()
         //let lottery_chineds: String = lottery_eng.numberToChinese()
+        var prize: String = ""
+        let lottery_num: Int = kind_enum.lottery()
+        let lottery_chinese: String = lottery_num.numberToChinese() + "張"
         
-        var prize: String = kind_chinese + "福利\n"
-        prize += kind_chinese + "福利有 " + kind_enum.lottery().numberToChinese() + "張 抽獎券，每月系統會舉行抽獎，抽獎券越多，越容易中獎\n"
+        prize += kind_chinese + "福利\n"
+        prize += kind_chinese + "福利有 " + lottery_chinese +" 抽獎券，每月系統會舉行抽獎，抽獎券越多，越容易中獎\n"
         
         prizeLbl.setLineHeight(lineHeight: 10)
         prizeLbl.text = prize
         
         //prizeLbl.setSpecialTextColor(fullText: prize, changeText: "三張", color: UIColor(MY_RED))
-        prizeLbl.setSpecialTextColorAndBold(fullText: prize, changeText: "三張", color: UIColor(MY_RED), ofSize: 36)
+        prizeLbl.setSpecialTextColorAndBold(fullText: prize, changeText: lottery_chinese, color: UIColor(MY_RED), ofSize: 36)
 
         
         refresh()
