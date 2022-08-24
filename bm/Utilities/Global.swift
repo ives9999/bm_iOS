@@ -1043,16 +1043,29 @@ enum SIGNUP_STATUS: String {
 enum MEMBER_LEVEL: String {
     
     case gold = "金牌"
-    case silver = "銀牌"
+    case sliver = "銀牌"
     case copper = "銅牌"
     case steal = "鐵牌"
+    
+    func lottery() -> Int {
+        switch self {
+        case .gold:
+            return 3
+        case .sliver:
+            return 2
+        case .copper:
+            return 1
+        case .steal:
+            return 0
+        }
+    }
     
     static func stringToEnum(_ enumString: String) -> MEMBER_LEVEL {
         switch enumString {
         case "gold":
             return .gold
-        case "silver":
-            return .silver
+        case "sliver":
+            return .sliver
         case "copper":
             return .copper
         case "steal":
@@ -1731,6 +1744,35 @@ extension Dictionary {
     }
 }
 
+extension Int {
+    func numberToChinese() -> String {
+        switch (self) {
+        case 1:
+            return "一"
+        case 2:
+            return "二"
+        case 3:
+            return "三"
+        case 4:
+            return "四"
+        case 5:
+            return "五"
+        case 6:
+            return "六"
+        case 7:
+            return "七"
+        case 8:
+            return "八"
+        case 9:
+            return "九"
+        case 10:
+            return "十"
+        default:
+            return ""
+        }
+    }
+}
+
 extension String {
     /**
      Truncates the string to the specified length number of characters and appends an optional trailing string if longer.
@@ -2401,6 +2443,76 @@ extension Numeric {
 
 extension UILabel {
     
+    func setLineHeight(lineHeight: CGFloat = 0.0, lineHeightMultiple: CGFloat = 0.0) {
+
+        guard let labelText = self.text else { return }
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = lineHeight
+        paragraphStyle.lineHeightMultiple = lineHeightMultiple
+
+        let attributedString:NSMutableAttributedString
+        if let labelattributedText = self.attributedText {
+            attributedString = NSMutableAttributedString(attributedString: labelattributedText)
+        } else {
+            attributedString = NSMutableAttributedString(string: labelText)
+        }
+
+        // (Swift 4.2 and above) Line spacing attribute
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+
+
+        // (Swift 4.1 and 4.0) Line spacing attribute
+        attributedString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, attributedString.length))
+
+        self.attributedText = attributedString
+    }
+    
+    func setSpecialTextColor (fullText : String , changeText : String, color: UIColor) {
+        
+        let strNumber: NSString = fullText as NSString
+        let range = (strNumber).range(of: changeText)
+        let attributedString = NSMutableAttributedString.init(string: fullText)
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: color
+        ]
+        
+        attributedString.addAttributes(attributes, range: range)
+        
+        self.attributedText = attributedString
+    }
+    
+    func setSpecialTextBold (fullText : String , changeText : String, ofSize: CGFloat) {
+        
+        let strNumber: NSString = fullText as NSString
+        let range = (strNumber).range(of: changeText)
+        let attributedString = NSMutableAttributedString.init(string: fullText)
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.boldSystemFont(ofSize: ofSize)
+        ]
+        
+        attributedString.addAttributes(attributes, range: range)
+        
+        self.attributedText = attributedString
+    }
+    
+    func setSpecialTextColorAndBold (fullText : String , changeText : String, color: UIColor, ofSize: CGFloat) {
+        
+        let strNumber: NSString = fullText as NSString
+        let range = (strNumber).range(of: changeText)
+        let attributedString = NSMutableAttributedString.init(string: fullText)
+        
+        let attributes: [NSAttributedString.Key: Any] = [
+            .foregroundColor: color,
+            .font: UIFont.boldSystemFont(ofSize: ofSize)
+        ]
+        
+        attributedString.addAttributes(attributes, range: range)
+        
+        self.attributedText = attributedString
+    }
 }
 
 extension UIColor {

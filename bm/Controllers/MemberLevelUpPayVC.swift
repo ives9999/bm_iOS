@@ -20,13 +20,30 @@ class MemberLevelUpPayVC: BaseViewController {
         
         super.viewDidLoad()
         
-        top.setTitle(title: name + "會員付款")
         top.delegate = self
         
         //tableView.anchor(parent: view, top: top, bottomThreeView: bottomThreeView)
         
         bottomThreeView.delegate = self
         setupBottomThreeView()
+        
+        let kind_enum: MEMBER_LEVEL = MEMBER_LEVEL.stringToEnum(kind)
+        let kind_chinese: String = kind_enum.rawValue
+        
+        top.setTitle(title: kind_chinese + "會員付款")
+        
+        //let lottery_eng: Int = kind_enum.lottery()
+        //let lottery_chineds: String = lottery_eng.numberToChinese()
+        
+        var prize: String = kind_chinese + "福利\n"
+        prize += kind_chinese + "福利有 " + kind_enum.lottery().numberToChinese() + "張 抽獎券，每月系統會舉行抽獎，抽獎券越多，越容易中獎\n"
+        
+        prizeLbl.setLineHeight(lineHeight: 10)
+        prizeLbl.text = prize
+        
+        //prizeLbl.setSpecialTextColor(fullText: prize, changeText: "三張", color: UIColor(MY_RED))
+        prizeLbl.setSpecialTextColorAndBold(fullText: prize, changeText: "三張", color: UIColor(MY_RED), ofSize: 36)
+
         
         refresh()
     }
@@ -46,7 +63,7 @@ class MemberLevelUpPayVC: BaseViewController {
             Global.instance.removeSpinner(superView: self.view)
             
             self.jsonData = MemberService.instance.jsonData
-            print(self.jsonData?.prettyPrintedJSONString)
+            //print(self.jsonData?.prettyPrintedJSONString)
             
             do {
                 if (self.jsonData != nil) {

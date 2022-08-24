@@ -180,17 +180,19 @@ class BaseCell<U: Table>: UITableViewCell {
         if (item != nil) {
             backgroundColor = item!.selected ? UIColor(CELL_SELECTED) : UIColor.clear
         }
+        
+        setSelectedBackgroundColor()
     }
     
     override class func awakeFromNib() {
         super.awakeFromNib()
     }
     
-//    func setSelectedBackgroundColor() {
-//        let bgColorView = UIView()
-//        bgColorView.backgroundColor = UIColor(MY_RED)
-//        selectedBackgroundView = bgColorView
-//    }
+    func setSelectedBackgroundColor() {
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(CELL_SELECTED1)
+        selectedBackgroundView = bgColorView
+    }
 }
 
 extension UITableViewCell {

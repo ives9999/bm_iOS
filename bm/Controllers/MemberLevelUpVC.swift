@@ -24,7 +24,6 @@ class MemberLevelUpVC: BaseViewController {
         top.setTitle(title: "進階會員")
         top.delegate = self
         
-        //tableView.baseViewDelegate = self
         tableView.anchor(parent: view, top: top, bottomThreeView: bottomThreeView)
         
         setupBottomThreeView()
