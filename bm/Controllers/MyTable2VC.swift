@@ -63,7 +63,7 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
         //register(cellNibName, forCellReuseIdentifier: cellId)
     //}
     
-    func anchor(parent: UIView, top: Top, bottomThreeView: BottomThreeView) {
+    func anchor(parent: UIView, top: Top, bottomThreeView: BottomThreeView?) {
         
         parent.addSubview(self)
         
@@ -71,7 +71,14 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
         leadingAnchor.constraint(equalTo: self.superview!.leadingAnchor).isActive = true
         trailingAnchor.constraint(equalTo: self.superview!.trailingAnchor).isActive = true
         topAnchor.constraint(equalTo: top.bottomAnchor).isActive = true
-        bottomAnchor.constraint(equalTo: bottomThreeView.topAnchor).isActive = true
+        
+        let equalTo: NSLayoutAnchor = (bottomThreeView != nil) ? bottomThreeView!.topAnchor : parent.bottomAnchor
+        bottomAnchor.constraint(equalTo: equalTo).isActive = true
+//        if (bottomThreeView != nil) {
+//            bottomAnchor.constraint(equalTo: bottomThreeView!.topAnchor).isActive = true
+//        } else {
+//            bottomAnchor.constraint(equalTo: parent.bottomAnchor).isActive = true
+//        }
         
         backgroundColor = UIColor(MY_BLACK)
         
@@ -148,7 +155,7 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
         //let cell = self.dequeueReusableCell(withIdentifier: cellId, for: atBaseTableIndexPath) as? BaseCell<U>
         
         let item = items[atBaseTableIndexPath.row]
-        item.no = atBaseTableIndexPath.row
+        item.no = atBaseTableIndexPath.row + 1
         
         cell?.item = item
         

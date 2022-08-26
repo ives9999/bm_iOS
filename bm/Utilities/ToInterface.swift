@@ -294,32 +294,47 @@ extension BaseViewController {
         }
     }
     
-    func toMemberLevelUp() {
+    func toMemberSubscriptionKind() {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_LEVELUP) as? MemberLevelUpVC {
+            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_SUPSCRIPTION_KIND) as? MemberSubscriptionKindVC {
                 viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_LEVELUP) as! MemberLevelUpVC
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_SUPSCRIPTION_KIND) as! MemberSubscriptionKindVC
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
     
-    func toMemberLevelUpPay(name: String, price: Int, kind: String) {
+    func toMemberSubscriptionLog() {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_LEVELUPPAY) as? MemberLevelUpPayVC {
+            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_SUBSCRIPTION_LOG) as? MemberSubscriptionLogVC {
+                viewController.modalPresentationStyle = .fullScreen
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_SUBSCRIPTION_LOG) as! MemberSubscriptionLogVC
+            viewController.modalPresentationStyle = .fullScreen
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toMemberScriptionPay(name: String, price: Int, kind: String) {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_SUBSCRIPTION_PAY) as? MemberSubscriptionPayVC {
                 viewController.modalPresentationStyle = .fullScreen
                 viewController.name = name
                 viewController.kind = kind
                 show(viewController, sender: nil)
             }
         } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_LEVELUPPAY) as! MemberLevelUpPayVC
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_SUBSCRIPTION_PAY) as! MemberSubscriptionPayVC
             viewController.modalPresentationStyle = .fullScreen
             viewController.name = name
+            viewController.kind = kind
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

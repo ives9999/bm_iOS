@@ -137,8 +137,8 @@ class MemberVC: MyTableVC {
         var r: MemberRow = MemberRow(title: "解碼點數", icon: "coin", segue: TO_MEMBER_COIN_LIST)
         r.show = Member.instance.coin.formattedWithSeparator + " 點"
         rows.append(r)
-        r = MemberRow(title: "進階會員", icon: "member_level_up", segue: TO_MEMBER_LEVELUP)
-        let levelEnum: MEMBER_LEVEL = MEMBER_LEVEL.stringToEnum(Member.instance.level)
+        r = MemberRow(title: "訂閱會員", icon: "member_level_up", segue: TO_MEMBER_SUPSCRIPTION_KIND)
+        let levelEnum: MEMBER_SUBSCRIPTION_KIND = MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription)
         r.show = levelEnum.rawValue
         rows.append(r)
         r = MemberRow(title: "帳戶資料", icon: "member", segue: TO_PROFILE)
@@ -632,8 +632,8 @@ extension MemberVC {
             delete()
         } else if segue == TO_MEMBER_COIN_LIST {
             toMemberCoinList()
-        } else if segue == TO_MEMBER_LEVELUP {
-            toMemberLevelUp()
+        } else if segue == TO_MEMBER_SUPSCRIPTION_KIND {
+            toMemberSubscriptionKind()
         }
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MemberLevelUpPayVC: BaseViewController {
+class MemberSubscriptionPayVC: BaseViewController {
     
     @IBOutlet weak var prizeLbl: SuperLabel!
     
@@ -27,7 +27,7 @@ class MemberLevelUpPayVC: BaseViewController {
         bottomThreeView.delegate = self
         setupBottomThreeView()
         
-        let kind_enum: MEMBER_LEVEL = MEMBER_LEVEL.stringToEnum(kind)
+        let kind_enum: MEMBER_SUBSCRIPTION_KIND = MEMBER_SUBSCRIPTION_KIND.stringToEnum(kind)
         let kind_chinese: String = kind_enum.rawValue
         
         top.setTitle(title: kind_chinese + "會員付款")
@@ -39,7 +39,7 @@ class MemberLevelUpPayVC: BaseViewController {
         let lottery_chinese: String = lottery_num.numberToChinese() + "張"
         
         prize += kind_chinese + "福利\n"
-        prize += kind_chinese + "福利有 " + lottery_chinese +" 抽獎券，每月系統會舉行抽獎，抽獎券越多，越容易中獎\n"
+        prize += kind_chinese + "福利有 " + lottery_chinese + " 抽獎券，每月系統會舉行抽獎，抽獎券越多，越容易中獎\n"
         
         prizeLbl.setLineHeight(lineHeight: 10)
         prizeLbl.text = prize
@@ -60,6 +60,12 @@ class MemberLevelUpPayVC: BaseViewController {
     }
     
     override func submitBtnPressed() {
+        
+        if (Member.instance.subscription.count > 0) {
+            warning("您已經有訂閱了，請先退訂，再重新訂閱")
+            return
+        }
+        
         Global.instance.addSpinner(superView: self.view)
         
         MemberService.instance.subscription(kind: kind) { Success in

@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MemberLevelUpCell" customModule="bm" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MemberSubscriptionKindCell" customModule="bm" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -34,7 +34,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="a8s-Tx-00E" secondAttribute="bottom" constant="16" id="fNM-Vo-lXc"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BDI-PM-c2w" secondAttribute="trailing" constant="32" id="k0L-pT-kXH"/>
                 <constraint firstItem="a8s-Tx-00E" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="top" constant="16" id="qi4-Fn-SFT"/>
-                <constraint firstItem="a8s-Tx-00E" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="32" id="vJv-ln-0qd"/>
+                <constraint firstItem="a8s-Tx-00E" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="32" id="u31-eJ-Uc5"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

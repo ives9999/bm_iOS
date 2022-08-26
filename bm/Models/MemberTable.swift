@@ -20,7 +20,7 @@ class MemberTable: Table {
 //        set { UserDefaults.standard.set(NICKNAME_KEY, newValue) }
 //    }
     var coin: Int = 0
-    var level: String = ""
+    var subscription: String = ""
     var dob: String = ""
     var sex: String = ""
     var email: String = ""
@@ -53,7 +53,7 @@ class MemberTable: Table {
 
         case nickname
         case coin
-        case level
+        case subscription
         case dob
         case sex
         case email
@@ -88,7 +88,7 @@ class MemberTable: Table {
 //        }
         
         nickname = try container.decodeIfPresent(String.self, forKey: .nickname) ?? ""
-        level = try container.decodeIfPresent(String.self, forKey: .level) ?? ""
+        subscription = try container.decodeIfPresent(String.self, forKey: .subscription) ?? ""
         coin = try container.decodeIfPresent(Int.self, forKey: .coin) ?? 0
         dob = try container.decodeIfPresent(String.self, forKey: .dob) ?? ""
         sex = try container.decodeIfPresent(String.self, forKey: .sex) ?? ""
@@ -261,12 +261,12 @@ class Member {
             session.set(COIN_KEY, newValue)
         }
     }
-    var level: String {
+    var subscription: String {
         get {
-            return session.getString(LEVEL_KEY)
+            return session.getString(SUBSCRIPTION_KEY)
         }
         set {
-            session.set(LEVEL_KEY, newValue)
+            session.set(SUBSCRIPTION_KEY, newValue)
         }
     }
     var dob: String {
@@ -850,7 +850,7 @@ class MemberBankTable: Table {
 //
 //}
 
-class MemberLevelKindTable: Table {
+class MemberSubscriptionKindTable: Table {
     
     var eng_name: String = ""
     var price: Int = 0

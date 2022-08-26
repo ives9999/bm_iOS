@@ -8,20 +8,20 @@
 
 import Foundation
 
-class MemberLevelUpVC: BaseViewController {
+class MemberSubscriptionKindVC: BaseViewController {
     
-    lazy var tableView: MyTable2VC<MemberLevelUpCell, MemberLevelKindTable> = {
-        let tableView = MyTable2VC<MemberLevelUpCell, MemberLevelKindTable>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
+    lazy var tableView: MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable> = {
+        let tableView = MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
         return tableView
     }()
     
-    var rows: [MemberLevelKindTable] = [MemberLevelKindTable]()
+    var rows: [MemberSubscriptionKindTable] = [MemberSubscriptionKindTable]()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        top.setTitle(title: "進階會員")
+        top.setTitle(title: "訂閱會員")
         top.delegate = self
         
         tableView.anchor(parent: view, top: top, bottomThreeView: bottomThreeView)
@@ -40,7 +40,7 @@ class MemberLevelUpVC: BaseViewController {
     func getDataFromServer() {
         Global.instance.addSpinner(superView: self.view)
         
-        MemberService.instance.levelKind(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
+        MemberService.instance.subscriptionKind(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 self.rows = self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
@@ -48,24 +48,28 @@ class MemberLevelUpVC: BaseViewController {
         }
     }
     
-    func tableViewSetSelected(row: MemberLevelKindTable)-> Bool {
-        return row.eng_name == Member.instance.level ? true : false
+    func tableViewSetSelected(row: MemberSubscriptionKindTable)-> Bool {
+        return row.eng_name == Member.instance.subscription ? true : false
     }
     
-    func didSelect<T: MemberLevelKindTable>(item: T, at indexPath: IndexPath) {
-        toMemberLevelUpPay(name: item.name, price: item.price, kind: item.eng_name)
+    func didSelect<T: MemberSubscriptionKindTable>(item: T, at indexPath: IndexPath) {
+        toMemberScriptionPay(name: item.name, price: item.price, kind: item.eng_name)
     }
     
     override func setupBottomThreeView() {
         bottomThreeView.delegate = self
-        bottomThreeView.submitButton.setTitle("退訂")
+        bottomThreeView.submitButton.setTitle("查詢")
         bottomThreeView.cancelButton.setTitle("回上一頁")
-        bottomThreeView.threeButton.isHidden = true
+        bottomThreeView.threeButton.setTitle("退訂")
         bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
+    }
+    
+    override func submitBtnPressed() {
+        toMemberSubscriptionLog()
     }
 }
 
-class MemberLevelUpCell: BaseCell<MemberLevelKindTable> {
+class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable> {
     
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var priceLbl: SuperLabel!

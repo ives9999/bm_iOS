@@ -1040,10 +1040,10 @@ enum SIGNUP_STATUS: String {
     }
 }
 
-enum MEMBER_LEVEL: String {
+enum MEMBER_SUBSCRIPTION_KIND: String {
     
     case gold = "金牌"
-    case sliver = "銀牌"
+    case silver = "銀牌"
     case copper = "銅牌"
     case steal = "鐵牌"
     
@@ -1051,7 +1051,7 @@ enum MEMBER_LEVEL: String {
         switch self {
         case .gold:
             return 3
-        case .sliver:
+        case .silver:
             return 2
         case .copper:
             return 1
@@ -1060,12 +1060,12 @@ enum MEMBER_LEVEL: String {
         }
     }
     
-    static func stringToEnum(_ enumString: String) -> MEMBER_LEVEL {
+    static func stringToEnum(_ enumString: String) -> MEMBER_SUBSCRIPTION_KIND {
         switch enumString {
         case "gold":
             return .gold
-        case "sliver":
-            return .sliver
+        case "silver":
+            return .silver
         case "copper":
             return .copper
         case "steal":
@@ -1076,7 +1076,7 @@ enum MEMBER_LEVEL: String {
     }
     
     static func getRawValueFromString(_ string: String)-> String {
-        let res: MEMBER_LEVEL = stringToEnum(string)
+        let res: MEMBER_SUBSCRIPTION_KIND = stringToEnum(string)
         return res.rawValue
     }
 }

@@ -724,15 +724,28 @@ class MemberService: DataService {
         _simpleService(url: url, params: params, completion: completion)
     }
     
-    func levelKind(member_token: String? = nil, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+    func subscriptionKind(member_token: String? = nil, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
         
         let _member_token: String = (member_token == nil) ? Member.instance.token : member_token!
         
-        let url: String = URL_MEMBER_LEVEL_KIND
+        let url: String = URL_MEMBER_SUBSCRIPTION_KIND
         let params: [String: String] = ["device": "app","member_token":_member_token]
         
         //print(url)
         //print(params)
+        
+        _simpleService(url: url, params: params, completion: completion)
+    }
+    
+    func subscriptionLog(member_token: String? = nil, page: Int, perPage: Int, completion: @escaping CompletionHandler) {
+        
+        let _member_token: String = (member_token == nil) ? Member.instance.token : member_token!
+        
+        let url: String = URL_MEMBER_SUBSCRIPTION_LOG
+        let params: [String: String] = ["device": "app","member_token":_member_token]
+        
+        print(url)
+        print(params)
         
         _simpleService(url: url, params: params, completion: completion)
     }
