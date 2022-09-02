@@ -269,23 +269,23 @@ class OrderTable: Table {
         
         order_tel_show = order_tel.mobileShow()
         
-        if all_process == 6 {
-            var return_expire_date: Date = Date()
-            if complete_at.count > 0 {
-                let tmp: String = complete_at.noTime() + " 00:00:00"
-                if let c: Date = tmp.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
-                    if let a: Date = Calendar.current.date(byAdding: .day, value: 10, to: c) {
-                        return_expire_date = a
-                    }
-                }
-            }
-            
-            if Date().isSmallerThan(return_expire_date) {
-                canReturn = true
-            }
-        } else {
-            canReturn = false
-        }
+//        if all_process == 6 {
+//            var return_expire_date: Date = Date()
+//            if complete_at.count > 0 {
+//                let tmp: String = complete_at.noTime() + " 00:00:00"
+//                if let c: Date = tmp.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
+//                    if let a: Date = Calendar.current.date(byAdding: .day, value: 10, to: c) {
+//                        return_expire_date = a
+//                    }
+//                }
+//            }
+//
+//            if Date().isSmallerThan(return_expire_date) {
+//                canReturn = true
+//            }
+//        } else {
+//            canReturn = false
+//        }
         
     }
     
