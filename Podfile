@@ -14,7 +14,7 @@ target 'bm' do
   pod 'UIColor_Hex_Swift'
   pod 'SwipeCellKit'
   #pod 'ReachabilitySwift'
-  pod 'OneSignal', '>= 3.0.0', '< 4.0'
+  pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
   
   pod 'ECPayPaymentGatewayKit', '~> 1.0.4'
   pod 'PromiseKit' , '~> 6.8.3'
@@ -34,7 +34,7 @@ end
 
 target 'bmNotificationServiceExtension' do
   use_frameworks!
-  pod 'OneSignal', '>=3.0.0', '<4.0'
+  pod 'OneSignalXCFramework', '>=3.0.0', '<4.0'
 end
 
 static_frameworks = ['ECPayPaymentGatewayKit']

@@ -38,7 +38,16 @@ PODS:
   - JXPageControl/Transform (0.1.5):
     - JXPageControl/Common
   - KeychainSwift (16.0.1)
-  - OneSignal (3.10.0)
+  - OneSignalXCFramework (3.11.2):
+    - OneSignalXCFramework/OneSignalCore (= 3.11.2)
+    - OneSignalXCFramework/OneSignalExtension (= 3.11.2)
+    - OneSignalXCFramework/OneSignalOutcomes (= 3.11.2)
+  - OneSignalXCFramework/OneSignalCore (3.11.2)
+  - OneSignalXCFramework/OneSignalExtension (3.11.2):
+    - OneSignalXCFramework/OneSignalCore
+    - OneSignalXCFramework/OneSignalOutcomes
+  - OneSignalXCFramework/OneSignalOutcomes (3.11.2):
+    - OneSignalXCFramework/OneSignalCore
   - PromiseKit (6.8.5):
     - PromiseKit/CorePromise (= 6.8.5)
     - PromiseKit/Foundation (= 6.8.5)
@@ -69,7 +78,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - JXBanner
   - KeychainSwift (~> 16.0)
-  - OneSignal (< 4.0, >= 3.0.0)
+  - OneSignalXCFramework (< 4.0, >= 3.0.0)
   - PromiseKit (~> 6.8.3)
   - SCLAlertView
   - SnapKit (~> 5.0.0)
@@ -92,7 +101,7 @@ SPEC REPOS:
     - JXBanner
     - JXPageControl
     - KeychainSwift
-    - OneSignal
+    - OneSignalXCFramework
     - PromiseKit
     - SCLAlertView
     - SnapKit
@@ -123,7 +132,7 @@ SPEC CHECKSUMS:
   JXBanner: 348dbef856e786494cbf30fb45d6b84826f2d3c5
   JXPageControl: e9487b39e2e58fc17790833214f3b8e935bef98b
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
-  OneSignal: 198da4de73fb7bd6e45bc04221a7f16efca057ad
+  OneSignalXCFramework: 81ceac017a290f23793443323090cfbe888f74ea
   PromiseKit: 9616b0afef31eae56ab9ce044c8ec2b8612a15cd
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
@@ -136,6 +145,6 @@ SPEC CHECKSUMS:
   UIColor_Hex_Swift: 31cd3e47440f07a20d2503a36bb0437a445b3c29
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: a758f5ae3ff7ac95f4e5e38fd7e4aa7a5e9ee094
+PODFILE CHECKSUM: 71f34fde178b71de72468da8e2b957e297c7d7be
 
 COCOAPODS: 1.11.2

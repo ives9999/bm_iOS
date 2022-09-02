@@ -2031,18 +2031,18 @@
                                                 <rect key="frame" x="16" y="165" width="382" height="280"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者金鑰：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXd-Pz-BLr" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="11" width="104" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="17" width="104" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DzE-80-1OQ" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="112" y="4" width="229" height="34"/>
+                                                        <rect key="frame" x="112" y="4" width="229" height="46"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McF-pq-NPP">
-                                                        <rect key="frame" x="357" y="8.5" width="25" height="25"/>
+                                                        <rect key="frame" x="357" y="14.5" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="8h7-OA-G7u"/>
                                                             <constraint firstAttribute="width" constant="25" id="qB1-0m-gxQ"/>
@@ -2054,7 +2054,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwT-9w-87p" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="141" y="108" width="100" height="31"/>
+                                                        <rect key="frame" x="141" y="120" width="100" height="31"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="4ia-V2-4M8"/>
                                                         </constraints>
@@ -2065,7 +2065,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9C-oz-mUD" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="42" width="163.5" height="39"/>
+                                                        <rect key="frame" x="8" y="54" width="163.5" height="39"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="question" imagePlacement="leading" title="如何取得會員金鑰" titleAlignment="center">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
@@ -2075,7 +2075,7 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="LAv-At-hEc">
-                                                        <rect key="frame" x="0.0" y="159" width="259" height="95.5"/>
+                                                        <rect key="frame" x="0.0" y="171" width="259" height="95.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="59F-c0-JFz" userLabel="暱稱">
                                                                 <rect key="frame" x="0.0" y="0.0" width="179" height="20.5"/>
@@ -2484,34 +2484,34 @@
     </scenes>
     <designables>
         <designable name="6CI-ik-ktJ">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="AVv-ec-reU">
-            <size key="intrinsicContentSize" width="62.5" height="34"/>
+            <size key="intrinsicContentSize" width="81.5" height="46"/>
         </designable>
         <designable name="DzE-80-1OQ">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="GrJ-VX-T9A">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="P8h-6D-5zS">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="WWA-5M-l1g">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="fDf-E9-mCZ">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="jrM-AS-IS7">
-            <size key="intrinsicContentSize" width="62.5" height="34"/>
+            <size key="intrinsicContentSize" width="81.5" height="46"/>
         </designable>
         <designable name="tq5-kh-j4r">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
         <designable name="vic-zn-4Mh">
-            <size key="intrinsicContentSize" width="32" height="34"/>
+            <size key="intrinsicContentSize" width="36" height="46"/>
         </designable>
     </designables>
     <resources>
