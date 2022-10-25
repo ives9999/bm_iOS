@@ -869,6 +869,7 @@ extension BaseViewController {
         if #available(iOS 13.0, *) {
             
             let v: ShowCourseVC = ShowCourseVC()
+            v.token = token
             v.modalPresentationStyle = .fullScreen
             show(v, sender: nil)
             
