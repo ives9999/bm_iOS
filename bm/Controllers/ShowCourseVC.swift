@@ -43,6 +43,47 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
     let contentView: UIView = UIView()
     let featured: UIImageView = UIImageView()
     let courseTableView: UITableView = UITableView()
+    //let courseTableView: UITableView = UITableView()
+    
+    var featured_h: CGFloat = 0
+    
+    private let scrollStackViewContainer: UIStackView = {
+        let view = UIStackView()
+        view.backgroundColor = UIColor.red
+        view.axis = .vertical
+        view.spacing = 0
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    var signupDataLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.text = "報名資料"
+        
+        return view
+    }()
+    
+//    private let subView1: UIView = {
+//        let view = UIView()
+//        view.heightAnchor.constraint(equalToConstant: 200).isActive = true
+//        view.backgroundColor = UIColor.blue
+//        return view
+//    }()
+//
+//    private let subview2: UIView = {
+//        let view = UIView()
+//        view.heightAnchor.constraint(equalToConstant: 300).isActive = true
+//        view.backgroundColor = UIColor.cyan
+//        return view
+//    }()
+//
+//    private let subview3: UIView = {
+//        let view = UIView()
+//        view.heightAnchor.constraint(equalToConstant: 400).isActive = true
+//        view.backgroundColor = UIColor.gray
+//        return view
+//    }()
     
     var coachRows: [MemberRow] = [MemberRow]()
     
@@ -66,65 +107,97 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         
         showTop.setAnchor(parent: self.view)
         
-        self.view.addSubview(scrollView)
+        //self.view.addSubview(scrollView)
         scrollView.backgroundColor = UIColor.brown
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
         //scrollerView.setAnchor(parent: self.view)
-        scrollView.snp.makeConstraints { make in
-            make.top.equalTo(showTop.snp.bottom)
-            make.right.left.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.width.equalToSuperview()
-        }
+//        scrollView.snp.makeConstraints { make in
+//            make.top.equalTo(showTop.snp.bottom)
+//            make.right.left.equalToSuperview()
+//            make.bottom.equalToSuperview()
+//            make.width.equalToSuperview()
+//        }
+        
+        setupScrollView()
         
         
-        contentView.backgroundColor = UIColor.red
-        scrollView.addSubview(contentView)
-        contentView.snp.makeConstraints { make in
-            make.edges.width.equalToSuperview()
-        }
+        //contentView.backgroundColor = UIColor.red
+        //scrollView.addSubview(contentView)
+        
+//        contentView.translatesAutoresizingMaskIntoConstraints = false
+//        contentView.leadingAnchor.constraint(equalTo: contentView.superview!.leftAnchor, constant: 0).isActive = true
+//        contentView.trailingAnchor.constraint(equalTo: contentView.superview!.trailingAnchor, constant: 0).isActive = true
+//        contentView.topAnchor.constraint(equalTo: contentView.superview!.topAnchor, constant: 0).isActive = true
+//        contentView.bottomAnchor.constraint(equalTo: contentView.superview!.bottomAnchor, constant: 0).isActive = true
+        //contentView.heightConstraint?.constant = 100
+        
+        
+        
+//        contentView.snp.makeConstraints { make in
+//            make.top.equalToSuperview()
+//            make.leading.trailing.equalToSuperview()
+//            //make.left.right.equalToSuperview()
+//            //make.edges.width.equalToSuperview()
+//            make.height.equalTo(100)
+//        }
         
         //scrollerView.setAnchor(parent: self.view)
         
         //scrollerView.contentView.addSubview(featured)
         
-        contentView.addSubview(featured)
+        //scrollStackViewContainer.addSubview(featured)
+        scrollStackViewContainer.addArrangedSubview(featured)
         featured.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(500)
+            //make.top.left.right.equalToSuperview()
+            make.height.equalTo(200)
         }
         featured.backgroundColor = UIColor.brown
-        
-        contentView.addSubview(courseTableView)
+//
+//        contentView.addSubview(courseTableView)
+        scrollStackViewContainer.addArrangedSubview(courseTableView)
         courseTableView.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.top.equalTo(featured.snp.bottom)
             make.height.equalTo(100)
         }
-        
+
         courseTableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
+
         courseTableView.delegate = self
         courseTableView.dataSource = self
-        
+        courseTableView.isScrollEnabled = false
+
         courseTableView.rowHeight = UITableView.automaticDimension
         courseTableView.estimatedRowHeight = UITableView.automaticDimension
-        //courseTableViewHeight.constant = 2000
-        
+
         let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
         courseTableView.register(cellNib, forCellReuseIdentifier: "cell")
+
+        
+        
+        scrollStackViewContainer.addArrangedSubview(signupDataLbl)
+        
+        signupDataLbl.snp.makeConstraints { make in
+            make.edges.equalTo(courseTableView.snp.bottom).inset(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+            //make.bottom.equalToSuperview().offset(12)
+        }
+        
         
         refresh(CourseTable.self)
         
-        
-        
 //        let v: UIView = UIView()
-//        contentView.addSubview(v)
+//        scrollStackViewContainer.addArrangedSubview(v)
 //        v.backgroundColor = UIColor.blue
 //        v.snp.makeConstraints { make in
-//            make.width.equalTo(50)
-//            make.height.equalTo(50)
-//            make.top.equalTo(featured.snp.bottom)
-//            make.left.equalTo(contentView)
+//            make.height.equalTo(500)
+//        }
+        
+//        let v1: UIView = UIView()
+//        contentView.addSubview(v1)
+//        v1.backgroundColor = UIColor.red
+//        v1.snp.makeConstraints { make in
+//            //make.width.equalToSuperview()
+//            make.height.equalTo(500)
+//            make.top.equalTo(v.snp.bottom).offset(20)
+//            make.left.right.equalToSuperview().inset(20)
 //        }
         
         
@@ -136,15 +209,48 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
         //let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
         //signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
         //coachTableView.register(cellNib, forCellReuseIdentifier: "cell")
-        
-        //refresh(CourseTable.self)
-        //refresh()
     }
+    
+    private func setupScrollView() {
+        //let margins = view.layoutMarginsGuide
+        view.addSubview(scrollView)
+        scrollView.addSubview(scrollStackViewContainer)
+        
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(showTop.snp.bottom)
+            make.bottom.equalToSuperview().inset(self.view.layoutMargins)
+            make.leading.trailing.equalToSuperview()
+        }
+
+//        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+//        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        scrollView.topAnchor.constraint(equalTo: margins.topAnchor).isActive = true
+//        scrollView.bottomAnchor.constraint(equalTo: margins.bottomAnchor).isActive = true
+        
+        scrollStackViewContainer.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+
+//        scrollStackViewContainer.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+//        scrollStackViewContainer.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+//        scrollStackViewContainer.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+//        scrollStackViewContainer.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+//        scrollStackViewContainer.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        //configureContainerView()
+    }
+    
+//    private func configureContainerView() {
+//        scrollStackViewContainer.addArrangedSubview(subView1)
+//        scrollStackViewContainer.addArrangedSubview(subview2)
+//        scrollStackViewContainer.addArrangedSubview(subview3)
+//    }
+
     
     override func viewWillLayoutSubviews() {
         let a = courseTableView.contentSize.height
         courseTableView.heightConstraint?.constant = a
-        contentView.heightConstraint?.constant = 500 + a
+        //contentView.heightConstraint?.constant = 500 + a
     }
     
     func refresh<T: Table>(_ t: T.Type) {
@@ -164,7 +270,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                                 self.warning("token錯誤，所以無法解析")
                             } else {
                                 self.table!.filterRow()
-                                //self.setFeatured()
+                                self.setFeatured()
                                 self.initData()
                                 //self.setData()
                                 //self.setContent()
@@ -224,6 +330,25 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
 //        coachRows.append(coachRow)
     }
     
+    func setFeatured() {
+
+        if (table != nil && table!.featured_path.count > 0) {
+            
+            featured.downloaded(from: table!.featured_path)
+            
+            featured_h = featured.heightForUrl(url: table!.featured_path, width: screen_width)
+            //featuredConstraintHeight.constant = featured_h
+            
+            //scrollContainerHeight += featuredConstraintHeight.constant
+            //containerViewConstraintHeight.constant = scrollContainerHeight
+            //print("featured:\(scrollContainerHeight)")
+            
+            //dataContainerConstraintTop.constant = featured_h - 30
+        } else {
+            warning("沒有取得內容資料值，請稍後再試或洽管理員")
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return memberRows.count
@@ -254,5 +379,9 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
 //
 //        return UITableView.automaticDimension
 //    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath.row)
+    }
 }
 
