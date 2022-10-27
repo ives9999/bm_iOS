@@ -245,7 +245,7 @@ class DataService {
         if (token != nil) {
             url = url + "/" + token!
         }
-        print(url)
+        //print(url)
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")

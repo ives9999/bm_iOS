@@ -359,6 +359,8 @@
 		F9FAB2B82721643000D83CC4 /* OneRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAB2B72721643000D83CC4 /* OneRow.swift */; };
 		F9FFD836290665F500AD8E52 /* ShowTop2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD835290665F500AD8E52 /* ShowTop2.swift */; };
 		F9FFD83829067E3000AD8E52 /* BaseScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */; };
+		F9FFD8AD2909406200AD8E52 /* ShowSignupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD8AC2909406200AD8E52 /* ShowSignupCell.swift */; };
+		F9FFD8AF290981EA00AD8E52 /* ShowBottom2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -787,6 +789,8 @@
 		F9FAB2B72721643000D83CC4 /* OneRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRow.swift; sourceTree = "<group>"; };
 		F9FFD835290665F500AD8E52 /* ShowTop2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTop2.swift; sourceTree = "<group>"; };
 		F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollerView.swift; sourceTree = "<group>"; };
+		F9FFD8AC2909406200AD8E52 /* ShowSignupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSignupCell.swift; sourceTree = "<group>"; };
+		F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBottom2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -954,6 +958,7 @@
 				B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
 				F9763E1728B6851A006ED47C /* MemberSubscriptionLogCell.xib */,
+				F9FFD8AC2909406200AD8E52 /* ShowSignupCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1050,6 +1055,7 @@
 				F9F583AF283518DF00F77B00 /* BottomThreeView.xib */,
 				F9FFD835290665F500AD8E52 /* ShowTop2.swift */,
 				F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */,
+				F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1931,6 +1937,7 @@
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
 				B3B7588B25A802A7006ACC33 /* OrderForm.swift in Sources */,
 				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
+				F9FFD8AD2909406200AD8E52 /* ShowSignupCell.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
 				F99DF39D286B393300A7C2C6 /* MemberBankVC.swift in Sources */,
 				B370EFBF26AD3F2B0022E599 /* MemberCartListVC.swift in Sources */,
@@ -1949,6 +1956,7 @@
 				B3F6B45B260500AC0000F9E0 /* SignupStandbyTab.swift in Sources */,
 				B306FE9C21F0DA8000403FE2 /* DateSelectVC.swift in Sources */,
 				B358B0B622A0FB5200F1A4E6 /* SingleSelectVC.swift in Sources */,
+				F9FFD8AF290981EA00AD8E52 /* ShowBottom2.swift in Sources */,
 				B36D66BB229A580E00502D62 /* CourseService.swift in Sources */,
 				B370EFAD26A836470022E599 /* CartTable.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,

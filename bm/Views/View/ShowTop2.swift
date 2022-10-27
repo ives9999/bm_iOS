@@ -10,6 +10,29 @@ import Foundation
 
 class ShowTop2: UIView {
     
+    var delegate: BaseViewController? = nil
+    
+    let titleLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextTitle()
+        view.setTextColor(UIColor(MY_BLACK))
+        
+        return view
+    }()
+    
+    let prevBtn: UIButton = {
+        let view = UIButton()
+        view.setImage(UIImage(named: "prev_black"), for: .normal)
+        
+        return view
+    }()
+    
+    init(delegate: BaseViewController?) {
+        super.init(frame: CGRect.zero)
+        self.delegate = delegate
+        setupView()
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -22,6 +45,10 @@ class ShowTop2: UIView {
     
     private func setupView() {
         backgroundColor = UIColor(MY_GREEN)
+        self.addSubview(titleLbl)
+        self.addSubview(prevBtn)
+        
+        prevBtn.addTarget(self, action: #selector(prev), for: .touchUpInside)
     }
     
     func setAnchor(parent: UIView) {
@@ -36,6 +63,23 @@ class ShowTop2: UIView {
             make.left.right.equalToSuperview()
             make.height.equalTo(64)
         }
+        
+        self.titleLbl.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        self.prevBtn.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(12)
+        }
     }
     
+    func setTitle(title: String) {
+        titleLbl.text = title
+    }
+    
+    @objc func prev() {
+        self.delegate?.prev()
+    }
 }

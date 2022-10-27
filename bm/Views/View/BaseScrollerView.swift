@@ -7,15 +7,36 @@
 //
 
 import Foundation
+import SnapKit
 
 class BaseScrollView: UIScrollView {
     
-    let contentView: UIView = {
-        
-        let view: UIView = UIView()
-        view.backgroundColor = UIColor.red
+    var delegate1: BaseViewController?
+    var parent: UIView?
+    
+    let stackContentView: UIStackView = {
+        let view = UIStackView()
+        //view.backgroundColor = UIColor.red
+        view.axis = .vertical
+        view.spacing = 0
         return view
     }()
+    
+//    let contentView: UIView = {
+//
+//        let view: UIView = UIView()
+//        view.backgroundColor = UIColor.red
+//        return view
+//    }()
+    
+    init(parent: UIView, delegate: BaseViewController?) {
+        super.init(frame: CGRect.zero)
+        self.parent = parent
+        parent.addSubview(self)
+        setupView()
+        
+        self.delegate1 = delegate
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,14 +49,40 @@ class BaseScrollView: UIScrollView {
     }
     
     private func setupView() {
-        backgroundColor = UIColor.brown
-        self.addSubview(contentView)
+        //backgroundColor = UIColor.brown
+        //self.addSubview(contentView)
+        self.addSubview(stackContentView)
+        
+        stackContentView.layer.cornerRadius = 26.0
+        stackContentView.clipsToBounds = true
     }
     
-    func setAnchor(parent: UIView) {
+    func setAnchor(top: ConstraintItem, bottom: ConstraintItem) {
         
-        self.contentView.snp.makeConstraints { make in
-            make.edges.width.equalToSuperview()
+        self.snp.makeConstraints { make in
+            make.top.equalTo(top)
+            make.right.left.equalToSuperview()
+            make.bottom.equalTo(bottom)
+        }
+        
+        self.stackContentView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+    }
+    
+    func setAnchor(top: ConstraintItem, right: UIView, bottom: ConstraintItem, left: UIView) {
+        
+        self.snp.makeConstraints { make in
+            make.top.equalTo(top)
+            make.right.equalTo(right)
+            make.bottom.equalTo(bottom)
+            make.left.equalTo(left)
+        }
+        
+        self.stackContentView.snp.makeConstraints { make in
+            make.top.bottom.leading.trailing.equalToSuperview()
+            make.width.equalToSuperview()
         }
     }
 }

@@ -147,13 +147,13 @@ class TimeSelectVC: MyTableVC {
         }
     }
     
-    @IBAction func submit() {
+    @IBAction override func submit() {
         
         self.delegate?.setTimeData(res: selecteds, type: input["type"] as! SELECT_TIME_TYPE, indexPath: indexPath)
         prev()
     }
     
-    @IBAction func cancel() {
+    @IBAction override func cancel() {
         prev()
     }
     

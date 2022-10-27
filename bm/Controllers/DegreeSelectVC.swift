@@ -95,10 +95,10 @@ class DegreeSelectVC: MyTableVC {
     @IBAction func back() {
         prev()
     }
-    @IBAction func cancel() {
+    @IBAction override func cancel() {
         prev()
     }
-    @IBAction func submit() {
+    @IBAction override func submit() {
         self.delegate?.setDegrees(res: selecteds)
         prev()
     }
