@@ -361,6 +361,8 @@
 		F9FFD83829067E3000AD8E52 /* BaseScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */; };
 		F9FFD8AD2909406200AD8E52 /* ShowSignupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD8AC2909406200AD8E52 /* ShowSignupCell.swift */; };
 		F9FFD8AF290981EA00AD8E52 /* ShowBottom2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */; };
+		F9FFD8B1290EC50C00AD8E52 /* ManagerTeamMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD8B0290EC50C00AD8E52 /* ManagerTeamMemberVC.swift */; };
+		F9FFD8B3290ED05F00AD8E52 /* TeamMemberTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD8B2290ED05F00AD8E52 /* TeamMemberTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -791,6 +793,8 @@
 		F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollerView.swift; sourceTree = "<group>"; };
 		F9FFD8AC2909406200AD8E52 /* ShowSignupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSignupCell.swift; sourceTree = "<group>"; };
 		F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBottom2.swift; sourceTree = "<group>"; };
+		F9FFD8B0290EC50C00AD8E52 /* ManagerTeamMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamMemberVC.swift; sourceTree = "<group>"; };
+		F9FFD8B2290ED05F00AD8E52 /* TeamMemberTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1379,6 +1383,7 @@
 				F99DF39E28715E4C00A7C2C6 /* WebViewVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
+				F9FFD8B0290EC50C00AD8E52 /* ManagerTeamMemberVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1413,6 +1418,7 @@
 				B3E4D1C22601FD0900D78210 /* TeamTable.swift */,
 				B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */,
 				B34A20AD21AE962700EE6E1C /* Timetables.swift */,
+				F9FFD8B2290ED05F00AD8E52 /* TeamMemberTable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1843,12 +1849,14 @@
 				B306FE9A21F0916D00403FE2 /* DateFormItem.swift in Sources */,
 				B3B758EC25B0763A006ACC33 /* WeightCell.swift in Sources */,
 				B3B4B61022CA247500245CC8 /* SomeCell.swift in Sources */,
+				F9FFD8B3290ED05F00AD8E52 /* TeamMemberTable.swift in Sources */,
 				B33C1ABB21BD2DED006F2BEB /* ColorFormItem.swift in Sources */,
 				B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */,
 				B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */,
 				B39E5FAB263ED55400C40BA7 /* ShowTeamVC.swift in Sources */,
 				B3B758E525B0759B006ACC33 /* WeightFormItem.swift in Sources */,
 				B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */,
+				F9FFD8B1290EC50C00AD8E52 /* ManagerTeamMemberVC.swift in Sources */,
 				B3FAA0AA20CAC995008F2294 /* TempPlaySignupOneCell.swift in Sources */,
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,
 				B3B4EF70257C8BFB00EE15D0 /* PasswordCell.swift in Sources */,
@@ -2159,7 +2167,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2.5;
+				MARKETING_VERSION = 2.2.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2184,7 +2192,7 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2.5;
+				MARKETING_VERSION = 2.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -2343,7 +2351,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.5;
+				MARKETING_VERSION = 2.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
@@ -2375,7 +2383,7 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.5;
+				MARKETING_VERSION = 2.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";

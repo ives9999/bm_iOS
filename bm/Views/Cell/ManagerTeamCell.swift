@@ -13,6 +13,7 @@ class ManagerTeamCell: List2Cell {
     @IBOutlet weak var editIcon: SuperButton!
     @IBOutlet weak var deleteIcon: SuperButton!
     @IBOutlet weak var signupIcon: SuperButton!
+    @IBOutlet weak var teamMemberIcon: SuperButton!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,6 +26,7 @@ class ManagerTeamCell: List2Cell {
         deleteIcon.row = row
         refreshIcon.row = row
         signupIcon.row = row
+        teamMemberIcon.row = row
         
         titleLbl.text = row.name
         if row.featured_path.count > 0 {
@@ -37,6 +39,14 @@ class ManagerTeamCell: List2Cell {
         self._pressed(sender: sender) { row in
             if cellDelegate != nil {
                 cellDelegate!.cellSignup(row: row)
+            }
+        }
+    }
+    
+    @IBAction func teamMemberBtnPressed(sender: UIButton) {
+        self._pressed(sender: sender) { row in
+            if cellDelegate != nil {
+                cellDelegate!.cellTeamMember(row: row)
             }
         }
     }

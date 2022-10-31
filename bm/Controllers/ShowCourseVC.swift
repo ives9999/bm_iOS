@@ -703,6 +703,7 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                 }
                 cell.noLbl.text = remain_text
             }
+            cell.setSelectedBackgroundColor()
 
             return cell
         } else if tableView == self.coachTableView {

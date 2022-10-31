@@ -1,14 +1,45 @@
 //
-//  ShowSignupCell.swift
+//  ManagerTeamMemberVC.swift
 //  bm
 //
-//  Created by ives on 2022/10/26.
+//  Created by ives on 2022/10/30.
 //  Copyright © 2022 bm. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class ShowSignupCell: UITableViewCell {
+class ManagerTeamMemberVC: BaseViewController {
+    
+    lazy var tableView: MyTable2VC<MemberTeamMemberCell, TeamMemberTable> = {
+        let tableView = MyTable2VC<MemberTeamMemberCell, MemberTeamMemberCell>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
+        return tableView
+    }()
+    
+    var teamMemberTables: [TeamMemberTable] = [TeamMemberTable]()
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        top.setTitle(title: "球隊隊員")
+        top.delegate = self
+        
+        tableView.anchor(parent: view, top: top, bottomThreeView: bottomThreeView)
+        
+        setupBottomThreeView()
+        
+//        let cellNibName = UINib(nibName: "MemberCoinListCell", bundle: nil)
+//        tableView.register(cellNibName, forCellReuseIdentifier: "MemberCoinListCell")
+        
+        panelHeight = 500
+        
+        refresh()
+    }
+    
+    
+}
+
+class MemberTeamMemberCell: BaseCell<TeamMemberTable> {
     
     let noLbl: SuperLabel = {
         let view = SuperLabel()
@@ -59,9 +90,10 @@ class ShowSignupCell: UITableViewCell {
         }
     }
     
-    func setSelectedBackgroundColor() {
+    override func setSelectedBackgroundColor() {
         let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(CELL_SELECTED1)
         selectedBackgroundView = bgColorView
     }
 }
+

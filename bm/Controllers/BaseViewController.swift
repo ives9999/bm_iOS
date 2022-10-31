@@ -308,6 +308,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     }
     
     func cellSignup(row: Table) {}
+    func cellTeamMember(row: Table) {}
     
     //暫時沒有作用
     func cellTel(row: Table) {
