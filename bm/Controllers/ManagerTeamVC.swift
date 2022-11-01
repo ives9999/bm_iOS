@@ -156,8 +156,7 @@ class ManagerTeamVC: ManagerVC {
     }
     
     override func cellTeamMember(row: Table) {
-        //toTeamMember()
-        print(row)
+        toManagerTeamMember()
     }
     
     override func cellDelete(row: Table) {

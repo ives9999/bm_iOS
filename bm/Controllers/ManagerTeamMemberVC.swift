@@ -11,9 +11,11 @@ import Foundation
 class ManagerTeamMemberVC: BaseViewController {
     
     lazy var tableView: MyTable2VC<MemberTeamMemberCell, TeamMemberTable> = {
-        let tableView = MyTable2VC<MemberTeamMemberCell, MemberTeamMemberCell>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
+        let tableView = MyTable2VC<MemberTeamMemberCell, TeamMemberTable>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
         return tableView
     }()
+    
+    var showTop: ShowTop2?
     
     var teamMemberTables: [TeamMemberTable] = [TeamMemberTable]()
     
@@ -21,12 +23,13 @@ class ManagerTeamMemberVC: BaseViewController {
         
         super.viewDidLoad()
         
-        top.setTitle(title: "球隊隊員")
-        top.delegate = self
+        showTop = ShowTop2(delegate: self)
+        showTop!.setAnchor(parent: self.view)
+        showTop!.setTitle(title: "球隊隊員")
         
-        tableView.anchor(parent: view, top: top, bottomThreeView: bottomThreeView)
+        tableView.anchor(parent: view, showTop: showTop!)
         
-        setupBottomThreeView()
+        //setupBottomThreeView()
         
 //        let cellNibName = UINib(nibName: "MemberCoinListCell", bundle: nil)
 //        tableView.register(cellNibName, forCellReuseIdentifier: "MemberCoinListCell")
@@ -36,6 +39,31 @@ class ManagerTeamMemberVC: BaseViewController {
         refresh()
     }
     
+    override func refresh() {
+        
+        page = 1
+        getDataFromServer()
+        //getDataStart(page: page, perPage: PERPAGE)
+    }
+    
+    func getDataFromServer() {
+        Global.instance.addSpinner(superView: self.view)
+        
+        MemberService.instance.MemberCoinList(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
+            }
+        }
+    }
+    
+    func didSelect<T: TeamMemberTable>(item: T, at indexPath: IndexPath) {
+        
+    }
+    
+    func tableViewSetSelected(row: TeamMemberTable)-> Bool {
+        return false
+    }
     
 }
 

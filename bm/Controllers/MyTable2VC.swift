@@ -44,6 +44,8 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
         self.selected = selected
         super.init(frame: CGRect.zero, style: .plain)
         
+        self.backgroundColor = UIColor(MY_BLACK)
+        
         register(T.nibName, forCellReuseIdentifier: T.identifier)
         //registerCell()
                 
@@ -62,6 +64,15 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
 //        let cellNibName = UINib(nibName: nibName, bundle: nil)
         //register(cellNibName, forCellReuseIdentifier: cellId)
     //}
+    
+    func anchor(parent: UIView, showTop: ShowTop2) {
+        
+        parent.addSubview(self)
+        self.snp.makeConstraints { make in
+            make.top.equalTo(showTop.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+    }
     
     func anchor(parent: UIView, top: Top, bottomThreeView: BottomThreeView?) {
         
