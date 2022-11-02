@@ -406,11 +406,11 @@ extension BaseViewController {
         }
     }
     
-    func toManagerTeamMember() {
+    func toManagerTeamMember(token: String) {
         if #available(iOS 13.0, *) {
             
             let v: ManagerTeamMemberVC = ManagerTeamMemberVC()
-            //v.token = token
+            v.token = token
             v.modalPresentationStyle = .fullScreen
             show(v, sender: nil)
             

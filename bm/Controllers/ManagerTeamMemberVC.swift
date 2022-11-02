@@ -15,6 +15,8 @@ class ManagerTeamMemberVC: BaseViewController {
         return tableView
     }()
     
+    var token: String? = nil
+    
     var showTop: ShowTop2?
     
     var teamMemberTables: [TeamMemberTable] = [TeamMemberTable]()
@@ -49,7 +51,7 @@ class ManagerTeamMemberVC: BaseViewController {
     func getDataFromServer() {
         Global.instance.addSpinner(superView: self.view)
         
-        MemberService.instance.MemberCoinList(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
+        TeamService.instance.teamMemberList(token: token!, page: page, perPage: PERPAGE) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
