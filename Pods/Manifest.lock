@@ -38,15 +38,16 @@ PODS:
   - JXPageControl/Transform (0.1.5):
     - JXPageControl/Common
   - KeychainSwift (16.0.1)
-  - OneSignalXCFramework (3.11.3):
-    - OneSignalXCFramework/OneSignalCore (= 3.11.3)
-    - OneSignalXCFramework/OneSignalExtension (= 3.11.3)
-    - OneSignalXCFramework/OneSignalOutcomes (= 3.11.3)
-  - OneSignalXCFramework/OneSignalCore (3.11.3)
-  - OneSignalXCFramework/OneSignalExtension (3.11.3):
+  - MercariQRScanner (1.9.0)
+  - OneSignalXCFramework (3.11.4):
+    - OneSignalXCFramework/OneSignalCore (= 3.11.4)
+    - OneSignalXCFramework/OneSignalExtension (= 3.11.4)
+    - OneSignalXCFramework/OneSignalOutcomes (= 3.11.4)
+  - OneSignalXCFramework/OneSignalCore (3.11.4)
+  - OneSignalXCFramework/OneSignalExtension (3.11.4):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalOutcomes
-  - OneSignalXCFramework/OneSignalOutcomes (3.11.3):
+  - OneSignalXCFramework/OneSignalOutcomes (3.11.4):
     - OneSignalXCFramework/OneSignalCore
   - PromiseKit (6.8.5):
     - PromiseKit/CorePromise (= 6.8.5)
@@ -78,6 +79,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift
   - JXBanner
   - KeychainSwift (~> 16.0)
+  - MercariQRScanner
   - OneSignalXCFramework (< 4.0, >= 3.0.0)
   - PromiseKit (~> 6.8.3)
   - SCLAlertView
@@ -101,6 +103,7 @@ SPEC REPOS:
     - JXBanner
     - JXPageControl
     - KeychainSwift
+    - MercariQRScanner
     - OneSignalXCFramework
     - PromiseKit
     - SCLAlertView
@@ -132,7 +135,8 @@ SPEC CHECKSUMS:
   JXBanner: 348dbef856e786494cbf30fb45d6b84826f2d3c5
   JXPageControl: e9487b39e2e58fc17790833214f3b8e935bef98b
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
-  OneSignalXCFramework: e3f0100b491f5c7191dd1e204020eb3ecc4188b1
+  MercariQRScanner: e5aea873969af59b09b4cc411fc1c5b6293dba44
+  OneSignalXCFramework: 45932e3c1e659e1485bfd765e0543d7f30cc737b
   PromiseKit: 9616b0afef31eae56ab9ce044c8ec2b8612a15cd
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
@@ -145,6 +149,6 @@ SPEC CHECKSUMS:
   UIColor_Hex_Swift: 31cd3e47440f07a20d2503a36bb0437a445b3c29
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: 67d0c5e3881b7fa145e4602f1fa76131cbb79057
+PODFILE CHECKSUM: b3ab7519c0b4cc3d442dd80c418d15e80eeb54b5
 
 COCOAPODS: 1.11.2

@@ -1042,24 +1042,24 @@
 		B337B9A71FE2981700C3EE28 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */,
-				B31106E8221E5285007A5D49 /* BottomView.swift */,
-				B3A9038D2385537900A986F7 /* CourseView.xib */,
-				B3A9038F23857A1200A986F7 /* CourseView.swift */,
 				F9FA3C3527E32A3B0094C773 /* _tab_search.swift */,
-				F9FA3C3B27E4C60C0094C773 /* tab_search.swift */,
 				F9FA3C3D27E4CC100094C773 /* _tab_search.xib */,
-				F9FA3C4327E57A650094C773 /* TabTop.swift */,
-				F9FA3C4727E5829A0094C773 /* TabTop.xib */,
-				F9A6751827FAED7E007C8F47 /* ShowTop.swift */,
-				F9A6751A27FAEDC3007C8F47 /* ShowTop.xib */,
-				F9A6751C27FAF605007C8F47 /* Top.swift */,
-				F9A6751E27FAF766007C8F47 /* Top.xib */,
+				F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */,
 				F9F583AD283518C400F77B00 /* BottomThreeView.swift */,
 				F9F583AF283518DF00F77B00 /* BottomThreeView.xib */,
-				F9FFD835290665F500AD8E52 /* ShowTop2.swift */,
-				F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */,
+				B31106E8221E5285007A5D49 /* BottomView.swift */,
+				B3A9038F23857A1200A986F7 /* CourseView.swift */,
+				B3A9038D2385537900A986F7 /* CourseView.xib */,
 				F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */,
+				F9A6751827FAED7E007C8F47 /* ShowTop.swift */,
+				F9A6751A27FAEDC3007C8F47 /* ShowTop.xib */,
+				F9FFD835290665F500AD8E52 /* ShowTop2.swift */,
+				F9FA3C3B27E4C60C0094C773 /* tab_search.swift */,
+				F9FA3C4327E57A650094C773 /* TabTop.swift */,
+				F9FA3C4727E5829A0094C773 /* TabTop.xib */,
+				B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */,
+				F9A6751C27FAF605007C8F47 /* Top.swift */,
+				F9A6751E27FAF766007C8F47 /* Top.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1322,6 +1322,7 @@
 				F964CDE227744D76004F1C78 /* ManagerSignupListVC.swift */,
 				F964CDDA276F5CBA004F1C78 /* ManagerSignupVC.swift */,
 				B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */,
+				F9FFD8B0290EC50C00AD8E52 /* ManagerTeamMemberVC.swift */,
 				F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */,
 				B3A5A28320B2CB80001A846F /* ManagerVC.swift */,
 				F99DF39C286B393300A7C2C6 /* MemberBankVC.swift */,
@@ -1383,7 +1384,6 @@
 				F99DF39E28715E4C00A7C2C6 /* WebViewVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
-				F9FFD8B0290EC50C00AD8E52 /* ManagerTeamMemberVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1716,6 +1716,7 @@
 				"${BUILT_PRODUCTS_DIR}/JXBanner/JXBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/JXPageControl/JXPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/MercariQRScanner/MercariQRScanner.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -1743,6 +1744,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXBanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MercariQRScanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -2173,7 +2175,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2197,7 +2199,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -2356,7 +2358,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2387,7 +2389,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

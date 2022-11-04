@@ -30,6 +30,10 @@ target 'bm' do
   
   #youtube
   pod 'YouTubePlayer'
+  
+  #qrcode
+  #platform :ios, '10.0'
+  pod 'MercariQRScanner'
 end
 
 target 'bmNotificationServiceExtension' do

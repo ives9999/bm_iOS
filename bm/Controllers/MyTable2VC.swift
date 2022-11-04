@@ -65,6 +65,15 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
         //register(cellNibName, forCellReuseIdentifier: cellId)
     //}
     
+    func anchor(parent: UIView, showTop: UIView) {
+        
+        parent.addSubview(self)
+        self.snp.makeConstraints { make in
+            make.top.equalTo(showTop.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+    }
+    
     func anchor(parent: UIView, showTop: ShowTop2) {
         
         parent.addSubview(self)
