@@ -46,7 +46,8 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
         
         self.backgroundColor = UIColor(MY_BLACK)
         
-        register(T.nibName, forCellReuseIdentifier: T.identifier)
+        register(T.self, forCellReuseIdentifier: T.identifier)
+        //register(T.nibName, forCellReuseIdentifier: T.identifier)
         //registerCell()
                 
         delegate = self
@@ -171,6 +172,7 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
     }
     
     func cellForRow(atBaseTableIndexPath: IndexPath) -> UITableViewCell {
+        
         let cell = self.dequeueReusableCell(withIdentifier: T.identifier, for: atBaseTableIndexPath) as? BaseCell<U>
         //let cell = self.dequeueReusableCell(withIdentifier: cellId, for: atBaseTableIndexPath) as? BaseCell<U>
         

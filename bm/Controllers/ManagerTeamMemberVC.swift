@@ -38,6 +38,9 @@ class ManagerTeamMemberVC: BaseViewController {
         return view
     }()
     
+    var member_token: String? //要加入會員的token
+    var rows: [TeamMemberTable] = [TeamMemberTable]()
+    
 //    var captureSession: AVCaptureSession!
 //    var previewLayer: AVCaptureVideoPreviewLayer!
     
@@ -93,11 +96,12 @@ class ManagerTeamMemberVC: BaseViewController {
         TeamService.instance.teamMemberList(token: token!, page: page, perPage: PERPAGE) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
+                TeamService.instance.jsonData?.prettyPrintedJSONString
                 let b: Bool = self.tableView.parseJSON(jsonData: TeamService.instance.jsonData)
                 if !b && self.tableView.msg.count == 0 {
                     self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
                 } else {
-                    //tableView.items
+                    self.rows = self.tableView.items
                 }
                 //self.showTableView(tableView: self.tableView, jsonData: TeamService.instance.jsonData!)
             }
@@ -190,6 +194,17 @@ class ManagerTeamMemberVC: BaseViewController {
         }
     }
     
+    private func addTeamMember(member_token: String) {
+        Global.instance.addSpinner(superView: self.view)
+        
+        TeamService.instance.teamMemberList(token: token!, page: page, perPage: PERPAGE) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.refresh()
+            }
+        }
+    }
+    
 //    override func viewWillDisappear(_ animated: Bool) {
 //        super.viewWillDisappear(animated)
 //        qrScannerView.stopRunning()
@@ -250,10 +265,11 @@ class ManagerTeamMemberVC: BaseViewController {
 extension ManagerTeamMemberVC: QRScannerViewDelegate {
     
     func qrScannerView(_ qrScannerView: QRScannerView, didSuccess code: String) {
-        print(code)
-        let member_token = code
+        //print(code)
+        let member_token: String = code
         qrScannerView.stopRunning()
         qrScannerView.removeFromSuperview()
+        addTeamMember(member_token: member_token)
     }
     
     func qrScannerView(_ qrScannerView: QRScannerView, didFailure error: QRScannerError) {
@@ -269,14 +285,18 @@ class MemberTeamMemberCell: BaseCell<TeamMemberTable> {
     
     let noLbl: SuperLabel = {
         let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
         view.setTextGeneral()
+        view.text = "100."
         
         return view
     }()
     
     let nameLbl: SuperLabel = {
         let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
         view.setTextGeneral()
+        view.text = "xxx"
         
         return view
     }()
@@ -305,8 +325,9 @@ class MemberTeamMemberCell: BaseCell<TeamMemberTable> {
         
         self.contentView.addSubview(noLbl)
         noLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(12)
+            make.left.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(16)
         }
         
         self.contentView.addSubview(nameLbl)
@@ -320,6 +341,11 @@ class MemberTeamMemberCell: BaseCell<TeamMemberTable> {
         let bgColorView = UIView()
         bgColorView.backgroundColor = UIColor(CELL_SELECTED1)
         selectedBackgroundView = bgColorView
+    }
+    
+    override func configureSubViews() {
+        noLbl.text = String(item!.no) + "."
+        nameLbl.text = item?.token
     }
 }
 
