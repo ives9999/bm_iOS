@@ -76,7 +76,7 @@ class HomeTotalAdVC: BaseViewController {
             make.leading.equalToSuperview().offset(submitBtn_leading)
             make.bottom.equalToSuperview().offset(-24)
         }
-        submitBtn.addTarget(self, action: #selector(submit), for: .touchUpInside)
+        //submitBtn.addTarget(self, action: #selector(submit), for: .touchUpInside)
         
         adContainer.addSubview(cancelBtn)
         cancelBtn.snp.makeConstraints { make in
@@ -84,7 +84,7 @@ class HomeTotalAdVC: BaseViewController {
             make.trailing.equalToSuperview().offset(cancelBtn_trailing)
             make.bottom.equalToSuperview().offset(-24)
         }
-        cancelBtn.addTarget(self, action: #selector(cancel), for: .touchUpInside)
+        //cancelBtn.addTarget(self, action: #selector(cancel), for: .touchUpInside)
     }
     
     @objc func submit(button: UIButton) {

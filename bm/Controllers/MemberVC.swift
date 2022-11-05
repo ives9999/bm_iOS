@@ -143,6 +143,8 @@ class MemberVC: MyTableVC {
         rows.append(r)
         r = MemberRow(title: "帳戶資料", icon: "member", segue: TO_PROFILE)
         rows.append(r)
+        r = MemberRow(title: "QRCode", icon: "qrcode", segue: "qrcode")
+        rows.append(r)
         r = MemberRow(title: "更改密碼", icon: "password", segue: TO_PASSWORD)
         rows.append(r)
         
@@ -634,7 +636,55 @@ extension MemberVC {
             toMemberCoinList()
         } else if segue == TO_MEMBER_SUPSCRIPTION_KIND {
             toMemberSubscriptionKind()
+        } else if segue == "qrcode" {
+            let qrcodeIV: UIImageView = makeQrcodeLayer()
+            let qrcode: UIImage = generateQRCode(from: Member.instance.token)!
+            qrcodeIV.image = qrcode
         }
+    }
+    
+    func makeQrcodeLayer()-> UIImageView {
+        
+        maskView = self.view.mask()
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        maskView.addGestureRecognizer(gestureRecognizer)
+        
+        let blackViewHeight: CGFloat = 500
+        let blackViewPaddingLeft: CGFloat = 20
+        
+        let blackView: UIView = maskView.blackView(left: blackViewPaddingLeft, top: (maskView.frame.height-blackViewHeight)/2, width: maskView.frame.width-(2*blackViewPaddingLeft), height: blackViewHeight)
+        
+        
+        let qrcodeIV: UIImageView = UIImageView()
+        
+        blackView.addSubview(qrcodeIV)
+        
+        qrcodeIV.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        return qrcodeIV
+    }
+    
+    func generateQRCode(from string: String) -> UIImage? {
+        let data = string.data(using: String.Encoding.ascii)
+
+        if let filter = CIFilter(name: "CIQRCodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 10, y: 10)
+
+            if let output = filter.outputImage?.transformed(by: transform) {
+                return UIImage(ciImage: output)
+            }
+        }
+
+        return nil
+    }
+    
+    @objc func handleTap(sender: UIView) {
+        maskView.unmask()
     }
 }
 

@@ -44,7 +44,10 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
         self.selected = selected
         super.init(frame: CGRect.zero, style: .plain)
         
-        register(T.nibName, forCellReuseIdentifier: T.identifier)
+        self.backgroundColor = UIColor(MY_BLACK)
+        
+        register(T.self, forCellReuseIdentifier: T.identifier)
+        //register(T.nibName, forCellReuseIdentifier: T.identifier)
         //registerCell()
                 
         delegate = self
@@ -62,6 +65,24 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
 //        let cellNibName = UINib(nibName: nibName, bundle: nil)
         //register(cellNibName, forCellReuseIdentifier: cellId)
     //}
+    
+    func anchor(parent: UIView, showTop: UIView) {
+        
+        parent.addSubview(self)
+        self.snp.makeConstraints { make in
+            make.top.equalTo(showTop.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+    }
+    
+    func anchor(parent: UIView, showTop: ShowTop2) {
+        
+        parent.addSubview(self)
+        self.snp.makeConstraints { make in
+            make.top.equalTo(showTop.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
+    }
     
     func anchor(parent: UIView, top: Top, bottomThreeView: BottomThreeView?) {
         
@@ -151,6 +172,7 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
     }
     
     func cellForRow(atBaseTableIndexPath: IndexPath) -> UITableViewCell {
+        
         let cell = self.dequeueReusableCell(withIdentifier: T.identifier, for: atBaseTableIndexPath) as? BaseCell<U>
         //let cell = self.dequeueReusableCell(withIdentifier: cellId, for: atBaseTableIndexPath) as? BaseCell<U>
         

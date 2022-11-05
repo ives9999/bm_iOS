@@ -287,7 +287,7 @@ class RequestManagerTeamVC: BaseViewController, UIImagePickerControllerDelegate,
         url.website()
     }
     
-    @IBAction func cancel() {
+    @IBAction override func cancel() {
         prev()
     }
 }

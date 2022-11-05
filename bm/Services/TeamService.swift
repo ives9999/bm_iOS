@@ -69,6 +69,58 @@ class TeamService: DataService {
         return url
     }
     
+    func addTeamMember(team_token: String, member_token: String, manager_token: String, completion: @escaping CompletionHandler) {
+        let url: String = URL_TEAM_MEMBER_ADD
+        var body: [String: String] = ["device": "app", "channel": CHANNEL, "team_token": team_token, "member_token": member_token, "manager_token": manager_token]
+        
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
+    func teamMemberList(token: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
+        let url: String = URL_TEAM_MEMBER_LIST
+        var body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "token": token]
+        print(url)
+        print(body)
+        
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
     func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["source": "app", "token": token, "strip_html": "true"]
         
@@ -109,7 +161,7 @@ class TeamService: DataService {
     
     func tempPlay_list(params:[String:String],page:Int, perPage: Int, completion: @escaping CompletionHandler) {
             
-        var body: [String: String] = ["source": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
+        var body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage)]
         body = body.merging(params){ (current, _) in current }
         //print(body)
         //print(URL_TEAM_TEMP_PLAY_LIST)

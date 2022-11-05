@@ -35,7 +35,7 @@ class ColorSelectVC: BaseViewController, UITableViewDelegate, UITableViewDataSou
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
     }
     
-    @objc func submit() {
+    @objc override func submit() {
         
         self.delegate?.setColorData(res: selecteds, indexPath: indexPath)
         prev()

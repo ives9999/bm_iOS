@@ -33,7 +33,7 @@ class StatusSelectVC: BaseViewController, UITableViewDelegate, UITableViewDataSo
         tableView.register(cellNib, forCellReuseIdentifier: "cell")
     }
     
-    @objc func submit() {
+    @objc override func submit() {
         
         self.delegate?.setStatusData(res: selected!, indexPath: indexPath)
         prev()

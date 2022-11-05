@@ -406,6 +406,27 @@ extension BaseViewController {
         }
     }
     
+    func toManagerTeamMember(token: String) {
+        if #available(iOS 13.0, *) {
+            
+            let v: ManagerTeamMemberVC = ManagerTeamMemberVC()
+            v.token = token
+            v.modalPresentationStyle = .fullScreen
+            show(v, sender: nil)
+            
+//            let storyboard = UIStoryboard(name: "Course", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_COURSE)  as? ShowCourseVC {
+//                viewController.token = token
+//                viewController.modalPresentationStyle = .fullScreen
+//                show(viewController, sender: nil)
+//            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_COURSE) as! ShowCourseVC
+            //viewController.token = token
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toOrder(login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void, product_token: String?=nil) {
 
         let msg: String = ""
@@ -867,15 +888,21 @@ extension BaseViewController {
     
     func toShowCourse(token: String) {
         if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Course", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_COURSE)  as? ShowCourseVC {
-                viewController.token = token
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
+            
+            let v: ShowCourseVC = ShowCourseVC()
+            v.token = token
+            v.modalPresentationStyle = .fullScreen
+            show(v, sender: nil)
+            
+//            let storyboard = UIStoryboard(name: "Course", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_COURSE)  as? ShowCourseVC {
+//                viewController.token = token
+//                viewController.modalPresentationStyle = .fullScreen
+//                show(viewController, sender: nil)
+//            }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_COURSE) as! ShowCourseVC
-            viewController.token = token
+            //viewController.token = token
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

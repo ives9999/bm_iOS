@@ -357,6 +357,12 @@
 		F9FA3C4827E5829A0094C773 /* TabTop.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9FA3C4727E5829A0094C773 /* TabTop.xib */; };
 		F9FAB2B6271EFD8100D83CC4 /* SearchRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */; };
 		F9FAB2B82721643000D83CC4 /* OneRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAB2B72721643000D83CC4 /* OneRow.swift */; };
+		F9FFD836290665F500AD8E52 /* ShowTop2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD835290665F500AD8E52 /* ShowTop2.swift */; };
+		F9FFD83829067E3000AD8E52 /* BaseScrollerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */; };
+		F9FFD8AD2909406200AD8E52 /* ShowSignupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD8AC2909406200AD8E52 /* ShowSignupCell.swift */; };
+		F9FFD8AF290981EA00AD8E52 /* ShowBottom2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */; };
+		F9FFD8B1290EC50C00AD8E52 /* ManagerTeamMemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD8B0290EC50C00AD8E52 /* ManagerTeamMemberVC.swift */; };
+		F9FFD8B3290ED05F00AD8E52 /* TeamMemberTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FFD8B2290ED05F00AD8E52 /* TeamMemberTable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -783,6 +789,12 @@
 		F9FA3C4727E5829A0094C773 /* TabTop.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TabTop.xib; sourceTree = "<group>"; };
 		F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRow.swift; sourceTree = "<group>"; };
 		F9FAB2B72721643000D83CC4 /* OneRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneRow.swift; sourceTree = "<group>"; };
+		F9FFD835290665F500AD8E52 /* ShowTop2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTop2.swift; sourceTree = "<group>"; };
+		F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollerView.swift; sourceTree = "<group>"; };
+		F9FFD8AC2909406200AD8E52 /* ShowSignupCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowSignupCell.swift; sourceTree = "<group>"; };
+		F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBottom2.swift; sourceTree = "<group>"; };
+		F9FFD8B0290EC50C00AD8E52 /* ManagerTeamMemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamMemberVC.swift; sourceTree = "<group>"; };
+		F9FFD8B2290ED05F00AD8E52 /* TeamMemberTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamMemberTable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -950,6 +962,7 @@
 				B3FAA0A920CAC995008F2294 /* TempPlaySignupOneCell.swift */,
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
 				F9763E1728B6851A006ED47C /* MemberSubscriptionLogCell.xib */,
+				F9FFD8AC2909406200AD8E52 /* ShowSignupCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1029,21 +1042,24 @@
 		B337B9A71FE2981700C3EE28 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */,
-				B31106E8221E5285007A5D49 /* BottomView.swift */,
-				B3A9038D2385537900A986F7 /* CourseView.xib */,
-				B3A9038F23857A1200A986F7 /* CourseView.swift */,
 				F9FA3C3527E32A3B0094C773 /* _tab_search.swift */,
-				F9FA3C3B27E4C60C0094C773 /* tab_search.swift */,
 				F9FA3C3D27E4CC100094C773 /* _tab_search.xib */,
-				F9FA3C4327E57A650094C773 /* TabTop.swift */,
-				F9FA3C4727E5829A0094C773 /* TabTop.xib */,
-				F9A6751827FAED7E007C8F47 /* ShowTop.swift */,
-				F9A6751A27FAEDC3007C8F47 /* ShowTop.xib */,
-				F9A6751C27FAF605007C8F47 /* Top.swift */,
-				F9A6751E27FAF766007C8F47 /* Top.xib */,
+				F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */,
 				F9F583AD283518C400F77B00 /* BottomThreeView.swift */,
 				F9F583AF283518DF00F77B00 /* BottomThreeView.xib */,
+				B31106E8221E5285007A5D49 /* BottomView.swift */,
+				B3A9038F23857A1200A986F7 /* CourseView.swift */,
+				B3A9038D2385537900A986F7 /* CourseView.xib */,
+				F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */,
+				F9A6751827FAED7E007C8F47 /* ShowTop.swift */,
+				F9A6751A27FAEDC3007C8F47 /* ShowTop.xib */,
+				F9FFD835290665F500AD8E52 /* ShowTop2.swift */,
+				F9FA3C3B27E4C60C0094C773 /* tab_search.swift */,
+				F9FA3C4327E57A650094C773 /* TabTop.swift */,
+				F9FA3C4727E5829A0094C773 /* TabTop.xib */,
+				B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */,
+				F9A6751C27FAF605007C8F47 /* Top.swift */,
+				F9A6751E27FAF766007C8F47 /* Top.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1306,6 +1322,7 @@
 				F964CDE227744D76004F1C78 /* ManagerSignupListVC.swift */,
 				F964CDDA276F5CBA004F1C78 /* ManagerSignupVC.swift */,
 				B3A9843025552DBB00DCD0F6 /* ManagerStoreVC.swift */,
+				F9FFD8B0290EC50C00AD8E52 /* ManagerTeamMemberVC.swift */,
 				F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */,
 				B3A5A28320B2CB80001A846F /* ManagerVC.swift */,
 				F99DF39C286B393300A7C2C6 /* MemberBankVC.swift */,
@@ -1401,6 +1418,7 @@
 				B3E4D1C22601FD0900D78210 /* TeamTable.swift */,
 				B36CBD5220DE00FE00E52B9C /* TempPlayDatePlayer.swift */,
 				B34A20AD21AE962700EE6E1C /* Timetables.swift */,
+				F9FFD8B2290ED05F00AD8E52 /* TeamMemberTable.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1699,6 +1717,7 @@
 				"${BUILT_PRODUCTS_DIR}/JXBanner/JXBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/JXPageControl/JXPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/MercariQRScanner/MercariQRScanner.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -1727,6 +1746,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXBanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MercariQRScanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -1833,12 +1853,14 @@
 				B306FE9A21F0916D00403FE2 /* DateFormItem.swift in Sources */,
 				B3B758EC25B0763A006ACC33 /* WeightCell.swift in Sources */,
 				B3B4B61022CA247500245CC8 /* SomeCell.swift in Sources */,
+				F9FFD8B3290ED05F00AD8E52 /* TeamMemberTable.swift in Sources */,
 				B33C1ABB21BD2DED006F2BEB /* ColorFormItem.swift in Sources */,
 				B3E72A1E1F9F9F350008A6B1 /* SWRevealViewController.m in Sources */,
 				B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */,
 				B39E5FAB263ED55400C40BA7 /* ShowTeamVC.swift in Sources */,
 				B3B758E525B0759B006ACC33 /* WeightFormItem.swift in Sources */,
 				B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */,
+				F9FFD8B1290EC50C00AD8E52 /* ManagerTeamMemberVC.swift in Sources */,
 				B3FAA0AA20CAC995008F2294 /* TempPlaySignupOneCell.swift in Sources */,
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,
 				B3B4EF70257C8BFB00EE15D0 /* PasswordCell.swift in Sources */,
@@ -1927,6 +1949,7 @@
 				B3ED38F81FBC476B0003F083 /* DegreeSelectVC.swift in Sources */,
 				B3B7588B25A802A7006ACC33 /* OrderForm.swift in Sources */,
 				B3F8C3B9215DFD72005CBBC1 /* SearchVC_next.swift in Sources */,
+				F9FFD8AD2909406200AD8E52 /* ShowSignupCell.swift in Sources */,
 				F9A1CB7F1F95CD2500DDEC86 /* CollectionCell1.swift in Sources */,
 				F99DF39D286B393300A7C2C6 /* MemberBankVC.swift in Sources */,
 				B370EFBF26AD3F2B0022E599 /* MemberCartListVC.swift in Sources */,
@@ -1945,6 +1968,7 @@
 				B3F6B45B260500AC0000F9E0 /* SignupStandbyTab.swift in Sources */,
 				B306FE9C21F0DA8000403FE2 /* DateSelectVC.swift in Sources */,
 				B358B0B622A0FB5200F1A4E6 /* SingleSelectVC.swift in Sources */,
+				F9FFD8AF290981EA00AD8E52 /* ShowBottom2.swift in Sources */,
 				B36D66BB229A580E00502D62 /* CourseService.swift in Sources */,
 				B370EFAD26A836470022E599 /* CartTable.swift in Sources */,
 				B31361E71F8786CC00BDA53D /* Contants.swift in Sources */,
@@ -1999,6 +2023,7 @@
 				B3C4953E262E671100D4F727 /* CoachListCell.swift in Sources */,
 				B3310D9722AD54000062EF98 /* SuperTextView.swift in Sources */,
 				F94DECE32747CFC700A9DA17 /* EditTeamVC.swift in Sources */,
+				F9FFD83829067E3000AD8E52 /* BaseScrollerView.swift in Sources */,
 				B3B758BE25AC6134006ACC33 /* ClothesSizeCell.swift in Sources */,
 				B3E4D09425F71B2500D78210 /* SelectionDialog.swift in Sources */,
 				B3E88BE92380F2D1001F015A /* CalendarSignupCell.swift in Sources */,
@@ -2014,6 +2039,7 @@
 				B3AE93B22640FBE700223B2A /* ShowArenaVC.swift in Sources */,
 				B3ED38F61FBC0A7C0003F083 /* TextInputVC.swift in Sources */,
 				B32FBCF31F8483E3003D39CC /* HomeImageCell.swift in Sources */,
+				F9FFD836290665F500AD8E52 /* ShowTop2.swift in Sources */,
 				B306FEAA21F7447000403FE2 /* TimetableService.swift in Sources */,
 				B370EFCF26AD50840022E599 /* CartListCell.swift in Sources */,
 				B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */,
@@ -2145,13 +2171,13 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2.5;
+				MARKETING_VERSION = 2.2.6;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2170,12 +2196,12 @@
 				INFOPLIST_FILE = bmNotificationServiceExtension/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
-				MARKETING_VERSION = 2.2.5;
+				MARKETING_VERSION = 2.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm.bmNotificationServiceExtension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -2329,12 +2355,12 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.5;
+				MARKETING_VERSION = 2.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2361,11 +2387,11 @@
 				INFOPLIST_FILE = bm/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 2.2.5;
+				MARKETING_VERSION = 2.2.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sportpassword.bm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "bm/Support files/bm-Bridging-Header.h";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

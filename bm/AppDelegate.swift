@@ -123,11 +123,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if isSimulate {
             gSimulate = true
         }
+<<<<<<< HEAD
         
 //        let deviceType: DeviceType = UIDevice.current.deviceType
 //        if deviceType == .simulator {
 //            gSimulate = true
 //        }
+=======
+>>>>>>> origin/master
         gSimulate = true
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)

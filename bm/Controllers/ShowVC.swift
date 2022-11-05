@@ -86,7 +86,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         }
         
         if (contentView != nil) {
-            initContentView()
+            //initContentView()
         }
         
         if (bottomView != nil) {
@@ -107,14 +107,14 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
 //
 //        }
         
-        containerViewConstraintWidth.constant = screen_width
-        containerViewConstraintHeight.constant = 2000
+        //containerViewConstraintWidth.constant = screen_width
+        //containerViewConstraintHeight.constant = 2000
         
-        contentDataLbl.text = "詳細介紹"
-        contentDataLbl.setTextSectionTitle()
+        //contentDataLbl.text = "詳細介紹"
+        //contentDataLbl.setTextSectionTitle()
         
-        scrollContainerHeight += dataConstraintHeight.constant
-        containerViewConstraintHeight.constant = scrollContainerHeight
+        //scrollContainerHeight += dataConstraintHeight.constant
+        //containerViewConstraintHeight.constant = scrollContainerHeight
         
         //refresh()
     }
@@ -171,7 +171,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
                                 self.setFeatured()
                                 self.initData()
                                 self.setData()
-                                self.setContent()
+                                //self.setContent()
                                 self.setLike()
                             }
                         }
@@ -201,11 +201,11 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
             let featured_h: CGFloat = featured.heightForUrl(url: table!.featured_path, width: screen_width)
             featuredConstraintHeight.constant = featured_h
             
-            scrollContainerHeight += featuredConstraintHeight.constant
-            containerViewConstraintHeight.constant = scrollContainerHeight
+            //scrollContainerHeight += featuredConstraintHeight.constant
+            //containerViewConstraintHeight.constant = scrollContainerHeight
             //print("featured:\(scrollContainerHeight)")
             
-            dataContainerConstraintTop.constant = featured_h - 30
+            //dataContainerConstraintTop.constant = featured_h - 30
         } else {
             warning("沒有取得內容資料值，請稍後再試或洽管理員")
         }

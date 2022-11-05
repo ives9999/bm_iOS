@@ -24,13 +24,17 @@ target 'bm' do
   pod 'SwiftyXMLParser' , :git => 'https://github.com/yahoojapan/SwiftyXMLParser.git'
   pod 'CryptoSwift', '~> 1.4.1'
   
-  pod 'SnapKit', '~> 5.0.0'
+  pod 'SnapKit', '~> 5.6.0'
   pod 'JXBanner'
   pod 'SCLAlertView'
   pod 'AssistantKit'
   
   #youtube
   pod 'YouTubePlayer'
+  
+  #qrcode
+  #platform :ios, '10.0'
+  pod 'MercariQRScanner'
 end
 
 target 'bmNotificationServiceExtension' do

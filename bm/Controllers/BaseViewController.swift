@@ -276,6 +276,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
         refreshControl.attributedTitle = NSAttributedString(string: "更新資料")
         refreshControl.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
     }
+    
+    func cancel() {}
 
     @objc func cartPressed() {
         toMemberCartList()
@@ -306,6 +308,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
     }
     
     func cellSignup(row: Table) {}
+    func cellTeamMember(row: Table) {}
     
     //暫時沒有作用
     func cellTel(row: Table) {
@@ -949,6 +952,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
         }
     }
     
+    func submit() {}
     func submitBtnPressed() {}
     
     //func tableViewSetSelected(row: Table)-> Bool { return false }

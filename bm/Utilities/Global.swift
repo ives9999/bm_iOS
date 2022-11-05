@@ -2397,6 +2397,7 @@ extension UIView {
         label.text = info
         label.setTextGeneral()
         label.textAlignment = .center
+        //label.backgroundColor = UIColor.red
         self.addSubview(label)
         
         label.translatesAutoresizingMaskIntoConstraints = false

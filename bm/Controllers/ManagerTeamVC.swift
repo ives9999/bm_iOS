@@ -155,6 +155,10 @@ class ManagerTeamVC: ManagerVC {
         toManagerSignup(able_type: able_type, able_token: row.token, able_title: row.name)
     }
     
+    override func cellTeamMember(row: Table) {
+        toManagerTeamMember(token: row.token)
+    }
+    
     override func cellDelete(row: Table) {
         msg = "是否確定要刪除此球隊？"
         warning(msg: msg, closeButtonTitle: "取消", buttonTitle: "刪除") {
