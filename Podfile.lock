@@ -1,11 +1,12 @@
 PODS:
-  - Alamofire (5.5.0)
+  - Alamofire (5.6.2)
   - AlamofireImage (4.2.0):
     - Alamofire (~> 5.4)
-  - CryptoSwift (1.4.2)
+  - AssistantKit (0.7.1)
+  - CryptoSwift (1.4.3)
   - Device.swift (1.2.2)
   - ECPayPaymentGatewayKit (1.0.5)
-  - IQKeyboardManagerSwift (6.5.9)
+  - IQKeyboardManagerSwift (6.5.10)
   - JXBanner (0.3.6):
     - JXBanner/Banner (= 0.3.6)
     - JXBanner/PageControl (= 0.3.6)
@@ -72,6 +73,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 5.4)
   - AlamofireImage
+  - AssistantKit
   - CryptoSwift (~> 1.4.1)
   - Device.swift
   - ECPayPaymentGatewayKit (~> 1.0.4)
@@ -94,6 +96,7 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - AlamofireImage
+    - AssistantKit
     - CryptoSwift
     - Device.swift
     - ECPayPaymentGatewayKit
@@ -123,12 +126,13 @@ CHECKOUT OPTIONS:
     :git: https://github.com/yahoojapan/SwiftyXMLParser.git
 
 SPEC CHECKSUMS:
-  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
-  CryptoSwift: a532e74ed010f8c95f611d00b8bbae42e9fe7c17
+  AssistantKit: 245d28aefcf3aeae240c8ecbe3c62714e3f1c6d4
+  CryptoSwift: a0799ee936271bd2253a006f1e4523df21845000
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
   ECPayPaymentGatewayKit: f11b3d42274d2e8150bd0e039b11ae3f0a115a89
-  IQKeyboardManagerSwift: 6e839c575c4aa1078d58a596e41244e77abe918f
+  IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
   JXBanner: 348dbef856e786494cbf30fb45d6b84826f2d3c5
   JXPageControl: e9487b39e2e58fc17790833214f3b8e935bef98b
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
@@ -145,6 +149,6 @@ SPEC CHECKSUMS:
   UIColor_Hex_Swift: 31cd3e47440f07a20d2503a36bb0437a445b3c29
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: 71f34fde178b71de72468da8e2b957e297c7d7be
+PODFILE CHECKSUM: 826c3f50300a732627cf7da9b386e8c932d9da70
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

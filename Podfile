@@ -27,6 +27,7 @@ target 'bm' do
   pod 'SnapKit', '~> 5.0.0'
   pod 'JXBanner'
   pod 'SCLAlertView'
+  pod 'AssistantKit'
   
   #youtube
   pod 'YouTubePlayer'
