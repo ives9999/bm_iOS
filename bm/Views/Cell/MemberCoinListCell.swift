@@ -20,7 +20,6 @@ class MemberCoinListCell: BaseCell<MemberCoinTable> {
     @IBOutlet weak var able_typeLbl: SuperLabel!
     @IBOutlet weak var typeButton: SuperButton!
     
-    var delegate: MemberCoinListVC?
     //var row: MemberCoinTable?
 
     override func awakeFromNib() {

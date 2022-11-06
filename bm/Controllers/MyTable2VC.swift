@@ -204,6 +204,7 @@ class BaseCell<U: Table>: UITableViewCell {
     }
 
     var no: Int?
+    var delegate: BaseViewController?
     
     func configureSubViews() {
         if (item != nil) {
