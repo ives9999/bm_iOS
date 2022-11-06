@@ -13,10 +13,7 @@ import MercariQRScanner
 class ManagerTeamMemberVC: BaseViewController {
     
     
-    lazy var tableView: MyTable2VC<MemberTeamMemberCell, TeamMemberTable> = {
-        let tableView = MyTable2VC<MemberTeamMemberCell, TeamMemberTable>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
-        return tableView
-    }()
+    lazy var tableView: ManagerTeamMemberTable? = nil
     
     var token: String? = nil
     
@@ -71,7 +68,8 @@ class ManagerTeamMemberVC: BaseViewController {
         let scanRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleScan(sender:)))
         scanIV.addGestureRecognizer(scanRecognizer)
         
-        tableView.anchor(parent: view, showTop: toolView)
+        tableView = ManagerTeamMemberTable(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:), delegate: self)
+        tableView!.anchor(parent: view, showTop: toolView)
         
         //setupBottomThreeView()
         
@@ -96,12 +94,12 @@ class ManagerTeamMemberVC: BaseViewController {
         TeamService.instance.teamMemberList(token: token!, page: page, perPage: PERPAGE) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                TeamService.instance.jsonData?.prettyPrintedJSONString
-                let b: Bool = self.tableView.parseJSON(jsonData: TeamService.instance.jsonData)
-                if !b && self.tableView.msg.count == 0 {
+                //TeamService.instance.jsonData?.prettyPrintedJSONString
+                let b: Bool = self.tableView!.parseJSON(jsonData: TeamService.instance.jsonData)
+                if !b && self.tableView!.msg.count == 0 {
                     self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
                 } else {
-                    self.rows = self.tableView.items
+                    self.rows = self.tableView!.items
                 }
                 //self.showTableView(tableView: self.tableView, jsonData: TeamService.instance.jsonData!)
             }
@@ -110,6 +108,23 @@ class ManagerTeamMemberVC: BaseViewController {
     
     func didSelect<T: TeamMemberTable>(item: T, at indexPath: IndexPath) {
         
+    }
+    
+    func delete(row: TeamMemberTable) {
+        //print(row.member_nickname)
+        warning(msg: "確定要刪除嗎？", closeButtonTitle: "取消", buttonTitle: "刪除") {
+            Global.instance.addSpinner(superView: self.view)
+            
+            TeamService.instance.deleteTeamMember(token: row.token) { success in
+                if success {
+                    self.info(msg: "刪除成功", buttonTitle: "刪除") {
+                        self.refresh()
+                    }
+                } else {
+                    self.info("刪除失敗")
+                }
+            }
+        }
     }
     
     func tableViewSetSelected(row: TeamMemberTable)-> Bool {
@@ -197,10 +212,26 @@ class ManagerTeamMemberVC: BaseViewController {
     private func addTeamMember(member_token: String) {
         Global.instance.addSpinner(superView: self.view)
         
-        TeamService.instance.teamMemberList(token: token!, page: page, perPage: PERPAGE) { (success) in
+        TeamService.instance.addTeamMember(team_token: token!, member_token: member_token, manager_token: Member.instance.token) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                self.refresh()
+                do {
+                    self.jsonData = TeamService.instance.jsonData
+                    if (self.jsonData != nil) {
+                        let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
+                        if (!successTable.success) {
+                            
+                            self.warning(successTable.parseMsgs())
+                        } else {
+                            self.refresh()
+                        }
+                    } else {
+                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                    }
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    self.warning(self.msg)
+                }
             }
         }
     }
@@ -281,7 +312,33 @@ extension ManagerTeamMemberVC: QRScannerViewDelegate {
     }
 }
 
-class MemberTeamMemberCell: BaseCell<TeamMemberTable> {
+class ManagerTeamMemberTable: MyTable2VC<ManagerTeamMemberCell, TeamMemberTable> {
+    
+    typealias deleteClosure = ((TeamMemberTable) -> Void)?
+    //var delete: deleteClosure = nil
+    var thisDelegate: ManagerTeamMemberVC?
+    
+    init(didSelect: didSelectClosure, selected: selectedClosure, delegate: ManagerTeamMemberVC) {
+        super.init(didSelect: didSelect, selected: selected)
+        self.thisDelegate = delegate
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func cellForRow(atBaseTableIndexPath: IndexPath) -> UITableViewCell {
+        let cell = super.cellForRow(atBaseTableIndexPath: atBaseTableIndexPath) as! ManagerTeamMemberCell
+        
+        if self.thisDelegate != nil {
+            cell.thisDelegate = self.thisDelegate
+        }
+        
+        return cell
+    }
+}
+
+class ManagerTeamMemberCell: BaseCell<TeamMemberTable> {
     
     let noLbl: SuperLabel = {
         let view = SuperLabel()
@@ -301,6 +358,28 @@ class MemberTeamMemberCell: BaseCell<TeamMemberTable> {
         return view
     }()
     
+    let createdAtLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "xxx"
+        
+        return view
+    }()
+    
+    let deleteIV: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "delete")
+        view.isUserInteractionEnabled = true
+        
+        return view
+    }()
+    
+    var thisDelegate: ManagerTeamMemberVC?
+    
+//    typealias deleteClosure = ((TeamMemberTable) -> Void)?
+//    var delete: deleteClosure = nil
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupView()
@@ -319,6 +398,9 @@ class MemberTeamMemberCell: BaseCell<TeamMemberTable> {
     private func setupView() {
         backgroundColor = UIColor(MY_BLACK)
         setAnchor()
+        
+        let deleteGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteThis))
+        deleteIV.addGestureRecognizer(deleteGR)
     }
     
     func setAnchor() {
@@ -335,6 +417,20 @@ class MemberTeamMemberCell: BaseCell<TeamMemberTable> {
             make.left.equalTo(noLbl.snp.right).offset(12)
             make.centerY.equalToSuperview()
         }
+        
+        self.contentView.addSubview(createdAtLbl)
+        createdAtLbl.snp.makeConstraints { make in
+            make.left.equalTo(nameLbl.snp.right).offset(15)
+            make.centerY.equalToSuperview()
+        }
+        
+        self.contentView.addSubview(deleteIV)
+        deleteIV.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(25)
+            make.height.equalTo(25)
+        }
     }
     
     override func setSelectedBackgroundColor() {
@@ -345,7 +441,19 @@ class MemberTeamMemberCell: BaseCell<TeamMemberTable> {
     
     override func configureSubViews() {
         noLbl.text = String(item!.no) + "."
-        nameLbl.text = item?.token
+        nameLbl.text = item?.member_nickname
+        createdAtLbl.text = item?.created_at.noSec()
+    }
+    
+    @objc func deleteThis(_ sender: UIView) {
+        //print(item?.token)
+        if thisDelegate != nil {
+            thisDelegate!.delete(row: item!)
+        }
+    }
+    
+    func setDeleteClickListener() {
+        
     }
 }
 

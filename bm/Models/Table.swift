@@ -184,6 +184,7 @@ class SuccessTable: Codable {
     var success: Bool = false
     var msg: String = ""
     var token: String = ""
+    var msgs: [[String]] = [[String]]()
     
     init(){}
     
@@ -193,5 +194,23 @@ class SuccessTable: Codable {
         success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
         msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
         token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
+        msgs = try container.decodeIfPresent([[String]].self, forKey: .msgs) ?? [[String]]()
+    }
+    
+    func parseMsgs()-> String {
+        
+        var msgs: [String] = [String]()
+        for msg in self.msgs {
+            for tmp in msg {
+                msgs.append(tmp)
+            }
+        }
+        //print(msgs)
+        var msg: String = ""
+        for tmp in msgs {
+            msg += tmp + "\n"
+        }
+        
+        return msg
     }
 }
