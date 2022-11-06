@@ -11,6 +11,7 @@ import Device_swift
 import UIColor_Hex_Swift
 import OneSignal
 import ECPayPaymentGatewayKit
+import AssistantKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -118,10 +119,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //let color = UIColor(red: 128/255, green: 100/255, blue: 0, alpha: 1)
         //setStatusBarBackgroundColor(color: color)
         
-        let deviceType: DeviceType = UIDevice.current.deviceType
-        if deviceType == .simulator {
+        let isSimulate: Bool = Device.isSimulator
+        if isSimulate {
             gSimulate = true
         }
+<<<<<<< HEAD
+        
+//        let deviceType: DeviceType = UIDevice.current.deviceType
+//        if deviceType == .simulator {
+//            gSimulate = true
+//        }
+=======
+>>>>>>> origin/master
         gSimulate = true
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
