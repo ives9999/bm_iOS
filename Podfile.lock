@@ -2,10 +2,7 @@ PODS:
   - Alamofire (5.6.2)
   - AlamofireImage (4.2.0):
     - Alamofire (~> 5.4)
-<<<<<<< HEAD
   - AssistantKit (0.7.1)
-=======
->>>>>>> origin/master
   - CryptoSwift (1.4.3)
   - Device.swift (1.2.2)
   - ECPayPaymentGatewayKit (1.0.5)
@@ -134,10 +131,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
-<<<<<<< HEAD
   AssistantKit: 245d28aefcf3aeae240c8ecbe3c62714e3f1c6d4
-=======
->>>>>>> origin/master
   CryptoSwift: a0799ee936271bd2253a006f1e4523df21845000
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
   ECPayPaymentGatewayKit: f11b3d42274d2e8150bd0e039b11ae3f0a115a89
@@ -159,10 +153,6 @@ SPEC CHECKSUMS:
   UIColor_Hex_Swift: 31cd3e47440f07a20d2503a36bb0437a445b3c29
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-<<<<<<< HEAD
-PODFILE CHECKSUM: 826c3f50300a732627cf7da9b386e8c932d9da70
-=======
-PODFILE CHECKSUM: b3ab7519c0b4cc3d442dd80c418d15e80eeb54b5
->>>>>>> origin/master
+PODFILE CHECKSUM: 54751365ac82dda21baa73afb444690bd85d2c79
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2
