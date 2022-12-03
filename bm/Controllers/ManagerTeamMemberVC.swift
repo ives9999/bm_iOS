@@ -110,16 +110,14 @@ class ManagerTeamMemberVC: BaseViewController {
         
     }
     
-    func delete(row: TeamMemberTable) {
+    func deleteTeamMember(row: TeamMemberTable) {
         //print(row.member_nickname)
         warning(msg: "確定要刪除嗎？", closeButtonTitle: "取消", buttonTitle: "刪除") {
             Global.instance.addSpinner(superView: self.view)
             
             TeamService.instance.deleteTeamMember(token: row.token) { success in
                 if success {
-                    self.info(msg: "刪除成功", buttonTitle: "刪除") {
-                        self.refresh()
-                    }
+                    self.refresh()
                 } else {
                     self.info("刪除失敗")
                 }
@@ -448,7 +446,7 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable> {
     @objc func deleteThis(_ sender: UIView) {
         //print(item?.token)
         if thisDelegate != nil {
-            thisDelegate!.delete(row: item!)
+            thisDelegate!.deleteTeamMember(row: item!)
         }
     }
     
