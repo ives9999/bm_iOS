@@ -531,8 +531,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
         }
     }
     
-    func didSelect<T: Table>(item: T, at indexPath: IndexPath) {
-        print(item.title + "\(indexPath.row)")
+    func didSelect<U>(item: U, at indexPath: IndexPath) {
+        //print(item.title + "\(indexPath.row)")
     }
     
     func genericTable() {}
@@ -899,7 +899,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
         }
     }
     
-    func showTableView<T: BaseCell<U>, U: Table>(tableView: MyTable2VC<T, U>, jsonData: Data)-> [U] {
+    func showTableView<T: BaseCell<U, V>, U: Table, V: BaseViewController>(tableView: MyTable2VC<T, U, V>, jsonData: Data)-> [U] {
         
         let b: Bool = tableView.parseJSON(jsonData: jsonData)
         if !b && tableView.msg.count == 0 {

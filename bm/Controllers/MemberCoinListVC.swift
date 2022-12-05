@@ -11,8 +11,8 @@ import UIKit
 
 class MemberCoinListVC: BaseViewController {
         
-    lazy var tableView: MyTable2VC<MemberCoinListCell, MemberCoinTable> = {
-        let tableView = MyTable2VC<MemberCoinListCell, MemberCoinTable>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
+    lazy var tableView: MyTable2VC<MemberCoinListCell, MemberCoinTable, MemberCoinListVC> = {
+        let tableView = MyTable2VC<MemberCoinListCell, MemberCoinTable, MemberCoinListVC>(selected: tableViewSetSelected(row:), myDelegate: self)
         return tableView
     }()
     
@@ -139,16 +139,29 @@ class MemberCoinListVC: BaseViewController {
         return buttonViewHeight * 2
     }
     
-    func didSelect<T: MemberCoinTable>(item: T, at indexPath: IndexPath) {
-        if MEMBER_COIN_IN_TYPE.enumFromString(item.in_type) == MEMBER_COIN_IN_TYPE.buy && item.order_token.count > 0 {
-            toPayment(order_token: item.order_token, source: "member")
-        }
+    override func didSelect<U>(item: U, at indexPath: IndexPath) {
         
+        let _item: MemberCoinTable = item as! MemberCoinTable
+        if MEMBER_COIN_IN_TYPE.enumFromString(_item.in_type) == MEMBER_COIN_IN_TYPE.buy && _item.order_token.count > 0 {
+            toPayment(order_token: _item.order_token, source: "member")
+        }
+
         //使用點數購買商品，前往查看訂單
-        if !item.in_out && MEMBER_COIN_OUT_TYPE.enumFromString(item.out_type) == MEMBER_COIN_OUT_TYPE.product && item.able_type == "order" {
-            toPayment(order_token: item.able_token, source: "member")
+        if !_item.in_out && MEMBER_COIN_OUT_TYPE.enumFromString(_item.out_type) == MEMBER_COIN_OUT_TYPE.product && _item.able_type == "order" {
+            toPayment(order_token: _item.able_token, source: "member")
         }
     }
+    
+//    func didSelect<T: MemberCoinTable>(item: T, at indexPath: IndexPath) {
+//        if MEMBER_COIN_IN_TYPE.enumFromString(item.in_type) == MEMBER_COIN_IN_TYPE.buy && item.order_token.count > 0 {
+//            toPayment(order_token: item.order_token, source: "member")
+//        }
+//
+//        //使用點數購買商品，前往查看訂單
+//        if !item.in_out && MEMBER_COIN_OUT_TYPE.enumFromString(item.out_type) == MEMBER_COIN_OUT_TYPE.product && item.able_type == "order" {
+//            toPayment(order_token: item.able_token, source: "member")
+//        }
+//    }
     
     @objc func panelSubmitAction() {
         print("aaa")
@@ -231,19 +244,22 @@ extension MemberCoinListVC: UITableViewDataSource {
                 }
             }
         }
-//        else {
-//
-//            if let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCoinListCell", for: indexPath) as? MemberCoinListCell {
-//
-//                let memberCoinTable: MemberCoinTable = memberCoinTables[indexPath.row]
-//                //memberCoinTable.filterRow()
-//                cell.delegate = self
-//                cell.item =
-//                cell.update(_row: memberCoinTable, no: indexPath.row + 1)
-//
-//                return cell
-//            }
-//        }
+        else {
+
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "MemberCoinListCell", for: indexPath) as? MemberCoinListCell {
+
+                let memberCoinTable: MemberCoinTable = memberCoinTables[indexPath.row]
+                //memberCoinTable.filterRow()
+                //cell.myDelegate = self
+                
+                //還未完成
+                //cell.item =
+                //cell.update(_row: memberCoinTable, no: indexPath.row + 1)
+                cell.configureSubViews()
+
+                return cell
+            }
+        }
         
         return UITableViewCell()
     }
@@ -268,6 +284,295 @@ extension MemberCoinListVC: UITableViewDataSource {
 }
 
 extension MemberCoinListVC: UITableViewDelegate {
+    
+}
+
+class MemberCoinListCell: BaseCell<MemberCoinTable, MemberCoinListVC> {
+    
+    let noLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "100."
+        
+        return view
+    }()
+    
+    let typeButton: SuperButton = {
+        let view = SuperButton()
+        
+        return view
+    }()
+    
+    let aView: UIView = {
+        let view = UIView()
+        
+        return view
+    }()
+    
+    let able_typeLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "商品訂單名稱"
+        
+        return view
+    }()
+    
+    let dateLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "2022-05-02 14:00"
+        
+        return view
+    }()
+    
+    let priceLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "300"
+        
+        return view
+    }()
+    
+    let priceSignLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.setTextSize(10)
+        view.text = "點"
+        
+        return view
+    }()
+    
+    let balanceSignLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.setTextSize(10)
+        view.text = "餘額"
+        
+        return view
+    }()
+    
+    let balanceLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "600"
+        
+        return view
+    }()
+    
+    let balanceUnitLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.setTextSize(10)
+        view.text = "點"
+        
+        return view
+    }()
+    
+//    @IBOutlet weak var noLbl: SuperLabel!
+//    @IBOutlet weak var priceSignLbl: SuperLabel!
+//    @IBOutlet weak var priceLbl: SuperLabel!
+//    @IBOutlet weak var balanceSignLbl: SuperLabel!
+//    @IBOutlet weak var balanceLbl: SuperLabel!
+//    @IBOutlet weak var balanceUnitLbl: SuperLabel!
+//    @IBOutlet weak var dateLbl: SuperLabel!
+//    @IBOutlet weak var able_typeLbl: SuperLabel!
+//    @IBOutlet weak var typeButton: SuperButton!
+    
+    //var row: MemberCoinTable?
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.setupView()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupView()
+    }
+    
+    private func setupView() {
+        backgroundColor = UIColor(MY_BLACK)
+        setAnchor()
+    }
+
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//
+//        if (noLbl != nil) {
+//            noLbl.setTextSize(15)
+//            noLbl.setTextColor(UIColor(CITY_BUTTON))
+//        }
+//
+//        if (priceSignLbl != nil) {
+//            priceSignLbl.setTextSize(10)
+//            priceSignLbl.setTextColor(UIColor(MY_WHITE))
+//        }
+//
+//        if (priceLbl != nil) {
+//            priceLbl.setTextSize(16)
+//            priceLbl.setTextColor(UIColor(MY_WHITE))
+//        }
+//
+//        if (balanceSignLbl != nil) {
+//            balanceSignLbl.setTextSize(10)
+//            balanceSignLbl.setTextColor(UIColor(MY_WHITE))
+//        }
+//
+//        if (balanceLbl != nil) {
+//            balanceLbl.setTextSize(16)
+//            balanceLbl.setTextColor(UIColor(MY_WHITE))
+//        }
+//
+//        if (balanceUnitLbl != nil) {
+//            balanceUnitLbl.setTextSize(10)
+//            balanceUnitLbl.setTextColor(UIColor(MY_WHITE))
+//        }
+//
+//        if (able_typeLbl != nil) {
+//            able_typeLbl.setTextSize(16)
+//            priceLbl.setTextColor(UIColor(TEXT_WHITE))
+//        }
+//
+//        if (dateLbl != nil) {
+//            dateLbl.setTextSize(10)
+//            dateLbl.setTextColor(UIColor(MY_LIGHT_WHITE))
+//        }
+//    }
+    
+    func setAnchor() {
+        
+        self.contentView.addSubview(noLbl)
+        noLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(16)
+        }
+        
+        self.contentView.addSubview(typeButton)
+        typeButton.snp.makeConstraints { make in
+            make.left.equalTo(noLbl.snp.right).offset(12)
+            make.centerY.equalToSuperview()
+        }
+        
+        self.contentView.addSubview(aView)
+        aView.snp.makeConstraints { make in
+            make.left.equalTo(typeButton.snp.right).offset(16)
+            make.centerY.equalToSuperview()
+            make.width.equalTo(150)
+            make.height.equalTo(40)
+            make.top.greaterThanOrEqualToSuperview().offset(16)
+            make.bottom.greaterThanOrEqualToSuperview().offset(16)
+        }
+        
+        self.aView.addSubview(able_typeLbl)
+        able_typeLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview().offset(2)
+        }
+        
+        self.aView.addSubview(dateLbl)
+        dateLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.bottom.equalToSuperview().offset(2)
+        }
+
+        self.contentView.addSubview(priceLbl)
+        priceLbl.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-125)
+            make.centerY.equalToSuperview()
+        }
+
+        self.contentView.addSubview(priceSignLbl)
+        priceSignLbl.snp.makeConstraints { make in
+            make.left.equalTo(priceLbl.snp.right).offset(4)
+            make.bottom.equalTo(priceLbl.snp.bottom).offset(-2)
+        }
+        
+        self.contentView.addSubview(balanceLbl)
+        balanceLbl.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-28)
+            make.centerY.equalToSuperview()
+        }
+
+        self.contentView.addSubview(balanceSignLbl)
+        balanceSignLbl.snp.makeConstraints { make in
+            make.right.equalTo(balanceLbl.snp.left).offset(-4)
+            make.bottom.equalTo(balanceLbl.snp.bottom).offset(-2)
+        }
+        
+        self.contentView.addSubview(balanceUnitLbl)
+        balanceUnitLbl.snp.makeConstraints { make in
+            make.left.equalTo(balanceLbl.snp.right).offset(4)
+            make.bottom.equalTo(balanceLbl.snp.bottom).offset(-2)
+        }
+    }
+    
+    override func configureSubViews() {
+        
+        super.configureSubViews()
+        
+        if (item != nil) {
+            noLbl.text = String(item!.no) + "."
+            
+            dateLbl.text = item!.created_at.noSec()
+            
+            balanceLbl.text = item!.balance.formattedWithSeparator
+            
+            if (item!.able_type_show.count > 0) {
+                able_typeLbl.text = item!.able_type_show
+                let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(able_action))
+                tap.cancelsTouchesInView = false
+                able_typeLbl.addGestureRecognizer(tap)
+            }
+            
+            
+            if (item!.in_out) {
+                priceLbl.text = "+" + item!.coin.formattedWithSeparator
+                typeButton.setTitle(item!.type_in_enum.rawValue)
+                if (item!.type_in_enum == MEMBER_COIN_IN_TYPE.buy) {
+                    typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_BUY))
+                } else if (item!.type_in_enum == MEMBER_COIN_IN_TYPE.gift) {
+                    typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_GIFT))
+                } else {
+                    typeButton.isHidden = true
+                }
+            } else {
+                priceLbl.text = "-" + item!.coin.formattedWithSeparator
+                priceLbl.setTextColor(UIColor(MY_RED))
+                typeButton.setTitle(item!.type_out_enum.rawValue)
+                if (item!.type_out_enum == MEMBER_COIN_OUT_TYPE.product) {
+                    typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_PAY))
+                } else if (item!.type_out_enum == MEMBER_COIN_OUT_TYPE.course) {
+                    typeButton.setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MEMBER_COIN_PAY))
+                } else {
+                    typeButton.isHidden = true
+                }
+            }
+            
+            if (item!.name.count > 0) {
+                able_typeLbl.text = item!.name
+            }
+        }
+    }
+    
+    @objc func able_action(_ sender: UITapGestureRecognizer) {
+        if (myDelegate != nil && item != nil) {
+            myDelegate!.toPayment(order_token: item!.able_token)
+        }
+    }
     
 }
 

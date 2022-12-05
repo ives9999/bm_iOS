@@ -13,7 +13,10 @@ import MercariQRScanner
 class ManagerTeamMemberVC: BaseViewController {
     
     
-    lazy var tableView: ManagerTeamMemberTable? = nil
+    lazy var tableView: MyTable2VC<ManagerTeamMemberCell, TeamMemberTable, ManagerTeamMemberVC> = {
+        let tableView = MyTable2VC<ManagerTeamMemberCell, TeamMemberTable, ManagerTeamMemberVC>(selected: tableViewSetSelected(row:), myDelegate: self)
+        return tableView
+    }()
     
     var token: String? = nil
     
@@ -68,8 +71,9 @@ class ManagerTeamMemberVC: BaseViewController {
         let scanRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleScan(sender:)))
         scanIV.addGestureRecognizer(scanRecognizer)
         
-        tableView = ManagerTeamMemberTable(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:), delegate: self)
-        tableView!.anchor(parent: view, showTop: toolView)
+        //tableView = MyTable2VC(didSelect: didSelect(item:, at:), selected: tableViewSetSelected(row:), myDelegate: self)
+        //tableView = ManagerTeamMemberTable(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:), myDelegate: self)
+        tableView.anchor(parent: view, showTop: toolView)
         
         //setupBottomThreeView()
         
@@ -95,18 +99,18 @@ class ManagerTeamMemberVC: BaseViewController {
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 //TeamService.instance.jsonData?.prettyPrintedJSONString
-                let b: Bool = self.tableView!.parseJSON(jsonData: TeamService.instance.jsonData)
-                if !b && self.tableView!.msg.count == 0 {
+                let b: Bool = self.tableView.parseJSON(jsonData: TeamService.instance.jsonData)
+                if !b && self.tableView.msg.count == 0 {
                     self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
                 } else {
-                    self.rows = self.tableView!.items
+                    self.rows = self.tableView.items
                 }
                 //self.showTableView(tableView: self.tableView, jsonData: TeamService.instance.jsonData!)
             }
         }
     }
     
-    func didSelect<T: TeamMemberTable>(item: T, at indexPath: IndexPath) {
+    override func didSelect<U>(item: U, at indexPath: IndexPath) {
         
     }
     
@@ -310,33 +314,32 @@ extension ManagerTeamMemberVC: QRScannerViewDelegate {
     }
 }
 
-class ManagerTeamMemberTable: MyTable2VC<ManagerTeamMemberCell, TeamMemberTable> {
-    
-    typealias deleteClosure = ((TeamMemberTable) -> Void)?
-    //var delete: deleteClosure = nil
-    var thisDelegate: ManagerTeamMemberVC?
-    
-    init(didSelect: didSelectClosure, selected: selectedClosure, delegate: ManagerTeamMemberVC) {
-        super.init(didSelect: didSelect, selected: selected)
-        self.thisDelegate = delegate
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    override func cellForRow(atBaseTableIndexPath: IndexPath) -> UITableViewCell {
-        let cell = super.cellForRow(atBaseTableIndexPath: atBaseTableIndexPath) as! ManagerTeamMemberCell
-        
-        if self.thisDelegate != nil {
-            cell.thisDelegate = self.thisDelegate
-        }
-        
-        return cell
-    }
-}
+//class ManagerTeamMemberTable: MyTable2VC<ManagerTeamMemberCell, TeamMemberTable, ManagerTeamMemberVC> {
+//
+//    typealias deleteClosure = ((TeamMemberTable) -> Void)?
+//    //var delete: deleteClosure = nil
+//    var thisDelegate: ManagerTeamMemberVC?
+//
+//    override init(didSelect: didSelectClosure, selected: selectedClosure, myDelegate: ManagerTeamMemberVC) {
+//        super.init(didSelect: didSelect, selected: selected, myDelegate: myDelegate)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        fatalError("init(coder:) has not been implemented")
+//    }
+//
+//    override func cellForRow(atBaseTableIndexPath: IndexPath) -> UITableViewCell {
+//        let cell = super.cellForRow(atBaseTableIndexPath: atBaseTableIndexPath) as! ManagerTeamMemberCell
+//
+//        if self.thisDelegate != nil {
+//            cell.thisDelegate = self.thisDelegate
+//        }
+//
+//        return cell
+//    }
+//}
 
-class ManagerTeamMemberCell: BaseCell<TeamMemberTable> {
+class ManagerTeamMemberCell: BaseCell<TeamMemberTable, ManagerTeamMemberVC> {
     
     let noLbl: SuperLabel = {
         let view = SuperLabel()
@@ -373,7 +376,7 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable> {
         return view
     }()
     
-    var thisDelegate: ManagerTeamMemberVC?
+    //var thisDelegate: ManagerTeamMemberVC?
     
 //    typealias deleteClosure = ((TeamMemberTable) -> Void)?
 //    var delete: deleteClosure = nil
@@ -445,9 +448,11 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable> {
     
     @objc func deleteThis(_ sender: UIView) {
         //print(item?.token)
-        if thisDelegate != nil {
-            thisDelegate!.deleteTeamMember(row: item!)
-        }
+//        if thisDelegate != nil {
+//            thisDelegate!.deleteTeamMember(row: item!)
+//        }
+        
+        myDelegate?.deleteTeamMember(row: item!)
     }
     
     func setDeleteClickListener() {

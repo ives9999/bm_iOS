@@ -10,8 +10,8 @@ import Foundation
 
 class MemberSubscriptionKindVC: BaseViewController {
     
-    lazy var tableView: MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable> = {
-        let tableView = MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
+    lazy var tableView: MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable, MemberSubscriptionKindVC> = {
+        let tableView = MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable, MemberSubscriptionKindVC>(selected: tableViewSetSelected(row:), myDelegate: self)
         return tableView
     }()
     
@@ -52,8 +52,10 @@ class MemberSubscriptionKindVC: BaseViewController {
         return row.eng_name == Member.instance.subscription ? true : false
     }
     
-    func didSelect<T: MemberSubscriptionKindTable>(item: T, at indexPath: IndexPath) {
-        toMemberScriptionPay(name: item.name, price: item.price, kind: item.eng_name)
+    override func didSelect<U>(item: U, at indexPath: IndexPath) {
+        
+        let _item: MemberSubscriptionKindTable = item as! MemberSubscriptionKindTable
+        toMemberScriptionPay(name: _item.name, price: _item.price, kind: _item.eng_name)
     }
     
     override func setupBottomThreeView() {
@@ -69,21 +71,87 @@ class MemberSubscriptionKindVC: BaseViewController {
     }
 }
 
-class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable> {
+class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSubscriptionKindVC> {
     
-    @IBOutlet weak var titleLbl: SuperLabel!
-    @IBOutlet weak var priceLbl: SuperLabel!
+    let noLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "100."
+        
+        return view
+    }()
+    
+    let nameLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "xxx"
+        
+        return view
+    }()
+    
+    let priceLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "300"
+        
+        return view
+    }()
+    
+//    @IBOutlet weak var titleLbl: SuperLabel!
+//    @IBOutlet weak var priceLbl: SuperLabel!
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.setupView()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupView()
+    }
+    
+    private func setupView() {
+        backgroundColor = UIColor(MY_BLACK)
+        setAnchor()
+    }
+    
+    func setAnchor() {
+        
+        self.contentView.addSubview(noLbl)
+        noLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(16)
+        }
+        
+        self.contentView.addSubview(nameLbl)
+        nameLbl.snp.makeConstraints { make in
+            make.left.equalTo(noLbl.snp.right).offset(12)
+            make.centerY.equalToSuperview()
+        }
+        
+        self.contentView.addSubview(priceLbl)
+        priceLbl.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
+        }
+    }
     
     override func configureSubViews() {
         
         super.configureSubViews()
-        titleLbl?.text = item?.name
-        priceLbl?.text = "NT$: " + String(item!.price) + " 元/月"
+        
+        noLbl.text = String(item!.no) + "."
+        nameLbl.text = item?.name
+        priceLbl.text = "NT$: " + String(item!.price) + " 元/月"
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
 }
 

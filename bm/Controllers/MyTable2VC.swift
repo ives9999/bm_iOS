@@ -13,7 +13,7 @@ protocol BaseTableViewDelegates: UITableViewDelegate, UITableViewDataSource {
     func cellForRow(atBaseTableIndexPath: IndexPath)-> UITableViewCell
 }
 
-class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates {
+class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableView, BaseTableViewDelegates {
     
     //let cellId: String = "BaseCellID"
     
@@ -22,7 +22,7 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
     var totalCount: Int = 100000
     var totalPage: Int = 1
     var msg: String = ""
-    //var baseViewDelegate: BaseViewController?
+    var myDelegate: V
     
     var items = [U]() {
         didSet {
@@ -32,16 +32,14 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
     
     //var rows: [U] = [U]()
     
-    typealias didSelectClosure = ((U, IndexPath) -> Void)?
-    var didSelect: didSelectClosure
-    
     typealias selectedClosure = ((U) -> Bool)?
     var selected: selectedClosure
     
-    init(didSelect: didSelectClosure, selected: selectedClosure) {
+    init(selected: selectedClosure, myDelegate: V) {
         
-        self.didSelect = didSelect
         self.selected = selected
+        self.myDelegate = myDelegate
+        
         super.init(frame: CGRect.zero, style: .plain)
         
         self.backgroundColor = UIColor(MY_BLACK)
@@ -173,9 +171,10 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
     
     func cellForRow(atBaseTableIndexPath: IndexPath) -> UITableViewCell {
         
-        let cell = self.dequeueReusableCell(withIdentifier: T.identifier, for: atBaseTableIndexPath) as? BaseCell<U>
+        let cell = self.dequeueReusableCell(withIdentifier: T.identifier, for: atBaseTableIndexPath) as? BaseCell<U, V>
         //let cell = self.dequeueReusableCell(withIdentifier: cellId, for: atBaseTableIndexPath) as? BaseCell<U>
         
+        cell?.myDelegate = myDelegate
         let item = items[atBaseTableIndexPath.row]
         item.no = atBaseTableIndexPath.row + 1
         
@@ -191,20 +190,25 @@ class MyTable2VC<T: BaseCell<U>, U: Table>: UITableView, BaseTableViewDelegates 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        didSelect?(items[indexPath.row], indexPath)
+        let i = items[indexPath.row]
+        
+        myDelegate.didSelect(item: i, at: indexPath)
+        
+        //didSelect?(items[indexPath.row], indexPath)
     }
 }
 
-class BaseCell<U: Table>: UITableViewCell {
+class BaseCell<U: Table, V: BaseViewController>: UITableViewCell {
     
     var item: U? {
         didSet {
             configureSubViews()
         }
     }
+    
+    var myDelegate: V?
 
     var no: Int?
-    var delegate: BaseViewController?
     
     func configureSubViews() {
         if (item != nil) {

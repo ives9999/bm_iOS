@@ -10,8 +10,8 @@ import Foundation
 
 class MemberSubscriptionLogVC: BaseViewController {
     
-    lazy var tableView: MyTable2VC<MemberSubscriptionLogCell, MemberSubscriptionLogTable> = {
-        let tableView = MyTable2VC<MemberSubscriptionLogCell, MemberSubscriptionLogTable>(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:))
+    lazy var tableView: MyTable2VC<MemberSubscriptionLogCell, MemberSubscriptionLogTable, MemberSubscriptionLogVC> = {
+        let tableView = MyTable2VC<MemberSubscriptionLogCell, MemberSubscriptionLogTable, MemberSubscriptionLogVC>(selected: tableViewSetSelected(row:), myDelegate: self)
         return tableView
     }()
     
@@ -58,25 +58,91 @@ class MemberSubscriptionLogVC: BaseViewController {
         return false
     }
     
-    func didSelect<T: MemberSubscriptionKindTable>(item: T, at indexPath: IndexPath) {}
+    override func didSelect<U>(item: U, at indexPath: IndexPath) {
+        
+    }    
 }
 
-class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable> {
+class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubscriptionLogVC> {
     
-    @IBOutlet weak var noLbl: SuperLabel!
-    @IBOutlet weak var priceLbl: SuperLabel!
-    @IBOutlet weak var dateLbl: SuperLabel!
+    let noLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "100."
+        
+        return view
+    }()
+    
+    let priceLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "200"
+        
+        return view
+    }()
+    
+    let dateLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "2022-01-05 22:00"
+        
+        return view
+    }()
+    
+//    @IBOutlet weak var noLbl: SuperLabel!
+//    @IBOutlet weak var priceLbl: SuperLabel!
+//    @IBOutlet weak var dateLbl: SuperLabel!
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.setupView()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupView()
+    }
+    
+    private func setupView() {
+        backgroundColor = UIColor(MY_BLACK)
+        setAnchor()
+    }
+    
+    func setAnchor() {
+        
+        self.contentView.addSubview(noLbl)
+        noLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
+            make.top.equalToSuperview().offset(16)
+        }
+        
+        self.contentView.addSubview(priceLbl)
+        priceLbl.snp.makeConstraints { make in
+            make.left.equalTo(noLbl.snp.right).offset(12)
+            make.centerY.equalToSuperview()
+        }
+        
+        self.contentView.addSubview(dateLbl)
+        dateLbl.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
+        }
+    }
     
     override func configureSubViews() {
         
         super.configureSubViews()
-        noLbl?.text = String(item!.no)
-        priceLbl?.text = "NT$: " + String(item!.amount) + " 元"
-        dateLbl?.text = item?.created_at.noSec()
+        noLbl.text = String(item!.no)
+        priceLbl.text = "NT$: " + String(item!.amount) + " 元"
+        dateLbl.text = item?.created_at.noSec()
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
-    
 }
