@@ -85,4 +85,8 @@ class BaseScrollView: UIScrollView {
             make.width.equalToSuperview()
         }
     }
+    
+    func setSpacing(_ margin: CGFloat) {
+        stackContentView.spacing = margin
+    }
 }

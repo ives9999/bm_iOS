@@ -11,7 +11,7 @@ import SwiftyJSON
 import WebKit
 import SCLAlertView
 
-class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WKNavigationDelegate {
+class ShowCourseVC: BaseViewController, WKNavigationDelegate {
     
 //    @IBOutlet weak var signupButton: SubmitButton!
 //    @IBOutlet weak var signupButtonConstraintLeading: NSLayoutConstraint!
@@ -638,6 +638,98 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
             warning("無法取得日期參數，所以無法報名，請通知管理員 - signupButtonPressed")
         }
     }
+
+    func getMemberOne(member_token: String) {
+        
+        MemberService.instance.getOne(params: ["token": member_token]) { success in
+            
+            Global.instance.removeSpinner(superView: self.view)
+            
+            if success {
+                
+                let jsonData: Data = MemberService.instance.jsonData!
+                do {
+                    let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
+                    if successTable.success {
+                        let memberTable: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
+                        if memberTable.id > 0 {
+                            self.showTempMemberInfo(memberTable)
+                        }
+                    } else {
+                        self.warning(successTable.msg)
+                    }
+                } catch {
+                    self.warning(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func showTempMemberInfo(_ memberTable: MemberTable) {
+        
+        let apperance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            showCircularIcon: true
+        )
+        
+        let alertView = SCLAlertView(appearance: apperance)
+        let alertViewIcon = UIImage(named: "member1")
+        
+        // Creat the subview
+        let subview = UIView(frame: CGRect(x:0, y:0, width:220, height:100))
+        //subview.backgroundColor = UIColor.red
+        //let x = (subview.frame.width - 10) / 2
+
+        let a: String = "姓名：" + memberTable.name + "\n"
+        + "電話：" + memberTable.mobile.mobileShow() + "\n"
+        + "EMail：" + memberTable.email
+        
+        // Add textfield 1
+        let textfield1 = UITextView(frame: CGRect(x:0, y:0, width:subview.frame.width, height:subview.frame.height))
+        //textfield1.backgroundColor = UIColor.yellow
+        textfield1.text = a
+        textfield1.font = UIFont(name: textfield1.font?.fontName ?? FONT_NAME, size: 18)
+        subview.addSubview(textfield1)
+
+        // Add the subview to the alert's UI property
+        alertView.customSubview = subview
+        
+//        let a: UITextView = alertView.addTextView()
+//        a.frame = CGRect(x: 0, y: 0, width: 216, height: 300)
+//
+
+        
+        alertView.addButton("打電話") {
+            memberTable.mobile.makeCall()
+        }
+        
+        alertView.addButton("關閉", backgroundColor: UIColor(MY_GRAY)) {
+            alertView.hideView()
+        }
+        alertView.showSuccess(memberTable.nickname, subTitle: "", circleIconImage: alertViewIcon)
+    }
+    
+    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.contentWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+            if complete != nil {
+                self.contentWebView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
+                    self.contentWebView.snp.remakeConstraints { make in
+                        make.height.equalTo(height as! CGFloat)
+                    }
+                    //self.contentWebViewConstraintHeight!.constant = height as! CGFloat
+                })
+            }
+
+        })
+    }
+}
+
+extension ShowCourseVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -739,95 +831,6 @@ class ShowCourseVC: BaseViewController, UITableViewDelegate, UITableViewDataSour
                 }
             }
         }
-    }
-    
-    func getMemberOne(member_token: String) {
-        
-        MemberService.instance.getOne(params: ["token": member_token]) { success in
-            
-            Global.instance.removeSpinner(superView: self.view)
-            
-            if success {
-                
-                let jsonData: Data = MemberService.instance.jsonData!
-                do {
-                    let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
-                    if successTable.success {
-                        let memberTable: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
-                        if memberTable.id > 0 {
-                            self.showTempMemberInfo(memberTable)
-                        }
-                    } else {
-                        self.warning(successTable.msg)
-                    }
-                } catch {
-                    self.warning(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    func showTempMemberInfo(_ memberTable: MemberTable) {
-        
-        let apperance = SCLAlertView.SCLAppearance(
-            showCloseButton: false,
-            showCircularIcon: true
-        )
-        
-        let alertView = SCLAlertView(appearance: apperance)
-        let alertViewIcon = UIImage(named: "member1")
-        
-        // Creat the subview
-        let subview = UIView(frame: CGRect(x:0, y:0, width:220, height:100))
-        //subview.backgroundColor = UIColor.red
-        //let x = (subview.frame.width - 10) / 2
-
-        let a: String = "姓名：" + memberTable.name + "\n"
-        + "電話：" + memberTable.mobile.mobileShow() + "\n"
-        + "EMail：" + memberTable.email
-        
-        // Add textfield 1
-        let textfield1 = UITextView(frame: CGRect(x:0, y:0, width:subview.frame.width, height:subview.frame.height))
-        //textfield1.backgroundColor = UIColor.yellow
-        textfield1.text = a
-        textfield1.font = UIFont(name: textfield1.font?.fontName ?? FONT_NAME, size: 18)
-        subview.addSubview(textfield1)
-
-        // Add the subview to the alert's UI property
-        alertView.customSubview = subview
-        
-//        let a: UITextView = alertView.addTextView()
-//        a.frame = CGRect(x: 0, y: 0, width: 216, height: 300)
-//
-
-        
-        alertView.addButton("打電話") {
-            memberTable.mobile.makeCall()
-        }
-        
-        alertView.addButton("關閉", backgroundColor: UIColor(MY_GRAY)) {
-            alertView.hideView()
-        }
-        alertView.showSuccess(memberTable.nickname, subTitle: "", circleIconImage: alertViewIcon)
-    }
-    
-    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.contentWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
-            if complete != nil {
-                self.contentWebView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
-                    self.contentWebView.snp.remakeConstraints { make in
-                        make.height.equalTo(height as! CGFloat)
-                    }
-                    //self.contentWebViewConstraintHeight!.constant = height as! CGFloat
-                })
-            }
-
-        })
     }
 }
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,6 +41,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="sAM-Sc-Ccy" firstAttribute="leading" secondItem="lA2-Mg-nYx" secondAttribute="leading" constant="16" id="XpQ-py-Wg2"/>
+                        <constraint firstAttribute="height" constant="48" id="bfD-Qm-vt2"/>
                         <constraint firstItem="pd0-QY-b3B" firstAttribute="leading" secondItem="sAM-Sc-Ccy" secondAttribute="trailing" constant="4" id="fvH-oT-jDw"/>
                         <constraint firstItem="pd0-QY-b3B" firstAttribute="centerY" secondItem="lA2-Mg-nYx" secondAttribute="centerY" id="jrH-D9-Ps8"/>
                         <constraint firstItem="sAM-Sc-Ccy" firstAttribute="centerY" secondItem="lA2-Mg-nYx" secondAttribute="centerY" id="u9T-gk-sAe"/>
@@ -57,6 +59,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="Um2-76-PD7" secondAttribute="bottom" id="Fwk-V6-gvo"/>
+                <constraint firstItem="lA2-Mg-nYx" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Ne5-Dz-oiZ"/>
                 <constraint firstItem="lA2-Mg-nYx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="PSm-x3-Qtz"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Um2-76-PD7" secondAttribute="trailing" id="ZLW-XA-MhZ"/>
                 <constraint firstItem="lA2-Mg-nYx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="aeg-bz-XOY"/>

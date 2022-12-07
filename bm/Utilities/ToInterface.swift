@@ -421,9 +421,12 @@ extension BaseViewController {
 //                show(viewController, sender: nil)
 //            }
         } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_COURSE) as! ShowCourseVC
+            let v: ManagerTeamMemberVC = ManagerTeamMemberVC()
+            v.token = token
+            v.modalPresentationStyle = .fullScreen
+            //let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_COURSE) as! ShowCourseVC
             //viewController.token = token
-            self.navigationController!.pushViewController(viewController, animated: true)
+            self.navigationController!.pushViewController(v, animated: true)
         }
     }
     
@@ -953,18 +956,23 @@ extension BaseViewController {
     }
     
     func toShowTeam(token: String) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Team", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_TEAM)  as? ShowTeamVC {
-                viewController.token = token
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_TEAM) as! ShowTeamVC
-            viewController.token = token
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
+        
+        let v: ShowTeamVC = ShowTeamVC()
+        v.token = token
+        v.modalPresentationStyle = .fullScreen
+        show(v, sender: nil)
+//        if #available(iOS 13.0, *) {
+//            let storyboard = UIStoryboard(name: "Team", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_TEAM)  as? ShowTeamVC {
+//                viewController.token = token
+//                viewController.modalPresentationStyle = .fullScreen
+//                show(viewController, sender: nil)
+//            }
+//        } else {
+//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_TEAM) as! ShowTeamVC
+//            viewController.token = token
+//            self.navigationController!.pushViewController(viewController, animated: true)
+//        }
     }
 
     func toShowProduct(token: String) {
