@@ -121,6 +121,7 @@ class ShowTeamVC: BaseViewController {
     var focusTabIdx: Int = 0
     
     var memberRows: [MemberRow] = [MemberRow]()
+    var items: [TeamMemberTable] = [TeamMemberTable]()
     
     var token: String?
 
@@ -522,10 +523,10 @@ class ShowTeamVC: BaseViewController {
             if (success) {
                 //TeamService.instance.jsonData?.prettyPrintedJSONString
                 let b: Bool = self.parseJSON(jsonData: TeamService.instance.jsonData)
-                if !b && self.tableView.msg.count == 0 {
+                if !b && self.msg.count == 0 {
                     self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
                 } else {
-                    self.rows = self.tableView.items
+                    //self.rows = self.tableView.items
                 }
                 //self.showTableView(tableView: self.tableView, jsonData: TeamService.instance.jsonData!)
             }
@@ -534,18 +535,59 @@ class ShowTeamVC: BaseViewController {
     
     func parseJSON(jsonData: Data?)-> Bool {
         
-        let _rows: [U] = genericTable2(jsonData: jsonData)
+        let _rows: [TeamMemberTable] = self.genericTable2(jsonData: jsonData)
         if (_rows.count == 0) {
             return false
         } else {
             if (page == 1) {
-                items = [U]()
+                items = [TeamMemberTable]()
             }
             items += _rows
-            reloadData()
+            introduceTableView.reloadData()
         }
         
         return true
+    }
+    
+    func genericTable2(jsonData: Data?)-> [TeamMemberTable] {
+        
+        var rows: [TeamMemberTable] = [TeamMemberTable]()
+        do {
+            if (jsonData != nil) {
+                //print(jsonData!.prettyPrintedJSONString)
+                let tables2: Tables2 = try JSONDecoder().decode(Tables2<TeamMemberTable>.self, from: jsonData!)
+                if (tables2.success) {
+                    if tables2.rows.count > 0 {
+                        
+                        for row in tables2.rows {
+                            row.filterRow()
+                            
+//                            if let b: Bool = selected?(row) {
+//                                row.selected = b
+//                            }
+                        }
+                        
+                        if (page == 1) {
+                            page = tables2.page
+                            perPage = tables2.perPage
+                            totalCount = tables2.totalCount
+                            let _totalPage: Int = totalCount / perPage
+                            totalPage = (totalCount % perPage > 0) ? _totalPage + 1 : _totalPage
+                        }
+                        
+                        rows += tables2.rows
+                    }
+                } else {
+                    msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
+                }
+            } else {
+                msg = "無法從伺服器取得正確的json資料，請洽管理員"
+            }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        
+        return rows
     }
     
     func getMemberOne(member_token: String) {
@@ -730,6 +772,8 @@ class ShowTeamVC: BaseViewController {
                         
                         initTeamMember()
                         showTeamMember()
+                        
+                        getTeamMemberList()
                         introduceTableView.reloadData()
                         
                     case 2:
