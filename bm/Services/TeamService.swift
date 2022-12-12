@@ -123,9 +123,9 @@ class TeamService: DataService {
     
     func teamMemberList(token: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
         let url: String = URL_TEAM_MEMBER_LIST
-        var body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "token": token]
-//        print(url)
-//        print(body)
+        var body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "team_token": token]
+        //print(url)
+        //print(body)
         
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             

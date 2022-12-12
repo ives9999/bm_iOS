@@ -643,6 +643,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
     func info(_ msg: String) {
         _info(msg: msg)
     }
+    
+    func like() {}
 
     func loadingShow() {
         if loadingMask == nil {

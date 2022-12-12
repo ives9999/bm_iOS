@@ -10,25 +10,7 @@ import UIKit
 import WebKit
 import SCLAlertView
 
-class ShowTeamVC: BaseViewController {
-    
-//    @IBOutlet weak var signupTableView: SuperTableView!
-//
-//    @IBOutlet weak var signupDataLbl: SuperLabel!
-//    @IBOutlet weak var signupTimeLbl: SuperLabel!
-//    @IBOutlet weak var signupDeadlineLbl: SuperLabel!
-//
-//    @IBOutlet weak var signupTableViewConstraintHeight: NSLayoutConstraint!
-//    @IBOutlet weak var signupButton: SubmitButton!
-//    @IBOutlet weak var signupButtonConstraintLeading: NSLayoutConstraint!
-//
-//    @IBOutlet weak var topTabContainer: UIStackView!
-    
-//    var topTabContainer: UIView = {
-//        let view: UIView = UIView()
-//        view.backgroundColor = UIColor.blue
-//        return view
-//    }()
+class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     var showTop: ShowTop2?
     
@@ -54,10 +36,26 @@ class ShowTeamVC: BaseViewController {
     var bottom_button_count: Int = 1
     var showBottom: ShowBottom2?
     
-    var scrollView: BaseScrollView?
+    var spacer: UIView = UIView()
+    
+    var scrollView: UIScrollView = {
+        let view = UIScrollView()
+        
+        return view
+    }()
+    
+    var introduceStackView: UIStackView = {
+        let view = UIStackView()
+        //view.backgroundColor = UIColor.red
+        //view.layer.cornerRadius = 26.0
+        //view.clipsToBounds = true
+        view.axis = .vertical
+        view.spacing = 0
+        return view
+    }()
     
     let featured: UIImageView = UIImageView()
-    var featured_h: CGFloat = 0
+    //var featured_h: CGFloat = 0
     let introduceTableView: UITableView = {
         let view = UITableView()
         view.isScrollEnabled = false
@@ -74,6 +72,56 @@ class ShowTeamVC: BaseViewController {
         return view
     }()
     
+    var contentLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextSectionTitle()
+        view.text = "更多介紹"
+        view.textAlignment = .center
+        
+        return view
+    }()
+    
+    var contentWebView: WKWebView = {
+        
+        //Create configuration
+        let configuration = WKWebViewConfiguration()
+        //configuration.userContentController = controller
+        
+        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+        webView.backgroundColor = UIColor.clear
+        webView.scrollView.isScrollEnabled = false
+        return webView
+    }()
+    
+    //team member
+    var teamMemberStackView: UIStackView = {
+        let view = UIStackView()
+        //view.backgroundColor = UIColor.red
+        //view.layer.cornerRadius = 26.0
+        //view.clipsToBounds = true
+        view.axis = .vertical
+        view.spacing = 12
+        return view
+    }()
+    
+    let teamMemberDataLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextTitle()
+        view.text = "總人數：16位"
+        view.visibility = .invisible
+        
+        return view
+    }()
+    
+    var tempPlayStackView: UIStackView = {
+        let view = UIStackView()
+        //view.backgroundColor = UIColor.red
+        //view.layer.cornerRadius = 26.0
+        //view.clipsToBounds = true
+        view.axis = .vertical
+        view.spacing = 12
+        return view
+    }()
     
     //tempplay data
     let tempPlayDataLbl: SuperLabel = {
@@ -97,16 +145,8 @@ class ShowTeamVC: BaseViewController {
         
         return view
     }()
-        
     
-    //team member
-    let teamMemberDataLbl: SuperLabel = {
-        let view: SuperLabel = SuperLabel()
-        view.setTextTitle()
-        view.text = "總人數：16位"
-        
-        return view
-    }()
+    var isTeamMemberLoaded: Bool = false
     
     var table: Table?
     var myTable: TeamTable?
@@ -122,32 +162,12 @@ class ShowTeamVC: BaseViewController {
     
     var memberRows: [MemberRow] = [MemberRow]()
     var items: [TeamMemberTable] = [TeamMemberTable]()
-    
+        
     var token: String?
 
     override func viewDidLoad() {
         
         dataService = TeamService.instance
-        
-        showTop = ShowTop2(delegate: self)
-        showTop!.setAnchor(parent: self.view)
-        
-        initTopTagStackView()
-        initTabTop()
-        
-        showBottom = ShowBottom2(delegate: self)
-        self.view.addSubview(showBottom!)
-        showBottom!.setAnchor(parent: self.view)
-        showBottom!.setSubmitBtnTitle("報名")
-        
-        initScrollView()
-        introduceTableView.snp.makeConstraints { make in
-            make.height.equalTo(100)
-        }
-        
-        initIntroduce()
-        
-        showIntroduce()
         
         //initSignup()
         
@@ -160,20 +180,30 @@ class ShowTeamVC: BaseViewController {
         
         super.viewDidLoad()
         
+        showTop = ShowTop2(delegate: self)
+        showTop!.setAnchor(parent: self.view)
+        
+        initTopTagStackView()
+        initTabTop()
+        
+        showBottom = ShowBottom2(delegate: self)
+        self.view.addSubview(showBottom!)
+        //showBottom!.justShowLike(parent: self.view)
+        showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
+
+        initScrollView()
+        
+        introduceTableView.snp.makeConstraints { make in
+            make.height.equalTo(100)
+        }
         introduceTableView.delegate = self
         introduceTableView.dataSource = self
         
-//        mainDataLbl.text = "主要資料"
-        //signupDataLbl.text = "臨打報名"
-//        contentDataLbl.text = "詳細介紹"
-//
-//        mainDataLbl.setTextTitle()
-        //signupDataLbl.setTextSectionTitle()
-//        contentDataLbl.setTextSectionTitle()
-//
-        //signupButton.setTitle("報名")
+        initIntroduce()
+        //initTeamMember()
 
         refresh(TeamTable.self)
+        //getTeamMemberList()
     }
     
     func initTopTagStackView() {
@@ -196,70 +226,91 @@ class ShowTeamVC: BaseViewController {
     }
     
     private func initScrollView() {
-        scrollView = BaseScrollView(parent: self.view, delegate: self)
-        scrollView!.setAnchor(top: tagLine.snp.bottom, bottom: showBottom!.snp.top)
-        scrollView?.setSpacing(10)
+        
+        self.view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { make in
+            make.top.equalTo(tagLine.snp.bottom)
+            make.right.left.equalToSuperview()
+            make.bottom.equalTo(showBottom!.snp.top)
+        }
     }
     
     private func initIntroduce() {
         
-        scrollView?.stackContentView.addArrangedSubview(featured)
+        scrollView.addSubview(introduceStackView)
+        introduceStackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+        
+        introduceStackView.addArrangedSubview(featured)
         featured.snp.makeConstraints { make in
-            //make.top.left.right.equalToSuperview()
             make.top.equalToSuperview().offset(5)
             make.height.equalTo(200)
         }
         //featured.backgroundColor = UIColor.brown
-        scrollView?.stackContentView.addArrangedSubview(introduceTableView)
-    }
-    
-    private func removeIntroduce() {
-        scrollView?.stackContentView.removeArrangedSubview(featured)
-        scrollView?.stackContentView.removeArrangedSubview(introduceTableView)
-    }
-    
-    private func initTempPlay() {
+        introduceStackView.addArrangedSubview(introduceTableView)
         
-        scrollView?.stackContentView.addArrangedSubview(tempPlayDataLbl)
-        tempPlayDataLbl.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
-            make.left.equalToSuperview().offset(12)
+        introduceStackView.addArrangedSubview(spacer)
+        spacer.snp.makeConstraints { make in
+            make.height.equalTo(130)
+        }
+        introduceStackView.addArrangedSubview(contentLbl)
+        introduceStackView.addArrangedSubview(spacer)
+        spacer.snp.makeConstraints { make in
+            make.height.equalTo(30)
         }
         
-        scrollView?.stackContentView.addArrangedSubview(tempPlayTimeLbl)
-        tempPlayTimeLbl.snp.makeConstraints { make in
-            //make.top.equalTo(signupDataLbl.snp.bottom).offset(50)
-            make.left.equalToSuperview().offset(12)
+        introduceStackView.addArrangedSubview(contentWebView)
+
+        contentWebView.snp.makeConstraints { make in
+            make.height.equalTo(100)
         }
-        //scrollView?.stackContentView.addArrangedSubview(spacerView)
-        
-        scrollView?.stackContentView.addArrangedSubview(tempPlayDeadlineLbl)
-        tempPlayDeadlineLbl.snp.makeConstraints { make in
-            //make.top.equalTo(signupTimeLbl.snp.bottom).offset(16)
-            make.left.equalToSuperview().offset(12)
-        }
-        
-        scrollView?.stackContentView.addArrangedSubview(introduceTableView)
-    }
-    
-    private func removeTempPlay() {
-        scrollView?.stackContentView.removeArrangedSubview(tempPlayDataLbl)
-        scrollView?.stackContentView.removeArrangedSubview(tempPlayTimeLbl)
-        scrollView?.stackContentView.removeArrangedSubview(tempPlayDeadlineLbl)
-        scrollView?.stackContentView.removeArrangedSubview(introduceTableView)
     }
     
     private func initTeamMember() {
-        scrollView?.stackContentView.addArrangedSubview(teamMemberDataLbl)
+        scrollView.addSubview(teamMemberStackView)
+        teamMemberStackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+        
+        teamMemberStackView.addArrangedSubview(teamMemberDataLbl)
         teamMemberDataLbl.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(10)
             make.left.equalToSuperview().offset(12)
         }
+        
+        teamMemberStackView.addArrangedSubview(introduceTableView)
     }
-    
-    private func removeTeamMember() {
-        scrollView?.stackContentView.removeArrangedSubview(teamMemberDataLbl)
-        scrollView?.stackContentView.removeArrangedSubview(introduceTableView)
+
+    private func initTempPlay() {
+        
+        scrollView.addSubview(tempPlayStackView)
+        tempPlayStackView.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.width.equalToSuperview()
+        }
+        
+        tempPlayStackView.addArrangedSubview(tempPlayDataLbl)
+        tempPlayDataLbl.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(10)
+            make.left.equalToSuperview().offset(12)
+        }
+
+        tempPlayStackView.addArrangedSubview(tempPlayTimeLbl)
+        tempPlayTimeLbl.snp.makeConstraints { make in
+            //make.top.equalTo(signupDataLbl.snp.bottom).offset(50)
+            make.left.equalToSuperview().offset(12)
+        }
+
+        tempPlayStackView.addArrangedSubview(tempPlayDeadlineLbl)
+        tempPlayDeadlineLbl.snp.makeConstraints { make in
+            //make.top.equalTo(signupTimeLbl.snp.bottom).offset(16)
+            make.left.equalToSuperview().offset(12)
+        }
+
+        tempPlayStackView.addArrangedSubview(introduceTableView)
     }
     
     func refresh<T: Table>(_ t: T.Type) {
@@ -282,9 +333,8 @@ class ShowTeamVC: BaseViewController {
                                 self.table!.filterRow()
                                 self.setFeatured()
                                 self.setIntroduceData()
-                                //self.setSignupData()
-//                                self.setContentWeb()
-//                                self.setLike()
+                                self.setContentWeb()
+                                self.setLike()
                                 self.showTop!.setTitle(title: self.table!.name)
                                 self.introduceTableView.reloadData()
                             }
@@ -346,7 +396,7 @@ class ShowTeamVC: BaseViewController {
             
             featured.downloaded(from: table!.featured_path)
             
-            featured_h = featured.heightForUrl(url: table!.featured_path, width: screen_width)
+            //featured_h = featured.heightForUrl(url: table!.featured_path, width: screen_width)
         } else {
             warning("沒有取得內容資料值，請稍後再試或洽管理員")
         }
@@ -401,18 +451,17 @@ class ShowTeamVC: BaseViewController {
         memberRows.append(row)
     }
     
-//    func setBottomButtonPadding() {
-//
-//        if (signupButton.isHidden) {
-//            bottom_button_count -= 1
-//        }
-//
-//        let padding: CGFloat = (screen_width - CGFloat(bottom_button_count) * button_width) / CGFloat((bottom_button_count + 1))
-//        likeButtonConstraintLeading.constant = CGFloat(bottom_button_count) * padding + CGFloat(bottom_button_count-1)*button_width
-//        signupButtonConstraintLeading.constant = padding
-//    }
+    func setContentWeb() {
+        let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+table!.content+"</body></html>"
+        
+        contentWebView.loadHTMLString(content, baseURL: nil)
+    }
     
-    
+    func setLike() {
+        if (table != nil) {
+            showBottom?.setLike(isLike: table!.like, count: table!.like_count)
+        }
+    }
     
     func setSignupData() {
 
@@ -435,23 +484,20 @@ class ShowTeamVC: BaseViewController {
             }
         }
 
-//        if (myTable!.people_limit == 0) {
-//            signupButton.visibility = .invisible
-//            setBottomButtonPadding()
-//        }
-//
-//        if myTable!.isSignup {
-//            signupButton.setTitle("取消報名")
-//        } else {
-//            let count = myTable!.signupNormalTables.count
-//            if count >= myTable!.people_limit {
-//                self.signupButton.setTitle("候補")
-//            } else {
-//                self.signupButton.setTitle("報名")
-//            }
-//        }
-//
-//        signupTableView.reloadData()
+        if (myTable!.people_limit == 0) {
+            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
+        }
+
+        if myTable!.isSignup {
+            showBottom?.setSubmitBtnTitle("取消報名")
+        } else {
+            let count = myTable!.signupNormalTables.count
+            if count >= myTable!.people_limit {
+                showBottom?.setSubmitBtnTitle("候補")
+            } else {
+                showBottom?.setSubmitBtnTitle("報名")
+            }
+        }
     }
 
     func isTempPlayOnline() {
@@ -521,14 +567,9 @@ class ShowTeamVC: BaseViewController {
         TeamService.instance.teamMemberList(token: token!, page: page, perPage: PERPAGE) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                //TeamService.instance.jsonData?.prettyPrintedJSONString
-                let b: Bool = self.parseJSON(jsonData: TeamService.instance.jsonData)
-                if !b && self.msg.count == 0 {
-                    self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
-                } else {
-                    //self.rows = self.tableView.items
-                }
-                //self.showTableView(tableView: self.tableView, jsonData: TeamService.instance.jsonData!)
+                self.parseJSON(jsonData: TeamService.instance.jsonData)
+            } else {
+                self.warning("取得資料錯誤，請洽管理員！！")
             }
         }
     }
@@ -537,12 +578,15 @@ class ShowTeamVC: BaseViewController {
         
         let _rows: [TeamMemberTable] = self.genericTable2(jsonData: jsonData)
         if (_rows.count == 0) {
-            return false
+            self.teamMemberDataLbl.visibility = .invisible
+            self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
         } else {
             if (page == 1) {
                 items = [TeamMemberTable]()
             }
             items += _rows
+            self.teamMemberDataLbl.visibility = .visible
+            self.teamMemberDataLbl.text = "總人數：\(totalCount)位"
             introduceTableView.reloadData()
         }
         
@@ -561,10 +605,6 @@ class ShowTeamVC: BaseViewController {
                         
                         for row in tables2.rows {
                             row.filterRow()
-                            
-//                            if let b: Bool = selected?(row) {
-//                                row.selected = b
-//                            }
                         }
                         
                         if (page == 1) {
@@ -660,32 +700,6 @@ class ShowTeamVC: BaseViewController {
         alertView.showSuccess(memberTable.nickname, subTitle: "", circleIconImage: alertViewIcon)
     }
     
-//    override func changeScrollViewContentSize() {
-//
-//        //let h1 = featuredConstraintHeight.constant
-//        //let h2 = mainDataLbl.bounds.size.height
-//        let h3 = tableViewConstraintHeight.constant
-////        let h6 = contentDataLbl.bounds.size.height
-////        let h7 = contentViewConstraintHeight!.constant
-////        let h8 = signupDataLbl.bounds.size.height
-//        let h9 = signupTableViewConstraintHeight.constant
-////        let h10 = signupTimeLbl.bounds.size.height
-////        let h11 = signupDeadlineLbl.bounds.size.height
-//        //print(contentViewConstraintHeight)
-//
-//        dataConstraintHeight.constant = h3 + h9
-//        //print("data height:\(dataConstraintHeight.constant)")
-//        //let h: CGFloat = h1 + h2 + h3 + h4 + h5
-//        let h: CGFloat = featuredConstraintHeight.constant + dataConstraintHeight.constant + 300
-//        //print("scroll height:\(h)")
-//
-//        //scrollContainerView.heightConstraint?.constant = h
-//        //scrollView.frame.height = h
-//        //scrollView.contentSize = CGSize(width: view.frame.width, height: h)
-//        //ContainerViewConstraintHeight.constant = h
-//        //print(h1)
-//    }
-    
     @IBAction func signupButtonPressed(_ sender: Any) {
         
         if !Member.instance.isLoggedIn {
@@ -756,36 +770,35 @@ class ShowTeamVC: BaseViewController {
                     switch focusTabIdx {
                     case 0:
                         removeTeamMember()
-                        hideTeamMember()
                         removeTempPlay()
-                        hideTempPlay()
                         
                         initIntroduce()
-                        showIntroduce()
                         introduceTableView.reloadData()
+                        showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
                         
                     case 1:
-                        hideIntroduce()
                         removeIntroduce()
-                        hideTempPlay()
-                        removeIntroduce()
-                        
-                        initTeamMember()
-                        showTeamMember()
-                        
-                        getTeamMemberList()
-                        introduceTableView.reloadData()
-                        
-                    case 2:
-                        hideIntroduce()
-                        removeIntroduce()
-                        hideTempPlay()
                         removeTempPlay()
                         
+                        initTeamMember()
+                        
+                        if (!isTeamMemberLoaded) {
+                            getTeamMemberList()
+                            isTeamMemberLoaded = true
+                        } else {
+                            introduceTableView.reloadData()
+                        }
+                        
+                        showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: true, isShowCancel: false)
+                        
+                    case 2:
+                        removeIntroduce()
+                        removeTeamMember()
+                        
                         initTempPlay()
-                        showTempPlay()
                         setSignupData()
                         introduceTableView.reloadData()
+                        showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
                         
                     default:
                         refresh()
@@ -795,35 +808,16 @@ class ShowTeamVC: BaseViewController {
         }
     }
     
-    private func showIntroduce() {
-        featured.visibility = .visible
-        introduceTableView.visibility = .visible
-    }
-    private func hideIntroduce() {
-        featured.visibility = .invisible
-        introduceTableView.visibility = .invisible
+    private func removeIntroduce() {
+        introduceStackView.removeFromSuperview()
     }
     
-    private func showTeamMember() {
-        teamMemberDataLbl.visibility = .visible
-        introduceTableView.visibility = .visible
-    }
-    private func hideTeamMember() {
-        teamMemberDataLbl.visibility = .invisible
-        introduceTableView.visibility = .invisible
+    private func removeTempPlay() {
+        tempPlayStackView.removeFromSuperview()
     }
     
-    private func showTempPlay() {
-        tempPlayDataLbl.visibility = .visible
-        tempPlayTimeLbl.visibility = .visible
-        tempPlayDeadlineLbl.visibility = .visible
-        introduceTableView.visibility = .visible
-    }
-    private func hideTempPlay() {
-        tempPlayDataLbl.visibility = .invisible
-        tempPlayTimeLbl.visibility = .invisible
-        tempPlayDeadlineLbl.visibility = .invisible
-        introduceTableView.visibility = .invisible
+    private func removeTeamMember() {
+        teamMemberStackView.removeFromSuperview()
     }
     
     private func updateTabSelected(idx: Int) {
@@ -858,6 +852,25 @@ class ShowTeamVC: BaseViewController {
             }
         }
     }
+    
+    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.contentWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+            if complete != nil {
+                self.contentWebView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
+                    self.contentWebView.snp.remakeConstraints { make in
+                        make.height.equalTo(height as! CGFloat)
+                    }
+                    //self.contentWebViewConstraintHeight!.constant = height as! CGFloat
+                })
+            }
+
+        })
+    }
 }
 
 extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
@@ -867,6 +880,9 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
         if (focusTabIdx == 0) {
             return memberRows.count
             //return tableRowKeys.count
+        } else if (focusTabIdx == 1) {
+            return items.count
+            
         } else if (focusTabIdx == 2) {
             
             if myTable != nil && isTempPlay {
@@ -918,6 +934,15 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
 //                }
 //            }
 
+            return cell
+        }
+        else if focusTabIdx == 1 {
+            let cell: ShowSignupCell = tableView.dequeueReusableCell(withIdentifier: "ShowSignupCell", for: indexPath) as! ShowSignupCell
+            
+            let row: TeamMemberTable = items[indexPath.row]
+            cell.noLbl.text = "\(indexPath.row + 1)."
+            cell.nameLbl.text = row.member_nickname
+            
             return cell
         }
         else if focusTabIdx == 2 {

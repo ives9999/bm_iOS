@@ -439,8 +439,7 @@ class ShowCourseVC: BaseViewController, WKNavigationDelegate {
         courseTableView.reloadData()
         courseTableView.invalidateIntrinsicContentSize()
         if (myTable!.people_limit == 0) {
-            showBottom!.setSubmitBtnVisible(true)
-            //signupButton.visibility = .invisible
+            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
         }
         if myTable!.isSignup {
             showBottom!.setSubmitBtnTitle("取消報名")
