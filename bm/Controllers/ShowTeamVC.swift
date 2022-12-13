@@ -54,7 +54,12 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let featured: UIImageView = UIImageView()
+    let featured: UIImageView = {
+        let view = UIImageView()
+        view.backgroundColor = UIColor(MY_GRAY)
+        
+        return view
+    }()
     //var featured_h: CGFloat = 0
     let introduceTableView: UITableView = {
         let view = UITableView()
@@ -199,11 +204,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         introduceTableView.delegate = self
         introduceTableView.dataSource = self
         
-        initIntroduce()
+        //initIntroduce()
         //initTeamMember()
 
         refresh(TeamTable.self)
-        //getTeamMemberList()
     }
     
     func initTopTagStackView() {
@@ -277,7 +281,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         teamMemberStackView.addArrangedSubview(teamMemberDataLbl)
         teamMemberDataLbl.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(12)
             make.left.equalToSuperview().offset(12)
         }
         
@@ -330,6 +334,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                                 //token錯誤，所以無法解析
                                 self.warning("token錯誤，所以無法解析")
                             } else {
+                                self.initIntroduce()
                                 self.table!.filterRow()
                                 self.setFeatured()
                                 self.setIntroduceData()
@@ -561,10 +566,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         //contentView.heightConstraint?.constant = 500 + a
     }
     
-    func getTeamMemberList() {
+    func getTeamMemberList(page: Int = 1, perPage: Int = 20) {
         Global.instance.addSpinner(superView: self.view)
         
-        TeamService.instance.teamMemberList(token: token!, page: page, perPage: PERPAGE) { (success) in
+        TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 self.parseJSON(jsonData: TeamService.instance.jsonData)
@@ -783,7 +788,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                         initTeamMember()
                         
                         if (!isTeamMemberLoaded) {
-                            getTeamMemberList()
+                            getTeamMemberList(page: page, perPage: perPage)
                             isTeamMemberLoaded = true
                         } else {
                             introduceTableView.reloadData()
@@ -1023,5 +1028,19 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
 //                }
 //            }
 //        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //print("page:\(page)")
+        //print("perPage:\(perPage)")
+        //print("index.row:\(indexPath.row)")
+        if indexPath.row == page * perPage - 2 {
+            page += 1
+            //print("current page: \(page)")
+            //print(totalPage)
+            if page <= totalPage {
+                getTeamMemberList(page: page, perPage: perPage)
+            }
+        }
     }
 }
