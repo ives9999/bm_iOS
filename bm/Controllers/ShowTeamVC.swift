@@ -165,8 +165,16 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     ]
     var focusTabIdx: Int = 0
     
-    var memberRows: [MemberRow] = [MemberRow]()
+    //team member
     var items: [TeamMemberTable] = [TeamMemberTable]()
+    var teamMemberPage: Int = 1
+    var teamMemberPerPage: Int = PERPAGE
+    var teamMemberTotalCount: Int = 0
+    var teamMemberTotalPage: Int = 0
+    
+    //temp play
+    var memberRows: [MemberRow] = [MemberRow]()
+    
         
     var token: String?
 
@@ -342,6 +350,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                                 self.setLike()
                                 self.showTop!.setTitle(title: self.table!.name)
                                 self.introduceTableView.reloadData()
+                                
+                                self._tabPressed(self.focusTabIdx)
                             }
                         }
                     } catch {
@@ -586,7 +596,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             self.teamMemberDataLbl.visibility = .invisible
             self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
         } else {
-            if (page == 1) {
+            if (teamMemberPage == 1) {
                 items = [TeamMemberTable]()
             }
             items += _rows
@@ -612,12 +622,12 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                             row.filterRow()
                         }
                         
-                        if (page == 1) {
-                            page = tables2.page
-                            perPage = tables2.perPage
-                            totalCount = tables2.totalCount
-                            let _totalPage: Int = totalCount / perPage
-                            totalPage = (totalCount % perPage > 0) ? _totalPage + 1 : _totalPage
+                        if (teamMemberPage == 1) {
+                            teamMemberPage = tables2.page
+                            teamMemberPerPage = tables2.perPage
+                            teamMemberTotalCount = tables2.totalCount
+                            let _totalPage: Int = teamMemberTotalCount / teamMemberPerPage
+                            teamMemberTotalPage = (teamMemberTotalCount % teamMemberPerPage > 0) ? _totalPage + 1 : _totalPage
                         }
                         
                         rows += tables2.rows
@@ -705,8 +715,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         alertView.showSuccess(memberTable.nickname, subTitle: "", circleIconImage: alertViewIcon)
     }
     
-    @IBAction func signupButtonPressed(_ sender: Any) {
-        
+    override func submit() {
         if !Member.instance.isLoggedIn {
             warning("請先登入會員")
             return
@@ -722,40 +731,43 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             return
         }
         
-        if myTable != nil && myTable!.signupDate != nil {
+        if (focusTabIdx == 2) {
             
-            //print(myTable!.signupDate!.deadline)
-            if let deadline_time: Date = myTable!.signupDate!.deadline.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
-                let now: Date = Date().myNow()
-                if now > deadline_time {
-                    
-                    var msg: String = "已經超過報名截止時間，請下次再報名"
-                    if myTable!.isSignup {
-                        msg = "已經超過取消報名截止時間，無法取消報名"
-                    }
-                    warning(msg)
-                    return
-                }
-            }
-            
-            Global.instance.addSpinner(superView: view)
-            dataService.signup(token: myTable!.token, member_token: Member.instance.token, date_token: myTable!.signupDate!.token) { (success) in
-
-                Global.instance.removeSpinner(superView: self.view)
-
-                do {
-                    if (self.dataService.jsonData != nil) {
-                        let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
-                        if (successTable.success) {
-                            self.info(msg: successTable.msg, buttonTitle: "關閉") {
-                                self.refresh(TeamTable.self)
-                            }
-                        } else {
-                            self.warning(successTable.msg)
+            if myTable != nil && myTable!.signupDate != nil {
+                
+                //print(myTable!.signupDate!.deadline)
+                if let deadline_time: Date = myTable!.signupDate!.deadline.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
+                    let now: Date = Date().myNow()
+                    if now > deadline_time {
+                        
+                        var msg: String = "已經超過報名截止時間，請下次再報名"
+                        if myTable!.isSignup {
+                            msg = "已經超過取消報名截止時間，無法取消報名"
                         }
+                        warning(msg)
+                        return
                     }
-                } catch {
-                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                }
+                
+                Global.instance.addSpinner(superView: view)
+                dataService.signup(token: myTable!.token, member_token: Member.instance.token, date_token: myTable!.signupDate!.token) { (success) in
+                    
+                    Global.instance.removeSpinner(superView: self.view)
+                    
+                    do {
+                        if (self.dataService.jsonData != nil) {
+                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
+                            if (successTable.success) {
+                                self.info(msg: successTable.msg, buttonTitle: "關閉") {
+                                    self.refresh(TeamTable.self)
+                                }
+                            } else {
+                                self.warning(successTable.msg)
+                            }
+                        }
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    }
                 }
             }
         }
@@ -764,52 +776,59 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     @objc func tabPressed(sender: UITapGestureRecognizer) {
                 
         if let idx: Int = sender.view?.tag {
-            
+            self._tabPressed(idx)
             let selectedTag: [String: Any] = topTabs[idx]
             if let focus: Bool = selectedTag["focus"] as? Bool {
-
                 //按了其他頁面的按鈕
                 if (!focus) {
                     updateTabSelected(idx: idx)
                     focusTabIdx = idx
-                    switch focusTabIdx {
-                    case 0:
-                        removeTeamMember()
-                        removeTempPlay()
-                        
-                        initIntroduce()
-                        introduceTableView.reloadData()
-                        showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
-                        
-                    case 1:
-                        removeIntroduce()
-                        removeTempPlay()
-                        
-                        initTeamMember()
-                        
-                        if (!isTeamMemberLoaded) {
-                            getTeamMemberList(page: page, perPage: perPage)
-                            isTeamMemberLoaded = true
-                        } else {
-                            introduceTableView.reloadData()
-                        }
-                        
-                        showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: true, isShowCancel: false)
-                        
-                    case 2:
-                        removeIntroduce()
-                        removeTeamMember()
-                        
-                        initTempPlay()
-                        setSignupData()
-                        introduceTableView.reloadData()
-                        showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
-                        
-                    default:
-                        refresh()
-                    }
+                    _tabPressed(idx)
                 }
             }
+        }
+    }
+    
+    private func _tabPressed(_ idx: Int) {
+        switch focusTabIdx {
+        case 0:
+            removeTeamMember()
+            removeTempPlay()
+            
+            initIntroduce()
+            setIntroduceData()
+            introduceTableView.reloadData()
+            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
+            
+        case 1:
+            removeIntroduce()
+            removeTempPlay()
+            
+            initTeamMember()
+            memberRows.removeAll()
+            
+            if (!isTeamMemberLoaded) {
+                teamMemberPage = 1
+                getTeamMemberList(page: teamMemberPage, perPage: teamMemberPerPage)
+                isTeamMemberLoaded = true
+            } else {
+                introduceTableView.reloadData()
+            }
+            
+            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: true, isShowCancel: false)
+            
+        case 2:
+            removeIntroduce()
+            removeTeamMember()
+            
+            initTempPlay()
+            memberRows.removeAll()
+            setSignupData()
+            introduceTableView.reloadData()
+            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
+            
+        default:
+            refresh()
         }
     }
     
@@ -916,6 +935,7 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
 
             let row: MemberRow = memberRows[indexPath.row]
             cell.update(icon: row.icon, title: row.title, content: row.show)
+            cell.setSelectedBackgroundColor()
 
 //            print("memberRow: \(memberRows.count)")
 //            print("index path: \(indexPath.row)")
@@ -941,13 +961,14 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
 
             return cell
         }
-        else if focusTabIdx == 1 {
+        else if focusTabIdx == 1 && items.count > 0 {
             let cell: ShowSignupCell = tableView.dequeueReusableCell(withIdentifier: "ShowSignupCell", for: indexPath) as! ShowSignupCell
             
             let row: TeamMemberTable = items[indexPath.row]
             cell.noLbl.text = "\(indexPath.row + 1)."
             cell.nameLbl.text = row.member_nickname
             
+            cell.setSelectedBackgroundColor()
             return cell
         }
         else if focusTabIdx == 2 {
@@ -1002,6 +1023,7 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
 //                }
 //            }
 
+            cell.setSelectedBackgroundColor()
             return cell
         }
 
@@ -1031,15 +1053,17 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //print("page:\(page)")
-        //print("perPage:\(perPage)")
-        //print("index.row:\(indexPath.row)")
-        if indexPath.row == page * perPage - 2 {
-            page += 1
-            //print("current page: \(page)")
-            //print(totalPage)
-            if page <= totalPage {
-                getTeamMemberList(page: page, perPage: perPage)
+        if focusTabIdx == 1 {
+//            print("page:\(teamMemberPage)")
+//            print("perPage:\(teamMemberPerPage)")
+//            print("index.row:\(indexPath.row)")
+            if indexPath.row == teamMemberPage * teamMemberPerPage - 2 {
+                teamMemberPage += 1
+                //print("current page: \(page)")
+                //print(totalPage)
+                if teamMemberPage <= teamMemberTotalPage {
+                    getTeamMemberList(page: teamMemberPage, perPage: teamMemberPerPage)
+                }
             }
         }
     }

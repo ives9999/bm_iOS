@@ -58,10 +58,4 @@ class ShowSignupCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
     }
-    
-    func setSelectedBackgroundColor() {
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(CELL_SELECTED1)
-        selectedBackgroundView = bgColorView
-    }
 }

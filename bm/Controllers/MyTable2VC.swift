@@ -221,12 +221,6 @@ class BaseCell<U: Table, V: BaseViewController>: UITableViewCell {
     override class func awakeFromNib() {
         super.awakeFromNib()
     }
-    
-    func setSelectedBackgroundColor() {
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(CELL_SELECTED1)
-        selectedBackgroundView = bgColorView
-    }
 }
 
 extension UITableViewCell {

@@ -434,12 +434,6 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable, ManagerTeamMemberVC> {
         }
     }
     
-    override func setSelectedBackgroundColor() {
-        let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(CELL_SELECTED1)
-        selectedBackgroundView = bgColorView
-    }
-    
     override func configureSubViews() {
         noLbl.text = String(item!.no) + "."
         nameLbl.text = item?.member_nickname

@@ -305,6 +305,8 @@
 		F9308B3E273954AB002531A1 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3C273954AB002531A1 /* SwitchCell.swift */; };
 		F9308B3F273954AB002531A1 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9308B3D273954AB002531A1 /* SwitchCell.xib */; };
 		F9308B41273E6A04002531A1 /* SignupDateTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B40273E6A04002531A1 /* SignupDateTable.swift */; };
+		F93095F62948ACFA006C625C /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93095F52948ACFA006C625C /* Enum.swift */; };
+		F93095F92948ADB9006C625C /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93095F82948ADB9006C625C /* UITableViewCell.swift */; };
 		F94DECDD27478F2F00A9DA17 /* ManagerTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */; };
 		F94DECE02747929A00A9DA17 /* ManagerTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */; };
 		F94DECE12747929A00A9DA17 /* ManagerTeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */; };
@@ -728,6 +730,8 @@
 		F9308B3C273954AB002531A1 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		F9308B3D273954AB002531A1 /* SwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
 		F9308B40273E6A04002531A1 /* SignupDateTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupDateTable.swift; sourceTree = "<group>"; };
+		F93095F52948ACFA006C625C /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		F93095F82948ADB9006C625C /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamVC.swift; sourceTree = "<group>"; };
 		F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamCell.swift; sourceTree = "<group>"; };
 		F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagerTeamCell.xib; sourceTree = "<group>"; };
@@ -880,6 +884,7 @@
 				B3A0D698226DD290008A7D47 /* Session.swift */,
 				B31ADD9225905387003E86BD /* Zone.swift */,
 				B342169D26775C2E005E406F /* ToInterface.swift */,
+				F93095F52948ACFA006C625C /* Enum.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -1216,6 +1221,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F93095F72948AD8A006C625C /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F93095F82948ADB9006C625C /* UITableViewCell.swift */,
+			);
+			path = extensions;
+			sourceTree = "<group>";
+		};
 		F94E7D131F83636A00F550FD = {
 			isa = PBXGroup;
 			children = (
@@ -1243,6 +1256,7 @@
 		F94E7D1E1F83636A00F550FD /* bm */ = {
 			isa = PBXGroup;
 			children = (
+				F93095F72948AD8A006C625C /* extensions */,
 				F94E7D1F1F83636A00F550FD /* AppDelegate.swift */,
 				F94E7D261F83636A00F550FD /* Assets.xcassets */,
 				B30C953A1FE82447005F71EF /* bm.entitlements */,
@@ -1953,6 +1967,7 @@
 				F9EDEDB128928E3400FB92BB /* MyTable2VC.swift in Sources */,
 				B39453E1223CE905005E3027 /* CancelButton.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
+				F93095F62948ACFA006C625C /* Enum.swift in Sources */,
 				B3F6B45B260500AC0000F9E0 /* SignupStandbyTab.swift in Sources */,
 				B306FE9C21F0DA8000403FE2 /* DateSelectVC.swift in Sources */,
 				B358B0B622A0FB5200F1A4E6 /* SingleSelectVC.swift in Sources */,
@@ -1989,6 +2004,7 @@
 				B31739EF21787960004CFEDE /* MyMapVC.swift in Sources */,
 				B3F6B456260500650000F9E0 /* SignupCancelTable.swift in Sources */,
 				B36CBD5920E13F7A00E52B9C /* TempPlayDatePlayerCell.swift in Sources */,
+				F93095F92948ADB9006C625C /* UITableViewCell.swift in Sources */,
 				B323390A21B6B8E4003EB84D /* FormItem.swift in Sources */,
 				F9F80483284EEE1F006FC509 /* MemberCoinListVC.swift in Sources */,
 				F9FAB2B82721643000D83CC4 /* OneRow.swift in Sources */,
