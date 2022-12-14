@@ -387,7 +387,7 @@ class ShowCourseVC: BaseViewController, WKNavigationDelegate {
                                 self.setFeatured()
                                 self.setData()
                                 self.setContentWeb()
-                                self.setLike()
+                                self.initLike()
                                 self.showTop!.setTitle(title: self.table!.title)
                             }
                         }
@@ -490,8 +490,8 @@ class ShowCourseVC: BaseViewController, WKNavigationDelegate {
         }
     }
     
-    func setLike() {
-        self.showBottom!.setLike(isLike: table!.like, count: table!.like_count)
+    func initLike() {
+        self.showBottom!.initLike(isLike: table!.like, count: table!.like_count)
     }
     
     func setNextTime() {

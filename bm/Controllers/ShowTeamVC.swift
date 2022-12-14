@@ -157,6 +157,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var myTable: TeamTable?
     
     var isTempPlay: Bool = true
+    var isLike: Bool = false
     
     var topTabs: [[String: Any]] = [
         ["key": "intrduce", "icon": "admin", "text": "介紹", "focus": true, "tag": 0, "class": ""],
@@ -405,6 +406,20 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
     }
     
+    override func like() {
+        if (!Member.instance.isLoggedIn) {
+            toLogin()
+        } else {
+            if (table != nil) {
+                isLike = !isLike
+                showBottom?.setLike(isLike)
+                dataService.like(token: table!.token, able_id: table!.id)
+            } else {
+                warning("沒有取得內容資料值，請稍後再試或洽管理員")
+            }
+        }
+    }
+    
     func setFeatured() {
 
         if (table != nil && table!.featured_path.count > 0) {
@@ -474,7 +489,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     func setLike() {
         if (table != nil) {
-            showBottom?.setLike(isLike: table!.like, count: table!.like_count)
+            isLike = table!.like
+            showBottom?.initLike(isLike: table!.like, count: table!.like_count)
         }
     }
     
@@ -601,7 +617,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             }
             items += _rows
             self.teamMemberDataLbl.visibility = .visible
-            self.teamMemberDataLbl.text = "總人數：\(totalCount)位"
+            self.teamMemberDataLbl.text = "總人數：\(teamMemberTotalCount)位"
             introduceTableView.reloadData()
         }
         
@@ -658,6 +674,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                     let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
                     if successTable.success {
                         let memberTable: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
+                        memberTable.filterRow()
                         if memberTable.id > 0 {
                             self.showTempMemberInfo(memberTable)
                         }
@@ -694,7 +711,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         let textfield1 = UITextView(frame: CGRect(x:0, y:0, width:subview.frame.width, height:subview.frame.height))
         //textfield1.backgroundColor = UIColor.yellow
         textfield1.text = a
-        textfield1.font = UIFont(name: textfield1.font!.fontName, size: 18)
+        textfield1.font = .systemFont(ofSize: 18)
+        //textfield1.font = UIFont(name: textfield1.font!.fontName, size: 18)
         subview.addSubview(textfield1)
 
         // Add the subview to the alert's UI property
@@ -1031,25 +1049,39 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-//        if tableView == signupTableView {
-//            if myTable != nil {
-//                if myTable!.manager_token == Member.instance.token {
-//                    let people_limit = myTable!.people_limit
-//                    if (indexPath.row < people_limit) {
-//                        let signup_normal_model = myTable!.signupNormalTables[indexPath.row]
-//                        //print(signup_normal_model.member_token)
-//                        getMemberOne(member_token: signup_normal_model.member_token)
-//
-//                    } else {
-//                        let signup_standby_model = myTable!.signupStandbyTables[indexPath.row]
-//                        getMemberOne(member_token: signup_standby_model.member_token)
-//                    }
-//                } else {
-//                    warning("只有球隊管理員可以檢視報名者資訊")
-//                }
-//            }
-//        }
+        
+        if focusTabIdx == 1 {
+            if myTable != nil {
+                if myTable!.manager_token == Member.instance.token {
+                    let row: TeamMemberTable = items[indexPath.row]
+                    getMemberOne(member_token: row.member_token)
+                } else {
+                    warning("只有球隊管理員可以檢視報名者資訊")
+                }
+            }
+        }
+        else if focusTabIdx == 2 {
+            if myTable != nil {
+                if myTable!.manager_token == Member.instance.token {
+                    
+                    let signupNormalCount: Int = myTable!.signupNormalTables.count
+                    let peopleLimit: Int = myTable!.people_limit
+                    let idx: Int = indexPath.row
+                    
+                    if (idx < signupNormalCount) {
+                        let signup_normal_model = myTable!.signupNormalTables[idx]
+                        getMemberOne(member_token: signup_normal_model.member_token)
+                    }
+                    
+                    if (idx >= peopleLimit) {
+                        let signup_standby_model = myTable!.signupStandbyTables[idx]
+                        getMemberOne(member_token: signup_standby_model.member_token)
+                    }
+                } else {
+                    warning("只有球隊管理員可以檢視報名者資訊")
+                }
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

@@ -156,9 +156,14 @@ class ShowBottom2: UIView {
         return padding
     }
     
-    func setLike(isLike: Bool, count: Int) {
+    func initLike(isLike: Bool, count: Int) {
         self.isLike = isLike
         likeBtn.initStatus(isLike, count)
+    }
+    
+    func setLike(_ isLike: Bool) {
+        self.isLike = isLike
+        likeBtn.setLike(isLike)
     }
     
     func setSubmitBtnTitle(_ title: String) {
