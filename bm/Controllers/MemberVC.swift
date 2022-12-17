@@ -227,10 +227,12 @@ class MemberVC: MyTableVC {
         
         let r1: MemberRow = MemberRow(title: "球隊", icon: "team", segue: TO_MEMBER_SIGNUPLIST, able_type: "team")
         rows.append(r1)
-        let r2: MemberRow = MemberRow(title: "課程", icon: "course", segue: TO_MEMBER_SIGNUPLIST, able_type: "course")
+        let r2: MemberRow = MemberRow(title: "臨打", icon: "tempPlay", segue: TO_MEMBER_SIGNUPLIST, able_type: "tempPlay")
         rows.append(r2)
+        let r3: MemberRow = MemberRow(title: "課程", icon: "course", segue: TO_MEMBER_SIGNUPLIST, able_type: "course")
+        rows.append(r3)
 
-        let s: MemberSection = MemberSection(title: "報名", isExpanded: isEpanded, items: rows)
+        let s: MemberSection = MemberSection(title: "參加", isExpanded: isEpanded, items: rows)
 
         return s
     }
