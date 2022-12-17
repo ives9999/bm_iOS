@@ -33,10 +33,24 @@ class ManagerTeamMemberVC: BaseViewController {
     
     var scanIV: UIImageView = {
         let view: UIImageView = UIImageView()
+        view.image = UIImage(named: "scan")
         view.isUserInteractionEnabled = true
         
         return view
     }()
+    
+    var qrScannerView: QRScannerView = QRScannerView(frame: CGRectZero)
+    var isScanning: Bool = false
+    let scanerWidth: Int = 300
+    let scanerHeight: Int = 300
+    
+//    var cancelScanIV: UIImageView = {
+//        let view: UIImageView = UIImageView()
+//        view.image = UIImage(named: "delete")
+//        view.isUserInteractionEnabled = true
+//
+//        return view
+//    }()
     
     var member_token: String? //要加入會員的token
     var rows: [TeamMemberTable] = [TeamMemberTable]()
@@ -67,9 +81,19 @@ class ManagerTeamMemberVC: BaseViewController {
             make.height.equalTo(35)
         }
         
-        scanIV.image = UIImage(named: "scan")
+//        toolView.addSubview(cancelScanIV)
+//        cancelScanIV.snp.makeConstraints { make in
+//            make.left.equalTo(scanIV.snp.right).offset(20)
+//            make.centerY.equalToSuperview()
+//            make.width.equalTo(35)
+//            make.height.equalTo(35)
+//        }
+        
         let scanRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleScan(sender:)))
         scanIV.addGestureRecognizer(scanRecognizer)
+        
+//        let cancelScanRecognizer = UITapGestureRecognizer(target: self, action: #selector(cancelScan(sender:)))
+//        cancelScanIV.addGestureRecognizer(cancelScanRecognizer)
         
         //tableView = MyTable2VC(didSelect: didSelect(item:, at:), selected: tableViewSetSelected(row:), myDelegate: self)
         //tableView = ManagerTeamMemberTable(didSelect: didSelect(item:at:), selected: tableViewSetSelected(row:), myDelegate: self)
@@ -133,9 +157,18 @@ class ManagerTeamMemberVC: BaseViewController {
         return false
     }
     
+    @objc func cancelScan(sender: UIView) {
+        stopScan()
+    }
+    
     @objc func handleScan(sender: UIView) {
         
-        setupQRScanner()
+        if (!isScanning) {
+            setupQRScannerView()
+            startScan()
+        } else {
+            stopScan()
+        }
         
 //        captureSession = AVCaptureSession()
 //
@@ -180,12 +213,12 @@ class ManagerTeamMemberVC: BaseViewController {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
             
         case .authorized:
-            setupQRScannerView()
+            startScan()
         case .notDetermined:
             AVCaptureDevice.requestAccess(for: .video) { [weak self] granted in
                 if granted {
                     DispatchQueue.main.async { [weak self] in
-                        self?.setupQRScannerView()
+                        self?.startScan()
                     }
                 }
             }
@@ -196,10 +229,20 @@ class ManagerTeamMemberVC: BaseViewController {
     
     private func setupQRScannerView() {
         
-        let qrScannerView = QRScannerView(frame: view.bounds)
-        view.addSubview(qrScannerView)
+//        let scannerTop: ShowTop2 = ShowTop2(delegate: self)
+//        scannerTop.setAnchor(parent: self.view)
+        
+        //let qrScannerView: QRScannerView = QRScannerView()
+        //let qrScannerView = QRScannerView(frame: view.bounds)
+        let showTopHeight: Int = Int(showTop!.frame.height)
+        let toolViewHeight: Int = Int(toolView.frame.height)
+        let x: Int = (Int(screen_width) - scanerWidth) / 2
+        let y: Int = showTopHeight + toolViewHeight + 100
+        qrScannerView = QRScannerView(frame: CGRect(x: x, y: y, width: scanerWidth, height: scanerHeight))
+        self.view.addSubview(qrScannerView)
+        
         qrScannerView.configure(delegate: self, input: .init(isBlurEffectEnabled: true))
-        qrScannerView.startRunning()
+        //qrScannerView.startRunning()
     }
     
     private func showAlert() {
@@ -297,20 +340,40 @@ class ManagerTeamMemberVC: BaseViewController {
 
 extension ManagerTeamMemberVC: QRScannerViewDelegate {
     
+    func startScan() {
+        qrScannerView.startRunning()
+        isScanning = true
+        scanIV.image = UIImage(named: "delete")
+    }
+    
+    func stopScan() {
+        qrScannerView.remove()
+        isScanning = false
+        scanIV.image = UIImage(named: "scan")
+    }
+    
     func qrScannerView(_ qrScannerView: QRScannerView, didSuccess code: String) {
         //print(code)
         let member_token: String = code
-        qrScannerView.stopRunning()
-        qrScannerView.removeFromSuperview()
+        stopScan()
         addTeamMember(member_token: member_token)
     }
     
     func qrScannerView(_ qrScannerView: QRScannerView, didFailure error: QRScannerError) {
+        stopScan()
         print(error.localizedDescription)
     }
     
     func qrScannerView(_ qrScannerView: QRScannerView, didChangeTorchActive isOn: Bool) {
         
+    }
+}
+
+extension QRScannerView {
+    
+    func remove() {
+        self.stopRunning()
+        self.removeFromSuperview()
     }
 }
 
