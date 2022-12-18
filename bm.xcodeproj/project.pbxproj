@@ -94,6 +94,8 @@
 		B34A210421B6A6D300EE6E1C /* MoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A210221B6A6D300EE6E1C /* MoreCell.swift */; };
 		B34A210521B6A6D300EE6E1C /* MoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B34A210321B6A6D300EE6E1C /* MoreCell.xib */; };
 		B3545DA01FD034E100583113 /* TeamTempPlayEditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */; };
+		B35593F4294DFCDE009E0658 /* MemberTeamListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35593F3294DFCDE009E0658 /* MemberTeamListVC.swift */; };
+		B35593F6294ED397009E0658 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35593F5294ED397009E0658 /* UIImageView.swift */; };
 		B358B0B0229D4F4F00F1A4E6 /* EditCourseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0AF229D4F4F00F1A4E6 /* EditCourseVC.swift */; };
 		B358B0B2229D722300F1A4E6 /* CourseForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B1229D722300F1A4E6 /* CourseForm.swift */; };
 		B358B0B422A0F66A00F1A4E6 /* PriceUnitFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B358B0B322A0F66A00F1A4E6 /* PriceUnitFormItem.swift */; };
@@ -515,6 +517,8 @@
 		B34A210221B6A6D300EE6E1C /* MoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreCell.swift; sourceTree = "<group>"; };
 		B34A210321B6A6D300EE6E1C /* MoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoreCell.xib; sourceTree = "<group>"; };
 		B3545D9F1FD034E100583113 /* TeamTempPlayEditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayEditVC.swift; sourceTree = "<group>"; };
+		B35593F3294DFCDE009E0658 /* MemberTeamListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTeamListVC.swift; sourceTree = "<group>"; };
+		B35593F5294ED397009E0658 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		B358B0AF229D4F4F00F1A4E6 /* EditCourseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCourseVC.swift; sourceTree = "<group>"; };
 		B358B0B1229D722300F1A4E6 /* CourseForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseForm.swift; sourceTree = "<group>"; };
 		B358B0B322A0F66A00F1A4E6 /* PriceUnitFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceUnitFormItem.swift; sourceTree = "<group>"; };
@@ -1225,6 +1229,7 @@
 			isa = PBXGroup;
 			children = (
 				F93095F82948ADB9006C625C /* UITableViewCell.swift */,
+				B35593F5294ED397009E0658 /* UIImageView.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1338,6 +1343,7 @@
 				F9EDEDAE28927C1B00FB92BB /* MemberSubscriptionKindVC.swift */,
 				F9763E1528B62D57006ED47C /* MemberSubscriptionLogVC.swift */,
 				F92FF16F28A941280005956D /* MemberSubscriptionPayVC.swift */,
+				B35593F3294DFCDE009E0658 /* MemberTeamListVC.swift */,
 				B3485C9623F841BE0078265D /* MemberVC.swift */,
 				B30C954F1FED68A0005F71EF /* MoreVC.swift */,
 				B3310D8D22ABB4820062EF98 /* MultiSelectVC.swift */,
@@ -1816,6 +1822,7 @@
 				B3756EEC21BA6AAA006893E1 /* StatusCell.swift in Sources */,
 				B3ED38E21FB77B830003F083 /* SuperTextField.swift in Sources */,
 				B317855920D60EE200765CA1 /* BlackListVC.swift in Sources */,
+				B35593F4294DFCDE009E0658 /* MemberTeamListVC.swift in Sources */,
 				B337B9A61FE039ED00C3EE28 /* TempPlaySignupCell.swift in Sources */,
 				F9A6751927FAED7E007C8F47 /* ShowTop.swift in Sources */,
 				B36CBD5320DE00FE00E52B9C /* TempPlayDatePlayer.swift in Sources */,
@@ -1999,6 +2006,7 @@
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
 				B322F80A1FC6AD1800DE98FB /* MenuCell.swift in Sources */,
 				B3310D8C22AA28260062EF98 /* CycleUnitFormItem.swift in Sources */,
+				B35593F6294ED397009E0658 /* UIImageView.swift in Sources */,
 				B35C4F4C2196F5E500F8AEB2 /* EditCell.swift in Sources */,
 				F9F804802844F248006FC509 /* DefaultCell.swift in Sources */,
 				B31739EF21787960004CFEDE /* MyMapVC.swift in Sources */,

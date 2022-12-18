@@ -8,6 +8,18 @@
 
 import Foundation
 
+enum PropertyTypes: String {
+    case OptionalInt = "Optional<Int>"
+    case SwiftInt = "Swift.Int"
+    case Int = "Int"
+    case OptionalString = "Optional<String>"
+    case SwiftString = "Swift.String"
+    case String = "String"
+    case OptionalBool = "Optional<Bool>"
+    case SwiftBool = "Swift.Bool"
+    case Bool = "Bool"
+}
+
 enum MYERROR: Int {
     case NONETWORK = 1
     case NOERROR = 100

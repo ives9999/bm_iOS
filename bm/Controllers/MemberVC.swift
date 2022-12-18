@@ -225,9 +225,9 @@ class MemberVC: MyTableVC {
 
         var rows: [MemberRow] = [MemberRow]()
         
-        let r1: MemberRow = MemberRow(title: "球隊", icon: "team", segue: TO_MEMBER_SIGNUPLIST, able_type: "team")
+        let r1: MemberRow = MemberRow(title: "球隊", icon: "team", segue: "toMemberTeamList", able_type: "team")
         rows.append(r1)
-        let r2: MemberRow = MemberRow(title: "臨打", icon: "tempPlay", segue: TO_MEMBER_SIGNUPLIST, able_type: "tempPlay")
+        let r2: MemberRow = MemberRow(title: "臨打", icon: "tempPlay", segue: TO_MEMBER_SIGNUPLIST, able_type: "temp")
         rows.append(r2)
         let r3: MemberRow = MemberRow(title: "課程", icon: "course", segue: TO_MEMBER_SIGNUPLIST, able_type: "course")
         rows.append(r3)
@@ -642,6 +642,8 @@ extension MemberVC {
             let qrcodeIV: UIImageView = makeQrcodeLayer()
             let qrcode: UIImage = generateQRCode(from: Member.instance.token)!
             qrcodeIV.image = qrcode
+        } else if segue == "toMemberTeamList" {
+            toMemberTeamList()
         }
     }
     
