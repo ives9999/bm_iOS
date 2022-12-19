@@ -73,11 +73,11 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
         }
     }
     
-    func anchor(parent: UIView, showTop: ShowTop2) {
+    func anchor(parent: UIView, showTop: ShowTop2, topConstant: Int = 0) {
         
         parent.addSubview(self)
         self.snp.makeConstraints { make in
-            make.top.equalTo(showTop.snp.bottom)
+            make.top.equalTo(showTop.snp.bottom).offset(topConstant)
             make.left.right.bottom.equalToSuperview()
         }
     }
@@ -209,6 +209,10 @@ class BaseCell<U: Table, V: BaseViewController>: UITableViewCell {
     var myDelegate: V?
 
     var no: Int?
+    
+    func setupView() {
+        backgroundColor = UIColor(MY_BLACK)
+    }
     
     func configureSubViews() {
         if (item != nil) {

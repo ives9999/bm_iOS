@@ -17,6 +17,8 @@ class MemberTeamListVC: BaseViewController {
         return tableView
     }()
     
+    var rows: [TeamMemberTable] = [TeamMemberTable]()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -26,10 +28,39 @@ class MemberTeamListVC: BaseViewController {
         showTop!.setTitle(title: "參加球隊")
         
         view.backgroundColor = UIColor(MY_BLACK)
+        
+        tableView.anchor(parent: view, showTop: showTop!)
+        
+        refresh()
     }
     
     func tableViewSetSelected(row: TeamMemberTable)-> Bool {
         return false
+    }
+    
+    override func refresh() {
+        
+        page = 1
+        getDataFromServer()
+        //getDataStart(page: page, perPage: PERPAGE)
+    }
+    
+    func getDataFromServer() {
+        Global.instance.addSpinner(superView: self.view)
+        
+        MemberService.instance.memberTeamList(token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                //TeamService.instance.jsonData?.prettyPrintedJSONString
+                let b: Bool = self.tableView.parseJSON(jsonData: MemberService.instance.jsonData)
+                if !b && self.tableView.msg.count == 0 {
+                    self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
+                } else {
+                    self.rows = self.tableView.items
+                }
+                //self.showTableView(tableView: self.tableView, jsonData: TeamService.instance.jsonData!)
+            }
+        }
     }
 }
 
@@ -126,8 +157,8 @@ class MemberTeamListCell: BaseCell<TeamMemberTable, MemberTeamListVC> {
         setupView()
     }
     
-    private func setupView() {
-        backgroundColor = UIColor(MY_BLACK)
+    override func setupView() {
+        super.setupView()
         setAnchor()
     }
     
@@ -137,7 +168,6 @@ class MemberTeamListCell: BaseCell<TeamMemberTable, MemberTeamListVC> {
         noLbl.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
-            make.top.equalToSuperview().offset(16)
         }
         
         self.contentView.addSubview(featuredIV)
@@ -145,26 +175,39 @@ class MemberTeamListCell: BaseCell<TeamMemberTable, MemberTeamListVC> {
             make.left.equalTo(noLbl.snp.right).offset(12)
             make.centerY.equalToSuperview()
             make.width.height.equalTo(90)
+            make.top.bottom.greaterThanOrEqualToSuperview().offset(2)
         }
         
-//        self.contentView.addSubview(createdAtLbl)
-//        createdAtLbl.snp.makeConstraints { make in
-//            make.left.equalTo(nameLbl.snp.right).offset(15)
-//            make.centerY.equalToSuperview()
-//        }
-//
-//        self.contentView.addSubview(deleteIV)
-//        deleteIV.snp.makeConstraints { make in
-//            make.right.equalToSuperview().offset(-20)
-//            make.centerY.equalToSuperview()
-//            make.width.equalTo(25)
-//            make.height.equalTo(25)
-//        }
+        self.contentView.addSubview(dataContainer)
+        dataContainer.snp.makeConstraints { make in
+            make.top.bottom.equalToSuperview()
+            make.left.equalTo(featuredIV.snp.right).offset(12)
+            make.right.equalToSuperview()
+        }
+        //dataContainer.backgroundColor = UIColor.gray
+        
+        dataContainer.addSubview(titleLbl)
+        titleLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.top.equalToSuperview()
+        }
+
+        dataContainer.addSubview(cityBtn)
+        cityBtn.snp.makeConstraints { make in
+            make.top.equalTo(titleLbl.snp.bottom).offset(12)
+            make.left.equalToSuperview()
+        }
+        
+        dataContainer.addSubview(arenaBtn)
+        arenaBtn.snp.makeConstraints { make in
+            make.left.equalTo(cityBtn.snp.right).offset(12)
+            make.centerY.equalTo(cityBtn.snp.centerY)
+        }
     }
     
     override func configureSubViews() {
         noLbl.text = String(item!.no) + "."
-        featuredIV.downloaded(from: item!.featured_path)
+        featuredIV.downloaded(from: item!.team_featured)
         //createdAtLbl.text = item?.created_at.noSec()
     }
 }
