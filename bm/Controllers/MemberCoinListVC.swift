@@ -403,8 +403,7 @@ class MemberCoinListCell: BaseCell<MemberCoinTable, MemberCoinListVC> {
         setupView()
     }
     
-    private func setupView() {
-        backgroundColor = UIColor(MY_BLACK)
+    override func setupView() {
         setAnchor()
     }
 

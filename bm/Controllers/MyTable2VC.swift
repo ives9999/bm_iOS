@@ -206,12 +206,20 @@ class BaseCell<U: Table, V: BaseViewController>: UITableViewCell {
         }
     }
     
+    let line: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.lightGray
+        
+        return view
+    }()
+    
     var myDelegate: V?
 
     var no: Int?
     
     func setupView() {
         backgroundColor = UIColor(MY_BLACK)
+        self.contentView.addSubview(line)
     }
     
     func configureSubViews() {

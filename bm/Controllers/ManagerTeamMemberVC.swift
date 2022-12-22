@@ -459,8 +459,7 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable, ManagerTeamMemberVC> {
         setupView()
     }
     
-    private func setupView() {
-        backgroundColor = UIColor(MY_BLACK)
+    override func setupView() {
         setAnchor()
         
         let deleteGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteThis))
@@ -499,7 +498,7 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable, ManagerTeamMemberVC> {
     
     override func configureSubViews() {
         noLbl.text = String(item!.no) + "."
-        nameLbl.text = item?.member_nickname
+        nameLbl.text = (item != nil && item!.memberTable != nil) ? item!.memberTable!.nickname : ""
         createdAtLbl.text = item?.created_at.noSec()
     }
     

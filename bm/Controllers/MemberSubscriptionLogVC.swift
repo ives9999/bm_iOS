@@ -111,8 +111,7 @@ class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubs
         setupView()
     }
     
-    private func setupView() {
-        backgroundColor = UIColor(MY_BLACK)
+    override func setupView() {
         setAnchor()
     }
     

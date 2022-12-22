@@ -55,7 +55,7 @@ class MemberService: DataService {
     
     func memberTeamList(token: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
         let url: String = URL_MEMBER_TEAM_LIST
-        var body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "member_token": token]
+        var body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "token": token]
 //        print(url)
 //        print(body)
         
@@ -315,6 +315,34 @@ class MemberService: DataService {
 //                    completion(false)
 //                }
 //            }
+        }
+    }
+    
+    func deleteMemberTeam(token: String, completion: @escaping CompletionHandler) {
+        let url: String = URL_MEMBER_TEAM_DELETE
+        var body: [String: String] = ["device": "app", "channel": CHANNEL, "team_member_token": token]
+        
+        print(url)
+        print(body)
+        
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
         }
     }
     

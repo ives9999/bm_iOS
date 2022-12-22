@@ -984,7 +984,12 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             
             let row: TeamMemberTable = items[indexPath.row]
             cell.noLbl.text = "\(indexPath.row + 1)."
-            cell.nameLbl.text = row.member_nickname
+            
+            var nickname: String = ""
+            if (row.memberTable != nil) {
+                nickname = row.memberTable!.nickname
+            }
+            cell.nameLbl.text = nickname
             
             cell.setSelectedBackgroundColor()
             return cell
@@ -1054,7 +1059,10 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             if myTable != nil {
                 if myTable!.manager_token == Member.instance.token {
                     let row: TeamMemberTable = items[indexPath.row]
-                    getMemberOne(member_token: row.member_token)
+                    
+                    if (row.memberTable != nil) {
+                        getMemberOne(member_token: row.memberTable!.token)
+                    }
                 } else {
                     warning("只有球隊管理員可以檢視報名者資訊")
                 }

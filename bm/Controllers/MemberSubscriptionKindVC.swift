@@ -118,8 +118,7 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
         setupView()
     }
     
-    private func setupView() {
-        backgroundColor = UIColor(MY_BLACK)
+    override func setupView() {
         setAnchor()
     }
     
