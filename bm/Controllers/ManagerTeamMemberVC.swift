@@ -119,7 +119,7 @@ class ManagerTeamMemberVC: BaseViewController {
     func getDataFromServer(page: Int) {
         Global.instance.addSpinner(superView: self.view)
         
-        TeamService.instance.teamMemberList(token: token!, page: page, perPage: PERPAGE) { (success) in
+        TeamService.instance.teamMemberList(token: token!, page: page, perPage: tableView.perPage) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 //TeamService.instance.jsonData?.prettyPrintedJSONString
@@ -460,6 +460,7 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable, ManagerTeamMemberVC> {
     }
     
     override func setupView() {
+        super.setupView()
         setAnchor()
         
         let deleteGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteThis))

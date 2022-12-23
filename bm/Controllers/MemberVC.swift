@@ -17,50 +17,10 @@ class MemberVC: MyTableVC {
     @IBOutlet weak var forgetPasswordIcon: UIImageView!
     @IBOutlet weak var forgetPasswordBtn: UIButton!
     @IBOutlet weak var avatarImageView: UIImageView!
-    
-    //let _sections: [String] = ["會員資料", "訂單", "喜歡", "管理"]
-    
-    //let _sections: [String] = ["會員資料", "報名"]
-//    let fixedRows: [Dictionary<String, String>] = [
-//        ["text": "帳戶資料", "icon": "account", "segue": TO_PROFILE],
-//        ["text": "更改密碼", "icon": "password", "segue": TO_PASSWORD]
-//    ]
-//    var memberRows: [Dictionary<String, String>] = [Dictionary<String, String>]()
-//
-//    var orderRows: [Dictionary<String, String>] = [
-//        ["text": "購物車", "icon": "cart", "segue": TO_MEMBER_CART_LIST],
-//        ["text": "訂單查詢", "icon": "order", "segue": TO_MEMBER_ORDER_LIST]
-//    ]
-//
-//    let likeRows: [Dictionary<String, String>] = [
-//        ["text": "球隊","icon":"team","segue":TO_LIKE,"able_type":"team"],
-//        ["text": "球館","icon":"arena","segue":TO_LIKE,"able_type":"arena"],
-//        ["text": "教練","icon":"coach","segue":TO_LIKE,"able_type":"coach"],
-//        ["text": "課程","icon":"course","segue":TO_LIKE,"able_type":"course"],
-//        ["text": "商品","icon":"product","segue":TO_LIKE,"able_type":"product"],
-//        ["text": "體育用品店","icon":"store","segue":TO_LIKE,"able_type":"store"]
-//    ]
-//
-//    let courseRows: [Dictionary<String, String>] = [
-//        ["text": "課程","icon":"course","segue":"toManagerCourse","able_type":"course"]
-//    ]
-    
+        
     var memberSections: [MemberSection] = [MemberSection]()
     
     let heightForSection: CGFloat = 34
-    
-//    var searchSections: [ExpandableItems] = [
-//        ExpandableItems(isExpanded: true, items: []),
-//        ExpandableItems(isExpanded: true, items: []),
-//        ExpandableItems(isExpanded: false, items: []),
-//        ExpandableItems(isExpanded: true, items: [])
-//    ]
-    
-    
-//    let signupRows: [Dictionary<String, String>] = [
-//        ["text": "課程報名", "icon": "account", "segue": TO_SIGNUP_LIST]
-//    ]
-//    var _rows: [[Dictionary<String, Any>]] = [[Dictionary<String, Any>]]()
 
     override func viewDidLoad() {
         myTablView = tableView
@@ -69,21 +29,8 @@ class MemberVC: MyTableVC {
         super.viewDidLoad()
         
         dataService = MemberService.instance
-        
-//        mySections = [
-//            ["name": "會員資料", "isExpanded": true, "key": "data"],
-//            ["name": "訂單", "isExpanded": true, "key": "order"],
-//            ["name": "喜歡", "isExpanded": false, "key": "like"],
-//            ["name": "管理", "isExpanded": true, "key": "manager"]
-//        ]
-//
-//        myRows = [
-//            ["key":"data", "rows": memberRows],
-//            ["key":"order", "rows": orderRows],
-//            ["key":"like", "rows": likeRows],
-//            ["key":"manager", "rows": courseRows],
-//        ]
 
+        //tableView.separatorStyle = .none
         tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
     }
     

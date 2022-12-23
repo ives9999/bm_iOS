@@ -39,16 +39,14 @@ class MemberTeamListVC: BaseViewController {
     }
     
     override func refresh() {
-        
-        page = 1
-        tableView.getDataFromServer(page: page)
+        tableView.refresh()
         //getDataStart(page: page, perPage: PERPAGE)
     }
     
     func getDataFromServer(page: Int) {
         Global.instance.addSpinner(superView: self.view)
         
-        MemberService.instance.memberTeamList(token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
+        MemberService.instance.memberTeamList(token: Member.instance.token, page: page, perPage: tableView.perPage) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 //TeamService.instance.jsonData?.prettyPrintedJSONString

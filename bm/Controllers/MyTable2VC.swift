@@ -24,6 +24,8 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
     var msg: String = ""
     var myDelegate: V
     
+    //var refreshControl: UIRefreshControl!
+    
     var items = [U]() {
         didSet {
             reloadData()
@@ -51,6 +53,8 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
         register(T.self, forCellReuseIdentifier: T.identifier)
         //register(T.nibName, forCellReuseIdentifier: T.identifier)
         //registerCell()
+        
+        beginRefresh()
                 
         delegate = self
         dataSource = self
@@ -112,6 +116,11 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
         separatorColor = UIColor.lightGray
     }
     
+    @objc func refresh() {
+        self.page = 1
+        getDataFromServer(page: self.page)
+    }
+    
     func getDataFromServer(page: Int) {
         self.page = page
         if (page == 1) {
@@ -148,6 +157,7 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
             }
             items += _rows
             reloadData()
+            endRefresh()
         }
         
         return true
@@ -237,6 +247,20 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
             if page <= totalPage {
                 getDataFromServer(page: page)
             }
+        }
+    }
+    
+    func beginRefresh() {
+        if (refreshControl == nil) {
+            refreshControl = UIRefreshControl()
+            refreshControl!.attributedTitle = NSAttributedString(string: "更新資料")
+            refreshControl!.addTarget(self, action: #selector(refresh), for: UIControl.Event.valueChanged)
+        }
+    }
+    
+    func endRefresh() {
+        if refreshControl != nil && refreshControl!.isRefreshing {
+            refreshControl!.endRefreshing()
         }
     }
 }

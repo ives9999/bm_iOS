@@ -74,15 +74,6 @@ class MyTableVC: BaseViewController {
         frameHeight = view.bounds.size.height
         beginRefresh()
         
-        if (myTablView != nil) {
-            myTablView.backgroundColor = UIColor.clear
-            myTablView.delegate = self
-            myTablView.dataSource = self
-            if (refreshControl != nil) {
-                myTablView.addSubview(refreshControl)
-            }
-        }
-        
 //        if form != nil {
 //            sections = form.getSections()
 //            section_keys = form.getSectionKeys()
@@ -95,13 +86,21 @@ class MyTableVC: BaseViewController {
         }
         
         if (tableView != nil) {
+            
+            myTablView.backgroundColor = UIColor.black
+            myTablView.delegate = self
+            myTablView.dataSource = self
+            if (refreshControl != nil) {
+                myTablView.addSubview(refreshControl)
+            }
+            
             let cellNibName = UINib(nibName: "List2Cell", bundle: nil)
             tableView.register(cellNibName, forCellReuseIdentifier: "listcell")
             tableView.estimatedRowHeight = 44
             tableView.rowHeight = UITableView.automaticDimension
             
-            tableView.separatorStyle = .singleLine
-            tableView.separatorColor = UIColor.lightGray
+            //tableView.separatorStyle = .singleLine
+            tableView.separatorColor = UIColor(MY_GRAY)
         }
     }
     

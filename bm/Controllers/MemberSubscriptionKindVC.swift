@@ -40,7 +40,7 @@ class MemberSubscriptionKindVC: BaseViewController {
     func getDataFromServer(page: Int) {
         Global.instance.addSpinner(superView: self.view)
         
-        MemberService.instance.subscriptionKind(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
+        MemberService.instance.subscriptionKind(member_token: Member.instance.token, page: page, perPage: tableView.perPage) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 self.rows = self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
