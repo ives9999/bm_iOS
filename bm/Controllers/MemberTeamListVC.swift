@@ -13,7 +13,7 @@ class MemberTeamListVC: BaseViewController {
     var showTop: ShowTop2?
     
     lazy var tableView: MyTable2VC<MemberTeamListCell, TeamMemberTable, MemberTeamListVC> = {
-        let tableView = MyTable2VC<MemberTeamListCell, TeamMemberTable, MemberTeamListVC>(selected: tableViewSetSelected(row:), myDelegate: self)
+        let tableView = MyTable2VC<MemberTeamListCell, TeamMemberTable, MemberTeamListVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer(page:), myDelegate: self)
         return tableView
     }()
     
@@ -41,11 +41,11 @@ class MemberTeamListVC: BaseViewController {
     override func refresh() {
         
         page = 1
-        getDataFromServer()
+        tableView.getDataFromServer(page: page)
         //getDataStart(page: page, perPage: PERPAGE)
     }
     
-    func getDataFromServer() {
+    func getDataFromServer(page: Int) {
         Global.instance.addSpinner(superView: self.view)
         
         MemberService.instance.memberTeamList(token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in

@@ -33,11 +33,15 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
     //var rows: [U] = [U]()
     
     typealias selectedClosure = ((U) -> Bool)?
-    var selected: selectedClosure
+    typealias getDataClosure = ((Int) -> Void)?
     
-    init(selected: selectedClosure, myDelegate: V) {
+    var selectedClosure: selectedClosure
+    var getDataClosure: getDataClosure
+    
+    init(selectedClosure: selectedClosure, getDataClosure: getDataClosure, myDelegate: V) {
         
-        self.selected = selected
+        self.selectedClosure = selectedClosure
+        self.getDataClosure = getDataClosure
         self.myDelegate = myDelegate
         
         super.init(frame: CGRect.zero, style: .plain)
@@ -108,6 +112,31 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
         separatorColor = UIColor.lightGray
     }
     
+    func getDataFromServer(page: Int) {
+        self.page = page
+        if (page == 1) {
+            items.removeAll()
+        }
+        
+        //Global.instance.addSpinner(superView: self.view)
+        
+        self.getDataClosure?(self.page)
+        
+//        MemberService.instance.memberTeamList(token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
+//            //Global.instance.removeSpinner(superView: self.view)
+//            if (success) {
+//                //TeamService.instance.jsonData?.prettyPrintedJSONString
+//                let b: Bool = self.parseJSON(jsonData: MemberService.instance.jsonData)
+//                if !b && self.msg.count == 0 {
+//                    //self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
+//                } else {
+//                    //self.rows = self.items
+//                }
+//                //self.showTableView(tableView: self.tableView, jsonData: TeamService.instance.jsonData!)
+//            }
+//        }
+    }
+    
     func parseJSON(jsonData: Data?)-> Bool {
         
         let _rows: [U] = genericTable2(jsonData: jsonData)
@@ -137,7 +166,7 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
                         for row in tables2.rows {
                             row.filterRow()
                             
-                            if let b: Bool = selected?(row) {
+                            if let b: Bool = self.selectedClosure?(row) {
                                 row.selected = b
                             }
                         }
@@ -206,7 +235,7 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
 //            print("current page: \(page)")
 //            print(totalPage)
             if page <= totalPage {
-                getDataStart(page: page, perPage: perPage)
+                getDataFromServer(page: page)
             }
         }
     }

@@ -11,7 +11,7 @@ import Foundation
 class MemberSubscriptionKindVC: BaseViewController {
     
     lazy var tableView: MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable, MemberSubscriptionKindVC> = {
-        let tableView = MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable, MemberSubscriptionKindVC>(selected: tableViewSetSelected(row:), myDelegate: self)
+        let tableView = MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable, MemberSubscriptionKindVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer(page:), myDelegate: self)
         return tableView
     }()
     
@@ -34,10 +34,10 @@ class MemberSubscriptionKindVC: BaseViewController {
     override func refresh() {
         
         page = 1
-        getDataFromServer()
+        tableView.getDataFromServer(page: page)
     }
     
-    func getDataFromServer() {
+    func getDataFromServer(page: Int) {
         Global.instance.addSpinner(superView: self.view)
         
         MemberService.instance.subscriptionKind(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in

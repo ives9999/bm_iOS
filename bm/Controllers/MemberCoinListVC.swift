@@ -12,7 +12,7 @@ import UIKit
 class MemberCoinListVC: BaseViewController {
         
     lazy var tableView: MyTable2VC<MemberCoinListCell, MemberCoinTable, MemberCoinListVC> = {
-        let tableView = MyTable2VC<MemberCoinListCell, MemberCoinTable, MemberCoinListVC>(selected: tableViewSetSelected(row:), myDelegate: self)
+        let tableView = MyTable2VC<MemberCoinListCell, MemberCoinTable, MemberCoinListVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer(page:), myDelegate: self)
         return tableView
     }()
     
@@ -44,11 +44,11 @@ class MemberCoinListVC: BaseViewController {
     override func refresh() {
         
         page = 1
-        getDataFromServer()
+        tableView.getDataFromServer(page: page)
         //getDataStart(page: page, perPage: PERPAGE)
     }
     
-    func getDataFromServer() {
+    func getDataFromServer(page: Int) {
         Global.instance.addSpinner(superView: self.view)
         
         MemberService.instance.MemberCoinList(member_token: Member.instance.token, page: page, perPage: PERPAGE) { (success) in
