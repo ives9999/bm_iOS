@@ -196,6 +196,20 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
         
         //didSelect?(items[indexPath.row], indexPath)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        print("page:\(page)")
+//        print("page:\(perPage)")
+//        print("index.row:\(indexPath.row)")
+        if indexPath.row == page * perPage - 2 {
+            page += 1
+//            print("current page: \(page)")
+//            print(totalPage)
+            if page <= totalPage {
+                getDataStart(page: page, perPage: perPage)
+            }
+        }
+    }
 }
 
 class BaseCell<U: Table, V: BaseViewController>: UITableViewCell {

@@ -322,8 +322,8 @@ class MemberService: DataService {
         let url: String = URL_MEMBER_TEAM_DELETE
         var body: [String: String] = ["device": "app", "channel": CHANNEL, "team_member_token": token]
         
-        print(url)
-        print(body)
+//        print(url)
+//        print(body)
         
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
