@@ -57,6 +57,7 @@ extension BaseViewController {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toArena") as! ArenaVC
             viewController.member_like = member_like
             viewController.isShowPrev = isShowPrev
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -72,6 +73,7 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-fEf-Ib-3oR") as! CoachVC
             viewController.member_like = member_like
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -89,6 +91,7 @@ extension BaseViewController {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Course") as! CourseVC
             viewController.member_like = member_like
             viewController.isShowPrev = isShowPrev
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -108,6 +111,7 @@ extension BaseViewController {
                 if (_delegate != nil) {
                     viewController.delegate = _delegate
                 }
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -121,6 +125,7 @@ extension BaseViewController {
             if (_delegate != nil) {
                 viewController.delegate = _delegate
             }
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -134,6 +139,7 @@ extension BaseViewController {
                 if (_delegate != nil) {
                     viewController.delegate = _delegate
                 }
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -142,6 +148,7 @@ extension BaseViewController {
             if (_delegate != nil) {
                 viewController.delegate = _delegate
             }
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -155,6 +162,7 @@ extension BaseViewController {
                 if (_delegate != nil) {
                     viewController.delegate = _delegate
                 }
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -163,6 +171,7 @@ extension BaseViewController {
             if (_delegate != nil) {
                 viewController.delegate = _delegate
             }
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -173,11 +182,13 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "Course", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-HrW-2D-NhE")  as? ManagerCourseVC {
                 viewController.manager_token = manager_token
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-HrW-2D-NhE") as! ManagerCourseVC
             viewController.manager_token = manager_token
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -190,6 +201,7 @@ extension BaseViewController {
                 viewController.able_type = able_type
                 viewController.able_token = able_token
                 viewController.able_title = able_title
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -197,6 +209,7 @@ extension BaseViewController {
             viewController.able_type = able_type
             viewController.able_token = able_token
             viewController.able_title = able_title
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -209,6 +222,7 @@ extension BaseViewController {
                 viewController.able_type = able_type
                 viewController.able_token = able_token
                 viewController.able_title = able_title
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -216,6 +230,7 @@ extension BaseViewController {
             viewController.able_type = able_type
             viewController.able_token = able_token
             viewController.able_title = able_title
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -226,11 +241,13 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "Team", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "toManagerTeam")  as? ManagerTeamVC {
                 viewController.manager_token = manager_token
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerTeam") as! ManagerTeamVC
             viewController.manager_token = manager_token
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -262,6 +279,7 @@ extension BaseViewController {
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_BANK) as! MemberBankVC
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -277,6 +295,7 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_CART_LIST) as! MemberCartListVC
             viewController.source = source
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -290,6 +309,7 @@ extension BaseViewController {
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_COIN_LIST) as! MemberCoinListVC
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -328,6 +348,7 @@ extension BaseViewController {
                 viewController.modalPresentationStyle = .fullScreen
                 viewController.name = name
                 viewController.kind = kind
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -335,6 +356,7 @@ extension BaseViewController {
             viewController.modalPresentationStyle = .fullScreen
             viewController.name = name
             viewController.kind = kind
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -348,6 +370,7 @@ extension BaseViewController {
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_ORDER_LIST) as! MemberOrderListVC
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -357,11 +380,13 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_SIGNUPLIST)  as? MemberSignupListVC {
                 viewController.able_type = able_type
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_SIGNUPLIST) as! MemberSignupListVC
             viewController.able_type = able_type
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -380,6 +405,7 @@ extension BaseViewController {
                     viewController.key = key
                 }
                 viewController.delegate = self
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -388,6 +414,7 @@ extension BaseViewController {
                 viewController.key = key
             }
             viewController.delegate = self
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -408,6 +435,7 @@ extension BaseViewController {
             if (memberVC != nil) {
                 viewController.memberVC = memberVC
             }
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -477,6 +505,7 @@ extension BaseViewController {
                     }
                 } else {
                     let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_ORDER) as! OrderVC
+                    viewController.modalPresentationStyle = .fullScreen
                     self.navigationController!.pushViewController(viewController, animated: true)
                 }
             }
@@ -489,12 +518,14 @@ extension BaseViewController {
             if let viewController = storyboard.instantiateViewController(identifier: "passwo") as? PasswordVC {
                 viewController.type = type
                 viewController.delegate = self
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
             let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "passwo") as! PasswordVC
             viewController.type = type
             viewController.delegate = self
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -542,6 +573,7 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_PRODUCT) as! ProductVC
             viewController.member_like = member_like
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -557,6 +589,7 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_REGISTER) as! RegisterVC
             //viewController.delegate = self
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -572,6 +605,7 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_REGISTER) as! RequestManagerTeamVC
             //viewController.delegate = self
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -590,6 +624,7 @@ extension BaseViewController {
                     viewController.city_id = city_id
                 }
                 viewController.delegate = delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -602,6 +637,7 @@ extension BaseViewController {
                 viewController.selected = selected
             }
             viewController.delegate = delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -617,6 +653,7 @@ extension BaseViewController {
                     viewController.selecteds = selecteds!
                 }
                 viewController.delegate = self
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -628,6 +665,7 @@ extension BaseViewController {
                 viewController.selecteds = selecteds!
             }
             viewController.delegate = self
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -644,6 +682,7 @@ extension BaseViewController {
                 }
                 viewController.city = city_id
                 viewController.delegate = delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -656,6 +695,7 @@ extension BaseViewController {
             }
             viewController.city = city_id
             viewController.delegate = delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -671,6 +711,7 @@ extension BaseViewController {
                     viewController.selected = selected
                 }
                 viewController.delegate = delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -682,6 +723,7 @@ extension BaseViewController {
                 viewController.selected = selected
             }
             viewController.delegate = delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -697,6 +739,7 @@ extension BaseViewController {
                     viewController.selecteds = selecteds!
                 }
                 viewController.delegate = delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -708,6 +751,7 @@ extension BaseViewController {
                 viewController.selecteds = selecteds!
             }
             viewController.delegate = delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -723,6 +767,7 @@ extension BaseViewController {
                     viewController.selected = selected!
                 }
                 viewController.delegate = self
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -734,6 +779,7 @@ extension BaseViewController {
                 viewController.selected = selected!
             }
             viewController.delegate = self
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -747,6 +793,7 @@ extension BaseViewController {
                     viewController.selecteds = selecteds!
                 }
                 viewController.delegate = delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -756,6 +803,7 @@ extension BaseViewController {
                 viewController.selecteds = selecteds!
             }
             viewController.delegate = delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -771,6 +819,7 @@ extension BaseViewController {
                 viewController.manager_token = manager_token
                 //}
                 viewController.delegate = delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -781,6 +830,7 @@ extension BaseViewController {
             viewController.manager_token = manager_token
             //}
             viewController.delegate = delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -797,6 +847,7 @@ extension BaseViewController {
                     viewController.selected = selected
                 }
                 viewController.delegate = delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -808,6 +859,7 @@ extension BaseViewController {
                 viewController.selected = selected
             }
             viewController.delegate = delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -824,6 +876,7 @@ extension BaseViewController {
                     viewController.selected = selected!
                 }
                 viewController.delegate = delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -835,6 +888,7 @@ extension BaseViewController {
                 viewController.selected = selected!
             }
             viewController.delegate = delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -850,6 +904,7 @@ extension BaseViewController {
                     viewController.selecteds = selecteds
                 }
                 viewController.delegate = delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -861,6 +916,7 @@ extension BaseViewController {
                 viewController.selecteds = selecteds
             }
             viewController.delegate = delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -891,6 +947,7 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_COACH) as! ShowCoachVC
             viewController.token = token
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -927,6 +984,7 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_PN) as! ShowPNVC
             //viewController.token = token
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -992,6 +1050,7 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_PRODUCT) as! ShowProductVC
             viewController.token = token
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -1013,6 +1072,7 @@ extension BaseViewController {
                     viewController.selected = selected
                 }
                 viewController.delegate = _delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
@@ -1030,6 +1090,7 @@ extension BaseViewController {
                 viewController.selected = selected
             }
             viewController.delegate = _delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -1063,6 +1124,7 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toStore") as! StoreVC
             viewController.member_like = member_like
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -1099,6 +1161,7 @@ extension BaseViewController {
             if (params != nil) {
                 viewController.params = params!
             }
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -1130,12 +1193,14 @@ extension BaseViewController {
             if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-XsO-Wn-cpI") as? ValidateVC {
                 viewController.type = type
                 viewController.delegate = self
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
             let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-XsO-Wn-cpI") as! ValidateVC
             viewController.type = type
             viewController.delegate = self
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
@@ -1146,12 +1211,14 @@ extension BaseViewController {
             if let viewController = storyboard.instantiateViewController(identifier: TO_WEBVIEW) as? WebViewVC {
                 viewController.token = token
                 viewController.delegate = delegate
+                viewController.modalPresentationStyle = .fullScreen
                 show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_WEBVIEW) as! WebViewVC
             viewController.token = token
             viewController.delegate = delegate
+            viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }

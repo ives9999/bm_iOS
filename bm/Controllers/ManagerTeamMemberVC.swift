@@ -55,6 +55,8 @@ class ManagerTeamMemberVC: BaseViewController {
     var member_token: String? //要加入會員的token
     var rows: [TeamMemberTable] = [TeamMemberTable]()
     
+    var infoLbl: SuperLabel?
+    
 //    var captureSession: AVCaptureSession!
 //    var previewLayer: AVCaptureVideoPreviewLayer!
     
@@ -125,8 +127,9 @@ class ManagerTeamMemberVC: BaseViewController {
                 //TeamService.instance.jsonData?.prettyPrintedJSONString
                 let b: Bool = self.tableView.parseJSON(jsonData: TeamService.instance.jsonData)
                 if !b && self.tableView.msg.count == 0 {
-                    self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
+                    self.infoLbl = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
                 } else {
+                    self.infoLbl?.removeFromSuperview()
                     self.rows = self.tableView.items
                 }
                 //self.showTableView(tableView: self.tableView, jsonData: TeamService.instance.jsonData!)
@@ -257,7 +260,7 @@ class ManagerTeamMemberVC: BaseViewController {
     private func addTeamMember(member_token: String) {
         Global.instance.addSpinner(superView: self.view)
         
-        TeamService.instance.addTeamMember(team_token: token!, member_token: member_token, manager_token: Member.instance.token) { (success) in
+        TeamService.instance.addTeamMember(token: token!, member_token: member_token, manager_token: Member.instance.token) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
                 do {

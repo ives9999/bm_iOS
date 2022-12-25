@@ -69,9 +69,9 @@ class TeamService: DataService {
         return url
     }
     
-    func addTeamMember(team_token: String, member_token: String, manager_token: String, completion: @escaping CompletionHandler) {
+    func addTeamMember(token: String, member_token: String, manager_token: String, completion: @escaping CompletionHandler) {
         let url: String = URL_TEAM_MEMBER_ADD
-        var body: [String: String] = ["device": "app", "channel": CHANNEL, "team_token": team_token, "member_token": member_token, "manager_token": manager_token]
+        var body: [String: String] = ["device": "app", "channel": CHANNEL, "token": token, "member_token": member_token, "manager_token": manager_token]
         //print(url)
         //print(body)
         
@@ -82,6 +82,7 @@ class TeamService: DataService {
             case .success(_):
                 if response.data != nil {
                     self.jsonData = response.data
+                    self.jsonData?.prettyPrintedJSONString
                     completion(true)
                 } else {
                     self.msg = "網路錯誤，請稍後再試"
