@@ -118,10 +118,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //let color = UIColor(red: 128/255, green: 100/255, blue: 0, alpha: 1)
         //setStatusBarBackgroundColor(color: color)
         
-        let deviceType: DeviceType = UIDevice.current.deviceType
-        if deviceType == .simulator {
+        #if os(iOS) && targetEnvironment(simulator)
             gSimulate = true
-        }
+        #else
+            gSimulate = false
+        #endif
+        
+//        let deviceType: DeviceType = UIDevice.current.deviceType
+//        if deviceType == .simulator {
+//            gSimulate = true
+//        }
         //gSimulate = true
         
         //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)

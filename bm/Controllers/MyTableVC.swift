@@ -230,6 +230,7 @@ class MyTableVC: BaseViewController {
             }
         }
         //print(params)
+        params["keyword"] = "絆"
     }
 
     override func singleSelected(key: String, selected: String, show: String?=nil) {
