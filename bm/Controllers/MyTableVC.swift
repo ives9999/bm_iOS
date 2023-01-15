@@ -159,6 +159,7 @@ class MyTableVC: BaseViewController {
     
     override func genericTable() {
         
+        //jsonData?.prettyPrintedJSONString
         var mysTable: TeamsTable?
         do {
             if (jsonData != nil) {
@@ -230,7 +231,7 @@ class MyTableVC: BaseViewController {
             }
         }
         //print(params)
-        params["keyword"] = "絆"
+        params["keyword"] = "羽球密碼"
     }
 
     override func singleSelected(key: String, selected: String, show: String?=nil) {
