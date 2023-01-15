@@ -48,9 +48,6 @@
                                     <constraint firstItem="Fbn-nY-DP6" firstAttribute="leading" secondItem="Req-IZ-nd0" secondAttribute="leading" constant="12" id="yMb-mt-E2p"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="X9c-VN-HVh">
-                                <rect key="frame" x="0.0" y="112" width="414" height="750"/>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="FcP-ze-zC8">
                                 <rect key="frame" x="0.0" y="112" width="414" height="700"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -76,9 +73,7 @@
                                 <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="B43-wG-Oee"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Xab-Th-e15"/>
                                     <constraint firstItem="hMx-d2-eep" firstAttribute="centerX" secondItem="BZG-Qs-wSQ" secondAttribute="centerX" id="hew-d3-fSR"/>
-                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="rmn-wG-iX7"/>
                                     <constraint firstItem="hMx-d2-eep" firstAttribute="centerY" secondItem="BZG-Qs-wSQ" secondAttribute="centerY" id="rmx-3y-CNk"/>
                                 </constraints>
                             </view>
@@ -86,20 +81,16 @@
                         <viewLayoutGuide key="safeArea" id="aJ9-6P-u9a"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="aJ9-6P-u9a" firstAttribute="trailing" secondItem="X9c-VN-HVh" secondAttribute="trailing" id="2RM-hU-Jyr"/>
                             <constraint firstItem="Req-IZ-nd0" firstAttribute="top" secondItem="aJ9-6P-u9a" secondAttribute="top" id="3k1-F6-PuD"/>
-                            <constraint firstItem="aJ9-6P-u9a" firstAttribute="bottom" secondItem="X9c-VN-HVh" secondAttribute="bottom" id="6ev-uJ-lgu"/>
                             <constraint firstItem="aJ9-6P-u9a" firstAttribute="bottom" secondItem="BZG-Qs-wSQ" secondAttribute="bottom" id="CRa-oS-3Wh"/>
                             <constraint firstItem="aJ9-6P-u9a" firstAttribute="trailing" secondItem="Req-IZ-nd0" secondAttribute="trailing" id="ENf-6A-aPt"/>
                             <constraint firstItem="Req-IZ-nd0" firstAttribute="leading" secondItem="UVT-AD-sSx" secondAttribute="leading" id="Ods-G3-xe5"/>
                             <constraint firstItem="BZG-Qs-wSQ" firstAttribute="leading" secondItem="aJ9-6P-u9a" secondAttribute="leading" id="TJu-iB-VAV"/>
                             <constraint firstAttribute="trailing" secondItem="BZG-Qs-wSQ" secondAttribute="trailing" id="Ves-Ns-39S"/>
-                            <constraint firstItem="aJ9-6P-u9a" firstAttribute="leading" secondItem="X9c-VN-HVh" secondAttribute="leading" id="Zz6-gw-g09"/>
                             <constraint firstItem="aJ9-6P-u9a" firstAttribute="bottom" secondItem="FcP-ze-zC8" secondAttribute="bottom" constant="50" id="cLl-u8-DSI"/>
                             <constraint firstItem="FcP-ze-zC8" firstAttribute="top" secondItem="Req-IZ-nd0" secondAttribute="bottom" id="gSy-Bs-fuz"/>
                             <constraint firstItem="aJ9-6P-u9a" firstAttribute="trailing" secondItem="FcP-ze-zC8" secondAttribute="trailing" id="kts-IZ-PnS"/>
                             <constraint firstItem="FcP-ze-zC8" firstAttribute="leading" secondItem="aJ9-6P-u9a" secondAttribute="leading" id="rXz-KD-khc"/>
-                            <constraint firstItem="X9c-VN-HVh" firstAttribute="top" secondItem="Req-IZ-nd0" secondAttribute="bottom" id="yLR-ar-udL"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Agn-u2-7Ah"/>

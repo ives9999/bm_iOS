@@ -508,42 +508,40 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         _showMap(title: _row.name, address: arenaTable!.address)
     }
     
-    @objc override func handleExpandClose(gesture : UITapGestureRecognizer) {
-        
-        let headerView = gesture.view!
-        let section = headerView.tag
-        let tmp = headerView.subviews.filter({$0 is UIImageView})
-        var mark: UIImageView?
-        if tmp.count > 0 {
-            mark = tmp[0] as? UIImageView
-        }
-        
-        var indexPaths: [IndexPath] = [IndexPath]()
-        
-//        let key: String = getSectionKey(idx: section)
-        let oneSection: OneSection = oneSections[section]
-        var isExpanded = oneSection.isExpanded
-        oneSections[section].isExpanded = !isExpanded
-        
-        let items: [OneRow] = oneSection.items
-        //let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
-        //indexPaths.append(IndexPath(row: 0, section: 1))
-        //indexPaths.append(IndexPath(row: 1, section: 1))
-        for (idx, _) in items.enumerated() {
-            indexPaths.append(IndexPath(row: idx, section: section))
-        }
-        
-        if isExpanded {
-            tableView.deleteRows(at: indexPaths, with: .fade)
-        } else {
-            tableView.insertRows(at: indexPaths, with: .fade)
-        }
-        
-        isExpanded = !isExpanded
-        if mark != nil {
-            toggleMark(mark: mark!, isExpanded: isExpanded)
-        }
-    }
+//    @objc override func handleExpandClose(gesture : UITapGestureRecognizer) {
+//
+//        let headerView = gesture.view!
+//        let section = headerView.tag
+//        let tmp = headerView.subviews.filter({$0 is UIImageView})
+//        var mark: UIImageView?
+//        if tmp.count > 0 {
+//            mark = tmp[0] as? UIImageView
+//        }
+//
+//        var indexPaths: [IndexPath] = [IndexPath]()
+//
+////        let key: String = getSectionKey(idx: section)
+//        let oneSection: OneSection = oneSections[section]
+//        var isExpanded = oneSection.isExpanded
+//        oneSections[section].isExpanded = !isExpanded
+//
+//        let items: [OneRow] = oneSection.items
+//
+//        for (idx, _) in items.enumerated() {
+//            indexPaths.append(IndexPath(row: idx, section: section))
+//        }
+//
+//        if isExpanded {
+//            tableView.deleteRows(at: indexPaths, with: .fade)
+//        } else {
+//            tableView.insertRows(at: indexPaths, with: .fade)
+//        }
+//
+//        isExpanded = !isExpanded
+//        if mark != nil {
+//            toggleMark(mark: mark!, isExpanded: isExpanded)
+//        }
+//    }
     
     @objc func tabPressed(sender: UITapGestureRecognizer) {
                 
@@ -600,11 +598,11 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         submitBtn.titleLabel?.textColor = UIColor(MY_BLACK)
         //submitBtn.setTitleColor(.red, for: .normal)
         
-        tableViewBottomConstraint.constant = 100
+        //tableViewBottomConstraint.constant = 50
         tableViewContainer.backgroundColor = UIColor(SEARCH_BACKGROUND)
         tableViewContainerleading.constant = 4
         tableViewContainertrailing.constant = 4
-        tableViewContainerBottom.constant = 100
+        tableViewContainerBottom.constant = 8
     }
     
     private func setListView() {

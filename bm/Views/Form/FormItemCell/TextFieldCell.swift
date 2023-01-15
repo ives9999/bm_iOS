@@ -72,7 +72,7 @@ class TextFieldCell: FormItemCell {
         textField.placeholder(row.placeholder)
         textField.keyboardType = row.keyboard.enumToSwift()
         //textField.backgroundColor = UIColor.clear
-        textField.tintColor = UIColor.red
+        textField.tintColor = UIColor(MY_GREEN)
         
         requiredImageView.isHidden = !row.isRequired
         //requiredImageView.isHidden = false
@@ -80,7 +80,7 @@ class TextFieldCell: FormItemCell {
         //promptBtn.isHidden = (_formItem.tooltip == nil) ? true : false
         promptBtn.isHidden = true
         
-        textField.backgroundColor = UIColor(MY_BLACK)
+        textField.backgroundColor = UIColor(MY_GRAY)
         textField.layer.borderWidth = 0
         textField.layer.borderColor = UIColor.clear.cgColor
         //textField.borderColor(UIColor.clear)
