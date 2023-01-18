@@ -122,6 +122,34 @@ class TeamService: DataService {
         }
     }
     
+    func leave(team_member_token: String, play_date: String, completion: @escaping CompletionHandler) {
+        
+        let url: String = URL_TEAM_MEMBER_LEAVE
+        let body: [String: String] = ["device": "app", "channel": CHANNEL, "team_member_token": team_member_token, "play_date": play_date]
+        print(url)
+        print(body)
+        
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+            
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "網路錯誤，請稍後再試"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
     func teamMemberList(token: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
         let url: String = URL_TEAM_MEMBER_LIST
         var body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "token": token]

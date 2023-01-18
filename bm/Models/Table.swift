@@ -26,6 +26,31 @@ class Tables2<T: Codable>: Codable {
     }
 }
 
+class SuccessTable2<T: Codable>: Codable {
+    var success: Bool = false
+    var msgs: [String] = [String]()
+    var model: T?
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        model = try container.decodeIfPresent(T.self, forKey: .model) ?? nil
+        msgs = try container.decodeIfPresent([String].self, forKey: .msgs) ?? [String]()
+    }
+    
+    func parseMsgs()-> String {
+        
+        var msg: String = ""
+        for tmp in msgs {
+            msg += tmp + "\n"
+        }
+        
+        return msg
+    }
+}
+
 class Tables: Codable {
     var success: Bool = false
     var page: Int = -1

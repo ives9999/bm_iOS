@@ -12,12 +12,6 @@ class TeamMemberTable: Table {
     
     var team_id: Int = -1
     var member_id: Int = -1
-//    var member_nickname: String = ""
-//    var member_token: String = ""
-//    var member_featured: String = ""
-//    var manager_nickname: String = ""
-//    var team_name: String = ""
-//    var team_featured: String = ""
     var memberTable: MemberTable?
     var managerTable: MemberTable?
     var teamTable: TeamTable?
@@ -25,12 +19,6 @@ class TeamMemberTable: Table {
     enum CodingKeys: String, CodingKey {
         case team_id
         case member_id
-//        case member_nickname
-//        case member_token
-//        case member_featured
-//        case manager_nickname
-//        case team_name
-//        case team_featured
         case memberTable = "member"
         case managerTable = "manager"
         case teamTable = "team"
@@ -50,12 +38,6 @@ class TeamMemberTable: Table {
         memberTable = try container.decodeIfPresent(MemberTable.self, forKey: .memberTable) ?? nil
         managerTable = try container.decodeIfPresent(MemberTable.self, forKey: .managerTable) ?? nil
         teamTable = try container.decodeIfPresent(TeamTable.self, forKey: .teamTable) ?? nil
-//        do {member_nickname = try container.decode(String.self, forKey: .member_nickname)}catch{member_nickname = ""}
-//        do {member_token = try container.decode(String.self, forKey: .member_token)}catch{member_token = ""}
-//        do {member_featured = try container.decode(String.self, forKey: .member_featured)}catch{member_featured = ""}
-//        do {manager_nickname = try container.decode(String.self, forKey: .manager_nickname)}catch{manager_nickname = ""}
-//        do {team_name = try container.decode(String.self, forKey: .team_name)}catch{team_name = ""}
-//        do {team_featured = try container.decode(String.self, forKey: .team_featured)}catch{team_featured = ""}
     }
     
     override func filterRow() {
@@ -64,23 +46,5 @@ class TeamMemberTable: Table {
         memberTable?.filterRow()
         managerTable?.filterRow()
         teamTable?.filterRow()
-        
-//        if member_featured.count > 0 {
-//            if !member_featured.hasPrefix("http://") && !member_featured.hasPrefix("https://") {
-//                member_featured = BASE_URL + member_featured
-//                //print(featured_path)
-//            }
-//        } else {
-//            member_featured = BASE_URL + "/imgs/nophoto.png"
-//        }
-//
-//        if team_featured.count > 0 {
-//            if !team_featured.hasPrefix("http://") && !team_featured.hasPrefix("https://") {
-//                team_featured = BASE_URL + team_featured
-//                //print(featured_path)
-//            }
-//        } else {
-//            team_featured = BASE_URL + "/imgs/nophoto.png"
-//        }
     }
 }

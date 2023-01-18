@@ -697,6 +697,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     func getMemberOne(member_token: String) {
         
+        Global.instance.addSpinner(superView: self.view)
+        
         MemberService.instance.getOne(params: ["token": member_token]) { success in
             
             Global.instance.removeSpinner(superView: self.view)
@@ -1151,7 +1153,32 @@ extension ShowTeamVC: ShowTeamMemberCellDelegate {
         
         guard let idx: Int = introduceTableView.indexPath(for: cell)?.row else { return }
         
-        print(idx)
+        let row: TeamMemberTable = items[idx]
+        
+        TeamService.instance.leave(team_member_token: row.token, play_date: self.nextDate) { success in
+            
+            Global.instance.removeSpinner(superView: self.view)
+            
+            if success {
+                
+                let jsonData: Data = TeamService.instance.jsonData!
+                //jsonData.prettyPrintedJSONString
+                do {
+                    let successTable: SuccessTable2<TeamMemberLeaveTable> = try JSONDecoder().decode(SuccessTable2.self, from: jsonData)
+                    if successTable.success {
+                        let teamMemberLeaveTable: TeamMemberLeaveTable = try JSONDecoder().decode(TeamMemberLeaveTable.self, from: jsonData)
+                        self.info(msg: "請假成功", buttonTitle: "關閉") {
+                            self.refresh()
+                        }
+                        
+                    } else {
+                        self.warning(successTable.parseMsgs())
+                    }
+                } catch {
+                    self.warning(error.localizedDescription)
+                }
+            }
+        }
     }
 }
 
