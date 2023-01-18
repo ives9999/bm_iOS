@@ -309,6 +309,7 @@
 		F9308B41273E6A04002531A1 /* SignupDateTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B40273E6A04002531A1 /* SignupDateTable.swift */; };
 		F93095F62948ACFA006C625C /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93095F52948ACFA006C625C /* Enum.swift */; };
 		F93095F92948ADB9006C625C /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93095F82948ADB9006C625C /* UITableViewCell.swift */; };
+		F94093D229765E720006D89D /* ShowTeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D129765E720006D89D /* ShowTeamMemberCell.swift */; };
 		F94DECDD27478F2F00A9DA17 /* ManagerTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */; };
 		F94DECE02747929A00A9DA17 /* ManagerTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */; };
 		F94DECE12747929A00A9DA17 /* ManagerTeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */; };
@@ -737,6 +738,7 @@
 		F9308B40273E6A04002531A1 /* SignupDateTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupDateTable.swift; sourceTree = "<group>"; };
 		F93095F52948ACFA006C625C /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		F93095F82948ADB9006C625C /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
+		F94093D129765E720006D89D /* ShowTeamMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTeamMemberCell.swift; sourceTree = "<group>"; };
 		F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamVC.swift; sourceTree = "<group>"; };
 		F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamCell.swift; sourceTree = "<group>"; };
 		F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagerTeamCell.xib; sourceTree = "<group>"; };
@@ -965,6 +967,7 @@
 				F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */,
 				F9763E1728B6851A006ED47C /* MemberSubscriptionLogCell.xib */,
 				F9FFD8AC2909406200AD8E52 /* ShowSignupCell.swift */,
+				F94093D129765E720006D89D /* ShowTeamMemberCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1831,6 +1834,7 @@
 				B36CBD5320DE00FE00E52B9C /* TempPlayDatePlayer.swift in Sources */,
 				B36E333A2542B996001336C2 /* StoreVC.swift in Sources */,
 				B3D4950D25DF67D900D7BF42 /* PaymentCell.swift in Sources */,
+				F94093D229765E720006D89D /* ShowTeamMemberCell.swift in Sources */,
 				F94FF4351FB4322C00D167B6 /* EditVC.swift in Sources */,
 				F9FA3C4427E57A650094C773 /* TabTop.swift in Sources */,
 				B370EFB226A849120022E599 /* CartService.swift in Sources */,

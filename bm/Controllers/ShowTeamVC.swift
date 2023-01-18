@@ -14,6 +14,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     var showTop: ShowTop2?
     
+    // tab
     var topTagStackView: UIStackView = {
         let view: UIStackView = UIStackView()
         //view.backgroundColor = UIColor.gray
@@ -72,6 +73,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         let oneLineCellNib = UINib(nibName: "OneLineCell", bundle: nil)
         view.register(oneLineCellNib, forCellReuseIdentifier: "OneLineCell")
         
+        view.register(ShowTeamMemberCell.self, forCellReuseIdentifier: "ShowTeamMemberCell")
+        
         view.register(ShowSignupCell.self, forCellReuseIdentifier: "ShowSignupCell")
         
         return view
@@ -113,6 +116,15 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         let view: SuperLabel = SuperLabel()
         view.setTextTitle()
         view.text = "總人數：16位"
+        view.visibility = .invisible
+        
+        return view
+    }()
+    
+    let nextDateLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextGeneral()
+        view.text = "下次打球時間"
         view.visibility = .invisible
         
         return view
@@ -172,6 +184,11 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var teamMemberPerPage: Int = PERPAGE
     var teamMemberTotalCount: Int = 0
     var teamMemberTotalPage: Int = 0
+    
+    var nextDate: String = ""
+    var nextDateWeek: String = ""
+    var play_start: String = ""
+    var play_end: String = ""
     
     //temp play
     var memberRows: [MemberRow] = [MemberRow]()
@@ -291,6 +308,12 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         teamMemberStackView.addArrangedSubview(teamMemberDataLbl)
         teamMemberDataLbl.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
+            make.left.equalToSuperview().offset(12)
+        }
+        
+        teamMemberStackView.addArrangedSubview(nextDateLbl)
+        nextDateLbl.snp.makeConstraints { make in
+            make.top.equalTo(teamMemberDataLbl.snp.bottom).offset(12)
             make.left.equalToSuperview().offset(12)
         }
         
@@ -610,6 +633,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         let _rows: [TeamMemberTable] = self.genericTable2(jsonData: jsonData)
         if (_rows.count == 0) {
             self.teamMemberDataLbl.visibility = .invisible
+            self.nextDateLbl.visibility = .invisible
             self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
         } else {
             if (teamMemberPage == 1) {
@@ -617,7 +641,11 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             }
             items += _rows
             self.teamMemberDataLbl.visibility = .visible
+            self.nextDateLbl.visibility = .visible
+            
             self.teamMemberDataLbl.text = "總人數：\(teamMemberTotalCount)位"
+            
+            self.nextDateLbl.text = "下次打球時間：\(nextDate)" + " ( " + nextDateWeek + " )" + "  " + "\(play_start) ~ \(play_end)"
             introduceTableView.reloadData()
         }
         
@@ -625,13 +653,15 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }
     
     func genericTable2(jsonData: Data?)-> [TeamMemberTable] {
-        
+            
         var rows: [TeamMemberTable] = [TeamMemberTable]()
         do {
             if (jsonData != nil) {
                 //print(jsonData!.prettyPrintedJSONString)
-                let tables2: Tables2 = try JSONDecoder().decode(Tables2<TeamMemberTable>.self, from: jsonData!)
+                let tables2: TeamMemberTables2 = try JSONDecoder().decode(TeamMemberTables2<TeamMemberTable>.self, from: jsonData!)
                 if (tables2.success) {
+                    
+                    tables2.filterRow()
                     if tables2.rows.count > 0 {
                         
                         for row in tables2.rows {
@@ -644,6 +674,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                             teamMemberTotalCount = tables2.totalCount
                             let _totalPage: Int = teamMemberTotalCount / teamMemberPerPage
                             teamMemberTotalPage = (teamMemberTotalCount % teamMemberPerPage > 0) ? _totalPage + 1 : _totalPage
+                            nextDate = tables2.nextDate
+                            nextDateWeek = tables2.nextDateWeek
+                            play_start = tables2.play_start_show
+                            play_end = tables2.play_end_show
                         }
                         
                         rows += tables2.rows
@@ -794,7 +828,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     @objc func tabPressed(sender: UITapGestureRecognizer) {
                 
         if let idx: Int = sender.view?.tag {
-            self._tabPressed(idx)
+            //self._tabPressed(idx)
             let selectedTag: [String: Any] = topTabs[idx]
             if let focus: Bool = selectedTag["focus"] as? Bool {
                 //按了其他頁面的按鈕
@@ -808,7 +842,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }
     
     private func _tabPressed(_ idx: Int) {
-        switch focusTabIdx {
+        switch idx {
         case 0:
             removeTeamMember()
             removeTempPlay()
@@ -980,7 +1014,9 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         else if focusTabIdx == 1 && items.count > 0 {
-            let cell: ShowSignupCell = tableView.dequeueReusableCell(withIdentifier: "ShowSignupCell", for: indexPath) as! ShowSignupCell
+            let cell: ShowTeamMemberCell = tableView.dequeueReusableCell(withIdentifier: "ShowTeamMemberCell", for: indexPath) as! ShowTeamMemberCell
+            
+            cell.delegate = self
             
             let row: TeamMemberTable = items[indexPath.row]
             cell.noLbl.text = "\(indexPath.row + 1)."
@@ -1105,6 +1141,56 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
                     getTeamMemberList(page: teamMemberPage, perPage: teamMemberPerPage)
                 }
             }
+        }
+    }
+}
+
+extension ShowTeamVC: ShowTeamMemberCellDelegate {
+    
+    func leavePressed(cell: ShowTeamMemberCell) {
+        
+        guard let idx: Int = introduceTableView.indexPath(for: cell)?.row else { return }
+        
+        print(idx)
+    }
+}
+
+class TeamMemberTables2<T: Codable>: Codable {
+    var success: Bool = false
+    var page: Int = -1
+    var totalCount: Int = -1
+    var perPage: Int = -1
+    var nextDate: String = ""
+    var nextDateWeek: String = ""
+    var play_start: String = ""
+    var play_end: String = ""
+    var rows: [T] = [T]()
+    
+    var play_start_show: String = ""
+    var play_end_show: String = ""
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        success = try container.decode(Bool.self, forKey: .success)
+        page = try container.decode(Int.self, forKey: .page)
+        totalCount = try container.decode(Int.self, forKey: .totalCount)
+        perPage = try container.decode(Int.self, forKey: .perPage)
+        nextDate = try container.decode(String.self, forKey: .nextDate)
+        nextDateWeek = try container.decode(String.self, forKey: .nextDateWeek)
+        play_start = try container.decode(String.self, forKey: .play_start)
+        play_end = try container.decode(String.self, forKey: .play_end)
+        rows = try container.decode([T].self, forKey: .rows)
+    }
+    
+    func filterRow() {
+        
+        if play_start.count > 0 {
+            play_start_show = play_start.noSec()
+        }
+        
+        if play_end.count > 0 {
+            play_end_show = play_end.noSec()
         }
     }
 }
