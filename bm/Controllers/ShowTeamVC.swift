@@ -184,6 +184,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var teamMemberPerPage: Int = PERPAGE
     var teamMemberTotalCount: Int = 0
     var teamMemberTotalPage: Int = 0
+    var teamMemberToken: String? = nil
     
     var nextDate: String = ""
     var nextDateWeek: String = ""
@@ -656,6 +657,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             for item in items {
                 if item.memberTable != nil {
                     if item.memberTable!.token == Member.instance.token {
+                        self.teamMemberToken = item.token
                         isTeamMember = true
                         break
                     }
@@ -809,11 +811,27 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             //team member token
             //play date
             
-            Global.instance.addSpinner(superView: self.view)
-            TeamService.instance.leave(team_member_token: "", play_date: self.nextDate) { Success in
-                Global.instance.removeSpinner(superView: self.view)
+            if self.teamMemberToken != nil {
+                Global.instance.addSpinner(superView: self.view)
+                TeamService.instance.leave(team_member_token: self.teamMemberToken!, play_date: self.nextDate) { Success in
+                    Global.instance.removeSpinner(superView: self.view)
+                    
+                    do {
+                        if (self.dataService.jsonData != nil) {
+                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
+                            if (successTable.success) {
+                                self.info(msg: successTable.msg, buttonTitle: "關閉") {
+                                    self.refresh(TeamTable.self)
+                                }
+                            } else {
+                                self.warning(successTable.msg)
+                            }
+                        }
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    }
+                }
             }
-            
         }
         else if (focusTabIdx == 2) {
             
