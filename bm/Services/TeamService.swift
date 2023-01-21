@@ -129,28 +129,54 @@ class TeamService: DataService {
         print(url)
         print(body)
         
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
-            
-            
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER)
+          .response { response in
+
+            //let json = JSON(response.value)
+            //print(json)
+
             switch response.result {
-            case .success(_):
-                if response.data != nil {
-                    self.jsonData = response.data
-                    completion(true)
-                } else {
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                }
+            case .success(let data):
+                //data?.prettyPrintedJSONString
+                self.jsonData = data
+                completion(true)
             case .failure(let error):
-                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                self.msg = "伺服器無法回傳，請洽管理員"
                 completion(false)
                 print(error)
                 return
             }
         }
+        
+//        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseDecodable(of: SuccessTable2<TeamMemberLeaveTable>.self) { response in
+//
+//            guard let successTable2: SuccessTable2 = response.value else { return }
+//
+//        }
+        
+//        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+//
+//
+//            switch response.result {
+//            case .success(_):
+//                if response.data != nil {
+//                    self.jsonData = response.data
+//                    completion(true)
+//                } else {
+//                    self.msg = "網路錯誤，請稍後再試"
+//                    completion(false)
+//                }
+//            case .failure(let error):
+//                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+//                completion(false)
+//                print(error)
+//                return
+//            }
+//        }
     }
     
     func teamMemberList(token: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
+        
         let url: String = URL_TEAM_MEMBER_LIST
         var body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "token": token]
         print(url)
@@ -175,6 +201,22 @@ class TeamService: DataService {
                 return
             }
         }
+    }
+    
+    func teamMemberList<T: Codable>(of: T.Type, token: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
+        
+        let url: String = URL_TEAM_MEMBER_LIST
+        let body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "token": token]
+        
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER)
+            .responseDecodable(of: T.self) { (response) in
+                guard let value = response.value
+                else {
+                    return
+                    
+                }
+                print(value)
+            }
     }
     
     func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {

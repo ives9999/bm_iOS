@@ -618,14 +618,18 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     func getTeamMemberList(page: Int = 1, perPage: Int = 20) {
         Global.instance.addSpinner(superView: self.view)
         
-        TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if (success) {
-                self.parseJSON(jsonData: TeamService.instance.jsonData)
-            } else {
-                self.warning("取得資料錯誤，請洽管理員！！")
-            }
+        TeamService.instance.teamMemberList(of: TeamMemberTables2<TeamMemberTable>.self, token: token!, page: page, perPage: perPage) { (success) in
+            let n = 6
         }
+        
+//        TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
+//            Global.instance.removeSpinner(superView: self.view)
+//            if (success) {
+//                self.parseJSON(jsonData: TeamService.instance.jsonData)
+//            } else {
+//                self.warning("取得資料錯誤，請洽管理員！！")
+//            }
+//        }
     }
     
     func parseJSON(jsonData: Data?)-> Bool {
@@ -647,6 +651,21 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             
             self.nextDateLbl.text = "下次打球時間：\(nextDate)" + " ( " + nextDateWeek + " )" + "  " + "\(play_start) ~ \(play_end)"
             introduceTableView.reloadData()
+            
+            var isTeamMember: Bool = false
+            for item in items {
+                if item.memberTable != nil {
+                    if item.memberTable!.token == Member.instance.token {
+                        isTeamMember = true
+                        break
+                    }
+                }
+            }
+            
+            if isTeamMember {
+                showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
+                showBottom!.submitBtn.setTitle("請假")
+            }
         }
         
         return true
@@ -868,8 +887,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             } else {
                 introduceTableView.reloadData()
             }
-            
-            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: true, isShowCancel: false)
             
         case 2:
             removeIntroduce()

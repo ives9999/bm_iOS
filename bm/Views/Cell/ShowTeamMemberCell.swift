@@ -30,12 +30,20 @@ class ShowTeamMemberCell: UITableViewCell {
         return view
     }()
     
-    let leaveBtn: CityButton = {
-        let view = CityButton()
-        view.setTitle("請假")
+    let leaveLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextGeneral()
+        view.text = "請假"
         
         return view
     }()
+    
+//    let leaveBtn: CityButton = {
+//        let view = CityButton()
+//        view.setTitle("請假")
+//
+//        return view
+//    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -71,17 +79,23 @@ class ShowTeamMemberCell: UITableViewCell {
             make.centerY.equalToSuperview()
         }
         
-        self.contentView.addSubview(leaveBtn)
-        leaveBtn.snp.makeConstraints { make in
+        self.contentView.addSubview(leaveLbl)
+        leaveLbl.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-12)
             make.centerY.equalToSuperview()
         }
         
-        leaveBtn.addTarget(self, action: #selector(leavePressed), for: .touchDown)
+//        self.contentView.addSubview(leaveBtn)
+//        leaveBtn.snp.makeConstraints { make in
+//            make.right.equalToSuperview().offset(-12)
+//            make.centerY.equalToSuperview()
+//        }
+//
+//        leaveBtn.addTarget(self, action: #selector(leavePressed), for: .touchDown)
     }
     
-    @objc func leavePressed(view: UIButton) {
-        
-        delegate?.leavePressed(cell: self)
-    }
+//    @objc func leavePressed(view: UIButton) {
+//
+//        delegate?.leavePressed(cell: self)
+//    }
 }
