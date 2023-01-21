@@ -618,18 +618,18 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     func getTeamMemberList(page: Int = 1, perPage: Int = 20) {
         Global.instance.addSpinner(superView: self.view)
         
-        TeamService.instance.teamMemberList(of: TeamMemberTables2<TeamMemberTable>.self, token: token!, page: page, perPage: perPage) { (success) in
-            let n = 6
-        }
-        
-//        TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
-//            Global.instance.removeSpinner(superView: self.view)
-//            if (success) {
-//                self.parseJSON(jsonData: TeamService.instance.jsonData)
-//            } else {
-//                self.warning("取得資料錯誤，請洽管理員！！")
-//            }
+//        TeamService.instance.teamMemberList(of: TeamMemberTables2<TeamMemberTable>.self, token: token!, page: page, perPage: perPage) { (success) in
+//            let n = 6
 //        }
+        
+        TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.parseJSON(jsonData: TeamService.instance.jsonData)
+            } else {
+                self.warning("取得資料錯誤，請洽管理員！！")
+            }
+        }
     }
     
     func parseJSON(jsonData: Data?)-> Bool {
@@ -804,7 +804,18 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             return
         }
         
-        if (focusTabIdx == 2) {
+        //請假
+        if (focusTabIdx == 1) {
+            //team member token
+            //play date
+            
+            Global.instance.addSpinner(superView: self.view)
+            TeamService.instance.leave(team_member_token: "", play_date: self.nextDate) { Success in
+                Global.instance.removeSpinner(superView: self.view)
+            }
+            
+        }
+        else if (focusTabIdx == 2) {
             
             if myTable != nil && myTable!.signupDate != nil {
                 
@@ -1045,6 +1056,8 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
                 nickname = row.memberTable!.nickname
             }
             cell.nameLbl.text = nickname
+            
+            cell.leaveLbl.visibility = (row.isLeave) ? .visible : .invisible
             
             cell.setSelectedBackgroundColor()
             return cell
