@@ -191,10 +191,14 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var play_start: String = ""
     var play_end: String = ""
     
+    //會員是否為球隊隊友
+    var isTeamMember: Bool = false
+    //會員為隊友，會員是否已經請假
+    var isTeapMemberLeave: Bool = false
+    
     //temp play
     var memberRows: [MemberRow] = [MemberRow]()
     
-        
     var token: String?
 
     override func viewDidLoad() {
@@ -653,20 +657,25 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             self.nextDateLbl.text = "下次打球時間：\(nextDate)" + " ( " + nextDateWeek + " )" + "  " + "\(play_start) ~ \(play_end)"
             introduceTableView.reloadData()
             
-            var isTeamMember: Bool = false
             for item in items {
                 if item.memberTable != nil {
                     if item.memberTable!.token == Member.instance.token {
                         self.teamMemberToken = item.token
-                        isTeamMember = true
+                        self.isTeamMember = true
+                        self.isTeapMemberLeave = item.isLeave
                         break
                     }
                 }
             }
             
-            if isTeamMember {
+            if self.isTeamMember && !self.isTeapMemberLeave {
                 showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
                 showBottom!.submitBtn.setTitle("請假")
+            } else if self.isTeamMember && self.isTeamMember {
+                showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
+                showBottom!.submitBtn.setTitle("取消")
+            } else {
+                showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: true, isShowCancel: false)
             }
         }
         
