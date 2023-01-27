@@ -73,29 +73,46 @@ class DataService {
     init() {}
     
     func _simpleService(url: String, params: [String: String], completion: @escaping CompletionHandler) {
-        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
+//        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER)
+//            .validate()
+//            .responseData { (response) in
+//            
+//            switch response.result {
+//            case .success(_):
+//                if response.data != nil {
+//                    if (response.data != nil) {
+//                        self.jsonData = response.data!
+//                        completion(true)
+//                    } else {
+//                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
+//                        completion(false)
+//                    }
+//                } else {
+//                    self.msg = "沒有任何伺服器回傳的訊息"
+//                    completion(false)
+//                }
+//            case .failure(let error):
+//                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+//                completion(false)
+//                print(error)
+//                return
+//            }
+//        }
+        
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER)
+            .validate()
+            .responseData { (response) in
             
             switch response.result {
-            //case .success(let value):
-            case .success(_):
-                if response.data != nil {
-//                    let json = JSON(value)
-//                    print(json)
-                    if (response.data != nil) {
-                        self.jsonData = response.data!
-                        completion(true)
-                    } else {
-                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
-                        completion(false)
-                    }
-                } else {
-                    self.msg = "沒有任何伺服器回傳的訊息"
-                    completion(false)
-                }
-            case .failure(let error):
-                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+            case .success(let data):
+                self.jsonData = data
+                completion(true)
+                
+            case .failure(_):
+                
+                self.msg = ServiceErrorHandler.instance1.serverError(response: response)
                 completion(false)
-                print(error)
+                print(self.msg)
                 return
             }
         }
@@ -1660,5 +1677,86 @@ struct Connectivity {
   static let sharedInstance = NetworkReachabilityManager()!
   static var isConnectedToInternet:Bool {
       return self.sharedInstance.isReachable
+    }
+}
+
+class ServiceErrorHandler {
+    
+    static let instance1 = ServiceErrorHandler()
+    
+    func getStatusCode(response: AFDataResponse<Data>)-> Int {
+        var statusCode: Int = 200
+        if let code: Int = response.response?.statusCode {
+            statusCode = code
+        }
+        
+        return statusCode
+    }
+    
+    func serverError(response: AFDataResponse<Data>)-> String {
+        
+        var msg: String = ""
+        
+        var statusCode: Int = ServiceErrorHandler.instance1.getStatusCode(response: response)
+        
+        guard case let .failure(error) = response.result else { return "cast error" }
+        
+        switch error {
+        case .invalidURL(let url):
+            msg = "Invalid URL: \(url) - \(error.localizedDescription)"
+        case .parameterEncodingFailed(let reason):
+            msg = "Parameter encoding failed: \(error.localizedDescription)"
+            msg += "Failure Reason: \(reason)"
+        case .multipartEncodingFailed(let reason):
+            msg = "Multipart encoding failed: \(error.localizedDescription)"
+            msg += "Failure Reason: \(reason)"
+        case .responseValidationFailed(let reason):
+            msg = "Response validation failed: \(error.localizedDescription)"
+            msg += "Failure Reason: \(reason)"
+
+            switch reason {
+            case .dataFileNil, .dataFileReadFailed:
+                msg += "Downloaded file could not be read"
+            case .missingContentType(let acceptableContentTypes):
+                msg += "Content Type Missing: \(acceptableContentTypes)"
+            case .unacceptableContentType(let acceptableContentTypes, let responseContentType):
+                msg += "Response content type: \(responseContentType) was unacceptable: \(acceptableContentTypes)"
+            case .unacceptableStatusCode(let code):
+                msg += "Response status code was unacceptable: \(code)"
+            case .customValidationFailed(error: let error):
+                msg += "Response custom validation failed: \(error.localizedDescription)"
+            }
+        case .responseSerializationFailed(let reason):
+            msg = "Response serialization failed: \(error.localizedDescription)"
+            msg += "Failure Reason: \(reason)"
+        case .createUploadableFailed(error: let reason):
+            msg = "create uploadable failed: \(reason.localizedDescription)"
+        case .createURLRequestFailed(error: let reason):
+            msg = "create url request failed: \(reason.localizedDescription)"
+        case .downloadedFileMoveFailed(error: let reason, source: let source, destination: let destination):
+            msg = "download file move failed: \(reason.localizedDescription) sorce:\(source) destination:\(destination)"
+        case .explicitlyCancelled:
+            msg = "explicitly cancelled: \(error.localizedDescription)"
+        case .parameterEncoderFailed(reason: let reason):
+            msg = "create uploadable failed: \(reason)"
+        case .requestAdaptationFailed(error: let reason):
+            msg = "request adatpation failed: \(reason.localizedDescription)"
+        case .requestRetryFailed(retryError: let retryError, originalError: let originalError):
+            msg = "request Retry failed: \(retryError.localizedDescription) originalError:\(originalError))"
+        case .serverTrustEvaluationFailed(reason: let reason):
+            msg = "server trust evaluation failed: \(reason)"
+        case .sessionDeinitialized:
+            msg = "session deinitialized: \(error.localizedDescription)"
+        case .sessionInvalidated(error: let reason):
+            msg = "session invalidate: \(reason!.localizedDescription)"
+        case .sessionTaskFailed(error: let reason):
+            msg = "session task failed: \(reason.localizedDescription)"
+        case .urlRequestValidationFailed(reason: let reason):
+            msg = "url request validation failed: \(reason)"
+        }
+        
+        msg += "\n伺服器錯誤，無法接收回傳資料，請洽管理員" + "\n" + error.localizedDescription + "\n\(statusCode)"
+        
+        return msg
     }
 }

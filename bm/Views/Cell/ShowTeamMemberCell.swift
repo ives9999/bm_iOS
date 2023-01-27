@@ -33,6 +33,7 @@ class ShowTeamMemberCell: UITableViewCell {
     let leaveLbl: SuperLabel = {
         let view = SuperLabel()
         view.setTextGeneral()
+        view.setTextColor(UIColor(MY_RED))
         view.text = "請假"
         
         return view
@@ -81,7 +82,7 @@ class ShowTeamMemberCell: UITableViewCell {
         
         self.contentView.addSubview(leaveLbl)
         leaveLbl.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-12)
+            make.right.equalToSuperview().offset(-20)
             make.centerY.equalToSuperview()
         }
         

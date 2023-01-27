@@ -16,6 +16,7 @@ class TeamMemberTable: Table {
     var managerTable: MemberTable?
     var teamTable: TeamTable?
     var isLeave: Bool = false
+    var leaveTime: String = ""
     
     enum CodingKeys: String, CodingKey {
         case team_id
@@ -24,6 +25,7 @@ class TeamMemberTable: Table {
         case managerTable = "manager"
         case teamTable = "team"
         case isLeave
+        case leaveTime
     }
     
     override init() {
@@ -42,6 +44,7 @@ class TeamMemberTable: Table {
         teamTable = try container.decodeIfPresent(TeamTable.self, forKey: .teamTable) ?? nil
         
         do {isLeave = try container.decode(Bool.self, forKey: .isLeave)}catch{isLeave = false}
+        do {leaveTime = try container.decode(String.self, forKey: .leaveTime)}catch{leaveTime = ""}
     }
     
     override func filterRow() {

@@ -460,6 +460,35 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
     }
     
+    func getMemberOne(member_token: String) {
+        
+        Global.instance.addSpinner(superView: self.view)
+        
+        MemberService.instance.getOne(params: ["token": member_token]) { success in
+            
+            Global.instance.removeSpinner(superView: self.view)
+            
+            if success {
+                
+                let jsonData: Data = MemberService.instance.jsonData!
+                do {
+                    let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
+                    if successTable.success {
+                        let memberTable: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
+                        memberTable.filterRow()
+                        if memberTable.id > 0 {
+                            self.showTempMemberInfo(memberTable)
+                        }
+                    } else {
+                        self.warning(successTable.msg)
+                    }
+                } catch {
+                    self.warning(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
     func setIntroduceData() {
 
         if myTable == nil {
@@ -522,6 +551,397 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
     }
     
+    override func viewWillLayoutSubviews() {
+        let a = introduceTableView.contentSize.height
+        introduceTableView.heightConstraint?.constant = a
+    }
+
+    override func submit() {
+        if !Member.instance.isLoggedIn {
+            warning("請先登入會員")
+            return
+        }
+        
+        if !Member.instance.checkEMailValidate() {
+            warning("請先通過email認證")
+            return
+        }
+        
+        if !Member.instance.checkMobileValidate() {
+            warning("請先通過行動電話認證")
+            return
+        }
+        
+        //請假
+        if (focusTabIdx == 1) {
+            
+            //如果要請假
+            if !isTeapMemberLeave {
+                warning(msg: "是否確定要請假？", closeButtonTitle: "關閉", buttonTitle: "是") {
+                    if self.teamMemberToken != nil {
+                        self.teamMemberLeave(doLeave: true)
+                    }
+                }
+            }
+            // 如果要取消請假
+            else {
+                warning(msg: "是否確定要取消請假？", closeButtonTitle: "關閉", buttonTitle: "取消請假") {
+                    if self.teamMemberToken != nil {
+                        self.teamMemberLeave(doLeave: false)
+                    }
+                }
+            }
+        }
+        else if (focusTabIdx == 2) {
+            
+            if myTable != nil && myTable!.signupDate != nil {
+                
+                //print(myTable!.signupDate!.deadline)
+                if let deadline_time: Date = myTable!.signupDate!.deadline.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
+                    let now: Date = Date().myNow()
+                    if now > deadline_time {
+                        
+                        var msg: String = "已經超過報名截止時間，請下次再報名"
+                        if myTable!.isSignup {
+                            msg = "已經超過取消報名截止時間，無法取消報名"
+                        }
+                        warning(msg)
+                        return
+                    }
+                }
+                
+                Global.instance.addSpinner(superView: view)
+                dataService.signup(token: myTable!.token, member_token: Member.instance.token, date_token: myTable!.signupDate!.token) { (success) in
+                    
+                    Global.instance.removeSpinner(superView: self.view)
+                    
+                    do {
+                        if (self.dataService.jsonData != nil) {
+                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
+                            if (successTable.success) {
+                                self.info(msg: successTable.msg, buttonTitle: "關閉") {
+                                    self.refresh(TeamTable.self)
+                                }
+                            } else {
+                                self.warning(successTable.msg)
+                            }
+                        }
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    }
+                }
+            }
+        }
+    }
+
+    @objc func tabPressed(sender: UITapGestureRecognizer) {
+                
+        if let idx: Int = sender.view?.tag {
+            //self._tabPressed(idx)
+            let selectedTag: [String: Any] = topTabs[idx]
+            if let focus: Bool = selectedTag["focus"] as? Bool {
+                //按了其他頁面的按鈕
+                if (!focus) {
+                    updateTabSelected(idx: idx)
+                    focusTabIdx = idx
+                    _tabPressed(idx)
+                }
+            }
+        }
+    }
+    
+    private func _tabPressed(_ idx: Int) {
+        switch idx {
+        case 0:
+            removeTeamMember()
+            removeTempPlay()
+            
+            initIntroduce()
+            setIntroduceData()
+            introduceTableView.reloadData()
+            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
+            
+        case 1:
+            removeIntroduce()
+            removeTempPlay()
+            
+            initTeamMember()
+            memberRows.removeAll()
+            
+            if (!isTeamMemberLoaded) {
+                teamMemberPage = 1
+                getTeamMemberList(page: teamMemberPage, perPage: teamMemberPerPage)
+                isTeamMemberLoaded = true
+            } else {
+                introduceTableView.reloadData()
+            }
+            
+            setTeamMemberBottom()
+            
+        case 2:
+            removeIntroduce()
+            removeTeamMember()
+            
+            initTempPlay()
+            memberRows.removeAll()
+            setSignupData()
+            introduceTableView.reloadData()
+            //showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
+            
+        default:
+            refresh()
+        }
+    }
+    
+    private func removeIntroduce() {
+        introduceStackView.removeFromSuperview()
+    }
+    
+    private func removeTempPlay() {
+        tempPlayStackView.removeFromSuperview()
+    }
+    
+    private func removeTeamMember() {
+        teamMemberStackView.removeFromSuperview()
+    }
+    
+    private func updateTabSelected(idx: Int) {
+        
+        // set user click which tag, set tag selected is true
+        for (i, var topTab) in topTabs.enumerated() {
+            
+            if (i == idx) {
+                topTab["focus"] = true
+            } else {
+                topTab["focus"] = false
+            }
+            topTabs[i] = topTab
+        }
+        setTabSelectedStyle()
+    }
+    
+    private func setTabSelectedStyle() {
+        
+        for topTab in topTabs {
+            
+            if (topTab.keyExist(key: "class")) {
+                
+                let tab: TabTop = (topTab["class"] as? TabTop)!
+                
+                var isFocus: Bool = false
+                if let tmp: Bool = topTab["focus"] as? Bool {
+                    isFocus = tmp
+                }
+                
+                tab.isFocus(isFocus)
+            }
+        }
+    }
+    
+    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        
+        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.contentWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
+            if complete != nil {
+                self.contentWebView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
+                    self.contentWebView.snp.remakeConstraints { make in
+                        make.height.equalTo(height as! CGFloat)
+                    }
+                    //self.contentWebViewConstraintHeight!.constant = height as! CGFloat
+                })
+            }
+
+        })
+    }
+}
+
+/////////////////  team member leave start /////////////////////////////
+extension ShowTeamVC {
+    func getTeamMemberList(page: Int = 1, perPage: Int = 20) {
+        Global.instance.addSpinner(superView: self.view)
+        
+//        TeamService.instance.teamMemberList(of: TeamMemberTables2<TeamMemberTable>.self, token: token!, page: page, perPage: perPage) { (success) in
+//            let n = 6
+//        }
+        
+        TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                self.parseJSON(jsonData: TeamService.instance.jsonData)
+            } else {
+                self.warning("取得資料錯誤，請洽管理員！！")
+            }
+        }
+    }
+    
+    func parseJSON(jsonData: Data?) {
+        
+        let _rows: [TeamMemberTable] = self.jsonToTable2(jsonData: jsonData)
+        if (_rows.count == 0) {
+            self.teamMemberDataLbl.visibility = .invisible
+            self.nextDateLbl.visibility = .invisible
+            let v = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
+        } else {
+            if (teamMemberPage == 1) {
+                items = [TeamMemberTable]()
+            }
+            items += _rows
+            self.teamMemberDataLbl.visibility = .visible
+            self.nextDateLbl.visibility = .visible
+            
+            self.teamMemberDataLbl.text = "總人數：\(teamMemberTotalCount)位"
+            
+            self.nextDateLbl.text = "下次打球時間：\(nextDate)" + " ( " + nextDateWeek + " )" + "  " + "\(play_start) ~ \(play_end)"
+            introduceTableView.reloadData()
+            
+            for item in items {
+                if item.memberTable != nil {
+                    if item.memberTable!.token == Member.instance.token {
+                        self.teamMemberToken = item.token
+                        self.isTeamMember = true
+                        self.isTeapMemberLeave = item.isLeave
+                        break
+                    }
+                }
+            }
+            
+            setTeamMemberBottom()
+        }
+    }
+    
+    func jsonToTable2(jsonData: Data?)-> [TeamMemberTable] {
+            
+        var rows: [TeamMemberTable] = [TeamMemberTable]()
+        do {
+            if (jsonData != nil) {
+                //print(jsonData!.prettyPrintedJSONString)
+                let tables2: TeamMemberTables2 = try JSONDecoder().decode(TeamMemberTables2<TeamMemberTable>.self, from: jsonData!)
+                if (tables2.success) {
+                    
+                    tables2.filterRow()
+                    if tables2.rows.count > 0 {
+                        
+                        for row in tables2.rows {
+                            row.filterRow()
+                        }
+                        
+                        if (teamMemberPage == 1) {
+                            teamMemberPage = tables2.page
+                            teamMemberPerPage = tables2.perPage
+                            teamMemberTotalCount = tables2.totalCount
+                            let _totalPage: Int = teamMemberTotalCount / teamMemberPerPage
+                            teamMemberTotalPage = (teamMemberTotalCount % teamMemberPerPage > 0) ? _totalPage + 1 : _totalPage
+                            nextDate = tables2.nextDate
+                            nextDateWeek = tables2.nextDateWeek
+                            play_start = tables2.play_start_show
+                            play_end = tables2.play_end_show
+                        }
+                        
+                        rows += tables2.rows
+                    }
+                } else {
+                    msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
+                }
+            } else {
+                msg = "無法從伺服器取得正確的json資料，請洽管理員"
+            }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        
+        return rows
+    }
+    
+    func setTeamMemberBottom() {
+        if self.isTeamMember && !self.isTeapMemberLeave {
+            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
+            showBottom!.submitBtn.setTitle("請假")
+        } else if self.isTeamMember && self.isTeamMember {
+            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
+            showBottom!.submitBtn.setTitle("取消")
+        } else {
+            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: true, isShowCancel: false)
+        }
+    }
+    
+    func teamMemberLeave(doLeave: Bool) {
+        
+        let doLeaveWarning: String = (doLeave) ? "已經請假了" : "已經取消請假了"
+        Global.instance.addSpinner(superView: self.view)
+        //team member token
+        //play date
+        TeamService.instance.leave(team_member_token: self.teamMemberToken!, play_date: self.nextDate) { success in
+            Global.instance.removeSpinner(superView: self.view)
+            
+            do {
+                if (self.dataService.jsonData != nil) {
+                    let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
+                    if (successTable.success) {
+                        self.info(msg: doLeaveWarning, buttonTitle: "關閉") {
+                            self.getTeamMemberList(page: 1, perPage: PERPAGE)
+                        }
+                    } else {
+                        self.warning(successTable.msg)
+                    }
+                }
+            } catch {
+                self.msg = "解析JSON字串時，得到空值，請洽管理員"
+            }
+        }
+    }
+    
+    func showTempMemberInfo(_ memberTable: MemberTable) {
+        
+        let apperance = SCLAlertView.SCLAppearance(
+            showCloseButton: false,
+            showCircularIcon: true
+        )
+        
+        let alertView = SCLAlertView(appearance: apperance)
+        let alertViewIcon = UIImage(named: "member1")
+        
+        // Creat the subview
+        let subview = UIView(frame: CGRect(x:0, y:0, width:220, height:100))
+        //subview.backgroundColor = UIColor.red
+        //let x = (subview.frame.width - 10) / 2
+
+        let a: String = "姓名：" + memberTable.name + "\n"
+        + "電話：" + memberTable.mobile_show + "\n"
+        + "EMail：" + memberTable.email
+        
+        // Add textfield 1
+        let textfield1 = UITextView(frame: CGRect(x:0, y:0, width:subview.frame.width, height:subview.frame.height))
+        //textfield1.backgroundColor = UIColor.yellow
+        textfield1.text = a
+        textfield1.font = .systemFont(ofSize: 18)
+        //textfield1.font = UIFont(name: textfield1.font!.fontName, size: 18)
+        subview.addSubview(textfield1)
+
+        // Add the subview to the alert's UI property
+        alertView.customSubview = subview
+        
+//        let a: UITextView = alertView.addTextView()
+//        a.frame = CGRect(x: 0, y: 0, width: 216, height: 300)
+//
+
+        
+        alertView.addButton("打電話") {
+            memberTable.mobile.makeCall()
+        }
+        
+        alertView.addButton("關閉", backgroundColor: UIColor(MY_GRAY)) {
+            alertView.hideView()
+        }
+        alertView.showSuccess(memberTable.nickname, subTitle: "", circleIconImage: alertViewIcon)
+    }
+}
+
+///////////////////// temp play /////////////////////////////
+extension ShowTeamVC {
+
     func setSignupData() {
 
         isTempPlayOnline()
@@ -530,8 +950,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             //signupButtonContainer.visibility = .invisible
             tempPlayTimeLbl.visibility = .invisible
             tempPlayDeadlineLbl.visibility = .invisible
-            //self.signupTableViewConstraintHeight.constant = 20
-            //self.changeScrollViewContentSize()
+            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
         } else {
             //signupButtonContainer.visibility = .visible
             //tempPlayDataLbl.visibility = .invisible
@@ -603,406 +1022,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         if myTable!.people_limit == 0 {
             isTempPlay = false
         }
-    }
-    
-    override func viewWillLayoutSubviews() {
-        let a = introduceTableView.contentSize.height
-        introduceTableView.heightConstraint?.constant = a
-        
-//        let b = signupTableView.contentSize.height
-//        signupTableView.heightConstraint?.constant = b
-//
-//        let c = coachTableView.contentSize.height
-//        coachTableView.heightConstraint?.constant = c
-        
-        //let d = contentWebView.content
-        
-        //contentView.heightConstraint?.constant = 500 + a
-    }
-    
-    func getTeamMemberList(page: Int = 1, perPage: Int = 20) {
-        Global.instance.addSpinner(superView: self.view)
-        
-//        TeamService.instance.teamMemberList(of: TeamMemberTables2<TeamMemberTable>.self, token: token!, page: page, perPage: perPage) { (success) in
-//            let n = 6
-//        }
-        
-        TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if (success) {
-                self.parseJSON(jsonData: TeamService.instance.jsonData)
-            } else {
-                self.warning("取得資料錯誤，請洽管理員！！")
-            }
-        }
-    }
-    
-    func parseJSON(jsonData: Data?)-> Bool {
-        
-        let _rows: [TeamMemberTable] = self.genericTable2(jsonData: jsonData)
-        if (_rows.count == 0) {
-            self.teamMemberDataLbl.visibility = .invisible
-            self.nextDateLbl.visibility = .invisible
-            self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
-        } else {
-            if (teamMemberPage == 1) {
-                items = [TeamMemberTable]()
-            }
-            items += _rows
-            self.teamMemberDataLbl.visibility = .visible
-            self.nextDateLbl.visibility = .visible
-            
-            self.teamMemberDataLbl.text = "總人數：\(teamMemberTotalCount)位"
-            
-            self.nextDateLbl.text = "下次打球時間：\(nextDate)" + " ( " + nextDateWeek + " )" + "  " + "\(play_start) ~ \(play_end)"
-            introduceTableView.reloadData()
-            
-            for item in items {
-                if item.memberTable != nil {
-                    if item.memberTable!.token == Member.instance.token {
-                        self.teamMemberToken = item.token
-                        self.isTeamMember = true
-                        self.isTeapMemberLeave = item.isLeave
-                        break
-                    }
-                }
-            }
-            
-            if self.isTeamMember && !self.isTeapMemberLeave {
-                showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
-                showBottom!.submitBtn.setTitle("請假")
-            } else if self.isTeamMember && self.isTeamMember {
-                showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
-                showBottom!.submitBtn.setTitle("取消")
-            } else {
-                showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: true, isShowCancel: false)
-            }
-        }
-        
-        return true
-    }
-    
-    func genericTable2(jsonData: Data?)-> [TeamMemberTable] {
-            
-        var rows: [TeamMemberTable] = [TeamMemberTable]()
-        do {
-            if (jsonData != nil) {
-                //print(jsonData!.prettyPrintedJSONString)
-                let tables2: TeamMemberTables2 = try JSONDecoder().decode(TeamMemberTables2<TeamMemberTable>.self, from: jsonData!)
-                if (tables2.success) {
-                    
-                    tables2.filterRow()
-                    if tables2.rows.count > 0 {
-                        
-                        for row in tables2.rows {
-                            row.filterRow()
-                        }
-                        
-                        if (teamMemberPage == 1) {
-                            teamMemberPage = tables2.page
-                            teamMemberPerPage = tables2.perPage
-                            teamMemberTotalCount = tables2.totalCount
-                            let _totalPage: Int = teamMemberTotalCount / teamMemberPerPage
-                            teamMemberTotalPage = (teamMemberTotalCount % teamMemberPerPage > 0) ? _totalPage + 1 : _totalPage
-                            nextDate = tables2.nextDate
-                            nextDateWeek = tables2.nextDateWeek
-                            play_start = tables2.play_start_show
-                            play_end = tables2.play_end_show
-                        }
-                        
-                        rows += tables2.rows
-                    }
-                } else {
-                    msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
-                }
-            } else {
-                msg = "無法從伺服器取得正確的json資料，請洽管理員"
-            }
-        } catch {
-            msg = "解析JSON字串時，得到空值，請洽管理員"
-        }
-        
-        return rows
-    }
-    
-    func getMemberOne(member_token: String) {
-        
-        Global.instance.addSpinner(superView: self.view)
-        
-        MemberService.instance.getOne(params: ["token": member_token]) { success in
-            
-            Global.instance.removeSpinner(superView: self.view)
-            
-            if success {
-                
-                let jsonData: Data = MemberService.instance.jsonData!
-                do {
-                    let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
-                    if successTable.success {
-                        let memberTable: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
-                        memberTable.filterRow()
-                        if memberTable.id > 0 {
-                            self.showTempMemberInfo(memberTable)
-                        }
-                    } else {
-                        self.warning(successTable.msg)
-                    }
-                } catch {
-                    self.warning(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    func showTempMemberInfo(_ memberTable: MemberTable) {
-        
-        let apperance = SCLAlertView.SCLAppearance(
-            showCloseButton: false,
-            showCircularIcon: true
-        )
-        
-        let alertView = SCLAlertView(appearance: apperance)
-        let alertViewIcon = UIImage(named: "member1")
-        
-        // Creat the subview
-        let subview = UIView(frame: CGRect(x:0, y:0, width:220, height:100))
-        //subview.backgroundColor = UIColor.red
-        //let x = (subview.frame.width - 10) / 2
-
-        let a: String = "姓名：" + memberTable.name + "\n"
-        + "電話：" + memberTable.mobile_show + "\n"
-        + "EMail：" + memberTable.email
-        
-        // Add textfield 1
-        let textfield1 = UITextView(frame: CGRect(x:0, y:0, width:subview.frame.width, height:subview.frame.height))
-        //textfield1.backgroundColor = UIColor.yellow
-        textfield1.text = a
-        textfield1.font = .systemFont(ofSize: 18)
-        //textfield1.font = UIFont(name: textfield1.font!.fontName, size: 18)
-        subview.addSubview(textfield1)
-
-        // Add the subview to the alert's UI property
-        alertView.customSubview = subview
-        
-//        let a: UITextView = alertView.addTextView()
-//        a.frame = CGRect(x: 0, y: 0, width: 216, height: 300)
-//
-
-        
-        alertView.addButton("打電話") {
-            memberTable.mobile.makeCall()
-        }
-        
-        alertView.addButton("關閉", backgroundColor: UIColor(MY_GRAY)) {
-            alertView.hideView()
-        }
-        alertView.showSuccess(memberTable.nickname, subTitle: "", circleIconImage: alertViewIcon)
-    }
-    
-    override func submit() {
-        if !Member.instance.isLoggedIn {
-            warning("請先登入會員")
-            return
-        }
-        
-        if !Member.instance.checkEMailValidate() {
-            warning("請先通過email認證")
-            return
-        }
-        
-        if !Member.instance.checkMobileValidate() {
-            warning("請先通過行動電話認證")
-            return
-        }
-        
-        //請假
-        if (focusTabIdx == 1) {
-            //team member token
-            //play date
-            
-            if self.teamMemberToken != nil {
-                Global.instance.addSpinner(superView: self.view)
-                TeamService.instance.leave(team_member_token: self.teamMemberToken!, play_date: self.nextDate) { Success in
-                    Global.instance.removeSpinner(superView: self.view)
-                    
-                    do {
-                        if (self.dataService.jsonData != nil) {
-                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
-                            if (successTable.success) {
-                                self.info(msg: successTable.msg, buttonTitle: "關閉") {
-                                    self.refresh(TeamTable.self)
-                                }
-                            } else {
-                                self.warning(successTable.msg)
-                            }
-                        }
-                    } catch {
-                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
-                    }
-                }
-            }
-        }
-        else if (focusTabIdx == 2) {
-            
-            if myTable != nil && myTable!.signupDate != nil {
-                
-                //print(myTable!.signupDate!.deadline)
-                if let deadline_time: Date = myTable!.signupDate!.deadline.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
-                    let now: Date = Date().myNow()
-                    if now > deadline_time {
-                        
-                        var msg: String = "已經超過報名截止時間，請下次再報名"
-                        if myTable!.isSignup {
-                            msg = "已經超過取消報名截止時間，無法取消報名"
-                        }
-                        warning(msg)
-                        return
-                    }
-                }
-                
-                Global.instance.addSpinner(superView: view)
-                dataService.signup(token: myTable!.token, member_token: Member.instance.token, date_token: myTable!.signupDate!.token) { (success) in
-                    
-                    Global.instance.removeSpinner(superView: self.view)
-                    
-                    do {
-                        if (self.dataService.jsonData != nil) {
-                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
-                            if (successTable.success) {
-                                self.info(msg: successTable.msg, buttonTitle: "關閉") {
-                                    self.refresh(TeamTable.self)
-                                }
-                            } else {
-                                self.warning(successTable.msg)
-                            }
-                        }
-                    } catch {
-                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
-                    }
-                }
-            }
-        }
-    }
-    
-    @objc func tabPressed(sender: UITapGestureRecognizer) {
-                
-        if let idx: Int = sender.view?.tag {
-            //self._tabPressed(idx)
-            let selectedTag: [String: Any] = topTabs[idx]
-            if let focus: Bool = selectedTag["focus"] as? Bool {
-                //按了其他頁面的按鈕
-                if (!focus) {
-                    updateTabSelected(idx: idx)
-                    focusTabIdx = idx
-                    _tabPressed(idx)
-                }
-            }
-        }
-    }
-    
-    private func _tabPressed(_ idx: Int) {
-        switch idx {
-        case 0:
-            removeTeamMember()
-            removeTempPlay()
-            
-            initIntroduce()
-            setIntroduceData()
-            introduceTableView.reloadData()
-            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
-            
-        case 1:
-            removeIntroduce()
-            removeTempPlay()
-            
-            initTeamMember()
-            memberRows.removeAll()
-            
-            if (!isTeamMemberLoaded) {
-                teamMemberPage = 1
-                getTeamMemberList(page: teamMemberPage, perPage: teamMemberPerPage)
-                isTeamMemberLoaded = true
-            } else {
-                introduceTableView.reloadData()
-            }
-            
-        case 2:
-            removeIntroduce()
-            removeTeamMember()
-            
-            initTempPlay()
-            memberRows.removeAll()
-            setSignupData()
-            introduceTableView.reloadData()
-            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
-            
-        default:
-            refresh()
-        }
-    }
-    
-    private func removeIntroduce() {
-        introduceStackView.removeFromSuperview()
-    }
-    
-    private func removeTempPlay() {
-        tempPlayStackView.removeFromSuperview()
-    }
-    
-    private func removeTeamMember() {
-        teamMemberStackView.removeFromSuperview()
-    }
-    
-    private func updateTabSelected(idx: Int) {
-        
-        // set user click which tag, set tag selected is true
-        for (i, var topTab) in topTabs.enumerated() {
-            
-            if (i == idx) {
-                topTab["focus"] = true
-            } else {
-                topTab["focus"] = false
-            }
-            topTabs[i] = topTab
-        }
-        setTabSelectedStyle()
-    }
-    
-    private func setTabSelectedStyle() {
-        
-        for topTab in topTabs {
-            
-            if (topTab.keyExist(key: "class")) {
-                
-                let tab: TabTop = (topTab["class"] as? TabTop)!
-                
-                var isFocus: Bool = false
-                if let tmp: Bool = topTab["focus"] as? Bool {
-                    isFocus = tmp
-                }
-                
-                tab.isFocus(isFocus)
-            }
-        }
-    }
-    
-    override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        
-        super.webView(webView, decidePolicyFor: navigationAction, decisionHandler: decisionHandler)
-    }
-    
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.contentWebView.evaluateJavaScript("document.readyState", completionHandler: { (complete, error) in
-            if complete != nil {
-                self.contentWebView.evaluateJavaScript("document.body.scrollHeight", completionHandler: { (height, error) in
-                    self.contentWebView.snp.remakeConstraints { make in
-                        make.height.equalTo(height as! CGFloat)
-                    }
-                    //self.contentWebViewConstraintHeight!.constant = height as! CGFloat
-                })
-            }
-
-        })
     }
 }
 
@@ -1085,6 +1104,9 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             cell.nameLbl.text = nickname
             
             cell.leaveLbl.visibility = (row.isLeave) ? .visible : .invisible
+            if cell.leaveLbl.visibility == .visible {
+                cell.leaveLbl.text = "請假(\(row.leaveTime.noSec()))"
+            }
             
             cell.setSelectedBackgroundColor()
             return cell

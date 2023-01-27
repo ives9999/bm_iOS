@@ -71,18 +71,18 @@ class TeamService: DataService {
     
     func addTeamMember(token: String, member_token: String, manager_token: String, completion: @escaping CompletionHandler) {
         let url: String = URL_TEAM_MEMBER_ADD
-        var body: [String: String] = ["device": "app", "channel": CHANNEL, "token": token, "member_token": member_token, "manager_token": manager_token]
+        let body: [String: String] = ["device": "app", "channel": CHANNEL, "token": token, "member_token": member_token, "manager_token": manager_token]
         //print(url)
         //print(body)
         
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             
             switch response.result {
             case .success(_):
                 if response.data != nil {
                     self.jsonData = response.data
-                    self.jsonData?.prettyPrintedJSONString
+                    //self.jsonData?.prettyPrintedJSONString
                     completion(true)
                 } else {
                     self.msg = "網路錯誤，請稍後再試"
@@ -99,9 +99,9 @@ class TeamService: DataService {
     
     func deleteTeamMember(token: String, completion: @escaping CompletionHandler) {
         let url: String = URL_TEAM_MEMBER_DELETE
-        var body: [String: String] = ["device": "app", "channel": CHANNEL, "token": token]
+        let body: [String: String] = ["device": "app", "channel": CHANNEL, "token": token]
         
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             
             switch response.result {
@@ -126,8 +126,8 @@ class TeamService: DataService {
         
         let url: String = URL_TEAM_MEMBER_LEAVE
         let body: [String: String] = ["device": "app", "channel": CHANNEL, "team_member_token": team_member_token, "play_date": play_date]
-        print(url)
-        print(body)
+//        print(url)
+//        print(body)
         
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER)
           .response { response in
@@ -178,29 +178,28 @@ class TeamService: DataService {
     func teamMemberList(token: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
         
         let url: String = URL_TEAM_MEMBER_LIST
-        var body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "token": token]
-        print(url)
-        print(body)
+        let body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "token": token]
+        //print(url)
+        //print(body)
+        _simpleService(url: url, params: body, completion: completion)
         
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
-            
-            
-            switch response.result {
-            case .success(_):
-                if response.data != nil {
-                    self.jsonData = response.data
-                    completion(true)
-                } else {
-                    self.msg = "網路錯誤，請稍後再試"
-                    completion(false)
-                }
-            case .failure(let error):
-                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-                completion(false)
-                print(error)
-                return
-            }
-        }
+//        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER)
+//            .validate()
+//            .responseData { (response) in
+//
+//            switch response.result {
+//            case .success(let data):
+//                self.jsonData = data
+//                completion(true)
+//
+//            case .failure(_):
+//
+//                self.msg = ServiceErrorHandler.instance1.serverError(response: response)
+//                completion(false)
+//                print(self.msg)
+//                return
+//            }
+//        }
     }
     
     func teamMemberList<T: Codable>(of: T.Type, token: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
@@ -209,20 +208,21 @@ class TeamService: DataService {
         let body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "token": token]
         
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER)
+            .validate()
             .responseDecodable(of: T.self) { (response) in
-                guard let value = response.value
-                else {
-                    return
-                    
-                }
-                print(value)
+            guard let value = response.value
+            else {
+                return
+                
             }
+            print(value)
+        }
     }
     
     func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["source": "app", "token": token, "strip_html": "true"]
         
-        AF.request(URL_TEAM_TEMP_PLAY, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(URL_TEAM_TEMP_PLAY, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             switch response.result {
             case .success(_):
@@ -265,7 +265,7 @@ class TeamService: DataService {
         //print(URL_TEAM_TEMP_PLAY_LIST)
         tempPlayList = [DATA]()
         
-        AF.request(URL_TEAM_TEMP_PLAY_LIST, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(URL_TEAM_TEMP_PLAY_LIST, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             
             switch response.result {
@@ -321,7 +321,7 @@ class TeamService: DataService {
         //print(url)
         
         
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             switch response.result {
             case .success(_):
@@ -376,7 +376,7 @@ class TeamService: DataService {
         //print(body)
         //print(url)
         
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             //print(response.result.value)
             
             switch response.result {
@@ -475,7 +475,7 @@ class TeamService: DataService {
     //                print("Data: \(utf8Text)")
     //            }
     //        }
-        AF.request(url).responseJSON { (response) in
+        AF.request(url).response { (response) in
             
             switch response.result {
             case .success(_):
@@ -525,7 +525,7 @@ class TeamService: DataService {
     //                    }
     //                }
             
-        AF.request(url).responseJSON { (response) in
+        AF.request(url).response { (response) in
             
             switch response.result {
             case .success(_):
@@ -575,7 +575,7 @@ class TeamService: DataService {
     func _blacklist(body: [String: String], completion: @escaping CompletionHandler) {
         
         let url: String = URL_TEAM_TEMP_PLAY_BLACKLIST
-        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default).responseJSON { (response) in
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default).response { (response) in
             
             switch response.result {
             case .success(_):
