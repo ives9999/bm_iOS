@@ -1093,7 +1093,7 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
         else if focusTabIdx == 1 && items.count > 0 {
             let cell: ShowTeamMemberCell = tableView.dequeueReusableCell(withIdentifier: "ShowTeamMemberCell", for: indexPath) as! ShowTeamMemberCell
             
-            cell.delegate = self
+            //cell.delegate = self
             
             let row: TeamMemberTable = items[indexPath.row]
             cell.noLbl.text = "\(indexPath.row + 1)."
@@ -1227,40 +1227,40 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension ShowTeamVC: ShowTeamMemberCellDelegate {
-    
-    func leavePressed(cell: ShowTeamMemberCell) {
-        
-        guard let idx: Int = introduceTableView.indexPath(for: cell)?.row else { return }
-        
-        let row: TeamMemberTable = items[idx]
-        
-        TeamService.instance.leave(team_member_token: row.token, play_date: self.nextDate) { success in
-            
-            Global.instance.removeSpinner(superView: self.view)
-            
-            if success {
-                
-                let jsonData: Data = TeamService.instance.jsonData!
-                //jsonData.prettyPrintedJSONString
-                do {
-                    let successTable: SuccessTable2<TeamMemberLeaveTable> = try JSONDecoder().decode(SuccessTable2.self, from: jsonData)
-                    if successTable.success {
-                        let teamMemberLeaveTable: TeamMemberLeaveTable = try JSONDecoder().decode(TeamMemberLeaveTable.self, from: jsonData)
-                        self.info(msg: "請假成功", buttonTitle: "關閉") {
-                            self.refresh()
-                        }
-                        
-                    } else {
-                        self.warning(successTable.parseMsgs())
-                    }
-                } catch {
-                    self.warning(error.localizedDescription)
-                }
-            }
-        }
-    }
-}
+//extension ShowTeamVC: ShowTeamMemberCellDelegate {
+//
+//    func leavePressed(cell: ShowTeamMemberCell) {
+//
+//        guard let idx: Int = introduceTableView.indexPath(for: cell)?.row else { return }
+//
+//        let row: TeamMemberTable = items[idx]
+//
+//        TeamService.instance.leave(team_member_token: row.token, play_date: self.nextDate) { success in
+//
+//            Global.instance.removeSpinner(superView: self.view)
+//
+//            if success {
+//
+//                let jsonData: Data = TeamService.instance.jsonData!
+//                //jsonData.prettyPrintedJSONString
+//                do {
+//                    let successTable: SuccessTable2<TeamMemberLeaveTable> = try JSONDecoder().decode(SuccessTable2.self, from: jsonData)
+//                    if successTable.success {
+//                        let teamMemberLeaveTable: TeamMemberLeaveTable = try JSONDecoder().decode(TeamMemberLeaveTable.self, from: jsonData)
+//                        self.info(msg: "請假成功", buttonTitle: "關閉") {
+//                            self.refresh()
+//                        }
+//
+//                    } else {
+//                        self.warning(successTable.parseMsgs())
+//                    }
+//                } catch {
+//                    self.warning(error.localizedDescription)
+//                }
+//            }
+//        }
+//    }
+//}
 
 class TeamMemberTables2<T: Codable>: Codable {
     var success: Bool = false
