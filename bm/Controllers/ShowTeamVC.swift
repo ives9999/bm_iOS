@@ -834,6 +834,7 @@ extension ShowTeamVC {
                             teamMemberTotalCount = tables2.totalCount
                             let _totalPage: Int = teamMemberTotalCount / teamMemberPerPage
                             teamMemberTotalPage = (teamMemberTotalCount % teamMemberPerPage > 0) ? _totalPage + 1 : _totalPage
+                            
                             nextDate = tables2.nextDate
                             nextDateWeek = tables2.nextDateWeek
                             play_start = tables2.play_start_show
