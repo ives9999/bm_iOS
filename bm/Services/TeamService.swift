@@ -215,7 +215,7 @@ class TeamService: DataService {
                 return
                 
             }
-            print(value)
+            //print(value)
         }
     }
     

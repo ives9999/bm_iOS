@@ -102,7 +102,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }()
     
     //team member
-    var teamMemberStackView: UIStackView = {
+    let teamMemberStackView: UIStackView = {
         let view = UIStackView()
         //view.backgroundColor = UIColor.red
         //view.layer.cornerRadius = 26.0
@@ -112,18 +112,106 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
+    let teamMemberAllContainer: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    let teamMemberLeftContainer: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    let likeContainer: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
     let teamMemberDataLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
         view.setTextTitle()
-        view.text = "總人數：16位"
+        view.text = "打球人數統計："
         view.visibility = .invisible
+        
+        return view
+    }()
+    
+    let teamMemberSummaryContainer: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    let teamMemberTotalLbl: UIPaddingLabel = {
+        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 25, 25)
+        view.font = UIFont(name: FONT_NAME, size: 12)
+        view.backgroundColor = UIColor(MY_GREEN)
+        view.textColor = UIColor(MY_BLACK)
+        view.text = "16位"
+        
+        view.visibility = .invisible
+        
+        return view
+    }()
+    
+    let teamMemberPlayLbl: UIPaddingLabel = {
+        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 25, 25)
+        view.font = UIFont(name: FONT_NAME, size: 12)
+        view.textColor = UIColor(MY_WHITE)
+        view.text = "16位"
+        
+        view.visibility = .invisible
+        
+        return view
+    }()
+    
+    let teamMemberLeaveLbl: UIPaddingLabel = {
+        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 25, 25)
+        view.font = UIFont(name: FONT_NAME, size: 12)
+        view.textColor = UIColor(MY_WHITE)
+        view.text = "16位"
+        
+        view.visibility = .invisible
+        
+        return view
+    }()
+    
+    let nextDateContainer: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    let nextDateIV: UIImageView = {
+        let view: UIImageView = UIImageView()
+        view.image = UIImage(named: "calendar_svg")
         
         return view
     }()
     
     let nextDateLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
-        view.setTextGeneral()
+        //view.setTextGeneralV2()
+        view.text = "下次打球時間"
+        view.visibility = .invisible
+        
+        return view
+    }()
+    
+    let nextTimeContainer: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    let nextTimeIV: UIImageView = {
+        let view: UIImageView = UIImageView()
+        view.image = UIImage(named: "clock_svg")
+        
+        return view
+    }()
+    
+    let nextTimeLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        //view.setTextGeneralV2()
+        view.weight(10)
         view.text = "下次打球時間"
         view.visibility = .invisible
         
@@ -184,6 +272,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var teamMemberPerPage: Int = PERPAGE
     var teamMemberTotalCount: Int = 0
     var teamMemberTotalPage: Int = 0
+    var leaveCount: Int = 0
     var teamMemberToken: String? = nil
     
     var nextDate: String = ""
@@ -306,20 +395,115 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     private func initTeamMember() {
         scrollView.addSubview(teamMemberStackView)
         teamMemberStackView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
+            make.top.bottom.equalToSuperview().offset(12)
             make.width.equalToSuperview()
         }
         
-        teamMemberStackView.addArrangedSubview(teamMemberDataLbl)
-        teamMemberDataLbl.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
-            make.left.equalToSuperview().offset(12)
+        //teamMemberAllContainer.backgroundColor = UIColor.blue
+        teamMemberStackView.addArrangedSubview(teamMemberAllContainer)
+        teamMemberAllContainer.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview()
+            make.height.equalTo(50)
         }
         
-        teamMemberStackView.addArrangedSubview(nextDateLbl)
+            teamMemberLeftContainer.backgroundColor = UIColor.red
+            teamMemberAllContainer.addSubview(teamMemberLeftContainer)
+            teamMemberLeftContainer.snp.makeConstraints { make in
+                make.top.left.equalToSuperview()
+                make.right.equalToSuperview().offset(-100)
+                //make.bottom.equalToSuperview().offset(40)
+            }
+        
+                teamMemberLeftContainer.addSubview(teamMemberDataLbl)
+                teamMemberDataLbl.snp.makeConstraints { make in
+                    make.top.left.equalToSuperview()
+                }
+        
+                teamMemberLeftContainer.addSubview(teamMemberSummaryContainer)
+                teamMemberSummaryContainer.snp.makeConstraints { make in
+                    make.top.equalTo(teamMemberDataLbl.snp.bottom).offset(20)
+                    make.left.equalToSuperview()
+                    make.bottom.equalToSuperview().offset(50)
+                }
+
+                    teamMemberSummaryContainer.addSubview(teamMemberTotalLbl)
+                    teamMemberTotalLbl.snp.makeConstraints { make in
+                        make.left.equalToSuperview()
+                        make.bottom.equalToSuperview().offset(10)
+                        make.centerY.equalToSuperview()
+                    }
+
+                    teamMemberSummaryContainer.addSubview(teamMemberPlayLbl)
+                    teamMemberPlayLbl.snp.makeConstraints { make in
+                        make.left.equalTo(teamMemberTotalLbl.snp.right)
+                        make.centerY.equalToSuperview()
+                    }
+
+                    teamMemberSummaryContainer.addSubview(teamMemberLeaveLbl)
+                    teamMemberLeaveLbl.snp.makeConstraints { make in
+                        make.left.equalTo(teamMemberPlayLbl.snp.right)
+                        make.centerY.equalToSuperview()
+                    }
+
+                
+        
+            teamMemberAllContainer.addSubview(likeContainer)
+            likeContainer.backgroundColor = UIColor.cyan
+            likeContainer.snp.makeConstraints { make in
+                make.top.equalToSuperview()
+                make.right.equalToSuperview()
+                make.width.equalTo(100)
+                //make.height.equalTo(40)
+            }
+        
+        let spacer1: UIView = UIView()
+        spacer1.backgroundColor = UIColor.gray
+        teamMemberStackView.addArrangedSubview(spacer1)
+        spacer.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.height.equalTo(10)
+        }
+        
+
+        
+        teamMemberStackView.addArrangedSubview(nextDateContainer)
+        nextDateContainer.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.height.equalTo(30)
+        }
+
+        nextDateContainer.addSubview(nextDateIV)
+        nextDateIV.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.width.height.equalTo(24)
+            make.centerY.equalToSuperview()
+        }
+
+        nextDateContainer.addSubview(nextDateLbl)
         nextDateLbl.snp.makeConstraints { make in
-            make.top.equalTo(teamMemberDataLbl.snp.bottom).offset(12)
-            make.left.equalToSuperview().offset(12)
+            make.left.equalTo(nextDateIV.snp.right).offset(24)
+            make.centerY.equalToSuperview()
+        }
+        
+        teamMemberStackView.addArrangedSubview(nextTimeContainer)
+        nextTimeContainer.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.height.equalTo(30)
+        }
+
+        nextTimeContainer.addSubview(nextTimeIV)
+        nextTimeIV.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.width.height.equalTo(24)
+            make.centerY.equalToSuperview()
+        }
+
+        nextTimeContainer.addSubview(nextTimeLbl)
+        nextTimeLbl.snp.makeConstraints { make in
+            make.left.equalTo(nextTimeIV.snp.right).offset(24)
+            make.centerY.equalToSuperview()
         }
         
         teamMemberStackView.addArrangedSubview(introduceTableView)
@@ -781,20 +965,21 @@ extension ShowTeamVC {
         
         let _rows: [TeamMemberTable] = self.jsonToTable2(jsonData: jsonData)
         if (_rows.count == 0) {
-            self.teamMemberDataLbl.visibility = .invisible
-            self.nextDateLbl.visibility = .invisible
+            self.teamMemberVisible(.invisible)
             let v = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
         } else {
             if (teamMemberPage == 1) {
                 items = [TeamMemberTable]()
             }
             items += _rows
-            self.teamMemberDataLbl.visibility = .visible
-            self.nextDateLbl.visibility = .visible
+            self.teamMemberVisible(.visible)
             
-            self.teamMemberDataLbl.text = "總人數：\(teamMemberTotalCount)位"
+            self.teamMemberTotalLbl.text = "全部：\(teamMemberTotalCount)位"
+            self.teamMemberLeaveLbl.text = "請假：\(leaveCount)位"
+            self.teamMemberPlayLbl.text = "打球：\(teamMemberTotalCount-leaveCount)位"
             
-            self.nextDateLbl.text = "下次打球時間：\(nextDate)" + " ( " + nextDateWeek + " )" + "  " + "\(play_start) ~ \(play_end)"
+            self.nextDateLbl.text = "\(nextDate)" + " ( " + nextDateWeek + " )"
+            self.nextTimeLbl.text = "\(play_start) ~ \(play_end)"
             introduceTableView.reloadData()
             
             for item in items {
@@ -839,6 +1024,7 @@ extension ShowTeamVC {
                             nextDateWeek = tables2.nextDateWeek
                             play_start = tables2.play_start_show
                             play_end = tables2.play_end_show
+                            self.leaveCount = tables2.leaveCount
                         }
                         
                         rows += tables2.rows
@@ -854,6 +1040,24 @@ extension ShowTeamVC {
         }
         
         return rows
+    }
+    
+    func teamMemberVisible(_ visible: UIView.Visibility)
+    {
+        self.teamMemberDataLbl.visibility = visible
+        
+        self.teamMemberSummaryContainer.visibility = visible
+        self.teamMemberTotalLbl.visibility = visible
+        self.teamMemberPlayLbl.visibility = visible
+        self.teamMemberLeaveLbl.visibility = visible
+        
+        self.nextDateContainer.visibility = visible
+        self.nextDateIV.visibility = visible
+        self.nextDateLbl.visibility = visible
+        
+        self.nextTimeContainer.visibility = visible
+        self.nextTimeIV.visibility = visible
+        self.nextTimeLbl.visibility = visible
     }
     
     func setTeamMemberBottom() {
@@ -1266,6 +1470,7 @@ class TeamMemberTables2<T: Codable>: Codable {
     var success: Bool = false
     var page: Int = -1
     var totalCount: Int = -1
+    var leaveCount: Int = -1
     var perPage: Int = -1
     var nextDate: String = ""
     var nextDateWeek: String = ""
@@ -1282,6 +1487,7 @@ class TeamMemberTables2<T: Codable>: Codable {
         success = try container.decode(Bool.self, forKey: .success)
         page = try container.decode(Int.self, forKey: .page)
         totalCount = try container.decode(Int.self, forKey: .totalCount)
+        leaveCount = try container.decode(Int.self, forKey: .leaveCount)
         perPage = try container.decode(Int.self, forKey: .perPage)
         nextDate = try container.decode(String.self, forKey: .nextDate)
         nextDateWeek = try container.decode(String.self, forKey: .nextDateWeek)

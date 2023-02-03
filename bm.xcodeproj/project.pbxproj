@@ -311,6 +311,8 @@
 		F93095F62948ACFA006C625C /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93095F52948ACFA006C625C /* Enum.swift */; };
 		F93095F92948ADB9006C625C /* UITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93095F82948ADB9006C625C /* UITableViewCell.swift */; };
 		F94093D229765E720006D89D /* ShowTeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D129765E720006D89D /* ShowTeamMemberCell.swift */; };
+		F94093D4298BA88E0006D89D /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D3298BA88E0006D89D /* UILabel.swift */; };
+		F94093D6298BADC60006D89D /* UIPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D5298BADC60006D89D /* UIPaddingLabel.swift */; };
 		F94DECDD27478F2F00A9DA17 /* ManagerTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */; };
 		F94DECE02747929A00A9DA17 /* ManagerTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */; };
 		F94DECE12747929A00A9DA17 /* ManagerTeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */; };
@@ -741,6 +743,8 @@
 		F93095F52948ACFA006C625C /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 		F93095F82948ADB9006C625C /* UITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCell.swift; sourceTree = "<group>"; };
 		F94093D129765E720006D89D /* ShowTeamMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTeamMemberCell.swift; sourceTree = "<group>"; };
+		F94093D3298BA88E0006D89D /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
+		F94093D5298BADC60006D89D /* UIPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPaddingLabel.swift; sourceTree = "<group>"; };
 		F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamVC.swift; sourceTree = "<group>"; };
 		F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamCell.swift; sourceTree = "<group>"; };
 		F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagerTeamCell.xib; sourceTree = "<group>"; };
@@ -1042,6 +1046,7 @@
 			children = (
 				B33297801FD6B4E400949CDE /* SuperLabel.swift */,
 				B3308C4C1FD9575E006A83B6 /* Tag.swift */,
+				F94093D5298BADC60006D89D /* UIPaddingLabel.swift */,
 			);
 			path = Label;
 			sourceTree = "<group>";
@@ -1238,6 +1243,7 @@
 				F93095F82948ADB9006C625C /* UITableViewCell.swift */,
 				B35593F5294ED397009E0658 /* UIImageView.swift */,
 				F985F4612956BF3900636FEA /* UIView.swift */,
+				F94093D3298BA88E0006D89D /* UILabel.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1867,6 +1873,7 @@
 				B3A0D699226DD290008A7D47 /* Session.swift in Sources */,
 				B3F6B4512605002E0000F9E0 /* SignupNormalTable.swift in Sources */,
 				B342169E26775C2E005E406F /* ToInterface.swift in Sources */,
+				F94093D4298BA88E0006D89D /* UILabel.swift in Sources */,
 				B3308C511FDA5311006A83B6 /* ShowTempPlayVC.swift in Sources */,
 				B3E4D1D82603395300D78210 /* TeachListCell.swift in Sources */,
 				B3310D8E22ABB4820062EF98 /* MultiSelectVC.swift in Sources */,
@@ -2079,6 +2086,7 @@
 				B3F8C3B7215D27BE005CBBC1 /* Checkbox.swift in Sources */,
 				B33C1AB921BD10B8006F2BEB /* StatusFormItem.swift in Sources */,
 				B3CABD8326B4561300FD0E4D /* OrderVC.swift in Sources */,
+				F94093D6298BADC60006D89D /* UIPaddingLabel.swift in Sources */,
 				B3A2542225723F5B004B8A03 /* SelectManager.swift in Sources */,
 				F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */,
 				B3F6B47A260603A70000F9E0 /* OrderTable.swift in Sources */,

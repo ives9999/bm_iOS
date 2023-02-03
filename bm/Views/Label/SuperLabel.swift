@@ -23,6 +23,7 @@ class SuperLabel: UILabel {
         super.init(frame: frame)
         self.commonInit()
     }
+    
     func commonInit(){
         
         self.textColor = UIColor.white
@@ -51,6 +52,11 @@ class SuperLabel: UILabel {
     
     func setTextGeneral() {
         self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
+        self.textColor = UIColor(TEXT_WHITE)
+    }
+    
+    func setTextGeneralV2() {
+        self.font = UIFont(name: FONT_BOLD_NAME, size: FONT_SIZE_GENERAL)
         self.textColor = UIColor(TEXT_WHITE)
     }
     
