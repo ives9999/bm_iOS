@@ -142,10 +142,11 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }()
     
     let teamMemberTotalLbl: UIPaddingLabel = {
-        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 25, 25)
+        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
         view.font = UIFont(name: FONT_NAME, size: 12)
         view.backgroundColor = UIColor(MY_GREEN)
         view.textColor = UIColor(MY_BLACK)
+        view.corner(3)
         view.text = "16位"
         
         view.visibility = .invisible
@@ -154,7 +155,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }()
     
     let teamMemberPlayLbl: UIPaddingLabel = {
-        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 25, 25)
+        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
         view.font = UIFont(name: FONT_NAME, size: 12)
         view.textColor = UIColor(MY_WHITE)
         view.text = "16位"
@@ -165,13 +166,33 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }()
     
     let teamMemberLeaveLbl: UIPaddingLabel = {
-        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 25, 25)
+        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
         view.font = UIFont(name: FONT_NAME, size: 12)
         view.textColor = UIColor(MY_WHITE)
         view.text = "16位"
         
         view.visibility = .invisible
         
+        return view
+    }()
+    
+    let likeHeartCircle: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#A6D903", alpha: 0.2)
+        return view
+    }()
+    
+    let likeIcon: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "like_in_svg")
+        return view
+    }()
+    
+    let likeCountLbl: UILabel = {
+        let view = SuperLabel()
+        view.text = "16"
+        //view.backgroundColor = UIColor.red
+        view.textAlignment = .center
         return view
     }()
     
@@ -218,6 +239,17 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
+    let teamMemberListLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextTitle()
+        view.text = "隊員："
+        view.visibility = .invisible
+        
+        return view
+    }()
+    
+    
+    //temp play
     var tempPlayStackView: UIStackView = {
         let view = UIStackView()
         //view.backgroundColor = UIColor.red
@@ -450,18 +482,34 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                 
         
             teamMemberAllContainer.addSubview(likeContainer)
-            likeContainer.backgroundColor = UIColor.cyan
+            //likeContainer.backgroundColor = UIColor.cyan
             likeContainer.snp.makeConstraints { make in
                 make.top.equalToSuperview()
-                make.right.equalToSuperview()
-                make.width.equalTo(100)
-                //make.height.equalTo(40)
+                make.right.equalToSuperview().offset(-12)
+                make.width.equalTo(48)
+                make.height.equalTo(50)
             }
         
+                likeContainer.addSubview(likeHeartCircle)
+                likeHeartCircle.snp.makeConstraints { make in
+                    make.top.left.equalToSuperview()
+                    make.width.height.equalTo(48)
+                }
+                    likeHeartCircle.addSubview(likeIcon)
+                    likeIcon.snp.makeConstraints { make in
+                        make.width.height.equalTo(24)
+                        make.centerX.centerY.equalToSuperview()
+                    }
+                likeContainer.addSubview(likeCountLbl)
+                likeCountLbl.snp.makeConstraints { make in
+                    make.left.right.equalToSuperview()
+                    make.top.equalTo(likeHeartCircle.snp.bottom).offset(5)
+                }
+        
         let spacer1: UIView = UIView()
-        spacer1.backgroundColor = UIColor.gray
+        //spacer1.backgroundColor = UIColor.gray
         teamMemberStackView.addArrangedSubview(spacer1)
-        spacer.snp.makeConstraints { make in
+        spacer1.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.height.equalTo(10)
         }
@@ -474,18 +522,18 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             make.height.equalTo(30)
         }
 
-        nextDateContainer.addSubview(nextDateIV)
-        nextDateIV.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.width.height.equalTo(24)
-            make.centerY.equalToSuperview()
-        }
+            nextDateContainer.addSubview(nextDateIV)
+            nextDateIV.snp.makeConstraints { make in
+                make.left.equalToSuperview()
+                make.width.height.equalTo(24)
+                make.centerY.equalToSuperview()
+            }
 
-        nextDateContainer.addSubview(nextDateLbl)
-        nextDateLbl.snp.makeConstraints { make in
-            make.left.equalTo(nextDateIV.snp.right).offset(24)
-            make.centerY.equalToSuperview()
-        }
+            nextDateContainer.addSubview(nextDateLbl)
+            nextDateLbl.snp.makeConstraints { make in
+                make.left.equalTo(nextDateIV.snp.right).offset(24)
+                make.centerY.equalToSuperview()
+            }
         
         teamMemberStackView.addArrangedSubview(nextTimeContainer)
         nextTimeContainer.snp.makeConstraints { make in
@@ -493,20 +541,35 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             make.height.equalTo(30)
         }
 
-        nextTimeContainer.addSubview(nextTimeIV)
-        nextTimeIV.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.width.height.equalTo(24)
-            make.centerY.equalToSuperview()
-        }
+            nextTimeContainer.addSubview(nextTimeIV)
+            nextTimeIV.snp.makeConstraints { make in
+                make.left.equalToSuperview()
+                make.width.height.equalTo(24)
+                make.centerY.equalToSuperview()
+            }
 
-        nextTimeContainer.addSubview(nextTimeLbl)
-        nextTimeLbl.snp.makeConstraints { make in
-            make.left.equalTo(nextTimeIV.snp.right).offset(24)
-            make.centerY.equalToSuperview()
+            nextTimeContainer.addSubview(nextTimeLbl)
+            nextTimeLbl.snp.makeConstraints { make in
+                make.left.equalTo(nextTimeIV.snp.right).offset(24)
+                make.centerY.equalToSuperview()
+            }
+        
+        let spacer2: UIView = UIView()
+        teamMemberStackView.addArrangedSubview(spacer2)
+        spacer2.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.height.equalTo(20)
+        }
+        
+        teamMemberStackView.addArrangedSubview(teamMemberListLbl)
+        teamMemberListLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
         }
         
         teamMemberStackView.addArrangedSubview(introduceTableView)
+        introduceTableView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+        }
     }
 
     private func initTempPlay() {
@@ -536,6 +599,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
 
         tempPlayStackView.addArrangedSubview(introduceTableView)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        likeHeartCircle.circle()
     }
     
     func refresh<T: Table>(_ t: T.Type) {
@@ -1058,6 +1125,8 @@ extension ShowTeamVC {
         self.nextTimeContainer.visibility = visible
         self.nextTimeIV.visibility = visible
         self.nextTimeLbl.visibility = visible
+        
+        self.teamMemberListLbl.visibility = visible
     }
     
     func setTeamMemberBottom() {

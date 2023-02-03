@@ -329,4 +329,10 @@ extension UIView {
         
         return label
     }
+    
+    //https://medium.com/thefloatingpoint/how-to-make-any-uiview-into-a-circle-a3aad48eac4a
+    func circle() {
+        self.layer.cornerRadius = self.layer.bounds.width / 2
+        self.clipsToBounds = true
+    }
 }

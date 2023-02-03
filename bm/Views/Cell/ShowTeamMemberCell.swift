@@ -70,7 +70,7 @@ class ShowTeamMemberCell: UITableViewCell {
         
         self.contentView.addSubview(noLbl)
         noLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(12)
+            make.left.equalToSuperview()
             make.centerY.equalToSuperview()
         }
         
