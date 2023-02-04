@@ -32,6 +32,12 @@ extension UIImageView {
         downloaded(from: url, contentMode: mode)
     }
     
+    func makeRounded() {
+        
+        self.layer.cornerRadius = (self.frame.width / 2) //instead of let radius = CGRectGetWidth(self.frame) / 2
+        self.layer.masksToBounds = true
+    }
+    
     func sizeOfImageAt(_ link: String) -> CGSize? {
         guard let url = URL(string: link) else {return CGSize(width: 0, height: 0)}
         // with CGImageSource we avoid loading the whole image into memory

@@ -1369,18 +1369,7 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             //cell.delegate = self
             
             let row: TeamMemberTable = items[indexPath.row]
-            cell.noLbl.text = "\(indexPath.row + 1)."
-            
-            var nickname: String = ""
-            if (row.memberTable != nil) {
-                nickname = row.memberTable!.nickname
-            }
-            cell.nameLbl.text = nickname
-            
-            cell.leaveLbl.visibility = (row.isLeave) ? .visible : .invisible
-            if cell.leaveLbl.visibility == .visible {
-                cell.leaveLbl.text = "請假(\(row.leaveTime.noSec()))"
-            }
+            cell.update(row: row, no: indexPath.row + 1)
             
             cell.setSelectedBackgroundColor()
             return cell
