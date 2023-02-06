@@ -38,6 +38,7 @@ class LikeButton: SuperButton {
     override func commonInit() {
         super.commonInit()
         setColor(textColor: UIColor(MY_WHITE), bkColor: UIColor(MY_BLACK))
+        self.backgroundColor = UIColor.gray
         //cornerRadius = MY_BUTTON_CORNER
         //contentEdgeInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
         tintColor = .white

@@ -9,7 +9,15 @@
 import UIKit
 
 class Avatar: UIImageView {
-
     
+    func path(_ url: String) {
+        self.downloaded(from: url)
+    }
+}
 
+class featured: UIImageView {
+    
+    func path(_ url: String) {
+        self.downloaded(from: url)
+    }
 }

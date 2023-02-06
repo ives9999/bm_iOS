@@ -1039,19 +1039,24 @@ class BaseViewController: UIViewController, List2CellDelegate {
         return selecteds
     }
     
+    //set status bar to lightContent for dark theme
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        .lightContent
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         //setNeedsStatusBarAppearanceUpdate()
-        let statusBarView = UIView()
-        view.addSubview(statusBarView)
-        statusBarView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            statusBarView.topAnchor.constraint(equalTo: view.topAnchor),
-            statusBarView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            statusBarView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            statusBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
-        ])
-        statusBarView.backgroundColor = UIColor(MY_GREEN)
+//        let statusBarView = UIView()
+//        view.addSubview(statusBarView)
+//        statusBarView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            statusBarView.topAnchor.constraint(equalTo: view.topAnchor),
+//            statusBarView.leftAnchor.constraint(equalTo: view.leftAnchor),
+//            statusBarView.rightAnchor.constraint(equalTo: view.rightAnchor),
+//            statusBarView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+//        ])
+//        statusBarView.backgroundColor = UIColor(MY_BLACK)
     }
     
     override func viewDidLoad() {

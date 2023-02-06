@@ -13,6 +13,10 @@ class SuperLabel: UILabel {
     var indexPath: IndexPath?
     var key: String?
     
+    var padding: UIEdgeInsets = UIEdgeInsets.zero {
+        didSet { invalidateIntrinsicContentSize() }
+    }
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
         self.commonInit()
@@ -33,6 +37,17 @@ class SuperLabel: UILabel {
         self.textAlignment = NSTextAlignment.left
         
         self.numberOfLines = 0
+    }
+    
+    override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
+        let textRect = super.textRect(forBounds: bounds, limitedToNumberOfLines: numberOfLines)
+        let invertedInsets = UIEdgeInsets(top: -padding.top, left: -padding.left, bottom: -padding.bottom, right: -padding.right)
+        
+        return textRect.inset(by: invertedInsets)
+    }
+    
+    override func drawText(in rect: CGRect) {
+        super.drawText(in: rect.inset(by: padding))
     }
     
     func setTextSize(_ size: CGFloat) {
@@ -77,6 +92,11 @@ class SuperLabel: UILabel {
     func setBorder(width: CGFloat, color: UIColor) {
         self.layer.borderWidth = width
         self.layer.borderColor = color.cgColor
+    }
+    
+    func corner(_ value: CGFloat) {
+        self.layer.cornerRadius = value
+        self.layer.masksToBounds = true
     }
 }
 

@@ -143,10 +143,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    func setStatusBarBackgroundColor(color: UIColor) {
-        guard let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView else { return }
-        statusBar.backgroundColor = color
-    }
+//    func setStatusBarBackgroundColor(color: UIColor) {
+//        guard let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView else { return }
+//        statusBar.backgroundColor = color
+//    }
     
     
     private func goShowPNVC() {

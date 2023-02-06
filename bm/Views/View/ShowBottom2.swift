@@ -38,7 +38,7 @@ class ShowBottom2: UIView {
     }
 
     private func setupView() {
-        backgroundColor = UIColor(MY_GRAY)
+        //backgroundColor = UIColor(MY_GRAY)
         self.addSubview(submitBtn)
         self.addSubview(likeBtn)
         self.addSubview(cancelBtn)
@@ -98,10 +98,12 @@ class ShowBottom2: UIView {
         }
         
         var padding: CGFloat = setBottomButtonPadding()
+        let topMargin: CGFloat = 2
         
         if (isShowSubmitBtn) {
             self.submitBtn.snp.remakeConstraints { make in
-                make.centerY.equalToSuperview()
+                //make.centerY.equalToSuperview()
+                make.top.equalToSuperview().offset(topMargin)
                 make.left.equalToSuperview().offset(padding)
                 make.width.equalTo(btnWidth)
                 make.height.equalTo(btnHeight)
@@ -113,7 +115,8 @@ class ShowBottom2: UIView {
         if (isShowLikeBtn) {
             padding = padding * CGFloat(bottom_button_count) + btnWidth * CGFloat(bottom_button_count-1)
             self.likeBtn.snp.remakeConstraints { make in
-                make.centerY.equalToSuperview()
+                //make.centerY.equalToSuperview()
+                make.top.equalToSuperview().offset(topMargin)
                 make.left.equalToSuperview().offset(padding)
                 make.width.equalTo(btnWidth)
                 make.height.equalTo(btnHeight)
@@ -125,7 +128,8 @@ class ShowBottom2: UIView {
         if (isShowCancelBtn) {
             padding = padding * CGFloat(bottom_button_count) + btnWidth * CGFloat(bottom_button_count-1)
             self.cancelBtn.snp.remakeConstraints { make in
-                make.centerY.equalToSuperview()
+                //make.centerY.equalToSuperview()
+                make.top.equalToSuperview().offset(topMargin)
                 make.left.equalToSuperview().offset(padding)
                 make.width.equalTo(btnWidth)
                 make.height.equalTo(btnHeight)

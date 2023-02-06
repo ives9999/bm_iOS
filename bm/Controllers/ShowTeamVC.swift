@@ -66,6 +66,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         let view = UITableView()
         view.isScrollEnabled = false
         view.backgroundColor = UIColor.clear
+//        view.separatorStyle = .singleLine
+//        view.separatorColor = UIColor.gray
         
         view.rowHeight = UITableView.automaticDimension
         view.estimatedRowHeight = UITableView.automaticDimension
@@ -122,11 +124,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let likeContainer: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
     let teamMemberDataLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
         view.setTextTitle()
@@ -141,8 +138,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let teamMemberTotalLbl: UIPaddingLabel = {
-        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
+    let teamMemberTotalLbl: SuperLabel = {
+        //let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
+        let view: SuperLabel = SuperLabel()
+        view.padding = UIEdgeInsets(top: 3, left: 15, bottom: 3, right: 15)
         view.font = UIFont(name: FONT_NAME, size: 12)
         view.backgroundColor = UIColor(MY_GREEN)
         view.textColor = UIColor(MY_BLACK)
@@ -154,8 +153,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let teamMemberPlayLbl: UIPaddingLabel = {
-        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
+    let teamMemberPlayLbl: SuperLabel = {
+        //let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
+        let view: SuperLabel = SuperLabel()
+        view.padding = UIEdgeInsets(top: 3, left: 15, bottom: 3, right: 15)
         view.font = UIFont(name: FONT_NAME, size: 12)
         view.textColor = UIColor(MY_WHITE)
         view.text = "16位"
@@ -165,8 +166,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let teamMemberLeaveLbl: UIPaddingLabel = {
-        let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
+    let teamMemberLeaveLbl: SuperLabel = {
+        //let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
+        let view: SuperLabel = SuperLabel()
+        view.padding = UIEdgeInsets(top: 3, left: 15, bottom: 3, right: 15)
         view.font = UIFont(name: FONT_NAME, size: 12)
         view.textColor = UIColor(MY_WHITE)
         view.text = "16位"
@@ -176,23 +179,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let likeHeartCircle: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hex: "#A6D903", alpha: 0.2)
-        return view
-    }()
-    
-    let likeIcon: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(named: "like_in_svg")
-        return view
-    }()
-    
-    let likeCountLbl: UILabel = {
-        let view = SuperLabel()
-        view.text = "16"
-        //view.backgroundColor = UIColor.red
-        view.textAlignment = .center
+    let likeContainer: ShowLike2 = {
+        let view = ShowLike2()
         return view
     }()
     
@@ -490,21 +478,21 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                 make.height.equalTo(50)
             }
         
-                likeContainer.addSubview(likeHeartCircle)
-                likeHeartCircle.snp.makeConstraints { make in
-                    make.top.left.equalToSuperview()
-                    make.width.height.equalTo(48)
-                }
-                    likeHeartCircle.addSubview(likeIcon)
-                    likeIcon.snp.makeConstraints { make in
-                        make.width.height.equalTo(24)
-                        make.centerX.centerY.equalToSuperview()
-                    }
-                likeContainer.addSubview(likeCountLbl)
-                likeCountLbl.snp.makeConstraints { make in
-                    make.left.right.equalToSuperview()
-                    make.top.equalTo(likeHeartCircle.snp.bottom).offset(5)
-                }
+//                likeContainer.addSubview(likeHeartCircle)
+//                likeHeartCircle.snp.makeConstraints { make in
+//                    make.top.left.equalToSuperview()
+//                    make.width.height.equalTo(48)
+//                }
+//                    likeHeartCircle.addSubview(likeIcon)
+//                    likeIcon.snp.makeConstraints { make in
+//                        make.width.height.equalTo(24)
+//                        make.centerX.centerY.equalToSuperview()
+//                    }
+//                likeContainer.addSubview(likeCountLbl)
+//                likeCountLbl.snp.makeConstraints { make in
+//                    make.left.right.equalToSuperview()
+//                    make.top.equalTo(likeHeartCircle.snp.bottom).offset(5)
+//                }
         
         let spacer1: UIView = UIView()
         //spacer1.backgroundColor = UIColor.gray
@@ -602,7 +590,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }
     
     override func viewDidLayoutSubviews() {
-        likeHeartCircle.circle()
+        self.likeContainer.backgroundCircle()
     }
     
     func refresh<T: Table>(_ t: T.Type) {
@@ -800,6 +788,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             isLike = table!.like
             showBottom?.initLike(isLike: table!.like, count: table!.like_count)
         }
+        //likeCountLbl.text = String(table!.like_count)
     }
     
     override func viewWillLayoutSubviews() {
@@ -1131,13 +1120,13 @@ extension ShowTeamVC {
     
     func setTeamMemberBottom() {
         if self.isTeamMember && !self.isTeapMemberLeave {
-            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
+            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
             showBottom!.submitBtn.setTitle("請假")
         } else if self.isTeamMember && self.isTeamMember {
-            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
+            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
             showBottom!.submitBtn.setTitle("取消")
         } else {
-            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: true, isShowCancel: false)
+            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: false, isShowCancel: false)
         }
     }
     

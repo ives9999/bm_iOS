@@ -21,6 +21,7 @@ class UIPaddingLabel: UILabel {
         self.leftInset = left
         self.rightInset = right
         super.init(frame: CGRect.zero)
+        self.numberOfLines = 0
     }
 
     required init?(coder aDecoder: NSCoder) {

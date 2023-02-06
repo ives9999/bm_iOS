@@ -14,15 +14,15 @@ class ShowTop2: UIView {
     
     let titleLbl: SuperLabel = {
         let view = SuperLabel()
-        view.setTextTitle()
-        view.setTextColor(UIColor(MY_BLACK))
+        view.font = UIFont(name: FONT_BOLD_NAME, size: 16)
+        view.setTextColor(UIColor(MY_WHITE))
         
         return view
     }()
     
     let prevBtn: UIButton = {
         let view = UIButton()
-        view.setImage(UIImage(named: "prev_black"), for: .normal)
+        view.setImage(UIImage(named: "prev"), for: .normal)
         
         return view
     }()
@@ -44,7 +44,7 @@ class ShowTop2: UIView {
     }
     
     private func setupView() {
-        backgroundColor = UIColor(MY_GREEN)
+        //backgroundColor = UIColor(MY_GREEN)
         self.addSubview(titleLbl)
         self.addSubview(prevBtn)
         
@@ -61,12 +61,13 @@ class ShowTop2: UIView {
         self.snp.makeConstraints { make in
             make.top.equalTo(parent).offset(statusBarHeight)
             make.left.right.equalToSuperview()
-            make.height.equalTo(64)
+            make.height.equalTo(30)
         }
         
         self.titleLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(60)
             make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
+            //make.centerX.equalToSuperview()
         }
         
         self.prevBtn.snp.makeConstraints { make in

@@ -19,13 +19,11 @@ class ShowTeamMemberCell: UITableViewCell {
     let noLbl: SuperLabel = {
         let view = SuperLabel()
         view.setTextGeneral()
-        
         return view
     }()
     
     let avatarIV: Avatar = {
         let view = Avatar()
-        
         return view
     }()
     
@@ -33,17 +31,33 @@ class ShowTeamMemberCell: UITableViewCell {
     
     let nameLbl: SuperLabel = {
         let view = SuperLabel()
-        view.setTextGeneral()
-        
+        return view
+    }()
+    
+    let createAtLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(hex: "#ffffff", alpha: 0.6)
+        view.setTextSize(12)
         return view
     }()
     
     let leaveLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.setTextGeneral()
-        view.setTextColor(UIColor(MY_RED))
+        //let view = UIPaddingLabel(withInsets: 3, 3, 10, 10)
+        let view: SuperLabel = SuperLabel()
+        view.padding = UIEdgeInsets(top: 3, left: 15, bottom: 3, right: 15)
+        view.corner(4)
+        view.textColor = UIColor(LEAVE_TEXT)
         view.text = "請假"
+        view.font = UIFont(name: FONT_NAME, size: 12)
+        view.textAlignment = .center
+        view.backgroundColor = UIColor(hex: LEAVE_TEXT, alpha: 0.2)
         
+        return view
+    }()
+    
+    let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.2)
         return view
     }()
     
@@ -76,8 +90,6 @@ class ShowTeamMemberCell: UITableViewCell {
     
     func setAnchor() {
         
-        self.contentView.backgroundColor = UIColor.gray
-        
         self.contentView.addSubview(noLbl)
         noLbl.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -86,15 +98,15 @@ class ShowTeamMemberCell: UITableViewCell {
         
         self.contentView.addSubview(avatarIV)
         avatarIV.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(12)
             make.left.equalTo(noLbl.snp.right).offset(12)
             make.width.height.equalTo(48)
             make.centerY.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-24)
+            make.bottom.equalToSuperview().offset(-12)
         }
         
         self.contentView.addSubview(dataContainer)
-        dataContainer.backgroundColor = UIColor.blue
+        //dataContainer.backgroundColor = UIColor.blue
         dataContainer.snp.makeConstraints { make in
             make.left.equalTo(avatarIV.snp.right).offset(18)
             make.top.equalToSuperview().offset(3)
@@ -103,14 +115,26 @@ class ShowTeamMemberCell: UITableViewCell {
         
         self.dataContainer.addSubview(nameLbl)
         nameLbl.snp.makeConstraints { make in
-            make.top.left.equalToSuperview()
-            //make.centerY.equalToSuperview()
+            make.top.equalTo(avatarIV.snp.top).offset(4)
+            make.left.equalToSuperview()
+        }
+        
+        self.dataContainer.addSubview(createAtLbl)
+        createAtLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.bottom.equalTo(avatarIV.snp.bottom).offset(-4)
         }
         
         self.contentView.addSubview(leaveLbl)
         leaveLbl.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-20)
             make.centerY.equalToSuperview()
+        }
+        
+        self.contentView.addSubview(separator)
+        separator.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
         
 //        self.contentView.addSubview(leaveBtn)
@@ -123,21 +147,23 @@ class ShowTeamMemberCell: UITableViewCell {
     }
     
     func update(row: TeamMemberTable, no: Int) {
+//        if no == 1 {
+//            self.contentView.backgroundColor = UIColor.gray
+//        }
         self.noLbl.text = "\(no)."
         
-        let f = row.memberTable!.featured_path
-        self.avatarIV.downloaded(from: f)
-        
+        self.avatarIV.path(row.memberTable!.featured_path)
         
         var nickname: String = ""
         if (row.memberTable != nil) {
             nickname = row.memberTable!.nickname
         }
         self.nameLbl.text = nickname
+        self.createAtLbl.text = row.created_at.noSec()
         
         self.leaveLbl.visibility = (row.isLeave) ? .visible : .invisible
         if self.leaveLbl.visibility == .visible {
-            self.leaveLbl.text = "請假(\(row.leaveTime.noSec()))"
+            self.leaveLbl.text = "請假\n\(row.leaveTime.noSec().noYear())"
         }
     }
     
