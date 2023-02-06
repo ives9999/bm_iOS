@@ -116,11 +116,13 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     let teamMemberAllContainer: UIView = {
         let view = UIView()
+        view.isUserInteractionEnabled = true
         return view
     }()
     
     let teamMemberLeftContainer: UIView = {
         let view = UIView()
+        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -135,20 +137,21 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     let teamMemberSummaryContainer: UIView = {
         let view = UIView()
+        view.isUserInteractionEnabled = true
         return view
     }()
     
     let teamMemberTotalLbl: SuperLabel = {
         //let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
         let view: SuperLabel = SuperLabel()
-        view.padding = UIEdgeInsets(top: 3, left: 15, bottom: 3, right: 15)
-        view.font = UIFont(name: FONT_NAME, size: 12)
-        view.backgroundColor = UIColor(MY_GREEN)
-        view.textColor = UIColor(MY_BLACK)
-        view.corner(3)
-        view.text = "16位"
+//        view.padding = UIEdgeInsets(top: 3, left: 15, bottom: 3, right: 15)
+//        view.font = UIFont(name: FONT_NAME, size: 12)
+//        view.backgroundColor = UIColor(MY_GREEN)
+//        view.textColor = UIColor(MY_BLACK)
+//        view.corner(3)
+//        view.text = "16位"
         
-        view.visibility = .invisible
+        //view.visibility = .invisible
         
         return view
     }()
@@ -179,7 +182,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let likeContainer: ShowLike2 = {
+    let showLike2: ShowLike2 = {
         let view = ShowLike2()
         return view
     }()
@@ -325,17 +328,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         super.viewDidLoad()
         
-        showTop = ShowTop2(delegate: self)
-        showTop!.setAnchor(parent: self.view)
+        initTop()
+        initBottom()
+        initTopTab()
         
-        initTopTagStackView()
-        initTabTop()
-        
-        showBottom = ShowBottom2(delegate: self)
-        self.view.addSubview(showBottom!)
-        //showBottom!.justShowLike(parent: self.view)
-        showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
-
         initScrollView()
         
         introduceTableView.snp.makeConstraints { make in
@@ -344,10 +340,32 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         introduceTableView.delegate = self
         introduceTableView.dataSource = self
         
+        showLike2.delegate = self
+        
         //initIntroduce()
         //initTeamMember()
+        
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(likePressed))
+//        self.addGestureRecognizer(tap)
 
         refresh(TeamTable.self)
+    }
+    
+    func initTop() {
+        showTop = ShowTop2(delegate: self)
+        showTop!.setAnchor(parent: self.view)
+    }
+    
+    func initBottom() {
+        showBottom = ShowBottom2(delegate: self)
+        self.view.addSubview(showBottom!)
+        //showBottom!.justShowLike(parent: self.view)
+        showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
+    }
+    
+    func initTopTab() {
+        initTopTagStackView()
+        initTopTap()
     }
     
     func initTopTagStackView() {
@@ -419,13 +437,13 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             make.width.equalToSuperview()
         }
         
-        //teamMemberAllContainer.backgroundColor = UIColor.blue
+        teamMemberAllContainer.backgroundColor = UIColor.blue
         teamMemberStackView.addArrangedSubview(teamMemberAllContainer)
         teamMemberAllContainer.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview()
-            make.height.equalTo(50)
+            //make.height.equalTo(50)
         }
         
             teamMemberLeftContainer.backgroundColor = UIColor.red
@@ -433,12 +451,15 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             teamMemberLeftContainer.snp.makeConstraints { make in
                 make.top.left.equalToSuperview()
                 make.right.equalToSuperview().offset(-100)
+                //make.height.equalTo(50)
                 //make.bottom.equalToSuperview().offset(40)
             }
         
                 teamMemberLeftContainer.addSubview(teamMemberDataLbl)
                 teamMemberDataLbl.snp.makeConstraints { make in
                     make.top.left.equalToSuperview()
+                    make.height.equalTo(20)
+                    make.bottom.equalToSuperview().offset(100)
                 }
         
                 teamMemberLeftContainer.addSubview(teamMemberSummaryContainer)
@@ -469,30 +490,15 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 
                 
         
-            teamMemberAllContainer.addSubview(likeContainer)
+            teamMemberAllContainer.addSubview(showLike2)
             //likeContainer.backgroundColor = UIColor.cyan
-            likeContainer.snp.makeConstraints { make in
+        showLike2.snp.makeConstraints { make in
                 make.top.equalToSuperview()
                 make.right.equalToSuperview().offset(-12)
                 make.width.equalTo(48)
                 make.height.equalTo(50)
             }
         
-//                likeContainer.addSubview(likeHeartCircle)
-//                likeHeartCircle.snp.makeConstraints { make in
-//                    make.top.left.equalToSuperview()
-//                    make.width.height.equalTo(48)
-//                }
-//                    likeHeartCircle.addSubview(likeIcon)
-//                    likeIcon.snp.makeConstraints { make in
-//                        make.width.height.equalTo(24)
-//                        make.centerX.centerY.equalToSuperview()
-//                    }
-//                likeContainer.addSubview(likeCountLbl)
-//                likeCountLbl.snp.makeConstraints { make in
-//                    make.left.right.equalToSuperview()
-//                    make.top.equalTo(likeHeartCircle.snp.bottom).offset(5)
-//                }
         
         let spacer1: UIView = UIView()
         //spacer1.backgroundColor = UIColor.gray
@@ -558,6 +564,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         introduceTableView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
         }
+        
+        let totalTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(totalPressed(_:)))
+        teamMemberLeftContainer.addGestureRecognizer(totalTR)
+        //teamMemberTotalLbl.addGestureRecognizer(totalTR)
     }
 
     private func initTempPlay() {
@@ -590,7 +600,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }
     
     override func viewDidLayoutSubviews() {
-        self.likeContainer.backgroundCircle()
+        self.showLike2.backgroundCircle()
     }
     
     func refresh<T: Table>(_ t: T.Type) {
@@ -630,7 +640,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
     }
     
-    func initTabTop() {
+    func initTopTap() {
         
         let count: Int = 3
         let tab_width: Int = 80
@@ -679,7 +689,11 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         } else {
             if (table != nil) {
                 isLike = !isLike
-                showBottom?.setLike(isLike)
+                if (focusTabIdx == 1) {
+                    showLike2.setLike(isLike)
+                } else {
+                    showBottom?.setLike(isLike)
+                }
                 dataService.like(token: table!.token, able_id: table!.id)
             } else {
                 warning("沒有取得內容資料值，請稍後再試或洽管理員")
@@ -787,8 +801,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         if (table != nil) {
             isLike = table!.like
             showBottom?.initLike(isLike: table!.like, count: table!.like_count)
+            showLike2.initStatus(table!.like, table!.like_count)
         }
-        //likeCountLbl.text = String(table!.like_count)
     }
     
     override func viewWillLayoutSubviews() {
@@ -814,23 +828,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         //請假
         if (focusTabIdx == 1) {
-            
-            //如果要請假
-            if !isTeapMemberLeave {
-                warning(msg: "是否確定要請假？", closeButtonTitle: "關閉", buttonTitle: "是") {
-                    if self.teamMemberToken != nil {
-                        self.teamMemberLeave(doLeave: true)
-                    }
-                }
-            }
-            // 如果要取消請假
-            else {
-                warning(msg: "是否確定要取消請假？", closeButtonTitle: "關閉", buttonTitle: "取消請假") {
-                    if self.teamMemberToken != nil {
-                        self.teamMemberLeave(doLeave: false)
-                    }
-                }
-            }
+            self.submitLeave()
         }
         else if (focusTabIdx == 2) {
             
@@ -996,6 +994,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 
         })
     }
+    
+    @objc func totalPressed(_ sender: Any) {
+        print("aaa")
+    }
 }
 
 /////////////////  team member leave start /////////////////////////////
@@ -1058,7 +1060,7 @@ extension ShowTeamVC {
         var rows: [TeamMemberTable] = [TeamMemberTable]()
         do {
             if (jsonData != nil) {
-                //print(jsonData!.prettyPrintedJSONString)
+                //jsonData!.prettyPrintedJSONString
                 let tables2: TeamMemberTables2 = try JSONDecoder().decode(TeamMemberTables2<TeamMemberTable>.self, from: jsonData!)
                 if (tables2.success) {
                     
@@ -1199,6 +1201,25 @@ extension ShowTeamVC {
             alertView.hideView()
         }
         alertView.showSuccess(memberTable.nickname, subTitle: "", circleIconImage: alertViewIcon)
+    }
+    
+    private func submitLeave() {
+        //如果要請假
+        if !isTeapMemberLeave {
+            warning(msg: "是否確定要請假？", closeButtonTitle: "關閉", buttonTitle: "是") {
+                if self.teamMemberToken != nil {
+                    self.teamMemberLeave(doLeave: true)
+                }
+            }
+        }
+        // 如果要取消請假
+        else {
+            warning(msg: "是否確定要取消請假？", closeButtonTitle: "關閉", buttonTitle: "取消請假") {
+                if self.teamMemberToken != nil {
+                    self.teamMemberLeave(doLeave: false)
+                }
+            }
+        }
     }
 }
 
@@ -1552,5 +1573,13 @@ class TeamMemberTables2<T: Codable>: Codable {
         if play_end.count > 0 {
             play_end_show = play_end.noSec()
         }
+    }
+}
+
+extension ShowTeamVC: LikeViewDelegate {
+    func likePressed(_ isLike: Bool) {
+        
+        //print(isLike)
+        self.like()
     }
 }

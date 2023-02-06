@@ -21,10 +21,7 @@ class ShowLike2: UIView {
     
     let backgroundAlpha: CGFloat = 0.2
     
-//    let likeContainer: UIView = {
-//        let view = UIView()
-//        return view
-//    }()
+    var delegate: LikeViewDelegate? = nil
     
     let likeHeartCircle: UIView = {
         let view = UIView()
@@ -65,6 +62,19 @@ class ShowLike2: UIView {
         likeIcon.image = UIImage(named: likeString)
         
         self.anchor()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(likePressed))
+        self.addGestureRecognizer(tap)
+    }
+    
+    func initStatus(_ initLike: Bool, _ initCount: Int) {
+        self.initLike = initLike
+        self.initCount = initCount
+        self.isLike = initLike
+        self.count = initCount
+        
+        setIcon()
+        setCount()
     }
 
     func anchor() {
@@ -93,7 +103,57 @@ class ShowLike2: UIView {
         }
     }
     
+    func setLike(_ _like: Bool, _ _count: Int? = nil) {
+        isLike = _like
+        if (_count != nil) {
+            count = _count!
+        }
+        setIcon()
+        setCount()
+    }
+    
+    private func setIcon() {
+        if (isLike) {
+            likeIcon.image = UIImage(named: likeString)
+        } else {
+            likeIcon.image = UIImage(named: unLikeString)
+        }
+    }
+    
+    private func setCount() {
+        if (initLike) {
+            if (isLike) {
+                count = initCount
+            } else {
+                count = initCount - 1
+            }
+        } else {
+            if (isLike) {
+                count = initCount + 1
+            } else {
+                count = initCount
+            }
+        }
+        
+        likeCountLbl.text = String(count)
+    }
+    
+    @objc func likePressed() {
+        self.isLike = !self.isLike
+        self.delegate?.likePressed(self.isLike)
+    }
+    
+    func setLike(_ isLike: Bool) {
+        self.isLike = isLike
+        self.setIcon()
+        self.setCount()
+    }
+    
     func backgroundCircle() {
         likeHeartCircle.circle()
     }
+}
+
+protocol LikeViewDelegate {
+    func likePressed(_ isLike: Bool)
 }

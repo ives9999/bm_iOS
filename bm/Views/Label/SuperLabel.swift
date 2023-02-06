@@ -37,6 +37,7 @@ class SuperLabel: UILabel {
         self.textAlignment = NSTextAlignment.left
         
         self.numberOfLines = 0
+        self.isUserInteractionEnabled = true
     }
     
     override func textRect(forBounds bounds: CGRect, limitedToNumberOfLines numberOfLines: Int) -> CGRect {
