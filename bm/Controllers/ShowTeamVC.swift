@@ -141,34 +141,30 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let teamMemberTotalLbl: SuperLabel = {
-        let view: SuperLabel = SuperLabel()
-        view.padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-        view.font = UIFont(name: FONT_NAME, size: 12)
+    let teamMemberTotalLbl: TapLabel = {
+        let view: TapLabel = TapLabel()
+        view.isFocus = true
+        view.tag = 0
         view.text = "16位"
-        
         view.visibility = .invisible
         
         return view
     }()
     
-    let teamMemberPlayLbl: SuperLabel = {
-        let view: SuperLabel = SuperLabel()
-        view.padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-        view.font = UIFont(name: FONT_NAME, size: 12)
-        view.textColor = UIColor(MY_WHITE)
+    let teamMemberPlayLbl: TapLabel = {
+        let view: TapLabel = TapLabel()
+        view.isFocus = false
+        view.tag = 1
         view.text = "16位"
-        
         view.visibility = .invisible
         
         return view
     }()
     
-    let teamMemberLeaveLbl: SuperLabel = {
-        let view: SuperLabel = SuperLabel()
-        view.padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-        view.font = UIFont(name: FONT_NAME, size: 12)
-        view.textColor = UIColor(MY_WHITE)
+    let teamMemberLeaveLbl: TapLabel = {
+        let view: TapLabel = TapLabel()
+        view.isFocus = false
+        view.tag = 2
         view.text = "16位"
         
         view.visibility = .invisible
@@ -312,15 +308,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         dataService = TeamService.instance
         
-        //initSignup()
-        
-        //let cellNib = UINib(nibName: "OneLineCell", bundle: nil)
-        //signupTableView.register(cellNib, forCellReuseIdentifier: "cell")
-        
-        //initSignupTableView()
-        
-        //bottom_button_count = 2
-        
         super.viewDidLoad()
         
         initTop()
@@ -336,18 +323,21 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         introduceTableView.dataSource = self
         
         showLike2.delegate = self
+        teamMemberTotalLbl.delegate = self
+        teamMemberPlayLbl.delegate = self
+        teamMemberLeaveLbl.delegate = self
         
         //initIntroduce()
         //initTeamMember()
         
-        let totalTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(totalPressed(_:)))
-        teamMemberTotalLbl.addGestureRecognizer(totalTR)
+//        let totalTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(totalPressed(_:)))
+//        teamMemberTotalLbl.addGestureRecognizer(totalTR)
         
-        let playTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(playPressed(_:)))
-        teamMemberPlayLbl.addGestureRecognizer(playTR)
-        
-        let leaveTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(leavePressed(_:)))
-        teamMemberLeaveLbl.addGestureRecognizer(leaveTR)
+//        let playTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(playPressed(_:)))
+//        teamMemberPlayLbl.addGestureRecognizer(playTR)
+//        
+//        let leaveTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(leavePressed(_:)))
+//        teamMemberLeaveLbl.addGestureRecognizer(leaveTR)
 
         refresh(TeamTable.self)
     }
@@ -473,8 +463,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                     make.bottom.equalToSuperview()
                 }
 
-        //teamMemberTotalLbl.backgroundColor = UIColor.cyan
-        teamMemberSummaryContainer.addSubview(teamMemberTotalLbl)
+                    //teamMemberTotalLbl.backgroundColor = UIColor.cyan
+                    teamMemberSummaryContainer.addSubview(teamMemberTotalLbl)
                     teamMemberTotalLbl.snp.makeConstraints { make in
                         make.top.equalToSuperview()
                         make.left.equalToSuperview()
@@ -997,19 +987,19 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         })
     }
     
-    @objc func totalPressed(_ sender: Any) {
-        memberCountFocus(view: teamMemberTotalLbl)
-        memberCountUnFocus(view: teamMemberPlayLbl)
-        memberCountUnFocus(view: teamMemberLeaveLbl)
+    func totalPressed() {
+        teamMemberTotalLbl.toggle()
+        teamMemberPlayLbl.toggle()
+        teamMemberLeaveLbl.toggle()
         
         filterItems = items
         introduceTableView.reloadData()
     }
     
-    @objc func playPressed(_ sender: Any) {
-        memberCountFocus(view: teamMemberPlayLbl)
-        memberCountUnFocus(view: teamMemberTotalLbl)
-        memberCountUnFocus(view: teamMemberLeaveLbl)
+    func playPressed() {
+        teamMemberTotalLbl.toggle()
+        teamMemberPlayLbl.toggle()
+        teamMemberLeaveLbl.toggle()
         
         filterItems.removeAll()
         for item in items {
@@ -1020,10 +1010,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         introduceTableView.reloadData()
     }
     
-    @objc func leavePressed(_ sender: Any) {
-        memberCountFocus(view: teamMemberLeaveLbl)
-        memberCountUnFocus(view: teamMemberTotalLbl)
-        memberCountUnFocus(view: teamMemberPlayLbl)
+    func leavePressed() {
+        teamMemberTotalLbl.toggle()
+        teamMemberPlayLbl.toggle()
+        teamMemberLeaveLbl.toggle()
         
         filterItems.removeAll()
         for item in items {
@@ -1088,7 +1078,8 @@ extension ShowTeamVC {
             self.nextDateLbl.text = "\(nextDate)" + " ( " + nextDateWeek + " )"
             self.nextTimeLbl.text = "\(play_start) ~ \(play_end)"
             
-            memberCountFocus(view: teamMemberTotalLbl)
+            teamMemberTotalLbl.isFocus = true
+            teamMemberTotalLbl.on()
             
             setTeamMemberBottom()
         }
@@ -1138,16 +1129,16 @@ extension ShowTeamVC {
         return rows
     }
     
-    func memberCountFocus(view: SuperLabel) {
-        view.backgroundColor = UIColor(MY_GREEN)
-        view.textColor = UIColor(MY_BLACK)
-        view.corner(3)
-    }
-    
-    func memberCountUnFocus(view: SuperLabel) {
-        view.backgroundColor = UIColor.clear
-        view.textColor = UIColor(MY_WHITE)
-    }
+//    func memberCountFocus(view: SuperLabel) {
+//        view.backgroundColor = UIColor(MY_GREEN)
+//        view.textColor = UIColor(MY_BLACK)
+//        view.corner(3)
+//    }
+//
+//    func memberCountUnFocus(view: SuperLabel) {
+//        view.backgroundColor = UIColor.clear
+//        view.textColor = UIColor(MY_WHITE)
+//    }
     
     func teamMemberVisible(_ visible: UIView.Visibility)
     {
@@ -1630,5 +1621,17 @@ extension ShowTeamVC: LikeViewDelegate {
         
         //print(isLike)
         self.like()
+    }
+}
+
+extension ShowTeamVC: TapLabelDelegate {
+    func tapPressed(_ idx: Int) {
+        if (idx == 0) {
+            totalPressed()
+        } else if (idx == 1) {
+            playPressed()
+        } else if (idx == 2) {
+            leavePressed()
+        }
     }
 }
