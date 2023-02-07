@@ -142,24 +142,19 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }()
     
     let teamMemberTotalLbl: SuperLabel = {
-        //let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
         let view: SuperLabel = SuperLabel()
-//        view.padding = UIEdgeInsets(top: 3, left: 15, bottom: 3, right: 15)
-//        view.font = UIFont(name: FONT_NAME, size: 12)
-//        view.backgroundColor = UIColor(MY_GREEN)
-//        view.textColor = UIColor(MY_BLACK)
-//        view.corner(3)
-//        view.text = "16位"
+        view.padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+        view.font = UIFont(name: FONT_NAME, size: 12)
+        view.text = "16位"
         
-        //view.visibility = .invisible
+        view.visibility = .invisible
         
         return view
     }()
     
     let teamMemberPlayLbl: SuperLabel = {
-        //let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
         let view: SuperLabel = SuperLabel()
-        view.padding = UIEdgeInsets(top: 3, left: 15, bottom: 3, right: 15)
+        view.padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         view.font = UIFont(name: FONT_NAME, size: 12)
         view.textColor = UIColor(MY_WHITE)
         view.text = "16位"
@@ -170,9 +165,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }()
     
     let teamMemberLeaveLbl: SuperLabel = {
-        //let view: UIPaddingLabel = UIPaddingLabel(withInsets: 3, 3, 15, 15)
         let view: SuperLabel = SuperLabel()
-        view.padding = UIEdgeInsets(top: 3, left: 15, bottom: 3, right: 15)
+        view.padding = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
         view.font = UIFont(name: FONT_NAME, size: 12)
         view.textColor = UIColor(MY_WHITE)
         view.text = "16位"
@@ -291,6 +285,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     //team member
     var items: [TeamMemberTable] = [TeamMemberTable]()
+    var filterItems: [TeamMemberTable] = [TeamMemberTable]()
     var teamMemberPage: Int = 1
     var teamMemberPerPage: Int = PERPAGE
     var teamMemberTotalCount: Int = 0
@@ -345,8 +340,14 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         //initIntroduce()
         //initTeamMember()
         
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(likePressed))
-//        self.addGestureRecognizer(tap)
+        let totalTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(totalPressed(_:)))
+        teamMemberTotalLbl.addGestureRecognizer(totalTR)
+        
+        let playTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(playPressed(_:)))
+        teamMemberPlayLbl.addGestureRecognizer(playTR)
+        
+        let leaveTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(leavePressed(_:)))
+        teamMemberLeaveLbl.addGestureRecognizer(leaveTR)
 
         refresh(TeamTable.self)
     }
@@ -437,7 +438,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             make.width.equalToSuperview()
         }
         
-        teamMemberAllContainer.backgroundColor = UIColor.blue
+        //teamMemberAllContainer.backgroundColor = UIColor.blue
         teamMemberStackView.addArrangedSubview(teamMemberAllContainer)
         teamMemberAllContainer.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
@@ -446,53 +447,58 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             //make.height.equalTo(50)
         }
         
-            teamMemberLeftContainer.backgroundColor = UIColor.red
+            //teamMemberLeftContainer.backgroundColor = UIColor.red
             teamMemberAllContainer.addSubview(teamMemberLeftContainer)
             teamMemberLeftContainer.snp.makeConstraints { make in
                 make.top.left.equalToSuperview()
                 make.right.equalToSuperview().offset(-100)
                 //make.height.equalTo(50)
-                //make.bottom.equalToSuperview().offset(40)
+                make.bottom.equalToSuperview()
             }
         
+                //teamMemberDataLbl.backgroundColor = UIColor.brown
                 teamMemberLeftContainer.addSubview(teamMemberDataLbl)
                 teamMemberDataLbl.snp.makeConstraints { make in
-                    make.top.left.equalToSuperview()
+                    make.top.left.right.equalToSuperview()
                     make.height.equalTo(20)
-                    make.bottom.equalToSuperview().offset(100)
+                    //make.bottom.equalToSuperview()
                 }
         
+                //teamMemberSummaryContainer.backgroundColor = UIColor.red
                 teamMemberLeftContainer.addSubview(teamMemberSummaryContainer)
                 teamMemberSummaryContainer.snp.makeConstraints { make in
                     make.top.equalTo(teamMemberDataLbl.snp.bottom).offset(20)
-                    make.left.equalToSuperview()
-                    make.bottom.equalToSuperview().offset(50)
+                    make.left.right.equalToSuperview()
+                    make.height.equalTo(20)
+                    make.bottom.equalToSuperview()
                 }
 
-                    teamMemberSummaryContainer.addSubview(teamMemberTotalLbl)
+        //teamMemberTotalLbl.backgroundColor = UIColor.cyan
+        teamMemberSummaryContainer.addSubview(teamMemberTotalLbl)
                     teamMemberTotalLbl.snp.makeConstraints { make in
+                        make.top.equalToSuperview()
                         make.left.equalToSuperview()
-                        make.bottom.equalToSuperview().offset(10)
                         make.centerY.equalToSuperview()
                     }
 
                     teamMemberSummaryContainer.addSubview(teamMemberPlayLbl)
                     teamMemberPlayLbl.snp.makeConstraints { make in
                         make.left.equalTo(teamMemberTotalLbl.snp.right)
+                        make.top.equalToSuperview()
                         make.centerY.equalToSuperview()
                     }
 
                     teamMemberSummaryContainer.addSubview(teamMemberLeaveLbl)
                     teamMemberLeaveLbl.snp.makeConstraints { make in
                         make.left.equalTo(teamMemberPlayLbl.snp.right)
+                        make.top.equalToSuperview()
                         make.centerY.equalToSuperview()
                     }
 
                 
         
             teamMemberAllContainer.addSubview(showLike2)
-            //likeContainer.backgroundColor = UIColor.cyan
-        showLike2.snp.makeConstraints { make in
+            showLike2.snp.makeConstraints { make in
                 make.top.equalToSuperview()
                 make.right.equalToSuperview().offset(-12)
                 make.width.equalTo(48)
@@ -564,10 +570,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         introduceTableView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
         }
-        
-        let totalTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(totalPressed(_:)))
-        teamMemberLeftContainer.addGestureRecognizer(totalTR)
-        //teamMemberTotalLbl.addGestureRecognizer(totalTR)
     }
 
     private func initTempPlay() {
@@ -996,7 +998,40 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }
     
     @objc func totalPressed(_ sender: Any) {
-        print("aaa")
+        memberCountFocus(view: teamMemberTotalLbl)
+        memberCountUnFocus(view: teamMemberPlayLbl)
+        memberCountUnFocus(view: teamMemberLeaveLbl)
+        
+        filterItems = items
+        introduceTableView.reloadData()
+    }
+    
+    @objc func playPressed(_ sender: Any) {
+        memberCountFocus(view: teamMemberPlayLbl)
+        memberCountUnFocus(view: teamMemberTotalLbl)
+        memberCountUnFocus(view: teamMemberLeaveLbl)
+        
+        filterItems.removeAll()
+        for item in items {
+            if !item.isLeave {
+                filterItems.append(item)
+            }
+        }
+        introduceTableView.reloadData()
+    }
+    
+    @objc func leavePressed(_ sender: Any) {
+        memberCountFocus(view: teamMemberLeaveLbl)
+        memberCountUnFocus(view: teamMemberTotalLbl)
+        memberCountUnFocus(view: teamMemberPlayLbl)
+        
+        filterItems.removeAll()
+        for item in items {
+            if item.isLeave {
+                filterItems.append(item)
+            }
+        }
+        introduceTableView.reloadData()
     }
 }
 
@@ -1024,20 +1059,13 @@ extension ShowTeamVC {
         let _rows: [TeamMemberTable] = self.jsonToTable2(jsonData: jsonData)
         if (_rows.count == 0) {
             self.teamMemberVisible(.invisible)
-            let v = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
+            _ = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
         } else {
             if (teamMemberPage == 1) {
                 items = [TeamMemberTable]()
             }
             items += _rows
-            self.teamMemberVisible(.visible)
-            
-            self.teamMemberTotalLbl.text = "全部：\(teamMemberTotalCount)位"
-            self.teamMemberLeaveLbl.text = "請假：\(leaveCount)位"
-            self.teamMemberPlayLbl.text = "打球：\(teamMemberTotalCount-leaveCount)位"
-            
-            self.nextDateLbl.text = "\(nextDate)" + " ( " + nextDateWeek + " )"
-            self.nextTimeLbl.text = "\(play_start) ~ \(play_end)"
+            filterItems = items
             introduceTableView.reloadData()
             
             for item in items {
@@ -1050,6 +1078,17 @@ extension ShowTeamVC {
                     }
                 }
             }
+            
+            self.teamMemberVisible(.visible)
+            
+            self.teamMemberTotalLbl.text = "全部：\(teamMemberTotalCount)位"
+            self.teamMemberLeaveLbl.text = "請假：\(leaveCount)位"
+            self.teamMemberPlayLbl.text = "打球：\(teamMemberTotalCount-leaveCount)位"
+            
+            self.nextDateLbl.text = "\(nextDate)" + " ( " + nextDateWeek + " )"
+            self.nextTimeLbl.text = "\(play_start) ~ \(play_end)"
+            
+            memberCountFocus(view: teamMemberTotalLbl)
             
             setTeamMemberBottom()
         }
@@ -1070,6 +1109,7 @@ extension ShowTeamVC {
                         for row in tables2.rows {
                             row.filterRow()
                         }
+                        rows += tables2.rows
                         
                         if (teamMemberPage == 1) {
                             teamMemberPage = tables2.page
@@ -1084,8 +1124,6 @@ extension ShowTeamVC {
                             play_end = tables2.play_end_show
                             self.leaveCount = tables2.leaveCount
                         }
-                        
-                        rows += tables2.rows
                     }
                 } else {
                     msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
@@ -1098,6 +1136,17 @@ extension ShowTeamVC {
         }
         
         return rows
+    }
+    
+    func memberCountFocus(view: SuperLabel) {
+        view.backgroundColor = UIColor(MY_GREEN)
+        view.textColor = UIColor(MY_BLACK)
+        view.corner(3)
+    }
+    
+    func memberCountUnFocus(view: SuperLabel) {
+        view.backgroundColor = UIColor.clear
+        view.textColor = UIColor(MY_WHITE)
     }
     
     func teamMemberVisible(_ visible: UIView.Visibility)
@@ -1317,7 +1366,7 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             return memberRows.count
             //return tableRowKeys.count
         } else if (focusTabIdx == 1) {
-            return items.count
+            return filterItems.count
             
         } else if (focusTabIdx == 2) {
             
@@ -1378,7 +1427,7 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             
             //cell.delegate = self
             
-            let row: TeamMemberTable = items[indexPath.row]
+            let row: TeamMemberTable = filterItems[indexPath.row]
             cell.update(row: row, no: indexPath.row + 1)
             
             cell.setSelectedBackgroundColor()
