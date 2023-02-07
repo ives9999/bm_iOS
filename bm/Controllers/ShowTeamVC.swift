@@ -288,6 +288,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var teamMemberTotalPage: Int = 0
     var leaveCount: Int = 0
     var teamMemberToken: String? = nil
+    var countTaps: [TapLabel] = [TapLabel]()
     
     var nextDate: String = ""
     var nextDateWeek: String = ""
@@ -330,14 +331,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         //initIntroduce()
         //initTeamMember()
         
-//        let totalTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(totalPressed(_:)))
-//        teamMemberTotalLbl.addGestureRecognizer(totalTR)
-        
-//        let playTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(playPressed(_:)))
-//        teamMemberPlayLbl.addGestureRecognizer(playTR)
-//        
-//        let leaveTR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(leavePressed(_:)))
-//        teamMemberLeaveLbl.addGestureRecognizer(leaveTR)
+        countTaps.append(contentsOf: [teamMemberTotalLbl, teamMemberPlayLbl, teamMemberLeaveLbl])
 
         refresh(TeamTable.self)
     }
@@ -986,43 +980,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 
         })
     }
-    
-    func totalPressed() {
-        teamMemberTotalLbl.toggle()
-        teamMemberPlayLbl.toggle()
-        teamMemberLeaveLbl.toggle()
-        
-        filterItems = items
-        introduceTableView.reloadData()
-    }
-    
-    func playPressed() {
-        teamMemberTotalLbl.toggle()
-        teamMemberPlayLbl.toggle()
-        teamMemberLeaveLbl.toggle()
-        
-        filterItems.removeAll()
-        for item in items {
-            if !item.isLeave {
-                filterItems.append(item)
-            }
-        }
-        introduceTableView.reloadData()
-    }
-    
-    func leavePressed() {
-        teamMemberTotalLbl.toggle()
-        teamMemberPlayLbl.toggle()
-        teamMemberLeaveLbl.toggle()
-        
-        filterItems.removeAll()
-        for item in items {
-            if item.isLeave {
-                filterItems.append(item)
-            }
-        }
-        introduceTableView.reloadData()
-    }
 }
 
 /////////////////  team member leave start /////////////////////////////
@@ -1626,12 +1583,28 @@ extension ShowTeamVC: LikeViewDelegate {
 
 extension ShowTeamVC: TapLabelDelegate {
     func tapPressed(_ idx: Int) {
-        if (idx == 0) {
-            totalPressed()
-        } else if (idx == 1) {
-            playPressed()
-        } else if (idx == 2) {
-            leavePressed()
+        for (i, tap) in countTaps.enumerated() {
+            (i == idx) ? tap.on() : tap.off()
         }
+        
+        filterItems.removeAll()
+        if (idx == 0) {
+            filterItems = items
+        } else if (idx == 1) {
+            for item in items {
+                if !item.isLeave {
+                    filterItems.append(item)
+                }
+            }
+        } else if (idx == 2) {
+            for item in items {
+                if item.isLeave {
+                    filterItems.append(item)
+                }
+            }
+        }
+        
+        introduceTableView.reloadData()
+        
     }
 }
