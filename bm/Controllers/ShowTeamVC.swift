@@ -1591,17 +1591,15 @@ extension ShowTeamVC: TapLabelDelegate {
         if (idx == 0) {
             filterItems = items
         } else if (idx == 1) {
-            for item in items {
-                if !item.isLeave {
-                    filterItems.append(item)
-                }
-            }
+            
+            filterItems = items.filter { !$0.isLeave }
+//            for item in items {
+//                if !item.isLeave {
+//                    filterItems.append(item)
+//                }
+//            }
         } else if (idx == 2) {
-            for item in items {
-                if item.isLeave {
-                    filterItems.append(item)
-                }
-            }
+            filterItems = items.filter { $0.isLeave }
         }
         
         introduceTableView.reloadData()
