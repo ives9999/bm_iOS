@@ -73,6 +73,7 @@ class ShowTop2: UIView {
         self.prevBtn.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(12)
+            make.width.height.equalTo(24)
         }
     }
     
