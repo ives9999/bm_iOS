@@ -784,7 +784,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             if success {
                 
                 self.jsonData = OrderService.instance.jsonData
-                //print(self.jsonData?.prettyPrintedJSONString)
+                //self.jsonData?.prettyPrintedJSONString
                 //print(self.jsonData.)
                 do {
                     if (self.jsonData != nil) {

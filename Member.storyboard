@@ -113,7 +113,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登入" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CP0-Qd-R4O">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lND-d7-C7w">
@@ -122,13 +122,13 @@
                                             <constraint firstAttribute="height" constant="18" id="WVg-nz-IvE"/>
                                             <constraint firstAttribute="width" constant="24" id="ZKP-wB-iSM"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="j9P-cA-JMi" eventType="touchUpInside" id="LFC-Iw-rVE"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="lND-d7-C7w" firstAttribute="leading" secondItem="QQl-Cf-5EQ" secondAttribute="leading" constant="12" id="2P1-LF-SQZ"/>
                                     <constraint firstItem="CP0-Qd-R4O" firstAttribute="centerX" secondItem="QQl-Cf-5EQ" secondAttribute="centerX" id="45u-Gu-8Xg"/>
@@ -236,7 +236,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="認證" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwD-jK-3i4">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NHD-sb-64G">
@@ -245,13 +245,13 @@
                                             <constraint firstAttribute="width" constant="24" id="8al-Uk-K5J"/>
                                             <constraint firstAttribute="height" constant="18" id="XIs-WI-eFH"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="XsO-Wn-cpI" eventType="touchUpInside" id="JeB-mk-bMm"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="Hzn-Cq-rjs"/>
                                     <constraint firstItem="NHD-sb-64G" firstAttribute="centerY" secondItem="hWd-K2-nZw" secondAttribute="centerY" id="M9M-RY-GWW"/>
@@ -368,7 +368,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="忘記密碼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="11X-Jp-huJ">
                                         <rect key="frame" x="168.5" y="18.5" width="77" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9XQ-tK-w3c">
@@ -377,13 +377,13 @@
                                             <constraint firstAttribute="height" constant="18" id="L2s-BF-kr5"/>
                                             <constraint firstAttribute="width" constant="24" id="R1d-Lu-ld8"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="trT-Qb-e9n" eventType="touchUpInside" id="r4Y-hJ-lSX"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="11X-Jp-huJ" firstAttribute="centerX" secondItem="5FF-VX-gI0" secondAttribute="centerX" id="0Cx-gJ-FFu"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="Dkv-R5-PBJ"/>
@@ -440,7 +440,7 @@
                                             <constraint firstAttribute="height" constant="18" id="CsC-aQ-Uhh"/>
                                             <constraint firstAttribute="width" constant="24" id="y53-mt-rLS"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="Fdb-fp-XbD" eventType="touchUpInside" id="HOW-il-htJ"/>
                                         </connections>
@@ -448,11 +448,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r4c-pR-JSU">
                                         <rect key="frame" x="168.5" y="18.5" width="77" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="F2q-1v-cXc" firstAttribute="centerY" secondItem="6T3-zc-5ik" secondAttribute="centerY" id="3uC-T8-PEw"/>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="64" id="4nn-6f-Wad"/>
@@ -503,11 +503,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="會員" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnK-P8-m6G">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="LnK-P8-m6G" firstAttribute="centerY" secondItem="wjB-Rp-kZH" secondAttribute="centerY" id="lKz-la-a0l"/>
                                     <constraint firstAttribute="height" constant="64" id="oAR-Os-MVK"/>
@@ -690,7 +690,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="報名列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2X-RC-B7U">
                                         <rect key="frame" x="169" y="19" width="76.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F0b-1U-FSe">
@@ -699,13 +699,13 @@
                                             <constraint firstAttribute="height" constant="18" id="0Cr-Db-KOa"/>
                                             <constraint firstAttribute="width" constant="24" id="BCQ-Tz-88H"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="kfU-PJ-07b" eventType="touchUpInside" id="ND7-b9-6nR"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="q2X-RC-B7U" firstAttribute="centerX" secondItem="F0k-9h-EAM" secondAttribute="centerX" id="5c7-l5-pgr"/>
                                     <constraint firstItem="q2X-RC-B7U" firstAttribute="centerY" secondItem="F0k-9h-EAM" secondAttribute="centerY" id="GLi-MN-vhk"/>
@@ -853,7 +853,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5zu-d3-D1F">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G8W-zv-hbe">
@@ -884,7 +884,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="7vk-7U-Hoc"/>
                                     <constraint firstItem="G8W-zv-hbe" firstAttribute="centerY" secondItem="3Jo-PK-ITV" secondAttribute="centerY" id="9GX-Gl-a7X"/>
@@ -1476,7 +1476,7 @@
                                             <constraint firstAttribute="width" constant="33" id="48A-Yk-H0z"/>
                                             <constraint firstAttribute="height" constant="26" id="VJh-sW-3KS"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prev1" destination="44A-2y-PC4" eventType="touchUpInside" id="fa8-bP-yux"/>
                                             <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="Epm-Sq-ewP"/>
@@ -1487,11 +1487,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊報名管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfA-WB-iqx">
                                         <rect key="frame" x="149.5" y="18.5" width="115" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="EOt-G8-Vh8"/>
                                     <constraint firstItem="XSz-CD-Zs7" firstAttribute="leading" secondItem="JYi-iw-cqu" secondAttribute="leading" constant="12" id="S9e-sc-lfN"/>
@@ -1544,7 +1544,7 @@
                                             <constraint firstAttribute="width" constant="33" id="mPb-kP-wdg"/>
                                             <constraint firstAttribute="height" constant="26" id="yf5-h9-qV3"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="Xjz-Rc-OSs"/>
                                         </connections>
@@ -1552,11 +1552,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="註冊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF3-ek-a6f">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="uF3-ek-a6f" firstAttribute="centerX" secondItem="E7b-Fd-wkA" secondAttribute="centerX" id="NP7-fj-hBn"/>
                                     <constraint firstItem="2Sj-qT-ZQc" firstAttribute="leading" secondItem="E7b-Fd-wkA" secondAttribute="leading" constant="12" id="Z97-3e-afS"/>
@@ -1698,7 +1698,7 @@
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="ONY-4Z-cJT"/>
                                             <constraint firstAttribute="height" constant="18" id="ong-xf-g5R"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="M4V-sg-RS1" eventType="touchUpInside" id="4vS-sB-NGs"/>
                                         </connections>
@@ -1706,11 +1706,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="購物車" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ocp-dd-sBn">
                                         <rect key="frame" x="178.5" y="19" width="57.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="G14-Mz-rsF"/>
                                     <constraint firstAttribute="height" constant="64" id="G9H-aO-csK"/>
@@ -1813,7 +1813,7 @@
                                             <constraint firstAttribute="width" constant="24" id="h7C-gr-eCg"/>
                                             <constraint firstAttribute="height" constant="18" id="lu5-e1-O1H"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="C62-n2-UAy" eventType="touchUpInside" id="DMw-Ug-ulG"/>
                                         </connections>
@@ -1821,11 +1821,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="訂單" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zx9-cY-3b6">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="FVv-au-Oqi" firstAttribute="leading" secondItem="3a1-ev-dLH" secondAttribute="leading" constant="12" id="5Q4-dh-3PJ"/>
                                     <constraint firstAttribute="height" constant="64" id="Ck2-zR-jhx"/>
@@ -1938,7 +1938,7 @@
                                             <constraint firstAttribute="width" constant="33" id="7pl-TO-gk7"/>
                                             <constraint firstAttribute="height" constant="26" id="dmF-8K-Mm4"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prev1" destination="44A-2y-PC4" eventType="touchUpInside" id="b5d-Bc-fBl"/>
                                             <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="qOR-qE-Kzy"/>
@@ -1947,11 +1947,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="申請球隊管理權" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53X-OK-S7l">
                                         <rect key="frame" x="140.5" y="19" width="133.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="53X-OK-S7l" firstAttribute="centerX" secondItem="iHb-8X-n1g" secondAttribute="centerX" id="Xwy-JZ-q1u"/>
                                     <constraint firstItem="Qso-QW-aki" firstAttribute="leading" secondItem="iHb-8X-n1g" secondAttribute="leading" constant="12" id="ZTn-kV-9Ah"/>
@@ -2378,7 +2378,7 @@
                                             <constraint firstAttribute="width" constant="33" id="5zt-wX-GzI"/>
                                             <constraint firstAttribute="height" constant="26" id="u7Y-cH-ZUg"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prev1" destination="44A-2y-PC4" eventType="touchUpInside" id="eoc-fI-Y8n"/>
                                             <action selector="prevBtnPressed:" destination="CVQ-dr-AV6" eventType="touchUpInside" id="F0L-Wj-hmd"/>
@@ -2388,11 +2388,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊報名管理" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cnm-fW-ayH">
                                         <rect key="frame" x="149.5" y="18.5" width="115" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="A2r-rm-Hut"/>
                                     <constraint firstItem="v3F-3N-YhR" firstAttribute="leading" secondItem="Ae0-SH-4Jh" secondAttribute="leading" constant="12" id="XVR-pM-Cfe"/>
@@ -2525,13 +2525,10 @@
         <image name="member" width="25" height="25"/>
         <image name="menuProfileIcon" width="99" height="99"/>
         <image name="power" width="25" height="25"/>
-        <image name="prev_black" width="25" height="25"/>
+        <image name="prev" width="25" height="25"/>
         <image name="question" width="25" height="25"/>
         <image name="search" width="25" height="25"/>
         <image name="signin" width="25" height="25"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

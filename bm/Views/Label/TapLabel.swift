@@ -11,7 +11,7 @@ import UIKit
 class TapLabel: SuperLabel {
     
     let defaultPadding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
-    var isFocus: Bool = false
+    var isOn: Bool = false
     var delegate: TapLabelDelegate? = nil
     
     required init(coder aDecoder: NSCoder) {
@@ -38,25 +38,32 @@ class TapLabel: SuperLabel {
     }
 
     func toggle() {
-        self.isFocus = !self.isFocus
-        self.isFocus ? self.on() : self.off()
+        self.isOn = !self.isOn
+        self.isOn ? self.on() : self.off()
     }
     
     func on() {
         self.backgroundColor = UIColor(MY_GREEN)
         self.textColor = UIColor(MY_BLACK)
         self.corner(3)
+        
+        self.isOn = true
     }
     
     func off() {
         self.backgroundColor = UIColor.clear
         self.textColor = UIColor(MY_WHITE)
         self.corner(0)
+        
+        self.isOn = false
     }
     
     @objc func pressed(_ sender: UITapGestureRecognizer) {
-        if let n = sender.view as? TapLabel {
-            delegate?.tapPressed(n.tag)
+        if (!isOn) {
+            if let n = sender.view as? TapLabel {
+                isOn = !isOn
+                delegate?.tapPressed(n.tag)
+            }
         }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -26,7 +26,7 @@
                                             <constraint firstAttribute="height" constant="26" id="4Uj-y4-Qy1"/>
                                             <constraint firstAttribute="width" constant="33" id="cAo-oO-oVS"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="fZf-Fb-4DO" eventType="touchUpInside" id="o7x-yd-SyD"/>
                                         </connections>
@@ -34,11 +34,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cHN-BZ-oKv">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="cHN-BZ-oKv" firstAttribute="centerY" secondItem="4i0-LR-Nzf" secondAttribute="centerY" id="5JY-jr-nJd"/>
                                     <constraint firstItem="cHN-BZ-oKv" firstAttribute="centerX" secondItem="4i0-LR-Nzf" secondAttribute="centerX" id="KvG-MJ-SMX"/>
@@ -120,11 +120,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSl-Mb-3BG">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="xCe-Ce-Q9N" firstAttribute="centerY" secondItem="yZ0-g4-hZ8" secondAttribute="centerY" id="0Z9-OF-3la"/>
                                     <constraint firstItem="HSl-Mb-3BG" firstAttribute="centerX" secondItem="yZ0-g4-hZ8" secondAttribute="centerX" id="CyQ-zm-2lB"/>
@@ -165,7 +165,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.73681992289999998" green="0.85881477589999999" blue="0.27035832409999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="Iba-Pw-pJn" firstAttribute="centerX" secondItem="Q8w-Js-ba1" secondAttribute="centerX" id="AzH-Em-YLs"/>
                                     <constraint firstItem="Iba-Pw-pJn" firstAttribute="centerY" secondItem="Q8w-Js-ba1" secondAttribute="centerY" id="Sdj-To-vUY"/>
@@ -482,7 +482,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgG-zi-T3t">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DTa-yo-007">
@@ -501,7 +501,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="UgG-zi-T3t" firstAttribute="centerX" secondItem="hFe-kJ-soy" secondAttribute="centerX" id="A03-Oz-peE"/>
                                     <constraint firstAttribute="height" constant="64" id="ANV-ZS-Bcb"/>
@@ -756,11 +756,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tSg-Vh-SKn">
                                         <rect key="frame" x="178" y="18.5" width="58" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="M2i-KM-ifL" firstAttribute="centerY" secondItem="7yj-ZN-pUB" secondAttribute="centerY" id="Qg4-cv-QfM"/>
                                     <constraint firstAttribute="height" constant="64" id="Uz0-57-667"/>
@@ -888,11 +888,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="時刻表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfh-Wl-Z80">
                                         <rect key="frame" x="178.5" y="19" width="57.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="tSK-EF-CS8" firstAttribute="centerY" secondItem="LJX-Oc-58U" secondAttribute="centerY" id="ORR-iu-hcR"/>
                                     <constraint firstItem="lfh-Wl-Z80" firstAttribute="centerX" secondItem="LJX-Oc-58U" secondAttribute="centerX" id="feX-Wj-VKk"/>
@@ -1081,7 +1081,7 @@
                                             <constraint firstAttribute="height" constant="26" id="e9P-2L-EkN"/>
                                             <constraint firstAttribute="width" constant="33" id="efg-TM-ESb"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="HrW-2D-NhE" eventType="touchUpInside" id="MgR-JV-t4f"/>
                                             <action selector="prevBtnPressed:" destination="HrW-2D-NhE" eventType="touchDown" id="Ohp-Ir-Ecl"/>
@@ -1090,11 +1090,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程管理列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2i-Yd-gYM">
                                         <rect key="frame" x="149.5" y="18.5" width="115" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="64" id="B4U-g0-QTS"/>
                                     <constraint firstItem="qft-NP-yrC" firstAttribute="centerY" secondItem="Ngt-cj-eIT" secondAttribute="centerY" id="K9a-4x-kOk"/>
@@ -1150,7 +1150,7 @@
                                             <constraint firstAttribute="height" constant="26" id="Vss-Qp-pDs"/>
                                             <constraint firstAttribute="width" constant="33" id="gaY-pd-mAA"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="FL6-tC-Cb5" eventType="touchUpInside" id="yGI-2F-G2P"/>
                                         </connections>
@@ -1158,11 +1158,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="課程" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ITK-WY-s8g">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="5Id-JC-YZF"/>
                                     <constraint firstItem="ITK-WY-s8g" firstAttribute="centerX" secondItem="0Di-Ps-mff" secondAttribute="centerX" id="LBD-h3-bzg"/>
@@ -1375,7 +1375,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fYu-zk-ZTm"/>
+        <segue reference="Uov-c4-hVF"/>
         <segue reference="x4H-6S-8nE"/>
         <segue reference="NO9-v4-wOp"/>
         <segue reference="A4Z-Qs-ID8"/>
@@ -1388,10 +1388,6 @@
         <image name="nophoto" width="900" height="514"/>
         <image name="plus" width="25" height="25"/>
         <image name="prev" width="25" height="25"/>
-        <image name="prev_black" width="25" height="25"/>
-        <systemColor name="darkTextColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

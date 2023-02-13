@@ -34,11 +34,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSl-Mb-3BG">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="xCe-Ce-Q9N" firstAttribute="centerY" secondItem="yZ0-g4-hZ8" secondAttribute="centerY" id="0Z9-OF-3la"/>
                                     <constraint firstItem="HSl-Mb-3BG" firstAttribute="centerX" secondItem="yZ0-g4-hZ8" secondAttribute="centerX" id="CyQ-zm-2lB"/>
@@ -231,7 +231,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="Ef8-WM-OSR"/>
                                     <constraint firstAttribute="height" constant="50" id="d9X-KL-5lt"/>
@@ -459,7 +459,7 @@
                                         <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="2LX-hb-De0"/>
                                     <constraint firstItem="dGu-QZ-rco" firstAttribute="centerY" secondItem="ffc-Eg-EnS" secondAttribute="centerY" id="7FS-AS-IgQ"/>
@@ -531,7 +531,7 @@
                                             <constraint firstAttribute="width" constant="33" id="9n9-C1-Esh"/>
                                             <constraint firstAttribute="height" constant="26" id="w4M-PG-Wng"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="hk6-fe-bLP" eventType="touchUpInside" id="LU4-MT-nSg"/>
                                         </connections>
@@ -539,11 +539,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGB-uY-eI7">
                                         <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="uVU-Kd-flA" firstAttribute="centerY" secondItem="h8g-qX-Kzm" secondAttribute="centerY" id="97j-Vl-5bn"/>
                                     <constraint firstItem="uVU-Kd-flA" firstAttribute="leading" secondItem="h8g-qX-Kzm" secondAttribute="leading" constant="12" id="Q3P-qi-Kro"/>
@@ -601,7 +601,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="程度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGh-UR-MaI">
                                         <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZ1-qb-9Lf">
@@ -610,13 +610,13 @@
                                             <constraint firstAttribute="height" constant="18" id="Dfo-PA-QYf"/>
                                             <constraint firstAttribute="width" constant="24" id="pmb-AU-yUa"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="back" destination="8Wp-Vh-56J" eventType="touchUpInside" id="nbc-jR-aGV"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="64" id="5Sz-wJ-gwn"/>
                                     <constraint firstItem="bGh-UR-MaI" firstAttribute="centerX" secondItem="afF-TY-Tdb" secondAttribute="centerX" id="7dP-p6-H25"/>
@@ -666,7 +666,7 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="GOc-sN-BTe"/>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="GTp-WX-ce9"/>
@@ -772,7 +772,7 @@
                                             <constraint firstAttribute="width" constant="33" id="1ds-hH-fUg"/>
                                             <constraint firstAttribute="height" constant="26" id="4LQ-PV-NAk"/>
                                         </constraints>
-                                        <state key="normal" image="prev_black"/>
+                                        <state key="normal" image="prev"/>
                                         <connections>
                                             <action selector="prevBtnPressed:" destination="cmN-SR-asl" eventType="touchDown" id="SYl-fu-8iT"/>
                                             <action selector="prevBtnPressed:" destination="cmN-SR-asl" eventType="touchUpInside" id="wfs-Ci-CqD"/>
@@ -781,11 +781,11 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊管理列表" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urW-sN-me0">
                                         <rect key="frame" x="149.5" y="18.5" width="115" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.65098039220000004" green="0.85098039219999999" blue="0.01176470588" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="hZ4-9O-EyN" firstAttribute="leading" secondItem="PtQ-lK-n7F" secondAttribute="leading" constant="12" id="MHg-Lg-UxT"/>
                                     <constraint firstItem="urW-sN-me0" firstAttribute="centerX" secondItem="PtQ-lK-n7F" secondAttribute="centerX" id="Mht-zr-H5G"/>

@@ -41,7 +41,7 @@ class Top: UIView {
     func setTitle(title: String) {
         titleLbl.text = title
         titleLbl.setTextTitle()
-        titleLbl.textColor = UIColor(MY_BLACK)
+        //titleLbl.textColor = UIColor(MY_BLACK)
     }
     
     @IBAction func prevBtnPressed(_ sender: Any) {

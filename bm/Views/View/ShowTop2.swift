@@ -60,7 +60,8 @@ class ShowTop2: UIView {
         parent.addSubview(self)
         self.snp.makeConstraints { make in
             make.top.equalTo(parent).offset(statusBarHeight)
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.height.equalTo(30)
         }
         
@@ -72,7 +73,7 @@ class ShowTop2: UIView {
         
         self.prevBtn.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.left.equalToSuperview().offset(12)
+            make.left.equalToSuperview()
             make.width.height.equalTo(24)
         }
     }

@@ -12,26 +12,33 @@ import SCLAlertView
 
 class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
-    var showTop: ShowTop2?
+    var showTop2: ShowTop2?
+    
+    var showTab2: ShowTab2 = {
+        let view: ShowTab2 = ShowTab2()
+        
+        return view
+    }()
     
     // tab
-    var topTagStackView: UIStackView = {
-        let view: UIStackView = UIStackView()
-        //view.backgroundColor = UIColor.gray
-        view.axis = NSLayoutConstraint.Axis.horizontal
-        view.distribution = UIStackView.Distribution.fillEqually
-        view.alignment = UIStackView.Alignment.center
-        view.spacing = 30
-        
-        return view
-    }()
+//    var topTagStackView: UIStackView = {
+//        let view: UIStackView = UIStackView()
+//        //view.backgroundColor = UIColor.gray
+//
+//        view.axis = NSLayoutConstraint.Axis.horizontal
+//        view.distribution = UIStackView.Distribution.fillEqually
+//        view.alignment = UIStackView.Alignment.center
+//        view.spacing = 30
+//
+//        return view
+//    }()
     
-    var tagLine: UIView = {
-        let view: UIView = UIView()
-        view.backgroundColor = UIColor("#616161")
-        
-        return view
-    }()
+//    var tagLine: UIView = {
+//        let view: UIView = UIView()
+//        view.backgroundColor = UIColor("#616161")
+//
+//        return view
+//    }()
     
     let button_width: CGFloat = 120
     var bottom_button_count: Int = 1
@@ -143,7 +150,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     let teamMemberTotalLbl: TapLabel = {
         let view: TapLabel = TapLabel()
-        view.isFocus = true
         view.tag = 0
         view.text = "16位"
         view.visibility = .invisible
@@ -153,7 +159,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     let teamMemberPlayLbl: TapLabel = {
         let view: TapLabel = TapLabel()
-        view.isFocus = false
         view.tag = 1
         view.text = "16位"
         view.visibility = .invisible
@@ -163,7 +168,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     let teamMemberLeaveLbl: TapLabel = {
         let view: TapLabel = TapLabel()
-        view.isFocus = false
         view.tag = 2
         view.text = "16位"
         
@@ -314,7 +318,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         initTop()
         initBottom()
         initTopTab()
-        
         initScrollView()
         
         introduceTableView.snp.makeConstraints { make in
@@ -322,6 +325,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
         introduceTableView.delegate = self
         introduceTableView.dataSource = self
+        
+        showTab2.delegate = self
         
         showLike2.delegate = self
         teamMemberTotalLbl.delegate = self
@@ -337,8 +342,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }
     
     func initTop() {
-        showTop = ShowTop2(delegate: self)
-        showTop!.setAnchor(parent: self.view)
+        showTop2 = ShowTop2(delegate: self)
+        showTop2!.setAnchor(parent: self.view)
     }
     
     func initBottom() {
@@ -349,25 +354,13 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }
     
     func initTopTab() {
-        initTopTagStackView()
-        initTopTap()
-    }
-    
-    func initTopTagStackView() {
         
-        self.view.addSubview(tagLine)
-        tagLine.snp.makeConstraints { make in
-            make.top.equalTo(showTop!.snp.bottom).offset(48)
-            make.height.equalTo(2)
-            make.horizontalEdges.equalToSuperview()
-        }
-        
-        self.view.addSubview(topTagStackView)
-        topTagStackView.snp.makeConstraints { make in
-            make.top.equalTo(showTop!.snp.bottom)
+        self.view.addSubview(showTab2)
+        showTab2.snp.makeConstraints { make in
+            make.top.equalTo(showTop2!.snp.bottom).offset(12)
             make.height.equalTo(50)
-            make.left.equalToSuperview().offset(25)
-            make.right.equalToSuperview().offset(-25)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             //make.horizontalEdges.equalToSuperview()
         }
     }
@@ -375,9 +368,11 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     private func initScrollView() {
         
         self.view.addSubview(scrollView)
+        //scrollView.backgroundColor = UIColor.red
         scrollView.snp.makeConstraints { make in
-            make.top.equalTo(tagLine.snp.bottom)
-            make.right.left.equalToSuperview()
+            make.top.equalTo(showTab2.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.bottom.equalTo(showBottom!.snp.top)
         }
     }
@@ -397,6 +392,9 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
         //featured.backgroundColor = UIColor.brown
         introduceStackView.addArrangedSubview(introduceTableView)
+        introduceTableView.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+        }
         
         introduceStackView.addArrangedSubview(spacer)
         spacer.snp.makeConstraints { make in
@@ -416,18 +414,19 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }
     
     private func initTeamMember() {
+        
         scrollView.addSubview(teamMemberStackView)
+        //teamMemberStackView.backgroundColor = UIColor.cyan
         teamMemberStackView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview().offset(12)
+            make.top.bottom.equalToSuperview()
             make.width.equalToSuperview()
         }
         
         //teamMemberAllContainer.backgroundColor = UIColor.blue
         teamMemberStackView.addArrangedSubview(teamMemberAllContainer)
         teamMemberAllContainer.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview()
+            make.top.equalToSuperview()
+            make.left.right.equalToSuperview()
             //make.height.equalTo(50)
         }
         
@@ -484,7 +483,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             teamMemberAllContainer.addSubview(showLike2)
             showLike2.snp.makeConstraints { make in
                 make.top.equalToSuperview()
-                make.right.equalToSuperview().offset(-12)
+                make.right.equalToSuperview()
                 make.width.equalTo(48)
                 make.height.equalTo(50)
             }
@@ -498,11 +497,9 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             make.height.equalTo(10)
         }
         
-
-        
         teamMemberStackView.addArrangedSubview(nextDateContainer)
         nextDateContainer.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
+            make.left.equalToSuperview()
             make.height.equalTo(30)
         }
 
@@ -521,7 +518,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         teamMemberStackView.addArrangedSubview(nextTimeContainer)
         nextTimeContainer.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
+            make.left.equalToSuperview()
             make.height.equalTo(30)
         }
 
@@ -547,12 +544,12 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         teamMemberStackView.addArrangedSubview(teamMemberListLbl)
         teamMemberListLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
+            make.left.equalToSuperview()
         }
         
         teamMemberStackView.addArrangedSubview(introduceTableView)
         introduceTableView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
+            make.left.right.equalToSuperview()
         }
     }
 
@@ -612,7 +609,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                                 self.setIntroduceData()
                                 self.setContentWeb()
                                 self.setLike()
-                                self.showTop!.setTitle(title: self.table!.name)
+                                self.showTop2!.setTitle(title: self.table!.name)
                                 self.introduceTableView.reloadData()
                                 
                                 self._tabPressed(self.focusTabIdx)
@@ -626,48 +623,48 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
     }
     
-    func initTopTap() {
-        
-        let count: Int = 3
-        let tab_width: Int = 80
-        
-        let padding: Int = (Int(screen_width) - count * tab_width) / (count+1)
-        
-        for (idx, topTab) in topTabs.enumerated() {
-            let x: Int = idx * tab_width + (idx + 1)*padding
-            let rect: CGRect = CGRect(x: x, y: 0, width: 80, height: 50)
-            
-            let tab = TabTop(frame: rect)
-            if let tmp: Int = topTab["tag"] as? Int {
-                tab.tag = tmp
-            }
-            
-            var icon: String = "like"
-            if let tmp: String = topTab["icon"] as? String {
-                icon = tmp
-            }
-            
-            var text: String = "喜歡"
-            if let tmp: String = topTab["text"] as? String {
-                text = tmp
-            }
-            
-            tab.setData(iconStr: icon, text: text)
-            
-            var isSelected: Bool = false
-            if let tmp: Bool = topTab["focus"] as? Bool {
-                isSelected = tmp
-            }
-            tab.isFocus(isSelected)
-            
-            let tabTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
-            tab.addGestureRecognizer(tabTap)
-            
-            topTabs[idx]["class"] = tab
-            
-            topTagStackView.addArrangedSubview(tab)
-        }
-    }
+//    func initTopTap() {
+//
+//        let count: Int = 3
+//        let tab_width: Int = 80
+//
+//        let padding: Int = (Int(screen_width) - count * tab_width) / (count+1)
+//
+//        for (idx, topTab) in topTabs.enumerated() {
+//            let x: Int = idx * tab_width + (idx + 1)*padding
+//            let rect: CGRect = CGRect(x: x, y: 0, width: 80, height: 50)
+//
+//            let tab = TabTop(frame: rect)
+//            if let tmp: Int = topTab["tag"] as? Int {
+//                tab.tag = tmp
+//            }
+//
+//            var icon: String = "like"
+//            if let tmp: String = topTab["icon"] as? String {
+//                icon = tmp
+//            }
+//
+//            var text: String = "喜歡"
+//            if let tmp: String = topTab["text"] as? String {
+//                text = tmp
+//            }
+//
+//            tab.setData(iconStr: icon, text: text)
+//
+//            var isSelected: Bool = false
+//            if let tmp: Bool = topTab["focus"] as? Bool {
+//                isSelected = tmp
+//            }
+//            tab.isFocus(isSelected)
+//
+//            let tabTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
+//            tab.addGestureRecognizer(tabTap)
+//
+//            topTabs[idx]["class"] = tab
+//
+//            //topTagStackView.addArrangedSubview(tab)
+//        }
+//    }
     
     override func like() {
         if (!Member.instance.isLoggedIn) {
@@ -858,21 +855,21 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
     }
 
-    @objc func tabPressed(sender: UITapGestureRecognizer) {
-                
-        if let idx: Int = sender.view?.tag {
-            //self._tabPressed(idx)
-            let selectedTag: [String: Any] = topTabs[idx]
-            if let focus: Bool = selectedTag["focus"] as? Bool {
-                //按了其他頁面的按鈕
-                if (!focus) {
-                    updateTabSelected(idx: idx)
-                    focusTabIdx = idx
-                    _tabPressed(idx)
-                }
-            }
-        }
-    }
+//    @objc func tabPressed(sender: UITapGestureRecognizer) {
+//
+//        if let idx: Int = sender.view?.tag {
+//            //self._tabPressed(idx)
+//            let selectedTag: [String: Any] = topTabs[idx]
+//            if let focus: Bool = selectedTag["focus"] as? Bool {
+//                //按了其他頁面的按鈕
+//                if (!focus) {
+//                    updateTabSelected(idx: idx)
+//                    focusTabIdx = idx
+//                    _tabPressed(idx)
+//                }
+//            }
+//        }
+//    }
     
     private func _tabPressed(_ idx: Int) {
         switch idx {
@@ -929,38 +926,38 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         teamMemberStackView.removeFromSuperview()
     }
     
-    private func updateTabSelected(idx: Int) {
-        
-        // set user click which tag, set tag selected is true
-        for (i, var topTab) in topTabs.enumerated() {
-            
-            if (i == idx) {
-                topTab["focus"] = true
-            } else {
-                topTab["focus"] = false
-            }
-            topTabs[i] = topTab
-        }
-        setTabSelectedStyle()
-    }
-    
-    private func setTabSelectedStyle() {
-        
-        for topTab in topTabs {
-            
-            if (topTab.keyExist(key: "class")) {
-                
-                let tab: TabTop = (topTab["class"] as? TabTop)!
-                
-                var isFocus: Bool = false
-                if let tmp: Bool = topTab["focus"] as? Bool {
-                    isFocus = tmp
-                }
-                
-                tab.isFocus(isFocus)
-            }
-        }
-    }
+//    private func updateTabSelected(idx: Int) {
+//
+//        // set user click which tag, set tag selected is true
+//        for (i, var topTab) in topTabs.enumerated() {
+//
+//            if (i == idx) {
+//                topTab["focus"] = true
+//            } else {
+//                topTab["focus"] = false
+//            }
+//            topTabs[i] = topTab
+//        }
+//        setTabSelectedStyle()
+//    }
+//
+//    private func setTabSelectedStyle() {
+//
+//        for topTab in topTabs {
+//
+//            if (topTab.keyExist(key: "class")) {
+//
+//                let tab: TabTop = (topTab["class"] as? TabTop)!
+//
+//                var isFocus: Bool = false
+//                if let tmp: Bool = topTab["focus"] as? Bool {
+//                    isFocus = tmp
+//                }
+//
+//                tab.isFocus(isFocus)
+//            }
+//        }
+//    }
     
     override func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         
@@ -1006,7 +1003,7 @@ extension ShowTeamVC {
         let _rows: [TeamMemberTable] = self.jsonToTable2(jsonData: jsonData)
         if (_rows.count == 0) {
             self.teamMemberVisible(.invisible)
-            _ = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
+            _ = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop2!)
         } else {
             if (teamMemberPage == 1) {
                 items = [TeamMemberTable]()
@@ -1035,7 +1032,6 @@ extension ShowTeamVC {
             self.nextDateLbl.text = "\(nextDate)" + " ( " + nextDateWeek + " )"
             self.nextTimeLbl.text = "\(play_start) ~ \(play_end)"
             
-            teamMemberTotalLbl.isFocus = true
             teamMemberTotalLbl.on()
             
             setTeamMemberBottom()
@@ -1593,16 +1589,18 @@ extension ShowTeamVC: TapLabelDelegate {
         } else if (idx == 1) {
             
             filterItems = items.filter { !$0.isLeave }
-//            for item in items {
-//                if !item.isLeave {
-//                    filterItems.append(item)
-//                }
-//            }
         } else if (idx == 2) {
             filterItems = items.filter { $0.isLeave }
         }
         
         introduceTableView.reloadData()
         
+    }
+}
+
+extension ShowTeamVC: ShowTab2Delegate {
+    func tabPressed(_ idx: Int) {
+        focusTabIdx = idx
+        _tabPressed(idx)
     }
 }
