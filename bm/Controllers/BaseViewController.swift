@@ -234,7 +234,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
         
         //search default is hidden set in viewDidLoad
         topView.addSubview(searchBtn)
-        searchBtn.setImage(UIImage(named: "search1"), for: .normal)
+        searchBtn.setImage(UIImage(named: "search_w"), for: .normal)
         
         searchBtn.translatesAutoresizingMaskIntoConstraints = false
         searchBtn.widthAnchor.constraint(equalToConstant: 36).isActive = true

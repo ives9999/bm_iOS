@@ -409,16 +409,21 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable, ManagerTeamMemberVC> {
     
     let noLbl: SuperLabel = {
         let view = SuperLabel()
-        view.textColor = UIColor(MY_WHITE)
         view.setTextGeneral()
         view.text = "100."
         
         return view
     }()
     
+    let avatarIV: Avatar = {
+        let view = Avatar()
+        return view
+    }()
+    
+    let dataContainer: UIView = UIView()
+    
     let nameLbl: SuperLabel = {
         let view = SuperLabel()
-        view.textColor = UIColor(MY_WHITE)
         view.setTextGeneral()
         view.text = "xxx"
         
@@ -439,6 +444,12 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable, ManagerTeamMemberVC> {
         view.image = UIImage(named: "delete")
         view.isUserInteractionEnabled = true
         
+        return view
+    }()
+    
+    let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.2)
         return view
     }()
     
@@ -474,21 +485,37 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable, ManagerTeamMemberVC> {
         
         self.contentView.addSubview(noLbl)
         noLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
+            make.left.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.top.equalToSuperview().offset(16)
         }
         
-        self.contentView.addSubview(nameLbl)
-        nameLbl.snp.makeConstraints { make in
+        self.contentView.addSubview(avatarIV)
+        avatarIV.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(12)
             make.left.equalTo(noLbl.snp.right).offset(12)
+            make.width.height.equalTo(48)
+            make.centerY.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-12)
+        }
+        
+        self.contentView.addSubview(dataContainer)
+        //dataContainer.backgroundColor = UIColor.blue
+        dataContainer.snp.makeConstraints { make in
+            make.left.equalTo(avatarIV.snp.right).offset(18)
+            make.top.equalToSuperview().offset(3)
             make.centerY.equalToSuperview()
         }
         
-        self.contentView.addSubview(createdAtLbl)
+        self.dataContainer.addSubview(nameLbl)
+        nameLbl.snp.makeConstraints { make in
+            make.top.equalTo(avatarIV.snp.top).offset(4)
+            make.left.equalToSuperview()
+        }
+        
+        self.dataContainer.addSubview(createdAtLbl)
         createdAtLbl.snp.makeConstraints { make in
-            make.left.equalTo(nameLbl.snp.right).offset(15)
-            make.centerY.equalToSuperview()
+            make.left.equalToSuperview()
+            make.bottom.equalTo(avatarIV.snp.bottom).offset(-4)
         }
         
         self.contentView.addSubview(deleteIV)
@@ -498,10 +525,20 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable, ManagerTeamMemberVC> {
             make.width.equalTo(25)
             make.height.equalTo(25)
         }
+        
+        self.contentView.addSubview(separator)
+        separator.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(1)
+        }
     }
     
     override func configureSubViews() {
         noLbl.text = String(item!.no) + "."
+        
+        if item != nil && item!.memberTable != nil {
+            self.avatarIV.path(item!.memberTable!.featured_path)
+        }
         nameLbl.text = (item != nil && item!.memberTable != nil) ? item!.memberTable!.nickname : ""
         createdAtLbl.text = item?.created_at.noSec()
     }

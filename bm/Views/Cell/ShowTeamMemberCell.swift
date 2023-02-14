@@ -34,7 +34,7 @@ class ShowTeamMemberCell: UITableViewCell {
         return view
     }()
     
-    let createAtLbl: SuperLabel = {
+    let createdAtLbl: SuperLabel = {
         let view = SuperLabel()
         view.textColor = UIColor(hex: "#ffffff", alpha: 0.6)
         view.setTextSize(12)
@@ -119,8 +119,8 @@ class ShowTeamMemberCell: UITableViewCell {
             make.left.equalToSuperview()
         }
         
-        self.dataContainer.addSubview(createAtLbl)
-        createAtLbl.snp.makeConstraints { make in
+        self.dataContainer.addSubview(createdAtLbl)
+        createdAtLbl.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.bottom.equalTo(avatarIV.snp.bottom).offset(-4)
         }
@@ -159,7 +159,7 @@ class ShowTeamMemberCell: UITableViewCell {
             nickname = row.memberTable!.nickname
         }
         self.nameLbl.text = nickname
-        self.createAtLbl.text = row.created_at.noSec()
+        self.createdAtLbl.text = row.created_at.noSec()
         
         self.leaveLbl.visibility = (row.isLeave) ? .visible : .invisible
         if self.leaveLbl.visibility == .visible {

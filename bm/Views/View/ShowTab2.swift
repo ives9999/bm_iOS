@@ -10,47 +10,57 @@ import UIKit
 
 class ShowTab2: UIView {
     
+    //外圍框線的寬度
     let borderWidth: CGFloat = 1
+    
+    //框線的透明度，做出ui的效果
     let borderAlpha: CGFloat = 0.8
+    
+    //圓角的大小值
     let cornerRadius: CGFloat = 8
     
+    //螢幕寬度，有了螢幕寬度才能計算出每個tab的寬度
     var screenWidth: CGFloat = 0
-    let margin: CGFloat = 25
     
+    //跟螢幕邊界的間隔值
+    let margin: CGFloat = 20
+    
+    //代理人，按下每一個tab時，要接收事件的代理人
     var delegate: ShowTab2Delegate?
     
+    //存放所有tab view的陣列
     var views: [UIView] = [UIView]()
     
+    //記錄目前按下的事那一個tab
     var onIdx: Int = 0
     
+    //宣告三個tab
     var view1: UIView = {
         let view: UIView = UIView()
-        //view.backgroundColor = UIColor(MY_GREEN)
         view.tag = 0
         view.layer.cornerRadius = 8
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
-        //view.isUserInteractionEnabled = true
+        
         return view
     }()
     
     var view2: UIView = {
         let view: UIView = UIView()
         view.tag = 1
-        //view.backgroundColor = UIColor.red
-        //view.isUserInteractionEnabled = true
+    
         return view
     }()
     
     var view3: UIView = {
         let view: UIView = UIView()
         view.tag = 2
-        //view.backgroundColor = UIColor.blue
         view.layer.cornerRadius = 8
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
-        //view.isUserInteractionEnabled = true
+        
         return view
     }()
     
+    //三個tab內的文字
     var label1: SuperLabel = {
         let view: SuperLabel = SuperLabel()
         view.text = "介紹"
@@ -89,6 +99,7 @@ class ShowTab2: UIView {
     
     func commonInit() {
         
+        //設定外框的參數
         self.layer.borderWidth = borderWidth
         self.layer.borderColor = UIColor(MY_WHITE).withAlphaComponent(borderAlpha).cgColor
         self.layer.cornerRadius = cornerRadius
@@ -96,9 +107,14 @@ class ShowTab2: UIView {
         views.append(contentsOf: [view1, view2, view3])
         
         self.screenWidth = UIScreen.main.bounds.width
+        
+        //設定定位
         self.anchor()
+        
+        //預設顯示的tab是第一個
         self.on(view1)
         
+        //設定每一個tab要執行按下的函數
         let tap1 = UITapGestureRecognizer(target: self, action: #selector(pressed))
         view1.addGestureRecognizer(tap1)
         
@@ -110,7 +126,10 @@ class ShowTab2: UIView {
     }
     
     func anchor() {
-        let w: CGFloat = (screenWidth - margin*2) / 3
+        
+        //計算取得每一個tab的寬度
+        let w: CGFloat = ((screenWidth - margin*2) / 3).rounded()
+        
         self.addSubview(view1)
         view1.snp.makeConstraints { make in
             make.top.left.equalToSuperview().offset(borderWidth)
@@ -153,6 +172,7 @@ class ShowTab2: UIView {
         }
     }
     
+    //tab被點選時外觀的變化
     func on(_ view: UIView) {
         view.backgroundColor = UIColor(MY_GREEN)
         if let label: SuperLabel = view.subviews[0] as? SuperLabel {
@@ -160,6 +180,7 @@ class ShowTab2: UIView {
         }
     }
     
+    //tab失去被點選時外觀的變化
     func off(_ view: UIView) {
         view.backgroundColor = UIColor.clear
         if let label: SuperLabel = view.subviews[0] as? SuperLabel {
@@ -167,10 +188,17 @@ class ShowTab2: UIView {
         }
     }
     
+    //tab被點選時要執行的動作
     @objc func pressed(_ sender: UITapGestureRecognizer) {
+        
+        //要判斷按下的是否為目前已經被按下的tab，如果是的話就不執行任何動作，要不同的tab才會動作
+        
+        //先記錄舊的tab的索引值
         let oldIdx: Int = onIdx
         if let view: UIView = sender.view {
             onIdx = view.tag
+            
+            //如果是不同的tab才執行動作
             if (onIdx != oldIdx) {
                 for _view in views {
                     (_view == view) ? self.on(_view) : self.off(_view)
@@ -182,6 +210,7 @@ class ShowTab2: UIView {
     }
 }
 
+//代理者的protocol
 protocol ShowTab2Delegate {
     func tabPressed(_ idx: Int)
 }

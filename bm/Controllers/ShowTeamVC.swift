@@ -20,26 +20,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    // tab
-//    var topTagStackView: UIStackView = {
-//        let view: UIStackView = UIStackView()
-//        //view.backgroundColor = UIColor.gray
-//
-//        view.axis = NSLayoutConstraint.Axis.horizontal
-//        view.distribution = UIStackView.Distribution.fillEqually
-//        view.alignment = UIStackView.Alignment.center
-//        view.spacing = 30
-//
-//        return view
-//    }()
-    
-//    var tagLine: UIView = {
-//        let view: UIView = UIView()
-//        view.backgroundColor = UIColor("#616161")
-//
-//        return view
-//    }()
-    
     let button_width: CGFloat = 120
     var bottom_button_count: Int = 1
     var showBottom: ShowBottom2?
@@ -276,11 +256,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var isTempPlay: Bool = true
     var isLike: Bool = false
     
-    var topTabs: [[String: Any]] = [
-        ["key": "intrduce", "icon": "admin", "text": "介紹", "focus": true, "tag": 0, "class": ""],
-        ["key": "member", "icon": "team", "text": "隊員", "focus": false, "tag": 1, "class": ""],
-        ["key": "tempplay", "icon": "tempPlay", "text": "臨打", "focus": false, "tag": 2, "class": ""]
-    ]
     var focusTabIdx: Int = 0
     
     //team member
