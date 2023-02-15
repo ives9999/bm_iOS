@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ManagerTeamCell: List2Cell {
+class ManagerTeamCell1: List2Cell {
         
     @IBOutlet weak var editIcon: SuperButton!
     @IBOutlet weak var deleteIcon: SuperButton!

@@ -170,21 +170,21 @@ class MemberTeamListCell: BaseCell<TeamMemberTable, MemberTeamListVC> {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupView()
+        commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.setupView()
+        self.commonInit()
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupView()
+        commonInit()
     }
     
-    override func setupView() {
-        super.setupView()
+    override func commonInit() {
+        super.commonInit()
         setAnchor()
         
         //self.backgroundColor = UIColor.red

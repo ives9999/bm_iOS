@@ -15,7 +15,7 @@ class Avatar: UIImageView {
     }
 }
 
-class featured: UIImageView {
+class Featured: UIImageView {
     
     func path(_ url: String) {
         self.downloaded(from: url)

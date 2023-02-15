@@ -755,10 +755,10 @@
             </objects>
             <point key="canvasLocation" x="-1646" y="-3456"/>
         </scene>
-        <!--Manager TeamVC-->
+        <!--View Controller-->
         <scene sceneID="EUs-f0-ZuP">
             <objects>
-                <viewController storyboardIdentifier="toManagerTeam" id="cmN-SR-asl" customClass="ManagerTeamVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toManagerTeam" id="cmN-SR-asl" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cKd-TB-JXb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -460,28 +460,28 @@ class ManagerTeamMemberCell: BaseCell<TeamMemberTable, ManagerTeamMemberVC> {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupView()
+        self.commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.setupView()
+        self.commonInit()
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupView()
+        self.commonInit()
     }
     
-    override func setupView() {
-        super.setupView()
-        setAnchor()
+    override func commonInit() {
+        super.commonInit()
+        anchor()
         
         let deleteGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteThis))
         deleteIV.addGestureRecognizer(deleteGR)
     }
     
-    func setAnchor() {
+    func anchor() {
         
         self.contentView.addSubview(noLbl)
         noLbl.snp.makeConstraints { make in

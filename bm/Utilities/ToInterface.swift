@@ -237,19 +237,25 @@ extension BaseViewController {
     
     //manager_token is member token
     func toManagerTeam(manager_token: String) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Team", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "toManagerTeam")  as? ManagerTeamVC {
-                viewController.manager_token = manager_token
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerTeam") as! ManagerTeamVC
-            viewController.manager_token = manager_token
-            viewController.modalPresentationStyle = .fullScreen
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
+        
+        let v: ManagerTeamVC = ManagerTeamVC()
+        v.manager_token = manager_token
+        v.modalPresentationStyle = .fullScreen
+        show(v, sender: nil)
+        
+//        if #available(iOS 13.0, *) {
+//            let storyboard = UIStoryboard(name: "Team", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: "toManagerTeam")  as? ManagerTeamVC {
+//                viewController.manager_token = manager_token
+//                viewController.modalPresentationStyle = .fullScreen
+//                show(viewController, sender: nil)
+//            }
+//        } else {
+//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toManagerTeam") as! ManagerTeamVC
+//            viewController.manager_token = manager_token
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.navigationController!.pushViewController(viewController, animated: true)
+//        }
     }
     
 //    func toManagerTeamSignup(able_type: String, able_token: String, able_title: String) {

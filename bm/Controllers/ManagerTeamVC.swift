@@ -9,142 +9,162 @@
 import Foundation
 import SCLAlertView
 
-class ManagerTeamVC: ManagerVC {
+class ManagerTeamVC: BaseViewController {
+    
+    var showTop2: ShowTop2?
+    
+    var showTab2: ShowTab2 = {
+        let view: ShowTab2 = ShowTab2()
+        
+        return view
+    }()
+    
+    lazy var tableView2: MyTable2VC<ManagerTeamCell, TeamTable, ManagerTeamVC> = {
+        let tableView2 = MyTable2VC<ManagerTeamCell, TeamTable, ManagerTeamVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer(page:), myDelegate: self)
+        
+        return tableView2
+    }()
+    
+    var rows: [TeamTable] = [TeamTable]()
+    var infoLbl: SuperLabel?
     
     var mysTable: TeamsTable?
+    var manager_token: String? = nil
     
-    var isReload: Bool = true
+    //var isReload: Bool = true
 
     override func viewDidLoad() {
         
-        myTablView = tableView
         able_type = "team"
         dataService = TeamService.instance
         
+        if (manager_token != nil) {
+            params["manager_token"] = manager_token!
+        }
+        //必須指定status，預設是只會出現上線的
+        params["status"] = "online,offline"
+        
         super.viewDidLoad()
         
-        let cellNib = UINib(nibName: "ManagerTeamCell", bundle: nil)
-        tableView.register(cellNib, forCellReuseIdentifier: "cell")
+        showTop2 = ShowTop2(delegate: self)
+        showTop2!.setAnchor(parent: self.view)
+        showTop2!.setTitle(title: "我的球隊")
         
+        anchor()
         refresh()
     }
     
-    override func genericTable() {
+    func anchor() {
         
-        do {
-            if (jsonData != nil) {
-                mysTable = try JSONDecoder().decode(TeamsTable.self, from: jsonData!)
-            } else {
-                warning("無法從伺服器取得正確的json資料，請洽管理員")
-            }
-        } catch {
-            warning("解析JSON字串時，得到空值，請洽管理員")
-        }
+        showTop2 = ShowTop2(delegate: self)
+        showTop2!.setAnchor(parent: self.view)
         
-        if (mysTable != nil) {
-            tables = mysTable!
-            if mysTable!.rows.count > 0 {
-                if (page == 1) {
-                    lists1 = [TeamTable]()
+        tableView2.anchor(parent: self.view, showTop: showTop2!)
+    }
+    
+    override func refresh() {
+        
+        page = 1
+        tableView2.getDataFromServer(page: page)
+        //getDataStart(page: page, perPage: PERPAGE)
+    }
+    
+    func getDataFromServer(page: Int) {
+        Global.instance.addSpinner(superView: self.view)
+        
+        TeamService.instance.getList(token: nil, _filter: params, page: page, perPage: tableView2.perPage) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                //TeamService.instance.jsonData?.prettyPrintedJSONString
+                let b: Bool = self.tableView2.parseJSON(jsonData: TeamService.instance.jsonData)
+                if !b && self.tableView2.msg.count == 0 {
+                    self.infoLbl = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop2!)
+                } else {
+                    self.infoLbl?.removeFromSuperview()
+                    self.rows = self.tableView2.items
                 }
-                lists1 += mysTable!.rows
-            } else {
-                view.setInfo(info: "目前暫無球隊", topAnchor: topView)
+                //self.showTableView(tableView: self.tableView, jsonData: TeamService.instance.jsonData!)
             }
         }
     }
     
-//    override func refresh() {
-//        var filter: [String: Any] = [String: Any]()
-//        filter.merge(["status": "online"])
-//        if manager_token != nil {
-//            filter.merge(["manager_token": manager_token!])
-//        }
+//    func refresh<T: Table>(_ t: T.Type) {
+//        rows.removeAll()
 //
 //        Global.instance.addSpinner(superView: self.view)
-//        CourseService.instance.getList(token: token, _filter: filter, page: 1, perPage: PERPAGE) { (success) in
+//        let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
+//        dataService.getOne(params: params) { (success) in
 //            Global.instance.removeSpinner(superView: self.view)
 //            if (success) {
-//
+//                let jsonData: Data = self.dataService.jsonData!
 //                do {
-//                    if (self.dataService.jsonData != nil) {
-//                        try self.coursesTable = JSONDecoder().decode(CoursesTable.self, from: CourseService.instance.jsonData!)
-//                        if (self.coursesTable != nil) {
-//                            //self.coursesTable!.printRows()
-//                            self.tableView.reloadData()
+//                    self.table = try JSONDecoder().decode(t, from: jsonData)
+//                    if (self.table != nil) {
+//                        if (self.table!.id == 0) {
+//                            //token錯誤，所以無法解析
+//                            self.warning("token錯誤，所以無法解析")
+//                        } else {
+//                            self.showTop2!.setTitle(title: self.table!.name)
+//                            self.tableView2.reloadData()
 //                        }
-//                    } else {
-//                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
 //                    }
 //                } catch {
-//                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
+//                    self.warning(error.localizedDescription)
 //                }
-//
-//            } else {
-//                self.warning(CourseService.instance.msg)
 //            }
-//            self.endRefresh()
 //        }
 //    }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ManagerTeamCell
-        //cell.blacklistCellDelegate = self
-        
-        let row = lists1[indexPath.row] as? TeamTable
-        if (row != nil) {
-            row!.filterRow()
-            cell.cellDelegate = self
-            cell.forRow(row: row!)
-        }
-        
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let row = lists1[indexPath.row] as? TeamTable
-        if row != nil {
-            toShowTeam(token: row!.token)
-        }
-        
-//        if mysTable != nil {
-//            let myTable = mysTable!.rows[indexPath.row]
+//    override func genericTable() {
 //
-//            let title = myTable.title
-//
-//            let alert = UIAlertController(title: title, message: "選擇動作", preferredStyle: .alert)
-//            let action1 = UIAlertAction(title: "檢視", style: .default) { (action) in
-//                self.toShowTeam(token: myTable.token)
-//                //let sender: [String: String] = ["title": title, "token": myTable.token]
-//                //self.performSegue(withIdentifier: TO_SHOW_COURSE, sender: sender)
+//        do {
+//            if (jsonData != nil) {
+//                mysTable = try JSONDecoder().decode(TeamsTable.self, from: jsonData!)
+//            } else {
+//                warning("無法從伺服器取得正確的json資料，請洽管理員")
 //            }
-//            let action2 = UIAlertAction(title: "編輯", style: .default) { (action) in
-//                self.toEditTeam(token: myTable.token)
-//            }
-//            let action3 = UIAlertAction(title: "刪除", style: .default) { (action) in
-//
-//                let appearance = SCLAlertView.SCLAppearance(
-//                    showCloseButton: false
-//                )
-//                let alert = SCLAlertView(appearance: appearance)
-//                alert.addButton("確定", action: {
-//                    self._delete(token: self.token!)
-//                    self.prevBtnPressed("")
-//                })
-//                alert.addButton("取消", action: {
-//                })
-//                alert.showWarning("警告", subTitle: "是否確定要刪除")
-//            }
-//            let action4 = UIAlertAction(title: "取消", style: .default) { (action) in
-//            }
-//            alert.addAction(action1)
-//            alert.addAction(action2)
-//            alert.addAction(action3)
-//            alert.addAction(action4)
-//            present(alert, animated: true, completion: nil)
+//        } catch {
+//            warning("解析JSON字串時，得到空值，請洽管理員")
 //        }
+//
+//        if (mysTable != nil) {
+//            tables = mysTable!
+//            if mysTable!.rows.count > 0 {
+//                if (page == 1) {
+//                    lists1 = [TeamTable]()
+//                }
+//                lists1 += mysTable!.rows
+//            } else {
+//                view.setInfo(info: "目前暫無球隊", topAnchor: topView)
+//            }
+//        }
+//    }
+    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ManagerTeamCell
+//        //cell.blacklistCellDelegate = self
+//
+//        let row = lists1[indexPath.row] as? TeamTable
+//        if (row != nil) {
+//            row!.filterRow()
+//            cell.cellDelegate = self
+//            cell.forRow(row: row!)
+//        }
+//
+//        return cell
+//    }
+//
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//        let row = lists1[indexPath.row] as? TeamTable
+//        if row != nil {
+//            toShowTeam(token: row!.token)
+//        }
+//    }
+    
+    func tableViewSetSelected(row: TeamTable)-> Bool {
+        return false
     }
     
     override func cellEdit(row: Table) {
@@ -192,19 +212,87 @@ class ManagerTeamVC: ManagerVC {
     override func addPressed() {
         toEditTeam(token: "", _delegate: self)
     }
+}
+
+class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
+        
+//    @IBOutlet weak var editIcon: SuperButton!
+//    @IBOutlet weak var deleteIcon: SuperButton!
+//    @IBOutlet weak var signupIcon: SuperButton!
+//    @IBOutlet weak var teamMemberIcon: SuperButton!
     
-//    @IBAction func addCourseBtnPressed(_ sender: Any) {
-//        if !Member.instance.isLoggedIn {
-//            warning("請先登入為會員")
-//        } else {
-//            performSegue(withIdentifier: TO_EDIT_COURSE, sender: nil)
-//        }
-//    }
+    let noLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextGeneral()
+        view.text = "100."
+        
+        return view
+    }()
     
-    func isReload(_ yes: Bool) {
-        self.isReload = yes
-        if self.isReload {
-            refresh()
+    let featuredIV: Featured = {
+        let view = Featured()
+        return view
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.commonInit()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.commonInit()
+    }
+    
+    override func commonInit() {
+        super.commonInit()
+        anchor()
+    }
+    
+    func anchor() {
+        
+        self.contentView.addSubview(noLbl)
+        noLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
+        
+        self.contentView.addSubview(featuredIV)
+        featuredIV.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(12)
+            make.left.equalTo(noLbl.snp.right).offset(12)
+            make.width.height.equalTo(48)
+            make.centerY.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-12)
         }
     }
+    
+    override func configureSubViews() {
+        noLbl.text = String(item!.no) + "."
+        
+        if item != nil && item!.featured_path.count > 0 {
+            self.featuredIV.path(item!.featured_path)
+        }
+        //nameLbl.text = (item != nil && item!.memberTable != nil) ? item!.memberTable!.nickname : ""
+        //createdAtLbl.text = item?.created_at.noSec()
+    }
+
+//    func forRow(row: TeamTable) {
+//
+//        editIcon.row = row
+//        deleteIcon.row = row
+//        refreshIcon.row = row
+//        signupIcon.row = row
+//        teamMemberIcon.row = row
+//
+//        titleLbl.text = row.name
+//        if row.featured_path.count > 0 {
+//            listFeatured.downloaded(from: row.featured_path)
+//        }
+//    }
 }

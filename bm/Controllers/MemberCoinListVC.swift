@@ -390,20 +390,20 @@ class MemberCoinListCell: BaseCell<MemberCoinTable, MemberCoinListVC> {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupView()
+        commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.setupView()
+        self.commonInit()
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupView()
+        commonInit()
     }
     
-    override func setupView() {
+    override func commonInit() {
         setAnchor()
     }
 

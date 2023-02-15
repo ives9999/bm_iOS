@@ -205,6 +205,7 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let n = items.count
         return items.count
     }
     
@@ -284,7 +285,7 @@ class BaseCell<U: Table, V: BaseViewController>: UITableViewCell {
 
     var no: Int?
     
-    func setupView() {
+    func commonInit() {
         backgroundColor = UIColor(MY_BLACK)
         self.contentView.addSubview(line)
     }
