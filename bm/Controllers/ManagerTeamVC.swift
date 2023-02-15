@@ -229,10 +229,21 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         return view
     }()
     
+    let mainContainerView: UIView = UIView()
+    
     let featuredIV: Featured = {
         let view = Featured()
         return view
     }()
+    
+    let nameLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextTitle()
+        
+        return view
+    }()
+    
+    let iconContainerView: UIView = UIView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -258,17 +269,43 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         
         self.contentView.addSubview(noLbl)
         noLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
         }
         
-        self.contentView.addSubview(featuredIV)
+        self.contentView.addSubview(mainContainerView)
+        mainContainerView.backgroundColor = UIColor.blue
+        mainContainerView.snp.makeConstraints { make in
+            make.left.equalTo(noLbl.snp.right).offset(12)
+            make.right.equalToSuperview().offset(-20)
+            make.top.equalToSuperview().offset(2)
+            make.height .equalTo(130)
+            make.bottom.equalToSuperview().offset(4)
+        }
+        
+        mainContainerView.addSubview(featuredIV)
         featuredIV.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
-            make.left.equalTo(noLbl.snp.right).offset(12)
-            make.width.height.equalTo(48)
+            make.left.equalToSuperview()
+            make.width.height.equalTo(120)
             make.centerY.equalToSuperview()
             make.bottom.equalToSuperview().offset(-12)
+        }
+        
+        mainContainerView.addSubview(nameLbl)
+        nameLbl.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalTo(featuredIV.snp.right).offset(12)
+        }
+        
+        self.contentView.addSubview(iconContainerView)
+        iconContainerView.backgroundColor = UIColor.red
+        iconContainerView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.top.equalTo(mainContainerView.snp.bottom)
+            //make.bottom.equalToSuperview().offset(-6)
+            make.height.equalTo(60)
         }
     }
     
@@ -278,7 +315,8 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         if item != nil && item!.featured_path.count > 0 {
             self.featuredIV.path(item!.featured_path)
         }
-        //nameLbl.text = (item != nil && item!.memberTable != nil) ? item!.memberTable!.nickname : ""
+        
+        nameLbl.text = (item != nil) ? item!.name : ""
         //createdAtLbl.text = item?.created_at.noSec()
     }
 
