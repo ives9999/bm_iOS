@@ -225,6 +225,7 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         return cellForRow(atBaseTableIndexPath: indexPath)
     }
     

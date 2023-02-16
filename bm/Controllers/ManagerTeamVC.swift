@@ -212,6 +212,11 @@ class ManagerTeamVC: BaseViewController {
     override func addPressed() {
         toEditTeam(token: "", _delegate: self)
     }
+    
+    override func didSelect<U>(item: U, at indexPath: IndexPath) {
+        let _item: TeamTable = item as! TeamTable
+        toShowTeam(token: _item.token)
+    }
 }
 
 class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
@@ -245,6 +250,44 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
     
     let iconContainerView: UIView = UIView()
     
+    let editIcon: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "edit1")
+        view.isUserInteractionEnabled = true
+        
+        return view
+    }()
+    
+    let deleteIcon: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "delete")
+        view.isUserInteractionEnabled = true
+        
+        return view
+    }()
+    
+    let signupIcon: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "signup")
+        view.isUserInteractionEnabled = true
+        
+        return view
+    }()
+    
+    let teamMemberIcon: UIImageView = {
+        let view = UIImageView()
+        view.image = UIImage(named: "member")
+        view.isUserInteractionEnabled = true
+        
+        return view
+    }()
+    
+    let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.2)
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.commonInit()
@@ -263,6 +306,22 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
     override func commonInit() {
         super.commonInit()
         anchor()
+        
+        let tapEdit: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(editPressed))
+        tapEdit.cancelsTouchesInView = true
+        editIcon.addGestureRecognizer(tapEdit)
+        
+        let tapDelete: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deletePressed))
+        tapDelete.cancelsTouchesInView = true
+        deleteIcon.addGestureRecognizer(tapDelete)
+        
+        let tapSignup: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(signupPressed))
+        tapSignup.cancelsTouchesInView = true
+        signupIcon.addGestureRecognizer(tapSignup)
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(teamMemberPressed))
+        tap.cancelsTouchesInView = true
+        teamMemberIcon.addGestureRecognizer(tap)
     }
     
     func anchor() {
@@ -274,42 +333,79 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         }
         
         self.contentView.addSubview(mainContainerView)
-        mainContainerView.backgroundColor = UIColor.blue
+        //mainContainerView.backgroundColor = UIColor.blue
         mainContainerView.snp.makeConstraints { make in
             make.left.equalTo(noLbl.snp.right).offset(12)
             make.right.equalToSuperview().offset(-20)
-            make.top.equalToSuperview().offset(2)
-            make.height .equalTo(130)
-            make.bottom.equalToSuperview().offset(4)
-        }
-        
-        mainContainerView.addSubview(featuredIV)
-        featuredIV.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
-            make.left.equalToSuperview()
-            make.width.height.equalTo(120)
-            make.centerY.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-12)
+            //make.bottom.equalToSuperview().offset(4)
+            //make.height .equalTo(130)
         }
         
-        mainContainerView.addSubview(nameLbl)
-        nameLbl.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.left.equalTo(featuredIV.snp.right).offset(12)
-        }
+            mainContainerView.addSubview(featuredIV)
+            featuredIV.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(12)
+                make.left.equalToSuperview()
+                make.width.height.equalTo(120)
+                make.centerY.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-6)
+            }
+
+            mainContainerView.addSubview(nameLbl)
+            nameLbl.snp.makeConstraints { make in
+                make.centerY.equalToSuperview()
+                make.left.equalTo(featuredIV.snp.right).offset(12)
+            }
         
         self.contentView.addSubview(iconContainerView)
-        iconContainerView.backgroundColor = UIColor.red
+        //iconContainerView.backgroundColor = UIColor.red
         iconContainerView.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
+            make.left.equalTo(noLbl.snp.right).offset(12)
             make.right.equalToSuperview().offset(-20)
             make.top.equalTo(mainContainerView.snp.bottom)
-            //make.bottom.equalToSuperview().offset(-6)
-            make.height.equalTo(60)
+            //make.bottom.equalToSuperview().offset(-20)
+            make.height.equalTo(40)
+        }
+        
+        iconContainerView.addSubview(editIcon)
+        editIcon.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.height.width.equalTo(35)
+        }
+        
+        iconContainerView.addSubview(deleteIcon)
+        deleteIcon.snp.makeConstraints { make in
+            make.left.equalTo(editIcon.snp.right).offset(12)
+            make.centerY.equalToSuperview()
+            make.height.width.equalTo(35)
+        }
+        
+        iconContainerView.addSubview(signupIcon)
+        signupIcon.snp.makeConstraints { make in
+            make.left.equalTo(deleteIcon.snp.right).offset(12)
+            make.centerY.equalToSuperview()
+            make.height.width.equalTo(35)
+        }
+        
+        iconContainerView.addSubview(teamMemberIcon)
+        teamMemberIcon.snp.makeConstraints { make in
+            make.left.equalTo(signupIcon.snp.right).offset(12)
+            make.centerY.equalToSuperview()
+            make.height.width.equalTo(35)
+        }
+        
+        self.contentView.addSubview(separator)
+        separator.snp.makeConstraints { make in
+            make.top.equalTo(iconContainerView.snp.bottom).offset(12)
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
     }
     
     override func configureSubViews() {
+        
+        super.configureSubViews()
         noLbl.text = String(item!.no) + "."
         
         if item != nil && item!.featured_path.count > 0 {
@@ -317,20 +413,21 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         }
         
         nameLbl.text = (item != nil) ? item!.name : ""
-        //createdAtLbl.text = item?.created_at.noSec()
     }
-
-//    func forRow(row: TeamTable) {
-//
-//        editIcon.row = row
-//        deleteIcon.row = row
-//        refreshIcon.row = row
-//        signupIcon.row = row
-//        teamMemberIcon.row = row
-//
-//        titleLbl.text = row.name
-//        if row.featured_path.count > 0 {
-//            listFeatured.downloaded(from: row.featured_path)
-//        }
-//    }
+    
+    @objc func editPressed(_ sender: UIGestureRecognizer) {
+        myDelegate?.cellEdit(row: item!)
+    }
+    
+    @objc func deletePressed(_ sender: UIGestureRecognizer) {
+        myDelegate?.cellDelete(row: item!)
+    }
+    
+    @objc func signupPressed(_ sender: UIGestureRecognizer) {
+        myDelegate?.cellSignup(row: item!)
+    }
+    
+    @objc func teamMemberPressed(_ sender: UIGestureRecognizer) {
+        myDelegate?.cellTeamMember(row: item!)
+    }
 }

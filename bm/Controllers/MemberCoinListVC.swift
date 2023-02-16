@@ -533,7 +533,7 @@ class MemberCoinListCell: BaseCell<MemberCoinTable, MemberCoinListVC> {
             if (item!.able_type_show.count > 0) {
                 able_typeLbl.text = item!.able_type_show
                 let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(able_action))
-                tap.cancelsTouchesInView = false
+                tap.cancelsTouchesInView = true
                 able_typeLbl.addGestureRecognizer(tap)
             }
             

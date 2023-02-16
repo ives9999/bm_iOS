@@ -36,6 +36,7 @@ class TeamTable: Table {
     //var arena_name: String = ""
     var play_start: String = ""
     var play_end: String = ""
+    var number: Int = 0
     var ball: String = ""
     var degree: String = ""
     var block: Int = 1
@@ -89,6 +90,7 @@ class TeamTable: Table {
         //case arena_name
         case play_start
         case play_end
+        case number
         case ball
         case degree
         case block
@@ -125,6 +127,7 @@ class TeamTable: Table {
         //do {arena_name = try container.decode(String.self, forKey: .arena_name)}catch{arena_name = ""}
         do {play_start = try container.decode(String.self, forKey: .play_start)}catch{play_start = ""}
         do {play_end = try container.decode(String.self, forKey: .play_end)}catch{play_end = ""}
+        do {number = try container.decode(Int.self, forKey: .number)}catch{number = 0}
         do {ball = try container.decode(String.self, forKey: .ball)}catch{ball = ""}
         do {degree = try container.decode(String.self, forKey: .degree)}catch{degree = ""}
         do {block = try container.decode(Int.self, forKey: .block)}catch{block = 1}
