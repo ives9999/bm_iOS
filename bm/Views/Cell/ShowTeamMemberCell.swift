@@ -167,9 +167,9 @@ class ShowTeamMemberCell: UITableViewCell {
         }
     }
     
-    override func layoutSubviews() {
-        self.avatarIV.makeRounded()
-    }
+//    override func layoutSubviews() {
+//        self.avatarIV.makeRounded()
+//    }
     
 //    @objc func leavePressed(view: UIButton) {
 //

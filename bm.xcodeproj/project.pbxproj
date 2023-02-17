@@ -33,6 +33,8 @@
 		B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C954D1FECDE9E005F71EF /* IconTextField.swift */; };
 		B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30C954F1FED68A0005F71EF /* MoreVC.swift */; };
 		B31106E9221E5285007A5D49 /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31106E8221E5285007A5D49 /* BottomView.swift */; };
+		B313271C299F3ACC00EAB782 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313271B299F3ACC00EAB782 /* UIImage.swift */; };
+		B313271E299F4F9100EAB782 /* IconView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313271D299F4F9100EAB782 /* IconView2.swift */; };
 		B31361E71F8786CC00BDA53D /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E61F8786CC00BDA53D /* Contants.swift */; };
 		B31361E91F88A35900BDA53D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E81F88A35900BDA53D /* Global.swift */; };
 		B316FED62112F13600FB990C /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B316FED42112F13600FB990C /* CollectionCell.swift */; };
@@ -465,6 +467,8 @@
 		B30C954F1FED68A0005F71EF /* MoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreVC.swift; sourceTree = "<group>"; };
 		B31106E7221D9EDB007A5D49 /* bmNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bmNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		B31106E8221E5285007A5D49 /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
+		B313271B299F3ACC00EAB782 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		B313271D299F4F9100EAB782 /* IconView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconView2.swift; sourceTree = "<group>"; };
 		B31361E61F8786CC00BDA53D /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		B31361E81F88A35900BDA53D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		B316FED42112F13600FB990C /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
@@ -1072,6 +1076,7 @@
 				B31106E8221E5285007A5D49 /* BottomView.swift */,
 				B3A9038F23857A1200A986F7 /* CourseView.swift */,
 				B3A9038D2385537900A986F7 /* CourseView.xib */,
+				B313271D299F4F9100EAB782 /* IconView2.swift */,
 				F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */,
 				F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */,
 				F9B192592997405F0037FE05 /* ShowTab2.swift */,
@@ -1264,6 +1269,7 @@
 				B35593F5294ED397009E0658 /* UIImageView.swift */,
 				F985F4612956BF3900636FEA /* UIView.swift */,
 				F94093D3298BA88E0006D89D /* UILabel.swift */,
+				B313271B299F3ACC00EAB782 /* UIImage.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1946,6 +1952,7 @@
 				B323390D21B6B995003EB84D /* FormConformity.swift in Sources */,
 				B306FEAD21F8422B00403FE2 /* IconCell.swift in Sources */,
 				B358B0B0229D4F4F00F1A4E6 /* EditCourseVC.swift in Sources */,
+				B313271E299F4F9100EAB782 /* IconView2.swift in Sources */,
 				B326C7C2256E2AEB0048A2C2 /* SelectAreaVC.swift in Sources */,
 				B30C95501FED68A0005F71EF /* MoreVC.swift in Sources */,
 				B3AE9382262FED6B00223B2A /* StoreListCell.swift in Sources */,
@@ -2126,6 +2133,7 @@
 				B3AE9324262962E200223B2A /* Team_WeekdaysTable.swift in Sources */,
 				B326C7BC256CE0950048A2C2 /* SelectCitysVC.swift in Sources */,
 				B3E4D17C25FF9E3900D78210 /* Table.swift in Sources */,
+				B313271C299F3ACC00EAB782 /* UIImage.swift in Sources */,
 				B362265D25E54C9D00D98317 /* HomeTotalAdVC.swift in Sources */,
 				B3CABD8926B6A66B00FD0E4D /* RadioCell.swift in Sources */,
 				B3E4D1CD2602DD7E00D78210 /* ArenaTable.swift in Sources */,

@@ -220,17 +220,20 @@ class ManagerTeamVC: BaseViewController {
 }
 
 class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
-        
-//    @IBOutlet weak var editIcon: SuperButton!
-//    @IBOutlet weak var deleteIcon: SuperButton!
-//    @IBOutlet weak var signupIcon: SuperButton!
-//    @IBOutlet weak var teamMemberIcon: SuperButton!
     
     let noLbl: SuperLabel = {
         let view = SuperLabel()
-        view.setTextGeneral()
+        //view.setTextGeneral()
+        view.setTextColor(UIColor(MY_GREEN))
+        view.setTextBold()
         view.text = "100."
         
+        return view
+    }()
+    
+    let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.3)
         return view
     }()
     
@@ -282,12 +285,6 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         return view
     }()
     
-    let separator: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.2)
-        return view
-    }()
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.commonInit()
@@ -326,18 +323,39 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
     
     func anchor() {
         
-        self.contentView.addSubview(noLbl)
-        noLbl.snp.makeConstraints { make in
+        let view1: UIView = UIView()
+        
+        self.contentView.addSubview(view1)
+        //view1.backgroundColor = UIColor.brown
+        view1.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
             make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(30)
+        }
+        
+        view1.addSubview(noLbl)
+        noLbl.snp.makeConstraints { make in
+        
+            make.left.equalToSuperview()
             make.centerY.equalToSuperview()
+        }
+        
+        self.contentView.addSubview(separator)
+        separator.snp.makeConstraints { make in
+            make.top.equalTo(view1.snp.bottom)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            //make.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
         
         self.contentView.addSubview(mainContainerView)
         //mainContainerView.backgroundColor = UIColor.blue
         mainContainerView.snp.makeConstraints { make in
-            make.left.equalTo(noLbl.snp.right).offset(12)
+            make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
-            make.top.equalToSuperview().offset(12)
+            make.top.equalTo(separator.snp.bottom).offset(4)
             //make.bottom.equalToSuperview().offset(4)
             //make.height .equalTo(130)
         }
@@ -346,7 +364,7 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
             featuredIV.snp.makeConstraints { make in
                 make.top.equalToSuperview().offset(12)
                 make.left.equalToSuperview()
-                make.width.height.equalTo(120)
+                make.width.height.equalTo(56)
                 make.centerY.equalToSuperview()
                 make.bottom.equalToSuperview().offset(-6)
             }
@@ -354,52 +372,59 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
             mainContainerView.addSubview(nameLbl)
             nameLbl.snp.makeConstraints { make in
                 make.centerY.equalToSuperview()
-                make.left.equalTo(featuredIV.snp.right).offset(12)
+                make.left.equalTo(featuredIV.snp.right).offset(20)
             }
         
         self.contentView.addSubview(iconContainerView)
         //iconContainerView.backgroundColor = UIColor.red
         iconContainerView.snp.makeConstraints { make in
-            make.left.equalTo(noLbl.snp.right).offset(12)
+            make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
-            make.top.equalTo(mainContainerView.snp.bottom)
-            //make.bottom.equalToSuperview().offset(-20)
+            make.top.equalTo(mainContainerView.snp.bottom).offset(13)
+            make.bottom.equalToSuperview().offset(-2)
             make.height.equalTo(40)
+        }
+        
+        let bk: IconView2 = {
+            let view: IconView2 = IconView2()
+            view.backgroundColor = UIColor.brown
+            return view
+        }()
+        
+        iconContainerView.addSubview(bk)
+        bk.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(40)
         }
         
         iconContainerView.addSubview(editIcon)
         editIcon.snp.makeConstraints { make in
-            make.left.equalToSuperview()
+            make.left.equalTo(bk.snp.right).offset(12)
+            //make.left.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.height.width.equalTo(35)
+            make.height.width.equalTo(20)
         }
         
         iconContainerView.addSubview(deleteIcon)
         deleteIcon.snp.makeConstraints { make in
             make.left.equalTo(editIcon.snp.right).offset(12)
             make.centerY.equalToSuperview()
-            make.height.width.equalTo(35)
+            make.height.width.equalTo(20)
         }
         
         iconContainerView.addSubview(signupIcon)
         signupIcon.snp.makeConstraints { make in
             make.left.equalTo(deleteIcon.snp.right).offset(12)
             make.centerY.equalToSuperview()
-            make.height.width.equalTo(35)
+            make.height.width.equalTo(20)
         }
         
         iconContainerView.addSubview(teamMemberIcon)
         teamMemberIcon.snp.makeConstraints { make in
             make.left.equalTo(signupIcon.snp.right).offset(12)
             make.centerY.equalToSuperview()
-            make.height.width.equalTo(35)
-        }
-        
-        self.contentView.addSubview(separator)
-        separator.snp.makeConstraints { make in
-            make.top.equalTo(iconContainerView.snp.bottom).offset(12)
-            make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(1)
+            make.height.width.equalTo(20)
         }
     }
     
@@ -429,5 +454,9 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
     
     @objc func teamMemberPressed(_ sender: UIGestureRecognizer) {
         myDelegate?.cellTeamMember(row: item!)
+    }
+    
+    override func layoutSubviews() {
+        self.featuredIV.makeRounded()
     }
 }

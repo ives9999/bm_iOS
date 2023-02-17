@@ -17,7 +17,7 @@ extension UIImageView {
             let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
             let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
             let data = data, error == nil,
-            let image = UIImage(data: data)
+            let image = UIImage(data: data)?.circleMasked
                 else {return}
             DispatchQueue.main.async {
                 self.image = image
@@ -34,8 +34,8 @@ extension UIImageView {
     
     func makeRounded() {
         
-        self.layer.cornerRadius = (self.frame.width / 2) //instead of let radius = CGRectGetWidth(self.frame) / 2
-        self.layer.masksToBounds = true
+        self.layer.cornerRadius = (self.frame.height / 2) //instead of let radius = CGRectGetWidth(self.frame) / 2
+        self.clipsToBounds = true
     }
     
     func sizeOfImageAt(_ link: String) -> CGSize? {
