@@ -1073,6 +1073,8 @@
 				B3A9038F23857A1200A986F7 /* CourseView.swift */,
 				B3A9038D2385537900A986F7 /* CourseView.xib */,
 				F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */,
+				F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */,
+				F9B192592997405F0037FE05 /* ShowTab2.swift */,
 				F9A6751827FAED7E007C8F47 /* ShowTop.swift */,
 				F9A6751A27FAEDC3007C8F47 /* ShowTop.xib */,
 				F9FFD835290665F500AD8E52 /* ShowTop2.swift */,
@@ -1082,8 +1084,6 @@
 				B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */,
 				F9A6751C27FAF605007C8F47 /* Top.swift */,
 				F9A6751E27FAF766007C8F47 /* Top.xib */,
-				F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */,
-				F9B192592997405F0037FE05 /* ShowTab2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";

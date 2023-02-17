@@ -25,7 +25,7 @@ class SuperTextView: UITextView {
 
     func commonInit(){
         self.textColor = UIColor.white
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.gray
         self.layer.borderColor = UIColor.clear.cgColor
         self.layer.borderWidth = 0
         self.font = UIFont(name: fontName, size: fontSize)

@@ -14,61 +14,91 @@ import UIKit
 
 class ContentEditVC: BaseViewController {
     
-    @IBOutlet weak var titleLbl: UILabel!
-    @IBOutlet weak var contentTextView: UITextView!
-    @IBOutlet weak var height: NSLayoutConstraint!
-    @IBOutlet weak var scrollView: SuperScrollView!
-    @IBOutlet weak var clearBtn: ClearButton!
+    //@IBOutlet weak var titleLbl: UILabel!
+    //@IBOutlet weak var contentTextView: UITextView!
+    //@IBOutlet weak var height: NSLayoutConstraint!
+    //@IBOutlet weak var scrollView: SuperScrollView!
+    //@IBOutlet weak var clearBtn: ClearButton!
     
     var key: String? = nil
     var content: String? = nil
     var delegate: BaseViewController? = nil
     var type: TEXT_INPUT_TYPE = TEXT_INPUT_TYPE.content
     var textViewHeight: CGFloat = 0
+    
+    var showTop2: ShowTop2?
+    var showBottom2: ShowBottom2?
+    
+    let contentTextView: SuperTextView = {
+        let view = SuperTextView()
+//        view.layer.borderColor = UIColor.lightGray.cgColor
+//        view.layer.borderWidth = 1.0
+//        
+//        view.contentInset = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+        
+        return view
+    }()
+    
+    let clearBtn: ClearButton = ClearButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if title != nil {
-            titleLbl.text = title
-        }
         
-        contentTextView.layer.borderColor = UIColor.lightGray.cgColor
-        contentTextView.layer.borderWidth = 1.0
+        showTop2 = ShowTop2(delegate: self)
+        showTop2!.setTitle(title: title ?? "內容編輯")
         
-        contentTextView.contentInset = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
+        showBottom2 = ShowBottom2(delegate: self)
+        
+//        contentTextView.layer.borderColor = UIColor.lightGray.cgColor
+//        contentTextView.layer.borderWidth = 1.0
+//
+//        contentTextView.contentInset = UIEdgeInsets(top: 8, left: 12, bottom: 8, right: 12)
         
         if content != nil {
             contentTextView.text = content
-            //textViewHeight = contentTextView.sizeThatFits(contentTextView.bounds.size).height
-            //height.constant = a.height
-            //scrollView.contentSize.height = a.height + 500
         }
+        
         addDoneButtonOnKeyboard()
         hideKeyboardWhenTappedAround()
+        
+        anchor()
+        
+        clearBtn.addTarget(self, action: #selector(clear1), for: .touchUpInside)
     }
     
-//    override func viewWillLayoutSubviews() {
-//        height.constant = textViewHeight
-//        scrollView.contentSize = CGSize(width: view.frame.width, height: textViewHeight + 100)
-//    }
+    func anchor() {
+        showTop2!.setAnchor(parent: self.view)
+        
+        self.view.addSubview(contentTextView)
+        contentTextView.snp.makeConstraints { make in
+            make.top.equalTo(showTop2!.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(500)
+        }
+        
+        self.view.addSubview(clearBtn)
+        clearBtn.snp.makeConstraints { make in
+            make.top.equalTo(contentTextView.snp.bottom).offset(20)
+            make.centerX.equalToSuperview()
+        }
+        
+        self.view.addSubview(showBottom2!)
+        showBottom2!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: true)
+    }
     
-    @IBAction func submit(_ sender: Any) {
+    override func submit() {
         if delegate != nil && key != nil {
             delegate!.setContent(key: key!, content: contentTextView.text)
         }
         prev()
     }
     
-    @IBAction func clear(_ sender: Any) {
+    @objc func clear1(btn: SuperButton) {
         contentTextView.text = ""
     }
     
-    @IBAction func cancel(_ sender: Any) {
-        prev()
-    }
-    
-    @IBAction func prevBtnPressed(_ sender: Any) {
+    override func cancel() {
         prev()
     }
     

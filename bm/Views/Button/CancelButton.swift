@@ -28,7 +28,9 @@ class CancelButton: SuperButton {
     override func commonInit() {
         super.commonInit()
         setTitle("取消", for: .normal)
-        setColor(textColor: UIColor.white, bkColor: UIColor(CANCEL_BUTTON))
+        setColor(textColor: UIColor(MY_GREEN), bkColor: UIColor(MY_BLACK))
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor(MY_GREEN).cgColor
         //self.cornerRadius = MY_BUTTON_CORNER
         //contentEdgeInsets = UIEdgeInsets(top: 4, left: 36, bottom: 4, right: 36)
     }

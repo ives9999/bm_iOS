@@ -60,6 +60,7 @@ class EditTeamVC: EditVC {
 //            myTable!.weekdays = [weekdays1, weekdays2]
 //            myTable!.play_start = "19:00:00"
 //            myTable!.play_end = "21:00:00"
+//            myTable!.number = 16
 //            myTable!.degree = "high,soso"
 //            myTable!.ball = "RSL4號"
 //            myTable!.temp_fee_M = 300
@@ -149,6 +150,8 @@ class EditTeamVC: EditVC {
         row = OneRow(title: "結束時間", value: myTable!.play_end, show: myTable!.play_end_show, key: TEAM_PLAY_END_KEY, cell: "more", isRequired: true)
         row.msg = "沒有選擇結束時間"
         rows.append(row)
+        row = OneRow(title: "人數", value: String(myTable!.number), show: String(myTable!.number), key: NUMBER_KEY, cell: "textField", keyboard: KEYBOARD.numberPad)
+        rows.append(row)
         row = OneRow(title: "程度", value: myTable!.degree, show: myTable!.degree_show, key: DEGREE_KEY, cell: "more")
         rows.append(row)
         row = OneRow(title: "球種", value: myTable!.ball, show: myTable!.ball, key: TEAM_BALL_KEY, cell: "textField", keyboard: KEYBOARD.default, placeholder: "RSL4號球")
@@ -159,9 +162,9 @@ class EditTeamVC: EditVC {
         rows.removeAll()
         row = OneRow(title: "臨打狀態", value: myTable!.temp_status, show: myTable!.temp_status_show, key: TEAM_TEMP_STATUS_KEY, cell: "switch")
         rows.append(row)
-        row = OneRow(title: "臨打日期", value: myTable!.last_signup_date, show: myTable!.last_signup_date, key: TEAM_TEMP_DATE_KEY, cell: "more")
-        rows.append(row)
-        
+//        row = OneRow(title: "臨打日期", value: myTable!.last_signup_date, show: myTable!.last_signup_date, key: TEAM_TEMP_DATE_KEY, cell: "more")
+//        rows.append(row)
+//
         var people_limit: String = ""
         if (myTable!.people_limit > 0) {
             people_limit = String(myTable!.people_limit)
@@ -225,12 +228,16 @@ class EditTeamVC: EditVC {
     
     override func submitValidate() {
         
-        let row: OneRow = getOneRowFromKey(TEAM_TEMP_DATE_KEY)
-        let temp_date_string: String = row.value
-        if let temp_date = temp_date_string.toDateTime(format: "yyyy-MM-dd") {
-            //print(temp_date)
-            if temp_date.isSmallerThan(Date()) {
-                msg = "臨打日期必須在明天之後\n"
+        var row: OneRow = getOneRowFromKey(TEAM_TEMP_STATUS_KEY)
+        //print(row.value)
+        if (row.value == "online") {
+            row = getOneRowFromKey(TEAM_TEMP_DATE_KEY)
+            let temp_date_string: String = row.value
+            if let temp_date = temp_date_string.toDateTime(format: "yyyy-MM-dd") {
+                //print(temp_date)
+                if temp_date.isSmallerThan(Date()) {
+                    msg = "臨打日期必須在明天之後\n"
+                }
             }
         }
     }

@@ -1675,10 +1675,10 @@
             </objects>
             <point key="canvasLocation" x="3612" y="603"/>
         </scene>
-        <!--Content EditVC-->
+        <!--View Controller-->
         <scene sceneID="JIa-J4-zJ7">
             <objects>
-                <viewController storyboardIdentifier="UIViewController-Rnr-RQ-nbw" id="Rnr-RQ-nbw" customClass="ContentEditVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UIViewController-Rnr-RQ-nbw" id="Rnr-RQ-nbw" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="skD-CI-s2o">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

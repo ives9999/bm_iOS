@@ -98,36 +98,48 @@ extension BaseViewController {
     
     func toEditContent(key: String, title: String, content: String?, _delegate: BaseViewController?) {
         
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-Rnr-RQ-nbw") as? ContentEditVC {
-                viewController.key = key
-                
-                viewController.title = title
-                if (content != nil) {
-                    viewController.content = content
-                }
-                
-                if (_delegate != nil) {
-                    viewController.delegate = _delegate
-                }
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-Rnr-RQ-nbw") as! ContentEditVC
-            viewController.key = key
-            
-            if (content != nil) {
-                viewController.content = content
-            }
-            
-            if (_delegate != nil) {
-                viewController.delegate = _delegate
-            }
-            viewController.modalPresentationStyle = .fullScreen
-            self.navigationController!.pushViewController(viewController, animated: true)
+        let v: ContentEditVC = ContentEditVC()
+        v.key = key
+        v.title = title
+        if (content != nil) {
+            v.content = content
         }
+        if (_delegate != nil) {
+            v.delegate = _delegate
+        }
+        v.modalPresentationStyle = .fullScreen
+        show(v, sender: nil)
+        
+//        if #available(iOS 13.0, *) {
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-Rnr-RQ-nbw") as? ContentEditVC {
+//                viewController.key = key
+//
+//                viewController.title = title
+//                if (content != nil) {
+//                    viewController.content = content
+//                }
+//
+//                if (_delegate != nil) {
+//                    viewController.delegate = _delegate
+//                }
+//                viewController.modalPresentationStyle = .fullScreen
+//                show(viewController, sender: nil)
+//            }
+//        } else {
+//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-Rnr-RQ-nbw") as! ContentEditVC
+//            viewController.key = key
+//
+//            if (content != nil) {
+//                viewController.content = content
+//            }
+//
+//            if (_delegate != nil) {
+//                viewController.delegate = _delegate
+//            }
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.navigationController!.pushViewController(viewController, animated: true)
+//        }
     }
     
     func toEditCourse(token: String, _delegate: BaseViewController? = nil) {

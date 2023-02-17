@@ -29,6 +29,7 @@ class ClearButton: SuperButton {
         super.commonInit()
         setTitle("清除", for: .normal)
         setColor(textColor: UIColor.white, bkColor: UIColor(CLEAR_BUTTON))
+        self.padding(top: 10, left: 40, bottom: 10, right: 40)
         //self.cornerRadius = MY_BUTTON_CORNER
         //contentEdgeInsets = UIEdgeInsets(top: 8, left: 36, bottom: 8, right: 36)
     }
