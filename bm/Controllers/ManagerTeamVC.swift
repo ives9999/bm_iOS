@@ -231,6 +231,22 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         return view
     }()
     
+    let playTimeLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
+        view.text = "19:00~21:00"
+        
+        return view
+    }()
+    
+    let playWeekLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
+        view.text = "19:00~21:00"
+        
+        return view
+    }()
+    
     let separator: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.3)
@@ -247,6 +263,16 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
     let nameLbl: SuperLabel = {
         let view = SuperLabel()
         view.setTextTitle()
+        
+        return view
+    }()
+    
+    let dot1: UIView = Dot2()
+    
+    let nextDateLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
+        view.text = "2023-05-12(六)"
         
         return view
     }()
@@ -319,12 +345,24 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
             make.height.equalTo(30)
         }
         
-        view1.addSubview(noLbl)
-        noLbl.snp.makeConstraints { make in
+            view1.addSubview(noLbl)
+            noLbl.snp.makeConstraints { make in
+            
+                make.left.equalToSuperview()
+                make.centerY.equalToSuperview()
+            }
+            
+            view1.addSubview(playTimeLbl)
+            playTimeLbl.snp.makeConstraints { make in
+                make.right.equalToSuperview()
+                make.centerY.equalToSuperview()
+            }
         
-            make.left.equalToSuperview()
-            make.centerY.equalToSuperview()
-        }
+            view1.addSubview(playWeekLbl)
+            playWeekLbl.snp.makeConstraints { make in
+                make.right.equalTo(playTimeLbl.snp.left).offset(-6)
+                make.centerY.equalToSuperview()
+            }
         
         self.contentView.addSubview(separator)
         separator.snp.makeConstraints { make in
@@ -356,9 +394,21 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
 
             mainContainerView.addSubview(nameLbl)
             nameLbl.snp.makeConstraints { make in
-                make.centerY.equalToSuperview()
+                make.top.equalToSuperview().offset(12)
                 make.left.equalTo(featuredIV.snp.right).offset(20)
             }
+        
+            mainContainerView.addSubview(dot1)
+            dot1.snp.makeConstraints { make in
+                make.bottom.equalToSuperview().offset(-20)
+                make.left.equalTo(featuredIV.snp.right).offset(20)
+            }
+        
+        mainContainerView.addSubview(nextDateLbl)
+        nextDateLbl.snp.makeConstraints { make in
+            make.left.equalTo(dot1.snp.right).offset(8)
+            make.centerY.equalTo(dot1.snp.centerY)
+        }
         
         self.contentView.addSubview(iconContainerView)
         //iconContainerView.backgroundColor = UIColor.red
@@ -417,6 +467,11 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         }
         
         nameLbl.text = (item != nil) ? item!.name : ""
+        if (item != nil) {
+            playTimeLbl.text = item!.interval_show
+            playWeekLbl.text = item!.weekdays_show
+            nextDateLbl.text = item!.nextDate
+        }
     }
 }
 
