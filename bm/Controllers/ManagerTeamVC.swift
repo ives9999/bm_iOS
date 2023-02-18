@@ -379,21 +379,21 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
             
             iconContainerView.addSubview(deleteIcon)
             deleteIcon.snp.makeConstraints { make in
-                make.left.equalTo(editIcon.snp.right).offset(12)
+                make.left.equalTo(editIcon.snp.right).offset(8)
                 make.centerY.equalToSuperview()
                 make.height.width.equalTo(40)
             }
             
             iconContainerView.addSubview(signupIcon)
             signupIcon.snp.makeConstraints { make in
-                make.left.equalTo(deleteIcon.snp.right).offset(12)
+                make.left.equalTo(deleteIcon.snp.right).offset(8)
                 make.centerY.equalToSuperview()
                 make.height.width.equalTo(40)
             }
             
             iconContainerView.addSubview(teamMemberIcon)
             teamMemberIcon.snp.makeConstraints { make in
-                make.left.equalTo(signupIcon.snp.right).offset(12)
+                make.left.equalTo(signupIcon.snp.right).offset(8)
                 make.centerY.equalToSuperview()
                 make.height.width.equalTo(40)
             }
