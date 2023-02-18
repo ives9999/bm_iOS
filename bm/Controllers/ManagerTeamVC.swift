@@ -253,37 +253,31 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
     
     let iconContainerView: UIView = UIView()
     
-    let editIcon: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(named: "edit1")
-        view.isUserInteractionEnabled = true
+    let editIcon: IconView2 = {
+        let view = IconView2(icon: "edit_svg")
         
         return view
     }()
     
-    let deleteIcon: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(named: "delete")
-        view.isUserInteractionEnabled = true
+    let deleteIcon: IconView2 = {
+        let view = IconView2(icon: "delete_svg")
         
         return view
     }()
     
-    let signupIcon: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(named: "signup")
-        view.isUserInteractionEnabled = true
+    let signupIcon: IconView2 = {
+        let view = IconView2(icon: "check_svg")
         
         return view
     }()
     
-    let teamMemberIcon: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(named: "member")
-        view.isUserInteractionEnabled = true
+    let teamMemberIcon: IconView2 = {
+        let view = IconView2(icon: "member_svg")
         
         return view
     }()
+    
+    let showButton2: ShowButton2 = ShowButton2()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -304,21 +298,12 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         super.commonInit()
         anchor()
         
-        let tapEdit: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(editPressed))
-        tapEdit.cancelsTouchesInView = true
-        editIcon.addGestureRecognizer(tapEdit)
+        editIcon.delegate = self
+        deleteIcon.delegate = self
+        signupIcon.delegate = self
+        teamMemberIcon.delegate = self
         
-        let tapDelete: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deletePressed))
-        tapDelete.cancelsTouchesInView = true
-        deleteIcon.addGestureRecognizer(tapDelete)
-        
-        let tapSignup: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(signupPressed))
-        tapSignup.cancelsTouchesInView = true
-        signupIcon.addGestureRecognizer(tapSignup)
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(teamMemberPressed))
-        tap.cancelsTouchesInView = true
-        teamMemberIcon.addGestureRecognizer(tap)
+        showButton2.delegate = self
     }
     
     func anchor() {
@@ -381,50 +366,44 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.top.equalTo(mainContainerView.snp.bottom).offset(13)
-            make.bottom.equalToSuperview().offset(-2)
+            make.bottom.equalToSuperview().offset(-20)
             make.height.equalTo(40)
         }
         
-        let bk: IconView2 = {
-            let view: IconView2 = IconView2()
-            view.backgroundColor = UIColor.brown
-            return view
-        }()
+            iconContainerView.addSubview(editIcon)
+            editIcon.snp.makeConstraints { make in
+                make.left.equalToSuperview()
+                make.centerY.equalToSuperview()
+                make.height.width.equalTo(40)
+            }
+            
+            iconContainerView.addSubview(deleteIcon)
+            deleteIcon.snp.makeConstraints { make in
+                make.left.equalTo(editIcon.snp.right).offset(12)
+                make.centerY.equalToSuperview()
+                make.height.width.equalTo(40)
+            }
+            
+            iconContainerView.addSubview(signupIcon)
+            signupIcon.snp.makeConstraints { make in
+                make.left.equalTo(deleteIcon.snp.right).offset(12)
+                make.centerY.equalToSuperview()
+                make.height.width.equalTo(40)
+            }
+            
+            iconContainerView.addSubview(teamMemberIcon)
+            teamMemberIcon.snp.makeConstraints { make in
+                make.left.equalTo(signupIcon.snp.right).offset(12)
+                make.centerY.equalToSuperview()
+                make.height.width.equalTo(40)
+            }
         
-        iconContainerView.addSubview(bk)
-        bk.snp.makeConstraints { make in
-            make.left.equalToSuperview()
+        iconContainerView.addSubview(showButton2)
+        showButton2.snp.makeConstraints { make in
+            make.right.equalToSuperview()
             make.centerY.equalToSuperview()
-            make.width.height.equalTo(40)
-        }
-        
-        iconContainerView.addSubview(editIcon)
-        editIcon.snp.makeConstraints { make in
-            make.left.equalTo(bk.snp.right).offset(12)
-            //make.left.equalToSuperview()
-            make.centerY.equalToSuperview()
-            make.height.width.equalTo(20)
-        }
-        
-        iconContainerView.addSubview(deleteIcon)
-        deleteIcon.snp.makeConstraints { make in
-            make.left.equalTo(editIcon.snp.right).offset(12)
-            make.centerY.equalToSuperview()
-            make.height.width.equalTo(20)
-        }
-        
-        iconContainerView.addSubview(signupIcon)
-        signupIcon.snp.makeConstraints { make in
-            make.left.equalTo(deleteIcon.snp.right).offset(12)
-            make.centerY.equalToSuperview()
-            make.height.width.equalTo(20)
-        }
-        
-        iconContainerView.addSubview(teamMemberIcon)
-        teamMemberIcon.snp.makeConstraints { make in
-            make.left.equalTo(signupIcon.snp.right).offset(12)
-            make.centerY.equalToSuperview()
-            make.height.width.equalTo(20)
+            make.height.equalTo(40)
+            make.width.equalTo(200)
         }
     }
     
@@ -439,24 +418,28 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         
         nameLbl.text = (item != nil) ? item!.name : ""
     }
-    
-    @objc func editPressed(_ sender: UIGestureRecognizer) {
-        myDelegate?.cellEdit(row: item!)
+}
+
+extension ManagerTeamCell: IconView2Delegate {
+    func pressed(icon: String) {
+        switch icon {
+        case "edit_svg" :
+            myDelegate?.cellEdit(row: item!)
+        case "delete_svg":
+            myDelegate?.cellDelete(row: item!)
+        case "check_svg":
+            myDelegate?.cellSignup(row: item!)
+        case "member_svg":
+            myDelegate?.cellTeamMember(row: item!)
+        default:
+            myDelegate?.cellEdit(row: item!)
+        }
     }
-    
-    @objc func deletePressed(_ sender: UIGestureRecognizer) {
-        myDelegate?.cellDelete(row: item!)
-    }
-    
-    @objc func signupPressed(_ sender: UIGestureRecognizer) {
-        myDelegate?.cellSignup(row: item!)
-    }
-    
-    @objc func teamMemberPressed(_ sender: UIGestureRecognizer) {
-        myDelegate?.cellTeamMember(row: item!)
-    }
-    
-    override func layoutSubviews() {
-        self.featuredIV.makeRounded()
+}
+
+extension ManagerTeamCell: ShowButton2Delegate {
+    func pressed() {
+        guard let superView = self.superview as? UITableView else { return }
+        myDelegate?.didSelect(item: item, at: superView.indexPath(for: self)!)
     }
 }

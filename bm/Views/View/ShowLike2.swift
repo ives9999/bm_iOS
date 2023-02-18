@@ -80,7 +80,7 @@ class ShowLike2: UIView {
     func anchor() {
         
         self.snp.makeConstraints { make in
-            make.width.height.equalTo(48)
+            make.width.equalTo(48)
             make.height.equalTo(50)
         }
         

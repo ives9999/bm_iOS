@@ -352,6 +352,7 @@
 		F9A6751D27FAF605007C8F47 /* Top.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A6751C27FAF605007C8F47 /* Top.swift */; };
 		F9A6751F27FAF766007C8F47 /* Top.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A6751E27FAF766007C8F47 /* Top.xib */; };
 		F9B1925A2997405F0037FE05 /* ShowTab2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B192592997405F0037FE05 /* ShowTab2.swift */; };
+		F9B1925C299FCCB00037FE05 /* ShowButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925B299FCCB00037FE05 /* ShowButton2.swift */; };
 		F9CB7F3E298FFE0900C1B92F /* ShowLike2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */; };
 		F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */; };
 		F9EDEDAF28927C1B00FB92BB /* MemberSubscriptionKindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EDEDAE28927C1B00FB92BB /* MemberSubscriptionKindVC.swift */; };
@@ -796,6 +797,7 @@
 		F9A6751C27FAF605007C8F47 /* Top.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Top.swift; sourceTree = "<group>"; };
 		F9A6751E27FAF766007C8F47 /* Top.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Top.xib; sourceTree = "<group>"; };
 		F9B192592997405F0037FE05 /* ShowTab2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTab2.swift; sourceTree = "<group>"; };
+		F9B1925B299FCCB00037FE05 /* ShowButton2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowButton2.swift; sourceTree = "<group>"; };
 		F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLike2.swift; sourceTree = "<group>"; };
 		F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImagePickerVC.swift; sourceTree = "<group>"; };
 		F9EDEDAE28927C1B00FB92BB /* MemberSubscriptionKindVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionKindVC.swift; sourceTree = "<group>"; };
@@ -1203,6 +1205,7 @@
 				B39E5F7B263BCDC100C40BA7 /* LikeIcon.swift */,
 				B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */,
 				F9F583B1283533C500F77B00 /* ThreeButton.swift */,
+				F9B1925B299FCCB00037FE05 /* ShowButton2.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -2035,6 +2038,7 @@
 				B3B75869259CBB27006ACC33 /* ProductService.swift in Sources */,
 				B3B758A225A960B0006ACC33 /* Color1Cell.swift in Sources */,
 				B3ED38E61FB785FE0003F083 /* EMailTextField.swift in Sources */,
+				F9B1925C299FCCB00037FE05 /* ShowButton2.swift in Sources */,
 				B39453712343256C000DF98E /* SignupListCell.swift in Sources */,
 				B358B0B822A100EF00F1A4E6 /* SectionFormItem.swift in Sources */,
 				B3756EDE21B901C5006893E1 /* TimeCell.swift in Sources */,

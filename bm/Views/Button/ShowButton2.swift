@@ -1,14 +1,16 @@
 //
-//  SubmitButton.swift
+//  ShowButton2.swift
 //  bm
 //
-//  Created by ives on 2018/10/20.
-//  Copyright © 2018 bm. All rights reserved.
+//  Created by ives on 2023/2/17.
+//  Copyright © 2023 bm. All rights reserved.
 //
 
 import UIKit
 
-class SubmitButton: SuperButton {
+class ShowButton2: SuperButton {
+    
+    var delegate: ShowButton2Delegate?
 
     init() {
         super.init(frame: .zero)
@@ -27,11 +29,20 @@ class SubmitButton: SuperButton {
     
     override func commonInit() {
         super.commonInit()
-        setTitle("送出", for: .normal)
+        setTitle("內容", for: .normal)
         setColor(textColor: UIColor(MY_BLACK), bkColor: UIColor(MY_GREEN))
-        frame.size = CGSize(width: 200, height: 35)
-        //self.cornerRadius = MY_BUTTON_CORNER
+        frame.size = CGSize(width: 190, height: 40)
+        self.cornerRadius = 20
         //contentEdgeInsets = UIEdgeInsets(top: 4, left: 36, bottom: 4, right: 36)
+        
+        self.addTarget(self, action: #selector(pressed), for: .touchUpInside)
+    }
+    
+    @objc func pressed(_ sender: UIButton) {
+        delegate?.pressed()
     }
 }
 
+protocol ShowButton2Delegate {
+    func pressed()
+}

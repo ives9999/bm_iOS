@@ -48,11 +48,13 @@ class MemberVC: MyTableVC {
         
         var sections: [MemberSection] = [MemberSection]()
         
+        sections.append(makeSection4Row())
+        
         sections.append(makeSection0Row())
         sections.append(makeSection1Row())
         sections.append(makeSection2Row(isEpanded: true))
         sections.append(makeSection3Row())
-        sections.append(makeSection4Row())
+        
         sections.append(makeSectionBankRow())
         sections.append(makeSectionXRow())
         
