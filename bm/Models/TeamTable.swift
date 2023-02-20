@@ -55,6 +55,7 @@ class TeamTable: Table {
     var arena: ArenaTable?
     var signupDate: SignupDateTable?
     var nextDate: String = ""
+    var leaveCount: Int = 0
     
     var isSignup: Bool = false
     var isTempPlay: Bool = false
@@ -114,6 +115,7 @@ class TeamTable: Table {
         case signupNormalTables = "signup_normal_models"
         case signupStandbyTables = "signup_standby_models"
         case nextDate
+        case leaveCount
     }
     
     required init(from decoder: Decoder) throws {
@@ -154,6 +156,7 @@ class TeamTable: Table {
         signupNormalTables = try container.decodeIfPresent([SignupNormalTable].self, forKey: .signupNormalTables) ?? [SignupNormalTable]()
         signupStandbyTables = try container.decodeIfPresent([SignupStandbyTable].self, forKey: .signupStandbyTables) ?? [SignupStandbyTable]()
         nextDate = try container.decodeIfPresent(String.self, forKey: .nextDate) ?? ""
+        leaveCount = try container.decodeIfPresent(Int.self, forKey: .leaveCount) ?? 0
         //do {arena = try container.decode(ArenaTable.self, forKey: .arena)}catch{arena = nil}
     }
     

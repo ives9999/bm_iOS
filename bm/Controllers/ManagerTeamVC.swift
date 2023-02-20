@@ -277,6 +277,26 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
         return view
     }()
     
+    let dot2: UIView = Dot2()
+    
+    let numberLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
+        view.text = "16人"
+        
+        return view
+    }()
+    
+    let dot3: UIView = Dot2()
+    
+    let leaveLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
+        view.text = "16人"
+        
+        return view
+    }()
+    
     let iconContainerView: UIView = UIView()
     
     let editIcon: IconView2 = {
@@ -404,11 +424,35 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
                 make.left.equalTo(featuredIV.snp.right).offset(20)
             }
         
-        mainContainerView.addSubview(nextDateLbl)
-        nextDateLbl.snp.makeConstraints { make in
-            make.left.equalTo(dot1.snp.right).offset(8)
-            make.centerY.equalTo(dot1.snp.centerY)
-        }
+            mainContainerView.addSubview(nextDateLbl)
+            nextDateLbl.snp.makeConstraints { make in
+                make.left.equalTo(dot1.snp.right).offset(6)
+                make.centerY.equalTo(dot1.snp.centerY)
+            }
+        
+            mainContainerView.addSubview(dot2)
+            dot2.snp.makeConstraints { make in
+                make.left.equalTo(nextDateLbl.snp.right).offset(16)
+                make.centerY.equalTo(dot1.snp.centerY)
+            }
+        
+            mainContainerView.addSubview(numberLbl)
+            numberLbl.snp.makeConstraints { make in
+                make.left.equalTo(dot2.snp.right).offset(6)
+                make.centerY.equalTo(dot1.snp.centerY)
+            }
+        
+            mainContainerView.addSubview(dot3)
+            dot3.snp.makeConstraints { make in
+                make.left.equalTo(numberLbl.snp.right).offset(16)
+                make.centerY.equalTo(dot1.snp.centerY)
+            }
+        
+            mainContainerView.addSubview(leaveLbl)
+            leaveLbl.snp.makeConstraints { make in
+                make.left.equalTo(dot3.snp.right).offset(6)
+                make.centerY.equalTo(dot1.snp.centerY)
+            }
         
         self.contentView.addSubview(iconContainerView)
         //iconContainerView.backgroundColor = UIColor.red
@@ -453,7 +497,7 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
             make.right.equalToSuperview()
             make.centerY.equalToSuperview()
             make.height.equalTo(40)
-            make.width.equalTo(200)
+            make.width.equalTo(160)
         }
     }
     
@@ -471,6 +515,8 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
             playTimeLbl.text = item!.interval_show
             playWeekLbl.text = item!.weekdays_show
             nextDateLbl.text = item!.nextDate
+            numberLbl.text = "隊員：\(item!.number)人"
+            leaveLbl.text = "請假：\(item!.leaveCount)人"
         }
     }
 }

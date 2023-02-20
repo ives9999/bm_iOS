@@ -22,7 +22,7 @@ class ShowTop2: UIView {
     
     let prevBtn: UIButton = {
         let view = UIButton()
-        view.setImage(UIImage(named: "prev"), for: .normal)
+        view.setImage(UIImage(named: "prev_svg"), for: .normal)
         
         return view
     }()

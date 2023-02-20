@@ -31,7 +31,7 @@ class ShowButton2: SuperButton {
         super.commonInit()
         setTitle("內容", for: .normal)
         setColor(textColor: UIColor(MY_BLACK), bkColor: UIColor(MY_GREEN))
-        frame.size = CGSize(width: 190, height: 40)
+        frame.size = CGSize(width: 160, height: 40)
         self.cornerRadius = 20
         //contentEdgeInsets = UIEdgeInsets(top: 4, left: 36, bottom: 4, right: 36)
         

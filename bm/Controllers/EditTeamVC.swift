@@ -150,7 +150,7 @@ class EditTeamVC: EditVC {
         row = OneRow(title: "結束時間", value: myTable!.play_end, show: myTable!.play_end_show, key: TEAM_PLAY_END_KEY, cell: "more", isRequired: true)
         row.msg = "沒有選擇結束時間"
         rows.append(row)
-        row = OneRow(title: "人數", value: String(myTable!.number), show: String(myTable!.number), key: NUMBER_KEY, cell: "textField", keyboard: KEYBOARD.numberPad)
+        row = OneRow(title: "人數", value: String(myTable!.number), show: String(myTable!.number), key: NUMBER_KEY, cell: "textField", keyboard: KEYBOARD.numberPad, isRequired: true)
         rows.append(row)
         row = OneRow(title: "程度", value: myTable!.degree, show: myTable!.degree_show, key: DEGREE_KEY, cell: "more")
         rows.append(row)
