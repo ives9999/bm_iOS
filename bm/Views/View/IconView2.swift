@@ -79,12 +79,12 @@ class IconView2: UIView {
     }
     
     @objc func pressed(_ sender: UITapGestureRecognizer) {
-        delegate?.pressed(icon: icon)
+        delegate?.iconPressed(icon: icon)
     }
 }
 
 protocol IconView2Delegate {
-    func pressed(icon: String)
+    func iconPressed(icon: String)
 }
 
 
