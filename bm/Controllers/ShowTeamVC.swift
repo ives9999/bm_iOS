@@ -531,14 +531,60 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     private func initTempPlay() {
         
         scrollView.addSubview(tempPlayStackView)
+        
         tempPlayStackView.snp.makeConstraints { make in
             make.top.bottom.equalToSuperview()
             make.width.equalToSuperview()
         }
         
+        tempPlayStackView.addArrangedSubview(nextDateContainer)
+        nextDateContainer.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.height.equalTo(30)
+        }
+
+            nextDateContainer.addSubview(nextDateIV)
+            nextDateIV.snp.makeConstraints { make in
+                make.left.equalToSuperview()
+                make.width.height.equalTo(24)
+                make.centerY.equalToSuperview()
+            }
+
+            nextDateContainer.addSubview(nextDateLbl)
+            nextDateLbl.snp.makeConstraints { make in
+                make.left.equalTo(nextDateIV.snp.right).offset(24)
+                make.centerY.equalToSuperview()
+            }
+        
+//        teamMemberStackView.addArrangedSubview(nextTimeContainer)
+//        nextTimeContainer.snp.makeConstraints { make in
+//            make.left.equalToSuperview()
+//            make.height.equalTo(30)
+//        }
+//
+//            nextTimeContainer.addSubview(nextTimeIV)
+//            nextTimeIV.snp.makeConstraints { make in
+//                make.left.equalToSuperview()
+//                make.width.height.equalTo(24)
+//                make.centerY.equalToSuperview()
+//            }
+//
+//            nextTimeContainer.addSubview(nextTimeLbl)
+//            nextTimeLbl.snp.makeConstraints { make in
+//                make.left.equalTo(nextTimeIV.snp.right).offset(24)
+//                make.centerY.equalToSuperview()
+//            }
+        
+        let spacer2: UIView = UIView()
+        tempPlayStackView.addArrangedSubview(spacer2)
+        spacer2.snp.makeConstraints { make in
+            make.left.equalToSuperview()
+            make.height.equalTo(20)
+        }
+        
         tempPlayStackView.addArrangedSubview(tempPlayDataLbl)
         tempPlayDataLbl.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalTo(spacer2.snp.bottom).offset(10)
             make.left.equalToSuperview().offset(12)
         }
 
@@ -567,7 +613,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         if token != nil {
             Global.instance.addSpinner(superView: self.view)
             let params: [String: String] = ["token": token!, "member_token": Member.instance.token]
-            dataService.getOne(params: params) { (success) in
+            dataService.getOne(params: params) { [self] (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if (success) {
                     let jsonData: Data = self.dataService.jsonData!
@@ -586,6 +632,9 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                                 self.setLike()
                                 self.showTop2!.setTitle(title: self.table!.name)
                                 self.introduceTableView.reloadData()
+                                
+                                let t1 = table as! TeamTable
+                                self.nextDate = t1.nextDate
                                 
                                 self._tabPressed(self.focusTabIdx)
                             }
@@ -1204,6 +1253,10 @@ extension ShowTeamVC {
             tempPlayDeadlineLbl.visibility = .invisible
             showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
         } else {
+            
+            self.nextDateLbl.text = "\(nextDate)"
+            //self.nextTimeLbl.text = "\(play_start) ~ \(play_end)"
+            
             //signupButtonContainer.visibility = .visible
             //tempPlayDataLbl.visibility = .invisible
             tempPlayDataLbl.text = ""
@@ -1238,37 +1291,37 @@ extension ShowTeamVC {
         }
 
         //2.如果沒有設定臨打日期，關閉臨打
-        if myTable!.signupDate != nil {
-            let temp_date_string: String = myTable!.signupDate!.date
-
-            let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd"
-            let now_string: String = formatter.string(from: Date())
-
-            //3.如果臨打日期超過現在的日期，關閉臨打
-            if let temp_date: Date = temp_date_string.toDateTime(format: "yyyy-MM-dd", locale: false) {
-
-                var now: Date = Date()
-                if let tmp: Date = now_string.toDateTime(format: "yyyy-MM-dd", locale: false) {
-                    now = tmp
-                }
-
-                //(1)如果報名日期剛好也是臨打日期則可以報名
-                if (temp_date.isEqualTo(now)) {
-                    isTempPlay = true
-                } else {
-                    //(2)如果報名日期已經過了臨打日期則無法報名
-                    if (temp_date.isSmallerThan(now)) {
-                        isTempPlay = false
-                    //(3)如果報名日期還沒過了臨打日期則無法報名
-                    } else {
-                        isTempPlay = true
-                    }
-                }
-            }
-        } else {
-            isTempPlay = false
-        }
+//        if myTable!.signupDate != nil {
+//            let temp_date_string: String = myTable!.signupDate!.date
+//
+//            let formatter = DateFormatter()
+//            formatter.dateFormat = "yyyy-MM-dd"
+//            let now_string: String = formatter.string(from: Date())
+//
+//            //3.如果臨打日期超過現在的日期，關閉臨打
+//            if let temp_date: Date = temp_date_string.toDateTime(format: "yyyy-MM-dd", locale: false) {
+//
+//                var now: Date = Date()
+//                if let tmp: Date = now_string.toDateTime(format: "yyyy-MM-dd", locale: false) {
+//                    now = tmp
+//                }
+//
+//                //(1)如果報名日期剛好也是臨打日期則可以報名
+//                if (temp_date.isEqualTo(now)) {
+//                    isTempPlay = true
+//                } else {
+//                    //(2)如果報名日期已經過了臨打日期則無法報名
+//                    if (temp_date.isSmallerThan(now)) {
+//                        isTempPlay = false
+//                    //(3)如果報名日期還沒過了臨打日期則無法報名
+//                    } else {
+//                        isTempPlay = true
+//                    }
+//                }
+//            }
+//        } else {
+//            isTempPlay = false
+//        }
 
         //3.如果管理者設定報名臨打名額是0，關閉臨打
         if myTable!.people_limit == 0 {
