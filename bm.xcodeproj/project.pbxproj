@@ -354,6 +354,7 @@
 		F9A6751F27FAF766007C8F47 /* Top.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9A6751E27FAF766007C8F47 /* Top.xib */; };
 		F9B1925A2997405F0037FE05 /* ShowTab2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B192592997405F0037FE05 /* ShowTab2.swift */; };
 		F9B1925C299FCCB00037FE05 /* ShowButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925B299FCCB00037FE05 /* ShowButton2.swift */; };
+		F9B1925E29A52AD50037FE05 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925D29A52AD50037FE05 /* Int.swift */; };
 		F9CB7F3E298FFE0900C1B92F /* ShowLike2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */; };
 		F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */; };
 		F9EDEDAF28927C1B00FB92BB /* MemberSubscriptionKindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EDEDAE28927C1B00FB92BB /* MemberSubscriptionKindVC.swift */; };
@@ -800,6 +801,7 @@
 		F9A6751E27FAF766007C8F47 /* Top.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Top.xib; sourceTree = "<group>"; };
 		F9B192592997405F0037FE05 /* ShowTab2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTab2.swift; sourceTree = "<group>"; };
 		F9B1925B299FCCB00037FE05 /* ShowButton2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowButton2.swift; sourceTree = "<group>"; };
+		F9B1925D29A52AD50037FE05 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLike2.swift; sourceTree = "<group>"; };
 		F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImagePickerVC.swift; sourceTree = "<group>"; };
 		F9EDEDAE28927C1B00FB92BB /* MemberSubscriptionKindVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionKindVC.swift; sourceTree = "<group>"; };
@@ -1276,6 +1278,7 @@
 				F985F4612956BF3900636FEA /* UIView.swift */,
 				F94093D3298BA88E0006D89D /* UILabel.swift */,
 				B313271B299F3ACC00EAB782 /* UIImage.swift */,
+				F9B1925D29A52AD50037FE05 /* Int.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1921,6 +1924,7 @@
 				B39E5FAB263ED55400C40BA7 /* ShowTeamVC.swift in Sources */,
 				B3B758E525B0759B006ACC33 /* WeightFormItem.swift in Sources */,
 				B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */,
+				F9B1925E29A52AD50037FE05 /* Int.swift in Sources */,
 				F9FFD8B1290EC50C00AD8E52 /* ManagerTeamMemberVC.swift in Sources */,
 				B3FAA0AA20CAC995008F2294 /* TempPlaySignupOneCell.swift in Sources */,
 				B31361E91F88A35900BDA53D /* Global.swift in Sources */,

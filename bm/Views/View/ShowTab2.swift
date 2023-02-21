@@ -11,13 +11,13 @@ import UIKit
 class ShowTab2: UIView {
     
     //外圍框線的寬度
-    let borderWidth: CGFloat = 1
+    let borderWidth: CGFloat = 0
     
     //框線的透明度，做出ui的效果
     let borderAlpha: CGFloat = 0.8
     
     //圓角的大小值
-    let cornerRadius: CGFloat = 8
+    let cornerRadius: CGFloat = 20
     
     //螢幕寬度，有了螢幕寬度才能計算出每個tab的寬度
     var screenWidth: CGFloat = 0
@@ -38,7 +38,7 @@ class ShowTab2: UIView {
     var view1: UIView = {
         let view: UIView = UIView()
         view.tag = 0
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = 20
         view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
         return view
@@ -54,7 +54,7 @@ class ShowTab2: UIView {
     var view3: UIView = {
         let view: UIView = UIView()
         view.tag = 2
-        view.layer.cornerRadius = 8
+        view.layer.cornerRadius = 20
         view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         
         return view
@@ -100,8 +100,9 @@ class ShowTab2: UIView {
     func commonInit() {
         
         //設定外框的參數
-        self.layer.borderWidth = borderWidth
-        self.layer.borderColor = UIColor(MY_WHITE).withAlphaComponent(borderAlpha).cgColor
+        //self.layer.borderWidth = borderWidth
+        //self.layer.borderColor = UIColor(MY_WHITE).withAlphaComponent(borderAlpha).cgColor
+        self.backgroundColor = UIColor(hex: MY_WHITE, alpha: 0.2)
         self.layer.cornerRadius = cornerRadius
         
         views.append(contentsOf: [view1, view2, view3])

@@ -18,7 +18,8 @@ class ShowTeamMemberCell: UITableViewCell {
     
     let noLbl: SuperLabel = {
         let view = SuperLabel()
-        view.setTextGeneral()
+        view.setTextColor(UIColor(MY_GREEN))
+        view.setTextBold()
         return view
     }()
     
@@ -57,7 +58,7 @@ class ShowTeamMemberCell: UITableViewCell {
     
     let separator: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.2)
+        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.26)
         return view
     }()
     
@@ -84,95 +85,92 @@ class ShowTeamMemberCell: UITableViewCell {
     }
     
     private func setupView() {
-        backgroundColor = UIColor(MY_BLACK)
+        backgroundColor = UIColor.clear
         setAnchor()
     }
     
     func setAnchor() {
         
         self.contentView.addSubview(noLbl)
+        //noLbl.backgroundColor = UIColor.red
         noLbl.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(12)
             make.left.equalToSuperview()
-            make.centerY.equalToSuperview()
+            //make.centerY.equalToSuperview()
+            make.height.equalTo(48)
         }
         
         self.contentView.addSubview(avatarIV)
+        //avatarIV.backgroundColor = UIColor.gray
         avatarIV.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
             make.left.equalTo(noLbl.snp.right).offset(12)
-            make.width.height.equalTo(48)
+            make.width.height.equalTo(40)
             make.centerY.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-12)
+            //make.bottom.equalToSuperview().offset(-12)
         }
-        
+
         self.contentView.addSubview(dataContainer)
         //dataContainer.backgroundColor = UIColor.blue
         dataContainer.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
             make.left.equalTo(avatarIV.snp.right).offset(18)
-            make.top.equalToSuperview().offset(3)
-            make.centerY.equalToSuperview()
+            make.right.equalToSuperview()
+
+            make.height.equalTo(42)
+            //make.centerY.equalToSuperview()
         }
-        
-        self.dataContainer.addSubview(nameLbl)
-        nameLbl.snp.makeConstraints { make in
-            make.top.equalTo(avatarIV.snp.top).offset(4)
-            make.left.equalToSuperview()
-        }
-        
-        self.dataContainer.addSubview(createdAtLbl)
-        createdAtLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.bottom.equalTo(avatarIV.snp.bottom).offset(-4)
-        }
-        
-        self.contentView.addSubview(leaveLbl)
-        leaveLbl.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-20)
-            make.centerY.equalToSuperview()
-        }
-        
+
+            self.dataContainer.addSubview(nameLbl)
+            nameLbl.snp.makeConstraints { make in
+                make.top.equalTo(avatarIV.snp.top)
+                make.left.equalToSuperview()
+            }
+
+            self.dataContainer.addSubview(createdAtLbl)
+            createdAtLbl.snp.makeConstraints { make in
+                make.left.equalToSuperview()
+                make.bottom.equalTo(avatarIV.snp.bottom)
+            }
+
+            self.contentView.addSubview(leaveLbl)
+            leaveLbl.snp.makeConstraints { make in
+                make.right.equalToSuperview().offset(-20)
+                make.centerY.equalToSuperview()
+            }
+
         self.contentView.addSubview(separator)
+        //separator.backgroundColor = UIColor.green
         separator.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
             make.height.equalTo(1)
+            make.top.equalTo(avatarIV.snp.bottom).offset(12)
+            //make.bottom.equalToSuperview().offset(-20)
         }
-        
-//        self.contentView.addSubview(leaveBtn)
-//        leaveBtn.snp.makeConstraints { make in
-//            make.right.equalToSuperview().offset(-12)
-//            make.centerY.equalToSuperview()
-//        }
-//
-//        leaveBtn.addTarget(self, action: #selector(leavePressed), for: .touchDown)
     }
     
     func update(row: TeamMemberTable, no: Int) {
 //        if no == 1 {
 //            self.contentView.backgroundColor = UIColor.gray
 //        }
-        self.noLbl.text = "\(no)."
+        self.noLbl.text = no.toTwoString()
         
         self.avatarIV.path(row.memberTable!.featured_path)
-        
+
         var nickname: String = ""
         if (row.memberTable != nil) {
             nickname = row.memberTable!.nickname
         }
         self.nameLbl.text = nickname
         self.createdAtLbl.text = row.created_at.noSec()
-        
+
         self.leaveLbl.visibility = (row.isLeave) ? .visible : .invisible
         if self.leaveLbl.visibility == .visible {
             self.leaveLbl.text = "請假\n\(row.leaveTime.noSec().noYear())"
         }
     }
     
-//    override func layoutSubviews() {
-//        self.avatarIV.makeRounded()
-//    }
-    
-//    @objc func leavePressed(view: UIButton) {
-//
-//        delegate?.leavePressed(cell: self)
-//    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
 }

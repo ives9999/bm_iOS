@@ -204,7 +204,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let teamMemberListLbl: SuperLabel = {
+    var teamMemberListLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
         view.setTextTitle()
         view.text = "隊員："
@@ -215,38 +215,38 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     
     //temp play
-    var tempPlayStackView: UIStackView = {
-        let view = UIStackView()
-        //view.backgroundColor = UIColor.red
-        //view.layer.cornerRadius = 26.0
-        //view.clipsToBounds = true
-        view.axis = .vertical
-        view.spacing = 12
-        return view
-    }()
+//    var tempPlayStackView: UIStackView = {
+//        let view = UIStackView()
+//        //view.backgroundColor = UIColor.red
+//        //view.layer.cornerRadius = 26.0
+//        //view.clipsToBounds = true
+//        view.axis = .vertical
+//        view.spacing = 12
+//        return view
+//    }()
     
     //tempplay data
-    let tempPlayDataLbl: SuperLabel = {
-        let view: SuperLabel = SuperLabel()
-        view.setTextTitle()
-        view.text = "目前球隊不開放臨打"
-        
-        return view
-    }()
-    let tempPlayTimeLbl: SuperLabel = {
-        let view: SuperLabel = SuperLabel()
-        view.setTextGeneral()
-        view.text = "下次臨打時間"
-        
-        return view
-    }()
-    let tempPlayDeadlineLbl: SuperLabel = {
-        let view: SuperLabel = SuperLabel()
-        view.setTextGeneral()
-        view.text = "臨打報名截止時間"
-        
-        return view
-    }()
+//    let tempPlayDataLbl: SuperLabel = {
+//        let view: SuperLabel = SuperLabel()
+//        view.setTextTitle()
+//        view.text = "目前球隊不開放臨打"
+//
+//        return view
+//    }()
+//    let tempPlayTimeLbl: SuperLabel = {
+//        let view: SuperLabel = SuperLabel()
+//        view.setTextGeneral()
+//        view.text = "下次臨打時間"
+//
+//        return view
+//    }()
+//    let tempPlayDeadlineLbl: SuperLabel = {
+//        let view: SuperLabel = SuperLabel()
+//        view.setTextGeneral()
+//        view.text = "臨打報名截止時間"
+//
+//        return view
+//    }()
     
     var isTeamMemberLoaded: Bool = false
     
@@ -333,7 +333,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         self.view.addSubview(showTab2)
         showTab2.snp.makeConstraints { make in
             make.top.equalTo(showTop2!.snp.bottom).offset(12)
-            make.height.equalTo(50)
+            make.height.equalTo(40)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             //make.horizontalEdges.equalToSuperview()
@@ -345,6 +345,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         self.view.addSubview(scrollView)
         //scrollView.backgroundColor = UIColor.red
         scrollView.snp.makeConstraints { make in
+            //make.top.equalTo(showTop2!.snp.bottom).offset(20)
             make.top.equalTo(showTab2.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
@@ -404,7 +405,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             make.left.right.equalToSuperview()
             //make.height.equalTo(50)
         }
-        
+
             //teamMemberLeftContainer.backgroundColor = UIColor.red
             teamMemberAllContainer.addSubview(teamMemberLeftContainer)
             teamMemberLeftContainer.snp.makeConstraints { make in
@@ -413,7 +414,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                 //make.height.equalTo(50)
                 make.bottom.equalToSuperview()
             }
-        
+
                 //teamMemberDataLbl.backgroundColor = UIColor.brown
                 teamMemberLeftContainer.addSubview(teamMemberDataLbl)
                 teamMemberDataLbl.snp.makeConstraints { make in
@@ -421,7 +422,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                     make.height.equalTo(20)
                     //make.bottom.equalToSuperview()
                 }
-        
+
                 //teamMemberSummaryContainer.backgroundColor = UIColor.red
                 teamMemberLeftContainer.addSubview(teamMemberSummaryContainer)
                 teamMemberSummaryContainer.snp.makeConstraints { make in
@@ -453,8 +454,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                         make.centerY.equalToSuperview()
                     }
 
-                
-        
+
+
             teamMemberAllContainer.addSubview(showLike2)
             showLike2.snp.makeConstraints { make in
                 make.top.equalToSuperview()
@@ -462,8 +463,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                 make.width.equalTo(48)
                 make.height.equalTo(50)
             }
-        
-        
+
+
         let spacer1: UIView = UIView()
         //spacer1.backgroundColor = UIColor.gray
         teamMemberStackView.addArrangedSubview(spacer1)
@@ -471,7 +472,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             make.left.equalToSuperview()
             make.height.equalTo(10)
         }
-        
+
         teamMemberStackView.addArrangedSubview(nextDateContainer)
         nextDateContainer.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -490,7 +491,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                 make.left.equalTo(nextDateIV.snp.right).offset(24)
                 make.centerY.equalToSuperview()
             }
-        
+
         teamMemberStackView.addArrangedSubview(nextTimeContainer)
         nextTimeContainer.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -509,14 +510,14 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                 make.left.equalTo(nextTimeIV.snp.right).offset(24)
                 make.centerY.equalToSuperview()
             }
-        
+
         let spacer2: UIView = UIView()
         teamMemberStackView.addArrangedSubview(spacer2)
         spacer2.snp.makeConstraints { make in
             make.left.equalToSuperview()
             make.height.equalTo(20)
         }
-        
+
         teamMemberStackView.addArrangedSubview(teamMemberListLbl)
         teamMemberListLbl.snp.makeConstraints { make in
             make.left.equalToSuperview()
@@ -528,35 +529,97 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
     }
 
-    private func initTempPlay() {
-        
-        scrollView.addSubview(tempPlayStackView)
-        
-        tempPlayStackView.snp.makeConstraints { make in
-            make.top.bottom.equalToSuperview()
-            make.width.equalToSuperview()
-        }
-        
-        tempPlayStackView.addArrangedSubview(nextDateContainer)
-        nextDateContainer.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.height.equalTo(30)
-        }
-
-            nextDateContainer.addSubview(nextDateIV)
-            nextDateIV.snp.makeConstraints { make in
-                make.left.equalToSuperview()
-                make.width.height.equalTo(24)
-                make.centerY.equalToSuperview()
-            }
-
-            nextDateContainer.addSubview(nextDateLbl)
-            nextDateLbl.snp.makeConstraints { make in
-                make.left.equalTo(nextDateIV.snp.right).offset(24)
-                make.centerY.equalToSuperview()
-            }
-        
-//        teamMemberStackView.addArrangedSubview(nextTimeContainer)
+//    private func initTempPlay() {
+//
+//        scrollView.addSubview(tempPlayStackView)
+//
+//        tempPlayStackView.snp.makeConstraints { make in
+//            make.top.bottom.equalToSuperview()
+//            make.width.equalToSuperview()
+//        }
+//
+//        tempPlayStackView.addArrangedSubview(teamMemberAllContainer)
+//        teamMemberAllContainer.snp.makeConstraints { make in
+//            make.top.equalToSuperview()
+//            make.left.right.equalToSuperview()
+//            //make.height.equalTo(50)
+//        }
+//
+//            //teamMemberLeftContainer.backgroundColor = UIColor.red
+//            teamMemberAllContainer.addSubview(teamMemberLeftContainer)
+//            teamMemberLeftContainer.snp.makeConstraints { make in
+//                make.top.left.equalToSuperview()
+//                make.right.equalToSuperview().offset(-100)
+//                //make.height.equalTo(50)
+//                make.bottom.equalToSuperview()
+//            }
+//
+//                //teamMemberDataLbl.backgroundColor = UIColor.brown
+//                teamMemberLeftContainer.addSubview(teamMemberDataLbl)
+//                teamMemberDataLbl.snp.makeConstraints { make in
+//                    make.top.left.right.equalToSuperview()
+//                    make.height.equalTo(20)
+//                    //make.bottom.equalToSuperview()
+//                }
+//
+//                teamMemberLeftContainer.addSubview(teamMemberSummaryContainer)
+//                teamMemberSummaryContainer.snp.makeConstraints { make in
+//                    make.top.equalTo(teamMemberDataLbl.snp.bottom).offset(20)
+//                    make.left.right.equalToSuperview()
+//                    make.height.equalTo(20)
+//                    make.bottom.equalToSuperview()
+//                }
+//
+//                //teamMemberTotalLbl.backgroundColor = UIColor.cyan
+//                teamMemberSummaryContainer.addSubview(teamMemberTotalLbl)
+//                teamMemberTotalLbl.snp.makeConstraints { make in
+//                    make.top.equalToSuperview()
+//                    make.left.equalToSuperview()
+//                    make.centerY.equalToSuperview()
+//                }
+//
+//                teamMemberSummaryContainer.addSubview(teamMemberPlayLbl)
+//                teamMemberPlayLbl.snp.makeConstraints { make in
+//                    make.left.equalTo(teamMemberTotalLbl.snp.right)
+//                    make.top.equalToSuperview()
+//                    make.centerY.equalToSuperview()
+//                }
+//
+//                teamMemberSummaryContainer.addSubview(teamMemberLeaveLbl)
+//                teamMemberLeaveLbl.snp.makeConstraints { make in
+//                    make.left.equalTo(teamMemberPlayLbl.snp.right)
+//                    make.top.equalToSuperview()
+//                    make.centerY.equalToSuperview()
+//                }
+//
+//        let spacer1: UIView = UIView()
+//        //spacer1.backgroundColor = UIColor.gray
+//        tempPlayStackView.addArrangedSubview(spacer1)
+//        spacer1.snp.makeConstraints { make in
+//            make.left.equalToSuperview()
+//            make.height.equalTo(10)
+//        }
+//
+//        tempPlayStackView.addArrangedSubview(nextDateContainer)
+//        nextDateContainer.snp.makeConstraints { make in
+//            make.left.equalToSuperview()
+//            make.height.equalTo(30)
+//        }
+//
+//            nextDateContainer.addSubview(nextDateIV)
+//            nextDateIV.snp.makeConstraints { make in
+//                make.left.equalToSuperview()
+//                make.width.height.equalTo(24)
+//                make.centerY.equalToSuperview()
+//            }
+//
+//            nextDateContainer.addSubview(nextDateLbl)
+//            nextDateLbl.snp.makeConstraints { make in
+//                make.left.equalTo(nextDateIV.snp.right).offset(24)
+//                make.centerY.equalToSuperview()
+//            }
+//
+//        tempPlayStackView.addArrangedSubview(nextTimeContainer)
 //        nextTimeContainer.snp.makeConstraints { make in
 //            make.left.equalToSuperview()
 //            make.height.equalTo(30)
@@ -574,34 +637,21 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 //                make.left.equalTo(nextTimeIV.snp.right).offset(24)
 //                make.centerY.equalToSuperview()
 //            }
-        
-        let spacer2: UIView = UIView()
-        tempPlayStackView.addArrangedSubview(spacer2)
-        spacer2.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.height.equalTo(20)
-        }
-        
-        tempPlayStackView.addArrangedSubview(tempPlayDataLbl)
-        tempPlayDataLbl.snp.makeConstraints { make in
-            make.top.equalTo(spacer2.snp.bottom).offset(10)
-            make.left.equalToSuperview().offset(12)
-        }
-
-        tempPlayStackView.addArrangedSubview(tempPlayTimeLbl)
-        tempPlayTimeLbl.snp.makeConstraints { make in
-            //make.top.equalTo(signupDataLbl.snp.bottom).offset(50)
-            make.left.equalToSuperview().offset(12)
-        }
-
-        tempPlayStackView.addArrangedSubview(tempPlayDeadlineLbl)
-        tempPlayDeadlineLbl.snp.makeConstraints { make in
-            //make.top.equalTo(signupTimeLbl.snp.bottom).offset(16)
-            make.left.equalToSuperview().offset(12)
-        }
-
-        tempPlayStackView.addArrangedSubview(introduceTableView)
-    }
+//
+//        let spacer2: UIView = UIView()
+//        tempPlayStackView.addArrangedSubview(spacer2)
+//        spacer2.snp.makeConstraints { make in
+//            make.left.equalToSuperview()
+//            make.height.equalTo(20)
+//        }
+//
+//        tempPlayStackView.addArrangedSubview(teamMemberListLbl)
+//        teamMemberListLbl.snp.makeConstraints { make in
+//            make.left.equalToSuperview()
+//        }
+//
+//        tempPlayStackView.addArrangedSubview(introduceTableView)
+//    }
     
     override func viewDidLayoutSubviews() {
         self.showLike2.backgroundCircle()
@@ -632,9 +682,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                                 self.setLike()
                                 self.showTop2!.setTitle(title: self.table!.name)
                                 self.introduceTableView.reloadData()
-                                
-                                let t1 = table as! TeamTable
-                                self.nextDate = t1.nextDate
                                 
                                 self._tabPressed(self.focusTabIdx)
                             }
@@ -756,9 +803,13 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
         
         myTable = table as? TeamTable
-        var row: MemberRow = MemberRow(title: "球館", icon: "arena", show: myTable!.arena!.name)
-        memberRows.append(row)
-        if (myTable!.arena != nil) {
+        
+        var row: MemberRow = MemberRow()
+        
+        if myTable != nil && myTable!.arena != nil {
+        
+            row = MemberRow(title: "球館", icon: "arena", show: myTable!.arena!.name)
+            memberRows.append(row)
             row = MemberRow(title: "縣市", icon: "map", show: myTable!.arena!.city_show)
             memberRows.append(row)
             row = MemberRow(title: "區域", icon: "map", show: myTable!.arena!.area_show)
@@ -896,10 +947,11 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 //    }
     
     private func _tabPressed(_ idx: Int) {
+        
+        focusTabIdx = idx
         switch idx {
         case 0:
             removeTeamMember()
-            removeTempPlay()
             
             initIntroduce()
             setIntroduceData()
@@ -908,29 +960,38 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             
         case 1:
             removeIntroduce()
-            removeTempPlay()
             
             initTeamMember()
             memberRows.removeAll()
             
+            teamMemberListLbl.text = "正式隊員："
             if (!isTeamMemberLoaded) {
                 teamMemberPage = 1
                 getTeamMemberList(page: teamMemberPage, perPage: teamMemberPerPage)
                 isTeamMemberLoaded = true
-            } else {
-                introduceTableView.reloadData()
             }
+            introduceTableView.reloadData()
             
             setTeamMemberBottom()
             
         case 2:
             removeIntroduce()
-            removeTeamMember()
             
-            initTempPlay()
+            initTeamMember()
             memberRows.removeAll()
-            setSignupData()
+            
+            teamMemberVisible(.visible)
+            teamMemberListLbl.text = "臨打隊員："
+            
+            if (!isTeamMemberLoaded) {
+                teamMemberPage = 1
+                getTeamMemberList(page: teamMemberPage, perPage: teamMemberPerPage)
+                isTeamMemberLoaded = true
+            }
             introduceTableView.reloadData()
+            
+            setSignupData()
+            
             //showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
             
         default:
@@ -942,9 +1003,9 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         introduceStackView.removeFromSuperview()
     }
     
-    private func removeTempPlay() {
-        tempPlayStackView.removeFromSuperview()
-    }
+//    private func removeTempPlay() {
+//        tempPlayStackView.removeFromSuperview()
+//    }
     
     private func removeTeamMember() {
         teamMemberStackView.removeFromSuperview()
@@ -1053,8 +1114,10 @@ extension ShowTeamVC {
             self.teamMemberLeaveLbl.text = "請假：\(leaveCount)位"
             self.teamMemberPlayLbl.text = "打球：\(teamMemberTotalCount-leaveCount)位"
             
-            self.nextDateLbl.text = "\(nextDate)" + " ( " + nextDateWeek + " )"
-            self.nextTimeLbl.text = "\(play_start) ~ \(play_end)"
+            if myTable != nil {
+                self.nextDateLbl.text = "\(myTable!.nextDate) ( \(myTable!.nextDateWeek) )"
+                self.nextTimeLbl.text = "\(myTable!.play_start) ~ \(myTable!.play_end)"
+            }
             
             teamMemberTotalLbl.on()
             
@@ -1086,10 +1149,10 @@ extension ShowTeamVC {
                             let _totalPage: Int = teamMemberTotalCount / teamMemberPerPage
                             teamMemberTotalPage = (teamMemberTotalCount % teamMemberPerPage > 0) ? _totalPage + 1 : _totalPage
                             
-                            nextDate = tables2.nextDate
-                            nextDateWeek = tables2.nextDateWeek
-                            play_start = tables2.play_start_show
-                            play_end = tables2.play_end_show
+//                            nextDate = tables2.nextDate
+//                            nextDateWeek = tables2.nextDateWeek
+//                            play_start = tables2.play_start_show
+//                            play_end = tables2.play_end_show
                             self.leaveCount = tables2.leaveCount
                         }
                     }
@@ -1117,8 +1180,7 @@ extension ShowTeamVC {
 //        view.textColor = UIColor(MY_WHITE)
 //    }
     
-    func teamMemberVisible(_ visible: UIView.Visibility)
-    {
+    func teamMemberVisible(_ visible: UIView.Visibility) {
         self.teamMemberDataLbl.visibility = visible
         
         self.teamMemberSummaryContainer.visibility = visible
@@ -1136,6 +1198,25 @@ extension ShowTeamVC {
         
         self.teamMemberListLbl.visibility = visible
     }
+    
+//    func tempPlayVisible(_ visible: UIView.Visibility) {
+//
+//        self.teamMemberDataLbl.visibility = visible
+//        self.teamMemberSummaryContainer.visibility = visible
+//        self.teamMemberTotalLbl.visibility = visible
+//        self.teamMemberPlayLbl.visibility = visible
+//        self.teamMemberLeaveLbl.visibility = visible
+//
+//        self.nextDateContainer.visibility = visible
+//        self.nextDateIV.visibility = visible
+//        self.nextDateLbl.visibility = visible
+//
+//        self.nextTimeContainer.visibility = visible
+//        self.nextTimeIV.visibility = visible
+//        self.nextTimeLbl.visibility = visible
+//
+//        self.teamMemberListLbl.visibility = visible
+//    }
     
     func setTeamMemberBottom() {
         if self.isTeamMember && !self.isTeapMemberLeave {
@@ -1155,7 +1236,7 @@ extension ShowTeamVC {
         Global.instance.addSpinner(superView: self.view)
         //team member token
         //play date
-        TeamService.instance.leave(team_member_token: self.teamMemberToken!, play_date: self.nextDate) { success in
+        TeamService.instance.leave(team_member_token: self.teamMemberToken!, play_date: myTable!.nextDate) { success in
             Global.instance.removeSpinner(superView: self.view)
             
             do {
@@ -1247,23 +1328,24 @@ extension ShowTeamVC {
 
         isTempPlayOnline()
         if !isTempPlay {
-            tempPlayDataLbl.text = "目前球隊不開放臨打"
+            //tempPlayDataLbl.text = "目前球隊不開放臨打"
             //signupButtonContainer.visibility = .invisible
-            tempPlayTimeLbl.visibility = .invisible
-            tempPlayDeadlineLbl.visibility = .invisible
+            //tempPlayTimeLbl.visibility = .invisible
+            //tempPlayDeadlineLbl.visibility = .invisible
             showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
         } else {
             
-            self.nextDateLbl.text = "\(nextDate)"
-            //self.nextTimeLbl.text = "\(play_start) ~ \(play_end)"
+            self.teamMemberTotalLbl.text = "全部：\(teamMemberTotalCount)位"
+            self.teamMemberLeaveLbl.text = "請假：\(leaveCount)位"
+            self.teamMemberPlayLbl.text = "打球：\(teamMemberTotalCount-leaveCount)位"
+            teamMemberTotalLbl.on()
             
-            //signupButtonContainer.visibility = .visible
-            //tempPlayDataLbl.visibility = .invisible
-            tempPlayDataLbl.text = ""
-            //tempPlayTimeLbl.visibility = .visible
-            if myTable != nil && myTable!.signupDate != nil {
-                tempPlayTimeLbl.text = "下次臨打時間：" + myTable!.signupDate!.date + " " + myTable!.interval_show
-                tempPlayDeadlineLbl.text = "報名截止時間：" + myTable!.signupDate!.deadline.noSec()
+            if let nextDate = myTable?.nextDate, !nextDate.isEmpty, let nextDateWeek = myTable?.nextDateWeek, !nextDateWeek.isEmpty {
+                self.nextDateLbl.text = "\(nextDate) ( \(nextDateWeek) )"
+            }
+            
+            if let playStart = myTable?.play_start, let playEnd = myTable?.play_end {
+                self.nextTimeLbl.text = "\(playStart) ~ \(playEnd)"
             }
         }
 
@@ -1561,10 +1643,10 @@ class TeamMemberTables2<T: Codable>: Codable {
     var totalCount: Int = -1
     var leaveCount: Int = -1
     var perPage: Int = -1
-    var nextDate: String = ""
-    var nextDateWeek: String = ""
-    var play_start: String = ""
-    var play_end: String = ""
+//    var nextDate: String = ""
+//    var nextDateWeek: String = ""
+//    var play_start: String = ""
+//    var play_end: String = ""
     var rows: [T] = [T]()
     
     var play_start_show: String = ""
@@ -1578,22 +1660,22 @@ class TeamMemberTables2<T: Codable>: Codable {
         totalCount = try container.decode(Int.self, forKey: .totalCount)
         leaveCount = try container.decode(Int.self, forKey: .leaveCount)
         perPage = try container.decode(Int.self, forKey: .perPage)
-        nextDate = try container.decode(String.self, forKey: .nextDate)
-        nextDateWeek = try container.decode(String.self, forKey: .nextDateWeek)
-        play_start = try container.decode(String.self, forKey: .play_start)
-        play_end = try container.decode(String.self, forKey: .play_end)
+//        nextDate = try container.decode(String.self, forKey: .nextDate)
+//        nextDateWeek = try container.decode(String.self, forKey: .nextDateWeek)
+//        play_start = try container.decode(String.self, forKey: .play_start)
+//        play_end = try container.decode(String.self, forKey: .play_end)
         rows = try container.decode([T].self, forKey: .rows)
     }
     
     func filterRow() {
         
-        if play_start.count > 0 {
-            play_start_show = play_start.noSec()
-        }
-        
-        if play_end.count > 0 {
-            play_end_show = play_end.noSec()
-        }
+//        if play_start.count > 0 {
+//            play_start_show = play_start.noSec()
+//        }
+//
+//        if play_end.count > 0 {
+//            play_end_show = play_end.noSec()
+//        }
     }
 }
 
@@ -1628,7 +1710,6 @@ extension ShowTeamVC: TapLabelDelegate {
 
 extension ShowTeamVC: ShowTab2Delegate {
     func tabPressed(_ idx: Int) {
-        focusTabIdx = idx
         _tabPressed(idx)
     }
 }

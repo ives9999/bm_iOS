@@ -27,6 +27,11 @@ class ShowTop2: UIView {
         return view
     }()
     
+    required init() {
+        super.init(frame: CGRect.zero)
+        setupView()
+    }
+    
     init(delegate: BaseViewController?) {
         super.init(frame: CGRect.zero)
         self.delegate = delegate
