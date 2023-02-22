@@ -94,7 +94,7 @@ class ShowTeamMemberCell: UITableViewCell {
         //noLbl.backgroundColor = UIColor.red
         noLbl.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(12)
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
             //make.centerY.equalToSuperview()
             make.height.equalTo(48)
         }
@@ -141,7 +141,8 @@ class ShowTeamMemberCell: UITableViewCell {
         self.contentView.addSubview(separator)
         //separator.backgroundColor = UIColor.green
         separator.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.height.equalTo(1)
             make.top.equalTo(avatarIV.snp.bottom).offset(12)
             //make.bottom.equalToSuperview().offset(-20)

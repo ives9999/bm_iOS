@@ -522,6 +522,7 @@ class ManagerTeamCell: BaseCell<TeamTable, ManagerTeamVC> {
 }
 
 extension ManagerTeamCell: IconView2Delegate {
+    
     func iconPressed(icon: String) {
         switch icon {
         case "edit_svg" :

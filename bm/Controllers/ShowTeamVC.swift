@@ -347,8 +347,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         scrollView.snp.makeConstraints { make in
             //make.top.equalTo(showTop2!.snp.bottom).offset(20)
             make.top.equalTo(showTab2.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.bottom.equalTo(showBottom!.snp.top)
         }
     }
@@ -402,7 +402,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         teamMemberStackView.addArrangedSubview(teamMemberAllContainer)
         teamMemberAllContainer.snp.makeConstraints { make in
             make.top.equalToSuperview()
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             //make.height.equalTo(50)
         }
 
@@ -475,7 +476,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 
         teamMemberStackView.addArrangedSubview(nextDateContainer)
         nextDateContainer.snp.makeConstraints { make in
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.height.equalTo(30)
         }
 
@@ -494,7 +496,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 
         teamMemberStackView.addArrangedSubview(nextTimeContainer)
         nextTimeContainer.snp.makeConstraints { make in
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.height.equalTo(30)
         }
 
@@ -520,7 +523,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 
         teamMemberStackView.addArrangedSubview(teamMemberListLbl)
         teamMemberListLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(20)
         }
         
         teamMemberStackView.addArrangedSubview(introduceTableView)
@@ -1069,10 +1072,6 @@ extension ShowTeamVC {
     func getTeamMemberList(page: Int = 1, perPage: Int = 20) {
         Global.instance.addSpinner(superView: self.view)
         
-//        TeamService.instance.teamMemberList(of: TeamMemberTables2<TeamMemberTable>.self, token: token!, page: page, perPage: perPage) { (success) in
-//            let n = 6
-//        }
-        
         TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
@@ -1222,9 +1221,11 @@ extension ShowTeamVC {
         if self.isTeamMember && !self.isTeapMemberLeave {
             showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
             showBottom!.submitBtn.setTitle("請假")
+            showBottom!.changeSubmitToNormalBtn()
         } else if self.isTeamMember && self.isTeamMember {
             showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
             showBottom!.submitBtn.setTitle("取消")
+            showBottom!.changeSubmitToCancelBtn()
         } else {
             showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: false, isShowCancel: false)
         }

@@ -174,6 +174,20 @@ class ShowBottom2: UIView {
         self.submitBtn.setTitle(title)
     }
     
+    func changeSubmitToCancelBtn() {
+        self.submitBtn.backgroundColor = UIColor(MY_BLACK)
+        self.submitBtn.layer.borderWidth = 1
+        self.submitBtn.layer.borderColor = UIColor(MY_GREEN).cgColor
+        self.submitBtn.setTitleColor(UIColor(MY_GREEN), for: .normal)
+    }
+    
+    func changeSubmitToNormalBtn() {
+        self.submitBtn.backgroundColor = UIColor(MY_GREEN)
+        self.submitBtn.layer.borderWidth = 0
+        self.submitBtn.layer.borderColor = UIColor(MY_GREEN).cgColor
+        self.submitBtn.setTitleColor(UIColor(MY_BLACK), for: .normal)
+    }
+    
 //    func setSubmitBtnVisible(_ isVisible: Bool) {
 //
 //        self.submitBtn.visibility = (isVisible) ? .visible : .invisible

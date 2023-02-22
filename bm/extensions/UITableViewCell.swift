@@ -12,7 +12,7 @@ extension UITableViewCell {
     
     func setSelectedBackgroundColor() {
         let bgColorView = UIView()
-        bgColorView.backgroundColor = UIColor(hex: MY_WHITE, alpha: 0.26)
+        bgColorView.backgroundColor = UIColor(CELL_SELECTED)
         selectedBackgroundView = bgColorView
     }
 }
