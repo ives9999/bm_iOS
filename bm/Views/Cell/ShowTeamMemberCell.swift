@@ -16,10 +16,9 @@ class ShowTeamMemberCell: UITableViewCell {
     
     var delegate: ShowTeamMemberCellDelegate?
     
-    let noLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.setTextColor(UIColor(MY_GREEN))
-        view.setTextBold()
+    let noLbl: NOLabel2 = {
+        let view = NOLabel2()
+        
         return view
     }()
     

@@ -128,8 +128,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let teamMemberTotalLbl: TapLabel = {
-        let view: TapLabel = TapLabel()
+    let teamMemberTotalLbl: TapLabel2 = {
+        let view: TapLabel2 = TapLabel2()
         view.tag = 0
         view.text = "16位"
         view.visibility = .invisible
@@ -137,8 +137,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let teamMemberPlayLbl: TapLabel = {
-        let view: TapLabel = TapLabel()
+    let teamMemberPlayLbl: TapLabel2 = {
+        let view: TapLabel2 = TapLabel2()
         view.tag = 1
         view.text = "16位"
         view.visibility = .invisible
@@ -146,8 +146,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let teamMemberLeaveLbl: TapLabel = {
-        let view: TapLabel = TapLabel()
+    let teamMemberLeaveLbl: TapLabel2 = {
+        let view: TapLabel2 = TapLabel2()
         view.tag = 2
         view.text = "16位"
         
@@ -267,7 +267,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var teamMemberTotalPage: Int = 0
     var leaveCount: Int = 0
     var teamMemberToken: String? = nil
-    var countTaps: [TapLabel] = [TapLabel]()
+    var countTaps: [TapLabel2] = [TapLabel2]()
     
     var nextDate: String = ""
     var nextDateWeek: String = ""
@@ -470,7 +470,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         teamMemberStackView.addArrangedSubview(spacer1)
         spacer1.snp.makeConstraints { make in
             make.left.equalToSuperview()
-            make.height.equalTo(10)
+            make.height.equalTo(4)
         }
 
         teamMemberStackView.addArrangedSubview(nextDateContainer)
@@ -515,7 +515,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         teamMemberStackView.addArrangedSubview(spacer2)
         spacer2.snp.makeConstraints { make in
             make.left.equalToSuperview()
-            make.height.equalTo(20)
+            make.height.equalTo(10)
         }
 
         teamMemberStackView.addArrangedSubview(teamMemberListLbl)
@@ -1679,7 +1679,7 @@ class TeamMemberTables2<T: Codable>: Codable {
     }
 }
 
-extension ShowTeamVC: LikeViewDelegate {
+extension ShowTeamVC: ShowLike2Delegate {
     func likePressed(_ isLike: Bool) {
         
         //print(isLike)
@@ -1687,7 +1687,7 @@ extension ShowTeamVC: LikeViewDelegate {
     }
 }
 
-extension ShowTeamVC: TapLabelDelegate {
+extension ShowTeamVC: TapLabel2Delegate {
     func tapPressed(_ idx: Int) {
         for (i, tap) in countTaps.enumerated() {
             (i == idx) ? tap.on() : tap.off()

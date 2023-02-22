@@ -38,8 +38,8 @@ class ShowTab2: UIView {
     var view1: UIView = {
         let view: UIView = UIView()
         view.tag = 0
-        view.layer.cornerRadius = 20
-        view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
+        view.layer.cornerRadius = 14
+        //view.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         
         return view
     }()
@@ -47,6 +47,7 @@ class ShowTab2: UIView {
     var view2: UIView = {
         let view: UIView = UIView()
         view.tag = 1
+        view.layer.cornerRadius = 14
     
         return view
     }()
@@ -54,8 +55,8 @@ class ShowTab2: UIView {
     var view3: UIView = {
         let view: UIView = UIView()
         view.tag = 2
-        view.layer.cornerRadius = 20
-        view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
+        view.layer.cornerRadius = 14
+        //view.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         
         return view
     }()
@@ -130,27 +131,31 @@ class ShowTab2: UIView {
         
         //計算取得每一個tab的寬度
         let w: CGFloat = ((screenWidth - margin*2) / 3).rounded()
+        let h: CGFloat = 32
         
         self.addSubview(view1)
         view1.snp.makeConstraints { make in
-            make.top.left.equalToSuperview().offset(borderWidth)
-            make.bottom.equalToSuperview().offset(-1 * borderWidth)
+            make.top.equalToSuperview().offset(4)
+            make.bottom.equalToSuperview().offset(-4)
+            make.left.equalToSuperview().offset(borderWidth)
             make.width.equalTo(w)
+            //make.height.equalTo(h)
+            //make.centerY.equalToSuperview()
         }
         
         self.addSubview(view2)
         view2.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(borderWidth)
+            make.top.equalToSuperview().offset(4)
+            make.bottom.equalToSuperview().offset(-4)
             make.left.equalTo(view1.snp.right)
-            make.bottom.equalToSuperview().offset(-1 * borderWidth)
             make.width.equalTo(w)
         }
         
         self.addSubview(view3)
         view3.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(borderWidth)
+            make.top.equalToSuperview().offset(4)
+            make.bottom.equalToSuperview().offset(-4)
             make.left.equalTo(view2.snp.right)
-            make.bottom.equalToSuperview().offset(-1 * borderWidth)
             make.width.equalTo(w)
         }
         

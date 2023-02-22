@@ -8,11 +8,13 @@
 
 import UIKit
 
-class TapLabel: SuperLabel {
+class TapLabel2: SuperLabel {
     
-    let defaultPadding: UIEdgeInsets = UIEdgeInsets(top: 0, left: 15, bottom: 0, right: 15)
+    let defaultPadding: UIEdgeInsets = UIEdgeInsets(top: 4, left: 16, bottom: 4, right: 16)
     var isOn: Bool = false
-    var delegate: TapLabelDelegate? = nil
+    var delegate: TapLabel2Delegate? = nil
+    var fontSize: CGFloat = 11
+    var cornerSize: CGFloat = 10
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -27,10 +29,9 @@ class TapLabel: SuperLabel {
     
     override func commonInit(){
         
-        self.font = UIFont(name: FONT_NAME, size: 12)
-        self.textColor = UIColor(MY_WHITE)
+        self.font = UIFont(name: FONT_NAME, size: fontSize)
+        self.textColor = UIColor(hex: MY_WHITE, alpha: 0.8)
         self.padding = defaultPadding
-        //self.backgroundColor = UIColor.blue
         self.isUserInteractionEnabled = true
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pressed))
@@ -43,16 +44,24 @@ class TapLabel: SuperLabel {
     }
     
     func on() {
-        self.backgroundColor = UIColor(MY_GREEN)
-        self.textColor = UIColor(MY_BLACK)
-        self.corner(3)
+        
+        self.font = UIFont(name: FONT_BOLD_NAME, size: fontSize)
+        self.textColor = UIColor(MY_GREEN)
+        
+        self.layer.borderColor = UIColor(MY_GREEN).cgColor
+        self.layer.borderWidth = 1
+        self.corner(cornerSize)
         
         self.isOn = true
     }
     
     func off() {
-        self.backgroundColor = UIColor.clear
-        self.textColor = UIColor(MY_WHITE)
+        
+        self.font = UIFont(name: FONT_NAME, size: fontSize)
+        self.textColor = UIColor(hex: MY_WHITE, alpha: 0.56)
+        
+        self.layer.borderColor = UIColor.clear.cgColor
+        self.layer.borderWidth = 0
         self.corner(0)
         
         self.isOn = false
@@ -60,7 +69,7 @@ class TapLabel: SuperLabel {
     
     @objc func pressed(_ sender: UITapGestureRecognizer) {
         if (!isOn) {
-            if let n = sender.view as? TapLabel {
+            if let n = sender.view as? TapLabel2 {
                 isOn = !isOn
                 delegate?.tapPressed(n.tag)
             }
@@ -68,6 +77,6 @@ class TapLabel: SuperLabel {
     }
 }
 
-protocol TapLabelDelegate {
+protocol TapLabel2Delegate {
     func tapPressed(_ idx: Int)
 }

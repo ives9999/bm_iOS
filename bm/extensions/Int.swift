@@ -19,7 +19,7 @@ extension Int {
         case 1:
             return "0\(s)"
         default:
-            return "\(s)"
+            return s
         }
     }
 }

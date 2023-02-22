@@ -21,7 +21,7 @@ class ShowLike2: UIView {
     
     let backgroundAlpha: CGFloat = 0.2
     
-    var delegate: LikeViewDelegate? = nil
+    var delegate: ShowLike2Delegate? = nil
     
     let likeHeartCircle: UIView = {
         let view = UIView()
@@ -154,6 +154,6 @@ class ShowLike2: UIView {
     }
 }
 
-protocol LikeViewDelegate {
+protocol ShowLike2Delegate {
     func likePressed(_ isLike: Bool)
 }
