@@ -218,13 +218,12 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var table: Table?
     var myTable: TeamTable?
     
-    var isTempPlay: Bool = false
     var isLike: Bool = false
     
     var focusTabIdx: Int = 0
     
     //team member
-    var items: [TeamMemberTable] = [TeamMemberTable]()
+    var items1: [TeamMemberTable] = [TeamMemberTable]()
     var filterItems: [TeamMemberTable] = [TeamMemberTable]()
     var teamMemberPage: Int = 1
     var teamMemberPerPage: Int = PERPAGE
@@ -242,15 +241,20 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     //會員是否為球隊隊友
     var isTeamMember: Bool = false
     //會員為隊友，會員是否已經請假
-    var isTeapMemberLeave: Bool = false
+    var isTeamMemberLeave: Bool = false
     
     //temp play
+    //是否開放臨打
+    var isTempPlay: Bool = true
+    var isAddTempPlay: Bool = false
+    //臨打列表資料是否已輸入
     var isTempplayLoaded: Bool = false
     var tempPlayPage: Int = 1
     var tempPlayPerPage: Int = PERPAGE
     var tempPlayTotalCount: Int = 0
     var tempPlayTotalPage: Int = 0
     
+    var items2: [TeamTempPlayTable] = [TeamTempPlayTable]()
     var memberRows: [MemberRow] = [MemberRow]()
     var tempPlayCount: Int = 0
     //var standbyCount: Int = 0
@@ -740,44 +744,45 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             self.submitLeave()
         }
         else if (focusTabIdx == 2) {
+            self.submitTempPlay()
             
-            if myTable != nil && myTable!.signupDate != nil {
-                
-                //print(myTable!.signupDate!.deadline)
-                if let deadline_time: Date = myTable!.signupDate!.deadline.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
-                    let now: Date = Date().myNow()
-                    if now > deadline_time {
-                        
-                        var msg: String = "已經超過報名截止時間，請下次再報名"
-                        if myTable!.isSignup {
-                            msg = "已經超過取消報名截止時間，無法取消報名"
-                        }
-                        warning(msg)
-                        return
-                    }
-                }
-                
-                Global.instance.addSpinner(superView: view)
-                dataService.signup(token: myTable!.token, member_token: Member.instance.token, date_token: myTable!.signupDate!.token) { (success) in
-                    
-                    Global.instance.removeSpinner(superView: self.view)
-                    
-                    do {
-                        if (self.dataService.jsonData != nil) {
-                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
-                            if (successTable.success) {
-                                self.info(msg: successTable.msg, buttonTitle: "關閉") {
-                                    self.refresh(TeamTable.self)
-                                }
-                            } else {
-                                self.warning(successTable.msg)
-                            }
-                        }
-                    } catch {
-                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
-                    }
-                }
-            }
+//            if myTable != nil && myTable!.signupDate != nil {
+//
+//                //print(myTable!.signupDate!.deadline)
+//                if let deadline_time: Date = myTable!.signupDate!.deadline.toDateTime(format: "yyyy-MM-dd HH:mm:ss", locale: false) {
+//                    let now: Date = Date().myNow()
+//                    if now > deadline_time {
+//
+//                        var msg: String = "已經超過報名截止時間，請下次再報名"
+//                        if myTable!.isSignup {
+//                            msg = "已經超過取消報名截止時間，無法取消報名"
+//                        }
+//                        warning(msg)
+//                        return
+//                    }
+//                }
+//
+//                Global.instance.addSpinner(superView: view)
+//                dataService.signup(token: myTable!.token, member_token: Member.instance.token, date_token: myTable!.signupDate!.token) { (success) in
+//
+//                    Global.instance.removeSpinner(superView: self.view)
+//
+//                    do {
+//                        if (self.dataService.jsonData != nil) {
+//                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
+//                            if (successTable.success) {
+//                                self.info(msg: successTable.msg, buttonTitle: "關閉") {
+//                                    self.refresh(TeamTable.self)
+//                                }
+//                            } else {
+//                                self.warning(successTable.msg)
+//                            }
+//                        }
+//                    } catch {
+//                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+//                    }
+//                }
+//            }
         }
     }
 
@@ -834,11 +839,11 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             teamMemberVisible(.visible)
             teamMemberListLbl.text = "臨打隊員："
             
-//            if (!isTempplayLoaded) {
-//                tempPlayPage = 1
-//                getTempPlayList(page: tempPlayPage, perPage: tempPlayPerPage)
-//                isTempplayLoaded = true
-//            }
+            if (!isTempplayLoaded) {
+                tempPlayPage = 1
+                getTempPlayList(page: tempPlayPage, perPage: tempPlayPerPage)
+                isTempplayLoaded = true
+            }
             introduceTableView.reloadData()
             
             setSignupData()
@@ -938,18 +943,18 @@ extension ShowTeamVC {
             _ = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop2!)
         } else {
             if (teamMemberPage == 1) {
-                items = [TeamMemberTable]()
+                items1 = [TeamMemberTable]()
             }
-            items += _rows
-            filterItems = items
+            items1 += _rows
+            filterItems = items1
             introduceTableView.reloadData()
             
-            for item in items {
+            for item in items1 {
                 if item.memberTable != nil {
                     if item.memberTable!.token == Member.instance.token {
                         self.teamMemberToken = item.token
                         self.isTeamMember = true
-                        self.isTeapMemberLeave = item.isLeave
+                        self.isTeamMemberLeave = item.isLeave
                         break
                     }
                 }
@@ -1047,7 +1052,7 @@ extension ShowTeamVC {
     }
     
     func setTeamMemberBottom() {
-        if self.isTeamMember && !self.isTeapMemberLeave {
+        if self.isTeamMember && !self.isTeamMemberLeave {
             showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
             showBottom!.submitBtn.setTitle("請假")
             showBottom!.changeSubmitToNormalBtn()
@@ -1133,7 +1138,7 @@ extension ShowTeamVC {
     
     private func submitLeave() {
         //如果要請假
-        if !isTeapMemberLeave {
+        if !isTeamMemberLeave {
             warning(msg: "是否確定要請假？", closeButtonTitle: "關閉", buttonTitle: "是") {
                 if self.teamMemberToken != nil {
                     self.teamMemberLeave(doLeave: true)
@@ -1154,21 +1159,88 @@ extension ShowTeamVC {
 ///////////////////// temp play /////////////////////////////
 extension ShowTeamVC {
     
+    func tempPlayAdd(doAdd: Bool) {
+        
+        let doAddWarning: String = (doAdd) ? "報名臨打成功" : "取消臨打成功"
+        Global.instance.addSpinner(superView: self.view)
+        //team member token
+        //play date
+        TeamService.instance.tempPlayAdd(token: token!, member_token: Member.instance.token, play_date: myTable!.nextDate) { success in
+            Global.instance.removeSpinner(superView: self.view)
+            
+            do {
+                if (self.dataService.jsonData != nil) {
+                    let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
+                    if (successTable.success) {
+                        self.info(msg: doAddWarning, buttonTitle: "關閉") {
+                            //self.getTeamMemberList(page: 1, perPage: PERPAGE)
+                        }
+                    } else {
+                        self.warning(successTable.msg)
+                    }
+                }
+            } catch {
+                self.msg = "解析JSON字串時，得到空值，請洽管理員"
+            }
+        }
+    }
+    
     func getTempPlayList(page: Int = 1, perPage: Int = 20) {
         Global.instance.addSpinner(superView: self.view)
         
-//        TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
-//            Global.instance.removeSpinner(superView: self.view)
-//            if (success) {
-//                self.parseJSON(jsonData: TeamService.instance.jsonData)
-//            } else {
-//                self.warning("取得資料錯誤，請洽管理員！！")
-//            }
-//        }
+        TeamService.instance.tempPlayList(token: token!, playDate: myTable!.nextDate, page: page, perPage: perPage) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if (success) {
+                var rows: [TeamTempPlayTable] = [TeamTempPlayTable]()
+                self.jsonData = TeamService.instance.jsonData
+                self.jsonData?.prettyPrintedJSONString
+                do {
+                    if (self.jsonData != nil) {
+                        //jsonData!.prettyPrintedJSONString
+                        let tables2: TempPlayTables2 = try JSONDecoder().decode(TempPlayTables2<TeamTempPlayTable>.self, from: self.jsonData!)
+                        if (tables2.success) {
+                            
+                            tables2.filterRow()
+                            if tables2.rows.count > 0 {
+                                
+                                for row in tables2.rows {
+                                    row.filterRow()
+                                }
+                                rows += tables2.rows
+                                
+                                if (self.tempPlayPage == 1) {
+                                    
+                                    self.tempPlayPage = tables2.page
+                                    self.tempPlayPerPage = tables2.perPage
+                                    self.tempPlayTotalCount = tables2.totalCount
+                                    let _totalPage: Int = self.tempPlayTotalCount / self.tempPlayPerPage
+                                    self.tempPlayTotalPage = (self.tempPlayTotalCount % self.tempPlayPerPage > 0) ? _totalPage + 1 : _totalPage
+                                }
+                                
+                                if (self.tempPlayPage == 1) {
+                                    self.items2 = [TeamTempPlayTable]()
+                                }
+                                self.items2 += rows
+                                //filterItems = items
+                                self.introduceTableView.reloadData()
+                            }
+                        } else {
+                            self.msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
+                        }
+                    } else {
+                        self.msg = "無法從伺服器取得正確的json資料，請洽管理員"
+                    }
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                }
+            } else {
+                self.warning("取得資料錯誤，請洽管理員！！")
+            }
+        }
     }
     
     func setTempPlayBottom() {
-        if self.isTempPlay {
+        if self.isAddTempPlay {
             
             showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
             showBottom!.submitBtn.setTitle("取消")
@@ -1266,6 +1338,21 @@ extension ShowTeamVC {
             isTempPlay = false
         }
     }
+    
+    private func submitTempPlay() {
+        //如果要請假
+        if !isAddTempPlay {
+            warning(msg: "是否確定要加入臨打？", closeButtonTitle: "關閉", buttonTitle: "是") {
+                self.tempPlayAdd(doAdd: true)
+            }
+        }
+        // 如果要取消請假
+        else {
+            warning(msg: "是否確定要取消臨打？", closeButtonTitle: "關閉", buttonTitle: "取消請假") {
+                self.tempPlayAdd(doAdd: false)
+            }
+        }
+    }
 }
 
 extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
@@ -1322,7 +1409,7 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
 
             return cell
         }
-        else if focusTabIdx == 1 && items.count > 0 {
+        else if focusTabIdx == 1 && items1.count > 0 {
             let cell: ShowTeamMemberCell = tableView.dequeueReusableCell(withIdentifier: "ShowTeamMemberCell", for: indexPath) as! ShowTeamMemberCell
             
             //cell.delegate = self
@@ -1337,7 +1424,10 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             let cell: ShowSignupCell = tableView.dequeueReusableCell(withIdentifier: "ShowSignupCell", for: indexPath) as! ShowSignupCell
             
             cell.noLbl.text = "\(indexPath.row + 1)."
-            //cell.nameLbl.text =
+            
+            if items2.count > indexPath.row {
+                cell.nameLbl.text = String(items2[indexPath.row].member_id)
+            }
 
 //            let people_limit = myTable!.people_limit + myTable!.leaveCount
 //            let normal_count = myTable!.signupNormalTables.count
@@ -1378,7 +1468,7 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
         if focusTabIdx == 1 {
             if myTable != nil {
                 if myTable!.manager_token == Member.instance.token {
-                    let row: TeamMemberTable = items[indexPath.row]
+                    let row: TeamMemberTable = items1[indexPath.row]
                     
                     if (row.memberTable != nil) {
                         getMemberOne(member_token: row.memberTable!.token)
@@ -1470,14 +1560,10 @@ class TeamMemberTables2<T: Codable>: Codable {
     var totalCount: Int = -1
     var leaveCount: Int = -1
     var perPage: Int = -1
-//    var nextDate: String = ""
-//    var nextDateWeek: String = ""
-//    var play_start: String = ""
-//    var play_end: String = ""
     var rows: [T] = [T]()
     
-    var play_start_show: String = ""
-    var play_end_show: String = ""
+    //var play_start_show: String = ""
+    //var play_end_show: String = ""
     
     required init(from decoder: Decoder) throws {
         
@@ -1487,22 +1573,33 @@ class TeamMemberTables2<T: Codable>: Codable {
         totalCount = try container.decode(Int.self, forKey: .totalCount)
         leaveCount = try container.decode(Int.self, forKey: .leaveCount)
         perPage = try container.decode(Int.self, forKey: .perPage)
-//        nextDate = try container.decode(String.self, forKey: .nextDate)
-//        nextDateWeek = try container.decode(String.self, forKey: .nextDateWeek)
-//        play_start = try container.decode(String.self, forKey: .play_start)
-//        play_end = try container.decode(String.self, forKey: .play_end)
+
         rows = try container.decode([T].self, forKey: .rows)
     }
     
     func filterRow() {
+    }
+}
+
+class TempPlayTables2<T: Codable>: Codable {
+    var success: Bool = false
+    var page: Int = -1
+    var totalCount: Int = -1
+    var perPage: Int = -1
+    var rows: [T] = [T]()
+    
+    required init(from decoder: Decoder) throws {
         
-//        if play_start.count > 0 {
-//            play_start_show = play_start.noSec()
-//        }
-//
-//        if play_end.count > 0 {
-//            play_end_show = play_end.noSec()
-//        }
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        success = try container.decode(Bool.self, forKey: .success)
+        page = try container.decode(Int.self, forKey: .page)
+        totalCount = try container.decode(Int.self, forKey: .totalCount)
+        perPage = try container.decode(Int.self, forKey: .perPage)
+
+        rows = try container.decode([T].self, forKey: .rows)
+    }
+    
+    func filterRow() {
     }
 }
 
@@ -1522,12 +1619,12 @@ extension ShowTeamVC: TapLabel2Delegate {
         
         filterItems.removeAll()
         if (idx == 0) {
-            filterItems = items
+            filterItems = items1
         } else if (idx == 1) {
             
-            filterItems = items.filter { !$0.isLeave }
+            filterItems = items1.filter { !$0.isLeave }
         } else if (idx == 2) {
-            filterItems = items.filter { $0.isLeave }
+            filterItems = items1.filter { $0.isLeave }
         }
         
         introduceTableView.reloadData()

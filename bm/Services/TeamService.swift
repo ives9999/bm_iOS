@@ -219,6 +219,42 @@ class TeamService: DataService {
         }
     }
     
+    func tempPlayAdd(token: String, member_token: String, play_date: String, completion: @escaping CompletionHandler) {
+        
+        let url: String = URL_TEAM_TEMP_PLAY_ADD
+        let body: [String: String] = ["device": "app", "channel": CHANNEL, "token": token, "member_token": member_token, "play_date": play_date]
+        //print(url)
+        //print(body)
+        
+        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER)
+          .response { response in
+
+            //let json = JSON(response.value)
+            //print(json)
+
+            switch response.result {
+            case .success(let data):
+                //data?.prettyPrintedJSONString
+                self.jsonData = data
+                completion(true)
+            case .failure(let error):
+                self.msg = "伺服器無法回傳，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
+    func tempPlayList(token: String, playDate: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
+        
+        let url: String = URL_TEAM_TEMP_PLAY_LIST
+        let body: [String: String] = ["device": "app", "channel": CHANNEL, "page": String(page), "perPage": String(perPage), "token": token, "playDate": playDate]
+        print(url)
+        print(body)
+        _simpleService(url: url, params: body, completion: completion)
+    }
+    
     func tempPlay_onoff(token: String, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["source": "app", "token": token, "strip_html": "true"]
         
@@ -283,34 +319,6 @@ class TeamService: DataService {
                 print(error)
                 return
             }
-            
-//            if response.result.error == nil {
-//                //print(response.result.value)
-//                guard let data = response.result.value else {
-//                    print("get response result value error")
-//                    self.msg = "網路錯誤，請稍後再試"
-//                    completion(false)
-//                    return
-//                }
-//                //print(data)
-//
-//                let json = JSON(data)
-//                self.tempPlayList = [DATA]()
-//                self.totalCount = json["totalCount"].intValue
-//                if self.totalCount > 0 {
-//                    self.page = json["page"].intValue
-//                    self.perPage = json["perPage"].intValue
-//                    let arr: [JSON] = json["rows"].arrayValue
-//                    //print(arr)
-//                    completion(true)
-//                } else {// total count == 0
-//                    completion(true)
-//                }
-//            } else {
-//                self.msg = "網路錯誤，請稍後再試"
-//                completion(false)
-//            }
-//        }
         }
     }
     
