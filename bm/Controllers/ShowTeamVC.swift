@@ -212,48 +212,13 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         return view
     }()
-    
-    
-    //temp play
-//    var tempPlayStackView: UIStackView = {
-//        let view = UIStackView()
-//        //view.backgroundColor = UIColor.red
-//        //view.layer.cornerRadius = 26.0
-//        //view.clipsToBounds = true
-//        view.axis = .vertical
-//        view.spacing = 12
-//        return view
-//    }()
-    
-    //tempplay data
-//    let tempPlayDataLbl: SuperLabel = {
-//        let view: SuperLabel = SuperLabel()
-//        view.setTextTitle()
-//        view.text = "目前球隊不開放臨打"
-//
-//        return view
-//    }()
-//    let tempPlayTimeLbl: SuperLabel = {
-//        let view: SuperLabel = SuperLabel()
-//        view.setTextGeneral()
-//        view.text = "下次臨打時間"
-//
-//        return view
-//    }()
-//    let tempPlayDeadlineLbl: SuperLabel = {
-//        let view: SuperLabel = SuperLabel()
-//        view.setTextGeneral()
-//        view.text = "臨打報名截止時間"
-//
-//        return view
-//    }()
-    
+
     var isTeamMemberLoaded: Bool = false
     
     var table: Table?
     var myTable: TeamTable?
     
-    var isTempPlay: Bool = true
+    var isTempPlay: Bool = false
     var isLike: Bool = false
     
     var focusTabIdx: Int = 0
@@ -280,7 +245,15 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var isTeapMemberLeave: Bool = false
     
     //temp play
+    var isTempplayLoaded: Bool = false
+    var tempPlayPage: Int = 1
+    var tempPlayPerPage: Int = PERPAGE
+    var tempPlayTotalCount: Int = 0
+    var tempPlayTotalPage: Int = 0
+    
     var memberRows: [MemberRow] = [MemberRow]()
+    var tempPlayCount: Int = 0
+    //var standbyCount: Int = 0
     
     var token: String?
 
@@ -531,130 +504,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             make.left.right.equalToSuperview()
         }
     }
-
-//    private func initTempPlay() {
-//
-//        scrollView.addSubview(tempPlayStackView)
-//
-//        tempPlayStackView.snp.makeConstraints { make in
-//            make.top.bottom.equalToSuperview()
-//            make.width.equalToSuperview()
-//        }
-//
-//        tempPlayStackView.addArrangedSubview(teamMemberAllContainer)
-//        teamMemberAllContainer.snp.makeConstraints { make in
-//            make.top.equalToSuperview()
-//            make.left.right.equalToSuperview()
-//            //make.height.equalTo(50)
-//        }
-//
-//            //teamMemberLeftContainer.backgroundColor = UIColor.red
-//            teamMemberAllContainer.addSubview(teamMemberLeftContainer)
-//            teamMemberLeftContainer.snp.makeConstraints { make in
-//                make.top.left.equalToSuperview()
-//                make.right.equalToSuperview().offset(-100)
-//                //make.height.equalTo(50)
-//                make.bottom.equalToSuperview()
-//            }
-//
-//                //teamMemberDataLbl.backgroundColor = UIColor.brown
-//                teamMemberLeftContainer.addSubview(teamMemberDataLbl)
-//                teamMemberDataLbl.snp.makeConstraints { make in
-//                    make.top.left.right.equalToSuperview()
-//                    make.height.equalTo(20)
-//                    //make.bottom.equalToSuperview()
-//                }
-//
-//                teamMemberLeftContainer.addSubview(teamMemberSummaryContainer)
-//                teamMemberSummaryContainer.snp.makeConstraints { make in
-//                    make.top.equalTo(teamMemberDataLbl.snp.bottom).offset(20)
-//                    make.left.right.equalToSuperview()
-//                    make.height.equalTo(20)
-//                    make.bottom.equalToSuperview()
-//                }
-//
-//                //teamMemberTotalLbl.backgroundColor = UIColor.cyan
-//                teamMemberSummaryContainer.addSubview(teamMemberTotalLbl)
-//                teamMemberTotalLbl.snp.makeConstraints { make in
-//                    make.top.equalToSuperview()
-//                    make.left.equalToSuperview()
-//                    make.centerY.equalToSuperview()
-//                }
-//
-//                teamMemberSummaryContainer.addSubview(teamMemberPlayLbl)
-//                teamMemberPlayLbl.snp.makeConstraints { make in
-//                    make.left.equalTo(teamMemberTotalLbl.snp.right)
-//                    make.top.equalToSuperview()
-//                    make.centerY.equalToSuperview()
-//                }
-//
-//                teamMemberSummaryContainer.addSubview(teamMemberLeaveLbl)
-//                teamMemberLeaveLbl.snp.makeConstraints { make in
-//                    make.left.equalTo(teamMemberPlayLbl.snp.right)
-//                    make.top.equalToSuperview()
-//                    make.centerY.equalToSuperview()
-//                }
-//
-//        let spacer1: UIView = UIView()
-//        //spacer1.backgroundColor = UIColor.gray
-//        tempPlayStackView.addArrangedSubview(spacer1)
-//        spacer1.snp.makeConstraints { make in
-//            make.left.equalToSuperview()
-//            make.height.equalTo(10)
-//        }
-//
-//        tempPlayStackView.addArrangedSubview(nextDateContainer)
-//        nextDateContainer.snp.makeConstraints { make in
-//            make.left.equalToSuperview()
-//            make.height.equalTo(30)
-//        }
-//
-//            nextDateContainer.addSubview(nextDateIV)
-//            nextDateIV.snp.makeConstraints { make in
-//                make.left.equalToSuperview()
-//                make.width.height.equalTo(24)
-//                make.centerY.equalToSuperview()
-//            }
-//
-//            nextDateContainer.addSubview(nextDateLbl)
-//            nextDateLbl.snp.makeConstraints { make in
-//                make.left.equalTo(nextDateIV.snp.right).offset(24)
-//                make.centerY.equalToSuperview()
-//            }
-//
-//        tempPlayStackView.addArrangedSubview(nextTimeContainer)
-//        nextTimeContainer.snp.makeConstraints { make in
-//            make.left.equalToSuperview()
-//            make.height.equalTo(30)
-//        }
-//
-//            nextTimeContainer.addSubview(nextTimeIV)
-//            nextTimeIV.snp.makeConstraints { make in
-//                make.left.equalToSuperview()
-//                make.width.height.equalTo(24)
-//                make.centerY.equalToSuperview()
-//            }
-//
-//            nextTimeContainer.addSubview(nextTimeLbl)
-//            nextTimeLbl.snp.makeConstraints { make in
-//                make.left.equalTo(nextTimeIV.snp.right).offset(24)
-//                make.centerY.equalToSuperview()
-//            }
-//
-//        let spacer2: UIView = UIView()
-//        tempPlayStackView.addArrangedSubview(spacer2)
-//        spacer2.snp.makeConstraints { make in
-//            make.left.equalToSuperview()
-//            make.height.equalTo(20)
-//        }
-//
-//        tempPlayStackView.addArrangedSubview(teamMemberListLbl)
-//        teamMemberListLbl.snp.makeConstraints { make in
-//            make.left.equalToSuperview()
-//        }
-//
-//        tempPlayStackView.addArrangedSubview(introduceTableView)
-//    }
     
     override func viewDidLayoutSubviews() {
         self.showLike2.backgroundCircle()
@@ -677,13 +526,18 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                                 //token錯誤，所以無法解析
                                 self.warning("token錯誤，所以無法解析")
                             } else {
+                                
+                                guard let _myTable = self.table as? TeamTable else { return }
+                                self.myTable = _myTable
                                 self.initIntroduce()
-                                self.table!.filterRow()
+                                self.myTable!.filterRow()
                                 self.setFeatured()
                                 self.setIntroduceData()
                                 self.setContentWeb()
                                 self.setLike()
                                 self.showTop2!.setTitle(title: self.table!.name)
+                                self.tempPlayCount = myTable!.people_limit + myTable!.leaveCount
+                                
                                 self.introduceTableView.reloadData()
                                 
                                 self._tabPressed(self.focusTabIdx)
@@ -800,12 +654,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }
     
     func setIntroduceData() {
-
-        if myTable == nil {
-            myTable = TeamTable()
-        }
-        
-        myTable = table as? TeamTable
         
         var row: MemberRow = MemberRow()
         
@@ -986,16 +834,16 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             teamMemberVisible(.visible)
             teamMemberListLbl.text = "臨打隊員："
             
-            if (!isTeamMemberLoaded) {
-                teamMemberPage = 1
-                getTeamMemberList(page: teamMemberPage, perPage: teamMemberPerPage)
-                isTeamMemberLoaded = true
-            }
+//            if (!isTempplayLoaded) {
+//                tempPlayPage = 1
+//                getTempPlayList(page: tempPlayPage, perPage: tempPlayPerPage)
+//                isTempplayLoaded = true
+//            }
             introduceTableView.reloadData()
             
             setSignupData()
             
-            //showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: true, isShowCancel: false)
+            setTempPlayBottom()
             
         default:
             refresh()
@@ -1198,25 +1046,6 @@ extension ShowTeamVC {
         self.teamMemberListLbl.visibility = visible
     }
     
-//    func tempPlayVisible(_ visible: UIView.Visibility) {
-//
-//        self.teamMemberDataLbl.visibility = visible
-//        self.teamMemberSummaryContainer.visibility = visible
-//        self.teamMemberTotalLbl.visibility = visible
-//        self.teamMemberPlayLbl.visibility = visible
-//        self.teamMemberLeaveLbl.visibility = visible
-//
-//        self.nextDateContainer.visibility = visible
-//        self.nextDateIV.visibility = visible
-//        self.nextDateLbl.visibility = visible
-//
-//        self.nextTimeContainer.visibility = visible
-//        self.nextTimeIV.visibility = visible
-//        self.nextTimeLbl.visibility = visible
-//
-//        self.teamMemberListLbl.visibility = visible
-//    }
-    
     func setTeamMemberBottom() {
         if self.isTeamMember && !self.isTeapMemberLeave {
             showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
@@ -1324,6 +1153,32 @@ extension ShowTeamVC {
 
 ///////////////////// temp play /////////////////////////////
 extension ShowTeamVC {
+    
+    func getTempPlayList(page: Int = 1, perPage: Int = 20) {
+        Global.instance.addSpinner(superView: self.view)
+        
+//        TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
+//            Global.instance.removeSpinner(superView: self.view)
+//            if (success) {
+//                self.parseJSON(jsonData: TeamService.instance.jsonData)
+//            } else {
+//                self.warning("取得資料錯誤，請洽管理員！！")
+//            }
+//        }
+    }
+    
+    func setTempPlayBottom() {
+        if self.isTempPlay {
+            
+            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
+            showBottom!.submitBtn.setTitle("取消")
+            showBottom!.changeSubmitToCancelBtn()
+        } else {
+            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
+            showBottom!.submitBtn.setTitle("報名")
+            showBottom!.changeSubmitToNormalBtn()
+        }
+    }
 
     func setSignupData() {
 
@@ -1425,17 +1280,7 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             
         } else if (focusTabIdx == 2) {
             
-            if myTable != nil && isTempPlay {
-
-                let people_limit: Int = myTable!.people_limit
-                //let normal_count: Int = myTable!.signupNormalTables.count
-                let standby_count: Int = myTable!.signupStandbyTables.count
-                let count = people_limit + standby_count + 1
-                //print(count)
-                return count
-            } else {
-                return 0
-            }
+            return tempPlayCount
         }
         
         return 0
@@ -1490,54 +1335,35 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
         }
         else if focusTabIdx == 2 {
             let cell: ShowSignupCell = tableView.dequeueReusableCell(withIdentifier: "ShowSignupCell", for: indexPath) as! ShowSignupCell
+            
+            cell.noLbl.text = "\(indexPath.row + 1)."
+            //cell.nameLbl.text =
 
-            let people_limit = myTable!.people_limit
-            let normal_count = myTable!.signupNormalTables.count
-            let standby_count = myTable!.signupStandbyTables.count
-            if indexPath.row < people_limit {
-                cell.noLbl.text = "\(indexPath.row + 1)."
-                cell.nameLbl.text = ""
-                if normal_count > 0 {
-                    if indexPath.row < normal_count {
-                        let signup_normal_model = myTable!.signupNormalTables[indexPath.row]
-                        cell.nameLbl.text = signup_normal_model.member_name
-                    }
-                }
-            } else if indexPath.row >= people_limit && indexPath.row < people_limit + standby_count {
-                cell.noLbl.text = "候補\(indexPath.row - people_limit + 1)."
-                let signup_standby_model = myTable!.signupStandbyTables[indexPath.row - people_limit]
-                cell.nameLbl.text = signup_standby_model.member_name
-            } else {
-                let remain: Int = people_limit - myTable!.signupNormalTables.count
-                var remain_text = ""
-                if (remain > 0) {
-                    remain_text = "還有\(remain)個名額"
-                } else {
-                    remain_text = "已經額滿，請排候補"
-                }
-                cell.noLbl.text = remain_text
-            }
-
-//            if indexPath.row == people_limit + standby_count - 1 {
-//
-//                UIView.animate(withDuration: 0, animations: {self.signupTableView.layoutIfNeeded()}) { (complete) in
-//                    var heightOfTableView: CGFloat = 0.0
-//                    let cells = self.introduceTableView.visibleCells
-//                    //print(cells.count)
-//                    for cell in cells {
-//                        heightOfTableView += cell.frame.height
+//            let people_limit = myTable!.people_limit + myTable!.leaveCount
+//            let normal_count = myTable!.signupNormalTables.count
+//            let standby_count = myTable!.signupStandbyTables.count
+//            if indexPath.row < people_limit {
+//                cell.noLbl.text = "\(indexPath.row + 1)."
+//                cell.nameLbl.text = ""
+//                if normal_count > 0 {
+//                    if indexPath.row < normal_count {
+//                        let signup_normal_model = myTable!.signupNormalTables[indexPath.row]
+//                        cell.nameLbl.text = signup_normal_model.member_name
 //                    }
-//
-//                    self.signupTableViewConstraintHeight.constant = heightOfTableView
-//                    self.dataConstraintHeight.constant += heightOfTableView
-//
-//                    //self.scrollContainerHeight += self.dataConstraintHeight.constant
-//                    //self.containerViewConstraintHeight.constant = self.scrollContainerHeight
-//
-//                    //print("signup:\(self.scrollContainerHeight)")
-//                    //self.scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.scrollContainerHeight)
-//                    //self.changeScrollViewContentSize()
 //                }
+//            } else if indexPath.row >= people_limit && indexPath.row < people_limit + standby_count {
+//                cell.noLbl.text = "候補\(indexPath.row - people_limit + 1)."
+//                let signup_standby_model = myTable!.signupStandbyTables[indexPath.row - people_limit]
+//                cell.nameLbl.text = signup_standby_model.member_name
+//            } else {
+//                let remain: Int = people_limit - myTable!.signupNormalTables.count
+//                var remain_text = ""
+//                if (remain > 0) {
+//                    remain_text = "還有\(remain)個名額"
+//                } else {
+//                    remain_text = "已經額滿，請排候補"
+//                }
+//                cell.noLbl.text = remain_text
 //            }
 
             cell.setSelectedBackgroundColor()
