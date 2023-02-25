@@ -246,6 +246,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     //temp play
     //是否開放臨打
     var isTempPlay: Bool = true
+    //會員是否已經加入臨打
     var isAddTempPlay: Bool = false
     //臨打列表資料是否已輸入
     var isTempplayLoaded: Bool = false
@@ -541,6 +542,14 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                                 self.setLike()
                                 self.showTop2!.setTitle(title: self.table!.name)
                                 self.tempPlayCount = myTable!.people_limit + myTable!.leaveCount
+                                
+                                if let nextDate = myTable?.nextDate, !nextDate.isEmpty, let nextDateWeek = myTable?.nextDateWeek, !nextDateWeek.isEmpty {
+                                    self.nextDateLbl.text = "\(nextDate) ( \(nextDateWeek) )"
+                                }
+                                
+                                if let playStart = myTable?.play_start, let playEnd = myTable?.play_end {
+                                    self.nextTimeLbl.text = "\(playStart) ~ \(playEnd)"
+                                }
                                 
                                 self.introduceTableView.reloadData()
                                 
@@ -966,11 +975,6 @@ extension ShowTeamVC {
             self.teamMemberLeaveLbl.text = "請假：\(leaveCount)位"
             self.teamMemberPlayLbl.text = "打球：\(teamMemberTotalCount-leaveCount)位"
             
-            if myTable != nil {
-                self.nextDateLbl.text = "\(myTable!.nextDate) ( \(myTable!.nextDateWeek) )"
-                self.nextTimeLbl.text = "\(myTable!.play_start) ~ \(myTable!.play_end)"
-            }
-            
             teamMemberTotalLbl.on()
             
             setTeamMemberBottom()
@@ -1173,7 +1177,7 @@ extension ShowTeamVC {
                     let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
                     if (successTable.success) {
                         self.info(msg: doAddWarning, buttonTitle: "關閉") {
-                            //self.getTeamMemberList(page: 1, perPage: PERPAGE)
+                            self.getTempPlayList(page: 1, perPage: PERPAGE)
                         }
                     } else {
                         self.warning(successTable.msg)
@@ -1193,7 +1197,7 @@ extension ShowTeamVC {
             if (success) {
                 var rows: [TeamTempPlayTable] = [TeamTempPlayTable]()
                 self.jsonData = TeamService.instance.jsonData
-                self.jsonData?.prettyPrintedJSONString
+                //self.jsonData?.prettyPrintedJSONString
                 do {
                     if (self.jsonData != nil) {
                         //jsonData!.prettyPrintedJSONString
@@ -1218,12 +1222,27 @@ extension ShowTeamVC {
                                 }
                                 
                                 if (self.tempPlayPage == 1) {
-                                    self.items2 = [TeamTempPlayTable]()
+                                    self.items2.removeAll()
                                 }
                                 self.items2 += rows
                                 //filterItems = items
-                                self.introduceTableView.reloadData()
+                                
+                                self.isAddTempPlay = false
+                                for item in self.items2 {
+                                    if item.memberTable != nil {
+                                        if item.memberTable!.token == Member.instance.token {
+                                            //self.tempPlayToken = item.token
+                                            self.isAddTempPlay = true
+                                            break
+                                        }
+                                    }
+                                }
+                            } else {
+                                self.items2.removeAll()
+                                self.isAddTempPlay = false
                             }
+                            self.introduceTableView.reloadData()
+                            self.setTempPlayBottom()
                         } else {
                             self.msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
                         }
@@ -1267,14 +1286,6 @@ extension ShowTeamVC {
             self.teamMemberLeaveLbl.text = "請假：\(leaveCount)位"
             self.teamMemberPlayLbl.text = "打球：\(teamMemberTotalCount-leaveCount)位"
             teamMemberTotalLbl.on()
-            
-            if let nextDate = myTable?.nextDate, !nextDate.isEmpty, let nextDateWeek = myTable?.nextDateWeek, !nextDateWeek.isEmpty {
-                self.nextDateLbl.text = "\(nextDate) ( \(nextDateWeek) )"
-            }
-            
-            if let playStart = myTable?.play_start, let playEnd = myTable?.play_end {
-                self.nextTimeLbl.text = "\(playStart) ~ \(playEnd)"
-            }
         }
 
         if (myTable!.people_limit == 0) {
@@ -1426,7 +1437,9 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             cell.noLbl.text = "\(indexPath.row + 1)."
             
             if items2.count > indexPath.row {
-                cell.nameLbl.text = String(items2[indexPath.row].member_id)
+                cell.nameLbl.text = String(items2[indexPath.row].memberTable!.nickname)
+            } else {
+                cell.nameLbl.text = ""
             }
 
 //            let people_limit = myTable!.people_limit + myTable!.leaveCount

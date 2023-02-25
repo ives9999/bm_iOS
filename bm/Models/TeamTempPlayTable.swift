@@ -13,11 +13,13 @@ class TeamTempPlayTable: Table {
     var team_id: Int = 0
     var member_id: Int = 0
     var play_date: String = ""
+    var memberTable: MemberTable? = nil
     
     enum CodingKeys: String, CodingKey {
         case team_id
         case member_id
         case play_date
+        case memberTable = "member"
     }
     
     override init() {
@@ -31,6 +33,7 @@ class TeamTempPlayTable: Table {
         team_id = try container.decodeIfPresent(Int.self, forKey: .team_id) ?? 0
         member_id = try container.decodeIfPresent(Int.self, forKey: .member_id) ?? 0
         play_date = try container.decodeIfPresent(String.self, forKey: .play_date) ?? ""
+        memberTable = try container.decodeIfPresent(MemberTable.self, forKey: .memberTable) ?? nil
     }
     
     override func filterRow() {
