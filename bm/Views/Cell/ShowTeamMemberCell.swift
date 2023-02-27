@@ -149,7 +149,7 @@ class ShowTeamMemberCell: UITableViewCell {
         }
     }
     
-    func update(row: TeamMemberTable, no: Int) {
+    func configureTeamMember(row: TeamMemberTable, no: Int) {
 //        if no == 1 {
 //            self.contentView.backgroundColor = UIColor.gray
 //        }
@@ -168,6 +168,30 @@ class ShowTeamMemberCell: UITableViewCell {
         if self.leaveLbl.visibility == .visible {
             self.leaveLbl.text = "請假\n\(row.leaveTime.noSec().noYear())"
         }
+    }
+    
+    func configureTempPlay(row: TeamTempPlayTable? = nil, no: Int) {
+//        if no == 1 {
+//            self.contentView.backgroundColor = UIColor.gray
+//        }
+        self.noLbl.text = no.toTwoString()
+        
+        if (row != nil) {
+            self.avatarIV.path(row!.memberTable!.featured_path)
+            
+            var nickname: String = ""
+            if (row!.memberTable != nil) {
+                nickname = row!.memberTable!.nickname
+            }
+            self.nameLbl.text = nickname
+            self.createdAtLbl.text = row!.created_at.noSec()
+        } else {
+            self.avatarIV.image = UIImage()
+            self.nameLbl.text = ""
+            self.createdAtLbl.text = ""
+        }
+        
+        self.leaveLbl.visibility = .invisible
     }
     
     override func layoutSubviews() {

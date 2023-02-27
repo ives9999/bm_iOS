@@ -38,5 +38,7 @@ class TeamTempPlayTable: Table {
     
     override func filterRow() {
         super.filterRow()
+        
+        memberTable?.filterRow()
     }
 }
