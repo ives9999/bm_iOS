@@ -37,8 +37,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 //        return view
 //    }()
     
-    let featured: UIImageView = {
-        let view = UIImageView()
+    let featured: Featured = {
+        let view = Featured()
         
         return view
     }()
@@ -236,6 +236,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var isTeamMember: Bool = false
     //會員為隊友，會員是否已經請假
     var isTeamMemberLeave: Bool = false
+    //顯示尚無資料的view
+    var noTeamMemberDataView: UIView? = nil
     
     //temp play
     //是否開放臨打
@@ -551,6 +553,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     override func viewDidLayoutSubviews() {
         self.showLike2.backgroundCircle()
+//        self.featured.layer.cornerRadius = 20
+//        self.featured.clipsToBounds = true
     }
     
     func refresh<T: Table>(_ t: T.Type) {
@@ -668,7 +672,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 
         if (table != nil && table!.featured_path.count > 0) {
             
-            featured.downloaded(from: table!.featured_path)
+            featured.path(table!.featured_path, isCircle: false, rounded: 100)
             
             //featured_h = featured.heightForUrl(url: table!.featured_path, width: screen_width)
         } else {
@@ -711,44 +715,44 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         if myTable != nil && myTable!.arena != nil {
         
-            row = MemberRow(title: "球館", icon: "arena", show: myTable!.arena!.name)
+            row = MemberRow(title: "球館", icon: "arena_svg", show: myTable!.arena!.name)
             memberRows.append(row)
-            row = MemberRow(title: "縣市", icon: "map", show: myTable!.arena!.city_show)
+            row = MemberRow(title: "縣市", icon: "city_svg", show: myTable!.arena!.city_show)
             memberRows.append(row)
-            row = MemberRow(title: "區域", icon: "map", show: myTable!.arena!.area_show)
+            row = MemberRow(title: "區域", icon: "area_svg", show: myTable!.arena!.area_show)
             memberRows.append(row)
         }
-        row = MemberRow(title: "星期", icon: "date", show: myTable!.weekdays_show)
+        row = MemberRow(title: "星期", icon: "calendar_svg", show: myTable!.weekdays_show)
         memberRows.append(row)
-        row = MemberRow(title: "時段", icon: "clock", show: myTable!.interval_show)
+        row = MemberRow(title: "時段", icon: "clock_svg", show: myTable!.interval_show)
         memberRows.append(row)
-        row = MemberRow(title: "球種", icon: "ball", show: myTable!.ball)
+        row = MemberRow(title: "球種", icon: "ball_svg", show: myTable!.ball)
         memberRows.append(row)
-        row = MemberRow(title: "程度", icon: "degree", show: myTable!.degree_show)
+        row = MemberRow(title: "程度", icon: "degree_svg", show: myTable!.degree_show)
         memberRows.append(row)
-        row = MemberRow(title: "場地", icon: "arena1", show: myTable!.block_show)
+        row = MemberRow(title: "場地", icon: "block_svg", show: myTable!.block_show)
         memberRows.append(row)
-        row = MemberRow(title: "費用-男", icon: "money", show: myTable!.temp_fee_M_show)
+        row = MemberRow(title: "費用-男", icon: "fee_svg", show: myTable!.temp_fee_M_show)
         memberRows.append(row)
-        row = MemberRow(title: "費用-女", icon: "money", show: myTable!.temp_fee_F_show)
+        row = MemberRow(title: "費用-女", icon: "fee_svg", show: myTable!.temp_fee_F_show)
         memberRows.append(row)
-        row = MemberRow(title: "管理者", icon: "admin", show: myTable!.manager_nickname)
+        row = MemberRow(title: "管理者", icon: "manager_svg", show: myTable!.manager_nickname)
         memberRows.append(row)
-        row = MemberRow(title: "行動電話", icon: "mobile", show: myTable!.mobile_show)
+        row = MemberRow(title: "行動電話", icon: "mobile_svg", show: myTable!.mobile_show)
         memberRows.append(row)
-        row = MemberRow(title: "line", icon: "line", show: myTable!.line)
+        row = MemberRow(title: "line", icon: "line_svg", show: myTable!.line)
         memberRows.append(row)
-        row = MemberRow(title: "FB", icon: "fb", show: myTable!.fb)
+        row = MemberRow(title: "FB", icon: "fb_svg", show: myTable!.fb)
         memberRows.append(row)
-        row = MemberRow(title: "Youtube", icon: "youtube", show: myTable!.youtube)
+        row = MemberRow(title: "Youtube", icon: "youtube_svg", show: myTable!.youtube)
         memberRows.append(row)
 //        row = MemberRow(title: "網站", icon: "website", show: myTable!.website)
 //        memberRows.append(row)
-        row = MemberRow(title: "EMail", icon: "email1", show: myTable!.email)
+        row = MemberRow(title: "EMail", icon: "email_svg", show: myTable!.email)
         memberRows.append(row)
-        row = MemberRow(title: "瀏覽數", icon: "pv", show: String(myTable!.pv))
+        row = MemberRow(title: "瀏覽數", icon: "pv_svg", show: String(myTable!.pv))
         memberRows.append(row)
-        row = MemberRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
+        row = MemberRow(title: "建立日期", icon: "createdAt_svg", show: myTable!.created_at_show)
         memberRows.append(row)
     }
     
@@ -999,8 +1003,11 @@ extension ShowTeamVC {
         let _rows: [TeamMemberTable] = self.jsonToTable2(jsonData: jsonData)
         if (_rows.count == 0) {
             self.teamMemberVisible(.invisible)
-            _ = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop2!)
+            //self.noTeamMemberDataView = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop2!)
         } else {
+//            if self.noTeamMemberDataView != nil && self.noTeamMemberDataView!.isHidden == false {
+//                self.noTeamMemberDataView?.visibility = .invisible
+//            }
             if (teamMemberPage == 1) {
                 items1 = [TeamMemberTable]()
             }
@@ -1432,9 +1439,11 @@ extension ShowTeamVC {
 extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        //if (focusTabIdx == 1) {
+        if (focusTabIdx == 0) {
+            return 40
+        } else {
             return 72
-        //}
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

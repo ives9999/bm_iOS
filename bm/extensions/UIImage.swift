@@ -27,4 +27,26 @@ extension UIImage {
             .draw(in: .init(origin: .zero, size: breadthSize))
         }
     }
+    
+    public func rounded(radius: CGFloat) -> UIImage {
+        let rect = CGRect(origin: .zero, size: size)
+        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        UIBezierPath(roundedRect: rect, cornerRadius: radius).addClip()
+        draw(in: rect)
+        return UIGraphicsGetImageFromCurrentImageContext()!
+    }
+    
+    enum Theme {
+        case triangle
+        
+        var name: String {
+            switch self {
+            case .triangle: return "greater1"
+            }
+        }
+        
+        var image: UIImage {
+            return UIImage(named: self.name)!
+        }
+    }
 }

@@ -58,8 +58,8 @@ class OneLineCell: SuperCell {
         if icon.count > 0 {
             iconView.image = UIImage(named: icon)
         }
-        iconView.image = iconView.image!.withRenderingMode(.alwaysTemplate)
-        iconView.tintColor = UIColor(TEXTGRAY)
+//        iconView.image = iconView.image!.withRenderingMode(.alwaysTemplate)
+//        iconView.tintColor = UIColor(TEXTGRAY)
         
         if title.count > 0 {
             titleLbl.text = title

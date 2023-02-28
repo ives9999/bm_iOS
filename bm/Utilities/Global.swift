@@ -1167,24 +1167,6 @@ extension Array: ArrayProtocol {
     
 }
 
-extension UIImage {
-    
-    // for textfield dropdown menu
-    enum Theme {
-        case triangle
-        
-        var name: String {
-            switch self {
-            case .triangle: return "greater1"
-            }
-        }
-        
-        var image: UIImage {
-            return UIImage(named: self.name)!
-        }
-    }
-}
-
 protocol DropDownTextFieldDelegate {
     func menuDidAnimate(up: Bool)
     func optionSelected(option: String)
