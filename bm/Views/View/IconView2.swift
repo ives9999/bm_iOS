@@ -44,7 +44,7 @@ class IconView2: UIView {
     func commonInit() {
         
         //self.backgroundColor = UIColor(hex: MY_WHITE, alpha: 0.1)
-        self.backgroundColor = UIColor(hex: MY_WHITE, alpha: 0.1)
+        self.backgroundColor = UIColor(hex: MY_WHITE, alpha: 0.13)
         
         iconIV.image = UIImage(named: icon)
 

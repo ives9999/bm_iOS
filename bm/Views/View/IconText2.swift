@@ -47,7 +47,7 @@ class IconText2: UIView {
     
     func commonInit() {
         
-        self.backgroundColor = UIColor(hex: MY_WHITE, alpha: 0.1)
+        self.backgroundColor = UIColor(hex: MY_WHITE, alpha: 0.13)
         //self.backgroundColor = UIColor(hex: MY_WHITE, alpha: 0.8)
         self.layer.cornerRadius = 16
         self.clipsToBounds = true
