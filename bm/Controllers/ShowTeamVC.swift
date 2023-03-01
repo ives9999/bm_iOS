@@ -359,6 +359,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
         
         introduceContentView.addSubview(introduceTableView)
+        //introduceTableView.backgroundColor = UIColor.red
         //introduceStackView.addArrangedSubview(introduceTableView)
         introduceTableView.snp.makeConstraints { make in
             make.top.equalTo(featured.snp.bottom).offset(20)
@@ -386,7 +387,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         contentWebView.snp.makeConstraints { make in
             make.top.equalTo(contentLbl.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(20)
-            make.height.equalTo(100)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(500)
             make.bottom.equalToSuperview().offset(-50)
         }
     }
@@ -1001,13 +1003,8 @@ extension ShowTeamVC {
     func parseJSON(jsonData: Data?) {
         
         let _rows: [TeamMemberTable] = self.jsonToTable2(jsonData: jsonData)
-        if (_rows.count == 0) {
-            self.teamMemberVisible(.invisible)
-            //self.noTeamMemberDataView = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop2!)
-        } else {
-//            if self.noTeamMemberDataView != nil && self.noTeamMemberDataView!.isHidden == false {
-//                self.noTeamMemberDataView?.visibility = .invisible
-//            }
+        if (_rows.count > 0) {
+            
             if (teamMemberPage == 1) {
                 items1 = [TeamMemberTable]()
             }
@@ -1026,15 +1023,11 @@ extension ShowTeamVC {
                 }
             }
             
-            self.setTeamMemberSummary()
-            
-            teamMemberTotalLbl.on()
-            
             setTeamMemberBottom()
-            
-            introduceTableView.layoutSubviews()
-            introduceTableView.layoutIfNeeded()
         }
+        
+        self.setTeamMemberSummary()
+        teamMemberTotalLbl.on()
     }
     
     func jsonToTable2(jsonData: Data?)-> [TeamMemberTable] {
@@ -1301,6 +1294,7 @@ extension ShowTeamVC {
                                 }
                                 
                                 self.setTempPlaySummary()
+                                self.teamMemberTotalLbl.on()
                             } else {
                                 self.items2.removeAll()
                                 self.isAddTempPlay = false
@@ -1323,15 +1317,20 @@ extension ShowTeamVC {
     }
     
     func setTempPlayBottom() {
-        if self.isAddTempPlay {
-            
-            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
-            showBottom!.submitBtn.setTitle("取消")
-            showBottom!.changeSubmitToCancelBtn()
+        
+        if self.tempPlayCount == 0 {
+            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: false, isShowCancel: false)
         } else {
-            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
-            showBottom!.submitBtn.setTitle("報名")
-            showBottom!.changeSubmitToNormalBtn()
+            if self.isAddTempPlay {
+                
+                showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
+                showBottom!.submitBtn.setTitle("取消")
+                showBottom!.changeSubmitToCancelBtn()
+            } else {
+                showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
+                showBottom!.submitBtn.setTitle("報名")
+                showBottom!.changeSubmitToNormalBtn()
+            }
         }
     }
     
@@ -1565,19 +1564,24 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             if myTable != nil {
                 if myTable!.manager_token == Member.instance.token {
                     
-                    let signupNormalCount: Int = myTable!.signupNormalTables.count
-                    let peopleLimit: Int = myTable!.people_limit
-                    let idx: Int = indexPath.row
-                    
-                    if (idx < signupNormalCount) {
-                        let signup_normal_model = myTable!.signupNormalTables[idx]
-                        getMemberOne(member_token: signup_normal_model.member_token)
+                    let row: TeamTempPlayTable = items2[indexPath.row]
+                    if let memberTable: MemberTable = row.memberTable {
+                        getMemberOne(member_token: memberTable.token)
                     }
                     
-                    if (idx >= peopleLimit) {
-                        let signup_standby_model = myTable!.signupStandbyTables[idx]
-                        getMemberOne(member_token: signup_standby_model.member_token)
-                    }
+//                    let signupNormalCount: Int = myTable!.signupNormalTables.count
+//                    let peopleLimit: Int = myTable!.people_limit
+//                    let idx: Int = indexPath.row
+//
+//                    if (idx < signupNormalCount) {
+//                        let signup_normal_model = myTable!.signupNormalTables[idx]
+//                        getMemberOne(member_token: signup_normal_model.member_token)
+//                    }
+//
+//                    if (idx >= peopleLimit) {
+//                        let signup_standby_model = myTable!.signupStandbyTables[idx]
+//                        getMemberOne(member_token: signup_standby_model.member_token)
+//                    }
                 } else {
                     warning("只有球隊管理員可以檢視報名者資訊")
                 }

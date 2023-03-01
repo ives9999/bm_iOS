@@ -76,7 +76,7 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
         
         parent.addSubview(self)
         self.snp.makeConstraints { make in
-            make.top.equalTo(showTop.snp.bottom)
+            make.top.equalTo(showTop.snp.bottom).offset(20)
             make.left.right.bottom.equalToSuperview()
         }
     }
