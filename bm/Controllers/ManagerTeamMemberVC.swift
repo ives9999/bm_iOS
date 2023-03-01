@@ -65,7 +65,7 @@ class ManagerTeamMemberVC: BaseViewController {
         super.viewDidLoad()
         
         showTop = ShowTop2(delegate: self)
-        showTop!.setAnchor(parent: self.view)
+        showTop!.anchor(parent: self.view)
         showTop!.setTitle(title: "球隊隊員")
         
         view.addSubview(toolView)

@@ -24,7 +24,7 @@ class MemberTeamListVC: BaseViewController {
         super.viewDidLoad()
         
         showTop = ShowTop2(delegate: self)
-        showTop!.setAnchor(parent: self.view)
+        showTop!.anchor(parent: self.view)
         showTop!.setTitle(title: "參加球隊")
         
         view.backgroundColor = UIColor(MY_BLACK)

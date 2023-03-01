@@ -67,7 +67,7 @@ class ContentEditVC: BaseViewController {
     }
     
     func anchor() {
-        showTop2!.setAnchor(parent: self.view)
+        showTop2!.anchor(parent: self.view)
         
         self.view.addSubview(contentTextView)
         contentTextView.snp.makeConstraints { make in

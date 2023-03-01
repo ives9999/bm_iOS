@@ -292,7 +292,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     func initTop() {
         showTop2 = ShowTop2(delegate: self)
-        showTop2!.setAnchor(parent: self.view)
+        showTop2!.anchor(parent: self.view)
     }
     
     func initBottom() {

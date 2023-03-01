@@ -37,6 +37,7 @@
 		B313272029A0869A00EAB782 /* Dot2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313271F29A0869A00EAB782 /* Dot2.swift */; };
 		B313272229A5C8EC00EAB782 /* NOLabel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272129A5C8EC00EAB782 /* NOLabel2.swift */; };
 		B313272429A884B300EAB782 /* TeamTempPlayTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272329A884B300EAB782 /* TeamTempPlayTable.swift */; };
+		B313272629AEFE8800EAB782 /* IconText2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272529AEFE8700EAB782 /* IconText2.swift */; };
 		B31361E71F8786CC00BDA53D /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E61F8786CC00BDA53D /* Contants.swift */; };
 		B31361E91F88A35900BDA53D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E81F88A35900BDA53D /* Global.swift */; };
 		B316FED62112F13600FB990C /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B316FED42112F13600FB990C /* CollectionCell.swift */; };
@@ -320,8 +321,6 @@
 		F94093D4298BA88E0006D89D /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D3298BA88E0006D89D /* UILabel.swift */; };
 		F94093D6298BADC60006D89D /* UIPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D5298BADC60006D89D /* UIPaddingLabel.swift */; };
 		F94DECDD27478F2F00A9DA17 /* ManagerTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */; };
-		F94DECE02747929A00A9DA17 /* ManagerTeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */; };
-		F94DECE12747929A00A9DA17 /* ManagerTeamCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */; };
 		F94DECE32747CFC700A9DA17 /* EditTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECE22747CFC700A9DA17 /* EditTeamVC.swift */; };
 		F94DECE52756237800A9DA17 /* RequestManagerTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */; };
 		F94E7D201F83636A00F550FD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D1F1F83636A00F550FD /* AppDelegate.swift */; };
@@ -476,6 +475,7 @@
 		B313271F29A0869A00EAB782 /* Dot2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dot2.swift; sourceTree = "<group>"; };
 		B313272129A5C8EC00EAB782 /* NOLabel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOLabel2.swift; sourceTree = "<group>"; };
 		B313272329A884B300EAB782 /* TeamTempPlayTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayTable.swift; sourceTree = "<group>"; };
+		B313272529AEFE8700EAB782 /* IconText2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconText2.swift; sourceTree = "<group>"; };
 		B31361E61F8786CC00BDA53D /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		B31361E81F88A35900BDA53D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		B316FED42112F13600FB990C /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
@@ -763,8 +763,6 @@
 		F94093D3298BA88E0006D89D /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		F94093D5298BADC60006D89D /* UIPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPaddingLabel.swift; sourceTree = "<group>"; };
 		F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamVC.swift; sourceTree = "<group>"; };
-		F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamCell.swift; sourceTree = "<group>"; };
-		F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagerTeamCell.xib; sourceTree = "<group>"; };
 		F94DECE22747CFC700A9DA17 /* EditTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamVC.swift; sourceTree = "<group>"; };
 		F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagerTeamVC.swift; sourceTree = "<group>"; };
 		F94E7D1C1F83636A00F550FD /* bm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bm.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -958,8 +956,6 @@
 				B36D66BF229A828A00502D62 /* ManagerCourseCell.xib */,
 				F964CDE427746DBF004F1C78 /* ManagerSignupListCell.swift */,
 				F964CDE527746DBF004F1C78 /* ManagerSignupListCell.xib */,
-				F94DECDE2747929A00A9DA17 /* ManagerTeamCell.swift */,
-				F94DECDF2747929A00A9DA17 /* ManagerTeamCell.xib */,
 				B322F8091FC6AD1800DE98FB /* MenuCell.swift */,
 				B3CB73E123E3185D00892F75 /* OlCell.swift */,
 				B3CB73D723D410CD00892F75 /* OneLineCell.swift */,
@@ -1101,6 +1097,7 @@
 				B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */,
 				F9A6751C27FAF605007C8F47 /* Top.swift */,
 				F9A6751E27FAF766007C8F47 /* Top.xib */,
+				B313272529AEFE8700EAB782 /* IconText2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1667,7 +1664,6 @@
 				F9F583B0283518DF00F77B00 /* BottomThreeView.xib in Resources */,
 				F9308B3F273954AB002531A1 /* SwitchCell.xib in Resources */,
 				F94E7D2A1F83636A00F550FD /* LaunchScreen.storyboard in Resources */,
-				F94DECE12747929A00A9DA17 /* ManagerTeamCell.xib in Resources */,
 				B3FB9B1E2407C9CB0051186F /* Member.storyboard in Resources */,
 				B362265425E2AD3300D98317 /* OrderListCell.xib in Resources */,
 				F9763E1828B6851A006ED47C /* MemberSubscriptionLogCell.xib in Resources */,
@@ -2004,6 +2000,7 @@
 				B37A13451FDAF3CB00413E64 /* SuperButton.swift in Sources */,
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
 				B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */,
+				B313272629AEFE8800EAB782 /* IconText2.swift in Sources */,
 				F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */,
 				F9EDEDAF28927C1B00FB92BB /* MemberSubscriptionKindVC.swift in Sources */,
 				B3B758D325AD55E7006ACC33 /* GMStepper.swift in Sources */,
@@ -2070,7 +2067,6 @@
 				F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */,
 				B323391121B6BC05003EB84D /* TimeTableFrom.swift in Sources */,
 				B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */,
-				F94DECE02747929A00A9DA17 /* ManagerTeamCell.swift in Sources */,
 				B385A07A22B9336C00BC3ADF /* CourseVC.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
 				B322F80A1FC6AD1800DE98FB /* MenuCell.swift in Sources */,

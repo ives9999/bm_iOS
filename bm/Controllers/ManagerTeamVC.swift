@@ -47,7 +47,6 @@ class ManagerTeamVC: BaseViewController {
         super.viewDidLoad()
         
         showTop2 = ShowTop2(delegate: self)
-        showTop2!.setAnchor(parent: self.view)
         showTop2!.setTitle(title: "我的球隊")
         
         anchor()
@@ -56,8 +55,9 @@ class ManagerTeamVC: BaseViewController {
     
     func anchor() {
         
-        showTop2 = ShowTop2(delegate: self)
-        showTop2!.setAnchor(parent: self.view)
+        showTop2!.anchor(parent: self.view)
+        showTop2!.showRefresh()
+        showTop2!.showAdd(rightAnchor: showTop2!.refreshIcon)
         
         tableView2.anchor(parent: self.view, showTop: showTop2!)
     }

@@ -137,7 +137,7 @@ class ShowCourseVC: BaseViewController, WKNavigationDelegate {
         super.viewDidLoad()
         
         showTop = ShowTop2(delegate: self)
-        showTop!.setAnchor(parent: self.view)
+        showTop!.anchor(parent: self.view)
         
         showBottom = ShowBottom2(delegate: self)
         self.view.addSubview(showBottom!)
