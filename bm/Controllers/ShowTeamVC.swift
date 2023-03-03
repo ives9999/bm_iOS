@@ -198,7 +198,9 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    var teamMemberListLbl: SuperLabel = {
+    let teamMemberListContainer: UIView = UIView()
+    
+    let teamMemberListLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
         view.setTextTitle()
         view.text = "隊員："
@@ -206,6 +208,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         return view
     }()
+    
+    let addIconText2: IconText2 = IconText2(icon: "add_svg", text: "新增")
 
     var isTeamMemberLoaded: Bool = false
     
@@ -276,6 +280,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         introduceTableView.dataSource = self
         
         showTab2.delegate = self
+        addIconText2.delegate = self
         
         showLike2.delegate = self
         teamMemberTotalLbl.delegate = self
@@ -536,18 +541,32 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 //            make.left.equalToSuperview()
 //            make.height.equalTo(10)
 //        }
-
-        teamMemberContentView.addSubview(teamMemberListLbl)
-//        teamMemberStackView.addArrangedSubview(teamMemberListLbl)
-        teamMemberListLbl.snp.makeConstraints { make in
+        
+        //teamMemberListContainer.backgroundColor = UIColor.gray
+        teamMemberContentView.addSubview(teamMemberListContainer)
+        teamMemberListContainer.snp.makeConstraints { make in
             make.top.equalTo(nextTimeContainer.snp.bottom).offset(40)
+            make.height.equalTo(40)
             make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
         }
+
+            teamMemberListContainer.addSubview(teamMemberListLbl)
+            teamMemberListLbl.snp.makeConstraints { make in
+                make.left.equalToSuperview()
+                make.centerY.equalToSuperview()
+            }
+        
+            teamMemberListContainer.addSubview(addIconText2)
+            addIconText2.snp.makeConstraints { make in
+                make.right.equalToSuperview()
+                make.centerY.equalToSuperview()
+            }
 
         teamMemberContentView.addSubview(introduceTableView)
 //        teamMemberStackView.addArrangedSubview(introduceTableView)
         introduceTableView.snp.makeConstraints { make in
-            make.top.equalTo(teamMemberListLbl.snp.bottom).offset(16)
+            make.top.equalTo(teamMemberListContainer.snp.bottom).offset(12)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-20)
         }
@@ -1722,5 +1741,19 @@ extension ShowTeamVC: TapLabel2Delegate {
 extension ShowTeamVC: ShowTab2Delegate {
     func tabPressed(_ idx: Int) {
         _tabPressed(idx)
+    }
+}
+
+extension ShowTeamVC: IconText2Delegate {
+    func pressed(icon: String) {
+        if icon == "add_svg" {
+            if myTable != nil {
+                if myTable!.manager_token == Member.instance.token {
+                    toManagerTeamMember(token: token!)
+                } else {
+                    warning("只有球隊管理員可以新增隊員")
+                }
+            }
+        }
     }
 }
