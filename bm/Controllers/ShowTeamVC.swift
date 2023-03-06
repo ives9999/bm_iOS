@@ -605,7 +605,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                                 self.setContentWeb()
                                 self.setLike()
                                 self.showTop2!.setTitle(title: self.table!.name)
-                                self.tempPlayCount = myTable!.people_limit + myTable!.leaveCount
+                                self.tempPlayCount = myTable!.number - myTable!.teamMemberCount + myTable!.leaveCount
                                 
                                 if let nextDate = myTable?.nextDate, !nextDate.isEmpty, let nextDateWeek = myTable?.nextDateWeek, !nextDateWeek.isEmpty {
                                     self.nextDateLbl.text = "\(nextDate) ( \(nextDateWeek) )"
@@ -914,7 +914,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             initTeamMember()
             self.teamMemberVisible(.visible)
             
-            //teamMemberVisible(.visible)
+            addIconText2.visibility = .invisible
             teamMemberDataLbl.text = "臨打人數統計："
             teamMemberListLbl.text = "臨打隊員："
             
@@ -1120,7 +1120,9 @@ extension ShowTeamVC {
         self.nextTimeIV.visibility = visible
         self.nextTimeLbl.visibility = visible
         
+        self.teamMemberListContainer.visibility = visible
         self.teamMemberListLbl.visibility = visible
+        self.addIconText2.visibility = visible
     }
     
     func setTeamMemberBottom() {
@@ -1311,14 +1313,13 @@ extension ShowTeamVC {
                                         }
                                     }
                                 }
-                                
-                                self.setTempPlaySummary()
-                                self.teamMemberTotalLbl.on()
                             } else {
                                 self.items2.removeAll()
                                 self.isAddTempPlay = false
                             }
                             self.introduceTableView.reloadData()
+                            self.setTempPlaySummary()
+                            self.teamMemberTotalLbl.on()
                             self.setTempPlayBottom()
                         } else {
                             self.msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
@@ -1359,38 +1360,38 @@ extension ShowTeamVC {
         self.teamMemberLeaveLbl.text = "候補：0位"
     }
 
-    func setSignupData() {
-
-        isTempPlayOnline()
-        if !isTempPlay {
-            //tempPlayDataLbl.text = "目前球隊不開放臨打"
-            //signupButtonContainer.visibility = .invisible
-            //tempPlayTimeLbl.visibility = .invisible
-            //tempPlayDeadlineLbl.visibility = .invisible
-            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
-        } else {
-            
-            self.teamMemberTotalLbl.text = "全部：\(teamMemberTotalCount)位"
-            self.teamMemberLeaveLbl.text = "請假：\(leaveCount)位"
-            self.teamMemberPlayLbl.text = "打球：\(teamMemberTotalCount-leaveCount)位"
-            teamMemberTotalLbl.on()
-        }
-
-        if (myTable!.people_limit == 0) {
-            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
-        }
-
-        if myTable!.isSignup {
-            showBottom?.setSubmitBtnTitle("取消報名")
-        } else {
-            let count = myTable!.signupNormalTables.count
-            if count >= myTable!.people_limit {
-                showBottom?.setSubmitBtnTitle("候補")
-            } else {
-                showBottom?.setSubmitBtnTitle("報名")
-            }
-        }
-    }
+//    func setSignupData() {
+//
+//        isTempPlayOnline()
+//        if !isTempPlay {
+//            //tempPlayDataLbl.text = "目前球隊不開放臨打"
+//            //signupButtonContainer.visibility = .invisible
+//            //tempPlayTimeLbl.visibility = .invisible
+//            //tempPlayDeadlineLbl.visibility = .invisible
+//            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
+//        } else {
+//
+//            self.teamMemberTotalLbl.text = "全部：\(tempPlayCount)位"
+//            self.teamMemberLeaveLbl.text = "報名：\(leaveCount)位"
+//            self.teamMemberPlayLbl.text = "候補：\0位"
+//            teamMemberTotalLbl.on()
+//        }
+//
+//        if (self.tempPlayCount == 0) {
+//            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
+//        }
+//
+//        if myTable!.isSignup {
+//            showBottom?.setSubmitBtnTitle("取消報名")
+//        } else {
+//            let count = myTable!.signupNormalTables.count
+//            if count >= self.tempPlayCount {
+//                showBottom?.setSubmitBtnTitle("候補")
+//            } else {
+//                showBottom?.setSubmitBtnTitle("報名")
+//            }
+//        }
+//    }
 
     func isTempPlayOnline() {
 
@@ -1432,8 +1433,8 @@ extension ShowTeamVC {
 //            isTempPlay = false
 //        }
 
-        //3.如果管理者設定報名臨打名額是0，關閉臨打
-        if myTable!.people_limit == 0 {
+        //3.如果沒有臨打名額是0，關閉臨打
+        if self.tempPlayCount == 0 {
             isTempPlay = false
         }
     }

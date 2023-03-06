@@ -165,12 +165,12 @@ class EditTeamVC: EditVC {
 //        row = OneRow(title: "臨打日期", value: myTable!.last_signup_date, show: myTable!.last_signup_date, key: TEAM_TEMP_DATE_KEY, cell: "more")
 //        rows.append(row)
 //
-        var people_limit: String = ""
-        if (myTable!.people_limit > 0) {
-            people_limit = String(myTable!.people_limit)
-        }
-        row = OneRow(title: "臨打名額", value: people_limit, show: people_limit, key: PEOPLE_LIMIT_KEY, cell: "textField")
-        rows.append(row)
+//        var people_limit: String = ""
+//        if (myTable!.people_limit > 0) {
+//            people_limit = String(myTable!.people_limit)
+//        }
+//        row = OneRow(title: "臨打名額", value: people_limit, show: people_limit, key: PEOPLE_LIMIT_KEY, cell: "textField")
+//        rows.append(row)
         
         var temp_fee_M: String = ""
         if (myTable!.temp_fee_M >= 0) {

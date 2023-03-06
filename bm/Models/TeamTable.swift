@@ -46,16 +46,17 @@ class TeamTable: Table {
     var manager_nickname: String = ""
     var temp_fee_M: Int = -1
     var temp_fee_F: Int = -1
-    var people_limit: Int = 0
+    //var people_limit: Int = 0
     var temp_content: String = ""
     var temp_status: String = ""
-    var temp_signup_count: Int = 0
+    //var temp_signup_count: Int = 0
     var color: String = ""
     var weekdays: [Team_WeekdaysTable] = [Team_WeekdaysTable]()
     var arena: ArenaTable?
-    var signupDate: SignupDateTable?
+    //var signupDate: SignupDateTable?
     var nextDate: String = ""
     var nextDateWeek: String = ""
+    var teamMemberCount: Int = 0
     var leaveCount: Int = 0
     
     var isSignup: Bool = false
@@ -103,20 +104,21 @@ class TeamTable: Table {
         case manager_nickname
         case temp_fee_M
         case temp_fee_F
-        case people_limit
+        //case people_limit
         case temp_content
         case temp_status
-        case temp_signup_count
+        //case temp_signup_count
         case color
         case weekdays
         case arena
-        case signupDate = "signup_date"
+        //case signupDate = "signup_date"
         case isSignup
         case isTempPlay
         case signupNormalTables = "signup_normal_models"
         case signupStandbyTables = "signup_standby_models"
         case nextDate
         case nextDateWeek
+        case teamMemberCount
         case leaveCount
     }
     
@@ -144,21 +146,22 @@ class TeamTable: Table {
         do {temp_fee_M = try container.decode(Int.self, forKey: .temp_fee_M)}catch{temp_fee_M = -1}
         do {temp_fee_F = try container.decode(Int.self, forKey: .temp_fee_F)}catch{temp_fee_F = -1}
         do {youtube = try container.decode(String.self, forKey: .youtube)}catch{youtube = ""}
-        do {people_limit = try container.decode(Int.self, forKey: .people_limit)}catch{people_limit = 0}
+        //do {people_limit = try container.decode(Int.self, forKey: .people_limit)}catch{people_limit = 0}
         do {temp_content = try container.decode(String.self, forKey: .temp_content)}catch{temp_content = ""}
         do {temp_status = try container.decode(String.self, forKey: .temp_status)}catch{temp_status = ""}
         do {color = try container.decode(String.self, forKey: .color)}catch{color = ""}
         
-        temp_signup_count = try container.decodeIfPresent(Int.self, forKey: .temp_signup_count) ?? 0
+        //temp_signup_count = try container.decodeIfPresent(Int.self, forKey: .temp_signup_count) ?? 0
         weekdays = try container.decodeIfPresent([Team_WeekdaysTable].self, forKey: .weekdays) ?? [Team_WeekdaysTable]()
         arena = try container.decodeIfPresent(ArenaTable.self, forKey: .arena) ?? nil
-        signupDate = try container.decodeIfPresent(SignupDateTable.self, forKey: .signupDate) ?? nil
+        //signupDate = try container.decodeIfPresent(SignupDateTable.self, forKey: .signupDate) ?? nil
         isSignup = try container.decodeIfPresent(Bool.self, forKey: .isSignup) ?? false
         isTempPlay = try container.decodeIfPresent(Bool.self, forKey: .isTempPlay) ?? false
         signupNormalTables = try container.decodeIfPresent([SignupNormalTable].self, forKey: .signupNormalTables) ?? [SignupNormalTable]()
         signupStandbyTables = try container.decodeIfPresent([SignupStandbyTable].self, forKey: .signupStandbyTables) ?? [SignupStandbyTable]()
         nextDate = try container.decodeIfPresent(String.self, forKey: .nextDate) ?? ""
         nextDateWeek = try container.decodeIfPresent(String.self, forKey: .nextDateWeek) ?? ""
+        teamMemberCount = try container.decodeIfPresent(Int.self, forKey: .teamMemberCount) ?? 0
         leaveCount = try container.decodeIfPresent(Int.self, forKey: .leaveCount) ?? 0
         //do {arena = try container.decode(ArenaTable.self, forKey: .arena)}catch{arena = nil}
     }
@@ -175,13 +178,13 @@ class TeamTable: Table {
             play_end_show = play_end.noSec()
         }
         
-        if isTempPlay {
-            people_limit_show = "臨打：\(people_limit)位"
-            temp_signup_count_show = "報名：\(temp_signup_count)位"
-        } else {
-            people_limit_show = "目前未提供臨打"
-            temp_signup_count_show = ""
-        }
+//        if isTempPlay {
+//            people_limit_show = "臨打：\(people_limit)位"
+//            temp_signup_count_show = "報名：\(temp_signup_count)位"
+//        } else {
+//            people_limit_show = "目前未提供臨打"
+//            temp_signup_count_show = ""
+//        }
         
         temp_status_show = STATUS(status: temp_status).rawValue
         
@@ -212,10 +215,10 @@ class TeamTable: Table {
             arena!.filterRow()
         }
         
-        if signupDate != nil {
-            signupDate?.filterRow()
-            last_signup_date = signupDate!.date
-        }
+//        if signupDate != nil {
+//            signupDate?.filterRow()
+//            last_signup_date = signupDate!.date
+//        }
         
         if temp_fee_M >= 0 {
             temp_fee_M_show = "\(temp_fee_M)元"
