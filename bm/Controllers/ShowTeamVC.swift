@@ -56,9 +56,9 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         let oneLineCellNib = UINib(nibName: "OneLineCell", bundle: nil)
         view.register(oneLineCellNib, forCellReuseIdentifier: "OneLineCell")
         
-        view.register(ShowTeamMemberCell.self, forCellReuseIdentifier: "ShowTeamMemberCell")
+        //view.register(ShowTeamMemberCell.self, forCellReuseIdentifier: "ShowTeamMemberCell")
         
-        view.register(ShowSignupCell.self, forCellReuseIdentifier: "ShowSignupCell")
+        //view.register(ShowSignupCell.self, forCellReuseIdentifier: "ShowSignupCell")
         
         return view
     }()
@@ -198,7 +198,12 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let teamMemberListContainer: UIView = UIView()
+    let teamMemberListContainer: UIView = {
+        let view: UIView = UIView()
+        view.visibility = .invisible
+        
+        return view
+    }()
     
     let teamMemberListLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
@@ -210,6 +215,19 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     }()
     
     let addIconText2: IconText2 = IconText2(icon: "add_svg", text: "新增")
+    
+    let teamMemberTableView: UITableView = {
+        let view = UITableView()
+        view.isScrollEnabled = false
+        view.backgroundColor = UIColor.clear
+        
+        view.rowHeight = UITableView.automaticDimension
+        view.estimatedRowHeight = UITableView.automaticDimension
+        
+        view.register(ShowTeamMemberCell.self, forCellReuseIdentifier: "ShowTeamMemberCell")
+                
+        return view
+    }()
 
     var isTeamMemberLoaded: Bool = false
     
@@ -278,6 +296,13 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
         introduceTableView.delegate = self
         introduceTableView.dataSource = self
+        
+        teamMemberTableView.snp.makeConstraints { make in
+            make.height.equalTo(0)
+        }
+        
+        teamMemberTableView.delegate = self
+        teamMemberTableView.dataSource = self
         
         showTab2.delegate = self
         addIconText2.delegate = self
@@ -563,9 +588,16 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                 make.centerY.equalToSuperview()
             }
 
-        teamMemberContentView.addSubview(introduceTableView)
+        teamMemberContentView.addSubview(teamMemberTableView)
+        //teamMemberContentView.addSubview(introduceTableView)
 //        teamMemberStackView.addArrangedSubview(introduceTableView)
-        introduceTableView.snp.makeConstraints { make in
+//        introduceTableView.snp.makeConstraints { make in
+//            make.top.equalTo(teamMemberListContainer.snp.bottom).offset(12)
+//            make.left.right.equalToSuperview()
+//            make.bottom.equalToSuperview().offset(-20)
+//        }
+        
+        teamMemberTableView.snp.makeConstraints { make in
             make.top.equalTo(teamMemberListContainer.snp.bottom).offset(12)
             make.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-20)
@@ -892,6 +924,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             
             initTeamMember()
             self.teamMemberVisible(.visible)
+            teamMemberTableView.heightConstraint?.constant = CGFloat(myTable!.teamMemberCount * 72)
             
             teamMemberDataLbl.text = "球隊人數統計："
             teamMemberListLbl.text = "正式隊員："
@@ -902,9 +935,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                 isTeamMemberLoaded = true
             } else {
                 setTeamMemberSummary()
+                teamMemberTableView.reloadData()
             }
-            
-            introduceTableView.reloadData()
             
             setTeamMemberBottom()
             
@@ -913,6 +945,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             
             initTeamMember()
             self.teamMemberVisible(.visible)
+            teamMemberTableView.heightConstraint?.constant = CGFloat(self.tempPlayCount * 72)
             
             addIconText2.visibility = .invisible
             teamMemberDataLbl.text = "臨打人數統計："
@@ -924,9 +957,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                 isTempplayLoaded = true
             } else {
                 setTempPlaySummary()
+                teamMemberTableView.reloadData()
             }
-            
-            introduceTableView.reloadData()
             
             //setSignupData()
             
@@ -1029,7 +1061,7 @@ extension ShowTeamVC {
             }
             items1 += _rows
             filterItems = items1
-            introduceTableView.reloadData()
+            teamMemberTableView.reloadData()
             
             for item in items1 {
                 if item.memberTable != nil {
@@ -1317,7 +1349,7 @@ extension ShowTeamVC {
                                 self.items2.removeAll()
                                 self.isAddTempPlay = false
                             }
-                            self.introduceTableView.reloadData()
+                            self.teamMemberTableView.reloadData()
                             self.setTempPlaySummary()
                             self.teamMemberTotalLbl.on()
                             self.setTempPlayBottom()
@@ -1457,22 +1489,30 @@ extension ShowTeamVC {
 
 extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (focusTabIdx == 0) {
-            return 40
-        } else {
-            return 72
-        }
-    }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if (focusTabIdx == 0) {
+//            return 40
+//        } else {
+//            return 72
+//        }
+//    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if (focusTabIdx == 0) {
-            return memberRows.count
+            var count: Int = memberRows.count
+            //print("introduce count: \(memberRows.count)")
+            return count
             //return tableRowKeys.count
         } else if (focusTabIdx == 1) {
-            return filterItems.count
-            
+//            var count: Int = 100
+//            if filterItems.count > 0 {
+//                count = filterItems.count
+//            }
+            let count = filterItems.count
+            //print("height:\(CGFloat(count * 72))")
+            //tableView.heightConstraint?.constant = CGFloat(count * 72)
+            return count
         } else if (focusTabIdx == 2) {
             
             return tempPlayCount
@@ -1494,75 +1534,36 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             cell.setSelectedBackgroundColor()
 
             return cell
-        }
-        else if focusTabIdx == 1 && items1.count > 0 {
+        } else {
             let cell: ShowTeamMemberCell = tableView.dequeueReusableCell(withIdentifier: "ShowTeamMemberCell", for: indexPath) as! ShowTeamMemberCell
+//            let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "OneLineCell", for: indexPath) as! OneLineCell
             
-            //cell.delegate = self
-            
-            let row: TeamMemberTable = filterItems[indexPath.row]
-            
-            let no: Int = (teamMemberPage - 1) * teamMemberPerPage + (indexPath.row + 1)
-            cell.configureTeamMember(row: row, no: no)
-            
-            cell.setSelectedBackgroundColor()
-            return cell
-        }
-        else if focusTabIdx == 2 {
-//            let cell: ShowSignupCell = tableView.dequeueReusableCell(withIdentifier: "ShowSignupCell", for: indexPath) as! ShowSignupCell
-            
-//            cell.noLbl.text = "\(indexPath.row + 1)."
-//
-//            if items2.count > indexPath.row {
-//                cell.nameLbl.text = String(items2[indexPath.row].memberTable!.nickname)
-//            } else {
-//                cell.nameLbl.text = ""
-//            }
-            
-            let cell: ShowTeamMemberCell = tableView.dequeueReusableCell(withIdentifier: "ShowTeamMemberCell", for: indexPath) as! ShowTeamMemberCell
-            
-            let no: Int = (tempPlayPage - 1) * tempPlayPerPage + (indexPath.row + 1)
-            
-            var row: TeamTempPlayTable? = nil
-            if (indexPath.row < items2.count) {
-                row = items2[indexPath.row]
+            if focusTabIdx == 1 && items1.count > 0 {
+//                print("teamMemberPage:\(teamMemberPage)")
+//                print("teamMemberPerPage:\(teamMemberPerPage)")
+//                print("indexPath.row:\(indexPath.row)")
+                let no: Int = (teamMemberPage - 1) * teamMemberPerPage + (indexPath.row + 1)
+//                print("no:\(no)")
+//                print("================")
+                if (indexPath.row < filterItems.count) {
+                    //let row: TeamMemberTable = items1[indexPath.row]
+                    let row: TeamMemberTable = filterItems[indexPath.row]
+                    
+                    //cell.update(icon: "clock_svg", title: row.name, content: row.created_at_show)
+                    cell.configureTeamMember(row: row, no: no)
+                }
+            } else if focusTabIdx == 2 {
+                let no: Int = (tempPlayPage - 1) * tempPlayPerPage + (indexPath.row + 1)
+                var row: TeamTempPlayTable? = nil
+                if (indexPath.row < items2.count) {
+                    row = items2[indexPath.row]
+                }
+                cell.configureTempPlay(row: row, no: no)
             }
-            cell.configureTempPlay(row: row, no: no)
             
             cell.setSelectedBackgroundColor()
-
-//            let people_limit = myTable!.people_limit + myTable!.leaveCount
-//            let normal_count = myTable!.signupNormalTables.count
-//            let standby_count = myTable!.signupStandbyTables.count
-//            if indexPath.row < people_limit {
-//                cell.noLbl.text = "\(indexPath.row + 1)."
-//                cell.nameLbl.text = ""
-//                if normal_count > 0 {
-//                    if indexPath.row < normal_count {
-//                        let signup_normal_model = myTable!.signupNormalTables[indexPath.row]
-//                        cell.nameLbl.text = signup_normal_model.member_name
-//                    }
-//                }
-//            } else if indexPath.row >= people_limit && indexPath.row < people_limit + standby_count {
-//                cell.noLbl.text = "候補\(indexPath.row - people_limit + 1)."
-//                let signup_standby_model = myTable!.signupStandbyTables[indexPath.row - people_limit]
-//                cell.nameLbl.text = signup_standby_model.member_name
-//            } else {
-//                let remain: Int = people_limit - myTable!.signupNormalTables.count
-//                var remain_text = ""
-//                if (remain > 0) {
-//                    remain_text = "還有\(remain)個名額"
-//                } else {
-//                    remain_text = "已經額滿，請排候補"
-//                }
-//                cell.noLbl.text = remain_text
-//            }
-
-            //cell.setSelectedBackgroundColor()
             return cell
         }
-
-        return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -1609,21 +1610,21 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if focusTabIdx == 1 {
-//            print("page:\(teamMemberPage)")
-//            print("perPage:\(teamMemberPerPage)")
-//            print("index.row:\(indexPath.row)")
-            if indexPath.row == teamMemberPage * teamMemberPerPage - 2 {
-                teamMemberPage += 1
-                //print("current page: \(page)")
-                //print(totalPage)
-                if teamMemberPage <= teamMemberTotalPage {
-                    getTeamMemberList(page: teamMemberPage, perPage: teamMemberPerPage)
-                }
-            }
-        }
-    }
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if focusTabIdx == 1 && filterItems.count > 0 {
+////            print("page:\(teamMemberPage)")
+////            print("perPage:\(teamMemberPerPage)")
+////            print("index.row:\(indexPath.row)")
+//            if indexPath.row == teamMemberPage * teamMemberPerPage - 2 {
+//                teamMemberPage += 1
+//                //print("current page: \(page)")
+//                //print(totalPage)
+//                if teamMemberPage <= teamMemberTotalPage {
+//                    getTeamMemberList(page: teamMemberPage, perPage: teamMemberPerPage)
+//                }
+//            }
+//        }
+//    }
 }
 
 //extension ShowTeamVC: ShowTeamMemberCellDelegate {

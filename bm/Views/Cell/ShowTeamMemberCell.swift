@@ -163,6 +163,8 @@ class ShowTeamMemberCell: UITableViewCell {
         }
         self.nameLbl.text = nickname
         self.createdAtLbl.text = row.created_at.noSec()
+        
+        self.leaveLbl.visibility = .invisible
 
         self.leaveLbl.visibility = (row.isLeave) ? .visible : .invisible
         if self.leaveLbl.visibility == .visible {
