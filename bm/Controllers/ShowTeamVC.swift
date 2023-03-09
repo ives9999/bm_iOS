@@ -42,6 +42,28 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         return view
     }()
+    
+    let introduceNameLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextTitle()
+        view.text = "xxx羽球隊"
+        
+        return view
+    }()
+    
+    let introduceAllContainer: UIView = {
+        let view = UIView()
+        view.isUserInteractionEnabled = true
+        return view
+    }()
+    
+    let introduceLeftContainer: UIView = {
+        let view = UIView()
+        view.isUserInteractionEnabled = true
+        return view
+    }()
+
+    
     //var featured_h: CGFloat = 0
     let introduceTableView: UITableView = {
         let view = UITableView()
@@ -388,11 +410,91 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             make.height.equalTo(200)
         }
         
+        introduceContentView.addSubview(introduceNameLbl)
+        introduceNameLbl.snp.makeConstraints { make in
+            make.top.equalTo(featured.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(40)
+        }
+        
+        
+        introduceContentView.addSubview(introduceAllContainer)
+        
+        introduceAllContainer.snp.makeConstraints { make in
+            make.top.equalTo(introduceNameLbl.snp.bottom).offset(12)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(60)
+        }
+        
+            introduceAllContainer.addSubview(introduceLeftContainer)
+            //introduceLeftContainer.backgroundColor = UIColor.gray
+            introduceLeftContainer.snp.makeConstraints { make in
+                make.top.left.equalToSuperview()
+                make.right.equalToSuperview().offset(-100)
+                make.height.equalTo(60)
+                //make.bottom.equalToSuperview()
+            }
+        
+                introduceLeftContainer.addSubview(nextDateContainer)
+                nextDateContainer.snp.makeConstraints { make in
+                    make.top.equalToSuperview()
+                    make.left.equalToSuperview()
+                    make.right.equalToSuperview()
+                    make.height.equalTo(30)
+                }
+
+                    nextDateContainer.addSubview(nextDateIV)
+                    nextDateIV.snp.makeConstraints { make in
+                        make.left.equalToSuperview()
+                        make.width.height.equalTo(24)
+                        make.centerY.equalToSuperview()
+                    }
+
+                    nextDateContainer.addSubview(nextDateLbl)
+                    nextDateLbl.snp.makeConstraints { make in
+                        make.left.equalTo(nextDateIV.snp.right).offset(24)
+                        make.centerY.equalToSuperview()
+                    }
+        
+                introduceLeftContainer.addSubview(nextTimeContainer)
+                nextTimeContainer.snp.makeConstraints { make in
+                    make.top.equalTo(nextDateContainer.snp.bottom).offset(4)
+                    make.left.equalToSuperview()
+                    make.right.equalToSuperview()
+                    make.height.equalTo(30)
+                }
+
+                    nextTimeContainer.addSubview(nextTimeIV)
+                    nextTimeIV.snp.makeConstraints { make in
+                        make.left.equalToSuperview()
+                        make.width.height.equalTo(24)
+                        make.centerY.equalToSuperview()
+                    }
+
+                    nextTimeContainer.addSubview(nextTimeLbl)
+                    nextTimeLbl.snp.makeConstraints { make in
+                        make.left.equalTo(nextTimeIV.snp.right).offset(24)
+                        make.centerY.equalToSuperview()
+                    }
+            
+            introduceAllContainer.addSubview(showLike2)
+            showLike2.snp.makeConstraints { make in
+                make.top.equalToSuperview()
+                make.right.equalToSuperview()
+                make.width.equalTo(48)
+                make.height.equalTo(60)
+            }
+        
+        
+        
+        
         introduceContentView.addSubview(introduceTableView)
         //introduceTableView.backgroundColor = UIColor.red
         //introduceStackView.addArrangedSubview(introduceTableView)
         introduceTableView.snp.makeConstraints { make in
-            make.top.equalTo(featured.snp.bottom).offset(20)
+            make.top.equalTo(introduceAllContainer.snp.bottom).offset(20)
             make.left.right.equalToSuperview()
         }
 
@@ -608,6 +710,12 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         self.showLike2.backgroundCircle()
 //        self.featured.layer.cornerRadius = 20
 //        self.featured.clipsToBounds = true
+        
+        let a = introduceTableView.contentSize.height
+        introduceTableView.heightConstraint?.constant = a
+        
+        let b = teamMemberTableView.contentSize.height
+        teamMemberTableView.heightConstraint?.constant = b
     }
     
     func refresh<T: Table>(_ t: T.Type) {
@@ -636,7 +744,6 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
                                 self.setIntroduceData()
                                 self.setContentWeb()
                                 self.setLike()
-                                self.showTop2!.setTitle(title: self.table!.name)
                                 self.tempPlayCount = myTable!.number - myTable!.teamMemberCount + myTable!.leaveCount
                                 
                                 if let nextDate = myTable?.nextDate, !nextDate.isEmpty, let nextDateWeek = myTable?.nextDateWeek, !nextDateWeek.isEmpty {
@@ -807,6 +914,9 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         memberRows.append(row)
         row = MemberRow(title: "建立日期", icon: "createdAt_svg", show: myTable!.created_at_show)
         memberRows.append(row)
+        
+        self.showTop2!.setTitle(title: myTable!.name)
+        introduceNameLbl.text = myTable!.name
     }
     
     func setContentWeb() {
@@ -823,10 +933,10 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         }
     }
     
-    override func viewWillLayoutSubviews() {
-        let a = introduceTableView.contentSize.height
-        introduceTableView.heightConstraint?.constant = a
-    }
+//    override func viewWillLayoutSubviews() {
+//        let a = introduceTableView.contentSize.height
+//        introduceTableView.heightConstraint?.constant = a
+//    }
 
     override func submit() {
         if !Member.instance.isLoggedIn {
@@ -915,9 +1025,12 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
             removeTeamMember()
             
             initIntroduce()
-            //setIntroduceData()
+            
+            nextDateLbl.visibility = .visible
+            nextTimeLbl.visibility = .visible
+            
             introduceTableView.reloadData()
-            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowCancel: false)
+            showBottom!.showButton(parent: self.view, isShowSubmit: false, isShowLike: false, isShowCancel: false)
             
         case 1:
             removeIntroduce()
