@@ -714,8 +714,8 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         let a = introduceTableView.contentSize.height
         introduceTableView.heightConstraint?.constant = a
         
-        let b = teamMemberTableView.contentSize.height
-        teamMemberTableView.heightConstraint?.constant = b
+        //let b = teamMemberTableView.contentSize.height
+        teamMemberTableView.heightConstraint?.constant = CGFloat(items1.count * 70)
     }
     
     func refresh<T: Table>(_ t: T.Type) {
@@ -1698,9 +1698,11 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             if myTable != nil {
                 if myTable!.manager_token == Member.instance.token {
                     
-                    let row: TeamTempPlayTable = items2[indexPath.row]
-                    if let memberTable: MemberTable = row.memberTable {
-                        getMemberOne(member_token: memberTable.token)
+                    if indexPath.row < items2.count {
+                        let row: TeamTempPlayTable = items2[indexPath.row]
+                        if let memberTable: MemberTable = row.memberTable {
+                            getMemberOne(member_token: memberTable.token)
+                        }
                     }
                     
 //                    let signupNormalCount: Int = myTable!.signupNormalTables.count
