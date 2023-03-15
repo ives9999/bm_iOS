@@ -264,7 +264,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var items1: [TeamMemberTable] = [TeamMemberTable]()
     var filterItems: [TeamMemberTable] = [TeamMemberTable]()
     var teamMemberPage: Int = 1
-    var teamMemberPerPage: Int = PERPAGE
+    var teamMemberPerPage: Int = 50
     var teamMemberTotalCount: Int = 0
     var teamMemberTotalPage: Int = 0
     var leaveCount: Int = 0
@@ -291,7 +291,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     //臨打列表資料是否已輸入
     var isTempplayLoaded: Bool = false
     var tempPlayPage: Int = 1
-    var tempPlayPerPage: Int = PERPAGE
+    var tempPlayPerPage: Int = 50
     var tempPlayTotalCount: Int = 0
     var tempPlayTotalPage: Int = 0
     
@@ -1151,7 +1151,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
 
 /////////////////  team member leave start /////////////////////////////
 extension ShowTeamVC {
-    func getTeamMemberList(page: Int = 1, perPage: Int = 20) {
+    func getTeamMemberList(page: Int = 1, perPage: Int = 50) {
         Global.instance.addSpinner(superView: self.view)
         
         TeamService.instance.teamMemberList(token: token!, page: page, perPage: perPage) { (success) in
@@ -1304,7 +1304,7 @@ extension ShowTeamVC {
                     let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
                     if (successTable.success) {
                         self.info(msg: doLeaveWarning, buttonTitle: "關閉") {
-                            self.getTeamMemberList(page: 1, perPage: PERPAGE)
+                            self.getTeamMemberList(page: 1, perPage: self.teamMemberPerPage)
                         }
                     } else {
                         self.warning(successTable.msg)
@@ -1398,7 +1398,7 @@ extension ShowTeamVC {
                     let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.dataService.jsonData!)
                     if (successTable.success) {
                         self.info(msg: doAddWarning, buttonTitle: "關閉") {
-                            self.getTempPlayList(page: 1, perPage: PERPAGE)
+                            self.getTempPlayList(page: 1, perPage: self.tempPlayPerPage)
                         }
                     } else {
                         self.warning(successTable.msg)
@@ -1410,7 +1410,7 @@ extension ShowTeamVC {
         }
     }
     
-    func getTempPlayList(page: Int = 1, perPage: Int = 20) {
+    func getTempPlayList(page: Int = 1, perPage: Int = 50) {
         Global.instance.addSpinner(superView: self.view)
         
         TeamService.instance.tempPlayList(token: token!, playDate: myTable!.nextDate, page: page, perPage: perPage) { (success) in
