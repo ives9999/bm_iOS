@@ -10,7 +10,7 @@ import UIKit
 
 class MemberVC: BaseViewController {
     
-    @IBOutlet weak var nicknameLbl: UILabel!
+    //@IBOutlet weak var nicknameLbl: UILabel!
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var registerBtn: UIButton!
     @IBOutlet weak var registerIcon: UIImageView!
@@ -20,6 +20,42 @@ class MemberVC: BaseViewController {
     
     let featuredContainer: UIView = {
         let view = UIView()
+        
+        return view
+    }()
+    
+    let qrcodeIV2: IconView2 = {
+        let view: IconView2 = IconView2(icon: "qrcode_svg", frameWidth: 48, frameHeight: 48, iconWidth: 24, iconHeight: 24)
+        
+        return view
+    }()
+    
+    let logoutIV2: IconView2 = {
+        let view: IconView2 = IconView2(icon: "logout_svg", frameWidth: 48, frameHeight: 48, iconWidth: 24, iconHeight: 24)
+        
+        return view
+    }()
+    
+    let avatarIV: Avatar = {
+        let view: Avatar = Avatar()
+        view.image = UIImage(named: "noavatar_svg")
+        
+        return view
+    }()
+    
+    let nicknameLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextTitle()
+        view.text = "ives"
+        
+        return view
+    }()
+    
+    let levelContainer: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = UIColor(MEMBER_LEVEL_BACKGROUND)
+        view.layer.cornerRadius = 20
+        view.clipsToBounds = true
         
         return view
     }()
@@ -59,6 +95,8 @@ class MemberVC: BaseViewController {
         mainBottom2.delegate = self
         
         anchor()
+        
+        
 
         //tableView.separatorStyle = .none
         //tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
@@ -66,18 +104,55 @@ class MemberVC: BaseViewController {
     
     func anchor() {
         self.view.addSubview(featuredContainer)
-        featuredContainer.backgroundColor = UIColor.gray
+        //featuredContainer.backgroundColor = UIColor.gray
         featuredContainer.snp.makeConstraints { make in
-            make.top.left.right.equalToSuperview()
-            make.height.equalTo(172)
+            make.top.equalToSuperview().offset(statusBarHeight)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(160)
+        }
+        
+            featuredContainer.addSubview(qrcodeIV2)
+            qrcodeIV2.snp.makeConstraints { make in
+                make.left.equalToSuperview().offset(20)
+                make.top.equalToSuperview()
+                make.width.height.equalTo(48)
+            }
+            
+            featuredContainer.addSubview(logoutIV2)
+            logoutIV2.snp.makeConstraints { make in
+                make.right.equalToSuperview().offset(-20)
+                make.top.equalToSuperview()
+                make.width.height.equalTo(48)
+            }
+            
+            featuredContainer.addSubview(avatarIV)
+            avatarIV.snp.makeConstraints { make in
+                make.width.height.equalTo(112)
+                make.top.equalToSuperview().offset(12)
+                make.centerX.equalToSuperview()
+            }
+            
+            featuredContainer.addSubview(nicknameLbl)
+            nicknameLbl.snp.makeConstraints { make in
+                make.centerX.equalToSuperview()
+                make.top.equalTo(avatarIV.snp.bottom).offset(12)
+            }
+        
+        self.view.addSubview(levelContainer)
+        //levelContainer.backgroundColor = UIColor.red
+        levelContainer.snp.makeConstraints { make in
+            make.top.equalTo(featuredContainer.snp.bottom).offset(16)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(85)
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        //refresh()
-        //loginout()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidAppear(animated)
+//        refresh()
+//        loginout()
+//    }
     
     func initSectionRows1() -> [MemberSection] {
         

@@ -41,6 +41,8 @@ class BaseViewController: UIViewController, List2CellDelegate {
     let titleBarHeight: CGFloat = 80
     var workAreaHeight: CGFloat = 600
     
+    var statusBarHeight = 80
+    
     let session: UserDefaults = UserDefaults.standard
     
     var page: Int = 1
@@ -1074,6 +1076,9 @@ class BaseViewController: UIViewController, List2CellDelegate {
         addBtn.visibility = .invisible
         
         screen_width = UIScreen.main.bounds.width
+        
+        let keyWindow = UIApplication.shared.connectedScenes.map({$0 as? UIWindowScene}).compactMap({$0}).first?.windows.first
+        statusBarHeight = Int(keyWindow?.windowScene?.statusBarManager?.statusBarFrame.size.height ?? 60)
         
         //setBottomTabFocus()
         

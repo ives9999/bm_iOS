@@ -497,25 +497,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wjB-Rp-kZH">
-                                <rect key="frame" x="0.0" y="48" width="414" height="64"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="會員" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LnK-P8-m6G">
-                                        <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
-                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="LnK-P8-m6G" firstAttribute="centerY" secondItem="wjB-Rp-kZH" secondAttribute="centerY" id="lKz-la-a0l"/>
-                                    <constraint firstAttribute="height" constant="64" id="oAR-Os-MVK"/>
-                                    <constraint firstItem="LnK-P8-m6G" firstAttribute="centerX" secondItem="wjB-Rp-kZH" secondAttribute="centerX" id="r0j-dm-n5o"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhS-Df-H8i" userLabel="top">
-                                <rect key="frame" x="0.0" y="120" width="414" height="100"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="100"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuProfileIcon" translatesAutoresizingMaskIntoConstraints="NO" id="H1p-AH-ugJ">
                                         <rect key="frame" x="30" y="12.5" width="75" height="75"/>
@@ -531,7 +514,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <constraints>
                                     <constraint firstItem="H1p-AH-ugJ" firstAttribute="leading" secondItem="RhS-Df-H8i" secondAttribute="leading" constant="30" id="5en-uJ-MiP"/>
                                     <constraint firstAttribute="height" constant="100" id="6XT-4G-q8X"/>
@@ -640,13 +623,10 @@
                         <constraints>
                             <constraint firstItem="ef6-8n-Fg2" firstAttribute="trailing" secondItem="JhB-i9-wta" secondAttribute="trailing" id="7Ta-u7-9zY"/>
                             <constraint firstItem="ef6-8n-Fg2" firstAttribute="trailing" secondItem="RhS-Df-H8i" secondAttribute="trailing" id="K4d-XJ-w0Y"/>
-                            <constraint firstItem="wjB-Rp-kZH" firstAttribute="centerX" secondItem="Oqs-vh-nZN" secondAttribute="centerX" id="VD0-Kk-xNx"/>
-                            <constraint firstItem="RhS-Df-H8i" firstAttribute="top" secondItem="wjB-Rp-kZH" secondAttribute="bottom" constant="8" symbolic="YES" id="VOV-tR-dAV"/>
-                            <constraint firstItem="wjB-Rp-kZH" firstAttribute="leading" secondItem="ef6-8n-Fg2" secondAttribute="leading" id="bnp-vh-EjD"/>
+                            <constraint firstItem="RhS-Df-H8i" firstAttribute="top" secondItem="ef6-8n-Fg2" secondAttribute="top" id="iHF-MP-Cjz"/>
                             <constraint firstItem="RhS-Df-H8i" firstAttribute="leading" secondItem="ef6-8n-Fg2" secondAttribute="leading" id="njZ-7h-KyI"/>
                             <constraint firstItem="ef6-8n-Fg2" firstAttribute="bottom" secondItem="JhB-i9-wta" secondAttribute="bottom" constant="72" id="qpw-qt-vXa"/>
                             <constraint firstItem="JhB-i9-wta" firstAttribute="leading" secondItem="ef6-8n-Fg2" secondAttribute="leading" id="sxj-JZ-PLg"/>
-                            <constraint firstItem="wjB-Rp-kZH" firstAttribute="top" secondItem="ef6-8n-Fg2" secondAttribute="top" id="tzf-2t-tUg"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="會員" image="member" id="p65-Zk-2yj"/>
@@ -659,7 +639,6 @@
                         <outlet property="nicknameLbl" destination="kts-dq-dst" id="2XM-NZ-EOY"/>
                         <outlet property="registerBtn" destination="Bzs-pN-MgL" id="W9r-hQ-3UM"/>
                         <outlet property="registerIcon" destination="9SS-RX-ALH" id="5lS-qe-GYw"/>
-                        <outlet property="topView" destination="wjB-Rp-kZH" id="Ihd-r0-8fk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0y-lF-F2G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -2530,6 +2509,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemTealColor">
+            <color red="0.18823529411764706" green="0.69019607843137254" blue="0.7803921568627451" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
