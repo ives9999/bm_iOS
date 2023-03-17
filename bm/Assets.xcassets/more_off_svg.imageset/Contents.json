@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "more_off_svg.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

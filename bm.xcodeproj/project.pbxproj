@@ -357,6 +357,7 @@
 		F9B1925C299FCCB00037FE05 /* ShowButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925B299FCCB00037FE05 /* ShowButton2.swift */; };
 		F9B1925E29A52AD50037FE05 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925D29A52AD50037FE05 /* Int.swift */; };
 		F9CB7F3E298FFE0900C1B92F /* ShowLike2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */; };
+		F9D28AD829C1EE3C00655988 /* MainBottom2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D28AD729C1EE3C00655988 /* MainBottom2.swift */; };
 		F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */; };
 		F9EDEDAF28927C1B00FB92BB /* MemberSubscriptionKindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EDEDAE28927C1B00FB92BB /* MemberSubscriptionKindVC.swift */; };
 		F9EDEDB128928E3400FB92BB /* MyTable2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EDEDB028928E3400FB92BB /* MyTable2VC.swift */; };
@@ -805,6 +806,7 @@
 		F9B1925B299FCCB00037FE05 /* ShowButton2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowButton2.swift; sourceTree = "<group>"; };
 		F9B1925D29A52AD50037FE05 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLike2.swift; sourceTree = "<group>"; };
+		F9D28AD729C1EE3C00655988 /* MainBottom2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBottom2.swift; sourceTree = "<group>"; };
 		F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImagePickerVC.swift; sourceTree = "<group>"; };
 		F9EDEDAE28927C1B00FB92BB /* MemberSubscriptionKindVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionKindVC.swift; sourceTree = "<group>"; };
 		F9EDEDB028928E3400FB92BB /* MyTable2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTable2VC.swift; sourceTree = "<group>"; };
@@ -1098,6 +1100,7 @@
 				F9A6751C27FAF605007C8F47 /* Top.swift */,
 				F9A6751E27FAF766007C8F47 /* Top.xib */,
 				B313272529AEFE8700EAB782 /* IconText2.swift */,
+				F9D28AD729C1EE3C00655988 /* MainBottom2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2035,6 +2038,7 @@
 				B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */,
 				B3FAA0A820CA5C48008F2294 /* TempPlaySignupOneVC.swift in Sources */,
 				B362263225E236C100D98317 /* MemberOrderListVC.swift in Sources */,
+				F9D28AD829C1EE3C00655988 /* MainBottom2.swift in Sources */,
 				F9EDEDB128928E3400FB92BB /* MyTable2VC.swift in Sources */,
 				B39453E1223CE905005E3027 /* CancelButton.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,

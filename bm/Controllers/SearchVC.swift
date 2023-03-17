@@ -13,9 +13,9 @@ import CryptoSwift
 class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     @IBOutlet weak var submitBtn: SubmitButton!
-//    @IBOutlet weak var likeTab: Tag!
-//    @IBOutlet weak var searchTab: Tag!
-//    @IBOutlet weak var allTab: Tag!
+    //    @IBOutlet weak var likeTab: Tag!
+    //    @IBOutlet weak var searchTab: Tag!
+    //    @IBOutlet weak var allTab: Tag!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var tableViewContainer: UIView!
     @IBOutlet weak var tableViewContainerleading: NSLayoutConstraint!
@@ -37,6 +37,8 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     var mustLoginLbl: SuperLabel?
     
+    var mainBottom2: MainBottom2 = MainBottom2()
+    
     override func viewDidLoad() {
         
         //Global.instance.setupTabbar(self)
@@ -47,13 +49,14 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         
         super.viewDidLoad()
         
+        
 //        let cellNib = UINib(nibName: "EditCell", bundle: nil)
 //        tableView.register(cellNib, forCellReuseIdentifier: "cell")
         
-        if (tableViewContainer != nil) {
-            tableViewContainer.layer.cornerRadius = CORNER_RADIUS
-            tableViewContainer.clipsToBounds = true
-        }
+//        if (tableViewContainer != nil) {
+//            tableViewContainer.layer.cornerRadius = CORNER_RADIUS
+//            tableViewContainer.clipsToBounds = true
+//        }
         
         let textFieldNib = UINib(nibName: "TextFieldCell", bundle: nil)
         tableView.register(textFieldNib, forCellReuseIdentifier: "textFieldCell")
@@ -78,7 +81,14 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 
         //bottomView.visibility = .invisible
         tableViewBottomConstraint.constant = 0
-        tableViewContainer.backgroundColor = UIColor.clear
+        tableViewContainer.backgroundColor = UIColor.red
+        
+        self.view.addSubview(mainBottom2)
+        mainBottom2.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(72)
+        }
+        mainBottom2.delegate = self
 
         member_like = true
         
@@ -135,6 +145,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
                 isSelected = tmp
             }
             tab.isFocus(isSelected)
+            setListView()
             
             let tabTap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tabPressed))
             tab.addGestureRecognizer(tabTap)
@@ -546,45 +557,48 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     @objc func tabPressed(sender: UITapGestureRecognizer) {
                 
         if let idx: Int = sender.view?.tag {
-            
-            let selectedTag: [String: Any] = searchTabs[idx]
-            if let focus: Bool = selectedTag["focus"] as? Bool {
+            _tabPressed(idx: idx)
+        }
+    }
+    
+    private func _tabPressed(idx: Int) {
+        let selectedTag: [String: Any] = searchTabs[idx]
+        if let focus: Bool = selectedTag["focus"] as? Bool {
 
-                //按了其他頁面的按鈕
-                if (!focus) {
-                    updateTabSelected(idx: idx)
-                    focusTabIdx = idx
-                    switch focusTabIdx {
-                    case 1:
-                        mustLoginLbl?.visibility = .invisible
-                        setFilterView()
+            //按了其他頁面的按鈕
+            if (!focus) {
+                updateTabSelected(idx: idx)
+                focusTabIdx = idx
+                switch focusTabIdx {
+                case 1:
+                    mustLoginLbl?.visibility = .invisible
+                    setFilterView()
+                    tableView.visibility = .visible
+                    tableView.reloadData()
+                case 0:
+                    member_like = true
+                    params.removeAll()
+                    setListView()
+                    if Member.instance.isLoggedIn {
                         tableView.visibility = .visible
-                        tableView.reloadData()
-                    case 0:
-                        member_like = true
-                        params.removeAll()
-                        setListView()
-                        if Member.instance.isLoggedIn {
-                            tableView.visibility = .visible
-                            refresh()
+                        refresh()
+                    } else {
+                        tableView.visibility = .invisible
+                        if mustLoginLbl == nil {
+                            mustLoginLbl = view.setInfo(info: "請先登入", topAnchor: topTabContainer)
                         } else {
-                            tableView.visibility = .invisible
-                            if mustLoginLbl == nil {
-                                mustLoginLbl = view.setInfo(info: "請先登入", topAnchor: topTabContainer)
-                            } else {
-                                mustLoginLbl!.visibility = .visible
-                            }
+                            mustLoginLbl!.visibility = .visible
                         }
-                    case 2:
-                        member_like = false
-                        params.removeAll()
-                        mustLoginLbl?.visibility = .invisible
-                        tableView.visibility = .visible
-                        setListView()
-                        refresh()
-                    default:
-                        refresh()
                     }
+                case 2:
+                    member_like = false
+                    params.removeAll()
+                    mustLoginLbl?.visibility = .invisible
+                    tableView.visibility = .visible
+                    setListView()
+                    refresh()
+                default:
+                    refresh()
                 }
             }
         }
@@ -599,10 +613,10 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         //submitBtn.setTitleColor(.red, for: .normal)
         
         //tableViewBottomConstraint.constant = 50
-        tableViewContainer.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        //tableViewContainer.backgroundColor = UIColor(SEARCH_BACKGROUND)
         tableViewContainerleading.constant = 4
         tableViewContainertrailing.constant = 4
-        tableViewContainerBottom.constant = 8
+        tableViewContainerBottom.constant = 72
     }
     
     private func setListView() {
@@ -613,7 +627,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         }
         
         tableViewBottomConstraint.constant = 0
-        tableViewContainer.backgroundColor = UIColor.clear
+        //tableViewContainer.backgroundColor = UIColor.clear
         tableViewContainerleading.constant = 0
         tableViewContainertrailing.constant = 0
         tableViewContainerBottom.constant = 0
@@ -668,4 +682,17 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 struct ExpandableItems {
     var isExpanded: Bool
     let items: [String]
+}
+
+extension SearchVC: MainBottom2Delegate {
+    func to(able_type: String) {
+        switch able_type {
+        case "team": toTeam()
+        case "course": toCourse()
+        default:
+            toTeam()
+        }
+    }
+    
+    
 }

@@ -218,7 +218,7 @@ let TO_WEBVIEW: String = "toWebView"
 let TO_YOUTUBE_PLAYER: String = "toYoutubePlayer"
 
 // color
-let BOTTOM_VIEW_BACKGROUND = "#5D5D5D"
+let BOTTOM_VIEW_BACKGROUND = "#242529"
 let CELL_SELECTED = "#3B3C43"
 let CELL_SELECTED1 = "#402424"
 let MEMBER_COIN_BUY = "#0D8504"

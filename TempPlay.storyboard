@@ -228,7 +228,7 @@
                                 <rect key="frame" x="0.0" y="48" width="414" height="64"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="球隊" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nd2-FW-fzb">
-                                        <rect key="frame" x="188" y="19" width="38.5" height="26.5"/>
+                                        <rect key="frame" x="187.5" y="18.5" width="39" height="27"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="22"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -268,15 +268,15 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdM-hU-xLE">
-                                <rect key="frame" x="0.0" y="163" width="414" height="699"/>
+                                <rect key="frame" x="0.0" y="163" width="414" height="627"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="XBU-v6-vgd">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="649"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="577"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableView>
                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f6n-WS-xoO" customClass="SubmitButton" customModule="bm" customModuleProvider="target">
-                                        <rect key="frame" x="16" y="649" width="382" height="50"/>
+                                        <rect key="frame" x="16" y="577" width="382" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="qJo-az-8x7"/>
                                         </constraints>
@@ -287,7 +287,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.22352941176470587" green="0.22352941176470587" blue="0.22352941176470587" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="XBU-v6-vgd" firstAttribute="top" secondItem="vdM-hU-xLE" secondAttribute="top" id="6IS-kU-7dG"/>
                                     <constraint firstItem="f6n-WS-xoO" firstAttribute="centerX" secondItem="vdM-hU-xLE" secondAttribute="centerX" id="A6d-9j-LP4"/>
@@ -313,7 +313,7 @@
                             <constraint firstItem="vdM-hU-xLE" firstAttribute="top" secondItem="sOG-tQ-pny" secondAttribute="bottom" id="drg-ud-3zp"/>
                             <constraint firstItem="vdM-hU-xLE" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="gXe-3S-hpr"/>
                             <constraint firstItem="RQt-D8-szo" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="jmq-hU-1to"/>
-                            <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="vdM-hU-xLE" secondAttribute="bottom" id="kDa-KX-0gX"/>
+                            <constraint firstItem="MId-N4-3lE" firstAttribute="bottom" secondItem="vdM-hU-xLE" secondAttribute="bottom" constant="72" id="kDa-KX-0gX"/>
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="leading" secondItem="MId-N4-3lE" secondAttribute="leading" id="wIa-be-ZTa"/>
                             <constraint firstItem="mB9-AG-XQD" firstAttribute="top" secondItem="MId-N4-3lE" secondAttribute="top" id="xYF-jR-S3y"/>
                         </constraints>

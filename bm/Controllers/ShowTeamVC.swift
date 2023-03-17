@@ -875,7 +875,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         
         if myTable != nil && myTable!.arena != nil {
         
-            row = MemberRow(title: "球館", icon: "arena_svg", show: myTable!.arena!.name)
+            row = MemberRow(title: "球館", icon: "arena_on_svg", show: myTable!.arena!.name)
             memberRows.append(row)
             row = MemberRow(title: "縣市", icon: "city_svg", show: myTable!.arena!.city_show)
             memberRows.append(row)

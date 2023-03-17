@@ -1075,7 +1075,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
         
         screen_width = UIScreen.main.bounds.width
         
-        setBottomTabFocus()
+        //setBottomTabFocus()
         
         //panelCancelBtn.setTitle("取消")
         //layerDeleteBtn.setTitle("刪除")
