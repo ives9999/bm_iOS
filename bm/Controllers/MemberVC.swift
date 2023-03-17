@@ -54,18 +54,41 @@ class MemberVC: BaseViewController {
     let levelContainer: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = UIColor(MEMBER_LEVEL_BACKGROUND)
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 12
         view.clipsToBounds = true
+        
+        return view
+    }()
+    
+    let levelDivideWidth: Int = 2
+    
+    let levelLeftContainer: UIView = UIView()
+    let levelDivideView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.26)
+        
+        return view
+    }()
+    let levelRightContainer: UIView = UIView()
+    
+    let pointIconText: IconTextVertical2 = IconTextVertical2(icon: "point_svg", text: "611 點")
+    let levelIconText: IconTextVertical2 = IconTextVertical2(icon: "level_svg", text: "金牌")
+    
+    let titleLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextTitle()
+        view.text = "功能"
         
         return view
     }()
         
     var memberSections: [MemberSection] = [MemberSection]()
+    var rows: [MainMemberTable] = [MainMemberTable]()
     
     let heightForSection: CGFloat = 34
     
     lazy var tableView: MyTable2VC<MainMemberCell, MainMemberTable, MemberVC> = {
-        let tableView = MyTable2VC<MainMemberCell, MainMemberTable, MemberVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer, myDelegate: self)
+        let tableView = MyTable2VC<MainMemberCell, MainMemberTable, MemberVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer, myDelegate: self, isRefresh: false)
         
         return tableView
     }()
@@ -93,13 +116,23 @@ class MemberVC: BaseViewController {
             make.height.equalTo(72)
         }
         mainBottom2.delegate = self
+        qrcodeIV2.delegate = self
+        logoutIV2.delegate = self
+        
+        rows.append(contentsOf: [
+            MainMemberTable(title: "會員資料", icon: "info_svg"),
+            MainMemberTable(title: "訂單查詢", icon: "truck_svg"),
+            MainMemberTable(title: "喜歡", icon: "like_in_svg"),
+            MainMemberTable(title: "參加", icon: "join_svg"),
+            MainMemberTable(title: "管理", icon: "manager1_svg"),
+            MainMemberTable(title: "銀行帳號", icon: "bank_account_svg"),
+            MainMemberTable(title: "刪除帳號", icon: "account_delete_svg")
+        ])
+        tableView.items = rows
         
         anchor()
         
-        
-
-        //tableView.separatorStyle = .none
-        //tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
+        refresh()
     }
     
     func anchor() {
@@ -146,217 +179,75 @@ class MemberVC: BaseViewController {
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(85)
         }
-    }
-    
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        refresh()
-//        loginout()
-//    }
-    
-    func initSectionRows1() -> [MemberSection] {
         
-//        if (memberSections.count > 0) {
-//            return memberSections
-//        }
+            let levelLeftWidth: Int = Int((Int(screen_width) - 20*2 - levelDivideWidth)/2)
+            
+            levelContainer.addSubview(levelLeftContainer)
+            //levelLeftContainer.backgroundColor = UIColor.red
+            levelLeftContainer.snp.makeConstraints { make in
+                make.left.top.bottom.equalToSuperview()
+                make.width.equalTo(levelLeftWidth)
+            }
+            
+                levelLeftContainer.addSubview(pointIconText)
+                pointIconText.snp.makeConstraints { make in
+                    make.width.equalTo(87)
+                    make.height.equalTo(52)
+                    make.centerX.centerY.equalToSuperview()
+                }
+            
+            levelContainer.addSubview(levelRightContainer)
+            //levelRightContainer.backgroundColor = UIColor.blue
+            levelRightContainer.snp.makeConstraints { make in
+                make.right.top.bottom.equalToSuperview()
+                make.width.equalTo(levelLeftWidth)
+            }
+            
+                levelRightContainer.addSubview(levelIconText)
+                levelIconText.snp.makeConstraints { make in
+                    make.width.equalTo(87)
+                    make.height.equalTo(52)
+                    make.centerX.centerY.equalToSuperview()
+                }
+            
+            levelContainer.addSubview(levelDivideView)
+            levelDivideView.snp.makeConstraints { make in
+                make.left.equalToSuperview().offset(levelLeftWidth)
+                make.width.equalTo(2)
+                make.top.equalToSuperview().offset(10)
+                make.bottom.equalToSuperview().offset(-10)
+            }
         
-        var sections: [MemberSection] = [MemberSection]()
-        
-        sections.append(makeSection4Row())
-        
-        sections.append(makeSection0Row())
-        sections.append(makeSection1Row())
-        sections.append(makeSection2Row(isEpanded: true))
-        sections.append(makeSection3Row())
-        
-        sections.append(makeSectionBankRow())
-        sections.append(makeSectionXRow())
-        
-        return sections
-    }
-    
-    func makeSection0Row(isEpanded: Bool = true)-> MemberSection {
-        
-        var rows: [MemberRow] = [MemberRow]()
-        
-        let fixedRows = makeSection0FixRow()
-        rows.append(contentsOf: fixedRows)
-        
-        let validateRows = makeSection0ValidateRow()
-        rows.append(contentsOf: validateRows)
-        
-        let refreshRows = makeSection0RefreshRow()
-        rows.append(contentsOf: refreshRows)
-        
-        let s: MemberSection = MemberSection(title: "會員資料", isExpanded: isEpanded, items: rows)
-        
-        return s
-    }
-    
-    func makeSection0FixRow()-> [MemberRow] {
-        
-        var rows: [MemberRow] = [MemberRow]()
-        
-        var r: MemberRow = MemberRow(title: "解碼點數", icon: "coin", segue: TO_MEMBER_COIN_LIST)
-        r.show = Member.instance.coin.formattedWithSeparator + " 點"
-        rows.append(r)
-        r = MemberRow(title: "訂閱會員", icon: "member_level_up", segue: TO_MEMBER_SUPSCRIPTION_KIND)
-        let levelEnum: MEMBER_SUBSCRIPTION_KIND = MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription)
-        r.show = levelEnum.rawValue
-        rows.append(r)
-        r = MemberRow(title: "帳戶資料", icon: "member", segue: TO_PROFILE)
-        rows.append(r)
-        r = MemberRow(title: "QRCode", icon: "qrcode", segue: "qrcode")
-        rows.append(r)
-        r = MemberRow(title: "更改密碼", icon: "password", segue: TO_PASSWORD)
-        rows.append(r)
-        
-        return rows
-    }
-    
-    func makeSection0RefreshRow()-> [MemberRow] {
-        
-        var rows: [MemberRow] = [MemberRow]()
-        
-        let r1: MemberRow = MemberRow(title: "重新整理", icon: "refresh", segue: TO_REFRESH)
-        rows.append(r1)
-        
-        return rows
-    }
-    
-    func makeSection0ValidateRow() -> [MemberRow] {
-        
-        var rows: [MemberRow] = [MemberRow]()
-        
-        let validate: Int = Member.instance.validate
-        
-        if (validate & EMAIL_VALIDATE <= 0) {
-            let r: MemberRow = MemberRow(title: "email認證", icon: "email1", segue: TO_VALIDATE)
-            r.validate_type = "email"
-            rows.append(r)
+        self.view.addSubview(titleLbl)
+        titleLbl.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.top.equalTo(levelContainer.snp.bottom).offset(20)
         }
         
-        if (validate & MOBILE_VALIDATE <= 0) {
-            let r: MemberRow = MemberRow(title: "手機認證", icon: "mobile", segue: TO_VALIDATE)
-            r.validate_type = "mobile"
-            rows.append(r)
+        self.view.addSubview(tableView)
+        //tableView.backgroundColor = UIColor.red
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(titleLbl.snp.bottom).offset(3)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(mainBottom2.snp.top)
         }
-        
-        return rows
-    }
-    
-    func makeSection1Row(isEpanded: Bool = true)-> MemberSection {
-        
-        var rows: [MemberRow] = [MemberRow]()
-        
-        let r1: MemberRow = MemberRow(title: "購物車", icon: "cart", segue: TO_MEMBER_CART_LIST)
-        rows.append(r1)
-        
-        let r2: MemberRow = MemberRow(title: "訂單查詢", icon: "order", segue: TO_MEMBER_ORDER_LIST)
-        rows.append(r2)
-        
-        let s: MemberSection = MemberSection(title: "訂單查詢", isExpanded: isEpanded, items: rows)
-        
-        return s
-    }
-    
-    func makeSection2Row(isEpanded: Bool = true)-> MemberSection {
-        
-        var rows: [MemberRow] = [MemberRow]()
-        
-        let r1: MemberRow = MemberRow(title: "球隊", icon: "team", segue: TO_LIKE, able_type: "team")
-        rows.append(r1)
-        let r2: MemberRow = MemberRow(title: "球館", icon: "arena", segue: TO_LIKE, able_type: "arena")
-        rows.append(r2)
-        let r3: MemberRow = MemberRow(title: "教學", icon: "teach", segue: TO_LIKE, able_type: "teach")
-        rows.append(r3)
-        let r4: MemberRow = MemberRow(title: "教練", icon: "coach", segue: TO_LIKE, able_type: "coach")
-        rows.append(r4)
-        let r5: MemberRow = MemberRow(title: "課程", icon: "course", segue: TO_LIKE, able_type: "course")
-        rows.append(r5)
-        let r6: MemberRow = MemberRow(title: "商品", icon: "product", segue: TO_LIKE, able_type: "product")
-        rows.append(r6)
-        let r7: MemberRow = MemberRow(title: "體育用品店", icon: "store", segue: TO_LIKE, able_type: "store")
-        rows.append(r7)
-        
-        let s: MemberSection = MemberSection(title: "喜歡", isExpanded: isEpanded, items: rows)
-        
-        return s
-    }
-    
-    func makeSection3Row(isEpanded: Bool = true)-> MemberSection {
-
-        var rows: [MemberRow] = [MemberRow]()
-        
-        let r1: MemberRow = MemberRow(title: "球隊", icon: "team", segue: "toMemberTeamList", able_type: "team")
-        rows.append(r1)
-        let r2: MemberRow = MemberRow(title: "臨打", icon: "tempPlay", segue: TO_MEMBER_SIGNUPLIST, able_type: "temp")
-        rows.append(r2)
-        let r3: MemberRow = MemberRow(title: "課程", icon: "course", segue: TO_MEMBER_SIGNUPLIST, able_type: "course")
-        rows.append(r3)
-
-        let s: MemberSection = MemberSection(title: "參加", isExpanded: isEpanded, items: rows)
-
-        return s
-    }
-    
-    func makeSection4Row(isEpanded: Bool = true)-> MemberSection {
-
-        var rows: [MemberRow] = [MemberRow]()
-        
-        let r1: MemberRow = MemberRow(title: "球隊", icon: "team", segue: "toManagerTeam")
-        rows.append(r1)
-        let r2: MemberRow = MemberRow(title: "球隊申請管理權", icon: "team", segue: "toRequestManagerTeam")
-        rows.append(r2)
-        let r3: MemberRow = MemberRow(title: "課程", icon: "course", segue: "toManagerCourse")
-        rows.append(r3)
-
-        let s: MemberSection = MemberSection(title: "管理", isExpanded: isEpanded, items: rows)
-
-        return s
-    }
-    
-    func makeSectionBankRow(isEpanded: Bool = true)-> MemberSection {
-
-        var rows: [MemberRow] = [MemberRow]()
-        
-        let r1: MemberRow = MemberRow(title: "銀行帳號", icon: "bank", segue: TO_MEMBER_BANK)
-        rows.append(r1)
-
-        let s: MemberSection = MemberSection(title: "銀行帳號", isExpanded: isEpanded, items: rows)
-
-        return s
-    }
-    
-    func makeSectionXRow(isEpanded: Bool = true)-> MemberSection {
-
-        var rows: [MemberRow] = [MemberRow]()
-        
-        let r1: MemberRow = MemberRow(title: "刪除會員", icon: "delete", segue: "delete")
-        rows.append(r1)
-
-        let s: MemberSection = MemberSection(title: "刪除", isExpanded: isEpanded, items: rows)
-
-        return s
     }
     
     override func refresh() {
         Global.instance.addSpinner(superView: self.view)
         MemberService.instance.getOne(params: ["token": Member.instance.token]) { success in
-            
             Global.instance.removeSpinner(superView: self.view)
-            if self.refreshControl.isRefreshing {
-                self.refreshControl.endRefreshing()
-            }
+            
             if success {
                 
                 let jsonData: Data = MemberService.instance.jsonData!
                 do {
                     let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
                     table.toSession(isLoggedIn: true)
+                    self._loginBlock()
                     //self.session.dump()
-                    self.loginout()
-                    self.tableView.reloadData()
+                    //self.loginout()
+                    //self.tableView.reloadData()
                 } catch {
                     self.warning(error.localizedDescription)
                 }
@@ -439,19 +330,19 @@ class MemberVC: BaseViewController {
        
     public func _loginBlock() {
         
-        memberSections = initSectionRows1()
-        self.tableView.reloadData()
+        //memberSections = initSectionRows1()
+        //self.tableView.reloadData()
         nicknameLbl.text = Member.instance.nickname
         if Member.instance.avatar.count > 0 {
-            avatarImageView.downloaded(from: Member.instance.avatar)
+            avatarIV.downloaded(from: Member.instance.avatar)
         }
-        loginBtn.setTitle("登出", for: .normal)
-        registerBtn.isHidden = true
-        registerIcon.isHidden = true
-        forgetPasswordBtn.isHidden = true
-        forgetPasswordIcon.isHidden = true
-    
-        tableView.isHidden = false
+//        loginBtn.setTitle("登出", for: .normal)
+//        registerBtn.isHidden = true
+//        registerIcon.isHidden = true
+//        forgetPasswordBtn.isHidden = true
+//        forgetPasswordIcon.isHidden = true
+//
+//        tableView.isHidden = false
     }
     
     public func _logoutBlock() {
@@ -710,10 +601,102 @@ extension MemberVC {
 
 class MainMemberCell: BaseCell<MainMemberTable, MemberVC> {
     
+    let containerView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = UIColor(BOTTOM_VIEW_BACKGROUND)
+        view.layer.cornerRadius = 16
+        view.clipsToBounds = true
+        
+        return view
+    }()
+    
+    let iconIV: UIImageView = UIImageView()
+    let titleLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextGeneral()
+        
+        return view
+    }()
+    let greaterIV: UIImageView = {
+        let view: UIImageView = UIImageView()
+        view.image = UIImage(named: "greater_svg")
+        
+        return view
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.commonInit()
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        commonInit()
+    }
+    
+    override func commonInit() {
+        anchor()
+    }
+    
+    func anchor() {
+        //self.containerView.heightConstraint?.constant = 60
+        self.contentView.addSubview(containerView)
+        containerView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(60)
+            make.top.equalToSuperview().offset(12)
+            make.bottom.equalToSuperview().offset(-12)
+        }
+        
+        containerView.addSubview(iconIV)
+        iconIV.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(20)
+        }
+        
+        containerView.addSubview(titleLbl)
+        titleLbl.snp.makeConstraints { make in
+            make.left.equalTo(iconIV.snp.right).offset(50)
+            make.centerY.equalToSuperview()
+        }
+        
+        containerView.addSubview(greaterIV)
+        greaterIV.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(20)
+        }
+    }
+    
+    override func configureSubViews() {
+        super.configureSubViews()
+        if item != nil {
+            iconIV.image = UIImage(named: item!.icon)
+            titleLbl.text = item!.title
+        }
+    }
 }
 
 class MainMemberTable: Table {
+    var icon: String = "nophoto"
     
+    init(title: String, icon: String) {
+        super.init()
+        
+        self.title = title
+        self.icon = icon
+    }
+    
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
 }
 
 extension MemberVC: MainBottom2Delegate {
@@ -726,6 +709,18 @@ extension MemberVC: MainBottom2Delegate {
         case "more": toMore()
         default:
             toTeam()
+        }
+    }
+}
+
+extension MemberVC: IconView2Delegate {
+    func iconPressed(icon: String) {
+        if icon == "qrcode_svg" {
+            let qrcodeIV: UIImageView = makeQrcodeLayer()
+            let qrcode: UIImage = generateQRCode(from: Member.instance.token)!
+            qrcodeIV.image = qrcode
+        } else if icon == "logout_svg" {
+            logout()
         }
     }
 }

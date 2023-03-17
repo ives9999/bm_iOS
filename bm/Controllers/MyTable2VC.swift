@@ -23,7 +23,7 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
     var totalPage: Int = 1
     var msg: String = ""
     var myDelegate: V
-    
+        
     //var refreshControl: UIRefreshControl!
     
     var items = [U]() {
@@ -40,7 +40,7 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
     var selectedClosure: selectedClosure
     var getDataClosure: getDataClosure
     
-    init(selectedClosure: selectedClosure, getDataClosure: getDataClosure, myDelegate: V) {
+    init(selectedClosure: selectedClosure, getDataClosure: getDataClosure, myDelegate: V, isRefresh: Bool = true) {
         
         self.selectedClosure = selectedClosure
         self.getDataClosure = getDataClosure
@@ -54,7 +54,9 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
         //register(T.nibName, forCellReuseIdentifier: T.identifier)
         //registerCell()
         
-        beginRefresh()
+        if isRefresh {
+            beginRefresh()
+        }
                 
         delegate = self
         dataSource = self
@@ -205,7 +207,7 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let n = items.count
+        //let n = items.count
         return items.count
     }
     

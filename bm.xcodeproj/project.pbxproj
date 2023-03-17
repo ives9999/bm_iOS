@@ -358,6 +358,7 @@
 		F9B1925E29A52AD50037FE05 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925D29A52AD50037FE05 /* Int.swift */; };
 		F9CB7F3E298FFE0900C1B92F /* ShowLike2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */; };
 		F9D28AD829C1EE3C00655988 /* MainBottom2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D28AD729C1EE3C00655988 /* MainBottom2.swift */; };
+		F9E221C729C4774D0054CF7B /* IconTextVertical2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E221C629C4774D0054CF7B /* IconTextVertical2.swift */; };
 		F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */; };
 		F9EDEDAF28927C1B00FB92BB /* MemberSubscriptionKindVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EDEDAE28927C1B00FB92BB /* MemberSubscriptionKindVC.swift */; };
 		F9EDEDB128928E3400FB92BB /* MyTable2VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9EDEDB028928E3400FB92BB /* MyTable2VC.swift */; };
@@ -807,6 +808,7 @@
 		F9B1925D29A52AD50037FE05 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLike2.swift; sourceTree = "<group>"; };
 		F9D28AD729C1EE3C00655988 /* MainBottom2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBottom2.swift; sourceTree = "<group>"; };
+		F9E221C629C4774D0054CF7B /* IconTextVertical2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextVertical2.swift; sourceTree = "<group>"; };
 		F9EBC44A275CDD2E00740AB6 /* MyImagePickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyImagePickerVC.swift; sourceTree = "<group>"; };
 		F9EDEDAE28927C1B00FB92BB /* MemberSubscriptionKindVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionKindVC.swift; sourceTree = "<group>"; };
 		F9EDEDB028928E3400FB92BB /* MyTable2VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTable2VC.swift; sourceTree = "<group>"; };
@@ -1101,6 +1103,7 @@
 				F9A6751E27FAF766007C8F47 /* Top.xib */,
 				B313272529AEFE8700EAB782 /* IconText2.swift */,
 				F9D28AD729C1EE3C00655988 /* MainBottom2.swift */,
+				F9E221C629C4774D0054CF7B /* IconTextVertical2.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1981,6 +1984,7 @@
 				B316FED62112F13600FB990C /* CollectionCell.swift in Sources */,
 				B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */,
 				B3ED38DD1FB4A06C0003F083 /* MyLabel.swift in Sources */,
+				F9E221C729C4774D0054CF7B /* IconTextVertical2.swift in Sources */,
 				F9CB7F3E298FFE0900C1B92F /* ShowLike2.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,
 				B3756EEF21BA6F19006893E1 /* StatusSelectVC.swift in Sources */,
