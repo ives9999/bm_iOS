@@ -37,7 +37,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
     
     var mustLoginLbl: SuperLabel?
     
-    var mainBottom2: MainBottom2 = MainBottom2()
+    var mainBottom2: MainBottom2 = MainBottom2(able_type: "team")
     
     override func viewDidLoad() {
         
@@ -687,12 +687,13 @@ struct ExpandableItems {
 extension SearchVC: MainBottom2Delegate {
     func to(able_type: String) {
         switch able_type {
-        case "team": toTeam()
+        case "team": toSearch()
         case "course": toCourse()
+        case "member": toMember()
+        case "arena": toArena()
+        case "more": toMore()
         default:
             toTeam()
         }
     }
-    
-    
 }

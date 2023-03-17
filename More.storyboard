@@ -164,7 +164,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4mb-SH-JK7">
-                                <rect key="frame" x="0.0" y="112" width="414" height="726"/>
+                                <rect key="frame" x="0.0" y="112" width="414" height="654"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
@@ -179,7 +179,7 @@
                             <constraint firstItem="g6Y-AK-76q" firstAttribute="trailing" secondItem="4mb-SH-JK7" secondAttribute="trailing" id="XQ9-wz-bXY"/>
                             <constraint firstItem="j88-uB-Kay" firstAttribute="top" secondItem="g6Y-AK-76q" secondAttribute="top" id="hJ6-XA-mpd"/>
                             <constraint firstItem="UJo-iB-5jy" firstAttribute="centerY" secondItem="j88-uB-Kay" secondAttribute="centerY" id="jgG-2G-g4B"/>
-                            <constraint firstItem="g6Y-AK-76q" firstAttribute="bottom" secondItem="4mb-SH-JK7" secondAttribute="bottom" id="vqR-bj-beT"/>
+                            <constraint firstItem="g6Y-AK-76q" firstAttribute="bottom" secondItem="4mb-SH-JK7" secondAttribute="bottom" constant="72" id="vqR-bj-beT"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="球館" image="arena" id="bjH-9J-pNt"/>
@@ -886,7 +886,7 @@
         <!--更多-->
         <scene sceneID="B3E-J4-4nC">
             <objects>
-                <viewController storyboardIdentifier="More" id="OKf-NR-jh3" customClass="MoreVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toMore" id="OKf-NR-jh3" customClass="MoreVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="X93-Vh-FYD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -910,14 +910,14 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IDb-Ca-u21">
-                                <rect key="frame" x="0.0" y="112" width="414" height="750"/>
+                                <rect key="frame" x="0.0" y="112" width="414" height="678"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1fi-b3-D15"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="1fi-b3-D15" firstAttribute="bottom" secondItem="IDb-Ca-u21" secondAttribute="bottom" id="F9m-jS-bsa"/>
+                            <constraint firstItem="1fi-b3-D15" firstAttribute="bottom" secondItem="IDb-Ca-u21" secondAttribute="bottom" constant="72" id="F9m-jS-bsa"/>
                             <constraint firstItem="IDb-Ca-u21" firstAttribute="top" secondItem="PW4-au-Cqj" secondAttribute="bottom" id="KXM-E0-Anh"/>
                             <constraint firstItem="PW4-au-Cqj" firstAttribute="top" secondItem="1fi-b3-D15" secondAttribute="top" id="SbT-JH-mj7"/>
                             <constraint firstAttribute="trailing" secondItem="PW4-au-Cqj" secondAttribute="trailing" id="Xwf-FU-D9d"/>
@@ -2039,8 +2039,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="f4Q-EU-SfD"/>
-        <segue reference="e7e-xA-HgL"/>
+        <segue reference="Wr7-FG-b1z"/>
+        <segue reference="cDK-8u-UPz"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arena" width="25" height="25"/>

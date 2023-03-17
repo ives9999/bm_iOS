@@ -288,6 +288,20 @@ extension BaseViewController {
 //        }
 //    }
     
+    func toMember() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toMember") as? MemberVC {
+                viewController.modalPresentationStyle = .fullScreen
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toMember") as! MemberVC
+            viewController.modalPresentationStyle = .fullScreen
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
     func toMemberBank() {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
@@ -413,6 +427,20 @@ extension BaseViewController {
         let vc = MemberTeamListVC()
         vc.modalPresentationStyle = .fullScreen
         show(vc, sender: nil)
+    }
+    
+    func toMore() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "More", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toMore") as? MoreVC {
+                viewController.modalPresentationStyle = .fullScreen
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toMore") as! MoreVC
+            viewController.modalPresentationStyle = .fullScreen
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
     }
     
     func toMultiSelect(key: String? = nil, _delegate: BaseViewController) {
@@ -623,6 +651,20 @@ extension BaseViewController {
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_REGISTER) as! RequestManagerTeamVC
             //viewController.delegate = self
+            viewController.modalPresentationStyle = .fullScreen
+            self.navigationController!.pushViewController(viewController, animated: true)
+        }
+    }
+    
+    func toSearch() {
+        if #available(iOS 13.0, *) {
+            let storyboard = UIStoryboard(name: "TempPlay", bundle: nil)
+            if let viewController = storyboard.instantiateViewController(identifier: "toSearch") as? SearchVC {
+                viewController.modalPresentationStyle = .fullScreen
+                show(viewController, sender: nil)
+            }
+        } else {
+            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toSearch") as! SearchVC
             viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }

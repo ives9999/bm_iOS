@@ -24,6 +24,8 @@ class MoreVC: MyTableVC {
 //        ]
 //    ]
     
+    var mainBottom2: MainBottom2 = MainBottom2(able_type: "more")
+    
     override func viewDidLoad() {
         myTablView = tableView
         able_type = "more"
@@ -36,6 +38,13 @@ class MoreVC: MyTableVC {
         //tableView.register(MoreCell.self, forCellReuseIdentifier: "cell")
         
         moreRows = initMoreRows()
+        
+        self.view.addSubview(mainBottom2)
+        mainBottom2.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(72)
+        }
+        mainBottom2.delegate = self
     }
     
     func initMoreRows()-> [MemberRow] {
@@ -119,5 +128,19 @@ class MoreVC: MyTableVC {
                 //performSegue(withIdentifier: segue, sender: row["sender"])
             }
         //}
+    }
+}
+
+extension MoreVC: MainBottom2Delegate {
+    func to(able_type: String) {
+        switch able_type {
+        case "team": toSearch()
+        case "course": toCourse()
+        case "member": toMember()
+        case "arena": toArena()
+        case "more": toMore()
+        default:
+            toTeam()
+        }
     }
 }

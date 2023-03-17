@@ -219,7 +219,7 @@
         <!--首頁-->
         <scene sceneID="3a3-E3-xcE">
             <objects>
-                <viewController storyboardIdentifier="TempPlay" id="Qui-jL-mMT" userLabel="首頁" customClass="SearchVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toSearch" id="Qui-jL-mMT" userLabel="首頁" customClass="SearchVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="U4o-jl-FLJ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

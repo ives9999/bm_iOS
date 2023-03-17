@@ -40,6 +40,8 @@ class MemberVC: BaseViewController {
     
     func getDataFromServer(page: Int) {
     }
+    
+    var mainBottom2: MainBottom2 = MainBottom2(able_type: "member")
 
     override func viewDidLoad() {
         //myTablView = tableView
@@ -48,6 +50,13 @@ class MemberVC: BaseViewController {
         super.viewDidLoad()
         
         dataService = MemberService.instance
+        
+        self.view.addSubview(mainBottom2)
+        mainBottom2.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(72)
+        }
+        mainBottom2.delegate = self
         
         anchor()
 
@@ -630,4 +639,18 @@ class MainMemberCell: BaseCell<MainMemberTable, MemberVC> {
 
 class MainMemberTable: Table {
     
+}
+
+extension MemberVC: MainBottom2Delegate {
+    func to(able_type: String) {
+        switch able_type {
+        case "team": toSearch()
+        case "course": toCourse()
+        case "member": toMember()
+        case "arena": toArena()
+        case "more": toMore()
+        default:
+            toTeam()
+        }
+    }
 }

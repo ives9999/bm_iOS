@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let mainStoryboard: UIStoryboard = UIStoryboard(name: "TempPlay", bundle: nil)
-        var controller: SearchVC = mainStoryboard.instantiateViewController(withIdentifier: "TempPlay") as! SearchVC
+        let controller: SearchVC = mainStoryboard.instantiateViewController(withIdentifier: "toSearch") as! SearchVC
         self.window?.rootViewController = controller
         self.window?.makeKeyAndVisible()
         

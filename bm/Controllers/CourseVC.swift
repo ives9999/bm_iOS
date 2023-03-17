@@ -17,6 +17,8 @@ class CourseVC: MyTableVC {
     var mysTable: CoursesTable?
     var isShowPrev: Bool = false
     
+    var mainBottom2: MainBottom2 = MainBottom2(able_type: "course")
+    
     override func viewDidLoad() {
         
         myTablView = tableView
@@ -45,6 +47,13 @@ class CourseVC: MyTableVC {
         
         // this page show search icon in top
         searchBtn.visibility = .visible
+        
+        self.view.addSubview(mainBottom2)
+        mainBottom2.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(72)
+        }
+        mainBottom2.delegate = self
         
         refresh()
     }
@@ -160,3 +169,16 @@ class CourseVC: MyTableVC {
     }
 }
 
+extension CourseVC: MainBottom2Delegate {
+    func to(able_type: String) {
+        switch able_type {
+        case "team": toSearch()
+        case "course": toCourse()
+        case "member": toMember()
+        case "arena": toArena()
+        case "more": toMore()
+        default:
+            toTeam()
+        }
+    }
+}

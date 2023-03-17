@@ -11,6 +11,7 @@ import UIKit
 class MainBottom2: UIView {
     
     var focusIdx: Int = 0
+    var param: PARAMS = PARAMS.team
     
     let stackView: UIStackView = {
         let view = UIStackView()
@@ -29,9 +30,19 @@ class MainBottom2: UIView {
     
     var items: [Item] = [Item]()
     var delegate: MainBottom2Delegate?
-
-    init() {
+    
+    required init(able_type: String) {
         super.init(frame: CGRect.zero)
+        let param: PARAMS = PARAMS.getParam(value: able_type)
+        let idx: Int = param.paramToIdx()
+        self.focusIdx = idx
+        self.param = param
+        setupView()
+    }
+
+    init(idx: Int) {
+        super.init(frame: CGRect.zero)
+        self.focusIdx = idx
         setupView()
     }
     
@@ -170,8 +181,31 @@ class MainBottom2: UIView {
         case arena = "arena"
         case more = "more"
         
-        func all()-> [PARAMS] {
-            return [.team, .course, .member, .arena, .more]
+        static let allValues: [PARAMS] = [team, course, member, arena, more]
+        
+//        func allValues()-> [PARAMS] {
+//            return [.team, .course, .member, .arena, .more]
+//        }
+        
+        static func getParam(value: String)-> PARAMS {
+            switch value {
+            case "team": return .team
+            case "course": return .course
+            case "member": return .member
+            case "arena": return .arena
+            case "more": return .more
+            default: return .team
+            }
+        }
+        
+        func paramToIdx()-> Int {
+            for (idx, item) in PARAMS.allValues.enumerated() {
+                if item == self {
+                    return idx
+                }
+            }
+            
+            return 0
         }
         
         func chineseText()-> String {
