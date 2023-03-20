@@ -84,6 +84,7 @@ class MainBottom2: UIView {
             let textLbl: SuperLabel = SuperLabel()
             textLbl.text = item.param.chineseText()
             textLbl.setTextSize(10)
+            textLbl.setTextColor(UIColor(hex: "#FFFFFF", alpha: 0.4))
             textLbl.textAlignment = .center
             
             innerView.addSubview(iconIV)

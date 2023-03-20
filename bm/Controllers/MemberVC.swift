@@ -119,15 +119,9 @@ class MemberVC: BaseViewController {
         qrcodeIV2.delegate = self
         logoutIV2.delegate = self
         
-        rows.append(contentsOf: [
-            MainMemberTable(title: "會員資料", icon: "info_svg"),
-            MainMemberTable(title: "訂單查詢", icon: "truck_svg"),
-            MainMemberTable(title: "喜歡", icon: "like_in_svg"),
-            MainMemberTable(title: "參加", icon: "join_svg"),
-            MainMemberTable(title: "管理", icon: "manager1_svg"),
-            MainMemberTable(title: "銀行帳號", icon: "bank_account_svg"),
-            MainMemberTable(title: "刪除帳號", icon: "account_delete_svg")
-        ])
+        for mainMemberEnum in MainMemberEnum.allValues {
+            rows.append(MainMemberTable(title: mainMemberEnum.rawValue, icon: mainMemberEnum.getIcon()))
+        }
         tableView.items = rows
         
         anchor()
@@ -433,6 +427,15 @@ class MemberVC: BaseViewController {
             self.logout()
         }
     }
+    
+    override func didSelect<U>(item: U, at indexPath: IndexPath) {
+        if let _item: MainMemberTable = item as? MainMemberTable {
+            let mainMemberEnum: MainMemberEnum = MainMemberEnum.chineseGetEnum(text: _item.title)
+//            switch mainMemberEnum {
+//            case .info
+//            }
+        }
+    }
 }
 
 extension MemberVC {
@@ -696,6 +699,42 @@ class MainMemberTable: Table {
     
     required init(from decoder: Decoder) throws {
         fatalError("init(from:) has not been implemented")
+    }
+}
+
+enum MainMemberEnum: String {
+    case info = "會員資料"
+    case order = "訂單查詢"
+    case like = "喜歡"
+    case join = "參加"
+    case manager = "管理"
+    case bank = "銀行帳號"
+    case delete = "刪除帳號"
+    
+    static let allValues: [MainMemberEnum] = [info, order, like, join, manager, bank, delete]
+    static func chineseGetEnum(text: String)-> MainMemberEnum {
+        switch text {
+        case "會員資料": return .info
+        case "訂單查詢": return .order
+        case "喜歡": return .like
+        case "參加": return .join
+        case "管理": return .manager
+        case "銀行帳號": return .bank
+        case "刪除帳號": return .delete
+        default: return .info
+        }
+    }
+    
+    func getIcon()-> String {
+        switch self {
+        case .info: return "info_svg"
+        case .order: return "truck_svg"
+        case .like: return "like_in_svg"
+        case .join: return "join_svg"
+        case .manager: return "manager1_svg"
+        case .bank: return "bank_account_svg"
+        case .delete: return "account_delete_svg"
+        }
     }
 }
 
