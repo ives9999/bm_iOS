@@ -350,6 +350,13 @@ extension BaseViewController {
         }
     }
     
+    func toMemberItem(_ mainMemberEnum: MainMemberEnum) {
+        let vc: MemberItemVC = MemberItemVC()
+        vc.mainMemberEnum = mainMemberEnum
+        vc.modalPresentationStyle = .fullScreen
+        show(vc, sender: nil)
+    }
+    
     func toMemberSubscriptionKind() {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
