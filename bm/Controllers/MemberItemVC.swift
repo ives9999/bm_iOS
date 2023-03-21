@@ -47,7 +47,58 @@ class MemberItemVC: BaseViewController {
     
     override func didSelect<U>(item: U, at indexPath: IndexPath) {
         if let _item: MainMemberTable = item as? MainMemberTable {
-            let memberItemEnum: MemberItemEnum = MemberItemEnum.chineseGetEnum(text: _item.title)
+            let memberItemEnum: MemberItemEnum? = MemberItemEnum.toEnum(rawValue: _item.title)
+            if memberItemEnum != nil {
+                to(mainMemberEnum: mainMemberEnum, memberItemEnum: memberItemEnum!)
+            }
+        }
+    }
+    
+    func to(mainMemberEnum: MainMemberEnum, memberItemEnum: MemberItemEnum) {
+        if (mainMemberEnum == MainMemberEnum.info) {
+            if (memberItemEnum == MemberItemEnum.info) {
+                toRegister()
+            } else if (memberItemEnum == MemberItemEnum.change_password) {
+                toPassword(type: "change_password")
+            }
+        } else if (mainMemberEnum == MainMemberEnum.order) {
+            if memberItemEnum == MemberItemEnum.cart {
+                toMemberCartList()
+            } else if (memberItemEnum == MemberItemEnum.order) {
+                toMemberOrderList()
+            }
+        } else if (mainMemberEnum == MainMemberEnum.like) {
+            if (memberItemEnum == MemberItemEnum.team) {
+                toTeam(member_like: true)
+            } else if (memberItemEnum == MemberItemEnum.arena) {
+                toArena(member_like: true, isShowPrev: true)
+            } else if (memberItemEnum == MemberItemEnum.teach) {
+                toTeach(member_like: true)
+            } else if (memberItemEnum == MemberItemEnum.coach) {
+                toCoach(member_like: true)
+            } else if (memberItemEnum == MemberItemEnum.course) {
+                toCourse(member_like: true, isShowPrev: true)
+            } else if (memberItemEnum == MemberItemEnum.product) {
+                toProduct(member_like: true)
+            } else if (memberItemEnum == MemberItemEnum.store) {
+                toStore(member_like: true)
+            }
+        } else if (mainMemberEnum == MainMemberEnum.join) {
+            if (memberItemEnum == MemberItemEnum.team) {
+                toMemberTeamList()
+            } else if (memberItemEnum == MemberItemEnum.tempPlay) {
+                toMemberSignuplist(able_type: "temp")
+            } else if (memberItemEnum == MemberItemEnum.course) {
+                toMemberSignuplist(able_type: "course")
+            }
+        } else if (mainMemberEnum == MainMemberEnum.manager) {
+            if (memberItemEnum == MemberItemEnum.team) {
+                toManagerTeam(manager_token: Member.instance.token)
+            } else if (memberItemEnum == MemberItemEnum.requestManager) {
+                toRequestManagerTeam()
+            } else if (memberItemEnum == MemberItemEnum.course) {
+                toManagerCourse(manager_token: Member.instance.token)
+            }
         }
     }
     
@@ -160,8 +211,12 @@ enum MemberItemEnum: String {
         }
     }
     
-    static func to() {
-        
+    static func toEnum(rawValue: String)-> MemberItemEnum? {
+        if let thisEnum: MemberItemEnum = MemberItemEnum(rawValue: rawValue) {
+            return thisEnum
+        } else {
+            return nil
+        }
     }
     
     func getIcon()-> String {

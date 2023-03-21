@@ -569,6 +569,7 @@ extension BaseViewController {
         }
     }
     
+    // forget_password, change_password
     func toPassword(type: String) {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "Member", bundle: nil)

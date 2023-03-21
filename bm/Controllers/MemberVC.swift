@@ -431,7 +431,13 @@ class MemberVC: BaseViewController {
     override func didSelect<U>(item: U, at indexPath: IndexPath) {
         if let _item: MainMemberTable = item as? MainMemberTable {
             let mainMemberEnum: MainMemberEnum = MainMemberEnum.chineseGetEnum(text: _item.title)
-            toMemberItem(mainMemberEnum)
+            if (mainMemberEnum == MainMemberEnum.bank) {
+                toMemberBank()
+            } else if (mainMemberEnum == MainMemberEnum.delete) {
+                delete()
+            } else {
+                toMemberItem(mainMemberEnum)
+            }
         }
     }
 }
