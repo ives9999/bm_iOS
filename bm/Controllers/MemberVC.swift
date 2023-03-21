@@ -432,9 +432,6 @@ class MemberVC: BaseViewController {
         if let _item: MainMemberTable = item as? MainMemberTable {
             let mainMemberEnum: MainMemberEnum = MainMemberEnum.chineseGetEnum(text: _item.title)
             toMemberItem(mainMemberEnum)
-//            switch mainMemberEnum {
-//            case .info
-//            }
         }
     }
 }

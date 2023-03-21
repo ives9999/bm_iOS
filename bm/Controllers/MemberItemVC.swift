@@ -45,6 +45,12 @@ class MemberItemVC: BaseViewController {
         tableView.items = rows
     }
     
+    override func didSelect<U>(item: U, at indexPath: IndexPath) {
+        if let _item: MainMemberTable = item as? MainMemberTable {
+            let memberItemEnum: MemberItemEnum = MemberItemEnum.chineseGetEnum(text: _item.title)
+        }
+    }
+    
     func tableViewSetSelected(row: MainMemberTable)-> Bool {
         return false
     }
@@ -125,17 +131,9 @@ class MemberItemCell: BaseCell<MainMemberTable, MemberItemVC> {
     }
 }
 
-//enum MemberItemEnum {
-//    case info
-//    case order
-//    case like
-//    case join
-//    case team
-//}
-
 enum MemberItemEnum: String {
     
-    case data = "帳戶資料"
+    case info = "帳戶資料"
     case change_password = "更改密碼"
     case cart = "購物車"
     case order = "訂單查詢"
@@ -152,20 +150,24 @@ enum MemberItemEnum: String {
     //static let allValues: [MemberInfoItemEnum] = [data, change_password]
     static func allValues(_ mainMemberEnum: MainMemberEnum)-> [MemberItemEnum] {
         switch mainMemberEnum {
-        case MainMemberEnum.info: return [.data, .change_password]
+        case MainMemberEnum.info: return [.info, .change_password]
         case MainMemberEnum.order: return [.cart, .order]
         case MainMemberEnum.like: return [.team, .arena, .teach, .coach, .course, .product, .store]
         case MainMemberEnum.join: return [.team, .tempPlay, .course]
         case MainMemberEnum.manager: return [.team, .requestManager, .course]
         
-        default: return [.data, .change_password]
+        default: return [.info, .change_password]
         }
+    }
+    
+    static func to() {
+        
     }
     
     func getIcon()-> String {
         switch self {
-        case .data: return "info_svg"
-        case .change_password: return "info_svg"
+        case .info: return "info_svg"
+        case .change_password: return "change_password_svg"
         case .cart: return "cart_svg"
         case .order: return "order_svg"
         case .team: return "team_on_svg"
