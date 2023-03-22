@@ -11,6 +11,11 @@ import UIKit
 class MainTextField2: UIView {
     
     var icon: String?
+    var placeholder: String?
+    var isShowDelete: Bool = true
+    var isPassword: Bool = false
+    var value: String = ""
+    var keyboard: KEYBOARD = KEYBOARD.default
     
     var label: SuperLabel = {
         let view: SuperLabel = SuperLabel()
@@ -19,38 +24,36 @@ class MainTextField2: UIView {
         return view
     }()
     
-    var textField: SuperTextField = {
-        let view: SuperTextField = SuperTextField()
+    var textField: UITextField = {
+        let view: UITextField = UITextField()
         view.backgroundColor = UIColor(hex: "#D9D9D9", alpha: 0.1)
+        
         view.layer.cornerRadius = 5
         view.clipsToBounds = true
+        
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor(hex: "#FFFFFF", alpha: 0.4).cgColor
+        view.textColor = UIColor(MY_WHITE)
         
-        view.leftViewMode = .always
+        view.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
         
-        return view
-    }()
-    
-    let iconIV: UIImageView = {
-        let view: UIImageView = UIImageView(frame: CGRect(x: 16, y: 16, width: 18, height: 18))
-        view.contentMode = .scaleAspectFit
-        
-        return view
-    }()
-    
-    let iconView: UIView = {
-        let view: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        view.layer.cornerRadius = 5
-        //mainView.backgroundColor = UIColor.blue
-        
+        view.attributedPlaceholder = NSAttributedString(
+            string: "email",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor(hex: "#FFFFFF", alpha: 0.31)]
+        )
+                
         return view
     }()
 
-    init(label: String, icon: String) {
+    init(label: String, value: String = "", icon: String, placeholder: String? = nil, isShowDelete: Bool = true, isPassword: Bool = false, keyboard: KEYBOARD = .default) {
         
         self.label.text = label
+        self.value = value
         self.icon = icon
+        self.placeholder = placeholder
+        self.isShowDelete = isShowDelete
+        self.isPassword = isPassword
+        self.keyboard = keyboard
         
         super.init(frame: .zero)
         commonInit()
@@ -70,10 +73,27 @@ class MainTextField2: UIView {
         anchor()
         
         if icon != nil {
-            iconIV.image = UIImage(named: icon!)
+            textField.setIcon(icon!)
         }
-        iconView.addSubview(iconIV)
-        textField.leftView = iconView
+        
+        if value.count > 0 {
+            textField.text = value
+        }
+        
+        if placeholder != nil {
+            textField.placeholder = placeholder
+        }
+        
+        if isShowDelete {
+            textField.showDelete()
+        }
+        
+        if isPassword {
+            textField.isSecureTextEntry = isPassword
+            textField.showEye()
+        }
+        
+        textField.keyboardType = keyboard.enumToSwift()
     }
     
     func anchor() {
@@ -89,5 +109,10 @@ class MainTextField2: UIView {
             make.height.equalTo(50)
             make.bottom.equalToSuperview().offset(5)
         }
+    }
+    
+    func setValue(_ value: String) {
+        self.value = value
+        textField.text = value
     }
 }

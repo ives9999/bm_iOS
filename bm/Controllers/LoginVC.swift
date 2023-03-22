@@ -41,7 +41,13 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     }()
     
     let emailTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg")
+        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", keyboard: KEYBOARD.emailAddress)
+        
+        return view
+    }()
+    
+    let passworTxt2: MainTextField2 = {
+        let view: MainTextField2 = MainTextField2(label: "密碼", icon: "password_svg", placeholder: "密碼", isShowDelete: false, isPassword: true)
         
         return view
     }()
@@ -56,6 +62,8 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         showTop2 = ShowTop2(delegate: self)
         showTop2!.anchor(parent: self.view)
         showTop2!.setTitle(title: "登入")
+        
+        emailTxt2.setValue("abced")
         
         anchor()
         
@@ -106,6 +114,13 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         self.view.addSubview(emailTxt2)
         emailTxt2.snp.makeConstraints { make in
             make.top.equalTo(descLbl.snp.bottom).offset(30)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        self.view.addSubview(passworTxt2)
+        passworTxt2.snp.makeConstraints { make in
+            make.top.equalTo(emailTxt2.snp.bottom).offset(26)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
