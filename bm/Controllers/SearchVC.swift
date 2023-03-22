@@ -81,7 +81,7 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
 
         //bottomView.visibility = .invisible
         tableViewBottomConstraint.constant = 0
-        tableViewContainer.backgroundColor = UIColor.red
+        //tableViewContainer.backgroundColor = UIColor.red
         
         self.view.addSubview(mainBottom2)
         mainBottom2.snp.makeConstraints { make in

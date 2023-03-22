@@ -11,25 +11,6 @@ import SCLAlertView
 //import FBSDKLoginKit
 
 class LoginVC: BaseViewController, UITextFieldDelegate {
-//    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
-//
-//        if result!.isCancelled {
-//
-//        } else {
-//            if result!.grantedPermissions.contains("email") {
-//
-//            }
-//        }
-//        fetchProfile()
-//    }
-//
-//    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
-//
-//    }
-//
-//    func loginButtonWillLogin(_ loginButton: FBLoginButton) -> Bool {
-//        return true
-//    }
     
     var memberVC: MemberVC? = nil
 
@@ -41,6 +22,30 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     @IBOutlet weak var registerBtn: UIButton!
     //@IBOutlet weak var facebookLogin: FBLoginButton!
     
+    var showTop2: ShowTop2?
+    
+    let loginLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextTitle()
+        view.text = "登入"
+        
+        return view
+    }()
+    
+    let descLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextGeneral()
+        view.text = "請輸入email與密碼來登入"
+        
+        return view
+    }()
+    
+    let emailTxt2: MainTextField2 = {
+        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg")
+        
+        return view
+    }()
+    
     var table: MemberTable?
     
     override func viewDidLoad() {
@@ -48,25 +53,31 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         super.viewDidLoad()
         self.hideKeyboardWhenTappedAround()
         
-        emailTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
-        emailTxt.attributedPlaceholder = NSAttributedString(
-            string: "EMail",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
-        )
-        emailTxt.keyboardType = .emailAddress
+        showTop2 = ShowTop2(delegate: self)
+        showTop2!.anchor(parent: self.view)
+        showTop2!.setTitle(title: "登入")
         
-        passwordTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
-        passwordTxt.attributedPlaceholder = NSAttributedString(
-            string: "密碼",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
-        )
-        passwordTxt.isSecureTextEntry = true
+        anchor()
         
-        emailTxt.delegate = self
-        passwordTxt.delegate = self
-        
-        forgetPasswordBtn.setTitleColor(UIColor(MY_GRAY), for: .normal)
-        registerBtn.setTitleColor(UIColor(MY_GREEN), for: .normal)
+//        emailTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
+//        emailTxt.attributedPlaceholder = NSAttributedString(
+//            string: "EMail",
+//            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+//        )
+//        emailTxt.keyboardType = .emailAddress
+//
+//        passwordTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
+//        passwordTxt.attributedPlaceholder = NSAttributedString(
+//            string: "密碼",
+//            attributes: [NSAttributedString.Key.foregroundColor: UIColor(SEARCH_BACKGROUND_PLACEHOLDER)]
+//        )
+//        passwordTxt.isSecureTextEntry = true
+//
+//        emailTxt.delegate = self
+//        passwordTxt.delegate = self
+//
+//        forgetPasswordBtn.setTitleColor(UIColor(MY_GRAY), for: .normal)
+//        registerBtn.setTitleColor(UIColor(MY_GREEN), for: .normal)
         
         //emailTxt.align(.left)
         //emailTxt.borderWidth(0)
@@ -77,6 +88,27 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
 
 //        emailTxt.text = "ives@housetube.tw"
 //        passwordTxt.text = "K5SD23r6"
+    }
+    
+    func anchor() {
+        self.view.addSubview(loginLbl)
+        loginLbl.snp.makeConstraints { make in
+            make.top.equalTo(showTop2!.snp.bottom).offset(100)
+            make.left.equalToSuperview().offset(20)
+        }
+        
+        self.view.addSubview(descLbl)
+        descLbl.snp.makeConstraints { make in
+            make.top.equalTo(loginLbl.snp.bottom).offset(16)
+            make.left.equalToSuperview().offset(20)
+        }
+        
+        self.view.addSubview(emailTxt2)
+        emailTxt2.snp.makeConstraints { make in
+            make.top.equalTo(descLbl.snp.bottom).offset(30)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
     }
 
     @IBAction func prevBtnPressed(_ sender: Any) {
@@ -117,9 +149,10 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
                             self.table!.toSession(isLoggedIn: true)
 
                             self.dismiss(animated: true, completion: {
-                                if self.memberVC != nil {
-                                    self.memberVC!.loginout()
-                                }
+                                self.toMember()
+//                                if self.memberVC != nil {
+//                                    self.memberVC!.loginout()
+//                                }
                             })
                         }
 

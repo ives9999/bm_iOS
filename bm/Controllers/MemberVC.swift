@@ -11,12 +11,12 @@ import UIKit
 class MemberVC: BaseViewController {
     
     //@IBOutlet weak var nicknameLbl: UILabel!
-    @IBOutlet weak var loginBtn: UIButton!
-    @IBOutlet weak var registerBtn: UIButton!
-    @IBOutlet weak var registerIcon: UIImageView!
-    @IBOutlet weak var forgetPasswordIcon: UIImageView!
-    @IBOutlet weak var forgetPasswordBtn: UIButton!
-    @IBOutlet weak var avatarImageView: UIImageView!
+//    @IBOutlet weak var loginBtn: UIButton!
+//    @IBOutlet weak var registerBtn: UIButton!
+//    @IBOutlet weak var registerIcon: UIImageView!
+//    @IBOutlet weak var forgetPasswordIcon: UIImageView!
+//    @IBOutlet weak var forgetPasswordBtn: UIButton!
+//    @IBOutlet weak var avatarImageView: UIImageView!
     
     let featuredContainer: UIView = {
         let view = UIView()
@@ -103,7 +103,6 @@ class MemberVC: BaseViewController {
     var mainBottom2: MainBottom2 = MainBottom2(able_type: "member")
 
     override func viewDidLoad() {
-        //myTablView = tableView
         able_type = "member"
         
         super.viewDidLoad()
@@ -238,7 +237,7 @@ class MemberVC: BaseViewController {
                 do {
                     let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
                     table.toSession(isLoggedIn: true)
-                    self._loginBlock()
+                    //self._loginBlock()
                     //self.session.dump()
                     //self.loginout()
                     //self.tableView.reloadData()
@@ -252,58 +251,59 @@ class MemberVC: BaseViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if sender != nil {
-            if segue.identifier == TO_VALIDATE {
-                let vc: ValidateVC = segue.destination as! ValidateVC
-                vc.type = sender as! String
-            } else if segue.identifier == TO_LOGIN {
-                //let vc: LoginVC = segue.destination as! LoginVC
-                //vc.menuVC = (sender as! MenuVC)
-            } else if segue.identifier == TO_REGISTER {
-                //let vc: RegisterVC = segue.destination as! RegisterVC
-                //vc.menuVC = (sender as! MenuVC)
-            } else {
-         }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if sender != nil {
+//            if segue.identifier == TO_VALIDATE {
+//                let vc: ValidateVC = segue.destination as! ValidateVC
+//                vc.type = sender as! String
+//            } else if segue.identifier == TO_LOGIN {
+//                //let vc: LoginVC = segue.destination as! LoginVC
+//                //vc.menuVC = (sender as! MenuVC)
+//            } else if segue.identifier == TO_REGISTER {
+//                //let vc: RegisterVC = segue.destination as! RegisterVC
+//                //vc.menuVC = (sender as! MenuVC)
+//            } else {
+//         }
+//        }
+//    }
     
-    func login() {
-        toLogin(memberVC: self)
+//    func login() {
+//        toLogin(memberVC: self)
 //            if let vc = storyboard?.instantiateViewController(withIdentifier: "login") as? LoginVC {
 //                vc.memberVC = self
 //                present(vc, animated: true, completion: nil)
 //            }
         //performSegue(withIdentifier: TO_LOGIN, sender: self)
-    }
+//    }
     
     func logout() {
         //1.清空session資料
         Member.instance.reset()
         //2.設定登出
         Member.instance.isLoggedIn = false
-        loginout()
+        toLogin()
+        //loginout()
     }
     
-    @IBAction func loginBtnPressed(_ sender: Any) {
-        if Member.instance.isLoggedIn { // logout
-            logout()
-        } else {
-            login()
-        }
-    }
+//    @IBAction func loginBtnPressed(_ sender: Any) {
+//        if Member.instance.isLoggedIn { // logout
+//            logout()
+//        } else {
+//            login()
+//        }
+//    }
     
-    @IBAction func registerBtnPressed(_ sender: Any) {
+//    @IBAction func registerBtnPressed(_ sender: Any) {
 //        if let vc = storyboard?.instantiateViewController(withIdentifier: "register") as? RegisterVC {
 //            vc.sourceVC = self
 //            present(vc, animated: true, completion: nil)
 //        }
         //performSegue(withIdentifier: TO_REGISTER, sender: self)
-        toRegister()
-    }
+//        toRegister()
+//    }
     
-    @IBAction func passwordBtnPressed(_ sender: Any) {
-        toPassword(type: "forget_password")
+//    @IBAction func passwordBtnPressed(_ sender: Any) {
+//        toPassword(type: "forget_password")
 //        let type: String = "forget_password"
 //        if let vc = storyboard?.instantiateViewController(withIdentifier: "passwo") as? PasswordVC {
 //            vc.type = type
@@ -311,25 +311,25 @@ class MemberVC: BaseViewController {
 //            present(vc, animated: true, completion: nil)
 //        }
         //performSegue(withIdentifier: TO_PASSWORD, sender: type)
-    }
+//    }
     
-    public func loginout() {
-        //print(Member.instance.isLoggedIn)
-        if Member.instance.isLoggedIn   { // login
-           _loginBlock()
-        } else {
-           _logoutBlock()
-       }
-    }
+//    public func loginout() {
+//        //print(Member.instance.isLoggedIn)
+//        if Member.instance.isLoggedIn   { // login
+//           _loginBlock()
+//        } else {
+//           _logoutBlock()
+//       }
+//    }
        
-    public func _loginBlock() {
+//    public func _loginBlock() {
         
         //memberSections = initSectionRows1()
         //self.tableView.reloadData()
-        nicknameLbl.text = Member.instance.nickname
-        if Member.instance.avatar.count > 0 {
-            avatarIV.downloaded(from: Member.instance.avatar)
-        }
+//        nicknameLbl.text = Member.instance.nickname
+//        if Member.instance.avatar.count > 0 {
+//            avatarIV.downloaded(from: Member.instance.avatar)
+//        }
 //        loginBtn.setTitle("登出", for: .normal)
 //        registerBtn.isHidden = true
 //        registerIcon.isHidden = true
@@ -337,18 +337,18 @@ class MemberVC: BaseViewController {
 //        forgetPasswordIcon.isHidden = true
 //
 //        tableView.isHidden = false
-    }
+//    }
     
-    public func _logoutBlock() {
-        nicknameLbl.text = "未登入"
-        loginBtn.setTitle("登入", for: .normal)
-        registerBtn.isHidden = false
-        registerIcon.isHidden = false
-        forgetPasswordBtn.isHidden = false
-        forgetPasswordIcon.isHidden = false
-        tableView.isHidden = true
-        avatarImageView.image = UIImage(named: "menuProfileIcon")
-    }
+//    public func _logoutBlock() {
+//        nicknameLbl.text = "未登入"
+//        loginBtn.setTitle("登入", for: .normal)
+//        registerBtn.isHidden = false
+//        registerIcon.isHidden = false
+//        forgetPasswordBtn.isHidden = false
+//        forgetPasswordIcon.isHidden = false
+//        tableView.isHidden = true
+//        avatarImageView.image = UIImage(named: "menuProfileIcon")
+//    }
     
 //    @objc override func handleExpandClose(gesture : UITapGestureRecognizer) {
 //

@@ -38,6 +38,8 @@ class MemberItemVC: BaseViewController {
             make.bottom.equalToSuperview()
         }
         
+        let validate: Int = Member.instance.validate
+        
         let enums: [MemberItemEnum] = MemberItemEnum.allValues(mainMemberEnum)
         for myEnum in enums {
             rows.append(MainMemberTable(title: myEnum.rawValue, icon: myEnum.getIcon()))
@@ -62,7 +64,7 @@ class MemberItemVC: BaseViewController {
                 toPassword(type: "change_password")
             }
         } else if (mainMemberEnum == MainMemberEnum.order) {
-            if memberItemEnum == MemberItemEnum.cart {
+            if (memberItemEnum == MemberItemEnum.cart) {
                 toMemberCartList()
             } else if (memberItemEnum == MemberItemEnum.order) {
                 toMemberOrderList()
@@ -186,6 +188,8 @@ enum MemberItemEnum: String {
     
     case info = "帳戶資料"
     case change_password = "更改密碼"
+    case email_validate = "EMail認證"
+    case mobile_validate = "手機認證"
     case cart = "購物車"
     case order = "訂單查詢"
     case team = "球隊"
@@ -201,7 +205,16 @@ enum MemberItemEnum: String {
     //static let allValues: [MemberInfoItemEnum] = [data, change_password]
     static func allValues(_ mainMemberEnum: MainMemberEnum)-> [MemberItemEnum] {
         switch mainMemberEnum {
-        case MainMemberEnum.info: return [.info, .change_password]
+        case MainMemberEnum.info:
+            var arr: [MemberItemEnum] = [.info, .change_password]
+            let validate: Int = Member.instance.validate
+            if (validate & EMAIL_VALIDATE <= 0) {
+                arr.append(.email_validate)
+            }
+            if (validate & MOBILE_VALIDATE <= 0) {
+                arr.append(.mobile_validate)
+            }
+            return arr
         case MainMemberEnum.order: return [.cart, .order]
         case MainMemberEnum.like: return [.team, .arena, .teach, .coach, .course, .product, .store]
         case MainMemberEnum.join: return [.team, .tempPlay, .course]
@@ -222,6 +235,8 @@ enum MemberItemEnum: String {
     func getIcon()-> String {
         switch self {
         case .info: return "info_svg"
+        case .email_validate: return "validate_svg"
+        case .mobile_validate: return "validate_svg"
         case .change_password: return "change_password_svg"
         case .cart: return "cart_svg"
         case .order: return "order_svg"

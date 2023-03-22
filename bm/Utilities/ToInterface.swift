@@ -188,6 +188,34 @@ extension BaseViewController {
         }
     }
     
+    func toLogin(memberVC: MemberVC? = nil) {
+        let vc: LoginVC = LoginVC()
+        if (memberVC != nil) {
+            vc.memberVC = memberVC
+        }
+        vc.modalPresentationStyle = .fullScreen
+        show(vc, sender: nil)
+        
+//        if #available(iOS 13.0, *) {
+//            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: "login") as? LoginVC {
+//                if (memberVC != nil) {
+//                    viewController.memberVC = memberVC
+//                }
+//                viewController.modalPresentationStyle = .fullScreen
+//                show(viewController, sender: nil)
+//            }
+//        } else {
+//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "login") as! LoginVC
+//            //viewController.delegate = self
+//            if (memberVC != nil) {
+//                viewController.memberVC = memberVC
+//            }
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.navigationController!.pushViewController(viewController, animated: true)
+//        }
+    }
+    
     //manager_token is member token
     func toManagerCourse(manager_token: String) {
         if #available(iOS 13.0, *) {
@@ -290,20 +318,11 @@ extension BaseViewController {
     
     func toMember() {
         
-        let vc: MemberVC = MemberVC()
-        vc.modalPresentationStyle = .fullScreen
-        show(vc, sender: nil)
-//        if #available(iOS 13.0, *) {
-//            let storyboard = UIStoryboard(name: "Member", bundle: nil)
-//            if let viewController = storyboard.instantiateViewController(identifier: "toMember") as? MemberVC {
-//                viewController.modalPresentationStyle = .fullScreen
-//                show(viewController, sender: nil)
-//            }
-//        } else {
-//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toMember") as! MemberVC
-//            viewController.modalPresentationStyle = .fullScreen
-//            self.navigationController!.pushViewController(viewController, animated: true)
-//        }
+        toLogin()
+        
+//        let vc: MemberVC = MemberVC()
+//        vc.modalPresentationStyle = .fullScreen
+//        show(vc, sender: nil)
     }
     
     func toMemberBank() {
@@ -471,27 +490,6 @@ extension BaseViewController {
                 viewController.key = key
             }
             viewController.delegate = self
-            viewController.modalPresentationStyle = .fullScreen
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
-    }
-    
-    func toLogin(memberVC: MemberVC? = nil) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "login") as? LoginVC {
-                if (memberVC != nil) {
-                    viewController.memberVC = memberVC
-                }
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: "login") as! LoginVC
-            //viewController.delegate = self
-            if (memberVC != nil) {
-                viewController.memberVC = memberVC
-            }
             viewController.modalPresentationStyle = .fullScreen
             self.navigationController!.pushViewController(viewController, animated: true)
         }

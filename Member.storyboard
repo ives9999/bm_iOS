@@ -99,10 +99,10 @@
             </objects>
             <point key="canvasLocation" x="-1824" y="-2095"/>
         </scene>
-        <!--LoginVC-->
+        <!--View Controller-->
         <scene sceneID="Oto-La-o8t">
             <objects>
-                <viewController storyboardIdentifier="login" id="j9P-cA-JMi" customClass="LoginVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="login" id="j9P-cA-JMi" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ksh-hs-DpB">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
