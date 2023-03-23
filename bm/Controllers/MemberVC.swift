@@ -280,7 +280,7 @@ class MemberVC: BaseViewController {
         //1.清空session資料
         Member.instance.reset()
         //2.設定登出
-        Member.instance.isLoggedIn = false
+        //Member.instance.isLoggedIn = false
         toLogin()
         //loginout()
     }

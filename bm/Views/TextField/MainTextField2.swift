@@ -16,6 +16,7 @@ class MainTextField2: UIView {
     var isPassword: Bool = false
     var value: String = ""
     var keyboard: KEYBOARD = KEYBOARD.default
+    var text: String = ""
     
     var label: SuperLabel = {
         let view: SuperLabel = SuperLabel()
@@ -94,6 +95,8 @@ class MainTextField2: UIView {
         }
         
         textField.keyboardType = keyboard.enumToSwift()
+        
+        textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
     }
     
     func anchor() {
@@ -107,12 +110,17 @@ class MainTextField2: UIView {
             make.top.equalTo(label.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
             make.height.equalTo(50)
-            make.bottom.equalToSuperview().offset(5)
+            make.bottom.equalToSuperview().offset(10)
         }
     }
     
     func setValue(_ value: String) {
         self.value = value
         textField.text = value
+    }
+    
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        //print(textField.text)
+        self.text = textField.text ?? ""
     }
 }

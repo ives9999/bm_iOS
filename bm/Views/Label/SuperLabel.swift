@@ -59,6 +59,10 @@ class SuperLabel: UILabel {
         self.font = UIFont(name: FONT_BOLD_NAME, size: FONT_SIZE_GENERAL)
     }
     
+    func setTextBoldAndSize(_ size: CGFloat) {
+        self.font = UIFont(name: FONT_BOLD_NAME, size: size)
+    }
+    
     func setTextTitle() {
         self.font = UIFont(name: FONT_BOLD_NAME, size: FONT_SIZE_TITLE)
         self.textColor = UIColor(MY_WHITE)

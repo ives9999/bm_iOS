@@ -12,21 +12,21 @@ import SCLAlertView
 
 class LoginVC: BaseViewController, UITextFieldDelegate {
     
-    var memberVC: MemberVC? = nil
-
-    // outlets
-    @IBOutlet weak var emailTxt: SuperTextField!
-    @IBOutlet weak var passwordTxt: SuperTextField!
-    @IBOutlet weak var submitBtn: SubmitButton!
-    @IBOutlet weak var forgetPasswordBtn: UIButton!
-    @IBOutlet weak var registerBtn: UIButton!
+//    var memberVC: MemberVC? = nil
+//
+//    // outlets
+//    @IBOutlet weak var emailTxt: SuperTextField!
+//    @IBOutlet weak var passwordTxt: SuperTextField!
+//    @IBOutlet weak var submitBtn: SubmitButton!
+//    @IBOutlet weak var forgetPasswordBtn: UIButton!
+//    @IBOutlet weak var registerBtn: UIButton!
     //@IBOutlet weak var facebookLogin: FBLoginButton!
     
     var showTop2: ShowTop2?
     
     let loginLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
-        view.setTextTitle()
+        view.setTextBoldAndSize(24)
         view.text = "登入"
         
         return view
@@ -46,13 +46,44 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         return view
     }()
     
-    let passworTxt2: MainTextField2 = {
+    let passwordTxt2: MainTextField2 = {
         let view: MainTextField2 = MainTextField2(label: "密碼", icon: "password_svg", placeholder: "密碼", isShowDelete: false, isPassword: true)
         
         return view
     }()
     
+    let forgetPasswordLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextSize(14)
+        view.setTextColor(TEXT_WHITE40)
+        view.text = "忘記密碼？"
+        
+        return view
+    }()
+    
+    let registerContainer: UIView = UIView()
+    let registerDescLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextSize(14)
+        view.setTextColor(TEXT_WHITE40)
+        view.text = "還沒有帳號？"
+        
+        return view
+    }()
+    let registerLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextSize(16)
+        view.setTextColor(UIColor(MY_GREEN))
+        view.text = "註冊"
+        
+        return view
+    }()
+    
+    let submitButton: SubmitButton = SubmitButton()
+    
     var table: MemberTable?
+    
+    var registerPadding: CGFloat = 0
     
     override func viewDidLoad() {
         
@@ -63,9 +94,19 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         showTop2!.anchor(parent: self.view)
         showTop2!.setTitle(title: "登入")
         
-        emailTxt2.setValue("abced")
+        let forgetPasswordGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(forgetPassword(_:)))
+        forgetPasswordLbl.addGestureRecognizer(forgetPasswordGR)
+        
+        let w1:CGFloat = registerDescLbl.intrinsicContentSize.width
+        let w2:CGFloat = registerLbl.intrinsicContentSize.width
+        registerPadding = (screen_width - (w1 + w2))/2
+        
+        let registerGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(register(_:)))
+        registerLbl.addGestureRecognizer(registerGR)
         
         anchor()
+        
+        submitButton.addTarget(self, action: #selector(submit), for: .touchUpInside)
         
 //        emailTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
 //        emailTxt.attributedPlaceholder = NSAttributedString(
@@ -118,24 +159,64 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
             make.right.equalToSuperview().offset(-20)
         }
         
-        self.view.addSubview(passworTxt2)
-        passworTxt2.snp.makeConstraints { make in
+        self.view.addSubview(passwordTxt2)
+        passwordTxt2.snp.makeConstraints { make in
             make.top.equalTo(emailTxt2.snp.bottom).offset(26)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
-    }
-
-    @IBAction func prevBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    @IBAction func closeBtnPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        
+        self.view.addSubview(forgetPasswordLbl)
+        forgetPasswordLbl.snp.makeConstraints { make in
+            make.top.equalTo(passwordTxt2.snp.bottom).offset(15)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        self.view.addSubview(submitButton)
+        submitButton.snp.makeConstraints { make in
+            make.top.equalTo(forgetPasswordLbl.snp.bottom).offset(65)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(335)
+            make.height.equalTo(52)
+        }
+        
+        self.view.addSubview(registerContainer)
+        registerContainer.snp.makeConstraints { make in
+            make.top.equalTo(submitButton.snp.bottom).offset(25)
+            make.left.right.equalToSuperview()
+            make.height.equalTo(20)
+        }
+        
+        registerContainer.addSubview(registerDescLbl)
+        registerDescLbl.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.equalToSuperview().offset(registerPadding)
+        }
+        registerContainer.addSubview(registerLbl)
+        registerLbl.snp.makeConstraints { make in
+            make.left.equalTo(registerDescLbl.snp.right)
+            make.centerY.equalTo(registerDescLbl.snp.centerY)
+        }
     }
     
-    @IBAction func loginBtnPressed(_ sender: Any) {
-        let email = emailTxt.text!
-        let password = passwordTxt.text!
+    @objc func forgetPassword(_ sender: UITapGestureRecognizer) {
+        toPassword(type: "forget_password")
+    }
+    
+    @objc func register(_ sender: UITapGestureRecognizer) {
+        toRegister()
+    }
+
+//    @IBAction func prevBtnPressed(_ sender: Any) {
+//        dismiss(animated: true, completion: nil)
+//    }
+//    @IBAction func closeBtnPressed(_ sender: Any) {
+//        dismiss(animated: true, completion: nil)
+//    }
+    
+    @objc override func submit() {
+        let email = emailTxt2.text
+        let password = passwordTxt2.text
         //print(email)
         if email.count == 0 {
             SCLAlertView().showWarning("警告", subTitle: "請填寫email")
@@ -225,31 +306,31 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
 //        }
 //    }
     
-    @IBAction func registerBtnPressed(_ sender: Any) {
-        toRegister()
-    }
-    @IBAction func passwordBtnPressed(_ sender: Any) {
-        performSegue(withIdentifier: TO_PASSWORD, sender: "forget_password")
-    }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == TO_PASSWORD {
-            let vc: PasswordVC = segue.destination as! PasswordVC
-            vc.type = sender as? String
-        } else if segue.identifier == UNWIND {
-            //let vc: MenuVC = segue.destination as! MenuVC
-        } else if segue.identifier == TO_LOGIN {
-            //let vc: LoginVC = segue.destination as! LoginVC
-            //vc.menuVC = (sender as! MenuVC)
-        } else if segue.identifier == TO_REGISTER {
-            //let vc: RegisterVC = segue.destination as! RegisterVC
-            //vc.menuVC = (sender as! MenuVC)
-        }
-    }
+//    @IBAction func registerBtnPressed(_ sender: Any) {
+//        toRegister()
+//    }
+//    @IBAction func passwordBtnPressed(_ sender: Any) {
+//        performSegue(withIdentifier: TO_PASSWORD, sender: "forget_password")
+//    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == TO_PASSWORD {
+//            let vc: PasswordVC = segue.destination as! PasswordVC
+//            vc.type = sender as? String
+//        } else if segue.identifier == UNWIND {
+//            //let vc: MenuVC = segue.destination as! MenuVC
+//        } else if segue.identifier == TO_LOGIN {
+//            //let vc: LoginVC = segue.destination as! LoginVC
+//            //vc.menuVC = (sender as! MenuVC)
+//        } else if segue.identifier == TO_REGISTER {
+//            //let vc: RegisterVC = segue.destination as! RegisterVC
+//            //vc.menuVC = (sender as! MenuVC)
+//        }
+//    }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        return true
-    }
+//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+//        self.view.endEditing(true)
+//        return true
+//    }
     
 //    func backToMenu() {
 //        if self.menuVC != nil {

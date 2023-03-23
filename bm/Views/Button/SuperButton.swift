@@ -38,7 +38,7 @@ class SuperButton: UIButton {
         self.titleLabel?.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
         self.alignH = .center
         self.alignV = .center
-        self.cornerRadius = 20
+        self.cornerRadius = 6
         self.padding(top: 5, left: 10, bottom: 5, right: 10)
     }
     

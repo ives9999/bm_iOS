@@ -529,6 +529,9 @@ class Member {
             mirror = mirror?.superclassMirror
         } while mirror != nil
         
+        isLoggedIn = false
+        session.set("isLoggedIn", false)
+        
         
 //        var data: [String: Any] = [String: Any]()
 //

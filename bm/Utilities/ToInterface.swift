@@ -188,11 +188,11 @@ extension BaseViewController {
         }
     }
     
-    func toLogin(memberVC: MemberVC? = nil) {
+    func toLogin() {
         let vc: LoginVC = LoginVC()
-        if (memberVC != nil) {
-            vc.memberVC = memberVC
-        }
+//        if (memberVC != nil) {
+//            vc.memberVC = memberVC
+//        }
         vc.modalPresentationStyle = .fullScreen
         show(vc, sender: nil)
         
@@ -317,12 +317,14 @@ extension BaseViewController {
 //    }
     
     func toMember() {
-        
-        toLogin()
-        
-//        let vc: MemberVC = MemberVC()
-//        vc.modalPresentationStyle = .fullScreen
-//        show(vc, sender: nil)
+        //Member.instance.isLoggedIn = false
+        if !Member.instance.isLoggedIn {
+            toLogin()
+        } else {
+            let vc: MemberVC = MemberVC()
+            vc.modalPresentationStyle = .fullScreen
+            show(vc, sender: nil)
+        }
     }
     
     func toMemberBank() {
