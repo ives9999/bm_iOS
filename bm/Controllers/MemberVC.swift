@@ -237,8 +237,14 @@ class MemberVC: BaseViewController {
                 do {
                     let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
                     table.toSession(isLoggedIn: true)
+                    self.nicknameLbl.text = Member.instance.nickname
+                    if Member.instance.avatar.count > 0 {
+                        self.avatarIV.downloaded(from: Member.instance.avatar)
+                    }
+                    self.pointIconText.setText("\(Member.instance.coin) 點")
+                    self.levelIconText.setText("\(Member.instance.subscription)")
                     //self._loginBlock()
-                    //self.session.dump()
+                    self.session.dump()
                     //self.loginout()
                     //self.tableView.reloadData()
                 } catch {
@@ -279,6 +285,7 @@ class MemberVC: BaseViewController {
     func logout() {
         //1.清空session資料
         Member.instance.reset()
+        self.session.dump()
         //2.設定登出
         //Member.instance.isLoggedIn = false
         toLogin()

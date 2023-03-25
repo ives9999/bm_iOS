@@ -78,6 +78,10 @@ class IconTextVertical2: UIView {
         }
     }
     
+    func setText(_ text: String) {
+        textLbl.text = text
+    }
+    
     @objc func pressed(view: UITapGestureRecognizer) {
         delegate?.pressed(icon: icon)
     }

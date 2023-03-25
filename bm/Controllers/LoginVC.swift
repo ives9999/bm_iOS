@@ -106,7 +106,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         
         anchor()
         
-        submitButton.addTarget(self, action: #selector(submit), for: .touchUpInside)
+        submitButton.delegate = self
         
 //        emailTxt.backgroundColor = UIColor(SEARCH_BACKGROUND)
 //        emailTxt.attributedPlaceholder = NSAttributedString(
@@ -214,63 +214,9 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
 //        dismiss(animated: true, completion: nil)
 //    }
     
-    @objc override func submit() {
-        let email = emailTxt2.text
-        let password = passwordTxt2.text
-        //print(email)
-        if email.count == 0 {
-            SCLAlertView().showWarning("警告", subTitle: "請填寫email")
-            return
-        }
-        if password.count == 0 {
-            SCLAlertView().showWarning("警告", subTitle: "請填寫密碼")
-            return
-        }
-        let playerID: String = _getPlayerID()
-        Global.instance.addSpinner(superView: self.view)
-        MemberService.instance.login(email: email, password: password, playerID: playerID) { (success) in
-            Global.instance.removeSpinner(superView: self.view)
-            if success {
-
-                let jsonData: Data = MemberService.instance.jsonData!
-                do {
-                    let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
-
-                    if (!successTable.success) {
-                        self.warning(successTable.msg)
-                    } else {
-                        self.table = try JSONDecoder().decode(MemberTable.self, from: jsonData)
-                        if (self.table != nil) {
-                            //self.table?.printRow()
-                            self.table!.toSession(isLoggedIn: true)
-
-                            self.dismiss(animated: true, completion: {
-                                self.toMember()
-//                                if self.memberVC != nil {
-//                                    self.memberVC!.loginout()
-//                                }
-                            })
-                        }
-
-
-                    }
-                } catch {
-                    self.warning(error.localizedDescription)
-                }
-
-            } else {
-                //print("login failed by server")
-                let appearance = SCLAlertView.SCLAppearance(
-                    showCloseButton: false
-                )
-                let alert = SCLAlertView(appearance: appearance)
-                alert.addButton("確定", action: {
-                    self.performSegue(withIdentifier: UNWIND, sender: nil)
-                })
-                alert.showWarning("警告", subTitle: MemberService.instance.msg)
-            }
-        }
-    }
+//    @objc override func submit() {
+//
+//    }
     
 //    @IBAction func loginFBBtnPressed(_ sender: Any) {
 //
@@ -340,7 +286,67 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
 //    }
 }
 
+extension LoginVC: SubmitButtonDelegate {
+    
+    func submit2() {
+        let email = emailTxt2.text
+        let password = passwordTxt2.text
+        //print(email)
+        if email.count == 0 {
+            SCLAlertView().showWarning("警告", subTitle: "請填寫email")
+            return
+        }
+        if password.count == 0 {
+            SCLAlertView().showWarning("警告", subTitle: "請填寫密碼")
+            return
+        }
+        let playerID: String = _getPlayerID()
+        Global.instance.addSpinner(superView: self.view)
+        MemberService.instance.login(email: email, password: password, playerID: playerID) { (success) in
+            Global.instance.removeSpinner(superView: self.view)
+            if success {
 
+                let jsonData: Data = MemberService.instance.jsonData!
+                do {
+                    let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
+
+                    if (!successTable.success) {
+                        self.warning(successTable.msg)
+                    } else {
+                        self.table = try JSONDecoder().decode(MemberTable.self, from: jsonData)
+                        if (self.table != nil) {
+                            //self.table?.printRow()
+                            self.table!.toSession(isLoggedIn: true)
+                            self.session.dump()
+
+                            self.dismiss(animated: true, completion: {
+                                self.toMember()
+//                                if self.memberVC != nil {
+//                                    self.memberVC!.loginout()
+//                                }
+                            })
+                        }
+
+
+                    }
+                } catch {
+                    self.warning(error.localizedDescription)
+                }
+
+            } else {
+                //print("login failed by server")
+                let appearance = SCLAlertView.SCLAppearance(
+                    showCloseButton: false
+                )
+                let alert = SCLAlertView(appearance: appearance)
+                alert.addButton("確定", action: {
+                    self.performSegue(withIdentifier: UNWIND, sender: nil)
+                })
+                alert.showWarning("警告", subTitle: MemberService.instance.msg)
+            }
+        }
+    }
+}
 
 
 
