@@ -42,6 +42,8 @@ class MainTextField2: UIView {
             string: "email",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor(hex: "#FFFFFF", alpha: 0.31)]
         )
+        
+        view.autocapitalizationType = .none
                 
         return view
     }()
@@ -117,6 +119,7 @@ class MainTextField2: UIView {
     func setValue(_ value: String) {
         self.value = value
         textField.text = value
+        self.text = value
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {

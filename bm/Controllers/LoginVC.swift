@@ -104,6 +104,9 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         let registerGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(register(_:)))
         registerLbl.addGestureRecognizer(registerGR)
         
+        emailTxt2.setValue("ives@bluemobile.com.tw")
+        passwordTxt2.setValue("K5SD23r6")
+        
         anchor()
         
         submitButton.delegate = self
@@ -317,14 +320,12 @@ extension LoginVC: SubmitButtonDelegate {
                         if (self.table != nil) {
                             //self.table?.printRow()
                             self.table!.toSession(isLoggedIn: true)
-                            self.session.dump()
+                            //self.session.dump()
+                            self.toMember()
 
-                            self.dismiss(animated: true, completion: {
-                                self.toMember()
-//                                if self.memberVC != nil {
-//                                    self.memberVC!.loginout()
-//                                }
-                            })
+//                            self.dismiss(animated: true, completion: {
+//                                self.toMember()
+//                            })
                         }
 
 

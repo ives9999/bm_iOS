@@ -30,8 +30,8 @@ class MemberService: DataService {
     func login(email: String, password: String, playerID: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
         let body: [String: String] = ["device": "app", "email": lowerCaseEmail, "password": password, "player_id": playerID]
-        //print(body)
-        //print(URL_LOGIN)
+        print(body)
+        print(URL_LOGIN)
         
         AF.request(URL_LOGIN, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             switch response.result {

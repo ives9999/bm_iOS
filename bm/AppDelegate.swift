@@ -130,6 +130,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             gSimulate = false
         #endif
         
+        print(gSimulate)
+        
 //        let deviceType: DeviceType = UIDevice.current.deviceType
 //        if deviceType == .simulator {
 //            gSimulate = true

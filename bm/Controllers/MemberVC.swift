@@ -241,10 +241,13 @@ class MemberVC: BaseViewController {
                     if Member.instance.avatar.count > 0 {
                         self.avatarIV.downloaded(from: Member.instance.avatar)
                     }
+                    
                     self.pointIconText.setText("\(Member.instance.coin) 點")
-                    self.levelIconText.setText("\(Member.instance.subscription)")
+                    
+                    let goldEnum = MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription)
+                    self.levelIconText.setText(goldEnum.rawValue)
                     //self._loginBlock()
-                    self.session.dump()
+                    //self.session.dump()
                     //self.loginout()
                     //self.tableView.reloadData()
                 } catch {
@@ -285,7 +288,7 @@ class MemberVC: BaseViewController {
     func logout() {
         //1.清空session資料
         Member.instance.reset()
-        self.session.dump()
+        //self.session.dump()
         //2.設定登出
         //Member.instance.isLoggedIn = false
         toLogin()
