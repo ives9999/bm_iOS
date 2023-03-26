@@ -571,21 +571,25 @@ extension BaseViewController {
     
     // forget_password, change_password
     func toPassword(type: String) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "passwo") as? PasswordVC {
-                viewController.type = type
-                viewController.delegate = self
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "passwo") as! PasswordVC
-            viewController.type = type
-            viewController.delegate = self
-            viewController.modalPresentationStyle = .fullScreen
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
+        let vc: PasswordVC = PasswordVC()
+        vc.type = type
+        vc.modalPresentationStyle = .fullScreen
+        show(vc, sender: nil)
+//        if #available(iOS 13.0, *) {
+//            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: "passwo") as? PasswordVC {
+//                viewController.type = type
+//                viewController.delegate = self
+//                viewController.modalPresentationStyle = .fullScreen
+//                show(viewController, sender: nil)
+//            }
+//        } else {
+//            let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "passwo") as! PasswordVC
+//            viewController.type = type
+//            viewController.delegate = self
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.navigationController!.pushViewController(viewController, animated: true)
+//        }
     }
     
     func toPayment(order_token: String, ecpay_token: String?=nil, tokenExpireDate: String?=nil, source: String = "order") {

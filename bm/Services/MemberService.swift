@@ -30,8 +30,8 @@ class MemberService: DataService {
     func login(email: String, password: String, playerID: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
         let body: [String: String] = ["device": "app", "email": lowerCaseEmail, "password": password, "player_id": playerID]
-        print(body)
-        print(URL_LOGIN)
+        //print(body)
+        //print(URL_LOGIN)
         
         AF.request(URL_LOGIN, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             switch response.result {
@@ -365,7 +365,7 @@ class MemberService: DataService {
             "perpage": String(perPage)
         ]
         //print(body)
-        
+                
         let url: String = URL_MEMBER_LIKELIST
         //print(url)
         
@@ -420,7 +420,10 @@ class MemberService: DataService {
     
     func forgetPassword(email: String, completion: @escaping CompletionHandler) {
         let lowerCaseEmail = email.lowercased()
-        let body: [String: String] = ["source": "app", "email": lowerCaseEmail]
+        let body: [String: String] = ["device": "app", "email": lowerCaseEmail]
+        
+        //print(URL_FORGET_PASSWORD)
+        //print(body)
         
         AF.request(URL_FORGET_PASSWORD, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             
@@ -464,9 +467,15 @@ class MemberService: DataService {
     
     func changePassword(oldPassword: String, password: String, rePassword: String, completion: @escaping CompletionHandler) {
         let token: String = Member.instance.token
-        let body: [String: String] = ["device": "app", "password_old": oldPassword,"password":password,"repassword":rePassword,"token":token]
-        //print(body)
-        //print(URL_CHANGE_PASSWORD)
+        let body: [String: String] = [
+            "device": "app",
+            "password_old": oldPassword,
+            "password":password,
+            "repassword":rePassword,
+            "token":token
+        ]
+//        print(body)
+//        print(URL_CHANGE_PASSWORD)
         
         AF.request(URL_CHANGE_PASSWORD, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).responseJSON { (response) in
             

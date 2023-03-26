@@ -915,7 +915,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         row = MemberRow(title: "建立日期", icon: "createdAt_svg", show: myTable!.created_at_show)
         memberRows.append(row)
         
-        self.showTop2!.setTitle(title: myTable!.name)
+        self.showTop2!.setTitle(myTable!.name)
         introduceNameLbl.text = myTable!.name
     }
     

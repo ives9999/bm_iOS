@@ -45,7 +45,7 @@ class ContentEditVC: BaseViewController {
         super.viewDidLoad()
         
         showTop2 = ShowTop2(delegate: self)
-        showTop2!.setTitle(title: title ?? "內容編輯")
+        showTop2!.setTitle(title ?? "內容編輯")
         
         showBottom2 = ShowBottom2(delegate: self)
         

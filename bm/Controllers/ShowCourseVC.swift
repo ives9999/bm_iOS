@@ -388,7 +388,7 @@ class ShowCourseVC: BaseViewController, WKNavigationDelegate {
                                 self.setData()
                                 self.setContentWeb()
                                 self.initLike()
-                                self.showTop!.setTitle(title: self.table!.title)
+                                self.showTop!.setTitle(self.table!.title)
                             }
                         }
                     } catch {

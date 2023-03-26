@@ -12,6 +12,11 @@ import UIColor_Hex_Swift
 import OneSignal
 import ECPayPaymentGatewayKit
 
+//public var BASE_URL: String = ""
+//let REMOTE_BASE_URL = "https://bm.sportpassword.com"
+//let LOCALHOST_BASE_URL = "http://bm.sportpassword.localhost"
+//var URL_HOME = ""
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -19,11 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        self.window = UIWindow(frame: UIScreen.main.bounds)
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "TempPlay", bundle: nil)
-        let controller: SearchVC = mainStoryboard.instantiateViewController(withIdentifier: "toSearch") as! SearchVC
-        self.window?.rootViewController = controller
-        self.window?.makeKeyAndVisible()
+        
         
         
 //        let status:OSPermissionSubscriptionState = OneSignal.getPermissionSubscriptionState()
@@ -130,7 +131,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             gSimulate = false
         #endif
         
-        print(gSimulate)
+        //print(gSimulate)
+        //BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
+        
+        
         
 //        let deviceType: DeviceType = UIDevice.current.deviceType
 //        if deviceType == .simulator {
@@ -146,6 +150,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 13.0, *) {
             self.window?.overrideUserInterfaceStyle = .light
         }
+        
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "TempPlay", bundle: nil)
+        let controller: SearchVC = mainStoryboard.instantiateViewController(withIdentifier: "toSearch") as! SearchVC
+        self.window?.rootViewController = controller
+        self.window?.makeKeyAndVisible()
         
         //Member.instance.justGetMemberOne = false
         return true

@@ -66,7 +66,7 @@ class ManagerTeamMemberVC: BaseViewController {
         
         showTop = ShowTop2(delegate: self)
         showTop!.anchor(parent: self.view)
-        showTop!.setTitle(title: "球隊隊員")
+        showTop!.setTitle("球隊隊員")
         
         view.addSubview(toolView)
         toolView.snp.makeConstraints { make in

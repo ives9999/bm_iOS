@@ -256,13 +256,13 @@ class DataService {
         if (Member.instance.isLoggedIn) {
             filter.merge(["member_token":Member.instance.token])
         }
-        //print(filter.toJSONString())
+        print(filter.toJSONString())
         
         var url: String = getListURL()
         if (token != nil) {
             url = url + "/" + token!
         }
-        //print(url)
+        print(url)
         
         
         //let a: FooRequestParameters = FooRequestParameters(paramName1: 1, paramName2: "aaa")
@@ -694,8 +694,8 @@ class DataService {
         var params: [String: String] = ["channel":CHANNEL,"device":"app"]
         params.merge(_params)
 
-        print(url)
-        print(params)
+        //print(url)
+        //print(params)
         msg = ""
         AF.upload(
             multipartFormData: { (multipartFormData) in

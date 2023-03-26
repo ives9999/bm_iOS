@@ -47,7 +47,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     }()
     
     let passwordTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "密碼", icon: "password_svg", placeholder: "密碼", isShowDelete: false, isPassword: true)
+        let view: MainTextField2 = MainTextField2(label: "密碼", icon: "password_svg", placeholder: "密碼", isPassword: true)
         
         return view
     }()
@@ -92,7 +92,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         
         showTop2 = ShowTop2(delegate: self)
         showTop2!.anchor(parent: self.view)
-        showTop2!.setTitle(title: "登入")
+        showTop2!.setTitle("登入")
         
         let forgetPasswordGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(forgetPassword(_:)))
         forgetPasswordLbl.addGestureRecognizer(forgetPasswordGR)
@@ -104,8 +104,8 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         let registerGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(register(_:)))
         registerLbl.addGestureRecognizer(registerGR)
         
-        emailTxt2.setValue("ives@bluemobile.com.tw")
-        passwordTxt2.setValue("K5SD23r6")
+//        emailTxt2.setValue("ives@bluemobile.com.tw")
+//        passwordTxt2.setValue("K5SD23r6")
         
         anchor()
         
@@ -178,8 +178,9 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         self.view.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(forgetPasswordLbl.snp.bottom).offset(65)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.centerX.equalToSuperview()
-            make.width.equalTo(335)
             make.height.equalTo(52)
         }
         

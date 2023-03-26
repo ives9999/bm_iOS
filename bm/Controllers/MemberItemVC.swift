@@ -28,7 +28,7 @@ class MemberItemVC: BaseViewController {
         
         showTop2 = ShowTop2(delegate: self)
         showTop2!.anchor(parent: self.view)
-        showTop2!.setTitle(title: mainMemberEnum.rawValue)
+        showTop2!.setTitle(mainMemberEnum.rawValue)
         
         self.view.addSubview(tableView)
         //tableView.backgroundColor = UIColor.red

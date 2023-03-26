@@ -354,10 +354,10 @@
             </objects>
             <point key="canvasLocation" x="-178.2608695652174" y="-2190.4017857142858"/>
         </scene>
-        <!--PasswordVC-->
+        <!--View Controller-->
         <scene sceneID="oJV-Mq-jGs">
             <objects>
-                <viewController storyboardIdentifier="passwo" id="trT-Qb-e9n" customClass="PasswordVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="passwo" id="trT-Qb-e9n" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z2o-2r-ldq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

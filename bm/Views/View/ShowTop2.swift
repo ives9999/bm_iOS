@@ -117,7 +117,7 @@ class ShowTop2: UIView {
         }
     }
     
-    func setTitle(title: String) {
+    func setTitle(_ title: String) {
         titleLbl.text = title
     }
     

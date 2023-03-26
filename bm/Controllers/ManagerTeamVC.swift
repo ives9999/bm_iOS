@@ -47,7 +47,7 @@ class ManagerTeamVC: BaseViewController {
         super.viewDidLoad()
         
         showTop2 = ShowTop2(delegate: self)
-        showTop2!.setTitle(title: "我的球隊")
+        showTop2!.setTitle("我的球隊")
         
         anchor()
         refresh()
