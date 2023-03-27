@@ -25,13 +25,13 @@ class ValidateVC: BaseViewController {
     var showTop2: ShowTop2?
     
     let emailTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", keyboard: KEYBOARD.emailAddress)
+        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", isRequired: true, keyboard: KEYBOARD.emailAddress)
         
         return view
     }()
     
     let codeTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "認證碼", icon: "email_svg", placeholder: "請填寫收到的認證碼")
+        let view: MainTextField2 = MainTextField2(label: "認證碼", icon: "code_svg", placeholder: "請填寫收到的認證碼", isRequired: true)
         
         return view
     }()
@@ -51,6 +51,7 @@ class ValidateVC: BaseViewController {
             showTop2!.setTitle("手機認證")
             emailTxt2.setLabel("手機號碼")
             emailTxt2.setValue(Member.instance.mobile)
+            emailTxt2.setIcon("mobild_svg")
         }
         submitButton.delegate = self
         

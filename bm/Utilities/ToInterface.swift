@@ -328,17 +328,20 @@ extension BaseViewController {
     }
     
     func toMemberBank() {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_BANK) as? MemberBankVC {
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_BANK) as! MemberBankVC
-            viewController.modalPresentationStyle = .fullScreen
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
+        let vc: MemberBankVC = MemberBankVC()
+        vc.modalPresentationStyle = .fullScreen
+        show(vc, sender: nil)
+//        if #available(iOS 13.0, *) {
+//            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_BANK) as? MemberBankVC {
+//                viewController.modalPresentationStyle = .fullScreen
+//                show(viewController, sender: nil)
+//            }
+//        } else {
+//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_BANK) as! MemberBankVC
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.navigationController!.pushViewController(viewController, animated: true)
+//        }
     }
     
     func toMemberCartList(source: String = "order") {

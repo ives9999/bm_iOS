@@ -154,6 +154,10 @@ class MainTextField2: UIView {
         self.label.text = label
     }
     
+    func setIcon(_ icon: String) {
+        textField.setIcon(icon)
+    }
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         //print(textField.text)
         self.text = textField.text ?? ""

@@ -31,25 +31,25 @@ class PasswordVC: BaseViewController {
     var showTop2: ShowTop2?
     
     let emailTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", keyboard: KEYBOARD.emailAddress)
+        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", isRequired: true, keyboard: KEYBOARD.emailAddress)
         
         return view
     }()
     
     let oldPasswordTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "舊密碼", icon: "password_svg", placeholder: "舊密碼", isPassword: true)
+        let view: MainTextField2 = MainTextField2(label: "舊密碼", icon: "password_svg", placeholder: "舊密碼", isRequired: true, isPassword: true)
         
         return view
     }()
     
     let newPasswordTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "新密碼", icon: "password_svg", placeholder: "新密碼", isPassword: true)
+        let view: MainTextField2 = MainTextField2(label: "新密碼", icon: "password_svg", placeholder: "新密碼", isRequired: true, isPassword: true)
         
         return view
     }()
     
     let rePasswordTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "密碼確認", icon: "password_svg", placeholder: "新密碼確認", isPassword: true)
+        let view: MainTextField2 = MainTextField2(label: "密碼確認", icon: "password_svg", placeholder: "新密碼確認", isRequired: true, isPassword: true)
         
         return view
     }()

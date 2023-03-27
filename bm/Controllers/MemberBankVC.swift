@@ -10,71 +10,147 @@ import Foundation
 
 class MemberBankVC: BaseViewController {
     
-    @IBOutlet weak var dataContainer: UIView!
+//    @IBOutlet weak var dataContainer: UIView!
+//
+//    @IBOutlet var bankTF: SuperTextField!
+//    @IBOutlet var branchTF: SuperTextField!
+//    @IBOutlet var bankCodeTF: SuperTextField!
+//    @IBOutlet var accountTF: SuperTextField!
+//
+//    @IBOutlet var bankLbl: SuperLabel!
+//    @IBOutlet var branchLbl: SuperLabel!
+//    @IBOutlet var bankCodeLbl: SuperLabel!
+//    @IBOutlet var accountLbl: SuperLabel!
     
-    @IBOutlet var bankTF: SuperTextField!
-    @IBOutlet var branchTF: SuperTextField!
-    @IBOutlet var bankCodeTF: SuperTextField!
-    @IBOutlet var accountTF: SuperTextField!
+    var showTop2: ShowTop2?
     
-    @IBOutlet var bankLbl: SuperLabel!
-    @IBOutlet var branchLbl: SuperLabel!
-    @IBOutlet var bankCodeLbl: SuperLabel!
-    @IBOutlet var accountLbl: SuperLabel!
+    let nameTxt2: MainTextField2 = {
+        let view: MainTextField2 = MainTextField2(label: "銀行名稱", icon: "email_svg", placeholder: "台灣銀行", isRequired: true)
+        
+        return view
+    }()
+    
+    let branchTxt2: MainTextField2 = {
+        let view: MainTextField2 = MainTextField2(label: "分行名稱", icon: "email_svg", placeholder: "中正分行", isRequired: true)
+        
+        return view
+    }()
+    
+    let codeTxt2: MainTextField2 = {
+        let view: MainTextField2 = MainTextField2(label: "銀行代碼", icon: "code_svg", placeholder: "100", isRequired: true, keyboard: KEYBOARD.numberPad)
+        
+        return view
+    }()
+    
+    let accountTxt2: MainTextField2 = {
+        let view: MainTextField2 = MainTextField2(label: "帳號", icon: "email_svg", placeholder: "0065432", isRequired: true, keyboard: KEYBOARD.numberPad)
+        
+        return view
+    }()
+    
+    let submitButton: SubmitButton = SubmitButton()
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
-        top.setTitle(title: "會員銀行帳戶")
-        top.delegate = self
+        showTop2 = ShowTop2(delegate: self)
+        showTop2!.anchor(parent: self.view)
+        showTop2!.setTitle("會員銀行帳戶")
         
-        dataContainer.layer.cornerRadius = CORNER_RADIUS
-        dataContainer.clipsToBounds = true
-        dataContainer.backgroundColor = UIColor(SEARCH_BACKGROUND)
+        submitButton.delegate = self
         
-        bankLbl.textAlignment = .right
-        branchLbl.textAlignment = .right
-        bankCodeLbl.textAlignment = .right
-        accountLbl.textAlignment = .right
+        anchor()
         
+//        top.setTitle(title: "會員銀行帳戶")
+//        top.delegate = self
+//        
+//        dataContainer.layer.cornerRadius = CORNER_RADIUS
+//        dataContainer.clipsToBounds = true
+//        dataContainer.backgroundColor = UIColor(SEARCH_BACKGROUND)
+//        
+//        bankLbl.textAlignment = .right
+//        branchLbl.textAlignment = .right
+//        bankCodeLbl.textAlignment = .right
+//        accountLbl.textAlignment = .right
+//        
         initData()
         
     }
     
-    func initData() {
-        bankTF.text = Member.instance.bank
-        branchTF.text = Member.instance.branch
-        bankCodeTF.text = String(Member.instance.bank_code)
-        accountTF.text = Member.instance.account
+    func anchor() {
+        self.view.addSubview(nameTxt2)
+        nameTxt2.snp.makeConstraints { make in
+            make.top.equalTo(showTop2!.snp.bottom).offset(100)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        self.view.addSubview(branchTxt2)
+        branchTxt2.snp.makeConstraints { make in
+            make.top.equalTo(nameTxt2.snp.bottom).offset(36)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        self.view.addSubview(codeTxt2)
+        codeTxt2.snp.makeConstraints { make in
+            make.top.equalTo(branchTxt2.snp.bottom).offset(36)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        self.view.addSubview(accountTxt2)
+        accountTxt2.snp.makeConstraints { make in
+            make.top.equalTo(codeTxt2.snp.bottom).offset(36)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        self.view.addSubview(submitButton)
+        submitButton.snp.makeConstraints { make in
+            make.top.equalTo(accountTxt2.snp.bottom).offset(65)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(52)
+        }
     }
     
-    @IBAction func submit(_ sender: Any) {
-        
+    func initData() {
+        nameTxt2.setValue(Member.instance.bank)
+        branchTxt2.setValue(Member.instance.branch)
+        codeTxt2.setValue(String(Member.instance.bank_code))
+        accountTxt2.setValue(Member.instance.account)
+    }
+}
+
+extension MemberBankVC: SubmitButtonDelegate {
+    func submit2() {
         let member_token: String = Member.instance.token
         
         msg = ""
         
-        if bankTF.text!.count == 0 {
+        if nameTxt2.text.count == 0 {
             msg += "沒有填寫銀行名稱\n"
         }
         
-        if branchTF.text!.count == 0 {
+        if branchTxt2.text.count == 0 {
             msg += "沒有填寫分行名稱\n"
         }
         
-        if bankCodeTF.text!.count == 0 {
+        if codeTxt2.text.count == 0 {
             msg += "沒有填寫銀行代碼\n"
         }
         
-        if accountTF.text!.count == 0 {
+        if accountTxt2.text.count == 0 {
             msg += "沒有填寫銀行帳號\n"
         }
         
-        params["bank"] = bankTF.text
-        params["branch"] = branchTF.text
-        params["bank_code"] = bankCodeTF.text
-        params["account"] = accountTF.text
+        params["bank"] = nameTxt2.text
+        params["branch"] = branchTxt2.text
+        params["bank_code"] = codeTxt2.text
+        params["account"] = accountTxt2.text
         params["member_token"] = member_token
         params["do"] = "update"
         
@@ -109,27 +185,5 @@ class MemberBankVC: BaseViewController {
                 }
             }
         }
-    }
-    
-    @IBAction func clearButtonPressed(view: UIView) {
-        if let clearButton: UIButton = view as? UIButton {
-            let tag: Int = clearButton.tag
-            switch (tag) {
-            case 1:
-                self.bankTF.text = ""
-            case 2:
-                self.branchTF.text = ""
-            case 3:
-                self.bankCodeTF.text = ""
-            case 4:
-                self.accountTF.text = ""
-            default:
-                self.warning("此按鈕沒有定義")
-            }
-        }
-    }
-    
-    @IBAction func prev1() {
-        prev()
     }
 }
