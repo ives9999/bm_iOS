@@ -41,13 +41,13 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     }()
     
     let emailTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", keyboard: KEYBOARD.emailAddress)
+        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", isRequired: true, keyboard: KEYBOARD.emailAddress)
         
         return view
     }()
     
     let passwordTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "密碼", icon: "password_svg", placeholder: "密碼", isPassword: true)
+        let view: MainTextField2 = MainTextField2(label: "密碼", icon: "password_svg", placeholder: "密碼", isRequired: true, isPassword: true)
         
         return view
     }()
@@ -164,7 +164,7 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
         
         self.view.addSubview(passwordTxt2)
         passwordTxt2.snp.makeConstraints { make in
-            make.top.equalTo(emailTxt2.snp.bottom).offset(26)
+            make.top.equalTo(emailTxt2.snp.bottom).offset(36)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }

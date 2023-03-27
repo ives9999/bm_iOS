@@ -17,10 +17,23 @@ class MainTextField2: UIView {
     var value: String = ""
     var keyboard: KEYBOARD = KEYBOARD.default
     var text: String = ""
+    var isRequired: Bool = false
+    
+    var labelContainer: UIView = UIView()
     
     var label: SuperLabel = {
         let view: SuperLabel = SuperLabel()
         view.setTextBold()
+        
+        return view
+    }()
+    
+    var required: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.highlight()
+        view.text = "*必填"
+        view.setTextSize(12)
+        view.visibility = .invisible
         
         return view
     }()
@@ -48,13 +61,14 @@ class MainTextField2: UIView {
         return view
     }()
 
-    init(label: String, value: String = "", icon: String, placeholder: String? = nil, isShowDelete: Bool = true, isPassword: Bool = false, keyboard: KEYBOARD = .default) {
+    init(label: String, value: String = "", icon: String, placeholder: String? = nil, isShowDelete: Bool = true, isRequired: Bool = false, isPassword: Bool = false, keyboard: KEYBOARD = .default) {
         
         self.label.text = label
         self.value = value
         self.icon = icon
         self.placeholder = placeholder
         self.isShowDelete = isShowDelete
+        self.isRequired = isRequired
         self.isPassword = isPassword
         self.keyboard = keyboard
         
@@ -83,6 +97,10 @@ class MainTextField2: UIView {
             textField.text = value
         }
         
+        if (isRequired) {
+            required.visibility = .visible
+        }
+        
         if placeholder != nil {
             textField.placeholder = placeholder
         }
@@ -102,9 +120,19 @@ class MainTextField2: UIView {
     }
     
     func anchor() {
-        self.addSubview(label)
+        self.addSubview(labelContainer)
+        labelContainer.snp.makeConstraints { make in
+            make.top.left.right.equalToSuperview()
+        }
+        
+        labelContainer.addSubview(label)
         label.snp.makeConstraints { make in
-            make.top.left.equalToSuperview()
+            make.top.bottom.left.equalToSuperview()
+        }
+        
+        labelContainer.addSubview(required)
+        required.snp.makeConstraints { make in
+            make.bottom.right.equalToSuperview()
         }
         
         self.addSubview(textField)
