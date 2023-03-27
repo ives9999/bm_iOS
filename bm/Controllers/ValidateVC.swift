@@ -46,9 +46,11 @@ class ValidateVC: BaseViewController {
         if type == "email" {
             showTop2!.setTitle("Email認證")
             emailTxt2.setLabel("Email")
+            emailTxt2.setValue(Member.instance.email)
         } else if type == "mobile" {
             showTop2!.setTitle("手機認證")
             emailTxt2.setLabel("手機號碼")
+            emailTxt2.setValue(Member.instance.mobile)
         }
         submitButton.delegate = self
         
@@ -150,6 +152,7 @@ class ValidateVC: BaseViewController {
 
 extension ValidateVC: SubmitButtonDelegate {
     func submit2() {
+        
         let code = codeTxt2.text
         if code.count <= 0 {
             let msg = "請填寫認證碼"
@@ -159,7 +162,7 @@ extension ValidateVC: SubmitButtonDelegate {
             MemberService.instance.validate(type: type, code: code, token: Member.instance.token) { (success) in
                 Global.instance.removeSpinner(superView: self.view)
                 if (success) {
-                    
+
                     self.jsonData = MemberService.instance.jsonData
                     var s: SuccessTable = SuccessTable()
                     do {
@@ -171,15 +174,15 @@ extension ValidateVC: SubmitButtonDelegate {
                     } catch {
                         self.warning("解析JSON字串時，得到空值，請洽管理員")
                     }
-                    
+
                     if s.success {
                         self.info(msg: "認證成功", buttonTitle: "關閉") {
                             Global.instance.addSpinner(superView: self.view)
                             MemberService.instance.getOne(params: ["token": Member.instance.token]) { success in
                                 Global.instance.removeSpinner(superView: self.view)
-                                
+
                                 if success {
-                                    
+
                                     let jsonData: Data = MemberService.instance.jsonData!
                                     do {
                                         let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
@@ -194,7 +197,7 @@ extension ValidateVC: SubmitButtonDelegate {
                     } else {
                         self.warning(s.msg)
                     }
-                    
+
                 } else {
                     SCLAlertView().showWarning("警告", subTitle: MemberService.instance.msg)
                 }

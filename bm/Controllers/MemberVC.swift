@@ -773,7 +773,9 @@ extension MemberVC: IconView2Delegate {
             let qrcode: UIImage = generateQRCode(from: Member.instance.token)!
             qrcodeIV.image = qrcode
         } else if icon == "logout_svg" {
-            logout()
+            warning(msg: "是否真的要登出？", closeButtonTitle: "取消", buttonTitle: "登出") {
+                self.logout()
+            }
         }
     }
 }
