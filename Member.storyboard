@@ -222,10 +222,10 @@
             </objects>
             <point key="canvasLocation" x="-1012" y="-2085"/>
         </scene>
-        <!--ValidateVC-->
+        <!--View Controller-->
         <scene sceneID="68j-z1-Qm2">
             <objects>
-                <viewController storyboardIdentifier="UIViewController-XsO-Wn-cpI" id="XsO-Wn-cpI" customClass="ValidateVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UIViewController-XsO-Wn-cpI" id="XsO-Wn-cpI" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="FtC-eI-1dW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

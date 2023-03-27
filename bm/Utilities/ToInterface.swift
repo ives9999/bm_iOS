@@ -1263,22 +1263,28 @@ extension BaseViewController {
         }
     }
     
+    //email or mobile
     func toValidate(type: String) {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-XsO-Wn-cpI") as? ValidateVC {
-                viewController.type = type
-                viewController.delegate = self
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-XsO-Wn-cpI") as! ValidateVC
-            viewController.type = type
-            viewController.delegate = self
-            viewController.modalPresentationStyle = .fullScreen
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
+        let vc: ValidateVC = ValidateVC()
+        vc.type = type
+        vc.modalPresentationStyle = .fullScreen
+        show(vc, sender: nil)
+        
+//        if #available(iOS 13.0, *) {
+//            let storyboard = UIStoryboard(name: "Member", bundle: nil)
+//            if let viewController = storyboard.instantiateViewController(identifier: "UIViewController-XsO-Wn-cpI") as? ValidateVC {
+//                viewController.type = type
+//                viewController.delegate = self
+//                viewController.modalPresentationStyle = .fullScreen
+//                show(viewController, sender: nil)
+//            }
+//        } else {
+//            let viewController =  self.storyboard!.instantiateViewController(withIdentifier: "UIViewController-XsO-Wn-cpI") as! ValidateVC
+//            viewController.type = type
+//            viewController.delegate = self
+//            viewController.modalPresentationStyle = .fullScreen
+//            self.navigationController!.pushViewController(viewController, animated: true)
+//        }
     }
     
     func toWebView(token: String? = nil, delegate: BaseViewController? = nil) {

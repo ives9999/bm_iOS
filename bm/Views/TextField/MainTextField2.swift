@@ -122,6 +122,10 @@ class MainTextField2: UIView {
         self.text = value
     }
     
+    func setLabel(_ label: String) {
+        self.label.text = label
+    }
+    
     @objc func textFieldDidChange(_ textField: UITextField) {
         //print(textField.text)
         self.text = textField.text ?? ""

@@ -30,14 +30,6 @@ class PasswordVC: BaseViewController {
     
     var showTop2: ShowTop2?
     
-    let lbl: SuperLabel = {
-        let view: SuperLabel = SuperLabel()
-        view.setTextBoldAndSize(24)
-        view.text = "密碼"
-        
-        return view
-    }()
-    
     let emailTxt2: MainTextField2 = {
         let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", keyboard: KEYBOARD.emailAddress)
         

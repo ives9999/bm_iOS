@@ -62,6 +62,10 @@ class MemberItemVC: BaseViewController {
                 toRegister()
             } else if (memberItemEnum == MemberItemEnum.change_password) {
                 toPassword(type: "change_password")
+            } else if (memberItemEnum == MemberItemEnum.email_validate) {
+                toValidate(type: "email")
+            } else if (memberItemEnum == MemberItemEnum.mobile_validate) {
+                toValidate(type: "mobile")
             }
         } else if (mainMemberEnum == MainMemberEnum.order) {
             if (memberItemEnum == MemberItemEnum.cart) {
