@@ -293,8 +293,8 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
 extension LoginVC: SubmitButtonDelegate {
     
     func submit2() {
-        let email = emailTxt2.text
-        let password = passwordTxt2.text
+        let email = emailTxt2.value
+        let password = passwordTxt2.value
         //print(email)
         if email.count == 0 {
             SCLAlertView().showWarning("警告", subTitle: "請填寫email")

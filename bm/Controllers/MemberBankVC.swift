@@ -131,26 +131,26 @@ extension MemberBankVC: SubmitButtonDelegate {
         
         msg = ""
         
-        if nameTxt2.text.count == 0 {
+        if nameTxt2.value.count == 0 {
             msg += "沒有填寫銀行名稱\n"
         }
         
-        if branchTxt2.text.count == 0 {
+        if branchTxt2.value.count == 0 {
             msg += "沒有填寫分行名稱\n"
         }
         
-        if codeTxt2.text.count == 0 {
+        if codeTxt2.value.count == 0 {
             msg += "沒有填寫銀行代碼\n"
         }
         
-        if accountTxt2.text.count == 0 {
+        if accountTxt2.value.count == 0 {
             msg += "沒有填寫銀行帳號\n"
         }
         
-        params["bank"] = nameTxt2.text
-        params["branch"] = branchTxt2.text
-        params["bank_code"] = codeTxt2.text
-        params["account"] = accountTxt2.text
+        params["bank"] = nameTxt2.value
+        params["branch"] = branchTxt2.value
+        params["bank_code"] = codeTxt2.value
+        params["account"] = accountTxt2.value
         params["member_token"] = member_token
         params["do"] = "update"
         

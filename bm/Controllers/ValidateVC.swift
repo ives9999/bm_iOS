@@ -154,7 +154,7 @@ class ValidateVC: BaseViewController {
 extension ValidateVC: SubmitButtonDelegate {
     func submit2() {
         
-        let code = codeTxt2.text
+        let code = codeTxt2.value
         if code.count <= 0 {
             let msg = "請填寫認證碼"
             SCLAlertView().showWarning("警告", subTitle: msg)

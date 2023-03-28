@@ -351,10 +351,10 @@ class PasswordVC: BaseViewController {
 extension PasswordVC: SubmitButtonDelegate {
     func submit2() {
         if type == "forget_password" {
-            if emailTxt2.text.count == 0 {
+            if emailTxt2.value.count == 0 {
                 SCLAlertView().showWarning("警告", subTitle: "email不能為空白")
             } else {
-                let email = emailTxt2.text
+                let email = emailTxt2.value
                 Global.instance.addSpinner(superView: self.view)
                 MemberService.instance.forgetPassword(email: email, completion: { (success) in
                     Global.instance.removeSpinner(superView: self.view)
@@ -385,20 +385,20 @@ extension PasswordVC: SubmitButtonDelegate {
             
         } else if type == "change_password" {
             var msg: String = ""
-            if oldPasswordTxt2.text.count == 0 {
+            if oldPasswordTxt2.value.count == 0 {
                 msg += "舊密碼不能為空白\n"
             }
-            if newPasswordTxt2.text.count == 0 {
+            if newPasswordTxt2.value.count == 0 {
                 msg += "新密碼不能為空白\n"
             }
-            if newPasswordTxt2.text != rePasswordTxt2.text {
+            if newPasswordTxt2.value != rePasswordTxt2.value {
                 msg = "新密碼不相符"
             }
             if msg.count > 0 {
                 SCLAlertView().showWarning("警告", subTitle: msg)
             } else {
                 Global.instance.addSpinner(superView: self.view)
-                MemberService.instance.changePassword(oldPassword:oldPasswordTxt2.text,password: newPasswordTxt2.text,rePassword: rePasswordTxt2.text, completion: { (success) in
+                MemberService.instance.changePassword(oldPassword:oldPasswordTxt2.value,password: newPasswordTxt2.value,rePassword: rePasswordTxt2.value, completion: { (success) in
                     Global.instance.removeSpinner(superView: self.view)
                     if success {
                         

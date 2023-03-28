@@ -10,13 +10,23 @@ import UIKit
 
 class MainTextField2: UIView {
     
+    //前面圖標的檔名
     var icon: String?
     var placeholder: String?
+    
+    //是否要顯示刪除圖示
     var isShowDelete: Bool = true
+    
+    //是否是密碼欄位
     var isPassword: Bool = false
+    
+    //UITextField欄位值
     var value: String = ""
+    
+    //UITextField欄位填寫時所有使用的鍵盤型態
     var keyboard: KEYBOARD = KEYBOARD.default
-    var text: String = ""
+    
+    //是不是必填值
     var isRequired: Bool = false
     
     var labelContainer: UIView = UIView()
@@ -30,9 +40,13 @@ class MainTextField2: UIView {
     
     var required: SuperLabel = {
         let view: SuperLabel = SuperLabel()
+        
+        //設定紅色醒目顏色
         view.highlight()
         view.text = "*必填"
         view.setTextSize(12)
+        
+        //預設為隱藏
         view.visibility = .invisible
         
         return view
@@ -40,22 +54,26 @@ class MainTextField2: UIView {
     
     var textField: UITextField = {
         let view: UITextField = UITextField()
+        //設定背景顏色
         view.backgroundColor = UIColor(hex: "#D9D9D9", alpha: 0.1)
         
+        //設定圓角
         view.layer.cornerRadius = 5
         view.clipsToBounds = true
         
+        //設定框線
         view.layer.borderWidth = 1
         view.layer.borderColor = UIColor(hex: "#FFFFFF", alpha: 0.4).cgColor
-        view.textColor = UIColor(MY_WHITE)
         
+        //設定文字顏色與大小
+        view.textColor = UIColor(MY_WHITE)
         view.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
         
+        //設定提示文字與顏色
         view.attributedPlaceholder = NSAttributedString(
             string: "email",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor(hex: "#FFFFFF", alpha: 0.31)]
         )
-        
         view.autocapitalizationType = .none
                 
         return view
@@ -147,7 +165,7 @@ class MainTextField2: UIView {
     func setValue(_ value: String) {
         self.value = value
         textField.text = value
-        self.text = value
+        //self.text = value
     }
     
     func setLabel(_ label: String) {
@@ -160,6 +178,6 @@ class MainTextField2: UIView {
     
     @objc func textFieldDidChange(_ textField: UITextField) {
         //print(textField.text)
-        self.text = textField.text ?? ""
+        self.value = textField.text ?? ""
     }
 }
