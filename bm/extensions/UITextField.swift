@@ -9,6 +9,7 @@
 import Foundation
 
 extension UITextField {
+    
     func setIcon(_ icon: String) {
         let iconView: UIImageView = UIImageView(frame: CGRect(x:16, y:16, width: 18, height: 18))
         iconView.image = UIImage(named: icon)
