@@ -6,7 +6,7 @@
 	<dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		WtJl7nmHbx8p2KHqq6U9Y8qj3VI=
+		9We5EFewVWZRjBzV0OVJq4QU7vg=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -71,7 +71,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GmdFYLP8Zwsod7m7aemuj8E4msAflq+RJTLAA2Y/hpY=
+			YdFlpQOMH+9m9N627gcvPVwShSPrBzKvDm3E3FCYHvk=
 			</data>
 		</dict>
 		<key>Headers/OneSignalClient.h</key>
@@ -85,7 +85,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VyQrw0aZfryMun+rTRzxcBMdeAGvVlMz9eh/amNmqoE=
+			ej7YFY5O7zCa8JbWJMeJO5symZNsiwnIaUz9YKP+H+M=
 			</data>
 		</dict>
 		<key>Headers/OneSignalCore.h</key>
@@ -141,7 +141,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			lBuoiCwlIqF01k21A/EiscdNKpkdhqN/8X2GaO5sfTw=
+			KXrLIPjnqSpns73GSmupBmkrAjv2LKDqccZi8roSRy8=
 			</data>
 		</dict>
 	</dict>

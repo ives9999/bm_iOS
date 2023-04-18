@@ -1,12 +1,12 @@
 PODS:
-  - Alamofire (5.6.2)
+  - Alamofire (5.6.4)
   - AlamofireImage (4.2.0):
     - Alamofire (~> 5.4)
   - AssistantKit (0.7.1)
   - CryptoSwift (1.4.3)
   - Device.swift (1.2.2)
   - ECPayPaymentGatewayKit (1.0.5)
-  - IQKeyboardManagerSwift (6.5.10)
+  - IQKeyboardManagerSwift (6.5.11)
   - JXBanner (0.3.6):
     - JXBanner/Banner (= 0.3.6)
     - JXBanner/PageControl (= 0.3.6)
@@ -40,15 +40,15 @@ PODS:
     - JXPageControl/Common
   - KeychainSwift (16.0.1)
   - MercariQRScanner (1.9.0)
-  - OneSignalXCFramework (3.11.4):
-    - OneSignalXCFramework/OneSignalCore (= 3.11.4)
-    - OneSignalXCFramework/OneSignalExtension (= 3.11.4)
-    - OneSignalXCFramework/OneSignalOutcomes (= 3.11.4)
-  - OneSignalXCFramework/OneSignalCore (3.11.4)
-  - OneSignalXCFramework/OneSignalExtension (3.11.4):
+  - OneSignalXCFramework (3.12.5):
+    - OneSignalXCFramework/OneSignalCore (= 3.12.5)
+    - OneSignalXCFramework/OneSignalExtension (= 3.12.5)
+    - OneSignalXCFramework/OneSignalOutcomes (= 3.12.5)
+  - OneSignalXCFramework/OneSignalCore (3.12.5)
+  - OneSignalXCFramework/OneSignalExtension (3.12.5):
     - OneSignalXCFramework/OneSignalCore
     - OneSignalXCFramework/OneSignalOutcomes
-  - OneSignalXCFramework/OneSignalOutcomes (3.11.4):
+  - OneSignalXCFramework/OneSignalOutcomes (3.12.5):
     - OneSignalXCFramework/OneSignalCore
   - PromiseKit (6.8.5):
     - PromiseKit/CorePromise (= 6.8.5)
@@ -68,7 +68,7 @@ PODS:
   - SwiftyXMLParser (5.5.0)
   - SwipeCellKit (2.7.1)
   - TRVideoView (0.1.5)
-  - UIColor_Hex_Swift (5.1.7)
+  - UIColor_Hex_Swift (5.1.9)
   - YouTubePlayer (0.7.2)
 
 DEPENDENCIES:
@@ -129,18 +129,18 @@ CHECKOUT OPTIONS:
     :git: https://github.com/yahoojapan/SwiftyXMLParser.git
 
 SPEC CHECKSUMS:
-  Alamofire: d368e1ff8a298e6dde360e35a3e68e6c610e7204
+  Alamofire: 4e95d97098eacb88856099c4fc79b526a299e48c
   AlamofireImage: 34a2d90b0e5fe6a5605f85ae4b7b01e784c60192
   AssistantKit: 245d28aefcf3aeae240c8ecbe3c62714e3f1c6d4
   CryptoSwift: a0799ee936271bd2253a006f1e4523df21845000
   Device.swift: 3f93632bb3fa3e4ebb9b202563975177e17c4296
   ECPayPaymentGatewayKit: f11b3d42274d2e8150bd0e039b11ae3f0a115a89
-  IQKeyboardManagerSwift: 52962c76ab33532f15ad9f3ff4e5715eda5335bb
+  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
   JXBanner: 348dbef856e786494cbf30fb45d6b84826f2d3c5
   JXPageControl: e9487b39e2e58fc17790833214f3b8e935bef98b
   KeychainSwift: 4209611373ca4a098e09b1e547eebd87c544dcc4
   MercariQRScanner: e5aea873969af59b09b4cc411fc1c5b6293dba44
-  OneSignalXCFramework: 45932e3c1e659e1485bfd765e0543d7f30cc737b
+  OneSignalXCFramework: 4afdd14f6fa769eadf141209037e3eac5890beb9
   PromiseKit: 9616b0afef31eae56ab9ce044c8ec2b8612a15cd
   SCLAlertView: 6a77bb2edfc65e04dbe57725546cb4107a506b85
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
@@ -150,9 +150,9 @@ SPEC CHECKSUMS:
   SwiftyXMLParser: 027d9e6fb54a38d95dccec025bcea9693f699c47
   SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
   TRVideoView: dc9617f61f7d3b207b2a5ad8afe401ef7c03e51e
-  UIColor_Hex_Swift: 31cd3e47440f07a20d2503a36bb0437a445b3c29
+  UIColor_Hex_Swift: 20cb4e8d51b63e168a9da6933bc5d39cd8fb4ab5
   YouTubePlayer: 2b5f2830d8f9b2cde942083211291e382c9e6bd5
 
-PODFILE CHECKSUM: 54751365ac82dda21baa73afb444690bd85d2c79
+PODFILE CHECKSUM: a705dfe3be0d07afd677c0a366b2a431192cd23a
 
-COCOAPODS: 1.11.2
+COCOAPODS: 1.11.3

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7002AF160D5B1FABF9447A65 /* Pods_bmNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EBCFA016E036233DE90E9D0 /* Pods_bmNotificationServiceExtension.framework */; };
+		2476FB21F03B44CA735441FB /* Pods_bmNotificationServiceExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F796700863B6B0A46E3DE6B9 /* Pods_bmNotificationServiceExtension.framework */; };
 		AD59FBBC678227DDEDFF345E /* Pods_bm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31652F9C125D81A7A364F94C /* Pods_bm.framework */; };
 		B3031D6A25CD46A50044830C /* PaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3031D6925CD46A50044830C /* PaymentVC.swift */; };
 		B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B306F33B217AF31100C32CE2 /* SubmitButton.swift */; };
@@ -444,11 +444,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		255024E22D42A7EB3A09DBBE /* Pods-bmNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		31652F9C125D81A7A364F94C /* Pods_bm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7EBCFA016E036233DE90E9D0 /* Pods_bmNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bmNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		778C3C684EBF9104A5C337A2 /* Pods-bmNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		7959AE7C655411D84D31A198 /* Pods-bmNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
 		8926EF92DD421B164AAC5AAE /* Pods-bm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.debug.xcconfig"; path = "Target Support Files/Pods-bm/Pods-bm.debug.xcconfig"; sourceTree = "<group>"; };
-		9DC49E2427E34400B5AB0708 /* Pods-bmNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bmNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-bmNotificationServiceExtension/Pods-bmNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
 		B3031D6925CD46A50044830C /* PaymentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentVC.swift; sourceTree = "<group>"; };
 		B306F33B217AF31100C32CE2 /* SubmitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
 		B306F33F217DA15000C32CE2 /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
@@ -758,6 +757,7 @@
 		B3FB9B242407F7280051186F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Course.storyboard; sourceTree = "<group>"; };
 		B3FB9B262407F7EE0051186F /* TempPlay.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TempPlay.storyboard; sourceTree = SOURCE_ROOT; };
 		B45D9C2D818D36544B377579 /* Pods-bm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bm.release.xcconfig"; path = "Target Support Files/Pods-bm/Pods-bm.release.xcconfig"; sourceTree = "<group>"; };
+		F796700863B6B0A46E3DE6B9 /* Pods_bmNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bmNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
 		F92FF16F28A941280005956D /* MemberSubscriptionPayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionPayVC.swift; sourceTree = "<group>"; };
 		F9308B3A2737743F002531A1 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
@@ -844,7 +844,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7002AF160D5B1FABF9447A65 /* Pods_bmNotificationServiceExtension.framework in Frameworks */,
+				2476FB21F03B44CA735441FB /* Pods_bmNotificationServiceExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -878,8 +878,8 @@
 			children = (
 				8926EF92DD421B164AAC5AAE /* Pods-bm.debug.xcconfig */,
 				B45D9C2D818D36544B377579 /* Pods-bm.release.xcconfig */,
-				255024E22D42A7EB3A09DBBE /* Pods-bmNotificationServiceExtension.debug.xcconfig */,
-				9DC49E2427E34400B5AB0708 /* Pods-bmNotificationServiceExtension.release.xcconfig */,
+				7959AE7C655411D84D31A198 /* Pods-bmNotificationServiceExtension.debug.xcconfig */,
+				778C3C684EBF9104A5C337A2 /* Pods-bmNotificationServiceExtension.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -1280,7 +1280,7 @@
 			children = (
 				B3E4D04225F7032000D78210 /* ECPayPaymentGatewayKit.xcframework */,
 				31652F9C125D81A7A364F94C /* Pods_bm.framework */,
-				7EBCFA016E036233DE90E9D0 /* Pods_bmNotificationServiceExtension.framework */,
+				F796700863B6B0A46E3DE6B9 /* Pods_bmNotificationServiceExtension.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1519,7 +1519,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B30C95471FE82DA1005F71EF /* Build configuration list for PBXNativeTarget "bmNotificationServiceExtension" */;
 			buildPhases = (
-				07E4610CB6812439F3160595 /* [CP] Check Pods Manifest.lock */,
+				5D0E540A3F7E6767EF16EE0B /* [CP] Check Pods Manifest.lock */,
 				B30C953B1FE82DA0005F71EF /* Sources */,
 				B30C953C1FE82DA0005F71EF /* Frameworks */,
 				B30C953D1FE82DA0005F71EF /* Resources */,
@@ -1544,7 +1544,7 @@
 				B36440C01F86467600B477F9 /* CopyFiles */,
 				B30C954A1FE82DA1005F71EF /* Embed App Extensions */,
 				B3E4D14E25F9B2C000D78210 /* Embed Frameworks */,
-				EE3FE3E0F7E8615486CDE592 /* [CP] Embed Pods Frameworks */,
+				1C1F5433C412C030478BCA62 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1755,29 +1755,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		07E4610CB6812439F3160595 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-bmNotificationServiceExtension-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EE3FE3E0F7E8615486CDE592 /* [CP] Embed Pods Frameworks */ = {
+		1C1F5433C412C030478BCA62 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1843,6 +1821,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bm/Pods-bm-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5D0E540A3F7E6767EF16EE0B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bmNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FE64493E4CFB48B3A44642AF /* [CP] Check Pods Manifest.lock */ = {
@@ -2259,7 +2259,7 @@
 /* Begin XCBuildConfiguration section */
 		B30C95481FE82DA1005F71EF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 255024E22D42A7EB3A09DBBE /* Pods-bmNotificationServiceExtension.debug.xcconfig */;
+			baseConfigurationReference = 7959AE7C655411D84D31A198 /* Pods-bmNotificationServiceExtension.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;
@@ -2284,7 +2284,7 @@
 		};
 		B30C95491FE82DA1005F71EF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9DC49E2427E34400B5AB0708 /* Pods-bmNotificationServiceExtension.release.xcconfig */;
+			baseConfigurationReference = 778C3C684EBF9104A5C337A2 /* Pods-bmNotificationServiceExtension.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_ENTITLEMENTS = bmNotificationServiceExtension/bmNotificationServiceExtension.entitlements;

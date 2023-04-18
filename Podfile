@@ -13,7 +13,6 @@ target 'bm' do
   pod 'TRVideoView'
   pod 'UIColor_Hex_Swift'
   pod 'SwipeCellKit'
-  #pod 'ReachabilitySwift'
   pod 'OneSignalXCFramework', '>= 3.0.0', '< 4.0'
   
   pod 'ECPayPaymentGatewayKit', '~> 1.0.4'
@@ -52,4 +51,14 @@ pre_install do |installer|
       end
     end
   end
+end
+
+post_install do |installer|
+    installer.generated_projects.each do |project|
+        project.targets.each do |target|
+            target.build_configurations.each do |config|
+                config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '10.0'
+            end
+        end
+    end
 end
