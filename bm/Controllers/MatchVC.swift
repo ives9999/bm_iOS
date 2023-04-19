@@ -30,6 +30,14 @@ class MatchVC: BaseViewController {
         showTop2!.anchor(parent: self.view)
         showTop2!.setTitle("賽事列表")
         
+        refresh()
+    }
+    
+    override func refresh() {
+        
+        page = 1
+        tableView.getDataFromServer(page: page)
+        //getDataStart(page: page, perPage: PERPAGE)
     }
     
     func getDataFromServer(page: Int) {
@@ -38,8 +46,8 @@ class MatchVC: BaseViewController {
         dataService.getList(token: nil, _filter: params, page: page, perPage: tableView.perPage) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                //TeamService.instance.jsonData?.prettyPrintedJSONString
-                let b: Bool = self.tableView.parseJSON(jsonData: TeamService.instance.jsonData)
+                self.dataService.jsonData?.prettyPrintedJSONString
+                let b: Bool = self.tableView.parseJSON(jsonData: self.dataService.jsonData)
                 if !b && self.tableView.msg.count == 0 {
                     self.infoLbl = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop2!)
                 } else {

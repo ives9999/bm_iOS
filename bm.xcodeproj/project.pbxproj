@@ -1413,6 +1413,7 @@
 				F9FFD8B0290EC50C00AD8E52 /* ManagerTeamMemberVC.swift */,
 				F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */,
 				B3A5A28320B2CB80001A846F /* ManagerVC.swift */,
+				F983441329EEC3690050B634 /* MatchVC.swift */,
 				F99DF39C286B393300A7C2C6 /* MemberBankVC.swift */,
 				B370EFBE26AD3F2B0022E599 /* MemberCartListVC.swift */,
 				F9F80482284EEE1F006FC509 /* MemberCoinListVC.swift */,
@@ -1474,7 +1475,6 @@
 				F99DF39E28715E4C00A7C2C6 /* WebViewVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
-				F983441329EEC3690050B634 /* MatchVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
