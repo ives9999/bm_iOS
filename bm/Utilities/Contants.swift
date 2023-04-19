@@ -53,6 +53,7 @@ let URL_ISNAMEEXIST = "\(URL_HOME)%@/isNameExist"
 let URL_LIKE = "\(URL_HOME)%@" // use URL_COURSE_LIKE etc...
 let URL_LIST = "\(URL_HOME)%@"
 let URL_LOGIN = URL_HOME + "login"
+let URL_MATCH_LIST = "\(URL_HOME)match/list"
 let URL_MANAGER_SIGNUPLIST = URL_HOME + "%@/manager_signup_list"
 let URL_MEMBER_BANK = URL_HOME + "member/bank"
 let URL_MEMBER_BLACKLIST = URL_HOME + "member/blacklist"

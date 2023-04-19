@@ -64,16 +64,19 @@ class MoreVC: MyTableVC {
         let r4: MemberRow = MemberRow(title: "體育用品店", icon: "store", segue: TO_STORE)
         rows.append(r4)
         
-        let r5: MemberRow = MemberRow(title: "推播訊息", icon: "push", segue: TO_PN)
+        let r5: MemberRow = MemberRow(title: "賽事", icon: "match", segue: "toMatch")
         rows.append(r5)
+        
+        let r6: MemberRow = MemberRow(title: "推播訊息", icon: "push", segue: TO_PN)
+        rows.append(r6)
         
         let nsObject: Any? = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
         
         //Then just cast the object as a String, but be careful, you may want to double check for nil
         let version = nsObject as! String
-        let r6: MemberRow = MemberRow(title: "版本", icon: "version", show: version)
-        r6.showGreater = false
-        rows.append(r6)
+        let r7: MemberRow = MemberRow(title: "版本", icon: "version", show: version)
+        r7.showGreater = false
+        rows.append(r7)
         
         return rows
     }
@@ -124,6 +127,8 @@ class MoreVC: MyTableVC {
                 toCoach()
             }else if segue == TO_STORE {
                 toStore()
+            } else if segue == "toMatch" {
+                toMatch()
             } else {
                 //performSegue(withIdentifier: segue, sender: row["sender"])
             }
@@ -139,6 +144,7 @@ extension MoreVC: MainBottom2Delegate {
         case "member": toMember()
         case "arena": toArena()
         case "more": toMore()
+        case "match": toMatch()
         default:
             toTeam()
         }

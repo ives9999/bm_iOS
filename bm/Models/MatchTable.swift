@@ -1,0 +1,54 @@
+//
+//  MatchTable.swift
+//  bm
+//
+//  Created by ives on 2023/4/18.
+//  Copyright © 2023 bm. All rights reserved.
+//
+
+import Foundation
+
+class MatchesTable: Tables {
+    
+    var rows: [MatchTable] = [MatchTable]()
+    
+    enum CodingKeys: String, CodingKey {
+        case rows
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        rows = try container.decode([MatchTable].self, forKey: .rows)
+    }
+}
+
+class MatchTable: Table {
+    var arena_id: Int = 0
+    var start_datetime: String = ""
+    var end_datetime: String = ""
+    var ball: String = ""
+    
+    enum CodingKeys: String, CodingKey {
+        case arena_id
+        case start_datetime
+        case end_datetime
+        case ball
+    }
+    
+    required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {arena_id = try container.decode(Int.self, forKey: .arena_id)}catch{arena_id = 0}
+        do {start_datetime = try container.decode(String.self, forKey: .start_datetime)}catch{start_datetime = ""}
+        do {end_datetime = try container.decode(String.self, forKey: .end_datetime)}catch{end_datetime = ""}
+        do {ball = try container.decode(String.self, forKey: .ball)}catch{ball = ""}
+    }
+    
+    override func filterRow() {
+        
+        super.filterRow()
+    }
+}

@@ -342,6 +342,12 @@
 		F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */; };
 		F9763E1628B62D57006ED47C /* MemberSubscriptionLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9763E1528B62D57006ED47C /* MemberSubscriptionLogVC.swift */; };
 		F9763E1828B6851A006ED47C /* MemberSubscriptionLogCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9763E1728B6851A006ED47C /* MemberSubscriptionLogCell.xib */; };
+		F983441429EEC3690050B634 /* MatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441329EEC3690050B634 /* MatchVC.swift */; };
+		F983441629EEEE950050B634 /* MatchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441529EEEE950050B634 /* MatchTable.swift */; };
+		F983441829EEF49C0050B634 /* MatchGroupTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441729EEF49C0050B634 /* MatchGroupTable.swift */; };
+		F983441A29EEF5C00050B634 /* MatchContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441929EEF5C00050B634 /* MatchContact.swift */; };
+		F983441C29EEF6E20050B634 /* MatchPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441B29EEF6E20050B634 /* MatchPlayer.swift */; };
+		F983441E29EEFA380050B634 /* MatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441D29EEFA380050B634 /* MatchService.swift */; };
 		F985F4622956BF3900636FEA /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985F4612956BF3900636FEA /* UIView.swift */; };
 		F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */; };
 		F98F928229AD091E00A4039E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98F928129AD091E00A4039E /* UIImage.swift */; };
@@ -795,6 +801,12 @@
 		F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayListCell.swift; sourceTree = "<group>"; };
 		F9763E1528B62D57006ED47C /* MemberSubscriptionLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionLogVC.swift; sourceTree = "<group>"; };
 		F9763E1728B6851A006ED47C /* MemberSubscriptionLogCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberSubscriptionLogCell.xib; sourceTree = "<group>"; };
+		F983441329EEC3690050B634 /* MatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchVC.swift; sourceTree = "<group>"; };
+		F983441529EEEE950050B634 /* MatchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTable.swift; sourceTree = "<group>"; };
+		F983441729EEF49C0050B634 /* MatchGroupTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchGroupTable.swift; sourceTree = "<group>"; };
+		F983441929EEF5C00050B634 /* MatchContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchContact.swift; sourceTree = "<group>"; };
+		F983441B29EEF6E20050B634 /* MatchPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPlayer.swift; sourceTree = "<group>"; };
+		F983441D29EEFA380050B634 /* MatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchService.swift; sourceTree = "<group>"; };
 		F985F4612956BF3900636FEA /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		F98F928129AD091E00A4039E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -1058,6 +1070,7 @@
 				B32D9EE521106C5F00999A4A /* TeachService.swift */,
 				B3ED38E91FB87EE50003F083 /* TeamService.swift */,
 				B306FEA921F7446F00403FE2 /* TimetableService.swift */,
+				F983441D29EEFA380050B634 /* MatchService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1461,6 +1474,7 @@
 				F99DF39E28715E4C00A7C2C6 /* WebViewVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
+				F983441329EEC3690050B634 /* MatchVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1478,6 +1492,10 @@
 				B3F6B44B2604F4B40000F9E0 /* DateTable.swift */,
 				B3591B6F2164CC6100E0919C /* Degree.swift */,
 				B35F8DD81F8F64310073BD70 /* Home.swift */,
+				F983441929EEF5C00050B634 /* MatchContact.swift */,
+				F983441729EEF49C0050B634 /* MatchGroupTable.swift */,
+				F983441B29EEF6E20050B634 /* MatchPlayer.swift */,
+				F983441529EEEE950050B634 /* MatchTable.swift */,
 				B31CD34726F19D52001B3848 /* MemberTable.swift */,
 				B3F6B479260603A70000F9E0 /* OrderTable.swift */,
 				B3F6B46C2605E80F0000F9E0 /* PaymentTable.swift */,
@@ -1885,6 +1903,7 @@
 				B33C1AC321BE669F006F2BEB /* TextFieldFormItem.swift in Sources */,
 				B3B7587525A1B06C006ACC33 /* ShowProductVC.swift in Sources */,
 				F9FA3C3627E32A3B0094C773 /* _tab_search.swift in Sources */,
+				F983441829EEF49C0050B634 /* MatchGroupTable.swift in Sources */,
 				B358B0B422A0F66A00F1A4E6 /* PriceUnitFormItem.swift in Sources */,
 				B3756EEC21BA6AAA006893E1 /* StatusCell.swift in Sources */,
 				B3BC325E298E07CB00243C21 /* Avatar.swift in Sources */,
@@ -1911,6 +1930,7 @@
 				B3A253D8256A57B6004B8A03 /* StoreForm.swift in Sources */,
 				B33C1ABD21BD300E006F2BEB /* TimeFormItem.swift in Sources */,
 				B3E72A191F9CBE9F0008A6B1 /* TeachVC.swift in Sources */,
+				F983441A29EEF5C00050B634 /* MatchContact.swift in Sources */,
 				B3ED38E81FB852EB0003F083 /* FormCell.swift in Sources */,
 				B3E8C29B220603310008ED25 /* ShowCoachVC.swift in Sources */,
 				B36D66B8229997AD00502D62 /* ManagerCourseVC.swift in Sources */,
@@ -1919,6 +1939,7 @@
 				B3A9843125552DBB00DCD0F6 /* ManagerStoreVC.swift in Sources */,
 				B3B758F325BB08CD006ACC33 /* OrderService.swift in Sources */,
 				B313272429A884B300EAB782 /* TeamTempPlayTable.swift in Sources */,
+				F983441E29EEFA380050B634 /* MatchService.swift in Sources */,
 				B31ADD9325905387003E86BD /* Zone.swift in Sources */,
 				F9FA3C3C27E4C60C0094C773 /* tab_search.swift in Sources */,
 				B3E4D1D22602EF1900D78210 /* TeachTable.swift in Sources */,
@@ -2029,6 +2050,7 @@
 				B3B7589B25A95EAD006ACC33 /* Color1FormItem.swift in Sources */,
 				B3310D8A22AA20A50062EF98 /* CourseKindFormItem.swift in Sources */,
 				B3308C4D1FD9575E006A83B6 /* Tag.swift in Sources */,
+				F983441C29EEF6E20050B634 /* MatchPlayer.swift in Sources */,
 				B39E5F7C263BCDC100C40BA7 /* LikeIcon.swift in Sources */,
 				F9A6751D27FAF605007C8F47 /* Top.swift in Sources */,
 				B3E4D1C826024C8F00D78210 /* CoachTable.swift in Sources */,
@@ -2169,8 +2191,10 @@
 				B326C7BC256CE0950048A2C2 /* SelectCitysVC.swift in Sources */,
 				B3E4D17C25FF9E3900D78210 /* Table.swift in Sources */,
 				B362265D25E54C9D00D98317 /* HomeTotalAdVC.swift in Sources */,
+				F983441429EEC3690050B634 /* MatchVC.swift in Sources */,
 				B3CABD8926B6A66B00FD0E4D /* RadioCell.swift in Sources */,
 				B3E4D1CD2602DD7E00D78210 /* ArenaTable.swift in Sources */,
+				F983441629EEEE950050B634 /* MatchTable.swift in Sources */,
 				B3A253E4256BCBB8004B8A03 /* AreaFormItem.swift in Sources */,
 				B33C1ABF21BD7F2C006F2BEB /* WeekdayFormItem.swift in Sources */,
 				B337B9A91FE2986B00C3EE28 /* TempPlayTableHeaderView.swift in Sources */,
