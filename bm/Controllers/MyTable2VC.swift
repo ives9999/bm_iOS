@@ -48,11 +48,16 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
         
         super.init(frame: CGRect.zero, style: .plain)
         
-        self.backgroundColor = UIColor(MY_BLACK)
-        
         register(T.self, forCellReuseIdentifier: T.identifier)
         //register(T.nibName, forCellReuseIdentifier: T.identifier)
         //registerCell()
+        estimatedRowHeight = 44
+        rowHeight = UITableView.automaticDimension
+        
+//        separatorStyle = .singleLine
+//        separatorColor = UIColor.lightGray
+        
+        self.backgroundColor = UIColor(MY_BLACK)
         
         if isRefresh {
             beginRefresh()
@@ -108,14 +113,6 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
 //        } else {
 //            bottomAnchor.constraint(equalTo: parent.bottomAnchor).isActive = true
 //        }
-        
-        backgroundColor = UIColor(MY_BLACK)
-        
-        estimatedRowHeight = 44
-        rowHeight = UITableView.automaticDimension
-        
-        separatorStyle = .singleLine
-        separatorColor = UIColor.lightGray
     }
     
     @objc func refresh() {

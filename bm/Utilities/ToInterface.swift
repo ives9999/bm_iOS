@@ -1058,6 +1058,14 @@ extension BaseViewController {
         }
     }
     
+    func toShowMatch(token: String) {
+        
+        let v: ShowMatchVC = ShowMatchVC()
+        v.token = token
+        v.modalPresentationStyle = .fullScreen
+        show(v, sender: nil)
+    }
+    
     func toShowPNVC() {
         if #available(iOS 13.0, *) {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
@@ -1110,18 +1118,6 @@ extension BaseViewController {
         v.token = token
         v.modalPresentationStyle = .fullScreen
         show(v, sender: nil)
-//        if #available(iOS 13.0, *) {
-//            let storyboard = UIStoryboard(name: "Team", bundle: nil)
-//            if let viewController = storyboard.instantiateViewController(identifier: TO_SHOW_TEAM)  as? ShowTeamVC {
-//                viewController.token = token
-//                viewController.modalPresentationStyle = .fullScreen
-//                show(viewController, sender: nil)
-//            }
-//        } else {
-//            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_SHOW_TEAM) as! ShowTeamVC
-//            viewController.token = token
-//            self.navigationController!.pushViewController(viewController, animated: true)
-//        }
     }
 
     func toShowProduct(token: String) {

@@ -30,11 +30,14 @@ class MatchTable: Table {
     var end_datetime: String = ""
     var ball: String = ""
     
+    var arena_name: String = ""
+    
     enum CodingKeys: String, CodingKey {
         case arena_id
         case start_datetime
         case end_datetime
         case ball
+        case arena_name
     }
     
     required init(from decoder: Decoder) throws {
@@ -45,6 +48,7 @@ class MatchTable: Table {
         do {start_datetime = try container.decode(String.self, forKey: .start_datetime)}catch{start_datetime = ""}
         do {end_datetime = try container.decode(String.self, forKey: .end_datetime)}catch{end_datetime = ""}
         do {ball = try container.decode(String.self, forKey: .ball)}catch{ball = ""}
+        do {arena_name = try container.decode(String.self, forKey: .arena_name)}catch{arena_name = ""}
     }
     
     override func filterRow() {
