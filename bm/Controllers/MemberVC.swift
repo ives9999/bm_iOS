@@ -82,7 +82,7 @@ class MemberVC: BaseViewController {
         return view
     }()
         
-    var memberSections: [MemberSection] = [MemberSection]()
+    var memberSections: [IconTextSection] = [IconTextSection]()
     var rows: [MainMemberTable] = [MainMemberTable]()
     
     let heightForSection: CGFloat = 34

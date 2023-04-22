@@ -12,7 +12,7 @@ class ManagerSignupVC: MyTableVC {
     
     @IBOutlet weak var titleLbl: UILabel!
     
-    var managerRows: [MemberRow] = [MemberRow]()
+    var managerRows: [IconTextRow] = [IconTextRow]()
     var able_token: String = ""
     var able_title: String = ""
     
@@ -31,19 +31,19 @@ class ManagerSignupVC: MyTableVC {
         //print(able_token)
     }
     
-    func initRows()-> [MemberRow] {
+    func initRows()-> [IconTextRow] {
         
-        var rows: [MemberRow] = [MemberRow]()
+        var rows: [IconTextRow] = [IconTextRow]()
         
         var tmp: String = "臨打報名列表"
         if (able_type == "course") {
             tmp = "課程報名管理"
         }
-        let r1: MemberRow = MemberRow(title: tmp, icon: "signup", segue: TO_MANAGER_SIGNUPLIST)
+        let r1: IconTextRow = IconTextRow(title: tmp, icon: "signup", segue: TO_MANAGER_SIGNUPLIST)
         r1.color = UIColor(MY_WEIGHT_RED)
         rows.append(r1)
         
-        let r2: MemberRow = MemberRow(title: "黑名單", icon: "blacklist", segue: TO_BLACKLIST)
+        let r2: IconTextRow = IconTextRow(title: "黑名單", icon: "blacklist", segue: TO_BLACKLIST)
         r2.color = UIColor(MY_LIGHT_WHITE)
         rows.append(r2)
         
@@ -64,7 +64,7 @@ class ManagerSignupVC: MyTableVC {
         let cell: MenuCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
         //cell.delegate = self
 
-        let row: MemberRow = managerRows[indexPath.row]
+        let row: IconTextRow = managerRows[indexPath.row]
         
         //let row: [String: Any] = rows![indexPath.section][indexPath.row]
         cell.setRow(row: row)
@@ -74,7 +74,7 @@ class ManagerSignupVC: MyTableVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
-        let row: MemberRow = managerRows[indexPath.row]
+        let row: IconTextRow = managerRows[indexPath.row]
         let segue = row.segue
         
         if segue == TO_MANAGER_SIGNUPLIST {

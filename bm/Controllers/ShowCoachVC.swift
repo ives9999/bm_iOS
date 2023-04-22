@@ -154,23 +154,23 @@ class ShowCoachVC: ShowVC {
         }
         
         myTable = table as? CoachTable
-        var row: MemberRow = MemberRow(title: "行動電話", icon: "mobile", show: myTable!.mobile)
+        var row: IconTextRow = IconTextRow(title: "行動電話", icon: "mobile", show: myTable!.mobile)
         memberRows.append(row)
-        row = MemberRow(title: "line", icon: "line", show: myTable!.line)
+        row = IconTextRow(title: "line", icon: "line", show: myTable!.line)
         memberRows.append(row)
-        row = MemberRow(title: "fb", icon: "fb", show: myTable!.fb)
+        row = IconTextRow(title: "fb", icon: "fb", show: myTable!.fb)
         memberRows.append(row)
-        row = MemberRow(title: "youtube", icon: "youtube", show: myTable!.youtube)
+        row = IconTextRow(title: "youtube", icon: "youtube", show: myTable!.youtube)
         memberRows.append(row)
-        row = MemberRow(title: "網站", icon: "website", show: myTable!.website)
+        row = IconTextRow(title: "網站", icon: "website", show: myTable!.website)
         memberRows.append(row)
-        row = MemberRow(title: "EMail", icon: "email1", show: myTable!.email)
+        row = IconTextRow(title: "EMail", icon: "email1", show: myTable!.email)
         memberRows.append(row)
-        row = MemberRow(title: "年資", icon: "seniority", show: myTable!.seniority_show)
+        row = IconTextRow(title: "年資", icon: "seniority", show: myTable!.seniority_show)
         memberRows.append(row)
-        row = MemberRow(title: "瀏覽數", icon: "pv", show: String(myTable!.pv))
+        row = IconTextRow(title: "瀏覽數", icon: "pv", show: String(myTable!.pv))
         memberRows.append(row)
-        row = MemberRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
+        row = IconTextRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
         memberRows.append(row)
     }
     
@@ -249,7 +249,7 @@ class ShowCoachVC: ShowVC {
         if tableView == self.tableView {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
             
-            let row: MemberRow = memberRows[indexPath.row]
+            let row: IconTextRow = memberRows[indexPath.row]
             cell.update(icon: row.icon, title: row.title, content: row.show)
             
             //填入資料

@@ -11,7 +11,7 @@ import SCLAlertView
 
 class MoreVC: MyTableVC {
     
-    var moreRows: [MemberRow] = [MemberRow]()
+    var moreRows: [IconTextRow] = [IconTextRow]()
         
 //    var _rows: [[Dictionary<String, Any>]] = [
 //        [
@@ -47,34 +47,34 @@ class MoreVC: MyTableVC {
         mainBottom2.delegate = self
     }
     
-    func initMoreRows()-> [MemberRow] {
+    func initMoreRows()-> [IconTextRow] {
         
-        var rows: [MemberRow] = [MemberRow]()
+        var rows: [IconTextRow] = [IconTextRow]()
         
-        let r1: MemberRow = MemberRow(title: "商品", icon: "product", segue: TO_PRODUCT)
+        let r1: IconTextRow = IconTextRow(title: "商品", icon: "product", segue: TO_PRODUCT)
         r1.color = UIColor(MY_LIGHT_RED)
         rows.append(r1)
         
-        let r2: MemberRow = MemberRow(title: "教學", icon: "teach", segue: TO_TEACH)
+        let r2: IconTextRow = IconTextRow(title: "教學", icon: "teach", segue: TO_TEACH)
         rows.append(r2)
         
-        let r3: MemberRow = MemberRow(title: "教練", icon: "coach", segue: TO_COACH)
+        let r3: IconTextRow = IconTextRow(title: "教練", icon: "coach", segue: TO_COACH)
         rows.append(r3)
         
-        let r4: MemberRow = MemberRow(title: "體育用品店", icon: "store", segue: TO_STORE)
+        let r4: IconTextRow = IconTextRow(title: "體育用品店", icon: "store", segue: TO_STORE)
         rows.append(r4)
         
-        let r5: MemberRow = MemberRow(title: "賽事", icon: "match", segue: "toMatch")
+        let r5: IconTextRow = IconTextRow(title: "賽事", icon: "match", segue: "toMatch")
         rows.append(r5)
         
-        let r6: MemberRow = MemberRow(title: "推播訊息", icon: "push", segue: TO_PN)
+        let r6: IconTextRow = IconTextRow(title: "推播訊息", icon: "push", segue: TO_PN)
         rows.append(r6)
         
         let nsObject: Any? = Bundle.main.infoDictionary?["CFBundleShortVersionString"]
         
         //Then just cast the object as a String, but be careful, you may want to double check for nil
         let version = nsObject as! String
-        let r7: MemberRow = MemberRow(title: "版本", icon: "version", show: version)
+        let r7: IconTextRow = IconTextRow(title: "版本", icon: "version", show: version)
         r7.showGreater = false
         rows.append(r7)
         
@@ -92,7 +92,7 @@ class MoreVC: MyTableVC {
         //let cell: MoreCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MoreCell
         //cell.delegate = self
 
-        let row: MemberRow = moreRows[indexPath.row]
+        let row: IconTextRow = moreRows[indexPath.row]
         
         //let row: [String: Any] = rows![indexPath.section][indexPath.row]
         cell.setRow(row: row)
@@ -114,7 +114,7 @@ class MoreVC: MyTableVC {
 //            let alert = SCLAlertView(appearance: appearance)
 //            alert.showInfo(version, subTitle: "")
 //        } else {
-            let row: MemberRow = moreRows[indexPath.row]
+            let row: IconTextRow = moreRows[indexPath.row]
             let segue = row.segue
             if segue == TO_PRODUCT {
                 toProduct()

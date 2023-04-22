@@ -9,20 +9,20 @@
 import Foundation
 import UIKit
 
-class MemberSection {
+class IconTextSection {
     
     var title: String = ""
     var isExpanded: Bool = true
-    var items: [MemberRow] = [MemberRow]()
+    var items: [IconTextRow] = [IconTextRow]()
     
-    init(title: String = "", isExpanded: Bool = true, items: [MemberRow] = [MemberRow]()) {
+    init(title: String = "", isExpanded: Bool = true, items: [IconTextRow] = [IconTextRow]()) {
         self.title = title
         self.isExpanded = isExpanded
         self.items = items
     }
 }
 
-class MemberRow {
+class IconTextRow {
     
     var title: String = ""
     var icon: String = ""

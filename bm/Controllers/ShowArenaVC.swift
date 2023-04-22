@@ -44,25 +44,25 @@ class ShowArenaVC: ShowVC {
         }
         
         myTable = table as? ArenaTable
-        var row: MemberRow = MemberRow(title: "電話", icon: "tel", show: myTable!.tel_show)
+        var row: IconTextRow = IconTextRow(title: "電話", icon: "tel", show: myTable!.tel_show)
         memberRows.append(row)
-        row = MemberRow(title: "住址", icon: "map", show: myTable!.address)
+        row = IconTextRow(title: "住址", icon: "map", show: myTable!.address)
         memberRows.append(row)
-        row = MemberRow(title: "fb", icon: "fb", show: myTable!.fb)
+        row = IconTextRow(title: "fb", icon: "fb", show: myTable!.fb)
         memberRows.append(row)
-        row = MemberRow(title: "時段", icon: "clock", show: myTable!.interval_show)
+        row = IconTextRow(title: "時段", icon: "clock", show: myTable!.interval_show)
         memberRows.append(row)
-        row = MemberRow(title: "場地", icon: "block", show: myTable!.block_show)
+        row = IconTextRow(title: "場地", icon: "block", show: myTable!.block_show)
         memberRows.append(row)
-        row = MemberRow(title: "浴室", icon: "bathroom", show: myTable!.bathroom_show)
+        row = IconTextRow(title: "浴室", icon: "bathroom", show: myTable!.bathroom_show)
         memberRows.append(row)
-        row = MemberRow(title: "空調", icon: "air_condition", show: myTable!.air_condition_show)
+        row = IconTextRow(title: "空調", icon: "air_condition", show: myTable!.air_condition_show)
         memberRows.append(row)
-        row = MemberRow(title: "停車場", icon: "parking", show: myTable!.air_condition_show)
+        row = IconTextRow(title: "停車場", icon: "parking", show: myTable!.air_condition_show)
         memberRows.append(row)
-        row = MemberRow(title: "瀏覽數", icon: "pv", show: String(myTable!.pv))
+        row = IconTextRow(title: "瀏覽數", icon: "pv", show: String(myTable!.pv))
         memberRows.append(row)
-        row = MemberRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
+        row = IconTextRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
         memberRows.append(row)
     }
 
@@ -119,7 +119,7 @@ class ShowArenaVC: ShowVC {
         if tableView == self.tableView {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
             
-            let row: MemberRow = memberRows[indexPath.row]
+            let row: IconTextRow = memberRows[indexPath.row]
             cell.update(icon: row.icon, title: row.title, content: row.show)
             
             //填入資料

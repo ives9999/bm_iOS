@@ -136,7 +136,7 @@ class MenuCell: UITableViewCell {
 //        titleLbl.sizeToFit()
 //    }
     
-    func setRow(row: MemberRow) {
+    func setRow(row: IconTextRow) {
         
         if row.icon.count > 0 {
             iconView.isHidden = false

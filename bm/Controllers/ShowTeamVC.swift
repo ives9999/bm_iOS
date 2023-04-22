@@ -296,7 +296,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     var tempPlayTotalPage: Int = 0
     
     var items2: [TeamTempPlayTable] = [TeamTempPlayTable]()
-    var memberRows: [MemberRow] = [MemberRow]()
+    var memberRows: [IconTextRow] = [IconTextRow]()
     var tempPlayCount: Int = 0
     //var standbyCount: Int = 0
     
@@ -871,48 +871,48 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
     
     func setIntroduceData() {
         
-        var row: MemberRow = MemberRow()
+        var row: IconTextRow = IconTextRow()
         
         if myTable != nil && myTable!.arena != nil {
         
-            row = MemberRow(title: "球館", icon: "arena_on_svg", show: myTable!.arena!.name)
+            row = IconTextRow(title: "球館", icon: "arena_on_svg", show: myTable!.arena!.name)
             memberRows.append(row)
-            row = MemberRow(title: "縣市", icon: "city_svg", show: myTable!.arena!.city_show)
+            row = IconTextRow(title: "縣市", icon: "city_svg", show: myTable!.arena!.city_show)
             memberRows.append(row)
-            row = MemberRow(title: "區域", icon: "area_svg", show: myTable!.arena!.area_show)
+            row = IconTextRow(title: "區域", icon: "area_svg", show: myTable!.arena!.area_show)
             memberRows.append(row)
         }
-        row = MemberRow(title: "星期", icon: "calendar_svg", show: myTable!.weekdays_show)
+        row = IconTextRow(title: "星期", icon: "calendar_svg", show: myTable!.weekdays_show)
         memberRows.append(row)
-        row = MemberRow(title: "時段", icon: "clock_svg", show: myTable!.interval_show)
+        row = IconTextRow(title: "時段", icon: "clock_svg", show: myTable!.interval_show)
         memberRows.append(row)
-        row = MemberRow(title: "球種", icon: "ball_svg", show: myTable!.ball)
+        row = IconTextRow(title: "球種", icon: "ball_svg", show: myTable!.ball)
         memberRows.append(row)
-        row = MemberRow(title: "程度", icon: "degree_svg", show: myTable!.degree_show)
+        row = IconTextRow(title: "程度", icon: "degree_svg", show: myTable!.degree_show)
         memberRows.append(row)
-        row = MemberRow(title: "場地", icon: "block_svg", show: myTable!.block_show)
+        row = IconTextRow(title: "場地", icon: "block_svg", show: myTable!.block_show)
         memberRows.append(row)
-        row = MemberRow(title: "費用-男", icon: "fee_svg", show: myTable!.temp_fee_M_show)
+        row = IconTextRow(title: "費用-男", icon: "fee_svg", show: myTable!.temp_fee_M_show)
         memberRows.append(row)
-        row = MemberRow(title: "費用-女", icon: "fee_svg", show: myTable!.temp_fee_F_show)
+        row = IconTextRow(title: "費用-女", icon: "fee_svg", show: myTable!.temp_fee_F_show)
         memberRows.append(row)
-        row = MemberRow(title: "管理者", icon: "manager_svg", show: myTable!.manager_nickname)
+        row = IconTextRow(title: "管理者", icon: "manager_svg", show: myTable!.manager_nickname)
         memberRows.append(row)
-        row = MemberRow(title: "行動電話", icon: "mobile_svg", show: myTable!.mobile_show)
+        row = IconTextRow(title: "行動電話", icon: "mobile_svg", show: myTable!.mobile_show)
         memberRows.append(row)
-        row = MemberRow(title: "line", icon: "line_svg", show: myTable!.line)
+        row = IconTextRow(title: "line", icon: "line_svg", show: myTable!.line)
         memberRows.append(row)
-        row = MemberRow(title: "FB", icon: "fb_svg", show: myTable!.fb)
+        row = IconTextRow(title: "FB", icon: "fb_svg", show: myTable!.fb)
         memberRows.append(row)
-        row = MemberRow(title: "Youtube", icon: "youtube_svg", show: myTable!.youtube)
+        row = IconTextRow(title: "Youtube", icon: "youtube_svg", show: myTable!.youtube)
         memberRows.append(row)
-//        row = MemberRow(title: "網站", icon: "website", show: myTable!.website)
+//        row = IconTextRow(title: "網站", icon: "website", show: myTable!.website)
 //        memberRows.append(row)
-        row = MemberRow(title: "EMail", icon: "email_svg", show: myTable!.email)
+        row = IconTextRow(title: "EMail", icon: "email_svg", show: myTable!.email)
         memberRows.append(row)
-        row = MemberRow(title: "瀏覽數", icon: "pv_svg", show: String(myTable!.pv))
+        row = IconTextRow(title: "瀏覽數", icon: "pv_svg", show: String(myTable!.pv))
         memberRows.append(row)
-        row = MemberRow(title: "建立日期", icon: "createdAt_svg", show: myTable!.created_at_show)
+        row = IconTextRow(title: "建立日期", icon: "createdAt_svg", show: myTable!.created_at_show)
         memberRows.append(row)
         
         self.showTop2!.setTitle(myTable!.name)
@@ -1642,7 +1642,7 @@ extension ShowTeamVC: UITableViewDelegate, UITableViewDataSource {
             
             //let cell: ShowSignupCell = tableView.dequeueReusableCell(withIdentifier: "ShowSignupCell", for: indexPath) as! ShowSignupCell
 
-            let row: MemberRow = memberRows[indexPath.row]
+            let row: IconTextRow = memberRows[indexPath.row]
             cell.update(icon: row.icon, title: row.title, content: row.show)
             cell.setSelectedBackgroundColor()
 

@@ -313,7 +313,7 @@
 		B3FB9B272407F7EE0051186F /* TempPlay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3FB9B262407F7EE0051186F /* TempPlay.storyboard */; };
 		F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F90423B81F83748C00DC8B1E /* TeamVC.swift */; };
 		F92FF17028A941280005956D /* MemberSubscriptionPayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F92FF16F28A941280005956D /* MemberSubscriptionPayVC.swift */; };
-		F9308B3B2737743F002531A1 /* MemberRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3A2737743F002531A1 /* MemberRow.swift */; };
+		F9308B3B2737743F002531A1 /* IconText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3A2737743F002531A1 /* IconText.swift */; };
 		F9308B3E273954AB002531A1 /* SwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B3C273954AB002531A1 /* SwitchCell.swift */; };
 		F9308B3F273954AB002531A1 /* SwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9308B3D273954AB002531A1 /* SwitchCell.xib */; };
 		F9308B41273E6A04002531A1 /* SignupDateTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9308B40273E6A04002531A1 /* SignupDateTable.swift */; };
@@ -767,7 +767,7 @@
 		F796700863B6B0A46E3DE6B9 /* Pods_bmNotificationServiceExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bmNotificationServiceExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F90423B81F83748C00DC8B1E /* TeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamVC.swift; sourceTree = "<group>"; };
 		F92FF16F28A941280005956D /* MemberSubscriptionPayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionPayVC.swift; sourceTree = "<group>"; };
-		F9308B3A2737743F002531A1 /* MemberRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberRow.swift; sourceTree = "<group>"; };
+		F9308B3A2737743F002531A1 /* IconText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconText.swift; sourceTree = "<group>"; };
 		F9308B3C273954AB002531A1 /* SwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCell.swift; sourceTree = "<group>"; };
 		F9308B3D273954AB002531A1 /* SwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchCell.xib; sourceTree = "<group>"; };
 		F9308B40273E6A04002531A1 /* SignupDateTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupDateTable.swift; sourceTree = "<group>"; };
@@ -1528,7 +1528,7 @@
 			children = (
 				F9FAB2B5271EFD8100D83CC4 /* SearchRow.swift */,
 				F9FAB2B72721643000D83CC4 /* OneRow.swift */,
-				F9308B3A2737743F002531A1 /* MemberRow.swift */,
+				F9308B3A2737743F002531A1 /* IconText.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -2212,7 +2212,7 @@
 				B3E4D1C32601FD0A00D78210 /* TeamTable.swift in Sources */,
 				B39453DB2230F516005E3027 /* OneSignal.swift in Sources */,
 				B306FEA321F1A35700403FE2 /* SuperDatePicker.swift in Sources */,
-				F9308B3B2737743F002531A1 /* MemberRow.swift in Sources */,
+				F9308B3B2737743F002531A1 /* IconText.swift in Sources */,
 				B39E5FEA2642A3AD00C40BA7 /* ShowVC.swift in Sources */,
 				B317855B20D9089600765CA1 /* BlackListCell.swift in Sources */,
 				B306F340217DA15000C32CE2 /* Area.swift in Sources */,

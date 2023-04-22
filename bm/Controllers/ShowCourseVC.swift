@@ -120,11 +120,11 @@ class ShowCourseVC: BaseViewController, WKNavigationDelegate {
     }()
     //var contentWebViewConstraintHeight: NSLayoutConstraint?
     
-    var coachRows: [MemberRow] = [MemberRow]()
+    var coachRows: [IconTextRow] = [IconTextRow]()
     
     var token: String?
     var table: Table?
-    var memberRows: [MemberRow] = [MemberRow]()
+    var memberRows: [IconTextRow] = [IconTextRow]()
     
     override func viewDidLoad() {
 
@@ -412,23 +412,23 @@ class ShowCourseVC: BaseViewController, WKNavigationDelegate {
         }
 
         myTable = table as? CourseTable
-        var row: MemberRow = MemberRow(title: "星期", icon: "date", show: myTable!.weekday_text)
+        var row: IconTextRow = IconTextRow(title: "星期", icon: "date", show: myTable!.weekday_text)
         memberRows.append(row)
-        row = MemberRow(title: "時段", icon: "clock", show: myTable!.interval_show)
+        row = IconTextRow(title: "時段", icon: "clock", show: myTable!.interval_show)
         memberRows.append(row)
         if myTable!.dateTable != nil {
-            row = MemberRow(title: "期間", icon: "date", show: myTable!.dateTable!.date)
+            row = IconTextRow(title: "期間", icon: "date", show: myTable!.dateTable!.date)
             memberRows.append(row)
         }
-        row = MemberRow(title: "收費", icon: "money", show: myTable!.price_text_long)
+        row = IconTextRow(title: "收費", icon: "money", show: myTable!.price_text_long)
         memberRows.append(row)
-        row = MemberRow(title: "限制人數", icon: "group", show: myTable!.people_limit_text)
+        row = IconTextRow(title: "限制人數", icon: "group", show: myTable!.people_limit_text)
         memberRows.append(row)
-        row = MemberRow(title: "週期", icon: "cycle", show: myTable!.kind_text)
+        row = IconTextRow(title: "週期", icon: "cycle", show: myTable!.kind_text)
         memberRows.append(row)
-        row = MemberRow(title: "瀏覽數", icon: "pv", show: String(myTable!.pv))
+        row = IconTextRow(title: "瀏覽數", icon: "pv", show: String(myTable!.pv))
         memberRows.append(row)
-        row = MemberRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
+        row = IconTextRow(title: "建立日期", icon: "date", show: myTable!.created_at_show)
         memberRows.append(row)
         
         if myTable!.dateTable != nil { // setup next time course time
@@ -458,19 +458,19 @@ class ShowCourseVC: BaseViewController, WKNavigationDelegate {
 
         if (myTable!.coachTable != nil) {
             coachTable = myTable!.coachTable
-            var coachRow: MemberRow = MemberRow(title: "教練", icon: "coach", show: coachTable!.name )
+            var coachRow: IconTextRow = IconTextRow(title: "教練", icon: "coach", show: coachTable!.name )
             coachRows.append(coachRow)
-            coachRow = MemberRow(title: "行動電話", icon: "mobile", show: coachTable!.mobile )
+            coachRow = IconTextRow(title: "行動電話", icon: "mobile", show: coachTable!.mobile )
             coachRows.append(coachRow)
-            coachRow = MemberRow(title: "LINE", icon: "line", show: coachTable!.line )
+            coachRow = IconTextRow(title: "LINE", icon: "line", show: coachTable!.line )
             coachRows.append(coachRow)
-            coachRow = MemberRow(title: "FB", icon: "fb", show: coachTable!.fb )
+            coachRow = IconTextRow(title: "FB", icon: "fb", show: coachTable!.fb )
             coachRows.append(coachRow)
-            coachRow = MemberRow(title: "YOUTUBE", icon: "youtube", show: coachTable!.youtube )
+            coachRow = IconTextRow(title: "YOUTUBE", icon: "youtube", show: coachTable!.youtube )
             coachRows.append(coachRow)
-            coachRow = MemberRow(title: "網站", icon: "website", show: coachTable!.website )
+            coachRow = IconTextRow(title: "網站", icon: "website", show: coachTable!.website )
             coachRows.append(coachRow)
-            coachRow = MemberRow(title: "EMail", icon: "email1", show: coachTable!.email )
+            coachRow = IconTextRow(title: "EMail", icon: "email1", show: coachTable!.email )
             coachRows.append(coachRow)
             
             coachTableView.reloadData()
@@ -757,7 +757,7 @@ extension ShowCourseVC: UITableViewDelegate, UITableViewDataSource {
         if (tableView == self.courseTableView) {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
             
-            let row: MemberRow = memberRows[indexPath.row]
+            let row: IconTextRow = memberRows[indexPath.row]
             cell.update(icon: row.icon, title: row.title, content: row.show)
             cell.backgroundColor = UIColor(MY_BLACK)
             
@@ -800,7 +800,7 @@ extension ShowCourseVC: UITableViewDelegate, UITableViewDataSource {
         } else if tableView == self.coachTableView {
             let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! OneLineCell
             
-            let row: MemberRow = coachRows[indexPath.row]
+            let row: IconTextRow = coachRows[indexPath.row]
             cell.update(icon: row.icon, title: row.title, content: row.show)
             cell.backgroundColor = UIColor(MY_BLACK)
             

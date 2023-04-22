@@ -62,7 +62,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
     var isLike: Bool = false
     var token: String?
     var table: Table?
-    var memberRows: [MemberRow] = [MemberRow]()
+    var memberRows: [IconTextRow] = [IconTextRow]()
     let button_width: CGFloat = 120
     var bottom_button_count: Int = 1
 
