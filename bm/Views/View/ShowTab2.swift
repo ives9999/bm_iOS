@@ -194,6 +194,18 @@ class ShowTab2: UIView {
         }
     }
     
+    func tab1Name(_ name: String) {
+        label1.text = name
+    }
+    
+    func tab2Name(_ name: String) {
+        label2.text = name
+    }
+    
+    func tab3Name(_ name: String) {
+        label3.text = name
+    }
+    
     //tab被點選時要執行的動作
     @objc func pressed(_ sender: UITapGestureRecognizer) {
         
