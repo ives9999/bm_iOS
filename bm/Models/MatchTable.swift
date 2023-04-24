@@ -26,22 +26,34 @@ class MatchesTable: Tables {
 
 class MatchTable: Table {
     var arena_id: Int = 0
-    var start_datetime: String = ""
-    var end_datetime: String = ""
+    var match_start: String = ""
+    var match_end: String = ""
     var signup_start: String = ""
     var signup_end: String = ""
     var ball: String = ""
-    
     var arena_name: String = ""
+    var arenaTable: ArenaTable? = nil
+    
+    var match_start_show: String = ""
+    var match_end_show: String = ""
+    var match_start_weekday: String = ""
+    var match_end_weekday: String = ""
+    var signup_start_show: String = ""
+    var signup_end_show: String = ""
+    var signup_start_weekday: String = ""
+    var signup_end_weekday: String = ""
+    var city_name: String = ""
+    var area_name: String = ""
     
     enum CodingKeys: String, CodingKey {
         case arena_id
-        case start_datetime
-        case end_datetime
+        case match_start
+        case match_end
         case signup_start
         case signup_end
         case ball
         case arena_name
+        case arenaTable = "arena"
     }
     
     required init(from decoder: Decoder) throws {
@@ -49,16 +61,60 @@ class MatchTable: Table {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         do {arena_id = try container.decode(Int.self, forKey: .arena_id)}catch{arena_id = 0}
-        do {start_datetime = try container.decode(String.self, forKey: .start_datetime)}catch{start_datetime = ""}
-        do {end_datetime = try container.decode(String.self, forKey: .end_datetime)}catch{end_datetime = ""}
+        do {match_start = try container.decode(String.self, forKey: .match_start)}catch{match_start = ""}
+        do {match_end = try container.decode(String.self, forKey: .match_end)}catch{match_end = ""}
         do {signup_start = try container.decode(String.self, forKey: .signup_start)}catch{signup_start = ""}
         do {signup_end = try container.decode(String.self, forKey: .signup_end)}catch{signup_end = ""}
         do {ball = try container.decode(String.self, forKey: .ball)}catch{ball = ""}
         do {arena_name = try container.decode(String.self, forKey: .arena_name)}catch{arena_name = ""}
+        do {arenaTable = try container.decode(ArenaTable.self, forKey: .arenaTable)}catch{arenaTable = nil}
     }
     
     override func filterRow() {
         
         super.filterRow()
+        arenaTable?.filterRow()
+        
+        if (match_start.count > 0) {
+            match_start_show = match_start.noSec()
+            if let t = match_start.toWeekday() {
+                match_start_weekday = t
+            }
+        }
+        
+        if (match_end.count > 0) {
+            match_end_show = match_end.noSec()
+            if let t = match_end.toWeekday() {
+                match_end_weekday = t
+            }
+        }
+        
+        if (signup_start.count > 0) {
+            signup_start_show = signup_start.noSec()
+            if let t = signup_start.toWeekday() {
+                signup_start_weekday = t
+            }
+        }
+        
+        if (signup_end.count > 0) {
+            signup_end_show = signup_end.noSec()
+            if let t = signup_start.toWeekday() {
+                signup_end_weekday = t
+            }
+        }
+        
+        if (arenaTable != nil) {
+            if (arenaTable!.city_id > 0) {
+                city_name = Global.instance.zoneIDToName(arenaTable!.city_id)
+            }
+            
+            if (arenaTable!.area_id > 0) {
+                area_name = Global.instance.zoneIDToName(arenaTable!.area_id)
+            }
+            
+            if arenaTable!.city_id > 0 && arenaTable!.area_id > 0 {
+                address = "\(city_name)\(area_name)\(arenaTable!.zip)\(arenaTable!.road)"
+            }
+        }
     }
 }

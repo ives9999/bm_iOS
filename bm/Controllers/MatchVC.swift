@@ -230,7 +230,7 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
         
         nameLbl.text = item?.name
         arenaLbl.text = item?.arena_name
-        datetimeLbl.text = "\(item!.start_datetime.noSec()) ~ \(item!.end_datetime.noSec())"
+        datetimeLbl.text = "\(item!.match_start_show) ~ \(item!.match_end_show)"
         
         //createdAtLbl.text = item?.created_at.noSec()
     }
