@@ -218,8 +218,8 @@ class ShowMatchVC: BaseViewController {
         row = IconTextRow(title: "比賽用球", icon: "ball_svg", show: table!.ball)
         iconTextRows.append(row)
         
-        row = IconTextRow(title: "聯絡人", icon: "member_on_svg", show: table!.contact_name)
-        iconTextRows.append(row)
+//        row = IconTextRow(title: "聯絡人", icon: "member_on_svg", show: table!.contact_name)
+//        iconTextRows.append(row)
         
         self.showTop2!.setTitle(table!.name)
         //introduceNameLbl.text = table!.name
