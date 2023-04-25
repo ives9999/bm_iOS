@@ -33,6 +33,8 @@ class MatchTable: Table {
     var ball: String = ""
     var arena_name: String = ""
     var arenaTable: ArenaTable? = nil
+    var matchContactTable: MatchContactTable? = nil
+    var matchGroups: [MatchGroupTable] = [MatchGroupTable]()
     
     var match_start_show: String = ""
     var match_end_show: String = ""
@@ -54,6 +56,8 @@ class MatchTable: Table {
         case ball
         case arena_name
         case arenaTable = "arena"
+        case matchContactTable = "contact"
+        case matchGroups = "groups"
     }
     
     required init(from decoder: Decoder) throws {
@@ -68,12 +72,19 @@ class MatchTable: Table {
         do {ball = try container.decode(String.self, forKey: .ball)}catch{ball = ""}
         do {arena_name = try container.decode(String.self, forKey: .arena_name)}catch{arena_name = ""}
         do {arenaTable = try container.decode(ArenaTable.self, forKey: .arenaTable)}catch{arenaTable = nil}
+        do {matchContactTable = try container.decode(MatchContactTable.self, forKey: .matchContactTable)}catch{matchContactTable = nil}
+        do{matchGroups = try container.decode([MatchGroupTable].self, forKey: .matchGroups)}catch{matchGroups = [MatchGroupTable]()}
     }
     
     override func filterRow() {
         
         super.filterRow()
         arenaTable?.filterRow()
+        if matchGroups.count > 0 {
+            for matchGroup in matchGroups {
+                matchGroup.filterRow()
+            }
+        }
         
         if (match_start.count > 0) {
             match_start_show = match_start.noSec()

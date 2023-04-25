@@ -29,7 +29,7 @@ class ShowMatchVC: BaseViewController {
     
     let introduceTableView: UITableView = {
         let view = UITableView()
-        view.isScrollEnabled = false
+        view.isScrollEnabled = true
         view.backgroundColor = UIColor.clear
         
         view.rowHeight = UITableView.automaticDimension
@@ -55,7 +55,7 @@ class ShowMatchVC: BaseViewController {
     
     let signupTableView: UITableView = {
         let view = UITableView()
-        view.isScrollEnabled = false
+        view.isScrollEnabled = true
         view.backgroundColor = UIColor.clear
         
         view.rowHeight = UITableView.automaticDimension
@@ -87,6 +87,9 @@ class ShowMatchVC: BaseViewController {
         
         introduceTableView.delegate = self
         introduceTableView.dataSource = self
+        
+        signupTableView.delegate = self
+        signupTableView.dataSource = self
         
         refresh(MatchTable.self)
     }
@@ -218,8 +221,16 @@ class ShowMatchVC: BaseViewController {
         row = IconTextRow(title: "比賽用球", icon: "ball_svg", show: table!.ball)
         iconTextRows.append(row)
         
-//        row = IconTextRow(title: "聯絡人", icon: "member_on_svg", show: table!.contact_name)
-//        iconTextRows.append(row)
+        if table!.matchContactTable != nil {
+            row = IconTextRow(title: "聯絡人", icon: "member_on_svg", show: table!.matchContactTable!.contact_name)
+            iconTextRows.append(row)
+            row = IconTextRow(title: "聯絡電話", icon: "mobile_svg", show: table!.matchContactTable!.contact_tel)
+            iconTextRows.append(row)
+            row = IconTextRow(title: "聯絡人Email", icon: "email_svg", show: table!.matchContactTable!.contact_email)
+            iconTextRows.append(row)
+            row = IconTextRow(title: "聯絡人line", icon: "line_svg", show: table!.matchContactTable!.contact_line)
+            iconTextRows.append(row)
+        }
         
         self.showTop2!.setTitle(table!.name)
         //introduceNameLbl.text = table!.name
@@ -229,6 +240,10 @@ class ShowMatchVC: BaseViewController {
         let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+table!.content+"</body></html>"
         
         contentWebView.loadHTMLString(content, baseURL: nil)
+    }
+    
+    func setSignupData() {
+        
     }
     
     func refresh<T: Table>(_ t: T.Type) {
@@ -253,7 +268,7 @@ class ShowMatchVC: BaseViewController {
                             
                             self.showTop2!.setTitle(self.table!.name)
                             self.setIntroduceData()
-                            //introduceTableView.reloadData()
+                            self.setSignupData()
                             
                             self._tabPressed(self.focusTabIdx)
                         }
@@ -288,8 +303,11 @@ class ShowMatchVC: BaseViewController {
             introduceContainer.removeFromSuperview()
             contentContainer.removeFromSuperview()
             initSignup()
+            
+            signupTableView.reloadData()
 
         default:
+            
             refresh()
         }
     }
@@ -297,20 +315,36 @@ class ShowMatchVC: BaseViewController {
 
 extension ShowMatchVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        var count: Int = iconTextRows.count
+        var count: Int = 0
+        if tableView == introduceTableView {
+            count = iconTextRows.count
+        } else if (tableView == signupTableView) {
+            count = table!.matchGroups.count
+        }
+        
         return count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "OneLineCell", for: indexPath) as! OneLineCell
+        if tableView == introduceTableView {
+            let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "OneLineCell", for: indexPath) as! OneLineCell
+            
+            let row: IconTextRow = iconTextRows[indexPath.row]
+            cell.update(icon: row.icon, title: row.title, content: row.show)
+            cell.setSelectedBackgroundColor()
+            
+            return cell
+        } else if tableView == signupTableView {
+            let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "OneLineCell", for: indexPath) as! OneLineCell
+            
+            let row: IconTextRow = iconTextRows[indexPath.row]
+            cell.update(icon: row.icon, title: row.title, content: row.show)
+            cell.setSelectedBackgroundColor()
+            
+            return cell
+        }
         
-        //let cell: ShowSignupCell = tableView.dequeueReusableCell(withIdentifier: "ShowSignupCell", for: indexPath) as! ShowSignupCell
-
-        let row: IconTextRow = iconTextRows[indexPath.row]
-        cell.update(icon: row.icon, title: row.title, content: row.show)
-        cell.setSelectedBackgroundColor()
-
-        return cell
+        return UITableViewCell()
     }
 }
 
