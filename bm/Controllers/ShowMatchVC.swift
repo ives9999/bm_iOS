@@ -21,7 +21,7 @@ class ShowMatchVC: BaseViewController {
     
     let button_width: CGFloat = 120
     var bottom_button_count: Int = 1
-    var showBottom: ShowBottom2?
+    //var showBottom: ShowBottom2?
     
     var introduceContainer: UIView = UIView()
     var contentContainer: UIView = UIView()
@@ -55,14 +55,13 @@ class ShowMatchVC: BaseViewController {
     
     let signupTableView: UITableView = {
         let view = UITableView()
-        view.isScrollEnabled = true
+        //view.isScrollEnabled = true
         view.backgroundColor = UIColor.clear
         
         view.rowHeight = UITableView.automaticDimension
         view.estimatedRowHeight = UITableView.automaticDimension
 
-        let oneLineCellNib = UINib(nibName: "OneLineCell", bundle: nil)
-        view.register(oneLineCellNib, forCellReuseIdentifier: "OneLineCell")
+        view.register(MatchGroupSignupCell.self, forCellReuseIdentifier: "MatchGroupSignupCell")
         
         return view
     }()
@@ -80,7 +79,7 @@ class ShowMatchVC: BaseViewController {
         super.viewDidLoad()
         
         initTop()
-        initBottom()
+        //initBottom()
         initTopTab()
         
         showTab2.delegate = self
@@ -99,12 +98,12 @@ class ShowMatchVC: BaseViewController {
         showTop2!.anchor(parent: self.view)
     }
     
-    func initBottom() {
-        showBottom = ShowBottom2(delegate: self)
-        self.view.addSubview(showBottom!)
-        //showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
-        showBottom!.setSubmitBtnTitle("報名")
-    }
+//    func initBottom() {
+//        showBottom = ShowBottom2(delegate: self)
+//        self.view.addSubview(showBottom!)
+//        //showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
+//        showBottom!.setSubmitBtnTitle("報名")
+//    }
     
     func initTopTab() {
         
@@ -150,7 +149,8 @@ class ShowMatchVC: BaseViewController {
         //introduceContainer.backgroundColor = UIColor.blue
         introduceContainer.snp.makeConstraints { make in
             make.top.equalTo(showTab2.snp.bottom).offset(20)
-            make.bottom.equalTo(showBottom!.snp.top)
+            //make.bottom.equalTo(showBottom!.snp.top)
+            make.bottom.equalToSuperview()
             make.left.right.equalToSuperview()
         }
         let view = initScrollView(introduceContainer)
@@ -167,7 +167,8 @@ class ShowMatchVC: BaseViewController {
         self.view.addSubview(contentContainer)
         contentContainer.snp.makeConstraints { make in
             make.top.equalTo(showTab2.snp.bottom).offset(20)
-            make.bottom.equalTo(showBottom!.snp.top)
+            make.bottom.equalToSuperview()
+            //make.bottom.equalTo(showBottom!.snp.top)
             make.left.right.equalToSuperview()
         }
         
@@ -183,11 +184,16 @@ class ShowMatchVC: BaseViewController {
     
     private func initSignup() {
         self.view.addSubview(signupContainer)
+        //signupContainer.backgroundColor = UIColor.gray
         signupContainer.snp.makeConstraints { make in
             make.top.equalTo(showTab2.snp.bottom).offset(20)
-            make.bottom.equalTo(showBottom!.snp.top)
+            //make.bottom.equalTo(showBottom!.snp.top)
+            make.bottom.equalToSuperview()
             make.left.right.equalToSuperview()
         }
+        
+//        let view = initScrollView(signupContainer)
+//        let contentView = view.contentView
         
         signupContainer.addSubview(signupTableView)
         signupTableView.snp.makeConstraints { make in
@@ -291,7 +297,7 @@ class ShowMatchVC: BaseViewController {
             initIntroduce()
 
             introduceTableView.reloadData()
-            showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
+            //showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
 
         case 1:
             introduceContainer.removeFromSuperview()
@@ -310,6 +316,11 @@ class ShowMatchVC: BaseViewController {
             
             refresh()
         }
+    }
+    
+    func signup(item: MatchGroupTable) {
+        print(item)
+        let i = 6
     }
 }
 
@@ -335,11 +346,12 @@ extension ShowMatchVC: UITableViewDelegate, UITableViewDataSource {
             
             return cell
         } else if tableView == signupTableView {
-            let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "OneLineCell", for: indexPath) as! OneLineCell
+            let cell: MatchGroupSignupCell = tableView.dequeueReusableCell(withIdentifier: "MatchGroupSignupCell", for: indexPath) as! MatchGroupSignupCell
             
-            let row: IconTextRow = iconTextRows[indexPath.row]
-            cell.update(icon: row.icon, title: row.title, content: row.show)
-            cell.setSelectedBackgroundColor()
+            cell.myDelegate = self
+            let item: MatchGroupTable = table!.matchGroups[indexPath.row]
+            item.no = indexPath.row + 1
+            cell.item = item
             
             return cell
         }
@@ -351,5 +363,168 @@ extension ShowMatchVC: UITableViewDelegate, UITableViewDataSource {
 extension ShowMatchVC: ShowTab2Delegate {
     func tabPressed(_ idx: Int) {
         _tabPressed(idx)
+    }
+}
+
+class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
+    
+    let noLbl: SuperLabel = {
+        let view = SuperLabel()
+        //view.setTextGeneral()
+        view.setTextColor(UIColor(MY_GREEN))
+        view.setTextBold()
+        view.text = "100."
+        
+        return view
+    }()
+    
+    let nameLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextGeneralV2()
+        return view
+    }()
+    
+    let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.3)
+        return view
+    }()
+    
+    let mainContainerView: UIView = UIView()
+    
+    let numberLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextGeneral()
+        return view
+    }()
+    
+    let signupNumberLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextGeneral()
+        return view
+    }()
+    
+    let limitLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextGeneral()
+        return view
+    }()
+    
+    let showButton2: ShowButton2 = ShowButton2()
+    
+    //var delegate: ShowButton2Delegate? = nil
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupView()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.setupView()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupView()
+    }
+    
+    private func setupView() {
+        backgroundColor = UIColor.clear
+        showButton2.delegate = self
+        setAnchor()
+    }
+    
+    func setAnchor() {
+        
+        let view1: UIView = UIView()
+        
+        self.contentView.addSubview(view1)
+        //view1.backgroundColor = UIColor.brown
+        view1.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(15)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            //make.bottom.equalToSuperview().offset(-2)
+            make.height.equalTo(30)
+        }
+        
+            view1.addSubview(noLbl)
+            noLbl.snp.makeConstraints { make in
+                make.left.equalToSuperview()
+                make.centerY.equalToSuperview()
+            }
+        
+            view1.addSubview(nameLbl)
+            nameLbl.snp.makeConstraints { make in
+                make.right.centerY.equalToSuperview()
+            }
+        
+        self.contentView.addSubview(separator)
+        separator.snp.makeConstraints { make in
+            make.top.equalTo(view1.snp.bottom)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            //make.bottom.equalToSuperview()
+            make.height.equalTo(1)
+        }
+
+        self.contentView.addSubview(mainContainerView)
+        //mainContainerView.backgroundColor = UIColor.blue
+        mainContainerView.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.top.equalTo(separator.snp.bottom).offset(4)
+            make.bottom.equalToSuperview().offset(-2)
+            //make.height .equalTo(180)
+        }
+        
+            mainContainerView.addSubview(numberLbl)
+            numberLbl.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(12)
+                make.left.equalToSuperview().offset(20)
+            }
+        
+        mainContainerView.addSubview(signupNumberLbl)
+        signupNumberLbl.snp.makeConstraints { make in
+            make.top.equalTo(numberLbl.snp.bottom).offset(12)
+            make.left.equalToSuperview().offset(20)
+        }
+        
+            mainContainerView.addSubview(limitLbl)
+            limitLbl.snp.makeConstraints { make in
+                make.right.equalToSuperview().offset(-12)
+                make.centerY.equalTo(signupNumberLbl.snp.centerY)
+            }
+        
+            mainContainerView.addSubview(showButton2)
+            showButton2.snp.makeConstraints { make in
+                make.top.equalTo(limitLbl.snp.bottom).offset(12)
+                make.right.equalToSuperview()
+                //make.centerY.equalToSuperview()
+                make.height.equalTo(40)
+                make.width.equalTo(160)
+                make.bottom.equalToSuperview().offset(-15)
+            }
+    }
+    
+    override func configureSubViews() {
+        super.configureSubViews()
+
+        self.noLbl.text = "\(item!.no)."
+        self.nameLbl.text = item?.name
+        self.numberLbl.text = "人數：\(item?.number ?? 0)人"
+        self.signupNumberLbl.text = "報名組數：0組"
+        self.limitLbl.text = "限制組數：\(item?.limit ?? 0)組"
+        
+        showButton2.setTitle("報名")
+    }
+}
+
+extension MatchGroupSignupCell: ShowButton2Delegate {
+    
+    func pressed() {
+        //guard let superView = self.superview as? UITableView else { return }
+        myDelegate?.signup(item: item!)
     }
 }
