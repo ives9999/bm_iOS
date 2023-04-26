@@ -56,6 +56,7 @@ class ShowMatchVC: BaseViewController {
     let signupTableView: UITableView = {
         let view = UITableView()
         //view.isScrollEnabled = true
+        view.isUserInteractionEnabled = true
         view.backgroundColor = UIColor.clear
         
         view.rowHeight = UITableView.automaticDimension
@@ -116,8 +117,8 @@ class ShowMatchVC: BaseViewController {
             //make.horizontalEdges.equalToSuperview()
         }
         
-        showTab2.tab1Name("說明")
-        showTab2.tab2Name("內容")
+        showTab2.tab1Name("內容")
+        showTab2.tab2Name("簡章")
         showTab2.tab3Name("報名")
     }
     
@@ -196,8 +197,13 @@ class ShowMatchVC: BaseViewController {
 //        let contentView = view.contentView
         
         signupContainer.addSubview(signupTableView)
+        //signupTableView.backgroundColor = UIColor.red
         signupTableView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            //make.edges.equalToSuperview()
+            make.top.equalTo(showTab2.snp.bottom).offset(20)
+            make.bottom.equalToSuperview()
+            make.left.right.equalToSuperview()
+            //make.height.equalTo(150)
         }
     }
     
@@ -228,6 +234,15 @@ class ShowMatchVC: BaseViewController {
         iconTextRows.append(row)
         
         if table!.matchContactTable != nil {
+            row = IconTextRow(title: "聯絡人", icon: "member_on_svg", show: table!.matchContactTable!.contact_name)
+            iconTextRows.append(row)
+            row = IconTextRow(title: "聯絡電話", icon: "mobile_svg", show: table!.matchContactTable!.contact_tel)
+            iconTextRows.append(row)
+            row = IconTextRow(title: "聯絡人Email", icon: "email_svg", show: table!.matchContactTable!.contact_email)
+            iconTextRows.append(row)
+            row = IconTextRow(title: "聯絡人line", icon: "line_svg", show: table!.matchContactTable!.contact_line)
+            iconTextRows.append(row)
+            
             row = IconTextRow(title: "聯絡人", icon: "member_on_svg", show: table!.matchContactTable!.contact_name)
             iconTextRows.append(row)
             row = IconTextRow(title: "聯絡電話", icon: "mobile_svg", show: table!.matchContactTable!.contact_tel)
@@ -292,12 +307,18 @@ class ShowMatchVC: BaseViewController {
         focusTabIdx = idx
         switch idx {
         case 0:
+//            introduceContainer.removeFromSuperview()
+//            contentContainer.removeFromSuperview()
+//            initSignup()
+//
+//            signupTableView.reloadData()
             contentContainer.removeFromSuperview()
             signupContainer.removeFromSuperview()
+            signupTableView.removeFromSuperview()
             initIntroduce()
 
-            introduceTableView.reloadData()
-            //showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
+//            introduceTableView.reloadData()
+//            //showBottom!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: false)
 
         case 1:
             introduceContainer.removeFromSuperview()
