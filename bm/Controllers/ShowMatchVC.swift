@@ -465,7 +465,8 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
         
             view1.addSubview(nameLbl)
             nameLbl.snp.makeConstraints { make in
-                make.right.centerY.equalToSuperview()
+                make.left.equalTo(noLbl.snp.right).offset(20)
+                make.centerY.equalToSuperview()
             }
         
         self.contentView.addSubview(separator)

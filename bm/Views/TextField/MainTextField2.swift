@@ -29,6 +29,9 @@ class MainTextField2: UIView {
     //是不是必填值
     var isRequired: Bool = false
     
+    //單位
+    var unit: String?
+    
     var labelContainer: UIView = UIView()
     
     var label: SuperLabel = {
@@ -78,8 +81,14 @@ class MainTextField2: UIView {
                 
         return view
     }()
+    
+    var unitLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextGeneral()
+        return view
+    }()
 
-    init(label: String, value: String = "", icon: String, placeholder: String? = nil, isShowDelete: Bool = true, isRequired: Bool = false, isPassword: Bool = false, keyboard: KEYBOARD = .default) {
+    init(label: String, value: String = "", icon: String, placeholder: String? = nil, isShowDelete: Bool = true, isRequired: Bool = false, isPassword: Bool = false, keyboard: KEYBOARD = .default, unit: String? = nil) {
         
         self.label.text = label
         self.value = value
@@ -89,6 +98,7 @@ class MainTextField2: UIView {
         self.isRequired = isRequired
         self.isPassword = isPassword
         self.keyboard = keyboard
+        self.unit = unit
         
         super.init(frame: .zero)
         commonInit()
@@ -135,6 +145,10 @@ class MainTextField2: UIView {
         textField.keyboardType = keyboard.enumToSwift()
         
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        
+        if (unit != nil) {
+            unitLbl.text = unit
+        }
     }
     
     func anchor() {
@@ -154,12 +168,22 @@ class MainTextField2: UIView {
             make.bottom.right.equalToSuperview()
         }
         
+        let rightMaring: Int = (unit == nil) ? 0 : -40
         self.addSubview(textField)
         textField.snp.makeConstraints { make in
             make.top.equalTo(label.snp.bottom).offset(10)
-            make.left.right.equalToSuperview()
+            make.left.equalToSuperview()
+            make.right.equalToSuperview().offset(rightMaring)
             make.height.equalTo(50)
             make.bottom.equalToSuperview().offset(-10)
+        }
+        
+        if unit != nil {
+            self.addSubview(unitLbl)
+            unitLbl.snp.makeConstraints { make in
+                make.centerY.equalTo(textField.snp.centerY)
+                make.left.equalTo(textField.snp.right).offset(12)
+            }
         }
     }
     

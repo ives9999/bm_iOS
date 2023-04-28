@@ -36,6 +36,18 @@ class MatchPlayerSignupVC: BaseViewController {
         return view
     }()
     
+    let lineTxt2: MainTextField2 = {
+        let view: MainTextField2 = MainTextField2(label: "line", icon: "line_svg", placeholder: "badminton")
+        
+        return view
+    }()
+    
+    let ageTxt2: MainTextField2 = {
+        let view: MainTextField2 = MainTextField2(label: "年齡", icon: "line_svg", placeholder: "32", unit: "歲")
+        
+        return view
+    }()
+    
     override func viewDidLoad() {
         
         dataService = MatchGroupService.instance
@@ -77,6 +89,20 @@ class MatchPlayerSignupVC: BaseViewController {
         formContainer.addSubview(emailTxt2)
         emailTxt2.snp.makeConstraints { make in
             make.top.equalTo(mobileTxt2.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        formContainer.addSubview(lineTxt2)
+        lineTxt2.snp.makeConstraints { make in
+            make.top.equalTo(emailTxt2.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        formContainer.addSubview(ageTxt2)
+        ageTxt2.snp.makeConstraints { make in
+            make.top.equalTo(lineTxt2.snp.bottom).offset(20)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
