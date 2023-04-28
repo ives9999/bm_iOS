@@ -138,6 +138,7 @@ class MainTextField2: UIView {
     }
     
     func anchor() {
+        //self.backgroundColor = UIColor.green
         self.addSubview(labelContainer)
         labelContainer.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview()
@@ -158,7 +159,7 @@ class MainTextField2: UIView {
             make.top.equalTo(label.snp.bottom).offset(10)
             make.left.right.equalToSuperview()
             make.height.equalTo(50)
-            make.bottom.equalToSuperview().offset(10)
+            make.bottom.equalToSuperview().offset(-10)
         }
     }
     

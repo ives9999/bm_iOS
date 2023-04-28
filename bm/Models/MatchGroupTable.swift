@@ -30,11 +30,16 @@ class MatchGroupTable: Table {
     var price: Int = 0
     var limit: Int = 0
     
+    var matchTable: MatchTable? = nil
+    var matchPlayers: [MatchPlayerTable] = [MatchPlayerTable]()
+    
     enum CodingKeys: String, CodingKey {
         case match_id
         case number
         case price
         case limit
+        case matchTable = "match"
+        case matchPlayers = "players"
     }
     
     required init(from decoder: Decoder) throws {
@@ -45,10 +50,18 @@ class MatchGroupTable: Table {
         do {number = try container.decode(Int.self, forKey: .number)}catch{number = 0}
         do {price = try container.decode(Int.self, forKey: .price)}catch{price = 0}
         do {limit = try container.decode(Int.self, forKey: .limit)}catch{limit = 0}
+        do {matchTable = try container.decode(MatchTable.self, forKey: .matchTable)}catch{matchTable = nil}
+        do {matchPlayers = try container.decode([MatchPlayerTable].self, forKey: .matchPlayers)}catch{matchPlayers = [MatchPlayerTable]()}
     }
     
     override func filterRow() {
         
         super.filterRow()
+        matchTable?.filterRow()
+        if (matchPlayers.count > 0) {
+            for matcherPlayer in matchPlayers {
+                matcherPlayer.filterRow()
+            }
+        }
     }
 }

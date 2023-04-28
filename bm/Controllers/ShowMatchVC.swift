@@ -242,15 +242,6 @@ class ShowMatchVC: BaseViewController {
             iconTextRows.append(row)
             row = IconTextRow(title: "聯絡人line", icon: "line_svg", show: table!.matchContactTable!.contact_line)
             iconTextRows.append(row)
-            
-            row = IconTextRow(title: "聯絡人", icon: "member_on_svg", show: table!.matchContactTable!.contact_name)
-            iconTextRows.append(row)
-            row = IconTextRow(title: "聯絡電話", icon: "mobile_svg", show: table!.matchContactTable!.contact_tel)
-            iconTextRows.append(row)
-            row = IconTextRow(title: "聯絡人Email", icon: "email_svg", show: table!.matchContactTable!.contact_email)
-            iconTextRows.append(row)
-            row = IconTextRow(title: "聯絡人line", icon: "line_svg", show: table!.matchContactTable!.contact_line)
-            iconTextRows.append(row)
         }
         
         self.showTop2!.setTitle(table!.name)
@@ -261,10 +252,6 @@ class ShowMatchVC: BaseViewController {
         let content: String = "<html><HEAD><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, shrink-to-fit=no\">"+self.body_css+"</HEAD><body>"+table!.content+"</body></html>"
         
         contentWebView.loadHTMLString(content, baseURL: nil)
-    }
-    
-    func setSignupData() {
-        
     }
     
     func refresh<T: Table>(_ t: T.Type) {
@@ -289,7 +276,7 @@ class ShowMatchVC: BaseViewController {
                             
                             self.showTop2!.setTitle(self.table!.name)
                             self.setIntroduceData()
-                            self.setSignupData()
+                            //self.setSignupData()
                             
                             self._tabPressed(self.focusTabIdx)
                         }
@@ -340,8 +327,8 @@ class ShowMatchVC: BaseViewController {
     }
     
     func signup(item: MatchGroupTable) {
-        print(item)
-        let i = 6
+        //print(item)
+        toMatchPlayerSignup(token: item.token)
     }
 }
 

@@ -322,6 +322,13 @@ extension BaseViewController {
         show(vc, sender: nil)
     }
     
+    func toMatchPlayerSignup(token: String) {
+        let vc: MatchPlayerSignupVC = MatchPlayerSignupVC()
+        vc.match_group_token = token
+        vc.modalPresentationStyle = .fullScreen
+        show(vc, sender: nil)
+    }
+    
     func toMember() {
         //Member.instance.isLoggedIn = false
         if !Member.instance.isLoggedIn {

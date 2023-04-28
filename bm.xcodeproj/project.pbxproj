@@ -350,6 +350,8 @@
 		F983441E29EEFA380050B634 /* MatchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441D29EEFA380050B634 /* MatchService.swift */; };
 		F983442029F188B80050B634 /* ShowMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441F29F188B80050B634 /* ShowMatchVC.swift */; };
 		F983442229F415F40050B634 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983442129F415F40050B634 /* String.swift */; };
+		F983442429F969FE0050B634 /* MatchPlayerSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983442329F969FE0050B634 /* MatchPlayerSignupVC.swift */; };
+		F983442629FAA2A90050B634 /* MatchGroupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983442529FAA2A90050B634 /* MatchGroupService.swift */; };
 		F985F4622956BF3900636FEA /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F985F4612956BF3900636FEA /* UIView.swift */; };
 		F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */; };
 		F98F928229AD091E00A4039E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F98F928129AD091E00A4039E /* UIImage.swift */; };
@@ -811,6 +813,8 @@
 		F983441D29EEFA380050B634 /* MatchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchService.swift; sourceTree = "<group>"; };
 		F983441F29F188B80050B634 /* ShowMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowMatchVC.swift; sourceTree = "<group>"; };
 		F983442129F415F40050B634 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		F983442329F969FE0050B634 /* MatchPlayerSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPlayerSignupVC.swift; sourceTree = "<group>"; };
+		F983442529FAA2A90050B634 /* MatchGroupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchGroupService.swift; sourceTree = "<group>"; };
 		F985F4612956BF3900636FEA /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		F98BD70D1F9DA24500C0CA79 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		F98F928129AD091E00A4039E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
@@ -1067,6 +1071,8 @@
 				B3DEBE13210781FD003699A0 /* CoachService.swift */,
 				B36D66BA229A580E00502D62 /* CourseService.swift */,
 				B32FBCF71F849AA7003D39CC /* DataService.swift */,
+				F983442529FAA2A90050B634 /* MatchGroupService.swift */,
+				F983441D29EEFA380050B634 /* MatchService.swift */,
 				B3E72A271FA20D280008A6B1 /* MemberService.swift */,
 				B3B758F225BB08CB006ACC33 /* OrderService.swift */,
 				B3B75868259CBB27006ACC33 /* ProductService.swift */,
@@ -1074,7 +1080,6 @@
 				B32D9EE521106C5F00999A4A /* TeachService.swift */,
 				B3ED38E91FB87EE50003F083 /* TeamService.swift */,
 				B306FEA921F7446F00403FE2 /* TimetableService.swift */,
-				F983441D29EEFA380050B634 /* MatchService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1418,6 +1423,7 @@
 				F9FFD8B0290EC50C00AD8E52 /* ManagerTeamMemberVC.swift */,
 				F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */,
 				B3A5A28320B2CB80001A846F /* ManagerVC.swift */,
+				F983442329F969FE0050B634 /* MatchPlayerSignupVC.swift */,
 				F983441329EEC3690050B634 /* MatchVC.swift */,
 				F99DF39C286B393300A7C2C6 /* MemberBankVC.swift */,
 				B370EFBE26AD3F2B0022E599 /* MemberCartListVC.swift */,
@@ -1931,6 +1937,7 @@
 				B36CBD4F20DCBBF600E52B9C /* TempPlayDateVC.swift in Sources */,
 				B3B758C625AD414E006ACC33 /* NumberCell.swift in Sources */,
 				B385A07C22BCB28E00BC3ADF /* SelectVC.swift in Sources */,
+				F983442429F969FE0050B634 /* MatchPlayerSignupVC.swift in Sources */,
 				B3AE937B262FCC5F00223B2A /* ArenaListCell.swift in Sources */,
 				F9763E1628B62D57006ED47C /* MemberSubscriptionLogVC.swift in Sources */,
 				B3A253D8256A57B6004B8A03 /* StoreForm.swift in Sources */,
@@ -2054,6 +2061,7 @@
 				B31106E9221E5285007A5D49 /* BottomView.swift in Sources */,
 				B323391521B6CAE8003EB84D /* FormItemUIProperties.swift in Sources */,
 				B3AB478E1F8BD240008C9EDF /* HomeCollectionHeaderView.swift in Sources */,
+				F983442629FAA2A90050B634 /* MatchGroupService.swift in Sources */,
 				B3B7589B25A95EAD006ACC33 /* Color1FormItem.swift in Sources */,
 				B3310D8A22AA20A50062EF98 /* CourseKindFormItem.swift in Sources */,
 				B3308C4D1FD9575E006A83B6 /* Tag.swift in Sources */,
