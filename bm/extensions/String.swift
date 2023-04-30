@@ -8,6 +8,21 @@
 
 import Foundation
 extension String {
+    
+    func clacAge()-> Int? {
+        let dateFormater: DateFormatter = DateFormatter()
+        dateFormater.dateFormat = "yyyy-MM-dd"
+        if let birthdayDate: Date = dateFormater.date(from: self) {
+            
+            if let calendar: NSCalendar = NSCalendar(calendarIdentifier: .gregorian) {
+                let now = Date()
+                let calcAge = calendar.components(.year, from: birthdayDate, to: now, options: [])
+                let age = calcAge.year
+                return age
+            } else { return nil }
+            
+        } else { return nil }
+    }
     /**
      Truncates the string to the specified length number of characters and appends an optional trailing string if longer.
      

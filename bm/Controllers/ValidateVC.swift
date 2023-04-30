@@ -25,13 +25,13 @@ class ValidateVC: BaseViewController {
     var showTop2: ShowTop2?
     
     let emailTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", isRequired: true, keyboard: KEYBOARD.emailAddress)
+        let view: MainTextField2 = MainTextField2(key: "email", label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", isRequired: true, keyboard: KEYBOARD.emailAddress)
         
         return view
     }()
     
     let codeTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "認證碼", icon: "code_svg", placeholder: "請填寫收到的認證碼", isRequired: true)
+        let view: MainTextField2 = MainTextField2(key: "code", label: "認證碼", icon: "code_svg", placeholder: "請填寫收到的認證碼", isRequired: true)
         
         return view
     }()

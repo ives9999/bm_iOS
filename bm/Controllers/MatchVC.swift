@@ -69,6 +69,11 @@ class MatchVC: BaseViewController {
     func tableViewSetSelected(row: MatchTable)-> Bool {
         return false
     }
+    
+    func signup(item: MatchTable) {
+        //print(item)
+        toShowMatch(token: item.token, idx: 2)
+    }
 }
 
 class MatchCell: BaseCell<MatchTable, MatchVC> {
@@ -134,9 +139,9 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
     
     override func commonInit() {
         super.commonInit()
-        anchor()
-        
+        showButton2.delegate = self
         showButton2.setTitle("報名")
+        anchor()
         
 //        let deleteGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteThis))
 //        deleteIV.addGestureRecognizer(deleteGR)
@@ -233,5 +238,12 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
         datetimeLbl.text = "\(item!.match_start_show) ~ \(item!.match_end_show)"
         
         //createdAtLbl.text = item?.created_at.noSec()
+    }
+}
+
+extension MatchCell: ShowButton2Delegate {
+    
+    func pressed() {
+        myDelegate?.signup(item: item!)
     }
 }

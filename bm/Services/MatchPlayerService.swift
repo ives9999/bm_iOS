@@ -8,9 +8,9 @@
 
 import Foundation
 
-class MatchGroupService: DataService {
+class MatchPlayerService: DataService {
     
-    static let instance = MatchGroupService()
+    static let instance = MatchPlayerService()
     
     override init() {
         super.init()
@@ -18,11 +18,11 @@ class MatchGroupService: DataService {
     }
     
     override func getListURL() -> String {
-        return URL_MATCH_GROUP_LIST
+        return URL_MATCH_PLAYER_LIST
     }
     
     override func getSource() -> String? {
-        return "match_group"
+        return "match_player"
     }
     
     override func getUpdateURL()-> String {

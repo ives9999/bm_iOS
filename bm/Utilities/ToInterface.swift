@@ -1065,10 +1065,11 @@ extension BaseViewController {
         }
     }
     
-    func toShowMatch(token: String) {
+    func toShowMatch(token: String, idx: Int = 0) {
         
         let v: ShowMatchVC = ShowMatchVC()
         v.token = token
+        v.focusTabIdx = idx
         v.modalPresentationStyle = .fullScreen
         show(v, sender: nil)
     }

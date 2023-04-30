@@ -63,6 +63,7 @@ extension UITextField {
     
     @objc func clean(_ sender: UIGestureRecognizer) {
         self.text = ""
+        self.sendActions(for: .editingChanged)
     }
     
     @objc func showPassword(_ sender: UIGestureRecognizer) {

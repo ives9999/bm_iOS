@@ -117,13 +117,13 @@ class ShowTab2: UIView {
         self.on(view1)
         
         //設定每一個tab要執行按下的函數
-        let tap1 = UITapGestureRecognizer(target: self, action: #selector(pressed))
+        let tap1 = UITapGestureRecognizer(target: self, action: #selector(_pressed))
         view1.addGestureRecognizer(tap1)
         
-        let tap2 = UITapGestureRecognizer(target: self, action: #selector(pressed))
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(_pressed))
         view2.addGestureRecognizer(tap2)
         
-        let tap3 = UITapGestureRecognizer(target: self, action: #selector(pressed))
+        let tap3 = UITapGestureRecognizer(target: self, action: #selector(_pressed))
         view3.addGestureRecognizer(tap3)
     }
     
@@ -206,24 +206,26 @@ class ShowTab2: UIView {
         label3.text = name
     }
     
-    //tab被點選時要執行的動作
-    @objc func pressed(_ sender: UITapGestureRecognizer) {
-        
-        //要判斷按下的是否為目前已經被按下的tab，如果是的話就不執行任何動作，要不同的tab才會動作
-        
-        //先記錄舊的tab的索引值
+    func pressed(_ idx: Int) {
         let oldIdx: Int = onIdx
-        if let view: UIView = sender.view {
-            onIdx = view.tag
-            
-            //如果是不同的tab才執行動作
-            if (onIdx != oldIdx) {
-                for _view in views {
-                    (_view == view) ? self.on(_view) : self.off(_view)
-                }
-                
-                delegate?.tabPressed(view.tag)
+
+        //如果是不同的tab才執行動作
+        if (idx != oldIdx) {
+
+            for (i, view) in views.enumerated() {
+                (i == idx) ? self.on(view) : self.off(view)
             }
+
+            delegate?.tabPressed(idx)
+            onIdx = idx
+        }
+    }
+    
+    //tab被點選時要執行的動作
+    @objc func _pressed(_ sender: UITapGestureRecognizer) {
+                
+        if let view: UIView = sender.view {
+            pressed(view.tag)
         }
     }
 }

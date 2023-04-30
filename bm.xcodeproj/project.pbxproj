@@ -368,6 +368,8 @@
 		F9B1925A2997405F0037FE05 /* ShowTab2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B192592997405F0037FE05 /* ShowTab2.swift */; };
 		F9B1925C299FCCB00037FE05 /* ShowButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925B299FCCB00037FE05 /* ShowButton2.swift */; };
 		F9B1925E29A52AD50037FE05 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925D29A52AD50037FE05 /* Int.swift */; };
+		F9C6648029FCCA37005C1905 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6647F29FCCA37005C1905 /* Date.swift */; };
+		F9C6648229FE4213005C1905 /* MatchPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6648129FE4212005C1905 /* MatchPlayerService.swift */; };
 		F9CB7F3E298FFE0900C1B92F /* ShowLike2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */; };
 		F9D28AD829C1EE3C00655988 /* MainBottom2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D28AD729C1EE3C00655988 /* MainBottom2.swift */; };
 		F9E221C729C4774D0054CF7B /* IconTextVertical2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E221C629C4774D0054CF7B /* IconTextVertical2.swift */; };
@@ -831,6 +833,8 @@
 		F9B192592997405F0037FE05 /* ShowTab2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTab2.swift; sourceTree = "<group>"; };
 		F9B1925B299FCCB00037FE05 /* ShowButton2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowButton2.swift; sourceTree = "<group>"; };
 		F9B1925D29A52AD50037FE05 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		F9C6647F29FCCA37005C1905 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		F9C6648129FE4212005C1905 /* MatchPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchPlayerService.swift; sourceTree = "<group>"; };
 		F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowLike2.swift; sourceTree = "<group>"; };
 		F9D28AD729C1EE3C00655988 /* MainBottom2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBottom2.swift; sourceTree = "<group>"; };
 		F9E221C629C4774D0054CF7B /* IconTextVertical2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextVertical2.swift; sourceTree = "<group>"; };
@@ -1072,6 +1076,7 @@
 				B36D66BA229A580E00502D62 /* CourseService.swift */,
 				B32FBCF71F849AA7003D39CC /* DataService.swift */,
 				F983442529FAA2A90050B634 /* MatchGroupService.swift */,
+				F9C6648129FE4212005C1905 /* MatchPlayerService.swift */,
 				F983441D29EEFA380050B634 /* MatchService.swift */,
 				B3E72A271FA20D280008A6B1 /* MemberService.swift */,
 				B3B758F225BB08CB006ACC33 /* OrderService.swift */,
@@ -1318,6 +1323,7 @@
 				F98F928129AD091E00A4039E /* UIImage.swift */,
 				B3B8671729CAA74900E0F1AB /* UITextField.swift */,
 				F983442129F415F40050B634 /* String.swift */,
+				F9C6647F29FCCA37005C1905 /* Date.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1975,6 +1981,7 @@
 				B3E72A241FA08D090008A6B1 /* GradientView.swift in Sources */,
 				B39E5FAB263ED55400C40BA7 /* ShowTeamVC.swift in Sources */,
 				B3B758E525B0759B006ACC33 /* WeightFormItem.swift in Sources */,
+				F9C6648029FCCA37005C1905 /* Date.swift in Sources */,
 				B322F8081FC6AC2200DE98FB /* SuperCell.swift in Sources */,
 				F9B1925E29A52AD50037FE05 /* Int.swift in Sources */,
 				F9FFD8B1290EC50C00AD8E52 /* ManagerTeamMemberVC.swift in Sources */,
@@ -2005,6 +2012,7 @@
 				B39A216F23420882006C9FF7 /* SignupListVC.swift in Sources */,
 				B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */,
 				B306FE9F21F0DC5900403FE2 /* DateCell.swift in Sources */,
+				F9C6648229FE4213005C1905 /* MatchPlayerService.swift in Sources */,
 				B35F8DDB1F8F66490073BD70 /* HomeVideoCell.swift in Sources */,
 				B3C4952A26287D1100D4F727 /* TeamListCell.swift in Sources */,
 				B3310D9122ACA57A0062EF98 /* ContentCell.swift in Sources */,

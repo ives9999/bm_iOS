@@ -41,13 +41,13 @@ class LoginVC: BaseViewController, UITextFieldDelegate {
     }()
     
     let emailTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", isRequired: true, keyboard: KEYBOARD.emailAddress)
+        let view: MainTextField2 = MainTextField2(key: "email", label: "Email", icon: "email_svg", placeholder: "davie@gmail.com", isRequired: true, keyboard: KEYBOARD.emailAddress)
         
         return view
     }()
     
     let passwordTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "密碼", icon: "password_svg", placeholder: "密碼", isRequired: true, isPassword: true)
+        let view: MainTextField2 = MainTextField2(key: "password", label: "密碼", icon: "password_svg", placeholder: "密碼", isRequired: true, isPassword: true)
         
         return view
     }()

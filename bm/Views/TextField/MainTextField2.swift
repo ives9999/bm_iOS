@@ -10,6 +10,8 @@ import UIKit
 
 class MainTextField2: UIView {
     
+    var key: String = ""
+    
     //前面圖標的檔名
     var icon: String?
     var placeholder: String?
@@ -88,8 +90,9 @@ class MainTextField2: UIView {
         return view
     }()
 
-    init(label: String, value: String = "", icon: String, placeholder: String? = nil, isShowDelete: Bool = true, isRequired: Bool = false, isPassword: Bool = false, keyboard: KEYBOARD = .default, unit: String? = nil) {
+    init(key: String, label: String, value: String = "", icon: String, placeholder: String? = nil, isShowDelete: Bool = true, isRequired: Bool = false, isPassword: Bool = false, keyboard: KEYBOARD = .default, unit: String? = nil) {
         
+        self.key = key
         self.label.text = label
         self.value = value
         self.icon = icon
@@ -145,6 +148,7 @@ class MainTextField2: UIView {
         textField.keyboardType = keyboard.enumToSwift()
         
         textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        //textField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .valueChanged)
         
         if (unit != nil) {
             unitLbl.text = unit
@@ -204,5 +208,9 @@ class MainTextField2: UIView {
     @objc func textFieldDidChange(_ textField: UITextField) {
         //print(textField.text)
         self.value = textField.text ?? ""
+    }
+    
+    @objc func textFieldDidChangeSelection() {
+        
     }
 }

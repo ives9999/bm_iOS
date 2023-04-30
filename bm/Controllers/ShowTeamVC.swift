@@ -1851,7 +1851,6 @@ extension ShowTeamVC: TapLabel2Delegate {
         }
         
         introduceTableView.reloadData()
-        
     }
 }
 

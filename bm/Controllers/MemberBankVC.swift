@@ -25,25 +25,25 @@ class MemberBankVC: BaseViewController {
     var showTop2: ShowTop2?
     
     let nameTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "銀行名稱", icon: "email_svg", placeholder: "台灣銀行", isRequired: true)
+        let view: MainTextField2 = MainTextField2(key: "name", label: "銀行名稱", icon: "email_svg", placeholder: "台灣銀行", isRequired: true)
         
         return view
     }()
     
     let branchTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "分行名稱", icon: "email_svg", placeholder: "中正分行", isRequired: true)
+        let view: MainTextField2 = MainTextField2(key: "branch", label: "分行名稱", icon: "email_svg", placeholder: "中正分行", isRequired: true)
         
         return view
     }()
     
     let codeTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "銀行代碼", icon: "code_svg", placeholder: "100", isRequired: true, keyboard: KEYBOARD.numberPad)
+        let view: MainTextField2 = MainTextField2(key: "code", label: "銀行代碼", icon: "code_svg", placeholder: "100", isRequired: true, keyboard: KEYBOARD.numberPad)
         
         return view
     }()
     
     let accountTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(label: "帳號", icon: "email_svg", placeholder: "0065432", isRequired: true, keyboard: KEYBOARD.numberPad)
+        let view: MainTextField2 = MainTextField2(key: "account", label: "帳號", icon: "email_svg", placeholder: "0065432", isRequired: true, keyboard: KEYBOARD.numberPad)
         
         return view
     }()

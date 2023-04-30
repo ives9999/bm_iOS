@@ -278,6 +278,7 @@ class ShowMatchVC: BaseViewController {
                             self.setIntroduceData()
                             //self.setSignupData()
                             
+                            showTab2.pressed(self.focusTabIdx)
                             self._tabPressed(self.focusTabIdx)
                         }
                     } catch {
