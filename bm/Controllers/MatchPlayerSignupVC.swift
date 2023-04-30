@@ -184,6 +184,16 @@ class MatchPlayerSignupVC: BaseViewController {
             return
         }
         
+        if table == nil {
+            warning("沒有取得賽事組別資料錯誤!!")
+            return
+        }
+        
+        if table!.matchTable == nil {
+            warning("沒有取得賽事資料錯誤!!")
+            return
+        }
+        
         var params: [String: String] = [String: String]()
         for field in fields {
             if let f: MainTextField2 = field as? MainTextField2 {
@@ -191,6 +201,8 @@ class MatchPlayerSignupVC: BaseViewController {
             }
         }
         
+        params["match_id"] = String(table!.matchTable!.id)
+        params["match_group_id"] = String(table!.id)
         params["member_token"] = Member.instance.token
         params["do"] = "update"
         //print(params)
