@@ -19,6 +19,12 @@ class MatchPlayerSignupVC: BaseViewController {
     
     var formContainer: UIView = UIView()
     
+    let teamNameTxt2: MainTextField2 = {
+        let view: MainTextField2 = MainTextField2(key: "team_name", label: "隊名", icon: "member_on_svg", placeholder: "無敵隊", isRequired: true)
+        
+        return view
+    }()
+    
     let nameTxt2: MainTextField2 = {
         let view: MainTextField2 = MainTextField2(key: "name", label: "姓名", icon: "member_on_svg", placeholder: "王大明", isRequired: true)
         
@@ -86,9 +92,17 @@ class MatchPlayerSignupVC: BaseViewController {
             make.bottom.equalTo(showBottom!.snp.top)
         }
         
+            formContainer.addSubview(teamNameTxt2)
+            teamNameTxt2.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(12)
+                make.left.equalToSuperview().offset(20)
+                make.right.equalToSuperview().offset(-20)
+            }
+            fields.append(nameTxt2)
+        
             formContainer.addSubview(nameTxt2)
             nameTxt2.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(12)
+                make.top.equalTo(teamNameTxt2.snp.bottom).offset(20)
                 make.left.equalToSuperview().offset(20)
                 make.right.equalToSuperview().offset(-20)
             }
