@@ -8,9 +8,9 @@
 
 import Foundation
 
-class MatchGroupsTable: Tables {
+class MatchTeamsTable: Tables {
     
-    var rows: [MatchGroupTable] = [MatchGroupTable]()
+    var rows: [MatchTeamTable] = [MatchTeamTable]()
     
     enum CodingKeys: String, CodingKey {
         case rows
@@ -20,17 +20,18 @@ class MatchGroupsTable: Tables {
         try super.init(from: decoder)
         
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        rows = try container.decode([MatchGroupTable].self, forKey: .rows)
+        rows = try container.decode([MatchTeamTable].self, forKey: .rows)
     }
 }
 
-class MatchGroupTable: Table {
+class MatchTeamTable: Table {
     var match_id: Int = 0
     var number: Int = 0
     var price: Int = 0
     var limit: Int = 0
     
     var matchTable: MatchTable? = nil
+    var matchGroupTable: MatchGroupTable? = nil
     var matchPlayers: [MatchPlayerTable] = [MatchPlayerTable]()
     
     enum CodingKeys: String, CodingKey {
@@ -39,6 +40,7 @@ class MatchGroupTable: Table {
         case price
         case limit
         case matchTable = "match"
+        case matchGroupTable = "match_group"
         case matchPlayers = "match_players"
     }
     
@@ -51,6 +53,7 @@ class MatchGroupTable: Table {
         do {price = try container.decode(Int.self, forKey: .price)}catch{price = 0}
         do {limit = try container.decode(Int.self, forKey: .limit)}catch{limit = 0}
         do {matchTable = try container.decode(MatchTable.self, forKey: .matchTable)}catch{matchTable = nil}
+        do {matchGroupTable = try container.decode(MatchGroupTable.self, forKey: .matchGroupTable)}catch{matchGroupTable = nil}
         do {matchPlayers = try container.decode([MatchPlayerTable].self, forKey: .matchPlayers)}catch{matchPlayers = [MatchPlayerTable]()}
     }
     
@@ -58,6 +61,7 @@ class MatchGroupTable: Table {
         
         super.filterRow()
         matchTable?.filterRow()
+        matchGroupTable?.filterRow()
         if (matchPlayers.count > 0) {
             for matcherPlayer in matchPlayers {
                 matcherPlayer.filterRow()

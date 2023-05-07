@@ -329,7 +329,7 @@ class ShowMatchVC: BaseViewController {
     
     func signup(item: MatchGroupTable) {
         //print(item)
-        toMatchPlayerSignup(token: item.token)
+        toMatchTeamSignup(match_group_token: item.token)
     }
 }
 

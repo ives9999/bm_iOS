@@ -73,31 +73,6 @@ class DataService {
     init() {}
     
     func _simpleService(url: String, params: [String: String], completion: @escaping CompletionHandler) {
-//        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER)
-//            .validate()
-//            .responseData { (response) in
-//            
-//            switch response.result {
-//            case .success(_):
-//                if response.data != nil {
-//                    if (response.data != nil) {
-//                        self.jsonData = response.data!
-//                        completion(true)
-//                    } else {
-//                        self.msg = "解析JSON字串時，得到空直，請洽管理員"
-//                        completion(false)
-//                    }
-//                } else {
-//                    self.msg = "沒有任何伺服器回傳的訊息"
-//                    completion(false)
-//                }
-//            case .failure(let error):
-//                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-//                completion(false)
-//                print(error)
-//                return
-//            }
-//        }
         
         AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER)
             .validate()
@@ -728,59 +703,6 @@ class DataService {
                 //Current upload progress of file
                 //print("Upload Progress: \(progress.fractionCompleted)")
             })
-        
-//        { (result) in
-//
-//            switch result {
-//            case .success(let upload, _, _):
-//                upload.responseJSON(completionHandler: { (response) in
-//
-//                    if (response.data != nil) {
-//                        self.jsonData = response.data
-//                        completion(true)
-//                    } else {
-//                        self.msg = "伺服器錯誤，請洽管理員"
-//                        completion(false)
-//                        return
-//                    }
-//                })
-//            case .failure(let error):
-//                //print(error)
-//                //onError(error)
-//                self.handleErrorMsg("網路錯誤，請稍後再試，" + error.localizedDescription)
-//                completion(false)
-//            }
-//        }
-    }
-    
-    func update(token: String = "", params: [String: String], completion: @escaping CompletionHandler) {
-        
-        var url: String = getUpdateURL()
-        if token.count > 0 {
-            url = url + "/" + token
-        }
-        print(url)
-        print(params)
-        
-        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
-            
-            switch response.result {
-            
-            case .success(_):
-                if response.data != nil {
-                    self.jsonData = response.data
-                    completion(true)
-                } else {
-                    self.msg = "沒有任何伺服器回傳的訊息"
-                    completion(false)
-                }
-            case .failure(let error):
-                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
-                completion(false)
-                print(error)
-                return
-            }
-        }
     }
     
     func update(_params: [String: String], images: [UIImage]?, completion: @escaping CompletionHandler) {
@@ -827,6 +749,71 @@ class DataService {
                 //Current upload progress of file
                 //print("Upload Progress: \(progress.fractionCompleted)")
             })
+    }
+    
+    func update(token: String = "", params: [String: String], completion: @escaping CompletionHandler) {
+        
+        var url: String = getUpdateURL()
+        if token.count > 0 {
+            url = url + "/" + token
+        }
+        print(url)
+        print(params)
+        
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
+            
+            switch response.result {
+            
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
+    func update(token: String = "", query: Dictionary<String, Any>, completion: @escaping CompletionHandler) {
+        
+        var url: String = getUpdateURL()
+        if token.count > 0 {
+            url = url + "/" + token
+        }
+        print(url)
+        print(query.toJson())
+        
+        var request: URLRequest = URLRequest(url: URL(string: url)!)
+        request.httpMethod = HTTPMethod.post.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = query.toJson()!.description.data(using: .utf8)
+        print(request.httpBody)
+        AF.request(request).response { (response) in
+            switch response.result {
+
+            case .success(_):
+                if response.data != nil {
+                    //response.data?.prettyPrintedJSONString
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
     }
 }
 

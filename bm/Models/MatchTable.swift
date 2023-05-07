@@ -56,8 +56,8 @@ class MatchTable: Table {
         case ball
         case arena_name
         case arenaTable = "arena"
-        case matchContactTable = "contact"
-        case matchGroups = "groups"
+        case matchContactTable = "match_contact"
+        case matchGroups = "match_groups"
     }
     
     required init(from decoder: Decoder) throws {
