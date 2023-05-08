@@ -258,6 +258,7 @@
 		B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */; };
 		B3D4950D25DF67D900D7BF42 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D4950B25DF67D900D7BF42 /* PaymentCell.swift */; };
 		B3D4950E25DF67D900D7BF42 /* PaymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3D4950C25DF67D900D7BF42 /* PaymentCell.xib */; };
+		B3D58D042A08A93D008524CC /* MatchGiftTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D58D032A08A93D008524CC /* MatchGiftTable.swift */; };
 		B3DEBE14210781FD003699A0 /* CoachService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE13210781FD003699A0 /* CoachService.swift */; };
 		B3DEBE16210CA83A003699A0 /* ArenaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE15210CA83A003699A0 /* ArenaVC.swift */; };
 		B3DEBE18210CB30E003699A0 /* ArenaService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DEBE17210CB30E003699A0 /* ArenaService.swift */; };
@@ -715,6 +716,7 @@
 		B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
 		B3D4950B25DF67D900D7BF42 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
 		B3D4950C25DF67D900D7BF42 /* PaymentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentCell.xib; sourceTree = "<group>"; };
+		B3D58D032A08A93D008524CC /* MatchGiftTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchGiftTable.swift; sourceTree = "<group>"; };
 		B3DEBE13210781FD003699A0 /* CoachService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachService.swift; sourceTree = "<group>"; };
 		B3DEBE15210CA83A003699A0 /* ArenaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaVC.swift; sourceTree = "<group>"; };
 		B3DEBE17210CB30E003699A0 /* ArenaService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaService.swift; sourceTree = "<group>"; };
@@ -1519,6 +1521,7 @@
 				B3591B6F2164CC6100E0919C /* Degree.swift */,
 				B35F8DD81F8F64310073BD70 /* Home.swift */,
 				F983441929EEF5C00050B634 /* MatchContact.swift */,
+				B3D58D032A08A93D008524CC /* MatchGiftTable.swift */,
 				F983441729EEF49C0050B634 /* MatchGroupTable.swift */,
 				F983441B29EEF6E20050B634 /* MatchPlayerTable.swift */,
 				F983441529EEEE950050B634 /* MatchTable.swift */,
@@ -1961,6 +1964,7 @@
 				F983441A29EEF5C00050B634 /* MatchContact.swift in Sources */,
 				B3ED38E81FB852EB0003F083 /* FormCell.swift in Sources */,
 				B3E8C29B220603310008ED25 /* ShowCoachVC.swift in Sources */,
+				B3D58D042A08A93D008524CC /* MatchGiftTable.swift in Sources */,
 				B36D66B8229997AD00502D62 /* ManagerCourseVC.swift in Sources */,
 				F9F583B2283533C500F77B00 /* ThreeButton.swift in Sources */,
 				B33297811FD6B4E400949CDE /* SuperLabel.swift in Sources */,

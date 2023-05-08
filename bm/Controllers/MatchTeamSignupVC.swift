@@ -86,7 +86,7 @@ class MatchTeamSignupVC: BaseViewController {
                 Global.instance.removeSpinner(superView: self.view)
                 if (success) {
                     let jsonData: Data = self.dataService.jsonData!
-                    jsonData.prettyPrintedJSONString
+                    //jsonData.prettyPrintedJSONString
                     do {
                         let t: Table = try JSONDecoder().decode(t, from: jsonData)
                         guard let _myTable = t as? MatchTeamTable else { return }
@@ -106,10 +106,20 @@ class MatchTeamSignupVC: BaseViewController {
     
     func setPage() {
         let playerNumber: Int = table!.number
+        var giftName: String = ""
+        if table!.matchGifts.count > 0 {
+            if let product: ProductTable = table!.matchGifts[0].productTable {
+                giftName = product.name
+            }
+        }
+        
         pages.append(MatchTeamEditVC(idx: 0))
         for i in 1...1 {
-            pages.append(MatchPlayerEditVC(idx: i))
+            let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
+            vc.setGiftName(giftName)
+            pages.append(vc)
         }
+        
         self.pageVC.setViewControllers([pages.first!], direction: .forward, animated: true)
     }
     
@@ -447,6 +457,21 @@ class MatchPlayerEditVC: BaseViewController {
         return view
     }()
     
+    let hr: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = UIColor(MY_LIGHT_WHITE)
+        
+        return view
+    }()
+    
+    let giftLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextBold()
+        view.text = "贈品"
+        
+        return view
+    }()
+    
     var fields: [UIView] = [UIView]()
     
     init(idx: Int) {
@@ -471,7 +496,10 @@ class MatchPlayerEditVC: BaseViewController {
     }
     
     func anchor() {
-        self.view.addSubview(formContainer)
+        
+        let scroll = initScrollView(self.view)
+        
+        scroll.contentView.addSubview(formContainer)
         formContainer.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
@@ -522,6 +550,46 @@ class MatchPlayerEditVC: BaseViewController {
                 make.right.equalToSuperview().offset(-20)
             }
             fields.append(ageTxt2)
+        
+        formContainer.addSubview(hr)
+        hr.snp.makeConstraints { make in
+            make.top.equalTo(ageTxt2.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(1)
+        }
+        
+        formContainer.addSubview(giftLbl)
+        giftLbl.snp.makeConstraints { make in
+            make.top.equalTo(hr.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+        }
+    }
+    
+    private func initScrollView(_ container: UIView)-> (scrollView: UIScrollView, contentView: UIView) {
+        
+        let scrollView: UIScrollView = UIScrollView()
+        container.addSubview(scrollView)
+        //scrollView.backgroundColor = UIColor.red
+        scrollView.snp.makeConstraints { make in
+            make.centerX.equalTo(container.snp.centerX)
+            make.width.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+        }
+        
+        let contentView = UIView()
+        scrollView.addSubview(contentView)
+        //contentView.backgroundColor = UIColor.green
+        contentView.snp.makeConstraints { make in
+            make.left.right.equalTo(scrollView)
+            make.width.height.top.bottom.equalTo(scrollView)
+        }
+        
+        return (scrollView, contentView)
+    }
+    
+    func setGiftName(_ giftName: String) {
+        giftLbl.text = "贈品：\(giftName)"
     }
 
     func setValue() {

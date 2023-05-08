@@ -33,6 +33,7 @@ class MatchTeamTable: Table {
     var matchTable: MatchTable? = nil
     var matchGroupTable: MatchGroupTable? = nil
     var matchPlayers: [MatchPlayerTable] = [MatchPlayerTable]()
+    var matchGifts: [MatchGiftTable] = [MatchGiftTable]()
     
     enum CodingKeys: String, CodingKey {
         case match_id
@@ -42,6 +43,7 @@ class MatchTeamTable: Table {
         case matchTable = "match"
         case matchGroupTable = "match_group"
         case matchPlayers = "match_players"
+        case matchGifts = "match_gifts"
     }
     
     required init(from decoder: Decoder) throws {
@@ -55,6 +57,7 @@ class MatchTeamTable: Table {
         do {matchTable = try container.decode(MatchTable.self, forKey: .matchTable)}catch{matchTable = nil}
         do {matchGroupTable = try container.decode(MatchGroupTable.self, forKey: .matchGroupTable)}catch{matchGroupTable = nil}
         do {matchPlayers = try container.decode([MatchPlayerTable].self, forKey: .matchPlayers)}catch{matchPlayers = [MatchPlayerTable]()}
+        do {matchGifts = try container.decode([MatchGiftTable].self, forKey: .matchGifts)}catch{matchGifts = [MatchGiftTable]()}
     }
     
     override func filterRow() {
@@ -62,9 +65,16 @@ class MatchTeamTable: Table {
         super.filterRow()
         matchTable?.filterRow()
         matchGroupTable?.filterRow()
+        
         if (matchPlayers.count > 0) {
             for matcherPlayer in matchPlayers {
                 matcherPlayer.filterRow()
+            }
+        }
+        
+        if (matchGifts.count > 0) {
+            for matchGift in matchGifts {
+                matchGift.filterRow()
             }
         }
     }
