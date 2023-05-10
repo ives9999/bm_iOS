@@ -137,7 +137,7 @@ class ShowMatchVC: BaseViewController {
         scrollView.addSubview(contentView)
         //contentView.backgroundColor = UIColor.green
         contentView.snp.makeConstraints { make in
-            make.left.right.equalTo(introduceContainer)
+            make.left.right.equalTo(container)
             make.width.height.top.bottom.equalTo(scrollView)
         }
         

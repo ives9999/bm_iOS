@@ -107,9 +107,18 @@ class MatchTeamSignupVC: BaseViewController {
     func setPage() {
         let playerNumber: Int = table!.number
         var giftName: String = ""
+        var attributes: [[String: String]] = [[String: String]]()
+        
         if table!.matchGifts.count > 0 {
             if let product: ProductTable = table!.matchGifts[0].productTable {
                 giftName = product.name
+                
+                for attribute in product.attributes {
+                    let a = attribute.name
+                    let b = attribute.attribute
+                    let c = ["name": a, "attribute": b]
+                    attributes.append(c)
+                }
             }
         }
         
@@ -117,6 +126,7 @@ class MatchTeamSignupVC: BaseViewController {
         for i in 1...1 {
             let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
             vc.setGiftName(giftName)
+            vc.parseAttributes(attributes: attributes)
             pages.append(vc)
         }
         
@@ -472,7 +482,16 @@ class MatchPlayerEditVC: BaseViewController {
         return view
     }()
     
+    let attributeLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextBold()
+        view.text = "屬性："
+        
+        return view
+    }()
+    
     var fields: [UIView] = [UIView]()
+    var attributes: [String] = [String]()
     
     init(idx: Int) {
         self.idx = idx
@@ -497,6 +516,10 @@ class MatchPlayerEditVC: BaseViewController {
     
     func anchor() {
         
+        let topPadding: Int = 20
+        let leftPadding: Int = 20
+        let rightPadding: Int = -20
+        
         let scroll = initScrollView(self.view)
         
         scroll.contentView.addSubview(formContainer)
@@ -507,63 +530,70 @@ class MatchPlayerEditVC: BaseViewController {
             formContainer.addSubview(lbl)
             lbl.snp.makeConstraints { make in
                 make.top.equalToSuperview().offset(12)
-                make.left.equalToSuperview().offset(20)
-                make.right.equalToSuperview().offset(-20)
+                make.left.equalToSuperview().offset(leftPadding)
+                make.right.equalToSuperview().offset(rightPadding)
             }
         
             formContainer.addSubview(nameTxt2)
             nameTxt2.snp.makeConstraints { make in
-                make.top.equalTo(lbl.snp.bottom).offset(20)
-                make.left.equalToSuperview().offset(20)
-                make.right.equalToSuperview().offset(-20)
+                make.top.equalTo(lbl.snp.bottom).offset(topPadding)
+                make.left.equalToSuperview().offset(leftPadding)
+                make.right.equalToSuperview().offset(rightPadding)
             }
             fields.append(nameTxt2)
             
             formContainer.addSubview(mobileTxt2)
             mobileTxt2.snp.makeConstraints { make in
-                make.top.equalTo(nameTxt2.snp.bottom).offset(20)
-                make.left.equalToSuperview().offset(20)
-                make.right.equalToSuperview().offset(-20)
+                make.top.equalTo(nameTxt2.snp.bottom).offset(topPadding)
+                make.left.equalToSuperview().offset(leftPadding)
+                make.right.equalToSuperview().offset(rightPadding)
             }
             fields.append(mobileTxt2)
             
             formContainer.addSubview(emailTxt2)
             emailTxt2.snp.makeConstraints { make in
-                make.top.equalTo(mobileTxt2.snp.bottom).offset(20)
-                make.left.equalToSuperview().offset(20)
-                make.right.equalToSuperview().offset(-20)
+                make.top.equalTo(mobileTxt2.snp.bottom).offset(topPadding)
+                make.left.equalToSuperview().offset(leftPadding)
+                make.right.equalToSuperview().offset(rightPadding)
             }
             fields.append(emailTxt2)
             
             formContainer.addSubview(lineTxt2)
             lineTxt2.snp.makeConstraints { make in
-                make.top.equalTo(emailTxt2.snp.bottom).offset(20)
-                make.left.equalToSuperview().offset(20)
-                make.right.equalToSuperview().offset(-20)
+                make.top.equalTo(emailTxt2.snp.bottom).offset(topPadding)
+                make.left.equalToSuperview().offset(leftPadding)
+                make.right.equalToSuperview().offset(rightPadding)
             }
             fields.append(lineTxt2)
             
             formContainer.addSubview(ageTxt2)
             ageTxt2.snp.makeConstraints { make in
-                make.top.equalTo(lineTxt2.snp.bottom).offset(20)
-                make.left.equalToSuperview().offset(20)
-                make.right.equalToSuperview().offset(-20)
+                make.top.equalTo(lineTxt2.snp.bottom).offset(topPadding)
+                make.left.equalToSuperview().offset(leftPadding)
+                make.right.equalToSuperview().offset(rightPadding)
             }
             fields.append(ageTxt2)
         
-        formContainer.addSubview(hr)
-        hr.snp.makeConstraints { make in
-            make.top.equalTo(ageTxt2.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            make.height.equalTo(1)
-        }
+            formContainer.addSubview(hr)
+            hr.snp.makeConstraints { make in
+                make.top.equalTo(ageTxt2.snp.bottom).offset(topPadding)
+                make.left.equalToSuperview().offset(leftPadding)
+                make.right.equalToSuperview().offset(rightPadding)
+                make.height.equalTo(1)
+            }
+            
+            formContainer.addSubview(giftLbl)
+            giftLbl.snp.makeConstraints { make in
+                make.top.equalTo(hr.snp.bottom).offset(topPadding)
+                make.left.equalToSuperview().offset(leftPadding)
+            }
         
-        formContainer.addSubview(giftLbl)
-        giftLbl.snp.makeConstraints { make in
-            make.top.equalTo(hr.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(20)
-        }
+            formContainer.addSubview(attributeLbl)
+            attributeLbl.snp.makeConstraints { make in
+                make.top.equalTo(giftLbl.snp.bottom).offset(topPadding)
+                make.left.equalToSuperview().offset(leftPadding)
+                //make.bottom.equalToSuperview().offset(-100)
+            }
     }
     
     private func initScrollView(_ container: UIView)-> (scrollView: UIScrollView, contentView: UIView) {
@@ -582,7 +612,9 @@ class MatchPlayerEditVC: BaseViewController {
         //contentView.backgroundColor = UIColor.green
         contentView.snp.makeConstraints { make in
             make.left.right.equalTo(scrollView)
-            make.width.height.top.bottom.equalTo(scrollView)
+            make.top.bottom.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+            make.height.equalTo(2000)
         }
         
         return (scrollView, contentView)
@@ -601,6 +633,29 @@ class MatchPlayerEditVC: BaseViewController {
         if let age = Member.instance.dob.clacAge() {
             ageTxt2.setValue(String(20))
         }
+    }
+    
+    func parseAttributes(attributes: [[String: String]]) {
+        
+        var res: [String] = [String]()
+        for attribute in attributes {
+            for (key, value) in attribute {
+                if key == "attribute" {
+                    var tmp: String = value
+                    tmp = tmp.replace(target: "{", withString: "")
+                    tmp = tmp.replace(target: "}", withString: "")
+                    tmp = tmp.replace(target: "\"", withString: "")
+                    res = tmp.components(separatedBy: ",")
+                }
+            }
+            
+            
+            //show is 湖水綠,極致黑,經典白,太空灰
+            //name is 顏色
+            //key is color
+        }
+        
+        self.attributes = res
     }
     
     func checkRequire()-> String {
