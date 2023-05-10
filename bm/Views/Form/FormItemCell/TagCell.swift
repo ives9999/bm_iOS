@@ -61,15 +61,6 @@ class TagCell: FormItemCell {
                 tag.setSelectedStyle()
             }
             
-//            if let _formItem: TagFormItem = formItem as? TagFormItem {
-//                for idx in _formItem.selected_idxs {
-//                    if count == idx {
-//                        tag.selected = true
-//                        tag.setSelectedStyle()
-//                    }
-//                }
-//            }
-            
             let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
             tag.addGestureRecognizer(gestureRecognizer)
             tagLabels.append(tag)

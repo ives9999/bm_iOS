@@ -34,6 +34,17 @@ import UIKit
     var selected_borderColor = UIColor(TAG_SELECTED_BOLDCOLOR)
     var border_width: CGFloat = 2
     var font_size: CGFloat = 16
+    
+    init(key: String, value: String, text: String, tag: Int) {
+        super.init(frame: CGRect.zero)
+        
+        self.key = key
+        self.value = value
+        self.text = text
+        self.tag = tag
+        
+        self.commonInit1()
+    }
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -102,15 +113,5 @@ import UIKit
         intrinsicSuperViewContentSize.width += leftInset + rightInset
         return intrinsicSuperViewContentSize
     }
- 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
- */
-    
-
 }
 

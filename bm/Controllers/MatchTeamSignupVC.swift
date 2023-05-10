@@ -492,6 +492,7 @@ class MatchPlayerEditVC: BaseViewController {
     
     var fields: [UIView] = [UIView]()
     var attributes: [String] = [String]()
+    var tagLabels: [Tag] = [Tag]()
     
     init(idx: Int) {
         self.idx = idx
@@ -509,6 +510,11 @@ class MatchPlayerEditVC: BaseViewController {
         self.view.backgroundColor = UIColor.black
         
         lbl.text = "隊員\(idx)"
+        
+//        if attributes.count > 0 {
+//            if let a =
+//            attributeLbl.text = attributes["name"]
+//        }
         anchor()
         
         setValue()
@@ -594,6 +600,44 @@ class MatchPlayerEditVC: BaseViewController {
                 make.left.equalToSuperview().offset(leftPadding)
                 //make.bottom.equalToSuperview().offset(-100)
             }
+        
+        let tagContainer: AttributesView = AttributesView(attributes: attributes)
+        formContainer.addSubview(tagContainer)
+        tagContainer.backgroundColor = UIColor.red
+        tagContainer.snp.makeConstraints { make in
+            make.top.equalTo(attributeLbl.snp.bottom).offset(panelTopPadding)
+            make.left.equalToSuperview().offset(leftPadding)
+            make.right.equalToSuperview().offset(rightPadding)
+            make.height.equalTo(100)
+        }
+        tagContainer.setAttributes()
+        
+        //let attributes: 
+        
+//        var count = attributes.count
+//        let column: Int = 3
+//        var res = count.quotientAndRemainder(dividingBy: column)
+//        let row: Int = (res.remainder >= 0) ? res.quotient + 1 : res.quotient
+//        count = 0
+//
+//        for attribute in attributes {
+//            let tag: Tag = Tag(key: attribute, value: attribute, text: attribute, tag: count)
+//            tagContainer.addSubview(tag)
+//
+//                if (attribute == value) {
+//                    tag.selected = true
+//                    tag.setSelectedStyle()
+//                }
+//
+//            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+//                tag.addGestureRecognizer(gestureRecognizer)
+//            tagLabels.append(tag)
+//
+//            res = count.quotientAndRemainder(dividingBy: column)
+//            tag.setMargin(parent: tagContainer, row_count: res.quotient + 1, column_count: res.remainder + 1)
+//
+//            count += 1
+//        }
     }
     
     private func initScrollView(_ container: UIView)-> (scrollView: UIScrollView, contentView: UIView) {
@@ -682,6 +726,33 @@ class MatchPlayerEditVC: BaseViewController {
         }
 
         return res
+    }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        let tag = sender.view as! Tag
+        
+        tag.selected = !tag.selected
+        tag.setSelectedStyle()
+        clearOtherTagSelected(selectedTag: tag)
+
+//        if valueDelegate != nil {
+//            valueDelegate!.tagChecked(checked: tag.selected, name: self.formItem!.name!, key: tag.key!, value: tag.value)
+//        }
+//
+//        if (cellDelegate != nil) {
+//            cellDelegate!.cellSetTag(sectionIdx: sectionIdx, rowIdx: rowIdx, value: tag.value, isChecked: tag.selected)
+//        }
+    }
+    
+    private func clearOtherTagSelected(selectedTag: Tag) {
+        if selectedTag.selected {
+            for tagLabel in tagLabels {
+                if tagLabel != selectedTag {
+                    tagLabel.selected = false
+                    tagLabel.unSelectedStyle()
+                }
+            }
+        }
     }
 }
 
