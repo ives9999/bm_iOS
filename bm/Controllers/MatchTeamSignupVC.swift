@@ -108,15 +108,22 @@ class MatchTeamSignupVC: BaseViewController {
         let playerNumber: Int = table!.number
         var giftName: String = ""
         var attributes: [[String: String]] = [[String: String]]()
+//        [
+//            {
+//                "name": "尺寸",
+//                "attribute": "{\"XS\",\"M\",\"3XL\"}"
+//            }
+//        ]
         
         if table!.matchGifts.count > 0 {
             if let product: ProductTable = table!.matchGifts[0].productTable {
                 giftName = product.name
                 
                 for attribute in product.attributes {
-                    let a = attribute.name
-                    let b = attribute.attribute
-                    let c = ["name": a, "attribute": b]
+                    let name = attribute.name
+                    let alias = attribute.alias
+                    let attribute = attribute.attribute
+                    let c = ["name": name, "alias": alias, "attribute": attribute]
                     attributes.append(c)
                 }
             }
@@ -126,7 +133,8 @@ class MatchTeamSignupVC: BaseViewController {
         for i in 1...1 {
             let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
             vc.setGiftName(giftName)
-            vc.parseAttributes(attributes: attributes)
+            vc.attributes = attributes
+            //vc.parseAttributes(attributes: attributes)
             pages.append(vc)
         }
         
@@ -482,16 +490,8 @@ class MatchPlayerEditVC: BaseViewController {
         return view
     }()
     
-    let attributeLbl: SuperLabel = {
-        let view: SuperLabel = SuperLabel()
-        view.setTextBold()
-        view.text = "屬性："
-        
-        return view
-    }()
-    
     var fields: [UIView] = [UIView]()
-    var attributes: [String] = [String]()
+    var attributes: [[String: String]] = [[String: String]]()
     var tagLabels: [Tag] = [Tag]()
     
     init(idx: Int) {
@@ -594,50 +594,54 @@ class MatchPlayerEditVC: BaseViewController {
                 make.left.equalToSuperview().offset(leftPadding)
             }
         
+        //下面回圈中要對齊的最後一個view
+        var lastView: UIView = giftLbl
+        
+        for attribute in attributes {
+            
+            let attributeLbl: SuperLabel = {
+                let view: SuperLabel = SuperLabel()
+                view.setTextBold()
+                view.text = "屬性："
+                
+                return view
+            }()
+            
             formContainer.addSubview(attributeLbl)
+            if let tmp: String = attribute["name"] {
+                attributeLbl.text = tmp
+            }
             attributeLbl.snp.makeConstraints { make in
-                make.top.equalTo(giftLbl.snp.bottom).offset(topPadding)
+                make.top.equalTo(lastView.snp.bottom).offset(topPadding)
                 make.left.equalToSuperview().offset(leftPadding)
                 //make.bottom.equalToSuperview().offset(-100)
             }
-        
-        let tagContainer: AttributesView = AttributesView(attributes: attributes)
-        formContainer.addSubview(tagContainer)
-        tagContainer.backgroundColor = UIColor.red
-        tagContainer.snp.makeConstraints { make in
-            make.top.equalTo(attributeLbl.snp.bottom).offset(panelTopPadding)
-            make.left.equalToSuperview().offset(leftPadding)
-            make.right.equalToSuperview().offset(rightPadding)
-            make.height.equalTo(100)
+            
+            //var alias: String = ""
+//            guard let alias: String = attribute["alias"] {
+//
+//            }
+            
+            //產生贈品屬性的tag
+            if let tmp: String = attribute["attribute"] {
+
+                let tagContainer: AttributesView = AttributesView(key: attribute["alias"] ?? "", attribute: tmp)
+                //屬性欄的高度，從tagContainer來取得
+                let h: Int = tagContainer.getHeight()
+                
+                formContainer.addSubview(tagContainer)
+                //tagContainer.backgroundColor = UIColor.red
+                tagContainer.snp.makeConstraints { make in
+                    make.top.equalTo(attributeLbl.snp.bottom).offset(topPadding)
+                    make.left.equalToSuperview().offset(leftPadding)
+                    make.right.equalToSuperview().offset(rightPadding)
+                    make.height.equalTo(h)
+                }
+                tagContainer.delegate = self
+                tagContainer.setAttributes()
+                lastView = tagContainer
+            }
         }
-        tagContainer.setAttributes()
-        
-        //let attributes: 
-        
-//        var count = attributes.count
-//        let column: Int = 3
-//        var res = count.quotientAndRemainder(dividingBy: column)
-//        let row: Int = (res.remainder >= 0) ? res.quotient + 1 : res.quotient
-//        count = 0
-//
-//        for attribute in attributes {
-//            let tag: Tag = Tag(key: attribute, value: attribute, text: attribute, tag: count)
-//            tagContainer.addSubview(tag)
-//
-//                if (attribute == value) {
-//                    tag.selected = true
-//                    tag.setSelectedStyle()
-//                }
-//
-//            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-//                tag.addGestureRecognizer(gestureRecognizer)
-//            tagLabels.append(tag)
-//
-//            res = count.quotientAndRemainder(dividingBy: column)
-//            tag.setMargin(parent: tagContainer, row_count: res.quotient + 1, column_count: res.remainder + 1)
-//
-//            count += 1
-//        }
     }
     
     private func initScrollView(_ container: UIView)-> (scrollView: UIScrollView, contentView: UIView) {
@@ -679,29 +683,6 @@ class MatchPlayerEditVC: BaseViewController {
         }
     }
     
-    func parseAttributes(attributes: [[String: String]]) {
-        
-        var res: [String] = [String]()
-        for attribute in attributes {
-            for (key, value) in attribute {
-                if key == "attribute" {
-                    var tmp: String = value
-                    tmp = tmp.replace(target: "{", withString: "")
-                    tmp = tmp.replace(target: "}", withString: "")
-                    tmp = tmp.replace(target: "\"", withString: "")
-                    res = tmp.components(separatedBy: ",")
-                }
-            }
-            
-            
-            //show is 湖水綠,極致黑,經典白,太空灰
-            //name is 顏色
-            //key is color
-        }
-        
-        self.attributes = res
-    }
-    
     func checkRequire()-> String {
 
         var res: String = ""
@@ -727,32 +708,11 @@ class MatchPlayerEditVC: BaseViewController {
 
         return res
     }
-    
-    @objc func handleTap(sender: UITapGestureRecognizer) {
-        let tag = sender.view as! Tag
-        
-        tag.selected = !tag.selected
-        tag.setSelectedStyle()
-        clearOtherTagSelected(selectedTag: tag)
+}
 
-//        if valueDelegate != nil {
-//            valueDelegate!.tagChecked(checked: tag.selected, name: self.formItem!.name!, key: tag.key!, value: tag.value)
-//        }
-//
-//        if (cellDelegate != nil) {
-//            cellDelegate!.cellSetTag(sectionIdx: sectionIdx, rowIdx: rowIdx, value: tag.value, isChecked: tag.selected)
-//        }
-    }
-    
-    private func clearOtherTagSelected(selectedTag: Tag) {
-        if selectedTag.selected {
-            for tagLabel in tagLabels {
-                if tagLabel != selectedTag {
-                    tagLabel.selected = false
-                    tagLabel.unSelectedStyle()
-                }
-            }
-        }
+extension MatchPlayerEditVC: AttributesViewDelegate {
+    func tagPressed(key: String, idx: Int, value: String) {
+        print("key:\(key) => idx:\(idx) => value:\(value)")
     }
 }
 

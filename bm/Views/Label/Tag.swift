@@ -64,6 +64,7 @@ import UIKit
     func commonInit1(){
         setTextSize(font_size)
         self.layer.masksToBounds = true
+        self.textAlignment = .center
         unSelectedStyle()
         setSelectedStyle()
         isUserInteractionEnabled = true

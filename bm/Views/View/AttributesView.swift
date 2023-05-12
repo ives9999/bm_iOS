@@ -10,33 +10,36 @@ import UIKit
 
 class AttributesView: UIView {
 
+    var key: String = ""
     var count: Int = 0
     var column: Int = 3
     var row: Int = 1
     
-    var labelWidth: CGFloat = 80
-    let labelHeight: CGFloat = 30
-    let horizonMergin: CGFloat = 30
-    let vericalMergin: CGFloat = 16
+    var labelWidth: Int = 80
+    let labelHeight: Int = 30
+    let horizonMergin: Int = 30
+    let vericalMergin: Int = 16
     
     //var parent: UIView = UIView()
     var attributes: [String] = [String]()
     
     var tagLabels: [Tag] = [Tag]()
     
-//    required init() {
-//        super.init(frame: CGRect.zero)
-//        setupView()
-//    }
+    var delegate: AttributesViewDelegate?
     
-    required init(attributes: [String], column: Int = 3) {
+    //attribute: 是從資料庫撈出來的屬性值，如：{\"XS\",\"S\",\"M\",\"L\",\"XL\",\"2XL\",\"3XL\"}
+    //clumn: 每列幾個欄，預設是3欄，列則是用欄跟屬性總數來計算出來的
+    required init(key: String, attribute: String, column: Int = 3) {
         super.init(frame: CGRect.zero)
         
-        //self.parent = parent
-        self.attributes = attributes
+        self.key = key
+        self.attributes = self.parseAttributes(attribute: attribute)
         self.column = column
         
         self.count = attributes.count
+        
+        var tmp: (quotient: Int, remainder: Int) = count.quotientAndRemainder(dividingBy: column)
+        row = (tmp.remainder > 0) ? tmp.quotient + 1 : tmp.quotient
     }
     
     override init(frame: CGRect) {
@@ -49,53 +52,76 @@ class AttributesView: UIView {
     
     func setAttributes() {
         
-        var tmp: (quotient: Int, remainder: Int) = count.quotientAndRemainder(dividingBy: column)
-        row = (tmp.remainder > 0) ? tmp.quotient + 1 : tmp.quotient
-        
         for (idx, attribute) in attributes.enumerated() {
+            
             let tag: Tag = Tag(key: attribute, value: attribute, text: attribute, tag: idx)
             self.addSubview(tag)
             
-            let leftPadding: Int = idx*Int((labelWidth + horizonMergin))
+            let tmp: (quotient: Int, remainder: Int) = idx.quotientAndRemainder(dividingBy: column)
+            //商是第幾列row，餘數是第幾排column
+            let leftPadding: Int = tmp.remainder*(labelWidth + horizonMergin)
+            let topPadding: Int = tmp.quotient*(labelHeight + vericalMergin)
             tag.snp.makeConstraints { make in
-                make.top.equalToSuperview()
+                make.top.equalToSuperview().offset(topPadding)
                 make.left.equalToSuperview().offset(leftPadding)
                 make.width.equalTo(labelWidth)
                 make.height.equalTo(labelHeight)
             }
-//            tmp = idx.quotientAndRemainder(dividingBy: column)
-//            self.setMargin(tag: tag, row_count: tmp.quotient + 1, column_count: tmp.remainder + 1)
             
+            let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+            tag.addGestureRecognizer(gestureRecognizer)
+                        
             tagLabels.append(tag)
+            
+            //selected tag
+//            if (attribute == value) {
+//                tag.selected = true
+//                tag.setSelectedStyle()
+//            }
         }
     }
     
-    //    (1, 1)  (1, 2)  (1, 3)
-    //    (2, 1)  (2, 2)  (2, 3)
-    //    (3, 1)  (3, 2)  (3, 3)
+    func getHeight()-> Int {
+        let height: Int = row*(labelHeight + vericalMergin)
         
-    func setMargin(tag: Tag, row_count: Int, column_count: Int) {
-        
-        
-        
-        let leading: CGFloat = CGFloat(column_count-1)*labelWidth + CGFloat(column_count-1)*horizonMergin
-        let top: CGFloat = CGFloat(row_count-1)*labelHeight + CGFloat(row_count)*vericalMergin
-        
-        var left: NSLayoutConstraint, up: NSLayoutConstraint
-            //h: NSLayoutConstraint, w: NSLayoutConstraint
-        
-        //左邊
-        left = NSLayoutConstraint(item: tag, attribute: .leading, relatedBy: .equal, toItem: tag.superview, attribute: .leading, multiplier: 1, constant: leading)
-        
-        //上面
-        up = NSLayoutConstraint(item: tag, attribute: .top, relatedBy: .equal, toItem: tag.superview, attribute: .top, multiplier: 1, constant: top)
-        
-        //寬度
-        //w = NSLayoutConstraint(item: block, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: labelWidth)
-        
-        //高度
-        //h = NSLayoutConstraint(item: block, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: labelHeight)
-        self.translatesAutoresizingMaskIntoConstraints = false
-        self.addConstraints([left, up])
+        return height
     }
+    
+    @objc func handleTap(sender: UITapGestureRecognizer) {
+        let tag = sender.view as! Tag
+        
+        tag.selected = !tag.selected
+        tag.setSelectedStyle()
+        clearOtherTagSelected(selectedTag: tag)
+        
+        delegate?.tagPressed(key: key, idx: tag.tag, value: tag.value)
+    }
+    
+    private func clearOtherTagSelected(selectedTag: Tag) {
+        if selectedTag.selected {
+            for tagLabel in tagLabels {
+                if tagLabel != selectedTag {
+                    tagLabel.selected = false
+                    tagLabel.unSelectedStyle()
+                }
+            }
+        }
+    }
+    
+    //將"{\"XS\",\"S\",\"M\",\"L\",\"XL\",\"2XL\",\"3XL\"}"解析成["XS","S","M","L","XL","2XL","3XL"]
+    func parseAttributes(attribute: String)-> [String] {
+        
+        var res: [String] = [String]()
+        var tmp = attribute.replace(target: "{", withString: "")
+        tmp = tmp.replace(target: "}", withString: "")
+        tmp = tmp.replace(target: "\"", withString: "")
+        res = tmp.components(separatedBy: ",")
+        
+        return res
+    }
+}
+
+protocol AttributesViewDelegate {
+    
+    func tagPressed(key: String, idx: Int, value: String)
 }
