@@ -106,26 +106,21 @@ class MatchTeamSignupVC: BaseViewController {
     
     func setPage() {
         let playerNumber: Int = table!.number
+        
         var giftName: String = ""
-        var attributes: [[String: String]] = [[String: String]]()
-//        [
-//            {
-//                "name": "尺寸",
-//                "attribute": "{\"XS\",\"M\",\"3XL\"}"
-//            }
-//        ]
+        var attributes: [ProductAttributeTable] = [ProductAttributeTable]()
         
         if table!.matchGifts.count > 0 {
             if let product: ProductTable = table!.matchGifts[0].productTable {
                 giftName = product.name
                 
-                for attribute in product.attributes {
-                    let name = attribute.name
-                    let alias = attribute.alias
-                    let attribute = attribute.attribute
-                    let c = ["name": name, "alias": alias, "attribute": attribute]
-                    attributes.append(c)
-                }
+//                [
+//                   {
+//                        "name": "尺寸",
+//                        "attribute": "{\"XS\",\"M\",\"3XL\"}"
+//                    }
+//                ]
+                attributes = product.attributes
             }
         }
         
@@ -134,7 +129,6 @@ class MatchTeamSignupVC: BaseViewController {
             let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
             vc.setGiftName(giftName)
             vc.attributes = attributes
-            //vc.parseAttributes(attributes: attributes)
             pages.append(vc)
         }
         
@@ -143,6 +137,7 @@ class MatchTeamSignupVC: BaseViewController {
     
     override func submit() {
         
+        //球隊資訊
         var params: [String: Any] = [String: Any]()
         if let vc = pages[0] as? MatchTeamEditVC {
             let res = vc.checkRequire()
@@ -162,6 +157,7 @@ class MatchTeamSignupVC: BaseViewController {
         
         //print(params)
         
+        //球員資訊
         var b: [[String: String]] = [[String: String]]()
         for i in 1...pages.count-1 {
             
@@ -176,6 +172,12 @@ class MatchTeamSignupVC: BaseViewController {
                 for field in vc.fields {
                     if let tmp = field as? MainTextField2 {
                         c["\(tmp.key)"] = tmp.value
+                    }
+                }
+                
+                for attribute in vc.giftAttributes {
+                    for (key, value) in attribute {
+                        c[key] = value
                     }
                 }
                 b.append(c)
@@ -490,9 +492,12 @@ class MatchPlayerEditVC: BaseViewController {
         return view
     }()
     
+    //填寫的所有欄位
     var fields: [UIView] = [UIView]()
-    var attributes: [[String: String]] = [[String: String]]()
-    var tagLabels: [Tag] = [Tag]()
+    //贈品的屬性
+    var attributes: [ProductAttributeTable] = [ProductAttributeTable]()
+    
+    var giftAttributes: [[String: String]] = [[String: String]]()
     
     init(idx: Int) {
         self.idx = idx
@@ -597,8 +602,9 @@ class MatchPlayerEditVC: BaseViewController {
         //下面回圈中要對齊的最後一個view
         var lastView: UIView = giftLbl
         
-        for attribute in attributes {
+        for attribute in self.attributes {
             
+            //setup attribute label
             let attributeLbl: SuperLabel = {
                 let view: SuperLabel = SuperLabel()
                 view.setTextBold()
@@ -608,40 +614,34 @@ class MatchPlayerEditVC: BaseViewController {
             }()
             
             formContainer.addSubview(attributeLbl)
-            if let tmp: String = attribute["name"] {
-                attributeLbl.text = tmp
-            }
+            attributeLbl.text = attribute.name
             attributeLbl.snp.makeConstraints { make in
                 make.top.equalTo(lastView.snp.bottom).offset(topPadding)
                 make.left.equalToSuperview().offset(leftPadding)
                 //make.bottom.equalToSuperview().offset(-100)
             }
             
-            //var alias: String = ""
-//            guard let alias: String = attribute["alias"] {
-//
-//            }
-            
             //產生贈品屬性的tag
-            if let tmp: String = attribute["attribute"] {
-
-                let tagContainer: AttributesView = AttributesView(key: attribute["alias"] ?? "", attribute: tmp)
-                //屬性欄的高度，從tagContainer來取得
-                let h: Int = tagContainer.getHeight()
-                
-                formContainer.addSubview(tagContainer)
-                //tagContainer.backgroundColor = UIColor.red
-                tagContainer.snp.makeConstraints { make in
-                    make.top.equalTo(attributeLbl.snp.bottom).offset(topPadding)
-                    make.left.equalToSuperview().offset(leftPadding)
-                    make.right.equalToSuperview().offset(rightPadding)
-                    make.height.equalTo(h)
-                }
-                tagContainer.delegate = self
-                tagContainer.setAttributes()
-                lastView = tagContainer
+            let tagContainer: AttributesView = AttributesView(key: attribute.alias, attribute: attribute.attribute)
+            //屬性欄的高度，從tagContainer來取得
+            let h: Int = tagContainer.getHeight()
+            
+            formContainer.addSubview(tagContainer)
+            //tagContainer.backgroundColor = UIColor.red
+            tagContainer.snp.makeConstraints { make in
+                make.top.equalTo(attributeLbl.snp.bottom).offset(topPadding)
+                make.left.equalToSuperview().offset(leftPadding)
+                make.right.equalToSuperview().offset(rightPadding)
+                make.height.equalTo(h)
             }
+            tagContainer.delegate = self
+            tagContainer.setAttributes()
+            lastView = tagContainer
+            
+            let tmp: [String: String] = [attribute.alias: ""]
+            giftAttributes.append(tmp)
         }
+        //print(giftAttributes)
     }
     
     private func initScrollView(_ container: UIView)-> (scrollView: UIScrollView, contentView: UIView) {
@@ -699,6 +699,21 @@ class MatchPlayerEditVC: BaseViewController {
         if emailTxt2.value.count == 0 {
             msgs.append("Email不能為空白")
         }
+        
+        if giftAttributes.count > 0 {
+            for giftAttribute in giftAttributes {
+                for (key, value) in giftAttribute {
+                    if value.count == 0 {
+                        for attribute in attributes {
+                            if attribute.alias == key {
+                                msgs.append("\(attribute.name)沒有選擇")
+                                break
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         if msgs.count > 0 {
             for msg in msgs {
@@ -711,8 +726,18 @@ class MatchPlayerEditVC: BaseViewController {
 }
 
 extension MatchPlayerEditVC: AttributesViewDelegate {
+    
     func tagPressed(key: String, idx: Int, value: String) {
-        print("key:\(key) => idx:\(idx) => value:\(value)")
+        //print("key:\(key) => idx:\(idx) => value:\(value)")
+        for (idx, giftAttriubte) in self.giftAttributes.enumerated() {
+            for (key1, _) in giftAttriubte {
+                if key1 == key {
+                    giftAttributes[idx][key] = value
+                    break
+                }
+            }
+        }
+        print(giftAttributes)
     }
 }
 
