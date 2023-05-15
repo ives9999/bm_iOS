@@ -10,7 +10,8 @@ import UIKit
 
 class AttributesView: UIView {
 
-    var key: String = ""
+    var alias: String = ""
+    var name: String = ""
     var count: Int = 0
     var column: Int = 3
     var row: Int = 1
@@ -29,10 +30,11 @@ class AttributesView: UIView {
     
     //attribute: 是從資料庫撈出來的屬性值，如：{\"XS\",\"S\",\"M\",\"L\",\"XL\",\"2XL\",\"3XL\"}
     //clumn: 每列幾個欄，預設是3欄，列則是用欄跟屬性總數來計算出來的
-    required init(key: String, attribute: String, column: Int = 3) {
+    required init(name: String, alias: String, attribute: String, column: Int = 3) {
         super.init(frame: CGRect.zero)
         
-        self.key = key
+        self.name = name
+        self.alias = alias
         self.attributes = self.parseAttributes(attribute: attribute)
         self.column = column
         
@@ -94,7 +96,7 @@ class AttributesView: UIView {
         tag.setSelectedStyle()
         clearOtherTagSelected(selectedTag: tag)
         
-        delegate?.tagPressed(key: key, idx: tag.tag, value: tag.value)
+        delegate?.tagPressed(name: self.name, alias: self.alias, value: tag.value, idx: tag.tag)
     }
     
     private func clearOtherTagSelected(selectedTag: Tag) {
@@ -123,5 +125,5 @@ class AttributesView: UIView {
 
 protocol AttributesViewDelegate {
     
-    func tagPressed(key: String, idx: Int, value: String)
+    func tagPressed(name: String, alias: String, value: String, idx: Int)
 }

@@ -110,25 +110,12 @@ class MatchTeamSignupVC: BaseViewController {
         var giftName: String = ""
         var attributes: [ProductAttributeTable] = [ProductAttributeTable]()
         
-        if table!.matchGifts.count > 0 {
-            if let product: ProductTable = table!.matchGifts[0].productTable {
-                giftName = product.name
-                
-//                [
-//                   {
-//                        "name": "尺寸",
-//                        "attribute": "{\"XS\",\"M\",\"3XL\"}"
-//                    }
-//                ]
-                attributes = product.attributes
-            }
-        }
-        
         pages.append(MatchTeamEditVC(idx: 0))
         for i in 1...1 {
             let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
-            vc.setGiftName(giftName)
-            vc.attributes = attributes
+            //vc.setGiftName(giftName)
+            //vc.attributes = attributes
+            vc.gifts = table!.matchGifts
             pages.append(vc)
         }
         
@@ -158,7 +145,7 @@ class MatchTeamSignupVC: BaseViewController {
         //print(params)
         
         //球員資訊
-        var b: [[String: String]] = [[String: String]]()
+        var b: [[String: Any]] = [[String: Any]]()
         for i in 1...pages.count-1 {
             
             if let vc = pages[i] as? MatchPlayerEditVC {
@@ -168,18 +155,30 @@ class MatchTeamSignupVC: BaseViewController {
                     return
                 }
                 
-                var c: [String: String] = [String: String]()
+                var c: [String: Any] = [String: Any]()
                 for field in vc.fields {
                     if let tmp = field as? MainTextField2 {
                         c["\(tmp.key)"] = tmp.value
                     }
                 }
                 
-                for attribute in vc.giftAttributes {
-                    for (key, value) in attribute {
-                        c[key] = value
-                    }
+                var selected_attributes: [String] = [String]()
+                var gift_id: String = "0"
+                for giftAttribute in vc.giftAttributes {
+                    let value: String = "{name:\(giftAttribute["name"] ?? ""),alias:\(giftAttribute["alias"] ?? ""),value:\(giftAttribute["value"] ?? "")}"
+                    selected_attributes.append(value)
+                    gift_id = giftAttribute["id"] ?? "0"
                 }
+                
+//                var c1: [[String: String] = [String: String]()
+//                for attribute in vc.giftAttributes {
+//                    for (key, value) in attribute {
+//                        c1[key] = value
+//                    }
+//                }
+                c["gift"] = ["id": gift_id, "attribute": selected_attributes.joined(separator: "|")]
+                
+                
                 b.append(c)
             }
         }
@@ -495,9 +494,12 @@ class MatchPlayerEditVC: BaseViewController {
     //填寫的所有欄位
     var fields: [UIView] = [UIView]()
     //贈品的屬性
-    var attributes: [ProductAttributeTable] = [ProductAttributeTable]()
+    //var attributes: [ProductAttributeTable] = [ProductAttributeTable]()
     
+    //要回傳的贈品屬性
     var giftAttributes: [[String: String]] = [[String: String]]()
+    
+    var gifts: [MatchGiftTable] = [MatchGiftTable]()
     
     init(idx: Int) {
         self.idx = idx
@@ -516,10 +518,13 @@ class MatchPlayerEditVC: BaseViewController {
         
         lbl.text = "隊員\(idx)"
         
-//        if attributes.count > 0 {
-//            if let a =
-//            attributeLbl.text = attributes["name"]
+//        if gifts.count > 0 {
+//            if let product: ProductTable = gifts[0].productTable {
+//                giftLbl.text = product.name
+//                self.attributes = product.attributes
+//            }
 //        }
+        
         anchor()
         
         setValue()
@@ -602,7 +607,7 @@ class MatchPlayerEditVC: BaseViewController {
         //下面回圈中要對齊的最後一個view
         var lastView: UIView = giftLbl
         
-        for attribute in self.attributes {
+        for attribute in self.gifts[0].productTable!.attributes {
             
             //setup attribute label
             let attributeLbl: SuperLabel = {
@@ -622,7 +627,7 @@ class MatchPlayerEditVC: BaseViewController {
             }
             
             //產生贈品屬性的tag
-            let tagContainer: AttributesView = AttributesView(key: attribute.alias, attribute: attribute.attribute)
+            let tagContainer: AttributesView = AttributesView(name: attribute.name, alias: attribute.alias, attribute: attribute.attribute)
             //屬性欄的高度，從tagContainer來取得
             let h: Int = tagContainer.getHeight()
             
@@ -638,7 +643,7 @@ class MatchPlayerEditVC: BaseViewController {
             tagContainer.setAttributes()
             lastView = tagContainer
             
-            let tmp: [String: String] = [attribute.alias: ""]
+            let tmp: [String: String] = ["name": attribute.name, "alias": attribute.alias, "value": "", "id": String(gifts[0].id)]
             giftAttributes.append(tmp)
         }
         //print(giftAttributes)
@@ -704,7 +709,7 @@ class MatchPlayerEditVC: BaseViewController {
             for giftAttribute in giftAttributes {
                 for (key, value) in giftAttribute {
                     if value.count == 0 {
-                        for attribute in attributes {
+                        for attribute in self.gifts[0].productTable!.attributes {
                             if attribute.alias == key {
                                 msgs.append("\(attribute.name)沒有選擇")
                                 break
@@ -727,27 +732,20 @@ class MatchPlayerEditVC: BaseViewController {
 
 extension MatchPlayerEditVC: AttributesViewDelegate {
     
-    func tagPressed(key: String, idx: Int, value: String) {
+    func tagPressed(name: String, alias: String, value: String, idx: Int) {
         //print("key:\(key) => idx:\(idx) => value:\(value)")
+        //let value: String = "{name:\(name),alias:\(alias),value:\(value)}"
+        //selected_attributes.append(value)
         for (idx, giftAttriubte) in self.giftAttributes.enumerated() {
-            for (key1, _) in giftAttriubte {
-                if key1 == key {
-                    giftAttributes[idx][key] = value
+            for (key, value1) in giftAttriubte {
+                if key == "alias" && value1 == alias {
+                    giftAttributes[idx]["value"] = value
                     break
                 }
             }
         }
-        print(giftAttributes)
-    }
-}
-
-extension Dictionary {
-    
-    func toJson() -> String? {
-        guard let data = try? JSONSerialization.data(withJSONObject: self, options: []) else {
-            return nil
-        }
-        return String(data: data, encoding: String.Encoding.utf8)
+//        print(giftAttributes)
+//        let i = 6
     }
 }
 

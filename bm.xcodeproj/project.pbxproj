@@ -370,6 +370,7 @@
 		F9B1925A2997405F0037FE05 /* ShowTab2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B192592997405F0037FE05 /* ShowTab2.swift */; };
 		F9B1925C299FCCB00037FE05 /* ShowButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925B299FCCB00037FE05 /* ShowButton2.swift */; };
 		F9B1925E29A52AD50037FE05 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925D29A52AD50037FE05 /* Int.swift */; };
+		F9B9F6DB2A0E3C0400FD9ADC /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */; };
 		F9C6648029FCCA37005C1905 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6647F29FCCA37005C1905 /* Date.swift */; };
 		F9C6648229FE4213005C1905 /* MatchPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6648129FE4212005C1905 /* MatchPlayerService.swift */; };
 		F9C664842A040BFE005C1905 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C664832A040BFE005C1905 /* Data.swift */; };
@@ -841,6 +842,7 @@
 		F9B192592997405F0037FE05 /* ShowTab2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTab2.swift; sourceTree = "<group>"; };
 		F9B1925B299FCCB00037FE05 /* ShowButton2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowButton2.swift; sourceTree = "<group>"; };
 		F9B1925D29A52AD50037FE05 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		F9C6647F29FCCA37005C1905 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F9C6648129FE4212005C1905 /* MatchPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchPlayerService.swift; sourceTree = "<group>"; };
 		F9C664832A040BFE005C1905 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -1340,6 +1342,7 @@
 				F9C6647F29FCCA37005C1905 /* Date.swift */,
 				F9C664832A040BFE005C1905 /* Data.swift */,
 				F9C6648F2A0959B6005C1905 /* UIColor.swift */,
+				F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -2124,6 +2127,7 @@
 				F9EDEDB128928E3400FB92BB /* MyTable2VC.swift in Sources */,
 				B39453E1223CE905005E3027 /* CancelButton.swift in Sources */,
 				B35BA6832073C06600B506CA /* BaseViewController.swift in Sources */,
+				F9B9F6DB2A0E3C0400FD9ADC /* Dictionary.swift in Sources */,
 				F93095F62948ACFA006C625C /* Enum.swift in Sources */,
 				F985F4622956BF3900636FEA /* UIView.swift in Sources */,
 				B3F6B45B260500AC0000F9E0 /* SignupStandbyTab.swift in Sources */,
