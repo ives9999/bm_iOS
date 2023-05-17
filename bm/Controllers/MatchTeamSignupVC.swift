@@ -212,7 +212,9 @@ class MatchTeamSignupVC: BaseViewController {
                    if (!table.success) {
                        self.warning(table.msg)
                    } else {
-                       self.info("已經完成報名")
+                       self.info(msg: "已經完成報名，請前往付款", showCloseButton: true, buttonTitle: "付款") {
+                           //self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
+                       }
                    }
                } catch {
                    //self.warning(error.localizedDescription)
