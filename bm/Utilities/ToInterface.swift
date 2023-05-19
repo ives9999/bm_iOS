@@ -538,7 +538,12 @@ extension BaseViewController {
         }
     }
     
-    func toOrder(login: @escaping (_ baseViewController: BaseViewController)-> Void, register:  @escaping (_ baseViewController: BaseViewController)-> Void, product_token: String?=nil) {
+    //product_price_id 目前僅供賽事使用，可以判別報名那一組賽事
+    func toOrder(
+        login: @escaping (_ baseViewController: BaseViewController)-> Void,
+        register:  @escaping (_ baseViewController: BaseViewController)-> Void,
+        product_token: String? = nil,
+        product_price_id: Int? = nil) {
 
         let msg: String = ""
         if !Member.instance.isLoggedIn {
@@ -573,6 +578,9 @@ extension BaseViewController {
                     if let viewController = storyboard.instantiateViewController(identifier: TO_ORDER)  as? OrderVC {
                         if product_token != nil {
                             viewController.product_token = product_token
+                        }
+                        if product_price_id != nil {
+                            viewController.product_price_id = product_price_id
                         }
                         viewController.modalPresentationStyle = .fullScreen
                         show(viewController, sender: nil)

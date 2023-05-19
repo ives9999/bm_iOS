@@ -205,15 +205,21 @@ class MatchTeamSignupVC: BaseViewController {
            Global.instance.removeSpinner(superView: self.view)
            if success {
                let jsonData: Data = self.dataService.jsonData!
-               print(jsonData.toString())
+               //print(jsonData.toString())
                //jsonData.prettyPrintedJSONString
                do {
-                   let table = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
-                   if (!table.success) {
-                       self.warning(table.msg)
+                   let t = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
+                   if (!t.success) {
+                       self.warning(t.msg)
                    } else {
+                       //print(self.table!.product_token)
                        self.info(msg: "已經完成報名，請前往付款", showCloseButton: true, buttonTitle: "付款") {
-                           self.toOrder(login: { vc in vc.toLogin() }, register: { vc in vc.toRegister() }, product_token: "aaa")
+                           self.toOrder(
+                            login: { vc in vc.toLogin() },
+                            register: { vc in vc.toRegister() },
+                            product_token: self.table!.product_token,
+                            product_price_id: self.table!.matchGroupTable?.product_price_id
+                           )
                        }
                    }
                } catch {

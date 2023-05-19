@@ -14,6 +14,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     @IBOutlet weak var submitButton: SubmitButton!
     
     var product_token: String? = nil
+    var product_price_id: Int? = nil
+    
     var productTable: ProductTable? = nil
     
     var cartsTable: CartsTable? = nil
@@ -120,7 +122,13 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         //單一品項購買，沒有使用購物車，直接結帳
         if product_token != nil {
             
-            let params: [String: String] = ["token": product_token!, "member_token": Member.instance.token]
+            var params: [String: String] = [
+                "token": product_token!,
+                "member_token": Member.instance.token
+            ]
+            if product_price_id != nil {
+                params["product_price_id"] = String(product_price_id!)
+            }
             ProductService.instance.getOne(params: params) { (success) in
                 if (success) {
                     do {
@@ -541,6 +549,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             }
             
             invoiceTable.reloadData()
+            tableView.reloadData()
             unmask()
         }
         

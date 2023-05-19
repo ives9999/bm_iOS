@@ -35,6 +35,8 @@ class MatchTeamTable: Table {
     var matchPlayers: [MatchPlayerTable] = [MatchPlayerTable]()
     var matchGifts: [MatchGiftTable] = [MatchGiftTable]()
     
+    var product_token: String = ""
+    
     enum CodingKeys: String, CodingKey {
         case match_id
         case number
@@ -44,6 +46,7 @@ class MatchTeamTable: Table {
         case matchGroupTable = "match_group"
         case matchPlayers = "match_players"
         case matchGifts = "match_gifts"
+        case product_token
     }
     
     required init(from decoder: Decoder) throws {
@@ -58,6 +61,8 @@ class MatchTeamTable: Table {
         do {matchGroupTable = try container.decode(MatchGroupTable.self, forKey: .matchGroupTable)}catch{matchGroupTable = nil}
         do {matchPlayers = try container.decode([MatchPlayerTable].self, forKey: .matchPlayers)}catch{matchPlayers = [MatchPlayerTable]()}
         do {matchGifts = try container.decode([MatchGiftTable].self, forKey: .matchGifts)}catch{matchGifts = [MatchGiftTable]()}
+        
+        product_token = try container.decodeIfPresent(String.self, forKey: .product_token) ?? ""
     }
     
     override func filterRow() {
