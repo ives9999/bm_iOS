@@ -105,13 +105,13 @@ class MatchTeamSignupVC: BaseViewController {
     }
     
     func setPage() {
-        let playerNumber: Int = table!.number
+        let playerNumber: Int = table!.matchGroupTable!.number
         
-        var giftName: String = ""
-        var attributes: [ProductAttributeTable] = [ProductAttributeTable]()
+//        var giftName: String = ""
+//        var attributes: [ProductAttributeTable] = [ProductAttributeTable]()
         
         pages.append(MatchTeamEditVC(idx: 0))
-        for i in 1...1 {
+        for i in 1...playerNumber {
             let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
             //vc.setGiftName(giftName)
             //vc.attributes = attributes
@@ -213,7 +213,7 @@ class MatchTeamSignupVC: BaseViewController {
                        self.warning(table.msg)
                    } else {
                        self.info(msg: "已經完成報名，請前往付款", showCloseButton: true, buttonTitle: "付款") {
-                           //self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
+                           self.toOrder(login: { vc in vc.toLogin() }, register: { vc in vc.toRegister() }, product_token: "aaa")
                        }
                    }
                } catch {
@@ -518,7 +518,8 @@ class MatchPlayerEditVC: BaseViewController {
         
         self.view.backgroundColor = UIColor.black
         
-        lbl.text = "隊員\(idx)"
+        title = "隊員\(idx)"
+        lbl.text = title
         
 //        if gifts.count > 0 {
 //            if let product: ProductTable = gifts[0].productTable {
@@ -710,13 +711,10 @@ class MatchPlayerEditVC: BaseViewController {
         if giftAttributes.count > 0 {
             for giftAttribute in giftAttributes {
                 for (key, value) in giftAttribute {
-                    if value.count == 0 {
-                        for attribute in self.gifts[0].productTable!.attributes {
-                            if attribute.alias == key {
-                                msgs.append("\(attribute.name)沒有選擇")
-                                break
-                            }
-                        }
+                    if key == "value" && value.count == 0 {
+                        let name: String = giftAttribute["name"] ?? ""
+                        msgs.append("\(title!) \(name)沒有選擇")
+                        break
                     }
                 }
             }

@@ -28,6 +28,7 @@ class MatchGroupTable: Table {
     var match_id: Int = 0
     var number: Int = 0
     var price: Int = 0
+    var product_price_id: Int = 0
     var limit: Int = 0
     
     var matchTable: MatchTable? = nil
@@ -37,6 +38,7 @@ class MatchGroupTable: Table {
         case match_id
         case number
         case price
+        case product_price_id
         case limit
         case matchTable = "match"
         case matchPlayers = "match_players"
@@ -49,6 +51,7 @@ class MatchGroupTable: Table {
         do {match_id = try container.decode(Int.self, forKey: .match_id)}catch{match_id = 0}
         do {number = try container.decode(Int.self, forKey: .number)}catch{number = 0}
         do {price = try container.decode(Int.self, forKey: .price)}catch{price = 0}
+        product_price_id = try container.decodeIfPresent(Int.self, forKey: .product_price_id) ?? 0
         do {limit = try container.decode(Int.self, forKey: .limit)}catch{limit = 0}
         do {matchTable = try container.decode(MatchTable.self, forKey: .matchTable)}catch{matchTable = nil}
         do {matchPlayers = try container.decode([MatchPlayerTable].self, forKey: .matchPlayers)}catch{matchPlayers = [MatchPlayerTable]()}
