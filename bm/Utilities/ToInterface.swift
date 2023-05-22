@@ -232,6 +232,13 @@ extension BaseViewController {
             self.navigationController!.pushViewController(viewController, animated: true)
         }
     }
+    
+    func toManagerMatch(manager_token: String) {
+        let v: ManagerMatchVC = ManagerMatchVC()
+        v.manager_token = manager_token
+        v.modalPresentationStyle = .fullScreen
+        show(v, sender: nil)
+    }
 
     func toManagerSignup(able_type: String, able_token: String, able_title: String) {
         if #available(iOS 13.0, *) {

@@ -722,11 +722,11 @@ enum MainMemberEnum: String {
     case like = "喜歡"
     case join = "參加"
     case manager = "管理"
-    case match = "賽事"
+    //case match = "賽事"
     case bank = "銀行帳號"
     case delete = "刪除帳號"
     
-    static let allValues: [MainMemberEnum] = [info, order, like, join, manager, match, bank, delete]
+    static let allValues: [MainMemberEnum] = [info, order, like, join, manager, bank, delete]
     static func chineseGetEnum(text: String)-> MainMemberEnum {
         switch text {
         case "會員資料": return .info
@@ -734,7 +734,7 @@ enum MainMemberEnum: String {
         case "喜歡": return .like
         case "參加": return .join
         case "管理": return .manager
-        case "賽事": return .match
+        //case "賽事": return .match
         case "銀行帳號": return .bank
         case "刪除帳號": return .delete
         default: return .info
@@ -748,7 +748,7 @@ enum MainMemberEnum: String {
         case .like: return "like_in_svg"
         case .join: return "join_svg"
         case .manager: return "manager1_svg"
-        case .match: return "match_svg"
+        //case .match: return "match_svg"
         case .bank: return "bank_account_svg"
         case .delete: return "account_delete_svg"
         }

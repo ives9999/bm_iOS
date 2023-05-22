@@ -38,7 +38,7 @@ class MemberItemVC: BaseViewController {
             make.bottom.equalToSuperview()
         }
         
-        let validate: Int = Member.instance.validate
+        //let validate: Int = Member.instance.validate
         
         let enums: [MemberItemEnum] = MemberItemEnum.allValues(mainMemberEnum)
         for myEnum in enums {
@@ -104,6 +104,8 @@ class MemberItemVC: BaseViewController {
                 toRequestManagerTeam()
             } else if (memberItemEnum == MemberItemEnum.course) {
                 toManagerCourse(manager_token: Member.instance.token)
+            } else if (memberItemEnum == MemberItemEnum.match) {
+                toManagerMatch(manager_token: Member.instance.token)
             }
         }
     }
@@ -205,6 +207,7 @@ enum MemberItemEnum: String {
     case store = "體育用品店"
     case tempPlay = "臨打"
     case requestManager = "球隊申請管理權"
+    case match = "賽事"
     
     //static let allValues: [MemberInfoItemEnum] = [data, change_password]
     static func allValues(_ mainMemberEnum: MainMemberEnum)-> [MemberItemEnum] {
@@ -222,7 +225,7 @@ enum MemberItemEnum: String {
         case MainMemberEnum.order: return [.cart, .order]
         case MainMemberEnum.like: return [.team, .arena, .teach, .coach, .course, .product, .store]
         case MainMemberEnum.join: return [.team, .tempPlay, .course]
-        case MainMemberEnum.manager: return [.team, .requestManager, .course]
+        case MainMemberEnum.manager: return [.team, .requestManager, .course, .match]
         
         default: return [.info, .change_password]
         }
@@ -253,6 +256,7 @@ enum MemberItemEnum: String {
         case .store: return "store_svg"
         case .tempPlay: return "tempPlay_svg"
         case .requestManager: return "request_manager_svg"
+        case .match: return "match_svg"
         }
     }
 }

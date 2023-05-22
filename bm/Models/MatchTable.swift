@@ -40,6 +40,7 @@ class MatchTable: Table {
     var match_end_show: String = ""
     var match_start_weekday: String = ""
     var match_end_weekday: String = ""
+    var match_time_show: String = ""
     var signup_start_show: String = ""
     var signup_end_show: String = ""
     var signup_start_weekday: String = ""
@@ -99,6 +100,8 @@ class MatchTable: Table {
                 match_end_weekday = t
             }
         }
+        
+        match_time_show = "\(match_start_show)(\(match_start_weekday)) ~ \(match_end_show)(\(match_end_weekday))"
         
         if (signup_start.count > 0) {
             signup_start_show = signup_start.noSec()
