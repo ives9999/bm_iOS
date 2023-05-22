@@ -129,6 +129,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             if product_price_id != nil {
                 params["product_price_id"] = String(product_price_id!)
             }
+            
             ProductService.instance.getOne(params: params) { (success) in
                 if (success) {
                     do {
@@ -319,7 +320,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         } else if (productTable != nil) {
             productTable!.filterRow()
             amount += productTable!.prices[0].price_member
-            if (productTable!.type == "coin") {
+            if (productTable!.type == "coin" || productTable!.type == "match") {
                 needShipping = false
             }
             
@@ -417,7 +418,7 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         section = makeSectionRow(title: "電子發票", key: INVOICE_KEY, rows: rows)
         oneSections.append(section)
         
-        if (needShipping) {
+        //if (needShipping) {
             //member
             rows.removeAll()
             row = OneRow(title: "姓名", value: Member.instance.name, show: Member.instance.name, key: NAME_KEY, cell: "textField", placeholder: "王大明")
@@ -428,15 +429,17 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             rows.append(row)
             row = OneRow(title: "住址", value: Member.instance.address, show: Member.instance.address, key: ADDRESS_KEY, cell: "textField", placeholder: "台北市信義區中山路60號")
             rows.append(row)
-            section = makeSectionRow(title: "收件人資料", key: MEMBER_KEY, rows: rows)
+            let memberTitle: String = (needShipping) ? "收件人資訊" : "訂購人資訊"
+            section = makeSectionRow(title: memberTitle, key: MEMBER_KEY, rows: rows)
             oneSections.append(section)
+        
             //memo
             rows.removeAll()
             row = OneRow(title: "留言", value: "", show: "", key: MEMO_KEY, cell: "textField", placeholder: "請於上班時間送達")
             rows.append(row)
             section = makeSectionRow(title: "其他留言", key: MEMO_KEY, rows: rows)
             oneSections.append(section)
-        }
+        //}
         
         tableView.reloadData()
     }
@@ -543,9 +546,11 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
             if (idx1 == 0) {
                 section.items.append(contentsOf: invoicePersonalRows)
                 row.value = INVOICE_PERSONAL_KEY
+                row.show = "個人"
             } else {
                 section.items.append(contentsOf: invoiceCompanyRows)
                 row.value = INVOICE_COMPANY_KEY
+                row.show = "公司"
             }
             
             invoiceTable.reloadData()

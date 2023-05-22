@@ -49,7 +49,6 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         
         super.viewDidLoad()
         
-        
 //        let cellNib = UINib(nibName: "EditCell", bundle: nil)
 //        tableView.register(cellNib, forCellReuseIdentifier: "cell")
         

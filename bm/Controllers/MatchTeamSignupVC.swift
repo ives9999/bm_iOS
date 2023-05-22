@@ -213,7 +213,7 @@ class MatchTeamSignupVC: BaseViewController {
                        self.warning(t.msg)
                    } else {
                        //print(self.table!.product_token)
-                       self.info(msg: "已經完成報名，請前往付款", showCloseButton: true, buttonTitle: "付款") {
+                       self.info(msg: "已經完成報名，請前往付款", closeButtonTitle: "關閉", buttonTitle: "付款") {
                            self.toOrder(
                             login: { vc in vc.toLogin() },
                             register: { vc in vc.toRegister() },
