@@ -75,6 +75,7 @@ class ManagerMatchVC: BaseViewController {
 }
 
 class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
+    
     let noLbl: SuperLabel = {
         let view = SuperLabel()
         //view.setTextGeneral()
@@ -85,10 +86,10 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         return view
     }()
     
-    var matchTimeLbl: SuperLabel = {
+    var createdAtLbl: SuperLabel = {
         let view = SuperLabel()
         view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "2023-08-01 08:00 ~ 2023-08-01 18:00"
+        view.text = "2023-08-01 08:00"
         
         return view
     }()
@@ -104,6 +105,15 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
     let nameLbl: SuperLabel = {
         let view = SuperLabel()
         view.setTextTitle()
+        view.text = "羽球密碼盃"
+        
+        return view
+    }()
+    
+    var matchTimeLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
+        view.text = "2023-08-01 08:00 ~ 2023-08-01 18:00"
         
         return view
     }()
@@ -113,7 +123,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
     let matchGroupLbl: SuperLabel = {
         let view = SuperLabel()
         view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "社會組男雙"
+        view.text = "社會組女雙"
         
         return view
     }()
@@ -123,17 +133,17 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
     let priceLbl: SuperLabel = {
         let view = SuperLabel()
         view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "1400元"
+        view.text = "1000元"
         
         return view
     }()
     
     let dot3: UIView = Dot2()
     
-    let signupTimeLbl: SuperLabel = {
+    let groupLimitLbl: SuperLabel = {
         let view = SuperLabel()
         view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "16人"
+        view.text = "10人"
         
         return view
     }()
@@ -213,8 +223,8 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
                 make.centerY.equalToSuperview()
             }
             
-            view1.addSubview(matchTimeLbl)
-            matchTimeLbl.snp.makeConstraints { make in
+            view1.addSubview(createdAtLbl)
+            createdAtLbl.snp.makeConstraints { make in
                 make.right.equalToSuperview()
                 make.centerY.equalToSuperview()
             }
@@ -233,52 +243,68 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         mainContainerView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
-            make.top.equalTo(separator.snp.bottom).offset(4)
+            make.top.equalTo(separator.snp.bottom).offset(12)
             //make.bottom.equalToSuperview().offset(4)
             //make.height .equalTo(130)
         }
 
             mainContainerView.addSubview(nameLbl)
             nameLbl.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(12)
+                make.top.equalToSuperview()
                 make.left.equalToSuperview()
             }
         
-            mainContainerView.addSubview(dot1)
-            dot1.snp.makeConstraints { make in
-                make.bottom.equalToSuperview().offset(-20)
+            mainContainerView.addSubview(matchTimeLbl)
+            matchTimeLbl.snp.makeConstraints { make in
+                make.top.equalTo(nameLbl.snp.bottom).offset(12)
                 make.left.equalToSuperview()
             }
         
-            mainContainerView.addSubview(matchGroupLbl)
-            matchGroupLbl.snp.makeConstraints { make in
-                make.left.equalTo(dot1.snp.right).offset(6)
-                make.centerY.equalTo(dot1.snp.centerY)
+            let partContainer:UIView = UIView()
+            //partContainer.backgroundColor = UIColor.red
+            mainContainerView.addSubview(partContainer)
+            partContainer.snp.makeConstraints { make in
+                make.top.equalTo(matchTimeLbl.snp.bottom).offset(12)
+                make.left.right.equalToSuperview()
+                make.height.equalTo(30)
+                make.bottom.equalToSuperview().offset(-12)
             }
         
-            mainContainerView.addSubview(dot2)
-            dot2.snp.makeConstraints { make in
-                make.left.equalTo(matchGroupLbl.snp.right).offset(16)
-                make.centerY.equalTo(dot1.snp.centerY)
-            }
+                partContainer.addSubview(dot1)
+                dot1.snp.makeConstraints { make in
+                    make.centerY.equalToSuperview()
+                    make.left.equalToSuperview()
+                }
+
+                partContainer.addSubview(matchGroupLbl)
+                matchGroupLbl.snp.makeConstraints { make in
+                    make.left.equalTo(dot1.snp.right).offset(6)
+                    make.centerY.equalToSuperview()
+                }
         
-            mainContainerView.addSubview(priceLbl)
-            priceLbl.snp.makeConstraints { make in
-                make.left.equalTo(dot2.snp.right).offset(6)
-                make.centerY.equalTo(dot1.snp.centerY)
-            }
-        
-            mainContainerView.addSubview(dot3)
-            dot3.snp.makeConstraints { make in
-                make.left.equalTo(priceLbl.snp.right).offset(16)
-                make.centerY.equalTo(dot1.snp.centerY)
-            }
-        
-            mainContainerView.addSubview(signupTimeLbl)
-            signupTimeLbl.snp.makeConstraints { make in
-                make.left.equalTo(dot3.snp.right).offset(6)
-                make.centerY.equalTo(dot1.snp.centerY)
-            }
+                partContainer.addSubview(dot2)
+                dot2.snp.makeConstraints { make in
+                    make.left.equalTo(matchGroupLbl.snp.right).offset(16)
+                    make.centerY.equalToSuperview()
+                }
+            
+                partContainer.addSubview(priceLbl)
+                priceLbl.snp.makeConstraints { make in
+                    make.left.equalTo(dot2.snp.right).offset(6)
+                    make.centerY.equalToSuperview()
+                }
+            
+                partContainer.addSubview(dot3)
+                dot3.snp.makeConstraints { make in
+                    make.left.equalTo(priceLbl.snp.right).offset(16)
+                    make.centerY.equalToSuperview()
+                }
+            
+                partContainer.addSubview(groupLimitLbl)
+                groupLimitLbl.snp.makeConstraints { make in
+                    make.left.equalTo(dot3.snp.right).offset(6)
+                    make.centerY.equalToSuperview()
+                }
         
         self.contentView.addSubview(iconContainerView)
         //iconContainerView.backgroundColor = UIColor.red
@@ -329,24 +355,24 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
     
     override func configureSubViews() {
         super.configureSubViews()
-        noLbl.text = String(item!.no) + "."
+        
+        if item != nil {
+            noLbl.text = String(item!.no) + "."
+            createdAtLbl.text = item!.created_at.noSec()
+            
+            
+        }
         
         if item != nil && item!.matchTable != nil {
             matchTimeLbl.text = item!.matchTable!.match_time_show
             nameLbl.text = item?.matchTable?.name
         }
         
-        
-//        if item != nil && item!.MatchTeamTable != nil {
-//
-//            weekendLbl.text = teamTable.weekdays_show
-//            intervalLbl.text = teamTable.interval_show
-//            joinTimeLbl.text = item!.created_at.noSec()
-//        } else {
-//
-//        }
-        
-        //createdAtLbl.text = item?.created_at.noSec()
+        if item != nil && item!.matchGroupTable != nil {
+            matchGroupLbl.text = item!.matchGroupTable!.name
+            groupLimitLbl.text = "\(item!.matchGroupTable!.limit)組"
+        }
+
     }
     
     @objc func deleteThis(_ sender: UIView) {
