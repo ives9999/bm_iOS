@@ -34,6 +34,9 @@ target 'bm' do
   #qrcode
   #platform :ios, '10.0'
   pod 'MercariQRScanner'
+  
+  #firebase
+  pod 'FirebaseMessaging'
 end
 
 target 'bmNotificationServiceExtension' do

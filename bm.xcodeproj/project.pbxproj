@@ -372,6 +372,7 @@
 		F9B1925E29A52AD50037FE05 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925D29A52AD50037FE05 /* Int.swift */; };
 		F9B9F6DB2A0E3C0400FD9ADC /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */; };
 		F9B9F6DD2A19F82000FD9ADC /* ManagerMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B9F6DC2A19F82000FD9ADC /* ManagerMatchVC.swift */; };
+		F9B9F6DF2A1CEC2000FD9ADC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9B9F6DE2A1CEC2000FD9ADC /* GoogleService-Info.plist */; };
 		F9C6648029FCCA37005C1905 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6647F29FCCA37005C1905 /* Date.swift */; };
 		F9C6648229FE4213005C1905 /* MatchPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6648129FE4212005C1905 /* MatchPlayerService.swift */; };
 		F9C664842A040BFE005C1905 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C664832A040BFE005C1905 /* Data.swift */; };
@@ -845,6 +846,7 @@
 		F9B1925D29A52AD50037FE05 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		F9B9F6DC2A19F82000FD9ADC /* ManagerMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerMatchVC.swift; sourceTree = "<group>"; };
+		F9B9F6DE2A1CEC2000FD9ADC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9C6647F29FCCA37005C1905 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F9C6648129FE4212005C1905 /* MatchPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchPlayerService.swift; sourceTree = "<group>"; };
 		F9C664832A040BFE005C1905 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -1376,6 +1378,7 @@
 		F94E7D1E1F83636A00F550FD /* bm */ = {
 			isa = PBXGroup;
 			children = (
+				F9B9F6DE2A1CEC2000FD9ADC /* GoogleService-Info.plist */,
 				F93095F72948AD8A006C625C /* extensions */,
 				F94E7D1F1F83636A00F550FD /* AppDelegate.swift */,
 				F94E7D261F83636A00F550FD /* Assets.xcassets */,
@@ -1757,6 +1760,7 @@
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
 				B3AE937C262FCC5F00223B2A /* ArenaListCell.xib in Resources */,
 				B380FD5025A827670081DBBA /* PlainCell.xib in Resources */,
+				F9B9F6DF2A1CEC2000FD9ADC /* GoogleService-Info.plist in Resources */,
 				B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */,
 				B3B4EF57257B59EA00EE15D0 /* PrivacyCell.xib in Resources */,
 				F9A6751F27FAF766007C8F47 /* Top.xib in Resources */,
@@ -1827,12 +1831,19 @@
 				"${BUILT_PRODUCTS_DIR}/AssistantKit/AssistantKit.framework",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Device.swift/Device_swift.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseCoreInternal/FirebaseCoreInternal.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework",
+				"${BUILT_PRODUCTS_DIR}/FirebaseMessaging/FirebaseMessaging.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleDataTransport/GoogleDataTransport.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/JXBanner/JXBanner.framework",
 				"${BUILT_PRODUCTS_DIR}/JXPageControl/JXPageControl.framework",
 				"${BUILT_PRODUCTS_DIR}/KeychainSwift/KeychainSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MercariQRScanner/MercariQRScanner.framework",
 				"${BUILT_PRODUCTS_DIR}/PromiseKit/PromiseKit.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
 				"${BUILT_PRODUCTS_DIR}/SCLAlertView/SCLAlertView.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
@@ -1843,6 +1854,7 @@
 				"${BUILT_PRODUCTS_DIR}/TRVideoView/TRVideoView.framework",
 				"${BUILT_PRODUCTS_DIR}/UIColor_Hex_Swift/UIColor_Hex_Swift.framework",
 				"${BUILT_PRODUCTS_DIR}/YouTubePlayer/YouTubePlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/ECPayPaymentGatewayKit/ECPayPaymentGatewayKit.framework/ECPayPaymentGatewayKit",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignal.framework/OneSignal",
 				"${PODS_XCFRAMEWORKS_BUILD_DIR}/OneSignalXCFramework/OneSignalCore/OneSignalCore.framework/OneSignalCore",
@@ -1856,12 +1868,19 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AssistantKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Device_swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseCoreInternal.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseInstallations.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FirebaseMessaging.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleDataTransport.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXBanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXPageControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KeychainSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MercariQRScanner.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PromiseKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SCLAlertView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
@@ -1872,6 +1891,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TRVideoView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIColor_Hex_Swift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ECPayPaymentGatewayKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignal.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OneSignalCore.framework",

@@ -11,6 +11,8 @@ import Device_swift
 import UIColor_Hex_Swift
 import OneSignal
 import ECPayPaymentGatewayKit
+import FirebaseCore
+import FirebaseMessaging
 
 //public var BASE_URL: String = ""
 //let REMOTE_BASE_URL = "https://bm.sportpassword.com"
@@ -18,9 +20,10 @@ import ECPayPaymentGatewayKit
 //var URL_HOME = ""
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 
     var window: UIWindow?
+    var fcmTokenUser : String?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -87,6 +90,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         OneSignal.setNotificationWillShowInForegroundHandler(MyOneSignal.instance.notificationWillShowInForegroundBlock)
         
         OneSignal.setNotificationOpenedHandler(MyOneSignal.instance.notificationOpenedBlock)
+        
+        FirebaseApp.configure()
+        
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+            
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in}
+            
+        
+            Messaging.messaging().delegate = self as! MessagingDelegate
+        } else {
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            application.registerUserNotificationSettings(settings)
+        }
+        application.registerForRemoteNotifications()
+        
+        Messaging.messaging().delegate = self
+        let token = Messaging.messaging().fcmToken
         
 //        OneSignal.initWithLaunchOptions(
 //            launchOptions,
@@ -159,6 +181,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Member.instance.justGetMemberOne = false
         return true
+    }
+    
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        fcmTokenUser = fcmToken
+    }
+    
+    private func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        Messaging.messaging().apnsToken = deviceToken as Data
     }
     
 //    func setStatusBarBackgroundColor(color: UIColor) {
