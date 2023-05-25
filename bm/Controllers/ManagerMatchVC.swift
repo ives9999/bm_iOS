@@ -359,8 +359,6 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         if item != nil {
             noLbl.text = String(item!.no) + "."
             createdAtLbl.text = item!.created_at.noSec()
-            
-            
         }
         
         if item != nil && item!.matchTable != nil {
@@ -371,6 +369,11 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         if item != nil && item!.matchGroupTable != nil {
             matchGroupLbl.text = item!.matchGroupTable!.name
             groupLimitLbl.text = "\(item!.matchGroupTable!.limit)組"
+            matchGroupLbl.text = item!.matchGroupTable!.name
+        }
+        
+        if item != nil && item!.matchGroupTable != nil && item!.matchGroupTable!.productPrice != nil {
+            priceLbl.text = "NT$\(item!.matchGroupTable!.productPrice!.price_member)元"
         }
 
     }

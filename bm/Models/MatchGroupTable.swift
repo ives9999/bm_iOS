@@ -33,6 +33,7 @@ class MatchGroupTable: Table {
     
     var matchTable: MatchTable? = nil
     var matchPlayers: [MatchPlayerTable] = [MatchPlayerTable]()
+    var productPrice: ProductPriceTable? = nil
     
     enum CodingKeys: String, CodingKey {
         case match_id
@@ -42,6 +43,7 @@ class MatchGroupTable: Table {
         case limit
         case matchTable = "match"
         case matchPlayers = "match_players"
+        case productPrice = "product_price"
     }
     
     required init(from decoder: Decoder) throws {
@@ -55,6 +57,7 @@ class MatchGroupTable: Table {
         do {limit = try container.decode(Int.self, forKey: .limit)}catch{limit = 0}
         do {matchTable = try container.decode(MatchTable.self, forKey: .matchTable)}catch{matchTable = nil}
         do {matchPlayers = try container.decode([MatchPlayerTable].self, forKey: .matchPlayers)}catch{matchPlayers = [MatchPlayerTable]()}
+        productPrice = try container.decodeIfPresent(ProductPriceTable.self, forKey: .productPrice) ?? nil
     }
     
     override func filterRow() {
