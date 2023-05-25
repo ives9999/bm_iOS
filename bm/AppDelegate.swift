@@ -93,22 +93,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         
         FirebaseApp.configure()
         
-        if #available(iOS 10.0, *) {
-            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
-            
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in}
-            
-        
-            Messaging.messaging().delegate = self as! MessagingDelegate
-        } else {
-            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+
+            // If granted comes true you can enabled features based on authorization.
+            guard granted else { return }
+
+            application.registerForRemoteNotifications()
         }
-        application.registerForRemoteNotifications()
         
-        Messaging.messaging().delegate = self
-        let token = Messaging.messaging().fcmToken
+//        if #available(iOS 10.0, *) {
+//            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
+//
+//            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+//            UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in}
+//
+//
+//            Messaging.messaging().delegate = self as! MessagingDelegate
+//        } else {
+//            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+//            application.registerUserNotificationSettings(settings)
+//        }
+//        application.registerForRemoteNotifications()
+//
+//        Messaging.messaging().delegate = self
+//        let token = Messaging.messaging().fcmToken
+//        print(token)
+//        let i = 6
+        
         
 //        OneSignal.initWithLaunchOptions(
 //            launchOptions,
@@ -185,6 +197,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         fcmTokenUser = fcmToken
+    }
+    
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print(token)
     }
     
     private func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
