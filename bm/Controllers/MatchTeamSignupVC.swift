@@ -74,13 +74,32 @@ class MatchTeamSignupVC: BaseViewController {
     }
     
     func refresh<T: Table>(_ t: T.Type) {
-        if match_group_token != nil {
+        if token != nil {
+            Global.instance.addSpinner(superView: self.view)
+            var params: [String: String] = ["token": token!, "member_token": Member.instance.token]
+            
+            dataService.getOne(params: params) { [self] (success) in
+                Global.instance.removeSpinner(superView: self.view)
+                if (success) {
+                    let jsonData: Data = self.dataService.jsonData!
+                    //jsonData.prettyPrintedJSONString
+                    do {
+                        let t: Table = try JSONDecoder().decode(t, from: jsonData)
+                        guard let _myTable = t as? MatchTeamTable else { return }
+                        self.table = _myTable
+                        self.table!.filterRow()
+                        
+                        self.showTop2!.setTitle(self.table!.name)
+                        self.setPage()
+                    } catch {
+                        print(error.localizedDescription)
+                        //self.warning(error.localizedDescription)
+                    }
+                }
+            }
+        } else if match_group_token != nil {
             Global.instance.addSpinner(superView: self.view)
             var params: [String: String] = ["match_group_token": match_group_token!, "member_token": Member.instance.token]
-            
-            if let tmp = token {
-                params["token"] = tmp
-            }
             
             dataService.getOne(params: params) { [self] (success) in
                 Global.instance.removeSpinner(superView: self.view)
@@ -105,17 +124,20 @@ class MatchTeamSignupVC: BaseViewController {
     }
     
     func setPage() {
+        let vc1: MatchTeamEditVC = MatchTeamEditVC(idx: 0)
+        if table != nil {
+            vc1.setValue(team: table!)
+        }
+        pages.append(vc1)
+        
         let playerNumber: Int = table!.matchGroupTable!.number
-        
-//        var giftName: String = ""
-//        var attributes: [ProductAttributeTable] = [ProductAttributeTable]()
-        
-        pages.append(MatchTeamEditVC(idx: 0))
         for i in 1...playerNumber {
             let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
-            //vc.setGiftName(giftName)
-            //vc.attributes = attributes
             vc.gifts = table!.matchGifts
+            
+            if table!.matchPlayers != nil && i <= table!.matchPlayers.count {
+                vc.setValue(player: table!.matchPlayers[i-1])
+            }
             pages.append(vc)
         }
         
@@ -401,12 +423,14 @@ class MatchTeamEditVC: BaseViewController {
         fields.append(managerLineTxt2)
     }
     
-    func setValue() {
-        teamNameTxt2.setValue("aaa")
-        managerNameTxt2.setValue(Member.instance.name)
-        managerMobileTxt2.setValue(Member.instance.mobile)
-        managerEmailTxt2.setValue(Member.instance.email)
-        managerLineTxt2.setValue(Member.instance.line)
+    func setValue(team: MatchTeamTable? = nil) {
+        if team != nil {
+            teamNameTxt2.setValue(team!.name)
+            managerNameTxt2.setValue(team!.manager_name)
+            managerMobileTxt2.setValue(team!.manager_mobile)
+            managerEmailTxt2.setValue(team!.manager_email)
+            managerLineTxt2.setValue(team!.manager_line)
+        }
     }
     
     func checkRequire()-> String {
@@ -686,14 +710,17 @@ class MatchPlayerEditVC: BaseViewController {
         giftLbl.text = "贈品：\(giftName)"
     }
 
-    func setValue() {
-        nameTxt2.setValue("bbb")
-        mobileTxt2.setValue("12334")
-        emailTxt2.setValue("email")
-        lineTxt2.setValue("line")
-        
-        if let age = Member.instance.dob.clacAge() {
-            ageTxt2.setValue(String(20))
+    func setValue(player: MatchPlayerTable? = nil) {
+        if player != nil {
+            nameTxt2.setValue(player!.name)
+            mobileTxt2.setValue(player!.mobile)
+            emailTxt2.setValue(player!.email)
+            lineTxt2.setValue(player!.line)
+            ageTxt2.setValue(String(player!.age))
+            
+//            if let age = Member.instance.dob.clacAge() {
+//                ageTxt2.setValue(String(20))
+//            }
         }
     }
     

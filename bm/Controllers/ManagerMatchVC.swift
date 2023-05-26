@@ -69,6 +69,14 @@ class ManagerMatchVC: BaseViewController {
         }
     }
     
+    override func cellEdit(row: Table) {
+        if let _row: MatchTeamTable = row as? MatchTeamTable {
+            if _row.matchGroupTable != nil {
+                toMatchTeamSignup(match_group_token: _row.matchGroupTable!.token, token: row.token)
+            }
+        }
+    }
+    
     func tableViewSetSelected(row: MatchTeamTable)-> Bool {
         return false
     }
@@ -195,9 +203,14 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         super.commonInit()
         setAnchor()
         
+        editIcon.delegate = self
+        deleteIcon.delegate = self
+        signupIcon.delegate = self
+        teamMemberIcon.delegate = self
+        
         //self.backgroundColor = UIColor.red
         
-        let deleteGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteThis))
+        //let deleteGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteThis))
         //deleteGR.cancelsTouchesInView = false
         //deleteIV.isUserInteractionEnabled = true
         //deleteIV.addGestureRecognizer(deleteGR)
@@ -380,5 +393,30 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
     
     @objc func deleteThis(_ sender: UIView) {
         //myDelegate?.deleteMemberTeam(row: item!)
+    }
+}
+
+extension ManagerMatchCell: IconView2Delegate {
+    
+    func iconPressed(icon: String) {
+        switch icon {
+        case "edit_svg" :
+            myDelegate?.cellEdit(row: item!)
+        case "delete_svg":
+            myDelegate?.cellDelete(row: item!)
+        case "check_svg":
+            myDelegate?.cellSignup(row: item!)
+        case "member_svg":
+            myDelegate?.cellTeamMember(row: item!)
+        default:
+            myDelegate?.cellEdit(row: item!)
+        }
+    }
+}
+
+extension ManagerMatchCell: ShowButton2Delegate {
+    func pressed() {
+        guard let superView = self.superview as? UITableView else { return }
+        myDelegate?.didSelect(item: item, at: superView.indexPath(for: self)!)
     }
 }

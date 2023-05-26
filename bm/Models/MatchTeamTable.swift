@@ -26,9 +26,11 @@ class MatchTeamsTable: Tables {
 
 class MatchTeamTable: Table {
     var match_id: Int = 0
-    var number: Int = 0
-    var price: Int = 0
-    var limit: Int = 0
+    var match_group_id: Int = 0
+    var manager_name: String = ""
+    var manager_mobile: String = ""
+    var manager_email: String = ""
+    var manager_line: String = ""
     
     var matchTable: MatchTable? = nil
     var matchGroupTable: MatchGroupTable? = nil
@@ -39,9 +41,11 @@ class MatchTeamTable: Table {
     
     enum CodingKeys: String, CodingKey {
         case match_id
-        case number
-        case price
-        case limit
+        case match_group_id
+        case manager_name
+        case manager_mobile
+        case manager_email
+        case manager_line
         case matchTable = "match"
         case matchGroupTable = "match_group"
         case matchPlayers = "match_players"
@@ -53,10 +57,13 @@ class MatchTeamTable: Table {
         try super.init(from: decoder)
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
-        do {match_id = try container.decode(Int.self, forKey: .match_id)}catch{match_id = 0}
-        do {number = try container.decode(Int.self, forKey: .number)}catch{number = 0}
-        do {price = try container.decode(Int.self, forKey: .price)}catch{price = 0}
-        do {limit = try container.decode(Int.self, forKey: .limit)}catch{limit = 0}
+        match_id = try container.decodeIfPresent(Int.self, forKey: .match_id) ?? 0
+        match_group_id = try container.decodeIfPresent(Int.self, forKey: .match_group_id) ?? 0
+        manager_name = try container.decodeIfPresent(String.self, forKey: .manager_name) ?? ""
+        manager_mobile = try container.decodeIfPresent(String.self, forKey: .manager_mobile) ?? ""
+        manager_email = try container.decodeIfPresent(String.self, forKey: .manager_email) ?? ""
+        manager_line = try container.decodeIfPresent(String.self, forKey: .manager_line) ?? ""
+        
         do {matchTable = try container.decode(MatchTable.self, forKey: .matchTable)}catch{matchTable = nil}
         do {matchGroupTable = try container.decode(MatchGroupTable.self, forKey: .matchGroupTable)}catch{matchGroupTable = nil}
         do {matchPlayers = try container.decode([MatchPlayerTable].self, forKey: .matchPlayers)}catch{matchPlayers = [MatchPlayerTable]()}

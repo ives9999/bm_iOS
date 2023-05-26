@@ -30,6 +30,7 @@ class MatchPlayerTable: Table {
     var member_id: Int = 0
     var age: Int = 0
     var line: String = ""
+    var email: String = ""
     
     var matchGroupTable: MatchGroupTable? = nil
     
@@ -40,6 +41,7 @@ class MatchPlayerTable: Table {
         case age
         case line
         case matchGroupTable
+        case email
     }
     
     required init(from decoder: Decoder) throws {
@@ -51,6 +53,7 @@ class MatchPlayerTable: Table {
         do {age = try container.decode(Int.self, forKey: .age)}catch{age = 0}
         do {line = try container.decode(String.self, forKey: .line)}catch{line = ""}
         matchGroupTable = try container.decodeIfPresent(MatchGroupTable.self, forKey: .matchGroupTable) ?? nil
+        email = try container.decodeIfPresent(String.self, forKey: .email) ?? ""
     }
     
     override func filterRow() {
