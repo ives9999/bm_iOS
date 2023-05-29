@@ -20,7 +20,7 @@ import FirebaseMessaging
 //var URL_HOME = ""
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     var fcmTokenUser : String?
@@ -93,13 +93,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         
         FirebaseApp.configure()
         
-        let center = UNUserNotificationCenter.current()
-        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
-
-            // If granted comes true you can enabled features based on authorization.
-            guard granted else { return }
-
-            application.registerForRemoteNotifications()
+        UNUserNotificationCenter.current().delegate = self
+        //取得推播權限
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in
+            DispatchQueue.main.async {
+                UIApplication.shared.registerForRemoteNotifications()
+            }
         }
         
 //        if #available(iOS 10.0, *) {
@@ -195,20 +195,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         return true
     }
     
-    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        fcmTokenUser = fcmToken
-    }
+//    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+//        fcmTokenUser = fcmToken
+//    }
     
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        print(token)
+        var tokenString = ""
+        for byte in deviceToken {
+            let hexString = String(format: "%02x", byte)
+            tokenString += hexString
+        }
+        //let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print("APNs device token: \(tokenString)")
     }
     
-    private func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        Messaging.messaging().apnsToken = deviceToken as Data
-    }
+//    private func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+//        Messaging.messaging().apnsToken = deviceToken as Data
+//    }
     
 //    func setStatusBarBackgroundColor(color: UIColor) {
 //        guard let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView else { return }

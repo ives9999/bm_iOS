@@ -3,23 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>638862893320-qir8aprr8rofb96qbgrsgklqfqt44mo6.apps.googleusercontent.com</string>
+	<string>367910377881-h2gsnpcchjsk47lfb010qf5lkjl36us3.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.638862893320-qir8aprr8rofb96qbgrsgklqfqt44mo6</string>
-	<key>ANDROID_CLIENT_ID</key>
-	<string>638862893320-5u85lj8r2dls18qn6psmq7r3teot4irf.apps.googleusercontent.com</string>
+	<string>com.googleusercontent.apps.367910377881-h2gsnpcchjsk47lfb010qf5lkjl36us3</string>
 	<key>API_KEY</key>
-	<string>AIzaSyALbMm-DIUPVGk8nuHr6XDys5Sm47k2sYQ</string>
+	<string>AIzaSyAfV_QLJDA6qQzwhLwQJclP1Omgs20VLiY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>638862893320</string>
+	<string>367910377881</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.sportpassword.bm</string>
 	<key>PROJECT_ID</key>
-	<string>com-sportpassword-com</string>
+	<string>badminton-ec298</string>
 	<key>STORAGE_BUCKET</key>
-	<string>com-sportpassword-com.appspot.com</string>
+	<string>badminton-ec298.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:638862893320:ios:178ad0453587b564590cbd</string>
-	<key>DATABASE_URL</key>
-	<string>https://com-sportpassword-com.firebaseio.com</string>
+	<string>1:367910377881:ios:e3312aff460ac2c5171b08</string>
 </dict>
 </plist>
