@@ -133,7 +133,8 @@ class MatchTeamSignupVC: BaseViewController {
         let playerNumber: Int = table!.matchGroupTable!.number
         for i in 1...playerNumber {
             let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
-            vc.gifts = table!.matchGifts
+            vc.playerTable = table!.matchPlayers[i-1]
+            vc.giftTables = table!.matchGifts
             
             if table!.matchPlayers != nil && i <= table!.matchPlayers.count {
                 vc.setValue(player: table!.matchPlayers[i-1])
@@ -525,13 +526,14 @@ class MatchPlayerEditVC: BaseViewController {
     
     //填寫的所有欄位
     var fields: [UIView] = [UIView]()
+    
+    var playerTable: MatchPlayerTable? = nil
+    var giftTables: [MatchGiftTable] = [MatchGiftTable]()
     //贈品的屬性
     //var attributes: [ProductAttributeTable] = [ProductAttributeTable]()
     
     //要回傳的贈品屬性
     var giftAttributes: [[String: String]] = [[String: String]]()
-    
-    var gifts: [MatchGiftTable] = [MatchGiftTable]()
     
     init(idx: Int) {
         self.idx = idx
@@ -640,7 +642,7 @@ class MatchPlayerEditVC: BaseViewController {
         //下面回圈中要對齊的最後一個view
         var lastView: UIView = giftLbl
         
-        for attribute in self.gifts[0].productTable!.attributes {
+        for attribute in self.giftTables[0].productTable!.attributes {
             
             //setup attribute label
             let attributeLbl: SuperLabel = {
@@ -660,7 +662,7 @@ class MatchPlayerEditVC: BaseViewController {
             }
             
             //產生贈品屬性的tag
-            let tagContainer: AttributesView = AttributesView(name: attribute.name, alias: attribute.alias, attribute: attribute.attribute)
+            let tagContainer: AttributesView = AttributesView(name: attribute.name, alias: attribute.alias, attribute: attribute.attribute, selected: "")
             //屬性欄的高度，從tagContainer來取得
             let h: Int = tagContainer.getHeight()
             
@@ -676,7 +678,7 @@ class MatchPlayerEditVC: BaseViewController {
             tagContainer.setAttributes()
             lastView = tagContainer
             
-            let tmp: [String: String] = ["name": attribute.name, "alias": attribute.alias, "value": "", "id": String(gifts[0].id)]
+            let tmp: [String: String] = ["name": attribute.name, "alias": attribute.alias, "value": "", "id": String(giftTables[0].id)]
             giftAttributes.append(tmp)
         }
         //print(giftAttributes)
