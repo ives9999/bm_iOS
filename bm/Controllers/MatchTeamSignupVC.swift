@@ -133,7 +133,9 @@ class MatchTeamSignupVC: BaseViewController {
         let playerNumber: Int = table!.matchGroupTable!.number
         for i in 1...playerNumber {
             let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
-            vc.playerTable = table!.matchPlayers[i-1]
+            if table!.matchPlayers.count > 0 {
+                vc.playerTable = table!.matchPlayers[i-1]
+            }
             vc.giftTables = table!.matchGifts
             
             if table!.matchPlayers != nil && i <= table!.matchPlayers.count {
@@ -662,7 +664,11 @@ class MatchPlayerEditVC: BaseViewController {
             }
             
             //產生贈品屬性的tag
-            let tagContainer: AttributesView = AttributesView(name: attribute.name, alias: attribute.alias, attribute: attribute.attribute, selected: "")
+            var selected: String = ""
+            if playerTable != nil {
+                
+            }
+            let tagContainer: AttributesView = AttributesView(name: attribute.name, alias: attribute.alias, attribute: attribute.attribute, selected: selected)
             //屬性欄的高度，從tagContainer來取得
             let h: Int = tagContainer.getHeight()
             
