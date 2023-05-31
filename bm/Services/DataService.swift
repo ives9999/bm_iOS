@@ -794,7 +794,7 @@ class DataService {
         request.httpMethod = HTTPMethod.post.rawValue
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.httpBody = query.toJson()!.description.data(using: .utf8)
-        print(request.httpBody)
+        //print(request.httpBody)
         AF.request(request).response { (response) in
             switch response.result {
 

@@ -168,11 +168,17 @@ class ProductPriceTable: Table {
 }
 
 class ProductAttributeTable: Table {
+    
+    static let instance = ProductAttributeTable()
  
     var product_id: Int = -1
     var attribute: String = ""
     var alias: String = ""
     var placeholder: String = ""
+    
+    override init() {
+        super.init()
+    }
     
     enum CodingKeys: String, CodingKey {
         case product_id
@@ -189,5 +195,43 @@ class ProductAttributeTable: Table {
         attribute = try container.decodeIfPresent(String.self, forKey: .attribute) ?? ""
         alias = try container.decodeIfPresent(String.self, forKey: .alias) ?? ""
         placeholder = try container.decodeIfPresent(String.self, forKey: .placeholder) ?? ""
+    }
+    
+    func composeProductAttribute(attributes: [String: String])-> String {
+        
+        let res: String = "{name:\(attributes["name"] ?? ""),alias:\(attributes["alias"] ?? ""),value:\(attributes["value"] ?? "")}"
+        
+        return res
+    }
+    
+    func productAttributeToArray(attribute: String)-> [[String: String]] {
+        
+        var res: [[String: String]] = [[String: String]]()
+        //{name:尺寸,alias:size,value:M}|{name:尺寸,alias:size,value:M}
+        let tmps: [String] = attribute.components(separatedBy: "|")
+        for var tmp in tmps {
+            
+            //{name:尺寸,alias:size,value:M}
+            tmp = tmp.replace(target: "{", withString: "")
+            tmp = tmp.replace(target: "}", withString: "")
+            
+            //name:尺寸,alias:size,value:M
+            let arr: [String] = tmp.components(separatedBy: ",")
+            
+            //[name:尺寸]
+            //[alias:size]
+            //[value:M]
+            var a: [String: String] = [String: String]()
+            if (arr.count > 0) {
+                for str in arr {
+                    let b: [String] = str.components(separatedBy: ":")
+                    a[b[0]] = b[1]
+                }
+                
+                res.append(a)
+            }
+        }
+        
+        return res
     }
 }

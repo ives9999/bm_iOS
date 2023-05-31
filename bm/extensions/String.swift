@@ -317,37 +317,6 @@ extension String {
         return size.height
     }
     
-    func productAttributeToArray()-> [[String: String]] {
-        
-        var res: [[String: String]] = [[String: String]]()
-        //{name:尺寸,alias:size,value:M}|{name:尺寸,alias:size,value:M}
-        let tmps: [String] = self.components(separatedBy: "|")
-        for var tmp in tmps {
-            
-            //{name:尺寸,alias:size,value:M}
-            tmp = tmp.replace(target: "{", withString: "")
-            tmp = tmp.replace(target: "}", withString: "")
-            
-            //name:尺寸,alias:size,value:M
-            let arr: [String] = tmp.components(separatedBy: ",")
-            
-            //[name:尺寸]
-            //[alias:size]
-            //[value:M]
-            var a: [String: String] = [String: String]()
-            if (arr.count > 0) {
-                for str in arr {
-                    let b: [String] = str.components(separatedBy: ":")
-                    a[b[0]] = b[1]
-                }
-                
-                res.append(a)
-            }
-        }
-        
-        return res
-    }
-    
     func replace(target: String, withString: String) -> String {
         return self.replacingOccurrences(of: target, with: withString, options: NSString.CompareOptions.literal, range: nil)
     }

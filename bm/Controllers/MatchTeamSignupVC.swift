@@ -151,6 +151,21 @@ class MatchTeamSignupVC: BaseViewController {
         
         //球隊資訊
         var params: [String: Any] = [String: Any]()
+        
+        //basic param
+        if self.table != nil && self.table!.matchTable != nil {
+            params["match_id"] = String(table!.matchTable!.id)
+        }
+        
+        if self.table != nil && self.table!.matchGroupTable != nil {
+            params["match_group_id"] = String(table!.matchGroupTable!.id)
+        }
+        
+        if self.token != nil {
+            params["token"] = token
+        }
+        
+        //team param
         if let vc = pages[0] as? MatchTeamEditVC {
             let res = vc.checkRequire()
             if res.count > 0 {
@@ -158,18 +173,19 @@ class MatchTeamSignupVC: BaseViewController {
                 return
             }
             
-            var a: [String: String] = [String: String]()
+            //var a: [String: String] = [String: String]()
             for field in vc.fields {
                 if let tmp = field as? MainTextField2 {
-                    a["\(tmp.key)"] = tmp.value
+                    //a["\(tmp.key)"] = tmp.value
+                    params["\(tmp.key)"] = tmp.value
                 }
             }
-            params["manager"] = a
+            //params["manager"] = a
         }
         
         //print(params)
         
-        //球員資訊
+        //team member param
         var b: [[String: Any]] = [[String: Any]]()
         for i in 1...pages.count-1 {
             
@@ -190,19 +206,16 @@ class MatchTeamSignupVC: BaseViewController {
                 var selected_attributes: [String] = [String]()
                 var gift_id: String = "0"
                 for giftAttribute in vc.giftAttributes {
-                    let value: String = "{name:\(giftAttribute["name"] ?? ""),alias:\(giftAttribute["alias"] ?? ""),value:\(giftAttribute["value"] ?? "")}"
+                    let value: String = ProductAttributeTable.instance.composeProductAttribute(attributes: giftAttribute)
                     selected_attributes.append(value)
                     gift_id = giftAttribute["id"] ?? "0"
                 }
                 
-//                var c1: [[String: String] = [String: String]()
-//                for attribute in vc.giftAttributes {
-//                    for (key, value) in attribute {
-//                        c1[key] = value
-//                    }
-//                }
                 c["gift"] = ["id": gift_id, "attribute": selected_attributes.joined(separator: "|")]
                 
+                if vc.playerTable != nil {
+                    c["token"] = vc.playerTable!.token
+                }
                 
                 b.append(c)
             }
@@ -210,14 +223,6 @@ class MatchTeamSignupVC: BaseViewController {
         
         if b.count > 0 {
             params["players"] = b
-        }
-        
-        if self.table != nil && self.table!.matchTable != nil {
-            params["match_id"] = String(table!.matchTable!.id)
-        }
-        
-        if self.table != nil && self.table!.matchGroupTable != nil {
-            params["match_group_id"] = String(table!.matchGroupTable!.id)
         }
         
         params["member_token"] = Member.instance.token
@@ -651,7 +656,7 @@ class MatchPlayerEditVC: BaseViewController {
             giftTables = playerTable!.matchPlayerGiftsTable
             if (giftTables.count > 0) {
                 let giftTable: MatchPlayerGiftTable = giftTables[0]
-                attributes = giftTable.attributes.productAttributeToArray()
+                attributes = ProductAttributeTable.instance.productAttributeToArray(attribute: giftTable.attributes)
             }
         }
         
@@ -697,7 +702,7 @@ class MatchPlayerEditVC: BaseViewController {
             tagContainer.setAttributes()
             lastView = tagContainer
             
-            let tmp: [String: String] = ["name": attribute.name, "alias": attribute.alias, "value": "", "id": String(giftTables[0].id)]
+            let tmp: [String: String] = ["name": attribute.name, "alias": attribute.alias, "value": selected, "id": String(giftTables[0].id)]
             giftAttributes.append(tmp)
         }
         //print(giftAttributes)
