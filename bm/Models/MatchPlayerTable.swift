@@ -33,6 +33,7 @@ class MatchPlayerTable: Table {
     var email: String = ""
     
     var matchGroupTable: MatchGroupTable? = nil
+    var matchPlayerGiftsTable: [MatchPlayerGiftTable] = [MatchPlayerGiftTable]()
     
     enum CodingKeys: String, CodingKey {
         case match_id
@@ -42,6 +43,7 @@ class MatchPlayerTable: Table {
         case line
         case matchGroupTable
         case email
+        case matchPlayerGiftsTable = "match_player_gifts"
     }
     
     required init(from decoder: Decoder) throws {
@@ -54,6 +56,7 @@ class MatchPlayerTable: Table {
         do {line = try container.decode(String.self, forKey: .line)}catch{line = ""}
         matchGroupTable = try container.decodeIfPresent(MatchGroupTable.self, forKey: .matchGroupTable) ?? nil
         email = try container.decodeIfPresent(String.self, forKey: .email) ?? ""
+        matchPlayerGiftsTable = try container.decodeIfPresent([MatchPlayerGiftTable].self, forKey: .matchPlayerGiftsTable) ?? [MatchPlayerGiftTable]()
     }
     
     override func filterRow() {

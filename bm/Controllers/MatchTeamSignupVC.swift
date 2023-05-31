@@ -82,7 +82,7 @@ class MatchTeamSignupVC: BaseViewController {
                 Global.instance.removeSpinner(superView: self.view)
                 if (success) {
                     let jsonData: Data = self.dataService.jsonData!
-                    //jsonData.prettyPrintedJSONString
+                    jsonData.prettyPrintedJSONString
                     do {
                         let t: Table = try JSONDecoder().decode(t, from: jsonData)
                         guard let _myTable = t as? MatchTeamTable else { return }
@@ -644,7 +644,18 @@ class MatchPlayerEditVC: BaseViewController {
         //下面回圈中要對齊的最後一個view
         var lastView: UIView = giftLbl
         
-        for attribute in self.giftTables[0].productTable!.attributes {
+        //取得隊員所選的贈品
+        var giftTables: [MatchPlayerGiftTable] = [MatchPlayerGiftTable]()
+        var attributes: [[String: String]] = [[String: String]]()
+        if playerTable != nil {
+            giftTables = playerTable!.matchPlayerGiftsTable
+            if (giftTables.count > 0) {
+                let giftTable: MatchPlayerGiftTable = giftTables[0]
+                attributes = giftTable.attributes.productAttributeToArray()
+            }
+        }
+        
+        for (i, attribute) in self.giftTables[0].productTable!.attributes.enumerated() {
             
             //setup attribute label
             let attributeLbl: SuperLabel = {
@@ -665,9 +676,11 @@ class MatchPlayerEditVC: BaseViewController {
             
             //產生贈品屬性的tag
             var selected: String = ""
-            if playerTable != nil {
-                
+            let isExist: Bool = attributes.indices.contains(i)
+            if isExist {
+                selected = attributes[i]["value"] ?? ""
             }
+            
             let tagContainer: AttributesView = AttributesView(name: attribute.name, alias: attribute.alias, attribute: attribute.attribute, selected: selected)
             //屬性欄的高度，從tagContainer來取得
             let h: Int = tagContainer.getHeight()

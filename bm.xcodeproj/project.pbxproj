@@ -373,6 +373,7 @@
 		F9B9F6DB2A0E3C0400FD9ADC /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */; };
 		F9B9F6DD2A19F82000FD9ADC /* ManagerMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B9F6DC2A19F82000FD9ADC /* ManagerMatchVC.swift */; };
 		F9B9F6DF2A1CEC2000FD9ADC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9B9F6DE2A1CEC2000FD9ADC /* GoogleService-Info.plist */; };
+		F9B9F6E12A25FC2A00FD9ADC /* MatchPlayerGiftTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B9F6E02A25FC2900FD9ADC /* MatchPlayerGiftTable.swift */; };
 		F9C6648029FCCA37005C1905 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6647F29FCCA37005C1905 /* Date.swift */; };
 		F9C6648229FE4213005C1905 /* MatchPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6648129FE4212005C1905 /* MatchPlayerService.swift */; };
 		F9C664842A040BFE005C1905 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C664832A040BFE005C1905 /* Data.swift */; };
@@ -847,6 +848,7 @@
 		F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		F9B9F6DC2A19F82000FD9ADC /* ManagerMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerMatchVC.swift; sourceTree = "<group>"; };
 		F9B9F6DE2A1CEC2000FD9ADC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F9B9F6E02A25FC2900FD9ADC /* MatchPlayerGiftTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPlayerGiftTable.swift; sourceTree = "<group>"; };
 		F9C6647F29FCCA37005C1905 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F9C6648129FE4212005C1905 /* MatchPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchPlayerService.swift; sourceTree = "<group>"; };
 		F9C664832A040BFE005C1905 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -1538,6 +1540,7 @@
 				F983441929EEF5C00050B634 /* MatchContact.swift */,
 				B3D58D032A08A93D008524CC /* MatchGiftTable.swift */,
 				F983441729EEF49C0050B634 /* MatchGroupTable.swift */,
+				F9B9F6E02A25FC2900FD9ADC /* MatchPlayerGiftTable.swift */,
 				F983441B29EEF6E20050B634 /* MatchPlayerTable.swift */,
 				F983441529EEEE950050B634 /* MatchTable.swift */,
 				F9C664892A052F10005C1905 /* MatchTeamTable.swift */,
@@ -2050,6 +2053,7 @@
 				B36D66C0229A828A00502D62 /* ManagerCourseCell.swift in Sources */,
 				B3B4EF56257B59EA00EE15D0 /* PrivacyCell.swift in Sources */,
 				B3031D6A25CD46A50044830C /* PaymentVC.swift in Sources */,
+				F9B9F6E12A25FC2A00FD9ADC /* MatchPlayerGiftTable.swift in Sources */,
 				B3BC32602991F5D900243C21 /* TapLabel2.swift in Sources */,
 				B3A253EA256CBA4D004B8A03 /* SelectCityVC.swift in Sources */,
 				B3EA0B1D2579EAF800F9C4C3 /* RegisterForm.swift in Sources */,
