@@ -384,6 +384,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         
         if item != nil {
             noLbl.text = String(item!.no) + "."
+            teamNameLbl.text = item!.name
             createdAtLbl.text = item!.created_at.noSec()
         }
         

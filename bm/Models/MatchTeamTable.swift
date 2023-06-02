@@ -36,6 +36,7 @@ class MatchTeamTable: Table {
     var matchGroupTable: MatchGroupTable? = nil
     var matchPlayers: [MatchPlayerTable] = [MatchPlayerTable]()
     var matchGifts: [MatchGiftTable] = [MatchGiftTable]()
+    var orderTable: OrderTable? = nil
     
     var product_token: String = ""
     
@@ -51,6 +52,7 @@ class MatchTeamTable: Table {
         case matchPlayers = "match_players"
         case matchGifts = "match_gifts"
         case product_token
+        case orderTable = "order"
     }
     
     required init(from decoder: Decoder) throws {
@@ -70,6 +72,7 @@ class MatchTeamTable: Table {
         do {matchGifts = try container.decode([MatchGiftTable].self, forKey: .matchGifts)}catch{matchGifts = [MatchGiftTable]()}
         
         product_token = try container.decodeIfPresent(String.self, forKey: .product_token) ?? ""
+        orderTable = try container.decodeIfPresent(OrderTable.self, forKey: .orderTable) ?? nil
     }
     
     override func filterRow() {
@@ -77,6 +80,7 @@ class MatchTeamTable: Table {
         super.filterRow()
         matchTable?.filterRow()
         matchGroupTable?.filterRow()
+        orderTable?.filterRow()
         
         if (matchPlayers.count > 0) {
             for matcherPlayer in matchPlayers {

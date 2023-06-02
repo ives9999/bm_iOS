@@ -125,23 +125,20 @@ class MatchTeamSignupVC: BaseViewController {
     
     func setPage() {
         let vc1: MatchTeamEditVC = MatchTeamEditVC(idx: 0)
-        if table != nil {
-            vc1.setValue(team: table!)
-        }
+        vc1.setValue(team: table)
         pages.append(vc1)
         
         let playerNumber: Int = table!.matchGroupTable!.number
         for i in 1...playerNumber {
+            
             let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
             if table!.matchPlayers.count > 0 && i <= table!.matchPlayers.count {
                 vc.playerTable = table!.matchPlayers[i-1]
             }
             
             vc.giftTables = table!.matchGifts
+            vc.setValue()
             
-//            if table!.matchPlayers != nil && i <= table!.matchPlayers.count {
-//                vc.setValue(player: table!.matchPlayers[i-1])
-//            }
             pages.append(vc)
         }
         
@@ -267,8 +264,8 @@ class MatchTeamSignupVC: BaseViewController {
                        }
                    }
                } catch {
-                   //self.warning(error.localizedDescription)
-                   self.warning(self.dataService.msg)
+                   self.warning(error.localizedDescription)
+                   //self.warning(self.dataService.msg)
                }
            } else {
                Global.instance.removeSpinner(superView: self.view)
@@ -393,7 +390,7 @@ class MatchTeamEditVC: BaseViewController {
         self.view.backgroundColor = UIColor.black
         
         anchor()
-        setValue()
+        //setValue()
     }
     
     func anchor() {
@@ -410,7 +407,6 @@ class MatchTeamEditVC: BaseViewController {
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
-        fields.append(teamNameTxt2)
         
         self.view.addSubview(managerNameTxt2)
         managerNameTxt2.snp.makeConstraints { make in
@@ -418,7 +414,6 @@ class MatchTeamEditVC: BaseViewController {
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
-        fields.append(managerNameTxt2)
         
         self.view.addSubview(managerMobileTxt2)
         managerMobileTxt2.snp.makeConstraints { make in
@@ -426,7 +421,6 @@ class MatchTeamEditVC: BaseViewController {
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
-        fields.append(managerMobileTxt2)
         
         self.view.addSubview(managerEmailTxt2)
         managerEmailTxt2.snp.makeConstraints { make in
@@ -434,7 +428,6 @@ class MatchTeamEditVC: BaseViewController {
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
-        fields.append(managerEmailTxt2)
         
         self.view.addSubview(managerLineTxt2)
         managerLineTxt2.snp.makeConstraints { make in
@@ -442,11 +435,10 @@ class MatchTeamEditVC: BaseViewController {
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
         }
-        fields.append(managerLineTxt2)
     }
     
     func setValue(team: MatchTeamTable? = nil) {
-        if team != nil {
+        if team != nil && team!.name.count > 0 {
             teamNameTxt2.setValue(team!.name)
             managerNameTxt2.setValue(team!.manager_name)
             managerMobileTxt2.setValue(team!.manager_mobile)
@@ -459,6 +451,12 @@ class MatchTeamEditVC: BaseViewController {
             managerEmailTxt2.setValue("david@gmail.com")
             managerLineTxt2.setValue("davidline")
         }
+        
+        fields.append(teamNameTxt2)
+        fields.append(managerNameTxt2)
+        fields.append(managerMobileTxt2)
+        fields.append(managerEmailTxt2)
+        fields.append(managerLineTxt2)
     }
     
     func checkRequire()-> String {
@@ -495,6 +493,9 @@ class MatchTeamEditVC: BaseViewController {
 class MatchPlayerEditVC: BaseViewController {
     
     var idx: Int = 1
+    
+    //填寫的所有欄位
+    var fields: [UIView] = [UIView]()
     
     var formContainer: UIView = UIView()
     
@@ -551,9 +552,6 @@ class MatchPlayerEditVC: BaseViewController {
         return view
     }()
     
-    //填寫的所有欄位
-    var fields: [UIView] = [UIView]()
-    
     var playerTable: MatchPlayerTable? = nil
     var giftTables: [MatchGiftTable] = [MatchGiftTable]()
     //贈品的屬性
@@ -580,16 +578,10 @@ class MatchPlayerEditVC: BaseViewController {
         title = "隊員\(idx)"
         lbl.text = title
         
-//        if gifts.count > 0 {
-//            if let product: ProductTable = gifts[0].productTable {
-//                giftLbl.text = product.name
-//                self.attributes = product.attributes
-//            }
-//        }
-        
         anchor()
         
-        setValue()
+        //移到viewController的setPage做了
+        //setValue()
     }
     
     func anchor() {
@@ -618,7 +610,7 @@ class MatchPlayerEditVC: BaseViewController {
                 make.left.equalToSuperview().offset(leftPadding)
                 make.right.equalToSuperview().offset(rightPadding)
             }
-            fields.append(nameTxt2)
+            //fields.append(nameTxt2)
             
             formContainer.addSubview(mobileTxt2)
             mobileTxt2.snp.makeConstraints { make in
@@ -626,7 +618,7 @@ class MatchPlayerEditVC: BaseViewController {
                 make.left.equalToSuperview().offset(leftPadding)
                 make.right.equalToSuperview().offset(rightPadding)
             }
-            fields.append(mobileTxt2)
+            //fields.append(mobileTxt2)
             
             formContainer.addSubview(emailTxt2)
             emailTxt2.snp.makeConstraints { make in
@@ -634,7 +626,7 @@ class MatchPlayerEditVC: BaseViewController {
                 make.left.equalToSuperview().offset(leftPadding)
                 make.right.equalToSuperview().offset(rightPadding)
             }
-            fields.append(emailTxt2)
+            //fields.append(emailTxt2)
             
             formContainer.addSubview(lineTxt2)
             lineTxt2.snp.makeConstraints { make in
@@ -642,7 +634,7 @@ class MatchPlayerEditVC: BaseViewController {
                 make.left.equalToSuperview().offset(leftPadding)
                 make.right.equalToSuperview().offset(rightPadding)
             }
-            fields.append(lineTxt2)
+            //fields.append(lineTxt2)
             
             formContainer.addSubview(ageTxt2)
             ageTxt2.snp.makeConstraints { make in
@@ -650,7 +642,7 @@ class MatchPlayerEditVC: BaseViewController {
                 make.left.equalToSuperview().offset(leftPadding)
                 make.right.equalToSuperview().offset(rightPadding)
             }
-            fields.append(ageTxt2)
+            //fields.append(ageTxt2)
         
             formContainer.addSubview(hr)
             hr.snp.makeConstraints { make in
@@ -777,12 +769,18 @@ class MatchPlayerEditVC: BaseViewController {
             lineTxt2.setValue(playerTable!.line)
             ageTxt2.setValue(String(playerTable!.age))
         } else {
-            nameTxt2.setValue("人員\(idx)")
-            mobileTxt2.setValue("0923487384")
-            emailTxt2.setValue("david@gmail.com")
-            lineTxt2.setValue("davidline")
-            ageTxt2.setValue("35")
+//            nameTxt2.setValue("人員\(idx)")
+//            mobileTxt2.setValue("0923487384")
+//            emailTxt2.setValue("david@gmail.com")
+//            lineTxt2.setValue("davidline")
+//            ageTxt2.setValue("35")
         }
+        
+        fields.append(nameTxt2)
+        fields.append(mobileTxt2)
+        fields.append(emailTxt2)
+        fields.append(lineTxt2)
+        fields.append(ageTxt2)
     }
     
     func checkRequire()-> String {
@@ -791,15 +789,15 @@ class MatchPlayerEditVC: BaseViewController {
         var msgs: [String] = [String]()
 
         if nameTxt2.value.count == 0 {
-            msgs.append("姓名不能為空白")
+            msgs.append("隊員\(idx)姓名不能為空白")
         }
 
         if mobileTxt2.value.count == 0 {
-            msgs.append("手機不能為空白")
+            msgs.append("隊員\(idx)手機不能為空白")
         }
 
         if emailTxt2.value.count == 0 {
-            msgs.append("Email不能為空白")
+            msgs.append("隊員\(idx)Email不能為空白")
         }
         
         if giftAttributes.count > 0 {
