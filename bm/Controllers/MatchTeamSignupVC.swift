@@ -133,14 +133,15 @@ class MatchTeamSignupVC: BaseViewController {
         let playerNumber: Int = table!.matchGroupTable!.number
         for i in 1...playerNumber {
             let vc: MatchPlayerEditVC = MatchPlayerEditVC(idx: i)
-            if table!.matchPlayers.count > 0 {
+            if table!.matchPlayers.count > 0 && i <= table!.matchPlayers.count {
                 vc.playerTable = table!.matchPlayers[i-1]
             }
+            
             vc.giftTables = table!.matchGifts
             
-            if table!.matchPlayers != nil && i <= table!.matchPlayers.count {
-                vc.setValue(player: table!.matchPlayers[i-1])
-            }
+//            if table!.matchPlayers != nil && i <= table!.matchPlayers.count {
+//                vc.setValue(player: table!.matchPlayers[i-1])
+//            }
             pages.append(vc)
         }
         
@@ -185,7 +186,7 @@ class MatchTeamSignupVC: BaseViewController {
         
         //print(params)
         
-        //team member param
+        //b is team member param
         var b: [[String: Any]] = [[String: Any]]()
         for i in 1...pages.count-1 {
             
@@ -196,26 +197,39 @@ class MatchTeamSignupVC: BaseViewController {
                     return
                 }
                 
+                //c is player param
                 var c: [String: Any] = [String: Any]()
                 for field in vc.fields {
                     if let tmp = field as? MainTextField2 {
                         c["\(tmp.key)"] = tmp.value
                     }
                 }
-                
-                var selected_attributes: [String] = [String]()
-                var gift_id: String = "0"
-                for giftAttribute in vc.giftAttributes {
-                    let value: String = ProductAttributeTable.instance.composeProductAttribute(attributes: giftAttribute)
-                    selected_attributes.append(value)
-                    gift_id = giftAttribute["id"] ?? "0"
-                }
-                
-                c["gift"] = ["id": gift_id, "attribute": selected_attributes.joined(separator: "|")]
-                
                 if vc.playerTable != nil {
                     c["token"] = vc.playerTable!.token
                 }
+                
+                var selected_attributes: [String] = [String]()
+                var gift_id: String?
+                var match_gift_id: String?
+                
+                //d is player gift param
+                var d: [String: String] = [String: String]()
+                for giftAttribute: [String: String] in vc.giftAttributes {
+                    let value: String = ProductAttributeTable.instance.composeProductAttribute(attributes: giftAttribute)
+                    selected_attributes.append(value)
+                    
+                    if giftAttribute.keyExist(key: "id") {
+                        gift_id = giftAttribute["id"]
+                        d["id"] = gift_id
+                    }
+                    
+                    if giftAttribute.keyExist(key: "match_gift_id") {
+                        match_gift_id = giftAttribute["match_gift_id"]
+                        d["match_gift_id"] = match_gift_id
+                    }
+                }
+                d["attributes"] = selected_attributes.joined(separator: "|")
+                c["gift"] = d
                 
                 b.append(c)
             }
@@ -333,7 +347,7 @@ class MatchTeamEditVC: BaseViewController {
     }()
     
     let teamNameTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(key: "team_name", label: "隊名", icon: "member_on_svg", placeholder: "無敵隊", isRequired: true)
+        let view: MainTextField2 = MainTextField2(key: "name", label: "隊名", icon: "member_on_svg", placeholder: "無敵隊", isRequired: true)
         
         return view
     }()
@@ -438,6 +452,12 @@ class MatchTeamEditVC: BaseViewController {
             managerMobileTxt2.setValue(team!.manager_mobile)
             managerEmailTxt2.setValue(team!.manager_email)
             managerLineTxt2.setValue(team!.manager_line)
+        } else {
+            teamNameTxt2.setValue("測試隊")
+            managerNameTxt2.setValue("王大明")
+            managerMobileTxt2.setValue("0934254387")
+            managerEmailTxt2.setValue("david@gmail.com")
+            managerLineTxt2.setValue("davidline")
         }
     }
     
@@ -650,13 +670,17 @@ class MatchPlayerEditVC: BaseViewController {
         var lastView: UIView = giftLbl
         
         //取得隊員所選的贈品
-        var giftTables: [MatchPlayerGiftTable] = [MatchPlayerGiftTable]()
+        var playerGiftTables: [MatchPlayerGiftTable] = [MatchPlayerGiftTable]()
         var attributes: [[String: String]] = [[String: String]]()
+        var match_player_gift_id: Int = 0
+        var match_gift_id: Int = 0
         if playerTable != nil {
-            giftTables = playerTable!.matchPlayerGiftsTable
-            if (giftTables.count > 0) {
-                let giftTable: MatchPlayerGiftTable = giftTables[0]
-                attributes = ProductAttributeTable.instance.productAttributeToArray(attribute: giftTable.attributes)
+            playerGiftTables = playerTable!.matchPlayerGiftsTable
+            if (playerGiftTables.count > 0) {
+                let playerGiftTable: MatchPlayerGiftTable = playerGiftTables[0]
+                attributes = ProductAttributeTable.instance.productAttributeToArray(attribute: playerGiftTable.attributes)
+                match_player_gift_id = playerGiftTable.id
+                match_gift_id = playerGiftTable.match_gift_id
             }
         }
         
@@ -702,7 +726,16 @@ class MatchPlayerEditVC: BaseViewController {
             tagContainer.setAttributes()
             lastView = tagContainer
             
-            let tmp: [String: String] = ["name": attribute.name, "alias": attribute.alias, "value": selected, "id": String(giftTables[0].id)]
+            var tmp: [String: String] = [
+                "name": attribute.name,
+                "alias": attribute.alias,
+                "value": selected
+            ]
+            if match_player_gift_id > 0 {
+                tmp["id"] = String(match_player_gift_id)
+            }
+            
+            tmp["match_gift_id"] = (match_gift_id > 0) ? String(match_gift_id) : String(giftTables[0].id)
             giftAttributes.append(tmp)
         }
         //print(giftAttributes)
@@ -736,17 +769,19 @@ class MatchPlayerEditVC: BaseViewController {
         giftLbl.text = "贈品：\(giftName)"
     }
 
-    func setValue(player: MatchPlayerTable? = nil) {
-        if player != nil {
-            nameTxt2.setValue(player!.name)
-            mobileTxt2.setValue(player!.mobile)
-            emailTxt2.setValue(player!.email)
-            lineTxt2.setValue(player!.line)
-            ageTxt2.setValue(String(player!.age))
-            
-//            if let age = Member.instance.dob.clacAge() {
-//                ageTxt2.setValue(String(20))
-//            }
+    func setValue() {
+        if playerTable != nil {
+            nameTxt2.setValue(playerTable!.name)
+            mobileTxt2.setValue(playerTable!.mobile)
+            emailTxt2.setValue(playerTable!.email)
+            lineTxt2.setValue(playerTable!.line)
+            ageTxt2.setValue(String(playerTable!.age))
+        } else {
+            nameTxt2.setValue("人員\(idx)")
+            mobileTxt2.setValue("0923487384")
+            emailTxt2.setValue("david@gmail.com")
+            lineTxt2.setValue("davidline")
+            ageTxt2.setValue("35")
         }
     }
     

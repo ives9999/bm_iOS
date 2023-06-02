@@ -94,10 +94,10 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         return view
     }()
     
-    var createdAtLbl: SuperLabel = {
+    var teamNameLbl: SuperLabel = {
         let view = SuperLabel()
         view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "2023-08-01 08:00"
+        view.text = "金剛隊"
         
         return view
     }()
@@ -152,6 +152,14 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         let view = SuperLabel()
         view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
         view.text = "10人"
+        
+        return view
+    }()
+    
+    var createdAtLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
+        view.text = "2023-08-01 08:00"
         
         return view
     }()
@@ -236,8 +244,8 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
                 make.centerY.equalToSuperview()
             }
             
-            view1.addSubview(createdAtLbl)
-            createdAtLbl.snp.makeConstraints { make in
+            view1.addSubview(teamNameLbl)
+            teamNameLbl.snp.makeConstraints { make in
                 make.right.equalToSuperview()
                 make.centerY.equalToSuperview()
             }
@@ -280,7 +288,6 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
                 make.top.equalTo(matchTimeLbl.snp.bottom).offset(12)
                 make.left.right.equalToSuperview()
                 make.height.equalTo(30)
-                make.bottom.equalToSuperview().offset(-12)
             }
         
                 partContainer.addSubview(dot1)
@@ -318,6 +325,12 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
                     make.left.equalTo(dot3.snp.right).offset(6)
                     make.centerY.equalToSuperview()
                 }
+            mainContainerView.addSubview(createdAtLbl)
+            createdAtLbl.snp.makeConstraints { make in
+                make.top.equalTo(partContainer.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-12)
+            }
         
         self.contentView.addSubview(iconContainerView)
         //iconContainerView.backgroundColor = UIColor.red
