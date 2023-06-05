@@ -77,6 +77,16 @@ class ManagerMatchVC: BaseViewController {
         }
     }
     
+    override func cellDelete(row: Table) {
+        //print(row)
+        if let _row: MatchTeamTable = row as? MatchTeamTable {
+            warning(msg: "是否確定刪除", closeButtonTitle: "取消", buttonTitle: "刪除") {
+                
+            }
+            
+        }
+    }
+    
     func tableViewSetSelected(row: MatchTeamTable)-> Bool {
         return false
     }
