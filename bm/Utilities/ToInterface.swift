@@ -239,6 +239,13 @@ extension BaseViewController {
         v.modalPresentationStyle = .fullScreen
         show(v, sender: nil)
     }
+    
+    func toManagerMatchPlayer(match_team_token: String) {
+        let v: ManagerMatchTeamPlayerVC = ManagerMatchTeamPlayerVC()
+        v.match_team_token = match_team_token
+        v.modalPresentationStyle = .fullScreen
+        show(v, sender: nil)
+    }
 
     func toManagerSignup(able_type: String, able_token: String, able_title: String) {
         if #available(iOS 13.0, *) {

@@ -256,7 +256,7 @@ enum MemberItemEnum: String {
         case .store: return "store_svg"
         case .tempPlay: return "tempPlay_svg"
         case .requestManager: return "request_manager_svg"
-        case .match: return "match_svg"
+        case .match: return "match_g_svg"
         }
     }
 }

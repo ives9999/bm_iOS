@@ -81,9 +81,25 @@ class ManagerMatchVC: BaseViewController {
         //print(row)
         if let _row: MatchTeamTable = row as? MatchTeamTable {
             warning(msg: "是否確定刪除", closeButtonTitle: "取消", buttonTitle: "刪除") {
-                
+                self.dataService.delete(token: row.token, type: "") { success in
+                    if success {
+                        self.refresh()
+                    } else {
+                        self.info("刪除失敗")
+                    }
+                }
             }
-            
+        }
+    }
+    
+    override func cellTeamMember(row: Table) {
+        toManagerMatchPlayer(match_team_token: row.token)
+    }
+    
+    override func didSelect<U>(item: U, at indexPath: IndexPath) {
+        let _item: MatchTeamTable = item as! MatchTeamTable
+        if _item.matchTable != nil {
+            toShowMatch(token: _item.matchTable!.token)
         }
     }
     
@@ -225,6 +241,8 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         deleteIcon.delegate = self
         signupIcon.delegate = self
         teamMemberIcon.delegate = self
+        
+        showButton2.delegate = self
         
         //self.backgroundColor = UIColor.red
         

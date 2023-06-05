@@ -257,6 +257,7 @@
 		B3CB73DA23D410CD00892F75 /* OneLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3CB73D823D410CD00892F75 /* OneLineCell.xib */; };
 		B3CB73E223E3185E00892F75 /* OlCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CB73E123E3185D00892F75 /* OlCell.swift */; };
 		B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */; };
+		B3D3E5002A2DBE6600285023 /* ManagerMatchTeamPlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D3E4FF2A2DBE6600285023 /* ManagerMatchTeamPlayerVC.swift */; };
 		B3D4950D25DF67D900D7BF42 /* PaymentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D4950B25DF67D900D7BF42 /* PaymentCell.swift */; };
 		B3D4950E25DF67D900D7BF42 /* PaymentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B3D4950C25DF67D900D7BF42 /* PaymentCell.xib */; };
 		B3D58D042A08A93D008524CC /* MatchGiftTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D58D032A08A93D008524CC /* MatchGiftTable.swift */; };
@@ -722,6 +723,7 @@
 		B3CB73D823D410CD00892F75 /* OneLineCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OneLineCell.xib; sourceTree = "<group>"; };
 		B3CB73E123E3185D00892F75 /* OlCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OlCell.swift; sourceTree = "<group>"; };
 		B3CCE63D1FAD6DF30050D2FE /* CircleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleImageView.swift; sourceTree = "<group>"; };
+		B3D3E4FF2A2DBE6600285023 /* ManagerMatchTeamPlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerMatchTeamPlayerVC.swift; sourceTree = "<group>"; };
 		B3D4950B25DF67D900D7BF42 /* PaymentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentCell.swift; sourceTree = "<group>"; };
 		B3D4950C25DF67D900D7BF42 /* PaymentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentCell.xib; sourceTree = "<group>"; };
 		B3D58D032A08A93D008524CC /* MatchGiftTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchGiftTable.swift; sourceTree = "<group>"; };
@@ -1452,6 +1454,7 @@
 				B3BBDD8E240E54D000EB9856 /* LoginVC.swift */,
 				B36D66B6229997AC00502D62 /* ManagerCourseVC.swift */,
 				B3A5A28520B32152001A846F /* ManagerFunctionVC.swift */,
+				B3D3E4FF2A2DBE6600285023 /* ManagerMatchTeamPlayerVC.swift */,
 				F9B9F6DC2A19F82000FD9ADC /* ManagerMatchVC.swift */,
 				F964CDE227744D76004F1C78 /* ManagerSignupListVC.swift */,
 				F964CDDA276F5CBA004F1C78 /* ManagerSignupVC.swift */,
@@ -2049,6 +2052,7 @@
 				B380FD4F25A827670081DBBA /* PlainCell.swift in Sources */,
 				B358B0B2229D722300F1A4E6 /* CourseForm.swift in Sources */,
 				B3591B702164CC6100E0919C /* Degree.swift in Sources */,
+				B3D3E5002A2DBE6600285023 /* ManagerMatchTeamPlayerVC.swift in Sources */,
 				F983442229F415F40050B634 /* String.swift in Sources */,
 				B362413C2601D7CA008FAD1B /* StoreTable.swift in Sources */,
 				B3E8C2A5220BFFE10008ED25 /* SuperWebView.swift in Sources */,

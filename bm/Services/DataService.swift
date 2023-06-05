@@ -103,8 +103,8 @@ class DataService {
             url = String(format: URL_DELETE, source!)
         }
         //let url: String = String(format: URL_DELETE, "cart")
-        //print(url)
-        //print(body)
+        print(url)
+        print(body)
         if url == nil {
             msg = "沒有網址錯誤，請洽管理員"
             completion(false)
