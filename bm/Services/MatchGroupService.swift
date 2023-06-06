@@ -26,6 +26,6 @@ class MatchGroupService: DataService {
     }
     
     override func getUpdateURL()-> String {
-        return URL_MATCH_PLAYER_UPDATE
+        return URL_MATCH_TEAM_PLAYER_UPDATE
     }
 }

@@ -18,7 +18,7 @@ class MatchPlayerService: DataService {
     }
     
     override func getListURL() -> String {
-        return URL_MATCH_PLAYER_LIST
+        return URL_MATCH_TEAM_PLAYER_LIST
     }
     
     override func getSource() -> String? {
@@ -26,6 +26,6 @@ class MatchPlayerService: DataService {
     }
     
     override func getUpdateURL()-> String {
-        return URL_MATCH_PLAYER_UPDATE
+        return URL_MATCH_TEAM_PLAYER_UPDATE
     }
 }

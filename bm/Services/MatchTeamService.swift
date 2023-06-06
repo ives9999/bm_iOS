@@ -28,4 +28,20 @@ class MatchTeamService: DataService {
     override func getUpdateURL()-> String {
         return URL_MATCH_TEAM_UPDATE
     }
+    
+    func teamPlayerList(token: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
+        
+        let url: String = URL_MATCH_TEAM_PLAYER_LIST
+        let body: [String: String] = [
+            "device": "app",
+            "channel": CHANNEL,
+            "page": String(page),
+            "perPage": String(perPage),
+            "token": token,
+            "member_token": Member.instance.token
+        ]
+        //print(url)
+        //print(body)
+        _simpleService(url: url, params: body, completion: completion)
+    }
 }

@@ -182,24 +182,6 @@ class TeamService: DataService {
         //print(url)
         //print(body)
         _simpleService(url: url, params: body, completion: completion)
-        
-//        AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER)
-//            .validate()
-//            .responseData { (response) in
-//
-//            switch response.result {
-//            case .success(let data):
-//                self.jsonData = data
-//                completion(true)
-//
-//            case .failure(_):
-//
-//                self.msg = ServiceErrorHandler.instance1.serverError(response: response)
-//                completion(false)
-//                print(self.msg)
-//                return
-//            }
-//        }
     }
     
     func teamMemberList<T: Codable>(of: T.Type, token: String, page:Int, perPage: Int, completion: @escaping CompletionHandler) {
