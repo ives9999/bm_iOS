@@ -326,6 +326,7 @@
 		F94093D229765E720006D89D /* ShowTeamMemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D129765E720006D89D /* ShowTeamMemberCell.swift */; };
 		F94093D4298BA88E0006D89D /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D3298BA88E0006D89D /* UILabel.swift */; };
 		F94093D6298BADC60006D89D /* UIPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D5298BADC60006D89D /* UIPaddingLabel.swift */; };
+		F94DD11B2A2E1999006D5B65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F94DD11A2A2E1999006D5B65 /* GoogleService-Info.plist */; };
 		F94DECDD27478F2F00A9DA17 /* ManagerTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */; };
 		F94DECE32747CFC700A9DA17 /* EditTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECE22747CFC700A9DA17 /* EditTeamVC.swift */; };
 		F94DECE52756237800A9DA17 /* RequestManagerTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */; };
@@ -374,7 +375,6 @@
 		F9B1925E29A52AD50037FE05 /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B1925D29A52AD50037FE05 /* Int.swift */; };
 		F9B9F6DB2A0E3C0400FD9ADC /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */; };
 		F9B9F6DD2A19F82000FD9ADC /* ManagerMatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B9F6DC2A19F82000FD9ADC /* ManagerMatchVC.swift */; };
-		F9B9F6DF2A1CEC2000FD9ADC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F9B9F6DE2A1CEC2000FD9ADC /* GoogleService-Info.plist */; };
 		F9B9F6E12A25FC2A00FD9ADC /* MatchPlayerGiftTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B9F6E02A25FC2900FD9ADC /* MatchPlayerGiftTable.swift */; };
 		F9C6648029FCCA37005C1905 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6647F29FCCA37005C1905 /* Date.swift */; };
 		F9C6648229FE4213005C1905 /* MatchPlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9C6648129FE4212005C1905 /* MatchPlayerService.swift */; };
@@ -797,6 +797,7 @@
 		F94093D129765E720006D89D /* ShowTeamMemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowTeamMemberCell.swift; sourceTree = "<group>"; };
 		F94093D3298BA88E0006D89D /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		F94093D5298BADC60006D89D /* UIPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPaddingLabel.swift; sourceTree = "<group>"; };
+		F94DD11A2A2E1999006D5B65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamVC.swift; sourceTree = "<group>"; };
 		F94DECE22747CFC700A9DA17 /* EditTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamVC.swift; sourceTree = "<group>"; };
 		F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagerTeamVC.swift; sourceTree = "<group>"; };
@@ -851,7 +852,6 @@
 		F9B1925D29A52AD50037FE05 /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
 		F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		F9B9F6DC2A19F82000FD9ADC /* ManagerMatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerMatchVC.swift; sourceTree = "<group>"; };
-		F9B9F6DE2A1CEC2000FD9ADC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F9B9F6E02A25FC2900FD9ADC /* MatchPlayerGiftTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchPlayerGiftTable.swift; sourceTree = "<group>"; };
 		F9C6647F29FCCA37005C1905 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		F9C6648129FE4212005C1905 /* MatchPlayerService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchPlayerService.swift; sourceTree = "<group>"; };
@@ -1385,7 +1385,7 @@
 		F94E7D1E1F83636A00F550FD /* bm */ = {
 			isa = PBXGroup;
 			children = (
-				F9B9F6DE2A1CEC2000FD9ADC /* GoogleService-Info.plist */,
+				F94DD11A2A2E1999006D5B65 /* GoogleService-Info.plist */,
 				F93095F72948AD8A006C625C /* extensions */,
 				F94E7D1F1F83636A00F550FD /* AppDelegate.swift */,
 				F94E7D261F83636A00F550FD /* Assets.xcassets */,
@@ -1769,7 +1769,7 @@
 				B3756EE921B96B96006893E1 /* ColorSelectCell.xib in Resources */,
 				B3AE937C262FCC5F00223B2A /* ArenaListCell.xib in Resources */,
 				B380FD5025A827670081DBBA /* PlainCell.xib in Resources */,
-				F9B9F6DF2A1CEC2000FD9ADC /* GoogleService-Info.plist in Resources */,
+				F94DD11B2A2E1999006D5B65 /* GoogleService-Info.plist in Resources */,
 				B306FEA021F0DC5900403FE2 /* DateCell.xib in Resources */,
 				B3B4EF57257B59EA00EE15D0 /* PrivacyCell.xib in Resources */,
 				F9A6751F27FAF766007C8F47 /* Top.xib in Resources */,

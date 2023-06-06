@@ -9,7 +9,7 @@
 import UIKit
 import Device_swift
 import UIColor_Hex_Swift
-import OneSignal
+//import OneSignal
 import ECPayPaymentGatewayKit
 import FirebaseCore
 import FirebaseMessaging
@@ -20,10 +20,11 @@ import FirebaseMessaging
 //var URL_HOME = ""
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var fcmTokenUser : String?
+    let gcmMessageIDKey: String = "grm.message_id"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -57,41 +58,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         // Replace 'YOUR_APP_ID' with your OneSignal App ID.
         
-        OneSignal.initWithLaunchOptions(launchOptions)
-        OneSignal.setAppId("856c8fdb-79fb-418d-a397-d58b9c6b880b")
-        
-        // promptForPushNotifications will show the native iOS notification permission prompt.
-        // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
-        OneSignal.promptForPushNotifications(userResponse: { accepted in
-            //print("User accepted notifications: \(accepted)")
-            
-        }, fallbackToSettings: true)
-        
-        OneSignal.register(forProvisionalAuthorization: { accepted in
-            //handle authorization
-        })
-        
-//        let notificationWillShowInForegroundBlock: OSNotificationWillShowInForegroundBlock = { notification, completion in
-//          print("Received Notification: ", notification.notificationId ?? "no id")
-//          print("launchURL: ", notification.launchURL ?? "no launch url")
-//          print("content_available = \(notification.contentAvailable)")
+//        OneSignal.initWithLaunchOptions(launchOptions)
+//        OneSignal.setAppId("856c8fdb-79fb-418d-a397-d58b9c6b880b")
 //
-//          if notification.notificationId == "example_silent_notif" {
-//            // Complete with null means don't show a notification
-//            completion(nil)
-//          } else {
-//            // Complete with a notification means it will show
-//            completion(notification)
-//          }
-//        }
-//        OneSignal.setNotificationWillShowInForegroundHandler(notificationWillShowInForegroundBlock)
-        
-        
-        OneSignal.setNotificationWillShowInForegroundHandler(MyOneSignal.instance.notificationWillShowInForegroundBlock)
-        
-        OneSignal.setNotificationOpenedHandler(MyOneSignal.instance.notificationOpenedBlock)
+//        // promptForPushNotifications will show the native iOS notification permission prompt.
+//        // We recommend removing the following code and instead using an In-App Message to prompt for notification permission (See step 8)
+//        OneSignal.promptForPushNotifications(userResponse: { accepted in
+//            //print("User accepted notifications: \(accepted)")
+//
+//        }, fallbackToSettings: true)
+//
+//        OneSignal.register(forProvisionalAuthorization: { accepted in
+//            //handle authorization
+//        })
+//
+////        let notificationWillShowInForegroundBlock: OSNotificationWillShowInForegroundBlock = { notification, completion in
+////          print("Received Notification: ", notification.notificationId ?? "no id")
+////          print("launchURL: ", notification.launchURL ?? "no launch url")
+////          print("content_available = \(notification.contentAvailable)")
+////
+////          if notification.notificationId == "example_silent_notif" {
+////            // Complete with null means don't show a notification
+////            completion(nil)
+////          } else {
+////            // Complete with a notification means it will show
+////            completion(notification)
+////          }
+////        }
+////        OneSignal.setNotificationWillShowInForegroundHandler(notificationWillShowInForegroundBlock)
+//
+//
+//        OneSignal.setNotificationWillShowInForegroundHandler(MyOneSignal.instance.notificationWillShowInForegroundBlock)
+//
+//        OneSignal.setNotificationOpenedHandler(MyOneSignal.instance.notificationOpenedBlock)
         
         FirebaseApp.configure()
+        // [START set_messaging_delegate]
+        Messaging.messaging().delegate = self
+        // [END set_messaging_delegate]
+        
+        // Register for remote notifications. This shows a permission dialog on first run, to
+        // show the dialog at a more appropriate time move this registration accordingly.
+        // [START register_for_notifications]
         
         UNUserNotificationCenter.current().delegate = self
         //取得推播權限
@@ -101,6 +109,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
+        
+        application.registerForRemoteNotifications()
         
 //        if #available(iOS 10.0, *) {
 //            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
@@ -199,6 +209,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        fcmTokenUser = fcmToken
 //    }
     
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // Print message ID.
+        
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        
+        // Print full message
+        print(userInfo)
+    }
+    
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
+        // If you are receiving a notification message while your app is in the background,
+        // this callback will not be fired till the user taps on the notification launching the application.
+        // TODO: Handle data of notification
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+
+        // Print full message.
+        print(userInfo)
+
+        return UIBackgroundFetchResult.newData
+    }
+    
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
@@ -211,9 +254,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         print("APNs device token: \(tokenString)")
     }
     
-//    private func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-//        Messaging.messaging().apnsToken = deviceToken as Data
-//    }
+    func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
+        print("Unable to register for remote notifications: \(error.localizedDescription)")
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        print("APNs token retrieved: \(deviceToken)")
+    }
     
 //    func setStatusBarBackgroundColor(color: UIColor) {
 //        guard let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView else { return }
@@ -267,25 +314,77 @@ extension UIApplication {
     }
 }
 
-extension AppDelegate {
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        //use response.notification.request.content.userInfo to fetch push data
-        //print("didReceive > 10.0")
+//extension AppDelegate {
+//    @available(iOS 10.0, *)
+//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+//        //use response.notification.request.content.userInfo to fetch push data
+//        //print("didReceive > 10.0")
+//    }
+//
+//    // for iOS < 10
+//    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
+//        //use notification.userInfo to fetch push data
+//        //print("didReceive < 10")
+//    }
+//
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//        //use userInfo to fetch push data
+//        //print("background")
+//    }
+//}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    // Receive displayed notifications for iOS 10 devices.
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
+        let userInfo = notification.request.content.userInfo
+        
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // [START_EXCLUDE]
+        // Print message ID.
+        if let messageID = userInfo[gcmMessageIDKey] {
+          print("Message ID: \(messageID)")
+        }
+        // [END_EXCLUDE]
+        // Print full message.
+        print(userInfo)
+
+        // Change this to your preferred presentation option
+        return [[.banner, .sound]]
     }
     
-    // for iOS < 10
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        //use notification.userInfo to fetch push data
-        //print("didReceive < 10")
-    }
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        //use userInfo to fetch push data
-        //print("background")
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
+        let userInfo = response.notification.request.content.userInfo
+        
+        // [START_EXCLUDE]
+        // Print message ID
+        if let messageID = userInfo[gcmMessageIDKey] {
+            print("Message ID: \(messageID)")
+        }
+        // [END_EXCLUDE]
+        // With swizzling disabled you must let Messaging know about the message, for Analytics
+        // Messaging.messaging().appDidReceiveMessage(userInfo)
+        // Print full message.
+        print(userInfo)
     }
 }
 
+// [END ios_10_message_handling]
+
+extension AppDelegate: MessagingDelegate {
+    
+    // [START refresh_token]
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("Firbase registration token: \(String(describing: fcmToken))")
+        
+        let dataDict: [String: String] = ["token": fcmToken ?? ""]
+        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        // TODO: If necessary send token to application server.
+        // Note: This callback is fired at each app startup and whenever a new token is generated.
+    }
+    
+    // [END refresh_token]
+}
 
 
 
