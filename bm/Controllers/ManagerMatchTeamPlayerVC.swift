@@ -95,6 +95,30 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
         return view
     }()
     
+    let ageLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextGeneral()
+        view.text = "30歲"
+        
+        return view
+    }()
+    
+    let mobileLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextGeneral()
+        view.text = "0933454946"
+        
+        return view
+    }()
+    
+    let emailLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextGeneral()
+        view.text = "hank@gmail.com"
+        
+        return view
+    }()
+    
     let createdAtLbl: SuperLabel = {
         let view = SuperLabel()
         view.textColor = UIColor(MY_WHITE)
@@ -104,13 +128,13 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
         return view
     }()
     
-    let deleteIV: UIImageView = {
-        let view = UIImageView()
-        view.image = UIImage(named: "delete")
-        view.isUserInteractionEnabled = true
-        
-        return view
-    }()
+//    let deleteIV: UIImageView = {
+//        let view = UIImageView()
+//        view.image = UIImage(named: "delete")
+//        view.isUserInteractionEnabled = true
+//        
+//        return view
+//    }()
     
     let separator: UIView = {
         let view = UIView()
@@ -158,7 +182,8 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
         //dataContainer.backgroundColor = UIColor.blue
         dataContainer.snp.makeConstraints { make in
             make.left.equalTo(noLbl.snp.right).offset(18)
-            make.top.equalToSuperview().offset(3)
+            make.right.equalToSuperview()
+            make.top.equalToSuperview().offset(12)
             make.centerY.equalToSuperview()
         }
         
@@ -168,20 +193,38 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
             make.left.equalToSuperview()
         }
         
+        self.dataContainer.addSubview(ageLbl)
+        ageLbl.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.centerY.equalTo(nameLbl.snp.centerY)
+        }
+        
+        self.dataContainer.addSubview(mobileLbl)
+        mobileLbl.snp.makeConstraints { make in
+            make.top.equalTo(nameLbl.snp.bottom).offset(12)
+            make.left.equalToSuperview()
+        }
+        
+        self.dataContainer.addSubview(emailLbl)
+        emailLbl.snp.makeConstraints { make in
+            make.top.equalTo(mobileLbl.snp.bottom).offset(12)
+            make.left.equalToSuperview()
+        }
+        
         self.dataContainer.addSubview(createdAtLbl)
         createdAtLbl.snp.makeConstraints { make in
             make.left.equalToSuperview()
-            make.top.equalTo(nameLbl.snp.bottom).offset(12)
-            make.bottom.equalToSuperview().offset(-4)
+            make.top.equalTo(emailLbl.snp.bottom).offset(12)
+            make.bottom.equalToSuperview().offset(-12)
         }
         
-        self.contentView.addSubview(deleteIV)
-        deleteIV.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(-20)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(25)
-            make.height.equalTo(25)
-        }
+//        self.contentView.addSubview(deleteIV)
+//        deleteIV.snp.makeConstraints { make in
+//            make.right.equalToSuperview().offset(-20)
+//            make.centerY.equalToSuperview()
+//            make.width.equalTo(25)
+//            make.height.equalTo(25)
+//        }
         
         self.contentView.addSubview(separator)
         separator.snp.makeConstraints { make in
@@ -197,6 +240,9 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
 //            self.avatarIV.path(item!.memberTable!.featured_path)
 //        }
         nameLbl.text = (item != nil) ? item!.name : ""
+        ageLbl.text = (item != nil) ? "\(item!.age)歲" : ""
+        mobileLbl.text = (item != nil) ? item!.mobile : ""
+        emailLbl.text = (item != nil) ? item!.email : ""
         createdAtLbl.text = item?.created_at.noSec()
     }
     
