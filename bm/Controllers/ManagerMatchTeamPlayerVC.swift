@@ -85,11 +85,6 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
         return view
     }()
     
-    let avatarIV: Avatar = {
-        let view = Avatar()
-        return view
-    }()
-    
     let dataContainer: UIView = UIView()
     
     let nameLbl: SuperLabel = {
@@ -159,33 +154,25 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
             make.centerY.equalToSuperview()
         }
         
-        self.contentView.addSubview(avatarIV)
-        avatarIV.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
-            make.left.equalTo(noLbl.snp.right).offset(12)
-            make.width.height.equalTo(48)
-            make.centerY.equalToSuperview()
-            make.bottom.equalToSuperview().offset(-12)
-        }
-        
         self.contentView.addSubview(dataContainer)
         //dataContainer.backgroundColor = UIColor.blue
         dataContainer.snp.makeConstraints { make in
-            make.left.equalTo(avatarIV.snp.right).offset(18)
+            make.left.equalTo(noLbl.snp.right).offset(18)
             make.top.equalToSuperview().offset(3)
             make.centerY.equalToSuperview()
         }
         
         self.dataContainer.addSubview(nameLbl)
         nameLbl.snp.makeConstraints { make in
-            make.top.equalTo(avatarIV.snp.top).offset(4)
+            make.top.equalToSuperview().offset(4)
             make.left.equalToSuperview()
         }
         
         self.dataContainer.addSubview(createdAtLbl)
         createdAtLbl.snp.makeConstraints { make in
             make.left.equalToSuperview()
-            make.bottom.equalTo(avatarIV.snp.bottom).offset(-4)
+            make.top.equalTo(nameLbl.snp.bottom).offset(12)
+            make.bottom.equalToSuperview().offset(-4)
         }
         
         self.contentView.addSubview(deleteIV)

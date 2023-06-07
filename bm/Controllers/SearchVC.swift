@@ -49,15 +49,15 @@ class SearchVC: MyTableVC, UINavigationControllerDelegate {
         
         super.viewDidLoad()
         
-        let content = UNMutableNotificationContent()
-        content.title = "Feed the cat"
-        content.subtitle = "It looks hungry"
-        content.sound = UNNotificationSound.default
-        
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request)
+//        let content = UNMutableNotificationContent()
+//        content.title = "Feed the cat"
+//        content.subtitle = "It looks hungry"
+//        content.sound = UNNotificationSound.default
+//
+//        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//
+//        UNUserNotificationCenter.current().add(request)
         
 //        let cellNib = UINib(nibName: "EditCell", bundle: nil)
 //        tableView.register(cellNib, forCellReuseIdentifier: "cell")

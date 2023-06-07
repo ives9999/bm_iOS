@@ -31,6 +31,7 @@ class MemberTable: Table {
     var pid: String = ""
     var avatar: String = ""
     var player_id: String = ""
+    var device_token: String = ""
     var type: Int = 0
     var social: String = ""
     var fb: String = ""
@@ -64,6 +65,7 @@ class MemberTable: Table {
         case pid
         case avatar
         case player_id
+        case device_token
         case type
         case social
         case fb
@@ -99,6 +101,7 @@ class MemberTable: Table {
         zip = try container.decodeIfPresent(Int.self, forKey: .zip) ?? 0
         avatar = try container.decodeIfPresent(String.self, forKey: .avatar) ?? ""
         player_id = try container.decodeIfPresent(String.self, forKey: .player_id) ?? ""
+        device_token = try container.decodeIfPresent(String.self, forKey: .device_token) ?? ""
         type = try container.decodeIfPresent(Int.self, forKey: .type) ?? 0
         social = try container.decodeIfPresent(String.self, forKey: .social) ?? ""
         fb = try container.decodeIfPresent(String.self, forKey: .fb) ?? ""
