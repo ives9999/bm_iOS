@@ -86,7 +86,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
         }
         
         if (contentView != nil) {
-            //initContentView()
+            initContentView()
         }
         
         if (bottomView != nil) {
@@ -171,7 +171,7 @@ class ShowVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, WK
                                 self.setFeatured()
                                 self.initData()
                                 self.setData()
-                                //self.setContent()
+                                self.setContent()
                                 self.setLike()
                             }
                         }

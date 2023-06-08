@@ -97,7 +97,7 @@ class ShowProductVC: ShowVC {
             if (myTable != nil) {
                 //myTable!.filterRow()
                 //self.courseTable?.printRow()
-                //setContent()  已經在showVC的refresh有執行了
+                //setContent()
                 setImages()
             }
         }
