@@ -25,6 +25,8 @@ class ManagerMatchTeamPlayerVC: BaseViewController {
     
     var infoLbl: SuperLabel?
     
+    //var items = [MatchPlayerTable]()
+    
     override func viewDidLoad() {
         
         dataService = MatchTeamService.instance
@@ -57,8 +59,8 @@ class ManagerMatchTeamPlayerVC: BaseViewController {
         MatchTeamService.instance.teamPlayerList(token: match_team_token!, page: page, perPage: tableView.perPage) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                MatchTeamService.instance.jsonData?.prettyPrintedJSONString
-                let b: Bool = self.tableView.parseJSON(jsonData: MatchTeamService.instance.jsonData)
+                //MatchTeamService.instance.jsonData?.prettyPrintedJSONString
+                let b: Bool = self.parseJSON(jsonData: MatchTeamService.instance.jsonData)
                 if !b && self.tableView.msg.count == 0 {
                     self.infoLbl = self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop!)
                 } else {
@@ -68,6 +70,63 @@ class ManagerMatchTeamPlayerVC: BaseViewController {
                 //self.showTableView(tableView: self.tableView, jsonData: TeamService.instance.jsonData!)
             }
         }
+    }
+    
+    func parseJSON(jsonData: Data?)-> Bool {
+        
+        let _rows: [MatchPlayerTable] = genericTable2(jsonData: jsonData)
+        if (_rows.count == 0) {
+            return false
+        } else {
+            if (page == 1) {
+                tableView.items = [MatchPlayerTable]()
+            }
+            tableView.items += _rows
+            tableView.reloadData()
+            tableView.endRefresh()
+        }
+        
+        return true
+    }
+    
+    func genericTable2(jsonData: Data?)-> [MatchPlayerTable] {
+        
+        var rows: [MatchPlayerTable] = [MatchPlayerTable]()
+        do {
+            if (jsonData != nil) {
+                print(jsonData!.prettyPrintedJSONString)
+                let tables2: MatchPlayerTables = try JSONDecoder().decode(MatchPlayerTables.self, from: jsonData!)
+                if (tables2.success) {
+                    if tables2.rows.count > 0 {
+                        
+                        for row in tables2.rows {
+                            row.filterRow()
+                        }
+                        
+                        if (page == 1) {
+                            page = tables2.page
+                            perPage = tables2.perPage
+                            totalCount = tables2.totalCount
+                            let _totalPage: Int = totalCount / perPage
+                            totalPage = (totalCount % perPage > 0) ? _totalPage + 1 : _totalPage
+                        }
+                        
+                        rows += tables2.rows
+                        if self.showTop != nil && tables2.match_group != nil {
+                            self.showTop!.setTitle(tables2.match_group!.name)
+                        }
+                    }
+                } else {
+                    msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
+                }
+            } else {
+                msg = "無法從伺服器取得正確的json資料，請洽管理員"
+            }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        
+        return rows
     }
     
     func tableViewSetSelected(row: MatchPlayerTable)-> Bool {
@@ -257,5 +316,25 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
     
     func setDeleteClickListener() {
         
+    }
+}
+
+class MatchPlayerTables: Codable {
+    var success: Bool = false
+    var page: Int = -1
+    var totalCount: Int = -1
+    var perPage: Int = -1
+    var match_group: MatchGroupTable? = nil
+    var rows: [MatchPlayerTable] = [MatchPlayerTable]()
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        success = try container.decode(Bool.self, forKey: .success)
+        page = try container.decode(Int.self, forKey: .page)
+        totalCount = try container.decode(Int.self, forKey: .totalCount)
+        perPage = try container.decode(Int.self, forKey: .perPage)
+        match_group = try container.decodeIfPresent(MatchGroupTable.self, forKey: .match_group) ?? nil
+        rows = try container.decode([MatchPlayerTable].self, forKey: .rows)
     }
 }

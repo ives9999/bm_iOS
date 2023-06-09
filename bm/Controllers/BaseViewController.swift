@@ -1088,7 +1088,7 @@ class BaseViewController: UIViewController, List2CellDelegate {
         
         if let app: AppDelegate = UIApplication.shared.delegate as? AppDelegate {
             fcmToken = app.fcmToken
-            print("fcmToken: \(fcmToken)")
+            print("fcmToken in BaseViewController: \(fcmToken)")
         }
     }
     
