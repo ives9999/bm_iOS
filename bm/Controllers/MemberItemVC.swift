@@ -225,7 +225,7 @@ enum MemberItemEnum: String {
         case MainMemberEnum.order: return [.cart, .order]
         case MainMemberEnum.like: return [.team, .arena, .teach, .coach, .course, .product, .store]
         case MainMemberEnum.join: return [.team, .tempPlay, .course]
-        case MainMemberEnum.manager: return [.team, .requestManager, .course, .match]
+        case MainMemberEnum.manager: return [.team, .requestManager, .course]
         
         default: return [.info, .change_password]
         }
