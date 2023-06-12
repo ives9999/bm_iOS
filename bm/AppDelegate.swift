@@ -93,15 +93,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //
 //        OneSignal.setNotificationOpenedHandler(MyOneSignal.instance.notificationOpenedBlock)
         
+        //let pushManager = Fcm()
+        //pushManager.registerForFcm()
+        
         FirebaseApp.configure()
+        
         // [START set_messaging_delegate]
         Messaging.messaging().delegate = self
         // [END set_messaging_delegate]
-        
+
         // Register for remote notifications. This shows a permission dialog on first run, to
         // show the dialog at a more appropriate time move this registration accordingly.
         // [START register_for_notifications]
-        
+
         UNUserNotificationCenter.current().delegate = self
         //取得推播權限
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -110,27 +114,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UIApplication.shared.registerForRemoteNotifications()
             }
         }
-        
+
         application.registerForRemoteNotifications()
-        
-//        if #available(iOS 10.0, *) {
-//            UNUserNotificationCenter.current().delegate = self as? UNUserNotificationCenterDelegate
-//
-//            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//            UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in}
-//
-//
-//            Messaging.messaging().delegate = self as! MessagingDelegate
-//        } else {
-//            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-//            application.registerUserNotificationSettings(settings)
-//        }
-//        application.registerForRemoteNotifications()
-//
-//        Messaging.messaging().delegate = self
-//        let token = Messaging.messaging().fcmToken
-//        print(token)
-//        let i = 6
         
         
 //        OneSignal.initWithLaunchOptions(
@@ -159,17 +144,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            //Will be used to reach the user at the most optimal time of day.
          //OneSignal.syncHashedEmail(userEmail)
         
-        //let storyboard: UIStoryboard = UIStoryboard(name:"Main", bundle: nil)
-        //let tbController = storyboard.instantiateViewController(withIdentifier: "TabBarController") as! UITabBarController
-        //tbController.tabBar.barTintColor = UIColor("#191c25")
-
-        //UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.font: UIFont(name: "Arial", size: 14)!], for: UIControlState.normal)
-        
-        //UIApplication.shared.statusBarStyle = .default
-        //UIApplication.shared.statusBarView?.backgroundColor = UIColor(STATUS_GREEN)
-        //let color = UIColor(red: 128/255, green: 100/255, blue: 0, alpha: 1)
-        //setStatusBarBackgroundColor(color: color)
-        
         #if os(iOS) && targetEnvironment(simulator)
             gSimulate = true
         #else
@@ -179,15 +153,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //print(gSimulate)
         //BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
         
-        
-        
-//        let deviceType: DeviceType = UIDevice.current.deviceType
-//        if deviceType == .simulator {
-//            gSimulate = true
-//        }
-//        gSimulate = false
-        
-        //ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         
         //ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Stage)
         ECPayPaymentGatewayManager.sharedInstance().initialize(env: .Prod)
@@ -253,6 +218,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         //let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         print("APNs device token: \(tokenString)")
+        
+//        if tokenString.count > 0 {
+//            self.sendDeviceToken(device_token: tokenString)
+//        }
     }
     
     func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
@@ -263,82 +232,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("APNs token retrieved: \(deviceToken)")
     }
     
-//    func setStatusBarBackgroundColor(color: UIColor) {
-//        guard let statusBar = UIApplication.shared.value(forKey: "statusBar") as? UIView else { return }
-//        statusBar.backgroundColor = color
+//    private func goShowPNVC() {
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        let showPNVC: ShowPNVC = mainStoryboard.instantiateViewController(withIdentifier: TO_PN) as! ShowPNVC
+//        let root = UIApplication.shared.keyWindow!.rootViewController
+//        root?.present(showPNVC, animated: true, completion: nil)
 //    }
     
-    
-    private func goShowPNVC() {
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let showPNVC: ShowPNVC = mainStoryboard.instantiateViewController(withIdentifier: TO_PN) as! ShowPNVC
-        let root = UIApplication.shared.keyWindow!.rootViewController
-        root?.present(showPNVC, animated: true, completion: nil)
-//        self.window = UIWindow(frame: UIScreen.main.bounds)
-//        self.window!.rootViewController = showPNVC
-//        self.window!.makeKeyAndVisible()
+    func sendDeviceToken(device_token: String) {
+        DataService.instance1.deviceToken(device_token: device_token, member_token: Member.instance.token) { (success) in
+            print("success: \(success)")
+        }
     }
-    
-    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
-//        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
-//        application.registerUserNotificationSettings(pushNotificationSettings)
-//        application.registerForRemoteNotifications()
-        
-//      stop facebook login support for 1.5.0 above
-//        let appId: String = Settings.appID!
-//        if url.scheme != nil && url.scheme!.hasPrefix("fb\(appId)") && url.host == "authorize" {
-//            return ApplicationDelegate.shared.application(application,
-//                                                         open: url,
-//                                                         sourceApplication: sourceApplication,
-//                                                         annotation: annotation)
-//        }
-        return false
-    }
-    
-    //      stop facebook login support for 1.5.0 above
-//    @available(iOS 9.0, *)
-//    func application(_ application: UIApplication,
-//                     open url: URL,
-//                     options: [UIApplicationOpenURLOptionsKey: Any]) -> Bool {
-//        return ApplicationDelegate.shared.application(application, open: url, options: options)
-//    }
 }
 
 extension UIApplication {
     var statusBarView: UIView? {
         let v = value(forKey: "statusBar") as? UIView
-//        if responds(to: Selector("statusBar")) {
-//            return value(forKey: "statusBar") as? UIView
-//        }
         return v
     }
 }
-
-//extension AppDelegate {
-//    @available(iOS 10.0, *)
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-//        //use response.notification.request.content.userInfo to fetch push data
-//        //print("didReceive > 10.0")
-//    }
-//
-//    // for iOS < 10
-//    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-//        //use notification.userInfo to fetch push data
-//        //print("didReceive < 10")
-//    }
-//
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        //use userInfo to fetch push data
-//        //print("background")
-//    }
-//}
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     // Receive displayed notifications for iOS 10 devices.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
         let userInfo = notification.request.content.userInfo
-        
+
         // With swizzling disabled you must let Messaging know about the message, for Analytics
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         // [START_EXCLUDE]
@@ -353,10 +272,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Change this to your preferred presentation option
         return [[.banner, .sound]]
     }
-    
+
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let userInfo = response.notification.request.content.userInfo
-        
+
         // [START_EXCLUDE]
         // Print message ID
         if let messageID = userInfo[gcmMessageIDKey] {
@@ -373,19 +292,23 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 // [END ios_10_message_handling]
 
 extension AppDelegate: MessagingDelegate {
-    
+
     // [START refresh_token]
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         print("Firbase registration token: \(String(describing: fcmToken))")
-        
+
         self.fcmToken = fcmToken
-        
+
         let dataDict: [String: String] = ["token": fcmToken ?? ""]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
         // TODO: If necessary send token to application server.
         // Note: This callback is fired at each app startup and whenever a new token is generated.
+
+        if fcmToken != nil {
+            sendDeviceToken(device_token: fcmToken!)
+        }
     }
-    
+
     // [END refresh_token]
 }
 

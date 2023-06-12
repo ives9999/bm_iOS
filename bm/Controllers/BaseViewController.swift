@@ -26,7 +26,6 @@ class BaseViewController: UIViewController, List2CellDelegate {
     @IBOutlet weak var bottomThreeView: BottomThreeView!
     //@IBOutlet weak var searchBtn: UIButton!
     
-    var fcmToken: String?
     //出現在topView的按鈕
     let shoppingCartBtn: UIButton = UIButton()
     let searchBtn: UIButton = UIButton()
@@ -1085,11 +1084,6 @@ class BaseViewController: UIViewController, List2CellDelegate {
         
         //panelCancelBtn.setTitle("取消")
         //layerDeleteBtn.setTitle("刪除")
-        
-        if let app: AppDelegate = UIApplication.shared.delegate as? AppDelegate {
-            fcmToken = app.fcmToken
-            print("fcmToken in BaseViewController: \(fcmToken)")
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

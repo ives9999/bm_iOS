@@ -327,6 +327,7 @@
 		F94093D4298BA88E0006D89D /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D3298BA88E0006D89D /* UILabel.swift */; };
 		F94093D6298BADC60006D89D /* UIPaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94093D5298BADC60006D89D /* UIPaddingLabel.swift */; };
 		F94DD11B2A2E1999006D5B65 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F94DD11A2A2E1999006D5B65 /* GoogleService-Info.plist */; };
+		F94DD11D2A362B66006D5B65 /* Fcm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DD11C2A362B66006D5B65 /* Fcm.swift */; };
 		F94DECDD27478F2F00A9DA17 /* ManagerTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */; };
 		F94DECE32747CFC700A9DA17 /* EditTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECE22747CFC700A9DA17 /* EditTeamVC.swift */; };
 		F94DECE52756237800A9DA17 /* RequestManagerTeamVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */; };
@@ -798,6 +799,7 @@
 		F94093D3298BA88E0006D89D /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		F94093D5298BADC60006D89D /* UIPaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPaddingLabel.swift; sourceTree = "<group>"; };
 		F94DD11A2A2E1999006D5B65 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		F94DD11C2A362B66006D5B65 /* Fcm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fcm.swift; sourceTree = "<group>"; };
 		F94DECDC27478F2F00A9DA17 /* ManagerTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerTeamVC.swift; sourceTree = "<group>"; };
 		F94DECE22747CFC700A9DA17 /* EditTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTeamVC.swift; sourceTree = "<group>"; };
 		F94DECE42756237800A9DA17 /* RequestManagerTeamVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestManagerTeamVC.swift; sourceTree = "<group>"; };
@@ -977,6 +979,7 @@
 				B31ADD9225905387003E86BD /* Zone.swift */,
 				B342169D26775C2E005E406F /* ToInterface.swift */,
 				F93095F52948ACFA006C625C /* Enum.swift */,
+				F94DD11C2A362B66006D5B65 /* Fcm.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -2201,6 +2204,7 @@
 				B35C4F4C2196F5E500F8AEB2 /* EditCell.swift in Sources */,
 				F9F804802844F248006FC509 /* DefaultCell.swift in Sources */,
 				B31739EF21787960004CFEDE /* MyMapVC.swift in Sources */,
+				F94DD11D2A362B66006D5B65 /* Fcm.swift in Sources */,
 				B3F6B456260500650000F9E0 /* SignupCancelTable.swift in Sources */,
 				B36CBD5920E13F7A00E52B9C /* TempPlayDatePlayerCell.swift in Sources */,
 				F93095F92948ADB9006C625C /* UITableViewCell.swift in Sources */,

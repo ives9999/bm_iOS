@@ -133,6 +133,39 @@ class DataService {
     
     func getCalendarURL(token: String? = nil)-> String { return ""}
     
+    func deviceToken(device_token: String, member_token: String? = nil, completion: @escaping CompletionHandler) {
+        
+        let _member_token: String? = (Member.instance.token != "") ? Member.instance.token : nil
+        
+        let url: String = URL_DEVICE_TOKEN
+        var params: [String: String] = ["device": "app","device_token":device_token]
+        if member_token != nil {
+            params["member_token"] = _member_token
+        }
+        
+        print(url)
+        print(params)
+        
+        AF.request(url, method: .post, parameters: params, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
+            
+            switch response.result {
+            case .success(_):
+                if response.data != nil {
+                    self.jsonData = response.data
+                    completion(true)
+                } else {
+                    self.msg = "沒有任何伺服器回傳的訊息"
+                    completion(false)
+                }
+            case .failure(let error):
+                self.msg = "伺服器回傳錯誤，所以無法解析字串，請洽管理員"
+                completion(false)
+                print(error)
+                return
+            }
+        }
+    }
+    
     func getArenaByCityID(city_id: Int, completion: @escaping CompletionHandler) {
         let body: [String: String] = ["device": "app", "city": String(city_id)]
         //print(URL_ARENA_BY_CITY_ID)
