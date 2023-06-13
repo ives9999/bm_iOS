@@ -6,6 +6,8 @@
 //  Copyright © 2023 bm. All rights reserved.
 //
 
+// 目前還未使用到 2023/06/12
+
 import Foundation
 import FirebaseMessaging
 
