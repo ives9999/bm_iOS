@@ -33,7 +33,7 @@ class ShowTop2: UIView {
         return view
     }()
     
-    let addIconText: IconText2 = IconText2(icon: "add_svg", text: "新增")
+    let addIconText: IconTextWithBGRoundCorner = IconTextWithBGRoundCorner(icon: "add_svg", text: "新增")
     
     required init() {
         super.init(frame: CGRect.zero)
@@ -130,7 +130,7 @@ class ShowTop2: UIView {
     }
 }
 
-extension ShowTop2: IconText2Delegate {
+extension ShowTop2: IconTextWithBGRoundCornerDelegate {
     
     func pressed(icon: String) {
         if icon == "add_svg" {

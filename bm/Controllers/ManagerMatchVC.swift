@@ -411,7 +411,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         super.configureSubViews()
         
         if item != nil {
-            noLbl.text = String(item!.no) + "."
+            noLbl.text = item!.no.toTwoString() + "."
             teamNameLbl.text = item!.name
             createdAtLbl.text = item!.created_at.noSec()
         }

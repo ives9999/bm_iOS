@@ -1,29 +1,33 @@
 //
-//  IconText.swift
+//  IconText2.swift
 //  bm
 //
-//  Created by ives on 2023/6/13.
+//  Created by ives on 2023/3/1.
 //  Copyright © 2023 bm. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
-class IconText2: UIView {
+class IconTextWithBGRoundCorner: UIView {
     
     var icon: String = "noPhont"
     var text: String = "Add"
     
+    var frameWidth: Int = 100
+    var frameHeight: Int = 32
     var iconWidth: Int = 24
     var iconHeight: Int = 24
     var iconIV: UIImageView = UIImageView()
     var textLbl: UILabel = SuperLabel()
     
-    var delegate: IconText2Delegate?
+    var delegate: IconTextWithBGRoundCornerDelegate?
     
-    init(icon: String, text: String, iconWidth: Int = 24, iconHeight: Int = 24) {
+    init(icon: String, text: String, frameWidth: Int = 100, frameHeight: Int = 32, iconWidth: Int = 24, iconHeight: Int = 24) {
         
         self.icon = icon
         self.text = text
+        self.frameWidth = frameWidth
+        self.frameHeight = frameHeight
         self.iconWidth = iconWidth
         self.iconHeight = iconHeight
         
@@ -43,6 +47,11 @@ class IconText2: UIView {
     
     func commonInit() {
         
+        self.backgroundColor = UIColor(hex: MY_WHITE, alpha: 0.13)
+        //self.backgroundColor = UIColor(hex: MY_WHITE, alpha: 0.8)
+        self.layer.cornerRadius = 16
+        self.clipsToBounds = true
+        
         iconIV.image = UIImage(named: icon)
         textLbl.text = self.text
 
@@ -54,13 +63,17 @@ class IconText2: UIView {
     
     func anchor() {
         
+        self.snp.makeConstraints { make in
+            make.width.equalTo(frameWidth)
+            make.height.equalTo(frameHeight)
+        }
+        
         self.addSubview(iconIV)
         iconIV.snp.makeConstraints { make in
-            make.left.equalToSuperview()
+            make.left.equalToSuperview().offset(12)
             make.width.equalTo(iconWidth)
             make.height.equalTo(iconHeight)
-            make.top.equalToSuperview().offset(6)
-            make.bottom.equalToSuperview().offset(-6)
+            make.centerY.equalToSuperview()
         }
         
         self.addSubview(textLbl)
@@ -70,15 +83,11 @@ class IconText2: UIView {
         }
     }
     
-    func setText(_ text: String) {
-        textLbl.text = text
-    }
-    
     @objc func pressed(view: UITapGestureRecognizer) {
         delegate?.pressed(icon: icon)
     }
 }
 
-protocol IconText2Delegate {
+protocol IconTextWithBGRoundCornerDelegate {
     func pressed(icon: String)
 }

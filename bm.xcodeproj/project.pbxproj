@@ -37,7 +37,7 @@
 		B313272029A0869A00EAB782 /* Dot2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313271F29A0869A00EAB782 /* Dot2.swift */; };
 		B313272229A5C8EC00EAB782 /* NOLabel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272129A5C8EC00EAB782 /* NOLabel2.swift */; };
 		B313272429A884B300EAB782 /* TeamTempPlayTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272329A884B300EAB782 /* TeamTempPlayTable.swift */; };
-		B313272629AEFE8800EAB782 /* IconText2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272529AEFE8700EAB782 /* IconText2.swift */; };
+		B313272629AEFE8800EAB782 /* IconTextWithBGRoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272529AEFE8700EAB782 /* IconTextWithBGRoundCorner.swift */; };
 		B31361E71F8786CC00BDA53D /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E61F8786CC00BDA53D /* Contants.swift */; };
 		B31361E91F88A35900BDA53D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E81F88A35900BDA53D /* Global.swift */; };
 		B316FED62112F13600FB990C /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B316FED42112F13600FB990C /* CollectionCell.swift */; };
@@ -91,6 +91,7 @@
 		B33C1AC321BE669F006F2BEB /* TextFieldFormItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */; };
 		B33C1AC521C3F848006F2BEB /* DrawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C1AC421C3F848006F2BEB /* DrawLine.swift */; };
 		B342169E26775C2E005E406F /* ToInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B342169D26775C2E005E406F /* ToInterface.swift */; };
+		B3426B982A3821190018ED2C /* IconText2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3426B972A3821190018ED2C /* IconText2.swift */; };
 		B3485C9723F841BE0078265D /* MemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3485C9623F841BE0078265D /* MemberVC.swift */; };
 		B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */; };
 		B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AD21AE962700EE6E1C /* Timetables.swift */; };
@@ -504,7 +505,7 @@
 		B313271F29A0869A00EAB782 /* Dot2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dot2.swift; sourceTree = "<group>"; };
 		B313272129A5C8EC00EAB782 /* NOLabel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOLabel2.swift; sourceTree = "<group>"; };
 		B313272329A884B300EAB782 /* TeamTempPlayTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayTable.swift; sourceTree = "<group>"; };
-		B313272529AEFE8700EAB782 /* IconText2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconText2.swift; sourceTree = "<group>"; };
+		B313272529AEFE8700EAB782 /* IconTextWithBGRoundCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextWithBGRoundCorner.swift; sourceTree = "<group>"; };
 		B31361E61F8786CC00BDA53D /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		B31361E81F88A35900BDA53D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		B316FED42112F13600FB990C /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
@@ -558,6 +559,7 @@
 		B33C1AC221BE669F006F2BEB /* TextFieldFormItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldFormItem.swift; sourceTree = "<group>"; };
 		B33C1AC421C3F848006F2BEB /* DrawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLine.swift; sourceTree = "<group>"; };
 		B342169D26775C2E005E406F /* ToInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToInterface.swift; sourceTree = "<group>"; };
+		B3426B972A3821190018ED2C /* IconText2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconText2.swift; sourceTree = "<group>"; };
 		B3485C9623F841BE0078265D /* MemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberVC.swift; sourceTree = "<group>"; };
 		B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableVC.swift; sourceTree = "<group>"; };
 		B34A20AD21AE962700EE6E1C /* Timetables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetables.swift; sourceTree = "<group>"; };
@@ -1142,6 +1144,7 @@
 			children = (
 				F9FA3C3527E32A3B0094C773 /* _tab_search.swift */,
 				F9FA3C3D27E4CC100094C773 /* _tab_search.xib */,
+				B3D58D052A0B6891008524CC /* AttributesView.swift */,
 				F9FFD83729067E3000AD8E52 /* BaseScrollerView.swift */,
 				F9F583AD283518C400F77B00 /* BottomThreeView.swift */,
 				F9F583AF283518DF00F77B00 /* BottomThreeView.xib */,
@@ -1149,8 +1152,9 @@
 				B3A9038F23857A1200A986F7 /* CourseView.swift */,
 				B3A9038D2385537900A986F7 /* CourseView.xib */,
 				B313271F29A0869A00EAB782 /* Dot2.swift */,
-				B313272529AEFE8700EAB782 /* IconText2.swift */,
+				B3426B972A3821190018ED2C /* IconText2.swift */,
 				F9E221C629C4774D0054CF7B /* IconTextVertical2.swift */,
+				B313272529AEFE8700EAB782 /* IconTextWithBGRoundCorner.swift */,
 				B313271D299F4F9100EAB782 /* IconView2.swift */,
 				F9D28AD729C1EE3C00655988 /* MainBottom2.swift */,
 				F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */,
@@ -1165,7 +1169,6 @@
 				B337B9A81FE2986B00C3EE28 /* TempPlayTableHeaderView.swift */,
 				F9A6751C27FAF605007C8F47 /* Top.swift */,
 				F9A6751E27FAF766007C8F47 /* Top.xib */,
-				B3D58D052A0B6891008524CC /* AttributesView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2096,6 +2099,7 @@
 				B316FED62112F13600FB990C /* CollectionCell.swift in Sources */,
 				B30C954E1FECDE9E005F71EF /* IconTextField.swift in Sources */,
 				B3ED38DD1FB4A06C0003F083 /* MyLabel.swift in Sources */,
+				B3426B982A3821190018ED2C /* IconText2.swift in Sources */,
 				F9E221C729C4774D0054CF7B /* IconTextVertical2.swift in Sources */,
 				F9CB7F3E298FFE0900C1B92F /* ShowLike2.swift in Sources */,
 				F90423B91F83748C00DC8B1E /* TeamVC.swift in Sources */,
@@ -2122,7 +2126,7 @@
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
 				B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */,
 				B3B8671829CAA74900E0F1AB /* UITextField.swift in Sources */,
-				B313272629AEFE8800EAB782 /* IconText2.swift in Sources */,
+				B313272629AEFE8800EAB782 /* IconTextWithBGRoundCorner.swift in Sources */,
 				F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */,
 				F9EDEDAF28927C1B00FB92BB /* MemberSubscriptionKindVC.swift in Sources */,
 				B3B758D325AD55E7006ACC33 /* GMStepper.swift in Sources */,

@@ -236,7 +236,7 @@ class ShowTeamVC: BaseViewController, WKNavigationDelegate {
         return view
     }()
     
-    let addIconText2: IconText2 = IconText2(icon: "add_svg", text: "新增")
+    let addIconText2: IconTextWithBGRoundCorner = IconTextWithBGRoundCorner(icon: "add_svg", text: "新增")
     
     let teamMemberTableView: UITableView = {
         let view = UITableView()
@@ -1860,7 +1860,7 @@ extension ShowTeamVC: ShowTab2Delegate {
     }
 }
 
-extension ShowTeamVC: IconText2Delegate {
+extension ShowTeamVC: IconTextWithBGRoundCornerDelegate {
     func pressed(icon: String) {
         if icon == "add_svg" {
             if myTable != nil {

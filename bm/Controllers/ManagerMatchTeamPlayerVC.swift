@@ -138,51 +138,50 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
     
     let noLbl: SuperLabel = {
         let view = SuperLabel()
-        view.setTextGeneral()
+        view.setTextColor(UIColor(MY_GREEN))
+        view.setTextBold()
         view.text = "100."
-        
-        return view
-    }()
-    
-    let dataContainer: UIView = UIView()
-    
-    let nameLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.setTextGeneral()
-        view.text = "xxx"
         
         return view
     }()
     
     let ageLbl: SuperLabel = {
         let view = SuperLabel()
-        view.setTextGeneral()
+        view.setTextColor(UIColor(MY_GREEN))
+        view.setTextBold()
         view.text = "30歲"
         
         return view
     }()
     
-    let mobileLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.setTextGeneral()
-        view.text = "0933454946"
+    let separator: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.3)
+        return view
+    }()
+    
+    let dataContainer: UIView = UIView()
+    
+    let nameIT2: IconText2 = {
+        let view = IconText2(icon: "member_g_svg", text: "name", iconWidth: 20, iconHeight: 20)
         
         return view
     }()
     
-    let emailLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.setTextGeneral()
-        view.text = "hank@gmail.com"
+    let mobileIT2: IconText2 = {
+        let view = IconText2(icon: "mobile_svg", text: "mobile", iconWidth: 20, iconHeight: 20)
         
         return view
     }()
     
-    let createdAtLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.textColor = UIColor(MY_WHITE)
-        view.setTextGeneral()
-        view.text = "xxx"
+    let emailIT2: IconText2 = {
+        let view = IconText2(icon: "email_svg", text: "email", iconWidth: 20, iconHeight: 20)
+        
+        return view
+    }()
+    
+    let createdAtIT2: IconText2 = {
+        let view = IconText2(icon: "calendar_svg", text: "createdAt", iconWidth: 20, iconHeight: 20)
         
         return view
     }()
@@ -195,11 +194,11 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
 //        return view
 //    }()
     
-    let separator: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.2)
-        return view
-    }()
+//    let separator: UIView = {
+//        let view = UIView()
+//        view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.2)
+//        return view
+//    }()
     
     //var thisDelegate: ManagerTeamMemberVC?
     
@@ -231,51 +230,73 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
     
     func anchor() {
         
-        self.contentView.addSubview(noLbl)
-        noLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.centerY.equalToSuperview()
+        let view1: UIView = UIView()
+        
+        self.contentView.addSubview(view1)
+        //view1.backgroundColor = UIColor.brown
+        view1.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(6)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(30)
+        }
+        
+            view1.addSubview(noLbl)
+            noLbl.snp.makeConstraints { make in
+            
+                make.left.equalToSuperview()
+                make.centerY.equalToSuperview()
+            }
+        
+            view1.addSubview(ageLbl)
+            ageLbl.snp.makeConstraints { make in
+                make.right.equalToSuperview()
+                make.centerY.equalToSuperview()
+            }
+        
+        self.contentView.addSubview(separator)
+        separator.snp.makeConstraints { make in
+            make.top.equalTo(view1.snp.bottom)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            //make.bottom.equalToSuperview()
+            make.height.equalTo(1)
         }
         
         self.contentView.addSubview(dataContainer)
         //dataContainer.backgroundColor = UIColor.blue
         dataContainer.snp.makeConstraints { make in
-            make.left.equalTo(noLbl.snp.right).offset(18)
-            make.right.equalToSuperview()
-            make.top.equalToSuperview().offset(12)
-            make.centerY.equalToSuperview()
-        }
-        
-        self.dataContainer.addSubview(nameLbl)
-        nameLbl.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(4)
-            make.left.equalToSuperview()
-        }
-        
-        self.dataContainer.addSubview(ageLbl)
-        ageLbl.snp.makeConstraints { make in
+            make.top.equalTo(separator.snp.bottom).offset(12)
             make.right.equalToSuperview().offset(-20)
-            make.centerY.equalTo(nameLbl.snp.centerY)
+            make.left.equalToSuperview().offset(20)
+            make.bottom.equalToSuperview().offset(-6)
+            //make.centerY.equalToSuperview()
         }
         
-        self.dataContainer.addSubview(mobileLbl)
-        mobileLbl.snp.makeConstraints { make in
-            make.top.equalTo(nameLbl.snp.bottom).offset(12)
-            make.left.equalToSuperview()
-        }
+            self.dataContainer.addSubview(nameIT2)
+            nameIT2.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(4)
+                make.left.equalToSuperview()
+            }
         
-        self.dataContainer.addSubview(emailLbl)
-        emailLbl.snp.makeConstraints { make in
-            make.top.equalTo(mobileLbl.snp.bottom).offset(12)
-            make.left.equalToSuperview()
-        }
+            self.dataContainer.addSubview(mobileIT2)
+            mobileIT2.snp.makeConstraints { make in
+                make.top.equalTo(nameIT2.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+            }
         
-        self.dataContainer.addSubview(createdAtLbl)
-        createdAtLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview()
-            make.top.equalTo(emailLbl.snp.bottom).offset(12)
-            make.bottom.equalToSuperview().offset(-12)
-        }
+            self.dataContainer.addSubview(emailIT2)
+            emailIT2.snp.makeConstraints { make in
+                make.top.equalTo(mobileIT2.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+            }
+        
+            self.dataContainer.addSubview(createdAtIT2)
+            createdAtIT2.snp.makeConstraints { make in
+                make.left.equalToSuperview()
+                make.top.equalTo(emailIT2.snp.bottom).offset(12)
+                make.bottom.equalToSuperview().offset(-6)
+            }
         
 //        self.contentView.addSubview(deleteIV)
 //        deleteIV.snp.makeConstraints { make in
@@ -285,24 +306,24 @@ class ManagerMatchTeamPlayerCell: BaseCell<MatchPlayerTable, ManagerMatchTeamPla
 //            make.height.equalTo(25)
 //        }
         
-        self.contentView.addSubview(separator)
-        separator.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(1)
-        }
+//        self.contentView.addSubview(separator)
+//        separator.snp.makeConstraints { make in
+//            make.left.right.bottom.equalToSuperview()
+//            make.height.equalTo(1)
+//        }
     }
     
     override func configureSubViews() {
-        noLbl.text = String(item!.no) + "."
+        noLbl.text = item!.no.toTwoString() + "."
         
 //        if item != nil && item!.memberTable != nil {
 //            self.avatarIV.path(item!.memberTable!.featured_path)
 //        }
-        nameLbl.text = (item != nil) ? item!.name : ""
+        nameIT2.setText((item != nil) ? item!.name : "")
         ageLbl.text = (item != nil) ? "\(item!.age)歲" : ""
-        mobileLbl.text = (item != nil) ? item!.mobile : ""
-        emailLbl.text = (item != nil) ? item!.email : ""
-        createdAtLbl.text = item?.created_at.noSec()
+        mobileIT2.setText((item != nil) ? item!.mobile : "")
+        emailIT2.setText((item != nil) ? item!.email : "")
+        createdAtIT2.setText((item != nil) ? item!.created_at.noSec() : "")
     }
     
 //    @objc func deleteThis(_ sender: UIView) {
