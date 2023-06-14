@@ -541,7 +541,7 @@ class DataService {
     
     func signup(token: String, member_token: String, date_token: String, course_deadline: String? = nil, completion: @escaping CompletionHandler) {
         let url = getSignupURL(token: token)
-        //print(url)
+        print(url)
         
         let player_id: String = getPlayerID()
         //print(player_id)
@@ -550,7 +550,7 @@ class DataService {
             body["cancel_deadline"] = course_deadline
         }
         
-        //print(body)
+        print(body)
         AF.request(url, method: .post, parameters: body, encoder: JSONParameterEncoder.default, headers: HEADER).response { (response) in
             
             //let str = String(decoding: response.data!, as: UTF8.self)
