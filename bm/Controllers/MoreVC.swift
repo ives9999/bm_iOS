@@ -64,8 +64,8 @@ class MoreVC: MyTableVC {
         let r4: IconTextRow = IconTextRow(title: "體育用品店", icon: "store", segue: TO_STORE)
         rows.append(r4)
         
-//        let r5: IconTextRow = IconTextRow(title: "賽事", icon: "match_w_svg", segue: "toMatch")
-//        rows.append(r5)
+        let r5: IconTextRow = IconTextRow(title: "賽事", icon: "match_w_svg", segue: "toMatch")
+        rows.append(r5)
         
         let r6: IconTextRow = IconTextRow(title: "推播訊息", icon: "push", segue: TO_PN)
         rows.append(r6)
