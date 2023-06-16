@@ -45,6 +45,9 @@ class IconText2: UIView {
         
         iconIV.image = UIImage(named: icon)
         textLbl.text = self.text
+        
+        textLbl.numberOfLines = 0
+        textLbl.lineBreakMode = .byWordWrapping
 
         self.anchor()
 
@@ -66,8 +69,13 @@ class IconText2: UIView {
         self.addSubview(textLbl)
         textLbl.snp.makeConstraints { make in
             make.left.equalTo(iconIV.snp.right).offset(12)
+            make.right.equalToSuperview()
             make.centerY.equalToSuperview()
         }
+    }
+    
+    func setIcon(_ icon: String) {
+        iconIV.image = UIImage(named: icon)
     }
     
     func setText(_ text: String) {

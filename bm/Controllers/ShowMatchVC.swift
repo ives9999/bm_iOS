@@ -38,6 +38,8 @@ class ShowMatchVC: BaseViewController {
         let oneLineCellNib = UINib(nibName: "OneLineCell", bundle: nil)
         view.register(oneLineCellNib, forCellReuseIdentifier: "OneLineCell")
         
+        view.register(OneLineCell2.self, forCellReuseIdentifier: "OneLineCell2")
+        
         return view
     }()
     
@@ -70,6 +72,8 @@ class ShowMatchVC: BaseViewController {
     var token: String?
     var table: MatchTable?
     
+    var sectionTitles: [String] = [String]()
+    var sections: [[IconTextRow]] = [[IconTextRow]]()
     var iconTextRows: [IconTextRow] = [IconTextRow]()
     var focusTabIdx: Int = 0
 
@@ -211,15 +215,19 @@ class ShowMatchVC: BaseViewController {
         
         var row: IconTextRow = IconTextRow()
         
-        row = IconTextRow(title: "比賽開始日期", icon: "calendar_svg", show: "\(table!.match_start_show)(\(table!.match_start_weekday))")
+        row = IconTextRow(title: "比賽開始日期", icon: "calendar_start_svg", show: "\(table!.match_start_show) (\(table!.match_start_weekday))")
         iconTextRows.append(row)
-        row = IconTextRow(title: "比賽結束日期", icon: "calendar_svg", show: "\(table!.match_end.noSec())(\(table!.match_end_weekday))")
+        row = IconTextRow(title: "比賽結束日期", icon: "calendar_end_svg", show: "\(table!.match_end.noSec()) (\(table!.match_end_weekday))")
         iconTextRows.append(row)
-        row = IconTextRow(title: "報名開始日期", icon: "calendar_svg", show: "\(table!.signup_start.noSec())(\(table!.signup_start_weekday))")
+        row = IconTextRow(title: "報名開始日期", icon: "member_start_svg", show: "\(table!.signup_start.noSec()) (\(table!.signup_start_weekday))")
         iconTextRows.append(row)
-        row = IconTextRow(title: "報名結束日期", icon: "calendar_svg", show: "\(table!.signup_end.noSec())(\(table!.signup_end_weekday))")
+        row = IconTextRow(title: "報名結束日期", icon: "member_end_svg", show: "\(table!.signup_end.noSec()) (\(table!.signup_end_weekday))")
         iconTextRows.append(row)
-        row = IconTextRow(title: "比賽地點", icon: "city_svg", show: table!.city_name)
+        sections.append(iconTextRows)
+        sectionTitles.append("賽事日期時間")
+        
+        iconTextRows.removeAll()
+        row = IconTextRow(title: "比賽地點", icon: "area_svg", show: table!.city_name)
         iconTextRows.append(row)
         if table!.arenaTable != nil {
             row = IconTextRow(title: "比賽球館", icon: "arena_on_svg 1", show: table!.arenaTable!.name)
@@ -232,7 +240,10 @@ class ShowMatchVC: BaseViewController {
         
         row = IconTextRow(title: "比賽用球", icon: "ball_svg", show: table!.ball)
         iconTextRows.append(row)
+        sections.append(iconTextRows)
+        sectionTitles.append("賽事地點")
         
+        iconTextRows.removeAll()
         if table!.matchContactTable != nil {
             row = IconTextRow(title: "聯絡人", icon: "member_on_svg", show: table!.matchContactTable!.contact_name)
             iconTextRows.append(row)
@@ -243,9 +254,12 @@ class ShowMatchVC: BaseViewController {
             row = IconTextRow(title: "聯絡人line", icon: "line_svg", show: table!.matchContactTable!.contact_line)
             iconTextRows.append(row)
         }
+        sections.append(iconTextRows)
+        sectionTitles.append("賽事聯絡人")
         
         self.showTop2!.setTitle(table!.name)
         //introduceNameLbl.text = table!.name
+        //print(section)
     }
     
     func setContentWeb() {
@@ -334,10 +348,19 @@ class ShowMatchVC: BaseViewController {
 }
 
 extension ShowMatchVC: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if tableView == introduceTableView {
+            return sections.count
+        } else {
+            return 0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var count: Int = 0
         if tableView == introduceTableView {
-            count = iconTextRows.count
+            count = sections[section].count
         } else if (tableView == signupTableView) {
             count = table!.matchGroups.count
         }
@@ -345,12 +368,68 @@ extension ShowMatchVC: UITableViewDelegate, UITableViewDataSource {
         return count
     }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if tableView == introduceTableView {
+            return 20
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if tableView == introduceTableView {
+            let headerView: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 100))
+            headerView.backgroundColor = UIColor(MY_BLACK)
+            
+            let titleLbl: SuperLabel = {
+                let view: SuperLabel = SuperLabel()
+                view.setTextTitle()
+                view.text = sectionTitles[section]
+                return view
+            }()
+            
+            headerView.addSubview(titleLbl)
+            titleLbl.snp.makeConstraints { make in
+                make.left.equalToSuperview().offset(20)
+                make.centerY.equalToSuperview()
+            }
+            return headerView
+        }
+        
+        return UIView()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if tableView == introduceTableView {
+            let footerView: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 20))
+            footerView.backgroundColor = UIColor(MY_BLACK)
+            
+            let separator: UIView = {
+                let view: UIView = UIView()
+                view.backgroundColor = UIColor(hex: "FFFFFF", alpha: 0.25)
+                return view
+            }()
+            
+            footerView.addSubview(separator)
+            separator.snp.makeConstraints { make in
+                make.left.equalToSuperview().offset(20)
+                make.right.equalToSuperview().offset(-20)
+                make.height.equalTo(1)
+                make.bottom.equalToSuperview()
+            }
+            
+            return footerView
+        }
+        
+        return UIView()
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if tableView == introduceTableView {
-            let cell: OneLineCell = tableView.dequeueReusableCell(withIdentifier: "OneLineCell", for: indexPath) as! OneLineCell
+            let cell: OneLineCell2 = tableView.dequeueReusableCell(withIdentifier: "OneLineCell2", for: indexPath) as! OneLineCell2
             
-            let row: IconTextRow = iconTextRows[indexPath.row]
-            cell.update(icon: row.icon, title: row.title, content: row.show)
+            let row: IconTextRow = sections[indexPath.section][indexPath.row]
+            cell.update(icon: row.icon, title: row.title, show: row.show)
             cell.setSelectedBackgroundColor()
             
             return cell

@@ -101,7 +101,7 @@ class MatchTable: Table {
             }
         }
         
-        match_time_show = "\(match_start_show)(\(match_start_weekday)) ~ \(match_end_show)(\(match_end_weekday))"
+        match_time_show = "\(match_start_show) (\(match_start_weekday)) ~ \(match_end_show) (\(match_end_weekday))"
         
         if (signup_start.count > 0) {
             signup_start_show = signup_start.noSec()
