@@ -92,8 +92,12 @@ class ShowMatchVC: BaseViewController {
         introduceTableView.delegate = self
         introduceTableView.dataSource = self
         
+        introduceTableView.backgroundColor = UIColor.red
+        
         signupTableView.delegate = self
         signupTableView.dataSource = self
+        
+        signupTableView.backgroundColor = UIColor.red
         
         refresh(MatchTable.self)
     }
@@ -153,7 +157,7 @@ class ShowMatchVC: BaseViewController {
         self.view.addSubview(introduceContainer)
         //introduceContainer.backgroundColor = UIColor.blue
         introduceContainer.snp.makeConstraints { make in
-            make.top.equalTo(showTab2.snp.bottom).offset(20)
+            make.top.equalTo(showTab2.snp.bottom)
             //make.bottom.equalTo(showBottom!.snp.top)
             make.bottom.equalToSuperview()
             make.left.right.equalToSuperview()
@@ -191,7 +195,7 @@ class ShowMatchVC: BaseViewController {
         self.view.addSubview(signupContainer)
         //signupContainer.backgroundColor = UIColor.gray
         signupContainer.snp.makeConstraints { make in
-            make.top.equalTo(showTab2.snp.bottom).offset(20)
+            make.top.equalTo(showTab2.snp.bottom)
             //make.bottom.equalTo(showBottom!.snp.top)
             make.bottom.equalToSuperview()
             make.left.right.equalToSuperview()
@@ -204,7 +208,7 @@ class ShowMatchVC: BaseViewController {
         //signupTableView.backgroundColor = UIColor.red
         signupTableView.snp.makeConstraints { make in
             //make.edges.equalToSuperview()
-            make.top.equalTo(showTab2.snp.bottom).offset(20)
+            make.top.equalTo(showTab2.snp.bottom)
             make.bottom.equalToSuperview()
             make.left.right.equalToSuperview()
             //make.height.equalTo(150)
@@ -353,7 +357,7 @@ extension ShowMatchVC: UITableViewDelegate, UITableViewDataSource {
         if tableView == introduceTableView {
             return sections.count
         } else {
-            return 0
+            return 1
         }
     }
     
@@ -468,7 +472,7 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
     
     let nameLbl: SuperLabel = {
         let view = SuperLabel()
-        view.setTextGeneralV2()
+        view.setTextTitle()
         return view
     }()
     
@@ -504,21 +508,22 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupView()
+        commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        self.setupView()
+        self.commonInit()
     }
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupView()
+        commonInit()
     }
     
-    private func setupView() {
-        backgroundColor = UIColor.clear
+    override func commonInit() {
+        //super.commonInit()
+        //self.contentView.backgroundColor = UIColor.blue
         showButton2.delegate = self
         setAnchor()
     }
@@ -528,85 +533,106 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
         let view1: UIView = UIView()
         
         self.contentView.addSubview(view1)
-        //view1.backgroundColor = UIColor.brown
+        view1.backgroundColor = UIColor.cyan
         view1.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(15)
+            make.top.equalToSuperview().offset(0)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             //make.bottom.equalToSuperview().offset(-2)
             make.height.equalTo(30)
         }
         
-            view1.addSubview(noLbl)
-            noLbl.snp.makeConstraints { make in
-                make.left.equalToSuperview()
-                make.centerY.equalToSuperview()
-            }
-        
-            view1.addSubview(nameLbl)
-            nameLbl.snp.makeConstraints { make in
-                make.left.equalTo(noLbl.snp.right).offset(20)
-                make.centerY.equalToSuperview()
-            }
-        
-        self.contentView.addSubview(separator)
-        separator.snp.makeConstraints { make in
-            make.top.equalTo(view1.snp.bottom)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            //make.bottom.equalToSuperview()
-            make.height.equalTo(1)
-        }
+//            view1.addSubview(noLbl)
+//            noLbl.snp.makeConstraints { make in
+//                make.top.equalToSuperview()
+//                make.left.equalToSuperview()
+//            }
+//
+//            view1.addSubview(separator)
+//            separator.snp.makeConstraints { make in
+//                make.top.equalTo(noLbl.snp.bottom).offset(2)
+//                make.left.equalToSuperview()
+//                make.right.equalToSuperview()
+//                make.bottom.equalToSuperview().offset(-2)
+//                make.height.equalTo(1)
+//            }
 
         self.contentView.addSubview(mainContainerView)
-        //mainContainerView.backgroundColor = UIColor.blue
+        mainContainerView.backgroundColor = UIColor.brown
         mainContainerView.snp.makeConstraints { make in
+            make.top.equalTo(view1.snp.bottom).offset(0)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
-            make.top.equalTo(separator.snp.bottom).offset(4)
-            make.bottom.equalToSuperview().offset(-2)
-            //make.height .equalTo(180)
+            //make.bottom.equalToSuperview().offset(-2)
+            make.height .equalTo(180)
         }
+
+//            mainContainerView.addSubview(nameLbl)
+//            nameLbl.snp.makeConstraints { make in
+//                make.left.equalToSuperview()
+//                make.top.equalToSuperview().offset(6)
+//            }
+//
+//            mainContainerView.addSubview(numberLbl)
+//            numberLbl.snp.makeConstraints { make in
+//                make.top.equalTo(nameLbl.snp.bottom).offset(12)
+//                make.left.equalToSuperview()
+//            }
+//
+//            mainContainerView.addSubview(signupNumberLbl)
+//            signupNumberLbl.snp.makeConstraints { make in
+//                make.top.equalTo(numberLbl.snp.bottom).offset(12)
+//                make.left.equalToSuperview()
+//            }
+//
+//            mainContainerView.addSubview(limitLbl)
+//            limitLbl.snp.makeConstraints { make in
+//                make.top.equalTo(signupNumberLbl.snp.bottom).offset(12)
+//                make.left.equalToSuperview()
+//                make.bottom.equalToSuperview().offset(-12)
+//            }
         
-            mainContainerView.addSubview(numberLbl)
-            numberLbl.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(12)
-                make.left.equalToSuperview().offset(20)
-            }
-        
-        mainContainerView.addSubview(signupNumberLbl)
-        signupNumberLbl.snp.makeConstraints { make in
-            make.top.equalTo(numberLbl.snp.bottom).offset(12)
+        let view2: UIView = UIView()
+        view2.backgroundColor = UIColor.gray
+        self.contentView.addSubview(view2)
+        view2.snp.makeConstraints { make in
+            make.top.equalTo(mainContainerView.snp.bottom).offset(0)
             make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            //make.centerY.equalToSuperview()
+            make.height.equalTo(40)
+            //make.width.equalTo(160)
+            make.bottom.equalToSuperview().offset(-1)
         }
-        
-            mainContainerView.addSubview(limitLbl)
-            limitLbl.snp.makeConstraints { make in
-                make.right.equalToSuperview().offset(-12)
-                make.centerY.equalTo(signupNumberLbl.snp.centerY)
-            }
-        
-            mainContainerView.addSubview(showButton2)
-            showButton2.snp.makeConstraints { make in
-                make.top.equalTo(limitLbl.snp.bottom).offset(12)
-                make.right.equalToSuperview()
-                //make.centerY.equalToSuperview()
-                make.height.equalTo(40)
-                make.width.equalTo(160)
-                make.bottom.equalToSuperview().offset(-15)
-            }
+
+//        self.contentView.addSubview(showButton2)
+//        showButton2.snp.makeConstraints { make in
+//            make.left.equalToSuperview().offset(20)
+//            make.right.equalToSuperview().offset(-20)
+//            //make.centerY.equalToSuperview()
+//            make.height.equalTo(40)
+//            //make.width.equalTo(160)
+//            make.top.equalTo(mainContainerView.snp.bottom).offset(12)
+//            make.bottom.equalToSuperview().offset(50)
+//        }
     }
     
     override func configureSubViews() {
         super.configureSubViews()
-
-        self.noLbl.text = "\(item!.no)."
-        self.nameLbl.text = item?.name
-        self.numberLbl.text = "人數：\(item?.number ?? 0)人"
-        self.signupNumberLbl.text = "報名組數：0組"
-        self.limitLbl.text = "限制組數：\(item?.limit ?? 0)組"
         
-        showButton2.setTitle("報名")
+        if item!.no % 2 == 0 {
+            self.contentView.backgroundColor = UIColor.blue
+        } else {
+            self.contentView.backgroundColor = UIColor.orange
+        }
+
+//        self.noLbl.text = "\(item!.no.toTwoString())."
+//        self.nameLbl.text = item?.name
+//        self.numberLbl.text = "人數：\(item?.number ?? 0)人"
+//        self.signupNumberLbl.text = "報名組數：0組"
+//        self.limitLbl.text = "限制組數：\(item?.limit ?? 0)組"
+//        
+//        showButton2.setTitle("報名")
     }
 }
 
