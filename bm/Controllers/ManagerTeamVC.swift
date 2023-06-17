@@ -540,7 +540,7 @@ extension ManagerTeamCell: IconView2Delegate {
 }
 
 extension ManagerTeamCell: ShowButton2Delegate {
-    func pressed() {
+    func showButtonPressed() {
         guard let superView = self.superview as? UITableView else { return }
         myDelegate?.didSelect(item: item, at: superView.indexPath(for: self)!)
     }

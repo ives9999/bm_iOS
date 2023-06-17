@@ -11,6 +11,7 @@ import UIKit
 class ShowButton2: SuperButton {
     
     var delegate: ShowButton2Delegate?
+    var idx: Int?
 
     init() {
         super.init(frame: .zero)
@@ -39,10 +40,18 @@ class ShowButton2: SuperButton {
     }
     
     @objc func pressed(_ sender: UIButton) {
-        delegate?.pressed()
+        if idx != nil {
+            delegate?.showButtonPressed(idx: idx!)
+        }
     }
 }
 
 protocol ShowButton2Delegate {
-    func pressed()
+    func showButtonPressed()
+    func showButtonPressed(idx: Int)
+}
+
+extension ShowButton2Delegate {
+    func showButtonPressed(){}
+    func showButtonPressed(idx: Int){}
 }

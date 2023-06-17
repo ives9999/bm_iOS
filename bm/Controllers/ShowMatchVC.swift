@@ -667,7 +667,7 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
 
 extension MatchGroupSignupCell: ShowButton2Delegate {
     
-    func pressed() {
+    func showButtonPressed() {
         //guard let superView = self.superview as? UITableView else { return }
         myDelegate?.signup(item: item!)
     }

@@ -70,9 +70,13 @@ class MatchVC: BaseViewController {
         return false
     }
     
-    func signup(item: MatchTable) {
+    func showMatch(idx: Int) {
+        toShowMatch(token: self.rows[idx].token)
+    }
+    
+    func signup(idx: Int) {
         //print(item)
-        toShowMatch(token: item.token, idx: 2)
+        toShowMatch(token: self.rows[idx].token, idx: 2)
     }
 }
 
@@ -104,23 +108,33 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
         return view
     }()
     
-    let datetimeLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.setTextGeneral()
-        view.text = "xxx"
+    let matchStartITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("calendar_start_svg")
+        view.setTitle("比賽開始日期")
         
         return view
     }()
     
-    let arenaLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.setTextGeneral()
-        view.text = "xxx"
+    let matchEndITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("calendar_end_svg")
+        view.setTitle("比賽結束日期")
+        
+        return view
+    }()
+    
+    let arenaITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("area_svg")
+        view.setTitle("比賽球館")
         
         return view
     }()
     
     let showButton2: ShowButton2 = ShowButton2()
+    
+    let signupButton2: SignupButton2 = SignupButton2()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -140,7 +154,9 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
     override func commonInit() {
         super.commonInit()
         showButton2.delegate = self
-        showButton2.setTitle("報名")
+        signupButton2.delegate = self
+        
+        showButton2.setTitle("內容")
         anchor()
         
 //        let deleteGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(deleteThis))
@@ -154,88 +170,108 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
         self.contentView.addSubview(view1)
         //view1.backgroundColor = UIColor.brown
         view1.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(15)
+            make.top.equalToSuperview().offset(0)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             //make.bottom.equalToSuperview().offset(-2)
-            make.height.equalTo(30)
+            //make.height.equalTo(30)
         }
         
             view1.addSubview(noLbl)
             noLbl.snp.makeConstraints { make in
-            
+                make.top.equalToSuperview()
                 make.left.equalToSuperview()
-                make.centerY.equalToSuperview()
             }
-            
-//            view1.addSubview(playTimeLbl)
-//            playTimeLbl.snp.makeConstraints { make in
-//                make.right.equalToSuperview()
-//                make.centerY.equalToSuperview()
-//            }
-//        
-//            view1.addSubview(playWeekLbl)
-//            playWeekLbl.snp.makeConstraints { make in
-//                make.right.equalTo(playTimeLbl.snp.left).offset(-6)
-//                make.centerY.equalToSuperview()
-//            }
         
-        self.contentView.addSubview(separator)
-        separator.snp.makeConstraints { make in
-            make.top.equalTo(view1.snp.bottom)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            //make.bottom.equalToSuperview()
-            make.height.equalTo(1)
-        }
+            view1.addSubview(separator)
+            separator.snp.makeConstraints { make in
+                make.top.equalTo(noLbl.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+                make.height.equalTo(1)
+                make.bottom.equalToSuperview().offset(-12)
+            }
 
         self.contentView.addSubview(mainContainerView)
         //mainContainerView.backgroundColor = UIColor.blue
         mainContainerView.snp.makeConstraints { make in
+            make.top.equalTo(view1.snp.bottom).offset(0)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
-            make.top.equalTo(separator.snp.bottom).offset(4)
-            make.bottom.equalToSuperview().offset(-2)
             //make.height .equalTo(180)
         }
         
             mainContainerView.addSubview(nameLbl)
             nameLbl.snp.makeConstraints { make in
-                make.top.equalToSuperview().offset(12)
+                make.top.equalToSuperview().offset(6)
                 make.left.equalToSuperview()
             }
         
-            mainContainerView.addSubview(datetimeLbl)
-                datetimeLbl.snp.makeConstraints { make in
+            mainContainerView.addSubview(matchStartITT)
+            matchStartITT.snp.makeConstraints { make in
                 make.top.equalTo(nameLbl.snp.bottom).offset(12)
                 make.left.equalToSuperview()
             }
         
-            mainContainerView.addSubview(arenaLbl)
-            arenaLbl.snp.makeConstraints { make in
-                make.top.equalTo(datetimeLbl.snp.bottom).offset(12)
+            mainContainerView.addSubview(matchEndITT)
+            matchEndITT.snp.makeConstraints { make in
+                make.top.equalTo(matchStartITT.snp.bottom).offset(12)
                 make.left.equalToSuperview()
             }
         
-            mainContainerView.addSubview(showButton2)
+            mainContainerView.addSubview(arenaITT)
+            arenaITT.snp.makeConstraints { make in
+                make.top.equalTo(matchEndITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-12)
+            }
+        
+        let buttonContainer: UIView = UIView()
+        self.contentView.addSubview(buttonContainer)
+        buttonContainer.snp.makeConstraints { make in
+            make.top.equalTo(mainContainerView.snp.bottom).offset(12)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            //make.height.equalTo(60)
+            make.bottom.equalToSuperview().offset(-30)
+        }
+        
+            buttonContainer.addSubview(signupButton2)
+            signupButton2.snp.makeConstraints { make in
+                make.top.equalToSuperview()
+                make.left.equalToSuperview()
+                //make.centerY.equalToSuperview()
+                make.height.equalTo(40)
+                make.width.equalTo(240)
+                //make.centerY.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-3)
+            }
+        
+            buttonContainer.addSubview(showButton2)
             showButton2.snp.makeConstraints { make in
-                make.top.equalTo(arenaLbl.snp.bottom).offset(12)
+                make.top.equalToSuperview()
                 make.right.equalToSuperview()
                 //make.centerY.equalToSuperview()
                 make.height.equalTo(40)
-                make.width.equalTo(160)
-                make.bottom.equalToSuperview().offset(-15)
+                make.width.equalTo(102)
+                //make.centerY.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-3)
             }
     }
     
     override func configureSubViews() {
         super.configureSubViews()
         
-        noLbl.text = String(item!.no) + "."
-        
-        nameLbl.text = item?.name
-        arenaLbl.text = item?.arena_name
-        datetimeLbl.text = "\(item!.match_start_show) ~ \(item!.match_end_show)"
+        if item != nil {
+            noLbl.text = item!.no.toTwoString() + "."
+            
+            nameLbl.text = item!.name
+            matchStartITT.setShow(item!.match_start_show)
+            matchEndITT.setShow(item!.match_end_show)
+            arenaITT.setShow(item!.arena_name)
+            showButton2.idx = item!.no - 1
+            signupButton2.idx = item!.no - 1
+        }
         
         //createdAtLbl.text = item?.created_at.noSec()
     }
@@ -243,7 +279,14 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
 
 extension MatchCell: ShowButton2Delegate {
     
-    func pressed() {
-        myDelegate?.signup(item: item!)
+    func showButtonPressed(idx: Int) {
+        myDelegate?.showMatch(idx: idx)
+    }
+}
+
+extension MatchCell: SignupButton2Delegate {
+    
+    func signupButtonPressed(idx: Int) {
+        myDelegate?.signup(idx: idx)
     }
 }

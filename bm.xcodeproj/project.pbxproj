@@ -92,6 +92,7 @@
 		B33C1AC521C3F848006F2BEB /* DrawLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33C1AC421C3F848006F2BEB /* DrawLine.swift */; };
 		B342169E26775C2E005E406F /* ToInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = B342169D26775C2E005E406F /* ToInterface.swift */; };
 		B3426B982A3821190018ED2C /* IconText2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3426B972A3821190018ED2C /* IconText2.swift */; };
+		B3426B9A2A3D6E8E0018ED2C /* SignupButton2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3426B992A3D6E8E0018ED2C /* SignupButton2.swift */; };
 		B3485C9723F841BE0078265D /* MemberVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3485C9623F841BE0078265D /* MemberVC.swift */; };
 		B34A20AC21A98B9300EE6E1C /* TimeTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */; };
 		B34A20AE21AE962700EE6E1C /* Timetables.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34A20AD21AE962700EE6E1C /* Timetables.swift */; };
@@ -562,6 +563,7 @@
 		B33C1AC421C3F848006F2BEB /* DrawLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawLine.swift; sourceTree = "<group>"; };
 		B342169D26775C2E005E406F /* ToInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToInterface.swift; sourceTree = "<group>"; };
 		B3426B972A3821190018ED2C /* IconText2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconText2.swift; sourceTree = "<group>"; };
+		B3426B992A3D6E8E0018ED2C /* SignupButton2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupButton2.swift; sourceTree = "<group>"; };
 		B3485C9623F841BE0078265D /* MemberVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberVC.swift; sourceTree = "<group>"; };
 		B34A20AB21A98B9300EE6E1C /* TimeTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTableVC.swift; sourceTree = "<group>"; };
 		B34A20AD21AE962700EE6E1C /* Timetables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timetables.swift; sourceTree = "<group>"; };
@@ -1280,16 +1282,17 @@
 		B37A13431FDAF38C00413E64 /* Button */ = {
 			isa = PBXGroup;
 			children = (
-				B37A13441FDAF3CB00413E64 /* SuperButton.swift */,
-				B306F33B217AF31100C32CE2 /* SubmitButton.swift */,
-				B3E8C2A12207E0DC0008ED25 /* CityButton.swift */,
 				B39453E0223CE905005E3027 /* CancelButton.swift */,
+				B3E8C2A12207E0DC0008ED25 /* CityButton.swift */,
 				B3310D9822AE302A0062EF98 /* ClearButton.swift */,
 				B307AA30263840EE001F685D /* LikeButton.swift */,
 				B39E5F7B263BCDC100C40BA7 /* LikeIcon.swift */,
 				B37510581FA74EBC00CDF1A0 /* RoundedButton.swift */,
-				F9F583B1283533C500F77B00 /* ThreeButton.swift */,
 				F9B1925B299FCCB00037FE05 /* ShowButton2.swift */,
+				B3426B992A3D6E8E0018ED2C /* SignupButton2.swift */,
+				B306F33B217AF31100C32CE2 /* SubmitButton.swift */,
+				B37A13441FDAF3CB00413E64 /* SuperButton.swift */,
+				F9F583B1283533C500F77B00 /* ThreeButton.swift */,
 			);
 			path = Button;
 			sourceTree = "<group>";
@@ -2206,6 +2209,7 @@
 				F98BD70E1F9DA24500C0CA79 /* VideoCell.swift in Sources */,
 				B323391121B6BC05003EB84D /* TimeTableFrom.swift in Sources */,
 				B3CCE63E1FAD6DF30050D2FE /* CircleImageView.swift in Sources */,
+				B3426B9A2A3D6E8E0018ED2C /* SignupButton2.swift in Sources */,
 				B385A07A22B9336C00BC3ADF /* CourseVC.swift in Sources */,
 				B32FBCF81F849AA7003D39CC /* DataService.swift in Sources */,
 				F9B9F6DD2A19F82000FD9ADC /* ManagerMatchVC.swift in Sources */,

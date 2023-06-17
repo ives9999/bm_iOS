@@ -94,7 +94,7 @@ class ManagerMatchTeamPlayerVC: BaseViewController {
         var rows: [MatchPlayerTable] = [MatchPlayerTable]()
         do {
             if (jsonData != nil) {
-                print(jsonData!.prettyPrintedJSONString)
+                //print(jsonData!.prettyPrintedJSONString)
                 let tables2: MatchPlayerTables = try JSONDecoder().decode(MatchPlayerTables.self, from: jsonData!)
                 if (tables2.success) {
                     if tables2.rows.count > 0 {
