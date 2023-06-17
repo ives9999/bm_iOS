@@ -32,6 +32,7 @@ class MatchTable: Table {
     var signup_end: String = ""
     var ball: String = ""
     var arena_name: String = ""
+    var arena_city_id: Int = 0
     var arenaTable: ArenaTable? = nil
     var matchContactTable: MatchContactTable? = nil
     var matchGroups: [MatchGroupTable] = [MatchGroupTable]()
@@ -47,6 +48,7 @@ class MatchTable: Table {
     var signup_end_weekday: String = ""
     var city_name: String = ""
     var area_name: String = ""
+    var arena_city_name: String = ""
     
     enum CodingKeys: String, CodingKey {
         case arena_id
@@ -56,6 +58,7 @@ class MatchTable: Table {
         case signup_end
         case ball
         case arena_name
+        case arena_city_id
         case arenaTable = "arena"
         case matchContactTable = "match_contact"
         case matchGroups = "match_groups"
@@ -75,6 +78,7 @@ class MatchTable: Table {
         do {arenaTable = try container.decode(ArenaTable.self, forKey: .arenaTable)}catch{arenaTable = nil}
         do {matchContactTable = try container.decode(MatchContactTable.self, forKey: .matchContactTable)}catch{matchContactTable = nil}
         do{matchGroups = try container.decode([MatchGroupTable].self, forKey: .matchGroups)}catch{matchGroups = [MatchGroupTable]()}
+        arena_city_id = try container.decodeIfPresent(Int.self, forKey: .arena_city_id) ?? 0
     }
     
     override func filterRow() {
@@ -129,6 +133,10 @@ class MatchTable: Table {
             if arenaTable!.city_id > 0 && arenaTable!.area_id > 0 {
                 address = "\(city_name)\(area_name)\(arenaTable!.zip)\(arenaTable!.road)"
             }
+        }
+        
+        if (arena_city_id > 0) {
+            arena_city_name = Global.instance.zoneIDToName(arena_city_id)
         }
     }
 }

@@ -92,6 +92,14 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
         return view
     }()
     
+    let arena_city_name: SuperLabel = {
+        let view = SuperLabel()
+        view.setTextGeneral()
+        view.setTextBold()
+        
+        return view
+    }()
+    
     let separator: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.3)
@@ -183,6 +191,12 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
                 make.left.equalToSuperview()
             }
         
+            view1.addSubview(arena_city_name)
+            arena_city_name.snp.makeConstraints { make in
+                make.top.equalToSuperview()
+                make.right.equalToSuperview()
+            }
+        
             view1.addSubview(separator)
             separator.snp.makeConstraints { make in
                 make.top.equalTo(noLbl.snp.bottom).offset(12)
@@ -264,6 +278,7 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
         
         if item != nil {
             noLbl.text = item!.no.toTwoString() + "."
+            arena_city_name.text = item!.arena_city_name
             
             nameLbl.text = item!.name
             matchStartITT.setShow(item!.match_start_show)
