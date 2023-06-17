@@ -92,12 +92,12 @@ class ShowMatchVC: BaseViewController {
         introduceTableView.delegate = self
         introduceTableView.dataSource = self
         
-        introduceTableView.backgroundColor = UIColor.red
+        //introduceTableView.backgroundColor = UIColor.red
         
         signupTableView.delegate = self
         signupTableView.dataSource = self
         
-        signupTableView.backgroundColor = UIColor.red
+        //signupTableView.backgroundColor = UIColor.red
         
         refresh(MatchTable.self)
     }
@@ -380,6 +380,14 @@ extension ShowMatchVC: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == introduceTableView {
+            return 100
+        } else {
+            return 0
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if tableView == introduceTableView {
             let headerView: UIView = UIView.init(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 100))
@@ -470,9 +478,12 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
         return view
     }()
     
-    let nameLbl: SuperLabel = {
+    let priceLbl: SuperLabel = {
         let view = SuperLabel()
-        view.setTextTitle()
+        view.setTextGeneralV2()
+        view.setTextColor(UIColor(MY_RED))
+        view.text = "600"
+        
         return view
     }()
     
@@ -484,21 +495,30 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
     
     let mainContainerView: UIView = UIView()
     
-    let numberLbl: SuperLabel = {
+    let nameLbl: SuperLabel = {
         let view = SuperLabel()
-        view.setTextGeneral()
+        view.setTextTitle()
         return view
     }()
     
-    let signupNumberLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.setTextGeneral()
+    let numberITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("member2_svg")
+        view.setTitle("人數")
         return view
     }()
     
-    let limitLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.setTextGeneral()
+    let signupNumberITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("member2_svg")
+        view.setTitle("報名組數")
+        return view
+    }()
+    
+    let limitITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("member2_svg")
+        view.setTitle("限制組數")
         return view
     }()
     
@@ -533,106 +553,115 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
         let view1: UIView = UIView()
         
         self.contentView.addSubview(view1)
-        view1.backgroundColor = UIColor.cyan
+        //view1.backgroundColor = UIColor.cyan
         view1.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(0)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             //make.bottom.equalToSuperview().offset(-2)
-            make.height.equalTo(30)
+            //make.height.equalTo(30)
         }
         
-//            view1.addSubview(noLbl)
-//            noLbl.snp.makeConstraints { make in
-//                make.top.equalToSuperview()
-//                make.left.equalToSuperview()
-//            }
-//
-//            view1.addSubview(separator)
-//            separator.snp.makeConstraints { make in
-//                make.top.equalTo(noLbl.snp.bottom).offset(2)
-//                make.left.equalToSuperview()
-//                make.right.equalToSuperview()
-//                make.bottom.equalToSuperview().offset(-2)
-//                make.height.equalTo(1)
-//            }
+            view1.addSubview(noLbl)
+            noLbl.snp.makeConstraints { make in
+                make.top.equalToSuperview()
+                make.left.equalToSuperview()
+            }
+        
+            view1.addSubview(priceLbl)
+            priceLbl.snp.makeConstraints { make in
+                make.top.equalToSuperview()
+                make.right.equalToSuperview()
+            }
+
+            view1.addSubview(separator)
+            separator.snp.makeConstraints { make in
+                make.top.equalTo(noLbl.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
+                make.height.equalTo(1)
+                make.bottom.equalToSuperview().offset(-12)
+            }
 
         self.contentView.addSubview(mainContainerView)
-        mainContainerView.backgroundColor = UIColor.brown
+        //mainContainerView.backgroundColor = UIColor.brown
         mainContainerView.snp.makeConstraints { make in
             make.top.equalTo(view1.snp.bottom).offset(0)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             //make.bottom.equalToSuperview().offset(-2)
-            make.height .equalTo(180)
+            //make.height .equalTo(180)
         }
 
-//            mainContainerView.addSubview(nameLbl)
-//            nameLbl.snp.makeConstraints { make in
-//                make.left.equalToSuperview()
-//                make.top.equalToSuperview().offset(6)
-//            }
-//
-//            mainContainerView.addSubview(numberLbl)
-//            numberLbl.snp.makeConstraints { make in
-//                make.top.equalTo(nameLbl.snp.bottom).offset(12)
-//                make.left.equalToSuperview()
-//            }
-//
-//            mainContainerView.addSubview(signupNumberLbl)
-//            signupNumberLbl.snp.makeConstraints { make in
-//                make.top.equalTo(numberLbl.snp.bottom).offset(12)
-//                make.left.equalToSuperview()
-//            }
-//
-//            mainContainerView.addSubview(limitLbl)
-//            limitLbl.snp.makeConstraints { make in
-//                make.top.equalTo(signupNumberLbl.snp.bottom).offset(12)
-//                make.left.equalToSuperview()
-//                make.bottom.equalToSuperview().offset(-12)
-//            }
+            mainContainerView.addSubview(nameLbl)
+            nameLbl.snp.makeConstraints { make in
+                make.left.equalToSuperview()
+                make.top.equalToSuperview().offset(6)
+            }
+
+            mainContainerView.addSubview(numberITT)
+            numberITT.snp.makeConstraints { make in
+                make.top.equalTo(nameLbl.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+            }
+
+            mainContainerView.addSubview(signupNumberITT)
+            signupNumberITT.snp.makeConstraints { make in
+                make.top.equalTo(numberITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+            }
+
+            mainContainerView.addSubview(limitITT)
+            limitITT.snp.makeConstraints { make in
+                make.top.equalTo(signupNumberITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-12)
+            }
         
-        let view2: UIView = UIView()
-        view2.backgroundColor = UIColor.gray
-        self.contentView.addSubview(view2)
-        view2.snp.makeConstraints { make in
-            make.top.equalTo(mainContainerView.snp.bottom).offset(0)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-            //make.centerY.equalToSuperview()
-            make.height.equalTo(40)
-            //make.width.equalTo(160)
-            make.bottom.equalToSuperview().offset(-1)
-        }
-
-//        self.contentView.addSubview(showButton2)
-//        showButton2.snp.makeConstraints { make in
+//        let view2: UIView = UIView()
+//        view2.backgroundColor = UIColor.gray
+//        self.contentView.addSubview(view2)
+//        view2.snp.makeConstraints { make in
+//            make.top.equalTo(mainContainerView.snp.bottom).offset(0)
 //            make.left.equalToSuperview().offset(20)
 //            make.right.equalToSuperview().offset(-20)
 //            //make.centerY.equalToSuperview()
 //            make.height.equalTo(40)
 //            //make.width.equalTo(160)
-//            make.top.equalTo(mainContainerView.snp.bottom).offset(12)
-//            make.bottom.equalToSuperview().offset(50)
+//            make.bottom.equalToSuperview().offset(-1)
 //        }
+
+        self.contentView.addSubview(showButton2)
+        showButton2.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            //make.centerY.equalToSuperview()
+            make.height.equalTo(50)
+            //make.width.equalTo(160)
+            make.top.equalTo(mainContainerView.snp.bottom).offset(12)
+            make.bottom.equalToSuperview().offset(-30)
+        }
     }
     
     override func configureSubViews() {
         super.configureSubViews()
         
-        if item!.no % 2 == 0 {
-            self.contentView.backgroundColor = UIColor.blue
-        } else {
-            self.contentView.backgroundColor = UIColor.orange
-        }
+//        if item!.no % 2 == 0 {
+//            self.contentView.backgroundColor = UIColor.blue
+//        } else {
+//            self.contentView.backgroundColor = UIColor.orange
+//        }
 
-//        self.noLbl.text = "\(item!.no.toTwoString())."
-//        self.nameLbl.text = item?.name
-//        self.numberLbl.text = "人數：\(item?.number ?? 0)人"
-//        self.signupNumberLbl.text = "報名組數：0組"
-//        self.limitLbl.text = "限制組數：\(item?.limit ?? 0)組"
-//        
-//        showButton2.setTitle("報名")
+        if item != nil {
+            self.noLbl.text = "\(item!.no.toTwoString())."
+            self.priceLbl.text = "NT$\(item!.price)元"
+            self.nameLbl.text = item!.name
+            self.numberITT.setShow("人數：\(item!.number)人")
+            self.signupNumberITT.setShow("報名組數：\(item!.signup_count)組")
+            self.limitITT.setShow("限制組數：\(item!.limit)組")
+        }
+        
+        showButton2.setTitle("報名")
     }
 }
 

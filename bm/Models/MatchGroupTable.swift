@@ -30,6 +30,7 @@ class MatchGroupTable: Table {
     var price: Int = 0
     var product_price_id: Int = 0
     var limit: Int = 0
+    var signup_count: Int = 0
     
     var matchTable: MatchTable? = nil
     var matchPlayers: [MatchPlayerTable] = [MatchPlayerTable]()
@@ -44,6 +45,7 @@ class MatchGroupTable: Table {
         case matchTable = "match"
         case matchPlayers = "match_players"
         case productPrice = "product_price"
+        case signup_count
     }
     
     required init(from decoder: Decoder) throws {
@@ -58,6 +60,7 @@ class MatchGroupTable: Table {
         do {matchTable = try container.decode(MatchTable.self, forKey: .matchTable)}catch{matchTable = nil}
         do {matchPlayers = try container.decode([MatchPlayerTable].self, forKey: .matchPlayers)}catch{matchPlayers = [MatchPlayerTable]()}
         productPrice = try container.decodeIfPresent(ProductPriceTable.self, forKey: .productPrice) ?? nil
+        signup_count = try container.decodeIfPresent(Int.self, forKey: .signup_count) ?? 0
     }
     
     override func filterRow() {
