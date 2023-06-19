@@ -345,9 +345,12 @@ class ShowMatchVC: BaseViewController {
         }
     }
     
-    func signup(item: MatchGroupTable) {
+    func signup(idx: Int) {
         //print(item)
-        toMatchTeamSignup(match_group_token: item.token)
+        if (self.table != nil) {
+            let item: MatchGroupTable = self.table!.matchGroups[idx]
+            toMatchTeamSignup(match_group_token: item.token)
+        }
     }
 }
 
@@ -659,6 +662,7 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
             self.numberITT.setShow("人數：\(item!.number)人")
             self.signupNumberITT.setShow("報名組數：\(item!.signup_count)組")
             self.limitITT.setShow("限制組數：\(item!.limit)組")
+            showButton2.idx = item!.no - 1
         }
         
         showButton2.setTitle("報名")
@@ -667,8 +671,8 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
 
 extension MatchGroupSignupCell: ShowButton2Delegate {
     
-    func showButtonPressed() {
+    func showButtonPressed(idx: Int) {
         //guard let superView = self.superview as? UITableView else { return }
-        myDelegate?.signup(item: item!)
+        myDelegate?.signup(idx: idx)
     }
 }
