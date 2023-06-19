@@ -739,15 +739,15 @@ enum ALL_PROCESS: String {
             return .shipping
         case 5:
             return .logistic
-        case 5:
-            return .store
         case 6:
-            return .complete
+            return .store
         case 7:
-            return .returning
+            return .complete
         case 8:
-            return .return
+            return .returning
         case 9:
+            return .return
+        case 10:
             return .gateway_fail
         default:
             return .normal

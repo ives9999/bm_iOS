@@ -259,7 +259,7 @@ class PaymentVC: MyTableVC {
                     //print(jsonData.prettyPrintedJSONString)
                     do {
                         self.orderTable = try JSONDecoder().decode(OrderTable.self, from: jsonData)
-                        
+                        self.orderTable!.filterRow()
                         //如果購買解碼點數，則須更新session的值
                         self.updateMemberCoin()
                         
@@ -352,9 +352,8 @@ class PaymentVC: MyTableVC {
     func initData() {
         
         titleLbl.text = orderTable!.order_no
-        titleLbl.textColor = UIColor.black
+        titleLbl.textColor = UIColor.white
         
-        orderTable!.filterRow()
         
         if (orderTable!.all_process > 1) {//已經付費了
             //bottomThreeView.isHidden = true

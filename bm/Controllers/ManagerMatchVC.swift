@@ -144,48 +144,50 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         return view
     }()
     
-    var matchTimeLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "2023-08-01 08:00 ~ 2023-08-01 18:00"
+    let matchStartITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("calendar_start_svg")
+        view.setTitle("比賽開始日期")
         
         return view
     }()
     
-    let dot1: UIView = Dot2()
-    
-    let matchGroupLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "社會組女雙"
+    let matchEndITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("calendar_end_svg")
+        view.setTitle("比賽結束日期")
         
         return view
     }()
     
-    let dot2: UIView = Dot2()
-    
-    let priceLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "1000元"
+    let matchGroupITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("name_svg")
+        view.setTitle("賽事組別")
         
         return view
     }()
     
-    let dot3: UIView = Dot2()
-    
-    let groupLimitLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "10人"
+    let priceITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("fee_svg")
+        view.setTitle("報名費")
         
         return view
     }()
     
-    var createdAtLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "2023-08-01 08:00"
+    let groupLimitITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("")
+        view.setTitle("限制組數")
+        
+        return view
+    }()
+    
+    var createdAtITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setTitle("報名日期")
+        view.setIcon("calendar_svg")
         
         return view
     }()
@@ -303,59 +305,39 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
                 make.left.equalToSuperview()
             }
         
-            mainContainerView.addSubview(matchTimeLbl)
-            matchTimeLbl.snp.makeConstraints { make in
+            mainContainerView.addSubview(matchStartITT)
+            matchStartITT.snp.makeConstraints { make in
                 make.top.equalTo(nameLbl.snp.bottom).offset(12)
                 make.left.equalToSuperview()
             }
         
-            let partContainer:UIView = UIView()
-            //partContainer.backgroundColor = UIColor.red
-            mainContainerView.addSubview(partContainer)
-            partContainer.snp.makeConstraints { make in
-                make.top.equalTo(matchTimeLbl.snp.bottom).offset(12)
-                make.left.right.equalToSuperview()
-                make.height.equalTo(30)
+            mainContainerView.addSubview(matchEndITT)
+            matchEndITT.snp.makeConstraints { make in
+                make.top.equalTo(matchStartITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+            }
+    
+            mainContainerView.addSubview(matchGroupITT)
+            matchGroupITT.snp.makeConstraints { make in
+                make.top.equalTo(matchEndITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
             }
         
-                partContainer.addSubview(dot1)
-                dot1.snp.makeConstraints { make in
-                    make.centerY.equalToSuperview()
-                    make.left.equalToSuperview()
-                }
-
-                partContainer.addSubview(matchGroupLbl)
-                matchGroupLbl.snp.makeConstraints { make in
-                    make.left.equalTo(dot1.snp.right).offset(6)
-                    make.centerY.equalToSuperview()
-                }
+            mainContainerView.addSubview(priceITT)
+            priceITT.snp.makeConstraints { make in
+                make.top.equalTo(matchGroupITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+            }
+            
+            mainContainerView.addSubview(groupLimitITT)
+            groupLimitITT.snp.makeConstraints { make in
+                make.top.equalTo(priceITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+            }
         
-                partContainer.addSubview(dot2)
-                dot2.snp.makeConstraints { make in
-                    make.left.equalTo(matchGroupLbl.snp.right).offset(16)
-                    make.centerY.equalToSuperview()
-                }
-            
-                partContainer.addSubview(priceLbl)
-                priceLbl.snp.makeConstraints { make in
-                    make.left.equalTo(dot2.snp.right).offset(6)
-                    make.centerY.equalToSuperview()
-                }
-            
-                partContainer.addSubview(dot3)
-                dot3.snp.makeConstraints { make in
-                    make.left.equalTo(priceLbl.snp.right).offset(16)
-                    make.centerY.equalToSuperview()
-                }
-            
-                partContainer.addSubview(groupLimitLbl)
-                groupLimitLbl.snp.makeConstraints { make in
-                    make.left.equalTo(dot3.snp.right).offset(6)
-                    make.centerY.equalToSuperview()
-                }
-            mainContainerView.addSubview(createdAtLbl)
-            createdAtLbl.snp.makeConstraints { make in
-                make.top.equalTo(partContainer.snp.bottom).offset(12)
+            mainContainerView.addSubview(createdAtITT)
+            createdAtITT.snp.makeConstraints { make in
+                make.top.equalTo(groupLimitITT.snp.bottom).offset(12)
                 make.left.equalToSuperview()
                 make.bottom.equalToSuperview().offset(-12)
             }
@@ -413,22 +395,22 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         if item != nil {
             noLbl.text = item!.no.toTwoString() + "."
             teamNameLbl.text = item!.name
-            createdAtLbl.text = item!.created_at.noSec()
+            createdAtITT.setShow(item!.created_at.noSec())
         }
         
         if item != nil && item!.matchTable != nil {
-            matchTimeLbl.text = item!.matchTable!.match_time_show
             nameLbl.text = item?.matchTable?.name
+            matchStartITT.setShow(item!.matchTable!.match_start_show)
+            matchEndITT.setShow(item!.matchTable!.match_end_show)
         }
         
         if item != nil && item!.matchGroupTable != nil {
-            matchGroupLbl.text = item!.matchGroupTable!.name
-            groupLimitLbl.text = "\(item!.matchGroupTable!.limit)組"
-            matchGroupLbl.text = item!.matchGroupTable!.name
+            matchGroupITT.setShow(item!.matchGroupTable!.name)
+            groupLimitITT.setShow("\(item!.matchGroupTable!.limit)組")
         }
         
         if item != nil && item!.matchGroupTable != nil && item!.matchGroupTable!.productPrice != nil {
-            priceLbl.text = "NT$\(item!.matchGroupTable!.productPrice!.price_member)元"
+            priceITT.setShow("NT$\(item!.matchGroupTable!.productPrice!.price_member)元")
         }
 
     }

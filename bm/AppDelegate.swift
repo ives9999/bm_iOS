@@ -150,6 +150,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             gSimulate = false
         #endif
         
+        //gSimulate = false
         //print(gSimulate)
         //BASE_URL = (gSimulate) ? LOCALHOST_BASE_URL : REMOTE_BASE_URL
         
