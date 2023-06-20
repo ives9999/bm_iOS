@@ -162,7 +162,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
     
     let matchGroupITT: IconTextText2 = {
         let view = IconTextText2()
-        view.setIcon("name_svg")
+        view.setIcon("ball_svg")
         view.setTitle("賽事組別")
         
         return view
@@ -170,7 +170,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
     
     let priceITT: IconTextText2 = {
         let view = IconTextText2()
-        view.setIcon("fee_svg")
+        view.setIcon("money_circle_svg")
         view.setTitle("報名費")
         
         return view
@@ -178,7 +178,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
     
     let groupLimitITT: IconTextText2 = {
         let view = IconTextText2()
-        view.setIcon("")
+        view.setIcon("group_svg")
         view.setTitle("限制組數")
         
         return view
