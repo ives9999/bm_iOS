@@ -92,6 +92,16 @@ class ManagerMatchVC: BaseViewController {
         }
     }
     
+    func cellPay(row: Table) {
+        if let _row: MatchTeamTable = row as? MatchTeamTable {
+            if _row.order_token.count > 0 {
+                toPayment(order_token: _row.order_token, source: "match")
+            } else {
+                print("aaa")
+            }
+        }
+    }
+    
     override func cellTeamMember(row: Table) {
         toManagerMatchPlayer(match_team_token: row.token)
     }
@@ -206,8 +216,8 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         return view
     }()
     
-    let signupIcon: IconView2 = {
-        let view = IconView2(icon: "check_svg")
+    let payIcon: IconView2 = {
+        let view = IconView2(icon: "card_svg")
         
         return view
     }()
@@ -241,7 +251,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         
         editIcon.delegate = self
         deleteIcon.delegate = self
-        signupIcon.delegate = self
+        payIcon.delegate = self
         teamMemberIcon.delegate = self
         
         showButton2.delegate = self
@@ -366,8 +376,8 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
                 make.height.width.equalTo(40)
             }
             
-            iconContainerView.addSubview(signupIcon)
-            signupIcon.snp.makeConstraints { make in
+            iconContainerView.addSubview(payIcon)
+            payIcon.snp.makeConstraints { make in
                 make.left.equalTo(deleteIcon.snp.right).offset(8)
                 make.centerY.equalToSuperview()
                 make.height.width.equalTo(40)
@@ -375,7 +385,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
             
             iconContainerView.addSubview(teamMemberIcon)
             teamMemberIcon.snp.makeConstraints { make in
-                make.left.equalTo(signupIcon.snp.right).offset(8)
+                make.left.equalTo(payIcon.snp.right).offset(8)
                 make.centerY.equalToSuperview()
                 make.height.width.equalTo(40)
             }
@@ -428,8 +438,8 @@ extension ManagerMatchCell: IconView2Delegate {
             myDelegate?.cellEdit(row: item!)
         case "delete_svg":
             myDelegate?.cellDelete(row: item!)
-        case "check_svg":
-            myDelegate?.cellSignup(row: item!)
+        case "card_svg":
+            myDelegate?.cellPay(row: item!)
         case "member_svg":
             myDelegate?.cellTeamMember(row: item!)
         default:

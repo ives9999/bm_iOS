@@ -31,6 +31,7 @@ class MatchTeamTable: Table {
     var manager_mobile: String = ""
     var manager_email: String = ""
     var manager_line: String = ""
+    var order_token: String = ""
     
     var matchTable: MatchTable? = nil
     var matchGroupTable: MatchGroupTable? = nil
@@ -47,6 +48,7 @@ class MatchTeamTable: Table {
         case manager_mobile
         case manager_email
         case manager_line
+        case order_token
         case matchTable = "match"
         case matchGroupTable = "match_group"
         case matchPlayers = "match_players"
@@ -73,6 +75,8 @@ class MatchTeamTable: Table {
         
         product_token = try container.decodeIfPresent(String.self, forKey: .product_token) ?? ""
         orderTable = try container.decodeIfPresent(OrderTable.self, forKey: .orderTable) ?? nil
+        
+        order_token = try container.decodeIfPresent(String.self, forKey: .order_token) ?? ""
     }
     
     override func filterRow() {
