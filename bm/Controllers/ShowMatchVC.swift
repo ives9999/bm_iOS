@@ -345,12 +345,13 @@ class ShowMatchVC: BaseViewController {
         }
     }
     
-    func signup(idx: Int) {
+    func signup(item: MatchGroupTable) {
         //print(item)
-        if (self.table != nil) {
-            let item: MatchGroupTable = self.table!.matchGroups[idx]
-            toMatchTeamSignup(match_group_token: item.token)
-        }
+        toMatchTeamSignup(match_group_token: item.token)
+//        if (self.table != nil) {
+//            let item: MatchGroupTable = self.table!.matchGroups[idx]
+//            toMatchTeamSignup(match_group_token: item.token)
+//        }
     }
 }
 
@@ -671,8 +672,16 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
 
 extension MatchGroupSignupCell: ShowButton2Delegate {
     
-    func showButtonPressed(idx: Int) {
-        //guard let superView = self.superview as? UITableView else { return }
-        myDelegate?.signup(idx: idx)
+//    func showButtonPressed(idx: Int) {
+//        //guard let superView = self.superview as? UITableView else { return }
+//        myDelegate?.signup(idx: idx)
+//    }
+    
+    func showButtonPressed() {
+        guard let superView = self.superview as? UITableView else { return }
+        //myDelegate?.didSelect(item: item, at: superView.indexPath(for: self)!)
+        if item != nil {
+            myDelegate?.signup(item: item!)
+        }
     }
 }

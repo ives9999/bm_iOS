@@ -557,7 +557,10 @@ extension BaseViewController {
         login: @escaping (_ baseViewController: BaseViewController)-> Void,
         register:  @escaping (_ baseViewController: BaseViewController)-> Void,
         product_token: String? = nil,
-        product_price_id: Int? = nil) {
+        product_price_id: Int? = nil,
+        able_type: String? = nil,
+        able_id: Int? = nil
+    ) {
 
         let msg: String = ""
         if !Member.instance.isLoggedIn {
@@ -565,23 +568,7 @@ extension BaseViewController {
                 self.goHomeThen(completion: login)
             }
         } else {
-//            for key in MEMBER_MUST_ARRAY {
-//                let type: String = Member.instance.info[key]!["type"]!
-//                let tmp = Member.instance.getData(key: key)
-//                if type == "Int" {
-//                    if let value: Int = tmp as? Int {
-//                        if value == 0 {
-//                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
-//                        }
-//                    }
-//                } else if type == "String" {
-//                    if let value = tmp as? String {
-//                        if value.count == 0 {
-//                            msg += MEMBER_MUST_ARRAY_WARNING[key]! + "\n"
-//                        }
-//                    }
-//                }
-//            }
+
             if msg.count > 0 {
                 warning(msg: msg, showCloseButton: true, buttonTitle: "填寫") {
                     self.goHomeThen(completion: register)
@@ -593,9 +580,16 @@ extension BaseViewController {
                         if product_token != nil {
                             viewController.product_token = product_token
                         }
+                        
                         if product_price_id != nil {
                             viewController.product_price_id = product_price_id
                         }
+                        
+                        if able_type != nil {
+                            viewController.able_type = able_type!
+                            viewController.able_id = able_id
+                        }
+                        
                         viewController.modalPresentationStyle = .fullScreen
                         show(viewController, sender: nil)
                     }

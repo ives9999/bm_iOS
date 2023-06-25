@@ -57,7 +57,7 @@ class ManagerMatchVC: BaseViewController {
         dataService.getList(token: nil, _filter: params, page: page, perPage: tableView2.perPage) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                //TeamService.instance.jsonData?.prettyPrintedJSONString
+                //self.dataService.jsonData?.prettyPrintedJSONString
                 let b: Bool = self.tableView2.parseJSON(jsonData: self.dataService.jsonData)
                 if !b && self.tableView2.msg.count == 0 {
                     self.view.setInfo(info: "目前尚無資料！！", topAnchor: self.showTop2!)
@@ -97,7 +97,15 @@ class ManagerMatchVC: BaseViewController {
             if _row.order_token.count > 0 {
                 toPayment(order_token: _row.order_token, source: "match")
             } else {
-                print("aaa")
+                if _row.matchGroupTable != nil && _row.matchGroupTable!.productTable != nil && _row.matchGroupTable!.productPriceTable != nil {
+                    
+                    self.toOrder(
+                        login: { vc in vc.toLogin() },
+                        register: { vc in vc.toRegister() },
+                        product_token: _row.matchGroupTable!.productTable!.token,
+                        product_price_id: _row.matchGroupTable!.productPriceTable!.id
+                    )
+                }
             }
         }
     }
@@ -406,6 +414,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
             noLbl.text = item!.no.toTwoString() + "."
             teamNameLbl.text = item!.name
             createdAtITT.setShow(item!.created_at.noSec())
+            //showButton2.idx = item!.no - 1
         }
         
         if item != nil && item!.matchTable != nil {
@@ -419,10 +428,9 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
             groupLimitITT.setShow("\(item!.matchGroupTable!.limit)組")
         }
         
-        if item != nil && item!.matchGroupTable != nil && item!.matchGroupTable!.productPrice != nil {
-            priceITT.setShow("NT$\(item!.matchGroupTable!.productPrice!.price_member)元")
+        if item != nil && item!.matchGroupTable != nil && item!.matchGroupTable!.productPriceTable != nil {
+            priceITT.setShow("NT$\(item!.matchGroupTable!.productPriceTable!.price_member)元")
         }
-
     }
     
     @objc func deleteThis(_ sender: UIView) {
@@ -449,6 +457,7 @@ extension ManagerMatchCell: IconView2Delegate {
 }
 
 extension ManagerMatchCell: ShowButton2Delegate {
+    
     func showButtonPressed() {
         guard let superView = self.superview as? UITableView else { return }
         myDelegate?.didSelect(item: item, at: superView.indexPath(for: self)!)

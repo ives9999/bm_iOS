@@ -33,8 +33,9 @@ class MatchGroupTable: Table {
     var signup_count: Int = 0
     
     var matchTable: MatchTable? = nil
-    var matchPlayers: [MatchPlayerTable] = [MatchPlayerTable]()
-    var productPrice: ProductPriceTable? = nil
+    var matchPlayerTables: [MatchPlayerTable] = [MatchPlayerTable]()
+    var productTable: ProductTable? = nil
+    var productPriceTable: ProductPriceTable? = nil
     
     enum CodingKeys: String, CodingKey {
         case match_id
@@ -43,8 +44,9 @@ class MatchGroupTable: Table {
         case product_price_id
         case limit
         case matchTable = "match"
-        case matchPlayers = "match_players"
-        case productPrice = "product_price"
+        case matchPlayerTables = "match_players"
+        case productTable = "product"
+        case productPriceTable = "product_price"
         case signup_count
     }
     
@@ -58,8 +60,9 @@ class MatchGroupTable: Table {
         product_price_id = try container.decodeIfPresent(Int.self, forKey: .product_price_id) ?? 0
         do {limit = try container.decode(Int.self, forKey: .limit)}catch{limit = 0}
         do {matchTable = try container.decode(MatchTable.self, forKey: .matchTable)}catch{matchTable = nil}
-        do {matchPlayers = try container.decode([MatchPlayerTable].self, forKey: .matchPlayers)}catch{matchPlayers = [MatchPlayerTable]()}
-        productPrice = try container.decodeIfPresent(ProductPriceTable.self, forKey: .productPrice) ?? nil
+        do {matchPlayerTables = try container.decode([MatchPlayerTable].self, forKey: .matchPlayerTables)}catch{matchPlayerTables = [MatchPlayerTable]()}
+        productTable = try container.decodeIfPresent(ProductTable.self, forKey: .productTable) ?? nil
+        productPriceTable = try container.decodeIfPresent(ProductPriceTable.self, forKey: .productPriceTable) ?? nil
         signup_count = try container.decodeIfPresent(Int.self, forKey: .signup_count) ?? 0
     }
     
@@ -67,8 +70,8 @@ class MatchGroupTable: Table {
         
         super.filterRow()
         matchTable?.filterRow()
-        if (matchPlayers.count > 0) {
-            for matcherPlayer in matchPlayers {
+        if (matchPlayerTables.count > 0) {
+            for matcherPlayer in matchPlayerTables {
                 matcherPlayer.filterRow()
             }
         }

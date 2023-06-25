@@ -294,8 +294,13 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
 
 extension MatchCell: ShowButton2Delegate {
     
-    func showButtonPressed(idx: Int) {
-        myDelegate?.showMatch(idx: idx)
+//    func showButtonPressed(idx: Int) {
+//        myDelegate?.showMatch(idx: idx)
+//    }
+    
+    func showButtonPressed() {
+        guard let superView = self.superview as? UITableView else { return }
+        myDelegate?.didSelect(item: item, at: superView.indexPath(for: self)!)
     }
 }
 

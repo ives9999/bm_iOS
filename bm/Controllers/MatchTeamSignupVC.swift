@@ -249,17 +249,20 @@ class MatchTeamSignupVC: BaseViewController {
                //print(jsonData.toString())
                //jsonData.prettyPrintedJSONString
                do {
-                   let t = try JSONDecoder().decode(SuccessTable.self, from: jsonData)
+                   let t = try JSONDecoder().decode(MatchPlayerSuccessTable.self, from: jsonData)
                    if (!t.success) {
                        self.warning(t.msg)
                    } else {
                        //print(self.table!.product_token)
+                       
                        self.info(msg: "已經完成報名，請前往付款", closeButtonTitle: "關閉", buttonTitle: "付款") {
                            self.toOrder(
                             login: { vc in vc.toLogin() },
                             register: { vc in vc.toRegister() },
                             product_token: self.table!.product_token,
-                            product_price_id: self.table!.matchGroupTable?.product_price_id
+                            product_price_id: self.table!.matchGroupTable?.product_price_id,
+                            able_type: "MatchTeam",
+                            able_id: t.model?.id
                            )
                        }
                    }
@@ -769,11 +772,11 @@ class MatchPlayerEditVC: BaseViewController {
             lineTxt2.setValue(playerTable!.line)
             ageTxt2.setValue(String(playerTable!.age))
         } else {
-//            nameTxt2.setValue("人員\(idx)")
-//            mobileTxt2.setValue("0923487384")
-//            emailTxt2.setValue("david@gmail.com")
-//            lineTxt2.setValue("davidline")
-//            ageTxt2.setValue("35")
+            nameTxt2.setValue("人員\(idx)")
+            mobileTxt2.setValue("0923487384")
+            emailTxt2.setValue("david@gmail.com")
+            lineTxt2.setValue("davidline")
+            ageTxt2.setValue("35")
         }
         
         fields.append(nameTxt2)
@@ -841,3 +844,32 @@ extension MatchPlayerEditVC: AttributesViewDelegate {
     }
 }
 
+class MatchPlayerSuccessTable: Codable {
+    var success: Bool = false
+    var msg: String = ""
+    var token: String = ""
+    var msgs: [String] = [String]()
+    var model: MatchPlayerTable? = nil
+    
+    init(){}
+    
+    required init(from decoder: Decoder) throws {
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        success = try container.decodeIfPresent(Bool.self, forKey: .success) ?? false
+        msg = try container.decodeIfPresent(String.self, forKey: .msg) ?? ""
+        token = try container.decodeIfPresent(String.self, forKey: .token) ?? ""
+        msgs = try container.decodeIfPresent([String].self, forKey: .msgs) ?? [String]()
+        model = try container.decodeIfPresent(MatchPlayerTable.self, forKey: .model) ?? nil
+    }
+    
+    func parseMsgs()-> String {
+        
+        var msg: String = ""
+        for tmp in msgs {
+            msg += tmp + "\n"
+        }
+        
+        return msg
+    }
+}

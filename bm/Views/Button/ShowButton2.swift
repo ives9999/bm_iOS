@@ -40,18 +40,18 @@ class ShowButton2: SuperButton {
     }
     
     @objc func pressed(_ sender: UIButton) {
-        if idx != nil {
-            delegate?.showButtonPressed(idx: idx!)
-        }
+        //if idx != nil {
+            delegate?.showButtonPressed()
+        //}
     }
 }
 
 protocol ShowButton2Delegate {
     func showButtonPressed()
-    func showButtonPressed(idx: Int)
+    //func showButtonPressed(idx: Int)
 }
 
-extension ShowButton2Delegate {
-    func showButtonPressed(){}
-    func showButtonPressed(idx: Int){}
-}
+//extension ShowButton2Delegate {
+//    func showButtonPressed(){}
+//    func showButtonPressed(idx: Int){}
+//}

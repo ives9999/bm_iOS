@@ -13,6 +13,8 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
     @IBOutlet weak var titleLbl: SuperLabel!
     @IBOutlet weak var submitButton: SubmitButton!
     
+    var able_id: Int? = nil
+    
     var product_token: String? = nil
     var product_price_id: Int? = nil
     
@@ -788,6 +790,14 @@ class OrderVC: MyTableVC, ValueChangedDelegate {
         params["order_address"] = getOneRowValue(ADDRESS_KEY)
         
         params[MEMO_KEY] = getOneRowValue(MEMO_KEY)
+        
+        if able_type.count > 0 {
+            params["able_type"] = able_type
+        }
+        
+        if able_id != nil {
+            params["able_id"] = String(able_id!)
+        }
         //print(params)
         
         //func update(token: String = "", params: [String: String], completion: @escaping CompletionHandler)
