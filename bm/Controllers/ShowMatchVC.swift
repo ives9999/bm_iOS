@@ -347,11 +347,26 @@ class ShowMatchVC: BaseViewController {
     
     func signup(item: MatchGroupTable) {
         //print(item)
-        toMatchTeamSignup(match_group_token: item.token)
-//        if (self.table != nil) {
-//            let item: MatchGroupTable = self.table!.matchGroups[idx]
-//            toMatchTeamSignup(match_group_token: item.token)
-//        }
+        
+        var canSignup: Bool = true
+        if table != nil {
+            if let signupStartDate: Date = table!.signup_start.toDateTime(), let signupEndDate: Date = table!.signup_end.toDateTime() {
+                let now: Date = Date()
+                if now.isSmallerThan(signupStartDate) {
+                    canSignup = false
+                    warning("還沒到報名時間，無法報名")
+                }
+                
+                if now.isGreaterThan(signupEndDate) {
+                    canSignup = false
+                    warning("已超過報名時間，無法報名")
+                }
+            }
+        }
+        
+        if canSignup {
+            toMatchTeamSignup(match_group_token: item.token)
+        }
     }
 }
 

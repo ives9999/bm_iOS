@@ -17,7 +17,15 @@ class IconTextText2: UIView {
     var iconWidth: Int = 24
     var iconHeight: Int = 24
     var iconIV: UIImageView = UIImageView()
-    var titleLbl: UILabel = SuperLabel()
+    var titleLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextGeneral()
+        view.setContentCompressionResistancePriority(.required, for: .horizontal)
+        view.setContentHuggingPriority(.required, for: .horizontal)
+        
+        return view
+    }()
+    
     var commonLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
         view.setTextGeneral()
