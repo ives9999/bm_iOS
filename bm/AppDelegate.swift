@@ -255,6 +255,8 @@ extension UIApplication {
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    //當訊息進來app在前景時，收到推播會呼叫此函式
     // Receive displayed notifications for iOS 10 devices.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification) async -> UNNotificationPresentationOptions {
         let userInfo = notification.request.content.userInfo
@@ -274,6 +276,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         return [[.banner, .sound]]
     }
 
+    //當app在背景時，使用者點選推播時，就會進入此函式
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse) async {
         let userInfo = response.notification.request.content.userInfo
 
