@@ -107,8 +107,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // [START register_for_notifications]
 
         UNUserNotificationCenter.current().delegate = self
+        
         //取得推播權限
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        
         UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { _, _ in
             DispatchQueue.main.async {
                 UIApplication.shared.registerForRemoteNotifications()
@@ -192,6 +194,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(userInfo)
     }
     
+    //silent notification
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) async -> UIBackgroundFetchResult {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
@@ -271,6 +274,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // [END_EXCLUDE]
         // Print full message.
         print(userInfo)
+        
+        
+        //for key in userInfo.keys {
+            //print("\(key) => \(userInfo[key])")
+            
+        //}
 
         // Change this to your preferred presentation option
         return [[.banner, .sound]]
@@ -290,6 +299,38 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         // Print full message.
         print(userInfo)
+        
+        if userInfo.keyExist(key: "type") {
+            if let type: String = userInfo["type"] as? String {
+                if type == "order" {
+                    
+                    if let vc: BaseViewController = self.getCurrentVC() {
+                        vc.toMemberOrderList()
+                    }
+                } else if type == "course" {
+                    if let vc: BaseViewController = self.getCurrentVC() {
+                        vc.toCourse()
+                    }
+                }
+            }
+        }
+    }
+    
+    //https://stackoverflow.com/questions/30592521/opening-view-controller-from-app-delegate-using-swift
+    func getCurrentVC()-> BaseViewController? {
+        
+        if let window = self.window, let rootViewController = window.rootViewController {
+            var currentController = rootViewController
+            while let presentedController = currentController.presentedViewController {
+                currentController = presentedController
+            }
+            
+            if let vc = currentController as? BaseViewController {
+                return vc
+            }
+        }
+        
+        return nil
     }
 }
 
@@ -315,7 +356,6 @@ extension AppDelegate: MessagingDelegate {
 
     // [END refresh_token]
 }
-
 
 
 

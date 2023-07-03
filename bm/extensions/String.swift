@@ -333,6 +333,26 @@ extension String {
         return attributedString
     }
     
+    func getTypeOfProperty()-> String? {
+        var res: String = ""
+        if
+            self == PropertyTypes.OptionalInt.rawValue ||
+            self == PropertyTypes.SwiftInt.rawValue ||
+            self == PropertyTypes.Int.rawValue {
+                res = PropertyTypes.Int.rawValue
+        } else if
+            self == PropertyTypes.OptionalString.rawValue ||
+            self == PropertyTypes.SwiftString.rawValue ||
+            self == PropertyTypes.String.rawValue {
+                res = PropertyTypes.String.rawValue
+        } else if
+            self == PropertyTypes.OptionalBool.rawValue ||
+            self == PropertyTypes.SwiftBool.rawValue ||
+            self == PropertyTypes.Bool.rawValue {
+                res = PropertyTypes.Bool.rawValue
+        }
+        return res
+    }
 //    func substring(_ range: CountableRange<Int>) -> String {
 //        let idx1 = index(startIndex, offsetBy: max(0, range.lowerBound))
 //        let idx2 = index(startIndex, offsetBy: min(self.count, range.upperBound))

@@ -21,9 +21,11 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1669875846375141</string>
+				<string>com.googleusercontent.apps.367910377881-h2gsnpcchjsk47lfb010qf5lkjl36us3</string>
 			</array>
 		</dict>
 	</array>
@@ -68,6 +70,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UILaunchStoryboardName</key>

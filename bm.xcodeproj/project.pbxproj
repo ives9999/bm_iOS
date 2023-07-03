@@ -350,6 +350,9 @@
 		F96AD97A1FD52D1C000D7176 /* TeamTempPlayListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */; };
 		F9763E1628B62D57006ED47C /* MemberSubscriptionLogVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9763E1528B62D57006ED47C /* MemberSubscriptionLogVC.swift */; };
 		F9763E1828B6851A006ED47C /* MemberSubscriptionLogCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F9763E1728B6851A006ED47C /* MemberSubscriptionLogCell.xib */; };
+		F97895B12A4DB0BB00C5D620 /* DropDownTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97895B02A4DB0BB00C5D620 /* DropDownTextField.swift */; };
+		F97895B32A4F18F700C5D620 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97895B22A4F18F700C5D620 /* UIApplication.swift */; };
+		F97895B52A4FDBFB00C5D620 /* TestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97895B42A4FDBFB00C5D620 /* TestVC.swift */; };
 		F983441429EEC3690050B634 /* MatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441329EEC3690050B634 /* MatchVC.swift */; };
 		F983441629EEEE950050B634 /* MatchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441529EEEE950050B634 /* MatchTable.swift */; };
 		F983441829EEF49C0050B634 /* MatchGroupTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F983441729EEF49C0050B634 /* MatchGroupTable.swift */; };
@@ -832,6 +835,9 @@
 		F96AD9791FD52D1C000D7176 /* TeamTempPlayListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayListCell.swift; sourceTree = "<group>"; };
 		F9763E1528B62D57006ED47C /* MemberSubscriptionLogVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberSubscriptionLogVC.swift; sourceTree = "<group>"; };
 		F9763E1728B6851A006ED47C /* MemberSubscriptionLogCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberSubscriptionLogCell.xib; sourceTree = "<group>"; };
+		F97895B02A4DB0BB00C5D620 /* DropDownTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownTextField.swift; sourceTree = "<group>"; };
+		F97895B22A4F18F700C5D620 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		F97895B42A4FDBFB00C5D620 /* TestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVC.swift; sourceTree = "<group>"; };
 		F983441329EEC3690050B634 /* MatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchVC.swift; sourceTree = "<group>"; };
 		F983441529EEEE950050B634 /* MatchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchTable.swift; sourceTree = "<group>"; };
 		F983441729EEF49C0050B634 /* MatchGroupTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchGroupTable.swift; sourceTree = "<group>"; };
@@ -1356,19 +1362,21 @@
 		F93095F72948AD8A006C625C /* extensions */ = {
 			isa = PBXGroup;
 			children = (
-				F93095F82948ADB9006C625C /* UITableViewCell.swift */,
-				B35593F5294ED397009E0658 /* UIImageView.swift */,
-				F985F4612956BF3900636FEA /* UIView.swift */,
-				F94093D3298BA88E0006D89D /* UILabel.swift */,
-				F9B1925D29A52AD50037FE05 /* Int.swift */,
-				F98F928129AD091E00A4039E /* UIImage.swift */,
-				B3B8671729CAA74900E0F1AB /* UITextField.swift */,
-				F983442129F415F40050B634 /* String.swift */,
-				F9C6647F29FCCA37005C1905 /* Date.swift */,
-				F9C664832A040BFE005C1905 /* Data.swift */,
-				F9C6648F2A0959B6005C1905 /* UIColor.swift */,
-				F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */,
 				B38755312A270098008B75F4 /* Array.swift */,
+				F9C664832A040BFE005C1905 /* Data.swift */,
+				F9C6647F29FCCA37005C1905 /* Date.swift */,
+				F9B9F6DA2A0E3C0400FD9ADC /* Dictionary.swift */,
+				F97895B02A4DB0BB00C5D620 /* DropDownTextField.swift */,
+				F9B1925D29A52AD50037FE05 /* Int.swift */,
+				F983442129F415F40050B634 /* String.swift */,
+				F97895B22A4F18F700C5D620 /* UIApplication.swift */,
+				F9C6648F2A0959B6005C1905 /* UIColor.swift */,
+				F98F928129AD091E00A4039E /* UIImage.swift */,
+				B35593F5294ED397009E0658 /* UIImageView.swift */,
+				F94093D3298BA88E0006D89D /* UILabel.swift */,
+				F93095F82948ADB9006C625C /* UITableViewCell.swift */,
+				B3B8671729CAA74900E0F1AB /* UITextField.swift */,
+				F985F4612956BF3900636FEA /* UIView.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -1541,6 +1549,7 @@
 				F99DF39E28715E4C00A7C2C6 /* WebViewVC.swift */,
 				B3ED38F11FBAD4C20003F083 /* WeekdaysSelectVC.swift */,
 				B31CD34526F0C1C8001B3848 /* YoutubePlayerVC.swift */,
+				F97895B42A4FDBFB00C5D620 /* TestVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2074,6 +2083,7 @@
 				B3E8C2A5220BFFE10008ED25 /* SuperWebView.swift in Sources */,
 				B306F33C217AF31100C32CE2 /* SubmitButton.swift in Sources */,
 				B36D66C0229A828A00502D62 /* ManagerCourseCell.swift in Sources */,
+				F97895B52A4FDBFB00C5D620 /* TestVC.swift in Sources */,
 				B3B4EF56257B59EA00EE15D0 /* PrivacyCell.swift in Sources */,
 				B3031D6A25CD46A50044830C /* PaymentVC.swift in Sources */,
 				F9B9F6E12A25FC2A00FD9ADC /* MatchPlayerGiftTable.swift in Sources */,
@@ -2168,6 +2178,7 @@
 				B370EFBF26AD3F2B0022E599 /* MemberCartListVC.swift in Sources */,
 				B32CAFE11FF2589000D184ED /* Switch.swift in Sources */,
 				F964CDDB276F5CBA004F1C78 /* ManagerSignupVC.swift in Sources */,
+				F97895B32A4F18F700C5D620 /* UIApplication.swift in Sources */,
 				B3B4EFC725807EDD00EE15D0 /* SexCell.swift in Sources */,
 				B31AF7DC267340B100D68778 /* SearchPanel.swift in Sources */,
 				B3CB73D923D410CD00892F75 /* OneLineCell.swift in Sources */,
@@ -2273,6 +2284,7 @@
 				B3CABD9026B6E4DA00FD0E4D /* MemoCell.swift in Sources */,
 				B31CD34826F19D52001B3848 /* MemberTable.swift in Sources */,
 				B32D9EE621106C5F00999A4A /* TeachService.swift in Sources */,
+				F97895B12A4DB0BB00C5D620 /* DropDownTextField.swift in Sources */,
 				F9FAB2B6271EFD8100D83CC4 /* SearchRow.swift in Sources */,
 				B326C7CC256E2F0D0048A2C2 /* SelectAreasVC.swift in Sources */,
 				B323390B21B6B8E4003EB84D /* FormValidableProtocol.swift in Sources */,

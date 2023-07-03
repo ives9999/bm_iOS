@@ -85,7 +85,8 @@ extension BaseViewController {
                 viewController.member_like = member_like
                 viewController.isShowPrev = isShowPrev
                 viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
+                UIApplication.topViewController()?.present(viewController, animated: true)
+                //show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "Course") as! CourseVC
@@ -333,7 +334,7 @@ extension BaseViewController {
     func toMatch() {
         let vc: MatchVC = MatchVC()
         vc.modalPresentationStyle = .fullScreen
-        show(vc, sender: nil)
+        present(vc, animated: true)
     }
     
     func toMatchTeamSignup(match_group_token: String, token: String? = nil) {
@@ -458,10 +459,12 @@ extension BaseViewController {
     
     func toMemberOrderList() {
         if #available(iOS 13.0, *) {
+            
             let storyboard = UIStoryboard(name: "Member", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_ORDER_LIST)  as? MemberOrderListVC {
                 viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
+                present(viewController, animated: true)
+                //show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_ORDER_LIST) as! MemberOrderListVC
@@ -497,7 +500,8 @@ extension BaseViewController {
             let storyboard = UIStoryboard(name: "More", bundle: nil)
             if let viewController = storyboard.instantiateViewController(identifier: "toMore") as? MoreVC {
                 viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
+                present(viewController, animated: true)
+                //show(viewController, sender: nil)
             }
         } else {
             let viewController = self.storyboard!.instantiateViewController(withIdentifier: "toMore") as! MoreVC
