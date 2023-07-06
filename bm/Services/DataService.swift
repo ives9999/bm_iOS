@@ -138,7 +138,7 @@ class DataService {
         let _member_token: String? = (Member.instance.token != "") ? Member.instance.token : nil
         
         let url: String = URL_DEVICE_TOKEN
-        var params: [String: String] = ["device": "app","device_token":device_token]
+        var params: [String: String] = ["device": "app","device_token":device_token,"device_type":"iOS"]
         if member_token != nil {
             params["member_token"] = _member_token
         }
