@@ -213,20 +213,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     
-//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//
-//        var tokenString = ""
-//        for byte in deviceToken {
-//            let hexString = String(format: "%02x", byte)
-//            tokenString += hexString
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        InstanceID
+
+        var tokenString = ""
+        for byte in deviceToken {
+            let hexString = String(format: "%02x", byte)
+            tokenString += hexString
+        }
+        //let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        print("APNs device token: \(tokenString)")
+
+//        if tokenString.count > 0 {
+//            self.sendDeviceToken(device_token: tokenString)
 //        }
-//        //let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-//        print("APNs device token: \(tokenString)")
-//
-////        if tokenString.count > 0 {
-////            self.sendDeviceToken(device_token: tokenString)
-////        }
-//    }
+    }
     
     func application(_ application: UIApplication, didFailToContinueUserActivityWithType userActivityType: String, error: Error) {
         print("Unable to register for remote notifications: \(error.localizedDescription)")
