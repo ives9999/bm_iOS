@@ -214,8 +214,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        
-        InstanceID
 
         var tokenString = ""
         for byte in deviceToken {
