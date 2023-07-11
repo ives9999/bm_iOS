@@ -21,7 +21,7 @@ class AttributesView: UIView {
     var labelWidth: Int = 80
     let labelHeight: Int = 30
     let horizonMergin: Int = 30
-    let vericalMergin: Int = 16
+    let verticalMergin: Int = 16
     
     //var parent: UIView = UIView()
     var attributes: [String] = [String]()
@@ -69,7 +69,7 @@ class AttributesView: UIView {
             let tmp: (quotient: Int, remainder: Int) = idx.quotientAndRemainder(dividingBy: column)
             //商是第幾列row，餘數是第幾排column
             let leftPadding: Int = tmp.remainder*(labelWidth + horizonMergin)
-            let topPadding: Int = tmp.quotient*(labelHeight + vericalMergin)
+            let topPadding: Int = tmp.quotient*(labelHeight + verticalMergin)
             tag.snp.makeConstraints { make in
                 make.top.equalToSuperview().offset(topPadding)
                 make.left.equalToSuperview().offset(leftPadding)
@@ -91,7 +91,7 @@ class AttributesView: UIView {
     }
     
     func getHeight()-> Int {
-        let height: Int = row*(labelHeight + vericalMergin)
+        let height: Int = row*(labelHeight + verticalMergin)
         
         return height
     }
