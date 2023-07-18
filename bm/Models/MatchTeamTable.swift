@@ -31,7 +31,6 @@ class MatchTeamTable: Table {
     var manager_mobile: String = ""
     var manager_email: String = ""
     var manager_line: String = ""
-    var order_token: String = ""
     var order_process: String = ""
     
     var matchTable: MatchTable? = nil
@@ -50,7 +49,6 @@ class MatchTeamTable: Table {
         case manager_mobile
         case manager_email
         case manager_line
-        case order_token
         case order_process
         case matchTable = "match"
         case matchGroupTable = "match_group"
@@ -81,7 +79,6 @@ class MatchTeamTable: Table {
         orderTable = try container.decodeIfPresent(OrderTable.self, forKey: .orderTable) ?? nil
         productTable = try container.decodeIfPresent(ProductTable.self, forKey: .productTable) ?? nil
         
-        order_token = try container.decodeIfPresent(String.self, forKey: .order_token) ?? ""
         order_process = try container.decodeIfPresent(String.self, forKey: .order_process) ?? ""
     }
     

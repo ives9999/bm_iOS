@@ -79,7 +79,40 @@ class ManagerMatchVC: BaseViewController {
     
     override func cellDelete(row: Table) {
         //print(row)
+        
+        //1.超過報名時間無法刪除
+        //2.繳費完無法刪除，只能棄賽
+        
+        var canDelete: Bool = false
         if let _row: MatchTeamTable = row as? MatchTeamTable {
+            
+            var isPay: Bool = false
+            if _row.orderTable != nil && _row.orderTable!.process == "complete" {
+                isPay = true
+            }
+            
+            var isInterval: Bool = false
+            if let signupStartDate: Date = _row.matchTable!.signup_start.toDateTime(), let signupEndDate: Date = _row.matchTable!.signup_end.toDateTime() {
+                let now: Date = Date()
+                if now.isGreaterThan(signupStartDate) && now.isSmallerThan(signupEndDate) {
+                    isInterval = true
+                }
+            }
+            
+            if isPay {
+                warning("已經報名且繳費，無法刪除隊伍，只能棄權")
+            }
+            
+            if !isInterval {
+                warning("已經超墮報名截止時間，無法刪除隊伍")
+            }
+            
+            if isInterval && !isPay {
+                canDelete = true
+            }
+        }
+        
+        if canDelete {
             warning(msg: "是否確定刪除", closeButtonTitle: "取消", buttonTitle: "刪除") {
                 self.dataService.delete(token: row.token, type: "") { success in
                     if success {
@@ -94,8 +127,8 @@ class ManagerMatchVC: BaseViewController {
     
     func cellPay(row: Table) {
         if let _row: MatchTeamTable = row as? MatchTeamTable {
-            if _row.order_token.count > 0 {
-                toPayment(order_token: _row.order_token, source: "match")
+            if _row.orderTable != nil {
+                toPayment(order_token: _row.orderTable!.token, source: "match")
             } else {
                 if _row.matchGroupTable != nil && _row.matchGroupTable!.productTable != nil && _row.matchGroupTable!.productPriceTable != nil {
                     
@@ -165,7 +198,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
     let matchStartITT: IconTextText2 = {
         let view = IconTextText2()
         view.setIcon("calendar_start_svg")
-        view.setTitle("比賽開始日期")
+        view.setTitle("比賽開始時間")
         
         return view
     }()
@@ -173,7 +206,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
     let matchEndITT: IconTextText2 = {
         let view = IconTextText2()
         view.setIcon("calendar_end_svg")
-        view.setTitle("比賽結束日期")
+        view.setTitle("比賽結束時間")
         
         return view
     }()
@@ -202,9 +235,25 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         return view
     }()
     
+    let signupStartITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("calendar_start_svg")
+        view.setTitle("報名開始時間")
+        
+        return view
+    }()
+    
+    let signupEndITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("calendar_end_svg")
+        view.setTitle("報明結束時間")
+        
+        return view
+    }()
+    
     var createdAtITT: IconTextText2 = {
         let view = IconTextText2()
-        view.setTitle("報名日期")
+        view.setTitle("報名時間")
         view.setIcon("calendar_svg")
         
         return view
@@ -230,11 +279,11 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         return view
     }()
     
-    let teamMemberIcon: IconView2 = {
-        let view = IconView2(icon: "member_svg")
-        
-        return view
-    }()
+//    let teamMemberIcon: IconView2 = {
+//        let view = IconView2(icon: "member_svg")
+//
+//        return view
+//    }()
     
     let showButton2: ShowButton2 = ShowButton2()
     
@@ -260,7 +309,7 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
         editIcon.delegate = self
         deleteIcon.delegate = self
         payIcon.delegate = self
-        teamMemberIcon.delegate = self
+        //teamMemberIcon.delegate = self
         
         showButton2.delegate = self
         
@@ -353,9 +402,21 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
                 make.left.equalToSuperview()
             }
         
+            mainContainerView.addSubview(signupStartITT)
+            signupStartITT.snp.makeConstraints { make in
+                make.top.equalTo(groupLimitITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+            }
+        
+            mainContainerView.addSubview(signupEndITT)
+            signupEndITT.snp.makeConstraints { make in
+                make.top.equalTo(signupStartITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+            }
+        
             mainContainerView.addSubview(createdAtITT)
             createdAtITT.snp.makeConstraints { make in
-                make.top.equalTo(groupLimitITT.snp.bottom).offset(12)
+                make.top.equalTo(signupEndITT.snp.bottom).offset(12)
                 make.left.equalToSuperview()
                 make.bottom.equalToSuperview().offset(-12)
             }
@@ -391,12 +452,12 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
                 make.height.width.equalTo(40)
             }
             
-            iconContainerView.addSubview(teamMemberIcon)
-            teamMemberIcon.snp.makeConstraints { make in
-                make.left.equalTo(payIcon.snp.right).offset(8)
-                make.centerY.equalToSuperview()
-                make.height.width.equalTo(40)
-            }
+//            iconContainerView.addSubview(teamMemberIcon)
+//            teamMemberIcon.snp.makeConstraints { make in
+//                make.left.equalTo(payIcon.snp.right).offset(8)
+//                make.centerY.equalToSuperview()
+//                make.height.width.equalTo(40)
+//            }
         
         iconContainerView.addSubview(showButton2)
         showButton2.snp.makeConstraints { make in
@@ -421,6 +482,8 @@ class ManagerMatchCell: BaseCell<MatchTeamTable, ManagerMatchVC> {
             nameLbl.text = item?.matchTable?.name
             matchStartITT.setShow(item!.matchTable!.match_start_show)
             matchEndITT.setShow(item!.matchTable!.match_end_show)
+            signupStartITT.setShow(item!.matchTable!.signup_start_show)
+            signupEndITT.setShow(item!.matchTable!.signup_end_show)
         }
         
         if item != nil && item!.matchGroupTable != nil {
@@ -448,8 +511,8 @@ extension ManagerMatchCell: IconView2Delegate {
             myDelegate?.cellDelete(row: item!)
         case "card_svg":
             myDelegate?.cellPay(row: item!)
-        case "member_svg":
-            myDelegate?.cellTeamMember(row: item!)
+//        case "member_svg":
+//            myDelegate?.cellTeamMember(row: item!)
         default:
             myDelegate?.cellEdit(row: item!)
         }
