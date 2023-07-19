@@ -450,6 +450,8 @@ class MemberVC: BaseViewController {
                 toMemberBank()
             } else if (mainMemberEnum == MainMemberEnum.delete) {
                 delete()
+            } else if (mainMemberEnum == MainMemberEnum.refresh) {
+                refresh()
             } else {
                 toMemberItem(mainMemberEnum)
             }
@@ -734,8 +736,9 @@ enum MainMemberEnum: String {
     //case match = "賽事"
     case bank = "銀行帳號"
     case delete = "刪除帳號"
+    case refresh = "重新整理"
     
-    static let allValues: [MainMemberEnum] = [info, order, like, join, manager, bank, delete]
+    static let allValues: [MainMemberEnum] = [info, order, like, join, manager, bank, delete, refresh]
     static func chineseGetEnum(text: String)-> MainMemberEnum {
         switch text {
         case "會員資料": return .info
@@ -746,6 +749,7 @@ enum MainMemberEnum: String {
         //case "賽事": return .match
         case "銀行帳號": return .bank
         case "刪除帳號": return .delete
+        case "重新整理": return .refresh
         default: return .info
         }
     }
@@ -760,6 +764,7 @@ enum MainMemberEnum: String {
         //case .match: return "match_svg"
         case .bank: return "bank_account_svg"
         case .delete: return "account_delete_svg"
+        case .refresh: return "refresh_svg"
         }
     }
 }

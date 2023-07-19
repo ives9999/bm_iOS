@@ -1049,36 +1049,51 @@ enum SIGNUP_STATUS: String {
 
 enum MEMBER_SUBSCRIPTION_KIND: String {
     
+    case diamond = "鑽石"
+    case white_gold = "白金"
     case gold = "金牌"
     case silver = "銀牌"
     case copper = "銅牌"
     case steal = "鐵牌"
+    case normal = "基本"
     
     func lottery() -> Int {
         switch self {
-        case .gold:
-            return 3
-        case .silver:
-            return 2
-        case .copper:
-            return 1
-        case .steal:
+        case .normal:
             return 0
+        case .steal:
+            return 1
+        case .copper:
+            return 2
+        case .silver:
+            return 3
+        case .gold:
+            return 4
+        case .white_gold:
+            return 5
+        case .diamond:
+            return 6
         }
     }
     
     static func stringToEnum(_ enumString: String) -> MEMBER_SUBSCRIPTION_KIND {
         switch enumString {
-        case "gold":
-            return .gold
-        case "silver":
-            return .silver
-        case "copper":
-            return .copper
+        case "normal":
+            return .normal
         case "steal":
             return .steal
+        case "copper":
+            return .copper
+        case "silver":
+            return .silver
+        case "gold":
+            return .gold
+        case "white_gold":
+            return .white_gold
+        case "diamond":
+            return .diamond
         default:
-            return .steal
+            return .normal
         }
     }
     

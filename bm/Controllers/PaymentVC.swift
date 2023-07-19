@@ -131,6 +131,11 @@ class PaymentVC: MyTableVC {
             if let creditPayment: CreatePaymentCallbackState = state as? CreatePaymentCallbackState {
                 
                 if let order = creditPayment.OrderInfo {
+                    
+                    //MerchantTradeNo就是我方的order_no
+//                    if let tmp = order.MerchantTradeNo {
+//                        self.merchantTradeNo = tmp
+//                    }
                     if let tmp = order.TradeNo {
                         self.trade_no = tmp
                     }
