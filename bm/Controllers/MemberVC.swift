@@ -125,6 +125,11 @@ class MemberVC: BaseViewController {
         
         anchor()
         
+        
+        let levelGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(levelClickListener(_:)))
+        levelRightContainer.addGestureRecognizer(levelGR)
+        levelIconText.addGestureRecognizer(levelGR)
+        
         refresh()
     }
     
@@ -449,6 +454,10 @@ class MemberVC: BaseViewController {
                 toMemberItem(mainMemberEnum)
             }
         }
+    }
+    
+    @objc func levelClickListener(_ sender: UIGestureRecognizer) {
+        toMemberSubscriptionLog()
     }
 }
 
