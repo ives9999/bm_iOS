@@ -1055,11 +1055,11 @@ enum MEMBER_SUBSCRIPTION_KIND: String {
     case silver = "銀牌"
     case copper = "銅牌"
     case steal = "鐵牌"
-    case normal = "基本"
+    case basic = "基本"
     
     func lottery() -> Int {
         switch self {
-        case .normal:
+        case .basic:
             return 0
         case .steal:
             return 1
@@ -1078,8 +1078,8 @@ enum MEMBER_SUBSCRIPTION_KIND: String {
     
     static func stringToEnum(_ enumString: String) -> MEMBER_SUBSCRIPTION_KIND {
         switch enumString {
-        case "normal":
-            return .normal
+        case "basic":
+            return .basic
         case "steal":
             return .steal
         case "copper":
@@ -1093,7 +1093,7 @@ enum MEMBER_SUBSCRIPTION_KIND: String {
         case "diamond":
             return .diamond
         default:
-            return .normal
+            return .basic
         }
     }
     

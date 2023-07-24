@@ -132,7 +132,7 @@ class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubs
         
         self.contentView.addSubview(dateLbl)
         dateLbl.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
             make.centerY.equalToSuperview()
         }
     }

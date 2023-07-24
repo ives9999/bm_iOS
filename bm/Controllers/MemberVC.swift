@@ -459,7 +459,7 @@ class MemberVC: BaseViewController {
     }
     
     @objc func levelClickListener(_ sender: UIGestureRecognizer) {
-        toMemberSubscriptionLog()
+        toMemberSubscriptionKind()
     }
 }
 
@@ -764,7 +764,7 @@ enum MainMemberEnum: String {
         //case .match: return "match_svg"
         case .bank: return "bank_account_svg"
         case .delete: return "account_delete_svg"
-        case .refresh: return "refresh_svg"
+        case .refresh: return "refresh_g_svg"
         }
     }
 }

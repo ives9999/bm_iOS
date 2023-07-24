@@ -69,6 +69,34 @@ class MemberSubscriptionKindVC: BaseViewController {
     override func submitBtnPressed() {
         toMemberSubscriptionLog()
     }
+    
+    override func threeBtnPressed() {
+        warning(msg: "是否真的要退訂？", closeButtonTitle: "取消", buttonTitle: "確定") {
+            Global.instance.addSpinner(superView: self.view)
+            MemberService.instance.unSubscription { success in
+                Global.instance.removeSpinner(superView: self.view)
+                self.jsonData = MemberService.instance.jsonData
+                print(self.jsonData?.prettyPrintedJSONString)
+                
+                do {
+                    if (self.jsonData != nil) {
+                        let table: OrderUpdateResTable = try JSONDecoder().decode(OrderUpdateResTable.self, from: self.jsonData!)
+                        if (!table.success) {
+                            self.warning(table.msg)
+                        } else {
+                            self.info("已經完成退訂")
+                        }
+                    } else {
+                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                    }
+                } catch {
+                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                    self.warning(self.msg)
+                    print(error)
+                }
+            }
+        }
+    }
 }
 
 class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSubscriptionKindVC> {
@@ -83,6 +111,15 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
     }()
     
     let nameLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_WHITE)
+        view.setTextGeneral()
+        view.text = "xxx"
+        
+        return view
+    }()
+    
+    let lotteryLbl: SuperLabel = {
         let view = SuperLabel()
         view.textColor = UIColor(MY_WHITE)
         view.setTextGeneral()
@@ -137,6 +174,12 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
             make.centerY.equalToSuperview()
         }
         
+        self.contentView.addSubview(lotteryLbl)
+        lotteryLbl.snp.makeConstraints { make in
+            make.left.equalTo(nameLbl.snp.right).offset(20)
+            make.centerY.equalToSuperview()
+        }
+        
         self.contentView.addSubview(priceLbl)
         priceLbl.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(20)
@@ -150,6 +193,7 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
         
         noLbl.text = String(item!.no) + "."
         nameLbl.text = item?.name
+        lotteryLbl.text = "每次開箱球拍券：\(item!.lottery)張"
         priceLbl.text = "NT$: " + String(item!.price) + " 元/月"
     }
 }

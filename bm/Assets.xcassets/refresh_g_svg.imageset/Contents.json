@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "refresh_g_svg.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
