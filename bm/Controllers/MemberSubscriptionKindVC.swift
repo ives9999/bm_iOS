@@ -52,9 +52,27 @@ class MemberSubscriptionKindVC: BaseViewController {
         return row.eng_name == Member.instance.subscription ? true : false
     }
     
+    //1.如果按下原本訂閱的選項，不動作
+    //2.如果已經有訂閱需要先退訂
+    //3.如果按下「基本」表示要退訂
     override func didSelect<U>(item: U, at indexPath: IndexPath) {
         
-        let _item: MemberSubscriptionKindTable = item as! MemberSubscriptionKindTable
+        guard let _item = item as? MemberSubscriptionKindTable else { return }
+        
+        if _item.eng_name == Member.instance.subscription {
+            return
+        }
+        
+        if MEMBER_SUBSCRIPTION_KIND.stringToEnum(_item.eng_name) == MEMBER_SUBSCRIPTION_KIND.basic {
+            threeBtnPressed()
+            return
+        }
+        
+        if Member.instance.subscription != "basic" {
+            warning("您已經有訂閱，如果要更改，請先執行「退訂」，再重新訂閱，謝謝")
+            return
+        }
+        
         toMemberScriptionPay(name: _item.name, price: _item.price, kind: _item.eng_name)
     }
     
@@ -76,7 +94,7 @@ class MemberSubscriptionKindVC: BaseViewController {
             MemberService.instance.unSubscription { success in
                 Global.instance.removeSpinner(superView: self.view)
                 self.jsonData = MemberService.instance.jsonData
-                print(self.jsonData?.prettyPrintedJSONString)
+                //print(self.jsonData?.prettyPrintedJSONString)
                 
                 do {
                     if (self.jsonData != nil) {
