@@ -1062,17 +1062,36 @@ enum MEMBER_SUBSCRIPTION_KIND: String {
         case .basic:
             return 0
         case .steal:
-            return 1
+            return 0
         case .copper:
-            return 2
+            return 1
         case .silver:
-            return 3
+            return 2
         case .gold:
-            return 4
+            return 3
         case .white_gold:
-            return 5
+            return 7
         case .diamond:
-            return 6
+            return 12
+        }
+    }
+    
+    func enumToEng() -> String {
+        switch self {
+        case .basic:
+            return "basic"
+        case .steal:
+            return "steal"
+        case .copper:
+            return "copper"
+        case .silver:
+            return "steal"
+        case .gold:
+            return "gold"
+        case .white_gold:
+            return "white_gold"
+        case .diamond:
+            return "diamond"
         }
     }
     

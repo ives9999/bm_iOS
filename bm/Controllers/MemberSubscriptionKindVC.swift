@@ -59,21 +59,24 @@ class MemberSubscriptionKindVC: BaseViewController {
         
         guard let _item = item as? MemberSubscriptionKindTable else { return }
         
-        if _item.eng_name == Member.instance.subscription {
+        let kind: MEMBER_SUBSCRIPTION_KIND = MEMBER_SUBSCRIPTION_KIND.stringToEnum(_item.eng_name)
+        
+        if kind == MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription) {
             return
         }
         
-        if MEMBER_SUBSCRIPTION_KIND.stringToEnum(_item.eng_name) == MEMBER_SUBSCRIPTION_KIND.basic {
+        if kind == MEMBER_SUBSCRIPTION_KIND.basic {
             threeBtnPressed()
             return
         }
         
-        if Member.instance.subscription != "basic" {
+        if MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription) != MEMBER_SUBSCRIPTION_KIND.basic {
             warning("您已經有訂閱，如果要更改，請先執行「退訂」，再重新訂閱，謝謝")
             return
         }
         
-        toMemberScriptionPay(name: _item.name, price: _item.price, kind: _item.eng_name)
+        //toMemberScriptionPay(name: _item.name, price: _item.price, kind: _item.eng_name)
+        subscription(kind)
     }
     
     override func setupBottomThreeView() {
@@ -113,6 +116,43 @@ class MemberSubscriptionKindVC: BaseViewController {
                     print(error)
                 }
             }
+        }
+    }
+    
+    func subscription(_ kind: MEMBER_SUBSCRIPTION_KIND) {
+        
+        Global.instance.addSpinner(superView: self.view)
+        
+        MemberService.instance.subscription(kind: kind.enumToEng()) { Success in
+            Global.instance.removeSpinner(superView: self.view)
+            
+            self.jsonData = MemberService.instance.jsonData
+            //print(self.jsonData?.prettyPrintedJSONString)
+            
+            do {
+                if (self.jsonData != nil) {
+                    let table: OrderUpdateResTable = try JSONDecoder().decode(OrderUpdateResTable.self, from: self.jsonData!)
+                    if (!table.success) {
+                        self.warning(table.msg)
+                    } else {
+                        let orderTable: OrderTable? = table.model
+                        if (orderTable != nil) {
+                            let ecpay_token: String = orderTable!.ecpay_token
+                            let ecpay_token_ExpireDate: String = orderTable!.ecpay_token_ExpireDate
+                            self.info(msg: "訂閱已經成立，是否前往付款？", showCloseButton: true, buttonTitle: "付款") {
+                                self.toPayment(order_token: orderTable!.token, ecpay_token: ecpay_token, tokenExpireDate: ecpay_token_ExpireDate)
+                            }
+                        }
+                    }
+                } else {
+                    self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                }
+            } catch {
+                self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                self.warning(self.msg)
+                print(error)
+            }
+            
         }
     }
 }
