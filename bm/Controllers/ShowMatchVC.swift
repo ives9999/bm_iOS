@@ -362,6 +362,11 @@ class ShowMatchVC: BaseViewController {
                     warning("已超過報名時間，無法報名")
                 }
             }
+            
+            if item.signup_count >= item.limit {
+                canSignup = false
+                warning("已超過報名組數，無法報名")
+            }
         }
         
         if canSignup {
@@ -467,10 +472,13 @@ extension ShowMatchVC: UITableViewDelegate, UITableViewDataSource {
         } else if tableView == signupTableView {
             let cell: MatchGroupSignupCell = tableView.dequeueReusableCell(withIdentifier: "MatchGroupSignupCell", for: indexPath) as! MatchGroupSignupCell
             
+            cell.signupStartShow = table!.signup_start_show
+            cell.signupEndShow = table!.signup_end_show
             cell.myDelegate = self
             let item: MatchGroupTable = table!.matchGroups[indexPath.row]
             item.no = indexPath.row + 1
             cell.item = item
+            
             
             return cell
         }
@@ -486,6 +494,9 @@ extension ShowMatchVC: ShowTab2Delegate {
 }
 
 class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
+    
+    var signupStartShow: String = ""
+    var signupEndShow: String = ""
     
     let noLbl: SuperLabel = {
         let view = SuperLabel()
@@ -538,6 +549,22 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
         let view = IconTextText2()
         view.setIcon("member2_svg")
         view.setTitle("限制組數")
+        return view
+    }()
+    
+    let signupStartITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("calendar_start_svg")
+        view.setTitle("報名開始時間")
+        
+        return view
+    }()
+    
+    let signupEndITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("calendar_end_svg")
+        view.setTitle("報明結束時間")
+        
         return view
     }()
     
@@ -634,21 +661,21 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
             limitITT.snp.makeConstraints { make in
                 make.top.equalTo(signupNumberITT.snp.bottom).offset(12)
                 make.left.equalToSuperview()
-                make.bottom.equalToSuperview().offset(-12)
             }
         
-//        let view2: UIView = UIView()
-//        view2.backgroundColor = UIColor.gray
-//        self.contentView.addSubview(view2)
-//        view2.snp.makeConstraints { make in
-//            make.top.equalTo(mainContainerView.snp.bottom).offset(0)
-//            make.left.equalToSuperview().offset(20)
-//            make.right.equalToSuperview().offset(-20)
-//            //make.centerY.equalToSuperview()
-//            make.height.equalTo(40)
-//            //make.width.equalTo(160)
-//            make.bottom.equalToSuperview().offset(-1)
-//        }
+            mainContainerView.addSubview(signupStartITT)
+            signupStartITT.snp.makeConstraints { make in
+                make.top.equalTo(limitITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+            }
+            
+            mainContainerView.addSubview(signupEndITT)
+            signupEndITT.snp.makeConstraints { make in
+                make.top.equalTo(signupStartITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+                make.bottom.equalToSuperview().offset(-12)
+            }
+
 
         self.contentView.addSubview(showButton2)
         showButton2.snp.makeConstraints { make in
@@ -675,9 +702,11 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
             self.noLbl.text = "\(item!.no.toTwoString())."
             self.priceLbl.text = "NT$\(item!.price)元"
             self.nameLbl.text = item!.name
-            self.numberITT.setShow("人數：\(item!.number)人")
-            self.signupNumberITT.setShow("報名組數：\(item!.signup_count)組")
-            self.limitITT.setShow("限制組數：\(item!.limit)組")
+            self.numberITT.setShow("\(item!.number)人")
+            self.signupNumberITT.setShow("\(item!.signup_count)組")
+            self.limitITT.setShow("\(item!.limit)組")
+            self.signupStartITT.setShow(signupStartShow)
+            self.signupEndITT.setShow(signupEndShow)
             showButton2.idx = item!.no - 1
         }
         

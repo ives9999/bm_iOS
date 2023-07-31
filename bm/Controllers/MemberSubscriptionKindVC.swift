@@ -61,21 +61,25 @@ class MemberSubscriptionKindVC: BaseViewController {
         
         let kind: MEMBER_SUBSCRIPTION_KIND = MEMBER_SUBSCRIPTION_KIND.stringToEnum(_item.eng_name)
         
+        //如果點選原來訂閱的選項，不做任何動作
         if kind == MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription) {
             return
         }
         
+        //如果點選基本選項，執行退訂
         if kind == MEMBER_SUBSCRIPTION_KIND.basic {
             threeBtnPressed()
             return
         }
         
+        //如果點選其他選項，警告要先退訂
         if MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription) != MEMBER_SUBSCRIPTION_KIND.basic {
             warning("您已經有訂閱，如果要更改，請先執行「退訂」，再重新訂閱，謝謝")
             return
         }
         
         //toMemberScriptionPay(name: _item.name, price: _item.price, kind: _item.eng_name)
+        
         subscription(kind)
     }
     
@@ -92,28 +96,34 @@ class MemberSubscriptionKindVC: BaseViewController {
     }
     
     override func threeBtnPressed() {
-        warning(msg: "是否真的要退訂？", closeButtonTitle: "取消", buttonTitle: "確定") {
-            Global.instance.addSpinner(superView: self.view)
-            MemberService.instance.unSubscription { success in
-                Global.instance.removeSpinner(superView: self.view)
-                self.jsonData = MemberService.instance.jsonData
-                //print(self.jsonData?.prettyPrintedJSONString)
-                
-                do {
-                    if (self.jsonData != nil) {
-                        let table: OrderUpdateResTable = try JSONDecoder().decode(OrderUpdateResTable.self, from: self.jsonData!)
-                        if (!table.success) {
-                            self.warning(table.msg)
+        
+        if MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription) == MEMBER_SUBSCRIPTION_KIND.basic {
+            warning("基本會員無法退訂")
+        } else {
+            
+            warning(msg: "是否真的要退訂？", closeButtonTitle: "取消", buttonTitle: "確定") {
+                Global.instance.addSpinner(superView: self.view)
+                MemberService.instance.unSubscription { success in
+                    Global.instance.removeSpinner(superView: self.view)
+                    self.jsonData = MemberService.instance.jsonData
+                    //print(self.jsonData?.prettyPrintedJSONString)
+                    
+                    do {
+                        if (self.jsonData != nil) {
+                            let table: OrderUpdateResTable = try JSONDecoder().decode(OrderUpdateResTable.self, from: self.jsonData!)
+                            if (!table.success) {
+                                self.warning(table.msg)
+                            } else {
+                                self.info("已經完成退訂")
+                            }
                         } else {
-                            self.info("已經完成退訂")
+                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
                         }
-                    } else {
-                        self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                        self.warning(self.msg)
+                        print(error)
                     }
-                } catch {
-                    self.msg = "解析JSON字串時，得到空值，請洽管理員"
-                    self.warning(self.msg)
-                    print(error)
                 }
             }
         }
