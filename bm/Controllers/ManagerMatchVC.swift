@@ -104,7 +104,7 @@ class ManagerMatchVC: BaseViewController {
             }
             
             if !isInterval {
-                warning("已經超墮報名截止時間，無法刪除隊伍")
+                warning("已經超過報名截止時間，無法刪除隊伍")
             }
             
             if isInterval && !isPay {
