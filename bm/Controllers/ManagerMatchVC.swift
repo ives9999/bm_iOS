@@ -127,17 +127,35 @@ class ManagerMatchVC: BaseViewController {
     
     func cellPay(row: Table) {
         if let _row: MatchTeamTable = row as? MatchTeamTable {
+            
+            //已經付款
             if _row.orderTable != nil {
                 toPayment(order_token: _row.orderTable!.token, source: "match")
+            //如果還沒付款
             } else {
-                if _row.matchGroupTable != nil && _row.matchGroupTable!.productTable != nil && _row.matchGroupTable!.productPriceTable != nil {
-                    
-                    self.toOrder(
-                        login: { vc in vc.toLogin() },
-                        register: { vc in vc.toRegister() },
-                        product_token: _row.matchGroupTable!.productTable!.token,
-                        product_price_id: _row.matchGroupTable!.productPriceTable!.id
-                    )
+                
+                guard let matchTable: MatchTable = _row.matchTable else { return }
+                
+                var isInterval: Bool = false
+                if let signupStartDate: Date = _row.matchTable!.signup_start.toDateTime(), let signupEndDate: Date = _row.matchTable!.signup_end.toDateTime() {
+                    let now: Date = Date()
+                    if now.isGreaterThan(signupStartDate) && now.isSmallerThan(signupEndDate) {
+                        isInterval = true
+                    }
+                }
+                
+                if isInterval {
+                    if _row.matchGroupTable != nil && _row.matchGroupTable!.productTable != nil && _row.matchGroupTable!.productPriceTable != nil {
+                        
+                        self.toOrder(
+                            login: { vc in vc.toLogin() },
+                            register: { vc in vc.toRegister() },
+                            product_token: _row.matchGroupTable!.productTable!.token,
+                            product_price_id: _row.matchGroupTable!.productPriceTable!.id
+                        )
+                    }
+                } else {
+                    warning("已經超過報名期限，無法付款，您的報名沒有成功")
                 }
             }
         }
