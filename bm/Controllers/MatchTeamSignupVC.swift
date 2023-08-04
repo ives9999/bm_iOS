@@ -205,28 +205,30 @@ class MatchTeamSignupVC: BaseViewController {
                     c["token"] = vc.playerTable!.token
                 }
                 
-                var selected_attributes: [String] = [String]()
-                var gift_id: String?
-                var match_gift_id: String?
-                
-                //d is player gift param
-                var d: [String: String] = [String: String]()
-                for giftAttribute: [String: String] in vc.giftAttributes {
-                    let value: String = ProductAttributeTable.instance.composeProductAttribute(attributes: giftAttribute)
-                    selected_attributes.append(value)
+                if vc.giftTables.count > 0 {
+                    var selected_attributes: [String] = [String]()
+                    var gift_id: String?
+                    var match_gift_id: String?
                     
-                    if giftAttribute.keyExist(key: "id") {
-                        gift_id = giftAttribute["id"]
-                        d["id"] = gift_id
+                    //d is player gift param
+                    var d: [String: String] = [String: String]()
+                    for giftAttribute: [String: String] in vc.giftAttributes {
+                        let value: String = ProductAttributeTable.instance.composeProductAttribute(attributes: giftAttribute)
+                        selected_attributes.append(value)
+                        
+                        if giftAttribute.keyExist(key: "id") {
+                            gift_id = giftAttribute["id"]
+                            d["id"] = gift_id
+                        }
+                        
+                        if giftAttribute.keyExist(key: "match_gift_id") {
+                            match_gift_id = giftAttribute["match_gift_id"]
+                            d["match_gift_id"] = match_gift_id
+                        }
                     }
-                    
-                    if giftAttribute.keyExist(key: "match_gift_id") {
-                        match_gift_id = giftAttribute["match_gift_id"]
-                        d["match_gift_id"] = match_gift_id
-                    }
+                    d["attributes"] = selected_attributes.joined(separator: "|")
+                    c["gift"] = d
                 }
-                d["attributes"] = selected_attributes.joined(separator: "|")
-                c["gift"] = d
                 
                 b.append(c)
             }
@@ -448,11 +450,11 @@ class MatchTeamEditVC: BaseViewController {
             managerEmailTxt2.setValue(team!.manager_email)
             managerLineTxt2.setValue(team!.manager_line)
         } else {
-            teamNameTxt2.setValue("測試隊")
-            managerNameTxt2.setValue("王大明")
-            managerMobileTxt2.setValue("0934254387")
-            managerEmailTxt2.setValue("david@gmail.com")
-            managerLineTxt2.setValue("davidline")
+//            teamNameTxt2.setValue("測試隊")
+//            managerNameTxt2.setValue("王大明")
+//            managerMobileTxt2.setValue("0934254387")
+//            managerEmailTxt2.setValue("david@gmail.com")
+//            managerLineTxt2.setValue("davidline")
         }
         
         fields.append(teamNameTxt2)
@@ -655,11 +657,13 @@ class MatchPlayerEditVC: BaseViewController {
                 make.height.equalTo(1)
             }
             
+        if self.giftTables.count > 0 {
             formContainer.addSubview(giftLbl)
             giftLbl.snp.makeConstraints { make in
                 make.top.equalTo(hr.snp.bottom).offset(topPadding)
                 make.left.equalToSuperview().offset(leftPadding)
             }
+        }
         
         //下面回圈中要對齊的最後一個view
         var lastView: UIView = giftLbl
@@ -679,59 +683,61 @@ class MatchPlayerEditVC: BaseViewController {
             }
         }
         
-        for (i, attribute) in self.giftTables[0].productTable!.attributes.enumerated() {
-            
-            //setup attribute label
-            let attributeLbl: SuperLabel = {
-                let view: SuperLabel = SuperLabel()
-                view.setTextBold()
-                view.text = "屬性："
+        if self.giftTables.count > 0 {
+            for (i, attribute) in self.giftTables[0].productTable!.attributes.enumerated() {
                 
-                return view
-            }()
-            
-            formContainer.addSubview(attributeLbl)
-            attributeLbl.text = attribute.name
-            attributeLbl.snp.makeConstraints { make in
-                make.top.equalTo(lastView.snp.bottom).offset(topPadding)
-                make.left.equalToSuperview().offset(leftPadding)
-                //make.bottom.equalToSuperview().offset(-100)
+                //setup attribute label
+                let attributeLbl: SuperLabel = {
+                    let view: SuperLabel = SuperLabel()
+                    view.setTextBold()
+                    view.text = "屬性："
+                    
+                    return view
+                }()
+                
+                formContainer.addSubview(attributeLbl)
+                attributeLbl.text = attribute.name
+                attributeLbl.snp.makeConstraints { make in
+                    make.top.equalTo(lastView.snp.bottom).offset(topPadding)
+                    make.left.equalToSuperview().offset(leftPadding)
+                    //make.bottom.equalToSuperview().offset(-100)
+                }
+                
+                //產生贈品屬性的tag
+                var selected: String = ""
+                let isExist: Bool = attributes.indices.contains(i)
+                if isExist {
+                    selected = attributes[i]["value"] ?? ""
+                }
+                
+                let tagContainer: AttributesView = AttributesView(name: attribute.name, alias: attribute.alias, attribute: attribute.attribute, selected: selected)
+                //屬性欄的高度，從tagContainer來取得
+                let h: Int = tagContainer.getHeight()
+                
+                formContainer.addSubview(tagContainer)
+                //tagContainer.backgroundColor = UIColor.red
+                tagContainer.snp.makeConstraints { make in
+                    make.top.equalTo(attributeLbl.snp.bottom).offset(topPadding)
+                    make.left.equalToSuperview().offset(leftPadding)
+                    make.right.equalToSuperview().offset(rightPadding)
+                    make.height.equalTo(h)
+                }
+                tagContainer.delegate = self
+                tagContainer.setAttributes()
+                lastView = tagContainer
+                
+                var tmp: [String: String] = [
+                    "name": attribute.name,
+                    "alias": attribute.alias,
+                    "value": selected
+                ]
+                if match_player_gift_id > 0 {
+                    tmp["id"] = String(match_player_gift_id)
+                }
+                
+                tmp["match_gift_id"] = (match_gift_id > 0) ? String(match_gift_id) : String(giftTables[0].id)
+                giftAttributes.append(tmp)
             }
-            
-            //產生贈品屬性的tag
-            var selected: String = ""
-            let isExist: Bool = attributes.indices.contains(i)
-            if isExist {
-                selected = attributes[i]["value"] ?? ""
-            }
-            
-            let tagContainer: AttributesView = AttributesView(name: attribute.name, alias: attribute.alias, attribute: attribute.attribute, selected: selected)
-            //屬性欄的高度，從tagContainer來取得
-            let h: Int = tagContainer.getHeight()
-            
-            formContainer.addSubview(tagContainer)
-            //tagContainer.backgroundColor = UIColor.red
-            tagContainer.snp.makeConstraints { make in
-                make.top.equalTo(attributeLbl.snp.bottom).offset(topPadding)
-                make.left.equalToSuperview().offset(leftPadding)
-                make.right.equalToSuperview().offset(rightPadding)
-                make.height.equalTo(h)
-            }
-            tagContainer.delegate = self
-            tagContainer.setAttributes()
-            lastView = tagContainer
-            
-            var tmp: [String: String] = [
-                "name": attribute.name,
-                "alias": attribute.alias,
-                "value": selected
-            ]
-            if match_player_gift_id > 0 {
-                tmp["id"] = String(match_player_gift_id)
-            }
-            
-            tmp["match_gift_id"] = (match_gift_id > 0) ? String(match_gift_id) : String(giftTables[0].id)
-            giftAttributes.append(tmp)
         }
         //print(giftAttributes)
     }
@@ -772,11 +778,11 @@ class MatchPlayerEditVC: BaseViewController {
             lineTxt2.setValue(playerTable!.line)
             ageTxt2.setValue(String(playerTable!.age))
         } else {
-            nameTxt2.setValue("人員\(idx)")
-            mobileTxt2.setValue("0923487384")
-            emailTxt2.setValue("david@gmail.com")
-            lineTxt2.setValue("davidline")
-            ageTxt2.setValue("35")
+//            nameTxt2.setValue("人員\(idx)")
+//            mobileTxt2.setValue("0923487384")
+//            emailTxt2.setValue("david@gmail.com")
+//            lineTxt2.setValue("davidline")
+//            ageTxt2.setValue("35")
         }
         
         fields.append(nameTxt2)

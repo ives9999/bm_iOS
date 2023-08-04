@@ -822,7 +822,8 @@ extension ShowCourseVC: UITableViewDelegate, UITableViewDataSource {
                         getMemberOne(member_token: signup_normal_model.member_token)
                         
                     } else {
-                        let signup_standby_model = myTable!.signupStandbyTables[indexPath.row]
+                        let idx: Int = indexPath.row - myTable!.signupNormalTables.count
+                        let signup_standby_model = myTable!.signupStandbyTables[idx]
                         getMemberOne(member_token: signup_standby_model.member_token)
                     }
                 } else {
