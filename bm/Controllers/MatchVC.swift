@@ -286,6 +286,8 @@ class MatchCell: BaseCell<MatchTable, MatchVC> {
             arenaITT.setShow(item!.arena_name)
             showButton2.idx = item!.no - 1
             signupButton2.idx = item!.no - 1
+            
+            signupButton2.setPrice(min: item!.priceMin, max: item!.priceMax)
         }
         
         //createdAtLbl.text = item?.created_at.noSec()

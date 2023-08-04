@@ -36,6 +36,8 @@ class MatchTable: Table {
     var arenaTable: ArenaTable? = nil
     var matchContactTable: MatchContactTable? = nil
     var matchGroups: [MatchGroupTable] = [MatchGroupTable]()
+    var priceMin: Int = 100000
+    var priceMax: Int = 100000
     
     var match_start_show: String = ""
     var match_end_show: String = ""
@@ -62,6 +64,8 @@ class MatchTable: Table {
         case arenaTable = "arena"
         case matchContactTable = "match_contact"
         case matchGroups = "match_groups"
+        case priceMin
+        case priceMax
     }
     
     required init(from decoder: Decoder) throws {
@@ -79,6 +83,8 @@ class MatchTable: Table {
         do {matchContactTable = try container.decode(MatchContactTable.self, forKey: .matchContactTable)}catch{matchContactTable = nil}
         do{matchGroups = try container.decode([MatchGroupTable].self, forKey: .matchGroups)}catch{matchGroups = [MatchGroupTable]()}
         arena_city_id = try container.decodeIfPresent(Int.self, forKey: .arena_city_id) ?? 0
+        priceMin = try container.decodeIfPresent(Int.self, forKey: .priceMin) ?? 100000
+        priceMax = try container.decodeIfPresent(Int.self, forKey: .priceMax) ?? 100000
     }
     
     override func filterRow() {

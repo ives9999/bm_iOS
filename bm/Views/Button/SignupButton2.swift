@@ -10,6 +10,9 @@ import UIKit
 
 class SignupButton2: UIView {
     
+    var priceMin: Int = 0
+    var priceMax: Int = 0
+    
     let priceLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
         view.setTextGeneral()
@@ -70,6 +73,14 @@ class SignupButton2: UIView {
             make.centerY.equalToSuperview()
             make.width.equalTo(90)
             make.height.equalTo(28)
+        }
+    }
+    
+    func setPrice(min: Int, max: Int) {
+        if min == max {
+            priceLbl.text = "NT$ \(min.formattedWithSeparator)"
+        } else {
+            priceLbl.text = "NT$ \(min.formattedWithSeparator)~\(max.formattedWithSeparator)"
         }
     }
     
