@@ -450,11 +450,11 @@ class MatchTeamEditVC: BaseViewController {
             managerEmailTxt2.setValue(team!.manager_email)
             managerLineTxt2.setValue(team!.manager_line)
         } else {
-//            teamNameTxt2.setValue("測試隊")
-//            managerNameTxt2.setValue("王大明")
-//            managerMobileTxt2.setValue("0934254387")
-//            managerEmailTxt2.setValue("david@gmail.com")
-//            managerLineTxt2.setValue("davidline")
+            //teamNameTxt2.setValue("測試隊")
+            managerNameTxt2.setValue(Member.instance.name)
+            managerMobileTxt2.setValue(Member.instance.mobile)
+            managerEmailTxt2.setValue(Member.instance.email)
+            managerLineTxt2.setValue(Member.instance.line)
         }
         
         fields.append(teamNameTxt2)

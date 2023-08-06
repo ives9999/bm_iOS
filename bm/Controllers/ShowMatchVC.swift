@@ -346,31 +346,36 @@ class ShowMatchVC: BaseViewController {
     }
     
     func signup(item: MatchGroupTable) {
-        //print(item)
         
-        var canSignup: Bool = true
-        if table != nil {
-            if let signupStartDate: Date = table!.signup_start.toDateTime(), let signupEndDate: Date = table!.signup_end.toDateTime() {
-                let now: Date = Date()
-                if now.isSmallerThan(signupStartDate) {
-                    canSignup = false
-                    warning("還沒到報名時間，無法報名")
+        if !Member.instance.isLoggedIn {
+            warning(msg: "請先登入", closeButtonTitle: "取消", buttonTitle: "登入") {
+                self.toLogin()
+            }
+        } else {
+            var canSignup: Bool = true
+            if table != nil {
+                if let signupStartDate: Date = table!.signup_start.toDateTime(), let signupEndDate: Date = table!.signup_end.toDateTime() {
+                    let now: Date = Date()
+                    if now.isSmallerThan(signupStartDate) {
+                        canSignup = false
+                        warning("還沒到報名時間，無法報名")
+                    }
+                    
+                    if now.isGreaterThan(signupEndDate) {
+                        canSignup = false
+                        warning("已超過報名時間，無法報名")
+                    }
                 }
                 
-                if now.isGreaterThan(signupEndDate) {
+                if item.signup_count >= item.limit {
                     canSignup = false
-                    warning("已超過報名時間，無法報名")
+                    warning("已超過報名組數，無法報名")
                 }
             }
             
-            if item.signup_count >= item.limit {
-                canSignup = false
-                warning("已超過報名組數，無法報名")
+            if canSignup {
+                toMatchTeamSignup(match_group_token: item.token)
             }
-        }
-        
-        if canSignup {
-            toMatchTeamSignup(match_group_token: item.token)
         }
     }
 }
@@ -700,7 +705,7 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
 
         if item != nil {
             self.noLbl.text = "\(item!.no.toTwoString())."
-            self.priceLbl.text = "NT$\(item!.price)元"
+            self.priceLbl.text = "NT$ \(item!.price.formattedWithSeparator)元"
             self.nameLbl.text = item!.name
             self.numberITT.setShow("\(item!.number)人")
             self.signupNumberITT.setShow("\(item!.signup_count)組")
