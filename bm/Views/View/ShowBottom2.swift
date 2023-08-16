@@ -174,6 +174,10 @@ class ShowBottom2: UIView {
         self.submitBtn.setTitle(title)
     }
     
+    func setCancelBtnTitle(_ title: String) {
+        self.cancelBtn.setTitle(title)
+    }
+    
     func changeSubmitToCancelBtn() {
         self.submitBtn.backgroundColor = UIColor(MY_BLACK)
         self.submitBtn.layer.borderWidth = 1

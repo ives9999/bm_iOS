@@ -10,7 +10,37 @@ import Foundation
 
 class MemberSubscriptionKindVC: BaseViewController {
     
-    lazy var tableView: MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable, MemberSubscriptionKindVC> = {
+    var showTop2: ShowTop2?
+    var showBottom2: ShowBottom2?
+    
+    let titleLbl = {
+        let view = SuperLabel()
+        view.setTextTitle()
+        view.text = "訂閱會員介紹"
+        
+        return view
+    }()
+    
+    let descLbl = {
+        let view = SuperLabel()
+        view.setTextGeneral()
+        view.numberOfLines = 0
+        view.text = """
+        訂閱會員將享有羽球密碼的各種優惠\n
+        1.鑽石會員享有12張開箱球拍券。\n
+        2.白金會員享有7張開箱球拍券。\n
+        3.金牌會員享有3張開箱球拍券。\n
+        4.銀牌會員享有2張開箱球拍券。\n
+        5.銅牌會員享有1張開箱球拍券。\n
+        6.鐵盤會員沒有開箱球拍券。\n
+        7.基本會員沒有開箱球拍券。\n
+        """
+        //view.setLineHeight(lineHeight: 2)
+        
+        return view
+    }()
+    
+    lazy var tableView2: MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable, MemberSubscriptionKindVC> = {
         let tableView = MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable, MemberSubscriptionKindVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer(page:), myDelegate: self)
         return tableView
     }()
@@ -21,34 +51,66 @@ class MemberSubscriptionKindVC: BaseViewController {
         
         super.viewDidLoad()
         
-        top.setTitle(title: "訂閱會員")
-        top.delegate = self
+        initTop()
+        initBottom()
+        anchor()
         
-        tableView.anchor(parent: view, top: top, bottomThreeView: bottomThreeView)
-        
-        setupBottomThreeView()
+        tableView2.anchor(parent: view, showTop: descLbl, showBottom: showBottom2!)
         
         refresh()
+    }
+    
+    func initTop() {
+        showTop2 = ShowTop2(delegate: self)
+        showTop2!.anchor(parent: self.view)
+        showTop2!.setTitle("訂閱會員")
+        showTop2!.showRefresh()
+    }
+    
+    func initBottom() {
+        showBottom2 = ShowBottom2(delegate: self)
+        self.view.addSubview(showBottom2!)
+        showBottom2!.showButton(parent: self.view, isShowSubmit: true, isShowLike: false, isShowCancel: true)
+        showBottom2!.setSubmitBtnTitle("取消訂閱")
+        showBottom2!.setCancelBtnTitle("回上一頁")
+    }
+    
+    func anchor() {
+        self.view.addSubview(titleLbl)
+        titleLbl.snp.makeConstraints { make in
+            make.top.equalTo(showTop2!.snp.bottom).offset(40)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
+        self.view.addSubview(descLbl)
+        descLbl.snp.makeConstraints { make in
+            make.top.equalTo(titleLbl.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
     }
     
     override func refresh() {
         
         page = 1
-        tableView.getDataFromServer(page: page)
+        tableView2.getDataFromServer(page: page)
     }
     
     func getDataFromServer(page: Int) {
         Global.instance.addSpinner(superView: self.view)
         
-        MemberService.instance.subscriptionKind(member_token: Member.instance.token, page: page, perPage: tableView.perPage) { (success) in
+        MemberService.instance.subscriptionKind(member_token: Member.instance.token, page: page, perPage: tableView2.perPage) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                self.rows = self.showTableView(tableView: self.tableView, jsonData: MemberService.instance.jsonData!)
+                self.rows = self.showTableView(tableView: self.tableView2, jsonData: MemberService.instance.jsonData!)
+                //self.showTop2!.setTitle("訂閱會員")
             }
         }
     }
     
     func tableViewSetSelected(row: MemberSubscriptionKindTable)-> Bool {
+        //print("\(row.eng_name) => \(Member.instance.subscription)")
         return row.eng_name == Member.instance.subscription ? true : false
     }
     
@@ -83,19 +145,23 @@ class MemberSubscriptionKindVC: BaseViewController {
         subscription(kind)
     }
     
-    override func setupBottomThreeView() {
-        bottomThreeView.delegate = self
-        bottomThreeView.submitButton.setTitle("查詢")
-        bottomThreeView.cancelButton.setTitle("回上一頁")
-        bottomThreeView.threeButton.setTitle("退訂")
-        bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
+    override func cancel() {
+        prev()
     }
     
-    override func submitBtnPressed() {
-        toMemberSubscriptionLog()
-    }
+//    override func setupBottomThreeView() {
+//        bottomThreeView.delegate = self
+//        bottomThreeView.submitButton.setTitle("查詢")
+//        bottomThreeView.cancelButton.setTitle("回上一頁")
+//        bottomThreeView.threeButton.setTitle("退訂")
+//        bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
+//    }
+//
+//    override func submitBtnPressed() {
+//        toMemberSubscriptionLog()
+//    }
     
-    override func threeBtnPressed() {
+    override func submit() {
         
         if MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription) == MEMBER_SUBSCRIPTION_KIND.basic {
             warning("基本會員無法退訂")

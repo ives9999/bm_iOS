@@ -88,6 +88,16 @@ class MyTable2VC<T: BaseCell<U, V>, U: Table, V: BaseViewController>: UITableVie
         }
     }
     
+    func anchor(parent: UIView, showTop: UIView, showBottom: UIView) {
+        
+        parent.addSubview(self)
+        self.snp.makeConstraints { make in
+            make.top.equalTo(showTop.snp.bottom).offset(20)
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(showBottom.snp.top)
+        }
+    }
+    
     func anchor(parent: UIView, showTop: ShowTop2, topConstant: Int = 0) {
         
         parent.addSubview(self)

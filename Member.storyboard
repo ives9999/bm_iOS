@@ -3,56 +3,12 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Member Subscription KindVC-->
-        <scene sceneID="mI0-Oy-eu1">
-            <objects>
-                <viewController storyboardIdentifier="toMemberSubscriptionKind" id="WB6-ll-QYz" customClass="MemberSubscriptionKindVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0Ea-gO-8VL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8jw-Ng-f1i" customClass="Top" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="48" width="414" height="64"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="CeH-8k-9TS"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dqw-ci-meZ" customClass="BottomThreeView" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="802" width="414" height="60"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="a9i-9I-D2n"/>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="j2E-MZ-vfg"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="TrA-rN-6RV"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="TrA-rN-6RV" firstAttribute="bottom" secondItem="Dqw-ci-meZ" secondAttribute="bottom" id="6Ye-Ob-djY"/>
-                            <constraint firstItem="8jw-Ng-f1i" firstAttribute="leading" secondItem="TrA-rN-6RV" secondAttribute="leading" id="Awv-rQ-qOy"/>
-                            <constraint firstItem="8jw-Ng-f1i" firstAttribute="top" secondItem="TrA-rN-6RV" secondAttribute="top" id="PP3-3y-cnv"/>
-                            <constraint firstAttribute="trailing" secondItem="Dqw-ci-meZ" secondAttribute="trailing" id="gf2-fS-IcS"/>
-                            <constraint firstItem="8jw-Ng-f1i" firstAttribute="trailing" secondItem="TrA-rN-6RV" secondAttribute="trailing" id="pyx-lH-0q4"/>
-                            <constraint firstItem="Dqw-ci-meZ" firstAttribute="leading" secondItem="TrA-rN-6RV" secondAttribute="leading" id="uLn-ih-n7h"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="bottomThreeView" destination="Dqw-ci-meZ" id="0Iq-cq-8P2"/>
-                        <outlet property="top" destination="8jw-Ng-f1i" id="uc5-ES-dfs"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hbJ-p2-svv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2487" y="-2080"/>
-        </scene>
         <!--Member Coin ListVC-->
         <scene sceneID="2fH-2N-0Dd">
             <objects>
@@ -1074,38 +1030,6 @@
             </objects>
             <point key="canvasLocation" x="-407" y="-460"/>
         </scene>
-        <!--Member Subscription LogVC-->
-        <scene sceneID="MTK-Ii-aJq">
-            <objects>
-                <viewController storyboardIdentifier="toMemberScriptionLog" id="rAp-zA-WtJ" customClass="MemberSubscriptionLogVC" customModule="bm" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZwU-tr-fXW">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEJ-ed-Vne" customClass="Top" customModule="bm" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="48" width="414" height="64"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="LoU-nm-4NH"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="oV2-2R-QZf"/>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="SEJ-ed-Vne" firstAttribute="leading" secondItem="oV2-2R-QZf" secondAttribute="leading" id="2ML-vb-BQ7"/>
-                            <constraint firstItem="SEJ-ed-Vne" firstAttribute="trailing" secondItem="oV2-2R-QZf" secondAttribute="trailing" id="S9I-jP-PRo"/>
-                            <constraint firstItem="SEJ-ed-Vne" firstAttribute="top" secondItem="oV2-2R-QZf" secondAttribute="top" id="iK2-dI-IJx"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="top" destination="SEJ-ed-Vne" id="hAV-QH-z4H"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="GKI-d6-E4u" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-329" y="205"/>
-        </scene>
         <!--Manager Signup ListVC-->
         <scene sceneID="2pY-fL-5Px">
             <objects>
@@ -1679,18 +1603,18 @@
                                                 <rect key="frame" x="16" y="165" width="382" height="280"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="管理者金鑰：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uXd-Pz-BLr" customClass="SuperLabel" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="17" width="104" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="11" width="104" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DzE-80-1OQ" customClass="SuperTextField" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="112" y="4" width="229" height="46"/>
+                                                        <rect key="frame" x="112" y="4" width="229" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="McF-pq-NPP">
-                                                        <rect key="frame" x="357" y="14.5" width="25" height="25"/>
+                                                        <rect key="frame" x="357" y="8.5" width="25" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="8h7-OA-G7u"/>
                                                             <constraint firstAttribute="width" constant="25" id="qB1-0m-gxQ"/>
@@ -1702,7 +1626,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jwT-9w-87p" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="141" y="120" width="100" height="34.5"/>
+                                                        <rect key="frame" x="141" y="108" width="100" height="34.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="100" id="4ia-V2-4M8"/>
                                                         </constraints>
@@ -1713,7 +1637,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9C-oz-mUD" customClass="SuperButton" customModule="bm" customModuleProvider="target">
-                                                        <rect key="frame" x="8" y="54" width="188" height="39"/>
+                                                        <rect key="frame" x="8" y="42" width="188" height="39"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="question" imagePlacement="leading" title="如何取得會員金鑰" titleAlignment="center">
                                                             <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage"/>
@@ -1723,7 +1647,7 @@
                                                         </connections>
                                                     </button>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="LAv-At-hEc">
-                                                        <rect key="frame" x="0.0" y="174.5" width="259" height="95.5"/>
+                                                        <rect key="frame" x="0.0" y="162.5" width="259" height="95.5"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="59F-c0-JFz" userLabel="暱稱">
                                                                 <rect key="frame" x="0.0" y="0.0" width="179" height="20.5"/>

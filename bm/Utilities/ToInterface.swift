@@ -411,16 +411,9 @@ extension BaseViewController {
     }
     
     func toMemberSubscriptionKind() {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_SUPSCRIPTION_KIND) as? MemberSubscriptionKindVC {
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_SUPSCRIPTION_KIND) as! MemberSubscriptionKindVC
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
+        let vc: MemberSubscriptionKindVC = MemberSubscriptionKindVC()
+        vc.modalPresentationStyle = .fullScreen
+        show(vc, sender: nil)
     }
     
     func toMemberSubscriptionLog() {
