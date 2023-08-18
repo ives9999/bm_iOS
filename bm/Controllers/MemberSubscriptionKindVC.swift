@@ -13,37 +13,28 @@ class MemberSubscriptionKindVC: BaseViewController {
     var showTop2: ShowTop2?
     var showBottom2: ShowBottom2?
     
-    let titleLbl = {
-        let view = SuperLabel()
-        view.setTextTitle()
-        view.text = "訂閱會員介紹"
-        
-        return view
-    }()
-    
-    let descLbl = {
-        let view = SuperLabel()
-        view.setTextGeneral()
-        view.numberOfLines = 0
-        view.text = """
-        訂閱會員將享有羽球密碼的各種優惠\n
-        1.鑽石會員享有12張開箱球拍券。\n
-        2.白金會員享有7張開箱球拍券。\n
-        3.金牌會員享有3張開箱球拍券。\n
-        4.銀牌會員享有2張開箱球拍券。\n
-        5.銅牌會員享有1張開箱球拍券。\n
-        6.鐵盤會員沒有開箱球拍券。\n
-        7.基本會員沒有開箱球拍券。\n
-        """
-        //view.setLineHeight(lineHeight: 2)
-        
-        return view
-    }()
-    
     lazy var tableView2: MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable, MemberSubscriptionKindVC> = {
         let tableView = MyTable2VC<MemberSubscriptionKindCell, MemberSubscriptionKindTable, MemberSubscriptionKindVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer(page:), myDelegate: self)
         return tableView
     }()
+    
+    lazy var tableView3: UITableView = {
+        let view: UITableView = UITableView()
+        view.backgroundColor = UIColor(MY_BLACK)
+        view.estimatedRowHeight = 44
+        view.rowHeight = UITableView.automaticDimension
+        
+        view.register(DescCell.self, forCellReuseIdentifier: "DescCell")
+        view.register(MemberSubscriptionKindCell.self, forCellReuseIdentifier: "MemberSubscriptionKindCell")
+        
+        return view
+    }()
+    
+    var items = [MemberSubscriptionKindTable]() {
+        didSet {
+            reloadData()
+        }
+    }
     
     var rows: [MemberSubscriptionKindTable] = [MemberSubscriptionKindTable]()
     
@@ -53,9 +44,10 @@ class MemberSubscriptionKindVC: BaseViewController {
         
         initTop()
         initBottom()
+        initTableView()
         anchor()
         
-        tableView2.anchor(parent: view, showTop: descLbl, showBottom: showBottom2!)
+        //tableView2.anchor(parent: view, showTop: descLbl, showBottom: showBottom2!)
         
         refresh()
     }
@@ -75,26 +67,26 @@ class MemberSubscriptionKindVC: BaseViewController {
         showBottom2!.setCancelBtnTitle("回上一頁")
     }
     
+    func initTableView() {
+        tableView3.dataSource = self
+        tableView3.delegate = self
+    }
+    
     func anchor() {
-        self.view.addSubview(titleLbl)
-        titleLbl.snp.makeConstraints { make in
-            make.top.equalTo(showTop2!.snp.bottom).offset(40)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-        }
         
-        self.view.addSubview(descLbl)
-        descLbl.snp.makeConstraints { make in
-            make.top.equalTo(titleLbl.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
+        self.view.addSubview(tableView3)
+        tableView3.snp.makeConstraints { make in
+            make.top.equalTo(showTop2!.snp.bottom)
+            make.bottom.equalTo(showBottom2!.snp.top)
+            make.left.right.equalToSuperview()
         }
     }
     
     override func refresh() {
         
         page = 1
-        tableView2.getDataFromServer(page: page)
+        getDataFromServer(page: 1)
+        //tableView2.getDataFromServer(page: page)
     }
     
     func getDataFromServer(page: Int) {
@@ -103,9 +95,61 @@ class MemberSubscriptionKindVC: BaseViewController {
         MemberService.instance.subscriptionKind(member_token: Member.instance.token, page: page, perPage: tableView2.perPage) { (success) in
             Global.instance.removeSpinner(superView: self.view)
             if (success) {
-                self.rows = self.showTableView(tableView: self.tableView2, jsonData: MemberService.instance.jsonData!)
+                
+                self.parseJSON(jsonData: MemberService.instance.jsonData)
+                //self.rows = self.showTableView(tableView: self.tableView2, jsonData: MemberService.instance.jsonData!)
                 //self.showTop2!.setTitle("訂閱會員")
             }
+        }
+    }
+    
+    func reloadData() {
+        tableView3.reloadData()
+    }
+    
+    func parseJSON(jsonData: Data?) {
+        
+        var rows: [MemberSubscriptionKindTable] = [MemberSubscriptionKindTable]()
+        do {
+            if (jsonData != nil) {
+                //print(jsonData!.prettyPrintedJSONString)
+                let tables2: Tables2 = try JSONDecoder().decode(Tables2<MemberSubscriptionKindTable>.self, from: jsonData!)
+                if (tables2.success) {
+                    if tables2.rows.count > 0 {
+                        
+                        for row in tables2.rows {
+                            row.filterRow()
+                            
+//                            if let b: Bool = self.selectedClosure?(row) {
+//                                row.selected = b
+//                            }
+                        }
+                        
+                        if (page == 1) {
+                            page = tables2.page
+                            perPage = tables2.perPage
+                            totalCount = tables2.totalCount
+                            let _totalPage: Int = totalCount / perPage
+                            totalPage = (totalCount % perPage > 0) ? _totalPage + 1 : _totalPage
+                        }
+                        
+                        rows += tables2.rows
+                    }
+                } else {
+                    msg = "解析JSON字串時，沒有成功，系統傳回值錯誤，請洽管理員"
+                }
+            } else {
+                msg = "無法從伺服器取得正確的json資料，請洽管理員"
+            }
+        } catch {
+            msg = "解析JSON字串時，得到空值，請洽管理員"
+        }
+        
+        if (rows.count > 0) {
+            if (page == 1) {
+                items = [MemberSubscriptionKindTable]()
+            }
+            items += rows
         }
     }
     
@@ -233,7 +277,118 @@ class MemberSubscriptionKindVC: BaseViewController {
     }
 }
 
+extension MemberSubscriptionKindVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.items.count == 0 {
+            return 0
+        } else {
+            return self.items.count + 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "DescCell", for: indexPath) as? DescCell {
+                return cell
+            }
+        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "MemberSubscriptionKindCell", for: indexPath) as? MemberSubscriptionKindCell {
+                if items.count >= indexPath.row {
+                    cell.item = self.items[indexPath.row - 1]
+                }
+                return cell
+            }
+        }
+        
+        return UITableViewCell()
+    }
+    
+    
+}
+
+extension MemberSubscriptionKindVC: UITableViewDelegate {
+    
+}
+
+class DescCell: UITableViewCell {
+    
+    let titleLbl = {
+        let view = SuperLabel()
+        view.setTextTitle()
+        view.text = "訂閱會員介紹"
+        
+        return view
+    }()
+    
+    let descLbl = {
+        let view = SuperLabel()
+        view.textColor = UIColor(hex: "FFFFFF", alpha: 0.56)
+        view.setTextSize(16)
+        view.numberOfLines = 0
+        view.text = """
+        訂閱會員將享有羽球密碼的各種優惠\n
+        1.鑽石會員享有12張開箱球拍券。\n
+        2.白金會員享有7張開箱球拍券。\n
+        3.金牌會員享有3張開箱球拍券。\n
+        4.銀牌會員享有2張開箱球拍券。\n
+        5.銅牌會員享有1張開箱球拍券。\n
+        6.鐵盤會員沒有開箱球拍券。\n
+        7.基本會員沒有開箱球拍券。\n
+        """
+        view.setLineHeight(lineHeight: 0.5)
+        
+        return view
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.commonInit()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        commonInit()
+    }
+    
+    func commonInit() {
+        self.contentView.backgroundColor = UIColor(MY_BLACK)
+        anchor()
+    }
+    
+    func anchor() {
+        self.contentView.addSubview(titleLbl)
+        titleLbl.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
+
+        self.contentView.addSubview(descLbl)
+        descLbl.snp.makeConstraints { make in
+            make.top.equalTo(titleLbl.snp.bottom).offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.bottom.equalToSuperview().offset(-20)
+        }
+    }
+}
+
 class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSubscriptionKindVC> {
+    
+    var containerView: UIView = {
+        let view: UIView = UIView()
+        view.backgroundColor = UIColor(hex: BOTTOM_VIEW_BACKGROUND, alpha: 1)
+        view.layer.cornerRadius = 16
+        view.clipsToBounds = true
+        
+        return view
+    }()
     
     let noLbl: SuperLabel = {
         let view = SuperLabel()
@@ -290,40 +445,50 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
     }
     
     override func commonInit() {
+        super.commonInit()
         setAnchor()
     }
     
     func setAnchor() {
         
-        self.contentView.addSubview(noLbl)
+        self.contentView.addSubview(containerView)
+        containerView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(4)
+            make.bottom.equalToSuperview().offset(-4)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(80)
+        }
+        
+        containerView.addSubview(noLbl)
         noLbl.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
             make.centerY.equalToSuperview()
             make.top.equalToSuperview().offset(16)
         }
         
-        self.contentView.addSubview(nameLbl)
+        containerView.addSubview(nameLbl)
         nameLbl.snp.makeConstraints { make in
             make.left.equalTo(noLbl.snp.right).offset(12)
             make.centerY.equalToSuperview()
         }
         
-        self.contentView.addSubview(lotteryLbl)
-        lotteryLbl.snp.makeConstraints { make in
-            make.left.equalTo(nameLbl.snp.right).offset(20)
-            make.centerY.equalToSuperview()
-        }
-        
-        self.contentView.addSubview(priceLbl)
-        priceLbl.snp.makeConstraints { make in
-            make.right.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
-        }
+//        self.contentView.addSubview(lotteryLbl)
+//        lotteryLbl.snp.makeConstraints { make in
+//            make.left.equalTo(nameLbl.snp.right).offset(20)
+//            make.centerY.equalToSuperview()
+//        }
+//
+//        self.contentView.addSubview(priceLbl)
+//        priceLbl.snp.makeConstraints { make in
+//            make.right.equalToSuperview().offset(20)
+//            make.centerY.equalToSuperview()
+//        }
     }
     
     override func configureSubViews() {
         
-        super.configureSubViews()
+        //super.configureSubViews()
         
         noLbl.text = String(item!.no) + "."
         nameLbl.text = item?.name
