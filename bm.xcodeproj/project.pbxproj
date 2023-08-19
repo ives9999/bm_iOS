@@ -37,7 +37,7 @@
 		B313272029A0869A00EAB782 /* Dot2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313271F29A0869A00EAB782 /* Dot2.swift */; };
 		B313272229A5C8EC00EAB782 /* NOLabel2.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272129A5C8EC00EAB782 /* NOLabel2.swift */; };
 		B313272429A884B300EAB782 /* TeamTempPlayTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272329A884B300EAB782 /* TeamTempPlayTable.swift */; };
-		B313272629AEFE8800EAB782 /* IconTextWithBGRoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272529AEFE8700EAB782 /* IconTextWithBGRoundCorner.swift */; };
+		B313272629AEFE8800EAB782 /* IconWithBGRoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = B313272529AEFE8700EAB782 /* IconWithBGRoundCorner.swift */; };
 		B31361E71F8786CC00BDA53D /* Contants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E61F8786CC00BDA53D /* Contants.swift */; };
 		B31361E91F88A35900BDA53D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = B31361E81F88A35900BDA53D /* Global.swift */; };
 		B316FED62112F13600FB990C /* CollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B316FED42112F13600FB990C /* CollectionCell.swift */; };
@@ -341,6 +341,7 @@
 		F94E7D351F83636B00F550FD /* bmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D341F83636B00F550FD /* bmTests.swift */; };
 		F94E7D401F83636B00F550FD /* bmUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94E7D3F1F83636B00F550FD /* bmUITests.swift */; };
 		F94FF4351FB4322C00D167B6 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94FF4341FB4322C00D167B6 /* EditVC.swift */; };
+		F96241462A906FAC00B0172C /* IconTextWithBGRoundCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96241452A906FAB00B0172C /* IconTextWithBGRoundCorner.swift */; };
 		F964CDDB276F5CBA004F1C78 /* ManagerSignupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F964CDDA276F5CBA004F1C78 /* ManagerSignupVC.swift */; };
 		F964CDE327744D76004F1C78 /* ManagerSignupListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F964CDE227744D76004F1C78 /* ManagerSignupListVC.swift */; };
 		F964CDE627746DBF004F1C78 /* ManagerSignupListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F964CDE427746DBF004F1C78 /* ManagerSignupListCell.swift */; };
@@ -511,7 +512,7 @@
 		B313271F29A0869A00EAB782 /* Dot2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dot2.swift; sourceTree = "<group>"; };
 		B313272129A5C8EC00EAB782 /* NOLabel2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NOLabel2.swift; sourceTree = "<group>"; };
 		B313272329A884B300EAB782 /* TeamTempPlayTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTempPlayTable.swift; sourceTree = "<group>"; };
-		B313272529AEFE8700EAB782 /* IconTextWithBGRoundCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconTextWithBGRoundCorner.swift; sourceTree = "<group>"; };
+		B313272529AEFE8700EAB782 /* IconWithBGRoundCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconWithBGRoundCorner.swift; sourceTree = "<group>"; };
 		B31361E61F8786CC00BDA53D /* Contants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contants.swift; sourceTree = "<group>"; };
 		B31361E81F88A35900BDA53D /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		B316FED42112F13600FB990C /* CollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionCell.swift; sourceTree = "<group>"; };
@@ -826,6 +827,7 @@
 		F94E7D3F1F83636B00F550FD /* bmUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bmUITests.swift; sourceTree = "<group>"; };
 		F94E7D411F83636B00F550FD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F94FF4341FB4322C00D167B6 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
+		F96241452A906FAB00B0172C /* IconTextWithBGRoundCorner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IconTextWithBGRoundCorner.swift; sourceTree = "<group>"; };
 		F964CDDA276F5CBA004F1C78 /* ManagerSignupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSignupVC.swift; sourceTree = "<group>"; };
 		F964CDE227744D76004F1C78 /* ManagerSignupListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSignupListVC.swift; sourceTree = "<group>"; };
 		F964CDE427746DBF004F1C78 /* ManagerSignupListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerSignupListCell.swift; sourceTree = "<group>"; };
@@ -1168,8 +1170,9 @@
 				B3426B972A3821190018ED2C /* IconText2.swift */,
 				F9DBED5A2A3A1EC4009D446F /* IconTextText2.swift */,
 				F9E221C629C4774D0054CF7B /* IconTextVertical2.swift */,
-				B313272529AEFE8700EAB782 /* IconTextWithBGRoundCorner.swift */,
+				B313272529AEFE8700EAB782 /* IconWithBGRoundCorner.swift */,
 				B313271D299F4F9100EAB782 /* IconView2.swift */,
+				F96241452A906FAB00B0172C /* IconTextWithBGRoundCorner.swift */,
 				F9D28AD729C1EE3C00655988 /* MainBottom2.swift */,
 				F9FFD8AE290981EA00AD8E52 /* ShowBottom2.swift */,
 				F9CB7F3D298FFE0900C1B92F /* ShowLike2.swift */,
@@ -2146,7 +2149,7 @@
 				B322F8051FC52CAF00DE98FB /* MyTableVC.swift in Sources */,
 				B34A210021B696AA00EE6E1C /* TextFieldCell.swift in Sources */,
 				B3B8671829CAA74900E0F1AB /* UITextField.swift in Sources */,
-				B313272629AEFE8800EAB782 /* IconTextWithBGRoundCorner.swift in Sources */,
+				B313272629AEFE8800EAB782 /* IconWithBGRoundCorner.swift in Sources */,
 				F9EBC44B275CDD2E00740AB6 /* MyImagePickerVC.swift in Sources */,
 				F9EDEDAF28927C1B00FB92BB /* MemberSubscriptionKindVC.swift in Sources */,
 				B3B758D325AD55E7006ACC33 /* GMStepper.swift in Sources */,
@@ -2256,6 +2259,7 @@
 				B3C4953E262E671100D4F727 /* CoachListCell.swift in Sources */,
 				B3310D9722AD54000062EF98 /* SuperTextView.swift in Sources */,
 				F94DECE32747CFC700A9DA17 /* EditTeamVC.swift in Sources */,
+				F96241462A906FAC00B0172C /* IconTextWithBGRoundCorner.swift in Sources */,
 				F9FFD83829067E3000AD8E52 /* BaseScrollerView.swift in Sources */,
 				F983442029F188B80050B634 /* ShowMatchVC.swift in Sources */,
 				B3B758BE25AC6134006ACC33 /* ClothesSizeCell.swift in Sources */,

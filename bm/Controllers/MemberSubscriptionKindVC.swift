@@ -390,14 +390,11 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
         return view
     }()
     
-    let noLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.textColor = UIColor(MY_WHITE)
-        view.setTextGeneral()
-        view.text = "100."
-        
-        return view
-    }()
+    var leftContainerView: UIView = UIView()
+    
+    var icon: IconWithBGRoundCorner = IconWithBGRoundCorner(icon: "", frameWidth: 48, frameHeight: 48, iconWidth: 32, iconHeight: 32)
+    
+    var centerContainerView: UIView = UIView()
     
     let nameLbl: SuperLabel = {
         let view = SuperLabel()
@@ -416,6 +413,8 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
         
         return view
     }()
+    
+    var rightContainerView: UIView = UIView()
     
     let priceLbl: SuperLabel = {
         let view = SuperLabel()
@@ -460,18 +459,24 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
             make.height.equalTo(80)
         }
         
-        containerView.addSubview(noLbl)
-        noLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
-            make.top.equalToSuperview().offset(16)
+        containerView.addSubview(leftContainerView)
+        leftContainerView.snp.makeConstraints { make in
+            make.top.left.bottom.equalToSuperview()
+            make.width.equalTo(64)
         }
         
-        containerView.addSubview(nameLbl)
-        nameLbl.snp.makeConstraints { make in
-            make.left.equalTo(noLbl.snp.right).offset(12)
+        leftContainerView.addSubview(icon)
+        icon.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(16)
             make.centerY.equalToSuperview()
+            make.right.equalToSuperview()
         }
+        
+//        containerView.addSubview(nameLbl)
+//        nameLbl.snp.makeConstraints { make in
+//            make.left.equalTo(noLbl.snp.right).offset(12)
+//            make.centerY.equalToSuperview()
+//        }
         
 //        self.contentView.addSubview(lotteryLbl)
 //        lotteryLbl.snp.makeConstraints { make in
@@ -490,7 +495,7 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
         
         //super.configureSubViews()
         
-        noLbl.text = String(item!.no) + "."
+        icon.setIcon("subscription_diamond")
         nameLbl.text = item?.name
         lotteryLbl.text = "每次開箱球拍券：\(item!.lottery)張"
         priceLbl.text = "NT$: " + String(item!.price) + " 元/月"
