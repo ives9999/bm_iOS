@@ -417,17 +417,9 @@ extension BaseViewController {
     }
     
     func toMemberSubscriptionLog() {
-        if #available(iOS 13.0, *) {
-            let storyboard = UIStoryboard(name: "Member", bundle: nil)
-            if let viewController = storyboard.instantiateViewController(identifier: TO_MEMBER_SUBSCRIPTION_LOG) as? MemberSubscriptionLogVC {
-                viewController.modalPresentationStyle = .fullScreen
-                show(viewController, sender: nil)
-            }
-        } else {
-            let viewController = self.storyboard!.instantiateViewController(withIdentifier: TO_MEMBER_SUBSCRIPTION_LOG) as! MemberSubscriptionLogVC
-            viewController.modalPresentationStyle = .fullScreen
-            self.navigationController!.pushViewController(viewController, animated: true)
-        }
+        let vc: MemberSubscriptionLogVC = MemberSubscriptionLogVC()
+        vc.modalPresentationStyle = .fullScreen
+        show(vc, sender: nil)
     }
     
     func toMemberScriptionPay(name: String, price: Int, kind: String) {

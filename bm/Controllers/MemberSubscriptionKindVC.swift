@@ -55,8 +55,8 @@ class MemberSubscriptionKindVC: BaseViewController {
     func initTop() {
         showTop2 = ShowTop2(delegate: self)
         showTop2!.anchor(parent: self.view)
-        showTop2!.setTitle("訂閱會員")
-        showTop2!.showRefresh()
+        showTop2!.setTitle("\(MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription).rawValue)會員")
+        showTop2!.showLog()
     }
     
     func initBottom() {
@@ -77,7 +77,7 @@ class MemberSubscriptionKindVC: BaseViewController {
         self.view.addSubview(tableView3)
         tableView3.snp.makeConstraints { make in
             make.top.equalTo(showTop2!.snp.bottom)
-            make.bottom.equalTo(showBottom2!.snp.top)
+            make.bottom.equalTo(showBottom2!.snp.top).offset(-20)
             make.left.right.equalToSuperview()
         }
     }
@@ -98,7 +98,6 @@ class MemberSubscriptionKindVC: BaseViewController {
                 
                 self.parseJSON(jsonData: MemberService.instance.jsonData)
                 //self.rows = self.showTableView(tableView: self.tableView2, jsonData: MemberService.instance.jsonData!)
-                //self.showTop2!.setTitle("訂閱會員")
             }
         }
     }
@@ -120,9 +119,9 @@ class MemberSubscriptionKindVC: BaseViewController {
                         for row in tables2.rows {
                             row.filterRow()
                             
-//                            if let b: Bool = self.selectedClosure?(row) {
-//                                row.selected = b
-//                            }
+                            if self.tableViewSetSelected(row: row) {
+                                row.selected = true
+                            }
                         }
                         
                         if (page == 1) {
@@ -201,9 +200,11 @@ class MemberSubscriptionKindVC: BaseViewController {
 //        bottomThreeView.setBottomButtonPadding(screen_width: screen_width)
 //    }
 //
-//    override func submitBtnPressed() {
-//        toMemberSubscriptionLog()
-//    }
+
+    
+    override func log() {
+        toMemberSubscriptionLog()
+    }
     
     override func submit() {
         
@@ -308,7 +309,12 @@ extension MemberSubscriptionKindVC: UITableViewDataSource {
 }
 
 extension MemberSubscriptionKindVC: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row > 0 && items.count >= indexPath.row {
+            let item: MemberSubscriptionKindTable = items[indexPath.row - 1]
+            didSelect(item: item, at: indexPath)
+        }
+    }
 }
 
 class DescCell: UITableViewCell {
@@ -399,7 +405,8 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
     let nameLbl: SuperLabel = {
         let view = SuperLabel()
         view.textColor = UIColor(MY_WHITE)
-        view.setTextGeneral()
+        view.setTextBold()
+        view.setTextSize(16)
         view.text = "xxx"
         
         return view
@@ -407,8 +414,8 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
     
     let lotteryLbl: SuperLabel = {
         let view = SuperLabel()
-        view.textColor = UIColor(MY_WHITE)
-        view.setTextGeneral()
+        view.textColor = UIColor(TEXT_DESC)
+        view.setTextSize(12)
         view.text = "xxx"
         
         return view
@@ -418,15 +425,24 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
     
     let priceLbl: SuperLabel = {
         let view = SuperLabel()
-        view.textColor = UIColor(MY_WHITE)
-        view.setTextGeneral()
+        view.textColor = UIColor(MY_GREEN)
+        view.setTextBold()
+        view.setTextSize(24)
+        view.textAlignment = .right
         view.text = "300"
         
         return view
     }()
     
-//    @IBOutlet weak var titleLbl: SuperLabel!
-//    @IBOutlet weak var priceLbl: SuperLabel!
+    let ntLbl: SuperLabel = {
+        let view = SuperLabel()
+        view.textColor = UIColor(MY_GREEN)
+        view.setTextSize(12)
+        view.textAlignment = .right
+        view.text = "NT$"
+        
+        return view
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -459,46 +475,92 @@ class MemberSubscriptionKindCell: BaseCell<MemberSubscriptionKindTable, MemberSu
             make.height.equalTo(80)
         }
         
-        containerView.addSubview(leftContainerView)
-        leftContainerView.snp.makeConstraints { make in
-            make.top.left.bottom.equalToSuperview()
-            make.width.equalTo(64)
-        }
+            containerView.addSubview(leftContainerView)
+            leftContainerView.snp.makeConstraints { make in
+                make.top.left.equalToSuperview().offset(16)
+                make.bottom.equalToSuperview().offset(-16)
+                make.width.height.equalTo(48)
+            }
+            
+                leftContainerView.addSubview(icon)
+                icon.snp.makeConstraints { make in
+                    make.centerX.centerY.equalToSuperview()
+                }
         
-        leftContainerView.addSubview(icon)
-        icon.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(16)
-            make.centerY.equalToSuperview()
-            make.right.equalToSuperview()
-        }
+            containerView.addSubview(rightContainerView)
+            //rightContainerView.backgroundColor = UIColor.red
+            rightContainerView.snp.makeConstraints { make in
+                make.top.equalToSuperview().offset(16)
+                make.bottom.equalToSuperview().offset(-16)
+                make.right.equalToSuperview().offset(-16)
+                make.width.equalTo(100)
+            }
         
-//        containerView.addSubview(nameLbl)
-//        nameLbl.snp.makeConstraints { make in
-//            make.left.equalTo(noLbl.snp.right).offset(12)
-//            make.centerY.equalToSuperview()
-//        }
+                rightContainerView.addSubview(priceLbl)
+                priceLbl.snp.makeConstraints { make in
+                    make.top.equalToSuperview().offset(4)
+                    make.right.equalToSuperview()
+                }
         
-//        self.contentView.addSubview(lotteryLbl)
-//        lotteryLbl.snp.makeConstraints { make in
-//            make.left.equalTo(nameLbl.snp.right).offset(20)
-//            make.centerY.equalToSuperview()
-//        }
-//
-//        self.contentView.addSubview(priceLbl)
-//        priceLbl.snp.makeConstraints { make in
-//            make.right.equalToSuperview().offset(20)
-//            make.centerY.equalToSuperview()
-//        }
+                rightContainerView.addSubview(ntLbl)
+                ntLbl.snp.makeConstraints { make in
+                    make.right.equalToSuperview().offset(-2)
+                    make.bottom.equalToSuperview()
+                }
+        
+            containerView.addSubview(centerContainerView)
+            //centerContainerView.backgroundColor = UIColor.green
+            centerContainerView.snp.makeConstraints { make in
+                make.left.equalTo(leftContainerView.snp.right).offset(8)
+                make.top.equalToSuperview().offset(16)
+                make.bottom.equalToSuperview().offset(-16)
+                //make.width.equalTo(300)
+                make.right.equalTo(rightContainerView.snp.left)
+            }
+        
+                centerContainerView.addSubview(nameLbl)
+                nameLbl.snp.makeConstraints { make in
+                    make.top.equalToSuperview().offset(4)
+                    make.left.equalToSuperview()
+                }
+
+                centerContainerView.addSubview(lotteryLbl)
+                lotteryLbl.snp.makeConstraints { make in
+                    make.left.equalToSuperview()
+                    make.bottom.equalToSuperview().offset(-4)
+                }
+        
+        
+
+
     }
     
     override func configureSubViews() {
         
         //super.configureSubViews()
         
-        icon.setIcon("subscription_diamond")
-        nameLbl.text = item?.name
+        icon.setIcon("subscription_\(item!.eng_name)")
+        nameLbl.text = item!.name
         lotteryLbl.text = "每次開箱球拍券：\(item!.lottery)張"
-        priceLbl.text = "NT$: " + String(item!.price) + " 元/月"
+        priceLbl.text = (item!.price == 0) ? "免費" : "\(String(item!.price))/月"
+        
+        if item!.selected {
+            setSelectedStyle()
+        }
+        
+        setClickBackgroundColor()
+    }
+    
+    func setSelectedStyle() {
+        containerView.backgroundColor = UIColor(CELL_SELECTED)
+        containerView.layer.borderWidth = 1.5
+        containerView.layer.borderColor = UIColor(MY_GREEN).cgColor
+    }
+    
+    func setClickBackgroundColor() {
+        let bgColorView = UIView()
+        bgColorView.backgroundColor = UIColor(CELL_SELECTED)
+        selectedBackgroundView = bgColorView
     }
 }
 

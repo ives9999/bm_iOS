@@ -1050,7 +1050,7 @@ enum SIGNUP_STATUS: String {
 enum MEMBER_SUBSCRIPTION_KIND: String {
     
     case diamond = "鑽石"
-    case white_gold = "白金"
+    case premium = "白金"
     case gold = "金牌"
     case silver = "銀牌"
     case copper = "銅牌"
@@ -1069,7 +1069,7 @@ enum MEMBER_SUBSCRIPTION_KIND: String {
             return 2
         case .gold:
             return 3
-        case .white_gold:
+        case .premium:
             return 7
         case .diamond:
             return 12
@@ -1088,8 +1088,8 @@ enum MEMBER_SUBSCRIPTION_KIND: String {
             return "steal"
         case .gold:
             return "gold"
-        case .white_gold:
-            return "white_gold"
+        case .premium:
+            return "premium"
         case .diamond:
             return "diamond"
         }
@@ -1107,8 +1107,8 @@ enum MEMBER_SUBSCRIPTION_KIND: String {
             return .silver
         case "gold":
             return .gold
-        case "white_gold":
-            return .white_gold
+        case "premium":
+            return .premium
         case "diamond":
             return .diamond
         default:

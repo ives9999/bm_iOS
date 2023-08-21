@@ -34,6 +34,7 @@ class ShowTop2: UIView {
     }()
     
     let addIconText: IconTextWithBGRoundCorner = IconTextWithBGRoundCorner(icon: "add_svg", text: "新增")
+    let logIconText: IconTextWithBGRoundCorner = IconTextWithBGRoundCorner(icon: "log_svg", text: "查詢")
     
     required init() {
         super.init(frame: CGRect.zero)
@@ -117,6 +118,15 @@ class ShowTop2: UIView {
         }
     }
     
+    func showLog() {
+        logIconText.delegate = self
+        self.addSubview(logIconText)
+        self.logIconText.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().offset(-12)
+        }
+    }
+    
     func setTitle(_ title: String) {
         titleLbl.text = title
     }
@@ -135,6 +145,8 @@ extension ShowTop2: IconTextWithBGRoundCornerDelegate {
     func pressed(icon: String) {
         if icon == "add_svg" {
             self.delegate?.addPressed()
+        } else if icon == "log_svg" {
+            self.delegate?.log()
         }
     }
 }

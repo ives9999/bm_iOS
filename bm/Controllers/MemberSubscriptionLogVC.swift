@@ -10,6 +10,8 @@ import Foundation
 
 class MemberSubscriptionLogVC: BaseViewController {
     
+    var showTop2: ShowTop2?
+    
     lazy var tableView: MyTable2VC<MemberSubscriptionLogCell, MemberSubscriptionLogTable, MemberSubscriptionLogVC> = {
         let tableView = MyTable2VC<MemberSubscriptionLogCell, MemberSubscriptionLogTable, MemberSubscriptionLogVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer(page:), myDelegate: self)
         return tableView
@@ -21,12 +23,19 @@ class MemberSubscriptionLogVC: BaseViewController {
         
         super.viewDidLoad()
         
-        top.setTitle(title: "訂閱會員付款紀錄")
-        top.delegate = self
+        initTop()
+//        top.setTitle(title: "訂閱會員付款紀錄")
+//        top.delegate = self
         
-        tableView.anchor(parent: view, top: top, bottomThreeView: bottomThreeView)
+        tableView.anchor(parent: view, showTop: showTop2!)
                 
         refresh()
+    }
+    
+    func initTop() {
+        showTop2 = ShowTop2(delegate: self)
+        showTop2!.anchor(parent: self.view)
+        showTop2!.setTitle("訂閱會員付款紀錄")
     }
     
     override func setupBottomThreeView() {
@@ -60,7 +69,17 @@ class MemberSubscriptionLogVC: BaseViewController {
     
     override func didSelect<U>(item: U, at indexPath: IndexPath) {
         
-    }    
+    }
+    
+    override func showTableView<T: BaseCell<U, V>, U: Table, V: BaseViewController>(tableView: MyTable2VC<T, U, V>, jsonData: Data)-> [U] {
+        
+        let b: Bool = tableView.parseJSON(jsonData: jsonData)
+        if !b && tableView.msg.count == 0 {
+            view.setInfo(info: tableView.msg, topAnchor: showTop2!)
+        }
+        
+        return tableView.items
+    }
 }
 
 class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubscriptionLogVC> {

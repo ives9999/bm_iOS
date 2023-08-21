@@ -681,6 +681,9 @@ class BaseViewController: UIViewController, List2CellDelegate {
         }
     }
     
+    // delegate of ShowTop2
+    func log() {}
+    
     func makeCalendar(_ _y:Int?, _ _m:Int?)->[String: Any] {
         
         let y: Int = (_y == nil) ? Date().getY() : _y!
