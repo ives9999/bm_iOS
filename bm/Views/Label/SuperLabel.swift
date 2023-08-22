@@ -93,6 +93,11 @@ class SuperLabel: UILabel {
         self.font = UIFont(name: FONT_NAME, size: FONT_SIZE_GENERAL)
         self.textColor = UIColor(MY_WEIGHT_RED)
     }
+    
+    func setIconText() {
+        self.font = UIFont(name: FONT_NAME, size: 14)
+        self.textColor = UIColor(hex: "#FFFFFF", alpha: 0.7)
+    }
 
     func setTextColor(_ color: UIColor) {
         self.textColor = color

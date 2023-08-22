@@ -16,7 +16,12 @@ class IconText2: UIView {
     var iconWidth: Int = 24
     var iconHeight: Int = 24
     var iconIV: UIImageView = UIImageView()
-    var textLbl: UILabel = SuperLabel()
+    var textLbl: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setIconText()
+        
+        return view
+    }()
     
     var delegate: IconText2Delegate?
     

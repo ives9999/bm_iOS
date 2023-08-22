@@ -108,27 +108,10 @@ class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubs
     
     let mainContainerView: UIView = UIView()
     
-    let priceLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.textColor = UIColor(MY_WHITE)
-        view.setTextGeneral()
-        view.text = "200"
-        
-        return view
-    }()
+    let datetimeIT: IconText2 = IconText2(icon: "calendar_start_svg", text: "", iconWidth: 20, iconHeight: 20)
     
-    let dateLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.textColor = UIColor(MY_WHITE)
-        view.setTextGeneral()
-        view.text = "2022-01-05 22:00"
-        
-        return view
-    }()
-    
-//    @IBOutlet weak var noLbl: SuperLabel!
-//    @IBOutlet weak var priceLbl: SuperLabel!
-//    @IBOutlet weak var dateLbl: SuperLabel!
+    let priceIT: IconText2 = IconText2(icon: "fee_svg", text: "", iconWidth: 20, iconHeight: 20)
+    let invoiceIT: IconText2 = IconText2(icon: "invoice_svg", text: "", iconWidth: 20, iconHeight: 20)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -200,24 +183,34 @@ class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubs
             //make.height .equalTo(130)
         }
         
-        mainContainerView.addSubview(priceLbl)
-        priceLbl.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
-            make.left.equalToSuperview()
+        mainContainerView.addSubview(datetimeIT)
+        datetimeIT.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(8)
+            make.left.equalToSuperview().offset(20)
+            make.width.equalTo(200)
         }
         
-        mainContainerView.addSubview(dateLbl)
-        dateLbl.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(12)
-            make.right.equalToSuperview().offset(-20)
+        mainContainerView.addSubview(invoiceIT)
+        invoiceIT.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(8)
+            make.left.equalTo(datetimeIT.snp.right)
         }
+        
+        mainContainerView.addSubview(priceIT)
+        priceIT.snp.makeConstraints { make in
+            make.top.equalTo(datetimeIT.snp.bottom).offset(8)
+            make.left.equalToSuperview().offset(20)
+        }
+
+        
     }
     
     override func configureSubViews() {
         
         super.configureSubViews()
-        noLbl.text = String(item!.no)
-        priceLbl.text = "NT$: " + String(item!.amount) + " 元"
-        dateLbl.text = item?.created_at.noSec()
+        noLbl.text = item!.no.toTwoString()
+        datetimeIT.setText(item!.created_at.noSec())
+        priceIT.setText("NT$: " + String(item!.amount) + " 元")
+        invoiceIT.setText(item!.invoice_no)
     }
 }

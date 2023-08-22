@@ -899,10 +899,15 @@ class MemberSubscriptionLogTable: Table {
     
     var member_id: Int = 0
     var amount: Int = 0
+    var invoice_no: String = ""
+    
+    var orderTable: OrderTable? = nil
     
     enum CodingKeys: String, CodingKey {
         case member_id
         case amount
+        case invoice_no
+        case orderTable
     }
     
     override init() {
@@ -915,6 +920,8 @@ class MemberSubscriptionLogTable: Table {
         
         member_id = try container.decodeIfPresent(Int.self, forKey: .member_id) ?? 0
         amount = try container.decodeIfPresent(Int.self, forKey: .amount) ?? 0
+        orderTable = try container.decodeIfPresent(OrderTable.self, forKey: .orderTable) ?? nil
+        invoice_no = try container.decodeIfPresent(String.self, forKey: .invoice_no) ?? ""
     }
     
     override func filterRow() {
