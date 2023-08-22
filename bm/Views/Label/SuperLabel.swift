@@ -98,6 +98,10 @@ class SuperLabel: UILabel {
         self.font = UIFont(name: FONT_NAME, size: 14)
         self.textColor = UIColor(hex: "#FFFFFF", alpha: 0.7)
     }
+    
+    func setIconTextDanger() {
+        self.textColor = UIColor(DANGER)
+    }
 
     func setTextColor(_ color: UIColor) {
         self.textColor = color

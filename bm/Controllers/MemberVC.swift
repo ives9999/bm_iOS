@@ -216,10 +216,18 @@ class MemberVC: BaseViewController {
                 make.bottom.equalToSuperview().offset(-10)
             }
         
+        let banner: UIImageView = UIImageView(image: UIImage(named: "banner_svg"))
+        self.view.addSubview(banner)
+        banner.snp.makeConstraints { make in
+            make.top.equalTo(levelContainer.snp.bottom).offset(24)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+        }
+        
         self.view.addSubview(titleLbl)
         titleLbl.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(20)
-            make.top.equalTo(levelContainer.snp.bottom).offset(20)
+            make.top.equalTo(banner.snp.bottom).offset(24)
         }
         
         self.view.addSubview(tableView)

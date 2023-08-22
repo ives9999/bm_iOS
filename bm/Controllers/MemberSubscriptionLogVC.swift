@@ -84,18 +84,11 @@ class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubs
         return view
     }()
     
-    let playTimeLbl: SuperLabel = {
+    let startOrEndLbl: SuperLabel = {
         let view = SuperLabel()
-        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "19:00~21:00"
-        
-        return view
-    }()
-    
-    let playWeekLbl: SuperLabel = {
-        let view = SuperLabel()
-        view.textColor = UIColor(hex: MY_WHITE, alpha: 0.7)
-        view.text = "19:00~21:00"
+        view.setIconText()
+        view.textColor = UIColor(MY_GREEN)
+        view.text = "訂閱開始"
         
         return view
     }()
@@ -108,10 +101,12 @@ class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubs
     
     let mainContainerView: UIView = UIView()
     
-    let datetimeIT: IconText2 = IconText2(icon: "calendar_start_svg", text: "", iconWidth: 20, iconHeight: 20)
+    let datetimeIT: IconText = IconText(icon: "calendar_start_svg", text: "", iconWidth: 20, iconHeight: 20)
     
-    let priceIT: IconText2 = IconText2(icon: "fee_svg", text: "", iconWidth: 20, iconHeight: 20)
+    let priceIT: IconText = IconText(icon: "fee_svg", text: "", iconWidth: 20, iconHeight: 20)
     let invoiceIT: IconText2 = IconText2(icon: "invoice_svg", text: "", iconWidth: 20, iconHeight: 20)
+    
+    let orderLbl: SuperLabel = SuperLabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -152,15 +147,9 @@ class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubs
                 make.centerY.equalToSuperview()
             }
             
-            view1.addSubview(playTimeLbl)
-            playTimeLbl.snp.makeConstraints { make in
+            view1.addSubview(startOrEndLbl)
+            startOrEndLbl.snp.makeConstraints { make in
                 make.right.equalToSuperview()
-                make.centerY.equalToSuperview()
-            }
-        
-            view1.addSubview(playWeekLbl)
-            playWeekLbl.snp.makeConstraints { make in
-                make.right.equalTo(playTimeLbl.snp.left).offset(-6)
                 make.centerY.equalToSuperview()
             }
         
@@ -179,7 +168,7 @@ class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubs
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.top.equalTo(separator.snp.bottom).offset(4)
-            //make.bottom.equalToSuperview().offset(4)
+            make.bottom.equalToSuperview().offset(-4)
             //make.height .equalTo(130)
         }
         
@@ -198,19 +187,50 @@ class MemberSubscriptionLogCell: BaseCell<MemberSubscriptionLogTable, MemberSubs
         
         mainContainerView.addSubview(priceIT)
         priceIT.snp.makeConstraints { make in
-            make.top.equalTo(datetimeIT.snp.bottom).offset(8)
+            make.top.equalTo(datetimeIT.snp.bottom).offset(4)
             make.left.equalToSuperview().offset(20)
+            //make.bottom.equalToSuperview().offset(-12)
         }
 
-        
+        mainContainerView.addSubview(orderLbl)
+        orderLbl.snp.makeConstraints { make in
+            make.top.equalTo(priceIT.snp.bottom).offset(8)
+            make.left.equalToSuperview().offset(20)
+            make.bottom.equalToSuperview().offset(-6)
+        }
     }
     
     override func configureSubViews() {
         
         super.configureSubViews()
-        noLbl.text = item!.no.toTwoString()
-        datetimeIT.setText(item!.created_at.noSec())
-        priceIT.setText("NT$: " + String(item!.amount) + " 元")
-        invoiceIT.setText(item!.invoice_no)
+        
+        if item != nil {
+            noLbl.text = item!.no.toTwoString()
+            datetimeIT.setText(item!.created_at.noSec())
+            priceIT.setText("NT$: " + String(item!.amount) + " 元")
+            invoiceIT.setText(item!.invoice_no)
+            
+            if item!.orderTable == nil {
+                if item!.type == "stop" {
+                    startOrEndLbl.setIconTextDanger()
+                    startOrEndLbl.text = "取消訂閱"
+                    priceIT.visibility = .invisible
+                    invoiceIT.visibility = .invisible
+                    orderLbl.visibility = .invisible
+                } else {
+                    startOrEndLbl.visibility = .invisible
+                }
+            } else {
+                startOrEndLbl.visibility = .visible
+                priceIT.visibility = .visible
+                invoiceIT.visibility = .visible
+                orderLbl.visibility = .visible
+                startOrEndLbl.textColor = UIColor(MY_GREEN)
+                startOrEndLbl.text = "訂閱開始"
+                orderLbl.text = "訂單編號：\(item!.orderTable!.order_no)"
+                orderLbl.setIconText()
+                orderLbl.setTextColor(UIColor(MY_GREEN))
+            }
+        }
     }
 }
