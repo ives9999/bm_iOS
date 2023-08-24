@@ -30,6 +30,7 @@ class ShowMatchVC: BaseViewController {
     let introduceTableView: UITableView = {
         let view = UITableView()
         view.isScrollEnabled = true
+        view.autoresizingMask = .flexibleHeight
         view.backgroundColor = UIColor.clear
         
         view.rowHeight = UITableView.automaticDimension
@@ -480,6 +481,8 @@ extension ShowMatchVC: UITableViewDelegate, UITableViewDataSource {
             cell.signupStartShow = table!.signup_start_show
             cell.signupEndShow = table!.signup_end_show
             cell.myDelegate = self
+            cell.backgroundColor = UIColor(MY_BLACK)
+            cell.setSelectedBackgroundColor()
             let item: MatchGroupTable = table!.matchGroups[indexPath.row]
             item.no = indexPath.row + 1
             cell.item = item
@@ -594,7 +597,7 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
     
     override func commonInit() {
         //super.commonInit()
-        //self.contentView.backgroundColor = UIColor.blue
+        //self.contentView.backgroundColor = UIColor.clear
         showButton2.delegate = self
         setAnchor()
     }
@@ -695,7 +698,8 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
     }
     
     override func configureSubViews() {
-        super.configureSubViews()
+        //super.configureSubViews()
+        //backgroundColor = UIColor.clear
         
 //        if item!.no % 2 == 0 {
 //            self.contentView.backgroundColor = UIColor.blue

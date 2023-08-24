@@ -249,7 +249,7 @@ class MatchTeamSignupVC: BaseViewController {
            if success {
                let jsonData: Data = self.dataService.jsonData!
                //print(jsonData.toString())
-               //jsonData.prettyPrintedJSONString
+               jsonData.prettyPrintedJSONString
                do {
                    let t = try JSONDecoder().decode(MatchPlayerSuccessTable.self, from: jsonData)
                    if (!t.success) {

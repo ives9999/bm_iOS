@@ -10,14 +10,6 @@ import UIKit
 
 class MemberVC: BaseViewController {
     
-    //@IBOutlet weak var nicknameLbl: UILabel!
-//    @IBOutlet weak var loginBtn: UIButton!
-//    @IBOutlet weak var registerBtn: UIButton!
-//    @IBOutlet weak var registerIcon: UIImageView!
-//    @IBOutlet weak var forgetPasswordIcon: UIImageView!
-//    @IBOutlet weak var forgetPasswordBtn: UIButton!
-//    @IBOutlet weak var avatarImageView: UIImageView!
-    
     let featuredContainer: UIView = {
         let view = UIView()
         
@@ -85,20 +77,32 @@ class MemberVC: BaseViewController {
     var memberSections: [IconTextSection] = [IconTextSection]()
     var rows: [MainMemberTable] = [MainMemberTable]()
     
-    let heightForSection: CGFloat = 34
+    //let heightForSection: CGFloat = 34
     
-    lazy var tableView: MyTable2VC<MainMemberCell, MainMemberTable, MemberVC> = {
-        let tableView = MyTable2VC<MainMemberCell, MainMemberTable, MemberVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer, myDelegate: self, isRefresh: false)
+//    lazy var tableView: MyTable2VC<MainMemberCell, MainMemberTable, MemberVC> = {
+//        let tableView = MyTable2VC<MainMemberCell, MainMemberTable, MemberVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer, myDelegate: self, isRefresh: false)
+//
+//        return tableView
+//    }()
+    
+    lazy var tableView3: UITableView = {
+        let view: UITableView = UITableView()
+        view.backgroundColor = UIColor(MY_BLACK)
+//        view.estimatedRowHeight = 44
+//        view.rowHeight = UITableView.automaticDimension
         
-        return tableView
+        view.register(BannerCell.self, forCellReuseIdentifier: "BannerCell")
+        view.register(MainMemberCell.self, forCellReuseIdentifier: "MainMemberCell")
+        
+        return view
     }()
     
-    func tableViewSetSelected(row: MainMemberTable)-> Bool {
-        return false
-    }
-    
-    func getDataFromServer(page: Int) {
-    }
+//    func tableViewSetSelected(row: MainMemberTable)-> Bool {
+//        return false
+//    }
+//
+//    func getDataFromServer(page: Int) {
+//    }
     
     var mainBottom2: MainBottom2 = MainBottom2(able_type: "member")
 
@@ -118,19 +122,27 @@ class MemberVC: BaseViewController {
         qrcodeIV2.delegate = self
         logoutIV2.delegate = self
         
-        for mainMemberEnum in MainMemberEnum.allValues {
-            rows.append(MainMemberTable(title: mainMemberEnum.rawValue, icon: mainMemberEnum.getIcon()))
-        }
-        tableView.items = rows
+        initTableView()
         
         anchor()
         
+        //one UITapGestureRecognizer just for one object
+        let levelGR1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
+        levelRightContainer.addGestureRecognizer(levelGR1)
         
-        let levelGR: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(levelClickListener(_:)))
-        levelRightContainer.addGestureRecognizer(levelGR)
-        levelIconText.addGestureRecognizer(levelGR)
+        let levelGR2: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
+        levelIconText.addGestureRecognizer(levelGR2)
         
         refresh()
+    }
+    
+    func initTableView() {
+        tableView3.dataSource = self
+        tableView3.delegate = self
+        
+        for mainMemberEnum in MainMemberEnum.allValues {
+            rows.append(MainMemberTable(title: mainMemberEnum.rawValue, icon: mainMemberEnum.getIcon()))
+        }
     }
     
     func anchor() {
@@ -216,24 +228,23 @@ class MemberVC: BaseViewController {
                 make.bottom.equalToSuperview().offset(-10)
             }
         
-        let banner: UIImageView = UIImageView(image: UIImage(named: "banner_svg"))
-        self.view.addSubview(banner)
-        banner.snp.makeConstraints { make in
-            make.top.equalTo(levelContainer.snp.bottom).offset(24)
-            make.left.equalToSuperview().offset(20)
-            make.right.equalToSuperview().offset(-20)
-        }
+//        self.view.addSubview(bannerIV)
+//        bannerIV.snp.makeConstraints { make in
+//            make.top.equalTo(levelContainer.snp.bottom).offset(24)
+//            make.left.equalToSuperview().offset(20)
+//            make.right.equalToSuperview().offset(-20)
+//        }
         
-        self.view.addSubview(titleLbl)
-        titleLbl.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(20)
-            make.top.equalTo(banner.snp.bottom).offset(24)
-        }
+//        self.view.addSubview(titleLbl)
+//        titleLbl.snp.makeConstraints { make in
+//            make.left.equalToSuperview().offset(20)
+//            make.top.equalTo(bannerIV.snp.bottom).offset(24)
+//        }
         
-        self.view.addSubview(tableView)
+        self.view.addSubview(tableView3)
         //tableView.backgroundColor = UIColor.red
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(titleLbl.snp.bottom).offset(3)
+        tableView3.snp.makeConstraints { make in
+            make.top.equalTo(levelContainer.snp.bottom)
             make.left.right.equalToSuperview()
             make.bottom.equalTo(mainBottom2.snp.top)
         }
@@ -273,31 +284,6 @@ class MemberVC: BaseViewController {
         }
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if sender != nil {
-//            if segue.identifier == TO_VALIDATE {
-//                let vc: ValidateVC = segue.destination as! ValidateVC
-//                vc.type = sender as! String
-//            } else if segue.identifier == TO_LOGIN {
-//                //let vc: LoginVC = segue.destination as! LoginVC
-//                //vc.menuVC = (sender as! MenuVC)
-//            } else if segue.identifier == TO_REGISTER {
-//                //let vc: RegisterVC = segue.destination as! RegisterVC
-//                //vc.menuVC = (sender as! MenuVC)
-//            } else {
-//         }
-//        }
-//    }
-    
-//    func login() {
-//        toLogin(memberVC: self)
-//            if let vc = storyboard?.instantiateViewController(withIdentifier: "login") as? LoginVC {
-//                vc.memberVC = self
-//                present(vc, animated: true, completion: nil)
-//            }
-        //performSegue(withIdentifier: TO_LOGIN, sender: self)
-//    }
-    
     func logout() {
         //1.清空session資料
         Member.instance.reset()
@@ -307,112 +293,6 @@ class MemberVC: BaseViewController {
         toLogin()
         //loginout()
     }
-    
-//    @IBAction func loginBtnPressed(_ sender: Any) {
-//        if Member.instance.isLoggedIn { // logout
-//            logout()
-//        } else {
-//            login()
-//        }
-//    }
-    
-//    @IBAction func registerBtnPressed(_ sender: Any) {
-//        if let vc = storyboard?.instantiateViewController(withIdentifier: "register") as? RegisterVC {
-//            vc.sourceVC = self
-//            present(vc, animated: true, completion: nil)
-//        }
-        //performSegue(withIdentifier: TO_REGISTER, sender: self)
-//        toRegister()
-//    }
-    
-//    @IBAction func passwordBtnPressed(_ sender: Any) {
-//        toPassword(type: "forget_password")
-//        let type: String = "forget_password"
-//        if let vc = storyboard?.instantiateViewController(withIdentifier: "passwo") as? PasswordVC {
-//            vc.type = type
-//            vc.delegate = self
-//            present(vc, animated: true, completion: nil)
-//        }
-        //performSegue(withIdentifier: TO_PASSWORD, sender: type)
-//    }
-    
-//    public func loginout() {
-//        //print(Member.instance.isLoggedIn)
-//        if Member.instance.isLoggedIn   { // login
-//           _loginBlock()
-//        } else {
-//           _logoutBlock()
-//       }
-//    }
-       
-//    public func _loginBlock() {
-        
-        //memberSections = initSectionRows1()
-        //self.tableView.reloadData()
-//        nicknameLbl.text = Member.instance.nickname
-//        if Member.instance.avatar.count > 0 {
-//            avatarIV.downloaded(from: Member.instance.avatar)
-//        }
-//        loginBtn.setTitle("登出", for: .normal)
-//        registerBtn.isHidden = true
-//        registerIcon.isHidden = true
-//        forgetPasswordBtn.isHidden = true
-//        forgetPasswordIcon.isHidden = true
-//
-//        tableView.isHidden = false
-//    }
-    
-//    public func _logoutBlock() {
-//        nicknameLbl.text = "未登入"
-//        loginBtn.setTitle("登入", for: .normal)
-//        registerBtn.isHidden = false
-//        registerIcon.isHidden = false
-//        forgetPasswordBtn.isHidden = false
-//        forgetPasswordIcon.isHidden = false
-//        tableView.isHidden = true
-//        avatarImageView.image = UIImage(named: "menuProfileIcon")
-//    }
-    
-//    @objc override func handleExpandClose(gesture : UITapGestureRecognizer) {
-//
-//        let headerView = gesture.view!
-//        let section = headerView.tag
-//        let tmp = headerView.subviews.filter({$0 is UIImageView})
-//        var mark: UIImageView?
-//        if tmp.count > 0 {
-//            mark = tmp[0] as? UIImageView
-//        }
-//
-//        var indexPaths: [IndexPath] = [IndexPath]()
-//
-//        //let key: String = getSectionKey(idx: section)
-//        //let rows: [[String: String]] = getRowRowsFromMyRowsByKey(key: key)
-//        let rows: [MemberRow] = memberSections[section].items
-//        for (i, _) in rows.enumerated() {
-//            let indexPath = IndexPath(row: i, section: section)
-//            indexPaths.append(indexPath)
-//        }
-//
-//        var isExpanded = memberSections[section].isExpanded
-//        memberSections[section].isExpanded = !isExpanded
-//
-////        var isExpanded = getSectionExpanded(idx: section)
-////        if (mySections[section].keyExist(key: "isExpanded")) {
-////            mySections[section]["isExpanded"] = !isExpanded
-////            //searchSections[section].isExpanded = !isExpanded
-////        }
-//
-//        if isExpanded {
-//            tableView.deleteRows(at: indexPaths, with: .fade)
-//        } else {
-//            tableView.insertRows(at: indexPaths, with: .fade)
-//        }
-//
-//        isExpanded = !isExpanded
-//        if mark != nil {
-//            toggleMark(mark: mark!, isExpanded: isExpanded)
-//        }
-//    }
     
     func delete() {
         msg = "是否確定要刪除自己的會員資料？"
@@ -466,129 +346,67 @@ class MemberVC: BaseViewController {
         }
     }
     
-    @objc func levelClickListener(_ sender: UIGestureRecognizer) {
+    func bannerToSubscription() {
         toMemberSubscriptionKind()
+    }
+    
+    @objc func subscription(_ sender: UIGestureRecognizer) {
+        bannerToSubscription()
+    }
+}
+
+extension MemberVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.rows.count == 0 {
+            return 0
+        } else {
+            return self.rows.count + 1
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 250
+        } else {
+            return 100
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "BannerCell", for: indexPath) as? BannerCell {
+                return cell
+            }
+        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "MainMemberCell", for: indexPath) as? MainMemberCell {
+                if rows.count >= indexPath.row {
+                    cell.item = self.rows[indexPath.row - 1]
+                }
+                return cell
+            }
+        }
+        
+        return UITableViewCell()
+    }
+    
+    
+}
+
+extension MemberVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            bannerToSubscription()
+        } else {
+            if rows.count >= indexPath.row {
+                let row: MainMemberTable = rows[indexPath.row - 1]
+                didSelect(item: row, at: indexPath)
+            }
+        }
     }
 }
 
 extension MemberVC {
-    
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//
-//        return memberSections.count
-//        //return mySections.count
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//
-//        var count: Int = 0
-//        if (memberSections[section].isExpanded) {
-//            count = memberSections[section].items.count
-//        }
-//
-//        return count
-//    }
-//
-//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//
-//        let headerView = UIView()
-//        headerView.backgroundColor = UIColor.gray
-//        headerView.tag = section
-//
-//        let titleLabel = UILabel()
-//        titleLabel.text = memberSections[section].title
-//        titleLabel.textColor = UIColor(MY_WHITE)
-//        titleLabel.sizeToFit()
-//        titleLabel.frame = CGRect(x: 10, y: 0, width: 100, height: heightForSection)
-//        headerView.addSubview(titleLabel)
-//
-//        return headerView
-//    }
-//
-//    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-//        return 34
-//    }
-//
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        //print("show cell sections: \(indexPath.section), rows: \(indexPath.row)")
-//        let cell: MenuCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! MenuCell
-//        //cell.delegate = self
-//        //print(rows)
-//
-//        let row: MemberRow = memberSections[indexPath.section].items[indexPath.row]
-//        //let row: [String: String] = getRowFromIndexPath(indexPath: indexPath)
-//        cell.setRow(row: row)
-//
-//        if indexPath.section == 1 && indexPath.row == 0 {
-//            cell.accessoryType = .none
-//        }
-//
-//        return cell
-//    }
-//
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        //print("click cell sections: \(indexPath.section), rows: \(indexPath.row)")
-//        let row: MemberRow = memberSections[indexPath.section].items[indexPath.row]
-//        let segue: String = row.segue
-//        if segue == TO_PROFILE {
-//            toRegister()
-//        } else if segue == TO_PASSWORD {
-//            toPassword(type: "change_password")
-//        } else if segue == TO_VALIDATE {
-//            toValidate(type: row.validate_type)
-//        } else if segue == TO_BLACKLIST {
-//            performSegue(withIdentifier: segue, sender: nil)
-//        } else if segue == TO_REFRESH {
-//            refresh()
-//        } else if segue == TO_SIGNUPLIST {
-//            performSegue(withIdentifier: "toA", sender: nil)
-//        } else if segue == TO_MEMBER_ORDER_LIST {
-//            toMemberOrderList()
-//        } else if segue == TO_MEMBER_CART_LIST {
-//            toMemberCartList(source: "member")
-//        } else if segue == TO_MEMBER_SIGNUPLIST {
-//            let able_type: String = row.able_type
-//            toMemberSignuplist(able_type: able_type)
-//        } else if segue == TO_LIKE {
-//            let able_type: String = row.able_type
-//
-//            if (able_type == "team") {
-//                toTeam(member_like: true)
-//            } else if (able_type == "course") {
-//                toCourse(member_like: true, isShowPrev: true)
-//            } else if (able_type == "product") {
-//                toProduct(member_like: true)
-//            } else if (able_type == "coach") {
-//                toCoach(member_like: true)
-//            } else if (able_type == "arena") {
-//                toArena(member_like: true, isShowPrev: true)
-//            } else if (able_type == "store") {
-//                toStore(member_like: true)
-//            } else {
-//                warning("沒有這個喜歡的連結")
-//            }
-//        } else if segue == "toManagerCourse" {
-//            toManagerCourse(manager_token: Member.instance.token)
-//        } else if segue == "toManagerTeam" {
-//            toManagerTeam(manager_token: Member.instance.token)
-//        } else if segue == "toRequestManagerTeam" {
-//            toRequestManagerTeam()
-//        } else if segue == TO_MEMBER_BANK {
-//            toMemberBank()
-//        } else if segue == "delete" {
-//            delete()
-//        } else if segue == TO_MEMBER_COIN_LIST {
-//            toMemberCoinList()
-//        } else if segue == TO_MEMBER_SUPSCRIPTION_KIND {
-//            toMemberSubscriptionKind()
-//        } else if segue == "qrcode" {
-//            let qrcodeIV: UIImageView = makeQrcodeLayer()
-//            let qrcode: UIImage = generateQRCode(from: Member.instance.token)!
-//            qrcodeIV.image = qrcode
-//        } else if segue == "toMemberTeamList" {
-//            toMemberTeamList()
-//        }
-//    }
     
     func makeQrcodeLayer()-> UIImageView {
         
@@ -632,6 +450,46 @@ extension MemberVC {
     
     @objc func handleTap(sender: UIView) {
         maskView.unmask()
+    }
+}
+
+class BannerCell: UITableViewCell {
+ 
+    let bannerIV: UIImageView = {
+        let view: UIImageView = UIImageView(image: UIImage(named: "banner"))
+        view.isUserInteractionEnabled = true
+        
+        return view
+    }()
+        
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.commonInit()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        commonInit()
+    }
+    
+    func commonInit() {
+        self.contentView.backgroundColor = UIColor(MY_BLACK)
+        anchor()
+    }
+    
+    func anchor() {
+        self.contentView.addSubview(bannerIV)
+        bannerIV.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(20)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.height.equalTo(200)
+        }
     }
 }
 
