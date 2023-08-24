@@ -456,7 +456,7 @@ extension MemberVC {
 class BannerCell: UITableViewCell {
  
     let bannerIV: UIImageView = {
-        let view: UIImageView = UIImageView(image: UIImage(named: "banner"))
+        let view: UIImageView = UIImageView(image: UIImage(named: "banner_subscription"))
         view.isUserInteractionEnabled = true
         
         return view
