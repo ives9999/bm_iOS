@@ -64,7 +64,7 @@ class MemberVC: BaseViewController {
     let levelRightContainer: UIView = UIView()
     
     let pointIconText: IconTextVertical2 = IconTextVertical2(icon: "point_svg", text: "611 點")
-    let levelIconText: IconTextVertical2 = IconTextVertical2(icon: "level_svg", text: "金牌")
+    let subscriptionIconText: IconTextVertical2 = IconTextVertical2(icon: "subscription_steal", text: "金牌")
     
     let titleLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
@@ -131,7 +131,7 @@ class MemberVC: BaseViewController {
         levelRightContainer.addGestureRecognizer(levelGR1)
         
         let levelGR2: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
-        levelIconText.addGestureRecognizer(levelGR2)
+        subscriptionIconText.addGestureRecognizer(levelGR2)
         
         refresh()
     }
@@ -213,8 +213,8 @@ class MemberVC: BaseViewController {
                 make.width.equalTo(levelLeftWidth)
             }
             
-                levelRightContainer.addSubview(levelIconText)
-                levelIconText.snp.makeConstraints { make in
+                levelRightContainer.addSubview(subscriptionIconText)
+                subscriptionIconText.snp.makeConstraints { make in
                     make.width.equalTo(87)
                     make.height.equalTo(52)
                     make.centerX.centerY.equalToSuperview()
@@ -269,7 +269,8 @@ class MemberVC: BaseViewController {
                     self.pointIconText.setText("\(Member.instance.coin) 點")
                     
                     let goldEnum = MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription)
-                    self.levelIconText.setText(goldEnum.rawValue)
+                    self.subscriptionIconText.setText(goldEnum.rawValue)
+                    self.subscriptionIconText.setIcon("subscription_\(Member.instance.subscription)")
                     //self._loginBlock()
                     //self.session.dump()
                     //self.loginout()

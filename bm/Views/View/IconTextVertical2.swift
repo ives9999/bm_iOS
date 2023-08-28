@@ -48,7 +48,8 @@ class IconTextVertical2: UIView {
     func commonInit() {
         
         iconIV.image = UIImage(named: icon)
-        textLbl.text = self.text
+        setText(self.text)
+        setIcon(self.icon)
 
         self.anchor()
 
@@ -80,6 +81,10 @@ class IconTextVertical2: UIView {
     
     func setText(_ text: String) {
         textLbl.text = text
+    }
+    
+    func setIcon(_ icon: String) {
+        iconIV.image = UIImage(named: icon)
     }
     
     @objc func pressed(view: UITapGestureRecognizer) {
