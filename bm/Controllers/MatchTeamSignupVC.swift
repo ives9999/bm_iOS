@@ -537,7 +537,7 @@ class MatchPlayerEditVC: BaseViewController {
     }()
     
     let ageTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(key: "age", label: "年齡", icon: "age_svg", placeholder: "32", isRequired: true, unit: "歲")
+        let view: MainTextField2 = MainTextField2(key: "age", label: "年齡", icon: "birthday_svg", placeholder: "32", isRequired: true, unit: "歲")
         
         return view
     }()

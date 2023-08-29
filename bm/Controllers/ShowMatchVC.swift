@@ -576,6 +576,14 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
         return view
     }()
     
+    let contentITT: IconTextText2 = {
+        let view = IconTextText2()
+        view.setIcon("content_svg")
+        view.setTitle("說明")
+        
+        return view
+    }()
+    
     let showButton2: ShowButton2 = ShowButton2()
     
     //var delegate: ShowButton2Delegate? = nil
@@ -681,6 +689,13 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
             signupEndITT.snp.makeConstraints { make in
                 make.top.equalTo(signupStartITT.snp.bottom).offset(12)
                 make.left.equalToSuperview()
+            }
+        
+            mainContainerView.addSubview(contentITT)
+            contentITT.snp.makeConstraints { make in
+                make.top.equalTo(signupEndITT.snp.bottom).offset(12)
+                make.left.equalToSuperview()
+                make.right.equalToSuperview()
                 make.bottom.equalToSuperview().offset(-12)
             }
 
@@ -716,6 +731,7 @@ class MatchGroupSignupCell: BaseCell<MatchGroupTable, ShowMatchVC> {
             self.limitITT.setShow("\(item!.limit)組")
             self.signupStartITT.setShow(signupStartShow)
             self.signupEndITT.setShow(signupEndShow)
+            self.contentITT.setShow(item!.content)
             showButton2.idx = item!.no - 1
         }
         
