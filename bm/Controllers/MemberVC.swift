@@ -52,19 +52,58 @@ class MemberVC: BaseViewController {
         return view
     }()
     
-    let levelDivideWidth: Int = 2
     
     let levelLeftContainer: UIView = UIView()
+    //let pointIconText: IconTextVertical2 = IconTextVertical2(icon: "point_svg", text: "611 點")
+    
+    let pointIcon: IconWithBGRoundCorner = IconWithBGRoundCorner(icon: "point_svg", frameWidth: 48, frameHeight: 48, iconWidth: 24, iconHeight: 24)
+    let pointText: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextSize(14)
+        view.setTextBold()
+        view.text = "0點"
+        
+        return view
+    }()
+    
+    let pointDesc: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextSize(10)
+        view.text = "會員點數"
+        
+        return view
+    }()
+    
+    
+    let levelRightContainer: UIView = UIView()
+    
+    let subscriptionIcon: IconWithBGRoundCorner = IconWithBGRoundCorner(icon: "subscription_basic", frameWidth: 48, frameHeight: 48, iconWidth: 24, iconHeight: 24)
+    let subscriptionText: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextSize(14)
+        view.setTextBold()
+        view.text = "基本會員"
+        
+        return view
+    }()
+    
+    let subscriptionDesc: SuperLabel = {
+        let view: SuperLabel = SuperLabel()
+        view.setTextSize(10)
+        view.text = "會員訂閱"
+        
+        return view
+    }()
+    //let subscriptionIconText: IconTextVertical2 = IconTextVertical2(icon: "subscription_steal", text: "金牌")
+    
+    let levelDivideWidth: Int = 2
+    
     let levelDivideView: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = UIColor(hex: "#FFFFFF", alpha: 0.26)
         
         return view
     }()
-    let levelRightContainer: UIView = UIView()
-    
-    let pointIconText: IconTextVertical2 = IconTextVertical2(icon: "point_svg", text: "611 點")
-    let subscriptionIconText: IconTextVertical2 = IconTextVertical2(icon: "subscription_steal", text: "金牌")
     
     let titleLbl: SuperLabel = {
         let view: SuperLabel = SuperLabel()
@@ -130,8 +169,8 @@ class MemberVC: BaseViewController {
         let levelGR1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
         levelRightContainer.addGestureRecognizer(levelGR1)
         
-        let levelGR2: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
-        subscriptionIconText.addGestureRecognizer(levelGR2)
+//        let levelGR2: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
+//        subscriptionIconText.addGestureRecognizer(levelGR2)
         
         refresh()
     }
@@ -198,13 +237,32 @@ class MemberVC: BaseViewController {
                 make.left.top.bottom.equalToSuperview()
                 make.width.equalTo(levelLeftWidth)
             }
+        
+        levelLeftContainer.addSubview(pointIcon)
+        pointIcon.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(24)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(48)
+        }
+        
+        levelLeftContainer.addSubview(pointText)
+        pointText.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(24)
+            make.left.equalTo(pointIcon.snp.right).offset(8)
+        }
+        
+        levelLeftContainer.addSubview(pointDesc)
+        pointDesc.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(-24)
+            make.left.equalTo(pointIcon.snp.right).offset(8)
+        }
             
-                levelLeftContainer.addSubview(pointIconText)
-                pointIconText.snp.makeConstraints { make in
-                    make.width.equalTo(87)
-                    make.height.equalTo(52)
-                    make.centerX.centerY.equalToSuperview()
-                }
+//                levelLeftContainer.addSubview(pointIconText)
+//                pointIconText.snp.makeConstraints { make in
+//                    make.width.equalTo(87)
+//                    make.height.equalTo(52)
+//                    make.centerX.centerY.equalToSuperview()
+//                }
             
             levelContainer.addSubview(levelRightContainer)
             //levelRightContainer.backgroundColor = UIColor.blue
@@ -212,13 +270,32 @@ class MemberVC: BaseViewController {
                 make.right.top.bottom.equalToSuperview()
                 make.width.equalTo(levelLeftWidth)
             }
-            
-                levelRightContainer.addSubview(subscriptionIconText)
-                subscriptionIconText.snp.makeConstraints { make in
-                    make.width.equalTo(87)
-                    make.height.equalTo(52)
-                    make.centerX.centerY.equalToSuperview()
+        
+                levelRightContainer.addSubview(subscriptionIcon)
+                subscriptionIcon.snp.makeConstraints { make in
+                    make.left.equalToSuperview().offset(24)
+                    make.centerY.equalToSuperview()
+                    make.width.height.equalTo(48)
                 }
+                
+                levelRightContainer.addSubview(subscriptionText)
+                subscriptionText.snp.makeConstraints { make in
+                    make.top.equalToSuperview().offset(24)
+                    make.left.equalTo(subscriptionIcon.snp.right).offset(8)
+                }
+                
+                levelRightContainer.addSubview(subscriptionDesc)
+                subscriptionDesc.snp.makeConstraints { make in
+                    make.bottom.equalToSuperview().offset(-24)
+                    make.left.equalTo(subscriptionIcon.snp.right).offset(8)
+                }
+            
+//                levelRightContainer.addSubview(subscriptionIconText)
+//                subscriptionIconText.snp.makeConstraints { make in
+//                    make.width.equalTo(87)
+//                    make.height.equalTo(52)
+//                    make.centerX.centerY.equalToSuperview()
+//                }
             
             levelContainer.addSubview(levelDivideView)
             levelDivideView.snp.makeConstraints { make in
@@ -266,11 +343,14 @@ class MemberVC: BaseViewController {
                         self.avatarIV.downloaded(from: Member.instance.avatar)
                     }
                     
-                    self.pointIconText.setText("\(Member.instance.coin) 點")
+                    //self.pointIconText.setText("\(Member.instance.coin) 點")
+                    self.pointText.text = "\(Member.instance.coin) 點"
                     
                     let goldEnum = MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription)
-                    self.subscriptionIconText.setText(goldEnum.rawValue)
-                    self.subscriptionIconText.setIcon("subscription_\(Member.instance.subscription)")
+                    self.subscriptionIcon.setIcon("subscription_\(Member.instance.subscription)")
+                    self.subscriptionText.text = "\(goldEnum.rawValue)會員"
+                    //self.subscriptionIconText.setText(goldEnum.rawValue)
+                    //self.subscriptionIconText.setIcon("subscription_\(Member.instance.subscription)")
                     //self._loginBlock()
                     //self.session.dump()
                     //self.loginout()
