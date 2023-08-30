@@ -537,7 +537,7 @@ class MatchPlayerEditVC: BaseViewController {
     }()
     
     let ageTxt2: MainTextField2 = {
-        let view: MainTextField2 = MainTextField2(key: "age", label: "年齡", icon: "line_svg", placeholder: "32", unit: "歲")
+        let view: MainTextField2 = MainTextField2(key: "age", label: "年齡", icon: "birthday_svg", placeholder: "32", isRequired: true, unit: "歲")
         
         return view
     }()
@@ -807,6 +807,10 @@ class MatchPlayerEditVC: BaseViewController {
 
         if emailTxt2.value.count == 0 {
             msgs.append("隊員\(idx)Email不能為空白")
+        }
+        
+        if ageTxt2.value.count == 0 {
+            msgs.append("隊員\(idx)年齡不能為空白")
         }
         
         if giftAttributes.count > 0 {
