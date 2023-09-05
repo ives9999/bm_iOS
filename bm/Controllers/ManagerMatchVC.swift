@@ -114,7 +114,7 @@ class ManagerMatchVC: BaseViewController {
         
         if canDelete {
             warning(msg: "是否確定刪除", closeButtonTitle: "取消", buttonTitle: "刪除") {
-                self.dataService.delete(token: row.token, type: "") { success in
+                self.dataService.delete(token: row.token, type: "", status: "delete") { success in
                     if success {
                         self.refresh()
                     } else {
