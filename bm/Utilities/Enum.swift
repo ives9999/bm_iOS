@@ -1085,7 +1085,7 @@ enum MEMBER_SUBSCRIPTION_KIND: String {
         case .copper:
             return "copper"
         case .silver:
-            return "steal"
+            return "silver"
         case .gold:
             return "gold"
         case .premium:
