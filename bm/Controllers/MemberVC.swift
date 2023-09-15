@@ -10,11 +10,322 @@ import UIKit
 
 class MemberVC: BaseViewController {
     
-    let featuredContainer: UIView = {
-        let view = UIView()
+//    let titleLbl: SuperLabel = {
+//        let view: SuperLabel = SuperLabel()
+//        view.setTextTitle()
+//        view.text = "功能"
+//
+//        return view
+//    }()
+        
+    //var memberSections: [IconTextSection] = [IconTextSection]()
+    var rows: [MainMemberTable] = [MainMemberTable]()
+    
+    //let heightForSection: CGFloat = 34
+    
+//    lazy var tableView: MyTable2VC<MainMemberCell, MainMemberTable, MemberVC> = {
+//        let tableView = MyTable2VC<MainMemberCell, MainMemberTable, MemberVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer, myDelegate: self, isRefresh: false)
+//
+//        return tableView
+//    }()
+    
+    lazy var tableView3: UITableView = {
+        let view: UITableView = UITableView()
+        view.backgroundColor = UIColor(MY_BLACK)
+//        view.estimatedRowHeight = 44
+//        view.rowHeight = UITableView.automaticDimension
+        
+        view.register(AvatarCell.self, forCellReuseIdentifier: "AvatarCell")
+        view.register(LevelCell.self, forCellReuseIdentifier: "LevelCell")
+        view.register(BannerCell.self, forCellReuseIdentifier: "BannerCell")
+        view.register(MainMemberCell.self, forCellReuseIdentifier: "MainMemberCell")
         
         return view
     }()
+    
+//    func tableViewSetSelected(row: MainMemberTable)-> Bool {
+//        return false
+//    }
+//
+//    func getDataFromServer(page: Int) {
+//    }
+    
+    var mainBottom2: MainBottom2 = MainBottom2(able_type: "member")
+
+    override func viewDidLoad() {
+        able_type = "member"
+        
+        super.viewDidLoad()
+        
+        dataService = MemberService.instance
+        
+        self.view.addSubview(mainBottom2)
+        mainBottom2.snp.makeConstraints { make in
+            make.left.right.bottom.equalToSuperview()
+            make.height.equalTo(72)
+        }
+        mainBottom2.delegate = self
+        
+        tableView3.dataSource = self
+        tableView3.delegate = self
+        
+        anchor()
+        refresh()
+    }
+    
+    func initMemberItem() {
+        rows.removeAll()
+        for mainMemberEnum in MainMemberEnum.allValues {
+            if mainMemberEnum == MainMemberEnum.email_validate && (Member.instance.validate & EMAIL_VALIDATE > 0) {
+                continue
+            }
+            
+            if mainMemberEnum == MainMemberEnum.mobile_validate && (Member.instance.validate & MOBILE_VALIDATE > 0) {
+                continue
+            }
+            rows.append(MainMemberTable(title: mainMemberEnum.rawValue, icon: mainMemberEnum.getIcon()))
+        }
+    }
+    
+    func anchor() {
+        
+        self.view.addSubview(tableView3)
+        //tableView.backgroundColor = UIColor.red
+        tableView3.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.left.right.equalToSuperview()
+            make.bottom.equalTo(mainBottom2.snp.top)
+        }
+    }
+    
+    override func refresh() {
+        Global.instance.addSpinner(superView: self.view)
+        MemberService.instance.getOne(params: ["token": Member.instance.token]) { success in
+            Global.instance.removeSpinner(superView: self.view)
+            
+            if success {
+                
+                let jsonData: Data = MemberService.instance.jsonData!
+                do {
+                    let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
+                    table.toSession(isLoggedIn: true)
+                    self.initMemberItem()
+                    self.tableView3.reloadData()
+                } catch {
+                    self.warning(error.localizedDescription)
+                }
+            } else {
+                self.warning("取得會員資訊錯誤")
+            }
+            
+        }
+    }
+    
+    func logout() {
+        warning(msg: "是否真的要登出？", closeButtonTitle: "取消", buttonTitle: "登出") {
+            //1.清空session資料
+            Member.instance.reset()
+            //self.session.dump()
+            //2.設定登出
+            //Member.instance.isLoggedIn = false
+            self.toLogin()
+            //loginout()
+        }
+    }
+    
+    func delete() {
+        msg = "是否確定要刪除自己的會員資料？"
+        warning(msg: msg, closeButtonTitle: "取消", buttonTitle: "刪除") {
+            Global.instance.addSpinner(superView: self.view)
+            self.dataService.delete(token: Member.instance.token, type: self.able_type) { success in
+                Global.instance.removeSpinner(superView: self.view)
+                if (success) {
+                    do {
+                        self.jsonData = self.dataService.jsonData
+                        if (self.jsonData != nil) {
+                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
+                            if (!successTable.success) {
+                                self.warning(successTable.msg)
+                            } else {
+                                self.deleteEnd()
+                            }
+                        } else {
+                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
+                        }
+                    } catch {
+                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
+                        self.warning(self.msg)
+                    }
+                } else {
+                    self.warning("刪除失敗，請洽管理員")
+                }
+            }
+        }
+    }
+    
+    func deleteEnd() {
+        
+        info(msg: "您的帳號已經被刪除，羽球密碼感謝您的支持", buttonTitle: "關閉") {
+            self.logout()
+        }
+    }
+    
+    override func didSelect<U>(item: U, at indexPath: IndexPath) {
+        if let _item: MainMemberTable = item as? MainMemberTable {
+            let mainMemberEnum: MainMemberEnum = MainMemberEnum.chineseGetEnum(text: _item.title)
+            if (mainMemberEnum == MainMemberEnum.email_validate) {
+                toValidate(type: "email")
+            } else if (mainMemberEnum == MainMemberEnum.mobile_validate) {
+                toValidate(type: "mobile")
+            } else if (mainMemberEnum == MainMemberEnum.bank) {
+                toMemberBank()
+            } else if (mainMemberEnum == MainMemberEnum.delete) {
+                delete()
+            } else if (mainMemberEnum == MainMemberEnum.refresh) {
+                refresh()
+            } else {
+                toMemberItem(mainMemberEnum)
+            }
+        }
+    }
+    
+    func bannerToSubscription() {
+        toMemberSubscriptionKind()
+    }
+}
+
+extension MemberVC: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.rows.count == 0 {
+            return 0
+        } else {
+            return self.rows.count + 3
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == 0 {
+            return 160
+        } else if indexPath.row == 1 {
+            return 100
+        } else if indexPath.row == 2 {
+            return 250
+        } else {
+            return 100
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == 0 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "AvatarCell", for: indexPath) as? AvatarCell {
+                
+                cell.delegate = self
+                cell.configureSubViews(nickname: Member.instance.nickname, avatar: Member.instance.avatar)
+                
+                return cell
+            }
+        } else if indexPath.row == 1 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "LevelCell", for: indexPath) as? LevelCell {
+                
+                cell.configureSubViews()
+                
+                return cell
+            }
+        } else if indexPath.row == 2 {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "BannerCell", for: indexPath) as? BannerCell {
+                return cell
+            }
+        } else {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "MainMemberCell", for: indexPath) as? MainMemberCell {
+                if rows.count >= indexPath.row - 3 {
+                    cell.item = self.rows[indexPath.row - 3]
+                }
+                return cell
+            }
+        }
+        
+        return UITableViewCell()
+    }
+    
+    
+}
+
+extension MemberVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            
+        } else if indexPath.row == 1 {
+            
+        } else if indexPath.row == 2 {
+            bannerToSubscription()
+        } else {
+            if rows.count >= indexPath.row - 3 {
+                let row: MainMemberTable = rows[indexPath.row - 3]
+                didSelect(item: row, at: indexPath)
+            }
+        }
+    }
+}
+
+extension MemberVC {
+    
+    func showQRCode(from: String) {
+        let qrcodeIV: UIImageView = makeQrcodeLayer()
+        let qrcode: UIImage? = generateQRCode(from: from)
+        if qrcode != nil {
+            qrcodeIV.image = qrcode
+        }
+    }
+    
+    private func makeQrcodeLayer()-> UIImageView {
+        
+        maskView = self.view.mask()
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
+        maskView.addGestureRecognizer(gestureRecognizer)
+        
+        let blackViewHeight: CGFloat = 500
+        let blackViewPaddingLeft: CGFloat = 20
+        
+        let blackView: UIView = maskView.blackView(left: blackViewPaddingLeft, top: (maskView.frame.height-blackViewHeight)/2, width: maskView.frame.width-(2*blackViewPaddingLeft), height: blackViewHeight)
+        
+        
+        let qrcodeIV: UIImageView = UIImageView()
+        
+        blackView.addSubview(qrcodeIV)
+        
+        qrcodeIV.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        return qrcodeIV
+    }
+    
+    private func generateQRCode(from string: String) -> UIImage? {
+        let data = string.data(using: String.Encoding.ascii)
+
+        if let filter = CIFilter(name: "CIQRCodeGenerator") {
+            filter.setValue(data, forKey: "inputMessage")
+            let transform = CGAffineTransform(scaleX: 10, y: 10)
+
+            if let output = filter.outputImage?.transformed(by: transform) {
+                return UIImage(ciImage: output)
+            }
+        }
+
+        return nil
+    }
+    
+    @objc func handleTap(sender: UIView) {
+        maskView.unmask()
+    }
+}
+
+class AvatarCell: UITableViewCell {
+    
+    var delegate: MemberVC? = nil
     
     let qrcodeIV2: IconView2 = {
         let view: IconView2 = IconView2(icon: "qrcode_svg", frameWidth: 48, frameHeight: 48, iconWidth: 24, iconHeight: 24)
@@ -43,6 +354,69 @@ class MemberVC: BaseViewController {
         return view
     }()
     
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.commonInit()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        commonInit()
+    }
+    
+    func commonInit() {
+        self.contentView.backgroundColor = UIColor(MY_BLACK)
+        qrcodeIV2.delegate = self
+        logoutIV2.delegate = self
+        anchor()
+    }
+    
+    func anchor() {
+        self.contentView.addSubview(qrcodeIV2)
+        qrcodeIV2.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(20)
+            make.top.equalToSuperview()
+            make.width.height.equalTo(48)
+        }
+        
+        self.contentView.addSubview(logoutIV2)
+        logoutIV2.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-20)
+            make.top.equalToSuperview()
+            make.width.height.equalTo(48)
+        }
+        
+        self.contentView.addSubview(avatarIV)
+        avatarIV.snp.makeConstraints { make in
+            make.width.height.equalTo(112)
+            make.top.equalToSuperview().offset(12)
+            make.centerX.equalToSuperview()
+        }
+        
+        self.contentView.addSubview(nicknameLbl)
+        nicknameLbl.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(avatarIV.snp.bottom).offset(12)
+        }
+    }
+    
+    func configureSubViews(nickname: String, avatar: String) {
+        nicknameLbl.text = nickname
+        if avatar.count > 0 {
+            avatarIV.downloaded(from: Member.instance.avatar)
+        }
+    }
+}
+
+class LevelCell: UITableViewCell {
+    
+    var delegate: MemberVC? = nil
+    
     let levelContainer: UIView = {
         let view: UIView = UIView()
         view.backgroundColor = UIColor(MEMBER_LEVEL_BACKGROUND)
@@ -52,9 +426,7 @@ class MemberVC: BaseViewController {
         return view
     }()
     
-    
     let levelLeftContainer: UIView = UIView()
-    //let pointIconText: IconTextVertical2 = IconTextVertical2(icon: "point_svg", text: "611 點")
     
     let pointIcon: IconWithBGRoundCorner = IconWithBGRoundCorner(icon: "point_svg", frameWidth: 48, frameHeight: 48, iconWidth: 24, iconHeight: 24)
     let pointText: SuperLabel = {
@@ -105,130 +477,39 @@ class MemberVC: BaseViewController {
         return view
     }()
     
-    let titleLbl: SuperLabel = {
-        let view: SuperLabel = SuperLabel()
-        view.setTextTitle()
-        view.text = "功能"
-        
-        return view
-    }()
-        
-    var memberSections: [IconTextSection] = [IconTextSection]()
-    var rows: [MainMemberTable] = [MainMemberTable]()
-    
-    //let heightForSection: CGFloat = 34
-    
-//    lazy var tableView: MyTable2VC<MainMemberCell, MainMemberTable, MemberVC> = {
-//        let tableView = MyTable2VC<MainMemberCell, MainMemberTable, MemberVC>(selectedClosure: tableViewSetSelected(row:), getDataClosure: getDataFromServer, myDelegate: self, isRefresh: false)
-//
-//        return tableView
-//    }()
-    
-    lazy var tableView3: UITableView = {
-        let view: UITableView = UITableView()
-        view.backgroundColor = UIColor(MY_BLACK)
-//        view.estimatedRowHeight = 44
-//        view.rowHeight = UITableView.automaticDimension
-        
-        view.register(BannerCell.self, forCellReuseIdentifier: "BannerCell")
-        view.register(MainMemberCell.self, forCellReuseIdentifier: "MainMemberCell")
-        
-        return view
-    }()
-    
-//    func tableViewSetSelected(row: MainMemberTable)-> Bool {
-//        return false
-//    }
-//
-//    func getDataFromServer(page: Int) {
-//    }
-    
-    var mainBottom2: MainBottom2 = MainBottom2(able_type: "member")
-
-    override func viewDidLoad() {
-        able_type = "member"
-        
-        super.viewDidLoad()
-        
-        dataService = MemberService.instance
-        
-        self.view.addSubview(mainBottom2)
-        mainBottom2.snp.makeConstraints { make in
-            make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(72)
-        }
-        mainBottom2.delegate = self
-        qrcodeIV2.delegate = self
-        logoutIV2.delegate = self
-        
-        initTableView()
-        
-        anchor()
-        
-        //one UITapGestureRecognizer just for one object
-        let levelGR1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
-        levelRightContainer.addGestureRecognizer(levelGR1)
-        
-//        let levelGR2: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
-//        subscriptionIconText.addGestureRecognizer(levelGR2)
-        
-        refresh()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        commonInit()
     }
     
-    func initTableView() {
-        tableView3.dataSource = self
-        tableView3.delegate = self
-        
-        for mainMemberEnum in MainMemberEnum.allValues {
-            rows.append(MainMemberTable(title: mainMemberEnum.rawValue, icon: mainMemberEnum.getIcon()))
-        }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.commonInit()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        commonInit()
+    }
+    
+    func commonInit() {
+        self.contentView.backgroundColor = UIColor(MY_BLACK)
+        let levelGR1: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(subscription(_:)))
+        levelRightContainer.addGestureRecognizer(levelGR1)
+        anchor()
     }
     
     func anchor() {
-        self.view.addSubview(featuredContainer)
-        //featuredContainer.backgroundColor = UIColor.gray
-        featuredContainer.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(statusBarHeight)
-            make.left.right.equalToSuperview()
-            make.height.equalTo(160)
-        }
-        
-            featuredContainer.addSubview(qrcodeIV2)
-            qrcodeIV2.snp.makeConstraints { make in
-                make.left.equalToSuperview().offset(20)
-                make.top.equalToSuperview()
-                make.width.height.equalTo(48)
-            }
-            
-            featuredContainer.addSubview(logoutIV2)
-            logoutIV2.snp.makeConstraints { make in
-                make.right.equalToSuperview().offset(-20)
-                make.top.equalToSuperview()
-                make.width.height.equalTo(48)
-            }
-            
-            featuredContainer.addSubview(avatarIV)
-            avatarIV.snp.makeConstraints { make in
-                make.width.height.equalTo(112)
-                make.top.equalToSuperview().offset(12)
-                make.centerX.equalToSuperview()
-            }
-            
-            featuredContainer.addSubview(nicknameLbl)
-            nicknameLbl.snp.makeConstraints { make in
-                make.centerX.equalToSuperview()
-                make.top.equalTo(avatarIV.snp.bottom).offset(12)
-            }
-        
-        self.view.addSubview(levelContainer)
+        self.contentView.addSubview(levelContainer)
         //levelContainer.backgroundColor = UIColor.red
         levelContainer.snp.makeConstraints { make in
-            make.top.equalTo(featuredContainer.snp.bottom).offset(16)
+            make.top.equalToSuperview().offset(16)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(85)
         }
         
+            let screen_width = UIScreen.main.bounds.width
             let levelLeftWidth: Int = Int((Int(screen_width) - 20*2 - levelDivideWidth)/2)
             
             levelContainer.addSubview(levelLeftContainer)
@@ -304,233 +585,18 @@ class MemberVC: BaseViewController {
                 make.top.equalToSuperview().offset(10)
                 make.bottom.equalToSuperview().offset(-10)
             }
+    }
+    
+    func configureSubViews() {
+        pointText.text = "\(Member.instance.coin) 點"
         
-//        self.view.addSubview(bannerIV)
-//        bannerIV.snp.makeConstraints { make in
-//            make.top.equalTo(levelContainer.snp.bottom).offset(24)
-//            make.left.equalToSuperview().offset(20)
-//            make.right.equalToSuperview().offset(-20)
-//        }
-        
-//        self.view.addSubview(titleLbl)
-//        titleLbl.snp.makeConstraints { make in
-//            make.left.equalToSuperview().offset(20)
-//            make.top.equalTo(bannerIV.snp.bottom).offset(24)
-//        }
-        
-        self.view.addSubview(tableView3)
-        //tableView.backgroundColor = UIColor.red
-        tableView3.snp.makeConstraints { make in
-            make.top.equalTo(levelContainer.snp.bottom)
-            make.left.right.equalToSuperview()
-            make.bottom.equalTo(mainBottom2.snp.top)
-        }
-    }
-    
-    override func refresh() {
-        Global.instance.addSpinner(superView: self.view)
-        MemberService.instance.getOne(params: ["token": Member.instance.token]) { success in
-            Global.instance.removeSpinner(superView: self.view)
-            
-            if success {
-                
-                let jsonData: Data = MemberService.instance.jsonData!
-                do {
-                    let table: MemberTable = try JSONDecoder().decode(MemberTable.self, from: jsonData)
-                    table.toSession(isLoggedIn: true)
-                    self.nicknameLbl.text = Member.instance.nickname
-                    if Member.instance.avatar.count > 0 {
-                        self.avatarIV.downloaded(from: Member.instance.avatar)
-                    }
-                    
-                    //self.pointIconText.setText("\(Member.instance.coin) 點")
-                    self.pointText.text = "\(Member.instance.coin) 點"
-                    
-                    let goldEnum = MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription)
-                    self.subscriptionIcon.setIcon("subscription_\(Member.instance.subscription)")
-                    self.subscriptionText.text = "\(goldEnum.rawValue)會員"
-                    //self.subscriptionIconText.setText(goldEnum.rawValue)
-                    //self.subscriptionIconText.setIcon("subscription_\(Member.instance.subscription)")
-                    //self._loginBlock()
-                    //self.session.dump()
-                    //self.loginout()
-                    //self.tableView.reloadData()
-                } catch {
-                    self.warning(error.localizedDescription)
-                }
-            } else {
-                self.warning("取得會員資訊錯誤")
-            }
-            
-        }
-    }
-    
-    func logout() {
-        //1.清空session資料
-        Member.instance.reset()
-        //self.session.dump()
-        //2.設定登出
-        //Member.instance.isLoggedIn = false
-        toLogin()
-        //loginout()
-    }
-    
-    func delete() {
-        msg = "是否確定要刪除自己的會員資料？"
-        warning(msg: msg, closeButtonTitle: "取消", buttonTitle: "刪除") {
-            Global.instance.addSpinner(superView: self.view)
-            self.dataService.delete(token: Member.instance.token, type: self.able_type) { success in
-                Global.instance.removeSpinner(superView: self.view)
-                if (success) {
-                    do {
-                        self.jsonData = self.dataService.jsonData
-                        if (self.jsonData != nil) {
-                            let successTable: SuccessTable = try JSONDecoder().decode(SuccessTable.self, from: self.jsonData!)
-                            if (!successTable.success) {
-                                self.warning(successTable.msg)
-                            } else {
-                                self.deleteEnd()
-                            }
-                        } else {
-                            self.warning("無法從伺服器取得正確的json資料，請洽管理員")
-                        }
-                    } catch {
-                        self.msg = "解析JSON字串時，得到空值，請洽管理員"
-                        self.warning(self.msg)
-                    }
-                } else {
-                    self.warning("刪除失敗，請洽管理員")
-                }
-            }
-        }
-    }
-    
-    func deleteEnd() {
-        
-        info(msg: "您的帳號已經被刪除，羽球密碼感謝您的支持", buttonTitle: "關閉") {
-            self.logout()
-        }
-    }
-    
-    override func didSelect<U>(item: U, at indexPath: IndexPath) {
-        if let _item: MainMemberTable = item as? MainMemberTable {
-            let mainMemberEnum: MainMemberEnum = MainMemberEnum.chineseGetEnum(text: _item.title)
-            if (mainMemberEnum == MainMemberEnum.bank) {
-                toMemberBank()
-            } else if (mainMemberEnum == MainMemberEnum.delete) {
-                delete()
-            } else if (mainMemberEnum == MainMemberEnum.refresh) {
-                refresh()
-            } else {
-                toMemberItem(mainMemberEnum)
-            }
-        }
-    }
-    
-    func bannerToSubscription() {
-        toMemberSubscriptionKind()
+        let goldEnum = MEMBER_SUBSCRIPTION_KIND.stringToEnum(Member.instance.subscription)
+        subscriptionIcon.setIcon("subscription_\(Member.instance.subscription)")
+        subscriptionText.text = "\(goldEnum.rawValue)會員"
     }
     
     @objc func subscription(_ sender: UIGestureRecognizer) {
-        bannerToSubscription()
-    }
-}
-
-extension MemberVC: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.rows.count == 0 {
-            return 0
-        } else {
-            return self.rows.count + 1
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 250
-        } else {
-            return 100
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "BannerCell", for: indexPath) as? BannerCell {
-                return cell
-            }
-        } else {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: "MainMemberCell", for: indexPath) as? MainMemberCell {
-                if rows.count >= indexPath.row {
-                    cell.item = self.rows[indexPath.row - 1]
-                }
-                return cell
-            }
-        }
-        
-        return UITableViewCell()
-    }
-    
-    
-}
-
-extension MemberVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            bannerToSubscription()
-        } else {
-            if rows.count >= indexPath.row {
-                let row: MainMemberTable = rows[indexPath.row - 1]
-                didSelect(item: row, at: indexPath)
-            }
-        }
-    }
-}
-
-extension MemberVC {
-    
-    func makeQrcodeLayer()-> UIImageView {
-        
-        maskView = self.view.mask()
-        
-        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(sender:)))
-        maskView.addGestureRecognizer(gestureRecognizer)
-        
-        let blackViewHeight: CGFloat = 500
-        let blackViewPaddingLeft: CGFloat = 20
-        
-        let blackView: UIView = maskView.blackView(left: blackViewPaddingLeft, top: (maskView.frame.height-blackViewHeight)/2, width: maskView.frame.width-(2*blackViewPaddingLeft), height: blackViewHeight)
-        
-        
-        let qrcodeIV: UIImageView = UIImageView()
-        
-        blackView.addSubview(qrcodeIV)
-        
-        qrcodeIV.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
-        
-        return qrcodeIV
-    }
-    
-    func generateQRCode(from string: String) -> UIImage? {
-        let data = string.data(using: String.Encoding.ascii)
-
-        if let filter = CIFilter(name: "CIQRCodeGenerator") {
-            filter.setValue(data, forKey: "inputMessage")
-            let transform = CGAffineTransform(scaleX: 10, y: 10)
-
-            if let output = filter.outputImage?.transformed(by: transform) {
-                return UIImage(ciImage: output)
-            }
-        }
-
-        return nil
-    }
-    
-    @objc func handleTap(sender: UIView) {
-        maskView.unmask()
+        delegate?.bannerToSubscription()
     }
 }
 
@@ -675,6 +741,8 @@ class MainMemberTable: Table {
 }
 
 enum MainMemberEnum: String {
+    case email_validate = "Email認證"
+    case mobile_validate = "手機認證"
     case info = "會員資料"
     case order = "訂單查詢"
     case like = "喜歡"
@@ -685,9 +753,11 @@ enum MainMemberEnum: String {
     case delete = "刪除帳號"
     case refresh = "重新整理"
     
-    static let allValues: [MainMemberEnum] = [info, order, like, join, manager, bank, delete, refresh]
+    static let allValues: [MainMemberEnum] = [email_validate, mobile_validate, info, order, like, join, manager, bank, delete, refresh]
     static func chineseGetEnum(text: String)-> MainMemberEnum {
         switch text {
+        case "Email認證": return .email_validate
+        case "手機認證": return .mobile_validate
         case "會員資料": return .info
         case "訂單查詢": return .order
         case "喜歡": return .like
@@ -703,6 +773,8 @@ enum MainMemberEnum: String {
     
     func getIcon()-> String {
         switch self {
+        case .email_validate: return "validate_svg"
+        case .mobile_validate: return "validate_svg"
         case .info: return "info_svg"
         case .order: return "truck_svg"
         case .like: return "like_in_svg"
@@ -730,15 +802,14 @@ extension MemberVC: MainBottom2Delegate {
     }
 }
 
-extension MemberVC: IconView2Delegate {
+extension AvatarCell: IconView2Delegate {
     func iconPressed(icon: String) {
-        if icon == "qrcode_svg" {
-            let qrcodeIV: UIImageView = makeQrcodeLayer()
-            let qrcode: UIImage = generateQRCode(from: Member.instance.token)!
-            qrcodeIV.image = qrcode
-        } else if icon == "logout_svg" {
-            warning(msg: "是否真的要登出？", closeButtonTitle: "取消", buttonTitle: "登出") {
-                self.logout()
+        
+        if delegate != nil {
+            if icon == "qrcode_svg" {
+                delegate!.showQRCode(from: Member.instance.token)
+            } else if icon == "logout_svg" {
+                delegate!.logout()
             }
         }
     }

@@ -37,6 +37,12 @@ class ValidateVC: BaseViewController {
     }()
     
     let submitButton: SubmitButton = SubmitButton()
+    let sendButton: CancelButton = {
+        let view: CancelButton = CancelButton()
+        view.setTitle("重送驗證碼")
+        
+        return view
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,6 +120,15 @@ class ValidateVC: BaseViewController {
         self.view.addSubview(submitButton)
         submitButton.snp.makeConstraints { make in
             make.top.equalTo(codeTxt2.snp.bottom).offset(65)
+            make.left.equalToSuperview().offset(20)
+            make.right.equalToSuperview().offset(-20)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(52)
+        }
+        
+        self.view.addSubview(sendButton)
+        sendButton.snp.makeConstraints { make in
+            make.top.equalTo(submitButton.snp.bottom).offset(30)
             make.left.equalToSuperview().offset(20)
             make.right.equalToSuperview().offset(-20)
             make.centerX.equalToSuperview()

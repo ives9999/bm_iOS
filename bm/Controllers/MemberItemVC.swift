@@ -62,10 +62,6 @@ class MemberItemVC: BaseViewController {
                 toRegister()
             } else if (memberItemEnum == MemberItemEnum.change_password) {
                 toPassword(type: "change_password")
-            } else if (memberItemEnum == MemberItemEnum.email_validate) {
-                toValidate(type: "email")
-            } else if (memberItemEnum == MemberItemEnum.mobile_validate) {
-                toValidate(type: "mobile")
             }
         } else if (mainMemberEnum == MainMemberEnum.order) {
             if (memberItemEnum == MemberItemEnum.cart) {
@@ -194,8 +190,6 @@ enum MemberItemEnum: String {
     
     case info = "帳戶資料"
     case change_password = "更改密碼"
-    case email_validate = "EMail認證"
-    case mobile_validate = "手機認證"
     case cart = "購物車"
     case order = "訂單查詢"
     case team = "球隊"
@@ -214,13 +208,13 @@ enum MemberItemEnum: String {
         switch mainMemberEnum {
         case MainMemberEnum.info:
             var arr: [MemberItemEnum] = [.info, .change_password]
-            let validate: Int = Member.instance.validate
-            if (validate & EMAIL_VALIDATE <= 0) {
-                arr.append(.email_validate)
-            }
-            if (validate & MOBILE_VALIDATE <= 0) {
-                arr.append(.mobile_validate)
-            }
+//            let validate: Int = Member.instance.validate
+//            if (validate & EMAIL_VALIDATE <= 0) {
+//                arr.append(.email_validate)
+//            }
+//            if (validate & MOBILE_VALIDATE <= 0) {
+//                arr.append(.mobile_validate)
+//            }
             return arr
         case MainMemberEnum.order: return [.cart, .order]
         case MainMemberEnum.like: return [.team, .arena, .teach, .coach, .course, .product, .store]
@@ -242,8 +236,8 @@ enum MemberItemEnum: String {
     func getIcon()-> String {
         switch self {
         case .info: return "info_svg"
-        case .email_validate: return "validate_svg"
-        case .mobile_validate: return "validate_svg"
+        //case .email_validate: return "validate_svg"
+        //case .mobile_validate: return "validate_svg"
         case .change_password: return "change_password_svg"
         case .cart: return "cart_svg"
         case .order: return "order_svg"
